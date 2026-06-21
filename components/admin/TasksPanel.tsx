@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { createTaskAction, type StudentOption } from "@/app/actions/tasks";
+import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 
 // ─── Curriculum options for module selector ────────────────────────────────
 
@@ -9,7 +10,7 @@ type LessonOpt = { id: string; label: string };
 type ModuleOpt = { id: string; label: string; lessons: LessonOpt[] };
 type MatiereOpt = { matiere: string; modules: ModuleOpt[] };
 
-const CURRICULUM: MatiereOpt[] = [
+const RAW_CURRICULUM: MatiereOpt[] = [
   {
     matiere: "Maths",
     modules: [
@@ -269,6 +270,42 @@ const CURRICULUM: MatiereOpt[] = [
 ];
 
 // ─── Component ─────────────────────────────────────────────────────────────
+
+const GRAMMAR_MODULE_TITLES: Record<string, string> = {
+  R1: "Les fondamentaux",
+  R2: "Les verbes essentiels",
+  R3: "L'interrogation",
+  R4: "Les adjectifs",
+  R5: "Les pronoms",
+  R6: "Le passé",
+  R7: "Le futur",
+  R8: "Les autres temps",
+  R9: "La comparaison",
+};
+
+const GRAMMAR_TASK_MODULES: ModuleOpt[] = Object.entries(GRAMMAR_MODULE_TITLES).map(
+  ([id, label]) => ({
+    id,
+    label: `${id} — ${label}`,
+    lessons: FRENCH_THEMES
+      .filter((theme) =>
+        (theme.tab === "grammaire" || theme.tab === "conjugaison")
+        && theme.code.startsWith(`${id}.`)
+      )
+      .map((theme) => ({ id: theme.code, label: `${theme.code} — ${theme.title}` })),
+  })
+);
+
+const CURRICULUM: MatiereOpt[] = RAW_CURRICULUM.map((subject) => {
+  if (subject.matiere !== "Français") return subject;
+  return {
+    ...subject,
+    modules: [
+      ...subject.modules.filter((module) => !/^(?:R\d+|RI|RP|RX)$/.test(module.id)),
+      ...GRAMMAR_TASK_MODULES,
+    ],
+  };
+});
 
 export function TasksPanel({ students }: { students: StudentOption[] }) {
   // Form state

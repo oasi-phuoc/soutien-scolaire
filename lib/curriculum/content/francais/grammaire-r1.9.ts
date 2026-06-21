@@ -4,7 +4,7 @@ export const A1_GR_CEST: GrammarLesson = {
   slug: "a1-gr-cest-il-est",
   code: "R1.9",
   level: "A1",
-  title: "C'est ou il est ?",
+  title: "C'est, ce sont, il est ou ils sont ?",
   theory: [
     // ── Intro ──────────────────────────────────────────────────────────────────
     {
@@ -23,8 +23,19 @@ export const A1_GR_CEST: GrammarLesson = {
 
     // ── C'EST ──────────────────────────────────────────────────────────────────
     {
+      type: "grid",
+      headers: ["Singulier", "Pluriel", "Emploi"],
+      rows: [
+        ["C'est", "Ce sont", "Identifier ou présenter"],
+        ["Il est", "Ils sont", "Décrire au masculin"],
+        ["Elle est", "Elles sont", "Décrire au féminin"],
+      ],
+      boldFirstCol: true,
+    },
+
+    {
       type: "heading",
-      text: "Quand utiliser c'est",
+      text: "Quand utiliser c'est / ce sont",
       sub: true,
       trans: { en: "When to use c'est", ar: "متى نستخدم c'est", fa: "چه وقت از c'est استفاده کنیم", ti: "መዓዝ c'est ንጠቀም", uk: "Коли вживати c'est" },
     },
@@ -32,7 +43,7 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "On utilise c'est pour identifier, présenter ou donner une information générale.",
+        "On utilise {a}c'est{/a} au singulier et {a}ce sont{/a} au pluriel pour identifier, présenter ou donner une information générale.",
       ],
       noBulletItems: [0],
       transItems: {
@@ -91,7 +102,7 @@ export const A1_GR_CEST: GrammarLesson = {
     // ── IL EST ────────────────────────────────────────────────────────────────
     {
       type: "heading",
-      text: "Quand utiliser il est / elle est",
+      text: "Quand utiliser il est / ils sont",
       sub: true,
       trans: { en: "When to use il est / elle est", ar: "متى نستخدم il est / elle est", fa: "چه وقت از il est / elle est استفاده کنیم", ti: "መዓዝ il est / elle est ንጠቀም", uk: "Коли вживати il est / elle est" },
     },
@@ -99,7 +110,7 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Il est / Elle est sert à décrire une personne ou une chose.",
+        "On utilise {a}il est{/a} au singulier et {a}ils sont{/a} au pluriel pour décrire des personnes ou des choses au masculin.",
       ],
       noBulletItems: [0],
       transItems: {
@@ -165,14 +176,14 @@ export const A1_GR_CEST: GrammarLesson = {
 
     {
       type: "grid",
-      headers: ["C'est …", "Il est / Elle est …"],
+      headers: ["C'est / Ce sont …", "Il est / Ils sont …"],
       equalCols: true,
       rows: [
         ["C'est {a}un{/a} professeur.", "Il est {a}professeur{/a}."],
-        ["C'est {a}une{/a} infirmière.", "Elle est {a}infirmière{/a}."],
-        ["C'est {a}Sophie{/a}.", "Elle est {a}gentille{/a}."],
+        ["Ce sont {a}des{/a} professeurs.", "Ils sont {a}professeurs{/a}."],
         ["C'est {a}mon{/a} frère.", "Il est {a}grand{/a}."],
-        ["C'est {a}une{/a} voiture.", "Elle est {a}rapide{/a}."],
+        ["Ce sont {a}mes{/a} frères.", "Ils sont {a}grands{/a}."],
+        ["Ce sont {a}Paul et Sami{/a}.", "Ils sont {a}gentils{/a}."],
       ],
     },
 

@@ -26,7 +26,7 @@ function lesson(
 }
 
 /** Parcours complet français. */
-export const FRENCH_THEMES: FrenchTheme[] = [
+const BASE_FRENCH_THEMES: FrenchTheme[] = [
   // ── A0 — Débutant absolu ─────────────────────────────────────── Apprendre
   t("A0", "a0-1", "A.1",  "Salutations et politesse",              "Présentations, tutoiement / vouvoiement.", [...Q]),
   t("A0", "a0-2", "A.2",  "Chiffres, nombres et âge (0–100)",      "Avoir, nombres, identité orale.", [...Q]),
@@ -118,7 +118,7 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-conj-l07", "R1.5", "Les verbes en -er au présent",                "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…",              "conjugaison"),
   lesson("A1", "a1-gr-phrases", "R1.6", "Les phrases",                               "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",     "grammaire"),
   lesson("A1", "a1-gr-l02",   "R1.7", "La négation",                                 "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
-  lesson("A1", "a1-gr-cest-il-est", "R1.9", "C'est ou il est ?",                     "Distinguer c'est + nom/pronom de il est/elle est + adjectif ou profession.",            "grammaire"),
+  lesson("A1", "a1-gr-cest-il-est", "R1.9", "C'est, ce sont, il est ou ils sont ?",   "Distinguer les formes d'identification et de description au singulier et au pluriel.", "grammaire"),
 
   // ── G2 — Verbes essentiels (R2.1–R2.5) ──────────────────────────────────────
   lesson("A1", "a1-conj-l08", "R2.1", "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
@@ -246,6 +246,64 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("V9", "v9-paysage",              "V9.8", "Le paysage",              "Éléments naturels du paysage.",                                    "vocabulaire"),
 
 ];
+
+const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
+  "a1-gr-interro": "R3.1",
+  "a2-gr-l07": "R3.2",
+  "a2-gr-l09": "R3.3",
+  "a1-gr-l10": "R3.4",
+  "a1-gr-l23": "R4.1",
+  "a1-gr-l18": "R4.2",
+  "a1-gr-l19": "R4.3",
+  "a1-gr-l14": "R4.4",
+  "a1-gr-l11": "R4.5",
+  "a2-gr-l19": "R5.1",
+  "a2-gr-l35": "R5.2",
+  "a2-gr-l36": "R5.3",
+  "a1-conj-l28": "R6.1",
+  "a1-conj-l29": "R6.2",
+  "a1-conj-l30": "R6.3",
+  "a1ConjL31": "R6.4",
+  "a1-gr-verbes-double-auxiliaire": "R6.5",
+  "a1-gr-pronominaux-passe-compose": "R6.6",
+  "a1-gr-marqueurs-chronologiques": "R6.7",
+  "a2-conj-l07": "R6.8",
+  "a2-gr-imparfait-irreguliers": "R6.9",
+  "a2-gr-passe-compose-ou-imparfait": "R6.10",
+  "a2-gr-l52": "R6.11",
+  "a1-conj-l20": "R7.1",
+  "a1-gr-expressions-temps": "R7.2",
+  "a1-gr-l22": "R7.3",
+  "a2-conj-l08": "R7.4",
+  "a2-gr-futur-irreguliers": "R7.5",
+  "a2-gr-futur-simple-ou-proche": "R7.6",
+  "a2-gr-marqueurs-temporels": "R7.7",
+  "a2-gr-hypothese-futur": "R7.8",
+  "a2-conj-l04": "R8.1",
+  "a2-gr-conditionnel": "R8.2",
+  "a2-conj-l05": "R8.3",
+  "a2-gr-gerondif": "R8.4",
+  "a2-gr-subjonctif": "R8.5",
+  "a2-gr-l39": "R9.1",
+  "a2-gr-bon-bien-meilleur-mieux": "R9.2",
+  "a2-gr-superlatif": "R9.3",
+  "a2-gr-l42": "R9.4",
+};
+
+export const FRENCH_THEMES: FrenchTheme[] = BASE_FRENCH_THEMES
+  .filter((theme) => theme.slug !== "a2-gr-l11" && theme.slug !== "a2-gr-l12")
+  .map((theme) => {
+    const code = REORGANIZED_GRAMMAR_CODES[theme.slug];
+    if (!code) return theme;
+    if (theme.slug === "a1-gr-l23") {
+      return {
+        ...theme,
+        code,
+        description: "Genre, nombre, cas particuliers et place de l'adjectif dans la phrase.",
+      };
+    }
+    return { ...theme, code };
+  });
 
 export function getFrenchThemeBySlug(slug: string): FrenchTheme | undefined {
   return FRENCH_THEMES.find((x) => x.slug === slug);

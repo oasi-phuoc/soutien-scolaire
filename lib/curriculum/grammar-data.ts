@@ -151,7 +151,62 @@ import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
 
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
-export const GRAMMAR_LESSONS: GrammarLesson[] = [
+const REORGANIZED_CODES: Record<string, string> = {
+  "a1-gr-interro": "R3.1",
+  "a2-gr-l07": "R3.2",
+  "a2-gr-l09": "R3.3",
+  "a1-gr-l10": "R3.4",
+  "a1-gr-l23": "R4.1",
+  "a1-gr-l18": "R4.2",
+  "a1-gr-l19": "R4.3",
+  "a1-gr-l14": "R4.4",
+  "a1-gr-l11": "R4.5",
+  "a2-gr-l19": "R5.1",
+  "a2-gr-l35": "R5.2",
+  "a2-gr-l36": "R5.3",
+  "a1-conj-l28": "R6.1",
+  "a1-conj-l29": "R6.2",
+  "a1-conj-l30": "R6.3",
+  "negation-passe-compose": "R6.4",
+  "a1-gr-verbes-double-auxiliaire": "R6.5",
+  "a1-gr-pronominaux-passe-compose": "R6.6",
+  "a1-gr-marqueurs-chronologiques": "R6.7",
+  "a2-conj-l07": "R6.8",
+  "a2-gr-imparfait-irreguliers": "R6.9",
+  "a2-gr-passe-compose-ou-imparfait": "R6.10",
+  "a2-gr-l52": "R6.11",
+  "a1-conj-l20": "R7.1",
+  "a1-gr-expressions-temps": "R7.2",
+  "a1-gr-l22": "R7.3",
+  "a2-conj-l08": "R7.4",
+  "a2-gr-futur-irreguliers": "R7.5",
+  "a2-gr-futur-simple-ou-proche": "R7.6",
+  "a2-gr-marqueurs-temporels": "R7.7",
+  "a2-gr-hypothese-futur": "R7.8",
+  "a2-conj-l04": "R8.1",
+  "a2-gr-conditionnel": "R8.2",
+  "a2-conj-l05": "R8.3",
+  "a2-gr-gerondif": "R8.4",
+  "a2-gr-subjonctif": "R8.5",
+  "a2-gr-l39": "R9.1",
+  "a2-gr-bon-bien-meilleur-mieux": "R9.2",
+  "a2-gr-superlatif": "R9.3",
+  "a2-gr-l42": "R9.4",
+};
+
+const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
+  ...A1_GR_L23,
+  code: "R4.1",
+  title: "Les adjectifs qualificatifs",
+  theory: [...A2_GR_L11.theory, ...A2_GR_L12.theory],
+};
+
+function applyReorganizedCode<T extends GrammarLesson | ConjLesson>(lesson: T): T {
+  const code = REORGANIZED_CODES[lesson.slug];
+  return code ? { ...lesson, code } : lesson;
+}
+
+const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
   A1_GR_CEST,
   A1_GR_PHRASES,
@@ -161,7 +216,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L04,
   A1_GR_L06,
   A1_GR_L10,
-  A1_GR_L23,
+  ADJECTIFS_QUALIFICATIFS,
   A1_GR_L18,
   A1_GR_L19,
   A1_GR_L14,
@@ -188,9 +243,6 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L20,
   A2_GR_L07,
   A2_GR_L09,
-  A2_GR_L11,
-  A2_GR_L12,
-
   A2_GR_L19,
   A2_GR_L35,
   A2_GR_L36,
@@ -203,9 +255,11 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_SUBJONCTIF,
 ];
 
+export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS.map(applyReorganizedCode);
+
 // ── Registre — conjugaison ────────────────────────────────────────────────────
 
-export const CONJUGAISON_LESSONS: ConjLesson[] = [
+const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L00,
   A1_CONJ_L01,
   A1_CONJ_L07,
@@ -228,6 +282,8 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = [
   A2_CONJ_L07,
   A2_CONJ_L08,
 ];
+
+export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS.map(applyReorganizedCode);
 
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import {
@@ -8,7 +9,8 @@ import {
   type TeacherOption,
 } from "@/app/actions/expression";
 import { submitOralAction, type OralDialogueLine, type OralGrammarMatch } from "@/app/actions/oral";
-import { randomOralPrompt, type OralLevel, type OralPrompt, DIALOGUE_HINTS } from "@/lib/curriculum/content/communication/speaking-prompts";
+import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
+import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
 import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import { speak } from "@/lib/utils/speech";
 
@@ -555,6 +557,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const lessonCode = lessonCodeFromId(lessonId);
 
   const [prompt] = useState<OralPrompt>(() => randomOralPrompt(level));
+  const [situation] = useState(() => randomOralSituation());
   const [phase, setPhase] = useState<Phase>("intro");
 
   // Task 1: questions on 3 themes
@@ -670,14 +673,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setIsChecking(true);
     const grammar = await checkGrammar(currentTranscript);
     setIsChecking(false);
-    const promptText = prompt.dialoguePrompts[dialogueIndex]!;
+    const promptText = situation.dialoguePrompts[dialogueIndex]!;
     const newLines: OralDialogueLine[] = [
       { role: "app", text: promptText },
       { role: "student", text: currentTranscript, grammar },
     ];
     setTask3Lines((prev) => [...prev, ...newLines]);
     setCurrentTranscript("");
-    if (dialogueIndex + 1 < prompt.dialoguePrompts.length) {
+    if (dialogueIndex + 1 < situation.dialoguePrompts.length) {
       setDialogueIndex((i) => i + 1);
     } else {
       setTask3Done(true);
@@ -717,11 +720,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   function sendToTeacher() {
     if (!teacherId || sent) return;
     startSending(async () => {
+      const submissionPrompt: OralPrompt = {
+        ...prompt,
+        id: `${prompt.id}-${situation.id}`,
+        imageDescription: situation.imageDescription,
+        dialogueContext: situation.dialogueContext,
+        dialoguePrompts: situation.dialoguePrompts,
+      };
       const result = await submitOralAction({
         teacherId,
         lessonCode,
         level,
-        prompt,
+        prompt: submissionPrompt,
         dialogue: fullDialogue,
         aiFeedback: allGrammar,
       });
@@ -1002,18 +1012,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </h2>
           </div>
 
-          {/* Image placeholder */}
-          <div
-            className="flex flex-col items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-dashed py-10 text-center"
-            style={{ borderColor: ACCENT }}
-          >
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: ACCENT }} aria-hidden>
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-            <p className="text-sm font-semibold" style={{ color: ACCENT }}>Image à venir</p>
-            <p className="mx-4 text-sm text-[var(--color-text-secondary)]">{prompt.imageDescription}</p>
+          <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
+            <Image
+              src={situation.image}
+              alt={situation.alt}
+              width={800}
+              height={600}
+              className="h-auto w-full object-contain"
+              priority
+            />
+            <p className="px-3 py-2 text-sm text-[var(--color-text-secondary)]">
+              {situation.imageDescription}
+            </p>
           </div>
 
           {/* Guide questions (audio only, text hidden by default) */}
@@ -1117,13 +1127,27 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       {/* ——— TASK 3: Dialogue ——— */}
       {phase === "task3" && (
         <div className="flex-1 space-y-4">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Partie 3 — Dialogue
-            </p>
-            <h2 className="mt-1 text-base font-bold text-[var(--color-text-primary)]">
-              {prompt.dialogueContext}
-            </h2>
+          <div className="space-y-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                  Partie 3 — Dialogue
+                </p>
+                <h2 className="mt-1 text-base font-bold leading-relaxed text-[var(--color-text-primary)]">
+                  {situation.dialogueContext}
+                </h2>
+              </div>
+              <SpeakButton text={situation.dialogueContext} />
+            </div>
+            <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
+              <Image
+                src={situation.image}
+                alt={situation.alt}
+                width={800}
+                height={600}
+                className="h-auto max-h-64 w-full object-contain"
+              />
+            </div>
           </div>
 
           {/* Past dialogue lines (text always visible) */}
@@ -1137,11 +1161,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <>
               {/* Current app prompt — voice message style */}
               {(() => {
-                const currentHints = DIALOGUE_HINTS[prompt.id]?.[dialogueIndex];
+                const currentHints: string[] = [];
                 return (
                   <>
                     <VoiceMessageBubble
-                      text={prompt.dialoguePrompts[dialogueIndex]!}
+                      text={situation.dialoguePrompts[dialogueIndex]!}
                       hints={currentHints}
                       hintsOpen={hintsOpen}
                       onToggleHints={() => setHintsOpen((v) => !v)}

@@ -24,30 +24,25 @@ const SECTIONS: SectionDef[] = [
 const GRAMMAR_GROUPS: SectionDef[] = [
   { id: "R1", code: "R1", title: "Les fondamentaux" },
   { id: "R2", code: "R2", title: "Les verbes essentiels" },
-  { id: "RI", code: "RI", title: "L'interrogation" },
-  { id: "R3", code: "R3", title: "Les adjectifs" },
-  { id: "RP", code: "RP", title: "Les pronoms" },
-  { id: "R5", code: "R5", title: "Le passé" },
-  { id: "R4", code: "R4", title: "Le futur" },
-  { id: "R6", code: "R6", title: "Les autres temps" },
-  { id: "R7", code: "R7", title: "Le futur simple" },
-  { id: "R8", code: "R8", title: "La comparaison" },
-  { id: "RX", code: "RX", title: "À organiser" },
+  { id: "R3", code: "R3", title: "L'interrogation" },
+  { id: "R4", code: "R4", title: "Les adjectifs" },
+  { id: "R5", code: "R5", title: "Les pronoms" },
+  { id: "R6", code: "R6", title: "Le passé" },
+  { id: "R7", code: "R7", title: "Le futur" },
+  { id: "R8", code: "R8", title: "Les autres temps" },
+  { id: "R9", code: "R9", title: "La comparaison" },
 ];
 
 function grammarGroupId(code: string): string {
-  if (code === "R1.8" || code === "RX.12" || code === "RX.13" || code === "RI.4") return "RI";
   if (code.startsWith("R1.")) return "R1";
   if (code.startsWith("R2.")) return "R2";
   if (code.startsWith("R3.")) return "R3";
-  if (code.startsWith("RP.")) return "RP";
   if (code.startsWith("R4.")) return "R4";
   if (code.startsWith("R5.")) return "R5";
   if (code.startsWith("R6.")) return "R6";
   if (code.startsWith("R7.")) return "R7";
   if (code.startsWith("R8.")) return "R8";
-  if (code.startsWith("RI.")) return "RI";
-  return "RX";
+  return "R9";
 }
 
 const VOCAB_MODULES: SectionDef[] = [
