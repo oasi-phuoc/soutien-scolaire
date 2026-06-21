@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import {
@@ -149,7 +150,7 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
       type="button"
       aria-label="Écouter"
       onClick={() => speak(text)}
-      className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} ${onLight ? "text-white" : "text-white"}`}
+      className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} text-white`}
       style={onLight ? { background: "rgba(255,255,255,0.25)" } : { background: ACCENT }}
     >
       <svg width={small ? 14 : 16} height={small ? 14 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -231,6 +232,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // Task 1: questions on 3 themes
   const [themeIndex, setThemeIndex] = useState(0);
   const [task1Lines, setTask1Lines] = useState<OralDialogueLine[]>([]);
+  const [task1Done, setTask1Done] = useState(false);
   const [currentTranscript, setCurrentTranscript] = useState("");
   const [isChecking, setIsChecking] = useState(false);
 
@@ -280,14 +282,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // Reset transcript on phase/index change
   useEffect(() => { setCurrentTranscript(""); }, [phase, themeIndex, dialogueIndex]);
 
-  // ——— Progress pct ———
+  // ——— Step index for segmented progress bar ———
 
-  const progressPct =
-    phase === "intro" ? 5 :
-    phase === "task1" ? 10 + Math.round((themeIndex / 3) * 25) :
-    phase === "task2" ? 40 :
-    phase === "task3" ? 55 + Math.round((dialogueIndex / prompt.dialoguePrompts.length) * 30) :
-    95;
+  const stepIdx =
+    phase === "intro" ? 0 :
+    phase === "task1" ? 1 :
+    phase === "task2" ? 2 :
+    phase === "task3" ? 3 : 4;
+
+  const totalSteps = 5;
 
   // ——— Task 1: confirm a theme question ———
 
@@ -306,7 +309,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     if (themeIndex + 1 < 3) {
       setThemeIndex((i) => i + 1);
     } else {
-      setPhase("task2");
+      setTask1Done(true);
     }
   }
 
@@ -398,7 +401,48 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     });
   }
 
-  // ——— Intro content ———
+  // ——— Nav bar logic ———
+
+  function goBack() {
+    if (phase === "intro") router.push("/francais?tab=communication");
+    else if (phase === "task1") setPhase("intro");
+    else if (phase === "task2") setPhase("task1");
+    else if (phase === "task3") setPhase("task2");
+    else setPhase("task3");
+  }
+
+  function goNext() {
+    if (phase === "intro") setPhase("task1");
+    else if (phase === "task1") setPhase("task2");
+    else if (phase === "task2") setPhase("task3");
+    else if (phase === "task3") setPhase("review");
+    else handleFinish();
+  }
+
+  function handleNavValidate() {
+    if (phase === "task1") void confirmTask1();
+    else if (phase === "task2") void validateTask2();
+    else if (phase === "task3") void confirmTask3();
+  }
+
+  const showValidate =
+    (phase === "task1" && !task1Done) ||
+    (phase === "task2" && !task2Done) ||
+    (phase === "task3" && !task3Done);
+
+  const validateDisabled =
+    (phase === "task1" && (!currentTranscript.trim() || listening1 || isChecking)) ||
+    (phase === "task2" && (task2Phrases.length === 0 || isChecking)) ||
+    (phase === "task3" && (!currentTranscript.trim() || listening3 || isChecking));
+
+  const nextDisabled =
+    (phase === "task1" && !task1Done) ||
+    (phase === "task2" && !task2Done) ||
+    (phase === "task3" && !task3Done);
+
+  const isLastPhase = phase === "review";
+
+  // ——— Content ———
 
   const levelLabel = level === "base" ? "Base" : level === "moyen" ? "Moyen" : "Avancé";
   const introSteps =
@@ -422,30 +466,45 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
-      {/* Progress bar */}
-      <div className="mb-4 flex items-center gap-3">
-        <div className="flex-1 overflow-hidden rounded-full bg-[var(--color-bg-secondary)] h-2">
-          <div
-            className="h-2 rounded-full transition-all duration-500"
-            style={{ width: `${progressPct}%`, background: ACCENT }}
-          />
+      {/* Header */}
+      <header className="mb-4 space-y-1">
+        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
+          Français · Production orale · {levelLabel}
+        </p>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/francais?tab=communication"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
+            style={{ background: ACCENT }}
+            aria-label="Retour au français"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+            {lessonCode} — Production orale
+          </h1>
         </div>
-        <span className="text-xs font-medium tabular-nums text-[var(--color-text-secondary)]">
-          {progressPct}%
-        </span>
+      </header>
+
+      {/* Segmented progress bar */}
+      <div className="mb-6 flex gap-1">
+        {Array.from({ length: totalSteps }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+            style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+          />
+        ))}
       </div>
 
       {/* ——— INTRO ——— */}
       {phase === "intro" && (
         <div className="flex-1 space-y-4">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Production orale — {levelLabel}
-            </p>
-            <h1 className="mt-1 text-xl font-bold text-[var(--color-text-primary)]">
-              Comment ça se passe ?
-            </h1>
-          </div>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+            Comment ça se passe ?
+          </h2>
           <div
             className="rounded-[var(--radius-md)] border-l-2 px-4 py-3 space-y-2"
             style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 9%, transparent)` }}
@@ -475,14 +534,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               </p>
             </div>
           )}
-          <button
-            type="button"
-            onClick={() => setPhase("task1")}
-            className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-            style={{ background: ACCENT }}
-          >
-            Commencer →
-          </button>
         </div>
       )}
 
@@ -491,23 +542,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         <div className="flex-1 space-y-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Partie 1 — Thème {themeIndex + 1} / 3
+              Partie 1 — Thème {Math.min(themeIndex + 1, 3)} / 3
             </p>
             <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">
-              Posez une question sur ce mot
+              {task1Done ? "Questions terminées" : "Posez une question sur ce mot"}
             </h2>
           </div>
 
           {/* Theme word */}
-          <div
-            className="relative flex items-center justify-center rounded-[var(--radius-md)] py-8 text-3xl font-bold text-white"
-            style={{ background: ACCENT }}
-          >
-            {prompt.themes[themeIndex]!.word}
-            <span className="absolute right-3 top-3">
-              <SpeakButton text={prompt.themes[themeIndex]!.word} small onLight />
-            </span>
-          </div>
+          {!task1Done && (
+            <div
+              className="relative flex items-center justify-center rounded-[var(--radius-md)] py-8 text-3xl font-bold text-white"
+              style={{ background: ACCENT }}
+            >
+              {prompt.themes[themeIndex]!.word}
+              <span className="absolute right-3 top-3">
+                <SpeakButton text={prompt.themes[themeIndex]!.word} small onLight />
+              </span>
+            </div>
+          )}
 
           {/* Previous theme answers */}
           {task1Lines.length > 0 && (
@@ -517,7 +570,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           )}
 
           {/* Current transcript preview */}
-          {currentTranscript && (
+          {!task1Done && currentTranscript && (
             <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
               <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
               <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
@@ -527,7 +580,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
 
           {/* Text input fallback */}
-          {!supported && (
+          {!supported && !task1Done && (
             <input
               type="text"
               value={currentTranscript}
@@ -537,28 +590,26 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             />
           )}
 
-          <div className="flex items-center gap-3">
-            <MicButton
-              isListening={listening1}
-              supported={supported}
-              onStart={start1}
-              onStop={stop1}
-              disabled={isChecking}
-            />
-            <button
-              type="button"
-              onClick={() => void confirmTask1()}
-              disabled={!currentTranscript.trim() || isChecking || listening1}
-              className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
-              style={{ background: ACCENT }}
-            >
-              Confirmer
-            </button>
-          </div>
+          {!task1Done && (
+            <>
+              <MicButton
+                isListening={listening1}
+                supported={supported}
+                onStart={start1}
+                onStop={stop1}
+                disabled={isChecking}
+              />
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                Exemple : <em>{prompt.themes[themeIndex]!.example}</em>
+              </p>
+            </>
+          )}
 
-          <p className="text-xs text-[var(--color-text-secondary)]">
-            Exemple : <em>{prompt.themes[themeIndex]!.example}</em>
-          </p>
+          {task1Done && (
+            <p className="text-center text-sm text-[var(--color-text-secondary)]">
+              Toutes vos questions ont été enregistrées. Appuyez sur <strong>Suivant</strong> pour continuer.
+            </p>
+          )}
         </div>
       )}
 
@@ -620,6 +671,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           )}
 
+          {task2Done && (
+            <p className="text-center text-sm text-[var(--color-text-secondary)]">
+              Description enregistrée. Appuyez sur <strong>Suivant</strong> pour continuer.
+            </p>
+          )}
+
           {!task2Done && (
             <>
               {currentTranscript && (
@@ -658,34 +715,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   + Ajouter
                 </button>
               </div>
-              {task2Phrases.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() => void validateTask2()}
-                  disabled={isChecking}
-                  className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white disabled:opacity-35"
-                  style={{ background: ACCENT }}
-                >
-                  {isChecking ? "Vérification…" : "Valider ma description ✓"}
-                </button>
-              )}
               {task2Phrases.length === 0 && (
                 <p className="text-center text-xs text-[var(--color-text-secondary)]">
                   Enregistrez autant de phrases que vous voulez, puis validez.
                 </p>
               )}
             </>
-          )}
-
-          {task2Done && (
-            <button
-              type="button"
-              onClick={() => { setPhase("task3"); }}
-              className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-              style={{ background: ACCENT }}
-            >
-              Partie 3 — Dialogue →
-            </button>
           )}
         </div>
       )}
@@ -734,36 +769,20 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
               )}
-              <div className="flex items-center gap-3">
-                <MicButton
-                  isListening={listening3}
-                  supported={supported}
-                  onStart={start3}
-                  onStop={stop3}
-                  disabled={isChecking}
-                />
-                <button
-                  type="button"
-                  onClick={() => void confirmTask3()}
-                  disabled={!currentTranscript.trim() || isChecking || listening3}
-                  className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
-                  style={{ background: ACCENT }}
-                >
-                  Répondre
-                </button>
-              </div>
+              <MicButton
+                isListening={listening3}
+                supported={supported}
+                onStart={start3}
+                onStop={stop3}
+                disabled={isChecking}
+              />
             </>
           )}
 
           {task3Done && (
-            <button
-              type="button"
-              onClick={() => setPhase("review")}
-              className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-              style={{ background: ACCENT }}
-            >
-              Voir le récapitulatif →
-            </button>
+            <p className="text-center text-sm text-[var(--color-text-secondary)]">
+              Dialogue terminé. Appuyez sur <strong>Suivant</strong> pour voir le récapitulatif.
+            </p>
           )}
         </div>
       )}
@@ -837,17 +856,60 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               </p>
             )}
           </section>
-
-          <button
-            type="button"
-            onClick={handleFinish}
-            className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-            style={{ background: ACCENT }}
-          >
-            Terminer ✓
-          </button>
         </div>
       )}
+
+      {/* Fixed bottom nav — picked up by MainNav */}
+      <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            {/* Back button */}
+            <button
+              type="button"
+              onClick={goBack}
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
+            >
+              ← Retour
+            </button>
+
+            {/* Validate (task phases only) */}
+            {showValidate ? (
+              <button
+                type="button"
+                onClick={handleNavValidate}
+                disabled={validateDisabled}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
+                style={{ background: ACCENT }}
+                aria-label="Valider"
+              >
+                {isChecking ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-spin" aria-hidden>
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                )}
+              </button>
+            ) : (
+              <span />
+            )}
+
+            {/* Next / Finish button */}
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={nextDisabled}
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
+              style={{ background: ACCENT }}
+            >
+              {isLastPhase ? "Terminer ✓" : "Suivant →"}
+            </button>
+          </div>
+        </div>
+        <div style={{ height: 72 }} />
+      </div>
     </div>
   );
 }

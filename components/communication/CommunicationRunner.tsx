@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import {
@@ -479,14 +480,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   const totalEx = lesson.exercises.length;
-  const progressPct =
-    phase === "theory"
-      ? 10
-      : phase === "writing"
-        ? 70
-      : phase === "exercises"
-        ? 10 + Math.round((exIndex / totalEx) * 80)
-        : 100;
+  const totalSteps = lesson.writingLevel ? 2 : 3;
+  const stepIdx =
+    phase === "theory" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
 
   function handleFinish() {
     try {
@@ -510,7 +506,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
   function goBack() {
     if (phase === "theory") {
-      router.push("/communication");
+      router.push("/francais?tab=communication");
     } else if (phase === "writing") {
       setPhase("theory");
       setGrammarFeedback([]);
@@ -605,17 +601,37 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
-      {/* Progress bar */}
-      <div className="mb-4 flex items-center gap-3">
-        <div className="flex-1 overflow-hidden rounded-full bg-[var(--color-bg-secondary)] h-2">
-          <div
-            className="h-2 rounded-full transition-all duration-500"
-            style={{ width: `${progressPct}%`, background: ACCENT }}
-          />
+      {/* Header */}
+      <header className="mb-4 space-y-1">
+        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
+          {lesson.writingLevel ? "Français · Expression écrite" : "Français · Communication"}
+        </p>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/francais?tab=communication"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
+            style={{ background: ACCENT }}
+            aria-label="Retour au français"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+            {lesson.code} — {lesson.title}
+          </h1>
         </div>
-        <span className="text-xs font-medium tabular-nums text-[var(--color-text-secondary)]">
-          {progressPct}%
-        </span>
+      </header>
+
+      {/* Segmented progress bar */}
+      <div className="mb-6 flex gap-1">
+        {Array.from({ length: totalSteps }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+            style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+          />
+        ))}
       </div>
 
       {/* Theory phase */}
