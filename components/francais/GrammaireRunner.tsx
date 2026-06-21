@@ -2836,7 +2836,10 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          hasExercises={false}
+          exercises={lesson.exercises.map((ex, i) => ({
+            id: String(i),
+            label: ex.title ?? `Exercice ${i + 1}`,
+          }))}
           accentColor="var(--color-accent-fr)"
         />
       )}

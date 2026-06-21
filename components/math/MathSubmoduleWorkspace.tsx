@@ -2260,7 +2260,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          hasExercises={false}
           accentColor="var(--color-accent-alg)"
         />
       )}

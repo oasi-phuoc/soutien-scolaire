@@ -524,7 +524,6 @@ export function VocabRunner({ theme }: Props) {
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          hasExercises={false}
           accentColor="var(--color-accent-fr)"
         />
       )}

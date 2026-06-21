@@ -2709,7 +2709,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          hasExercises={false}
           accentColor="var(--color-accent-alg)"
         />
       )}

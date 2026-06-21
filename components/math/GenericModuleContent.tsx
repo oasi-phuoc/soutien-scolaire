@@ -6759,7 +6759,7 @@ export function GenericModuleContent({
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          hasExercises={trainingExercisePrompts.length > 0}
+          exercises={trainingExercisePrompts.map((_, i) => ({ id: String(i), label: `Exercice ${i + 1}` }))}
           accentColor="var(--color-accent-alg)"
         />
       )}
@@ -6832,26 +6832,39 @@ export function GenericModuleContent({
         <>
           <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
           {/* Print-only exercise list */}
-          {printConfig?.exercises && trainingExercisePrompts.length > 0 && (
-            <div className="mt-6 hidden print:block">
-              <h3 className="mb-3 text-sm font-bold">Exercices d&apos;entraînement</h3>
-              <ol className="space-y-5">
-                {trainingExercisePrompts.map((prompt, i) => (
-                  <li key={i} className="text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="shrink-0 font-bold">{i + 1}.</span>
-                      <div className="flex-1">
-                        <p>{prompt}</p>
-                        {printConfig.evalMode && (
-                          <span className="text-xs text-gray-500"> / {printConfig.pointsPerExercise} pt{printConfig.pointsPerExercise > 1 ? "s" : ""}</span>
-                        )}
-                        <div className="mt-3 h-px border-b border-black/30" />
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+          {printConfig && trainingExercisePrompts.length > 0 && (
+            (() => {
+              const includedExs = trainingExercisePrompts
+                .map((prompt, i) => ({
+                  prompt,
+                  sel: printConfig.exerciseSelection.find((s) => s.id === String(i)),
+                }))
+                .filter(({ sel }) => sel?.included !== false);
+              if (includedExs.length === 0) return null;
+              return (
+                <div className="mt-6 hidden print:block">
+                  <h3 className="mb-3 text-sm font-bold">Exercices d&apos;entraînement</h3>
+                  <ol className="space-y-5">
+                    {includedExs.flatMap(({ prompt, sel }, i) =>
+                      Array.from({ length: sel?.occurrences ?? 1 }).map((_, rep) => (
+                        <li key={`${i}-${rep}`} className="text-sm">
+                          <div className="flex items-start gap-2">
+                            <span className="shrink-0 font-bold">{i + 1}{(sel?.occurrences ?? 1) > 1 ? ` (${rep + 1})` : ""}.</span>
+                            <div className="flex-1">
+                              <p>{prompt}</p>
+                              {printConfig.evalMode && (
+                                <span className="text-xs text-gray-500"> / {printConfig.pointsPerExercise} pt{printConfig.pointsPerExercise > 1 ? "s" : ""}</span>
+                              )}
+                              <div className="mt-3 h-px border-b border-black/30" />
+                            </div>
+                          </div>
+                        </li>
+                      ))
+                    )}
+                  </ol>
+                </div>
+              );
+            })()
           )}
         </>
       )}
