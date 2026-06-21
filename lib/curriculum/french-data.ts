@@ -169,9 +169,14 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-superlatif", "R8.3", "Le superlatif", "Le, la ou les plus et moins ; le meilleur, le mieux et le pire.", "grammaire"),
   lesson("A2", "a2-gr-l42", "R8.4", "La négation (2/2)", "Ne…jamais, ne…rien, ne…personne ; rien et personne comme sujets.", "grammaire"),
 
+  // ── G6 — Les autres temps ────────────────────────────────────────────────────
+  lesson("A2", "a2-conj-l04",        "R6.1", "Le conditionnel de politesse", "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
+  lesson("A2", "a2-gr-conditionnel", "R6.2", "Le conditionnel",              "Conditionnel présent et passé ; phrases hypothétiques avec si + imparfait ou plus-que-parfait.", "grammaire"),
+  lesson("A2", "a2-conj-l05",        "R6.3", "L'impératif",                  "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.", "conjugaison"),
+  lesson("A2", "a2-gr-gerondif",     "R6.4", "Le gérondif",                  "En + participe présent : simultanéité, manière, condition et cause.", "grammaire"),
+  lesson("A2", "a2-gr-subjonctif",   "R6.5", "Le subjonctif",                "Formation, irréguliers et emplois : vouloir que, il faut que, bien que, pour que, avant que.", "grammaire"),
+
   // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
-  lesson("A2", "a2-conj-l04", "RX.14", "Le conditionnel de politesse",                    "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
-  lesson("A2", "a2-conj-l05", "RX.15", "L'impératif",                                     "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.","conjugaison"),
   lesson("A2", "a2-gr-l11",   "RX.17", "Les adjectifs — généralités",                     "Genre, nombre, accord des adjectifs qualificatifs en contexte.",                           "grammaire"),
   lesson("A2", "a2-gr-l12",   "RX.18", "Les adjectifs — cas particuliers et place",       "Nouveau/beau/vieux, adjectifs invariables, place avant ou après le nom.",                  "grammaire"),
   lesson("A2", "a2-gr-l19",   "RX.19", "Les pronoms relatifs qui et que",                 "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",          "grammaire"),

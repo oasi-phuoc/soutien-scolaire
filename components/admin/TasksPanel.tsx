@@ -229,11 +229,12 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R5.6", label: "R5.6 — Les verbes pronominaux au passé composé" },
         { id: "R5.7", label: "R5.7 — Les marqueurs chronologiques" },
       ]},
-      { id: "R6", label: "L'imparfait", lessons: [
-        { id: "R6.1", label: "R6.1 — Les verbes réguliers" },
-        { id: "R6.2", label: "R6.2 — Les verbes irréguliers" },
-        { id: "R6.3", label: "R6.3 — Passé composé ou imparfait ?" },
-        { id: "R6.4", label: "R6.4 — Cause et conséquence" },
+      { id: "R6", label: "Les autres temps", lessons: [
+        { id: "R6.1", label: "R6.1 — Le conditionnel de politesse" },
+        { id: "R6.2", label: "R6.2 — Le conditionnel" },
+        { id: "R6.3", label: "R6.3 — L'impératif" },
+        { id: "R6.4", label: "R6.4 — Le gérondif" },
+        { id: "R6.5", label: "R6.5 — Le subjonctif" },
       ]},
       { id: "R7", label: "Le futur simple", lessons: [
         { id: "R7.1", label: "R7.1 — Les verbes réguliers" },
@@ -253,8 +254,7 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "RX.7", label: "RX.7 — Le comparatif et le superlatif" },
         { id: "RX.8", label: "RX.8 — Savoir ou connaître ?" },
         { id: "RX.9", label: "RX.9 — Les verbes en -er (révision)" },
-        { id: "RX.14", label: "RX.14 — Le conditionnel de politesse" },
-        { id: "RX.15", label: "RX.15 — L'impératif" },
+
 
         { id: "RX.17", label: "RX.17 — Les adjectifs (généralités)" },
         { id: "RX.18", label: "RX.18 — Les adjectifs (cas particuliers)" },

@@ -28,7 +28,7 @@ const GRAMMAR_GROUPS: SectionDef[] = [
   { id: "R3", code: "R3", title: "Les adjectifs" },
   { id: "R5", code: "R5", title: "Le passé" },
   { id: "R4", code: "R4", title: "Le futur" },
-  { id: "R6", code: "R6", title: "L'imparfait" },
+  { id: "R6", code: "R6", title: "Les autres temps" },
   { id: "R7", code: "R7", title: "Le futur simple" },
   { id: "R8", code: "R8", title: "La comparaison" },
   { id: "RX", code: "RX", title: "À organiser" },

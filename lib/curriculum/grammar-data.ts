@@ -143,6 +143,9 @@ import { A2_CONJ_L02 } from "./content/francais/grammaire-r4.10";
 
 import { A2_CONJ_L04 } from "./content/francais/grammaire-r4.14";
 import { A2_CONJ_L05 } from "./content/francais/grammaire-r4.15";
+import { A2_GR_CONDITIONNEL } from "./content/francais/grammaire-r6.2";
+import { A2_GR_GERONDIF } from "./content/francais/grammaire-r6.4";
+import { A2_GR_SUBJONCTIF } from "./content/francais/grammaire-r6.5";
 import { A2_CONJ_L06 } from "./content/francais/grammaire-r4.24";
 import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
 import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
@@ -196,6 +199,10 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_L39,
   A2_GR_L42,
   A2_GR_L52,
+
+  A2_GR_CONDITIONNEL,
+  A2_GR_GERONDIF,
+  A2_GR_SUBJONCTIF,
 ];
 
 // ── Registre — conjugaison ────────────────────────────────────────────────────
