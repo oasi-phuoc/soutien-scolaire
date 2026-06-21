@@ -287,6 +287,11 @@ input[type=number] {
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 12mm 12mm 18mm;
+  }
+
   body {
     background: #fff !important;
     color: #000 !important;
@@ -313,5 +318,25 @@ input[type=number] {
   /* Titre du module visible en haut de la feuille */
   .math-module-page {
     padding-top: 12px !important;
+    padding-bottom: 18mm !important;
+  }
+
+  .print-document-header {
+    break-inside: avoid;
+  }
+
+  .print-document-footer {
+    left: 12mm !important;
+    right: 12mm !important;
+    bottom: 4mm !important;
+    z-index: 9999;
+  }
+
+  .print-page-current::after {
+    content: "Page " counter(page);
+  }
+
+  .print-page-total::after {
+    content: counter(pages);
   }
 }

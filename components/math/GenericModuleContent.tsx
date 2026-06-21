@@ -13,7 +13,12 @@ import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
-import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
+import {
+  PrintConfigSheet,
+  PrintDocumentFooter,
+  PrintDocumentHeader,
+  type PrintConfig,
+} from "@/components/ui/PrintConfigSheet";
 
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import {
@@ -6830,7 +6835,14 @@ export function GenericModuleContent({
       {/* Theory */}
       {currentStep?.kind === "theory" && (
         <>
-          <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
+          {printConfig && (
+            <div className="hidden print:block">
+              <PrintDocumentHeader config={printConfig.header} />
+            </div>
+          )}
+          <div className={printConfig && !printConfig.theory ? "print:hidden" : undefined}>
+            <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
+          </div>
           {/* Print-only exercise list */}
           {printConfig && trainingExercisePrompts.length > 0 && (
             (() => {
@@ -6865,6 +6877,9 @@ export function GenericModuleContent({
                 </div>
               );
             })()
+          )}
+          {printConfig && (
+            <PrintDocumentFooter date={printConfig.printDate} version={printConfig.version} />
           )}
         </>
       )}

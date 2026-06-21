@@ -91,13 +91,12 @@ import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
 import { A1_GR_TIME_EXPRESSIONS } from "./content/francais/grammaire-r4.2-temps";
 import { A1_GR_DOUBLE_AUXILIAIRE } from "./content/francais/grammaire-r5.5-double-auxiliaire";
 import { A1_GR_PRONOMINAUX_PASSE } from "./content/francais/grammaire-r5.6-pronominaux";
-import { A1_GR_MARQUEURS_CHRONOLOGIQUES } from "./content/francais/grammaire-r5.7-marqueurs";
 import { A2_GR_IMPARFAIT_IRREGULIERS } from "./content/francais/grammaire-r6.2-irreguliers";
 import { A2_GR_PASSE_OU_IMPARFAIT } from "./content/francais/grammaire-r6.3-passe-imparfait";
 import { A2_GR_FUTUR_IRREGULIERS } from "./content/francais/grammaire-r7.2-irreguliers";
 import { A2_GR_FUTUR_SIMPLE_PROCHE } from "./content/francais/grammaire-r7.3-futurs";
-import { A2_GR_MARQUEURS_TEMPORELS } from "./content/francais/grammaire-r7.4-marqueurs";
 import { A2_GR_HYPOTHESE_FUTUR } from "./content/francais/grammaire-r7.5-hypothese";
+import { GR_MARQUEURS_TEMPS_COMPLET } from "./content/francais/grammaire-r9.1-marqueurs-temps";
 import { A2_GR_BON_BIEN } from "./content/francais/grammaire-r8.2-bon-bien";
 import { A2_GR_SUPERLATIF } from "./content/francais/grammaire-r8.3-superlatif";
 
@@ -172,28 +171,27 @@ const REORGANIZED_CODES: Record<string, string> = {
   "negation-passe-compose": "R6.4",
   "a1-gr-verbes-double-auxiliaire": "R6.5",
   "a1-gr-pronominaux-passe-compose": "R6.6",
-  "a1-gr-marqueurs-chronologiques": "R6.7",
-  "a2-conj-l07": "R6.8",
-  "a2-gr-imparfait-irreguliers": "R6.9",
-  "a2-gr-passe-compose-ou-imparfait": "R6.10",
-  "a2-gr-l52": "R6.11",
+  "a2-conj-l07": "R6.7",
+  "a2-gr-imparfait-irreguliers": "R6.8",
+  "a2-gr-passe-compose-ou-imparfait": "R6.9",
   "a1-conj-l20": "R7.1",
-  "a1-gr-expressions-temps": "R7.2",
-  "a1-gr-l22": "R7.3",
-  "a2-conj-l08": "R7.4",
-  "a2-gr-futur-irreguliers": "R7.5",
-  "a2-gr-futur-simple-ou-proche": "R7.6",
-  "a2-gr-marqueurs-temporels": "R7.7",
-  "a2-gr-hypothese-futur": "R7.8",
+  "a1-gr-l22": "R7.2",
+  "a2-conj-l08": "R7.3",
+  "a2-gr-futur-irreguliers": "R7.4",
+  "a2-gr-futur-simple-ou-proche": "R7.5",
+  "a2-gr-hypothese-futur": "R7.6",
   "a2-conj-l04": "R8.1",
   "a2-gr-conditionnel": "R8.2",
   "a2-conj-l05": "R8.3",
   "a2-gr-gerondif": "R8.4",
   "a2-gr-subjonctif": "R8.5",
-  "a2-gr-l39": "R9.1",
-  "a2-gr-bon-bien-meilleur-mieux": "R9.2",
-  "a2-gr-superlatif": "R9.3",
-  "a2-gr-l42": "R9.4",
+  "gr-marqueurs-temps-complet": "R9.1",
+  "a2-gr-l52": "R9.2",
+  "a1-gr-expressions-temps": "R9.3",
+  "a2-gr-l39": "R10.1",
+  "a2-gr-bon-bien-meilleur-mieux": "R10.2",
+  "a2-gr-superlatif": "R10.3",
+  "a2-gr-l42": "R10.4",
 };
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
@@ -227,15 +225,14 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_TIME_EXPRESSIONS,
   A1_GR_DOUBLE_AUXILIAIRE,
   A1_GR_PRONOMINAUX_PASSE,
-  A1_GR_MARQUEURS_CHRONOLOGIQUES,
   A2_GR_IMPARFAIT_IRREGULIERS,
   A2_GR_PASSE_OU_IMPARFAIT,
   A2_GR_FUTUR_IRREGULIERS,
   A2_GR_FUTUR_SIMPLE_PROCHE,
-  A2_GR_MARQUEURS_TEMPORELS,
   A2_GR_HYPOTHESE_FUTUR,
   A2_GR_BON_BIEN,
   A2_GR_SUPERLATIF,
+  GR_MARQUEURS_TEMPS_COMPLET,
 
   A1_GR_L24,
 
