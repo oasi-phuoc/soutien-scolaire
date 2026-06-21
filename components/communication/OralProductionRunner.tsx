@@ -58,6 +58,7 @@ function getSpeechRecognition(): (new () => SpeechRecognitionInstance) | null {
 
 function useSpeechRecognition(onTranscript: (text: string) => void) {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+  const accumulatedRef = useRef("");
   const [isListening, setIsListening] = useState(false);
   const [supported, setSupported] = useState(true);
 
@@ -68,15 +69,21 @@ function useSpeechRecognition(onTranscript: (text: string) => void) {
   const startListening = useCallback(() => {
     const SR = getSpeechRecognition();
     if (!SR) return;
+    accumulatedRef.current = "";
     const rec = new SR();
     rec.lang = "fr-FR";
-    rec.continuous = false;
+    rec.continuous = true;
     rec.interimResults = false;
     rec.onresult = (event) => {
-      const transcript = event.results[event.resultIndex]?.[0]?.transcript ?? "";
-      if (transcript.trim()) onTranscript(transcript.trim());
+      const latest = event.results[event.resultIndex]?.[0]?.transcript ?? "";
+      if (latest.trim()) {
+        accumulatedRef.current = (accumulatedRef.current + " " + latest).trim();
+        onTranscript(accumulatedRef.current);
+      }
     };
-    rec.onerror = () => setIsListening(false);
+    rec.onerror = (event) => {
+      if (event.error !== "no-speech") setIsListening(false);
+    };
     rec.onend = () => setIsListening(false);
     recognitionRef.current = rec;
     rec.start();
