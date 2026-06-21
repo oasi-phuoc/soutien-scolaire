@@ -473,23 +473,17 @@ function HintsPanel({
 
 // ——— Guide question bubble (audio-only, for task 2 image description) ———
 
-function GuideQuestion({ text, index }: { text: string; index: number }) {
-  const [expanded, setExpanded] = useState(false);
+function GuideAudioBtn({ text }: { text: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const bars = useMemo(() => waveformBars(text), [text]);
 
   useEffect(() => () => {
     if (checkRef.current) clearInterval(checkRef.current);
   }, []);
 
   function handlePlay() {
-    if (isPlaying) {
-      window.speechSynthesis?.cancel();
-      setIsPlaying(false);
-      if (checkRef.current) clearInterval(checkRef.current);
-      return;
-    }
+    window.speechSynthesis?.cancel();
+    if (isPlaying) { setIsPlaying(false); return; }
     setIsPlaying(true);
     speak(text);
     checkRef.current = setInterval(() => {
@@ -501,77 +495,24 @@ function GuideQuestion({ text, index }: { text: string; index: number }) {
   }
 
   return (
-    <div
-      className="rounded-[var(--radius-md)] px-3 py-2"
-      style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
+    <button
+      type="button"
+      onClick={handlePlay}
+      className="mx-auto flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95"
+      style={{ background: ACCENT }}
+      aria-label={isPlaying ? "Arrêter" : "Écouter"}
     >
-      <div className="flex items-center gap-2">
-        <span
-          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
-          style={{ background: ACCENT }}
-        >
-          {index + 1}
-        </span>
-
-        <button
-          type="button"
-          onClick={handlePlay}
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white shadow-sm active:scale-95"
-          style={{ background: ACCENT }}
-          aria-label={isPlaying ? "Pause" : "Écouter la question"}
-        >
-          {isPlaying ? (
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <rect x="6" y="4" width="4" height="16" rx="1" />
-              <rect x="14" y="4" width="4" height="16" rx="1" />
-            </svg>
-          ) : (
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-          )}
-        </button>
-
-        <div className="flex flex-1 items-center gap-px" style={{ height: 22 }}>
-          {bars.map((h, i) => (
-            <div
-              key={i}
-              className={`flex-1 rounded-full ${isPlaying ? "animate-pulse" : ""}`}
-              style={{
-                height: `${Math.round(h * 100)}%`,
-                background: ACCENT,
-                opacity: isPlaying ? 0.35 + (i % 4) * 0.15 : 0.35,
-                animationDelay: isPlaying ? `${(i % 6) * 80}ms` : undefined,
-              }}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setExpanded((v) => !v)}
-          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 text-[11px] font-bold leading-none transition-colors"
-          style={{
-            borderColor: ACCENT,
-            color: expanded ? "white" : ACCENT,
-            background: expanded ? ACCENT : "transparent",
-          }}
-          aria-label={expanded ? "Masquer le texte" : "Afficher le texte"}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M9 18h6" />
-            <path d="M10 22h4" />
-            <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
-          </svg>
-        </button>
-      </div>
-
-      {expanded && (
-        <p className="mt-2 border-t border-[var(--color-border-default)] pt-2 text-sm italic leading-relaxed text-[var(--color-text-primary)]">
-          {text}
-        </p>
+      {isPlaying ? (
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <rect x="6" y="4" width="4" height="16" rx="1" />
+          <rect x="14" y="4" width="4" height="16" rx="1" />
+        </svg>
+      ) : (
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
       )}
-    </div>
+    </button>
   );
 }
 
@@ -667,6 +608,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [task2Grammar, setTask2Grammar] = useState<OralGrammarMatch[]>([]);
   const [task2Done, setTask2Done] = useState(false);
   const [imageHelpOpen, setImageHelpOpen] = useState(false);
+  const [openTranscriptIdx, setOpenTranscriptIdx] = useState<number | null>(null);
 
   // Task 4: dialogue
   const [dialogueIndex, setDialogueIndex] = useState(0);
@@ -1312,9 +1254,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       {phase === "task3" && (
         <div className="flex-1 space-y-4">
           <div>
-            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-              Partie 3 — Description d&apos;image
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+                Partie 3 — Description d&apos;image
+              </h2>
+              <button
+                type="button"
+                onClick={() => { setImageHelpOpen(true); setOpenTranscriptIdx(null); }}
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:opacity-80"
+                style={{ color: ACCENT }}
+                aria-label="Astuces"
+                title="Astuces"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                  <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
+                </svg>
+              </button>
+            </div>
             <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
               <p>Décrivez cette image.</p>
               <p className="flex items-center gap-1.5">
@@ -1389,42 +1347,96 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           )}
 
-          <div className="space-y-2">
-            <button
-              type="button"
-              onClick={() => setImageHelpOpen((open) => !open)}
-              aria-expanded={imageHelpOpen}
-              className="flex w-full items-center justify-between rounded-[var(--radius-md)] border px-4 py-3 text-left text-sm font-bold transition-colors"
-              style={{
-                borderColor: `color-mix(in srgb, ${ACCENT} 35%, var(--color-border-default))`,
-                color: ACCENT,
-                background: imageHelpOpen
-                  ? `color-mix(in srgb, ${ACCENT} 12%, var(--color-bg-secondary))`
-                  : "var(--color-bg-secondary)",
-              }}
+          {/* Astuce modal — rendered via portal-style fixed overlay */}
+          {imageHelpOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              style={{ background: "rgba(0,0,0,0.5)" }}
+              onClick={() => setImageHelpOpen(false)}
             >
-              <span className="flex items-center gap-2">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                  <path d="M9 18h6" />
-                  <path d="M10 22h4" />
-                  <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
-                </svg>
-                Aide
-              </span>
-              <span className={`text-lg transition-transform ${imageHelpOpen ? "rotate-180" : ""}`} aria-hidden>⌄</span>
-            </button>
+              <div
+                className="relative w-full max-w-xs rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close */}
+                <button
+                  type="button"
+                  onClick={() => setImageHelpOpen(false)}
+                  className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+                  aria-label="Fermer"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
 
-            {imageHelpOpen && (
-              <div className="space-y-1.5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                <p className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                  Questions pour vous guider
+                <p className="mb-4 pr-6 text-sm font-bold" style={{ color: ACCENT }}>
+                  Astuces — Questions guide
                 </p>
-                {IMAGE_GUIDE_QUESTIONS.map((question, index) => (
-                  <GuideQuestion key={question} text={question} index={index} />
-                ))}
+
+                {/* 3-row table: number / audio / transcript-toggle */}
+                <div className="overflow-x-auto">
+                  <table className="mx-auto border-collapse">
+                    <tbody>
+                      {/* Row 1: numbers */}
+                      <tr>
+                        {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
+                          <td key={i} className="px-1 pb-2 text-center">
+                            <span
+                              className="mx-auto flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                              style={{ background: ACCENT }}
+                            >
+                              {i + 1}
+                            </span>
+                          </td>
+                        ))}
+                      </tr>
+                      {/* Row 2: audio icon only */}
+                      <tr>
+                        {IMAGE_GUIDE_QUESTIONS.map((q, i) => (
+                          <td key={i} className="px-1 pb-2 text-center">
+                            <GuideAudioBtn text={q} />
+                          </td>
+                        ))}
+                      </tr>
+                      {/* Row 3: transcript toggle (one at a time) */}
+                      <tr>
+                        {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
+                          <td key={i} className="px-1 text-center">
+                            <button
+                              type="button"
+                              onClick={() => setOpenTranscriptIdx(openTranscriptIdx === i ? null : i)}
+                              className="mx-auto flex h-6 w-6 items-center justify-center rounded-full border-2 text-[10px] font-bold transition-colors"
+                              style={{
+                                borderColor: ACCENT,
+                                color: openTranscriptIdx === i ? "white" : ACCENT,
+                                background: openTranscriptIdx === i ? ACCENT : "transparent",
+                              }}
+                              aria-label="Afficher / masquer le texte"
+                            >
+                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                                <path d="M9 18h6" />
+                                <path d="M10 22h4" />
+                                <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
+                              </svg>
+                            </button>
+                          </td>
+                        ))}
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Transcript shown below table */}
+                {openTranscriptIdx !== null && (
+                  <p className="mt-3 border-t border-[var(--color-border-default)] pt-3 text-sm italic leading-relaxed text-[var(--color-text-primary)]">
+                    {IMAGE_GUIDE_QUESTIONS[openTranscriptIdx]}
+                  </p>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {task2Phrases.length > 0 && (
             <div className="space-y-1.5">
