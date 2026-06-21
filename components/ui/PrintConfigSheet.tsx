@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 export interface PrintExercise {
   id: string;
   label: string;
+  preview?: ReactNode;
 }
 
 export interface ExercisePrintSelection {
@@ -33,6 +34,7 @@ interface PrintConfigSheetProps {
   onClose: () => void;
   onPrint: (config: PrintConfig) => void;
   exercises?: PrintExercise[];
+  theoryPreview?: ReactNode;
   accentColor?: string;
 }
 
@@ -56,36 +58,48 @@ function formatPrintDate(date = new Date()): string {
 
 export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
   return (
-    <div className="print-document-header mb-6 text-black">
-      <div className="grid grid-cols-[1fr_auto_1.35fr] items-center gap-4 border-b border-black pb-2">
-        <p className="text-lg font-bold uppercase">Classe d&apos;accueil</p>
-        <div className="flex items-center gap-2">
-          <div className="flex h-12 w-7 -skew-y-6 flex-col items-center justify-center bg-red-600 text-[7px] font-bold leading-none text-white">
-            <span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+    <div className="print-document-header mb-[4%] w-full text-black">
+      <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(70px,0.7fr)_minmax(0,1.45fr)] items-center gap-[3%] border-b border-black pb-[1.5%]">
+        <p className="text-[clamp(9px,2.6vw,18px)] font-bold uppercase leading-tight">Classe d&apos;accueil</p>
+        <div className="flex min-w-0 items-center justify-center gap-1.5">
+          <div className="flex h-11 w-6 shrink-0 -skew-y-6 flex-col items-center justify-center bg-red-600 text-[6px] font-bold leading-none text-white">
+            <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
           </div>
-          <p className="text-center text-[7px] font-bold uppercase leading-tight">Canton du Valais<br />Kanton Wallis</p>
+          <p className="text-center text-[clamp(4px,0.9vw,7px)] font-bold uppercase leading-tight">Canton du Valais<br />Kanton Wallis</p>
         </div>
-        <div className="text-[7px] leading-tight">
+        <div className="min-w-0 text-[clamp(4px,0.9vw,7px)] leading-tight">
           <p>Département de la santé, des affaires sociales et de la culture</p>
           <p>Service de l&apos;action sociale</p>
           <p>Office de l&apos;asile</p>
           <p>Centre de formation « Le Botza »</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 border-b border-black py-1 text-base font-bold uppercase">
+      <div className="grid grid-cols-2 gap-3 border-b border-black py-[1%] text-[clamp(8px,2.3vw,16px)] font-bold uppercase leading-tight">
         <p>{config.classLevel} {config.classNumber}</p>
-        <p>Cours {config.course}</p>
+        <p className="truncate">Cours {config.course}</p>
       </div>
-      <div className="mt-5 grid grid-cols-[1fr_0.75fr_74px] items-center gap-5 border border-dotted border-black px-2 py-3 text-sm">
-        <p>Prénom <span className="tracking-[0.2em]">...............................</span></p>
-        <p>Date <span className="tracking-[0.15em]">....................</span></p>
-        <div className="border border-black/50 px-3 py-2">N°</div>
+      <div className="mt-[4%] grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(34px,0.18fr)] items-center gap-[3%] border border-dotted border-black px-[2%] py-[2.5%] text-[clamp(7px,1.9vw,13px)]">
+        <p className="min-w-0 whitespace-nowrap">Prénom <span className="tracking-[0.08em]">........................</span></p>
+        <p className="min-w-0 whitespace-nowrap">Date <span className="tracking-[0.06em]">.................</span></p>
+        <div className="flex min-h-8 items-center justify-center border border-black/50 px-1">N°</div>
       </div>
     </div>
   );
 }
 
-export function PrintDocumentFooter({ date, version, preview = false }: { date: string; version: string; preview?: boolean }) {
+export function PrintDocumentFooter({
+  date,
+  version,
+  preview = false,
+  page = 1,
+  totalPages = 1,
+}: {
+  date: string;
+  version: string;
+  preview?: boolean;
+  page?: number;
+  totalPages?: number;
+}) {
   return (
     <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[7px] leading-tight text-black`}>
       <div>
@@ -94,7 +108,7 @@ export function PrintDocumentFooter({ date, version, preview = false }: { date: 
       </div>
       <div className="text-right">
         <p>Version {version}</p>
-        <p>{preview ? "Page 1 sur 1" : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
+        <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>
   );
@@ -173,6 +187,7 @@ export function PrintConfigSheet({
   onClose,
   onPrint,
   exercises = [],
+  theoryPreview,
   accentColor = "var(--color-theme)",
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
@@ -181,6 +196,9 @@ export function PrintConfigSheet({
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
+  const [previewPage, setPreviewPage] = useState(0);
+  const [hasPrinted, setHasPrinted] = useState(false);
+  const [showExitWarning, setShowExitWarning] = useState(false);
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
     exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
   );
@@ -212,7 +230,8 @@ export function PrintConfigSheet({
   const version = "0.1.0";
   const header: PrintHeaderConfig = { classLevel, classNumber, course };
 
-  const handlePrint = () =>
+  const handlePrint = () => {
+    setHasPrinted(true);
     onPrint({
       theory,
       evalMode,
@@ -221,17 +240,55 @@ export function PrintConfigSheet({
       printDate,
       version,
     });
+  };
 
   const hasPrintableContent = theory || selection.some((item) => item.included && item.occurrences > 0);
+  const previewExercises = selection.flatMap((item) => {
+    if (!item.included || item.occurrences < 1) return [];
+    const exercise = exercises.find((candidate) => candidate.id === item.id);
+    return Array.from({ length: item.occurrences }, (_, occurrence) => ({
+      key: `${item.id}-${occurrence}`,
+      exercise,
+      selection: item,
+      occurrence,
+    }));
+  });
+  const exercisePages = Array.from(
+    { length: Math.ceil(previewExercises.length / 4) },
+    (_, index) => previewExercises.slice(index * 4, index * 4 + 4),
+  );
+  const previewPages: Array<{ showTheory: boolean; exercises: typeof previewExercises }> = [
+    ...(theory ? [{ showTheory: true, exercises: [] as typeof previewExercises }] : []),
+    ...exercisePages.map((items) => ({ showTheory: false, exercises: items })),
+  ];
+  if (previewPages.length === 0) previewPages.push({ showTheory: false, exercises: [] });
+
+  useEffect(() => {
+    setPreviewPage((current) => Math.min(current, previewPages.length - 1));
+  }, [previewPages.length]);
+  const currentPreview = previewPages[previewPage]!;
 
   const handleBack = () => {
-    if (step === 0) onClose();
-    else setStep((current) => current - 1);
+    if (step === 0) {
+      onClose();
+    } else if (step === 2 && previewPage > 0) {
+      setPreviewPage((current) => current - 1);
+    } else {
+      setStep((current) => current - 1);
+    }
   };
 
   const handleNext = () => {
-    if (step < 2) setStep((current) => current + 1);
-    else if (hasPrintableContent) handlePrint();
+    if (step < 2) {
+      setStep((current) => current + 1);
+      if (step === 1) setPreviewPage(0);
+    } else if (previewPage < previewPages.length - 1) {
+      setPreviewPage((current) => current + 1);
+    } else if (!hasPrinted) {
+      setShowExitWarning(true);
+    } else {
+      onClose();
+    }
   };
 
   const stepLabels = ["Contenu", "En-tête", "Aperçu"];
@@ -465,43 +522,48 @@ export function PrintConfigSheet({
 
           {step === 2 && (
             <section className="space-y-4">
-              <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
-                Aperçu avant impression
-              </h2>
-              <div className="mx-auto flex aspect-[210/297] w-full max-w-md flex-col overflow-hidden border border-zinc-300 bg-white p-5 text-black shadow-lg">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+                  Aperçu avant impression
+                </h2>
+                <span className="text-xs font-semibold tabular-nums text-[var(--color-text-secondary)]">
+                  Page {previewPage + 1} sur {previewPages.length}
+                </span>
+              </div>
+              <div className="mx-auto flex aspect-[210/297] w-full max-w-[44rem] flex-col overflow-hidden border border-zinc-300 bg-white p-[5%] text-black shadow-lg">
                 <PrintDocumentHeader config={header} />
-                <div className="min-h-0 flex-1 overflow-hidden text-[8px]">
-                  {theory && (
-                    <div className="mb-3">
-                      <p className="mb-1 font-bold">Théorie</p>
-                      <div className="space-y-1 text-zinc-500">
-                        <div className="h-1.5 w-full rounded bg-zinc-200" />
-                        <div className="h-1.5 w-4/5 rounded bg-zinc-200" />
-                        <div className="h-1.5 w-11/12 rounded bg-zinc-200" />
-                      </div>
+                <div className="min-h-0 flex-1 overflow-hidden text-[clamp(6px,1.35vw,10px)] leading-relaxed">
+                  {currentPreview.showTheory && (
+                    <div className="print-preview-content origin-top-left [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
+                      {theoryPreview ?? (
+                        <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
+                      )}
                     </div>
                   )}
-                  <p className="mb-2 font-bold">Exercices</p>
-                  <ol className="space-y-2">
-                    {selection
-                      .filter((item) => item.included && item.occurrences > 0)
-                      .slice(0, 7)
-                      .map((item, index) => {
-                        const exercise = exercises.find((candidate) => candidate.id === item.id);
-                        return (
-                          <li key={item.id} className="flex gap-2 border-b border-zinc-200 pb-1">
-                            <span className="font-bold">{index + 1}.</span>
-                            <span className="flex-1">{exercise?.label ?? item.id}</span>
-                            <span>
-                              × {item.occurrences}
-                              {evalMode ? ` · ${item.points} pt${item.points > 1 ? "s" : ""}` : ""}
-                            </span>
-                          </li>
-                        );
-                      })}
-                  </ol>
+                  {currentPreview.exercises.length > 0 && (
+                    <ol className="space-y-5">
+                      {currentPreview.exercises.map((item, index) => (
+                        <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
+                          <div className="mb-1 flex items-start gap-2 font-bold">
+                            <span>{previewPage * 4 + index + 1}.</span>
+                            <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
+                            {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                          </div>
+                          <div className="pl-5 text-zinc-800 [&_button]:pointer-events-none">
+                            {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
                 </div>
-                <PrintDocumentFooter date={printDate} version={version} preview />
+                <PrintDocumentFooter
+                  date={printDate}
+                  version={version}
+                  preview
+                  page={previewPage + 1}
+                  totalPages={previewPages.length}
+                />
               </div>
               {!hasPrintableContent && (
                 <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-700">
@@ -509,7 +571,7 @@ export function PrintConfigSheet({
                 </p>
               )}
               <p className="text-center text-sm text-[var(--color-text-secondary)]">
-                Appuyez sur <strong>Suivant</strong> pour ouvrir l&apos;impression.
+                Utilisez <strong>Suivant</strong> pour feuilleter et <strong>Imprimer</strong> pour ouvrir le PDF.
               </p>
             </section>
           )}
@@ -519,15 +581,57 @@ export function PrintConfigSheet({
       {/* Legacy action bridge consumed by MainNav. */}
       <div className="hidden fixed bottom-0 left-0 right-0">
         <button type="button" onClick={handleBack} aria-label="Retour">Retour</button>
+        {step === 2 && (
+          <button
+            type="button"
+            onClick={handlePrint}
+            disabled={!hasPrintableContent}
+            aria-label="Imprimer"
+            data-nav-label="Imprimer"
+            data-nav-action="validate"
+          >
+            Imprimer
+          </button>
+        )}
         <button
           type="button"
           onClick={handleNext}
           disabled={step === 2 && !hasPrintableContent}
-          aria-label={step === 2 ? "Terminer et imprimer" : "Suivant"}
+          aria-label="Suivant"
+          data-nav-label="Suivant"
+          data-nav-action="next"
         >
-          {step === 2 ? "Terminer" : "Suivant"}
+          Suivant
         </button>
       </div>
+
+      {showExitWarning && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/35 px-5" role="alertdialog" aria-modal="true" aria-labelledby="print-exit-title">
+          <div className="w-full max-w-sm rounded-xl bg-[var(--color-bg-primary)] p-5 shadow-2xl">
+            <h2 id="print-exit-title" className="text-lg font-bold text-[var(--color-text-primary)]">Quitter sans imprimer ?</h2>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              Le document n&apos;a pas encore été imprimé ou enregistré en PDF.
+            </p>
+            <div className="mt-5 flex gap-3">
+              <button
+                type="button"
+                onClick={() => setShowExitWarning(false)}
+                className="min-h-11 flex-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-semibold text-[var(--color-text-primary)]"
+              >
+                Rester
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="min-h-11 flex-1 rounded-xl px-4 text-sm font-bold text-white"
+                style={{ background: accentColor }}
+              >
+                Quitter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

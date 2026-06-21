@@ -6764,7 +6764,14 @@ export function GenericModuleContent({
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          exercises={trainingExercisePrompts.map((_, i) => ({ id: String(i), label: `Exercice ${i + 1}` }))}
+          theoryPreview={currentStep?.kind === "theory" ? (
+            <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
+          ) : undefined}
+          exercises={trainingExercisePrompts.map((prompt, i) => ({
+            id: String(i),
+            label: `Exercice ${i + 1}`,
+            preview: <p>{prompt}</p>,
+          }))}
           accentColor="var(--color-accent-alg)"
         />
       )}

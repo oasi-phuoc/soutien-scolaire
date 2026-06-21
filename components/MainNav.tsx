@@ -9,7 +9,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 
 type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
 type ActionKind = "back" | "refresh" | "validate" | "next";
-type ActionAvailability = Record<ActionKind, { available: boolean; disabled: boolean }>;
+type ActionAvailability = Record<ActionKind, { available: boolean; disabled: boolean; label?: string }>;
 type NavItem = {
   href: string;
   label: string;
@@ -75,7 +75,7 @@ function getLegacyActionButton(kind: ActionKind) {
     back: [/\bretour\b/],
     refresh: [/recommencer/, /reinitialiser/, /refaire/, /refresh/, /actualiser/],
     validate: [/valider/],
-    next: [/suivant/, /terminer/],
+    next: [/suivant/, /terminer/, /imprimer/],
   };
   const candidates = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).reverse();
   const priorityCandidates = candidates.filter((candidate) => candidate.closest("[data-nav-action-priority]"));
@@ -83,6 +83,7 @@ function getLegacyActionButton(kind: ActionKind) {
   return pool.find((candidate) => {
     if (candidate.closest("[data-main-nav]")) return false;
     if (!candidate.closest(".hidden.fixed.bottom-0")) return false;
+    if (candidate.dataset.navAction) return candidate.dataset.navAction === kind;
     return tests[kind].some((rx) => rx.test(normalizedLabel(candidate)));
   });
 }
@@ -94,6 +95,7 @@ function readActionAvailability(): ActionAvailability {
     states[kind] = {
       available: !!button && !button.classList.contains("invisible") && !button.classList.contains("hidden"),
       disabled: !button || button.disabled || button.getAttribute("aria-disabled") === "true",
+      label: button?.dataset.navLabel,
     };
   });
   return states;
@@ -152,7 +154,7 @@ export function MainNav() {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ["disabled", "aria-disabled", "class"],
+      attributeFilter: ["disabled", "aria-disabled", "class", "data-nav-label"],
     });
     return () => {
       cancelAnimationFrame(frame);
@@ -316,10 +318,20 @@ export function MainNav() {
               {lessonMode ? (
                 <>
                   {actions.validate.available ? (
-                    <ActionButton label="Valider" icon={<IconCheck />} disabled={actions.validate.disabled} onClick={() => triggerLegacyAction("validate", () => {})} />
+                    <ActionButton
+                      label={actions.validate.label ?? "Valider"}
+                      icon={actions.validate.label === "Imprimer" ? <IconPrint /> : <IconCheck />}
+                      disabled={actions.validate.disabled}
+                      onClick={() => triggerLegacyAction("validate", () => {})}
+                    />
                   ) : <span aria-hidden />}
                   {actions.next.available ? (
-                    <ActionButton label="Suivant" icon={<IconRight />} disabled={actions.next.disabled} onClick={() => triggerLegacyAction("next", () => {})} />
+                    <ActionButton
+                      label={actions.next.label ?? "Suivant"}
+                      icon={actions.next.label === "Imprimer" ? <IconPrint /> : <IconRight />}
+                      disabled={actions.next.disabled}
+                      onClick={() => triggerLegacyAction("next", () => {})}
+                    />
                   ) : <span aria-hidden />}
                 </>
               ) : (
@@ -407,6 +419,16 @@ function IconRight() {
   return (
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M9 18l6-6-6-6" />
+    </svg>
+  );
+}
+
+function IconPrint() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M6 9V2h12v7" />
+      <rect x="6" y="14" width="12" height="8" rx="1" />
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
     </svg>
   );
 }
