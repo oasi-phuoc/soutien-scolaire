@@ -3,10 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { OralLevel, OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
-import { getExpressionTeachersAction } from "./expression";
-
-export { getExpressionTeachersAction };
-
 export type OralGrammarMatch = {
   message: string;
   shortMessage?: string;
