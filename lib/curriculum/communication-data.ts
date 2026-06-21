@@ -31,6 +31,17 @@ export const COMM_MODULES: CommunicationModule[] = [
     ],
   },
   {
+    id: "PO",
+    level: "PO",
+    title: "Production orale",
+    description: "Format FLE/FIDE : questions sur thèmes, description d'image, dialogue",
+    submodules: [
+      { id: "PO-1", code: "PO.1", title: "Base", available: true, lessonId: "production-orale-1" },
+      { id: "PO-2", code: "PO.2", title: "Moyen", available: true, lessonId: "production-orale-2" },
+      { id: "PO-3", code: "PO.3", title: "Avancé", available: true, lessonId: "production-orale-3" },
+    ],
+  },
+  {
     id: "E2",
     level: "E2",
     title: "Expression orale — Base",

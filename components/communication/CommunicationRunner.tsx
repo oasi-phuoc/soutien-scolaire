@@ -23,6 +23,7 @@ import {
   randomWritingPrompt,
   type WritingPrompt,
 } from "@/lib/curriculum/content/communication/writing-prompts";
+import { OralProductionRunner } from "@/components/communication/OralProductionRunner";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
@@ -435,6 +436,7 @@ function MCQExercise({
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
   if (lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
+  if (lessonId.startsWith("PO-")) return <OralProductionRunner lessonId={lessonId} />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
 }
 
