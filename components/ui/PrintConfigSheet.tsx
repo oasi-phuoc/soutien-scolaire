@@ -34,8 +34,8 @@ export function PrintConfigSheet({
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[100] min-h-[100dvh] overflow-y-auto bg-[var(--color-bg-primary)]">
-      <header className="sticky top-0 z-10 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
+    <div className="fixed inset-0 z-[100] flex flex-col bg-[var(--color-bg-primary)]">
+      <header className="shrink-0 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
         <div className="mx-auto flex min-h-20 w-full max-w-xl items-center gap-4 px-5 py-4">
           <button
             type="button"
@@ -59,8 +59,9 @@ export function PrintConfigSheet({
         </div>
       </header>
 
-      <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-xl flex-col px-5 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-8">
-        <div className="flex-1 space-y-6">
+      <div className="flex-1 overflow-y-auto">
+      <main className="mx-auto w-full max-w-xl px-5 pb-6 pt-8">
+        <div className="space-y-6">
           <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: accentColor }}>
             Contenu du document
           </h2>
@@ -162,23 +163,28 @@ export function PrintConfigSheet({
         </div>
 
         </div>
-
-        {/* Print button */}
-        <button
-          type="button"
-          onClick={() =>
-            onPrint({
-              exercises: hasExercises ? exercises : false,
-              evalMode,
-              pointsPerExercise: points,
-            })
-          }
-          className="mt-10 min-h-12 w-full rounded-xl py-3 text-base font-semibold text-white transition-opacity hover:opacity-90"
-          style={{ background: accentColor }}
-        >
-          Imprimer
-        </button>
       </main>
+      </div>
+
+      {/* Print button — sticky footer always visible */}
+      <div className="shrink-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-5 py-4 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
+        <div className="mx-auto w-full max-w-xl">
+          <button
+            type="button"
+            onClick={() =>
+              onPrint({
+                exercises: hasExercises ? exercises : false,
+                evalMode,
+                pointsPerExercise: points,
+              })
+            }
+            className="min-h-12 w-full rounded-xl py-3 text-base font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: accentColor }}
+          >
+            Imprimer
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
