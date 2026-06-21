@@ -9,6 +9,7 @@ import {
 import { submitOralAction, type OralDialogueLine, type OralGrammarMatch } from "@/app/actions/oral";
 import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import { speak } from "@/lib/utils/speech";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
@@ -140,6 +141,25 @@ function MicButton({
   );
 }
 
+// ——— Speak button (like lecture) ———
+
+function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; onLight?: boolean }) {
+  return (
+    <button
+      type="button"
+      aria-label="Écouter"
+      onClick={() => speak(text)}
+      className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} ${onLight ? "text-white" : "text-white"}`}
+      style={onLight ? { background: "rgba(255,255,255,0.25)" } : { background: ACCENT }}
+    >
+      <svg width={small ? 14 : 16} height={small ? 14 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+      </svg>
+    </button>
+  );
+}
+
 // ——— Dialogue bubble ———
 
 function DialogueBubble({ line }: { line: OralDialogueLine }) {
@@ -214,8 +234,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [currentTranscript, setCurrentTranscript] = useState("");
   const [isChecking, setIsChecking] = useState(false);
 
-  // Task 2: image description
+  // Task 2: image description (multi-phrase)
+  const [task2Phrases, setTask2Phrases] = useState<string[]>([]);
   const [task2Lines, setTask2Lines] = useState<OralDialogueLine[]>([]);
+  const [task2Grammar, setTask2Grammar] = useState<OralGrammarMatch[]>([]);
   const [task2Done, setTask2Done] = useState(false);
 
   // Task 3: dialogue
@@ -288,18 +310,24 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     }
   }
 
-  // ——— Task 2: confirm image description ———
+  // ——— Task 2: accumulate phrases then validate all at once ———
 
-  async function confirmTask2() {
-    if (!currentTranscript.trim() || isChecking) return;
+  function addTask2Phrase() {
+    if (!currentTranscript.trim() || listening2) return;
+    setTask2Phrases((prev) => [...prev, currentTranscript.trim()]);
+    setCurrentTranscript("");
+  }
+
+  async function validateTask2() {
+    if (task2Phrases.length === 0 || isChecking) return;
     setIsChecking(true);
-    const grammar = await checkGrammar(currentTranscript);
+    const grammar = await checkGrammar(task2Phrases.join(" "));
     setIsChecking(false);
     setTask2Lines([
       { role: "app", text: "Décrivez cette image." },
-      { role: "student", text: currentTranscript, grammar },
+      ...task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase })),
     ]);
-    setCurrentTranscript("");
+    setTask2Grammar(grammar);
     setTask2Done(true);
   }
 
@@ -328,7 +356,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const allGrammar = [
     ...task1Lines.flatMap((l) => l.grammar ?? []),
-    ...task2Lines.flatMap((l) => l.grammar ?? []),
+    ...task2Grammar,
     ...task3Lines.flatMap((l) => l.grammar ?? []),
   ];
 
@@ -472,10 +500,13 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {/* Theme word */}
           <div
-            className="flex items-center justify-center rounded-[var(--radius-md)] py-8 text-3xl font-bold text-white"
+            className="relative flex items-center justify-center rounded-[var(--radius-md)] py-8 text-3xl font-bold text-white"
             style={{ background: ACCENT }}
           >
             {prompt.themes[themeIndex]!.word}
+            <span className="absolute right-3 top-3">
+              <SpeakButton text={prompt.themes[themeIndex]!.word} small onLight />
+            </span>
           </div>
 
           {/* Previous theme answers */}
@@ -531,7 +562,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* ——— TASK 2: Image description ——— */}
+      {/* ——— TASK 2: Image description (multi-phrase) ——— */}
       {phase === "task2" && (
         <div className="flex-1 space-y-4">
           <div>
@@ -557,9 +588,35 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <p className="mx-4 text-sm text-[var(--color-text-secondary)]">{prompt.imageDescription}</p>
           </div>
 
-          {task2Lines.length > 0 && (
-            <div className="space-y-2">
-              {task2Lines.map((line, i) => <DialogueBubble key={i} line={line} />)}
+          {/* Accumulated phrases */}
+          {task2Phrases.length > 0 && (
+            <div className="space-y-1.5">
+              <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                {task2Done ? "Vos phrases :" : `${task2Phrases.length} phrase${task2Phrases.length > 1 ? "s" : ""} enregistrée${task2Phrases.length > 1 ? "s" : ""} :`}
+              </p>
+              {task2Phrases.map((phrase, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-2 rounded-[var(--radius-md)] px-3 py-2"
+                  style={{ background: `color-mix(in srgb, ${ACCENT} 10%, transparent)` }}
+                >
+                  <span
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                    style={{ background: ACCENT }}
+                  >
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-[var(--color-text-primary)]">{phrase}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Grammar feedback after validation */}
+          {task2Done && (
+            <div className="rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 p-3 dark:border-amber-700 dark:bg-amber-950/30">
+              <p className="mb-1.5 text-xs font-bold text-amber-700 dark:text-amber-300">Pistes de correction :</p>
+              <GrammarPanel matches={task2Grammar} />
             </div>
           )}
 
@@ -571,13 +628,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
                 </div>
               )}
-              {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
+              {isChecking && (
+                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>
+              )}
               {!supported && (
                 <input
                   type="text"
                   value={currentTranscript}
                   onChange={(e) => setCurrentTranscript(e.target.value)}
-                  placeholder="Décrivez l'image en quelques phrases…"
+                  placeholder="Tapez une phrase sur l'image…"
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
               )}
@@ -591,14 +650,30 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 />
                 <button
                   type="button"
-                  onClick={() => void confirmTask2()}
+                  onClick={addTask2Phrase}
                   disabled={!currentTranscript.trim() || isChecking || listening2}
                   className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
                   style={{ background: ACCENT }}
                 >
-                  Confirmer
+                  + Ajouter
                 </button>
               </div>
+              {task2Phrases.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => void validateTask2()}
+                  disabled={isChecking}
+                  className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white disabled:opacity-35"
+                  style={{ background: ACCENT }}
+                >
+                  {isChecking ? "Vérification…" : "Valider ma description ✓"}
+                </button>
+              )}
+              {task2Phrases.length === 0 && (
+                <p className="text-center text-xs text-[var(--color-text-secondary)]">
+                  Enregistrez autant de phrases que vous voulez, puis validez.
+                </p>
+              )}
             </>
           )}
 
@@ -634,9 +709,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {!task3Done && (
             <>
               {/* Current app prompt */}
-              <DialogueBubble
-                line={{ role: "app", text: prompt.dialoguePrompts[dialogueIndex]! }}
-              />
+              <div className="flex items-start gap-2">
+                <div className="flex-1">
+                  <DialogueBubble
+                    line={{ role: "app", text: prompt.dialoguePrompts[dialogueIndex]! }}
+                  />
+                </div>
+                <SpeakButton text={prompt.dialoguePrompts[dialogueIndex]!} small />
+              </div>
 
               {currentTranscript && (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
