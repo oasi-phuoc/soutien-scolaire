@@ -2709,6 +2709,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          exercises={steps
+            .filter((candidate) => candidate.startsWith("ex"))
+            .map((candidate, index) => ({
+              id: candidate,
+              label: `Exercice ${index + 1}`,
+            }))}
           accentColor="var(--color-accent-alg)"
         />
       )}

@@ -6865,7 +6865,7 @@ export function GenericModuleContent({
                             <div className="flex-1">
                               <p>{prompt}</p>
                               {printConfig.evalMode && (
-                                <span className="text-xs text-gray-500"> / {printConfig.pointsPerExercise} pt{printConfig.pointsPerExercise > 1 ? "s" : ""}</span>
+                                <span className="text-xs text-gray-500"> / {sel?.points ?? 1} pt{(sel?.points ?? 1) > 1 ? "s" : ""}</span>
                               )}
                               <div className="mt-3 h-px border-b border-black/30" />
                             </div>

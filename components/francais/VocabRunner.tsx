@@ -524,6 +524,12 @@ export function VocabRunner({ theme }: Props) {
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          exercises={steps
+            .filter((candidate) => !candidate.isTheory && !candidate.isEval)
+            .map((candidate, index) => ({
+              id: candidate.key,
+              label: candidate.label || `Exercice ${index + 1}`,
+            }))}
           accentColor="var(--color-accent-fr)"
         />
       )}

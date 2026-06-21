@@ -2260,6 +2260,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          exercises={trainingSteps
+            .filter((candidate) => candidate.kind !== "theory")
+            .map((_, index) => ({
+              id: String(index),
+              label: `Exercice ${index + 1}`,
+            }))}
           accentColor="var(--color-accent-alg)"
         />
       )}

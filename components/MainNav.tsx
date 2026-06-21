@@ -78,7 +78,9 @@ function getLegacyActionButton(kind: ActionKind) {
     next: [/suivant/, /terminer/],
   };
   const candidates = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).reverse();
-  return candidates.find((candidate) => {
+  const priorityCandidates = candidates.filter((candidate) => candidate.closest("[data-nav-action-priority]"));
+  const pool = priorityCandidates.length > 0 ? priorityCandidates : candidates;
+  return pool.find((candidate) => {
     if (candidate.closest("[data-main-nav]")) return false;
     if (!candidate.closest(".hidden.fixed.bottom-0")) return false;
     return tests[kind].some((rx) => rx.test(normalizedLabel(candidate)));

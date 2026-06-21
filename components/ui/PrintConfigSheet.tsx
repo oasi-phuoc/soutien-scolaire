@@ -11,6 +11,7 @@ export interface ExercisePrintSelection {
   id: string;
   included: boolean;
   occurrences: number;
+  points: number;
 }
 
 export interface PrintHeaderConfig {
@@ -22,7 +23,6 @@ export interface PrintHeaderConfig {
 export interface PrintConfig {
   theory: boolean;
   evalMode: boolean;
-  pointsPerExercise: number;
   exerciseSelection: ExercisePrintSelection[];
   header: PrintHeaderConfig;
   printDate: string;
@@ -177,13 +177,12 @@ export function PrintConfigSheet({
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(false);
-  const [points, setPoints] = useState(5);
   const [theory, setTheory] = useState(true);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
-    exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1 }))
+    exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
   );
 
   useEffect(() => {
@@ -206,6 +205,9 @@ export function PrintConfigSheet({
       occurrences,
     } : s));
 
+  const setExercisePoints = (id: string, points: number) =>
+    setSelection((prev) => prev.map((item) => item.id === id ? { ...item, points } : item));
+
   const printDate = formatPrintDate();
   const version = "0.1.0";
   const header: PrintHeaderConfig = { classLevel, classNumber, course };
@@ -214,7 +216,6 @@ export function PrintConfigSheet({
     onPrint({
       theory,
       evalMode,
-      pointsPerExercise: points,
       exerciseSelection: selection,
       header,
       printDate,
@@ -236,13 +237,16 @@ export function PrintConfigSheet({
   const stepLabels = ["Contenu", "En-tête", "Aperçu"];
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col bg-[var(--color-bg-primary)]">
+    <div
+      className="fixed inset-0 z-40 flex flex-col bg-[var(--color-bg-primary)]"
+      data-nav-action-priority="print"
+    >
       {/* Header */}
       <header className="shrink-0 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
         <div className="mx-auto flex min-h-20 w-full max-w-xl items-center gap-4 px-5 py-4">
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleBack}
             aria-label="Retour"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
             style={{ background: accentColor }}
@@ -291,29 +295,29 @@ export function PrintConfigSheet({
 
           {step === 0 && (
             <>
-          {/* ── Mode évaluation ── */}
+          {/* ── Mode d'impression ── */}
           <section className="mb-5">
             <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
               Mode
             </h2>
-            <div className="rounded-xl border border-[var(--color-border-default)] divide-y divide-[var(--color-border-default)]">
-              <div className="flex min-h-14 cursor-pointer items-center gap-4 px-4">
-                <CheckBox checked={evalMode} onChange={setEvalMode} accent={accentColor} />
+            <div className="grid grid-cols-2 rounded-xl bg-[var(--color-bg-secondary)] p-1">
+              {[
+                { label: "Exercice", value: false },
+                { label: "Évaluation", value: true },
+              ].map((option) => (
                 <button
+                  key={option.label}
                   type="button"
-                  className="flex-1 text-left"
-                  onClick={() => setEvalMode((v) => !v)}
+                  onClick={() => setEvalMode(option.value)}
+                  className="min-h-11 rounded-lg px-3 text-sm font-semibold transition-colors"
+                  style={evalMode === option.value
+                    ? { background: accentColor, color: "white" }
+                    : { color: "var(--color-text-secondary)" }}
+                  aria-pressed={evalMode === option.value}
                 >
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Mode évaluation</p>
-                  <p className="text-xs text-[var(--color-text-secondary)]">Affiche un barème sur le PDF</p>
+                  {option.label}
                 </button>
-              </div>
-              {evalMode && (
-                <div className="flex items-center gap-3 px-4 py-3">
-                  <span className="flex-1 text-sm text-[var(--color-text-secondary)]">Points par exercice</span>
-                  <Counter value={points} onChange={setPoints} min={1} max={20} accent={accentColor} />
-                </div>
-              )}
+              ))}
             </div>
           </section>
 
@@ -368,17 +372,31 @@ export function PrintConfigSheet({
                           </p>
                         </button>
                       </div>
-                      <div className="mt-3 flex items-center justify-between pl-10">
-                        <span className="text-xs text-[var(--color-text-secondary)]">
-                          {sel.occurrences === 0 ? "Exercice retiré" : "Récurrences"}
-                        </span>
-                        <Counter
-                          value={sel.occurrences}
-                          onChange={(v) => setOccurrences(ex.id, v)}
-                          min={0}
-                          max={10}
-                          accent={accentColor}
-                        />
+                      <div className="mt-3 space-y-2 pl-10">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-xs text-[var(--color-text-secondary)]">
+                            {sel.occurrences === 0 ? "Exercice retiré" : "Récurrences"}
+                          </span>
+                          <Counter
+                            value={sel.occurrences}
+                            onChange={(v) => setOccurrences(ex.id, v)}
+                            min={0}
+                            max={10}
+                            accent={accentColor}
+                          />
+                        </div>
+                        {evalMode && sel.occurrences > 0 && (
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="text-xs text-[var(--color-text-secondary)]">Points</span>
+                            <Counter
+                              value={sel.points}
+                              onChange={(value) => setExercisePoints(ex.id, value)}
+                              min={1}
+                              max={20}
+                              accent={accentColor}
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   );
@@ -474,7 +492,10 @@ export function PrintConfigSheet({
                           <li key={item.id} className="flex gap-2 border-b border-zinc-200 pb-1">
                             <span className="font-bold">{index + 1}.</span>
                             <span className="flex-1">{exercise?.label ?? item.id}</span>
-                            <span>× {item.occurrences}</span>
+                            <span>
+                              × {item.occurrences}
+                              {evalMode ? ` · ${item.points} pt${item.points > 1 ? "s" : ""}` : ""}
+                            </span>
                           </li>
                         );
                       })}
