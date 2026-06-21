@@ -1097,15 +1097,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
                 Partie 1 — Questions thématiques
               </h2>
-              <p className="mt-1 text-sm text-[var(--color-text-secondary)] flex items-center gap-1.5 flex-wrap">
-                Posez une question sur ces trois mots. Maintenez
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="inline-block" aria-hidden>
-                  <rect x="9" y="2" width="6" height="12" rx="3" />
-                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                pour parler.
-              </p>
+              <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
+                <p>Posez une question sur ces trois mots.</p>
+                <p className="flex items-center gap-1.5">
+                  Maintenez
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
+                    <rect x="9" y="2" width="6" height="12" rx="3" />
+                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                  pour parler.
+                </p>
+              </div>
             </div>
 
             <div className="space-y-3">
@@ -1192,15 +1195,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 2 — Entretien dirigé
             </h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)] flex items-center gap-1.5 flex-wrap">
-              Répondez aux questions. Maintenez
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="inline-block" aria-hidden>
-                <rect x="9" y="2" width="6" height="12" rx="3" />
-                <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-              </svg>
-              pour parler.
-            </p>
+            <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
+              <p>Répondez aux questions.</p>
+              <p className="flex items-center gap-1.5">
+                Maintenez
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
+                  <rect x="9" y="2" width="6" height="12" rx="3" />
+                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                </svg>
+                pour parler.
+              </p>
+            </div>
           </div>
 
           {/* Current question card */}
@@ -1273,15 +1279,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 3 — Description d&apos;image
             </h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)] flex items-center gap-1.5 flex-wrap">
-              Décrivez cette image. Maintenez
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="inline-block" aria-hidden>
-                <rect x="9" y="2" width="6" height="12" rx="3" />
-                <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-              </svg>
-              pour ajouter une phrase.
-            </p>
+            <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
+              <p>Décrivez cette image.</p>
+              <p className="flex items-center gap-1.5">
+                Maintenez
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
+                  <rect x="9" y="2" width="6" height="12" rx="3" />
+                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                </svg>
+                pour ajouter une phrase.
+              </p>
+            </div>
           </div>
 
           <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
