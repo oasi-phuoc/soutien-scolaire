@@ -205,7 +205,7 @@ const RAW_CURRICULUM: MatiereOpt[] = [
       ]},
       { id: "RI", label: "L'interrogation", lessons: [
         { id: "R1.8",  label: "R1.8 — L'interrogation de base" },
-        { id: "RX.12", label: "RX.12 — L'interrogation (questions fermées)" },
+        { id: "RX.12", label: "RX.12 — Les questions fermées" },
         { id: "RX.13", label: "RX.13 — Répondre aux questions fermées" },
         { id: "RI.4",  label: "RI.4 — Les mots interrogatifs" },
       ]},

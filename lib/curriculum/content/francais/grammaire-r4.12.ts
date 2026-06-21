@@ -4,7 +4,7 @@ export const A2_GR_L07: GrammarLesson = {
   slug: "a2-gr-l07",
   code: "RX.12",
   level: "A2",
-  title: "L'interrogation (questions fermées)",
+  title: "Les questions fermées",
   theory: [
     { type: "heading", text: "Les 3 formes de questions fermées", trans: { en: "The 3 forms of closed (yes/no) questions", ar: "الأشكال الثلاثة للأسئلة المغلقة (نعم/لا)", fa: "سه شکل پرسش‌های بسته (بله/خیر)", ti: "ሰለስተ ቅርጽታት ናይ ዕጹዋት ሕቶታት (እወ/ኣይፋል)", uk: "3 форми закритих питань (так/ні)" } },
     {

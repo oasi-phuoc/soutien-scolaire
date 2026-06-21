@@ -129,7 +129,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
 
   // ── RI — L'interrogation ─────────────────────────────────────────────────────
   lesson("A1", "a1-gr-interro", "R1.8",  "L'interrogation de base",                  "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
-  lesson("A2", "a2-gr-l07",    "RX.12", "L'interrogation (questions fermées)",        "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
+  lesson("A2", "a2-gr-l07",    "RX.12", "Les questions fermées",                      "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
   lesson("A2", "a2-gr-l09",    "RX.13", "Répondre aux questions fermées",             "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
   lesson("A1", "a1-gr-l10",    "RI.4",  "Les mots interrogatifs",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
 
