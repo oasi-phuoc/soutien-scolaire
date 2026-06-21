@@ -654,12 +654,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [currentTranscript, setCurrentTranscript] = useState("");
   const [isChecking, setIsChecking] = useState(false);
 
-  // Task 2: image description (multi-phrase)
+  // Task 2: directed interview (all questions shown at once)
   const [interviewQuestions] = useState<string[]>(() => {
     const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
     return [...DIRECTED_INTERVIEW_BASE, ...group];
   });
-  const [interviewIndex, setInterviewIndex] = useState(0);
+  const [interviewTranscripts, setInterviewTranscripts] = useState<string[]>(() => Array(8).fill(""));
   const [interviewLines, setInterviewLines] = useState<OralDialogueLine[]>([]);
   const [interviewDone, setInterviewDone] = useState(false);
   const [task2Phrases, setTask2Phrases] = useState<string[]>([]);
@@ -697,11 +697,22 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setTask1Transcripts((prev) => { const n = [...prev]; n[2] = lessonId === "PO-1" ? ensureQuestionMark(t) : t; return n; });
   }, [lessonId]);
 
-  const onTask2Transcript = useCallback((text: string) => {
+  const setIQ = useCallback((i: number, t: string) =>
+    setInterviewTranscripts((prev) => { const n = [...prev]; n[i] = t; return n; }), []);
+  const onIQ0 = useCallback((t: string) => setIQ(0, t), [setIQ]);
+  const onIQ1 = useCallback((t: string) => setIQ(1, t), [setIQ]);
+  const onIQ2 = useCallback((t: string) => setIQ(2, t), [setIQ]);
+  const onIQ3 = useCallback((t: string) => setIQ(3, t), [setIQ]);
+  const onIQ4 = useCallback((t: string) => setIQ(4, t), [setIQ]);
+  const onIQ5 = useCallback((t: string) => setIQ(5, t), [setIQ]);
+  const onIQ6 = useCallback((t: string) => setIQ(6, t), [setIQ]);
+  const onIQ7 = useCallback((t: string) => setIQ(7, t), [setIQ]);
+
+  const onTask3Transcript = useCallback((text: string) => {
     setCurrentTranscript(text);
   }, []);
 
-  const onTask3Transcript = useCallback((text: string) => {
+  const onTask4Transcript = useCallback((text: string) => {
     setCurrentTranscript(text);
   }, []);
 
@@ -711,17 +722,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     useSpeechRecognition(onT1);
   const { isListening: listenT2, startListening: startT2, stopListening: stopT2 } =
     useSpeechRecognition(onT2);
-  const { isListening: listening2, startListening: start2, stopListening: stop2 } =
-    useSpeechRecognition(onTask2Transcript);
+  const { isListening: listenIQ0, startListening: startIQ0, stopListening: stopIQ0 } = useSpeechRecognition(onIQ0);
+  const { isListening: listenIQ1, startListening: startIQ1, stopListening: stopIQ1 } = useSpeechRecognition(onIQ1);
+  const { isListening: listenIQ2, startListening: startIQ2, stopListening: stopIQ2 } = useSpeechRecognition(onIQ2);
+  const { isListening: listenIQ3, startListening: startIQ3, stopListening: stopIQ3 } = useSpeechRecognition(onIQ3);
+  const { isListening: listenIQ4, startListening: startIQ4, stopListening: stopIQ4 } = useSpeechRecognition(onIQ4);
+  const { isListening: listenIQ5, startListening: startIQ5, stopListening: stopIQ5 } = useSpeechRecognition(onIQ5);
+  const { isListening: listenIQ6, startListening: startIQ6, stopListening: stopIQ6 } = useSpeechRecognition(onIQ6);
+  const { isListening: listenIQ7, startListening: startIQ7, stopListening: stopIQ7 } = useSpeechRecognition(onIQ7);
   const { isListening: listening3, startListening: start3, stopListening: stop3 } =
     useSpeechRecognition(onTask3Transcript);
+  const { isListening: listening4, startListening: start4, stopListening: stop4 } =
+    useSpeechRecognition(onTask4Transcript);
 
-  // Reset transcript + hints on phase/index change
+  // Reset transcript + hints on phase/dialogue index change
   useEffect(() => {
     setCurrentTranscript("");
     setHintsOpen(false);
     setImageHelpOpen(false);
-  }, [phase, interviewIndex, dialogueIndex]);
+  }, [phase, dialogueIndex]);
 
   // ——— Task 1: confirm all 3 theme questions at once ———
 
@@ -745,30 +764,29 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setTask1Done(true);
   }
 
-  // ——— Task 2: directed interview, then image description ———
+  // ——— Task 2: directed interview (all questions at once) ———
 
-  async function confirmInterviewAnswer() {
-    if (!currentTranscript.trim() || listening2 || isChecking) return;
-    const answer = currentTranscript.trim();
+  async function confirmInterview() {
+    const hasAny = interviewTranscripts.some((t) => t.trim());
+    if (!hasAny || isChecking) return;
     setIsChecking(true);
-    const grammar = await checkGrammar(answer);
+    const grammarResults = await Promise.all(
+      interviewTranscripts.map((text) => text.trim() ? checkGrammar(text) : Promise.resolve([]))
+    );
     setIsChecking(false);
-    const question = interviewQuestions[interviewIndex]!;
-    setInterviewLines((prev) => [
-      ...prev,
-      { role: "app", text: question },
-      { role: "student", text: answer, grammar },
-    ]);
-    setCurrentTranscript("");
-    if (interviewIndex + 1 < interviewQuestions.length) {
-      setInterviewIndex((index) => index + 1);
-    } else {
-      setInterviewDone(true);
+    const lines: OralDialogueLine[] = [];
+    for (let i = 0; i < interviewQuestions.length; i++) {
+      lines.push(
+        { role: "app", text: interviewQuestions[i]! },
+        { role: "student", text: interviewTranscripts[i] || "(pas de réponse)", grammar: grammarResults[i] ?? [] },
+      );
     }
+    setInterviewLines(lines);
+    setInterviewDone(true);
   }
 
   function addTask2Phrase() {
-    if (!currentTranscript.trim() || listening2) return;
+    if (!currentTranscript.trim() || listening3) return;
     setTask2Phrases((prev) => [...prev, currentTranscript.trim()]);
     setCurrentTranscript("");
   }
@@ -885,7 +903,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function handleNavValidate() {
     if (phase === "task1") void confirmTask1();
-    else if (phase === "task2") void confirmInterviewAnswer();
+    else if (phase === "task2") void confirmInterview();
     else if (phase === "task3") void validateTask2();
     else if (phase === "task4") void confirmDialogue();
   }
@@ -898,9 +916,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const validateDisabled =
     (phase === "task1" && (!task1Transcripts.some((t) => t.trim()) || isChecking)) ||
-    (phase === "task2" && (!currentTranscript.trim() || listening2 || isChecking)) ||
+    (phase === "task2" && (!interviewTranscripts.some((t) => t.trim()) || isChecking)) ||
     (phase === "task3" && (task2Phrases.length === 0 || isChecking)) ||
-    (phase === "task4" && (!currentTranscript.trim() || listening3 || isChecking));
+    (phase === "task4" && (!currentTranscript.trim() || listening4 || isChecking));
 
   // Free navigation: Suivant never depends on validation.
   const nextDisabled = false;
@@ -1209,60 +1227,78 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           </div>
 
-          {/* Current question card */}
-          {!interviewDone && (
-            <div
-              className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
-              style={{ borderColor: ACCENT }}
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                  style={{ background: ACCENT }}
-                >
-                  {interviewIndex + 1}
-                </span>
-                <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">
-                  {interviewQuestions[interviewIndex]}
-                </span>
-                <SpeakButton text={interviewQuestions[interviewIndex]!} small />
-                <ThemeMicButton
-                  isListening={listening2}
-                  supported={supported}
-                  onStart={start2}
-                  onStop={stop2}
-                  disabled={isChecking}
-                />
+          {/* All questions shown simultaneously */}
+          {(() => {
+            const iqListeners = [listenIQ0, listenIQ1, listenIQ2, listenIQ3, listenIQ4, listenIQ5, listenIQ6, listenIQ7];
+            const iqStarters  = [startIQ0, startIQ1, startIQ2, startIQ3, startIQ4, startIQ5, startIQ6, startIQ7];
+            const iqStoppers  = [stopIQ0,  stopIQ1,  stopIQ2,  stopIQ3,  stopIQ4,  stopIQ5,  stopIQ6,  stopIQ7];
+            return (
+              <div className="space-y-3">
+                {interviewQuestions.map((question, i) => {
+                  const transcript = interviewTranscripts[i] ?? "";
+                  const grammar = interviewDone ? (interviewLines[i * 2 + 1]?.grammar ?? []) : [];
+                  return (
+                    <div
+                      key={i}
+                      className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
+                      style={{ borderColor: ACCENT }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+                          style={{ background: ACCENT }}
+                        >
+                          {i + 1}
+                        </span>
+                        <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">{question}</span>
+                        <SpeakButton text={question} small />
+                        {!interviewDone && (
+                          <ThemeMicButton
+                            isListening={iqListeners[i]!}
+                            supported={supported}
+                            onStart={iqStarters[i]!}
+                            onStop={iqStoppers[i]!}
+                            disabled={isChecking}
+                          />
+                        )}
+                      </div>
+                      {transcript ? (
+                        <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
+                      ) : !interviewDone ? (
+                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
+                          {supported ? "Maintenez le micro pour enregistrer…" : ""}
+                        </p>
+                      ) : null}
+                      {grammar.length > 0 && (
+                        <ul className="pl-9 space-y-0.5">
+                          {grammar.map((g, gi) => (
+                            <li key={gi} className="text-[10px] leading-snug text-amber-600">
+                              {g.shortMessage || g.message}
+                              {g.replacements?.length ? ` → ${g.replacements.slice(0, 2).map((r) => r.value).join(" / ")}` : ""}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {!interviewDone && !supported && (
+                        <input
+                          type="text"
+                          value={transcript}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setInterviewTranscripts((prev) => { const n = [...prev]; n[i] = val; return n; });
+                          }}
+                          placeholder="Votre réponse…"
+                          className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              {currentTranscript && (
-                <p className="text-sm text-[var(--color-text-primary)] pl-9">{currentTranscript}</p>
-              )}
-              {!supported && (
-                <input
-                  type="text"
-                  value={currentTranscript}
-                  onChange={(e) => setCurrentTranscript(e.target.value)}
-                  placeholder="Votre réponse…"
-                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-                />
-              )}
-            </div>
-          )}
+            );
+          })()}
 
           {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
-
-          {!interviewDone && (
-            <p className="text-center text-xs text-[var(--color-text-secondary)]">
-              Question {interviewIndex + 1} sur {interviewQuestions.length}
-            </p>
-          )}
-
-          {/* Past interview lines */}
-          {interviewLines.length > 0 && (
-            <div className="space-y-2">
-              {interviewLines.map((line, i) => <DialogueBubble key={i} line={line} />)}
-            </div>
-          )}
 
           {interviewDone && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
@@ -1329,16 +1365,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               )}
               <div className="flex items-center gap-3">
                 <MicButton
-                  isListening={listening2}
+                  isListening={listening3}
                   supported={supported}
-                  onStart={start2}
-                  onStop={stop2}
+                  onStart={start3}
+                  onStop={stop3}
                   disabled={isChecking}
                 />
                 <button
                   type="button"
                   onClick={addTask2Phrase}
-                  disabled={!currentTranscript.trim() || isChecking || listening2}
+                  disabled={!currentTranscript.trim() || isChecking || listening3}
                   className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
                   style={{ background: ACCENT }}
                 >
@@ -1501,10 +1537,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 />
               )}
               <MicButton
-                isListening={listening3}
+                isListening={listening4}
                 supported={supported}
-                onStart={start3}
-                onStop={stop3}
+                onStart={start4}
+                onStop={stop4}
                 disabled={isChecking}
               />
             </>
