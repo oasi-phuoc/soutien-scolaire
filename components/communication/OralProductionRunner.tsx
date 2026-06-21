@@ -8,7 +8,7 @@ import {
   type TeacherOption,
 } from "@/app/actions/expression";
 import { submitOralAction, type OralDialogueLine, type OralGrammarMatch } from "@/app/actions/oral";
-import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
+import { randomOralPrompt, type OralLevel, type OralPrompt, DIALOGUE_HINTS } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import { speak } from "@/lib/utils/speech";
 
@@ -170,7 +170,17 @@ function waveformBars(text: string, count = 22): number[] {
   });
 }
 
-function VoiceMessageBubble({ text }: { text: string }) {
+function VoiceMessageBubble({
+  text,
+  hints,
+  hintsOpen,
+  onToggleHints,
+}: {
+  text: string;
+  hints?: string[];
+  hintsOpen?: boolean;
+  onToggleHints?: () => void;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -267,6 +277,67 @@ function VoiceMessageBubble({ text }: { text: string }) {
           </p>
         )}
       </div>
+
+      {/* Lightbulb help button */}
+      {hints && hints.length > 0 && onToggleHints && (
+        <div className="ml-2 flex shrink-0 flex-col items-center">
+          <button
+            type="button"
+            onClick={onToggleHints}
+            className="flex h-8 w-8 items-center justify-center rounded-full border-2 transition-colors"
+            style={{
+              borderColor: hintsOpen ? ACCENT : "var(--color-border-default)",
+              background: hintsOpen ? `color-mix(in srgb, ${ACCENT} 12%, transparent)` : "var(--color-bg-secondary)",
+              color: hintsOpen ? ACCENT : "var(--color-text-secondary)",
+            }}
+            aria-label={hintsOpen ? "Masquer les suggestions" : "Voir des suggestions de réponse"}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M9 14a7 7 0 1 1 6 0H9z" />
+              <path d="M9 14v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2" />
+              <line x1="12" y1="18" x2="12" y2="21" />
+            </svg>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HintsPanel({
+  hints,
+  onUseHint,
+}: {
+  hints: string[];
+  onUseHint: (hint: string) => void;
+}) {
+  return (
+    <div
+      className="rounded-[var(--radius-md)] border px-3 py-2.5 space-y-2"
+      style={{ borderColor: `color-mix(in srgb, ${ACCENT} 30%, transparent)`, background: `color-mix(in srgb, ${ACCENT} 6%, var(--color-bg-secondary))` }}
+    >
+      <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+        💡 Suggestions de réponse
+      </p>
+      <ul className="space-y-1.5">
+        {hints.map((hint, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <button
+              type="button"
+              onClick={() => onUseHint(hint)}
+              className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded text-[9px] font-bold text-white"
+              style={{ background: ACCENT }}
+              aria-label={`Utiliser : ${hint}`}
+            >
+              ↑
+            </button>
+            <span className="text-sm leading-snug text-[var(--color-text-primary)]">{hint}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="text-[10px] text-[var(--color-text-secondary)]">
+        Appuyez sur ↑ pour utiliser une suggestion, puis modifiez-la à votre façon.
+      </p>
     </div>
   );
 }
@@ -356,6 +427,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [task3Lines, setTask3Lines] = useState<OralDialogueLine[]>([]);
   const [task3Done, setTask3Done] = useState(false);
+  const [hintsOpen, setHintsOpen] = useState(false);
 
   // Review
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
@@ -389,8 +461,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const { isListening: listening3, startListening: start3, stopListening: stop3 } =
     useSpeechRecognition(onTask3Transcript);
 
-  // Reset transcript on phase/index change
-  useEffect(() => { setCurrentTranscript(""); }, [phase, themeIndex, dialogueIndex]);
+  // Reset transcript + hints on phase/index change
+  useEffect(() => { setCurrentTranscript(""); setHintsOpen(false); }, [phase, themeIndex, dialogueIndex]);
 
   // ——— Step index for segmented progress bar ———
 
@@ -754,18 +826,13 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           )}
 
           {!task1Done && (
-            <>
-              <MicButton
-                isListening={listening1}
-                supported={supported}
-                onStart={start1}
-                onStop={stop1}
-                disabled={isChecking}
-              />
-              <p className="text-xs text-[var(--color-text-secondary)]">
-                Exemple : <em>{prompt.themes[themeIndex]!.example}</em>
-              </p>
-            </>
+            <MicButton
+              isListening={listening1}
+              supported={supported}
+              onStart={start1}
+              onStop={stop1}
+              disabled={isChecking}
+            />
           )}
 
           {task1Done && (
@@ -910,7 +977,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {!task3Done && (
             <>
               {/* Current app prompt — voice message style */}
-              <VoiceMessageBubble text={prompt.dialoguePrompts[dialogueIndex]!} />
+              {(() => {
+                const currentHints = DIALOGUE_HINTS[prompt.id]?.[dialogueIndex];
+                return (
+                  <>
+                    <VoiceMessageBubble
+                      text={prompt.dialoguePrompts[dialogueIndex]!}
+                      hints={currentHints}
+                      hintsOpen={hintsOpen}
+                      onToggleHints={() => setHintsOpen((v) => !v)}
+                    />
+                    {hintsOpen && currentHints && currentHints.length > 0 && (
+                      <HintsPanel
+                        hints={currentHints}
+                        onUseHint={(hint) => { setCurrentTranscript(hint); setHintsOpen(false); }}
+                      />
+                    )}
+                  </>
+                );
+              })()}
 
               {currentTranscript && (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
