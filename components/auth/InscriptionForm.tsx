@@ -8,10 +8,13 @@ import { buildLoginId } from "@/lib/auth/identifier";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUES = [
-  { code: "fr", label: "Français" },
   ...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })),
   { code: "other", label: "Autre" },
-];
+].sort((a, b) => {
+  if (a.code === "other") return 1;
+  if (b.code === "other") return -1;
+  return a.label.localeCompare(b.label, "fr");
+});
 
 const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
 const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";

@@ -23,7 +23,7 @@ export default async function ComptePage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("preferred_pivot_lang")
+    .select("preferred_pivot_lang, login_id")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -36,6 +36,8 @@ export default async function ComptePage() {
       user={{
         id: user.id,
         email: user.email ?? "",
+        loginId: profile?.login_id ?? null,
+        createdAt: user.created_at ?? null,
       }}
       profilePivot={isPivotCode(piv) ? piv : null}
       supabaseConfigured

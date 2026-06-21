@@ -85,7 +85,7 @@ function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (
 }
 
 export type CompteDashboardProps = {
-  user: { id: string; email: string } | null;
+  user: { id: string; email: string; loginId?: string | null; createdAt?: string | null } | null;
   profilePivot: PivotCode | null;
   supabaseConfigured: boolean;
   isAdmin?: boolean;
@@ -223,7 +223,15 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         {supabaseConfigured && user ? (
           <>
             <SectionTitle>Compte connecté</SectionTitle>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{user.email}</p>
+            {user.loginId && (
+              <p className="mt-1 font-mono text-sm font-semibold text-[var(--color-theme)]">{user.loginId}</p>
+            )}
+            <p className={`${user.loginId ? "" : "mt-1 "}text-sm text-[var(--color-text-secondary)]`}>{user.email}</p>
+            {user.createdAt && (
+              <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+                Créé le {new Date(user.createdAt).toLocaleDateString("fr-CH", { day: "2-digit", month: "long", year: "numeric" })}
+              </p>
+            )}
             <div className="mt-4 flex flex-wrap items-center gap-3">
               {isAdmin && (
                 <Link href="/admin" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90">

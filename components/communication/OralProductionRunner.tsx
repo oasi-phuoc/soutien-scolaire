@@ -56,6 +56,23 @@ function getSpeechRecognition(): (new () => SpeechRecognitionInstance) | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
 
+const FRENCH_QUESTION_START = /^(?:qui|que|qu['’]est-ce (?:que|qui)|quoi|ou|où|quand|comment|pourquoi|combien|quel(?:le)?s?|est-ce que|(?:avez|etes|êtes|pouvez|voulez|savez|allez|devez)-vous|(?:as|es|peux|veux|sais|vas|dois)-tu|(?:a|est|peut|veut|sait|va|doit)-(?:il|elle|on)|dois-je|puis-je)\b/i;
+
+function normalizeFrenchTranscript(raw: string): string {
+  const cleaned = raw
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;!?])/g, "$1")
+    .replace(/([,;:!?])(?=\S)/g, "$1 ");
+
+  if (!cleaned) return "";
+
+  const capitalized = cleaned.replace(/[A-Za-zÀ-ÖØ-öø-ÿ]/, (letter) => letter.toUpperCase());
+  if (/[.!?…]$/.test(capitalized)) return capitalized;
+
+  return `${capitalized}${FRENCH_QUESTION_START.test(capitalized) ? "?" : "."}`;
+}
+
 function useSpeechRecognition(onTranscript: (text: string) => void) {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const accumulatedRef = useRef("");
@@ -78,7 +95,7 @@ function useSpeechRecognition(onTranscript: (text: string) => void) {
       const latest = event.results[event.resultIndex]?.[0]?.transcript ?? "";
       if (latest.trim()) {
         accumulatedRef.current = (accumulatedRef.current + " " + latest).trim();
-        onTranscript(accumulatedRef.current);
+        onTranscript(normalizeFrenchTranscript(accumulatedRef.current));
       }
     };
     rec.onerror = (event) => {
@@ -114,7 +131,7 @@ async function checkGrammar(text: string): Promise<OralGrammarMatch[]> {
   }
 }
 
-// ——— Mic button ———
+// ——— Mic button (hold-to-speak) ———
 
 function MicButton({
   isListening,
@@ -135,17 +152,29 @@ function MicButton({
     );
   }
   return (
-    <button
-      type="button"
-      onClick={isListening ? onStop : onStart}
-      disabled={disabled}
-      className="flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold text-white shadow transition-all active:scale-95 disabled:opacity-40"
-      style={{ background: isListening ? "#dc2626" : ACCENT }}
-      aria-label={isListening ? "Arrêter l'enregistrement" : "Commencer à parler"}
-    >
-      <span className={`h-3 w-3 rounded-full ${isListening ? "animate-pulse bg-white" : "bg-white/80"}`} />
-      {isListening ? "Arrêter" : "Parler"}
-    </button>
+    <div className="flex flex-col items-center gap-2">
+      <button
+        type="button"
+        onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); if (!disabled) onStart(); }}
+        onPointerUp={onStop}
+        onPointerLeave={onStop}
+        disabled={disabled}
+        className={`flex h-20 w-20 select-none touch-none items-center justify-center rounded-full shadow-md transition-all active:scale-95 disabled:opacity-40 ${
+          isListening ? "animate-pulse scale-95" : "hover:opacity-90"
+        }`}
+        style={{ background: isListening ? "#dc2626" : ACCENT }}
+        aria-label={isListening ? "Relâchez pour arrêter" : "Maintenez pour parler"}
+      >
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" className="text-white" aria-hidden>
+          <rect x="9" y="2" width="6" height="12" rx="3" />
+          <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+          <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+        </svg>
+      </button>
+      <p className="text-xs font-medium text-[var(--color-text-secondary)]">
+        {isListening ? "Relâchez pour arrêter" : "Maintenez pour parler"}
+      </p>
+    </div>
   );
 }
 

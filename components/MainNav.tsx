@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
+import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import { useTranslation } from "@/components/TranslationProvider";
 
 type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
@@ -111,10 +112,12 @@ export function MainNav() {
   const { showPivot, togglePivot } = useTranslation();
   const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
+  const [unreadMessages, setUnreadMessages] = useState(0);
   const [actions, setActions] = useState<ActionAvailability>(emptyActionAvailability);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
+    getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
   }, [pathname]);
 
   useEffect(() => {
@@ -204,9 +207,9 @@ export function MainNav() {
                     }`}
                   >
                     <Icon active={selected} />
-                    {item.href === "/" && pendingTasks > 0 && (
+                    {item.href === "/" && (pendingTasks + unreadMessages) > 0 && (
                       <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
-                        {pendingTasks > 9 ? "9+" : pendingTasks}
+                        {(pendingTasks + unreadMessages) > 9 ? "9+" : (pendingTasks + unreadMessages)}
                       </span>
                     )}
                   </span>
@@ -284,7 +287,7 @@ export function MainNav() {
                 </>
               ) : (
                 <>
-                  <MainSectionButton item={mainPrimaryItems[0]} pathname={pathname} pendingTasks={pendingTasks} />
+                  <MainSectionButton item={mainPrimaryItems[0]} pathname={pathname} pendingTasks={pendingTasks} unreadMessages={unreadMessages} />
                   <MainSectionButton item={mainPrimaryItems[1]} pathname={pathname} />
                 </>
               )}
@@ -331,11 +334,12 @@ export function MainNav() {
   );
 }
 
-function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem; pathname: string; pendingTasks?: number }) {
+function MainSectionButton({ item, pathname, pendingTasks = 0, unreadMessages = 0 }: { item: NavItem; pathname: string; pendingTasks?: number; unreadMessages?: number }) {
   const Icon = item.icon;
   const active = isActivePath(pathname, item.href)
     || (item.href === "/francais" && pathname.startsWith("/communication"))
     || (item.href === "/mathematiques" && pathname.startsWith("/placement"));
+  const totalBadge = pendingTasks + unreadMessages;
   return (
     <Link
       href={item.href}
@@ -345,9 +349,9 @@ function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem
     >
       <span className={`relative flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors ${active ? "bg-[var(--main-nav-color)] text-white" : "bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] group-hover:bg-white"}`}>
         <Icon active={active} />
-        {item.href === "/" && pendingTasks > 0 && (
+        {item.href === "/" && totalBadge > 0 && (
           <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
-            {pendingTasks > 9 ? "9+" : pendingTasks}
+            {totalBadge > 9 ? "9+" : totalBadge}
           </span>
         )}
       </span>

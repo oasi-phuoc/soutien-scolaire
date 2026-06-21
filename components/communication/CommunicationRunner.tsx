@@ -581,8 +581,6 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         return;
       }
       setPhase("exercises");
-      setSelected(null);
-      setExerciseValidated(false);
     } else if (phase === "writing") {
       if (!exerciseValidated) return;
       handleFinish();
@@ -748,8 +746,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               setPhase("exercises");
               setExIndex(0);
               setResults([]);
-              setSelected(null);
-              setExerciseValidated(false);
+              setAnswers(Array(totalEx).fill(null));
+              setValidated(Array(totalEx).fill(false));
             }}
             className="w-full rounded-[var(--radius-md)] border-2 py-3 text-sm font-bold transition-colors hover:bg-[var(--color-bg-secondary)]"
             style={{ borderColor: ACCENT, color: ACCENT }}
