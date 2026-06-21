@@ -443,7 +443,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {!supported && (
             <div className="rounded-[var(--radius-md)] border border-red-300 bg-red-50 px-3 py-2.5">
               <p className="text-sm text-red-700">
-                La reconnaissance vocale n'est pas disponible dans ce navigateur. Utilisez Chrome ou Edge pour une meilleure expérience. Vous pouvez quand même taper vos réponses.
+                La reconnaissance vocale n&apos;est pas disponible dans ce navigateur. Utilisez Chrome ou Edge pour une meilleure expérience. Vous pouvez quand même taper vos réponses.
               </p>
             </div>
           )}
@@ -536,7 +536,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         <div className="flex-1 space-y-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Partie 2 — Description d'image
+              Partie 2 — Description d&apos;image
             </p>
             <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">
               Décrivez cette image
@@ -748,7 +748,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               </div>
             ) : (
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                Aucun professeur n'est encore disponible dans la liste.
+                Aucun professeur n&apos;est encore disponible dans la liste.
               </p>
             )}
             {sendMessage && (
