@@ -163,6 +163,17 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
 
 // ——— Voice message bubble (WhatsApp-style for app prompts in task 3) ———
 
+const IMAGE_GUIDE_QUESTIONS = [
+  "Qu'est-ce que vous voyez sur l'image ?",
+  "Où sont les personnes ?",
+  "Que font les personnes ?",
+  "Comment sont les personnes ?",
+  "De quoi parlent les personnes ?",
+  "Qu'est-ce qu'il y a en arrière-plan ?",
+  "Quelle est l'ambiance générale de l'image ?",
+  "Quelle est votre impression sur cette scène ?",
+];
+
 function waveformBars(text: string, count = 22): number[] {
   return Array.from({ length: count }, (_, i) => {
     const code = text.charCodeAt(i % Math.max(text.length, 1)) || 65;
@@ -338,6 +349,106 @@ function HintsPanel({
       <p className="text-[10px] text-[var(--color-text-secondary)]">
         Appuyez sur ↑ pour utiliser une suggestion, puis modifiez-la à votre façon.
       </p>
+    </div>
+  );
+}
+
+// ——— Guide question bubble (audio-only, for task 2 image description) ———
+
+function GuideQuestion({ text, index }: { text: string; index: number }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const bars = useMemo(() => waveformBars(text), [text]);
+
+  useEffect(() => () => {
+    if (checkRef.current) clearInterval(checkRef.current);
+  }, []);
+
+  function handlePlay() {
+    if (isPlaying) {
+      window.speechSynthesis?.cancel();
+      setIsPlaying(false);
+      if (checkRef.current) clearInterval(checkRef.current);
+      return;
+    }
+    setIsPlaying(true);
+    speak(text);
+    checkRef.current = setInterval(() => {
+      if (!window.speechSynthesis?.speaking) {
+        setIsPlaying(false);
+        if (checkRef.current) clearInterval(checkRef.current);
+      }
+    }, 150);
+  }
+
+  return (
+    <div
+      className="rounded-[var(--radius-md)] px-3 py-2"
+      style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
+    >
+      <div className="flex items-center gap-2">
+        <span
+          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+          style={{ background: ACCENT }}
+        >
+          {index + 1}
+        </span>
+
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white shadow-sm active:scale-95"
+          style={{ background: ACCENT }}
+          aria-label={isPlaying ? "Pause" : "Écouter la question"}
+        >
+          {isPlaying ? (
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          )}
+        </button>
+
+        <div className="flex flex-1 items-center gap-px" style={{ height: 22 }}>
+          {bars.map((h, i) => (
+            <div
+              key={i}
+              className={`flex-1 rounded-full ${isPlaying ? "animate-pulse" : ""}`}
+              style={{
+                height: `${Math.round(h * 100)}%`,
+                background: ACCENT,
+                opacity: isPlaying ? 0.35 + (i % 4) * 0.15 : 0.35,
+                animationDelay: isPlaying ? `${(i % 6) * 80}ms` : undefined,
+              }}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 text-[11px] font-bold leading-none transition-colors"
+          style={{
+            borderColor: ACCENT,
+            color: expanded ? "white" : ACCENT,
+            background: expanded ? ACCENT : "transparent",
+          }}
+          aria-label={expanded ? "Masquer le texte" : "Afficher le texte"}
+        >
+          {expanded ? "−" : "+"}
+        </button>
+      </div>
+
+      {expanded && (
+        <p className="mt-2 border-t border-[var(--color-border-default)] pt-2 text-sm italic leading-relaxed text-[var(--color-text-primary)]">
+          {text}
+        </p>
+      )}
     </div>
   );
 }
@@ -867,6 +978,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </svg>
             <p className="text-sm font-semibold" style={{ color: ACCENT }}>Image à venir</p>
             <p className="mx-4 text-sm text-[var(--color-text-secondary)]">{prompt.imageDescription}</p>
+          </div>
+
+          {/* Guide questions (audio only, text hidden by default) */}
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+              Questions pour vous guider
+            </p>
+            <div className="space-y-1.5">
+              {IMAGE_GUIDE_QUESTIONS.map((q, i) => (
+                <GuideQuestion key={i} text={q} index={i} />
+              ))}
+            </div>
           </div>
 
           {/* Accumulated phrases */}
