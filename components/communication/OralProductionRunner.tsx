@@ -75,6 +75,11 @@ function normalizeFrenchTranscript(raw: string): string {
   return `${capitalized}${FRENCH_QUESTION_START.test(capitalized) ? "?" : "."}`;
 }
 
+function ensureQuestionMark(text: string): string {
+  const trimmed = text.trim().replace(/[.!?…]+$/, "");
+  return trimmed ? `${trimmed}?` : "";
+}
+
 function useSpeechRecognition(onTranscript: (text: string) => void) {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const accumulatedRef = useRef("");
@@ -212,11 +217,122 @@ const IMAGE_GUIDE_QUESTIONS = [
   "Quelle est votre impression sur cette scène ?",
 ];
 
+const DIRECTED_INTERVIEW_BASE = [
+  "Quel est votre nom ?",
+  "Quel est votre prénom ?",
+  "Où habitez-vous ?",
+  "Quelles langues parlez-vous ?",
+  "Qu'avez-vous fait ce week-end ?",
+];
+
+const DIRECTED_INTERVIEW_GROUPS = [
+  [
+    "Est-ce que vous faites du sport ?",
+    "Depuis combien de temps pratiquez-vous ce sport ?",
+    "Combien de fois par semaine faites-vous ce sport ?",
+  ],
+  [
+    "Quel est votre plat préféré ?",
+    "De quoi est-il fait ?",
+    "Savez-vous le préparer ?",
+  ],
+  [
+    "Quel genre de films ou de séries aimez-vous regarder ?",
+    "Pourquoi aimez-vous ce genre ?",
+    "Quel est votre film ou votre série préféré ?",
+  ],
+  [
+    "Qui fait les courses chez vous ?",
+    "Aimez-vous faire les courses et pourquoi ?",
+    "Où allez-vous faire les courses et pourquoi ?",
+  ],
+  [
+    "Quel moyen de transport utilisez-vous le plus ?",
+    "Aimez-vous vous déplacer avec ce moyen de transport et pourquoi ?",
+    "Quel moyen de transport n'aimez-vous pas et pourquoi ?",
+  ],
+];
+
 function waveformBars(text: string, count = 22): number[] {
   return Array.from({ length: count }, (_, i) => {
     const code = text.charCodeAt(i % Math.max(text.length, 1)) || 65;
     return 0.18 + Math.abs(Math.sin(code * 0.137 + i * 1.31)) * 0.79;
   });
+}
+
+function InterviewAudioQuestion({ text, index, total }: { text: string; index: number; total: number }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const bars = useMemo(() => waveformBars(text, 30), [text]);
+
+  useEffect(() => () => {
+    if (checkRef.current) clearInterval(checkRef.current);
+  }, []);
+
+  function handlePlay() {
+    if (isPlaying) {
+      window.speechSynthesis?.cancel();
+      setIsPlaying(false);
+      if (checkRef.current) clearInterval(checkRef.current);
+      return;
+    }
+    setIsPlaying(true);
+    speak(text);
+    checkRef.current = setInterval(() => {
+      if (!window.speechSynthesis?.speaking) {
+        setIsPlaying(false);
+        if (checkRef.current) clearInterval(checkRef.current);
+      }
+    }, 150);
+  }
+
+  return (
+    <div
+      className="rounded-[var(--radius-md)] border px-4 py-3"
+      style={{
+        borderColor: `color-mix(in srgb, ${ACCENT} 35%, var(--color-border-default))`,
+        background: `color-mix(in srgb, ${ACCENT} 8%, var(--color-bg-secondary))`,
+      }}
+    >
+      <p className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+        Question {index + 1} / {total}
+      </p>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white shadow-sm active:scale-95"
+          style={{ background: ACCENT }}
+          aria-label={isPlaying ? "Arrêter l'audio" : "Écouter la question"}
+        >
+          {isPlaying ? (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          )}
+        </button>
+        <div className="flex h-9 flex-1 items-center gap-px" aria-hidden>
+          {bars.map((height, barIndex) => (
+            <div
+              key={barIndex}
+              className={isPlaying ? "flex-1 animate-pulse rounded-full" : "flex-1 rounded-full"}
+              style={{
+                height: `${Math.round(height * 100)}%`,
+                background: ACCENT,
+                opacity: isPlaying ? 0.45 + (barIndex % 4) * 0.12 : 0.35,
+                animationDelay: isPlaying ? `${(barIndex % 6) * 80}ms` : undefined,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function VoiceMessageBubble({
@@ -478,7 +594,11 @@ function GuideQuestion({ text, index }: { text: string; index: number }) {
           }}
           aria-label={expanded ? "Masquer le texte" : "Afficher le texte"}
         >
-          {expanded ? "−" : "+"}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+            <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
+          </svg>
         </button>
       </div>
 
@@ -558,6 +678,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const [prompt] = useState<OralPrompt>(() => randomOralPrompt(level));
   const [situation] = useState(() => randomOralSituation());
+  const compactImage = /PO_(?:Chaussure|Cinema|Telephone)\.webp$/.test(situation.image);
+  const imageWidth = compactImage ? 1402 : 1448;
+  const imageHeight = compactImage ? 1122 : 1086;
   const [phase, setPhase] = useState<Phase>("intro");
 
   // Task 1: questions on 3 themes
@@ -568,10 +691,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [isChecking, setIsChecking] = useState(false);
 
   // Task 2: image description (multi-phrase)
+  const [interviewQuestions] = useState<string[]>(() => {
+    const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
+    return [...DIRECTED_INTERVIEW_BASE, ...group];
+  });
+  const [interviewIndex, setInterviewIndex] = useState(0);
+  const [interviewLines, setInterviewLines] = useState<OralDialogueLine[]>([]);
+  const [interviewDone, setInterviewDone] = useState(false);
   const [task2Phrases, setTask2Phrases] = useState<string[]>([]);
   const [task2Lines, setTask2Lines] = useState<OralDialogueLine[]>([]);
   const [task2Grammar, setTask2Grammar] = useState<OralGrammarMatch[]>([]);
   const [task2Done, setTask2Done] = useState(false);
+  const [imageHelpOpen, setImageHelpOpen] = useState(false);
 
   // Task 3: dialogue
   const [dialogueIndex, setDialogueIndex] = useState(0);
@@ -593,8 +724,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Speech recognition per phase ———
 
   const onTask1Transcript = useCallback((text: string) => {
-    setCurrentTranscript(text);
-  }, []);
+    setCurrentTranscript(lessonId === "PO-1" ? ensureQuestionMark(text) : text);
+  }, [lessonId]);
 
   const onTask2Transcript = useCallback((text: string) => {
     setCurrentTranscript(text);
@@ -612,29 +743,24 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     useSpeechRecognition(onTask3Transcript);
 
   // Reset transcript + hints on phase/index change
-  useEffect(() => { setCurrentTranscript(""); setHintsOpen(false); }, [phase, themeIndex, dialogueIndex]);
-
-  // ——— Step index for segmented progress bar ———
-
-  const stepIdx =
-    phase === "intro" ? 0 :
-    phase === "task1" ? 1 :
-    phase === "task2" ? 2 :
-    phase === "task3" ? 3 : 4;
-
-  const totalSteps = 5;
+  useEffect(() => {
+    setCurrentTranscript("");
+    setHintsOpen(false);
+    setImageHelpOpen(false);
+  }, [phase, themeIndex, interviewIndex, dialogueIndex]);
 
   // ——— Task 1: confirm a theme question ———
 
   async function confirmTask1() {
     if (!currentTranscript.trim() || isChecking) return;
+    const answer = lessonId === "PO-1" ? ensureQuestionMark(currentTranscript) : currentTranscript.trim();
     setIsChecking(true);
-    const grammar = await checkGrammar(currentTranscript);
+    const grammar = await checkGrammar(answer);
     setIsChecking(false);
     const theme = prompt.themes[themeIndex]!;
     const newLines: OralDialogueLine[] = [
       { role: "app", text: `Thème : « ${theme.word} »` },
-      { role: "student", text: currentTranscript, grammar },
+      { role: "student", text: answer, grammar },
     ];
     setTask1Lines((prev) => [...prev, ...newLines]);
     setCurrentTranscript("");
@@ -645,7 +771,27 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     }
   }
 
-  // ——— Task 2: accumulate phrases then validate all at once ———
+  // ——— Task 2: directed interview, then image description ———
+
+  async function confirmInterviewAnswer() {
+    if (!currentTranscript.trim() || listening2 || isChecking) return;
+    const answer = currentTranscript.trim();
+    setIsChecking(true);
+    const grammar = await checkGrammar(answer);
+    setIsChecking(false);
+    const question = interviewQuestions[interviewIndex]!;
+    setInterviewLines((prev) => [
+      ...prev,
+      { role: "app", text: question },
+      { role: "student", text: answer, grammar },
+    ]);
+    setCurrentTranscript("");
+    if (interviewIndex + 1 < interviewQuestions.length) {
+      setInterviewIndex((index) => index + 1);
+    } else {
+      setInterviewDone(true);
+    }
+  }
 
   function addTask2Phrase() {
     if (!currentTranscript.trim() || listening2) return;
@@ -691,11 +837,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const allGrammar = [
     ...task1Lines.flatMap((l) => l.grammar ?? []),
+    ...interviewLines.flatMap((l) => l.grammar ?? []),
     ...task2Grammar,
     ...task3Lines.flatMap((l) => l.grammar ?? []),
   ];
 
-  const fullDialogue = [...task1Lines, ...task2Lines, ...task3Lines];
+  const fullDialogue = [...task1Lines, ...interviewLines, ...task2Lines, ...task3Lines];
 
   // ——— Save progress + finish ———
 
@@ -744,23 +891,28 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function goBack() {
     if (phase === "intro") router.push("/francais?tab=communication");
-    else if (phase === "task1") setPhase("intro");
+    else if (phase === "task1") setPhase("task3");
     else if (phase === "task2") setPhase("task1");
     else if (phase === "task3") setPhase("task2");
     else setPhase("task3");
   }
 
+  const allTasksDone = task1Done && task2Done && task3Done;
+
   function goNext() {
     if (phase === "intro") setPhase("task1");
     else if (phase === "task1") setPhase("task2");
     else if (phase === "task2") setPhase("task3");
-    else if (phase === "task3") setPhase("review");
+    else if (phase === "task3") setPhase(allTasksDone ? "review" : "task1");
     else handleFinish();
   }
 
   function handleNavValidate() {
     if (phase === "task1") void confirmTask1();
-    else if (phase === "task2") void validateTask2();
+    else if (phase === "task2") {
+      if (!interviewDone) void confirmInterviewAnswer();
+      else void validateTask2();
+    }
     else if (phase === "task3") void confirmTask3();
   }
 
@@ -771,13 +923,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const validateDisabled =
     (phase === "task1" && (!currentTranscript.trim() || listening1 || isChecking)) ||
-    (phase === "task2" && (task2Phrases.length === 0 || isChecking)) ||
+    (phase === "task2" && (
+      !interviewDone
+        ? (!currentTranscript.trim() || listening2 || isChecking)
+        : (task2Phrases.length === 0 || isChecking)
+    )) ||
     (phase === "task3" && (!currentTranscript.trim() || listening3 || isChecking));
 
-  const nextDisabled =
-    (phase === "task1" && !task1Done) ||
-    (phase === "task2" && !task2Done) ||
-    (phase === "task3" && !task3Done);
+  // Free navigation: Suivant never depends on validation.
+  const nextDisabled = false;
 
   const isLastPhase = phase === "review";
 
@@ -795,8 +949,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             body: "Un mot s'affiche à l'écran. Posez une question simple en rapport avec ce thème, puis confirmez. Vous passerez ainsi 3 mots différents.",
           },
           {
-            title: "Partie 2 — Description d'image",
-            body: "Une image est présentée. Décrivez-la phrase par phrase : enregistrez une phrase, ajoutez-en d'autres si vous le souhaitez, puis validez en une seule fois.",
+            title: "Partie 2 — Entretien dirigé et description d'image",
+            body: "Écoutez les questions de l'entretien et répondez oralement. Une image apparaît ensuite : décrivez-la phrase par phrase, puis validez.",
           },
           {
             title: "Partie 3 — Dialogue",
@@ -810,8 +964,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             body: "Un mot-thème est affiché. Formulez une question ouverte et développée sur ce sujet. Évitez les questions fermées (oui/non).",
           },
           {
-            title: "Partie 2 — Description d'image",
-            body: "Décrivez l'image avec des détails : les personnes, le lieu, les actions, l'ambiance. Enregistrez phrase par phrase, puis validez.",
+            title: "Partie 2 — Entretien dirigé et description d'image",
+            body: "Écoutez les questions de l'entretien et développez vos réponses oralement. Décrivez ensuite l'image avec des détails : personnes, lieu, actions et ambiance.",
           },
           {
             title: "Partie 3 — Dialogue",
@@ -824,8 +978,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             body: "Formulez une question argumentée et nuancée sur le thème proposé. Montrez votre capacité à aborder des sujets complexes.",
           },
           {
-            title: "Partie 2 — Description et interprétation",
-            body: "Décrivez l'image en détail, puis interprétez-la : quel sens, quel contexte, quels symboles éventuels ? Enregistrez vos observations phrase par phrase.",
+            title: "Partie 2 — Entretien, description et interprétation",
+            body: "Répondez d'abord aux questions audio de manière développée. Décrivez ensuite l'image en détail et interprétez son contexte ou ses symboles éventuels.",
           },
           {
             title: "Partie 3 — Dialogue argumenté",
@@ -865,13 +1019,30 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
       {/* Segmented progress bar */}
       <div className="mb-6 flex gap-1">
-        {Array.from({ length: totalSteps }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
-            style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
-          />
-        ))}
+        {(["intro", "task1", "task2", "task3", "review"] as Phase[]).map((targetPhase, i) => {
+          const completed =
+            targetPhase === "intro"
+            || (targetPhase === "task1" && task1Done)
+            || (targetPhase === "task2" && task2Done)
+            || (targetPhase === "task3" && task3Done)
+            || (targetPhase === "review" && allTasksDone);
+          const disabled = targetPhase === "review" && !allTasksDone;
+          return (
+            <button
+              key={targetPhase}
+              type="button"
+              onClick={() => setPhase(targetPhase)}
+              disabled={disabled}
+              aria-label={`Aller à l'étape ${i + 1}`}
+              aria-current={phase === targetPhase ? "step" : undefined}
+              className="h-2 flex-1 rounded-full bg-[var(--color-border-default)] transition-all disabled:cursor-not-allowed"
+              style={completed || phase === targetPhase ? {
+                background: ACCENT,
+                opacity: phase === targetPhase ? 0.65 : 1,
+              } : undefined}
+            />
+          );
+        })}
       </div>
 
       {/* ——— INTRO / THEORY ——— */}
@@ -1003,6 +1174,62 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       {/* ——— TASK 2: Image description (multi-phrase) ——— */}
       {phase === "task2" && (
         <div className="flex-1 space-y-4">
+          {!interviewDone ? (
+            <>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                  Partie 2 — Entretien dirigé
+                </p>
+                <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">
+                  Écoutez puis répondez oralement
+                </h2>
+              </div>
+
+              <InterviewAudioQuestion
+                text={interviewQuestions[interviewIndex]!}
+                index={interviewIndex}
+                total={interviewQuestions.length}
+              />
+
+              <p className="text-center text-xs text-[var(--color-text-secondary)]">
+                Le texte de la question n&apos;est pas affiché. Vous pouvez réécouter l&apos;audio avant de répondre.
+              </p>
+
+              {currentTranscript && (
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
+                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
+                </div>
+              )}
+
+              {isChecking && (
+                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>
+              )}
+
+              {!supported && (
+                <input
+                  type="text"
+                  value={currentTranscript}
+                  onChange={(event) => setCurrentTranscript(event.target.value)}
+                  placeholder="Votre réponse…"
+                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+                />
+              )}
+
+              <MicButton
+                isListening={listening2}
+                supported={supported}
+                onStart={start2}
+                onStop={stop2}
+                disabled={isChecking}
+              />
+
+              <p className="text-center text-xs text-[var(--color-text-secondary)]">
+                {interviewIndex} réponse{interviewIndex > 1 ? "s" : ""} enregistrée{interviewIndex > 1 ? "s" : ""} sur {interviewQuestions.length}
+              </p>
+            </>
+          ) : (
+            <>
           <div>
             <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
               Partie 2 — Description d&apos;image
@@ -1016,8 +1243,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <Image
               src={situation.image}
               alt={situation.alt}
-              width={800}
-              height={600}
+              width={imageWidth}
+              height={imageHeight}
               className="h-auto w-full object-contain"
               priority
             />
@@ -1026,16 +1253,87 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </p>
           </div>
 
-          {/* Guide questions (audio only, text hidden by default) */}
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Questions pour vous guider
-            </p>
-            <div className="space-y-1.5">
-              {IMAGE_GUIDE_QUESTIONS.map((q, i) => (
-                <GuideQuestion key={i} text={q} index={i} />
-              ))}
+          {!task2Done && (
+            <div className="space-y-3">
+              {currentTranscript && (
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
+                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
+                </div>
+              )}
+              {isChecking && (
+                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>
+              )}
+              {!supported && (
+                <input
+                  type="text"
+                  value={currentTranscript}
+                  onChange={(event) => setCurrentTranscript(event.target.value)}
+                  placeholder="Tapez une phrase sur l'image…"
+                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+                />
+              )}
+              <div className="flex items-center gap-3">
+                <MicButton
+                  isListening={listening2}
+                  supported={supported}
+                  onStart={start2}
+                  onStop={stop2}
+                  disabled={isChecking}
+                />
+                <button
+                  type="button"
+                  onClick={addTask2Phrase}
+                  disabled={!currentTranscript.trim() || isChecking || listening2}
+                  className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
+                  style={{ background: ACCENT }}
+                >
+                  + Ajouter
+                </button>
+              </div>
+              {task2Phrases.length === 0 && (
+                <p className="text-center text-xs text-[var(--color-text-secondary)]">
+                  Enregistrez autant de phrases que vous voulez, puis validez.
+                </p>
+              )}
             </div>
+          )}
+
+          <div className="space-y-2">
+            <button
+              type="button"
+              onClick={() => setImageHelpOpen((open) => !open)}
+              aria-expanded={imageHelpOpen}
+              className="flex w-full items-center justify-between rounded-[var(--radius-md)] border px-4 py-3 text-left text-sm font-bold transition-colors"
+              style={{
+                borderColor: `color-mix(in srgb, ${ACCENT} 35%, var(--color-border-default))`,
+                color: ACCENT,
+                background: imageHelpOpen
+                  ? `color-mix(in srgb, ${ACCENT} 12%, var(--color-bg-secondary))`
+                  : "var(--color-bg-secondary)",
+              }}
+            >
+              <span className="flex items-center gap-2">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                  <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
+                </svg>
+                Aide
+              </span>
+              <span className={`text-lg transition-transform ${imageHelpOpen ? "rotate-180" : ""}`} aria-hidden>⌄</span>
+            </button>
+
+            {imageHelpOpen && (
+              <div className="space-y-1.5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                  Questions pour vous guider
+                </p>
+                {IMAGE_GUIDE_QUESTIONS.map((question, index) => (
+                  <GuideQuestion key={question} text={question} index={index} />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Accumulated phrases */}
@@ -1076,49 +1374,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </p>
           )}
 
-          {!task2Done && (
-            <>
-              {currentTranscript && (
-                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
-                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
-                </div>
-              )}
-              {isChecking && (
-                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>
-              )}
-              {!supported && (
-                <input
-                  type="text"
-                  value={currentTranscript}
-                  onChange={(e) => setCurrentTranscript(e.target.value)}
-                  placeholder="Tapez une phrase sur l'image…"
-                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-                />
-              )}
-              <div className="flex items-center gap-3">
-                <MicButton
-                  isListening={listening2}
-                  supported={supported}
-                  onStart={start2}
-                  onStop={stop2}
-                  disabled={isChecking}
-                />
-                <button
-                  type="button"
-                  onClick={addTask2Phrase}
-                  disabled={!currentTranscript.trim() || isChecking || listening2}
-                  className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
-                  style={{ background: ACCENT }}
-                >
-                  + Ajouter
-                </button>
-              </div>
-              {task2Phrases.length === 0 && (
-                <p className="text-center text-xs text-[var(--color-text-secondary)]">
-                  Enregistrez autant de phrases que vous voulez, puis validez.
-                </p>
-              )}
             </>
           )}
         </div>
@@ -1128,24 +1383,17 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       {phase === "task3" && (
         <div className="flex-1 space-y-4">
           <div className="space-y-3">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                  Partie 3 — Dialogue
-                </p>
-                <h2 className="mt-1 text-base font-bold leading-relaxed text-[var(--color-text-primary)]">
-                  {situation.dialogueContext}
-                </h2>
-              </div>
-              <SpeakButton text={situation.dialogueContext} />
-            </div>
+            <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+              Partie 3 — Dialogue
+            </p>
+            <VoiceMessageBubble text={situation.dialogueContext} />
             <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
               <Image
                 src={situation.image}
                 alt={situation.alt}
-                width={800}
-                height={600}
-                className="h-auto max-h-64 w-full object-contain"
+                width={imageWidth}
+                height={imageHeight}
+                className="block h-auto w-full"
               />
             </div>
           </div>

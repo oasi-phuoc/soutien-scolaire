@@ -179,10 +179,10 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "telephone",
     image: "/expression/po/PO_Telephone.webp",
-    alt: "Un magasin de téléphones",
-    imageDescription: "Une cliente demande conseil pour un téléphone portable.",
-    dialogueContext: "Vous voulez acheter ou remplacer un téléphone. Vous expliquez vos besoins et demandez le prix, la garantie et les conditions de l'abonnement.",
-    dialoguePrompts: ["Bonjour, quel type de téléphone recherchez-vous ?", "Quelles fonctions sont importantes pour vous ?", "Avez-vous déjà un abonnement ?", "Quel est votre budget ?"],
+    alt: "Un appel téléphonique à un médecin",
+    imageDescription: "Une personne téléphone à un médecin pour parler d'un problème de santé.",
+    dialogueContext: "Vous ne vous sentez pas bien et vous téléphonez au cabinet médical. Vous décrivez vos symptômes, dites depuis quand vous les avez et demandez un rendez-vous.",
+    dialoguePrompts: ["Cabinet médical, bonjour. Que puis-je faire pour vous ?", "Quels symptômes avez-vous ?", "Depuis quand ne vous sentez-vous pas bien ?", "Êtes-vous disponible aujourd'hui pour un rendez-vous ?"],
   },
   {
     id: "train",
