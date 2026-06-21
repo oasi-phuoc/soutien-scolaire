@@ -25,6 +25,7 @@ export const COMM_MODULES: CommunicationModule[] = [
     title: "Production écrite",
     description: "Apprendre à préparer, organiser, rédiger et relire un texte",
     submodules: [
+      { id: "E1-0", code: "E1.0", title: "Les formulaires", available: true, lessonId: "expression-e1-0" },
       { id: "E1-1", code: "E1.1", title: "Base", available: true, lessonId: "expression-e1-1" },
       { id: "E1-2", code: "E1.2", title: "Moyen", available: true, lessonId: "expression-e1-2" },
       { id: "E1-3", code: "E1.3", title: "Avancé", available: true, lessonId: "expression-e1-3" },
