@@ -945,19 +945,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             ))}
           </div>
 
-          {/* Tips */}
-          <div className="rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-3 dark:border-amber-700 dark:bg-amber-950">
-            <p className="mb-1.5 text-xs font-bold text-amber-700 dark:text-amber-300">Conseils</p>
-            <ul className="space-y-1">
-              {tips.map((tip, i) => (
-                <li key={i} className="flex gap-2 text-sm text-amber-800 dark:text-amber-200">
-                  <span className="mt-0.5 shrink-0 text-amber-500">•</span>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {!supported && (
             <div className="rounded-[var(--radius-md)] border border-red-300 bg-red-50 px-3 py-2.5">
               <p className="text-sm text-red-700">
