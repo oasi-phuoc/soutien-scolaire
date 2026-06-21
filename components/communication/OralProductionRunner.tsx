@@ -613,6 +613,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setImageHelpOpen(false);
   }, [phase, dialogueIndex]);
 
+  // ——— Step index for segmented progress bar ———
+
+  const stepIdx =
+    phase === "intro" ? 0 :
+    phase === "task1" ? 1 :
+    phase === "task2" ? 2 : 3;
+
+  const totalSteps = 4;
+
   // ——— Task 1: confirm all 3 theme questions at once ———
 
   async function confirmTask1() {
@@ -890,34 +899,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       </header>
 
-      {/* Segmented progress bar */}
-      <div className="mb-6 flex gap-1">
-        {(["intro", "task1", "task2", "task3", "task4", "review"] as Phase[]).map((targetPhase, i) => {
-          const completed =
-            targetPhase === "intro"
-            || (targetPhase === "task1" && task1Done)
-            || (targetPhase === "task2" && interviewDone)
-            || (targetPhase === "task3" && task2Done)
-            || (targetPhase === "task4" && task4Done)
-            || (targetPhase === "review" && allTasksDone);
-          const disabled = targetPhase === "review" && !allTasksDone;
-          return (
-            <button
-              key={targetPhase}
-              type="button"
-              onClick={() => setPhase(targetPhase)}
-              disabled={disabled}
-              aria-label={`Aller à l'étape ${i + 1}`}
-              aria-current={phase === targetPhase ? "step" : undefined}
-              className="h-2 flex-1 rounded-full bg-[var(--color-border-default)] transition-all disabled:cursor-not-allowed"
-              style={completed || phase === targetPhase ? {
-                background: ACCENT,
-                opacity: phase === targetPhase ? 0.65 : 1,
-              } : undefined}
+      {/* Segmented progress bar — hidden on recap page */}
+      {phase !== "review" && (
+        <div className="mb-6 flex gap-1">
+          {Array.from({ length: totalSteps }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+              style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
             />
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* ——— INTRO / THEORY ——— */}
       {phase === "intro" && (
