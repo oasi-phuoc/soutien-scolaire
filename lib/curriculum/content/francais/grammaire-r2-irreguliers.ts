@@ -52,6 +52,14 @@ const IRREGULAR_VERBS = [
   {
     infinitive: "savoir",
     radical: "",
+    note: "{a}Savoir{/a} = un fait, une capacité ou une information (+ infinitif, que, si, où…). Différent de {a}connaître{/a} qui s'emploie pour les personnes, lieux et choses familières.",
+    noteTrans: {
+      en: "{a}Savoir{/a} = a fact, an ability or information (+ infinitive, que, si, où…). Different from {a}connaître{/a}, which is used for people, places and familiar things.",
+      ar: "{a}Savoir{/a} = حقيقة أو قدرة أو معلومة (+ مصدر، que، si، où…). يختلف عن {a}connaître{/a} الذي يُستخدم مع الأشخاص والأماكن والأشياء المألوفة.",
+      fa: "{a}Savoir{/a} = یک واقعیت، توانایی یا اطلاعات (+ مصدر، que، si، où…). متفاوت از {a}connaître{/a} که برای آشنایی با افراد، مکان‌ها و چیزها به کار می‌رود.",
+      ti: "{a}Savoir{/a} = ሓቂ፣ ክእለት ወይ ሓበሬታ (+ infinitif፣ que፣ si፣ où…)። ካብ {a}connaître{/a} ዝፍለ — {a}connaître{/a} ንሰባት፣ ቦታታትን ነገራትን ንምልላይ ይሕግዝ።",
+      uk: "{a}Savoir{/a} = факт, вміння або інформація (+ інфінітив, que, si, où…). Відрізняється від {a}connaître{/a}, яке вживається для людей, місць і знайомих речей.",
+    },
     rows: [
       { pronoun: "je",             ending: "sais" },
       { pronoun: "tu",             ending: "sais" },
@@ -64,6 +72,14 @@ const IRREGULAR_VERBS = [
   {
     infinitive: "connaître",
     radical: "",
+    note: "{a}Connaître{/a} = être familier avec une personne, un lieu ou une œuvre. Différent de {a}savoir{/a} qui exprime un fait, une capacité ou une information.",
+    noteTrans: {
+      en: "{a}Connaître{/a} = to be familiar with a person, a place or a work. Different from {a}savoir{/a}, which expresses a fact, an ability or information.",
+      ar: "{a}Connaître{/a} = أن تكون مألوفاً بشخص أو مكان أو عمل. يختلف عن {a}savoir{/a} الذي يُعبّر عن حقيقة أو قدرة أو معلومة.",
+      fa: "{a}Connaître{/a} = آشنا بودن با یک شخص، مکان یا اثر. متفاوت از {a}savoir{/a} که یک واقعیت، توانایی یا اطلاعات را بیان می‌کند.",
+      ti: "{a}Connaître{/a} = ምስ ሰብ፣ ቦታ ወይ ስራሕ ምልላይ። ካብ {a}savoir{/a} ዝፍለ — {a}savoir{/a} ሓቂ፣ ክእለት ወይ ሓበሬታ ይገልጽ።",
+      uk: "{a}Connaître{/a} = бути знайомим з особою, місцем або твором. Відрізняється від {a}savoir{/a}, яке виражає факт, вміння або інформацію.",
+    },
     rows: [
       { pronoun: "je",             ending: "connais" },
       { pronoun: "tu",             ending: "connais" },
