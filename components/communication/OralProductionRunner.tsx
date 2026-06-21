@@ -494,42 +494,12 @@ function DialogueBubble({ line }: { line: OralDialogueLine }) {
           {isApp ? "Interlocuteur" : "Vous"}
         </p>
         <p className="leading-snug">{line.text}</p>
-        {line.grammar && line.grammar.length > 0 && (
-          <ul className="mt-1.5 space-y-0.5 border-t border-white/20 pt-1">
-            {line.grammar.map((g, i) => (
-              <li key={i} className="text-[10px] leading-snug text-amber-200">
-                {g.shortMessage || g.message}
-                {g.replacements?.length ? ` → ${g.replacements.slice(0, 2).map((r) => r.value).join(" / ")}` : ""}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </div>
   );
 }
 
 // ——— Grammar corrections panel ———
-
-function GrammarPanel({ matches }: { matches: OralGrammarMatch[] }) {
-  if (matches.length === 0) return (
-    <p className="text-sm text-[var(--color-text-secondary)]">Aucune erreur évidente détectée.</p>
-  );
-  return (
-    <ul className="space-y-2">
-      {matches.map((m, i) => (
-        <li key={i} className="text-sm text-[var(--color-text-primary)]">
-          <span className="font-semibold text-amber-600">{m.shortMessage || m.message}</span>
-          {m.replacements?.length ? (
-            <span className="ml-1 text-[var(--color-text-secondary)]">
-              → {m.replacements.slice(0, 3).map((r) => r.value).join(" / ")}
-            </span>
-          ) : null}
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 // ——— Main component ———
 
@@ -1036,7 +1006,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 const isListeningI = listenersT[i]!;
                 const onStartI = startersT[i]!;
                 const onStopI = stoppersT[i]!;
-                const grammar = task1Done ? (task1Lines[i * 2 + 1]?.grammar ?? []) : [];
                 return (
                   <div
                     key={i}
@@ -1069,16 +1038,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         {supported ? "Maintenez le micro pour enregistrer…" : ""}
                       </p>
                     ) : null}
-                    {grammar.length > 0 && (
-                      <ul className="pl-9 space-y-0.5">
-                        {grammar.map((g, gi) => (
-                          <li key={gi} className="text-[10px] leading-snug text-amber-600">
-                            {g.shortMessage || g.message}
-                            {g.replacements?.length ? ` → ${g.replacements.slice(0, 2).map((r) => r.value).join(" / ")}` : ""}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                     {!task1Done && !supported && (
                       <input
                         type="text"
@@ -1137,7 +1096,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <div className="space-y-3">
                 {interviewQuestions.map((question, i) => {
                   const transcript = interviewTranscripts[i] ?? "";
-                  const grammar = interviewDone ? (interviewLines[i * 2 + 1]?.grammar ?? []) : [];
                   return (
                     <div
                       key={i}
@@ -1170,16 +1128,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                           {supported ? "Maintenez le micro pour enregistrer…" : ""}
                         </p>
                       ) : null}
-                      {grammar.length > 0 && (
-                        <ul className="pl-9 space-y-0.5">
-                          {grammar.map((g, gi) => (
-                            <li key={gi} className="text-[10px] leading-snug text-amber-600">
-                              {g.shortMessage || g.message}
-                              {g.replacements?.length ? ` → ${g.replacements.slice(0, 2).map((r) => r.value).join(" / ")}` : ""}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
                       {!interviewDone && !supported && (
                         <input
                           type="text"
@@ -1441,13 +1389,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           )}
 
           {task2Done && (
-            <div className="rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 p-3 dark:border-amber-700 dark:bg-amber-950/30">
-              <p className="mb-1.5 text-xs font-bold text-amber-700 dark:text-amber-300">Pistes de correction :</p>
-              <GrammarPanel matches={task2Grammar} />
-            </div>
-          )}
-
-          {task2Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
               Description enregistrée. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
@@ -1565,15 +1506,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 <DialogueBubble key={i} line={{ ...line, grammar: undefined }} />
               ))}
             </div>
-          </section>
-
-          {/* Grammar corrections */}
-          <section className="rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
-            <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
-            <GrammarPanel matches={allGrammar} />
-            <p className="mt-3 text-xs text-[var(--color-text-secondary)]">
-              La correction automatique est une aide. Le professeur peut compléter et expliquer les corrections.
-            </p>
           </section>
 
           {/* Send to teacher */}
