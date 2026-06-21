@@ -886,7 +886,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           },
           {
             title: "Partie 3 — Description d'image",
-            body: "Une image apparaît. Décrivez-la phrase par phrase en maintenant le micro, puis ajoutez chaque phrase. Validez quand vous avez terminé.",
+            body: "Une image apparaît. Décrivez l'image avec des phrases en maintenant le micro. Ajoutez des phrases pour compléter votre description. Validez quand vous avez terminé.",
           },
           {
             title: "Partie 4 — Dialogue",
