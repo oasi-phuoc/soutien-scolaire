@@ -869,11 +869,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           },
         ];
 
-  const tips = [
-    "Parlez clairement et à un rythme naturel.",
-    "Utilisez le bouton Parler pour enregistrer votre voix.",
-    "Appuyez sur Valider ✓ dans la barre de navigation pour confirmer chaque réponse.",
-  ];
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
@@ -966,18 +961,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
                 Partie 1 — Questions thématiques
               </h2>
-              <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
-                <p>Posez une question sur ces trois mots.</p>
-                <p className="flex items-center gap-1.5">
-                  Maintenez
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
-                    <rect x="9" y="2" width="6" height="12" rx="3" />
-                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                  pour parler.
-                </p>
-              </div>
             </div>
 
             <div className="space-y-3">
@@ -1053,18 +1036,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 2 — Entretien dirigé
             </h2>
-            <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
-              <p>Répondez aux questions.</p>
-              <p className="flex items-center gap-1.5">
-                Maintenez
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
-                  <rect x="9" y="2" width="6" height="12" rx="3" />
-                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                pour parler.
-              </p>
-            </div>
           </div>
 
           {/* All questions shown simultaneously */}
@@ -1159,18 +1130,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
                 </svg>
               </button>
-            </div>
-            <div className="mt-1 text-sm text-[var(--color-text-secondary)] space-y-0.5">
-              <p>Décrivez cette image.</p>
-              <p className="flex items-center gap-1.5">
-                Maintenez
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: ACCENT }}>
-                  <rect x="9" y="2" width="6" height="12" rx="3" />
-                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                pour ajouter une phrase.
-              </p>
             </div>
           </div>
 
