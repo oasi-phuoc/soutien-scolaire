@@ -116,7 +116,6 @@ import { A2_GR_L11 } from "./content/francais/grammaire-r4.17";
 import { A2_GR_L12 } from "./content/francais/grammaire-r4.18";
 
 import { A2_GR_L19 } from "./content/francais/grammaire-r4.19";
-import { A2_GR_L25 } from "./content/francais/grammaire-r4.20";
 import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
 import { A2_GR_L36 } from "./content/francais/grammaire-r4.23";
 import { A2_GR_L39 } from "./content/francais/grammaire-r4.27";
@@ -193,7 +192,6 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_L12,
 
   A2_GR_L19,
-  A2_GR_L25,
   A2_GR_L35,
   A2_GR_L36,
   A2_GR_L39,

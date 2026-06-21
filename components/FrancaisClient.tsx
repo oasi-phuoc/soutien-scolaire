@@ -26,6 +26,7 @@ const GRAMMAR_GROUPS: SectionDef[] = [
   { id: "R2", code: "R2", title: "Les verbes essentiels" },
   { id: "RI", code: "RI", title: "L'interrogation" },
   { id: "R3", code: "R3", title: "Les adjectifs" },
+  { id: "RP", code: "RP", title: "Les pronoms" },
   { id: "R5", code: "R5", title: "Le passé" },
   { id: "R4", code: "R4", title: "Le futur" },
   { id: "R6", code: "R6", title: "Les autres temps" },
@@ -39,6 +40,7 @@ function grammarGroupId(code: string): string {
   if (code.startsWith("R1.")) return "R1";
   if (code.startsWith("R2.")) return "R2";
   if (code.startsWith("R3.")) return "R3";
+  if (code.startsWith("RP.")) return "RP";
   if (code.startsWith("R4.")) return "R4";
   if (code.startsWith("R5.")) return "R5";
   if (code.startsWith("R6.")) return "R6";

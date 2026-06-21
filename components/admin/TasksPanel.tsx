@@ -215,6 +215,11 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R3.1", label: "R3.1 — Les adjectifs partitifs" },
         { id: "R3.3", label: "R3.3 — Les prépositions de lieu" },
       ]},
+      { id: "RP", label: "Les pronoms", lessons: [
+        { id: "RP.1", label: "RP.1 — Les pronoms relatifs qui et que" },
+        { id: "RP.2", label: "RP.2 — Les pronoms COD et COI" },
+        { id: "RP.3", label: "RP.3 — Les pronoms Y et EN" },
+      ]},
       { id: "R4", label: "Le futur et le temps", lessons: [
         { id: "R4.1", label: "R4.1 — Le futur proche" },
         { id: "R4.2", label: "R4.2 — Les expressions de temps" },
@@ -258,10 +263,6 @@ const CURRICULUM: MatiereOpt[] = [
 
         { id: "RX.17", label: "RX.17 — Les adjectifs (généralités)" },
         { id: "RX.18", label: "RX.18 — Les adjectifs (cas particuliers)" },
-        { id: "RX.19", label: "RX.19 — Les pronoms relatifs qui et que" },
-        { id: "RX.20", label: "RX.20 — La négation (ne…plus, ne…que)" },
-        { id: "RX.22", label: "RX.22 — Les pronoms COD et COI" },
-        { id: "RX.23", label: "RX.23 — Les pronoms Y et EN" },
       ]},
     ],
   },

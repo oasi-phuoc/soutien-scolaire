@@ -176,13 +176,14 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-gerondif",     "R6.4", "Le gérondif",                  "En + participe présent : simultanéité, manière, condition et cause.", "grammaire"),
   lesson("A2", "a2-gr-subjonctif",   "R6.5", "Le subjonctif",                "Formation, irréguliers et emplois : vouloir que, il faut que, bien que, pour que, avant que.", "grammaire"),
 
+  // ── RP — Les pronoms ─────────────────────────────────────────────────────────
+  lesson("A2", "a2-gr-l19",   "RP.1", "Les pronoms relatifs qui et que",                 "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",          "grammaire"),
+  lesson("A2", "a2-gr-l35",   "RP.2", "Les pronoms COD et COI",                          "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",                "grammaire"),
+  lesson("A2", "a2-gr-l36",   "RP.3", "Les pronoms Y et EN",                             "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                         "grammaire"),
+
   // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
   lesson("A2", "a2-gr-l11",   "RX.17", "Les adjectifs — généralités",                     "Genre, nombre, accord des adjectifs qualificatifs en contexte.",                           "grammaire"),
   lesson("A2", "a2-gr-l12",   "RX.18", "Les adjectifs — cas particuliers et place",       "Nouveau/beau/vieux, adjectifs invariables, place avant ou après le nom.",                  "grammaire"),
-  lesson("A2", "a2-gr-l19",   "RX.19", "Les pronoms relatifs qui et que",                 "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",          "grammaire"),
-  lesson("A2", "a2-gr-l25",   "RX.20", "La négation — ne…pas, ne…plus, ne…que",          "Ne…pas (action absente), ne…plus (arrêt), ne…que (restriction) : formes et sens.",         "grammaire"),
-  lesson("A2", "a2-gr-l35",   "RX.22", "Les pronoms COD et COI",                          "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",                "grammaire"),
-  lesson("A2", "a2-gr-l36",   "RX.23", "Les pronoms Y et EN",                             "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                         "grammaire"),
 
   // ── V1 — L'identité ──────────────────────────────────────────────────────────
   lesson("V1", "v1-nationalites",         "V1.1", "Les nationalités",       "Nationalités masculin/féminin, pays d'Europe et du monde.",         "vocabulaire"),
