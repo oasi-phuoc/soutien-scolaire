@@ -473,49 +473,6 @@ function HintsPanel({
 
 // ——— Guide question bubble (audio-only, for task 2 image description) ———
 
-function GuideAudioBtn({ text }: { text: string }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => () => {
-    if (checkRef.current) clearInterval(checkRef.current);
-  }, []);
-
-  function handlePlay() {
-    window.speechSynthesis?.cancel();
-    if (isPlaying) { setIsPlaying(false); return; }
-    setIsPlaying(true);
-    speak(text);
-    checkRef.current = setInterval(() => {
-      if (!window.speechSynthesis?.speaking) {
-        setIsPlaying(false);
-        if (checkRef.current) clearInterval(checkRef.current);
-      }
-    }, 150);
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={handlePlay}
-      className="mx-auto flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95"
-      style={{ background: ACCENT }}
-      aria-label={isPlaying ? "Arrêter" : "Écouter"}
-    >
-      {isPlaying ? (
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <rect x="6" y="4" width="4" height="16" rx="1" />
-          <rect x="14" y="4" width="4" height="16" rx="1" />
-        </svg>
-      ) : (
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <polygon points="5 3 19 12 5 21 5 3" />
-        </svg>
-      )}
-    </button>
-  );
-}
-
 // ——— Dialogue bubble (for past lines) ———
 
 function DialogueBubble({ line }: { line: OralDialogueLine }) {
@@ -609,6 +566,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [task2Done, setTask2Done] = useState(false);
   const [imageHelpOpen, setImageHelpOpen] = useState(false);
   const [openTranscriptIdx, setOpenTranscriptIdx] = useState<number | null>(null);
+  const [playingGuideIdx, setPlayingGuideIdx] = useState<number | null>(null);
+  const guideIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Task 4: dialogue
   const [dialogueIndex, setDialogueIndex] = useState(0);
@@ -1344,21 +1303,33 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           )}
 
-          {/* Astuce modal — rendered via portal-style fixed overlay */}
+          {/* Astuce modal — centered overlay */}
           {imageHelpOpen && (
             <div
               className="fixed inset-0 z-50 flex items-center justify-center p-4"
               style={{ background: "rgba(0,0,0,0.5)" }}
-              onClick={() => setImageHelpOpen(false)}
+              onClick={() => {
+                window.speechSynthesis?.cancel();
+                if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
+                setPlayingGuideIdx(null);
+                setOpenTranscriptIdx(null);
+                setImageHelpOpen(false);
+              }}
             >
               <div
-                className="relative w-full max-w-xs rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-2xl"
+                className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close */}
                 <button
                   type="button"
-                  onClick={() => setImageHelpOpen(false)}
+                  onClick={() => {
+                    window.speechSynthesis?.cancel();
+                    if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
+                    setPlayingGuideIdx(null);
+                    setOpenTranscriptIdx(null);
+                    setImageHelpOpen(false);
+                  }}
                   className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
                   aria-label="Fermer"
                 >
@@ -1372,60 +1343,71 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   Astuces — Questions guide
                 </p>
 
-                {/* 3-row table: number / audio / transcript-toggle */}
-                <div className="overflow-x-auto">
-                  <table className="mx-auto border-collapse">
-                    <tbody>
-                      {/* Row 1: numbers */}
-                      <tr>
-                        {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
-                          <td key={i} className="px-1 pb-2 text-center">
-                            <span
-                              className="mx-auto flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                              style={{ background: ACCENT }}
-                            >
-                              {i + 1}
-                            </span>
-                          </td>
-                        ))}
-                      </tr>
-                      {/* Row 2: audio icon only */}
-                      <tr>
-                        {IMAGE_GUIDE_QUESTIONS.map((q, i) => (
-                          <td key={i} className="px-1 pb-2 text-center">
-                            <GuideAudioBtn text={q} />
-                          </td>
-                        ))}
-                      </tr>
-                      {/* Row 3: transcript toggle (one at a time) */}
-                      <tr>
-                        {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
-                          <td key={i} className="px-1 text-center">
+                {/* 2-row table: number / audio (clicking audio shows transcript) */}
+                <table className="w-full border-collapse">
+                  <tbody>
+                    {/* Row 1: numbers */}
+                    <tr>
+                      {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
+                        <td key={i} className="pb-2 text-center" style={{ width: "12.5%" }}>
+                          <span
+                            className="mx-auto flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                            style={{ background: ACCENT }}
+                          >
+                            {i + 1}
+                          </span>
+                        </td>
+                      ))}
+                    </tr>
+                    {/* Row 2: audio buttons */}
+                    <tr>
+                      {IMAGE_GUIDE_QUESTIONS.map((q, i) => {
+                        const isPlaying = playingGuideIdx === i;
+                        return (
+                          <td key={i} className="text-center" style={{ width: "12.5%" }}>
                             <button
                               type="button"
-                              onClick={() => setOpenTranscriptIdx(openTranscriptIdx === i ? null : i)}
-                              className="mx-auto flex h-6 w-6 items-center justify-center rounded-full border-2 text-[10px] font-bold transition-colors"
-                              style={{
-                                borderColor: ACCENT,
-                                color: openTranscriptIdx === i ? "white" : ACCENT,
-                                background: openTranscriptIdx === i ? ACCENT : "transparent",
+                              onClick={() => {
+                                window.speechSynthesis?.cancel();
+                                if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
+                                if (isPlaying) {
+                                  setPlayingGuideIdx(null);
+                                  setOpenTranscriptIdx(null);
+                                  return;
+                                }
+                                setPlayingGuideIdx(i);
+                                setOpenTranscriptIdx(i);
+                                speak(q);
+                                guideIntervalRef.current = setInterval(() => {
+                                  if (!window.speechSynthesis?.speaking) {
+                                    setPlayingGuideIdx(null);
+                                    if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
+                                  }
+                                }, 150);
                               }}
-                              aria-label="Afficher / masquer le texte"
+                              className="mx-auto flex h-7 w-7 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95"
+                              style={{ background: isPlaying ? "#dc2626" : ACCENT }}
+                              aria-label={isPlaying ? "Arrêter" : "Écouter"}
                             >
-                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                                <path d="M9 18h6" />
-                                <path d="M10 22h4" />
-                                <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5C14.5 15.2 14 16 14 18h-4c0-2-.5-2.8-1.5-3.5Z" />
-                              </svg>
+                              {isPlaying ? (
+                                <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                  <rect x="6" y="4" width="4" height="16" rx="1" />
+                                  <rect x="14" y="4" width="4" height="16" rx="1" />
+                                </svg>
+                              ) : (
+                                <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                  <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                              )}
                             </button>
                           </td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                        );
+                      })}
+                    </tr>
+                  </tbody>
+                </table>
 
-                {/* Transcript shown below table */}
+                {/* Transcript shown below table when an audio is active */}
                 {openTranscriptIdx !== null && (
                   <p className="mt-3 border-t border-[var(--color-border-default)] pt-3 text-sm italic leading-relaxed text-[var(--color-text-primary)]">
                     {IMAGE_GUIDE_QUESTIONS[openTranscriptIdx]}
