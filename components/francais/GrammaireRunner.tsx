@@ -128,7 +128,7 @@ function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number 
 
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
-function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number }) {
+function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; pivot?: string; showTrans?: boolean }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const verb = verbs[selectedIdx]!;
   const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
@@ -215,6 +215,18 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
           </tbody>
         </table>
       </div>
+      {verb.note && (() => {
+        const isRtl = pivot === "ar" || pivot === "fa";
+        const useTrans = showTrans && pivot && pivot !== "fr";
+        const noteText = useTrans && pivot && verb.noteTrans?.[pivot as "en" | "ar" | "fa" | "ti" | "uk"]
+          ? verb.noteTrans[pivot as "en" | "ar" | "fa" | "ti" | "uk"]!
+          : verb.note;
+        return (
+          <div className="rounded-[var(--radius-md)] bg-[var(--color-accent-fr)]/8 px-3 py-2 text-sm text-[var(--color-text-primary)]" lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
+            {renderInlineMarkup(noteText)}
+          </div>
+        );
+      })()}
     </div>
   );
 }
@@ -450,7 +462,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "verb_toggle":
             return (
               <div key={i}>
-                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} />
+                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} pivot={pivot} showTrans={showTrans} />
               </div>
             );
 
