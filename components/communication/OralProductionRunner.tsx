@@ -882,7 +882,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           },
           {
             title: "Partie 2 — Entretien dirigé",
-            body: "Des questions vous sont posées. Lisez la question, puis répondez oralement en maintenant le micro.",
+            body: "Des questions vous sont posées. Écoutez les questions, puis répondez oralement en maintenant le micro.",
           },
           {
             title: "Partie 3 — Description d'image",
