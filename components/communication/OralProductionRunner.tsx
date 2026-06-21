@@ -397,10 +397,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const stepIdx =
     phase === "intro" ? 0 :
     phase === "task1" ? 1 :
-    phase === "task2" ? 2 :
-    phase === "task3" ? 3 : 4;
+    phase === "task2" ? 2 : 3;
 
-  const totalSteps = 5;
+  const totalSteps = 4;
 
   // ——— Task 1: confirm a theme question ———
 
@@ -634,16 +633,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       </header>
 
-      {/* Segmented progress bar */}
-      <div className="mb-6 flex gap-1">
-        {Array.from({ length: totalSteps }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
-            style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
-          />
-        ))}
-      </div>
+      {/* Segmented progress bar — hidden on recap page */}
+      {phase !== "review" && (
+        <div className="mb-6 flex gap-1">
+          {Array.from({ length: totalSteps }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+              style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+            />
+          ))}
+        </div>
+      )}
 
       {/* ——— INTRO / THEORY ——— */}
       {phase === "intro" && (
