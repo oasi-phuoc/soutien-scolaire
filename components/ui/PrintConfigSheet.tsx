@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface PrintConfig {
   exercises: boolean;
@@ -25,31 +25,51 @@ export function PrintConfigSheet({
   const [evalMode, setEvalMode] = useState(false);
   const [points, setPoints] = useState(1);
 
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/30"
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-sm rounded-t-2xl border border-[var(--color-border-default)] border-b-0 bg-[var(--color-bg-primary)] p-5 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Handle */}
-        <div className="mb-5">
-          <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-[var(--color-border-default)]" />
-          <h3 className="text-base font-bold text-[var(--color-text-primary)]">
-            Imprimer / Enregistrer en PDF
-          </h3>
-          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
-            Choisissez le contenu à inclure
-          </p>
+    <div className="fixed inset-0 z-[100] min-h-[100dvh] overflow-y-auto bg-[var(--color-bg-primary)]">
+      <header className="sticky top-0 z-10 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
+        <div className="mx-auto flex min-h-20 w-full max-w-xl items-center gap-4 px-5 py-4">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Retour"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
+            style={{ background: accentColor }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-lg font-bold text-[var(--color-text-primary)]">
+              Imprimer / Enregistrer en PDF
+            </h1>
+            <p className="mt-0.5 text-sm text-[var(--color-text-secondary)]">
+              Choisissez le contenu à inclure
+            </p>
+          </div>
         </div>
+      </header>
+
+      <main className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-xl flex-col px-5 pb-[calc(env(safe-area-inset-bottom)+2rem)] pt-8">
+        <div className="flex-1 space-y-6">
+          <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+            Contenu du document
+          </h2>
 
         {/* Options */}
-        <div className="mb-5 space-y-4">
+        <div className="space-y-5 border-y border-[var(--color-border-default)] py-5">
           {/* Theory — always included */}
-          <div className="flex items-start gap-3 opacity-60">
-            <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+          <div className="flex min-h-14 items-center gap-4 opacity-60">
+            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
                 <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -62,9 +82,9 @@ export function PrintConfigSheet({
 
           {/* Exercises toggle */}
           {hasExercises && (
-            <label className="flex cursor-pointer items-start gap-3">
+            <label className="flex min-h-14 cursor-pointer items-center gap-4">
               <div
-                className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors"
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors"
                 style={{
                   borderColor: exercises ? accentColor : "var(--color-border-default)",
                   background: exercises ? accentColor : "transparent",
@@ -91,9 +111,9 @@ export function PrintConfigSheet({
           )}
 
           {/* Eval mode toggle */}
-          <label className="flex cursor-pointer items-start gap-3">
+          <label className="flex min-h-14 cursor-pointer items-center gap-4">
             <div
-              className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors"
               style={{
                 borderColor: evalMode ? accentColor : "var(--color-border-default)",
                 background: evalMode ? accentColor : "transparent",
@@ -121,11 +141,12 @@ export function PrintConfigSheet({
 
           {/* Points per exercise — only when eval mode is on */}
           {evalMode && (
-            <div className="ml-7 flex items-center gap-2">
-              <span className="text-xs text-[var(--color-text-secondary)]">
+            <div className="ml-10 flex items-center gap-3">
+              <label htmlFor="print-points" className="text-sm text-[var(--color-text-secondary)]">
                 Points par exercice :
-              </span>
+              </label>
               <input
+                id="print-points"
                 type="text"
                 inputMode="numeric"
                 value={points}
@@ -133,10 +154,13 @@ export function PrintConfigSheet({
                   const v = parseInt(e.target.value.replace(/[^0-9]/g, "")) || 1;
                   setPoints(Math.max(1, Math.min(20, v)));
                 }}
-                className="w-12 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-2 py-0.5 text-center text-sm text-[var(--color-text-primary)]"
+                className="h-10 w-16 rounded-lg border border-[var(--color-border-default)] bg-transparent px-2 text-center text-base text-[var(--color-text-primary)] outline-none focus:border-current"
+                style={{ color: accentColor }}
               />
             </div>
           )}
+        </div>
+
         </div>
 
         {/* Print button */}
@@ -149,12 +173,12 @@ export function PrintConfigSheet({
               pointsPerExercise: points,
             })
           }
-          className="w-full rounded-xl py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          className="mt-10 min-h-12 w-full rounded-xl py-3 text-base font-semibold text-white transition-opacity hover:opacity-90"
           style={{ background: accentColor }}
         >
           Imprimer
         </button>
-      </div>
+      </main>
     </div>
   );
 }

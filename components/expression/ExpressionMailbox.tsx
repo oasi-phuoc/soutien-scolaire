@@ -3,7 +3,7 @@ import type { ExpressionInboxRow } from "@/app/actions/expression";
 
 const LEVEL_LABELS = { base: "Base", moyen: "Moyen", avance: "Avancé" } as const;
 
-export function ExpressionMailbox({ rows, isTeacher }: { rows: ExpressionInboxRow[]; isTeacher: boolean }) {
+export function ExpressionMailbox({ rows, isTeacher, isAdmin = false }: { rows: ExpressionInboxRow[]; isTeacher: boolean; isAdmin?: boolean }) {
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-32 pt-8">
       <header className="mb-6 flex items-center gap-3">
@@ -15,7 +15,7 @@ export function ExpressionMailbox({ rows, isTeacher }: { rows: ExpressionInboxRo
       </header>
 
       <p className="mb-5 text-sm text-[var(--color-text-secondary)]">
-        {isTeacher ? "Productions que les élèves vous ont envoyées." : "Vos productions envoyées et les corrections reçues."}
+        {isAdmin ? "Productions reçues et productions envoyées pour tester le fonctionnement." : isTeacher ? "Productions que les élèves vous ont envoyées." : "Vos productions envoyées et les corrections reçues."}
       </p>
 
       {rows.length === 0 ? (
@@ -33,13 +33,14 @@ export function ExpressionMailbox({ rows, isTeacher }: { rows: ExpressionInboxRo
                   <span className="flex flex-wrap items-center gap-2">
                     <span className="font-bold text-[var(--color-text-primary)]">{row.prompt_title}</span>
                     <span className="rounded-full bg-[var(--color-theme-light)] px-2 py-0.5 text-[10px] font-bold text-[var(--color-theme)]">{LEVEL_LABELS[row.level]}</span>
+                    {isAdmin && <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-bold text-zinc-600">{row.direction === "sent" ? "Envoyée" : "Reçue"}</span>}
                   </span>
                   <span className="mt-1 block text-xs text-[var(--color-text-secondary)]">
-                    {row.correspondent_name || (isTeacher ? "Élève" : "Professeur")} · {new Date(row.created_at).toLocaleDateString("fr-CH")}
+                    {row.correspondent_name || (row.direction === "received" ? "Élève" : "Professeur")} · {new Date(row.created_at).toLocaleDateString("fr-CH")}
                   </span>
                 </span>
                 <span className={`shrink-0 text-xs font-bold ${row.status === "reviewed" ? "text-emerald-600" : "text-amber-600"}`}>
-                  {row.status === "reviewed" ? "Corrigé" : "À corriger"}
+                  {row.status === "reviewed" ? "Corrigé" : row.direction === "sent" ? "Envoyé" : "À corriger"}
                 </span>
               </Link>
             </li>

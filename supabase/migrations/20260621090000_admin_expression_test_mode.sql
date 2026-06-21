@@ -1,40 +1,11 @@
--- Written-expression mailbox between students and teachers.
-
-CREATE TABLE IF NOT EXISTS public.expression_submissions (
-  id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  student_id             uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  teacher_id             uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  lesson_code            text NOT NULL,
-  level                   text NOT NULL CHECK (level IN ('base', 'moyen', 'avance')),
-  prompt_id               text NOT NULL,
-  prompt                  jsonb NOT NULL,
-  original_text           text NOT NULL,
-  ai_feedback             jsonb NOT NULL DEFAULT '[]'::jsonb,
-  corrected_text          text,
-  teacher_comment         text,
-  annotations             jsonb NOT NULL DEFAULT '[]'::jsonb,
-  status                  text NOT NULL DEFAULT 'submitted' CHECK (status IN ('submitted', 'reviewed')),
-  teacher_read_at         timestamptz,
-  student_read_at         timestamptz,
-  created_at              timestamptz NOT NULL DEFAULT now(),
-  reviewed_at             timestamptz,
-  updated_at              timestamptz NOT NULL DEFAULT now()
-);
-
-CREATE INDEX IF NOT EXISTS expression_submissions_student_idx
-  ON public.expression_submissions (student_id, created_at DESC);
-CREATE INDEX IF NOT EXISTS expression_submissions_teacher_idx
-  ON public.expression_submissions (teacher_id, status, created_at DESC);
-
-ALTER TABLE public.expression_submissions ENABLE ROW LEVEL SECURITY;
+-- Admins can test written-expression submissions while keeping their teacher inbox.
 
 CREATE OR REPLACE FUNCTION public.is_expression_teacher(target_user uuid)
 RETURNS boolean
 LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
 AS $$
   SELECT EXISTS (
-    SELECT 1
-    FROM public.profiles p
+    SELECT 1 FROM public.profiles p
     WHERE p.id = target_user AND p.role IN ('prof', 'admin')
   );
 $$;
@@ -42,37 +13,13 @@ $$;
 REVOKE ALL ON FUNCTION public.is_expression_teacher(uuid) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.is_expression_teacher(uuid) TO authenticated;
 
-DROP POLICY IF EXISTS "expression_select_participants"
-  ON public.expression_submissions;
-CREATE POLICY "expression_select_participants"
-  ON public.expression_submissions FOR SELECT TO authenticated
-  USING (student_id = auth.uid() OR teacher_id = auth.uid());
-
-DROP POLICY IF EXISTS "expression_student_insert"
-  ON public.expression_submissions;
+DROP POLICY IF EXISTS "expression_student_insert" ON public.expression_submissions;
 CREATE POLICY "expression_student_insert"
   ON public.expression_submissions FOR INSERT TO authenticated
   WITH CHECK (
     student_id = auth.uid()
     AND public.is_expression_teacher(teacher_id)
   );
-
-DROP POLICY IF EXISTS "expression_teacher_update"
-  ON public.expression_submissions;
-CREATE POLICY "expression_teacher_update"
-  ON public.expression_submissions FOR UPDATE TO authenticated
-  USING (teacher_id = auth.uid())
-  WITH CHECK (teacher_id = auth.uid());
-
-CREATE OR REPLACE FUNCTION public.get_expression_teachers()
-RETURNS TABLE(id uuid, prenom text, nom text)
-LANGUAGE sql SECURITY DEFINER SET search_path = public
-AS $$
-  SELECT p.id, p.prenom, p.nom
-  FROM public.profiles p
-  WHERE p.role IN ('prof', 'admin') AND p.id <> auth.uid()
-  ORDER BY p.nom NULLS LAST, p.prenom NULLS LAST;
-$$;
 
 DROP FUNCTION IF EXISTS public.get_expression_inbox();
 CREATE FUNCTION public.get_expression_inbox()
@@ -159,20 +106,5 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION public.mark_expression_read(submission uuid)
-RETURNS void
-LANGUAGE plpgsql SECURITY DEFINER SET search_path = public
-AS $$
-BEGIN
-  UPDATE public.expression_submissions
-  SET
-    teacher_read_at = CASE WHEN teacher_id = auth.uid() THEN now() ELSE teacher_read_at END,
-    student_read_at = CASE WHEN student_id = auth.uid() THEN now() ELSE student_read_at END
-  WHERE id = submission AND (teacher_id = auth.uid() OR student_id = auth.uid());
-END;
-$$;
-
-GRANT EXECUTE ON FUNCTION public.get_expression_teachers() TO authenticated;
 GRANT EXECUTE ON FUNCTION public.get_expression_inbox() TO authenticated;
 GRANT EXECUTE ON FUNCTION public.get_expression_unread_count() TO authenticated;
-GRANT EXECUTE ON FUNCTION public.mark_expression_read(uuid) TO authenticated;

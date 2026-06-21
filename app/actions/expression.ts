@@ -15,6 +15,7 @@ export type ExpressionInboxRow = {
   created_at: string;
   reviewed_at: string | null;
   unread: boolean;
+  direction: "sent" | "received";
   correspondent_name: string;
 };
 export type ExpressionSubmission = {
@@ -78,7 +79,15 @@ export async function submitExpressionAction(input: {
     original_text: text,
     ai_feedback: input.aiFeedback,
   });
-  if (error) return { ok: false, reason: error.message };
+  if (error) {
+    if (error.code === "42501") {
+      return {
+        ok: false,
+        reason: "La règle d’envoi Supabase doit être mise à jour. Exécutez la migration 20260620140000.",
+      };
+    }
+    return { ok: false, reason: error.message };
+  }
   revalidatePath("/messagerie");
   return { ok: true };
 }
@@ -97,14 +106,14 @@ export async function getExpressionUnreadCountAction(): Promise<number> {
   return Number(data ?? 0);
 }
 
-export async function getExpressionSubmissionAction(id: string): Promise<{ item: ExpressionSubmission | null; role: string }> {
+export async function getExpressionSubmissionAction(id: string): Promise<{ item: ExpressionSubmission | null; isTeacher: boolean }> {
   const session = await currentSession();
-  if (!session) return { item: null, role: "eleve" };
+  if (!session) return { item: null, isTeacher: false };
   const { data } = await session.supabase.from("expression_submissions").select("*").eq("id", id).single();
-  if (!data) return { item: null, role: session.role };
+  if (!data) return { item: null, isTeacher: false };
 
   await session.supabase.rpc("mark_expression_read", { submission: id });
-  return { item: data as ExpressionSubmission, role: session.role };
+  return { item: data as ExpressionSubmission, isTeacher: data.teacher_id === session.user.id };
 }
 
 export async function reviewExpressionAction(input: {

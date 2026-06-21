@@ -4,7 +4,7 @@ import { ExpressionSubmissionDetail } from "@/components/expression/ExpressionSu
 
 export default async function SubmissionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { item, role } = await getExpressionSubmissionAction(id);
+  const { item, isTeacher } = await getExpressionSubmissionAction(id);
   if (!item) notFound();
-  return <ExpressionSubmissionDetail item={item} isTeacher={role === "prof" || role === "admin"} />;
+  return <ExpressionSubmissionDetail item={item} isTeacher={isTeacher} />;
 }
