@@ -290,6 +290,7 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
         ti: "ብ depuis, il y a, pendant, dans, pour ምሉእ ግበር።",
         uk: "Доповніть: depuis, il y a, pendant, dans, pour.",
       },
+      items: [],
       pool: [
         { sentence: "J'apprends le français ___ deux ans.", hint: "action toujours en cours", answer: "depuis" },
         { sentence: "Il est parti ___ une heure.", hint: "moment dans le passé", answer: "il y a" },
@@ -315,6 +316,7 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
         ti: "ብቕኑዕ ናይ ግዜ መፈለዪ ምሉእ ግበር።",
         uk: "Доповніть правильним часовим маркером.",
       },
+      items: [],
       pool: [
         { sentence: "___, je vais au marché.", hint: "aujourd'hui / maintenant / ce matin", answer: "Aujourd'hui" },
         { sentence: "___, il faisait très froid.", hint: "passé récent", answer: "Hier" },
@@ -339,6 +341,7 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
         uk: "Розсортуйте кожен вираз за часом, який він вказує.",
       },
       categories: ["Passé", "Présent", "Futur"],
+      items: [],
       pool: [
         { word: "il y a deux jours", categoryIdx: 0 },
         { word: "l'année dernière", categoryIdx: 0 },
@@ -366,6 +369,7 @@ export const GR_MARQUEURS_TEMPS_COMPLET: GrammarLesson = {
         ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።",
         uk: "Розставте слова в правильному порядку.",
       },
+      items: [],
       pool: [
         { sentence: "J'apprends le français depuis trois ans.", words: ["J'apprends", "le", "français", "depuis", "trois", "ans."] },
         { sentence: "Il est parti il y a une semaine.", words: ["Il", "est", "parti", "il", "y", "a", "une", "semaine."] },
