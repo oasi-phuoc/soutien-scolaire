@@ -1114,11 +1114,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 const isListeningI = listenersT[i]!;
                 const onStartI = startersT[i]!;
                 const onStopI = stoppersT[i]!;
+                const grammar = task1Done ? (task1Lines[i * 2 + 1]?.grammar ?? []) : [];
                 return (
                   <div
                     key={i}
-                    className="rounded-[var(--radius-md)] px-4 py-3 space-y-2"
-                    style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
+                    className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
+                    style={{ borderColor: ACCENT }}
                   >
                     <div className="flex items-center gap-3">
                       <span
@@ -1146,6 +1147,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         {supported ? "Maintenez le micro pour enregistrer…" : ""}
                       </p>
                     ) : null}
+                    {grammar.length > 0 && (
+                      <ul className="pl-9 space-y-0.5">
+                        {grammar.map((g, gi) => (
+                          <li key={gi} className="text-[10px] leading-snug text-amber-600">
+                            {g.shortMessage || g.message}
+                            {g.replacements?.length ? ` → ${g.replacements.slice(0, 2).map((r) => r.value).join(" / ")}` : ""}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     {!task1Done && !supported && (
                       <input
                         type="text"
@@ -1164,12 +1175,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
 
             {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
-
-            {task1Done && task1Lines.length > 0 && (
-              <div className="space-y-2">
-                {task1Lines.map((line, i) => <DialogueBubble key={i} line={line} />)}
-              </div>
-            )}
 
             {task1Done && (
               <p className="text-center text-sm text-[var(--color-text-secondary)]">
@@ -1201,8 +1206,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {/* Current question card */}
           {!interviewDone && (
             <div
-              className="rounded-[var(--radius-md)] px-4 py-3 space-y-2"
-              style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
+              className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
+              style={{ borderColor: ACCENT }}
             >
               <div className="flex items-center gap-3">
                 <span
