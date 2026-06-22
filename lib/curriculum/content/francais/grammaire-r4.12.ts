@@ -45,7 +45,8 @@ export const A2_GR_L07: GrammarLesson = {
         uk: [["{a}Висхідна інтонація{/a}", "неформальний / усний", "Tu parles français {a}↗{/a} ? (Ти говориш французькою?)"], ["{a}Est-ce que{/a} + підмет + дієслово", "нейтральний / поширений", "Est-ce que tu parles français ? (Ти говориш французькою?)"], ["{a}Інверсія{/a} дієслово-підмет", "формальний / письмовий", "Parlez-vous français ? (Ви говорите французькою?)"]],
       },
     },
-    { type: "heading", text: "Est-ce que (forme la plus courante)", sub: true, accent: true, trans: { en: "Est-ce que (the most common form)", ar: "Est-ce que (الشكل الأكثر شيوعاً)", fa: "Est-ce que (رایج‌ترین شکل)", ti: "Est-ce que (እቲ ዝበዝሐ ልሙድ ቅርጺ)", uk: "Est-ce que (найпоширеніша форма)" } },
+    { type: "heading", text: 'Questions avec "Est-ce que"', sub: true, trans: { en: 'Questions with "Est-ce que"', ar: 'الأسئلة بـ "Est-ce que"', fa: 'سوالات با "Est-ce que"', ti: 'ሕቶታት ብ "Est-ce que"', uk: 'Питання з "Est-ce que"' } },
+    { type: "plain_list", items: ["C'est la forme la plus courante qui est utilisée."] },
     {
       type: "grid",
       headers: ["Affirmatif", "Question avec est-ce que"],
@@ -70,7 +71,8 @@ export const A2_GR_L07: GrammarLesson = {
         uk: [["Tu aimes le café. (Ти любиш каву.)", "{a}Est-ce que{/a} tu aimes le café ? (Ти любиш каву?)"], ["Il est libre. (Він вільний.)", "{a}Est-ce qu'{/a}il est libre ? (Він вільний?)"], ["Vous avez le temps. (У вас є час.)", "{a}Est-ce que{/a} vous avez le temps ? (У вас є час?)"], ["Elles sont arrivées. (Вони прибули.)", "{a}Est-ce qu'{/a}elles sont arrivées ? (Вони прибули?)"]],
       },
     },
-    { type: "heading", text: "L'inversion verbe-sujet (formel)", sub: true, accent: true, trans: { en: "Verb-subject inversion (formal)", ar: "القلب فعل-فاعل (رسمي)", fa: "وارونگی فعل-فاعل (رسمی)", ti: "ምግልባጥ ግሲ-ርእሲ (ወግዓዊ)", uk: "Інверсія дієслово-підмет (формальна)" } },
+    { type: "heading", text: "L'inversion verbe-sujet", sub: true, trans: { en: "Verb-subject inversion", ar: "القلب فعل-فاعل", fa: "وارونگی فعل-فاعل", ti: "ምግልባጥ ግሲ-ርእሲ", uk: "Інверсія дієслово-підмет" } },
+    { type: "plain_list", items: ["C'est la forme formelle, utilisée principalement à l'écrit et dans les situations officielles."] },
     {
       type: "grid",
       headers: ["Affirmatif", "Inversion"],
