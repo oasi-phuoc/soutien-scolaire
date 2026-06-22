@@ -1437,15 +1437,34 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </h2>
           </div>
 
-          {/* Full dialogue */}
-          <section>
-            <h3 className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">Dialogue complet</h3>
-            <div className="space-y-2">
-              {fullDialogue.map((line, i) => (
-                <DialogueBubble key={i} line={{ ...line, grammar: undefined }} />
-              ))}
-            </div>
-          </section>
+          {/* Dialogue split by section */}
+          <div className="space-y-5">
+            {[
+              { num: 1, label: "Partie 1 — Questions thématiques", lines: task1Lines },
+              { num: 2, label: "Partie 2 — Entretien dirigé",       lines: interviewLines },
+              { num: 3, label: "Partie 3 — Description d'image",    lines: task2Lines },
+              { num: 4, label: "Partie 4 — Dialogue",               lines: task4Lines },
+            ].filter(({ lines }) => lines.length > 0).map(({ num, label, lines }) => (
+              <section key={num}>
+                <div className="mb-2 flex items-center gap-2">
+                  <span
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                    style={{ background: ACCENT }}
+                  >
+                    {num}
+                  </span>
+                  <h3 className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                    {label}
+                  </h3>
+                </div>
+                <div className="space-y-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+                  {lines.map((line, i) => (
+                    <DialogueBubble key={i} line={{ ...line, grammar: undefined }} />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
 
           {/* Send to teacher */}
           <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/5 p-4">
