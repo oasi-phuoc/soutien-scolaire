@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import { GENERATED_ALGEBRA_LESSONS, generateAlgebraQuestions } from "@/lib/curriculum/content/math/generated-algebra-exercises";
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
@@ -3214,6 +3215,14 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 3, 3) });
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
       steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
+    } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
+      generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
+        steps.push({ kind: "exercise", lesson, item }),
+      );
+      steps.push({ kind: "eval_start", lesson });
+      generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
+        steps.push({ kind: "exercise", lesson, item }),
+      );
     } else {
       if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5" && sid !== "A5-2") {
         const pool = lesson.exercisePool;
@@ -3233,7 +3242,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
-    !!G5_VOLUME_PLACEMENT[l.submoduleId]
+    !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
+    GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
