@@ -2864,6 +2864,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
           exercises={lesson.exercises.map((ex, i) => ({
             id: String(i),
             label: ex.title ?? `Exercice ${i + 1}`,
+            preview: <ExerciseView exercise={ex} onValidated={() => {}} validateCommand={0} onCanValidateChange={() => {}} />,
           }))}
           accentColor="var(--color-accent-fr)"
         />

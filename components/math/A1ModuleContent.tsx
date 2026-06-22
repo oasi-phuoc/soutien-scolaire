@@ -2708,10 +2708,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           onPrint={handlePrint}
           exercises={steps
             .filter((candidate) => candidate.startsWith("ex"))
-            .map((candidate, index) => ({
-              id: candidate,
-              label: `Exercice ${index + 1}`,
-            }))}
+            .map((candidate, index) => {
+              const hint = getA1StepHint(candidate);
+              return {
+                id: candidate,
+                label: `Exercice ${index + 1}`,
+                preview: hint ? <p className="text-xs italic text-zinc-500">{hint}</p> : undefined,
+              };
+            })}
           accentColor="var(--color-accent-alg)"
         />
       )}
