@@ -86,7 +86,6 @@ import { A1_GR_L02 } from "./content/francais/grammaire-r1.7";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-r1.8";
 import { A1_GR_L03 } from "./content/francais/grammaire-r1.4";
 import { A1_GR_L04 } from "./content/francais/grammaire-r1.3";
-import { A1_GR_L06 } from "./content/francais/grammaire-r1.7b";
 import { A1_GR_L10 } from "./content/francais/grammaire-r2.4";
 import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
 import { A1_GR_TIME_EXPRESSIONS } from "./content/francais/grammaire-r4.2-temps";
@@ -106,12 +105,6 @@ import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
 import { A1_GR_L23 } from "./content/francais/grammaire-r3.7b";
-import { A1_GR_L24 } from "./content/francais/grammaire-r4.7";
-
-import { A1_GR_L07 } from "./content/francais/grammaire-r3.4";
-import { A1_GR_L08 } from "./content/francais/grammaire-r3.5";
-import { A1_GR_L09 } from "./content/francais/grammaire-r3.6";
-import { A1_GR_L20 } from "./content/francais/grammaire-r3.7";
 import { A2_GR_L07 } from "./content/francais/grammaire-r4.12";
 import { A2_GR_L09 } from "./content/francais/grammaire-r4.13";
 import { A2_GR_L11 } from "./content/francais/grammaire-r4.17";
@@ -139,7 +132,6 @@ import { A1_CONJ_L28 } from "./content/francais/grammaire-r4.3";
 import { A1_CONJ_L29 } from "./content/francais/grammaire-r4.4";
 import { A1_CONJ_L30 } from "./content/francais/grammaire-r4.5";
 import { NEGATION_PASSE_COMPOSE } from "./content/francais/grammaire-r4.6";
-import { A2_CONJ_L01 } from "./content/francais/grammaire-r4.9";
 import { A2_CONJ_L02 } from "./content/francais/grammaire-r4.10";
 
 import { A2_CONJ_L04 } from "./content/francais/grammaire-r4.14";
@@ -147,7 +139,6 @@ import { A2_CONJ_L05 } from "./content/francais/grammaire-r4.15";
 import { A2_GR_CONDITIONNEL } from "./content/francais/grammaire-r6.2";
 import { A2_GR_GERONDIF } from "./content/francais/grammaire-r6.4";
 import { A2_GR_SUBJONCTIF } from "./content/francais/grammaire-r6.5";
-import { A2_CONJ_L06 } from "./content/francais/grammaire-r4.24";
 import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
 import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
 import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
@@ -222,7 +213,6 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_INTERRO,
   A1_GR_L03,
   A1_GR_L04,
-  A1_GR_L06,
   A1_GR_L10,
   ADJECTIFS_QUALIFICATIFS,
   A1_GR_L18,
@@ -242,12 +232,6 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_SUPERLATIF,
   GR_MARQUEURS_TEMPS_COMPLET,
 
-  A1_GR_L24,
-
-  A1_GR_L07,
-  A1_GR_L08,
-  A1_GR_L09,
-  A1_GR_L20,
   A2_GR_L07,
   A2_GR_L09,
   A2_GR_L19,
@@ -282,12 +266,10 @@ const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L29,
   A1_CONJ_L30,
   NEGATION_PASSE_COMPOSE,
-  A2_CONJ_L01,
   A2_CONJ_L02,
 
   A2_CONJ_L04,
   A2_CONJ_L05,
-  A2_CONJ_L06,
   A2_CONJ_L07,
   A2_CONJ_L08,
 ];
