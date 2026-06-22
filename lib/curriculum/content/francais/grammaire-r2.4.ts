@@ -4,9 +4,9 @@ export const A1_GR_L10: GrammarLesson = {
   slug: "a1-gr-l10",
   code: "RI.4",
   level: "A1",
-  title: "Les mots interrogatifs",
+  title: "Les questions ouvertes",
   theory: [
-    { type: "heading", text: "Les mots interrogatifs", trans: { en: "Question words", ar: "أدوات الاستفهام", fa: "کلمات پرسشی", ti: "ናይ ሕቶ ቃላት", uk: "Питальні слова" } },
+    { type: "heading", text: "Les questions ouvertes", trans: { en: "Open questions", ar: "الأسئلة المفتوحة", fa: "سؤالات باز", ti: "ክፉት ሕቶታት", uk: "Відкриті запитання" } },
     {
       type: "plain_list",
       items: [
@@ -50,7 +50,7 @@ export const A1_GR_L10: GrammarLesson = {
         ["{a}Quel / Quelle ?{/a}", "choix parmi plusieurs", "Quel bus prends-tu ?"],
       ],
     },
-    { type: "heading", text: "Deux façons de construire la question", sub: true, trans: { en: "Two ways to build the question", ar: "طريقتان لبناء السؤال", fa: "دو روش برای ساختن سؤال", ti: "ሕቶ ንምስራሕ ክልተ መንገድታት", uk: "Два способи побудувати запитання" } },
+    { type: "heading", text: "Trois façons de construire la question", sub: true, trans: { en: "Three ways to build the question", ar: "ثلاث طرق لبناء السؤال", fa: "سه روش برای ساختن سؤال", ti: "ሕቶ ንምስራሕ ሰለስተ መንገድታት", uk: "Три способи побудувати запитання" } },
     {
       type: "highlight",
       label: "Registre neutre",
@@ -68,6 +68,26 @@ export const A1_GR_L10: GrammarLesson = {
         fa: ["کلمه‌ی پرسشی + {a}est-ce que{/a} + فاعل + فعل؟", "Où est-ce que tu habites ? (کجا زندگی می‌کنی؟)", "Quand est-ce qu'il arrive ? (کِی می‌رسد؟)", "Comment est-ce que vous vous appelez ? (نامتان چیست؟)"],
         ti: ["ናይ ሕቶ ቃል + {a}est-ce que{/a} + ርእሲ + ግሲ?", "Où est-ce que tu habites ? (ኣበይ ትቕመጥ?)", "Quand est-ce qu'il arrive ? (መዓስ ይመጽእ?)", "Comment est-ce que vous vous appelez ? (መን ትብሃሉ?)"],
         uk: ["Питальне слово + {a}est-ce que{/a} + підмет + дієслово?", "Où est-ce que tu habites ? (Де ти живеш?)", "Quand est-ce qu'il arrive ? (Коли він приїжджає?)", "Comment est-ce que vous vous appelez ? (Як вас звати?)"],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Registre formel — L'inversion",
+      items: [
+        "Mot interrogatif + {a}verbe-sujet{/a} ?",
+        "Où vas-{a}tu{/a} ?",
+        "Quand part-{a}il{/a} ?",
+        "Comment vous appelez-{a}vous{/a} ?",
+        "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a} : Où va-{a}t-il{/a} ? / Quand mange-{a}t-elle{/a} ?",
+      ],
+      noBulletItems: [0],
+      transLabel: { en: "Formal register — Inversion", ar: "المستوى الرسمي — القلب", fa: "سطح رسمی — وارونگی", ti: "ወግዓዊ ደረጃ — ምልዋጥ", uk: "Формальний регістр — інверсія" },
+      transItems: {
+        en: ["Question word + {a}verb-subject{/a}?", "Où vas-{a}tu{/a} ? (Where are you going?)", "Quand part-{a}il{/a} ? (When does he leave?)", "Comment vous appelez-{a}vous{/a} ? (What is your name?)", "When the verb ends in a vowel + il/elle/on, add {a}-t-{/a}: Où va-{a}t-il{/a}? / Quand mange-{a}t-elle{/a}?"],
+        ar: ["أداة الاستفهام + {a}الفعل-الفاعل{/a}؟", "Où vas-{a}tu{/a} ؟ (إلى أين تذهب؟)", "Quand part-{a}il{/a} ؟ (متى يغادر؟)", "Comment vous appelez-{a}vous{/a} ؟ (ما اسمك؟)", "إذا انتهى الفعل بحرف علة + il/elle/on، نضيف {a}-t-{/a}: Où va-{a}t-il{/a} ؟ / Quand mange-{a}t-elle{/a} ؟"],
+        fa: ["کلمه‌ی پرسشی + {a}فعل-فاعل{/a}؟", "Où vas-{a}tu{/a} ? (کجا می‌روی؟)", "Quand part-{a}il{/a} ? (کِی می‌رود؟)", "Comment vous appelez-{a}vous{/a} ? (نامتان چیست؟)", "وقتی فعل به مصوت + il/elle/on ختم می‌شود، {a}-t-{/a} اضافه می‌شود: Où va-{a}t-il{/a} ? / Quand mange-{a}t-elle{/a} ?"],
+        ti: ["ናይ ሕቶ ቃል + {a}ግሲ-ርእሲ{/a}?", "Où vas-{a}tu{/a} ? (ናበይ ትኸድ?)", "Quand part-{a}il{/a} ? (መዓስ ይብገስ?)", "Comment vous appelez-{a}vous{/a} ? (መን ትብሃሉ?)", "ግሲ ብ il/elle/on ምስ ዝውዳእ፣ {a}-t-{/a} ንውስኽ: Où va-{a}t-il{/a} ? / Quand mange-{a}t-elle{/a} ?"],
+        uk: ["Питальне слово + {a}дієслово-підмет{/a}?", "Où vas-{a}tu{/a} ? (Куди ти йдеш?)", "Quand part-{a}il{/a} ? (Коли він від'їжджає?)", "Comment vous appelez-{a}vous{/a} ? (Як вас звати?)", "Коли дієслово закінчується на голосну + il/elle/on, додаємо {a}-t-{/a}: Où va-{a}t-il{/a} ? / Quand mange-{a}t-elle{/a} ?"],
       },
     },
     {

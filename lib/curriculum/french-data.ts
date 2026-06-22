@@ -131,7 +131,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-interro", "R1.8",  "L'interrogation de base",                  "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
   lesson("A2", "a2-gr-l07",    "RX.12", "Les questions fermées",                      "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
   lesson("A2", "a2-gr-l09",    "RX.13", "Répondre aux questions fermées",             "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
-  lesson("A1", "a1-gr-l10",    "RI.4",  "Les mots interrogatifs",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
+  lesson("A1", "a1-gr-l10",    "RI.4",  "Les questions ouvertes",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
 
   // ── G3 — Les adjectifs A1 ────────────────────────────────────────────────────
   lesson("A1", "a1-gr-l23",   "R3.7", "Les adjectifs qualificatifs",                 "Genre, nombre et place de l'adjectif dans la phrase.",                                  "grammaire"),
