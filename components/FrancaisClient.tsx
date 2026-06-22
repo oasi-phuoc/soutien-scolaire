@@ -139,7 +139,7 @@ function _VocabFlatList({
   vocabGrades: Record<string, { score: number; passed: boolean }>;
 }) {
   return (
-    <div className="rounded-[var(--radius-lg)] border border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-primary)]">
+    <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-primary)]">
       <ul className="divide-y divide-[var(--color-border-default)]">
         {themes.map((th) => {
           const ls: LessonState = !hydrated ? "locked" : completedSlugs.has(th.slug) ? "completed" : "available";
@@ -247,7 +247,7 @@ function SectionCard({
 
   return (
     <div
-      className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
+      className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
         locked
           ? "border-[var(--color-border-default)] opacity-50"
           : inProgress || expanded
