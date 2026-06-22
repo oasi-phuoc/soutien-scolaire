@@ -14,12 +14,7 @@ import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
-import {
-  PrintConfigSheet,
-  PrintDocumentFooter,
-  PrintDocumentHeader,
-  type PrintConfig,
-} from "@/components/ui/PrintConfigSheet";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import {
@@ -4674,15 +4669,9 @@ export function GenericModuleContent({
 
   // Print config sheet
   const [showPrintConfig, setShowPrintConfig] = useState(false);
-  const [printConfig, setPrintConfig] = useState<PrintConfig | null>(null);
 
-  const handlePrint = useCallback((config: PrintConfig) => {
-    setPrintConfig(config);
+  const handlePrint = useCallback(() => {
     setShowPrintConfig(false);
-    setTimeout(() => {
-      import("@/lib/utils/print").then((m) => m.triggerPrint());
-      setTimeout(() => setPrintConfig(null), 1000);
-    }, 150);
   }, []);
 
   // Eval phase state
@@ -6851,54 +6840,7 @@ export function GenericModuleContent({
 
       {/* Theory */}
       {currentStep?.kind === "theory" && (
-        <>
-          {printConfig && (
-            <div className="hidden print:block">
-              <PrintDocumentHeader config={printConfig.header} />
-            </div>
-          )}
-          <div className={printConfig && !printConfig.theory ? "print:hidden" : undefined}>
-            <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
-          </div>
-          {/* Print-only exercise list */}
-          {printConfig && trainingExercisePrompts.length > 0 && (
-            (() => {
-              const includedExs = trainingExercisePrompts
-                .map((prompt, i) => ({
-                  prompt,
-                  sel: printConfig.exerciseSelection.find((s) => s.id === String(i)),
-                }))
-                .filter(({ sel }) => sel?.included !== false);
-              if (includedExs.length === 0) return null;
-              return (
-                <div className="mt-6 hidden print:block">
-                  <h3 className="mb-3 text-sm font-bold">Exercices d&apos;entraînement</h3>
-                  <ol className="space-y-5">
-                    {includedExs.flatMap(({ prompt, sel }, i) =>
-                      Array.from({ length: sel?.occurrences ?? 1 }).map((_, rep) => (
-                        <li key={`${i}-${rep}`} className="text-sm">
-                          <div className="flex items-start gap-2">
-                            <span className="shrink-0 font-bold">{i + 1}{(sel?.occurrences ?? 1) > 1 ? ` (${rep + 1})` : ""}.</span>
-                            <div className="flex-1">
-                              <p>{prompt}</p>
-                              {printConfig.evalMode && (
-                                <span className="text-xs text-gray-500"> / {sel?.points ?? 1} pt{(sel?.points ?? 1) > 1 ? "s" : ""}</span>
-                              )}
-                              <div className="mt-3 h-px border-b border-black/30" />
-                            </div>
-                          </div>
-                        </li>
-                      ))
-                    )}
-                  </ol>
-                </div>
-              );
-            })()
-          )}
-          {printConfig && (
-            <PrintDocumentFooter date={printConfig.printDate} version={printConfig.version} />
-          )}
-        </>
+        <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
       )}
 
       {/* Exercise */}

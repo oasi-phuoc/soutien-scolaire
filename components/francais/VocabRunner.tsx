@@ -21,7 +21,7 @@ import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
-import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 interface Props {
   theme: VocabTheme;
@@ -133,11 +133,8 @@ export function VocabRunner({ theme }: Props) {
   const [showHint, setShowHint] = useState(false);
   const [showPrintConfig, setShowPrintConfig] = useState(false);
 
-  const handlePrint = (_config: PrintConfig) => {
+  const handlePrint = () => {
     setShowPrintConfig(false);
-    setTimeout(() => {
-      import("@/lib/utils/print").then((m) => m.triggerPrint());
-    }, 150);
   };
 
   const [_canValidate, setCanValidate] = useState(false);

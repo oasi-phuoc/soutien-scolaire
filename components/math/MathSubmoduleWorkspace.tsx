@@ -28,7 +28,7 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
-import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
 import { G3AreaExercise } from "@/components/math/geo/G3AreaExercises";
@@ -1710,11 +1710,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [showHint, setShowHint] = useState(false);
   const [showPrintConfig, setShowPrintConfig] = useState(false);
 
-  const handlePrint = useCallback((_config: PrintConfig) => {
+  const handlePrint = useCallback(() => {
     setShowPrintConfig(false);
-    setTimeout(() => {
-      import("@/lib/utils/print").then((m) => m.triggerPrint());
-    }, 150);
   }, []);
 
   const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});

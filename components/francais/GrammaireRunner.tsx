@@ -16,7 +16,7 @@ import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
-import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -2559,11 +2559,8 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [showHint, setShowHint] = useState(false);
   const [showPrintConfig, setShowPrintConfig] = useState(false);
 
-  const handlePrint = useCallback((_config: PrintConfig) => {
+  const handlePrint = useCallback(() => {
     setShowPrintConfig(false);
-    setTimeout(() => {
-      import("@/lib/utils/print").then((m) => m.triggerPrint());
-    }, 150);
   }, []);
 
   const [timeLeft, setTimeLeft] = useState<number | null>(null);

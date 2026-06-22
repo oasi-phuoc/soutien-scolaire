@@ -22,7 +22,7 @@ import {
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
-import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import {
   LEVEL_PASSING_GRADES,
@@ -1880,11 +1880,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const [showHint, setShowHint] = useState(false);
   const [showPrintConfig, setShowPrintConfig] = useState(false);
 
-  const handlePrint = (_config: PrintConfig) => {
+  const handlePrint = () => {
     setShowPrintConfig(false);
-    setTimeout(() => {
-      import("@/lib/utils/print").then((m) => m.triggerPrint());
-    }, 150);
   };
 
   // Exercice 2 — écrire les nombres (1–10)

@@ -15,3 +15,45 @@ export function triggerPrint() {
     window.print();
   }
 }
+
+/**
+ * Extracts all CSS from the current page (style tags + same-origin stylesheets).
+ */
+export function capturePageCss(): string {
+  if (typeof document === "undefined") return "";
+  const styles: string[] = [];
+  document.querySelectorAll("style").forEach((el) => {
+    if (el.textContent) styles.push(el.textContent);
+  });
+  Array.from(document.styleSheets).forEach((sheet) => {
+    if (sheet.href && !sheet.href.startsWith(window.location.origin)) return;
+    try {
+      Array.from(sheet.cssRules || []).forEach((rule) => styles.push(rule.cssText));
+    } catch { /* cross-origin, skip */ }
+  });
+  return styles.join("\n");
+}
+
+/**
+ * Opens a new popup window, writes the given HTML, and triggers the print dialog.
+ */
+export function openPrintPopup(
+  htmlContent: string,
+  options: { title?: string; width?: number; height?: number } = {}
+): Window | null {
+  if (typeof window === "undefined") return null;
+  const { title = "Impression", width = 1000, height = 800 } = options;
+  const popup = window.open("", "_blank", `width=${width},height=${height}`);
+  if (!popup) {
+    window.alert("Le navigateur a bloqué la fenêtre d'impression. Veuillez autoriser les popups pour ce site.");
+    return null;
+  }
+  popup.document.write(htmlContent);
+  popup.document.title = title;
+  popup.document.close();
+  popup.onload = () => {
+    popup.focus();
+    popup.print();
+  };
+  return popup;
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 
 export interface PrintExercise {
   id: string;
@@ -62,9 +63,8 @@ export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
       <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(70px,0.7fr)_minmax(0,1.45fr)] items-center gap-[3%] border-b border-black pb-[1.5%]">
         <p className="text-[clamp(9px,2.6vw,18px)] font-bold uppercase leading-tight">Classe d&apos;accueil</p>
         <div className="flex min-w-0 items-center justify-center gap-1.5">
-          <div className="flex h-11 w-6 shrink-0 -skew-y-6 flex-col items-center justify-center bg-red-600 text-[6px] font-bold leading-none text-white">
-            <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-etat-du-valais.png" alt="" className="h-11 w-auto shrink-0" style={{ objectFit: "contain" }} />
           <p className="text-center text-[clamp(4px,0.9vw,7px)] font-bold uppercase leading-tight">Canton du Valais<br />Kanton Wallis</p>
         </div>
         <div className="min-w-0 text-[clamp(4px,0.9vw,7px)] leading-tight">
@@ -102,9 +102,18 @@ export function PrintDocumentFooter({
 }) {
   return (
     <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[7px] leading-tight text-black`}>
-      <div>
-        <p>Référence : LearnUP - Van Thanh Phuoc</p>
-        <p>Date de l&apos;impression : {date}</p>
+      <div className="flex items-center gap-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-pied-page.png"
+          alt=""
+          style={{ height: 19, objectFit: "contain" }}
+          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+        />
+        <div>
+          <p>Zone Industrielle 4, 1963 Vétroz</p>
+          <p>Tél. 027 606 18 60</p>
+        </div>
       </div>
       <div className="text-right">
         <p>Version {version}</p>
@@ -232,14 +241,14 @@ export function PrintConfigSheet({
 
   const handlePrint = () => {
     setHasPrinted(true);
-    onPrint({
-      theory,
-      evalMode,
-      exerciseSelection: selection,
-      header,
-      printDate,
-      version,
-    });
+    const node = document.getElementById("print-all-pages-container");
+    if (node) {
+      const css = capturePageCss();
+      const base = window.location.origin;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin:0;}html,body{margin:0;padding:0;background:white;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-popup-page{page-break-after:always;break-after:page;}.print-popup-page:last-child{page-break-after:auto;break-after:auto;}</style></head><body>${node.innerHTML}</body></html>`;
+      openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
+    }
+    onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
   };
 
   const hasPrintableContent = theory || selection.some((item) => item.included && item.occurrences > 0);
@@ -603,6 +612,53 @@ export function PrintConfigSheet({
         >
           Suivant
         </button>
+      </div>
+
+      {/* Hidden container for popup printing — all pages rendered at once */}
+      <div id="print-all-pages-container" className="hidden" aria-hidden="true">
+        {previewPages.map((page, pageIndex) => (
+          <div
+            key={pageIndex}
+            className="print-popup-page flex flex-col bg-white text-black"
+            style={{ width: "210mm", minHeight: "297mm", padding: "15mm" }}
+          >
+            <PrintDocumentHeader config={header} />
+            <div className="flex-1 text-[10px] leading-relaxed">
+              {page.showTheory && (
+                <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
+                  {theoryPreview ?? (
+                    <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
+                  )}
+                </div>
+              )}
+              {page.exercises.length > 0 && (
+                <ol className="space-y-5">
+                  {page.exercises.map((item, exIndex) => (
+                    <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
+                      <div className="mb-1 flex items-start gap-2 text-[10px] font-bold">
+                        <span>{pageIndex * 4 + exIndex + 1}.</span>
+                        <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
+                        {evalMode && (
+                          <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
+                        )}
+                      </div>
+                      <div className="pl-5 [&_button]:pointer-events-none">
+                        {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+            <PrintDocumentFooter
+              date={printDate}
+              version={version}
+              preview
+              page={pageIndex + 1}
+              totalPages={previewPages.length}
+            />
+          </div>
+        ))}
       </div>
 
       {showExitWarning && (
