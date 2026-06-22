@@ -16,6 +16,10 @@ type GrammarProfile = {
   cases: GrammarCase[];
   instruction1?: string;
   instruction2?: string;
+  instruction4?: string;
+  instruction5?: string;
+  inversionPool?: Record<ExerciseDifficulty, string[]>;
+  wordPool?: Record<ExerciseDifficulty, string[]>;
 };
 
 const TRANSFORMATION_TASKS: Record<string, string[]> = {
@@ -190,17 +194,31 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
     },
     {
       type: "write",
-      title: `Exercice 4 — Transformer une phrase : ${profile.label}`,
-      instruction: "Transformez la phrase en respectant précisément la consigne.",
-      levelPromptPools: transformationPrompts,
+      title: `Exercice 4 — ${profile.label}`,
+      instruction: profile.instruction4 ?? "Transformez la phrase en respectant précisément la consigne.",
+      levelPromptPools: profile.inversionPool
+        ? (Object.fromEntries(
+            (["A1", "A2", "B1"] as const).map((level) => [
+              level,
+              (profile.inversionPool![level] ?? []).map((q) => `Transformez en inversion : « ${q} »`),
+            ]),
+          ) as Record<ExerciseDifficulty, string[]>)
+        : transformationPrompts,
       promptPoolSize: 5,
       promptLayout: "stacked",
     },
     {
       type: "write",
-      title: `Exercice 5 — Production écrite : ${profile.label}`,
-      instruction: "Rédigez le texte demandé en respectant la notion de la leçon.",
-      levelPromptPools: writingPrompts,
+      title: `Exercice 5 — ${profile.wordPool ? "Poser une question" : "Production écrite"} : ${profile.label}`,
+      instruction: profile.instruction5 ?? "Rédigez le texte demandé en respectant la notion de la leçon.",
+      levelPromptPools: profile.wordPool
+        ? (Object.fromEntries(
+            (["A1", "A2", "B1"] as const).map((level) => [
+              level,
+              (profile.wordPool![level] ?? []).map((w) => `Posez une question fermée avec le mot : « ${w} »`),
+            ]),
+          ) as Record<ExerciseDifficulty, string[]>)
+        : writingPrompts,
       promptPoolSize: 5,
       promptLayout: "stacked",
     },
@@ -356,6 +374,8 @@ const PROFILES: Record<string, GrammarProfile> = {
     label: "Les questions fermées",
     instruction1: "Complétez chaque phrase avec la forme correcte : Est-ce que ou Est-ce qu'.",
     instruction2: "Complétez chaque phrase avec la forme correcte : Est-ce que ou Est-ce qu'.",
+    instruction4: "Transformez chaque question en posant une question avec l'inversion sujet-verbe.",
+    instruction5: "Posez une question fermée en utilisant le mot ou les mots donnés. Utilisez l'inversion, Est-ce que ou l'intonation montante.",
     choices: ["Est-ce que", "Est-ce qu'", "Habitez-vous", "Avez-vous"],
     cases: [
       { sentence: "___ vous travaillez demain ?", answer: "Est-ce que" },
@@ -369,6 +389,94 @@ const PROFILES: Record<string, GrammarProfile> = {
       { sentence: "___ le magasin est ouvert ?", answer: "Est-ce que" },
       { sentence: "___ on peut entrer ?", answer: "Est-ce qu'" },
     ],
+    inversionPool: {
+      A1: [
+        "Tu parles français ?",
+        "Il est libre ?",
+        "Elle a faim ?",
+        "Vous êtes prêts ?",
+        "Tu habites ici ?",
+        "Il aime le café ?",
+        "Elle travaille ici ?",
+        "Vous avez le temps ?",
+        "Tu viens demain ?",
+        "Il comprend ?",
+        "Elle mange ici ?",
+        "Vous partez ce soir ?",
+        "Tu as soif ?",
+        "Il est content ?",
+        "Elle sait conduire ?",
+        "Vous aimez le sport ?",
+        "Tu peux m'aider ?",
+        "Il fait beau ?",
+        "Elle est arrivée ?",
+        "Vous prenez le bus ?",
+      ],
+      A2: [
+        "Est-ce que tu manges à midi ici ?",
+        "Est-ce qu'il parle anglais ?",
+        "Est-ce que vous avez un rendez-vous ?",
+        "Est-ce qu'elle connaît cette rue ?",
+        "Est-ce que tu peux venir demain ?",
+        "Est-ce qu'il vient souvent ici ?",
+        "Est-ce que vous comprenez la question ?",
+        "Est-ce qu'elle a passé son examen ?",
+        "Est-ce que tu connais ce quartier ?",
+        "Est-ce qu'ils habitent près d'ici ?",
+        "Est-ce que vous travaillez le samedi ?",
+        "Est-ce qu'elle prend le train ?",
+        "Est-ce que tu as reçu ma lettre ?",
+        "Est-ce qu'il attend depuis longtemps ?",
+        "Est-ce que vous venez à la réunion ?",
+        "Est-ce qu'elle aime la cuisine française ?",
+        "Est-ce que tu veux du café ?",
+        "Est-ce qu'il fait du sport ?",
+        "Est-ce que vous pouvez répéter ?",
+        "Est-ce qu'elle est disponible ce soir ?",
+      ],
+      B1: [
+        "Est-ce que tu as déjà visité Paris ?",
+        "Est-ce qu'elle pourrait venir plus tôt ?",
+        "Est-ce que vous avez besoin d'aide ?",
+        "Est-ce qu'il serait possible de reporter ?",
+        "Est-ce que tu saurais expliquer ça ?",
+        "Est-ce qu'elle va souvent au cinéma ?",
+        "Est-ce que vous avez terminé votre rapport ?",
+        "Est-ce qu'il y a encore de la place ?",
+        "Est-ce que tu pourrais me rendre un service ?",
+        "Est-ce qu'elle connaît la réponse ?",
+        "Est-ce que vous êtes déjà allés en Suisse ?",
+        "Est-ce qu'il faudrait réserver à l'avance ?",
+        "Est-ce que tu aurais le numéro de téléphone ?",
+        "Est-ce qu'elle travaille encore là-bas ?",
+        "Est-ce que vous souhaiteriez d'autres informations ?",
+        "Est-ce qu'il reste des billets pour le concert ?",
+        "Est-ce que tu viendrais si on t'invitait ?",
+        "Est-ce qu'elle a eu des nouvelles récemment ?",
+        "Est-ce que vous pourriez me rappeler demain ?",
+        "Est-ce qu'il comprend toujours la situation ?",
+      ],
+    },
+    wordPool: {
+      A1: [
+        "français", "libre", "faim", "prêts", "ici",
+        "café", "demain", "soif", "content", "le bus",
+        "le sport", "beau", "arrivée", "tôt", "le train",
+        "les enfants", "à l'heure", "froid", "occupé", "chez vous",
+      ],
+      A2: [
+        "un rendez-vous", "la consigne", "le samedi", "une lettre", "la réunion",
+        "du café", "du sport", "en retard", "la cuisine française", "ce quartier",
+        "le français", "souvent", "à midi", "votre voisin", "disponible",
+        "anglais", "le train", "à Paris", "le soir", "votre numéro",
+      ],
+      B1: [
+        "Paris", "plus tôt", "de l'aide", "votre rapport", "une place",
+        "la réponse", "en Suisse", "à l'avance", "des nouvelles", "la situation",
+        "un service", "là-bas", "des informations", "des billets", "votre numéro",
+        "souvent", "récemment", "ce soir", "demain", "longtemps",
+      ],
+    },
   },
   "a2-gr-l09": {
     label: "Les réponses aux questions fermées",

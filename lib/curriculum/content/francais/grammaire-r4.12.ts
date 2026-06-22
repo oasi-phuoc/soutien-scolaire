@@ -131,4 +131,41 @@ export const A2_GR_L07: GrammarLesson = {
     },
   ],
   exercises: [],
+  evalExercises: [
+    // ── Éval 1 — Fill: Est-ce que / Est-ce qu' ───────────────────────────────
+    {
+      type: "fill",
+      title: "Évaluation — Question 1",
+      instruction: "Complétez chaque phrase avec Est-ce que ou Est-ce qu'.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ tu parles français ?", answer: "Est-ce que" },
+        { sentence: "___ elle est médecin ?", answer: "Est-ce qu'" },
+        { sentence: "___ vous avez le temps ?", answer: "Est-ce que" },
+        { sentence: "___ il aime le café ?", answer: "Est-ce qu'" },
+        { sentence: "___ on peut entrer ?", answer: "Est-ce qu'" },
+        { sentence: "___ vous travaillez demain ?", answer: "Est-ce que" },
+        { sentence: "___ elles sont arrivées ?", answer: "Est-ce qu'" },
+        { sentence: "___ tu comprends la question ?", answer: "Est-ce que" },
+      ],
+    },
+    // ── Éval 2 — Word order: question avec inversion ─────────────────────────
+    {
+      type: "word_order",
+      title: "Évaluation — Question 2",
+      instruction: "Remettez les mots dans le bon ordre pour former une question avec l'inversion.",
+      allowPartialValidation: true,
+      items: [],
+      poolSize: 4,
+      pool: [
+        { sentence: "Parles-tu français ?",         words: ["Parles-tu", "français"] },
+        { sentence: "Est-il libre ?",               words: ["Est-il", "libre"] },
+        { sentence: "Avez-vous le temps ?",         words: ["Avez-vous", "le", "temps"] },
+        { sentence: "Comprend-il la question ?",    words: ["Comprend-il", "la", "question"] },
+        { sentence: "Mange-t-elle ici ?",           words: ["Mange-t-elle", "ici"] },
+        { sentence: "Travaillez-vous le samedi ?",  words: ["Travaillez-vous", "le", "samedi"] },
+      ],
+    },
+  ],
 };
