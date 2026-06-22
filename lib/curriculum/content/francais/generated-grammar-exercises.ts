@@ -15,6 +15,7 @@ type GrammarProfile = {
   choices: string[];
   cases: GrammarCase[];
   instruction1?: string;
+  instruction2?: string;
 };
 
 const TRANSFORMATION_TASKS: Record<string, string[]> = {
@@ -169,13 +170,14 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
       poolSize: 5,
     },
     {
-      type: "qcm",
+      type: "fill_select",
       title: `Exercice 2 — ${profile.label}`,
-      instruction: "Choisissez la forme correcte pour compléter chaque phrase.",
+      instruction: profile.instruction2 ?? "Choisissez la bonne réponse dans la liste.",
+      wordBank: profile.choices,
       items: [],
-      pool: qcmPool,
+      pool: fillPool,
       poolSize: 5,
-      inlineChoices: true,
+      hideWordBank: true,
     },
     {
       type: "word_order",
@@ -353,6 +355,7 @@ const PROFILES: Record<string, GrammarProfile> = {
   "a2-gr-l07": {
     label: "Les questions fermées",
     instruction1: "Complétez chaque phrase avec la forme correcte : Est-ce que ou Est-ce qu'.",
+    instruction2: "Complétez chaque phrase avec la forme correcte : Est-ce que ou Est-ce qu'.",
     choices: ["Est-ce que", "Est-ce qu'", "Habitez-vous", "Avez-vous"],
     cases: [
       { sentence: "___ vous travaillez demain ?", answer: "Est-ce que" },
