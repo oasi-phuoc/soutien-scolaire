@@ -60,14 +60,21 @@ function formatPrintDate(date = new Date()): string {
 export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
   return (
     <div className="print-document-header mb-[4%] w-full text-black">
-      <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(70px,0.7fr)_minmax(0,1.45fr)] items-center gap-[3%] border-b border-black pb-[1.5%]">
-        <p className="text-[clamp(9px,2.6vw,18px)] font-bold uppercase leading-tight">Classe d&apos;accueil</p>
-        <div className="flex min-w-0 items-center justify-center gap-1.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-etat-du-valais.png" alt="" className="h-11 w-auto shrink-0" style={{ objectFit: "contain" }} />
-          <p className="text-center text-[clamp(4px,0.9vw,7px)] font-bold uppercase leading-tight">Canton du Valais<br />Kanton Wallis</p>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.3fr)] items-start gap-[3%] border-b border-black pb-[1.5%]">
+        {/* Left: school identity */}
+        <div className="text-[clamp(4px,0.85vw,7px)] leading-snug">
+          <p>SCAI</p>
+          <p>2025-2026</p>
+          <p className="font-bold uppercase">Classes d&apos;accueil</p>
+          <p className="font-bold">Centre de formation Le Botza</p>
+          <p>Zone Industrielle 4, 1963 Vétroz</p>
+          <p>Tél. 027 606 18 60</p>
         </div>
-        <div className="min-w-0 text-[clamp(4px,0.9vw,7px)] leading-tight">
+        {/* Centre: logo only */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-etat-du-valais.png" alt="" className="h-11 w-auto shrink-0" style={{ objectFit: "contain" }} />
+        {/* Right: department */}
+        <div className="text-[clamp(4px,0.85vw,7px)] leading-snug">
           <p>Département de la santé, des affaires sociales et de la culture</p>
           <p>Service de l&apos;action sociale</p>
           <p>Office de l&apos;asile</p>

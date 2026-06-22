@@ -6763,9 +6763,10 @@ export function GenericModuleContent({
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
-          theoryPreview={currentStep?.kind === "theory" ? (
-            <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />
-          ) : undefined}
+          theoryPreview={(() => {
+            const ts = trainingSteps.find(s => s.kind === "theory") as { kind: "theory"; lesson: MathSubmoduleLesson } | undefined;
+            return ts ? <TheoryView lesson={ts.lesson} pivot={pivot} showPivot={!!showPivotTranslation} /> : undefined;
+          })()}
           exercises={trainingExercisePrompts.map((prompt, i) => ({
             id: String(i),
             label: `Exercice ${i + 1}`,
