@@ -34,7 +34,7 @@ export type TheoryBlock =
   | { type: "word_cards"; items: string[]; cols?: 2 | 3 | 4 }
   | { type: "illus_cards"; items: Array<{ label: string; svg: string }>; cols?: 2 | 3 | 4 | 5 }
   | { type: "grammar_link"; text: string; href: string }
-  | { type: "selector"; labelPrefix?: string; tabs: Array<{ label: string; content: TheoryBlock[] }> };
+  | { type: "selector"; labelPrefix?: string; buttonCols?: number; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
 export type ExerciseDifficulty = "A1" | "A2" | "B1";
 export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty };

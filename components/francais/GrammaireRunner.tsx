@@ -556,14 +556,18 @@ function SelectorBlock({ block, pivot, showTrans }: {
   showTrans: boolean;
 }) {
   const [activeTab, setActiveTab] = useState(0);
+  const cols = block.buttonCols;
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
+      <div
+        className={cols ? "grid gap-2" : "flex flex-wrap gap-2"}
+        style={cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined}
+      >
         {block.tabs.map((tab, i) => (
           <button
             key={i}
             onClick={() => setActiveTab(i)}
-            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${cols ? "w-full" : ""} ${
               activeTab === i
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[color-mix(in_oklch,var(--color-accent-fr)_15%,white)] hover:text-[var(--color-accent-fr)]"
