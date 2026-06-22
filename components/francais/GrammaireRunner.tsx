@@ -383,7 +383,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                               ? (block.pronounGrid && transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
                               : undefined;
                             return (
-                              <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)]${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`} lang={transText ? pivot : undefined} dir={transText && isRtl ? "rtl" : "ltr"}>
+                              <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)] whitespace-pre-line${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`} lang={transText ? pivot : undefined} dir={transText && isRtl ? "rtl" : "ltr"}>
                                 {block.pronounGrid && !transText ? renderPronounCell(cell) : renderInlineMarkup(transText ?? cell)}
                               </td>
                             );

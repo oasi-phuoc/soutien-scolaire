@@ -12,9 +12,9 @@ export const A2_GR_L09: GrammarLesson = {
       headers: ["Réponse", "Quand l'utiliser", "Exemple"],
       boldFirstCol: true,
       rows: [
-        ["{a}Oui{/a}", "Question affirmative → réponse affirmative", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café."],
-        ["{a}Non{/a}", "Question (affirmative ou négative) → réponse négative", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café."],
-        ["{a}Si{/a}", "Question {a}négative{/a} → réponse affirmative", "Tu ne parles pas français ? — {a}Si{/a}, je parle français !"],
+        ["{a}Oui{/a}", "Réponse {a}affirmative{/a}", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café."],
+        ["{a}Non{/a}", "Réponse {a}négative{/a}", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café."],
+        ["{a}Si{/a}", "Réponse {a}affirmative{/a} à une question {a}négative{/a}", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français !"],
       ],
       transHeaders: {
         en: ["Answer", "When to use it", "Example"],
@@ -24,11 +24,11 @@ export const A2_GR_L09: GrammarLesson = {
         uk: ["Відповідь", "Коли вживати", "Приклад"],
       },
       transRows: {
-        en: [["{a}Oui{/a}", "Affirmative question → affirmative answer", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café. (Do you like coffee? — Yes, I like coffee.)"], ["{a}Non{/a}", "Question (affirmative or negative) → negative answer", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café. (Do you like coffee? — No, I don't.)"], ["{a}Si{/a}", "{a}Negative{/a} question → affirmative answer", "Tu ne parles pas français ? — {a}Si{/a}, je parle français ! (Don't you speak French? — Yes, I do!)"]],
-        ar: [["{a}Oui{/a}", "سؤال مثبت ← إجابة مثبتة", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café. (هل تحب القهوة؟ — نعم، أحب القهوة.)"], ["{a}Non{/a}", "سؤال (مثبت أو منفي) ← إجابة منفية", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café. (هل تحب القهوة؟ — لا.)"], ["{a}Si{/a}", "سؤال {a}منفي{/a} ← إجابة مثبتة", "Tu ne parles pas français ? — {a}Si{/a}, je parle français ! (ألا تتكلم الفرنسية؟ — بلى، أتكلمها!)"]],
-        fa: [["{a}Oui{/a}", "پرسش مثبت ← پاسخ مثبت", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café. (قهوه دوست داری؟ — بله، قهوه دوست دارم.)"], ["{a}Non{/a}", "پرسش (مثبت یا منفی) ← پاسخ منفی", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café. (قهوه دوست داری؟ — خیر.)"], ["{a}Si{/a}", "پرسش {a}منفی{/a} ← پاسخ مثبت", "Tu ne parles pas français ? — {a}Si{/a}, je parle français ! (فرانسوی صحبت نمی‌کنی؟ — چرا، می‌کنم!)"]],
-        ti: [["{a}Oui{/a}", "ኣረጋጋጺ ሕቶ → ኣረጋጋጺ መልሲ", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café. (ቡን ትፈቱ ዶ? — እወ፣ ቡን እፈቱ።)"], ["{a}Non{/a}", "ሕቶ (ኣረጋጋጺ ወይ ኣሉታዊ) → ኣሉታዊ መልሲ", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café. (ቡን ትፈቱ ዶ? — ኣይፋል።)"], ["{a}Si{/a}", "{a}ኣሉታዊ{/a} ሕቶ → ኣረጋጋጺ መልሲ", "Tu ne parles pas français ? — {a}Si{/a}, je parle français ! (ፈረንሳይ ኣይትዛረብን ዲኻ? — እወ፣ ፈረንሳይ እዛረብ!)"]],
-        uk: [["{a}Oui{/a}", "Стверджувальне питання → стверджувальна відповідь", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café. (Ти любиш каву? — Так, люблю.)"], ["{a}Non{/a}", "Питання (стверджувальне або заперечне) → заперечна відповідь", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café. (Ти любиш каву? — Ні.)"], ["{a}Si{/a}", "{a}Заперечне{/a} питання → стверджувальна відповідь", "Tu ne parles pas français ? — {a}Si{/a}, je parle français ! (Хіба ти не говориш французькою? — Так, говорю!)"]],
+        en: [["{a}Oui{/a}", "{a}Affirmative{/a} answer", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café. (Do you like coffee? — Yes, I like coffee.)"], ["{a}Non{/a}", "{a}Negative{/a} answer", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café. (Do you like coffee? — No, I don't.)"], ["{a}Si{/a}", "{a}Affirmative{/a} answer to a {a}negative{/a} question", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français ! (Don't you speak French? — Yes, I do!)"]],
+        ar: [["{a}Oui{/a}", "إجابة {a}مثبتة{/a}", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café. (هل تحب القهوة؟ — نعم، أحب القهوة.)"], ["{a}Non{/a}", "إجابة {a}منفية{/a}", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café. (هل تحب القهوة؟ — لا.)"], ["{a}Si{/a}", "إجابة {a}مثبتة{/a} على سؤال {a}منفي{/a}", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français ! (ألا تتكلم الفرنسية؟ — بلى، أتكلمها!)"]],
+        fa: [["{a}Oui{/a}", "پاسخ {a}مثبت{/a}", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café. (قهوه دوست داری؟ — بله، قهوه دوست دارم.)"], ["{a}Non{/a}", "پاسخ {a}منفی{/a}", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café. (قهوه دوست داری؟ — خیر.)"], ["{a}Si{/a}", "پاسخ {a}مثبت{/a} به پرسش {a}منفی{/a}", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français ! (فرانسوی صحبت نمی‌کنی؟ — چرا، می‌کنم!)"]],
+        ti: [["{a}Oui{/a}", "ኣረጋጋጺ {a}መልሲ{/a}", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café. (ቡን ትፈቱ ዶ? — እወ፣ ቡን እፈቱ።)"], ["{a}Non{/a}", "{a}ኣሉታዊ{/a} መልሲ", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café. (ቡን ትፈቱ ዶ? — ኣይፋል።)"], ["{a}Si{/a}", "ኣረጋጋጺ {a}መልሲ{/a} ናብ {a}ኣሉታዊ{/a} ሕቶ", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français ! (ፈረንሳይ ኣይትዛረብን ዲኻ? — እወ፣ ፈረንሳይ እዛረብ!)"]],
+        uk: [["{a}Oui{/a}", "{a}Стверджувальна{/a} відповідь", "Tu aimes le café ?\n— {a}Oui{/a}, j'aime le café. (Ти любиш каву? — Так, люблю.)"], ["{a}Non{/a}", "{a}Заперечна{/a} відповідь", "Tu aimes le café ?\n— {a}Non{/a}, je {a}n'{/a}aime {a}pas{/a} le café. (Ти любиш каву? — Ні.)"], ["{a}Si{/a}", "{a}Стверджувальна{/a} відповідь на {a}заперечне{/a} питання", "Tu {a}ne{/a} parles {a}pas{/a} français ?\n— {a}Si{/a}, je parle français ! (Хіба ти не говориш французькою? — Так, говорю!)"]],
       },
     },
     {
