@@ -588,6 +588,24 @@ function shuffle<T>(arr: T[]): T[] {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j]!, a[i]!];
   }
+  const levelled = a as Array<T & { difficulty?: "A1" | "A2" | "B1" }>;
+  if (levelled.some((item) => item?.difficulty)) {
+    const groups = {
+      A1: levelled.filter((item) => item.difficulty === "A1"),
+      A2: levelled.filter((item) => item.difficulty === "A2"),
+      B1: levelled.filter((item) => item.difficulty === "B1"),
+    };
+    const order: Array<keyof typeof groups> = ["A1", "A2", "A1", "A2", "B1"];
+    const balanced: T[] = [];
+    while (groups.A1.length || groups.A2.length || groups.B1.length) {
+      for (const level of order) {
+        const item = groups[level].shift();
+        if (item) balanced.push(item);
+      }
+    }
+    const untagged = levelled.filter((item) => !item.difficulty);
+    return [...balanced, ...untagged];
+  }
   return a;
 }
 
@@ -1518,6 +1536,11 @@ function WriteExercise({
     }
     if (exercise.promptPool?.length) {
       return [null, shuffle([...exercise.promptPool]).slice(0, exercise.promptPoolSize ?? 5)];
+    }
+    if (exercise.levelPromptPools) {
+      const levelled = (Object.entries(exercise.levelPromptPools) as Array<["A1" | "A2" | "B1", string[]]>)
+        .flatMap(([difficulty, prompts]) => prompts.map((prompt) => ({ prompt, difficulty })));
+      return [null, shuffle(levelled).slice(0, exercise.promptPoolSize ?? 5).map((item) => item.prompt)];
     }
     return [null, exercise.prompts ?? []];
   });

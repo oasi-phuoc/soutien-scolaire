@@ -36,8 +36,9 @@ export type TheoryBlock =
   | { type: "grammar_link"; text: string; href: string }
   | { type: "selector"; labelPrefix?: string; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
-export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number };
-export type FillItem = { sentence: string; hint: string; answer: string };
+export type ExerciseDifficulty = "A1" | "A2" | "B1";
+export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number; difficulty?: ExerciseDifficulty };
+export type FillItem = { sentence: string; hint: string; answer: string; difficulty?: ExerciseDifficulty };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =
@@ -45,11 +46,11 @@ export type Exercise =
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "fill_select"; title: string; instruction: string; transInstruction?: Trans; wordBank: string[]; items: FillItem[]; pool?: FillItem[]; poolSize?: number; letterSelect?: boolean; hideWordBank?: boolean }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; promptPool?: string[]; promptPoolSize?: number; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[] }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; promptPool?: string[]; levelPromptPools?: Record<ExerciseDifficulty, string[]>; promptPoolSize?: number; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked"; imagePool?: { image: string; promptPool: string[] }[] }
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[]; imagePool?: { image: string; items: { statement: string; answer: boolean }[] }[]; poolSize?: number }
   | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number; allowPartialValidation?: boolean }
-  | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[] }[]; pool?: { sentence: string; words: string[] }[]; poolSize?: number; allowPartialValidation?: boolean }
+  | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty }[]; pool?: { sentence: string; words: string[]; difficulty?: ExerciseDifficulty }[]; poolSize?: number; allowPartialValidation?: boolean }
   | { type: "color_highlight"; title: string; instruction: string; transInstruction?: Trans; colors: string[]; items: { words: string[]; answers: (number | null)[] }[] }
   | { type: "clock_read"; title: string; instruction: string; transInstruction?: Trans; clocks: { h: number; m: number; label: string; answer: string }[] }
   | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number };
@@ -149,6 +150,7 @@ import { A2_GR_SUBJONCTIF } from "./content/francais/grammaire-r6.5";
 import { A2_CONJ_L06 } from "./content/francais/grammaire-r4.24";
 import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
 import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
+import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
 
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
@@ -206,6 +208,12 @@ function applyReorganizedCode<T extends GrammarLesson | ConjLesson>(lesson: T): 
   return code ? { ...lesson, code } : lesson;
 }
 
+function addGeneratedExercises<T extends GrammarLesson | ConjLesson>(lesson: T): T {
+  if (lesson.exercises.length > 0) return lesson;
+  const exercises = generatedGrammarExercises(lesson.slug);
+  return exercises.length > 0 ? { ...lesson, exercises } : lesson;
+}
+
 const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
   A1_GR_CEST,
@@ -254,7 +262,9 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_SUBJONCTIF,
 ];
 
-export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS.map(applyReorganizedCode);
+export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS
+  .map(applyReorganizedCode)
+  .map(addGeneratedExercises);
 
 // ── Registre — conjugaison ────────────────────────────────────────────────────
 
@@ -282,7 +292,9 @@ const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
   A2_CONJ_L08,
 ];
 
-export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS.map(applyReorganizedCode);
+export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
+  .map(applyReorganizedCode)
+  .map(addGeneratedExercises);
 
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 
