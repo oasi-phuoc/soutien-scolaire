@@ -116,7 +116,7 @@ export function PrintDocumentFooter({
         </div>
       </div>
       <div className="text-right">
-        <p>Version {version}</p>
+        <p>LearnUP - Van Thanh Phuoc</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>
