@@ -78,9 +78,9 @@ export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
           <p>Centre de formation « Le Botza »</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-3 border-b border-black py-[1%] text-[clamp(8px,2.3vw,16px)] font-bold uppercase leading-tight">
-        <p>{config.classLevel} {config.classNumber}</p>
-        <p className="truncate">Cours {config.course}</p>
+      <div className="grid grid-cols-2 items-center gap-3 border-b border-black py-[1%] text-[clamp(8px,2.3vw,16px)] font-bold uppercase leading-tight">
+        <p className="text-left">{config.classLevel} {config.classNumber}</p>
+        <p className="truncate text-left">Cours {config.course}</p>
       </div>
       <div className="mt-[4%] grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(34px,0.18fr)] items-center gap-[3%] border border-dotted border-black px-[2%] py-[2.5%] text-[clamp(7px,1.9vw,13px)]">
         <p className="min-w-0 whitespace-nowrap">Prénom <span className="tracking-[0.08em]">........................</span></p>
@@ -102,6 +102,9 @@ export function PrintDocumentFooter({
   page?: number;
   totalPages?: number;
 }) {
+  // `preview` → inline footer at the bottom of the on-screen A4 preview box.
+  // otherwise → real footer pinned to the bottom of every printed page via
+  // `position: fixed` + CSS page counters (see globals.css @media print).
   return (
     <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[7px] leading-tight text-black`}>
       <div className="flex items-center gap-1.5">
@@ -248,7 +251,11 @@ export function PrintConfigSheet({
     if (node) {
       const css = capturePageCss();
       const base = window.location.origin;
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin:0;}html,body{margin:0;padding:0;background:white;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-popup-page{page-break-after:always;break-after:page;}.print-popup-page:last-child{page-break-after:auto;break-after:auto;}</style></head><body>${node.innerHTML}</body></html>`;
+      // Natural flow: header appears once (page 1), exercises stay whole
+      // (break-inside: avoid), the footer is fixed to the bottom of every page
+      // via globals.css @media print + CSS page counters. Symmetric top/bottom
+      // @page margins give pages 2+ the same top spacing as the footer zone.
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin:18mm 12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -543,8 +550,9 @@ export function PrintConfigSheet({
                 </span>
               </div>
               <div className="mx-auto flex aspect-[210/297] w-full max-w-[44rem] flex-col overflow-hidden border border-zinc-300 bg-white p-[5%] text-black shadow-lg">
-                <PrintDocumentHeader config={header} />
-                <div className="min-h-0 flex-1 overflow-hidden text-[clamp(6px,1.35vw,10px)] leading-relaxed">
+                {/* Header on the first page only — matches the printed PDF */}
+                {previewPage === 0 && <PrintDocumentHeader config={header} />}
+                <div className={`min-h-0 flex-1 overflow-hidden text-[clamp(6px,1.35vw,10px)] leading-relaxed ${previewPage > 0 ? "pt-[6%]" : ""}`}>
                   {currentPreview.showTheory && (
                     <div className="print-preview-content origin-top-left [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
                       {theoryPreview ?? (
@@ -616,50 +624,45 @@ export function PrintConfigSheet({
         </button>
       </div>
 
-      {/* Hidden container for popup printing — all pages rendered at once */}
+      {/* Hidden container for popup printing — natural content flow.
+          Header is rendered once (first page only); the theory page-breaks
+          before the exercises; each exercise stays whole; the footer is fixed
+          to the bottom of every page via globals.css @media print. */}
       <div id="print-all-pages-container" className="hidden" aria-hidden="true">
-        {previewPages.map((page, pageIndex) => (
-          <div
-            key={pageIndex}
-            className="print-popup-page flex flex-col bg-white text-black"
-            style={{ width: "210mm", minHeight: "297mm", padding: "15mm" }}
-          >
-            <PrintDocumentHeader config={header} />
-            <div className="flex-1 text-[10px] leading-relaxed">
-              {page.showTheory && (
-                <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
-                  {theoryPreview ?? (
-                    <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
+        {/* Header — appears on the first page only */}
+        <PrintDocumentHeader config={header} />
+
+        {/* Theory */}
+        {theory && (
+          <div className={`${previewExercises.length > 0 ? "print-break-after" : ""} [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]`}>
+            {theoryPreview ?? (
+              <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
+            )}
+          </div>
+        )}
+
+        {/* Exercises — sequential numbering, each kept whole */}
+        {previewExercises.length > 0 && (
+          <ol className="space-y-5 text-[10px] leading-relaxed">
+            {previewExercises.map((item, index) => (
+              <li key={item.key} className="print-exercise border-b border-zinc-200 pb-4">
+                <div className="mb-1 flex items-start gap-2 text-[10px] font-bold">
+                  <span>{index + 1}.</span>
+                  <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
+                  {evalMode && (
+                    <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
                   )}
                 </div>
-              )}
-              {page.exercises.length > 0 && (
-                <ol className="space-y-5">
-                  {page.exercises.map((item, exIndex) => (
-                    <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
-                      <div className="mb-1 flex items-start gap-2 text-[10px] font-bold">
-                        <span>{(pageIndex - (theory ? 1 : 0)) * 4 + exIndex + 1}.</span>
-                        <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
-                        {evalMode && (
-                          <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
-                        )}
-                      </div>
-                      <div className="pl-5 [&_button]:pointer-events-none">
-                        {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-            <PrintDocumentFooter
-              date={printDate}
-              preview
-              page={pageIndex + 1}
-              totalPages={previewPages.length}
-            />
-          </div>
-        ))}
+                <div className="pl-5 [&_button]:pointer-events-none">
+                  {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                </div>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        {/* Footer — pinned to the bottom of every printed page */}
+        <PrintDocumentFooter date={printDate} />
       </div>
 
       {showExitWarning && (

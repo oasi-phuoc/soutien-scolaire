@@ -432,6 +432,434 @@ function getA1StepHint(step: Step): string | undefined {
   return undefined;
 }
 
+// ─── Aperçu d'impression des exercices A1 (versions vierges à remplir) ───────
+// Reproduit chaque exercice avec des données fraîches et des champs vides,
+// pour l'aperçu PDF / impression (PrintConfigSheet).
+function a1PrintPreview(step: Step): React.ReactNode | undefined {
+  const line = (w = 150) => (
+    <span className="inline-block border-b border-black/50 align-bottom" style={{ width: w, height: 15 }} />
+  );
+  const box = (w = 36, h = 26) => (
+    <span className="inline-block rounded border border-black/60 align-middle" style={{ width: w, height: h }} />
+  );
+  const numberedBlanks = (count: number, lead?: (i: number) => React.ReactNode) => (
+    <ol className="space-y-2">
+      {Array.from({ length: count }, (_, i) => (
+        <li key={i} className="flex items-center gap-3">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          {lead?.(i)}
+          {line(180)}
+        </li>
+      ))}
+    </ol>
+  );
+  const numberLine = (l: { min: number; max: number; arrows: number[]; step?: number }) => {
+    const ML = 30, lineW = 450, svgH = 130, lineY = 112;
+    const totalUnits = l.max - l.min;
+    const st = l.step ?? 1;
+    const pos = (v: number) => ML + ((v - l.min) / totalUnits) * lineW;
+    const boxW = 54, boxH = 24, boxYArr = [4, 36];
+    return (
+      <div className="w-full overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+        <svg viewBox={`0 0 500 ${svgH}`} width="100%" style={{ display: "block" }}>
+          <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke="#374151" strokeWidth="2" />
+          <polygon points={`${ML + lineW},${lineY} ${ML + lineW - 6},${lineY - 3} ${ML + lineW - 6},${lineY + 3}`} fill="#374151" />
+          {Array.from({ length: Math.floor(totalUnits / st) + 1 }, (_, i) => {
+            const v = l.min + i * st;
+            const x = pos(v);
+            const isMajor = st > 1 || v % 10 === 0;
+            return (
+              <g key={v}>
+                <line x1={x} y1={lineY} x2={x} y2={isMajor ? lineY + 12 : lineY + 5} stroke="#374151" strokeWidth={isMajor ? 1.5 : 1} />
+                {isMajor && <text x={x} y={svgH - 4} textAnchor="middle" fontSize="9" fill="#374151" fontWeight="600">{v}</text>}
+              </g>
+            );
+          })}
+          {l.arrows.map((v, ai) => {
+            const x = pos(v);
+            const bY = boxYArr[ai] ?? 4;
+            const boxX = Math.min(Math.max(x - boxW / 2, ML), ML + lineW - boxW);
+            return (
+              <g key={ai}>
+                <line x1={x} y1={bY + boxH} x2={x} y2={lineY - 8} stroke="#374151" strokeWidth="1.5" />
+                <polygon points={`${x},${lineY - 4} ${x - 4},${lineY - 11} ${x + 4},${lineY - 11}`} fill="#374151" />
+                <rect x={boxX} y={bY} width={boxW} height={boxH} rx="4" fill="#fff" stroke="#9CA3AF" strokeWidth="1.5" />
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+    );
+  };
+  const blocksRow = (n: number, sizes = { c: 4, d: 6, u: 10 }) => {
+    const c = Math.floor(n / 100), d = Math.floor((n % 100) / 10), u = n % 10;
+    return (
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-lg font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+        {c > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: c }, (_, i) => <SvgCentaine key={i} s={sizes.c} />)}</div>}
+        {d > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: d }, (_, i) => <SvgDizaine key={i} s={sizes.d} />)}</div>}
+        {u > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: u }, (_, i) => <SvgUnite key={i} s={sizes.u} />)}</div>}
+      </div>
+    );
+  };
+
+  switch (step) {
+    case "ex2":
+      return (() => { const nums = generateNumbers(); return numberedBlanks(nums.length, (i) => (
+        <span className="w-10 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
+      )); })();
+    case "ex3":
+      return (() => { const nums = generateTensNumbers(); return numberedBlanks(nums.length, (i) => (
+        <span className="w-12 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
+      )); })();
+    case "ex4":
+    case "ex5":
+    case "ex6":
+      return numberedBlanks(5, () => <span className="shrink-0 text-base" aria-hidden>🔊</span>);
+    case "ex7":
+      return (() => {
+        const grid = generateEx7Grid();
+        const tens = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+        const units = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        return (
+          <div className="grid border-l border-t border-zinc-400" style={{ gridTemplateColumns: "repeat(10, 1fr)", maxWidth: 360 }}>
+            <div className="aspect-square border-b border-r border-zinc-400 bg-zinc-100" />
+            {units.map((u) => <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-400 bg-zinc-100 text-[10px] font-bold">{u}</div>)}
+            {tens.map((d) => (
+              <React.Fragment key={d}>
+                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-400 bg-zinc-100 text-[10px] font-bold">{d}</div>
+                {units.map((u) => {
+                  const state = grid[`${d}-${u}`] ?? "empty";
+                  return (
+                    <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-400 text-[10px] tabular-nums">
+                      {state === "revealed" ? d + u : ""}
+                    </div>
+                  );
+                })}
+              </React.Fragment>
+            ))}
+          </div>
+        );
+      })();
+    case "ex8":
+      return (() => {
+        const series = generateEx8();
+        return (
+          <div className="space-y-2">
+            {series.map((s, si) => (
+              <div key={si} className="flex items-center gap-1">
+                <span className="w-4 shrink-0 text-[10px] font-bold text-[var(--color-accent-alg)]">{si + 1}.</span>
+                {Array.from({ length: s.count }, (_, i) => {
+                  const num = s.start + i;
+                  const isBlank = s.blanks.includes(i);
+                  return (
+                    <span key={i} className={`flex h-7 min-w-0 flex-1 items-center justify-center rounded border text-[11px] tabular-nums ${isBlank ? "border-zinc-500 bg-white" : "border-zinc-300 bg-zinc-50 text-zinc-700"}`}>
+                      {isBlank ? "" : num}
+                    </span>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex9":
+      return (() => {
+        const qs = generateEx9();
+        return (
+          <div className="space-y-3">
+            {qs.map((q, i) => (
+              <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <div className="flex min-h-20 flex-col items-center justify-center gap-1">
+                  {q.tens > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: q.tens }, (_, ti) => <SvgDizaineH key={ti} s={7} />)}</div>}
+                  {q.units > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: q.units }, (_, ui) => <SvgUnite key={ui} s={10} />)}</div>}
+                </div>
+                <div className="mt-2 flex justify-center gap-2">
+                  {q.choices.map((c) => (
+                    <span key={c} className="w-14 rounded border border-zinc-400 py-1 text-center text-sm tabular-nums">{c}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex10":
+      return (() => {
+        const qs = generateEx10();
+        return (
+          <div className="space-y-3">
+            {qs.map((q, qi) => (
+              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <ScaledCanvas width={420} height={q.canvasH}>
+                  {q.positions.map((p, pi) => (
+                    <div key={pi} style={{ position: "absolute", left: p.x, top: p.y }}>
+                      {p.kind === "h" ? <SvgCentaine s={5} /> : p.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
+                    </div>
+                  ))}
+                </ScaledCanvas>
+                <div className="mt-2 flex items-center gap-2 text-sm">Total : {line(120)}</div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex11":
+      return (() => {
+        const qs = generateEx11();
+        return (
+          <div className="space-y-3">
+            {qs.map((q, qi) => (
+              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <ScaledCanvas width={420} height={q.canvasH}>
+                  {q.positions.map((p, pi) => (
+                    <div key={pi} style={{ position: "absolute", left: p.x, top: p.y }}>
+                      {p.kind === "m" ? <SvgMillier s={4} d={9} /> : p.kind === "h" ? <SvgCentaine s={5} /> : p.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
+                    </div>
+                  ))}
+                </ScaledCanvas>
+                <div className="mt-2 flex items-center justify-center gap-1 text-sm">
+                  = {box(44)} + {box(44)} + {box(44)} + {box(44)}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex12":
+    case "ex13":
+      return (() => {
+        const q = (step === "ex12" ? generateEx12() : generateEx13())[0]!;
+        return (
+          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+            <div className="flex justify-center py-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={q.src} alt="assemblage de cubes" className="max-h-56 w-auto object-contain" />
+            </div>
+            <div className="mt-1 flex items-center gap-2 text-sm">Nombre de cubes : {line(120)}</div>
+          </div>
+        );
+      })();
+    case "ex14":
+      return (() => {
+        const nums = Array.from({ length: 2 }, () => Math.floor(Math.random() * 9899) + 101);
+        return (
+          <div className="space-y-3">
+            {nums.map((n, i) => (
+              <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                <div className="mb-2 text-center text-xl font-bold tabular-nums">{n.toLocaleString("fr-CH")}</div>
+                <div className="flex items-end justify-center gap-1 text-xs">
+                  = {box(40)} <span className="text-[10px]">millier</span> + {box(40)} <span className="text-[10px]">centaine</span> + {box(40)} <span className="text-[10px]">dizaine</span> + {box(40)} <span className="text-[10px]">unité</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex15":
+      return (() => {
+        const qs = generateEx14();
+        return (
+          <div className="space-y-4">
+            {qs.map((q, qi) => (
+              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <div className="mb-2 text-center text-xl font-bold tabular-nums">{q.refDisplay}</div>
+                <div className="flex flex-col gap-1.5">
+                  {q.tags.map((t, ti) => (
+                    <div key={ti} className="flex items-center gap-2 rounded border border-zinc-300 p-2 text-sm">
+                      <span className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-zinc-400" />
+                      <span>{t.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex16":
+      return (() => {
+        const qs = generateEx15();
+        const CORNER_POS = [{ r: 0, c: 0 }, { r: 0, c: 2 }, { r: 2, c: 0 }, { r: 2, c: 2 }];
+        return (
+          <div className="space-y-4">
+            {qs.map((q, qi) => {
+              const corners = [q.tl, q.tr, q.bl, q.br];
+              const cells: React.ReactNode[] = [];
+              for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+                const ci = CORNER_POS.findIndex((p) => p.r === r && p.c === c);
+                if (ci !== -1) {
+                  const isGiven = ci === q.givenIdx;
+                  cells.push(
+                    <div key={`${r}${c}`} className="flex h-9 items-center justify-center rounded border border-zinc-400 text-sm font-bold tabular-nums">
+                      {isGiven ? corners[ci]!.toLocaleString("fr-CH") : ""}
+                    </div>
+                  );
+                } else {
+                  const arrow = q.arrows.find((a) => a.row === r && a.col === c);
+                  cells.push(
+                    <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-lg ${arrow.colorCls}` : undefined}>
+                      {arrow ? <span style={c === 1 ? { display: "inline-block", transform: "scaleX(2)" } : undefined}>{arrow.symbol}</span> : null}
+                    </div>
+                  );
+                }
+              }
+              return <div key={qi} className="grid grid-cols-3 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">{cells}</div>;
+            })}
+          </div>
+        );
+      })();
+    case "ex17":
+      return (() => { const lines = generateEx16(); return <div className="space-y-4">{lines.map((l, i) => <div key={i}>{numberLine(l)}</div>)}</div>; })();
+    case "ex18":
+      return (() => { const lines = generateEx18(); return <div className="space-y-4">{lines.map((l, i) => <div key={i}>{numberLine(l)}</div>)}</div>; })();
+    case "ex19":
+    case "ex20":
+      return (() => {
+        const data = step === "ex19" ? generateEx19() : generateEx20();
+        return (
+          <div className="space-y-3">
+            {data.map((nums, si) => (
+              <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <p className="mb-1 text-[10px] font-semibold uppercase text-[var(--color-text-secondary)]">Série {si + 1}</p>
+                <div className="space-y-1.5">
+                  {nums.map((n, ni) => (
+                    <div key={ni} className="flex items-center gap-2 text-sm">
+                      {box(48, 22)} <span className="text-[var(--color-text-secondary)]">&lt;</span>
+                      <span className="w-14 text-center font-bold tabular-nums">{n.toLocaleString("fr-CH")}</span>
+                      <span className="text-[var(--color-text-secondary)]">&lt;</span> {box(48, 22)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex21":
+    case "ex24":
+      return (() => {
+        const series = step === "ex21" ? generateEx21() : generateEx24();
+        return (
+          <div className="space-y-3">
+            {series.map((s, si) => {
+              const consigne = "mode" in s && s.mode === "plus_grand" ? "Entourez le plus grand nombre."
+                : "mode" in s && s.mode === "plus_petit" ? "Entourez le plus petit nombre."
+                : "mode" in s && s.mode === "moins_que" ? `Entourez les nombres plus petits que ${(s as { threshold: number }).threshold}.`
+                : "mode" in s && s.mode === "plus_que" ? `Entourez les nombres plus grands que ${(s as { threshold: number }).threshold}.`
+                : `Entourez les nombres entre ${(s as { limitLo: number }).limitLo} et ${(s as { limitHi: number }).limitHi}.`;
+              return (
+                <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                  <p className="mb-2 text-sm font-medium">{consigne}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {s.numbers.map((n, ni) => (
+                      <span key={ni} className="rounded border border-zinc-400 px-3 py-1 text-sm font-bold tabular-nums">{n.toLocaleString("fr-CH")}</span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })();
+    case "ex22":
+      return (() => {
+        const pairs = generateEx22();
+        return (
+          <div className="space-y-3">
+            {pairs.map((p, pi) => (
+              <div key={pi} className="flex items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                {blocksRow(p.a)}
+                <div className="flex flex-col gap-1">{(["<", ">", "="] as const).map((sym) => <span key={sym} className="w-9 rounded border border-zinc-400 py-0.5 text-center text-sm font-bold">{sym}</span>)}</div>
+                {blocksRow(p.b)}
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex23":
+      return (() => {
+        const pairs = generateEx23();
+        return (
+          <div className="grid grid-cols-2 gap-2">
+            {pairs.map((p, pi) => (
+              <div key={pi} className="flex items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] px-2 py-1.5">
+                <span className="flex-1 text-right text-sm font-bold tabular-nums">{p.a}</span>
+                {box(28, 28)}
+                <span className="flex-1 text-left text-sm font-bold tabular-nums">{p.b}</span>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    case "ex25":
+      return (() => {
+        const nums = generateEx25Numbers();
+        return (
+          <div>
+            <div className="mb-2 flex flex-wrap gap-3 text-[11px]">
+              <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded-full bg-green-400" />vert : 350–600</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded-full bg-blue-400" />bleu : &gt; 710</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded-full bg-yellow-400" />jaune : &lt; 300</span>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {nums.map((n, ni) => (
+                <div key={ni} className="flex flex-col items-center rounded-[var(--radius-md)] border border-zinc-400 p-2">
+                  <span className="text-xl" aria-hidden>🪰</span>
+                  <span className="text-sm font-bold tabular-nums">{n}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })();
+    case "ex26":
+      return (
+        <div>
+          <div className="mb-2 flex flex-wrap gap-1.5">
+            {EX26_NUMBERS.map((n) => <span key={n} className="rounded border border-zinc-300 bg-zinc-50 px-1.5 py-0.5 text-[11px] font-bold tabular-nums">{n}</span>)}
+          </div>
+          <div className="space-y-2">
+            {EX26_BUBBLES.map((b, bi) => (
+              <div key={bi} className={`rounded-[var(--radius-md)] border p-2 ${b.bgCls} ${b.borderCls}`}>
+                <p className={`mb-1 text-sm font-semibold ${b.textCls}`}>Entre {b.lo} et {b.hi}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {EX26_NUMBERS.map((n) => <span key={n} className="rounded border border-zinc-300 px-1.5 py-0.5 text-[11px] tabular-nums">{n}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "ex27":
+      return (() => {
+        const data = generateEx27();
+        return (
+          <div className="space-y-3">
+            {data.map((items, si) => (
+              <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-2">
+                <p className="mb-1 text-[10px] font-semibold uppercase text-[var(--color-text-secondary)]">Série {si + 1}</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {items.map((it, ii) => (
+                    <div key={ii} className="flex items-center justify-center gap-1 rounded-[var(--radius-md)] border border-zinc-300 px-2 py-2 text-sm font-bold tabular-nums">
+                      {it.reversed ? (
+                        <><span className="text-blue-600">{it.hi}</span><span className="text-[var(--color-text-secondary)]">&gt;</span>{box(44, 22)}<span className="text-[var(--color-text-secondary)]">&gt;</span><span className="text-blue-600">{it.lo}</span></>
+                      ) : (
+                        <><span className="text-blue-600">{it.lo}</span><span className="text-[var(--color-text-secondary)]">&lt;</span>{box(44, 22)}<span className="text-[var(--color-text-secondary)]">&lt;</span><span className="text-blue-600">{it.hi}</span></>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      })();
+    default:
+      return undefined;
+  }
+}
+
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
   const s = secs % 60;
@@ -2706,14 +3134,32 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          theoryPreview={
+            <div className="space-y-3 text-sm leading-relaxed text-black">
+              <h2 className="text-base font-bold">{theoryTitleText}</h2>
+              {lesson.theory.blocks
+                ? lesson.theory.blocks.map((block, i) => (
+                    <React.Fragment key={i}>
+                      {RichBlock({ block, blockIdx: i, trad: lessonTrad, pivot, showPivot: false, isRtl: false })}
+                    </React.Fragment>
+                  ))
+                : theoryFr.paragraphs.map((p, i) => <p key={i}>{renderBold(p)}</p>)}
+            </div>
+          }
           exercises={steps
             .filter((candidate) => candidate.startsWith("ex"))
             .map((candidate, index) => {
               const hint = getA1StepHint(candidate);
+              const body = a1PrintPreview(candidate);
               return {
                 id: candidate,
                 label: `Exercice ${index + 1}`,
-                preview: hint ? <p className="text-xs italic text-zinc-500">{hint}</p> : undefined,
+                preview: (
+                  <div className="space-y-2">
+                    {hint && <p className="text-xs italic text-zinc-600">{hint}</p>}
+                    {body ?? <div className="h-7 border-b border-black/40" />}
+                  </div>
+                ),
               };
             })}
           accentColor="var(--color-accent-alg)"
@@ -4683,7 +5129,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 return (
                   <div className="flex flex-col items-center gap-1 min-w-0 flex-1">
                     <span className="text-xl font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-                    {c > 0 && <div className="flex flex-wrap justify-centÉcrire les dizaineser gap-0.5">{Array.from({length:c},(_,i)=><SvgCentaine key={i} s={4} />)}</div>}
+                    {c > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:c},(_,i)=><SvgCentaine key={i} s={4} />)}</div>}
                     {d > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:d},(_,i)=><SvgDizaine key={i} s={6} />)}</div>}
                     {u > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:u},(_,i)=><SvgUnite key={i} s={10} />)}</div>}
                   </div>
