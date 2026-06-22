@@ -89,13 +89,11 @@ export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
 
 export function PrintDocumentFooter({
   date,
-  version,
   preview = false,
   page = 1,
   totalPages = 1,
 }: {
   date: string;
-  version: string;
   preview?: boolean;
   page?: number;
   totalPages?: number;
@@ -113,6 +111,7 @@ export function PrintDocumentFooter({
         <div>
           <p>Zone Industrielle 4, 1963 Vétroz</p>
           <p>Tél. 027 606 18 60</p>
+          <p>Imprimé le {date}</p>
         </div>
       </div>
       <div className="text-right">
@@ -568,7 +567,6 @@ export function PrintConfigSheet({
                 </div>
                 <PrintDocumentFooter
                   date={printDate}
-                  version={version}
                   preview
                   page={previewPage + 1}
                   totalPages={previewPages.length}
@@ -652,7 +650,6 @@ export function PrintConfigSheet({
             </div>
             <PrintDocumentFooter
               date={printDate}
-              version={version}
               preview
               page={pageIndex + 1}
               totalPages={previewPages.length}
