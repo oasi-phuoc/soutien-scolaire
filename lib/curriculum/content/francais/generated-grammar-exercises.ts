@@ -14,12 +14,18 @@ type GrammarProfile = {
   label: string;
   choices: string[];
   cases: GrammarCase[];
+  casesDisagree?: GrammarCase[];
+  casesAll?: GrammarCase[];
   instruction1?: string;
+  instruction1b?: string;
   instruction2?: string;
   instruction4?: string;
   instruction5?: string;
   inversionPool?: Record<ExerciseDifficulty, string[]>;
   wordPool?: Record<ExerciseDifficulty, string[]>;
+  disagreePools?: Record<ExerciseDifficulty, string[]>;
+  disagreePools2?: Record<ExerciseDifficulty, string[]>;
+  noPrefixes?: boolean;
 };
 
 const TRANSFORMATION_TASKS: Record<string, string[]> = {
@@ -106,10 +112,11 @@ function lowerFirst(text: string): string {
   return text.charAt(0).toLocaleLowerCase("fr-CH") + text.slice(1);
 }
 
-function levelPool(profile: GrammarProfile, difficulty: ExerciseDifficulty): FillItem[] {
+function levelPool(profile: GrammarProfile, difficulty: ExerciseDifficulty, cases?: GrammarCase[]): FillItem[] {
+  const src = cases ?? profile.cases;
   return Array.from({ length: 20 }, (_, index) => {
-    const sample = profile.cases[index % profile.cases.length]!;
-    const prefix = LEVEL_PREFIXES[difficulty][index < 10 ? 0 : 1];
+    const sample = src[index % src.length]!;
+    const prefix = profile.noPrefixes ? "" : LEVEL_PREFIXES[difficulty][index < 10 ? 0 : 1];
     return {
       sentence: prefix ? `${prefix}${lowerFirst(sample.sentence)}` : sample.sentence,
       hint: profile.choices.join(" / "),
@@ -121,6 +128,12 @@ function levelPool(profile: GrammarProfile, difficulty: ExerciseDifficulty): Fil
 
 function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
   const fillPool = (["A1", "A2", "B1"] as const).flatMap((level) => levelPool(profile, level));
+  const fillPoolDisagree = profile.casesDisagree
+    ? (["A1", "A2", "B1"] as const).flatMap((level) => levelPool(profile, level, profile.casesDisagree))
+    : null;
+  const fillPoolAll = profile.casesAll
+    ? (["A1", "A2", "B1"] as const).flatMap((level) => levelPool(profile, level, profile.casesAll))
+    : fillPool;
   const qcmPool: QcmItem[] = fillPool.map((item) => ({
     sentence: item.sentence,
     choices: profile.choices,
@@ -164,39 +177,57 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
     ]),
   ) as Record<ExerciseDifficulty, string[]>;
 
-  return [
-    {
+  let n = 1;
+  const exercises: Exercise[] = [];
+
+  exercises.push({
+    type: "fill",
+    title: `Exercice ${n++}`,
+    instruction: profile.instruction1 ?? "Complétez chaque phrase avec la forme correcte.",
+    items: [],
+    pool: fillPool,
+    poolSize: 5,
+  });
+
+  if (fillPoolDisagree) {
+    exercises.push({
       type: "fill",
-      title: `Exercice 1 — ${profile.label}`,
-      instruction: profile.instruction1 ?? "Complétez chaque phrase avec la forme correcte.",
+      title: `Exercice ${n++}`,
+      instruction: profile.instruction1b ?? "Complétez chaque phrase avec la forme correcte.",
       items: [],
-      pool: fillPool,
+      pool: fillPoolDisagree,
       poolSize: 5,
-    },
-    {
-      type: "fill_select",
-      title: `Exercice 2 — ${profile.label}`,
-      instruction: profile.instruction2 ?? "Choisissez la bonne réponse dans la liste.",
-      wordBank: profile.choices,
-      items: [],
-      pool: fillPool,
-      poolSize: 5,
-      hideWordBank: true,
-    },
-    {
-      type: "word_order",
-      title: `Exercice 3 — ${profile.label}`,
-      instruction: "Remettez les mots dans le bon ordre.",
-      items: [],
-      pool: orderPool,
-      poolSize: 5,
-      allowPartialValidation: true,
-    },
-    {
-      type: "write",
-      title: `Exercice 4 — ${profile.label}`,
-      instruction: profile.instruction4 ?? "Transformez la phrase en respectant précisément la consigne.",
-      levelPromptPools: profile.inversionPool
+    });
+  }
+
+  exercises.push({
+    type: "fill_select",
+    title: `Exercice ${n++}`,
+    instruction: profile.instruction2 ?? "Choisissez la bonne réponse dans la liste.",
+    wordBank: profile.choices,
+    items: [],
+    pool: fillPoolAll,
+    poolSize: 5,
+    hideWordBank: true,
+  });
+
+  exercises.push({
+    type: "word_order",
+    title: `Exercice ${n++}`,
+    instruction: "Remettez les mots dans le bon ordre.",
+    items: [],
+    pool: orderPool,
+    poolSize: 5,
+    allowPartialValidation: true,
+  });
+
+  exercises.push({
+    type: "write",
+    title: `Exercice ${n++}`,
+    instruction: profile.instruction4 ?? "Transformez la phrase en respectant précisément la consigne.",
+    levelPromptPools: profile.disagreePools
+      ? profile.disagreePools
+      : profile.inversionPool
         ? (Object.fromEntries(
             (["A1", "A2", "B1"] as const).map((level) => [
               level,
@@ -204,14 +235,17 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
             ]),
           ) as Record<ExerciseDifficulty, string[]>)
         : transformationPrompts,
-      promptPoolSize: 5,
-      promptLayout: "stacked",
-    },
-    {
-      type: "write",
-      title: `Exercice 5 — ${profile.wordPool ? "Poser une question" : "Production écrite"} : ${profile.label}`,
-      instruction: profile.instruction5 ?? "Rédigez le texte demandé en respectant la notion de la leçon.",
-      levelPromptPools: profile.wordPool
+    promptPoolSize: profile.disagreePools ? 1 : 5,
+    promptLayout: "stacked",
+  });
+
+  exercises.push({
+    type: "write",
+    title: profile.wordPool ? `Exercice ${n++} — Poser une question` : `Exercice ${n++}`,
+    instruction: profile.instruction5 ?? "Rédigez le texte demandé en respectant la notion de la leçon.",
+    levelPromptPools: profile.disagreePools2
+      ? profile.disagreePools2
+      : profile.wordPool
         ? (Object.fromEntries(
             (["A1", "A2", "B1"] as const).map((level) => [
               level,
@@ -219,10 +253,11 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
             ]),
           ) as Record<ExerciseDifficulty, string[]>)
         : writingPrompts,
-      promptPoolSize: 5,
-      promptLayout: "stacked",
-    },
-  ];
+    promptPoolSize: profile.disagreePools2 ? 1 : 5,
+    promptLayout: "stacked",
+  });
+
+  return exercises;
 }
 
 const PROFILES: Record<string, GrammarProfile> = {
@@ -480,19 +515,95 @@ const PROFILES: Record<string, GrammarProfile> = {
   },
   "a2-gr-l09": {
     label: "Les réponses aux questions fermées",
-    choices: ["oui", "non", "si", "moi aussi", "moi non plus", "moi si"],
+    choices: ["oui", "non", "si", "moi aussi", "moi non plus", "moi pas"],
+    noPrefixes: true,
+    instruction1: "Répondez aux questions en indiquant que vous êtes d'accord.",
+    instruction1b: "Répondez aux questions en indiquant que vous n'êtes pas d'accord.",
+    instruction2: "Choisissez la bonne réponse dans la liste.",
+    instruction4: "Répondez aux questions en indiquant que vous n'êtes pas d'accord. Écrivez la réponse complète.",
+    instruction5: "Répondez aux questions en indiquant que vous n'êtes pas d'accord. Écrivez la réponse complète.",
     cases: [
-      { sentence: "Vous habitez à Sion ? — ___, j'habite à Sion.", answer: "oui" },
-      { sentence: "Tu viens demain ? — ___, je ne peux pas.", answer: "non" },
-      { sentence: "Vous n'avez pas reçu la lettre ? — ___, je l'ai reçue.", answer: "si" },
-      { sentence: "J'aime ce film. — ___.", answer: "moi aussi" },
-      { sentence: "Je ne bois pas de café. — ___.", answer: "moi non plus" },
-      { sentence: "Je ne pars pas ce soir. — ___, je pars à huit heures.", answer: "moi si" },
-      { sentence: "Elle travaille ici ? — ___, depuis janvier.", answer: "oui" },
-      { sentence: "Il n'est pas disponible ? — ___, il est dans son bureau.", answer: "si" },
-      { sentence: "Je fais du sport. — ___.", answer: "moi aussi" },
-      { sentence: "Je ne connais personne. — ___.", answer: "moi non plus" },
+      { sentence: "Tu parles français ?\n— ___, je parle français.", answer: "oui" },
+      { sentence: "Vous habitez à Lausanne ?\n— ___, nous habitons à Lausanne.", answer: "oui" },
+      { sentence: "Elle travaille à l'hôpital ?\n— ___, elle est infirmière.", answer: "oui" },
+      { sentence: "Il aime les enfants ?\n— ___, il est très patient.", answer: "oui" },
+      { sentence: "Vous venez à la réunion ?\n— ___, nous serons là.", answer: "oui" },
+      { sentence: "Tu n'aimes pas le café ?\n— ___, j'adore ça !", answer: "si" },
+      { sentence: "Il ne travaille pas le week-end ?\n— ___, il travaille le samedi.", answer: "si" },
+      { sentence: "Vous n'avez pas encore mangé ?\n— ___, on a fini à midi.", answer: "si" },
+      { sentence: "Elle ne prend pas le bus ?\n— ___, elle prend le bus chaque matin.", answer: "si" },
+      { sentence: "Tu ne connais pas ce quartier ?\n— ___, j'y habite !", answer: "si" },
     ],
+    casesDisagree: [
+      { sentence: "Tu habites à Berne ?\n— ___, j'habite à Zurich.", answer: "non" },
+      { sentence: "Vous parlez allemand ?\n— ___, nous parlons français.", answer: "non" },
+      { sentence: "Il est médecin ?\n— ___, il est ingénieur.", answer: "non" },
+      { sentence: "Elle vient ce soir ?\n— ___, elle est fatiguée.", answer: "non" },
+      { sentence: "Vous aimez la randonnée ?\n— ___, nous préférons le ski.", answer: "non" },
+      { sentence: "J'adore faire du vélo.\n— ___, c'est épuisant !", answer: "moi pas" },
+      { sentence: "Je regarde beaucoup la télé.\n— ___, je lis plutôt.", answer: "moi pas" },
+      { sentence: "Je mange de la viande.\n— ___, je suis végétarien.", answer: "moi pas" },
+      { sentence: "J'aime me lever tôt.\n— ___, je préfère dormir !", answer: "moi pas" },
+      { sentence: "Je voyage souvent en avion.\n— ___, je préfère le train.", answer: "moi pas" },
+    ],
+    casesAll: [
+      { sentence: "Tu viens à la fête ?\n— ___, avec plaisir !", answer: "oui" },
+      { sentence: "Tu ne parles pas italien ?\n— ___, je le parle couramment.", answer: "si" },
+      { sentence: "Vous restez pour le dîner ?\n— ___, nous avons un autre rendez-vous.", answer: "non" },
+      { sentence: "J'aime les voyages.\n— ___ !", answer: "moi aussi" },
+      { sentence: "Je ne mange pas de viande.\n— ___ !", answer: "moi non plus" },
+      { sentence: "Je fais du yoga chaque matin.\n— ___, je préfère courir.", answer: "moi pas" },
+      { sentence: "Elle est prête ?\n— ___, elle attend depuis une heure.", answer: "oui" },
+      { sentence: "Tu n'as pas faim ?\n— ___, j'ai très faim !", answer: "si" },
+      { sentence: "Il ne viendra pas ?\n— ___, il est confirmé.", answer: "si" },
+      { sentence: "Tu travailles le samedi ?\n— ___, je suis libre.", answer: "non" },
+    ],
+    disagreePools: {
+      A1: [
+        "Tu aimes le football ?",
+        "Vous habitez en France ?",
+        "Il est professeur ?",
+        "Tu parles anglais ?",
+        "Elle aime danser ?",
+      ],
+      A2: [
+        "Tu n'aimes pas les légumes ?",
+        "Vous ne venez pas ce soir ?",
+        "Il ne travaille pas le week-end ?",
+        "Tu ne connais pas ce restaurant ?",
+        "Elle ne prend pas le métro ?",
+      ],
+      B1: [
+        "Vous n'avez pas lu ce roman ?",
+        "Tu ne fais pas de sport régulièrement ?",
+        "Il ne s'est pas encore inscrit ?",
+        "Vous n'aviez pas entendu parler de ça ?",
+        "Tu ne serais pas d'accord avec cette décision ?",
+      ],
+    },
+    disagreePools2: {
+      A1: [
+        "Tu aimes les épinards ?",
+        "Il est grand ?",
+        "Vous avez un chien ?",
+        "Elle chante bien ?",
+        "Tu aimes les maths ?",
+      ],
+      A2: [
+        "Tu n'aimes pas le rock ?",
+        "Vous ne regardez pas la télé ?",
+        "Il ne fait pas de natation ?",
+        "Tu ne lis pas de romans ?",
+        "Elle ne mange pas de poisson ?",
+      ],
+      B1: [
+        "Tu n'aurais pas mieux à faire ?",
+        "Vous ne seriez pas plutôt d'accord ?",
+        "Il n'aurait pas pu répondre autrement ?",
+        "Tu ne trouves pas ça difficile ?",
+        "Elle ne préférerait pas rester ?",
+      ],
+    },
   },
   "a2-gr-l19": {
     label: "Les pronoms relatifs",

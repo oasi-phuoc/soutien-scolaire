@@ -957,10 +957,11 @@ function FillExercise({
         const rawSentence = parenMatch ? parenMatch[1]! : item.sentence;
         const parenHint = parenMatch ? parenMatch[2]! : null;
 
-        // Detect arrow split (only when no parenthetical): "before → after"
-        const arrowIdx = rawSentence.indexOf(" → ");
-        const sentLine1 = arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
-        const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
+        // Detect newline split first, then arrow split (only when no newline/parenthetical)
+        const nlIdx = rawSentence.indexOf("\n");
+        const arrowIdx = nlIdx < 0 ? rawSentence.indexOf(" → ") : -1;
+        const sentLine1 = nlIdx >= 0 ? rawSentence.slice(0, nlIdx) : arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
+        const sentLine2 = nlIdx >= 0 ? rawSentence.slice(nlIdx + 1) : arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct && revealCorrection ? (
           <span className="inline-flex h-8 w-28 flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle">
