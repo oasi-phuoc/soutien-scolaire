@@ -2,7 +2,6 @@ import type {
   Exercise,
   ExerciseDifficulty,
   FillItem,
-  QcmItem,
 } from "../../grammar-data";
 
 type GrammarCase = {
@@ -134,12 +133,6 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
   const fillPoolAll = profile.casesAll
     ? (["A1", "A2", "B1"] as const).flatMap((level) => levelPool(profile, level, profile.casesAll))
     : fillPool;
-  const qcmPool: QcmItem[] = fillPool.map((item) => ({
-    sentence: item.sentence,
-    choices: profile.choices,
-    correctIdx: Math.max(0, profile.choices.indexOf(item.answer)),
-    difficulty: item.difficulty,
-  }));
   const orderPool = fillPool.map((item) => {
     const sentence = item.sentence.replace("___", item.answer);
     return {
