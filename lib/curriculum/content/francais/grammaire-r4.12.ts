@@ -10,7 +10,7 @@ export const A2_GR_L07: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Une question {a}fermée{/a} a pour réponse oui / non / si.",
+        "Une question {a}fermée{/a} a pour réponse {a}oui{/a} ou {a}non{/a}.",
         "Il existe 3 structures, du plus familier au plus formel.",
       ],
       transItems: {
