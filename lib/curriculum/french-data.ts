@@ -182,10 +182,6 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-l35",   "RP.2", "Les pronoms COD et COI",                          "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",                "grammaire"),
   lesson("A2", "a2-gr-l36",   "RP.3", "Les pronoms Y et EN",                             "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                         "grammaire"),
 
-  // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
-  lesson("A2", "a2-gr-l11",   "RX.17", "Les adjectifs — généralités",                     "Genre, nombre, accord des adjectifs qualificatifs en contexte.",                           "grammaire"),
-  lesson("A2", "a2-gr-l12",   "RX.18", "Les adjectifs — cas particuliers et place",       "Nouveau/beau/vieux, adjectifs invariables, place avant ou après le nom.",                  "grammaire"),
-
   // ── V1 — L'identité ──────────────────────────────────────────────────────────
   lesson("V1", "v1-nationalites",         "V1.1", "Les nationalités",       "Nationalités masculin/féminin, pays d'Europe et du monde.",         "vocabulaire"),
   lesson("V1", "v1-professions",          "V1.2", "Les professions",         "Métiers courants, masculin/féminin des professions.",               "vocabulaire"),
@@ -291,7 +287,6 @@ const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
 };
 
 export const FRENCH_THEMES: FrenchTheme[] = BASE_FRENCH_THEMES
-  .filter((theme) => theme.slug !== "a2-gr-l11" && theme.slug !== "a2-gr-l12")
   .map((theme) => {
     const code = REORGANIZED_GRAMMAR_CODES[theme.slug];
     if (!code) return theme;

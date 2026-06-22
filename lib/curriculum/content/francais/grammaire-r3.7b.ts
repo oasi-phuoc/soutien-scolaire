@@ -1,4 +1,8 @@
 import type { GrammarLesson } from "../../grammar-data";
+import {
+  ADJECTIFS_QUALIFICATIFS_GENERALITES,
+  ADJECTIFS_QUALIFICATIFS_PLACE,
+} from "./adjectifs-qualificatifs-theory";
 
 export const A1_GR_L23: GrammarLesson = {
   slug: "a1-gr-l23",
@@ -6,6 +10,8 @@ export const A1_GR_L23: GrammarLesson = {
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [
+    ...ADJECTIFS_QUALIFICATIFS_GENERALITES,
+    ...ADJECTIFS_QUALIFICATIFS_PLACE,
     { type: "heading", text: "Accord en genre", trans: { en: "Agreement in gender", ar: "المطابقة في الجنس", fa: "مطابقت در جنس", ti: "ምስምማዕ ብጾታ", uk: "Узгодження за родом" } },
     {
       type: "plain_list",

@@ -107,8 +107,6 @@ import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
 import { A1_GR_L23 } from "./content/francais/grammaire-r3.7b";
 import { A2_GR_L07 } from "./content/francais/grammaire-r4.12";
 import { A2_GR_L09 } from "./content/francais/grammaire-r4.13";
-import { A2_GR_L11 } from "./content/francais/grammaire-r4.17";
-import { A2_GR_L12 } from "./content/francais/grammaire-r4.18";
 
 import { A2_GR_L19 } from "./content/francais/grammaire-r4.19";
 import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
@@ -191,7 +189,6 @@ const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
   ...A1_GR_L23,
   code: "R4.1",
   title: "Les adjectifs qualificatifs",
-  theory: [...A2_GR_L11.theory, ...A2_GR_L12.theory],
 };
 
 function applyReorganizedCode<T extends GrammarLesson | ConjLesson>(lesson: T): T {
