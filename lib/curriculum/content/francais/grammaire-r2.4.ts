@@ -43,32 +43,80 @@ export const A1_GR_L10: GrammarLesson = {
       },
     },
     {
-      type: "grid",
-      headers: ["Mot", "Sens", "Exemple"],
-      boldFirstCol: true,
-      transHeaders: {
-        en: ["Word", "Meaning", "Example"],
-        ar: ["الكلمة", "المعنى", "مثال"],
-        fa: ["کلمه", "معنی", "مثال"],
-        ti: ["ቃል", "ትርጉም", "ኣብነት"],
-        uk: ["Слово", "Значення", "Приклад"],
-      },
-      transRows: {
-        en: [["{a}Où ?{/a}", "place", "Où est-ce que tu habites ? (Where do you live?)"], ["{a}Quand ?{/a}", "time", "Quand est-ce qu'il arrive ? (When does he arrive?)"], ["{a}Qui ?{/a}", "person", "Qui est-ce que tu appelles ? (Who are you calling?)"], ["{a}Qu'est-ce que ?{/a}", "thing", "Qu'est-ce que tu manges ? (What are you eating?)"], ["{a}Comment ?{/a}", "manner / state", "Comment tu t'appelles ? (What is your name?)"], ["{a}Pourquoi ?{/a}", "reason", "Pourquoi tu étudies le français ? (Why do you study French?)"], ["{a}Combien ?{/a}", "quantity", "Combien d'enfants vous avez ? (How many children do you have?)"], ["{a}Quel / Quelle ?{/a}", "choice among several", "Quel bus prends-tu ? (Which bus do you take?)"]],
-        ar: [["{a}Où ?{/a}", "المكان", "Où est-ce que tu habites ؟ (أين تسكن؟)"], ["{a}Quand ?{/a}", "الزمان", "Quand est-ce qu'il arrive ؟ (متى يصل؟)"], ["{a}Qui ?{/a}", "الشخص", "Qui est-ce que tu appelles ؟ (من تتصل به؟)"], ["{a}Qu'est-ce que ?{/a}", "الشيء", "Qu'est-ce que tu manges ؟ (ماذا تأكل؟)"], ["{a}Comment ?{/a}", "الطريقة / الحالة", "Comment tu t'appelles ؟ (ما اسمك؟)"], ["{a}Pourquoi ?{/a}", "السبب", "Pourquoi tu étudies le français ؟ (لماذا تدرس الفرنسية؟)"], ["{a}Combien ?{/a}", "الكمية", "Combien d'enfants vous avez ؟ (كم طفلاً لديك؟)"], ["{a}Quel / Quelle ?{/a}", "الاختيار من بين عدة", "Quel bus prends-tu ؟ (أي حافلة تأخذ؟)"]],
-        fa: [["{a}Où ?{/a}", "مکان", "Où est-ce que tu habites ? (کجا زندگی می‌کنی؟)"], ["{a}Quand ?{/a}", "زمان", "Quand est-ce qu'il arrive ? (کِی می‌رسد؟)"], ["{a}Qui ?{/a}", "شخص", "Qui est-ce que tu appelles ? (به چه کسی زنگ می‌زنی؟)"], ["{a}Qu'est-ce que ?{/a}", "چیز", "Qu'est-ce que tu manges ? (چه می‌خوری؟)"], ["{a}Comment ?{/a}", "شیوه / حالت", "Comment tu t'appelles ? (نامت چیست؟)"], ["{a}Pourquoi ?{/a}", "دلیل", "Pourquoi tu étudies le français ? (چرا فرانسوی می‌خوانی؟)"], ["{a}Combien ?{/a}", "مقدار", "Combien d'enfants vous avez ? (چند فرزند دارید؟)"], ["{a}Quel / Quelle ?{/a}", "انتخاب از میان چند", "Quel bus prends-tu ? (کدام اتوبوس را می‌گیری؟)"]],
-        ti: [["{a}Où ?{/a}", "ቦታ", "Où est-ce que tu habites ? (ኣበይ ትቕመጥ?)"], ["{a}Quand ?{/a}", "ግዜ", "Quand est-ce qu'il arrive ? (መዓስ ይመጽእ?)"], ["{a}Qui ?{/a}", "ሰብ", "Qui est-ce que tu appelles ? (ንመን ትድውል?)"], ["{a}Qu'est-ce que ?{/a}", "ነገር", "Qu'est-ce que tu manges ? (እንታይ ትበልዕ?)"], ["{a}Comment ?{/a}", "ኣገባብ / ኩነታት", "Comment tu t'appelles ? (መን ትብሃል?)"], ["{a}Pourquoi ?{/a}", "ምኽንያት", "Pourquoi tu étudies le français ? (ስለምንታይ ፈረንሳይ ትመሃር?)"], ["{a}Combien ?{/a}", "መጠን", "Combien d'enfants vous avez ? (ክንደይ ቆልዑ ኣለዉኻ?)"], ["{a}Quel / Quelle ?{/a}", "ካብ ብዙሕ ምርጫ", "Quel bus prends-tu ? (ኣየናይ ኣውቶቡስ ትወስድ?)"]],
-        uk: [["{a}Où ?{/a}", "місце", "Où est-ce que tu habites ? (Де ти живеш?)"], ["{a}Quand ?{/a}", "час", "Quand est-ce qu'il arrive ? (Коли він приїжджає?)"], ["{a}Qui ?{/a}", "особа", "Qui est-ce que tu appelles ? (Кому ти телефонуєш?)"], ["{a}Qu'est-ce que ?{/a}", "річ", "Qu'est-ce que tu manges ? (Що ти їси?)"], ["{a}Comment ?{/a}", "спосіб / стан", "Comment tu t'appelles ? (Як тебе звати?)"], ["{a}Pourquoi ?{/a}", "причина", "Pourquoi tu étudies le français ? (Чому ти вивчаєш французьку?)"], ["{a}Combien ?{/a}", "кількість", "Combien d'enfants vous avez ? (Скільки у вас дітей?)"], ["{a}Quel / Quelle ?{/a}", "вибір з кількох", "Quel bus prends-tu ? (Який автобус ти береш?)"]],
-      },
-      rows: [
-        ["{a}Où ?{/a}", "lieu", "Où est-ce que tu habites ?"],
-        ["{a}Quand ?{/a}", "temps", "Quand est-ce qu'il arrive ?"],
-        ["{a}Qui ?{/a}", "personne", "Qui est-ce que tu appelles ?"],
-        ["{a}Qu'est-ce que ?{/a}", "chose", "Qu'est-ce que tu manges ?"],
-        ["{a}Comment ?{/a}", "manière / état", "Comment tu t'appelles ?"],
-        ["{a}Pourquoi ?{/a}", "raison", "Pourquoi tu étudies le français ?"],
-        ["{a}Combien ?{/a}", "quantité", "Combien d'enfants vous avez ?"],
-        ["{a}Quel / Quelle ?{/a}", "choix parmi plusieurs", "Quel bus prends-tu ?"],
+      type: "selector",
+      tabs: [
+        {
+          label: "Où ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}lieu{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Où est-ce que tu habites ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Où habites-tu ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu habites où ?"] },
+          ],
+        },
+        {
+          label: "Quand ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}temps{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Quand est-ce qu'il arrive ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Quand arrive-t-il ?"] },
+            { type: "highlight", label: "Informel", items: ["Il arrive quand ?"] },
+          ],
+        },
+        {
+          label: "Qui ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}personne{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Qui est-ce que tu appelles ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Qui appelles-tu ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu appelles qui ?"] },
+          ],
+        },
+        {
+          label: "Qu'est-ce que ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}chose{/a} — à l'oral : quoi"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Qu'est-ce que tu manges ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Que manges-tu ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu manges quoi ?"] },
+          ],
+        },
+        {
+          label: "Comment ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}manière / état{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Comment est-ce que tu t'appelles ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Comment t'appelles-tu ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu t'appelles comment ?"] },
+          ],
+        },
+        {
+          label: "Pourquoi ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}raison{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Pourquoi est-ce que tu étudies le français ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Pourquoi étudies-tu le français ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu étudies le français pourquoi ?"] },
+          ],
+        },
+        {
+          label: "Combien ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}quantité{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Combien est-ce que ça coûte ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Combien cela coûte-t-il ?"] },
+            { type: "highlight", label: "Informel", items: ["Ça coûte combien ?"] },
+          ],
+        },
+        {
+          label: "Quel ?",
+          content: [
+            { type: "plain_list", items: ["Sens : {a}choix parmi plusieurs{/a}"], noBulletItems: [0] },
+            { type: "highlight", label: "Neutre — est-ce que", items: ["Quel bus est-ce que tu prends ?"] },
+            { type: "highlight", label: "Formel — inversion", items: ["Quel bus prends-tu ?"] },
+            { type: "highlight", label: "Informel", items: ["Tu prends quel bus ?"] },
+          ],
+        },
       ],
     },
     { type: "heading", text: "Trois façons de construire la question", sub: true, trans: { en: "Three ways to build the question", ar: "ثلاث طرق لبناء السؤال", fa: "سه روش برای ساختن سؤال", ti: "ሕቶ ንምስራሕ ሰለስተ መንገድታት", uk: "Три способи побудувати запитання" } },
