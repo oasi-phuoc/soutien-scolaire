@@ -105,30 +105,13 @@ export const A1_GR_L10: GrammarLesson = {
         {
           label: "Quel",
           content: [
+            { type: "highlight", label: "Quel / Quelle — accord", items: ["{a}Quel{/a} + nom masculin singulier : Quel jour ?", "{a}Quelle{/a} + nom féminin singulier : Quelle heure ?", "{a}Quels{/a} + nom masculin pluriel : Quels films ?", "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?"], noBulletItems: [0, 1, 2, 3] },
             { type: "highlight", label: "Neutre — est-ce que", items: ["Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?", "Quel bus est-ce que tu prends ?"], noBulletItems: [0, 1] },
             { type: "highlight", label: "Formel — inversion", items: ["Mot interrogatif + {a}verbe-sujet{/a} ?", "Quel bus prends-tu ?", "Quand le verbe se termine par une voyelle + il/elle/on, on ajoute {a}-t-{/a}"], noBulletItems: [0, 1, 2] },
             { type: "highlight", label: "Informel", items: ["Sujet + verbe + {a}mot interrogatif{/a} ?", "Tu prends quel bus ?"], noBulletItems: [0, 1] },
           ],
         },
       ],
-    },
-    {
-      type: "highlight",
-      label: "Quel / Quelle — accord",
-      items: [
-        "{a}Quel{/a} + nom masculin singulier : Quel jour ?",
-        "{a}Quelle{/a} + nom féminin singulier : Quelle heure ?",
-        "{a}Quels{/a} + nom masculin pluriel : Quels films ?",
-        "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?",
-      ],
-      transLabel: { en: "Quel / Quelle — agreement", ar: "Quel / Quelle — التطابق", fa: "Quel / Quelle — مطابقت", ti: "Quel / Quelle — ምስምማዕ", uk: "Quel / Quelle — узгодження" },
-      transItems: {
-        en: ["{a}Quel{/a} + masculine singular noun: Quel jour ? (Which day?)", "{a}Quelle{/a} + feminine singular noun: Quelle heure ? (What time?)", "{a}Quels{/a} + masculine plural noun: Quels films ? (Which films?)", "{a}Quelles{/a} + feminine plural noun: Quelles langues ? (Which languages?)"],
-        ar: ["{a}Quel{/a} + اسم مذكر مفرد: Quel jour ؟ (أي يوم؟)", "{a}Quelle{/a} + اسم مؤنث مفرد: Quelle heure ؟ (أي ساعة؟)", "{a}Quels{/a} + اسم مذكر جمع: Quels films ؟ (أي أفلام؟)", "{a}Quelles{/a} + اسم مؤنث جمع: Quelles langues ؟ (أي لغات؟)"],
-        fa: ["{a}Quel{/a} + اسم مذکر مفرد: Quel jour ? (کدام روز؟)", "{a}Quelle{/a} + اسم مؤنث مفرد: Quelle heure ? (چه ساعتی؟)", "{a}Quels{/a} + اسم مذکر جمع: Quels films ? (کدام فیلم‌ها؟)", "{a}Quelles{/a} + اسم مؤنث جمع: Quelles langues ? (کدام زبان‌ها؟)"],
-        ti: ["{a}Quel{/a} + ተባዕታይ ነጠላ ስም፦ Quel jour ? (ኣየናይ መዓልቲ?)", "{a}Quelle{/a} + ኣንስታይ ነጠላ ስም፦ Quelle heure ? (ክንደይ ሰዓት?)", "{a}Quels{/a} + ተባዕታይ ብዙሕ ስም፦ Quels films ? (ኣየኖት ፊልምታት?)", "{a}Quelles{/a} + ኣንስታይ ብዙሕ ስም፦ Quelles langues ? (ኣየኖት ቋንቋታት?)"],
-        uk: ["{a}Quel{/a} + іменник чоловічого роду однини: Quel jour ? (Який день?)", "{a}Quelle{/a} + іменник жіночого роду однини: Quelle heure ? (Котра година?)", "{a}Quels{/a} + іменник чоловічого роду множини: Quels films ? (Які фільми?)", "{a}Quelles{/a} + іменник жіночого роду множини: Quelles langues ? (Які мови?)"],
-      },
     },
   ],
   exercises: [
