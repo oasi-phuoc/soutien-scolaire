@@ -10,15 +10,30 @@ export const A1_GR_L10: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "Les mots interrogatifs permettent de poser des questions précises.",
-        "Ils se placent en début de question (ou à la fin à l'oral informel).",
+        "Une question ouverte est une question qui demande une réponse avec une information. On ne peut pas répondre seulement par oui ou non. Les questions ouvertes commencent souvent par un mot interrogatif : qui, quoi, où, quand, comment, pourquoi, combien, quel, quelle.",
       ],
       transItems: {
-        en: ["Question words let you ask precise questions.", "They are placed at the start of the question (or at the end in informal speech)."],
-        ar: ["أدوات الاستفهام تتيح لك طرح أسئلة دقيقة.", "توضع في بداية السؤال (أو في نهايته في الكلام غير الرسمي)."],
-        fa: ["کلمات پرسشی به شما اجازه می‌دهند سؤالات دقیق بپرسید.", "آن‌ها در ابتدای سؤال قرار می‌گیرند (یا در پایان در گفتار غیررسمی)."],
-        ti: ["ናይ ሕቶ ቃላት ቅኑዓት ሕቶታት ንምሕታት የኽእሉ።", "ኣብ መጀመርታ ሕቶ ይቕመጡ (ወይ ኣብ መወዳእታ ኣብ ዘይወግዓዊ ዘረባ)።"],
-        uk: ["Питальні слова дозволяють ставити точні запитання.", "Вони ставляться на початку запитання (або в кінці в неформальному мовленні)."],
+        en: ["An open question is a question that requires an answer with information. You cannot answer only yes or no. Open questions often begin with a question word: who, what, where, when, how, why, how much, which."],
+        ar: ["السؤال المفتوح هو سؤال يتطلب إجابة بمعلومة. لا يمكن الإجابة فقط بنعم أو لا. تبدأ الأسئلة المفتوحة غالباً بأداة استفهام: من، ماذا، أين، متى، كيف، لماذا، كم، أي."],
+        fa: ["سؤال باز سؤالی است که پاسخی با اطلاعات می‌طلبد. نمی‌توان فقط با بله یا خیر پاسخ داد. سؤالات باز اغلب با یک کلمه‌ی پرسشی شروع می‌شوند: چه کسی، چه، کجا، کِی، چطور، چرا، چقدر، کدام."],
+        ti: ["ክፉት ሕቶ ምስ ሓበሬታ መልሲ ዝሓቱ ሕቶ እዩ። ብሆወ ወይ ኣይሆ ጥራይ ክትምልስ ኣይትኽእልን። ክፉት ሕቶታት ብናይ ሕቶ ቃል ይጅምሩ፦ መን፣ እንታይ፣ ኣበይ፣ መዓስ፣ ከመይ፣ ስለምንታይ፣ ክንደይ፣ ኣየናይ።"],
+        uk: ["Відкрите запитання — це запитання, що потребує відповіді з інформацією. Не можна відповісти лише так або ні. Відкриті запитання часто починаються з питального слова: хто, що, де, коли, як, чому, скільки, який."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Ils se placent en début de question.",
+        "Ou à la fin à l'oral informel.",
+      ],
+      transLabel: { en: "", ar: "", fa: "", ti: "", uk: "" },
+      transItems: {
+        en: ["They are placed at the start of the question.", "Or at the end in informal speech."],
+        ar: ["توضع في بداية السؤال.", "أو في نهايته في الكلام غير الرسمي."],
+        fa: ["آن‌ها در ابتدای سؤال قرار می‌گیرند.", "یا در پایان در گفتار غیررسمی."],
+        ti: ["ኣብ መጀመርታ ሕቶ ይቕመጡ።", "ወይ ኣብ ዘይወግዓዊ ዘረባ ኣብ መወዳእታ።"],
+        uk: ["Вони ставляться на початку запитання.", "Або в кінці в неформальному мовленні."],
       },
     },
     {
