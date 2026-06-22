@@ -705,7 +705,7 @@ export const A1_CONJ_L15: ConjLesson = {
           answers: [0, 1, 1, 1, 2, 2],
         },
         {
-          words: ["Est-ce que", "tu", "sais", "conduire", "?"],
+          words: ["Est-ce que", "tu", "sais", "conduire"],
           answers: [null, 0, 1, 2, null],
         },
       ],

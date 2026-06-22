@@ -202,7 +202,7 @@ export const A1_CONJ_L30: ConjLesson = {
         { sentence: "Je suis parti tôt ce matin.", words: ["Je", "suis", "parti", "tôt", "ce", "matin."] },
         { sentence: "Nous sommes arrivés en retard.", words: ["Nous", "sommes", "arrivés", "en", "retard."] },
         { sentence: "Elles ne sont pas restées longtemps.", words: ["Elles", "ne", "sont", "pas", "restées", "longtemps."] },
-        { sentence: "Tu es née en France ?", words: ["Tu", "es", "née", "en", "France", "?"] },
+        { sentence: "Tu es née en France ?", words: ["Tu", "es", "née", "en", "France"] },
       ],
       poolSize: 5,
     },

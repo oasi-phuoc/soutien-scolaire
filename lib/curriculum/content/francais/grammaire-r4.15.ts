@@ -219,11 +219,11 @@ export const A2_CONJ_L05: ConjLesson = {
       instruction: "Remettez les mots dans le bon ordre pour former une phrase à l'impératif.",
       items: [],
       pool: [
-        { sentence: "Parle plus lentement !", words: ["Parle", "plus", "lentement", "!"] },
-        { sentence: "Ne mangez pas de sucre !", words: ["Ne", "mangez", "pas", "de", "sucre", "!"] },
-        { sentence: "Soyons patients ensemble !", words: ["Soyons", "patients", "ensemble", "!"] },
-        { sentence: "Ne pars pas sans moi !", words: ["Ne", "pars", "pas", "sans", "moi", "!"] },
-        { sentence: "Finissez vos devoirs avant ce soir !", words: ["Finissez", "vos", "devoirs", "avant", "ce", "soir", "!"] },
+        { sentence: "Parle plus lentement !", words: ["Parle", "plus", "lentement"] },
+        { sentence: "Ne mangez pas de sucre !", words: ["Ne", "mangez", "pas", "de", "sucre"] },
+        { sentence: "Soyons patients ensemble !", words: ["Soyons", "patients", "ensemble"] },
+        { sentence: "Ne pars pas sans moi !", words: ["Ne", "pars", "pas", "sans", "moi"] },
+        { sentence: "Finissez vos devoirs avant ce soir !", words: ["Finissez", "vos", "devoirs", "avant", "ce", "soir"] },
       ],
       poolSize: 4,
     },
@@ -234,15 +234,15 @@ export const A2_CONJ_L05: ConjLesson = {
       colors: ["Verbe impératif", "Négation"],
       items: [
         {
-          words: ["Parle", "plus", "lentement", "!"],
+          words: ["Parle", "plus", "lentement"],
           answers: [0, null, null, null],
         },
         {
-          words: ["Ne", "mange", "pas", "de", "sucre", "!"],
+          words: ["Ne", "mange", "pas", "de", "sucre"],
           answers: [1, 0, 1, null, null, null],
         },
         {
-          words: ["Finissez", "vos", "devoirs", "!"],
+          words: ["Finissez", "vos", "devoirs"],
           answers: [0, null, null, null],
         },
       ],

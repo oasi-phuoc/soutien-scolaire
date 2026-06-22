@@ -401,7 +401,7 @@ export const A2_CONJ_L02: ConjLesson = {
         { sentence: "Il part à huit heures.",                             words: ["Il", "part", "à", "huit", "heures."] },
         { sentence: "Nous choisissons un appartement calme.",            words: ["Nous", "choisissons", "un", "appartement", "calme."] },
         { sentence: "Ils viennent de Syrie.",                             words: ["Ils", "viennent", "de", "Syrie."] },
-        { sentence: "Tu obéis à tes parents ?",                          words: ["Tu", "obéis", "à", "tes", "parents", "?"] },
+        { sentence: "Tu obéis à tes parents ?",                          words: ["Tu", "obéis", "à", "tes", "parents"] },
         { sentence: "Elle sort avec ses enfants.",                        words: ["Elle", "sort", "avec", "ses", "enfants."] },
         { sentence: "Je dors bien à la campagne.",                        words: ["Je", "dors", "bien", "à", "la", "campagne."] },
         { sentence: "Vous réussissez vos examens.",                      words: ["Vous", "réussissez", "vos", "examens."] },

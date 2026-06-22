@@ -104,7 +104,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       pool: [
         { sentence: "Je vais appeler dans cinq minutes.", words: ["Je", "vais", "appeler", "dans", "cinq", "minutes."] },
         { sentence: "L'année prochaine, nous voyagerons en Asie.", words: ["L'année", "prochaine,", "nous", "voyagerons", "en", "Asie."] },
-        { sentence: "Attention, tu vas tomber !", words: ["Attention,", "tu", "vas", "tomber", "!"] },
+        { sentence: "Attention, tu vas tomber !", words: ["Attention,", "tu", "vas", "tomber"] },
         { sentence: "Dans dix ans, il habitera à Paris.", words: ["Dans", "dix", "ans,", "il", "habitera", "à", "Paris."] },
         { sentence: "On va manger, j'ai faim.", words: ["On", "va", "manger,", "j'ai", "faim."] },
       ],

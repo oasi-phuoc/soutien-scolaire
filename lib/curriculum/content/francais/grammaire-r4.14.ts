@@ -169,7 +169,7 @@ export const A2_CONJ_L04: ConjLesson = {
         { sentence: "Je voudrais un café, s'il vous plaît.", words: ["Je", "voudrais", "un", "café,", "s'il", "vous", "plaît."] },
         { sentence: "Tu devrais consulter un médecin.", words: ["Tu", "devrais", "consulter", "un", "médecin."] },
         { sentence: "Elle aimerait voyager en Italie.", words: ["Elle", "aimerait", "voyager", "en", "Italie."] },
-        { sentence: "Vous pourriez m'aider, s'il vous plaît ?", words: ["Vous", "pourriez", "m'aider,", "s'il", "vous", "plaît", "?"] },
+        { sentence: "Vous pourriez m'aider, s'il vous plaît ?", words: ["Vous", "pourriez", "m'aider,", "s'il", "vous", "plaît"] },
         { sentence: "Ils seraient contents de vous voir.", words: ["Ils", "seraient", "contents", "de", "vous", "voir."] },
       ],
       poolSize: 4,
