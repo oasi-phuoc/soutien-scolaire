@@ -509,7 +509,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const lessonCode = lessonCodeFromId(lessonId);
 
   const [prompt] = useState<OralPrompt>(() => randomOralPrompt(level));
-  const [situation] = useState(() => randomOralSituation());
+  const [situation] = useState(() => randomOralSituation(level));
   const compactImage = /PO_(?:Chaussure|Cinema|Telephone)\.webp$/.test(situation.image);
   const imageWidth = compactImage ? 1402 : 1448;
   const imageHeight = compactImage ? 1122 : 1086;
