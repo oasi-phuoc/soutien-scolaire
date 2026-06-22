@@ -2259,10 +2259,11 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           onPrint={handlePrint}
           theoryPreview={lesson ? <TheoryView lesson={lesson} pivot={pivot} showPivot={showPivotTranslation} /> : undefined}
           exercises={trainingSteps
-            .filter((candidate) => candidate.kind !== "theory")
-            .map((_, index) => ({
+            .filter((step) => step.kind !== "theory" && step.kind !== "eval_start" && step.kind !== "pass_toggle" && step.kind !== "results")
+            .map((step, index) => ({
               id: String(index),
               label: `Exercice ${index + 1}`,
+              preview: renderEvalStep(step, 0, () => {}) ?? undefined,
             }))}
           accentColor="var(--color-accent-alg)"
         />

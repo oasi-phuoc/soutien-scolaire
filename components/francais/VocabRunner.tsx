@@ -517,19 +517,40 @@ export function VocabRunner({ theme }: Props) {
       )}
 
       {/* Print config sheet */}
-      {showPrintConfig && (
-        <PrintConfigSheet
-          onClose={() => setShowPrintConfig(false)}
-          onPrint={handlePrint}
-          exercises={steps
-            .filter((candidate) => !candidate.isTheory && !candidate.isEval)
-            .map((candidate, index) => ({
-              id: candidate.key,
-              label: candidate.label || `Exercice ${index + 1}`,
-            }))}
-          accentColor="var(--color-accent-fr)"
-        />
-      )}
+      {showPrintConfig && (() => {
+        const noop = () => {};
+        function exPreview(stepKey: string) {
+          switch (stepKey) {
+            case "ex1-image-match":     return <ExImageMatch theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex2-article":         return <ExArticle theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex3-anagram":         return <ExAnagram theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex4-missing-letters": return <ExMissingLetters theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex5-definition-match":return <ExDefinitionMatch theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex6-fill-sentences":  return <ExFillSentences theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex-masc-fem":         return <ExMascFem theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex7-image-write":     return <ExImageWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex8-dictation":       return <ExDictation theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex-word-order":       return <ExWordOrder theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex9-sentence-write":  return <ExSentenceWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            case "ex10-question-write": return <ExQuestionWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
+            default: return undefined;
+          }
+        }
+        return (
+          <PrintConfigSheet
+            onClose={() => setShowPrintConfig(false)}
+            onPrint={handlePrint}
+            exercises={steps
+              .filter((candidate) => !candidate.isTheory && !candidate.isEval)
+              .map((candidate, index) => ({
+                id: candidate.key,
+                label: candidate.label || `Exercice ${index + 1}`,
+                preview: exPreview(candidate.key),
+              }))}
+            accentColor="var(--color-accent-fr)"
+          />
+        );
+      })()}
 
       {/* Step content */}
       <div className="min-h-[280px]">

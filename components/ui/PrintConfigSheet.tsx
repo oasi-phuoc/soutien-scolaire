@@ -63,12 +63,9 @@ export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.3fr)] items-start gap-[3%] border-b border-black pb-[1.5%]">
         {/* Left: school identity */}
         <div className="text-[clamp(4px,0.85vw,7px)] leading-snug">
-          <p>SCAI</p>
+          <p className="text-[clamp(8px,1.7vw,14px)] font-bold">SCAI</p>
           <p>2025-2026</p>
           <p className="font-bold uppercase">Classes d&apos;accueil</p>
-          <p className="font-bold">Centre de formation Le Botza</p>
-          <p>Zone Industrielle 4, 1963 Vétroz</p>
-          <p>Tél. 027 606 18 60</p>
         </div>
         {/* Centre: logo only */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -560,7 +557,7 @@ export function PrintConfigSheet({
                       {currentPreview.exercises.map((item, index) => (
                         <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
                           <div className="mb-1 flex items-start gap-2 font-bold">
-                            <span>{previewPage * 4 + index + 1}.</span>
+                            <span>{(previewPage - (theory ? 1 : 0)) * 4 + index + 1}.</span>
                             <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
                             {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                           </div>
@@ -641,7 +638,7 @@ export function PrintConfigSheet({
                   {page.exercises.map((item, exIndex) => (
                     <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
                       <div className="mb-1 flex items-start gap-2 text-[10px] font-bold">
-                        <span>{pageIndex * 4 + exIndex + 1}.</span>
+                        <span>{(pageIndex - (theory ? 1 : 0)) * 4 + exIndex + 1}.</span>
                         <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
                         {evalMode && (
                           <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
@@ -675,18 +672,18 @@ export function PrintConfigSheet({
             <div className="mt-5 flex gap-3">
               <button
                 type="button"
-                onClick={() => setShowExitWarning(false)}
+                onClick={onClose}
                 className="min-h-11 flex-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-semibold text-[var(--color-text-primary)]"
               >
-                Rester
+                Quitter
               </button>
               <button
                 type="button"
-                onClick={onClose}
+                onClick={() => setShowExitWarning(false)}
                 className="min-h-11 flex-1 rounded-xl px-4 text-sm font-bold text-white"
                 style={{ background: accentColor }}
               >
-                Quitter
+                Rester
               </button>
             </div>
           </div>
