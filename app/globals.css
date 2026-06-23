@@ -340,3 +340,8 @@ input[type=number] {
     content: counter(pages);
   }
 }
+
+.print-ex-content h2,
+.print-ex-content p.font-bold {
+  display: none !important;
+}

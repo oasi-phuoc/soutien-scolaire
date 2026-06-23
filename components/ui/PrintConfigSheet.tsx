@@ -105,36 +105,42 @@ export function PrintDocumentHeader({
           ))}
         </div>
         {/* Right: same 4-column table in both modes; first 3 cols hidden in exercise mode */}
-        <table className="h-full shrink-0 table-fixed border-collapse text-center text-[clamp(7px,1.9vw,13px)]">
-          <colgroup>
-            {[0, 1, 2, 3].map((i) => <col key={i} style={{ width: "3em" }} />)}
-          </colgroup>
-          <thead>
-            <tr>
+        <div
+          className="shrink-0 text-center text-[clamp(7px,1.9vw,13px)]"
+          style={{ display: "table", height: "100%", tableLayout: "fixed", borderCollapse: "collapse" }}
+        >
+          <div style={{ display: "table-header-group" }}>
+            <div style={{ display: "table-row" }}>
               {(["Pts", "Total", "Note", "N°"] as const).map((h, i) => {
                 const hide = !evalMode && i < 3;
                 return (
-                  <th key={h} className={`align-middle font-bold ${hide ? "border-0 p-0" : "border border-black px-[0.8em] py-[0.5em]"}`}>
+                  <div key={h}
+                    style={{ display: "table-cell", width: "3em" }}
+                    className={`align-middle font-bold ${hide ? "border-0 p-0" : "border border-black px-[0.8em] py-[0.5em]"}`}
+                  >
                     {hide ? null : h}
-                  </th>
+                  </div>
                 );
               })}
-            </tr>
-          </thead>
-          <tbody style={{ height: "100%" }}>
-            <tr>
+            </div>
+          </div>
+          <div style={{ display: "table-row-group", height: "100%" }}>
+            <div style={{ display: "table-row" }}>
               {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
                 const hide = !evalMode && i < 3;
                 const isTotal = i === 1 && evalMode;
                 return (
-                  <td key={i} className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em] py-[0.5em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}>
+                  <div key={i}
+                    style={{ display: "table-cell" }}
+                    className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em] py-[0.5em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}
+                  >
                     {val !== null ? val : ""}
-                  </td>
+                  </div>
                 );
               })}
-            </tr>
-          </tbody>
-        </table>
+            </div>
+          </div>
+        </div>
       </div>
       {config.title && (
         <p className="py-[3%] text-center text-[1.5em] font-bold leading-tight">
@@ -170,8 +176,7 @@ export function PrintDocumentFooter({
           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
         />
         <div>
-          <p>Zone Industrielle 4, 1963 Vétroz</p>
-          <p>Tél. 027 606 18 60</p>
+          <p>Zone Industrielle 4, 1963 Vétroz — Tél. 027 606 18 60</p>
           <p>Imprimé le {date}</p>
         </div>
       </div>
@@ -267,12 +272,13 @@ export function PrintConfigSheet({
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
   const [title, setTitle] = useState(() => lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
-  const [previewPage, setPreviewPage] = useState(0);
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
     exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
   );
+  const [dragIdx, setDragIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
 
   useEffect(() => {
     setTitle(evalMode ? "Évaluation" : lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
@@ -316,7 +322,7 @@ export function PrintConfigSheet({
       // (break-inside: avoid), the footer is fixed to the bottom of every page
       // via globals.css @media print + CSS page counters. Symmetric top/bottom
       // @page margins give pages 2+ the same top spacing as the footer zone.
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:20mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-exercise h2{display:none!important;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:20mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -336,26 +342,10 @@ export function PrintConfigSheet({
       occurrence,
     }));
   });
-  const exercisePages = Array.from(
-    { length: Math.ceil(previewExercises.length / 4) },
-    (_, index) => previewExercises.slice(index * 4, index * 4 + 4),
-  );
-  const previewPages: Array<{ showTheory: boolean; exercises: typeof previewExercises }> = [
-    ...(theory ? [{ showTheory: true, exercises: [] as typeof previewExercises }] : []),
-    ...exercisePages.map((items) => ({ showTheory: false, exercises: items })),
-  ];
-  if (previewPages.length === 0) previewPages.push({ showTheory: false, exercises: [] });
-
-  useEffect(() => {
-    setPreviewPage((current) => Math.min(current, previewPages.length - 1));
-  }, [previewPages.length]);
-  const currentPreview = previewPages[previewPage]!;
 
   const handleBack = () => {
     if (step === 0) {
       onClose();
-    } else if (step === 2 && previewPage > 0) {
-      setPreviewPage((current) => current - 1);
     } else {
       setStep((current) => current - 1);
     }
@@ -364,9 +354,6 @@ export function PrintConfigSheet({
   const handleNext = () => {
     if (step < 2) {
       setStep((current) => current + 1);
-      if (step === 1) setPreviewPage(0);
-    } else if (previewPage < previewPages.length - 1) {
-      setPreviewPage((current) => current + 1);
     } else if (!hasPrinted) {
       setShowExitWarning(true);
     } else {
@@ -492,11 +479,39 @@ export function PrintConfigSheet({
                 Exercices
               </h2>
               <div className="rounded-xl border border-[var(--color-border-default)] divide-y divide-[var(--color-border-default)]">
-                {exercises.map((ex) => {
-                  const sel = selection.find((s) => s.id === ex.id)!;
+                {selection.map((sel, selIdx) => {
+                  const ex = exercises.find((e) => e.id === sel.id);
+                  if (!ex) return null;
+                  const isDragOver = dragOverIdx === selIdx && dragIdx !== selIdx;
                   return (
-                    <div key={ex.id} className="px-4 py-3">
-                      <div className="flex items-center gap-4">
+                    <div
+                      key={ex.id}
+                      draggable
+                      onDragStart={() => setDragIdx(selIdx)}
+                      onDragOver={(e) => { e.preventDefault(); setDragOverIdx(selIdx); }}
+                      onDragEnd={() => {
+                        const from = dragIdx;
+                        const to = dragOverIdx;
+                        if (from !== null && to !== null && from !== to) {
+                          setSelection((prev) => {
+                            const next = [...prev];
+                            const [removed] = next.splice(from, 1);
+                            next.splice(to, 0, removed!);
+                            return next;
+                          });
+                        }
+                        setDragIdx(null);
+                        setDragOverIdx(null);
+                      }}
+                      className={`px-4 py-3 transition-colors ${isDragOver ? "bg-[var(--color-bg-secondary)]" : ""}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="shrink-0 cursor-grab text-[var(--color-text-tertiary)]" aria-hidden>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="9" cy="7" r="1.5" /><circle cx="9" cy="12" r="1.5" /><circle cx="9" cy="17" r="1.5" />
+                            <circle cx="15" cy="7" r="1.5" /><circle cx="15" cy="12" r="1.5" /><circle cx="15" cy="17" r="1.5" />
+                          </svg>
+                        </div>
                         <CheckBox
                           checked={sel.included}
                           onChange={(v) => setIncluded(ex.id, v)}
@@ -512,7 +527,7 @@ export function PrintConfigSheet({
                           </p>
                         </button>
                       </div>
-                      <div className="mt-3 space-y-2 pl-10">
+                      <div className="mt-3 space-y-2 pl-[52px]">
                         <div className="flex items-center justify-between gap-3">
                           <span className="text-xs text-[var(--color-text-secondary)]">
                             {sel.occurrences === 0 ? "Exercice retiré" : "Récurrences"}
@@ -620,62 +635,45 @@ export function PrintConfigSheet({
 
           {step === 2 && (
             <section className="space-y-4">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
-                  Aperçu avant impression
-                </h2>
-                <span className="text-xs font-semibold tabular-nums text-[var(--color-text-secondary)]">
-                  Page {previewPage + 1} sur {previewPages.length}
-                </span>
-              </div>
-              <div className="mx-auto flex aspect-[210/297] w-full max-w-[44rem] flex-col overflow-hidden border border-zinc-300 bg-white p-[5%] text-black shadow-lg">
-                {/* Header on the first page only — matches the printed PDF */}
-                {previewPage === 0 && <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
-                <div className={`min-h-0 flex-1 overflow-hidden text-[clamp(6px,1.35vw,10px)] leading-relaxed ${previewPage > 0 ? "pt-[6%]" : ""}`}>
-                  {currentPreview.showTheory && (
-                    <div className="print-preview-content origin-top-left [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
-                      {theoryPreview ?? (
-                        <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
-                      )}
-                    </div>
-                  )}
-                  {currentPreview.exercises.length > 0 && (() => {
-                    const exBefore = previewPages.slice(0, previewPage).reduce((sum, p) => sum + p.exercises.length, 0);
-                    return (
-                      <ol className="space-y-5">
-                        {currentPreview.exercises.map((item, index) => {
-                          const seqNum = exBefore + index + 1;
-                          return (
-                            <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
-                              <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[2.1em] font-bold" style={{ color: accentColor }}>
-                                <span className="flex-1">Exercice {seqNum}</span>
-                                {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
-                              </div>
-                              <div className="text-zinc-800 [&_button]:pointer-events-none [&_h2]:hidden">
-                                {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ol>
-                    );
-                  })()}
+              <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+                Aperçu avant impression
+              </h2>
+              <div
+                className="mx-auto w-full max-w-[44rem] overflow-y-auto rounded border border-zinc-300 bg-white p-[5%] text-black shadow-lg"
+                style={{ maxHeight: "75vh" }}
+              >
+                <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
+                {theory && (
+                  <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
+                    {theoryPreview ?? (
+                      <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
+                    )}
+                  </div>
+                )}
+                {previewExercises.length > 0 && (
+                  <ol className="mt-4 space-y-5">
+                    {previewExercises.map((item, index) => (
+                      <li key={item.key} className="border-b border-zinc-200 pb-3">
+                        <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                          <span className="flex-1">Exercice {index + 1}</span>
+                          {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                        </div>
+                        <div className="print-ex-content text-zinc-800 [&_button]:pointer-events-none">
+                          {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                <div className="mt-8">
+                  <PrintDocumentFooter date={printDate} preview page={1} totalPages={1} />
                 </div>
-                <PrintDocumentFooter
-                  date={printDate}
-                  preview
-                  page={previewPage + 1}
-                  totalPages={previewPages.length}
-                />
               </div>
               {!hasPrintableContent && (
                 <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-700">
                   Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
                 </p>
               )}
-              <p className="text-center text-sm text-[var(--color-text-secondary)]">
-                Utilisez <strong>Suivant</strong> pour feuilleter et <strong>Imprimer</strong> pour ouvrir le PDF.
-              </p>
             </section>
           )}
         </main>
@@ -736,7 +734,7 @@ export function PrintConfigSheet({
                     <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
                   )}
                 </div>
-                <div className="[&_button]:pointer-events-none [&_h2]:hidden">
+                <div className="print-ex-content [&_button]:pointer-events-none">
                   {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
                 </div>
               </li>
