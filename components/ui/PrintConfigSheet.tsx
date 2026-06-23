@@ -57,7 +57,15 @@ function formatPrintDate(date = new Date()): string {
   return new Intl.DateTimeFormat("fr-CH", { day: "2-digit", month: "2-digit", year: "numeric" }).format(date);
 }
 
-export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
+export function PrintDocumentHeader({
+  config,
+  evalMode = false,
+  totalPoints,
+}: {
+  config: PrintHeaderConfig;
+  evalMode?: boolean;
+  totalPoints?: number;
+}) {
   return (
     <div className="print-document-header mb-[4%] w-full text-black">
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.3fr)] items-start gap-[3%] border-b border-black pb-[1.5%]">
@@ -82,10 +90,38 @@ export function PrintDocumentHeader({ config }: { config: PrintHeaderConfig }) {
         <p className="text-left">{config.classLevel} {config.classNumber}</p>
         <p className="truncate text-left">Cours {config.course}</p>
       </div>
-      <div className="mt-[4%] grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(34px,0.18fr)] items-center gap-[3%] border border-dotted border-black px-[2%] py-[2.5%] text-[clamp(7px,1.9vw,13px)]">
-        <p className="min-w-0 whitespace-nowrap">Prénom <span className="tracking-[0.08em]">........................</span></p>
-        <p className="min-w-0 whitespace-nowrap">Date <span className="tracking-[0.06em]">.................</span></p>
-        <div className="flex min-h-8 items-center justify-center border border-black/50 px-1">N°</div>
+      {/* Student identity block — Nom / Prénom / Date + N° or eval table */}
+      <div className="mt-[4%] flex items-start gap-[4%] border border-dotted border-black px-[2%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
+        <div className="min-w-0 flex-1 space-y-[1em]">
+          {(["Nom", "Prénom", "Date"] as const).map((label) => (
+            <p key={label} className="flex items-baseline gap-1">
+              <span className="shrink-0">{label}</span>
+              <span className="shrink-0">:</span>
+              <span className="min-w-0 flex-1 border-b border-black" />
+            </p>
+          ))}
+        </div>
+        {evalMode && totalPoints !== undefined ? (
+          <table className="shrink-0 border-collapse border border-black text-center text-[clamp(7px,1.9vw,13px)]">
+            <thead>
+              <tr>
+                {["Pts", "Total", "Note", "N°"].map((h) => (
+                  <th key={h} className="border border-black px-[1em] py-[0.4em] font-bold">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-black px-[1em] py-[1.2em]" />
+                <td className="border border-black px-[1em] py-[1.2em] font-bold text-[1.6em]">{totalPoints}</td>
+                <td className="border border-black px-[1em] py-[1.2em]" />
+                <td className="border border-black px-[1em] py-[1.2em]" />
+              </tr>
+            </tbody>
+          </table>
+        ) : (
+          <div className="flex shrink-0 min-h-[4em] min-w-[2.5em] items-center justify-center border border-black/50 px-[0.5em]">N°</div>
+        )}
       </div>
     </div>
   );
@@ -207,7 +243,7 @@ export function PrintConfigSheet({
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(false);
-  const [theory, setTheory] = useState(true);
+  const [theory, setTheory] = useState(false);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
@@ -255,13 +291,16 @@ export function PrintConfigSheet({
       // (break-inside: avoid), the footer is fixed to the bottom of every page
       // via globals.css @media print + CSS page counters. Symmetric top/bottom
       // @page margins give pages 2+ the same top spacing as the footer zone.
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin:18mm 12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:5mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
   };
 
   const hasPrintableContent = theory || selection.some((item) => item.included && item.occurrences > 0);
+  const totalPoints = selection
+    .filter((s) => s.included && s.occurrences > 0)
+    .reduce((sum, s) => sum + s.points * s.occurrences, 0);
   const previewExercises = selection.flatMap((item) => {
     if (!item.included || item.occurrences < 1) return [];
     const exercise = exercises.find((candidate) => candidate.id === item.id);
@@ -493,31 +532,33 @@ export function PrintConfigSheet({
                 En-tête du document
               </h2>
               <div className="space-y-4 rounded-xl border border-[var(--color-border-default)] p-4">
-                <div>
-                  <label htmlFor="print-class-level" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Classe
-                  </label>
-                  <select
-                    id="print-class-level"
-                    value={classLevel}
-                    onChange={(event) => setClassLevel(event.target.value as PrintHeaderConfig["classLevel"])}
-                    className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                  >
-                    {CLASS_LEVELS.map((level) => <option key={level} value={level}>{level}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="print-class-number" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
-                    Numéro
-                  </label>
-                  <select
-                    id="print-class-number"
-                    value={classNumber}
-                    onChange={(event) => setClassNumber(event.target.value)}
-                    className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                  >
-                    {CLASS_NUMBERS.map((number) => <option key={number} value={number}>{number}</option>)}
-                  </select>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="print-class-level" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Classe
+                    </label>
+                    <select
+                      id="print-class-level"
+                      value={classLevel}
+                      onChange={(event) => setClassLevel(event.target.value as PrintHeaderConfig["classLevel"])}
+                      className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
+                    >
+                      {CLASS_LEVELS.map((level) => <option key={level} value={level}>{level}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="print-class-number" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
+                      Numéro
+                    </label>
+                    <select
+                      id="print-class-number"
+                      value={classNumber}
+                      onChange={(event) => setClassNumber(event.target.value)}
+                      className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
+                    >
+                      {CLASS_NUMBERS.map((number) => <option key={number} value={number}>{number}</option>)}
+                    </select>
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="print-course" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
@@ -534,7 +575,7 @@ export function PrintConfigSheet({
                 </div>
               </div>
               <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
-                <PrintDocumentHeader config={header} />
+                <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
               </div>
             </section>
           )}
@@ -551,31 +592,36 @@ export function PrintConfigSheet({
               </div>
               <div className="mx-auto flex aspect-[210/297] w-full max-w-[44rem] flex-col overflow-hidden border border-zinc-300 bg-white p-[5%] text-black shadow-lg">
                 {/* Header on the first page only — matches the printed PDF */}
-                {previewPage === 0 && <PrintDocumentHeader config={header} />}
+                {previewPage === 0 && <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
                 <div className={`min-h-0 flex-1 overflow-hidden text-[clamp(6px,1.35vw,10px)] leading-relaxed ${previewPage > 0 ? "pt-[6%]" : ""}`}>
                   {currentPreview.showTheory && (
-                    <div className="print-preview-content origin-top-left [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]">
+                    <div className="print-preview-content origin-top-left [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
                       {theoryPreview ?? (
                         <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
                       )}
                     </div>
                   )}
-                  {currentPreview.exercises.length > 0 && (
-                    <ol className="space-y-5">
-                      {currentPreview.exercises.map((item, index) => (
-                        <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
-                          <div className="mb-1 flex items-start gap-2 font-bold">
-                            <span>{(previewPage - (theory ? 1 : 0)) * 4 + index + 1}.</span>
-                            <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
-                            {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
-                          </div>
-                          <div className="pl-5 text-zinc-800 [&_button]:pointer-events-none">
-                            {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
+                  {currentPreview.exercises.length > 0 && (() => {
+                    const exBefore = previewPages.slice(0, previewPage).reduce((sum, p) => sum + p.exercises.length, 0);
+                    return (
+                      <ol className="space-y-5">
+                        {currentPreview.exercises.map((item, index) => {
+                          const seqNum = exBefore + index + 1;
+                          return (
+                            <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
+                              <div className="mb-1 flex items-start gap-2 text-[1.05em] font-bold">
+                                <span className="flex-1">Exercice {seqNum}</span>
+                                {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                              </div>
+                              <div className="pl-5 text-zinc-800 [&_button]:pointer-events-none">
+                                {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    );
+                  })()}
                 </div>
                 <PrintDocumentFooter
                   date={printDate}
@@ -630,7 +676,7 @@ export function PrintConfigSheet({
           to the bottom of every page via globals.css @media print. */}
       <div id="print-all-pages-container" className="hidden" aria-hidden="true">
         {/* Header — appears on the first page only */}
-        <PrintDocumentHeader config={header} />
+        <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
 
         {/* Theory */}
         {theory && (
@@ -646,9 +692,8 @@ export function PrintConfigSheet({
           <ol className="space-y-5 text-[10px] leading-relaxed">
             {previewExercises.map((item, index) => (
               <li key={item.key} className="print-exercise border-b border-zinc-200 pb-4">
-                <div className="mb-1 flex items-start gap-2 text-[10px] font-bold">
-                  <span>{index + 1}.</span>
-                  <span className="flex-1">{item.exercise?.label ?? item.selection.id}</span>
+                <div className="mb-1 flex items-start gap-2 text-[12px] font-bold">
+                  <span className="flex-1">Exercice {index + 1}</span>
                   {evalMode && (
                     <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
                   )}

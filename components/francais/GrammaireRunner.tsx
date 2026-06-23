@@ -2862,7 +2862,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
           theoryPreview={
-            <div className="space-y-3 text-sm leading-relaxed text-black">
+            <div className="space-y-3 leading-relaxed text-black">
               <TheoryView blocks={lesson.theory} pivot={pivot} showTrans={false} />
               {lesson.theory2 && <TheoryView blocks={lesson.theory2} pivot={pivot} showTrans={false} />}
             </div>
