@@ -90,38 +90,49 @@ export function PrintDocumentHeader({
         <p className="text-left">{config.classLevel} {config.classNumber}</p>
         <p className="truncate text-left">Cours {config.course}</p>
       </div>
-      {/* Student identity block — Nom / Prénom / Date + N° or eval table */}
-      <div className="mt-[4%] flex items-start gap-[4%] border border-dotted border-black px-[2%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
-        <div className="min-w-0 flex-1 space-y-[1em]">
+      {/* Student identity block — Nom / Prénom / Date + table (eval: 4 cols; exercise: N° only) */}
+      <div className="mt-[4%] flex items-stretch gap-[4%] border border-dotted border-black px-[2%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
+        {/* Left: labels with vertically aligned colons */}
+        <div className="flex min-w-0 flex-1 flex-col justify-around">
           {(["Nom", "Prénom", "Date"] as const).map((label) => (
-            <p key={label} className="flex items-baseline gap-1">
-              <span className="shrink-0">{label}</span>
-              <span className="shrink-0">:</span>
+            <p key={label} className="flex items-baseline">
+              <span className="w-[4.5em] shrink-0">{label}</span>
+              <span className="shrink-0 pr-[0.3em]">:</span>
               <span className="min-w-0 flex-1 border-b border-black" />
             </p>
           ))}
         </div>
-        {evalMode && totalPoints !== undefined ? (
-          <table className="shrink-0 border-collapse border border-black text-center text-[clamp(7px,1.9vw,13px)]">
-            <thead>
-              <tr>
-                {["Pts", "Total", "Note", "N°"].map((h) => (
-                  <th key={h} className="border border-black px-[1em] py-[0.4em] font-bold">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-black px-[1em] py-[1.2em]" />
-                <td className="border border-black px-[1em] py-[1.2em] font-bold text-[1.6em]">{totalPoints}</td>
-                <td className="border border-black px-[1em] py-[1.2em]" />
-                <td className="border border-black px-[1em] py-[1.2em]" />
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          <div className="flex shrink-0 min-h-[4em] min-w-[2.5em] items-center justify-center border border-black/50 px-[0.5em]">N°</div>
-        )}
+        {/* Right: same 4-column table in both modes; first 3 cols hidden in exercise mode */}
+        <table className="h-full shrink-0 table-fixed border-collapse text-center text-[clamp(7px,1.9vw,13px)]">
+          <colgroup>
+            {[0, 1, 2, 3].map((i) => <col key={i} style={{ width: "3em" }} />)}
+          </colgroup>
+          <thead>
+            <tr style={{ height: "50%" }}>
+              {(["Pts", "Total", "Note", "N°"] as const).map((h, i) => {
+                const hide = !evalMode && i < 3;
+                return (
+                  <th key={h} className={`align-middle font-bold ${hide ? "border-0 p-0" : "border border-black px-[0.8em]"}`}>
+                    {hide ? null : h}
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ height: "50%" }}>
+              {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
+                const hide = !evalMode && i < 3;
+                const isTotal = i === 1 && evalMode;
+                return (
+                  <td key={i} className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}>
+                    {val !== null ? val : ""}
+                  </td>
+                );
+              })}
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
