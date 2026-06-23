@@ -92,12 +92,6 @@ export function PrintDocumentHeader({
         <p className="text-left">{config.classLevel} {config.classNumber}</p>
         <p className="truncate text-left">Cours {config.course}</p>
       </div>
-      {/* Document title */}
-      {config.title && (
-        <p className="py-[3%] text-center text-[3em] font-bold leading-tight">
-          {config.title}
-        </p>
-      )}
       {/* Student identity block — Nom / Prénom / Date + table (eval: 4 cols; exercise: N° only) */}
       <div className="mt-[4%] flex items-stretch gap-[4%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
         {/* Left: labels with vertically aligned colons */}
@@ -142,6 +136,11 @@ export function PrintDocumentHeader({
           </tbody>
         </table>
       </div>
+      {config.title && (
+        <p className="py-[3%] text-center text-[1.5em] font-bold leading-tight">
+          {config.title}
+        </p>
+      )}
     </div>
   );
 }
@@ -643,7 +642,7 @@ export function PrintConfigSheet({
                           const seqNum = exBefore + index + 1;
                           return (
                             <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
-                              <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.05em] font-bold">
+                              <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[2.1em] font-bold">
                                 <span className="flex-1">Exercice {seqNum}</span>
                                 {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                               </div>
@@ -726,7 +725,7 @@ export function PrintConfigSheet({
           <ol className="space-y-5 text-[10px] leading-relaxed">
             {previewExercises.map((item, index) => (
               <li key={item.key} className="print-exercise border-b border-zinc-200 pb-4">
-                <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[12px] font-bold">
+                <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[24px] font-bold">
                   <span className="flex-1">Exercice {index + 1}</span>
                   {evalMode && (
                     <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
