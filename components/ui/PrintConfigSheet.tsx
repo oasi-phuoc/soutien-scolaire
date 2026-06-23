@@ -127,8 +127,8 @@ export function PrintDocumentHeader({
               })}
             </tr>
           </thead>
-          <tbody>
-            <tr style={{ height: "3em" }}>
+          <tbody style={{ height: "100%" }}>
+            <tr>
               {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
                 const hide = !evalMode && i < 3;
                 const isTotal = i === 1 && evalMode;
