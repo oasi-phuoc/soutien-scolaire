@@ -311,7 +311,7 @@ export function PrintConfigSheet({
       // (break-inside: avoid), the footer is fixed to the bottom of every page
       // via globals.css @media print + CSS page counters. Symmetric top/bottom
       // @page margins give pages 2+ the same top spacing as the footer zone.
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:5mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:20mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -646,7 +646,7 @@ export function PrintConfigSheet({
                                 <span className="flex-1">Exercice {seqNum}</span>
                                 {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                               </div>
-                              <div className="pl-5 text-zinc-800 [&_button]:pointer-events-none">
+                              <div className="text-zinc-800 [&_button]:pointer-events-none">
                                 {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
                               </div>
                             </li>
@@ -731,7 +731,7 @@ export function PrintConfigSheet({
                     <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
                   )}
                 </div>
-                <div className="pl-5 [&_button]:pointer-events-none">
+                <div className="[&_button]:pointer-events-none">
                   {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
                 </div>
               </li>
