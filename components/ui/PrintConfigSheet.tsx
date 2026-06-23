@@ -20,6 +20,7 @@ export interface PrintHeaderConfig {
   classLevel: "CSC" | "CFR" | "EPL" | "CPR";
   classNumber: string;
   course: string;
+  title?: string;
 }
 
 export interface PrintConfig {
@@ -37,6 +38,7 @@ interface PrintConfigSheetProps {
   exercises?: PrintExercise[];
   theoryPreview?: ReactNode;
   accentColor?: string;
+  lessonTitle?: string;
 }
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
@@ -90,10 +92,16 @@ export function PrintDocumentHeader({
         <p className="text-left">{config.classLevel} {config.classNumber}</p>
         <p className="truncate text-left">Cours {config.course}</p>
       </div>
+      {/* Document title */}
+      {config.title && (
+        <p className="py-[3%] text-center text-[3em] font-bold leading-tight">
+          {config.title}
+        </p>
+      )}
       {/* Student identity block — Nom / Prénom / Date + table (eval: 4 cols; exercise: N° only) */}
-      <div className="mt-[4%] flex items-stretch gap-[4%] px-[2%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
+      <div className="mt-[4%] flex items-stretch gap-[4%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
         {/* Left: labels with vertically aligned colons */}
-        <div className="flex min-w-0 flex-1 flex-col justify-around">
+        <div className="flex min-w-0 flex-1 flex-col justify-around gap-[10px]">
           {(["Nom", "Prénom", "Date"] as const).map((label) => (
             <p key={label} className="flex items-baseline">
               <span className="w-[4.5em] shrink-0">{label}</span>
@@ -251,6 +259,7 @@ export function PrintConfigSheet({
   exercises = [],
   theoryPreview,
   accentColor = "var(--color-theme)",
+  lessonTitle = "",
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(false);
@@ -258,6 +267,7 @@ export function PrintConfigSheet({
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
+  const [title, setTitle] = useState(lessonTitle);
   const [previewPage, setPreviewPage] = useState(0);
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);
@@ -290,7 +300,7 @@ export function PrintConfigSheet({
 
   const printDate = formatPrintDate();
   const version = "0.1.0";
-  const header: PrintHeaderConfig = { classLevel, classNumber, course };
+  const header: PrintHeaderConfig = { classLevel, classNumber, course, title };
 
   const handlePrint = () => {
     setHasPrinted(true);
@@ -583,6 +593,19 @@ export function PrintConfigSheet({
                   >
                     {COURSES.map((item) => <option key={item} value={item}>{item}</option>)}
                   </select>
+                </div>
+                <div>
+                  <label htmlFor="print-title" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
+                    Titre
+                  </label>
+                  <input
+                    id="print-title"
+                    type="text"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                    placeholder="Titre de la leçon…"
+                    className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
+                  />
                 </div>
               </div>
               <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
