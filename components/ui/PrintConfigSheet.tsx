@@ -266,13 +266,18 @@ export function PrintConfigSheet({
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState("Mathématiques");
-  const [title, setTitle] = useState(lessonTitle);
+  const [title, setTitle] = useState(() => lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
   const [previewPage, setPreviewPage] = useState(0);
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
     exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
   );
+
+  useEffect(() => {
+    setTitle(evalMode ? "Évaluation" : lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalMode]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
