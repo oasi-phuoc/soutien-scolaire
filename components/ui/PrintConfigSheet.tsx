@@ -643,7 +643,7 @@ export function PrintConfigSheet({
                           const seqNum = exBefore + index + 1;
                           return (
                             <li key={item.key} className="break-inside-avoid border-b border-zinc-200 pb-3">
-                              <div className="mb-1 flex items-start gap-2 text-[1.05em] font-bold">
+                              <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.05em] font-bold">
                                 <span className="flex-1">Exercice {seqNum}</span>
                                 {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                               </div>
@@ -726,7 +726,7 @@ export function PrintConfigSheet({
           <ol className="space-y-5 text-[10px] leading-relaxed">
             {previewExercises.map((item, index) => (
               <li key={item.key} className="print-exercise border-b border-zinc-200 pb-4">
-                <div className="mb-1 flex items-start gap-2 text-[12px] font-bold">
+                <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[12px] font-bold">
                   <span className="flex-1">Exercice {index + 1}</span>
                   {evalMode && (
                     <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
