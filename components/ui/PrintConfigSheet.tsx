@@ -127,7 +127,7 @@ export function PrintDocumentHeader({
                 const hide = !evalMode && i < 3;
                 const isTotal = i === 1 && evalMode;
                 return (
-                  <td key={i} className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}>
+                  <td key={i} className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em] py-[0.5em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}>
                     {val !== null ? val : ""}
                   </td>
                 );
