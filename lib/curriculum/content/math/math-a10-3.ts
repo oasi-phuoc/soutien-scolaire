@@ -5,7 +5,7 @@ export const MATH_A10_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.3",
     theory: {
       title: {
-        fr: "",
+        fr: "Méthode de substitution",
       },
       paragraphs: { fr: [] },
       blocks: [

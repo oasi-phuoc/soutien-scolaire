@@ -5,7 +5,7 @@ export const MATH_A9_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.2",
     theory: {
       title: {
-        fr: "",
+        fr: "Variable et inconnue",
       },
       paragraphs: { fr: [] },
       blocks: [

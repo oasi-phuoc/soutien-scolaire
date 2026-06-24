@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A12_2: SubmoduleTrad = {
-  submoduleId: "A12-2",
+export const TRAD_A10_4: SubmoduleTrad = {
+  submoduleId: "A10-4",
   title: {
     fr: "Méthode d'addition / soustraction",
     en: "Addition / subtraction method (elimination)",

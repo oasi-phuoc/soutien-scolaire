@@ -5,7 +5,7 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.1",
     theory: {
       title: {
-        fr: "",
+        fr: "Lire et écrire une expression algébrique",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -34,12 +34,27 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "table",
-          headersFr: ["Terme", "Définition", "Exemple dans 4x² − 3x + 7"],
+          headersFr: ["Élément", "Définition", "Exemple avec −6cd²"],
           accentHeader: true,
           rows: [
-            ["Terme", "Partie séparée par **+** ou **−**", "4x², **−**3x, 7"],
-            ["Coefficient", "Nombre devant la variable", "4 et **−**3"],
-            ["Terme constant", "Terme sans variable", "7"],
+            ["Monôme", "Produit d'un nombre et d'une ou plusieurs lettres", "−6cd²"],
+            ["Coefficient", "Partie numérique, avec son signe", "−6"],
+            ["Partie littérale", "Lettres et exposants du monôme", "cd²"],
+            ["Degré", "Somme des exposants de la partie littérale", "1 + 2 = 3"],
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Comment reconnaître les trois éléments ?",
+        },
+        {
+          type: "section",
+          labelFr: "Dans le monôme −6cd² :",
+          itemsFr: [
+            "Le **coefficient** est −6.",
+            "La **partie littérale** est cd².",
+            "Le **degré** est 3, car c = c¹ et d² : 1 + 2 = 3.",
+            "Un nombre sans lettre est un terme constant de degré 0.",
           ],
         },
         {
@@ -59,7 +74,7 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "example",
-          fr: "Dans 4x² − 3x + 7 :\n• Termes : 4x²,  −3x,  7\n• Coefficients : 4 et −3\n• Terme constant : 7",
+          fr: "Monôme : −2a²bc³\n• Coefficient : −2\n• Partie littérale : a²bc³\n• Degré : 2 + 1 + 3 = 6",
         },
       ],
     },

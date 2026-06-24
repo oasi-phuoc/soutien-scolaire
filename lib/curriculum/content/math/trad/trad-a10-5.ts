@@ -1,10 +1,10 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A12_3: SubmoduleTrad = {
-  submoduleId: "A12-3",
+export const TRAD_A10_5: SubmoduleTrad = {
+  submoduleId: "A10-5",
   title: {
-    fr: "Problèmes à deux inconnues",
-    en: "Problems with two unknowns",
+    fr: "Problèmes",
+    en: "Problems",
     ar: "مسائل بمجهولين",
     fa: "مسائل با دو مجهول",
     ti: "ጸገማት ምስ ክልተ ዘይፍለጥ",

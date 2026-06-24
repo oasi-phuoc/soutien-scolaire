@@ -133,8 +133,8 @@ export const MATH_MODULES: MathModule[] = [
     comingSoon: true,
     prerequisiteIds: ["A5", "A7"],
     submodules: [
-      sm("A9.1", "Variable et inconnue"),
-      sm("A9.2", "Lire et écrire une expression"),
+      sm("A9.1", "Lire et écrire une expression"),
+      sm("A9.2", "Variable et inconnue"),
       sm("A9.3", "Substitution"),
       sm("A9.4", "Réduction"),
       sm("A9.5", "Développement simple"),

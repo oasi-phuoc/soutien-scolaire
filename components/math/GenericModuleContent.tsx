@@ -220,8 +220,29 @@ type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLess
 
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
+type EquationSolution = { kind: "rational"; num: number; den: number } | { kind: "impossible" } | { kind: "infinite" };
+type EquationQuestion = { expr: string; solution: EquationSolution };
+type EquationGroupStep = { kind: "equation_group"; lesson: MathSubmoduleLesson; questions: EquationQuestion[] };
+type FracEqSide = { terms: Array<{ num: number; den: number; xMul: number }> };
+type FracEquationGroupStep = { kind: "frac_equation_group"; lesson: MathSubmoduleLesson; questions: Array<{ lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution }> };
+type MonomialQuestion = {
+  expression: string;
+  coefficient: string[];
+  literal: string[];
+  degree: number;
+};
+type MonomialGroupStep = { kind: "monomial_group"; lesson: MathSubmoduleLesson; questions: MonomialQuestion[] };
+type SymbolicQuestion = { expression: string; acceptable: string[]; truth?: boolean };
+type SymbolicGroupStep = {
+  kind: "symbolic_group";
+  lesson: MathSubmoduleLesson;
+  exNum: number;
+  instruction: string;
+  mode: "input" | "true_false";
+  questions: SymbolicQuestion[];
+};
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | FracEquationGroupStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -2963,46 +2984,83 @@ function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
   const LETTERS = ["n", "x", "y", "k", "m", "p", "t"];
   const letter = LETTERS[ri(0, LETTERS.length - 1)]!;
   const value = ri(2, 9);
-  const cl = (a: number) => a === 1 ? letter : `${a}${letter}`;
-  const cl2 = (a: number) => a === 1 ? `${letter}²` : `${a}${letter}²`;
+  const l = letter;
+  const v = value;
+  // Helpers: cl(1) → "x", cl(3) → "3x" | cl2(1) → "x²" | cl3(1) → "x³"
+  const cl  = (a: number) => a === 1 ? l : `${a}${l}`;
+  const cl2 = (a: number) => a === 1 ? `${l}²` : `${a}${l}²`;
+  const cl3 = (a: number) => a === 1 ? `${l}³` : `${a}${l}³`;
 
+  // ── Facile (10 templates très variés) ──────────────────────────────────────
   const easyGens: Array<() => { expr: string; answer: number }> = [
-    () => { const a=ri(2,6), b=ri(1,9); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
-    () => { const a=ri(3,8), b=ri(1,5); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
-    () => { const a=ri(4,9), b=ri(2,7); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
-    () => { const a=ri(5,9), b=ri(3,9); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
-    () => { const a=ri(2,5), b=ri(4,10); return { expr: `${b} + ${cl(a)}`, answer: b+a*value }; },
-    () => { const a=ri(2,5), b=ri(4,11); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
-    () => { const a=ri(4,7), b=ri(1,4); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
-    () => { const a=ri(6,9), b=ri(1,5); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
-    () => { const a=ri(6,9), b=ri(4,9); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
-    () => { const a=ri(3,7), b=ri(6,12); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+    // 1. al  (produit seul)
+    () => { const a=ri(2,9); return { expr: cl(a), answer: a*v }; },
+    // 2. al + b
+    () => { const a=ri(2,6), b=ri(1,9); return { expr: `${cl(a)} + ${b}`, answer: a*v+b }; },
+    // 3. b + al  (constante en premier)
+    () => { const a=ri(2,6), b=ri(2,9); return { expr: `${b} + ${cl(a)}`, answer: b+a*v }; },
+    // 4. l + b  (coefficient 1 implicite)
+    () => { const b=ri(2,9); return { expr: `${l} + ${b}`, answer: v+b }; },
+    // 5. (a + b)l  (somme entre parenthèses × variable)
+    () => { const a=ri(1,5), b=ri(1,5); return { expr: `(${a} + ${b})${l}`, answer: (a+b)*v }; },
+    // 6. al + l  (deux occurrences, dont un coefficient 1)
+    () => { const a=ri(2,7); return { expr: `${cl(a)} + ${l}`, answer: (a+1)*v }; },
+    // 7. l + l + b  (deux variables + constante)
+    () => { const b=ri(1,8); return { expr: `${l} + ${l} + ${b}`, answer: 2*v+b }; },
+    // 8. al + b + l  (ordre mélangé, termes semblables à repérer)
+    () => { const a=ri(2,6), b=ri(1,8); return { expr: `${cl(a)} + ${b} + ${l}`, answer: (a+1)*v+b }; },
+    // 9. a(l + b)  (distribution simple)
+    () => { const a=ri(2,5), b=ri(1,6); return { expr: `${a}(${l} + ${b})`, answer: a*(v+b) }; },
+    // 10. a(l − b)  (distribution avec soustraction)
+    () => { const a=ri(2,5), b=ri(1,3); return { expr: `${a}(${l} − ${b})`, answer: a*(v-b) }; },
   ];
 
+  // ── Moyen (10 templates — distribution, termes multiples, parenthèses) ────
   const mediumGens: Array<() => { expr: string; answer: number }> = [
-    () => { const a=ri(2,5), b=ri(2,3), c=ri(1,7); return { expr: `${cl(a)} + ${cl(b)} − ${c}`, answer: (a+b)*value-c }; },
-    () => { const a=ri(2,4), b=ri(2,4), c=ri(1,6); return { expr: `${cl(a)} + ${cl(b)} + ${c}`, answer: (a+b)*value+c }; },
-    () => { const a=ri(5,8), b=ri(1,3), c=ri(1,8); return { expr: `${cl(a)} − ${cl(b)} + ${c}`, answer: (a-b)*value+c }; },
-    () => { const a=ri(3,6), b=ri(2,4), c=ri(2,8); return { expr: `${cl(a)} + ${cl(b)} − ${c}`, answer: (a+b)*value-c }; },
-    () => { const a=ri(2,4), c=ri(2,3), b=ri(1,5); return { expr: `${cl(c)} + ${cl(a)} − ${b}`, answer: (c+a)*value-b }; },
-    () => { const a=ri(5,9), b=ri(2,4), c=ri(3,9); return { expr: `${cl(a)} − ${cl(b)} + ${c}`, answer: (a-b)*value+c }; },
-    () => { const a=ri(3,7), b=ri(2,5), c=ri(4,10); return { expr: `${cl(a)} + ${cl(b)} + ${c}`, answer: (a+b)*value+c }; },
-    () => { const a=ri(2,5), b=ri(2,3), c=ri(2,8); return { expr: `${cl(b)} + ${cl(a)} − ${c}`, answer: (b+a)*value-c }; },
-    () => { const a=ri(6,9), b=ri(2,3), c=ri(1,4); return { expr: `${cl(a)} − ${cl(b)} − ${c}`, answer: (a-b)*value-c }; },
-    () => { const a=ri(2,4), b=ri(2,3); return { expr: `${cl(a)} + ${cl(b)} − ${a}`, answer: (a+b)*value-a }; },
+    // 1. al + bl − c  (réduire les termes semblables)
+    () => { const a=ri(2,5), b=ri(2,4), c=ri(1,8); return { expr: `${cl(a)} + ${cl(b)} − ${c}`, answer: (a+b)*v-c }; },
+    // 2. al + b(l + c)  (distribution + combinaison)
+    () => { const a=ri(2,4), b=ri(2,4), c=ri(1,5); return { expr: `${cl(a)} + ${b}(${l} + ${c})`, answer: a*v+b*(v+c) }; },
+    // 3. (al + b) + cl  (parenthèses puis addition)
+    () => { const a=ri(2,5), b=ri(1,8), c=ri(2,4); return { expr: `(${cl(a)} + ${b}) + ${cl(c)}`, answer: (a+c)*v+b }; },
+    // 4. al − bl + c  (soustraction de termes semblables, a > b)
+    () => { const a=ri(4,8), b=ri(1,3), c=ri(1,8); return { expr: `${cl(a)} − ${cl(b)} + ${c}`, answer: (a-b)*v+c }; },
+    // 5. a(l + b) + cl  (distribuer puis combiner)
+    () => { const a=ri(2,4), b=ri(1,5), c=ri(2,5); return { expr: `${a}(${l} + ${b}) + ${cl(c)}`, answer: a*(v+b)+c*v }; },
+    // 6. (a + b)l + c  (coefficient groupé puis constante)
+    () => { const a=ri(1,4), b=ri(1,4), c=ri(2,9); return { expr: `(${a} + ${b})${l} + ${c}`, answer: (a+b)*v+c }; },
+    // 7. al + bl + cl  (trois termes semblables)
+    () => { const a=ri(2,4), b=ri(1,3), c=ri(1,3); return { expr: `${cl(a)} + ${cl(b)} + ${cl(c)}`, answer: (a+b+c)*v }; },
+    // 8. a(bl + c)  (coefficient imbriqué)
+    () => { const a=ri(2,3), b=ri(2,4), c=ri(1,5); return { expr: `${a}(${cl(b)} + ${c})`, answer: a*(b*v+c) }; },
+    // 9. al + b − cl  (ordre différent, a > c)
+    () => { const a=ri(4,8), b=ri(2,9), c=ri(1,3); return { expr: `${cl(a)} + ${b} − ${cl(c)}`, answer: (a-c)*v+b }; },
+    // 10. (al + b) − cl  (parenthèses puis soustraction)
+    () => { const a=ri(4,7), b=ri(2,8), c=ri(1,3); return { expr: `(${cl(a)} + ${b}) − ${cl(c)}`, answer: (a-c)*v+b }; },
   ];
 
+  // ── Difficile (10 templates — ² et ³ à des positions variées) ────────────
   const hardGens: Array<() => { expr: string; answer: number }> = [
-    () => { const a=ri(1,2), b=ri(2,5), c=ri(1,5); return { expr: `${cl2(a)} + ${cl(b)} − ${c}`, answer: a*value*value+b*value-c }; },
-    () => { const a=ri(1,2), b=ri(2,4), c=ri(1,6); return { expr: `${cl2(a)} − ${cl(b)} + ${c}`, answer: a*value*value-b*value+c }; },
-    () => { const a=ri(1,2), b=ri(2,4), c=ri(1,8); return { expr: `${cl2(a)} + ${cl(b)} + ${c}`, answer: a*value*value+b*value+c }; },
-    () => { const b=ri(2,5), c=ri(1,7); return { expr: `${letter}² + ${cl(b)} + ${c}`, answer: value*value+b*value+c }; },
-    () => { const a=ri(2,3), b=ri(2,3), c=ri(1,2); return { expr: `${cl2(a)} − ${cl(b)} − ${c}`, answer: a*value*value-b*value-c }; },
-    () => { const b=ri(2,5), c=ri(1,4); return { expr: `${letter}² + ${cl(b)} − ${c}`, answer: value*value+b*value-c }; },
-    () => { const a=ri(1,2), b=ri(3,6), c=ri(2,7); return { expr: `${cl2(a)} + ${cl(b)} − ${c}`, answer: a*value*value+b*value-c }; },
-    () => { const a=ri(1,2), b=ri(2,5), c=ri(2,8); return { expr: `${cl2(a)} − ${cl(b)} + ${c}`, answer: a*value*value-b*value+c }; },
-    () => { const a=ri(1,2), b=ri(2,4), c=ri(2,4); return { expr: `${cl2(a)} + ${cl(c)} − ${b}`, answer: a*value*value+c*value-b }; },
-    () => { const b=ri(2,3), c=ri(3,7); return { expr: `${letter}² − ${cl(b)} + ${c}`, answer: value*value-b*value+c }; },
+    // 1. al² + bl − c  (classique : puissance en premier)
+    () => { const a=ri(1,2), b=ri(2,5), c=ri(1,6); return { expr: `${cl2(a)} + ${cl(b)} − ${c}`, answer: a*v*v+b*v-c }; },
+    // 2. al + bl²  (linéaire EN PREMIER, puis puissance)
+    () => { const a=ri(2,5), b=ri(2,3); return { expr: `${cl(a)} + ${cl2(b)}`, answer: a*v+b*v*v }; },
+    // 3. l³ + al  (cubique en premier, linéaire après)
+    () => { const a=ri(2,6); return { expr: `${l}³ + ${cl(a)}`, answer: v*v*v+a*v }; },
+    // 4. a(l² + b)  (distribution avec carré à l'intérieur)
+    () => { const a=ri(2,3), b=ri(1,6); return { expr: `${a}(${l}² + ${b})`, answer: a*(v*v+b) }; },
+    // 5. b + al²  (constante EN PREMIER, puis carré)
+    () => { const a=ri(1,3), b=ri(2,9); return { expr: `${b} + ${cl2(a)}`, answer: b+a*v*v }; },
+    // 6. al + bl³  (linéaire EN PREMIER, cubique après)
+    () => { const a=ri(2,5), b=ri(1,2); return { expr: `${cl(a)} + ${cl3(b)}`, answer: a*v+b*v*v*v }; },
+    // 7. al² − bl² + cl  (deux termes au carré, puis linéaire)
+    () => { const a=ri(2,4), b=ri(1,2), c=ri(2,5); return { expr: `${cl2(a)} − ${cl2(b)} + ${cl(c)}`, answer: (a-b)*v*v+c*v }; },
+    // 8. al² + bl² + c  (sommer les carrés, puis constante)
+    () => { const a=ri(1,2), b=ri(1,2), c=ri(1,8); return { expr: `${cl2(a)} + ${cl2(b)} + ${c}`, answer: (a+b)*v*v+c }; },
+    // 9. l³ − al + b  (cubique, puis soustraction linéaire)
+    () => { const a=ri(1,4), b=ri(1,8); return { expr: `${l}³ − ${cl(a)} + ${b}`, answer: v*v*v-a*v+b }; },
+    // 10. al² + b − cl  (carré + constante − linéaire, ordre varié)
+    () => { const a=ri(1,2), b=ri(2,8), c=ri(1,3); return { expr: `${cl2(a)} + ${b} − ${cl(c)}`, answer: a*v*v+b-c*v }; },
   ];
 
   function pickUnique(
@@ -3014,9 +3072,9 @@ function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
     const shuffled = [...gens.keys()].sort(() => Math.random() - 0.5);
     for (const idx of shuffled) {
       if (results.length >= count) break;
-      for (let t = 0; t < 15; t++) {
+      for (let t = 0; t < 20; t++) {
         const { expr, answer } = gens[idx]!();
-        if (answer > 0 && answer < 300) { results.push({ expr, answer, difficulty }); break; }
+        if (answer > 0 && answer < 500) { results.push({ expr, answer, difficulty }); break; }
       }
     }
     return results;
@@ -3029,6 +3087,373 @@ function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
   ];
 
   return { kind: "algebra_group", lesson, letter, value, questions };
+}
+
+// ── Equation group (A10.1) ─────────────────────────────────────────────────
+function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
+  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
+  function rat(n: number, d: number): EquationSolution {
+    if (d === 0) return { kind: "impossible" };
+    if (d < 0) { n = -n; d = -d; }
+    const g = gcd(Math.abs(n), d);
+    return { kind: "rational", num: n / g, den: d / g };
+  }
+  const imp: EquationSolution = { kind: "impossible" };
+  const inf: EquationSolution = { kind: "infinite" };
+  // Helpers for signed display
+  const s = (n: number) => n < 0 ? ` − ${-n}` : ` + ${n}`;  // " + 3" or " − 3"
+  const sl = (n: number) => n < 0 ? ` − ${-n}x` : ` + ${n}x`; // " + 3x" or " − 3x"
+
+  type EqGen = () => EquationQuestion;
+  const templates: EqGen[] = [
+    // 1. ax + b = cx + d  (integer solution, a > c)
+    () => { const a=ri(3,8),c=ri(1,a-1),x=ri(1,6),b=ri(1,9),d=(a-c)*x+b; return { expr:`${a}x${s(b)} = ${c}x${s(d)}`, solution:rat(x,1) }; },
+    // 2. ax + b = cx + d  (negative x, a < c)
+    () => { const c=ri(3,8),a=ri(1,c-1),x=ri(-5,-1),b=ri(2,9),d=(a-c)*x+b; return { expr:`${a}x${s(b)} = ${c}x${s(d)}`, solution:rat(x,1) }; },
+    // 3. a(x + b) = cx + d
+    () => { const a=ri(2,5),c=ri(1,a-1),x=ri(1,7),b=ri(1,5),d=(a-c)*x+a*b; return { expr:`${a}(x${s(b)}) = ${c}x${s(d)}`, solution:rat(x,1) }; },
+    // 4. a(x − b) = cx + d  (negative x possible)
+    () => { const a=ri(2,5),c=ri(1,a-1),x=ri(-4,4),b=ri(1,5),d=(a-c)*x-a*b; return { expr:`${a}(x − ${b}) = ${c}x${s(d)}`, solution:rat(x,1) }; },
+    // 5. a(x + b) = c(x + d)  → (a−c)x = cd−ab
+    () => { const a=ri(3,7),c=ri(1,a-1),b=ri(1,5),d=ri(1,6); const num=c*d-a*b,den=a-c; return { expr:`${a}(x${s(b)}) = ${c}(x${s(d)})`, solution:rat(num,den) }; },
+    // 6. a·b·x + c = dx + e  (product shown)
+    () => { const a=ri(2,4),b=ri(2,4),c=ri(1,9),d=ri(1,a*b-1),x=ri(1,6),e=(a*b-d)*x+c; return { expr:`${a}·${b}·x${s(c)} = ${d}x${s(e)}`, solution:rat(x,1) }; },
+    // 7. ax + b(x + c) = d(x + e)  (multi-paren)
+    () => { const a=ri(2,5),b=ri(2,4),c=ri(1,5),d=ri(1,a+b-1),e=ri(1,6); const num=d*e-b*c,den=a+b-d; return { expr:`${a}x${sl(b)}(x${s(c)}) = ${d}(x${s(e)})`, solution: den===0?(num===0?inf:imp):rat(num,den) }; },
+    // 8. a - b(x + c) = d(x + e)  (subtract distribution)
+    () => { const a=ri(5,15),b=ri(2,4),c=ri(1,4),d=ri(1,4),e=ri(1,4); const num=a-b*c-d*e,den=b+d; return { expr:`${a} − ${b}(x${s(c)}) = ${d}(x${s(e)})`, solution:rat(num,den) }; },
+    // 9. "fake quadratic" ax(x + b) = ax² + cx + d  (x² cancels)
+    () => { const a=ri(2,4),b=ri(2,5),c=ri(1,a*b-1),d=ri(1,8); const num=d,den=a*b-c; return { expr:`${a}x(x${s(b)}) = ${a}x²${sl(c)}${s(d)}`, solution: den===0?(d===0?inf:imp):rat(num,den) }; },
+    // 10. ax² + bx + c = ax(x + d) + e  (x² cancels)
+    () => { const a=ri(2,4),b=ri(3,8),d=ri(1,b-1),c=ri(1,8),e=ri(1,8); const num=e-c,den=b-a*d; return { expr:`${a}x²${sl(b)}${s(c)} = ${a}x(x${s(d)})${s(e)}`, solution: den===0?(num===0?inf:imp):rat(num,den) }; },
+    // 11. Impossible: ax + b = ax + c  (b ≠ c)
+    () => { const a=ri(2,7),b=ri(1,9); let c=ri(1,9); while(c===b) c=ri(1,9); return { expr:`${a}x${s(b)} = ${a}x${s(c)}`, solution:imp }; },
+    // 12. Impossible disguised: a(x + b) = ax + c (c ≠ ab)
+    () => { const a=ri(2,5),b=ri(2,6); let c=ri(1,20); while(c===a*b) c=ri(1,20); return { expr:`${a}(x${s(b)}) = ${a}x${s(c)}`, solution:imp }; },
+    // 13. Infinite: a(x + b) = ax + ab
+    () => { const a=ri(2,5),b=ri(2,8); return { expr:`${a}(x${s(b)}) = ${a}x${s(a*b)}`, solution:inf }; },
+    // 14. Infinite: ax + bx = (a+b)x
+    () => { const a=ri(2,6),b=ri(1,4); return { expr:`${a}x${sl(b)} = ${a+b}x`, solution:inf }; },
+    // 15. b = ax + c  (reverse form, x positive)
+    () => { const a=ri(2,6),c=ri(1,8),x=ri(1,7),B=a*x+c; return { expr:`${B} = ${a}x${s(c)}`, solution:rat(x,1) }; },
+    // 16. ax·b + cx = d  (product notation, x positive)
+    () => { const a=ri(2,4),b=ri(2,3),c=ri(1,5),d=ri(10,50),x=ri(1,4); return { expr:`${a}·${b}·x${sl(c)} = ${a*b*x+c*x}`, solution:rat(1,1) /* recomputed below */ }; },
+    // 17. a + bx = c(x + d)  → a+bx = cx+cd → (b-c)x = cd-a
+    () => { const a=ri(2,10),b=ri(3,8),c=ri(1,b-1),d=ri(1,6); const num=c*d-a,den=b-c; return { expr:`${a}${sl(b)} = ${c}(x${s(d)})`, solution: den===0?(num===0?inf:imp):rat(num,den) }; },
+    // 18. Simple: ax − b = c  (integer x positive)
+    () => { const a=ri(2,7),b=ri(1,9),x=ri(1,8),c=a*x-b; return { expr:`${a}x − ${b} = ${c}`, solution:rat(x,1) }; },
+    // 19. Simple: ax + b = c  (integer x negative)
+    () => { const a=ri(2,6),b=ri(5,15),x=ri(-5,-1),c=a*x+b; return { expr:`${a}x${s(b)} = ${c}`, solution:rat(x,1) }; },
+    // 20. ax + b(x − c) = d  (two terms, combine)
+    () => { const a=ri(2,5),b=ri(2,4),c=ri(1,4),d=ri(1,20),x=ri(-4,6); return { expr:`${a}x${sl(b)}(x − ${c}) = ${(a+b)*x-b*c}`, solution:rat(x,1) }; },
+  ];
+
+  // Fix template 16 properly
+  templates[15] = () => {
+    const a=ri(2,4),b=ri(2,3),c=ri(1,5),x=ri(1,6),d=a*b*x+c*x;
+    return { expr:`${a}·${b}x${sl(c)} = ${d}`, solution:rat(x,1) };
+  };
+
+  const shuffled = [...templates.keys()].sort(() => Math.random() - 0.5);
+  const questions: EquationQuestion[] = [];
+  for (const idx of shuffled) {
+    if (questions.length >= 5) break;
+    for (let t = 0; t < 15; t++) {
+      const q = templates[idx]!();
+      if (q.solution.kind !== "rational" || (Math.abs(q.solution.num) < 500 && Math.abs(q.solution.den) < 50)) {
+        questions.push(q);
+        break;
+      }
+    }
+  }
+  // Ensure at least 5 (fallback: simple equations)
+  while (questions.length < 5) {
+    const a=ri(2,6),b=ri(1,9),x=ri(1,8);
+    questions.push({ expr:`${a}x${s(b)} = ${a*x+b}`, solution:rat(x,1) });
+  }
+  return { kind: "equation_group", lesson, questions };
+}
+
+// ── Fraction equation group (A10.2) ───────────────────────────────────────
+function genFracEquationGroupStep(lesson: MathSubmoduleLesson): FracEquationGroupStep {
+  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
+  function lcm(a: number, b: number) { return Math.abs(a * b) / gcd(a, b); }
+  function rat(n: number, d: number): EquationSolution {
+    if (d === 0) return { kind: "impossible" };
+    if (d < 0) { n = -n; d = -d; }
+    const g = gcd(Math.abs(n), d);
+    return { kind: "rational", num: n / g, den: d / g };
+  }
+  // Build a FracEqSide term: xMul=1 means "num/den · x", xMul=0 means constant "num/den"
+  // Equation: sum of lhs terms = sum of rhs terms
+  // After multiplying by LCD, each term (num/den)*x*LCD → becomes (num*LCD/den)*x
+  // We solve (sum of xCoef)*x = (sum of constants)
+  type Term = { num: number; den: number; xMul: number }; // value = num/den, * x^xMul
+  const mkTerm = (num: number, den: number, xMul: number): Term => ({ num, den, xMul });
+
+  type EqProblem = { lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution };
+
+  function buildProblem(lhsTerms: Term[], rhsTerms: Term[]): EqProblem {
+    const allDens = [...lhsTerms, ...rhsTerms].map(t => t.den);
+    const LCD = allDens.reduce((acc, d) => lcm(acc, d), 1);
+    // After multiplying by LCD: x coefs and constants
+    let xCoef = 0, constant = 0;
+    for (const t of lhsTerms) {
+      const factor = LCD / t.den * t.num;
+      if (t.xMul === 1) xCoef += factor; else constant -= factor;
+    }
+    for (const t of rhsTerms) {
+      const factor = LCD / t.den * t.num;
+      if (t.xMul === 1) xCoef -= factor; else constant += factor;
+    }
+    // xCoef * x = constant → x = constant / xCoef
+    const sol = xCoef === 0 ? (constant === 0 ? { kind: "infinite" as const } : { kind: "impossible" as const }) : rat(constant, xCoef);
+    return { lhs: { terms: lhsTerms }, rhs: { terms: rhsTerms }, solution: sol };
+  }
+
+  const problems: EqProblem[] = [];
+  const DENS = [2, 3, 4, 5, 6, 7, 8, 10];
+  const used = new Set<number>();
+
+  // Generate 5 fraction equation problems
+  for (let attempt = 0; problems.length < 5 && attempt < 80; attempt++) {
+    // Pick 2–3 different denominators
+    const d1 = DENS[ri(0, DENS.length-1)]!;
+    const d2 = DENS[ri(0, DENS.length-1)]!;
+    const xN1 = ri(1, 5), cN1 = ri(1, 8);
+    const xN2 = ri(1, 5), cN2 = ri(1, 8);
+    const cN3 = ri(1, 6);
+    const templates = [
+      // (a/d1)x + cN1/1 = (b/d2)x + cN2/1
+      () => buildProblem(
+        [mkTerm(xN1, d1, 1), mkTerm(cN1, 1, 0)],
+        [mkTerm(xN2, d2, 1), mkTerm(cN2, 1, 0)],
+      ),
+      // (a/d1)x + cN1/d2 = cN2/1
+      () => buildProblem(
+        [mkTerm(xN1, d1, 1), mkTerm(cN1, d2, 0)],
+        [mkTerm(cN2, 1, 0)],
+      ),
+      // cN1/d1 − (a/d2)x = cN2/d1 + cN3/1
+      () => buildProblem(
+        [mkTerm(cN1, d1, 0), mkTerm(-xN1, d2, 1)],
+        [mkTerm(cN2, d1, 0), mkTerm(cN3, 1, 0)],
+      ),
+      // (a/d1)x − cN1/1 = (b/d2)x − cN2/1
+      () => buildProblem(
+        [mkTerm(xN1, d1, 1), mkTerm(-cN1, 1, 0)],
+        [mkTerm(xN2, d2, 1), mkTerm(-cN2, 1, 0)],
+      ),
+      // cN1/d1 + (a/1)x = cN2/d2 − (b/1)x  → a+b on x side
+      () => buildProblem(
+        [mkTerm(cN1, d1, 0), mkTerm(xN1, 1, 1)],
+        [mkTerm(cN2, d2, 0), mkTerm(-xN2, 1, 1)],
+      ),
+    ];
+    const prob = templates[ri(0, templates.length-1)]!();
+    if (prob.solution.kind !== "rational") continue;
+    const { num, den } = prob.solution as { kind: "rational"; num: number; den: number };
+    if (Math.abs(num) > 200 || den > 100 || den === 1 && Math.abs(num) > 50) continue;
+    // Avoid duplicate denominator pairs
+    const key = d1 * 1000 + d2;
+    if (used.has(key)) continue;
+    used.add(key);
+    problems.push(prob);
+  }
+  // Fallback if not enough
+  while (problems.length < 5) {
+    const d=ri(2,6),n=ri(1,4),c1=ri(2,8),c2=ri(2,8);
+    problems.push(buildProblem([mkTerm(n,d,1),mkTerm(c1,1,0)],[mkTerm(c2,1,0)]));
+  }
+  return { kind: "frac_equation_group", lesson, questions: problems };
+}
+
+const ALGEBRA_SYMBOLS = ["a", "b", "c", "m", "n", "x", "y"] as const;
+const SUPER_DIGITS: Record<number, string> = { 1: "", 2: "²", 3: "³", 4: "⁴" };
+
+function symbolicVariants(value: string): string[] {
+  return [
+    value,
+    value.replace(/−/g, "-").replace(/·/g, "*"),
+    value.replace(/²/g, "^2").replace(/³/g, "^3").replace(/⁴/g, "^4"),
+  ];
+}
+
+function normalizeSymbolicInput(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/,/g, ".")
+    .replace(/−/g, "-")
+    .replace(/[·×]/g, "*")
+    .replace(/\^2/g, "²")
+    .replace(/\^3/g, "³")
+    .replace(/\^4/g, "⁴");
+}
+
+function symbolicMatches(value: string, acceptable: string[]): boolean {
+  const normalized = normalizeSymbolicInput(value);
+  return normalized !== "" && acceptable.some((answer) => normalizeSymbolicInput(answer) === normalized);
+}
+
+function literalText(powers: Record<string, number>): string {
+  return Object.keys(powers).sort().map((letter) => `${letter}${SUPER_DIGITS[powers[letter]!] ?? `^${powers[letter]}`}`).join("");
+}
+
+function monomialText(coefficient: number, literal: string): string {
+  if (!literal) return String(coefficient);
+  if (coefficient === 1) return literal;
+  if (coefficient === -1) return `−${literal}`;
+  return `${coefficient < 0 ? "−" : ""}${Math.abs(coefficient)}${literal}`;
+}
+
+function polynomialText(terms: Array<{ coefficient: number; literal: string }>): string {
+  const grouped = new Map<string, number>();
+  terms.forEach(({ coefficient, literal }) => grouped.set(literal, (grouped.get(literal) ?? 0) + coefficient));
+  const entries = [...grouped.entries()]
+    .filter(([, coefficient]) => coefficient !== 0)
+    .sort(([left], [right]) => right.length - left.length || left.localeCompare(right));
+  if (entries.length === 0) return "0";
+  return entries.map(([literal, coefficient], index) => {
+    const term = monomialText(Math.abs(coefficient), literal);
+    if (index === 0) return coefficient < 0 ? `−${term}` : term;
+    return `${coefficient < 0 ? "−" : "+"} ${term}`;
+  }).join(" ");
+}
+
+function expressionFromTerms(terms: Array<{ coefficient: number; display: string }>): string {
+  return terms.map(({ coefficient, display }, index) => {
+    const body = display.replace(/^−/, "");
+    if (index === 0) return coefficient < 0 ? `−${body}` : body;
+    return `${coefficient < 0 ? "−" : "+"} ${body}`;
+  }).join(" ");
+}
+
+function generateProductQuestion(templateIndex: number): SymbolicQuestion {
+  const factorCount = 3 + (templateIndex % 4);
+  const powers: Record<string, number> = {};
+  let coefficient = 1;
+  const factors: string[] = [];
+  for (let index = 0; index < factorCount; index++) {
+    const numeric = (templateIndex + index) % 3 === 0;
+    if (numeric) {
+      const value = 2 + ((templateIndex * 3 + index) % 7);
+      coefficient *= value;
+      factors.push(String(value));
+    } else {
+      const letter = ALGEBRA_SYMBOLS[(templateIndex + index * 2) % ALGEBRA_SYMBOLS.length]!;
+      const exponent = (templateIndex + index) % 5 === 0 ? 2 : 1;
+      powers[letter] = (powers[letter] ?? 0) + exponent;
+      factors.push(`${letter}${SUPER_DIGITS[exponent]}`);
+    }
+  }
+  const result = monomialText(coefficient, literalText(powers));
+  return { expression: factors.join(" · "), acceptable: symbolicVariants(result) };
+}
+
+function generateReductionQuestion(templateIndex: number, mixed: boolean): SymbolicQuestion {
+  const termCount = 4 + (templateIndex % 4);
+  const literals = [
+    ALGEBRA_SYMBOLS[templateIndex % ALGEBRA_SYMBOLS.length]!,
+    ALGEBRA_SYMBOLS[(templateIndex + 3) % ALGEBRA_SYMBOLS.length]!,
+  ];
+  const terms: Array<{ coefficient: number; literal: string; display: string }> = [];
+  for (let index = 0; index < termCount; index++) {
+    const isConstant = (templateIndex + index) % (mixed ? 4 : 6) === 0;
+    const letter = isConstant ? "" : literals[(templateIndex + index) % literals.length]!;
+    const exponent = !letter || (templateIndex + index) % 5 !== 0 ? 1 : 2;
+    const literal = letter ? `${letter}${SUPER_DIGITS[exponent]}` : "";
+    const magnitude = 1 + ((templateIndex * 2 + index * 3) % 9);
+    const coefficient = (templateIndex + index) % 4 === 0 ? -magnitude : magnitude;
+    if (mixed && letter && index % 2 === 0) {
+      const left = 1 + ((templateIndex + index) % 4);
+      const right = Math.max(1, Math.floor(magnitude / left));
+      const actualCoefficient = left * right * Math.sign(coefficient);
+      terms.push({ coefficient: actualCoefficient, literal, display: `${coefficient < 0 ? "−" : ""}${left} · ${right} · ${literal}` });
+    } else {
+      terms.push({ coefficient, literal, display: monomialText(coefficient, literal) });
+    }
+  }
+  const answer = polynomialText(terms);
+  return {
+    expression: expressionFromTerms(terms.map(({ coefficient, display }) => ({ coefficient, display }))),
+    acceptable: symbolicVariants(answer),
+  };
+}
+
+function genSymbolicGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
+  const templates = Array.from({ length: 50 }, (_, index) => {
+    if (exNum === 1) return generateProductQuestion(index);
+    return generateReductionQuestion(index, exNum === 3);
+  });
+  const instruction = exNum === 1
+    ? "Simplifiez les produits."
+    : exNum === 2
+      ? "Réduisez les termes semblables."
+      : "Simplifiez les expressions quand c'est possible.";
+  return {
+    kind: "symbolic_group",
+    lesson,
+    exNum,
+    instruction,
+    mode: "input",
+    questions: shufflePick(templates, 5),
+  };
+}
+
+function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupStep {
+  const templates = Array.from({ length: 50 }, (_, index) => {
+    const base = index % 2 === 0 ? generateProductQuestion(index) : generateReductionQuestion(index, true);
+    const correct = index % 3 !== 0;
+    const right = correct
+      ? base.acceptable[0]!
+      : `${base.acceptable[0]} ${index % 2 === 0 ? "+ 1" : "+ 2"}`;
+    return {
+      expression: `${base.expression} = ${right}`,
+      acceptable: [correct ? "vrai" : "faux"],
+      truth: correct,
+    };
+  });
+  const trueQuestions = shufflePick(templates.filter((question) => question.truth), 3);
+  const falseQuestions = shufflePick(templates.filter((question) => !question.truth), 2);
+  return {
+    kind: "symbolic_group",
+    lesson,
+    exNum: 4,
+    instruction: "Cochez les bonnes réponses.",
+    mode: "true_false",
+    questions: shufflePick([...trueQuestions, ...falseQuestions], 5),
+  };
+}
+
+function genMonomialGroupStep(lesson: MathSubmoduleLesson): MonomialGroupStep {
+  const templates = Array.from({ length: 50 }, (_, index): MonomialQuestion => {
+    const first = ALGEBRA_SYMBOLS[index % ALGEBRA_SYMBOLS.length]!;
+    const second = ALGEBRA_SYMBOLS[(index + 2) % ALGEBRA_SYMBOLS.length]!;
+    const third = ALGEBRA_SYMBOLS[(index + 5) % ALGEBRA_SYMBOLS.length]!;
+    const powers: Record<string, number> = { [first]: 1 + (index % 3) };
+    if (index % 2 === 0) powers[second] = 1 + (index % 2);
+    if (index % 5 === 0) powers[third] = 1;
+    const literal = literalText(powers);
+    const coefficientMode = index % 5;
+    const integer = 2 + (index % 8);
+    const coefficient = coefficientMode === 0 ? "1"
+      : coefficientMode === 1 ? "−1"
+        : coefficientMode === 2 ? String(integer)
+          : coefficientMode === 3 ? `${integer}/3`
+            : `${integer},5`;
+    const shownCoefficient = coefficient === "1" ? "" : coefficient === "−1" ? "−" : coefficient;
+    return {
+      expression: `${shownCoefficient}${literal}`,
+      coefficient: symbolicVariants(coefficient),
+      literal: symbolicVariants(literal),
+      degree: Object.values(powers).reduce((sum, exponent) => sum + exponent, 0),
+    };
+  });
+  return { kind: "monomial_group", lesson, questions: shufflePick(templates, 5) };
 }
 
 function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
@@ -3286,18 +3711,42 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 3, 3) });
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
       steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
+    } else if (sid === "A10-1") {
+      steps.push(genEquationGroupStep(lesson));
+      steps.push({ kind: "eval_start", lesson });
+      steps.push(genEquationGroupStep(lesson));
+    } else if (sid === "A10-2") {
+      steps.push(genFracEquationGroupStep(lesson));
+      steps.push({ kind: "eval_start", lesson });
+      steps.push(genFracEquationGroupStep(lesson));
     } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
       if (sid === "A9-1") {
+        steps.push(genMonomialGroupStep(lesson));
+      } else if (sid === "A9-2") {
         steps.push(genAlgebraGroupStep(lesson));
+      } else if (sid === "A9-4") {
+        steps.push(genSymbolicGroupStep(lesson, 1));
+        steps.push(genSymbolicGroupStep(lesson, 2));
+        steps.push(genSymbolicGroupStep(lesson, 3));
+        steps.push(genSymbolicTrueFalseStep(lesson));
       } else {
         generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
         );
       }
       steps.push({ kind: "eval_start", lesson });
-      generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
-        steps.push({ kind: "exercise", lesson, item }),
-      );
+      if (sid === "A9-1") {
+        steps.push(genMonomialGroupStep(lesson));
+      } else if (sid === "A9-4") {
+        steps.push(genSymbolicGroupStep(lesson, 1));
+        steps.push(genSymbolicGroupStep(lesson, 2));
+        steps.push(genSymbolicGroupStep(lesson, 3));
+        steps.push(genSymbolicTrueFalseStep(lesson));
+      } else {
+        generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
+          steps.push({ kind: "exercise", lesson, item }),
+        );
+      }
     } else {
       if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5" && sid !== "A5-2") {
         const pool = lesson.exercisePool;
@@ -3316,6 +3765,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
+    l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
     GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)
@@ -4581,6 +5031,15 @@ export function GenericModuleContent({
   const [algebraGroupAnswers, setAlgebraGroupAnswers] = useState<string[]>([]);
   const [algebraGroupValidated, setAlgebraGroupValidated] = useState(false);
   const [algebraGroupResults, setAlgebraGroupResults] = useState<boolean[]>([]);
+  const [eqAnswers, setEqAnswers] = useState<string[]>([]);
+  const [eqValidated, setEqValidated] = useState(false);
+  const [eqResults, setEqResults] = useState<boolean[]>([]);
+  const [monomialAnswers, setMonomialAnswers] = useState<Array<{ coefficient: string; literal: string; degree: string }>>([]);
+  const [monomialValidated, setMonomialValidated] = useState(false);
+  const [monomialResults, setMonomialResults] = useState<Array<{ coefficient: boolean; literal: boolean; degree: boolean }>>([]);
+  const [symbolicAnswers, setSymbolicAnswers] = useState<string[]>([]);
+  const [symbolicValidated, setSymbolicValidated] = useState(false);
+  const [symbolicResults, setSymbolicResults] = useState<boolean[]>([]);
 
   // Comparison exercise lifted state
   const [compAnswers, setCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
@@ -4798,6 +5257,18 @@ export function GenericModuleContent({
     setExStatus("idle");
     setExAttempts(0);
     setToggleAnswer(null);
+    setAlgebraGroupAnswers([]);
+    setAlgebraGroupValidated(false);
+    setAlgebraGroupResults([]);
+    setEqAnswers([]);
+    setEqValidated(false);
+    setEqResults([]);
+    setMonomialAnswers([]);
+    setMonomialValidated(false);
+    setMonomialResults([]);
+    setSymbolicAnswers([]);
+    setSymbolicValidated(false);
+    setSymbolicResults([]);
     setCompAnswers(Array(5).fill(null));
     setCompValidated(false);
     setExprCompAnswers(Array(5).fill(null));
@@ -5113,6 +5584,12 @@ export function GenericModuleContent({
       if (currentStep.kind === "exercise") {
         currentResults = [answerMatches(answer, currentStep.item.acceptable)];
         setEvalSavedAnswers(prev => ({ ...prev, [evalStepOffset]: answer }));
+      } else if (currentStep.kind === "monomial_group") {
+        currentResults = monomialResults.map((result) => result.coefficient && result.literal && result.degree);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: monomialAnswers } }));
+      } else if (currentStep.kind === "symbolic_group") {
+        currentResults = symbolicResults.slice(0, currentStep.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
       } else if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: arithAnswers } }));
@@ -5375,6 +5852,8 @@ export function GenericModuleContent({
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
+            : es?.kind === "monomial_group" ? "Coefficient, partie littérale et degré"
+            : es?.kind === "symbolic_group" ? es.instruction
             : es?.kind === "arithmetic_group"
               ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
               : es?.kind === "rounding_group"
@@ -5481,6 +5960,30 @@ export function GenericModuleContent({
     stepReset = () => { setAnswer(""); setExStatus("idle"); setExAttempts(0); };
   }
 
+  function checkEqAnswer(user: string, sol: EquationSolution): boolean {
+    const t = user.trim().toLowerCase().replace(/\s+/g, "");
+    if (sol.kind === "impossible") return ["impossible","∅","vide","s=∅","s={}"].some(k => t.includes(k));
+    if (sol.kind === "infinite") return ["ir","ℝ","infini","s=ir","s=r","s=ℝ"].some(k => t.includes(k));
+    const { num, den } = sol;
+    const m1 = t.match(/^(-?\d+)$/); if (m1) return parseInt(m1[1]!) * den === num;
+    const m2 = t.match(/^(-?\d+)\/(\d+)$/); if (m2) return parseInt(m2[1]!) * den === num * parseInt(m2[2]!);
+    return false;
+  }
+
+  if ((currentStep?.kind === "equation_group" || currentStep?.kind === "frac_equation_group") && !eqValidated) {
+    stepCanValidate = true;
+    stepValidate = () => {
+      const qs = currentStep.kind === "equation_group"
+        ? (currentStep as EquationGroupStep).questions
+        : (currentStep as FracEquationGroupStep).questions.map(q => ({ expr: "", solution: q.solution }));
+      const results = qs.map((q, i) => checkEqAnswer(eqAnswers[i] ?? "", q.solution));
+      setEqResults(results);
+      setEqValidated(true);
+      setExStatus("correct");
+    };
+    stepReset = () => { setEqAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
+  }
+
   if (currentStep?.kind === "algebra_group" && !algebraGroupValidated) {
     stepCanValidate = true;
     stepValidate = () => {
@@ -5497,6 +6000,47 @@ export function GenericModuleContent({
       setAlgebraGroupAnswers([]);
       setAlgebraGroupValidated(false);
       setAlgebraGroupResults([]);
+      setExStatus("idle");
+    };
+  }
+
+  if (currentStep?.kind === "monomial_group" && !monomialValidated) {
+    stepCanValidate = true;
+    stepValidate = () => {
+      const results = currentStep.questions.map((question, index) => {
+        const user = monomialAnswers[index] ?? { coefficient: "", literal: "", degree: "" };
+        return {
+          coefficient: symbolicMatches(user.coefficient, question.coefficient),
+          literal: symbolicMatches(user.literal, question.literal),
+          degree: parseInt(user.degree, 10) === question.degree,
+        };
+      });
+      setMonomialResults(results);
+      setMonomialValidated(true);
+      setExStatus("correct");
+    };
+    stepReset = () => {
+      setMonomialAnswers([]);
+      setMonomialValidated(false);
+      setMonomialResults([]);
+      setExStatus("idle");
+    };
+  }
+
+  if (currentStep?.kind === "symbolic_group" && !symbolicValidated) {
+    stepCanValidate = true;
+    stepValidate = () => {
+      const results = currentStep.questions.map((question, index) =>
+        symbolicMatches(symbolicAnswers[index] ?? "", question.acceptable),
+      );
+      setSymbolicResults(results);
+      setSymbolicValidated(true);
+      setExStatus("correct");
+    };
+    stepReset = () => {
+      setSymbolicAnswers([]);
+      setSymbolicValidated(false);
+      setSymbolicResults([]);
       setExStatus("idle");
     };
   }
@@ -6107,6 +6651,39 @@ export function GenericModuleContent({
           </div>
         );
       }
+      case "monomial_group":
+        if (!snapshot) return null;
+        return (
+          <div className="space-y-1 text-xs">
+            {step.questions.map((question, index) => {
+              const user = snapshot.answers?.[index] ?? {};
+              return (
+                <p key={index}>
+                  <span className="font-mono">{question.expression}</span>
+                  <span className="text-[var(--color-text-secondary)]"> : </span>
+                  <span className="text-amber-600">{user.coefficient || "—"}; {user.literal || "—"}; {user.degree || "—"}</span>
+                  <span className="text-[var(--color-text-secondary)]"> → </span>
+                  <span className="font-bold text-[var(--color-accent-alg)]">{question.coefficient[0]}; {question.literal[0]}; {question.degree}</span>
+                </p>
+              );
+            })}
+          </div>
+        );
+      case "symbolic_group":
+        if (!snapshot) return null;
+        return (
+          <div className="space-y-1 text-xs">
+            {step.questions.map((question, index) => (
+              <p key={index}>
+                <span className="font-mono">{question.expression}</span>
+                <span className="text-[var(--color-text-secondary)]"> : </span>
+                <span className="text-amber-600">{snapshot.answers?.[index] || "—"}</span>
+                <span className="text-[var(--color-text-secondary)]"> → </span>
+                <span className="font-bold text-[var(--color-accent-alg)]">{question.acceptable[0]}</span>
+              </p>
+            ))}
+          </div>
+        );
       case "arithmetic_group":
         if (!snapshot) return null;
         return (
@@ -6992,7 +7569,234 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Algebra group exercise (A9.1) */}
+      {/* Monomial analysis (A9.1) */}
+      {currentStep?.kind === "monomial_group" && (() => {
+        const step = currentStep as MonomialGroupStep;
+        const update = (index: number, field: "coefficient" | "literal" | "degree", value: string) => {
+          setMonomialAnswers((previous) => {
+            const next = [...previous];
+            while (next.length <= index) next.push({ coefficient: "", literal: "", degree: "" });
+            next[index] = { ...next[index]!, [field]: value };
+            return next;
+          });
+        };
+        return (
+          <div className="space-y-4">
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+            <p className="text-sm text-[var(--color-text-primary)]">
+              Indiquez le coefficient, la partie littérale et le degré de chaque monôme.
+            </p>
+            <div className="overflow-x-auto">
+              <div className="grid min-w-[34rem] grid-cols-[2rem_minmax(6rem,1fr)_8rem_10rem_5rem] items-stretch text-sm">
+                {["", "Monôme", "Coefficient", "Partie littérale", "Degré"].map((heading) => (
+                  <div key={heading} className="border-b border-[var(--color-border-default)] px-2 py-2 text-center text-xs font-bold text-[var(--color-text-secondary)]">
+                    {heading}
+                  </div>
+                ))}
+                {step.questions.flatMap((question, index) => {
+                  const user = monomialAnswers[index] ?? { coefficient: "", literal: "", degree: "" };
+                  const result = monomialResults[index];
+                  const fields = [
+                    { key: "coefficient" as const, value: user.coefficient, correct: question.coefficient[0]!, ok: result?.coefficient },
+                    { key: "literal" as const, value: user.literal, correct: question.literal[0]!, ok: result?.literal },
+                    { key: "degree" as const, value: user.degree, correct: String(question.degree), ok: result?.degree },
+                  ];
+                  return [
+                    <div key={`${index}-num`} className="flex items-center justify-center border-b border-[var(--color-border-default)] px-1 py-2 text-xs font-bold text-[var(--color-accent-alg)]">{index + 1}.</div>,
+                    <div key={`${index}-expr`} className="flex items-center justify-center border-b border-[var(--color-border-default)] px-2 py-2 font-mono font-bold">{question.expression}</div>,
+                    ...fields.map((field) => (
+                      <div key={`${index}-${field.key}`} className="flex min-h-12 items-center justify-center border-b border-[var(--color-border-default)] px-2 py-1">
+                        {monomialValidated && field.ok === false ? (
+                          <div className="flex min-w-16 flex-col items-center border-b-2 border-amber-500 pb-1">
+                            <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{field.value || "—"}</span>
+                            <span className="font-bold text-amber-600">{field.correct}</span>
+                          </div>
+                        ) : (
+                          <input
+                            type="text"
+                            inputMode={field.key === "degree" ? "numeric" : "text"}
+                            value={field.value}
+                            disabled={monomialValidated}
+                            onChange={(event) => update(index, field.key, event.target.value)}
+                            className="w-full min-w-0 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center outline-none focus:border-amber-500"
+                          />
+                        )}
+                      </div>
+                    )),
+                  ];
+                })}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Symbolic simplification groups (A9.4) */}
+      {currentStep?.kind === "symbolic_group" && (() => {
+        const step = currentStep as SymbolicGroupStep;
+        return (
+          <div className="space-y-4">
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
+            <p className="text-sm text-[var(--color-text-primary)]">{step.instruction}</p>
+            <div className="space-y-3">
+              {step.questions.map((question, index) => {
+                const value = symbolicAnswers[index] ?? "";
+                const ok = symbolicResults[index];
+                return (
+                  <div key={index} className="grid grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-2">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{index + 1}.</span>
+                    <span className="min-w-0 font-mono text-sm text-[var(--color-text-primary)]">{question.expression}</span>
+                    {step.mode === "true_false" ? (
+                      <div className="flex gap-1">
+                        {(["vrai", "faux"] as const).map((choice) => {
+                          const selected = value === choice;
+                          const isCorrectChoice = question.acceptable[0] === choice;
+                          return (
+                            <button
+                              key={choice}
+                              type="button"
+                              disabled={symbolicValidated}
+                              onClick={() => setSymbolicAnswers((previous) => {
+                                const next = [...previous];
+                                next[index] = choice;
+                                return next;
+                              })}
+                              className={`min-h-9 min-w-14 rounded-md border px-2 text-xs font-semibold transition-colors ${
+                                selected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                              } ${symbolicValidated && isCorrectChoice ? "!border-amber-500 !text-amber-600" : ""}`}
+                            >
+                              {choice === "vrai" ? "Vrai" : "Faux"}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ) : symbolicValidated && ok === false ? (
+                      <div className="flex w-28 flex-col items-center border-b-2 border-amber-500 pb-1">
+                        <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value || "—"}</span>
+                        <span className="text-center text-xs font-bold text-amber-600">{question.acceptable[0]}</span>
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        value={value}
+                        disabled={symbolicValidated}
+                        onChange={(event) => setSymbolicAnswers((previous) => {
+                          const next = [...previous];
+                          next[index] = event.target.value;
+                          return next;
+                        })}
+                        className="w-28 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Equation group (A10.1) */}
+      {currentStep?.kind === "equation_group" && (() => {
+        const step = currentStep as EquationGroupStep;
+        const formatSol = (sol: EquationSolution) =>
+          sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
+          sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+        const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        return (
+          <div className="space-y-4">
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez un entier (ex&nbsp;: 4&nbsp;ou&nbsp;−6), une fraction (ex&nbsp;: −1/4), <em>impossible</em> ou <em>IR</em>.</p>
+            <div className="space-y-4">
+              {step.questions.map((q, i) => {
+                const userAns = eqAnswers[i] ?? "";
+                const result = eqValidated ? (eqResults[i] ?? null) : null;
+                const isWrong = result === false;
+                return (
+                  <div key={i} className="flex flex-wrap items-center gap-2">
+                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
+                    <span className="text-sm text-[var(--color-text-secondary)] mx-1">x =</span>
+                    {isWrong ? (
+                      <div className="w-24 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
+                      </div>
+                    ) : (
+                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated}
+                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
+                        className={inputCls} />
+                    )}
+                    {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Fraction equation group (A10.2) */}
+      {currentStep?.kind === "frac_equation_group" && (() => {
+        const step = currentStep as FracEquationGroupStep;
+        const formatSol = (sol: EquationSolution) =>
+          sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
+          sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+        const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        // Render a side (list of terms) as inline fraction elements
+        const renderTerm = (t: { num: number; den: number; xMul: number }, idx: number) => {
+          const isNeg = t.num < 0;
+          const absN = Math.abs(t.num);
+          const sign = idx === 0 ? (isNeg ? "−" : "") : (isNeg ? " − " : " + ");
+          const coef = t.den === 1
+            ? <span className="font-mono">{absN === 1 && t.xMul === 1 ? "" : absN}</span>
+            : <FracDisplay num={`${absN}`} den={`${t.den}`} />;
+          const varPart = t.xMul === 1 ? <span className="font-mono">x</span> : null;
+          return <span key={idx} className="inline-flex items-center">{sign}{coef}{varPart}</span>;
+        };
+        const renderSide = (side: FracEqSide) => (
+          <span className="inline-flex items-center flex-wrap gap-0">
+            {side.terms.map((t, i) => renderTerm(t, i))}
+          </span>
+        );
+        return (
+          <div className="space-y-4">
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez une fraction (ex&nbsp;: 3/4), un entier, <em>impossible</em> ou <em>IR</em>.</p>
+            <div className="space-y-5">
+              {step.questions.map((q, i) => {
+                const userAns = eqAnswers[i] ?? "";
+                const result = eqValidated ? (eqResults[i] ?? null) : null;
+                const isWrong = result === false;
+                return (
+                  <div key={i} className="flex flex-wrap items-center gap-2">
+                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    <span className="inline-flex items-center text-sm text-[var(--color-text-primary)]">
+                      {renderSide(q.lhs)}
+                      <span className="mx-2 font-mono">=</span>
+                      {renderSide(q.rhs)}
+                    </span>
+                    <span className="text-sm text-[var(--color-text-secondary)] mx-1">x =</span>
+                    {isWrong ? (
+                      <div className="w-24 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
+                      </div>
+                    ) : (
+                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated}
+                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
+                        className={inputCls} />
+                    )}
+                    {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Algebra group exercise (A9.2) */}
       {currentStep?.kind === "algebra_group" && (() => {
         const step = currentStep as AlgebraGroupStep;
         return (

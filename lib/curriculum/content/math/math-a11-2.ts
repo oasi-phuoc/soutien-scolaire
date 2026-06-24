@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_A13_2_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A13-2",
-    submoduleCode: "A13.2",
+export const MATH_A11_2_LESSON: MathSubmoduleLesson = {
+    submoduleId: "A11-2",
+    submoduleCode: "A11.2",
     theory: {
       title: {
         fr: "",
@@ -64,18 +64,18 @@ export const MATH_A13_2_LESSON: MathSubmoduleLesson = {
     },
   exercises: [],
   exercisePool: [
-    { id: "a13-2-ep01", promptFr: "f(x) = 3x + 1. Calcule f(−3).", type: "number", acceptable: ["-8"], hintFr: "3 × (−3) + 1 = −9 + 1 = ?" },
-    { id: "a13-2-ep02", promptFr: "f(x) = 3x + 1. Calcule f(3).", type: "number", acceptable: ["10"], hintFr: "3 × 3 + 1 = 9 + 1 = ?" },
-    { id: "a13-2-ep03", promptFr: "f(x) = x² − 4. Calcule f(0).", type: "number", acceptable: ["-4"], hintFr: "0² − 4 = 0 − 4 = ?" },
-    { id: "a13-2-ep04", promptFr: "f(x) = x² − 4. Calcule f(4).", type: "number", acceptable: ["12"], hintFr: "4² − 4 = 16 − 4 = ?" },
-    { id: "a13-2-ep05", promptFr: "f(x) = 4x − 3. Calcule f(3).", type: "number", acceptable: ["9"], hintFr: "4 × 3 − 3 = 12 − 3 = ?" },
-    { id: "a13-2-ep06", promptFr: "f(x) = 4x − 3. Calcule f(−1).", type: "number", acceptable: ["-7"], hintFr: "4 × (−1) − 3 = −4 − 3 = ?" },
-    { id: "a13-2-ep07", promptFr: "f(x) = x² + 3x. Calcule f(4).", type: "number", acceptable: ["28"], hintFr: "4² + 3 × 4 = 16 + 12 = ?" },
-    { id: "a13-2-ep08", promptFr: "f(x) = x² + 3x. Calcule f(−3).", type: "number", acceptable: ["0"], hintFr: "(−3)² + 3 × (−3) = 9 − 9 = ?" },
-    { id: "a13-2-ep09", promptFr: "f(x) = 6 − x. Calcule f(9).", type: "number", acceptable: ["-3"], hintFr: "6 − 9 = ?" },
-    { id: "a13-2-ep10", promptFr: "f(x) = 6 − x. Calcule f(0).", type: "number", acceptable: ["6"], hintFr: "6 − 0 = ?" },
-    { id: "a13-2-ep11", promptFr: "f(x) = 2x² − 1. Calcule f(3).", type: "number", acceptable: ["17"], hintFr: "2 × 9 − 1 = 18 − 1 = ?" },
-    { id: "a13-2-ep12", promptFr: "f(x) = 2x² − 1. Calcule f(−2).", type: "number", acceptable: ["7"], hintFr: "2 × 4 − 1 = 8 − 1 = ?" },
+    { id: "a11-2-ep01", promptFr: "f(x) = 3x + 1. Calcule f(−3).", type: "number", acceptable: ["-8"], hintFr: "3 × (−3) + 1 = −9 + 1 = ?" },
+    { id: "a11-2-ep02", promptFr: "f(x) = 3x + 1. Calcule f(3).", type: "number", acceptable: ["10"], hintFr: "3 × 3 + 1 = 9 + 1 = ?" },
+    { id: "a11-2-ep03", promptFr: "f(x) = x² − 4. Calcule f(0).", type: "number", acceptable: ["-4"], hintFr: "0² − 4 = 0 − 4 = ?" },
+    { id: "a11-2-ep04", promptFr: "f(x) = x² − 4. Calcule f(4).", type: "number", acceptable: ["12"], hintFr: "4² − 4 = 16 − 4 = ?" },
+    { id: "a11-2-ep05", promptFr: "f(x) = 4x − 3. Calcule f(3).", type: "number", acceptable: ["9"], hintFr: "4 × 3 − 3 = 12 − 3 = ?" },
+    { id: "a11-2-ep06", promptFr: "f(x) = 4x − 3. Calcule f(−1).", type: "number", acceptable: ["-7"], hintFr: "4 × (−1) − 3 = −4 − 3 = ?" },
+    { id: "a11-2-ep07", promptFr: "f(x) = x² + 3x. Calcule f(4).", type: "number", acceptable: ["28"], hintFr: "4² + 3 × 4 = 16 + 12 = ?" },
+    { id: "a11-2-ep08", promptFr: "f(x) = x² + 3x. Calcule f(−3).", type: "number", acceptable: ["0"], hintFr: "(−3)² + 3 × (−3) = 9 − 9 = ?" },
+    { id: "a11-2-ep09", promptFr: "f(x) = 6 − x. Calcule f(9).", type: "number", acceptable: ["-3"], hintFr: "6 − 9 = ?" },
+    { id: "a11-2-ep10", promptFr: "f(x) = 6 − x. Calcule f(0).", type: "number", acceptable: ["6"], hintFr: "6 − 0 = ?" },
+    { id: "a11-2-ep11", promptFr: "f(x) = 2x² − 1. Calcule f(3).", type: "number", acceptable: ["17"], hintFr: "2 × 9 − 1 = 18 − 1 = ?" },
+    { id: "a11-2-ep12", promptFr: "f(x) = 2x² − 1. Calcule f(−2).", type: "number", acceptable: ["7"], hintFr: "2 × 4 − 1 = 8 − 1 = ?" },
   ],
   poolSize: 5,
 };

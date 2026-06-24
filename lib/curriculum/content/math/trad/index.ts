@@ -55,20 +55,13 @@ import { TRAD_A10_2 } from "./trad-a10-2";
 import { TRAD_A10_3 } from "./trad-a10-3";
 import { TRAD_A10_4 } from "./trad-a10-4";
 import { TRAD_A10_5 } from "./trad-a10-5";
-import { TRAD_A10_6 } from "./trad-a10-6";
 import { TRAD_A11_1 } from "./trad-a11-1";
 import { TRAD_A11_2 } from "./trad-a11-2";
 import { TRAD_A11_3 } from "./trad-a11-3";
-import { TRAD_A12_1 } from "./trad-a12-1";
-import { TRAD_A12_2 } from "./trad-a12-2";
-import { TRAD_A12_3 } from "./trad-a12-3";
-import { TRAD_A13_1 } from "./trad-a13-1";
-import { TRAD_A13_2 } from "./trad-a13-2";
-import { TRAD_A13_3 } from "./trad-a13-3";
-import { TRAD_A13_4 } from "./trad-a13-4";
-import { TRAD_A13_5 } from "./trad-a13-5";
-import { TRAD_A13_6 } from "./trad-a13-6";
-import { TRAD_A13_7 } from "./trad-a13-7";
+import { TRAD_A11_4 } from "./trad-a11-4";
+import { TRAD_A11_5 } from "./trad-a11-5";
+import { TRAD_A11_6 } from "./trad-a11-6";
+import { TRAD_A11_7 } from "./trad-a11-7";
 import { TRAD_G1_1 } from "./trad-g1-1";
 import { TRAD_G1_2 } from "./trad-g1-2";
 import { TRAD_G2_1 } from "./trad-g2-1";
@@ -159,10 +152,8 @@ const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_A7_1, TRAD_A7_2, TRAD_A7_3, TRAD_A7_4, TRAD_A7_5,
   TRAD_A8_1, TRAD_A8_2, TRAD_A8_3, TRAD_A8_4, TRAD_A8_5,
   TRAD_A9_1, TRAD_A9_2, TRAD_A9_3, TRAD_A9_4, TRAD_A9_5, TRAD_A9_6,
-  TRAD_A10_1, TRAD_A10_2, TRAD_A10_3, TRAD_A10_4, TRAD_A10_5, TRAD_A10_6,
-  TRAD_A11_1, TRAD_A11_2, TRAD_A11_3,
-  TRAD_A12_1, TRAD_A12_2, TRAD_A12_3,
-  TRAD_A13_1, TRAD_A13_2, TRAD_A13_3, TRAD_A13_4, TRAD_A13_5, TRAD_A13_6, TRAD_A13_7,
+  TRAD_A10_1, TRAD_A10_2, TRAD_A10_3, TRAD_A10_4, TRAD_A10_5,
+  TRAD_A11_1, TRAD_A11_2, TRAD_A11_3, TRAD_A11_4, TRAD_A11_5, TRAD_A11_6, TRAD_A11_7,
   TRAD_G1_1, TRAD_G1_2,
   TRAD_G2_1, TRAD_G2_2,
   TRAD_G3_1, TRAD_G3_2, TRAD_G3_3, TRAD_G3_4, TRAD_G3_5,
