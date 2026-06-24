@@ -5,7 +5,7 @@ export const MATH_A13_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A13.1",
     theory: {
       title: {
-        fr: "Notion de fonction",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

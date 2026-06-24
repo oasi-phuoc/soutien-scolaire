@@ -5,7 +5,7 @@ export const MATH_A12_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A12.3",
     theory: {
       title: {
-        fr: "Problèmes à deux inconnues",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

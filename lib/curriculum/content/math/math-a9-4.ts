@@ -5,7 +5,7 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.4",
     theory: {
       title: {
-        fr: "Réduction (termes semblables)",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

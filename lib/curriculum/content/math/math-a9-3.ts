@@ -5,7 +5,7 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.3",
     theory: {
       title: {
-        fr: "Substitution (évaluation)",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

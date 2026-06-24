@@ -5,7 +5,7 @@ export const MATH_A10_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.5",
     theory: {
       title: {
-        fr: "Équations avec fractions",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

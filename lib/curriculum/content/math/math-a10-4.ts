@@ -5,7 +5,7 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.4",
     theory: {
       title: {
-        fr: "Équations avec parenthèses",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

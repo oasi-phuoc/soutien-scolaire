@@ -5,7 +5,7 @@ export const MATH_A10_6_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.6",
     theory: {
       title: {
-        fr: "Problèmes concrets (mise en équation)",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

@@ -5,7 +5,7 @@ export const MATH_A12_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A12.2",
     theory: {
       title: {
-        fr: "Méthode d'addition / soustraction",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

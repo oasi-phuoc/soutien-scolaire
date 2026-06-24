@@ -5,7 +5,7 @@ export const MATH_A10_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.1",
     theory: {
       title: {
-        fr: "Principe d'une équation",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

@@ -5,7 +5,7 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.1",
     theory: {
       title: {
-        fr: "Variable et inconnue",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -54,14 +54,6 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
           itemsFr: [
             "Dans l'équation 3x **+** 5 = 20, x est une **inconnue** : il y a une valeur précise à trouver.",
             "Ici, x = 5 est la seule valeur qui vérifie l'équation.",
-          ],
-        },
-        {
-          type: "rule",
-          titleFr: "Convention d'écriture",
-          itemsFr: [
-            "x, y, z → utilisés pour les variables et inconnues",
-            "a, b, c → utilisés pour les constantes (valeurs fixes connues)",
           ],
         },
       ],

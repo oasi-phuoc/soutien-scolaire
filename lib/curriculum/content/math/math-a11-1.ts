@@ -5,7 +5,7 @@ export const MATH_A11_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A11.1",
     theory: {
       title: {
-        fr: "Symboles et droite numérique",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

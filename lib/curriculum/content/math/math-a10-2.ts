@@ -5,7 +5,7 @@ export const MATH_A10_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A10.2",
     theory: {
       title: {
-        fr: "Résolution : ax = b",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [

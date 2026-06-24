@@ -5,7 +5,7 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.5",
     theory: {
       title: {
-        fr: "Développement simple",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [
