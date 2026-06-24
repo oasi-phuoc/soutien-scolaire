@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 
 export interface PrintExercise {
@@ -184,6 +184,150 @@ export function PrintDocumentFooter({
       <div className="text-right">
         <p>LearnUP - Van Thanh Phuoc</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
+      </div>
+    </div>
+  );
+}
+
+// ── Book-like A4 page preview ─────────────────────────────────────────────
+// Splits the content (theory + each exercise) across distinct A4 sheets,
+// measuring real heights so each exercise stays whole — same rule as the
+// printed output. The header appears on page 1 only; every page has a footer
+// with its "Page N sur Total" number.
+const A4_RATIO = 297 / 210;
+
+function PaginatedPreview({
+  header,
+  theoryNode,
+  exerciseNodes,
+  printDate,
+}: {
+  header: ReactNode;
+  theoryNode: ReactNode | null;
+  exerciseNodes: { key: string; node: ReactNode }[];
+  printDate: string;
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const headerMeasureRef = useRef<HTMLDivElement>(null);
+  const footerMeasureRef = useRef<HTMLDivElement>(null);
+  const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [pageWidth, setPageWidth] = useState(0);
+  const [tick, setTick] = useState(0);
+  const [pages, setPages] = useState<number[][]>([]);
+
+  const blocks = useMemo(() => {
+    const arr: { key: string; node: ReactNode }[] = [];
+    if (theoryNode) arr.push({ key: "__theory__", node: theoryNode });
+    exerciseNodes.forEach((e) => arr.push(e));
+    return arr;
+  }, [theoryNode, exerciseNodes]);
+  blockRefs.current = [];
+
+  // Page geometry (px), derived from the available width.
+  const padX = (pageWidth * 12) / 210;
+  const padTop = (pageWidth * 18) / 210;
+  const padBottom = (pageWidth * 12) / 210;
+  const pageHeight = pageWidth * A4_RATIO;
+  const contentWidth = pageWidth - 2 * padX;
+  const contentHeight = pageHeight - padTop - padBottom;
+  // Calibrated so the look matches the previous preview at full width (~16px).
+  const baseFont = (pageWidth / 704) * 16;
+  const gap = baseFont * 1.1;
+
+  // Track available width responsively.
+  useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => setPageWidth(Math.min(el.clientWidth, 704));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Recompute after images (logos) load and settle.
+  useEffect(() => {
+    const t1 = setTimeout(() => setTick((v) => v + 1), 200);
+    const t2 = setTimeout(() => setTick((v) => v + 1), 700);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [pageWidth, blocks.length]);
+
+  // Pack blocks into pages based on measured heights.
+  useLayoutEffect(() => {
+    if (pageWidth === 0) return;
+    const headerH = headerMeasureRef.current?.offsetHeight ?? 0;
+    const footerH = footerMeasureRef.current?.offsetHeight ?? 0;
+    const blockH = blocks.map((_, i) => blockRefs.current[i]?.offsetHeight ?? 0);
+    const page1Avail = contentHeight - headerH - footerH - gap;
+    const pageNAvail = contentHeight - footerH - gap;
+    const result: number[][] = [];
+    let cur: number[] = [];
+    let curH = 0;
+    let avail = page1Avail;
+    blocks.forEach((_, i) => {
+      const h = blockH[i] + gap;
+      if (cur.length > 0 && curH + h > avail) {
+        result.push(cur);
+        cur = [];
+        curH = 0;
+        avail = pageNAvail;
+      }
+      cur.push(i);
+      curH += h;
+    });
+    if (cur.length > 0) result.push(cur);
+    if (result.length === 0) result.push([]);
+    setPages(result);
+  }, [pageWidth, blocks, contentHeight, gap, tick]);
+
+  return (
+    <div ref={wrapRef} className="w-full">
+      {/* Hidden measuring layer — same width & font context as a page. */}
+      {pageWidth > 0 && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none invisible absolute -left-[9999px] top-0"
+          style={{ width: contentWidth, fontSize: baseFont }}
+        >
+          <div ref={headerMeasureRef}>{header}</div>
+          {blocks.map((b, i) => (
+            <div key={b.key} ref={(el) => { blockRefs.current[i] = el; }}>
+              {b.node}
+            </div>
+          ))}
+          <div ref={footerMeasureRef}>
+            <PrintDocumentFooter date={printDate} preview page={1} totalPages={1} />
+          </div>
+        </div>
+      )}
+
+      {/* Visible page sheets, stacked like a book. */}
+      <div className="mx-auto flex flex-col items-center gap-6 overflow-y-auto py-1" style={{ maxHeight: "75vh" }}>
+        {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
+          <div
+            key={pageIdx}
+            className="flex shrink-0 flex-col rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
+            style={{
+              width: pageWidth,
+              minHeight: pageHeight,
+              paddingTop: padTop,
+              paddingBottom: padBottom,
+              paddingLeft: padX,
+              paddingRight: padX,
+              fontSize: baseFont,
+            }}
+          >
+            {pageIdx === 0 && header}
+            <div className="flex-1">
+              {blockIdxs.map((bi, j) => (
+                <div key={blocks[bi]!.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
+                  {blocks[bi]!.node}
+                </div>
+              ))}
+            </div>
+            <PrintDocumentFooter date={printDate} preview page={pageIdx + 1} totalPages={pages.length} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -639,37 +783,31 @@ export function PrintConfigSheet({
               <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
                 Aperçu avant impression
               </h2>
-              <div
-                className="mx-auto w-full max-w-[44rem] overflow-y-auto rounded border border-zinc-300 bg-white p-[5%] text-black shadow-lg"
-                style={{ maxHeight: "75vh" }}
-              >
-                <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
-                {theory && (
+              <PaginatedPreview
+                printDate={printDate}
+                header={<PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
+                theoryNode={theory ? (
                   <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
                     {theoryPreview ?? (
                       <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
                     )}
                   </div>
-                )}
-                {previewExercises.length > 0 && (
-                  <ol className="mt-4 space-y-5">
-                    {previewExercises.map((item, index) => (
-                      <li key={item.key} className="border-b border-zinc-200 pb-3">
-                        <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
-                          <span className="flex-1">Exercice {index + 1}</span>
-                          {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
-                        </div>
-                        <div className="print-ex-content text-zinc-800 [&_button]:pointer-events-none">
-                          {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-                <div className="mt-8">
-                  <PrintDocumentFooter date={printDate} preview page={1} totalPages={1} />
-                </div>
-              </div>
+                ) : null}
+                exerciseNodes={previewExercises.map((item, index) => ({
+                  key: item.key,
+                  node: (
+                    <div className="border-b border-zinc-200 pb-3">
+                      <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                        <span className="flex-1">Exercice {index + 1}</span>
+                        {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                      </div>
+                      <div className="print-ex-content text-zinc-800 [&_button]:pointer-events-none">
+                        {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
+                      </div>
+                    </div>
+                  ),
+                }))}
+              />
               {!hasPrintableContent && (
                 <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-700">
                   Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
