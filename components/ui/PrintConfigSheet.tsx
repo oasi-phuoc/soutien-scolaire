@@ -652,7 +652,7 @@ export function PrintConfigSheet({
                       <li key={item.key} className="border-b border-zinc-200 pb-3">
                         <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
                           <span className="flex-1">Exercice {index + 1}</span>
-                          {evalMode && <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                          {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                         </div>
                         <div className="print-ex-content text-zinc-800 [&_button]:pointer-events-none">
                           {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
@@ -727,7 +727,7 @@ export function PrintConfigSheet({
                 <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[24px] font-bold" style={{ color: accentColor }}>
                   <span className="flex-1">Exercice {index + 1}</span>
                   {evalMode && (
-                    <span>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
+                    <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
                   )}
                 </div>
                 <div className="print-ex-content [&_button]:pointer-events-none">
