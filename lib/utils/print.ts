@@ -51,9 +51,31 @@ export function openPrintPopup(
   popup.document.write(htmlContent);
   popup.document.title = title;
   popup.document.close();
-  popup.onload = () => {
+  const printWhenReady = async () => {
+    const images = Array.from(popup.document.images);
+    await Promise.all(images.map(async (image) => {
+      image.loading = "eager";
+      if (!image.complete) {
+        await new Promise<void>((resolve) => {
+          image.addEventListener("load", () => resolve(), { once: true });
+          image.addEventListener("error", () => resolve(), { once: true });
+        });
+      }
+      try {
+        await image.decode();
+      } catch {
+        // A failed decorative image must not block the whole document.
+      }
+    }));
+    await popup.document.fonts?.ready;
+    await new Promise<void>((resolve) => popup.requestAnimationFrame(() => popup.requestAnimationFrame(() => resolve())));
     popup.focus();
     popup.print();
   };
+  if (popup.document.readyState === "complete") {
+    void printWhenReady();
+  } else {
+    popup.addEventListener("load", () => { void printWhenReady(); }, { once: true });
+  }
   return popup;
 }

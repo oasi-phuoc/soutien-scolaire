@@ -345,3 +345,8 @@ input[type=number] {
 .print-ex-content p.font-bold {
   display: none !important;
 }
+
+/* One typographic scale shared by the A4 preview and the printed clone. */
+.print-layout-context .print-ex-content :is(div, span, p, li, label, button, input, textarea, td, th) {
+  font-size: 1em !important;
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export interface PrintExercise {
   id: string;
@@ -72,32 +73,32 @@ export function PrintDocumentHeader({
     <div className="print-document-header mb-[4%] w-full text-black">
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.3fr)] items-start gap-[3%] border-b border-black pb-[1.5%]">
         {/* Left: school identity */}
-        <div className="text-[clamp(4px,0.85vw,7px)] leading-snug">
-          <p className="text-[clamp(8px,1.7vw,14px)] font-bold">SCAI</p>
+        <div className="text-[0.7em] leading-snug">
+          <p className="text-[2em] font-bold">SCAI</p>
           <p>2025-2026</p>
           <p className="font-bold uppercase">Classes d&apos;accueil</p>
         </div>
         {/* Centre: logo only */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo-etat-du-valais.png" alt="" className="h-11 w-auto shrink-0" style={{ objectFit: "contain" }} />
+        <img src="/logo-etat-du-valais.png" alt="" className="w-auto shrink-0" style={{ height: "4.4em", objectFit: "contain" }} />
         {/* Right: department */}
-        <div className="text-[clamp(4px,0.85vw,7px)] leading-snug">
+        <div className="text-[0.7em] leading-snug">
           <p>Département de la santé, des affaires sociales et de la culture</p>
           <p>Service de l&apos;action sociale</p>
           <p>Office de l&apos;asile</p>
           <p>Centre de formation « Le Botza »</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 items-center gap-3 border-b border-black py-[1%] text-[clamp(8px,2.3vw,16px)] font-bold uppercase leading-tight">
+      <div className="grid grid-cols-2 items-center gap-3 border-b border-black py-[1%] text-[1.6em] font-bold uppercase leading-tight">
         <p className="text-left">{config.classLevel} {config.classNumber}</p>
         <p className="truncate text-left">Cours {config.course}</p>
       </div>
       {/* Student identity block — Nom / Prénom / Date + table (eval: 4 cols; exercise: N° only) */}
-      <div className="mt-[4%] flex items-stretch gap-[4%] py-[2%] text-[clamp(7px,1.9vw,13px)]">
+      <div className="print-student-identity mt-[4%] flex items-stretch gap-[4%] py-[2%] text-[1.6em] leading-tight">
         {/* Left: labels with vertically aligned colons */}
-        <div className="flex min-w-0 flex-1 flex-col justify-around gap-[10px]">
+        <div className="grid min-w-0 flex-1 grid-rows-3 gap-[0.55em]">
           {(["Nom", "Prénom", "Date"] as const).map((label) => (
-            <p key={label} className="flex items-baseline">
+            <p key={label} className="flex min-h-0 items-end">
               <span className="w-[4.5em] shrink-0">{label}</span>
               <span className="shrink-0 pr-[0.3em]">:</span>
               <span className="min-w-0 flex-1 border-b border-black" />
@@ -105,46 +106,34 @@ export function PrintDocumentHeader({
           ))}
         </div>
         {evalMode ? (
-          /* Eval mode: 4-column table (Pts/Total/Note/N°), natural height */
-          <div className="shrink-0 self-start flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
-            <div className="flex shrink-0">
-              {(["Pts", "Total", "Note", "N°"] as const).map((h) => {
-                const w = h === "Total" ? "4.5em" : h === "Note" ? "3.5em" : "3em";
-                return (
-                  <div key={h} style={{ width: w }} className="border-b border-r border-black px-[0.5em] py-[0.5em] font-bold">
-                    {h}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex">
-              {([
-                { val: null,                  w: "3em"   },
-                { val: totalPoints ?? null,   w: "4.5em" },
-                { val: null,                  w: "3.5em" },
-                { val: null,                  w: "3em"   },
-              ] as { val: number | null; w: string }[]).map(({ val, w }, i) => (
-                <div key={i} style={{ width: w }}
-                  className={`border-b border-r border-black px-[0.5em] py-[0.5em] flex items-center justify-center${i === 1 ? " font-bold" : ""}`}
-                >
-                  {val !== null ? val : ""}
-                </div>
-              ))}
-            </div>
+          /* Eval mode: 4 equal columns; two rows match the full identity-block height. */
+          <div className="grid w-[14em] shrink-0 self-stretch grid-cols-4 grid-rows-2 border-l border-t border-black text-center">
+            {(["Pts", "Total", "Note", "N°"] as const).map((heading) => (
+              <div key={heading} className="flex min-h-0 items-center justify-center border-b border-r border-black px-[0.35em] font-bold">
+                {heading}
+              </div>
+            ))}
+            {[null, totalPoints ?? null, null, null].map((value, index) => (
+              <div key={index}
+                className={`flex min-h-0 items-center justify-center border-b border-r border-black px-[0.35em]${index === 1 ? " font-bold" : ""}`}
+              >
+                {value !== null ? value : ""}
+              </div>
+            ))}
           </div>
         ) : (
-          /* Exercise mode: 11em spacer + 3em N° = 14em total (matches eval width 3+4.5+3.5+3) */
-          <div className="shrink-0 flex items-stretch text-center text-[clamp(7px,1.9vw,13px)]" style={{ width: "14em" }}>
-            <div style={{ width: "11em" }} />
-            <div className="flex flex-col" style={{ width: "3em" }}>
-              <div className="shrink-0 border border-black px-[0.5em] py-[0.5em] font-bold">N°</div>
-              <div className="flex-1 border border-black border-t-0" />
+          /* Exercise mode: N° keeps the same 3.5em width as one evaluation column. */
+          <div className="flex w-[14em] shrink-0 self-stretch items-stretch text-center">
+            <div className="min-w-0 flex-1" />
+            <div className="grid w-[3.5em] shrink-0 grid-rows-2">
+              <div className="flex min-h-0 items-center justify-center border border-black px-[0.35em] font-bold">N°</div>
+              <div className="min-h-0 border border-t-0 border-black" />
             </div>
           </div>
         )}
       </div>
       {config.title && (
-        <p className="py-[3%] text-center text-[1.5em] font-bold leading-tight">
+        <p className="print-document-title py-[3%] text-center text-[2.667em] font-bold leading-tight">
           {config.title}
         </p>
       )}
@@ -154,11 +143,13 @@ export function PrintDocumentHeader({
 
 export function PrintDocumentFooter({
   date,
+  printedBy,
   preview = false,
   page = 1,
   totalPages = 1,
 }: {
   date: string;
+  printedBy?: string;
   preview?: boolean;
   page?: number;
   totalPages?: number;
@@ -167,22 +158,22 @@ export function PrintDocumentFooter({
   // otherwise → real footer pinned to the bottom of every printed page via
   // `position: fixed` + CSS page counters (see globals.css @media print).
   return (
-    <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[7px] leading-tight text-black`}>
+    <div className={`${preview ? "mt-auto flex" : "print-document-footer fixed bottom-0 left-0 right-0 hidden print:flex"} items-end justify-between border-t border-black bg-white pt-1 text-[0.7em] leading-tight text-black`}>
       <div className="flex items-center gap-1.5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo-pied-page.png"
           alt=""
-          style={{ height: 19, objectFit: "contain" }}
+          style={{ height: "2.714em", objectFit: "contain" }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
         />
         <div>
-          <p>Zone Industrielle 4, 1963 Vétroz — Tél. 027 606 18 60</p>
-          <p>Imprimé le {date}</p>
+          <p>LearnUP - Van Thanh Phuoc</p>
+          <p>Imprimé le {date}{printedBy ? ` par ${printedBy}` : ""}</p>
         </div>
       </div>
       <div className="text-right">
-        <p>LearnUP - Van Thanh Phuoc</p>
+        <p>Zone Industrielle 4, 1963 Vétroz — Tél. 027 606 18 60</p>
         <p>{preview ? `Page ${page} sur ${totalPages}` : <><span className="print-page-current" /> sur <span className="print-page-total" /></>}</p>
       </div>
     </div>
@@ -201,12 +192,14 @@ function PaginatedPreview({
   theoryNode,
   exerciseNodes,
   printDate,
+  printedBy,
   pagesContainerRef,
 }: {
   header: ReactNode;
   theoryNode: ReactNode | null;
   exerciseNodes: { key: string; node: ReactNode }[];
   printDate: string;
+  printedBy?: string;
   pagesContainerRef?: RefObject<HTMLDivElement | null>;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -254,6 +247,22 @@ function PaginatedPreview({
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [pageWidth, blocks.length]);
 
+  useEffect(() => {
+    if (pageWidth === 0 || typeof ResizeObserver === "undefined") return;
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setTick((value) => value + 1));
+    });
+    if (headerMeasureRef.current) observer.observe(headerMeasureRef.current);
+    if (footerMeasureRef.current) observer.observe(footerMeasureRef.current);
+    blockRefs.current.forEach((node) => { if (node) observer.observe(node); });
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [pageWidth, blocks]);
+
   // Pack blocks into pages based on measured heights.
   useLayoutEffect(() => {
     if (pageWidth === 0) return;
@@ -288,7 +297,7 @@ function PaginatedPreview({
       {pageWidth > 0 && (
         <div
           aria-hidden="true"
-          className="pointer-events-none invisible absolute -left-[9999px] top-0"
+          className="print-layout-context pointer-events-none invisible absolute -left-[9999px] top-0"
           style={{ width: contentWidth, fontSize: baseFont }}
         >
           <div ref={headerMeasureRef}>{header}</div>
@@ -298,7 +307,7 @@ function PaginatedPreview({
             </div>
           ))}
           <div ref={footerMeasureRef}>
-            <PrintDocumentFooter date={printDate} preview page={1} totalPages={1} />
+            <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={1} totalPages={1} />
           </div>
         </div>
       )}
@@ -308,7 +317,7 @@ function PaginatedPreview({
         {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
           <div
             key={pageIdx}
-            className="preview-page-sheet flex shrink-0 flex-col rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
+            className="preview-page-sheet print-layout-context flex shrink-0 flex-col overflow-hidden rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
             style={{
               width: pageWidth,
               minHeight: pageHeight,
@@ -327,7 +336,7 @@ function PaginatedPreview({
                 </div>
               ))}
             </div>
-            <PrintDocumentFooter date={printDate} preview page={pageIdx + 1} totalPages={pages.length} />
+            <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={pageIdx + 1} totalPages={pages.length} />
           </div>
         ))}
       </div>
@@ -421,6 +430,7 @@ export function PrintConfigSheet({
   const [title, setTitle] = useState(() => lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);
+  const [printedBy, setPrintedBy] = useState("");
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
     exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
   );
@@ -437,6 +447,28 @@ export function PrintConfigSheet({
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = previousOverflow; };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadPrintedBy = async () => {
+      const supabase = createSupabaseBrowserClient();
+      if (!supabase) return;
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || cancelled) return;
+      const metadata = user.user_metadata as { prenom?: string; nom?: string };
+      const fallback = [metadata.prenom, metadata.nom].filter(Boolean).join(" ");
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("prenom, nom")
+        .eq("id", user.id)
+        .maybeSingle();
+      if (!cancelled) {
+        setPrintedBy([profile?.prenom, profile?.nom].filter(Boolean).join(" ") || fallback);
+      }
+    };
+    void loadPrintedBy();
+    return () => { cancelled = true; };
   }, []);
 
   const setIncluded = (id: string, included: boolean) =>
@@ -466,9 +498,21 @@ export function PrintConfigSheet({
     if (node) {
       const css = capturePageCss();
       const base = window.location.origin;
+      const printNode = node.cloneNode(true) as HTMLDivElement;
+      const sourceImages = Array.from(node.querySelectorAll("img"));
+      const clonedImages = Array.from(printNode.querySelectorAll("img"));
+      clonedImages.forEach((image, index) => {
+        const source = sourceImages[index];
+        const sourceUrl = source?.currentSrc || source?.src || image.getAttribute("src") || "";
+        if (sourceUrl) image.src = new URL(sourceUrl, window.location.href).href;
+        image.removeAttribute("srcset");
+        image.removeAttribute("sizes");
+        image.loading = "eager";
+        image.decoding = "sync";
+      });
       // Override preview classes to exact A4 mm dimensions — identical to on-screen layout.
-      const printCss = `@page{size:A4 portrait;margin:0;}html,body{margin:0;padding:0;background:white;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container{max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;display:block!important;}.preview-page-sheet{width:210mm!important;min-height:297mm!important;max-height:297mm!important;padding:18mm 12mm 12mm!important;font-size:10px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}`;
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${node.outerHTML}</body></html>`;
+      const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container{width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;display:block!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:10px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${printNode.outerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -787,6 +831,7 @@ export function PrintConfigSheet({
               <PaginatedPreview
                 pagesContainerRef={previewPagesRef}
                 printDate={printDate}
+                printedBy={printedBy}
                 header={<PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
                 theoryNode={theory ? (
                   <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
@@ -798,12 +843,12 @@ export function PrintConfigSheet({
                 exerciseNodes={previewExercises.map((item, index) => ({
                   key: item.key,
                   node: (
-                    <div className="border-b border-zinc-200 pb-3">
+                    <div className="print-exercise border-b border-zinc-200 pb-3">
                       <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
                         <span className="flex-1">Exercice {index + 1}</span>
                         {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                       </div>
-                      <div className="print-ex-content text-zinc-800 [&_button]:pointer-events-none">
+                      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
                         {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
                       </div>
                     </div>
