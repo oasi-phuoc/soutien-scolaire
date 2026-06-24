@@ -129,11 +129,20 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-
-  ],
+  exercises: [],
   exercisePool: [
-
+    { id: "a2-2-ep01", promptFr: "Calculez : 83 − 37 = ?", type: "number", acceptable: ["46"], hintFr: "Soustraction colonne par colonne : 3−7 impossible, emprunte ; 13−7=6 ; 7−3=4." },
+    { id: "a2-2-ep02", promptFr: "Calculez : 254 − 127 = ?", type: "number", acceptable: ["127"], hintFr: "Soustrait colonne par colonne de droite à gauche, emprunte si nécessaire." },
+    { id: "a2-2-ep03", promptFr: "Calculez : 500 − 163 = ?", type: "number", acceptable: ["337"], hintFr: "0−3 impossible, 0 au-dessus → emprunte en chaîne depuis les centaines." },
+    { id: "a2-2-ep04", promptFr: "Calculez : 742 − 385 = ?", type: "number", acceptable: ["357"], hintFr: "Soustrait colonne par colonne de droite à gauche, emprunte si nécessaire." },
+    { id: "a2-2-ep05", promptFr: "Calculez : 1 000 − 456 = ?", type: "number", acceptable: ["544"], hintFr: "Emprunte en chaîne : 1 000 = 999 + 1." },
+    { id: "a2-2-ep06", promptFr: "Calculez : 3 821 − 1 475 = ?", type: "number", acceptable: ["2346"], hintFr: "Soustrait colonne par colonne de droite à gauche avec les emprunts." },
+    { id: "a2-2-ep07", promptFr: "Calculez : 605 − 278 = ?", type: "number", acceptable: ["327"], hintFr: "5−8 impossible, emprunte ; 15−8=7 ; 9−7=2 ; 5−2=3." },
+    { id: "a2-2-ep08", promptFr: "Calculez : 4 002 − 1 357 = ?", type: "number", acceptable: ["2645"], hintFr: "Emprunte en chaîne depuis les milliers." },
+    { id: "a2-2-ep09", promptFr: "Calculez : 916 − 439 = ?", type: "number", acceptable: ["477"], hintFr: "Soustrait colonne par colonne de droite à gauche, emprunte si nécessaire." },
+    { id: "a2-2-ep10", promptFr: "Calculez : 7 500 − 3 284 = ?", type: "number", acceptable: ["4216"], hintFr: "Soustrait colonne par colonne de droite à gauche avec les emprunts." },
+    { id: "a2-2-ep11", promptFr: "Calculez : 200 − 87 = ?", type: "number", acceptable: ["113"], hintFr: "Emprunte en chaîne depuis les centaines." },
+    { id: "a2-2-ep12", promptFr: "Calculez : 5 000 − 2 749 = ?", type: "number", acceptable: ["2251"], hintFr: "Emprunte en chaîne depuis les milliers." },
   ],
   poolSize: 5,
 };
