@@ -6763,6 +6763,7 @@ export function GenericModuleContent({
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          lessonTitle={revisionTitle ?? currentStep?.lesson.theory.title.fr ?? ""}
           theoryPreview={(() => {
             const ts = trainingSteps.find(s => s.kind === "theory") as { kind: "theory"; lesson: MathSubmoduleLesson } | undefined;
             return ts ? <TheoryView lesson={ts.lesson} pivot={pivot} showPivot={!!showPivotTranslation} /> : undefined;

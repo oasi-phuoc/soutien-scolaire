@@ -105,40 +105,32 @@ export function PrintDocumentHeader({
           ))}
         </div>
         {/* Right: same 4-column table in both modes; first 3 cols hidden in exercise mode */}
-        <div
-          className="shrink-0 text-center text-[clamp(7px,1.9vw,13px)]"
-          style={{ display: "table", height: "100%", tableLayout: "fixed", borderCollapse: "collapse" }}
-        >
-          <div style={{ display: "table-header-group" }}>
-            <div style={{ display: "table-row" }}>
-              {(["Pts", "Total", "Note", "N°"] as const).map((h, i) => {
-                const hide = !evalMode && i < 3;
-                return (
-                  <div key={h}
-                    style={{ display: "table-cell", width: "3em" }}
-                    className={`align-middle font-bold ${hide ? "border-0 p-0" : "border border-black px-[0.8em] py-[0.5em]"}`}
-                  >
-                    {hide ? null : h}
-                  </div>
-                );
-              })}
-            </div>
+        {/* Flexbox column with manual border-collapse (border-t/border-l on container, border-b/border-r on cells) */}
+        <div className="shrink-0 flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
+          {/* Header row */}
+          <div className="flex shrink-0">
+            {(["Pts", "Total", "Note", "N°"] as const).map((h, i) => {
+              if (!evalMode && i < 3) return null;
+              return (
+                <div key={h} style={{ width: "3em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold">
+                  {h}
+                </div>
+              );
+            })}
           </div>
-          <div style={{ display: "table-row-group", height: "100%" }}>
-            <div style={{ display: "table-row" }}>
-              {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
-                const hide = !evalMode && i < 3;
-                const isTotal = i === 1 && evalMode;
-                return (
-                  <div key={i}
-                    style={{ display: "table-cell" }}
-                    className={`align-middle ${hide ? "border-0 p-0" : `border border-black px-[0.8em] py-[0.5em]${isTotal ? " font-bold text-[1.6em]" : ""}`}`}
-                  >
-                    {val !== null ? val : ""}
-                  </div>
-                );
-              })}
-            </div>
+          {/* Body row — flex-1 fills remaining height */}
+          <div className="flex flex-1">
+            {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
+              if (!evalMode && i < 3) return null;
+              const isTotal = i === 1 && evalMode;
+              return (
+                <div key={i} style={{ width: "3em" }}
+                  className={`border-b border-r border-black px-[0.8em] flex items-center justify-center${isTotal ? " font-bold text-[1.6em]" : ""}`}
+                >
+                  {val !== null ? val : ""}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

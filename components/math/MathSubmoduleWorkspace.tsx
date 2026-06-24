@@ -2257,6 +2257,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          lessonTitle={lesson?.theory.title.fr ?? ""}
           theoryPreview={lesson ? <TheoryView lesson={lesson} pivot={pivot} showPivot={showPivotTranslation} /> : undefined}
           exercises={trainingSteps
             .filter((step) => step.kind !== "theory" && step.kind !== "eval_start" && step.kind !== "pass_toggle" && step.kind !== "results")

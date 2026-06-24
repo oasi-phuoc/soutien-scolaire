@@ -540,6 +540,7 @@ export function VocabRunner({ theme }: Props) {
           <PrintConfigSheet
             onClose={() => setShowPrintConfig(false)}
             onPrint={handlePrint}
+            lessonTitle={theme.title}
             theoryPreview={<VocabCards theme={theme} onCanValidateChange={noop} />}
             exercises={steps
               .filter((candidate) => !candidate.isTheory && !candidate.isEval)

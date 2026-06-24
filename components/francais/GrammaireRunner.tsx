@@ -2861,6 +2861,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          lessonTitle={lesson.title}
           theoryPreview={
             <div className="space-y-3 leading-relaxed text-black">
               <TheoryView blocks={lesson.theory} pivot={pivot} showTrans={false} />

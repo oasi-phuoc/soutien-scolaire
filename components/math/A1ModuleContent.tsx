@@ -3134,6 +3134,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         <PrintConfigSheet
           onClose={() => setShowPrintConfig(false)}
           onPrint={handlePrint}
+          lessonTitle={defaultTheoryTitle}
           theoryPreview={
             <div className="space-y-3 leading-relaxed text-black">
               <h2 className="text-base font-bold">{theoryTitleText}</h2>
