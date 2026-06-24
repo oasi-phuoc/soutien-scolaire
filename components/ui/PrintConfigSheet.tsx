@@ -104,33 +104,39 @@ export function PrintDocumentHeader({
             </p>
           ))}
         </div>
-        {/* Right: same 4-column table in both modes; first 3 cols hidden in exercise mode */}
+        {/* Right: table — 4 cols (12em) in eval mode; 1 wide col (12em) in exercise mode */}
         {/* Flexbox column with manual border-collapse (border-t/border-l on container, border-b/border-r on cells) */}
         <div className="shrink-0 flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
           {/* Header row */}
           <div className="flex shrink-0">
-            {(["Pts", "Total", "Note", "N°"] as const).map((h, i) => {
-              if (!evalMode && i < 3) return null;
-              return (
+            {evalMode ? (
+              (["Pts", "Total", "Note", "N°"] as const).map((h) => (
                 <div key={h} style={{ width: "3em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold">
                   {h}
                 </div>
-              );
-            })}
+              ))
+            ) : (
+              <div style={{ width: "12em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold text-right">
+                N°
+              </div>
+            )}
           </div>
-          {/* Body row — flex-1 fills remaining height */}
-          <div className="flex flex-1">
-            {([null, evalMode ? (totalPoints ?? null) : null, null, null] as (number | null)[]).map((val, i) => {
-              if (!evalMode && i < 3) return null;
-              const isTotal = i === 1 && evalMode;
-              return (
-                <div key={i} style={{ width: "3em" }}
-                  className={`border-b border-r border-black px-[0.8em] flex items-center justify-center${isTotal ? " font-bold text-[1.6em]" : ""}`}
-                >
-                  {val !== null ? val : ""}
-                </div>
-              );
-            })}
+          {/* Body row — flex-1 fills remaining height in exercise mode; natural height in eval mode */}
+          <div className={`flex${!evalMode ? " flex-1" : ""}`}>
+            {evalMode ? (
+              ([null, totalPoints ?? null, null, null] as (number | null)[]).map((val, i) => {
+                const isTotal = i === 1;
+                return (
+                  <div key={i} style={{ width: "3em" }}
+                    className={`border-b border-r border-black px-[0.8em] flex items-center justify-center${isTotal ? " font-bold text-[1.6em]" : ""}`}
+                  >
+                    {val !== null ? val : ""}
+                  </div>
+                );
+              })
+            ) : (
+              <div style={{ width: "12em" }} className="border-b border-r border-black" />
+            )}
           </div>
         </div>
       </div>
@@ -314,7 +320,7 @@ export function PrintConfigSheet({
       // (break-inside: avoid), the footer is fixed to the bottom of every page
       // via globals.css @media print + CSS page counters. Symmetric top/bottom
       // @page margins give pages 2+ the same top spacing as the footer zone.
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:20mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:12mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;padding-bottom:20px;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -522,7 +528,7 @@ export function PrintConfigSheet({
                       <div className="mt-3 space-y-2 pl-[52px]">
                         <div className="flex items-center justify-between gap-3">
                           <span className="text-xs text-[var(--color-text-secondary)]">
-                            {sel.occurrences === 0 ? "Exercice retiré" : "Récurrences"}
+                            {sel.occurrences === 0 ? "Exercice retiré" : "Questions"}
                           </span>
                           <Counter
                             value={sel.occurrences}
