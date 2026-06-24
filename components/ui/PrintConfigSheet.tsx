@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
 
 export interface PrintExercise {
@@ -201,11 +201,13 @@ function PaginatedPreview({
   theoryNode,
   exerciseNodes,
   printDate,
+  pagesContainerRef,
 }: {
   header: ReactNode;
   theoryNode: ReactNode | null;
   exerciseNodes: { key: string; node: ReactNode }[];
   printDate: string;
+  pagesContainerRef?: RefObject<HTMLDivElement | null>;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const headerMeasureRef = useRef<HTMLDivElement>(null);
@@ -230,8 +232,8 @@ function PaginatedPreview({
   const pageHeight = pageWidth * A4_RATIO;
   const contentWidth = pageWidth - 2 * padX;
   const contentHeight = pageHeight - padTop - padBottom;
-  // Calibrated so the look matches the previous preview at full width (~16px).
-  const baseFont = (pageWidth / 704) * 16;
+  // Match print scale: 10px at 794px (210mm@96dpi) so measurement matches PDF reflow.
+  const baseFont = (pageWidth / 794) * 10;
   const gap = baseFont * 1.1;
 
   // Track available width responsively.
@@ -302,11 +304,11 @@ function PaginatedPreview({
       )}
 
       {/* Visible page sheets, stacked like a book. */}
-      <div className="mx-auto flex flex-col items-center gap-6 overflow-y-auto py-1" style={{ maxHeight: "75vh" }}>
+      <div ref={pagesContainerRef} className="preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto py-1" style={{ maxHeight: "75vh" }}>
         {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
           <div
             key={pageIdx}
-            className="flex shrink-0 flex-col rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
+            className="preview-page-sheet flex shrink-0 flex-col rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
             style={{
               width: pageWidth,
               minHeight: pageHeight,
@@ -424,6 +426,7 @@ export function PrintConfigSheet({
   );
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  const previewPagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTitle(evalMode ? "Évaluation" : lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
@@ -459,15 +462,13 @@ export function PrintConfigSheet({
 
   const handlePrint = () => {
     setHasPrinted(true);
-    const node = document.getElementById("print-all-pages-container");
+    const node = previewPagesRef.current;
     if (node) {
       const css = capturePageCss();
       const base = window.location.origin;
-      // Natural flow: header appears once (page 1), exercises stay whole
-      // (break-inside: avoid), the footer is fixed to the bottom of every page
-      // via globals.css @media print + CSS page counters. Symmetric top/bottom
-      // @page margins give pages 2+ the same top spacing as the footer zone.
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}@page{size:A4 portrait;margin-top:18mm;margin-right:12mm;margin-bottom:12mm;margin-left:12mm;}html,body{margin:0;padding:0;background:white;}body{font-size:10px;line-height:1.55;color:#000;padding-bottom:20px;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}.print-break-after{break-after:page;page-break-after:always;}</style></head><body>${node.innerHTML}</body></html>`;
+      // Override preview classes to exact A4 mm dimensions — identical to on-screen layout.
+      const printCss = `@page{size:A4 portrait;margin:0;}html,body{margin:0;padding:0;background:white;}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container{max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;display:block!important;}.preview-page-sheet{width:210mm!important;min-height:297mm!important;max-height:297mm!important;padding:18mm 12mm 12mm!important;font-size:10px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}`;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${node.outerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
@@ -784,6 +785,7 @@ export function PrintConfigSheet({
                 Aperçu avant impression
               </h2>
               <PaginatedPreview
+                pagesContainerRef={previewPagesRef}
                 printDate={printDate}
                 header={<PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
                 theoryNode={theory ? (
@@ -843,46 +845,6 @@ export function PrintConfigSheet({
         >
           Suivant
         </button>
-      </div>
-
-      {/* Hidden container for popup printing — natural content flow.
-          Header is rendered once (first page only); the theory page-breaks
-          before the exercises; each exercise stays whole; the footer is fixed
-          to the bottom of every page via globals.css @media print. */}
-      <div id="print-all-pages-container" className="hidden" aria-hidden="true">
-        {/* Header — appears on the first page only */}
-        <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
-
-        {/* Theory */}
-        {theory && (
-          <div className={`${previewExercises.length > 0 ? "print-break-after" : ""} [&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em]`}>
-            {theoryPreview ?? (
-              <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
-            )}
-          </div>
-        )}
-
-        {/* Exercises — sequential numbering, each kept whole */}
-        {previewExercises.length > 0 && (
-          <ol className="space-y-5 text-[10px] leading-relaxed">
-            {previewExercises.map((item, index) => (
-              <li key={item.key} className="print-exercise border-b border-zinc-200 pb-4">
-                <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[24px] font-bold" style={{ color: accentColor }}>
-                  <span className="flex-1">Exercice {index + 1}</span>
-                  {evalMode && (
-                    <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>
-                  )}
-                </div>
-                <div className="print-ex-content [&_button]:pointer-events-none">
-                  {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                </div>
-              </li>
-            ))}
-          </ol>
-        )}
-
-        {/* Footer — pinned to the bottom of every printed page */}
-        <PrintDocumentFooter date={printDate} />
       </div>
 
       {showExitWarning && (
