@@ -119,7 +119,7 @@ export function PrintDocumentHeader({
                 const isTotal = i === 1;
                 return (
                   <div key={i} style={{ width: "3em" }}
-                    className={`border-b border-r border-black px-[0.8em] flex items-center justify-center${isTotal ? " font-bold text-[1.6em]" : ""}`}
+                    className={`border-b border-r border-black px-[0.8em] py-[0.5em] flex items-center justify-center${isTotal ? " font-bold" : ""}`}
                   >
                     {val !== null ? val : ""}
                   </div>
