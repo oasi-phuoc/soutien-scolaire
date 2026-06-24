@@ -218,7 +218,10 @@ type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; ge
 type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep;
+type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
+type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
+
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -2955,6 +2958,79 @@ function GeoPlacementExercise({
   );
 }
 
+function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
+  const ri = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const LETTERS = ["n", "x", "y", "k", "m", "p", "t"];
+  const letter = LETTERS[ri(0, LETTERS.length - 1)]!;
+  const value = ri(2, 9);
+  const cl = (a: number) => a === 1 ? letter : `${a}${letter}`;
+  const cl2 = (a: number) => a === 1 ? `${letter}²` : `${a}${letter}²`;
+
+  const easyGens: Array<() => { expr: string; answer: number }> = [
+    () => { const a=ri(2,6), b=ri(1,9); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+    () => { const a=ri(3,8), b=ri(1,5); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
+    () => { const a=ri(4,9), b=ri(2,7); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+    () => { const a=ri(5,9), b=ri(3,9); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
+    () => { const a=ri(2,5), b=ri(4,10); return { expr: `${b} + ${cl(a)}`, answer: b+a*value }; },
+    () => { const a=ri(2,5), b=ri(4,11); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+    () => { const a=ri(4,7), b=ri(1,4); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
+    () => { const a=ri(6,9), b=ri(1,5); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+    () => { const a=ri(6,9), b=ri(4,9); return { expr: `${cl(a)} − ${b}`, answer: a*value-b }; },
+    () => { const a=ri(3,7), b=ri(6,12); return { expr: `${cl(a)} + ${b}`, answer: a*value+b }; },
+  ];
+
+  const mediumGens: Array<() => { expr: string; answer: number }> = [
+    () => { const a=ri(2,5), b=ri(2,3), c=ri(1,7); return { expr: `${cl(a)} + ${cl(b)} − ${c}`, answer: (a+b)*value-c }; },
+    () => { const a=ri(2,4), b=ri(2,4), c=ri(1,6); return { expr: `${cl(a)} + ${cl(b)} + ${c}`, answer: (a+b)*value+c }; },
+    () => { const a=ri(5,8), b=ri(1,3), c=ri(1,8); return { expr: `${cl(a)} − ${cl(b)} + ${c}`, answer: (a-b)*value+c }; },
+    () => { const a=ri(3,6), b=ri(2,4), c=ri(2,8); return { expr: `${cl(a)} + ${cl(b)} − ${c}`, answer: (a+b)*value-c }; },
+    () => { const a=ri(2,4), c=ri(2,3), b=ri(1,5); return { expr: `${cl(c)} + ${cl(a)} − ${b}`, answer: (c+a)*value-b }; },
+    () => { const a=ri(5,9), b=ri(2,4), c=ri(3,9); return { expr: `${cl(a)} − ${cl(b)} + ${c}`, answer: (a-b)*value+c }; },
+    () => { const a=ri(3,7), b=ri(2,5), c=ri(4,10); return { expr: `${cl(a)} + ${cl(b)} + ${c}`, answer: (a+b)*value+c }; },
+    () => { const a=ri(2,5), b=ri(2,3), c=ri(2,8); return { expr: `${cl(b)} + ${cl(a)} − ${c}`, answer: (b+a)*value-c }; },
+    () => { const a=ri(6,9), b=ri(2,3), c=ri(1,4); return { expr: `${cl(a)} − ${cl(b)} − ${c}`, answer: (a-b)*value-c }; },
+    () => { const a=ri(2,4), b=ri(2,3); return { expr: `${cl(a)} + ${cl(b)} − ${a}`, answer: (a+b)*value-a }; },
+  ];
+
+  const hardGens: Array<() => { expr: string; answer: number }> = [
+    () => { const a=ri(1,2), b=ri(2,5), c=ri(1,5); return { expr: `${cl2(a)} + ${cl(b)} − ${c}`, answer: a*value*value+b*value-c }; },
+    () => { const a=ri(1,2), b=ri(2,4), c=ri(1,6); return { expr: `${cl2(a)} − ${cl(b)} + ${c}`, answer: a*value*value-b*value+c }; },
+    () => { const a=ri(1,2), b=ri(2,4), c=ri(1,8); return { expr: `${cl2(a)} + ${cl(b)} + ${c}`, answer: a*value*value+b*value+c }; },
+    () => { const b=ri(2,5), c=ri(1,7); return { expr: `${letter}² + ${cl(b)} + ${c}`, answer: value*value+b*value+c }; },
+    () => { const a=ri(2,3), b=ri(2,3), c=ri(1,2); return { expr: `${cl2(a)} − ${cl(b)} − ${c}`, answer: a*value*value-b*value-c }; },
+    () => { const b=ri(2,5), c=ri(1,4); return { expr: `${letter}² + ${cl(b)} − ${c}`, answer: value*value+b*value-c }; },
+    () => { const a=ri(1,2), b=ri(3,6), c=ri(2,7); return { expr: `${cl2(a)} + ${cl(b)} − ${c}`, answer: a*value*value+b*value-c }; },
+    () => { const a=ri(1,2), b=ri(2,5), c=ri(2,8); return { expr: `${cl2(a)} − ${cl(b)} + ${c}`, answer: a*value*value-b*value+c }; },
+    () => { const a=ri(1,2), b=ri(2,4), c=ri(2,4); return { expr: `${cl2(a)} + ${cl(c)} − ${b}`, answer: a*value*value+c*value-b }; },
+    () => { const b=ri(2,3), c=ri(3,7); return { expr: `${letter}² − ${cl(b)} + ${c}`, answer: value*value-b*value+c }; },
+  ];
+
+  function pickUnique(
+    gens: Array<() => { expr: string; answer: number }>,
+    count: number,
+    difficulty: "easy" | "medium" | "hard",
+  ): AlgebraGroupQuestion[] {
+    const results: AlgebraGroupQuestion[] = [];
+    const shuffled = [...gens.keys()].sort(() => Math.random() - 0.5);
+    for (const idx of shuffled) {
+      if (results.length >= count) break;
+      for (let t = 0; t < 15; t++) {
+        const { expr, answer } = gens[idx]!();
+        if (answer > 0 && answer < 300) { results.push({ expr, answer, difficulty }); break; }
+      }
+    }
+    return results;
+  }
+
+  const questions: AlgebraGroupQuestion[] = [
+    ...pickUnique(easyGens, 2, "easy"),
+    ...pickUnique(mediumGens, 2, "medium"),
+    ...pickUnique(hardGens, 1, "hard"),
+  ];
+
+  return { kind: "algebra_group", lesson, letter, value, questions };
+}
+
 function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
@@ -3211,9 +3287,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
       steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
     } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
-      generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
-        steps.push({ kind: "exercise", lesson, item }),
-      );
+      if (sid === "A9-1") {
+        steps.push(genAlgebraGroupStep(lesson));
+      } else {
+        generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
+          steps.push({ kind: "exercise", lesson, item }),
+        );
+      }
       steps.push({ kind: "eval_start", lesson });
       generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
         steps.push({ kind: "exercise", lesson, item }),
@@ -4497,6 +4577,11 @@ export function GenericModuleContent({
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
 
+  // Algebra group exercise state (A9.1)
+  const [algebraGroupAnswers, setAlgebraGroupAnswers] = useState<string[]>([]);
+  const [algebraGroupValidated, setAlgebraGroupValidated] = useState(false);
+  const [algebraGroupResults, setAlgebraGroupResults] = useState<boolean[]>([]);
+
   // Comparison exercise lifted state
   const [compAnswers, setCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
   const [compValidated, setCompValidated] = useState(false);
@@ -5394,6 +5479,26 @@ export function GenericModuleContent({
       setExAttempts((a) => a + 1);
     };
     stepReset = () => { setAnswer(""); setExStatus("idle"); setExAttempts(0); };
+  }
+
+  if (currentStep?.kind === "algebra_group" && !algebraGroupValidated) {
+    stepCanValidate = true;
+    stepValidate = () => {
+      const step = currentStep as AlgebraGroupStep;
+      const results = step.questions.map((q, i) => {
+        const userAns = (algebraGroupAnswers[i] ?? "").trim();
+        return userAns !== "" && parseInt(userAns, 10) === q.answer;
+      });
+      setAlgebraGroupResults(results);
+      setAlgebraGroupValidated(true);
+      setExStatus("correct");
+    };
+    stepReset = () => {
+      setAlgebraGroupAnswers([]);
+      setAlgebraGroupValidated(false);
+      setAlgebraGroupResults([]);
+      setExStatus("idle");
+    };
   }
 
   if (currentStep?.kind === "comparison_ex") {
@@ -6886,6 +6991,61 @@ export function GenericModuleContent({
           )}
         </div>
       )}
+
+      {/* Algebra group exercise (A9.1) */}
+      {currentStep?.kind === "algebra_group" && (() => {
+        const step = currentStep as AlgebraGroupStep;
+        return (
+          <div className="space-y-4">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]">Calculez le résultat.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              <span className="font-bold text-[var(--color-accent-alg)]">{step.letter}</span>
+              {" = "}
+              <span className="font-mono font-bold text-[var(--color-text-primary)]">{step.value}</span>
+            </p>
+            <div className="space-y-3">
+              {step.questions.map((q, i) => {
+                const userAns = algebraGroupAnswers[i] ?? "";
+                const result = algebraGroupValidated ? (algebraGroupResults[i] ?? null) : null;
+                const isWrong = result === false;
+                return (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr} =</span>
+                    {isWrong ? (
+                      <div className="w-16 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        value={userAns}
+                        disabled={algebraGroupValidated}
+                        onChange={e => {
+                          const val = e.target.value.replace(/[^0-9]/g, "");
+                          setAlgebraGroupAnswers(prev => {
+                            const next = [...prev];
+                            while (next.length <= i) next.push("");
+                            next[i] = val;
+                            return next;
+                          });
+                        }}
+                        className={`w-16 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 ${
+                          result === true
+                            ? "border-[var(--color-accent-alg)]"
+                            : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
+                        }`}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Number line exercise */}
       {currentStep?.kind === "number_line" && (

@@ -10,8 +10,6 @@ import { MATH_A8_LESSONS } from "./content/math/math-a8";
 import { MATH_A9_LESSONS } from "./content/math/math-a9";
 import { MATH_A10_LESSONS } from "./content/math/math-a10";
 import { MATH_A11_LESSONS } from "./content/math/math-a11";
-import { MATH_A12_LESSONS } from "./content/math/math-a12";
-import { MATH_A13_LESSONS } from "./content/math/math-a13";
 import { MATH_G1_LESSONS } from "./content/math/math-g1";
 import { MATH_G2_LESSONS } from "./content/math/math-g2";
 import { MATH_G3_LESSONS } from "./content/math/math-g3";
@@ -37,8 +35,6 @@ const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
   A9: MATH_A9_LESSONS,
   A10: MATH_A10_LESSONS,
   A11: MATH_A11_LESSONS,
-  A12: MATH_A12_LESSONS,
-  A13: MATH_A13_LESSONS,
   G1: MATH_G1_LESSONS,
   G2: MATH_G2_LESSONS,
   G3: MATH_G3_LESSONS,

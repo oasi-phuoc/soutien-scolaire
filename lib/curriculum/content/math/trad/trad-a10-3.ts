@@ -3,75 +3,85 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_A10_3: SubmoduleTrad = {
   submoduleId: "A10-3",
   title: {
-    fr: "Résolution : ax + b = c",
-    en: "Solving: ax + b = c",
-    ar: "الحل: ax + b = c",
-    fa: "حل: ax + b = c",
-    ti: "ምፍታሕ: ax + b = c",
-    uk: "Розв'язання: ax + b = c",
+    fr: "Méthode de substitution",
+    en: "Substitution method",
+    ar: "طريقة الإحلال",
+    fa: "روش جایگذاری",
+    ti: "ኣፈጻጽማ ምትካእ",
+    uk: "Метод підстановки",
   },
   blocks: [
     {
       text: {
-        fr: "Méthode en deux étapes",
+        fr: "Système de deux équations",
       }
     },
     {
       text: {
-        fr: "Étapes de résolution",
+        fr: "Un système de deux équations à deux inconnues admet généralement une solution unique (x, y). La méthode de substitution exprime une inconnue en fonction de l'autre, puis substitue.",
+      }
+    },
+    {
+      text: {
+        fr: "Les 5 étapes de la méthode",
       },
       items: {
         fr: [
-            "1. Isoler le terme en x : soustraire ou additionner b des deux membres",
-            "2. Diviser les deux membres par le coefficient a",
-            "3. Vérifier la solution dans l'équation originale",
+            "1. Choisir l'équation la plus simple pour exprimer x (ou y)",
+            "2. Exprimer x en fonction de y (ou y en fonction de x)",
+            "3. Substituer cette expression dans l'autre équation",
+            "4. Résoudre l'équation à une inconnue obtenue",
+            "5. Trouver la deuxième inconnue, puis vérifier dans les deux équations",
           ],
       }
     },
     {
       text: {
-        fr: "Exemple standard",
+        fr: "Exemple détaillé",
+      }
+    },
+    {
+      text: {
+        fr: "Système à résoudre",
       }
     },
     {
       items: {
         fr: [
-            "2x **+** 5 = 13",
-            "→ 2x = 13 **−** 5 = 8",
-            "→ x = 8 ÷ 2 = 4",
-            "Vérification : 2(4) **+** 5 = 13 ✓",
+            "{ x **+** y = 7",
+            "{ 2x **−** y = 2",
           ],
       }
     },
     {
       text: {
-        fr: "Termes en x des deux côtés",
-      }
-    },
-    {
-      text: {
-        fr: "Quand des termes en x apparaissent des deux côtés de l'équation, on les regroupe d'un côté avant de résoudre.",
-      }
-    },
-    {
-      text: {
-        fr: "Exemple avec x des deux côtés",
+        fr: "Résolution pas à pas",
       }
     },
     {
       items: {
         fr: [
-            "3x **+** 2 = x **+** 10",
-            "→ 3x **−** x = 10 **−** 2",
-            "→ 2x = 8",
-            "→ x = 4",
-            "Vérification : 3(4) **+** 2 = 14 et (4) **+** 10 = 14 ✓",
+            "De la 1ʳᵉ équation : x = 7 **−** y",
+            "Substitution dans la 2ᵉ : 2(7 **−** y) **−** y = 2",
+            "→ 14 **−** 2y **−** y = 2",
+            "→ 14 **−** 3y = 2",
+            "→ 3y = 12  →  y = 4",
+            "Puis : x = 7 **−** 4 = 3",
+            "**Solution : (x, y) = (3, 4)**",
           ],
       }
     },
     {
       text: {
-        fr: "Toujours vérifier en substituant la valeur trouvée dans l'équation originale (pas dans une étape intermédiaire).",
+        fr: "Vérification",
+      }
+    },
+    {
+      items: {
+        fr: [
+            "Équation 1 : 3 **+** 4 = 7 ✓",
+            "Équation 2 : 2(3) **−** 4 = 6 **−** 4 = 2 ✓",
+          ],
       }
     },
   ],
