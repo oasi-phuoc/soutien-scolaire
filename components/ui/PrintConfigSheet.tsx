@@ -104,27 +104,18 @@ export function PrintDocumentHeader({
             </p>
           ))}
         </div>
-        {/* Right: table — 4 cols (12em) in eval mode; 1 wide col (12em) in exercise mode */}
-        {/* Flexbox column with manual border-collapse (border-t/border-l on container, border-b/border-r on cells) */}
-        <div className={`shrink-0 flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]${evalMode ? " self-start" : ""}`}>
-          {/* Header row */}
-          <div className="flex shrink-0">
-            {evalMode ? (
-              (["Pts", "Total", "Note", "N°"] as const).map((h) => (
+        {evalMode ? (
+          /* Eval mode: 4-column table (Pts/Total/Note/N°), natural height */
+          <div className="shrink-0 self-start flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
+            <div className="flex shrink-0">
+              {(["Pts", "Total", "Note", "N°"] as const).map((h) => (
                 <div key={h} style={{ width: "3em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold">
                   {h}
                 </div>
-              ))
-            ) : (
-              <div style={{ width: "12em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold text-right">
-                N°
-              </div>
-            )}
-          </div>
-          {/* Body row — flex-1 fills remaining height in exercise mode; natural height in eval mode */}
-          <div className={`flex${!evalMode ? " flex-1" : ""}`}>
-            {evalMode ? (
-              ([null, totalPoints ?? null, null, null] as (number | null)[]).map((val, i) => {
+              ))}
+            </div>
+            <div className="flex">
+              {([null, totalPoints ?? null, null, null] as (number | null)[]).map((val, i) => {
                 const isTotal = i === 1;
                 return (
                   <div key={i} style={{ width: "3em" }}
@@ -133,12 +124,19 @@ export function PrintDocumentHeader({
                     {val !== null ? val : ""}
                   </div>
                 );
-              })
-            ) : (
-              <div style={{ width: "12em" }} className="border-b border-r border-black" />
-            )}
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          /* Exercise mode: 9em spacer + 3em N° column = 12em total (matches eval width → fixed underlines) */
+          <div className="shrink-0 flex items-stretch text-center text-[clamp(7px,1.9vw,13px)]" style={{ width: "12em" }}>
+            <div style={{ width: "9em" }} />
+            <div className="flex flex-col" style={{ width: "3em" }}>
+              <div className="shrink-0 border border-black px-[0.8em] py-[0.5em] font-bold">N°</div>
+              <div className="flex-1 border border-black border-t-0" />
+            </div>
+          </div>
+        )}
       </div>
       {config.title && (
         <p className="py-[3%] text-center text-[1.5em] font-bold leading-tight">
