@@ -4478,9 +4478,18 @@ export function GenericModuleContent({
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
   const initialIdx = (startAtEval || revisionMode) && evalStartIdx >= 0 ? evalStartIdx : 0;
-  const trainingExercisePrompts = (evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps)
-    .filter((s) => s.kind === "exercise")
-    .map((s) => (s as { kind: "exercise"; item: { promptFr: string } }).item.promptFr);
+  const trainingExercisePrompts = (() => {
+    const textExercises = (evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps)
+      .filter((s) => s.kind === "exercise")
+      .map((s) => (s as { kind: "exercise"; item: { promptFr: string } }).item.promptFr);
+    if (textExercises.length > 0) return textExercises;
+    // Fallback for interactive-only modules (A1.3/A1.4/A1.5/A3.4): use exercisePool for PDF display
+    const pool = lessons?.[0]?.exercisePool;
+    const size = lessons?.[0]?.poolSize ?? 5;
+    if (pool && pool.length > 0 && size > 0)
+      return shufflePick(pool, size).map((e) => e.promptFr);
+    return [];
+  })();
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [answer, setAnswer] = useState("");

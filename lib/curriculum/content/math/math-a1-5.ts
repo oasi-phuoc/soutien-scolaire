@@ -53,11 +53,20 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-
-  ],
+  exercises: [],
   exercisePool: [
-
+    { id: "a1-5-ep01", promptFr: "Trouvez le terme suivant : 5, 10, 15, 20, ?", type: "number", acceptable: ["25"], hintFr: "La règle est +5 à chaque fois." },
+    { id: "a1-5-ep02", promptFr: "Trouvez le terme suivant : 100, 90, 80, 70, ?", type: "number", acceptable: ["60"], hintFr: "La règle est −10 à chaque fois." },
+    { id: "a1-5-ep03", promptFr: "Trouvez le terme suivant : 3, 6, 9, 12, ?", type: "number", acceptable: ["15"], hintFr: "La règle est +3 à chaque fois." },
+    { id: "a1-5-ep04", promptFr: "Trouvez le terme suivant : 50, 100, 150, 200, ?", type: "number", acceptable: ["250"], hintFr: "La règle est +50 à chaque fois." },
+    { id: "a1-5-ep05", promptFr: "Trouvez le terme suivant : 1 000, 900, 800, 700, ?", type: "number", acceptable: ["600"], hintFr: "La règle est −100 à chaque fois." },
+    { id: "a1-5-ep06", promptFr: "Trouvez le terme manquant : 4, 8, ?, 16, 20", type: "number", acceptable: ["12"], hintFr: "La règle est +4 à chaque fois : 8+4=?" },
+    { id: "a1-5-ep07", promptFr: "Trouvez le terme suivant : 25, 50, 75, 100, ?", type: "number", acceptable: ["125"], hintFr: "La règle est +25 à chaque fois." },
+    { id: "a1-5-ep08", promptFr: "Trouvez le terme manquant : 30, 25, ?, 15, 10", type: "number", acceptable: ["20"], hintFr: "La règle est −5 à chaque fois : 25−5=?" },
+    { id: "a1-5-ep09", promptFr: "Trouvez le terme suivant : 2, 4, 8, 16, ?", type: "number", acceptable: ["32"], hintFr: "Chaque terme est multiplié par 2." },
+    { id: "a1-5-ep10", promptFr: "Trouvez le terme suivant : 200, 400, 600, 800, ?", type: "number", acceptable: ["1000"], hintFr: "La règle est +200 à chaque fois." },
+    { id: "a1-5-ep11", promptFr: "Trouvez le terme manquant : 10, 20, 30, ?, 50", type: "number", acceptable: ["40"], hintFr: "La règle est +10 à chaque fois : 30+10=?" },
+    { id: "a1-5-ep12", promptFr: "Trouvez le terme suivant : 7, 14, 21, 28, ?", type: "number", acceptable: ["35"], hintFr: "La règle est +7 à chaque fois (table de 7)." },
   ],
   poolSize: 5,
 };
