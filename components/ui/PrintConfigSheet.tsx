@@ -108,31 +108,36 @@ export function PrintDocumentHeader({
           /* Eval mode: 4-column table (Pts/Total/Note/N°), natural height */
           <div className="shrink-0 self-start flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
             <div className="flex shrink-0">
-              {(["Pts", "Total", "Note", "N°"] as const).map((h) => (
-                <div key={h} style={{ width: "3em" }} className="border-b border-r border-black px-[0.8em] py-[0.5em] font-bold">
-                  {h}
-                </div>
-              ))}
-            </div>
-            <div className="flex">
-              {([null, totalPoints ?? null, null, null] as (number | null)[]).map((val, i) => {
-                const isTotal = i === 1;
+              {(["Pts", "Total", "Note", "N°"] as const).map((h) => {
+                const w = h === "Total" ? "4.5em" : h === "Note" ? "3.5em" : "3em";
                 return (
-                  <div key={i} style={{ width: "3em" }}
-                    className={`border-b border-r border-black px-[0.8em] py-[0.5em] flex items-center justify-center${isTotal ? " font-bold" : ""}`}
-                  >
-                    {val !== null ? val : ""}
+                  <div key={h} style={{ width: w }} className="border-b border-r border-black px-[0.5em] py-[0.5em] font-bold">
+                    {h}
                   </div>
                 );
               })}
             </div>
+            <div className="flex">
+              {([
+                { val: null,                  w: "3em"   },
+                { val: totalPoints ?? null,   w: "4.5em" },
+                { val: null,                  w: "3.5em" },
+                { val: null,                  w: "3em"   },
+              ] as { val: number | null; w: string }[]).map(({ val, w }, i) => (
+                <div key={i} style={{ width: w }}
+                  className={`border-b border-r border-black px-[0.5em] py-[0.5em] flex items-center justify-center${i === 1 ? " font-bold" : ""}`}
+                >
+                  {val !== null ? val : ""}
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
-          /* Exercise mode: 9em spacer + 3em N° column = 12em total (matches eval width → fixed underlines) */
-          <div className="shrink-0 flex items-stretch text-center text-[clamp(7px,1.9vw,13px)]" style={{ width: "12em" }}>
-            <div style={{ width: "9em" }} />
+          /* Exercise mode: 11em spacer + 3em N° = 14em total (matches eval width 3+4.5+3.5+3) */
+          <div className="shrink-0 flex items-stretch text-center text-[clamp(7px,1.9vw,13px)]" style={{ width: "14em" }}>
+            <div style={{ width: "11em" }} />
             <div className="flex flex-col" style={{ width: "3em" }}>
-              <div className="shrink-0 border border-black px-[0.8em] py-[0.5em] font-bold">N°</div>
+              <div className="shrink-0 border border-black px-[0.5em] py-[0.5em] font-bold">N°</div>
               <div className="flex-1 border border-black border-t-0" />
             </div>
           </div>
