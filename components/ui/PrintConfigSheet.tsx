@@ -106,7 +106,7 @@ export function PrintDocumentHeader({
         </div>
         {/* Right: table — 4 cols (12em) in eval mode; 1 wide col (12em) in exercise mode */}
         {/* Flexbox column with manual border-collapse (border-t/border-l on container, border-b/border-r on cells) */}
-        <div className="shrink-0 flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]">
+        <div className={`shrink-0 flex flex-col border-t border-l border-black text-center text-[clamp(7px,1.9vw,13px)]${evalMode ? " self-start" : ""}`}>
           {/* Header row */}
           <div className="flex shrink-0">
             {evalMode ? (
