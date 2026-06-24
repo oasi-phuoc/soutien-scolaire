@@ -1,88 +1,102 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A10_4: SubmoduleTrad = {
-  submoduleId: "A10-4",
+export const TRAD_A12_2: SubmoduleTrad = {
+  submoduleId: "A12-2",
   title: {
-    fr: "Équations avec parenthèses",
-    en: "Equations with parentheses",
-    ar: "معادلات بالأقواس",
-    fa: "معادلات با پرانتز",
-    ti: "ምዕርርያ ምስ ቅርሕ",
-    uk: "Рівняння з дужками",
+    fr: "Méthode d'addition / soustraction",
+    en: "Addition / subtraction method (elimination)",
+    ar: "طريقة الجمع والطرح (الحذف)",
+    fa: "روش جمع / تفریق (حذف)",
+    ti: "ኣፈጻጽማ ምኽፋሎ / ምቕናስ",
+    uk: "Метод додавання / віднімання (виключення)",
   },
   blocks: [
     {
       text: {
-        fr: "Démarche générale",
+        fr: "Méthode d'élimination",
       }
     },
     {
       text: {
-        fr: "Étapes avec parenthèses",
+        fr: "La méthode d'élimination (combinaison linéaire) consiste à additionner ou soustraire les deux équations membre à membre pour faire disparaître une inconnue.",
+      }
+    },
+    {
+      text: {
+        fr: "Les 4 étapes",
       },
       items: {
         fr: [
-            "1. Développer toutes les parenthèses",
-            "2. Réduire les termes semblables",
-            "3. Résoudre l'équation obtenue",
-            "4. Vérifier la solution",
+            "1. Si nécessaire, multiplier une équation (ou les deux) pour que les coefficients d'une inconnue soient opposés",
+            "2. Additionner les deux équations membre à membre",
+            "3. Résoudre l'équation à une inconnue obtenue",
+            "4. Substituer pour trouver la deuxième inconnue, puis vérifier",
           ],
       }
     },
     {
       text: {
-        fr: "Exemples",
+        fr: "Exemple : élimination directe",
       }
     },
     {
       text: {
-        fr: "Exemple simple",
+        fr: "Système",
       }
     },
     {
       items: {
         fr: [
-            "3(2x **+** 1) = 21",
-            "→ 6x **+** 3 = 21",
-            "→ 6x = 18",
-            "→ x = 3",
+            "{ 2x **+** 3y = 12",
+            "{ 2x **−** y = 4",
           ],
       }
     },
     {
       text: {
-        fr: "Exemple avec plusieurs parenthèses",
+        fr: "Résolution",
       }
     },
     {
       items: {
         fr: [
-            "2(x **+** 3) **−** (x **−** 1) = 8",
-            "→ 2x **+** 6 **−** x **+** 1 = 8",
-            "→ x **+** 7 = 8",
-            "→ x = 1",
+            "Soustraction membre à membre : (2x **+** 3y) **−** (2x **−** y) = 12 **−** 4",
+            "→ 4y = 8  →  y = 2",
+            "Substitution : 2x **+** 6 = 12  →  2x = 6  →  x = 3",
+            "**Solution : (3, 2)**",
           ],
       }
     },
     {
       text: {
-        fr: "Piège : le signe − devant une parenthèse",
+        fr: "Exemple : multiplication préalable",
       }
     },
     {
       text: {
-        fr: "Le signe − devant une parenthèse inverse tous les signes à l'intérieur.",
+        fr: "Système",
       }
     },
     {
-      label: {
-        fr: "Exemples de développement",
-      },
       items: {
         fr: [
-            "**−**(x **−** 5) = **−**x **+** 5",
-            "**−**(2x **+** 3) = **−**2x **−** 3",
-            "**−**(a **−** b) = **−**a **+** b",
+            "{ 3x **+** 2y = 7",
+            "{ x **−** y = 1",
+          ],
+      }
+    },
+    {
+      text: {
+        fr: "Résolution",
+      }
+    },
+    {
+      items: {
+        fr: [
+            "Multiplier la 2ᵉ équation par 2 : 2x **−** 2y = 2",
+            "Addition : (3x **+** 2y) **+** (2x **−** 2y) = 7 **+** 2",
+            "→ 5x = 9  →  x = 9/5 = 1,8",
+            "Puis y = x **−** 1 = 0,8",
           ],
       }
     },

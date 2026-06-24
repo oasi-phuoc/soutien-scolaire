@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A11_4: SubmoduleTrad = {
-  submoduleId: "A11-4",
+export const TRAD_A13_4: SubmoduleTrad = {
+  submoduleId: "A13-4",
   title: {
     fr: "Fonction linéaire f(x) = ax",
     en: "Linear function f(x) = ax",

@@ -1,57 +1,77 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A11_1: SubmoduleTrad = {
-  submoduleId: "A11-1",
+export const TRAD_A13_1: SubmoduleTrad = {
+  submoduleId: "A13-1",
   title: {
-    fr: "Symboles et droite numérique",
-    en: "Symbols and number line",
-    ar: "الرموز والمحور العددي",
-    fa: "نمادها و محور اعداد",
-    ti: "ምልክታትን ቁጽሪ ሕርምን",
-    uk: "Символи та числова пряма",
+    fr: "Notion de fonction",
+    en: "Notion of function",
+    ar: "مفهوم الدالة",
+    fa: "مفهوم تابع",
+    ti: "ናይ ስራሕ ሓሳብ",
+    uk: "Поняття функції",
   },
   blocks: [
     {
       text: {
-        fr: "Qu'est-ce qu'une inéquation ?",
+        fr: "Qu'est-ce qu'une fonction ?",
       }
     },
     {
       text: {
-        fr: "Une inéquation est une inégalité contenant une inconnue. Sa solution est un ensemble de nombres (un intervalle), et non une valeur unique.",
+        fr: "Une fonction est une règle qui associe à chaque valeur d'entrée x **une et une seule** valeur de sortie y. On note f(x) = expression en x.",
       }
     },
     {
       text: {
-        fr: "Les quatre symboles d'inégalité",
-      }
-    },
-    {
-      headers: {
-        fr: ["Symbole", "Se lit", "Exemple", "Signification"],
-      }
-    },
-    {
-      text: {
-        fr: "Représentation sur la droite numérique",
-      }
-    },
-    {
-      text: {
-        fr: "Conventions graphiques",
+        fr: "Vocabulaire essentiel",
       },
       items: {
         fr: [
-            "Cercle **plein** ● pour ≤ ou ≥ → la valeur est **incluse** dans la solution",
-            "Cercle **vide** ○ pour < ou > → la valeur est **exclue** de la solution",
-            "Flèche vers la droite → solutions plus grandes",
-            "Flèche vers la gauche → solutions plus petites",
+            "**x** = valeur d'entrée (antécédent)",
+            "**f(x)** = valeur de sortie (image de x)",
+            "**Domaine** = ensemble des valeurs d'entrée autorisées",
+          ],
+      }
+    },
+    {
+      text: {
+        fr: "Comment utiliser une fonction",
+      }
+    },
+    {
+      text: {
+        fr: "Calculer f(x) pour une valeur donnée",
+      }
+    },
+    {
+      items: {
+        fr: [
+            "f(x) = 2x **+** 3",
+            "Pour x = 4 : f(4) = 2 × 4 **+** 3 = 8 **+** 3 = **11**",
+            "On dit : « l'image de 4 par f est 11 »",
+          ],
+      }
+    },
+    {
+      text: {
+        fr: "Formes de représentation",
+      }
+    },
+    {
+      label: {
+        fr: "Une fonction peut être représentée par :",
+      },
+      items: {
+        fr: [
+            "Une **formule** : f(x) = 2x **+** 3",
+            "Un **tableau de valeurs** : liste de couples (x, f(x))",
+            "Un **graphique** : courbe dans un repère cartésien",
           ],
       }
     },
     {
       headers: {
-        fr: ["Inéquation", "Cercle en x₀", "Direction de la flèche"],
+        fr: ["x", "0", "1", "2", "3", "4"],
       }
     },
   ],

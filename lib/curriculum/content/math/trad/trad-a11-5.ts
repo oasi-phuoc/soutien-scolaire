@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A11_5: SubmoduleTrad = {
-  submoduleId: "A11-5",
+export const TRAD_A13_5: SubmoduleTrad = {
+  submoduleId: "A13-5",
   title: {
     fr: "Fonction affine f(x) = ax + b",
     en: "Affine function f(x) = ax + b",

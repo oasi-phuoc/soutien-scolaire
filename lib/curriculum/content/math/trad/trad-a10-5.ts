@@ -1,79 +1,107 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A10_5: SubmoduleTrad = {
-  submoduleId: "A10-5",
+export const TRAD_A12_3: SubmoduleTrad = {
+  submoduleId: "A12-3",
   title: {
-    fr: "Équations avec fractions",
-    en: "Equations with fractions",
-    ar: "معادلات بالكسور",
-    fa: "معادلات با کسر",
-    ti: "ምዕርርያ ምስ ምምቅቅዮ",
-    uk: "Рівняння з дробами",
+    fr: "Problèmes à deux inconnues",
+    en: "Problems with two unknowns",
+    ar: "مسائل بمجهولين",
+    fa: "مسائل با دو مجهول",
+    ti: "ጸገማት ምስ ክልተ ዘይፍለጥ",
+    uk: "Задачі з двома невідомими",
   },
   blocks: [
     {
       text: {
-        fr: "Éliminer les fractions",
+        fr: "Démarche générale",
       }
     },
     {
       text: {
-        fr: "Pour résoudre une équation contenant des fractions, on commence par éliminer les dénominateurs en multipliant tous les termes par le dénominateur commun (ou le PPCM des dénominateurs).",
-      }
-    },
-    {
-      text: {
-        fr: "Méthode",
+        fr: "4 étapes pour résoudre un problème à deux inconnues",
       },
       items: {
         fr: [
-            "1. Trouver le PPCM de tous les dénominateurs",
-            "2. Multiplier chaque terme des deux membres par ce PPCM",
-            "3. Simplifier : les fractions disparaissent",
-            "4. Résoudre l'équation entière obtenue",
-            "5. Vérifier la solution",
+            "1. Nommer x et y les deux quantités cherchées (préciser clairement ce qu'ils représentent)",
+            "2. Traduire les deux conditions de l'énoncé en deux équations",
+            "3. Résoudre le système (par substitution ou par élimination)",
+            "4. Répondre à la question et vérifier",
           ],
       }
     },
     {
       text: {
-        fr: "Exemples",
+        fr: "Exemple : billets de spectacle",
       }
     },
     {
       text: {
-        fr: "Exemple avec un seul dénominateur",
+        fr: "Énoncé",
       }
     },
     {
       items: {
         fr: [
-            "x/2 **+** 3 = 7",
-            "→ Multiplier par 2 : x **+** 6 = 14",
-            "→ x = 8",
-            "Vérification : 8/2 **+** 3 = 4 **+** 3 = 7 ✓",
+            "Des billets d'adulte coûtent 8 € et d'enfant 5 €.",
+            "10 personnes paient ensemble 68 €. Combien d'adultes ?",
           ],
       }
     },
     {
       text: {
-        fr: "Exemple avec deux dénominateurs différents",
+        fr: "Résolution",
       }
     },
     {
       items: {
         fr: [
-            "x/3 **+** x/6 = 5",
-            "→ PPCM(3, 6) = 6",
-            "→ Multiplier par 6 : 2x **+** x = 30",
-            "→ 3x = 30  →  x = 10",
-            "Vérification : 10/3 **+** 10/6 = 3,33 **+** 1,67 = 5 ✓",
+            "Soit x = nombre d'adultes, y = nombre d'enfants",
+            "Équation 1 (total personnes) : x **+** y = 10",
+            "Équation 2 (total argent) : 8x **+** 5y = 68",
+            "Substitution : x = 10 **−** y → 8(10 **−** y) **+** 5y = 68",
+            "→ 80 **−** 8y **+** 5y = 68  →  **−**3y = **−**12  →  y = 4",
+            "→ x = 10 **−** 4 = 6",
+            "**Réponse : 6 adultes et 4 enfants.**",
           ],
       }
     },
     {
       text: {
-        fr: "La vérification est indispensable : après avoir trouvé la solution, la substituer dans l'équation originale (avec les fractions) pour valider.",
+        fr: "Exemple : prix d'articles",
+      }
+    },
+    {
+      text: {
+        fr: "Énoncé",
+      }
+    },
+    {
+      items: {
+        fr: [
+            "2 stylos **+** 3 cahiers = 8,50 €",
+            "4 stylos **+** 1 cahier = 9 €",
+            "Trouver le prix d'un stylo et d'un cahier.",
+          ],
+      }
+    },
+    {
+      text: {
+        fr: "Mise en système",
+      }
+    },
+    {
+      items: {
+        fr: [
+            "Soit x = prix d'un stylo, y = prix d'un cahier",
+            "Système : { 2x **+** 3y = 8,50",
+            "           { 4x **+** y = 9",
+            "→ Résoudre par élimination ou substitution",
+          ],
+      }
+    },
+    {
+      text: {
+        fr: "Toujours définir clairement x et y avant de poser les équations. Une définition imprécise mène souvent à des erreurs de traduction.",
       }
     },
   ],

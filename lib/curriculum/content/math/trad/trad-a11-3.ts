@@ -1,76 +1,80 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A11_3: SubmoduleTrad = {
-  submoduleId: "A11-3",
+export const TRAD_A13_3: SubmoduleTrad = {
+  submoduleId: "A13-3",
   title: {
-    fr: "Représentation graphique des solutions",
-    en: "Graphical representation of solutions",
-    ar: "التمثيل البياني للحلول",
-    fa: "نمایش گرافیکی جواب‌ها",
-    ti: "ስዕላዊ ምርኣይ ናይ ፍትሒ",
-    uk: "Графічне зображення розв'язків",
+    fr: "Graphique dans un repère",
+    en: "Graph in a coordinate system",
+    ar: "الرسم البياني في منظومة إحداثيات",
+    fa: "نمودار در دستگاه مختصات",
+    ti: "ስዕሊ ኣብ ናይ ቦታ ስርዓት",
+    uk: "Графік у системі координат",
   },
   blocks: [
     {
       text: {
-        fr: "Notation par intervalles",
+        fr: "Le repère cartésien",
       }
     },
     {
       text: {
-        fr: "La solution d'une inéquation à une variable s'écrit sous forme d'intervalle. Les crochets indiquent si les bornes sont incluses ou exclues.",
-      }
-    },
-    {
-      text: {
-        fr: "Convention des crochets",
-      },
-      items: {
-        fr: [
-            "Crochet fermé [ ou ] → borne **incluse** (correspond à ≤ ou ≥)",
-            "Crochet ouvert ] ou [ → borne **exclue** (correspond à < ou >)",
-          ],
+        fr: "Le repère cartésien est formé de deux axes perpendiculaires qui se croisent en l'**origine O(0, 0)**.",
       }
     },
     {
       headers: {
-        fr: ["Inéquation", "Notation intervalle", "Droite numérique"],
+        fr: ["Axe", "Direction", "Variable", "Nom"],
       }
     },
     {
       text: {
-        fr: "Exemple complet",
+        fr: "Lire et placer des coordonnées",
       }
     },
     {
       text: {
-        fr: "Résoudre et représenter",
-      }
-    },
-    {
+        fr: "Comment placer un point (x ; y)",
+      },
       items: {
         fr: [
-            "2x **−** 4 ≤ 6",
-            "→ 2x ≤ 10",
-            "→ x ≤ 5",
-            "Intervalle solution : ]**−**∞ ; 5]",
-            "Droite numérique : ● en 5, flèche vers la gauche",
+            "1. Repérer la valeur x sur l'axe horizontal",
+            "2. Depuis ce point, monter (ou descendre) jusqu'à la valeur y",
+            "3. Marquer le point à l'intersection",
+          ],
+      }
+    },
+    {
+      label: {
+        fr: "Exemples de coordonnées",
+      },
+      items: {
+        fr: [
+            "A(3 ; 7) → x = 3, y = 7 (3 vers la droite, 7 vers le haut)",
+            "B(**−**2 ; 5) → x = **−**2, y = 5 (2 vers la gauche, 5 vers le haut)",
+            "O(0 ; 0) → l'origine, intersection des deux axes",
           ],
       }
     },
     {
       text: {
-        fr: "Inéquation double",
+        fr: "Tracer le graphique d'une fonction",
       }
     },
     {
       text: {
-        fr: "Une inéquation double encadre x entre deux valeurs. Sa solution est un segment sur la droite numérique.",
+        fr: "3 étapes",
+      },
+      items: {
+        fr: [
+            "1. Construire le tableau de valeurs",
+            "2. Placer chaque point (x ; f(x)) dans le repère",
+            "3. Relier les points par une courbe lisse (ou une droite si la fonction est affine/linéaire)",
+          ],
       }
     },
     {
       text: {
-        fr: "1 ≤ x + 2 < 6\n→ 1 − 2 ≤ x < 6 − 2\n→ −1 ≤ x < 4\nIntervalle : [−1 ; 4[\nDroite : ● en −1, ○ en 4, segment entre les deux",
+        fr: "Lecture graphique : pour un x donné → lire y sur la courbe. Pour un y donné → aller horizontalement jusqu'à la courbe, lire x.",
       }
     },
   ],

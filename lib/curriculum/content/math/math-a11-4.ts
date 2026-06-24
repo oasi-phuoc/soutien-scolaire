@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_A11_4_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A11-4",
-    submoduleCode: "A11.4",
+export const MATH_A13_4_LESSON: MathSubmoduleLesson = {
+    submoduleId: "A13-4",
+    submoduleCode: "A13.4",
     theory: {
       title: {
         fr: "",
@@ -61,18 +61,18 @@ export const MATH_A11_4_LESSON: MathSubmoduleLesson = {
     },
   exercises: [],
   exercisePool: [
-    { id: "a11-4-ep01", promptFr: "f(x) = 4x. Calcule f(5).", type: "number", acceptable: ["20"], hintFr: "4 × 5 = ?" },
-    { id: "a11-4-ep02", promptFr: "f(x) = −3x. Calcule f(6).", type: "number", acceptable: ["-18"], hintFr: "−3 × 6 = ?" },
-    { id: "a11-4-ep03", promptFr: "f(x) = 5x. Calcule f(−4).", type: "number", acceptable: ["-20"], hintFr: "5 × (−4) = ?" },
-    { id: "a11-4-ep04", promptFr: "f(x) = 3x. Quel est le coefficient directeur ?", type: "number", acceptable: ["3"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
-    { id: "a11-4-ep05", promptFr: "f(x) = −7x. Calcule f(3).", type: "number", acceptable: ["-21"], hintFr: "−7 × 3 = ?" },
-    { id: "a11-4-ep06", promptFr: "f(x) = 6x. Quel est le coefficient directeur ?", type: "number", acceptable: ["6"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
-    { id: "a11-4-ep07", promptFr: "f(x) = 8x. Calcule f(4).", type: "number", acceptable: ["32"], hintFr: "8 × 4 = ?" },
-    { id: "a11-4-ep08", promptFr: "f(x) = 9x. Calcule f(0).", type: "number", acceptable: ["0"], hintFr: "Toute fonction linéaire passe par l'origine : f(0) = 0." },
-    { id: "a11-4-ep09", promptFr: "f(x) = −4x. Calcule f(−5).", type: "number", acceptable: ["20"], hintFr: "−4 × (−5) = ?" },
-    { id: "a11-4-ep10", promptFr: "f(x) = 7x. Quel est le coefficient directeur ?", type: "number", acceptable: ["7"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
-    { id: "a11-4-ep11", promptFr: "f(x) = 2x. Calcule f(12).", type: "number", acceptable: ["24"], hintFr: "2 × 12 = ?" },
-    { id: "a11-4-ep12", promptFr: "f(x) = −5x. Calcule f(4).", type: "number", acceptable: ["-20"], hintFr: "−5 × 4 = ?" },
+    { id: "a13-4-ep01", promptFr: "f(x) = 4x. Calcule f(5).", type: "number", acceptable: ["20"], hintFr: "4 × 5 = ?" },
+    { id: "a13-4-ep02", promptFr: "f(x) = −3x. Calcule f(6).", type: "number", acceptable: ["-18"], hintFr: "−3 × 6 = ?" },
+    { id: "a13-4-ep03", promptFr: "f(x) = 5x. Calcule f(−4).", type: "number", acceptable: ["-20"], hintFr: "5 × (−4) = ?" },
+    { id: "a13-4-ep04", promptFr: "f(x) = 3x. Quel est le coefficient directeur ?", type: "number", acceptable: ["3"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
+    { id: "a13-4-ep05", promptFr: "f(x) = −7x. Calcule f(3).", type: "number", acceptable: ["-21"], hintFr: "−7 × 3 = ?" },
+    { id: "a13-4-ep06", promptFr: "f(x) = 6x. Quel est le coefficient directeur ?", type: "number", acceptable: ["6"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
+    { id: "a13-4-ep07", promptFr: "f(x) = 8x. Calcule f(4).", type: "number", acceptable: ["32"], hintFr: "8 × 4 = ?" },
+    { id: "a13-4-ep08", promptFr: "f(x) = 9x. Calcule f(0).", type: "number", acceptable: ["0"], hintFr: "Toute fonction linéaire passe par l'origine : f(0) = 0." },
+    { id: "a13-4-ep09", promptFr: "f(x) = −4x. Calcule f(−5).", type: "number", acceptable: ["20"], hintFr: "−4 × (−5) = ?" },
+    { id: "a13-4-ep10", promptFr: "f(x) = 7x. Quel est le coefficient directeur ?", type: "number", acceptable: ["7"], hintFr: "Dans f(x) = ax, le coefficient directeur est a." },
+    { id: "a13-4-ep11", promptFr: "f(x) = 2x. Calcule f(12).", type: "number", acceptable: ["24"], hintFr: "2 × 12 = ?" },
+    { id: "a13-4-ep12", promptFr: "f(x) = −5x. Calcule f(4).", type: "number", acceptable: ["-20"], hintFr: "−5 × 4 = ?" },
   ],
   poolSize: 5,
 };

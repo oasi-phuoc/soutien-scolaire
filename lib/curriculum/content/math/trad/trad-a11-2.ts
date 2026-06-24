@@ -1,86 +1,62 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_A11_2: SubmoduleTrad = {
-  submoduleId: "A11-2",
+export const TRAD_A13_2: SubmoduleTrad = {
+  submoduleId: "A13-2",
   title: {
-    fr: "Résolution d'inéquations simples",
-    en: "Solving simple inequalities",
-    ar: "حل المتباينات البسيطة",
-    fa: "حل نامعادلات ساده",
-    ti: "ምፍታሕ ቀሊል ዘይምዕርርያ",
-    uk: "Розв'язання простих нерівностей",
+    fr: "Tableau de valeurs",
+    en: "Table of values",
+    ar: "جدول القيم",
+    fa: "جدول مقادیر",
+    ti: "ሰሌዳ ዋጋ",
+    uk: "Таблиця значень",
   },
   blocks: [
     {
       text: {
-        fr: "Résoudre une inéquation",
+        fr: "Construire un tableau de valeurs",
       }
     },
     {
       text: {
-        fr: "On résout une inéquation comme une équation, en effectuant les mêmes opérations des deux côtés. Il y a cependant une exception fondamentale.",
+        fr: "Un tableau de valeurs liste plusieurs couples (x, f(x)). On choisit des valeurs régulières de x et on calcule f(x) pour chacune.",
       }
     },
     {
       text: {
-        fr: "RÈGLE IMPORTANTE",
+        fr: "Méthode",
       },
       items: {
         fr: [
-            "Quand on multiplie ou divise les deux membres par un nombre **négatif**, le sens de l'inégalité s'**inverse**.",
-            "< devient >,  > devient <,  ≤ devient ≥,  ≥ devient ≤",
+            "1. Choisir des valeurs entières de x (souvent symétriques autour de 0)",
+            "2. Calculer f(x) pour chaque valeur de x",
+            "3. Remplir le tableau ligne par ligne",
+            "4. Utiliser ces points pour tracer le graphique",
           ],
       }
     },
     {
       text: {
-        fr: "Exemples de résolution",
+        fr: "Exemple : f(x) = 2x + 1",
+      }
+    },
+    {
+      headers: {
+        fr: ["x", "−2", "−1", "0", "1", "2"],
       }
     },
     {
       text: {
-        fr: "Exemple standard (diviseur positif)",
+        fr: "Exemple : f(x) = x² − 1",
       }
     },
     {
-      items: {
-        fr: [
-            "2x **+** 3 < 11",
-            "→ 2x < 8  (on soustrait 3)",
-            "→ x < 4  (on divise par **+**2 : signe inchangé)",
-          ],
+      headers: {
+        fr: ["x", "−2", "−1", "0", "1", "2"],
       }
     },
     {
       text: {
-        fr: "Exemple standard (autre sens)",
-      }
-    },
-    {
-      items: {
-        fr: [
-            "3x **−** 5 ≥ 7",
-            "→ 3x ≥ 12",
-            "→ x ≥ 4",
-          ],
-      }
-    },
-    {
-      text: {
-        fr: "Exemple avec diviseur négatif (inversion du signe !)",
-      }
-    },
-    {
-      items: {
-        fr: [
-            "**−**2x > 6",
-            "→ x < **−**3  (on divise par **−**2 : le signe s'inverse !)",
-          ],
-      }
-    },
-    {
-      text: {
-        fr: "Toujours noter la solution sous forme d'intervalle ou sur la droite numérique. Par exemple : x < 4 s'écrit ]−∞ ; 4[.",
+        fr: "Conseil : choisir des valeurs symétriques autour de 0 permet de voir la tendance globale de la fonction et de faciliter le tracé du graphique.",
       }
     },
   ],
