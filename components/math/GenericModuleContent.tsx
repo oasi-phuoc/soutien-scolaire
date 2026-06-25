@@ -7402,8 +7402,12 @@ export function GenericModuleContent({
       stepValidate = () => {
         const step = activeSystemStep ?? currentStep;
         const expected = step.question.acceptable.map(normalizeSystemAnswer);
-        const answerValue = normalizeSystemAnswer(eqAnswers[0] ?? "");
-        const ok = expected.some((item) => answerValue === item || answerValue.includes(item));
+        const x = (eqAnswers[0] ?? "").trim();
+        const y = (eqAnswers[1] ?? "").trim();
+        const xLow = x.toLowerCase().replace(/\s+/g, "");
+        const isSpecial = ["ir","ℝ","infini","infinité","impossible","∅","vide"].some(k => xLow === k || xLow.includes(k));
+        const combined = isSpecial ? normalizeSystemAnswer(x) : normalizeSystemAnswer(`${x};${y}`);
+        const ok = expected.some((item) => combined === item || combined.includes(item));
         setEqResults([ok]);
         setEqValidated(true);
         setExStatus("correct");
@@ -9141,7 +9145,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "equation_group" && (() => {
         const step = activeEquationStep ?? (currentStep as EquationGroupStep);
         const formatSol = (sol: EquationSolution) =>
-          sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const formatXSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
@@ -9154,6 +9158,9 @@ export function GenericModuleContent({
           const userAns = eqAnswers[0] ?? "";
           const result = eqValidated ? (eqResults[0] ?? null) : null;
           const isWrong = result === false;
+          const infActive = userAns.trim().toUpperCase() === "IR";
+          const impActive = userAns.trim().toLowerCase() === "impossible";
+          const btnClsSingle = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
           return (
             <div className="space-y-5">
               <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
@@ -9178,6 +9185,12 @@ export function GenericModuleContent({
                       />
                     </div>
                   ))}
+                  {!eqValidated && (
+                    <div className="flex justify-center gap-2">
+                      <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; n[0]=infActive?"":"IR"; return n; })} className={btnClsSingle(infActive)}>∞</button>
+                      <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; n[0]=impActive?"":"impossible"; return n; })} className={btnClsSingle(impActive)}>impossible</button>
+                    </div>
+                  )}
                   <div className="grid grid-cols-[auto_8rem] items-end justify-center gap-2 pt-2">
                     <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
                     {isWrong ? (
@@ -9190,7 +9203,7 @@ export function GenericModuleContent({
                         type="text"
                         inputMode="text"
                         value={userAns}
-                        disabled={eqValidated}
+                        disabled={eqValidated || infActive || impActive}
                         onChange={e => setEqAnswers(prev => {
                           const next = [...prev];
                           next[0] = e.target.value;
@@ -9241,6 +9254,9 @@ export function GenericModuleContent({
                 const userAns = eqAnswers[i] ?? "";
                 const result = eqValidated ? (eqResults[i] ?? null) : null;
                 const isWrong = result === false;
+                const infA = userAns.trim().toUpperCase() === "IR";
+                const impA = userAns.trim().toLowerCase() === "impossible";
+                const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
                   <div key={i} className="flex flex-wrap items-center gap-2">
                     <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -9252,10 +9268,12 @@ export function GenericModuleContent({
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
                     ) : (
-                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated}
+                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated || infA || impA}
                         onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
                         className={inputCls} />
                     )}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"IR"; return n; })} className={btnCls(infA)}>∞</button>}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=impA?"":"impossible"; return n; })} className={btnCls(impA)}>impossible</button>}
                     {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
                   </div>
                 );
@@ -9269,10 +9287,9 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "system_equation" && (() => {
         const step = activeSystemStep ?? (currentStep as SystemEquationStep);
         const q = step.question;
-        const userAns = eqAnswers[0] ?? "";
         const result = eqValidated ? (eqResults[0] ?? null) : null;
         const isWrong = result === false;
-        const inputCls = "w-36 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const inputCls = "w-28 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
         const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
         return (
           <div className="space-y-5">
@@ -9304,29 +9321,48 @@ export function GenericModuleContent({
                   />
                 </div>
               ))}
-              <div className="grid grid-cols-[auto_10rem] items-end justify-center gap-2 pt-2">
-                <span className="text-sm font-semibold text-[var(--color-text-primary)]">S =</span>
-                {isWrong ? (
-                  <div className="flex flex-col items-center border-b-2 border-amber-500 pb-1">
-                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{userAns || "—"}</span>
-                    <span className="text-xs font-bold leading-none text-amber-600">{renderText(q.answer)}</span>
+              {(() => {
+                const isPairSol = (q.acceptable[0] ?? "").includes(";");
+                const corrX = isPairSol ? ((q.acceptable[0] ?? "").split(";")[0] ?? "") : q.answer;
+                const corrY = isPairSol ? ((q.acceptable[0] ?? "").split(";")[1] ?? "") : "";
+                const userX = eqAnswers[0] ?? "";
+                const userY = eqAnswers[1] ?? "";
+                const xLow = userX.trim().toLowerCase().replace(/\s+/g, "");
+                const isSpecialBtn = xLow === "ir" || xLow === "impossible" || xLow === "∅";
+                return (
+                  <div className="space-y-2 pt-2">
+                    <div className="flex items-end justify-center gap-2">
+                      <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
+                      {isWrong ? (
+                        <div className="w-28 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                          <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userX || "—"}</span>
+                          <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrX)}</span>
+                        </div>
+                      ) : (
+                        <input type="text" inputMode="text" value={userX} disabled={eqValidated}
+                          onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=e.target.value; return n; })}
+                          className={inputCls} />
+                      )}
+                    </div>
+                    {(!isSpecialBtn || isWrong) && isPairSol && (
+                      <div className="flex items-end justify-center gap-2">
+                        <span className="text-sm font-semibold text-[var(--color-text-primary)]">y =</span>
+                        {isWrong ? (
+                          <div className="w-28 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                            <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userY || "—"}</span>
+                            <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrY)}</span>
+                          </div>
+                        ) : (
+                          <input type="text" inputMode="text" value={userY} disabled={eqValidated}
+                            onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[1]=e.target.value; return n; })}
+                            className={inputCls} />
+                        )}
+                      </div>
+                    )}
+                    {result === true && <div className="text-center text-xs text-[var(--color-accent-alg)]">✓</div>}
                   </div>
-                ) : (
-                  <input
-                    type="text"
-                    inputMode="text"
-                    value={userAns}
-                    disabled={eqValidated}
-                    onChange={e => setEqAnswers(prev => {
-                      const next = [...prev];
-                      next[0] = e.target.value;
-                      return next;
-                    })}
-                    className={inputCls}
-                  />
-                )}
-                {result === true && <span className="col-start-2 text-center text-xs text-[var(--color-accent-alg)]">✓</span>}
-              </div>
+                );
+              })()}
             </div>
             {eqValidated && (
               <div className="mt-5 border-t border-[var(--color-border)] pt-4">
@@ -9362,7 +9398,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "frac_equation_group" && (() => {
         const step = currentStep as FracEquationGroupStep;
         const formatSol = (sol: EquationSolution) =>
-          sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
         // Render a side (list of terms) as inline fraction elements
@@ -9390,6 +9426,9 @@ export function GenericModuleContent({
                 const userAns = eqAnswers[i] ?? "";
                 const result = eqValidated ? (eqResults[i] ?? null) : null;
                 const isWrong = result === false;
+                const infA = userAns.trim().toUpperCase() === "IR";
+                const impA = userAns.trim().toLowerCase() === "impossible";
+                const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
                   <div key={i} className="flex flex-wrap items-center gap-2">
                     <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -9405,10 +9444,12 @@ export function GenericModuleContent({
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
                     ) : (
-                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated}
+                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated || infA || impA}
                         onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
                         className={inputCls} />
                     )}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"IR"; return n; })} className={btnCls(infA)}>∞</button>}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=impA?"":"impossible"; return n; })} className={btnCls(impA)}>impossible</button>}
                     {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
                   </div>
                 );
