@@ -630,23 +630,23 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4), omelets = rnd(20, 80);
-      return { textFr: `Un cuisinier achète ${trays} plateaux de ${perTray} œufs. Pour préparer une omelette, il utilise ${usedPer} œufs et il prépare ${omelets} omelettes. Combien d'œufs lui reste-t-il ?`, answer: trays * perTray - usedPer * omelets, op: "-" };
+      return { textFr: `Un cuisinier achète ${trays} plateaux de ${perTray} œufs. Pour préparer une omelette, il utilise ${usedPer} œufs et il prépare ${omelets} omelettes. Combien d'œufs lui reste-t-il ?`, answer: trays * perTray - usedPer * omelets, op: "-", calculation: `${trays * perTray} − ${usedPer * omelets} = ${trays * perTray - usedPer * omelets}` };
     },
     () => {
       const pages = rnd(8, 20), lines = rnd(4, 8), perLine = rnd(5, 12), placed = rnd(80, 280);
-      return { textFr: `${name} reçoit un album de ${pages} pages. Chaque page comporte ${lines} lignes et chaque ligne peut contenir ${perLine} timbres. Il a déjà placé ${placed} timbres. Combien de timbres doit-il encore ajouter pour remplir l'album ?`, answer: pages * lines * perLine - placed, op: "-" };
+      return { textFr: `${name} reçoit un album de ${pages} pages. Chaque page comporte ${lines} lignes et chaque ligne peut contenir ${perLine} timbres. Il a déjà placé ${placed} timbres. Combien de timbres doit-il encore ajouter pour remplir l'album ?`, answer: pages * lines * perLine - placed, op: "-", calculation: `${pages * lines * perLine} − ${placed} = ${pages * lines * perLine - placed}` };
     },
     () => {
       const bottles = rnd(90, 360), perCarton = [6, 9, 12, 18][rnd(0, 3)]!;
-      return { textFr: `${name} emballe ${bottles} bouteilles dans des cartons de ${perCarton} bouteilles. Combien de cartons peut-il remplir entièrement ?`, answer: Math.floor(bottles / perCarton), op: "÷" };
+      return { textFr: `${name} emballe ${bottles} bouteilles dans des cartons de ${perCarton} bouteilles. Combien de cartons peut-il remplir entièrement ?`, answer: Math.floor(bottles / perCarton), op: "÷", calculation: `${bottles} ÷ ${perCarton} = ${Math.floor(bottles / perCarton)}` };
     },
     () => {
       const hens = rnd(4, 18), eggsPerMonth = rnd(15, 30);
-      return { textFr: `Dans un poulailler, il y a ${hens} poules. Chaque poule pond ${eggsPerMonth} œufs par mois. Combien d'œufs sont pondus en une année complète ?`, answer: hens * eggsPerMonth * 12, op: "×" };
+      return { textFr: `Dans un poulailler, il y a ${hens} poules. Chaque poule pond ${eggsPerMonth} œufs par mois. Combien d'œufs sont pondus en une année complète ?`, answer: hens * eggsPerMonth * 12, op: "×", calculation: `${hens} × ${eggsPerMonth} × 12 = ${hens * eggsPerMonth * 12}` };
     },
     () => {
       const packs = rnd(20, 150), per = rnd(25, 100);
-      return { textFr: `La professeure de dessin commande ${packs} paquets de papier cartonné. Chaque paquet contient ${per} feuilles. Combien de feuilles reçoit-elle ?`, answer: packs * per, op: "×" };
+      return { textFr: `La professeure de dessin commande ${packs} paquets de papier cartonné. Chaque paquet contient ${per} feuilles. Combien de feuilles reçoit-elle ?`, answer: packs * per, op: "×", calculation: `${packs} × ${per} = ${packs * per}` };
     },
   ];
   for (let attempt = 0; attempt < 20; attempt++) {
@@ -688,8 +688,8 @@ function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
     exNum,
     level,
     questions: [
-      { textFr: addPool[addIdx]!(addA, addB), answer: addA + addB, op: "+" },
-      { textFr: subPool[subIdx]!(subA, subB), answer: subA - subB, op: "-" },
+      { textFr: addPool[addIdx]!(addA, addB), answer: addA + addB, op: "+", calculation: `${addA} + ${addB} = ${addA + addB}` },
+      { textFr: subPool[subIdx]!(subA, subB), answer: subA - subB, op: "-", calculation: `${subA} − ${subB} = ${subA - subB}` },
     ],
   };
 }
@@ -1856,6 +1856,11 @@ function WordProblemsExercise({
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
                 )}
               </div>
+              {validated && revealCorrection && q.calculation && (
+                <p className="mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
+                  Calcul : <span className="font-mono text-[var(--color-text-primary)]">{q.calculation}</span>
+                </p>
+              )}
             </div>
           );
         })}
@@ -5932,7 +5937,8 @@ export function GenericModuleContent({
   });
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
-  const initialIdx = (startAtEval || revisionMode) && evalStartIdx >= 0 ? evalStartIdx : 0;
+  const trainingHasWordProblems = evalStartIdx >= 0 && steps.slice(0, evalStartIdx).some(s => s.kind === "word_problems");
+  const initialIdx = !trainingHasWordProblems && (startAtEval || revisionMode) && evalStartIdx >= 0 ? evalStartIdx : 0;
   const trainingExercisePrompts = (() => {
     const textExercises = (evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps)
       .filter((s) => s.kind === "exercise")
