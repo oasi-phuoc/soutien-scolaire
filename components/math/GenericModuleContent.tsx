@@ -3312,98 +3312,146 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
 }
 
 // ── Fraction equation group (A10.2) ───────────────────────────────────────
-function genFracEquationGroupStep(lesson: MathSubmoduleLesson): FracEquationGroupStep {
-  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+function genFracEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
   function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
-  function lcm(a: number, b: number) { return Math.abs(a * b) / gcd(a, b); }
   function rat(n: number, d: number): EquationSolution {
     if (d === 0) return { kind: "impossible" };
     if (d < 0) { n = -n; d = -d; }
     const g = gcd(Math.abs(n), d);
     return { kind: "rational", num: n / g, den: d / g };
   }
-  // Build a FracEqSide term: xMul=1 means "num/den · x", xMul=0 means constant "num/den"
-  // Equation: sum of lhs terms = sum of rhs terms
-  // After multiplying by LCD, each term (num/den)*x*LCD → becomes (num*LCD/den)*x
-  // We solve (sum of xCoef)*x = (sum of constants)
-  type Term = { num: number; den: number; xMul: number }; // value = num/den, * x^xMul
-  const mkTerm = (num: number, den: number, xMul: number): Term => ({ num, den, xMul });
-
-  type EqProblem = { lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution };
-
-  function buildProblem(lhsTerms: Term[], rhsTerms: Term[]): EqProblem {
-    const allDens = [...lhsTerms, ...rhsTerms].map(t => t.den);
-    const LCD = allDens.reduce((acc, d) => lcm(acc, d), 1);
-    // After multiplying by LCD: x coefs and constants
-    let xCoef = 0, constant = 0;
-    for (const t of lhsTerms) {
-      const factor = LCD / t.den * t.num;
-      if (t.xMul === 1) xCoef += factor; else constant -= factor;
-    }
-    for (const t of rhsTerms) {
-      const factor = LCD / t.den * t.num;
-      if (t.xMul === 1) xCoef -= factor; else constant += factor;
-    }
-    // xCoef * x = constant → x = constant / xCoef
-    const sol = xCoef === 0 ? (constant === 0 ? { kind: "infinite" as const } : { kind: "impossible" as const }) : rat(constant, xCoef);
-    return { lhs: { terms: lhsTerms }, rhs: { terms: rhsTerms }, solution: sol };
-  }
-
-  const problems: EqProblem[] = [];
-  const DENS = [2, 3, 4, 5, 6, 7, 8, 10];
-  const used = new Set<number>();
-
-  // Generate 5 fraction equation problems
-  for (let attempt = 0; problems.length < 5 && attempt < 80; attempt++) {
-    // Pick 2–3 different denominators
-    const d1 = DENS[ri(0, DENS.length-1)]!;
-    const d2 = DENS[ri(0, DENS.length-1)]!;
-    const xN1 = ri(1, 5), cN1 = ri(1, 8);
-    const xN2 = ri(1, 5), cN2 = ri(1, 8);
-    const cN3 = ri(1, 6);
-    const templates = [
-      // (a/d1)x + cN1/1 = (b/d2)x + cN2/1
-      () => buildProblem(
-        [mkTerm(xN1, d1, 1), mkTerm(cN1, 1, 0)],
-        [mkTerm(xN2, d2, 1), mkTerm(cN2, 1, 0)],
-      ),
-      // (a/d1)x + cN1/d2 = cN2/1
-      () => buildProblem(
-        [mkTerm(xN1, d1, 1), mkTerm(cN1, d2, 0)],
-        [mkTerm(cN2, 1, 0)],
-      ),
-      // cN1/d1 − (a/d2)x = cN2/d1 + cN3/1
-      () => buildProblem(
-        [mkTerm(cN1, d1, 0), mkTerm(-xN1, d2, 1)],
-        [mkTerm(cN2, d1, 0), mkTerm(cN3, 1, 0)],
-      ),
-      // (a/d1)x − cN1/1 = (b/d2)x − cN2/1
-      () => buildProblem(
-        [mkTerm(xN1, d1, 1), mkTerm(-cN1, 1, 0)],
-        [mkTerm(xN2, d2, 1), mkTerm(-cN2, 1, 0)],
-      ),
-      // cN1/d1 + (a/1)x = cN2/d2 − (b/1)x  → a+b on x side
-      () => buildProblem(
-        [mkTerm(cN1, d1, 0), mkTerm(xN1, 1, 1)],
-        [mkTerm(cN2, d2, 0), mkTerm(-xN2, 1, 1)],
-      ),
-    ];
-    const prob = templates[ri(0, templates.length-1)]!();
-    if (prob.solution.kind !== "rational") continue;
-    const { num, den } = prob.solution as { kind: "rational"; num: number; den: number };
-    if (Math.abs(num) > 200 || den > 100 || den === 1 && Math.abs(num) > 50) continue;
-    // Avoid duplicate denominator pairs
-    const key = d1 * 1000 + d2;
-    if (used.has(key)) continue;
-    used.add(key);
-    problems.push(prob);
-  }
-  // Fallback if not enough
-  while (problems.length < 5) {
-    const d=ri(2,6),n=ri(1,4),c1=ri(2,8),c2=ri(2,8);
-    problems.push(buildProblem([mkTerm(n,d,1),mkTerm(c1,1,0)],[mkTerm(c2,1,0)]));
-  }
-  return { kind: "frac_equation_group", lesson, questions: problems };
+  const f = (num: string, den: string) => `[[frac:${num}/${den}]]`;
+  const question = (expr: string, solution: EquationSolution, development: string[], operations: string[] = []): EquationQuestion =>
+    ({ expr, solution, development, operations });
+  const commonOps = (mult: number, more: string[]) => [
+    "même dénominateur",
+    `· ${mult}\n(«explosion de fractions»)`,
+    "réduire",
+    ...more,
+  ];
+  const templates: EquationQuestion[] = [
+    question(`- ${f("x", "2")} + ${f("3", "5")} = ${f("1", "3")} x - ${f("5", "2")}`, rat(93, 25), [
+      `${f("-15x", "30")} + ${f("18", "30")} = ${f("10x", "30")} - ${f("75", "30")}`,
+      "-15x + 18 = 10x - 75", "-25x + 18 = -75", "-25x = -93", `x = ${f("93", "25")}`, `S = {${f("93", "25")}}`,
+    ], commonOps(30, ["- 10x", "- 18", ": 25", ""])),
+    question(`${f("x - 7", "3")} - 1 = ${f("2x + 2", "5")}`, rat(-56, 1), [
+      `${f("5x - 35", "15")} - ${f("15", "15")} = ${f("6x + 6", "15")}`,
+      "5x - 35 - 15 = 6x + 6", "5x - 50 = 6x + 6", "-x - 50 = 6", "-x = 56", "x = -56", "S = {-56}",
+    ], commonOps(15, ["- 6x", "+ 50", "· (-1)", ""])),
+    question(`${f("2x - 3", "2")} - ${f("2 - 4x", "7")} = 0`, rat(25, 22), [
+      `${f("14x - 21", "14")} - ${f("4 - 8x", "14")} = ${f("0", "14")}`,
+      "14x - 21 - 4 + 8x = 0", "22x - 25 = 0", "22x = 25", `x = ${f("25", "22")}`, `S = {${f("25", "22")}}`,
+    ], commonOps(14, ["+ 25", ": 22", ""])),
+    question(`${f("3", "4")} x - ${f("x", "2")} = 6`, rat(24, 1), [
+      `${f("3x", "4")} - ${f("2x", "4")} = ${f("24", "4")}`,
+      "3x - 2x = 24", "x = 24", "S = {24}",
+    ], commonOps(4, [""])),
+    question(`${f("5 - 7x", "9")} + ${f("1", "2")} = ${f("x", "4")}`, rat(38, 37), [
+      `${f("20 - 28x", "36")} + ${f("18", "36")} = ${f("9x", "36")}`,
+      "20 - 28x + 18 = 9x", "38 - 28x = 9x", "38 = 37x", `x = ${f("38", "37")}`, `S = {${f("38", "37")}}`,
+    ], commonOps(36, ["+ 28x", ": 37", ""])),
+    question(`8x + ${f("3", "5")} = 7 - ${f("8 - 3x", "6")}`, rat(152, 225), [
+      `${f("240x", "30")} + ${f("18", "30")} = ${f("210", "30")} - ${f("40 - 15x", "30")}`,
+      "240x + 18 = 210 - 40 + 15x", "240x + 18 = 170 + 15x", "225x + 18 = 170", "225x = 152", `x = ${f("152", "225")}`, `S = {${f("152", "225")}}`,
+    ], commonOps(30, ["- 15x", "- 18", ": 225", ""])),
+    question(`1 - ${f("2x + 3", "2")} = ${f("5", "2")}`, rat(-3, 1), [
+      `${f("2", "2")} - ${f("2x + 3", "2")} = ${f("5", "2")}`,
+      "2 - 2x - 3 = 5", "-1 - 2x = 5", "-2x = 6", "x = -3", "S = {-3}",
+    ], commonOps(2, ["+ 1", ": (-2)", ""])),
+    question(`10 = ${f("3", "4")} - ${f("8x - 3", "5")}`, rat(-173, 32), [
+      `${f("200", "20")} = ${f("15", "20")} - ${f("32x - 12", "20")}`,
+      "200 = 15 - 32x + 12", "200 = 27 - 32x", "173 = -32x", `x = ${f("-173", "32")}`, `S = {${f("-173", "32")}}`,
+    ], commonOps(20, ["- 27", ": -32", ""])),
+    question(`6x - ${f("8 - x", "2")} = ${f("x + 3", "3")} - 1`, rat(24, 37), [
+      `${f("36x", "6")} - ${f("24 - 3x", "6")} = ${f("2x + 6", "6")} - ${f("6", "6")}`,
+      "36x - 24 + 3x = 2x + 6 - 6", "39x - 24 = 2x", "-24 = -37x", `x = ${f("24", "37")}`, `S = {${f("24", "37")}}`,
+    ], commonOps(6, ["- 39x", ": (-37)", ""])),
+    question(`${f("x - 7", "3")} = ${f("x + 2", "9")}`, rat(23, 2), [
+      `${f("3x - 21", "9")} = ${f("x + 2", "9")}`,
+      "3x - 21 = x + 2", "2x - 21 = 2", "2x = 23", `x = ${f("23", "2")}`, `S = {${f("23", "2")}}`,
+    ], commonOps(9, ["- x", "+ 21", ": 2", ""])),
+    question(`5x - ${f("1", "7")} x = ${f("3", "4")} x + 2`, rat(56, 115), [
+      `${f("140x", "28")} - ${f("4x", "28")} = ${f("21x", "28")} + ${f("56", "28")}`,
+      "140x - 4x = 21x + 56", "115x = 56", `x = ${f("56", "115")}`, `S = {${f("56", "115")}}`,
+    ], commonOps(28, ["- 21x", ": 115", ""])),
+    question(`${f("6x - 7", "3")} = -x + ${f("2", "11")}`, rat(83, 99), [
+      `${f("66x - 77", "33")} = ${f("-33x", "33")} + ${f("6", "33")}`,
+      "66x - 77 = -33x + 6", "99x - 77 = 6", "99x = 83", `x = ${f("83", "99")}`, `S = {${f("83", "99")}}`,
+    ], commonOps(33, ["+ 33x", "+ 77", ": 99", ""])),
+    question(`${f("x - 7", "7")} - ${f("-8 + 2x", "6")} = ${f("1", "2")} x`, rat(14, 29), [
+      `${f("6x - 42", "42")} - ${f("-56 + 14x", "42")} = ${f("21x", "42")}`,
+      "6x - 42 + 56 - 14x = 21x", "-8x + 14 = 21x", "14 = 29x", `x = ${f("14", "29")}`, `S = {${f("14", "29")}}`,
+    ], commonOps(42, ["+ 8x", ": 29", ""])),
+    question(`6 = 8 + ${f("5 - 3x", "3")}`, rat(11, 3), [
+      `${f("18", "3")} = ${f("24", "3")} + ${f("5 - 3x", "3")}`,
+      "18 = 24 + 5 - 3x", "18 = 29 - 3x", "-11 = -3x", `x = ${f("11", "3")}`, `S = {${f("11", "3")}}`,
+    ], commonOps(3, ["- 29", ": (-3)", ""])),
+    question(`${f("8", "7")} - ${f("1", "2")} x = ${f("3", "7")} - ${f("3", "2")} x`, rat(-5, 7), [
+      `${f("16", "14")} - ${f("7x", "14")} = ${f("6", "14")} - ${f("21x", "14")}`,
+      "16 - 7x = 6 - 21x", "16 + 14x = 6", "14x = -10", `x = ${f("-5", "7")}`, `S = {${f("-5", "7")}}`,
+    ], commonOps(14, ["+ 21x", "- 16", ": 14", ""])),
+    question(`${f("x - 1", "3")} = ${f("7 - 3x", "10")}`, rat(31, 19), [
+      `${f("10x - 10", "30")} = ${f("21 - 9x", "30")}`,
+      "10x - 10 = 21 - 9x", "19x - 10 = 21", "19x = 31", `x = ${f("31", "19")}`, `S = {${f("31", "19")}}`,
+    ], commonOps(30, ["+ 9x", "+ 10", ": 19", ""])),
+    question(`5x - ${f("3", "8")} = ${f("1", "3")} + x`, rat(17, 96), [
+      `${f("120x", "24")} - ${f("9", "24")} = ${f("8", "24")} + ${f("24x", "24")}`,
+      "120x - 9 = 8 + 24x", "96x - 9 = 8", "96x = 17", `x = ${f("17", "96")}`, `S = {${f("17", "96")}}`,
+    ], commonOps(24, ["- 24x", "+ 9", ": 96", ""])),
+    question(`${f("5x - 3", "2")} = ${f("x + 7", "8")}`, rat(1, 1), [
+      `${f("20x - 12", "8")} = ${f("x + 7", "8")}`,
+      "20x - 12 = x + 7", "19x - 12 = 7", "19x = 19", "x = 1", "S = {1}",
+    ], commonOps(8, ["- x", "+ 12", ": 19", ""])),
+    question(`7 - ${f("2x + 3", "5")} = ${f("1", "4")} x + 2`, rat(88, 13), [
+      `${f("140", "20")} - ${f("8x + 12", "20")} = ${f("5x", "20")} + ${f("40", "20")}`,
+      "140 - 8x - 12 = 5x + 40", "128 - 8x = 5x + 40", "128 - 13x = 40", "-13x = -88", `x = ${f("88", "13")}`, `S = {${f("88", "13")}}`,
+    ], commonOps(20, ["- 5x", "- 128", ": (-13)", ""])),
+    question(`5x - 3 = ${f("1", "2")} + 2x`, rat(7, 6), [
+      `${f("10x", "2")} - ${f("6", "2")} = ${f("1", "2")} + ${f("4x", "2")}`,
+      "10x - 6 = 1 + 4x", "6x - 6 = 1", "6x = 7", `x = ${f("7", "6")}`, `S = {${f("7", "6")}}`,
+    ], commonOps(2, ["- 4x", "+ 6", ": 6", ""])),
+    question(`${f("8", "5")} - ${f("3", "2")} x = 7 + 5x`, rat(-54, 65), [
+      `${f("16", "10")} - ${f("15x", "10")} = ${f("70", "10")} + ${f("50x", "10")}`,
+      "16 - 15x = 70 + 50x", "16 - 65x = 70", "-65x = 54", `x = ${f("-54", "65")}`, `S = {${f("-54", "65")}}`,
+    ], commonOps(10, ["- 50x", "- 16", ": (-65)", ""])),
+    question(`${f("3", "7")} - ${f("x + 2", "2")} = ${f("1", "4")} x`, rat(-16, 21), [
+      `${f("12", "28")} - ${f("14x + 28", "28")} = ${f("7x", "28")}`,
+      "12 - 14x - 28 = 7x", "-16 - 14x = 7x", "-16 = 21x", `x = ${f("-16", "21")}`, `S = {${f("-16", "21")}}`,
+    ], commonOps(28, ["+ 14x", ": 21", ""])),
+    question(`3 - ${f("2x - 7", "3")} = ${f("4", "6")} + x`, rat(14, 5), [
+      `${f("18", "6")} - ${f("4x - 14", "6")} = ${f("4", "6")} + ${f("6x", "6")}`,
+      "18 - 4x + 14 = 4 + 6x", "32 - 4x = 4 + 6x", "32 - 10x = 4", "-10x = -28", `x = ${f("14", "5")}`, `S = {${f("14", "5")}}`,
+    ], commonOps(6, ["- 6x", "- 32", ": (-10)", ""])),
+    question(`${f("5", "2")} - 2x = 6x + ${f("3", "5")}`, rat(19, 80), [
+      `${f("25", "10")} - ${f("20x", "10")} = ${f("60x", "10")} + ${f("6", "10")}`,
+      "25 - 20x = 60x + 6", "25 - 80x = 6", "-80x = -19", `x = ${f("19", "80")}`, `S = {${f("19", "80")}}`,
+    ], commonOps(10, ["- 60x", "- 25", ": (-80)", ""])),
+    question(`${f("4", "3")} x + 2 = 5x`, rat(6, 11), [
+      `${f("4x", "3")} + ${f("6", "3")} = ${f("15x", "3")}`,
+      "4x + 6 = 15x", "-11x + 6 = 0", "-11x = -6", `x = ${f("6", "11")}`, `S = {${f("6", "11")}}`,
+    ], commonOps(3, ["- 15x", "- 6", ": (-11)", ""])),
+    question(`${f("7x - 2", "3")} + ${f("1", "4")} = 2`, rat(29, 28), [
+      `${f("28x - 8", "12")} + ${f("3", "12")} = ${f("24", "12")}`,
+      "28x - 8 + 3 = 24", "28x - 5 = 24", "28x = 29", `x = ${f("29", "28")}`, `S = {${f("29", "28")}}`,
+    ], commonOps(12, ["+ 5", ": 28", ""])),
+    question(`4 - ${f("1", "5")} x = ${f("2", "3")} + x`, rat(25, 9), [
+      `${f("60", "15")} - ${f("3x", "15")} = ${f("10", "15")} + ${f("15x", "15")}`,
+      "60 - 3x = 10 + 15x", "60 - 18x = 10", "-18x = -50", `x = ${f("25", "9")}`, `S = {${f("25", "9")}}`,
+    ], commonOps(15, ["- 15x", "- 60", ": (-18)", ""])),
+    question(`${f("8", "3")} - ${f("5 - 3x", "2")} = ${f("2", "5")}`, rat(7, 45), [
+      `${f("80", "30")} - ${f("75 - 45x", "30")} = ${f("12", "30")}`,
+      "80 - 75 + 45x = 12", "5 + 45x = 12", "45x = 7", `x = ${f("7", "45")}`, `S = {${f("7", "45")}}`,
+    ], commonOps(30, ["- 5", ": 45", ""])),
+    question(`8 - ${f("2", "3")} x = - ${f("1", "2")} x + 4`, rat(24, 1), [
+      `${f("48", "6")} - ${f("4x", "6")} = ${f("-3x", "6")} + ${f("24", "6")}`,
+      "48 - 4x = -3x + 24", "48 - x = 24", "-x = -24", "x = 24", "S = {24}",
+    ], commonOps(6, ["+ 3x", "- 48", "· (-1)", ""])),
+    question(`${f("x - 2", "3")} + ${f("2x - 3", "5")} = 1`, rat(34, 11), [
+      `${f("5x - 10", "15")} + ${f("6x - 9", "15")} = ${f("15", "15")}`,
+      "5x - 10 + 6x - 9 = 15", "11x - 19 = 15", "11x = 34", `x = ${f("34", "11")}`, `S = {${f("34", "11")}}`,
+    ], commonOps(15, ["+ 19", ": 11", ""])),
+  ];
+  return { kind: "equation_group", lesson, exNum: 1, questions: [templates[Math.floor(Math.random() * templates.length)]!] };
 }
 
 const ALGEBRA_SYMBOLS = ["a", "b", "c", "m", "n", "x", "y"] as const;
@@ -7863,7 +7911,7 @@ export function GenericModuleContent({
               <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">Résolvez l&apos;équation. Écrivez le développement, puis la valeur de x.</p>
               <div className="space-y-5">
-                <div className="mb-5 text-center font-mono text-lg text-[var(--color-text-primary)]">{q.expr}</div>
+                <div className="mb-5 text-center font-mono text-lg text-[var(--color-text-primary)]">{renderText(q.expr)}</div>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
                     <div key={i}>
@@ -7918,14 +7966,14 @@ export function GenericModuleContent({
                           <div key={`${line}-${i}`} className="grid grid-cols-[minmax(5rem,1fr)_1rem_minmax(5rem,1fr)_minmax(3.5rem,auto)] items-center gap-2">
                             {hasEquation ? (
                               <>
-                                <span className="text-right">{line.slice(0, equalIndex).trim()}</span>
+                                <span className="text-right">{renderText(line.slice(0, equalIndex).trim())}</span>
                                 <span className="text-center">=</span>
-                                <span>{line.slice(equalIndex + 1).trim()}</span>
+                                <span>{renderText(line.slice(equalIndex + 1).trim())}</span>
                               </>
                             ) : (
-                              <span className="col-span-3 text-center font-bold">{line}</span>
+                              <span className="col-span-3 text-center font-bold">{renderText(line)}</span>
                             )}
-                            <span className={`min-h-5 border-l border-amber-500 pl-3 ${op ? "" : "text-transparent"}`}>{op || "."}</span>
+                            <span className={`min-h-5 whitespace-pre-line border-l border-amber-500 pl-3 ${op ? "" : "text-transparent"}`}>{op || "."}</span>
                           </div>
                         );
                       })}
@@ -7948,7 +7996,7 @@ export function GenericModuleContent({
                 return (
                   <div key={i} className="flex flex-wrap items-center gap-2">
                     <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
+                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{renderText(q.expr)}</span>
                     <span className="text-sm text-[var(--color-text-secondary)] mx-1">x =</span>
                     {isWrong ? (
                       <div className="w-24 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
