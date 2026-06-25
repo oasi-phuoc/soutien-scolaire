@@ -570,8 +570,9 @@ function genA24ContextProblem(): WordProblemQ {
       return { textFr: `${name} gagne ${base} francs par mois. Son amie gagne ${plus} francs de plus. Combien gagne son amie ?`, answer: base + plus, op: "+", calculation: `${base} + ${plus} = ${base + plus}` };
     },
     () => {
-      const mariam = rnd(700, 1800), diff = rnd(80, 360);
-      return { textFr: `${name} collectionne les gommettes. Il en a ${mariam}. Il en a ${diff} de moins que Sofia. Combien de gommettes Sofia a-t-elle ?`, answer: mariam + diff, op: "+", calculation: `${mariam} + ${diff} = ${mariam + diff}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const count = rnd(700, 1800), diff = rnd(80, 360);
+      return { textFr: `${name} collectionne les gommettes. ${name} en a ${count}. C'est ${diff} de moins que ${name2}. Combien ${name2} en a-t-il ?`, answer: count + diff, op: "+", calculation: `${count} + ${diff} = ${count + diff}` };
     },
     () => {
       const today = rnd(60, 180), diff = rnd(20, 110);
@@ -595,8 +596,9 @@ function genA24ContextProblem(): WordProblemQ {
       return { textFr: `${name} a ${grande} livres dans sa bibliothèque. Il en a ${diff} de plus que son frère. Combien de livres son frère a-t-il ?`, answer: grande - diff, op: "-", calculation: `${grande} − ${diff} = ${grande - diff}` };
     },
     () => {
-      const aicha = rnd(1200, 4200), timurPlus = rnd(400, 1900);
-      return { textFr: `Dans un jeu, Aïcha possède ${aicha} francs. Timur a ${timurPlus} francs de plus qu'Aïcha. Combien d'argent possède Timur ?`, answer: aicha + timurPlus, op: "+", calculation: `${aicha} + ${timurPlus} = ${aicha + timurPlus}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const n1Money = rnd(1200, 4200), moreMoney = rnd(400, 1900);
+      return { textFr: `Dans un jeu, ${name} possède ${n1Money} francs. ${name2} a ${moreMoney} francs de plus. Combien ${name2} possède-t-il ?`, answer: n1Money + moreMoney, op: "+", calculation: `${n1Money} + ${moreMoney} = ${n1Money + moreMoney}` };
     },
     () => {
       const bleus = rnd(40, 130), vertsPlus = rnd(20, 70), rougesMoins = rnd(10, 50);
@@ -736,7 +738,7 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const cards = rnd(8, 24), per = rnd(35, 180);
-      return { textFr: `${name} a acheté ${cards} cartes. Chaque carte contient ${per} papillons. Combien de papillons a-t-elle en tout ?`, answer: cards * per, op: "×", calculation: `${cards} × ${per} = ${cards * per}` };
+      return { textFr: `${name} a acheté ${cards} cartes. Chaque carte contient ${per} papillons. Combien de papillons cela représente-t-il en tout ?`, answer: cards * per, op: "×", calculation: `${cards} × ${per} = ${cards * per}` };
     },
     () => {
       const francs = rnd(8, 28), students = rnd(15, 75);
@@ -776,7 +778,7 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const perDay = rnd(3, 8), days = 31, absent = rnd(4, 14);
-      return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. Elle est absente pendant ${absent} jours. Combien de bûches brûle-t-elle en décembre ?`, answer: perDay * (days - absent), op: "×", calculation: `${perDay} × ${days - absent} = ${perDay * (days - absent)}` };
+      return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. ${name} est absent(e) pendant ${absent} jours. Combien de bûches sont brûlées en décembre ?`, answer: perDay * (days - absent), op: "×", calculation: `${perDay} × ${days - absent} = ${perDay * (days - absent)}` };
     },
     () => {
       const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4), omelets = rnd(20, 80);
@@ -800,33 +802,35 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const buildings = rnd(8, 35), apartments = rnd(12, 48);
-      return { textFr: `Amandine a 10 ans. Elle vient de déménager avec ses parents et ses 2 frères dans un nouveau quartier qui compte ${buildings} immeubles de ${apartments} appartements chacun. Combien d'appartements y a-t-il dans le quartier d'Amandine ?`, answer: buildings * apartments, op: "×", calculation: `${buildings} × ${apartments} = ${buildings * apartments}` };
+      return { textFr: `${name} déménage dans un nouveau quartier qui compte ${buildings} immeubles de ${apartments} appartements chacun. Combien d'appartements y a-t-il dans ce quartier ?`, answer: buildings * apartments, op: "×", calculation: `${buildings} × ${apartments} = ${buildings * apartments}` };
     },
     () => {
       const remaining = rnd(20, 90), factor = rnd(3, 8);
-      return { textFr: `Après ses achats, Alain a encore ${remaining} francs dans son portemonnaie. Il a ${factor} fois moins d'argent que ce qu'il avait avant de faire ses achats. Combien Alain avait-il d'argent avant ses dépenses ?`, answer: remaining * factor, op: "×", calculation: `${remaining} × ${factor} = ${remaining * factor}` };
+      return { textFr: `Après ses achats, ${name} a encore ${remaining} fr. dans son portemonnaie. C'est ${factor} fois moins qu'avant les achats. Quel montant ${name} avait-il avant ?`, answer: remaining * factor, op: "×", calculation: `${remaining} × ${factor} = ${remaining * factor}` };
     },
     () => {
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
       const saved = rnd(20, 120), diff = rnd(5, 40);
-      return { textFr: `Monique a économisé ${saved} francs. Elle a économisé ${diff} francs de moins que Didier. Combien d'argent Didier a-t-il économisé ?`, answer: saved + diff, op: "+", calculation: `${saved} + ${diff} = ${saved + diff}` };
+      return { textFr: `${name} a économisé ${saved} fr. C'est ${diff} fr. de moins que ${name2}. Combien ${name2} a-t-il économisé ?`, answer: saved + diff, op: "+", calculation: `${saved} + ${diff} = ${saved + diff}` };
     },
     () => {
-      const paola = rnd(12, 45), plus = rnd(3, 18);
-      return { textFr: `Paola a planté ${paola} tulipes. Son papa a planté ${plus} tulipes de plus qu'elle. Combien de tulipes le papa de Paola a-t-il plantées ?`, answer: paola + plus, op: "+", calculation: `${paola} + ${plus} = ${paola + plus}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const nameCount = rnd(12, 45), morePlanted = rnd(3, 18);
+      return { textFr: `${name} a planté ${nameCount} tulipes. ${name2} en a planté ${morePlanted} de plus. Combien ${name2} a-t-il planté de tulipes ?`, answer: nameCount + morePlanted, op: "+", calculation: `${nameCount} + ${morePlanted} = ${nameCount + morePlanted}` };
     },
     () => {
       const bouquets = rnd(12, 40), roses = rnd(3, 12);
-      return { textFr: `La maman de Paola, qui est fleuriste, a composé ${bouquets} bouquets de roses. Dans chaque bouquet, il y a ${roses} roses. Combien de roses a-t-elle utilisées pour composer les bouquets ?`, answer: bouquets * roses, op: "×", calculation: `${bouquets} × ${roses} = ${bouquets * roses}` };
+      return { textFr: `${name}, fleuriste, compose ${bouquets} bouquets de roses. Dans chaque bouquet, il y a ${roses} roses. Combien de roses ont été utilisées en tout ?`, answer: bouquets * roses, op: "×", calculation: `${bouquets} × ${roses} = ${bouquets * roses}` };
     },
     () => {
       const towers = rnd(4, 16), cubes = rnd(8, 25);
-      return { textFr: `Zaha a construit ${towers} tours. Chaque tour est formée de ${cubes} cubes. Combien de cubes Zaha a-t-elle utilisés pour construire ses tours ?`, answer: towers * cubes, op: "×", calculation: `${towers} × ${cubes} = ${towers * cubes}` };
+      return { textFr: `${name} a construit ${towers} tours. Chaque tour est formée de ${cubes} cubes. Combien de cubes ont été utilisés en tout ?`, answer: towers * cubes, op: "×", calculation: `${towers} × ${cubes} = ${towers * cubes}` };
     },
     () => {
-      const zahaTowers = rnd(4, 10), zahaCubes = rnd(8, 16), marioTowers = rnd(11, 22), marioCubes = rnd(14, 28);
-      const zahaTotal = zahaTowers * zahaCubes;
-      const marioTotal = marioTowers * marioCubes;
-      return { textFr: `Zaha a construit ${zahaTowers} tours de ${zahaCubes} cubes. Mario a construit ${marioTowers} tours de ${marioCubes} cubes. Combien de cubes Mario a-t-il utilisés de plus que Zaha ?`, answer: marioTotal - zahaTotal, op: "-", calculation: `${marioTotal} − ${zahaTotal} = ${marioTotal - zahaTotal}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const towers1 = rnd(4, 10), cubes1 = rnd(8, 16), towers2 = rnd(11, 22), cubes2 = rnd(14, 28);
+      const total1 = towers1 * cubes1, total2 = towers2 * cubes2;
+      return { textFr: `${name} a construit ${towers1} tours de ${cubes1} cubes. ${name2} a construit ${towers2} tours de ${cubes2} cubes. De combien de cubes ${name2} en a-t-il utilisé de plus ?`, answer: total2 - total1, op: "-", calculation: `${total2} − ${total1} = ${total2 - total1}` };
     },
     () => {
       const rows = rnd(12, 28), places = rnd(10, 24);
@@ -887,15 +891,16 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Un cuisinier a acheté ${trays} plateaux de ${perTray} œufs. Il utilise ${perOmelet} œufs pour faire une omelette. Combien lui reste-t-il d'œufs après avoir préparé ${omelets} omelettes ?`, answer: trays * perTray - perOmelet * omelets, op: "-", calculation: `${trays * perTray} − ${perOmelet * omelets} = ${trays * perTray - perOmelet * omelets}` };
     },
     () => {
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
       const brownPages = rnd(10, 20), brownPer = rnd(8, 16), yellowPages = rnd(8, 18), yellowPer = rnd(8, 16), greenPages = rnd(6, 14), greenPer = rnd(12, 22);
       const brown = brownPages * brownPer, yellow = yellowPages * yellowPer, green = greenPages * greenPer;
-      return { textFr: `Dalila et Pascal regardent trois albums de photos : un album brun de ${brownPages} pages avec ${brownPer} photos par page, un album jaune de ${yellowPages} pages avec ${yellowPer} photos par page et un album vert de ${greenPages} pages avec ${greenPer} photos par page. Combien de photos contient l'album qui en a le plus ?`, answer: Math.max(brown, yellow, green), op: "×", calculation: `max(${brown}, ${yellow}, ${green}) = ${Math.max(brown, yellow, green)}` };
+      return { textFr: `${name} et ${name2} regardent trois albums de photos : un album brun de ${brownPages} pages avec ${brownPer} photos par page, un album jaune de ${yellowPages} pages avec ${yellowPer} photos par page et un album vert de ${greenPages} pages avec ${greenPer} photos par page. Combien de photos contient l'album qui en a le plus ?`, answer: Math.max(brown, yellow, green), op: "×", calculation: `max(${brown}, ${yellow}, ${green}) = ${Math.max(brown, yellow, green)}` };
     },
     () => {
       const students = rnd(12, 28), price = rnd(500, 900) / 100, budget = rnd(120, 220);
       const cost = Math.round(students * price * 100) / 100;
       const rest = Math.round((budget - cost) * 100) / 100;
-      return { textFr: `Monsieur Pagan souhaite aller au zoo avec ses ${students} élèves. L'entrée coûte ${price.toLocaleString("fr-CH")} francs par enfant. Les enseignants ne paient pas. Il a ${budget} francs. Combien d'argent lui restera-t-il après avoir payé les entrées ?`, answer: rest, op: "-", calculation: `${budget} − ${cost.toLocaleString("fr-CH")} = ${rest.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} souhaite aller au zoo avec ${students} élèves. L'entrée coûte ${price.toLocaleString("fr-CH")} fr. par enfant. Les accompagnants ne paient pas. ${name} a ${budget} fr. Combien d'argent restera-t-il après avoir payé les entrées ?`, answer: rest, op: "-", calculation: `${budget} − ${cost.toLocaleString("fr-CH")} = ${rest.toLocaleString("fr-CH")}` };
     },
     () => {
       const students = rnd(40, 90), transport = rnd(350, 700) / 100, entry = rnd(300, 800) / 100, budget = rnd(450, 850);
@@ -914,21 +919,21 @@ function genA37MultDivProblem(): WordProblemQ {
       const money = students * received;
       const cost = Math.round((bus + students * entry + students * ice) * 100) / 100;
       const diff = Math.round(Math.abs(money - cost) * 100) / 100;
-      return { textFr: `Madame Davet va au musée avec ses ${students} élèves. Elle reçoit ${received} francs pour chaque élève. Elle paie ${bus} francs pour le bus, ${entry.toLocaleString("fr-CH")} francs par élève pour l'entrée et veut acheter une glace à ${ice} francs pour chaque élève. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${money} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} va au musée avec ${students} élèves. ${name} reçoit ${received} fr. par élève. ${name} paie ${bus} fr. pour le bus, ${entry.toLocaleString("fr-CH")} fr. par élève pour l'entrée et ${ice} fr. par élève pour une glace. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${money} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
     },
     () => {
       const book = rnd(2500, 6500) / 100, diff = rnd(800, 1800) / 100, puzzle = rnd(2000, 5000) / 100, plush = rnd(2000, 5000) / 100, paid = [150, 200, 250][rnd(0, 2)]!;
       const game = Math.round((book + diff) * 100) / 100;
       const change = Math.round((paid - book - game - puzzle - plush) * 100) / 100;
-      return { textFr: `Elie achète un livre à ${book.toLocaleString("fr-CH")} francs. C'est ${diff.toLocaleString("fr-CH")} francs de moins que le jeu qu'il achète aussi. Il ajoute un puzzle à ${puzzle.toLocaleString("fr-CH")} francs et une peluche à ${plush.toLocaleString("fr-CH")} francs. Il paie avec ${paid} francs. Combien le vendeur lui rend-il ?`, answer: change, op: "-", calculation: `${paid} − ${book.toLocaleString("fr-CH")} − ${game.toLocaleString("fr-CH")} − ${puzzle.toLocaleString("fr-CH")} − ${plush.toLocaleString("fr-CH")} = ${change.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} achète un livre à ${book.toLocaleString("fr-CH")} fr. C'est ${diff.toLocaleString("fr-CH")} fr. de moins que le jeu acheté aussi. ${name} ajoute un puzzle à ${puzzle.toLocaleString("fr-CH")} fr. et une peluche à ${plush.toLocaleString("fr-CH")} fr. ${name} paie avec ${paid} fr. Combien le vendeur lui rend-il ?`, answer: change, op: "-", calculation: `${paid} − ${book.toLocaleString("fr-CH")} − ${game.toLocaleString("fr-CH")} − ${puzzle.toLocaleString("fr-CH")} − ${plush.toLocaleString("fr-CH")} = ${change.toLocaleString("fr-CH")}` };
     },
     () => {
       const sticks = rnd(800, 2500), perPack = [10, 20, 25, 50][rnd(0, 3)]!;
-      return { textFr: `Philippe range ses ${sticks} bâtonnets. Chaque fois qu'il a ${perPack} bâtonnets, il forme un petit paquet et l'attache avec un élastique rouge. Combien d'élastiques rouges utilise-t-il ?`, answer: Math.floor(sticks / perPack), op: "÷", calculation: `${sticks} ÷ ${perPack} = ${Math.floor(sticks / perPack)}` };
+      return { textFr: `${name} range ses ${sticks} bâtonnets. Chaque fois qu'${name} a ${perPack} bâtonnets, ${name} forme un paquet et l'attache avec un élastique rouge. Combien d'élastiques rouges sont utilisés ?`, answer: Math.floor(sticks / perPack), op: "÷", calculation: `${sticks} ÷ ${perPack} = ${Math.floor(sticks / perPack)}` };
     },
     () => {
       const beads = rnd(1200, 4200), perNecklace = [50, 100, 120, 150][rnd(0, 3)]!;
-      return { textFr: `Laura est bijoutière. Elle possède ${beads} petites perles de verre. Elle décide de fabriquer des colliers de ${perNecklace} perles exactement. Combien de colliers peut-elle fabriquer ?`, answer: Math.floor(beads / perNecklace), op: "÷", calculation: `${beads} ÷ ${perNecklace} = ${Math.floor(beads / perNecklace)}` };
+      return { textFr: `${name}, bijoutier/ère, possède ${beads} petites perles de verre. ${name} décide de fabriquer des colliers de ${perNecklace} perles exactement. Combien de colliers peuvent être fabriqués ?`, answer: Math.floor(beads / perNecklace), op: "÷", calculation: `${beads} ÷ ${perNecklace} = ${Math.floor(beads / perNecklace)}` };
     },
     () => {
       const candies = rnd(800, 1800), perBag = [10, 20, 25][rnd(0, 2)]!;
@@ -945,11 +950,12 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const green = rnd(8, 25), yellow = green * 2;
-      return { textFr: `Dans son sac, Réal a ${green + yellow} billes en tout. Certaines sont jaunes, les autres sont vertes. Il y a deux fois plus de billes jaunes que de billes vertes. Combien y a-t-il de billes jaunes ?`, answer: yellow, op: "÷", calculation: `${green + yellow} ÷ 3 × 2 = ${yellow}` };
+      return { textFr: `Dans son sac, ${name} a ${green + yellow} billes en tout. Certaines sont jaunes, les autres sont vertes. Il y a deux fois plus de billes jaunes que de billes vertes. Combien y a-t-il de billes jaunes ?`, answer: yellow, op: "÷", calculation: `${green + yellow} ÷ 3 × 2 = ${yellow}` };
     },
     () => {
-      const reagan = rnd(120, 260), diff = rnd(10, 60);
-      return { textFr: `Reagan a ${reagan} livres dans sa bibliothèque. Elle en a ${diff} de plus que son frère Miles. Combien de livres Miles a-t-il dans sa bibliothèque ?`, answer: reagan - diff, op: "-", calculation: `${reagan} − ${diff} = ${reagan - diff}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const n1books = rnd(120, 260), diff = rnd(10, 60);
+      return { textFr: `${name} a ${n1books} livres dans sa bibliothèque. C'est ${diff} de plus que ${name2}. Combien de livres ${name2} a-t-il dans sa bibliothèque ?`, answer: n1books - diff, op: "-", calculation: `${n1books} − ${diff} = ${n1books - diff}` };
     },
     () => {
       const length = rnd(30, 90), width = rnd(6, 20);
@@ -957,7 +963,7 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const bottles = rnd(120, 360), perBox = [12, 18, 24][rnd(0, 2)]!;
-      return { textFr: `José et Anne emballent ${bottles} bouteilles d'huile d'olive dans des cartons de ${perBox} bouteilles. Combien de cartons peuvent-ils remplir entièrement ?`, answer: Math.floor(bottles / perBox), op: "÷", calculation: `${bottles} ÷ ${perBox} = ${Math.floor(bottles / perBox)}` };
+      return { textFr: `${name} et des collègues emballent ${bottles} bouteilles d'huile d'olive dans des cartons de ${perBox} bouteilles. Combien de cartons peuvent-ils remplir entièrement ?`, answer: Math.floor(bottles / perBox), op: "÷", calculation: `${bottles} ÷ ${perBox} = ${Math.floor(bottles / perBox)}` };
     },
     () => {
       const sheets = rnd(80, 240), rows = rnd(2, 5), cols = rnd(5, 10);
@@ -965,20 +971,22 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const first = rnd(8, 25), more = rnd(3, 10);
-      return { textFr: `Paola est allée deux fois à la piscine cette semaine. La première fois, elle a fait ${first} traversées. La deuxième fois, elle en a fait ${more} de plus que la première fois. Combien a-t-elle fait de traversées cette semaine ?`, answer: first + first + more, op: "+", calculation: `${first} + ${first + more} = ${first + first + more}` };
+      return { textFr: `${name} est allé(e) deux fois à la piscine cette semaine. La première fois, ${name} a fait ${first} traversées. La deuxième fois, ${name} en a fait ${more} de plus. Combien de traversées en tout ?`, answer: first + first + more, op: "+", calculation: `${first} + ${first + more} = ${first + first + more}` };
     },
     () => {
       const saved = rnd(9000, 22000) / 100, missing = rnd(1000, 6000) / 100;
       const price = Math.round((saved + missing) * 100) / 100;
-      return { textFr: `Chloé aimerait s'acheter une paire de baskets. Elle a déjà économisé ${saved.toLocaleString("fr-CH")} francs et sa maman lui donne les ${missing.toLocaleString("fr-CH")} francs qui lui manquent. Combien coûte la paire de baskets ?`, answer: price, op: "+", calculation: `${saved.toLocaleString("fr-CH")} + ${missing.toLocaleString("fr-CH")} = ${price.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} aimerait s'acheter une paire de baskets. ${name} a déjà économisé ${saved.toLocaleString("fr-CH")} fr. et reçoit ${missing.toLocaleString("fr-CH")} fr. en cadeau. Combien coûte la paire de baskets ?`, answer: price, op: "+", calculation: `${saved.toLocaleString("fr-CH")} + ${missing.toLocaleString("fr-CH")} = ${price.toLocaleString("fr-CH")}` };
     },
     () => {
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
       const expensive = rnd(120, 420);
-      return { textFr: `Fabien a dépensé ${expensive} francs pour un nouvel aspirateur. L'aspirateur de Maya est deux fois moins cher. Quel est le prix de l'aspirateur de Maya ?`, answer: expensive / 2, op: "÷", calculation: `${expensive} ÷ 2 = ${expensive / 2}` };
+      return { textFr: `${name} a dépensé ${expensive} fr. pour un nouvel aspirateur. L'aspirateur de ${name2} est deux fois moins cher. Quel est le prix de l'aspirateur de ${name2} ?`, answer: expensive / 2, op: "÷", calculation: `${expensive} ÷ 2 = ${expensive / 2}` };
     },
     () => {
-      const leo = rnd(120, 420), diff = rnd(10, 80);
-      return { textFr: `Jeanne a fait un parcours en voiture de ${leo} km. Bertrand a fait un trajet de ${diff} kilomètres de moins. Combien de kilomètres Bertrand a-t-il parcourus ?`, answer: leo - diff, op: "-", calculation: `${leo} − ${diff} = ${leo - diff}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const dist1 = rnd(120, 420), diff = rnd(10, 80);
+      return { textFr: `${name} a fait un trajet de ${dist1} km. ${name2} a fait un trajet de ${diff} km de moins. Combien de kilomètres ${name2} a-t-il parcourus ?`, answer: dist1 - diff, op: "-", calculation: `${dist1} − ${diff} = ${dist1 - diff}` };
     },
     () => {
       const pupils = rnd(15, 28), minigolf = rnd(900, 1600) / 100, ice = rnd(250, 550) / 100;
@@ -997,12 +1005,14 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const startBlue = rnd(12, 30), addedEach = rnd(10, 25), total = startBlue + addedEach * 2;
-      return { textFr: `Ahmed fait un collier de perles pour sa maman. Il a déjà enfilé ${startBlue} perles bleues. Il ajoute ensuite le même nombre de perles bleues que de perles blanches. Une fois terminé, le collier comporte ${total} perles. Combien y a-t-il de perles bleues en tout sur le collier ?`, answer: startBlue + addedEach, op: "+", calculation: `${startBlue} + (${total} − ${startBlue}) ÷ 2 = ${startBlue + addedEach}` };
+      return { textFr: `${name} fait un collier de perles. ${name} a déjà enfilé ${startBlue} perles bleues. ${name} ajoute ensuite le même nombre de perles bleues que de perles blanches. Une fois terminé, le collier comporte ${total} perles. Combien y a-t-il de perles bleues en tout ?`, answer: startBlue + addedEach, op: "+", calculation: `${startBlue} + (${total} − ${startBlue}) ÷ 2 = ${startBlue + addedEach}` };
     },
     () => {
-      const louane = rnd(3000, 7000), minus = rnd(800, 2200), plus = rnd(900, 2600);
-      const juliette = louane - minus, timeo = juliette + plus;
-      return { textFr: `Dans un jeu de société, Louane a ${louane} francs. Juliette a ${minus} francs de moins que Louane. Timéo a ${plus} francs de plus que Juliette. Combien d'argent Timéo possède-t-il ?`, answer: timeo, op: "+", calculation: `${louane} − ${minus} + ${plus} = ${timeo}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const name3 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const n1money = rnd(3000, 7000), minus = rnd(800, 2200), plus = rnd(900, 2600);
+      const n2money = n1money - minus, n3money = n2money + plus;
+      return { textFr: `Dans un jeu de société, ${name} a ${n1money} francs. ${name2} a ${minus} francs de moins que ${name}. ${name3} a ${plus} francs de plus que ${name2}. Combien ${name3} possède-t-il ?`, answer: n3money, op: "+", calculation: `${n1money} − ${minus} + ${plus} = ${n3money}` };
     },
     () => {
       const blue = rnd(60, 140), greenMore = rnd(20, 70), redLess = rnd(20, 60);
@@ -1011,21 +1021,22 @@ function genA37MultDivProblem(): WordProblemQ {
     },
     () => {
       const mountains = rnd(80, 240), forests = rnd(60, 180), horses = rnd(70, 180), mice = rnd(70, 180);
-      return { textFr: `Sacha photographie souvent la nature. Sur son ordinateur, elle a ${mountains} photos de montagnes, ${forests} photos de forêts, ${horses} photos de chevaux et ${mice} photos de souris. Combien a-t-elle de photos d'animaux en tout ?`, answer: horses + mice, op: "+", calculation: `${horses} + ${mice} = ${horses + mice}` };
+      return { textFr: `${name} photographie souvent la nature. Sur son ordinateur, ${name} a ${mountains} photos de montagnes, ${forests} photos de forêts, ${horses} photos de chevaux et ${mice} photos de souris. Combien ${name} a-t-il de photos d'animaux en tout ?`, answer: horses + mice, op: "+", calculation: `${horses} + ${mice} = ${horses + mice}` };
     },
     () => {
       const salary = rnd(3200, 5600) + 0.5, remaining = rnd(900, 2600) + 0.7;
       const spent = Math.round((salary - remaining) * 100) / 100;
-      return { textFr: `Par mois, Antoine gagne un salaire de ${salary.toLocaleString("fr-CH")} francs. Après avoir payé toutes les factures, il a encore ${remaining.toLocaleString("fr-CH")} francs. Combien a-t-il dépensé d'argent ?`, answer: spent, op: "-", calculation: `${salary.toLocaleString("fr-CH")} − ${remaining.toLocaleString("fr-CH")} = ${spent.toLocaleString("fr-CH")}` };
+      return { textFr: `Par mois, ${name} gagne ${salary.toLocaleString("fr-CH")} fr. Après avoir payé toutes les factures, ${name} a encore ${remaining.toLocaleString("fr-CH")} fr. Combien ${name} a-t-il dépensé ?`, answer: spent, op: "-", calculation: `${salary.toLocaleString("fr-CH")} − ${remaining.toLocaleString("fr-CH")} = ${spent.toLocaleString("fr-CH")}` };
     },
     () => {
-      const corentin = rnd(800, 2400), diff = rnd(80, 320);
-      return { textFr: `Quentin et Daniela collectionnent les gommettes. Corentin a ${corentin} gommettes. Il en a ${diff} de moins que Daniela. Combien y a-t-il de gommettes dans la collection de Daniela ?`, answer: corentin + diff, op: "+", calculation: `${corentin} + ${diff} = ${corentin + diff}` };
+      const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+      const n1gommettes = rnd(800, 2400), diff = rnd(80, 320);
+      return { textFr: `${name} et ${name2} collectionnent les gommettes. ${name} en a ${n1gommettes}. C'est ${diff} de moins que ${name2}. Combien ${name2} a-t-il de gommettes ?`, answer: n1gommettes + diff, op: "+", calculation: `${n1gommettes} + ${diff} = ${n1gommettes + diff}` };
     },
     () => {
       const budget = rnd(250, 600), grocery = rnd(5000, 14000) / 100, bakery = rnd(900, 3500) / 100, remaining = rnd(60, 220);
       const butcher = Math.round((budget - grocery - bakery - remaining) * 100) / 100;
-      return { textFr: `Pour faire ses courses, le papa de Romain dispose de ${budget} francs. Il dépense ${grocery.toLocaleString("fr-CH")} francs à l'épicerie et ${bakery.toLocaleString("fr-CH")} francs à la boulangerie. Puis il passe encore à la boucherie. Une fois ses courses terminées, il lui reste ${remaining} francs. Combien a-t-il dépensé à la boucherie ?`, answer: butcher, op: "-", calculation: `${budget} − ${grocery.toLocaleString("fr-CH")} − ${bakery.toLocaleString("fr-CH")} − ${remaining} = ${butcher.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} dispose de ${budget} fr. pour faire ses courses. ${name} dépense ${grocery.toLocaleString("fr-CH")} fr. à l'épicerie et ${bakery.toLocaleString("fr-CH")} fr. à la boulangerie, puis passe à la boucherie. Une fois les courses terminées, il reste ${remaining} fr. Combien a-t-il été dépensé à la boucherie ?`, answer: butcher, op: "-", calculation: `${budget} − ${grocery.toLocaleString("fr-CH")} − ${bakery.toLocaleString("fr-CH")} − ${remaining} = ${butcher.toLocaleString("fr-CH")}` };
     },
     () => {
       const monday = rnd(120, 360), more = rnd(30, 120);
@@ -1034,11 +1045,11 @@ function genA37MultDivProblem(): WordProblemQ {
     () => {
       const total = rnd(1800, 3200), instrument = rnd(120000, 220000) / 100, caseAndAccessories = rnd(12000, 42000) / 100;
       const bow = Math.round((total - instrument - caseAndAccessories) * 100) / 100;
-      return { textFr: `Clémence s'est acheté un violon complet dans un étui avec tous les accessoires et l'archet. Elle a payé ${total} francs. Le prix de l'instrument est de ${instrument.toLocaleString("fr-CH")} francs. L'étui et les accessoires ont coûté ${caseAndAccessories.toLocaleString("fr-CH")} francs. Que coûte l'archet ?`, answer: bow, op: "-", calculation: `${total} − ${instrument.toLocaleString("fr-CH")} − ${caseAndAccessories.toLocaleString("fr-CH")} = ${bow.toLocaleString("fr-CH")}` };
+      return { textFr: `${name} a acheté un violon complet avec étui, accessoires et archet pour ${total} fr. au total. Le prix de l'instrument est ${instrument.toLocaleString("fr-CH")} fr. L'étui et les accessoires ont coûté ${caseAndAccessories.toLocaleString("fr-CH")} fr. Quel est le prix de l'archet ?`, answer: bow, op: "-", calculation: `${total} − ${instrument.toLocaleString("fr-CH")} − ${caseAndAccessories.toLocaleString("fr-CH")} = ${bow.toLocaleString("fr-CH")}` };
     },
     () => {
       const total = rnd(900, 2200), red = rnd(120, 380), blue = rnd(160, 420), white = rnd(220, 520), green = rnd(80, 260);
-      return { textFr: `Pour réaliser une mosaïque, Lionel a utilisé ${total} tesselles en tout. Il a collé ${red} tesselles rouges, ${blue} bleues, ${white} blanches, ${green} vertes et des jaunes. Combien de tesselles jaunes a-t-il utilisées ?`, answer: total - red - blue - white - green, op: "-", calculation: `${total} − ${red} − ${blue} − ${white} − ${green} = ${total - red - blue - white - green}` };
+      return { textFr: `Pour réaliser une mosaïque, ${name} a utilisé ${total} tesselles en tout. ${name} a collé ${red} tesselles rouges, ${blue} bleues, ${white} blanches, ${green} vertes et des jaunes. Combien de tesselles jaunes ont été utilisées ?`, answer: total - red - blue - white - green, op: "-", calculation: `${total} − ${red} − ${blue} − ${white} − ${green} = ${total - red - blue - white - green}` };
     },
     () => {
       const weightPerBrick = rnd(2, 6), sampleA = rnd(10, 25), sampleB = rnd(30, 50), bricks = [25, 50, 75, 95][rnd(0, 3)]!;
@@ -1101,13 +1112,13 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
         const a2 = rnd(4, 16), b2 = rnd(2, 10);
         const a = a2 / 2, b = b2 / 2, tot = (a2 + b2) / 2;
         const items = ["pommes", "poires", "cerises", "fraises", "légumes"][rnd(0, 4)]!;
-        return { textFr: `${name} achète ${fmt(a * 100)} kg de ${items}, puis ${fmt(b * 100)} kg de plus. Combien de kg a-t-il en tout ?`, answer: tot, op: "+", calculation: `${fmt(a * 100)} + ${fmt(b * 100)} = ${fmt(tot * 100)} kg` };
+        return { textFr: `${name} achète ${fmt(a * 100)} kg de ${items}, puis ${fmt(b * 100)} kg de plus. Combien de kg cela fait-il en tout ?`, answer: tot, op: "+", calculation: `${fmt(a * 100)} + ${fmt(b * 100)} = ${fmt(tot * 100)} kg` };
       },
       () => {
         const tot2 = rnd(8, 20), used2 = rnd(2, Math.max(2, tot2 - 3));
         const tot = tot2 / 2, used = used2 / 2, rem = (tot2 - used2) / 2;
         const liquid = ["jus", "eau", "lait", "sirop"][rnd(0, 3)]!;
-        return { textFr: `${name} a ${fmt(tot * 100)} litre${tot > 1 ? "s" : ""} de ${liquid}. Il en utilise ${fmt(used * 100)} litre${used > 1 ? "s" : ""}. Combien reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(used * 100)} = ${fmt(rem * 100)}` };
+        return { textFr: `${name} a ${fmt(tot * 100)} litre${tot > 1 ? "s" : ""} de ${liquid}. ${name} en utilise ${fmt(used * 100)} litre${used > 1 ? "s" : ""}. Combien reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(used * 100)} = ${fmt(rem * 100)}` };
       },
       () => {
         const n = rnd(2, 8), p2 = rnd(2, 12);
@@ -1124,12 +1135,12 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       () => {
         const v = rnd(4, 12), t2 = rnd(2, 8);
         const t = t2 / 2, dist = (v * t2) / 2;
-        return { textFr: `${name} roule à ${v} km/h pendant ${fmt(t * 100)} heure${t > 1 ? "s" : ""}. Quelle distance parcourt-il ?`, answer: dist, op: "×", calculation: `${v} × ${fmt(t * 100)} = ${fmt(dist * 100)} km` };
+        return { textFr: `${name} roule à ${v} km/h pendant ${fmt(t * 100)} heure${t > 1 ? "s" : ""}. Quelle est la distance parcourue ?`, answer: dist, op: "×", calculation: `${v} × ${fmt(t * 100)} = ${fmt(dist * 100)} km` };
       },
       () => {
         const tot2 = rnd(10, 30), spent2 = rnd(4, Math.max(4, tot2 - 3));
         const tot = tot2 / 2, spent = spent2 / 2, rem = (tot2 - spent2) / 2;
-        return { textFr: `${name} a ${fmt(tot * 100)} fr. Il dépense ${fmt(spent * 100)} fr. Combien lui reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(spent * 100)} = ${fmt(rem * 100)} fr.` };
+        return { textFr: `${name} a ${fmt(tot * 100)} fr. ${name} dépense ${fmt(spent * 100)} fr. Quel montant reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(spent * 100)} = ${fmt(rem * 100)} fr.` };
       },
     ];
     for (let attempt = 0; attempt < 20; attempt++) {
@@ -1156,7 +1167,7 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       () => {
         const taux100 = rnd(1200, 2500), h_num = rnd(3, 10);
         const taux = taux100 / 100, tot = Math.round(taux100 * h_num) / 100;
-        return { textFr: `${name} gagne ${fmt(taux100)} fr. de l'heure. En ${h_num} heures, combien gagne-t-il ?`, answer: tot, op: "×", calculation: `${h_num} × ${fmt(taux100)} = ${fmt(Math.round(taux100 * h_num))} fr.` };
+        return { textFr: `${name} gagne ${fmt(taux100)} fr. de l'heure. En ${h_num} heures, quel est le salaire de ${name} ?`, answer: tot, op: "×", calculation: `${h_num} × ${fmt(taux100)} = ${fmt(Math.round(taux100 * h_num))} fr.` };
       },
       () => {
         const spd = rnd(8, 20), t2 = rnd(4, 16);
@@ -1196,7 +1207,7 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       const tot = (cost1 + cost2) / 100;
       const item1 = ["carnets", "livres", "stylos"][rnd(0, 2)]!;
       const item2 = ["règles", "gommes", "feutres"][rnd(0, 2)]!;
-      return { textFr: `${name} achète ${n1} ${item1} à ${fmt(p1100)} fr. et ${n2} ${item2} à ${fmt(p2100)} fr. Combien dépense-t-il au total ?`, answer: tot, op: "+", calculation: `${n1} × ${fmt(p1100)} + ${n2} × ${fmt(p2100)} = ${fmt(cost1)} + ${fmt(cost2)} = ${fmt(cost1 + cost2)} fr.` };
+      return { textFr: `${name} achète ${n1} ${item1} à ${fmt(p1100)} fr. et ${n2} ${item2} à ${fmt(p2100)} fr. Quel est le montant total dépensé ?`, answer: tot, op: "+", calculation: `${n1} × ${fmt(p1100)} + ${n2} × ${fmt(p2100)} = ${fmt(cost1)} + ${fmt(cost2)} = ${fmt(cost1 + cost2)} fr.` };
     },
     () => {
       const n = rnd(2, 6), p100 = rnd(150, 600);
@@ -1204,7 +1215,7 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       const budget100 = Math.round(budMax / 50) * 50;
       const cost100 = n * p100, rem100 = budget100 - cost100;
       const item = ["billets", "livres", "repas"][rnd(0, 2)]!;
-      return { textFr: `${name} a ${fmt(budget100)} fr. Il achète ${n} ${item} à ${fmt(p100)} fr. chacun. Combien lui reste-t-il ?`, answer: rem100 / 100, op: "-", calculation: `${n} × ${fmt(p100)} = ${fmt(cost100)} ; ${fmt(budget100)} − ${fmt(cost100)} = ${fmt(rem100)} fr.` };
+      return { textFr: `${name} a ${fmt(budget100)} fr. ${name} achète ${n} ${item} à ${fmt(p100)} fr. chacun. Quel montant reste-t-il ?`, answer: rem100 / 100, op: "-", calculation: `${n} × ${fmt(p100)} = ${fmt(cost100)} ; ${fmt(budget100)} − ${fmt(cost100)} = ${fmt(rem100)} fr.` };
     },
     () => {
       const taux100 = rnd(1500, 2500), hours = rnd(5, 8), days = rnd(3, 5);
@@ -1212,7 +1223,7 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       const total100 = taux100 * hours * days;
       const savings100 = total100 - expenses100;
       if (savings100 <= 0) return { textFr: "", answer: -1, op: "+" };
-      return { textFr: `${name} gagne ${fmt(taux100)} fr./h, ${hours} h/jour pendant ${days} jours. Il dépense ${fmt(expenses100)} fr. Combien économise-t-il ?`, answer: savings100 / 100, op: "-", calculation: `${fmt(taux100)} × ${hours} × ${days} = ${fmt(total100)} ; − ${fmt(expenses100)} = ${fmt(savings100)} fr.` };
+      return { textFr: `${name} gagne ${fmt(taux100)} fr./h, ${hours} h/jour pendant ${days} jours. ${name} dépense ${fmt(expenses100)} fr. Quelle somme est économisée ?`, answer: savings100 / 100, op: "-", calculation: `${fmt(taux100)} × ${hours} × ${days} = ${fmt(total100)} ; − ${fmt(expenses100)} = ${fmt(savings100)} fr.` };
     },
     () => {
       const n = rnd(4, 12), w100 = rnd(25, 150);
@@ -1373,7 +1384,7 @@ function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
       const rate100 = rnd(1500, 2800), hoursDay = rnd(5, 8), days = rnd(3, 6);
       const tot100 = rate100 * hoursDay * days;
       const tot = tot100 / 100;
-      return { textFr: `${name} gagne ${fmt(rate100)} fr./h. Il travaille ${hoursDay} h/jour pendant ${days} jours. Quel est son salaire total ?`, answer: tot, op: "×", calculation: `${fmt(rate100)} × ${hoursDay} × ${days} = ${fmt(tot100)} fr.` };
+      return { textFr: `${name} gagne ${fmt(rate100)} fr./h. ${name} travaille ${hoursDay} h/jour pendant ${days} jours. Quel est le salaire total ?`, answer: tot, op: "×", calculation: `${fmt(rate100)} × ${hoursDay} × ${days} = ${fmt(tot100)} fr.` };
     },
     () => {
       // Percentage increase: new price
