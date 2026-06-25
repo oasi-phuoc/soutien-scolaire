@@ -9329,8 +9329,17 @@ export function GenericModuleContent({
                 const userY = eqAnswers[1] ?? "";
                 const xLow = userX.trim().toLowerCase().replace(/\s+/g, "");
                 const isSpecialBtn = xLow === "ir" || xLow === "impossible" || xLow === "∅";
+                const infA = xLow === "ir";
+                const impA = xLow === "impossible" || xLow === "∅";
+                const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
                   <div className="space-y-2 pt-2">
+                    {!eqValidated && (
+                      <div className="flex justify-center gap-2">
+                        <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=infA?"":"IR"; if(!infA)n[1]=""; return n; })} className={btnCls(infA)}>∞</button>
+                        <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=impA?"":"impossible"; if(!impA)n[1]=""; return n; })} className={btnCls(impA)}>impossible</button>
+                      </div>
+                    )}
                     <div className="flex items-end justify-center gap-2">
                       <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
                       {isWrong ? (
@@ -9339,7 +9348,7 @@ export function GenericModuleContent({
                           <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrX)}</span>
                         </div>
                       ) : (
-                        <input type="text" inputMode="text" value={userX} disabled={eqValidated}
+                        <input type="text" inputMode="text" value={userX} disabled={eqValidated || isSpecialBtn}
                           onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=e.target.value; return n; })}
                           className={inputCls} />
                       )}
