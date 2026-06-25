@@ -448,12 +448,80 @@ const WP_SUB_BY_LEVEL: Record<Exclude<WordLevel, "multdiv">, Array<(a: number, b
 };
 
 const A2_4_CONTEXT_NAMES = [
+  // Élèves de classe
   "Yousef", "Daryna", "Yaroslav", "Mariam", "Sofia", "Ahmed", "Svitlana", "Omar",
   "Rachid", "Sana", "Leila", "Aïcha", "Timur", "Salma", "Farid", "Zahra",
   "Nadia", "Mustafa", "Iryna", "Rustam", "Amina", "Bilal", "Fatima", "Murat",
   "Zabi", "Kamram", "Selma", "Alsina", "Rojda", "Yoko", "Alicia", "Adna",
   "Rémi", "Jalal", "Rohani", "Sirin", "Elsa", "Alona", "Khalil", "Mozamel",
   "Muzghan", "Yaseen", "Ahmad", "Saber", "Yllia", "Zabihullah", "Sadik", "Olivia",
+  // Arabes / maghrébins masculins
+  "Ali", "Sami", "Adam", "Amir", "Karim", "Youssef", "Hassan", "Rami", "Nabil",
+  "Malik", "Mohamed", "Ibrahim", "Hamza", "Khaled", "Walid", "Anas", "Tarek",
+  // Arabes / maghrébins féminins
+  "Sara", "Lina", "Nour", "Aya", "Amal", "Hana", "Mira", "Maya", "Samira",
+  "Rania", "Yasmin", "Khadija", "Zainab", "Hiba", "Iman", "Asma", "Malika",
+  // Persan / irano-afghan communs
+  "Reza", "Farhad", "Navid", "Hamid", "Arash", "Sayed", "Jawad", "Bashir",
+  "Soraya", "Shirin", "Laila", "Roya", "Nasrin", "Parisa",
+  // Africains sub-sahariens premiers arrivants
+  "Tesfay", "Dawit", "Yohannes", "Samuel", "Merhawi", "Daniel",
+  "Selam", "Saba", "Ruta", "Meron", "Eden", "Senait",
+  // Ukrainiens premiers arrivants
+  "Andriy", "Oleksandr", "Mykola", "Viktor", "Roman", "Ivan",
+  "Olena", "Kateryna", "Yulia", "Natalia", "Anastasia",
+  // Divers
+  "Elias", "Noé", "Milan", "Arben", "Dilan", "Anna", "Elena", "Irina", "Dina",
+  // Neutres
+  "Alex", "Noor", "Sasha", "Dany", "Mika", "Eli", "Rayan",
+  // Ukrainiens masculins
+  "Bohdan", "Dmytro", "Vasyl", "Ihor", "Pavlo", "Oleh", "Mykhailo", "Serhii",
+  "Volodymyr", "Taras", "Petro", "Yuriy", "Kostiantyn", "Oleksiy", "Vitaliy",
+  "Anatoliy", "Valentyn", "Artem", "Kyrylo", "Maksym", "Yevhen", "Stanislav",
+  "Nazar", "Denys", "Borys", "Vadym", "Fedir", "Hryhorii", "Hlib", "Ruslan",
+  // Ukrainiennes féminines
+  "Oksana", "Inna", "Vira", "Liudmyla", "Halyna", "Tetiana", "Nadiia", "Uliana",
+  "Mariia", "Larysa", "Tamara", "Valentyna", "Veronika", "Yevheniia", "Zhanna",
+  "Khrystyna", "Marta", "Liliia", "Ruslana", "Zoriana", "Bohdana", "Olha",
+  "Viktoriia", "Yelyzaveta", "Yaryna", "Sonya", "Alla", "Liuba", "Hanna", "Milena",
+  // Afghans masculins
+  "Ezatullah", "Nawab", "Naeem", "Shaheen", "Faizullah", "Ghulam", "Wali",
+  "Rohullah", "Sediq", "Zia", "Niaz", "Daoud", "Qais", "Omid", "Bahroz",
+  "Rahim", "Sharif", "Hafiz", "Shoaib", "Parwiz", "Zarghun", "Sardar",
+  "Kabir", "Anwar", "Nasim", "Hazrat", "Naseer", "Aziz", "Ramiz", "Rafiullah",
+  // Afghanes féminines
+  "Freshta", "Hasina", "Farida", "Nilufar", "Zohal", "Saghar", "Zarlasht",
+  "Gulnaz", "Anisa", "Hawa", "Mursal", "Najiba", "Palwasha", "Setara",
+  "Farzana", "Pareesa", "Malalai", "Nafisa", "Marzia", "Breshna", "Rokhsar",
+  "Sima", "Samia", "Nahid", "Aziza", "Sabrina", "Shaesta", "Roshan", "Latifa", "Zarghona",
+  // Africains sub-sahariens masculins
+  "Haile", "Yonas", "Berhe", "Amanuel", "Kibrom", "Tewolde", "Tekle", "Negasi",
+  "Goitom", "Fissehaye", "Berhane", "Kofi", "Kwame", "Amadou", "Boubacar",
+  "Moussa", "Sekou", "Mamadou", "Ibrahima", "Cheikh", "Ousmane", "Juma",
+  "Baraka", "Emmanuel", "Sipho", "Themba", "Abdi", "Osei", "Kweku", "Yaw",
+  // Africaines sub-sahariennes féminines
+  "Tigist", "Hiwet", "Lidya", "Tsehay", "Lemlem", "Awet", "Feven", "Amara",
+  "Adanech", "Fatou", "Aminata", "Mariama", "Aissatou", "Rokhaya", "Bineta",
+  "Kadiatou", "Coumba", "Astou", "Ndèye", "Aïda", "Grace", "Mercy", "Joyce",
+  "Abeba", "Chaltu", "Zenash", "Hirut", "Selamawit", "Miriam", "Desta",
+  // Syriens masculins
+  "Yaser", "Amin", "Firas", "Nizar", "Samir", "Wasim", "Bassem", "Ghassan",
+  "Ziad", "Haitham", "Louai", "Ayman", "Mazen", "Jad", "Samer",
+  // Syriennes féminines
+  "Razan", "Nisreen", "Ghalia", "Bisan", "Dima", "Maysaa", "Rasha", "Ghada",
+  "Reem", "Lana", "Yara", "Sireen", "Noura", "Nariman", "Dalia",
+  // Portugais masculins
+  "João", "Tiago", "André", "Ricardo", "Gonçalo", "Hugo", "Diogo", "Rui",
+  "Carlos", "Luís", "Pedro", "Miguel", "Nuno", "Paulo", "Filipe",
+  // Portugaises féminines
+  "Ana", "Inês", "Catarina", "Patrícia", "Cláudia", "Rita", "Raquel", "Beatriz",
+  "Joana", "Mariana", "Isabel", "Filipa", "Mónica", "Vanessa", "Carla",
+  // Italiens masculins
+  "Marco", "Luca", "Matteo", "Lorenzo", "Andrea", "Francesco", "Alessandro",
+  "Davide", "Giulio", "Stefano", "Nicola", "Alberto", "Dario", "Claudio", "Roberto",
+  // Italiennes féminines
+  "Giulia", "Chiara", "Valentina", "Federica", "Alessandra", "Serena", "Francesca",
+  "Laura", "Roberta", "Cristina", "Silvia", "Beatrice", "Patrizia", "Daniela", "Giorgia",
 ];
 
 type A24ProblemTemplate = () => WordProblemQ;
@@ -640,8 +708,7 @@ function genA24ContextProblem(): WordProblemQ {
 }
 
 function genA37MultDivProblem(): WordProblemQ {
-  const names = ["Ahmad", "Anastasiia", "Alona", "Frozan", "Omar", "Fatima", "Amina", "Ezatullah", "Nadiia", "Samira", "Danylo", "Bilal", "Iryna", "Hassan", "Daryna", "Yulia", "Yeva", "Paola", "José", "Sana"];
-  const name = names[rnd(0, names.length - 1)]!;
+  const name = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
   const templates: A24ProblemTemplate[] = [
     () => {
       const every = rnd(4, 12), stones = rnd(25, 120);
@@ -816,6 +883,137 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Le professeur offre des glaces aux joueurs du tournoi. Il achète ${packs} paquets de ${ice} glaces. Combien y a-t-il de glaces au total ?`, answer: packs * ice, op: "×", calculation: `${packs} × ${ice} = ${packs * ice}` };
     },
     () => {
+      const trays = rnd(3, 8), perTray = 30, perOmelet = rnd(2, 3), omelets = rnd(25, 75);
+      return { textFr: `Un cuisinier a acheté ${trays} plateaux de ${perTray} œufs. Il utilise ${perOmelet} œufs pour faire une omelette. Combien lui reste-t-il d'œufs après avoir préparé ${omelets} omelettes ?`, answer: trays * perTray - perOmelet * omelets, op: "-", calculation: `${trays * perTray} − ${perOmelet * omelets} = ${trays * perTray - perOmelet * omelets}` };
+    },
+    () => {
+      const brownPages = rnd(10, 20), brownPer = rnd(8, 16), yellowPages = rnd(8, 18), yellowPer = rnd(8, 16), greenPages = rnd(6, 14), greenPer = rnd(12, 22);
+      const brown = brownPages * brownPer, yellow = yellowPages * yellowPer, green = greenPages * greenPer;
+      return { textFr: `Dalila et Pascal regardent trois albums de photos : un album brun de ${brownPages} pages avec ${brownPer} photos par page, un album jaune de ${yellowPages} pages avec ${yellowPer} photos par page et un album vert de ${greenPages} pages avec ${greenPer} photos par page. Combien de photos contient l'album qui en a le plus ?`, answer: Math.max(brown, yellow, green), op: "×", calculation: `max(${brown}, ${yellow}, ${green}) = ${Math.max(brown, yellow, green)}` };
+    },
+    () => {
+      const students = rnd(12, 28), price = rnd(500, 900) / 100, budget = rnd(120, 220);
+      const cost = Math.round(students * price * 100) / 100;
+      const rest = Math.round((budget - cost) * 100) / 100;
+      return { textFr: `Monsieur Pagan souhaite aller au zoo avec ses ${students} élèves. L'entrée coûte ${price.toLocaleString("fr-CH")} francs par enfant. Les enseignants ne paient pas. Il a ${budget} francs. Combien d'argent lui restera-t-il après avoir payé les entrées ?`, answer: rest, op: "-", calculation: `${budget} − ${cost.toLocaleString("fr-CH")} = ${rest.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const students = rnd(40, 90), transport = rnd(350, 700) / 100, entry = rnd(300, 800) / 100, budget = rnd(450, 850);
+      const cost = Math.round(students * (transport + entry) * 100) / 100;
+      const diff = Math.round(Math.abs(budget - cost) * 100) / 100;
+      return { textFr: `${students} élèves veulent faire une sortie à la piscine. Il faut compter ${transport.toLocaleString("fr-CH")} francs par élève pour le transport et ${entry.toLocaleString("fr-CH")} francs par élève pour l'entrée. Les enseignants donnent ${budget} francs. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${budget} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const children = rnd(8, 20), adults = rnd(2, 5), adultPrice = rnd(1000, 1500) / 100;
+      const totalPeople = children + adults;
+      const total = Math.round(totalPeople * adultPrice * 100) / 100;
+      return { textFr: `Une entrée au cinéma coûte ${adultPrice.toLocaleString("fr-CH")} francs pour les adultes. Une classe regarde un film ce soir. Il y a ${children} élèves et ${adults} enseignants, qui paient tous le prix adulte. Combien paient-ils en tout ?`, answer: total, op: "×", calculation: `${totalPeople} × ${adultPrice.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const students = rnd(15, 28), received = 20, bus = rnd(150, 260), entry = rnd(400, 700) / 100, ice = 2;
+      const money = students * received;
+      const cost = Math.round((bus + students * entry + students * ice) * 100) / 100;
+      const diff = Math.round(Math.abs(money - cost) * 100) / 100;
+      return { textFr: `Madame Davet va au musée avec ses ${students} élèves. Elle reçoit ${received} francs pour chaque élève. Elle paie ${bus} francs pour le bus, ${entry.toLocaleString("fr-CH")} francs par élève pour l'entrée et veut acheter une glace à ${ice} francs pour chaque élève. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${money} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const book = rnd(2500, 6500) / 100, diff = rnd(800, 1800) / 100, puzzle = rnd(2000, 5000) / 100, plush = rnd(2000, 5000) / 100, paid = [150, 200, 250][rnd(0, 2)]!;
+      const game = Math.round((book + diff) * 100) / 100;
+      const change = Math.round((paid - book - game - puzzle - plush) * 100) / 100;
+      return { textFr: `Elie achète un livre à ${book.toLocaleString("fr-CH")} francs. C'est ${diff.toLocaleString("fr-CH")} francs de moins que le jeu qu'il achète aussi. Il ajoute un puzzle à ${puzzle.toLocaleString("fr-CH")} francs et une peluche à ${plush.toLocaleString("fr-CH")} francs. Il paie avec ${paid} francs. Combien le vendeur lui rend-il ?`, answer: change, op: "-", calculation: `${paid} − ${book.toLocaleString("fr-CH")} − ${game.toLocaleString("fr-CH")} − ${puzzle.toLocaleString("fr-CH")} − ${plush.toLocaleString("fr-CH")} = ${change.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const sticks = rnd(800, 2500), perPack = [10, 20, 25, 50][rnd(0, 3)]!;
+      return { textFr: `Philippe range ses ${sticks} bâtonnets. Chaque fois qu'il a ${perPack} bâtonnets, il forme un petit paquet et l'attache avec un élastique rouge. Combien d'élastiques rouges utilise-t-il ?`, answer: Math.floor(sticks / perPack), op: "÷", calculation: `${sticks} ÷ ${perPack} = ${Math.floor(sticks / perPack)}` };
+    },
+    () => {
+      const beads = rnd(1200, 4200), perNecklace = [50, 100, 120, 150][rnd(0, 3)]!;
+      return { textFr: `Laura est bijoutière. Elle possède ${beads} petites perles de verre. Elle décide de fabriquer des colliers de ${perNecklace} perles exactement. Combien de colliers peut-elle fabriquer ?`, answer: Math.floor(beads / perNecklace), op: "÷", calculation: `${beads} ÷ ${perNecklace} = ${Math.floor(beads / perNecklace)}` };
+    },
+    () => {
+      const candies = rnd(800, 1800), perBag = [10, 20, 25][rnd(0, 2)]!;
+      return { textFr: `Une confiserie a fabriqué ${candies} caramels. Les caramels sont emballés par sachets de ${perBag}. Combien de sachets faut-il préparer ?`, answer: Math.ceil(candies / perBag), op: "÷", calculation: `${candies} ÷ ${perBag} = ${Math.ceil(candies / perBag)}` };
+    },
+    () => {
+      const tickets = rnd(20, 80), price = rnd(1000, 2200) / 100;
+      const total = Math.round(tickets * price * 100) / 100;
+      return { textFr: `Au cinéma, toutes les places sont à ${price.toLocaleString("fr-CH")} francs. Ce soir, la caissière vend ${tickets} billets. Quelle somme reçoit-elle ?`, answer: total, op: "×", calculation: `${tickets} × ${price.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const bags = rnd(20, 80), waffles = rnd(8, 18);
+      return { textFr: `Un confiseur a préparé des gaufres. Il a rempli exactement ${bags} sachets. Chaque sachet contient ${waffles} gaufres. Combien de gaufres a-t-il préparées au total ?`, answer: bags * waffles, op: "×", calculation: `${bags} × ${waffles} = ${bags * waffles}` };
+    },
+    () => {
+      const green = rnd(8, 25), yellow = green * 2;
+      return { textFr: `Dans son sac, Réal a ${green + yellow} billes en tout. Certaines sont jaunes, les autres sont vertes. Il y a deux fois plus de billes jaunes que de billes vertes. Combien y a-t-il de billes jaunes ?`, answer: yellow, op: "÷", calculation: `${green + yellow} ÷ 3 × 2 = ${yellow}` };
+    },
+    () => {
+      const reagan = rnd(120, 260), diff = rnd(10, 60);
+      return { textFr: `Reagan a ${reagan} livres dans sa bibliothèque. Elle en a ${diff} de plus que son frère Miles. Combien de livres Miles a-t-il dans sa bibliothèque ?`, answer: reagan - diff, op: "-", calculation: `${reagan} − ${diff} = ${reagan - diff}` };
+    },
+    () => {
+      const length = rnd(30, 90), width = rnd(6, 20);
+      return { textFr: `Le concierge observe que le sol du couloir forme un long rectangle recouvert de carrés de lino. Il en compte ${length} en longueur et ${width} en largeur. Combien y a-t-il de carrés de lino dans le couloir ?`, answer: length * width, op: "×", calculation: `${length} × ${width} = ${length * width}` };
+    },
+    () => {
+      const bottles = rnd(120, 360), perBox = [12, 18, 24][rnd(0, 2)]!;
+      return { textFr: `José et Anne emballent ${bottles} bouteilles d'huile d'olive dans des cartons de ${perBox} bouteilles. Combien de cartons peuvent-ils remplir entièrement ?`, answer: Math.floor(bottles / perBox), op: "÷", calculation: `${bottles} ÷ ${perBox} = ${Math.floor(bottles / perBox)}` };
+    },
+    () => {
+      const sheets = rnd(80, 240), rows = rnd(2, 5), cols = rnd(5, 10);
+      return { textFr: `La maîtresse a commandé ${sheets} feuilles de gommettes. Sur chaque feuille, il y a ${rows} lignes de ${cols} gommettes. Combien y a-t-il de gommettes en tout ?`, answer: sheets * rows * cols, op: "×", calculation: `${sheets} × ${rows} × ${cols} = ${sheets * rows * cols}` };
+    },
+    () => {
+      const first = rnd(8, 25), more = rnd(3, 10);
+      return { textFr: `Paola est allée deux fois à la piscine cette semaine. La première fois, elle a fait ${first} traversées. La deuxième fois, elle en a fait ${more} de plus que la première fois. Combien a-t-elle fait de traversées cette semaine ?`, answer: first + first + more, op: "+", calculation: `${first} + ${first + more} = ${first + first + more}` };
+    },
+    () => {
+      const saved = rnd(9000, 22000) / 100, missing = rnd(1000, 6000) / 100;
+      const price = Math.round((saved + missing) * 100) / 100;
+      return { textFr: `Chloé aimerait s'acheter une paire de baskets. Elle a déjà économisé ${saved.toLocaleString("fr-CH")} francs et sa maman lui donne les ${missing.toLocaleString("fr-CH")} francs qui lui manquent. Combien coûte la paire de baskets ?`, answer: price, op: "+", calculation: `${saved.toLocaleString("fr-CH")} + ${missing.toLocaleString("fr-CH")} = ${price.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const expensive = rnd(120, 420);
+      return { textFr: `Fabien a dépensé ${expensive} francs pour un nouvel aspirateur. L'aspirateur de Maya est deux fois moins cher. Quel est le prix de l'aspirateur de Maya ?`, answer: expensive / 2, op: "÷", calculation: `${expensive} ÷ 2 = ${expensive / 2}` };
+    },
+    () => {
+      const leo = rnd(120, 420), diff = rnd(10, 80);
+      return { textFr: `Jeanne a fait un parcours en voiture de ${leo} km. Bertrand a fait un trajet de ${diff} kilomètres de moins. Combien de kilomètres Bertrand a-t-il parcourus ?`, answer: leo - diff, op: "-", calculation: `${leo} − ${diff} = ${leo - diff}` };
+    },
+    () => {
+      const pupils = rnd(15, 28), minigolf = rnd(900, 1600) / 100, ice = rnd(250, 550) / 100;
+      const total = Math.round((pupils * minigolf + (pupils + 1) * ice) * 100) / 100;
+      return { textFr: `La classe EPL 1 ira en promenade. Il y a ${pupils} élèves. Chaque élève fait une partie de minigolf à ${minigolf.toLocaleString("fr-CH")} francs et mange une glace à ${ice.toLocaleString("fr-CH")} francs. L'enseignante ne joue pas au minigolf mais mange aussi une glace. Combien l'enseignante devra-t-elle payer en tout ?`, answer: total, op: "×", calculation: `${pupils} × ${minigolf.toLocaleString("fr-CH")} + ${pupils + 1} × ${ice.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+    },
+    () => {
+      const fiction = rnd(800, 1600), docs = rnd(400, 900), albums = rnd(400, 900), comics = rnd(500, 1100), cds = rnd(10, 60), audio = rnd(2, 20), dvds = rnd(20, 90), kami = rnd(10, 40);
+      const total = fiction + docs + albums + comics + cds + audio + dvds + kami;
+      return { textFr: `La bibliothèque municipale a acheté ${fiction} livres de fiction, ${docs} documentaires, ${albums} albums pour enfants, ${comics} bandes dessinées, ${cds} CD, ${audio} livres audio, ${dvds} DVD et ${kami} kamishibaïs. Combien d'articles a-t-elle achetés au total ?`, answer: total, op: "+", calculation: `${fiction} + ${docs} + ${albums} + ${comics} + ${cds} + ${audio} + ${dvds} + ${kami} = ${total}` };
+    },
+    () => {
+      const referenceTotal = rnd(3000, 5200), less = rnd(300, 900), docs = rnd(400, 900), albums = rnd(300, 800), comics = rnd(500, 1000), cds = rnd(10, 60), audio = rnd(2, 20), dvds = rnd(20, 90), kami = rnd(10, 40);
+      const target = referenceTotal - less;
+      return { textFr: `La bibliothèque de Couvrelivre a acheté ${docs} documentaires, ${albums} albums, ${comics} bandes dessinées, ${cds} CD, ${audio} livres audio, ${dvds} DVD, ${kami} kamishibaïs et des livres de fiction. Elle a acheté en tout ${less} articles de moins qu'une autre bibliothèque qui en a acheté ${referenceTotal}. Combien a-t-elle acheté de livres de fiction ?`, answer: target - docs - albums - comics - cds - audio - dvds - kami, op: "-", calculation: `${target} − ${docs} − ${albums} − ${comics} − ${cds} − ${audio} − ${dvds} − ${kami} = ${target - docs - albums - comics - cds - audio - dvds - kami}` };
+    },
+    () => {
+      const startBlue = rnd(12, 30), addedEach = rnd(10, 25), total = startBlue + addedEach * 2;
+      return { textFr: `Ahmed fait un collier de perles pour sa maman. Il a déjà enfilé ${startBlue} perles bleues. Il ajoute ensuite le même nombre de perles bleues que de perles blanches. Une fois terminé, le collier comporte ${total} perles. Combien y a-t-il de perles bleues en tout sur le collier ?`, answer: startBlue + addedEach, op: "+", calculation: `${startBlue} + (${total} − ${startBlue}) ÷ 2 = ${startBlue + addedEach}` };
+    },
+    () => {
+      const louane = rnd(3000, 7000), minus = rnd(800, 2200), plus = rnd(900, 2600);
+      const juliette = louane - minus, timeo = juliette + plus;
+      return { textFr: `Dans un jeu de société, Louane a ${louane} francs. Juliette a ${minus} francs de moins que Louane. Timéo a ${plus} francs de plus que Juliette. Combien d'argent Timéo possède-t-il ?`, answer: timeo, op: "+", calculation: `${louane} − ${minus} + ${plus} = ${timeo}` };
+    },
+    () => {
+      const blue = rnd(60, 140), greenMore = rnd(20, 70), redLess = rnd(20, 60);
+      const green = blue + greenMore, red = green - redLess, yellow = green;
+      return { textFr: `Les élèves confectionnent des bonnets de lutin. On compte ${blue} bonnets bleus. Il y a ${greenMore} bonnets verts de plus que de bonnets bleus. Il y a ${redLess} bonnets rouges de moins que de bonnets verts et autant de bonnets jaunes que de bonnets verts. Combien y a-t-il d'élèves dans l'école ?`, answer: blue + green + red + yellow, op: "+", calculation: `${blue} + ${green} + ${red} + ${yellow} = ${blue + green + red + yellow}` };
+    },
+    () => {
+      const mountains = rnd(80, 240), forests = rnd(60, 180), horses = rnd(70, 180), mice = rnd(70, 180);
+      return { textFr: `Sacha photographie souvent la nature. Sur son ordinateur, elle a ${mountains} photos de montagnes, ${forests} photos de forêts, ${horses} photos de chevaux et ${mice} photos de souris. Combien a-t-elle de photos d'animaux en tout ?`, answer: horses + mice, op: "+", calculation: `${horses} + ${mice} = ${horses + mice}` };
+    },
+    () => {
       const salary = rnd(3200, 5600) + 0.5, remaining = rnd(900, 2600) + 0.7;
       const spent = Math.round((salary - remaining) * 100) / 100;
       return { textFr: `Par mois, Antoine gagne un salaire de ${salary.toLocaleString("fr-CH")} francs. Après avoir payé toutes les factures, il a encore ${remaining.toLocaleString("fr-CH")} francs. Combien a-t-il dépensé d'argent ?`, answer: spent, op: "-", calculation: `${salary.toLocaleString("fr-CH")} − ${remaining.toLocaleString("fr-CH")} = ${spent.toLocaleString("fr-CH")}` };
@@ -843,8 +1041,8 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Pour réaliser une mosaïque, Lionel a utilisé ${total} tesselles en tout. Il a collé ${red} tesselles rouges, ${blue} bleues, ${white} blanches, ${green} vertes et des jaunes. Combien de tesselles jaunes a-t-il utilisées ?`, answer: total - red - blue - white - green, op: "-", calculation: `${total} − ${red} − ${blue} − ${white} − ${green} = ${total - red - blue - white - green}` };
     },
     () => {
-      const weightPerBrick = rnd(2, 6), bricks = [25, 50, 75, 95][rnd(0, 3)]!;
-      return { textFr: `Nina est maçonne. Pour construire un nouveau mur, elle utilise des briques qui ont toutes le même poids. ${rnd(10, 25)} briques pèsent ${weightPerBrick * rnd(10, 25)} kilos. On sait qu'une brique pèse ${weightPerBrick} kilos. Combien pèsent ${bricks} briques ?`, answer: bricks * weightPerBrick, op: "×", calculation: `${bricks} × ${weightPerBrick} = ${bricks * weightPerBrick}` };
+      const weightPerBrick = rnd(2, 6), sampleA = rnd(10, 25), sampleB = rnd(30, 50), bricks = [25, 50, 75, 95][rnd(0, 3)]!;
+      return { textFr: `Nina est maçonne. Pour construire un nouveau mur, elle utilise des briques qui ont toutes le même poids. ${sampleA} briques pèsent ${sampleA * weightPerBrick} kilos et ${sampleB} briques pèsent ${sampleB * weightPerBrick} kilos. Combien pèsent ${bricks} briques ?`, answer: bricks * weightPerBrick, op: "×", calculation: `${bricks} × ${weightPerBrick} = ${bricks * weightPerBrick}` };
     },
     () => {
       const inhabitants = rnd(80, 320), factor = rnd(8, 25);
