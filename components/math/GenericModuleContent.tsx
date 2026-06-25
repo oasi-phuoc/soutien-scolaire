@@ -3138,7 +3138,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
     // 15. b = ax + c  (reverse form, x positive)
     () => { const a=ri(2,6),c=ri(1,8),x=ri(1,7),B=a*x+c; return { expr:`${B} = ${a}x${s(c)}`, solution:rat(x,1) }; },
     // 16. ax·b + cx = d  (product notation, x positive)
-    () => { const a=ri(2,4),b=ri(2,3),c=ri(1,5),d=ri(10,50),x=ri(1,4); return { expr:`${a}·${b}·x${sl(c)} = ${a*b*x+c*x}`, solution:rat(1,1) /* recomputed below */ }; },
+    () => { const a=ri(2,4),b=ri(2,3),c=ri(1,5),x=ri(1,4); return { expr:`${a}·${b}·x${sl(c)} = ${a*b*x+c*x}`, solution:rat(1,1) /* recomputed below */ }; },
     // 17. a + bx = c(x + d)  → a+bx = cx+cd → (b-c)x = cd-a
     () => { const a=ri(2,10),b=ri(3,8),c=ri(1,b-1),d=ri(1,6); const num=c*d-a,den=b-c; return { expr:`${a}${sl(b)} = ${c}(x${s(d)})`, solution: den===0?(num===0?inf:imp):rat(num,den) }; },
     // 18. Simple: ax − b = c  (integer x positive)
@@ -3146,7 +3146,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
     // 19. Simple: ax + b = c  (integer x negative)
     () => { const a=ri(2,6),b=ri(5,15),x=ri(-5,-1),c=a*x+b; return { expr:`${a}x${s(b)} = ${c}`, solution:rat(x,1) }; },
     // 20. ax + b(x − c) = d  (two terms, combine)
-    () => { const a=ri(2,5),b=ri(2,4),c=ri(1,4),d=ri(1,20),x=ri(-4,6); return { expr:`${a}x${sl(b)}(x − ${c}) = ${(a+b)*x-b*c}`, solution:rat(x,1) }; },
+    () => { const a=ri(2,5),b=ri(2,4),c=ri(1,4),x=ri(-4,6); return { expr:`${a}x${sl(b)}(x − ${c}) = ${(a+b)*x-b*c}`, solution:rat(x,1) }; },
   ];
 
   // Fix template 16 properly
