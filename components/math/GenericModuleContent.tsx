@@ -223,6 +223,8 @@ type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; le
 type EquationSolution = { kind: "rational"; num: number; den: number } | { kind: "impossible" } | { kind: "infinite" };
 type EquationQuestion = { expr: string; solution: EquationSolution; development?: string[]; operations?: string[] };
 type EquationGroupStep = { kind: "equation_group"; lesson: MathSubmoduleLesson; questions: EquationQuestion[]; exNum?: number };
+type SystemEquationQuestion = { equations: [string, string]; answer: string; acceptable: string[]; development: string[]; operations?: string[] };
+type SystemEquationStep = { kind: "system_equation"; lesson: MathSubmoduleLesson; question: SystemEquationQuestion; exNum?: number };
 type FracEqSide = { terms: Array<{ num: number; den: number; xMul: number }> };
 type FracEquationGroupStep = { kind: "frac_equation_group"; lesson: MathSubmoduleLesson; questions: Array<{ lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution }> };
 type MonomialQuestion = {
@@ -242,7 +244,7 @@ type SymbolicGroupStep = {
   questions: SymbolicQuestion[];
 };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | FracEquationGroupStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -3454,6 +3456,101 @@ function genFracEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupSte
   return { kind: "equation_group", lesson, exNum: 1, questions: [templates[Math.floor(Math.random() * templates.length)]!] };
 }
 
+function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep {
+  const f = (num: string, den: string) => `[[frac:${num}/${den}]]`;
+  const acceptPair = (x: string, y: string) => [
+    `${x};${y}`, `${x},${y}`, `(${x};${y})`, `(${x},${y})`,
+    `{(${x};${y})}`, `{(${x},${y})}`, `s={(${x};${y})}`, `s={(${x},${y})}`,
+  ];
+  const sys = (
+    equations: [string, string],
+    answer: string,
+    acceptable: string[],
+    development: string[],
+    operations: string[] = [],
+  ): SystemEquationQuestion => ({ equations, answer, acceptable, development, operations });
+  const templates: SystemEquationQuestion[] = [
+    sys(["3x + y = 1", "5x - 8y = -37"], `{(-1 ; 4)}`, acceptPair("-1", "4"), [
+      "isoler y dans I", "3x + y = 1", "y = 1 - 3x", "injecter I → II et résoudre",
+      "5x - 8(1 - 3x) = -37", "5x - 8 + 24x = -37", "29x - 8 = -37", "29x = -29", "x = -1", "chercher la valeur de y", "y = 1 - 3x", "y = 1 - 3 · (-1) = 4", "S = {(-1 ; 4)}",
+    ], ["", "- 3x", "", "", "effectuer", "réduire", "+ 8", ": 29", "", "", "", ""]),
+    sys(["2x - 4y = 26", "7y = -32 - x"], `{(3 ; -5)}`, acceptPair("3", "-5"), [
+      "isoler x dans II", "7y = -32 - x", "7y + 32 = -x", "-7y - 32 = x", "injecter II → I et résoudre",
+      "2(-7y - 32) - 4y = 26", "-14y - 64 - 4y = 26", "-18y - 64 = 26", "-18y = 90", "y = -5", "chercher la valeur de x", "-7y - 32 = x", "x = -7 · (-5) - 32 = 3", "S = {(3 ; -5)}",
+    ], ["", "+ 32", "· (-1)", "", "", "effectuer", "réduire", "+ 64", ": (-18)", "", "", ""]),
+    sys(["3x - y = -22", "5x + 3y = -46"], `{(-8 ; -2)}`, acceptPair("-8", "-2"), [
+      "isoler y dans I", "3x - y = -22", "-y = -22 - 3x", "y = 22 + 3x", "injecter I → II et résoudre",
+      "5x + 3(22 + 3x) = -46", "5x + 66 + 9x = -46", "14x + 66 = -46", "14x = -112", "x = -8", "chercher la valeur de y", "y = 22 + 3x", "y = 22 + 3 · (-8) = -2", "S = {(-8 ; -2)}",
+    ], ["", "- 3x", "· (-1)", "", "", "effectuer", "réduire", "- 66", ": 14", "", "", ""]),
+    sys(["4x + 4y = 28", "x - (-2y) = 14"], `{(0 ; 7)}`, acceptPair("0", "7"), [
+      "isoler x dans II", "x + 2y = 14", "x = 14 - 2y", "injecter II → I et résoudre",
+      "4(14 - 2y) + 4y = 28", "56 - 8y + 4y = 28", "56 - 4y = 28", "-4y = -28", "y = 7", "chercher la valeur de x", "x = 14 - 2y", "x = 14 - 2 · 7 = 0", "S = {(0 ; 7)}",
+    ], ["", "- 2y", "", "", "effectuer", "réduire", "- 56", ": (-4)", "", "", ""]),
+    sys(["8y - 5x = 10", "10 - y = 4x + 3"], `{(${f("46", "37")} ; ${f("75", "37")})}`, acceptPair("46/37", "75/37"), [
+      "isoler y dans II", "10 - y = 4x + 3", "-y = 4x - 7", "y = -4x + 7", "injecter II → I et résoudre",
+      "8(-4x + 7) - 5x = 10", "-32x + 56 - 5x = 10", "-37x + 56 = 10", "-37x = -46", `x = ${f("46", "37")}`, "chercher la valeur de y",
+      "y = -4x + 7", `y = -4 · ${f("46", "37")} + 7 = ${f("75", "37")}`, `S = {(${f("46", "37")} ; ${f("75", "37")})}`,
+    ], ["", "- 10", "· (-1)", "", "", "effectuer", "réduire", "- 56", ": (-37)", "", ""]),
+    sys(["5x + 10 = y", "-4y + 40 = -20x"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "y est déjà isolé dans I", "injecter I → II et résoudre", "-4(5x + 10) + 40 = -20x", "-20x - 40 + 40 = -20x", "-20x = -20x", "0 = 0", "infinité de possibilités !", "S = IR",
+    ], ["", "", "effectuer", "réduire", "+ 20x", "", ""]),
+    sys(["15 - 3y = 5x + 2", "8y + 7 = 12 - x"], `{(${f("89", "37")} ; ${f("12", "37")})}`, acceptPair("89/37", "12/37"), [
+      "isoler x dans II", "8y + 7 = 12 - x", "8y - 5 = -x", "-8y + 5 = x", "injecter II → I et résoudre",
+      "15 - 3y = 5(-8y + 5) + 2", "15 - 3y = -40y + 25 + 2", "15 + 37y = 27", "37y = 12", `y = ${f("12", "37")}`,
+      "chercher la valeur de x", "x = -8y + 5", `x = -8 · ${f("12", "37")} + 5 = ${f("89", "37")}`, `S = {(${f("89", "37")} ; ${f("12", "37")})}`,
+    ], ["", "- 12", "· (-1)", "", "", "effectuer", "réduire", "- 15", ": 37", "", ""]),
+    sys(["3(y - 7) = 12 + x", "5(x + 1) = 3y + 2"], `{(${f("15", "2")} ; ${f("27", "2")})}`, acceptPair("15/2", "27/2"), [
+      "tout d'abord, effectuer", "I   3y - 21 = 12 + x", "II  5x + 5 = 3y + 2", "isoler x dans I", "3y - 21 = 12 + x", "3y - 33 = x", "injecter I → II et résoudre",
+      "5(3y - 33) + 5 = 3y + 2", "15y - 165 + 5 = 3y + 2", "12y - 160 = 2", "12y = 162", `y = ${f("27", "2")}`, "chercher la valeur de x", "x = 3y - 33", `x = 3 · ${f("27", "2")} - 33 = ${f("15", "2")}`, `S = {(${f("15", "2")} ; ${f("27", "2")})}`,
+    ], ["", "", "", "", "- 12", "", "", "effectuer", "- 3y", "+ 160", ": 12", "", ""]),
+    sys(["x - 7 = 8 + 3y", "2y - 5x = 10"], `{(${f("-60", "13")} ; ${f("-85", "13")})}`, acceptPair("-60/13", "-85/13"), [
+      "isoler x dans I", "x - 7 = 8 + 3y", "x = 15 + 3y", "injecter I → II et résoudre", "2y - 5(15 + 3y) = 10", "2y - 75 - 15y = 10", "-13y - 75 = 10", "-13y = 85", `y = ${f("-85", "13")}`,
+      "chercher la valeur de x", "x = 15 + 3y", `x = 15 + 3 · ${f("-85", "13")} = ${f("-60", "13")}`, `S = {(${f("-60", "13")} ; ${f("-85", "13")})}`,
+    ], ["", "+ 7", "", "", "effectuer", "réduire", "+ 75", ": -13", "", ""]),
+    sys(["2x + 3y = 10", "8x = y - 7"], `{(${f("-11", "26")} ; ${f("47", "13")})}`, acceptPair("-11/26", "47/13"), [
+      "isoler y dans II", "8x = y - 7", "8x + 7 = y", "injecter II → I et résoudre", "2x + 3(8x + 7) = 10", "2x + 24x + 21 = 10", "26x + 21 = 10", "26x = -11", `x = ${f("-11", "26")}`,
+      "chercher la valeur de y", "8x + 7 = y", `8 · ${f("-11", "26")} + 7 = y`, `y = ${f("47", "13")}`, `S = {(${f("-11", "26")} ; ${f("47", "13")})}`,
+    ], ["", "+ 7", "", "", "effectuer", "réduire", "- 21", ": 26", "", ""]),
+    sys(["4x + 3 = 5 - y", "7y + 1 = 8x + 3"], `{(${f("1", "3")} ; ${f("2", "3")})}`, acceptPair("1/3", "2/3"), [
+      "isoler y dans I", "4x + 3 = 5 - y", "4x - 2 = -y", "-4x + 2 = y", "injecter I → II et résoudre", "7(-4x + 2) + 1 = 8x + 3", "-28x + 14 + 1 = 8x + 3", "-28x + 15 = 8x + 3", "-36x + 15 = 3", "-36x = -12", `x = ${f("1", "3")}`,
+      "chercher la valeur de y", "-4x + 2 = y", `-4 · ${f("1", "3")} + 2 = y`, `y = ${f("2", "3")}`, `S = {(${f("1", "3")} ; ${f("2", "3")})}`,
+    ], ["", "- 5", "· (-1)", "", "", "effectuer", "réduire", "- 8x", "- 15", ": (-36)", ""]),
+    sys(["5y + x = 7", "10y = 14 - 2x"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "isoler x dans I", "5y + x = 7", "x = 7 - 5y", "injecter II → I et résoudre", "10y = 14 - 2(7 - 5y)", "10y = 14 - 14 + 10y", "10y = 10y", "0 = 0", "infinité de possibilités !", "S = IR",
+    ], ["", "- 5y", "", "", "effectuer", "réduire", "- 10y", ""]),
+    sys(["y - 7 = 5x + 19", "3x - 8 = 2y + 1"], `{(${f("-61", "7")} ; ${f("-123", "7")})}`, acceptPair("-61/7", "-123/7"), [
+      "isoler y dans I", "y - 7 = 5x + 19", "y = 5x + 26", "injecter I → II et résoudre", "3x - 8 = 2(5x + 26) + 1", "3x - 8 = 10x + 52 + 1", "-8 = 7x + 53", "-61 = 7x", `x = ${f("-61", "7")}`,
+      "chercher la valeur de y", "y = 5x + 26", `y = 5 · ${f("-61", "7")} + 26 = ${f("-123", "7")}`, `S = {(${f("-61", "7")} ; ${f("-123", "7")})}`,
+    ], ["", "+ 7", "", "", "effectuer", "- 3x", "- 53", ": 7", "", ""]),
+    sys(["5(x - 7) = 8y + 2", "10 + y = 3(8 - 2x)"], `{(${f("149", "53")} ; ${f("-152", "53")})}`, acceptPair("149/53", "-152/53"), [
+      "tout d'abord, effectuer", "I   5x - 35 = 8y + 2", "II  10 + y = 24 - 6x", "isoler y dans II", "10 + y = 24 - 6x", "y = 14 - 6x", "injecter II → I et résoudre",
+      "5x - 35 = 8(14 - 6x) + 2", "5x - 35 = 112 - 48x + 2", "53x - 35 = 114", "53x = 149", `x = ${f("149", "53")}`, "chercher la valeur de y", "y = 14 - 6x", `y = 14 - 6 · ${f("149", "53")} = ${f("-152", "53")}`, `S = {(${f("149", "53")} ; ${f("-152", "53")})}`,
+    ], ["", "", "", "", "- 10", "", "", "effectuer", "+ 48x", "+ 35", ": 53", ""]),
+    sys(["4x + 7y = 10", "x - 9y = 3"], `{(${f("111", "43")} ; ${f("-2", "43")})}`, acceptPair("111/43", "-2/43"), [
+      "isoler x dans II", "x - 9y = 3", "x = 3 + 9y", "injecter II → I et résoudre", "4(3 + 9y) + 7y = 10", "12 + 36y + 7y = 10", "43y = -2", `y = ${f("-2", "43")}`,
+      "chercher la valeur de x", "x = 3 + 9y", `x = 3 + 9 · ${f("-2", "43")} = ${f("111", "43")}`, `S = {(${f("111", "43")} ; ${f("-2", "43")})}`,
+    ], ["", "+ 9y", "", "", "effectuer", "- 12", ": 43", "", ""]),
+    sys(["8y - x = 12", "-5x - 65 = -40y"], `impossible`, ["impossible", "s=∅", "vide", "∅"], [
+      "isoler x dans I", "8y - x = 12", "-x = 12 - 8y", "x = -12 + 8y", "injecter I → II et résoudre", "-5(-12 + 8y) - 65 = -40y", "60 - 40y - 65 = -40y", "-5 = 0", "impossible !", "S = ∅",
+    ], ["", "- 8y", "· (-1)", "", "", "effectuer", "+ 40y", ""]),
+    sys(["4y + 5x = 10", "3 - x = 7 + 8y"], `{(${f("8", "3")} ; ${f("-5", "6")})}`, acceptPair("8/3", "-5/6"), [
+      "isoler x dans II", "3 - x = 7 + 8y", "-x = 4 + 8y", "x = -4 - 8y", "injecter II → I et résoudre", "4y + 5(-4 - 8y) = 10", "4y - 20 - 40y = 10", "-36y = 30", `y = ${f("-5", "6")}`,
+      "chercher la valeur de x", "x = -4 - 8y", `x = -4 - 8 · ${f("-5", "6")} = ${f("8", "3")}`, `S = {(${f("8", "3")} ; ${f("-5", "6")})}`,
+    ], ["", "- 3", "· (-1)", "", "", "effectuer", "+ 20", ": (-36)", "", ""]),
+    sys(["8x = 24", "5x - 3y = 36"], `{(3 ; -7)}`, acceptPair("3", "-7"), [
+      "isoler x dans I", "8x = 24", "x = 3", "injecter I → II et résoudre", "5 · 3 - 3y = 36", "-3y = 21", "y = -7", "S = {(3 ; -7)}",
+    ], ["", ": 8", "", "", "- 15", ": (-3)", ""]),
+    sys(["8y = 15 + x", "-3x = 45 - 24y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "isoler x dans I", "8y = 15 + x", "8y - 15 = x", "injecter I → II et résoudre", "-3(8y - 15) = 45 - 24y", "-24y + 45 = 45 - 24y", "45 = 45", "infinité de possibilités !", "S = IR",
+    ], ["", "- 15", "", "", "effectuer", "+ 24y", ""]),
+    sys(["5y - 2x = 3", "10x + y = 7"], `{(${f("8", "13")} ; ${f("11", "13")})}`, acceptPair("8/13", "11/13"), [
+      "isoler y dans II", "10x + y = 7", "y = 7 - 10x", "injecter II → I et résoudre", "5(7 - 10x) - 2x = 3", "35 - 50x - 2x = 3", "35 - 52x = 3", "-52x = -32", `x = ${f("8", "13")}`,
+      "chercher la valeur de y", "y = 7 - 10x", `y = 7 - 10 · ${f("8", "13")} = ${f("11", "13")}`, `S = {(${f("8", "13")} ; ${f("11", "13")})}`,
+    ], ["", "- 10x", "", "", "effectuer", "réduire", "- 35", ": (-52)", "", ""]),
+  ];
+  return { kind: "system_equation", lesson, exNum: 1, question: templates[Math.floor(Math.random() * templates.length)]! };
+}
+
 const ALGEBRA_SYMBOLS = ["a", "b", "c", "m", "n", "x", "y"] as const;
 const SUPER_DIGITS: Record<number, string> = { 1: "", 2: "²", 3: "³", 4: "⁴" };
 
@@ -3905,6 +4002,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push(genFracEquationGroupStep(lesson));
       steps.push({ kind: "eval_start", lesson });
       steps.push(genFracEquationGroupStep(lesson));
+    } else if (sid === "A10-3") {
+      steps.push(genSystemEquationStep(lesson));
+      steps.push({ kind: "eval_start", lesson });
+      steps.push(genSystemEquationStep(lesson));
     } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
       if (sid === "A9-1") {
         steps.push(genMonomialGroupStep(lesson));
@@ -5778,6 +5879,9 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "symbolic_group") {
         currentResults = symbolicResults.slice(0, currentStep.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
+      } else if (currentStep.kind === "system_equation") {
+        currentResults = eqResults.slice(0, 1);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: eqAnswers, work: eqWorkAnswers } }));
       } else if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: arithAnswers } }));
@@ -6123,7 +6227,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, eqAnswers, eqWorkAnswers, eqResults, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
 
   const goNextRef = useRef<() => void>(() => {});
   useEffect(() => { goNextRef.current = goNext; });
@@ -6158,6 +6262,16 @@ export function GenericModuleContent({
     return false;
   }
 
+  function normalizeSystemAnswer(value: string): string {
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/,/g, ";")
+      .replace(/−/g, "-")
+      .replace(/\[\[frac:([^/\]]+)\/([^\]]+)\]\]/g, "$1/$2");
+  }
+
   if (currentStep?.kind === "equation_group" || currentStep?.kind === "frac_equation_group") {
     if (!eqValidated) {
       stepCanValidate = true;
@@ -6167,6 +6281,24 @@ export function GenericModuleContent({
           : (currentStep as FracEquationGroupStep).questions.map(q => ({ expr: "", solution: q.solution }));
         const results = qs.map((q, i) => checkEqAnswer(eqAnswers[i] ?? "", q.solution));
         setEqResults(results);
+        setEqValidated(true);
+        setExStatus("correct");
+      };
+    } else if (!isInEvalPhase) {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
+    stepReset = () => { setEqAnswers([]); setEqWorkAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
+  }
+
+  if (currentStep?.kind === "system_equation") {
+    if (!eqValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        const expected = currentStep.question.acceptable.map(normalizeSystemAnswer);
+        const answerValue = normalizeSystemAnswer(eqAnswers[0] ?? "");
+        const ok = expected.some((item) => answerValue === item || answerValue.includes(item));
+        setEqResults([ok]);
         setEqValidated(true);
         setExStatus("correct");
       };
@@ -8013,6 +8145,99 @@ export function GenericModuleContent({
                 );
               })}
             </div>
+          </div>
+        );
+      })()}
+
+      {/* System equation group (A10.3) */}
+      {!showEvalScore && currentStep?.kind === "system_equation" && (() => {
+        const step = currentStep as SystemEquationStep;
+        const q = step.question;
+        const userAns = eqAnswers[0] ?? "";
+        const result = eqValidated ? (eqResults[0] ?? null) : null;
+        const isWrong = result === false;
+        const inputCls = "w-36 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
+        return (
+          <div className="space-y-5">
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">Résolvez le système. Écrivez le développement, puis l&apos;ensemble solution.</p>
+            <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] items-center gap-x-3 font-mono text-lg text-[var(--color-text-primary)]">
+              <span className="text-sm font-serif">I</span>
+              <span className="row-span-2 text-5xl leading-none text-[var(--color-text-secondary)]">{"{"}</span>
+              <span>{renderText(q.equations[0])}</span>
+              <span className="text-sm font-serif">II</span>
+              <span>{renderText(q.equations[1])}</span>
+            </div>
+            <div className="space-y-3">
+              {Array.from({ length: 10 }, (_, i) => (
+                <div key={i} className="grid grid-cols-[1.5rem_1fr] items-end gap-2">
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <input
+                    type="text"
+                    inputMode="text"
+                    value={eqWorkAnswers[i] ?? ""}
+                    disabled={eqValidated}
+                    onChange={(e) => setEqWorkAnswers(prev => {
+                      const next = [...prev];
+                      while (next.length <= i) next.push("");
+                      next[i] = e.target.value;
+                      return next;
+                    })}
+                    className={workInputCls}
+                  />
+                </div>
+              ))}
+              <div className="grid grid-cols-[auto_10rem] items-end justify-center gap-2 pt-2">
+                <span className="text-sm font-semibold text-[var(--color-text-primary)]">S =</span>
+                {isWrong ? (
+                  <div className="flex flex-col items-center border-b-2 border-amber-500 pb-1">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{userAns || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{renderText(q.answer)}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="text"
+                    value={userAns}
+                    disabled={eqValidated}
+                    onChange={e => setEqAnswers(prev => {
+                      const next = [...prev];
+                      next[0] = e.target.value;
+                      return next;
+                    })}
+                    className={inputCls}
+                  />
+                )}
+                {result === true && <span className="col-start-2 text-center text-xs text-[var(--color-accent-alg)]">✓</span>}
+              </div>
+            </div>
+            {eqValidated && (
+              <div className="mt-5 border-t border-[var(--color-border)] pt-4">
+                <div className="mb-2 text-xs font-bold uppercase tracking-wide text-amber-600">Correction</div>
+                <div className="space-y-1 font-mono text-sm text-amber-600">
+                  {q.development.map((line, i) => {
+                    const op = q.operations?.[i] ?? "";
+                    const equalIndex = line.indexOf("=");
+                    const hasEquation = equalIndex > 0;
+                    return (
+                      <div key={`${line}-${i}`} className="grid grid-cols-[minmax(5rem,1fr)_1rem_minmax(5rem,1fr)_minmax(3.5rem,auto)] items-center gap-2">
+                        {hasEquation ? (
+                          <>
+                            <span className="text-right">{renderText(line.slice(0, equalIndex).trim())}</span>
+                            <span className="text-center">=</span>
+                            <span>{renderText(line.slice(equalIndex + 1).trim())}</span>
+                          </>
+                        ) : (
+                          <span className="col-span-3 text-center font-bold">{renderText(line)}</span>
+                        )}
+                        <span className={`min-h-5 whitespace-pre-line border-l border-amber-500 pl-3 ${op ? "" : "text-transparent"}`}>{op || "."}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         );
       })()}
