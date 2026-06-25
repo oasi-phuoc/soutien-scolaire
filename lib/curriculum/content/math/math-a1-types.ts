@@ -200,6 +200,10 @@ export type MathSubmoduleLesson = {
   exercisePool?: MathExerciseItem[];
   /** Nombre d’exercices à piocher dans exercisePool (défaut : 5). */
   poolSize?: number;
+  /** Banques d’exercices par niveau (exercice 1, 2, 3…). Chaque banque génère un exercice distinct. */
+  exercisePools?: MathExerciseItem[][];
+  /** Nombre d’items à piocher dans chaque pool de exercisePools (défaut : 5 par pool). */
+  poolSizes?: number[];
 };
 
 export function normalizeMathAnswer(raw: string): string {

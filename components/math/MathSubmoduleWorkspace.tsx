@@ -188,9 +188,11 @@ function buildRevisionEvalSteps(parentModuleId: string): WorkspaceStep[] {
       result.push(...evalSlice);
     } else {
       // pool-only lesson: include up to 3 exercises in scored mode
-      const pool = sub.exercisePool;
-      const src = pool && pool.length > 0
-        ? shufflePick(pool, Math.min(3, pool.length))
+      const allPool = sub.exercisePools
+        ? sub.exercisePools.flat()
+        : (sub.exercisePool ?? []);
+      const src = allPool.length > 0
+        ? shufflePick(allPool, Math.min(3, allPool.length))
         : sub.exercises.slice(0, 3);
       src.forEach(item => result.push({ kind: "exercise", item, exNum: exCounter++ }));
     }
@@ -563,6 +565,15 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "g3_area", exNum: 3, shapeKind, mode: "area", decimals: true });
     steps.push({ kind: "g3_area", exNum: 4, shapeKind, mode: "missing", decimals: true });
     steps.push({ kind: "results" });
+  } else if (lesson.exercisePools && lesson.exercisePools.length > 0) {
+    let exCounter = 1;
+    lesson.exercisePools.forEach((pool, pi) => {
+      const size = lesson.poolSizes?.[pi] ?? 5;
+      const picked = shufflePick(pool, Math.min(size, pool.length));
+      picked.forEach(item => steps.push({ kind: "exercise", item, exNum: exCounter++ }));
+    });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
   } else {
     const pool = lesson.exercisePool;
     const size = lesson.poolSize ?? 5;
