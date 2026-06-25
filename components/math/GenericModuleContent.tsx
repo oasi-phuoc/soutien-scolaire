@@ -221,8 +221,8 @@ type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLess
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
 type EquationSolution = { kind: "rational"; num: number; den: number } | { kind: "impossible" } | { kind: "infinite" };
-type EquationQuestion = { expr: string; solution: EquationSolution; development?: string[] };
-type EquationGroupStep = { kind: "equation_group"; lesson: MathSubmoduleLesson; questions: EquationQuestion[] };
+type EquationQuestion = { expr: string; solution: EquationSolution; development?: string[]; operations?: string[] };
+type EquationGroupStep = { kind: "equation_group"; lesson: MathSubmoduleLesson; questions: EquationQuestion[]; exNum?: number };
 type FracEqSide = { terms: Array<{ num: number; den: number; xMul: number }> };
 type FracEquationGroupStep = { kind: "frac_equation_group"; lesson: MathSubmoduleLesson; questions: Array<{ lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution }> };
 type MonomialQuestion = {
@@ -3090,53 +3090,7 @@ function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
 }
 
 // ── Equation group (A10.1) ─────────────────────────────────────────────────
-function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
-  const fixedA101: EquationQuestion[] = [
-    {
-      expr: "5x - 3 = 3x + 5",
-      solution: { kind: "rational", num: 4, den: 1 },
-      development: ["2x - 3 = 5", "2x = 8", "x = 4", "S = {4}"],
-    },
-    {
-      expr: "x - 5 = 5 - x",
-      solution: { kind: "rational", num: 5, den: 1 },
-      development: ["2x - 5 = 5", "2x = 10", "x = 5", "S = {5}"],
-    },
-    {
-      expr: "4x · 2 + 4 = 6x - 8",
-      solution: { kind: "rational", num: -6, den: 1 },
-      development: ["8x + 4 = 6x - 8", "2x + 4 = -8", "2x = -12", "x = -6", "S = {-6}"],
-    },
-    {
-      expr: "7x - 3x + 1 = 3 + 2 · 3x",
-      solution: { kind: "rational", num: -1, den: 1 },
-      development: ["4x + 1 = 3 + 6x", "-2x + 1 = 3", "-2x = 2", "x = -1", "S = {-1}"],
-    },
-    {
-      expr: "4(x - 2) + x = 6 + 6x",
-      solution: { kind: "rational", num: -14, den: 1 },
-      development: ["4x - 8 + x = 6 + 6x", "5x - 8 = 6 + 6x", "-x - 8 = 6", "-x = 14", "x = -14", "S = {-14}"],
-    },
-    {
-      expr: "10x + 5 = 10x + 2 · 7",
-      solution: { kind: "impossible" },
-      development: ["10x + 5 = 10x + 14", "5 = 14", "impossible !", "S = ∅"],
-    },
-    {
-      expr: "8x + 5x + x = 6x + 1 + x",
-      solution: { kind: "rational", num: 1, den: 7 },
-      development: ["14x = 7x + 1", "7x = 1", "x = 1/7", "S = {1/7}"],
-    },
-    {
-      expr: "3(x - 2) + 1 = 2x - 5 + x",
-      solution: { kind: "infinite" },
-      development: ["3x - 6 + 1 = 3x - 5", "3x - 5 = 3x - 5", "une infinité de possibilités !", "S = IR"],
-    },
-  ];
-  if (lesson.submoduleId === "A10-1") {
-    return { kind: "equation_group", lesson, questions: [fixedA101[Math.floor(Math.random() * fixedA101.length)]!] };
-  }
-
+function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationGroupStep {
   const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
   function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
   function rat(n: number, d: number): EquationSolution {
@@ -3144,6 +3098,142 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
     if (d < 0) { n = -n; d = -d; }
     const g = gcd(Math.abs(n), d);
     return { kind: "rational", num: n / g, den: d / g };
+  }
+  const sx = (coef: number) => coef === 1 ? "x" : coef === -1 ? "-x" : `${coef}x`;
+  const term = (coef: number, first = false) => {
+    if (coef === 0) return first ? "0" : "";
+    const abs = Math.abs(coef);
+    const body = coef === 1 || coef === -1 ? "x" : `${abs}x`;
+    if (first) return coef < 0 ? `-${body}` : body;
+    return coef < 0 ? ` - ${body}` : ` + ${body}`;
+  };
+  const cn = (value: number, first = false) => {
+    if (first) return `${value}`;
+    return value < 0 ? ` - ${Math.abs(value)}` : ` + ${value}`;
+  };
+  const lin = (xCoef: number, constant: number) => {
+    if (xCoef === 0) return `${constant}`;
+    if (constant === 0) return term(xCoef, true);
+    return `${term(xCoef, true)}${cn(constant)}`;
+  };
+  const solText = (sol: EquationSolution) =>
+    sol.kind === "impossible" ? "∅" : sol.kind === "infinite" ? "IR" : sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+  const opAdd = (n: number) => n < 0 ? `- ${Math.abs(n)}` : `+ ${n}`;
+  const opMoveX = (coef: number) => coef < 0 ? `+ ${sx(Math.abs(coef))}` : `- ${sx(coef)}`;
+  const makeA101 = (
+    expr: string,
+    a: number,
+    b: number,
+    c: number,
+    d: number,
+    pre: string[] = [],
+    preOps: string[] = [],
+  ): EquationQuestion => {
+    const development = [...pre];
+    const operations = [...preOps];
+    const leftAfterMove = a - c;
+    development.push(`${lin(leftAfterMove, b)} = ${d}`);
+    operations.push(opMoveX(c));
+    if (leftAfterMove === 0) {
+      if (b === d) {
+        development.push("une infinité de possibilités !");
+        development.push("S = IR");
+        operations.push("");
+        operations.push("");
+        return { expr, solution: { kind: "infinite" }, development, operations };
+      }
+      development.push("impossible !");
+      development.push("S = ∅");
+      operations.push("");
+      operations.push("");
+      return { expr, solution: { kind: "impossible" }, development, operations };
+    }
+    if (b !== 0) {
+      development.push(`${sx(leftAfterMove)} = ${d - b}`);
+      operations.push(opAdd(-b));
+    }
+    const solution = rat(d - b, leftAfterMove);
+    if (solution.kind === "rational") {
+      development.push(`x = ${solText(solution)}`);
+      development.push(`S = {${solText(solution)}}`);
+      operations.push(`: ${leftAfterMove < 0 ? `(${leftAfterMove})` : leftAfterMove}`);
+      operations.push("");
+    }
+    return { expr, solution, development, operations };
+  };
+  const a101Templates: Array<() => EquationQuestion> = [
+    () => { const a=ri(4,9), c=ri(1,a-2), b=-ri(1,9), x=ri(2,9), d=(a-c)*x+b; return makeA101(`${a}x${cn(b)} = ${c}x${cn(d)}`, a,b,c,d); },
+    () => { const p=ri(4,10), b=ri(2,9), x=ri(-6,-1), c=ri(1,p-2), d=(p-c)*x-b; return makeA101(`${p}x - ${b} = ${d} ${c < 0 ? "-" : "+"} ${Math.abs(c)}x`, p,-b,c,d); },
+    () => { const a=ri(2,6), k=ri(2,9); return makeA101(`${a}(x + ${k}) = ${a}x + ${a*k}`, a,a*k,a,a*k, [`${a}x + ${a*k} = ${a}x + ${a*k}`], ["effectuer"]); },
+    () => { const a=ri(2,8), c=ri(a+1,a+6); return makeA101(`${a}x = ${c}x`, a,0,c,0); },
+    () => { const c=ri(3,9), x=ri(2,7), d=ri(1,9), left=c*x-d; return makeA101(`${left} = ${c}x - ${d}`, 0,left,c,-d); },
+    () => { const a=ri(2,6), k=ri(2,8), add=ri(1,6); const b=-a*k+add, d=b-ri(1,5); return makeA101(`${a}(x - ${k}) + ${add} = x${cn(d)} + ${a-1}x`, a,b,a,d, [`${a}x - ${a*k} + ${add} = ${a}x${cn(d)}`, `${lin(a,b)} = ${lin(a,d)}`], ["effectuer", "réduire"]); },
+    () => { const p=ri(3,7), q=ri(2,5), r=ri(2,5), c=ri(2,8), b=-ri(1,6), d=ri(1,12); return makeA101(`${p} · ${q}x + ${r}x · 2${cn(b)} = ${d} + ${c}x`, p*q+r*2,b,c,d, [`${p*q}x + ${r*2}x${cn(b)} = ${d} + ${c}x`, `${lin(p*q+r*2,b)} = ${lin(c,d)}`], ["effectuer", "réduire"]); },
+    () => { const m=ri(2,5), n=ri(2,5), a=ri(2,5), k=ri(2,7), add=ri(1,6); return makeA101(`${m} · ${n} - ${a} · ${k}x = ${a}(x - ${k}) + ${add}`, -a*k,m*n,a,add-a*k, [`${m*n} - ${a*k}x = ${a}x - ${a*k} + ${add}`, `${lin(-a*k,m*n)} = ${lin(a,add-a*k)}`], ["effectuer", "réduire"]); },
+    () => { const c=ri(4,9), b=ri(1,6), d=ri(1,8); return makeA101(`x - ${b} = ${c}x${cn(d)}`, 1,-b,c,d); },
+    () => { const a=ri(4,9), m=ri(2,5), n=ri(2,5); return makeA101(`${a}x - ${m} · ${n} = ${a-1}x - ${m*n} + x`, a,-m*n,a,-m*n, [`${a}x - ${m*n} = ${a}x - ${m*n}`], ["effectuer"]); },
+    () => { const a=ri(2,6), b=ri(1,8), d=ri(1,9); return makeA101(`-${b} - ${a}x = ${-(a-1)}x - ${d}`, -a,-b,-(a-1),-d); },
+    () => { const p=ri(3,7), q=ri(2,6), r=ri(2,5), rhs=ri(6,20); return makeA101(`${p}(${q} - ${r}x) - x = ${rhs}`, -p*r-1,p*q,0,rhs, [`${p*q} - ${p*r}x - x = ${rhs}`, `${lin(-p*r-1,p*q)} = ${rhs}`], ["effectuer", "réduire"]); },
+    () => { const a=ri(2,6), k=ri(1,7), d=ri(1,8); return makeA101(`${a}(x - ${k}) = x + ${d} + ${a-1}x`, a,-a*k,a,d, [`${a}x - ${a*k} = ${a}x + ${d}`], ["effectuer"]); },
+    () => { const p=ri(2,8), q=ri(2,6), d=ri(1,8), left=ri(10,35); return makeA101(`${left} = (x + ${p}) · ${q} - ${d}`, 0,left,q,p*q-d, [`${left} = ${q}x + ${p*q} - ${d}`, `${left} = ${lin(q,p*q-d)}`], ["effectuer", "réduire"]); },
+    () => { const a=ri(3,8), c=ri(a+2,a+9), b=ri(2,9), d=ri(1,9); return makeA101(`${a}x - ${b} = ${c}x + ${d}`, a,-b,c,d); },
+    () => { const p=ri(3,8), q=ri(2,4), add=ri(1,6), r=ri(2,6), k=ri(2,7); return makeA101(`${p}x · ${q} - ${add} = ${r}(x - ${k}) + x`, p*q,-add,r+1,-r*k, [`${p*q}x - ${add} = ${r}x - ${r*k} + x`, `${lin(p*q,-add)} = ${lin(r+1,-r*k)}`], ["effectuer", "réduire"]); },
+    () => { const a=ri(2,8), c=ri(a+10,a+80), b=ri(10,60); return makeA101(`${a}x + ${b} = ${c}x`, a,b,c,0); },
+    () => { const a=ri(4,9), c=ri(a+1,a+6), b=ri(1,8), d=-ri(1,8); return makeA101(`${a}x + ${b} = ${c}x${cn(d)}`, a,b,c,d); },
+    () => { const k=ri(2,5), m=ri(2,6), n=ri(2,6), p=ri(2,5), q=ri(2,6); return makeA101(`(x - ${k}) · ${m} = ${p}(${q} - ${n}x)`, m,-m*k,-p*n,p*q, [`${m}x - ${m*k} = ${p*q} - ${p*n}x`], ["effectuer"]); },
+    () => { const a=ri(2,5), c=ri(1,5); return makeA101(`${a}x · 2 - x = x - ${c} + ${2*a-2}x`, 2*a-1,0,2*a-1,-c, [`${2*a}x - x = ${2*a-1}x - ${c}`, `${lin(2*a-1,0)} = ${lin(2*a-1,-c)}`], ["effectuer", "réduire"]); },
+    () => { const c=ri(2,6), b=ri(2,12); return makeA101(`x + ${b} = ${b} + ${c}x`, 1,b,c,b); },
+    () => { const a=ri(4,9), k=ri(1,5), r=ri(2,6), s=ri(1,4), t=ri(2,5); return makeA101(`${a}(x - ${k}) + x = ${r}(${s} - ${t}x)`, a+1,-a*k,-r*t,r*s, [`${a}x - ${a*k} + x = ${r*s} - ${r*t}x`, `${lin(a+1,-a*k)} = ${lin(-r*t,r*s)}`], ["effectuer", "réduire"]); },
+    () => { const a=ri(2,6), b=ri(1,6), c=ri(1,4), d=ri(1,6); return makeA101(`${a}x - ${b} + x = ${c}x - ${d} + ${a+1-c}x${cn(b-d)}`, a+1,-b,a+1,-b, [`${lin(a+1,-b)} = ${lin(a+1,-b)}`], ["réduire"]); },
+    () => { const a=ri(2,5), b=ri(1,5), m=ri(2,4), add=ri(1,8), c=ri(2,5), d=ri(2,5), r=ri(1,10); return makeA101(`(${a}x - ${b}) · ${m} + ${add} = ${c}x · ${d} + ${r}`, a*m, -b*m+add, c*d, r, [`${a*m}x - ${b*m} + ${add} = ${c*d}x + ${r}`, `${lin(a*m,-b*m+add)} = ${lin(c*d,r)}`], ["effectuer", "réduire"]); },
+    () => { const b=ri(5,15), d=-ri(20,60); return makeA101(`x - ${b} = ${d}`, 1,-b,0,d); },
+    () => { const a=ri(4,9), c=ri(1,a-2), b=-ri(1,9), d=-ri(1,12); return makeA101(`${a}x${cn(b)} = ${d} + ${c}x`, a,b,c,d); },
+    () => { const a=ri(2,7), k=ri(2,9); return makeA101(`${a}(x + ${k}) = ${a}x + ${a*k}`, a,a*k,a,a*k, [`${a}x + ${a*k} = ${a}x + ${a*k}`], ["effectuer"]); },
+    () => { const a=ri(2,8), c=ri(a+1,a+7); return makeA101(`${a}x = ${c}x`, a,0,c,0); },
+    () => { const c=ri(2,9), x=ri(1,7), b=ri(1,12); return makeA101(`${c*x-b} = ${c}x - ${b}`, 0,c*x-b,c,-b); },
+    () => { const a=ri(2,6), k=ri(2,8), add=ri(1,5), d=-a*k+add-ri(1,5); return makeA101(`${a}(x - ${k}) + ${add} = x${cn(d)} + ${a-1}x`, a,-a*k+add,a,d, [`${a}x - ${a*k} + ${add} = ${a}x${cn(d)}`, `${lin(a,-a*k+add)} = ${lin(a,d)}`], ["effectuer", "réduire"]); },
+    () => { const p=ri(3,7), q=ri(2,8), r=ri(2,6), c=ri(1,10), b=-ri(1,6), d=ri(1,15); return makeA101(`${p} · ${q}x + ${r}x · 2${cn(b)} = ${d} + ${c}x`, p*q+r*2,b,c,d, [`${p*q}x + ${r*2}x${cn(b)} = ${d} + ${c}x`, `${lin(p*q+r*2,b)} = ${lin(c,d)}`], ["effectuer", "réduire"]); },
+    () => { const m=ri(2,10), n=ri(2,5), a=ri(2,5), k=ri(1,7), add=ri(1,8); return makeA101(`${m} · ${n} - ${a} · ${k}x = ${a}(x - ${k}) + ${add}`, -a*k,m*n,a,add-a*k, [`${m*n} - ${a*k}x = ${a}x - ${a*k} + ${add}`, `${lin(-a*k,m*n)} = ${lin(a,add-a*k)}`], ["effectuer", "réduire"]); },
+  ];
+  const fixedA102: EquationQuestion[] = [
+    { expr: "4x · 3 - 2(x + 1) = 5x - 3 + x", solution: rat(-1, 4), development: ["12x - 2x - 2 = 6x - 3", "10x - 2 = 6x - 3", "4x - 2 = -3", "4x = -1", "x = -1/4", "S = {-1/4}"], operations: ["effectuer", "réduire", "- 6x", "+ 2", ": 4", ""] },
+    { expr: "7 - (8 - 2x) = 7x + (2x - 1) · 3", solution: rat(2, 11), development: ["7 - 8 + 2x = 7x + 6x - 3", "-1 + 2x = 13x - 3", "-1 - 11x = -3", "-11x = -2", "x = 2/11", "S = {2/11}"], operations: ["effectuer", "réduire", "- 13x", "+ 1", ": (-11)", ""] },
+    { expr: "8x + x + x + 2x = (x - 2) - (x + 3)", solution: rat(-5, 12), development: ["12x = x - 2 - x - 3", "12x = -5", "x = -5/12", "S = {-5/12}"], operations: ["effectuer", "réduire", ": 12", ""] },
+    { expr: "5x + (x - 3) · 2 = 3(x - 7) + 4x", solution: { kind: "impossible" }, development: ["5x + 2x - 6 = 3x - 21 + 4x", "7x - 6 = 7x - 21", "-6 = -21", "impossible !", "S = ∅"], operations: ["effectuer", "réduire", "- 7x", "", ""] },
+    { expr: "3x² + 4x - 2 = 3x(x - 3) + 1", solution: rat(3, 13), development: ["3x² + 4x - 2 = 3x² - 9x + 1", "4x - 2 = -9x + 1", "13x - 2 = 1", "13x = 3", "x = 3/13", "S = {3/13}"], operations: ["effectuer", "- 3x²", "+ 9x", "+ 2", ": 13", ""] },
+    { expr: "5x · 2 - 3x · (-2) + 1 = 10", solution: rat(9, 16), development: ["10x + 6x + 1 = 10", "16x + 1 = 10", "16x = 9", "x = 9/16", "S = {9/16}"], operations: ["effectuer", "réduire", "- 1", ": 16", ""] },
+    { expr: "6(x - 3) + 2 · 5 = 3(x - 2) + 3x - 2", solution: { kind: "infinite" }, development: ["6x - 18 + 10 = 3x - 6 + 3x - 2", "6x - 8 = 6x - 8", "-8 = -8", "une infinité de possibilités !", "S = IR"], operations: ["effectuer", "réduire", "- 6x", "", ""] },
+    { expr: "4x · (x - 3) - 4x² = (5 + 2x) · 7", solution: rat(-35, 26), development: ["4x² - 12x - 4x² = 35 + 14x", "-12x = 35 + 14x", "-26x = 35", "x = -35/26", "S = {-35/26}"], operations: ["effectuer", "réduire", "- 14x", ": (-26)", ""] },
+    { expr: "10x - 3 · (-2x) + 5 = 7x · 3 - 2", solution: rat(7, 5), development: ["10x + 6x + 5 = 21x - 2", "16x + 5 = 21x - 2", "-5x + 5 = -2", "-5x = -7", "x = 7/5", "S = {7/5}"], operations: ["effectuer", "réduire", "- 21x", "- 5", ": (-5)", ""] },
+    { expr: "(x - 7) - 2(x + 2) = (x - 3) · 2", solution: rat(-5, 3), development: ["x - 7 - 2x - 4 = 2x - 6", "-x - 11 = 2x - 6", "-3x - 11 = -6", "-3x = 5", "x = -5/3", "S = {-5/3}"], operations: ["effectuer", "réduire", "- 2x", "+ 11", ": (-3)", ""] },
+    { expr: "5x · 3 + 2 - x = 7(1 + 2x) - 5", solution: { kind: "infinite" }, development: ["15x + 2 - x = 7 + 14x - 5", "14x + 2 = 2 + 14x", "2 = 2", "une infinité de possibilités !", "S = IR"], operations: ["effectuer", "réduire", "- 14x", ""] },
+    { expr: "5x² · 3 · (-4x) + 2 = x(5x + 2)", solution: rat(-1, 5), development: ["5x² + 12x + 2 = 5x² + 2x", "12x + 2 = 2x", "10x + 2 = 0", "10x = -2", "x = -1/5", "S = {-1/5}"], operations: ["effectuer", "- 5x²", "- 2x", "- 2", ": 10", ""] },
+    { expr: "(x + 2) · 3 - 1 = x · 3 - 1 - 1", solution: { kind: "impossible" }, development: ["3x + 6 - 1 = 3x - 2", "3x + 5 = 3x - 2", "5 = -2", "impossible !", "S = ∅"], operations: ["effectuer", "réduire", "- 3x", "", ""] },
+    { expr: "8x - (3x - 1) + 2 = (x - 3) · 4", solution: rat(-15, 1), development: ["8x - 3x + 1 + 2 = 4x - 12", "5x + 3 = 4x - 12", "x + 3 = -12", "x = -15", "S = {-15}"], operations: ["effectuer", "réduire", "- 4x", "- 3", ""] },
+    { expr: "x + x + x - 3 = (x + 2) - (4x - 7)", solution: rat(2, 1), development: ["3x - 3 = x + 2 - 4x + 7", "3x - 3 = -3x + 9", "6x - 3 = 9", "6x = 12", "x = 2", "S = {2}"], operations: ["effectuer", "réduire", "+ 3x", "+ 3", ": 6", ""] },
+    { expr: "5(x - 2) + 2(8 + 3x) = 0", solution: rat(-6, 11), development: ["5x - 10 + 16 + 6x = 0", "11x + 6 = 0", "11x = -6", "x = -6/11", "S = {-6/11}"], operations: ["effectuer", "réduire", "- 6", ": 11", ""] },
+    { expr: "50 - 3(x - 1) = (4 + 3x) · 2", solution: rat(5, 1), development: ["50 - 3x + 3 = 8 + 6x", "53 - 3x = 8 + 6x", "53 - 9x = 8", "-9x = -45", "x = 5", "S = {5}"], operations: ["effectuer", "réduire", "- 6x", "- 53", ": (-9)", ""] },
+    { expr: "3x · 2x - 8 = 7x² + 2 - x(x + 1)", solution: rat(10, 1), development: ["6x² - 8 = 7x² + 2 - x² - x", "6x² - 8 = 6x² + 2 - x", "-8 = 2 - x", "-10 = -x", "x = 10", "S = {10}"], operations: ["effectuer", "réduire", "- 6x²", "- 2", "· (-1)", ""] },
+    { expr: "(8 - 3x) - (7 - 3x) = 10", solution: { kind: "impossible" }, development: ["8 - 3x - 7 + 3x = 10", "1 = 10", "impossible !", "S = ∅"], operations: ["effectuer", "réduire", "", ""] },
+    { expr: "5 · (-3x) - 3(2 + 4x) = 5(1 - x) + 2x", solution: rat(11, -24), development: ["-15x - 6 - 12x = 5 - 5x + 2x", "-27x - 6 = 5 - 3x", "-24x - 6 = 5", "-24x = 11", "x = -11/24", "S = {-11/24}"], operations: ["effectuer", "réduire", "+ 3x", "+ 6", ": (-24)", ""] },
+    { expr: "7 · (-3) + 4 · (-2x) = 5 · (-1) - 3 · (-x)", solution: rat(-16, 11), development: ["-21 - 8x = -5 + 3x", "-21 - 11x = -5", "-11x = 16", "x = -16/11", "S = {-16/11}"], operations: ["effectuer", "- 3x", "+ 21", ": (-11)", ""] },
+    { expr: "8 - (2x - 1) - 1 = 7x · 3 + 4", solution: rat(-4, 23), development: ["8 - 2x + 1 - 1 = 21x + 4", "8 - 2x = 21x + 4", "8 - 23x = 4", "-23x = -4", "x = 4/23", "S = {4/23}"], operations: ["effectuer", "réduire", "- 21x", "- 8", ": (-23)", ""] },
+    { expr: "10x · 3 + 7 · (2 + x) = 3 · (4 + 10x) + 2 + 7x", solution: { kind: "infinite" }, development: ["30x + 14 + 7x = 12 + 30x + 2 + 7x", "37x + 14 = 14 + 37x", "14 = 14", "une infinité de possibilités !", "S = IR"], operations: ["effectuer", "réduire", "- 37x", "", ""] },
+    { expr: "(x - 3) · 10 + 2 = 5 · (2x + 3) - 1", solution: { kind: "impossible" }, development: ["10x - 30 + 2 = 10x + 15 - 1", "10x - 28 = 10x + 14", "-28 = 14", "impossible !", "S = ∅"], operations: ["effectuer", "réduire", "- 10x", "", ""] },
+    { expr: "8 - (10 - 3x) = 3(x + 4) - 2", solution: { kind: "impossible" }, development: ["8 - 10 + 3x = 3x + 12 - 2", "-2 + 3x = 3x + 10", "-2 = 10", "impossible !", "S = ∅"], operations: ["effectuer", "réduire", "- 3x", "", ""] },
+    { expr: "(x - 7) - (8x + 6) = 3 · (-5x)", solution: rat(13, 8), development: ["x - 7 - 8x - 6 = -15x", "-7x - 13 = -15x", "-13 = -8x", "x = 13/8", "S = {13/8}"], operations: ["effectuer", "réduire", "+ 7x", ": (-8)", ""] },
+    { expr: "2x · 3x - x + 2 = 6x(x - 1) + 5x + 2", solution: { kind: "infinite" }, development: ["6x² - x + 2 = 6x² - 6x + 5x + 2", "6x² - x + 2 = 6x² - x + 2", "2 = 2", "une infinité de possibilités !", "S = IR"], operations: ["effectuer", "réduire", "- 6x²", "+ x", ""] },
+    { expr: "(x - 2) · (-2) - 4(5 + x) = 0", solution: rat(-8, 3), development: ["-2x + 4 - 20 - 4x = 0", "-6x - 16 = 0", "-6x = 16", "x = -8/3", "S = {-8/3}"], operations: ["effectuer", "réduire", "+ 16", ": (-6)", ""] },
+    { expr: "(8x - 2) · 3 - 2(x + 4) = 2 · (-7)", solution: rat(0, 1), development: ["24x - 6 - 2x - 8 = -14", "22x - 14 = -14", "22x = 0", "x = 0", "S = {0}"], operations: ["effectuer", "réduire", "+ 14", ": 22", ""] },
+    { expr: "(x - 7) · (-3) - 1 = (x + 2) · 2 + x", solution: rat(8, 3), development: ["-3x + 21 - 1 = 2x + 4 + x", "-3x + 20 = 3x + 4", "-6x + 20 = 4", "-6x = -16", "x = 8/3", "S = {8/3}"], operations: ["effectuer", "réduire", "- 3x", "- 20", ": (-6)", ""] },
+    { expr: "3x · 2 - 4 · 5x = 8 - (4 + 5x)", solution: rat(-4, 9), development: ["6x - 20x = 8 - 4 - 5x", "-14x = 4 - 5x", "-9x = 4", "x = -4/9", "S = {-4/9}"], operations: ["effectuer", "réduire", "+ 5x", ": (-9)", ""] },
+    { expr: "5x · (-2) - 3x = 2x + 7 - 6x + 3", solution: rat(-10, 9), development: ["-10x - 3x = -4x + 10", "-13x = -4x + 10", "-9x = 10", "x = -10/9", "S = {-10/9}"], operations: ["effectuer", "réduire", "+ 4x", ": (-9)", ""] },
+  ];
+  if (lesson.submoduleId === "A10-1" && exNum === 1) {
+    return { kind: "equation_group", lesson, exNum, questions: [a101Templates[Math.floor(Math.random() * a101Templates.length)]!()] };
+  }
+  if (lesson.submoduleId === "A10-1" && exNum === 2) {
+    return { kind: "equation_group", lesson, exNum, questions: [fixedA102[Math.floor(Math.random() * fixedA102.length)]!] };
   }
   const imp: EquationSolution = { kind: "impossible" };
   const inf: EquationSolution = { kind: "infinite" };
@@ -3758,9 +3848,11 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
       steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
     } else if (sid === "A10-1") {
-      steps.push(genEquationGroupStep(lesson));
+      steps.push(genEquationGroupStep(lesson, 1));
+      steps.push(genEquationGroupStep(lesson, 2));
       steps.push({ kind: "eval_start", lesson });
-      steps.push(genEquationGroupStep(lesson));
+      steps.push(genEquationGroupStep(lesson, 1));
+      steps.push(genEquationGroupStep(lesson, 2));
     } else if (sid === "A10-2") {
       steps.push(genFracEquationGroupStep(lesson));
       steps.push({ kind: "eval_start", lesson });
@@ -6018,17 +6110,22 @@ export function GenericModuleContent({
     return false;
   }
 
-  if ((currentStep?.kind === "equation_group" || currentStep?.kind === "frac_equation_group") && !eqValidated) {
-    stepCanValidate = true;
-    stepValidate = () => {
-      const qs = currentStep.kind === "equation_group"
-        ? (currentStep as EquationGroupStep).questions
-        : (currentStep as FracEquationGroupStep).questions.map(q => ({ expr: "", solution: q.solution }));
-      const results = qs.map((q, i) => checkEqAnswer(eqAnswers[i] ?? "", q.solution));
-      setEqResults(results);
-      setEqValidated(true);
-      setExStatus("correct");
-    };
+  if (currentStep?.kind === "equation_group" || currentStep?.kind === "frac_equation_group") {
+    if (!eqValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        const qs = currentStep.kind === "equation_group"
+          ? (currentStep as EquationGroupStep).questions
+          : (currentStep as FracEquationGroupStep).questions.map(q => ({ expr: "", solution: q.solution }));
+        const results = qs.map((q, i) => checkEqAnswer(eqAnswers[i] ?? "", q.solution));
+        setEqResults(results);
+        setEqValidated(true);
+        setExStatus("correct");
+      };
+    } else if (!isInEvalPhase) {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
     stepReset = () => { setEqAnswers([]); setEqWorkAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
   }
 
@@ -7562,7 +7659,7 @@ export function GenericModuleContent({
       )}
 
       {/* Print config button — floated right, only on theory step */}
-      {currentStep?.kind === "theory" && (
+      {!showEvalScore && currentStep?.kind === "theory" && (
         <div className="float-right ml-2" data-no-print>
           <button
             type="button"
@@ -7585,7 +7682,7 @@ export function GenericModuleContent({
       )}
 
       {/* Exercise */}
-      {currentStep?.kind === "exercise" && (
+      {!showEvalScore && currentStep?.kind === "exercise" && (
         <div className="space-y-4">
           <p
             className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]"
@@ -7618,7 +7715,7 @@ export function GenericModuleContent({
       )}
 
       {/* Monomial analysis (A9.1) */}
-      {currentStep?.kind === "monomial_group" && (() => {
+      {!showEvalScore && currentStep?.kind === "monomial_group" && (() => {
         const step = currentStep as MonomialGroupStep;
         const update = (index: number, field: "coefficient" | "literal" | "degree", value: string) => {
           setMonomialAnswers((previous) => {
@@ -7680,7 +7777,7 @@ export function GenericModuleContent({
       })()}
 
       {/* Symbolic simplification groups (A9.4) */}
-      {currentStep?.kind === "symbolic_group" && (() => {
+      {!showEvalScore && currentStep?.kind === "symbolic_group" && (() => {
         const step = currentStep as SymbolicGroupStep;
         return (
           <div className="space-y-4">
@@ -7745,7 +7842,7 @@ export function GenericModuleContent({
       })()}
 
       {/* Equation group (A10.1) */}
-      {currentStep?.kind === "equation_group" && (() => {
+      {!showEvalScore && currentStep?.kind === "equation_group" && (() => {
         const step = currentStep as EquationGroupStep;
         const formatSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
@@ -7763,14 +7860,13 @@ export function GenericModuleContent({
           const isWrong = result === false;
           return (
             <div className="space-y-5">
-              <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+              <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">Résolvez l&apos;équation. Écrivez le développement, puis la valeur de x.</p>
-              <div className="rounded-xl border border-[var(--color-border)] bg-white p-4">
+              <div className="space-y-5">
                 <div className="mb-5 text-center font-mono text-lg text-[var(--color-text-primary)]">{q.expr}</div>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
-                    <div key={i} className="grid grid-cols-[1.5rem_minmax(0,1fr)] items-end gap-2">
-                      <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    <div key={i}>
                       <input
                         type="text"
                         inputMode="text"
@@ -7786,8 +7882,7 @@ export function GenericModuleContent({
                       />
                     </div>
                   ))}
-                  <div className="grid grid-cols-[1.5rem_auto_8rem] items-end gap-2 pt-2">
-                    <span />
+                  <div className="grid grid-cols-[auto_8rem] items-end justify-center gap-2 pt-2">
                     <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
                     {isWrong ? (
                       <div className="flex flex-col items-center border-b-2 border-amber-500 pb-1">
@@ -7808,14 +7903,32 @@ export function GenericModuleContent({
                         className={inputCls}
                       />
                     )}
-                    {result === true && <span className="col-start-3 text-center text-xs text-[var(--color-accent-alg)]">✓</span>}
+                    {result === true && <span className="col-start-2 text-center text-xs text-[var(--color-accent-alg)]">✓</span>}
                   </div>
                 </div>
                 {eqValidated && (
                   <div className="mt-5 border-t border-[var(--color-border)] pt-4">
                     <div className="mb-2 text-xs font-bold uppercase tracking-wide text-amber-600">Correction</div>
                     <div className="space-y-1 font-mono text-sm text-amber-600">
-                      {q.development!.map((line, i) => <div key={`${line}-${i}`}>{line}</div>)}
+                      {q.development!.map((line, i) => {
+                        const op = q.operations?.[i] ?? "";
+                        const equalIndex = line.indexOf("=");
+                        const hasEquation = equalIndex > 0;
+                        return (
+                          <div key={`${line}-${i}`} className="grid grid-cols-[minmax(5rem,1fr)_1rem_minmax(5rem,1fr)_minmax(3.5rem,auto)] items-center gap-2">
+                            {hasEquation ? (
+                              <>
+                                <span className="text-right">{line.slice(0, equalIndex).trim()}</span>
+                                <span className="text-center">=</span>
+                                <span>{line.slice(equalIndex + 1).trim()}</span>
+                              </>
+                            ) : (
+                              <span className="col-span-3 text-center font-bold">{line}</span>
+                            )}
+                            <span className={`min-h-5 border-l border-amber-500 pl-3 ${op ? "" : "text-transparent"}`}>{op || "."}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -7825,7 +7938,7 @@ export function GenericModuleContent({
         }
         return (
           <div className="space-y-4">
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez un entier (ex&nbsp;: 4&nbsp;ou&nbsp;−6), une fraction (ex&nbsp;: −1/4), <em>impossible</em> ou <em>IR</em>.</p>
             <div className="space-y-4">
               {step.questions.map((q, i) => {
@@ -7857,7 +7970,7 @@ export function GenericModuleContent({
       })()}
 
       {/* Fraction equation group (A10.2) */}
-      {currentStep?.kind === "frac_equation_group" && (() => {
+      {!showEvalScore && currentStep?.kind === "frac_equation_group" && (() => {
         const step = currentStep as FracEquationGroupStep;
         const formatSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
@@ -7917,7 +8030,7 @@ export function GenericModuleContent({
       })()}
 
       {/* Algebra group exercise (A9.2) */}
-      {currentStep?.kind === "algebra_group" && (() => {
+      {!showEvalScore && currentStep?.kind === "algebra_group" && (() => {
         const step = currentStep as AlgebraGroupStep;
         return (
           <div className="space-y-4">
@@ -7972,7 +8085,7 @@ export function GenericModuleContent({
       })()}
 
       {/* Number line exercise */}
-      {currentStep?.kind === "number_line" && (
+      {!showEvalScore && currentStep?.kind === "number_line" && (
         <div className="space-y-4">
           <p className="text-sm font-medium text-[var(--color-text-primary)]">
             Quel est le nombre indiqué par la flèche ?
@@ -9274,6 +9387,7 @@ export function GenericModuleContent({
                 type="button"
                 onClick={goBack}
                 disabled={isFirstStep || currentStep?.kind === "pass_toggle"}
+                data-nav-action="back"
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
               >
                 ← Retour
@@ -9289,6 +9403,7 @@ export function GenericModuleContent({
                   <button
                     type="button"
                     onClick={stepReset}
+                    data-nav-action="refresh"
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                     aria-label="Réinitialiser"
                   >
@@ -9302,6 +9417,7 @@ export function GenericModuleContent({
                     type="button"
                     onClick={stepValidate}
                     disabled={!stepCanValidate}
+                    data-nav-action="validate"
                     className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                     aria-label="Valider"
                   >
@@ -9323,6 +9439,7 @@ export function GenericModuleContent({
                 disabled={
                   (currentStep?.kind === "pass_toggle" && toggleAnswer === null)
                 }
+                data-nav-action="next"
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
                 {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
