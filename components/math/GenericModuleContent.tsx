@@ -221,7 +221,7 @@ type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLess
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
 type EquationSolution = { kind: "rational"; num: number; den: number } | { kind: "impossible" } | { kind: "infinite" };
-type EquationQuestion = { expr: string; solution: EquationSolution };
+type EquationQuestion = { expr: string; solution: EquationSolution; development?: string[] };
 type EquationGroupStep = { kind: "equation_group"; lesson: MathSubmoduleLesson; questions: EquationQuestion[] };
 type FracEqSide = { terms: Array<{ num: number; den: number; xMul: number }> };
 type FracEquationGroupStep = { kind: "frac_equation_group"; lesson: MathSubmoduleLesson; questions: Array<{ lhs: FracEqSide; rhs: FracEqSide; solution: EquationSolution }> };
@@ -3091,6 +3091,52 @@ function genAlgebraGroupStep(lesson: MathSubmoduleLesson): AlgebraGroupStep {
 
 // ── Equation group (A10.1) ─────────────────────────────────────────────────
 function genEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
+  const fixedA101: EquationQuestion[] = [
+    {
+      expr: "5x - 3 = 3x + 5",
+      solution: { kind: "rational", num: 4, den: 1 },
+      development: ["2x - 3 = 5", "2x = 8", "x = 4", "S = {4}"],
+    },
+    {
+      expr: "x - 5 = 5 - x",
+      solution: { kind: "rational", num: 5, den: 1 },
+      development: ["2x - 5 = 5", "2x = 10", "x = 5", "S = {5}"],
+    },
+    {
+      expr: "4x · 2 + 4 = 6x - 8",
+      solution: { kind: "rational", num: -6, den: 1 },
+      development: ["8x + 4 = 6x - 8", "2x + 4 = -8", "2x = -12", "x = -6", "S = {-6}"],
+    },
+    {
+      expr: "7x - 3x + 1 = 3 + 2 · 3x",
+      solution: { kind: "rational", num: -1, den: 1 },
+      development: ["4x + 1 = 3 + 6x", "-2x + 1 = 3", "-2x = 2", "x = -1", "S = {-1}"],
+    },
+    {
+      expr: "4(x - 2) + x = 6 + 6x",
+      solution: { kind: "rational", num: -14, den: 1 },
+      development: ["4x - 8 + x = 6 + 6x", "5x - 8 = 6 + 6x", "-x - 8 = 6", "-x = 14", "x = -14", "S = {-14}"],
+    },
+    {
+      expr: "10x + 5 = 10x + 2 · 7",
+      solution: { kind: "impossible" },
+      development: ["10x + 5 = 10x + 14", "5 = 14", "impossible !", "S = ∅"],
+    },
+    {
+      expr: "8x + 5x + x = 6x + 1 + x",
+      solution: { kind: "rational", num: 1, den: 7 },
+      development: ["14x = 7x + 1", "7x = 1", "x = 1/7", "S = {1/7}"],
+    },
+    {
+      expr: "3(x - 2) + 1 = 2x - 5 + x",
+      solution: { kind: "infinite" },
+      development: ["3x - 6 + 1 = 3x - 5", "3x - 5 = 3x - 5", "une infinité de possibilités !", "S = IR"],
+    },
+  ];
+  if (lesson.submoduleId === "A10-1") {
+    return { kind: "equation_group", lesson, questions: [fixedA101[Math.floor(Math.random() * fixedA101.length)]!] };
+  }
+
   const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
   function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
   function rat(n: number, d: number): EquationSolution {
@@ -5032,6 +5078,7 @@ export function GenericModuleContent({
   const [algebraGroupValidated, setAlgebraGroupValidated] = useState(false);
   const [algebraGroupResults, setAlgebraGroupResults] = useState<boolean[]>([]);
   const [eqAnswers, setEqAnswers] = useState<string[]>([]);
+  const [eqWorkAnswers, setEqWorkAnswers] = useState<string[]>([]);
   const [eqValidated, setEqValidated] = useState(false);
   const [eqResults, setEqResults] = useState<boolean[]>([]);
   const [monomialAnswers, setMonomialAnswers] = useState<Array<{ coefficient: string; literal: string; degree: string }>>([]);
@@ -5261,6 +5308,7 @@ export function GenericModuleContent({
     setAlgebraGroupValidated(false);
     setAlgebraGroupResults([]);
     setEqAnswers([]);
+    setEqWorkAnswers([]);
     setEqValidated(false);
     setEqResults([]);
     setMonomialAnswers([]);
@@ -5981,7 +6029,7 @@ export function GenericModuleContent({
       setEqValidated(true);
       setExStatus("correct");
     };
-    stepReset = () => { setEqAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
+    stepReset = () => { setEqAnswers([]); setEqWorkAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
   }
 
   if (currentStep?.kind === "algebra_group" && !algebraGroupValidated) {
@@ -7702,7 +7750,79 @@ export function GenericModuleContent({
         const formatSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+        const formatXSol = (sol: EquationSolution) =>
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
+          sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
+        const singleQuestion = step.questions.length === 1 && !!step.questions[0]?.development;
+        if (singleQuestion) {
+          const q = step.questions[0]!;
+          const userAns = eqAnswers[0] ?? "";
+          const result = eqValidated ? (eqResults[0] ?? null) : null;
+          const isWrong = result === false;
+          return (
+            <div className="space-y-5">
+              <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+              <p className="text-sm text-[var(--color-text-secondary)]">Résolvez l&apos;équation. Écrivez le développement, puis la valeur de x.</p>
+              <div className="rounded-xl border border-[var(--color-border)] bg-white p-4">
+                <div className="mb-5 text-center font-mono text-lg text-[var(--color-text-primary)]">{q.expr}</div>
+                <div className="space-y-3">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <div key={i} className="grid grid-cols-[1.5rem_minmax(0,1fr)] items-end gap-2">
+                      <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                      <input
+                        type="text"
+                        inputMode="text"
+                        value={eqWorkAnswers[i] ?? ""}
+                        disabled={eqValidated}
+                        onChange={(e) => setEqWorkAnswers(prev => {
+                          const next = [...prev];
+                          while (next.length <= i) next.push("");
+                          next[i] = e.target.value;
+                          return next;
+                        })}
+                        className={workInputCls}
+                      />
+                    </div>
+                  ))}
+                  <div className="grid grid-cols-[1.5rem_auto_8rem] items-end gap-2 pt-2">
+                    <span />
+                    <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
+                    {isWrong ? (
+                      <div className="flex flex-col items-center border-b-2 border-amber-500 pb-1">
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{userAns || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{formatXSol(q.solution)}</span>
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        inputMode="text"
+                        value={userAns}
+                        disabled={eqValidated}
+                        onChange={e => setEqAnswers(prev => {
+                          const next = [...prev];
+                          next[0] = e.target.value;
+                          return next;
+                        })}
+                        className={inputCls}
+                      />
+                    )}
+                    {result === true && <span className="col-start-3 text-center text-xs text-[var(--color-accent-alg)]">✓</span>}
+                  </div>
+                </div>
+                {eqValidated && (
+                  <div className="mt-5 border-t border-[var(--color-border)] pt-4">
+                    <div className="mb-2 text-xs font-bold uppercase tracking-wide text-amber-600">Correction</div>
+                    <div className="space-y-1 font-mono text-sm text-amber-600">
+                      {q.development!.map((line, i) => <div key={`${line}-${i}`}>{line}</div>)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        }
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
