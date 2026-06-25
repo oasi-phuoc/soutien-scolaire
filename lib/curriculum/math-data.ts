@@ -52,6 +52,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A3.4", "Division en colonnes"),
       sm("A3.5", "Multiples et diviseurs"),
       sm("A3.6", "PGCD et PPCM"),
+      sm("A3.7", "Problèmes"),
     ],
   },
   {

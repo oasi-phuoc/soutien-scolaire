@@ -435,13 +435,13 @@ const WP_SUB_B1: Array<(a: number, b: number) => string> = [
   (a, b) => `Une caisse contient ${a} enveloppes. On en utilise ${b} pour un envoi. Combien d'enveloppes restent dans la caisse ?`,
 ];
 
-const WP_ADD_BY_LEVEL: Record<WordLevel, Array<(a: number, b: number) => string>> = {
+const WP_ADD_BY_LEVEL: Record<Exclude<WordLevel, "multdiv">, Array<(a: number, b: number) => string>> = {
   a1: WP_ADD_A1,
   a2: WP_ADD,
   b1: WP_ADD_B1,
 };
 
-const WP_SUB_BY_LEVEL: Record<WordLevel, Array<(a: number, b: number) => string>> = {
+const WP_SUB_BY_LEVEL: Record<Exclude<WordLevel, "multdiv">, Array<(a: number, b: number) => string>> = {
   a1: WP_SUB_A1,
   a2: WP_SUB,
   b1: WP_SUB_B1,
@@ -592,7 +592,7 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `L'enseignante reçoit ${francs} francs pour chacun de ses ${students} étudiants. Quelle somme totale reçoit-elle ?`, answer: francs * students, op: "×" };
     },
     () => {
-      const students = rnd(12, 28), packs = rnd(4, 12), per = 100;
+      const students = [10, 20, 25][rnd(0, 2)]!, packs = rnd(4, 12), per = 100;
       return { textFr: `Pour son cours d'ACM, une enseignante achète ${packs} paquets de feuilles. Chaque paquet contient ${per} feuilles. Sa classe compte ${students} élèves. Combien de feuilles chaque élève recevra-t-il ?`, answer: Math.floor((packs * per) / students), op: "÷" };
     },
     () => {
@@ -1844,10 +1844,10 @@ function WordProblemsExercise({
                 ) : (
                   <input
                     type="text"
-                    inputMode="numeric"
+                    inputMode="decimal"
                     value={v}
                     disabled={validated}
-                    onChange={e => onChange(i, e.target.value.replace(/[^0-9 ]/g, ""))}
+                    onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\- ]/g, ""))}
                     className={inputCls}
                   />
                 )}
@@ -4503,6 +4503,14 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 3, 3) });
       steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
       steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
+    } else if (sid === "A3-7") {
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 3) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 3) });
     } else if (sid === "A10-1") {
       steps.push(genEquationGroupStep(lesson, 1));
       steps.push(genEquationGroupStep(lesson, 2));
@@ -4564,7 +4572,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
-    l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
+    l.submoduleId === "A3-5" || l.submoduleId === "A3-6" || l.submoduleId === "A3-7" ||
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
     l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||
@@ -6638,7 +6646,7 @@ export function GenericModuleContent({
         const cfg = wpOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
-          return parseInt(v, 10) === q.answer;
+          return numericAnswerMatches(v, String(q.answer));
         });
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
       } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement") {
@@ -7053,7 +7061,7 @@ export function GenericModuleContent({
       const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
       setWpResults(cfg.questions.map((q, i) => {
         const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
-        return parseInt(v, 10) === q.answer;
+        return numericAnswerMatches(v, String(q.answer));
       }));
       setWpValidated(true);
     };
