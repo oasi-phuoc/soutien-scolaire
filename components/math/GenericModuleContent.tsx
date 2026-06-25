@@ -8567,7 +8567,7 @@ export function GenericModuleContent({
               <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">Résolvez l&apos;équation. Écrivez le développement, puis la valeur de x.</p>
               <div className="space-y-5">
-                <div className="mb-5 text-center font-mono text-lg text-[var(--color-text-primary)]">{renderText(q.expr)}</div>
+                <div className="mb-5 text-center font-mono text-sm text-[var(--color-text-primary)]">{renderText(q.expr)}</div>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }, (_, i) => (
                     <div key={i}>
@@ -8686,7 +8686,7 @@ export function GenericModuleContent({
           <div className="space-y-5">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Résolvez le système. Écrivez le développement, puis l&apos;ensemble solution.</p>
-            <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] items-center gap-x-3 font-mono text-lg text-[var(--color-text-primary)]">
+            <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] items-center gap-x-3 font-mono text-sm text-[var(--color-text-primary)]">
               <span className="text-sm font-serif">I</span>
               <span className="row-span-2 text-5xl leading-none text-[var(--color-text-secondary)]">{"{"}</span>
               <span>{renderText(q.equations[0])}</span>
