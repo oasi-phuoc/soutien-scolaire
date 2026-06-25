@@ -205,8 +205,8 @@ type TrueFalseGcdLcmQ = { statement: string; answer: boolean; type: "pgcd"|"ppmc
 type TrueFalseGcdLcmConfig = { questions: TrueFalseGcdLcmQ[]; exNum: number };
 type TrueFalseGcdLcmStep = { kind: "true_false_gcd_lcm"; lesson: MathSubmoduleLesson; config: TrueFalseGcdLcmConfig };
 
-type WordLevel = "a1" | "a2" | "b1";
-type WordProblemQ = { textFr: string; answer: number; op: "+" | "-" };
+type WordLevel = "a1" | "a2" | "b1" | "multdiv";
+type WordProblemQ = { textFr: string; answer: number; op: ArithOp };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
 type UnitConversionDomain = "length" | "area" | "volume" | "capacity" | "mass" | "time";
@@ -447,7 +447,227 @@ const WP_SUB_BY_LEVEL: Record<WordLevel, Array<(a: number, b: number) => string>
   b1: WP_SUB_B1,
 };
 
+const A2_4_CONTEXT_NAMES = [
+  "Yousef", "Daryna", "Yaroslav", "Mariam", "Sofia", "Ahmed", "Svitlana", "Omar",
+  "Rachid", "Sana", "Leila", "Aïcha", "Timur", "Salma", "Farid", "Zahra",
+  "Nadia", "Mustafa", "Iryna", "Rustam", "Amina", "Bilal", "Fatima", "Murat",
+];
+
+type A24ProblemTemplate = () => WordProblemQ;
+
+function genA24ContextProblem(): WordProblemQ {
+  const name = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+  const templates: A24ProblemTemplate[] = [
+    () => {
+      const r = rnd(80, 260), v = rnd(20, 90), j = rnd(10, 70);
+      return { textFr: `Dans la cuisine, ${name} a trois bocaux de bonbons. Le premier contient ${r} bonbons rouges, le deuxième ${v} bonbons verts et le troisième ${j} bonbons jaunes. Combien y a-t-il de bonbons en tout ?`, answer: r + v + j, op: "+" };
+    },
+    () => {
+      const r = rnd(120, 320), j = rnd(20, 110);
+      return { textFr: `${name} a ${r} bonbons rouges et ${j} bonbons jaunes. Combien y a-t-il de bonbons rouges de plus que de bonbons jaunes ?`, answer: r - j, op: "-" };
+    },
+    () => {
+      const r = rnd(80, 220), v = rnd(20, 90), j = rnd(15, 80);
+      return { textFr: `${name} possède ${r} bonbons rouges, ${v} bonbons verts et ${j} bonbons jaunes. Il donne tous les bonbons rouges à un ami. Combien lui reste-t-il de bonbons ?`, answer: v + j, op: "+" };
+    },
+    () => {
+      const total = rnd(350, 950), empr = rnd(80, 260);
+      return { textFr: `La bibliothèque de l'école a ${total} livres de français. Actuellement, ${empr} livres sont empruntés par des élèves. Combien de livres reste-t-il à la bibliothèque ?`, answer: total - empr, op: "-" };
+    },
+    () => {
+      const total = rnd(600, 1400), empr = rnd(100, 280), demain = rnd(80, 260);
+      return { textFr: `La bibliothèque a ${total} livres. ${empr} livres sont déjà prêtés. Demain, ${demain} livres supplémentaires seront prêtés. Combien de livres restera-t-il à la bibliothèque ?`, answer: total - empr - demain, op: "-" };
+    },
+    () => {
+      const pages = rnd(900, 2500), lues = rnd(250, pages - 120);
+      return { textFr: `${name} a emprunté un livre de ${pages} pages à la médiathèque. Il a déjà lu ${lues} pages. Combien de pages doit-il encore lire ?`, answer: pages - lues, op: "-" };
+    },
+    () => {
+      const classes = rnd(18, 42), eleves = rnd(320, 780), profs = rnd(25, 70);
+      return { textFr: `Dans une école, il y a ${classes} classes, ${eleves} élèves et ${profs} professeurs. Combien de personnes y a-t-il en tout dans l'école ?`, answer: eleves + profs, op: "+" };
+    },
+    () => {
+      const eleves = rnd(350, 820), filles = rnd(140, Math.floor(eleves * 0.55));
+      return { textFr: `Dans une école, il y a ${eleves} élèves. Parmi eux, ${filles} sont des filles. Combien y a-t-il de garçons ?`, answer: eleves - filles, op: "-" };
+    },
+    () => {
+      const eleves = rnd(350, 820), malades = rnd(20, 80), retard = rnd(5, 35);
+      return { textFr: `Aujourd'hui, une école compte ${eleves} élèves inscrits. ${malades} élèves sont malades et ${retard} sont en retard. Combien d'élèves sont déjà à l'école ?`, answer: eleves - malades - retard, op: "-" };
+    },
+    () => {
+      const base = rnd(2500, 5200), plus = rnd(200, 900);
+      return { textFr: `${name} gagne ${base} francs par mois. Son amie gagne ${plus} francs de plus. Combien gagne son amie ?`, answer: base + plus, op: "+" };
+    },
+    () => {
+      const mariam = rnd(700, 1800), diff = rnd(80, 360);
+      return { textFr: `${name} collectionne les gommettes. Il en a ${mariam}. Il en a ${diff} de moins que Sofia. Combien de gommettes Sofia a-t-elle ?`, answer: mariam + diff, op: "+" };
+    },
+    () => {
+      const today = rnd(60, 180), diff = rnd(20, 110);
+      return { textFr: `Ce matin, dans le parking de la gare de Sion, il y a ${today} vélos. Hier, il y avait ${diff} vélos de plus. Combien y avait-il de vélos hier ?`, answer: today + diff, op: "+" };
+    },
+    () => {
+      const livre = rnd(20, 80), jeuPlus = rnd(8, 35), puzzle = rnd(20, 60), peluche = rnd(25, 70), billet = rnd(180, 300);
+      return { textFr: `${name} achète un livre à ${livre} francs, un jeu qui coûte ${jeuPlus} francs de plus que le livre, un puzzle à ${puzzle} francs et une peluche à ${peluche} francs. Il paie avec ${billet} francs. Combien reçoit-il de monnaie ?`, answer: billet - (livre + livre + jeuPlus + puzzle + peluche), op: "-" };
+    },
+    () => {
+      const depart = rnd(10, 45), total = depart + rnd(10, 45);
+      return { textFr: `${name} fabrique un collier. Il a déjà enfilé ${depart} perles bleues. Le collier terminé contient ${total} perles. Combien de perles doit-il encore ajouter ?`, answer: total - depart, op: "-" };
+    },
+    () => {
+      const fiction = rnd(500, 1600), doc = rnd(200, 900), albums = rnd(150, 700), bd = rnd(250, 1000);
+      return { textFr: `La médiathèque de Sion achète ${fiction} livres de fiction, ${doc} documentaires, ${albums} albums jeunesse et ${bd} bandes dessinées. Combien d'articles ont été achetés au total ?`, answer: fiction + doc + albums + bd, op: "+" };
+    },
+    () => {
+      const grande = rnd(900, 2200), diff = rnd(150, 700);
+      return { textFr: `${name} a ${grande} livres dans sa bibliothèque. Il en a ${diff} de plus que son frère. Combien de livres son frère a-t-il ?`, answer: grande - diff, op: "-" };
+    },
+    () => {
+      const aicha = rnd(1200, 4200), timurPlus = rnd(400, 1900);
+      return { textFr: `Dans un jeu, Aïcha possède ${aicha} francs. Timur a ${timurPlus} francs de plus qu'Aïcha. Combien d'argent possède Timur ?`, answer: aicha + timurPlus, op: "+" };
+    },
+    () => {
+      const bleus = rnd(40, 130), vertsPlus = rnd(20, 70), rougesMoins = rnd(10, 50);
+      const verts = bleus + vertsPlus, rouges = verts - rougesMoins, jaunes = verts;
+      return { textFr: `Les élèves fabriquent des bonnets. Il y a ${bleus} bonnets bleus, ${vertsPlus} bonnets verts de plus que les bleus, ${rougesMoins} bonnets rouges de moins que les verts et autant de bonnets jaunes que de verts. Combien de bonnets y a-t-il en tout ?`, answer: bleus + verts + rouges + jaunes, op: "+" };
+    },
+    () => {
+      const chevaux = rnd(120, 550), chats = rnd(80, 420);
+      return { textFr: `${name} prend des photos. Il possède ${chevaux} photos de chevaux et ${chats} photos de chats. Combien a-t-il de photos d'animaux au total ?`, answer: chevaux + chats, op: "+" };
+    },
+    () => {
+      const total = rnd(900, 2200), rouges = rnd(120, 420), bleues = rnd(120, 420), blanches = rnd(120, 500), vertes = rnd(80, 300);
+      return { textFr: `${name} réalise une mosaïque avec ${total} tesselles. Il utilise ${rouges} rouges, ${bleues} bleues, ${blanches} blanches et ${vertes} vertes. Combien de tesselles jaunes a-t-il utilisées ?`, answer: total - rouges - bleues - blanches - vertes, op: "-" };
+    },
+    () => {
+      const lundi = rnd(120, 360), plus = rnd(40, 130);
+      return { textFr: `Un maraîcher récolte ${lundi} salades le lundi. Le mardi, il en récolte ${plus} de plus que le lundi. Combien de salades a-t-il récoltées pendant les deux premiers jours ?`, answer: lundi + lundi + plus, op: "+" };
+    },
+    () => {
+      const premiere = rnd(8, 25), plus = rnd(3, 12);
+      return { textFr: `${name} est allé deux fois à la piscine cette semaine. La première fois, il a fait ${premiere} traversées. La deuxième fois, il en a fait ${plus} de plus. Combien de traversées a-t-il faites cette semaine ?`, answer: premiere + premiere + plus, op: "+" };
+    },
+  ];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const q = templates[rnd(0, templates.length - 1)]!();
+    if (Number.isFinite(q.answer) && q.answer >= 0) return q;
+  }
+  return templates[0]!();
+}
+
+function genA37MultDivProblem(): WordProblemQ {
+  const names = ["Ahmad", "Anastasiia", "Alona", "Frozan", "Omar", "Fatima", "Amina", "Ezatullah", "Nadiia", "Samira", "Danylo", "Bilal", "Iryna", "Hassan", "Daryna", "Yulia", "Yeva", "Paola", "José", "Sana"];
+  const name = names[rnd(0, names.length - 1)]!;
+  const templates: A24ProblemTemplate[] = [
+    () => {
+      const every = rnd(4, 12), stones = rnd(25, 120);
+      return { textFr: `${name} marche sur un chemin. Il met un petit caillou tous les ${every} pas. Il a mis ${stones} cailloux. Combien de pas a-t-il faits ?`, answer: every * stones, op: "×" };
+    },
+    () => {
+      const rows = rnd(4, 12), per = rnd(18, 70);
+      return { textFr: `Dans le jardin de ${name}, il y a ${rows} lignes de ${per} choux. Combien de choux ont été plantés ?`, answer: rows * per, op: "×" };
+    },
+    () => {
+      const per = rnd(4, 12), boxes = rnd(18, 140);
+      return { textFr: `Dans la chambre de ${name}, ${per * boxes} pierres précieuses sont cachées. Dans chaque boîte, il y a ${per} pierres précieuses. Combien de boîtes sont cachées ?`, answer: boxes, op: "÷" };
+    },
+    () => {
+      const bins = rnd(8, 30), per = rnd(15, 45);
+      return { textFr: `Dans la bibliothèque de ${name}, chaque bac contient ${per} livres. Combien de livres peut-on ranger dans ${bins} bacs ?`, answer: bins * per, op: "×" };
+    },
+    () => {
+      const base = rnd(12, 45), factor = rnd(3, 8);
+      return { textFr: `${name} a une collection de ${base} bandes dessinées. Son amie en a ${factor} fois plus. Combien de bandes dessinées son amie a-t-elle ?`, answer: base * factor, op: "×" };
+    },
+    () => {
+      const pupils = rnd(12, 28), per = rnd(8, 24);
+      return { textFr: `Dans une classe de ${pupils} élèves, l'enseignante distribue ${per} crayons de couleur à chaque élève. Combien de crayons distribue-t-elle ?`, answer: pupils * per, op: "×" };
+    },
+    () => {
+      const cards = rnd(8, 24), per = rnd(35, 180);
+      return { textFr: `${name} a acheté ${cards} cartes. Chaque carte contient ${per} papillons. Combien de papillons a-t-elle en tout ?`, answer: cards * per, op: "×" };
+    },
+    () => {
+      const francs = rnd(8, 28), students = rnd(15, 75);
+      return { textFr: `L'enseignante reçoit ${francs} francs pour chacun de ses ${students} étudiants. Quelle somme totale reçoit-elle ?`, answer: francs * students, op: "×" };
+    },
+    () => {
+      const students = rnd(12, 28), packs = rnd(4, 12), per = 100;
+      return { textFr: `Pour son cours d'ACM, une enseignante achète ${packs} paquets de feuilles. Chaque paquet contient ${per} feuilles. Sa classe compte ${students} élèves. Combien de feuilles chaque élève recevra-t-il ?`, answer: Math.floor((packs * per) / students), op: "÷" };
+    },
+    () => {
+      const teams = rnd(8, 32), per = rnd(6, 12);
+      return { textFr: `Un tournoi est organisé à l'école. Les élèves sont répartis en ${teams} équipes de ${per} joueurs. Combien d'élèves participent au tournoi ?`, answer: teams * per, op: "×" };
+    },
+    () => {
+      const total = rnd(400, 1200), per = [10, 20, 25, 50][rnd(0, 3)]!;
+      return { textFr: `Pour décorer le terrain de sport, il faut ${total} ballons. Les ballons sont vendus par sachets de ${per}. Combien de sachets faut-il acheter ?`, answer: Math.ceil(total / per), op: "÷" };
+    },
+    () => {
+      const packs = rnd(8, 35), per = [10, 12, 20, 25, 50, 100][rnd(0, 5)]!;
+      return { textFr: `Le professeur achète ${packs} paquets. Chaque paquet contient ${per} objets. Combien d'objets a-t-il achetés au total ?`, answer: packs * per, op: "×" };
+    },
+    () => {
+      const total = rnd(700, 2500), per = [10, 20, 25, 50, 100][rnd(0, 4)]!;
+      return { textFr: `${name} range ${total} bâtonnets. Chaque fois qu'il a ${per} bâtonnets, il forme un paquet. Combien de paquets complets peut-il former ?`, answer: Math.floor(total / per), op: "÷" };
+    },
+    () => {
+      const per = rnd(10, 30), rows = rnd(8, 24);
+      return { textFr: `À la gare de Sierre, un parking à vélos contient ${rows} rangées de ${per} places. Combien y a-t-il de places en tout ?`, answer: rows * per, op: "×" };
+    },
+    () => {
+      const start = rnd(10, 60), factor = rnd(2, 8);
+      return { textFr: `Dimanche, il y avait ${start} vélos sur le parking. Maintenant, il y en a ${factor} fois plus. Combien de vélos se trouvent maintenant sur le parking ?`, answer: start * factor, op: "×" };
+    },
+    () => {
+      const zoneA = rnd(3, 9), ptsA = [20, 30, 40, 50][rnd(0, 3)]!, zoneB = rnd(2, 8), ptsB = [60, 70, 80, 100][rnd(0, 3)]!;
+      return { textFr: `${name} joue aux fléchettes. Il place ${zoneA} fléchettes dans la zone à ${ptsA} points et ${zoneB} fléchettes dans la zone à ${ptsB} points. Combien de points obtient-il ?`, answer: zoneA * ptsA + zoneB * ptsB, op: "×" };
+    },
+    () => {
+      const perDay = rnd(3, 8), days = 31, absent = rnd(4, 14);
+      return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. Elle est absente pendant ${absent} jours. Combien de bûches brûle-t-elle en décembre ?`, answer: perDay * (days - absent), op: "×" };
+    },
+    () => {
+      const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4), omelets = rnd(20, 80);
+      return { textFr: `Un cuisinier achète ${trays} plateaux de ${perTray} œufs. Pour préparer une omelette, il utilise ${usedPer} œufs et il prépare ${omelets} omelettes. Combien d'œufs lui reste-t-il ?`, answer: trays * perTray - usedPer * omelets, op: "-" };
+    },
+    () => {
+      const pages = rnd(8, 20), lines = rnd(4, 8), perLine = rnd(5, 12), placed = rnd(80, 280);
+      return { textFr: `${name} reçoit un album de ${pages} pages. Chaque page comporte ${lines} lignes et chaque ligne peut contenir ${perLine} timbres. Il a déjà placé ${placed} timbres. Combien de timbres doit-il encore ajouter pour remplir l'album ?`, answer: pages * lines * perLine - placed, op: "-" };
+    },
+    () => {
+      const bottles = rnd(90, 360), perCarton = [6, 9, 12, 18][rnd(0, 3)]!;
+      return { textFr: `${name} emballe ${bottles} bouteilles dans des cartons de ${perCarton} bouteilles. Combien de cartons peut-il remplir entièrement ?`, answer: Math.floor(bottles / perCarton), op: "÷" };
+    },
+    () => {
+      const hens = rnd(4, 18), eggsPerMonth = rnd(15, 30);
+      return { textFr: `Dans un poulailler, il y a ${hens} poules. Chaque poule pond ${eggsPerMonth} œufs par mois. Combien d'œufs sont pondus en une année complète ?`, answer: hens * eggsPerMonth * 12, op: "×" };
+    },
+    () => {
+      const packs = rnd(20, 150), per = rnd(25, 100);
+      return { textFr: `La professeure de dessin commande ${packs} paquets de papier cartonné. Chaque paquet contient ${per} feuilles. Combien de feuilles reçoit-elle ?`, answer: packs * per, op: "×" };
+    },
+  ];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const q = templates[rnd(0, templates.length - 1)]!();
+    if (Number.isFinite(q.answer) && q.answer >= 0) return q;
+  }
+  return templates[0]!();
+}
+
 function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
+  if (level === "a1" && exNum === 1) {
+    const first = genA24ContextProblem();
+    let second = genA24ContextProblem();
+    for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA24ContextProblem();
+    return { exNum, level, questions: [first, second] };
+  }
+  if (level === "multdiv") {
+    const first = genA37MultDivProblem();
+    let second = genA37MultDivProblem();
+    for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA37MultDivProblem();
+    return { exNum, level, questions: [first, second] };
+  }
   const addPool = WP_ADD_BY_LEVEL[level];
   const subPool = WP_SUB_BY_LEVEL[level];
   const addIdx = Math.floor(Math.random() * addPool.length);
@@ -3551,6 +3771,297 @@ function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep 
   return { kind: "system_equation", lesson, exNum: 1, question: templates[Math.floor(Math.random() * templates.length)]! };
 }
 
+function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationStep {
+  const f = (num: string, den: string) => `[[frac:${num}/${den}]]`;
+  const acceptPair = (x: string, y: string) => [
+    `${x};${y}`, `${x},${y}`, `(${x};${y})`, `(${x},${y})`,
+    `{(${x};${y})}`, `{(${x},${y})}`, `s={(${x};${y})}`, `s={(${x},${y})}`,
+  ];
+  const sys = (
+    equations: [string, string],
+    answer: string,
+    acceptable: string[],
+    development: string[],
+    operations: string[] = [],
+  ): SystemEquationQuestion => ({ equations, answer, acceptable, development, operations });
+  // All solutions verified by substituting (x₀,y₀) into both original equations.
+  const templates: SystemEquationQuestion[] = [
+    // ── T1: I·2 + II → 14x=70 → x=5, y=7  (3·5−2·7=1✓  8·5+4·7=68✓) ──────
+    sys(["3x − 2y = 1", "8x + 4y = 68"], `{(5 ; 7)}`, acceptPair("5", "7"), [
+      "I · 2 :  6x − 4y = 2",
+      "II    :  8x + 4y = 68",
+      "addition I·2 + II  →  14x = 70",
+      "x = 5",
+      "dans I : 3(5) − 2y = 1",
+      "−2y = 1 − 15 = −14",
+      "y = 7",
+      "S = {(5 ; 7)}",
+    ], ["× 2", "", "I·2 + II", ": 14", "substitution", "effectuer", ": (−2)", ""]),
+    // ── T2: I·3 + II·5 → −16y=32 → y=−2, x=−1  (−5·−1+3·−2=−1✓) ───────────
+    sys(["−5x + 3y = −1", "3x − 5y = 7"], `{(−1 ; −2)}`, acceptPair("-1", "-2"), [
+      "I · 3  : −15x +  9y = −3",
+      "II · 5 :  15x − 25y = 35",
+      "addition I·3 + II·5  →  −16y = 32",
+      "y = −2",
+      "dans II : 3x − 5(−2) = 7",
+      "3x + 10 = 7",
+      "3x = −3",
+      "x = −1",
+      "S = {(−1 ; −2)}",
+    ], ["× 3", "× 5", "I·3 + II·5", ": (−16)", "substitution", "effectuer", "− 10", ": 3", ""]),
+    // ── T3: rearrange I, I + II·2 → 11y=0 → y=0, x=10  (4·10=40+5·0✓) ──────
+    sys(["4x = 40 + 5y", "−2x + 8y = −20"], `{(10 ; 0)}`, acceptPair("10", "0"), [
+      "remettre I en forme : 4x − 5y = 40",
+      "I        :  4x − 5y = 40",
+      "II · 2   : −4x + 16y = −40",
+      "addition I + II·2  →  11y = 0",
+      "y = 0",
+      "dans I : 4x − 5(0) = 40",
+      "x = 10",
+      "S = {(10 ; 0)}",
+    ], ["forme std", "", "× 2", "I + II·2", ": 11", "substitution", ": 4", ""]),
+    // ── T4: rearrange II, I·5 − II·2 → −29y=145 → y=−5, x=−2  (verified) ───
+    sys(["−2x − 3y = 19", "7y = −25 + 5x"], `{(−2 ; −5)}`, acceptPair("-2", "-5"), [
+      "remettre II en forme : −5x + 7y = −25",
+      "I · 5  : −10x − 15y = 95",
+      "II · 2 : −10x + 14y = −50",
+      "I·5 − II·2  →  −29y = 145",
+      "y = −5",
+      "dans I : −2x − 3(−5) = 19",
+      "−2x + 15 = 19",
+      "−2x = 4",
+      "x = −2",
+      "S = {(−2 ; −5)}",
+    ], ["forme std", "× 5", "× 2", "I·5 − II·2", ": (−29)", "substitution", "effectuer", "− 15", ": (−2)", ""]),
+    // ── T5: I + II → 2x=6 → x=3, y=2  (3+2=5✓  3−2=1✓) ────────────────────
+    sys(["x + y = 5", "x − y = 1"], `{(3 ; 2)}`, acceptPair("3", "2"), [
+      "I  :  x + y = 5",
+      "II :  x − y = 1",
+      "addition I + II  →  2x = 6",
+      "x = 3",
+      "dans I : 3 + y = 5",
+      "y = 2",
+      "S = {(3 ; 2)}",
+    ], ["", "", "I + II", ": 2", "substitution", "− 3", ""]),
+    // ── T6: I·3 + II → 7x=14 → x=2, y=3  (2·2+3=7✓  2−3·3=−7✓) ────────────
+    sys(["2x + y = 7", "x − 3y = −7"], `{(2 ; 3)}`, acceptPair("2", "3"), [
+      "I · 3 :  6x + 3y = 21",
+      "II    :   x − 3y = −7",
+      "addition I·3 + II  →  7x = 14",
+      "x = 2",
+      "dans I : 2(2) + y = 7",
+      "y = 3",
+      "S = {(2 ; 3)}",
+    ], ["× 3", "", "I·3 + II", ": 7", "substitution", "− 4", ""]),
+    // ── T7: I·2 − II → 5x=10 → x=2, y=1  (3·2+2·1=8✓  2+4·1=6✓) ───────────
+    sys(["3x + 2y = 8", "x + 4y = 6"], `{(2 ; 1)}`, acceptPair("2", "1"), [
+      "I · 2 :  6x + 4y = 16",
+      "II    :   x + 4y = 6",
+      "soustraction I·2 − II  →  5x = 10",
+      "x = 2",
+      "dans II : 2 + 4y = 6",
+      "4y = 4",
+      "y = 1",
+      "S = {(2 ; 1)}",
+    ], ["× 2", "", "I·2 − II", ": 5", "substitution", "− 2", ": 4", ""]),
+    // ── T8: II·3 + I → 17x=34 → x=2, y=3  (2·2+3·3=13✓  5·2−3=7✓) ─────────
+    sys(["2x + 3y = 13", "5x − y = 7"], `{(2 ; 3)}`, acceptPair("2", "3"), [
+      "II · 3 : 15x − 3y = 21",
+      "I      :  2x + 3y = 13",
+      "addition II·3 + I  →  17x = 34",
+      "x = 2",
+      "dans I : 2(2) + 3y = 13",
+      "3y = 9",
+      "y = 3",
+      "S = {(2 ; 3)}",
+    ], ["× 3", "", "II·3 + I", ": 17", "substitution", "− 4", ": 3", ""]),
+    // ── T9: I·8 + II → 29x=−29 → x=−1, y=4  (3·−1+4=1✓  5·−1−8·4=−37✓) ────
+    sys(["3x + y = 1", "5x − 8y = −37"], `{(−1 ; 4)}`, acceptPair("-1", "4"), [
+      "I · 8 :  24x + 8y = 8",
+      "II    :   5x − 8y = −37",
+      "addition I·8 + II  →  29x = −29",
+      "x = −1",
+      "dans I : 3(−1) + y = 1",
+      "y = 4",
+      "S = {(−1 ; 4)}",
+    ], ["× 8", "", "I·8 + II", ": 29", "substitution", "+ 3", ""]),
+    // ── T10: I·2 − II → 9x=18 → x=2, y=−3  (4·2+(−3)=5✓  −2+2·(−3)=−8✓) ───
+    sys(["4x + y = 5", "−x + 2y = −8"], `{(2 ; −3)}`, acceptPair("2", "-3"), [
+      "I · 2 :  8x + 2y = 10",
+      "II    : −x + 2y = −8",
+      "soustraction I·2 − II  →  9x = 18",
+      "x = 2",
+      "dans I : 4(2) + y = 5",
+      "y = −3",
+      "S = {(2 ; −3)}",
+    ], ["× 2", "", "I·2 − II", ": 9", "substitution", "− 8", ""]),
+    // ── T11: II·2 − I → −11y=22 → y=−2, x=5  (2·5+3·(−2)=4✓  5−4·(−2)=13✓) ─
+    sys(["2x + 3y = 4", "x − 4y = 13"], `{(5 ; −2)}`, acceptPair("5", "-2"), [
+      "II · 2 :  2x − 8y = 26",
+      "I      :  2x + 3y = 4",
+      "soustraction II·2 − I  →  −11y = 22",
+      "y = −2",
+      "dans II : x − 4(−2) = 13",
+      "x + 8 = 13",
+      "x = 5",
+      "S = {(5 ; −2)}",
+    ], ["× 2", "", "II·2 − I", ": (−11)", "substitution", "effectuer", "− 8", ""]),
+    // ── T12: II − I → −y=2 → y=−2, x=1  (3·1−(−2)=5✓  3·1−2·(−2)=7✓) ──────
+    sys(["3x − y = 5", "3x − 2y = 7"], `{(1 ; −2)}`, acceptPair("1", "-2"), [
+      "II :  3x − 2y = 7",
+      "I  :  3x −  y = 5",
+      "soustraction II − I  →  −y = 2",
+      "y = −2",
+      "dans I : 3x − (−2) = 5",
+      "3x = 3",
+      "x = 1",
+      "S = {(1 ; −2)}",
+    ], ["", "", "II − I", "· (−1)", "substitution", "− 2", ": 3", ""]),
+    // ── T13: II·3 + I → 10x=30 → x=3, y=2  (4·3−3·2=6✓  2·3+2=8✓) ─────────
+    sys(["4x − 3y = 6", "2x + y = 8"], `{(3 ; 2)}`, acceptPair("3", "2"), [
+      "II · 3 :  6x + 3y = 24",
+      "I      :  4x − 3y = 6",
+      "addition II·3 + I  →  10x = 30",
+      "x = 3",
+      "dans II : 2(3) + y = 8",
+      "y = 2",
+      "S = {(3 ; 2)}",
+    ], ["× 3", "", "II·3 + I", ": 10", "substitution", "− 6", ""]),
+    // ── T14: impossible  (2x+3y=5 vs 4x+6y=15) ──────────────────────────────
+    sys(["2x + 3y = 5", "4x + 6y = 15"], `impossible`, ["impossible", "s=∅", "vide", "∅"], [
+      "I · 2  : 4x + 6y = 10",
+      "II     : 4x + 6y = 15",
+      "soustraction II − I·2  →  0 = 5",
+      "contradiction : impossible !",
+      "S = ∅",
+    ], ["× 2", "", "II − I·2", "", ""]),
+    // ── T15: infinite solutions  (x+2y=4 vs 3x+6y=12) ───────────────────────
+    sys(["x + 2y = 4", "3x + 6y = 12"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "I · 3  : 3x + 6y = 12",
+      "II     : 3x + 6y = 12",
+      "soustraction II − I·3  →  0 = 0",
+      "identité : infinité de solutions !",
+      "S = IR",
+    ], ["× 3", "", "II − I·3", "", ""]),
+    // ── T16: II·2 + I → 7x=21 → x=3, y=2  (3+2·2=7✓  3·3−2=7✓) ────────────
+    sys(["x + 2y = 7", "3x − y = 7"], `{(3 ; 2)}`, acceptPair("3", "2"), [
+      "II · 2 :  6x − 2y = 14",
+      "I      :   x + 2y = 7",
+      "addition II·2 + I  →  7x = 21",
+      "x = 3",
+      "dans I : 3 + 2y = 7",
+      "2y = 4",
+      "y = 2",
+      "S = {(3 ; 2)}",
+    ], ["× 2", "", "II·2 + I", ": 7", "substitution", "− 3", ": 2", ""]),
+    // ── T17: I + II → 3x=12 → x=4, y=2  (2·4+2=10✓  4−2=2✓) ───────────────
+    sys(["2x + y = 10", "x − y = 2"], `{(4 ; 2)}`, acceptPair("4", "2"), [
+      "I  :  2x + y = 10",
+      "II :   x − y = 2",
+      "addition I + II  →  3x = 12",
+      "x = 4",
+      "dans II : 4 − y = 2",
+      "y = 2",
+      "S = {(4 ; 2)}",
+    ], ["", "", "I + II", ": 3", "substitution", "− 4", ""]),
+    // ── T18: II·3 + I → 8x=16 → x=2, y=2  (5·2+3·2=16✓  2−2=0✓) ───────────
+    sys(["5x + 3y = 16", "x − y = 0"], `{(2 ; 2)}`, acceptPair("2", "2"), [
+      "II · 3 :  3x − 3y = 0",
+      "I      :  5x + 3y = 16",
+      "addition II·3 + I  →  8x = 16",
+      "x = 2",
+      "dans II : 2 − y = 0",
+      "y = 2",
+      "S = {(2 ; 2)}",
+    ], ["× 3", "", "II·3 + I", ": 8", "substitution", "", ""]),
+    // ── T19: I·2 − II → 7y=17 → y=17/7, x=19/7  (x+3·17/7=10✓) ─────────────
+    sys(["x + 3y = 10", "2x − y = 3"], `{(${f("19", "7")} ; ${f("17", "7")})}`, acceptPair("19/7", "17/7"), [
+      "I · 2 :  2x + 6y = 20",
+      "II    :  2x −  y = 3",
+      "soustraction I·2 − II  →  7y = 17",
+      `y = ${f("17", "7")}`,
+      `dans I : x + 3 · ${f("17", "7")} = 10`,
+      `x = 10 − ${f("51", "7")} = ${f("19", "7")}`,
+      `S = {(${f("19", "7")} ; ${f("17", "7")})}`,
+    ], ["× 2", "", "I·2 − II", ": 7", "substitution", "effectuer", ""]),
+    // ── T20: II·3 + I → 11x=22 → x=2, y=3  (5·2−3·3=1✓  2·2+3=7✓) ─────────
+    sys(["5x − 3y = 1", "2x + y = 7"], `{(2 ; 3)}`, acceptPair("2", "3"), [
+      "II · 3 :  6x + 3y = 21",
+      "I      :  5x − 3y = 1",
+      "addition II·3 + I  →  11x = 22",
+      "x = 2",
+      "dans II : 2(2) + y = 7",
+      "y = 3",
+      "S = {(2 ; 3)}",
+    ], ["× 3", "", "II·3 + I", ": 11", "substitution", "− 4", ""]),
+    // ── T21: II·2 + I → 14x=42 → x=3, y=2  (2·3+3·2=12✓  4·3−2=10✓) ────────
+    sys(["2x + 3y = 12", "4x − y = 10"], `{(3 ; 2)}`, acceptPair("3", "2"), [
+      "II · 3 : 12x − 3y = 30",
+      "I      :  2x + 3y = 12",
+      "addition II·3 + I  →  14x = 42",
+      "x = 3",
+      "dans I : 2(3) + 3y = 12",
+      "3y = 6",
+      "y = 2",
+      "S = {(3 ; 2)}",
+    ], ["× 3", "", "II·3 + I", ": 14", "substitution", "− 6", ": 3", ""]),
+    // ── T22: I + II → 4x=12 → x=3, y=5  (3+5=8✓  3·3−5=4✓) ────────────────
+    sys(["x + y = 8", "3x − y = 4"], `{(3 ; 5)}`, acceptPair("3", "5"), [
+      "I  :   x +  y = 8",
+      "II :  3x −  y = 4",
+      "addition I + II  →  4x = 12",
+      "x = 3",
+      "dans I : 3 + y = 8",
+      "y = 5",
+      "S = {(3 ; 5)}",
+    ], ["", "", "+ II", ": 4", "substitution", "− 3", ""]),
+    // ── T23: I·2 + II → 7x=2 → x=2/7, y=29/7  (3·2/7+29/7=5✓  2/7−2·29/7=−8✓)
+    sys(["3x + y = 5", "x − 2y = −8"], `{(${f("2", "7")} ; ${f("29", "7")})}`, acceptPair("2/7", "29/7"), [
+      "I · 2 :  6x + 2y = 10",
+      "II    :   x − 2y = −8",
+      "addition I·2 + II  →  7x = 2",
+      `x = ${f("2", "7")}`,
+      `dans I : 3 · ${f("2", "7")} + y = 5`,
+      `y = 5 − ${f("6", "7")} = ${f("29", "7")}`,
+      `S = {(${f("2", "7")} ; ${f("29", "7")})}`,
+    ], ["× 2", "", "I·2 + II", ": 7", "substitution", "effectuer", ""]),
+    // ── T24: I·5 + II·4 → 23x=92 → x=4, y=1  (3·4+4·1=16✓  2·4−5·1=3✓) ────
+    sys(["3x + 4y = 16", "2x − 5y = 3"], `{(4 ; 1)}`, acceptPair("4", "1"), [
+      "I · 5  : 15x + 20y = 80",
+      "II · 4 :  8x − 20y = 12",
+      "addition I·5 + II·4  →  23x = 92",
+      "x = 4",
+      "dans I : 3(4) + 4y = 16",
+      "4y = 4",
+      "y = 1",
+      "S = {(4 ; 1)}",
+    ], ["× 5", "× 4", "I·5 + II·4", ": 23", "substitution", "− 12", ": 4", ""]),
+    // ── T25: II·3 + I → 17x=51 → x=3, y=1  (2·3+3·1=9✓  5·3−1=14✓) ─────────
+    sys(["2x + 3y = 9", "5x − y = 14"], `{(3 ; 1)}`, acceptPair("3", "1"), [
+      "II · 3 : 15x − 3y = 42",
+      "I      :  2x + 3y = 9",
+      "addition II·3 + I  →  17x = 51",
+      "x = 3",
+      "dans I : 2(3) + 3y = 9",
+      "3y = 3",
+      "y = 1",
+      "S = {(3 ; 1)}",
+    ], ["× 3", "", "II·3 + I", ": 17", "substitution", "− 6", ": 3", ""]),
+    // ── T26: I·2 + II → 7x=18 → x=18/7, y=19/7  (3·18/7−19/7=5✓) ───────────
+    sys(["3x − y = 5", "x + 2y = 8"], `{(${f("18", "7")} ; ${f("19", "7")})}`, acceptPair("18/7", "19/7"), [
+      "I · 2 :  6x − 2y = 10",
+      "II    :   x + 2y = 8",
+      "addition I·2 + II  →  7x = 18",
+      `x = ${f("18", "7")}`,
+      `dans II : ${f("18", "7")} + 2y = 8`,
+      `2y = 8 − ${f("18", "7")} = ${f("38", "7")}`,
+      `y = ${f("19", "7")}`,
+      `S = {(${f("18", "7")} ; ${f("19", "7")})}`,
+    ], ["× 2", "", "I·2 + II", ": 7", "substitution", "effectuer", ": 2", ""]),
+  ];
+  return { kind: "system_equation", lesson, exNum: 1, question: templates[Math.floor(Math.random() * templates.length)]! };
+}
+
 const ALGEBRA_SYMBOLS = ["a", "b", "c", "m", "n", "x", "y"] as const;
 const SUPER_DIGITS: Record<number, string> = { 1: "", 2: "²", 3: "³", 4: "⁴" };
 
@@ -4006,6 +4517,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push(genSystemEquationStep(lesson));
       steps.push({ kind: "eval_start", lesson });
       steps.push(genSystemEquationStep(lesson));
+    } else if (sid === "A10-4") {
+      steps.push(genLinearCombinationStep(lesson));
+      steps.push({ kind: "eval_start", lesson });
+      steps.push(genLinearCombinationStep(lesson));
     } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
       if (sid === "A9-1") {
         steps.push(genMonomialGroupStep(lesson));
@@ -4053,6 +4568,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
     l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||
+    l.submoduleId === "A10-3" || l.submoduleId === "A10-4" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
     GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)
