@@ -3534,7 +3534,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
 }
 
 // ── Fraction equation group (A10.2) ───────────────────────────────────────
-function genFracEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupStep {
+function genFracEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationGroupStep {
   function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
   function rat(n: number, d: number): EquationSolution {
     if (d === 0) return { kind: "impossible" };
@@ -3673,7 +3673,7 @@ function genFracEquationGroupStep(lesson: MathSubmoduleLesson): EquationGroupSte
       "5x - 10 + 6x - 9 = 15", "11x - 19 = 15", "11x = 34", `x = ${f("34", "11")}`, `S = {${f("34", "11")}}`,
     ], commonOps(15, ["+ 19", ": 11", ""])),
   ];
-  return { kind: "equation_group", lesson, exNum: 1, questions: [templates[Math.floor(Math.random() * templates.length)]!] };
+  return { kind: "equation_group", lesson, exNum, questions: [templates[Math.floor(Math.random() * templates.length)]!] };
 }
 
 function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep {
@@ -3784,6 +3784,117 @@ function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationSt
     development: string[],
     operations: string[] = [],
   ): SystemEquationQuestion => ({ equations, answer, acceptable, development, operations });
+
+  const templatesA104: SystemEquationQuestion[] = [
+    sys(["3x - 2y = 1", "8x + 4y = 68"], `{(5 ; 7)}`, acceptPair("5", "7"), [
+      "I · 2", "6x - 4y = 2", "8x + 4y = 68", "14x = 70", "x = 5",
+      "dans I", "3 · 5 - 2y = 1", "15 - 2y = 1", "-2y = -14", "y = 7", "S = {(5 ; 7)}",
+    ], ["· 2", "", "", ": 14", "", "", "", "- 15", ": (-2)", "", ""]),
+    sys(["-5x + 3y = -1", "3x - 5y = 7"], `{(-1 ; -2)}`, acceptPair("-1", "-2"), [
+      "I · 3", "-15x + 9y = -3", "II · 5", "15x - 25y = 35", "-16y = 32", "y = -2",
+      "dans II", "3x - 5 · (-2) = 7", "3x + 10 = 7", "3x = -3", "x = -1", "S = {(-1 ; -2)}",
+    ], ["· 3", "", "· 5", "", ": (-16)", "", "", "", "- 10", ": 3", "", ""]),
+    sys(["4x = 40 + 5y", "-2x + 8y = -20"], `{(10 ; 0)}`, acceptPair("10", "0"), [
+      "mettre I dans le même ordre", "I : 4x - 5y = 40", "II · 2 : -4x + 16y = -40",
+      "11y = 0", "y = 0", "dans I", "4x - 5 · 0 = 40", "4x = 40", "x = 10", "S = {(10 ; 0)}",
+    ], ["- 5y", "", "· 2", ": 11", "", "", "", ": 4", "", ""]),
+    sys(["-2x - 3y = 19", "7y = -25 + 5x"], `{(-2 ; -5)}`, acceptPair("-2", "-5"), [
+      "mettre II dans le même ordre", "II : -5x + 7y = -25", "I · 5 : -10x - 15y = 95",
+      "II · 2 : -10x + 14y = -50", "-29y = 145", "y = -5",
+      "dans I", "-2x - 3 · (-5) = 19", "-2x + 15 = 19", "-2x = 4", "x = -2", "S = {(-2 ; -5)}",
+    ], ["- 5x", "", "· 5", "· 2", ": (-29)", "", "", "", "- 15", ": (-2)", "", ""]),
+    sys(["4x + 10y = 7", "20x + y = 2"], `{(13/196 ; 33/49)}`, acceptPair("13/196", "33/49"), [
+      "I · 5", "20x + 50y = 35", "II", "20x + y = 2", "49y = 33", "y = [[frac:33/49]]",
+      "dans II", "20x + [[frac:33/49]] = 2", "20x = 2 - [[frac:33/49]]", "20x = [[frac:65/49]]",
+      "x = [[frac:13/196]]", "S = {([[frac:13/196]] ; [[frac:33/49]])}",
+    ], ["· 5", "", "", "", ": 49", "", "", "", "- [[frac:33/49]]", ": 20", "", ""]),
+    sys(["4y + 3x = 10", "7y + 2x = 20"], `{(-10/13 ; 40/13)}`, acceptPair("-10/13", "40/13"), [
+      "I · 2", "8y + 6x = 20", "II · 3", "21y + 6x = 60", "-13y = -40", "y = [[frac:40/13]]",
+      "dans I", "4 · [[frac:40/13]] + 3x = 10", "[[frac:160/13]] + 3x = 10",
+      "3x = 10 - [[frac:160/13]]", "3x = [[frac:-30/13]]", "x = [[frac:-10/13]]",
+      "S = {([[frac:-10/13]] ; [[frac:40/13]])}",
+    ], ["· 2", "", "· 3", "", ": (-13)", "", "", "", "", "- [[frac:160/13]]", ": 3", "", ""]),
+    sys(["3y - 2 = 4x + 4", "8x + 7 = 4y - 1"], `{(0 ; 2)}`, acceptPair("0", "2"), [
+      "mettre dans le même ordre", "I : -4x + 3y = 6", "II : 8x - 4y = -8",
+      "I · 2", "-8x + 6y = 12", "II", "8x - 4y = -8", "2y = 4", "y = 2",
+      "dans I", "-4x + 3 · 2 = 6", "-4x = 0", "x = 0", "S = {(0 ; 2)}",
+    ], ["", "- 4x / + 2", "- 4y / - 7", "· 2", "", "", "", ": 2", "", "", "- 6", ": (-4)", "", ""]),
+    sys(["7y + 1 = 4x - 8", "-12x + 27 = -21y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "mettre dans le même ordre", "I : -4x + 7y = -9", "II : -12x + 21y = -27",
+      "I · 3", "-12x + 21y = -27", "II", "-12x + 21y = -27", "0 = 0",
+      "infinité de possibilités !", "S = IR",
+    ], ["", "- 4x / - 9", "+ 21y / - 27", "· 3", "", "", "", "", ""]),
+    sys(["3x + 8y = 1", "5x - 2y = 1"], `{(5/23 ; 1/23)}`, acceptPair("5/23", "1/23"), [
+      "I · 5", "15x + 40y = 5", "II · 3", "15x - 6y = 3", "46y = 2", "y = [[frac:1/23]]",
+      "dans I", "3x + 8 · [[frac:1/23]] = 1", "3x + [[frac:8/23]] = 1",
+      "3x = [[frac:23/23]] - [[frac:8/23]]", "3x = [[frac:15/23]]", "x = [[frac:5/23]]",
+      "S = {([[frac:5/23]] ; [[frac:1/23]])}",
+    ], ["· 5", "", "· 3", "", ": 46", "", "", "", "", "- [[frac:8/23]]", ": 3", "", ""]),
+    sys(["2x + 3y = 4", "15 = -4x - 6y"], `impossible`, ["impossible", "s=∅", "vide", "∅"], [
+      "mettre II dans le même ordre", "II : 4x + 6y = -15", "I · 2", "4x + 6y = 8",
+      "II", "4x + 6y = -15", "0 = 23", "impossible !", "S = ∅",
+    ], ["+ 4x / + 6y / - 15", "", "· 2", "", "", "", "", ""]),
+    sys(["7y + 2 = 4x - 3", "4y + 2x = 10"], `{(3 ; 1)}`, acceptPair("3", "1"), [
+      "mettre I dans le même ordre", "I : -4x + 7y = -5", "II : 2x + 4y = 10",
+      "II · 2", "4x + 8y = 20", "I", "-4x + 7y = -5", "15y = 15", "y = 1",
+      "dans I", "-4x + 7 · 1 = -5", "-4x = -12", "x = 3", "S = {(3 ; 1)}",
+    ], ["- 4x / - 2", "", "", "· 2", "", "", "", ": 15", "", "", "- 7", ": (-4)", "", ""]),
+    sys(["7x - 5y = 10", "3x + 8y = 4"], `{(100/71 ; -2/71)}`, acceptPair("100/71", "-2/71"), [
+      "I · 3", "21x - 15y = 30", "II · 7", "21x + 56y = 28", "-71y = 2", "y = [[frac:-2/71]]",
+      "dans II", "3x + 8 · ([[frac:-2/71]]) = 4", "3x - [[frac:16/71]] = 4",
+      "3x = [[frac:284/71]] + [[frac:16/71]]", "3x = [[frac:300/71]]", "x = [[frac:100/71]]",
+      "S = {([[frac:100/71]] ; [[frac:-2/71]])}",
+    ], ["· 3", "", "· 7", "", ": (-71)", "", "", "", "", "+ [[frac:16/71]]", ": 3", "", ""]),
+    sys(["4x - 10y = 7", "6x - 3y = 8"], `{(59/48 ; -5/24)}`, acceptPair("59/48", "-5/24"), [
+      "I · 3", "12x - 30y = 21", "II · 2", "12x - 6y = 16", "-24y = 5", "y = [[frac:-5/24]]",
+      "dans I", "4x - 10 · ([[frac:-5/24]]) = 7", "4x + [[frac:25/12]] = 7",
+      "4x = [[frac:84/12]] - [[frac:25/12]]", "4x = [[frac:59/12]]", "x = [[frac:59/48]]",
+      "S = {([[frac:59/48]] ; [[frac:-5/24]])}",
+    ], ["· 3", "", "· 2", "", ": (-24)", "", "", "", "", "- [[frac:25/12]]", ": 4", "", ""]),
+    sys(["3(x + 2) = 2y - 5", "4x - 7 = 3(y + 1)"], `{(-53 ; -74)}`, acceptPair("-53", "-74"), [
+      "effectuer", "I : 3x - 2y = -11", "II : 4x - 3y = 10",
+      "I · 4", "12x - 8y = -44", "II · 3", "12x - 9y = 30", "y = -74",
+      "dans I", "3x - 2 · (-74) = -11", "3x + 148 = -11", "3x = -159", "x = -53",
+      "S = {(-53 ; -74)}",
+    ], ["", "- 2y / - 6", "- 3y / + 7", "· 4", "", "· 3", "", "", "", "", "- 148", ": 3", "", ""]),
+    sys(["8y - 3 = 4x + 3", "-2x - 3 = -4y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
+      "mettre dans le même ordre", "I : -4x + 8y = 6", "II : 2x - 4y = 3",
+      "II · 2", "4x - 8y = 6", "I", "-4x + 8y = 6", "0 = 0",
+      "infinité de possibilités !", "S = IR",
+    ], ["- 4x / + 3", "+ 4y / + 3", "", "· 2", "", "", "", "", ""]),
+    sys(["5y - 2x = 10", "15 - 7y = 5(x + 8)"], `{(-5 ; 0)}`, acceptPair("-5", "0"), [
+      "effectuer", "I : 5y - 2x = 10", "II : -7y - 5x = 25",
+      "I · 7", "35y - 14x = 70", "II · 5", "-35y - 25x = 125", "-39x = 195", "x = -5",
+      "dans I", "5y - 2 · (-5) = 10", "5y + 10 = 10", "5y = 0", "y = 0", "S = {(-5 ; 0)}",
+    ], ["", "", "- 5x / - 15", "· 7", "", "· 5", "", ": (-39)", "", "", "", "- 10", ": 5", "", ""]),
+    sys(["10y + 7x - 1 = 0", "40y + 28x - 10 = 0"], `impossible`, ["impossible", "s=∅", "vide", "∅"], [
+      "I · 4", "40y + 28x - 4 = 0", "II", "40y + 28x - 10 = 0", "6 = 0", "impossible !", "S = ∅",
+    ], ["· 4", "", "", "", "", ""]),
+    sys(["(x - 8) · 2 = 10 + 3y", "10x - 7 = 4(3 - 5y)"], `{(577/70 ; -111/35)}`, acceptPair("577/70", "-111/35"), [
+      "effectuer", "I : 2x - 16 = 10 + 3y", "II : 10x - 7 = 12 - 20y",
+      "I · 5", "10x - 80 = 50 + 15y", "II", "10x - 7 = 12 - 20y", "-73 = 38 + 35y",
+      "-111 = 35y", "y = [[frac:-111/35]]", "dans I",
+      "2x - 16 = 10 + 3 · ([[frac:-111/35]])", "2x - 16 = [[frac:17/35]]",
+      "2x = [[frac:577/35]]", "x = [[frac:577/70]]",
+      "S = {([[frac:577/70]] ; [[frac:-111/35]])}",
+    ], ["", "", "", "· 5", "", "", "", "- 38", ": 35", "", "", "effectuer", "+ 16", ": 2", "", ""]),
+    sys(["3y - 7 = 8x + 1", "5x + 1 = 7y - 5"], `{(-38/41 ; 8/41)}`, acceptPair("-38/41", "8/41"), [
+      "mettre dans le même ordre", "I : -8x + 3y = 8", "II : 5x - 7y = -6",
+      "I · 5", "-40x + 15y = 40", "II · 8", "40x - 56y = -48", "-41y = -8",
+      "y = [[frac:8/41]]", "dans I", "-8x + 3 · [[frac:8/41]] = 8",
+      "-8x + [[frac:24/41]] = 8", "-8x = [[frac:304/41]]", "x = [[frac:-38/41]]",
+      "S = {([[frac:-38/41]] ; [[frac:8/41]])}",
+    ], ["", "- 8x / + 7", "- 7y / - 1", "· 5", "", "· 8", "", ": (-41)", "", "", "", "- [[frac:24/41]]", ": (-8)", "", ""]),
+    sys(["8(x - 3) = 4(y + 2)", "5(y - 5) = 2x + 1"], `{(33/4 ; 17/2)}`, acceptPair("33/4", "17/2"), [
+      "effectuer", "I : 8x - 4y = 32", "II : -2x + 5y = 26",
+      "II · 4", "-8x + 20y = 104", "I", "8x - 4y = 32", "16y = 136", "y = [[frac:17/2]]",
+      "dans I", "8x - 4 · [[frac:17/2]] = 32", "8x - 34 = 32", "8x = 66", "x = [[frac:33/4]]",
+      "S = {([[frac:33/4]] ; [[frac:17/2]])}",
+    ], ["", "- 4y / + 24", "- 2x / + 25", "· 4", "", "", "", ": 16", "", "", "", "+ 34", ": 8", "", ""]),
+  ];
+
+  return { kind: "system_equation", lesson, exNum: 1, question: templatesA104[Math.floor(Math.random() * templatesA104.length)]! };
+
   // All solutions verified by substituting (x₀,y₀) into both original equations.
   const templates: SystemEquationQuestion[] = [
     // ── T1: I·2 + II → 14x=70 → x=5, y=7  (3·5−2·7=1✓  8·5+4·7=68✓) ──────
@@ -4518,9 +4629,11 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push(genEquationGroupStep(lesson, 1));
       steps.push(genEquationGroupStep(lesson, 2));
     } else if (sid === "A10-2") {
-      steps.push(genFracEquationGroupStep(lesson));
+      steps.push(genFracEquationGroupStep(lesson, 1));
+      steps.push(genFracEquationGroupStep(lesson, 2));
       steps.push({ kind: "eval_start", lesson });
-      steps.push(genFracEquationGroupStep(lesson));
+      steps.push(genFracEquationGroupStep(lesson, 1));
+      steps.push(genFracEquationGroupStep(lesson, 2));
     } else if (sid === "A10-3") {
       steps.push(genSystemEquationStep(lesson));
       steps.push({ kind: "eval_start", lesson });
