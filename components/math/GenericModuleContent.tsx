@@ -3778,7 +3778,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
     return `${term(xCoef, true)}${cn(constant)}`;
   };
   const solText = (sol: EquationSolution) =>
-    sol.kind === "impossible" ? "∅" : sol.kind === "infinite" ? "IR" : sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+    sol.kind === "impossible" ? "∅" : sol.kind === "infinite" ? "infini" : sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
   const opAdd = (n: number) => n < 0 ? `- ${Math.abs(n)}` : `+ ${n}`;
   const opMoveX = (coef: number) => coef < 0 ? `+ ${sx(Math.abs(coef))}` : `- ${sx(coef)}`;
   const makeA101 = (
@@ -9145,10 +9145,10 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "equation_group" && (() => {
         const step = activeEquationStep ?? (currentStep as EquationGroupStep);
         const formatSol = (sol: EquationSolution) =>
-          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "infini" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const formatXSol = (sol: EquationSolution) =>
-          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "infini" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
         const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
@@ -9158,7 +9158,7 @@ export function GenericModuleContent({
           const userAns = eqAnswers[0] ?? "";
           const result = eqValidated ? (eqResults[0] ?? null) : null;
           const isWrong = result === false;
-          const infActive = userAns.trim().toUpperCase() === "IR";
+          const infActive = userAns.trim().toLowerCase() === "infini";
           const impActive = userAns.trim().toLowerCase() === "impossible";
           const btnClsSingle = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
           return (
@@ -9187,7 +9187,7 @@ export function GenericModuleContent({
                   ))}
                   {!eqValidated && (
                     <div className="flex justify-center gap-2">
-                      <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; n[0]=infActive?"":"IR"; return n; })} className={btnClsSingle(infActive)}>∞</button>
+                      <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; n[0]=infActive?"":"infini"; return n; })} className={btnClsSingle(infActive)}>∞</button>
                       <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; n[0]=impActive?"":"impossible"; return n; })} className={btnClsSingle(impActive)}>impossible</button>
                     </div>
                   )}
@@ -9254,7 +9254,7 @@ export function GenericModuleContent({
                 const userAns = eqAnswers[i] ?? "";
                 const result = eqValidated ? (eqResults[i] ?? null) : null;
                 const isWrong = result === false;
-                const infA = userAns.trim().toUpperCase() === "IR";
+                const infA = userAns.trim().toLowerCase() === "infini";
                 const impA = userAns.trim().toLowerCase() === "impossible";
                 const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
@@ -9272,7 +9272,7 @@ export function GenericModuleContent({
                         onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
                         className={inputCls} />
                     )}
-                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"IR"; return n; })} className={btnCls(infA)}>∞</button>}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"infini"; return n; })} className={btnCls(infA)}>∞</button>}
                     {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=impA?"":"impossible"; return n; })} className={btnCls(impA)}>impossible</button>}
                     {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
                   </div>
@@ -9328,15 +9328,15 @@ export function GenericModuleContent({
                 const userX = eqAnswers[0] ?? "";
                 const userY = eqAnswers[1] ?? "";
                 const xLow = userX.trim().toLowerCase().replace(/\s+/g, "");
-                const isSpecialBtn = xLow === "ir" || xLow === "impossible" || xLow === "∅";
-                const infA = xLow === "ir";
+                const isSpecialBtn = xLow === "infini" || xLow === "impossible" || xLow === "∅";
+                const infA = xLow === "infini";
                 const impA = xLow === "impossible" || xLow === "∅";
                 const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
                   <div className="space-y-2 pt-2">
                     {!eqValidated && (
                       <div className="flex justify-center gap-2">
-                        <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=infA?"":"IR"; if(!infA)n[1]=""; return n; })} className={btnCls(infA)}>∞</button>
+                        <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=infA?"":"infini"; if(!infA)n[1]=""; return n; })} className={btnCls(infA)}>∞</button>
                         <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=impA?"":"impossible"; if(!impA)n[1]=""; return n; })} className={btnCls(impA)}>impossible</button>
                       </div>
                     )}
@@ -9407,7 +9407,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "frac_equation_group" && (() => {
         const step = currentStep as FracEquationGroupStep;
         const formatSol = (sol: EquationSolution) =>
-          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "IR" :
+          sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "infini" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
         const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
         // Render a side (list of terms) as inline fraction elements
@@ -9429,13 +9429,13 @@ export function GenericModuleContent({
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez une fraction (ex&nbsp;: 3/4), un entier, <em>impossible</em> ou <em>IR</em>.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez une fraction (ex&nbsp;: 3/4), un entier, <em>impossible</em> ou <em>infini</em>.</p>
             <div className="space-y-5">
               {step.questions.map((q, i) => {
                 const userAns = eqAnswers[i] ?? "";
                 const result = eqValidated ? (eqResults[i] ?? null) : null;
                 const isWrong = result === false;
-                const infA = userAns.trim().toUpperCase() === "IR";
+                const infA = userAns.trim().toLowerCase() === "infini";
                 const impA = userAns.trim().toLowerCase() === "impossible";
                 const btnCls = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
                 return (
@@ -9457,7 +9457,7 @@ export function GenericModuleContent({
                         onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
                         className={inputCls} />
                     )}
-                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"IR"; return n; })} className={btnCls(infA)}>∞</button>}
+                    {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"infini"; return n; })} className={btnCls(infA)}>∞</button>}
                     {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=impA?"":"impossible"; return n; })} className={btnCls(impA)}>impossible</button>}
                     {result === true && <span className="text-xs text-[var(--color-accent-alg)]">✓</span>}
                   </div>
