@@ -205,7 +205,7 @@ type TrueFalseGcdLcmQ = { statement: string; answer: boolean; type: "pgcd"|"ppmc
 type TrueFalseGcdLcmConfig = { questions: TrueFalseGcdLcmQ[]; exNum: number };
 type TrueFalseGcdLcmStep = { kind: "true_false_gcd_lcm"; lesson: MathSubmoduleLesson; config: TrueFalseGcdLcmConfig };
 
-type WordLevel = "a1" | "a2" | "b1" | "multdiv";
+type WordLevel = "a1" | "a2" | "b1" | "multdiv" | "decimal_e" | "decimal_m" | "decimal_h" | "propor_e" | "propor_m" | "propor_h";
 type WordProblemQ = { textFr: string; answer: number; op: ArithOp; calculation?: string };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
@@ -435,13 +435,13 @@ const WP_SUB_B1: Array<(a: number, b: number) => string> = [
   (a, b) => `Une caisse contient ${a} enveloppes. On en utilise ${b} pour un envoi. Combien d'enveloppes restent dans la caisse ?`,
 ];
 
-const WP_ADD_BY_LEVEL: Record<Exclude<WordLevel, "multdiv">, Array<(a: number, b: number) => string>> = {
+const WP_ADD_BY_LEVEL: Record<"a1" | "a2" | "b1", Array<(a: number, b: number) => string>> = {
   a1: WP_ADD_A1,
   a2: WP_ADD,
   b1: WP_ADD_B1,
 };
 
-const WP_SUB_BY_LEVEL: Record<Exclude<WordLevel, "multdiv">, Array<(a: number, b: number) => string>> = {
+const WP_SUB_BY_LEVEL: Record<"a1" | "a2" | "b1", Array<(a: number, b: number) => string>> = {
   a1: WP_SUB_A1,
   a2: WP_SUB,
   b1: WP_SUB_B1,
@@ -1089,6 +1089,313 @@ function genA37MultDivProblem(): WordProblemQ {
   return templates[0]!();
 }
 
+// ── Decimal word problems (A5.7) ─────────────────────────────────────────────
+function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
+  const name = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+  // fmt: format a hundredths-integer as French decimal string
+  const fmt = (h: number) => fmtDec(Math.round(h));
+
+  if (level === "e") {
+    const templates: Array<() => WordProblemQ> = [
+      () => {
+        const a2 = rnd(4, 16), b2 = rnd(2, 10);
+        const a = a2 / 2, b = b2 / 2, tot = (a2 + b2) / 2;
+        const items = ["pommes", "poires", "cerises", "fraises", "légumes"][rnd(0, 4)]!;
+        return { textFr: `${name} achète ${fmt(a * 100)} kg de ${items}, puis ${fmt(b * 100)} kg de plus. Combien de kg a-t-il en tout ?`, answer: tot, op: "+", calculation: `${fmt(a * 100)} + ${fmt(b * 100)} = ${fmt(tot * 100)} kg` };
+      },
+      () => {
+        const tot2 = rnd(8, 20), used2 = rnd(2, Math.max(2, tot2 - 3));
+        const tot = tot2 / 2, used = used2 / 2, rem = (tot2 - used2) / 2;
+        const liquid = ["jus", "eau", "lait", "sirop"][rnd(0, 3)]!;
+        return { textFr: `${name} a ${fmt(tot * 100)} litre${tot > 1 ? "s" : ""} de ${liquid}. Il en utilise ${fmt(used * 100)} litre${used > 1 ? "s" : ""}. Combien reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(used * 100)} = ${fmt(rem * 100)}` };
+      },
+      () => {
+        const n = rnd(2, 8), p2 = rnd(2, 12);
+        const p = p2 / 2, tot = (p2 * n) / 2;
+        const item = ["stylo", "carnet", "cahier", "livre"][rnd(0, 3)]!;
+        return { textFr: `Un ${item} coûte ${fmt(p * 100)} fr. ${name} en achète ${n}. Combien cela coûte-t-il ?`, answer: tot, op: "×", calculation: `${n} × ${fmt(p * 100)} = ${fmt(tot * 100)} fr.` };
+      },
+      () => {
+        const n = rnd(2, 6), part2 = rnd(3, 12);
+        const total = (n * part2) / 2, part = part2 / 2;
+        const thing = ["ruban", "corde", "tissu", "câble"][rnd(0, 3)]!;
+        return { textFr: `${name} coupe ${fmt(total * 100)} m de ${thing} en ${n} morceaux égaux. Combien mesure chaque morceau ?`, answer: part, op: "÷", calculation: `${fmt(total * 100)} ÷ ${n} = ${fmt(part * 100)} m` };
+      },
+      () => {
+        const v = rnd(4, 12), t2 = rnd(2, 8);
+        const t = t2 / 2, dist = (v * t2) / 2;
+        return { textFr: `${name} roule à ${v} km/h pendant ${fmt(t * 100)} heure${t > 1 ? "s" : ""}. Quelle distance parcourt-il ?`, answer: dist, op: "×", calculation: `${v} × ${fmt(t * 100)} = ${fmt(dist * 100)} km` };
+      },
+      () => {
+        const tot2 = rnd(10, 30), spent2 = rnd(4, Math.max(4, tot2 - 3));
+        const tot = tot2 / 2, spent = spent2 / 2, rem = (tot2 - spent2) / 2;
+        return { textFr: `${name} a ${fmt(tot * 100)} fr. Il dépense ${fmt(spent * 100)} fr. Combien lui reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot * 100)} − ${fmt(spent * 100)} = ${fmt(rem * 100)} fr.` };
+      },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  if (level === "m") {
+    const templates: Array<() => WordProblemQ> = [
+      () => {
+        const n = rnd(3, 15), p100 = rnd(125, 900);
+        const p = p100 / 100, tot = Math.round(p100 * n) / 100;
+        const item = ["article", "billet", "repas", "abonnement"][rnd(0, 3)]!;
+        return { textFr: `Un ${item} coûte ${fmt(p100)} fr. ${name} en achète ${n}. Combien cela coûte-t-il ?`, answer: tot, op: "×", calculation: `${n} × ${fmt(p100)} = ${fmt(Math.round(p100 * n))} fr.` };
+      },
+      () => {
+        const n = rnd(2, 8), part100 = rnd(50, 200);
+        const total = (n * part100) / 100, part = part100 / 100;
+        const item = ["farine", "sucre", "riz", "café"][rnd(0, 3)]!;
+        return { textFr: `${name} répartit ${fmt(n * part100)} kg de ${item} dans ${n} sacs égaux. Combien pèse chaque sac ?`, answer: part, op: "÷", calculation: `${fmt(n * part100)} ÷ ${n} = ${fmt(part100)} kg` };
+      },
+      () => {
+        const taux100 = rnd(1200, 2500), h_num = rnd(3, 10);
+        const taux = taux100 / 100, tot = Math.round(taux100 * h_num) / 100;
+        return { textFr: `${name} gagne ${fmt(taux100)} fr. de l'heure. En ${h_num} heures, combien gagne-t-il ?`, answer: tot, op: "×", calculation: `${h_num} × ${fmt(taux100)} = ${fmt(Math.round(taux100 * h_num))} fr.` };
+      },
+      () => {
+        const spd = rnd(8, 20), t2 = rnd(4, 16);
+        const t = t2 / 2, dist = Math.round(spd * t * 100) / 100;
+        return { textFr: `Une voiture roule à ${spd} km/h pendant ${fmt(t2 * 50)} heures. Quelle distance parcourt-elle ?`, answer: dist, op: "×", calculation: `${spd} × ${fmt(t2 * 50)} = ${fmt(Math.round(spd * t * 100))} km` };
+      },
+      () => {
+        const a100 = rnd(500, 3000), b100 = rnd(200, 1500);
+        const tot = (a100 + b100) / 100;
+        return { textFr: `${name} dépense ${fmt(a100)} fr. le matin et ${fmt(b100)} fr. l'après-midi. Quel est le montant total ?`, answer: tot, op: "+", calculation: `${fmt(a100)} + ${fmt(b100)} = ${fmt(a100 + b100)} fr.` };
+      },
+      () => {
+        const tot100 = rnd(1500, 8000), used100 = rnd(500, tot100 - 500);
+        const tot = tot100 / 100, used = used100 / 100, rem = (tot100 - used100) / 100;
+        const unit = ["m", "kg", "litres"][rnd(0, 2)]!;
+        return { textFr: `Un camion transporte ${fmt(tot100)} ${unit} de marchandises. Il en livre ${fmt(used100)} ${unit}. Combien reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot100)} − ${fmt(used100)} = ${fmt(tot100 - used100)} ${unit}` };
+      },
+      () => {
+        const n = rnd(4, 12), per100 = rnd(75, 400);
+        const total = Math.round(n * per100) / 100, per = per100 / 100;
+        return { textFr: `${name} partage ${fmt(Math.round(n * per100))} litres de jus entre ${n} verres égaux. Combien y a-t-il dans chaque verre ?`, answer: per, op: "÷", calculation: `${fmt(Math.round(n * per100))} ÷ ${n} = ${fmt(per100)} litre${per !== 1 ? "s" : ""}` };
+      },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  // level === "h": multi-step
+  const templates: Array<() => WordProblemQ> = [
+    () => {
+      const n1 = rnd(2, 8), n2 = rnd(2, 8);
+      const p1100 = rnd(150, 800), p2100 = rnd(100, 600);
+      const cost1 = Math.round(n1 * p1100), cost2 = Math.round(n2 * p2100);
+      const tot = (cost1 + cost2) / 100;
+      const item1 = ["carnets", "livres", "stylos"][rnd(0, 2)]!;
+      const item2 = ["règles", "gommes", "feutres"][rnd(0, 2)]!;
+      return { textFr: `${name} achète ${n1} ${item1} à ${fmt(p1100)} fr. et ${n2} ${item2} à ${fmt(p2100)} fr. Combien dépense-t-il au total ?`, answer: tot, op: "+", calculation: `${n1} × ${fmt(p1100)} + ${n2} × ${fmt(p2100)} = ${fmt(cost1)} + ${fmt(cost2)} = ${fmt(cost1 + cost2)} fr.` };
+    },
+    () => {
+      const n = rnd(2, 6), p100 = rnd(150, 600);
+      const budMax = n * p100 + rnd(200, 2000);
+      const budget100 = Math.round(budMax / 50) * 50;
+      const cost100 = n * p100, rem100 = budget100 - cost100;
+      const item = ["billets", "livres", "repas"][rnd(0, 2)]!;
+      return { textFr: `${name} a ${fmt(budget100)} fr. Il achète ${n} ${item} à ${fmt(p100)} fr. chacun. Combien lui reste-t-il ?`, answer: rem100 / 100, op: "-", calculation: `${n} × ${fmt(p100)} = ${fmt(cost100)} ; ${fmt(budget100)} − ${fmt(cost100)} = ${fmt(rem100)} fr.` };
+    },
+    () => {
+      const taux100 = rnd(1500, 2500), hours = rnd(5, 8), days = rnd(3, 5);
+      const expenses100 = rnd(1000, 3000);
+      const total100 = taux100 * hours * days;
+      const savings100 = total100 - expenses100;
+      if (savings100 <= 0) return { textFr: "", answer: -1, op: "+" };
+      return { textFr: `${name} gagne ${fmt(taux100)} fr./h, ${hours} h/jour pendant ${days} jours. Il dépense ${fmt(expenses100)} fr. Combien économise-t-il ?`, answer: savings100 / 100, op: "-", calculation: `${fmt(taux100)} × ${hours} × ${days} = ${fmt(total100)} ; − ${fmt(expenses100)} = ${fmt(savings100)} fr.` };
+    },
+    () => {
+      const n = rnd(4, 12), w100 = rnd(25, 150);
+      const total100 = n * w100, used100 = rnd(50, total100 - 50);
+      const rem100 = total100 - used100;
+      const item = ["fromages", "pains", "gâteaux"][rnd(0, 2)]!;
+      return { textFr: `Un boulanger prépare ${n} ${item} de ${fmt(w100)} kg chacun. Il en vend ${fmt(used100)} kg. Combien de kg lui reste-t-il ?`, answer: rem100 / 100, op: "-", calculation: `${n} × ${fmt(w100)} = ${fmt(total100)} ; − ${fmt(used100)} = ${fmt(rem100)} kg` };
+    },
+    () => {
+      const n1 = rnd(3, 8), n2 = rnd(2, 6), p100 = rnd(100, 400);
+      const fixed100 = rnd(500, 1500);
+      const tot = (n1 * n2 * p100 + fixed100) / 100;
+      return { textFr: `${name} achète ${n1} paquets de ${n2} articles à ${fmt(p100)} fr. l'article, plus ${fmt(fixed100)} fr. de frais. Quel est le total ?`, answer: tot, op: "+", calculation: `${n1} × ${n2} × ${fmt(p100)} = ${fmt(n1 * n2 * p100)} ; + ${fmt(fixed100)} = ${fmt(Math.round(tot * 100))} fr.` };
+    },
+  ];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const q = templates[rnd(0, templates.length - 1)]!();
+    if (Number.isFinite(q.answer) && q.answer > 0) return q;
+  }
+  return templates[0]!();
+}
+
+// ── Proportion / rate / percentage word problems (A6.4) ───────────────────────
+function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
+  const name = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+  const fmt = (h: number) => fmtDec(Math.round(h));
+
+  if (level === "e") {
+    // Easy: integers, simple proportions and round percentages
+    const templates: Array<() => WordProblemQ> = [
+      () => {
+        // Direct proportion: unit method
+        const unitPrice = rnd(2, 8), qty = rnd(3, 12);
+        const totalRef = unitPrice * rnd(2, 5), qtyRef = totalRef / unitPrice;
+        const tot = unitPrice * qty;
+        return { textFr: `${qtyRef} articles coûtent ${totalRef} fr. Combien coûtent ${qty} articles du même type ?`, answer: tot, op: "×", calculation: `Prix unitaire : ${totalRef} ÷ ${qtyRef} = ${unitPrice} fr. → ${qty} × ${unitPrice} = ${tot} fr.` };
+      },
+      () => {
+        // Simple percentage: 10%
+        const base = rnd(2, 20) * 10;
+        const pct = 10, res = base * pct / 100;
+        return { textFr: `Quel est ${pct}% de ${base} ?`, answer: res, op: "×", calculation: `${base} × ${pct} ÷ 100 = ${res}` };
+      },
+      () => {
+        // Simple percentage: 25%
+        const base = rnd(1, 12) * 4;
+        const pct = 25, res = base * pct / 100;
+        return { textFr: `Quel est ${pct}% de ${base} ?`, answer: res, op: "×", calculation: `${base} × ${pct} ÷ 100 = ${res}` };
+      },
+      () => {
+        // Simple percentage: 50%
+        const base = rnd(2, 30) * 2;
+        const res = base / 2;
+        return { textFr: `Quel est 50% de ${base} ?`, answer: res, op: "÷", calculation: `${base} ÷ 2 = ${res}` };
+      },
+      () => {
+        // Speed × time = distance (integer)
+        const v = rnd(40, 120), t = rnd(1, 5);
+        const dist = v * t;
+        return { textFr: `Une voiture roule à ${v} km/h pendant ${t} heure${t > 1 ? "s" : ""}. Quelle distance parcourt-elle ?`, answer: dist, op: "×", calculation: `${v} × ${t} = ${dist} km` };
+      },
+      () => {
+        // Discount (round %)
+        const base = rnd(2, 20) * 10, pct = [10, 20, 25, 50][rnd(0, 3)]!;
+        const disc = base * pct / 100, final = base - disc;
+        return { textFr: `Un article coûte ${base} fr. ${name} obtient une réduction de ${pct}%. Quel est le prix final ?`, answer: final, op: "-", calculation: `${base} × ${pct}/100 = ${disc} ; ${base} − ${disc} = ${final} fr.` };
+      },
+      () => {
+        // Production rate: n per hour × hours
+        const rate = rnd(8, 40), hours = rnd(3, 8);
+        const tot = rate * hours;
+        return { textFr: `Une machine produit ${rate} pièces par heure. En ${hours} heures, combien de pièces produit-elle ?`, answer: tot, op: "×", calculation: `${rate} × ${hours} = ${tot}` };
+      },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  if (level === "m") {
+    // Medium: decimals, non-round percentages, unit prices
+    const templates: Array<() => WordProblemQ> = [
+      () => {
+        // Unit price (decimal): find total
+        const qty = rnd(3, 15), p100 = rnd(125, 800);
+        const p = p100 / 100, tot = Math.round(qty * p100) / 100;
+        const item = ["kg de fruits", "litres de lait", "mètres de tissu", "articles"][rnd(0, 3)]!;
+        return { textFr: `${name} achète ${qty} ${item} à ${fmt(p100)} fr. l'unité. Quel est le coût total ?`, answer: tot, op: "×", calculation: `${qty} × ${fmt(p100)} = ${fmt(Math.round(qty * p100))} fr.` };
+      },
+      () => {
+        // Find unit price from total
+        const n = rnd(2, 8), tot100 = n * rnd(150, 600);
+        const tot = tot100 / 100, unit = tot100 / 100 / n;
+        const item = ["billets", "repas", "abonnements"][rnd(0, 2)]!;
+        return { textFr: `${n} ${item} coûtent ${fmt(tot100)} fr. au total. Quel est le prix par ${item.slice(0, -1)} ?`, answer: unit, op: "÷", calculation: `${fmt(tot100)} ÷ ${n} = ${fmt(tot100 / n)} fr.` };
+      },
+      () => {
+        // Percentage non-round
+        const base100 = rnd(100, 500) * 10, pct = [15, 20, 30, 40][rnd(0, 3)]!;
+        const res100 = Math.round(base100 * pct / 100);
+        const base = base100 / 100, res = res100 / 100;
+        return { textFr: `Quel est ${pct}% de ${fmt(base100)} fr. ?`, answer: res, op: "×", calculation: `${fmt(base100)} × ${pct} ÷ 100 = ${fmt(res100)} fr.` };
+      },
+      () => {
+        // Discount (decimal result)
+        const base100 = rnd(50, 300) * 10, pct = [15, 20, 30][rnd(0, 2)]!;
+        const disc100 = Math.round(base100 * pct / 100), final100 = base100 - disc100;
+        const base = base100 / 100, final = final100 / 100;
+        return { textFr: `Un article vaut ${fmt(base100)} fr. Après une réduction de ${pct}%, quel est le prix à payer ?`, answer: final, op: "-", calculation: `${fmt(base100)} × ${1 - pct / 100} = ${fmt(final100)} fr.` };
+      },
+      () => {
+        // Speed × decimal time
+        const v = rnd(50, 120), t2 = rnd(3, 10);
+        const t = t2 / 2, dist = Math.round(v * t * 100) / 100;
+        return { textFr: `Un train roule à ${v} km/h pendant ${fmt(t2 * 50)} heures. Quelle distance parcourt-il ?`, answer: dist, op: "×", calculation: `${v} × ${fmt(t2 * 50)} = ${fmt(Math.round(v * t * 100))} km` };
+      },
+      () => {
+        // Proportion (cross-multiply): decimal answer
+        const u = rnd(2, 8), ref = u * rnd(2, 6);
+        const refCost100 = rnd(150, 600), totCost100 = Math.round(refCost100 * u);
+        const perUnit100 = Math.round(refCost100 / ref * 100) / 100 * 100; // hmm
+        // Simpler: 5 articles cost X. How much for n?
+        const n2 = rnd(3, 15), perUnit100b = rnd(75, 400);
+        const refQty = rnd(2, 5), refCost100b = refQty * perUnit100b;
+        const totb = (n2 * perUnit100b) / 100;
+        return { textFr: `Si ${refQty} kg coûtent ${fmt(refCost100b)} fr., combien coûtent ${n2} kg ?`, answer: totb, op: "×", calculation: `Prix au kg : ${fmt(refCost100b)} ÷ ${refQty} = ${fmt(perUnit100b)} fr./kg → ${n2} × ${fmt(perUnit100b)} = ${fmt(Math.round(totb * 100))} fr.` };
+      },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  // level === "h": multi-step proportion/rate/percentage
+  const templates: Array<() => WordProblemQ> = [
+    () => {
+      // Budget − proportional discount
+      const base100 = rnd(200, 600) * 10, pct = [10, 15, 20, 25][rnd(0, 3)]!;
+      const disc100 = Math.round(base100 * pct / 100), after100 = base100 - disc100;
+      const tax = 8, final100 = Math.round(after100 * (1 + tax / 100));
+      const final = final100 / 100;
+      return { textFr: `Un article vaut ${fmt(base100)} fr. ${name} obtient ${pct}% de réduction, puis paie ${tax}% de TVA. Quel est le prix final ?`, answer: final, op: "+", calculation: `${fmt(base100)} − ${pct}% = ${fmt(after100)} ; + ${tax}% TVA = ${fmt(final100)} fr.` };
+    },
+    () => {
+      // Total cost: two groups with unit prices
+      const n1 = rnd(3, 10), p1100 = rnd(100, 500), n2 = rnd(2, 8), p2100 = rnd(75, 350);
+      const cost1 = n1 * p1100, cost2 = n2 * p2100, tot = (cost1 + cost2) / 100;
+      const item1 = ["cahiers", "livres", "stylos"][rnd(0, 2)]!;
+      const item2 = ["règles", "gommes", "feutres"][rnd(0, 2)]!;
+      return { textFr: `${name} achète ${n1} ${item1} à ${fmt(p1100)} fr. et ${n2} ${item2} à ${fmt(p2100)} fr. Quel est le total ?`, answer: tot, op: "+", calculation: `${n1}×${fmt(p1100)} + ${n2}×${fmt(p2100)} = ${fmt(cost1)} + ${fmt(cost2)} = ${fmt(cost1 + cost2)} fr.` };
+    },
+    () => {
+      // Work: rate × time × days
+      const rate100 = rnd(1500, 2800), hoursDay = rnd(5, 8), days = rnd(3, 6);
+      const tot100 = rate100 * hoursDay * days;
+      const tot = tot100 / 100;
+      return { textFr: `${name} gagne ${fmt(rate100)} fr./h. Il travaille ${hoursDay} h/jour pendant ${days} jours. Quel est son salaire total ?`, answer: tot, op: "×", calculation: `${fmt(rate100)} × ${hoursDay} × ${days} = ${fmt(tot100)} fr.` };
+    },
+    () => {
+      // Percentage increase: new price
+      const base100 = rnd(100, 400) * 10, pct = [5, 8, 10, 12, 15][rnd(0, 4)]!;
+      const increase100 = Math.round(base100 * pct / 100), new100 = base100 + increase100;
+      return { textFr: `Le prix d'un abonnement est de ${fmt(base100)} fr. Il augmente de ${pct}%. Quel est le nouveau prix ?`, answer: new100 / 100, op: "+", calculation: `${fmt(base100)} × ${pct}/100 = ${fmt(increase100)} ; ${fmt(base100)} + ${fmt(increase100)} = ${fmt(new100)} fr.` };
+    },
+    () => {
+      // Split costs proportionally (not % but ratio)
+      const total100 = rnd(500, 3000) * 10, persons = rnd(3, 8);
+      const share100 = Math.round(total100 / persons);
+      if (share100 * persons !== total100) return { textFr: "", answer: -1, op: "+" };
+      return { textFr: `${name} et ${persons - 1} amis partagent des dépenses de ${fmt(total100)} fr. en parts égales. Combien chacun paie-t-il ?`, answer: share100 / 100, op: "÷", calculation: `${fmt(total100)} ÷ ${persons} = ${fmt(share100)} fr.` };
+    },
+  ];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const q = templates[rnd(0, templates.length - 1)]!();
+    if (Number.isFinite(q.answer) && q.answer > 0) return q;
+  }
+  return templates[0]!();
+}
+
 function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
   if (level === "a1" && exNum === 1) {
     const first = genA24ContextProblem();
@@ -1100,6 +1407,20 @@ function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
     const first = genA37MultDivProblem();
     let second = genA37MultDivProblem();
     for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA37MultDivProblem();
+    return { exNum, level, questions: [first, second] };
+  }
+  if (level === "decimal_e" || level === "decimal_m" || level === "decimal_h") {
+    const lev = level === "decimal_e" ? "e" : level === "decimal_m" ? "m" : "h";
+    const first = genA57DecimalProblem(lev);
+    let second = genA57DecimalProblem(lev);
+    for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA57DecimalProblem(lev);
+    return { exNum, level, questions: [first, second] };
+  }
+  if (level === "propor_e" || level === "propor_m" || level === "propor_h") {
+    const lev = level === "propor_e" ? "e" : level === "propor_m" ? "m" : "h";
+    const first = genA64ProportionProblem(lev);
+    let second = genA64ProportionProblem(lev);
+    for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA64ProportionProblem(lev);
     return { exNum, level, questions: [first, second] };
   }
   const addPool = WP_ADD_BY_LEVEL[level];
@@ -5061,6 +5382,22 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 1) });
       steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 2) });
       steps.push({ kind: "word_problems", lesson, config: genWP("multdiv", 3) });
+    } else if (sid === "A5-7") {
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_h", 3) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("decimal_h", 3) });
+    } else if (sid === "A6-4") {
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_h", 3) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("propor_h", 3) });
     } else if (sid === "A10-1") {
       steps.push(genEquationGroupStep(lesson, 1));
       steps.push(genEquationGroupStep(lesson, 2));
@@ -5125,6 +5462,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
     l.submoduleId === "A3-5" || l.submoduleId === "A3-6" || l.submoduleId === "A3-7" ||
+    l.submoduleId === "A5-7" || l.submoduleId === "A6-4" ||
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
     l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||

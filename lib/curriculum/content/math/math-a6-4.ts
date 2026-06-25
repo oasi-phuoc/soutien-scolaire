@@ -1,55 +1,71 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A6_4_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A6-4",
-    submoduleCode: "A6.4",
-    theory: {
-      title: { fr: "Comparaison de pourcentages",},
-      paragraphs: {
-        fr: [
-          "Comparer des pourcentages permet de prendre de meilleures décisions : quelle offre est plus avantageuse ? Quel produit a le meilleur rapport qualité-prix ?",
-          "Les pourcentages permettent de comparer des quantités de bases différentes.",
-        ],
-      },
-      blocks: [
-        { type: "heading", fr: "Comparaison de pourcentages", black: true },
-        { type: "plain", fr: "Comparer des pourcentages permet de prendre de meilleures décisions : quelle offre est plus avantageuse ? Quel produit a le meilleur rapport qualité-prix ? Les pourcentages permettent de comparer des quantités de bases différentes." },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Comparer des offres commerciales" },
-        { type: "section", labelFr: "Méthode", itemsFr: [
-          "**1.** Calculer le montant de la réduction pour chaque offre",
-          "**2.** Comparer les montants obtenus",
-          "**3.** Choisir l'offre la plus avantageuse selon la situation",
-        ]},
-        { type: "section", labelFr: "", itemsFr: [
-          "Offre A : −20% sur 150 CHF → 150 × 0,80 = 120 CHF  (économie : 30 CHF)",
-          "Offre B : −15% sur 130 CHF → 130 × 0,85 = 110,50 CHF  (économie : 19,50 CHF)",
-        ]},
-        { type: "plain", fr: "" },
-        { type: "table", headersFr: ["Produit", "Prix initial", "Réduction", "Prix final"], accentHeader: true,
-          rows: [
-            ["Veste — Magasin A", "200 CHF", "−25%", "150 CHF"],
-            ["Veste — Magasin B", "180 CHF", "−20%", "144 CHF"],
-            ["Veste — Magasin C", "220 CHF", "−30%", "154 CHF"],
-          ]
+  submoduleId: "A6-4",
+  submoduleCode: "A6.4",
+  theory: {
+    title: { fr: "Problèmes" },
+    paragraphs: { fr: [] },
+    blocks: [
+      { type: "heading", fr: "Problèmes : proportion, taux et pourcentage", black: true },
+      { type: "highlight", fr: "Trois outils, une même logique" },
+      { type: "plain", fr: "Proportion, taux et pourcentage permettent tous de comparer ou de transférer une relation entre deux grandeurs. On choisit l'outil selon la situation." },
+      { type: "theory_tabs", tabs: [
+        {
+          label: "Proportion",
+          blocks: [
+            { type: "heading", fr: "Proportionnalité directe", black: true },
+            { type: "highlight", fr: "Si une quantité double, l'autre double aussi" },
+            { type: "section", labelFr: "Méthode du produit en croix", itemsFr: [
+              "On connaît 3 valeurs et on cherche la 4ème.",
+              "On pose : a / b = c / x",
+              "On calcule : x = (b × c) / a",
+            ] },
+            { type: "example", fr: "3 kg coûtent 7,50 fr. Combien coûtent 5 kg ?\n3 / 7,50 = 5 / x → x = (5 × 7,50) / 3 = 12,50 fr." },
+            { type: "section", labelFr: "Méthode de l'unité (plus simple)", itemsFr: [
+              "**1.** Trouver la valeur pour 1 unité.",
+              "**2.** Multiplier par le nombre d'unités cherché.",
+              "Exemple : 1 kg coûte 7,50 ÷ 3 = 2,50 fr. → 5 kg coûtent 5 × 2,50 = 12,50 fr.",
+            ] },
+          ],
         },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Comparer des taux (notes, résultats...)" },
-        { type: "section", labelFr: "Principe", itemsFr: [
-          "Convertir chaque résultat en pourcentage pour comparer sur la même base",
-          "Classe A : 18/24 réussites → (18 ÷ 24) × 100 = **75%**",
-          "Classe B : 21/30 réussites → (21 ÷ 30) × 100 = **70%**",
-          "→ La classe A a un meilleur taux de réussite",
-        ]},
-        { type: "plain", fr: "" },
-        { type: "note", fr: "La plus grande réduction en % ne garantit pas le prix le plus bas. Toujours calculer le prix final pour comparer correctement." },
-      ],
-    },
-    exercises: [
-      { id: "a6-4-e1", promptFr: "Offre A : −20% sur 150 CHF. Prix final ?", type: "number", acceptable: ["120"] },
-      { id: "a6-4-e2", promptFr: "Offre B : −15% sur 130 CHF. Prix final ?", type: "number", acceptable: ["110.5", "110,5"] },
-      { id: "a6-4-e3", promptFr: "Classe A : 18 sur 24. Taux de réussite ?", type: "short_text", acceptable: ["75%", "75"] },
-      { id: "a6-4-e4", promptFr: "Classe B : 21 sur 30. Taux de réussite ?", type: "short_text", acceptable: ["70%", "70"] },
-      { id: "a6-4-e5", promptFr: "Veste Magasin C : 220 CHF − 30%. Prix final ?", type: "number", acceptable: ["154"] },
+        {
+          label: "Taux",
+          blocks: [
+            { type: "heading", fr: "Taux et vitesse", black: true },
+            { type: "highlight", fr: "Un taux exprime une quantité par unité" },
+            { type: "section", labelFr: "Formule distance", itemsFr: [
+              "distance = vitesse × temps",
+              "vitesse = distance ÷ temps",
+              "temps = distance ÷ vitesse",
+            ] },
+            { type: "example", fr: "Vitesse : 80 km/h. Temps : 2,5 h. Distance = 80 × 2,5 = 200 km" },
+            { type: "section", labelFr: "Autres taux", itemsFr: [
+              "Débit d'eau : litres par minute",
+              "Production : pièces par heure",
+              "Salaire : fr. par heure",
+            ] },
+          ],
+        },
+        {
+          label: "Pourcentage",
+          blocks: [
+            { type: "heading", fr: "Calculer avec un pourcentage", black: true },
+            { type: "highlight", fr: "p% d'une valeur = valeur × p ÷ 100" },
+            { type: "section", labelFr: "Formules clés", itemsFr: [
+              "**p% de A** = A × p / 100",
+              "**Prix après réduction** = prix × (1 − p/100)",
+              "**Prix après augmentation** = prix × (1 + p/100)",
+              "**Taux de variation** = (valeur finale − valeur initiale) / valeur initiale × 100",
+            ] },
+            { type: "example", fr: "Réduction de 20% sur 150 fr. → 150 × (1 − 0,20) = 150 × 0,80 = 120 fr." },
+            { type: "note", fr: "La plus grande réduction en % ne garantit pas le prix le plus bas. Toujours calculer le prix final." },
+          ],
+        },
+      ] },
     ],
-  };
+  },
+  exercises: [],
+  exercisePool: [],
+  poolSize: 0,
+};
