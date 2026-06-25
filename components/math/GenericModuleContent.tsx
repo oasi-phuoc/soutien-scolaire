@@ -206,7 +206,7 @@ type TrueFalseGcdLcmConfig = { questions: TrueFalseGcdLcmQ[]; exNum: number };
 type TrueFalseGcdLcmStep = { kind: "true_false_gcd_lcm"; lesson: MathSubmoduleLesson; config: TrueFalseGcdLcmConfig };
 
 type WordLevel = "a1" | "a2" | "b1" | "multdiv";
-type WordProblemQ = { textFr: string; answer: number; op: ArithOp };
+type WordProblemQ = { textFr: string; answer: number; op: ArithOp; calculation?: string };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
 type UnitConversionDomain = "length" | "area" | "volume" | "capacity" | "mass" | "time";
@@ -460,92 +460,93 @@ function genA24ContextProblem(): WordProblemQ {
   const templates: A24ProblemTemplate[] = [
     () => {
       const r = rnd(80, 260), v = rnd(20, 90), j = rnd(10, 70);
-      return { textFr: `Dans la cuisine, ${name} a trois bocaux de bonbons. Le premier contient ${r} bonbons rouges, le deuxième ${v} bonbons verts et le troisième ${j} bonbons jaunes. Combien y a-t-il de bonbons en tout ?`, answer: r + v + j, op: "+" };
+      return { textFr: `Dans la cuisine, ${name} a trois bocaux de bonbons. Le premier contient ${r} bonbons rouges, le deuxième ${v} bonbons verts et le troisième ${j} bonbons jaunes. Combien y a-t-il de bonbons en tout ?`, answer: r + v + j, op: "+", calculation: `${r} + ${v} + ${j} = ${r + v + j}` };
     },
     () => {
       const r = rnd(120, 320), j = rnd(20, 110);
-      return { textFr: `${name} a ${r} bonbons rouges et ${j} bonbons jaunes. Combien y a-t-il de bonbons rouges de plus que de bonbons jaunes ?`, answer: r - j, op: "-" };
+      return { textFr: `${name} a ${r} bonbons rouges et ${j} bonbons jaunes. Combien y a-t-il de bonbons rouges de plus que de bonbons jaunes ?`, answer: r - j, op: "-", calculation: `${r} − ${j} = ${r - j}` };
     },
     () => {
       const r = rnd(80, 220), v = rnd(20, 90), j = rnd(15, 80);
-      return { textFr: `${name} possède ${r} bonbons rouges, ${v} bonbons verts et ${j} bonbons jaunes. Il donne tous les bonbons rouges à un ami. Combien lui reste-t-il de bonbons ?`, answer: v + j, op: "+" };
+      return { textFr: `${name} possède ${r} bonbons rouges, ${v} bonbons verts et ${j} bonbons jaunes. Il donne tous les bonbons rouges à un ami. Combien lui reste-t-il de bonbons ?`, answer: v + j, op: "+", calculation: `${v} + ${j} = ${v + j}` };
     },
     () => {
       const total = rnd(350, 950), empr = rnd(80, 260);
-      return { textFr: `La bibliothèque de l'école a ${total} livres de français. Actuellement, ${empr} livres sont empruntés par des élèves. Combien de livres reste-t-il à la bibliothèque ?`, answer: total - empr, op: "-" };
+      return { textFr: `La bibliothèque de l'école a ${total} livres de français. Actuellement, ${empr} livres sont empruntés par des élèves. Combien de livres reste-t-il à la bibliothèque ?`, answer: total - empr, op: "-", calculation: `${total} − ${empr} = ${total - empr}` };
     },
     () => {
       const total = rnd(600, 1400), empr = rnd(100, 280), demain = rnd(80, 260);
-      return { textFr: `La bibliothèque a ${total} livres. ${empr} livres sont déjà prêtés. Demain, ${demain} livres supplémentaires seront prêtés. Combien de livres restera-t-il à la bibliothèque ?`, answer: total - empr - demain, op: "-" };
+      return { textFr: `La bibliothèque a ${total} livres. ${empr} livres sont déjà prêtés. Demain, ${demain} livres supplémentaires seront prêtés. Combien de livres restera-t-il à la bibliothèque ?`, answer: total - empr - demain, op: "-", calculation: `${total} − ${empr} − ${demain} = ${total - empr - demain}` };
     },
     () => {
       const pages = rnd(900, 2500), lues = rnd(250, pages - 120);
-      return { textFr: `${name} a emprunté un livre de ${pages} pages à la médiathèque. Il a déjà lu ${lues} pages. Combien de pages doit-il encore lire ?`, answer: pages - lues, op: "-" };
+      return { textFr: `${name} a emprunté un livre de ${pages} pages à la médiathèque. Il a déjà lu ${lues} pages. Combien de pages doit-il encore lire ?`, answer: pages - lues, op: "-", calculation: `${pages} − ${lues} = ${pages - lues}` };
     },
     () => {
       const classes = rnd(18, 42), eleves = rnd(320, 780), profs = rnd(25, 70);
-      return { textFr: `Dans une école, il y a ${classes} classes, ${eleves} élèves et ${profs} professeurs. Combien de personnes y a-t-il en tout dans l'école ?`, answer: eleves + profs, op: "+" };
+      return { textFr: `Dans une école, il y a ${classes} classes, ${eleves} élèves et ${profs} professeurs. Combien de personnes y a-t-il en tout dans l'école ?`, answer: eleves + profs, op: "+", calculation: `${eleves} + ${profs} = ${eleves + profs}` };
     },
     () => {
       const eleves = rnd(350, 820), filles = rnd(140, Math.floor(eleves * 0.55));
-      return { textFr: `Dans une école, il y a ${eleves} élèves. Parmi eux, ${filles} sont des filles. Combien y a-t-il de garçons ?`, answer: eleves - filles, op: "-" };
+      return { textFr: `Dans une école, il y a ${eleves} élèves. Parmi eux, ${filles} sont des filles. Combien y a-t-il de garçons ?`, answer: eleves - filles, op: "-", calculation: `${eleves} − ${filles} = ${eleves - filles}` };
     },
     () => {
       const eleves = rnd(350, 820), malades = rnd(20, 80), retard = rnd(5, 35);
-      return { textFr: `Aujourd'hui, une école compte ${eleves} élèves inscrits. ${malades} élèves sont malades et ${retard} sont en retard. Combien d'élèves sont déjà à l'école ?`, answer: eleves - malades - retard, op: "-" };
+      return { textFr: `Aujourd'hui, une école compte ${eleves} élèves inscrits. ${malades} élèves sont malades et ${retard} sont en retard. Combien d'élèves sont déjà à l'école ?`, answer: eleves - malades - retard, op: "-", calculation: `${eleves} − ${malades} − ${retard} = ${eleves - malades - retard}` };
     },
     () => {
       const base = rnd(2500, 5200), plus = rnd(200, 900);
-      return { textFr: `${name} gagne ${base} francs par mois. Son amie gagne ${plus} francs de plus. Combien gagne son amie ?`, answer: base + plus, op: "+" };
+      return { textFr: `${name} gagne ${base} francs par mois. Son amie gagne ${plus} francs de plus. Combien gagne son amie ?`, answer: base + plus, op: "+", calculation: `${base} + ${plus} = ${base + plus}` };
     },
     () => {
       const mariam = rnd(700, 1800), diff = rnd(80, 360);
-      return { textFr: `${name} collectionne les gommettes. Il en a ${mariam}. Il en a ${diff} de moins que Sofia. Combien de gommettes Sofia a-t-elle ?`, answer: mariam + diff, op: "+" };
+      return { textFr: `${name} collectionne les gommettes. Il en a ${mariam}. Il en a ${diff} de moins que Sofia. Combien de gommettes Sofia a-t-elle ?`, answer: mariam + diff, op: "+", calculation: `${mariam} + ${diff} = ${mariam + diff}` };
     },
     () => {
       const today = rnd(60, 180), diff = rnd(20, 110);
-      return { textFr: `Ce matin, dans le parking de la gare de Sion, il y a ${today} vélos. Hier, il y avait ${diff} vélos de plus. Combien y avait-il de vélos hier ?`, answer: today + diff, op: "+" };
+      return { textFr: `Ce matin, dans le parking de la gare de Sion, il y a ${today} vélos. Hier, il y avait ${diff} vélos de plus. Combien y avait-il de vélos hier ?`, answer: today + diff, op: "+", calculation: `${today} + ${diff} = ${today + diff}` };
     },
     () => {
       const livre = rnd(20, 80), jeuPlus = rnd(8, 35), puzzle = rnd(20, 60), peluche = rnd(25, 70), billet = rnd(180, 300);
-      return { textFr: `${name} achète un livre à ${livre} francs, un jeu qui coûte ${jeuPlus} francs de plus que le livre, un puzzle à ${puzzle} francs et une peluche à ${peluche} francs. Il paie avec ${billet} francs. Combien reçoit-il de monnaie ?`, answer: billet - (livre + livre + jeuPlus + puzzle + peluche), op: "-" };
+      const depenses = livre + livre + jeuPlus + puzzle + peluche;
+      return { textFr: `${name} achète un livre à ${livre} francs, un jeu qui coûte ${jeuPlus} francs de plus que le livre, un puzzle à ${puzzle} francs et une peluche à ${peluche} francs. Il paie avec ${billet} francs. Combien reçoit-il de monnaie ?`, answer: billet - depenses, op: "-", calculation: `${billet} − ${depenses} = ${billet - depenses}` };
     },
     () => {
       const depart = rnd(10, 45), total = depart + rnd(10, 45);
-      return { textFr: `${name} fabrique un collier. Il a déjà enfilé ${depart} perles bleues. Le collier terminé contient ${total} perles. Combien de perles doit-il encore ajouter ?`, answer: total - depart, op: "-" };
+      return { textFr: `${name} fabrique un collier. Il a déjà enfilé ${depart} perles bleues. Le collier terminé contient ${total} perles. Combien de perles doit-il encore ajouter ?`, answer: total - depart, op: "-", calculation: `${total} − ${depart} = ${total - depart}` };
     },
     () => {
       const fiction = rnd(500, 1600), doc = rnd(200, 900), albums = rnd(150, 700), bd = rnd(250, 1000);
-      return { textFr: `La médiathèque de Sion achète ${fiction} livres de fiction, ${doc} documentaires, ${albums} albums jeunesse et ${bd} bandes dessinées. Combien d'articles ont été achetés au total ?`, answer: fiction + doc + albums + bd, op: "+" };
+      return { textFr: `La médiathèque de Sion achète ${fiction} livres de fiction, ${doc} documentaires, ${albums} albums jeunesse et ${bd} bandes dessinées. Combien d'articles ont été achetés au total ?`, answer: fiction + doc + albums + bd, op: "+", calculation: `${fiction} + ${doc} + ${albums} + ${bd} = ${fiction + doc + albums + bd}` };
     },
     () => {
       const grande = rnd(900, 2200), diff = rnd(150, 700);
-      return { textFr: `${name} a ${grande} livres dans sa bibliothèque. Il en a ${diff} de plus que son frère. Combien de livres son frère a-t-il ?`, answer: grande - diff, op: "-" };
+      return { textFr: `${name} a ${grande} livres dans sa bibliothèque. Il en a ${diff} de plus que son frère. Combien de livres son frère a-t-il ?`, answer: grande - diff, op: "-", calculation: `${grande} − ${diff} = ${grande - diff}` };
     },
     () => {
       const aicha = rnd(1200, 4200), timurPlus = rnd(400, 1900);
-      return { textFr: `Dans un jeu, Aïcha possède ${aicha} francs. Timur a ${timurPlus} francs de plus qu'Aïcha. Combien d'argent possède Timur ?`, answer: aicha + timurPlus, op: "+" };
+      return { textFr: `Dans un jeu, Aïcha possède ${aicha} francs. Timur a ${timurPlus} francs de plus qu'Aïcha. Combien d'argent possède Timur ?`, answer: aicha + timurPlus, op: "+", calculation: `${aicha} + ${timurPlus} = ${aicha + timurPlus}` };
     },
     () => {
       const bleus = rnd(40, 130), vertsPlus = rnd(20, 70), rougesMoins = rnd(10, 50);
       const verts = bleus + vertsPlus, rouges = verts - rougesMoins, jaunes = verts;
-      return { textFr: `Les élèves fabriquent des bonnets. Il y a ${bleus} bonnets bleus, ${vertsPlus} bonnets verts de plus que les bleus, ${rougesMoins} bonnets rouges de moins que les verts et autant de bonnets jaunes que de verts. Combien de bonnets y a-t-il en tout ?`, answer: bleus + verts + rouges + jaunes, op: "+" };
+      return { textFr: `Les élèves fabriquent des bonnets. Il y a ${bleus} bonnets bleus, ${vertsPlus} bonnets verts de plus que les bleus, ${rougesMoins} bonnets rouges de moins que les verts et autant de bonnets jaunes que de verts. Combien de bonnets y a-t-il en tout ?`, answer: bleus + verts + rouges + jaunes, op: "+", calculation: `${bleus} + ${verts} + ${rouges} + ${jaunes} = ${bleus + verts + rouges + jaunes}` };
     },
     () => {
       const chevaux = rnd(120, 550), chats = rnd(80, 420);
-      return { textFr: `${name} prend des photos. Il possède ${chevaux} photos de chevaux et ${chats} photos de chats. Combien a-t-il de photos d'animaux au total ?`, answer: chevaux + chats, op: "+" };
+      return { textFr: `${name} prend des photos. Il possède ${chevaux} photos de chevaux et ${chats} photos de chats. Combien a-t-il de photos d'animaux au total ?`, answer: chevaux + chats, op: "+", calculation: `${chevaux} + ${chats} = ${chevaux + chats}` };
     },
     () => {
       const total = rnd(900, 2200), rouges = rnd(120, 420), bleues = rnd(120, 420), blanches = rnd(120, 500), vertes = rnd(80, 300);
-      return { textFr: `${name} réalise une mosaïque avec ${total} tesselles. Il utilise ${rouges} rouges, ${bleues} bleues, ${blanches} blanches et ${vertes} vertes. Combien de tesselles jaunes a-t-il utilisées ?`, answer: total - rouges - bleues - blanches - vertes, op: "-" };
+      return { textFr: `${name} réalise une mosaïque avec ${total} tesselles. Il utilise ${rouges} rouges, ${bleues} bleues, ${blanches} blanches et ${vertes} vertes. Combien de tesselles jaunes a-t-il utilisées ?`, answer: total - rouges - bleues - blanches - vertes, op: "-", calculation: `${total} − ${rouges} − ${bleues} − ${blanches} − ${vertes} = ${total - rouges - bleues - blanches - vertes}` };
     },
     () => {
       const lundi = rnd(120, 360), plus = rnd(40, 130);
-      return { textFr: `Un maraîcher récolte ${lundi} salades le lundi. Le mardi, il en récolte ${plus} de plus que le lundi. Combien de salades a-t-il récoltées pendant les deux premiers jours ?`, answer: lundi + lundi + plus, op: "+" };
+      return { textFr: `Un maraîcher récolte ${lundi} salades le lundi. Le mardi, il en récolte ${plus} de plus que le lundi. Combien de salades a-t-il récoltées pendant les deux premiers jours ?`, answer: lundi + lundi + plus, op: "+", calculation: `${lundi} + ${lundi + plus} = ${lundi + lundi + plus}` };
     },
     () => {
       const premiere = rnd(8, 25), plus = rnd(3, 12);
-      return { textFr: `${name} est allé deux fois à la piscine cette semaine. La première fois, il a fait ${premiere} traversées. La deuxième fois, il en a fait ${plus} de plus. Combien de traversées a-t-il faites cette semaine ?`, answer: premiere + premiere + plus, op: "+" };
+      return { textFr: `${name} est allé deux fois à la piscine cette semaine. La première fois, il a fait ${premiere} traversées. La deuxième fois, il en a fait ${plus} de plus. Combien de traversées a-t-il faites cette semaine ?`, answer: premiere + premiere + plus, op: "+", calculation: `${premiere} + ${premiere + plus} = ${premiere + premiere + plus}` };
     },
   ];
   for (let attempt = 0; attempt < 20; attempt++) {
@@ -561,71 +562,71 @@ function genA37MultDivProblem(): WordProblemQ {
   const templates: A24ProblemTemplate[] = [
     () => {
       const every = rnd(4, 12), stones = rnd(25, 120);
-      return { textFr: `${name} marche sur un chemin. Il met un petit caillou tous les ${every} pas. Il a mis ${stones} cailloux. Combien de pas a-t-il faits ?`, answer: every * stones, op: "×" };
+      return { textFr: `${name} marche sur un chemin. Il met un petit caillou tous les ${every} pas. Il a mis ${stones} cailloux. Combien de pas a-t-il faits ?`, answer: every * stones, op: "×", calculation: `${every} × ${stones} = ${every * stones}` };
     },
     () => {
       const rows = rnd(4, 12), per = rnd(18, 70);
-      return { textFr: `Dans le jardin de ${name}, il y a ${rows} lignes de ${per} choux. Combien de choux ont été plantés ?`, answer: rows * per, op: "×" };
+      return { textFr: `Dans le jardin de ${name}, il y a ${rows} lignes de ${per} choux. Combien de choux ont été plantés ?`, answer: rows * per, op: "×", calculation: `${rows} × ${per} = ${rows * per}` };
     },
     () => {
       const per = rnd(4, 12), boxes = rnd(18, 140);
-      return { textFr: `Dans la chambre de ${name}, ${per * boxes} pierres précieuses sont cachées. Dans chaque boîte, il y a ${per} pierres précieuses. Combien de boîtes sont cachées ?`, answer: boxes, op: "÷" };
+      return { textFr: `Dans la chambre de ${name}, ${per * boxes} pierres précieuses sont cachées. Dans chaque boîte, il y a ${per} pierres précieuses. Combien de boîtes sont cachées ?`, answer: boxes, op: "÷", calculation: `${per * boxes} ÷ ${per} = ${boxes}` };
     },
     () => {
       const bins = rnd(8, 30), per = rnd(15, 45);
-      return { textFr: `Dans la bibliothèque de ${name}, chaque bac contient ${per} livres. Combien de livres peut-on ranger dans ${bins} bacs ?`, answer: bins * per, op: "×" };
+      return { textFr: `Dans la bibliothèque de ${name}, chaque bac contient ${per} livres. Combien de livres peut-on ranger dans ${bins} bacs ?`, answer: bins * per, op: "×", calculation: `${bins} × ${per} = ${bins * per}` };
     },
     () => {
       const base = rnd(12, 45), factor = rnd(3, 8);
-      return { textFr: `${name} a une collection de ${base} bandes dessinées. Son amie en a ${factor} fois plus. Combien de bandes dessinées son amie a-t-elle ?`, answer: base * factor, op: "×" };
+      return { textFr: `${name} a une collection de ${base} bandes dessinées. Son amie en a ${factor} fois plus. Combien de bandes dessinées son amie a-t-elle ?`, answer: base * factor, op: "×", calculation: `${base} × ${factor} = ${base * factor}` };
     },
     () => {
       const pupils = rnd(12, 28), per = rnd(8, 24);
-      return { textFr: `Dans une classe de ${pupils} élèves, l'enseignante distribue ${per} crayons de couleur à chaque élève. Combien de crayons distribue-t-elle ?`, answer: pupils * per, op: "×" };
+      return { textFr: `Dans une classe de ${pupils} élèves, l'enseignante distribue ${per} crayons de couleur à chaque élève. Combien de crayons distribue-t-elle ?`, answer: pupils * per, op: "×", calculation: `${pupils} × ${per} = ${pupils * per}` };
     },
     () => {
       const cards = rnd(8, 24), per = rnd(35, 180);
-      return { textFr: `${name} a acheté ${cards} cartes. Chaque carte contient ${per} papillons. Combien de papillons a-t-elle en tout ?`, answer: cards * per, op: "×" };
+      return { textFr: `${name} a acheté ${cards} cartes. Chaque carte contient ${per} papillons. Combien de papillons a-t-elle en tout ?`, answer: cards * per, op: "×", calculation: `${cards} × ${per} = ${cards * per}` };
     },
     () => {
       const francs = rnd(8, 28), students = rnd(15, 75);
-      return { textFr: `L'enseignante reçoit ${francs} francs pour chacun de ses ${students} étudiants. Quelle somme totale reçoit-elle ?`, answer: francs * students, op: "×" };
+      return { textFr: `L'enseignante reçoit ${francs} francs pour chacun de ses ${students} étudiants. Quelle somme totale reçoit-elle ?`, answer: francs * students, op: "×", calculation: `${francs} × ${students} = ${francs * students}` };
     },
     () => {
       const students = [10, 20, 25][rnd(0, 2)]!, packs = rnd(4, 12), per = 100;
-      return { textFr: `Pour son cours d'ACM, une enseignante achète ${packs} paquets de feuilles. Chaque paquet contient ${per} feuilles. Sa classe compte ${students} élèves. Combien de feuilles chaque élève recevra-t-il ?`, answer: Math.floor((packs * per) / students), op: "÷" };
+      return { textFr: `Pour son cours d'ACM, une enseignante achète ${packs} paquets de feuilles. Chaque paquet contient ${per} feuilles. Sa classe compte ${students} élèves. Combien de feuilles chaque élève recevra-t-il ?`, answer: Math.floor((packs * per) / students), op: "÷", calculation: `${packs * per} ÷ ${students} = ${Math.floor((packs * per) / students)}` };
     },
     () => {
       const teams = rnd(8, 32), per = rnd(6, 12);
-      return { textFr: `Un tournoi est organisé à l'école. Les élèves sont répartis en ${teams} équipes de ${per} joueurs. Combien d'élèves participent au tournoi ?`, answer: teams * per, op: "×" };
+      return { textFr: `Un tournoi est organisé à l'école. Les élèves sont répartis en ${teams} équipes de ${per} joueurs. Combien d'élèves participent au tournoi ?`, answer: teams * per, op: "×", calculation: `${teams} × ${per} = ${teams * per}` };
     },
     () => {
       const total = rnd(400, 1200), per = [10, 20, 25, 50][rnd(0, 3)]!;
-      return { textFr: `Pour décorer le terrain de sport, il faut ${total} ballons. Les ballons sont vendus par sachets de ${per}. Combien de sachets faut-il acheter ?`, answer: Math.ceil(total / per), op: "÷" };
+      return { textFr: `Pour décorer le terrain de sport, il faut ${total} ballons. Les ballons sont vendus par sachets de ${per}. Combien de sachets faut-il acheter ?`, answer: Math.ceil(total / per), op: "÷", calculation: `${total} ÷ ${per} = ${Math.ceil(total / per)}` };
     },
     () => {
       const packs = rnd(8, 35), per = [10, 12, 20, 25, 50, 100][rnd(0, 5)]!;
-      return { textFr: `Le professeur achète ${packs} paquets. Chaque paquet contient ${per} objets. Combien d'objets a-t-il achetés au total ?`, answer: packs * per, op: "×" };
+      return { textFr: `Le professeur achète ${packs} paquets. Chaque paquet contient ${per} objets. Combien d'objets a-t-il achetés au total ?`, answer: packs * per, op: "×", calculation: `${packs} × ${per} = ${packs * per}` };
     },
     () => {
       const total = rnd(700, 2500), per = [10, 20, 25, 50, 100][rnd(0, 4)]!;
-      return { textFr: `${name} range ${total} bâtonnets. Chaque fois qu'il a ${per} bâtonnets, il forme un paquet. Combien de paquets complets peut-il former ?`, answer: Math.floor(total / per), op: "÷" };
+      return { textFr: `${name} range ${total} bâtonnets. Chaque fois qu'il a ${per} bâtonnets, il forme un paquet. Combien de paquets complets peut-il former ?`, answer: Math.floor(total / per), op: "÷", calculation: `${total} ÷ ${per} = ${Math.floor(total / per)}` };
     },
     () => {
       const per = rnd(10, 30), rows = rnd(8, 24);
-      return { textFr: `À la gare de Sierre, un parking à vélos contient ${rows} rangées de ${per} places. Combien y a-t-il de places en tout ?`, answer: rows * per, op: "×" };
+      return { textFr: `À la gare de Sierre, un parking à vélos contient ${rows} rangées de ${per} places. Combien y a-t-il de places en tout ?`, answer: rows * per, op: "×", calculation: `${rows} × ${per} = ${rows * per}` };
     },
     () => {
       const start = rnd(10, 60), factor = rnd(2, 8);
-      return { textFr: `Dimanche, il y avait ${start} vélos sur le parking. Maintenant, il y en a ${factor} fois plus. Combien de vélos se trouvent maintenant sur le parking ?`, answer: start * factor, op: "×" };
+      return { textFr: `Dimanche, il y avait ${start} vélos sur le parking. Maintenant, il y en a ${factor} fois plus. Combien de vélos se trouvent maintenant sur le parking ?`, answer: start * factor, op: "×", calculation: `${start} × ${factor} = ${start * factor}` };
     },
     () => {
       const zoneA = rnd(3, 9), ptsA = [20, 30, 40, 50][rnd(0, 3)]!, zoneB = rnd(2, 8), ptsB = [60, 70, 80, 100][rnd(0, 3)]!;
-      return { textFr: `${name} joue aux fléchettes. Il place ${zoneA} fléchettes dans la zone à ${ptsA} points et ${zoneB} fléchettes dans la zone à ${ptsB} points. Combien de points obtient-il ?`, answer: zoneA * ptsA + zoneB * ptsB, op: "×" };
+      return { textFr: `${name} joue aux fléchettes. Il place ${zoneA} fléchettes dans la zone à ${ptsA} points et ${zoneB} fléchettes dans la zone à ${ptsB} points. Combien de points obtient-il ?`, answer: zoneA * ptsA + zoneB * ptsB, op: "×", calculation: `${zoneA} × ${ptsA} + ${zoneB} × ${ptsB} = ${zoneA * ptsA + zoneB * ptsB}` };
     },
     () => {
       const perDay = rnd(3, 8), days = 31, absent = rnd(4, 14);
-      return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. Elle est absente pendant ${absent} jours. Combien de bûches brûle-t-elle en décembre ?`, answer: perDay * (days - absent), op: "×" };
+      return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. Elle est absente pendant ${absent} jours. Combien de bûches brûle-t-elle en décembre ?`, answer: perDay * (days - absent), op: "×", calculation: `${perDay} × ${days - absent} = ${perDay * (days - absent)}` };
     },
     () => {
       const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4), omelets = rnd(20, 80);
@@ -5959,6 +5960,8 @@ export function GenericModuleContent({
   const [eqWorkAnswers, setEqWorkAnswers] = useState<string[]>([]);
   const [eqValidated, setEqValidated] = useState(false);
   const [eqResults, setEqResults] = useState<boolean[]>([]);
+  const [equationOverrideSteps, setEquationOverrideSteps] = useState<Record<number, EquationGroupStep>>({});
+  const [systemOverrideSteps, setSystemOverrideSteps] = useState<Record<number, SystemEquationStep>>({});
   const [monomialAnswers, setMonomialAnswers] = useState<Array<{ coefficient: string; literal: string; degree: string }>>([]);
   const [monomialValidated, setMonomialValidated] = useState(false);
   const [monomialResults, setMonomialResults] = useState<Array<{ coefficient: boolean; literal: boolean; degree: boolean }>>([]);
@@ -6167,6 +6170,12 @@ export function GenericModuleContent({
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
   const currentStep = steps[stepIdx];
+  const activeEquationStep = currentStep?.kind === "equation_group"
+    ? (equationOverrideSteps[stepIdx] ?? currentStep)
+    : undefined;
+  const activeSystemStep = currentStep?.kind === "system_equation"
+    ? (systemOverrideSteps[stepIdx] ?? currentStep)
+    : undefined;
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
   const evalSteps = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1) : [];
@@ -6516,6 +6525,10 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "symbolic_group") {
         currentResults = symbolicResults.slice(0, currentStep.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
+      } else if (currentStep.kind === "equation_group") {
+        const step = equationOverrideSteps[stepIdx] ?? currentStep;
+        currentResults = eqResults.slice(0, step.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: eqAnswers, work: eqWorkAnswers } }));
       } else if (currentStep.kind === "system_equation") {
         currentResults = eqResults.slice(0, 1);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: eqAnswers, work: eqWorkAnswers } }));
@@ -6781,9 +6794,11 @@ export function GenericModuleContent({
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
-            : es?.kind === "monomial_group" ? "Coefficient, partie littérale et degré"
-            : es?.kind === "symbolic_group" ? es.instruction
-            : es?.kind === "arithmetic_group"
+                : es?.kind === "monomial_group" ? "Coefficient, partie littérale et degré"
+                : es?.kind === "symbolic_group" ? es.instruction
+                : es?.kind === "equation_group" ? "Équations"
+                : es?.kind === "system_equation" ? "Systèmes d'équations"
+                : es?.kind === "arithmetic_group"
               ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
               : es?.kind === "rounding_group"
                 ? "Arrondis et estimations"
@@ -6914,7 +6929,7 @@ export function GenericModuleContent({
       stepCanValidate = true;
       stepValidate = () => {
         const qs = currentStep.kind === "equation_group"
-          ? (currentStep as EquationGroupStep).questions
+          ? (activeEquationStep ?? currentStep as EquationGroupStep).questions
           : (currentStep as FracEquationGroupStep).questions.map(q => ({ expr: "", solution: q.solution }));
         const results = qs.map((q, i) => checkEqAnswer(eqAnswers[i] ?? "", q.solution));
         setEqResults(results);
@@ -6925,14 +6940,29 @@ export function GenericModuleContent({
       stepCanValidate = false;
       stepValidate = () => {};
     }
-    stepReset = () => { setEqAnswers([]); setEqWorkAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
+    stepReset = () => {
+      if (currentStep.kind === "equation_group") {
+        const lesson = currentStep.lesson;
+        const exNum = currentStep.exNum ?? 1;
+        const regenerated = lesson.submoduleId === "A10-2"
+          ? genFracEquationGroupStep(lesson, exNum)
+          : genEquationGroupStep(lesson, exNum);
+        setEquationOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
+      }
+      setEqAnswers([]);
+      setEqWorkAnswers([]);
+      setEqValidated(false);
+      setEqResults([]);
+      setExStatus("idle");
+    };
   }
 
   if (currentStep?.kind === "system_equation") {
     if (!eqValidated) {
       stepCanValidate = true;
       stepValidate = () => {
-        const expected = currentStep.question.acceptable.map(normalizeSystemAnswer);
+        const step = activeSystemStep ?? currentStep;
+        const expected = step.question.acceptable.map(normalizeSystemAnswer);
         const answerValue = normalizeSystemAnswer(eqAnswers[0] ?? "");
         const ok = expected.some((item) => answerValue === item || answerValue.includes(item));
         setEqResults([ok]);
@@ -6943,7 +6973,17 @@ export function GenericModuleContent({
       stepCanValidate = false;
       stepValidate = () => {};
     }
-    stepReset = () => { setEqAnswers([]); setEqWorkAnswers([]); setEqValidated(false); setEqResults([]); setExStatus("idle"); };
+    stepReset = () => {
+      const regenerated = currentStep.lesson.submoduleId === "A10-4"
+        ? genLinearCombinationStep(currentStep.lesson)
+        : genSystemEquationStep(currentStep.lesson);
+      setSystemOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
+      setEqAnswers([]);
+      setEqWorkAnswers([]);
+      setEqValidated(false);
+      setEqResults([]);
+      setExStatus("idle");
+    };
   }
 
   if (currentStep?.kind === "algebra_group" && !algebraGroupValidated) {
@@ -8660,7 +8700,7 @@ export function GenericModuleContent({
 
       {/* Equation group (A10.1) */}
       {!showEvalScore && currentStep?.kind === "equation_group" && (() => {
-        const step = currentStep as EquationGroupStep;
+        const step = activeEquationStep ?? (currentStep as EquationGroupStep);
         const formatSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "S = ∅" : sol.kind === "infinite" ? "S = IR" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
@@ -8788,7 +8828,7 @@ export function GenericModuleContent({
 
       {/* System equation group (A10.3) */}
       {!showEvalScore && currentStep?.kind === "system_equation" && (() => {
-        const step = currentStep as SystemEquationStep;
+        const step = activeSystemStep ?? (currentStep as SystemEquationStep);
         const q = step.question;
         const userAns = eqAnswers[0] ?? "";
         const result = eqValidated ? (eqResults[0] ?? null) : null;
