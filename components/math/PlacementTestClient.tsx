@@ -51,6 +51,7 @@ import {
   Exercise37,
   Exercise38,
 } from "@/components/math/placement/PlacementExercises28to38";
+import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 // ── Exercise registry ─────────────────────────────────────────────────────────
 
@@ -392,6 +393,26 @@ export function PlacementTestClient() {
   const [savedResult, setSavedResult] = useState(false);
   const [selectedResultIdx, setSelectedResultIdx] = useState(0);
   const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
+  const [showPrint, setShowPrint] = useState(false);
+
+  const printExercisesForConfig = useMemo(() =>
+    EXERCISES.map(ex => {
+      const ExComp = ex.component;
+      return {
+        id: String(ex.id),
+        label: `${ex.id}. ${ex.label}`,
+        preview: (
+          <ExComp
+            exerciseKey={1}
+            validated={false}
+            onValidated={() => {}}
+            validateTrigger={0}
+          />
+        ),
+      };
+    }),
+    [] // EXERCISES is a module-level constant
+  );
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -538,6 +559,18 @@ export function PlacementTestClient() {
   // ── Start screen ───────────────────────────────────────────────────────────
 
   if (phase === "idle") {
+    if (showPrint) {
+      return (
+        <PrintConfigSheet
+          onClose={() => setShowPrint(false)}
+          onPrint={() => {}}
+          exercises={printExercisesForConfig}
+          accentColor="var(--color-accent-alg)"
+          lessonTitle="Test de placement"
+        />
+      );
+    }
+
     return (
       <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
         <div className="space-y-6">
@@ -591,6 +624,19 @@ export function PlacementTestClient() {
             className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             {introText.start}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setShowPrint(true)}
+            className="flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-alg)] hover:text-[var(--color-accent-alg)]"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
+            </svg>
+            Imprimer le test ({TOTAL_EXERCISES} exercices)
           </button>
         </div>
       </div>
@@ -671,18 +717,9 @@ export function PlacementTestClient() {
         />
       </div>
 
-      {/* Exercise header + PDF button */}
+      {/* Exercise header */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
-        <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())} data-no-print
-          className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-          aria-label="Imprimer en PDF">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-            <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
-          </svg>
-        </button>
         <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
       </>
