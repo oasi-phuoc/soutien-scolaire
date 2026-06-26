@@ -19,28 +19,24 @@ export const MATH_A2_4_LESSON: MathSubmoduleLesson = {
           label: "Addition",
           blocks: [
             { type: "heading", fr: "Quand faut-il additionner ?", black: true },
-            { type: "highlight", fr: "La quantité cherchée est plus grande" },
             { type: "plain", fr: "On additionne quand la personne ou la chose demandée a **plus** que la quantité connue." },
-            { type: "section", labelFr: "Exemple 1", itemsFr: [
-              "Ali a 10 francs.",
-              "Alona a 5 francs de plus qu'Ali.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. Alona a 5 francs de plus qu'Ali." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Alona a plus qu'Ali.",
               "Calcul : **10 + 5 = 15**",
               "Réponse : **Alona a 15 francs.**",
             ] },
-            { type: "section", labelFr: "Exemple 2", itemsFr: [
-              "Ali a 10 francs.",
-              "Il a 5 francs de moins qu'Alona.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. Il a 5 francs de moins qu'Alona." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Ali a moins qu'Alona, donc Alona a plus.",
               "Calcul : **10 + 5 = 15**",
               "Réponse : **Alona a 15 francs.**",
             ] },
-            { type: "section", labelFr: "Exemple 3", itemsFr: [
-              "Ali a 10 francs.",
-              "C'est 5 francs de moins qu'Alona.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. C'est 5 francs de moins qu'Alona." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Les 10 francs d'Ali sont une quantité plus petite.",
               "Calcul : **10 + 5 = 15**",
               "Réponse : **Alona a 15 francs.**",
@@ -51,28 +47,24 @@ export const MATH_A2_4_LESSON: MathSubmoduleLesson = {
           label: "Soustraction",
           blocks: [
             { type: "heading", fr: "Quand faut-il soustraire ?", black: true },
-            { type: "highlight", fr: "La quantité cherchée est plus petite" },
             { type: "plain", fr: "On soustrait quand la personne ou la chose demandée a **moins** que la quantité connue." },
-            { type: "section", labelFr: "Exemple 1", itemsFr: [
-              "Ali a 10 francs.",
-              "Alona a 5 francs de moins qu'Ali.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. Alona a 5 francs de moins qu'Ali." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Alona a moins qu'Ali.",
               "Calcul : **10 − 5 = 5**",
               "Réponse : **Alona a 5 francs.**",
             ] },
-            { type: "section", labelFr: "Exemple 2", itemsFr: [
-              "Ali a 10 francs.",
-              "Il a 5 francs de plus qu'Alona.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. Il a 5 francs de plus qu'Alona." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Ali a plus qu'Alona, donc Alona a moins.",
               "Calcul : **10 − 5 = 5**",
               "Réponse : **Alona a 5 francs.**",
             ] },
-            { type: "section", labelFr: "Exemple 3", itemsFr: [
-              "Ali a 10 francs.",
-              "C'est 5 francs de plus qu'Alona.",
-              "Combien d'argent a Alona ?",
+            { type: "plain", fr: "Ali a 10 francs. C'est 5 francs de plus qu'Alona." },
+            { type: "bullets", labelFr: "", itemsFr: ["Combien d'argent a Alona ?"] },
+            { type: "section", labelFr: "", itemsFr: [
               "Les 10 francs d'Ali sont une quantité plus grande.",
               "Calcul : **10 − 5 = 5**",
               "Réponse : **Alona a 5 francs.**",
