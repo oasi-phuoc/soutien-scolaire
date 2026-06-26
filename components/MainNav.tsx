@@ -51,7 +51,8 @@ function sectionColor(pathname: string) {
 
 function isMainSectionPage(pathname: string) {
   return ["", "/", "/lecture", "/francais", "/mathematiques", "/communication"].includes(pathname)
-    || pathname.startsWith("/compte");
+    || pathname.startsWith("/compte")
+    || pathname.startsWith("/messagerie");
 }
 
 const emptyActionAvailability: ActionAvailability = {
