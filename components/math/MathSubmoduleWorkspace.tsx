@@ -117,6 +117,7 @@ type WorkspaceStep =
   | { kind: "pct_table_ex"; exNum: number }
   | { kind: "pct_word_ex"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
+  | { kind: "pool_group"; items: MathExerciseItem[]; exNum: number }
   | { kind: "g1_name_to_svg"; exNum: number }
   | { kind: "g1_definition_match"; exNum: number }
   | { kind: "g1_anagram"; exNum: number }
@@ -143,6 +144,7 @@ const STEP_DEFAULT_TOTALS: Record<string, number> = {
   dec_col_arith: 4, dec_col_arith_full: 2, dec_expr_comp: 5,
   dec_mul2_col: 2,
   g1_prop_check: 5, g1_shape_qa: 5,
+  pool_group: 2,
 };
 
 function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
@@ -564,6 +566,19 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "g3_area", exNum: 2, shapeKind, mode: "missing" });
     steps.push({ kind: "g3_area", exNum: 3, shapeKind, mode: "area", decimals: true });
     steps.push({ kind: "g3_area", exNum: 4, shapeKind, mode: "missing", decimals: true });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A4-8") {
+    // Training: 3 grouped screens (1 per pool), 2 questions each
+    lesson.exercisePools?.forEach((pool, pi) => {
+      const picked = shufflePick(pool, Math.min(2, pool.length));
+      steps.push({ kind: "pool_group", items: picked, exNum: pi + 1 });
+    });
+    steps.push({ kind: "eval_start" });
+    // Evaluation: 3 grouped screens (1 per pool), 2 questions each
+    lesson.exercisePools?.forEach((pool, pi) => {
+      const picked = shufflePick(pool, Math.min(2, pool.length));
+      steps.push({ kind: "pool_group", items: picked, exNum: pi + 1 });
+    });
     steps.push({ kind: "results" });
   } else if (lesson.exercisePools && lesson.exercisePools.length > 0) {
     let exCounter = 1;
@@ -1653,6 +1668,79 @@ function getWorkspaceStepHint(step: WorkspaceStep | undefined): string | undefin
   return undefined;
 }
 
+const MATH_TEXT_INPUT_POOL = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
+
+function PoolGroupExercise({
+  exNum,
+  items,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  items: MathExerciseItem[];
+  validateCommand: number;
+  onValidated: (ok: boolean, correct: number, total: number) => void;
+}) {
+  const [answers, setAnswers] = React.useState<string[]>(() => Array(items.length).fill(""));
+  const [validated, setValidated] = React.useState(false);
+  const [results, setResults] = React.useState<boolean[]>([]);
+
+  const doValidate = React.useCallback(() => {
+    if (validated) return;
+    const res = items.map((item, i) => answerMatches(answers[i] ?? "", item.acceptable));
+    setResults(res);
+    setValidated(true);
+    const c = res.filter(Boolean).length;
+    onValidated(c === items.length, c, items.length);
+  }, [validated, items, answers, onValidated]);
+
+  React.useEffect(() => {
+    if (validateCommand > 0) doValidate();
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <div className="space-y-5">
+        {items.map((item, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? results[i] : null;
+          const isWrong = ok === false;
+          return (
+            <div key={i} className="space-y-2">
+              <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+                {i + 1}. {item.promptFr}
+              </p>
+              {isWrong ? (
+                <div className={`w-full ${MATH_TEXT_INPUT_POOL} border-amber-500 flex flex-col items-start justify-center px-4 py-2`}>
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                  <span className="text-xs font-bold leading-none text-amber-600">{item.acceptable[0]}</span>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  inputMode={item.type === "number" ? "decimal" : "text"}
+                  value={v}
+                  disabled={validated}
+                  onChange={e => {
+                    const val = item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value;
+                    setAnswers(prev => prev.map((a, j) => j === i ? val : a));
+                  }}
+                  placeholder="Votre réponse…"
+                  className={`w-full px-4 py-3 ${MATH_TEXT_INPUT_POOL}`}
+                />
+              )}
+              {ok === true && (
+                <p className="text-xs font-medium text-green-600">✓ Correct</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson; pivot: PivotCode; showPivot: boolean }) {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
@@ -1817,7 +1905,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "g1_name_to_svg" || currentStep?.kind === "g1_definition_match" || currentStep?.kind === "g1_anagram" || currentStep?.kind === "g1_shape_write" || currentStep?.kind === "g1_prop_check" || currentStep?.kind === "g1_shape_qa" || currentStep?.kind === "g2_perimeter" || currentStep?.kind === "g3_area" || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "pool_group" || currentStep?.kind === "g1_name_to_svg" || currentStep?.kind === "g1_definition_match" || currentStep?.kind === "g1_anagram" || currentStep?.kind === "g1_shape_write" || currentStep?.kind === "g1_prop_check" || currentStep?.kind === "g1_shape_qa" || currentStep?.kind === "g2_perimeter" || currentStep?.kind === "g3_area" || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -2039,6 +2127,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     if (step.kind === "g1_shape_qa") return <G1ShapeQAExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pool_group") return <PoolGroupExercise exNum={step.exNum} items={step.items} validateCommand={validateCmd} onValidated={onVld} />;
     return null;
   }
 
@@ -2642,6 +2731,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           />
           {exStatus === "wrong" && <p>{exAttempts >= 2 ? <><span className="text-xs text-[var(--color-text-primary)] leading-none block">{answer}</span><span className="text-xs font-bold text-amber-600 leading-none block">{currentStep.item.acceptable[0]}</span></> : <span className="text-xs text-amber-500">Essayez encore…</span>}</p>}
         </div>
+      )}
+
+      {currentStep?.kind === "pool_group" && (
+        <PoolGroupExercise
+          key={exKey}
+          exNum={currentStep.exNum}
+          items={currentStep.items}
+          validateCommand={validateCommand}
+          onValidated={handleCustomValidated}
+        />
       )}
       </>)}
 
