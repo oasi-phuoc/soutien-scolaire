@@ -1154,19 +1154,19 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
     const templates: Array<() => WordProblemQ> = [
       () => {
         const n = rnd(3, 15), p100 = rnd(125, 900);
-        const p = p100 / 100, tot = Math.round(p100 * n) / 100;
+        const tot = Math.round(p100 * n) / 100;
         const item = ["article", "billet", "repas", "abonnement"][rnd(0, 3)]!;
         return { textFr: `Un ${item} coûte ${fmt(p100)} fr. ${name} en achète ${n}. Combien cela coûte-t-il ?`, answer: tot, op: "×", calculation: `${n} × ${fmt(p100)} = ${fmt(Math.round(p100 * n))} fr.` };
       },
       () => {
         const n = rnd(2, 8), part100 = rnd(50, 200);
-        const total = (n * part100) / 100, part = part100 / 100;
+        const part = part100 / 100;
         const item = ["farine", "sucre", "riz", "café"][rnd(0, 3)]!;
         return { textFr: `${name} répartit ${fmt(n * part100)} kg de ${item} dans ${n} sacs égaux. Combien pèse chaque sac ?`, answer: part, op: "÷", calculation: `${fmt(n * part100)} ÷ ${n} = ${fmt(part100)} kg` };
       },
       () => {
         const taux100 = rnd(1200, 2500), h_num = rnd(3, 10);
-        const taux = taux100 / 100, tot = Math.round(taux100 * h_num) / 100;
+        const tot = Math.round(taux100 * h_num) / 100;
         return { textFr: `${name} gagne ${fmt(taux100)} fr. de l'heure. En ${h_num} heures, quel est le salaire de ${name} ?`, answer: tot, op: "×", calculation: `${h_num} × ${fmt(taux100)} = ${fmt(Math.round(taux100 * h_num))} fr.` };
       },
       () => {
@@ -1181,13 +1181,13 @@ function genA57DecimalProblem(level: "e" | "m" | "h"): WordProblemQ {
       },
       () => {
         const tot100 = rnd(1500, 8000), used100 = rnd(500, tot100 - 500);
-        const tot = tot100 / 100, used = used100 / 100, rem = (tot100 - used100) / 100;
+        const rem = (tot100 - used100) / 100;
         const unit = ["m", "kg", "litres"][rnd(0, 2)]!;
         return { textFr: `Un camion transporte ${fmt(tot100)} ${unit} de marchandises. Il en livre ${fmt(used100)} ${unit}. Combien reste-t-il ?`, answer: rem, op: "-", calculation: `${fmt(tot100)} − ${fmt(used100)} = ${fmt(tot100 - used100)} ${unit}` };
       },
       () => {
         const n = rnd(4, 12), per100 = rnd(75, 400);
-        const total = Math.round(n * per100) / 100, per = per100 / 100;
+        const per = per100 / 100;
         return { textFr: `${name} partage ${fmt(Math.round(n * per100))} litres de jus entre ${n} verres égaux. Combien y a-t-il dans chaque verre ?`, answer: per, op: "÷", calculation: `${fmt(Math.round(n * per100))} ÷ ${n} = ${fmt(per100)} litre${per !== 1 ? "s" : ""}` };
       },
     ];
@@ -1311,14 +1311,14 @@ function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
       () => {
         // Unit price (decimal): find total
         const qty = rnd(3, 15), p100 = rnd(125, 800);
-        const p = p100 / 100, tot = Math.round(qty * p100) / 100;
+        const tot = Math.round(qty * p100) / 100;
         const item = ["kg de fruits", "litres de lait", "mètres de tissu", "articles"][rnd(0, 3)]!;
         return { textFr: `${name} achète ${qty} ${item} à ${fmt(p100)} fr. l'unité. Quel est le coût total ?`, answer: tot, op: "×", calculation: `${qty} × ${fmt(p100)} = ${fmt(Math.round(qty * p100))} fr.` };
       },
       () => {
         // Find unit price from total
         const n = rnd(2, 8), tot100 = n * rnd(150, 600);
-        const tot = tot100 / 100, unit = tot100 / 100 / n;
+        const unit = tot100 / 100 / n;
         const item = ["billets", "repas", "abonnements"][rnd(0, 2)]!;
         return { textFr: `${n} ${item} coûtent ${fmt(tot100)} fr. au total. Quel est le prix par ${item.slice(0, -1)} ?`, answer: unit, op: "÷", calculation: `${fmt(tot100)} ÷ ${n} = ${fmt(tot100 / n)} fr.` };
       },
@@ -1326,14 +1326,14 @@ function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
         // Percentage non-round
         const base100 = rnd(100, 500) * 10, pct = [15, 20, 30, 40][rnd(0, 3)]!;
         const res100 = Math.round(base100 * pct / 100);
-        const base = base100 / 100, res = res100 / 100;
+        const res = res100 / 100;
         return { textFr: `Quel est ${pct}% de ${fmt(base100)} fr. ?`, answer: res, op: "×", calculation: `${fmt(base100)} × ${pct} ÷ 100 = ${fmt(res100)} fr.` };
       },
       () => {
         // Discount (decimal result)
         const base100 = rnd(50, 300) * 10, pct = [15, 20, 30][rnd(0, 2)]!;
         const disc100 = Math.round(base100 * pct / 100), final100 = base100 - disc100;
-        const base = base100 / 100, final = final100 / 100;
+        const final = final100 / 100;
         return { textFr: `Un article vaut ${fmt(base100)} fr. Après une réduction de ${pct}%, quel est le prix à payer ?`, answer: final, op: "-", calculation: `${fmt(base100)} × ${1 - pct / 100} = ${fmt(final100)} fr.` };
       },
       () => {
@@ -1344,10 +1344,7 @@ function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
       },
       () => {
         // Proportion (cross-multiply): decimal answer
-        const u = rnd(2, 8), ref = u * rnd(2, 6);
-        const refCost100 = rnd(150, 600), totCost100 = Math.round(refCost100 * u);
-        const perUnit100 = Math.round(refCost100 / ref * 100) / 100 * 100; // hmm
-        // Simpler: 5 articles cost X. How much for n?
+        // 5 articles cost X. How much for n?
         const n2 = rnd(3, 15), perUnit100b = rnd(75, 400);
         const refQty = rnd(2, 5), refCost100b = refQty * perUnit100b;
         const totb = (n2 * perUnit100b) / 100;
