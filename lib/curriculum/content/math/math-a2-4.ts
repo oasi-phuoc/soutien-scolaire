@@ -72,7 +72,7 @@ export const MATH_A2_4_LESSON: MathSubmoduleLesson = {
           ],
         },
       ] },
-      { type: "highlight", fr: "Attention aux mots « plus » et « moins »" },
+      { type: "heading", fr: "Attention aux mots « plus » et « moins »", black: true },
       { type: "section", labelFr: "", itemsFr: [
         "Le mot plus ne veut pas toujours dire addition.",
         "Le mot moins ne veut pas toujours dire soustraction.",
