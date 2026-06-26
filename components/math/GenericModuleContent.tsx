@@ -205,7 +205,7 @@ type TrueFalseGcdLcmQ = { statement: string; answer: boolean; type: "pgcd"|"ppmc
 type TrueFalseGcdLcmConfig = { questions: TrueFalseGcdLcmQ[]; exNum: number };
 type TrueFalseGcdLcmStep = { kind: "true_false_gcd_lcm"; lesson: MathSubmoduleLesson; config: TrueFalseGcdLcmConfig };
 
-type WordLevel = "a1" | "a2" | "b1" | "multdiv" | "decimal_e" | "decimal_m" | "decimal_h" | "propor_e" | "propor_m" | "propor_h";
+type WordLevel = "a1" | "a2" | "b1" | "multdiv" | "decimal_e" | "decimal_m" | "decimal_h" | "propor_e" | "propor_m" | "propor_h" | "eq_e" | "eq_m" | "eq_h";
 type WordProblemQ = { textFr: string; answer: number; op: ArithOp; calculation?: string };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
@@ -781,12 +781,14 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Chaque soir de décembre, ${name} brûle ${perDay} bûches dans la cheminée. ${name} est absent(e) pendant ${absent} jours. Combien de bûches sont brûlées en décembre ?`, answer: perDay * (days - absent), op: "×", calculation: `${perDay} × ${days - absent} = ${perDay * (days - absent)}` };
     },
     () => {
-      const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4), omelets = rnd(20, 80);
-      return { textFr: `Un cuisinier achète ${trays} plateaux de ${perTray} œufs. Pour préparer une omelette, il utilise ${usedPer} œufs et il prépare ${omelets} omelettes. Combien d'œufs lui reste-t-il ?`, answer: trays * perTray - usedPer * omelets, op: "-", calculation: `${trays * perTray} − ${usedPer * omelets} = ${trays * perTray - usedPer * omelets}` };
+      const trays = rnd(3, 9), perTray = 30, usedPer = rnd(2, 4);
+      const totalEggs = trays * perTray, omelets = rnd(5, Math.floor(totalEggs / usedPer) - 2);
+      return { textFr: `Un cuisinier achète ${trays} plateaux de ${perTray} œufs. Pour préparer une omelette, il utilise ${usedPer} œufs et il prépare ${omelets} omelettes. Combien d'œufs lui reste-t-il ?`, answer: totalEggs - usedPer * omelets, op: "-", calculation: `${totalEggs} − ${usedPer * omelets} = ${totalEggs - usedPer * omelets}` };
     },
     () => {
-      const pages = rnd(8, 20), lines = rnd(4, 8), perLine = rnd(5, 12), placed = rnd(80, 280);
-      return { textFr: `${name} reçoit un album de ${pages} pages. Chaque page comporte ${lines} lignes et chaque ligne peut contenir ${perLine} timbres. Il a déjà placé ${placed} timbres. Combien de timbres doit-il encore ajouter pour remplir l'album ?`, answer: pages * lines * perLine - placed, op: "-", calculation: `${pages * lines * perLine} − ${placed} = ${pages * lines * perLine - placed}` };
+      const pages = rnd(8, 20), lines = rnd(4, 8), perLine = rnd(5, 12);
+      const totalStamps = pages * lines * perLine, placed = rnd(10, totalStamps - 10);
+      return { textFr: `${name} reçoit un album de ${pages} pages. Chaque page comporte ${lines} lignes et chaque ligne peut contenir ${perLine} timbres. ${name} a déjà placé ${placed} timbres. Combien de timbres doit-il encore ajouter pour remplir l'album ?`, answer: totalStamps - placed, op: "-", calculation: `${totalStamps} − ${placed} = ${totalStamps - placed}` };
     },
     () => {
       const bottles = rnd(90, 360), perCarton = [6, 9, 12, 18][rnd(0, 3)]!;
@@ -887,8 +889,9 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Le professeur offre des glaces aux joueurs du tournoi. Il achète ${packs} paquets de ${ice} glaces. Combien y a-t-il de glaces au total ?`, answer: packs * ice, op: "×", calculation: `${packs} × ${ice} = ${packs * ice}` };
     },
     () => {
-      const trays = rnd(3, 8), perTray = 30, perOmelet = rnd(2, 3), omelets = rnd(25, 75);
-      return { textFr: `Un cuisinier a acheté ${trays} plateaux de ${perTray} œufs. Il utilise ${perOmelet} œufs pour faire une omelette. Combien lui reste-t-il d'œufs après avoir préparé ${omelets} omelettes ?`, answer: trays * perTray - perOmelet * omelets, op: "-", calculation: `${trays * perTray} − ${perOmelet * omelets} = ${trays * perTray - perOmelet * omelets}` };
+      const trays = rnd(3, 8), perTray = 30, perOmelet = rnd(2, 3);
+      const totalEggs2 = trays * perTray, omelets = rnd(5, Math.floor(totalEggs2 / perOmelet) - 2);
+      return { textFr: `Un cuisinier a acheté ${trays} plateaux de ${perTray} œufs. Il utilise ${perOmelet} œufs pour faire une omelette. Combien lui reste-t-il d'œufs après avoir préparé ${omelets} omelettes ?`, answer: totalEggs2 - perOmelet * omelets, op: "-", calculation: `${totalEggs2} − ${perOmelet * omelets} = ${totalEggs2 - perOmelet * omelets}` };
     },
     () => {
       const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
@@ -897,35 +900,29 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `${name} et ${name2} regardent trois albums de photos : un album brun de ${brownPages} pages avec ${brownPer} photos par page, un album jaune de ${yellowPages} pages avec ${yellowPer} photos par page et un album vert de ${greenPages} pages avec ${greenPer} photos par page. Combien de photos contient l'album qui en a le plus ?`, answer: Math.max(brown, yellow, green), op: "×", calculation: `max(${brown}, ${yellow}, ${green}) = ${Math.max(brown, yellow, green)}` };
     },
     () => {
-      const students = rnd(12, 28), price = rnd(500, 900) / 100, budget = rnd(120, 220);
-      const cost = Math.round(students * price * 100) / 100;
-      const rest = Math.round((budget - cost) * 100) / 100;
-      return { textFr: `${name} souhaite aller au zoo avec ${students} élèves. L'entrée coûte ${price.toLocaleString("fr-CH")} fr. par enfant. Les accompagnants ne paient pas. ${name} a ${budget} fr. Combien d'argent restera-t-il après avoir payé les entrées ?`, answer: rest, op: "-", calculation: `${budget} − ${cost.toLocaleString("fr-CH")} = ${rest.toLocaleString("fr-CH")}` };
+      const students = rnd(12, 28), price = rnd(5, 9);
+      const cost = students * price, rest = rnd(10, 50), budget = cost + rest;
+      return { textFr: `${name} souhaite aller au zoo avec ${students} élèves. L'entrée coûte ${price} fr. par enfant. Les accompagnants ne paient pas. ${name} a ${budget} fr. Combien d'argent restera-t-il après avoir payé les entrées ?`, answer: rest, op: "-", calculation: `${budget} − ${cost} = ${rest}` };
     },
     () => {
-      const students = rnd(40, 90), transport = rnd(350, 700) / 100, entry = rnd(300, 800) / 100, budget = rnd(450, 850);
-      const cost = Math.round(students * (transport + entry) * 100) / 100;
-      const diff = Math.round(Math.abs(budget - cost) * 100) / 100;
-      return { textFr: `${students} élèves veulent faire une sortie à la piscine. Il faut compter ${transport.toLocaleString("fr-CH")} francs par élève pour le transport et ${entry.toLocaleString("fr-CH")} francs par élève pour l'entrée. Les enseignants donnent ${budget} francs. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${budget} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
+      const students = rnd(20, 45), transport = rnd(3, 8), entry = rnd(3, 7);
+      const cost = students * (transport + entry), rest = rnd(10, 80), budget = cost + rest;
+      return { textFr: `${students} élèves veulent faire une sortie à la piscine. Il faut compter ${transport} fr. par élève pour le transport et ${entry} fr. par élève pour l'entrée. Les enseignants donnent ${budget} fr. Combien reste-t-il ?`, answer: rest, op: "-", calculation: `${budget} − ${cost} = ${rest}` };
     },
     () => {
-      const children = rnd(8, 20), adults = rnd(2, 5), adultPrice = rnd(1000, 1500) / 100;
-      const totalPeople = children + adults;
-      const total = Math.round(totalPeople * adultPrice * 100) / 100;
-      return { textFr: `Une entrée au cinéma coûte ${adultPrice.toLocaleString("fr-CH")} francs pour les adultes. Une classe regarde un film ce soir. Il y a ${children} élèves et ${adults} enseignants, qui paient tous le prix adulte. Combien paient-ils en tout ?`, answer: total, op: "×", calculation: `${totalPeople} × ${adultPrice.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+      const children = rnd(8, 20), adults = rnd(2, 5), adultPrice = rnd(10, 15);
+      const totalPeople = children + adults, total = totalPeople * adultPrice;
+      return { textFr: `Une entrée au cinéma coûte ${adultPrice} fr. pour les adultes. Une classe regarde un film ce soir. Il y a ${children} élèves et ${adults} enseignants, qui paient tous le prix adulte. Combien paient-ils en tout ?`, answer: total, op: "×", calculation: `${totalPeople} × ${adultPrice} = ${total}` };
     },
     () => {
-      const students = rnd(15, 28), received = 20, bus = rnd(150, 260), entry = rnd(400, 700) / 100, ice = 2;
-      const money = students * received;
-      const cost = Math.round((bus + students * entry + students * ice) * 100) / 100;
-      const diff = Math.round(Math.abs(money - cost) * 100) / 100;
-      return { textFr: `${name} va au musée avec ${students} élèves. ${name} reçoit ${received} fr. par élève. ${name} paie ${bus} fr. pour le bus, ${entry.toLocaleString("fr-CH")} fr. par élève pour l'entrée et ${ice} fr. par élève pour une glace. Combien reste-t-il ou manque-t-il ?`, answer: diff, op: "-", calculation: `|${money} − ${cost.toLocaleString("fr-CH")}| = ${diff.toLocaleString("fr-CH")}` };
+      const students = rnd(15, 28), received = 20, entry = rnd(2, 4), ice = 2, bus = rnd(20, 60);
+      const money = students * received, cost = bus + students * (entry + ice), diff = money - cost;
+      return { textFr: `${name} va au musée avec ${students} élèves. ${name} reçoit ${received} fr. par élève. ${name} paie ${bus} fr. pour le bus, ${entry} fr. par élève pour l'entrée et ${ice} fr. par élève pour une glace. Combien reste-t-il ?`, answer: diff, op: "-", calculation: `${money} − ${bus} − ${students} × ${entry + ice} = ${diff}` };
     },
     () => {
-      const book = rnd(2500, 6500) / 100, diff = rnd(800, 1800) / 100, puzzle = rnd(2000, 5000) / 100, plush = rnd(2000, 5000) / 100, paid = [150, 200, 250][rnd(0, 2)]!;
-      const game = Math.round((book + diff) * 100) / 100;
-      const change = Math.round((paid - book - game - puzzle - plush) * 100) / 100;
-      return { textFr: `${name} achète un livre à ${book.toLocaleString("fr-CH")} fr. C'est ${diff.toLocaleString("fr-CH")} fr. de moins que le jeu acheté aussi. ${name} ajoute un puzzle à ${puzzle.toLocaleString("fr-CH")} fr. et une peluche à ${plush.toLocaleString("fr-CH")} fr. ${name} paie avec ${paid} fr. Combien le vendeur lui rend-il ?`, answer: change, op: "-", calculation: `${paid} − ${book.toLocaleString("fr-CH")} − ${game.toLocaleString("fr-CH")} − ${puzzle.toLocaleString("fr-CH")} − ${plush.toLocaleString("fr-CH")} = ${change.toLocaleString("fr-CH")}` };
+      const book = rnd(8, 20), diff = rnd(2, 8), puzzle = rnd(6, 15), plush = rnd(6, 15);
+      const game = book + diff, paid = 100, change = paid - book - game - puzzle - plush;
+      return { textFr: `${name} achète un livre à ${book} fr. C'est ${diff} fr. de moins que le jeu acheté aussi. ${name} ajoute un puzzle à ${puzzle} fr. et une peluche à ${plush} fr. ${name} paie avec ${paid} fr. Combien le vendeur lui rend-il ?`, answer: change, op: "-", calculation: `${paid} − ${book} − ${game} − ${puzzle} − ${plush} = ${change}` };
     },
     () => {
       const sticks = rnd(800, 2500), perPack = [10, 20, 25, 50][rnd(0, 3)]!;
@@ -940,9 +937,9 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Une confiserie a fabriqué ${candies} caramels. Les caramels sont emballés par sachets de ${perBag}. Combien de sachets faut-il préparer ?`, answer: Math.ceil(candies / perBag), op: "÷", calculation: `${candies} ÷ ${perBag} = ${Math.ceil(candies / perBag)}` };
     },
     () => {
-      const tickets = rnd(20, 80), price = rnd(1000, 2200) / 100;
-      const total = Math.round(tickets * price * 100) / 100;
-      return { textFr: `Au cinéma, toutes les places sont à ${price.toLocaleString("fr-CH")} francs. Ce soir, la caissière vend ${tickets} billets. Quelle somme reçoit-elle ?`, answer: total, op: "×", calculation: `${tickets} × ${price.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+      const tickets = rnd(20, 80), price = rnd(10, 22);
+      const total = tickets * price;
+      return { textFr: `Au cinéma, toutes les places sont à ${price} fr. Ce soir, la caissière vend ${tickets} billets. Quelle somme reçoit-elle ?`, answer: total, op: "×", calculation: `${tickets} × ${price} = ${total}` };
     },
     () => {
       const bags = rnd(20, 80), waffles = rnd(8, 18);
@@ -974,13 +971,13 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `${name} est allé(e) deux fois à la piscine cette semaine. La première fois, ${name} a fait ${first} traversées. La deuxième fois, ${name} en a fait ${more} de plus. Combien de traversées en tout ?`, answer: first + first + more, op: "+", calculation: `${first} + ${first + more} = ${first + first + more}` };
     },
     () => {
-      const saved = rnd(9000, 22000) / 100, missing = rnd(1000, 6000) / 100;
-      const price = Math.round((saved + missing) * 100) / 100;
-      return { textFr: `${name} aimerait s'acheter une paire de baskets. ${name} a déjà économisé ${saved.toLocaleString("fr-CH")} fr. et reçoit ${missing.toLocaleString("fr-CH")} fr. en cadeau. Combien coûte la paire de baskets ?`, answer: price, op: "+", calculation: `${saved.toLocaleString("fr-CH")} + ${missing.toLocaleString("fr-CH")} = ${price.toLocaleString("fr-CH")}` };
+      const saved = rnd(90, 220), missing = rnd(10, 60);
+      const price = saved + missing;
+      return { textFr: `${name} aimerait s'acheter une paire de baskets. ${name} a déjà économisé ${saved} fr. et reçoit ${missing} fr. en cadeau. Combien coûte la paire de baskets ?`, answer: price, op: "+", calculation: `${saved} + ${missing} = ${price}` };
     },
     () => {
       const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
-      const expensive = rnd(120, 420);
+      const expensive = rnd(60, 210) * 2;
       return { textFr: `${name} a dépensé ${expensive} fr. pour un nouvel aspirateur. L'aspirateur de ${name2} est deux fois moins cher. Quel est le prix de l'aspirateur de ${name2} ?`, answer: expensive / 2, op: "÷", calculation: `${expensive} ÷ 2 = ${expensive / 2}` };
     },
     () => {
@@ -989,9 +986,9 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `${name} a fait un trajet de ${dist1} km. ${name2} a fait un trajet de ${diff} km de moins. Combien de kilomètres ${name2} a-t-il parcourus ?`, answer: dist1 - diff, op: "-", calculation: `${dist1} − ${diff} = ${dist1 - diff}` };
     },
     () => {
-      const pupils = rnd(15, 28), minigolf = rnd(900, 1600) / 100, ice = rnd(250, 550) / 100;
-      const total = Math.round((pupils * minigolf + (pupils + 1) * ice) * 100) / 100;
-      return { textFr: `La classe EPL 1 ira en promenade. Il y a ${pupils} élèves. Chaque élève fait une partie de minigolf à ${minigolf.toLocaleString("fr-CH")} francs et mange une glace à ${ice.toLocaleString("fr-CH")} francs. L'enseignante ne joue pas au minigolf mais mange aussi une glace. Combien l'enseignante devra-t-elle payer en tout ?`, answer: total, op: "×", calculation: `${pupils} × ${minigolf.toLocaleString("fr-CH")} + ${pupils + 1} × ${ice.toLocaleString("fr-CH")} = ${total.toLocaleString("fr-CH")}` };
+      const pupils = rnd(15, 28), minigolf = rnd(8, 15), ice = rnd(2, 5);
+      const total = pupils * minigolf + (pupils + 1) * ice;
+      return { textFr: `La classe EPL 1 ira en promenade. Il y a ${pupils} élèves. Chaque élève fait une partie de minigolf à ${minigolf} fr. et mange une glace à ${ice} fr. L'enseignante ne joue pas au minigolf mais mange aussi une glace. Combien l'enseignante devra-t-elle payer en tout ?`, answer: total, op: "×", calculation: `${pupils} × ${minigolf} + ${pupils + 1} × ${ice} = ${total}` };
     },
     () => {
       const fiction = rnd(800, 1600), docs = rnd(400, 900), albums = rnd(400, 900), comics = rnd(500, 1100), cds = rnd(10, 60), audio = rnd(2, 20), dvds = rnd(20, 90), kami = rnd(10, 40);
@@ -999,9 +996,10 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `La bibliothèque municipale a acheté ${fiction} livres de fiction, ${docs} documentaires, ${albums} albums pour enfants, ${comics} bandes dessinées, ${cds} CD, ${audio} livres audio, ${dvds} DVD et ${kami} kamishibaïs. Combien d'articles a-t-elle achetés au total ?`, answer: total, op: "+", calculation: `${fiction} + ${docs} + ${albums} + ${comics} + ${cds} + ${audio} + ${dvds} + ${kami} = ${total}` };
     },
     () => {
-      const referenceTotal = rnd(3000, 5200), less = rnd(300, 900), docs = rnd(400, 900), albums = rnd(300, 800), comics = rnd(500, 1000), cds = rnd(10, 60), audio = rnd(2, 20), dvds = rnd(20, 90), kami = rnd(10, 40);
-      const target = referenceTotal - less;
-      return { textFr: `La bibliothèque de Couvrelivre a acheté ${docs} documentaires, ${albums} albums, ${comics} bandes dessinées, ${cds} CD, ${audio} livres audio, ${dvds} DVD, ${kami} kamishibaïs et des livres de fiction. Elle a acheté en tout ${less} articles de moins qu'une autre bibliothèque qui en a acheté ${referenceTotal}. Combien a-t-elle acheté de livres de fiction ?`, answer: target - docs - albums - comics - cds - audio - dvds - kami, op: "-", calculation: `${target} − ${docs} − ${albums} − ${comics} − ${cds} − ${audio} − ${dvds} − ${kami} = ${target - docs - albums - comics - cds - audio - dvds - kami}` };
+      const fiction = rnd(500, 1200), docs = rnd(150, 400), albums = rnd(100, 300), comics = rnd(200, 500), cds = rnd(10, 50), audio = rnd(2, 15), dvds = rnd(15, 60), kami = rnd(8, 30);
+      const target = fiction + docs + albums + comics + cds + audio + dvds + kami;
+      const less = rnd(100, 400), referenceTotal = target + less;
+      return { textFr: `La bibliothèque de Couvrelivre a acheté ${docs} documentaires, ${albums} albums, ${comics} bandes dessinées, ${cds} CD, ${audio} livres audio, ${dvds} DVD, ${kami} kamishibaïs et des livres de fiction. Elle a acheté en tout ${less} articles de moins qu'une autre bibliothèque qui en a acheté ${referenceTotal}. Combien a-t-elle acheté de livres de fiction ?`, answer: fiction, op: "-", calculation: `${target} − ${docs} − ${albums} − ${comics} − ${cds} − ${audio} − ${dvds} − ${kami} = ${fiction}` };
     },
     () => {
       const startBlue = rnd(12, 30), addedEach = rnd(10, 25), total = startBlue + addedEach * 2;
@@ -1024,9 +1022,9 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `${name} photographie souvent la nature. Sur son ordinateur, ${name} a ${mountains} photos de montagnes, ${forests} photos de forêts, ${horses} photos de chevaux et ${mice} photos de souris. Combien ${name} a-t-il de photos d'animaux en tout ?`, answer: horses + mice, op: "+", calculation: `${horses} + ${mice} = ${horses + mice}` };
     },
     () => {
-      const salary = rnd(3200, 5600) + 0.5, remaining = rnd(900, 2600) + 0.7;
-      const spent = Math.round((salary - remaining) * 100) / 100;
-      return { textFr: `Par mois, ${name} gagne ${salary.toLocaleString("fr-CH")} fr. Après avoir payé toutes les factures, ${name} a encore ${remaining.toLocaleString("fr-CH")} fr. Combien ${name} a-t-il dépensé ?`, answer: spent, op: "-", calculation: `${salary.toLocaleString("fr-CH")} − ${remaining.toLocaleString("fr-CH")} = ${spent.toLocaleString("fr-CH")}` };
+      const salary = rnd(3200, 5600), remaining = rnd(900, salary - 100);
+      const spent = salary - remaining;
+      return { textFr: `Par mois, ${name} gagne ${salary} fr. Après avoir payé toutes les factures, ${name} a encore ${remaining} fr. Combien ${name} a-t-il dépensé ?`, answer: spent, op: "-", calculation: `${salary} − ${remaining} = ${spent}` };
     },
     () => {
       const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
@@ -1034,22 +1032,23 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `${name} et ${name2} collectionnent les gommettes. ${name} en a ${n1gommettes}. C'est ${diff} de moins que ${name2}. Combien ${name2} a-t-il de gommettes ?`, answer: n1gommettes + diff, op: "+", calculation: `${n1gommettes} + ${diff} = ${n1gommettes + diff}` };
     },
     () => {
-      const budget = rnd(250, 600), grocery = rnd(5000, 14000) / 100, bakery = rnd(900, 3500) / 100, remaining = rnd(60, 220);
-      const butcher = Math.round((budget - grocery - bakery - remaining) * 100) / 100;
-      return { textFr: `${name} dispose de ${budget} fr. pour faire ses courses. ${name} dépense ${grocery.toLocaleString("fr-CH")} fr. à l'épicerie et ${bakery.toLocaleString("fr-CH")} fr. à la boulangerie, puis passe à la boucherie. Une fois les courses terminées, il reste ${remaining} fr. Combien a-t-il été dépensé à la boucherie ?`, answer: butcher, op: "-", calculation: `${budget} − ${grocery.toLocaleString("fr-CH")} − ${bakery.toLocaleString("fr-CH")} − ${remaining} = ${butcher.toLocaleString("fr-CH")}` };
+      const grocery = rnd(40, 80), bakery = rnd(10, 30), butcher = rnd(15, 40), remaining = rnd(5, 20);
+      const budget = grocery + bakery + butcher + remaining;
+      return { textFr: `${name} dispose de ${budget} fr. pour faire ses courses. ${name} dépense ${grocery} fr. à l'épicerie et ${bakery} fr. à la boulangerie, puis passe à la boucherie. Une fois les courses terminées, il reste ${remaining} fr. Combien a-t-il été dépensé à la boucherie ?`, answer: butcher, op: "-", calculation: `${budget} − ${grocery} − ${bakery} − ${remaining} = ${butcher}` };
     },
     () => {
       const monday = rnd(120, 360), more = rnd(30, 120);
       return { textFr: `Lundi, un maraîcher a ramassé ${monday} salades pour les vendre. Le mardi, il en a ramassé ${more} de plus que le lundi. Combien de salades le maraîcher a-t-il ramassées les deux premiers jours de la semaine ?`, answer: monday + monday + more, op: "+", calculation: `${monday} + ${monday + more} = ${monday + monday + more}` };
     },
     () => {
-      const total = rnd(1800, 3200), instrument = rnd(120000, 220000) / 100, caseAndAccessories = rnd(12000, 42000) / 100;
-      const bow = Math.round((total - instrument - caseAndAccessories) * 100) / 100;
-      return { textFr: `${name} a acheté un violon complet avec étui, accessoires et archet pour ${total} fr. au total. Le prix de l'instrument est ${instrument.toLocaleString("fr-CH")} fr. L'étui et les accessoires ont coûté ${caseAndAccessories.toLocaleString("fr-CH")} fr. Quel est le prix de l'archet ?`, answer: bow, op: "-", calculation: `${total} − ${instrument.toLocaleString("fr-CH")} − ${caseAndAccessories.toLocaleString("fr-CH")} = ${bow.toLocaleString("fr-CH")}` };
+      const instrument = rnd(600, 1200), caseAndAccessories = rnd(80, 200), bow = rnd(50, 150);
+      const total = instrument + caseAndAccessories + bow;
+      return { textFr: `${name} a acheté un violon complet avec étui, accessoires et archet pour ${total} fr. au total. Le prix de l'instrument est ${instrument} fr. L'étui et les accessoires ont coûté ${caseAndAccessories} fr. Quel est le prix de l'archet ?`, answer: bow, op: "-", calculation: `${total} − ${instrument} − ${caseAndAccessories} = ${bow}` };
     },
     () => {
-      const total = rnd(900, 2200), red = rnd(120, 380), blue = rnd(160, 420), white = rnd(220, 520), green = rnd(80, 260);
-      return { textFr: `Pour réaliser une mosaïque, ${name} a utilisé ${total} tesselles en tout. ${name} a collé ${red} tesselles rouges, ${blue} bleues, ${white} blanches, ${green} vertes et des jaunes. Combien de tesselles jaunes ont été utilisées ?`, answer: total - red - blue - white - green, op: "-", calculation: `${total} − ${red} − ${blue} − ${white} − ${green} = ${total - red - blue - white - green}` };
+      const red = rnd(50, 150), blue = rnd(60, 160), white = rnd(80, 180), green = rnd(40, 120), yellow = rnd(30, 100);
+      const total = red + blue + white + green + yellow;
+      return { textFr: `Pour réaliser une mosaïque, ${name} a utilisé ${total} tesselles en tout. ${name} a collé ${red} tesselles rouges, ${blue} bleues, ${white} blanches, ${green} vertes et des jaunes. Combien de tesselles jaunes ont été utilisées ?`, answer: yellow, op: "-", calculation: `${total} − ${red} − ${blue} − ${white} − ${green} = ${yellow}` };
     },
     () => {
       const weightPerBrick = rnd(2, 6), sampleA = rnd(10, 25), sampleB = rnd(30, 50), bricks = [25, 50, 75, 95][rnd(0, 3)]!;
@@ -1076,9 +1075,9 @@ function genA37MultDivProblem(): WordProblemQ {
       return { textFr: `Dans une école, il y a ${rnd(20, 45)} classes. Au total, il y a ${pupils} élèves et ${rnd(25, 60)} professeurs. Il y a ${girls} filles. Combien y a-t-il de garçons dans cette école ?`, answer: pupils - girls, op: "-", calculation: `${pupils} − ${girls} = ${pupils - girls}` };
     },
     () => {
-      const francs = rnd(800, 2800) / 100, students = rnd(25, 75);
-      const total = Math.round(francs * students * 100) / 100;
-      return { textFr: `L'enseignante a reçu ${francs.toLocaleString("fr-CH")} francs pour chacun de ses ${students} étudiants. Quelle est la somme totale que l'enseignante a reçue ?`, answer: total, op: "×", calculation: `${francs.toLocaleString("fr-CH")} × ${students} = ${total.toLocaleString("fr-CH")}` };
+      const francs = rnd(8, 28), students = rnd(25, 75);
+      const total = francs * students;
+      return { textFr: `L'enseignante a reçu ${francs} fr. pour chacun de ses ${students} étudiants. Quelle est la somme totale que l'enseignante a reçue ?`, answer: total, op: "×", calculation: `${francs} × ${students} = ${total}` };
     },
     () => {
       const a = rnd(3, 9), ptsA = [30, 50, 70][rnd(0, 2)]!, b = rnd(2, 8), ptsB = [60, 80, 90][rnd(0, 2)]!;
@@ -1095,7 +1094,7 @@ function genA37MultDivProblem(): WordProblemQ {
   ];
   for (let attempt = 0; attempt < 20; attempt++) {
     const q = templates[rnd(0, templates.length - 1)]!();
-    if (Number.isFinite(q.answer) && q.answer >= 0) return q;
+    if (Number.isInteger(q.answer) && q.answer > 0) return q;
   }
   return templates[0]!();
 }
@@ -1404,6 +1403,205 @@ function genA64ProportionProblem(level: "e" | "m" | "h"): WordProblemQ {
   return templates[0]!();
 }
 
+// ── Equation word problems (A10.5) ────────────────────────────────────────────
+function genA105EquationProblem(level: "e" | "m" | "h"): WordProblemQ {
+  const name = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+  const name2 = A2_4_CONTEXT_NAMES[rnd(0, A2_4_CONTEXT_NAMES.length - 1)]!;
+
+  if (level === "e") {
+    // 1-step equations: x+a=b (15), a×x=b (15), x-a=b (12), x÷a=b (8)
+    const templates: Array<() => WordProblemQ> = [
+      // ── x + a = b (find initial or added) — 15 templates ─────────────────
+      () => { const a = rnd(5, 30), b = rnd(a + 3, a + 40); return { textFr: `${name} a une collection de cartes. Après en avoir reçu ${a} de plus, ${name} en a ${b} au total. Combien ${name} en avait-il au départ ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(10, 50), b = rnd(a + 5, a + 60); return { textFr: `${name} dépose ${a} francs sur son compte en banque. Le solde passe à ${b} francs. Quel était le solde initial ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(3, 20), b = rnd(a + 5, a + 30); return { textFr: `Au départ, ${name} parcourt une partie du chemin. Après ${a} km de plus, ${name} a parcouru ${b} km au total. Quelle distance avait-il déjà faite ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(5, 25), b = rnd(a + 3, a + 35); return { textFr: `Un sac pèse déjà une certaine masse. On y ajoute ${a} kg. Le sac pèse maintenant ${b} kg. Quelle était la masse initiale du sac ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(20, 80), b = rnd(a + 10, a + 100); return { textFr: `${name} marque ${a} points supplémentaires et totalise ${b} points. Combien de points avait-il avant ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(4, 20), b = rnd(a + 2, a + 25); return { textFr: `${name} reçoit ${a} billes d'un ami. Maintenant ${name} possède ${b} billes. Combien en avait-il avant ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(10, 40), b = rnd(a + 8, a + 50); return { textFr: `La bibliothèque achète ${a} nouveaux livres et en possède maintenant ${b}. Combien en avait-elle avant l'achat ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const x = rnd(5, 40), a = rnd(3, 20); return { textFr: `${name} a économisé ${x} francs. Combien doit-il encore épargner pour atteindre ${x + a} francs ?`, answer: a, op: "+", calculation: `${x} + x = ${x + a} → x = ${x + a} − ${x} = ${a}` }; },
+      () => { const x = rnd(10, 60), a = rnd(5, 30); return { textFr: `Une équipe a déjà marqué ${x} buts. Combien de buts supplémentaires faut-il marquer pour en avoir ${x + a} au total ?`, answer: a, op: "+", calculation: `${x} + x = ${x + a} → x = ${x + a} − ${x} = ${a}` }; },
+      () => { const x = rnd(50, 200), a = rnd(20, 80); return { textFr: `Un magasin reçoit une livraison. Après reception, le stock passe de ${x} à ${x + a} articles. Combien d'articles ont été livrés ?`, answer: a, op: "+", calculation: `${x} + x = ${x + a} → x = ${x + a} − ${x} = ${a}` }; },
+      () => { const x = rnd(5, 30), a = rnd(3, 15); return { textFr: `${name} plante ${x} graines. Après quelques jours, ${a} graines germent en plus. Combien de pousses ${name} a-t-il maintenant ?`, answer: x + a, op: "+", calculation: `${x} + ${a} = ${x + a}` }; },
+      () => { const a = rnd(8, 30), b = rnd(a + 5, a + 40); return { textFr: `${name} avait une certaine somme. Après avoir reçu ${a} fr. de sa part, ${name} a maintenant ${b} fr. Quelle somme avait ${name} au départ ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const a = rnd(15, 60), b = rnd(a + 10, a + 80); return { textFr: `Un réservoir contient déjà de l'eau. On y verse ${a} litres de plus ; il en contient maintenant ${b} litres. Quelle quantité y avait-il au départ ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      () => { const x = rnd(20, 80), a = rnd(10, 40); return { textFr: `Un train transporte ${x} passagers. À la gare suivante, des voyageurs montent et le train a maintenant ${x + a} passagers. Combien sont montés ?`, answer: a, op: "+", calculation: `${x} + x = ${x + a} → x = ${x + a} − ${x} = ${a}` }; },
+      () => { const a = rnd(3, 15), b = rnd(a + 2, a + 20); return { textFr: `${name} a des stylos. Après en avoir trouvé ${a} dans son cartable, ${name} en a ${b} au total. Combien en avait-il avant ?`, answer: b - a, op: "+", calculation: `x + ${a} = ${b} → x = ${b} − ${a} = ${b - a}` }; },
+      // ── a × x = b (find unit) — 15 templates ─────────────────────────────
+      () => { const a = rnd(2, 8), x = rnd(3, 15); return { textFr: `${name} achète ${a} carnets au même prix. Le total est de ${a * x} francs. Quel est le prix d'un carnet ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 7), x = rnd(4, 20); return { textFr: `Un ouvrier remplit ${a} sacs égaux avec ${a * x} kg de sable en tout. Quelle masse contient chaque sac ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 10), x = rnd(5, 25); return { textFr: `Une boîte contient ${a} rangées de ${x} chocolats chacune... non : ${a} boîtes identiques contiennent ${a * x} chocolats au total. Combien y a-t-il de chocolats par boîte ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 9), x = rnd(3, 12); return { textFr: `Un camion effectue ${a} voyages identiques et transporte ${a * x} colis au total. Combien de colis transporte-t-il par voyage ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 12), x = rnd(6, 20); return { textFr: `${name} travaille ${a} jours et gagne ${a * x} francs en tout. Quel est le salaire journalier de ${name} ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 8), x = rnd(4, 18); return { textFr: `Une machine produit le même nombre de pièces chaque heure. En ${a} heures, elle produit ${a * x} pièces. Combien produit-elle par heure ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 6), x = rnd(8, 30); return { textFr: `${name} achète ${a} billets de cinéma pour ${a * x} fr. au total. Quel est le prix d'un billet ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 10), x = rnd(5, 20); return { textFr: `Un groupe de ${a} personnes partage un repas de ${a * x} fr. de façon égale. Combien chacun paie-t-il ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 9), x = rnd(7, 25); return { textFr: `${name} fait ${a} tours de piste identiques et parcourt ${a * x} km au total. Quelle est la longueur d'un tour ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 7), x = rnd(10, 40); return { textFr: `${a} boîtes identiques pèsent ${a * x} kg en tout. Quelle est la masse d'une boîte ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 10), x = rnd(4, 15); return { textFr: `${name} met le même nombre de graines dans chacun des ${a} pots. Au total, ${name} a planté ${a * x} graines. Combien y en a-t-il par pot ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 8), x = rnd(6, 22); return { textFr: `Un fermier ramasse le même nombre d'œufs chaque matin. En ${a} jours, il ramasse ${a * x} œufs. Combien en ramasse-t-il par jour ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 6), x = rnd(5, 30); return { textFr: `Un livre de ${a * x} pages est divisé en ${a} chapitres de même longueur. Combien de pages compte chaque chapitre ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 8), x = rnd(3, 12); return { textFr: `${name} achète ${a} sacs de fruits au même prix unitaire. Le total est de ${a * x} fr. Quel est le prix d'un sac ?`, answer: x, op: "×", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 7), x = rnd(5, 18); return { textFr: `Une corde est coupée en ${a} morceaux égaux et mesure ${a * x} m au total. Quelle est la longueur de chaque morceau ?`, answer: x, op: "÷", calculation: `${a} × x = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      // ── x - a = b (find original before removal) — 12 templates ──────────
+      () => { const a = rnd(5, 25), x = rnd(a + 3, a + 40); return { textFr: `${name} dépense ${a} francs et il lui reste ${x - a} francs. Combien ${name} avait-il au départ ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(10, 50), x = rnd(a + 5, a + 80); return { textFr: `${name} prête ${a} livres à des amis. Il lui en reste ${x - a}. Combien de livres ${name} possédait-il au départ ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(3, 15), x = rnd(a + 2, a + 30); return { textFr: `Un marchand vend ${a} fruits et il lui en reste ${x - a}. Combien en avait-il au départ ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(20, 80), x = rnd(a + 10, a + 100); return { textFr: `${name} mange ${a} bonbons de son stock et il lui en reste ${x - a}. Combien ${name} en avait-il avant ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(5, 30), x = rnd(a + 5, a + 60); return { textFr: `Un entrepôt expédie ${a} caisses. Il en reste ${x - a}. Combien y avait-il de caisses avant l'expédition ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(8, 40), x = rnd(a + 5, a + 70); return { textFr: `Une classe comptait un certain nombre d'élèves. ${a} sont partis en excursion et il en reste ${x - a} en classe. Combien y avait-il d'élèves au total ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(15, 60), x = rnd(a + 10, a + 90); return { textFr: `${name} retire ${a} francs au distributeur. Le solde de son compte passe à ${x - a} fr. Quel était le solde avant le retrait ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(4, 20), x = rnd(a + 2, a + 35); return { textFr: `${name} donne ${a} autocollants à ${name2}. ${name} en a maintenant ${x - a}. Combien en avait-il avant ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(10, 45), x = rnd(a + 8, a + 70); return { textFr: `Un fleuriste vend ${a} bouquets dans la matinée et en a ${x - a} à midi. Combien en avait-il au matin ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(5, 25), x = rnd(a + 3, a + 45); return { textFr: `Après avoir utilisé ${a} feuilles de papier, ${name} en a encore ${x - a}. Combien en avait-il au début ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(30, 100), x = rnd(a + 20, a + 120); return { textFr: `Un parking avait un certain nombre de voitures. ${a} voitures sont reparties ; il en reste ${x - a}. Combien y en avait-il ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      () => { const a = rnd(6, 28), x = rnd(a + 4, a + 40); return { textFr: `${name} consomme ${a} litres d'eau d'une bonbonne et il en reste ${x - a} litres. Quelle était la quantité initiale ?`, answer: x, op: "-", calculation: `x − ${a} = ${x - a} → x = ${x - a} + ${a} = ${x}` }; },
+      // ── x ÷ a = b (find total from sharing/rate) — 8 templates ───────────
+      () => { const a = rnd(2, 8), b = rnd(3, 15); return { textFr: `${name} partage des biscuits en ${a} parts égales. Chaque part contient ${b} biscuits. Combien ${name} avait-il de biscuits au départ ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(3, 7), b = rnd(4, 20); return { textFr: `${name} divise une somme d'argent entre ${a} enfants. Chacun reçoit ${b} francs. Quelle était la somme totale ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(4, 10), b = rnd(5, 18); return { textFr: `Une longue corde est coupée en ${a} morceaux de ${b} m chacun. Quelle était la longueur totale de la corde ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(2, 6), b = rnd(6, 25); return { textFr: `${name} répartit des livres dans ${a} cartons identiques. Chaque carton contient ${b} livres. Combien de livres ${name} avait-il ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(5, 10), b = rnd(4, 12); return { textFr: `Un magasin reçoit des articles répartis en ${a} colis identiques de ${b} articles chacun. Combien d'articles au total ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(3, 8), b = rnd(5, 20); return { textFr: `Une production est divisée en ${a} lots égaux de ${b} pièces. Quelle est la production totale ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(4, 9), b = rnd(3, 15); return { textFr: `${name} partage des graines entre ${a} jardinets. Chaque jardinet reçoit ${b} graines. Combien de graines ${name} avait-il ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+      () => { const a = rnd(2, 7), b = rnd(8, 30); return { textFr: `${name} répartit des pages de lecture sur ${a} jours. Chaque jour, ${name} lit ${b} pages. Combien de pages compte le livre ?`, answer: a * b, op: "÷", calculation: `x ÷ ${a} = ${b} → x = ${b} × ${a} = ${a * b}` }; },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  if (level === "m") {
+    // 2-step equations: ax+b=c (15), a(x+b)=c (10), ax-b=c (10), x/a+b=c (8), mixed (7)
+    const templates: Array<() => WordProblemQ> = [
+      // ── ax + b = c (base/fixed + variable = total) — 15 templates ─────────
+      () => { const a = rnd(2, 8), b = rnd(5, 30), x = rnd(3, 15); const c = a * x + b; return { textFr: `Un abonnement de base coûte ${b} fr., puis ${a} fr. par utilisation. ${name} paie ${c} fr. au total. Combien d'utilisations a-t-il faites ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c} − ${b} = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 10), b = rnd(10, 50), x = rnd(2, 12); const c = a * x + b; return { textFr: `L'entrée d'un parc coûte ${b} fr. fixe plus ${a} fr. par attraction. ${name} dépense ${c} fr. Combien d'attractions a-t-il visitées ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 15), b = rnd(20, 80), x = rnd(3, 10); const c = a * x + b; return { textFr: `${name} reçoit un salaire de base de ${b} fr. et ${a} fr. par heure supplémentaire. Ce mois, ${name} touche ${c} fr. Combien d'heures supplémentaires a-t-il faites ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 7), b = rnd(8, 40), x = rnd(4, 18); const c = a * x + b; return { textFr: `Un forfait téléphonique coûte ${b} fr./mois et ${a} fr. par SMS hors forfait. La facture de ${name} est de ${c} fr. Combien de SMS hors forfait a-t-il envoyés ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 12), b = rnd(15, 60), x = rnd(2, 10); const c = a * x + b; return { textFr: `Une salle de sport facture ${b} fr. d'inscription et ${a} fr. par séance. ${name} paye ${c} fr. en tout. Combien de séances a-t-il faites ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 9), b = rnd(12, 45), x = rnd(3, 14); const c = a * x + b; return { textFr: `La livraison coûte ${b} fr. de frais fixes plus ${a} fr. par colis. ${name} paye ${c} fr. Combien de colis a-t-il envoyés ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 20), b = rnd(25, 100), x = rnd(2, 8); const c = a * x + b; return { textFr: `${name} loue un vélo avec ${b} fr. de caution et ${a} fr. de l'heure. ${name} paie ${c} fr. Combien d'heures a-t-il loué le vélo ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(6, 18), b = rnd(20, 70), x = rnd(3, 12); const c = a * x + b; return { textFr: `Un cours de cuisine coûte ${b} fr. pour les ingrédients de base, plus ${a} fr. par heure d'enseignement. ${name} paie ${c} fr. Combien d'heures de cours a-t-il eu ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(2, 8), b = rnd(5, 30), x = rnd(5, 20); const c = a * x + b; return { textFr: `Un club de lecture demande ${b} fr. d'adhésion annuelle et ${a} fr. par livre emprunté. ${name} paie ${c} fr. Combien de livres a-t-il empruntés ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 10), b = rnd(10, 50), x = rnd(4, 15); const c = a * x + b; return { textFr: `${name} paie ${b} fr. de frais administratifs et ${a} fr. par document traduit. La facture totale est de ${c} fr. Combien de documents ont été traduits ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(8, 20), b = rnd(30, 80), x = rnd(2, 9); const c = a * x + b; return { textFr: `Un parking facture ${b} fr. d'abonnement mensuel et ${a} fr. par nuit supplémentaire. ${name} paie ${c} fr. ce mois. Combien de nuits supplémentaires a-t-il passées ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 14), b = rnd(15, 55), x = rnd(3, 11); const c = a * x + b; return { textFr: `${name} paie ${b} fr. de matériel et ${a} fr. par atelier de bricolage. Au total, ${name} dépense ${c} fr. Combien d'ateliers a-t-il suivis ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(10, 25), b = rnd(40, 100), x = rnd(2, 7); const c = a * x + b; return { textFr: `Un service de nettoyage coûte ${b} fr. de déplacement et ${a} fr. de l'heure. La facture de ${name} est de ${c} fr. Combien d'heures de nettoyage a-t-il commandées ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 12), b = rnd(18, 60), x = rnd(4, 14); const c = a * x + b; return { textFr: `${name} achète un abonnement bus à ${b} fr. et recharge ${x} fois sa carte de ${a} fr. Le total débité est de ${c} fr. Combien de recharges a-t-il effectuées ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 9), b = rnd(10, 40), x = rnd(5, 18); const c = a * x + b; return { textFr: `Une piscine facture ${b} fr. de cotisation annuelle et ${a} fr. par entrée. ${name} dépense ${c} fr. Combien d'entrées a-t-il utilisées ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      // ── a(x + b) = c (groups with base+extra = total) — 10 templates ──────
+      () => { const a = rnd(2, 6), b = rnd(2, 8), x = rnd(5, 20); const c = a * (x + b); return { textFr: `${a} packs de bouteilles sont vendus. Chaque pack contient des bouteilles normales plus ${b} bouteilles bonus. Au total, il y a ${c} bouteilles. Combien de bouteilles normales contient un pack ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(3, 7), b = rnd(1, 4), x = rnd(4, 15); const c = a * (x + b); return { textFr: `${a} groupes d'élèves partent en excursion. Chaque groupe comprend des élèves et ${b} accompagnateurs. En tout, il y a ${c} personnes. Combien d'élèves compte chaque groupe ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(2, 5), b = rnd(3, 10), x = rnd(6, 20); const c = a * (x + b); return { textFr: `${name} prépare ${a} boîtes-cadeaux identiques. Chaque boîte contient des articles achetés et ${b} articles reçus en cadeau. Au total, il y a ${c} articles. Combien d'articles achetés contient chaque boîte ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(4, 8), b = rnd(2, 6), x = rnd(5, 14); const c = a * (x + b); return { textFr: `Un marchand vend ${a} lots identiques. Chaque lot comprend des articles payants et ${b} articles offerts. Il remet ${c} articles en tout. Combien d'articles payants contient chaque lot ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(3, 6), b = rnd(2, 5), x = rnd(4, 12); const c = a * (x + b); return { textFr: `${a} navettes transportent des personnes. Chaque navette transporte des adultes et ${b} enfants. En tout, ${c} personnes sont transportées. Combien d'adultes sont dans chaque navette ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(2, 5), b = rnd(4, 10), x = rnd(8, 22); const c = a * (x + b); return { textFr: `${a} étagères identiques contiennent des livres de fiction et ${b} dictionnaires chacune. On compte ${c} livres au total sur ces étagères. Combien de livres de fiction sont sur chaque étagère ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(3, 7), b = rnd(2, 6), x = rnd(5, 18); const c = a * (x + b); return { textFr: `${a} camions livrent des palettes. Chaque camion transporte des palettes pleines et ${b} palettes vides. En tout, ${c} palettes sont transportées. Combien de palettes pleines par camion ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(2, 6), b = rnd(3, 8), x = rnd(6, 16); const c = a * (x + b); return { textFr: `${a} équipes participent à un tournoi. Chaque équipe a des joueurs titulaires et ${b} remplaçants. Il y a ${c} joueurs en tout. Combien de titulaires par équipe ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(4, 8), b = rnd(1, 4), x = rnd(4, 12); const c = a * (x + b); return { textFr: `${a} classes visitent un musée. Chaque classe comprend des élèves et ${b} professeurs. Au total, ${c} personnes visitent le musée. Combien d'élèves y a-t-il par classe ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      () => { const a = rnd(3, 6), b = rnd(2, 7), x = rnd(5, 15); const c = a * (x + b); return { textFr: `${a} sacs identiques contiennent des oranges et ${b} citrons chacun. On compte ${c} fruits au total. Combien d'oranges dans chaque sac ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c} ÷ ${a} = ${c / a} → x = ${c / a} − ${b} = ${x}` }; },
+      // ── ax - b = c (earnings - fixed cost = net) — 10 templates ──────────
+      () => { const a = rnd(3, 10), b = rnd(10, 50), x = rnd(5, 20); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} vend des articles à ${a} fr. l'unité, mais paie ${b} fr. de location de stand. ${name} gagne ${c} fr. de bénéfice net. Combien d'articles a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c} + ${b} = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 15), b = rnd(20, 80), x = rnd(4, 14); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} gagne ${a} fr. par heure mais paie ${b} fr. de frais de transport. Le revenu net est de ${c} fr. Combien d'heures a-t-il travaillé ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 12), b = rnd(15, 60), x = rnd(5, 15); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `Un agriculteur gagne ${a} fr. par kg vendu, mais paie ${b} fr. de frais d'emballage. Son revenu net est de ${c} fr. Combien de kg a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(6, 20), b = rnd(25, 90), x = rnd(3, 12); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} vend des gâteaux ${a} fr. pièce. Après avoir remboursé ${b} fr. de coût de production, ${name} garde ${c} fr. de profit. Combien de gâteaux a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(8, 18), b = rnd(30, 80), x = rnd(4, 10); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `Un taxi facture ${a} fr. par course. Après déduction de ${b} fr. d'essence, le chauffeur a gagné ${c} fr. nets. Combien de courses a-t-il effectuées ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(5, 12), b = rnd(20, 70), x = rnd(5, 14); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} vend des abonnements à ${a} fr. par abonné. Après avoir payé ${b} fr. de publicité, il lui reste ${c} fr. Combien d'abonnements a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 9), b = rnd(10, 45), x = rnd(6, 18); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} gagne ${a} fr. par heure de babysitting. Après avoir payé ${b} fr. de bus, son bénéfice net est de ${c} fr. Combien d'heures a-t-il gardé les enfants ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(10, 25), b = rnd(40, 100), x = rnd(3, 9); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `Un atelier facture ${a} fr. par pièce réparée. Après déduction de ${b} fr. de fournitures, le technicien touche ${c} fr. nets. Combien de pièces a-t-il réparées ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(4, 10), b = rnd(12, 50), x = rnd(5, 16); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} perçoit ${a} fr. par article vendu sur internet. Après paiement de ${b} fr. de commission, ${name} garde ${c} fr. Combien d'articles a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(6, 14), b = rnd(18, 60), x = rnd(4, 12); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} produit et vend des pots de confiture à ${a} fr. Après ${b} fr. de frais d'ingrédients, son bénéfice est de ${c} fr. Combien de pots a-t-il vendus ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+      // ── x/a + b = c (partial amount + supplement = final) — 8 templates ───
+      () => { const a = rnd(2, 5), b = rnd(3, 15), x = rnd(a * 2, a * 20); const r = x / a; if (!Number.isInteger(r)) return { textFr: "", answer: -1, op: "+" }; const c = r + b; return { textFr: `${name} paie la moitié du prix d'un vélo (soit le prix divisé par ${a}) plus ${b} fr. de frais de livraison. ${name} paie ${c} fr. en tout. Quel est le prix du vélo ?`, answer: x, op: "+", calculation: `x/${a} + ${b} = ${c} → x/${a} = ${c} − ${b} = ${r} → x = ${r} × ${a} = ${x}` }; },
+      () => { const a = 2, b = rnd(5, 20), x = rnd(10, 60) * 2; const r = x / a; const c = r + b; return { textFr: `${name} verse la moitié de son salaire sur son compte épargne, plus ${b} fr. supplémentaires. Au total, ${name} a versé ${c} fr. Quel est son salaire ?`, answer: x, op: "+", calculation: `x/2 + ${b} = ${c} → x/2 = ${c - b} → x = ${c - b} × 2 = ${x}` }; },
+      () => { const a = 3, b = rnd(4, 18), x = rnd(5, 15) * 3; const r = x / a; const c = r + b; return { textFr: `${name} mange un tiers d'une pizza, puis prend ${b} tranches supplémentaires d'une autre. Au total, ${name} a consommé l'équivalent de ${c} tranches. Combien de tranches compte la pizza entière ?`, answer: x, op: "+", calculation: `x/3 + ${b} = ${c} → x/3 = ${c - b} → x = ${c - b} × 3 = ${x}` }; },
+      () => { const a = 4, b = rnd(5, 20), x = rnd(4, 12) * 4; const r = x / a; const c = r + b; return { textFr: `${name} utilise un quart de son stock de farine, puis reçoit ${b} kg en cadeau. ${name} a maintenant ${c} kg. Quelle était la taille initiale du stock ?`, answer: x, op: "+", calculation: `x/4 + ${b} = ${c} → x/4 = ${c - b} → x = ${c - b} × 4 = ${x}` }; },
+      () => { const a = 2, b = rnd(8, 30), x = rnd(6, 30) * 2; const r = x / a; const c = r + b; return { textFr: `${name} lit la moitié d'un roman puis ${b} pages supplémentaires. ${name} a lu ${c} pages en tout. Combien de pages compte le roman ?`, answer: x, op: "+", calculation: `x/2 + ${b} = ${c} → x/2 = ${c - b} → x = ${c - b} × 2 = ${x}` }; },
+      () => { const a = 5, b = rnd(3, 12), x = rnd(3, 10) * 5; const r = x / a; const c = r + b; return { textFr: `Un groupe dépense un cinquième de son budget pour le transport, puis ${b} fr. pour la restauration. Le groupe a dépensé ${c} fr. en tout. Quel était le budget total ?`, answer: x, op: "+", calculation: `x/5 + ${b} = ${c} → x/5 = ${c - b} → x = ${c - b} × 5 = ${x}` }; },
+      () => { const a = 2, b = rnd(10, 40), x = rnd(8, 40) * 2; const r = x / a; const c = r + b; return { textFr: `${name} donne la moitié de ses économies à une association et verse encore ${b} fr. par la suite. Au total, ${name} a donné ${c} fr. Quelle était la somme initiale de ses économies ?`, answer: x, op: "+", calculation: `x/2 + ${b} = ${c} → x/2 = ${c - b} → x = ${c - b} × 2 = ${x}` }; },
+      () => { const a = 3, b = rnd(6, 24), x = rnd(4, 14) * 3; const r = x / a; const c = r + b; return { textFr: `${name} parcourt un tiers d'un sentier de randonnée le matin, puis encore ${b} km l'après-midi. ${name} a marché ${c} km. Quelle est la longueur totale du sentier ?`, answer: x, op: "+", calculation: `x/3 + ${b} = ${c} → x/3 = ${c - b} → x = ${c - b} × 3 = ${x}` }; },
+      // ── Mixed 2-step — 7 templates ────────────────────────────────────────
+      () => { const a = rnd(2, 6), b = rnd(3, 10), c2 = rnd(5, 15), x = rnd(4, 14); const tot = a * x + b * c2; return { textFr: `${name} achète ${a} chemises à x fr. et ${c2} cravates à ${b} fr. Le total est de ${tot} fr. Quel est le prix d'une chemise ?`, answer: x, op: "×", calculation: `${a}x + ${b * c2} = ${tot} → ${a}x = ${tot} − ${b * c2} = ${a * x} → x = ${a * x} ÷ ${a} = ${x}` }; },
+      () => { const d = rnd(5, 20), n = rnd(3, 8), x = rnd(10, 50); const tot = x * n - d; if (tot <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} vend ${n} articles au même prix et dépense ${d} fr. en matériel. Le bénéfice net est de ${tot} fr. Quel est le prix de vente d'un article ?`, answer: x, op: "×", calculation: `${n}x − ${d} = ${tot} → ${n}x = ${tot + d} → x = ${tot + d} ÷ ${n} = ${x}` }; },
+      () => { const a = rnd(2, 5), b = rnd(2, 8), x = rnd(5, 18); const c = (x + b) * a; return { textFr: `${name} et ${a - 1} amis organisent un repas. Chacun apporte ${b} plats et en prépare x en plus. Il y a ${c} plats en tout. Combien chacun a-t-il préparé ?`, answer: x, op: "×", calculation: `${a}(x + ${b}) = ${c} → x + ${b} = ${c / a} → x = ${c / a - b}` }; },
+      () => { const a = rnd(10, 30), x = rnd(3, 12), b = rnd(2, 8); const c = a * x - a * b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `${name} gagne ${a} fr. de l'heure. Après avoir payé ${a * b} fr. de charges, il lui reste ${c} fr. Combien d'heures a-t-il travaillé ?`, answer: x, op: "×", calculation: `${a}x − ${a * b} = ${c} → ${a}x = ${c + a * b} → x = ${(c + a * b)} ÷ ${a} = ${x}` }; },
+      () => { const k = rnd(2, 4), b = rnd(5, 20), x = rnd(4, 15); const c = k * x + b; return { textFr: `${name} parcourt ${k} fois une même distance en voiture, puis marche encore ${b} km. Au total, ${name} a couvert ${c} km. Quelle est la distance en voiture ?`, answer: x, op: "×", calculation: `${k}x + ${b} = ${c} → ${k}x = ${c - b} → x = ${c - b} ÷ ${k} = ${x}` }; },
+      () => { const a = rnd(2, 5), b = rnd(3, 12), x = rnd(6, 20); const c = a * x + b; return { textFr: `${name} remplit ${a} bouteilles identiques et a encore ${b} cl de jus restants. Au total, ${name} avait ${c} cl de jus. Quelle est la contenance d'une bouteille ?`, answer: x, op: "×", calculation: `${a}x + ${b} = ${c} → ${a}x = ${c - b} → x = ${c - b} ÷ ${a} = ${x}` }; },
+      () => { const a = rnd(3, 7), b = rnd(8, 30), x = rnd(5, 18); const c = a * x - b; if (c <= 0) return { textFr: "", answer: -1, op: "+" }; return { textFr: `Une association collecte ${a} fr. par donateur. Après avoir payé ${b} fr. de frais administratifs, il reste ${c} fr. pour la cause. Combien de donateurs ont contribué ?`, answer: x, op: "×", calculation: `${a}x − ${b} = ${c} → ${a}x = ${c + b} → x = ${c + b} ÷ ${a} = ${x}` }; },
+    ];
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const q = templates[rnd(0, templates.length - 1)]!();
+      if (Number.isFinite(q.answer) && q.answer > 0) return q;
+    }
+    return templates[0]!();
+  }
+
+  // level === "h" — Systems of 2 equations
+  const templates: Array<() => WordProblemQ> = [
+    // ── x + y = a, x - y = b (sum and difference) — 12 templates ────────────
+    () => { const y = rnd(3, 20), d = rnd(2, 15); const x = y + d, a = x + y; return { textFr: `${name} et ${name2} ont en tout ${a} cartes. ${name} en a ${d} de plus que ${name2}. Combien ${name} en a-t-il ?`, answer: x, op: "+", calculation: `Soit x = cartes de ${name}, y = cartes de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ Addition : 2x = ${a + d} → x = ${(a + d) / 2} = ${x}` }; },
+    () => { const y = rnd(5, 25), d = rnd(3, 18); const x = y + d, a = x + y; return { textFr: `${name} et ${name2} ont collecté ${a} points au total. ${name} a ${d} points de plus que ${name2}. Quel est le score de ${name} ?`, answer: x, op: "+", calculation: `Soit x = score de ${name}, y = score de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(10, 40), d = rnd(4, 20); const x = y + d, a = x + y; return { textFr: `Deux sacs pèsent ${a} kg ensemble. Le premier est plus lourd de ${d} kg. Quelle est la masse du premier sac ?`, answer: x, op: "+", calculation: `Soit x = masse 1er sac, y = masse 2e sac\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(5, 30), d = rnd(2, 14); const x = y + d, a = x + y; return { textFr: `${name} et ${name2} ont lu ${a} pages en tout. ${name} a lu ${d} pages de plus. Combien de pages ${name} a-t-il lues ?`, answer: x, op: "+", calculation: `Soit x = pages de ${name}, y = pages de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(8, 30), d = rnd(3, 16); const x = y + d, a = x + y; return { textFr: `Deux jardins ont ensemble une surface de ${a} m². Le plus grand est plus vaste de ${d} m². Quelle est la surface du grand jardin ?`, answer: x, op: "+", calculation: `Soit x = grand jardin, y = petit jardin\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(6, 25), d = rnd(2, 12); const x = y + d, a = x + y; return { textFr: `${name} et ${name2} ont en tout ${a} bonbons. ${name} en a ${d} de plus que ${name2}. Combien ${name} en possède-t-il ?`, answer: x, op: "+", calculation: `Soit x = bonbons de ${name}, y = bonbons de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(4, 20), d = rnd(2, 10); const x = y + d, a = x + y; return { textFr: `Deux équipes ont marqué ${a} buts ensemble. L'équipe gagnante a marqué ${d} buts de plus. Combien de buts l'équipe gagnante a-t-elle marqués ?`, answer: x, op: "+", calculation: `Soit x = buts gagnants, y = buts perdants\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(10, 35), d = rnd(4, 18); const x = y + d, a = x + y; return { textFr: `Deux villes sont reliées par une route de ${a} km. La première portion est plus longue de ${d} km. Quelle est la longueur de la première portion ?`, answer: x, op: "+", calculation: `Soit x = 1re portion, y = 2e portion\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(5, 22), d = rnd(3, 14); const x = y + d, a = x + y; return { textFr: `${name} a ${d} livres de plus que ${name2}. Ensemble, ils en ont ${a}. Combien ${name} en a-t-il ?`, answer: x, op: "+", calculation: `Soit x = livres de ${name}, y = livres de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(12, 40), d = rnd(5, 20); const x = y + d, a = x + y; return { textFr: `Deux boulangeries vendent ${a} pains par jour ensemble. La grande en vend ${d} de plus. Combien la grande boulangerie en vend-elle ?`, answer: x, op: "+", calculation: `Soit x = grande boulangerie, y = petite\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(4, 18), d = rnd(2, 8); const x = y + d, a = x + y; return { textFr: `${name} et ${name2} ont fait ${a} km de vélo ensemble. ${name} en a parcouru ${d} de plus. Quelle distance ${name} a-t-il couverte ?`, answer: x, op: "+", calculation: `Soit x = distance de ${name}, y = distance de ${name2}\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    () => { const y = rnd(8, 28), d = rnd(3, 15); const x = y + d, a = x + y; return { textFr: `Deux caisses contiennent ${a} pommes au total. La première contient ${d} pommes de plus. Combien y a-t-il de pommes dans la première caisse ?`, answer: x, op: "+", calculation: `Soit x = 1re caisse, y = 2e caisse\nÉq.1 : x + y = ${a}\nÉq.2 : x − y = ${d}\n→ 2x = ${a + d} → x = ${x}` }; },
+    // ── x + y = a, px + qy = b (count + weighted sum) — 20 templates ─────────
+    () => { const x = rnd(8, 30), y = rnd(5, 25), pa = rnd(10, 20), pb = rnd(5, 9); const a = x + y, b = pa * x + pb * y; return { textFr: `Une salle de spectacle vend des billets adultes à ${pa} fr. et enfants à ${pb} fr. ${a} billets sont vendus pour une recette de ${b} fr. Combien de billets adultes ont été vendus ?`, answer: x, op: "+", calculation: `Soit x = billets adultes, y = billets enfants\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ De Éq.1 : y = ${a} − x\n→ ${pa}x + ${pb}(${a} − x) = ${b}\n→ ${pa - pb}x + ${pb * a} = ${b}\n→ ${pa - pb}x = ${b - pb * a}\n→ x = ${x}` }; },
+    () => { const x = rnd(5, 20), y = rnd(8, 25), pa = rnd(12, 25), pb = rnd(6, 11); const a = x + y, b = pa * x + pb * y; return { textFr: `${name} achète des roses à ${pa} fr. et des tulipes à ${pb} fr. ${name} achète ${a} fleurs et dépense ${b} fr. Combien de roses a-t-il achetées ?`, answer: x, op: "+", calculation: `Soit x = roses, y = tulipes\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a} − x → ${pa}x + ${pb}(${a}−x) = ${b} → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(6, 20), y = rnd(4, 18), pa = rnd(8, 18), pb = rnd(3, 7); const a = x + y, b = pa * x + pb * y; return { textFr: `Un kiosque vend des sandwichs à ${pa} fr. et des boissons à ${pb} fr. En tout, ${a} articles sont vendus pour ${b} fr. Combien de sandwichs ont été vendus ?`, answer: x, op: "+", calculation: `Soit x = sandwichs, y = boissons\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa}x + ${pb}(${a}−x) = ${b} → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(10, 30), y = rnd(5, 20), pa = 2, pb = 1; const a = x + y, b = pa * x + pb * y; return { textFr: `Un bus transporte des adultes qui paient ${pa} fr. et des enfants qui paient ${pb} fr. ${a} passagers paient ${b} fr. en tout. Combien d'adultes y a-t-il ?`, answer: x, op: "+", calculation: `Soit x = adultes, y = enfants\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa}x + (${a}−x) = ${b} → x + ${a} = ${b} → x = ${x}` }; },
+    () => { const x = rnd(5, 18), y = rnd(6, 20), pa = rnd(15, 30), pb = rnd(8, 14); const a = x + y, b = pa * x + pb * y; return { textFr: `Un restaurant propose des plats à ${pa} fr. et des salades à ${pb} fr. ${a} commandes pour ${b} fr. Combien de plats ont été commandés ?`, answer: x, op: "+", calculation: `Soit x = plats, y = salades\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(8, 25), y = rnd(4, 15), pa = rnd(5, 10), pb = rnd(2, 4); const a = x + y, b = pa * x + pb * y; return { textFr: `${name} conditionne des pommes (${pa} fr./kg) et des poires (${pb} fr./kg). ${name} conditionne ${a} kg de fruits pour ${b} fr. Combien de kg de pommes ?`, answer: x, op: "+", calculation: `Soit x = kg pommes, y = kg poires\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(6, 22), y = rnd(4, 18), pa = rnd(50, 100), pb = rnd(20, 45); const a = x + y, b = pa * x + pb * y; return { textFr: `Un hôtel loue des chambres doubles à ${pa} fr. et des chambres simples à ${pb} fr. ${a} chambres sont occupées pour une recette de ${b} fr. Combien de chambres doubles ?`, answer: x, op: "+", calculation: `Soit x = doubles, y = simples\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(10, 35), y = rnd(5, 20), pa = rnd(3, 8), pb = 1; const a = x + y, b = pa * x + pb * y; return { textFr: `Un marché vend des billets à ${pa} fr. (premium) et à ${pb} fr. (standard). ${a} billets vendus, recette de ${b} fr. Combien de billets premium ?`, answer: x, op: "+", calculation: `Soit x = premium, y = standard\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + y = ${b}\n→ (${pa}−1)x = ${b}−${a} → ${pa - 1}x = ${b - a} → x = ${x}` }; },
+    () => { const x = rnd(4, 15), y = rnd(6, 20), pa = rnd(20, 40), pb = rnd(8, 18); const a = x + y, b = pa * x + pb * y; return { textFr: `Un club vend des maillots à ${pa} fr. et des casquettes à ${pb} fr. ${a} articles pour ${b} fr. Combien de maillots ?`, answer: x, op: "+", calculation: `Soit x = maillots, y = casquettes\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(5, 18), y = rnd(8, 22), pa = rnd(10, 20), pb = rnd(4, 9); const a = x + y, b = pa * x + pb * y; return { textFr: `Une fête vend des pizzas à ${pa} fr. et des hot-dogs à ${pb} fr. ${a} ventes pour ${b} fr. Combien de pizzas ont été vendues ?`, answer: x, op: "+", calculation: `Soit x = pizzas, y = hot-dogs\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(6, 20), y = rnd(4, 16), pa = rnd(30, 60), pb = rnd(12, 25); const a = x + y, b = pa * x + pb * y; return { textFr: `Un musée vend des places adultes à ${pa} fr. et enfants à ${pb} fr. ${a} entrées pour ${b} fr. Combien d'adultes ?`, answer: x, op: "+", calculation: `Soit x = adultes, y = enfants\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(8, 24), y = rnd(5, 18), pa = rnd(5, 12), pb = rnd(2, 4); const a = x + y, b = pa * x + pb * y; return { textFr: `${name} achète des cahiers à ${pa} fr. et des crayons à ${pb} fr. ${name} achète ${a} fournitures pour ${b} fr. Combien de cahiers ?`, answer: x, op: "+", calculation: `Soit x = cahiers, y = crayons\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(5, 16), y = rnd(6, 22), pa = rnd(40, 80), pb = rnd(15, 35); const a = x + y, b = pa * x + pb * y; return { textFr: `Un concessionnaire vend des VTT à ${pa} fr. et des trottinettes à ${pb} fr. ${a} ventes pour ${b} fr. Combien de VTT ?`, answer: x, op: "+", calculation: `Soit x = VTT, y = trottinettes\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(10, 28), y = rnd(4, 16), pa = rnd(2, 5), pb = 1; const a = x + y, b = pa * x + pb * y; return { textFr: `Un marché distribue des jetons de ${pa} fr. et de ${pb} fr. ${a} jetons distribués valent ${b} fr. au total. Combien de jetons à ${pa} fr. ?`, answer: x, op: "+", calculation: `Soit x = jetons ${pa} fr., y = jetons ${pb} fr.\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + y = ${b}\n→ (${pa}-1)x = ${b - a} → x = ${x}` }; },
+    () => { const x = rnd(5, 15), y = rnd(8, 20), pa = rnd(6, 14), pb = rnd(2, 5); const a = x + y, b = pa * x + pb * y; return { textFr: `Une cantine vend des menus chauds à ${pa} fr. et des salades à ${pb} fr. ${a} repas servis pour ${b} fr. Combien de menus chauds ?`, answer: x, op: "+", calculation: `Soit x = menus chauds, y = salades\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(6, 18), y = rnd(5, 16), pa = rnd(10, 18), pb = rnd(4, 8); const a = x + y, b = pa * x + pb * y; return { textFr: `Une boutique vend des livres à ${pa} fr. et des BD à ${pb} fr. ${a} achats pour ${b} fr. Combien de livres ?`, answer: x, op: "+", calculation: `Soit x = livres, y = BD\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(4, 14), y = rnd(6, 18), pa = rnd(25, 50), pb = rnd(10, 20); const a = x + y, b = pa * x + pb * y; return { textFr: `${name} collecte des chemises (${pa} fr.) et des pulls (${pb} fr.) pour une vente caritative. ${a} vêtements collectés valent ${b} fr. Combien de chemises ?`, answer: x, op: "+", calculation: `Soit x = chemises, y = pulls\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(5, 20), y = rnd(4, 15), pa = rnd(8, 16), pb = rnd(3, 7); const a = x + y, b = pa * x + pb * y; return { textFr: `Un atelier produit des pièces A (${pa} min/pièce) et des pièces B (${pb} min/pièce). En ${a} pièces, l'atelier utilise ${b} minutes. Combien de pièces A ?`, answer: x, op: "+", calculation: `Soit x = pièces A, y = pièces B\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    () => { const x = rnd(6, 22), y = rnd(5, 18), pa = rnd(20, 45), pb = rnd(8, 18); const a = x + y, b = pa * x + pb * y; return { textFr: `Une salle vend ${a} places : des sièges de luxe à ${pa} fr. et des sièges standards à ${pb} fr. La recette est de ${b} fr. Combien de sièges de luxe ?`, answer: x, op: "+", calculation: `Soit x = luxe, y = standard\nÉq.1 : x + y = ${a}\nÉq.2 : ${pa}x + ${pb}y = ${b}\n→ y = ${a}−x → ${pa - pb}x = ${b - pb * a} → x = ${x}` }; },
+    // ── x + y = a, x = ky (one is multiple of other) — 10 templates ──────────
+    () => { const k = rnd(2, 4), y = rnd(3, 15); const x = k * y, a = x + y; return { textFr: `${name} a ${k} fois plus de stickers que ${name2}. Ensemble, ils en ont ${a}. Combien ${name} en a-t-il ?`, answer: x, op: "×", calculation: `Soit x = stickers de ${name}, y = stickers de ${name2}\nx = ${k}y et x + y = ${a}\n→ ${k}y + y = ${a} → ${k + 1}y = ${a} → y = ${y} → x = ${k} × ${y} = ${x}` }; },
+    () => { const k = rnd(2, 5), y = rnd(4, 12); const x = k * y, a = x + y; return { textFr: `Dans une ferme, le nombre de poules est ${k} fois le nombre de lapins. Il y a ${a} animaux au total. Combien de poules ?`, answer: x, op: "×", calculation: `Soit x = poules, y = lapins\nx = ${k}y et x + y = ${a}\n→ ${k}y + y = ${a} → ${k + 1}y = ${a} → y = ${y} → x = ${x}` }; },
+    () => { const k = 3, y = rnd(5, 18); const x = k * y, a = x + y; return { textFr: `${name} a trois fois plus de livres que ${name2}. Ensemble, ils en ont ${a}. Combien de livres ${name} possède-t-il ?`, answer: x, op: "×", calculation: `Soit x = livres de ${name}, y = livres de ${name2}\nx = 3y et x + y = ${a}\n→ 4y = ${a} → y = ${y} → x = 3 × ${y} = ${x}` }; },
+    () => { const k = 2, y = rnd(6, 20); const x = k * y, a = x + y; return { textFr: `${name} a le double de billes de ${name2}. Ensemble, ils en ont ${a}. Combien ${name} en a-t-il ?`, answer: x, op: "×", calculation: `Soit x = billes de ${name}, y = billes de ${name2}\nx = 2y et x + y = ${a}\n→ 3y = ${a} → y = ${y} → x = 2 × ${y} = ${x}` }; },
+    () => { const k = rnd(2, 4), y = rnd(5, 16); const x = k * y, a = x + y; return { textFr: `Un grand contenant a ${k} fois la capacité d'un petit. Ensemble, ils contiennent ${a} litres. Quelle est la capacité du grand contenant ?`, answer: x, op: "×", calculation: `Soit x = grand, y = petit\nx = ${k}y et x + y = ${a}\n→ ${k + 1}y = ${a} → y = ${y} → x = ${k} × ${y} = ${x}` }; },
+    () => { const k = rnd(2, 5), y = rnd(3, 10); const x = k * y, a = x + y; return { textFr: `Dans une classe, le nombre de filles est ${k} fois le nombre de garçons. Il y a ${a} élèves en tout. Combien de filles ?`, answer: x, op: "×", calculation: `Soit x = filles, y = garçons\nx = ${k}y et x + y = ${a}\n→ ${k + 1}y = ${a} → y = ${y} → x = ${k} × ${y} = ${x}` }; },
+    () => { const k = 4, y = rnd(4, 10); const x = k * y, a = x + y; return { textFr: `Un champ a quatre fois la surface d'un jardin. Ensemble, ils font ${a} ares. Quelle est la surface du champ ?`, answer: x, op: "×", calculation: `Soit x = champ, y = jardin\nx = 4y et x + y = ${a}\n→ 5y = ${a} → y = ${y} → x = 4 × ${y} = ${x}` }; },
+    () => { const k = rnd(2, 3), y = rnd(8, 22); const x = k * y, a = x + y; return { textFr: `Le plus rapide des deux coureurs met ${k} fois moins de temps que le plus lent. Ensemble, ils utilisent ${a} minutes. Combien de minutes le plus rapide met-il ?`, answer: y, op: "×", calculation: `Soit x = temps rapide, y = temps lent\ny = ${k}x et x + y = ${a}\n→ x + ${k}x = ${a} → ${k + 1}x = ${a} → x = ${y}` }; },
+    () => { const k = rnd(2, 4), y = rnd(4, 14); const x = k * y, a = x + y; return { textFr: `${name} a ${k} fois plus de photos que ${name2}. Ils ont ${a} photos au total. Combien ${name} en a-t-il ?`, answer: x, op: "×", calculation: `Soit x = photos de ${name}, y = photos de ${name2}\nx = ${k}y et x + y = ${a}\n→ ${k + 1}y = ${a} → y = ${y} → x = ${k} × ${y} = ${x}` }; },
+    () => { const k = 3, y = rnd(6, 15); const x = k * y, a = x + y; return { textFr: `Un entrepôt A stocke trois fois plus de cartons que l'entrepôt B. Les deux entrepôts contiennent ${a} cartons. Combien y a-t-il de cartons dans l'entrepôt A ?`, answer: x, op: "×", calculation: `Soit x = entrepôt A, y = entrepôt B\nx = 3y et x + y = ${a}\n→ 4y = ${a} → y = ${y} → x = 3 × ${y} = ${x}` }; },
+    // ── px + qy = a, rx + sy = b (two weighted conditions) — 8 templates ─────
+    () => { const x = rnd(4, 12), y = rnd(3, 10); const p = rnd(2, 5), q = rnd(3, 7), r = rnd(1, 3), s = rnd(4, 8); const a = p * x + q * y, b = r * x + s * y; return { textFr: `Une recette de tarte nécessite ${p} œufs et ${q} dl de lait. Une recette de crêpes nécessite ${r} œuf et ${s} dl de lait. En faisant ${x} tartes et ${y} lots de crêpes, on utilise ${a} œufs et ${b} dl de lait. Combien de tartes ?`, answer: x, op: "×", calculation: `Soit x = tartes, y = lots crêpes\nÉq.1 : ${p}x + ${q}y = ${a}\nÉq.2 : ${r}x + ${s}y = ${b}\n→ Résolution par substitution → x = ${x}` }; },
+    () => { const x = rnd(3, 10), y = rnd(4, 12); const p = rnd(2, 4), q = rnd(1, 3), r = rnd(3, 6), s = rnd(2, 5); const a = p * x + q * y, b = r * x + s * y; return { textFr: `Pour construire, on utilise ${p} sacs de ciment et ${q} sacs de sable par mur intérieur, et ${r} sacs de ciment et ${s} sacs de sable par mur extérieur. ${x} murs intérieurs et ${y} murs extérieurs utilisent ${a} sacs de ciment et ${b} sacs de sable. Combien de murs intérieurs ?`, answer: x, op: "×", calculation: `Soit x = murs int., y = murs ext.\nÉq.1 : ${p}x + ${r}y = ${a}\nÉq.2 : ${q}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(3, 9), y = rnd(4, 11); const h1 = rnd(3, 6), h2 = rnd(2, 4), r1 = rnd(8, 15), r2 = rnd(4, 8); const a = h1 * x + h2 * y, b = r1 * x + r2 * y; return { textFr: `${name} travaille ${h1} h/j sur le projet A et ${h2} h/j sur le projet B. ${name2} travaille ${r1} min/j sur le projet A et ${r2} min/j sur le projet B. En ${x} jours sur A et ${y} jours sur B, ${name} fait ${a} heures et ${name2} fait ${b} minutes. Combien de jours sur A ?`, answer: x, op: "×", calculation: `Soit x = jours A, y = jours B\nÉq.1 : ${h1}x + ${h2}y = ${a}\nÉq.2 : ${r1}x + ${r2}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(2, 8), y = rnd(3, 9); const p = rnd(3, 6), q = rnd(2, 4), r = rnd(1, 3), s = rnd(4, 7); const a = p * x + q * y, b = r * x + s * y; return { textFr: `Un magasin mélange du café A (${p} g/cuill.) et du café B (${q} g/cuill.) pour la boisson froide, et du café A (${r} g/cuill.) et du café B (${s} g/cuill.) pour la boisson chaude. ${x} boissons froides et ${y} boissons chaudes utilisent ${a} g du café A et ${b} g du café B. Combien de boissons froides ?`, answer: x, op: "×", calculation: `Soit x = boissons froides, y = boissons chaudes\nÉq.1 : ${p}x + ${r}y = ${a}\nÉq.2 : ${q}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(4, 10), y = rnd(3, 9); const p = rnd(2, 5), q = rnd(1, 3), r = rnd(3, 6), s = rnd(2, 4); const a = p * x + q * y, b = r * x + s * y; return { textFr: `Deux types de machines produisent des pièces. La machine X produit ${p} pièces/min et consomme ${r} W. La machine Y produit ${q} pièces/min et consomme ${s} W. En ${x} min de X et ${y} min de Y, on obtient ${a} pièces et on consomme ${b} W. Combien de minutes sur la machine X ?`, answer: x, op: "×", calculation: `Soit x = min machine X, y = min machine Y\nÉq.1 : ${p}x + ${q}y = ${a}\nÉq.2 : ${r}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(3, 8), y = rnd(4, 10); const p = 5, q = 3, r = 2, s = 4; const a = p * x + q * y, b = r * x + s * y; return { textFr: `Une équipe de peintres : les peintres de type A couvrent ${p} m²/h et utilisent ${r} litres/h de peinture. Les peintres de type B couvrent ${q} m²/h et utilisent ${s} litres/h. En ${x} h de peintres A et ${y} h de peintres B, on couvre ${a} m² et consomme ${b} litres. Combien d'heures de peintres A ?`, answer: x, op: "×", calculation: `Soit x = h peintres A, y = h peintres B\nÉq.1 : ${p}x + ${q}y = ${a}\nÉq.2 : ${r}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(2, 7), y = rnd(3, 8); const p = rnd(4, 8), q = rnd(2, 4), r = rnd(1, 3), s = rnd(5, 9); const a = p * x + q * y, b = r * x + s * y; return { textFr: `Deux types de véhicules transportent des marchandises. Le camion transporte ${p} tonnes et utilise ${r} chauffeurs. Le fourgon transporte ${q} tonnes et utilise ${s} chauffeurs. ${x} camions et ${y} fourgons transportent ${a} tonnes avec ${b} chauffeurs. Combien de camions ?`, answer: x, op: "×", calculation: `Soit x = camions, y = fourgons\nÉq.1 : ${p}x + ${q}y = ${a}\nÉq.2 : ${r}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+    () => { const x = rnd(3, 9), y = rnd(2, 7); const p = rnd(3, 6), q = rnd(2, 5), r = rnd(4, 8), s = rnd(1, 3); const a = p * x + q * y, b = r * x + s * y; return { textFr: `${name} achète ${x} chemises et ${y} pantalons. Chaque chemise pèse ${p} g et chaque pantalon pèse ${q} g ; la valeur en points de fidélité est ${r} par chemise et ${s} par pantalon. Le colis pèse ${a} g et rapporte ${b} points. Combien de chemises ?`, answer: x, op: "×", calculation: `Soit x = chemises, y = pantalons\nÉq.1 : ${p}x + ${q}y = ${a}\nÉq.2 : ${r}x + ${s}y = ${b}\n→ Résolution → x = ${x}` }; },
+  ];
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const q = templates[rnd(0, templates.length - 1)]!();
+    if (Number.isFinite(q.answer) && q.answer > 0) return q;
+  }
+  return templates[0]!();
+}
+
 function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
   if (level === "a1" && exNum === 1) {
     const first = genA24ContextProblem();
@@ -1429,6 +1627,13 @@ function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
     const first = genA64ProportionProblem(lev);
     let second = genA64ProportionProblem(lev);
     for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA64ProportionProblem(lev);
+    return { exNum, level, questions: [first, second] };
+  }
+  if (level === "eq_e" || level === "eq_m" || level === "eq_h") {
+    const lev = level === "eq_e" ? "e" : level === "eq_m" ? "m" : "h";
+    const first = genA105EquationProblem(lev);
+    let second = genA105EquationProblem(lev);
+    for (let attempt = 0; attempt < 10 && second.textFr === first.textFr; attempt++) second = genA105EquationProblem(lev);
     return { exNum, level, questions: [first, second] };
   }
   const addPool = WP_ADD_BY_LEVEL[level];
@@ -5426,6 +5631,14 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push(genLinearCombinationStep(lesson));
       steps.push({ kind: "eval_start", lesson });
       steps.push(genLinearCombinationStep(lesson));
+    } else if (sid === "A10-5") {
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_h", 3) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_e", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_m", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("eq_h", 3) });
     } else if (GENERATED_ALGEBRA_LESSONS.has(sid)) {
       if (sid === "A9-1") {
         steps.push(genMonomialGroupStep(lesson));
@@ -5474,7 +5687,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     l.submoduleId === "G5-10" ||
     l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||
-    l.submoduleId === "A10-3" || l.submoduleId === "A10-4" ||
+    l.submoduleId === "A10-3" || l.submoduleId === "A10-4" || l.submoduleId === "A10-5" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
     GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)
