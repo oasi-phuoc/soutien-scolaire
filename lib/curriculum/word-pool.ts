@@ -31,6 +31,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "abeille",    phonemes: ["/a/", "/b/"] },
   { label: "aigle",      phonemes: ["/e/", "/g/", "/l/"] },
   { label: "armoire",    phonemes: ["/a/", "/r/", "/m/", "/wa/"] },
+  { label: "agenda",     phonemes: ["/a/", "/ʒ/", "/d/", "/n/"] },
   // ── B ──────────────────────────────────────────────────────────────────────
   { label: "ballon",     phonemes: ["/b/", "/a/", "/l/"] },
   { label: "banane",     phonemes: ["/b/", "/a/", "/n/"] },
@@ -41,6 +42,10 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "bureau",     phonemes: ["/b/", "/y/", "/r/", "/o/"] },
   { label: "balle",      phonemes: ["/b/", "/a/", "/l/"] },
   { label: "baleine",    phonemes: ["/b/", "/a/", "/l/", "/n/"] },
+  { label: "basketball", phonemes: ["/b/", "/a/", "/s/", "/k/", "/t/", "/l/"] },
+  { label: "billard",    phonemes: ["/b/", "/i/", "/a/", "/r/"] },
+  { label: "bouche",     phonemes: ["/b/"] },
+  { label: "bouquet",    phonemes: ["/b/", "/k/", "/e/"] },
   // ── K / C ──────────────────────────────────────────────────────────────────
   { label: "café",       phonemes: ["/k/", "/a/", "/f/", "/e/"] },
   { label: "canard",     phonemes: ["/k/", "/a/", "/n/", "/r/"] },
@@ -58,6 +63,14 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "cochon",     phonemes: ["/k/", "/o/"] },
   { label: "coq",        phonemes: ["/k/", "/o/"] },
   { label: "cygne",      phonemes: ["/s/", "/i/", "/n/"] },
+  { label: "cahier",     phonemes: ["/k/", "/a/", "/i/", "/r/"] },
+  { label: "chaud",      phonemes: ["/o/", "/d/"] },                     // au=/o/, ch non enseigné
+  { label: "ciseaux",    phonemes: ["/s/", "/i/", "/z/", "/o/"] },
+  { label: "classeur",   phonemes: ["/k/", "/l/", "/a/", "/s/", "/r/"] },
+  { label: "colle",      phonemes: ["/k/", "/o/"] },
+  { label: "compas",     phonemes: ["/k/", "/o/", "/m/", "/p/", "/a/"] },
+  { label: "cou",        phonemes: ["/k/"] },
+  { label: "course",     phonemes: ["/k/", "/r/", "/s/"] },
   // ── D ──────────────────────────────────────────────────────────────────────
   { label: "dauphin",    phonemes: ["/d/", "/o/", "/f/"] },           // au=/o/, ph=/f/
   { label: "domino",     phonemes: ["/d/", "/o/", "/m/", "/i/", "/n/"] },
@@ -65,6 +78,9 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "drapeau",    phonemes: ["/d/", "/r/", "/a/", "/p/", "/o/"] },
   { label: "dodo",       phonemes: ["/d/", "/o/"] },
   { label: "danse",      phonemes: ["/d/", "/a/", "/s/"] },
+  { label: "doigt",      phonemes: ["/d/", "/wa/"] },                    // oi=/wa/
+  { label: "dos",        phonemes: ["/d/", "/o/"] },
+  { label: "doux",       phonemes: ["/d/"] },
   // ── F ──────────────────────────────────────────────────────────────────────
   { label: "farine",     phonemes: ["/f/", "/a/", "/r/", "/i/", "/n/"] },
   { label: "flamme",     phonemes: ["/f/", "/l/", "/a/", "/m/"] },
