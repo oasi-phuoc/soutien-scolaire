@@ -1050,7 +1050,8 @@ export function builtInVocabDefinition(word: string, lang: PivotCode): string | 
     ?? V3_DEFINITIONS[key]?.[lang]
     ?? V4_DEFINITIONS[key]?.[lang]
     ?? V5_DEFINITIONS[key]?.[lang]
-    ?? V6_DEFINITIONS[key]?.[lang];
+    ?? V6_DEFINITIONS[key]?.[lang]
+    ?? V7_DEFINITIONS[key]?.[lang];
 }
 
 const V2_DEFINITIONS: Record<string, DefinitionMap> = {
@@ -1447,3 +1448,23 @@ const V6_DEFINITIONS: Record<string, DefinitionMap> = {
   culotte: d("Underwear for the lower body.", "ملابس داخلية لأسفل الجسم.", "لباس زیر پایین بدن.", "Roupa interior da parte inferior do corpo.", "Dhar hoose oo qaybta hoose ah.", "ናይ ታሕተዋይ ክፋል ውሽጢ ክዳን።", "Alt beden iç çamaşırı.", "د بدن ښکته برخې زيرجامه.", "Нижня білизна."),
   débardeur: d("A sleeveless top.", "لباس علوي بلا أكمام.", "لباس بدون آستین.", "Camisola sem mangas.", "Shaati aan gacmo lahayn.", "እጅገ ዘይብሉ ላዕለዋይ ክዳን።", "Kolsuz üst.", "بې لستوڼي کالی.", "Майка без рукавів."),
 };
+
+const bakeryDef = d("A food sold in a bakery.", "طعام يُباع في المخبز.", "خوراکی که در نانوایی فروخته می‌شود.", "Alimento vendido numa padaria.", "Cunto lagu iibiyo rooti-dubaha.", "ኣብ መጋገሪ ዝሽየጥ መግቢ።", "Fırında satılan yiyecek.", "هغه خواړه چې په نانوايي کې پلورل کېږي.", "Їжа, яку продають у пекарні.");
+const cookingActionDef = d("An action used to prepare food.", "فعل يُستعمل لتحضير الطعام.", "کاری برای آماده کردن غذا.", "Ação usada para preparar comida.", "Ficil cunto lagu diyaariyo.", "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", "Yemek hazırlamak için yapılan iş.", "هغه کار چې د خوړو د تيارولو لپاره کېږي.", "Дія для приготування їжі.");
+const fruitDef = d("A fruit that people eat.", "فاكهة يأكلها الناس.", "میوه‌ای که مردم می‌خورند.", "Fruta que as pessoas comem.", "Miro dadku cunaan.", "ሰባት ዝበልዕዎ ፍረ።", "İnsanların yediği meyve.", "هغه مېوه چې خلک يې خوري.", "Фрукт, який їдять люди.");
+const vegetableDef = d("A vegetable used in food.", "خضار يُستعمل في الطعام.", "سبزی‌ای که در غذا استفاده می‌شود.", "Legume usado na comida.", "Khudaar cunto lagu isticmaalo.", "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", "Yemekte kullanılan sebze.", "سبزي چې په خوړو کې کارېږي.", "Овоч, який використовують у їжі.");
+const quantityDef = d("A word used to measure or contain food.", "كلمة لقياس الطعام أو حفظه.", "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", "Palavra para medir ou conter alimentos.", "Eray lagu cabbiro ama lagu hayo cunto.", "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", "Yiyeceği ölçmek veya koymak için kelime.", "د خوړو د اندازه کولو يا ساتلو کلمه.", "Слово для вимірювання або зберігання їжі.");
+const ingredientDef = d("A food item used in a recipe.", "عنصر غذائي يُستعمل في وصفة.", "ماده غذایی که در دستور غذا استفاده می‌شود.", "Ingrediente usado numa receita.", "Wax cunto ah oo lagu isticmaalo cunto-karis.", "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", "Tarifte kullanılan malzeme.", "هغه خوراکي مواد چې په پخلي کې کارېږي.", "Інгредієнт для рецепта.");
+const kitchenToolDef = d("A tool used in the kitchen.", "أداة تُستعمل في المطبخ.", "وسیله‌ای که در آشپزخانه استفاده می‌شود.", "Utensílio usado na cozinha.", "Qalab jikada lagu isticmaalo.", "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", "Mutfakta kullanılan araç.", "هغه اله چې په پخلنځي کې کارېږي.", "Інструмент для кухні.");
+const restaurantDef = d("A word used at a restaurant.", "كلمة تُستعمل في المطعم.", "واژه‌ای که در رستوران استفاده می‌شود.", "Palavra usada no restaurante.", "Eray makhaayad lagu isticmaalo.", "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", "Restoranda kullanılan kelime.", "کلمه چې په رستورانت کې کارېږي.", "Слово, яке використовують у ресторані.");
+
+const V7_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
+  ...["pain", "baguette", "sandwich", "viennoiserie", "croissant", "pain au chocolat", "brioche", "biscuit", "pâtisserie", "gâteau", "tarte", "éclair"].map((word) => [word, bakeryDef]),
+  ...["cuisiner", "couper", "mélanger", "cuire", "bouillir", "frire", "rôtir", "saler", "goûter", "laver", "éplucher", "verser", "réchauffer"].map((word) => [word, cookingActionDef]),
+  ...["pomme", "poire", "banane", "orange", "fraise", "framboise", "raisin", "kiwi", "pêche", "abricot", "cerise", "prune", "ananas", "citron", "melon", "pastèque", "mangue"].map((word) => [word, fruitDef]),
+  ...["carotte", "tomate", "salade", "concombre", "pomme de terre", "oignon", "échalote", "ail", "poivron", "piment", "courgette", "aubergine", "brocoli", "chou", "épinard", "asperge", "betterave", "navet", "radis", "haricot", "maïs", "champignon"].map((word) => [word, vegetableDef]),
+  ...["gramme", "kilogramme", "boîte", "paquet", "sachet", "pincée", "tranche", "part", "morceau", "bol", "bouteille", "cuillère"].map((word) => [word, quantityDef]),
+  ...["ingrédient", "farine", "lait", "œuf", "beurre", "sucre", "sel", "poivre", "épice", "curry", "paprika", "herbe"].map((word) => [word, ingredientDef]),
+  ...["ustensile", "casserole", "poêle", "planche", "rouleau", "doseur", "spatule", "louche"].map((word) => [word, kitchenToolDef]),
+  ...["service", "cuisine", "table", "chaise", "assiette", "couvert", "couteau", "fourchette", "verre", "serviette", "plat", "dessert", "menu", "addition", "boisson"].map((word) => [word, restaurantDef]),
+]);
