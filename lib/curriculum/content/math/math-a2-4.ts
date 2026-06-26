@@ -86,6 +86,16 @@ export const MATH_A2_4_LESSON: MathSubmoduleLesson = {
         "Le mot moins ne veut pas toujours dire soustraction.",
         "Il faut toujours regarder ce que la question demande.",
       ] },
+      { type: "table",
+        headersFr: ["Situation", "Question", "Opération"],
+        accentHeader: true,
+        rows: [
+          ["Alona a 5 francs de plus qu'Ali. Ali a 10 francs.", "Combien Alona a ?", "10 + 5"],
+          ["Ali a 5 francs de moins qu'Alona. Ali a 10 francs.", "Combien Alona a ?", "10 + 5"],
+          ["Alona a 5 francs de moins qu'Ali. Ali a 10 francs.", "Combien Alona a ?", "10 − 5"],
+          ["Ali a 5 francs de plus qu'Alona. Ali a 10 francs.", "Combien Alona a ?", "10 − 5"],
+        ],
+      },
       { type: "heading", fr: "Petite stratégie", black: true },
       { type: "section", labelFr: "Avant de calculer", itemsFr: [
         "Je souligne la quantité connue.",
