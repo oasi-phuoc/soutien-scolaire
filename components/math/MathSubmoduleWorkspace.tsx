@@ -117,7 +117,7 @@ type WorkspaceStep =
   | { kind: "pct_table_ex"; exNum: number }
   | { kind: "pct_word_ex"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
-  | { kind: "pool_group"; items: MathExerciseItem[]; exNum: number }
+  | { kind: "pool_group"; pool: MathExerciseItem[]; count: number; exNum: number }
   | { kind: "g1_name_to_svg"; exNum: number }
   | { kind: "g1_definition_match"; exNum: number }
   | { kind: "g1_anagram"; exNum: number }
@@ -568,16 +568,14 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "g3_area", exNum: 4, shapeKind, mode: "missing", decimals: true });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-8") {
-    // Training: 3 grouped screens (1 per pool), 2 questions each
+    // Training: 3 grouped screens (1 per pool), 2 questions each — pool passed so refresh picks new items
     lesson.exercisePools?.forEach((pool, pi) => {
-      const picked = shufflePick(pool, Math.min(2, pool.length));
-      steps.push({ kind: "pool_group", items: picked, exNum: pi + 1 });
+      steps.push({ kind: "pool_group", pool, count: 2, exNum: pi + 1 });
     });
     steps.push({ kind: "eval_start" });
     // Evaluation: 3 grouped screens (1 per pool), 2 questions each
     lesson.exercisePools?.forEach((pool, pi) => {
-      const picked = shufflePick(pool, Math.min(2, pool.length));
-      steps.push({ kind: "pool_group", items: picked, exNum: pi + 1 });
+      steps.push({ kind: "pool_group", pool, count: 2, exNum: pi + 1 });
     });
     steps.push({ kind: "results" });
   } else if (lesson.exercisePools && lesson.exercisePools.length > 0) {
@@ -1668,19 +1666,23 @@ function getWorkspaceStepHint(step: WorkspaceStep | undefined): string | undefin
   return undefined;
 }
 
-const MATH_TEXT_INPUT_POOL = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
+const MATH_TEXT_INPUT_POOL = "w-28 px-0 pb-2 text-sm rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 
 function PoolGroupExercise({
   exNum,
-  items,
+  pool,
+  count,
   validateCommand,
   onValidated,
 }: {
   exNum: number;
-  items: MathExerciseItem[];
+  pool: MathExerciseItem[];
+  count: number;
   validateCommand: number;
   onValidated: (ok: boolean, correct: number, total: number) => void;
 }) {
+  // Items picked fresh on every mount (new random questions on refresh)
+  const [items] = React.useState<MathExerciseItem[]>(() => shufflePick(pool, Math.min(count, pool.length)));
   const [answers, setAnswers] = React.useState<string[]>(() => Array(items.length).fill(""));
   const [validated, setValidated] = React.useState(false);
   const [results, setResults] = React.useState<boolean[]>([]);
@@ -1700,38 +1702,51 @@ function PoolGroupExercise({
 
   return (
     <div className="space-y-5">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Résolvez les problèmes. Écrivez uniquement la réponse.</p>
+      </div>
+      <div className="space-y-6">
         {items.map((item, i) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] : null;
           const isWrong = ok === false;
           return (
-            <div key={i} className="space-y-2">
-              <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
-                {i + 1}. {item.promptFr}
-              </p>
-              {isWrong ? (
-                <div className={`w-full ${MATH_TEXT_INPUT_POOL} border-amber-500 flex flex-col items-start justify-center px-4 py-2`}>
-                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
-                  <span className="text-xs font-bold leading-none text-amber-600">{item.acceptable[0]}</span>
-                </div>
-              ) : (
-                <input
-                  type="text"
-                  inputMode={item.type === "number" ? "decimal" : "text"}
-                  value={v}
-                  disabled={validated}
-                  onChange={e => {
-                    const val = item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value;
-                    setAnswers(prev => prev.map((a, j) => j === i ? val : a));
-                  }}
-                  placeholder="Votre réponse…"
-                  className={`w-full px-4 py-3 ${MATH_TEXT_INPUT_POOL}`}
-                />
-              )}
-              {ok === true && (
-                <p className="text-xs font-medium text-green-600">✓ Correct</p>
+            <div key={item.id} className="space-y-3">
+              {/* Question frame — same as WordProblemsExercise */}
+              <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{item.promptFr}</p>
+              </div>
+              {/* Answer row */}
+              <div className="flex items-center gap-3 pl-2">
+                <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
+                {isWrong ? (
+                  <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{item.acceptable[0]}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode={item.type === "number" ? "decimal" : "text"}
+                    value={v}
+                    disabled={validated}
+                    onChange={e => {
+                      const val = item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value;
+                      setAnswers(prev => prev.map((a, j) => j === i ? val : a));
+                    }}
+                    className={MATH_TEXT_INPUT_POOL}
+                  />
+                )}
+                {ok === true && (
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
+                )}
+              </div>
+              {/* Developed calculation shown after validation (from hintFr) */}
+              {validated && item.hintFr && (
+                <p className="mt-1 pl-2 text-xs text-[var(--color-text-secondary)]">
+                  Calcul : <span className="font-mono text-[var(--color-text-primary)]">{item.hintFr}</span>
+                </p>
               )}
             </div>
           );
@@ -2127,7 +2142,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     if (step.kind === "g1_shape_qa") return <G1ShapeQAExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pool_group") return <PoolGroupExercise exNum={step.exNum} items={step.items} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pool_group") return <PoolGroupExercise exNum={step.exNum} pool={step.pool} count={step.count} validateCommand={validateCmd} onValidated={onVld} />;
     return null;
   }
 
@@ -2737,7 +2752,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <PoolGroupExercise
           key={exKey}
           exNum={currentStep.exNum}
-          items={currentStep.items}
+          pool={currentStep.pool}
+          count={currentStep.count}
           validateCommand={validateCommand}
           onValidated={handleCustomValidated}
         />
