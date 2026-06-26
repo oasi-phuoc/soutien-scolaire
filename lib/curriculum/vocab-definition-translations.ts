@@ -1051,7 +1051,8 @@ export function builtInVocabDefinition(word: string, lang: PivotCode): string | 
     ?? V4_DEFINITIONS[key]?.[lang]
     ?? V5_DEFINITIONS[key]?.[lang]
     ?? V6_DEFINITIONS[key]?.[lang]
-    ?? V7_DEFINITIONS[key]?.[lang];
+    ?? V7_DEFINITIONS[key]?.[lang]
+    ?? V8_DEFINITIONS[key]?.[lang];
 }
 
 const V2_DEFINITIONS: Record<string, DefinitionMap> = {
@@ -1467,4 +1468,16 @@ const V7_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["ingrédient", "farine", "lait", "œuf", "beurre", "sucre", "sel", "poivre", "épice", "curry", "paprika", "herbe"].map((word) => [word, ingredientDef]),
   ...["ustensile", "casserole", "poêle", "planche", "rouleau", "doseur", "spatule", "louche"].map((word) => [word, kitchenToolDef]),
   ...["service", "cuisine", "table", "chaise", "assiette", "couvert", "couteau", "fourchette", "verre", "serviette", "plat", "dessert", "menu", "addition", "boisson"].map((word) => [word, restaurantDef]),
+]);
+
+const bodyPartDef = d("A part of the human body.", "جزء من جسم الإنسان.", "بخشی از بدن انسان.", "Parte do corpo humano.", "Qayb ka mid ah jirka bini'aadamka.", "ክፋል ሰብነት ሰብ።", "İnsan vücudunun bir bölümü.", "د انسان د بدن يوه برخه.", "Частина людського тіла.");
+const illnessDef = d("A health problem or symptom.", "مشكلة صحية أو عَرَض.", "مشکل سلامتی یا نشانه بیماری.", "Problema de saúde ou sintoma.", "Dhibaato caafimaad ama calaamad.", "ጸገም ጥዕና ወይ ምልክት።", "Sağlık sorunu veya belirti.", "روغتيايي ستونزه يا نښه.", "Проблема зі здоров’ям або симптом.");
+const medicalWorkerDef = d("A person or place connected with health care.", "شخص أو مكان مرتبط بالرعاية الصحية.", "فرد یا جایی مربوط به مراقبت سلامت.", "Pessoa ou lugar ligado aos cuidados de saúde.", "Qof ama meel la xiriirta daryeel caafimaad.", "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", "Sağlık bakımıyla ilgili kişi veya yer.", "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", "Людина або місце, пов’язане з медичною допомогою.");
+const medicineDef = d("A product or object used for health care.", "منتج أو شيء يُستعمل للعلاج.", "محصول یا وسیله‌ای برای مراقبت سلامتی.", "Produto ou objeto usado nos cuidados de saúde.", "Shey ama daawo loo isticmaalo daryeel caafimaad.", "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", "Sağlık bakımında kullanılan ürün veya nesne.", "محصول يا شی چې د روغتيا لپاره کارېږي.", "Засіб або предмет для медичного догляду.");
+
+const V8_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
+  ...["tête", "bras", "main", "doigt", "jambe", "pied", "dos", "ventre", "genou", "épaule", "cou", "nez", "bouche", "œil", "oreille", "dent"].map((word) => [word, bodyPartDef]),
+  ...["rhume", "grippe", "fièvre", "douleur", "toux", "allergie", "coupure", "brûlure", "blessure", "fracture", "nausée"].map((word) => [word, illnessDef]),
+  ...["médecin", "infirmier", "pharmacien", "dentiste", "ophtalmologue", "pédiatre", "chirurgien", "urgentiste", "kinésithérapeute", "salle d'attente", "consultation", "rendez-vous"].map((word) => [word, medicalWorkerDef]),
+  ...["médicament", "ordonnance", "sirop", "comprimé", "gélule", "pommade", "crème", "pansement", "thermomètre", "spray", "goutte", "pharmacie", "dosette", "vitamine", "boîte"].map((word) => [word, medicineDef]),
 ]);
