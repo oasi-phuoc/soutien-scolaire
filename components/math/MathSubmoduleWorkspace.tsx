@@ -1678,7 +1678,7 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
   );
 }
 
-export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {
+export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode, isAdmin }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
   const lesson = getLessonBySubmoduleId(submoduleId ?? "");
   const pivot = usePivotLang();
@@ -2245,8 +2245,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         </div>
       )}
 
-      {/* Print config button — floated right, only on theory step */}
-      {currentStep?.kind === "theory" && !isInEvalExercises && (
+      {/* Print config button — floated right, only on theory step, only for admin */}
+      {isAdmin && currentStep?.kind === "theory" && !isInEvalExercises && (
         <div className="float-right ml-2" data-no-print>
           <button
             type="button"

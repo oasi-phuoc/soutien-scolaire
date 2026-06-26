@@ -8,12 +8,20 @@ import {
   getLessonBySubmoduleId,
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = { params: Promise<{ moduleId: string }>; searchParams: Promise<{ eval?: string }> };
 
 export default async function MathModulePage({ params, searchParams }: Props) {
   const { moduleId } = await params;
   const { eval: evalParam } = await searchParams;
+
+  const supabase = await createSupabaseServerClient();
+  let isAdmin = false;
+  if (supabase) {
+    const { data: myRole } = await supabase.rpc("get_my_role");
+    isAdmin = myRole === "admin";
+  }
   const upper = moduleId.toUpperCase();
 
   // If it's a module ID (A4, G1…), redirect to its first submodule
@@ -64,7 +72,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
           </h1>
         </div>
       </header>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} startAtEval={evalParam === "1"} />
+      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} startAtEval={evalParam === "1"} isAdmin={isAdmin} />
     </main>
   );
 }

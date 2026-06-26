@@ -202,12 +202,29 @@ export const MATH_A3_7_LESSON: MathSubmoduleLesson = {
             ] },
             { type: "heading", fr: "Double, triple et quadruple" },
             { type: "plain", fr: "Ces termes sont utilisés pour des multiplications." },
-            { type: "plain", fr: "Pour obtenir le double d'un nombre, on le multiplie par **2**." },
-            { type: "plain", fr: "Exemple : le double de 4 est 8, car **4 × 2 = 8**." },
-            { type: "plain", fr: "Pour obtenir le triple d'un nombre, on le multiplie par **3**." },
-            { type: "plain", fr: "Exemple : le triple de 4 est 12, car **4 × 3 = 12**." },
-            { type: "plain", fr: "Pour obtenir le quadruple d'un nombre, on le multiplie par **4**." },
-            { type: "plain", fr: "Exemple : le quadruple de 4 est 16, car **4 × 4 = 16**." },
+            { type: "theory_tabs", tabs: [
+              {
+                label: "Double",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir le double d'un nombre, on le multiplie par **2**." },
+                  { type: "plain", fr: "Exemple : le double de 4 est 8, car **4 × 2 = 8**." },
+                ],
+              },
+              {
+                label: "Triple",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir le triple d'un nombre, on le multiplie par **3**." },
+                  { type: "plain", fr: "Exemple : le triple de 4 est 12, car **4 × 3 = 12**." },
+                ],
+              },
+              {
+                label: "Quadruple",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir le quadruple d'un nombre, on le multiplie par **4**." },
+                  { type: "plain", fr: "Exemple : le quadruple de 4 est 16, car **4 × 4 = 16**." },
+                ],
+              },
+            ] },
           ],
         },
         {
@@ -232,12 +249,29 @@ export const MATH_A3_7_LESSON: MathSubmoduleLesson = {
             ] },
             { type: "heading", fr: "Moitié, tiers et quart", black: true },
             { type: "plain", fr: "Ces termes sont utilisés pour des divisions." },
-            { type: "plain", fr: "Pour obtenir la moitié d'un nombre, on divise par **2**." },
-            { type: "plain", fr: "Exemple : la moitié de 12 est 6, car **12 ÷ 2 = 6**." },
-            { type: "plain", fr: "Pour obtenir le tiers d'un nombre, on divise par **3**." },
-            { type: "plain", fr: "Exemple : le tiers de 12 est 4, car **12 ÷ 3 = 4**." },
-            { type: "plain", fr: "Pour obtenir le quart d'un nombre, on divise par **4**." },
-            { type: "plain", fr: "Exemple : le quart de 12 est 3, car **12 ÷ 4 = 3**." },
+            { type: "theory_tabs", tabs: [
+              {
+                label: "Moitié",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir la moitié d'un nombre, on divise par **2**." },
+                  { type: "plain", fr: "Exemple : la moitié de 12 est 6, car **12 ÷ 2 = 6**." },
+                ],
+              },
+              {
+                label: "Tiers",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir le tiers d'un nombre, on divise par **3**." },
+                  { type: "plain", fr: "Exemple : le tiers de 12 est 4, car **12 ÷ 3 = 4**." },
+                ],
+              },
+              {
+                label: "Quart",
+                blocks: [
+                  { type: "plain", fr: "Pour obtenir le quart d'un nombre, on divise par **4**." },
+                  { type: "plain", fr: "Exemple : le quart de 12 est 3, car **12 ÷ 4 = 3**." },
+                ],
+              },
+            ] },
           ],
         },
       ] },
