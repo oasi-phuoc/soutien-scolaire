@@ -3,6 +3,9 @@ import { useEffect, useState, Fragment } from "react";
 import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import Image from "next/image";
 import { playWord, SoundIcon } from "./vocabUtils";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import { definitionLabel, pickWordDefinition } from "@/lib/curriculum/vocab-definition-utils";
 
 function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
   const cx = size / 2, cy = size / 2, r = size * 0.44;
@@ -133,10 +136,70 @@ function resolveImage(image: string | undefined, folder: string): string | undef
   return `/vocab/images/${folder}/${image}`;
 }
 
+function DefinitionToggle({
+  isOpen,
+  onToggle,
+  ariaLabel,
+}: {
+  isOpen: boolean;
+  onToggle: () => void;
+  ariaLabel: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={ariaLabel}
+      aria-expanded={isOpen}
+      className={`ml-1.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none transition-colors ${
+        isOpen
+          ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)] text-white"
+          : "border-[var(--color-accent-fr)]/35 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+      }`}
+    >
+      ?
+    </button>
+  );
+}
+
+function DefinitionText({
+  w,
+  isOpen,
+}: {
+  w: VocabWord;
+  isOpen: boolean;
+}) {
+  const pivot = usePivotLang();
+  const { showPivot } = useTranslation();
+  const picked = pickWordDefinition(w, pivot, showPivot);
+  if (!isOpen || !picked.text) return null;
+  const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+
+  return (
+    <div
+      className="mt-1 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)]/8 px-2 py-1.5 text-left text-xs leading-snug text-[var(--color-text-secondary)]"
+      lang={showPivot && picked.translated ? pivot : "fr"}
+      dir={isRtl && picked.translated ? "rtl" : "ltr"}
+    >
+      <span className="font-bold text-[var(--color-accent-fr)]">{definitionLabel(showPivot ? pivot : "fr")} : </span>
+      <span>{picked.text}</span>
+    </div>
+  );
+}
+
 function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "mf"; imageFolder: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
   const [imgFailed, setImgFailed] = useState(false);
+  const [definitionOpen, setDefinitionOpen] = useState(false);
   const src = resolveImage(w.image, imageFolder);
+  const hasDefinition = !!(w.definition || w.definitionPivot);
+  const definitionButton = hasDefinition ? (
+    <DefinitionToggle
+      isOpen={definitionOpen}
+      onToggle={() => setDefinitionOpen((open) => !open)}
+      ariaLabel={`${definitionOpen ? "Masquer" : "Afficher"} la définition de ${w.word}`}
+    />
+  ) : null;
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
@@ -163,33 +226,41 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       <div className="w-full">
         {cardLayout === "mf" ? (
           <>
-            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-              {w.relatedWords?.[0] ?? w.word}
+            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+              <span>{w.relatedWords?.[0] ?? w.word}</span>
+              {definitionButton}
             </p>
+            <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : country ? (
           <>
-            <p className="text-center text-sm leading-tight text-[var(--color-text-primary)]">
+            <p className="flex items-center justify-center text-center text-sm leading-tight text-[var(--color-text-primary)]">
               <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
               <strong>{country.namePart}</strong>
+              {definitionButton}
             </p>
+            <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine ?? w.word} article="un" />
           </>
         ) : w.feminine ? (
           <>
-            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
-              {w.word}
+              <span>{w.word}</span>
+              {definitionButton}
             </p>
+            <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : (
           <>
-            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
-              {w.word}
+              <span>{w.word}</span>
+              {definitionButton}
             </p>
+            <DefinitionText w={w} isOpen={definitionOpen} />
             {w.relatedWords && w.relatedWords.length > 0 && (
               <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
                 {w.relatedWords.map((rw) => <p key={rw}>{rw}</p>)}

@@ -1,3 +1,5 @@
+import type { PivotCode } from "@/lib/pivot-langs";
+
 export type VocabWord = {
   word: string;
   article?: string;
@@ -6,6 +8,7 @@ export type VocabWord = {
   image?: string;
   audio?: string;
   definition?: string | string[];
+  definitionPivot?: Partial<Record<PivotCode, string | string[]>>;
   gender?: "m" | "f";
   group?: string;
   exampleSentences?: { a1?: string[]; a2?: string[]; b1?: string[] };
