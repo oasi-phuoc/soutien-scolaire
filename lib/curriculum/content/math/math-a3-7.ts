@@ -200,7 +200,7 @@ export const MATH_A3_7_LESSON: MathSubmoduleLesson = {
               "un prix répété plusieurs fois",
               "une quantité qui est **2 fois, 3 fois, 4 fois** plus grande",
             ] },
-            { type: "heading", fr: "Double, triple et quadruple" },
+            { type: "heading", fr: "Double, triple et quadruple", black: true },
             { type: "plain", fr: "Ces termes sont utilisés pour des multiplications." },
             { type: "theory_tabs", tabs: [
               {
@@ -286,13 +286,11 @@ export const MATH_A3_7_LESSON: MathSubmoduleLesson = {
         ],
       },
       { type: "heading", fr: "Petite stratégie", black: true },
-      { type: "section", labelFr: "Avant de calculer", itemsFr: [
-        "Je repère ce qui se répète (une quantité identique dans chaque groupe).",
-        "Je demande : est-ce que je cherche le **total** ou une **part** ?",
-        "Si je cherche le total, je fais **×**.",
-        "Si je cherche une part ou un nombre de groupes, je fais **÷**.",
-        "Je vérifie que ma réponse est logique.",
-      ] },
+      { type: "plain", fr: "**1.** Je repère ce qui se répète (une quantité identique dans chaque groupe)." },
+      { type: "plain", fr: "**2.** Je demande : est-ce que je cherche le **total** ou une **part** ?" },
+      { type: "plain", fr: "**3.** Si je cherche le total, je fais **×**." },
+      { type: "plain", fr: "**4.** Si je cherche une part ou un nombre de groupes, je fais **÷**." },
+      { type: "plain", fr: "**5.** Je vérifie que ma réponse est logique." },
     ],
     paragraphs: { fr: [] },
   },

@@ -206,89 +206,70 @@ export const TRAD_A3_7: SubmoduleTrad = {
       "Küçük strateji",
       "کوچنۍ ستراتيژي"
     ) },
-    // Block 8 — section labelFr "Avant de calculer"
-    { label: S(
-        "Avant de calculer",
-        "Before calculating",
-        "قبل الحساب",
-        "قبل از محاسبه",
-        "ቅድሚ ምሕሳብ",
-        "Перед обчисленням",
-        "Antes de calcular",
-        "Ka hor xisaabinta",
-        "Hesaplamadan önce",
-        "د محاسبې دمخه"
-      ), items: A(
-      [
-        "Je repère ce qui se répète (une quantité identique dans chaque groupe).",
-        "Je demande : est-ce que je cherche le **total** ou une **part** ?",
-        "Si je cherche le total, je fais **×**.",
-        "Si je cherche une part ou un nombre de groupes, je fais **÷**.",
-        "Je vérifie que ma réponse est logique.",
-      ],
-      [
-        "I identify what repeats (an identical quantity in each group).",
-        "I ask: am I looking for the **total** or a **part**?",
-        "If I am looking for the total, I do **×**.",
-        "If I am looking for a part or a number of groups, I do **÷**.",
-        "I check that my answer makes sense.",
-      ],
-      [
-        "أجد ما يتكرر (كمية متطابقة في كل مجموعة).",
-        "أسأل: هل أبحث عن **المجموع** أم عن **الجزء**؟",
-        "إذا كنت أبحث عن المجموع، أستخدم **×**.",
-        "إذا كنت أبحث عن جزء أو عدد المجموعات، أستخدم **÷**.",
-        "أتحقق من أن إجابتي منطقية.",
-      ],
-      [
-        "چیزی که تکرار می‌شود را تشخیص می‌دهم (کمیت یکسان در هر گروه).",
-        "می‌پرسم: دنبال **کل** می‌گردم یا **یک سهم**؟",
-        "اگر دنبال کل می‌گردم، **×** انجام می‌دهم.",
-        "اگر دنبال یک سهم یا تعداد گروه‌ها می‌گردم، **÷** انجام می‌دهم.",
-        "بررسی می‌کنم که پاسخم منطقی باشد.",
-      ],
-      [
-        "ዝድገም ዘሎ ይኽሕስ (ኣብ ነፍሲ ወከፍ ጉጅለ ማዕረ ዝኾነ ዕቐን)።",
-        "ሕቶ ይሓቶ፡ **ጠቕላሊ** ወይ **ክፋል** ክደሊ?",
-        "ጠቕላሊ ክደሊ ምዃነይ ምስ ዝፈልጥ, **×** ይገብር።",
-        "ክፋል ወይ ቁጽሪ ጉጅለ ክደሊ ምዃነይ ምስ ዝፈልጥ, **÷** ይገብር።",
-        "ምላሸይ ኣሎ እዩ ኢለ ይርኢ።",
-      ],
-      [
-        "Знаходжу те, що повторюється (однакова кількість у кожній групі).",
-        "Питаю: я шукаю **загальну кількість** чи **частину**?",
-        "Якщо я шукаю загальну кількість, роблю **×**.",
-        "Якщо я шукаю частину або кількість груп, роблю **÷**.",
-        "Перевіряю, чи відповідь логічна.",
-      ],
-      [
-        "Identifico o que se repete (uma quantidade idêntica em cada grupo).",
-        "Pergunto: estou à procura do **total** ou de uma **parte**?",
-        "Se estou à procura do total, faço **×**.",
-        "Se estou à procura de uma parte ou de um número de grupos, faço **÷**.",
-        "Verifico se a minha resposta faz sentido.",
-      ],
-      [
-        "Waxaan ogaadaa waxa ku celcelinaya (tirada isku mid ah ee koox kasta).",
-        "Waxaan is weydiinaqa: ma raadinayaa **wadarta** mise **qayb**?",
-        "Haddaan raadinayo wadarta, waxaan sameyaa **×**.",
-        "Haddaan raadinayo qayb ama tirada kooxaha, waxaan sameyaa **÷**.",
-        "Waxaan xaqiijiyaa in jawaabtu macno yeelatay.",
-      ],
-      [
-        "Tekrar edeni belirliyorum (her grupta aynı miktar).",
-        "Soruyorum: **toplam** mı yoksa **parça** mı arıyorum?",
-        "Toplamı arıyorsam **×** yapıyorum.",
-        "Bir parça veya grup sayısı arıyorsam **÷** yapıyorum.",
-        "Cevabımın mantıklı olup olmadığını kontrol ediyorum.",
-      ],
-      [
-        "هغه شی چه تکراریږي ومومم (د هر ډل کې یوه شان مقدار).",
-        "پوښتم: **مجموعه** لټوم که **يوه برخه**؟",
-        "که مجموعه لټوم، **×** کوم.",
-        "که برخه یا د ډلو شمیر لټوم، **÷** کوم.",
-        "چک کوم چه ځوابم منطقي وي.",
-      ],
+    // Block 8 — plain "1. Je repère..."
+    { text: S(
+      "**1.** Je repère ce qui se répète (une quantité identique dans chaque groupe).",
+      "**1.** I identify what repeats (an identical quantity in each group).",
+      "**1.** أجد ما يتكرر (كمية متطابقة في كل مجموعة).",
+      "**1.** چیزی که تکرار می‌شود را تشخیص می‌دهم (کمیت یکسان در هر گروه).",
+      "**1.** ዝድገም ዘሎ ይኽሕስ (ኣብ ነፍሲ ወከፍ ጉጅለ ማዕረ ዝኾነ ዕቐን)።",
+      "**1.** Знаходжу те, що повторюється (однакова кількість у кожній групі).",
+      "**1.** Identifico o que se repete (uma quantidade idêntica em cada grupo).",
+      "**1.** Waxaan ogaadaa waxa ku celcelinaya (tirada isku mid ah ee koox kasta).",
+      "**1.** Tekrar edeni belirliyorum (her grupta aynı miktar).",
+      "**1.** هغه شی چه تکراریږي ومومم (د هر ډل کې یوه شان مقدار)."
+    ) },
+    // Block 9 — plain "2. Je demande..."
+    { text: S(
+      "**2.** Je demande : est-ce que je cherche le **total** ou une **part** ?",
+      "**2.** I ask: am I looking for the **total** or a **part**?",
+      "**2.** أسأل: هل أبحث عن **المجموع** أم عن **الجزء**؟",
+      "**2.** می‌پرسم: دنبال **کل** می‌گردم یا **یک سهم**؟",
+      "**2.** ሕቶ ይሓቶ፡ **ጠቕላሊ** ወይ **ክፋል** ክደሊ?",
+      "**2.** Питаю: я шукаю **загальну кількість** чи **частину**?",
+      "**2.** Pergunto: estou à procura do **total** ou de uma **parte**?",
+      "**2.** Waxaan is weydiinaqa: ma raadinayaa **wadarta** mise **qayb**?",
+      "**2.** Soruyorum: **toplam** mı yoksa **parça** mı arıyorum?",
+      "**2.** پوښتم: **مجموعه** لټوم که **يوه برخه**؟"
+    ) },
+    // Block 10 — plain "3. Si je cherche le total..."
+    { text: S(
+      "**3.** Si je cherche le total, je fais **×**.",
+      "**3.** If I am looking for the total, I do **×**.",
+      "**3.** إذا كنت أبحث عن المجموع، أستخدم **×**.",
+      "**3.** اگر دنبال کل می‌گردم، **×** انجام می‌دهم.",
+      "**3.** ጠቕላሊ ክደሊ ምዃነይ ምስ ዝፈልጥ, **×** ይገብር።",
+      "**3.** Якщо я шукаю загальну кількість, роблю **×**.",
+      "**3.** Se estou à procura do total, faço **×**.",
+      "**3.** Haddaan raadinayo wadarta, waxaan sameyaa **×**.",
+      "**3.** Toplamı arıyorsam **×** yapıyorum.",
+      "**3.** که مجموعه لټوم، **×** کوم."
+    ) },
+    // Block 11 — plain "4. Si je cherche une part..."
+    { text: S(
+      "**4.** Si je cherche une part ou un nombre de groupes, je fais **÷**.",
+      "**4.** If I am looking for a part or a number of groups, I do **÷**.",
+      "**4.** إذا كنت أبحث عن جزء أو عدد المجموعات، أستخدم **÷**.",
+      "**4.** اگر دنبال یک سهم یا تعداد گروه‌ها می‌گردم، **÷** انجام می‌دهم.",
+      "**4.** ክፋል ወይ ቁጽሪ ጉጅለ ክደሊ ምዃነይ ምስ ዝፈልጥ, **÷** ይገብር།",
+      "**4.** Якщо я шукаю частину або кількість груп, роблю **÷**.",
+      "**4.** Se estou à procura de uma parte ou de um número de grupos, faço **÷**.",
+      "**4.** Haddaan raadinayo qayb ama tirada kooxaha, waxaan sameyaa **÷**.",
+      "**4.** Bir parça veya grup sayısı arıyorsam **÷** yapıyorum.",
+      "**4.** که برخه یا د ډلو شمیر لټوم، **÷** کوم."
+    ) },
+    // Block 12 — plain "5. Je vérifie..."
+    { text: S(
+      "**5.** Je vérifie que ma réponse est logique.",
+      "**5.** I check that my answer makes sense.",
+      "**5.** أتحقق من أن إجابتي منطقية.",
+      "**5.** بررسی می‌کنم که پاسخم منطقی باشد.",
+      "**5.** ምላሸይ ኣሎ እዩ ኢለ ይርኢ።",
+      "**5.** Перевіряю, чи відповідь логічна.",
+      "**5.** Verifico se a minha resposta faz sentido.",
+      "**5.** Waxaan xaqiijiyaa in jawaabtu macno yeelatay.",
+      "**5.** Cevabımın mantıklı olup olmadığını kontrol ediyorum.",
+      "**5.** چک کوم چه ځوابم منطقي وي."
     ) },
   ],
   consignes: {

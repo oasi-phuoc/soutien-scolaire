@@ -69,6 +69,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A4.5", "Multiplication"),
       sm("A4.6", "Division "),
       sm("A4.7", "Fractions et décimaux"),
+      sm("A4.8", "Problèmes"),
     ],
   },
   {

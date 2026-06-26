@@ -165,20 +165,23 @@ export const TRAD_A2_4: SubmoduleTrad = {
       "**Az** kelimesi her zaman **çıkarma** anlamına gelmez.",
       "د **لږ** کلمه تل د **تفریق** مانا نه لري."
     ) },
-    // Block 8 — plain "Il faut toujours regarder ce que la question demande."
-    { text: S(
-      "Il faut toujours regarder ce que la question demande.",
-      "Always look at what the question asks for.",
-      "يجب دائمًا النظر إلى ما يطلبه السؤال.",
-      "همیشه باید به آنچه سؤال می‌خواهد نگاه کرد.",
-      "ሕቶ ዝሓቶ ዘሎ ኩሉ ግዜ ምርኣይ የድሊ።",
-      "Завжди дивись на те, що питає запитання.",
-      "É preciso sempre ver o que a pergunta pede.",
-      "Waa in mar walba la fiirsadaa waxa su'aashu weydiineyso.",
-      "Sorunun ne istediğine her zaman bakılmalıdır.",
-      "تل باید وګورو چه پوښتنه څه غواړي."
+    // Block 8 — section labelFr "" (Il faut toujours regarder...)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+      ["Il faut toujours regarder ce que la question demande."],
+      ["Always look at what the question asks for."],
+      ["يجب دائمًا النظر إلى ما يطلبه السؤال."],
+      ["همیشه باید به آنچه سؤال می‌خواهد نگاه کرد."],
+      ["ሕቶ ዝሓቶ ዘሎ ኩሉ ግዜ ምርኣይ የድሊ።"],
+      ["Завжди дивись на те, що питає запитання."],
+      ["É preciso sempre ver o que a pergunta pede."],
+      ["Waa in mar walba la fiirsadaa waxa su'aashu weydiineyso."],
+      ["Sorunun ne istediğine her zaman bakılmalıdır."],
+      ["تل باید وګورو چه پوښتنه څه غواړي."],
     ) },
-    // Block 9 — table
+    // Block 9 — plain "" (spacer)
+    {},
+    // Block 10 — table (was block 9)
     { headers: A(
       ["Situation", "Question", "Opération"],
       ["Situation", "Question", "Operation"],
@@ -191,7 +194,7 @@ export const TRAD_A2_4: SubmoduleTrad = {
       ["Durum", "Soru", "İşlem"],
       ["حالت", "پوښتنه", "عمليه"],
     ) },
-    // Block 10 — heading "Petite stratégie" (black)
+    // Block 11 — heading "Petite stratégie" (black)
     { text: S(
       "Petite stratégie",
       "Quick strategy",
@@ -204,89 +207,70 @@ export const TRAD_A2_4: SubmoduleTrad = {
       "Küçük strateji",
       "کوچنۍ ستراتيژي"
     ) },
-    // Block 11 — section labelFr "Avant de calculer"
-    { label: S(
-        "Avant de calculer",
-        "Before calculating",
-        "قبل الحساب",
-        "قبل از محاسبه",
-        "ቅድሚ ምሕሳብ",
-        "Перед обчисленням",
-        "Antes de calcular",
-        "Ka hor xisaabinta",
-        "Hesaplamadan önce",
-        "د محاسبې دمخه"
-      ), items: A(
-      [
-        "Je souligne la quantité connue.",
-        "Je souligne la question.",
-        "Je demande : la réponse sera-t-elle **plus grande** ou **plus petite** ?",
-        "Si elle est plus grande, je fais **+**.",
-        "Si elle est plus petite, je fais **−**.",
-      ],
-      [
-        "I underline the known quantity.",
-        "I underline the question.",
-        "I ask myself: will the answer be **bigger** or **smaller**?",
-        "If bigger, I do **+**.",
-        "If smaller, I do **−**.",
-      ],
-      [
-        "أسطر الكمية المعطاة.",
-        "أسطر السؤال.",
-        "أسأل نفسي: هل الإجابة ستكون **أكبر** أم **أصغر**؟",
-        "إذا كانت أكبر، أستخدم **+**.",
-        "إذا كانت أصغر، أستخدم **−**.",
-      ],
-      [
-        "مقدار معلوم را خط می‌کشم.",
-        "سؤال را خط می‌کشم.",
-        "از خودم می‌پرسم: آیا پاسخ **بزرگتر** یا **کوچکتر** خواهد بود؟",
-        "اگر بزرگتر است، **+** انجام می‌دهم.",
-        "اگر کوچکتر است، **−** انجام می‌دهم.",
-      ],
-      [
-        "ዝፈለጥኩዎ ዕቐን ይስሕቦ።",
-        "ሕቶ ይስሕቦ።",
-        "ንርእሰይ ሕቶ ይሓቶ፡ ምላሽ **ዝዓበ** ወይ **ዝነኣሰ** ኣሎ?",
-        "ዝዓበ ምስ ዝኸውን **+** ይገብር።",
-        "ዝነኣሰ ምስ ዝኸውን **−** ይገብር።",
-      ],
-      [
-        "Підкреслюю відому величину.",
-        "Підкреслюю запитання.",
-        "Питаю себе: відповідь буде **більша** чи **менша**?",
-        "Якщо більша — роблю **+**.",
-        "Якщо менша — роблю **−**.",
-      ],
-      [
-        "Sublinho a quantidade conhecida.",
-        "Sublinho a pergunta.",
-        "Pergunto: a resposta será **maior** ou **menor**?",
-        "Se maior, faço **+**.",
-        "Se menor, faço **−**.",
-      ],
-      [
-        "Waxaan xariiqaa tirooyinka la yaqaan.",
-        "Waxaan xariiqaa su'aasha.",
-        "Waxaan is weydiinaqa: jawaabtu ma noqon doontaa **weyn** mise **yar**?",
-        "Haddii ay weyn tahay, waxaan sameyaa **+**.",
-        "Haddii ay yar tahay, waxaan sameyaa **−**.",
-      ],
-      [
-        "Bilinen miktarın altını çiziyorum.",
-        "Sorunun altını çiziyorum.",
-        "Kendime soruyorum: cevap **büyük** mü yoksa **küçük** mü olacak?",
-        "Büyük olacaksa **+** yapıyorum.",
-        "Küçük olacaksa **−** yapıyorum.",
-      ],
-      [
-        "د پيژندل شوي مقدار لاندې کرښه وباسم.",
-        "د پوښتنې لاندې کرښه وباسم.",
-        "له ځان پوښتم: ځواب به **لوی** وي که **کوچنی**؟",
-        "که لوی وي، **+** کوم.",
-        "که کوچنی وي، **−** کوم.",
-      ],
+    // Block 12 — plain "1. Je souligne la quantité connue."
+    { text: S(
+      "**1.** Je souligne la quantité connue.",
+      "**1.** I underline the known quantity.",
+      "**1.** أسطر الكمية المعطاة.",
+      "**1.** مقدار معلوم را خط می‌کشم.",
+      "**1.** ዝፈለጥኩዎ ዕቐን ይስሕቦ።",
+      "**1.** Підкреслюю відому величину.",
+      "**1.** Sublinho a quantidade conhecida.",
+      "**1.** Waxaan xariiqaa tirooyinka la yaqaan.",
+      "**1.** Bilinen miktarın altını çiziyorum.",
+      "**1.** د پيژندل شوي مقدار لاندې کرښه وباسم."
+    ) },
+    // Block 13 — plain "2. Je souligne la question."
+    { text: S(
+      "**2.** Je souligne la question.",
+      "**2.** I underline the question.",
+      "**2.** أسطر السؤال.",
+      "**2.** سؤال را خط می‌کشم.",
+      "**2.** ሕቶ ይስሕቦ።",
+      "**2.** Підкреслюю запитання.",
+      "**2.** Sublinho a pergunta.",
+      "**2.** Waxaan xariiqaa su'aasha.",
+      "**2.** Sorunun altını çiziyorum.",
+      "**2.** د پوښتنې لاندې کرښه وباسم."
+    ) },
+    // Block 14 — plain "3. Je demande : la réponse..."
+    { text: S(
+      "**3.** Je demande : la réponse sera-t-elle **plus grande** ou **plus petite** ?",
+      "**3.** I ask myself: will the answer be **bigger** or **smaller**?",
+      "**3.** أسأل نفسي: هل الإجابة ستكون **أكبر** أم **أصغر**؟",
+      "**3.** از خودم می‌پرسم: آیا پاسخ **بزرگتر** یا **کوچکتر** خواهد بود؟",
+      "**3.** ንርእሰይ ሕቶ ይሓቶ፡ ምላሽ **ዝዓበ** ወይ **ዝነኣሰ** ኣሎ?",
+      "**3.** Питаю себе: відповідь буде **більша** чи **менша**?",
+      "**3.** Pergunto: a resposta será **maior** ou **menor**?",
+      "**3.** Waxaan is weydiinaqa: jawaabtu ma noqon doontaa **weyn** mise **yar**?",
+      "**3.** Kendime soruyorum: cevap **büyük** mü yoksa **küçük** mü olacak?",
+      "**3.** له ځان پوښتم: ځواب به **لوی** وي که **کوچنی**؟"
+    ) },
+    // Block 15 — plain "4. Si elle est plus grande..."
+    { text: S(
+      "**4.** Si elle est plus grande, je fais **+**.",
+      "**4.** If bigger, I do **+**.",
+      "**4.** إذا كانت أكبر، أستخدم **+**.",
+      "**4.** اگر بزرگتر است، **+** انجام می‌دهم.",
+      "**4.** ዝዓበ ምስ ዝኸውን **+** ይገብር።",
+      "**4.** Якщо більша — роблю **+**.",
+      "**4.** Se maior, faço **+**.",
+      "**4.** Haddii ay weyn tahay, waxaan sameyaa **+**.",
+      "**4.** Büyük olacaksa **+** yapıyorum.",
+      "**4.** که لوی وي، **+** کوم."
+    ) },
+    // Block 16 — plain "5. Si elle est plus petite..."
+    { text: S(
+      "**5.** Si elle est plus petite, je fais **−**.",
+      "**5.** If smaller, I do **−**.",
+      "**5.** إذا كانت أصغر، أستخدم **−**.",
+      "**5.** اگر کوچکتر است، **−** انجام می‌دهم.",
+      "**5.** ዝነኣሰ ምስ ዝኸውን **−** ይገብር።",
+      "**5.** Якщо менша — роблю **−**.",
+      "**5.** Se menor, faço **−**.",
+      "**5.** Haddii ay yar tahay, waxaan sameyaa **−**.",
+      "**5.** Küçük olacaksa **−** yapıyorum.",
+      "**5.** که کوچنی وي، **−** کوم."
     ) },
   ],
   consignes: {
