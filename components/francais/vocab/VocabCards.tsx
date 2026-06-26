@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment, type ReactNode } from "react";
 import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import Image from "next/image";
 import { playWord, SoundIcon } from "./vocabUtils";
@@ -151,7 +151,7 @@ function DefinitionToggle({
       onClick={onToggle}
       aria-label={ariaLabel}
       aria-expanded={isOpen}
-      className={`ml-1.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none transition-colors ${
+      className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none transition-colors ${
         isOpen
           ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)] text-white"
           : "border-[var(--color-accent-fr)]/35 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -159,6 +159,24 @@ function DefinitionToggle({
     >
       ?
     </button>
+  );
+}
+
+function WordTitle({
+  children,
+  definitionButton,
+  bold = true,
+}: {
+  children: ReactNode;
+  definitionButton: ReactNode;
+  bold?: boolean;
+}) {
+  return (
+    <div className={`grid w-full grid-cols-[1.25rem_minmax(0,1fr)_1.25rem] items-center gap-1 text-sm leading-tight text-[var(--color-text-primary)] ${bold ? "font-bold" : ""}`}>
+      <div className="flex justify-start">{definitionButton}</div>
+      <p className="min-w-0 text-center">{children}</p>
+      <div aria-hidden className="h-5 w-5" />
+    </div>
   );
 }
 
@@ -226,40 +244,34 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       <div className="w-full">
         {cardLayout === "mf" ? (
           <>
-            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-              <span>{w.relatedWords?.[0] ?? w.word}</span>
-              {definitionButton}
-            </p>
+            <WordTitle definitionButton={definitionButton}>{w.relatedWords?.[0] ?? w.word}</WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : country ? (
           <>
-            <p className="flex items-center justify-center text-center text-sm leading-tight text-[var(--color-text-primary)]">
-              <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
+            <WordTitle definitionButton={definitionButton} bold={false}>
+              <span className={`font-normal text-[var(--color-text-secondary)]${country.articlePart.endsWith("'") ? "" : " mr-0.5"}`}>{country.articlePart}</span>
               <strong>{country.namePart}</strong>
-              {definitionButton}
-            </p>
+            </WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine ?? w.word} article="un" />
           </>
         ) : w.feminine ? (
           <>
-            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+            <WordTitle definitionButton={definitionButton}>
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
               <span>{w.word}</span>
-              {definitionButton}
-            </p>
+            </WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : (
           <>
-            <p className="flex items-center justify-center text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+            <WordTitle definitionButton={definitionButton}>
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
               <span>{w.word}</span>
-              {definitionButton}
-            </p>
+            </WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} />
             {w.relatedWords && w.relatedWords.length > 0 && (
               <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
