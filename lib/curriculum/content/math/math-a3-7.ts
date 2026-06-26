@@ -201,7 +201,7 @@ export const MATH_A3_7_LESSON: MathSubmoduleLesson = {
               "une quantité qui est **2 fois, 3 fois, 4 fois** plus grande",
             ] },
             { type: "heading", fr: "Double, triple et quadruple" },
-            { type: "highlight", fr: "Ce sont des multiplications" },
+            { type: "plain", fr: "Ces termes sont utilisés pour des multiplications." },
             { type: "section", labelFr: "Double", itemsFr: [
               "Pour obtenir le double d'un nombre, on le multiplie par **2**.",
               "Exemple : le double de 4 est 8, car **4 × 2 = 8**.",
