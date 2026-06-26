@@ -85,6 +85,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A5.4", "Addition et soustraction"),
       sm("A5.5", "Multiplication"),
       sm("A5.6", "Division"),
+      sm("A5.7", "Problèmes"),
     ],
   },
   {
@@ -97,6 +98,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A6.1", "Notion de pourcentage"),
       sm("A6.2", "Pourcentage d'un nombre"),
       sm("A6.3", "Augmentation et réduction"),
+      sm("A6.4", "Problèmes"),
     ],
   },
   {
