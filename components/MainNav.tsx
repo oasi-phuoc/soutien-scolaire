@@ -172,7 +172,7 @@ export function MainNav() {
     : links.find((item) => isActivePath(pathname, item.href));
   const navColor = sectionColor(pathname);
   const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin");
-  const menuItems = [...links.filter((item) => item.href !== current?.href), translateItem];
+  const menuItems = [...links, translateItem];
 
   return (
     <>
@@ -198,9 +198,10 @@ export function MainNav() {
               }`}
               aria-hidden={!open}
             >
-              {menuItems.map((item, index) => {
+              {menuItems.flatMap((item, index) => {
                 const Icon = item.icon;
                 const isTranslate = item.href === translateItem.href;
+                const isSettings = item.href === "/compte";
                 const selected = isTranslate && showPivot;
                 const icon = (
                   <span
@@ -219,26 +220,22 @@ export function MainNav() {
                   </span>
                 );
 
-                if (isTranslate) {
-                  return (
-                    <button
-                      key={item.href}
-                      type="button"
-                      aria-label={item.label}
-                      title={item.label}
-                      tabIndex={open ? 0 : -1}
-                      onClick={() => {
-                        togglePivot();
-                        setOpen(false);
-                      }}
-                      style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
-                    >
-                      {icon}
-                    </button>
-                  );
-                }
-
-                return (
+                const navEl = isTranslate ? (
+                  <button
+                    key={item.href}
+                    type="button"
+                    aria-label={item.label}
+                    title={item.label}
+                    tabIndex={open ? 0 : -1}
+                    onClick={() => {
+                      togglePivot();
+                      setOpen(false);
+                    }}
+                    style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
+                  >
+                    {icon}
+                  </button>
+                ) : (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -250,6 +247,10 @@ export function MainNav() {
                     {icon}
                   </Link>
                 );
+
+                return isSettings
+                  ? [<span key="__nav-sep__" className="w-6" aria-hidden />, navEl]
+                  : [navEl];
               })}
             </div>
           ) : (
