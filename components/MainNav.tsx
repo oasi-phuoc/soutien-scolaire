@@ -21,8 +21,8 @@ type NavItem = {
 const links: NavItem[] = [
   { href: "/", label: "Accueil", icon: HomeIcon, x: 0, y: -174 },
   { href: "/lecture", label: "Lecture", icon: LectureIcon, x: -100, y: -134 },
-  { href: "/mathematiques", label: "Maths", icon: MathIcon, x: -112, y: -48 },
   { href: "/francais", label: "Français", icon: FrIcon, x: 100, y: -134 },
+  { href: "/mathematiques", label: "Maths", icon: MathIcon, x: -112, y: -48 },
   { href: "/compte", label: "Réglages", icon: GearIcon, x: 0, y: -78 },
 ];
 
