@@ -96,6 +96,9 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "flûte",      phonemes: ["/f/", "/l/", "/y/", "/t/"] },
   { label: "feuille",    phonemes: ["/f/", "/l/"] },
   { label: "feutre",     phonemes: ["/f/", "/t/", "/r/"] },
+  { label: "football",   phonemes: ["/f/", "/t/", "/b/", "/l/"] },
+  { label: "frais",      phonemes: ["/f/", "/r/"] },
+  { label: "froid",      phonemes: ["/f/", "/r/", "/wa/"] },
   // ── G ──────────────────────────────────────────────────────────────────────
   { label: "gateau",     phonemes: ["/g/", "/a/", "/t/", "/o/"] },
   { label: "girafe",     phonemes: ["/ʒ/", "/i/", "/r/", "/a/", "/f/"] }, // g + i → /ʒ/
@@ -103,6 +106,8 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "grenouille", phonemes: ["/g/", "/r/", "/n/", "/l/"] },
   { label: "guitare",    phonemes: ["/g/", "/i/", "/t/", "/a/", "/r/"] },
   { label: "gare",       phonemes: ["/g/", "/a/", "/r/"] },
+  { label: "genou",      phonemes: ["/ʒ/", "/n/", "/u/"] },
+  { label: "gomme",      phonemes: ["/g/", "/o/", "/m/"] },
   // ── H ──────────────────────────────────────────────────────────────────────
   { label: "herbe",      phonemes: ["/∅/", "/r/", "/b/"] },
   { label: "hibou",      phonemes: ["/∅/", "/i/", "/b/"] },

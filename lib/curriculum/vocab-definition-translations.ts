@@ -2,6 +2,10 @@ import type { PivotCode } from "@/lib/pivot-langs";
 
 type DefinitionMap = Partial<Record<PivotCode, string>>;
 
+function d(en: string, ar: string, fa: string, pt: string, so: string, ti: string, tr: string, ps: string, uk: string): DefinitionMap {
+  return { en, ar, fa, pt, so, ti, tr, ps, uk };
+}
+
 const DEFINITIONS_BY_WORD: Record<string, DefinitionMap> = {
   suisse: {
     en: "A person from Switzerland.",
@@ -1041,7 +1045,11 @@ const DEFINITIONS_BY_WORD: Record<string, DefinitionMap> = {
 
 export function builtInVocabDefinition(word: string, lang: PivotCode): string | undefined {
   const key = word.toLowerCase();
-  return DEFINITIONS_BY_WORD[key]?.[lang] ?? V2_DEFINITIONS[key]?.[lang] ?? V3_DEFINITIONS[key]?.[lang] ?? V4_DEFINITIONS[key]?.[lang];
+  return DEFINITIONS_BY_WORD[key]?.[lang]
+    ?? V2_DEFINITIONS[key]?.[lang]
+    ?? V3_DEFINITIONS[key]?.[lang]
+    ?? V4_DEFINITIONS[key]?.[lang]
+    ?? V5_DEFINITIONS[key]?.[lang];
 }
 
 const V2_DEFINITIONS: Record<string, DefinitionMap> = {
@@ -1322,4 +1330,48 @@ const V4_DEFINITIONS: Record<string, DefinitionMap> = {
   cabane: { en: "A small simple wooden shelter.", ar: "بناء خشبي صغير وبسيط.", fa: "پناهگاه کوچک و ساده چوبی.", pt: "Pequena construção simples de madeira.", so: "Hoy yar oo alwaax ah.", ti: "ንእሽቶን ቀሊልን ናይ ዕንጨይቲ መጽለሊ።", tr: "Küçük basit ahşap barınak.", ps: "کوچنی ساده لرګين سرپناه.", uk: "Маленьке просте дерев’яне укриття." },
   logement: { en: "A place where someone lives.", ar: "مكان يعيش فيه شخص.", fa: "جایی که کسی در آن زندگی می‌کند.", pt: "Lugar onde alguém vive.", so: "Meel qof ku nool yahay.", ti: "ሰብ ዝነብረሉ ቦታ።", tr: "Birinin yaşadığı yer.", ps: "هغه ځای چې څوک پکې ژوند کوي.", uk: "Місце, де хтось живе." },
   dortoir: { en: "A large room with several beds.", ar: "غرفة كبيرة فيها عدة أسرّة.", fa: "اتاق بزرگ با چند تخت.", pt: "Grande divisão com várias camas.", so: "Qol weyn oo sariiro badan leh.", ti: "ብዙሕ ዓራታት ዘለዎ ዓቢ ክፍሊ።", tr: "Birkaç yatağı olan büyük oda.", ps: "لويه کوټه چې څو کټونه لري.", uk: "Велика кімната з кількома ліжками." },
+};
+
+const V5_DEFINITIONS: Record<string, DefinitionMap> = {
+  sac: d("A bag for carrying school things.", "حقيبة لحمل أدوات المدرسة.", "کیفی برای بردن وسایل مدرسه.", "Saco para levar material escolar.", "Boorso lagu qaato alaabta dugsiga.", "ናይ ቤት ትምህርቲ ነገራት ንምስካም ቦርሳ።", "Okul eşyalarını taşımak için çanta.", "د ښوونځي شيانو وړلو لپاره بکس.", "Сумка для шкільних речей."),
+  trousse: d("A small case for pens and pencils.", "مقلمة للأقلام.", "جامدادی برای خودکار و مداد.", "Estojo para canetas e lápis.", "Kiis yar oo qalimaan lagu rido.", "ብርዒን ርሳስን ዝቕመጠሉ ንእሽቶ መትሓዚ።", "Kalemler için küçük çanta.", "د قلمونو او پنسلونو کوچنی بکس.", "Пенал для ручок і олівців."),
+  agenda: d("A notebook for homework and dates.", "دفتر لكتابة الواجبات والمواعيد.", "دفترچه‌ای برای تکالیف و تاریخ‌ها.", "Caderno para deveres e datas.", "Buug lagu qoro shaqo-guri iyo taariikho.", "ዕዮ ገዛን ዕለታትን ንምጽሓፍ ደብተር።", "Ödevleri ve tarihleri yazma defteri.", "د کورنۍ دندې او نېټو کتابچه.", "Записник для домашніх завдань і дат."),
+  classe: d("A group of students or a classroom.", "مجموعة تلاميذ أو قاعة درس.", "گروه دانش‌آموزان یا کلاس درس.", "Grupo de alunos ou sala de aula.", "Koox arday ah ama fasal.", "ጉጅለ ተማሃሮ ወይ ክፍሊ ትምህርቲ።", "Öğrenci grubu veya derslik.", "د زده کوونکو ډله يا ټولګی.", "Група учнів або класна кімната."),
+  classeur: d("A folder for organizing papers.", "ملف لتنظيم الأوراق.", "پوشه‌ای برای مرتب کردن برگه‌ها.", "Pasta para organizar folhas.", "Fayl lagu habeeyo waraaqaha.", "ወረቓቕቲ ንምውዳብ ፋይል።", "Kağıtları düzenlemek için klasör.", "د کاغذونو د تنظيم فولډر.", "Папка для впорядкування аркушів."),
+  intercalaire: d("A divider sheet for sections.", "ورقة فاصلة بين الأقسام.", "برگه جداکننده برای بخش‌ها.", "Separador para dividir secções.", "Warqad kala qaybiya qaybaha.", "ክፍልታት ንምፍላይ ወረቐት።", "Bölümleri ayıran sayfa.", "د برخو بېلوونکې پاڼه.", "Розділювач для частин."),
+  feuille: d("A sheet of paper for writing.", "ورقة للكتابة.", "برگه کاغذ برای نوشتن.", "Folha de papel para escrever.", "Warqad wax lagu qoro.", "ንምጽሓፍ ወረቐት።", "Yazmak için kağıt.", "د ليکلو کاغذ.", "Аркуш паперу для письма."),
+  livre: d("A printed book to read or study.", "كتاب مطبوع للقراءة أو الدراسة.", "کتاب چاپی برای خواندن یا درس.", "Livro impresso para ler ou estudar.", "Buug daabacan oo la akhriyo ama lagu barto.", "ንምንባብ ወይ ንምጽናዕ ዝተሓተመ መጽሓፍ።", "Okumak veya çalışmak için basılı kitap.", "د لوستلو يا زده کړې چاپ شوی کتاب.", "Друкована книга для читання або навчання."),
+  cahier: d("A notebook for writing lessons.", "دفتر لكتابة الدروس.", "دفتر برای نوشتن درس‌ها.", "Caderno para escrever lições.", "Buug-yare lagu qoro casharrada.", "ትምህርቲ ንምጽሓፍ ደብተር።", "Ders yazmak için defter.", "د درسونو ليکلو کتابچه.", "Зошит для запису уроків."),
+  stylo: d("A pen used to write with ink.", "قلم للكتابة بالحبر.", "خودکار برای نوشتن با جوهر.", "Caneta para escrever com tinta.", "Qalin khad wax lagu qoro.", "ብቀለም ንምጽሓፍ ብርዒ።", "Mürekkeple yazan kalem.", "قلم چې په رنګ ليکي.", "Ручка для письма чорнилом."),
+  crayon: d("A pencil for writing or drawing.", "قلم رصاص للكتابة أو الرسم.", "مداد برای نوشتن یا نقاشی.", "Lápis para escrever ou desenhar.", "Qalin rasaas ah oo wax lagu qoro ama sawiro.", "ንምጽሓፍ ወይ ንምስኣል ርሳስ።", "Yazmak veya çizmek için kurşun kalem.", "پنسل د ليکلو يا رسمولو لپاره.", "Олівець для письма або малювання."),
+  gomme: d("An eraser for pencil marks.", "ممحاة لمسح قلم الرصاص.", "پاک‌کن برای پاک کردن مداد.", "Borracha para apagar lápis.", "Masax qalin rasaas lagu tirtiro.", "ርሳስ ንምድምሳስ መደምሰሲ።", "Kurşun kalemi silen silgi.", "د پنسل پاکولو ربړ.", "Гумка для стирання олівця."),
+  feutre: d("A felt-tip pen for coloring.", "قلم تلوين برأس لباد.", "ماژیک برای رنگ‌آمیزی.", "Marcador para colorir.", "Qalin midabayn oo feutre ah.", "ንምቕባእ ብርዒ ፈትር።", "Boyamak için keçeli kalem.", "د رنګولو فيلټ قلم.", "Фломастер для розфарбовування."),
+  surligneur: d("A fluorescent pen for marking text.", "قلم فسفوري لتحديد النص.", "هایلایتر برای برجسته کردن متن.", "Marcador fluorescente para destacar texto.", "Qalin ifaya oo qoraal lagu muujiyo.", "ጽሑፍ ንምጉላሕ ብርሃን ዘለዎ ብርዒ።", "Metni vurgulayan fosforlu kalem.", "د متن روښانولو قلم.", "Маркер для виділення тексту."),
+  "taille-crayon": d("A tool for sharpening pencils.", "أداة لبري الأقلام الرصاص.", "وسیله‌ای برای تراشیدن مداد.", "Afiador para lápis.", "Qalab lagu qoro qalin rasaas.", "ርሳስ ንምሓዝ መሳርሒ።", "Kalem açan araç.", "د پنسل تېره کولو اله.", "Точилка для олівців."),
+  règle: d("A tool for drawing straight lines.", "أداة لرسم خطوط مستقيمة.", "وسیله‌ای برای کشیدن خط راست.", "Régua para traçar linhas retas.", "Qalab lagu sawiro xariiq toosan.", "ቀጥታ መስመር ንምስኣል መሳርሒ።", "Düz çizgi çizme aracı.", "د نېغې کرښې رسمولو اله.", "Лінійка для прямих ліній."),
+  équerre: d("A tool for drawing right angles.", "أداة لرسم الزوايا القائمة.", "وسیله‌ای برای رسم زاویه راست.", "Esquadro para traçar ângulos retos.", "Qalab lagu sawiro xaglo qumman.", "ቀንዲ ኩርናዕ ንምስኣል መሳርሒ።", "Dik açı çizme aracı.", "د قايمې زاويې رسمولو اله.", "Косинець для прямих кутів."),
+  compas: d("A tool for drawing circles.", "أداة لرسم الدوائر.", "پرگار برای رسم دایره.", "Compasso para desenhar círculos.", "Qalab lagu sawiro wareegyo.", "ክበባት ንምስኣል መሳርሒ።", "Daire çizme aracı.", "د دايرو رسمولو اله.", "Циркуль для кіл."),
+  agrafeuse: d("A tool that staples papers together.", "أداة تجمع الأوراق بالدبابيس.", "وسیله‌ای که برگه‌ها را منگنه می‌کند.", "Agrafador para juntar folhas.", "Qalab waraaqaha isku qabta.", "ወረቓቕቲ ብስቴፕል ዘተኣሳስር መሳርሒ።", "Kağıtları zımbalayan araç.", "د کاغذونو منګنه کولو اله.", "Степлер для аркушів."),
+  perforatrice: d("A tool that makes holes in papers.", "أداة لثقب الأوراق.", "وسیله‌ای برای سوراخ کردن برگه‌ها.", "Furador para fazer buracos nas folhas.", "Qalab waraaqaha godad ka sameeya.", "ኣብ ወረቓቕቲ ጉድጓድ ዝገብር መሳርሒ።", "Kağıtta delik açan araç.", "په کاغذ کې د سوری کولو اله.", "Дирокол для аркушів."),
+  tableau: d("A board used for writing in class.", "سبورة للكتابة في الصف.", "تخته‌ای برای نوشتن در کلاس.", "Quadro para escrever na aula.", "Loox fasalka wax lagu qoro.", "ኣብ ክፍሊ ትምህርቲ ንምጽሓፍ ሰሌዳ።", "Sınıfta yazı yazılan tahta.", "په ټولګي کې د ليکلو تخته.", "Дошка для письма в класі."),
+  mathématiques: d("The school subject about numbers and calculations.", "مادة مدرسية عن الأعداد والحساب.", "درس مدرسه درباره عددها و محاسبه.", "Disciplina sobre números e cálculos.", "Maaddo ku saabsan tirooyin iyo xisaab.", "ብዛዕባ ቍጽርታትን ሕሳብን ዝምህር ትምህርቲ።", "Sayılar ve hesaplarla ilgili ders.", "د شمېر او حساب مضمون.", "Предмет про числа й обчислення."),
+  histoire: d("The school subject about past events.", "مادة عن أحداث الماضي.", "درس درباره رویدادهای گذشته.", "Disciplina sobre acontecimentos do passado.", "Maaddo ku saabsan dhacdooyinkii hore.", "ብዛዕባ ታሪኻዊ ፍጻመታት ትምህርቲ።", "Geçmiş olayları anlatan ders.", "د تېرو پېښو مضمون.", "Предмет про події минулого."),
+  géographie: d("The school subject about countries and landscapes.", "مادة عن البلدان والمناظر الطبيعية.", "درس درباره کشورها و چشم‌اندازها.", "Disciplina sobre países e paisagens.", "Maaddo ku saabsan dalal iyo muuqaal dhuleed.", "ብዛዕባ ሃገራትን መልክዕ መሬትን ትምህርቲ።", "Ülkeler ve yeryüzüyle ilgili ders.", "د هېوادونو او منظرو مضمون.", "Предмет про країни й ландшафти."),
+  musique: d("The school subject about songs and instruments.", "مادة عن الغناء والآلات.", "درس درباره آواز و سازها.", "Disciplina sobre canto e instrumentos.", "Maaddo ku saabsan heeso iyo qalab muusig.", "ብዛዕባ ደርፍን መሳርሒ ሙዚቃን ትምህርቲ።", "Şarkılar ve çalgılarla ilgili ders.", "د سندرو او سازونو مضمون.", "Предмет про спів та інструменти."),
+  art: d("The school subject about drawing and painting.", "مادة عن الرسم والتلوين.", "درس درباره نقاشی و رنگ‌آمیزی.", "Disciplina sobre desenho e pintura.", "Maaddo ku saabsan sawir iyo rinji.", "ብዛዕባ ስእልን ሕብርን ትምህርቲ።", "Çizim ve resim dersi.", "د رسم او رنګ مضمون.", "Предмет про малювання і живопис."),
+  informatique: d("The school subject about computers and digital tools.", "مادة عن الحواسيب والأدوات الرقمية.", "درس درباره رایانه و ابزار دیجیتال.", "Disciplina sobre computadores e digital.", "Maaddo ku saabsan kombiyuutarro iyo digital.", "ብዛዕባ ኮምፒዩተርን ዲጂታልን ትምህርቲ።", "Bilgisayar ve dijital araçlar dersi.", "د کمپيوټر او ډيجېټل مضمون.", "Предмет про комп’ютери й цифрові інструменти."),
+  biologie: d("The school subject about living things.", "مادة عن الكائنات الحية.", "درس درباره موجودات زنده.", "Disciplina sobre seres vivos.", "Maaddo ku saabsan noolaha.", "ብዛዕባ ህያዋን ነገራት ትምህርቲ።", "Canlılarla ilgili ders.", "د ژونديو موجوداتو مضمون.", "Предмет про живі істоти."),
+  physique: d("The school subject about matter and energy.", "مادة عن المادة والطاقة.", "درس درباره ماده و انرژی.", "Disciplina sobre matéria e energia.", "Maaddo ku saabsan walax iyo tamar.", "ብዛዕባ ነገርን ሓይልን ትምህርቲ።", "Madde ve enerji dersi.", "د مادې او انرژۍ مضمون.", "Предмет про матерію та енергію."),
+  chimie: d("The school subject about substances and reactions.", "مادة عن المواد والتفاعلات.", "درس درباره مواد و واکنش‌ها.", "Disciplina sobre substâncias e reações.", "Maaddo ku saabsan walxo iyo falcelin.", "ብዛዕባ ንጥረ ነገራትን ምላሽን ትምህርቲ።", "Maddeler ve tepkimeler dersi.", "د موادو او غبرګونونو مضمون.", "Предмет про речовини й реакції."),
+  école: d("A place where students learn.", "مكان يتعلم فيه التلاميذ.", "جایی که دانش‌آموزان یاد می‌گیرند.", "Lugar onde os alunos aprendem.", "Meel ardaydu wax ku bartaan.", "ተማሃሮ ዝመሃሩሉ ቦታ።", "Öğrencilerin öğrendiği yer.", "هغه ځای چې زده کوونکي پکې زده کړه کوي.", "Місце, де учні навчаються."),
+  salle: d("A room used for an activity.", "غرفة لنشاط معيّن.", "اتاقی برای یک فعالیت.", "Sala usada para uma atividade.", "Qol hawl lagu qabto.", "ንሓደ ንጥፈት ዝጥቀሙሉ ክፍሊ።", "Bir etkinlik için kullanılan oda.", "د يو فعاليت لپاره کوټه.", "Кімната для певної діяльності."),
+  secrétariat: d("The school administrative office.", "المكتب الإداري في المدرسة.", "دفتر اداری مدرسه.", "Secretaria administrativa da escola.", "Xafiiska maamulka dugsiga.", "ናይ ቤት ትምህርቲ ምምሕዳር ቤት ጽሕፈት።", "Okul idare ofisi.", "د ښوونځي اداري دفتر.", "Адміністративний офіс школи."),
+  bibliothèque: d("A room with books to read or borrow.", "غرفة فيها كتب للقراءة أو الاستعارة.", "اتاقی با کتاب برای خواندن یا امانت.", "Sala com livros para ler ou emprestar.", "Qol buugaag lagu akhriyo ama amaahdo.", "መጻሕፍቲ ንምንባብ ወይ ንምልቃሕ ዘለዎ ክፍሊ።", "Kitap okuma veya ödünç alma yeri.", "د کتابونو د لوستلو يا پور اخيستلو ځای.", "Кімната з книгами для читання або позики."),
+  gymnase: d("A room or hall for sport.", "قاعة للرياضة.", "سالن برای ورزش.", "Sala para fazer desporto.", "Hool lagu ciyaaro sport.", "ንስፖርት ዝጥቀሙሉ ኣዳራሽ።", "Spor yapılan salon.", "د سپورت تالار.", "Зал для спорту."),
+  cour: d("An outside school space for breaks.", "ساحة خارجية للاستراحة.", "حیاط مدرسه برای زنگ تفریح.", "Espaço exterior da escola para pausas.", "Barxad dugsi oo nasasho lagu qaato.", "ናይ ቤት ትምህርቲ ደገ ንዕረፍቲ።", "Okul bahçesi.", "د ښوونځي انګړ.", "Шкільне подвір’я для перерв."),
+  direction: d("The office of the school director.", "مكتب مدير أو مديرة المدرسة.", "دفتر مدیر مدرسه.", "Gabinete da direção da escola.", "Xafiiska agaasimaha dugsiga.", "ቤት ጽሕፈት ዳይሬክተር ቤት ትምህርቲ።", "Okul müdürünün ofisi.", "د ښوونځي د مدير دفتر.", "Кабінет директора школи."),
+  sonnerie: d("A sound that marks the start or end of class.", "صوت يعلن بداية أو نهاية الدرس.", "صدایی که شروع یا پایان کلاس را نشان می‌دهد.", "Som que marca o início ou fim da aula.", "Cod sheegaya bilowga ama dhammaadka casharka.", "መጀመርታ ወይ መወዳእታ ትምህርቲ ዘርኢ ድምጺ።", "Dersin başını veya sonunu bildiren ses.", "هغه غږ چې د درس پيل يا پای ښيي.", "Звук початку або кінця уроку."),
+  cantine: d("A school restaurant for meals.", "مطعم المدرسة للوجبات.", "رستوران مدرسه برای غذا.", "Restaurante escolar para refeições.", "Makhaayad dugsi oo cunto laga cuno.", "ናይ ቤት ትምህርቲ መመገቢ።", "Okul yemekhanesi.", "د ښوونځي ډوډۍ ځای.", "Шкільна їдальня."),
+  infirmerie: d("A school room for first aid.", "غرفة إسعافات في المدرسة.", "اتاق کمک‌های اولیه در مدرسه.", "Sala de primeiros socorros na escola.", "Qol gargaarka degdegga ah ee dugsiga.", "ኣብ ቤት ትምህርቲ ናይ መጀመርታ ሓገዝ ክፍሊ።", "Okulda ilk yardım odası.", "په ښوونځي کې د لومړنۍ مرستې کوټه.", "Шкільний медпункт."),
+  ascenseur: d("A cabin used to go up and down floors.", "مصعد للصعود والنزول بين الطوابق.", "کابینی برای بالا و پایین رفتن بین طبقات.", "Cabina para subir e descer pisos.", "Qol yar oo dabaqyada lagu koro ama dego.", "ደረጃታት ንምድያብን ንምውራድን ዝጥቀሙሉ ሊፍት።", "Katlar arasında inip çıkmaya yarayan kabin.", "د پوړونو ختلو او ښکته کېدو لفټ.", "Ліфт для руху між поверхами."),
 };
