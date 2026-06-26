@@ -162,14 +162,6 @@ export function MainNav() {
     };
   }, [pathname]);
 
-  const currentHref = pathname.startsWith("/communication")
-    ? "/francais"
-    : pathname.startsWith("/placement")
-      ? "/mathematiques"
-      : undefined;
-  const current = currentHref
-    ? links.find((item) => item.href === currentHref)
-    : links.find((item) => isActivePath(pathname, item.href));
   const navColor = sectionColor(pathname);
   const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin");
   const menuItems = [...links, translateItem];
