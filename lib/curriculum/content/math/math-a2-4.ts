@@ -244,7 +244,7 @@ export const MATH_A2_4_LESSON: MathSubmoduleLesson = {
     ],
     // ── Exercice 3 — Niveau avancé (B1) : logique inversée, multi-étapes, grands nombres ──
     [
-      { id: "a2-4-e3-01", promptFr: "Alona a 1 450 francs. Ali a 325 francs de moins qu'Alona. Combien Ali a-t-il de francs ?", type: "number", acceptable: ["1125"], hintFr: "Ali a moins qu'Alona : on soustrait 325 à la somme d'Alona." },
+      { id: "a2-4-e3-01", promptFr: "Alona a 1 450 francs. Ali en a 325 de moins qu'elle. Combien en a-t-il ?", type: "number", acceptable: ["1125"], hintFr: "Ali a moins qu'Alona : on soustrait 325 à la somme d'Alona." },
       { id: "a2-4-e3-02", promptFr: "Un train transporte 876 passagers. C'est 234 passagers de plus qu'un autre train. Combien de passagers y a-t-il dans le deuxième train ?", type: "number", acceptable: ["642"], hintFr: "Le deuxième train a moins : on soustrait 234." },
       { id: "a2-4-e3-03", promptFr: "Après avoir dépensé 1 280 francs, il reste 945 francs dans le budget. Quel était le budget de départ ?", type: "number", acceptable: ["2225"], hintFr: "Budget de départ = dépensé + reste." },
       { id: "a2-4-e3-04", promptFr: "Une ville compte 3 746 femmes. C'est 512 de plus que le nombre d'hommes. Combien d'hommes habitent dans cette ville ?", type: "number", acceptable: ["3234"], hintFr: "Les femmes sont plus nombreuses : hommes = femmes − 512." },
