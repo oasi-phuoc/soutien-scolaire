@@ -108,13 +108,20 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "gare",       phonemes: ["/g/", "/a/", "/r/"] },
   { label: "genou",      phonemes: ["/ʒ/", "/n/", "/u/"] },
   { label: "gomme",      phonemes: ["/g/", "/o/", "/m/"] },
+  { label: "gymnastique", phonemes: ["/ʒ/", "/i/", "/m/", "/n/", "/a/", "/s/", "/t/", "/k/"] },
   // ── H ──────────────────────────────────────────────────────────────────────
+  { label: "handball",   phonemes: ["/a/", "/d/", "/b/", "/l/"] },
   { label: "herbe",      phonemes: ["/∅/", "/r/", "/b/"] },
   { label: "hibou",      phonemes: ["/∅/", "/i/", "/b/"] },
+  { label: "hockey",     phonemes: ["/o/", "/k/", "/e/"] },
   { label: "hôpital",    phonemes: ["/∅/", "/o/", "/p/", "/i/", "/t/", "/a/", "/l/"] },
+  // ── I ──────────────────────────────────────────────────────────────────────
+  { label: "intercalaire", phonemes: ["/i/", "/t/", "/r/", "/k/", "/a/", "/l/", "/r/"] },
   // ── J / ʒ ──────────────────────────────────────────────────────────────────
+  { label: "jambe",      phonemes: ["/ʒ/", "/a/", "/b/"] },
   { label: "jardin",     phonemes: ["/ʒ/", "/a/", "/r/", "/d/"] },
   { label: "jouet",      phonemes: ["/ʒ/", "/w/"] },                  // ou before vowel = /w/
+  { label: "judo",       phonemes: ["/ʒ/", "/y/", "/d/", "/o/"] },
   { label: "jus",        phonemes: ["/ʒ/", "/y/"] },
   { label: "bijou",      phonemes: ["/b/", "/i/", "/ʒ/"] },
   // ── K ──────────────────────────────────────────────────────────────────────
