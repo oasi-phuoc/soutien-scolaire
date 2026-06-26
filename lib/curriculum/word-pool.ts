@@ -27,6 +27,10 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "école",      phonemes: ["/e/", "/k/", "/l/"] },
   { label: "elephant",   phonemes: ["/e/", "/l/", "/f/"] },
   { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/"] },
+  { label: "echecs",     phonemes: ["/e/", "/k/"] },
+  { label: "epaule",     phonemes: ["/e/", "/p/", "/o/", "/l/"] },          // au=/o/
+  { label: "equerre",    phonemes: ["/e/", "/k/", "/r/"] },
+  { label: "escalade",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/d/"] },
   // ── A (more) ───────────────────────────────────────────────────────────────
   { label: "abeille",    phonemes: ["/a/", "/b/"] },
   { label: "aigle",      phonemes: ["/e/", "/g/", "/l/"] },
@@ -90,6 +94,8 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "fromage",    phonemes: ["/f/", "/r/", "/m/", "/a/", "/ʒ/"] },
   { label: "fusee",      phonemes: ["/f/", "/y/", "/z/", "/e/"] },
   { label: "flûte",      phonemes: ["/f/", "/l/", "/y/", "/t/"] },
+  { label: "feuille",    phonemes: ["/f/", "/l/"] },
+  { label: "feutre",     phonemes: ["/f/", "/t/", "/r/"] },
   // ── G ──────────────────────────────────────────────────────────────────────
   { label: "gateau",     phonemes: ["/g/", "/a/", "/t/", "/o/"] },
   { label: "girafe",     phonemes: ["/ʒ/", "/i/", "/r/", "/a/", "/f/"] }, // g + i → /ʒ/
