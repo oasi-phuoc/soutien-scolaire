@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData, ReadingGrid } from "@/lib/curriculum/lecture-data";
@@ -25,6 +25,7 @@ interface Props {
 }
 
 type Step = { key: string; label: string };
+type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
 function getSteps(data: LetterData): Step[] {
   if (data.type === "complex-sound") {
@@ -92,44 +93,214 @@ function ReadingGridView({ grid }: { grid: ReadingGrid }) {
   );
 }
 
-function StaticWordSpotter({ words, target }: { words: string[]; target: string }) {
-  const normalizedTargets = target.toLowerCase().split(/\s*\/\s*/u);
-  function parts(word: string) {
-    const lower = word.toLowerCase();
-    const found = normalizedTargets
-      .map((entry) => entry.replace(/[^a-z]/gu, ""))
-      .filter(Boolean)
-      .sort((a, b) => b.length - a.length)
-      .find((entry) => lower.includes(entry));
-    if (!found) return [{ text: word, hit: false }];
-    const start = lower.indexOf(found);
-    return [
-      { text: word.slice(0, start), hit: false },
-      { text: word.slice(start, start + found.length), hit: true },
-      { text: word.slice(start + found.length), hit: false },
-    ].filter((part) => part.text);
+function normalizeGraph(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/gu, "")
+    .toLowerCase();
+}
+
+function complexTargets(label: string) {
+  const key = normalizeGraph(label);
+  if (key.includes("an") || key.includes("en")) return ["an", "en", "am", "em"];
+  if (key.includes("in") || key.includes("ain")) return ["in", "ain", "ein", "im", "aim"];
+  if (key.includes("on")) return ["on", "om"];
+  if (key.includes("au") || key.includes("eau")) return ["au", "eau"];
+  if (key.includes("ou")) return ["ou"];
+  if (key.includes("oi")) return ["oi"];
+  if (key.includes("ch")) return ["ch"];
+  if (key.includes("ph")) return ["ph"];
+  return key.split(/\s*\/\s*/u).map((entry) => entry.replace(/[^a-z]/gu, "")).filter(Boolean);
+}
+
+function makeComplexGrid(targets: string[], isUppercase: boolean) {
+  const distractors = ["la", "ri", "ma", "to", "be", "su", "fe", "po", "di", "ve", "ra", "mi", "lo", "te", "nu"]
+    .filter((entry) => !targets.includes(entry));
+  const targetCount = 6 + Math.floor(Math.random() * 4);
+  const cells = [
+    ...Array.from({ length: targetCount }, (_, i) => targets[i % targets.length]!),
+    ...Array.from({ length: 25 - targetCount }, () => distractors[Math.floor(Math.random() * distractors.length)]!),
+  ];
+  for (let i = cells.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cells[i], cells[j]] = [cells[j]!, cells[i]!];
   }
+  return cells.map((cell) => (isUppercase ? cell.toUpperCase() : cell.toLowerCase()));
+}
+
+const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
+  target: string;
+  isUppercase: boolean;
+}>(function ComplexGraphemeGrid({
+  target,
+  isUppercase,
+}, ref) {
+  const targets = complexTargets(target);
+  const [grid, setGrid] = useState(() => makeComplexGrid(targets, isUppercase));
+  const [states, setStates] = useState<CellState[]>(() => Array(25).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  function reset() {
+    setGrid(makeComplexGrid(targets, isUppercase));
+    setStates(Array(25).fill("idle"));
+    setValidated(false);
+  }
+
+  function validate() {
+    if (validated) return;
+    setValidated(true);
+    setStates((prev) =>
+      prev.map((state, index) => {
+        const isTarget = targets.includes(normalizeGraph(grid[index]!));
+        if (state === "selected") return isTarget ? "correct" : "wrong";
+        if (isTarget) return "missed";
+        return "idle";
+      }),
+    );
+  }
+
+  useImperativeHandle(ref, () => ({ reset, validate }));
+
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître le graphème</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Touchez chaque{" "}
+        <strong className="text-[var(--color-accent-lecture)]">
+          {isUppercase ? target.toUpperCase() : target.toLowerCase()}
+        </strong>
+      </p>
+      <div className="grid grid-cols-5 gap-2">
+        {grid.map((cell, index) => {
+          const state = states[index]!;
+          return (
+            <button
+              key={`${cell}-${index}`}
+              type="button"
+              onClick={() => {
+                if (validated) return;
+                setStates((prev) => {
+                  const next = [...prev];
+                  next[index] = prev[index] === "selected" ? "idle" : "selected";
+                  return next;
+                });
+              }}
+              disabled={validated}
+              className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-xl font-bold transition-colors ${
+                state === "correct"
+                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
+                  : state === "wrong" || state === "missed"
+                    ? "border-red-400 bg-red-50 text-red-700"
+                    : state === "selected"
+                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
+                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
+              }`}
+            >
+              {cell}
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+});
+
+function splitComplexWord(word: string, targets: string[]) {
+  const sorted = [...targets].sort((a, b) => b.length - a.length);
+  const chunks: Array<{ text: string; hit: boolean }> = [];
+  for (let i = 0; i < word.length;) {
+    const rest = normalizeGraph(word.slice(i));
+    const found = sorted.find((target) => rest.startsWith(target));
+    if (found) {
+      chunks.push({ text: word.slice(i, i + found.length), hit: true });
+      i += found.length;
+    } else {
+      chunks.push({ text: word.slice(i, i + 1), hit: false });
+      i += 1;
+    }
+  }
+  return chunks;
+}
+
+const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
+  function ComplexWordSpotter({ words, target, isUppercase }, ref) {
+  const targets = complexTargets(target);
+  const displayedWords = words.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const [states, setStates] = useState<Record<string, CellState>>({});
+  const [validated, setValidated] = useState(false);
+
+  function reset() {
+    setStates({});
+    setValidated(false);
+  }
+
+  function validate() {
+    if (validated) return;
+    setValidated(true);
+    const next: Record<string, CellState> = {};
+    displayedWords.forEach((word, wordIndex) => {
+      splitComplexWord(word, targets).forEach((part, partIndex) => {
+        const key = `${wordIndex}-${partIndex}`;
+        const state = states[key] ?? "idle";
+        if (state === "selected") next[key] = part.hit ? "correct" : "wrong";
+        else if (part.hit) next[key] = "missed";
+      });
+    });
+    setStates(next);
+  }
+
+  useImperativeHandle(ref, () => ({ reset, validate }));
 
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Lisez les mots et repérez <strong className="text-[var(--color-accent-lecture)]">{target}</strong>.
+        Touchez le graphème{" "}
+        <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
+        dans chaque mot.
       </p>
       <ul className="space-y-2">
-        {words.map((word) => (
-          <li key={word} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-center text-xl font-bold">
-            {parts(word).map((part, index) => part.hit ? (
-              <span key={index} className="text-[var(--color-accent-lecture)]">{part.text}</span>
-            ) : (
-              <span key={index}>{part.text}</span>
-            ))}
+        {displayedWords.map((word, wordIndex) => (
+          <li
+            key={`${word}-${wordIndex}`}
+            className="flex flex-wrap items-center justify-center gap-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
+          >
+            {splitComplexWord(word, targets).map((part, partIndex) => {
+              const key = `${wordIndex}-${partIndex}`;
+              const state = states[key] ?? "idle";
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  disabled={validated}
+                  onClick={() => {
+                    if (validated) return;
+                    setStates((prev) => ({
+                      ...prev,
+                      [key]: prev[key] === "selected" ? "idle" : "selected",
+                    }));
+                  }}
+                  className={`flex min-h-8 min-w-8 items-center justify-center rounded-lg border px-1.5 text-base font-bold transition-colors ${
+                    state === "correct"
+                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                      : state === "wrong" || state === "missed"
+                        ? "border-red-400 bg-red-100 text-red-600"
+                        : state === "selected"
+                          ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                          : "border-transparent text-[var(--color-text-primary)]"
+                  }`}
+                >
+                  {part.text}
+                </button>
+              );
+            })}
           </li>
         ))}
       </ul>
     </section>
   );
-}
+  },
+);
 
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
@@ -159,21 +330,23 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
+  const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
+  const isComplexWordStep = step.key === "complex-word-upper" || step.key === "complex-word-lower";
   const isSoundImageStep = step.key === "sound-image";
   const isSoundAudioStep = step.key === "sound-audio";
   const isPronounceStep = step.key === "pronounce";
   const isEvalStep = step.key === "eval";
-  const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep || isSoundAudioStep;
+  const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
-    if (isGridStep) gridRef.current?.reset();
-    else if (isWordStep) wordRef.current?.reset();
+    if (isGridStep || isComplexGridStep) gridRef.current?.reset();
+    else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
     else if (isPronounceStep) pronounceRef.current?.reset();
   }
   function exerciseValidate() {
-    if (isGridStep) gridRef.current?.validate();
-    else if (isWordStep) wordRef.current?.validate();
+    if (isGridStep || isComplexGridStep) gridRef.current?.validate();
+    else if (isWordStep || isComplexWordStep) wordRef.current?.validate();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.validate();
   }
 
@@ -231,13 +404,13 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             />
           );
         case "complex-grid-upper":
-          return <ReadingGridView key={k} grid={{ key: "upper", label: "Exercice 1 - Repérez le graphème en majuscules", items: data.upperGrid }} />;
+          return <ComplexGraphemeGrid key={k} ref={gridRef} target={data.letter} isUppercase={true} />;
         case "complex-grid-lower":
-          return <ReadingGridView key={k} grid={{ key: "lower", label: "Exercice 2 - Repérez le graphème en minuscules", items: data.lowerGrid }} />;
+          return <ComplexGraphemeGrid key={k} ref={gridRef} target={data.letter} isUppercase={false} />;
         case "complex-word-upper":
-          return <StaticWordSpotter key={k} words={data.upperWords} target={data.letter} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} words={data.upperWords} target={data.letter} isUppercase={true} />;
         case "complex-word-lower":
-          return <StaticWordSpotter key={k} words={data.lowerWords} target={data.letter} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} words={data.lowerWords} target={data.letter} isUppercase={false} />;
         case "sound-image":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
         case "sound-audio":

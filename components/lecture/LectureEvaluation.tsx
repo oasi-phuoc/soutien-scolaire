@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import type { ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
+import { getWordAudioPath } from "@/lib/utils/audio";
 import { speak } from "@/lib/utils/speech";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -328,7 +329,7 @@ function SoundImageExercise({
         {items.map((word, i) => {
           const s = cellStates[i]!;
           const imgSrc = `/assets/words/img/${word.label}.webp`;
-          const audioSrc = `/assets/words/son/${word.label}.mp3`;
+          const audioSrc = getWordAudioPath(word.label);
           return (
             <button
               key={i}
@@ -396,7 +397,7 @@ function SoundAudioExercise({
   function toggle(i: number) {
     if (validated) return;
     const word = items[i]!;
-    new Audio(`/assets/words/son/${word.label}.mp3`).play().catch(() => speak(word.label));
+    new Audio(getWordAudioPath(word.label)).play().catch(() => speak(word.label));
     setCellStates((prev) => {
       const next = [...prev] as CellState[];
       next[i] = prev[i] === "selected" ? "idle" : "selected";
@@ -414,7 +415,7 @@ function SoundAudioExercise({
       <div className="grid grid-cols-4 gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
-          const audioSrc = `/assets/words/son/${word.label}.mp3`;
+          const audioSrc = getWordAudioPath(word.label);
           return (
             <button
               key={i}
