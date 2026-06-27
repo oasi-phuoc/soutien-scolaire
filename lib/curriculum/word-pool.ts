@@ -154,7 +154,6 @@ export const WORD_ITEMS: WordItem[] = [
   // ── O ──────────────────────────────────────────────────────────────────────
   { label: "oiseau",     phonemes: ["/wa/", "/z/", "/o/"] },           // oi=/wa/, eau=/o/
   { label: "orange",     phonemes: ["/o/", "/r/", "/ɑ̃/", "/ʒ/"] },
-  { label: "ours",       phonemes: ["/u/", "/r/", "/s/"] },
   // ── P ──────────────────────────────────────────────────────────────────────
   { label: "panda",      phonemes: ["/p/", "/ɑ̃/", "/d/", "/a/"] },
   { label: "papa",       phonemes: ["/p/", "/a/"] },
@@ -332,7 +331,7 @@ export const LETTER_WORDS: string[] = [
   "nébuleuse","nectarine","nenuphar","névé","nickel","nigelle","niveau","noix",
   "nomade","noyau","numéro","nymphe",
   // ── O ──
-  "oiseau","orange","ours","oreille","ordinateur","olive","otarie","ogre",
+  "oiseau","orange","oreille","ordinateur","olive","otarie","ogre",
   "obélisque","océan","oeillet","ombre","omelette","ongle","opossum","oranger",
   "orchidée","orgue","ortie","oscille","oubli","outarde","outre","ovale","ovni",
   "oignon",
@@ -411,7 +410,7 @@ function isLikelySilentFinal(word: string, index: number): boolean {
   const final = word[index];
   if (!final || !"dtspxz".includes(final)) return false;
   const pronouncedFinals = new Set([
-    "bus", "ours", "os", "as", "vis", "lys", "gaz", "quiz", "nez", "riz", "lac", "sac",
+    "bus", "os", "as", "vis", "lys", "gaz", "quiz", "nez", "riz", "lac", "sac",
   ]);
   return !pronouncedFinals.has(word);
 }
