@@ -3,6 +3,12 @@
 export type SoundItem = { label: string; hasSound: boolean };
 export type PronStep = { phoneme: string; syllable: string; word: string };
 
+export type ReadingGrid = {
+  key: string;
+  label: string;
+  items: string[];
+};
+
 export type VowelData = {
   type: "vowel";
   letter: string;
@@ -37,7 +43,49 @@ export type ConsonantData = {
   pronunciationChain: PronStep[];
 };
 
-export type LetterData = VowelData | ConsonantData;
+export type SyllableLessonData = {
+  type: "syllable";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  title: string;
+  grids: ReadingGrid[];
+};
+
+export type MonosyllableLessonData = {
+  type: "monosyllable";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  title: string;
+  grids: ReadingGrid[];
+};
+
+export type ComplexSoundLessonData = {
+  type: "complex-sound";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  title: string;
+  exampleWord: string;
+  upperGrid: string[];
+  lowerGrid: string[];
+  upperWords: string[];
+  lowerWords: string[];
+  pronunciationChain: PronStep[];
+  grids: ReadingGrid[];
+};
+
+export type MultisyllableLessonData = {
+  type: "multisyllable";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  title: string;
+  grids: ReadingGrid[];
+};
+
+export type LetterData = VowelData | ConsonantData | SyllableLessonData | MonosyllableLessonData | ComplexSoundLessonData | MultisyllableLessonData;
 
 export type RevisionData = {
   pair: string;
@@ -1379,6 +1427,151 @@ export function getStory(id: string): Story | undefined {
 export const VOWEL_ORDER = ["a","o","i","u","e","y"] as const;
 export const CONSONANT_ORDER = ["b","c","d","g","k","p","q","t","f","j","l","m","n","r","s","v","z","w","x","h"] as const;
 
+const SIMPLE_CONSONANTS = ["b", "c", "d", "f", "g", "j", "l", "m", "n", "p", "r", "s", "t", "v", "z"];
+const SIMPLE_VOWELS = ["a", "o", "i", "e", "u", "y"] as const;
+
+function grid25(items: string[]): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < 25; i++) out.push(items[i % items.length]!);
+  return out;
+}
+
+function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonData {
+  const upperV = vowel.toUpperCase();
+  const upperConsonants = SIMPLE_CONSONANTS.map((c) => c.toUpperCase());
+  const lowerVc = SIMPLE_CONSONANTS.map((c) => `${vowel}${c}`);
+  const upperVc = upperConsonants.map((c) => `${upperV}${c}`);
+  const lowerCv = SIMPLE_CONSONANTS.map((c) => `${c}${vowel}`);
+  const upperCv = upperConsonants.map((c) => `${c}${upperV}`);
+  const mixed = SIMPLE_CONSONANTS.map((c, index) => {
+    const syllable = index % 2 === 0 ? `${vowel}${c}` : `${c}${vowel}`;
+    return index % 3 === 0 ? syllable.toUpperCase() : syllable;
+  });
+  return {
+    type: "syllable",
+    letter: upperV,
+    letterLower: vowel,
+    phoneme: `/${vowel}/`,
+    title: `Syllabes avec ${upperV}`,
+    grids: [
+      { key: "vc-upper", label: `Exercice 1 - ${upperV} + consonne en majuscules`, items: grid25(upperVc) },
+      { key: "vc-lower", label: `Exercice 2 - ${vowel} + consonne en minuscules`, items: grid25(lowerVc) },
+      { key: "cv-upper", label: `Exercice 3 - consonne + ${upperV} en majuscules`, items: grid25(upperCv) },
+      { key: "cv-lower", label: `Exercice 4 - consonne + ${vowel} en minuscules`, items: grid25(lowerCv) },
+      { key: "mixed", label: "Exercice 5 - syllabes melangees", items: grid25(mixed) },
+    ],
+  };
+}
+
+export const SIMPLE_SYLLABLE_LESSONS: SyllableLessonData[] = SIMPLE_VOWELS.map(syllableLesson);
+
+export const MONOSYLLABLE_LESSON: MonosyllableLessonData = {
+  type: "monosyllable",
+  letter: "Mots",
+  letterLower: "mots",
+  phoneme: "",
+  title: "Mots monosyllabes",
+  grids: [
+    { key: "short", label: "Exercice 1 - Lis les mots courts", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis"]) },
+    { key: "three-sounds", label: "Exercice 2 - Lis les mots avec trois sons", items: grid25(["chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse"]) },
+    { key: "mixed", label: "Exercice 3 - Lis les mots melanges", items: grid25(["nez", "dos", "main", "pain", "jour", "nuit", "fleur", "train", "bois", "roi"]) },
+    { key: "silent", label: "Exercice 4 - Lis les mots avec lettre muette", items: grid25(["chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond"]) },
+    { key: "review", label: "Exercice 5 - Lecture rapide", items: grid25(["sac", "mur", "chat", "pain", "jour", "loup", "train", "bol", "gris", "nez"]) },
+  ],
+};
+
+function complexSoundLesson(
+  id: string,
+  title: string,
+  phoneme: string,
+  rows: [string, string[]][],
+): ComplexSoundLessonData {
+  const baseWords = rows.flatMap(([, items]) => items);
+  const upper = title.split(" / ")[0]!.replace("/", "");
+  const lower = upper.toLowerCase();
+  const distractors = ["la", "ri", "ma", "to", "be", "su", "fe", "po", "di", "ve"];
+  return {
+    type: "complex-sound",
+    letter: title,
+    letterLower: id,
+    phoneme,
+    title,
+    exampleWord: baseWords[0] ?? title.toLowerCase(),
+    upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
+    lowerGrid: grid25([lower, ...distractors]),
+    upperWords: baseWords.slice(0, 5).map((word) => word.toUpperCase()),
+    lowerWords: baseWords.slice(5, 10).map((word) => word.toLowerCase()),
+    pronunciationChain: baseWords.slice(0, 8).map((word) => ({
+      phoneme: title,
+      syllable: word,
+      word,
+    })),
+    grids: rows.map(([label, items], index) => ({
+      key: `ex${index + 1}`,
+      label: `Exercice ${index + 1} - ${label}`,
+      items: grid25(items),
+    })),
+  };
+}
+
+export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
+  complexSoundLesson("ou", "OU", "/u/", [
+    ["Lis les mots avec ou", ["roue", "loup", "jour", "four", "cour", "souris", "bouton", "mouton", "poule", "route"]],
+    ["Retrouve le son ou", ["sou", "fou", "tout", "nous", "vous", "doux", "cou", "trou", "clou", "rouge"]],
+    ["Lecture melangee", ["bonjour", "toujours", "courir", "ouvrir", "soupe", "gouter", "journée", "pousser", "douze", "mouche"]],
+  ]),
+  complexSoundLesson("an-en", "AN / EN", "/ɑ̃/", [
+    ["Lis an et en", ["sans", "dans", "grand", "blanc", "vent", "temps", "enfant", "maman", "ruban", "avant"]],
+    ["Avec m devant b ou p", ["jambe", "lampe", "champ", "camp", "tambour", "tempête", "emporter", "remplir", "ensemble", "emballer"]],
+    ["Lecture melangee", ["manger", "orange", "dimanche", "chanson", "lent", "cent", "dent", "pendant", "vendre", "planche"]],
+  ]),
+  complexSoundLesson("in-ain", "IN / AIN", "/ɛ̃/", [
+    ["Lis in et ain", ["main", "pain", "bain", "train", "lapin", "matin", "jardin", "cousin", "chemin", "vin"]],
+    ["Avec m devant b ou p", ["timbre", "simple", "impoli", "impossible", "important", "grimpe", "sympa", "imprimer", "limpide", "imbiber"]],
+    ["Lecture melangee", ["demain", "soudain", "plein", "frein", "peint", "ceinture", "vingt", "fin", "linge", "inviter"]],
+  ]),
+  complexSoundLesson("on", "ON", "/ɔ̃/", [
+    ["Lis le son on", ["pont", "rond", "son", "bon", "mon", "ton", "don", "lion", "melon", "ballon"]],
+    ["Avec m devant b ou p", ["tomber", "ombre", "pompe", "compter", "complet", "nombre", "combat", "comprendre", "trompette", "plomb"]],
+    ["Lecture melangee", ["maison", "poisson", "garçon", "cochon", "mouton", "long", "front", "ronde", "réponse", "monde"]],
+  ]),
+  complexSoundLesson("au-eau", "AU / EAU", "/o/", [
+    ["Lis au", ["jaune", "chaud", "autre", "aussi", "saut", "haut", "pause", "cause", "gauche", "faute"]],
+    ["Lis eau", ["eau", "bateau", "chapeau", "gâteau", "oiseau", "manteau", "cadeau", "rideau", "bureau", "tableau"]],
+    ["Lecture melangee", ["beau", "nouveau", "chaussure", "pauvre", "seau", "morceau", "autobus", "anneau", "niveau", "taupe"]],
+  ]),
+  complexSoundLesson("oi", "OI", "/wa/", [
+    ["Lis le son oi", ["roi", "toi", "moi", "fois", "bois", "noix", "voix", "doigt", "poire", "soir"]],
+    ["Lecture de mots", ["oiseau", "voiture", "boite", "poisson", "histoire", "étoile", "voisin", "couloir", "miroir", "avoir"]],
+    ["Lecture melangee", ["trois", "froid", "choix", "loi", "moitié", "ardoise", "boisson", "soirée", "voir", "croire"]],
+  ]),
+  complexSoundLesson("ch", "CH", "/ʃ/", [
+    ["Lis ch", ["chat", "chien", "chou", "cheval", "chambre", "chaise", "chemise", "chapeau", "bouche", "mouche"]],
+    ["Lecture de mots", ["chercher", "chanter", "marcher", "acheter", "dimanche", "branche", "rocher", "cacher", "toucher", "fiche"]],
+    ["Lecture melangee", ["chaud", "chiffre", "machine", "chocolat", "richesse", "chute", "chemin", "chance", "chariot", "château"]],
+  ]),
+  complexSoundLesson("ph", "PH", "/f/", [
+    ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "graphique", "physique"]],
+    ["Lecture de mots", ["photographe", "orthographe", "géographie", "phénomène", "philosophie", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
+    ["Lecture melangee", ["photo", "phare", "dauphin", "éléphant", "téléphone", "phrase", "alphabet", "pharmacie", "graphique", "sphère"]],
+  ]),
+];
+
+export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
+  type: "multisyllable",
+  letter: "Mots",
+  letterLower: "multi",
+  phoneme: "",
+  title: "Mots avec plusieurs syllabes",
+  grids: [
+    { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: grid25(["moto", "lune", "table", "robe", "salade", "tomate", "valise", "panda", "radio", "domino"]) },
+    { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: grid25(["ananas", "animal", "carotte", "papillon", "tulipe", "girafe", "banane", "cabane", "orange", "fromage"]) },
+    { key: "four", label: "Exercice 3 - Mots plus longs", items: grid25(["crocodile", "ordinateur", "bibliothèque", "éléphant", "chocolat", "kangourou", "aspirateur", "hôpital", "escalier", "intercalaire"]) },
+    { key: "cut", label: "Exercice 4 - Lis en decoupant les syllabes", items: grid25(["pa-pi-llon", "ca-ro-tte", "do-mi-no", "a-na-nas", "sa-la-de", "or-di-na-teur", "bi-blio-the-que", "e-le-phant"]) },
+    { key: "review", label: "Exercice 5 - Lecture rapide", items: grid25(["animal", "domino", "papillon", "tomate", "crocodile", "valise", "fromage", "banane", "escalier", "kangourou"]) },
+  ],
+};
+
 // ─── Module structure (L1–L4) ──────────────────────────────────────────────────
 
 export type LectureModule = {
@@ -1421,6 +1614,34 @@ export const LECTURE_MODULES: LectureModule[] = [
     title: "Consonnes spéciales",
     description: "W, X, H",
     letters: CONSONANTS.filter((c) => L4_IDS.includes(c.letterLower)),
+  },
+  {
+    id: "l5",
+    code: "L5",
+    title: "Les syllabes simples",
+    description: "A, O, I, E, U, Y",
+    letters: SIMPLE_SYLLABLE_LESSONS,
+  },
+  {
+    id: "l6",
+    code: "L6",
+    title: "Les mots monosyllabes",
+    description: "Exercices de lecture de mots monosyllabiques",
+    letters: [MONOSYLLABLE_LESSON],
+  },
+  {
+    id: "l7",
+    code: "L7",
+    title: "Les sons complexes",
+    description: "OU, AN/EN, IN/AIN, ON, AU/EAU, OI, CH, PH",
+    letters: COMPLEX_SOUND_LESSONS,
+  },
+  {
+    id: "l8",
+    code: "L8",
+    title: "Lecture de mots avec plusieurs syllabes",
+    description: "Mots de deux syllabes et plus",
+    letters: [MULTISYLLABLE_LESSON],
   },
 ];
 

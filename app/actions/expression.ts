@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { WritingLevel, WritingPrompt } from "@/lib/curriculum/content/communication/writing-prompts";
 
@@ -8,15 +9,17 @@ export type TeacherOption = { id: string; prenom: string | null; nom: string | n
 export type ExpressionAnnotation = { start: number; end: number; text: string; comment: string };
 export type ExpressionInboxRow = {
   submission_id: string;
+  kind?: "expression" | "task";
   lesson_code: string;
-  level: WritingLevel;
+  level: WritingLevel | null;
   prompt_title: string;
-  status: "submitted" | "reviewed";
+  status: "submitted" | "reviewed" | "task";
   created_at: string;
   reviewed_at: string | null;
   unread: boolean;
   direction: "sent" | "received";
   correspondent_name: string;
+  body?: string | null;
 };
 export type ExpressionSubmission = {
   id: string;
@@ -96,14 +99,70 @@ export async function getExpressionInboxAction(): Promise<ExpressionInboxRow[]> 
   const session = await currentSession();
   if (!session) return [];
   const { data } = await session.supabase.rpc("get_expression_inbox");
-  return (data ?? []) as ExpressionInboxRow[];
+  const expressionRows = ((data ?? []) as ExpressionInboxRow[]).map((row) => ({
+    ...row,
+    kind: "expression" as const,
+  }));
+
+  const { data: taskMessages } = await session.supabase
+    .from("task_messages")
+    .select("id, title, body, read_at, created_at, sender_id")
+    .eq("student_id", session.user.id);
+
+  const senderIds = Array.from(new Set((taskMessages ?? []).map((row) => row.sender_id as string).filter(Boolean)));
+  const { data: profiles } = senderIds.length
+    ? await session.supabase.from("profiles").select("id, prenom, nom").in("id", senderIds)
+    : { data: [] };
+  const profileMap = new Map((profiles ?? []).map((profile) => [profile.id as string, profile]));
+
+  const taskRows: ExpressionInboxRow[] = (taskMessages ?? []).map((row) => {
+    const profile = profileMap.get(row.sender_id as string);
+    return {
+      submission_id: row.id as string,
+      kind: "task",
+      lesson_code: "Devoir",
+      level: null,
+      prompt_title: row.title as string,
+      status: "task",
+      created_at: row.created_at as string,
+      reviewed_at: null,
+      unread: !row.read_at,
+      direction: "received",
+      correspondent_name: [profile?.prenom, profile?.nom].filter(Boolean).join(" "),
+      body: (row.body as string | null) ?? null,
+    };
+  });
+
+  return [...expressionRows, ...taskRows].sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+  );
 }
 
 export async function getExpressionUnreadCountAction(): Promise<number> {
   const session = await currentSession();
   if (!session) return 0;
   const { data } = await session.supabase.rpc("get_expression_unread_count");
-  return Number(data ?? 0);
+  const { count } = await session.supabase
+    .from("task_messages")
+    .select("*", { count: "exact", head: true })
+    .eq("student_id", session.user.id)
+    .is("read_at", null);
+  return Number(data ?? 0) + (count ?? 0);
+}
+
+export async function openTaskMessageAction(messageId: string) {
+  const session = await currentSession();
+  if (session) {
+    await session.supabase
+      .from("task_messages")
+      .update({ read_at: new Date().toISOString() })
+      .eq("id", messageId)
+      .eq("student_id", session.user.id)
+      .is("read_at", null);
+  }
+  revalidatePath("/messagerie");
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function getExpressionSubmissionAction(id: string): Promise<{ item: ExpressionSubmission | null; isTeacher: boolean }> {

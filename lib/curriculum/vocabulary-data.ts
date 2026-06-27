@@ -29,7 +29,7 @@ export type VocabTheme = {
   slug: string;
   code: string;
   title: string;
-  section: "A0" | "A1" | "A2" | "B1" | "B2" | "V1" | "V2" | "V3" | "V4" | "V5" | "V6" | "V7" | "V8" | "V9";
+  section: "A0" | "A1" | "A2" | "B1" | "B2" | "V1" | "V2" | "V3" | "V4" | "V5" | "V6" | "V7" | "V8" | "V9" | "V10";
   words: VocabWord[];
   sentences?: VocabSentence[];
   theory?: VocabTheoryBlock[];
@@ -80,6 +80,10 @@ import { V9_AEROPORT_THEME } from "./content/francais/vocab-v9-aeroport";
 import { V9_HOTEL_THEME } from "./content/francais/vocab-v9-hotel";
 import { V9_PAYSAGE_THEME } from "./content/francais/vocab-v9-paysage";
 
+function movedTheme(theme: VocabTheme, section: VocabTheme["section"], code: string, title?: string): VocabTheme {
+  return { ...theme, section, code, title: title ?? theme.title };
+}
+
 export const VOCAB_THEMES: VocabTheme[] = [
   V1_NATIONALITES_THEME,
   V1_PROFESSIONS_THEME,
@@ -106,11 +110,9 @@ export const VOCAB_THEMES: VocabTheme[] = [
   V6_MATIERES_THEME,
   V7_FRUITS_THEME,
   V7_LEGUMES_THEME,
-  V7_RESTAURANT_THEME,
-  V7_BOULANGERIE_THEME,
-  V7_CUISINE_THEME,
-  V7_RECETTES_THEME,
-  V7_QUANTITES_THEME,
+  movedTheme(V7_CUISINE_THEME, "V7", "V7.3"),
+  movedTheme(V7_RECETTES_THEME, "V7", "V7.4"),
+  movedTheme(V7_QUANTITES_THEME, "V7", "V7.5"),
   V8_CORPS_THEME,
   V8_MALADIES_THEME,
   V8_MEDECINS_THEME,
@@ -119,10 +121,12 @@ export const VOCAB_THEMES: VocabTheme[] = [
   V9_TRANSPORT_THEME,
   V9_DIRECTION_THEME,
   V9_ESPACE_CULTUREL_THEME,
-  V9_TRAIN_THEME,
-  V9_AEROPORT_THEME,
-  V9_HOTEL_THEME,
-  V9_PAYSAGE_THEME,
+  movedTheme(V9_PAYSAGE_THEME, "V9", "V9.5"),
+  movedTheme(V7_RESTAURANT_THEME, "V10", "V10.1"),
+  movedTheme(V7_BOULANGERIE_THEME, "V10", "V10.2"),
+  movedTheme(V9_TRAIN_THEME, "V10", "V10.3", "La gare"),
+  movedTheme(V9_AEROPORT_THEME, "V10", "V10.4"),
+  movedTheme(V9_HOTEL_THEME, "V10", "V10.5"),
 ];
 
 export function getVocabTheme(slug: string): VocabTheme | undefined {

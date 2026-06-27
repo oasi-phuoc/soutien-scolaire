@@ -72,6 +72,26 @@ export const SUBMODULE_SEQUENCE: SubEntry[] = [
   { moduleId: "l4", letterId: "w" },
   { moduleId: "l4", letterId: "x" },
   { moduleId: "l4", letterId: "h" },
+  // L5 — Syllabes simples
+  { moduleId: "l5", letterId: "a" },
+  { moduleId: "l5", letterId: "o" },
+  { moduleId: "l5", letterId: "i" },
+  { moduleId: "l5", letterId: "e" },
+  { moduleId: "l5", letterId: "u" },
+  { moduleId: "l5", letterId: "y" },
+  // L6 — Mots monosyllabes
+  { moduleId: "l6", letterId: "mots" },
+  // L7 — Sons complexes
+  { moduleId: "l7", letterId: "ou" },
+  { moduleId: "l7", letterId: "an-en" },
+  { moduleId: "l7", letterId: "in-ain" },
+  { moduleId: "l7", letterId: "on" },
+  { moduleId: "l7", letterId: "au-eau" },
+  { moduleId: "l7", letterId: "oi" },
+  { moduleId: "l7", letterId: "ch" },
+  { moduleId: "l7", letterId: "ph" },
+  // L8 — Mots de plusieurs syllabes
+  { moduleId: "l8", letterId: "multi" },
 ];
 
 export const TOTAL_LETTERS = SUBMODULE_SEQUENCE.length;
@@ -86,6 +106,10 @@ export function createInitialProgress(): LectureProgressV2 {
     l2: "locked",
     l3: "locked",
     l4: "locked",
+    l5: "locked",
+    l6: "locked",
+    l7: "locked",
+    l8: "locked",
   };
   const submodules: Record<string, ItemState> = {};
   for (const { moduleId, letterId } of SUBMODULE_SEQUENCE) {

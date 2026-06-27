@@ -220,11 +220,9 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   // ── V7 — La nourriture ───────────────────────────────────────────────────────
   lesson("V7", "v7-fruits",               "V7.1", "Les fruits",              "Fruits courants.",                                                 "vocabulaire"),
   lesson("V7", "v7-legumes",              "V7.2", "Les légumes",             "Légumes courants.",                                                "vocabulaire"),
-  lesson("V7", "v7-restaurant",           "V7.3", "Le restaurant",           "Table et service au restaurant.",                                  "vocabulaire"),
-  lesson("V7", "v7-boulangerie",          "V7.4", "La boulangerie",          "Produits de boulangerie et pâtisserie.",                           "vocabulaire"),
-  lesson("V7", "v7-cuisine",              "V7.5", "La cuisine",              "Verbes et actions en cuisine.",                                    "vocabulaire"),
-  lesson("V7", "v7-recettes",             "V7.6", "Les recettes",            "Ingrédients de base et ustensiles.",                               "vocabulaire"),
-  lesson("V7", "v7-quantites",            "V7.7", "Les quantités",           "Unités de mesure et contenants.",                                  "vocabulaire"),
+  lesson("V7", "v7-cuisine",              "V7.3", "La cuisine",              "Verbes et actions en cuisine.",                                    "vocabulaire"),
+  lesson("V7", "v7-recettes",             "V7.4", "Les recettes",            "Ingr?dients de base et ustensiles.",                               "vocabulaire"),
+  lesson("V7", "v7-quantites",            "V7.5", "Les quantit?s",           "Unit?s de mesure et contenants.",                                  "vocabulaire"),
 
   // ── V8 — La santé ────────────────────────────────────────────────────────────
   lesson("V8", "v8-corps",                "V8.1", "Le corps",                "Parties du corps humain.",                                         "vocabulaire"),
@@ -237,10 +235,14 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("V9", "v9-transport",            "V9.2", "Le transport",            "Moyens de transport urbains et longue distance.",                  "vocabulaire"),
   lesson("V9", "v9-direction",            "V9.3", "La direction",            "S'orienter et indiquer un chemin.",                                "vocabulaire"),
   lesson("V9", "v9-espace-culturel",      "V9.4", "L'espace culturel",       "Lieux et acteurs de la culture.",                                  "vocabulaire"),
-  lesson("V9", "v9-train",                "V9.5", "Le train",                "Vocabulaire de la gare et du train.",                              "vocabulaire"),
-  lesson("V9", "v9-aeroport",             "V9.6", "L'aéroport",              "Vocabulaire de l'aéroport et du voyage en avion.",                 "vocabulaire"),
-  lesson("V9", "v9-hotel",                "V9.7", "L'hôtel",                 "Séjour à l'hôtel et hébergement.",                                 "vocabulaire"),
-  lesson("V9", "v9-paysage",              "V9.8", "Le paysage",              "Éléments naturels du paysage.",                                    "vocabulaire"),
+  lesson("V9", "v9-paysage",              "V9.5", "Le paysage",              "Éléments naturels du paysage.",                                    "vocabulaire"),
+
+  // ── V10 — Services et voyages ──────────────────────────────────────────────
+  lesson("V10", "v7-restaurant",          "V10.1", "Le restaurant",          "Table et service au restaurant.",                                  "vocabulaire"),
+  lesson("V10", "v7-boulangerie",         "V10.2", "La boulangerie",         "Produits de boulangerie et pâtisserie.",                           "vocabulaire"),
+  lesson("V10", "v9-train",               "V10.3", "La gare",                "Vocabulaire de la gare et du train.",                              "vocabulaire"),
+  lesson("V10", "v9-aeroport",            "V10.4", "L'aéroport",             "Vocabulaire de l'aéroport et du voyage en avion.",                 "vocabulaire"),
+  lesson("V10", "v9-hotel",               "V10.5", "L'hôtel",                "Séjour à l'hôtel et hébergement.",                                 "vocabulaire"),
 
 ];
 

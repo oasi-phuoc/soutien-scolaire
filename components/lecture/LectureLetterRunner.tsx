@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
-import type { LetterData } from "@/lib/curriculum/lecture-data";
+import type { LetterData, ReadingGrid } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
@@ -27,6 +27,21 @@ interface Props {
 type Step = { key: string; label: string };
 
 function getSteps(data: LetterData): Step[] {
+  if (data.type === "complex-sound") {
+    return [
+      { key: "discover-complex", label: "Découverte" },
+      { key: "complex-grid-upper", label: "Majuscules" },
+      { key: "complex-grid-lower", label: "Minuscules" },
+      { key: "complex-word-upper", label: "Mots (MAJ)" },
+      { key: "complex-word-lower", label: "Mots (min)" },
+      { key: "sound-image", label: "Images" },
+      { key: "sound-audio", label: "Audio" },
+      { key: "pronounce-complex", label: "Prononcer" },
+    ];
+  }
+  if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
+    return data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
+  }
   if (data.type === "vowel") {
     return [
       { key: "discover", label: "Découverte" },
@@ -56,6 +71,66 @@ function getSteps(data: LetterData): Step[] {
   ];
 }
 
+function ReadingGridView({ grid }: { grid: ReadingGrid }) {
+  return (
+    <section className="space-y-4">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">{grid.label}</p>
+        <h2 className="mt-1 text-xl font-bold text-[var(--color-text-primary)]">Lisez chaque element.</h2>
+      </div>
+      <div className="grid grid-cols-5 gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white/80 p-3 shadow-sm">
+        {grid.items.map((item, index) => (
+          <div
+            key={`${item}-${index}`}
+            className="flex aspect-square items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-accent-lecture)]/25 bg-[var(--color-accent-lecture)]/10 text-lg font-bold text-[var(--color-text-primary)]"
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function StaticWordSpotter({ words, target }: { words: string[]; target: string }) {
+  const normalizedTargets = target.toLowerCase().split(/\s*\/\s*/u);
+  function parts(word: string) {
+    const lower = word.toLowerCase();
+    const found = normalizedTargets
+      .map((entry) => entry.replace(/[^a-z]/gu, ""))
+      .filter(Boolean)
+      .sort((a, b) => b.length - a.length)
+      .find((entry) => lower.includes(entry));
+    if (!found) return [{ text: word, hit: false }];
+    const start = lower.indexOf(found);
+    return [
+      { text: word.slice(0, start), hit: false },
+      { text: word.slice(start, start + found.length), hit: true },
+      { text: word.slice(start + found.length), hit: false },
+    ].filter((part) => part.text);
+  }
+
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Lisez les mots et repérez <strong className="text-[var(--color-accent-lecture)]">{target}</strong>.
+      </p>
+      <ul className="space-y-2">
+        {words.map((word) => (
+          <li key={word} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-center text-xl font-bold">
+            {parts(word).map((part, index) => part.hit ? (
+              <span key={index} className="text-[var(--color-accent-lecture)]">{part.text}</span>
+            ) : (
+              <span key={index}>{part.text}</span>
+            ))}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -80,6 +155,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
   const step = steps[stepIdx]!;
+  const hasEvalStep = steps.some((s) => s.key === "eval");
+  const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isSoundImageStep = step.key === "sound-image";
@@ -137,6 +214,40 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
 
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
+    if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
+      const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      return <ReadingGridView key={k} grid={grid} />;
+    }
+    if (data.type === "complex-sound") {
+      switch (step.key) {
+        case "discover-complex":
+          return (
+            <DiscoverSound
+              key={k}
+              phoneme={data.phoneme}
+              letter={data.letter}
+              letterLower={data.letter.toLowerCase()}
+              exampleWord={data.exampleWord}
+            />
+          );
+        case "complex-grid-upper":
+          return <ReadingGridView key={k} grid={{ key: "upper", label: "Exercice 1 - Repérez le graphème en majuscules", items: data.upperGrid }} />;
+        case "complex-grid-lower":
+          return <ReadingGridView key={k} grid={{ key: "lower", label: "Exercice 2 - Repérez le graphème en minuscules", items: data.lowerGrid }} />;
+        case "complex-word-upper":
+          return <StaticWordSpotter key={k} words={data.upperWords} target={data.letter} />;
+        case "complex-word-lower":
+          return <StaticWordSpotter key={k} words={data.lowerWords} target={data.letter} />;
+        case "sound-image":
+          return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
+        case "sound-audio":
+          return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
+        case "pronounce-complex":
+          return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+        default:
+          return null;
+      }
+    }
     switch (step.key) {
       case "discover":
         return (
@@ -201,7 +312,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture · {isEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : "Consonne"}
+          Lecture · {isEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : data.type === "consonant" ? "Consonne" : "Lecture"}
         </p>
         <div className="flex items-center gap-2">
           <button
@@ -215,7 +326,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             </svg>
           </button>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {data.letter} - {data.letterLower} — {data.phoneme}
+            {data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable" || data.type === "complex-sound" ? data.title : `${data.letter} - ${data.letterLower} — ${data.phoneme}`}
           </h1>
         </div>
       </header>
@@ -225,10 +336,10 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">Entraînement</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {steps.length - 1}</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {trainingSteps.length}</p>
           </div>
           <div className="flex gap-1">
-            {steps.slice(0, -1).map((s, i) => (
+            {trainingSteps.map((s, i) => (
               <div
                 key={s.key}
                 className={`h-1.5 flex-1 rounded-full transition-colors ${

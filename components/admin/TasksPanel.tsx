@@ -164,11 +164,9 @@ const RAW_CURRICULUM: MatiereOpt[] = [
       { id: "V7", label: "V7 — L'alimentation", lessons: [
         { id: "V7.1", label: "V7.1 — Les fruits" },
         { id: "V7.2", label: "V7.2 — Les légumes" },
-        { id: "V7.3", label: "V7.3 — Le restaurant" },
-        { id: "V7.4", label: "V7.4 — La boulangerie" },
-        { id: "V7.5", label: "V7.5 — La cuisine" },
-        { id: "V7.6", label: "V7.6 — Les recettes" },
-        { id: "V7.7", label: "V7.7 — Les quantités" },
+        { id: "V7.3", label: "V7.3 — La cuisine" },
+        { id: "V7.4", label: "V7.4 — Les recettes" },
+        { id: "V7.5", label: "V7.5 — Les quantités" },
       ]},
       { id: "V8", label: "V8 — Le corps et la santé", lessons: [
         { id: "V8.1", label: "V8.1 — Le corps" },
@@ -176,15 +174,19 @@ const RAW_CURRICULUM: MatiereOpt[] = [
         { id: "V8.3", label: "V8.3 — Les médecins" },
         { id: "V8.4", label: "V8.4 — La pharmacie" },
       ]},
-      { id: "V9", label: "V9 — La ville et les transports", lessons: [
+      { id: "V9", label: "V9 — La ville et les lieux", lessons: [
         { id: "V9.1", label: "V9.1 — La ville" },
         { id: "V9.2", label: "V9.2 — Le transport" },
         { id: "V9.3", label: "V9.3 — La direction" },
         { id: "V9.4", label: "V9.4 — L'espace culturel" },
-        { id: "V9.5", label: "V9.5 — Le train" },
-        { id: "V9.6", label: "V9.6 — L'aéroport" },
-        { id: "V9.7", label: "V9.7 — L'hôtel" },
-        { id: "V9.8", label: "V9.8 — Le paysage" },
+        { id: "V9.5", label: "V9.5 — Le paysage" },
+      ]},
+      { id: "V10", label: "V10 — Services et voyages", lessons: [
+        { id: "V10.1", label: "V10.1 — Le restaurant" },
+        { id: "V10.2", label: "V10.2 — La boulangerie" },
+        { id: "V10.3", label: "V10.3 — La gare" },
+        { id: "V10.4", label: "V10.4 — L'aéroport" },
+        { id: "V10.5", label: "V10.5 — L'hôtel" },
       ]},
       { id: "R1", label: "R1 — Bases de la grammaire", lessons: [
         { id: "R1.1", label: "R1.1 — Les pronoms personnels sujets" },

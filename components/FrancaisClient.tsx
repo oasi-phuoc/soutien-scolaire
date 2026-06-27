@@ -55,6 +55,7 @@ const VOCAB_MODULES: SectionDef[] = [
   { id: "V7", code: "V7", title: "La nourriture" },
   { id: "V8", code: "V8", title: "La santé" },
   { id: "V9", code: "V9", title: "Les lieux" },
+  { id: "V10", code: "V10", title: "Services et voyages" },
 ];
 
 const TABS: { id: FrenchTab; label: string }[] = [

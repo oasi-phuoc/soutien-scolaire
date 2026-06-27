@@ -80,12 +80,31 @@ export async function createTaskAction(
 
   if (taskErr || !task) return { ok: false, reason: taskErr?.message ?? "Erreur création tâche." };
 
-  const { error: assignErr } = await supabase.from("task_assignments").insert(
+  const { data: assignments, error: assignErr } = await supabase.from("task_assignments").insert(
     studentIds.map((student_id) => ({ task_id: task.id, student_id, status: "pending" })),
-  );
+  ).select("id, student_id");
   if (assignErr) return { ok: false, reason: assignErr.message };
 
+  const details = [
+    description.trim() || null,
+    moduleRef || lessonRef ? `Module : ${[moduleRef, lessonRef].filter(Boolean).join(" - ")}` : null,
+    dueDate ? `A faire pour le ${new Date(dueDate).toLocaleDateString("fr-CH")}` : null,
+  ].filter(Boolean).join("\n");
+
+  const { error: messageErr } = await supabase.from("task_messages").insert(
+    (assignments ?? []).map((assignment) => ({
+      task_id: task.id,
+      assignment_id: assignment.id,
+      student_id: assignment.student_id,
+      sender_id: user.id,
+      title: `Nouveau devoir : ${title.trim()}`,
+      body: details || "Un nouveau devoir vous a ete attribue.",
+    })),
+  );
+  if (messageErr) return { ok: false, reason: messageErr.message };
+
   revalidatePath("/admin/taches");
+  revalidatePath("/messagerie");
   return { ok: true };
 }
 
@@ -135,7 +154,15 @@ export async function markAssignmentDoneAction(assignmentId: string): Promise<{ 
 
   if (error) return { ok: false, reason: error.message };
 
+  await supabase
+    .from("task_messages")
+    .update({ read_at: new Date().toISOString() })
+    .eq("assignment_id", assignmentId)
+    .eq("student_id", user.id)
+    .is("read_at", null);
+
   revalidatePath("/");
+  revalidatePath("/messagerie");
   return { ok: true };
 }
 

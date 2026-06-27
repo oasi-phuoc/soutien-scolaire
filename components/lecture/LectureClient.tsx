@@ -166,7 +166,9 @@ function ModuleCard({
                   {subCode}
                 </span>
                 <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">
-                  Lettre {letter.letter} - {letter.letterLower}
+                  {letter.type === "vowel" || letter.type === "consonant"
+                    ? `Lettre ${letter.letter} - ${letter.letterLower}`
+                    : letter.title}
                 </span>
                 <span className="ml-1 text-[10px] text-[var(--color-text-secondary)]">
                   {letter.phoneme}
@@ -326,7 +328,7 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const [tab, setTab] = useState<TabId>("apprendre");
   const [progress, setProgress] = useState<LectureProgressV2>(() => ({
     version: 2,
-    modules: { l1: "locked", l2: "locked", l3: "locked", l4: "locked" },
+    modules: { l1: "locked", l2: "locked", l3: "locked", l4: "locked", l5: "locked", l6: "locked", l7: "locked", l8: "locked" },
     submodules: {},
   }));
   const [hydrated, setHydrated] = useState(false);

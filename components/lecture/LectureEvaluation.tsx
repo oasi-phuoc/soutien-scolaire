@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import type { LetterData, PronStep } from "@/lib/curriculum/lecture-data";
+import type { ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { speak } from "@/lib/utils/speech";
@@ -9,7 +9,7 @@ import { speak } from "@/lib/utils/speech";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Props {
-  data: LetterData;
+  data: VowelData | ConsonantData;
   onBack: () => void;
   onDone: (grade: number, passed: boolean, total: number) => void;
   onEvalStepChange?: (idx: number, total: number, validated: boolean[], isResults: boolean) => void;
