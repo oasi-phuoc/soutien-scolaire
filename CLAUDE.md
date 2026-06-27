@@ -1,5 +1,10 @@
 # CLAUDE.md — Référence du projet soutien-scolaire
 
+## TODO
+
+- Quand une tache/devoir est affecte depuis le tableau de bord admin, envoyer aussi un message dans la messagerie des eleves concernes.
+- Faire un audit complet des phonemes dans la section Lecture : verifier les mots, sons et incoherences de classification phonetique.
+
 ## Blocs de contenu math (`MathRichBlock`)
 
 Utilisés dans `theory.blocks[]` des fichiers `lib/curriculum/content/math/`.

@@ -1052,7 +1052,8 @@ export function builtInVocabDefinition(word: string, lang: PivotCode): string | 
     ?? V5_DEFINITIONS[key]?.[lang]
     ?? V6_DEFINITIONS[key]?.[lang]
     ?? V7_DEFINITIONS[key]?.[lang]
-    ?? V8_DEFINITIONS[key]?.[lang];
+    ?? V8_DEFINITIONS[key]?.[lang]
+    ?? V9_DEFINITIONS[key]?.[lang];
 }
 
 const V2_DEFINITIONS: Record<string, DefinitionMap> = {
@@ -1480,4 +1481,24 @@ const V8_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["rhume", "grippe", "fièvre", "douleur", "toux", "allergie", "coupure", "brûlure", "blessure", "fracture", "nausée"].map((word) => [word, illnessDef]),
   ...["médecin", "infirmier", "pharmacien", "dentiste", "ophtalmologue", "pédiatre", "chirurgien", "urgentiste", "kinésithérapeute", "salle d'attente", "consultation", "rendez-vous"].map((word) => [word, medicalWorkerDef]),
   ...["médicament", "ordonnance", "sirop", "comprimé", "gélule", "pommade", "crème", "pansement", "thermomètre", "spray", "goutte", "pharmacie", "dosette", "vitamine", "boîte"].map((word) => [word, medicineDef]),
+]);
+
+const airportDef = d("A word used for air travel.", "كلمة تُستعمل في السفر بالطائرة.", "واژه‌ای برای سفر با هواپیما.", "Palavra usada em viagens de avião.", "Eray loo isticmaalo safarka diyaaradda.", "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", "Uçak yolculuğunda kullanılan kelime.", "د الوتکې د سفر کلمه.", "Слово для авіаподорожі.");
+const directionDef = d("A word used to give or understand directions.", "كلمة لفهم أو إعطاء الاتجاهات.", "واژه‌ای برای فهمیدن یا دادن آدرس.", "Palavra para dar ou entender direções.", "Eray lagu bixiyo ama lagu fahmo jiho.", "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", "Yön tarif etmek veya anlamak için kelime.", "د لوري ورکولو يا پوهېدو کلمه.", "Слово для пояснення або розуміння напрямку.");
+const cultureDef = d("A word connected with art and culture.", "كلمة مرتبطة بالفن والثقافة.", "واژه‌ای مربوط به هنر و فرهنگ.", "Palavra ligada à arte e à cultura.", "Eray la xiriira farshaxan iyo dhaqan.", "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", "Sanat ve kültürle ilgili kelime.", "د هنر او کلتور اړوند کلمه.", "Слово, пов’язане з мистецтвом і культурою.");
+const hotelDef = d("A word used in a hotel.", "كلمة تُستعمل في الفندق.", "واژه‌ای که در هتل استفاده می‌شود.", "Palavra usada num hotel.", "Eray hoteel lagu isticmaalo.", "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", "Otelde kullanılan kelime.", "کلمه چې په هوټل کې کارېږي.", "Слово, яке використовують у готелі.");
+const landscapeDef = d("A natural place or landscape element.", "مكان طبيعي أو عنصر من المنظر.", "جای طبیعی یا عنصر منظره.", "Lugar natural ou elemento da paisagem.", "Meel dabiici ah ama qayb muuqaalka dhulka.", "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", "Doğal yer veya manzara öğesi.", "طبيعي ځای يا د منظرې برخه.", "Природне місце або елемент ландшафту.");
+const trainDef = d("A word used for train travel.", "كلمة تُستعمل في السفر بالقطار.", "واژه‌ای برای سفر با قطار.", "Palavra usada em viagens de comboio.", "Eray loo isticmaalo safarka tareenka.", "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", "Tren yolculuğunda kullanılan kelime.", "د اورګاډي د سفر کلمه.", "Слово для подорожі потягом.");
+const transportDef = d("A vehicle or word used for transport.", "مركبة أو كلمة تُستعمل في النقل.", "وسیله یا واژه‌ای برای حمل‌ونقل.", "Veículo ou palavra usada nos transportes.", "Gaari ama eray gaadiid loo isticmaalo.", "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", "Ulaşımda kullanılan araç veya kelime.", "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", "Транспорт або слово, пов’язане з транспортом.");
+const cityDef = d("A place or service in a town.", "مكان أو خدمة في المدينة.", "جای یا خدماتی در شهر.", "Lugar ou serviço numa cidade.", "Meel ama adeeg magaalo ku yaal.", "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", "Şehirdeki yer veya hizmet.", "په ښار کې ځای يا خدمت.", "Місце або послуга в місті.");
+
+const V9_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
+  ...["passeport", "visa", "vol", "destination", "escale", "valise", "terminal", "douane", "enregistrement", "réservation", "embarquement", "porte", "bagage", "carte d'embarquement"].map((word) => [word, airportDef]),
+  ...["gauche", "droite", "nord", "sud", "est", "ouest", "carrefour", "rond-point", "rue", "panneau", "feu rouge", "passage piéton", "sortie", "entrée", "chemin"].map((word) => [word, directionDef]),
+  ...["théâtre", "cinéma", "musée", "concert", "exposition", "spectacle", "chanteur", "acteur", "musicien", "peintre", "danseur", "billet", "salle", "scène", "festival"].map((word) => [word, cultureDef]),
+  ...["réception", "clé", "chambre", "chambre double", "chambre simple", "piscine", "petit-déjeuner", "demi-pension", "nuit", "étage", "ascenseur", "coffre-fort", "concierge", "parking"].map((word) => [word, hotelDef]),
+  ...["montagne", "mer", "plage", "campagne", "forêt", "rivière", "lac", "colline", "vallée", "désert", "île", "nature", "paysage", "côte", "volcan"].map((word) => [word, landscapeDef]),
+  ...["gare", "quai", "guichet", "aller-retour", "départ", "arrivée", "wagon", "contrôleur", "place", "grève", "retard", "correspondance", "voie", "horaire"].map((word) => [word, trainDef]),
+  ...["bus", "métro", "tram", "train", "voiture", "vélo", "taxi", "moto", "avion", "bateau", "camion", "scooter", "arrêt", "ticket"].map((word) => [word, transportDef]),
+  ...["ville", "quartier", "centre-ville", "avenue", "marché", "mairie", "hôpital", "magasin", "banque", "parc", "boulangerie", "église"].map((word) => [word, cityDef]),
 ]);
