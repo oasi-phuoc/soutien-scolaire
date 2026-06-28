@@ -34,9 +34,9 @@ export const REVISION_CHECKPOINTS: RevisionCheckpoint[] = [
   { afterModuleId: "l2", afterLetterId: "t", pair: "q-t" },
   { afterModuleId: "l3", afterLetterId: "j", pair: "f-j" },
   { afterModuleId: "l3", afterLetterId: "n", pair: "l-m" },
-  { afterModuleId: "l3", afterLetterId: "s", pair: "n-r" },
-  { afterModuleId: "l3", afterLetterId: "z", pair: "s-v" },
-  { afterModuleId: "l4", afterLetterId: "x", pair: "z-w" },
+  { afterModuleId: "l3", afterLetterId: "s", pair: "r-s" },
+  { afterModuleId: "l3", afterLetterId: "z", pair: "v-z" },
+  { afterModuleId: "l4", afterLetterId: "x", pair: "w-x" },
 ];
 
 type SubEntry = { moduleId: string; letterId: string };

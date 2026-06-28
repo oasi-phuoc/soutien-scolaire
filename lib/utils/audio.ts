@@ -2,10 +2,10 @@ export function getWordAssetSlug(word: string): string {
   return word
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/œ/g, "oe")
-    .replace(/Œ/g, "oe")
-    .replace(/æ/g, "ae")
-    .replace(/Æ/g, "ae")
+    .replace(/\u0153/g, "oe")
+    .replace(/\u0152/g, "oe")
+    .replace(/\u00e6/g, "ae")
+    .replace(/\u00c6/g, "ae")
     .toLowerCase();
 }
 

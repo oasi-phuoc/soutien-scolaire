@@ -1,5 +1,6 @@
 "use client";
 import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
+import { speak } from "@/lib/utils/speech";
 
 export function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -25,12 +26,7 @@ export function playWord(word: VocabWord | string) {
 }
 
 function speakFr(text: string) {
-  if (typeof window === "undefined" || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "fr-FR";
-  u.rate = 0.85;
-  window.speechSynthesis.speak(u);
+  speak(text);
 }
 
 export function normalizeText(s: string): string {

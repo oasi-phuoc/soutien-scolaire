@@ -61,7 +61,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const rec: any = new SR();
-      rec.lang = "fr-FR";
+      rec.lang = "fr-CH";
       rec.continuous = false;
       rec.interimResults = false;
       rec.maxAlternatives = 3;

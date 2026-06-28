@@ -121,7 +121,7 @@ export function CommunicationAiPractice() {
     setInput("");
     setInterim("");
     setError(null);
-    speak(scenario.firstMessage, "fr-FR", 0.86);
+    speak(scenario.firstMessage, "fr-CH", 0.86);
   }, [scenario]);
 
   useEffect(() => {
@@ -141,7 +141,7 @@ export function CommunicationAiPractice() {
 
     recognitionRef.current?.abort();
     const recognition = new Recognition();
-    recognition.lang = "fr-FR";
+    recognition.lang = "fr-CH";
     recognition.interimResults = true;
     recognition.continuous = false;
     recognition.onstart = () => setListening(true);
@@ -204,7 +204,7 @@ export function CommunicationAiPractice() {
         suggestion: data.suggestion?.trim() || undefined,
       };
       setMessages([...nextMessages, assistantMessage]);
-      speak(reply, "fr-FR", 0.86);
+      speak(reply, "fr-CH", 0.86);
     } catch {
       setError("La réponse n'a pas pu être générée.");
     } finally {

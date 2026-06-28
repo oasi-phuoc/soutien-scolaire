@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { speak } from "@/lib/utils/speech";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function rnd(min: number, max: number) {
@@ -38,11 +39,7 @@ function decToFr(s: string): string {
   return `${intText} virgule ${intToFr(parseInt(b))}`;
 }
 function speakFr(text: string) {
-  if (typeof window === "undefined") return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "fr-FR"; u.rate = 0.85;
-  window.speechSynthesis.speak(u);
+  speak(text);
 }
 function acc(s: string): string[] { return [s, s.replace(",", ".")]; }
 function fmtNum(v: number): string {

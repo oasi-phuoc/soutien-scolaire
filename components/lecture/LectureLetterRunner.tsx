@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData, ReadingGrid } from "@/lib/curriculum/lecture-data";
@@ -18,6 +18,7 @@ import {
   saveEvaluationResult,
 } from "@/lib/progress/lecture-progress";
 import { LectureEvaluation } from "./LectureEvaluation";
+import { speak } from "@/lib/utils/speech";
 
 interface Props {
   data: LetterData;
@@ -62,7 +63,6 @@ function getSteps(data: LetterData): Step[] {
     { key: "grid-upper", label: "Majuscules" },
     { key: "grid-lower", label: "Minuscules" },
     { key: "word-upper-1", label: "Mots 1" },
-    { key: "word-upper-2", label: "Mots 2" },
     { key: "word-lower", label: "Mots (min)" },
     { key: "sound-image", label: "Images" },
     { key: "sound-audio", label: "Audio" },
@@ -88,6 +88,184 @@ function ReadingGridView({ grid }: { grid: ReadingGrid }) {
             {item}
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+type SyllableRecState = "idle" | "listening" | "correct" | "wrong";
+
+function shuffle<T>(items: T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j]!, next[i]!];
+  }
+  return next;
+}
+
+function randomCaseText(text: string): string {
+  return text
+    .split("")
+    .map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()))
+    .join("");
+}
+
+function makeDynamicSyllables(items: string[]) {
+  return shuffle(items).slice(0, 25).map(randomCaseText);
+}
+
+function normalizeSpeechText(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/gu, "")
+    .replace(/\s+/gu, "")
+    .toLowerCase();
+}
+
+function syllableMatches(transcript: string, target: string) {
+  const heard = normalizeSpeechText(transcript);
+  const wanted = normalizeSpeechText(target);
+  const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
+  return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
+}
+
+function SyllableReadingGridView({ grid }: { grid: ReadingGrid }) {
+  const [resetSeed, setResetSeed] = useState(0);
+  const syllables = useMemo(() => {
+    void resetSeed;
+    return makeDynamicSyllables(grid.items);
+  }, [grid.items, resetSeed]);
+  const [states, setStates] = useState<SyllableRecState[]>(() => Array(25).fill("idle"));
+  const [heard, setHeard] = useState<string[]>(() => Array(25).fill(""));
+  const recRef = useRef<unknown>(null);
+
+  function reset() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    setResetSeed((value) => value + 1);
+    setStates(Array(25).fill("idle"));
+    setHeard(Array(25).fill(""));
+  }
+
+  function startListening(index: number) {
+    if (typeof window === "undefined") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rec: any = new SR();
+    rec.lang = "fr-CH";
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+
+    rec.onstart = () => {
+      setStates((prev) => prev.map((state, i) => (i === index ? "listening" : state)));
+      setHeard((prev) => prev.map((value, i) => (i === index ? "" : value)));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (event: any) => {
+      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
+      let matched = false;
+      for (let alt = 0; alt < event.results[0].length; alt++) {
+        const transcript = event.results[0][alt].transcript.trim();
+        if (syllableMatches(transcript, syllables[index]!)) {
+          best = transcript;
+          matched = true;
+          break;
+        }
+      }
+      setHeard((prev) => prev.map((value, i) => (i === index ? best : value)));
+      setStates((prev) => prev.map((state, i) => (i === index ? (matched ? "correct" : "wrong") : state)));
+    };
+    rec.onerror = () => setStates((prev) => prev.map((state, i) => (i === index ? "idle" : state)));
+    rec.onend = () => setStates((prev) => prev.map((state, i) => (i === index && state === "listening" ? "idle" : state)));
+
+    recRef.current = rec;
+    rec.start();
+  }
+
+  return (
+    <section className="space-y-3">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Lisez chaque syllabe puis prononcez-la.</p>
+        </div>
+        <button
+          type="button"
+          aria-label="Recommencer"
+          onClick={reset}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M1 4v6h6" />
+            <path d="M3.51 15a9 9 0 1 0 .49-4" />
+          </svg>
+        </button>
+      </div>
+      <div className="grid grid-cols-5 gap-2">
+        {syllables.map((syllable, index) => {
+          const state = states[index]!;
+          return (
+            <div
+              key={`${syllable}-${index}-${resetSeed}`}
+              className={`relative flex aspect-square flex-col items-center justify-center rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] transition-colors ${
+                state === "correct"
+                  ? "border-[var(--color-accent-lecture)] text-[var(--color-accent-lecture)]"
+                  : state === "wrong"
+                    ? "border-red-400 text-red-600"
+                    : "border-[var(--color-border-default)]"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => speak(syllable)}
+                className="flex h-full w-full items-center justify-center rounded-[var(--radius-lg)] text-xl font-bold active:scale-95"
+              >
+                {syllable}
+              </button>
+              <button
+                type="button"
+                onClick={() => startListening(index)}
+                disabled={state === "listening"}
+                className={`absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full text-white shadow-sm ${
+                  state === "listening"
+                    ? "animate-pulse bg-red-500"
+                    : state === "correct"
+                      ? "bg-[var(--color-accent-lecture)]"
+                      : state === "wrong"
+                        ? "bg-red-400"
+                        : "bg-[var(--color-accent-lecture)]"
+                }`}
+                aria-label="Parler"
+              >
+                {state === "correct" ? (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                ) : state === "wrong" ? (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <rect x="9" y="2" width="6" height="12" rx="3" />
+                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                )}
+              </button>
+              {state === "wrong" && heard[index] && (
+                <span className="sr-only">J&apos;ai entendu {heard[index]}</span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -389,6 +567,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     const k = `${step.key}-${resetKey}`;
     if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       return <ReadingGridView key={k} grid={grid} />;
     }
     if (data.type === "complex-sound") {
@@ -461,7 +640,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
       case "syllables":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} syllables={data.syllableGrid} />;
+        return <SyllableGrid key={k} baseLetter={data.letterLower} />;
       case "pronounce":
         return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
       case "eval":

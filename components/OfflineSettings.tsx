@@ -15,6 +15,7 @@ export function OfflineSettings() {
   const [progress, setProgress] = useState({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
   const [manifestSize, setManifestSize] = useState<number | null>(null);
   const [downloadedBytes, setDownloadedBytes] = useState<number | null>(null);
+  const [cacheStatus, setCacheStatus] = useState<{ cachedAssetBytes: number; expectedBytes: number; missingAssets: number } | null>(null);
   const [hasCachedContent, setHasCachedContent] = useState(false);
 
   const checkCachedContent = async () => {
@@ -30,6 +31,11 @@ export function OfflineSettings() {
   const askManifestSize = () => {
     const sw = navigator.serviceWorker?.controller;
     if (sw) sw.postMessage({ type: "GET_MANIFEST_SIZE" });
+  };
+
+  const askCacheStatus = () => {
+    const sw = navigator.serviceWorker?.controller;
+    if (sw) sw.postMessage({ type: "GET_CACHE_STATUS" });
   };
 
   useEffect(() => {
@@ -56,6 +62,7 @@ export function OfflineSettings() {
         setState("ready");
         setHasCachedContent(true);
         if (event.data.downloadedBytes) setDownloadedBytes(event.data.downloadedBytes);
+        askCacheStatus();
       }
       if (event.data?.type === "OFFLINE_CLEARED") {
         setState("cleared");
@@ -69,6 +76,13 @@ export function OfflineSettings() {
       if (event.data?.type === "MANIFEST_SIZE") {
         setManifestSize(event.data.totalBytes ?? null);
       }
+      if (event.data?.type === "CACHE_STATUS") {
+        setCacheStatus({
+          cachedAssetBytes: event.data.cachedAssetBytes ?? 0,
+          expectedBytes: event.data.expectedBytes ?? 0,
+          missingAssets: event.data.missingAssets ?? 0,
+        });
+      }
     };
 
     window.addEventListener("online", handleOnline);
@@ -76,7 +90,10 @@ export function OfflineSettings() {
     navigator.serviceWorker.addEventListener("message", handleMessage);
 
     // Ask SW for manifest size once it's ready
-    navigator.serviceWorker.ready.then(() => askManifestSize());
+    navigator.serviceWorker.ready.then(() => {
+      askManifestSize();
+      askCacheStatus();
+    });
 
     return () => {
       window.removeEventListener("online", handleOnline);
@@ -116,6 +133,16 @@ export function OfflineSettings() {
   const bytesPct = progress.totalBytes > 0 ? Math.round((progress.downloadedBytes / progress.totalBytes) * 100) : pct;
   const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~27 Mo";
   const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
+  const cacheExpectedBytes = cacheStatus?.expectedBytes || manifestSize || 0;
+  const cachedAssetBytes = cacheStatus?.cachedAssetBytes ?? 0;
+  const cacheSizeMismatch = hasCachedContent && cacheExpectedBytes > 0
+    && (cacheStatus?.missingAssets ? cacheStatus.missingAssets > 0 : false
+      || Math.abs(cachedAssetBytes - cacheExpectedBytes) > 1024);
+  const statusDotClass = online
+    ? "bg-emerald-500"
+    : cacheSizeMismatch
+      ? "bg-red-500"
+      : "bg-amber-500";
 
   return (
     <>
@@ -128,7 +155,7 @@ export function OfflineSettings() {
           </p>
         </div>
         <span
-          className={`h-3 w-3 shrink-0 rounded-full ${online ? "bg-emerald-500" : "bg-amber-500"}`}
+          className={`h-3 w-3 shrink-0 rounded-full ${statusDotClass}`}
           aria-hidden
         />
       </div>

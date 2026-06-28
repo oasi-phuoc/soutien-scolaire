@@ -95,7 +95,7 @@ function useSpeechRecognition(onTranscript: (text: string) => void) {
     if (!SR) return;
     accumulatedRef.current = "";
     const rec = new SR();
-    rec.lang = "fr-FR";
+    rec.lang = "fr-CH";
     rec.continuous = true;
     rec.interimResults = false;
     rec.onresult = (event) => {

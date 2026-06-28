@@ -1,39 +1,178 @@
 "use client";
 
+import { useMemo, useRef, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 interface Props {
-  syllables: string[];
+  baseLetter: string;
 }
 
-export function SyllableGrid({ syllables }: Props) {
+type RecState = "idle" | "listening" | "correct" | "wrong";
+
+const VOWELS = ["a", "e", "i", "o", "u", "y"];
+
+function shuffle<T>(items: T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j]!, next[i]!];
+  }
+  return next;
+}
+
+function randomCase(text: string): string {
+  return text
+    .split("")
+    .map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()))
+    .join("");
+}
+
+function normalize(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/gu, "")
+    .replace(/\s+/gu, "")
+    .toLowerCase();
+}
+
+function matchesSyllable(transcript: string, target: string): boolean {
+  const heard = normalize(transcript);
+  const wanted = normalize(target);
+  const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
+  return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
+}
+
+export function SyllableGrid({ baseLetter }: Props) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
+  const recRef = useRef<unknown>(null);
+  const [states, setStates] = useState<RecState[]>(() => Array(6).fill("idle"));
+  const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
+  const syllables = useMemo(
+    () => shuffle(VOWELS).map((vowel) => randomCase(`${baseLetter.toLowerCase()}${vowel}`)),
+    [baseLetter],
+  );
+
+  function startListening(index: number) {
+    if (typeof window === "undefined") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rec: any = new SR();
+    rec.lang = "fr-CH";
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+
+    rec.onstart = () => {
+      setStates((prev) => prev.map((state, i) => (i === index ? "listening" : state)));
+      setHeard((prev) => prev.map((value, i) => (i === index ? "" : value)));
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (event: any) => {
+      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
+      let matched = false;
+      for (let alt = 0; alt < event.results[0].length; alt++) {
+        const transcript = event.results[0][alt].transcript.trim();
+        if (matchesSyllable(transcript, syllables[index]!)) {
+          best = transcript;
+          matched = true;
+          break;
+        }
+      }
+      setHeard((prev) => prev.map((value, i) => (i === index ? best : value)));
+      setStates((prev) => prev.map((state, i) => (i === index ? (matched ? "correct" : "wrong") : state)));
+    };
+
+    rec.onerror = () => {
+      setStates((prev) => prev.map((state, i) => (i === index ? "idle" : state)));
+    };
+    rec.onend = () => {
+      setStates((prev) => prev.map((state, i) => (i === index && state === "listening" ? "idle" : state)));
+    };
+
+    recRef.current = rec;
+    rec.start();
+  }
+
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Touchez chaque syllabe pour la lire à voix haute
+        Prononcez chaque syllabe a voix haute.
       </p>
       {showPivot && (
         <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
           {lectureUi(lang, "tapSyllableAloud")}
         </p>
       )}
-      <div className="grid grid-cols-3 gap-2">
-        {syllables.map((syl, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => speak(syl)}
-            className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 text-sm font-semibold text-[var(--color-text-primary)] active:scale-95 transition-transform"
-          >
-            {syl}
-          </button>
-        ))}
+      <div className="space-y-2">
+        {syllables.map((syl, i) => {
+          const state = states[i]!;
+          return (
+            <div
+              key={`${syl}-${i}`}
+              className={`grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
+                state === "correct"
+                  ? "border-[var(--color-accent-lecture)]"
+                  : state === "wrong"
+                    ? "border-red-300"
+                    : "border-[var(--color-border-default)]"
+              }`}
+            >
+              <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
+              <button
+                type="button"
+                onClick={() => speak(syl)}
+                className="min-h-12 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 text-center text-xl font-bold text-[var(--color-text-primary)] active:scale-95"
+              >
+                {syl}
+              </button>
+              <button
+                type="button"
+                onClick={() => startListening(i)}
+                disabled={state === "listening"}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 ${
+                  state === "listening"
+                    ? "animate-pulse bg-red-500"
+                    : state === "correct"
+                      ? "bg-[var(--color-accent-lecture)]"
+                      : state === "wrong"
+                        ? "bg-red-400"
+                        : "bg-[var(--color-accent-lecture)]"
+                }`}
+                aria-label="Parler"
+              >
+                {state === "correct" ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                ) : state === "wrong" ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <rect x="9" y="2" width="6" height="12" rx="3" />
+                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                )}
+              </button>
+              {state === "wrong" && heard[i] && (
+                <p className="col-span-3 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

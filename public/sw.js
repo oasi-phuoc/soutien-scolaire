@@ -161,4 +161,45 @@ self.addEventListener("message", (event) => {
       }
     })());
   }
+
+  if (event.data?.type === "GET_CACHE_STATUS") {
+    event.waitUntil((async () => {
+      try {
+        const res = await fetch("/offline-manifest.json");
+        const manifest = res.ok ? await res.json() : { assets: [] };
+        const assetUrls = manifest.assets || [];
+        const cache = await caches.open(CORE_CACHE);
+        let cachedAssetBytes = 0;
+        let missingAssets = 0;
+
+        for (const url of assetUrls) {
+          const response = await cache.match(url);
+          if (!response) {
+            missingAssets += 1;
+            continue;
+          }
+          try {
+            const blob = await response.clone().blob();
+            cachedAssetBytes += blob.size;
+          } catch {
+            missingAssets += 1;
+          }
+        }
+
+        await notifyClients({
+          type: "CACHE_STATUS",
+          cachedAssetBytes,
+          expectedBytes: manifest.totalBytes || 0,
+          missingAssets,
+        });
+      } catch {
+        await notifyClients({
+          type: "CACHE_STATUS",
+          cachedAssetBytes: 0,
+          expectedBytes: 0,
+          missingAssets: 1,
+        });
+      }
+    })());
+  }
 });
