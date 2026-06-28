@@ -6,7 +6,7 @@ export const V2_HEURE_THEME: VocabTheme = {
   title: "L'heure",
   section: "V2",
   words: [
-    { word: "heure", image: "heure.webp",      article: "l'",  gender: "f", exampleSentences: {
+    { word: "heure", definition: [], image: "heure.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'heure en classe.",
@@ -71,7 +71,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque heure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minute", image: "minute.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "minute", definition: [], image: "minute.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la minute en classe.",
@@ -136,7 +136,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minute est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "seconde", image: "seconde.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "seconde", definition: [], image: "seconde.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la seconde en classe.",
@@ -201,7 +201,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque seconde est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "matin", image: "matin.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "matin", definition: [], image: "matin.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le matin en classe.",
@@ -266,7 +266,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque matin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "midi", image: "midi.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "midi", definition: [], image: "midi.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le midi en classe.",
@@ -331,7 +331,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "après-midi", image: "apres-midi.webp", article: "l'",  gender: "m", exampleSentences: {
+    { word: "après-midi", definition: [], image: "apres-midi.webp", article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'après-midi en classe.",
@@ -396,7 +396,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque après-midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soir", image: "soir.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "soir", definition: [], image: "soir.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le soir en classe.",
@@ -461,7 +461,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque soir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minuit", image: "minuit.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "minuit", definition: [], image: "minuit.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le minuit en classe.",
@@ -526,7 +526,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "horloge", image: "horloge.webp",    article: "l'",  gender: "f", exampleSentences: {
+    { word: "horloge", definition: [], image: "horloge.webp",    article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'horloge en classe.",

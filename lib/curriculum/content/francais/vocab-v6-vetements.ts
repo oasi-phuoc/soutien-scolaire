@@ -6,7 +6,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
   title: "Les vêtements",
   section: "V6",
   words: [
-    { word: "t-shirt", article: "le", gender: "m", image: "t-shirt.webp", exampleSentences: {
+    { word: "t-shirt", definition: [], article: "le", gender: "m", image: "t-shirt.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le t-shirt pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque t-shirt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chemise", article: "la", gender: "f", image: "chemise.webp", exampleSentences: {
+    { word: "chemise", definition: [], article: "la", gender: "f", image: "chemise.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chemise pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque chemise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pull", article: "le", gender: "m", image: "pull.webp", exampleSentences: {
+    { word: "pull", definition: [], article: "le", gender: "m", image: "pull.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pull pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pull est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blouson", article: "le", gender: "m", image: "blouson.webp", exampleSentences: {
+    { word: "blouson", definition: [], article: "le", gender: "m", image: "blouson.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le blouson pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque blouson est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "legging", article: "le", gender: "m", image: "legging.webp", exampleSentences: {
+    { word: "legging", definition: [], article: "le", gender: "m", image: "legging.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le legging pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque legging est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pantalon", article: "le", gender: "m", image: "pantalon.webp", exampleSentences: {
+    { word: "pantalon", definition: [], article: "le", gender: "m", image: "pantalon.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pantalon pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pantalon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jupe", article: "la", gender: "f", image: "jupe.webp", exampleSentences: {
+    { word: "jupe", definition: [], article: "la", gender: "f", image: "jupe.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la jupe pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque jupe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "robe", article: "la", gender: "f", image: "robe.webp", exampleSentences: {
+    { word: "robe", definition: [], article: "la", gender: "f", image: "robe.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la robe pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque robe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "veste", article: "la", gender: "f", image: "veste.webp", exampleSentences: {
+    { word: "veste", definition: [], article: "la", gender: "f", image: "veste.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la veste pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque veste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "manteau", article: "le", gender: "m", image: "manteau.webp", exampleSentences: {
+    { word: "manteau", definition: [], article: "le", gender: "m", image: "manteau.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le manteau pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque manteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "short", article: "le", gender: "m", image: "short.webp", exampleSentences: {
+    { word: "short", definition: [], article: "le", gender: "m", image: "short.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le short pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque short est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pyjama", article: "le", gender: "m", image: "pyjama.webp", exampleSentences: {
+    { word: "pyjama", definition: [], article: "le", gender: "m", image: "pyjama.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pyjama pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pyjama est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "maillot", article: "le", gender: "m", image: "maillot.webp", exampleSentences: {
+    { word: "maillot", definition: [], article: "le", gender: "m", image: "maillot.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le maillot pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque maillot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "uniforme",    article: "l'", gender: "m", image: "uniforme.webp", exampleSentences: {
+    { word: "uniforme", definition: [],    article: "l'", gender: "m", image: "uniforme.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'uniforme pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque uniforme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "caleçon", article: "le", gender: "m", image: "calecon.webp", group: "Sous-vêtements", exampleSentences: {
+    { word: "caleçon", definition: [], article: "le", gender: "m", image: "calecon.webp", group: "Sous-vêtements", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le caleçon pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque caleçon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soutien-gorge", article: "le", gender: "m", image: "soutien-gorge.webp", group: "Sous-vêtements", exampleSentences: {
+    { word: "soutien-gorge", definition: [], article: "le", gender: "m", image: "soutien-gorge.webp", group: "Sous-vêtements", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le soutien-gorge pendant l'exercice.",
@@ -1046,7 +1046,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque soutien-gorge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "culotte", article: "la", gender: "f", image: "culotte.webp", group: "Sous-vêtements", exampleSentences: {
+    { word: "culotte", definition: [], article: "la", gender: "f", image: "culotte.webp", group: "Sous-vêtements", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la culotte pendant l'exercice.",
@@ -1111,7 +1111,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque culotte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "débardeur", article: "le", gender: "m", image: "t-shirt.webp", group: "Sous-vêtements", exampleSentences: {
+    { word: "débardeur", definition: [], article: "le", gender: "m", image: "t-shirt.webp", group: "Sous-vêtements", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le débardeur pendant l'exercice.",

@@ -6,7 +6,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
   title: "La structure de l'école",
   section: "V5",
   words: [
-    { word: "école",        image: "ecole.webp",        article: "l'",  gender: "f", exampleSentences: {
+    { word: "école", definition: [],        image: "ecole.webp",        article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'école pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque école est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "classe",       image: "classe.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "classe", definition: [],       image: "classe.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la classe pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque classe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle",        image: "salle.webp",        article: "la",  gender: "f", exampleSentences: {
+    { word: "salle", definition: [],        image: "salle.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir",      image: "couloir.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "couloir", definition: [],      image: "couloir.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le couloir pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétariat",  image: "secretariat.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "secrétariat", definition: [],  image: "secretariat.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le secrétariat pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque secrétariat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bibliothèque", image: "bibliotheque.webp", article: "la",  gender: "f", exampleSentences: {
+    { word: "bibliothèque", definition: [], image: "bibliotheque.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bibliothèque pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque bibliothèque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gymnase",      image: "gymnase.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "gymnase", definition: [],      image: "gymnase.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le gymnase pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque gymnase est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cour",         image: "cour.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "cour", definition: [],         image: "cour.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cour pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "direction",    image: "direction.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "direction", definition: [],    image: "direction.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la direction pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque direction est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sonnerie",     image: "sonnerie.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "sonnerie", definition: [],     image: "sonnerie.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la sonnerie pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque sonnerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cantine",      image: "cantine.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "cantine", definition: [],      image: "cantine.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cantine pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cantine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmerie",   image: "infirmerie.webp",   article: "l'",  gender: "f", exampleSentences: {
+    { word: "infirmerie", definition: [],   image: "infirmerie.webp",   article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'infirmerie pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque infirmerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ascenseur",    image: "ascenseur.webp",    article: "l'",  gender: "m", exampleSentences: {
+    { word: "ascenseur", definition: [],    image: "ascenseur.webp",    article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'ascenseur pendant l'exercice.",

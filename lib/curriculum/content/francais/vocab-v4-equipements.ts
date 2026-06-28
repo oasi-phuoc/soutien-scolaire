@@ -6,7 +6,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   title: "Les meubles",
   section: "V4",
   words: [
-    { word: "table",    image: "table.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "table", definition: [],    image: "table.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la table pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque table est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaise",   image: "chaise.webp",   article: "la",  gender: "f", exampleSentences: {
+    { word: "chaise", definition: [],   image: "chaise.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chaise pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "canapé",   image: "canape.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "canapé", definition: [],   image: "canape.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le canapé pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque canapé est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fauteuil", image: "fauteuil.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "fauteuil", definition: [], image: "fauteuil.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le fauteuil pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque fauteuil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau",   image: "bureau.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "bureau", definition: [],   image: "bureau.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "armoire",  image: "armoire.webp",  article: "l'",  gender: "f", exampleSentences: {
+    { word: "armoire", definition: [],  image: "armoire.webp",  article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'armoire pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque armoire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lit",      image: "lit.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "lit", definition: [],      image: "lit.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lit pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque lit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étagère",  image: "etagere.webp",  article: "l'",  gender: "f", exampleSentences: {
+    { word: "étagère", definition: [],  image: "etagere.webp",  article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'étagère pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque étagère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "miroir",   image: "miroir.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "miroir", definition: [],   image: "miroir.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le miroir pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque miroir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tabouret", image: "tabouret.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "tabouret", definition: [], image: "tabouret.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tabouret pendant l'exercice.",

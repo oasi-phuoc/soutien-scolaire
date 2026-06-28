@@ -6,7 +6,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
   title: "Les types de logement",
   section: "V4",
   words: [
-    { word: "maison", image: "maison.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "maison", definition: [], image: "maison.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la maison pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque maison est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "appartement", image: "appartement.webp", article: "l'",  gender: "m", exampleSentences: {
+    { word: "appartement", definition: [], image: "appartement.webp", article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'appartement pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque appartement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "studio", image: "studio.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "studio", definition: [], image: "studio.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le studio pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque studio est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ferme", image: "ferme.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "ferme", definition: [], image: "ferme.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la ferme pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque ferme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "immeuble", image: "immeuble.webp",    article: "l'",  gender: "m", exampleSentences: {
+    { word: "immeuble", definition: [], image: "immeuble.webp",    article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'immeuble pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque immeuble est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chalet", image: "chalet.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "chalet", definition: [], image: "chalet.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le chalet pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque chalet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cabane", image: "cabane.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "cabane", definition: [], image: "cabane.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cabane pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque cabane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "logement", image: "logement.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "logement", definition: [], image: "logement.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le logement pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque logement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dortoir", image: "dortoir.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "dortoir", definition: [], image: "dortoir.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le dortoir pendant l'exercice.",

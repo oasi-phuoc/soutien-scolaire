@@ -7,7 +7,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "gentil",       feminine: "gentille",     image: "gentillesse.webp", relatedWords: ["qui rend service volontiers","contraire de méchant"], exampleSentences: {
+    { word: "gentil", definition: [],       feminine: "gentille",     image: "gentillesse.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gentil avec ses amis.",
@@ -72,7 +72,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque gentil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "méchant",      feminine: "méchante",     image: "mechancete-v2.webp", relatedWords: ["qui fait du mal aux autres","contraire de gentil"], exampleSentences: {
+    { word: "méchant", definition: [],      feminine: "méchante",     image: "mechancete-v2.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été méchant avec ses amis.",
@@ -137,7 +137,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque méchant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poli",         feminine: "polie",        image: "politesse.webp", relatedWords: ["qui dit bonjour et merci","contraire d'impoli"], exampleSentences: {
+    { word: "poli", definition: [],         feminine: "polie",        image: "politesse.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été poli avec ses amis.",
@@ -202,7 +202,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque poli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "impoli",       feminine: "impolie",      image: "impolitesse.webp", relatedWords: ["qui ne dit pas bonjour","contraire de poli"], exampleSentences: {
+    { word: "impoli", definition: [],       feminine: "impolie",      image: "impolitesse.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été impoli avec ses amis.",
@@ -267,7 +267,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque impoli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "travailleur",  feminine: "travailleuse", image: "travail.webp", relatedWords: ["appliqué et sérieux","contraire de paresseux"], exampleSentences: {
+    { word: "travailleur", definition: [],  feminine: "travailleuse", image: "travail.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été travailleur avec ses amis.",
@@ -332,7 +332,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque travailleur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paresseux",    feminine: "paresseuse",   image: "paresse.webp", relatedWords: ["qui remet tout au lendemain","contraire de travailleur"], exampleSentences: {
+    { word: "paresseux", definition: [],    feminine: "paresseuse",   image: "paresse.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été paresseux avec ses amis.",
@@ -397,7 +397,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque paresseux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "calme",                                  image: "calme.webp", relatedWords: ["serein et posé","contraire de nerveux"], exampleSentences: {
+    { word: "calme", definition: [],                                  image: "calme.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été calme avec ses amis.",
@@ -462,7 +462,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque calme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nerveux",      feminine: "nerveuse",     image: "nevosite.webp", relatedWords: ["stressé et excité","contraire de calme"], exampleSentences: {
+    { word: "nerveux", definition: [],      feminine: "nerveuse",     image: "nevosite.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été nerveux avec ses amis.",
@@ -527,7 +527,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque nerveux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sociable",                               image: "sociabilite.webp", relatedWords: ["facile à vivre","contraire de timide"], exampleSentences: {
+    { word: "sociable", definition: [],                               image: "sociabilite.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été sociable avec ses amis.",
@@ -592,7 +592,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque sociable est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "timide",                                 image: "timidite.webp", relatedWords: ["qui rougit facilement","contraire de sociable"], exampleSentences: {
+    { word: "timide", definition: [],                                 image: "timidite.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été timide avec ses amis.",
@@ -657,7 +657,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque timide est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "patient",      feminine: "patiente",     image: "patience.webp", relatedWords: ["calme face à l'attente","contraire d'impatient"], exampleSentences: {
+    { word: "patient", definition: [],      feminine: "patiente",     image: "patience.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été patient avec ses amis.",
@@ -722,7 +722,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque patient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "impatient",    feminine: "impatiente",   image: "impatience.webp", relatedWords: ["qui veut tout immédiatement","contraire de patient"], exampleSentences: {
+    { word: "impatient", definition: [],    feminine: "impatiente",   image: "impatience.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été impatient avec ses amis.",
@@ -787,7 +787,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque impatient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "joyeux",       feminine: "joyeuse",      image: "joie.webp", relatedWords: ["de bonne humeur","contraire de triste"], exampleSentences: {
+    { word: "joyeux", definition: [],       feminine: "joyeuse",      image: "joie.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été joyeux avec ses amis.",
@@ -852,7 +852,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque joyeux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "triste",                                 image: "tristesse.webp", relatedWords: ["malheureux, abattu","contraire de joyeux"], exampleSentences: {
+    { word: "triste", definition: [],                                 image: "tristesse.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été triste avec ses amis.",

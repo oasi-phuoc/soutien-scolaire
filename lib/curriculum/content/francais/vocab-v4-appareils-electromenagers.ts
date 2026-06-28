@@ -6,7 +6,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
   title: "Les appareils électroménagers",
   section: "V4",
   words: [
-    { word: "réfrigérateur",   image: "frigo.webp",          article: "le",  gender: "m", exampleSentences: {
+    { word: "réfrigérateur", definition: [],   image: "frigo.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le réfrigérateur pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque réfrigérateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "congélateur",     image: "congelateur.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "congélateur", definition: [],     image: "congelateur.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le congélateur pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque congélateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "four",            image: "four.webp",          article: "le",  gender: "m", exampleSentences: {
+    { word: "four", definition: [],            image: "four.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le four pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque four est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinière",      image: "cuisiniere.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "cuisinière", definition: [],      image: "cuisiniere.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cuisinière pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque cuisinière est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-linge",      image: "lave-linge.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "lave-linge", definition: [],      image: "lave-linge.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lave-linge pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-linge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-vaisselle",  image: "lave-vaiselle.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "lave-vaisselle", definition: [],  image: "lave-vaiselle.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lave-vaisselle pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-vaisselle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aspirateur",      image: "aspirateur.webp",    article: "l'",  gender: "m", exampleSentences: {
+    { word: "aspirateur", definition: [],      image: "aspirateur.webp",    article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'aspirateur pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque aspirateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fer à repasser",  image: "fer-a-repasser.webp", article: "le", gender: "m", exampleSentences: {
+    { word: "fer à repasser", definition: [],  image: "fer-a-repasser.webp", article: "le", gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le fer à repasser pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque fer à repasser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "micro-ondes",     image: "micro-onde.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "micro-ondes", definition: [],     image: "micro-onde.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le micro-ondes pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque micro-ondes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ventilateur",     image: "ventilateur.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "ventilateur", definition: [],     image: "ventilateur.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le ventilateur pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque ventilateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouilloire",      image: "bouilloire.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "bouilloire", definition: [],      image: "bouilloire.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bouilloire pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque bouilloire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cafetière",       image: "cafetiere.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "cafetière", definition: [],       image: "cafetiere.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cafetière pendant l'exercice.",

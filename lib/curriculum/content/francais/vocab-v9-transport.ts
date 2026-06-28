@@ -6,7 +6,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
   title: "Le transport",
   section: "V9",
   words: [
-    { word: "bus", image: "bus.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "bus", definition: [], image: "bus.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bus sur le plan.",
@@ -71,7 +71,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bus est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métro", image: "metro.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "métro", definition: [], image: "metro.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le métro sur le plan.",
@@ -136,7 +136,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque métro est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tram", image: "tram.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "tram", definition: [], image: "tram.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le tram sur le plan.",
@@ -201,7 +201,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque tram est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "train", image: "train.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "train", definition: [], image: "train.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le train sur le plan.",
@@ -266,7 +266,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque train est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "voiture", image: "voiture.webp", article: "la",  gender: "f", exampleSentences: {
+    { word: "voiture", definition: [], image: "voiture.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la voiture sur le plan.",
@@ -331,7 +331,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque voiture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vélo", image: "/vocab/images/V3/velo.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "vélo", definition: [], image: "/vocab/images/V3/velo.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le vélo sur le plan.",
@@ -396,7 +396,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque vélo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "taxi", image: "taxi.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "taxi", definition: [], image: "taxi.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le taxi sur le plan.",
@@ -461,7 +461,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque taxi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "moto", image: "moto.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "moto", definition: [], image: "moto.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la moto sur le plan.",
@@ -526,7 +526,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque moto est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.webp",   article: "l'",  gender: "m", exampleSentences: {
+    { word: "avion", definition: [], image: "avion.webp",   article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avion sur le plan.",
@@ -591,7 +591,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bateau", image: "bateau.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "bateau", definition: [], image: "bateau.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bateau sur le plan.",
@@ -656,7 +656,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bateau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "camion", image: "camion.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "camion", definition: [], image: "camion.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le camion sur le plan.",
@@ -721,7 +721,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque camion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scooter", image: "scooter.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "scooter", definition: [], image: "scooter.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le scooter sur le plan.",
@@ -786,7 +786,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque scooter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arrêt", image: "arret.webp",   article: "l'",  gender: "m", exampleSentences: {
+    { word: "arrêt", definition: [], image: "arret.webp",   article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'arrêt sur le plan.",
@@ -851,7 +851,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque arrêt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ticket", image: "ticket.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "ticket", definition: [], image: "ticket.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le ticket sur le plan.",
@@ -916,7 +916,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque ticket est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "billet", definition: [], image: "billet.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le billet sur le plan.",

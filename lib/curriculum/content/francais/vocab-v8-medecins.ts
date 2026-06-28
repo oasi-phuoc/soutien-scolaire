@@ -6,7 +6,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
   title: "Les médecins",
   section: "V8",
   words: [
-    { word: "médecin",          image: "medecin.webp",            article: "le",  gender: "m", exampleSentences: {
+    { word: "médecin", definition: [],          image: "medecin.webp",            article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du médecin au patient.",
@@ -70,7 +70,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmier",        image: "infirmier.webp",          article: "un",  gender: "m", feminine: "infirmière", exampleSentences: {
+    { word: "infirmier", definition: [],        image: "infirmier.webp",          article: "un",  gender: "m", feminine: "infirmière", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'infirmier au patient.",
@@ -134,7 +134,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacien",       image: "pharmacien.webp",         article: "un",  gender: "m", feminine: "pharmacienne", exampleSentences: {
+    { word: "pharmacien", definition: [],       image: "pharmacien.webp",         article: "un",  gender: "m", feminine: "pharmacienne", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pharmacien au patient.",
@@ -198,7 +198,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dentiste",         image: "dentiste.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "dentiste", definition: [],         image: "dentiste.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du dentiste au patient.",
@@ -262,7 +262,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque dentiste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ophtalmologue",    image: "ophtalmologue.webp",      article: "l'",  gender: "m", exampleSentences: {
+    { word: "ophtalmologue", definition: [],    image: "ophtalmologue.webp",      article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ophtalmologue au patient.",
@@ -326,7 +326,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque ophtalmologue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pédiatre",         image: "pediatre.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "pédiatre", definition: [],         image: "pediatre.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pédiatre au patient.",
@@ -390,7 +390,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque pédiatre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chirurgien",       image: "chirurgien.webp",         article: "le",  gender: "m", exampleSentences: {
+    { word: "chirurgien", definition: [],       image: "chirurgien.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du chirurgien au patient.",
@@ -454,7 +454,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque chirurgien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "urgentiste",       image: "urgentiste.webp",         article: "l'",  gender: "m", exampleSentences: {
+    { word: "urgentiste", definition: [],       image: "urgentiste.webp",         article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'urgentiste au patient.",
@@ -518,7 +518,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque urgentiste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kinésithérapeute", image: "kinésithérapeute.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "kinésithérapeute", definition: [], image: "kinésithérapeute.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du kinésithérapeute au patient.",
@@ -582,7 +582,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque kinésithérapeute est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle d'attente",  image: "salle-d-attente.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "salle d'attente", definition: [],  image: "salle-d-attente.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la salle d'attente au patient.",
@@ -646,7 +646,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque salle d'attente est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "consultation",     image: "consultation.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "consultation", definition: [],     image: "consultation.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la consultation au patient.",
@@ -710,7 +710,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque consultation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ordonnance",       image: "ordonnance.webp",         article: "l'",  gender: "f", exampleSentences: {
+    { word: "ordonnance", definition: [],       image: "ordonnance.webp",         article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ordonnance au patient.",
@@ -774,7 +774,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque ordonnance est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rendez-vous",      image: "rendez-vous.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "rendez-vous", definition: [],      image: "rendez-vous.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du rendez-vous au patient.",

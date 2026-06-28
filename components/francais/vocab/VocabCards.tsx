@@ -237,7 +237,8 @@ function DefinitionText({
 }
 
 function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "mf"; imageFolder: string }) {
-  const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
+  const showCountryName = imageFolder.includes("nationalites");
+  const country = showCountryName && w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
   const [imgFailed, setImgFailed] = useState(false);
   const [definitionOpen, setDefinitionOpen] = useState(false);
   const src = resolveImage(w.image, imageFolder);

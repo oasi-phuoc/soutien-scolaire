@@ -6,7 +6,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
   title: "Les accessoires",
   section: "V6",
   words: [
-    { word: "chaussettes", image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
+    { word: "chaussettes", definition: [], image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussettes pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussures", image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
+    { word: "chaussures", definition: [], image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussures pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussures est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottes", image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
+    { word: "bottes", definition: [], image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les bottes pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottines", image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
+    { word: "bottines", definition: [], image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les bottines pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottines est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussons", image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", exampleSentences: {
+    { word: "chaussons", definition: [], image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussons pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussons est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandales", image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
+    { word: "sandales", definition: [], image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les sandales pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sandales est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chapeau", image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
+    { word: "chapeau", definition: [], image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le chapeau pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chapeau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casquette", image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", exampleSentences: {
+    { word: "casquette", definition: [], image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la casquette pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque casquette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bonnet", image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
+    { word: "bonnet", definition: [], image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bonnet pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bonnet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "béret", image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
+    { word: "béret", definition: [], image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le béret pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque béret est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "écharpe", image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", exampleSentences: {
+    { word: "écharpe", definition: [], image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'écharpe pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque écharpe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "foulard", image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", exampleSentences: {
+    { word: "foulard", definition: [], image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le foulard pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque foulard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nœud papillon", image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", exampleSentences: {
+    { word: "nœud papillon", definition: [], image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le nœud papillon pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque nœud papillon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ceinture", image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", exampleSentences: {
+    { word: "ceinture", definition: [], image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la ceinture pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque ceinture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sac à main", image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", exampleSentences: {
+    { word: "sac à main", definition: [], image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sac à main pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sac à main est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "portefeuille", image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", exampleSentences: {
+    { word: "portefeuille", definition: [], image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le portefeuille pendant l'exercice.",
@@ -1046,7 +1046,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque portefeuille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lunettes", image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", exampleSentences: {
+    { word: "lunettes", definition: [], image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les lunettes pendant l'exercice.",
@@ -1111,7 +1111,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque lunettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "montre", image: "montre.webp", article: "la", gender: "f", group: "Bijoux", exampleSentences: {
+    { word: "montre", definition: [], image: "montre.webp", article: "la", gender: "f", group: "Bijoux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la montre pendant l'exercice.",
@@ -1176,7 +1176,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque montre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "collier", image: "collier.webp", article: "le", gender: "m", group: "Bijoux", exampleSentences: {
+    { word: "collier", definition: [], image: "collier.webp", article: "le", gender: "m", group: "Bijoux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le collier pendant l'exercice.",
@@ -1241,7 +1241,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque collier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boucles d'oreilles", image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", exampleSentences: {
+    { word: "boucles d'oreilles", definition: [], image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les boucles d'oreilles pendant l'exercice.",
@@ -1306,7 +1306,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque boucles d'oreilles est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bracelet", image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", exampleSentences: {
+    { word: "bracelet", definition: [], image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bracelet pendant l'exercice.",
@@ -1371,7 +1371,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bracelet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bague", image: "bague.webp", article: "la", gender: "f", group: "Bijoux", exampleSentences: {
+    { word: "bague", definition: [], image: "bague.webp", article: "la", gender: "f", group: "Bijoux", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bague pendant l'exercice.",

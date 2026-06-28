@@ -6,7 +6,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
   title: "Les matières scolaires",
   section: "V5",
   words: [
-    { word: "français", image: "francais.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "français", definition: [], image: "francais.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le français en classe.",
@@ -71,7 +71,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque français est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mathématiques", image: "mathematiques.webp",   article: "les", gender: "f", exampleSentences: {
+    { word: "mathématiques", definition: [], image: "mathematiques.webp",   article: "les", gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié les mathématiques en classe.",
@@ -136,7 +136,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque mathématiques est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "histoire", image: "histoire.webp",        article: "l'",  gender: "f", exampleSentences: {
+    { word: "histoire", definition: [], image: "histoire.webp",        article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'histoire en classe.",
@@ -201,7 +201,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque histoire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "géographie", image: "geographie.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "géographie", definition: [], image: "geographie.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la géographie en classe.",
@@ -266,7 +266,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque géographie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sport", image: "sport.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "sport", definition: [], image: "sport.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le sport en classe.",
@@ -331,7 +331,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque sport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musique", image: "musique.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "musique", definition: [], image: "musique.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la musique en classe.",
@@ -396,7 +396,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque musique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "art", image: "art.webp",             article: "l'",  gender: "m", exampleSentences: {
+    { word: "art", definition: [], image: "art.webp",             article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'art en classe.",
@@ -461,7 +461,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque art est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "informatique", image: "informatique.webp",    article: "l'",  gender: "f", exampleSentences: {
+    { word: "informatique", definition: [], image: "informatique.webp",    article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'informatique en classe.",
@@ -526,7 +526,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque informatique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biologie", image: "biologie.webp",        article: "la",  gender: "f", exampleSentences: {
+    { word: "biologie", definition: [], image: "biologie.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la biologie en classe.",
@@ -591,7 +591,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque biologie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "physique", image: "physique.webp",        article: "la",  gender: "f", exampleSentences: {
+    { word: "physique", definition: [], image: "physique.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la physique en classe.",
@@ -656,7 +656,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque physique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chimie", image: "chimie.webp",          article: "la",  gender: "f", exampleSentences: {
+    { word: "chimie", definition: [], image: "chimie.webp",          article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la chimie en classe.",

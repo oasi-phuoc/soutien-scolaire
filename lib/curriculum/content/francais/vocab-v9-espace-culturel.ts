@@ -6,7 +6,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
   title: "L'espace culturel",
   section: "V9",
   words: [
-    { word: "théâtre", image: "theatre.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "théâtre", definition: [], image: "theatre.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le théâtre sur le plan.",
@@ -71,7 +71,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque théâtre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cinéma", image: "cinema.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "cinéma", definition: [], image: "cinema.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le cinéma sur le plan.",
@@ -136,7 +136,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque cinéma est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musée", image: "musee.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "musée", definition: [], image: "musee.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le musée sur le plan.",
@@ -201,7 +201,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concert", image: "concert.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "concert", definition: [], image: "concert.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le concert sur le plan.",
@@ -266,7 +266,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque concert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "exposition", image: "exposition.webp", article: "l'",  gender: "f", exampleSentences: {
+    { word: "exposition", definition: [], image: "exposition.webp", article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'exposition sur le plan.",
@@ -331,7 +331,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque exposition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spectacle", image: "spectacle.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "spectacle", definition: [], image: "spectacle.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le spectacle sur le plan.",
@@ -396,7 +396,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque spectacle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chanteur", image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", exampleSentences: {
+    { word: "chanteur", definition: [], image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le chanteur sur le plan.",
@@ -461,7 +461,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque chanteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "acteur", image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice", exampleSentences: {
+    { word: "acteur", definition: [], image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'acteur sur le plan.",
@@ -526,7 +526,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque acteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musicien", image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne", exampleSentences: {
+    { word: "musicien", definition: [], image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le musicien sur le plan.",
@@ -591,7 +591,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musicien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "peintre", image: "peintre.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "peintre", definition: [], image: "peintre.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le peintre sur le plan.",
@@ -656,7 +656,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque peintre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "danseur", image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse", exampleSentences: {
+    { word: "danseur", definition: [], image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le danseur sur le plan.",
@@ -721,7 +721,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque danseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "billet", definition: [], image: "billet.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le billet sur le plan.",
@@ -786,7 +786,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque billet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle", image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "salle", definition: [], image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la salle sur le plan.",
@@ -851,7 +851,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scène", image: "scene.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "scène", definition: [], image: "scene.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la scène sur le plan.",
@@ -916,7 +916,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque scène est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "festival", image: "festival.webp",   article: "le",  gender: "m", exampleSentences: {
+    { word: "festival", definition: [], image: "festival.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le festival sur le plan.",

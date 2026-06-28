@@ -6,7 +6,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
   title: "Les quantités",
   section: "V7",
   words: [
-    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "gramme", definition: [],     image: "gramme.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le gramme en classe.",
@@ -71,7 +71,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque gramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "kilogramme", definition: [], image: "kilogramme.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un kilogramme au marché.",
@@ -136,7 +136,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque kilogramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "boîte", definition: [],      image: "boite.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une boîte au marché.",
@@ -201,7 +201,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque boîte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "paquet", definition: [],     image: "paquet.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le paquet en classe.",
@@ -266,7 +266,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque paquet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "sachet", definition: [],     image: "sachet.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sachet au marché.",
@@ -331,7 +331,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque sachet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "pincée", definition: [],     image: "pincee.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pincée au marché.",
@@ -396,7 +396,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque pincée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "tranche", definition: [],    image: "tranche.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la tranche en classe.",
@@ -461,7 +461,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque tranche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "part",       image: "part.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "part", definition: [],       image: "part.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une part au marché.",
@@ -526,7 +526,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque part est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "morceau", definition: [],    image: "morceau.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le morceau en classe.",
@@ -591,7 +591,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque morceau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "bol", definition: [],        image: "bol.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bol en classe.",
@@ -656,7 +656,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", exampleSentences: {
+    { word: "bouteille", definition: [],  image: "bouteille.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la bouteille en classe.",
@@ -721,7 +721,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bouteille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", exampleSentences: {
+    { word: "cuillère", definition: [],   image: "cuillere.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la cuillère en classe.",

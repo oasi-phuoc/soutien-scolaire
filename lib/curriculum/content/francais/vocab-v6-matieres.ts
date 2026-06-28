@@ -6,7 +6,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
   title: "Les matières",
   section: "V6",
   words: [
-    { word: "coton",      image: "coton.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "coton", definition: [],      image: "coton.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le coton en classe.",
@@ -71,7 +71,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque coton est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laine",      image: "laine.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "laine", definition: [],      image: "laine.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la laine en classe.",
@@ -136,7 +136,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque laine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuir",       image: "cuir.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "cuir", definition: [],       image: "cuir.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le cuir en classe.",
@@ -201,7 +201,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque cuir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soie",       image: "soie.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "soie", definition: [],       image: "soie.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la soie en classe.",
@@ -266,7 +266,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque soie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plastique",  image: "plastique.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "plastique", definition: [],  image: "plastique.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le plastique en classe.",
@@ -331,7 +331,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque plastique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métal",      image: "metal.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "métal", definition: [],      image: "metal.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le métal en classe.",
@@ -396,7 +396,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque métal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bois",       image: "bois.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "bois", definition: [],       image: "bois.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bois en classe.",
@@ -461,7 +461,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque bois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "verre", definition: [],      image: "verre.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le verre en classe.",
@@ -526,7 +526,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "papier",     image: "papier.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "papier", definition: [],     image: "papier.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le papier en classe.",
@@ -591,7 +591,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque papier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nylon",      image: "nylon.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "nylon", definition: [],      image: "nylon.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le nylon en classe.",
@@ -656,7 +656,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque nylon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "caoutchouc", image: "caoutchouc.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "caoutchouc", definition: [], image: "caoutchouc.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le caoutchouc en classe.",
@@ -721,7 +721,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque caoutchouc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "velours",    image: "velours.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "velours", definition: [],    image: "velours.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le velours en classe.",

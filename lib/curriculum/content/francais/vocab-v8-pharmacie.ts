@@ -6,7 +6,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
   title: "La pharmacie",
   section: "V8",
   words: [
-    { word: "médicament", article: "le",  gender: "m", exampleSentences: {
+    { word: "médicament", definition: [], article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du médicament au patient.",
@@ -70,7 +70,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque médicament est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ordonnance", article: "l'",  gender: "f", exampleSentences: {
+    { word: "ordonnance", definition: [], article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ordonnance au patient.",
@@ -134,7 +134,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque ordonnance est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sirop",      article: "le",  gender: "m", exampleSentences: {
+    { word: "sirop", definition: [],      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du sirop au patient.",
@@ -198,7 +198,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque sirop est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "comprimé",   article: "le",  gender: "m", exampleSentences: {
+    { word: "comprimé", definition: [],   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du comprimé au patient.",
@@ -262,7 +262,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque comprimé est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gélule",     article: "la",  gender: "f", exampleSentences: {
+    { word: "gélule", definition: [],     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la gélule au patient.",
@@ -326,7 +326,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque gélule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pommade",    article: "la",  gender: "f", exampleSentences: {
+    { word: "pommade", definition: [],    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la pommade au patient.",
@@ -390,7 +390,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque pommade est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "crème",      article: "la",  gender: "f", exampleSentences: {
+    { word: "crème", definition: [],      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la crème au patient.",
@@ -454,7 +454,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque crème est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pansement",  article: "le",  gender: "m", exampleSentences: {
+    { word: "pansement", definition: [],  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pansement au patient.",
@@ -518,7 +518,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque pansement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "thermomètre",article: "le",  gender: "m", exampleSentences: {
+    { word: "thermomètre", definition: [],article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du thermomètre au patient.",
@@ -582,7 +582,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque thermomètre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spray",      article: "le",  gender: "m", exampleSentences: {
+    { word: "spray", definition: [],      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du spray au patient.",
@@ -646,7 +646,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque spray est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "goutte",     article: "la",  gender: "f", exampleSentences: {
+    { word: "goutte", definition: [],     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la goutte au patient.",
@@ -710,7 +710,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque goutte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacie",  article: "la",  gender: "f", exampleSentences: {
+    { word: "pharmacie", definition: [],  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la pharmacie au patient.",
@@ -774,7 +774,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque pharmacie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dosette",    article: "la",  gender: "f", exampleSentences: {
+    { word: "dosette", definition: [],    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la dosette au patient.",
@@ -838,7 +838,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque dosette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vitamine",   article: "la",  gender: "f", exampleSentences: {
+    { word: "vitamine", definition: [],   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la vitamine au patient.",
@@ -902,7 +902,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Puisque vitamine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boîte",      article: "la",  gender: "f", exampleSentences: {
+    { word: "boîte", definition: [],      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la boîte au patient.",

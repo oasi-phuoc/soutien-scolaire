@@ -6,7 +6,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
   title: "L'aéroport",
   section: "V9",
   words: [
-    { word: "passeport", image: "passeport.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "passeport", definition: [], image: "passeport.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le passeport sur le plan.",
@@ -71,7 +71,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque passeport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "visa", image: "visa.webp",                article: "le",  gender: "m", exampleSentences: {
+    { word: "visa", definition: [], image: "visa.webp",                article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le visa sur le plan.",
@@ -136,7 +136,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque visa est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vol", image: "vol.webp",                 article: "le",  gender: "m", exampleSentences: {
+    { word: "vol", definition: [], image: "vol.webp",                 article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le vol sur le plan.",
@@ -201,7 +201,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque vol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "destination", image: "destination.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "destination", definition: [], image: "destination.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la destination sur le plan.",
@@ -266,7 +266,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque destination est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.webp",               article: "l'",  gender: "m", exampleSentences: {
+    { word: "avion", definition: [], image: "avion.webp",               article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avion sur le plan.",
@@ -331,7 +331,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "escale", image: "escale.webp",              article: "l'",  gender: "f", exampleSentences: {
+    { word: "escale", definition: [], image: "escale.webp",              article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'escale sur le plan.",
@@ -396,7 +396,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque escale est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "valise", image: "valise.webp",              article: "la",  gender: "f", exampleSentences: {
+    { word: "valise", definition: [], image: "valise.webp",              article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la valise sur le plan.",
@@ -461,7 +461,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque valise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terminal", image: "terminal.webp",            article: "le",  gender: "m", exampleSentences: {
+    { word: "terminal", definition: [], image: "terminal.webp",            article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le terminal sur le plan.",
@@ -526,7 +526,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque terminal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "douane", image: "douane.webp",              article: "la",  gender: "f", exampleSentences: {
+    { word: "douane", definition: [], image: "douane.webp",              article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la douane sur le plan.",
@@ -591,7 +591,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque douane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "enregistrement", image: "enregistrement.webp",      article: "l'",  gender: "m", exampleSentences: {
+    { word: "enregistrement", definition: [], image: "enregistrement.webp",      article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'enregistrement sur le plan.",
@@ -656,7 +656,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque enregistrement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réservation", image: "reservation.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "réservation", definition: [], image: "reservation.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réservation sur le plan.",
@@ -721,7 +721,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque réservation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "embarquement", image: "embarquement.webp",        article: "l'",  gender: "m", exampleSentences: {
+    { word: "embarquement", definition: [], image: "embarquement.webp",        article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'embarquement sur le plan.",
@@ -786,7 +786,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque embarquement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "porte", image: "porte.webp",               article: "la",  gender: "f", exampleSentences: {
+    { word: "porte", definition: [], image: "porte.webp",               article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la porte sur le plan.",
@@ -851,7 +851,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque porte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bagage", image: "bagage.webp",              article: "le",  gender: "m", exampleSentences: {
+    { word: "bagage", definition: [], image: "bagage.webp",              article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bagage sur le plan.",
@@ -916,7 +916,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque bagage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "carte d'embarquement", image: "carte-d-embarquement.webp",article: "la",  gender: "f", exampleSentences: {
+    { word: "carte d'embarquement", definition: [], image: "carte-d-embarquement.webp",article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la carte d'embarquement sur le plan.",

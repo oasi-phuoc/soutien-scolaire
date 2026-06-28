@@ -6,7 +6,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
   title: "Les pièces de la maison",
   section: "V4",
   words: [
-    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "cuisine", definition: [], image: "cuisine.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cuisine pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", exampleSentences: {
+    { word: "salon", definition: [], image: "salon.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le salon pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "chambre", definition: [], image: "chambre.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chambre pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", exampleSentences: {
+    { word: "salle de bain", definition: [], image: "salle-de-bain.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle de bain pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle de bain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", exampleSentences: {
+    { word: "toilettes", definition: [], image: "toilettes.webp",     article: "les", gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les toilettes pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque toilettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "bureau", definition: [], image: "bureau.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "couloir", definition: [], image: "couloir.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le couloir pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "balcon", definition: [], image: "balcon.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le balcon pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque balcon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "terrasse", definition: [], image: "terrasse.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la terrasse pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque terrasse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", exampleSentences: {
+    { word: "cave", definition: [], image: "cave.webp",          article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cave pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "grenier", definition: [], image: "grenier.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le grenier pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque grenier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", exampleSentences: {
+    { word: "salle à manger", definition: [], image: "salle-a-manger.webp",article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle à manger pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle à manger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "jardin", definition: [], image: "jardin.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le jardin pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque jardin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "sous-sol", definition: [], image: "sous-sol.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sous-sol pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque sous-sol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", exampleSentences: {
+    { word: "entrée", definition: [], image: "entree.webp",        article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'entrée pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "garage", definition: [], image: "garage.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le garage pendant l'exercice.",

@@ -6,7 +6,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   title: "Le restaurant",
   section: "V7",
   words: [
-    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse", exampleSentences: {
+    { word: "service", definition: [],    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un service au marché.",
@@ -71,7 +71,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque service est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", exampleSentences: {
+    { word: "cuisine", definition: [],    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une cuisine au marché.",
@@ -136,7 +136,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "table",      image: "table.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "table", definition: [],      image: "table.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une table au marché.",
@@ -201,7 +201,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque table est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaise",                              article: "la",  gender: "f", exampleSentences: {
+    { word: "chaise", definition: [],                              article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une chaise au marché.",
@@ -266,7 +266,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", exampleSentences: {
+    { word: "assiette", definition: [],   image: "assiette.webp",   article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'assiette en classe.",
@@ -331,7 +331,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque assiette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "couvert", definition: [],    image: "couvert.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couvert au marché.",
@@ -396,7 +396,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couvert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", exampleSentences: {
+    { word: "cuillère", definition: [],   image: "cuillere.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la cuillère en classe.",
@@ -461,7 +461,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuillère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "couteau", definition: [],    image: "couteau.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couteau au marché.",
@@ -526,7 +526,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", exampleSentences: {
+    { word: "fourchette", definition: [], image: "fourchette.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une fourchette au marché.",
@@ -591,7 +591,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque fourchette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "verre", definition: [],      image: "verre.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le verre en classe.",
@@ -656,7 +656,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", exampleSentences: {
+    { word: "serviette", definition: [],  image: "serviette.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une serviette au marché.",
@@ -721,7 +721,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque serviette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "plat", definition: [],       image: "plat.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un plat au marché.",
@@ -786,7 +786,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque plat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", exampleSentences: {
+    { word: "dessert", definition: [],    image: "dessert.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un dessert au marché.",
@@ -851,7 +851,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque dessert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "menu", definition: [],       image: "menu.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un menu au marché.",
@@ -916,7 +916,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque menu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", exampleSentences: {
+    { word: "addition", definition: [],   image: "addition.webp",   article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une addition au marché.",
@@ -981,7 +981,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque addition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "boisson", definition: [],    image: "boisson.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une boisson au marché.",

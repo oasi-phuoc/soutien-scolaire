@@ -6,7 +6,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
   title: "L'hôtel",
   section: "V9",
   words: [
-    { word: "réception", image: "reception.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "réception", definition: [], image: "reception.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réception sur le plan.",
@@ -71,7 +71,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque réception est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "clé", image: "cle.webp",             article: "la",  gender: "f", exampleSentences: {
+    { word: "clé", definition: [], image: "cle.webp",             article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la clé sur le plan.",
@@ -136,7 +136,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque clé est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre", image: "/vocab/images/V4/chambre.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "chambre", definition: [], image: "/vocab/images/V4/chambre.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre sur le plan.",
@@ -201,7 +201,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre double", image: "chambre-double.webp",  article: "la",  gender: "f", exampleSentences: {
+    { word: "chambre double", definition: [], image: "chambre-double.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre double sur le plan.",
@@ -266,7 +266,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque chambre double est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre simple", image: "chambre-simple.webp",  article: "la",  gender: "f", exampleSentences: {
+    { word: "chambre simple", definition: [], image: "chambre-simple.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre simple sur le plan.",
@@ -331,7 +331,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque chambre simple est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "piscine", image: "piscine.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "piscine", definition: [], image: "piscine.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la piscine sur le plan.",
@@ -396,7 +396,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque piscine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "petit-déjeuner", image: "petit-dejeuner.webp",  article: "le",  gender: "m", exampleSentences: {
+    { word: "petit-déjeuner", definition: [], image: "petit-dejeuner.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le petit-déjeuner sur le plan.",
@@ -461,7 +461,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque petit-déjeuner est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "demi-pension", image: "demi-pension.webp",    article: "la",  gender: "f", exampleSentences: {
+    { word: "demi-pension", definition: [], image: "demi-pension.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la demi-pension sur le plan.",
@@ -526,7 +526,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque demi-pension est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réservation", image: "reservation.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "réservation", definition: [], image: "reservation.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réservation sur le plan.",
@@ -591,7 +591,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque réservation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nuit", image: "/vocab/images/V2/nuit.webp",            article: "la",  gender: "f", exampleSentences: {
+    { word: "nuit", definition: [], image: "/vocab/images/V2/nuit.webp",            article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la nuit sur le plan.",
@@ -656,7 +656,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque nuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étage", image: "etage.webp",           article: "l'",  gender: "m", exampleSentences: {
+    { word: "étage", definition: [], image: "etage.webp",           article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'étage sur le plan.",
@@ -721,7 +721,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque étage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ascenseur", image: "/vocab/images/V5/ascenseur.webp",       article: "l'",  gender: "m", exampleSentences: {
+    { word: "ascenseur", definition: [], image: "/vocab/images/V5/ascenseur.webp",       article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'ascenseur sur le plan.",
@@ -786,7 +786,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque ascenseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "coffre-fort", image: "coffre-fort.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "coffre-fort", definition: [], image: "coffre-fort.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le coffre-fort sur le plan.",
@@ -851,7 +851,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque coffre-fort est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concierge", image: "concierge.webp",       article: "le",  gender: "m", exampleSentences: {
+    { word: "concierge", definition: [], image: "concierge.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le concierge sur le plan.",
@@ -916,7 +916,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Puisque concierge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "parking", image: "parking.webp",         article: "le",  gender: "m", exampleSentences: {
+    { word: "parking", definition: [], image: "parking.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le parking sur le plan.",

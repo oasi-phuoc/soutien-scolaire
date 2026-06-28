@@ -6,7 +6,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
   title: "Les saisons",
   section: "V2",
   words: [
-    { word: "printemps", image: "printemps.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "printemps", definition: [], image: "printemps.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le printemps en classe.",
@@ -71,7 +71,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque printemps est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "été", image: "ete.webp",           article: "l'",  gender: "m", exampleSentences: {
+    { word: "été", definition: [], image: "ete.webp",           article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'été en classe.",
@@ -136,7 +136,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque été est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "automne", image: "automne.webp",       article: "l'",  gender: "m", exampleSentences: {
+    { word: "automne", definition: [], image: "automne.webp",       article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'automne en classe.",
@@ -201,7 +201,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque automne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "hiver", image: "hiver.webp",         article: "l'",  gender: "m", exampleSentences: {
+    { word: "hiver", definition: [], image: "hiver.webp",         article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'hiver en classe.",
@@ -266,7 +266,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque hiver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saison", image: "saison.webp",        article: "la",  gender: "f", exampleSentences: {
+    { word: "saison", definition: [], image: "saison.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la saison en classe.",
@@ -331,7 +331,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque saison est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "climat", image: "climat.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "climat", definition: [], image: "climat.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le climat en classe.",
@@ -396,7 +396,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque climat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "météo", image: "meteo.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "météo", definition: [], image: "meteo.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la météo en classe.",
@@ -461,7 +461,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque météo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "température", image: "temperature.webp",   article: "la",  gender: "f", exampleSentences: {
+    { word: "température", definition: [], image: "temperature.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la température en classe.",
@@ -526,7 +526,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque température est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se réchauffer", image: "se-rechauffer.webp", exampleSentences: {
+    { word: "se réchauffer", definition: [], image: "se-rechauffer.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié se réchauffer en classe.",
@@ -591,7 +591,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque se réchauffer est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se rafraîchir", image: "se-rafraichir.webp", exampleSentences: {
+    { word: "se rafraîchir", definition: [], image: "se-rafraichir.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié se rafraîchir en classe.",

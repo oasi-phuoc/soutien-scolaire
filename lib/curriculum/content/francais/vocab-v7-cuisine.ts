@@ -6,7 +6,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
   title: "La cuisine",
   section: "V7",
   words: [
-    { word: "cuisiner", image: "cuisiner.webp", exampleSentences: {
+    { word: "cuisiner", definition: [], image: "cuisiner.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un cuisiner au marché.",
@@ -71,7 +71,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuisiner est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couper", image: "couper.webp", exampleSentences: {
+    { word: "couper", definition: [], image: "couper.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couper au marché.",
@@ -136,7 +136,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque couper est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mélanger", image: "melanger.webp", exampleSentences: {
+    { word: "mélanger", definition: [], image: "melanger.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un mélanger au marché.",
@@ -201,7 +201,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque mélanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuire", image: "cuire.webp", exampleSentences: {
+    { word: "cuire", definition: [], image: "cuire.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un cuire au marché.",
@@ -266,7 +266,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouillir", image: "bouillir.webp", exampleSentences: {
+    { word: "bouillir", definition: [], image: "bouillir.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un bouillir au marché.",
@@ -331,7 +331,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque bouillir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frire", image: "frire.webp", exampleSentences: {
+    { word: "frire", definition: [], image: "frire.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un frire au marché.",
@@ -396,7 +396,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque frire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rôtir", image: "rotir.webp", exampleSentences: {
+    { word: "rôtir", definition: [], image: "rotir.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un rôtir au marché.",
@@ -461,7 +461,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque rôtir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saler", image: "saler.webp", exampleSentences: {
+    { word: "saler", definition: [], image: "saler.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un saler au marché.",
@@ -526,7 +526,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque saler est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "goûter", image: "gouter.webp", exampleSentences: {
+    { word: "goûter", definition: [], image: "gouter.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un goûter au marché.",
@@ -591,7 +591,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque goûter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laver", image: "laver.webp", exampleSentences: {
+    { word: "laver", definition: [], image: "laver.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un laver au marché.",
@@ -656,7 +656,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque laver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éplucher", image: "eplucher.webp", exampleSentences: {
+    { word: "éplucher", definition: [], image: "eplucher.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un éplucher au marché.",
@@ -721,7 +721,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque éplucher est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verser", image: "verser.webp", exampleSentences: {
+    { word: "verser", definition: [], image: "verser.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un verser au marché.",
@@ -786,7 +786,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque verser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réchauffer", image: "rechauffer.webp", exampleSentences: {
+    { word: "réchauffer", definition: [], image: "rechauffer.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un réchauffer au marché.",

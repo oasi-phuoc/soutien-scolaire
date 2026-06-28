@@ -6,7 +6,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
   title: "L'état civil",
   section: "V1",
   words: [
-    { word: "célibataire",    image: "celibataire.webp", relatedWords: ["qui n'est pas en couple", "qui vit seul sans conjoint"], exampleSentences: {
+    { word: "célibataire", definition: [],    image: "celibataire.webp", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est célibataire.",
@@ -68,7 +68,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en couple",      image: "en-couple.webp", relatedWords: ["qui a une relation amoureuse", "qui sort avec quelqu'un"], exampleSentences: {
+    { word: "en couple", definition: [],      image: "en-couple.webp", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est en couple.",
@@ -130,7 +130,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en concubinage", image: "en-concubinage.webp", relatedWords: ["union libre", "couple non marié qui vit ensemble"], exampleSentences: {
+    { word: "en concubinage", definition: [], image: "en-concubinage.webp", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est en concubinage.",
@@ -192,7 +192,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fiancé",         image: "fiance.webp",         feminine: "fiancée", relatedWords: ["qui a accepté de se marier", "dont les fiançailles sont officielles"], exampleSentences: {
+    { word: "fiancé", definition: [],         image: "fiance.webp",         feminine: "fiancée", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est fiancé.",
@@ -256,7 +256,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "marié",          image: "marie.webp",          feminine: "mariée", relatedWords: ["qui a dit oui devant le maire", "qui a un conjoint légal"], exampleSentences: {
+    { word: "marié", definition: [],          image: "marie.webp",          feminine: "mariée", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est marié.",
@@ -320,7 +320,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "pacsé",          image: "pacse.webp",          feminine: "pacsée", relatedWords: ["uni par un pacte civil de solidarité", "alternative légale au mariage"], exampleSentences: {
+    { word: "pacsé", definition: [],          image: "pacse.webp",          feminine: "pacsée", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est pacsé.",
@@ -384,7 +384,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "séparé",         image: "separe.webp",         feminine: "séparée", relatedWords: ["qui ne vit plus avec son partenaire", "en cours de séparation"], exampleSentences: {
+    { word: "séparé", definition: [],         image: "separe.webp",         feminine: "séparée", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est séparé.",
@@ -448,7 +448,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "divorcé",        image: "divorce.webp",        feminine: "divorcée", relatedWords: ["dont le divorce est prononcé", "qui a mis fin à son mariage"], exampleSentences: {
+    { word: "divorcé", definition: [],        image: "divorce.webp",        feminine: "divorcée", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est divorcé.",
@@ -512,7 +512,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "veuf",           image: "veuf.webp",           feminine: "veuve", relatedWords: ["qui a perdu son mari ou sa femme", "qui vit seul après le décès du conjoint"], exampleSentences: {
+    { word: "veuf", definition: [],           image: "veuf.webp",           feminine: "veuve", exampleSentences: {
         a1: [],
         a2: [
           "Depuis l'année dernière, il est veuf.",

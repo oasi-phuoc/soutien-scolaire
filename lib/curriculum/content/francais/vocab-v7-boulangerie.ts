@@ -6,7 +6,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
   title: "La boulangerie",
   section: "V7",
   words: [
-    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", exampleSentences: {
+    { word: "pain", definition: [],             image: "pain.webp",             article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au marché.",
@@ -71,7 +71,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "baguette", definition: [],         image: "baguette.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une baguette au marché.",
@@ -136,7 +136,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque baguette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", exampleSentences: {
+    { word: "sandwich", definition: [],         image: "sandwich.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sandwich au marché.",
@@ -201,7 +201,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque sandwich est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", exampleSentences: {
+    { word: "viennoiserie", definition: [],     image: "viennoiserie.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une viennoiserie au marché.",
@@ -266,7 +266,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque viennoiserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "croissant",                                        article: "le",  gender: "m", exampleSentences: {
+    { word: "croissant", definition: [],                                        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un croissant au marché.",
@@ -331,7 +331,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque croissant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", exampleSentences: {
+    { word: "pain au chocolat", definition: [], image: "pain-au-chocolat.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au chocolat au marché.",
@@ -396,7 +396,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain au chocolat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", exampleSentences: {
+    { word: "brioche", definition: [],          image: "brioche.webp",          article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une brioche au marché.",
@@ -461,7 +461,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque brioche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", exampleSentences: {
+    { word: "biscuit", definition: [],          image: "biscuit.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un biscuit au marché.",
@@ -526,7 +526,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque biscuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", exampleSentences: {
+    { word: "pâtisserie", definition: [],       image: "patisserie.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pâtisserie au marché.",
@@ -591,7 +591,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pâtisserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "gâteau", definition: [],           image: "gateau.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un gâteau au marché.",
@@ -656,7 +656,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque gâteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", exampleSentences: {
+    { word: "tarte", definition: [],            image: "tarte.webp",            article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une tarte au marché.",
@@ -721,7 +721,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque tarte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", exampleSentences: {
+    { word: "éclair", definition: [],           image: "eclair.webp",           article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un éclair au marché.",

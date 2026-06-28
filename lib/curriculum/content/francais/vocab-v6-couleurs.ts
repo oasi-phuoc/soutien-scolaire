@@ -6,7 +6,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
   title: "Les couleurs",
   section: "V6",
   words: [
-    { word: "rouge",     image: "rouge.svg", exampleSentences: {
+    { word: "rouge", definition: [],     image: "rouge.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rouge avec ses amis.",
@@ -71,7 +71,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bleu",      image: "bleu.svg",       feminine: "bleue", exampleSentences: {
+    { word: "bleu", definition: [],      image: "bleu.svg",       feminine: "bleue", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bleu avec ses amis.",
@@ -136,7 +136,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bleu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vert",      image: "vert.svg",       feminine: "verte", exampleSentences: {
+    { word: "vert", definition: [],      image: "vert.svg",       feminine: "verte", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été vert avec ses amis.",
@@ -201,7 +201,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque vert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jaune",     image: "jaune.svg", exampleSentences: {
+    { word: "jaune", definition: [],     image: "jaune.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été jaune avec ses amis.",
@@ -266,7 +266,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque jaune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "noir",      image: "noir.svg",       feminine: "noire", exampleSentences: {
+    { word: "noir", definition: [],      image: "noir.svg",       feminine: "noire", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été noir avec ses amis.",
@@ -331,7 +331,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque noir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blanc",     image: "blanc.svg",      feminine: "blanche", exampleSentences: {
+    { word: "blanc", definition: [],     image: "blanc.svg",      feminine: "blanche", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été blanc avec ses amis.",
@@ -396,7 +396,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque blanc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gris",      image: "gris.svg",       feminine: "grise", exampleSentences: {
+    { word: "gris", definition: [],      image: "gris.svg",       feminine: "grise", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gris avec ses amis.",
@@ -461,7 +461,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque gris est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rose",      image: "rose.svg", exampleSentences: {
+    { word: "rose", definition: [],      image: "rose.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rose avec ses amis.",
@@ -526,7 +526,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rose est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",    image: "orange.svg", exampleSentences: {
+    { word: "orange", definition: [],    image: "orange.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été orange avec ses amis.",
@@ -591,7 +591,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "violet",    image: "violet.svg",     feminine: "violette", exampleSentences: {
+    { word: "violet", definition: [],    image: "violet.svg",     feminine: "violette", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été violet avec ses amis.",
@@ -656,7 +656,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque violet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "marron",    image: "marron.svg", exampleSentences: {
+    { word: "marron", definition: [],    image: "marron.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été marron avec ses amis.",
@@ -721,7 +721,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque marron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beige",     image: "beige.svg", exampleSentences: {
+    { word: "beige", definition: [],     image: "beige.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été beige avec ses amis.",
@@ -786,7 +786,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque beige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turquoise", image: "turquoise.svg", exampleSentences: {
+    { word: "turquoise", definition: [], image: "turquoise.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été turquoise avec ses amis.",
@@ -851,7 +851,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque turquoise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cyan",      image: "cyan.svg", exampleSentences: {
+    { word: "cyan", definition: [],      image: "cyan.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été cyan avec ses amis.",
@@ -916,7 +916,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque cyan est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bordeaux",  image: "bordeaux.svg", exampleSentences: {
+    { word: "bordeaux", definition: [],  image: "bordeaux.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bordeaux avec ses amis.",
@@ -981,7 +981,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bordeaux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kaki",      image: "kaki.svg", exampleSentences: {
+    { word: "kaki", definition: [],      image: "kaki.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été kaki avec ses amis.",

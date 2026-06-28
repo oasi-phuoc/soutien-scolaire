@@ -6,7 +6,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
   title: "Les légumes",
   section: "V7",
   words: [
-    { word: "carotte",        image: "carotte.webp",        article: "la",  gender: "f", exampleSentences: {
+    { word: "carotte", definition: [],        image: "carotte.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une carotte au marché.",
@@ -71,7 +71,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque carotte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tomate",         image: "tomate.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "tomate", definition: [],         image: "tomate.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une tomate au marché.",
@@ -136,7 +136,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque tomate est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salade",         image: "salade.webp",         article: "la",  gender: "f", exampleSentences: {
+    { word: "salade", definition: [],         image: "salade.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une salade au marché.",
@@ -201,7 +201,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque salade est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concombre",      image: "concombre.webp",      article: "le",  gender: "m", exampleSentences: {
+    { word: "concombre", definition: [],      image: "concombre.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un concombre au marché.",
@@ -266,7 +266,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque concombre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pomme de terre", image: "pomme-de-terre.webp", article: "la",  gender: "f", exampleSentences: {
+    { word: "pomme de terre", definition: [], image: "pomme-de-terre.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pomme de terre au marché.",
@@ -331,7 +331,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque pomme de terre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oignon",         image: "oignon.webp",         article: "l'",  gender: "m", exampleSentences: {
+    { word: "oignon", definition: [],         image: "oignon.webp",         article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un oignon au marché.",
@@ -396,7 +396,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque oignon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "échalote",       image: "echalotte.webp",      article: "l'",  gender: "f", exampleSentences: {
+    { word: "échalote", definition: [],       image: "echalotte.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une échalote au marché.",
@@ -461,7 +461,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque échalote est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ail",            image: "ail.webp",            article: "l'",  gender: "m", exampleSentences: {
+    { word: "ail", definition: [],            image: "ail.webp",            article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ail au marché.",
@@ -526,7 +526,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque ail est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poivron",        image: "poivron.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "poivron", definition: [],        image: "poivron.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un poivron au marché.",
@@ -591,7 +591,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque poivron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "piment",         image: "piment.webp",         article: "le",  gender: "m", exampleSentences: {
+    { word: "piment", definition: [],         image: "piment.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un piment au marché.",
@@ -656,7 +656,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque piment est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "courgette",      image: "courgette.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "courgette", definition: [],      image: "courgette.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une courgette au marché.",
@@ -721,7 +721,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque courgette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aubergine",      image: "aubergine.webp",      article: "l'",  gender: "f", exampleSentences: {
+    { word: "aubergine", definition: [],      image: "aubergine.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une aubergine au marché.",
@@ -786,7 +786,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque aubergine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brocoli",        image: "brocoli.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "brocoli", definition: [],        image: "brocoli.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un brocoli au marché.",
@@ -851,7 +851,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque brocoli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chou",           image: "chou.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "chou", definition: [],           image: "chou.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un chou au marché.",
@@ -916,7 +916,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque chou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épinard",        image: "epinard.webp",        article: "l'",  gender: "m", exampleSentences: {
+    { word: "épinard", definition: [],        image: "epinard.webp",        article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un épinard au marché.",
@@ -981,7 +981,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque épinard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "asperge",        image: "asperge.webp",        article: "l'",  gender: "f", exampleSentences: {
+    { word: "asperge", definition: [],        image: "asperge.webp",        article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une asperge au marché.",
@@ -1046,7 +1046,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque asperge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "betterave",      image: "betterave.webp",      article: "la",  gender: "f", exampleSentences: {
+    { word: "betterave", definition: [],      image: "betterave.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une betterave au marché.",
@@ -1111,7 +1111,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque betterave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "navet",          image: "navet.webp",          article: "le",  gender: "m", exampleSentences: {
+    { word: "navet", definition: [],          image: "navet.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un navet au marché.",
@@ -1176,7 +1176,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque navet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "radis",          image: "radis.webp",          article: "le",  gender: "m", exampleSentences: {
+    { word: "radis", definition: [],          image: "radis.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un radis au marché.",
@@ -1241,7 +1241,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque radis est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "haricot",        image: "haricot.webp",        article: "le",  gender: "m", exampleSentences: {
+    { word: "haricot", definition: [],        image: "haricot.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un haricot au marché.",
@@ -1306,7 +1306,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque haricot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "maïs",           image: "mais.webp",           article: "le",  gender: "m", exampleSentences: {
+    { word: "maïs", definition: [],           image: "mais.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un maïs au marché.",
@@ -1371,7 +1371,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque maïs est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "champignon",     image: "champignon.webp",     article: "le",  gender: "m", exampleSentences: {
+    { word: "champignon", definition: [],     image: "champignon.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un champignon au marché.",
