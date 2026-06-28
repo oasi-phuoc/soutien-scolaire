@@ -6,7 +6,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
   title: "Les pièces de la maison",
   section: "V4",
   words: [
-    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", definition: "pièce où l'on prépare les repas" , exampleSentences: {
+    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", definition: "La cuisine est pièce où l'on prépare les repas. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la cuisine.",
           "J'utilise la cuisine.",
@@ -107,7 +107,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", definition: "pièce principale pour se détendre" , exampleSentences: {
+    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", definition: "Le salon est pièce principale pour se détendre. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le salon.",
           "J'utilise le salon.",
@@ -208,7 +208,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", definition: "pièce pour dormir" , exampleSentences: {
+    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", definition: "La chambre est pièce pour dormir. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la chambre.",
           "J'utilise la chambre.",
@@ -309,7 +309,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", definition: "pièce avec baignoire ou douche" , exampleSentences: {
+    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", definition: "La salle de bain est pièce avec baignoire ou douche. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la salle de bain.",
           "J'utilise la salle de bain.",
@@ -410,7 +410,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle de bain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", definition: "pièce avec les WC" , exampleSentences: {
+    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", definition: "Les toilettes est pièce avec les WC. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les toilettes.",
           "J'utilise les toilettes.",
@@ -511,7 +511,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque toilettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", definition: "pièce pour travailler ou étudier" , exampleSentences: {
+    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", definition: "Le bureau est pièce pour travailler ou étudier. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le bureau.",
           "J'utilise le bureau.",
@@ -612,7 +612,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", definition: "passage entre les pièces" , exampleSentences: {
+    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", definition: "Le couloir est passage entre les pièces. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le couloir.",
           "J'utilise le couloir.",
@@ -713,7 +713,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", definition: "plateforme extérieure d'un appartement" , exampleSentences: {
+    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", definition: "Le balcon est plateforme extérieure d'un appartement. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le balcon.",
           "J'utilise le balcon.",
@@ -814,7 +814,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque balcon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", definition: "espace extérieur plat attenant à la maison" , exampleSentences: {
+    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", definition: "La terrasse est espace extérieur plat attenant à la maison. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la terrasse.",
           "J'utilise la terrasse.",
@@ -915,7 +915,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque terrasse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", definition: "pièce souterraine pour le stockage" , exampleSentences: {
+    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", definition: "La cave est pièce souterraine pour le stockage. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la cave.",
           "J'utilise la cave.",
@@ -1016,7 +1016,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", definition: "espace sous le toit pour ranger" , exampleSentences: {
+    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", definition: "Le grenier est espace sous le toit pour ranger. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le grenier.",
           "J'utilise le grenier.",
@@ -1117,7 +1117,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque grenier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", definition: "pièce pour prendre les repas" , exampleSentences: {
+    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", definition: "La salle à manger est pièce pour prendre les repas. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la salle à manger.",
           "J'utilise la salle à manger.",
@@ -1218,7 +1218,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle à manger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", definition: "espace vert autour de la maison" , exampleSentences: {
+    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", definition: "Le jardin est espace vert autour de la maison. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le jardin.",
           "J'utilise le jardin.",
@@ -1319,7 +1319,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque jardin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", definition: "niveau en dessous du rez-de-chaussée" , exampleSentences: {
+    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", definition: "Le sous-sol est niveau en dessous du rez-de-chaussée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le sous-sol.",
           "J'utilise le sous-sol.",
@@ -1420,7 +1420,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque sous-sol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", definition: "espace d'accueil à l'entrée du logement" , exampleSentences: {
+    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", definition: "L'entrée est espace d'accueil à l'entrée du logement. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'entrée.",
           "J'utilise l'entrée.",
@@ -1521,7 +1521,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", definition: "pièce ou espace pour garer une voiture" , exampleSentences: {
+    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", definition: "Le garage est pièce ou espace pour garer une voiture. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le garage.",
           "J'utilise le garage.",

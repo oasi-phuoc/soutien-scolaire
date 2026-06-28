@@ -6,7 +6,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
   title: "Les accessoires",
   section: "V6",
   words: [
-    { word: "chaussettes", image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "vêtements qui couvrent les pieds" , exampleSentences: {
+    { word: "chaussettes", image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "Les chaussettes est vêtements qui couvrent les pieds. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les chaussettes.",
           "J'utilise les chaussettes.",
@@ -107,7 +107,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussures", image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", definition: "paire de souliers pour les pieds" , exampleSentences: {
+    { word: "chaussures", image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", definition: "Les chaussures est paire de souliers pour les pieds. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les chaussures.",
           "J'utilise les chaussures.",
@@ -208,7 +208,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussures est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottes", image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures hautes" , exampleSentences: {
+    { word: "bottes", image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "Les bottes est chaussures hautes. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les bottes.",
           "J'utilise les bottes.",
@@ -309,7 +309,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottines", image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures qui montent à la cheville" , exampleSentences: {
+    { word: "bottines", image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", definition: "Les bottines est chaussures qui montent à la cheville. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les bottines.",
           "J'utilise les bottines.",
@@ -410,7 +410,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottines est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussons", image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", definition: "chaussures d'intérieur confortables" , exampleSentences: {
+    { word: "chaussons", image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", definition: "Les chaussons est chaussures d'intérieur confortables. Ils sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les chaussons.",
           "J'utilise les chaussons.",
@@ -511,7 +511,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussons est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandales", image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures ouvertes pour l'été" , exampleSentences: {
+    { word: "sandales", image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", definition: "Les sandales est chaussures ouvertes pour l'été. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les sandales.",
           "J'utilise les sandales.",
@@ -612,7 +612,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sandales est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chapeau", image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", definition: "coiffure rigide qui protège la tête" , exampleSentences: {
+    { word: "chapeau", image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", definition: "Le chapeau est coiffure rigide qui protège la tête. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le chapeau.",
           "J'utilise le chapeau.",
@@ -713,7 +713,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chapeau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casquette", image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", definition: "coiffure souple avec visière" , exampleSentences: {
+    { word: "casquette", image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", definition: "La casquette est coiffure souple avec visière. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la casquette.",
           "J'utilise la casquette.",
@@ -814,7 +814,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque casquette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bonnet", image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", definition: "coiffure chaude en tissu ou en laine" , exampleSentences: {
+    { word: "bonnet", image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", definition: "Le bonnet est coiffure chaude en tissu ou en laine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le bonnet.",
           "J'utilise le bonnet.",
@@ -915,7 +915,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bonnet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "béret", image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", definition: "chapeau souple et rond" , exampleSentences: {
+    { word: "béret", image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", definition: "Le béret est chapeau souple et rond. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le béret.",
           "J'utilise le béret.",
@@ -1016,7 +1016,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque béret est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "écharpe", image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", definition: "longue pièce de tissu pour le cou" , exampleSentences: {
+    { word: "écharpe", image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", definition: "L'écharpe est longue pièce de tissu pour le cou. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'écharpe.",
           "J'utilise l'écharpe.",
@@ -1117,7 +1117,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque écharpe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "foulard", image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", definition: "tissu léger porté autour du cou ou sur la tête" , exampleSentences: {
+    { word: "foulard", image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", definition: "Le foulard est tissu léger porté autour du cou ou sur la tête. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le foulard.",
           "J'utilise le foulard.",
@@ -1218,7 +1218,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque foulard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nœud papillon", image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", definition: "petit nœud porté au cou avec une chemise" , exampleSentences: {
+    { word: "nœud papillon", image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", definition: "Le nœud papillon est petit nœud porté au cou avec une chemise. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le nœud papillon.",
           "J'utilise le nœud papillon.",
@@ -1319,7 +1319,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque nœud papillon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ceinture", image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", definition: "bande pour tenir le pantalon" , exampleSentences: {
+    { word: "ceinture", image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", definition: "La ceinture est bande pour tenir le pantalon. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la ceinture.",
           "J'utilise la ceinture.",
@@ -1420,7 +1420,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque ceinture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sac à main", image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "sac pour transporter des objets personnels" , exampleSentences: {
+    { word: "sac à main", image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "Le sac à main est sac pour transporter des objets personnels. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le sac à main.",
           "J'utilise le sac à main.",
@@ -1521,7 +1521,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sac à main est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "portefeuille", image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "petit étui pour ranger argent et cartes" , exampleSentences: {
+    { word: "portefeuille", image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "Le portefeuille est petit étui pour ranger argent et cartes. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le portefeuille.",
           "J'utilise le portefeuille.",
@@ -1622,7 +1622,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque portefeuille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lunettes", image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", definition: "verres correcteurs portés sur le nez" , exampleSentences: {
+    { word: "lunettes", image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", definition: "Les lunettes est verres correcteurs portés sur le nez. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les lunettes.",
           "J'utilise les lunettes.",
@@ -1723,7 +1723,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque lunettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "montre", image: "montre.webp", article: "la", gender: "f", group: "Bijoux", definition: "bijou au poignet indiquant l'heure" , exampleSentences: {
+    { word: "montre", image: "montre.webp", article: "la", gender: "f", group: "Bijoux", definition: "La montre est bijou au poignet indiquant l'heure. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la montre.",
           "J'utilise la montre.",
@@ -1824,7 +1824,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque montre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "collier", image: "collier.webp", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté autour du cou" , exampleSentences: {
+    { word: "collier", image: "collier.webp", article: "le", gender: "m", group: "Bijoux", definition: "Le collier est bijou porté autour du cou. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le collier.",
           "J'utilise le collier.",
@@ -1925,7 +1925,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque collier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boucles d'oreilles", image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", definition: "bijoux portés aux oreilles" , exampleSentences: {
+    { word: "boucles d'oreilles", image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", definition: "Les boucles d'oreilles est bijoux portés aux oreilles. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois les boucles d'oreilles.",
           "J'utilise les boucles d'oreilles.",
@@ -2026,7 +2026,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque boucles d'oreilles est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bracelet", image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté au poignet" , exampleSentences: {
+    { word: "bracelet", image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", definition: "Le bracelet est bijou porté au poignet. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le bracelet.",
           "J'utilise le bracelet.",
@@ -2127,7 +2127,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bracelet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bague", image: "bague.webp", article: "la", gender: "f", group: "Bijoux", definition: "anneau bijou porté au doigt" , exampleSentences: {
+    { word: "bague", image: "bague.webp", article: "la", gender: "f", group: "Bijoux", definition: "La bague est anneau bijou porté au doigt. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la bague.",
           "J'utilise la bague.",

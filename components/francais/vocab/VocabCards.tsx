@@ -5,7 +5,7 @@ import Image from "next/image";
 import { playWord, SoundIcon } from "./vocabUtils";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
-import { definitionLabel, pickWordDefinition } from "@/lib/curriculum/vocab-definition-utils";
+import { pickWordDefinition } from "@/lib/curriculum/vocab-definition-utils";
 
 function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
   const cx = size / 2, cy = size / 2, r = size * 0.44;
@@ -110,6 +110,27 @@ function femArticle(art?: string): string {
   return art === "le" ? "la" : art === "un" ? "une" : art ?? "";
 }
 
+function displayArticle(article?: string, word?: string): string {
+  if (!article) return word ? `Le mot ${word}` : "Ce mot";
+  if (article === "l'") return `L'${word ?? ""}`.trim();
+  return `${article.charAt(0).toUpperCase()}${article.slice(1)} ${word ?? ""}`.trim();
+}
+
+function ensureSentence(text: string): string {
+  const trimmed = text.trim();
+  if (!trimmed) return trimmed;
+  return /[.!?]$/u.test(trimmed) ? trimmed : `${trimmed}.`;
+}
+
+function elaborateFrenchDefinition(w: VocabWord, text: string, translated: boolean): string {
+  if (translated) return ensureSentence(text);
+  const clean = ensureSentence(text);
+  if (clean.split(/\s+/u).length >= 12 || clean.includes(w.word)) return clean;
+
+  const subject = displayArticle(w.article, w.word);
+  return `${subject} est ${clean.charAt(0).toLowerCase()}${clean.slice(1)} Ce mot sert à reconnaître, nommer ou décrire cette réalité dans une phrase.`;
+}
+
 function MfRows({ word, feminine, article }: { word: string; feminine?: string; article?: string }) {
   const art = article ?? "";
   const artF = femArticle(article);
@@ -183,15 +204,19 @@ function WordTitle({
 function DefinitionText({
   w,
   isOpen,
+  closeWords,
 }: {
   w: VocabWord;
   isOpen: boolean;
+  closeWords?: string[];
 }) {
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
   const picked = pickWordDefinition(w, pivot, showPivot);
   if (!isOpen || !picked.text) return null;
   const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+  const definition = elaborateFrenchDefinition(w, picked.text, picked.translated);
+  const hasCloseWords = !!closeWords?.length;
 
   return (
     <div
@@ -199,8 +224,14 @@ function DefinitionText({
       lang={showPivot && picked.translated ? pivot : "fr"}
       dir={isRtl && picked.translated ? "rtl" : "ltr"}
     >
-      <span className="font-bold text-[var(--color-accent-fr)]">{definitionLabel(showPivot ? pivot : "fr")} : </span>
-      <span>{picked.text}</span>
+      <p>{definition}</p>
+      {hasCloseWords && (
+        <p className="mt-1">
+          <span className="font-semibold text-[var(--color-text-primary)]">Mots proches : </span>
+          <span className="font-bold text-[var(--color-accent-fr)]">{closeWords.join(", ")}</span>
+          <span>.</span>
+        </p>
+      )}
     </div>
   );
 }
@@ -218,6 +249,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       ariaLabel={`${definitionOpen ? "Masquer" : "Afficher"} la définition de ${w.word}`}
     />
   ) : null;
+  const closeWords = country ? undefined : w.relatedWords;
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
@@ -245,7 +277,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
         {cardLayout === "mf" ? (
           <>
             <WordTitle definitionButton={definitionButton}>{w.relatedWords?.[0] ?? w.word}</WordTitle>
-            <DefinitionText w={w} isOpen={definitionOpen} />
+            <DefinitionText w={w} isOpen={definitionOpen} closeWords={closeWords} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : country ? (
@@ -254,7 +286,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
               <span className={`font-normal text-[var(--color-text-secondary)]${country.articlePart.endsWith("'") ? "" : " mr-0.5"}`}>{country.articlePart}</span>
               <strong>{country.namePart}</strong>
             </WordTitle>
-            <DefinitionText w={w} isOpen={definitionOpen} />
+            <DefinitionText w={w} isOpen={definitionOpen} closeWords={undefined} />
             <MfRows word={w.word} feminine={w.feminine ?? w.word} article="un" />
           </>
         ) : w.feminine ? (
@@ -263,7 +295,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
               <span>{w.word}</span>
             </WordTitle>
-            <DefinitionText w={w} isOpen={definitionOpen} />
+            <DefinitionText w={w} isOpen={definitionOpen} closeWords={closeWords} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : (
@@ -272,12 +304,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
               <span>{w.word}</span>
             </WordTitle>
-            <DefinitionText w={w} isOpen={definitionOpen} />
-            {w.relatedWords && w.relatedWords.length > 0 && (
-              <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                {w.relatedWords.map((rw) => <p key={rw}>{rw}</p>)}
-              </div>
-            )}
+            <DefinitionText w={w} isOpen={definitionOpen} closeWords={closeWords} />
           </>
         )}
       </div>

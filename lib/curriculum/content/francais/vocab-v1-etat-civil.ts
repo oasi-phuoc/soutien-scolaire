@@ -6,7 +6,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
   title: "L'état civil",
   section: "V1",
   words: [
-    { word: "célibataire",    image: "celibataire.webp",    definition: ["sans partenaire officiel", "qui n'est pas en couple", "qui vit seul sans conjoint"],
+    { word: "célibataire",    image: "celibataire.webp",    definition: "Le mot célibataire est sans partenaire officiel. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est célibataire.",
@@ -105,7 +105,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en couple",      image: "en-couple.webp",      definition: ["qui vit avec un partenaire", "qui a une relation amoureuse", "qui sort avec quelqu'un"],
+    { word: "en couple",      image: "en-couple.webp",      definition: "Le mot en couple est qui vit avec un partenaire. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est en couple.",
@@ -204,7 +204,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en concubinage", image: "en-concubinage.webp", definition: ["qui vit avec un partenaire sans être marié", "union libre", "couple non marié qui vit ensemble"],
+    { word: "en concubinage", image: "en-concubinage.webp", definition: "Le mot en concubinage est qui vit avec un partenaire sans être marié. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est en concubinage.",
@@ -303,7 +303,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fiancé",         image: "fiance.webp",         feminine: "fiancée",  definition: ["promis au mariage", "qui a accepté de se marier", "dont les fiançailles sont officielles"],
+    { word: "fiancé",         image: "fiance.webp",         feminine: "fiancée",  definition: "Le mot fiancé est promis au mariage. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est fiancé.",
@@ -404,7 +404,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "marié",          image: "marie.webp",          feminine: "mariée",   definition: ["uni par le mariage", "qui a dit oui devant le maire", "qui a un conjoint légal"],
+    { word: "marié",          image: "marie.webp",          feminine: "mariée",   definition: "Le mot marié est uni par le mariage. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est marié.",
@@ -505,7 +505,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "pacsé",          image: "pacse.webp",          feminine: "pacsée",   definition: ["lié par un PACS", "uni par un pacte civil de solidarité", "alternative légale au mariage"],
+    { word: "pacsé",          image: "pacse.webp",          feminine: "pacsée",   definition: "Le mot pacsé est lié par un PACS. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est pacsé.",
@@ -606,7 +606,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "séparé",         image: "separe.webp",         feminine: "séparée",  definition: ["qui vit séparé de son conjoint", "qui ne vit plus avec son partenaire", "en cours de séparation"],
+    { word: "séparé",         image: "separe.webp",         feminine: "séparée",  definition: "Le mot séparé est qui vit séparé de son conjoint. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est séparé.",
@@ -707,7 +707,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "divorcé",        image: "divorce.webp",        feminine: "divorcée", definition: ["dont le mariage est dissous", "dont le divorce est prononcé", "qui a mis fin à son mariage"],
+    { word: "divorcé",        image: "divorce.webp",        feminine: "divorcée", definition: "Le mot divorcé est dont le mariage est dissous. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est divorcé.",
@@ -808,7 +808,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "veuf",           image: "veuf.webp",           feminine: "veuve",    definition: ["dont le conjoint est décédé", "qui a perdu son mari ou sa femme", "qui vit seul après le décès du conjoint"],
+    { word: "veuf",           image: "veuf.webp",           feminine: "veuve",    definition: "Le mot veuf est dont le conjoint est décédé. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est veuf.",

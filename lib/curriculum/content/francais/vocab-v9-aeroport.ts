@@ -6,7 +6,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
   title: "L'aéroport",
   section: "V9",
   words: [
-    { word: "passeport", image: "passeport.webp",           article: "le",  gender: "m", definition: "document officiel d'identité pour voyager" , exampleSentences: {
+    { word: "passeport", image: "passeport.webp",           article: "le",  gender: "m", definition: "Le passeport est document officiel d'identité pour voyager. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le passeport.",
           "Je cherche le passeport.",
@@ -102,7 +102,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque passeport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "visa", image: "visa.webp",                article: "le",  gender: "m", definition: "autorisation officielle pour entrer dans un pays" , exampleSentences: {
+    { word: "visa", image: "visa.webp",                article: "le",  gender: "m", definition: "Le visa est autorisation officielle pour entrer dans un pays. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le visa.",
           "Je cherche le visa.",
@@ -198,7 +198,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque visa est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vol", image: "vol.webp",                 article: "le",  gender: "m", definition: "trajet en avion" , exampleSentences: {
+    { word: "vol", image: "vol.webp",                 article: "le",  gender: "m", definition: "Le vol est trajet en avion. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le vol.",
           "Je cherche le vol.",
@@ -294,7 +294,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque vol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "destination", image: "destination.webp",         article: "la",  gender: "f", definition: "lieu où l'on se rend" , exampleSentences: {
+    { word: "destination", image: "destination.webp",         article: "la",  gender: "f", definition: "La destination est lieu où l'on se rend. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la destination.",
           "Je cherche la destination.",
@@ -390,7 +390,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque destination est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.webp",               article: "l'",  gender: "m", definition: "véhicule aérien" , exampleSentences: {
+    { word: "avion", image: "avion.webp",               article: "l'",  gender: "m", definition: "L'avion est véhicule aérien. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'avion.",
           "Je cherche l'avion.",
@@ -486,7 +486,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "escale", image: "escale.webp",              article: "l'",  gender: "f", definition: "arrêt intermédiaire lors d'un vol" , exampleSentences: {
+    { word: "escale", image: "escale.webp",              article: "l'",  gender: "f", definition: "L'escale est arrêt intermédiaire lors d'un vol. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'escale.",
           "Je cherche l'escale.",
@@ -582,7 +582,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque escale est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "valise", image: "valise.webp",              article: "la",  gender: "f", definition: "grand bagage pour les voyages" , exampleSentences: {
+    { word: "valise", image: "valise.webp",              article: "la",  gender: "f", definition: "La valise est grand bagage pour les voyages. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la valise.",
           "Je cherche la valise.",
@@ -678,7 +678,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque valise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terminal", image: "terminal.webp",            article: "le",  gender: "m", definition: "bâtiment principal d'un aéroport" , exampleSentences: {
+    { word: "terminal", image: "terminal.webp",            article: "le",  gender: "m", definition: "Le terminal est bâtiment principal d'un aéroport. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le terminal.",
           "Je cherche le terminal.",
@@ -774,7 +774,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque terminal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "douane", image: "douane.webp",              article: "la",  gender: "f", definition: "contrôle des bagages à la frontière" , exampleSentences: {
+    { word: "douane", image: "douane.webp",              article: "la",  gender: "f", definition: "La douane est contrôle des bagages à la frontière. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la douane.",
           "Je cherche la douane.",
@@ -870,7 +870,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque douane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "enregistrement", image: "enregistrement.webp",      article: "l'",  gender: "m", definition: "démarche pour valider son billet avant de voler" , exampleSentences: {
+    { word: "enregistrement", image: "enregistrement.webp",      article: "l'",  gender: "m", definition: "L'enregistrement est démarche pour valider son billet avant de voler. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'enregistrement.",
           "Je cherche l'enregistrement.",
@@ -966,7 +966,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque enregistrement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réservation", image: "reservation.webp",         article: "la",  gender: "f", definition: "action de réserver un vol ou un siège" , exampleSentences: {
+    { word: "réservation", image: "reservation.webp",         article: "la",  gender: "f", definition: "La réservation est action de réserver un vol ou un siège. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la réservation.",
           "Je cherche la réservation.",
@@ -1062,7 +1062,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque réservation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "embarquement", image: "embarquement.webp",        article: "l'",  gender: "m", definition: "montée dans l'avion" , exampleSentences: {
+    { word: "embarquement", image: "embarquement.webp",        article: "l'",  gender: "m", definition: "L'embarquement est montée dans l'avion. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'embarquement.",
           "Je cherche l'embarquement.",
@@ -1158,7 +1158,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque embarquement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "porte", image: "porte.webp",               article: "la",  gender: "f", definition: "accès à l'avion dans le terminal" , exampleSentences: {
+    { word: "porte", image: "porte.webp",               article: "la",  gender: "f", definition: "La porte est accès à l'avion dans le terminal. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la porte.",
           "Je cherche la porte.",
@@ -1254,7 +1254,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque porte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bagage", image: "bagage.webp",              article: "le",  gender: "m", definition: "valise ou sac de voyage" , exampleSentences: {
+    { word: "bagage", image: "bagage.webp",              article: "le",  gender: "m", definition: "Le bagage est valise ou sac de voyage. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le bagage.",
           "Je cherche le bagage.",
@@ -1350,7 +1350,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque bagage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "carte d'embarquement", image: "carte-d-embarquement.webp",article: "la",  gender: "f", definition: "document remis pour monter dans l'avion" , exampleSentences: {
+    { word: "carte d'embarquement", image: "carte-d-embarquement.webp",article: "la",  gender: "f", definition: "La carte d'embarquement est document remis pour monter dans l'avion. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la carte d'embarquement.",
           "Je cherche la carte d'embarquement.",

@@ -6,7 +6,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
   title: "Les couleurs",
   section: "V6",
   words: [
-    { word: "rouge",     image: "rouge.svg",      definition: "couleur du sang et des fraises" , exampleSentences: {
+    { word: "rouge",     image: "rouge.svg",      definition: "Le mot rouge est couleur du sang et des fraises. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est rouge.",
           "Elle est rouge.",
@@ -107,7 +107,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bleu",      image: "bleu.svg",       feminine: "bleue",     definition: "couleur du ciel et de la mer" , exampleSentences: {
+    { word: "bleu",      image: "bleu.svg",       feminine: "bleue",     definition: "Le mot bleu est couleur du ciel et de la mer. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est bleu.",
           "Elle est bleue.",
@@ -208,7 +208,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bleu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vert",      image: "vert.svg",       feminine: "verte",     definition: "couleur de l'herbe et des arbres" , exampleSentences: {
+    { word: "vert",      image: "vert.svg",       feminine: "verte",     definition: "Le mot vert est couleur de l'herbe et des arbres. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est vert.",
           "Elle est verte.",
@@ -309,7 +309,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque vert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jaune",     image: "jaune.svg",      definition: "couleur du soleil et du citron" , exampleSentences: {
+    { word: "jaune",     image: "jaune.svg",      definition: "Le mot jaune est couleur du soleil et du citron. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est jaune.",
           "Elle est jaune.",
@@ -410,7 +410,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque jaune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "noir",      image: "noir.svg",       feminine: "noire",     definition: "couleur de la nuit, absence de lumière" , exampleSentences: {
+    { word: "noir",      image: "noir.svg",       feminine: "noire",     definition: "Le mot noir est couleur de la nuit, absence de lumière. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est noir.",
           "Elle est noire.",
@@ -511,7 +511,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque noir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blanc",     image: "blanc.svg",      feminine: "blanche",   definition: "couleur de la neige, toutes les lumières" , exampleSentences: {
+    { word: "blanc",     image: "blanc.svg",      feminine: "blanche",   definition: "Le mot blanc est couleur de la neige, toutes les lumières. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est blanc.",
           "Elle est blanche.",
@@ -612,7 +612,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque blanc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gris",      image: "gris.svg",       feminine: "grise",     definition: "couleur intermédiaire entre noir et blanc" , exampleSentences: {
+    { word: "gris",      image: "gris.svg",       feminine: "grise",     definition: "Le mot gris est couleur intermédiaire entre noir et blanc. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est gris.",
           "Elle est grise.",
@@ -713,7 +713,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque gris est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rose",      image: "rose.svg",       definition: "couleur entre rouge et blanc" , exampleSentences: {
+    { word: "rose",      image: "rose.svg",       definition: "Le mot rose est couleur entre rouge et blanc. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est rose.",
           "Elle est rose.",
@@ -814,7 +814,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rose est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",    image: "orange.svg",     definition: "couleur du fruit orange, entre rouge et jaune" , exampleSentences: {
+    { word: "orange",    image: "orange.svg",     definition: "Le mot orange est couleur du fruit orange, entre rouge et jaune. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est orange.",
           "Elle est orange.",
@@ -915,7 +915,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "violet",    image: "violet.svg",     feminine: "violette",  definition: "couleur entre bleu et rouge" , exampleSentences: {
+    { word: "violet",    image: "violet.svg",     feminine: "violette",  definition: "Le mot violet est couleur entre bleu et rouge. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est violet.",
           "Elle est violette.",
@@ -1016,7 +1016,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque violet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "marron",    image: "marron.svg",     definition: "couleur brun foncé comme le chocolat" , exampleSentences: {
+    { word: "marron",    image: "marron.svg",     definition: "Le mot marron est couleur brun foncé comme le chocolat. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est marron.",
           "Elle est marron.",
@@ -1117,7 +1117,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque marron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beige",     image: "beige.svg",      definition: "couleur crème, brun très clair" , exampleSentences: {
+    { word: "beige",     image: "beige.svg",      definition: "Le mot beige est couleur crème, brun très clair. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est beige.",
           "Elle est beige.",
@@ -1218,7 +1218,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque beige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turquoise", image: "turquoise.svg",  definition: "couleur bleu-vert vif" , exampleSentences: {
+    { word: "turquoise", image: "turquoise.svg",  definition: "Le mot turquoise est couleur bleu-vert vif. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est turquoise.",
           "Elle est turquoise.",
@@ -1319,7 +1319,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque turquoise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cyan",      image: "cyan.svg",       definition: "couleur bleu vif entre bleu et vert" , exampleSentences: {
+    { word: "cyan",      image: "cyan.svg",       definition: "Le mot cyan est couleur bleu vif entre bleu et vert. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est cyan.",
           "Elle est cyan.",
@@ -1420,7 +1420,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque cyan est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bordeaux",  image: "bordeaux.svg",   definition: "couleur rouge foncé comme le vin de Bordeaux" , exampleSentences: {
+    { word: "bordeaux",  image: "bordeaux.svg",   definition: "Le mot bordeaux est couleur rouge foncé comme le vin de Bordeaux. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est bordeaux.",
           "Elle est bordeaux.",
@@ -1521,7 +1521,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bordeaux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kaki",      image: "kaki.svg",       definition: "couleur vert olive tirant sur le brun" , exampleSentences: {
+    { word: "kaki",      image: "kaki.svg",       definition: "Le mot kaki est couleur vert olive tirant sur le brun. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il est kaki.",
           "Elle est kaki.",

@@ -6,7 +6,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
   title: "L'espace culturel",
   section: "V9",
   words: [
-    { word: "théâtre", image: "theatre.webp",    article: "le",  gender: "m", definition: "lieu pour les représentations scéniques" , exampleSentences: {
+    { word: "théâtre", image: "theatre.webp",    article: "le",  gender: "m", definition: "Le théâtre est lieu pour les représentations scéniques. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le théâtre.",
           "Je cherche le théâtre.",
@@ -102,7 +102,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque théâtre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cinéma", image: "cinema.webp",     article: "le",  gender: "m", definition: "lieu pour regarder des films" , exampleSentences: {
+    { word: "cinéma", image: "cinema.webp",     article: "le",  gender: "m", definition: "Le cinéma est lieu pour regarder des films. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le cinéma.",
           "Je cherche le cinéma.",
@@ -198,7 +198,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque cinéma est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musée", image: "musee.webp",      article: "le",  gender: "m", definition: "lieu pour exposer des œuvres d'art" , exampleSentences: {
+    { word: "musée", image: "musee.webp",      article: "le",  gender: "m", definition: "Le musée est lieu pour exposer des œuvres d'art. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le musée.",
           "Je cherche le musée.",
@@ -294,7 +294,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concert", image: "concert.webp",    article: "le",  gender: "m", definition: "spectacle musical en direct" , exampleSentences: {
+    { word: "concert", image: "concert.webp",    article: "le",  gender: "m", definition: "Le concert est spectacle musical en direct. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le concert.",
           "Je cherche le concert.",
@@ -390,7 +390,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque concert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "exposition", image: "exposition.webp", article: "l'",  gender: "f", definition: "présentation publique d'œuvres ou objets" , exampleSentences: {
+    { word: "exposition", image: "exposition.webp", article: "l'",  gender: "f", definition: "L'exposition est présentation publique d'œuvres ou objets. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'exposition.",
           "Je cherche l'exposition.",
@@ -486,7 +486,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque exposition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spectacle", image: "spectacle.webp",  article: "le",  gender: "m", definition: "représentation artistique devant un public" , exampleSentences: {
+    { word: "spectacle", image: "spectacle.webp",  article: "le",  gender: "m", definition: "Le spectacle est représentation artistique devant un public. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le spectacle.",
           "Je cherche le spectacle.",
@@ -582,7 +582,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque spectacle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chanteur", image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", definition: "artiste qui chante" , exampleSentences: {
+    { word: "chanteur", image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", definition: "Le chanteur est artiste qui chante. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le chanteur.",
           "Je cherche le chanteur.",
@@ -678,7 +678,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque chanteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "acteur", image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice",   definition: "artiste qui joue un rôle" , exampleSentences: {
+    { word: "acteur", image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice",   definition: "L'acteur est artiste qui joue un rôle. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'acteur.",
           "Je cherche l'acteur.",
@@ -774,7 +774,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque acteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musicien", image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne",definition: "artiste qui joue d'un instrument" , exampleSentences: {
+    { word: "musicien", image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne",definition: "Le musicien est artiste qui joue d'un instrument. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le musicien.",
           "Je cherche le musicien.",
@@ -870,7 +870,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musicien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "peintre", image: "peintre.webp",    article: "le",  gender: "m", definition: "artiste qui crée des tableaux" , exampleSentences: {
+    { word: "peintre", image: "peintre.webp",    article: "le",  gender: "m", definition: "Le peintre est artiste qui crée des tableaux. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le peintre.",
           "Je cherche le peintre.",
@@ -966,7 +966,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque peintre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "danseur", image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse",  definition: "artiste qui pratique la danse" , exampleSentences: {
+    { word: "danseur", image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse",  definition: "Le danseur est artiste qui pratique la danse. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le danseur.",
           "Je cherche le danseur.",
@@ -1062,7 +1062,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque danseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.webp",     article: "le",  gender: "m", definition: "titre d'entrée pour un spectacle ou musée" , exampleSentences: {
+    { word: "billet", image: "billet.webp",     article: "le",  gender: "m", definition: "Le billet est titre d'entrée pour un spectacle ou musée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le billet.",
           "Je cherche le billet.",
@@ -1158,7 +1158,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque billet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle", image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", definition: "espace où se déroule un spectacle" , exampleSentences: {
+    { word: "salle", image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", definition: "La salle est espace où se déroule un spectacle. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la salle.",
           "Je cherche la salle.",
@@ -1254,7 +1254,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scène", image: "scene.webp",      article: "la",  gender: "f", definition: "plateforme où se produit l'artiste" , exampleSentences: {
+    { word: "scène", image: "scene.webp",      article: "la",  gender: "f", definition: "La scène est plateforme où se produit l'artiste. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la scène.",
           "Je cherche la scène.",
@@ -1350,7 +1350,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque scène est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "festival", image: "festival.webp",   article: "le",  gender: "m", definition: "événement culturel regroupant plusieurs spectacles" , exampleSentences: {
+    { word: "festival", image: "festival.webp",   article: "le",  gender: "m", definition: "Le festival est événement culturel regroupant plusieurs spectacles. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le festival.",
           "Je cherche le festival.",

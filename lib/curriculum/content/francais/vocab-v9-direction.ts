@@ -6,7 +6,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
   title: "La direction",
   section: "V9",
   words: [
-    { word: "gauche", image: "gauche.webp",          article: "la",  gender: "f", definition: "côté opposé à la droite" , exampleSentences: {
+    { word: "gauche", image: "gauche.webp",          article: "la",  gender: "f", definition: "La gauche est côté opposé à la droite. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la gauche.",
           "Je cherche la gauche.",
@@ -102,7 +102,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque gauche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "droite", image: "droite.webp",          article: "la",  gender: "f", definition: "côté opposé à la gauche" , exampleSentences: {
+    { word: "droite", image: "droite.webp",          article: "la",  gender: "f", definition: "La droite est côté opposé à la gauche. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la droite.",
           "Je cherche la droite.",
@@ -198,7 +198,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque droite est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nord", image: "nord.webp",            article: "le",  gender: "m", definition: "direction vers le pôle Nord" , exampleSentences: {
+    { word: "nord", image: "nord.webp",            article: "le",  gender: "m", definition: "Le nord est direction vers le pôle Nord. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le nord.",
           "Je cherche le nord.",
@@ -294,7 +294,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque nord est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sud", image: "sud.webp",             article: "le",  gender: "m", definition: "direction vers le pôle Sud" , exampleSentences: {
+    { word: "sud", image: "sud.webp",             article: "le",  gender: "m", definition: "Le sud est direction vers le pôle Sud. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le sud.",
           "Je cherche le sud.",
@@ -390,7 +390,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque sud est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "est", image: "est.webp",             article: "l'",  gender: "m", definition: "direction du lever du soleil" , exampleSentences: {
+    { word: "est", image: "est.webp",             article: "l'",  gender: "m", definition: "L'est est direction du lever du soleil. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'est.",
           "Je cherche l'est.",
@@ -486,7 +486,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque est est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ouest", image: "ouest.webp",           article: "l'",  gender: "m", definition: "direction du coucher du soleil" , exampleSentences: {
+    { word: "ouest", image: "ouest.webp",           article: "l'",  gender: "m", definition: "L'ouest est direction du coucher du soleil. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'ouest.",
           "Je cherche l'ouest.",
@@ -582,7 +582,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque ouest est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "carrefour", image: "carrefour.webp",       article: "le",  gender: "m", definition: "intersection de plusieurs routes" , exampleSentences: {
+    { word: "carrefour", image: "carrefour.webp",       article: "le",  gender: "m", definition: "Le carrefour est intersection de plusieurs routes. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le carrefour.",
           "Je cherche le carrefour.",
@@ -678,7 +678,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque carrefour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rond-point", image: "rond-point.webp",      article: "le",  gender: "m", definition: "carrefour circulaire" , exampleSentences: {
+    { word: "rond-point", image: "rond-point.webp",      article: "le",  gender: "m", definition: "Le rond-point est carrefour circulaire. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le rond-point.",
           "Je cherche le rond-point.",
@@ -774,7 +774,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque rond-point est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rue", image: "rue.webp",             article: "la",  gender: "f", definition: "voie publique en ville" , exampleSentences: {
+    { word: "rue", image: "rue.webp",             article: "la",  gender: "f", definition: "La rue est voie publique en ville. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la rue.",
           "Je cherche la rue.",
@@ -870,7 +870,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque rue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "panneau", image: "/vocab/images/V5/panneau.webp",         article: "le",  gender: "m", definition: "signe routier avec indications" , exampleSentences: {
+    { word: "panneau", image: "/vocab/images/V5/panneau.webp",         article: "le",  gender: "m", definition: "Le panneau est signe routier avec indications. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le panneau.",
           "Je cherche le panneau.",
@@ -966,7 +966,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque panneau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "feu rouge", image: "feu-rouge.webp",       article: "le",  gender: "m", definition: "signal lumineux pour la circulation" , exampleSentences: {
+    { word: "feu rouge", image: "feu-rouge.webp",       article: "le",  gender: "m", definition: "Le feu rouge est signal lumineux pour la circulation. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le feu rouge.",
           "Je cherche le feu rouge.",
@@ -1062,7 +1062,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque feu rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "passage piéton", image: "passage-pieton.webp",  article: "le",  gender: "m", definition: "zone réservée pour traverser la rue" , exampleSentences: {
+    { word: "passage piéton", image: "passage-pieton.webp",  article: "le",  gender: "m", definition: "Le passage piéton est zone réservée pour traverser la rue. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le passage piéton.",
           "Je cherche le passage piéton.",
@@ -1158,7 +1158,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque passage piéton est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sortie", image: "sortie.webp",          article: "la",  gender: "f", definition: "point de départ d'un lieu" , exampleSentences: {
+    { word: "sortie", image: "sortie.webp",          article: "la",  gender: "f", definition: "La sortie est point de départ d'un lieu. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois la sortie.",
           "Je cherche la sortie.",
@@ -1254,7 +1254,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque sortie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "/vocab/images/V4/entree.webp",          article: "l'",  gender: "f", definition: "point d'accès à un lieu" , exampleSentences: {
+    { word: "entrée", image: "/vocab/images/V4/entree.webp",          article: "l'",  gender: "f", definition: "L'entrée est point d'accès à un lieu. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois l'entrée.",
           "Je cherche l'entrée.",
@@ -1350,7 +1350,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chemin", image: "chemin.webp",          article: "le",  gender: "m", definition: "voie étroite ou itinéraire à suivre" , exampleSentences: {
+    { word: "chemin", image: "chemin.webp",          article: "le",  gender: "m", definition: "Le chemin est voie étroite ou itinéraire à suivre. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je vois le chemin.",
           "Je cherche le chemin.",

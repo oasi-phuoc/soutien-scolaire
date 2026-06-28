@@ -6,7 +6,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
   title: "Les matières scolaires",
   section: "V5",
   words: [
-    { word: "français", image: "francais.webp",        article: "le",  gender: "m", definition: "matière sur la langue française" , exampleSentences: {
+    { word: "français", image: "francais.webp",        article: "le",  gender: "m", definition: "Le français est matière sur la langue française. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le français.",
           "J'utilise le français.",
@@ -107,7 +107,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque français est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mathématiques", image: "mathematiques.webp",   article: "les", gender: "f", definition: "matière sur les chiffres et calculs" , exampleSentences: {
+    { word: "mathématiques", image: "mathematiques.webp",   article: "les", gender: "f", definition: "Les mathématiques est matière sur les chiffres et calculs. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais les mathématiques.",
           "J'utilise les mathématiques.",
@@ -208,7 +208,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque mathématiques est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "histoire", image: "histoire.webp",        article: "l'",  gender: "f", definition: "matière sur les événements du passé" , exampleSentences: {
+    { word: "histoire", image: "histoire.webp",        article: "l'",  gender: "f", definition: "L'histoire est matière sur les événements du passé. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'histoire.",
           "J'utilise l'histoire.",
@@ -309,7 +309,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque histoire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "géographie", image: "geographie.webp",      article: "la",  gender: "f", definition: "matière sur les pays et les paysages" , exampleSentences: {
+    { word: "géographie", image: "geographie.webp",      article: "la",  gender: "f", definition: "La géographie est matière sur les pays et les paysages. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la géographie.",
           "J'utilise la géographie.",
@@ -410,7 +410,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque géographie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sport", image: "sport.webp",           article: "le",  gender: "m", definition: "matière d'éducation physique" , exampleSentences: {
+    { word: "sport", image: "sport.webp",           article: "le",  gender: "m", definition: "Le sport est matière d'éducation physique. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le sport.",
           "J'utilise le sport.",
@@ -511,7 +511,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque sport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musique", image: "musique.webp",         article: "la",  gender: "f", definition: "matière sur le chant et les instruments" , exampleSentences: {
+    { word: "musique", image: "musique.webp",         article: "la",  gender: "f", definition: "La musique est matière sur le chant et les instruments. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la musique.",
           "J'utilise la musique.",
@@ -612,7 +612,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque musique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "art", image: "art.webp",             article: "l'",  gender: "m", definition: "matière sur le dessin et la peinture" , exampleSentences: {
+    { word: "art", image: "art.webp",             article: "l'",  gender: "m", definition: "L'art est matière sur le dessin et la peinture. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'art.",
           "J'utilise l'art.",
@@ -713,7 +713,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque art est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "informatique", image: "informatique.webp",    article: "l'",  gender: "f", definition: "matière sur les ordinateurs et le numérique" , exampleSentences: {
+    { word: "informatique", image: "informatique.webp",    article: "l'",  gender: "f", definition: "L'informatique est matière sur les ordinateurs et le numérique. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'informatique.",
           "J'utilise l'informatique.",
@@ -814,7 +814,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque informatique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biologie", image: "biologie.webp",        article: "la",  gender: "f", definition: "matière sur les êtres vivants" , exampleSentences: {
+    { word: "biologie", image: "biologie.webp",        article: "la",  gender: "f", definition: "La biologie est matière sur les êtres vivants. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la biologie.",
           "J'utilise la biologie.",
@@ -915,7 +915,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque biologie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "physique", image: "physique.webp",        article: "la",  gender: "f", definition: "matière sur la matière et l'énergie" , exampleSentences: {
+    { word: "physique", image: "physique.webp",        article: "la",  gender: "f", definition: "La physique est matière sur la matière et l'énergie. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la physique.",
           "J'utilise la physique.",
@@ -1016,7 +1016,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque physique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chimie", image: "chimie.webp",          article: "la",  gender: "f", definition: "matière sur les substances et réactions" , exampleSentences: {
+    { word: "chimie", image: "chimie.webp",          article: "la",  gender: "f", definition: "La chimie est matière sur les substances et réactions. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la chimie.",
           "J'utilise la chimie.",

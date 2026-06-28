@@ -6,7 +6,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
   title: "La boulangerie",
   section: "V7",
   words: [
-    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", definition: "aliment de base fait de farine cuite" , exampleSentences: {
+    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", definition: "Le pain est aliment de base fait de farine cuite. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un pain.",
           "J'aime le pain.",
@@ -107,7 +107,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", definition: "pain long et fin typiquement français" , exampleSentences: {
+    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", definition: "La baguette est pain long et fin typiquement français. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une baguette.",
           "J'aime la baguette.",
@@ -208,7 +208,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque baguette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", definition: "pain fourré avec des ingrédients" , exampleSentences: {
+    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", definition: "Le sandwich est pain fourré avec des ingrédients. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un sandwich.",
           "J'aime le sandwich.",
@@ -309,7 +309,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque sandwich est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", definition: "pâtisserie feuilletée à base de beurre" , exampleSentences: {
+    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", definition: "La viennoiserie est pâtisserie feuilletée à base de beurre. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une viennoiserie.",
           "J'aime la viennoiserie.",
@@ -410,7 +410,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque viennoiserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "croissant",                                        article: "le",  gender: "m", definition: "viennoiserie feuilletée en forme de lune" , exampleSentences: {
+    { word: "croissant",                                        article: "le",  gender: "m", definition: "Le croissant est viennoiserie feuilletée en forme de lune. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un croissant.",
           "J'aime le croissant.",
@@ -511,7 +511,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque croissant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", definition: "viennoiserie feuilletée avec du chocolat" , exampleSentences: {
+    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", definition: "Le pain au chocolat est viennoiserie feuilletée avec du chocolat. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un pain au chocolat.",
           "J'aime le pain au chocolat.",
@@ -612,7 +612,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain au chocolat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", definition: "pain sucré et moelleux au beurre" , exampleSentences: {
+    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", definition: "La brioche est pain sucré et moelleux au beurre. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une brioche.",
           "J'aime la brioche.",
@@ -713,7 +713,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque brioche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", definition: "petite pâtisserie sèche et sucrée" , exampleSentences: {
+    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", definition: "Le biscuit est petite pâtisserie sèche et sucrée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un biscuit.",
           "J'aime le biscuit.",
@@ -814,7 +814,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque biscuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", definition: "art de faire des gâteaux et friandises" , exampleSentences: {
+    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", definition: "La pâtisserie est art de faire des gâteaux et friandises. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une pâtisserie.",
           "J'aime la pâtisserie.",
@@ -915,7 +915,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pâtisserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", definition: "pâtisserie sucrée pour les fêtes" , exampleSentences: {
+    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", definition: "Le gâteau est pâtisserie sucrée pour les fêtes. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un gâteau.",
           "J'aime le gâteau.",
@@ -1016,7 +1016,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque gâteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", definition: "pâtisserie plate avec garniture" , exampleSentences: {
+    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", definition: "La tarte est pâtisserie plate avec garniture. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une tarte.",
           "J'aime la tarte.",
@@ -1117,7 +1117,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque tarte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", definition: "gâteau allongé fourré de crème" , exampleSentences: {
+    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", definition: "L'éclair est gâteau allongé fourré de crème. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un éclair.",
           "J'aime l'éclair.",

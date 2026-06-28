@@ -7,7 +7,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", definition: ["de grande taille", "qui mesure beaucoup", "contraire de petit"],
+    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", definition: "Le mot grand est de grande taille. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est grand.",
@@ -110,7 +110,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", definition: ["de petite taille", "qui ne mesure pas beaucoup", "contraire de grand"],
+    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", definition: "Le mot petit est de petite taille. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est petit.",
@@ -213,7 +213,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "mince",                           image: "mince.webp",    group: "Physique", definition: ["peu épais, svelte", "qui n'est pas gros", "de morphologie fine"],
+    { word: "mince",                           image: "mince.webp",    group: "Physique", definition: "Le mot mince est peu épais, svelte. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est mince.",
@@ -316,7 +316,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", definition: ["de forte corpulence", "en surpoids", "contraire de mince"],
+    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", definition: "Le mot gros est de forte corpulence. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est gros.",
@@ -419,7 +419,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", definition: ["agréable à regarder", "qui a une belle apparence", "contraire de laid"],
+    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", definition: "Le mot beau est agréable à regarder. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est beau.",
@@ -522,7 +522,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", definition: ["désagréable à regarder", "qui n'est pas beau", "contraire de beau"],
+    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", definition: "Le mot laid est désagréable à regarder. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est laid.",
@@ -625,7 +625,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "jeune",                           image: "jeune.webp",    group: "Physique", definition: ["de peu d'âge", "qui n'est pas vieux", "contraire d'âgé"],
+    { word: "jeune",                           image: "jeune.webp",    group: "Physique", definition: "Le mot jeune est de peu d'âge. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est jeune.",
@@ -728,7 +728,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", definition: ["d'un âge avancé", "qui est vieux", "contraire de jeune"],
+    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", definition: "Le mot âgé est d'un âge avancé. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est âgé.",
@@ -831,7 +831,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", definition: ["musclé, robuste", "qui a beaucoup de force", "contraire de faible"],
+    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", definition: "Le mot fort est musclé, robuste. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est fort.",
@@ -934,7 +934,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "faible",                          image: "faible.webp",   group: "Physique", definition: ["sans force", "qui manque de vigueur", "contraire de fort"],
+    { word: "faible",                          image: "faible.webp",   group: "Physique", definition: "Le mot faible est sans force. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est faible.",
@@ -1037,7 +1037,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", definition: ["aux muscles développés", "qui fait beaucoup de sport", "avec un corps athlétique"],
+    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", definition: "Le mot musclé est aux muscles développés. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est musclé.",
@@ -1140,7 +1140,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", definition: ["d'une beauté raffinée", "bien habillé avec goût", "de mise soignée et distinguée"],
+    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", definition: "Le mot élégant est d'une beauté raffinée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est élégant.",
@@ -1243,7 +1243,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux",  definition: ["de faible longueur", "qui ne dépasse pas les oreilles", "contraire de long"],
+    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux",  definition: "Le mot court est de faible longueur. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est court.",
@@ -1346,7 +1346,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux",  definition: ["de grande longueur", "qui tombe sur les épaules ou plus", "contraire de court"],
+    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux",  definition: "Le mot long est de grande longueur. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est long.",
@@ -1449,7 +1449,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux",  definition: ["en boucles", "qui forme des courbes régulières", "ondulé en spirales"],
+    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux",  definition: "Le mot bouclé est en boucles. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est bouclé.",
@@ -1552,7 +1552,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux",  definition: ["en frisures serrées", "très ondulé et serré", "plus frisé que bouclé"],
+    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux",  definition: "Le mot frisé est en frisures serrées. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est frisé.",
@@ -1655,7 +1655,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux",  definition: ["aux cheveux clairs", "de couleur jaune dorée", "cheveux de couleur claire"],
+    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux",  definition: "Le mot blond est aux cheveux clairs. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est blond.",
@@ -1758,7 +1758,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "brun",     feminine: "brune",                                                 group: "Cheveux",  definition: ["aux cheveux brun foncé", "de couleur châtain foncé à noir", "cheveux bruns"],
+    { word: "brun",     feminine: "brune",                                                 group: "Cheveux",  definition: "Le mot brun est aux cheveux brun foncé. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est brun.",
@@ -1861,7 +1861,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux",  definition: ["aux cheveux noir clair", "entre noir et blond", "de couleur noisette"],
+    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux",  definition: "Le mot châtain est aux cheveux noir clair. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est châtain.",
@@ -1964,7 +1964,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux",  definition: ["aux cheveux roux", "de couleur orangée ou cuivrée", "cheveux de teinte rouge-orange"],
+    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux",  definition: "Le mot roux est aux cheveux roux. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.",
       exampleSentences: {
         a1: [
           "Il est roux.",

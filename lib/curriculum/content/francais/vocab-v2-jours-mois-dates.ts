@@ -6,7 +6,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
   title: "Jours, Mois et Dates",
   section: "V2",
   words: [
-    { word: "jour", image: "jour.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "période de 24 heures" , exampleSentences: {
+    { word: "jour", image: "jour.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "Le jour est période de 24 heures. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le jour.",
           "Je note le jour.",
@@ -107,7 +107,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque jour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mois", image: "mois.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "division de l'année en 12 parties" , exampleSentences: {
+    { word: "mois", image: "mois.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "Le mois est division de l'année en 12 parties. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le mois.",
           "Je note le mois.",
@@ -208,7 +208,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "semaine", image: "semaine.webp",   article: "la",  gender: "f", group: "Calendrier", definition: "période de 7 jours" , exampleSentences: {
+    { word: "semaine", image: "semaine.webp",   article: "la",  gender: "f", group: "Calendrier", definition: "La semaine est période de 7 jours. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la semaine.",
           "Je note la semaine.",
@@ -309,7 +309,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque semaine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "année", image: "annee.webp",     article: "l'",  gender: "f", group: "Calendrier", definition: "durée de 12 mois" , exampleSentences: {
+    { word: "année", image: "annee.webp",     article: "l'",  gender: "f", group: "Calendrier", definition: "L'année est durée de 12 mois. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'année.",
           "Je note l'année.",
@@ -410,7 +410,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque année est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lundi", image: "lundi.webp",      group: "Jours",  definition: "premier jour de la semaine" , exampleSentences: {
+    { word: "lundi", image: "lundi.webp",      group: "Jours",  definition: "Le mot lundi est premier jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais lundi.",
           "Je note lundi.",
@@ -511,7 +511,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque lundi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mardi", image: "mardi.webp",      group: "Jours",  definition: "deuxième jour de la semaine" , exampleSentences: {
+    { word: "mardi", image: "mardi.webp",      group: "Jours",  definition: "Le mot mardi est deuxième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais mardi.",
           "Je note mardi.",
@@ -612,7 +612,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mardi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mercredi", image: "mercredi.webp",   group: "Jours",  definition: "troisième jour de la semaine" , exampleSentences: {
+    { word: "mercredi", image: "mercredi.webp",   group: "Jours",  definition: "Le mot mercredi est troisième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais mercredi.",
           "Je note mercredi.",
@@ -713,7 +713,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mercredi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jeudi", image: "jeudi.webp",      group: "Jours",  definition: "quatrième jour de la semaine" , exampleSentences: {
+    { word: "jeudi", image: "jeudi.webp",      group: "Jours",  definition: "Le mot jeudi est quatrième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais jeudi.",
           "Je note jeudi.",
@@ -814,7 +814,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque jeudi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vendredi", image: "vendredi.webp",   group: "Jours",  definition: "cinquième jour de la semaine" , exampleSentences: {
+    { word: "vendredi", image: "vendredi.webp",   group: "Jours",  definition: "Le mot vendredi est cinquième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais vendredi.",
           "Je note vendredi.",
@@ -915,7 +915,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque vendredi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "samedi", image: "samedi.webp",     group: "Jours",  definition: "sixième jour de la semaine" , exampleSentences: {
+    { word: "samedi", image: "samedi.webp",     group: "Jours",  definition: "Le mot samedi est sixième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais samedi.",
           "Je note samedi.",
@@ -1016,7 +1016,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque samedi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dimanche", image: "dimanche.webp",   group: "Jours",  definition: "septième jour de la semaine" , exampleSentences: {
+    { word: "dimanche", image: "dimanche.webp",   group: "Jours",  definition: "Le mot dimanche est septième jour de la semaine. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais dimanche.",
           "Je note dimanche.",
@@ -1117,7 +1117,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque dimanche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "janvier", image: "janvier.webp",    group: "Mois",   definition: "premier mois de l'année" , exampleSentences: {
+    { word: "janvier", image: "janvier.webp",    group: "Mois",   definition: "Le mot janvier est premier mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais janvier.",
           "Je note janvier.",
@@ -1218,7 +1218,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque janvier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "février", image: "fevrier.webp",    group: "Mois",   definition: "deuxième mois de l'année" , exampleSentences: {
+    { word: "février", image: "fevrier.webp",    group: "Mois",   definition: "Le mot février est deuxième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais février.",
           "Je note février.",
@@ -1319,7 +1319,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque février est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mars", image: "mars.webp",       group: "Mois",   definition: "troisième mois de l'année" , exampleSentences: {
+    { word: "mars", image: "mars.webp",       group: "Mois",   definition: "Le mot mars est troisième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais mars.",
           "Je note mars.",
@@ -1420,7 +1420,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mars est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avril", image: "avril.webp",      group: "Mois",   definition: "quatrième mois de l'année" , exampleSentences: {
+    { word: "avril", image: "avril.webp",      group: "Mois",   definition: "Le mot avril est quatrième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais avril.",
           "Je note avril.",
@@ -1521,7 +1521,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque avril est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mai", image: "mai.webp",        group: "Mois",   definition: "cinquième mois de l'année" , exampleSentences: {
+    { word: "mai", image: "mai.webp",        group: "Mois",   definition: "Le mot mai est cinquième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais mai.",
           "Je note mai.",
@@ -1622,7 +1622,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mai est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "juin", image: "juin.webp",       group: "Mois",   definition: "sixième mois de l'année" , exampleSentences: {
+    { word: "juin", image: "juin.webp",       group: "Mois",   definition: "Le mot juin est sixième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais juin.",
           "Je note juin.",
@@ -1723,7 +1723,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque juin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "juillet", image: "juillet.webp",    group: "Mois",   definition: "septième mois de l'année" , exampleSentences: {
+    { word: "juillet", image: "juillet.webp",    group: "Mois",   definition: "Le mot juillet est septième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais juillet.",
           "Je note juillet.",
@@ -1824,7 +1824,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque juillet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "août", image: "aout.webp",       group: "Mois",   definition: "huitième mois de l'année" , exampleSentences: {
+    { word: "août", image: "aout.webp",       group: "Mois",   definition: "Le mot août est huitième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais août.",
           "Je note août.",
@@ -1925,7 +1925,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque août est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "septembre", image: "septembre.webp",  group: "Mois",   definition: "neuvième mois de l'année" , exampleSentences: {
+    { word: "septembre", image: "septembre.webp",  group: "Mois",   definition: "Le mot septembre est neuvième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais septembre.",
           "Je note septembre.",
@@ -2026,7 +2026,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque septembre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "octobre", image: "octobre.webp",    group: "Mois",   definition: "dixième mois de l'année" , exampleSentences: {
+    { word: "octobre", image: "octobre.webp",    group: "Mois",   definition: "Le mot octobre est dixième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais octobre.",
           "Je note octobre.",
@@ -2127,7 +2127,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque octobre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "novembre", image: "novembre.webp",   group: "Mois",   definition: "onzième mois de l'année" , exampleSentences: {
+    { word: "novembre", image: "novembre.webp",   group: "Mois",   definition: "Le mot novembre est onzième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais novembre.",
           "Je note novembre.",
@@ -2228,7 +2228,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque novembre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "décembre", image: "decembre.webp",   group: "Mois",   definition: "douzième mois de l'année" , exampleSentences: {
+    { word: "décembre", image: "decembre.webp",   group: "Mois",   definition: "Le mot décembre est douzième mois de l'année. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais décembre.",
           "Je note décembre.",

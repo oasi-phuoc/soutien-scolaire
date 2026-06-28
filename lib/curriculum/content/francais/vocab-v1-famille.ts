@@ -6,7 +6,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
   title: "La famille",
   section: "V1",
   words: [
-    { word: "père",         article: "le",  gender: "m", image: "pere.webp",          definition: ["le parent masculin", "l'homme qui a des enfants", "le papa"], exampleSentences: {
+    { word: "père",         article: "le",  gender: "m", image: "pere.webp",          definition: "Le père est le parent masculin. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le père.",
           "J'utilise le père.",
@@ -107,7 +107,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque père est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mère",         article: "la",  gender: "f", image: "mere.webp",          definition: ["le parent féminin", "la femme qui a des enfants", "la maman"], exampleSentences: {
+    { word: "mère",         article: "la",  gender: "f", image: "mere.webp",          definition: "La mère est le parent féminin. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la mère.",
           "J'utilise la mère.",
@@ -208,7 +208,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque mère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fils",         article: "le",  gender: "m", image: "fils.webp",          definition: ["l'enfant masculin", "le garçon par rapport à ses parents", "le petit garçon d'une famille"], exampleSentences: {
+    { word: "fils",         article: "le",  gender: "m", image: "fils.webp",          definition: "Le fils est l'enfant masculin. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le fils.",
           "J'utilise le fils.",
@@ -309,7 +309,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque fils est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fille",        article: "la",  gender: "f", image: "fille.webp",         definition: ["l'enfant féminin", "la petite fille par rapport à ses parents", "la petite fille d'une famille"], exampleSentences: {
+    { word: "fille",        article: "la",  gender: "f", image: "fille.webp",         definition: "La fille est l'enfant féminin. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la fille.",
           "J'utilise la fille.",
@@ -410,7 +410,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque fille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frère",        article: "le",  gender: "m", image: "frere.webp",         definition: ["le fils des mêmes parents", "le garçon qui a les mêmes parents que vous", "celui qui partage vos parents"], exampleSentences: {
+    { word: "frère",        article: "le",  gender: "m", image: "frere.webp",         definition: "Le frère est le fils des mêmes parents. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le frère.",
           "J'utilise le frère.",
@@ -511,7 +511,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque frère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sœur",         article: "la",  gender: "f", image: "soeur.webp",         definition: ["la fille des mêmes parents", "la fille qui a les mêmes parents que vous", "celle qui partage vos parents"], exampleSentences: {
+    { word: "sœur",         article: "la",  gender: "f", image: "soeur.webp",         definition: "La sœur est la fille des mêmes parents. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la sœur.",
           "J'utilise la sœur.",
@@ -612,7 +612,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque sœur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grand-père",   article: "le",  gender: "m", image: "grand-pere.webp",    definition: ["le père du père ou de la mère", "le papy", "l'homme de la génération de vos parents' parents"], exampleSentences: {
+    { word: "grand-père",   article: "le",  gender: "m", image: "grand-pere.webp",    definition: "Le grand-père est le père du père ou de la mère. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le grand-père.",
           "J'utilise le grand-père.",
@@ -713,7 +713,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque grand-père est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grand-mère",   article: "la",  gender: "f", image: "grand-mere.webp",    definition: ["la mère du père ou de la mère", "la mamie", "la femme de la génération de vos parents' parents"], exampleSentences: {
+    { word: "grand-mère",   article: "la",  gender: "f", image: "grand-mere.webp",    definition: "La grand-mère est la mère du père ou de la mère. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la grand-mère.",
           "J'utilise la grand-mère.",
@@ -814,7 +814,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque grand-mère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "petit-fils",   article: "le",  gender: "m", image: "petit-fils.webp",    definition: ["le fils du fils ou de la fille", "le garçon par rapport à ses grands-parents", "l'enfant masculin de vos enfants"], exampleSentences: {
+    { word: "petit-fils",   article: "le",  gender: "m", image: "petit-fils.webp",    definition: "Le petit-fils est le fils du fils ou de la fille. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le petit-fils.",
           "J'utilise le petit-fils.",
@@ -915,7 +915,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque petit-fils est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "petite-fille", article: "la",  gender: "f", image: "petite-fille.webp",  definition: ["la fille du fils ou de la fille", "la fille par rapport à ses grands-parents", "l'enfant féminin de vos enfants"], exampleSentences: {
+    { word: "petite-fille", article: "la",  gender: "f", image: "petite-fille.webp",  definition: "La petite-fille est la fille du fils ou de la fille. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la petite-fille.",
           "J'utilise la petite-fille.",
@@ -1016,7 +1016,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque petite-fille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oncle",        article: "l'",  gender: "m", image: "oncle.webp",         definition: ["le frère du père ou de la mère", "le mari de la tante", "l'homme qui est frère de votre parent"], exampleSentences: {
+    { word: "oncle",        article: "l'",  gender: "m", image: "oncle.webp",         definition: "L'oncle est le frère du père ou de la mère. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois l'oncle.",
           "J'utilise l'oncle.",
@@ -1117,7 +1117,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque oncle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tante",        article: "la",  gender: "f", image: "tante.webp",         definition: ["la sœur du père ou de la mère", "la femme de l'oncle", "la femme qui est sœur de votre parent"], exampleSentences: {
+    { word: "tante",        article: "la",  gender: "f", image: "tante.webp",         definition: "La tante est la sœur du père ou de la mère. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la tante.",
           "J'utilise la tante.",
@@ -1218,7 +1218,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque tante est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cousin",       article: "le",  gender: "m", image: "cousin.webp",        definition: ["le fils de l'oncle ou de la tante", "le garçon dont les parents sont vos oncle ou tante", "l'enfant masculin de vos oncles ou tantes"], exampleSentences: {
+    { word: "cousin",       article: "le",  gender: "m", image: "cousin.webp",        definition: "Le cousin est le fils de l'oncle ou de la tante. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le cousin.",
           "J'utilise le cousin.",
@@ -1319,7 +1319,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque cousin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cousine",      article: "la",  gender: "f", image: "cousine.webp",       definition: ["la fille de l'oncle ou de la tante", "la fille dont les parents sont vos oncle ou tante", "l'enfant féminin de vos oncles ou tantes"], exampleSentences: {
+    { word: "cousine",      article: "la",  gender: "f", image: "cousine.webp",       definition: "La cousine est la fille de l'oncle ou de la tante. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la cousine.",
           "J'utilise la cousine.",
@@ -1420,7 +1420,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque cousine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "neveu",        article: "le",  gender: "m", image: "neveu.webp",         definition: ["le fils du frère ou de la sœur", "le garçon dont vous êtes l'oncle ou la tante", "l'enfant masculin de vos frères ou sœurs"], exampleSentences: {
+    { word: "neveu",        article: "le",  gender: "m", image: "neveu.webp",         definition: "Le neveu est le fils du frère ou de la sœur. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois le neveu.",
           "J'utilise le neveu.",
@@ -1521,7 +1521,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque neveu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nièce",        article: "la",  gender: "f", image: "niece.webp",         definition: ["la fille du frère ou de la sœur", "la fille dont vous êtes l'oncle ou la tante", "l'enfant féminin de vos frères ou sœurs"], exampleSentences: {
+    { word: "nièce",        article: "la",  gender: "f", image: "niece.webp",         definition: "La nièce est la fille du frère ou de la sœur. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase.", exampleSentences: {
         a1: [
           "Je vois la nièce.",
           "J'utilise la nièce.",

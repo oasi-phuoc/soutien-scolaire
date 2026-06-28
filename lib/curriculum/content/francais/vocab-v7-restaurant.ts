@@ -6,7 +6,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   title: "Le restaurant",
   section: "V7",
   words: [
-    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse",   definition: "personne qui sert les clients au restaurant (serveur / serveuse)" , exampleSentences: {
+    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse",   definition: "Le service est personne qui sert les clients au restaurant (serveur / serveuse). Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un service.",
           "J'aime le service.",
@@ -107,7 +107,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque service est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", definition: "personne qui prépare les plats (cuisinier / cuisinière)" , exampleSentences: {
+    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", definition: "La cuisine est personne qui prépare les plats (cuisinier / cuisinière). Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une cuisine.",
           "J'aime la cuisine.",
@@ -208,7 +208,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "table",      image: "table.webp",      article: "la",  gender: "f", definition: "meuble où l'on mange au restaurant" , exampleSentences: {
+    { word: "table",      image: "table.webp",      article: "la",  gender: "f", definition: "La table est meuble où l'on mange au restaurant. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une table.",
           "J'aime la table.",
@@ -309,7 +309,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque table est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaise",                              article: "la",  gender: "f", definition: "siège avec dossier pour s'asseoir à table" , exampleSentences: {
+    { word: "chaise",                              article: "la",  gender: "f", definition: "La chaise est siège avec dossier pour s'asseoir à table. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une chaise.",
           "J'aime la chaise.",
@@ -410,7 +410,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", definition: "plat creux ou plat pour servir les aliments" , exampleSentences: {
+    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", definition: "L'assiette est plat creux ou plat pour servir les aliments. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'assiette.",
           "J'utilise l'assiette.",
@@ -511,7 +511,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque assiette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", definition: "ensemble couteau, fourchette, cuillère" , exampleSentences: {
+    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", definition: "Le couvert est ensemble couteau, fourchette, cuillère. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un couvert.",
           "J'aime le couvert.",
@@ -612,7 +612,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couvert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "ustensile pour les soupes et desserts" , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "La cuillère est ustensile pour les soupes et desserts. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la cuillère.",
           "J'utilise la cuillère.",
@@ -713,7 +713,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuillère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", definition: "ustensile tranchant pour couper" , exampleSentences: {
+    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", definition: "Le couteau est ustensile tranchant pour couper. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un couteau.",
           "J'aime le couteau.",
@@ -814,7 +814,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", definition: "ustensile à dents pour piquer les aliments" , exampleSentences: {
+    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", definition: "La fourchette est ustensile à dents pour piquer les aliments. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une fourchette.",
           "J'aime la fourchette.",
@@ -915,7 +915,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque fourchette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "récipient pour boire les liquides" , exampleSentences: {
+    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "Le verre est récipient pour boire les liquides. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le verre.",
           "J'utilise le verre.",
@@ -1016,7 +1016,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", definition: "tissu pour s'essuyer la bouche" , exampleSentences: {
+    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", definition: "La serviette est tissu pour s'essuyer la bouche. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une serviette.",
           "J'aime la serviette.",
@@ -1117,7 +1117,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque serviette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", definition: "plat principal d'un repas" , exampleSentences: {
+    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", definition: "Le plat est plat principal d'un repas. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un plat.",
           "J'aime le plat.",
@@ -1218,7 +1218,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque plat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", definition: "dernier plat sucré d'un repas" , exampleSentences: {
+    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", definition: "Le dessert est dernier plat sucré d'un repas. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un dessert.",
           "J'aime le dessert.",
@@ -1319,7 +1319,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque dessert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", definition: "liste des plats proposés" , exampleSentences: {
+    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", definition: "Le menu est liste des plats proposés. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un menu.",
           "J'aime le menu.",
@@ -1420,7 +1420,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque menu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", definition: "note à payer à la fin du repas" , exampleSentences: {
+    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", definition: "L'addition est note à payer à la fin du repas. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une addition.",
           "J'aime l'addition.",
@@ -1521,7 +1521,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque addition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", definition: "liquide à boire" , exampleSentences: {
+    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", definition: "La boisson est liquide à boire. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une boisson.",
           "J'aime la boisson.",

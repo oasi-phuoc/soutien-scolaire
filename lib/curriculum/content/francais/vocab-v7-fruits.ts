@@ -6,7 +6,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
   title: "Les fruits",
   section: "V7",
   words: [
-    { word: "pomme",      image: "pomme.webp",      article: "la",  gender: "f", definition: "fruit rouge ou vert de forme ronde" , exampleSentences: {
+    { word: "pomme",      image: "pomme.webp",      article: "la",  gender: "f", definition: "La pomme est fruit rouge ou vert de forme ronde. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une pomme.",
           "J'aime la pomme.",
@@ -107,7 +107,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pomme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poire",      image: "poire.webp",      article: "la",  gender: "f", definition: "fruit jaune-vert de forme allongée" , exampleSentences: {
+    { word: "poire",      image: "poire.webp",      article: "la",  gender: "f", definition: "La poire est fruit jaune-vert de forme allongée. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une poire.",
           "J'aime la poire.",
@@ -208,7 +208,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque poire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "banane",     image: "banane.webp",     article: "la",  gender: "f", definition: "fruit jaune courbé à peau épaisse" , exampleSentences: {
+    { word: "banane",     image: "banane.webp",     article: "la",  gender: "f", definition: "La banane est fruit jaune courbé à peau épaisse. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une banane.",
           "J'aime la banane.",
@@ -309,7 +309,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque banane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",     image: "orange.webp",     article: "l'",  gender: "f", definition: "fruit rond orange à peau épaisse" , exampleSentences: {
+    { word: "orange",     image: "orange.webp",     article: "l'",  gender: "f", definition: "L'orange est fruit rond orange à peau épaisse. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une orange.",
           "J'aime l'orange.",
@@ -410,7 +410,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fraise",     image: "fraise.webp",     article: "la",  gender: "f", definition: "petit fruit rouge et sucré" , exampleSentences: {
+    { word: "fraise",     image: "fraise.webp",     article: "la",  gender: "f", definition: "La fraise est petit fruit rouge et sucré. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une fraise.",
           "J'aime la fraise.",
@@ -511,7 +511,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque fraise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "framboise",  image: "framboise.webp",  article: "la",  gender: "f", definition: "petit fruit rouge composé de petites boules" , exampleSentences: {
+    { word: "framboise",  image: "framboise.webp",  article: "la",  gender: "f", definition: "La framboise est petit fruit rouge composé de petites boules. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une framboise.",
           "J'aime la framboise.",
@@ -612,7 +612,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque framboise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "raisin",     image: "raisin.webp",     article: "le",  gender: "m", definition: "fruit en grappes, violet ou vert" , exampleSentences: {
+    { word: "raisin",     image: "raisin.webp",     article: "le",  gender: "m", definition: "Le raisin est fruit en grappes, violet ou vert. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un raisin.",
           "J'aime le raisin.",
@@ -713,7 +713,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque raisin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kiwi",       image: "kiwi.webp",       article: "le",  gender: "m", definition: "petit fruit vert à peau brune et velue" , exampleSentences: {
+    { word: "kiwi",       image: "kiwi.webp",       article: "le",  gender: "m", definition: "Le kiwi est petit fruit vert à peau brune et velue. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un kiwi.",
           "J'aime le kiwi.",
@@ -814,7 +814,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque kiwi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pêche",      image: "peche.webp",      article: "la",  gender: "f", definition: "fruit juteux à peau veloutée, orange ou jaune" , exampleSentences: {
+    { word: "pêche",      image: "peche.webp",      article: "la",  gender: "f", definition: "La pêche est fruit juteux à peau veloutée, orange ou jaune. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une pêche.",
           "J'aime la pêche.",
@@ -915,7 +915,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pêche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "abricot",    image: "abricot.webp",    article: "l'",  gender: "m", definition: "petit fruit orange et sucré" , exampleSentences: {
+    { word: "abricot",    image: "abricot.webp",    article: "l'",  gender: "m", definition: "L'abricot est petit fruit orange et sucré. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un abricot.",
           "J'aime l'abricot.",
@@ -1016,7 +1016,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque abricot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cerise",     image: "cerise.webp",     article: "la",  gender: "f", definition: "petit fruit rond rouge sur une tige" , exampleSentences: {
+    { word: "cerise",     image: "cerise.webp",     article: "la",  gender: "f", definition: "La cerise est petit fruit rond rouge sur une tige. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une cerise.",
           "J'aime la cerise.",
@@ -1117,7 +1117,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque cerise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "prune",      image: "prune.webp",      article: "la",  gender: "f", definition: "petit fruit violet ou rouge à noyau" , exampleSentences: {
+    { word: "prune",      image: "prune.webp",      article: "la",  gender: "f", definition: "La prune est petit fruit violet ou rouge à noyau. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une prune.",
           "J'aime la prune.",
@@ -1218,7 +1218,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque prune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ananas",                               article: "l'",  gender: "m", definition: "grand fruit tropical avec une couronne de feuilles" , exampleSentences: {
+    { word: "ananas",                               article: "l'",  gender: "m", definition: "L'ananas est grand fruit tropical avec une couronne de feuilles. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un ananas.",
           "J'aime l'ananas.",
@@ -1319,7 +1319,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque ananas est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "citron",                               article: "le",  gender: "m", definition: "fruit jaune très acide" , exampleSentences: {
+    { word: "citron",                               article: "le",  gender: "m", definition: "Le citron est fruit jaune très acide. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un citron.",
           "J'aime le citron.",
@@ -1420,7 +1420,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque citron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "melon",      image: "melon.webp",      article: "le",  gender: "m", definition: "gros fruit rond à chair orange et sucrée" , exampleSentences: {
+    { word: "melon",      image: "melon.webp",      article: "le",  gender: "m", definition: "Le melon est gros fruit rond à chair orange et sucrée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un melon.",
           "J'aime le melon.",
@@ -1521,7 +1521,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque melon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pastèque",   image: "pasteque.webp",   article: "la",  gender: "f", definition: "grand fruit vert à chair rouge et rafraîchissante" , exampleSentences: {
+    { word: "pastèque",   image: "pasteque.webp",   article: "la",  gender: "f", definition: "La pastèque est grand fruit vert à chair rouge et rafraîchissante. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une pastèque.",
           "J'aime la pastèque.",
@@ -1622,7 +1622,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pastèque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mangue",     image: "mangue.webp",     article: "la",  gender: "f", definition: "fruit tropical jaune-orange très sucré" , exampleSentences: {
+    { word: "mangue",     image: "mangue.webp",     article: "la",  gender: "f", definition: "La mangue est fruit tropical jaune-orange très sucré. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange une mangue.",
           "J'aime la mangue.",

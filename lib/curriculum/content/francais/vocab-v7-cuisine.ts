@@ -6,7 +6,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
   title: "La cuisine",
   section: "V7",
   words: [
-    { word: "cuisiner", image: "cuisiner.webp",  definition: "préparer des plats" , exampleSentences: {
+    { word: "cuisiner", image: "cuisiner.webp",  definition: "Le mot cuisiner est préparer des plats. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un cuisiner.",
           "J'aime cuisiner.",
@@ -107,7 +107,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuisiner est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couper", image: "couper.webp",    definition: "diviser avec un couteau" , exampleSentences: {
+    { word: "couper", image: "couper.webp",    definition: "Le mot couper est diviser avec un couteau. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un couper.",
           "J'aime couper.",
@@ -208,7 +208,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque couper est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mélanger", image: "melanger.webp",  definition: "combiner des ingrédients" , exampleSentences: {
+    { word: "mélanger", image: "melanger.webp",  definition: "Le mot mélanger est combiner des ingrédients. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un mélanger.",
           "J'aime mélanger.",
@@ -309,7 +309,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque mélanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuire", image: "cuire.webp",     definition: "chauffer un aliment pour le rendre comestible" , exampleSentences: {
+    { word: "cuire", image: "cuire.webp",     definition: "Le mot cuire est chauffer un aliment pour le rendre comestible. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un cuire.",
           "J'aime cuire.",
@@ -410,7 +410,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouillir", image: "bouillir.webp",  definition: "chauffer un liquide jusqu'à 100°C" , exampleSentences: {
+    { word: "bouillir", image: "bouillir.webp",  definition: "Le mot bouillir est chauffer un liquide jusqu'à 100°C. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un bouillir.",
           "J'aime bouillir.",
@@ -511,7 +511,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque bouillir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frire", image: "frire.webp",     definition: "cuire dans de l'huile très chaude" , exampleSentences: {
+    { word: "frire", image: "frire.webp",     definition: "Le mot frire est cuire dans de l'huile très chaude. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un frire.",
           "J'aime frire.",
@@ -612,7 +612,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque frire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rôtir", image: "rotir.webp",     definition: "cuire au four à chaleur sèche" , exampleSentences: {
+    { word: "rôtir", image: "rotir.webp",     definition: "Le mot rôtir est cuire au four à chaleur sèche. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un rôtir.",
           "J'aime rôtir.",
@@ -713,7 +713,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque rôtir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saler", image: "saler.webp",     definition: "ajouter du sel à un plat" , exampleSentences: {
+    { word: "saler", image: "saler.webp",     definition: "Le mot saler est ajouter du sel à un plat. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un saler.",
           "J'aime saler.",
@@ -814,7 +814,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque saler est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "goûter", image: "gouter.webp",    definition: "tester le goût d'un aliment" , exampleSentences: {
+    { word: "goûter", image: "gouter.webp",    definition: "Le mot goûter est tester le goût d'un aliment. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un goûter.",
           "J'aime goûter.",
@@ -915,7 +915,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque goûter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laver", image: "laver.webp",     definition: "nettoyer à l'eau" , exampleSentences: {
+    { word: "laver", image: "laver.webp",     definition: "Le mot laver est nettoyer à l'eau. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un laver.",
           "J'aime laver.",
@@ -1016,7 +1016,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque laver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éplucher", image: "eplucher.webp",  definition: "enlever la peau d'un légume ou fruit" , exampleSentences: {
+    { word: "éplucher", image: "eplucher.webp",  definition: "Le mot éplucher est enlever la peau d'un légume ou fruit. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un éplucher.",
           "J'aime éplucher.",
@@ -1117,7 +1117,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque éplucher est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verser", image: "verser.webp",    definition: "faire couler un liquide d'un récipient" , exampleSentences: {
+    { word: "verser", image: "verser.webp",    definition: "Le mot verser est faire couler un liquide d'un récipient. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un verser.",
           "J'aime verser.",
@@ -1218,7 +1218,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque verser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réchauffer", image: "rechauffer.webp",definition: "chauffer à nouveau un plat déjà cuit" , exampleSentences: {
+    { word: "réchauffer", image: "rechauffer.webp",definition: "Le mot réchauffer est chauffer à nouveau un plat déjà cuit. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je mange un réchauffer.",
           "J'aime réchauffer.",

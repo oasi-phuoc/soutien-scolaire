@@ -6,7 +6,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
   title: "Les médecins",
   section: "V8",
   words: [
-    { word: "médecin",          image: "medecin.webp",            article: "le",  gender: "m", definition: "professionnel de santé généraliste" , exampleSentences: {
+    { word: "médecin",          image: "medecin.webp",            article: "le",  gender: "m", definition: "Le médecin est professionnel de santé généraliste. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le médecin.",
           "Je parle du médecin.",
@@ -106,7 +106,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmier",        image: "infirmier.webp",          article: "un",  gender: "m", feminine: "infirmière", definition: "professionnel de santé qui soigne les patients" , exampleSentences: {
+    { word: "infirmier",        image: "infirmier.webp",          article: "un",  gender: "m", feminine: "infirmière", definition: "Un infirmier est professionnel de santé qui soigne les patients. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'infirmier.",
           "Je parle de l'infirmier.",
@@ -206,7 +206,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacien",       image: "pharmacien.webp",         article: "un",  gender: "m", feminine: "pharmacienne", definition: "professionnel qui délivre les médicaments" , exampleSentences: {
+    { word: "pharmacien",       image: "pharmacien.webp",         article: "un",  gender: "m", feminine: "pharmacienne", definition: "Un pharmacien est professionnel qui délivre les médicaments. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le pharmacien.",
           "Je parle du pharmacien.",
@@ -306,7 +306,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dentiste",         image: "dentiste.webp",           article: "le",  gender: "m", definition: "médecin spécialiste des dents" , exampleSentences: {
+    { word: "dentiste",         image: "dentiste.webp",           article: "le",  gender: "m", definition: "Le dentiste est médecin spécialiste des dents. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le dentiste.",
           "Je parle du dentiste.",
@@ -406,7 +406,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque dentiste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ophtalmologue",    image: "ophtalmologue.webp",      article: "l'",  gender: "m", definition: "médecin spécialiste des yeux" , exampleSentences: {
+    { word: "ophtalmologue",    image: "ophtalmologue.webp",      article: "l'",  gender: "m", definition: "L'ophtalmologue est médecin spécialiste des yeux. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'ophtalmologue.",
           "Je parle de l'ophtalmologue.",
@@ -506,7 +506,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque ophtalmologue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pédiatre",         image: "pediatre.webp",           article: "le",  gender: "m", definition: "médecin spécialiste des enfants" , exampleSentences: {
+    { word: "pédiatre",         image: "pediatre.webp",           article: "le",  gender: "m", definition: "Le pédiatre est médecin spécialiste des enfants. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le pédiatre.",
           "Je parle du pédiatre.",
@@ -606,7 +606,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque pédiatre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chirurgien",       image: "chirurgien.webp",         article: "le",  gender: "m", definition: "médecin qui pratique des opérations" , exampleSentences: {
+    { word: "chirurgien",       image: "chirurgien.webp",         article: "le",  gender: "m", definition: "Le chirurgien est médecin qui pratique des opérations. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le chirurgien.",
           "Je parle du chirurgien.",
@@ -706,7 +706,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque chirurgien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "urgentiste",       image: "urgentiste.webp",         article: "l'",  gender: "m", definition: "médecin des urgences" , exampleSentences: {
+    { word: "urgentiste",       image: "urgentiste.webp",         article: "l'",  gender: "m", definition: "L'urgentiste est médecin des urgences. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'urgentiste.",
           "Je parle de l'urgentiste.",
@@ -806,7 +806,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque urgentiste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kinésithérapeute", image: "kinésithérapeute.webp",   article: "le",  gender: "m", definition: "professionnel en rééducation physique" , exampleSentences: {
+    { word: "kinésithérapeute", image: "kinésithérapeute.webp",   article: "le",  gender: "m", definition: "Le kinésithérapeute est professionnel en rééducation physique. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le kinésithérapeute.",
           "Je parle du kinésithérapeute.",
@@ -906,7 +906,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque kinésithérapeute est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle d'attente",  image: "salle-d-attente.webp",    article: "la",  gender: "f", definition: "endroit où l'on attend chez le médecin" , exampleSentences: {
+    { word: "salle d'attente",  image: "salle-d-attente.webp",    article: "la",  gender: "f", definition: "La salle d'attente est endroit où l'on attend chez le médecin. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la salle d'attente.",
           "Je parle de la salle d'attente.",
@@ -1006,7 +1006,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque salle d'attente est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "consultation",     image: "consultation.webp",       article: "la",  gender: "f", definition: "rendez-vous médical chez un praticien" , exampleSentences: {
+    { word: "consultation",     image: "consultation.webp",       article: "la",  gender: "f", definition: "La consultation est rendez-vous médical chez un praticien. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la consultation.",
           "Je parle de la consultation.",
@@ -1106,7 +1106,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque consultation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ordonnance",       image: "ordonnance.webp",         article: "l'",  gender: "f", definition: "document du médecin pour les médicaments" , exampleSentences: {
+    { word: "ordonnance",       image: "ordonnance.webp",         article: "l'",  gender: "f", definition: "L'ordonnance est document du médecin pour les médicaments. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'ordonnance.",
           "Je parle de l'ordonnance.",
@@ -1206,7 +1206,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Puisque ordonnance est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rendez-vous",      image: "rendez-vous.webp",        article: "le",  gender: "m", definition: "heure fixée pour voir un médecin" , exampleSentences: {
+    { word: "rendez-vous",      image: "rendez-vous.webp",        article: "le",  gender: "m", definition: "Le rendez-vous est heure fixée pour voir un médecin. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le rendez-vous.",
           "Je parle du rendez-vous.",

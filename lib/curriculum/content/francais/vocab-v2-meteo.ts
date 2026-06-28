@@ -6,7 +6,7 @@ export const V2_METEO_THEME: VocabTheme = {
   title: "La météo",
   section: "V2",
   words: [
-    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", definition: "astre qui donne lumière et chaleur" , exampleSentences: {
+    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", definition: "Le soleil est astre qui donne lumière et chaleur. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a du soleil.",
           "Je vois le soleil.",
@@ -106,7 +106,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque soleil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", definition: "masse de vapeur d'eau dans le ciel" , exampleSentences: {
+    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", definition: "Le nuage est masse de vapeur d'eau dans le ciel. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un nuage.",
           "Je vois le nuage.",
@@ -206,7 +206,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque nuage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", definition: "astre qui tourne autour de la Terre et brille la nuit" , exampleSentences: {
+    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", definition: "La lune est astre qui tourne autour de la Terre et brille la nuit. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a une lune.",
           "Je vois la lune.",
@@ -306,7 +306,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque lune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", definition: "astre lumineux visible dans le ciel la nuit" , exampleSentences: {
+    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", definition: "Une étoile est astre lumineux visible dans le ciel la nuit. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a une étoile.",
           "Je vois l'étoile.",
@@ -406,7 +406,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque étoile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" , exampleSentences: {
+    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", definition: "La pluie est eau qui tombe du ciel. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a de la pluie.",
           "Je vois la pluie.",
@@ -506,7 +506,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque pluie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", definition: "mouvement de l'air" , exampleSentences: {
+    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", definition: "Le vent est mouvement de l'air. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a du vent.",
           "Je vois le vent.",
@@ -606,7 +606,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque vent est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", definition: "eau gelée qui tombe en flocons blancs" , exampleSentences: {
+    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", definition: "La neige est eau gelée qui tombe en flocons blancs. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a de la neige.",
           "Je vois la neige.",
@@ -706,7 +706,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque neige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", definition: "tempête avec tonnerre et éclairs" , exampleSentences: {
+    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", definition: "L'orage est tempête avec tonnerre et éclairs. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a de l'orage.",
           "Je vois l'orage.",
@@ -806,7 +806,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque orage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", definition: "nuage bas qui réduit la visibilité" , exampleSentences: {
+    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", definition: "Le brouillard est nuage bas qui réduit la visibilité. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a du brouillard.",
           "Je vois le brouillard.",
@@ -906,7 +906,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque brouillard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", definition: "température au-dessous de zéro degré" , exampleSentences: {
+    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", definition: "Le gel est température au-dessous de zéro degré. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a du gel.",
           "Je vois le gel.",
@@ -1006,7 +1006,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque gel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", definition: "précipitation de grains de glace" , exampleSentences: {
+    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", definition: "La grêle est précipitation de grains de glace. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a de la grêle.",
           "Je vois la grêle.",
@@ -1106,7 +1106,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque grêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", definition: "arc coloré visible après la pluie" , exampleSentences: {
+    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", definition: "L'arc-en-ciel est arc coloré visible après la pluie. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un arc-en-ciel.",
           "Je vois l'arc-en-ciel.",
@@ -1206,7 +1206,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque arc-en-ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", definition: "pluie soudaine et abondante" , exampleSentences: {
+    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", definition: "L'averse est pluie soudaine et abondante. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a une averse.",
           "Je vois l'averse.",
@@ -1306,7 +1306,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque averse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", definition: "espace au-dessus de nos têtes" , exampleSentences: {
+    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", definition: "Le ciel est espace au-dessus de nos têtes. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un ciel.",
           "Je vois le ciel.",
@@ -1406,7 +1406,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "humide", image: "humide.webp",                                      definition: "chargé d'eau, mouillé" , exampleSentences: {
+    { word: "humide", image: "humide.webp",                                      definition: "Le mot humide est chargé d'eau, mouillé. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un humide.",
           "Je vois humide.",
@@ -1506,7 +1506,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque humide est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sec", image: "sec.webp",          feminine: "sèche",            definition: "sans humidité, contraire d'humide" , exampleSentences: {
+    { word: "sec", image: "sec.webp",          feminine: "sèche",            definition: "Le mot sec est sans humidité, contraire d'humide. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un sec.",
           "Je vois sec.",
@@ -1606,7 +1606,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque sec est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doux", image: "doux.webp",         feminine: "douce",            definition: "agréable, sans excès de chaud ou de froid" , exampleSentences: {
+    { word: "doux", image: "doux.webp",         feminine: "douce",            definition: "Le mot doux est agréable, sans excès de chaud ou de froid. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un doux.",
           "Je vois doux.",
@@ -1706,7 +1706,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque doux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaud", image: "chaud.webp",        feminine: "chaude",           definition: "à haute température, contraire de froid" , exampleSentences: {
+    { word: "chaud", image: "chaud.webp",        feminine: "chaude",           definition: "Le mot chaud est à haute température, contraire de froid. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un chaud.",
           "Je vois chaud.",
@@ -1806,7 +1806,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque chaud est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "froid", image: "froid.webp",        feminine: "froide",           definition: "à basse température, contraire de chaud" , exampleSentences: {
+    { word: "froid", image: "froid.webp",        feminine: "froide",           definition: "Le mot froid est à basse température, contraire de chaud. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a de froid.",
           "Je vois froid.",
@@ -1906,7 +1906,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque froid est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frais", image: "frais.webp",        feminine: "fraîche",          definition: "légèrement froid, agréablement frais" , exampleSentences: {
+    { word: "frais", image: "frais.webp",        feminine: "fraîche",          definition: "Le mot frais est légèrement froid, agréablement frais. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Il y a un frais.",
           "Je vois frais.",

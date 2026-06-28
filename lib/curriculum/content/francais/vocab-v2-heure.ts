@@ -6,7 +6,7 @@ export const V2_HEURE_THEME: VocabTheme = {
   title: "L'heure",
   section: "V2",
   words: [
-    { word: "heure", image: "heure.webp",      article: "l'",  gender: "f", definition: "unité de temps de 60 minutes" , exampleSentences: {
+    { word: "heure", image: "heure.webp",      article: "l'",  gender: "f", definition: "L'heure est unité de temps de 60 minutes. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'heure.",
           "Je note l'heure.",
@@ -107,7 +107,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque heure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minute", image: "minute.webp",     article: "la",  gender: "f", definition: "unité de temps de 60 secondes" , exampleSentences: {
+    { word: "minute", image: "minute.webp",     article: "la",  gender: "f", definition: "La minute est unité de temps de 60 secondes. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la minute.",
           "Je note la minute.",
@@ -208,7 +208,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minute est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "seconde", image: "seconde.webp",    article: "la",  gender: "f", definition: "unité de temps la plus courte" , exampleSentences: {
+    { word: "seconde", image: "seconde.webp",    article: "la",  gender: "f", definition: "La seconde est unité de temps la plus courte. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais la seconde.",
           "Je note la seconde.",
@@ -309,7 +309,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque seconde est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "matin", image: "matin.webp",      article: "le",  gender: "m", definition: "début de la journée" , exampleSentences: {
+    { word: "matin", image: "matin.webp",      article: "le",  gender: "m", definition: "Le matin est début de la journée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le matin.",
           "Je note le matin.",
@@ -410,7 +410,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque matin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "midi", image: "midi.webp",       article: "le",  gender: "m", definition: "12 heures, milieu de la journée" , exampleSentences: {
+    { word: "midi", image: "midi.webp",       article: "le",  gender: "m", definition: "Le midi est 12 heures, milieu de la journée. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le midi.",
           "Je note le midi.",
@@ -511,7 +511,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "après-midi", image: "apres-midi.webp", article: "l'",  gender: "m", definition: "partie de la journée après midi" , exampleSentences: {
+    { word: "après-midi", image: "apres-midi.webp", article: "l'",  gender: "m", definition: "L'après-midi est partie de la journée après midi. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'après-midi.",
           "Je note l'après-midi.",
@@ -612,7 +612,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque après-midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soir", image: "soir.webp",       article: "le",  gender: "m", definition: "fin de la journée avant la nuit" , exampleSentences: {
+    { word: "soir", image: "soir.webp",       article: "le",  gender: "m", definition: "Le soir est fin de la journée avant la nuit. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le soir.",
           "Je note le soir.",
@@ -713,7 +713,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque soir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minuit", image: "minuit.webp",     article: "le",  gender: "m", definition: "24 heures, milieu de la nuit" , exampleSentences: {
+    { word: "minuit", image: "minuit.webp",     article: "le",  gender: "m", definition: "Le minuit est 24 heures, milieu de la nuit. Il sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais le minuit.",
           "Je note le minuit.",
@@ -814,7 +814,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "horloge", image: "horloge.webp",    article: "l'",  gender: "f", definition: "grande pendule fixée au mur" , exampleSentences: {
+    { word: "horloge", image: "horloge.webp",    article: "l'",  gender: "f", definition: "L'horloge est grande pendule fixée au mur. Elle sert ? nommer cette r?alit? dans la vie quotidienne, ? la reconna?tre dans une image et ? l'utiliser correctement dans une phrase." , exampleSentences: {
         a1: [
           "Je connais l'horloge.",
           "Je note l'horloge.",
