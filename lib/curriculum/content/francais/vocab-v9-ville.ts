@@ -6,7 +6,7 @@ export const V9_VILLE_THEME: VocabTheme = {
   title: "La ville",
   section: "V9",
   words: [
-    { word: "ville", image: "/vocab/images/V4/ville.webp",       article: "la",  gender: "f", definition: "La ville est agglomération urbaine importante." , exampleSentences: {
+    { word: "ville", image: "/vocab/images/V4/ville.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la ville sur le plan.",
@@ -71,7 +71,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque ville est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "quartier", image: "quartier.webp",    article: "le",  gender: "m", definition: "Le quartier est zone d'une ville avec ses habitants." , exampleSentences: {
+    { word: "quartier", image: "quartier.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le quartier sur le plan.",
@@ -136,7 +136,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque quartier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "centre-ville", image: "/vocab/images/V4/centre-ville.webp",article: "le",  gender: "m", definition: "Le centre-ville est une partie centrale d'une ville." , exampleSentences: {
+    { word: "centre-ville", image: "/vocab/images/V4/centre-ville.webp",article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le centre-ville sur le plan.",
@@ -201,7 +201,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque centre-ville est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rue", image: "rue.webp",         article: "la",  gender: "f", definition: "La rue est voie publique entre des bâtiments." , exampleSentences: {
+    { word: "rue", image: "rue.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la rue sur le plan.",
@@ -266,7 +266,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque rue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avenue", image: "/vocab/images/V4/avenue.webp",      article: "l'",  gender: "f", definition: "L'avenue est large voie plantée d'arbres." , exampleSentences: {
+    { word: "avenue", image: "/vocab/images/V4/avenue.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avenue sur le plan.",
@@ -331,7 +331,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque avenue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "place", image: "/vocab/images/V4/place.webp",       article: "la",  gender: "f", definition: "La place est un espace public ouvert en ville." , exampleSentences: {
+    { word: "place", image: "/vocab/images/V4/place.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la place sur le plan.",
@@ -396,7 +396,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque place est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "marché", image: "marche.webp",      article: "le",  gender: "m", definition: "Le marché est un lieu de vente en plein air." , exampleSentences: {
+    { word: "marché", image: "marche.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le marché sur le plan.",
@@ -461,7 +461,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque marché est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mairie", image: "mairie.webp",      article: "la",  gender: "f", definition: "La mairie est un bâtiment administratif de la commune." , exampleSentences: {
+    { word: "mairie", image: "mairie.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la mairie sur le plan.",
@@ -526,7 +526,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque mairie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gare", image: "gare.webp",        article: "la",  gender: "f", definition: "La gare est un bâtiment pour les trains et transports." , exampleSentences: {
+    { word: "gare", image: "gare.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la gare sur le plan.",
@@ -591,7 +591,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque gare est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "hôpital", image: "hopital.webp",     article: "l'",  gender: "m", definition: "L'hôpital est établissement de soins médicaux." , exampleSentences: {
+    { word: "hôpital", image: "hopital.webp",     article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'hôpital sur le plan.",
@@ -656,7 +656,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque hôpital est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "magasin", image: "magasin.webp",     article: "le",  gender: "m", definition: "Le magasin est boutique pour acheter des produits." , exampleSentences: {
+    { word: "magasin", image: "magasin.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le magasin sur le plan.",
@@ -721,7 +721,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque magasin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "banque", image: "banque.webp",      article: "la",  gender: "f", definition: "La banque est établissement financier." , exampleSentences: {
+    { word: "banque", image: "banque.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la banque sur le plan.",
@@ -786,7 +786,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque banque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "parc", image: "parc.webp",        article: "le",  gender: "m", definition: "Le parc est un espace vert public en ville." , exampleSentences: {
+    { word: "parc", image: "parc.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le parc sur le plan.",
@@ -851,7 +851,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque parc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boulangerie", image: "boulangerie.webp", article: "la",  gender: "f", definition: "La boulangerie est boutique qui vend du pain et des viennoiseries." , exampleSentences: {
+    { word: "boulangerie", image: "boulangerie.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la boulangerie sur le plan.",
@@ -916,7 +916,7 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Puisque boulangerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "église", image: "eglise.webp",      article: "l'",  gender: "f", definition: "L'église est un lieu de culte chrétien." , exampleSentences: {
+    { word: "église", image: "eglise.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'église sur le plan.",

@@ -6,7 +6,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
   title: "Les recettes",
   section: "V7",
   words: [
-    { word: "ingrédient",  image: "ingredient.webp", article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "L'ingrédient est élément de base d'une recette." , exampleSentences: {
+    { word: "ingrédient",  image: "ingredient.webp", article: "l'",  gender: "m", group: "Les ingrédients de base", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ingrédient au marché.",
@@ -71,7 +71,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ingrédient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "farine",      image: "farine.webp",     article: "la",  gender: "f", group: "Les ingrédients de base", definition: "La farine est poudre de céréale pour faire la pâte." , exampleSentences: {
+    { word: "farine",      image: "farine.webp",     article: "la",  gender: "f", group: "Les ingrédients de base", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une farine au marché.",
@@ -136,7 +136,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque farine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lait",        image: "lait.webp",       article: "le",  gender: "m", group: "Les ingrédients de base", definition: "Le lait est liquide blanc produit par les vaches." , exampleSentences: {
+    { word: "lait",        image: "lait.webp",       article: "le",  gender: "m", group: "Les ingrédients de base", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un lait au marché.",
@@ -201,7 +201,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque lait est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "œuf",         image: "oeuf.webp",       article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "L'œuf est ingrédient pondu par la poule." , exampleSentences: {
+    { word: "œuf",         image: "oeuf.webp",       article: "l'",  gender: "m", group: "Les ingrédients de base", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un œuf au marché.",
@@ -266,7 +266,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque œuf est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beurre",      image: "beurre.webp",     article: "le",  gender: "m", group: "Les ingrédients de base", definition: "Le beurre est une matière grasse faite de crème de lait." , exampleSentences: {
+    { word: "beurre",      image: "beurre.webp",     article: "le",  gender: "m", group: "Les ingrédients de base", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un beurre au marché.",
@@ -331,7 +331,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque beurre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sucre",       image: "sucre.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "Le sucre est ingrédient sucrant blanc ou roux." , exampleSentences: {
+    { word: "sucre",       image: "sucre.webp",      article: "le",  gender: "m", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sucre au marché.",
@@ -396,7 +396,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sucre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sel",         image: "sel.webp",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: "Le sel est minéral blanc pour assaisonner." , exampleSentences: {
+    { word: "sel",         image: "sel.webp",        article: "le",  gender: "m", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sel au marché.",
@@ -461,7 +461,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poivre",      image: "poivre.webp",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: "Le poivre est épice noire ou blanche très piquante." , exampleSentences: {
+    { word: "poivre",      image: "poivre.webp",     article: "le",  gender: "m", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un poivre au marché.",
@@ -526,7 +526,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poivre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épice",       image: "epice.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "L'épice est substance aromatique pour parfumer les plats." , exampleSentences: {
+    { word: "épice",       image: "epice.webp",      article: "l'",  gender: "f", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une épice au marché.",
@@ -591,7 +591,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque épice est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "curry",       image: "curry.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "Le curry est mélange d'épices aromatiques d'origine indienne." , exampleSentences: {
+    { word: "curry",       image: "curry.webp",      article: "le",  gender: "m", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un curry au marché.",
@@ -656,7 +656,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque curry est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paprika",     image: "paprika.webp",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: "Le paprika est épice rouge à base de poivron séché." , exampleSentences: {
+    { word: "paprika",     image: "paprika.webp",    article: "le",  gender: "m", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un paprika au marché.",
@@ -721,7 +721,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque paprika est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "herbe",       image: "herbe.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "L'herbe est plante aromatique utilisée en cuisine." , exampleSentences: {
+    { word: "herbe",       image: "herbe.webp",      article: "l'",  gender: "f", group: "L'assaisonnement", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une herbe au marché.",
@@ -786,7 +786,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque herbe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ustensile",   image: "ustensile.webp",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: "L'ustensile est un outil de cuisine comme une casserole ou louche." , exampleSentences: {
+    { word: "ustensile",   image: "ustensile.webp",  article: "l'",  gender: "m", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ustensile au marché.",
@@ -851,7 +851,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ustensile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casserole",   image: "casserole.webp",  article: "la",  gender: "f", group: "Les ustensiles",          definition: "La casserole est un récipient à bord haut pour cuire sur le feu." , exampleSentences: {
+    { word: "casserole",   image: "casserole.webp",  article: "la",  gender: "f", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une casserole au marché.",
@@ -916,7 +916,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque casserole est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poêle",       image: "poele.webp",      article: "la",  gender: "f", group: "Les ustensiles",          definition: "La poêle est un ustensile plat avec manche pour faire revenir." , exampleSentences: {
+    { word: "poêle",       image: "poele.webp",      article: "la",  gender: "f", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une poêle au marché.",
@@ -981,7 +981,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "planche",     image: "planche.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "La planche est surface de bois pour couper les aliments." , exampleSentences: {
+    { word: "planche",     image: "planche.webp",    article: "la",  gender: "f", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une planche au marché.",
@@ -1046,7 +1046,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque planche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rouleau",     image: "rouleau.webp",    article: "le",  gender: "m", group: "Les ustensiles",          definition: "Le rouleau est un outil cylindrique pour étaler la pâte." , exampleSentences: {
+    { word: "rouleau",     image: "rouleau.webp",    article: "le",  gender: "m", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un rouleau au marché.",
@@ -1111,7 +1111,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque rouleau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doseur",      image: "doseur.webp",     article: "le",  gender: "m", group: "Les ustensiles",          definition: "Le doseur est un récipient gradué pour mesurer les ingrédients." , exampleSentences: {
+    { word: "doseur",      image: "doseur.webp",     article: "le",  gender: "m", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un doseur au marché.",
@@ -1176,7 +1176,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque doseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spatule",     image: "spatule.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "La spatule est un outil plat pour retourner les aliments." , exampleSentences: {
+    { word: "spatule",     image: "spatule.webp",    article: "la",  gender: "f", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une spatule au marché.",
@@ -1241,7 +1241,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque spatule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "louche",      image: "louche.webp",     article: "la",  gender: "f", group: "Les ustensiles",          definition: "La louche est grande cuillère creuse pour servir les soupes." , exampleSentences: {
+    { word: "louche",      image: "louche.webp",     article: "la",  gender: "f", group: "Les ustensiles", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une louche au marché.",

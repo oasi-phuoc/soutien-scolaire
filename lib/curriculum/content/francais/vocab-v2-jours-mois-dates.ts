@@ -6,7 +6,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
   title: "Jours, Mois et Dates",
   section: "V2",
   words: [
-    { word: "jour", image: "jour.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "Le jour est période de 24 heures." , exampleSentences: {
+    { word: "jour", image: "jour.webp",      article: "le",  gender: "m", group: "Calendrier", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le jour en classe.",
@@ -71,7 +71,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque jour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mois", image: "mois.webp",      article: "le",  gender: "m", group: "Calendrier", definition: "Le mois est division de l'année en 12 parties." , exampleSentences: {
+    { word: "mois", image: "mois.webp",      article: "le",  gender: "m", group: "Calendrier", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le mois en classe.",
@@ -136,7 +136,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "semaine", image: "semaine.webp",   article: "la",  gender: "f", group: "Calendrier", definition: "La semaine est période de 7 jours." , exampleSentences: {
+    { word: "semaine", image: "semaine.webp",   article: "la",  gender: "f", group: "Calendrier", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la semaine en classe.",
@@ -201,7 +201,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque semaine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "année", image: "annee.webp",     article: "l'",  gender: "f", group: "Calendrier", definition: "L'année est durée de 12 mois." , exampleSentences: {
+    { word: "année", image: "annee.webp",     article: "l'",  gender: "f", group: "Calendrier", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'année en classe.",
@@ -266,7 +266,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque année est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lundi", image: "lundi.webp",      group: "Jours",  definition: "Lundi est le premier jour de la semaine." , exampleSentences: {
+    { word: "lundi", image: "lundi.webp",      group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié lundi en classe.",
@@ -331,7 +331,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque lundi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mardi", image: "mardi.webp",      group: "Jours",  definition: "Mardi est deuxième jour de la semaine." , exampleSentences: {
+    { word: "mardi", image: "mardi.webp",      group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mardi en classe.",
@@ -396,7 +396,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mardi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mercredi", image: "mercredi.webp",   group: "Jours",  definition: "Mercredi est troisième jour de la semaine." , exampleSentences: {
+    { word: "mercredi", image: "mercredi.webp",   group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mercredi en classe.",
@@ -461,7 +461,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mercredi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jeudi", image: "jeudi.webp",      group: "Jours",  definition: "Jeudi est quatrième jour de la semaine." , exampleSentences: {
+    { word: "jeudi", image: "jeudi.webp",      group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié jeudi en classe.",
@@ -526,7 +526,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque jeudi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vendredi", image: "vendredi.webp",   group: "Jours",  definition: "Vendredi est cinquième jour de la semaine." , exampleSentences: {
+    { word: "vendredi", image: "vendredi.webp",   group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié vendredi en classe.",
@@ -591,7 +591,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque vendredi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "samedi", image: "samedi.webp",     group: "Jours",  definition: "Samedi est sixième jour de la semaine." , exampleSentences: {
+    { word: "samedi", image: "samedi.webp",     group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié samedi en classe.",
@@ -656,7 +656,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque samedi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dimanche", image: "dimanche.webp",   group: "Jours",  definition: "Dimanche est septième jour de la semaine." , exampleSentences: {
+    { word: "dimanche", image: "dimanche.webp",   group: "Jours", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié dimanche en classe.",
@@ -721,7 +721,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque dimanche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "janvier", image: "janvier.webp",    group: "Mois",   definition: "Janvier est le premier mois de l'année." , exampleSentences: {
+    { word: "janvier", image: "janvier.webp",    group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié janvier en classe.",
@@ -786,7 +786,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque janvier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "février", image: "fevrier.webp",    group: "Mois",   definition: "Février est deuxième mois de l'année." , exampleSentences: {
+    { word: "février", image: "fevrier.webp",    group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié février en classe.",
@@ -851,7 +851,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque février est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mars", image: "mars.webp",       group: "Mois",   definition: "Mars est troisième mois de l'année." , exampleSentences: {
+    { word: "mars", image: "mars.webp",       group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mars en classe.",
@@ -916,7 +916,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mars est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avril", image: "avril.webp",      group: "Mois",   definition: "Avril est quatrième mois de l'année." , exampleSentences: {
+    { word: "avril", image: "avril.webp",      group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié avril en classe.",
@@ -981,7 +981,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque avril est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mai", image: "mai.webp",        group: "Mois",   definition: "Mai est cinquième mois de l'année." , exampleSentences: {
+    { word: "mai", image: "mai.webp",        group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mai en classe.",
@@ -1046,7 +1046,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque mai est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "juin", image: "juin.webp",       group: "Mois",   definition: "Juin est sixième mois de l'année." , exampleSentences: {
+    { word: "juin", image: "juin.webp",       group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié juin en classe.",
@@ -1111,7 +1111,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque juin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "juillet", image: "juillet.webp",    group: "Mois",   definition: "Juillet est septième mois de l'année." , exampleSentences: {
+    { word: "juillet", image: "juillet.webp",    group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié juillet en classe.",
@@ -1176,7 +1176,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque juillet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "août", image: "aout.webp",       group: "Mois",   definition: "Août est huitième mois de l'année." , exampleSentences: {
+    { word: "août", image: "aout.webp",       group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié août en classe.",
@@ -1241,7 +1241,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque août est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "septembre", image: "septembre.webp",  group: "Mois",   definition: "Septembre est neuvième mois de l'année." , exampleSentences: {
+    { word: "septembre", image: "septembre.webp",  group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié septembre en classe.",
@@ -1306,7 +1306,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque septembre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "octobre", image: "octobre.webp",    group: "Mois",   definition: "Octobre est dixième mois de l'année." , exampleSentences: {
+    { word: "octobre", image: "octobre.webp",    group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié octobre en classe.",
@@ -1371,7 +1371,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque octobre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "novembre", image: "novembre.webp",   group: "Mois",   definition: "Novembre est onzième mois de l'année." , exampleSentences: {
+    { word: "novembre", image: "novembre.webp",   group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié novembre en classe.",
@@ -1436,7 +1436,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Puisque novembre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "décembre", image: "decembre.webp",   group: "Mois",   definition: "Décembre est douzième mois de l'année." , exampleSentences: {
+    { word: "décembre", image: "decembre.webp",   group: "Mois", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié décembre en classe.",

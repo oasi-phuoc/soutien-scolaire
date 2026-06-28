@@ -6,7 +6,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
   title: "Le matériel scolaire",
   section: "V5",
   words: [
-    { word: "sac",          image: "sac-a-dos.webp",    article: "le",  gender: "m", definition: "Le sac est sac pour porter les affaires scolaires." , exampleSentences: {
+    { word: "sac",          image: "sac-a-dos.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sac pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque sac est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "trousse",      image: "trousse.webp",      article: "la",  gender: "f", definition: "La trousse est pochette pour ranger les stylos." , exampleSentences: {
+    { word: "trousse",      image: "trousse.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la trousse pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque trousse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "agenda",       image: "agenda.webp",       article: "l'",  gender: "m", definition: "L'agenda est carnet pour noter les devoirs et rendez-vous." , exampleSentences: {
+    { word: "agenda",       image: "agenda.webp",       article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'agenda pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque agenda est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "classeur",     image: "classeur.webp",     article: "le",  gender: "m", definition: "Le classeur est pochette rigide pour classer des feuilles." , exampleSentences: {
+    { word: "classeur",     image: "classeur.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le classeur pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque classeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "intercalaire", image: "intercalaire.webp", article: "l'",  gender: "m", definition: "L'intercalaire est feuille colorée pour séparer les sections." , exampleSentences: {
+    { word: "intercalaire", image: "intercalaire.webp", article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'intercalaire pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque intercalaire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "feuille",      image: "feuille.webp",      article: "la",  gender: "f", definition: "La feuille est page de papier pour écrire." , exampleSentences: {
+    { word: "feuille",      image: "feuille.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la feuille pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque feuille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "livre",        image: "livre.webp",        article: "le",  gender: "m", definition: "Le livre est ouvrage imprimé relié." , exampleSentences: {
+    { word: "livre",        image: "livre.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le livre pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque livre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cahier",       image: "cahier.webp",       article: "le",  gender: "m", definition: "Le cahier est carnet de feuilles pour écrire." , exampleSentences: {
+    { word: "cahier",       image: "cahier.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le cahier pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque cahier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "stylo",        image: "stylo.webp",        article: "le",  gender: "m", definition: "Le stylo est instrument pour écrire à l'encre." , exampleSentences: {
+    { word: "stylo",        image: "stylo.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le stylo pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque stylo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "crayon",       image: "crayon.webp",       article: "le",  gender: "m", definition: "Le crayon est instrument pour écrire et dessiner." , exampleSentences: {
+    { word: "crayon",       image: "crayon.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le crayon pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque crayon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gomme",        image: "gomme.webp",        article: "la",  gender: "f", definition: "La gomme est un outil pour effacer le crayon." , exampleSentences: {
+    { word: "gomme",        image: "gomme.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la gomme pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque gomme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "feutre",       image: "feutre.webp",       article: "le",  gender: "m", definition: "Le feutre est stylo à pointe en feutre pour colorier." , exampleSentences: {
+    { word: "feutre",       image: "feutre.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le feutre pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque feutre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "surligneur",   image: "surligneur.webp",   article: "le",  gender: "m", definition: "Le surligneur est stylo fluorescent pour mettre en valeur du texte." , exampleSentences: {
+    { word: "surligneur",   image: "surligneur.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le surligneur pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque surligneur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "taille-crayon", image: "taille-crayon.webp", article: "le", gender: "m", definition: "Le taille-crayon est un outil pour aiguiser les crayons." , exampleSentences: {
+    { word: "taille-crayon", image: "taille-crayon.webp", article: "le", gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le taille-crayon pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque taille-crayon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "règle",        image: "regle.webp",        article: "la",  gender: "f", definition: "La règle est un outil pour tracer des lignes droites." , exampleSentences: {
+    { word: "règle",        image: "regle.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la règle pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque règle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "équerre",      image: "equerre.webp",      article: "l'",  gender: "f", definition: "L'équerre est un outil pour tracer des angles droits." , exampleSentences: {
+    { word: "équerre",      image: "equerre.webp",      article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'équerre pendant l'exercice.",
@@ -1046,7 +1046,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque équerre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "compas",       image: "compas.webp",       article: "le",  gender: "m", definition: "Le compas est un outil pour tracer des cercles." , exampleSentences: {
+    { word: "compas",       image: "compas.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le compas pendant l'exercice.",
@@ -1111,7 +1111,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque compas est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "agrafeuse",    image: "agrafeuse.webp",    article: "l'",  gender: "f", definition: "L'agrafeuse est un outil pour assembler des feuilles avec des agrafes." , exampleSentences: {
+    { word: "agrafeuse",    image: "agrafeuse.webp",    article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'agrafeuse pendant l'exercice.",
@@ -1176,7 +1176,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque agrafeuse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "perforatrice", image: "perforatrice.webp", article: "la",  gender: "f", definition: "La perforatrice est un outil pour faire des trous dans les feuilles." , exampleSentences: {
+    { word: "perforatrice", image: "perforatrice.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la perforatrice pendant l'exercice.",
@@ -1241,7 +1241,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Puisque perforatrice est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tableau",      image: "tableau.webp",      article: "le",  gender: "m", definition: "Le tableau est surface noire ou blanche pour écrire en classe." , exampleSentences: {
+    { word: "tableau",      image: "tableau.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tableau pendant l'exercice.",

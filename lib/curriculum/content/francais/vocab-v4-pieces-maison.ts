@@ -6,7 +6,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
   title: "Les pièces de la maison",
   section: "V4",
   words: [
-    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", definition: "La cuisine est une pièce où l'on prépare les repas." , exampleSentences: {
+    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cuisine pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", definition: "Le salon est une pièce principale pour se détendre." , exampleSentences: {
+    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le salon pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", definition: "La chambre est une pièce pour dormir." , exampleSentences: {
+    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chambre pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", definition: "La salle de bain est une pièce avec baignoire ou douche." , exampleSentences: {
+    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle de bain pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle de bain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", definition: "Les toilettes est une pièce avec les WC." , exampleSentences: {
+    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les toilettes pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque toilettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", definition: "Le bureau est une pièce pour travailler ou étudier." , exampleSentences: {
+    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", definition: "Le couloir est passage entre les pièces." , exampleSentences: {
+    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le couloir pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", definition: "Le balcon est une plateforme extérieure d'un appartement." , exampleSentences: {
+    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le balcon pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque balcon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", definition: "La terrasse est un espace extérieur plat attenant à la maison." , exampleSentences: {
+    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la terrasse pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque terrasse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", definition: "La cave est une pièce souterraine pour le stockage." , exampleSentences: {
+    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cave pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", definition: "Le grenier est un espace sous le toit pour ranger." , exampleSentences: {
+    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le grenier pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque grenier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", definition: "La salle à manger est une pièce pour prendre les repas." , exampleSentences: {
+    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle à manger pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle à manger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", definition: "Le jardin est un espace vert autour de la maison." , exampleSentences: {
+    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le jardin pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque jardin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", definition: "Le sous-sol est niveau en dessous du rez-de-chaussée." , exampleSentences: {
+    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sous-sol pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque sous-sol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", definition: "L'entrée est un espace d'accueil à l'entrée du logement." , exampleSentences: {
+    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'entrée pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", definition: "Le garage est une pièce ou espace pour garer une voiture." , exampleSentences: {
+    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le garage pendant l'exercice.",

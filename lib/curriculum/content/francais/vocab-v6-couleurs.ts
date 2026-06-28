@@ -6,7 +6,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
   title: "Les couleurs",
   section: "V6",
   words: [
-    { word: "rouge",     image: "rouge.svg",      definition: "Rouge est une couleur du sang et des fraises." , exampleSentences: {
+    { word: "rouge",     image: "rouge.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rouge avec ses amis.",
@@ -71,7 +71,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bleu",      image: "bleu.svg",       feminine: "bleue",     definition: "Bleu est une couleur du ciel et de la mer." , exampleSentences: {
+    { word: "bleu",      image: "bleu.svg",       feminine: "bleue", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bleu avec ses amis.",
@@ -136,7 +136,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bleu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vert",      image: "vert.svg",       feminine: "verte",     definition: "Vert est une couleur de l'herbe et des arbres." , exampleSentences: {
+    { word: "vert",      image: "vert.svg",       feminine: "verte", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été vert avec ses amis.",
@@ -201,7 +201,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque vert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jaune",     image: "jaune.svg",      definition: "Jaune est une couleur du soleil et du citron." , exampleSentences: {
+    { word: "jaune",     image: "jaune.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été jaune avec ses amis.",
@@ -266,7 +266,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque jaune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "noir",      image: "noir.svg",       feminine: "noire",     definition: "Noir est une couleur de la nuit, absence de lumière." , exampleSentences: {
+    { word: "noir",      image: "noir.svg",       feminine: "noire", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été noir avec ses amis.",
@@ -331,7 +331,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque noir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blanc",     image: "blanc.svg",      feminine: "blanche",   definition: "Blanc est une couleur de la neige, toutes les lumières." , exampleSentences: {
+    { word: "blanc",     image: "blanc.svg",      feminine: "blanche", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été blanc avec ses amis.",
@@ -396,7 +396,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque blanc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gris",      image: "gris.svg",       feminine: "grise",     definition: "Gris est une couleur intermédiaire entre noir et blanc." , exampleSentences: {
+    { word: "gris",      image: "gris.svg",       feminine: "grise", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gris avec ses amis.",
@@ -461,7 +461,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque gris est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rose",      image: "rose.svg",       definition: "Rose est une couleur entre rouge et blanc." , exampleSentences: {
+    { word: "rose",      image: "rose.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rose avec ses amis.",
@@ -526,7 +526,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rose est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",    image: "orange.svg",     definition: "Orange est une couleur du fruit orange, entre rouge et jaune." , exampleSentences: {
+    { word: "orange",    image: "orange.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été orange avec ses amis.",
@@ -591,7 +591,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "violet",    image: "violet.svg",     feminine: "violette",  definition: "Violet est une couleur entre bleu et rouge." , exampleSentences: {
+    { word: "violet",    image: "violet.svg",     feminine: "violette", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été violet avec ses amis.",
@@ -656,7 +656,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque violet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "marron",    image: "marron.svg",     definition: "Marron est une couleur brun foncé comme le chocolat." , exampleSentences: {
+    { word: "marron",    image: "marron.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été marron avec ses amis.",
@@ -721,7 +721,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque marron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beige",     image: "beige.svg",      definition: "Beige est une couleur crème, brun très clair." , exampleSentences: {
+    { word: "beige",     image: "beige.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été beige avec ses amis.",
@@ -786,7 +786,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque beige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turquoise", image: "turquoise.svg",  definition: "Turquoise est une couleur bleu-vert vif." , exampleSentences: {
+    { word: "turquoise", image: "turquoise.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été turquoise avec ses amis.",
@@ -851,7 +851,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque turquoise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cyan",      image: "cyan.svg",       definition: "Cyan est une couleur bleu vif entre bleu et vert." , exampleSentences: {
+    { word: "cyan",      image: "cyan.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été cyan avec ses amis.",
@@ -916,7 +916,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque cyan est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bordeaux",  image: "bordeaux.svg",   definition: "Bordeaux est une couleur rouge foncé comme le vin de Bordeaux." , exampleSentences: {
+    { word: "bordeaux",  image: "bordeaux.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bordeaux avec ses amis.",
@@ -981,7 +981,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bordeaux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kaki",      image: "kaki.svg",       definition: "Kaki est une couleur vert olive tirant sur le brun." , exampleSentences: {
+    { word: "kaki",      image: "kaki.svg", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été kaki avec ses amis.",

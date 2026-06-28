@@ -7,7 +7,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", definition: "Grand signifie de grande taille.", relatedWords: ["qui mesure beaucoup", "contraire de petit"], exampleSentences: {
+    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", relatedWords: ["qui mesure beaucoup", "contraire de petit"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été grand avec ses amis.",
@@ -73,7 +73,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", definition: "Petit signifie de petite taille.", relatedWords: ["qui ne mesure pas beaucoup", "contraire de grand"], exampleSentences: {
+    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", relatedWords: ["qui ne mesure pas beaucoup", "contraire de grand"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été petit avec ses amis.",
@@ -139,7 +139,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "mince",                           image: "mince.webp",    group: "Physique", definition: "Mince signifie peu épais, svelte.", relatedWords: ["qui n'est pas gros", "de morphologie fine"], exampleSentences: {
+    { word: "mince",                           image: "mince.webp",    group: "Physique", relatedWords: ["qui n'est pas gros", "de morphologie fine"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été mince avec ses amis.",
@@ -205,7 +205,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", definition: "Gros signifie de forte corpulence.", relatedWords: ["en surpoids", "contraire de mince"], exampleSentences: {
+    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", relatedWords: ["en surpoids", "contraire de mince"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gros avec ses amis.",
@@ -271,7 +271,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", definition: "Beau est agréable à regarder.", relatedWords: ["qui a une belle apparence", "contraire de laid"], exampleSentences: {
+    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", relatedWords: ["qui a une belle apparence", "contraire de laid"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été beau avec ses amis.",
@@ -337,7 +337,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", definition: "Laid est désagréable à regarder.", relatedWords: ["qui n'est pas beau", "contraire de beau"], exampleSentences: {
+    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", relatedWords: ["qui n'est pas beau", "contraire de beau"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été laid avec ses amis.",
@@ -403,7 +403,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "jeune",                           image: "jeune.webp",    group: "Physique", definition: "Jeune signifie de peu d'âge.", relatedWords: ["qui n'est pas vieux", "contraire d'âgé"], exampleSentences: {
+    { word: "jeune",                           image: "jeune.webp",    group: "Physique", relatedWords: ["qui n'est pas vieux", "contraire d'âgé"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été jeune avec ses amis.",
@@ -469,7 +469,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", definition: "Âgé est d'un âge avancé.", relatedWords: ["qui est vieux", "contraire de jeune"], exampleSentences: {
+    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", relatedWords: ["qui est vieux", "contraire de jeune"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été âgé avec ses amis.",
@@ -535,7 +535,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", definition: "Fort est musclé, robuste.", relatedWords: ["qui a beaucoup de force", "contraire de faible"], exampleSentences: {
+    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", relatedWords: ["qui a beaucoup de force", "contraire de faible"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été fort avec ses amis.",
@@ -601,7 +601,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "faible",                          image: "faible.webp",   group: "Physique", definition: "Faible est sans force.", relatedWords: ["qui manque de vigueur", "contraire de fort"], exampleSentences: {
+    { word: "faible",                          image: "faible.webp",   group: "Physique", relatedWords: ["qui manque de vigueur", "contraire de fort"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été faible avec ses amis.",
@@ -667,7 +667,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", definition: "Musclé d?signe une personne aux muscles développés.", relatedWords: ["qui fait beaucoup de sport", "avec un corps athlétique"], exampleSentences: {
+    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", relatedWords: ["qui fait beaucoup de sport", "avec un corps athlétique"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été musclé avec ses amis.",
@@ -733,7 +733,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", definition: "Élégant est d'une beauté raffinée.", relatedWords: ["bien habillé avec goût", "de mise soignée et distinguée"], exampleSentences: {
+    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", relatedWords: ["bien habillé avec goût", "de mise soignée et distinguée"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été élégant avec ses amis.",
@@ -799,7 +799,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux",  definition: "Court signifie de faible longueur.", relatedWords: ["qui ne dépasse pas les oreilles", "contraire de long"], exampleSentences: {
+    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux", relatedWords: ["qui ne dépasse pas les oreilles", "contraire de long"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été court avec ses amis.",
@@ -865,7 +865,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux",  definition: "Long signifie de grande longueur.", relatedWords: ["qui tombe sur les épaules ou plus", "contraire de court"], exampleSentences: {
+    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux", relatedWords: ["qui tombe sur les épaules ou plus", "contraire de court"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été long avec ses amis.",
@@ -931,7 +931,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux",  definition: "Bouclé signifie en boucles.", relatedWords: ["qui forme des courbes régulières", "ondulé en spirales"], exampleSentences: {
+    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux", relatedWords: ["qui forme des courbes régulières", "ondulé en spirales"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bouclé avec ses amis.",
@@ -997,7 +997,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux",  definition: "Frisé signifie en frisures serrées.", relatedWords: ["très ondulé et serré", "plus frisé que bouclé"], exampleSentences: {
+    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux", relatedWords: ["très ondulé et serré", "plus frisé que bouclé"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été frisé avec ses amis.",
@@ -1063,7 +1063,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux",  definition: "Blond d?signe une personne aux cheveux clairs.", relatedWords: ["de couleur jaune dorée", "cheveux de couleur claire"], exampleSentences: {
+    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux", relatedWords: ["de couleur jaune dorée", "cheveux de couleur claire"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été blond avec ses amis.",
@@ -1129,7 +1129,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "brun",     feminine: "brune",                                                 group: "Cheveux",  definition: "Brun d?signe une personne aux cheveux brun foncé.", relatedWords: ["de couleur châtain foncé à noir", "cheveux bruns"], exampleSentences: {
+    { word: "brun",     feminine: "brune",                                                 group: "Cheveux", relatedWords: ["de couleur châtain foncé à noir", "cheveux bruns"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été brun avec ses amis.",
@@ -1195,7 +1195,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux",  definition: "Châtain d?signe une personne aux cheveux noir clair.", relatedWords: ["entre noir et blond", "de couleur noisette"], exampleSentences: {
+    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux", relatedWords: ["entre noir et blond", "de couleur noisette"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été châtain avec ses amis.",
@@ -1261,7 +1261,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux",  definition: "Roux d?signe une personne aux cheveux roux.", relatedWords: ["de couleur orangée ou cuivrée", "cheveux de teinte rouge-orange"], exampleSentences: {
+    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux", relatedWords: ["de couleur orangée ou cuivrée", "cheveux de teinte rouge-orange"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été roux avec ses amis.",

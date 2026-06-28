@@ -6,7 +6,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
   title: "Les fruits",
   section: "V7",
   words: [
-    { word: "pomme",      image: "pomme.webp",      article: "la",  gender: "f", definition: "La pomme est un fruit rouge ou vert de forme ronde." , exampleSentences: {
+    { word: "pomme",      image: "pomme.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pomme au marché.",
@@ -71,7 +71,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pomme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poire",      image: "poire.webp",      article: "la",  gender: "f", definition: "La poire est un fruit jaune-vert de forme allongée." , exampleSentences: {
+    { word: "poire",      image: "poire.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une poire au marché.",
@@ -136,7 +136,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque poire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "banane",     image: "banane.webp",     article: "la",  gender: "f", definition: "La banane est un fruit jaune courbé à peau épaisse." , exampleSentences: {
+    { word: "banane",     image: "banane.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une banane au marché.",
@@ -201,7 +201,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque banane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",     image: "orange.webp",     article: "l'",  gender: "f", definition: "L'orange est un fruit rond orange à peau épaisse." , exampleSentences: {
+    { word: "orange",     image: "orange.webp",     article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une orange au marché.",
@@ -266,7 +266,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fraise",     image: "fraise.webp",     article: "la",  gender: "f", definition: "La fraise est petit fruit rouge et sucré." , exampleSentences: {
+    { word: "fraise",     image: "fraise.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une fraise au marché.",
@@ -331,7 +331,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque fraise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "framboise",  image: "framboise.webp",  article: "la",  gender: "f", definition: "La framboise est petit fruit rouge composé de petites boules." , exampleSentences: {
+    { word: "framboise",  image: "framboise.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une framboise au marché.",
@@ -396,7 +396,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque framboise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "raisin",     image: "raisin.webp",     article: "le",  gender: "m", definition: "Le raisin est un fruit en grappes, violet ou vert." , exampleSentences: {
+    { word: "raisin",     image: "raisin.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un raisin au marché.",
@@ -461,7 +461,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque raisin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kiwi",       image: "kiwi.webp",       article: "le",  gender: "m", definition: "Le kiwi est petit fruit vert à peau brune et velue." , exampleSentences: {
+    { word: "kiwi",       image: "kiwi.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un kiwi au marché.",
@@ -526,7 +526,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque kiwi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pêche",      image: "peche.webp",      article: "la",  gender: "f", definition: "La pêche est un fruit juteux à peau veloutée, orange ou jaune." , exampleSentences: {
+    { word: "pêche",      image: "peche.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pêche au marché.",
@@ -591,7 +591,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pêche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "abricot",    image: "abricot.webp",    article: "l'",  gender: "m", definition: "L'abricot est petit fruit orange et sucré." , exampleSentences: {
+    { word: "abricot",    image: "abricot.webp",    article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un abricot au marché.",
@@ -656,7 +656,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque abricot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cerise",     image: "cerise.webp",     article: "la",  gender: "f", definition: "La cerise est petit fruit rond rouge sur une tige." , exampleSentences: {
+    { word: "cerise",     image: "cerise.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une cerise au marché.",
@@ -721,7 +721,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque cerise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "prune",      image: "prune.webp",      article: "la",  gender: "f", definition: "La prune est petit fruit violet ou rouge à noyau." , exampleSentences: {
+    { word: "prune",      image: "prune.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une prune au marché.",
@@ -786,7 +786,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque prune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ananas",                               article: "l'",  gender: "m", definition: "L'ananas est grand fruit tropical avec une couronne de feuilles." , exampleSentences: {
+    { word: "ananas",                               article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ananas au marché.",
@@ -851,7 +851,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque ananas est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "citron",                               article: "le",  gender: "m", definition: "Le citron est un fruit jaune très acide." , exampleSentences: {
+    { word: "citron",                               article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un citron au marché.",
@@ -916,7 +916,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque citron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "melon",      image: "melon.webp",      article: "le",  gender: "m", definition: "Le melon est gros fruit rond à chair orange et sucrée." , exampleSentences: {
+    { word: "melon",      image: "melon.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un melon au marché.",
@@ -981,7 +981,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque melon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pastèque",   image: "pasteque.webp",   article: "la",  gender: "f", definition: "La pastèque est grand fruit vert à chair rouge et rafraîchissante." , exampleSentences: {
+    { word: "pastèque",   image: "pasteque.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pastèque au marché.",
@@ -1046,7 +1046,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Puisque pastèque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mangue",     image: "mangue.webp",     article: "la",  gender: "f", definition: "La mangue est un fruit tropical jaune-orange très sucré." , exampleSentences: {
+    { word: "mangue",     image: "mangue.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une mangue au marché.",

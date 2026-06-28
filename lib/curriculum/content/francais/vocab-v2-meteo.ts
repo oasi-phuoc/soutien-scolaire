@@ -6,7 +6,7 @@ export const V2_METEO_THEME: VocabTheme = {
   title: "La météo",
   section: "V2",
   words: [
-    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", definition: "Le soleil est un astre qui donne lumière et chaleur." , exampleSentences: {
+    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du soleil toute la journée.",
@@ -71,7 +71,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque soleil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", definition: "Le nuage est masse de vapeur d'eau dans le ciel." , exampleSentences: {
+    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un nuage toute la journée.",
@@ -136,7 +136,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque nuage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", definition: "La lune est un astre qui tourne autour de la Terre et brille la nuit." , exampleSentences: {
+    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une lune toute la journée.",
@@ -201,7 +201,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque lune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", definition: "Une étoile est un astre lumineux visible dans le ciel la nuit." , exampleSentences: {
+    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une étoile toute la journée.",
@@ -266,7 +266,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque étoile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", definition: "La pluie est eau qui tombe du ciel." , exampleSentences: {
+    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la pluie toute la journée.",
@@ -331,7 +331,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque pluie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", definition: "Le vent est mouvement de l'air." , exampleSentences: {
+    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du vent toute la journée.",
@@ -396,7 +396,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque vent est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", definition: "La neige est eau gelée qui tombe en flocons blancs." , exampleSentences: {
+    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la neige toute la journée.",
@@ -461,7 +461,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque neige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", definition: "L'orage est tempête avec tonnerre et éclairs." , exampleSentences: {
+    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de l'orage toute la journée.",
@@ -526,7 +526,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque orage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", definition: "Le brouillard est nuage bas qui réduit la visibilité." , exampleSentences: {
+    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du brouillard toute la journée.",
@@ -591,7 +591,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque brouillard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", definition: "Le gel est température au-dessous de zéro degré." , exampleSentences: {
+    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du gel toute la journée.",
@@ -656,7 +656,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque gel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", definition: "La grêle est précipitation de grains de glace." , exampleSentences: {
+    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la grêle toute la journée.",
@@ -721,7 +721,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque grêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", definition: "L'arc-en-ciel est arc coloré visible après la pluie." , exampleSentences: {
+    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un arc-en-ciel toute la journée.",
@@ -786,7 +786,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque arc-en-ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", definition: "L'averse est pluie soudaine et abondante." , exampleSentences: {
+    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une averse toute la journée.",
@@ -851,7 +851,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque averse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", definition: "Le ciel est un espace au-dessus de nos têtes." , exampleSentences: {
+    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un ciel toute la journée.",
@@ -916,7 +916,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "humide", image: "humide.webp",                                      definition: "Humide est chargé d'eau, mouillé." , exampleSentences: {
+    { word: "humide", image: "humide.webp", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un humide toute la journée.",
@@ -981,7 +981,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque humide est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sec", image: "sec.webp",          feminine: "sèche",            definition: "Sec est sans humidité, contraire d'humide." , exampleSentences: {
+    { word: "sec", image: "sec.webp",          feminine: "sèche", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un sec toute la journée.",
@@ -1046,7 +1046,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque sec est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doux", image: "doux.webp",         feminine: "douce",            definition: "Doux est agréable, sans excès de chaud ou de froid." , exampleSentences: {
+    { word: "doux", image: "doux.webp",         feminine: "douce", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un doux toute la journée.",
@@ -1111,7 +1111,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque doux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaud", image: "chaud.webp",        feminine: "chaude",           definition: "Chaud est à haute température, contraire de froid." , exampleSentences: {
+    { word: "chaud", image: "chaud.webp",        feminine: "chaude", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un chaud toute la journée.",
@@ -1176,7 +1176,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque chaud est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "froid", image: "froid.webp",        feminine: "froide",           definition: "Froid est à basse température, contraire de chaud." , exampleSentences: {
+    { word: "froid", image: "froid.webp",        feminine: "froide", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de froid toute la journée.",
@@ -1241,7 +1241,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque froid est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frais", image: "frais.webp",        feminine: "fraîche",          definition: "Frais est légèrement froid, agréablement frais." , exampleSentences: {
+    { word: "frais", image: "frais.webp",        feminine: "fraîche", exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un frais toute la journée.",

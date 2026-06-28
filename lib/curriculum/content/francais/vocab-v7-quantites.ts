@@ -6,7 +6,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
   title: "Les quantités",
   section: "V7",
   words: [
-    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", definition: "Le gramme est unité de mesure de masse (g)." , exampleSentences: {
+    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le gramme en classe.",
@@ -71,7 +71,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque gramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", definition: "Le kilogramme est mille grammes (kg)." , exampleSentences: {
+    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un kilogramme au marché.",
@@ -136,7 +136,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque kilogramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", definition: "La boîte est contenant rigide pour conserver les aliments." , exampleSentences: {
+    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une boîte au marché.",
@@ -201,7 +201,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque boîte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", definition: "Le paquet est emballage de plusieurs produits ensemble." , exampleSentences: {
+    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le paquet en classe.",
@@ -266,7 +266,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque paquet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", definition: "Le sachet est petit sac contenant un produit." , exampleSentences: {
+    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sachet au marché.",
@@ -331,7 +331,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque sachet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", definition: "La pincée est très petite quantité prise entre les doigts." , exampleSentences: {
+    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pincée au marché.",
@@ -396,7 +396,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque pincée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", definition: "La tranche est morceau fin coupé dans un aliment." , exampleSentences: {
+    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la tranche en classe.",
@@ -461,7 +461,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque tranche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "part",       image: "part.webp",       article: "la",  gender: "f", definition: "La part est portion d'un gâteau ou plat." , exampleSentences: {
+    { word: "part",       image: "part.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une part au marché.",
@@ -526,7 +526,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque part est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", definition: "Le morceau est petit morceau d'aliment découpé." , exampleSentences: {
+    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le morceau en classe.",
@@ -591,7 +591,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque morceau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", definition: "Le bol est un récipient rond pour le petit-déjeuner." , exampleSentences: {
+    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bol en classe.",
@@ -656,7 +656,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", definition: "La bouteille est un récipient en verre ou plastique pour liquides." , exampleSentences: {
+    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la bouteille en classe.",
@@ -721,7 +721,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bouteille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "La cuillère est mesure d'ingrédient prise avec une cuillère." , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la cuillère en classe.",

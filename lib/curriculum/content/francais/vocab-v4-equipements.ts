@@ -6,7 +6,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   title: "Les meubles",
   section: "V4",
   words: [
-    { word: "table",    image: "table.webp",    article: "la",  gender: "f", definition: "La table est un meuble plat pour poser des objets." , exampleSentences: {
+    { word: "table",    image: "table.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la table pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque table est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaise",   image: "chaise.webp",   article: "la",  gender: "f", definition: "La chaise est siège à quatre pieds avec un dossier." , exampleSentences: {
+    { word: "chaise",   image: "chaise.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chaise pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "canapé",   image: "canape.webp",   article: "le",  gender: "m", definition: "Le canapé est long siège rembourré pour plusieurs personnes." , exampleSentences: {
+    { word: "canapé",   image: "canape.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le canapé pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque canapé est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fauteuil", image: "fauteuil.webp", article: "le",  gender: "m", definition: "Le fauteuil est siège confortable avec accoudoirs et dossier." , exampleSentences: {
+    { word: "fauteuil", image: "fauteuil.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le fauteuil pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque fauteuil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau",   image: "bureau.webp",   article: "le",  gender: "m", definition: "Le bureau est un meuble pour travailler ou étudier." , exampleSentences: {
+    { word: "bureau",   image: "bureau.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "armoire",  image: "armoire.webp",  article: "l'",  gender: "f", definition: "L'armoire est grand meuble pour ranger les vêtements." , exampleSentences: {
+    { word: "armoire",  image: "armoire.webp",  article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'armoire pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque armoire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lit",      image: "lit.webp",      article: "le",  gender: "m", definition: "Le lit est un meuble pour dormir." , exampleSentences: {
+    { word: "lit",      image: "lit.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lit pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque lit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étagère",  image: "etagere.webp",  article: "l'",  gender: "f", definition: "L'étagère est planche fixée au mur pour poser des objets." , exampleSentences: {
+    { word: "étagère",  image: "etagere.webp",  article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'étagère pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque étagère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "miroir",   image: "miroir.webp",   article: "le",  gender: "m", definition: "Le miroir est surface réfléchissante pour se voir." , exampleSentences: {
+    { word: "miroir",   image: "miroir.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le miroir pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Puisque miroir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tabouret", image: "tabouret.webp", article: "le",  gender: "m", definition: "Le tabouret est petit siège sans dossier ni accoudoirs." , exampleSentences: {
+    { word: "tabouret", image: "tabouret.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tabouret pendant l'exercice.",

@@ -241,14 +241,13 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
   const [imgFailed, setImgFailed] = useState(false);
   const [definitionOpen, setDefinitionOpen] = useState(false);
   const src = resolveImage(w.image, imageFolder);
-  const hasDefinition = !!(w.definition || w.definitionPivot);
-  const definitionButton = hasDefinition ? (
+  const definitionButton = (
     <DefinitionToggle
       isOpen={definitionOpen}
       onToggle={() => setDefinitionOpen((open) => !open)}
       ariaLabel={`${definitionOpen ? "Masquer" : "Afficher"} la définition de ${w.word}`}
     />
-  ) : null;
+  );
   const closeWords = country ? undefined : w.relatedWords;
 
   return (
@@ -276,7 +275,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       <div className="w-full">
         {cardLayout === "mf" ? (
           <>
-            <WordTitle definitionButton={definitionButton}>{w.relatedWords?.[0] ?? w.word}</WordTitle>
+            <WordTitle definitionButton={definitionButton}>{w.word}</WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} closeWords={closeWords} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>

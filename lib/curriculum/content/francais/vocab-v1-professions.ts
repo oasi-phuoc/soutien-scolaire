@@ -7,7 +7,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.webp",    feminine: "étudiante",    relatedWords: ["les études"],         definition: "Un étudiant est une personne qui fait des études.", exampleSentences: {
+    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.webp",    feminine: "étudiante",    relatedWords: ["les études"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'étudiant a parlé avec le professeur.",
@@ -72,7 +72,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque étudiant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "professeur",   article: "le",  gender: "m", image: "professeur.webp",  feminine: "professeure",  relatedWords: ["l'enseignement"],     definition: "Le professeur est une personne qui enseigne.", exampleSentences: {
+    { word: "professeur",   article: "le",  gender: "m", image: "professeur.webp",  feminine: "professeure",  relatedWords: ["l'enseignement"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le professeur a parlé avec le professeur.",
@@ -137,7 +137,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque professeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "médecin",      article: "le",  gender: "m", image: "medecin.webp",     relatedWords: ["la médecine"],        definition: "Le médecin est spécialiste de la santé.", exampleSentences: {
+    { word: "médecin",      article: "le",  gender: "m", image: "medecin.webp",     relatedWords: ["la médecine"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé avec le professeur.",
@@ -202,7 +202,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.webp",   feminine: "infirmière",   relatedWords: ["les soins"],          definition: "Un infirmier est un soignant en milieu médical.", exampleSentences: {
+    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.webp",   feminine: "infirmière",   relatedWords: ["les soins"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'infirmier a parlé avec le professeur.",
@@ -267,7 +267,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.webp",   feminine: "boulangère",   relatedWords: ["la boulangerie"],     definition: "Un boulanger est un fabricant et vendeur de pain.", exampleSentences: {
+    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.webp",   feminine: "boulangère",   relatedWords: ["la boulangerie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le boulanger a parlé avec le professeur.",
@@ -332,7 +332,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque boulanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.webp",     feminine: "vendeuse",     relatedWords: ["la vente"],           definition: "Un vendeur est une personne qui vend des produits.", exampleSentences: {
+    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.webp",     feminine: "vendeuse",     relatedWords: ["la vente"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le vendeur a parlé avec le professeur.",
@@ -397,7 +397,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque vendeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.webp",   feminine: "cuisinière",   relatedWords: ["la cuisine"],         definition: "Un cuisinier est une personne qui prépare les repas.", exampleSentences: {
+    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.webp",   feminine: "cuisinière",   relatedWords: ["la cuisine"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le cuisinier a parlé avec le professeur.",
@@ -462,7 +462,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque cuisinier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.webp",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"],       definition: "Un ingénieur est un technicien spécialisé.", exampleSentences: {
+    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.webp",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'ingénieur a parlé avec le professeur.",
@@ -527,7 +527,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque ingénieur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.webp",  feminine: "pharmacienne", relatedWords: ["la pharmacie"],       definition: "Un pharmacien est un professionnel de la pharmacie.", exampleSentences: {
+    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.webp",  feminine: "pharmacienne", relatedWords: ["la pharmacie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le pharmacien a parlé avec le professeur.",
@@ -592,7 +592,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serveur",      article: "un",  gender: "m", image: "serveur.webp",     feminine: "serveuse",     relatedWords: ["le service"],         definition: "Un serveur est une personne qui sert les clients au restaurant.", exampleSentences: {
+    { word: "serveur",      article: "un",  gender: "m", image: "serveur.webp",     feminine: "serveuse",     relatedWords: ["le service"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le serveur a parlé avec le professeur.",
@@ -657,7 +657,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque serveur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricien", article: "un",  gender: "m", image: "electricien.webp", feminine: "électricienne", relatedWords: ["l'électricité"],      definition: "Un électricien est un technicien spécialisé en installations électriques.", exampleSentences: {
+    { word: "électricien", article: "un",  gender: "m", image: "electricien.webp", feminine: "électricienne", relatedWords: ["l'électricité"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'électricien a parlé avec le professeur.",
@@ -722,7 +722,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque électricien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plombier",    article: "un",  gender: "m", image: "plombier.webp",    feminine: "plombière",    relatedWords: ["la plomberie"],       definition: "Un plombier est un technicien spécialisé en installations de plomberie.", exampleSentences: {
+    { word: "plombier",    article: "un",  gender: "m", image: "plombier.webp",    feminine: "plombière",    relatedWords: ["la plomberie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le plombier a parlé avec le professeur.",
@@ -787,7 +787,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque plombier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.webp",  relatedWords: ["le secrétariat"],     definition: "Un secrétaire est un assistant administratif.", exampleSentences: {
+    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.webp",  relatedWords: ["le secrétariat"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le secrétaire a parlé avec le professeur.",

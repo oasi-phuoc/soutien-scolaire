@@ -6,7 +6,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
   title: "La boulangerie",
   section: "V7",
   words: [
-    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", definition: "Le pain est un aliment de base fait de farine cuite." , exampleSentences: {
+    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au marché.",
@@ -71,7 +71,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", definition: "La baguette est pain long et fin typiquement français." , exampleSentences: {
+    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une baguette au marché.",
@@ -136,7 +136,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque baguette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", definition: "Le sandwich est pain fourré avec des ingrédients." , exampleSentences: {
+    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sandwich au marché.",
@@ -201,7 +201,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque sandwich est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", definition: "La viennoiserie est pâtisserie feuilletée à base de beurre." , exampleSentences: {
+    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une viennoiserie au marché.",
@@ -266,7 +266,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque viennoiserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "croissant",                                        article: "le",  gender: "m", definition: "Le croissant est viennoiserie feuilletée en forme de lune." , exampleSentences: {
+    { word: "croissant",                                        article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un croissant au marché.",
@@ -331,7 +331,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque croissant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", definition: "Le pain au chocolat est viennoiserie feuilletée avec du chocolat." , exampleSentences: {
+    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au chocolat au marché.",
@@ -396,7 +396,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pain au chocolat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", definition: "La brioche est pain sucré et moelleux au beurre." , exampleSentences: {
+    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une brioche au marché.",
@@ -461,7 +461,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque brioche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", definition: "Le biscuit est petite pâtisserie sèche et sucrée." , exampleSentences: {
+    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un biscuit au marché.",
@@ -526,7 +526,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque biscuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", definition: "La pâtisserie est art de faire des gâteaux et friandises." , exampleSentences: {
+    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pâtisserie au marché.",
@@ -591,7 +591,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque pâtisserie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", definition: "Le gâteau est pâtisserie sucrée pour les fêtes." , exampleSentences: {
+    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un gâteau au marché.",
@@ -656,7 +656,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque gâteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", definition: "La tarte est pâtisserie plate avec garniture." , exampleSentences: {
+    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une tarte au marché.",
@@ -721,7 +721,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Puisque tarte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", definition: "L'éclair est gâteau allongé fourré de crème." , exampleSentences: {
+    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un éclair au marché.",

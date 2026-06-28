@@ -6,7 +6,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
   title: "Les matières",
   section: "V6",
   words: [
-    { word: "coton",      image: "coton.webp",      article: "le",  gender: "m", definition: "Le coton est tissu doux fait de la plante de coton." , exampleSentences: {
+    { word: "coton",      image: "coton.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le coton en classe.",
@@ -71,7 +71,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque coton est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laine",      image: "laine.webp",      article: "la",  gender: "f", definition: "La laine est tissu chaud fait de poils de mouton." , exampleSentences: {
+    { word: "laine",      image: "laine.webp",      article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la laine en classe.",
@@ -136,7 +136,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque laine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuir",       image: "cuir.webp",       article: "le",  gender: "m", definition: "Le cuir est une matière faite de peau animale tannée." , exampleSentences: {
+    { word: "cuir",       image: "cuir.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le cuir en classe.",
@@ -201,7 +201,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque cuir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soie",       image: "soie.webp",       article: "la",  gender: "f", definition: "La soie est tissu fin et brillant produit par les vers à soie." , exampleSentences: {
+    { word: "soie",       image: "soie.webp",       article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la soie en classe.",
@@ -266,7 +266,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque soie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plastique",  image: "plastique.webp",  article: "le",  gender: "m", definition: "Le plastique est une matière synthétique légère et imperméable." , exampleSentences: {
+    { word: "plastique",  image: "plastique.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le plastique en classe.",
@@ -331,7 +331,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque plastique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métal",      image: "metal.webp",      article: "le",  gender: "m", definition: "Le métal est une matière dure et conductrice comme le fer." , exampleSentences: {
+    { word: "métal",      image: "metal.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le métal en classe.",
@@ -396,7 +396,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque métal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bois",       image: "bois.webp",       article: "le",  gender: "m", definition: "Le bois est une matière naturelle provenant des arbres." , exampleSentences: {
+    { word: "bois",       image: "bois.webp",       article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bois en classe.",
@@ -461,7 +461,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque bois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "Le verre est une matière transparente et fragile." , exampleSentences: {
+    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le verre en classe.",
@@ -526,7 +526,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "papier",     image: "papier.webp",     article: "le",  gender: "m", definition: "Le papier est une matière fine faite de fibres végétales." , exampleSentences: {
+    { word: "papier",     image: "papier.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le papier en classe.",
@@ -591,7 +591,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque papier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nylon",      image: "nylon.webp",      article: "le",  gender: "m", definition: "Le nylon est tissu synthétique résistant." , exampleSentences: {
+    { word: "nylon",      image: "nylon.webp",      article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le nylon en classe.",
@@ -656,7 +656,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque nylon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "caoutchouc", image: "caoutchouc.webp", article: "le",  gender: "m", definition: "Le caoutchouc est une matière élastique pour imperméables et chaussures." , exampleSentences: {
+    { word: "caoutchouc", image: "caoutchouc.webp", article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le caoutchouc en classe.",
@@ -721,7 +721,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque caoutchouc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "velours",    image: "velours.webp",    article: "le",  gender: "m", definition: "Le velours est tissu doux avec un côté poilu et brillant." , exampleSentences: {
+    { word: "velours",    image: "velours.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le velours en classe.",

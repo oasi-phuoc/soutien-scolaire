@@ -6,7 +6,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
   title: "Les nationalités",
   section: "V1",
   words: [
-    { word: "suisse",                              image: "suisse.webp",      relatedWords: ["la Suisse"],       definition: "Suisse est originaire de Suisse.", exampleSentences: {
+    { word: "suisse",                              image: "suisse.webp",      relatedWords: ["la Suisse"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant suisse.",
@@ -69,7 +69,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque suisse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "français",   feminine: "française",   image: "france.webp",      relatedWords: ["la France"],       definition: "Français est originaire de France.", exampleSentences: {
+    { word: "français",   feminine: "française",   image: "france.webp",      relatedWords: ["la France"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant français.",
@@ -132,7 +132,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque français est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "belge",                               image: "belgique.webp",    relatedWords: ["la Belgique"],     definition: "Belge est originaire de Belgique.", exampleSentences: {
+    { word: "belge",                               image: "belgique.webp",    relatedWords: ["la Belgique"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant belge.",
@@ -195,7 +195,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque belge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "italien",    feminine: "italienne",   image: "italie.webp",      relatedWords: ["l'Italie"],        definition: "Italien est originaire d'Italie.", exampleSentences: {
+    { word: "italien",    feminine: "italienne",   image: "italie.webp",      relatedWords: ["l'Italie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant italien.",
@@ -258,7 +258,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque italien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "espagnol",   feminine: "espagnole",   image: "espagne.webp",     relatedWords: ["l'Espagne"],       definition: "Espagnol est originaire d'Espagne.", exampleSentences: {
+    { word: "espagnol",   feminine: "espagnole",   image: "espagne.webp",     relatedWords: ["l'Espagne"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant espagnol.",
@@ -321,7 +321,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque espagnol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "portugais",  feminine: "portugaise",  image: "portugal.webp",    relatedWords: ["le Portugal"],     definition: "Portugais est originaire du Portugal.", exampleSentences: {
+    { word: "portugais",  feminine: "portugaise",  image: "portugal.webp",    relatedWords: ["le Portugal"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant portugais.",
@@ -384,7 +384,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque portugais est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "allemand",   feminine: "allemande",   image: "allemagne.webp",   relatedWords: ["l'Allemagne"],     definition: "Allemand est originaire d'Allemagne.", exampleSentences: {
+    { word: "allemand",   feminine: "allemande",   image: "allemagne.webp",   relatedWords: ["l'Allemagne"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant allemand.",
@@ -447,7 +447,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque allemand est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "anglais",    feminine: "anglaise",    image: "angleterre.webp",  relatedWords: ["l'Angleterre"],    definition: "Anglais est originaire d'Angleterre.", exampleSentences: {
+    { word: "anglais",    feminine: "anglaise",    image: "angleterre.webp",  relatedWords: ["l'Angleterre"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant anglais.",
@@ -510,7 +510,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque anglais est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "américain",  feminine: "américaine",  image: "etats-unis.webp",  relatedWords: ["les États-Unis"],  definition: "Américain est originaire des États-Unis.", exampleSentences: {
+    { word: "américain",  feminine: "américaine",  image: "etats-unis.webp",  relatedWords: ["les États-Unis"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant américain.",
@@ -573,7 +573,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque américain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "canadien",   feminine: "canadienne",  image: "canada.webp",      relatedWords: ["le Canada"],       definition: "Canadien est originaire du Canada.", exampleSentences: {
+    { word: "canadien",   feminine: "canadienne",  image: "canada.webp",      relatedWords: ["le Canada"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant canadien.",
@@ -636,7 +636,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque canadien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "russe",                               image: "russie.webp",      relatedWords: ["la Russie"],       definition: "Russe est originaire de Russie.", exampleSentences: {
+    { word: "russe",                               image: "russie.webp",      relatedWords: ["la Russie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant russe.",
@@ -699,7 +699,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque russe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chinois",    feminine: "chinoise",    image: "chine.webp",       relatedWords: ["la Chine"],        definition: "Chinois est originaire de Chine.", exampleSentences: {
+    { word: "chinois",    feminine: "chinoise",    image: "chine.webp",       relatedWords: ["la Chine"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant chinois.",
@@ -762,7 +762,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque chinois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "autrichien", feminine: "autrichienne", image: "autriche.webp", relatedWords: ["l'Autriche"], definition: "Autrichien est originaire d'Autriche.", exampleSentences: {
+    { word: "autrichien", feminine: "autrichienne", image: "autriche.webp", relatedWords: ["l'Autriche"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant autrichien.",
@@ -825,7 +825,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque autrichien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "syrien", feminine: "syrienne", image: "syrie.webp", relatedWords: ["la Syrie"], definition: "Syrien est originaire de Syrie.", exampleSentences: {
+    { word: "syrien", feminine: "syrienne", image: "syrie.webp", relatedWords: ["la Syrie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant syrien.",
@@ -888,7 +888,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque syrien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "érythréen", feminine: "érythréenne", image: "erythree.webp", relatedWords: ["l'Érythrée"], definition: "Érythréen est originaire d'Érythrée.", exampleSentences: {
+    { word: "érythréen", feminine: "érythréenne", image: "erythree.webp", relatedWords: ["l'Érythrée"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant érythréen.",
@@ -951,7 +951,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque érythréen est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turc", feminine: "turque", image: "turquie.webp", relatedWords: ["la Turquie"], definition: "Turc est originaire de Turquie.", exampleSentences: {
+    { word: "turc", feminine: "turque", image: "turquie.webp", relatedWords: ["la Turquie"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant turc.",
@@ -1014,7 +1014,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque turc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "iranien", feminine: "iranienne", image: "iran.webp", relatedWords: ["l'Iran"], definition: "Iranien est originaire d'Iran.", exampleSentences: {
+    { word: "iranien", feminine: "iranienne", image: "iran.webp", relatedWords: ["l'Iran"], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant iranien.",

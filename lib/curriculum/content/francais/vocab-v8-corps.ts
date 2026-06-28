@@ -6,7 +6,7 @@ export const V8_CORPS_THEME: VocabTheme = {
   title: "Le corps",
   section: "V8",
   words: [
-    { word: "tête",    image: "tete.webp",    article: "la",  gender: "f", definition: "La tête est une partie supérieure du corps." , exampleSentences: {
+    { word: "tête",    image: "tete.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la tête après le sport.",
@@ -70,7 +70,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque tête est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bras",                           article: "le",  gender: "m", definition: "Le bras est membre supérieur du corps." , exampleSentences: {
+    { word: "bras",                           article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au bras après le sport.",
@@ -134,7 +134,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque bras est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "main",    image: "main.webp",    article: "la",  gender: "f", definition: "La main est extrémité du bras avec cinq doigts." , exampleSentences: {
+    { word: "main",    image: "main.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la main après le sport.",
@@ -198,7 +198,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque main est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doigt",   image: "doigt.webp",   article: "le",  gender: "m", definition: "Le doigt est chacun des cinq appendices de la main." , exampleSentences: {
+    { word: "doigt",   image: "doigt.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au doigt après le sport.",
@@ -262,7 +262,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque doigt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jambe",   image: "jambe.webp",   article: "la",  gender: "f", definition: "La jambe est membre inférieur du corps." , exampleSentences: {
+    { word: "jambe",   image: "jambe.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la jambe après le sport.",
@@ -326,7 +326,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque jambe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pied",    image: "pied.webp",    article: "le",  gender: "m", definition: "Le pied est extrémité de la jambe pour marcher." , exampleSentences: {
+    { word: "pied",    image: "pied.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au pied après le sport.",
@@ -390,7 +390,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque pied est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dos",     image: "dos.webp",     article: "le",  gender: "m", definition: "Le dos est une partie arrière du tronc." , exampleSentences: {
+    { word: "dos",     image: "dos.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au dos après le sport.",
@@ -454,7 +454,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque dos est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ventre",  image: "ventre.webp",  article: "le",  gender: "m", definition: "Le ventre est une partie avant du tronc." , exampleSentences: {
+    { word: "ventre",  image: "ventre.webp",  article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au ventre après le sport.",
@@ -518,7 +518,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque ventre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "genou",   image: "genou.webp",   article: "le",  gender: "m", definition: "Le genou est articulation de la jambe." , exampleSentences: {
+    { word: "genou",   image: "genou.webp",   article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au genou après le sport.",
@@ -582,7 +582,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque genou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épaule",  image: "epaule.webp",  article: "l'",  gender: "f", definition: "L'épaule est articulation entre le bras et le tronc." , exampleSentences: {
+    { word: "épaule",  image: "epaule.webp",  article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'épaule après le sport.",
@@ -646,7 +646,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque épaule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cou",     image: "cou.webp",     article: "le",  gender: "m", definition: "Le cou est une partie entre la tête et les épaules." , exampleSentences: {
+    { word: "cou",     image: "cou.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au cou après le sport.",
@@ -710,7 +710,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque cou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nez",     image: "nez.webp",     article: "le",  gender: "m", definition: "Le nez est un organe de l'odorat au milieu du visage." , exampleSentences: {
+    { word: "nez",     image: "nez.webp",     article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au nez après le sport.",
@@ -774,7 +774,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque nez est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouche",  image: "bouche.webp",  article: "la",  gender: "f", definition: "La bouche est ouverture du visage pour manger et parler." , exampleSentences: {
+    { word: "bouche",  image: "bouche.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la bouche après le sport.",
@@ -838,7 +838,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque bouche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "œil",     image: "oeil.webp",    article: "l'",  gender: "m", definition: "L'œil est un organe de la vue." , exampleSentences: {
+    { word: "œil",     image: "oeil.webp",    article: "l'",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'œil après le sport.",
@@ -902,7 +902,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque œil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oreille", image: "oreille.webp", article: "l'",  gender: "f", definition: "L'oreille est un organe de l'ouïe de chaque côté de la tête." , exampleSentences: {
+    { word: "oreille", image: "oreille.webp", article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'oreille après le sport.",
@@ -966,7 +966,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque oreille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dent",    image: "dent.webp",    article: "la",  gender: "f", definition: "La dent est un organe dur de la mâchoire pour mordre et mâcher." , exampleSentences: {
+    { word: "dent",    image: "dent.webp",    article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la dent après le sport.",

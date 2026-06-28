@@ -6,7 +6,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
   title: "Les maladies",
   section: "V8",
   words: [
-    { word: "rhume",        image: "rhume.webp",    article: "le",  gender: "m", definition: "Le rhume est infection légère du nez et de la gorge." , exampleSentences: {
+    { word: "rhume",        image: "rhume.webp",    article: "le",  gender: "m", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du rhume au patient.",
@@ -70,7 +70,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque rhume est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grippe",       image: "grippe.webp",   article: "la",  gender: "f", definition: "La grippe est une maladie virale avec fièvre et courbatures." , exampleSentences: {
+    { word: "grippe",       image: "grippe.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la grippe au patient.",
@@ -134,7 +134,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque grippe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fièvre",       image: "fievre.webp",   article: "la",  gender: "f", definition: "La fièvre est température corporelle anormalement élevée." , exampleSentences: {
+    { word: "fièvre",       image: "fievre.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la fièvre au patient.",
@@ -198,7 +198,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque fièvre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "douleur",      image: "douleur.webp",  article: "la",  gender: "f", definition: "La douleur est sensation désagréable dans une partie du corps." , exampleSentences: {
+    { word: "douleur",      image: "douleur.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la douleur au patient.",
@@ -262,7 +262,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque douleur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toux",         image: "toux.webp",     article: "la",  gender: "f", definition: "La toux est expiration forcée et bruyante." , exampleSentences: {
+    { word: "toux",         image: "toux.webp",     article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la toux au patient.",
@@ -326,7 +326,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque toux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "allergie",     image: "allergie.webp", article: "l'",  gender: "f", definition: "L'allergie est réaction du corps à une substance étrangère." , exampleSentences: {
+    { word: "allergie",     image: "allergie.webp", article: "l'",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'allergie au patient.",
@@ -390,7 +390,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque allergie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "coupure",      image: "coupure.webp",  article: "la",  gender: "f", definition: "La coupure est blessure faite par un objet tranchant." , exampleSentences: {
+    { word: "coupure",      image: "coupure.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la coupure au patient.",
@@ -454,7 +454,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque coupure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brûlure",      image: "brulure.webp",  article: "la",  gender: "f", definition: "La brûlure est lésion causée par la chaleur ou le feu." , exampleSentences: {
+    { word: "brûlure",      image: "brulure.webp",  article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la brûlure au patient.",
@@ -518,7 +518,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque brûlure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blessure",     image: "blessure.webp", article: "la",  gender: "f", definition: "La blessure est lésion corporelle causée par un choc." , exampleSentences: {
+    { word: "blessure",     image: "blessure.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la blessure au patient.",
@@ -582,7 +582,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque blessure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fracture",     image: "fracture.webp", article: "la",  gender: "f", definition: "La fracture est cassure d'un os." , exampleSentences: {
+    { word: "fracture",     image: "fracture.webp", article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la fracture au patient.",
@@ -646,7 +646,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque fracture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nausée",       image: "nausee.webp",   article: "la",  gender: "f", definition: "La nausée est sensation d'envie de vomir." , exampleSentences: {
+    { word: "nausée",       image: "nausee.webp",   article: "la",  gender: "f", exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la nausée au patient.",
