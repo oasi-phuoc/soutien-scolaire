@@ -33,6 +33,69 @@ async function store(cacheName, request, response) {
   await cache.put(request, response.clone());
 }
 
+function sameOriginPath(value) {
+  try {
+    const url = new URL(value, self.location.origin);
+    if (url.origin !== self.location.origin) return null;
+    return `${url.pathname}${url.search}`;
+  } catch {
+    return null;
+  }
+}
+
+async function cacheUrlWithLinkedAssets(cache, url) {
+  const response = await fetch(url, { credentials: "include" });
+  if (!canStore(response)) return 0;
+
+  let bytes = 0;
+  const clone = response.clone();
+  try {
+    const blob = await clone.blob();
+    bytes += blob.size;
+  } catch {
+    // Size is only used for progress display.
+  }
+  await cache.put(url, response.clone());
+
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("text/html")) return bytes;
+
+  const html = await response.text();
+  const linked = new Set();
+  for (const match of html.matchAll(/\b(?:src|href)=["']([^"']+)["']/g)) {
+    const path = sameOriginPath(match[1]);
+    if (!path) continue;
+    if (
+      path.startsWith("/_next/")
+      || path.startsWith("/assets/")
+      || path.startsWith("/vocab/")
+      || path.endsWith(".css")
+      || path.endsWith(".js")
+      || path.endsWith(".woff2")
+    ) {
+      linked.add(path);
+    }
+  }
+
+  await Promise.all([...linked].map(async (assetUrl) => {
+    try {
+      const assetResponse = await fetch(assetUrl, { credentials: "include" });
+      if (!canStore(assetResponse)) return;
+      try {
+        const blob = await assetResponse.clone().blob();
+        bytes += blob.size;
+      } catch {
+        // ignore size
+      }
+      await cache.put(assetUrl, assetResponse.clone());
+    } catch {
+      // One failed linked asset must not cancel the page.
+    }
+  }));
+
+  return bytes;
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CORE_CACHE)
@@ -105,9 +168,10 @@ self.addEventListener("message", (event) => {
         const manifestRes = await fetch("/offline-manifest.json");
         const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
         const assetUrls = manifest.assets || [];
+        const routeUrls = manifest.routes || [];
 
-        // Build full URL list: app routes + all static assets
-        const urls = [...new Set([...APP_ROUTES, ...assetUrls])];
+        // Build full URL list: app routes + all static assets + generated lesson routes
+        const urls = [...new Set([...APP_ROUTES, ...routeUrls, ...assetUrls])];
         const cache = await caches.open(CORE_CACHE);
         let completed = 0;
         let downloadedBytes = 0;
@@ -120,12 +184,7 @@ self.addEventListener("message", (event) => {
           const batch = urls.slice(i, i + BATCH);
           await Promise.all(batch.map(async (url) => {
             try {
-              const response = await fetch(url, { credentials: "include" });
-              if (canStore(response)) {
-                const blob = await response.clone().blob();
-                downloadedBytes += blob.size;
-                await cache.put(url, response.clone());
-              }
+              downloadedBytes += await cacheUrlWithLinkedAssets(cache, url);
             } catch {
               // One failed asset must not cancel the whole download
             }
@@ -168,11 +227,12 @@ self.addEventListener("message", (event) => {
         const res = await fetch("/offline-manifest.json");
         const manifest = res.ok ? await res.json() : { assets: [] };
         const assetUrls = manifest.assets || [];
+        const routeUrls = manifest.routes || [];
         const cache = await caches.open(CORE_CACHE);
         let cachedAssetBytes = 0;
         let missingAssets = 0;
 
-        for (const url of assetUrls) {
+        for (const url of [...assetUrls, ...routeUrls]) {
           const response = await cache.match(url);
           if (!response) {
             missingAssets += 1;

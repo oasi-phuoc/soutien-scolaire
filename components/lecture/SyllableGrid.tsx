@@ -24,17 +24,18 @@ function shuffle<T>(items: T[]): T[] {
   return next;
 }
 
-function randomCase(text: string): string {
-  return Math.random() > 0.5 ? text.toUpperCase() : text.toLowerCase();
+function applyBalancedCase(items: string[]): string[] {
+  const upperFlags = shuffle([true, true, true, false, false, false]);
+  return items.map((item, index) => (upperFlags[index] ? item.toUpperCase() : item.toLowerCase()));
 }
 
 function makeSyllables(baseLetter: string, mode: NonNullable<Props["mode"]>): string[] {
   const letter = baseLetter.toLowerCase();
   if (mode === "cv") {
-    return shuffle(VOWELS).map((vowel) => randomCase(`${letter}${vowel}`));
+    return applyBalancedCase(shuffle(VOWELS).map((vowel) => `${letter}${vowel}`));
   }
   if (mode === "vc") {
-    return shuffle(VOWELS).map((vowel) => randomCase(`${vowel}${letter}`));
+    return applyBalancedCase(shuffle(VOWELS).map((vowel) => `${vowel}${letter}`));
   }
 
   const patterns = [
@@ -44,11 +45,12 @@ function makeSyllables(baseLetter: string, mode: NonNullable<Props["mode"]>): st
     (a: string, b: string) => `${a}${letter}${b}${letter}`,
   ];
   const vowels = shuffle(VOWELS);
-  return Array.from({ length: 6 }, (_, index) => {
+  const syllables = Array.from({ length: 6 }, (_, index) => {
     const first = vowels[index % vowels.length]!;
     const second = vowels[(index + 2) % vowels.length]!;
-    return randomCase(patterns[index % patterns.length]!(first, second));
+    return patterns[index % patterns.length]!(first, second);
   });
+  return applyBalancedCase(syllables);
 }
 
 function normalize(text: string): string {

@@ -19,6 +19,7 @@ import {
 } from "@/lib/progress/lecture-progress";
 import { LectureEvaluation } from "./LectureEvaluation";
 import { speak } from "@/lib/utils/speech";
+import { getWordAudioPath } from "@/lib/utils/audio";
 
 interface Props {
   data: LetterData;
@@ -75,20 +76,47 @@ function getSteps(data: LetterData): Step[] {
 }
 
 function ReadingGridView({ grid }: { grid: ReadingGrid }) {
+  const [resetSeed, setResetSeed] = useState(0);
+  const items = useMemo(() => {
+    void resetSeed;
+    return shuffle(grid.items).slice(0, 25);
+  }, [grid.items, resetSeed]);
+
+  function playItem(item: string) {
+    const spoken = item.replaceAll("-", "");
+    new Audio(getWordAudioPath(spoken)).play().catch(() => speak(spoken));
+  }
+
   return (
     <section className="space-y-4">
-      <div>
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">{grid.label}</p>
-        <h2 className="mt-1 text-xl font-bold text-[var(--color-text-primary)]">Lisez chaque element.</h2>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">{grid.label}</p>
+          <h2 className="mt-1 text-xl font-bold text-[var(--color-text-primary)]">Lisez chaque mot.</h2>
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touchez une carte pour écouter le mot.</p>
+        </div>
+        <button
+          type="button"
+          aria-label="Recommencer"
+          onClick={() => setResetSeed((value) => value + 1)}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)] active:scale-95"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M1 4v6h6" />
+            <path d="M3.51 15a9 9 0 1 0 .49-4" />
+          </svg>
+        </button>
       </div>
-      <div className="grid grid-cols-5 gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white/80 p-3 shadow-sm">
-        {grid.items.map((item, index) => (
-          <div
-            key={`${item}-${index}`}
-            className="flex aspect-square items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-accent-lecture)]/25 bg-[var(--color-accent-lecture)]/10 text-lg font-bold text-[var(--color-text-primary)]"
+      <div className="grid grid-cols-5 gap-2">
+        {items.map((item, index) => (
+          <button
+            type="button"
+            key={`${item}-${index}-${resetSeed}`}
+            onClick={() => playItem(item)}
+            className="flex aspect-square items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-1 text-center text-lg font-bold text-[var(--color-text-primary)] shadow-sm active:scale-95"
           >
             {item}
-          </div>
+          </button>
         ))}
       </div>
     </section>
@@ -389,7 +417,9 @@ function splitComplexWord(word: string, targets: string[]) {
     const rest = normalizeGraph(word.slice(i));
     const found = sorted.find((target) => rest.startsWith(target));
     if (found) {
-      chunks.push({ text: word.slice(i, i + found.length), hit: true });
+      for (let offset = 0; offset < found.length; offset++) {
+        chunks.push({ text: word.slice(i + offset, i + offset + 1), hit: true });
+      }
       i += found.length;
     } else {
       chunks.push({ text: word.slice(i, i + 1), hit: false });

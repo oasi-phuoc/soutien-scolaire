@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   randomFormTemplates,
   type FormField,
@@ -11,7 +11,6 @@ import {
 } from "@/lib/curriculum/content/communication/form-prompts";
 
 const ACCENT = "var(--color-accent-comm)";
-const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 type Phase = "intro" | "form" | "result";
 
 function FieldControl({
@@ -118,18 +117,7 @@ export function FormProductionRunner() {
 
   function saveProgress() {
     try {
-      const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      const progress = normalizeCommunicationProgress(raw ? JSON.parse(raw) : {});
-      progress["E1-0"] = true;
-      localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(progress));
-      const mainKey = "soutien-learning-progress-v1";
-      const mainRaw = localStorage.getItem(mainKey);
-      if (mainRaw) {
-        const main = JSON.parse(mainRaw) as Record<string, unknown>;
-        main.commProgress = progress;
-        localStorage.setItem(mainKey, JSON.stringify(main));
-        window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
-      }
+      markCommunicationLessonComplete("E1-0");
     } catch { /* local progress remains optional */ }
   }
 

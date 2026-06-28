@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
 
 const ACCENT = "var(--color-accent-comm)";
-const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
 type SpeechRecognitionResult = {
   readonly isFinal: boolean;
@@ -84,18 +84,7 @@ function getSpeechRecognitionConstructor(): SpeechRecognitionConstructor | null 
 
 function markCompleted() {
   try {
-    const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-    const prev: Record<string, boolean> = raw ? JSON.parse(raw) : {};
-    prev["AI-1"] = true;
-    localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
-
-    const mainRaw = localStorage.getItem("soutien-learning-progress-v1");
-    if (mainRaw) {
-      const main = JSON.parse(mainRaw) as Record<string, unknown>;
-      main.commProgress = prev;
-      localStorage.setItem("soutien-learning-progress-v1", JSON.stringify(main));
-      window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
-    }
+    markCommunicationLessonComplete("AI-1");
   } catch {
     /* ignore */
   }

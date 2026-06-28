@@ -60,6 +60,15 @@ async function doSync(progress: StoredProgressV1) {
   }
 }
 
+async function mergeWithCloudBeforeSync(localProgress: StoredProgressV1) {
+  const cloudProgress = await loadProgressFromCloud();
+  if (!cloudProgress) return localProgress;
+  const merged = mergeProgress(localProgress, cloudProgress);
+  localStorage.setItem(MATH_PROGRESS_KEY, JSON.stringify(merged));
+  restoreSubKeys(merged);
+  return merged;
+}
+
 export function ProgressSyncProvider() {
   const syncedRef = useRef(false);
   const [storageReady, setStorageReady] = useState(false);
@@ -137,7 +146,8 @@ export function ProgressSyncProvider() {
       if (!navigator.onLine) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
-      doSync(progress);
+      const merged = await mergeWithCloudBeforeSync(progress);
+      doSync(merged);
     }, 3000);
 
     window.addEventListener("progress-saved", debouncedSync);
@@ -164,7 +174,8 @@ export function ProgressSyncProvider() {
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
       const queued = pendingProgress();
-      await doSync(queued ?? loadProgress());
+      const merged = await mergeWithCloudBeforeSync(queued ?? loadProgress());
+      await doSync(merged);
       touchActivityAction().catch(() => {});
     };
 

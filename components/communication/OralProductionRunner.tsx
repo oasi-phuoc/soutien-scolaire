@@ -11,11 +11,10 @@ import {
 import { submitOralAction, type OralDialogueLine, type OralGrammarMatch } from "@/app/actions/oral";
 import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
-import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
 
 const ACCENT = "var(--color-accent-comm)";
-const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
 const IGNORED_RULES = new Set([
   "WHITESPACE_RULE",
@@ -720,18 +719,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function handleFinish() {
     try {
-      const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      const prev = normalizeCommunicationProgress(raw ? JSON.parse(raw) : {});
-      prev[lessonId] = true;
-      localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
-      const MAIN_KEY = "soutien-learning-progress-v1";
-      const mainRaw = localStorage.getItem(MAIN_KEY);
-      if (mainRaw) {
-        const main = JSON.parse(mainRaw) as Record<string, unknown>;
-        main.commProgress = prev;
-        localStorage.setItem(MAIN_KEY, JSON.stringify(main));
-        window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
-      }
+      markCommunicationLessonComplete(lessonId);
     } catch { /* ignore */ }
     router.push("/francais?tab=communication");
   }

@@ -9,7 +9,7 @@ import {
   type TeacherOption,
 } from "@/app/actions/expression";
 import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
-import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   COMMUNICATION_E2_1,
   type CommunicationLesson,
@@ -28,8 +28,6 @@ import { OralProductionRunner } from "@/components/communication/OralProductionR
 import { FormProductionRunner } from "@/components/communication/FormProductionRunner";
 
 const ACCENT = "var(--color-accent-comm)";
-const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
-
 const LESSONS: Record<string, CommunicationLesson> = {
   "E1-1": EXPRESSION_E1_1,
   "E1-2": EXPRESSION_E1_2,
@@ -497,18 +495,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
   function handleFinish() {
     try {
-      const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      const prev = normalizeCommunicationProgress(raw ? JSON.parse(raw) : {});
-      prev[lesson.id] = true;
-      localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
-      const MAIN_KEY = "soutien-learning-progress-v1";
-      const mainRaw = localStorage.getItem(MAIN_KEY);
-      if (mainRaw) {
-        const main = JSON.parse(mainRaw) as Record<string, unknown>;
-        main.commProgress = prev;
-        localStorage.setItem(MAIN_KEY, JSON.stringify(main));
-        window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
-      }
+      markCommunicationLessonComplete(lesson.id);
     } catch {
       /* ignore */
     }

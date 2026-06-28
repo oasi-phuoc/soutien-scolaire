@@ -52,7 +52,7 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
           <SpeakerIcon />
         </button>
         <p className="text-6xl font-bold tracking-tight text-[var(--color-text-primary)]">
-          {letter}{letterLower}
+          {letter} {letterLower}
         </p>
         {exampleImagePath && (
           // eslint-disable-next-line @next/next/no-img-element

@@ -1465,18 +1465,38 @@ function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonDa
 
 export const SIMPLE_SYLLABLE_LESSONS: SyllableLessonData[] = SIMPLE_VOWELS.map(syllableLesson);
 
+export const TOOL_WORDS_LESSON: MonosyllableLessonData = {
+  type: "monosyllable",
+  letter: "Mots",
+  letterLower: "outils",
+  phoneme: "",
+  title: "Mots-outils",
+  grids: [
+    { key: "articles", label: "Exercice 1 - Articles et déterminants", items: grid25(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
+    { key: "possessifs-1", label: "Exercice 2 - Possessifs 1", items: grid25(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses"]) },
+    { key: "possessifs-2", label: "Exercice 3 - Possessifs 2", items: grid25(["notre", "nos", "votre", "vos", "leur", "leurs"]) },
+    { key: "pronoms-sujets", label: "Exercice 4 - Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
+    { key: "pronoms-complements", label: "Exercice 5 - Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
+  ],
+};
+
 export const MONOSYLLABLE_LESSON: MonosyllableLessonData = {
   type: "monosyllable",
   letter: "Mots",
-  letterLower: "mots",
+  letterLower: "courants",
   phoneme: "",
-  title: "Mots monosyllabes",
+  title: "Mots courants",
   grids: [
-    { key: "short", label: "Exercice 1 - Lis les mots courts", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis"]) },
-    { key: "three-sounds", label: "Exercice 2 - Lis les mots avec trois sons", items: grid25(["chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse"]) },
-    { key: "mixed", label: "Exercice 3 - Lis les mots melanges", items: grid25(["nez", "dos", "main", "pain", "jour", "nuit", "fleur", "train", "bois", "roi"]) },
-    { key: "silent", label: "Exercice 4 - Lis les mots avec lettre muette", items: grid25(["chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond"]) },
-    { key: "review", label: "Exercice 5 - Lecture rapide", items: grid25(["sac", "mur", "chat", "pain", "jour", "loup", "train", "bol", "gris", "nez"]) },
+    { key: "existants-1", label: "Exercice 1 - Mots déjà appris", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis", "chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse", "nez", "dos", "main", "pain", "jour"]) },
+    { key: "existants-2", label: "Exercice 2 - Lecture rapide", items: grid25(["nuit", "fleur", "train", "bois", "roi", "chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond", "sac", "mur", "bol"]) },
+    { key: "personnes", label: "Exercice 3 - Personnes et famille", items: grid25(["homme", "femme", "fille", "gars", "père", "mère", "frère", "sœur", "fils"]) },
+    { key: "lieux-transports", label: "Exercice 4 - Lieux et transports", items: grid25(["rue", "ville", "bus", "train", "taxi", "tram", "gare", "poste", "parc", "bar", "classe", "salle", "hall", "pont", "coin"]) },
+    { key: "maison", label: "Exercice 5 - Maison et objets", items: grid25(["clé", "lit", "sac", "table", "chaise", "porte", "mur", "sol", "verre", "bol", "plat", "four", "lampe", "douche", "bain", "savon", "livre"]) },
+    { key: "aliments", label: "Exercice 6 - Aliments", items: grid25(["pain", "riz", "lait", "eau", "thé", "jus", "sel", "soupe", "œuf", "fruit", "pomme", "poire", "noix", "miel"]) },
+    { key: "corps", label: "Exercice 7 - Corps", items: grid25(["cour", "tête", "main", "bras", "pied", "dos", "nez", "œil", "yeux", "dent", "bouche", "cou", "peau", "sang"]) },
+    { key: "vetements-couleurs", label: "Exercice 8 - Vêtements et couleurs", items: grid25(["pull", "jean", "robe", "jupe", "short", "gant", "botte", "bleu", "blanc", "noir", "vert", "gris", "brun", "rouge", "jaune", "rose"]) },
+    { key: "temps-nature", label: "Exercice 9 - Temps et nature", items: grid25(["jour", "nuit", "soir", "mois", "an", "heure", "temps", "date", "fin", "fois", "air", "eau", "feu", "terre", "ciel", "mer", "lac", "vent", "pluie", "neige", "fleur", "bois"]) },
+    { key: "qualites", label: "Exercice 10 - Adjectifs", items: grid25(["bon", "beau", "grand", "petit", "gros", "chaud", "froid", "neuf", "vieux", "jeune", "propre", "sale", "plein", "vide", "fort", "doux", "dur", "lourd"]) },
   ],
 };
 
@@ -1625,9 +1645,9 @@ export const LECTURE_MODULES: LectureModule[] = [
   {
     id: "l6",
     code: "L6",
-    title: "Les mots monosyllabes",
-    description: "Exercices de lecture de mots monosyllabiques",
-    letters: [MONOSYLLABLE_LESSON],
+    title: "Les mots",
+    description: "Mots-outils et mots courants",
+    letters: [TOOL_WORDS_LESSON, MONOSYLLABLE_LESSON],
   },
   {
     id: "l7",
@@ -1639,7 +1659,7 @@ export const LECTURE_MODULES: LectureModule[] = [
   {
     id: "l8",
     code: "L8",
-    title: "Lecture de mots avec plusieurs syllabes",
+    title: "Les mots avec plusieurs syllabes",
     description: "Mots de deux syllabes et plus",
     letters: [MULTISYLLABLE_LESSON],
   },

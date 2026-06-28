@@ -1,3 +1,9 @@
+import {
+  createInitialProgress as createInitialMainProgress,
+  MATH_PROGRESS_KEY,
+} from "@/lib/progress/math-progress";
+import type { StoredProgressV1 } from "@/lib/curriculum/types";
+
 export const LECTURE_PROGRESS_KEY = "soutien-lecture-v2";
 
 export type ItemState = "locked" | "available" | "completed";
@@ -80,7 +86,8 @@ export const SUBMODULE_SEQUENCE: SubEntry[] = [
   { moduleId: "l5", letterId: "u" },
   { moduleId: "l5", letterId: "y" },
   // L6 — Mots monosyllabes
-  { moduleId: "l6", letterId: "mots" },
+  { moduleId: "l6", letterId: "outils" },
+  { moduleId: "l6", letterId: "courants" },
   // L7 — Sons complexes
   { moduleId: "l7", letterId: "ou" },
   { moduleId: "l7", letterId: "an-en" },
@@ -228,28 +235,63 @@ export function loadLectureProgress(): LectureProgressV2 {
   if (typeof window === "undefined") return createInitialProgress();
   try {
     const raw = localStorage.getItem(LECTURE_PROGRESS_KEY);
-    if (!raw) return createInitialProgress();
+    if (!raw) {
+      const mainRaw = localStorage.getItem(MATH_PROGRESS_KEY);
+      if (mainRaw) {
+        const main = JSON.parse(mainRaw) as { lectureProgress?: LectureProgressV2 };
+        if (main.lectureProgress?.version === 2) {
+          return normalizeLectureProgress(main.lectureProgress);
+        }
+      }
+      return createInitialProgress();
+    }
     const parsed = JSON.parse(raw) as { version?: number };
     if (!parsed.version || parsed.version < 2) return createInitialProgress();
-    return parsed as LectureProgressV2;
+    return normalizeLectureProgress(parsed as LectureProgressV2);
   } catch {
     return createInitialProgress();
   }
 }
 
+function normalizeLectureProgress(progress: LectureProgressV2): LectureProgressV2 {
+  const initial = createInitialProgress();
+  const submodules = { ...initial.submodules, ...progress.submodules };
+  const modules = { ...initial.modules, ...progress.modules };
+
+  const legacyL6 = progress.submodules["l6-mots"];
+  if (legacyL6 === "completed") {
+    submodules["l6-outils"] = "completed";
+    submodules["l6-courants"] = "completed";
+  } else if (legacyL6 === "available" && submodules["l6-outils"] !== "completed") {
+    submodules["l6-outils"] = "available";
+  }
+
+  return {
+    ...progress,
+    modules,
+    submodules,
+    evaluations: progress.evaluations ?? {},
+    revisions: progress.revisions ?? {},
+  };
+}
+
 export function saveLectureProgress(p: LectureProgressV2): void {
   if (typeof window === "undefined") return;
-  localStorage.setItem(LECTURE_PROGRESS_KEY, JSON.stringify(p));
-  // Also embed in main progress blob so ProgressSyncProvider can sync to cloud
+  const normalized = normalizeLectureProgress(p);
+  localStorage.setItem(LECTURE_PROGRESS_KEY, JSON.stringify(normalized));
+  // Also embed in main progress blob so ProgressSyncProvider can sync to cloud/offline queue.
   try {
-    const MAIN_KEY = "soutien-learning-progress-v1";
-    const raw = localStorage.getItem(MAIN_KEY);
-    if (raw) {
-      const main = JSON.parse(raw) as Record<string, unknown>;
-      main.lectureProgress = p;
-      localStorage.setItem(MAIN_KEY, JSON.stringify(main));
-      window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
-    }
+    const raw = localStorage.getItem(MATH_PROGRESS_KEY);
+    const main = raw
+      ? (JSON.parse(raw) as StoredProgressV1)
+      : createInitialMainProgress();
+    const next: StoredProgressV1 = {
+      ...main,
+      lectureProgress: normalized,
+      lastActivityAt: new Date().toISOString(),
+    };
+    localStorage.setItem(MATH_PROGRESS_KEY, JSON.stringify(next));
+    window.dispatchEvent(new CustomEvent("progress-saved", { detail: next }));
   } catch { /* ignore */ }
 }
 
