@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import type { ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
-import { getWordAudioPath } from "@/lib/utils/audio";
+import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
 import { speak } from "@/lib/utils/speech";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -328,7 +328,7 @@ function SoundImageExercise({
       <div className="grid grid-cols-4 gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
-          const imgSrc = `/assets/words/img/${word.label}.webp`;
+          const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
           const audioSrc = getWordAudioPath(word.label);
           return (
             <button
@@ -611,7 +611,7 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
       <div key={`${label}-${i}`} className={`flex min-h-24 flex-col items-center justify-center rounded-[var(--radius-lg)] border-2 p-2 ${correctionStateClass(snapshot.states[i]!)}`}>
         {snapshot.kind === "sound-image" && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={`/assets/words/img/${label}.webp`} alt={label} className="h-16 w-full object-contain" />
+          <img src={`/assets/words/img/${getWordAssetSlug(label)}.webp`} alt={label} className="h-16 w-full object-contain" />
         )}
         <span className={snapshot.states[i] === "wrong" ? "text-xs line-through" : "text-xs"}>{label}</span>
         {snapshot.targets[i] && <span className="mt-1 text-center text-xs font-bold text-[var(--color-correction)]">Bonne réponse</span>}

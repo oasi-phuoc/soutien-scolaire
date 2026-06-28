@@ -2,7 +2,7 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
-import { getWordAudioPath } from "@/lib/utils/audio";
+import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -81,7 +81,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   <div className="relative aspect-square w-full overflow-hidden rounded-lg">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/assets/words/img/${word}.webp`}
+                      src={`/assets/words/img/${getWordAssetSlug(word)}.webp`}
                       alt=""
                       className="h-full w-full object-contain p-1"
                     />

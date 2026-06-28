@@ -66,7 +66,9 @@ function getSteps(data: LetterData): Step[] {
     { key: "word-lower", label: "Mots (min)" },
     { key: "sound-image", label: "Images" },
     { key: "sound-audio", label: "Audio" },
-    { key: "syllables", label: "Syllabes" },
+    { key: "syllables-cv", label: "Syllabes" },
+    { key: "syllables-vc", label: "Syllabes inverses" },
+    { key: "syllables-mixed", label: "Syllabes mixtes" },
     { key: "pronounce", label: "Prononcer" },
     { key: "eval", label: "Évaluation" },
   ];
@@ -105,10 +107,7 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function randomCaseText(text: string): string {
-  return text
-    .split("")
-    .map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()))
-    .join("");
+  return Math.random() > 0.5 ? text.toUpperCase() : text.toLowerCase();
 }
 
 function makeDynamicSyllables(items: string[]) {
@@ -638,9 +637,15 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
       case "sound-audio":
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
-      case "syllables":
+      case "syllables-cv":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} baseLetter={data.letterLower} />;
+        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="cv" />;
+      case "syllables-vc":
+        if (data.type !== "consonant") return null;
+        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="vc" />;
+      case "syllables-mixed":
+        if (data.type !== "consonant") return null;
+        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="mixed" />;
       case "pronounce":
         return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
       case "eval":

@@ -8,6 +8,7 @@ import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 interface Props {
   baseLetter: string;
+  mode?: "cv" | "vc" | "mixed";
 }
 
 type RecState = "idle" | "listening" | "correct" | "wrong";
@@ -24,10 +25,30 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function randomCase(text: string): string {
-  return text
-    .split("")
-    .map((char) => (Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()))
-    .join("");
+  return Math.random() > 0.5 ? text.toUpperCase() : text.toLowerCase();
+}
+
+function makeSyllables(baseLetter: string, mode: NonNullable<Props["mode"]>): string[] {
+  const letter = baseLetter.toLowerCase();
+  if (mode === "cv") {
+    return shuffle(VOWELS).map((vowel) => randomCase(`${letter}${vowel}`));
+  }
+  if (mode === "vc") {
+    return shuffle(VOWELS).map((vowel) => randomCase(`${vowel}${letter}`));
+  }
+
+  const patterns = [
+    (a: string, b: string) => `${a}${letter}${b}`,
+    (a: string, _b: string) => `${letter}${a}${letter}`,
+    (a: string, b: string) => `${letter}${a}${letter}${b}`,
+    (a: string, b: string) => `${a}${letter}${b}${letter}`,
+  ];
+  const vowels = shuffle(VOWELS);
+  return Array.from({ length: 6 }, (_, index) => {
+    const first = vowels[index % vowels.length]!;
+    const second = vowels[(index + 2) % vowels.length]!;
+    return randomCase(patterns[index % patterns.length]!(first, second));
+  });
 }
 
 function normalize(text: string): string {
@@ -45,15 +66,15 @@ function matchesSyllable(transcript: string, target: string): boolean {
   return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
 }
 
-export function SyllableGrid({ baseLetter }: Props) {
+export function SyllableGrid({ baseLetter, mode = "cv" }: Props) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
   const recRef = useRef<unknown>(null);
   const [states, setStates] = useState<RecState[]>(() => Array(6).fill("idle"));
   const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
   const syllables = useMemo(
-    () => shuffle(VOWELS).map((vowel) => randomCase(`${baseLetter.toLowerCase()}${vowel}`)),
-    [baseLetter],
+    () => makeSyllables(baseLetter, mode),
+    [baseLetter, mode],
   );
 
   function startListening(index: number) {
@@ -120,7 +141,7 @@ export function SyllableGrid({ baseLetter }: Props) {
           return (
             <div
               key={`${syl}-${i}`}
-              className={`grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
+              className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)]"
                   : state === "wrong"
@@ -129,13 +150,6 @@ export function SyllableGrid({ baseLetter }: Props) {
               }`}
             >
               <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
-              <button
-                type="button"
-                onClick={() => speak(syl)}
-                className="min-h-12 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 text-center text-xl font-bold text-[var(--color-text-primary)] active:scale-95"
-              >
-                {syl}
-              </button>
               <button
                 type="button"
                 onClick={() => startListening(i)}
@@ -167,8 +181,22 @@ export function SyllableGrid({ baseLetter }: Props) {
                   </svg>
                 )}
               </button>
+              <span className="min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
+                {syl}
+              </span>
+              <button
+                type="button"
+                onClick={() => speak(syl)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95"
+                aria-label={`Ecouter ${syl}`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </button>
               {state === "wrong" && heard[i] && (
-                <p className="col-span-3 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+                <p className="col-span-4 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );

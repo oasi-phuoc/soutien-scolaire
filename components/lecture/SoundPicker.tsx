@@ -3,7 +3,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
-import { getWordAudioPath } from "@/lib/utils/audio";
+import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -91,7 +91,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const imgSrc = `/assets/words/img/${word.label}.webp`;
+            const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
             const audioSrc = getWordAudioPath(word.label);
             return (
               <button
