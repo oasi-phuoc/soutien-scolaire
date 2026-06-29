@@ -6,7 +6,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   title: "Le restaurant",
   section: "V7",
   words: [
-    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse",   definition: "personne qui sert les clients au restaurant (serveur / serveuse)" , exampleSentences: {
+    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse",   definition: ["Action de servir les clients dans un restaurant."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un service au marché.",
@@ -71,7 +71,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque service est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", definition: "personne qui prépare les plats (cuisinier / cuisinière)" , exampleSentences: {
+    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", definition: ["Lieu où l’on prépare les repas."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une cuisine au marché.",
@@ -136,7 +136,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "table",      image: "table.webp",      article: "la",  gender: "f", definition: "meuble où l'on mange au restaurant" , exampleSentences: {
+    { word: "table",      image: "table.webp",      article: "la",  gender: "f", definition: ["Meuble sur lequel on mange."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une table au marché.",
@@ -201,7 +201,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque table est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaise",                              article: "la",  gender: "f", definition: "siège avec dossier pour s'asseoir à table" , exampleSentences: {
+    { word: "chaise",                              article: "la",  gender: "f", definition: ["Siège pour une personne."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une chaise au marché.",
@@ -266,7 +266,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", definition: "plat creux ou plat pour servir les aliments" , exampleSentences: {
+    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", definition: ["Objet plat dans lequel on met la nourriture."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'assiette en classe.",
@@ -331,7 +331,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque assiette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", definition: "ensemble couteau, fourchette, cuillère" , exampleSentences: {
+    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", definition: ["Ensemble des objets pour manger : couteau, fourchette, cuillère."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couvert au marché.",
@@ -396,7 +396,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couvert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "ustensile pour les soupes et desserts" , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: ["Objet pour manger une soupe ou un dessert."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la cuillère en classe.",
@@ -461,7 +461,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuillère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", definition: "ustensile tranchant pour couper" , exampleSentences: {
+    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", definition: ["Objet pour couper les aliments."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couteau au marché.",
@@ -526,7 +526,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", definition: "ustensile à dents pour piquer les aliments" , exampleSentences: {
+    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", definition: ["Objet avec des dents pour piquer les aliments."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une fourchette au marché.",
@@ -591,7 +591,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque fourchette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "récipient pour boire les liquides" , exampleSentences: {
+    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: ["Récipient pour boire."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le verre en classe.",
@@ -656,7 +656,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", definition: "tissu pour s'essuyer la bouche" , exampleSentences: {
+    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", definition: ["Tissu ou papier pour s’essuyer la bouche ou les mains."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une serviette au marché.",
@@ -721,7 +721,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque serviette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", definition: "plat principal d'un repas" , exampleSentences: {
+    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", definition: ["Nourriture préparée ou grand récipient pour servir."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un plat au marché.",
@@ -786,7 +786,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque plat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", definition: "dernier plat sucré d'un repas" , exampleSentences: {
+    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", definition: ["Plat sucré mangé à la fin du repas."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un dessert au marché.",
@@ -851,7 +851,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque dessert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", definition: "liste des plats proposés" , exampleSentences: {
+    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", definition: ["Liste des plats et des boissons dans un restaurant."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un menu au marché.",
@@ -916,7 +916,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque menu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", definition: "note à payer à la fin du repas" , exampleSentences: {
+    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", definition: ["Papier qui indique le prix à payer au restaurant."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une addition au marché.",
@@ -981,7 +981,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque addition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", definition: "liquide à boire" , exampleSentences: {
+    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", definition: ["Liquide que l’on boit."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une boisson au marché.",

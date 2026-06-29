@@ -9,6 +9,7 @@ export type VocabWord = {
   audio?: string;
   definition?: string | string[];
   definitionPivot?: Partial<Record<PivotCode, string | string[]>>;
+  synonym?: string[];
   gender?: "m" | "f";
   group?: string;
   exampleSentences?: { a1?: string[]; a2?: string[]; b1?: string[] };

@@ -6,7 +6,7 @@ export const V2_METEO_THEME: VocabTheme = {
   title: "La météo",
   section: "V2",
   words: [
-    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", definition: "astre qui donne lumière et chaleur" , exampleSentences: {
+    { word: "soleil", image: "soleil.webp",       article: "le",  gender: "m", definition: ["Astre qui donne la lumière et la chaleur."], definitionPivot: { en: "The star that gives light and heat.", ar: "النجم الذي يعطي الضوء والحرارة.", fa: "ستاره‌ای که نور و گرما می‌دهد.", pt: "Astro que dá luz e calor.", so: "Xiddigga bixiya iftiin iyo kulayl.", ti: "ብርሃንን ሙቐትን ዝህብ ኮኾብ።", tr: "Işık ve ısı veren yıldız.", ps: "هغه ستوری چې رڼا او تودوخه ورکوي.", uk: "Зоря, що дає світло і тепло." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du soleil toute la journée.",
@@ -71,7 +71,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque soleil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", definition: "masse de vapeur d'eau dans le ciel" , exampleSentences: {
+    { word: "nuage", image: "nuage.webp",        article: "le",  gender: "m", definition: ["Masse blanche ou grise dans le ciel."], definitionPivot: { en: "A mass of water vapor in the sky.", ar: "كتلة من بخار الماء في السماء.", fa: "توده‌ای از بخار آب در آسمان.", pt: "Massa de vapor de água no céu.", so: "Uumi biyo ah oo cirka ku jira.", ti: "ኣብ ሰማይ ዘሎ ጭቃ ትኪ ማይ።", tr: "Gökyüzündeki su buharı kütlesi.", ps: "په اسمان کې د اوبو بخار غونډه.", uk: "Маса водяної пари в небі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un nuage toute la journée.",
@@ -136,7 +136,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque nuage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", definition: "astre qui tourne autour de la Terre et brille la nuit" , exampleSentences: {
+    { word: "lune", image: "lune.webp",         article: "la",  gender: "f", definition: ["Astre visible la nuit."], definitionPivot: { en: "The body that shines at night and goes around Earth.", ar: "جرم يضيء ليلاً ويدور حول الأرض.", fa: "جرمی که شب می‌درخشد و دور زمین می‌گردد.", pt: "Astro que brilha à noite e gira à volta da Terra.", so: "Jir cirka ah oo habeenkii ifa oo dhulka ku wareega.", ti: "ለይቲ ዝበርህን ንምድሪ ዝዞርን ኣካል።", tr: "Gece parlayan ve Dünya’nın etrafında dönen gök cismi.", ps: "هغه جسم چې شپه کې ځلېږي او د ځمکې چاپېر ګرځي.", uk: "Тіло, що світить уночі й обертається навколо Землі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une lune toute la journée.",
@@ -201,7 +201,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque lune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", definition: "astre lumineux visible dans le ciel la nuit" , exampleSentences: {
+    { word: "étoile", image: "etoile.webp",       article: "une", gender: "f", definition: ["Point lumineux dans le ciel la nuit."], definitionPivot: { en: "A bright object visible in the night sky.", ar: "جرم مضيء يُرى في سماء الليل.", fa: "جرم روشنی که در آسمان شب دیده می‌شود.", pt: "Astro luminoso visível no céu à noite.", so: "Jir ifaya oo habeenkii cirka laga arko.", ti: "ኣብ ሰማይ ለይቲ ዝርአ ብሩህ ኣካል።", tr: "Gece gökyüzünde görülen parlak cisim.", ps: "روښانه جسم چې د شپې په اسمان کې ښکاري.", uk: "Яскравий об’єкт, видимий у нічному небі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une étoile toute la journée.",
@@ -266,7 +266,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque étoile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" , exampleSentences: {
+    { word: "pluie", image: "pluie.webp",        article: "la",  gender: "f", definition: ["Eau qui tombe du ciel."], definitionPivot: { en: "Water that falls from the sky.", ar: "ماء ينزل من السماء.", fa: "آبی که از آسمان می‌بارد.", pt: "Água que cai do céu.", so: "Biyo cirka ka soo dhaca.", ti: "ካብ ሰማይ ዝወርድ ማይ።", tr: "Gökyüzünden düşen su.", ps: "اوبه چې له اسمانه راځي.", uk: "Вода, що падає з неба." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la pluie toute la journée.",
@@ -331,7 +331,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque pluie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", definition: "mouvement de l'air" , exampleSentences: {
+    { word: "vent", image: "vent.webp",         article: "le",  gender: "m", definition: ["Air qui bouge."], definitionPivot: { en: "Moving air.", ar: "حركة الهواء.", fa: "حرکت هوا.", pt: "Movimento do ar.", so: "Dhaqdhaqaaqa hawada.", ti: "ምንቅስቓስ ኣየር።", tr: "Havanın hareketi.", ps: "د هوا حرکت.", uk: "Рух повітря." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du vent toute la journée.",
@@ -396,7 +396,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque vent est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", definition: "eau gelée qui tombe en flocons blancs" , exampleSentences: {
+    { word: "neige", image: "neige.webp",        article: "la",  gender: "f", definition: ["Eau gelée qui tombe en flocons."], definitionPivot: { en: "Frozen water falling in white flakes.", ar: "ماء متجمد يسقط كرقائق بيضاء.", fa: "آب یخ‌زده که به صورت دانه‌های سفید می‌بارد.", pt: "Água gelada que cai em flocos brancos.", so: "Biyo barafoobay oo jajab cad ah u dhaca.", ti: "ብነጻ ቅርጺ ዝወርድ ዝተዘሕለ ማይ።", tr: "Beyaz taneler halinde düşen donmuş su.", ps: "کنګل شوې اوبه چې سپينې دانې راولوېږي.", uk: "Замерзла вода, що падає білими пластівцями." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la neige toute la journée.",
@@ -461,7 +461,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque neige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", definition: "tempête avec tonnerre et éclairs" , exampleSentences: {
+    { word: "orage", image: "orage.webp",        article: "l'",  gender: "m", definition: ["Mauvais temps avec pluie, tonnerre et éclairs."], definitionPivot: { en: "A storm with thunder and lightning.", ar: "عاصفة مع رعد وبرق.", fa: "طوفانی همراه با رعد و برق.", pt: "Tempestade com trovões e relâmpagos.", so: "Duufaan leh onkod iyo hillaac.", ti: "ነጎዳን በርቅን ዘለዎ ማዕበል።", tr: "Gök gürültülü ve şimşekli fırtına.", ps: "طوفان د تندر او برېښنا سره.", uk: "Буря з громом і блискавкою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de l'orage toute la journée.",
@@ -526,7 +526,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque orage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", definition: "nuage bas qui réduit la visibilité" , exampleSentences: {
+    { word: "brouillard", image: "brouillard.webp",   article: "le",  gender: "m", definition: ["Nuage très bas qui cache la vue."], definitionPivot: { en: "Low cloud that makes it hard to see.", ar: "سحاب منخفض يقلل الرؤية.", fa: "ابر پایینی که دید را کم می‌کند.", pt: "Nuvem baixa que reduz a visibilidade.", so: "Daruur hoose oo aragtida yareysa.", ti: "ምርኣይ ዝንክይ ታሕተዋይ ደመና።", tr: "Görüşü azaltan alçak bulut.", ps: "ټيټ وريځ چې ليد کموي.", uk: "Низька хмара, що погіршує видимість." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du brouillard toute la journée.",
@@ -591,7 +591,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque brouillard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", definition: "température au-dessous de zéro degré" , exampleSentences: {
+    { word: "gel", image: "gel.webp",          article: "le",  gender: "m", definition: ["Froid qui transforme l’eau en glace."], definitionPivot: { en: "Temperature below zero degrees.", ar: "درجة حرارة تحت الصفر.", fa: "دمای زیر صفر درجه.", pt: "Temperatura abaixo de zero graus.", so: "Heerkul ka hooseeya eber.", ti: "ትሕቲ ዜሮ ዲግሪ ሙቐት።", tr: "Sıfır derecenin altındaki sıcaklık.", ps: "د صفر درجې څخه ښکته تودوخه.", uk: "Температура нижче нуля." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait du gel toute la journée.",
@@ -656,7 +656,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque gel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", definition: "précipitation de grains de glace" , exampleSentences: {
+    { word: "grêle", image: "grele.webp",        article: "la",  gender: "f", definition: ["Petites boules de glace qui tombent du ciel."], definitionPivot: { en: "Small balls of ice that fall from the sky.", ar: "حبات جليد تسقط من السماء.", fa: "دانه‌های یخ که از آسمان می‌بارند.", pt: "Grãos de gelo que caem do céu.", so: "Kubado baraf ah oo cirka ka soo dhaca.", ti: "ካብ ሰማይ ዝወርዱ ንኣሽቱ ኩዕሶታት በረድ።", tr: "Gökyüzünden düşen küçük buz taneleri.", ps: "د يخ کوچنۍ دانې چې له اسمانه راځي.", uk: "Маленькі кульки льоду, що падають з неба." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de la grêle toute la journée.",
@@ -721,7 +721,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque grêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", definition: "arc coloré visible après la pluie" , exampleSentences: {
+    { word: "arc-en-ciel", image: "arc-en-ciel.webp",  article: "l'",  gender: "m", definition: ["Bande de couleurs visible après la pluie."], definitionPivot: { en: "A colored arc visible after rain.", ar: "قوس ملون يظهر بعد المطر.", fa: "قوس رنگی که بعد از باران دیده می‌شود.", pt: "Arco colorido visível depois da chuva.", so: "Qaanso midab leh oo roobka ka dib muuqata.", ti: "ድሕሪ ዝናብ ዝርአ ቀለማዊ ቀስቲ።", tr: "Yağmurdan sonra görülen renkli yay.", ps: "رنګين کمان چې له باران وروسته ښکاري.", uk: "Кольорова дуга, видима після дощу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un arc-en-ciel toute la journée.",
@@ -786,7 +786,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque arc-en-ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", definition: "pluie soudaine et abondante" , exampleSentences: {
+    { word: "averse", image: "averse.webp",       article: "l'",  gender: "f", definition: ["Pluie courte et forte."], definitionPivot: { en: "A sudden heavy rain.", ar: "مطر مفاجئ وغزير.", fa: "باران ناگهانی و شدید.", pt: "Chuva repentina e forte.", so: "Roob kedis ah oo xooggan.", ti: "ድንገተኛን ብርቱዕን ዝናብ።", tr: "Ani ve şiddetli yağmur.", ps: "ناڅاپي او سخت باران.", uk: "Раптовий сильний дощ." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait une averse toute la journée.",
@@ -851,7 +851,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque averse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", definition: "espace au-dessus de nos têtes" , exampleSentences: {
+    { word: "ciel", image: "ciel.webp",         article: "le",  gender: "m", definition: ["Espace au-dessus de la terre."], definitionPivot: { en: "The space above our heads.", ar: "الفضاء فوق رؤوسنا.", fa: "فضای بالای سر ما.", pt: "O espaço acima das nossas cabeças.", so: "Meesha ka sarreysa madaxyadeenna.", ti: "ልዕሊ ርእስና ዘሎ ቦታ።", tr: "Başımızın üstündeki boşluk.", ps: "زموږ د سرونو پورته فضا.", uk: "Простір над нашими головами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un ciel toute la journée.",
@@ -916,7 +916,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque ciel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "humide", image: "humide.webp",                                      definition: "chargé d'eau, mouillé" , exampleSentences: {
+    { word: "humide", image: "humide.webp",                                      definition: ["Qui contient de l’eau ou de la vapeur d’eau."], definitionPivot: { en: "Wet or full of water.", ar: "رطب أو مليء بالماء.", fa: "مرطوب یا پر از آب.", pt: "Húmido ou cheio de água.", so: "Qoyan ama biyo badan leh.", ti: "ርሑስ ወይ ብማይ ዝመልአ።", tr: "Nemli veya su dolu.", ps: "لوند يا له اوبو ډک.", uk: "Вологий або повний води." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un humide toute la journée.",
@@ -981,7 +981,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque humide est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sec", image: "sec.webp",          feminine: "sèche",            definition: "sans humidité, contraire d'humide" , exampleSentences: {
+    { word: "sec", image: "sec.webp",          feminine: "sèche",            definition: ["Qui n’a pas d’eau."], definitionPivot: { en: "Without moisture or water.", ar: "بدون رطوبة أو ماء.", fa: "بدون رطوبت یا آب.", pt: "Sem humidade ou água.", so: "Aan qoyaan ama biyo lahayn.", ti: "ብዘይ ርሕስነት ወይ ማይ።", tr: "Nemsiz veya susuz.", ps: "بې رطوبته يا بې اوبو.", uk: "Без вологи або води." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un sec toute la journée.",
@@ -1046,7 +1046,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque sec est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doux", image: "doux.webp",         feminine: "douce",            definition: "agréable, sans excès de chaud ou de froid" , exampleSentences: {
+    { word: "doux", image: "doux.webp",         feminine: "douce",            definition: ["Ni trop chaud ni trop froid."], definitionPivot: { en: "Pleasant, not too hot or too cold.", ar: "لطيف، ليس حاراً جداً ولا بارداً جداً.", fa: "ملایم، نه خیلی گرم و نه خیلی سرد.", pt: "Agradável, nem muito quente nem muito frio.", so: "Macaan, aan aad u kululayn ama u qabowayn.", ti: "ደስ ዝብል፣ ኣዝዩ ዘይሙቐት ወይ ዘይዛሕሊ።", tr: "Hoş, ne çok sıcak ne çok soğuk.", ps: "ملايم، نه ډېر ګرم او نه ډېر يخ.", uk: "Приємний, не надто теплий і не надто холодний." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un doux toute la journée.",
@@ -1111,7 +1111,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque doux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaud", image: "chaud.webp",        feminine: "chaude",           definition: "à haute température, contraire de froid" , exampleSentences: {
+    { word: "chaud", image: "chaud.webp",        feminine: "chaude",           definition: ["Qui a une température élevée."], definitionPivot: { en: "At a high temperature.", ar: "ذو درجة حرارة عالية.", fa: "دارای دمای بالا.", pt: "Com temperatura alta.", so: "Heerkul sare leh.", ti: "ልዑል ሙቐት ዘለዎ።", tr: "Yüksek sıcaklıkta.", ps: "په لوړه تودوخه کې.", uk: "З високою температурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un chaud toute la journée.",
@@ -1176,7 +1176,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque chaud est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "froid", image: "froid.webp",        feminine: "froide",           definition: "à basse température, contraire de chaud" , exampleSentences: {
+    { word: "froid", image: "froid.webp",        feminine: "froide",           definition: ["Qui a une température basse."], definitionPivot: { en: "At a low temperature.", ar: "ذو درجة حرارة منخفضة.", fa: "دارای دمای پایین.", pt: "Com temperatura baixa.", so: "Heerkul hoose leh.", ti: "ትሑት ሙቐት ዘለዎ።", tr: "Düşük sıcaklıkta.", ps: "په ټيټه تودوخه کې.", uk: "З низькою температурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait de froid toute la journée.",
@@ -1241,7 +1241,7 @@ export const V2_METEO_THEME: VocabTheme = {
           "Puisque froid est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frais", image: "frais.webp",        feminine: "fraîche",          definition: "légèrement froid, agréablement frais" , exampleSentences: {
+    { word: "frais", image: "frais.webp",        feminine: "fraîche",          definition: ["Un peu froid, mais agréable."], definitionPivot: { en: "Slightly cold in a pleasant way.", ar: "بارد قليلاً بشكل لطيف.", fa: "کمی خنک و دلپذیر.", pt: "Ligeiramente frio de forma agradável.", so: "Wax yar qabow oo wanaagsan.", ti: "ብቐሊሉ ዝዛሕልን ደስ ዝብልን።", tr: "Hoş şekilde hafif soğuk.", ps: "لږ يخ او خوندور.", uk: "Трохи прохолодний і приємний." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il y avait un frais toute la journée.",

@@ -6,7 +6,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
   title: "Les matières scolaires",
   section: "V5",
   words: [
-    { word: "français", image: "francais.webp",        article: "le",  gender: "m", definition: "matière sur la langue française" , exampleSentences: {
+    { word: "français", image: "francais.webp",        article: "le",  gender: "m", definition: ["Matière où l’on apprend la langue française."], definitionPivot: { en: "A person from France.", ar: "شخص من فرنسا.", fa: "شخصی از فرانسه.", pt: "Uma pessoa da França.", so: "Qof ka yimid Faransiiska.", ti: "ካብ ፈረንሳ ዝመጸ ሰብ።", tr: "Fransa’dan gelen kişi.", ps: "هغه کس چې د فرانسې څخه وي.", uk: "Людина з Франції." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le français en classe.",
@@ -71,7 +71,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque français est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mathématiques", image: "mathematiques.webp",   article: "les", gender: "f", definition: "matière sur les chiffres et calculs" , exampleSentences: {
+    { word: "mathématiques", image: "mathematiques.webp",   article: "les", gender: "f", definition: ["Matière où l’on apprend les nombres, les calculs et les formes."], definitionPivot: { en: "The school subject about numbers and calculations.", ar: "مادة مدرسية عن الأعداد والحساب.", fa: "درس مدرسه درباره عددها و محاسبه.", pt: "Disciplina sobre números e cálculos.", so: "Maaddo ku saabsan tirooyin iyo xisaab.", ti: "ብዛዕባ ቍጽርታትን ሕሳብን ዝምህር ትምህርቲ።", tr: "Sayılar ve hesaplarla ilgili ders.", ps: "د شمېر او حساب مضمون.", uk: "Предмет про числа й обчислення." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié les mathématiques en classe.",
@@ -136,7 +136,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque mathématiques est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "histoire", image: "histoire.webp",        article: "l'",  gender: "f", definition: "matière sur les événements du passé" , exampleSentences: {
+    { word: "histoire", image: "histoire.webp",        article: "l'",  gender: "f", definition: ["Matière où l’on étudie le passé."], definitionPivot: { en: "The school subject about past events.", ar: "مادة عن أحداث الماضي.", fa: "درس درباره رویدادهای گذشته.", pt: "Disciplina sobre acontecimentos do passado.", so: "Maaddo ku saabsan dhacdooyinkii hore.", ti: "ብዛዕባ ታሪኻዊ ፍጻመታት ትምህርቲ።", tr: "Geçmiş olayları anlatan ders.", ps: "د تېرو پېښو مضمون.", uk: "Предмет про події минулого." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'histoire en classe.",
@@ -201,7 +201,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque histoire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "géographie", image: "geographie.webp",      article: "la",  gender: "f", definition: "matière sur les pays et les paysages" , exampleSentences: {
+    { word: "géographie", image: "geographie.webp",      article: "la",  gender: "f", definition: ["Matière où l’on étudie les pays, les villes, les montagnes et les cartes."], definitionPivot: { en: "The school subject about countries and landscapes.", ar: "مادة عن البلدان والمناظر الطبيعية.", fa: "درس درباره کشورها و چشم‌اندازها.", pt: "Disciplina sobre países e paisagens.", so: "Maaddo ku saabsan dalal iyo muuqaal dhuleed.", ti: "ብዛዕባ ሃገራትን መልክዕ መሬትን ትምህርቲ።", tr: "Ülkeler ve yeryüzüyle ilgili ders.", ps: "د هېوادونو او منظرو مضمون.", uk: "Предмет про країни й ландшафти." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la géographie en classe.",
@@ -266,7 +266,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque géographie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sport", image: "sport.webp",           article: "le",  gender: "m", definition: "matière d'éducation physique" , exampleSentences: {
+    { word: "sport", image: "sport.webp",           article: "le",  gender: "m", definition: ["Matière où l’on fait des activités physiques."], definitionPivot: { en: "A school subject with physical activities.", ar: "مادة مدرسية فيها أنشطة بدنية.", fa: "درس مدرسه با فعالیت‌های بدنی.", pt: "Disciplina escolar com atividades físicas.", so: "Maaddo dugsi oo leh dhaqdhaqaaq jireed.", ti: "ናይ ኣካላዊ ንጥፈታት ትምህርቲ።", tr: "Fiziksel etkinlikler içeren okul dersi.", ps: "د ښوونځي مضمون چې بدني فعالیتونه لري.", uk: "Шкільний предмет із фізичними вправами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le sport en classe.",
@@ -331,7 +331,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque sport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musique", image: "musique.webp",         article: "la",  gender: "f", definition: "matière sur le chant et les instruments" , exampleSentences: {
+    { word: "musique", image: "musique.webp",         article: "la",  gender: "f", definition: ["Matière où l’on apprend les sons, les chansons et les instruments."], definitionPivot: { en: "The school subject about songs and instruments.", ar: "مادة عن الغناء والآلات.", fa: "درس درباره آواز و سازها.", pt: "Disciplina sobre canto e instrumentos.", so: "Maaddo ku saabsan heeso iyo qalab muusig.", ti: "ብዛዕባ ደርፍን መሳርሒ ሙዚቃን ትምህርቲ።", tr: "Şarkılar ve çalgılarla ilgili ders.", ps: "د سندرو او سازونو مضمون.", uk: "Предмет про спів та інструменти." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la musique en classe.",
@@ -396,7 +396,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque musique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "art", image: "art.webp",             article: "l'",  gender: "m", definition: "matière sur le dessin et la peinture" , exampleSentences: {
+    { word: "art", image: "art.webp",             article: "l'",  gender: "m", definition: ["Matière où l’on dessine, peint ou crée des objets."], definitionPivot: { en: "The school subject about drawing and painting.", ar: "مادة عن الرسم والتلوين.", fa: "درس درباره نقاشی و رنگ‌آمیزی.", pt: "Disciplina sobre desenho e pintura.", so: "Maaddo ku saabsan sawir iyo rinji.", ti: "ብዛዕባ ስእልን ሕብርን ትምህርቲ።", tr: "Çizim ve resim dersi.", ps: "د رسم او رنګ مضمون.", uk: "Предмет про малювання і живопис." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'art en classe.",
@@ -461,7 +461,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque art est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "informatique", image: "informatique.webp",    article: "l'",  gender: "f", definition: "matière sur les ordinateurs et le numérique" , exampleSentences: {
+    { word: "informatique", image: "informatique.webp",    article: "l'",  gender: "f", definition: ["Matière où l’on apprend à utiliser un ordinateur."], definitionPivot: { en: "The school subject about computers and digital tools.", ar: "مادة عن الحواسيب والأدوات الرقمية.", fa: "درس درباره رایانه و ابزار دیجیتال.", pt: "Disciplina sobre computadores e digital.", so: "Maaddo ku saabsan kombiyuutarro iyo digital.", ti: "ብዛዕባ ኮምፒዩተርን ዲጂታልን ትምህርቲ።", tr: "Bilgisayar ve dijital araçlar dersi.", ps: "د کمپيوټر او ډيجېټل مضمون.", uk: "Предмет про комп’ютери й цифрові інструменти." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'informatique en classe.",
@@ -526,7 +526,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque informatique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "biologie", image: "biologie.webp",        article: "la",  gender: "f", definition: "matière sur les êtres vivants" , exampleSentences: {
+    { word: "biologie", image: "biologie.webp",        article: "la",  gender: "f", definition: ["Matière où l’on étudie les êtres vivants."], definitionPivot: { en: "The school subject about living things.", ar: "مادة عن الكائنات الحية.", fa: "درس درباره موجودات زنده.", pt: "Disciplina sobre seres vivos.", so: "Maaddo ku saabsan noolaha.", ti: "ብዛዕባ ህያዋን ነገራት ትምህርቲ።", tr: "Canlılarla ilgili ders.", ps: "د ژونديو موجوداتو مضمون.", uk: "Предмет про живі істоти." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la biologie en classe.",
@@ -591,7 +591,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque biologie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "physique", image: "physique.webp",        article: "la",  gender: "f", definition: "matière sur la matière et l'énergie" , exampleSentences: {
+    { word: "physique", image: "physique.webp",        article: "la",  gender: "f", definition: ["Matière où l’on étudie les forces, la lumière, le mouvement et l’énergie."], definitionPivot: { en: "The school subject about matter and energy.", ar: "مادة عن المادة والطاقة.", fa: "درس درباره ماده و انرژی.", pt: "Disciplina sobre matéria e energia.", so: "Maaddo ku saabsan walax iyo tamar.", ti: "ብዛዕባ ነገርን ሓይልን ትምህርቲ።", tr: "Madde ve enerji dersi.", ps: "د مادې او انرژۍ مضمون.", uk: "Предмет про матерію та енергію." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la physique en classe.",
@@ -656,7 +656,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
           "Puisque physique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chimie", image: "chimie.webp",          article: "la",  gender: "f", definition: "matière sur les substances et réactions" , exampleSentences: {
+    { word: "chimie", image: "chimie.webp",          article: "la",  gender: "f", definition: ["Matière où l’on étudie les matières et leurs transformations."], definitionPivot: { en: "The school subject about substances and reactions.", ar: "مادة عن المواد والتفاعلات.", fa: "درس درباره مواد و واکنش‌ها.", pt: "Disciplina sobre substâncias e reações.", so: "Maaddo ku saabsan walxo iyo falcelin.", ti: "ብዛዕባ ንጥረ ነገራትን ምላሽን ትምህርቲ።", tr: "Maddeler ve tepkimeler dersi.", ps: "د موادو او غبرګونونو مضمون.", uk: "Предмет про речовини й реакції." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la chimie en classe.",

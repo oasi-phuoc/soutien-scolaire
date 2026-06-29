@@ -6,7 +6,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
   title: "Le transport",
   section: "V9",
   words: [
-    { word: "bus", image: "bus.webp",     article: "le",  gender: "m", definition: "transport collectif urbain sur route" , exampleSentences: {
+    { word: "bus", image: "bus.webp",     article: "le",  gender: "m", definition: ["Grand véhicule qui transporte plusieurs personnes en ville ou entre des villes."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bus sur le plan.",
@@ -71,7 +71,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bus est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métro", image: "metro.webp",   article: "le",  gender: "m", definition: "train souterrain en ville" , exampleSentences: {
+    { word: "métro", image: "metro.webp",   article: "le",  gender: "m", definition: ["Train qui circule souvent sous la ville."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le métro sur le plan.",
@@ -136,7 +136,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque métro est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tram", image: "tram.webp",    article: "le",  gender: "m", definition: "transport sur rails en surface" , exampleSentences: {
+    { word: "tram", image: "tram.webp",    article: "le",  gender: "m", definition: ["Véhicule électrique qui circule sur des rails en ville."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le tram sur le plan.",
@@ -201,7 +201,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque tram est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "train", image: "train.webp",   article: "le",  gender: "m", definition: "transport ferroviaire longue distance" , exampleSentences: {
+    { word: "train", image: "train.webp",   article: "le",  gender: "m", definition: ["Véhicule qui circule sur des rails et transporte des passagers ou des marchandises."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le train sur le plan.",
@@ -266,7 +266,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque train est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "voiture", image: "voiture.webp", article: "la",  gender: "f", definition: "véhicule personnel à moteur" , exampleSentences: {
+    { word: "voiture", image: "voiture.webp", article: "la",  gender: "f", definition: ["Véhicule avec un moteur, utilisé pour se déplacer sur la route."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la voiture sur le plan.",
@@ -331,7 +331,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque voiture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vélo", image: "/vocab/images/V3/velo.webp",    article: "le",  gender: "m", definition: "véhicule à deux roues sans moteur" , exampleSentences: {
+    { word: "vélo", image: "/vocab/images/V3/velo.webp",    article: "le",  gender: "m", definition: ["Véhicule à deux roues que l’on fait avancer avec les jambes."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le vélo sur le plan.",
@@ -396,7 +396,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque vélo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "taxi", image: "taxi.webp",    article: "le",  gender: "m", definition: "voiture avec chauffeur payant" , exampleSentences: {
+    { word: "taxi", image: "taxi.webp",    article: "le",  gender: "m", definition: ["Voiture avec chauffeur que l’on paie pour un trajet."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le taxi sur le plan.",
@@ -461,7 +461,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque taxi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "moto", image: "moto.webp",    article: "la",  gender: "f", definition: "véhicule motorisé à deux roues" , exampleSentences: {
+    { word: "moto", image: "moto.webp",    article: "la",  gender: "f", definition: ["Véhicule à deux roues avec un moteur."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la moto sur le plan.",
@@ -526,7 +526,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque moto est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.webp",   article: "l'",  gender: "m", definition: "véhicule aérien pour voyager loin" , exampleSentences: {
+    { word: "avion", image: "avion.webp",   article: "l'",  gender: "m", definition: ["Véhicule qui vole dans le ciel et transporte des passagers."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avion sur le plan.",
@@ -591,7 +591,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bateau", image: "bateau.webp",  article: "le",  gender: "m", definition: "véhicule pour voyager sur l'eau" , exampleSentences: {
+    { word: "bateau", image: "bateau.webp",  article: "le",  gender: "m", definition: ["Véhicule qui se déplace sur l’eau."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bateau sur le plan.",
@@ -656,7 +656,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bateau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "camion", image: "camion.webp",  article: "le",  gender: "m", definition: "grand véhicule pour transporter des marchandises" , exampleSentences: {
+    { word: "camion", image: "camion.webp",  article: "le",  gender: "m", definition: ["Grand véhicule qui transporte des marchandises."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le camion sur le plan.",
@@ -721,7 +721,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque camion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scooter", image: "scooter.webp", article: "le",  gender: "m", definition: "petit véhicule motorisé à deux roues" , exampleSentences: {
+    { word: "scooter", image: "scooter.webp", article: "le",  gender: "m", definition: ["Petit véhicule à deux roues avec un moteur."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le scooter sur le plan.",
@@ -786,7 +786,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque scooter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arrêt", image: "arret.webp",   article: "l'",  gender: "m", definition: "point d'arrêt pour le bus ou tram" , exampleSentences: {
+    { word: "arrêt", image: "arret.webp",   article: "l'",  gender: "m", definition: ["Lieu où le bus, le tram ou le métro s’arrête."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'arrêt sur le plan.",
@@ -851,7 +851,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque arrêt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ticket", image: "ticket.webp",  article: "le",  gender: "m", definition: "billet pour un trajet en transport commun" , exampleSentences: {
+    { word: "ticket", image: "ticket.webp",  article: "le",  gender: "m", definition: ["Petit papier ou document qui permet de voyager ou d’entrer quelque part."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le ticket sur le plan.",
@@ -916,7 +916,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque ticket est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.webp",  article: "le",  gender: "m", definition: "titre de transport pour le train ou avion" , exampleSentences: {
+    { word: "billet", image: "billet.webp",  article: "le",  gender: "m", definition: ["Document qui permet de prendre un transport ou d’entrer à un spectacle."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le billet sur le plan.",

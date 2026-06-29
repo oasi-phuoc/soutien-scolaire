@@ -6,7 +6,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
   title: "Les pièces de la maison",
   section: "V4",
   words: [
-    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", definition: "pièce où l'on prépare les repas" , exampleSentences: {
+    { word: "cuisine", image: "cuisine.webp",       article: "la",  gender: "f", definition: ["Lieu où l’on prépare les repas."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cuisine pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", definition: "pièce principale pour se détendre" , exampleSentences: {
+    { word: "salon", image: "salon.webp",         article: "le",  gender: "m", definition: ["Pièce où l’on se repose et reçoit des invités."], definitionPivot: { en: "The main room for relaxing.", ar: "الغرفة الرئيسية للاسترخاء.", fa: "اتاق اصلی برای استراحت.", pt: "Divisão principal para descansar.", so: "Qolka weyn ee nasashada.", ti: "ንምዝናይ ዝኸውን ቀንዲ ክፍሊ።", tr: "Dinlenmek için ana oda.", ps: "اصلي کوټه د ارام لپاره.", uk: "Головна кімната для відпочинку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le salon pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", definition: "pièce pour dormir" , exampleSentences: {
+    { word: "chambre", image: "chambre.webp",       article: "la",  gender: "f", definition: ["Pièce où l’on dort dans un hôtel."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chambre pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", definition: "pièce avec baignoire ou douche" , exampleSentences: {
+    { word: "salle de bain", image: "salle-de-bain.webp", article: "la",  gender: "f", definition: ["Pièce où l’on se lave."], definitionPivot: { en: "A room used for washing and bathing.", ar: "غرفة تُستعمل للغسل والاستحمام.", fa: "اتاقی برای شستن و حمام کردن.", pt: "Divisão usada para lavar-se e tomar banho.", so: "Qol lagu maydho oo lagu qubeysto.", ti: "ንምሕጻብን ንምሕንባስን ዝጥቀሙሉ ክፍሊ።", tr: "Yıkanmak için kullanılan oda.", ps: "هغه خونه چې د مینځلو او حمام لپاره کارېږي.", uk: "Кімната для миття і купання." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle de bain pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle de bain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", definition: "pièce avec les WC" , exampleSentences: {
+    { word: "toilettes", image: "toilettes.webp",     article: "les", gender: "f", definition: ["Pièce avec un WC."], definitionPivot: { en: "A room with a toilet.", ar: "غرفة فيها مرحاض.", fa: "اتاقی با توالت.", pt: "Divisão com sanita.", so: "Qol musqul leh.", ti: "ሽቓቕ ዘለዎ ክፍሊ።", tr: "Tuvaleti olan oda.", ps: "کوټه چې تشناب لري.", uk: "Кімната з туалетом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les toilettes pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque toilettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", definition: "pièce pour travailler ou étudier" , exampleSentences: {
+    { word: "bureau", image: "bureau.webp",        article: "le",  gender: "m", definition: ["Meuble utilisé pour travailler ou écrire."], definitionPivot: { en: "A desk or a room for working.", ar: "مكتب أو غرفة للعمل.", fa: "میز کار یا اتاق کار.", pt: "Secretária ou divisão para trabalhar.", so: "Miis shaqo ama qol shaqo.", ti: "መስርሒ ጠረጴዛ ወይ ክፍሊ ስራሕ።", tr: "Çalışma masası veya çalışma odası.", ps: "د کار مېز يا د کار کوټه.", uk: "Письмовий стіл або кімната для роботи." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", definition: "passage entre les pièces" , exampleSentences: {
+    { word: "couloir", image: "couloir.webp",       article: "le",  gender: "m", definition: ["Passage entre les salles."], definitionPivot: { en: "A passage between rooms.", ar: "ممر بين الغرف.", fa: "راهرو بین اتاق‌ها.", pt: "Passagem entre divisões.", so: "Marin u dhexeeya qolalka.", ti: "ኣብ መንጎ ክፍልታት ዘሎ መተሓላለፊ።", tr: "Odalar arasındaki geçit.", ps: "د کوټو ترمنځ لار.", uk: "Прохід між кімнатами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le couloir pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", definition: "plateforme extérieure d'un appartement" , exampleSentences: {
+    { word: "balcon", image: "balcon.webp",        article: "le",  gender: "m", definition: ["Petit espace extérieur attaché à un appartement."], definitionPivot: { en: "An outside platform of an apartment.", ar: "منصة خارجية للشقة.", fa: "سکوی بیرونی آپارتمان.", pt: "Plataforma exterior de um apartamento.", so: "Meel bannaanka ah oo guri dabaq ku taal.", ti: "ናይ ኣፓርታማ ደገ መድረኽ።", tr: "Dairenin dış platformu.", ps: "د اپارتمان بهرنی ځای.", uk: "Зовнішній майданчик квартири." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le balcon pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque balcon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", definition: "espace extérieur plat attenant à la maison" , exampleSentences: {
+    { word: "terrasse", image: "terrasse.webp",      article: "la",  gender: "f", definition: ["Espace extérieur où l’on peut s’asseoir."], definitionPivot: { en: "A flat outdoor space next to a home.", ar: "مساحة خارجية مسطحة بجانب المنزل.", fa: "فضای بیرونی صاف کنار خانه.", pt: "Espaço exterior plano junto à casa.", so: "Meel bannaanka ah oo fidsan guriga agtiisa.", ti: "ኣብ ጥቓ ገዛ ዘሎ ጸፍሒ ናይ ደገ ቦታ።", tr: "Evin yanında düz dış alan.", ps: "د کور ترڅنګ هوار بهرنی ځای.", uk: "Плаский зовнішній простір біля дому." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la terrasse pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque terrasse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", definition: "pièce souterraine pour le stockage" , exampleSentences: {
+    { word: "cave", image: "cave.webp",          article: "la",  gender: "f", definition: ["Pièce en bas de la maison pour ranger des choses."], definitionPivot: { en: "An underground room for storage.", ar: "غرفة تحت الأرض للتخزين.", fa: "اتاق زیرزمینی برای انبار.", pt: "Divisão subterrânea para guardar coisas.", so: "Qol dhulka hoostiisa ah oo wax lagu kaydiyo.", ti: "ኣብ ትሕቲ መሬት ንምቕማጥ ዝኸውን ክፍሊ።", tr: "Depolama için yeraltı odası.", ps: "زېرزميني کوټه د ساتلو لپاره.", uk: "Підземна кімната для зберігання." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cave pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque cave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", definition: "espace sous le toit pour ranger" , exampleSentences: {
+    { word: "grenier", image: "grenier.webp",       article: "le",  gender: "m", definition: ["Pièce sous le toit pour ranger des choses."], definitionPivot: { en: "A space under the roof for storage.", ar: "مساحة تحت السقف للتخزين.", fa: "فضایی زیر سقف برای انبار.", pt: "Espaço debaixo do telhado para arrumos.", so: "Meel saqafka hoostiisa ah oo wax lagu kaydiyo.", ti: "ኣብ ትሕቲ ናሕሲ ንምቕማጥ ዝኸውን ቦታ።", tr: "Çatı altında depolama alanı.", ps: "د چت لاندې د ساتلو ځای.", uk: "Простір під дахом для зберігання." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le grenier pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque grenier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", definition: "pièce pour prendre les repas" , exampleSentences: {
+    { word: "salle à manger", image: "salle-a-manger.webp",article: "la",  gender: "f", definition: ["Pièce où l’on mange."], definitionPivot: { en: "A room where people eat meals.", ar: "غرفة يأكل فيها الناس الوجبات.", fa: "اتاقی که در آن غذا می‌خورند.", pt: "Divisão onde as pessoas comem.", so: "Qol ay dadku cuntada ku cunaan.", ti: "ሰባት መግቢ ዝበልዑሉ ክፍሊ።", tr: "İnsanların yemek yediği oda.", ps: "هغه خونه چې خلک پکې خواړه خوري.", uk: "Кімната, де їдять." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle à manger pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque salle à manger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", definition: "espace vert autour de la maison" , exampleSentences: {
+    { word: "jardin", image: "jardin.webp",        article: "le",  gender: "m", definition: ["Espace extérieur avec des plantes, de l’herbe ou des fleurs."], definitionPivot: { en: "A green outdoor space around a home.", ar: "مساحة خضراء خارجية حول المنزل.", fa: "فضای سبز بیرونی اطراف خانه.", pt: "Espaço verde exterior à volta da casa.", so: "Meel cagaaran oo bannaanka guriga ku wareegsan.", ti: "ኣብ ዙርያ ገዛ ዘሎ ቀጠልያ ናይ ደገ ቦታ።", tr: "Evin çevresindeki yeşil dış alan.", ps: "د کور شاوخوا شين بهرنی ځای.", uk: "Зелений простір навколо дому." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le jardin pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque jardin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", definition: "niveau en dessous du rez-de-chaussée" , exampleSentences: {
+    { word: "sous-sol", image: "sous-sol.webp",      article: "le",  gender: "m", definition: ["Partie d’un bâtiment située sous le rez-de-chaussée."], definitionPivot: { en: "A level below the ground floor.", ar: "طابق تحت الطابق الأرضي.", fa: "طبقه‌ای زیر همکف.", pt: "Piso abaixo do rés-do-chão.", so: "Dabaq ka hooseeya dabaqa dhulka.", ti: "ትሕቲ ቀዳማይ ደረጃ ዘሎ ደረጃ።", tr: "Zemin katın altındaki seviye.", ps: "د ځمکني پوړ لاندې کچه.", uk: "Рівень нижче першого поверху." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sous-sol pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque sous-sol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", definition: "espace d'accueil à l'entrée du logement" , exampleSentences: {
+    { word: "entrée", image: "entree.webp",        article: "l'",  gender: "f", definition: ["Endroit par où l’on entre."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'entrée pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", definition: "pièce ou espace pour garer une voiture" , exampleSentences: {
+    { word: "garage", image: "garage.webp",        article: "le",  gender: "m", definition: ["Lieu où l’on met une voiture."], definitionPivot: { en: "A space used to park a car.", ar: "مكان لركن السيارة.", fa: "فضایی برای پارک کردن ماشین.", pt: "Espaço para estacionar um carro.", so: "Meel baabuur lagu dhigto.", ti: "መኪና ንምቕማጥ ዝኸውን ቦታ።", tr: "Araba park etmek için alan.", ps: "ځای چې موټر پکې درول کېږي.", uk: "Місце для паркування автомобіля." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le garage pendant l'exercice.",

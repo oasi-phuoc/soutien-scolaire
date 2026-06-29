@@ -7,7 +7,7 @@ export const V4_PANNES_THEME: VocabTheme = {
   section: "V4",
   words: [
     // Les problèmes électriques
-    { word: "panne",        image: "panne-de-courant.webp", article: "la",  gender: "f", definition: "arrêt de fonctionnement d'un appareil ou coupure d'électricité",  group: "Les problèmes électriques" , exampleSentences: {
+    { word: "panne",        image: "panne-de-courant.webp", article: "la",  gender: "f", definition: ["Problème qui empêche un appareil de fonctionner."], definitionPivot: { en: "When a device stops working.", ar: "عندما يتوقف جهاز عن العمل.", fa: "وقتی وسیله‌ای از کار می‌افتد.", pt: "Quando um aparelho deixa de funcionar.", so: "Marka qalab shaqada joojiyo.", ti: "መሳርሒ ስራሕ ምስ ዘቋርጽ።", tr: "Bir cihazın çalışmayı durdurması.", ps: "کله چې آله کار بند کړي.", uk: "Коли пристрій перестає працювати." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la panne pendant l'exercice.",
@@ -72,7 +72,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque panne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricien",  image: "electricien.webp",      article: "l'",  gender: "m", feminine: "électricienne", definition: "artisan spécialiste des installations électriques", group: "Les problèmes électriques" , exampleSentences: {
+    { word: "électricien",  image: "electricien.webp",      article: "l'",  gender: "m", feminine: "électricienne", definition: ["Personne qui installe ou répare l’électricité."], definitionPivot: { en: "A person who installs or repairs electricity.", ar: "شخص يركّب أو يصلح الكهرباء.", fa: "کسی که برق را نصب یا تعمیر می‌کند.", pt: "Pessoa que instala ou repara eletricidade.", so: "Qof rakiba ama dayactira koronto.", ti: "ኤሌክትሪክ ዝተክል ወይ ዝጽግን ሰብ።", tr: "Elektrik tesisatı kuran veya tamir eden kişi.", ps: "هغه کس چې برېښنا نصب يا ترميموي.", uk: "Людина, яка встановлює або ремонтує електрику." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'électricien pendant l'exercice.",
@@ -137,7 +137,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque électricien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricité",  image: "electricite.webp",      article: "l'",  gender: "f", definition: "énergie utilisée pour alimenter les appareils",                   group: "Les problèmes électriques" , exampleSentences: {
+    { word: "électricité",  image: "electricite.webp",      article: "l'",  gender: "f", definition: ["Énergie qui permet de faire fonctionner les lumières et les appareils."], definitionPivot: { en: "Energy used to power appliances.", ar: "طاقة تُستخدم لتشغيل الأجهزة.", fa: "انرژی برای روشن کردن وسایل.", pt: "Energia usada para alimentar aparelhos.", so: "Tamar lagu shaqaysiiyo qalabka.", ti: "መሳርሒታት ንምስራሕ ዝጥቀም ሓይሊ።", tr: "Cihazları çalıştırmak için kullanılan enerji.", ps: "انرژي چې آلې پرې چلېږي.", uk: "Енергія для роботи приладів." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'électricité pendant l'exercice.",
@@ -202,7 +202,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque électricité est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ampoule",      image: "ampoule.webp",          article: "l'",  gender: "f", definition: "source lumineuse électrique",                                     group: "Les problèmes électriques" , exampleSentences: {
+    { word: "ampoule",      image: "ampoule.webp",          article: "l'",  gender: "f", definition: ["Objet qui donne de la lumière."], definitionPivot: { en: "An electric light bulb.", ar: "مصباح كهربائي.", fa: "لامپ برقی.", pt: "Lâmpada elétrica.", so: "Nal koronto.", ti: "ኤሌክትሪክ መብራህቲ።", tr: "Elektrik ampulü.", ps: "برېښنايي ګروپ.", uk: "Електрична лампочка." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'ampoule pendant l'exercice.",
@@ -267,7 +267,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque ampoule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "interrupteur", image: "interrupteur.webp",     article: "l'",  gender: "m", definition: "commande pour allumer ou éteindre la lumière",                   group: "Les problèmes électriques" , exampleSentences: {
+    { word: "interrupteur", image: "interrupteur.webp",     article: "l'",  gender: "m", definition: ["Bouton pour allumer ou éteindre la lumière."], definitionPivot: { en: "A switch to turn light on or off.", ar: "مفتاح لتشغيل أو إطفاء الضوء.", fa: "کلید برای روشن یا خاموش کردن چراغ.", pt: "Interruptor para ligar ou desligar a luz.", so: "Badham nalka lagu shido ama lagu damiyo.", ti: "መብራህቲ ንምብራህ ወይ ንምጥፋእ መቆጻጸሪ።", tr: "Işığı açıp kapatan düğme.", ps: "سويچ چې څراغ پرې بل يا ګل کېږي.", uk: "Вимикач для світла." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'interrupteur pendant l'exercice.",
@@ -332,7 +332,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque interrupteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "prise",        image: "prise.webp",            article: "la",  gender: "f", definition: "point de connexion électrique au mur",                           group: "Les problèmes électriques" , exampleSentences: {
+    { word: "prise",        image: "prise.webp",            article: "la",  gender: "f", definition: ["Objet dans le mur pour brancher un appareil électrique."], definitionPivot: { en: "An electrical connection point in a wall.", ar: "نقطة اتصال كهربائية في الحائط.", fa: "محل اتصال برق روی دیوار.", pt: "Ponto de ligação elétrica na parede.", so: "Meel koronto laga xiro darbiga.", ti: "ኣብ መንደቕ ዘሎ መተሓላለፊ ኤሌክትሪክ።", tr: "Duvardaki elektrik bağlantı noktası.", ps: "په دېوال کې د برېښنا نښلونکی ځای.", uk: "Електрична розетка в стіні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la prise pendant l'exercice.",
@@ -399,7 +399,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes d'eau
-    { word: "fuite",        image: "fuite.webp",            article: "la",  gender: "f", definition: "écoulement d'eau hors d'un tuyau",                               group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "fuite",        image: "fuite.webp",            article: "la",  gender: "f", definition: ["Eau ou gaz qui sort d’un tuyau ou d’un objet cassé."], definitionPivot: { en: "Water escaping from a pipe.", ar: "تسرب ماء من أنبوب.", fa: "نشت آب از لوله.", pt: "Saída de água de um cano.", so: "Biyo ka baxaya tubo.", ti: "ካብ ቱቦ ዝወጽእ ማይ።", tr: "Borudan su kaçması.", ps: "له نل څخه د اوبو وتل.", uk: "Витік води з труби." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la fuite pendant l'exercice.",
@@ -464,7 +464,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque fuite est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plombier",     image: "plombier.webp",         article: "le",  gender: "m", feminine: "plombière",    definition: "artisan spécialiste des installations d'eau",        group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "plombier",     image: "plombier.webp",         article: "le",  gender: "m", feminine: "plombière",    definition: ["Personne qui installe ou répare les tuyaux, les robinets et les sanitaires."], definitionPivot: { en: "A person who installs or repairs water pipes.", ar: "شخص يركّب أو يصلح أنابيب الماء.", fa: "کسی که لوله‌های آب را نصب یا تعمیر می‌کند.", pt: "Pessoa que instala ou repara canalizações.", so: "Qof rakiba ama dayactira tuubooyinka biyaha.", ti: "ቱቦታት ማይ ዝተክል ወይ ዝጽግን ሰብ።", tr: "Su borularını kuran veya tamir eden kişi.", ps: "هغه کس چې د اوبو نلونه نصب يا ترميموي.", uk: "Людина, яка встановлює або ремонтує водопровід." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le plombier pendant l'exercice.",
@@ -529,7 +529,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque plombier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "robinet",      image: "robinet.webp",          article: "le",  gender: "m", definition: "dispositif pour ouvrir ou fermer l'eau",                         group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "robinet",      image: "robinet.webp",          article: "le",  gender: "m", definition: ["Objet qui permet de faire couler l’eau."], definitionPivot: { en: "A device used to open or close water.", ar: "جهاز لفتح أو إغلاق الماء.", fa: "وسیله‌ای برای باز و بسته کردن آب.", pt: "Dispositivo para abrir ou fechar a água.", so: "Qalab biyaha lagu furo ama xiro.", ti: "ማይ ንምኽፋት ወይ ንምዕጻው መሳርሒ።", tr: "Suyu açıp kapatan araç.", ps: "هغه وسيله چې اوبه پرې خلاصې يا بندېږي.", uk: "Пристрій для відкривання або закривання води." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le robinet pendant l'exercice.",
@@ -594,7 +594,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque robinet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "évier",        image: "evier.webp",            article: "l'",  gender: "m", definition: "bac pour laver la vaisselle dans la cuisine",                    group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "évier",        image: "evier.webp",            article: "l'",  gender: "m", definition: ["Bac dans la cuisine pour laver la vaisselle ou les aliments."], definitionPivot: { en: "A kitchen basin for washing dishes.", ar: "حوض في المطبخ لغسل الأواني.", fa: "سینک آشپزخانه برای شستن ظرف.", pt: "Bacia da cozinha para lavar loiça.", so: "Weel jikada ku yaal oo lagu dhaqo weelka.", ti: "ኣብ ክሽነ ኣቕሑ ንምሕጻብ ዝኸውን ሳንኬሎ።", tr: "Bulaşık yıkamak için mutfak lavabosu.", ps: "د پخلنځي سينک د لوښو مينځلو لپاره.", uk: "Кухонна раковина для миття посуду." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'évier pendant l'exercice.",
@@ -659,7 +659,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque évier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lavabo",       image: "lavabo.webp",           article: "le",  gender: "m", definition: "bac pour se laver les mains dans la salle de bain",              group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "lavabo",       image: "lavabo.webp",           article: "le",  gender: "m", definition: ["Bac dans la salle de bain pour se laver les mains."], definitionPivot: { en: "A bathroom basin for washing hands.", ar: "حوض في الحمام لغسل اليدين.", fa: "روشویی برای شستن دست‌ها.", pt: "Lavatório para lavar as mãos.", so: "Saxanka musqusha ee gacmaha lagu dhaqo.", ti: "ኣብ መሕጸቢ ኣእዳው ዝኸውን ሳንኬሎ።", tr: "Eller için banyo lavabosu.", ps: "د لاسونو مينځلو تشناب سينک.", uk: "Умивальник для миття рук." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lavabo pendant l'exercice.",
@@ -724,7 +724,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque lavabo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tuyau",        image: "tuyau.webp",            article: "le",  gender: "m", definition: "conduit pour l'eau ou le gaz",                                   group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "tuyau",        image: "tuyau.webp",            article: "le",  gender: "m", definition: ["Tube qui transporte l’eau, le gaz ou l’air."], definitionPivot: { en: "A pipe for water or gas.", ar: "أنبوب للماء أو الغاز.", fa: "لوله برای آب یا گاز.", pt: "Cano para água ou gás.", so: "Tuubo biyo ama gaas.", ti: "ንማይ ወይ ጋዝ ዝኸውን ቱቦ።", tr: "Su veya gaz borusu.", ps: "د اوبو يا ګاز نل.", uk: "Труба для води або газу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tuyau pendant l'exercice.",
@@ -791,7 +791,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes de chauffage
-    { word: "chauffage",    image: "probleme-de-chauffage.webp", article: "le", gender: "m", definition: "système pour réchauffer un logement",                       group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "chauffage",    image: "probleme-de-chauffage.webp", article: "le", gender: "m", definition: ["Système qui donne de la chaleur dans un logement."], definitionPivot: { en: "A system that warms a home.", ar: "نظام يدفئ المنزل.", fa: "سیستمی که خانه را گرم می‌کند.", pt: "Sistema que aquece uma casa.", so: "Nidaam guriga kululeeya.", ti: "ገዛ ዘሞቕ ስርዓት።", tr: "Evi ısıtan sistem.", ps: "سيستم چې کور ګرموي.", uk: "Система, що обігріває житло." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le chauffage pendant l'exercice.",
@@ -856,7 +856,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque chauffage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réparateur",   image: "reparateur.webp",       article: "le",  gender: "m", feminine: "réparatrice", definition: "personne qui répare les appareils en panne",                     group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "réparateur",   image: "reparateur.webp",       article: "le",  gender: "m", feminine: "réparatrice", definition: ["Personne qui répare les objets ou les appareils."], definitionPivot: { en: "A person who repairs broken devices.", ar: "شخص يصلح الأجهزة المعطلة.", fa: "کسی که وسایل خراب را تعمیر می‌کند.", pt: "Pessoa que repara aparelhos avariados.", so: "Qof hagaajiya qalab jabay.", ti: "ዝተበላሸወ መሳርሒ ዝጽግን ሰብ።", tr: "Bozuk cihazları tamir eden kişi.", ps: "هغه کس چې خرابې آلې ترميموي.", uk: "Людина, яка ремонтує зламані пристрої." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le réparateur pendant l'exercice.",
@@ -921,7 +921,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque réparateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "radiateur",    image: "radiateur.webp",        article: "le",  gender: "m", definition: "appareil qui diffuse la chaleur dans une pièce",                 group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "radiateur",    image: "radiateur.webp",        article: "le",  gender: "m", definition: ["Appareil qui chauffe une pièce."], definitionPivot: { en: "A device that gives heat in a room.", ar: "جهاز ينشر الحرارة في الغرفة.", fa: "وسیله‌ای که در اتاق گرما پخش می‌کند.", pt: "Aparelho que difunde calor numa divisão.", so: "Qalab qolka kuleyl ku faafiya.", ti: "ኣብ ክፍሊ ሙቐት ዝዝርግሕ መሳርሒ።", tr: "Odaya ısı veren cihaz.", ps: "هغه آله چې په کوټه کې تودوخه خپروي.", uk: "Прилад, що віддає тепло в кімнаті." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le radiateur pendant l'exercice.",
@@ -986,7 +986,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque radiateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "thermostat",   image: "thermostat.webp",       article: "le",  gender: "m", definition: "dispositif pour régler la température",                          group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "thermostat",   image: "thermostat.webp",       article: "le",  gender: "m", definition: ["Appareil qui règle la température."], definitionPivot: { en: "A device used to set temperature.", ar: "جهاز لضبط درجة الحرارة.", fa: "وسیله‌ای برای تنظیم دما.", pt: "Dispositivo para regular a temperatura.", so: "Qalab lagu hagaajiyo heerkulka.", ti: "ሙቐት ንምቅንጻር ዝጥቀም መሳርሒ።", tr: "Sıcaklığı ayarlayan cihaz.", ps: "هغه آله چې تودوخه تنظيموي.", uk: "Пристрій для регулювання температури." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le thermostat pendant l'exercice.",
@@ -1053,7 +1053,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes de portes
-    { word: "serrure",       image: "probleme-de-serrure.webp", article: "la", gender: "f", definition: "mécanisme pour fermer une porte à clé",                    group: "Les problèmes de portes" , exampleSentences: {
+    { word: "serrure",       image: "probleme-de-serrure.webp", article: "la", gender: "f", definition: ["Mécanisme qui ferme une porte avec une clé."], definitionPivot: { en: "A mechanism used to lock a door.", ar: "آلية لإغلاق الباب بالمفتاح.", fa: "وسیله‌ای برای قفل کردن در.", pt: "Mecanismo para fechar uma porta à chave.", so: "Qalab albaab lagu xiro furaha.", ti: "ማዕጾ ብመፍትሕ ንምዕጻው ዝኸውን መሳርሒ።", tr: "Kapıyı kilitleyen mekanizma.", ps: "هغه ميکانيزم چې دروازه پرې قفل کېږي.", uk: "Механізм для замикання дверей." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la serrure pendant l'exercice.",
@@ -1118,7 +1118,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque serrure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serrurier",    image: "serrurier.webp",        article: "le",  gender: "m", feminine: "serrurière",   definition: "artisan spécialiste des serrures et des clés",       group: "Les problèmes de portes" , exampleSentences: {
+    { word: "serrurier",    image: "serrurier.webp",        article: "le",  gender: "m", feminine: "serrurière",   definition: ["Personne qui répare ou installe les serrures."], definitionPivot: { en: "A craftsperson who works with locks and keys.", ar: "حرفي مختص بالأقفال والمفاتيح.", fa: "فرد متخصص در قفل و کلید.", pt: "Profissional especialista em fechaduras e chaves.", so: "Farsamo yaqaan quful iyo furayaal.", ti: "ኣብ ቁልፍን መፍትሕን ዝሰርሕ ሰብ ሞያ።", tr: "Kilit ve anahtar uzmanı.", ps: "د قلفونو او کيليو مسلکي کس.", uk: "Майстер із замків і ключів." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le serrurier pendant l'exercice.",
@@ -1183,7 +1183,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque serrurier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "porte",        image: "porte.webp",            article: "la",  gender: "f", definition: "ouverture avec un battant pour entrer ou sortir",                group: "Les problèmes de portes" , exampleSentences: {
+    { word: "porte",        image: "porte.webp",            article: "la",  gender: "f", definition: ["Endroit de l’aéroport où l’on attend avant de monter dans l’avion."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la porte pendant l'exercice.",
@@ -1248,7 +1248,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque porte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "clé",          image: "cle.webp",              article: "la",  gender: "f", definition: "objet pour ouvrir ou fermer une serrure",                        group: "Les problèmes de portes" , exampleSentences: {
+    { word: "clé",          image: "cle.webp",              article: "la",  gender: "f", definition: ["Objet ou carte qui sert à ouvrir une porte."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la clé pendant l'exercice.",

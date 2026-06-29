@@ -6,7 +6,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
   title: "L'aéroport",
   section: "V9",
   words: [
-    { word: "passeport", image: "passeport.webp",           article: "le",  gender: "m", definition: "document officiel d'identité pour voyager" , exampleSentences: {
+    { word: "passeport", image: "passeport.webp",           article: "le",  gender: "m", definition: ["Document officiel pour voyager dans un autre pays."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le passeport sur le plan.",
@@ -71,7 +71,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque passeport est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "visa", image: "visa.webp",                article: "le",  gender: "m", definition: "autorisation officielle pour entrer dans un pays" , exampleSentences: {
+    { word: "visa", image: "visa.webp",                article: "le",  gender: "m", definition: ["Autorisation officielle pour entrer dans certains pays."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le visa sur le plan.",
@@ -136,7 +136,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque visa est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vol", image: "vol.webp",                 article: "le",  gender: "m", definition: "trajet en avion" , exampleSentences: {
+    { word: "vol", image: "vol.webp",                 article: "le",  gender: "m", definition: ["Voyage en avion."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le vol sur le plan.",
@@ -201,7 +201,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque vol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "destination", image: "destination.webp",         article: "la",  gender: "f", definition: "lieu où l'on se rend" , exampleSentences: {
+    { word: "destination", image: "destination.webp",         article: "la",  gender: "f", definition: ["Lieu où l’on veut aller."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la destination sur le plan.",
@@ -266,7 +266,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque destination est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.webp",               article: "l'",  gender: "m", definition: "véhicule aérien" , exampleSentences: {
+    { word: "avion", image: "avion.webp",               article: "l'",  gender: "m", definition: ["Véhicule qui vole dans le ciel et transporte des passagers."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avion sur le plan.",
@@ -331,7 +331,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "escale", image: "escale.webp",              article: "l'",  gender: "f", definition: "arrêt intermédiaire lors d'un vol" , exampleSentences: {
+    { word: "escale", image: "escale.webp",              article: "l'",  gender: "f", definition: ["Arrêt pendant un voyage avant d’arriver à la destination finale."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'escale sur le plan.",
@@ -396,7 +396,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque escale est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "valise", image: "valise.webp",              article: "la",  gender: "f", definition: "grand bagage pour les voyages" , exampleSentences: {
+    { word: "valise", image: "valise.webp",              article: "la",  gender: "f", definition: ["Grand sac rigide ou souple pour transporter ses affaires en voyage."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la valise sur le plan.",
@@ -461,7 +461,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque valise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "terminal", image: "terminal.webp",            article: "le",  gender: "m", definition: "bâtiment principal d'un aéroport" , exampleSentences: {
+    { word: "terminal", image: "terminal.webp",            article: "le",  gender: "m", definition: ["Partie d’un aéroport où les passagers arrivent ou partent."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le terminal sur le plan.",
@@ -526,7 +526,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque terminal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "douane", image: "douane.webp",              article: "la",  gender: "f", definition: "contrôle des bagages à la frontière" , exampleSentences: {
+    { word: "douane", image: "douane.webp",              article: "la",  gender: "f", definition: ["Service qui contrôle les marchandises et les voyageurs à la frontière."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la douane sur le plan.",
@@ -591,7 +591,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque douane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "enregistrement", image: "enregistrement.webp",      article: "l'",  gender: "m", definition: "démarche pour valider son billet avant de voler" , exampleSentences: {
+    { word: "enregistrement", image: "enregistrement.webp",      article: "l'",  gender: "m", definition: ["Moment où l’on donne ses bagages et reçoit sa carte d’embarquement."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'enregistrement sur le plan.",
@@ -656,7 +656,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque enregistrement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réservation", image: "reservation.webp",         article: "la",  gender: "f", definition: "action de réserver un vol ou un siège" , exampleSentences: {
+    { word: "réservation", image: "reservation.webp",         article: "la",  gender: "f", definition: ["Action de garder une place, une chambre ou un billet à l’avance."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réservation sur le plan.",
@@ -721,7 +721,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque réservation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "embarquement", image: "embarquement.webp",        article: "l'",  gender: "m", definition: "montée dans l'avion" , exampleSentences: {
+    { word: "embarquement", image: "embarquement.webp",        article: "l'",  gender: "m", definition: ["Moment où les passagers montent dans l’avion."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'embarquement sur le plan.",
@@ -786,7 +786,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque embarquement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "porte", image: "porte.webp",               article: "la",  gender: "f", definition: "accès à l'avion dans le terminal" , exampleSentences: {
+    { word: "porte", image: "porte.webp",               article: "la",  gender: "f", definition: ["Endroit de l’aéroport où l’on attend avant de monter dans l’avion."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la porte sur le plan.",
@@ -851,7 +851,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque porte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bagage", image: "bagage.webp",              article: "le",  gender: "m", definition: "valise ou sac de voyage" , exampleSentences: {
+    { word: "bagage", image: "bagage.webp",              article: "le",  gender: "m", definition: ["Sac ou valise que l’on prend en voyage."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le bagage sur le plan.",
@@ -916,7 +916,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
           "Puisque bagage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "carte d'embarquement", image: "carte-d-embarquement.webp",article: "la",  gender: "f", definition: "document remis pour monter dans l'avion" , exampleSentences: {
+    { word: "carte d'embarquement", image: "carte-d-embarquement.webp",article: "la",  gender: "f", definition: ["Document qui permet de monter dans l’avion."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la carte d'embarquement sur le plan.",

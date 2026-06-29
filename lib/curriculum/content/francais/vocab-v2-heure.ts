@@ -6,7 +6,7 @@ export const V2_HEURE_THEME: VocabTheme = {
   title: "L'heure",
   section: "V2",
   words: [
-    { word: "heure", image: "heure.webp",      article: "l'",  gender: "f", definition: "unité de temps de 60 minutes" , exampleSentences: {
+    { word: "heure", image: "heure.webp",      article: "l'",  gender: "f", definition: ["Durée de 60 minutes."], definitionPivot: { en: "A time unit of 60 minutes.", ar: "وحدة زمنية تساوي 60 دقيقة.", fa: "واحد زمان برابر با ۶۰ دقیقه.", pt: "Unidade de tempo de 60 minutos.", so: "Halbeeg waqti oo ah 60 daqiiqo.", ti: "60 ደቓይቕ ዝኾነ መለክዒ ግዜ።", tr: "60 dakikalık zaman birimi.", ps: "د وخت واحد چې ۶۰ دقیقې وي.", uk: "Одиниця часу, що дорівнює 60 хвилинам." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'heure en classe.",
@@ -71,7 +71,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque heure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minute", image: "minute.webp",     article: "la",  gender: "f", definition: "unité de temps de 60 secondes" , exampleSentences: {
+    { word: "minute", image: "minute.webp",     article: "la",  gender: "f", definition: ["Durée de 60 secondes."], definitionPivot: { en: "A time unit of 60 seconds.", ar: "وحدة زمنية تساوي 60 ثانية.", fa: "واحد زمان برابر با ۶۰ ثانیه.", pt: "Unidade de tempo de 60 segundos.", so: "Halbeeg waqti oo ah 60 ilbiriqsi.", ti: "60 ሰከንድ ዝኾነ መለክዒ ግዜ።", tr: "60 saniyelik zaman birimi.", ps: "د وخت واحد چې ۶۰ ثانيې وي.", uk: "Одиниця часу, що дорівнює 60 секундам." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la minute en classe.",
@@ -136,7 +136,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minute est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "seconde", image: "seconde.webp",    article: "la",  gender: "f", definition: "unité de temps la plus courte" , exampleSentences: {
+    { word: "seconde", image: "seconde.webp",    article: "la",  gender: "f", definition: ["Très petite unité de temps."], definitionPivot: { en: "A very short unit of time.", ar: "وحدة زمنية قصيرة جداً.", fa: "واحد زمانی بسیار کوتاه.", pt: "Unidade de tempo muito curta.", so: "Halbeeg waqti oo aad u gaaban.", ti: "ኣዝዩ ሓጺር መለክዒ ግዜ።", tr: "Çok kısa bir zaman birimi.", ps: "د وخت ډېر لنډ واحد.", uk: "Дуже коротка одиниця часу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la seconde en classe.",
@@ -201,7 +201,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque seconde est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "matin", image: "matin.webp",      article: "le",  gender: "m", definition: "début de la journée" , exampleSentences: {
+    { word: "matin", image: "matin.webp",      article: "le",  gender: "m", definition: ["Partie de la journée avant midi."], definitionPivot: { en: "The beginning of the day.", ar: "بداية اليوم.", fa: "آغاز روز.", pt: "O início do dia.", so: "Bilowga maalinta.", ti: "መጀመርታ መዓልቲ።", tr: "Günün başlangıcı.", ps: "د ورځې پیل.", uk: "Початок дня." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le matin en classe.",
@@ -266,7 +266,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque matin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "midi", image: "midi.webp",       article: "le",  gender: "m", definition: "12 heures, milieu de la journée" , exampleSentences: {
+    { word: "midi", image: "midi.webp",       article: "le",  gender: "m", definition: ["Moment au milieu de la journée."], definitionPivot: { en: "Twelve o’clock, the middle of the day.", ar: "الساعة الثانية عشرة، وسط النهار.", fa: "ساعت دوازده، نیمه روز.", pt: "Doze horas, meio do dia.", so: "Laba iyo tobanka duhurnimo, bartamaha maalinta.", ti: "12 ሰዓት፣ ማእከል መዓልቲ።", tr: "Saat on iki, gün ortası.", ps: "دولس بجې، د ورځې منځ.", uk: "Дванадцята година, середина дня." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le midi en classe.",
@@ -331,7 +331,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "après-midi", image: "apres-midi.webp", article: "l'",  gender: "m", definition: "partie de la journée après midi" , exampleSentences: {
+    { word: "après-midi", image: "apres-midi.webp", article: "l'",  gender: "m", definition: ["Partie de la journée entre midi et le soir."], definitionPivot: { en: "The part of the day after noon.", ar: "جزء اليوم بعد الظهر.", fa: "بخش روز بعد از ظهر.", pt: "Parte do dia depois do meio-dia.", so: "Qaybta maalinta ka dambeysa duhurka.", ti: "ድሕሪ ቀትሪ ዘሎ ክፋል መዓልቲ።", tr: "Öğleden sonraki zaman.", ps: "د غرمې وروسته د ورځې برخه.", uk: "Частина дня після полудня." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'après-midi en classe.",
@@ -396,7 +396,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque après-midi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soir", image: "soir.webp",       article: "le",  gender: "m", definition: "fin de la journée avant la nuit" , exampleSentences: {
+    { word: "soir", image: "soir.webp",       article: "le",  gender: "m", definition: ["Fin de la journée."], definitionPivot: { en: "The end of the day before night.", ar: "نهاية اليوم قبل الليل.", fa: "پایان روز قبل از شب.", pt: "Fim do dia antes da noite.", so: "Dhammaadka maalinta ka hor habeenka.", ti: "ቅድሚ ለይቲ መወዳእታ መዓልቲ።", tr: "Geceden önce günün sonu.", ps: "د شپې مخکې د ورځې پای.", uk: "Кінець дня перед ніччю." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le soir en classe.",
@@ -461,7 +461,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque soir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "minuit", image: "minuit.webp",     article: "le",  gender: "m", definition: "24 heures, milieu de la nuit" , exampleSentences: {
+    { word: "minuit", image: "minuit.webp",     article: "le",  gender: "m", definition: ["Moment au milieu de la nuit."], definitionPivot: { en: "Twelve o’clock at night.", ar: "الساعة الثانية عشرة ليلاً.", fa: "ساعت دوازده شب.", pt: "Doze horas da noite.", so: "Laba iyo tobanka habeenimo.", ti: "12 ሰዓት ለይቲ።", tr: "Gece saat on iki.", ps: "د شپې دولس بجې.", uk: "Дванадцята година ночі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le minuit en classe.",
@@ -526,7 +526,7 @@ export const V2_HEURE_THEME: VocabTheme = {
           "Puisque minuit est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "horloge", image: "horloge.webp",    article: "l'",  gender: "f", definition: "grande pendule fixée au mur" , exampleSentences: {
+    { word: "horloge", image: "horloge.webp",    article: "l'",  gender: "f", definition: ["Objet qui indique l’heure."], definitionPivot: { en: "A clock that shows the time.", ar: "ساعة تُظهر الوقت.", fa: "ساعتی که زمان را نشان می‌دهد.", pt: "Relógio que mostra as horas.", so: "Saacad muujisa waqtiga.", ti: "ግዜ ዘርኢ ሰዓት።", tr: "Saati gösteren araç.", ps: "ساعت چې وخت ښيي.", uk: "Годинник, який показує час." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'horloge en classe.",

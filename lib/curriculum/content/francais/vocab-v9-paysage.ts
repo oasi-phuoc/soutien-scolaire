@@ -6,7 +6,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
   title: "Le paysage",
   section: "V9",
   words: [
-    { word: "montagne", image: "montagne.webp", article: "la",  gender: "f", definition: "relief élevé avec des sommets" , exampleSentences: {
+    { word: "montagne", image: "montagne.webp", article: "la",  gender: "f", definition: ["Grande élévation naturelle du sol."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la montagne sur le plan.",
@@ -71,7 +71,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque montagne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mer", image: "mer.webp",      article: "la",  gender: "f", definition: "grande étendue d'eau salée" , exampleSentences: {
+    { word: "mer", image: "mer.webp",      article: "la",  gender: "f", definition: ["Grande étendue d’eau salée."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la mer sur le plan.",
@@ -136,7 +136,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque mer est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plage", image: "plage.webp",    article: "la",  gender: "f", definition: "bande de sable au bord de la mer" , exampleSentences: {
+    { word: "plage", image: "plage.webp",    article: "la",  gender: "f", definition: ["Lieu avec du sable ou des pierres au bord de la mer ou d’un lac."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la plage sur le plan.",
@@ -201,7 +201,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque plage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "campagne", image: "campagne.webp", article: "la",  gender: "f", definition: "zone rurale avec champs et nature" , exampleSentences: {
+    { word: "campagne", image: "campagne.webp", article: "la",  gender: "f", definition: ["Région avec des villages, des champs et peu de bâtiments."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la campagne sur le plan.",
@@ -266,7 +266,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque campagne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "forêt", image: "foret.webp",    article: "la",  gender: "f", definition: "grande étendue d'arbres" , exampleSentences: {
+    { word: "forêt", image: "foret.webp",    article: "la",  gender: "f", definition: ["Grand espace avec beaucoup d’arbres."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la forêt sur le plan.",
@@ -331,7 +331,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque forêt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rivière", image: "riviere.webp",  article: "la",  gender: "f", definition: "cours d'eau naturel" , exampleSentences: {
+    { word: "rivière", image: "riviere.webp",  article: "la",  gender: "f", definition: ["Cours d’eau naturel plus petit qu’un fleuve."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la rivière sur le plan.",
@@ -396,7 +396,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque rivière est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lac", image: "lac.webp",      article: "le",  gender: "m", definition: "étendue d'eau douce entourée de terres" , exampleSentences: {
+    { word: "lac", image: "lac.webp",      article: "le",  gender: "m", definition: ["Grande étendue d’eau entourée de terre."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le lac sur le plan.",
@@ -461,7 +461,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque lac est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "colline", image: "colline.webp",  article: "la",  gender: "f", definition: "élévation de terrain moins haute qu'une montagne" , exampleSentences: {
+    { word: "colline", image: "colline.webp",  article: "la",  gender: "f", definition: ["Petite montagne ou élévation du sol."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la colline sur le plan.",
@@ -526,7 +526,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque colline est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vallée", image: "vallee.webp",   article: "la",  gender: "f", definition: "espace plat entre deux reliefs" , exampleSentences: {
+    { word: "vallée", image: "vallee.webp",   article: "la",  gender: "f", definition: ["Espace bas entre deux montagnes ou collines."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la vallée sur le plan.",
@@ -591,7 +591,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque vallée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "désert", image: "desert.webp",   article: "le",  gender: "m", definition: "région très sèche et peu habitée" , exampleSentences: {
+    { word: "désert", image: "desert.webp",   article: "le",  gender: "m", definition: ["Région très sèche avec peu d’eau et peu de plantes."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le désert sur le plan.",
@@ -656,7 +656,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque désert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "île", image: "ile.webp",      article: "l'",  gender: "f", definition: "terre entourée d'eau de tous côtés" , exampleSentences: {
+    { word: "île", image: "ile.webp",      article: "l'",  gender: "f", definition: ["Terre entourée d’eau."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'île sur le plan.",
@@ -721,7 +721,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque île est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nature", image: "nature.webp",   article: "la",  gender: "f", definition: "l'ensemble du monde naturel" , exampleSentences: {
+    { word: "nature", image: "nature.webp",   article: "la",  gender: "f", definition: ["Ensemble des plantes, animaux, paysages et éléments non fabriqués par l’homme."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la nature sur le plan.",
@@ -786,7 +786,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque nature est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paysage", image: "paysage.webp",  article: "le",  gender: "m", definition: "vue d'ensemble d'un lieu naturel" , exampleSentences: {
+    { word: "paysage", image: "paysage.webp",  article: "le",  gender: "m", definition: ["Vue d’un lieu naturel ou d’un endroit."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le paysage sur le plan.",
@@ -851,7 +851,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque paysage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "côte", image: "cote.webp",     article: "la",  gender: "f", definition: "zone littorale entre terre et mer" , exampleSentences: {
+    { word: "côte", image: "cote.webp",     article: "la",  gender: "f", definition: ["Bord de la mer."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la côte sur le plan.",
@@ -916,7 +916,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque côte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "volcan", image: "volcan.webp",   article: "le",  gender: "m", definition: "montagne qui peut cracher de la lave" , exampleSentences: {
+    { word: "volcan", image: "volcan.webp",   article: "le",  gender: "m", definition: ["Montagne qui peut faire sortir de la lave, des gaz et des cendres."], definitionPivot: { en: "A natural place or landscape element.", ar: "مكان طبيعي أو عنصر من المنظر.", fa: "جای طبیعی یا عنصر منظره.", pt: "Lugar natural ou elemento da paisagem.", so: "Meel dabiici ah ama qayb muuqaalka dhulka.", ti: "ተፈጥሮኣዊ ቦታ ወይ ክፋል መልክዕ መሬት።", tr: "Doğal yer veya manzara öğesi.", ps: "طبيعي ځای يا د منظرې برخه.", uk: "Природне місце або елемент ландшафту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le volcan sur le plan.",

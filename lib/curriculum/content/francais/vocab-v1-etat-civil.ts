@@ -6,7 +6,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
   title: "L'état civil",
   section: "V1",
   words: [
-    { word: "célibataire",    image: "celibataire.webp",    definition: ["sans partenaire officiel", "qui n'est pas en couple", "qui vit seul sans conjoint"],
+    { word: "célibataire",    image: "celibataire.webp",    definition: ["Personne qui n’est pas mariée et qui n’est pas officiellement en couple."], definitionPivot: { en: "Not married and without an official partner.", ar: "غير متزوج وبدون شريك رسمي.", fa: "ازدواج نکرده و بدون شریک رسمی.", pt: "Não casado e sem parceiro oficial.", so: "Aan guursan oo aan lammaane rasmi ah lahayn.", ti: "ዘይተመርዓወን ዕላዊ መጻምዲ ዘይብሉን።", tr: "Evli olmayan ve resmi partneri olmayan.", ps: "نه واده شوی او رسمي ملګری نه لري.", uk: "Неодружений/незаміжня і без офіційного партнера." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -69,7 +69,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en couple",      image: "en-couple.webp",      definition: ["qui vit avec un partenaire", "qui a une relation amoureuse", "qui sort avec quelqu'un"],
+    { word: "en couple",      image: "en-couple.webp",      definition: ["Personne qui a une relation amoureuse avec quelqu’un."], definitionPivot: { en: "A person who is in a romantic relationship.", ar: "شخص في علاقة عاطفية.", fa: "شخصی که در یک رابطه عاطفی است.", pt: "Pessoa que está numa relação amorosa.", so: "Qof ku jira xiriir jacayl.", ti: "ኣብ ናይ ፍቕሪ ዝምድና ዘሎ ሰብ።", tr: "Duygusal bir ilişki içinde olan kişi.", ps: "هغه کس چې په عاطفي اړیکه کې وي.", uk: "Людина, яка має романтичні стосунки." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -132,7 +132,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "en concubinage", image: "en-concubinage.webp", definition: ["qui vit avec un partenaire sans être marié", "union libre", "couple non marié qui vit ensemble"],
+    { word: "en concubinage", image: "en-concubinage.webp", definition: ["Personnes qui vivent ensemble en couple sans être mariées."], definitionPivot: { en: "A person who lives with a partner without being married.", ar: "شخص يعيش مع شريك دون زواج.", fa: "شخصی که بدون ازدواج با شریک زندگی می‌کند.", pt: "Pessoa que vive com o/a companheiro/a sem ser casada.", so: "Qof la nool lamaane iyada oo aan la guursan.", ti: "ከይተመርዓወ ምስ መጻምድቱ ዝነብር ሰብ።", tr: "Evli olmadan partneriyle yaşayan kişi.", ps: "هغه کس چې له واده پرته له ملګري سره ژوند کوي.", uk: "Людина, яка живе з партнером без шлюбу." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -195,7 +195,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fiancé",         image: "fiance.webp",         feminine: "fiancée",  definition: ["promis au mariage", "qui a accepté de se marier", "dont les fiançailles sont officielles"],
+    { word: "fiancé",         image: "fiance.webp",         feminine: "fiancée",  definition: ["Personne qui a promis de se marier avec quelqu’un."], definitionPivot: { en: "Promised to be married.", ar: "موعود بالزواج.", fa: "نامزد برای ازدواج.", pt: "Prometido em casamento.", so: "Ballan guur galay.", ti: "ንመርዓ ተስፋ ዝተዋህቦ።", tr: "Evlenmek üzere nişanlı.", ps: "د واده لپاره کوژدن شوی.", uk: "Заручений/заручена для шлюбу." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -260,7 +260,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "marié",          image: "marie.webp",          feminine: "mariée",   definition: ["uni par le mariage", "qui a dit oui devant le maire", "qui a un conjoint légal"],
+    { word: "marié",          image: "marie.webp",          feminine: "mariée",   definition: ["Personne qui a un mari ou une femme."], definitionPivot: { en: "Legally united by marriage.", ar: "مرتبط قانونياً بالزواج.", fa: "به طور قانونی با ازدواج پیوند یافته.", pt: "Unido legalmente pelo casamento.", so: "Sharci ahaan guur ku midoobay.", ti: "ብሕጋዊ መርዓ ዝተተሓሓዘ።", tr: "Evlilikle yasal olarak birleşmiş.", ps: "د واده له لارې قانوني تړاو لري.", uk: "Юридично поєднаний/поєднана шлюбом." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -325,7 +325,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "pacsé",          image: "pacse.webp",          feminine: "pacsée",   definition: ["lié par un PACS", "uni par un pacte civil de solidarité", "alternative légale au mariage"],
+    { word: "pacsé",          image: "pacse.webp",          feminine: "pacsée",   definition: ["Personne liée à une autre par un contrat officiel de couple."], definitionPivot: { en: "United by a civil partnership.", ar: "مرتبط بشراكة مدنية.", fa: "در یک شراکت مدنی رسمی.", pt: "Unido por uma parceria civil.", so: "Ku mideysan heshiis madani ah.", ti: "ብሲቪላዊ ሽርክነት ዝተተሓሓዘ።", tr: "Sivil birliktelikle bağlı.", ps: "د مدني شراکت له لارې تړلی.", uk: "Поєднаний/поєднана цивільним партнерством." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -390,7 +390,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "séparé",         image: "separe.webp",         feminine: "séparée",  definition: ["qui vit séparé de son conjoint", "qui ne vit plus avec son partenaire", "en cours de séparation"],
+    { word: "séparé",         image: "separe.webp",         feminine: "séparée",  definition: ["Personne qui ne vit plus avec son mari, sa femme ou son partenaire."], definitionPivot: { en: "No longer living with one's partner.", ar: "لا يعيش مع الشريك بعد الآن.", fa: "دیگر با شریک زندگی نمی‌کند.", pt: "Já não vive com o parceiro.", so: "Aan hadda la noolayn lammaanihiisa.", ti: "ድሕሪ ሕጂ ምስ መጻምዲ ዘይነብር።", tr: "Artık partneriyle yaşamayan.", ps: "نور له خپل ملګري سره نه اوسېږي.", uk: "Більше не живе зі своїм партнером." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -455,7 +455,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "divorcé",        image: "divorce.webp",        feminine: "divorcée", definition: ["dont le mariage est dissous", "dont le divorce est prononcé", "qui a mis fin à son mariage"],
+    { word: "divorcé",        image: "divorce.webp",        feminine: "divorcée", definition: ["Personne dont le mariage est officiellement terminé."], definitionPivot: { en: "Whose marriage has legally ended.", ar: "انتهى زواجه قانونياً.", fa: "کسی که ازدواجش قانونی پایان یافته است.", pt: "Cujo casamento terminou legalmente.", so: "Guurkiisu si sharci ah u dhammaaday.", ti: "መርዓኡ ብሕጊ ዝተዛዘመ።", tr: "Evliliği yasal olarak sona ermiş.", ps: "چې واده یې قانوني پای ته رسېدلی وي.", uk: "Чий шлюб юридично завершився." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -520,7 +520,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "veuf",           image: "veuf.webp",           feminine: "veuve",    definition: ["dont le conjoint est décédé", "qui a perdu son mari ou sa femme", "qui vit seul après le décès du conjoint"],
+    { word: "veuf",           image: "veuf.webp",           feminine: "veuve",    definition: ["Personne dont le mari ou la femme est mort."], definitionPivot: { en: "A person whose spouse has died.", ar: "شخص توفي زوجه أو زوجته.", fa: "کسی که همسرش فوت کرده است.", pt: "Pessoa cujo cônjuge morreu.", so: "Qof seygiisa ama xaaskiisu dhintay.", ti: "መጻምዱ ዝሞተሉ ሰብ።", tr: "Eşi ölmüş kişi.", ps: "هغه کس چې مېړه يا ښځه یې مړه شوې وي.", uk: "Людина, чий чоловік або дружина померли." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [

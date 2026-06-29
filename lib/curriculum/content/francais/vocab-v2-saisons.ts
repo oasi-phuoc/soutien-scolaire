@@ -6,7 +6,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
   title: "Les saisons",
   section: "V2",
   words: [
-    { word: "printemps", image: "printemps.webp",     article: "le",  gender: "m", definition: "saison entre l'hiver et l'été" , exampleSentences: {
+    { word: "printemps", image: "printemps.webp",     article: "le",  gender: "m", definition: ["Saison après l’hiver, quand les plantes repoussent."], definitionPivot: { en: "The season between winter and summer.", ar: "الفصل بين الشتاء والصيف.", fa: "فصل بین زمستان و تابستان.", pt: "Estação entre o inverno e o verão.", so: "Xilliga u dhexeeya jiilaalka iyo xagaaga.", ti: "ኣብ መንጎ ሓጋይን ክረምትን ዘሎ ወቕቲ።", tr: "Kış ile yaz arasındaki mevsim.", ps: "د ژمي او دوبي ترمنځ موسم.", uk: "Пора року між зимою і літом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le printemps en classe.",
@@ -71,7 +71,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque printemps est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "été", image: "ete.webp",           article: "l'",  gender: "m", definition: "saison la plus chaude de l'année" , exampleSentences: {
+    { word: "été", image: "ete.webp",           article: "l'",  gender: "m", definition: ["Saison chaude de l’année."], definitionPivot: { en: "The hottest season of the year.", ar: "أحر فصل في السنة.", fa: "گرم‌ترین فصل سال.", pt: "A estação mais quente do ano.", so: "Xilliga ugu kulul sanadka.", ti: "ኣብ ዓመት ዝሙቐ ወቕቲ።", tr: "Yılın en sıcak mevsimi.", ps: "د کال تر ټولو ګرم موسم.", uk: "Найтепліша пора року." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'été en classe.",
@@ -136,7 +136,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque été est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "automne", image: "automne.webp",       article: "l'",  gender: "m", definition: "saison entre l'été et l'hiver" , exampleSentences: {
+    { word: "automne", image: "automne.webp",       article: "l'",  gender: "m", definition: ["Saison après l’été, quand les feuilles tombent."], definitionPivot: { en: "The season between summer and winter.", ar: "الفصل بين الصيف والشتاء.", fa: "فصل بین تابستان و زمستان.", pt: "Estação entre o verão e o inverno.", so: "Xilliga u dhexeeya xagaaga iyo jiilaalka.", ti: "ኣብ መንጎ ክረምትን ሓጋይን ዘሎ ወቕቲ።", tr: "Yaz ile kış arasındaki mevsim.", ps: "د دوبي او ژمي ترمنځ موسم.", uk: "Пора року між літом і зимою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'automne en classe.",
@@ -201,7 +201,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque automne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "hiver", image: "hiver.webp",         article: "l'",  gender: "m", definition: "saison la plus froide de l'année" , exampleSentences: {
+    { word: "hiver", image: "hiver.webp",         article: "l'",  gender: "m", definition: ["Saison froide de l’année."], definitionPivot: { en: "The coldest season of the year.", ar: "أبرد فصل في السنة.", fa: "سردترین فصل سال.", pt: "A estação mais fria do ano.", so: "Xilliga ugu qabow sanadka.", ti: "ኣብ ዓመት ዝዛሕለ ወቕቲ።", tr: "Yılın en soğuk mevsimi.", ps: "د کال تر ټولو يخ موسم.", uk: "Найхолодніша пора року." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'hiver en classe.",
@@ -266,7 +266,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque hiver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saison", image: "saison.webp",        article: "la",  gender: "f", definition: "une des quatre périodes de l'année" , exampleSentences: {
+    { word: "saison", image: "saison.webp",        article: "la",  gender: "f", definition: ["Partie de l’année avec un climat particulier."], definitionPivot: { en: "One of the four parts of the year.", ar: "واحد من أربعة أجزاء السنة.", fa: "یکی از چهار بخش سال.", pt: "Uma das quatro partes do ano.", so: "Mid ka mid ah afarta qaybood ee sanadka.", ti: "ካብ ኣርባዕተ ክፋላት ዓመት ሓደ።", tr: "Yılın dört bölümünden biri.", ps: "د کال له څلورو برخو څخه يوه.", uk: "Одна з чотирьох частин року." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la saison en classe.",
@@ -331,7 +331,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque saison est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "climat", image: "climat.webp",        article: "le",  gender: "m", definition: "conditions météo habituelles d'une région" , exampleSentences: {
+    { word: "climat", image: "climat.webp",        article: "le",  gender: "m", definition: ["Temps habituel d’un lieu sur une longue période."], definitionPivot: { en: "The usual weather in a region.", ar: "الطقس المعتاد في منطقة.", fa: "هوای معمول یک منطقه.", pt: "O tempo habitual de uma região.", so: "Cimilada caadiga ah ee gobol.", ti: "ኣብ ክልል ዝልሙድ ኩነታት ኣየር።", tr: "Bir bölgedeki olağan hava durumu.", ps: "د يوې سيمې عادي هوا.", uk: "Звичайна погода в регіоні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le climat en classe.",
@@ -396,7 +396,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque climat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "météo", image: "meteo.webp",         article: "la",  gender: "f", definition: "prévision des conditions atmosphériques" , exampleSentences: {
+    { word: "météo", image: "meteo.webp",         article: "la",  gender: "f", definition: ["Temps qu’il fait aujourd’hui ou dans les prochains jours."], definitionPivot: { en: "The weather forecast or weather conditions.", ar: "توقعات الطقس أو حالة الطقس.", fa: "پیش‌بینی هوا یا وضعیت هوا.", pt: "Previsão ou condições do tempo.", so: "Saadaasha cimilada ama xaaladda hawada.", ti: "ትንበያ ኣየር ወይ ኩነታት ኣየር።", tr: "Hava tahmini veya hava durumu.", ps: "د هوا وړاندوينه يا د هوا حالت.", uk: "Прогноз погоди або погодні умови." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la météo en classe.",
@@ -461,7 +461,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque météo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "température", image: "temperature.webp",   article: "la",  gender: "f", definition: "mesure du chaud ou du froid en degrés" , exampleSentences: {
+    { word: "température", image: "temperature.webp",   article: "la",  gender: "f", definition: ["Mesure du chaud ou du froid."], definitionPivot: { en: "The measure of heat or cold.", ar: "قياس الحرارة أو البرودة.", fa: "اندازه گرما یا سرما.", pt: "Medida do calor ou do frio.", so: "Qiyaasta kulaylka ama qabowga.", ti: "መለክዒ ሙቐት ወይ ዛሕሊ።", tr: "Sıcaklık veya soğukluk ölçüsü.", ps: "د تودوخې يا يخنۍ اندازه.", uk: "Міра тепла або холоду." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la température en classe.",
@@ -526,7 +526,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque température est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se réchauffer", image: "se-rechauffer.webp",                              definition: "devenir plus chaud, augmenter en température" , exampleSentences: {
+    { word: "se réchauffer", image: "se-rechauffer.webp",                              definition: ["Devenir plus chaud."], definitionPivot: { en: "To become warmer.", ar: "أن يصبح أكثر دفئًا.", fa: "گرم‌تر شدن.", pt: "Ficar mais quente.", so: "Inuu sii diiranaado.", ti: "ዝያዳ ሙቐት ምርካብ።", tr: "Daha sıcak hale gelmek.", ps: "لا زیات تودېدل.", uk: "Ставати теплішим." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié se réchauffer en classe.",
@@ -591,7 +591,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque se réchauffer est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se rafraîchir", image: "se-rafraichir.webp",                              definition: "devenir plus frais, baisser en température" , exampleSentences: {
+    { word: "se rafraîchir", image: "se-rafraichir.webp",                              definition: ["Devenir plus frais ou plus froid."], definitionPivot: { en: "To become cooler.", ar: "أن يصبح أكثر برودة.", fa: "خنک‌تر شدن.", pt: "Ficar mais fresco.", so: "Inuu sii qabowgaado.", ti: "ዝያዳ ዝሑል ምዃን።", tr: "Daha serin hale gelmek.", ps: "لا زیات یخېدل.", uk: "Ставати прохолоднішим." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié se rafraîchir en classe.",

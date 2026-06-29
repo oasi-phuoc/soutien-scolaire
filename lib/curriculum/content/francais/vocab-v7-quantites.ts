@@ -6,7 +6,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
   title: "Les quantités",
   section: "V7",
   words: [
-    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", definition: "unité de mesure de masse (g)" , exampleSentences: {
+    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", definition: ["Petite unité de masse utilisée pour peser des objets ou des aliments."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le gramme en classe.",
@@ -71,7 +71,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque gramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", definition: "mille grammes (kg)" , exampleSentences: {
+    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", definition: ["Unité de masse égale à mille grammes."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un kilogramme au marché.",
@@ -136,7 +136,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque kilogramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", definition: "contenant rigide pour conserver les aliments" , exampleSentences: {
+    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", definition: ["Emballage qui contient un médicament ou un produit."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une boîte au marché.",
@@ -201,7 +201,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque boîte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", definition: "emballage de plusieurs produits ensemble" , exampleSentences: {
+    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", definition: ["Emballage qui contient plusieurs objets ou plusieurs aliments."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le paquet en classe.",
@@ -266,7 +266,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque paquet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", definition: "petit sac contenant un produit" , exampleSentences: {
+    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", definition: ["Petit sac léger qui contient une petite quantité de produit."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sachet au marché.",
@@ -331,7 +331,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque sachet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", definition: "très petite quantité prise entre les doigts" , exampleSentences: {
+    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", definition: ["Très petite quantité que l’on prend entre les doigts."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pincée au marché.",
@@ -396,7 +396,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque pincée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", definition: "morceau fin coupé dans un aliment" , exampleSentences: {
+    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", definition: ["Morceau fin coupé dans un aliment."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la tranche en classe.",
@@ -461,7 +461,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque tranche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "part",       image: "part.webp",       article: "la",  gender: "f", definition: "portion d'un gâteau ou plat" , exampleSentences: {
+    { word: "part",       image: "part.webp",       article: "la",  gender: "f", definition: ["Portion d’un aliment, d’un gâteau ou d’un plat."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une part au marché.",
@@ -526,7 +526,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque part est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", definition: "petit morceau d'aliment découpé" , exampleSentences: {
+    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", definition: ["Petite partie d’un objet ou d’un aliment."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le morceau en classe.",
@@ -591,7 +591,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque morceau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", definition: "récipient rond pour le petit-déjeuner" , exampleSentences: {
+    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", definition: ["Récipient rond utilisé pour boire ou manger une soupe, un café ou des céréales."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bol en classe.",
@@ -656,7 +656,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", definition: "récipient en verre ou plastique pour liquides" , exampleSentences: {
+    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", definition: ["Récipient avec un goulot utilisé pour contenir un liquide."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la bouteille en classe.",
@@ -721,7 +721,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bouteille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "mesure d'ingrédient prise avec une cuillère" , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: ["Objet pour manger une soupe ou un dessert."], definitionPivot: { en: "A word used to measure or contain food.", ar: "كلمة لقياس الطعام أو حفظه.", fa: "واژه‌ای برای اندازه‌گیری یا نگهداری غذا.", pt: "Palavra para medir ou conter alimentos.", so: "Eray lagu cabbiro ama lagu hayo cunto.", ti: "መግቢ ንምዕቃን ወይ ንምሓዝ ዝጥቀሙሉ ቃል።", tr: "Yiyeceği ölçmek veya koymak için kelime.", ps: "د خوړو د اندازه کولو يا ساتلو کلمه.", uk: "Слово для вимірювання або зберігання їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la cuillère en classe.",

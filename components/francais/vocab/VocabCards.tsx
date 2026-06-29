@@ -190,7 +190,8 @@ function DefinitionText({
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
   const picked = pickWordDefinition(w, pivot, showPivot);
-  if (!isOpen || !picked.text) return null;
+  const synonyms = w.synonym?.filter((item) => item.trim().length > 0) ?? [];
+  if (!isOpen || (!picked.text && synonyms.length === 0)) return null;
   const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
 
   return (
@@ -199,8 +200,18 @@ function DefinitionText({
       lang={showPivot && picked.translated ? pivot : "fr"}
       dir={isRtl && picked.translated ? "rtl" : "ltr"}
     >
-      <span className="font-bold text-[var(--color-accent-fr)]">{definitionLabel(showPivot ? pivot : "fr")} : </span>
-      <span>{picked.text}</span>
+      {picked.text && (
+        <p>
+          <span className="font-bold text-[var(--color-accent-fr)]">{definitionLabel(showPivot ? pivot : "fr")} : </span>
+          <span>{picked.text}</span>
+        </p>
+      )}
+      {synonyms.length > 0 && (
+        <p className={picked.text ? "mt-1" : ""}>
+          <span className="font-bold text-[var(--color-accent-fr)]">Synonymes : </span>
+          <span>{synonyms.join(", ")}</span>
+        </p>
+      )}
     </div>
   );
 }

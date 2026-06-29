@@ -7,7 +7,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", definition: ["de grande taille", "qui mesure beaucoup", "contraire de petit"],
+    { word: "grand",    feminine: "grande",    image: "grand.webp",    group: "Physique", definition: ["Qui a une taille élevée."], definitionPivot: { en: "Tall or large in size.", ar: "طويل أو كبير الحجم.", fa: "بلند یا بزرگ از نظر اندازه.", pt: "Alto ou grande em tamanho.", so: "Dheer ama cabbir ahaan weyn.", ti: "ነዊሕ ወይ ብመጠን ዓቢ።", tr: "Uzun veya büyük ölçüde.", ps: "لوړ يا په اندازه کې لوی.", uk: "Високий або великий за розміром." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -74,7 +74,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", definition: ["de petite taille", "qui ne mesure pas beaucoup", "contraire de grand"],
+    { word: "petit",    feminine: "petite",    image: "petit.webp",    group: "Physique", definition: ["Qui a une taille peu élevée."], definitionPivot: { en: "Short or small in size.", ar: "قصير أو صغير الحجم.", fa: "کوتاه یا کوچک از نظر اندازه.", pt: "Baixo ou pequeno em tamanho.", so: "Gaaban ama cabbir ahaan yar.", ti: "ሓጺር ወይ ብመጠን ንእሽቶ።", tr: "Kısa veya küçük ölçüde.", ps: "لنډ يا په اندازه کې کوچنی.", uk: "Низький або малий за розміром." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -141,7 +141,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "mince",                           image: "mince.webp",    group: "Physique", definition: ["peu épais, svelte", "qui n'est pas gros", "de morphologie fine"],
+    { word: "mince",                           image: "mince.webp",    group: "Physique", definition: ["Qui n’est pas gros, avec un corps fin."], definitionPivot: { en: "Thin, not fat.", ar: "نحيف، ليس سميناً.", fa: "لاغر، چاق نیست.", pt: "Magro, não gordo.", so: "Caato, aan buurnayn.", ti: "ቀጢን፣ ዘይሰቢሕ።", tr: "Zayıf, şişman olmayan.", ps: "نری، چاغ نه وي.", uk: "Худий, не товстий." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -208,7 +208,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", definition: ["de forte corpulence", "en surpoids", "contraire de mince"],
+    { word: "gros",     feminine: "grosse",    image: "gros.webp",     group: "Physique", definition: ["Qui a un corps fort ou beaucoup de poids."], definitionPivot: { en: "Big or heavy in body.", ar: "كبير أو ثقيل الجسم.", fa: "بزرگ یا سنگین از نظر بدن.", pt: "Grande ou pesado de corpo.", so: "Jir ahaan weyn ama culus.", ti: "ብሰብነት ዓቢ ወይ ከቢድ።", tr: "Vücutça iri veya kilolu.", ps: "په بدن کې لوی يا دروند.", uk: "Великий або важкий тілом." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", definition: ["agréable à regarder", "qui a une belle apparence", "contraire de laid"],
+    { word: "beau",     feminine: "belle",     image: "beau.webp",     group: "Physique", definition: ["Qui est agréable à regarder."], definitionPivot: { en: "Pleasant to look at.", ar: "جميل عند النظر إليه.", fa: "دیدنش خوشایند است.", pt: "Agradável de ver.", so: "Qurux badan marka la eego.", ti: "ክርአ ደስ ዝብል።", tr: "Bakması hoş olan.", ps: "چې کتل ورته خوندور وي.", uk: "Приємний на вигляд." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -342,7 +342,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", definition: ["désagréable à regarder", "qui n'est pas beau", "contraire de beau"],
+    { word: "laid",     feminine: "laide",     image: "laid.webp",     group: "Physique", definition: ["Qui n’est pas agréable à regarder."], definitionPivot: { en: "Not pleasant to look at.", ar: "غير جميل عند النظر إليه.", fa: "دیدنش خوشایند نیست.", pt: "Não agradável de ver.", so: "Aan qurux badnayn marka la eego.", ti: "ክርአ ደስ ዘይብል።", tr: "Bakması hoş olmayan.", ps: "چې کتل ورته خوندور نه وي.", uk: "Неприємний на вигляд." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -409,7 +409,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "jeune",                           image: "jeune.webp",    group: "Physique", definition: ["de peu d'âge", "qui n'est pas vieux", "contraire d'âgé"],
+    { word: "jeune",                           image: "jeune.webp",    group: "Physique", definition: ["Qui n’est pas âgé."], definitionPivot: { en: "Not old; of a low age.", ar: "غير كبير في السن.", fa: "پیر نیست؛ سن کم دارد.", pt: "Não velho; de pouca idade.", so: "Aan duq ahayn; da' yar.", ti: "ዘይኣረገ፣ ብዕድመ ንእሽቶ።", tr: "Yaşlı olmayan; genç yaşta.", ps: "زوړ نه وي؛ کم عمره.", uk: "Не старий; молодого віку." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -476,7 +476,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", definition: ["d'un âge avancé", "qui est vieux", "contraire de jeune"],
+    { word: "âgé",      feminine: "âgée",      image: "age.webp",      group: "Physique", definition: ["Qui a beaucoup d’années."], definitionPivot: { en: "Old or advanced in age.", ar: "كبير في السن.", fa: "پیر یا سن بالا.", pt: "Idoso ou de idade avançada.", so: "Da' weyn.", ti: "ብዕድመ ዓቢ።", tr: "Yaşlı veya ileri yaşta.", ps: "زوړ يا د لوړ عمر.", uk: "Старший або похилого віку." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -543,7 +543,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", definition: ["musclé, robuste", "qui a beaucoup de force", "contraire de faible"],
+    { word: "fort",     feminine: "forte",     image: "fort.webp",     group: "Physique", definition: ["Qui a beaucoup de force."], definitionPivot: { en: "With a lot of strength.", ar: "لديه قوة كبيرة.", fa: "دارای نیروی زیاد.", pt: "Com muita força.", so: "Leh xoog badan.", ti: "ብዙሕ ሓይሊ ዘለዎ።", tr: "Çok güçlü.", ps: "ډېر ځواک لرونکی.", uk: "З великою силою." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -610,7 +610,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "faible",                          image: "faible.webp",   group: "Physique", definition: ["sans force", "qui manque de vigueur", "contraire de fort"],
+    { word: "faible",                          image: "faible.webp",   group: "Physique", definition: ["Qui manque de force."], definitionPivot: { en: "With little strength.", ar: "لديه قوة قليلة.", fa: "دارای نیروی کم.", pt: "Com pouca força.", so: "Leh xoog yar.", ti: "ትሑት ሓይሊ ዘለዎ።", tr: "Az güçlü.", ps: "کمزور، لږ ځواک لرونکی.", uk: "З малою силою." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -677,7 +677,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", definition: ["aux muscles développés", "qui fait beaucoup de sport", "avec un corps athlétique"],
+    { word: "musclé",   feminine: "musclée",   image: "muscle.webp",   group: "Physique", definition: ["Qui a des muscles visibles et développés."], definitionPivot: { en: "With well-developed muscles.", ar: "لديه عضلات قوية.", fa: "دارای عضلات رشد کرده.", pt: "Com músculos desenvolvidos.", so: "Leh murqo horumarsan.", ti: "ጽቡቕ ዝዓበየ ጭዋዳ ዘለዎ።", tr: "Kasları gelişmiş.", ps: "ښه وده کړي عضلات لري.", uk: "З добре розвиненими м’язами." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -744,7 +744,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", definition: ["d'une beauté raffinée", "bien habillé avec goût", "de mise soignée et distinguée"],
+    { word: "élégant",  feminine: "élégante",  image: "elegant.webp",  group: "Physique", definition: ["Qui est bien habillé ou qui a une belle manière de se présenter."], definitionPivot: { en: "Well dressed and refined.", ar: "أنيق وحسن اللباس.", fa: "خوش‌لباس و آراسته.", pt: "Bem vestido e refinado.", so: "Si fiican u labisan oo quruxsan.", ti: "ጽቡቕ ዝተኸድነን ዝተሰርዐን።", tr: "Şık ve zarif giyimli.", ps: "ښه اغوستی او ښکلی.", uk: "Гарно одягнений і вишуканий." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -811,7 +811,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux",  definition: ["de faible longueur", "qui ne dépasse pas les oreilles", "contraire de long"],
+    { word: "court",    feminine: "courte",    image: "court.webp",    group: "Cheveux",  definition: ["Qui a une petite longueur."], definitionPivot: { en: "Not long.", ar: "ليس طويلاً.", fa: "بلند نیست.", pt: "Não comprido.", so: "Aan dheerayn.", ti: "ነዊሕ ዘይኮነ።", tr: "Uzun olmayan.", ps: "اوږد نه وي.", uk: "Не довгий." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -878,7 +878,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux",  definition: ["de grande longueur", "qui tombe sur les épaules ou plus", "contraire de court"],
+    { word: "long",     feminine: "longue",    image: "long.webp",     group: "Cheveux",  definition: ["Qui a une grande longueur."], definitionPivot: { en: "Of great length.", ar: "طويل.", fa: "دارای طول زیاد.", pt: "De grande comprimento.", so: "Dherer badan leh.", ti: "ብዙሕ ንውሓት ዘለዎ።", tr: "Uzun.", ps: "اوږد.", uk: "Довгий." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -945,7 +945,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux",  definition: ["en boucles", "qui forme des courbes régulières", "ondulé en spirales"],
+    { word: "bouclé",   feminine: "bouclée",   image: "boucle.webp",   group: "Cheveux",  definition: ["Se dit de cheveux qui forment des boucles."], definitionPivot: { en: "With curls.", ar: "له تجعيدات.", fa: "دارای فرهای مو.", pt: "Com caracóis.", so: "Leh timo duuban.", ti: "ጸጉሪ ብኩርኩር ዘለዎ።", tr: "Bukleli.", ps: "تاو تاو ويښتان لري.", uk: "З кучерями." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1012,7 +1012,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux",  definition: ["en frisures serrées", "très ondulé et serré", "plus frisé que bouclé"],
+    { word: "frisé",    feminine: "frisée",    image: "frise.webp",    group: "Cheveux",  definition: ["Se dit de cheveux avec beaucoup de petites boucles."], definitionPivot: { en: "Very curly.", ar: "مجعد جداً.", fa: "خیلی فر.", pt: "Muito encaracolado.", so: "Aad u duuban.", ti: "ኣዝዩ ዝተኾርኮረ።", tr: "Çok kıvırcık.", ps: "ډېر تاو تاو.", uk: "Дуже кучерявий." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1079,7 +1079,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux",  definition: ["aux cheveux clairs", "de couleur jaune dorée", "cheveux de couleur claire"],
+    { word: "blond",    feminine: "blonde",    image: "blond.webp",    group: "Cheveux",  definition: ["Qui a les cheveux jaunes ou très clairs."], definitionPivot: { en: "With light yellow hair.", ar: "ذو شعر أصفر فاتح.", fa: "دارای موی روشن و زرد.", pt: "Com cabelo claro e amarelo.", so: "Leh timo jaalle khafiif ah.", ti: "ብሩህ ቢጫ ጸጉሪ ዘለዎ።", tr: "Açık sarı saçlı.", ps: "روښانه ژېړ ويښتان لري.", uk: "Зі світлим жовтуватим волоссям." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1146,7 +1146,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "brun",     feminine: "brune",                                                 group: "Cheveux",  definition: ["aux cheveux brun foncé", "de couleur châtain foncé à noir", "cheveux bruns"],
+    { word: "brun",     feminine: "brune",                                                 group: "Cheveux",  definition: ["Qui a les cheveux bruns ou foncés."], definitionPivot: { en: "With brown or dark hair.", ar: "ذو شعر بني أو داكن.", fa: "دارای موی قهوه‌ای یا تیره.", pt: "Com cabelo castanho ou escuro.", so: "Leh timo bunni ama madow.", ti: "ቡናዊ ወይ ጸሊም ጸጉሪ ዘለዎ።", tr: "Kahverengi veya koyu saçlı.", ps: "نسواري يا تور ويښتان لري.", uk: "З каштановим або темним волоссям." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1213,7 +1213,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux",  definition: ["aux cheveux noir clair", "entre noir et blond", "de couleur noisette"],
+    { word: "châtain",  feminine: "châtaine",  image: "chatain.webp",  group: "Cheveux",  definition: ["Qui a les cheveux entre le blond et le brun."], definitionPivot: { en: "With light brown hair.", ar: "ذو شعر بني فاتح.", fa: "دارای موی قهوه‌ای روشن.", pt: "Com cabelo castanho claro.", so: "Leh timo bunni khafiif ah.", ti: "ብሩህ ቡናዊ ጸጉሪ ዘለዎ።", tr: "Açık kahverengi saçlı.", ps: "روښانه نسواري ويښتان لري.", uk: "Зі світло-каштановим волоссям." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1280,7 +1280,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux",  definition: ["aux cheveux roux", "de couleur orangée ou cuivrée", "cheveux de teinte rouge-orange"],
+    { word: "roux",     feminine: "rousse",    image: "roux.webp",     group: "Cheveux",  definition: ["Qui a les cheveux orange ou rouge clair."], definitionPivot: { en: "With red or orange hair.", ar: "ذو شعر أحمر أو برتقالي.", fa: "دارای موی قرمز یا نارنجی.", pt: "Com cabelo ruivo ou alaranjado.", so: "Leh timo casaan ama oranji ah.", ti: "ቀይሕ ወይ ኦራንጅ ጸጉሪ ዘለዎ።", tr: "Kızıl veya turuncu saçlı.", ps: "سور يا نارنجي ويښتان لري.", uk: "З рудим або помаранчевим волоссям." }, synonym: [],
       exampleSentences: {
         a1: [],
         a2: [

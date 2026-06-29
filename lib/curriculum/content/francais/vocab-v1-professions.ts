@@ -7,7 +7,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.webp",    feminine: "étudiante",    relatedWords: ["les études"],         definition: ["personne qui fait des études", "élève d'université ou d'école supérieure", "celui qui prépare un diplôme"], exampleSentences: {
+    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.webp",    feminine: "étudiante",    relatedWords: ["les études"],         definition: ["Personne qui suit des études dans une école, une université ou une formation."], definitionPivot: { en: "A person who studies at a school or university.", ar: "شخص يدرس في مدرسة أو جامعة.", fa: "کسی که در مدرسه یا دانشگاه درس می‌خواند.", pt: "Pessoa que estuda numa escola ou universidade.", so: "Qof wax ka barta dugsi ama jaamacad.", ti: "ኣብ ቤት ትምህርቲ ወይ ዩኒቨርሲቲ ዝመሃር ሰብ።", tr: "Okulda veya üniversitede okuyan kişi.", ps: "هغه کس چې په ښوونځي يا پوهنتون کې زده کړه کوي.", uk: "Людина, яка навчається у школі або університеті." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'étudiant a parlé avec le professeur.",
@@ -72,7 +72,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque étudiant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "professeur",   article: "le",  gender: "m", image: "professeur.webp",  feminine: "professeure",  relatedWords: ["l'enseignement"],     definition: ["personne qui enseigne", "enseignant dans une école ou un lycée", "celui qui transmet des connaissances"], exampleSentences: {
+    { word: "professeur",   article: "le",  gender: "m", image: "professeur.webp",  feminine: "professeure",  relatedWords: ["l'enseignement"],     definition: ["Personne qui enseigne une matière à des élèves."], definitionPivot: { en: "A person who teaches.", ar: "شخص يعلّم.", fa: "کسی که آموزش می‌دهد.", pt: "Pessoa que ensina.", so: "Qof wax bara.", ti: "ዝምህር ሰብ።", tr: "Ders veren kişi.", ps: "هغه کس چې درس ورکوي.", uk: "Людина, яка навчає." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le professeur a parlé avec le professeur.",
@@ -137,7 +137,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque professeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "médecin",      article: "le",  gender: "m", image: "medecin.webp",     relatedWords: ["la médecine"],        definition: ["spécialiste de la santé", "docteur qui soigne les malades", "professionnel de la médecine"], exampleSentences: {
+    { word: "médecin",      article: "le",  gender: "m", image: "medecin.webp",     relatedWords: ["la médecine"],        definition: ["Personne qui examine et soigne les malades."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé avec le professeur.",
@@ -202,7 +202,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.webp",   feminine: "infirmière",   relatedWords: ["les soins"],          definition: ["soignant en milieu médical", "assistant du médecin à l'hôpital", "professionnel qui prend soin des patients"], exampleSentences: {
+    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.webp",   feminine: "infirmière",   relatedWords: ["les soins"],          definition: ["Personne qui soigne les patients et aide le médecin."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'infirmier a parlé avec le professeur.",
@@ -267,7 +267,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.webp",   feminine: "boulangère",   relatedWords: ["la boulangerie"],     definition: ["fabricant et vendeur de pain", "artisan qui fait du pain", "personne qui travaille dans une boulangerie"], exampleSentences: {
+    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.webp",   feminine: "boulangère",   relatedWords: ["la boulangerie"],     definition: ["Personne qui fabrique et vend du pain."], definitionPivot: { en: "A person who makes and sells bread.", ar: "شخص يصنع ويبيع الخبز.", fa: "کسی که نان می‌پزد و می‌فروشد.", pt: "Pessoa que faz e vende pão.", so: "Qof sameeya oo iibiya rooti.", ti: "እንጀራ ዝሰርሕን ዝሸይጥን ሰብ።", tr: "Ekmek yapan ve satan kişi.", ps: "هغه کس چې ډوډۍ پخوي او پلوري.", uk: "Людина, яка пече і продає хліб." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le boulanger a parlé avec le professeur.",
@@ -332,7 +332,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque boulanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.webp",     feminine: "vendeuse",     relatedWords: ["la vente"],           definition: ["personne qui vend des produits", "employé de magasin", "celui qui aide les clients à choisir"], exampleSentences: {
+    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.webp",     feminine: "vendeuse",     relatedWords: ["la vente"],           definition: ["Personne qui vend des produits dans un magasin."], definitionPivot: { en: "A person who sells products.", ar: "شخص يبيع المنتجات.", fa: "کسی که کالا می‌فروشد.", pt: "Pessoa que vende produtos.", so: "Qof alaab iibiya.", ti: "ንብረት ዝሸይጥ ሰብ።", tr: "Ürün satan kişi.", ps: "هغه کس چې توکي پلوري.", uk: "Людина, яка продає товари." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le vendeur a parlé avec le professeur.",
@@ -397,7 +397,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque vendeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.webp",   feminine: "cuisinière",   relatedWords: ["la cuisine"],         definition: ["personne qui prépare les repas", "professionnel de la cuisine", "chef qui travaille dans un restaurant"], exampleSentences: {
+    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.webp",   feminine: "cuisinière",   relatedWords: ["la cuisine"],         definition: ["Personne qui prépare les repas dans un restaurant, une cantine ou une cuisine."], definitionPivot: { en: "A person who prepares meals.", ar: "شخص يحضّر الطعام.", fa: "کسی که غذا آماده می‌کند.", pt: "Pessoa que prepara refeições.", so: "Qof cunto diyaariya.", ti: "መግቢ ዘዳሉ ሰብ።", tr: "Yemek hazırlayan kişi.", ps: "هغه کس چې خواړه چمتو کوي.", uk: "Людина, яка готує їжу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le cuisinier a parlé avec le professeur.",
@@ -462,7 +462,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque cuisinier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.webp",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"],       definition: ["technicien spécialisé", "expert en sciences appliquées", "professionnel qui résout des problèmes techniques"], exampleSentences: {
+    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.webp",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"],       definition: ["Personne qui conçoit, construit ou améliore des machines, des bâtiments, des systèmes ou des projets techniques."], definitionPivot: { en: "A technical specialist who solves practical problems.", ar: "مختص تقني يحل مشكلات عملية.", fa: "متخصص فنی که مشکلات عملی را حل می‌کند.", pt: "Especialista técnico que resolve problemas práticos.", so: "Khabiir farsamo oo xaliya dhibaatooyin.", ti: "ተክኒካዊ ሽግራት ዝፈትሕ ሰብ ሞያ።", tr: "Teknik problemleri çözen uzman.", ps: "تخنيکي متخصص چې عملي ستونزې حل کوي.", uk: "Технічний фахівець, який розв’язує практичні проблеми." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'ingénieur a parlé avec le professeur.",
@@ -527,7 +527,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque ingénieur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.webp",  feminine: "pharmacienne", relatedWords: ["la pharmacie"],       definition: ["professionnel de la pharmacie", "personne qui vend des médicaments", "expert en médicaments et soins"], exampleSentences: {
+    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.webp",  feminine: "pharmacienne", relatedWords: ["la pharmacie"],       definition: ["Personne qui vend et conseille des médicaments dans une pharmacie."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le pharmacien a parlé avec le professeur.",
@@ -592,7 +592,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serveur",      article: "un",  gender: "m", image: "serveur.webp",     feminine: "serveuse",     relatedWords: ["le service"],         definition: ["personne qui sert les clients au restaurant", "employé de salle dans un café ou restaurant", "celui qui apporte les plats aux tables"], exampleSentences: {
+    { word: "serveur",      article: "un",  gender: "m", image: "serveur.webp",     feminine: "serveuse",     relatedWords: ["le service"],         definition: ["Personne qui sert les clients dans un restaurant, un café ou un bar."], definitionPivot: { en: "A person who serves customers in a restaurant or café.", ar: "شخص يخدم الزبائن في مطعم أو مقهى.", fa: "کسی که در رستوران یا کافه به مشتریان خدمت می‌کند.", pt: "Pessoa que atende clientes num restaurante ou café.", so: "Qof macaamiisha uga adeega makhaayad ama kafee.", ti: "ኣብ ምግብ ቤት ወይ ካፈ ንዓማዊል ዘገልግል ሰብ።", tr: "Restoran veya kafede müşterilere hizmet eden kişi.", ps: "هغه کس چې په رستورانت يا کافه کې پېرودونکو ته خدمت کوي.", uk: "Людина, яка обслуговує клієнтів у ресторані або кафе." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le serveur a parlé avec le professeur.",
@@ -657,7 +657,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque serveur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricien", article: "un",  gender: "m", image: "electricien.webp", feminine: "électricienne", relatedWords: ["l'électricité"],      definition: ["technicien spécialisé en installations électriques", "professionnel qui installe et répare les circuits électriques", "artisan qui intervient sur les réseaux électriques"], exampleSentences: {
+    { word: "électricien", article: "un",  gender: "m", image: "electricien.webp", feminine: "électricienne", relatedWords: ["l'électricité"],      definition: ["Personne qui installe ou répare l’électricité."], definitionPivot: { en: "A person who installs or repairs electricity.", ar: "شخص يركّب أو يصلح الكهرباء.", fa: "کسی که برق را نصب یا تعمیر می‌کند.", pt: "Pessoa que instala ou repara eletricidade.", so: "Qof rakiba ama dayactira koronto.", ti: "ኤሌክትሪክ ዝተክል ወይ ዝጽግን ሰብ።", tr: "Elektrik tesisatı kuran veya tamir eden kişi.", ps: "هغه کس چې برېښنا نصب يا ترميموي.", uk: "Людина, яка встановлює або ремонтує електрику." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'électricien a parlé avec le professeur.",
@@ -722,7 +722,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque électricien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plombier",    article: "un",  gender: "m", image: "plombier.webp",    feminine: "plombière",    relatedWords: ["la plomberie"],       definition: ["technicien spécialisé en installations de plomberie", "professionnel qui répare les canalisations et robinets", "artisan qui intervient sur les réseaux d'eau"], exampleSentences: {
+    { word: "plombier",    article: "un",  gender: "m", image: "plombier.webp",    feminine: "plombière",    relatedWords: ["la plomberie"],       definition: ["Personne qui installe ou répare les tuyaux, les robinets et les sanitaires."], definitionPivot: { en: "A person who installs or repairs water pipes.", ar: "شخص يركّب أو يصلح أنابيب الماء.", fa: "کسی که لوله‌های آب را نصب یا تعمیر می‌کند.", pt: "Pessoa que instala ou repara canalizações.", so: "Qof rakiba ama dayactira tuubooyinka biyaha.", ti: "ቱቦታት ማይ ዝተክል ወይ ዝጽግን ሰብ።", tr: "Su borularını kuran veya tamir eden kişi.", ps: "هغه کس چې د اوبو نلونه نصب يا ترميموي.", uk: "Людина, яка встановлює або ремонтує водопровід." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le plombier a parlé avec le professeur.",
@@ -787,7 +787,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque plombier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.webp",  relatedWords: ["le secrétariat"],     definition: ["assistant administratif", "personne qui gère les tâches de bureau", "employé qui organise les rendez-vous"], exampleSentences: {
+    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.webp",  relatedWords: ["le secrétariat"],     definition: ["Personne qui accueille, répond au téléphone, écrit des documents et organise des rendez-vous."], definitionPivot: { en: "A person who does office and administrative work.", ar: "شخص يقوم بأعمال مكتبية وإدارية.", fa: "کسی که کارهای اداری و دفتری انجام می‌دهد.", pt: "Pessoa que faz trabalho de escritório e administração.", so: "Qof qabta shaqo xafiis iyo maamul.", ti: "ስራሕ ቢሮን ምምሕዳርን ዝገብር ሰብ።", tr: "Ofis ve idari işler yapan kişi.", ps: "هغه کس چې د دفتر او ادارې کار کوي.", uk: "Людина, яка виконує офісну та адміністративну роботу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le secrétaire a parlé avec le professeur.",

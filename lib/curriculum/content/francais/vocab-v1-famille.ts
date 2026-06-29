@@ -6,7 +6,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
   title: "La famille",
   section: "V1",
   words: [
-    { word: "père",         article: "le",  gender: "m", image: "pere.webp",          definition: ["le parent masculin", "l'homme qui a des enfants", "le papa"], exampleSentences: {
+    { word: "père",         article: "le",  gender: "m", image: "pere.webp",          definition: ["Homme qui a un ou plusieurs enfants."], definitionPivot: { en: "The male parent.", ar: "الوالد الذكر.", fa: "والد مرد.", pt: "O progenitor masculino.", so: "Waalidka labka ah.", ti: "ወላዲ ወዲ።", tr: "Erkek ebeveyn.", ps: "نارینه مور او پلار.", uk: "Чоловік-батько." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le père a parlé avec le professeur.",
@@ -71,7 +71,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque père est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mère",         article: "la",  gender: "f", image: "mere.webp",          definition: ["le parent féminin", "la femme qui a des enfants", "la maman"], exampleSentences: {
+    { word: "mère",         article: "la",  gender: "f", image: "mere.webp",          definition: ["Femme qui a un ou plusieurs enfants."], definitionPivot: { en: "The female parent.", ar: "الوالدة الأنثى.", fa: "والد زن.", pt: "A progenitora feminina.", so: "Waalidka dhedigga ah.", ti: "ወላዲት ኣደ።", tr: "Kadın ebeveyn.", ps: "ښځینه مور او پلار.", uk: "Жінка-мати." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la mère a parlé avec le professeur.",
@@ -136,7 +136,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque mère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fils",         article: "le",  gender: "m", image: "fils.webp",          definition: ["l'enfant masculin", "le garçon par rapport à ses parents", "le petit garçon d'une famille"], exampleSentences: {
+    { word: "fils",         article: "le",  gender: "m", image: "fils.webp",          definition: ["Garçon ou homme par rapport à son père ou à sa mère."], definitionPivot: { en: "A male child in a family.", ar: "طفل ذكر في العائلة.", fa: "فرزند پسر در خانواده.", pt: "Um filho menino na família.", so: "Wiil ka tirsan qoyska.", ti: "ወዲ ኣብ ስድራ።", tr: "Ailede erkek çocuk.", ps: "په کورنۍ کې زوی.", uk: "Син у сім’ї." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le fils a parlé avec le professeur.",
@@ -201,7 +201,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque fils est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fille",        article: "la",  gender: "f", image: "fille.webp",         definition: ["l'enfant féminin", "la petite fille par rapport à ses parents", "la petite fille d'une famille"], exampleSentences: {
+    { word: "fille",        article: "la",  gender: "f", image: "fille.webp",         definition: ["Fille ou femme par rapport à son père ou à sa mère."], definitionPivot: { en: "A female child in a family.", ar: "طفلة أنثى في العائلة.", fa: "فرزند دختر در خانواده.", pt: "Uma filha menina na família.", so: "Gabar ka tirsan qoyska.", ti: "ጓል ኣብ ስድራ።", tr: "Ailede kız çocuk.", ps: "په کورنۍ کې لور.", uk: "Донька у сім’ї." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la fille a parlé avec le professeur.",
@@ -266,7 +266,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque fille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frère",        article: "le",  gender: "m", image: "frere.webp",         definition: ["le fils des mêmes parents", "le garçon qui a les mêmes parents que vous", "celui qui partage vos parents"], exampleSentences: {
+    { word: "frère",        article: "le",  gender: "m", image: "frere.webp",         definition: ["Garçon ou homme qui a les mêmes parents qu’une autre personne."], definitionPivot: { en: "A boy or man with the same parents.", ar: "ولد أو رجل له نفس الوالدين.", fa: "پسر یا مردی با همان پدر و مادر.", pt: "Um rapaz ou homem com os mesmos pais.", so: "Wiil ama nin aad waalid wadaagtaan.", ti: "ሓው፣ ተመሳሳሊ ወለዲ ዘለዎ።", tr: "Aynı anne babaya sahip erkek.", ps: "هلک يا سړی چې هماغه مور او پلار لري.", uk: "Хлопець або чоловік з тими самими батьками." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le frère a parlé avec le professeur.",
@@ -331,7 +331,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque frère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sœur",         article: "la",  gender: "f", image: "soeur.webp",         definition: ["la fille des mêmes parents", "la fille qui a les mêmes parents que vous", "celle qui partage vos parents"], exampleSentences: {
+    { word: "sœur",         article: "la",  gender: "f", image: "soeur.webp",         definition: ["Fille ou femme qui a les mêmes parents qu’une autre personne."], definitionPivot: { en: "A girl or woman with the same parents.", ar: "بنت أو امرأة لها نفس الوالدين.", fa: "دختر یا زنی با همان پدر و مادر.", pt: "Uma rapariga ou mulher com os mesmos pais.", so: "Gabar ama haweeney aad waalid wadaagtaan.", ti: "ሓብቲ፣ ተመሳሳሊ ወለዲ ዘለዋ።", tr: "Aynı anne babaya sahip kız.", ps: "نجلۍ يا ښځه چې هماغه مور او پلار لري.", uk: "Дівчина або жінка з тими самими батьками." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la sœur a parlé avec le professeur.",
@@ -396,7 +396,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque sœur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grand-père",   article: "le",  gender: "m", image: "grand-pere.webp",    definition: ["le père du père ou de la mère", "le papy", "l'homme de la génération de vos parents' parents"], exampleSentences: {
+    { word: "grand-père",   article: "le",  gender: "m", image: "grand-pere.webp",    definition: ["Père du père ou de la mère."], definitionPivot: { en: "The father of a parent.", ar: "والد الأب أو الأم.", fa: "پدرِ پدر یا مادر.", pt: "O pai do pai ou da mãe.", so: "Aabbaha aabbaha ama hooyada.", ti: "ኣቦ ናይ ኣቦ ወይ ኣደ።", tr: "Anne veya babanın babası.", ps: "د پلار يا مور پلار.", uk: "Батько тата або мами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le grand-père a parlé avec le professeur.",
@@ -461,7 +461,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque grand-père est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grand-mère",   article: "la",  gender: "f", image: "grand-mere.webp",    definition: ["la mère du père ou de la mère", "la mamie", "la femme de la génération de vos parents' parents"], exampleSentences: {
+    { word: "grand-mère",   article: "la",  gender: "f", image: "grand-mere.webp",    definition: ["Mère du père ou de la mère."], definitionPivot: { en: "The mother of a parent.", ar: "والدة الأب أو الأم.", fa: "مادرِ پدر یا مادر.", pt: "A mãe do pai ou da mãe.", so: "Hooyada aabbaha ama hooyada.", ti: "ኣደ ናይ ኣቦ ወይ ኣደ።", tr: "Anne veya babanın annesi.", ps: "د پلار يا مور مور.", uk: "Мати тата або мами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la grand-mère a parlé avec le professeur.",
@@ -526,7 +526,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque grand-mère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "petit-fils",   article: "le",  gender: "m", image: "petit-fils.webp",    definition: ["le fils du fils ou de la fille", "le garçon par rapport à ses grands-parents", "l'enfant masculin de vos enfants"], exampleSentences: {
+    { word: "petit-fils",   article: "le",  gender: "m", image: "petit-fils.webp",    definition: ["Fils du fils ou de la fille."], definitionPivot: { en: "The son of your child.", ar: "ابن ابنك أو ابنتك.", fa: "پسرِ فرزند شما.", pt: "O filho do seu filho ou da sua filha.", so: "Wiilka ilmahaaga.", ti: "ወዲ ናይ ውላድካ።", tr: "Çocuğunuzun oğlu.", ps: "ستاسو د اولاد زوی.", uk: "Син вашої дитини." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le petit-fils a parlé avec le professeur.",
@@ -591,7 +591,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque petit-fils est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "petite-fille", article: "la",  gender: "f", image: "petite-fille.webp",  definition: ["la fille du fils ou de la fille", "la fille par rapport à ses grands-parents", "l'enfant féminin de vos enfants"], exampleSentences: {
+    { word: "petite-fille", article: "la",  gender: "f", image: "petite-fille.webp",  definition: ["Fille du fils ou de la fille."], definitionPivot: { en: "The daughter of your child.", ar: "ابنة ابنك أو ابنتك.", fa: "دخترِ فرزند شما.", pt: "A filha do seu filho ou da sua filha.", so: "Gabadha ilmahaaga.", ti: "ጓል ናይ ውላድካ።", tr: "Çocuğunuzun kızı.", ps: "ستاسو د اولاد لور.", uk: "Донька вашої дитини." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la petite-fille a parlé avec le professeur.",
@@ -656,7 +656,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque petite-fille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oncle",        article: "l'",  gender: "m", image: "oncle.webp",         definition: ["le frère du père ou de la mère", "le mari de la tante", "l'homme qui est frère de votre parent"], exampleSentences: {
+    { word: "oncle",        article: "l'",  gender: "m", image: "oncle.webp",         definition: ["Frère du père ou de la mère."], definitionPivot: { en: "The brother of a parent.", ar: "أخ الأب أو الأم.", fa: "برادرِ پدر یا مادر.", pt: "O irmão do pai ou da mãe.", so: "Walaalka aabbaha ama hooyada.", ti: "ሓው ናይ ኣቦ ወይ ኣደ።", tr: "Anne veya babanın erkek kardeşi.", ps: "د پلار يا مور ورور.", uk: "Брат тата або мами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, l'oncle a parlé avec le professeur.",
@@ -721,7 +721,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque oncle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tante",        article: "la",  gender: "f", image: "tante.webp",         definition: ["la sœur du père ou de la mère", "la femme de l'oncle", "la femme qui est sœur de votre parent"], exampleSentences: {
+    { word: "tante",        article: "la",  gender: "f", image: "tante.webp",         definition: ["Sœur du père ou de la mère."], definitionPivot: { en: "The sister of a parent.", ar: "أخت الأب أو الأم.", fa: "خواهرِ پدر یا مادر.", pt: "A irmã do pai ou da mãe.", so: "Walaasha aabbaha ama hooyada.", ti: "ሓብቲ ናይ ኣቦ ወይ ኣደ።", tr: "Anne veya babanın kız kardeşi.", ps: "د پلار يا مور خور.", uk: "Сестра тата або мами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la tante a parlé avec le professeur.",
@@ -786,7 +786,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque tante est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cousin",       article: "le",  gender: "m", image: "cousin.webp",        definition: ["le fils de l'oncle ou de la tante", "le garçon dont les parents sont vos oncle ou tante", "l'enfant masculin de vos oncles ou tantes"], exampleSentences: {
+    { word: "cousin",       article: "le",  gender: "m", image: "cousin.webp",        definition: ["Fils de l’oncle ou de la tante."], definitionPivot: { en: "The son of an uncle or aunt.", ar: "ابن العم أو الخال أو العمة أو الخالة.", fa: "پسرِ عمو، دایی، عمه یا خاله.", pt: "O filho de um tio ou de uma tia.", so: "Wiilka adeer, abti ama eeddo.", ti: "ወዲ ናይ ሓው/ሓብቲ ወላዲ።", tr: "Amca, dayı, hala veya teyzenin oğlu.", ps: "د تره، ماما، عمه يا خاله زوی.", uk: "Син дядька або тітки." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le cousin a parlé avec le professeur.",
@@ -851,7 +851,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque cousin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cousine",      article: "la",  gender: "f", image: "cousine.webp",       definition: ["la fille de l'oncle ou de la tante", "la fille dont les parents sont vos oncle ou tante", "l'enfant féminin de vos oncles ou tantes"], exampleSentences: {
+    { word: "cousine",      article: "la",  gender: "f", image: "cousine.webp",       definition: ["Fille de l’oncle ou de la tante."], definitionPivot: { en: "The daughter of an uncle or aunt.", ar: "ابنة العم أو الخال أو العمة أو الخالة.", fa: "دخترِ عمو، دایی، عمه یا خاله.", pt: "A filha de um tio ou de uma tia.", so: "Gabadha adeer, abti ama eeddo.", ti: "ጓል ናይ ሓው/ሓብቲ ወላዲ።", tr: "Amca, dayı, hala veya teyzenin kızı.", ps: "د تره، ماما، عمه يا خاله لور.", uk: "Донька дядька або тітки." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la cousine a parlé avec le professeur.",
@@ -916,7 +916,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque cousine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "neveu",        article: "le",  gender: "m", image: "neveu.webp",         definition: ["le fils du frère ou de la sœur", "le garçon dont vous êtes l'oncle ou la tante", "l'enfant masculin de vos frères ou sœurs"], exampleSentences: {
+    { word: "neveu",        article: "le",  gender: "m", image: "neveu.webp",         definition: ["Fils du frère ou de la sœur."], definitionPivot: { en: "The son of a brother or sister.", ar: "ابن الأخ أو الأخت.", fa: "پسرِ برادر یا خواهر.", pt: "O filho de um irmão ou de uma irmã.", so: "Wiilka walaalkaa ama walaashaa.", ti: "ወዲ ናይ ሓውካ ወይ ሓብትኻ።", tr: "Erkek veya kız kardeşin oğlu.", ps: "د ورور يا خور زوی.", uk: "Син брата або сестри." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le neveu a parlé avec le professeur.",
@@ -981,7 +981,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
           "Puisque neveu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nièce",        article: "la",  gender: "f", image: "niece.webp",         definition: ["la fille du frère ou de la sœur", "la fille dont vous êtes l'oncle ou la tante", "l'enfant féminin de vos frères ou sœurs"], exampleSentences: {
+    { word: "nièce",        article: "la",  gender: "f", image: "niece.webp",         definition: ["Fille du frère ou de la sœur."], definitionPivot: { en: "The daughter of a brother or sister.", ar: "ابنة الأخ أو الأخت.", fa: "دخترِ برادر یا خواهر.", pt: "A filha de um irmão ou de uma irmã.", so: "Gabadha walaalkaa ama walaashaa.", ti: "ጓል ናይ ሓውካ ወይ ሓብትኻ።", tr: "Erkek veya kız kardeşin kızı.", ps: "د ورور يا خور لور.", uk: "Донька брата або сестри." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, la nièce a parlé avec le professeur.",

@@ -6,7 +6,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
   title: "Les recettes",
   section: "V7",
   words: [
-    { word: "ingrédient",  image: "ingredient.webp", article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "élément de base d'une recette" , exampleSentences: {
+    { word: "ingrédient",  image: "ingredient.webp", article: "l'",  gender: "m", group: "Les ingrédients de base", definition: ["Aliment utilisé pour préparer une recette."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ingrédient au marché.",
@@ -71,7 +71,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ingrédient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "farine",      image: "farine.webp",     article: "la",  gender: "f", group: "Les ingrédients de base", definition: "poudre de céréale pour faire la pâte" , exampleSentences: {
+    { word: "farine",      image: "farine.webp",     article: "la",  gender: "f", group: "Les ingrédients de base", definition: ["Poudre blanche utilisée pour faire du pain ou des gâteaux."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une farine au marché.",
@@ -136,7 +136,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque farine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lait",        image: "lait.webp",       article: "le",  gender: "m", group: "Les ingrédients de base", definition: "liquide blanc produit par les vaches" , exampleSentences: {
+    { word: "lait",        image: "lait.webp",       article: "le",  gender: "m", group: "Les ingrédients de base", definition: ["Boisson blanche qui vient souvent de la vache."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un lait au marché.",
@@ -201,7 +201,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque lait est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "œuf",         image: "oeuf.webp",       article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "ingrédient pondu par la poule" , exampleSentences: {
+    { word: "œuf",         image: "oeuf.webp",       article: "l'",  gender: "m", group: "Les ingrédients de base", definition: ["Aliment avec une coquille, souvent utilisé en cuisine."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un œuf au marché.",
@@ -266,7 +266,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque œuf est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beurre",      image: "beurre.webp",     article: "le",  gender: "m", group: "Les ingrédients de base", definition: "matière grasse faite de crème de lait" , exampleSentences: {
+    { word: "beurre",      image: "beurre.webp",     article: "le",  gender: "m", group: "Les ingrédients de base", definition: ["Produit gras fait avec du lait."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un beurre au marché.",
@@ -331,7 +331,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque beurre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sucre",       image: "sucre.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "ingrédient sucrant blanc ou roux" , exampleSentences: {
+    { word: "sucre",       image: "sucre.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: ["Produit blanc ou brun qui donne un goût sucré."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sucre au marché.",
@@ -396,7 +396,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sucre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sel",         image: "sel.webp",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: "minéral blanc pour assaisonner" , exampleSentences: {
+    { word: "sel",         image: "sel.webp",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: ["Produit blanc qui donne du goût salé."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sel au marché.",
@@ -461,7 +461,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poivre",      image: "poivre.webp",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice noire ou blanche très piquante" , exampleSentences: {
+    { word: "poivre",      image: "poivre.webp",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: ["Épice souvent noire qui donne du goût."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un poivre au marché.",
@@ -526,7 +526,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poivre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épice",       image: "epice.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "substance aromatique pour parfumer les plats" , exampleSentences: {
+    { word: "épice",       image: "epice.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: ["Produit qui donne du goût aux plats."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une épice au marché.",
@@ -591,7 +591,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque épice est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "curry",       image: "curry.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "mélange d'épices aromatiques d'origine indienne" , exampleSentences: {
+    { word: "curry",       image: "curry.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: ["Mélange d’épices souvent jaune."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un curry au marché.",
@@ -656,7 +656,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque curry est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paprika",     image: "paprika.webp",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice rouge à base de poivron séché" , exampleSentences: {
+    { word: "paprika",     image: "paprika.webp",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: ["Épice rouge douce ou forte."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un paprika au marché.",
@@ -721,7 +721,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque paprika est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "herbe",       image: "herbe.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "plante aromatique utilisée en cuisine" , exampleSentences: {
+    { word: "herbe",       image: "herbe.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: ["Plante utilisée pour donner du goût."], definitionPivot: { en: "A food item used in a recipe.", ar: "عنصر غذائي يُستعمل في وصفة.", fa: "ماده غذایی که در دستور غذا استفاده می‌شود.", pt: "Ingrediente usado numa receita.", so: "Wax cunto ah oo lagu isticmaalo cunto-karis.", ti: "ኣብ መግቢ ኣሰራርሓ ዝጥቀሙሉ ነገር።", tr: "Tarifte kullanılan malzeme.", ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.", uk: "Інгредієнт для рецепта." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une herbe au marché.",
@@ -786,7 +786,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque herbe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ustensile",   image: "ustensile.webp",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: "outil de cuisine comme une casserole ou louche" , exampleSentences: {
+    { word: "ustensile",   image: "ustensile.webp",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: ["Objet utilisé pour cuisiner ou manger."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ustensile au marché.",
@@ -851,7 +851,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ustensile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casserole",   image: "casserole.webp",  article: "la",  gender: "f", group: "Les ustensiles",          definition: "récipient à bord haut pour cuire sur le feu" , exampleSentences: {
+    { word: "casserole",   image: "casserole.webp",  article: "la",  gender: "f", group: "Les ustensiles",          definition: ["Récipient pour cuire des aliments avec de l’eau ou une sauce."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une casserole au marché.",
@@ -916,7 +916,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque casserole est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poêle",       image: "poele.webp",      article: "la",  gender: "f", group: "Les ustensiles",          definition: "ustensile plat avec manche pour faire revenir" , exampleSentences: {
+    { word: "poêle",       image: "poele.webp",      article: "la",  gender: "f", group: "Les ustensiles",          definition: ["Objet plat pour cuire ou frire les aliments."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une poêle au marché.",
@@ -981,7 +981,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "planche",     image: "planche.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "surface de bois pour couper les aliments" , exampleSentences: {
+    { word: "planche",     image: "planche.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: ["Objet plat pour couper les aliments."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une planche au marché.",
@@ -1046,7 +1046,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque planche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rouleau",     image: "rouleau.webp",    article: "le",  gender: "m", group: "Les ustensiles",          definition: "outil cylindrique pour étaler la pâte" , exampleSentences: {
+    { word: "rouleau",     image: "rouleau.webp",    article: "le",  gender: "m", group: "Les ustensiles",          definition: ["Objet pour étaler la pâte."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un rouleau au marché.",
@@ -1111,7 +1111,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque rouleau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doseur",      image: "doseur.webp",     article: "le",  gender: "m", group: "Les ustensiles",          definition: "récipient gradué pour mesurer les ingrédients" , exampleSentences: {
+    { word: "doseur",      image: "doseur.webp",     article: "le",  gender: "m", group: "Les ustensiles",          definition: ["Objet pour mesurer une quantité."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un doseur au marché.",
@@ -1176,7 +1176,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque doseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spatule",     image: "spatule.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "outil plat pour retourner les aliments" , exampleSentences: {
+    { word: "spatule",     image: "spatule.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: ["Objet plat pour mélanger ou retourner les aliments."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une spatule au marché.",
@@ -1241,7 +1241,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque spatule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "louche",      image: "louche.webp",     article: "la",  gender: "f", group: "Les ustensiles",          definition: "grande cuillère creuse pour servir les soupes" , exampleSentences: {
+    { word: "louche",      image: "louche.webp",     article: "la",  gender: "f", group: "Les ustensiles",          definition: ["Grande cuillère pour servir la soupe ou la sauce."], definitionPivot: { en: "A tool used in the kitchen.", ar: "أداة تُستعمل في المطبخ.", fa: "وسیله‌ای که در آشپزخانه استفاده می‌شود.", pt: "Utensílio usado na cozinha.", so: "Qalab jikada lagu isticmaalo.", ti: "ኣብ ክሽነ ዝጥቀሙሉ መሳርሒ።", tr: "Mutfakta kullanılan araç.", ps: "هغه اله چې په پخلنځي کې کارېږي.", uk: "Інструмент для кухні." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une louche au marché.",

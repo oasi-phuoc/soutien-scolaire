@@ -6,7 +6,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
   title: "L'espace culturel",
   section: "V9",
   words: [
-    { word: "théâtre", image: "theatre.webp",    article: "le",  gender: "m", definition: "lieu pour les représentations scéniques" , exampleSentences: {
+    { word: "théâtre", image: "theatre.webp",    article: "le",  gender: "m", definition: ["Lieu où l’on regarde des pièces jouées par des acteurs."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le théâtre sur le plan.",
@@ -71,7 +71,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque théâtre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cinéma", image: "cinema.webp",     article: "le",  gender: "m", definition: "lieu pour regarder des films" , exampleSentences: {
+    { word: "cinéma", image: "cinema.webp",     article: "le",  gender: "m", definition: ["Lieu où l’on regarde des films."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le cinéma sur le plan.",
@@ -136,7 +136,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque cinéma est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musée", image: "musee.webp",      article: "le",  gender: "m", definition: "lieu pour exposer des œuvres d'art" , exampleSentences: {
+    { word: "musée", image: "musee.webp",      article: "le",  gender: "m", definition: ["Lieu où l’on voit des objets, des œuvres d’art ou des expositions."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le musée sur le plan.",
@@ -201,7 +201,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concert", image: "concert.webp",    article: "le",  gender: "m", definition: "spectacle musical en direct" , exampleSentences: {
+    { word: "concert", image: "concert.webp",    article: "le",  gender: "m", definition: ["Spectacle musical avec des chanteurs ou des musiciens."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le concert sur le plan.",
@@ -266,7 +266,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque concert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "exposition", image: "exposition.webp", article: "l'",  gender: "f", definition: "présentation publique d'œuvres ou objets" , exampleSentences: {
+    { word: "exposition", image: "exposition.webp", article: "l'",  gender: "f", definition: ["Présentation d’œuvres, d’objets ou d’informations au public."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'exposition sur le plan.",
@@ -331,7 +331,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque exposition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spectacle", image: "spectacle.webp",  article: "le",  gender: "m", definition: "représentation artistique devant un public" , exampleSentences: {
+    { word: "spectacle", image: "spectacle.webp",  article: "le",  gender: "m", definition: ["Événement que l’on regarde, avec des artistes."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le spectacle sur le plan.",
@@ -396,7 +396,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque spectacle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chanteur", image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", definition: "artiste qui chante" , exampleSentences: {
+    { word: "chanteur", image: "chanteur.webp",   article: "le",  gender: "m", feminine: "chanteuse", definition: ["Personne qui chante."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le chanteur sur le plan.",
@@ -461,7 +461,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque chanteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "acteur", image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice",   definition: "artiste qui joue un rôle" , exampleSentences: {
+    { word: "acteur", image: "acteur.webp",     article: "l'",  gender: "m", feminine: "actrice",   definition: ["Personne qui joue un rôle dans un film ou au théâtre."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'acteur sur le plan.",
@@ -526,7 +526,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque acteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "musicien", image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne",definition: "artiste qui joue d'un instrument" , exampleSentences: {
+    { word: "musicien", image: "musicien.webp",   article: "le",  gender: "m", feminine: "musicienne",definition: ["Personne qui joue d’un instrument ou fait de la musique."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le musicien sur le plan.",
@@ -591,7 +591,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque musicien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "peintre", image: "peintre.webp",    article: "le",  gender: "m", definition: "artiste qui crée des tableaux" , exampleSentences: {
+    { word: "peintre", image: "peintre.webp",    article: "le",  gender: "m", definition: ["Personne qui fait des tableaux ou qui peint."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le peintre sur le plan.",
@@ -656,7 +656,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque peintre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "danseur", image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse",  definition: "artiste qui pratique la danse" , exampleSentences: {
+    { word: "danseur", image: "danseur.webp",    article: "le",  gender: "m", feminine: "danseuse",  definition: ["Personne qui danse."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le danseur sur le plan.",
@@ -721,7 +721,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque danseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.webp",     article: "le",  gender: "m", definition: "titre d'entrée pour un spectacle ou musée" , exampleSentences: {
+    { word: "billet", image: "billet.webp",     article: "le",  gender: "m", definition: ["Document qui permet de prendre un transport ou d’entrer à un spectacle."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le billet sur le plan.",
@@ -786,7 +786,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque billet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle", image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", definition: "espace où se déroule un spectacle" , exampleSentences: {
+    { word: "salle", image: "/vocab/images/V5/salle.webp",      article: "la",  gender: "f", definition: ["Pièce ou grand espace où se déroule une activité."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la salle sur le plan.",
@@ -851,7 +851,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scène", image: "scene.webp",      article: "la",  gender: "f", definition: "plateforme où se produit l'artiste" , exampleSentences: {
+    { word: "scène", image: "scene.webp",      article: "la",  gender: "f", definition: ["Endroit où les artistes jouent devant le public."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la scène sur le plan.",
@@ -916,7 +916,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
           "Puisque scène est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "festival", image: "festival.webp",   article: "le",  gender: "m", definition: "événement culturel regroupant plusieurs spectacles" , exampleSentences: {
+    { word: "festival", image: "festival.webp",   article: "le",  gender: "m", definition: ["Grande fête avec plusieurs spectacles, concerts ou activités."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le festival sur le plan.",

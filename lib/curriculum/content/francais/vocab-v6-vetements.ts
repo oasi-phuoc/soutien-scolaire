@@ -6,7 +6,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
   title: "Les vêtements",
   section: "V6",
   words: [
-    { word: "t-shirt", article: "le", gender: "m", image: "t-shirt.webp", definition: "haut à manches courtes en coton" , exampleSentences: {
+    { word: "t-shirt", article: "le", gender: "m", image: "t-shirt.webp", definition: ["Vêtement léger pour le haut du corps, avec des manches courtes."], definitionPivot: { en: "A short-sleeved cotton top.", ar: "قميص قطني بأكمام قصيرة.", fa: "بالاپوش نخی آستین کوتاه.", pt: "Camisola de algodão de manga curta.", so: "Shaati cudbi ah oo gacmo gaaban leh.", ti: "ሓጺር እጅገ ዘለዎ ናይ ጡጥ ላዕለዋይ ክዳን።", tr: "Kısa kollu pamuklu üst.", ps: "لنډ لستوڼی پنبه يي کميس.", uk: "Бавовняна футболка з короткими рукавами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le t-shirt pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque t-shirt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chemise", article: "la", gender: "f", image: "chemise.webp", definition: "haut boutonné à manches longues" , exampleSentences: {
+    { word: "chemise", article: "la", gender: "f", image: "chemise.webp", definition: ["Vêtement avec un col et des boutons."], definitionPivot: { en: "A buttoned shirt with long sleeves.", ar: "قميص بأزرار وأكمام طويلة.", fa: "پیراهن دکمه‌دار آستین بلند.", pt: "Camisa com botões e mangas compridas.", so: "Shaati badhanno iyo gacmo dheer leh.", ti: "መልጎም ዘለዎ ነዊሕ እጅገ ክዳን።", tr: "Düğmeli uzun kollu gömlek.", ps: "د تڼيو اوږد لستوڼي کميس.", uk: "Сорочка з ґудзиками й довгими рукавами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chemise pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque chemise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pull", article: "le", gender: "m", image: "pull.webp", definition: "haut chaud en laine ou coton épais" , exampleSentences: {
+    { word: "pull", article: "le", gender: "m", image: "pull.webp", definition: ["Vêtement chaud que l’on porte sur le haut du corps."], definitionPivot: { en: "A warm top made of wool or thick cotton.", ar: "لباس علوي دافئ من صوف أو قطن سميك.", fa: "لباس گرم از پشم یا پنبه ضخیم.", pt: "Camisola quente de lã ou algodão grosso.", so: "Dhar sare oo diirran oo dhogor ama cudbi culus ah.", ti: "ካብ ጸጉሪ ወይ ጽዑቕ ጡጥ ዝተሰርሐ ሙቕ ክዳን።", tr: "Yün veya kalın pamuktan sıcak üst.", ps: "تود پورته کالی له وړۍ يا غټې پنبې.", uk: "Теплий светр з вовни або товстої бавовни." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pull pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pull est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blouson", article: "le", gender: "m", image: "blouson.webp", definition: "veste courte et ample, souvent en cuir ou nylon" , exampleSentences: {
+    { word: "blouson", article: "le", gender: "m", image: "blouson.webp", definition: ["Veste courte, souvent pour sortir."], definitionPivot: { en: "A short loose jacket.", ar: "سترة قصيرة وواسعة.", fa: "کاپشن کوتاه و گشاد.", pt: "Casaco curto e largo.", so: "Jaakad gaaban oo ballaaran.", ti: "ሓጺርን ሰፊሕን ጃኬት።", tr: "Kısa ve bol ceket.", ps: "لنډ او پراخ جاکټ.", uk: "Коротка вільна куртка." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le blouson pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque blouson est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "legging", article: "le", gender: "m", image: "legging.webp", definition: "pantalon collant très élastique" , exampleSentences: {
+    { word: "legging", article: "le", gender: "m", image: "legging.webp", definition: ["Pantalon très serré et souple."], definitionPivot: { en: "Very stretchy tight trousers.", ar: "بنطال ضيق ومرن جداً.", fa: "شلوار چسبان بسیار کشسان.", pt: "Calças justas muito elásticas.", so: "Surwaal cidhiidhi ah oo aad u kala baxa.", ti: "ኣዝዩ ዝተዓጻጸፍ ጥብቕ ስረ።", tr: "Çok esnek dar pantolon.", ps: "ډېر کشېدونکی تنګ پتلون.", uk: "Дуже еластичні обтислі штани." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le legging pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque legging est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pantalon", article: "le", gender: "m", image: "pantalon.webp", definition: "vêtement qui couvre les deux jambes" , exampleSentences: {
+    { word: "pantalon", article: "le", gender: "m", image: "pantalon.webp", definition: ["Vêtement qui couvre les jambes."], definitionPivot: { en: "Clothing that covers both legs.", ar: "لباس يغطي الساقين.", fa: "لباسی که هر دو پا را می‌پوشاند.", pt: "Roupa que cobre as duas pernas.", so: "Dhar daboola labada lugood.", ti: "ክልቲኡ እግሪ ዝሽፍን ክዳን።", tr: "İki bacağı örten giysi.", ps: "کالی چې دواړه پښې پټوي.", uk: "Одяг, що покриває обидві ноги." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pantalon pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pantalon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jupe", article: "la", gender: "f", image: "jupe.webp", definition: "vêtement féminin couvrant le bas du corps" , exampleSentences: {
+    { word: "jupe", article: "la", gender: "f", image: "jupe.webp", definition: ["Vêtement qui couvre le bas du corps à partir de la taille."], definitionPivot: { en: "Clothing that covers the lower body.", ar: "لباس يغطي أسفل الجسم.", fa: "لباسی برای پوشاندن پایین بدن.", pt: "Roupa que cobre a parte de baixo do corpo.", so: "Dhar daboola qaybta hoose ee jirka.", ti: "ታሕተዋይ ክፋል ሰብነት ዝሽፍን ክዳን።", tr: "Vücudun alt kısmını örten giysi.", ps: "د بدن ښکته برخه پټونکی کالی.", uk: "Одяг, що покриває нижню частину тіла." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la jupe pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque jupe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "robe", article: "la", gender: "f", image: "robe.webp", definition: "vêtement d'une pièce couvrant le haut et le bas" , exampleSentences: {
+    { word: "robe", article: "la", gender: "f", image: "robe.webp", definition: ["Vêtement en une seule pièce qui couvre le haut du corps et descend sur les jambes."], definitionPivot: { en: "One-piece clothing for the upper and lower body.", ar: "لباس من قطعة واحدة للجسم كله.", fa: "لباس یک‌تکه برای بالا و پایین بدن.", pt: "Peça única que cobre o corpo.", so: "Dhar hal xabbo ah oo jirka daboola.", ti: "ሓደ ቁራጽ ክዳን ንላዕልን ታሕትን ሰብነት።", tr: "Üst ve alt bedeni örten tek parça giysi.", ps: "يو ټوټه کالی د بدن لپاره.", uk: "Сукня, що покриває верх і низ тіла." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la robe pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque robe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "veste", article: "la", gender: "f", image: "veste.webp", definition: "vêtement court avec manches, ouvert devant" , exampleSentences: {
+    { word: "veste", article: "la", gender: "f", image: "veste.webp", definition: ["Vêtement que l’on porte par-dessus un autre vêtement."], definitionPivot: { en: "A short garment with sleeves, open in front.", ar: "لباس قصير بأكمام مفتوح من الأمام.", fa: "لباس کوتاه آستین‌دار و جلو باز.", pt: "Casaco curto com mangas, aberto à frente.", so: "Jaakad gaaban oo hore ka furan.", ti: "ሓጺር እጅገ ዘለዎ ኣብ ቅድሚት ክፉት ክዳን።", tr: "Önden açık kısa kollu giysi.", ps: "لنډ کالی له لستوڼو سره، مخکې خلاص.", uk: "Короткий одяг з рукавами, відкритий спереду." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la veste pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque veste est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "manteau", article: "le", gender: "m", image: "manteau.webp", definition: "vêtement long et chaud pour l'extérieur" , exampleSentences: {
+    { word: "manteau", article: "le", gender: "m", image: "manteau.webp", definition: ["Vêtement chaud pour sortir quand il fait froid."], definitionPivot: { en: "A long warm coat for outside.", ar: "معطف طويل ودافئ للخارج.", fa: "پالتوی بلند و گرم برای بیرون.", pt: "Casaco comprido e quente para o exterior.", so: "Koodh dheer oo diirran oo bannaanka ah.", ti: "ንደገ ነዊሕን ሙቕን ካፖርት።", tr: "Dışarı için uzun sıcak palto.", ps: "اوږد تود کوټ د بهر لپاره.", uk: "Довге тепле пальто для вулиці." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le manteau pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque manteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "short", article: "le", gender: "m", image: "short.webp", definition: "pantalon très court pour le sport ou l'été" , exampleSentences: {
+    { word: "short", article: "le", gender: "m", image: "short.webp", definition: ["Pantalon court."], definitionPivot: { en: "Very short trousers for sport or summer.", ar: "بنطال قصير جداً للرياضة أو الصيف.", fa: "شلوارک برای ورزش یا تابستان.", pt: "Calções para desporto ou verão.", so: "Surwaal gaaban oo sport ama xagaa ah.", ti: "ንስፖርት ወይ ሓጋይ ሓጺር ስረ።", tr: "Spor veya yaz için şort.", ps: "لنډ پتلون د سپورت يا دوبي لپاره.", uk: "Шорти для спорту або літа." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le short pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque short est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pyjama", article: "le", gender: "m", image: "pyjama.webp", definition: "vêtement pour dormir" , exampleSentences: {
+    { word: "pyjama", article: "le", gender: "m", image: "pyjama.webp", definition: ["Vêtement pour dormir."], definitionPivot: { en: "Clothing worn for sleeping.", ar: "لباس للنوم.", fa: "لباس خواب.", pt: "Roupa para dormir.", so: "Dhar lagu seexdo.", ti: "ንምድቃስ ዝኽደን ክዳን።", tr: "Uyumak için giysi.", ps: "د خوب کالي.", uk: "Одяг для сну." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le pyjama pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque pyjama est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "maillot", article: "le", gender: "m", image: "maillot.webp", definition: "vêtement de sport ou de bain" , exampleSentences: {
+    { word: "maillot", article: "le", gender: "m", image: "maillot.webp", definition: ["Vêtement pour le sport ou la baignade."], definitionPivot: { en: "Clothing for sport or swimming.", ar: "لباس للرياضة أو السباحة.", fa: "لباس ورزش یا شنا.", pt: "Roupa de desporto ou de banho.", so: "Dhar sport ama dabaal.", ti: "ንስፖርት ወይ ንምሕንባስ ክዳን።", tr: "Spor veya yüzme giysisi.", ps: "د سپورت يا لامبو کالی.", uk: "Одяг для спорту або плавання." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le maillot pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque maillot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "uniforme",    article: "l'", gender: "m", image: "uniforme.webp",    definition: "vêtement identique porté dans certaines écoles ou professions" , exampleSentences: {
+    { word: "uniforme",    article: "l'", gender: "m", image: "uniforme.webp",    definition: ["Vêtement identique porté par un groupe."], definitionPivot: { en: "The same clothing worn by a group.", ar: "لباس موحّد تلبسه مجموعة.", fa: "لباس یکسان برای یک گروه.", pt: "Roupa igual usada por um grupo.", so: "Dhar isku mid ah oo koox xirato.", ti: "ብጉጅለ ዝኽደን ሓደ ዓይነት ክዳን።", tr: "Bir grubun giydiği aynı kıyafet.", ps: "يو شان کالي چې يوه ډله يې اغوندي.", uk: "Однаковий одяг для групи." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'uniforme pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque uniforme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "caleçon", article: "le", gender: "m", image: "calecon.webp", group: "Sous-vêtements", definition: "sous-vêtement masculin" , exampleSentences: {
+    { word: "caleçon", article: "le", gender: "m", image: "calecon.webp", group: "Sous-vêtements", definition: ["Sous-vêtement masculin."], definitionPivot: { en: "Men's underwear.", ar: "ملابس داخلية رجالية.", fa: "لباس زیر مردانه.", pt: "Roupa interior masculina.", so: "Nigisyada ragga.", ti: "ናይ ደቂ ተባዕትዮ ውሽጢ ክዳን።", tr: "Erkek iç çamaşırı.", ps: "د نارينه وو زيرجامه.", uk: "Чоловіча білизна." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le caleçon pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque caleçon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soutien-gorge", article: "le", gender: "m", image: "soutien-gorge.webp", group: "Sous-vêtements", definition: "sous-vêtement qui soutient la poitrine" , exampleSentences: {
+    { word: "soutien-gorge", article: "le", gender: "m", image: "soutien-gorge.webp", group: "Sous-vêtements", definition: ["Sous-vêtement féminin qui soutient la poitrine."], definitionPivot: { en: "Underwear that supports the chest.", ar: "ملابس داخلية تدعم الصدر.", fa: "لباس زیری که سینه را نگه می‌دارد.", pt: "Roupa interior que sustenta o peito.", so: "Dhar hoose oo laabta taageera.", ti: "ጡብ ዝድግፍ ውሽጢ ክዳን።", tr: "Göğsü destekleyen iç çamaşırı.", ps: "زيرجامه چې سينه نيسي.", uk: "Білизна, що підтримує груди." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le soutien-gorge pendant l'exercice.",
@@ -1046,7 +1046,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque soutien-gorge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "culotte", article: "la", gender: "f", image: "culotte.webp", group: "Sous-vêtements", definition: "sous-vêtement du bas du corps" , exampleSentences: {
+    { word: "culotte", article: "la", gender: "f", image: "culotte.webp", group: "Sous-vêtements", definition: ["Sous-vêtement pour le bas du corps."], definitionPivot: { en: "Underwear for the lower body.", ar: "ملابس داخلية لأسفل الجسم.", fa: "لباس زیر پایین بدن.", pt: "Roupa interior da parte inferior do corpo.", so: "Dhar hoose oo qaybta hoose ah.", ti: "ናይ ታሕተዋይ ክፋል ውሽጢ ክዳን።", tr: "Alt beden iç çamaşırı.", ps: "د بدن ښکته برخې زيرجامه.", uk: "Нижня білизна." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la culotte pendant l'exercice.",
@@ -1111,7 +1111,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
           "Puisque culotte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "débardeur", article: "le", gender: "m", image: "t-shirt.webp", group: "Sous-vêtements", definition: "haut sans manches porté sous ou sur les vêtements" , exampleSentences: {
+    { word: "débardeur", article: "le", gender: "m", image: "t-shirt.webp", group: "Sous-vêtements", definition: ["Vêtement sans manches pour le haut du corps."], definitionPivot: { en: "A sleeveless top.", ar: "لباس علوي بلا أكمام.", fa: "لباس بدون آستین.", pt: "Camisola sem mangas.", so: "Shaati aan gacmo lahayn.", ti: "እጅገ ዘይብሉ ላዕለዋይ ክዳን።", tr: "Kolsuz üst.", ps: "بې لستوڼي کالی.", uk: "Майка без рукавів." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le débardeur pendant l'exercice.",

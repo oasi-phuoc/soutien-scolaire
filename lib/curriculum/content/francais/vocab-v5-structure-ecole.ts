@@ -6,7 +6,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
   title: "La structure de l'école",
   section: "V5",
   words: [
-    { word: "école",        image: "ecole.webp",        article: "l'",  gender: "f", definition: "établissement où l'on apprend" , exampleSentences: {
+    { word: "école",        image: "ecole.webp",        article: "l'",  gender: "f", definition: ["Lieu où les élèves apprennent."], definitionPivot: { en: "A place where students learn.", ar: "مكان يتعلم فيه التلاميذ.", fa: "جایی که دانش‌آموزان یاد می‌گیرند.", pt: "Lugar onde os alunos aprendem.", so: "Meel ardaydu wax ku bartaan.", ti: "ተማሃሮ ዝመሃሩሉ ቦታ።", tr: "Öğrencilerin öğrendiği yer.", ps: "هغه ځای چې زده کوونکي پکې زده کړه کوي.", uk: "Місце, де учні навчаються." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'école pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque école est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "classe",       image: "classe.webp",       article: "la",  gender: "f", definition: "groupe d'élèves ou salle de cours" , exampleSentences: {
+    { word: "classe",       image: "classe.webp",       article: "la",  gender: "f", definition: ["Groupe d’élèves ou salle où l’on apprend."], definitionPivot: { en: "A group of students or a classroom.", ar: "مجموعة تلاميذ أو قاعة درس.", fa: "گروه دانش‌آموزان یا کلاس درس.", pt: "Grupo de alunos ou sala de aula.", so: "Koox arday ah ama fasal.", ti: "ጉጅለ ተማሃሮ ወይ ክፍሊ ትምህርቲ።", tr: "Öğrenci grubu veya derslik.", ps: "د زده کوونکو ډله يا ټولګی.", uk: "Група учнів або класна кімната." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la classe pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque classe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle",        image: "salle.webp",        article: "la",  gender: "f", definition: "espace dans l'école pour une activité" , exampleSentences: {
+    { word: "salle",        image: "salle.webp",        article: "la",  gender: "f", definition: ["Pièce ou grand espace où se déroule une activité."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la salle pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir",      image: "couloir.webp",      article: "le",  gender: "m", definition: "passage entre les salles" , exampleSentences: {
+    { word: "couloir",      image: "couloir.webp",      article: "le",  gender: "m", definition: ["Passage entre les salles."], definitionPivot: { en: "A passage between rooms.", ar: "ممر بين الغرف.", fa: "راهرو بین اتاق‌ها.", pt: "Passagem entre divisões.", so: "Marin u dhexeeya qolalka.", ti: "ኣብ መንጎ ክፍልታት ዘሎ መተሓላለፊ።", tr: "Odalar arasındaki geçit.", ps: "د کوټو ترمنځ لار.", uk: "Прохід між кімнатами." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le couloir pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétariat",  image: "secretariat.webp",  article: "le",  gender: "m", definition: "bureau administratif de l'école" , exampleSentences: {
+    { word: "secrétariat",  image: "secretariat.webp",  article: "le",  gender: "m", definition: ["Bureau où l’on accueille les personnes et organise les documents."], definitionPivot: { en: "The school administrative office.", ar: "المكتب الإداري في المدرسة.", fa: "دفتر اداری مدرسه.", pt: "Secretaria administrativa da escola.", so: "Xafiiska maamulka dugsiga.", ti: "ናይ ቤት ትምህርቲ ምምሕዳር ቤት ጽሕፈት።", tr: "Okul idare ofisi.", ps: "د ښوونځي اداري دفتر.", uk: "Адміністративний офіс школи." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le secrétariat pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque secrétariat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bibliothèque", image: "bibliotheque.webp", article: "la",  gender: "f", definition: "salle avec des livres à consulter" , exampleSentences: {
+    { word: "bibliothèque", image: "bibliotheque.webp", article: "la",  gender: "f", definition: ["Lieu avec des livres que l’on peut lire ou emprunter."], definitionPivot: { en: "A room with books to read or borrow.", ar: "غرفة فيها كتب للقراءة أو الاستعارة.", fa: "اتاقی با کتاب برای خواندن یا امانت.", pt: "Sala com livros para ler ou emprestar.", so: "Qol buugaag lagu akhriyo ama amaahdo.", ti: "መጻሕፍቲ ንምንባብ ወይ ንምልቃሕ ዘለዎ ክፍሊ።", tr: "Kitap okuma veya ödünç alma yeri.", ps: "د کتابونو د لوستلو يا پور اخيستلو ځای.", uk: "Кімната з книгами для читання або позики." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bibliothèque pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque bibliothèque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gymnase",      image: "gymnase.webp",      article: "le",  gender: "m", definition: "salle pour faire du sport" , exampleSentences: {
+    { word: "gymnase",      image: "gymnase.webp",      article: "le",  gender: "m", definition: ["Salle où l’on fait du sport."], definitionPivot: { en: "A room or hall for sport.", ar: "قاعة للرياضة.", fa: "سالن برای ورزش.", pt: "Sala para fazer desporto.", so: "Hool lagu ciyaaro sport.", ti: "ንስፖርት ዝጥቀሙሉ ኣዳራሽ።", tr: "Spor yapılan salon.", ps: "د سپورت تالار.", uk: "Зал для спорту." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le gymnase pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque gymnase est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cour",         image: "cour.webp",         article: "la",  gender: "f", definition: "espace extérieur pour jouer pendant la pause" , exampleSentences: {
+    { word: "cour",         image: "cour.webp",         article: "la",  gender: "f", definition: ["Espace extérieur de l’école pour la récréation."], definitionPivot: { en: "An outside school space for breaks.", ar: "ساحة خارجية للاستراحة.", fa: "حیاط مدرسه برای زنگ تفریح.", pt: "Espaço exterior da escola para pausas.", so: "Barxad dugsi oo nasasho lagu qaato.", ti: "ናይ ቤት ትምህርቲ ደገ ንዕረፍቲ።", tr: "Okul bahçesi.", ps: "د ښوونځي انګړ.", uk: "Шкільне подвір’я для перерв." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cour pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "direction",    image: "direction.webp",    article: "la",  gender: "f", definition: "bureau du directeur ou de la directrice" , exampleSentences: {
+    { word: "direction",    image: "direction.webp",    article: "la",  gender: "f", definition: ["Bureau du directeur ou de la directrice."], definitionPivot: { en: "The office of the school director.", ar: "مكتب مدير أو مديرة المدرسة.", fa: "دفتر مدیر مدرسه.", pt: "Gabinete da direção da escola.", so: "Xafiiska agaasimaha dugsiga.", ti: "ቤት ጽሕፈት ዳይሬክተር ቤት ትምህርቲ።", tr: "Okul müdürünün ofisi.", ps: "د ښوونځي د مدير دفتر.", uk: "Кабінет директора школи." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la direction pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque direction est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sonnerie",     image: "sonnerie.webp",     article: "la",  gender: "f", definition: "signal sonore marquant le début ou la fin d'un cours" , exampleSentences: {
+    { word: "sonnerie",     image: "sonnerie.webp",     article: "la",  gender: "f", definition: ["Son qui annonce le début ou la fin d’un cours."], definitionPivot: { en: "A sound that marks the start or end of class.", ar: "صوت يعلن بداية أو نهاية الدرس.", fa: "صدایی که شروع یا پایان کلاس را نشان می‌دهد.", pt: "Som que marca o início ou fim da aula.", so: "Cod sheegaya bilowga ama dhammaadka casharka.", ti: "መጀመርታ ወይ መወዳእታ ትምህርቲ ዘርኢ ድምጺ።", tr: "Dersin başını veya sonunu bildiren ses.", ps: "هغه غږ چې د درس پيل يا پای ښيي.", uk: "Звук початку або кінця уроку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la sonnerie pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque sonnerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cantine",      image: "cantine.webp",      article: "la",  gender: "f", definition: "restaurant scolaire pour les repas" , exampleSentences: {
+    { word: "cantine",      image: "cantine.webp",      article: "la",  gender: "f", definition: ["Lieu où les élèves mangent à l’école."], definitionPivot: { en: "A school restaurant for meals.", ar: "مطعم المدرسة للوجبات.", fa: "رستوران مدرسه برای غذا.", pt: "Restaurante escolar para refeições.", so: "Makhaayad dugsi oo cunto laga cuno.", ti: "ናይ ቤት ትምህርቲ መመገቢ።", tr: "Okul yemekhanesi.", ps: "د ښوونځي ډوډۍ ځای.", uk: "Шкільна їдальня." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cantine pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cantine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmerie",   image: "infirmerie.webp",   article: "l'",  gender: "f", definition: "salle de soins dans l'école" , exampleSentences: {
+    { word: "infirmerie",   image: "infirmerie.webp",   article: "l'",  gender: "f", definition: ["Lieu où l’on soigne les élèves malades ou blessés."], definitionPivot: { en: "A school room for first aid.", ar: "غرفة إسعافات في المدرسة.", fa: "اتاق کمک‌های اولیه در مدرسه.", pt: "Sala de primeiros socorros na escola.", so: "Qol gargaarka degdegga ah ee dugsiga.", ti: "ኣብ ቤት ትምህርቲ ናይ መጀመርታ ሓገዝ ክፍሊ።", tr: "Okulda ilk yardım odası.", ps: "په ښوونځي کې د لومړنۍ مرستې کوټه.", uk: "Шкільний медпункт." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'infirmerie pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque infirmerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ascenseur",    image: "ascenseur.webp",    article: "l'",  gender: "m", definition: "cabine pour monter et descendre les étages" , exampleSentences: {
+    { word: "ascenseur",    image: "ascenseur.webp",    article: "l'",  gender: "m", definition: ["Appareil qui monte et descend entre les étages."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'ascenseur pendant l'exercice.",

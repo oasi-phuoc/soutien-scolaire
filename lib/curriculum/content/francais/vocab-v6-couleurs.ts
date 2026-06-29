@@ -6,7 +6,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
   title: "Les couleurs",
   section: "V6",
   words: [
-    { word: "rouge",     image: "rouge.svg",      definition: "couleur du sang et des fraises" , exampleSentences: {
+    { word: "rouge",     image: "rouge.svg",      definition: ["Couleur du sang ou de la tomate."], definitionPivot: { en: "The color of blood and strawberries.", ar: "لون الدم والفراولة.", fa: "رنگ خون و توت‌فرنگی.", pt: "Cor do sangue e dos morangos.", so: "Midabka dhiigga iyo farambooska.", ti: "ሕብሪ ደምን ስትሮበሪን።", tr: "Kan ve çilek rengi.", ps: "د وينې او توت زميني رنګ.", uk: "Колір крові й полуниці." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rouge avec ses amis.",
@@ -71,7 +71,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bleu",      image: "bleu.svg",       feminine: "bleue",     definition: "couleur du ciel et de la mer" , exampleSentences: {
+    { word: "bleu",      image: "bleu.svg",       feminine: "bleue",     definition: ["Couleur du ciel clair ou de la mer."], definitionPivot: { en: "The color of the sky and sea.", ar: "لون السماء والبحر.", fa: "رنگ آسمان و دریا.", pt: "Cor do céu e do mar.", so: "Midabka cirka iyo badda.", ti: "ሕብሪ ሰማይን ባሕርን።", tr: "Gökyüzü ve deniz rengi.", ps: "د اسمان او سمندر رنګ.", uk: "Колір неба й моря." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bleu avec ses amis.",
@@ -136,7 +136,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bleu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vert",      image: "vert.svg",       feminine: "verte",     definition: "couleur de l'herbe et des arbres" , exampleSentences: {
+    { word: "vert",      image: "vert.svg",       feminine: "verte",     definition: ["Couleur de l’herbe ou des feuilles."], definitionPivot: { en: "The color of grass and trees.", ar: "لون العشب والأشجار.", fa: "رنگ چمن و درختان.", pt: "Cor da relva e das árvores.", so: "Midabka cawska iyo geedaha.", ti: "ሕብሪ ሳዕርን ኣግራብን።", tr: "Çimen ve ağaç rengi.", ps: "د واښو او ونو رنګ.", uk: "Колір трави й дерев." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été vert avec ses amis.",
@@ -201,7 +201,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque vert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jaune",     image: "jaune.svg",      definition: "couleur du soleil et du citron" , exampleSentences: {
+    { word: "jaune",     image: "jaune.svg",      definition: ["Couleur du soleil ou du citron."], definitionPivot: { en: "The color of the sun and lemon.", ar: "لون الشمس والليمون.", fa: "رنگ خورشید و لیمو.", pt: "Cor do sol e do limão.", so: "Midabka qorraxda iyo liinta.", ti: "ሕብሪ ጸሓይን ለሚንን።", tr: "Güneş ve limon rengi.", ps: "د لمر او ليمو رنګ.", uk: "Колір сонця й лимона." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été jaune avec ses amis.",
@@ -266,7 +266,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque jaune est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "noir",      image: "noir.svg",       feminine: "noire",     definition: "couleur de la nuit, absence de lumière" , exampleSentences: {
+    { word: "noir",      image: "noir.svg",       feminine: "noire",     definition: ["Couleur très foncée."], definitionPivot: { en: "The color of night.", ar: "لون الليل.", fa: "رنگ شب.", pt: "Cor da noite.", so: "Midabka habeenka.", ti: "ሕብሪ ለይቲ።", tr: "Gece rengi.", ps: "د شپې رنګ.", uk: "Колір ночі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été noir avec ses amis.",
@@ -331,7 +331,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque noir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blanc",     image: "blanc.svg",      feminine: "blanche",   definition: "couleur de la neige, toutes les lumières" , exampleSentences: {
+    { word: "blanc",     image: "blanc.svg",      feminine: "blanche",   definition: ["Couleur de la neige ou du lait."], definitionPivot: { en: "The color of snow.", ar: "لون الثلج.", fa: "رنگ برف.", pt: "Cor da neve.", so: "Midabka barafka.", ti: "ሕብሪ በረድ።", tr: "Kar rengi.", ps: "د واورې رنګ.", uk: "Колір снігу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été blanc avec ses amis.",
@@ -396,7 +396,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque blanc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gris",      image: "gris.svg",       feminine: "grise",     definition: "couleur intermédiaire entre noir et blanc" , exampleSentences: {
+    { word: "gris",      image: "gris.svg",       feminine: "grise",     definition: ["Couleur entre le noir et le blanc."], definitionPivot: { en: "A color between black and white.", ar: "لون بين الأسود والأبيض.", fa: "رنگی بین سیاه و سفید.", pt: "Cor entre preto e branco.", so: "Midab u dhexeeya madow iyo caddaan.", ti: "ኣብ መንጎ ጸሊምን ጻዕዳን ዘሎ ሕብሪ።", tr: "Siyah ile beyaz arası renk.", ps: "د تور او سپين ترمنځ رنګ.", uk: "Колір між чорним і білим." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gris avec ses amis.",
@@ -461,7 +461,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque gris est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rose",      image: "rose.svg",       definition: "couleur entre rouge et blanc" , exampleSentences: {
+    { word: "rose",      image: "rose.svg",       definition: ["Couleur claire proche du rouge."], definitionPivot: { en: "A color between red and white.", ar: "لون بين الأحمر والأبيض.", fa: "رنگی بین قرمز و سفید.", pt: "Cor entre vermelho e branco.", so: "Midab u dhexeeya casaan iyo caddaan.", ti: "ኣብ መንጎ ቀይሕን ጻዕዳን ዘሎ ሕብሪ።", tr: "Kırmızı ile beyaz arası renk.", ps: "د سور او سپين ترمنځ رنګ.", uk: "Колір між червоним і білим." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été rose avec ses amis.",
@@ -526,7 +526,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque rose est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "orange",    image: "orange.svg",     definition: "couleur du fruit orange, entre rouge et jaune" , exampleSentences: {
+    { word: "orange",    image: "orange.svg",     definition: ["Fruit rond, orange, avec beaucoup de jus."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été orange avec ses amis.",
@@ -591,7 +591,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque orange est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "violet",    image: "violet.svg",     feminine: "violette",  definition: "couleur entre bleu et rouge" , exampleSentences: {
+    { word: "violet",    image: "violet.svg",     feminine: "violette",  definition: ["Couleur entre le bleu et le rouge."], definitionPivot: { en: "A color between blue and red.", ar: "لون بين الأزرق والأحمر.", fa: "رنگی بین آبی و قرمز.", pt: "Cor entre azul e vermelho.", so: "Midab u dhexeeya buluug iyo casaan.", ti: "ኣብ መንጎ ሰማያውን ቀይሕን ዘሎ ሕብሪ።", tr: "Mavi ile kırmızı arası renk.", ps: "د آبي او سور ترمنځ رنګ.", uk: "Колір між синім і червоним." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été violet avec ses amis.",
@@ -656,7 +656,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque violet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "marron",    image: "marron.svg",     definition: "couleur brun foncé comme le chocolat" , exampleSentences: {
+    { word: "marron",    image: "marron.svg",     definition: ["Couleur du bois ou du chocolat."], definitionPivot: { en: "A dark brown color like chocolate.", ar: "لون بني داكن مثل الشوكولاتة.", fa: "رنگ قهوه‌ای تیره مثل شکلات.", pt: "Cor castanha escura como chocolate.", so: "Midab bunni madow sida shukulaato.", ti: "ከም ቸኮላታ ጸሊም ቡናዊ ሕብሪ።", tr: "Çikolata gibi koyu kahverengi.", ps: "د چاکلېټ په شان تياره نسواري.", uk: "Темно-коричневий колір, як шоколад." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été marron avec ses amis.",
@@ -721,7 +721,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque marron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beige",     image: "beige.svg",      definition: "couleur crème, brun très clair" , exampleSentences: {
+    { word: "beige",     image: "beige.svg",      definition: ["Couleur claire proche du brun."], definitionPivot: { en: "A very light brown cream color.", ar: "لون كريمي بني فاتح جداً.", fa: "رنگ کرمی قهوه‌ای خیلی روشن.", pt: "Cor creme, castanho muito claro.", so: "Midab kareem bunni aad u khafiif ah.", ti: "ኣዝዩ ቀሊል ቡናዊ ክሬም ሕብሪ።", tr: "Çok açık kahverengi krem rengi.", ps: "ډېر روښانه نسواري کريمي رنګ.", uk: "Світло-коричневий кремовий колір." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été beige avec ses amis.",
@@ -786,7 +786,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque beige est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turquoise", image: "turquoise.svg",  definition: "couleur bleu-vert vif" , exampleSentences: {
+    { word: "turquoise", image: "turquoise.svg",  definition: ["Couleur entre le bleu et le vert."], definitionPivot: { en: "A bright blue-green color.", ar: "لون أزرق مخضر زاهٍ.", fa: "رنگ آبی-سبز روشن.", pt: "Cor azul-verde viva.", so: "Midab buluug-cagaar dhalaalaya.", ti: "ብሩህ ሰማያዊ-ቀጠልያ ሕብሪ።", tr: "Canlı mavi-yeşil renk.", ps: "روښانه آبي-شنه رنګ.", uk: "Яскравий синьо-зелений колір." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été turquoise avec ses amis.",
@@ -851,7 +851,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque turquoise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cyan",      image: "cyan.svg",       definition: "couleur bleu vif entre bleu et vert" , exampleSentences: {
+    { word: "cyan",      image: "cyan.svg",       definition: ["Couleur bleu clair."], definitionPivot: { en: "A bright blue color.", ar: "لون أزرق زاهٍ.", fa: "رنگ آبی روشن.", pt: "Cor azul viva.", so: "Midab buluug dhalaalaya.", ti: "ብሩህ ሰማያዊ ሕብሪ።", tr: "Canlı mavi renk.", ps: "روښانه آبي رنګ.", uk: "Яскравий блакитний колір." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été cyan avec ses amis.",
@@ -916,7 +916,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque cyan est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bordeaux",  image: "bordeaux.svg",   definition: "couleur rouge foncé comme le vin de Bordeaux" , exampleSentences: {
+    { word: "bordeaux",  image: "bordeaux.svg",   definition: ["Couleur rouge foncé."], definitionPivot: { en: "A dark red color like wine.", ar: "لون أحمر داكن مثل النبيذ.", fa: "رنگ قرمز تیره مثل شراب.", pt: "Cor vermelha escura como vinho.", so: "Midab casaan madow sida khamri.", ti: "ከም ወይኒ ጸሊም ቀይሕ ሕብሪ።", tr: "Şarap gibi koyu kırmızı.", ps: "د شراب په شان تياره سور رنګ.", uk: "Темно-червоний колір, як вино." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été bordeaux avec ses amis.",
@@ -981,7 +981,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
           "Puisque bordeaux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kaki",      image: "kaki.svg",       definition: "couleur vert olive tirant sur le brun" , exampleSentences: {
+    { word: "kaki",      image: "kaki.svg",       definition: ["Couleur vert-brun."], definitionPivot: { en: "An olive green-brown color.", ar: "لون أخضر زيتوني مائل إلى البني.", fa: "رنگ سبز زیتونی مایل به قهوه‌ای.", pt: "Cor verde-oliva acastanhada.", so: "Midab saytuuni cagaar-bunni ah.", ti: "ዘይቲ ቀጠልያ-ቡናዊ ሕብሪ።", tr: "Zeytin yeşili-kahverengi renk.", ps: "زيتوني شين نسواري رنګ.", uk: "Оливково-коричневий колір." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été kaki avec ses amis.",

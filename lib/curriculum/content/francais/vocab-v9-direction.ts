@@ -6,7 +6,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
   title: "La direction",
   section: "V9",
   words: [
-    { word: "gauche", image: "gauche.webp",          article: "la",  gender: "f", definition: "côté opposé à la droite" , exampleSentences: {
+    { word: "gauche", image: "gauche.webp",          article: "la",  gender: "f", definition: ["Côté opposé à la droite."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la gauche sur le plan.",
@@ -71,7 +71,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque gauche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "droite", image: "droite.webp",          article: "la",  gender: "f", definition: "côté opposé à la gauche" , exampleSentences: {
+    { word: "droite", image: "droite.webp",          article: "la",  gender: "f", definition: ["Côté opposé à la gauche."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la droite sur le plan.",
@@ -136,7 +136,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque droite est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nord", image: "nord.webp",            article: "le",  gender: "m", definition: "direction vers le pôle Nord" , exampleSentences: {
+    { word: "nord", image: "nord.webp",            article: "le",  gender: "m", definition: ["Direction opposée au sud."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le nord sur le plan.",
@@ -201,7 +201,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque nord est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sud", image: "sud.webp",             article: "le",  gender: "m", definition: "direction vers le pôle Sud" , exampleSentences: {
+    { word: "sud", image: "sud.webp",             article: "le",  gender: "m", definition: ["Direction opposée au nord."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le sud sur le plan.",
@@ -266,7 +266,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque sud est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "est", image: "est.webp",             article: "l'",  gender: "m", definition: "direction du lever du soleil" , exampleSentences: {
+    { word: "est", image: "est.webp",             article: "l'",  gender: "m", definition: ["Direction où le soleil se lève."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'est sur le plan.",
@@ -331,7 +331,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque est est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ouest", image: "ouest.webp",           article: "l'",  gender: "m", definition: "direction du coucher du soleil" , exampleSentences: {
+    { word: "ouest", image: "ouest.webp",           article: "l'",  gender: "m", definition: ["Direction où le soleil se couche."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'ouest sur le plan.",
@@ -396,7 +396,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque ouest est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "carrefour", image: "carrefour.webp",       article: "le",  gender: "m", definition: "intersection de plusieurs routes" , exampleSentences: {
+    { word: "carrefour", image: "carrefour.webp",       article: "le",  gender: "m", definition: ["Endroit où plusieurs rues se croisent."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le carrefour sur le plan.",
@@ -461,7 +461,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque carrefour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rond-point", image: "rond-point.webp",      article: "le",  gender: "m", definition: "carrefour circulaire" , exampleSentences: {
+    { word: "rond-point", image: "rond-point.webp",      article: "le",  gender: "m", definition: ["Carrefour rond où les véhicules tournent autour d’un centre."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le rond-point sur le plan.",
@@ -526,7 +526,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque rond-point est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rue", image: "rue.webp",             article: "la",  gender: "f", definition: "voie publique en ville" , exampleSentences: {
+    { word: "rue", image: "rue.webp",             article: "la",  gender: "f", definition: ["Chemin dans une ville où les voitures et les personnes circulent."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la rue sur le plan.",
@@ -591,7 +591,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque rue est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "panneau", image: "/vocab/images/V5/panneau.webp",         article: "le",  gender: "m", definition: "signe routier avec indications" , exampleSentences: {
+    { word: "panneau", image: "/vocab/images/V5/panneau.webp",         article: "le",  gender: "m", definition: ["Objet qui donne une information sur la route ou dans un lieu."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le panneau sur le plan.",
@@ -656,7 +656,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque panneau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "feu rouge", image: "feu-rouge.webp",       article: "le",  gender: "m", definition: "signal lumineux pour la circulation" , exampleSentences: {
+    { word: "feu rouge", image: "feu-rouge.webp",       article: "le",  gender: "m", definition: ["Signal lumineux qui indique aux véhicules ou aux piétons de s’arrêter."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le feu rouge sur le plan.",
@@ -721,7 +721,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque feu rouge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "passage piéton", image: "passage-pieton.webp",  article: "le",  gender: "m", definition: "zone réservée pour traverser la rue" , exampleSentences: {
+    { word: "passage piéton", image: "passage-pieton.webp",  article: "le",  gender: "m", definition: ["Endroit où les piétons traversent la route."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le passage piéton sur le plan.",
@@ -786,7 +786,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque passage piéton est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sortie", image: "sortie.webp",          article: "la",  gender: "f", definition: "point de départ d'un lieu" , exampleSentences: {
+    { word: "sortie", image: "sortie.webp",          article: "la",  gender: "f", definition: ["Endroit par où l’on sort."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la sortie sur le plan.",
@@ -851,7 +851,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque sortie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "entrée", image: "/vocab/images/V4/entree.webp",          article: "l'",  gender: "f", definition: "point d'accès à un lieu" , exampleSentences: {
+    { word: "entrée", image: "/vocab/images/V4/entree.webp",          article: "l'",  gender: "f", definition: ["Endroit par où l’on entre."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'entrée sur le plan.",
@@ -916,7 +916,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
           "Puisque entrée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chemin", image: "chemin.webp",          article: "le",  gender: "m", definition: "voie étroite ou itinéraire à suivre" , exampleSentences: {
+    { word: "chemin", image: "chemin.webp",          article: "le",  gender: "m", definition: ["Voie ou petit passage pour aller quelque part."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le chemin sur le plan.",

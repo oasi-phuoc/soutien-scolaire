@@ -6,7 +6,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
   title: "Les appareils électroménagers",
   section: "V4",
   words: [
-    { word: "réfrigérateur",   image: "frigo.webp",          article: "le",  gender: "m", definition: "appareil pour conserver les aliments au frais" , exampleSentences: {
+    { word: "réfrigérateur",   image: "frigo.webp",          article: "le",  gender: "m", definition: ["Appareil qui garde les aliments au froid."], definitionPivot: { en: "An appliance that keeps food cold.", ar: "جهاز يحفظ الطعام بارداً.", fa: "وسیله‌ای که غذا را سرد نگه می‌دارد.", pt: "Aparelho que mantém os alimentos frios.", so: "Qalab cuntada qabow ku haya.", ti: "መግቢ ዘዝሕል መሳርሒ።", tr: "Yiyecekleri soğuk tutan cihaz.", ps: "هغه آله چې خواړه يخ ساتي.", uk: "Прилад, що зберігає їжу холодною." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le réfrigérateur pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque réfrigérateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "congélateur",     image: "congelateur.webp",   article: "le",  gender: "m", definition: "appareil pour conserver les aliments surgelés" , exampleSentences: {
+    { word: "congélateur",     image: "congelateur.webp",   article: "le",  gender: "m", definition: ["Appareil qui garde les aliments congelés."], definitionPivot: { en: "An appliance that freezes food.", ar: "جهاز يجمّد الطعام.", fa: "وسیله‌ای که غذا را منجمد می‌کند.", pt: "Aparelho que congela alimentos.", so: "Qalab cuntada qaboojiya oo barafeeya.", ti: "መግቢ ዘበርድ መሳርሒ።", tr: "Yiyecekleri donduran cihaz.", ps: "هغه آله چې خواړه کنګلوي.", uk: "Прилад, що заморожує їжу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le congélateur pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque congélateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "four",            image: "four.webp",          article: "le",  gender: "m", definition: "appareil pour cuire les aliments" , exampleSentences: {
+    { word: "four",            image: "four.webp",          article: "le",  gender: "m", definition: ["Appareil pour cuire les aliments."], definitionPivot: { en: "An appliance used to cook food.", ar: "جهاز يُستخدم لطهي الطعام.", fa: "وسیله‌ای برای پختن غذا.", pt: "Aparelho usado para cozinhar alimentos.", so: "Qalab lagu kariyo cunto.", ti: "መግቢ ንምብሳል ዝጥቀም መሳርሒ።", tr: "Yemek pişirmek için kullanılan cihaz.", ps: "هغه آله چې د خوړو پخولو لپاره کارېږي.", uk: "Прилад для приготування їжі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le four pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque four est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinière",      image: "cuisiniere.webp",    article: "la",  gender: "f", definition: "appareil avec plaques de cuisson et four" , exampleSentences: {
+    { word: "cuisinière",      image: "cuisiniere.webp",    article: "la",  gender: "f", definition: ["Appareil pour cuire les repas avec des plaques et parfois un four."], definitionPivot: { en: "An appliance with hotplates and an oven.", ar: "جهاز فيه صفائح طبخ وفرن.", fa: "وسیله‌ای با شعله/صفحه پخت و فر.", pt: "Aparelho com placas de cozedura e forno.", so: "Qalab leh meelo wax lagu kariyo iyo foorno.", ti: "መብሰሊታትን ፎርኖን ዘለዎ መሳርሒ።", tr: "Ocak gözleri ve fırını olan cihaz.", ps: "آله چې د پخلي تختې او تنور لري.", uk: "Прилад із конфорками та духовкою." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cuisinière pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque cuisinière est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-linge",      image: "lave-linge.webp",    article: "le",  gender: "m", definition: "appareil pour laver le linge" , exampleSentences: {
+    { word: "lave-linge",      image: "lave-linge.webp",    article: "le",  gender: "m", definition: ["Machine qui lave les vêtements."], definitionPivot: { en: "An appliance that washes clothes.", ar: "جهاز يغسل الملابس.", fa: "دستگاهی که لباس می‌شوید.", pt: "Aparelho que lava roupa.", so: "Qalab dharka dhaqa.", ti: "ክዳውንቲ ዝሓጽብ መሳርሒ።", tr: "Çamaşır yıkayan cihaz.", ps: "هغه آله چې کالي مينځي.", uk: "Прилад, що пере одяг." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lave-linge pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-linge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-vaisselle",  image: "lave-vaiselle.webp", article: "le",  gender: "m", definition: "appareil pour laver la vaisselle" , exampleSentences: {
+    { word: "lave-vaisselle",  image: "lave-vaiselle.webp", article: "le",  gender: "m", definition: ["Machine qui lave la vaisselle."], definitionPivot: { en: "An appliance that washes dishes.", ar: "جهاز يغسل الأواني.", fa: "دستگاهی که ظرف‌ها را می‌شوید.", pt: "Aparelho que lava a loiça.", so: "Qalab weelka dhaqa.", ti: "ኣቕሑ መግቢ ዝሓጽብ መሳርሒ።", tr: "Bulaşıkları yıkayan cihaz.", ps: "هغه آله چې لوښي مينځي.", uk: "Прилад, що миє посуд." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lave-vaisselle pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-vaisselle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aspirateur",      image: "aspirateur.webp",    article: "l'",  gender: "m", definition: "appareil pour aspirer la poussière" , exampleSentences: {
+    { word: "aspirateur",      image: "aspirateur.webp",    article: "l'",  gender: "m", definition: ["Appareil qui aspire la poussière."], definitionPivot: { en: "An appliance that removes dust by suction.", ar: "جهاز يشفط الغبار.", fa: "دستگاهی که گرد و خاک را می‌مکد.", pt: "Aparelho que aspira o pó.", so: "Qalab nuuga boorka.", ti: "ሓመድ ዝስሕብ መሳርሒ።", tr: "Tozu emerek temizleyen cihaz.", ps: "هغه آله چې دوړه جذبوي.", uk: "Прилад, що всмоктує пил." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'aspirateur pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque aspirateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fer à repasser",  image: "fer-a-repasser.webp", article: "le", gender: "m", definition: "appareil pour lisser les vêtements" , exampleSentences: {
+    { word: "fer à repasser",  image: "fer-a-repasser.webp", article: "le", gender: "m", definition: ["Appareil pour lisser les vêtements."], definitionPivot: { en: "A household appliance used to iron clothes.", ar: "جهاز منزلي يُستعمل لكيّ الملابس.", fa: "وسیله‌ای خانگی برای اتو کردن لباس.", pt: "Aparelho doméstico usado para passar roupa.", so: "Qalab guri oo dharka lagu feereeyo.", ti: "ክዳን ንምጥራይ ዝጥቀሙሉ ናይ ገዛ መሳርሒ።", tr: "Giysileri ütülemek için kullanılan ev aleti.", ps: "کورنی وسیله چې کالي پرې اوتو کېږي.", uk: "Побутовий прилад для прасування одягу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le fer à repasser pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque fer à repasser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "micro-ondes",     image: "micro-onde.webp",    article: "le",  gender: "m", definition: "appareil pour réchauffer rapidement les aliments" , exampleSentences: {
+    { word: "micro-ondes",     image: "micro-onde.webp",    article: "le",  gender: "m", definition: ["Appareil qui réchauffe rapidement les aliments."], definitionPivot: { en: "An appliance that heats food quickly.", ar: "جهاز يسخّن الطعام بسرعة.", fa: "دستگاهی که غذا را سریع گرم می‌کند.", pt: "Aparelho que aquece alimentos rapidamente.", so: "Qalab cuntada si degdeg ah u kululeeya.", ti: "መግቢ ብቕልጡፍ ዘሞቕ መሳርሒ።", tr: "Yiyecekleri hızlı ısıtan cihaz.", ps: "هغه آله چې خواړه ژر ګرموي.", uk: "Прилад, що швидко розігріває їжу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le micro-ondes pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque micro-ondes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ventilateur",     image: "ventilateur.webp",   article: "le",  gender: "m", definition: "appareil qui brasse l'air pour rafraîchir" , exampleSentences: {
+    { word: "ventilateur",     image: "ventilateur.webp",   article: "le",  gender: "m", definition: ["Appareil qui fait bouger l’air pour rafraîchir."], definitionPivot: { en: "An appliance that moves air to cool a room.", ar: "جهاز يحرك الهواء لتبريد المكان.", fa: "وسیله‌ای که هوا را برای خنک کردن حرکت می‌دهد.", pt: "Aparelho que faz circular ar para refrescar.", so: "Qalab hawada dhaqaajiya si meel loo qaboojiyo.", ti: "ክፍሊ ንምዝሓል ኣየር ዘንቀሳቕስ መሳርሒ።", tr: "Bir yeri serinletmek için hava üfleyen cihaz.", ps: "هغه آله چې د يخولو لپاره هوا خوځوي.", uk: "Прилад, що рухає повітря для охолодження." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le ventilateur pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque ventilateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouilloire",      image: "bouilloire.webp",    article: "la",  gender: "f", definition: "appareil pour faire bouillir de l'eau" , exampleSentences: {
+    { word: "bouilloire",      image: "bouilloire.webp",    article: "la",  gender: "f", definition: ["Appareil pour faire chauffer de l’eau."], definitionPivot: { en: "An appliance that boils water.", ar: "جهاز يغلي الماء.", fa: "وسیله‌ای که آب را می‌جوشاند.", pt: "Aparelho que ferve água.", so: "Qalab biyo karkariya.", ti: "ማይ ዘፍልሕ መሳርሒ።", tr: "Su kaynatan cihaz.", ps: "هغه آله چې اوبه جوشوي.", uk: "Прилад, що кип’ятить воду." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bouilloire pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque bouilloire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cafetière",       image: "cafetiere.webp",     article: "la",  gender: "f", definition: "appareil électrique pour préparer le café" , exampleSentences: {
+    { word: "cafetière",       image: "cafetiere.webp",     article: "la",  gender: "f", definition: ["Appareil pour préparer le café."], definitionPivot: { en: "An appliance used to make coffee.", ar: "جهاز لتحضير القهوة.", fa: "وسیله‌ای برای آماده کردن قهوه.", pt: "Aparelho para preparar café.", so: "Qalab lagu sameeyo qaxwo.", ti: "ቡን ንምድላው ዝጥቀም መሳርሒ።", tr: "Kahve yapmak için kullanılan cihaz.", ps: "هغه آله چې قهوه پرې جوړېږي.", uk: "Прилад для приготування кави." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cafetière pendant l'exercice.",

@@ -6,7 +6,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
   title: "Les maladies",
   section: "V8",
   words: [
-    { word: "rhume",        image: "rhume.webp",    article: "le",  gender: "m", definition: "infection légère du nez et de la gorge" , exampleSentences: {
+    { word: "rhume",        image: "rhume.webp",    article: "le",  gender: "m", definition: ["Petite maladie avec le nez qui coule, parfois de la toux."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du rhume au patient.",
@@ -70,7 +70,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque rhume est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grippe",       image: "grippe.webp",   article: "la",  gender: "f", definition: "maladie virale avec fièvre et courbatures" , exampleSentences: {
+    { word: "grippe",       image: "grippe.webp",   article: "la",  gender: "f", definition: ["Maladie avec de la fièvre, de la fatigue et des douleurs."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la grippe au patient.",
@@ -134,7 +134,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque grippe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fièvre",       image: "fievre.webp",   article: "la",  gender: "f", definition: "température corporelle anormalement élevée" , exampleSentences: {
+    { word: "fièvre",       image: "fievre.webp",   article: "la",  gender: "f", definition: ["Température du corps trop élevée."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la fièvre au patient.",
@@ -198,7 +198,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque fièvre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "douleur",      image: "douleur.webp",  article: "la",  gender: "f", definition: "sensation désagréable dans une partie du corps" , exampleSentences: {
+    { word: "douleur",      image: "douleur.webp",  article: "la",  gender: "f", definition: ["Sensation désagréable dans le corps."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la douleur au patient.",
@@ -262,7 +262,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque douleur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "toux",         image: "toux.webp",     article: "la",  gender: "f", definition: "expiration forcée et bruyante" , exampleSentences: {
+    { word: "toux",         image: "toux.webp",     article: "la",  gender: "f", definition: ["Action de tousser quand la gorge ou les poumons sont irrités."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la toux au patient.",
@@ -326,7 +326,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque toux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "allergie",     image: "allergie.webp", article: "l'",  gender: "f", definition: "réaction du corps à une substance étrangère" , exampleSentences: {
+    { word: "allergie",     image: "allergie.webp", article: "l'",  gender: "f", definition: ["Réaction du corps à quelque chose, comme le pollen ou un aliment."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'allergie au patient.",
@@ -390,7 +390,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque allergie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "coupure",      image: "coupure.webp",  article: "la",  gender: "f", definition: "blessure faite par un objet tranchant" , exampleSentences: {
+    { word: "coupure",      image: "coupure.webp",  article: "la",  gender: "f", definition: ["Blessure faite par un objet coupant."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la coupure au patient.",
@@ -454,7 +454,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque coupure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brûlure",      image: "brulure.webp",  article: "la",  gender: "f", definition: "lésion causée par la chaleur ou le feu" , exampleSentences: {
+    { word: "brûlure",      image: "brulure.webp",  article: "la",  gender: "f", definition: ["Blessure causée par le feu, la chaleur ou un produit."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la brûlure au patient.",
@@ -518,7 +518,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque brûlure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "blessure",     image: "blessure.webp", article: "la",  gender: "f", definition: "lésion corporelle causée par un choc" , exampleSentences: {
+    { word: "blessure",     image: "blessure.webp", article: "la",  gender: "f", definition: ["Mal ou dommage sur une partie du corps."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la blessure au patient.",
@@ -582,7 +582,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque blessure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fracture",     image: "fracture.webp", article: "la",  gender: "f", definition: "cassure d'un os" , exampleSentences: {
+    { word: "fracture",     image: "fracture.webp", article: "la",  gender: "f", definition: ["Os cassé."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la fracture au patient.",
@@ -646,7 +646,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
           "Puisque fracture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nausée",       image: "nausee.webp",   article: "la",  gender: "f", definition: "sensation d'envie de vomir" , exampleSentences: {
+    { word: "nausée",       image: "nausee.webp",   article: "la",  gender: "f", definition: ["Envie de vomir."], definitionPivot: { en: "A health problem or symptom.", ar: "مشكلة صحية أو عَرَض.", fa: "مشکل سلامتی یا نشانه بیماری.", pt: "Problema de saúde ou sintoma.", so: "Dhibaato caafimaad ama calaamad.", ti: "ጸገም ጥዕና ወይ ምልክት።", tr: "Sağlık sorunu veya belirti.", ps: "روغتيايي ستونزه يا نښه.", uk: "Проблема зі здоров’ям або симптом." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la nausée au patient.",

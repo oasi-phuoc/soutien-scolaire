@@ -6,7 +6,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
   title: "Les accessoires",
   section: "V6",
   words: [
-    { word: "chaussettes", image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "vêtements qui couvrent les pieds" , exampleSentences: {
+    { word: "chaussettes", image: "chaussettes.webp", article: "les", gender: "f", group: "Les chaussures", definition: ["Vêtements que l’on met sur les pieds."], definitionPivot: { en: "Clothes that cover the feet.", ar: "ملابس تغطي القدمين.", fa: "لباسی که پاها را می‌پوشاند.", pt: "Roupa que cobre os pés.", so: "Dhar daboola cagaha.", ti: "እግሪ ዝሽፍን ክዳን።", tr: "Ayakları örten giysi.", ps: "هغه کالي چې پښې پټوي.", uk: "Одяг, що покриває стопи." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussettes pendant l'exercice.",
@@ -71,7 +71,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussures", image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", definition: "paire de souliers pour les pieds" , exampleSentences: {
+    { word: "chaussures", image: "chaussures.webp", article: "les", gender: "f", group: "Les chaussures", definition: ["Objets que l’on porte aux pieds pour marcher."], definitionPivot: { en: "Shoes worn on the feet.", ar: "أحذية تُلبس في القدمين.", fa: "کفش‌هایی که به پا می‌کنند.", pt: "Calçado usado nos pés.", so: "Kabo cagaha lagu xirto.", ti: "ኣብ እግሪ ዝኽደን ጫማ።", tr: "Ayakta giyilen ayakkabılar.", ps: "بوټان چې په پښو کېږي.", uk: "Взуття для ніг." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussures pendant l'exercice.",
@@ -136,7 +136,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussures est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottes", image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures hautes" , exampleSentences: {
+    { word: "bottes", image: "bottes.webp", article: "les", gender: "f", group: "Les chaussures", definition: ["Chaussures hautes qui couvrent une partie de la jambe."], definitionPivot: { en: "High shoes that cover the ankle or leg.", ar: "أحذية عالية تغطي الكاحل أو الساق.", fa: "کفش‌های بلندی که مچ یا ساق را می‌پوشانند.", pt: "Calçado alto que cobre o tornozelo ou a perna.", so: "Kabo dhaadheer oo daboola canqowga ama lugta.", ti: "ልዕሊ ቁርጭምጭሚት ዝሽፍን ነዊሕ ጫማ።", tr: "Bileği veya bacağı örten yüksek ayakkabı.", ps: "لوړ بوټان چې ټخۍ يا پښه پټوي.", uk: "Високе взуття, що закриває щиколотку або ногу." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les bottes pendant l'exercice.",
@@ -201,7 +201,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bottines", image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures qui montent à la cheville" , exampleSentences: {
+    { word: "bottines", image: "bottines.webp", article: "les", gender: "f", group: "Les chaussures", definition: ["Chaussures montantes qui couvrent la cheville."], definitionPivot: { en: "Shoes that reach the ankle.", ar: "أحذية تصل إلى الكاحل.", fa: "کفش‌هایی تا مچ پا.", pt: "Botas curtas até ao tornozelo.", so: "Kabo gaara canqowga.", ti: "ክሳብ ቁርጭምጭሚት ዝበጽሕ ጫማ።", tr: "Bileğe kadar çıkan ayakkabı.", ps: "بوټان چې تر ټخۍ رسېږي.", uk: "Черевики до щиколотки." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les bottines pendant l'exercice.",
@@ -266,7 +266,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bottines est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chaussons", image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", definition: "chaussures d'intérieur confortables" , exampleSentences: {
+    { word: "chaussons", image: "chaussons.webp", article: "les", gender: "m", group: "Les chaussures", definition: ["Chaussures souples que l’on porte à l’intérieur de la maison."], definitionPivot: { en: "Comfortable indoor shoes.", ar: "أحذية منزلية مريحة.", fa: "کفش راحتی داخل خانه.", pt: "Calçado confortável para casa.", so: "Kabo raaxo leh oo guriga lagu xirto.", ti: "ኣብ ገዛ ዝኽደን ምቹእ ጫማ።", tr: "Evde giyilen rahat ayakkabı.", ps: "د کور ارام بوټان.", uk: "Зручне домашнє взуття." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les chaussons pendant l'exercice.",
@@ -331,7 +331,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chaussons est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sandales", image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", definition: "chaussures ouvertes pour l'été" , exampleSentences: {
+    { word: "sandales", image: "sandales.webp", article: "les", gender: "f", group: "Les chaussures", definition: ["Chaussures ouvertes que l’on porte souvent quand il fait chaud."], definitionPivot: { en: "Open shoes for warm weather.", ar: "أحذية مفتوحة للطقس الحار.", fa: "کفش‌های باز برای هوای گرم.", pt: "Calçado aberto para tempo quente.", so: "Kabo furan oo xilliga kulul ah.", ti: "ንውዑይ ወቕቲ ክፉት ጫማ።", tr: "Sıcak havada giyilen açık ayakkabı.", ps: "د ګرمې هوا خلاص بوټان.", uk: "Відкрите взуття для теплої погоди." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les sandales pendant l'exercice.",
@@ -396,7 +396,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sandales est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chapeau", image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", definition: "coiffure rigide qui protège la tête" , exampleSentences: {
+    { word: "chapeau", image: "chapeau.webp", article: "le", gender: "m", group: "Pour la tête", definition: ["Objet que l’on porte sur la tête."], definitionPivot: { en: "A rigid item worn on the head.", ar: "قبعة صلبة تُلبس على الرأس.", fa: "کلاه محکمی که روی سر می‌گذارند.", pt: "Chapéu rígido usado na cabeça.", so: "Koofiyad adag oo madaxa la saaro.", ti: "ኣብ ርእሲ ዝኽደን ጠንካራ ቆቢዕ።", tr: "Başa takılan sert şapka.", ps: "کلکه خولۍ چې په سر کېږي.", uk: "Жорсткий головний убір." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le chapeau pendant l'exercice.",
@@ -461,7 +461,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque chapeau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casquette", image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", definition: "coiffure souple avec visière" , exampleSentences: {
+    { word: "casquette", image: "casquette.webp", article: "la", gender: "f", group: "Pour la tête", definition: ["Chapeau avec une visière."], definitionPivot: { en: "A soft cap with a visor.", ar: "قبعة ناعمة لها واقية.", fa: "کلاه نرم با لبه.", pt: "Boné macio com pala.", so: "Koofiyad jilicsan oo leh dabool hore.", ti: "ምስ መከላኸሊ ዘለዎ ልስሉስ ቆቢዕ።", tr: "Siperlikli yumuşak şapka.", ps: "نرمه خولۍ له سيورې سره.", uk: "М’яка кепка з козирком." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la casquette pendant l'exercice.",
@@ -526,7 +526,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque casquette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bonnet", image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", definition: "coiffure chaude en tissu ou en laine" , exampleSentences: {
+    { word: "bonnet", image: "bonnet.webp", article: "le", gender: "m", group: "Pour la tête", definition: ["Chapeau chaud pour l’hiver."], definitionPivot: { en: "A warm hat made of fabric or wool.", ar: "قبعة دافئة من قماش أو صوف.", fa: "کلاه گرم از پارچه یا پشم.", pt: "Gorro quente de tecido ou lã.", so: "Koofiyad diirran oo maro ama dhogor ah.", ti: "ካብ ጨርቂ ወይ ጸጉሪ ዝተሰርሐ ሙቕ ቆቢዕ።", tr: "Kumaş veya yünden sıcak bere.", ps: "توده خولۍ له ټوکر يا وړۍ.", uk: "Тепла шапка з тканини або вовни." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bonnet pendant l'exercice.",
@@ -591,7 +591,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bonnet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "béret", image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", definition: "chapeau souple et rond" , exampleSentences: {
+    { word: "béret", image: "beret.webp", article: "le", gender: "m", group: "Pour la tête", definition: ["Chapeau rond et plat."], definitionPivot: { en: "A soft round hat.", ar: "قبعة ناعمة ومستديرة.", fa: "کلاه نرم و گرد.", pt: "Chapéu macio e redondo.", so: "Koofiyad jilicsan oo wareegsan.", ti: "ልስሉስን ክቢን ቆቢዕ።", tr: "Yumuşak yuvarlak şapka.", ps: "نرمه ګرده خولۍ.", uk: "М’який круглий берет." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le béret pendant l'exercice.",
@@ -656,7 +656,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque béret est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "écharpe", image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", definition: "longue pièce de tissu pour le cou" , exampleSentences: {
+    { word: "écharpe", image: "echarpe.webp", article: "l'", gender: "f", group: "Pour le cou", definition: ["Long tissu que l’on porte autour du cou pour avoir chaud."], definitionPivot: { en: "A long cloth worn around the neck.", ar: "قطعة قماش طويلة حول الرقبة.", fa: "پارچه بلند دور گردن.", pt: "Tecido comprido usado no pescoço.", so: "Maro dheer oo qoorta lagu xirto.", ti: "ኣብ ክሳድ ዝእሰር ነዊሕ ጨርቂ።", tr: "Boyna takılan uzun kumaş.", ps: "اوږده ټوټه چې پر غاړه تړل کېږي.", uk: "Довга тканина для шиї." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'écharpe pendant l'exercice.",
@@ -721,7 +721,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque écharpe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "foulard", image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", definition: "tissu léger porté autour du cou ou sur la tête" , exampleSentences: {
+    { word: "foulard", image: "foulard.webp", article: "le", gender: "m", group: "Pour le cou", definition: ["Tissu léger que l’on porte autour du cou ou sur la tête."], definitionPivot: { en: "A light cloth for the neck or head.", ar: "قماش خفيف للرقبة أو الرأس.", fa: "پارچه سبک برای گردن یا سر.", pt: "Lenço leve para o pescoço ou cabeça.", so: "Maro fudud oo qoorta ama madaxa lagu xirto.", ti: "ንክሳድ ወይ ርእሲ ቀሊል ጨርቂ።", tr: "Boyun veya baş için hafif kumaş.", ps: "سپکه ټوټه د غاړې يا سر لپاره.", uk: "Легка хустка для шиї або голови." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le foulard pendant l'exercice.",
@@ -786,7 +786,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque foulard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nœud papillon", image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", definition: "petit nœud porté au cou avec une chemise" , exampleSentences: {
+    { word: "nœud papillon", image: "noeud-papillon.webp", article: "le", gender: "m", group: "Pour le cou", definition: ["Accessoire élégant que l’on porte au cou."], definitionPivot: { en: "A small bow-shaped accessory worn around the neck.", ar: "إكسسوار صغير على شكل ربطة يُلبس حول العنق.", fa: "وسیله‌ای کوچک شبیه پاپیون که دور گردن بسته می‌شود.", pt: "Acessório pequeno em forma de laço usado ao pescoço.", so: "Qurxin yar oo qaab xarig ah oo qoorta lagu xirto.", ti: "ኣብ ክሳድ ዝእሰር ንእሽቶ ናይ ቅርጺ ቀስቲ መጌጺ።", tr: "Boyna takılan küçük fiyonk biçimli aksesuar.", ps: "کوچنی پاپیون چې د غاړې شاوخوا تړل کېږي.", uk: "Невеликий аксесуар у формі метелика для шиї." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le nœud papillon pendant l'exercice.",
@@ -851,7 +851,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque nœud papillon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ceinture", image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", definition: "bande pour tenir le pantalon" , exampleSentences: {
+    { word: "ceinture", image: "ceinture.webp", article: "la", gender: "f", group: "Pour porter des objets", definition: ["Bande que l’on porte autour de la taille."], definitionPivot: { en: "A band used to hold trousers.", ar: "حزام يمسك البنطال.", fa: "کمربندی برای نگه داشتن شلوار.", pt: "Cinto para segurar as calças.", so: "Suun lagu hayo surwaalka.", ti: "ስረ ንምሓዝ ቀለበት ሰሪት።", tr: "Pantolonu tutan kemer.", ps: "کمربند چې پتلون نيسي.", uk: "Пояс для штанів." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la ceinture pendant l'exercice.",
@@ -916,7 +916,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque ceinture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sac à main", image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "sac pour transporter des objets personnels" , exampleSentences: {
+    { word: "sac à main", image: "sac-a-main.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: ["Sac souvent porté à la main ou à l’épaule."], definitionPivot: { en: "A small bag carried by hand or on the shoulder.", ar: "حقيبة صغيرة تُحمل باليد أو على الكتف.", fa: "کیف کوچکی که با دست یا روی شانه حمل می‌شود.", pt: "Saco pequeno transportado na mão ou ao ombro.", so: "Boorso yar oo gacanta ama garabka lagu qaato.", ti: "ብኢድ ወይ ኣብ መንኵብ ዝተሓዝ ንእሽቶ ቦርሳ።", tr: "Elde veya omuzda taşınan küçük çanta.", ps: "کوچنۍ کڅوړه چې په لاس یا اوږه وړل کېږي.", uk: "Невелика сумка, яку носять у руці або на плечі." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sac à main pendant l'exercice.",
@@ -981,7 +981,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque sac à main est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "portefeuille", image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: "petit étui pour ranger argent et cartes" , exampleSentences: {
+    { word: "portefeuille", image: "portefeuille.webp", article: "le", gender: "m", group: "Pour porter des objets", definition: ["Petit objet pour ranger l’argent et les cartes."], definitionPivot: { en: "A small case for money and cards.", ar: "محفظة صغيرة للنقود والبطاقات.", fa: "کیف کوچک برای پول و کارت.", pt: "Carteira para dinheiro e cartões.", so: "Kiis yar oo lacag iyo kaarar lagu rido.", ti: "ገንዘብን ካርድታትን ንምቕማጥ ንእሽቶ መትሓዚ።", tr: "Para ve kartlar için cüzdan.", ps: "د پيسو او کارتونو کوچنی بټوه.", uk: "Гаманець для грошей і карток." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le portefeuille pendant l'exercice.",
@@ -1046,7 +1046,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque portefeuille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lunettes", image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", definition: "verres correcteurs portés sur le nez" , exampleSentences: {
+    { word: "lunettes", image: "lunettes.webp", article: "les", gender: "f", group: "Pour les yeux", definition: ["Objet que l’on porte devant les yeux pour mieux voir ou se protéger du soleil."], definitionPivot: { en: "Glasses worn on the nose to see better.", ar: "نظارات تُلبس على الأنف للرؤية.", fa: "عینکی برای بهتر دیدن.", pt: "Óculos usados para ver melhor.", so: "Muraayado sanka lagu xirto si fiican loo arko.", ti: "ንምርኣይ ኣብ ኣፍንጫ ዝኽደን መነጽር።", tr: "Daha iyi görmek için gözlük.", ps: "عينکې د ښه ليدلو لپاره.", uk: "Окуляри для кращого зору." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les lunettes pendant l'exercice.",
@@ -1111,7 +1111,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque lunettes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "montre", image: "montre.webp", article: "la", gender: "f", group: "Bijoux", definition: "bijou au poignet indiquant l'heure" , exampleSentences: {
+    { word: "montre", image: "montre.webp", article: "la", gender: "f", group: "Bijoux", definition: ["Objet que l’on porte au poignet pour lire l’heure."], definitionPivot: { en: "An object worn on the wrist that shows the time.", ar: "شيء يُلبس في المعصم ويُظهر الوقت.", fa: "وسیله‌ای روی مچ برای نشان دادن ساعت.", pt: "Objeto no pulso que mostra as horas.", so: "Shay gacanta lagu xirto oo waqtiga sheega.", ti: "ኣብ ኢድ ዝኽደን ሰዓት።", tr: "Bilekte zamanı gösteren saat.", ps: "په مړوند کې ساعت چې وخت ښيي.", uk: "Годинник на зап’ясті." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la montre pendant l'exercice.",
@@ -1176,7 +1176,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque montre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "collier", image: "collier.webp", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté autour du cou" , exampleSentences: {
+    { word: "collier", image: "collier.webp", article: "le", gender: "m", group: "Bijoux", definition: ["Bijou porté autour du cou."], definitionPivot: { en: "A jewel worn around the neck.", ar: "حلية تُلبس حول الرقبة.", fa: "زیوری که دور گردن می‌اندازند.", pt: "Joia usada ao pescoço.", so: "Dahab qoorta lagu xirto.", ti: "ኣብ ክሳድ ዝኽደን ጌጽ።", tr: "Boyna takılan takı.", ps: "غاړکۍ چې په غاړه کېږي.", uk: "Прикраса на шию." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le collier pendant l'exercice.",
@@ -1241,7 +1241,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque collier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boucles d'oreilles", image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", definition: "bijoux portés aux oreilles" , exampleSentences: {
+    { word: "boucles d'oreilles", image: "boucles-d-oreilles.webp", article: "les", gender: "f", group: "Bijoux", definition: ["Bijoux portés aux oreilles."], definitionPivot: { en: "Jewels worn on the ears.", ar: "حلي تُلبس في الأذنين.", fa: "زیورهایی که به گوش زده می‌شوند.", pt: "Joias usadas nas orelhas.", so: "Qurxiyo dhegaha lagu xirto.", ti: "ኣብ እዝኒ ዝእሰር ጌጣጌጥ።", tr: "Kulaklara takılan takılar.", ps: "ګاڼې چې په غوږونو کې اغوستل کېږي.", uk: "Прикраси, які носять на вухах." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé les boucles d'oreilles pendant l'exercice.",
@@ -1306,7 +1306,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque boucles d'oreilles est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bracelet", image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté au poignet" , exampleSentences: {
+    { word: "bracelet", image: "bracelet.webp", article: "le", gender: "m", group: "Bijoux", definition: ["Bijou porté autour du poignet."], definitionPivot: { en: "A jewel worn on the wrist.", ar: "حلية تُلبس حول المعصم.", fa: "دستبندی برای مچ.", pt: "Joia usada no pulso.", so: "Dahab gacanta lagu xirto.", ti: "ኣብ ኢድ ዝኽደን ጌጽ።", tr: "Bileğe takılan takı.", ps: "لاس بند د مړوند لپاره.", uk: "Браслет на зап’ястя." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bracelet pendant l'exercice.",
@@ -1371,7 +1371,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
           "Puisque bracelet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bague", image: "bague.webp", article: "la", gender: "f", group: "Bijoux", definition: "anneau bijou porté au doigt" , exampleSentences: {
+    { word: "bague", image: "bague.webp", article: "la", gender: "f", group: "Bijoux", definition: ["Bijou porté au doigt."], definitionPivot: { en: "A ring worn on a finger.", ar: "خاتم يُلبس في الإصبع.", fa: "انگشتری برای انگشت.", pt: "Anel usado no dedo.", so: "Faraanti far lagu xirto.", ti: "ኣብ ኣጻብዕቲ ዝኽደን ቀለበት።", tr: "Parmağa takılan yüzük.", ps: "ګوتې ته اچول کېدونکې ګوتمۍ.", uk: "Перстень на палець." }, synonym: [], exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la bague pendant l'exercice.",
