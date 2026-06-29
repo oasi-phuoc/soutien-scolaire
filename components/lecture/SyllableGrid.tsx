@@ -80,7 +80,7 @@ export function SyllableGrid({ baseLetter, mode = "cv" }: Props) {
   );
 
   function startListening(index: number) {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -155,8 +155,8 @@ export function SyllableGrid({ baseLetter, mode = "cv" }: Props) {
               <button
                 type="button"
                 onClick={() => startListening(i)}
-                disabled={state === "listening"}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 ${
+                disabled={state === "listening" || state === "correct"}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:active:scale-100 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "correct"

@@ -554,7 +554,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
   useImperativeHandle(ref, () => ({ reset }));
 
   function startListening(index: number) {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -617,8 +617,8 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
               <button
                 type="button"
                 onClick={() => startListening(i)}
-                disabled={state === "listening"}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 ${
+                disabled={state === "listening" || state === "correct"}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:active:scale-100 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "correct"
@@ -668,17 +668,35 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSeconds?: number; sampleSize?: number; isEval?: boolean }>(
-  function WordPronounceGrid({ words, timerSeconds, sampleSize, isEval }, ref) {
+const WordPronounceGrid = forwardRef<ResetHandle, {
+  words: string[];
+  timerSeconds?: number;
+  sampleSize?: number;
+  isEval?: boolean;
+  title?: string;
+  consigne?: string;
+  onTimeChange?: (t: number | null) => void;
+}>(
+  function WordPronounceGrid({ words, timerSeconds, sampleSize, isEval, title, consigne, onTimeChange }, ref) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
   const count = sampleSize ? Math.min(sampleSize, unique.length) : unique.length;
-  const [items, setItems] = useState<string[]>(() => shuffle(unique).slice(0, count));
-  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(count).fill("idle"));
-  const [heard, setHeard] = useState<string[]>(() => Array(count).fill(""));
+  // Items start empty and are sampled on the client only — this avoids a
+  // server/client hydration mismatch (the random order would differ), which
+  // otherwise made the list "auto-refresh" right after the page loaded.
+  const [items, setItems] = useState<string[]>([]);
+  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>([]);
+  const [heard, setHeard] = useState<string[]>([]);
   const [timeLeft, setTimeLeft] = useState<number>(timerSeconds ?? 0);
   // Evaluations show an announcement screen first; the timer only starts on "Commencer".
   const [started, setStarted] = useState<boolean>(!isEval);
   const recRef = useRef<unknown>(null);
+
+  // Sample the words once, on mount (client only).
+  useEffect(() => {
+    setItems(shuffle(unique).slice(0, count));
+    setStates(Array(count).fill("idle"));
+    setHeard(Array(count).fill(""));
+  }, [unique, count]);
 
   // Countdown timer (timed steps only). Stops at 0; reset restarts it.
   useEffect(() => {
@@ -690,6 +708,14 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
   const timeUp = !!timerSeconds && started && timeLeft <= 0;
   const remaining = states.filter((s) => s !== "correct").length;
   const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+  // Report the remaining time to the parent (so it can show it in the main
+  // progress bar), and clear it on unmount.
+  useEffect(() => {
+    onTimeChange?.(timerSeconds && started ? timeLeft : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, started, timerSeconds]);
+  useEffect(() => () => onTimeChange?.(null), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // While the evaluation is running, guard against leaving via the main nav.
   useRegisterEvalGuard(!!isEval && started && !timeUp);
@@ -722,7 +748,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
   }
 
   function startListening(index: number) {
-    if (typeof window === "undefined" || timeUp) return;
+    if (typeof window === "undefined" || timeUp || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -763,22 +789,26 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
 
   return (
     <section className="space-y-3">
-      {/* Timed steps: timer lives in the progress bar (math eval style). */}
-      {timerSeconds ? (
-        <div className="mb-2">
-          <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">
-              {isEval ? "Évaluation" : "Lecture rapide"}
-            </p>
-            <div className="flex items-center gap-3">
+      {/* Title + consigne */}
+      <div>
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{title ?? "Lire les mots"}</h2>
+        <p className="text-sm text-[var(--color-text-secondary)]">{consigne ?? "Prononcez chaque mot à voix haute."}</p>
+      </div>
+
+      {/* Timed steps: word-progress bar. The eval has no main bar, so it shows
+          its own timer here; the timed training step shows the timer in the
+          main progress bar (via onTimeChange). The "restant" count sits below. */}
+      {timerSeconds && (
+        <div>
+          {isEval && (
+            <div className="mb-1 flex items-center justify-end">
               <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
                 timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
               }`}>
                 {fmt(timeLeft)}
               </span>
-              <p className="text-xs text-[var(--color-text-secondary)]">{remaining} restant(s)</p>
             </div>
-          </div>
+          )}
           <div className="flex gap-1">
             {items.map((_, i) => (
               states[i] === "correct" ? null : (
@@ -786,11 +816,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
               )
             ))}
           </div>
-        </div>
-      ) : (
-        <div>
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les mots</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque mot à voix haute.</p>
+          <p className="mt-1 text-right text-xs text-[var(--color-text-secondary)]">{remaining} restant(s)</p>
         </div>
       )}
       {timeUp && (
@@ -816,8 +842,8 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
               <button
                 type="button"
                 onClick={() => startListening(i)}
-                disabled={state === "listening" || (timeUp && state !== "correct")}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 ${
+                disabled={state === "listening" || state === "correct" || timeUp}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "wrong"
@@ -844,12 +870,12 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
               <button
                 type="button"
                 onClick={() => playWord(word)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/15 text-[var(--color-text-secondary)] transition-opacity hover:opacity-75 active:scale-95"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95"
                 aria-label={`Écouter ${word}`}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                   <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                 </svg>
               </button>
               {state === "wrong" && heard[i] && (
@@ -877,6 +903,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [resetKey, setResetKey] = useState(0);
+  const [wordTimerLeft, setWordTimerLeft] = useState<number | null>(null);
   const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number; validated: boolean[]; isResults: boolean } | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const evalNavigateRef = useRef<(index: number) => void>(() => {});
@@ -892,6 +919,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const hasEvalStep = steps.some((s) => s.key === "eval" || s.key === "word-eval");
   const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
   const isWordEvalStep = step.key === "word-eval";
+  const isTimedReview = data.type === "multisyllable" && step.key === "review";
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
@@ -979,7 +1007,30 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       // step 4 ("review") is also timed: 10 words in 2 minutes.
       if (data.letterLower === "outils" || data.type === "multisyllable") {
         const timed = data.type === "multisyllable" && grid.key === "review";
-        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={data.type === "multisyllable" ? 10 : undefined} />;
+        const MS_TITLES: Record<string, string> = {
+          two: "Lecture des mots à 2 syllabes",
+          three: "Lecture des mots à 3 syllabes",
+          four: "Lecture des mots à 4 syllabes et plus",
+          review: "Lecture rapide chronométré",
+        };
+        const title = data.type === "multisyllable" ? MS_TITLES[grid.key] : undefined;
+        const consigne = timed
+          ? "Prononcez chaque mot à voix haute le plus vite possible avant la fin du temps."
+          : data.type === "multisyllable"
+            ? "Prononcez chaque mot à voix haute."
+            : undefined;
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            words={grid.items}
+            timerSeconds={timed ? 120 : undefined}
+            sampleSize={data.type === "multisyllable" ? 10 : undefined}
+            title={title}
+            consigne={consigne}
+            onTimeChange={timed ? setWordTimerLeft : undefined}
+          />
+        );
       }
       return <ReadingGridView key={k} grid={grid} />;
     }
@@ -1110,7 +1161,16 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">Entraînement</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {trainingSteps.length}</p>
+            <div className="flex items-center gap-3">
+              {isTimedReview && wordTimerLeft != null && (
+                <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
+                  wordTimerLeft <= 0 ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                }`}>
+                  {`${Math.floor(wordTimerLeft / 60)}:${String(wordTimerLeft % 60).padStart(2, "0")}`}
+                </span>
+              )}
+              <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {trainingSteps.length}</p>
+            </div>
           </div>
           <div className="flex gap-1">
             {trainingSteps.map((s, i) => (
