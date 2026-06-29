@@ -1584,6 +1584,54 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   ], "dauphin"),
 ];
 
+// ─── Pools de mots pour L8 (multisyllabes) ─────────────────────────────────────
+// Utilisés par la step 4 (Lecture rapide) et l'évaluation, qui tirent un
+// échantillon aléatoire du pool combiné.
+
+export const MS_TWO_SYLLABLE_POOL: string[] = [
+  "maison", "bateau", "gâteau", "chapeau", "couteau", "rideau", "château", "oiseau", "cadeau", "morceau",
+  "pinceau", "bureau", "marteau", "robot", "vélo", "moto", "panda", "tomate", "carotte", "salade",
+  "banane", "orange", "fromage", "valise", "souris", "chemin", "jardin", "lapin", "sapin", "requin",
+  "dauphin", "poussin", "raisin", "coussin", "dessin", "matin", "copain", "ballon", "bonbon", "garçon",
+  "savon", "citron", "mouton", "bouton", "wagon", "dragon", "melon", "salon", "jambon", "crayon",
+  "rayon", "avion", "camion", "cheval", "journal", "canard", "fourmi", "tapis", "radis", "chemise",
+  "surprise", "ceinture", "voiture", "peinture", "lecture", "facture", "nature", "figure", "mesure", "chaussure",
+  "tortue", "statue", "tableau", "drapeau", "manteau",
+];
+
+export const MS_THREE_SYLLABLE_POOL: string[] = [
+  "ananas", "animal", "papillon", "domino", "éléphant", "chocolat", "hôpital", "escalier", "parapluie", "téléphone",
+  "cinéma", "caméra", "pyjama", "kimono", "numéro", "horizon", "caleçon", "hérisson", "toboggan", "pélican",
+  "océan", "capitaine", "magasin", "magazine", "parasol", "parachute", "biberon", "calepin", "médecin", "crocodile",
+  "kangourou", "tabouret", "araignée", "cheminée", "dromadaire", "perroquet", "escargot", "koala", "patinage", "jardinage",
+  "bricolage", "maquillage", "bavardage", "nettoyage", "ramassage", "arrosage", "décollage", "paysage", "pantalon", "dentifrice",
+  "ascenseur", "professeur", "directeur", "inspecteur", "spectateur", "aviateur", "radiateur", "jardinier", "cuisinier", "pâtissier",
+  "policier", "infirmier", "boulanger", "charcutier", "ouvrier", "écolier", "chevalier", "calendrier", "saladier", "épervier",
+  "balançoire", "trampoline", "mandarine", "clémentine", "aubergine",
+];
+
+export const MS_FOUR_PLUS_SYLLABLE_POOL: string[] = [
+  "ordinateur", "aspirateur", "calculatrice", "animateur", "illustrateur", "commentateur", "explorateur", "navigateur", "opérateur", "incubateur",
+  "congélateur", "ventilateur", "agitateur", "imitateur", "décorateur", "dessinateur", "éducateur", "libérateur", "modérateur", "générateur",
+  "réalisateur", "accélérateur", "hélicoptère", "réfrigérateur", "dictionnaire", "température", "bibliothèque", "intercalaire", "anniversaire", "vétérinaire",
+  "propriétaire", "imperméable", "automobile", "locomotive", "motocyclette", "aérodrome", "aéroport", "téléviseur", "télévision", "hippopotame",
+  "rhinocéros", "information", "opération", "animation", "récréation", "décoration", "fabrication", "multiplication", "explication", "application",
+  "imagination", "respiration", "observation", "préparation", "réparation", "célébration", "génération", "population", "éducation", "situation",
+  "alimentation", "administration", "communication", "organisation", "présentation", "récupération", "transformation", "décongélation", "climatisation", "vaccination",
+  "pâtisserie", "boulangerie", "épicerie", "bijouterie", "charcuterie", "quincaillerie", "parfumerie", "université", "électricité", "curiosité",
+  "personnalité", "nationalité", "généralité", "publicité", "activité", "responsabilité", "appartement", "gouvernement", "médicament", "supermarché",
+  "chocolatier", "mathématiques", "géographie", "photographie", "biographie", "américain", "dégustation", "exploration", "invitation", "réservation",
+  "atterrissage", "déménagement", "développement", "environnement", "remerciement", "rétablissement", "ralentissement", "refroidissement", "agrandissement", "applaudissement",
+  "vocabulaire", "itinéraire", "millionnaire", "questionnaire", "extraordinaire", "imaginaire", "abécédaire", "publicitaire", "documentaire", "élémentaire",
+  "alimentaire", "supplémentaire", "parlementaire", "réglementaire", "complémentaire", "géographique", "catastrophique", "scientifique", "électronique", "informatique",
+  "mathématique", "automatique", "aromatique", "antipathique", "pédagogique", "biologique", "écologique", "technologique", "psychologique", "chronologique",
+  "météorologique", "géométrique", "kilométrique", "électricien", "informaticien", "mathématicien", "collectionneur", "ambassadeur", "consommateur", "encyclopédie",
+];
+
+export const MULTISYLLABLE_POOL: string[] = Array.from(
+  new Set([...MS_TWO_SYLLABLE_POOL, ...MS_THREE_SYLLABLE_POOL, ...MS_FOUR_PLUS_SYLLABLE_POOL]),
+);
+
 export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
   type: "multisyllable",
   letter: "Mots",
@@ -1594,7 +1642,7 @@ export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
     { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: grid25(["moto", "lune", "table", "robe", "salade", "tomate", "valise", "panda", "radio", "domino"]) },
     { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: grid25(["ananas", "animal", "carotte", "papillon", "tulipe", "girafe", "banane", "cabane", "orange", "fromage"]) },
     { key: "four", label: "Exercice 3 - Mots plus longs", items: grid25(["crocodile", "ordinateur", "bibliothèque", "éléphant", "chocolat", "kangourou", "aspirateur", "hôpital", "escalier", "intercalaire"]) },
-    { key: "review", label: "Exercice 4 - Lecture rapide", items: grid25(["animal", "domino", "papillon", "tomate", "crocodile", "valise", "fromage", "banane", "escalier", "kangourou"]) },
+    { key: "review", label: "Exercice 4 - Lecture rapide", items: MULTISYLLABLE_POOL },
   ],
 };
 

@@ -670,11 +670,12 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-function WordPronounceGrid({ words, timerSeconds }: { words: string[]; timerSeconds?: number }) {
+function WordPronounceGrid({ words, timerSeconds, sampleSize }: { words: string[]; timerSeconds?: number; sampleSize?: number }) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
-  const [items, setItems] = useState<string[]>(() => shuffle(unique));
-  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(unique.length).fill("idle"));
-  const [heard, setHeard] = useState<string[]>(() => Array(unique.length).fill(""));
+  const count = sampleSize ? Math.min(sampleSize, unique.length) : unique.length;
+  const [items, setItems] = useState<string[]>(() => shuffle(unique).slice(0, count));
+  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(count).fill("idle"));
+  const [heard, setHeard] = useState<string[]>(() => Array(count).fill(""));
   const [timeLeft, setTimeLeft] = useState<number>(timerSeconds ?? 0);
   const recRef = useRef<unknown>(null);
 
@@ -691,9 +692,9 @@ function WordPronounceGrid({ words, timerSeconds }: { words: string[]; timerSeco
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (recRef.current as any)?.abort?.();
     recRef.current = null;
-    setItems(shuffle(unique));
-    setStates(Array(unique.length).fill("idle"));
-    setHeard(Array(unique.length).fill(""));
+    setItems(shuffle(unique).slice(0, count));
+    setStates(Array(count).fill("idle"));
+    setHeard(Array(count).fill(""));
     if (timerSeconds) setTimeLeft(timerSeconds);
   }
 
@@ -747,7 +748,7 @@ function WordPronounceGrid({ words, timerSeconds }: { words: string[]; timerSeco
         <div>
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les mots</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            {timerSeconds ? "Lisez les 10 mots avant la fin du temps." : "Prononcez chaque mot à voix haute."}
+            {timerSeconds ? `Lisez les ${count} mots avant la fin du temps.` : "Prononcez chaque mot à voix haute."}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -928,19 +929,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
     if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
-      // L8 evaluation: 25 words drawn from every lesson grid, in 5 minutes.
+      // L8 evaluation: 25 words sampled from the full multisyllable pool, in 5 minutes.
       if (step.key === "word-eval") {
-        const pool = Array.from(new Set(data.grids.flatMap((g) => g.items)));
-        const words = shuffle(pool).slice(0, 25);
-        return <WordPronounceGrid key={k} words={words} timerSeconds={300} />;
+        const pool = data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items);
+        return <WordPronounceGrid key={k} words={pool} timerSeconds={300} sampleSize={25} />;
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
-      // L8 step 4 ("review") is timed: 2 minutes to read the 10 words.
+      // L8 step 4 ("review") is timed: 10 words sampled from the pool in 2 minutes.
       if (data.letterLower === "outils" || data.type === "multisyllable") {
         const timed = data.type === "multisyllable" && grid.key === "review";
-        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} />;
+        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={timed ? 10 : undefined} />;
       }
       return <ReadingGridView key={k} grid={grid} />;
     }
