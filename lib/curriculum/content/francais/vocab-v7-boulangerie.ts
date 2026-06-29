@@ -6,7 +6,25 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
   title: "La boulangerie",
   section: "V7",
   words: [
-    { word: "pain",             image: "pain.webp",             article: "le",  gender: "m", definition: ["Aliment fait avec de la farine, de l’eau et du sel."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+    {
+      word: "pain",
+      image: "pain.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Aliment fait avec de la farine, de l’eau et du sel."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au marché.",
@@ -70,8 +88,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pain.",
           "Puisque pain est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "baguette",         image: "baguette.webp",         article: "la",  gender: "f", definition: ["Pain long et fin, très connu en France."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "baguette",
+      image: "baguette.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Pain long et fin, très connu en France."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une baguette au marché.",
@@ -135,8 +172,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la baguette.",
           "Puisque baguette est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "sandwich",         image: "sandwich.webp",         article: "le",  gender: "m", definition: ["Pain coupé avec des aliments à l’intérieur."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "sandwich",
+      image: "sandwich.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Pain coupé avec des aliments à l’intérieur."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un sandwich au marché.",
@@ -200,8 +256,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le sandwich.",
           "Puisque sandwich est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "viennoiserie",     image: "viennoiserie.webp",     article: "la",  gender: "f", definition: ["Aliment sucré de boulangerie, souvent mangé le matin."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "viennoiserie",
+      image: "viennoiserie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Aliment sucré de boulangerie, souvent mangé le matin."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une viennoiserie au marché.",
@@ -265,8 +340,26 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la viennoiserie.",
           "Puisque viennoiserie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "croissant",                                        article: "le",  gender: "m", definition: ["Viennoiserie en forme de lune."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "croissant",
+      article: "le",
+      gender: "m",
+      definition: ["Viennoiserie en forme de lune."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un croissant au marché.",
@@ -330,8 +423,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le croissant.",
           "Puisque croissant est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pain au chocolat", image: "pain-au-chocolat.webp", article: "le",  gender: "m", definition: ["Viennoiserie avec du chocolat à l’intérieur."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pain au chocolat",
+      image: "pain-au-chocolat.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Viennoiserie avec du chocolat à l’intérieur."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un pain au chocolat au marché.",
@@ -395,8 +507,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pain au chocolat.",
           "Puisque pain au chocolat est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "brioche",          image: "brioche.webp",          article: "la",  gender: "f", definition: ["Pain sucré, tendre et moelleux."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "brioche",
+      image: "brioche.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Pain sucré, tendre et moelleux."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une brioche au marché.",
@@ -460,8 +591,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la brioche.",
           "Puisque brioche est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "biscuit",          image: "biscuit.webp",          article: "le",  gender: "m", definition: ["Petit gâteau sec."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "biscuit",
+      image: "biscuit.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit gâteau sec."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un biscuit au marché.",
@@ -525,8 +675,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le biscuit.",
           "Puisque biscuit est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pâtisserie",       image: "patisserie.webp",       article: "la",  gender: "f", definition: ["Gâteau ou préparation sucrée."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pâtisserie",
+      image: "patisserie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Gâteau ou préparation sucrée."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pâtisserie au marché.",
@@ -590,8 +759,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pâtisserie.",
           "Puisque pâtisserie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "gâteau",           image: "gateau.webp",           article: "le",  gender: "m", definition: ["Dessert sucré souvent préparé pour une fête."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "gâteau",
+      image: "gateau.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Dessert sucré souvent préparé pour une fête."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un gâteau au marché.",
@@ -655,8 +843,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le gâteau.",
           "Puisque gâteau est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "tarte",            image: "tarte.webp",            article: "la",  gender: "f", definition: ["Dessert avec une pâte et des fruits ou une garniture."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "tarte",
+      image: "tarte.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Dessert avec une pâte et des fruits ou une garniture."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une tarte au marché.",
@@ -720,8 +927,27 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la tarte.",
           "Puisque tarte est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "éclair",           image: "eclair.webp",           article: "l'",  gender: "m", definition: ["Pâtisserie longue avec de la crème à l’intérieur."], definitionPivot: { en: "A food sold in a bakery.", ar: "طعام يُباع في المخبز.", fa: "خوراکی که در نانوایی فروخته می‌شود.", pt: "Alimento vendido numa padaria.", so: "Cunto lagu iibiyo rooti-dubaha.", ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።", tr: "Fırında satılan yiyecek.", ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.", uk: "Їжа, яку продають у пекарні." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "éclair",
+      image: "eclair.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Pâtisserie longue avec de la crème à l’intérieur."],
+      definitionPivot: {
+        en: "A food sold in a bakery.",
+        ar: "طعام يُباع في المخبز.",
+        fa: "خوراکی که در نانوایی فروخته می‌شود.",
+        pt: "Alimento vendido numa padaria.",
+        so: "Cunto lagu iibiyo rooti-dubaha.",
+        ti: "ኣብ መጋገሪ ዝሽየጥ መግቢ።",
+        tr: "Fırında satılan yiyecek.",
+        ps: "هغه خواړه چې په نانوايي کې پلورل کېږي.",
+        uk: "Їжа, яку продають у пекарні.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un éclair au marché.",
@@ -785,7 +1011,8 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'éclair.",
           "Puisque éclair est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il achète une ___ fraîche chaque matin.",                answer: "baguette" },

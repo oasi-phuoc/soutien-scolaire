@@ -6,7 +6,25 @@ export const V8_MEDECINS_THEME: VocabTheme = {
   title: "Les médecins",
   section: "V8",
   words: [
-    { word: "médecin",          image: "medecin.webp",            article: "le",  gender: "m", definition: ["Personne qui examine et soigne les malades."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+    {
+      word: "médecin",
+      image: "medecin.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Personne qui examine et soigne les malades."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du médecin au patient.",
@@ -69,8 +87,28 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le médecin.",
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "infirmier",        image: "infirmier.webp",          article: "un",  gender: "m", feminine: "infirmière", definition: ["Personne qui soigne les patients et aide le médecin."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "infirmier",
+      image: "infirmier.webp",
+      article: "un",
+      gender: "m",
+      feminine: "infirmière",
+      definition: ["Personne qui soigne les patients et aide le médecin."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'infirmier au patient.",
@@ -133,8 +171,28 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'infirmier.",
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pharmacien",       image: "pharmacien.webp",         article: "un",  gender: "m", feminine: "pharmacienne", definition: ["Personne qui vend et conseille des médicaments dans une pharmacie."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pharmacien",
+      image: "pharmacien.webp",
+      article: "un",
+      gender: "m",
+      feminine: "pharmacienne",
+      definition: ["Personne qui vend et conseille des médicaments dans une pharmacie."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pharmacien au patient.",
@@ -197,8 +255,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pharmacien.",
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dentiste",         image: "dentiste.webp",           article: "le",  gender: "m", definition: ["Médecin qui soigne les dents."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dentiste",
+      image: "dentiste.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Médecin qui soigne les dents."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du dentiste au patient.",
@@ -261,8 +338,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le dentiste.",
           "Puisque dentiste est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ophtalmologue",    image: "ophtalmologue.webp",      article: "l'",  gender: "m", definition: ["Médecin spécialiste des yeux."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ophtalmologue",
+      image: "ophtalmologue.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Médecin spécialiste des yeux."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ophtalmologue au patient.",
@@ -325,8 +421,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ophtalmologue.",
           "Puisque ophtalmologue est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pédiatre",         image: "pediatre.webp",           article: "le",  gender: "m", definition: ["Médecin spécialiste des enfants."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pédiatre",
+      image: "pediatre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Médecin spécialiste des enfants."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pédiatre au patient.",
@@ -389,8 +504,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pédiatre.",
           "Puisque pédiatre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chirurgien",       image: "chirurgien.webp",         article: "le",  gender: "m", definition: ["Médecin qui opère les patients."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chirurgien",
+      image: "chirurgien.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Médecin qui opère les patients."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du chirurgien au patient.",
@@ -453,8 +587,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le chirurgien.",
           "Puisque chirurgien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "urgentiste",       image: "urgentiste.webp",         article: "l'",  gender: "m", definition: ["Médecin qui soigne les personnes en urgence."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "urgentiste",
+      image: "urgentiste.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Médecin qui soigne les personnes en urgence."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'urgentiste au patient.",
@@ -517,8 +670,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'urgentiste.",
           "Puisque urgentiste est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "kinésithérapeute", image: "kinésithérapeute.webp",   article: "le",  gender: "m", definition: ["Personne qui aide à soigner le corps avec des mouvements et des exercices."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "kinésithérapeute",
+      image: "kinésithérapeute.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Personne qui aide à soigner le corps avec des mouvements et des exercices."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du kinésithérapeute au patient.",
@@ -581,8 +753,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le kinésithérapeute.",
           "Puisque kinésithérapeute est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "salle d'attente",  image: "salle-d-attente.webp",    article: "la",  gender: "f", definition: ["Lieu où l’on attend avant de voir le médecin."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "salle d'attente",
+      image: "salle-d-attente.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Lieu où l’on attend avant de voir le médecin."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la salle d'attente au patient.",
@@ -645,8 +836,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la salle d'attente.",
           "Puisque salle d'attente est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "consultation",     image: "consultation.webp",       article: "la",  gender: "f", definition: ["Rendez-vous avec un médecin pour parler d’un problème de santé."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "consultation",
+      image: "consultation.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Rendez-vous avec un médecin pour parler d’un problème de santé."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la consultation au patient.",
@@ -709,8 +919,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la consultation.",
           "Puisque consultation est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ordonnance",       image: "ordonnance.webp",         article: "l'",  gender: "f", definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ordonnance",
+      image: "ordonnance.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ordonnance au patient.",
@@ -773,8 +1002,27 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ordonnance.",
           "Puisque ordonnance est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "rendez-vous",      image: "rendez-vous.webp",        article: "le",  gender: "m", definition: ["Moment fixé pour rencontrer quelqu’un, par exemple un médecin."], definitionPivot: { en: "A person or place connected with health care.", ar: "شخص أو مكان مرتبط بالرعاية الصحية.", fa: "فرد یا جایی مربوط به مراقبت سلامت.", pt: "Pessoa ou lugar ligado aos cuidados de saúde.", so: "Qof ama meel la xiriirta daryeel caafimaad.", ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።", tr: "Sağlık bakımıyla ilgili kişi veya yer.", ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.", uk: "Людина або місце, пов’язане з медичною допомогою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "rendez-vous",
+      image: "rendez-vous.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Moment fixé pour rencontrer quelqu’un, par exemple un médecin."],
+      definitionPivot: {
+        en: "A person or place connected with health care.",
+        ar: "شخص أو مكان مرتبط بالرعاية الصحية.",
+        fa: "فرد یا جایی مربوط به مراقبت سلامت.",
+        pt: "Pessoa ou lugar ligado aos cuidados de saúde.",
+        so: "Qof ama meel la xiriirta daryeel caafimaad.",
+        ti: "ምስ ክንክን ጥዕና ዝተኣሳሰር ሰብ ወይ ቦታ።",
+        tr: "Sağlık bakımıyla ilgili kişi veya yer.",
+        ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
+        uk: "Людина або місце, пов’язане з медичною допомогою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du rendez-vous au patient.",
@@ -837,7 +1085,8 @@ export const V8_MEDECINS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le rendez-vous.",
           "Puisque rendez-vous est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il a pris un ___ chez le médecin pour jeudi.",          answer: "rendez-vous" },

@@ -6,7 +6,25 @@ export const V3_SPORT_THEME: VocabTheme = {
   title: "Le sport",
   section: "V3",
   words: [
-    { word: "football", image: "football.webp", article: "le", gender: "m", definition: ["Sport avec deux équipes qui jouent avec un ballon au pied."], definitionPivot: { en: "A team sport played with a round ball.", ar: "رياضة جماعية تُلعب بكرة مستديرة.", fa: "ورزش گروهی با توپ گرد.", pt: "Desporto coletivo jogado com uma bola redonda.", so: "Ciyaar kooxeed lagu ciyaaro kubbad wareegsan.", ti: "ብኩዕሶ ክቢ ዝጻወት የጉጅለ ስፖርት።", tr: "Yuvarlak topla oynanan takım sporu.", ps: "ډله ييزه لوبه چې په ګرد توپ کېږي.", uk: "Командний спорт із круглим м’ячем." }, synonym: [], exampleSentences: {
+    {
+      word: "football",
+      image: "football.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport avec deux équipes qui jouent avec un ballon au pied."],
+      definitionPivot: {
+        en: "A team sport played with a round ball.",
+        ar: "رياضة جماعية تُلعب بكرة مستديرة.",
+        fa: "ورزش گروهی با توپ گرد.",
+        pt: "Desporto coletivo jogado com uma bola redonda.",
+        so: "Ciyaar kooxeed lagu ciyaaro kubbad wareegsan.",
+        ti: "ብኩዕሶ ክቢ ዝጻወት የጉጅለ ስፖርት።",
+        tr: "Yuvarlak topla oynanan takım sporu.",
+        ps: "ډله ييزه لوبه چې په ګرد توپ کېږي.",
+        uk: "Командний спорт із круглим м’ячем.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du football avec mes amis.",
@@ -70,8 +88,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le football.",
           "Puisque football est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "basket-ball", image: "basketball.webp", article: "le", gender: "m", definition: ["Sport avec deux équipes qui lancent un ballon dans un panier."], definitionPivot: { en: "A team sport where players score in a basket.", ar: "رياضة جماعية يسجل فيها اللاعبون في سلة.", fa: "ورزش گروهی که بازیکنان در سبد امتیاز می‌گیرند.", pt: "Desporto coletivo em que se marca num cesto.", so: "Ciyaar kooxeed oo dhibco lagu dhaliyo dambiil.", ti: "ተጻወትቲ ኣብ ቅርጫት ዝእትዉሉ የጉጅለ ስፖርት።", tr: "Oyuncuların sepete sayı attığı takım sporu.", ps: "ډله ييزه لوبه چې لوبغاړي په ټوکرۍ کې نمرې اخلي.", uk: "Командний спорт, де м’яч закидають у кошик." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "basket-ball",
+      image: "basketball.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport avec deux équipes qui lancent un ballon dans un panier."],
+      definitionPivot: {
+        en: "A team sport where players score in a basket.",
+        ar: "رياضة جماعية يسجل فيها اللاعبون في سلة.",
+        fa: "ورزش گروهی که بازیکنان در سبد امتیاز می‌گیرند.",
+        pt: "Desporto coletivo em que se marca num cesto.",
+        so: "Ciyaar kooxeed oo dhibco lagu dhaliyo dambiil.",
+        ti: "ተጻወትቲ ኣብ ቅርጫት ዝእትዉሉ የጉጅለ ስፖርት።",
+        tr: "Oyuncuların sepete sayı attığı takım sporu.",
+        ps: "ډله ييزه لوبه چې لوبغاړي په ټوکرۍ کې نمرې اخلي.",
+        uk: "Командний спорт, де м’яч закидають у кошик.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du basket-ball avec mes amis.",
@@ -135,8 +172,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le basket-ball.",
           "Puisque basket-ball est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "tennis", image: "tennis.webp", article: "le", gender: "m", definition: ["Sport avec une raquette et une balle."], definitionPivot: { en: "A racket sport played on a court.", ar: "رياضة مضرب تُلعب في ملعب.", fa: "ورزش راکتی که در زمین بازی می‌شود.", pt: "Desporto de raquete jogado num campo.", so: "Ciyaar raket lagu ciyaaro garoon.", ti: "ብራኬት ኣብ ሜዳ ዝጻወት ስፖርት።", tr: "Kortta oynanan raket sporu.", ps: "د راکټ لوبه چې په میدان کې کېږي.", uk: "Ракетковий спорт на корті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "tennis",
+      image: "tennis.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport avec une raquette et une balle."],
+      definitionPivot: {
+        en: "A racket sport played on a court.",
+        ar: "رياضة مضرب تُلعب في ملعب.",
+        fa: "ورزش راکتی که در زمین بازی می‌شود.",
+        pt: "Desporto de raquete jogado num campo.",
+        so: "Ciyaar raket lagu ciyaaro garoon.",
+        ti: "ብራኬት ኣብ ሜዳ ዝጻወት ስፖርት።",
+        tr: "Kortta oynanan raket sporu.",
+        ps: "د راکټ لوبه چې په میدان کې کېږي.",
+        uk: "Ракетковий спорт на корті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du tennis avec mes amis.",
@@ -200,8 +256,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le tennis.",
           "Puisque tennis est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "natation", image: "natation.webp", article: "la", gender: "f", definition: ["Sport où l’on nage dans l’eau."], definitionPivot: { en: "A sport of swimming in water.", ar: "رياضة السباحة في الماء.", fa: "ورزش شنا در آب.", pt: "Desporto de nadar na água.", so: "Ciyaarta dabaasha biyaha.", ti: "ኣብ ማይ ምሕንባስ ዝኾነ ስፖርት።", tr: "Suda yüzme sporu.", ps: "په اوبو کې د لامبو ورزش.", uk: "Спорт плавання у воді." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "natation",
+      image: "natation.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Sport où l’on nage dans l’eau."],
+      definitionPivot: {
+        en: "A sport of swimming in water.",
+        ar: "رياضة السباحة في الماء.",
+        fa: "ورزش شنا در آب.",
+        pt: "Desporto de nadar na água.",
+        so: "Ciyaarta dabaasha biyaha.",
+        ti: "ኣብ ማይ ምሕንባስ ዝኾነ ስፖርት።",
+        tr: "Suda yüzme sporu.",
+        ps: "په اوبو کې د لامبو ورزش.",
+        uk: "Спорт плавання у воді.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de la natation avec mes amis.",
@@ -265,8 +340,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la natation.",
           "Puisque natation est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "vélo", image: "velo.webp", article: "le", gender: "m", definition: ["Véhicule à deux roues que l’on fait avancer avec les jambes."], definitionPivot: { en: "A vehicle or word used for transport.", ar: "مركبة أو كلمة تُستعمل في النقل.", fa: "وسیله یا واژه‌ای برای حمل‌ونقل.", pt: "Veículo ou palavra usada nos transportes.", so: "Gaari ama eray gaadiid loo isticmaalo.", ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።", tr: "Ulaşımda kullanılan araç veya kelime.", ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.", uk: "Транспорт або слово, пов’язане з транспортом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "vélo",
+      image: "velo.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Véhicule à deux roues que l’on fait avancer avec les jambes."],
+      definitionPivot: {
+        en: "A vehicle or word used for transport.",
+        ar: "مركبة أو كلمة تُستعمل في النقل.",
+        fa: "وسیله یا واژه‌ای برای حمل‌ونقل.",
+        pt: "Veículo ou palavra usada nos transportes.",
+        so: "Gaari ama eray gaadiid loo isticmaalo.",
+        ti: "መጓዓዝያ ወይ ኣብ መጓዓዝያ ዝጥቀሙሉ ቃል።",
+        tr: "Ulaşımda kullanılan araç veya kelime.",
+        ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
+        uk: "Транспорт або слово, пов’язане з транспортом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du vélo avec mes amis.",
@@ -330,8 +424,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le vélo.",
           "Puisque vélo est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "course", image: "courir.webp", article: "la", gender: "f", definition: ["Activité où l’on court."], definitionPivot: { en: "A speed competition on foot.", ar: "مسابقة سرعة على القدمين.", fa: "مسابقه سرعت با دویدن.", pt: "Competição de velocidade a pé.", so: "Tartan orod oo xawaare ah.", ti: "ብእግሪ ዝግበር ውድድር ፍጥነት።", tr: "Yaya hız yarışması.", ps: "د پښو په مټ د سرعت سيالي.", uk: "Змагання зі швидкості бігом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "course",
+      image: "courir.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Activité où l’on court."],
+      definitionPivot: {
+        en: "A speed competition on foot.",
+        ar: "مسابقة سرعة على القدمين.",
+        fa: "مسابقه سرعت با دویدن.",
+        pt: "Competição de velocidade a pé.",
+        so: "Tartan orod oo xawaare ah.",
+        ti: "ብእግሪ ዝግበር ውድድር ፍጥነት።",
+        tr: "Yaya hız yarışması.",
+        ps: "د پښو په مټ د سرعت سيالي.",
+        uk: "Змагання зі швидкості бігом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de la course avec mes amis.",
@@ -395,8 +508,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la course.",
           "Puisque course est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "danse", image: "danse.webp", article: "la", gender: "f", definition: ["Activité où l’on bouge avec de la musique."], definitionPivot: { en: "The art of moving the body to rhythm.", ar: "فن تحريك الجسم على الإيقاع.", fa: "هنر حرکت دادن بدن با ریتم.", pt: "Arte de mover o corpo ao ritmo.", so: "Farshaxanka jirka loogu dhaqaaqo laxanka.", ti: "ንሰብነት ብሪትም ምንቅስቓስ ዝኾነ ጥበብ።", tr: "Bedeni ritme göre hareket ettirme sanatı.", ps: "د بدن د ريتم سره خوځولو هنر.", uk: "Мистецтво рухати тілом у ритмі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "danse",
+      image: "danse.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Activité où l’on bouge avec de la musique."],
+      definitionPivot: {
+        en: "The art of moving the body to rhythm.",
+        ar: "فن تحريك الجسم على الإيقاع.",
+        fa: "هنر حرکت دادن بدن با ریتم.",
+        pt: "Arte de mover o corpo ao ritmo.",
+        so: "Farshaxanka jirka loogu dhaqaaqo laxanka.",
+        ti: "ንሰብነት ብሪትም ምንቅስቓስ ዝኾነ ጥበብ።",
+        tr: "Bedeni ritme göre hareket ettirme sanatı.",
+        ps: "د بدن د ريتم سره خوځولو هنر.",
+        uk: "Мистецтво рухати тілом у ритмі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de la danse avec mes amis.",
@@ -460,8 +592,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la danse.",
           "Puisque danse est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "yoga", image: "yoga.webp", article: "le", gender: "m", definition: ["Activité avec des exercices du corps et de la respiration."], definitionPivot: { en: "A practice for relaxation, breathing and stretching.", ar: "تمرين للاسترخاء والتنفس والتمدد.", fa: "تمرینی برای آرامش، تنفس و کشش.", pt: "Prática de relaxamento, respiração e alongamento.", so: "Tababar nasasho, neefsasho iyo kala bixid.", ti: "ንምዝናይ፣ ምትንፋስን ምዝርጋሕን ዝኸውን ልምምድ።", tr: "Rahatlama, nefes ve esneme çalışması.", ps: "د ارامۍ، ساه اخيستلو او غځولو تمرين.", uk: "Практика для розслаблення, дихання і розтягування." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "yoga",
+      image: "yoga.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Activité avec des exercices du corps et de la respiration."],
+      definitionPivot: {
+        en: "A practice for relaxation, breathing and stretching.",
+        ar: "تمرين للاسترخاء والتنفس والتمدد.",
+        fa: "تمرینی برای آرامش، تنفس و کشش.",
+        pt: "Prática de relaxamento, respiração e alongamento.",
+        so: "Tababar nasasho, neefsasho iyo kala bixid.",
+        ti: "ንምዝናይ፣ ምትንፋስን ምዝርጋሕን ዝኸውን ልምምድ።",
+        tr: "Rahatlama, nefes ve esneme çalışması.",
+        ps: "د ارامۍ، ساه اخيستلو او غځولو تمرين.",
+        uk: "Практика для розслаблення, дихання і розтягування.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du yoga avec mes amis.",
@@ -525,8 +676,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le yoga.",
           "Puisque yoga est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "randonnée", image: "marcher.webp", article: "la", gender: "f", definition: ["Longue marche dans la nature."], definitionPivot: { en: "A long walk in nature.", ar: "مشي طويل في الطبيعة.", fa: "پیاده‌روی طولانی در طبیعت.", pt: "Longa caminhada na natureza.", so: "Socod dheer oo dabiicadda ah.", ti: "ኣብ ተፈጥሮ ዝግበር ነዊሕ እግሪ ጉዕዞ።", tr: "Doğada uzun yürüyüş.", ps: "په طبیعت کې اوږد مزل.", uk: "Довга прогулянка на природі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "randonnée",
+      image: "marcher.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Longue marche dans la nature."],
+      definitionPivot: {
+        en: "A long walk in nature.",
+        ar: "مشي طويل في الطبيعة.",
+        fa: "پیاده‌روی طولانی در طبیعت.",
+        pt: "Longa caminhada na natureza.",
+        so: "Socod dheer oo dabiicadda ah.",
+        ti: "ኣብ ተፈጥሮ ዝግበር ነዊሕ እግሪ ጉዕዞ።",
+        tr: "Doğada uzun yürüyüş.",
+        ps: "په طبیعت کې اوږد مزل.",
+        uk: "Довга прогулянка на природі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de la randonnée avec mes amis.",
@@ -590,8 +760,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la randonnée.",
           "Puisque randonnée est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "judo", image: "judo.webp", article: "le", gender: "m", definition: ["Sport de combat où l’on apprend à faire tomber l’adversaire."], definitionPivot: { en: "A Japanese martial art.", ar: "فن قتالي ياباني.", fa: "هنر رزمی ژاپنی.", pt: "Arte marcial japonesa.", so: "Fanka dagaalka Jabaan.", ti: "ጃፓናዊ ስነ-ውግእ።", tr: "Japon dövüş sanatı.", ps: "جاپاني رزمي هنر.", uk: "Японське бойове мистецтво." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "judo",
+      image: "judo.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport de combat où l’on apprend à faire tomber l’adversaire."],
+      definitionPivot: {
+        en: "A Japanese martial art.",
+        ar: "فن قتالي ياباني.",
+        fa: "هنر رزمی ژاپنی.",
+        pt: "Arte marcial japonesa.",
+        so: "Fanka dagaalka Jabaan.",
+        ti: "ጃፓናዊ ስነ-ውግእ።",
+        tr: "Japon dövüş sanatı.",
+        ps: "جاپاني رزمي هنر.",
+        uk: "Японське бойове мистецтво.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du judo avec mes amis.",
@@ -655,8 +844,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le judo.",
           "Puisque judo est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "gymnastique", image: "gymnastique.webp", article: "la", gender: "f", definition: ["Sport avec des mouvements du corps, de l’équilibre et de la souplesse."], definitionPivot: { en: "A sport of agility, balance and flexibility.", ar: "رياضة الرشاقة والتوازن والمرونة.", fa: "ورزش چابکی، تعادل و انعطاف.", pt: "Desporto de agilidade, equilíbrio e flexibilidade.", so: "Ciyaar firfircooni, dheelitir iyo dabacsanaan.", ti: "ቅልጡፍነት፣ ሚዛንን ተዓጻጻፍነትን ዝጠልብ ስፖርት።", tr: "Çeviklik, denge ve esneklik sporu.", ps: "د چټکتيا، توازن او انعطاف ورزش.", uk: "Спорт на спритність, рівновагу і гнучкість." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "gymnastique",
+      image: "gymnastique.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Sport avec des mouvements du corps, de l’équilibre et de la souplesse."],
+      definitionPivot: {
+        en: "A sport of agility, balance and flexibility.",
+        ar: "رياضة الرشاقة والتوازن والمرونة.",
+        fa: "ورزش چابکی، تعادل و انعطاف.",
+        pt: "Desporto de agilidade, equilíbrio e flexibilidade.",
+        so: "Ciyaar firfircooni, dheelitir iyo dabacsanaan.",
+        ti: "ቅልጡፍነት፣ ሚዛንን ተዓጻጻፍነትን ዝጠልብ ስፖርት።",
+        tr: "Çeviklik, denge ve esneklik sporu.",
+        ps: "د چټکتيا، توازن او انعطاف ورزش.",
+        uk: "Спорт на спритність, рівновагу і гнучкість.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de la gymnastique avec mes amis.",
@@ -720,8 +928,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la gymnastique.",
           "Puisque gymnastique est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ski", image: "ski.webp", article: "le", gender: "m", definition: ["Sport où l’on glisse sur la neige avec des skis."], definitionPivot: { en: "A sliding sport on snow.", ar: "رياضة انزلاق على الثلج.", fa: "ورزش سر خوردن روی برف.", pt: "Desporto de deslizar na neve.", so: "Ciyaar lagu simbiriirixo barafka.", ti: "ኣብ በረድ ምስሕባብ ዝኾነ ስፖርት።", tr: "Karda kayma sporu.", ps: "په واوره د ښويېدو ورزش.", uk: "Спорт ковзання по снігу." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ski",
+      image: "ski.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport où l’on glisse sur la neige avec des skis."],
+      definitionPivot: {
+        en: "A sliding sport on snow.",
+        ar: "رياضة انزلاق على الثلج.",
+        fa: "ورزش سر خوردن روی برف.",
+        pt: "Desporto de deslizar na neve.",
+        so: "Ciyaar lagu simbiriirixo barafka.",
+        ti: "ኣብ በረድ ምስሕባብ ዝኾነ ስፖርት።",
+        tr: "Karda kayma sporu.",
+        ps: "په واوره د ښويېدو ورزش.",
+        uk: "Спорт ковзання по снігу.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du ski avec mes amis.",
@@ -785,8 +1012,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le ski.",
           "Puisque ski est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "handball", image: "handball.webp", article: "le", gender: "m", definition: ["Sport avec deux équipes qui jouent avec les mains et marquent dans un but."], definitionPivot: { en: "A team sport played with the hands and a ball.", ar: "رياضة جماعية باليدين والكرة.", fa: "ورزش گروهی با دست و توپ.", pt: "Desporto coletivo jogado com as mãos e uma bola.", so: "Ciyaar kooxeed gacmaha iyo kubbad lagu ciyaaro.", ti: "ብኣእዳውን ኩዕሶን ዝጻወት የጉጅለ ስፖርት።", tr: "El ve topla oynanan takım sporu.", ps: "ډله ييزه لوبه چې په لاسونو او توپ کېږي.", uk: "Командний спорт з м’ячем і руками." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "handball",
+      image: "handball.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport avec deux équipes qui jouent avec les mains et marquent dans un but."],
+      definitionPivot: {
+        en: "A team sport played with the hands and a ball.",
+        ar: "رياضة جماعية باليدين والكرة.",
+        fa: "ورزش گروهی با دست و توپ.",
+        pt: "Desporto coletivo jogado com as mãos e uma bola.",
+        so: "Ciyaar kooxeed gacmaha iyo kubbad lagu ciyaaro.",
+        ti: "ብኣእዳውን ኩዕሶን ዝጻወት የጉጅለ ስፖርት።",
+        tr: "El ve topla oynanan takım sporu.",
+        ps: "ډله ييزه لوبه چې په لاسونو او توپ کېږي.",
+        uk: "Командний спорт з м’ячем і руками.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de l'handball avec mes amis.",
@@ -850,8 +1096,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'handball.",
           "Puisque handball est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "volley-ball", image: "volleyball.webp", article: "le", gender: "m", definition: ["Sport avec deux équipes qui se renvoient un ballon au-dessus d’un filet."], definitionPivot: { en: "A team sport where the ball is hit over a net.", ar: "رياضة جماعية تُضرب فيها الكرة فوق شبكة.", fa: "ورزش گروهی که توپ از روی تور زده می‌شود.", pt: "Desporto coletivo em que se bate a bola por cima da rede.", so: "Ciyaar kooxeed oo kubbadda shabag korkiisa laga garaaco.", ti: "ኩዕሶ ልዕሊ መርበብ ዝውቃዕሉ የጉጅለ ስፖርት።", tr: "Topun file üzerinden vurulduğu takım sporu.", ps: "ډله ييزه لوبه چې توپ له جال پورته وهل کېږي.", uk: "Командний спорт, де м’яч б’ють через сітку." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "volley-ball",
+      image: "volleyball.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Sport avec deux équipes qui se renvoient un ballon au-dessus d’un filet."],
+      definitionPivot: {
+        en: "A team sport where the ball is hit over a net.",
+        ar: "رياضة جماعية تُضرب فيها الكرة فوق شبكة.",
+        fa: "ورزش گروهی که توپ از روی تور زده می‌شود.",
+        pt: "Desporto coletivo em que se bate a bola por cima da rede.",
+        so: "Ciyaar kooxeed oo kubbadda shabag korkiisa laga garaaco.",
+        ti: "ኩዕሶ ልዕሊ መርበብ ዝውቃዕሉ የጉጅለ ስፖርት።",
+        tr: "Topun file üzerinden vurulduğu takım sporu.",
+        ps: "ډله ييزه لوبه چې توپ له جال پورته وهل کېږي.",
+        uk: "Командний спорт, де м’яч б’ють через сітку.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait du volley-ball avec mes amis.",
@@ -915,8 +1180,27 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le volley-ball.",
           "Puisque volley-ball est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "escalade", image: "escalade.webp", article: "l'", gender: "f", definition: ["Sport où l’on monte sur un mur ou une montagne."], definitionPivot: { en: "A sport of climbing a wall or rock.", ar: "رياضة تسلق جدار أو صخرة.", fa: "ورزش بالا رفتن از دیوار یا سنگ.", pt: "Desporto de subir uma parede ou rocha.", so: "Ciyaar lagu fuulo darbi ama dhagax.", ti: "መንደቕ ወይ ከውሒ ምድያብ ዝኾነ ስፖርት።", tr: "Duvara veya kayaya tırmanma sporu.", ps: "د دېوال يا ډبرې ختلو ورزش.", uk: "Спорт лазіння по стіні або скелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "escalade",
+      image: "escalade.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Sport où l’on monte sur un mur ou une montagne."],
+      definitionPivot: {
+        en: "A sport of climbing a wall or rock.",
+        ar: "رياضة تسلق جدار أو صخرة.",
+        fa: "ورزش بالا رفتن از دیوار یا سنگ.",
+        pt: "Desporto de subir uma parede ou rocha.",
+        so: "Ciyaar lagu fuulo darbi ama dhagax.",
+        ti: "መንደቕ ወይ ከውሒ ምድያብ ዝኾነ ስፖርት።",
+        tr: "Duvara veya kayaya tırmanma sporu.",
+        ps: "د دېوال يا ډبرې ختلو ورزش.",
+        uk: "Спорт лазіння по стіні або скелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai fait de l'escalade avec mes amis.",
@@ -980,7 +1264,8 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'escalade.",
           "Puisque escalade est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il joue au ___ avec ses amis dans le parc.", answer: "football" },

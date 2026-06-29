@@ -6,7 +6,24 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
   title: "La pharmacie",
   section: "V8",
   words: [
-    { word: "médicament", article: "le",  gender: "m", definition: ["Produit que l’on prend pour se soigner."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+    {
+      word: "médicament",
+      article: "le",
+      gender: "m",
+      definition: ["Produit que l’on prend pour se soigner."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du médicament au patient.",
@@ -69,8 +86,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le médicament.",
           "Puisque médicament est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ordonnance", article: "l'",  gender: "f", definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ordonnance",
+      article: "l'",
+      gender: "f",
+      definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de l'ordonnance au patient.",
@@ -133,8 +168,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ordonnance.",
           "Puisque ordonnance est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "sirop",      article: "le",  gender: "m", definition: ["Médicament liquide, souvent pour la toux."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "sirop",
+      article: "le",
+      gender: "m",
+      definition: ["Médicament liquide, souvent pour la toux."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du sirop au patient.",
@@ -197,8 +250,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le sirop.",
           "Puisque sirop est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "comprimé",   article: "le",  gender: "m", definition: ["Médicament solide que l’on avale."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "comprimé",
+      article: "le",
+      gender: "m",
+      definition: ["Médicament solide que l’on avale."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du comprimé au patient.",
@@ -261,8 +332,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le comprimé.",
           "Puisque comprimé est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "gélule",     article: "la",  gender: "f", definition: ["Médicament dans une petite enveloppe que l’on avale."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "gélule",
+      article: "la",
+      gender: "f",
+      definition: ["Médicament dans une petite enveloppe que l’on avale."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la gélule au patient.",
@@ -325,8 +414,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la gélule.",
           "Puisque gélule est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pommade",    article: "la",  gender: "f", definition: ["Produit épais que l’on met sur la peau pour soigner."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pommade",
+      article: "la",
+      gender: "f",
+      definition: ["Produit épais que l’on met sur la peau pour soigner."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la pommade au patient.",
@@ -389,8 +496,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pommade.",
           "Puisque pommade est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "crème",      article: "la",  gender: "f", definition: ["Produit que l’on met sur la peau."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "crème",
+      article: "la",
+      gender: "f",
+      definition: ["Produit que l’on met sur la peau."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la crème au patient.",
@@ -453,8 +578,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la crème.",
           "Puisque crème est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pansement",  article: "le",  gender: "m", definition: ["Protection que l’on met sur une petite blessure."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pansement",
+      article: "le",
+      gender: "m",
+      definition: ["Protection que l’on met sur une petite blessure."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du pansement au patient.",
@@ -517,8 +660,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pansement.",
           "Puisque pansement est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "thermomètre",article: "le",  gender: "m", definition: ["Objet qui sert à mesurer la température du corps."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "thermomètre",
+      article: "le",
+      gender: "m",
+      definition: ["Objet qui sert à mesurer la température du corps."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du thermomètre au patient.",
@@ -581,8 +742,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le thermomètre.",
           "Puisque thermomètre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "spray",      article: "le",  gender: "m", definition: ["Produit que l’on vaporise."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "spray",
+      article: "le",
+      gender: "m",
+      definition: ["Produit que l’on vaporise."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé du spray au patient.",
@@ -645,8 +824,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le spray.",
           "Puisque spray est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "goutte",     article: "la",  gender: "f", definition: ["Petite quantité de liquide, souvent pour les yeux, les oreilles ou le nez."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "goutte",
+      article: "la",
+      gender: "f",
+      definition: ["Petite quantité de liquide, souvent pour les yeux, les oreilles ou le nez."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la goutte au patient.",
@@ -709,8 +906,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la goutte.",
           "Puisque goutte est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pharmacie",  article: "la",  gender: "f", definition: ["Lieu où l’on achète des médicaments."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pharmacie",
+      article: "la",
+      gender: "f",
+      definition: ["Lieu où l’on achète des médicaments."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la pharmacie au patient.",
@@ -773,8 +988,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pharmacie.",
           "Puisque pharmacie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dosette",    article: "la",  gender: "f", definition: ["Petite dose de produit déjà préparée."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dosette",
+      article: "la",
+      gender: "f",
+      definition: ["Petite dose de produit déjà préparée."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la dosette au patient.",
@@ -837,8 +1070,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la dosette.",
           "Puisque dosette est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "vitamine",   article: "la",  gender: "f", definition: ["Substance utile au corps pour rester en bonne santé."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "vitamine",
+      article: "la",
+      gender: "f",
+      definition: ["Substance utile au corps pour rester en bonne santé."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la vitamine au patient.",
@@ -901,8 +1152,26 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la vitamine.",
           "Puisque vitamine est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "boîte",      article: "la",  gender: "f", definition: ["Emballage qui contient un médicament ou un produit."], definitionPivot: { en: "A product or object used for health care.", ar: "منتج أو شيء يُستعمل للعلاج.", fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.", pt: "Produto ou objeto usado nos cuidados de saúde.", so: "Shey ama daawo loo isticmaalo daryeel caafimaad.", ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።", tr: "Sağlık bakımında kullanılan ürün veya nesne.", ps: "محصول يا شی چې د روغتيا لپاره کارېږي.", uk: "Засіб або предмет для медичного догляду." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "boîte",
+      article: "la",
+      gender: "f",
+      definition: ["Emballage qui contient un médicament ou un produit."],
+      definitionPivot: {
+        en: "A product or object used for health care.",
+        ar: "منتج أو شيء يُستعمل للعلاج.",
+        fa: "محصول یا وسیله‌ای برای مراقبت سلامتی.",
+        pt: "Produto ou objeto usado nos cuidados de saúde.",
+        so: "Shey ama daawo loo isticmaalo daryeel caafimaad.",
+        ti: "ንክንክን ጥዕና ዝጥቀሙሉ ነገር።",
+        tr: "Sağlık bakımında kullanılan ürün veya nesne.",
+        ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
+        uk: "Засіб або предмет для медичного догляду.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, le médecin a parlé de la boîte au patient.",
@@ -965,7 +1234,8 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la boîte.",
           "Puisque boîte est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Le médecin prescrit un ___ pour la toux.",             answer: "sirop" },

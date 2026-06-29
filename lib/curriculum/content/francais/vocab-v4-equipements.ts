@@ -6,7 +6,25 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   title: "Les meubles",
   section: "V4",
   words: [
-    { word: "table",    image: "table.webp",    article: "la",  gender: "f", definition: ["Meuble sur lequel on mange."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
+    {
+      word: "table",
+      image: "table.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Meuble sur lequel on mange."],
+      definitionPivot: {
+        en: "A word used at a restaurant.",
+        ar: "كلمة تُستعمل في المطعم.",
+        fa: "واژه‌ای که در رستوران استفاده می‌شود.",
+        pt: "Palavra usada no restaurante.",
+        so: "Eray makhaayad lagu isticmaalo.",
+        ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።",
+        tr: "Restoranda kullanılan kelime.",
+        ps: "کلمه چې په رستورانت کې کارېږي.",
+        uk: "Слово, яке використовують у ресторані.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la table pendant l'exercice.",
@@ -70,8 +88,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la table.",
           "Puisque table est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chaise",   image: "chaise.webp",   article: "la",  gender: "f", definition: ["Siège pour une personne."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chaise",
+      image: "chaise.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Siège pour une personne."],
+      definitionPivot: {
+        en: "A word used at a restaurant.",
+        ar: "كلمة تُستعمل في المطعم.",
+        fa: "واژه‌ای که در رستوران استفاده می‌شود.",
+        pt: "Palavra usada no restaurante.",
+        so: "Eray makhaayad lagu isticmaalo.",
+        ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።",
+        tr: "Restoranda kullanılan kelime.",
+        ps: "کلمه چې په رستورانت کې کارېږي.",
+        uk: "Слово, яке використовують у ресторані.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la chaise pendant l'exercice.",
@@ -135,8 +172,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la chaise.",
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "canapé",   image: "canape.webp",   article: "le",  gender: "m", definition: ["Grand siège confortable pour plusieurs personnes."], definitionPivot: { en: "A long soft seat for several people.", ar: "مقعد طويل ومبطن لعدة أشخاص.", fa: "نشیمن نرم و بلند برای چند نفر.", pt: "Assento comprido e macio para várias pessoas.", so: "Kursi dheer oo jilicsan oo dhowr qof fadhiistaan.", ti: "ንብዙሓት ሰባት ዝኸውን ነዊሕ ልስሉስ መቐመጢ።", tr: "Birkaç kişi için uzun yumuşak koltuk.", ps: "اوږده نرمه څوکۍ د څو کسانو لپاره.", uk: "Довге м’яке сидіння для кількох людей." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "canapé",
+      image: "canape.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Grand siège confortable pour plusieurs personnes."],
+      definitionPivot: {
+        en: "A long soft seat for several people.",
+        ar: "مقعد طويل ومبطن لعدة أشخاص.",
+        fa: "نشیمن نرم و بلند برای چند نفر.",
+        pt: "Assento comprido e macio para várias pessoas.",
+        so: "Kursi dheer oo jilicsan oo dhowr qof fadhiistaan.",
+        ti: "ንብዙሓት ሰባት ዝኸውን ነዊሕ ልስሉስ መቐመጢ።",
+        tr: "Birkaç kişi için uzun yumuşak koltuk.",
+        ps: "اوږده نرمه څوکۍ د څو کسانو لپاره.",
+        uk: "Довге м’яке сидіння для кількох людей.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le canapé pendant l'exercice.",
@@ -200,8 +256,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le canapé.",
           "Puisque canapé est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "fauteuil", image: "fauteuil.webp", article: "le",  gender: "m", definition: ["Siège confortable pour une personne."], definitionPivot: { en: "A comfortable chair with armrests.", ar: "كرسي مريح له مسندان للذراعين.", fa: "صندلی راحت با دسته.", pt: "Cadeira confortável com braços.", so: "Kursi raaxo leh oo gacmo leh.", ti: "ብኣቕማጥ ኣእዳው ዘለዎ ምቹእ መቐመጢ።", tr: "Kolçaklı rahat sandalye.", ps: "ارامه څوکۍ چې د لاسونو ځايونه لري.", uk: "Зручне крісло з підлокітниками." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "fauteuil",
+      image: "fauteuil.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Siège confortable pour une personne."],
+      definitionPivot: {
+        en: "A comfortable chair with armrests.",
+        ar: "كرسي مريح له مسندان للذراعين.",
+        fa: "صندلی راحت با دسته.",
+        pt: "Cadeira confortável com braços.",
+        so: "Kursi raaxo leh oo gacmo leh.",
+        ti: "ብኣቕማጥ ኣእዳው ዘለዎ ምቹእ መቐመጢ።",
+        tr: "Kolçaklı rahat sandalye.",
+        ps: "ارامه څوکۍ چې د لاسونو ځايونه لري.",
+        uk: "Зручне крісло з підлокітниками.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le fauteuil pendant l'exercice.",
@@ -265,8 +340,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le fauteuil.",
           "Puisque fauteuil est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "bureau",   image: "bureau.webp",   article: "le",  gender: "m", definition: ["Meuble utilisé pour travailler ou écrire."], definitionPivot: { en: "A desk or a room for working.", ar: "مكتب أو غرفة للعمل.", fa: "میز کار یا اتاق کار.", pt: "Secretária ou divisão para trabalhar.", so: "Miis shaqo ama qol shaqo.", ti: "መስርሒ ጠረጴዛ ወይ ክፍሊ ስራሕ።", tr: "Çalışma masası veya çalışma odası.", ps: "د کار مېز يا د کار کوټه.", uk: "Письмовий стіл або кімната для роботи." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "bureau",
+      image: "bureau.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Meuble utilisé pour travailler ou écrire."],
+      definitionPivot: {
+        en: "A desk or a room for working.",
+        ar: "مكتب أو غرفة للعمل.",
+        fa: "میز کار یا اتاق کار.",
+        pt: "Secretária ou divisão para trabalhar.",
+        so: "Miis shaqo ama qol shaqo.",
+        ti: "መስርሒ ጠረጴዛ ወይ ክፍሊ ስራሕ።",
+        tr: "Çalışma masası veya çalışma odası.",
+        ps: "د کار مېز يا د کار کوټه.",
+        uk: "Письмовий стіл або кімната для роботи.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le bureau pendant l'exercice.",
@@ -330,8 +424,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le bureau.",
           "Puisque bureau est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "armoire",  image: "armoire.webp",  article: "l'",  gender: "f", definition: ["Meuble pour ranger les vêtements ou les objets."], definitionPivot: { en: "A large piece of furniture for storing clothes.", ar: "خزانة كبيرة لتخزين الملابس.", fa: "کمد بزرگ برای نگهداری لباس.", pt: "Móvel grande para guardar roupa.", so: "Alaab weyn oo dharka lagu kaydiyo.", ti: "ክዳውንቲ ንምቕማጥ ዝኸውን ዓቢ ኣቕሓ።", tr: "Kıyafet saklamak için büyük dolap.", ps: "لوی المارۍ د کاليو ساتلو لپاره.", uk: "Велика шафа для одягу." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "armoire",
+      image: "armoire.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Meuble pour ranger les vêtements ou les objets."],
+      definitionPivot: {
+        en: "A large piece of furniture for storing clothes.",
+        ar: "خزانة كبيرة لتخزين الملابس.",
+        fa: "کمد بزرگ برای نگهداری لباس.",
+        pt: "Móvel grande para guardar roupa.",
+        so: "Alaab weyn oo dharka lagu kaydiyo.",
+        ti: "ክዳውንቲ ንምቕማጥ ዝኸውን ዓቢ ኣቕሓ።",
+        tr: "Kıyafet saklamak için büyük dolap.",
+        ps: "لوی المارۍ د کاليو ساتلو لپاره.",
+        uk: "Велика шафа для одягу.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'armoire pendant l'exercice.",
@@ -395,8 +508,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'armoire.",
           "Puisque armoire est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "lit",      image: "lit.webp",      article: "le",  gender: "m", definition: ["Meuble où l’on dort."], definitionPivot: { en: "A piece of furniture used for sleeping.", ar: "قطعة أثاث للنوم.", fa: "وسیله‌ای برای خوابیدن.", pt: "Móvel usado para dormir.", so: "Alaab guri oo lagu seexdo.", ti: "ንምድቃስ ዝጥቀሙሉ ኣቕሓ።", tr: "Uyumak için kullanılan mobilya.", ps: "فرنيچر چې د خوب لپاره کارېږي.", uk: "Меблі для сну." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "lit",
+      image: "lit.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Meuble où l’on dort."],
+      definitionPivot: {
+        en: "A piece of furniture used for sleeping.",
+        ar: "قطعة أثاث للنوم.",
+        fa: "وسیله‌ای برای خوابیدن.",
+        pt: "Móvel usado para dormir.",
+        so: "Alaab guri oo lagu seexdo.",
+        ti: "ንምድቃስ ዝጥቀሙሉ ኣቕሓ።",
+        tr: "Uyumak için kullanılan mobilya.",
+        ps: "فرنيچر چې د خوب لپاره کارېږي.",
+        uk: "Меблі для сну.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le lit pendant l'exercice.",
@@ -460,8 +592,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le lit.",
           "Puisque lit est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "étagère",  image: "etagere.webp",  article: "l'",  gender: "f", definition: ["Meuble avec des planches pour ranger des objets ou des livres."], definitionPivot: { en: "A shelf used to put objects on.", ar: "رف لوضع الأشياء.", fa: "قفسه‌ای برای گذاشتن اشیا.", pt: "Prateleira para colocar objetos.", so: "Shelf wax lagu saaro.", ti: "ነገራት ንምቕማጥ ዝኸውን መደርደሪ።", tr: "Eşya koymak için raf.", ps: "طاقچه چې شيان پرې اېښودل کېږي.", uk: "Полиця для речей." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "étagère",
+      image: "etagere.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Meuble avec des planches pour ranger des objets ou des livres."],
+      definitionPivot: {
+        en: "A shelf used to put objects on.",
+        ar: "رف لوضع الأشياء.",
+        fa: "قفسه‌ای برای گذاشتن اشیا.",
+        pt: "Prateleira para colocar objetos.",
+        so: "Shelf wax lagu saaro.",
+        ti: "ነገራት ንምቕማጥ ዝኸውን መደርደሪ።",
+        tr: "Eşya koymak için raf.",
+        ps: "طاقچه چې شيان پرې اېښودل کېږي.",
+        uk: "Полиця для речей.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'étagère pendant l'exercice.",
@@ -525,8 +676,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'étagère.",
           "Puisque étagère est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "miroir",   image: "miroir.webp",   article: "le",  gender: "m", definition: ["Objet où l’on voit son image."], definitionPivot: { en: "A reflective surface used to see yourself.", ar: "سطح عاكس ترى فيه نفسك.", fa: "سطح بازتابنده برای دیدن خود.", pt: "Superfície refletora para se ver.", so: "Meel milicsata oo aad isku aragto.", ti: "ርእስኻ ንምርኣይ ዝጥቀም ዘንጸባርቕ ገጽ።", tr: "Kendini görmek için yansıtıcı yüzey.", ps: "انعکاسي سطح چې ځان پکې ګورې.", uk: "Відбивна поверхня, щоб бачити себе." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "miroir",
+      image: "miroir.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet où l’on voit son image."],
+      definitionPivot: {
+        en: "A reflective surface used to see yourself.",
+        ar: "سطح عاكس ترى فيه نفسك.",
+        fa: "سطح بازتابنده برای دیدن خود.",
+        pt: "Superfície refletora para se ver.",
+        so: "Meel milicsata oo aad isku aragto.",
+        ti: "ርእስኻ ንምርኣይ ዝጥቀም ዘንጸባርቕ ገጽ።",
+        tr: "Kendini görmek için yansıtıcı yüzey.",
+        ps: "انعکاسي سطح چې ځان پکې ګورې.",
+        uk: "Відбивна поверхня, щоб бачити себе.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le miroir pendant l'exercice.",
@@ -590,8 +760,27 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le miroir.",
           "Puisque miroir est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "tabouret", image: "tabouret.webp", article: "le",  gender: "m", definition: ["Petit siège sans dossier."], definitionPivot: { en: "A small seat without a back.", ar: "مقعد صغير بلا ظهر.", fa: "صندلی کوچک بدون پشتی.", pt: "Pequeno assento sem encosto.", so: "Kursi yar oo aan dhabarka lahayn.", ti: "ብድሕሪት ዘይብሉ ንእሽቶ መቐመጢ።", tr: "Sırtlığı olmayan küçük oturak.", ps: "کوچنۍ څوکۍ چې شا نه لري.", uk: "Маленьке сидіння без спинки." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "tabouret",
+      image: "tabouret.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit siège sans dossier."],
+      definitionPivot: {
+        en: "A small seat without a back.",
+        ar: "مقعد صغير بلا ظهر.",
+        fa: "صندلی کوچک بدون پشتی.",
+        pt: "Pequeno assento sem encosto.",
+        so: "Kursi yar oo aan dhabarka lahayn.",
+        ti: "ብድሕሪት ዘይብሉ ንእሽቶ መቐመጢ።",
+        tr: "Sırtlığı olmayan küçük oturak.",
+        ps: "کوچنۍ څوکۍ چې شا نه لري.",
+        uk: "Маленьке сидіння без спинки.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tabouret pendant l'exercice.",
@@ -655,7 +844,8 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le tabouret.",
           "Puisque tabouret est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Elle range ses vêtements dans l'___.",      answer: "armoire" },

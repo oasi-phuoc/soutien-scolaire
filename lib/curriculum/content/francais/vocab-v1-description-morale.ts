@@ -7,7 +7,24 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "gentil",       feminine: "gentille",     image: "gentillesse.webp",       definition: ["Qui est bon avec les autres."], definitionPivot: { en: "Kind and nice to others.", ar: "لطيف وطيب مع الآخرين.", fa: "مهربان و خوب با دیگران.", pt: "Gentil e simpático com os outros.", so: "Naxariis leh oo dadka u fiican.", ti: "ለዋህን ምስ ካልኦት ጽቡቕን።", tr: "Başkalarına karşı nazik ve iyi.", ps: "له نورو سره مهربان او ښه.", uk: "Добрий і приємний до інших." }, synonym: [], exampleSentences: {
+    {
+      word: "gentil",
+      feminine: "gentille",
+      image: "gentillesse.webp",
+      definition: ["Qui est bon avec les autres."],
+      definitionPivot: {
+        en: "Kind and nice to others.",
+        ar: "لطيف وطيب مع الآخرين.",
+        fa: "مهربان و خوب با دیگران.",
+        pt: "Gentil e simpático com os outros.",
+        so: "Naxariis leh oo dadka u fiican.",
+        ti: "ለዋህን ምስ ካልኦት ጽቡቕን።",
+        tr: "Başkalarına karşı nazik ve iyi.",
+        ps: "له نورو سره مهربان او ښه.",
+        uk: "Добрий і приємний до інших.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été gentil avec ses amis.",
@@ -71,8 +88,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec gentil.",
           "Puisque gentil est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "méchant",      feminine: "méchante",     image: "mechancete-v2.webp",      definition: ["Qui fait du mal ou qui n’est pas gentil."], definitionPivot: { en: "Mean or hurtful to others.", ar: "سيئ أو مؤذٍ للآخرين.", fa: "بدرفتار یا آزاردهنده با دیگران.", pt: "Mau ou ofensivo com os outros.", so: "Xun ama dadka dhaawaca.", ti: "ንካልኦት ዝጎድእ ወይ ሕማቕ።", tr: "Başkalarına kötü veya kırıcı davranan.", ps: "له نورو سره بد يا ځوروونکی.", uk: "Злий або образливий до інших." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "méchant",
+      feminine: "méchante",
+      image: "mechancete-v2.webp",
+      definition: ["Qui fait du mal ou qui n’est pas gentil."],
+      definitionPivot: {
+        en: "Mean or hurtful to others.",
+        ar: "سيئ أو مؤذٍ للآخرين.",
+        fa: "بدرفتار یا آزاردهنده با دیگران.",
+        pt: "Mau ou ofensivo com os outros.",
+        so: "Xun ama dadka dhaawaca.",
+        ti: "ንካልኦት ዝጎድእ ወይ ሕማቕ።",
+        tr: "Başkalarına kötü veya kırıcı davranan.",
+        ps: "له نورو سره بد يا ځوروونکی.",
+        uk: "Злий або образливий до інших.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été méchant avec ses amis.",
@@ -136,8 +171,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec méchant.",
           "Puisque méchant est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "poli",         feminine: "polie",        image: "politesse.webp",         definition: ["Qui parle et agit avec respect."], definitionPivot: { en: "Respectful and well-mannered.", ar: "محترم وحسن السلوك.", fa: "محترم و خوش‌رفتار.", pt: "Respeitoso e bem-educado.", so: "Ixtiraam leh oo edeb badan.", ti: "ኣኽባሪን ስነ-ምግባር ዘለዎን።", tr: "Saygılı ve terbiyeli.", ps: "درناوی کوونکی او با ادبه.", uk: "Ввічливий і вихований." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "poli",
+      feminine: "polie",
+      image: "politesse.webp",
+      definition: ["Qui parle et agit avec respect."],
+      definitionPivot: {
+        en: "Respectful and well-mannered.",
+        ar: "محترم وحسن السلوك.",
+        fa: "محترم و خوش‌رفتار.",
+        pt: "Respeitoso e bem-educado.",
+        so: "Ixtiraam leh oo edeb badan.",
+        ti: "ኣኽባሪን ስነ-ምግባር ዘለዎን።",
+        tr: "Saygılı ve terbiyeli.",
+        ps: "درناوی کوونکی او با ادبه.",
+        uk: "Ввічливий і вихований.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été poli avec ses amis.",
@@ -201,8 +254,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec poli.",
           "Puisque poli est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "impoli",       feminine: "impolie",      image: "impolitesse.webp",       definition: ["Qui manque de respect."], definitionPivot: { en: "Not respectful or not polite.", ar: "غير محترم أو غير مهذب.", fa: "بی‌احترام یا بی‌ادب.", pt: "Desrespeitoso ou mal-educado.", so: "Aan ixtiraam lahayn ama edeb daran.", ti: "ዘይኣኽባሪ ወይ ዘይስነ-ምግባራዊ።", tr: "Saygısız veya kaba.", ps: "بې ادبه يا بې احترامي کوونکی.", uk: "Неввічливий або нешанобливий." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "impoli",
+      feminine: "impolie",
+      image: "impolitesse.webp",
+      definition: ["Qui manque de respect."],
+      definitionPivot: {
+        en: "Not respectful or not polite.",
+        ar: "غير محترم أو غير مهذب.",
+        fa: "بی‌احترام یا بی‌ادب.",
+        pt: "Desrespeitoso ou mal-educado.",
+        so: "Aan ixtiraam lahayn ama edeb daran.",
+        ti: "ዘይኣኽባሪ ወይ ዘይስነ-ምግባራዊ።",
+        tr: "Saygısız veya kaba.",
+        ps: "بې ادبه يا بې احترامي کوونکی.",
+        uk: "Неввічливий або нешанобливий.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été impoli avec ses amis.",
@@ -266,8 +337,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec impoli.",
           "Puisque impoli est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "travailleur",  feminine: "travailleuse", image: "travail.webp",  definition: ["Qui aime travailler ou qui travaille beaucoup."], definitionPivot: { en: "Someone who works seriously and a lot.", ar: "شخص يعمل بجد وبكثرة.", fa: "کسی که جدی و زیاد کار می‌کند.", pt: "Pessoa que trabalha muito e com seriedade.", so: "Qof si dhab ah oo badan u shaqeeya.", ti: "ብዙሕን ብትግሃትን ዝሰርሕ።", tr: "Çok ve ciddi çalışan kişi.", ps: "هغه څوک چې ډېر او جدي کار کوي.", uk: "Той, хто багато і старанно працює." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "travailleur",
+      feminine: "travailleuse",
+      image: "travail.webp",
+      definition: ["Qui aime travailler ou qui travaille beaucoup."],
+      definitionPivot: {
+        en: "Someone who works seriously and a lot.",
+        ar: "شخص يعمل بجد وبكثرة.",
+        fa: "کسی که جدی و زیاد کار می‌کند.",
+        pt: "Pessoa que trabalha muito e com seriedade.",
+        so: "Qof si dhab ah oo badan u shaqeeya.",
+        ti: "ብዙሕን ብትግሃትን ዝሰርሕ።",
+        tr: "Çok ve ciddi çalışan kişi.",
+        ps: "هغه څوک چې ډېر او جدي کار کوي.",
+        uk: "Той, хто багато і старанно працює.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été travailleur avec ses amis.",
@@ -331,8 +420,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec travailleur.",
           "Puisque travailleur est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "paresseux",    feminine: "paresseuse",   image: "paresse.webp",    definition: ["Qui n’aime pas faire d’efforts."], definitionPivot: { en: "Someone who does not like to work.", ar: "شخص لا يحب العمل.", fa: "کسی که کار کردن را دوست ندارد.", pt: "Pessoa que não gosta de trabalhar.", so: "Qof aan jeclayn shaqada.", ti: "ስራሕ ዘይፈቱ ሰብ።", tr: "Çalışmayı sevmeyen kişi.", ps: "هغه څوک چې کار نه خوښوي.", uk: "Той, хто не любить працювати." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "paresseux",
+      feminine: "paresseuse",
+      image: "paresse.webp",
+      definition: ["Qui n’aime pas faire d’efforts."],
+      definitionPivot: {
+        en: "Someone who does not like to work.",
+        ar: "شخص لا يحب العمل.",
+        fa: "کسی که کار کردن را دوست ندارد.",
+        pt: "Pessoa que não gosta de trabalhar.",
+        so: "Qof aan jeclayn shaqada.",
+        ti: "ስራሕ ዘይፈቱ ሰብ።",
+        tr: "Çalışmayı sevmeyen kişi.",
+        ps: "هغه څوک چې کار نه خوښوي.",
+        uk: "Той, хто не любить працювати.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été paresseux avec ses amis.",
@@ -396,8 +503,25 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec paresseux.",
           "Puisque paresseux est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "calme",                                  image: "calme.webp",        definition: ["Qui est tranquille et ne s’énerve pas facilement."], definitionPivot: { en: "Quiet and not agitated.", ar: "هادئ وغير متوتر.", fa: "آرام و بی‌اضطراب.", pt: "Tranquilo e sem agitação.", so: "Deggan oo aan kacsanayn.", ti: "ህዱእን ዘይተረበሸን።", tr: "Sakin ve telaşsız.", ps: "ارام او نه ناکراره.", uk: "Спокійний і не схвильований." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "calme",
+      image: "calme.webp",
+      definition: ["Qui est tranquille et ne s’énerve pas facilement."],
+      definitionPivot: {
+        en: "Quiet and not agitated.",
+        ar: "هادئ وغير متوتر.",
+        fa: "آرام و بی‌اضطراب.",
+        pt: "Tranquilo e sem agitação.",
+        so: "Deggan oo aan kacsanayn.",
+        ti: "ህዱእን ዘይተረበሸን።",
+        tr: "Sakin ve telaşsız.",
+        ps: "ارام او نه ناکراره.",
+        uk: "Спокійний і не схвильований.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été calme avec ses amis.",
@@ -461,8 +585,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec calme.",
           "Puisque calme est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "nerveux",      feminine: "nerveuse",     image: "nevosite.webp",      definition: ["Qui s’inquiète ou s’agite facilement."], definitionPivot: { en: "Agitated, stressed or tense.", ar: "مضطرب أو متوتر.", fa: "مضطرب، پراسترس یا عصبی.", pt: "Agitado, stressado ou tenso.", so: "Kacsan, walwalsan ama ciriiri dareemaya.", ti: "ተረቢሹ፣ ተጨኒቑ ወይ ተወጢሩ።", tr: "Gergin, stresli veya huzursuz.", ps: "ناارامه، ستړی يا عصبي.", uk: "Знервований, напружений або схвильований." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "nerveux",
+      feminine: "nerveuse",
+      image: "nevosite.webp",
+      definition: ["Qui s’inquiète ou s’agite facilement."],
+      definitionPivot: {
+        en: "Agitated, stressed or tense.",
+        ar: "مضطرب أو متوتر.",
+        fa: "مضطرب، پراسترس یا عصبی.",
+        pt: "Agitado, stressado ou tenso.",
+        so: "Kacsan, walwalsan ama ciriiri dareemaya.",
+        ti: "ተረቢሹ፣ ተጨኒቑ ወይ ተወጢሩ።",
+        tr: "Gergin, stresli veya huzursuz.",
+        ps: "ناارامه، ستړی يا عصبي.",
+        uk: "Знервований, напружений або схвильований.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été nerveux avec ses amis.",
@@ -526,8 +668,25 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec nerveux.",
           "Puisque nerveux est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "sociable",                               image: "sociabilite.webp",     definition: ["Qui aime être avec les autres."], definitionPivot: { en: "Someone who likes being with other people.", ar: "شخص يحب أن يكون مع الآخرين.", fa: "کسی که بودن با دیگران را دوست دارد.", pt: "Pessoa que gosta de estar com os outros.", so: "Qof jecel inuu dadka la joogo.", ti: "ምስ ካልኦት ምዃን ዝፈቱ ሰብ።", tr: "İnsanlarla birlikte olmayı seven kişi.", ps: "هغه څوک چې له خلکو سره اوسېدل خوښوي.", uk: "Той, хто любить бути з іншими людьми." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "sociable",
+      image: "sociabilite.webp",
+      definition: ["Qui aime être avec les autres."],
+      definitionPivot: {
+        en: "Someone who likes being with other people.",
+        ar: "شخص يحب أن يكون مع الآخرين.",
+        fa: "کسی که بودن با دیگران را دوست دارد.",
+        pt: "Pessoa que gosta de estar com os outros.",
+        so: "Qof jecel inuu dadka la joogo.",
+        ti: "ምስ ካልኦት ምዃን ዝፈቱ ሰብ።",
+        tr: "İnsanlarla birlikte olmayı seven kişi.",
+        ps: "هغه څوک چې له خلکو سره اوسېدل خوښوي.",
+        uk: "Той, хто любить бути з іншими людьми.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été sociable avec ses amis.",
@@ -591,8 +750,25 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec sociable.",
           "Puisque sociable est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "timide",                                 image: "timidite.webp",       definition: ["Qui n’ose pas beaucoup parler aux autres."], definitionPivot: { en: "Not very confident with other people.", ar: "غير واثق كثيراً مع الآخرين.", fa: "در برخورد با دیگران خیلی مطمئن نیست.", pt: "Pouco confiante com outras pessoas.", so: "Aan dadka hortooda kalsooni badan lahayn.", ti: "ምስ ካልኦት ብዙሕ ዘይተኣማመን።", tr: "İnsanların yanında çok özgüvenli olmayan.", ps: "له خلکو سره ډېر ځان ډاډه نه وي.", uk: "Не дуже впевнений серед інших людей." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "timide",
+      image: "timidite.webp",
+      definition: ["Qui n’ose pas beaucoup parler aux autres."],
+      definitionPivot: {
+        en: "Not very confident with other people.",
+        ar: "غير واثق كثيراً مع الآخرين.",
+        fa: "در برخورد با دیگران خیلی مطمئن نیست.",
+        pt: "Pouco confiante com outras pessoas.",
+        so: "Aan dadka hortooda kalsooni badan lahayn.",
+        ti: "ምስ ካልኦት ብዙሕ ዘይተኣማመን።",
+        tr: "İnsanların yanında çok özgüvenli olmayan.",
+        ps: "له خلکو سره ډېر ځان ډاډه نه وي.",
+        uk: "Не дуже впевнений серед інших людей.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été timide avec ses amis.",
@@ -656,8 +832,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec timide.",
           "Puisque timide est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "patient",      feminine: "patiente",     image: "patience.webp",      definition: ["Qui sait attendre calmement."], definitionPivot: { en: "Able to wait calmly.", ar: "قادر على الانتظار بهدوء.", fa: "می‌تواند با آرامش صبر کند.", pt: "Capaz de esperar com calma.", so: "Si deggen u sugi kara.", ti: "ብህድኣት ክጽበ ዝኽእል።", tr: "Sakince bekleyebilen.", ps: "په ارامۍ سره انتظار کولی شي.", uk: "Здатний спокійно чекати." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "patient",
+      feminine: "patiente",
+      image: "patience.webp",
+      definition: ["Qui sait attendre calmement."],
+      definitionPivot: {
+        en: "Able to wait calmly.",
+        ar: "قادر على الانتظار بهدوء.",
+        fa: "می‌تواند با آرامش صبر کند.",
+        pt: "Capaz de esperar com calma.",
+        so: "Si deggen u sugi kara.",
+        ti: "ብህድኣት ክጽበ ዝኽእል።",
+        tr: "Sakince bekleyebilen.",
+        ps: "په ارامۍ سره انتظار کولی شي.",
+        uk: "Здатний спокійно чекати.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été patient avec ses amis.",
@@ -721,8 +915,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec patient.",
           "Puisque patient est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "impatient",    feminine: "impatiente",   image: "impatience.webp",    definition: ["Qui n’aime pas attendre."], definitionPivot: { en: "Unable to wait calmly.", ar: "غير قادر على الانتظار بهدوء.", fa: "نمی‌تواند با آرامش صبر کند.", pt: "Incapaz de esperar com calma.", so: "Aan si deggen u sugi karin.", ti: "ብህድኣት ክጽበ ዘይክእል።", tr: "Sakince bekleyemeyen.", ps: "په ارامۍ سره انتظار نه شي کولی.", uk: "Не здатний спокійно чекати." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "impatient",
+      feminine: "impatiente",
+      image: "impatience.webp",
+      definition: ["Qui n’aime pas attendre."],
+      definitionPivot: {
+        en: "Unable to wait calmly.",
+        ar: "غير قادر على الانتظار بهدوء.",
+        fa: "نمی‌تواند با آرامش صبر کند.",
+        pt: "Incapaz de esperar com calma.",
+        so: "Aan si deggen u sugi karin.",
+        ti: "ብህድኣት ክጽበ ዘይክእል።",
+        tr: "Sakince bekleyemeyen.",
+        ps: "په ارامۍ سره انتظار نه شي کولی.",
+        uk: "Не здатний спокійно чекати.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été impatient avec ses amis.",
@@ -786,8 +998,26 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec impatient.",
           "Puisque impatient est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "joyeux",       feminine: "joyeuse",      image: "joie.webp",       definition: ["Qui est content et de bonne humeur."], definitionPivot: { en: "Happy and full of joy.", ar: "سعيد ومليء بالفرح.", fa: "شاد و پر از خوشحالی.", pt: "Feliz e cheio de alegria.", so: "Faraxsan oo raynrayn leh.", ti: "ሕጉስን ብሓጎስ ዝመልአን።", tr: "Mutlu ve sevinç dolu.", ps: "خوشحاله او له خوښۍ ډک.", uk: "Щасливий і радісний." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "joyeux",
+      feminine: "joyeuse",
+      image: "joie.webp",
+      definition: ["Qui est content et de bonne humeur."],
+      definitionPivot: {
+        en: "Happy and full of joy.",
+        ar: "سعيد ومليء بالفرح.",
+        fa: "شاد و پر از خوشحالی.",
+        pt: "Feliz e cheio de alegria.",
+        so: "Faraxsan oo raynrayn leh.",
+        ti: "ሕጉስን ብሓጎስ ዝመልአን።",
+        tr: "Mutlu ve sevinç dolu.",
+        ps: "خوشحاله او له خوښۍ ډک.",
+        uk: "Щасливий і радісний.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été joyeux avec ses amis.",
@@ -851,8 +1081,25 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec joyeux.",
           "Puisque joyeux est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "triste",                                 image: "tristesse.webp",       definition: ["Qui n’est pas content."], definitionPivot: { en: "Unhappy or feeling sadness.", ar: "غير سعيد أو يشعر بالحزن.", fa: "ناراحت یا غمگین.", pt: "Infeliz ou com tristeza.", so: "Murugaysan ama aan faraxsanayn.", ti: "ዘይሕጉስ ወይ ሓዘን ዝስምዖ።", tr: "Mutsuz veya üzgün.", ps: "خفه يا غمجن.", uk: "Сумний або нещасний." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "triste",
+      image: "tristesse.webp",
+      definition: ["Qui n’est pas content."],
+      definitionPivot: {
+        en: "Unhappy or feeling sadness.",
+        ar: "غير سعيد أو يشعر بالحزن.",
+        fa: "ناراحت یا غمگین.",
+        pt: "Infeliz ou com tristeza.",
+        so: "Murugaysan ama aan faraxsanayn.",
+        ti: "ዘይሕጉስ ወይ ሓዘን ዝስምዖ።",
+        tr: "Mutsuz veya üzgün.",
+        ps: "خفه يا غمجن.",
+        uk: "Сумний або нещасний.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, il a été triste avec ses amis.",
@@ -916,7 +1163,8 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec triste.",
           "Puisque triste est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il aide toujours ses amis, il est très ___.", answer: "gentil" },

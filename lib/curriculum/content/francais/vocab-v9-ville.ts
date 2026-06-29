@@ -6,7 +6,25 @@ export const V9_VILLE_THEME: VocabTheme = {
   title: "La ville",
   section: "V9",
   words: [
-    { word: "ville", image: "/vocab/images/V4/ville.webp",       article: "la",  gender: "f", definition: ["Grand lieu où vivent beaucoup de personnes, avec des rues, des maisons et des magasins."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+    {
+      word: "ville",
+      image: "/vocab/images/V4/ville.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Grand lieu où vivent beaucoup de personnes, avec des rues, des maisons et des magasins."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la ville sur le plan.",
@@ -70,8 +88,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la ville.",
           "Puisque ville est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "quartier", image: "quartier.webp",    article: "le",  gender: "m", definition: ["Partie d’une ville."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "quartier",
+      image: "quartier.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie d’une ville."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le quartier sur le plan.",
@@ -135,8 +172,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le quartier.",
           "Puisque quartier est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "centre-ville", image: "/vocab/images/V4/centre-ville.webp",article: "le",  gender: "m", definition: ["Partie centrale d’une ville, souvent avec beaucoup de magasins."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "centre-ville",
+      image: "/vocab/images/V4/centre-ville.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie centrale d’une ville, souvent avec beaucoup de magasins."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le centre-ville sur le plan.",
@@ -200,8 +256,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le centre-ville.",
           "Puisque centre-ville est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "rue", image: "rue.webp",         article: "la",  gender: "f", definition: ["Chemin dans une ville où les voitures et les personnes circulent."], definitionPivot: { en: "A word used to give or understand directions.", ar: "كلمة لفهم أو إعطاء الاتجاهات.", fa: "واژه‌ای برای فهمیدن یا دادن آدرس.", pt: "Palavra para dar ou entender direções.", so: "Eray lagu bixiyo ama lagu fahmo jiho.", ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።", tr: "Yön tarif etmek veya anlamak için kelime.", ps: "د لوري ورکولو يا پوهېدو کلمه.", uk: "Слово для пояснення або розуміння напрямку." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "rue",
+      image: "rue.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Chemin dans une ville où les voitures et les personnes circulent."],
+      definitionPivot: {
+        en: "A word used to give or understand directions.",
+        ar: "كلمة لفهم أو إعطاء الاتجاهات.",
+        fa: "واژه‌ای برای فهمیدن یا دادن آدرس.",
+        pt: "Palavra para dar ou entender direções.",
+        so: "Eray lagu bixiyo ama lagu fahmo jiho.",
+        ti: "ኣቕጣጫ ንምርዳእ ወይ ንምሃብ ዝጥቀሙሉ ቃል።",
+        tr: "Yön tarif etmek veya anlamak için kelime.",
+        ps: "د لوري ورکولو يا پوهېدو کلمه.",
+        uk: "Слово для пояснення або розуміння напрямку.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la rue sur le plan.",
@@ -265,8 +340,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la rue.",
           "Puisque rue est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "avenue", image: "/vocab/images/V4/avenue.webp",      article: "l'",  gender: "f", definition: ["Grande rue, souvent large."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "avenue",
+      image: "/vocab/images/V4/avenue.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Grande rue, souvent large."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'avenue sur le plan.",
@@ -330,8 +424,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'avenue.",
           "Puisque avenue est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "place", image: "/vocab/images/V4/place.webp",       article: "la",  gender: "f", definition: ["Siège réservé ou disponible dans un transport."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "place",
+      image: "/vocab/images/V4/place.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Siège réservé ou disponible dans un transport."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la place sur le plan.",
@@ -395,8 +508,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la place.",
           "Puisque place est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "marché", image: "marche.webp",      article: "le",  gender: "m", definition: ["Lieu où l’on achète des fruits, des légumes ou d’autres produits."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "marché",
+      image: "marche.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Lieu où l’on achète des fruits, des légumes ou d’autres produits."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le marché sur le plan.",
@@ -460,8 +592,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le marché.",
           "Puisque marché est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mairie", image: "mairie.webp",      article: "la",  gender: "f", definition: ["Bâtiment où travaille l’administration d’une commune."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mairie",
+      image: "mairie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Bâtiment où travaille l’administration d’une commune."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la mairie sur le plan.",
@@ -525,8 +676,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la mairie.",
           "Puisque mairie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "gare", image: "gare.webp",        article: "la",  gender: "f", definition: ["Lieu où les trains arrivent et partent."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "gare",
+      image: "gare.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Lieu où les trains arrivent et partent."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la gare sur le plan.",
@@ -590,8 +760,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la gare.",
           "Puisque gare est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "hôpital", image: "hopital.webp",     article: "l'",  gender: "m", definition: ["Lieu où l’on soigne les personnes malades ou blessées."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "hôpital",
+      image: "hopital.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Lieu où l’on soigne les personnes malades ou blessées."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'hôpital sur le plan.",
@@ -655,8 +844,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'hôpital.",
           "Puisque hôpital est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "magasin", image: "magasin.webp",     article: "le",  gender: "m", definition: ["Lieu où l’on achète des produits."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "magasin",
+      image: "magasin.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Lieu où l’on achète des produits."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le magasin sur le plan.",
@@ -720,8 +928,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le magasin.",
           "Puisque magasin est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "banque", image: "banque.webp",      article: "la",  gender: "f", definition: ["Lieu où l’on garde, retire ou échange de l’argent."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "banque",
+      image: "banque.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Lieu où l’on garde, retire ou échange de l’argent."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la banque sur le plan.",
@@ -785,8 +1012,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la banque.",
           "Puisque banque est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "parc", image: "parc.webp",        article: "le",  gender: "m", definition: ["Espace vert dans une ville pour se promener ou se reposer."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "parc",
+      image: "parc.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Espace vert dans une ville pour se promener ou se reposer."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le parc sur le plan.",
@@ -850,8 +1096,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le parc.",
           "Puisque parc est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "boulangerie", image: "boulangerie.webp", article: "la",  gender: "f", definition: ["Magasin où l’on achète du pain et des viennoiseries."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "boulangerie",
+      image: "boulangerie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Magasin où l’on achète du pain et des viennoiseries."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la boulangerie sur le plan.",
@@ -915,8 +1180,27 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la boulangerie.",
           "Puisque boulangerie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "église", image: "eglise.webp",      article: "l'",  gender: "f", definition: ["Bâtiment religieux chrétien."], definitionPivot: { en: "A place or service in a town.", ar: "مكان أو خدمة في المدينة.", fa: "جای یا خدماتی در شهر.", pt: "Lugar ou serviço numa cidade.", so: "Meel ama adeeg magaalo ku yaal.", ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።", tr: "Şehirdeki yer veya hizmet.", ps: "په ښار کې ځای يا خدمت.", uk: "Місце або послуга в місті." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "église",
+      image: "eglise.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Bâtiment religieux chrétien."],
+      definitionPivot: {
+        en: "A place or service in a town.",
+        ar: "مكان أو خدمة في المدينة.",
+        fa: "جای یا خدماتی در شهر.",
+        pt: "Lugar ou serviço numa cidade.",
+        so: "Meel ama adeeg magaalo ku yaal.",
+        ti: "ኣብ ከተማ ዘሎ ቦታ ወይ ኣገልግሎት።",
+        tr: "Şehirdeki yer veya hizmet.",
+        ps: "په ښار کې ځای يا خدمت.",
+        uk: "Місце або послуга в місті.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'église sur le plan.",
@@ -980,7 +1264,8 @@ export const V9_VILLE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'église.",
           "Puisque église est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il va acheter du pain à la ___ du quartier.",           answer: "boulangerie" },

@@ -6,7 +6,24 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
   title: "Les nationalités",
   section: "V1",
   words: [
-    { word: "suisse",                              image: "suisse.webp",      relatedWords: ["la Suisse"],       definition: ["Personne qui vient de Suisse"], definitionPivot: { en: "A person from Switzerland.", ar: "شخص من سويسرا.", fa: "شخصی از سوئیس.", pt: "Uma pessoa da Suíça.", so: "Qof ka yimid Iswiiska.", ti: "ካብ ስዊዘርላንድ ዝመጸ ሰብ።", tr: "İsviçre’den gelen kişi.", ps: "هغه کس چې د سویس څخه وي.", uk: "Людина зі Швейцарії." }, synonym: [], exampleSentences: {
+    {
+      word: "suisse",
+      image: "suisse.webp",
+      relatedWords: ["la Suisse"],
+      definition: ["Personne qui vient de Suisse"],
+      definitionPivot: {
+        en: "A person from Switzerland.",
+        ar: "شخص من سويسرا.",
+        fa: "شخصی از سوئیس.",
+        pt: "Uma pessoa da Suíça.",
+        so: "Qof ka yimid Iswiiska.",
+        ti: "ካብ ስዊዘርላንድ ዝመጸ ሰብ።",
+        tr: "İsviçre’den gelen kişi.",
+        ps: "هغه کس چې د سویس څخه وي.",
+        uk: "Людина зі Швейцарії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant suisse.",
@@ -68,8 +85,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec suisse.",
           "Puisque suisse est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "français",   feminine: "française",   image: "france.webp",      relatedWords: ["la France"],       definition: ["Matière où l’on apprend la langue française."], definitionPivot: { en: "A person from France.", ar: "شخص من فرنسا.", fa: "شخصی از فرانسه.", pt: "Uma pessoa da França.", so: "Qof ka yimid Faransiiska.", ti: "ካብ ፈረንሳ ዝመጸ ሰብ።", tr: "Fransa’dan gelen kişi.", ps: "هغه کس چې د فرانسې څخه وي.", uk: "Людина з Франції." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "français",
+      feminine: "française",
+      image: "france.webp",
+      relatedWords: ["la France"],
+      definition: ["Matière où l’on apprend la langue française."],
+      definitionPivot: {
+        en: "A person from France.",
+        ar: "شخص من فرنسا.",
+        fa: "شخصی از فرانسه.",
+        pt: "Uma pessoa da França.",
+        so: "Qof ka yimid Faransiiska.",
+        ti: "ካብ ፈረንሳ ዝመጸ ሰብ።",
+        tr: "Fransa’dan gelen kişi.",
+        ps: "هغه کس چې د فرانسې څخه وي.",
+        uk: "Людина з Франції.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant français.",
@@ -131,8 +167,26 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec français.",
           "Puisque français est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "belge",                               image: "belgique.webp",    relatedWords: ["la Belgique"],     definition: ["Personne qui vient de Belgique"], definitionPivot: { en: "A person from Belgium.", ar: "شخص من بلجيكا.", fa: "شخصی از بلژیک.", pt: "Uma pessoa da Bélgica.", so: "Qof ka yimid Biljam.", ti: "ካብ ቤልጅየም ዝመጸ ሰብ።", tr: "Belçika’dan gelen kişi.", ps: "هغه کس چې د بلجیم څخه وي.", uk: "Людина з Бельгії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "belge",
+      image: "belgique.webp",
+      relatedWords: ["la Belgique"],
+      definition: ["Personne qui vient de Belgique"],
+      definitionPivot: {
+        en: "A person from Belgium.",
+        ar: "شخص من بلجيكا.",
+        fa: "شخصی از بلژیک.",
+        pt: "Uma pessoa da Bélgica.",
+        so: "Qof ka yimid Biljam.",
+        ti: "ካብ ቤልጅየም ዝመጸ ሰብ።",
+        tr: "Belçika’dan gelen kişi.",
+        ps: "هغه کس چې د بلجیم څخه وي.",
+        uk: "Людина з Бельгії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant belge.",
@@ -194,8 +248,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec belge.",
           "Puisque belge est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "italien",    feminine: "italienne",   image: "italie.webp",      relatedWords: ["l'Italie"],        definition: ["Personne qui vient d’Italie."], definitionPivot: { en: "A person from Italy.", ar: "شخص من إيطاليا.", fa: "شخصی از ایتالیا.", pt: "Uma pessoa da Itália.", so: "Qof ka yimid Talyaaniga.", ti: "ካብ ጣልያን ዝመጸ ሰብ።", tr: "İtalya’dan gelen kişi.", ps: "هغه کس چې د ایټالیا څخه وي.", uk: "Людина з Італії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "italien",
+      feminine: "italienne",
+      image: "italie.webp",
+      relatedWords: ["l'Italie"],
+      definition: ["Personne qui vient d’Italie."],
+      definitionPivot: {
+        en: "A person from Italy.",
+        ar: "شخص من إيطاليا.",
+        fa: "شخصی از ایتالیا.",
+        pt: "Uma pessoa da Itália.",
+        so: "Qof ka yimid Talyaaniga.",
+        ti: "ካብ ጣልያን ዝመጸ ሰብ።",
+        tr: "İtalya’dan gelen kişi.",
+        ps: "هغه کس چې د ایټالیا څخه وي.",
+        uk: "Людина з Італії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant italien.",
@@ -257,8 +330,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec italien.",
           "Puisque italien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "espagnol",   feminine: "espagnole",   image: "espagne.webp",     relatedWords: ["l'Espagne"],       definition: ["Personne qui vient d’Espagne"], definitionPivot: { en: "A person from Spain.", ar: "شخص من إسبانيا.", fa: "شخصی از اسپانیا.", pt: "Uma pessoa da Espanha.", so: "Qof ka yimid Isbaanishka.", ti: "ካብ ስጳኛ ዝመጸ ሰብ።", tr: "İspanya’dan gelen kişi.", ps: "هغه کس چې د هسپانیې څخه وي.", uk: "Людина з Іспанії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "espagnol",
+      feminine: "espagnole",
+      image: "espagne.webp",
+      relatedWords: ["l'Espagne"],
+      definition: ["Personne qui vient d’Espagne"],
+      definitionPivot: {
+        en: "A person from Spain.",
+        ar: "شخص من إسبانيا.",
+        fa: "شخصی از اسپانیا.",
+        pt: "Uma pessoa da Espanha.",
+        so: "Qof ka yimid Isbaanishka.",
+        ti: "ካብ ስጳኛ ዝመጸ ሰብ።",
+        tr: "İspanya’dan gelen kişi.",
+        ps: "هغه کس چې د هسپانیې څخه وي.",
+        uk: "Людина з Іспанії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant espagnol.",
@@ -320,8 +412,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec espagnol.",
           "Puisque espagnol est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "portugais",  feminine: "portugaise",  image: "portugal.webp",    relatedWords: ["le Portugal"],     definition: ["Personne qui vient du Portugal"], definitionPivot: { en: "A person from Portugal.", ar: "شخص من البرتغال.", fa: "شخصی از پرتغال.", pt: "Uma pessoa de Portugal.", so: "Qof ka yimid Bortuqiiska.", ti: "ካብ ፖርቱጋል ዝመጸ ሰብ።", tr: "Portekiz’den gelen kişi.", ps: "هغه کس چې د پرتګال څخه وي.", uk: "Людина з Португалії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "portugais",
+      feminine: "portugaise",
+      image: "portugal.webp",
+      relatedWords: ["le Portugal"],
+      definition: ["Personne qui vient du Portugal"],
+      definitionPivot: {
+        en: "A person from Portugal.",
+        ar: "شخص من البرتغال.",
+        fa: "شخصی از پرتغال.",
+        pt: "Uma pessoa de Portugal.",
+        so: "Qof ka yimid Bortuqiiska.",
+        ti: "ካብ ፖርቱጋል ዝመጸ ሰብ።",
+        tr: "Portekiz’den gelen kişi.",
+        ps: "هغه کس چې د پرتګال څخه وي.",
+        uk: "Людина з Португалії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant portugais.",
@@ -383,8 +494,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec portugais.",
           "Puisque portugais est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "allemand",   feminine: "allemande",   image: "allemagne.webp",   relatedWords: ["l'Allemagne"],     definition: ["Personne qui vient d’Allemagne"], definitionPivot: { en: "A person from Germany.", ar: "شخص من ألمانيا.", fa: "شخصی از آلمان.", pt: "Uma pessoa da Alemanha.", so: "Qof ka yimid Jarmalka.", ti: "ካብ ጀርመን ዝመጸ ሰብ።", tr: "Almanya’dan gelen kişi.", ps: "هغه کس چې د آلمان څخه وي.", uk: "Людина з Німеччини." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "allemand",
+      feminine: "allemande",
+      image: "allemagne.webp",
+      relatedWords: ["l'Allemagne"],
+      definition: ["Personne qui vient d’Allemagne"],
+      definitionPivot: {
+        en: "A person from Germany.",
+        ar: "شخص من ألمانيا.",
+        fa: "شخصی از آلمان.",
+        pt: "Uma pessoa da Alemanha.",
+        so: "Qof ka yimid Jarmalka.",
+        ti: "ካብ ጀርመን ዝመጸ ሰብ።",
+        tr: "Almanya’dan gelen kişi.",
+        ps: "هغه کس چې د آلمان څخه وي.",
+        uk: "Людина з Німеччини.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant allemand.",
@@ -446,8 +576,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec allemand.",
           "Puisque allemand est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "anglais",    feminine: "anglaise",    image: "angleterre.webp",  relatedWords: ["l'Angleterre"],    definition: ["Personne qui vient d’Angleterre"], definitionPivot: { en: "A person from England.", ar: "شخص من إنجلترا.", fa: "شخصی از انگلستان.", pt: "Uma pessoa da Inglaterra.", so: "Qof ka yimid Ingiriiska.", ti: "ካብ እንግሊዝ ዝመጸ ሰብ።", tr: "İngiltere’den gelen kişi.", ps: "هغه کس چې د انګلستان څخه وي.", uk: "Людина з Англії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "anglais",
+      feminine: "anglaise",
+      image: "angleterre.webp",
+      relatedWords: ["l'Angleterre"],
+      definition: ["Personne qui vient d’Angleterre"],
+      definitionPivot: {
+        en: "A person from England.",
+        ar: "شخص من إنجلترا.",
+        fa: "شخصی از انگلستان.",
+        pt: "Uma pessoa da Inglaterra.",
+        so: "Qof ka yimid Ingiriiska.",
+        ti: "ካብ እንግሊዝ ዝመጸ ሰብ።",
+        tr: "İngiltere’den gelen kişi.",
+        ps: "هغه کس چې د انګلستان څخه وي.",
+        uk: "Людина з Англії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant anglais.",
@@ -509,8 +658,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec anglais.",
           "Puisque anglais est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "américain",  feminine: "américaine",  image: "etats-unis.webp",  relatedWords: ["les États-Unis"],  definition: ["Personne qui vient des États-Unis."], definitionPivot: { en: "A person from the United States.", ar: "شخص من الولايات المتحدة.", fa: "شخصی از ایالات متحده.", pt: "Uma pessoa dos Estados Unidos.", so: "Qof ka yimid Maraykanka.", ti: "ካብ ኣመሪካ ዝመጸ ሰብ።", tr: "Amerika Birleşik Devletleri’nden gelen kişi.", ps: "هغه کس چې د امریکا څخه وي.", uk: "Людина зі Сполучених Штатів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "américain",
+      feminine: "américaine",
+      image: "etats-unis.webp",
+      relatedWords: ["les États-Unis"],
+      definition: ["Personne qui vient des États-Unis."],
+      definitionPivot: {
+        en: "A person from the United States.",
+        ar: "شخص من الولايات المتحدة.",
+        fa: "شخصی از ایالات متحده.",
+        pt: "Uma pessoa dos Estados Unidos.",
+        so: "Qof ka yimid Maraykanka.",
+        ti: "ካብ ኣመሪካ ዝመጸ ሰብ።",
+        tr: "Amerika Birleşik Devletleri’nden gelen kişi.",
+        ps: "هغه کس چې د امریکا څخه وي.",
+        uk: "Людина зі Сполучених Штатів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant américain.",
@@ -572,8 +740,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec américain.",
           "Puisque américain est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "canadien",   feminine: "canadienne",  image: "canada.webp",      relatedWords: ["le Canada"],       definition: ["Personne qui vient du Canada"], definitionPivot: { en: "A person from Canada.", ar: "شخص من كندا.", fa: "شخصی از کانادا.", pt: "Uma pessoa do Canadá.", so: "Qof ka yimid Kanada.", ti: "ካብ ካናዳ ዝመጸ ሰብ።", tr: "Kanada’dan gelen kişi.", ps: "هغه کس چې د کاناډا څخه وي.", uk: "Людина з Канади." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "canadien",
+      feminine: "canadienne",
+      image: "canada.webp",
+      relatedWords: ["le Canada"],
+      definition: ["Personne qui vient du Canada"],
+      definitionPivot: {
+        en: "A person from Canada.",
+        ar: "شخص من كندا.",
+        fa: "شخصی از کانادا.",
+        pt: "Uma pessoa do Canadá.",
+        so: "Qof ka yimid Kanada.",
+        ti: "ካብ ካናዳ ዝመጸ ሰብ።",
+        tr: "Kanada’dan gelen kişi.",
+        ps: "هغه کس چې د کاناډا څخه وي.",
+        uk: "Людина з Канади.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant canadien.",
@@ -635,8 +822,26 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec canadien.",
           "Puisque canadien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "russe",                               image: "russie.webp",      relatedWords: ["la Russie"],       definition: ["Personne qui vient de Russie"], definitionPivot: { en: "A person from Russia.", ar: "شخص من روسيا.", fa: "شخصی از روسیه.", pt: "Uma pessoa da Rússia.", so: "Qof ka yimid Ruushka.", ti: "ካብ ሩስያ ዝመጸ ሰብ።", tr: "Rusya’dan gelen kişi.", ps: "هغه کس چې د روسیې څخه وي.", uk: "Людина з Росії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "russe",
+      image: "russie.webp",
+      relatedWords: ["la Russie"],
+      definition: ["Personne qui vient de Russie"],
+      definitionPivot: {
+        en: "A person from Russia.",
+        ar: "شخص من روسيا.",
+        fa: "شخصی از روسیه.",
+        pt: "Uma pessoa da Rússia.",
+        so: "Qof ka yimid Ruushka.",
+        ti: "ካብ ሩስያ ዝመጸ ሰብ።",
+        tr: "Rusya’dan gelen kişi.",
+        ps: "هغه کس چې د روسیې څخه وي.",
+        uk: "Людина з Росії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant russe.",
@@ -698,8 +903,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec russe.",
           "Puisque russe est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chinois",    feminine: "chinoise",    image: "chine.webp",       relatedWords: ["la Chine"],        definition: ["Personne qui vient de Chine"], definitionPivot: { en: "A person from China.", ar: "شخص من الصين.", fa: "شخصی از چین.", pt: "Uma pessoa da China.", so: "Qof ka yimid Shiinaha.", ti: "ካብ ቻይና ዝመጸ ሰብ።", tr: "Çin’den gelen kişi.", ps: "هغه کس چې د چین څخه وي.", uk: "Людина з Китаю." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chinois",
+      feminine: "chinoise",
+      image: "chine.webp",
+      relatedWords: ["la Chine"],
+      definition: ["Personne qui vient de Chine"],
+      definitionPivot: {
+        en: "A person from China.",
+        ar: "شخص من الصين.",
+        fa: "شخصی از چین.",
+        pt: "Uma pessoa da China.",
+        so: "Qof ka yimid Shiinaha.",
+        ti: "ካብ ቻይና ዝመጸ ሰብ።",
+        tr: "Çin’den gelen kişi.",
+        ps: "هغه کس چې د چین څخه وي.",
+        uk: "Людина з Китаю.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant chinois.",
@@ -761,8 +985,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec chinois.",
           "Puisque chinois est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "autrichien", feminine: "autrichienne", image: "autriche.webp", relatedWords: ["l'Autriche"], definition: ["Personne qui vient d’Autriche"], definitionPivot: { en: "A person from Austria.", ar: "شخص من النمسا.", fa: "شخصی از اتریش.", pt: "Uma pessoa da Áustria.", so: "Qof ka yimid Awstariya.", ti: "ካብ ኦስትርያ ዝመጸ ሰብ።", tr: "Avusturya’dan gelen kişi.", ps: "هغه کس چې د اتریش څخه وي.", uk: "Людина з Австрії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "autrichien",
+      feminine: "autrichienne",
+      image: "autriche.webp",
+      relatedWords: ["l'Autriche"],
+      definition: ["Personne qui vient d’Autriche"],
+      definitionPivot: {
+        en: "A person from Austria.",
+        ar: "شخص من النمسا.",
+        fa: "شخصی از اتریش.",
+        pt: "Uma pessoa da Áustria.",
+        so: "Qof ka yimid Awstariya.",
+        ti: "ካብ ኦስትርያ ዝመጸ ሰብ።",
+        tr: "Avusturya’dan gelen kişi.",
+        ps: "هغه کس چې د اتریش څخه وي.",
+        uk: "Людина з Австрії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant autrichien.",
@@ -824,8 +1067,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec autrichien.",
           "Puisque autrichien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "syrien", feminine: "syrienne", image: "syrie.webp", relatedWords: ["la Syrie"], definition: ["Personne qui vient de Syrie"], definitionPivot: { en: "A person from Syria.", ar: "شخص من سوريا.", fa: "شخصی از سوریه.", pt: "Uma pessoa da Síria.", so: "Qof ka yimid Suuriya.", ti: "ካብ ሶርያ ዝመጸ ሰብ።", tr: "Suriye’den gelen kişi.", ps: "هغه کس چې د سوریې څخه وي.", uk: "Людина із Сирії." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "syrien",
+      feminine: "syrienne",
+      image: "syrie.webp",
+      relatedWords: ["la Syrie"],
+      definition: ["Personne qui vient de Syrie"],
+      definitionPivot: {
+        en: "A person from Syria.",
+        ar: "شخص من سوريا.",
+        fa: "شخصی از سوریه.",
+        pt: "Uma pessoa da Síria.",
+        so: "Qof ka yimid Suuriya.",
+        ti: "ካብ ሶርያ ዝመጸ ሰብ።",
+        tr: "Suriye’den gelen kişi.",
+        ps: "هغه کس چې د سوریې څخه وي.",
+        uk: "Людина із Сирії.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant syrien.",
@@ -887,8 +1149,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec syrien.",
           "Puisque syrien est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "érythréen", feminine: "érythréenne", image: "erythree.webp", relatedWords: ["l'Érythrée"], definition: ["Personne qui vient d’Érythrée."], definitionPivot: { en: "A person from Eritrea.", ar: "شخص من إريتريا.", fa: "شخصی از اریتره.", pt: "Uma pessoa da Eritreia.", so: "Qof ka yimid Ereteriya.", ti: "ካብ ኤርትራ ዝመጸ ሰብ።", tr: "Eritre’den gelen kişi.", ps: "هغه کس چې د اریتریا څخه وي.", uk: "Людина з Еритреї." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "érythréen",
+      feminine: "érythréenne",
+      image: "erythree.webp",
+      relatedWords: ["l'Érythrée"],
+      definition: ["Personne qui vient d’Érythrée."],
+      definitionPivot: {
+        en: "A person from Eritrea.",
+        ar: "شخص من إريتريا.",
+        fa: "شخصی از اریتره.",
+        pt: "Uma pessoa da Eritreia.",
+        so: "Qof ka yimid Ereteriya.",
+        ti: "ካብ ኤርትራ ዝመጸ ሰብ።",
+        tr: "Eritre’den gelen kişi.",
+        ps: "هغه کس چې د اریتریا څخه وي.",
+        uk: "Людина з Еритреї.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant érythréen.",
@@ -950,8 +1231,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec érythréen.",
           "Puisque érythréen est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "turc", feminine: "turque", image: "turquie.webp", relatedWords: ["la Turquie"], definition: ["Personne qui vient de Turquie."], definitionPivot: { en: "A person from Türkiye.", ar: "شخص من تركيا.", fa: "شخصی از ترکیه.", pt: "Uma pessoa da Turquia.", so: "Qof ka yimid Turkiga.", ti: "ካብ ቱርኪ ዝመጸ ሰብ።", tr: "Türkiye’den gelen kişi.", ps: "هغه کس چې د ترکیې څخه وي.", uk: "Людина з Туреччини." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "turc",
+      feminine: "turque",
+      image: "turquie.webp",
+      relatedWords: ["la Turquie"],
+      definition: ["Personne qui vient de Turquie."],
+      definitionPivot: {
+        en: "A person from Türkiye.",
+        ar: "شخص من تركيا.",
+        fa: "شخصی از ترکیه.",
+        pt: "Uma pessoa da Turquia.",
+        so: "Qof ka yimid Turkiga.",
+        ti: "ካብ ቱርኪ ዝመጸ ሰብ።",
+        tr: "Türkiye’den gelen kişi.",
+        ps: "هغه کس چې د ترکیې څخه وي.",
+        uk: "Людина з Туреччини.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant turc.",
@@ -1013,8 +1313,27 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec turc.",
           "Puisque turc est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "iranien", feminine: "iranienne", image: "iran.webp", relatedWords: ["l'Iran"], definition: ["Personne qui vient d’Iran"], definitionPivot: { en: "A person from Iran.", ar: "شخص من إيران.", fa: "شخصی از ایران.", pt: "Uma pessoa do Irão.", so: "Qof ka yimid Iiraan.", ti: "ካብ ኢራን ዝመጸ ሰብ።", tr: "İran’dan gelen kişi.", ps: "هغه کس چې د ایران څخه وي.", uk: "Людина з Ірану." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "iranien",
+      feminine: "iranienne",
+      image: "iran.webp",
+      relatedWords: ["l'Iran"],
+      definition: ["Personne qui vient d’Iran"],
+      definitionPivot: {
+        en: "A person from Iran.",
+        ar: "شخص من إيران.",
+        fa: "شخصی از ایران.",
+        pt: "Uma pessoa do Irão.",
+        so: "Qof ka yimid Iiraan.",
+        ti: "ካብ ኢራን ዝመጸ ሰብ።",
+        tr: "İran’dan gelen kişi.",
+        ps: "هغه کس چې د ایران څخه وي.",
+        uk: "Людина з Ірану.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai rencontré un étudiant iranien.",
@@ -1076,7 +1395,8 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec iranien.",
           "Puisque iranien est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il est ___, il habite à Genève.", answer: "suisse" },

@@ -6,7 +6,25 @@ export const V7_LEGUMES_THEME: VocabTheme = {
   title: "Les légumes",
   section: "V7",
   words: [
-    { word: "carotte",        image: "carotte.webp",        article: "la",  gender: "f", definition: ["Légume orange, long et croquant."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+    {
+      word: "carotte",
+      image: "carotte.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Légume orange, long et croquant."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une carotte au marché.",
@@ -70,8 +88,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la carotte.",
           "Puisque carotte est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "tomate",         image: "tomate.webp",         article: "la",  gender: "f", definition: ["Fruit-légume rouge, souvent utilisé en salade ou en sauce."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "tomate",
+      image: "tomate.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit-légume rouge, souvent utilisé en salade ou en sauce."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une tomate au marché.",
@@ -135,8 +172,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la tomate.",
           "Puisque tomate est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "salade",         image: "salade.webp",         article: "la",  gender: "f", definition: ["Légume vert avec des feuilles."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "salade",
+      image: "salade.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Légume vert avec des feuilles."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une salade au marché.",
@@ -200,8 +256,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la salade.",
           "Puisque salade est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "concombre",      image: "concombre.webp",      article: "le",  gender: "m", definition: ["Légume long et vert, souvent mangé cru."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "concombre",
+      image: "concombre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume long et vert, souvent mangé cru."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un concombre au marché.",
@@ -265,8 +340,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le concombre.",
           "Puisque concombre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pomme de terre", image: "pomme-de-terre.webp", article: "la",  gender: "f", definition: ["Légume rond qui pousse dans la terre."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pomme de terre",
+      image: "pomme-de-terre.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Légume rond qui pousse dans la terre."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pomme de terre au marché.",
@@ -330,8 +424,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pomme de terre.",
           "Puisque pomme de terre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "oignon",         image: "oignon.webp",         article: "l'",  gender: "m", definition: ["Légume qui donne du goût aux plats."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "oignon",
+      image: "oignon.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Légume qui donne du goût aux plats."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un oignon au marché.",
@@ -395,8 +508,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'oignon.",
           "Puisque oignon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "échalote",       image: "echalotte.webp",      article: "l'",  gender: "f", definition: ["Petit légume proche de l’oignon."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "échalote",
+      image: "echalotte.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Petit légume proche de l’oignon."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une échalote au marché.",
@@ -460,8 +592,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'échalote.",
           "Puisque échalote est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ail",            image: "ail.webp",            article: "l'",  gender: "m", definition: ["Plante au goût fort, utilisée pour parfumer les plats."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ail",
+      image: "ail.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Plante au goût fort, utilisée pour parfumer les plats."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ail au marché.",
@@ -525,8 +676,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ail.",
           "Puisque ail est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "poivron",        image: "poivron.webp",        article: "le",  gender: "m", definition: ["Légume rouge, vert ou jaune, doux."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "poivron",
+      image: "poivron.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume rouge, vert ou jaune, doux."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un poivron au marché.",
@@ -590,8 +760,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le poivron.",
           "Puisque poivron est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "piment",         image: "piment.webp",         article: "le",  gender: "m", definition: ["Petit légume très fort ou piquant."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "piment",
+      image: "piment.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit légume très fort ou piquant."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un piment au marché.",
@@ -655,8 +844,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le piment.",
           "Puisque piment est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "courgette",      image: "courgette.webp",      article: "la",  gender: "f", definition: ["Légume long, souvent vert."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "courgette",
+      image: "courgette.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Légume long, souvent vert."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une courgette au marché.",
@@ -720,8 +928,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la courgette.",
           "Puisque courgette est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "aubergine",      image: "aubergine.webp",      article: "l'",  gender: "f", definition: ["Légume violet, long ou rond."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "aubergine",
+      image: "aubergine.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Légume violet, long ou rond."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une aubergine au marché.",
@@ -785,8 +1012,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'aubergine.",
           "Puisque aubergine est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "brocoli",        image: "brocoli.webp",        article: "le",  gender: "m", definition: ["Légume vert en petits bouquets."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "brocoli",
+      image: "brocoli.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume vert en petits bouquets."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un brocoli au marché.",
@@ -850,8 +1096,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le brocoli.",
           "Puisque brocoli est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chou",           image: "chou.webp",           article: "le",  gender: "m", definition: ["Légume avec beaucoup de feuilles serrées."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chou",
+      image: "chou.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume avec beaucoup de feuilles serrées."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un chou au marché.",
@@ -915,8 +1180,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le chou.",
           "Puisque chou est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "épinard",        image: "epinard.webp",        article: "l'",  gender: "m", definition: ["Légume vert avec des feuilles."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "épinard",
+      image: "epinard.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Légume vert avec des feuilles."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un épinard au marché.",
@@ -980,8 +1264,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'épinard.",
           "Puisque épinard est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "asperge",        image: "asperge.webp",        article: "l'",  gender: "f", definition: ["Légume long et fin, vert ou blanc."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "asperge",
+      image: "asperge.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Légume long et fin, vert ou blanc."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une asperge au marché.",
@@ -1045,8 +1348,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'asperge.",
           "Puisque asperge est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "betterave",      image: "betterave.webp",      article: "la",  gender: "f", definition: ["Légume rouge foncé, souvent sucré."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "betterave",
+      image: "betterave.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Légume rouge foncé, souvent sucré."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une betterave au marché.",
@@ -1110,8 +1432,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la betterave.",
           "Puisque betterave est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "navet",          image: "navet.webp",          article: "le",  gender: "m", definition: ["Légume rond, blanc ou violet."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "navet",
+      image: "navet.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume rond, blanc ou violet."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un navet au marché.",
@@ -1175,8 +1516,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le navet.",
           "Puisque navet est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "radis",          image: "radis.webp",          article: "le",  gender: "m", definition: ["Petit légume rond ou long, souvent rouge et blanc."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "radis",
+      image: "radis.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit légume rond ou long, souvent rouge et blanc."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un radis au marché.",
@@ -1240,8 +1600,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le radis.",
           "Puisque radis est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "haricot",        image: "haricot.webp",        article: "le",  gender: "m", definition: ["Légume long ou graine que l’on mange cuit."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "haricot",
+      image: "haricot.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Légume long ou graine que l’on mange cuit."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un haricot au marché.",
@@ -1305,8 +1684,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'haricot.",
           "Puisque haricot est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "maïs",           image: "mais.webp",           article: "le",  gender: "m", definition: ["Plante avec des grains jaunes."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "maïs",
+      image: "mais.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Plante avec des grains jaunes."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un maïs au marché.",
@@ -1370,8 +1768,27 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le maïs.",
           "Puisque maïs est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "champignon",     image: "champignon.webp",     article: "le",  gender: "m", definition: ["Aliment qui pousse dans la terre ou sur le bois."], definitionPivot: { en: "A vegetable used in food.", ar: "خضار يُستعمل في الطعام.", fa: "سبزی‌ای که در غذا استفاده می‌شود.", pt: "Legume usado na comida.", so: "Khudaar cunto lagu isticmaalo.", ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።", tr: "Yemekte kullanılan sebze.", ps: "سبزي چې په خوړو کې کارېږي.", uk: "Овоч, який використовують у їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "champignon",
+      image: "champignon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Aliment qui pousse dans la terre ou sur le bois."],
+      definitionPivot: {
+        en: "A vegetable used in food.",
+        ar: "خضار يُستعمل في الطعام.",
+        fa: "سبزی‌ای که در غذا استفاده می‌شود.",
+        pt: "Legume usado na comida.",
+        so: "Khudaar cunto lagu isticmaalo.",
+        ti: "ኣብ መግቢ ዝጥቀሙሉ ኣሕምልቲ።",
+        tr: "Yemekte kullanılan sebze.",
+        ps: "سبزي چې په خوړو کې کارېږي.",
+        uk: "Овоч, який використовують у їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un champignon au marché.",
@@ -1435,7 +1852,8 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le champignon.",
           "Puisque champignon est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Je coupe une ___ rouge pour mettre dans ma salade.",    answer: "tomate" },

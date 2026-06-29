@@ -6,7 +6,25 @@ export const V9_HOTEL_THEME: VocabTheme = {
   title: "L'hôtel",
   section: "V9",
   words: [
-    { word: "réception", image: "reception.webp",       article: "la",  gender: "f", definition: ["Accueil d’un hôtel où l’on demande une chambre ou des informations."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+    {
+      word: "réception",
+      image: "reception.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Accueil d’un hôtel où l’on demande une chambre ou des informations."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réception sur le plan.",
@@ -70,8 +88,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la réception.",
           "Puisque réception est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "clé", image: "cle.webp",             article: "la",  gender: "f", definition: ["Objet ou carte qui sert à ouvrir une porte."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "clé",
+      image: "cle.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Objet ou carte qui sert à ouvrir une porte."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la clé sur le plan.",
@@ -135,8 +172,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la clé.",
           "Puisque clé est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chambre", image: "/vocab/images/V4/chambre.webp",         article: "la",  gender: "f", definition: ["Pièce où l’on dort dans un hôtel."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chambre",
+      image: "/vocab/images/V4/chambre.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Pièce où l’on dort dans un hôtel."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre sur le plan.",
@@ -200,8 +256,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la chambre.",
           "Puisque chambre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chambre double", image: "chambre-double.webp",  article: "la",  gender: "f", definition: ["Chambre pour deux personnes, souvent avec un grand lit ou deux lits."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chambre double",
+      image: "chambre-double.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Chambre pour deux personnes, souvent avec un grand lit ou deux lits."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre double sur le plan.",
@@ -265,8 +340,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la chambre double.",
           "Puisque chambre double est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chambre simple", image: "chambre-simple.webp",  article: "la",  gender: "f", definition: ["Chambre pour une seule personne."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chambre simple",
+      image: "chambre-simple.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Chambre pour une seule personne."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la chambre simple sur le plan.",
@@ -330,8 +424,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la chambre simple.",
           "Puisque chambre simple est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "piscine", image: "piscine.webp",         article: "la",  gender: "f", definition: ["Bassin rempli d’eau où l’on nage."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "piscine",
+      image: "piscine.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Bassin rempli d’eau où l’on nage."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la piscine sur le plan.",
@@ -395,8 +508,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la piscine.",
           "Puisque piscine est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "petit-déjeuner", image: "petit-dejeuner.webp",  article: "le",  gender: "m", definition: ["Repas du matin."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "petit-déjeuner",
+      image: "petit-dejeuner.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Repas du matin."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le petit-déjeuner sur le plan.",
@@ -460,8 +592,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le petit-déjeuner.",
           "Puisque petit-déjeuner est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "demi-pension", image: "demi-pension.webp",    article: "la",  gender: "f", definition: ["Formule avec la nuit, le petit-déjeuner et un autre repas."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "demi-pension",
+      image: "demi-pension.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Formule avec la nuit, le petit-déjeuner et un autre repas."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la demi-pension sur le plan.",
@@ -525,8 +676,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la demi-pension.",
           "Puisque demi-pension est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "réservation", image: "reservation.webp",     article: "la",  gender: "f", definition: ["Action de garder une place, une chambre ou un billet à l’avance."], definitionPivot: { en: "A word used for air travel.", ar: "كلمة تُستعمل في السفر بالطائرة.", fa: "واژه‌ای برای سفر با هواپیما.", pt: "Palavra usada em viagens de avião.", so: "Eray loo isticmaalo safarka diyaaradda.", ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።", tr: "Uçak yolculuğunda kullanılan kelime.", ps: "د الوتکې د سفر کلمه.", uk: "Слово для авіаподорожі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "réservation",
+      image: "reservation.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Action de garder une place, une chambre ou un billet à l’avance."],
+      definitionPivot: {
+        en: "A word used for air travel.",
+        ar: "كلمة تُستعمل في السفر بالطائرة.",
+        fa: "واژه‌ای برای سفر با هواپیما.",
+        pt: "Palavra usada em viagens de avião.",
+        so: "Eray loo isticmaalo safarka diyaaradda.",
+        ti: "ኣብ ጉዕዞ ነፋሪት ዝጥቀሙሉ ቃል።",
+        tr: "Uçak yolculuğunda kullanılan kelime.",
+        ps: "د الوتکې د سفر کلمه.",
+        uk: "Слово для авіаподорожі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la réservation sur le plan.",
@@ -590,8 +760,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la réservation.",
           "Puisque réservation est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "nuit", image: "/vocab/images/V2/nuit.webp",            article: "la",  gender: "f", definition: ["Période entre le soir et le matin ; dans un hôtel, temps passé à dormir sur place."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "nuit",
+      image: "/vocab/images/V2/nuit.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Période entre le soir et le matin ; dans un hôtel, temps passé à dormir sur place."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la nuit sur le plan.",
@@ -655,8 +844,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la nuit.",
           "Puisque nuit est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "étage", image: "etage.webp",           article: "l'",  gender: "m", definition: ["Niveau d’un bâtiment."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "étage",
+      image: "etage.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Niveau d’un bâtiment."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'étage sur le plan.",
@@ -720,8 +928,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'étage.",
           "Puisque étage est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ascenseur", image: "/vocab/images/V5/ascenseur.webp",       article: "l'",  gender: "m", definition: ["Appareil qui monte et descend entre les étages."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ascenseur",
+      image: "/vocab/images/V5/ascenseur.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Appareil qui monte et descend entre les étages."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'ascenseur sur le plan.",
@@ -785,8 +1012,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ascenseur.",
           "Puisque ascenseur est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "coffre-fort", image: "coffre-fort.webp",     article: "le",  gender: "m", definition: ["Petite boîte solide pour garder des objets importants."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "coffre-fort",
+      image: "coffre-fort.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petite boîte solide pour garder des objets importants."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le coffre-fort sur le plan.",
@@ -850,8 +1096,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le coffre-fort.",
           "Puisque coffre-fort est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "concierge", image: "concierge.webp",       article: "le",  gender: "m", definition: ["Personne qui aide les clients dans un hôtel ou un immeuble."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "concierge",
+      image: "concierge.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Personne qui aide les clients dans un hôtel ou un immeuble."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le concierge sur le plan.",
@@ -915,8 +1180,27 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le concierge.",
           "Puisque concierge est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "parking", image: "parking.webp",         article: "le",  gender: "m", definition: ["Lieu où l’on gare les voitures."], definitionPivot: { en: "A word used in a hotel.", ar: "كلمة تُستعمل في الفندق.", fa: "واژه‌ای که در هتل استفاده می‌شود.", pt: "Palavra usada num hotel.", so: "Eray hoteel lagu isticmaalo.", ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።", tr: "Otelde kullanılan kelime.", ps: "کلمه چې په هوټل کې کارېږي.", uk: "Слово, яке використовують у готелі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "parking",
+      image: "parking.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Lieu où l’on gare les voitures."],
+      definitionPivot: {
+        en: "A word used in a hotel.",
+        ar: "كلمة تُستعمل في الفندق.",
+        fa: "واژه‌ای که در هتل استفاده می‌شود.",
+        pt: "Palavra usada num hotel.",
+        so: "Eray hoteel lagu isticmaalo.",
+        ti: "ኣብ ሆቴል ዝጥቀሙሉ ቃል።",
+        tr: "Otelde kullanılan kelime.",
+        ps: "کلمه چې په هوټل کې کارېږي.",
+        uk: "Слово, яке використовують у готелі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le parking sur le plan.",
@@ -980,7 +1264,8 @@ export const V9_HOTEL_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le parking.",
           "Puisque parking est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il fait une ___ pour deux nuits à l'hôtel.",            answer: "réservation" },

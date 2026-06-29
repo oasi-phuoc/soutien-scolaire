@@ -6,7 +6,25 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
   title: "Le matériel scolaire",
   section: "V5",
   words: [
-    { word: "sac",          image: "sac-a-dos.webp",    article: "le",  gender: "m", definition: ["Objet pour porter ses affaires."], definitionPivot: { en: "A bag for carrying school things.", ar: "حقيبة لحمل أدوات المدرسة.", fa: "کیفی برای بردن وسایل مدرسه.", pt: "Saco para levar material escolar.", so: "Boorso lagu qaato alaabta dugsiga.", ti: "ናይ ቤት ትምህርቲ ነገራት ንምስካም ቦርሳ።", tr: "Okul eşyalarını taşımak için çanta.", ps: "د ښوونځي شيانو وړلو لپاره بکس.", uk: "Сумка для шкільних речей." }, synonym: [], exampleSentences: {
+    {
+      word: "sac",
+      image: "sac-a-dos.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour porter ses affaires."],
+      definitionPivot: {
+        en: "A bag for carrying school things.",
+        ar: "حقيبة لحمل أدوات المدرسة.",
+        fa: "کیفی برای بردن وسایل مدرسه.",
+        pt: "Saco para levar material escolar.",
+        so: "Boorso lagu qaato alaabta dugsiga.",
+        ti: "ናይ ቤት ትምህርቲ ነገራት ንምስካም ቦርሳ።",
+        tr: "Okul eşyalarını taşımak için çanta.",
+        ps: "د ښوونځي شيانو وړلو لپاره بکس.",
+        uk: "Сумка для шкільних речей.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le sac pendant l'exercice.",
@@ -70,8 +88,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le sac.",
           "Puisque sac est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "trousse",      image: "trousse.webp",      article: "la",  gender: "f", definition: ["Petit sac pour ranger les stylos et les crayons."], definitionPivot: { en: "A small case for pens and pencils.", ar: "مقلمة للأقلام.", fa: "جامدادی برای خودکار و مداد.", pt: "Estojo para canetas e lápis.", so: "Kiis yar oo qalimaan lagu rido.", ti: "ብርዒን ርሳስን ዝቕመጠሉ ንእሽቶ መትሓዚ።", tr: "Kalemler için küçük çanta.", ps: "د قلمونو او پنسلونو کوچنی بکس.", uk: "Пенал для ручок і олівців." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "trousse",
+      image: "trousse.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Petit sac pour ranger les stylos et les crayons."],
+      definitionPivot: {
+        en: "A small case for pens and pencils.",
+        ar: "مقلمة للأقلام.",
+        fa: "جامدادی برای خودکار و مداد.",
+        pt: "Estojo para canetas e lápis.",
+        so: "Kiis yar oo qalimaan lagu rido.",
+        ti: "ብርዒን ርሳስን ዝቕመጠሉ ንእሽቶ መትሓዚ።",
+        tr: "Kalemler için küçük çanta.",
+        ps: "د قلمونو او پنسلونو کوچنی بکس.",
+        uk: "Пенал для ручок і олівців.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la trousse pendant l'exercice.",
@@ -135,8 +172,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la trousse.",
           "Puisque trousse est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "agenda",       image: "agenda.webp",       article: "l'",  gender: "m", definition: ["Cahier pour écrire les devoirs et les rendez-vous."], definitionPivot: { en: "A notebook for homework and dates.", ar: "دفتر لكتابة الواجبات والمواعيد.", fa: "دفترچه‌ای برای تکالیف و تاریخ‌ها.", pt: "Caderno para deveres e datas.", so: "Buug lagu qoro shaqo-guri iyo taariikho.", ti: "ዕዮ ገዛን ዕለታትን ንምጽሓፍ ደብተር።", tr: "Ödevleri ve tarihleri yazma defteri.", ps: "د کورنۍ دندې او نېټو کتابچه.", uk: "Записник для домашніх завдань і дат." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "agenda",
+      image: "agenda.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Cahier pour écrire les devoirs et les rendez-vous."],
+      definitionPivot: {
+        en: "A notebook for homework and dates.",
+        ar: "دفتر لكتابة الواجبات والمواعيد.",
+        fa: "دفترچه‌ای برای تکالیف و تاریخ‌ها.",
+        pt: "Caderno para deveres e datas.",
+        so: "Buug lagu qoro shaqo-guri iyo taariikho.",
+        ti: "ዕዮ ገዛን ዕለታትን ንምጽሓፍ ደብተር።",
+        tr: "Ödevleri ve tarihleri yazma defteri.",
+        ps: "د کورنۍ دندې او نېټو کتابچه.",
+        uk: "Записник для домашніх завдань і дат.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'agenda pendant l'exercice.",
@@ -200,8 +256,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'agenda.",
           "Puisque agenda est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "classeur",     image: "classeur.webp",     article: "le",  gender: "m", definition: ["Objet pour ranger des feuilles."], definitionPivot: { en: "A folder for organizing papers.", ar: "ملف لتنظيم الأوراق.", fa: "پوشه‌ای برای مرتب کردن برگه‌ها.", pt: "Pasta para organizar folhas.", so: "Fayl lagu habeeyo waraaqaha.", ti: "ወረቓቕቲ ንምውዳብ ፋይል።", tr: "Kağıtları düzenlemek için klasör.", ps: "د کاغذونو د تنظيم فولډر.", uk: "Папка для впорядкування аркушів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "classeur",
+      image: "classeur.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour ranger des feuilles."],
+      definitionPivot: {
+        en: "A folder for organizing papers.",
+        ar: "ملف لتنظيم الأوراق.",
+        fa: "پوشه‌ای برای مرتب کردن برگه‌ها.",
+        pt: "Pasta para organizar folhas.",
+        so: "Fayl lagu habeeyo waraaqaha.",
+        ti: "ወረቓቕቲ ንምውዳብ ፋይል።",
+        tr: "Kağıtları düzenlemek için klasör.",
+        ps: "د کاغذونو د تنظيم فولډر.",
+        uk: "Папка для впорядкування аркушів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le classeur pendant l'exercice.",
@@ -265,8 +340,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le classeur.",
           "Puisque classeur est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "intercalaire", image: "intercalaire.webp", article: "l'",  gender: "m", definition: ["Feuille épaisse qui sépare les parties dans un classeur."], definitionPivot: { en: "A divider sheet for sections.", ar: "ورقة فاصلة بين الأقسام.", fa: "برگه جداکننده برای بخش‌ها.", pt: "Separador para dividir secções.", so: "Warqad kala qaybiya qaybaha.", ti: "ክፍልታት ንምፍላይ ወረቐት።", tr: "Bölümleri ayıran sayfa.", ps: "د برخو بېلوونکې پاڼه.", uk: "Розділювач для частин." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "intercalaire",
+      image: "intercalaire.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Feuille épaisse qui sépare les parties dans un classeur."],
+      definitionPivot: {
+        en: "A divider sheet for sections.",
+        ar: "ورقة فاصلة بين الأقسام.",
+        fa: "برگه جداکننده برای بخش‌ها.",
+        pt: "Separador para dividir secções.",
+        so: "Warqad kala qaybiya qaybaha.",
+        ti: "ክፍልታት ንምፍላይ ወረቐት።",
+        tr: "Bölümleri ayıran sayfa.",
+        ps: "د برخو بېلوونکې پاڼه.",
+        uk: "Розділювач для частин.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'intercalaire pendant l'exercice.",
@@ -330,8 +424,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'intercalaire.",
           "Puisque intercalaire est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "feuille",      image: "feuille.webp",      article: "la",  gender: "f", definition: ["Papier sur lequel on écrit."], definitionPivot: { en: "A sheet of paper for writing.", ar: "ورقة للكتابة.", fa: "برگه کاغذ برای نوشتن.", pt: "Folha de papel para escrever.", so: "Warqad wax lagu qoro.", ti: "ንምጽሓፍ ወረቐት።", tr: "Yazmak için kağıt.", ps: "د ليکلو کاغذ.", uk: "Аркуш паперу для письма." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "feuille",
+      image: "feuille.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Papier sur lequel on écrit."],
+      definitionPivot: {
+        en: "A sheet of paper for writing.",
+        ar: "ورقة للكتابة.",
+        fa: "برگه کاغذ برای نوشتن.",
+        pt: "Folha de papel para escrever.",
+        so: "Warqad wax lagu qoro.",
+        ti: "ንምጽሓፍ ወረቐት።",
+        tr: "Yazmak için kağıt.",
+        ps: "د ليکلو کاغذ.",
+        uk: "Аркуш паперу для письма.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la feuille pendant l'exercice.",
@@ -395,8 +508,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la feuille.",
           "Puisque feuille est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "livre",        image: "livre.webp",        article: "le",  gender: "m", definition: ["Objet avec des pages pour lire ou apprendre."], definitionPivot: { en: "A printed book to read or study.", ar: "كتاب مطبوع للقراءة أو الدراسة.", fa: "کتاب چاپی برای خواندن یا درس.", pt: "Livro impresso para ler ou estudar.", so: "Buug daabacan oo la akhriyo ama lagu barto.", ti: "ንምንባብ ወይ ንምጽናዕ ዝተሓተመ መጽሓፍ።", tr: "Okumak veya çalışmak için basılı kitap.", ps: "د لوستلو يا زده کړې چاپ شوی کتاب.", uk: "Друкована книга для читання або навчання." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "livre",
+      image: "livre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet avec des pages pour lire ou apprendre."],
+      definitionPivot: {
+        en: "A printed book to read or study.",
+        ar: "كتاب مطبوع للقراءة أو الدراسة.",
+        fa: "کتاب چاپی برای خواندن یا درس.",
+        pt: "Livro impresso para ler ou estudar.",
+        so: "Buug daabacan oo la akhriyo ama lagu barto.",
+        ti: "ንምንባብ ወይ ንምጽናዕ ዝተሓተመ መጽሓፍ።",
+        tr: "Okumak veya çalışmak için basılı kitap.",
+        ps: "د لوستلو يا زده کړې چاپ شوی کتاب.",
+        uk: "Друкована книга для читання або навчання.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le livre pendant l'exercice.",
@@ -460,8 +592,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le livre.",
           "Puisque livre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cahier",       image: "cahier.webp",       article: "le",  gender: "m", definition: ["Petit livre avec des pages pour écrire."], definitionPivot: { en: "A notebook for writing lessons.", ar: "دفتر لكتابة الدروس.", fa: "دفتر برای نوشتن درس‌ها.", pt: "Caderno para escrever lições.", so: "Buug-yare lagu qoro casharrada.", ti: "ትምህርቲ ንምጽሓፍ ደብተር።", tr: "Ders yazmak için defter.", ps: "د درسونو ليکلو کتابچه.", uk: "Зошит для запису уроків." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cahier",
+      image: "cahier.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit livre avec des pages pour écrire."],
+      definitionPivot: {
+        en: "A notebook for writing lessons.",
+        ar: "دفتر لكتابة الدروس.",
+        fa: "دفتر برای نوشتن درس‌ها.",
+        pt: "Caderno para escrever lições.",
+        so: "Buug-yare lagu qoro casharrada.",
+        ti: "ትምህርቲ ንምጽሓፍ ደብተር።",
+        tr: "Ders yazmak için defter.",
+        ps: "د درسونو ليکلو کتابچه.",
+        uk: "Зошит для запису уроків.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le cahier pendant l'exercice.",
@@ -525,8 +676,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le cahier.",
           "Puisque cahier est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "stylo",        image: "stylo.webp",        article: "le",  gender: "m", definition: ["Objet pour écrire avec de l’encre."], definitionPivot: { en: "A pen used to write with ink.", ar: "قلم للكتابة بالحبر.", fa: "خودکار برای نوشتن با جوهر.", pt: "Caneta para escrever com tinta.", so: "Qalin khad wax lagu qoro.", ti: "ብቀለም ንምጽሓፍ ብርዒ።", tr: "Mürekkeple yazan kalem.", ps: "قلم چې په رنګ ليکي.", uk: "Ручка для письма чорнилом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "stylo",
+      image: "stylo.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour écrire avec de l’encre."],
+      definitionPivot: {
+        en: "A pen used to write with ink.",
+        ar: "قلم للكتابة بالحبر.",
+        fa: "خودکار برای نوشتن با جوهر.",
+        pt: "Caneta para escrever com tinta.",
+        so: "Qalin khad wax lagu qoro.",
+        ti: "ብቀለም ንምጽሓፍ ብርዒ።",
+        tr: "Mürekkeple yazan kalem.",
+        ps: "قلم چې په رنګ ليکي.",
+        uk: "Ручка для письма чорнилом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le stylo pendant l'exercice.",
@@ -590,8 +760,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le stylo.",
           "Puisque stylo est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "crayon",       image: "crayon.webp",       article: "le",  gender: "m", definition: ["Objet pour écrire ou dessiner, souvent avec une mine."], definitionPivot: { en: "A pencil for writing or drawing.", ar: "قلم رصاص للكتابة أو الرسم.", fa: "مداد برای نوشتن یا نقاشی.", pt: "Lápis para escrever ou desenhar.", so: "Qalin rasaas ah oo wax lagu qoro ama sawiro.", ti: "ንምጽሓፍ ወይ ንምስኣል ርሳስ።", tr: "Yazmak veya çizmek için kurşun kalem.", ps: "پنسل د ليکلو يا رسمولو لپاره.", uk: "Олівець для письма або малювання." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "crayon",
+      image: "crayon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour écrire ou dessiner, souvent avec une mine."],
+      definitionPivot: {
+        en: "A pencil for writing or drawing.",
+        ar: "قلم رصاص للكتابة أو الرسم.",
+        fa: "مداد برای نوشتن یا نقاشی.",
+        pt: "Lápis para escrever ou desenhar.",
+        so: "Qalin rasaas ah oo wax lagu qoro ama sawiro.",
+        ti: "ንምጽሓፍ ወይ ንምስኣል ርሳስ።",
+        tr: "Yazmak veya çizmek için kurşun kalem.",
+        ps: "پنسل د ليکلو يا رسمولو لپاره.",
+        uk: "Олівець для письма або малювання.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le crayon pendant l'exercice.",
@@ -655,8 +844,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le crayon.",
           "Puisque crayon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "gomme",        image: "gomme.webp",        article: "la",  gender: "f", definition: ["Objet pour effacer le crayon."], definitionPivot: { en: "An eraser for pencil marks.", ar: "ممحاة لمسح قلم الرصاص.", fa: "پاک‌کن برای پاک کردن مداد.", pt: "Borracha para apagar lápis.", so: "Masax qalin rasaas lagu tirtiro.", ti: "ርሳስ ንምድምሳስ መደምሰሲ።", tr: "Kurşun kalemi silen silgi.", ps: "د پنسل پاکولو ربړ.", uk: "Гумка для стирання олівця." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "gomme",
+      image: "gomme.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Objet pour effacer le crayon."],
+      definitionPivot: {
+        en: "An eraser for pencil marks.",
+        ar: "ممحاة لمسح قلم الرصاص.",
+        fa: "پاک‌کن برای پاک کردن مداد.",
+        pt: "Borracha para apagar lápis.",
+        so: "Masax qalin rasaas lagu tirtiro.",
+        ti: "ርሳስ ንምድምሳስ መደምሰሲ።",
+        tr: "Kurşun kalemi silen silgi.",
+        ps: "د پنسل پاکولو ربړ.",
+        uk: "Гумка для стирання олівця.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la gomme pendant l'exercice.",
@@ -720,8 +928,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la gomme.",
           "Puisque gomme est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "feutre",       image: "feutre.webp",       article: "le",  gender: "m", definition: ["Stylo avec une pointe épaisse pour écrire ou colorier."], definitionPivot: { en: "A felt-tip pen for coloring.", ar: "قلم تلوين برأس لباد.", fa: "ماژیک برای رنگ‌آمیزی.", pt: "Marcador para colorir.", so: "Qalin midabayn oo feutre ah.", ti: "ንምቕባእ ብርዒ ፈትር።", tr: "Boyamak için keçeli kalem.", ps: "د رنګولو فيلټ قلم.", uk: "Фломастер для розфарбовування." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "feutre",
+      image: "feutre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Stylo avec une pointe épaisse pour écrire ou colorier."],
+      definitionPivot: {
+        en: "A felt-tip pen for coloring.",
+        ar: "قلم تلوين برأس لباد.",
+        fa: "ماژیک برای رنگ‌آمیزی.",
+        pt: "Marcador para colorir.",
+        so: "Qalin midabayn oo feutre ah.",
+        ti: "ንምቕባእ ብርዒ ፈትር።",
+        tr: "Boyamak için keçeli kalem.",
+        ps: "د رنګولو فيلټ قلم.",
+        uk: "Фломастер для розфарбовування.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le feutre pendant l'exercice.",
@@ -785,8 +1012,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le feutre.",
           "Puisque feutre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "surligneur",   image: "surligneur.webp",   article: "le",  gender: "m", definition: ["Feutre clair pour mettre un mot en évidence."], definitionPivot: { en: "A fluorescent pen for marking text.", ar: "قلم فسفوري لتحديد النص.", fa: "هایلایتر برای برجسته کردن متن.", pt: "Marcador fluorescente para destacar texto.", so: "Qalin ifaya oo qoraal lagu muujiyo.", ti: "ጽሑፍ ንምጉላሕ ብርሃን ዘለዎ ብርዒ።", tr: "Metni vurgulayan fosforlu kalem.", ps: "د متن روښانولو قلم.", uk: "Маркер для виділення тексту." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "surligneur",
+      image: "surligneur.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Feutre clair pour mettre un mot en évidence."],
+      definitionPivot: {
+        en: "A fluorescent pen for marking text.",
+        ar: "قلم فسفوري لتحديد النص.",
+        fa: "هایلایتر برای برجسته کردن متن.",
+        pt: "Marcador fluorescente para destacar texto.",
+        so: "Qalin ifaya oo qoraal lagu muujiyo.",
+        ti: "ጽሑፍ ንምጉላሕ ብርሃን ዘለዎ ብርዒ።",
+        tr: "Metni vurgulayan fosforlu kalem.",
+        ps: "د متن روښانولو قلم.",
+        uk: "Маркер для виділення тексту.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le surligneur pendant l'exercice.",
@@ -850,8 +1096,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le surligneur.",
           "Puisque surligneur est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "taille-crayon", image: "taille-crayon.webp", article: "le", gender: "m", definition: ["Objet pour tailler un crayon."], definitionPivot: { en: "A tool for sharpening pencils.", ar: "أداة لبري الأقلام الرصاص.", fa: "وسیله‌ای برای تراشیدن مداد.", pt: "Afiador para lápis.", so: "Qalab lagu qoro qalin rasaas.", ti: "ርሳስ ንምሓዝ መሳርሒ።", tr: "Kalem açan araç.", ps: "د پنسل تېره کولو اله.", uk: "Точилка для олівців." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "taille-crayon",
+      image: "taille-crayon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour tailler un crayon."],
+      definitionPivot: {
+        en: "A tool for sharpening pencils.",
+        ar: "أداة لبري الأقلام الرصاص.",
+        fa: "وسیله‌ای برای تراشیدن مداد.",
+        pt: "Afiador para lápis.",
+        so: "Qalab lagu qoro qalin rasaas.",
+        ti: "ርሳስ ንምሓዝ መሳርሒ።",
+        tr: "Kalem açan araç.",
+        ps: "د پنسل تېره کولو اله.",
+        uk: "Точилка для олівців.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le taille-crayon pendant l'exercice.",
@@ -915,8 +1180,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le taille-crayon.",
           "Puisque taille-crayon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "règle",        image: "regle.webp",        article: "la",  gender: "f", definition: ["Objet droit pour tracer des lignes ou mesurer."], definitionPivot: { en: "A tool for drawing straight lines.", ar: "أداة لرسم خطوط مستقيمة.", fa: "وسیله‌ای برای کشیدن خط راست.", pt: "Régua para traçar linhas retas.", so: "Qalab lagu sawiro xariiq toosan.", ti: "ቀጥታ መስመር ንምስኣል መሳርሒ።", tr: "Düz çizgi çizme aracı.", ps: "د نېغې کرښې رسمولو اله.", uk: "Лінійка для прямих ліній." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "règle",
+      image: "regle.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Objet droit pour tracer des lignes ou mesurer."],
+      definitionPivot: {
+        en: "A tool for drawing straight lines.",
+        ar: "أداة لرسم خطوط مستقيمة.",
+        fa: "وسیله‌ای برای کشیدن خط راست.",
+        pt: "Régua para traçar linhas retas.",
+        so: "Qalab lagu sawiro xariiq toosan.",
+        ti: "ቀጥታ መስመር ንምስኣል መሳርሒ።",
+        tr: "Düz çizgi çizme aracı.",
+        ps: "د نېغې کرښې رسمولو اله.",
+        uk: "Лінійка для прямих ліній.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la règle pendant l'exercice.",
@@ -980,8 +1264,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la règle.",
           "Puisque règle est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "équerre",      image: "equerre.webp",      article: "l'",  gender: "f", definition: ["Objet en forme de triangle pour tracer des angles droits."], definitionPivot: { en: "A tool for drawing right angles.", ar: "أداة لرسم الزوايا القائمة.", fa: "وسیله‌ای برای رسم زاویه راست.", pt: "Esquadro para traçar ângulos retos.", so: "Qalab lagu sawiro xaglo qumman.", ti: "ቀንዲ ኩርናዕ ንምስኣል መሳርሒ።", tr: "Dik açı çizme aracı.", ps: "د قايمې زاويې رسمولو اله.", uk: "Косинець для прямих кутів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "équerre",
+      image: "equerre.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Objet en forme de triangle pour tracer des angles droits."],
+      definitionPivot: {
+        en: "A tool for drawing right angles.",
+        ar: "أداة لرسم الزوايا القائمة.",
+        fa: "وسیله‌ای برای رسم زاویه راست.",
+        pt: "Esquadro para traçar ângulos retos.",
+        so: "Qalab lagu sawiro xaglo qumman.",
+        ti: "ቀንዲ ኩርናዕ ንምስኣል መሳርሒ።",
+        tr: "Dik açı çizme aracı.",
+        ps: "د قايمې زاويې رسمولو اله.",
+        uk: "Косинець для прямих кутів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'équerre pendant l'exercice.",
@@ -1045,8 +1348,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'équerre.",
           "Puisque équerre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "compas",       image: "compas.webp",       article: "le",  gender: "m", definition: ["Objet pour tracer des cercles."], definitionPivot: { en: "A tool for drawing circles.", ar: "أداة لرسم الدوائر.", fa: "پرگار برای رسم دایره.", pt: "Compasso para desenhar círculos.", so: "Qalab lagu sawiro wareegyo.", ti: "ክበባት ንምስኣል መሳርሒ።", tr: "Daire çizme aracı.", ps: "د دايرو رسمولو اله.", uk: "Циркуль для кіл." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "compas",
+      image: "compas.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Objet pour tracer des cercles."],
+      definitionPivot: {
+        en: "A tool for drawing circles.",
+        ar: "أداة لرسم الدوائر.",
+        fa: "پرگار برای رسم دایره.",
+        pt: "Compasso para desenhar círculos.",
+        so: "Qalab lagu sawiro wareegyo.",
+        ti: "ክበባት ንምስኣል መሳርሒ።",
+        tr: "Daire çizme aracı.",
+        ps: "د دايرو رسمولو اله.",
+        uk: "Циркуль для кіл.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le compas pendant l'exercice.",
@@ -1110,8 +1432,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le compas.",
           "Puisque compas est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "agrafeuse",    image: "agrafeuse.webp",    article: "l'",  gender: "f", definition: ["Objet pour attacher des feuilles avec des agrafes."], definitionPivot: { en: "A tool that staples papers together.", ar: "أداة تجمع الأوراق بالدبابيس.", fa: "وسیله‌ای که برگه‌ها را منگنه می‌کند.", pt: "Agrafador para juntar folhas.", so: "Qalab waraaqaha isku qabta.", ti: "ወረቓቕቲ ብስቴፕል ዘተኣሳስር መሳርሒ።", tr: "Kağıtları zımbalayan araç.", ps: "د کاغذونو منګنه کولو اله.", uk: "Степлер для аркушів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "agrafeuse",
+      image: "agrafeuse.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Objet pour attacher des feuilles avec des agrafes."],
+      definitionPivot: {
+        en: "A tool that staples papers together.",
+        ar: "أداة تجمع الأوراق بالدبابيس.",
+        fa: "وسیله‌ای که برگه‌ها را منگنه می‌کند.",
+        pt: "Agrafador para juntar folhas.",
+        so: "Qalab waraaqaha isku qabta.",
+        ti: "ወረቓቕቲ ብስቴፕል ዘተኣሳስር መሳርሒ።",
+        tr: "Kağıtları zımbalayan araç.",
+        ps: "د کاغذونو منګنه کولو اله.",
+        uk: "Степлер для аркушів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'agrafeuse pendant l'exercice.",
@@ -1175,8 +1516,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'agrafeuse.",
           "Puisque agrafeuse est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "perforatrice", image: "perforatrice.webp", article: "la",  gender: "f", definition: ["Objet pour faire des trous dans les feuilles."], definitionPivot: { en: "A tool that makes holes in papers.", ar: "أداة لثقب الأوراق.", fa: "وسیله‌ای برای سوراخ کردن برگه‌ها.", pt: "Furador para fazer buracos nas folhas.", so: "Qalab waraaqaha godad ka sameeya.", ti: "ኣብ ወረቓቕቲ ጉድጓድ ዝገብር መሳርሒ።", tr: "Kağıtta delik açan araç.", ps: "په کاغذ کې د سوری کولو اله.", uk: "Дирокол для аркушів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "perforatrice",
+      image: "perforatrice.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Objet pour faire des trous dans les feuilles."],
+      definitionPivot: {
+        en: "A tool that makes holes in papers.",
+        ar: "أداة لثقب الأوراق.",
+        fa: "وسیله‌ای برای سوراخ کردن برگه‌ها.",
+        pt: "Furador para fazer buracos nas folhas.",
+        so: "Qalab waraaqaha godad ka sameeya.",
+        ti: "ኣብ ወረቓቕቲ ጉድጓድ ዝገብር መሳርሒ።",
+        tr: "Kağıtta delik açan araç.",
+        ps: "په کاغذ کې د سوری کولو اله.",
+        uk: "Дирокол для аркушів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la perforatrice pendant l'exercice.",
@@ -1240,8 +1600,27 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la perforatrice.",
           "Puisque perforatrice est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "tableau",      image: "tableau.webp",      article: "le",  gender: "m", definition: ["Surface où le professeur écrit devant la classe."], definitionPivot: { en: "A board used for writing in class.", ar: "سبورة للكتابة في الصف.", fa: "تخته‌ای برای نوشتن در کلاس.", pt: "Quadro para escrever na aula.", so: "Loox fasalka wax lagu qoro.", ti: "ኣብ ክፍሊ ትምህርቲ ንምጽሓፍ ሰሌዳ።", tr: "Sınıfta yazı yazılan tahta.", ps: "په ټولګي کې د ليکلو تخته.", uk: "Дошка для письма в класі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "tableau",
+      image: "tableau.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Surface où le professeur écrit devant la classe."],
+      definitionPivot: {
+        en: "A board used for writing in class.",
+        ar: "سبورة للكتابة في الصف.",
+        fa: "تخته‌ای برای نوشتن در کلاس.",
+        pt: "Quadro para escrever na aula.",
+        so: "Loox fasalka wax lagu qoro.",
+        ti: "ኣብ ክፍሊ ትምህርቲ ንምጽሓፍ ሰሌዳ።",
+        tr: "Sınıfta yazı yazılan tahta.",
+        ps: "په ټولګي کې د ليکلو تخته.",
+        uk: "Дошка для письма в класі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le tableau pendant l'exercice.",
@@ -1305,7 +1684,8 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le tableau.",
           "Puisque tableau est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "J'écris mes leçons dans mon ___.",                    answer: "cahier" },

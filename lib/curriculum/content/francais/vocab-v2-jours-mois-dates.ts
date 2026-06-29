@@ -6,7 +6,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
   title: "Jours, Mois et Dates",
   section: "V2",
   words: [
-    { word: "jour", image: "jour.webp",      article: "le",  gender: "m", group: "Calendrier", definition: ["Durée de 24 heures."], definitionPivot: { en: "A period of 24 hours.", ar: "فترة من 24 ساعة.", fa: "دوره‌ای ۲۴ ساعته.", pt: "Período de 24 horas.", so: "Muddo 24 saacadood ah.", ti: "24 ሰዓታት ዝኾነ ግዜ።", tr: "24 saatlik süre.", ps: "د ۲۴ ساعتونو موده.", uk: "Період у 24 години." }, synonym: [], exampleSentences: {
+    {
+      word: "jour",
+      image: "jour.webp",
+      article: "le",
+      gender: "m",
+      group: "Calendrier",
+      definition: ["Durée de 24 heures."],
+      definitionPivot: {
+        en: "A period of 24 hours.",
+        ar: "فترة من 24 ساعة.",
+        fa: "دوره‌ای ۲۴ ساعته.",
+        pt: "Período de 24 horas.",
+        so: "Muddo 24 saacadood ah.",
+        ti: "24 ሰዓታት ዝኾነ ግዜ።",
+        tr: "24 saatlik süre.",
+        ps: "د ۲۴ ساعتونو موده.",
+        uk: "Період у 24 години.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le jour en classe.",
@@ -70,8 +89,28 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le jour.",
           "Puisque jour est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mois", image: "mois.webp",      article: "le",  gender: "m", group: "Calendrier", definition: ["Partie de l’année ; il y a 12 mois dans une année."], definitionPivot: { en: "One of the 12 parts of a year.", ar: "جزء من 12 جزءاً في السنة.", fa: "یکی از ۱۲ بخش سال.", pt: "Uma das 12 partes do ano.", so: "Mid ka mid ah 12-ka qaybood ee sanadka.", ti: "ካብ 12 ክፋላት ዓመት ሓደ።", tr: "Yılın 12 bölümünden biri.", ps: "د کال له ۱۲ برخو څخه يوه.", uk: "Одна з 12 частин року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mois",
+      image: "mois.webp",
+      article: "le",
+      gender: "m",
+      group: "Calendrier",
+      definition: ["Partie de l’année ; il y a 12 mois dans une année."],
+      definitionPivot: {
+        en: "One of the 12 parts of a year.",
+        ar: "جزء من 12 جزءاً في السنة.",
+        fa: "یکی از ۱۲ بخش سال.",
+        pt: "Uma das 12 partes do ano.",
+        so: "Mid ka mid ah 12-ka qaybood ee sanadka.",
+        ti: "ካብ 12 ክፋላት ዓመት ሓደ።",
+        tr: "Yılın 12 bölümünden biri.",
+        ps: "د کال له ۱۲ برخو څخه يوه.",
+        uk: "Одна з 12 частин року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le mois en classe.",
@@ -135,8 +174,28 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le mois.",
           "Puisque mois est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "semaine", image: "semaine.webp",   article: "la",  gender: "f", group: "Calendrier", definition: ["Période de 7 jours."], definitionPivot: { en: "A period of 7 days.", ar: "فترة من 7 أيام.", fa: "دوره‌ای ۷ روزه.", pt: "Período de 7 dias.", so: "Muddo 7 maalmood ah.", ti: "7 መዓልታት ዝኾነ ግዜ።", tr: "7 günlük süre.", ps: "د ۷ ورځو موده.", uk: "Період у 7 днів." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "semaine",
+      image: "semaine.webp",
+      article: "la",
+      gender: "f",
+      group: "Calendrier",
+      definition: ["Période de 7 jours."],
+      definitionPivot: {
+        en: "A period of 7 days.",
+        ar: "فترة من 7 أيام.",
+        fa: "دوره‌ای ۷ روزه.",
+        pt: "Período de 7 dias.",
+        so: "Muddo 7 maalmood ah.",
+        ti: "7 መዓልታት ዝኾነ ግዜ።",
+        tr: "7 günlük süre.",
+        ps: "د ۷ ورځو موده.",
+        uk: "Період у 7 днів.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la semaine en classe.",
@@ -200,8 +259,28 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la semaine.",
           "Puisque semaine est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "année", image: "annee.webp",     article: "l'",  gender: "f", group: "Calendrier", definition: ["Période de 12 mois."], definitionPivot: { en: "A period of 12 months.", ar: "فترة من 12 شهراً.", fa: "دوره‌ای ۱۲ ماهه.", pt: "Período de 12 meses.", so: "Muddo 12 bilood ah.", ti: "12 ኣዋርሕ ዝኾነ ግዜ።", tr: "12 aylık süre.", ps: "د ۱۲ مياشتو موده.", uk: "Період у 12 місяців." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "année",
+      image: "annee.webp",
+      article: "l'",
+      gender: "f",
+      group: "Calendrier",
+      definition: ["Période de 12 mois."],
+      definitionPivot: {
+        en: "A period of 12 months.",
+        ar: "فترة من 12 شهراً.",
+        fa: "دوره‌ای ۱۲ ماهه.",
+        pt: "Período de 12 meses.",
+        so: "Muddo 12 bilood ah.",
+        ti: "12 ኣዋርሕ ዝኾነ ግዜ።",
+        tr: "12 aylık süre.",
+        ps: "د ۱۲ مياشتو موده.",
+        uk: "Період у 12 місяців.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié l'année en classe.",
@@ -265,8 +344,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'année.",
           "Puisque année est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "lundi", image: "lundi.webp",      group: "Jours",  definition: ["Premier jour de la semaine de travail."], definitionPivot: { en: "The first day of the week.", ar: "اليوم الأول من الأسبوع.", fa: "روز اول هفته.", pt: "O primeiro dia da semana.", so: "Maalinta koowaad ee toddobaadka.", ti: "ቀዳማይ መዓልቲ ሰሙን።", tr: "Haftanın ilk günü.", ps: "د اونۍ لومړۍ ورځ.", uk: "Перший день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "lundi",
+      image: "lundi.webp",
+      group: "Jours",
+      definition: ["Premier jour de la semaine de travail."],
+      definitionPivot: {
+        en: "The first day of the week.",
+        ar: "اليوم الأول من الأسبوع.",
+        fa: "روز اول هفته.",
+        pt: "O primeiro dia da semana.",
+        so: "Maalinta koowaad ee toddobaadka.",
+        ti: "ቀዳማይ መዓልቲ ሰሙን።",
+        tr: "Haftanın ilk günü.",
+        ps: "د اونۍ لومړۍ ورځ.",
+        uk: "Перший день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié lundi en classe.",
@@ -330,8 +427,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec lundi.",
           "Puisque lundi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mardi", image: "mardi.webp",      group: "Jours",  definition: ["Jour après lundi."], definitionPivot: { en: "The second day of the week.", ar: "اليوم الثاني من الأسبوع.", fa: "روز دوم هفته.", pt: "O segundo dia da semana.", so: "Maalinta labaad ee toddobaadka.", ti: "ካልኣይ መዓልቲ ሰሙን።", tr: "Haftanın ikinci günü.", ps: "د اونۍ دوهمه ورځ.", uk: "Другий день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mardi",
+      image: "mardi.webp",
+      group: "Jours",
+      definition: ["Jour après lundi."],
+      definitionPivot: {
+        en: "The second day of the week.",
+        ar: "اليوم الثاني من الأسبوع.",
+        fa: "روز دوم هفته.",
+        pt: "O segundo dia da semana.",
+        so: "Maalinta labaad ee toddobaadka.",
+        ti: "ካልኣይ መዓልቲ ሰሙን።",
+        tr: "Haftanın ikinci günü.",
+        ps: "د اونۍ دوهمه ورځ.",
+        uk: "Другий день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mardi en classe.",
@@ -395,8 +510,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec mardi.",
           "Puisque mardi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mercredi", image: "mercredi.webp",   group: "Jours",  definition: ["Jour après mardi."], definitionPivot: { en: "The third day of the week.", ar: "اليوم الثالث من الأسبوع.", fa: "روز سوم هفته.", pt: "O terceiro dia da semana.", so: "Maalinta saddexaad ee toddobaadka.", ti: "ሳልሳይ መዓልቲ ሰሙን።", tr: "Haftanın üçüncü günü.", ps: "د اونۍ درېيمه ورځ.", uk: "Третій день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mercredi",
+      image: "mercredi.webp",
+      group: "Jours",
+      definition: ["Jour après mardi."],
+      definitionPivot: {
+        en: "The third day of the week.",
+        ar: "اليوم الثالث من الأسبوع.",
+        fa: "روز سوم هفته.",
+        pt: "O terceiro dia da semana.",
+        so: "Maalinta saddexaad ee toddobaadka.",
+        ti: "ሳልሳይ መዓልቲ ሰሙን።",
+        tr: "Haftanın üçüncü günü.",
+        ps: "د اونۍ درېيمه ورځ.",
+        uk: "Третій день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mercredi en classe.",
@@ -460,8 +593,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec mercredi.",
           "Puisque mercredi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "jeudi", image: "jeudi.webp",      group: "Jours",  definition: ["Jour après mercredi."], definitionPivot: { en: "The fourth day of the week.", ar: "اليوم الرابع من الأسبوع.", fa: "روز چهارم هفته.", pt: "O quarto dia da semana.", so: "Maalinta afraad ee toddobaadka.", ti: "ራብዓይ መዓልቲ ሰሙን።", tr: "Haftanın dördüncü günü.", ps: "د اونۍ څلورمه ورځ.", uk: "Четвертий день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "jeudi",
+      image: "jeudi.webp",
+      group: "Jours",
+      definition: ["Jour après mercredi."],
+      definitionPivot: {
+        en: "The fourth day of the week.",
+        ar: "اليوم الرابع من الأسبوع.",
+        fa: "روز چهارم هفته.",
+        pt: "O quarto dia da semana.",
+        so: "Maalinta afraad ee toddobaadka.",
+        ti: "ራብዓይ መዓልቲ ሰሙን።",
+        tr: "Haftanın dördüncü günü.",
+        ps: "د اونۍ څلورمه ورځ.",
+        uk: "Четвертий день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié jeudi en classe.",
@@ -525,8 +676,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec jeudi.",
           "Puisque jeudi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "vendredi", image: "vendredi.webp",   group: "Jours",  definition: ["Jour après jeudi."], definitionPivot: { en: "The fifth day of the week.", ar: "اليوم الخامس من الأسبوع.", fa: "روز پنجم هفته.", pt: "O quinto dia da semana.", so: "Maalinta shanaad ee toddobaadka.", ti: "ሓሙሻይ መዓልቲ ሰሙን።", tr: "Haftanın beşinci günü.", ps: "د اونۍ پنځمه ورځ.", uk: "П’ятий день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "vendredi",
+      image: "vendredi.webp",
+      group: "Jours",
+      definition: ["Jour après jeudi."],
+      definitionPivot: {
+        en: "The fifth day of the week.",
+        ar: "اليوم الخامس من الأسبوع.",
+        fa: "روز پنجم هفته.",
+        pt: "O quinto dia da semana.",
+        so: "Maalinta shanaad ee toddobaadka.",
+        ti: "ሓሙሻይ መዓልቲ ሰሙን።",
+        tr: "Haftanın beşinci günü.",
+        ps: "د اونۍ پنځمه ورځ.",
+        uk: "П’ятий день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié vendredi en classe.",
@@ -590,8 +759,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec vendredi.",
           "Puisque vendredi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "samedi", image: "samedi.webp",     group: "Jours",  definition: ["Jour après vendredi."], definitionPivot: { en: "The sixth day of the week.", ar: "اليوم السادس من الأسبوع.", fa: "روز ششم هفته.", pt: "O sexto dia da semana.", so: "Maalinta lixaad ee toddobaadka.", ti: "ሻዱሻይ መዓልቲ ሰሙን።", tr: "Haftanın altıncı günü.", ps: "د اونۍ شپږمه ورځ.", uk: "Шостий день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "samedi",
+      image: "samedi.webp",
+      group: "Jours",
+      definition: ["Jour après vendredi."],
+      definitionPivot: {
+        en: "The sixth day of the week.",
+        ar: "اليوم السادس من الأسبوع.",
+        fa: "روز ششم هفته.",
+        pt: "O sexto dia da semana.",
+        so: "Maalinta lixaad ee toddobaadka.",
+        ti: "ሻዱሻይ መዓልቲ ሰሙን።",
+        tr: "Haftanın altıncı günü.",
+        ps: "د اونۍ شپږمه ورځ.",
+        uk: "Шостий день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié samedi en classe.",
@@ -655,8 +842,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec samedi.",
           "Puisque samedi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dimanche", image: "dimanche.webp",   group: "Jours",  definition: ["Dernier jour de la semaine."], definitionPivot: { en: "The seventh day of the week.", ar: "اليوم السابع من الأسبوع.", fa: "روز هفتم هفته.", pt: "O sétimo dia da semana.", so: "Maalinta toddobaad ee toddobaadka.", ti: "ሻብዓይ መዓልቲ ሰሙን።", tr: "Haftanın yedinci günü.", ps: "د اونۍ اوومه ورځ.", uk: "Сьомий день тижня." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dimanche",
+      image: "dimanche.webp",
+      group: "Jours",
+      definition: ["Dernier jour de la semaine."],
+      definitionPivot: {
+        en: "The seventh day of the week.",
+        ar: "اليوم السابع من الأسبوع.",
+        fa: "روز هفتم هفته.",
+        pt: "O sétimo dia da semana.",
+        so: "Maalinta toddobaad ee toddobaadka.",
+        ti: "ሻብዓይ መዓልቲ ሰሙን።",
+        tr: "Haftanın yedinci günü.",
+        ps: "د اونۍ اوومه ورځ.",
+        uk: "Сьомий день тижня.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié dimanche en classe.",
@@ -720,8 +925,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec dimanche.",
           "Puisque dimanche est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "janvier", image: "janvier.webp",    group: "Mois",   definition: ["Premier mois de l’année."], definitionPivot: { en: "The first month of the year.", ar: "الشهر الأول من السنة.", fa: "ماه اول سال.", pt: "O primeiro mês do ano.", so: "Bisha koowaad ee sanadka.", ti: "ቀዳማይ ወርሒ ዓመት።", tr: "Yılın ilk ayı.", ps: "د کال لومړۍ مياشت.", uk: "Перший місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "janvier",
+      image: "janvier.webp",
+      group: "Mois",
+      definition: ["Premier mois de l’année."],
+      definitionPivot: {
+        en: "The first month of the year.",
+        ar: "الشهر الأول من السنة.",
+        fa: "ماه اول سال.",
+        pt: "O primeiro mês do ano.",
+        so: "Bisha koowaad ee sanadka.",
+        ti: "ቀዳማይ ወርሒ ዓመት።",
+        tr: "Yılın ilk ayı.",
+        ps: "د کال لومړۍ مياشت.",
+        uk: "Перший місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié janvier en classe.",
@@ -785,8 +1008,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec janvier.",
           "Puisque janvier est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "février", image: "fevrier.webp",    group: "Mois",   definition: ["Deuxième mois de l’année."], definitionPivot: { en: "The second month of the year.", ar: "الشهر الثاني من السنة.", fa: "ماه دوم سال.", pt: "O segundo mês do ano.", so: "Bisha labaad ee sanadka.", ti: "ካልኣይ ወርሒ ዓመት።", tr: "Yılın ikinci ayı.", ps: "د کال دوهمه مياشت.", uk: "Другий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "février",
+      image: "fevrier.webp",
+      group: "Mois",
+      definition: ["Deuxième mois de l’année."],
+      definitionPivot: {
+        en: "The second month of the year.",
+        ar: "الشهر الثاني من السنة.",
+        fa: "ماه دوم سال.",
+        pt: "O segundo mês do ano.",
+        so: "Bisha labaad ee sanadka.",
+        ti: "ካልኣይ ወርሒ ዓመት።",
+        tr: "Yılın ikinci ayı.",
+        ps: "د کال دوهمه مياشت.",
+        uk: "Другий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié février en classe.",
@@ -850,8 +1091,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec février.",
           "Puisque février est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mars", image: "mars.webp",       group: "Mois",   definition: ["Troisième mois de l’année."], definitionPivot: { en: "The third month of the year.", ar: "الشهر الثالث من السنة.", fa: "ماه سوم سال.", pt: "O terceiro mês do ano.", so: "Bisha saddexaad ee sanadka.", ti: "ሳልሳይ ወርሒ ዓመት።", tr: "Yılın üçüncü ayı.", ps: "د کال درېيمه مياشت.", uk: "Третій місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mars",
+      image: "mars.webp",
+      group: "Mois",
+      definition: ["Troisième mois de l’année."],
+      definitionPivot: {
+        en: "The third month of the year.",
+        ar: "الشهر الثالث من السنة.",
+        fa: "ماه سوم سال.",
+        pt: "O terceiro mês do ano.",
+        so: "Bisha saddexaad ee sanadka.",
+        ti: "ሳልሳይ ወርሒ ዓመት።",
+        tr: "Yılın üçüncü ayı.",
+        ps: "د کال درېيمه مياشت.",
+        uk: "Третій місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mars en classe.",
@@ -915,8 +1174,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec mars.",
           "Puisque mars est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "avril", image: "avril.webp",      group: "Mois",   definition: ["Quatrième mois de l’année."], definitionPivot: { en: "The fourth month of the year.", ar: "الشهر الرابع من السنة.", fa: "ماه چهارم سال.", pt: "O quarto mês do ano.", so: "Bisha afraad ee sanadka.", ti: "ራብዓይ ወርሒ ዓመት።", tr: "Yılın dördüncü ayı.", ps: "د کال څلورمه مياشت.", uk: "Четвертий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "avril",
+      image: "avril.webp",
+      group: "Mois",
+      definition: ["Quatrième mois de l’année."],
+      definitionPivot: {
+        en: "The fourth month of the year.",
+        ar: "الشهر الرابع من السنة.",
+        fa: "ماه چهارم سال.",
+        pt: "O quarto mês do ano.",
+        so: "Bisha afraad ee sanadka.",
+        ti: "ራብዓይ ወርሒ ዓመት።",
+        tr: "Yılın dördüncü ayı.",
+        ps: "د کال څلورمه مياشت.",
+        uk: "Четвертий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié avril en classe.",
@@ -980,8 +1257,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec avril.",
           "Puisque avril est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mai", image: "mai.webp",        group: "Mois",   definition: ["Cinquième mois de l’année."], definitionPivot: { en: "The fifth month of the year.", ar: "الشهر الخامس من السنة.", fa: "ماه پنجم سال.", pt: "O quinto mês do ano.", so: "Bisha shanaad ee sanadka.", ti: "ሓሙሻይ ወርሒ ዓመት።", tr: "Yılın beşinci ayı.", ps: "د کال پنځمه مياشت.", uk: "П’ятий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mai",
+      image: "mai.webp",
+      group: "Mois",
+      definition: ["Cinquième mois de l’année."],
+      definitionPivot: {
+        en: "The fifth month of the year.",
+        ar: "الشهر الخامس من السنة.",
+        fa: "ماه پنجم سال.",
+        pt: "O quinto mês do ano.",
+        so: "Bisha shanaad ee sanadka.",
+        ti: "ሓሙሻይ ወርሒ ዓመት።",
+        tr: "Yılın beşinci ayı.",
+        ps: "د کال پنځمه مياشت.",
+        uk: "П’ятий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié mai en classe.",
@@ -1045,8 +1340,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec mai.",
           "Puisque mai est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "juin", image: "juin.webp",       group: "Mois",   definition: ["Sixième mois de l’année."], definitionPivot: { en: "The sixth month of the year.", ar: "الشهر السادس من السنة.", fa: "ماه ششم سال.", pt: "O sexto mês do ano.", so: "Bisha lixaad ee sanadka.", ti: "ሻዱሻይ ወርሒ ዓመት።", tr: "Yılın altıncı ayı.", ps: "د کال شپږمه مياشت.", uk: "Шостий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "juin",
+      image: "juin.webp",
+      group: "Mois",
+      definition: ["Sixième mois de l’année."],
+      definitionPivot: {
+        en: "The sixth month of the year.",
+        ar: "الشهر السادس من السنة.",
+        fa: "ماه ششم سال.",
+        pt: "O sexto mês do ano.",
+        so: "Bisha lixaad ee sanadka.",
+        ti: "ሻዱሻይ ወርሒ ዓመት።",
+        tr: "Yılın altıncı ayı.",
+        ps: "د کال شپږمه مياشت.",
+        uk: "Шостий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié juin en classe.",
@@ -1110,8 +1423,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec juin.",
           "Puisque juin est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "juillet", image: "juillet.webp",    group: "Mois",   definition: ["Septième mois de l’année."], definitionPivot: { en: "The seventh month of the year.", ar: "الشهر السابع من السنة.", fa: "ماه هفتم سال.", pt: "O sétimo mês do ano.", so: "Bisha toddobaad ee sanadka.", ti: "ሻብዓይ ወርሒ ዓመት።", tr: "Yılın yedinci ayı.", ps: "د کال اوومه مياشت.", uk: "Сьомий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "juillet",
+      image: "juillet.webp",
+      group: "Mois",
+      definition: ["Septième mois de l’année."],
+      definitionPivot: {
+        en: "The seventh month of the year.",
+        ar: "الشهر السابع من السنة.",
+        fa: "ماه هفتم سال.",
+        pt: "O sétimo mês do ano.",
+        so: "Bisha toddobaad ee sanadka.",
+        ti: "ሻብዓይ ወርሒ ዓመት።",
+        tr: "Yılın yedinci ayı.",
+        ps: "د کال اوومه مياشت.",
+        uk: "Сьомий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié juillet en classe.",
@@ -1175,8 +1506,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec juillet.",
           "Puisque juillet est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "août", image: "aout.webp",       group: "Mois",   definition: ["Huitième mois de l’année."], definitionPivot: { en: "The eighth month of the year.", ar: "الشهر الثامن من السنة.", fa: "ماه هشتم سال.", pt: "O oitavo mês do ano.", so: "Bisha siddeedaad ee sanadka.", ti: "ሻሙናይ ወርሒ ዓመት።", tr: "Yılın sekizinci ayı.", ps: "د کال اتمه مياشت.", uk: "Восьмий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "août",
+      image: "aout.webp",
+      group: "Mois",
+      definition: ["Huitième mois de l’année."],
+      definitionPivot: {
+        en: "The eighth month of the year.",
+        ar: "الشهر الثامن من السنة.",
+        fa: "ماه هشتم سال.",
+        pt: "O oitavo mês do ano.",
+        so: "Bisha siddeedaad ee sanadka.",
+        ti: "ሻሙናይ ወርሒ ዓመት።",
+        tr: "Yılın sekizinci ayı.",
+        ps: "د کال اتمه مياشت.",
+        uk: "Восьмий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié août en classe.",
@@ -1240,8 +1589,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec août.",
           "Puisque août est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "septembre", image: "septembre.webp",  group: "Mois",   definition: ["Neuvième mois de l’année."], definitionPivot: { en: "The ninth month of the year.", ar: "الشهر التاسع من السنة.", fa: "ماه نهم سال.", pt: "O nono mês do ano.", so: "Bisha sagaalaad ee sanadka.", ti: "ታሽዓይ ወርሒ ዓመት።", tr: "Yılın dokuzuncu ayı.", ps: "د کال نهمه مياشت.", uk: "Дев’ятий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "septembre",
+      image: "septembre.webp",
+      group: "Mois",
+      definition: ["Neuvième mois de l’année."],
+      definitionPivot: {
+        en: "The ninth month of the year.",
+        ar: "الشهر التاسع من السنة.",
+        fa: "ماه نهم سال.",
+        pt: "O nono mês do ano.",
+        so: "Bisha sagaalaad ee sanadka.",
+        ti: "ታሽዓይ ወርሒ ዓመት።",
+        tr: "Yılın dokuzuncu ayı.",
+        ps: "د کال نهمه مياشت.",
+        uk: "Дев’ятий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié septembre en classe.",
@@ -1305,8 +1672,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec septembre.",
           "Puisque septembre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "octobre", image: "octobre.webp",    group: "Mois",   definition: ["Dixième mois de l’année."], definitionPivot: { en: "The tenth month of the year.", ar: "الشهر العاشر من السنة.", fa: "ماه دهم سال.", pt: "O décimo mês do ano.", so: "Bisha tobnaad ee sanadka.", ti: "ዓስራይ ወርሒ ዓመት።", tr: "Yılın onuncu ayı.", ps: "د کال لسمه مياشت.", uk: "Десятий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "octobre",
+      image: "octobre.webp",
+      group: "Mois",
+      definition: ["Dixième mois de l’année."],
+      definitionPivot: {
+        en: "The tenth month of the year.",
+        ar: "الشهر العاشر من السنة.",
+        fa: "ماه دهم سال.",
+        pt: "O décimo mês do ano.",
+        so: "Bisha tobnaad ee sanadka.",
+        ti: "ዓስራይ ወርሒ ዓመት።",
+        tr: "Yılın onuncu ayı.",
+        ps: "د کال لسمه مياشت.",
+        uk: "Десятий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié octobre en classe.",
@@ -1370,8 +1755,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec octobre.",
           "Puisque octobre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "novembre", image: "novembre.webp",   group: "Mois",   definition: ["Onzième mois de l’année."], definitionPivot: { en: "The eleventh month of the year.", ar: "الشهر الحادي عشر من السنة.", fa: "ماه یازدهم سال.", pt: "O décimo primeiro mês do ano.", so: "Bisha kow iyo tobnaad ee sanadka.", ti: "መበል 11 ወርሒ ዓመት።", tr: "Yılın on birinci ayı.", ps: "د کال يوولسمه مياشت.", uk: "Одинадцятий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "novembre",
+      image: "novembre.webp",
+      group: "Mois",
+      definition: ["Onzième mois de l’année."],
+      definitionPivot: {
+        en: "The eleventh month of the year.",
+        ar: "الشهر الحادي عشر من السنة.",
+        fa: "ماه یازدهم سال.",
+        pt: "O décimo primeiro mês do ano.",
+        so: "Bisha kow iyo tobnaad ee sanadka.",
+        ti: "መበል 11 ወርሒ ዓመት።",
+        tr: "Yılın on birinci ayı.",
+        ps: "د کال يوولسمه مياشت.",
+        uk: "Одинадцятий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié novembre en classe.",
@@ -1435,8 +1838,26 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec novembre.",
           "Puisque novembre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "décembre", image: "decembre.webp",   group: "Mois",   definition: ["Douzième mois de l’année."], definitionPivot: { en: "The twelfth month of the year.", ar: "الشهر الثاني عشر من السنة.", fa: "ماه دوازدهم سال.", pt: "O décimo segundo mês do ano.", so: "Bisha laba iyo tobnaad ee sanadka.", ti: "መበል 12 ወርሒ ዓመት።", tr: "Yılın on ikinci ayı.", ps: "د کال دولسمه مياشت.", uk: "Дванадцятий місяць року." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "décembre",
+      image: "decembre.webp",
+      group: "Mois",
+      definition: ["Douzième mois de l’année."],
+      definitionPivot: {
+        en: "The twelfth month of the year.",
+        ar: "الشهر الثاني عشر من السنة.",
+        fa: "ماه دوازدهم سال.",
+        pt: "O décimo segundo mês do ano.",
+        so: "Bisha laba iyo tobnaad ee sanadka.",
+        ti: "መበል 12 ወርሒ ዓመት።",
+        tr: "Yılın on ikinci ayı.",
+        ps: "د کال دولسمه مياشت.",
+        uk: "Дванадцятий місяць року.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié décembre en classe.",
@@ -1500,7 +1921,8 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec décembre.",
           "Puisque décembre est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Nous avons cours de sport le ___.",               answer: "mercredi" },

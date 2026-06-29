@@ -6,7 +6,25 @@ export const V8_CORPS_THEME: VocabTheme = {
   title: "Le corps",
   section: "V8",
   words: [
-    { word: "tête",    image: "tete.webp",    article: "la",  gender: "f", definition: ["Partie du corps où se trouvent les yeux, le nez, la bouche et les oreilles."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+    {
+      word: "tête",
+      image: "tete.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Partie du corps où se trouvent les yeux, le nez, la bouche et les oreilles."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la tête après le sport.",
@@ -69,8 +87,26 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la tête.",
           "Puisque tête est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "bras",                           article: "le",  gender: "m", definition: ["Partie du corps entre l’épaule et la main."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "bras",
+      article: "le",
+      gender: "m",
+      definition: ["Partie du corps entre l’épaule et la main."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au bras après le sport.",
@@ -133,8 +169,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le bras.",
           "Puisque bras est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "main",    image: "main.webp",    article: "la",  gender: "f", definition: ["Partie du corps au bout du bras, avec les doigts."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "main",
+      image: "main.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Partie du corps au bout du bras, avec les doigts."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la main après le sport.",
@@ -197,8 +252,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la main.",
           "Puisque main est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "doigt",   image: "doigt.webp",   article: "le",  gender: "m", definition: ["Partie longue et fine de la main."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "doigt",
+      image: "doigt.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie longue et fine de la main."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au doigt après le sport.",
@@ -261,8 +335,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le doigt.",
           "Puisque doigt est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "jambe",   image: "jambe.webp",   article: "la",  gender: "f", definition: ["Partie du corps qui sert à marcher."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "jambe",
+      image: "jambe.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Partie du corps qui sert à marcher."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la jambe après le sport.",
@@ -325,8 +418,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la jambe.",
           "Puisque jambe est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pied",    image: "pied.webp",    article: "le",  gender: "m", definition: ["Partie du corps au bout de la jambe, qui touche le sol."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pied",
+      image: "pied.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie du corps au bout de la jambe, qui touche le sol."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au pied après le sport.",
@@ -389,8 +501,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le pied.",
           "Puisque pied est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dos",     image: "dos.webp",     article: "le",  gender: "m", definition: ["Partie arrière du corps."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dos",
+      image: "dos.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie arrière du corps."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au dos après le sport.",
@@ -453,8 +584,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le dos.",
           "Puisque dos est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ventre",  image: "ventre.webp",  article: "le",  gender: "m", definition: ["Partie du corps où se trouve l’estomac."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ventre",
+      image: "ventre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie du corps où se trouve l’estomac."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au ventre après le sport.",
@@ -517,8 +667,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le ventre.",
           "Puisque ventre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "genou",   image: "genou.webp",   article: "le",  gender: "m", definition: ["Partie de la jambe qui se plie au milieu."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "genou",
+      image: "genou.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie de la jambe qui se plie au milieu."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au genou après le sport.",
@@ -581,8 +750,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le genou.",
           "Puisque genou est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "épaule",  image: "epaule.webp",  article: "l'",  gender: "f", definition: ["Partie du corps entre le cou et le bras."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "épaule",
+      image: "epaule.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Partie du corps entre le cou et le bras."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'épaule après le sport.",
@@ -645,8 +833,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'épaule.",
           "Puisque épaule est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cou",     image: "cou.webp",     article: "le",  gender: "m", definition: ["Partie du corps entre la tête et les épaules."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cou",
+      image: "cou.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie du corps entre la tête et les épaules."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au cou après le sport.",
@@ -709,8 +916,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le cou.",
           "Puisque cou est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "nez",     image: "nez.webp",     article: "le",  gender: "m", definition: ["Partie du visage qui sert à respirer et sentir."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "nez",
+      image: "nez.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie du visage qui sert à respirer et sentir."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal au nez après le sport.",
@@ -773,8 +999,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le nez.",
           "Puisque nez est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "bouche",  image: "bouche.webp",  article: "la",  gender: "f", definition: ["Partie du visage qui sert à parler et manger."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "bouche",
+      image: "bouche.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Partie du visage qui sert à parler et manger."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la bouche après le sport.",
@@ -837,8 +1082,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la bouche.",
           "Puisque bouche est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "œil",     image: "oeil.webp",    article: "l'",  gender: "m", definition: ["Organe qui sert à voir."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "œil",
+      image: "oeil.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Organe qui sert à voir."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'œil après le sport.",
@@ -901,8 +1165,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'œil.",
           "Puisque œil est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "oreille", image: "oreille.webp", article: "l'",  gender: "f", definition: ["Organe qui sert à entendre."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "oreille",
+      image: "oreille.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Organe qui sert à entendre."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à l'oreille après le sport.",
@@ -965,8 +1248,27 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'oreille.",
           "Puisque oreille est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dent",    image: "dent.webp",    article: "la",  gender: "f", definition: ["Partie dure dans la bouche qui sert à manger."], definitionPivot: { en: "A part of the human body.", ar: "جزء من جسم الإنسان.", fa: "بخشی از بدن انسان.", pt: "Parte do corpo humano.", so: "Qayb ka mid ah jirka bini'aadamka.", ti: "ክፋል ሰብነት ሰብ።", tr: "İnsan vücudunun bir bölümü.", ps: "د انسان د بدن يوه برخه.", uk: "Частина людського тіла." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dent",
+      image: "dent.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Partie dure dans la bouche qui sert à manger."],
+      definitionPivot: {
+        en: "A part of the human body.",
+        ar: "جزء من جسم الإنسان.",
+        fa: "بخشی از بدن انسان.",
+        pt: "Parte do corpo humano.",
+        so: "Qayb ka mid ah jirka bini'aadamka.",
+        ti: "ክፋል ሰብነት ሰብ።",
+        tr: "İnsan vücudunun bir bölümü.",
+        ps: "د انسان د بدن يوه برخه.",
+        uk: "Частина людського тіла.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai eu mal à la dent après le sport.",
@@ -1029,7 +1331,8 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la dent.",
           "Puisque dent est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "J'ai mal au ___, je dois voir un médecin.",             answer: "dos" },

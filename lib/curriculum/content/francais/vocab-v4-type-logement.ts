@@ -6,7 +6,25 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
   title: "Les types de logement",
   section: "V4",
   words: [
-    { word: "maison", image: "maison.webp",      article: "la",  gender: "f", definition: ["Bâtiment où une famille ou des personnes habitent."], definitionPivot: { en: "An individual home, often with a garden.", ar: "مسكن فردي غالباً مع حديقة.", fa: "خانه مستقل، اغلب با باغ.", pt: "Habitação individual, muitas vezes com jardim.", so: "Guri gaar ah, badanaa beer leh.", ti: "ብውልቂ ዝነብሩሉ ገዛ፣ ብዙሕ ግዜ ምስ ጀርዲን።", tr: "Genellikle bahçeli müstakil konut.", ps: "جلا کور، ډېر وخت له باغ سره.", uk: "Окреме житло, часто з садом." }, synonym: [], exampleSentences: {
+    {
+      word: "maison",
+      image: "maison.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Bâtiment où une famille ou des personnes habitent."],
+      definitionPivot: {
+        en: "An individual home, often with a garden.",
+        ar: "مسكن فردي غالباً مع حديقة.",
+        fa: "خانه مستقل، اغلب با باغ.",
+        pt: "Habitação individual, muitas vezes com jardim.",
+        so: "Guri gaar ah, badanaa beer leh.",
+        ti: "ብውልቂ ዝነብሩሉ ገዛ፣ ብዙሕ ግዜ ምስ ጀርዲን።",
+        tr: "Genellikle bahçeli müstakil konut.",
+        ps: "جلا کور، ډېر وخت له باغ سره.",
+        uk: "Окреме житло, часто з садом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la maison pendant l'exercice.",
@@ -70,8 +88,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la maison.",
           "Puisque maison est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "appartement", image: "appartement.webp", article: "l'",  gender: "m", definition: ["Logement dans un immeuble."], definitionPivot: { en: "A home inside a building.", ar: "مسكن داخل مبنى.", fa: "خانه‌ای داخل ساختمان.", pt: "Habitação dentro de um prédio.", so: "Guri ku dhex yaal dhisme.", ti: "ኣብ ህንጻ ውሽጢ ዘሎ መኖሪ።", tr: "Bir binanın içindeki konut.", ps: "په ودانۍ کې دننه کور.", uk: "Житло всередині будівлі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "appartement",
+      image: "appartement.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Logement dans un immeuble."],
+      definitionPivot: {
+        en: "A home inside a building.",
+        ar: "مسكن داخل مبنى.",
+        fa: "خانه‌ای داخل ساختمان.",
+        pt: "Habitação dentro de um prédio.",
+        so: "Guri ku dhex yaal dhisme.",
+        ti: "ኣብ ህንጻ ውሽጢ ዘሎ መኖሪ።",
+        tr: "Bir binanın içindeki konut.",
+        ps: "په ودانۍ کې دننه کور.",
+        uk: "Житло всередині будівлі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'appartement pendant l'exercice.",
@@ -135,8 +172,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'appartement.",
           "Puisque appartement est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "studio", image: "studio.webp",      article: "le",  gender: "m", definition: ["Petit appartement avec une seule pièce principale."], definitionPivot: { en: "A small one-room apartment.", ar: "شقة صغيرة من غرفة واحدة.", fa: "آپارتمان کوچک یک‌اتاقه.", pt: "Pequeno apartamento de uma só divisão.", so: "Guri yar oo hal qol ah.", ti: "ንእሽቶ ሓደ ክፍሊ ዘለዎ ኣፓርታማ።", tr: "Tek odalı küçük daire.", ps: "کوچنی يو کوټه اپارتمان.", uk: "Маленька однокімнатна квартира." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "studio",
+      image: "studio.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit appartement avec une seule pièce principale."],
+      definitionPivot: {
+        en: "A small one-room apartment.",
+        ar: "شقة صغيرة من غرفة واحدة.",
+        fa: "آپارتمان کوچک یک‌اتاقه.",
+        pt: "Pequeno apartamento de uma só divisão.",
+        so: "Guri yar oo hal qol ah.",
+        ti: "ንእሽቶ ሓደ ክፍሊ ዘለዎ ኣፓርታማ።",
+        tr: "Tek odalı küçük daire.",
+        ps: "کوچنی يو کوټه اپارتمان.",
+        uk: "Маленька однокімнатна квартира.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le studio pendant l'exercice.",
@@ -200,8 +256,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le studio.",
           "Puisque studio est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ferme", image: "ferme.webp",       article: "la",  gender: "f", definition: ["Maison à la campagne, souvent avec des animaux ou des champs."], definitionPivot: { en: "A farm with land and a home.", ar: "مزرعة مع أرض ومسكن.", fa: "مزرعه‌ای با زمین و خانه.", pt: "Exploração agrícola com terra e habitação.", so: "Beer leh dhul iyo guri.", ti: "መሬትን ገዛን ዘለዋ ሕርሻ።", tr: "Arazi ve konutu olan çiftlik.", ps: "فارم چې ځمکه او کور لري.", uk: "Ферма із землею та житлом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ferme",
+      image: "ferme.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Maison à la campagne, souvent avec des animaux ou des champs."],
+      definitionPivot: {
+        en: "A farm with land and a home.",
+        ar: "مزرعة مع أرض ومسكن.",
+        fa: "مزرعه‌ای با زمین و خانه.",
+        pt: "Exploração agrícola com terra e habitação.",
+        so: "Beer leh dhul iyo guri.",
+        ti: "መሬትን ገዛን ዘለዋ ሕርሻ።",
+        tr: "Arazi ve konutu olan çiftlik.",
+        ps: "فارم چې ځمکه او کور لري.",
+        uk: "Ферма із землею та житлом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la ferme pendant l'exercice.",
@@ -265,8 +340,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la ferme.",
           "Puisque ferme est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "immeuble", image: "immeuble.webp",    article: "l'",  gender: "m", definition: ["Grand bâtiment avec plusieurs appartements."], definitionPivot: { en: "A building with several floors and homes.", ar: "مبنى بعدة طوابق ومساكن.", fa: "ساختمانی با چند طبقه و خانه.", pt: "Prédio com vários pisos e habitações.", so: "Dhisme dabaqyo iyo guryo badan leh.", ti: "ብዙሕ ደረጃታትን መኖሪታትን ዘለዎ ህንጻ።", tr: "Birçok katı ve dairesi olan bina.", ps: "ودانۍ چې څو پوړونه او کورونه لري.", uk: "Будівля з кількома поверхами та житлами." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "immeuble",
+      image: "immeuble.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Grand bâtiment avec plusieurs appartements."],
+      definitionPivot: {
+        en: "A building with several floors and homes.",
+        ar: "مبنى بعدة طوابق ومساكن.",
+        fa: "ساختمانی با چند طبقه و خانه.",
+        pt: "Prédio com vários pisos e habitações.",
+        so: "Dhisme dabaqyo iyo guryo badan leh.",
+        ti: "ብዙሕ ደረጃታትን መኖሪታትን ዘለዎ ህንጻ።",
+        tr: "Birçok katı ve dairesi olan bina.",
+        ps: "ودانۍ چې څو پوړونه او کورونه لري.",
+        uk: "Будівля з кількома поверхами та житлами.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé l'immeuble pendant l'exercice.",
@@ -330,8 +424,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'immeuble.",
           "Puisque immeuble est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "chalet", image: "chalet.webp",      article: "le",  gender: "m", definition: ["Maison souvent en bois, située à la montagne."], definitionPivot: { en: "A wooden house in the mountains.", ar: "منزل خشبي في الجبال.", fa: "خانه چوبی در کوهستان.", pt: "Casa de madeira na montanha.", so: "Guri alwaax ah oo buuraha ku yaal.", ti: "ኣብ ኣኽራን ዘሎ ናይ ዕንጨይቲ ገዛ።", tr: "Dağlarda ahşap ev.", ps: "په غرونو کې لرګين کور.", uk: "Дерев’яний будинок у горах." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "chalet",
+      image: "chalet.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Maison souvent en bois, située à la montagne."],
+      definitionPivot: {
+        en: "A wooden house in the mountains.",
+        ar: "منزل خشبي في الجبال.",
+        fa: "خانه چوبی در کوهستان.",
+        pt: "Casa de madeira na montanha.",
+        so: "Guri alwaax ah oo buuraha ku yaal.",
+        ti: "ኣብ ኣኽራን ዘሎ ናይ ዕንጨይቲ ገዛ።",
+        tr: "Dağlarda ahşap ev.",
+        ps: "په غرونو کې لرګين کور.",
+        uk: "Дерев’яний будинок у горах.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le chalet pendant l'exercice.",
@@ -395,8 +508,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le chalet.",
           "Puisque chalet est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cabane", image: "cabane.webp",      article: "la",  gender: "f", definition: ["Petite construction simple, souvent en bois."], definitionPivot: { en: "A small simple wooden shelter.", ar: "بناء خشبي صغير وبسيط.", fa: "پناهگاه کوچک و ساده چوبی.", pt: "Pequena construção simples de madeira.", so: "Hoy yar oo alwaax ah.", ti: "ንእሽቶን ቀሊልን ናይ ዕንጨይቲ መጽለሊ።", tr: "Küçük basit ahşap barınak.", ps: "کوچنی ساده لرګين سرپناه.", uk: "Маленьке просте дерев’яне укриття." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cabane",
+      image: "cabane.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Petite construction simple, souvent en bois."],
+      definitionPivot: {
+        en: "A small simple wooden shelter.",
+        ar: "بناء خشبي صغير وبسيط.",
+        fa: "پناهگاه کوچک و ساده چوبی.",
+        pt: "Pequena construção simples de madeira.",
+        so: "Hoy yar oo alwaax ah.",
+        ti: "ንእሽቶን ቀሊልን ናይ ዕንጨይቲ መጽለሊ።",
+        tr: "Küçük basit ahşap barınak.",
+        ps: "کوچنی ساده لرګين سرپناه.",
+        uk: "Маленьке просте дерев’яне укриття.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé la cabane pendant l'exercice.",
@@ -460,8 +592,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la cabane.",
           "Puisque cabane est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "logement", image: "logement.webp",    article: "le",  gender: "m", definition: ["Lieu où une personne habite."], definitionPivot: { en: "A place where someone lives.", ar: "مكان يعيش فيه شخص.", fa: "جایی که کسی در آن زندگی می‌کند.", pt: "Lugar onde alguém vive.", so: "Meel qof ku nool yahay.", ti: "ሰብ ዝነብረሉ ቦታ።", tr: "Birinin yaşadığı yer.", ps: "هغه ځای چې څوک پکې ژوند کوي.", uk: "Місце, де хтось живе." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "logement",
+      image: "logement.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Lieu où une personne habite."],
+      definitionPivot: {
+        en: "A place where someone lives.",
+        ar: "مكان يعيش فيه شخص.",
+        fa: "جایی که کسی در آن زندگی می‌کند.",
+        pt: "Lugar onde alguém vive.",
+        so: "Meel qof ku nool yahay.",
+        ti: "ሰብ ዝነብረሉ ቦታ።",
+        tr: "Birinin yaşadığı yer.",
+        ps: "هغه ځای چې څوک پکې ژوند کوي.",
+        uk: "Місце, де хтось живе.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le logement pendant l'exercice.",
@@ -525,8 +676,27 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le logement.",
           "Puisque logement est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "dortoir", image: "dortoir.webp",     article: "le",  gender: "m", definition: ["Grande pièce avec plusieurs lits."], definitionPivot: { en: "A large room with several beds.", ar: "غرفة كبيرة فيها عدة أسرّة.", fa: "اتاق بزرگ با چند تخت.", pt: "Grande divisão com várias camas.", so: "Qol weyn oo sariiro badan leh.", ti: "ብዙሕ ዓራታት ዘለዎ ዓቢ ክፍሊ።", tr: "Birkaç yatağı olan büyük oda.", ps: "لويه کوټه چې څو کټونه لري.", uk: "Велика кімната з кількома ліжками." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "dortoir",
+      image: "dortoir.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Grande pièce avec plusieurs lits."],
+      definitionPivot: {
+        en: "A large room with several beds.",
+        ar: "غرفة كبيرة فيها عدة أسرّة.",
+        fa: "اتاق بزرگ با چند تخت.",
+        pt: "Grande divisão com várias camas.",
+        so: "Qol weyn oo sariiro badan leh.",
+        ti: "ብዙሕ ዓራታት ዘለዎ ዓቢ ክፍሊ።",
+        tr: "Birkaç yatağı olan büyük oda.",
+        ps: "لويه کوټه چې څو کټونه لري.",
+        uk: "Велика кімната з кількома ліжками.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai utilisé le dortoir pendant l'exercice.",
@@ -590,7 +760,8 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le dortoir.",
           "Puisque dortoir est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il habite dans un ___ au troisième étage.",              answer: "appartement" },

@@ -6,7 +6,25 @@ export const V7_FRUITS_THEME: VocabTheme = {
   title: "Les fruits",
   section: "V7",
   words: [
-    { word: "pomme",      image: "pomme.webp",      article: "la",  gender: "f", definition: ["Fruit rond, souvent rouge, vert ou jaune."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+    {
+      word: "pomme",
+      image: "pomme.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit rond, souvent rouge, vert ou jaune."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pomme au marché.",
@@ -70,8 +88,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pomme.",
           "Puisque pomme est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "poire",      image: "poire.webp",      article: "la",  gender: "f", definition: ["Fruit sucré avec une forme allongée."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "poire",
+      image: "poire.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit sucré avec une forme allongée."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une poire au marché.",
@@ -135,8 +172,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la poire.",
           "Puisque poire est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "banane",     image: "banane.webp",     article: "la",  gender: "f", definition: ["Fruit long et jaune."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "banane",
+      image: "banane.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit long et jaune."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une banane au marché.",
@@ -200,8 +256,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la banane.",
           "Puisque banane est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "orange",     image: "orange.webp",     article: "l'",  gender: "f", definition: ["Fruit rond, orange, avec beaucoup de jus."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "orange",
+      image: "orange.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Fruit rond, orange, avec beaucoup de jus."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une orange au marché.",
@@ -265,8 +340,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'orange.",
           "Puisque orange est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "fraise",     image: "fraise.webp",     article: "la",  gender: "f", definition: ["Petit fruit rouge et sucré."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "fraise",
+      image: "fraise.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Petit fruit rouge et sucré."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une fraise au marché.",
@@ -330,8 +424,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la fraise.",
           "Puisque fraise est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "framboise",  image: "framboise.webp",  article: "la",  gender: "f", definition: ["Petit fruit rouge ou rose, doux et fragile."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "framboise",
+      image: "framboise.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Petit fruit rouge ou rose, doux et fragile."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une framboise au marché.",
@@ -395,8 +508,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la framboise.",
           "Puisque framboise est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "raisin",     image: "raisin.webp",     article: "le",  gender: "m", definition: ["Petit fruit rond qui pousse en grappe."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "raisin",
+      image: "raisin.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Petit fruit rond qui pousse en grappe."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un raisin au marché.",
@@ -460,8 +592,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le raisin.",
           "Puisque raisin est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "kiwi",       image: "kiwi.webp",       article: "le",  gender: "m", definition: ["Fruit vert à l’intérieur avec une peau brune."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "kiwi",
+      image: "kiwi.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Fruit vert à l’intérieur avec une peau brune."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un kiwi au marché.",
@@ -525,8 +676,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le kiwi.",
           "Puisque kiwi est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pêche",      image: "peche.webp",      article: "la",  gender: "f", definition: ["Fruit rond, doux et juteux."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pêche",
+      image: "peche.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit rond, doux et juteux."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pêche au marché.",
@@ -590,8 +760,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pêche.",
           "Puisque pêche est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "abricot",    image: "abricot.webp",    article: "l'",  gender: "m", definition: ["Petit fruit orange, doux et sucré."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "abricot",
+      image: "abricot.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Petit fruit orange, doux et sucré."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un abricot au marché.",
@@ -655,8 +844,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'abricot.",
           "Puisque abricot est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cerise",     image: "cerise.webp",     article: "la",  gender: "f", definition: ["Petit fruit rouge avec un noyau."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cerise",
+      image: "cerise.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Petit fruit rouge avec un noyau."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une cerise au marché.",
@@ -720,8 +928,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la cerise.",
           "Puisque cerise est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "prune",      image: "prune.webp",      article: "la",  gender: "f", definition: ["Fruit rond ou ovale, souvent violet."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "prune",
+      image: "prune.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit rond ou ovale, souvent violet."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une prune au marché.",
@@ -785,8 +1012,26 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la prune.",
           "Puisque prune est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "ananas",                               article: "l'",  gender: "m", definition: ["Grand fruit tropical avec une peau dure."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "ananas",
+      article: "l'",
+      gender: "m",
+      definition: ["Grand fruit tropical avec une peau dure."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un ananas au marché.",
@@ -850,8 +1095,26 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'ananas.",
           "Puisque ananas est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "citron",                               article: "le",  gender: "m", definition: ["Fruit jaune et acide."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "citron",
+      article: "le",
+      gender: "m",
+      definition: ["Fruit jaune et acide."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un citron au marché.",
@@ -915,8 +1178,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le citron.",
           "Puisque citron est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "melon",      image: "melon.webp",      article: "le",  gender: "m", definition: ["Gros fruit rond, sucré et juteux."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "melon",
+      image: "melon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Gros fruit rond, sucré et juteux."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un melon au marché.",
@@ -980,8 +1262,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le melon.",
           "Puisque melon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "pastèque",   image: "pasteque.webp",   article: "la",  gender: "f", definition: ["Gros fruit vert à l’extérieur et rouge à l’intérieur."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "pastèque",
+      image: "pasteque.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Gros fruit vert à l’extérieur et rouge à l’intérieur."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une pastèque au marché.",
@@ -1045,8 +1346,27 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la pastèque.",
           "Puisque pastèque est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mangue",     image: "mangue.webp",     article: "la",  gender: "f", definition: ["Fruit tropical orange et très sucré."], definitionPivot: { en: "A fruit that people eat.", ar: "فاكهة يأكلها الناس.", fa: "میوه‌ای که مردم می‌خورند.", pt: "Fruta que as pessoas comem.", so: "Miro dadku cunaan.", ti: "ሰባት ዝበልዕዎ ፍረ።", tr: "İnsanların yediği meyve.", ps: "هغه مېوه چې خلک يې خوري.", uk: "Фрукт, який їдять люди." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mangue",
+      image: "mangue.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Fruit tropical orange et très sucré."],
+      definitionPivot: {
+        en: "A fruit that people eat.",
+        ar: "فاكهة يأكلها الناس.",
+        fa: "میوه‌ای که مردم می‌خورند.",
+        pt: "Fruta que as pessoas comem.",
+        so: "Miro dadku cunaan.",
+        ti: "ሰባት ዝበልዕዎ ፍረ።",
+        tr: "İnsanların yediği meyve.",
+        ps: "هغه مېوه چې خلک يې خوري.",
+        uk: "Фрукт, який їдять люди.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté une mangue au marché.",
@@ -1110,7 +1430,8 @@ export const V7_FRUITS_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la mangue.",
           "Puisque mangue est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Je mange une ___ par jour pour rester en bonne santé.", answer: "pomme" },

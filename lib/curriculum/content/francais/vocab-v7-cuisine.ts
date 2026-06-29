@@ -6,7 +6,23 @@ export const V7_CUISINE_THEME: VocabTheme = {
   title: "La cuisine",
   section: "V7",
   words: [
-    { word: "cuisiner", image: "cuisiner.webp",  definition: ["Préparer un repas."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+    {
+      word: "cuisiner",
+      image: "cuisiner.webp",
+      definition: ["Préparer un repas."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un cuisiner au marché.",
@@ -70,8 +86,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec cuisiner.",
           "Puisque cuisiner est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "couper", image: "couper.webp",    definition: ["Diviser avec un couteau."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "couper",
+      image: "couper.webp",
+      definition: ["Diviser avec un couteau."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un couper au marché.",
@@ -135,8 +168,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec couper.",
           "Puisque couper est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "mélanger", image: "melanger.webp",  definition: ["Mettre plusieurs choses ensemble."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "mélanger",
+      image: "melanger.webp",
+      definition: ["Mettre plusieurs choses ensemble."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un mélanger au marché.",
@@ -200,8 +250,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec mélanger.",
           "Puisque mélanger est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cuire", image: "cuire.webp",     definition: ["Préparer un aliment avec la chaleur."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cuire",
+      image: "cuire.webp",
+      definition: ["Préparer un aliment avec la chaleur."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un cuire au marché.",
@@ -265,8 +332,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec cuire.",
           "Puisque cuire est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "bouillir", image: "bouillir.webp",  definition: ["Chauffer un liquide jusqu’à faire des bulles."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "bouillir",
+      image: "bouillir.webp",
+      definition: ["Chauffer un liquide jusqu’à faire des bulles."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un bouillir au marché.",
@@ -330,8 +414,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec bouillir.",
           "Puisque bouillir est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "frire", image: "frire.webp",     definition: ["Cuire dans de l’huile chaude."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "frire",
+      image: "frire.webp",
+      definition: ["Cuire dans de l’huile chaude."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un frire au marché.",
@@ -395,8 +496,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec frire.",
           "Puisque frire est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "rôtir", image: "rotir.webp",     definition: ["Cuire au four ou au feu."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "rôtir",
+      image: "rotir.webp",
+      definition: ["Cuire au four ou au feu."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un rôtir au marché.",
@@ -460,8 +578,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec rôtir.",
           "Puisque rôtir est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "saler", image: "saler.webp",     definition: ["Ajouter du sel."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "saler",
+      image: "saler.webp",
+      definition: ["Ajouter du sel."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un saler au marché.",
@@ -525,8 +660,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec saler.",
           "Puisque saler est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "goûter", image: "gouter.webp",    definition: ["Essayer un aliment avec la bouche."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "goûter",
+      image: "gouter.webp",
+      definition: ["Essayer un aliment avec la bouche."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un goûter au marché.",
@@ -590,8 +742,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec goûter.",
           "Puisque goûter est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "laver", image: "laver.webp",     definition: ["Nettoyer avec de l’eau."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "laver",
+      image: "laver.webp",
+      definition: ["Nettoyer avec de l’eau."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un laver au marché.",
@@ -655,8 +824,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec laver.",
           "Puisque laver est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "éplucher", image: "eplucher.webp",  definition: ["Enlever la peau d’un fruit ou d’un légume."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "éplucher",
+      image: "eplucher.webp",
+      definition: ["Enlever la peau d’un fruit ou d’un légume."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un éplucher au marché.",
@@ -720,8 +906,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec éplucher.",
           "Puisque éplucher est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "verser", image: "verser.webp",    definition: ["Faire couler un liquide dans un récipient."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "verser",
+      image: "verser.webp",
+      definition: ["Faire couler un liquide dans un récipient."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un verser au marché.",
@@ -785,8 +988,25 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec verser.",
           "Puisque verser est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "réchauffer", image: "rechauffer.webp",definition: ["Rendre un aliment chaud à nouveau."], definitionPivot: { en: "An action used to prepare food.", ar: "فعل يُستعمل لتحضير الطعام.", fa: "کاری برای آماده کردن غذا.", pt: "Ação usada para preparar comida.", so: "Ficil cunto lagu diyaariyo.", ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።", tr: "Yemek hazırlamak için yapılan iş.", ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.", uk: "Дія для приготування їжі." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "réchauffer",
+      image: "rechauffer.webp",
+      definition: ["Rendre un aliment chaud à nouveau."],
+      definitionPivot: {
+        en: "An action used to prepare food.",
+        ar: "فعل يُستعمل لتحضير الطعام.",
+        fa: "کاری برای آماده کردن غذا.",
+        pt: "Ação usada para preparar comida.",
+        so: "Ficil cunto lagu diyaariyo.",
+        ti: "መግቢ ንምድላው ዝጥቀሙሉ ተግባር።",
+        tr: "Yemek hazırlamak için yapılan iş.",
+        ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
+        uk: "Дія для приготування їжі.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai acheté un réchauffer au marché.",
@@ -850,7 +1070,8 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec réchauffer.",
           "Puisque réchauffer est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Il faut ___ les carottes avant de les couper.",         answer: "éplucher" },

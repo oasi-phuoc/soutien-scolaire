@@ -6,7 +6,25 @@ export const V6_MATIERES_THEME: VocabTheme = {
   title: "Les matières",
   section: "V6",
   words: [
-    { word: "coton",      image: "coton.webp",      article: "le",  gender: "m", definition: ["Matière douce utilisée pour faire des vêtements."], definitionPivot: { en: "A soft fabric from the cotton plant.", ar: "قماش ناعم من نبات القطن.", fa: "پارچه نرم از گیاه پنبه.", pt: "Tecido macio da planta do algodão.", so: "Maro jilicsan oo ka timaadda cudbi.", ti: "ካብ ጡጥ ዝተሰርሐ ልስሉስ ጨርቂ።", tr: "Pamuk bitkisinden yumuşak kumaş.", ps: "نرم ټوکر د پنبې له بوټي.", uk: "М’яка тканина з бавовни." }, synonym: [], exampleSentences: {
+    {
+      word: "coton",
+      image: "coton.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière douce utilisée pour faire des vêtements."],
+      definitionPivot: {
+        en: "A soft fabric from the cotton plant.",
+        ar: "قماش ناعم من نبات القطن.",
+        fa: "پارچه نرم از گیاه پنبه.",
+        pt: "Tecido macio da planta do algodão.",
+        so: "Maro jilicsan oo ka timaadda cudbi.",
+        ti: "ካብ ጡጥ ዝተሰርሐ ልስሉስ ጨርቂ።",
+        tr: "Pamuk bitkisinden yumuşak kumaş.",
+        ps: "نرم ټوکر د پنبې له بوټي.",
+        uk: "М’яка тканина з бавовни.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le coton en classe.",
@@ -70,8 +88,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le coton.",
           "Puisque coton est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "laine",      image: "laine.webp",      article: "la",  gender: "f", definition: ["Matière chaude qui vient souvent du mouton."], definitionPivot: { en: "A warm material from sheep hair.", ar: "مادة دافئة من صوف الغنم.", fa: "جنس گرم از پشم گوسفند.", pt: "Material quente feito de lã de ovelha.", so: "Wax diirran oo ka samaysan dhogor ido.", ti: "ካብ ጸጉሪ በጊዕ ዝተሰርሐ ሙቕ ነገር።", tr: "Koyun yününden sıcak malzeme.", ps: "تود مواد د پسه له وړۍ.", uk: "Теплий матеріал з овечої вовни." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "laine",
+      image: "laine.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Matière chaude qui vient souvent du mouton."],
+      definitionPivot: {
+        en: "A warm material from sheep hair.",
+        ar: "مادة دافئة من صوف الغنم.",
+        fa: "جنس گرم از پشم گوسفند.",
+        pt: "Material quente feito de lã de ovelha.",
+        so: "Wax diirran oo ka samaysan dhogor ido.",
+        ti: "ካብ ጸጉሪ በጊዕ ዝተሰርሐ ሙቕ ነገር።",
+        tr: "Koyun yününden sıcak malzeme.",
+        ps: "تود مواد د پسه له وړۍ.",
+        uk: "Теплий матеріал з овечої вовни.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la laine en classe.",
@@ -135,8 +172,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la laine.",
           "Puisque laine est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "cuir",       image: "cuir.webp",       article: "le",  gender: "m", definition: ["Matière faite avec la peau d’un animal."], definitionPivot: { en: "A material made from animal skin.", ar: "مادة مصنوعة من جلد الحيوان.", fa: "جنسی ساخته از پوست حیوان.", pt: "Material feito de pele animal.", so: "Wax laga sameeyo harag xayawaan.", ti: "ካብ ቆርበት እንስሳ ዝተሰርሐ ነገር።", tr: "Hayvan derisinden yapılan malzeme.", ps: "مواد چې د حيوان له پوستکي جوړېږي.", uk: "Матеріал зі шкіри тварини." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "cuir",
+      image: "cuir.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière faite avec la peau d’un animal."],
+      definitionPivot: {
+        en: "A material made from animal skin.",
+        ar: "مادة مصنوعة من جلد الحيوان.",
+        fa: "جنسی ساخته از پوست حیوان.",
+        pt: "Material feito de pele animal.",
+        so: "Wax laga sameeyo harag xayawaan.",
+        ti: "ካብ ቆርበት እንስሳ ዝተሰርሐ ነገር።",
+        tr: "Hayvan derisinden yapılan malzeme.",
+        ps: "مواد چې د حيوان له پوستکي جوړېږي.",
+        uk: "Матеріал зі шкіри тварини.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le cuir en classe.",
@@ -200,8 +256,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le cuir.",
           "Puisque cuir est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "soie",       image: "soie.webp",       article: "la",  gender: "f", definition: ["Matière douce et brillante."], definitionPivot: { en: "A fine shiny fabric.", ar: "قماش رقيق ولامع.", fa: "پارچه نازک و براق.", pt: "Tecido fino e brilhante.", so: "Maro khafiif ah oo dhalaalaysa.", ti: "ቀጢንን ብሩህን ጨርቂ።", tr: "İnce ve parlak kumaş.", ps: "نری او ځلاند ټوکر.", uk: "Тонка блискуча тканина." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "soie",
+      image: "soie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Matière douce et brillante."],
+      definitionPivot: {
+        en: "A fine shiny fabric.",
+        ar: "قماش رقيق ولامع.",
+        fa: "پارچه نازک و براق.",
+        pt: "Tecido fino e brilhante.",
+        so: "Maro khafiif ah oo dhalaalaysa.",
+        ti: "ቀጢንን ብሩህን ጨርቂ።",
+        tr: "İnce ve parlak kumaş.",
+        ps: "نری او ځلاند ټوکر.",
+        uk: "Тонка блискуча тканина.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié la soie en classe.",
@@ -265,8 +340,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la soie.",
           "Puisque soie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "plastique",  image: "plastique.webp",  article: "le",  gender: "m", definition: ["Matière légère utilisée pour fabriquer beaucoup d’objets."], definitionPivot: { en: "A light synthetic material.", ar: "مادة صناعية خفيفة.", fa: "جنس مصنوعی سبک.", pt: "Material sintético leve.", so: "Wax macmal ah oo fudud.", ti: "ቀሊል ሰብ ዝሰርሖ ነገር።", tr: "Hafif sentetik malzeme.", ps: "سپک مصنوعي مواد.", uk: "Легкий синтетичний матеріал." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "plastique",
+      image: "plastique.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière légère utilisée pour fabriquer beaucoup d’objets."],
+      definitionPivot: {
+        en: "A light synthetic material.",
+        ar: "مادة صناعية خفيفة.",
+        fa: "جنس مصنوعی سبک.",
+        pt: "Material sintético leve.",
+        so: "Wax macmal ah oo fudud.",
+        ti: "ቀሊል ሰብ ዝሰርሖ ነገር።",
+        tr: "Hafif sentetik malzeme.",
+        ps: "سپک مصنوعي مواد.",
+        uk: "Легкий синтетичний матеріал.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le plastique en classe.",
@@ -330,8 +424,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le plastique.",
           "Puisque plastique est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "métal",      image: "metal.webp",      article: "le",  gender: "m", definition: ["Matière dure comme le fer ou l’acier."], definitionPivot: { en: "A hard material like iron.", ar: "مادة صلبة مثل الحديد.", fa: "جنس سخت مانند آهن.", pt: "Material duro como ferro.", so: "Wax adag sida birta.", ti: "ከም ሓጺን ጠንካራ ነገር።", tr: "Demir gibi sert malzeme.", ps: "کلک مواد لکه اوسپنه.", uk: "Твердий матеріал, як залізо." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "métal",
+      image: "metal.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière dure comme le fer ou l’acier."],
+      definitionPivot: {
+        en: "A hard material like iron.",
+        ar: "مادة صلبة مثل الحديد.",
+        fa: "جنس سخت مانند آهن.",
+        pt: "Material duro como ferro.",
+        so: "Wax adag sida birta.",
+        ti: "ከም ሓጺን ጠንካራ ነገር።",
+        tr: "Demir gibi sert malzeme.",
+        ps: "کلک مواد لکه اوسپنه.",
+        uk: "Твердий матеріал, як залізо.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le métal en classe.",
@@ -395,8 +508,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le métal.",
           "Puisque métal est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "bois",       image: "bois.webp",       article: "le",  gender: "m", definition: ["Matière qui vient des arbres."], definitionPivot: { en: "A natural material from trees.", ar: "مادة طبيعية من الأشجار.", fa: "جنس طبیعی از درختان.", pt: "Material natural das árvores.", so: "Wax dabiici ah oo geedo ka yimaadda.", ti: "ካብ ኣግራብ ዝመጽእ ተፈጥሮኣዊ ነገር።", tr: "Ağaçlardan gelen doğal malzeme.", ps: "طبيعي مواد د ونو څخه.", uk: "Природний матеріал з дерев." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "bois",
+      image: "bois.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière qui vient des arbres."],
+      definitionPivot: {
+        en: "A natural material from trees.",
+        ar: "مادة طبيعية من الأشجار.",
+        fa: "جنس طبیعی از درختان.",
+        pt: "Material natural das árvores.",
+        so: "Wax dabiici ah oo geedo ka yimaadda.",
+        ti: "ካብ ኣግራብ ዝመጽእ ተፈጥሮኣዊ ነገር።",
+        tr: "Ağaçlardan gelen doğal malzeme.",
+        ps: "طبيعي مواد د ونو څخه.",
+        uk: "Природний матеріал з дерев.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le bois en classe.",
@@ -460,8 +592,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le bois.",
           "Puisque bois est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: ["Récipient pour boire."], definitionPivot: { en: "A word used at a restaurant.", ar: "كلمة تُستعمل في المطعم.", fa: "واژه‌ای که در رستوران استفاده می‌شود.", pt: "Palavra usada no restaurante.", so: "Eray makhaayad lagu isticmaalo.", ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።", tr: "Restoranda kullanılan kelime.", ps: "کلمه چې په رستورانت کې کارېږي.", uk: "Слово, яке використовують у ресторані." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "verre",
+      image: "verre.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Récipient pour boire."],
+      definitionPivot: {
+        en: "A word used at a restaurant.",
+        ar: "كلمة تُستعمل في المطعم.",
+        fa: "واژه‌ای که در رستوران استفاده می‌شود.",
+        pt: "Palavra usada no restaurante.",
+        so: "Eray makhaayad lagu isticmaalo.",
+        ti: "ኣብ ሬስቶራንት ዝጥቀሙሉ ቃል።",
+        tr: "Restoranda kullanılan kelime.",
+        ps: "کلمه چې په رستورانت کې کارېږي.",
+        uk: "Слово, яке використовують у ресторані.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le verre en classe.",
@@ -525,8 +676,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le verre.",
           "Puisque verre est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "papier",     image: "papier.webp",     article: "le",  gender: "m", definition: ["Matière fine sur laquelle on écrit."], definitionPivot: { en: "A thin material made from plant fibers.", ar: "مادة رقيقة من ألياف نباتية.", fa: "جنس نازک از الیاف گیاهی.", pt: "Material fino feito de fibras vegetais.", so: "Wax khafiif ah oo laga sameeyo fiber geed.", ti: "ካብ ፋይበር ተኽሊ ዝተሰርሐ ቀጢን ነገር።", tr: "Bitki liflerinden ince malzeme.", ps: "نری مواد د نباتي رېښو څخه.", uk: "Тонкий матеріал з рослинних волокон." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "papier",
+      image: "papier.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière fine sur laquelle on écrit."],
+      definitionPivot: {
+        en: "A thin material made from plant fibers.",
+        ar: "مادة رقيقة من ألياف نباتية.",
+        fa: "جنس نازک از الیاف گیاهی.",
+        pt: "Material fino feito de fibras vegetais.",
+        so: "Wax khafiif ah oo laga sameeyo fiber geed.",
+        ti: "ካብ ፋይበር ተኽሊ ዝተሰርሐ ቀጢን ነገር።",
+        tr: "Bitki liflerinden ince malzeme.",
+        ps: "نری مواد د نباتي رېښو څخه.",
+        uk: "Тонкий матеріал з рослинних волокон.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le papier en classe.",
@@ -590,8 +760,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le papier.",
           "Puisque papier est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "nylon",      image: "nylon.webp",      article: "le",  gender: "m", definition: ["Matière synthétique utilisée pour des vêtements ou des sacs."], definitionPivot: { en: "A strong synthetic fabric.", ar: "قماش صناعي قوي.", fa: "پارچه مصنوعی مقاوم.", pt: "Tecido sintético resistente.", so: "Maro macmal ah oo adkaysi leh.", ti: "ጠንካራ ሰብ ዝሰርሖ ጨርቂ።", tr: "Dayanıklı sentetik kumaş.", ps: "قوي مصنوعي ټوکر.", uk: "Міцна синтетична тканина." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "nylon",
+      image: "nylon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière synthétique utilisée pour des vêtements ou des sacs."],
+      definitionPivot: {
+        en: "A strong synthetic fabric.",
+        ar: "قماش صناعي قوي.",
+        fa: "پارچه مصنوعی مقاوم.",
+        pt: "Tecido sintético resistente.",
+        so: "Maro macmal ah oo adkaysi leh.",
+        ti: "ጠንካራ ሰብ ዝሰርሖ ጨርቂ።",
+        tr: "Dayanıklı sentetik kumaş.",
+        ps: "قوي مصنوعي ټوکر.",
+        uk: "Міцна синтетична тканина.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le nylon en classe.",
@@ -655,8 +844,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le nylon.",
           "Puisque nylon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "caoutchouc", image: "caoutchouc.webp", article: "le",  gender: "m", definition: ["Matière souple utilisée pour les pneus ou les semelles."], definitionPivot: { en: "An elastic material used for shoes and rain clothes.", ar: "مادة مرنة للأحذية وملابس المطر.", fa: "جنس کشسان برای کفش و لباس باران.", pt: "Material elástico para calçado e impermeáveis.", so: "Wax kala baxa oo kabo iyo dhar roob lagu sameeyo.", ti: "ንጫማን ናይ ዝናብ ክዳንን ዝጥቀሙሉ ተዓጻጻፊ ነገር።", tr: "Ayakkabı ve yağmurluklarda kullanılan esnek malzeme.", ps: "کشېدونکی مواد د بوټانو او باراني کالو لپاره.", uk: "Еластичний матеріал для взуття й дощового одягу." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "caoutchouc",
+      image: "caoutchouc.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Matière souple utilisée pour les pneus ou les semelles."],
+      definitionPivot: {
+        en: "An elastic material used for shoes and rain clothes.",
+        ar: "مادة مرنة للأحذية وملابس المطر.",
+        fa: "جنس کشسان برای کفش و لباس باران.",
+        pt: "Material elástico para calçado e impermeáveis.",
+        so: "Wax kala baxa oo kabo iyo dhar roob lagu sameeyo.",
+        ti: "ንጫማን ናይ ዝናብ ክዳንን ዝጥቀሙሉ ተዓጻጻፊ ነገር።",
+        tr: "Ayakkabı ve yağmurluklarda kullanılan esnek malzeme.",
+        ps: "کشېدونکی مواد د بوټانو او باراني کالو لپاره.",
+        uk: "Еластичний матеріал для взуття й дощового одягу.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le caoutchouc en classe.",
@@ -720,8 +928,27 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le caoutchouc.",
           "Puisque caoutchouc est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "velours",    image: "velours.webp",    article: "le",  gender: "m", definition: ["Tissu doux au toucher."], definitionPivot: { en: "A soft fabric with a smooth surface.", ar: "قماش ناعم بسطح أملس.", fa: "پارچه نرم با سطح لطیف.", pt: "Tecido macio com superfície suave.", so: "Maro jilicsan oo dusheedu siman yahay.", ti: "ልስሉስ ጨርቂ ምስ ልሙጽ ገጽ።", tr: "Yumuşak yüzeyli kumaş.", ps: "نرم ټوکر له ښويې سطحې سره.", uk: "М’яка тканина з гладкою поверхнею." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "velours",
+      image: "velours.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Tissu doux au toucher."],
+      definitionPivot: {
+        en: "A soft fabric with a smooth surface.",
+        ar: "قماش ناعم بسطح أملس.",
+        fa: "پارچه نرم با سطح لطیف.",
+        pt: "Tecido macio com superfície suave.",
+        so: "Maro jilicsan oo dusheedu siman yahay.",
+        ti: "ልስሉስ ጨርቂ ምስ ልሙጽ ገጽ።",
+        tr: "Yumuşak yüzeyli kumaş.",
+        ps: "نرم ټوکر له ښويې سطحې سره.",
+        uk: "М’яка тканина з гладкою поверхнею.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai étudié le velours en classe.",
@@ -785,7 +1012,8 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le velours.",
           "Puisque velours est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Ce t-shirt est en ___, c'est très doux et respirant.",  answer: "coton" },

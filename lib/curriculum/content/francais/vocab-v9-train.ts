@@ -6,7 +6,25 @@ export const V9_TRAIN_THEME: VocabTheme = {
   title: "Le train",
   section: "V9",
   words: [
-    { word: "gare", image: "gare.webp",           article: "la",  gender: "f", definition: ["Lieu où les trains arrivent et partent."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+    {
+      word: "gare",
+      image: "gare.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Lieu où les trains arrivent et partent."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la gare sur le plan.",
@@ -70,8 +88,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la gare.",
           "Puisque gare est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "quai", image: "quai.webp",           article: "le",  gender: "m", definition: ["Endroit dans une gare où l’on attend le train."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "quai",
+      image: "quai.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Endroit dans une gare où l’on attend le train."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le quai sur le plan.",
@@ -135,8 +172,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le quai.",
           "Puisque quai est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "guichet", image: "guichet.webp",        article: "le",  gender: "m", definition: ["Bureau où l’on achète un billet ou demande une information."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "guichet",
+      image: "guichet.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Bureau où l’on achète un billet ou demande une information."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le guichet sur le plan.",
@@ -200,8 +256,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le guichet.",
           "Puisque guichet est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "billet", image: "billet.webp",         article: "le",  gender: "m", definition: ["Document qui permet de prendre un transport ou d’entrer à un spectacle."], definitionPivot: { en: "A word connected with art and culture.", ar: "كلمة مرتبطة بالفن والثقافة.", fa: "واژه‌ای مربوط به هنر و فرهنگ.", pt: "Palavra ligada à arte e à cultura.", so: "Eray la xiriira farshaxan iyo dhaqan.", ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።", tr: "Sanat ve kültürle ilgili kelime.", ps: "د هنر او کلتور اړوند کلمه.", uk: "Слово, пов’язане з мистецтвом і культурою." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "billet",
+      image: "billet.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Document qui permet de prendre un transport ou d’entrer à un spectacle."],
+      definitionPivot: {
+        en: "A word connected with art and culture.",
+        ar: "كلمة مرتبطة بالفن والثقافة.",
+        fa: "واژه‌ای مربوط به هنر و فرهنگ.",
+        pt: "Palavra ligada à arte e à cultura.",
+        so: "Eray la xiriira farshaxan iyo dhaqan.",
+        ti: "ምስ ጥበብን ባህልን ዝተኣሳሰር ቃል።",
+        tr: "Sanat ve kültürle ilgili kelime.",
+        ps: "د هنر او کلتور اړوند کلمه.",
+        uk: "Слово, пов’язане з мистецтвом і культурою.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le billet sur le plan.",
@@ -265,8 +340,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le billet.",
           "Puisque billet est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "aller-retour", image: "aller-retour.webp",   article: "l'",  gender: "m", definition: ["Billet ou trajet pour aller à un endroit et revenir."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "aller-retour",
+      image: "aller-retour.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Billet ou trajet pour aller à un endroit et revenir."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'aller-retour sur le plan.",
@@ -330,8 +424,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'aller-retour.",
           "Puisque aller-retour est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "départ", image: "depart.webp",         article: "le",  gender: "m", definition: ["Moment où un train, un bus ou un avion part."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "départ",
+      image: "depart.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Moment où un train, un bus ou un avion part."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le départ sur le plan.",
@@ -395,8 +508,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le départ.",
           "Puisque départ est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "arrivée", image: "arrivee.webp",        article: "l'",  gender: "f", definition: ["Moment où un train, un bus ou un avion arrive."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "arrivée",
+      image: "arrivee.webp",
+      article: "l'",
+      gender: "f",
+      definition: ["Moment où un train, un bus ou un avion arrive."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'arrivée sur le plan.",
@@ -460,8 +592,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'arrivée.",
           "Puisque arrivée est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "wagon", image: "wagon.webp",          article: "le",  gender: "m", definition: ["Partie d’un train où les passagers montent."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "wagon",
+      image: "wagon.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Partie d’un train où les passagers montent."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le wagon sur le plan.",
@@ -525,8 +676,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le wagon.",
           "Puisque wagon est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "contrôleur", image: "controleur.webp",     article: "le",  gender: "m", definition: ["Personne qui vérifie les billets dans le train ou le bus."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "contrôleur",
+      image: "controleur.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Personne qui vérifie les billets dans le train ou le bus."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le contrôleur sur le plan.",
@@ -590,8 +760,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le contrôleur.",
           "Puisque contrôleur est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "place", image: "/vocab/images/V4/place.webp",          article: "la",  gender: "f", definition: ["Siège réservé ou disponible dans un transport."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "place",
+      image: "/vocab/images/V4/place.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Siège réservé ou disponible dans un transport."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la place sur le plan.",
@@ -655,8 +844,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la place.",
           "Puisque place est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "grève", image: "greve.webp",          article: "la",  gender: "f", definition: ["Arrêt du travail pour protester ou demander des changements."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "grève",
+      image: "greve.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Arrêt du travail pour protester ou demander des changements."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la grève sur le plan.",
@@ -720,8 +928,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la grève.",
           "Puisque grève est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "retard", image: "retard.webp",         article: "le",  gender: "m", definition: ["Quand quelque chose arrive plus tard que prévu."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "retard",
+      image: "retard.webp",
+      article: "le",
+      gender: "m",
+      definition: ["Quand quelque chose arrive plus tard que prévu."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché le retard sur le plan.",
@@ -785,8 +1012,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec le retard.",
           "Puisque retard est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "correspondance", image: "correspondance.webp", article: "la",  gender: "f", definition: ["Transport que l’on prend après un premier transport pour continuer le voyage."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "correspondance",
+      image: "correspondance.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Transport que l’on prend après un premier transport pour continuer le voyage."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la correspondance sur le plan.",
@@ -850,8 +1096,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la correspondance.",
           "Puisque correspondance est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "voie", image: "voie.webp",           article: "la",  gender: "f", definition: ["Rail ou ligne où arrive et part le train."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "voie",
+      image: "voie.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Rail ou ligne où arrive et part le train."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché la voie sur le plan.",
@@ -915,8 +1180,27 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec la voie.",
           "Puisque voie est utile, je le révise régulièrement.",
         ],
-      } },
-    { word: "horaire", image: "horaire.webp",        article: "l'",  gender: "m", definition: ["Liste des heures de départ et d’arrivée."], definitionPivot: { en: "A word used for train travel.", ar: "كلمة تُستعمل في السفر بالقطار.", fa: "واژه‌ای برای سفر با قطار.", pt: "Palavra usada em viagens de comboio.", so: "Eray loo isticmaalo safarka tareenka.", ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።", tr: "Tren yolculuğunda kullanılan kelime.", ps: "د اورګاډي د سفر کلمه.", uk: "Слово для подорожі потягом." }, synonym: [], exampleSentences: {
+      },
+    },
+    {
+      word: "horaire",
+      image: "horaire.webp",
+      article: "l'",
+      gender: "m",
+      definition: ["Liste des heures de départ et d’arrivée."],
+      definitionPivot: {
+        en: "A word used for train travel.",
+        ar: "كلمة تُستعمل في السفر بالقطار.",
+        fa: "واژه‌ای برای سفر با قطار.",
+        pt: "Palavra usada em viagens de comboio.",
+        so: "Eray loo isticmaalo safarka tareenka.",
+        ti: "ኣብ ጉዕዞ ባቡር ዝጥቀሙሉ ቃል።",
+        tr: "Tren yolculuğunda kullanılan kelime.",
+        ps: "د اورګاډي د سفر کلمه.",
+        uk: "Слово для подорожі потягом.",
+      },
+      synonym: [],
+      exampleSentences: {
         a1: [],
         a2: [
           "Hier, j'ai cherché l'horaire sur le plan.",
@@ -980,7 +1264,8 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Pendant que les autres lisaient, j'ai cherché un exemple avec l'horaire.",
           "Puisque horaire est utile, je le révise régulièrement.",
         ],
-      } },
+      },
+    },
   ],
   sentences: [
     { sentence: "Le train part du ___ numéro 3.",                        answer: "quai" },
