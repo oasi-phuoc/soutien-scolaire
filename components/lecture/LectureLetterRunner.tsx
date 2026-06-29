@@ -667,12 +667,22 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-function WordPronounceGrid({ words }: { words: string[] }) {
+function WordPronounceGrid({ words, timerSeconds }: { words: string[]; timerSeconds?: number }) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
   const [items, setItems] = useState<string[]>(() => shuffle(unique));
   const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(unique.length).fill("idle"));
   const [heard, setHeard] = useState<string[]>(() => Array(unique.length).fill(""));
+  const [timeLeft, setTimeLeft] = useState<number>(timerSeconds ?? 0);
   const recRef = useRef<unknown>(null);
+
+  // Countdown timer (timed steps only). Stops at 0; reset restarts it.
+  useEffect(() => {
+    if (!timerSeconds || timeLeft <= 0) return;
+    const id = setInterval(() => setTimeLeft((t) => (t <= 1 ? 0 : t - 1)), 1000);
+    return () => clearInterval(id);
+  }, [timerSeconds, timeLeft]);
+
+  const timeUp = !!timerSeconds && timeLeft <= 0;
 
   function reset() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -681,6 +691,7 @@ function WordPronounceGrid({ words }: { words: string[] }) {
     setItems(shuffle(unique));
     setStates(Array(unique.length).fill("idle"));
     setHeard(Array(unique.length).fill(""));
+    if (timerSeconds) setTimeLeft(timerSeconds);
   }
 
   function playWord(word: string) {
@@ -688,7 +699,7 @@ function WordPronounceGrid({ words }: { words: string[] }) {
   }
 
   function startListening(index: number) {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || timeUp) return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -732,15 +743,31 @@ function WordPronounceGrid({ words }: { words: string[] }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les mots</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque mot à voix haute.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            {timerSeconds ? "Lisez les 10 mots avant la fin du temps." : "Prononcez chaque mot à voix haute."}
+          </p>
         </div>
-        <button type="button" aria-label="Recommencer" onClick={reset}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
-          </svg>
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          {timerSeconds ? (
+            <span className={`rounded-full px-2.5 py-1 text-sm font-bold tabular-nums ${
+              timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+            }`}>
+              {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}`}
+            </span>
+          ) : null}
+          <button type="button" aria-label="Recommencer" onClick={reset}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+            </svg>
+          </button>
+        </div>
       </div>
+      {timeUp && (
+        <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/20">
+          Temps écoulé ! Appuyez sur recommencer pour réessayer.
+        </p>
+      )}
       <div className="space-y-2">
         {items.map((word, i) => {
           const state = states[i]!;
@@ -759,8 +786,8 @@ function WordPronounceGrid({ words }: { words: string[] }) {
               <button
                 type="button"
                 onClick={() => startListening(i)}
-                disabled={state === "listening"}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 ${
+                disabled={state === "listening" || (timeUp && state !== "correct")}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "wrong"
@@ -900,7 +927,11 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
-      if (data.letterLower === "outils" || data.type === "multisyllable") return <WordPronounceGrid key={k} words={grid.items} />;
+      // L8 step 4 ("review") is timed: 2 minutes to read the 10 words.
+      if (data.letterLower === "outils" || data.type === "multisyllable") {
+        const timed = data.type === "multisyllable" && grid.key === "review";
+        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} />;
+      }
       return <ReadingGridView key={k} grid={grid} />;
     }
     if (data.type === "complex-sound") {
