@@ -1443,15 +1443,14 @@ function uniqueGrid(items: string[]): string[] {
 
 function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonData {
   const upperV = vowel.toUpperCase();
-  const upperConsonants = SIMPLE_CONSONANTS.map((c) => c.toUpperCase());
-  const lowerVc = SIMPLE_CONSONANTS.map((c) => `${vowel}${c}`);
-  const upperVc = upperConsonants.map((c) => `${upperV}${c}`);
-  const lowerCv = SIMPLE_CONSONANTS.map((c) => `${c}${vowel}`);
-  const upperCv = upperConsonants.map((c) => `${c}${upperV}`);
-  const mixed = SIMPLE_CONSONANTS.map((c, index) => {
-    const syllable = index % 2 === 0 ? `${vowel}${c}` : `${c}${vowel}`;
-    return index % 3 === 0 ? syllable.toUpperCase() : syllable;
-  });
+  // CV (consonne + voyelle) : toutes les consonnes.
+  // VC (voyelle + consonne) : on exclut n et m, qui forment des sons complexes
+  // (nasales : an, am, on, in, en, un…) avec la voyelle.
+  const vcConsonants = SIMPLE_CONSONANTS.filter((c) => c !== "n" && c !== "m");
+  const cvUpper = SIMPLE_CONSONANTS.map((c) => `${c.toUpperCase()}${upperV}`);
+  const cvLower = SIMPLE_CONSONANTS.map((c) => `${c}${vowel}`);
+  const vcUpper = vcConsonants.map((c) => `${upperV}${c.toUpperCase()}`);
+  const vcLower = vcConsonants.map((c) => `${vowel}${c}`);
   return {
     type: "syllable",
     letter: upperV,
@@ -1459,11 +1458,10 @@ function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonDa
     phoneme: `/${vowel}/`,
     title: `Syllabes avec ${upperV}`,
     grids: [
-      { key: "vc-upper", label: `Exercice 1 - ${upperV} + consonne en majuscules`, items: grid25(upperVc) },
-      { key: "vc-lower", label: `Exercice 2 - ${vowel} + consonne en minuscules`, items: grid25(lowerVc) },
-      { key: "cv-upper", label: `Exercice 3 - consonne + ${upperV} en majuscules`, items: grid25(upperCv) },
-      { key: "cv-lower", label: `Exercice 4 - consonne + ${vowel} en minuscules`, items: grid25(lowerCv) },
-      { key: "mixed", label: "Exercice 5 - syllabes melangees", items: grid25(mixed) },
+      { key: "cv-upper", label: `Consonne + ${upperV} (majuscules)`, items: cvUpper },
+      { key: "cv-lower", label: `Consonne + ${vowel} (minuscules)`, items: cvLower },
+      { key: "vc-upper", label: `${upperV} + consonne (majuscules)`, items: vcUpper },
+      { key: "vc-lower", label: `${vowel} + consonne (minuscules)`, items: vcLower },
     ],
   };
 }

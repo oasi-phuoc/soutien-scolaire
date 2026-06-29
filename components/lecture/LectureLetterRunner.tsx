@@ -3,7 +3,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
-import type { LetterData, ReadingGrid } from "@/lib/curriculum/lecture-data";
+import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
@@ -46,7 +46,21 @@ function getSteps(data: LetterData): Step[] {
       { key: "pronounce-complex", label: "Prononcer" },
     ];
   }
-  if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
+  if (data.type === "syllable") {
+    // L5: CV (consonne+voyelle) majuscules/minuscules, lecture rapide CV,
+    // VC (voyelle+consonne) majuscules/minuscules, lecture rapide VC, évaluation.
+    const labelOf = (key: string) => data.grids.find((g) => g.key === key)?.label ?? key;
+    return [
+      { key: "cv-upper", label: labelOf("cv-upper") },
+      { key: "cv-lower", label: labelOf("cv-lower") },
+      { key: "cv-timed", label: "Lecture rapide" },
+      { key: "vc-upper", label: labelOf("vc-upper") },
+      { key: "vc-lower", label: labelOf("vc-lower") },
+      { key: "vc-timed", label: "Lecture rapide" },
+      { key: "word-eval", label: "Évaluation" },
+    ];
+  }
+  if (data.type === "monosyllable" || data.type === "multisyllable") {
     const gridSteps = data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
     // L8 ends with a timed word evaluation (25 words in 5 minutes).
     if (data.type === "multisyllable") gridSteps.push({ key: "word-eval", label: "Évaluation" });
@@ -87,8 +101,6 @@ function getSteps(data: LetterData): Step[] {
   ];
 }
 
-type SyllableRecState = "idle" | "listening" | "correct" | "wrong";
-
 function shuffle<T>(items: T[]): T[] {
   const next = [...items];
   for (let i = next.length - 1; i > 0; i--) {
@@ -96,170 +108,6 @@ function shuffle<T>(items: T[]): T[] {
     [next[i], next[j]] = [next[j]!, next[i]!];
   }
   return next;
-}
-
-function randomCaseText(text: string): string {
-  return Math.random() > 0.5 ? text.toUpperCase() : text.toLowerCase();
-}
-
-function makeDynamicSyllables(items: string[]) {
-  return shuffle(items).slice(0, 25).map(randomCaseText);
-}
-
-function normalizeSpeechText(text: string) {
-  return text
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/gu, "")
-    .replace(/\s+/gu, "")
-    .toLowerCase();
-}
-
-function syllableMatches(transcript: string, target: string) {
-  const heard = normalizeSpeechText(transcript);
-  const wanted = normalizeSpeechText(target);
-  const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
-  return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
-}
-
-function SyllableReadingGridView({ grid }: { grid: ReadingGrid }) {
-  const [resetSeed, setResetSeed] = useState(0);
-  const syllables = useMemo(() => {
-    void resetSeed;
-    return makeDynamicSyllables(grid.items);
-  }, [grid.items, resetSeed]);
-  const [states, setStates] = useState<SyllableRecState[]>(() => Array(25).fill("idle"));
-  const [heard, setHeard] = useState<string[]>(() => Array(25).fill(""));
-  const recRef = useRef<unknown>(null);
-
-  function reset() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    setResetSeed((value) => value + 1);
-    setStates(Array(25).fill("idle"));
-    setHeard(Array(25).fill(""));
-  }
-
-  function startListening(index: number) {
-    if (typeof window === "undefined") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-
-    rec.onstart = () => {
-      setStates((prev) => prev.map((state, i) => (i === index ? "listening" : state)));
-      setHeard((prev) => prev.map((value, i) => (i === index ? "" : value)));
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
-      let matched = false;
-      for (let alt = 0; alt < event.results[0].length; alt++) {
-        const transcript = event.results[0][alt].transcript.trim();
-        if (syllableMatches(transcript, syllables[index]!)) {
-          best = transcript;
-          matched = true;
-          break;
-        }
-      }
-      setHeard((prev) => prev.map((value, i) => (i === index ? best : value)));
-      setStates((prev) => prev.map((state, i) => (i === index ? (matched ? "correct" : "wrong") : state)));
-    };
-    rec.onerror = () => setStates((prev) => prev.map((state, i) => (i === index ? "idle" : state)));
-    rec.onend = () => setStates((prev) => prev.map((state, i) => (i === index && state === "listening" ? "idle" : state)));
-
-    recRef.current = rec;
-    rec.start();
-  }
-
-  return (
-    <section className="space-y-3">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Lisez chaque syllabe puis prononcez-la.</p>
-        </div>
-        <button
-          type="button"
-          aria-label="Recommencer"
-          onClick={reset}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M1 4v6h6" />
-            <path d="M3.51 15a9 9 0 1 0 .49-4" />
-          </svg>
-        </button>
-      </div>
-      <div className="grid grid-cols-5 gap-2">
-        {syllables.map((syllable, index) => {
-          const state = states[index]!;
-          return (
-            <div
-              key={`${syllable}-${index}-${resetSeed}`}
-              className={`relative flex aspect-square flex-col items-center justify-center rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] transition-colors ${
-                state === "correct"
-                  ? "border-[var(--color-accent-lecture)] text-[var(--color-accent-lecture)]"
-                  : state === "wrong"
-                    ? "border-red-400 text-red-600"
-                    : "border-[var(--color-border-default)]"
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() => speak(syllable)}
-                className="flex h-full w-full items-center justify-center rounded-[var(--radius-lg)] text-xl font-bold active:scale-95"
-              >
-                {syllable}
-              </button>
-              <button
-                type="button"
-                onClick={() => startListening(index)}
-                disabled={state === "listening"}
-                className={`absolute bottom-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full text-white shadow-sm ${
-                  state === "listening"
-                    ? "animate-pulse bg-red-500"
-                    : state === "correct"
-                      ? "bg-[var(--color-accent-lecture)]"
-                      : state === "wrong"
-                        ? "bg-red-400"
-                        : "bg-[var(--color-accent-lecture)]"
-                }`}
-                aria-label="Parler"
-              >
-                {state === "correct" ? (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                ) : state === "wrong" ? (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <rect x="9" y="2" width="6" height="12" rx="3" />
-                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                )}
-              </button>
-              {state === "wrong" && heard[index] && (
-                <span className="sr-only">J&apos;ai entendu {heard[index]}</span>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
 }
 
 function normalizeGraph(text: string) {
@@ -626,17 +474,29 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
 const WordPronounceGrid = forwardRef<ResetHandle, {
-  words: string[];
+  words?: string[];
   timerSeconds?: number;
   sampleSize?: number;
+  // Compose the shown items from several sub-pools (e.g. 10 uppercase + 10
+  // lowercase); each pool is shuffled and `n` items are taken, then combined.
+  sampleSpec?: { pool: string[]; n: number }[];
   isEval?: boolean;
   title?: string;
   consigne?: string;
   onTimeChange?: (t: number | null) => void;
 }>(
-  function WordPronounceGrid({ words, timerSeconds, sampleSize, isEval, title, consigne, onTimeChange }, ref) {
+  function WordPronounceGrid({ words = [], timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, onTimeChange }, ref) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
-  const count = sampleSize ? Math.min(sampleSize, unique.length) : unique.length;
+  const count = sampleSpec
+    ? sampleSpec.reduce((sum, s) => sum + Math.min(s.n, new Set(s.pool).size), 0)
+    : sampleSize
+      ? Math.min(sampleSize, unique.length)
+      : unique.length;
+  const specKey = sampleSpec ? sampleSpec.map((s) => `${s.n}:${s.pool.length}`).join("|") : "";
+  const buildItems = () =>
+    sampleSpec
+      ? shuffle(sampleSpec.flatMap((s) => shuffle(Array.from(new Set(s.pool))).slice(0, s.n)))
+      : shuffle(unique).slice(0, count);
   // Items start empty and are sampled on the client only — this avoids a
   // server/client hydration mismatch (the random order would differ), which
   // otherwise made the list "auto-refresh" right after the page loaded.
@@ -650,10 +510,11 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
 
   // Sample the words once, on mount (client only).
   useEffect(() => {
-    setItems(shuffle(unique).slice(0, count));
+    setItems(buildItems());
     setStates(Array(count).fill("idle"));
     setHeard(Array(count).fill(""));
-  }, [unique, count]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unique, count, specKey]);
 
   // Countdown timer (timed steps only). Stops at 0; reset restarts it.
   useEffect(() => {
@@ -681,7 +542,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (recRef.current as any)?.abort?.();
     recRef.current = null;
-    setItems(shuffle(unique).slice(0, count));
+    setItems(buildItems());
     setStates(Array(count).fill("idle"));
     setHeard(Array(count).fill(""));
     if (timerSeconds) setTimeLeft(timerSeconds);
@@ -876,7 +737,11 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const hasEvalStep = steps.some((s) => s.key === "eval" || s.key === "word-eval");
   const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
   const isWordEvalStep = step.key === "word-eval";
-  const isTimedReview = (data.type === "multisyllable" && step.key === "review") || step.key === "ms-review";
+  const isTimedReview =
+    (data.type === "multisyllable" && step.key === "review") ||
+    step.key === "ms-review" ||
+    step.key === "cv-timed" ||
+    step.key === "vc-timed";
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
@@ -890,6 +755,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isPronounceGridStep =
     step.key === "complex-syllables-cv" ||
     isWordEvalStep ||
+    data.type === "syllable" ||
     data.type === "multisyllable" ||
     data.type === "monosyllable";
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
@@ -951,7 +817,63 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
 
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
-    if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
+    if (data.type === "syllable") {
+      // L5 syllable lesson: CV / VC reading, two timed steps and an evaluation,
+      // all using the mic/word/audio rows (same style as L8).
+      const itemsOf = (key: string) => data.grids.find((g) => g.key === key)?.items ?? [];
+      const cvUpper = itemsOf("cv-upper");
+      const cvLower = itemsOf("cv-lower");
+      const vcUpper = itemsOf("vc-upper");
+      const vcLower = itemsOf("vc-lower");
+      const TITLES: Record<string, string> = {
+        "cv-upper": `Consonne + ${data.letter} (majuscules)`,
+        "cv-lower": `Consonne + ${data.letterLower} (minuscules)`,
+        "vc-upper": `${data.letter} + consonne (majuscules)`,
+        "vc-lower": `${data.letterLower} + consonne (minuscules)`,
+      };
+      if (step.key === "word-eval") {
+        // 30 syllables: 8+7 from CV (upper/lower) and 8+7 from VC (upper/lower).
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            sampleSpec={[
+              { pool: cvUpper, n: 8 }, { pool: cvLower, n: 7 },
+              { pool: vcUpper, n: 8 }, { pool: vcLower, n: 7 },
+            ]}
+            timerSeconds={300}
+            isEval
+          />
+        );
+      }
+      if (step.key === "cv-timed" || step.key === "vc-timed") {
+        const isCv = step.key === "cv-timed";
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            sampleSpec={isCv
+              ? [{ pool: cvUpper, n: 10 }, { pool: cvLower, n: 10 }]
+              : [{ pool: vcUpper, n: 10 }, { pool: vcLower, n: 10 }]}
+            timerSeconds={120}
+            title="Lecture rapide chronométré"
+            consigne="Prononcez chaque syllabe à voix haute le plus vite possible avant la fin du temps."
+            onTimeChange={setWordTimerLeft}
+          />
+        );
+      }
+      const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      return (
+        <WordPronounceGrid
+          key={k}
+          ref={pronounceGridRef}
+          words={grid.items}
+          title={TITLES[grid.key] ?? grid.label}
+          consigne="Prononcez chaque syllabe à voix haute."
+        />
+      );
+    }
+    if (data.type === "monosyllable" || data.type === "multisyllable") {
       const isMulti = data.type === "multisyllable";
       // Evaluation step. Multisyllable (L8): 25 words / 5 min from the pool.
       // Monosyllable (L6): 30 words / 5 min from the combined pool.
@@ -978,7 +900,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         );
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
-      if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       // L6 (monosyllable) and L8 (multisyllable) word steps use the mic/word/audio rows.
       // L8 grids sample 10 random words; the "review" grid is also timed (2 min).
       // L6 grids show each unique word once (refresh re-shuffles the order).
