@@ -28,6 +28,7 @@ interface Props {
 
 type Step = { key: string; label: string };
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
+type ResetHandle = { reset: () => void };
 
 function getSteps(data: LetterData): Step[] {
   if (data.type === "complex-sound") {
@@ -531,7 +532,8 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; targ
   },
 );
 
-function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "vc" | "mixed" }) {
+const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv" | "vc" | "mixed" }>(
+  function ComplexSyllableGrid({ target, mode }, ref) {
   const targets = complexTargets(target);
   const [syllables, setSyllables] = useState(() => makeComplexSyllables(targets, mode));
   const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(6).fill("idle"));
@@ -546,6 +548,8 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
     setStates(Array(6).fill("idle"));
     setHeard(Array(6).fill(""));
   }
+
+  useImperativeHandle(ref, () => ({ reset }));
 
   function startListening(index: number) {
     if (typeof window === "undefined") return;
@@ -589,17 +593,9 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
 
   return (
     <section className="space-y-3">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque syllabe à voix haute.</p>
-        </div>
-        <button type="button" aria-label="Recommencer" onClick={reset}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
-          </svg>
-        </button>
+      <div>
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
+        <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque syllabe à voix haute.</p>
       </div>
       <div className="space-y-2">
         {syllables.map((syl, i) => {
@@ -666,11 +662,12 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
       </div>
     </section>
   );
-}
+});
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-function WordPronounceGrid({ words, timerSeconds, sampleSize }: { words: string[]; timerSeconds?: number; sampleSize?: number }) {
+const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSeconds?: number; sampleSize?: number }>(
+  function WordPronounceGrid({ words, timerSeconds, sampleSize }, ref) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
   const count = sampleSize ? Math.min(sampleSize, unique.length) : unique.length;
   const [items, setItems] = useState<string[]>(() => shuffle(unique).slice(0, count));
@@ -697,6 +694,8 @@ function WordPronounceGrid({ words, timerSeconds, sampleSize }: { words: string[
     setHeard(Array(count).fill(""));
     if (timerSeconds) setTimeLeft(timerSeconds);
   }
+
+  useImperativeHandle(ref, () => ({ reset }));
 
   function playWord(word: string) {
     new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
@@ -751,21 +750,13 @@ function WordPronounceGrid({ words, timerSeconds, sampleSize }: { words: string[
             {timerSeconds ? `Lisez les ${count} mots avant la fin du temps.` : "Prononcez chaque mot à voix haute."}
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
-          {timerSeconds ? (
-            <span className={`rounded-full px-2.5 py-1 text-sm font-bold tabular-nums ${
-              timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-            }`}>
-              {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}`}
-            </span>
-          ) : null}
-          <button type="button" aria-label="Recommencer" onClick={reset}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
-            </svg>
-          </button>
-        </div>
+        {timerSeconds ? (
+          <span className={`shrink-0 rounded-full px-2.5 py-1 text-sm font-bold tabular-nums ${
+            timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+          }`}>
+            {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}`}
+          </span>
+        ) : null}
       </div>
       {timeUp && (
         <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/20">
@@ -835,7 +826,7 @@ function WordPronounceGrid({ words, timerSeconds, sampleSize }: { words: string[
       </div>
     </section>
   );
-}
+});
 
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
@@ -857,6 +848,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
   const pronounceRef = useRef<PronunciationChainHandle>(null);
+  const pronounceGridRef = useRef<ResetHandle>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
@@ -872,6 +864,13 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isSoundAudioStep = step.key === "sound-audio";
   const isPronounceStep = step.key === "pronounce";
   const isEvalStep = step.key === "eval";
+  // Steps rendered with the mic/word/audio grids (ComplexSyllableGrid / WordPronounceGrid):
+  // these auto-validate on correct speech, so they only need a refresh action.
+  const isPronounceGridStep =
+    step.key === "complex-syllables-cv" ||
+    isWordEvalStep ||
+    data.type === "multisyllable" ||
+    (data.type === "monosyllable" && data.letterLower === "outils");
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
@@ -879,6 +878,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
     else if (isPronounceStep) pronounceRef.current?.reset();
+    else if (isPronounceGridStep) pronounceGridRef.current?.reset();
   }
   function exerciseValidate() {
     if (isGridStep || isComplexGridStep) gridRef.current?.validate();
@@ -932,7 +932,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       // L8 evaluation: 25 words sampled from the full multisyllable pool, in 5 minutes.
       if (step.key === "word-eval") {
         const pool = data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items);
-        return <WordPronounceGrid key={k} words={pool} timerSeconds={300} sampleSize={25} />;
+        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={25} />;
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
@@ -941,7 +941,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       // step 4 ("review") is also timed: 10 words in 2 minutes.
       if (data.letterLower === "outils" || data.type === "multisyllable") {
         const timed = data.type === "multisyllable" && grid.key === "review";
-        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={data.type === "multisyllable" ? 10 : undefined} />;
+        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={data.type === "multisyllable" ? 10 : undefined} />;
       }
       return <ReadingGridView key={k} grid={grid} />;
     }
@@ -971,7 +971,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "sound-audio":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
         case "complex-syllables-cv":
-          return <ComplexSyllableGrid key={k} target={data.letter} mode="cv" />;
+          return <ComplexSyllableGrid key={k} ref={pronounceGridRef} target={data.letter} mode="cv" />;
         case "pronounce-complex":
           return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
         default:
@@ -1119,7 +1119,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               Retour
             </button>
 
-            {(showExerciseButtons || isPronounceStep) && (
+            {(showExerciseButtons || isPronounceStep || isPronounceGridStep) && (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -1132,7 +1132,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
                     <path d="M3.51 15a9 9 0 1 0 .49-4" />
                   </svg>
                 </button>
-                {!isPronounceStep && (
+                {!isPronounceStep && !isPronounceGridStep && (
                   <button
                     type="button"
                     aria-label="Valider"
