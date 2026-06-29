@@ -666,24 +666,28 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSeconds?: number; sampleSize?: number }>(
-  function WordPronounceGrid({ words, timerSeconds, sampleSize }, ref) {
+const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSeconds?: number; sampleSize?: number; isEval?: boolean }>(
+  function WordPronounceGrid({ words, timerSeconds, sampleSize, isEval }, ref) {
   const unique = useMemo(() => Array.from(new Set(words)), [words]);
   const count = sampleSize ? Math.min(sampleSize, unique.length) : unique.length;
   const [items, setItems] = useState<string[]>(() => shuffle(unique).slice(0, count));
   const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(count).fill("idle"));
   const [heard, setHeard] = useState<string[]>(() => Array(count).fill(""));
   const [timeLeft, setTimeLeft] = useState<number>(timerSeconds ?? 0);
+  // Evaluations show an announcement screen first; the timer only starts on "Commencer".
+  const [started, setStarted] = useState<boolean>(!isEval);
   const recRef = useRef<unknown>(null);
 
   // Countdown timer (timed steps only). Stops at 0; reset restarts it.
   useEffect(() => {
-    if (!timerSeconds || timeLeft <= 0) return;
+    if (!timerSeconds || !started || timeLeft <= 0) return;
     const id = setInterval(() => setTimeLeft((t) => (t <= 1 ? 0 : t - 1)), 1000);
     return () => clearInterval(id);
-  }, [timerSeconds, timeLeft]);
+  }, [timerSeconds, started, timeLeft]);
 
-  const timeUp = !!timerSeconds && timeLeft <= 0;
+  const timeUp = !!timerSeconds && started && timeLeft <= 0;
+  const remaining = states.filter((s) => s !== "correct").length;
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
   function reset() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -696,6 +700,30 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
   }
 
   useImperativeHandle(ref, () => ({ reset }));
+
+  // Announcement screen for evaluations (math-style), shown before starting.
+  if (isEval && !started) {
+    return (
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Évaluation</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Lecture de mots à voix haute.</p>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
+          <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-lecture)]">{fmt(timerSeconds ?? 0)}</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour lire les {count} mots</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">Les mots apparaîtront au démarrage du chronomètre.</p>
+          <button
+            type="button"
+            onClick={() => setStarted(true)}
+            className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+          >
+            Commencer
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   function playWord(word: string) {
     new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
@@ -743,21 +771,36 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
 
   return (
     <section className="space-y-3">
-      <div className="flex items-start justify-between gap-3">
+      {/* Timed steps: timer lives in the progress bar (math eval style). */}
+      {timerSeconds ? (
+        <div className="mb-2">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">
+              {isEval ? "Évaluation" : "Lecture rapide"}
+            </p>
+            <div className="flex items-center gap-3">
+              <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
+                timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+              }`}>
+                {fmt(timeLeft)}
+              </span>
+              <p className="text-xs text-[var(--color-text-secondary)]">{remaining} restant(s)</p>
+            </div>
+          </div>
+          <div className="flex gap-1">
+            {items.map((_, i) => (
+              states[i] === "correct" ? null : (
+                <div key={i} className="h-1.5 flex-1 rounded-full bg-[var(--color-border-default)]" />
+              )
+            ))}
+          </div>
+        </div>
+      ) : (
         <div>
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les mots</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            {timerSeconds ? `Lisez les ${count} mots avant la fin du temps.` : "Prononcez chaque mot à voix haute."}
-          </p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque mot à voix haute.</p>
         </div>
-        {timerSeconds ? (
-          <span className={`shrink-0 rounded-full px-2.5 py-1 text-sm font-bold tabular-nums ${
-            timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-          }`}>
-            {`${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, "0")}`}
-          </span>
-        ) : null}
-      </div>
+      )}
       {timeUp && (
         <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/20">
           Temps écoulé ! Appuyez sur recommencer pour réessayer.
@@ -932,7 +975,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       // L8 evaluation: 25 words sampled from the full multisyllable pool, in 5 minutes.
       if (step.key === "word-eval") {
         const pool = data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items);
-        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={25} />;
+        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={25} isEval />;
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
