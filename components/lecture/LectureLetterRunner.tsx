@@ -40,8 +40,6 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
       { key: "complex-syllables-cv", label: "Syllabes" },
-      { key: "complex-syllables-vc", label: "Syllabes inv." },
-      { key: "complex-syllables-mixed", label: "Syllabes mix." },
       { key: "pronounce-complex", label: "Prononcer" },
     ];
   }
@@ -606,12 +604,12 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
           return (
             <div
               key={`${syl}-${i}`}
-              className={`grid grid-cols-[auto_auto_1fr] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
+              className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border-2 px-3 py-2 transition-colors ${
                 state === "correct"
-                  ? "border-[var(--color-accent-lecture)]"
+                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
-                    ? "border-red-300"
-                    : "border-[var(--color-border-default)]"
+                    ? "border-red-300 bg-[var(--color-bg-primary)]"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
               <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
@@ -645,8 +643,19 @@ function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "v
               <span className="min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
                 {syl}
               </span>
+              <button
+                type="button"
+                onClick={() => speak(syl)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/15 text-[var(--color-text-secondary)] transition-opacity hover:opacity-75 active:scale-95"
+                aria-label={`Écouter ${syl}`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </button>
               {state === "wrong" && heard[i] && (
-                <p className="col-span-3 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+                <p className="col-span-4 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );
@@ -778,10 +787,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
         case "complex-syllables-cv":
           return <ComplexSyllableGrid key={k} target={data.letter} mode="cv" />;
-        case "complex-syllables-vc":
-          return <ComplexSyllableGrid key={k} target={data.letter} mode="vc" />;
-        case "complex-syllables-mixed":
-          return <ComplexSyllableGrid key={k} target={data.letter} mode="mixed" />;
         case "pronounce-complex":
           return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
         default:
