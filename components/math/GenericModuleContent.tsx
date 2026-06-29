@@ -13,6 +13,7 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
+import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
@@ -9433,6 +9434,7 @@ export function GenericModuleContent({
 
   return (
     <div className="pb-40" style={geoStyle}>
+      {isInEvalPhase && <EvalGuardSentinel />}
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">

@@ -17,6 +17,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -2534,6 +2535,7 @@ function GramHintPopup({ hint, onClose }: { hint: string; onClose: () => void })
 
 export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
+  const evalGuard = useEvalNavGuard();
   const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
@@ -2747,6 +2749,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+      {isEvalPhase && <EvalGuardSentinel />}
       {/* Cancel confirmation dialog */}
       {showCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
@@ -2793,6 +2796,12 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
         <div className="flex items-center gap-2">
           <Link
             href={returnUrl}
+            onClick={(e) => {
+              if (evalGuard?.active) {
+                e.preventDefault();
+                evalGuard.requestNavigate(() => router.push(returnUrl));
+              }
+            }}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-80"
             aria-label="Retour au français"
           >

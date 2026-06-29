@@ -24,6 +24,7 @@ import {
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
+import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import {
   LEVEL_PASSING_GRADES,
   linearSwissGrade,
@@ -3074,6 +3075,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
   return (
     <div className="pb-40">
+      {step === "eval" && evalStarted && !evalSubmitted && <EvalGuardSentinel />}
 
       {/* Step progress bar — hidden during eval */}
       {step !== "eval" && (

@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
+import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 
 import { VocabCards } from "./vocab/VocabCards";
 import { ExImageMatch } from "./vocab/ExImageMatch";
@@ -118,6 +119,7 @@ function VocabHintPopup({ hint, onClose }: { hint: string; onClose: () => void }
 
 export function VocabRunner({ theme }: Props) {
   const router = useRouter();
+  const evalGuard = useEvalNavGuard();
   const [steps] = useState<StepDef[]>(() => buildSteps(theme));
   const evalAnnounceIdx = steps.findIndex((s) => s.key === "eval-announce");
   const evalExFirst = evalAnnounceIdx + 1;
@@ -395,6 +397,7 @@ export function VocabRunner({ theme }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+      {isInEvalPhase && <EvalGuardSentinel />}
 
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
@@ -424,6 +427,12 @@ export function VocabRunner({ theme }: Props) {
         <div className="flex items-center gap-2">
           <Link
             href="/francais"
+            onClick={(e) => {
+              if (evalGuard?.active) {
+                e.preventDefault();
+                evalGuard.requestNavigate(() => router.push("/francais"));
+              }
+            }}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-80"
             aria-label="Retour au français"
           >

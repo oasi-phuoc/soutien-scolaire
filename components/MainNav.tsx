@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import { useTranslation } from "@/components/TranslationProvider";
+import { useEvalNavGuard } from "@/components/EvalNavGuard";
 
 type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
 type ActionKind = "back" | "refresh" | "validate" | "next";
@@ -115,6 +116,7 @@ export function MainNav() {
   const router = useRouter();
   const pathname = usePathname() ?? "";
   const { showPivot, togglePivot } = useTranslation();
+  const evalGuard = useEvalNavGuard();
   const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -235,6 +237,13 @@ export function MainNav() {
                     aria-label={item.label}
                     title={item.label}
                     tabIndex={open ? 0 : -1}
+                    onClick={(e) => {
+                      if (evalGuard?.active) {
+                        e.preventDefault();
+                        setOpen(false);
+                        evalGuard.requestNavigate(() => router.push(item.href));
+                      }
+                    }}
                     style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
                   >
                     {icon}

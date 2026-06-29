@@ -2,6 +2,7 @@ import { MainNav } from "@/components/MainNav";
 import { ProgressSyncProvider } from "@/components/ProgressSyncProvider";
 import { SectionBackground } from "@/components/SectionBackground";
 import { TranslationProvider } from "@/components/TranslationProvider";
+import { EvalNavGuardProvider } from "@/components/EvalNavGuard";
 
 export default function MainLayout({
   children,
@@ -10,14 +11,16 @@ export default function MainLayout({
 }) {
   return (
     <TranslationProvider>
-      <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent">
-        <SectionBackground />
-        <ProgressSyncProvider />
-        <div className="relative z-10 flex min-h-screen flex-col">
-          {children}
+      <EvalNavGuardProvider>
+        <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent">
+          <SectionBackground />
+          <ProgressSyncProvider />
+          <div className="relative z-10 flex min-h-screen flex-col">
+            {children}
+          </div>
+          <MainNav />
         </div>
-        <MainNav />
-      </div>
+      </EvalNavGuardProvider>
     </TranslationProvider>
   );
 }

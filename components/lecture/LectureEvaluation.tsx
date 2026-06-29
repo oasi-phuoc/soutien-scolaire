@@ -6,6 +6,7 @@ import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/c
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
 import { speak } from "@/lib/utils/speech";
+import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -897,6 +898,9 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
   const step = evalSteps[stepIdx]!;
   const isResults = step === "results";
   const showValidateBtn = evalStarted && !isResults && !validated[stepIdx];
+
+  // Guard against leaving the evaluation (in progress) via the main nav.
+  useRegisterEvalGuard(evalStarted && !isResults);
 
   // Timer
   useEffect(() => {

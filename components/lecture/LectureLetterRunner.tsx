@@ -20,6 +20,7 @@ import {
 import { LectureEvaluation } from "./LectureEvaluation";
 import { speak } from "@/lib/utils/speech";
 import { getWordAudioPath } from "@/lib/utils/audio";
+import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 
 interface Props {
   data: LetterData;
@@ -689,6 +690,9 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
   const remaining = states.filter((s) => s !== "correct").length;
   const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
+  // While the evaluation is running, guard against leaving via the main nav.
+  useRegisterEvalGuard(!!isEval && started && !timeUp);
+
   function reset() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (recRef.current as any)?.abort?.();
@@ -873,6 +877,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
 
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
+  const evalGuard = useEvalNavGuard();
   const searchParams = useSearchParams();
   const steps = getSteps(data);
   const [stepIdx, setStepIdx] = useState(0);
@@ -939,8 +944,10 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   }
 
   // Quit the lesson entirely and return to the lecture tab it belongs to.
+  // During an evaluation this routes through the guard so the user is warned first.
   function goExit() {
-    router.push("/lecture");
+    if (evalGuard) evalGuard.requestNavigate(() => router.push("/lecture"));
+    else router.push("/lecture");
   }
 
   function goNext() {

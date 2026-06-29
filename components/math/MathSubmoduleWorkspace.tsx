@@ -13,6 +13,7 @@ import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
+import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
@@ -2148,6 +2149,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
 
   return (
     <div className="pb-40">
+      {isInEvalExercises && <EvalGuardSentinel />}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="mx-4 w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
