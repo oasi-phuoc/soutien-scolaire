@@ -44,7 +44,10 @@ function getSteps(data: LetterData): Step[] {
     ];
   }
   if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
-    return data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
+    const gridSteps = data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
+    // L8 ends with a timed word evaluation (25 words in 5 minutes).
+    if (data.type === "multisyllable") gridSteps.push({ key: "word-eval", label: "Évaluation" });
+    return gridSteps;
   }
   if (data.type === "vowel") {
     return [
@@ -857,8 +860,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
   const step = steps[stepIdx]!;
-  const hasEvalStep = steps.some((s) => s.key === "eval");
+  const hasEvalStep = steps.some((s) => s.key === "eval" || s.key === "word-eval");
   const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
+  const isWordEvalStep = step.key === "word-eval";
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
@@ -924,6 +928,12 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
     if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
+      // L8 evaluation: 25 words drawn from every lesson grid, in 5 minutes.
+      if (step.key === "word-eval") {
+        const pool = Array.from(new Set(data.grids.flatMap((g) => g.items)));
+        const words = shuffle(pool).slice(0, 25);
+        return <WordPronounceGrid key={k} words={words} timerSeconds={300} />;
+      }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
@@ -1037,7 +1047,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture · {isEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : data.type === "consonant" ? "Consonne" : "Lecture"}
+          Lecture · {isEvalStep || isWordEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : data.type === "consonant" ? "Consonne" : "Lecture"}
         </p>
         <div className="flex items-center gap-2">
           <button
@@ -1057,7 +1067,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       </header>
 
       {/* Training progress bar — hidden during eval */}
-      {!isEvalStep && (
+      {!isEvalStep && !isWordEvalStep && (
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">Entraînement</p>
