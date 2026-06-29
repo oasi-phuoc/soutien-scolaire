@@ -1639,9 +1639,9 @@ export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
   phoneme: "",
   title: "Mots avec plusieurs syllabes",
   grids: [
-    { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: grid25(["moto", "lune", "table", "robe", "salade", "tomate", "valise", "panda", "radio", "domino"]) },
-    { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: grid25(["ananas", "animal", "carotte", "papillon", "tulipe", "girafe", "banane", "cabane", "orange", "fromage"]) },
-    { key: "four", label: "Exercice 3 - Mots plus longs", items: grid25(["crocodile", "ordinateur", "bibliothèque", "éléphant", "chocolat", "kangourou", "aspirateur", "hôpital", "escalier", "intercalaire"]) },
+    { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: MS_TWO_SYLLABLE_POOL },
+    { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: MS_THREE_SYLLABLE_POOL },
+    { key: "four", label: "Exercice 3 - Mots plus longs", items: MS_FOUR_PLUS_SYLLABLE_POOL },
     { key: "review", label: "Exercice 4 - Lecture rapide", items: MULTISYLLABLE_POOL },
   ],
 };

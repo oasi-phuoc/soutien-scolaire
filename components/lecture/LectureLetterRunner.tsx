@@ -937,10 +937,11 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
       // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
-      // L8 step 4 ("review") is timed: 10 words sampled from the pool in 2 minutes.
+      // L8 steps sample 10 random words from their pool (refresh re-samples);
+      // step 4 ("review") is also timed: 10 words in 2 minutes.
       if (data.letterLower === "outils" || data.type === "multisyllable") {
         const timed = data.type === "multisyllable" && grid.key === "review";
-        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={timed ? 10 : undefined} />;
+        return <WordPronounceGrid key={k} words={grid.items} timerSeconds={timed ? 120 : undefined} sampleSize={data.type === "multisyllable" ? 10 : undefined} />;
       }
       return <ReadingGridView key={k} grid={grid} />;
     }
