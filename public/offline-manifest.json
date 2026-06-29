@@ -1,6 +1,6 @@
 {
-  "version": 1782736844711,
-  "totalBytes": 101366888,
+  "version": 1782737695844,
+  "totalBytes": 77755975,
   "routes": [
     "/",
     "/communication",
@@ -1772,7 +1772,7 @@
     "/vocab/images/V8/urgentiste.webp",
     "/vocab/images/V8/ventre.webp",
     "/vocab/images/V9/abeille.webp",
-    "/vocab/images/V9/aeroport.png",
+    "/vocab/images/V9/aeroport.webp",
     "/vocab/images/V9/aigle.webp",
     "/vocab/images/V9/animal.webp",
     "/vocab/images/V9/arbre.webp",
@@ -1780,9 +1780,9 @@
     "/vocab/images/V9/avion.webp",
     "/vocab/images/V9/baleine.webp",
     "/vocab/images/V9/bateau.webp",
-    "/vocab/images/V9/bibliotheque.png",
-    "/vocab/images/V9/boucher.png",
-    "/vocab/images/V9/boulangerie.png",
+    "/vocab/images/V9/bibliotheque.webp",
+    "/vocab/images/V9/boucher.webp",
+    "/vocab/images/V9/boulangerie.webp",
     "/vocab/images/V9/bus.webp",
     "/vocab/images/V9/camion.webp",
     "/vocab/images/V9/campagne.webp",
@@ -1791,9 +1791,9 @@
     "/vocab/images/V9/cheval.webp",
     "/vocab/images/V9/chien.webp",
     "/vocab/images/V9/cochon.webp",
-    "/vocab/images/V9/coiffeur.png",
+    "/vocab/images/V9/coiffeur.webp",
     "/vocab/images/V9/colline.webp",
-    "/vocab/images/V9/commissariat.png",
+    "/vocab/images/V9/commissariat.webp",
     "/vocab/images/V9/coq.webp",
     "/vocab/images/V9/crocodile.webp",
     "/vocab/images/V9/cygne.webp",
@@ -1816,7 +1816,7 @@
     "/vocab/images/V9/koala.webp",
     "/vocab/images/V9/lac.webp",
     "/vocab/images/V9/lapin.webp",
-    "/vocab/images/V9/librairie.png",
+    "/vocab/images/V9/librairie.webp",
     "/vocab/images/V9/lion.webp",
     "/vocab/images/V9/loup.webp",
     "/vocab/images/V9/marche.webp",
@@ -1824,30 +1824,29 @@
     "/vocab/images/V9/montagne.webp",
     "/vocab/images/V9/moto.webp",
     "/vocab/images/V9/mouton.webp",
-    "/vocab/images/V9/musee.png",
+    "/vocab/images/V9/musee.webp",
     "/vocab/images/V9/navire.webp",
     "/vocab/images/V9/ours.webp",
     "/vocab/images/V9/panda.webp",
-    "/vocab/images/V9/papeterie.png",
+    "/vocab/images/V9/papeterie.webp",
     "/vocab/images/V9/pharmacie.webp",
-    "/vocab/images/V9/piscine.png",
+    "/vocab/images/V9/piscine.webp",
     "/vocab/images/V9/plage.webp",
     "/vocab/images/V9/poisson.webp",
-    "/vocab/images/V9/poste.png",
     "/vocab/images/V9/poste.webp",
     "/vocab/images/V9/poule.webp",
     "/vocab/images/V9/rat.webp",
     "/vocab/images/V9/renard.webp",
     "/vocab/images/V9/requin.webp",
-    "/vocab/images/V9/restaurant.png",
+    "/vocab/images/V9/restaurant.webp",
     "/vocab/images/V9/riviere.webp",
     "/vocab/images/V9/rue.webp",
-    "/vocab/images/V9/salle-de-sport.png",
+    "/vocab/images/V9/salle-de-sport.webp",
     "/vocab/images/V9/sapin.webp",
     "/vocab/images/V9/scooter.webp",
-    "/vocab/images/V9/supermarche.png",
+    "/vocab/images/V9/supermarche.webp",
     "/vocab/images/V9/train.webp",
-    "/vocab/images/V9/tribunal.png",
+    "/vocab/images/V9/tribunal.webp",
     "/vocab/images/V9/usine.webp",
     "/vocab/images/V9/vallee.webp",
     "/vocab/images/V9/volcan.webp",
@@ -8120,9 +8119,9 @@
       "revision": "6227a9f489f50d1d"
     },
     {
-      "url": "/vocab/images/V9/aeroport.png",
-      "size": 1417686,
-      "revision": "4f018f7b927a5a55"
+      "url": "/vocab/images/V9/aeroport.webp",
+      "size": 82334,
+      "revision": "4eaf78a5925092d5"
     },
     {
       "url": "/vocab/images/V9/aigle.webp",
@@ -8160,19 +8159,19 @@
       "revision": "d68ff3da670cb9d3"
     },
     {
-      "url": "/vocab/images/V9/bibliotheque.png",
-      "size": 1996425,
-      "revision": "cbd3d2e01d59a6ef"
+      "url": "/vocab/images/V9/bibliotheque.webp",
+      "size": 192946,
+      "revision": "726131348a0bc4c3"
     },
     {
-      "url": "/vocab/images/V9/boucher.png",
-      "size": 1583728,
-      "revision": "b2a8806864028dec"
+      "url": "/vocab/images/V9/boucher.webp",
+      "size": 120818,
+      "revision": "342c99c57de70f88"
     },
     {
-      "url": "/vocab/images/V9/boulangerie.png",
-      "size": 1753650,
-      "revision": "0d0f3673ee03ebf5"
+      "url": "/vocab/images/V9/boulangerie.webp",
+      "size": 142618,
+      "revision": "9c1e45f59906ae0d"
     },
     {
       "url": "/vocab/images/V9/bus.webp",
@@ -8215,9 +8214,9 @@
       "revision": "d0bfede52d5e41d6"
     },
     {
-      "url": "/vocab/images/V9/coiffeur.png",
-      "size": 1744611,
-      "revision": "f7fb19ba18f17415"
+      "url": "/vocab/images/V9/coiffeur.webp",
+      "size": 107590,
+      "revision": "6406bb30a3dd0de7"
     },
     {
       "url": "/vocab/images/V9/colline.webp",
@@ -8225,9 +8224,9 @@
       "revision": "0382f5c7b9073018"
     },
     {
-      "url": "/vocab/images/V9/commissariat.png",
-      "size": 1666834,
-      "revision": "154472490e64aad3"
+      "url": "/vocab/images/V9/commissariat.webp",
+      "size": 115664,
+      "revision": "25a9f35c4aadf734"
     },
     {
       "url": "/vocab/images/V9/coq.webp",
@@ -8340,9 +8339,9 @@
       "revision": "314dfd89d1239321"
     },
     {
-      "url": "/vocab/images/V9/librairie.png",
-      "size": 1711574,
-      "revision": "9092fe43315cc009"
+      "url": "/vocab/images/V9/librairie.webp",
+      "size": 151922,
+      "revision": "552505f1d29ab1f6"
     },
     {
       "url": "/vocab/images/V9/lion.webp",
@@ -8380,9 +8379,9 @@
       "revision": "2938c6d7f1b11758"
     },
     {
-      "url": "/vocab/images/V9/musee.png",
-      "size": 1748547,
-      "revision": "1fe8cbc430c49ed6"
+      "url": "/vocab/images/V9/musee.webp",
+      "size": 114784,
+      "revision": "c3e99a72421e3c6f"
     },
     {
       "url": "/vocab/images/V9/navire.webp",
@@ -8400,9 +8399,9 @@
       "revision": "d2de4fad16ae0c92"
     },
     {
-      "url": "/vocab/images/V9/papeterie.png",
-      "size": 1592307,
-      "revision": "471340224bf356d4"
+      "url": "/vocab/images/V9/papeterie.webp",
+      "size": 103386,
+      "revision": "44a20cab2e01bdff"
     },
     {
       "url": "/vocab/images/V9/pharmacie.webp",
@@ -8410,9 +8409,9 @@
       "revision": "25aa9cfe5773641f"
     },
     {
-      "url": "/vocab/images/V9/piscine.png",
-      "size": 1532944,
-      "revision": "44a96113cf71842b"
+      "url": "/vocab/images/V9/piscine.webp",
+      "size": 95892,
+      "revision": "92527e6aed094a9c"
     },
     {
       "url": "/vocab/images/V9/plage.webp",
@@ -8425,14 +8424,9 @@
       "revision": "bd3ebd7414b45c7b"
     },
     {
-      "url": "/vocab/images/V9/poste.png",
-      "size": 1486619,
-      "revision": "b301c79fa59901f3"
-    },
-    {
       "url": "/vocab/images/V9/poste.webp",
-      "size": 48886,
-      "revision": "a54493e900b6ef91"
+      "size": 108526,
+      "revision": "ee69dde884bbe8ee"
     },
     {
       "url": "/vocab/images/V9/poule.webp",
@@ -8455,9 +8449,9 @@
       "revision": "a3e598adbb29cf00"
     },
     {
-      "url": "/vocab/images/V9/restaurant.png",
-      "size": 1787337,
-      "revision": "d6d2ab59591cfe50"
+      "url": "/vocab/images/V9/restaurant.webp",
+      "size": 149326,
+      "revision": "1902a55f5fe9e865"
     },
     {
       "url": "/vocab/images/V9/riviere.webp",
@@ -8470,9 +8464,9 @@
       "revision": "b433de456354d684"
     },
     {
-      "url": "/vocab/images/V9/salle-de-sport.png",
-      "size": 1541791,
-      "revision": "bd8fb0eb27177a65"
+      "url": "/vocab/images/V9/salle-de-sport.webp",
+      "size": 115180,
+      "revision": "682bcf448f233dec"
     },
     {
       "url": "/vocab/images/V9/sapin.webp",
@@ -8485,9 +8479,9 @@
       "revision": "b516cc53978c15f1"
     },
     {
-      "url": "/vocab/images/V9/supermarche.png",
-      "size": 2063984,
-      "revision": "bde9b82815871217"
+      "url": "/vocab/images/V9/supermarche.webp",
+      "size": 177546,
+      "revision": "a8e10209379e66f6"
     },
     {
       "url": "/vocab/images/V9/train.webp",
@@ -8495,9 +8489,9 @@
       "revision": "b717e3a082a9a85d"
     },
     {
-      "url": "/vocab/images/V9/tribunal.png",
-      "size": 1842780,
-      "revision": "3722e05b2c9c060e"
+      "url": "/vocab/images/V9/tribunal.webp",
+      "size": 130258,
+      "revision": "b881c43acbe37891"
     },
     {
       "url": "/vocab/images/V9/usine.webp",
