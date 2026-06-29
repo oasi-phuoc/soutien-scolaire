@@ -1,5 +1,24 @@
 "use client";
 
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import type { PivotCode } from "@/lib/pivot-langs";
+
+type Tr = { title: string; timed: string; untimed: string };
+
+// Mother-tongue translations shown as a hint (helps absolute beginners, e.g. A1.1/A1.2).
+const PIVOT: Partial<Record<PivotCode, Tr>> = {
+  en: { title: "Ready for the evaluation?", timed: "You have {m} minutes to complete it.", untimed: "Show your mastery to pass this module." },
+  ar: { title: "هل أنت مستعد للتقييم؟", timed: "لديك {m} دقائق لإكماله.", untimed: "أظهر إتقانك لاجتياز هذه الوحدة." },
+  fa: { title: "آماده‌ای برای ارزیابی؟", timed: "شما {m} دقیقه برای تکمیل آن دارید.", untimed: "تسلط خود را نشان دهید تا این ماژول را بگذرانید." },
+  uk: { title: "Готові до оцінювання?", timed: "У вас є {m} хвилин, щоб завершити.", untimed: "Покажіть свої знання, щоб скласти цей модуль." },
+  pt: { title: "Pronto para a avaliação?", timed: "Tens {m} minutos para a completar.", untimed: "Mostra o teu domínio para validar este módulo." },
+  so: { title: "Diyaar u tahay qiimaynta?", timed: "Waxaad haysataa {m} daqiiqo si aad u dhammaystirto.", untimed: "Muuji aqoontaada si aad u gudubto module-kan." },
+  tr: { title: "Değerlendirmeye hazır mısın?", timed: "Tamamlamak için {m} dakikan var.", untimed: "Bu modülü geçmek için ustalığını göster." },
+  ti: { title: "ንግምገማ ድሉው ኢኻ?", timed: "ንምዝዛም {m} ደቓይቕ ኣለካ።", untimed: "ነዚ ሞዱል ንምሕላፍ ክእለትካ ኣርእይ።" },
+  ps: { title: "د ارزونې لپاره چمتو يې؟", timed: "د بشپړولو لپاره {m} دقیقې لرئ.", untimed: "د دې ماډل د بریالیتوب لپاره خپله مهارت وښایاست." },
+};
+
 /**
  * Shared evaluation announcement screen (math / français / lecture).
  * Mirrors the français design: a pencil in a soft circle, an "Évaluation"
@@ -20,6 +39,12 @@ export function EvalAnnounceScreen({
   minutes?: number;
   onStart: () => void;
 }) {
+  const lang = usePivotLang();
+  const { showPivot } = useTranslation();
+  const tr = PIVOT[lang];
+  const showTr = showPivot && !!tr;
+  const isRtl = lang === "ar" || lang === "fa" || lang === "ps";
+
   return (
     <div className="flex flex-col items-center py-6 text-center">
       <div
@@ -40,7 +65,7 @@ export function EvalAnnounceScreen({
           <strong className="text-[var(--color-text-primary)]">{lessonTitle}</strong>.
         </p>
       )}
-      <p className="mb-8 max-w-xs text-sm text-[var(--color-text-secondary)]">
+      <p className="mb-3 max-w-xs text-sm text-[var(--color-text-secondary)]">
         {minutes != null ? (
           <>
             {exerciseCount != null ? (
@@ -59,6 +84,17 @@ export function EvalAnnounceScreen({
           <>Évaluez votre maîtrise pour valider ce module.</>
         )}
       </p>
+      {showTr && tr && (
+        <div
+          className="mb-5 max-w-xs space-y-0.5 border-l-2 pl-2 text-left text-xs italic text-[var(--color-text-secondary)]"
+          style={{ borderColor: `color-mix(in srgb, ${accent} 40%, transparent)` }}
+          lang={lang}
+          dir={isRtl ? "rtl" : "ltr"}
+        >
+          <p>{tr.title}</p>
+          <p>{minutes != null ? tr.timed.replace("{m}", String(minutes)) : tr.untimed}</p>
+        </div>
+      )}
       <button
         type="button"
         onClick={onStart}

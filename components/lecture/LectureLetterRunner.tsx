@@ -50,6 +50,11 @@ function getSteps(data: LetterData): Step[] {
     const gridSteps = data.grids.map((grid) => ({ key: grid.key, label: grid.label }));
     // L8 ends with a timed word evaluation (25 words in 5 minutes).
     if (data.type === "multisyllable") gridSteps.push({ key: "word-eval", label: "Évaluation" });
+    // L6 (mots-outils / mots courants): add a timed reading step then an evaluation.
+    if (data.type === "monosyllable") {
+      gridSteps.push({ key: "ms-review", label: "Lecture rapide" });
+      gridSteps.push({ key: "word-eval", label: "Évaluation" });
+    }
     return gridSteps;
   }
   if (data.type === "vowel") {
@@ -80,54 +85,6 @@ function getSteps(data: LetterData): Step[] {
     { key: "pronounce", label: "Prononcer" },
     { key: "eval", label: "Évaluation" },
   ];
-}
-
-function ReadingGridView({ grid }: { grid: ReadingGrid }) {
-  const [resetSeed, setResetSeed] = useState(0);
-  const items = useMemo(() => {
-    void resetSeed;
-    return shuffle(grid.items).slice(0, 25);
-  }, [grid.items, resetSeed]);
-
-  function playItem(item: string) {
-    const spoken = item.replaceAll("-", "");
-    new Audio(getWordAudioPath(spoken)).play().catch(() => speak(spoken));
-  }
-
-  return (
-    <section className="space-y-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">{grid.label}</p>
-          <h2 className="mt-1 text-xl font-bold text-[var(--color-text-primary)]">Lisez chaque mot.</h2>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touchez une carte pour écouter le mot.</p>
-        </div>
-        <button
-          type="button"
-          aria-label="Recommencer"
-          onClick={() => setResetSeed((value) => value + 1)}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-white text-[var(--color-text-secondary)] active:scale-95"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M1 4v6h6" />
-            <path d="M3.51 15a9 9 0 1 0 .49-4" />
-          </svg>
-        </button>
-      </div>
-      <div className="grid grid-cols-5 gap-2">
-        {items.map((item, index) => (
-          <button
-            type="button"
-            key={`${item}-${index}-${resetSeed}`}
-            onClick={() => playItem(item)}
-            className="flex aspect-square items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-1 text-center text-lg font-bold text-[var(--color-text-primary)] shadow-sm active:scale-95"
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-    </section>
-  );
 }
 
 type SyllableRecState = "idle" | "listening" | "correct" | "wrong";
@@ -919,7 +876,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const hasEvalStep = steps.some((s) => s.key === "eval" || s.key === "word-eval");
   const trainingSteps = hasEvalStep ? steps.slice(0, -1) : steps;
   const isWordEvalStep = step.key === "word-eval";
-  const isTimedReview = data.type === "multisyllable" && step.key === "review";
+  const isTimedReview = (data.type === "multisyllable" && step.key === "review") || step.key === "ms-review";
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
@@ -934,7 +891,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     step.key === "complex-syllables-cv" ||
     isWordEvalStep ||
     data.type === "multisyllable" ||
-    (data.type === "monosyllable" && data.letterLower === "outils");
+    data.type === "monosyllable";
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
@@ -995,44 +952,59 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   function renderStep() {
     const k = `${step.key}-${resetKey}`;
     if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
-      // L8 evaluation: 25 words sampled from the full multisyllable pool, in 5 minutes.
+      const isMulti = data.type === "multisyllable";
+      // Evaluation step. Multisyllable (L8): 25 words / 5 min from the pool.
+      // Monosyllable (L6): 30 words / 5 min from the combined pool.
       if (step.key === "word-eval") {
-        const pool = data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items);
-        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={25} isEval />;
+        const pool = isMulti
+          ? (data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items))
+          : Array.from(new Set(data.grids.flatMap((g) => g.items)));
+        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={isMulti ? 25 : 30} isEval />;
       }
-      const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
-      if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
-      // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
-      // L8 steps sample 10 random words from their pool (refresh re-samples);
-      // step 4 ("review") is also timed: 10 words in 2 minutes.
-      if (data.letterLower === "outils" || data.type === "multisyllable") {
-        const timed = data.type === "multisyllable" && grid.key === "review";
-        const MS_TITLES: Record<string, string> = {
-          two: "Lecture des mots à 2 syllabes",
-          three: "Lecture des mots à 3 syllabes",
-          four: "Lecture des mots à 4 syllabes et plus",
-          review: "Lecture rapide chronométré",
-        };
-        const title = data.type === "multisyllable" ? MS_TITLES[grid.key] : undefined;
-        const consigne = timed
-          ? "Prononcez chaque mot à voix haute le plus vite possible avant la fin du temps."
-          : data.type === "multisyllable"
-            ? "Prononcez chaque mot à voix haute."
-            : undefined;
+      // Monosyllable timed reading step (L6): 15 words / 2 min from the combined pool.
+      if (step.key === "ms-review") {
+        const pool = Array.from(new Set(data.grids.flatMap((g) => g.items)));
         return (
           <WordPronounceGrid
             key={k}
             ref={pronounceGridRef}
-            words={grid.items}
-            timerSeconds={timed ? 120 : undefined}
-            sampleSize={data.type === "multisyllable" ? 10 : undefined}
-            title={title}
-            consigne={consigne}
-            onTimeChange={timed ? setWordTimerLeft : undefined}
+            words={pool}
+            timerSeconds={120}
+            sampleSize={15}
+            title="Lecture rapide chronométré"
+            consigne="Prononcez chaque mot à voix haute le plus vite possible avant la fin du temps."
+            onTimeChange={setWordTimerLeft}
           />
         );
       }
-      return <ReadingGridView key={k} grid={grid} />;
+      const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
+      // L6 (monosyllable) and L8 (multisyllable) word steps use the mic/word/audio rows.
+      // L8 grids sample 10 random words; the "review" grid is also timed (2 min).
+      // L6 grids show each unique word once (refresh re-shuffles the order).
+      const timed = isMulti && grid.key === "review";
+      const MS_TITLES: Record<string, string> = {
+        two: "Lecture des mots à 2 syllabes",
+        three: "Lecture des mots à 3 syllabes",
+        four: "Lecture des mots à 4 syllabes et plus",
+        review: "Lecture rapide chronométré",
+      };
+      const title = isMulti ? MS_TITLES[grid.key] : grid.label;
+      const consigne = timed
+        ? "Prononcez chaque mot à voix haute le plus vite possible avant la fin du temps."
+        : "Prononcez chaque mot à voix haute.";
+      return (
+        <WordPronounceGrid
+          key={k}
+          ref={pronounceGridRef}
+          words={grid.items}
+          timerSeconds={timed ? 120 : undefined}
+          sampleSize={isMulti ? 10 : undefined}
+          title={title}
+          consigne={consigne}
+          onTimeChange={timed ? setWordTimerLeft : undefined}
+        />
+      );
     }
     if (data.type === "complex-sound") {
       switch (step.key) {
