@@ -39,6 +39,9 @@ function getSteps(data: LetterData): Step[] {
       { key: "complex-word-lower", label: "Mots (min)" },
       { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
+      { key: "complex-syllables-cv", label: "Syllabes" },
+      { key: "complex-syllables-vc", label: "Syllabes inv." },
+      { key: "complex-syllables-mixed", label: "Syllabes mix." },
       { key: "pronounce-complex", label: "Prononcer" },
     ];
   }
@@ -333,6 +336,21 @@ function makeComplexGrid(targets: string[], isUppercase: boolean) {
   return cells.map((cell) => (isUppercase ? cell.toUpperCase() : cell.toLowerCase()));
 }
 
+const SYLLABLE_CONSONANTS = ["b", "d", "f", "l", "m", "n", "p", "r", "s", "t", "v"];
+
+function makeComplexSyllables(targets: string[], mode: "cv" | "vc" | "mixed"): string[] {
+  const cons = shuffle([...SYLLABLE_CONSONANTS]);
+  const result: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const c1 = cons[i % cons.length]!;
+    const c2 = cons[(i + 4) % cons.length]!;
+    const g = targets[i % targets.length]!;
+    const syl = mode === "cv" ? `${c1}${g}` : mode === "vc" ? `${g}${c1}` : `${c1}${g}${c2}`;
+    result.push(Math.random() > 0.5 ? syl.toUpperCase() : syl.toLowerCase());
+  }
+  return shuffle(result);
+}
+
 const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
   target: string;
   isUppercase: boolean;
@@ -432,11 +450,14 @@ function splitComplexWord(word: string, targets: string[]) {
 const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
   function ComplexWordSpotter({ words, target, isUppercase }, ref) {
   const targets = complexTargets(target);
-  const displayedWords = words.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const VISIBLE = Math.min(8, words.length);
+  const [selectedWords, setSelectedWords] = useState(() => shuffle(words).slice(0, VISIBLE));
+  const displayedWords = selectedWords.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
 
   function reset() {
+    setSelectedWords(shuffle(words).slice(0, VISIBLE));
     setStates({});
     setValidated(false);
   }
@@ -508,6 +529,132 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; targ
   );
   },
 );
+
+function ComplexSyllableGrid({ target, mode }: { target: string; mode: "cv" | "vc" | "mixed" }) {
+  const targets = complexTargets(target);
+  const [syllables, setSyllables] = useState(() => makeComplexSyllables(targets, mode));
+  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(6).fill("idle"));
+  const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
+  const recRef = useRef<unknown>(null);
+
+  function reset() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    recRef.current = null;
+    setSyllables(makeComplexSyllables(complexTargets(target), mode));
+    setStates(Array(6).fill("idle"));
+    setHeard(Array(6).fill(""));
+  }
+
+  function startListening(index: number) {
+    if (typeof window === "undefined") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rec: any = new SR();
+    rec.lang = "fr-CH";
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    rec.onstart = () => {
+      setStates((prev) => prev.map((s, i) => (i === index ? "listening" : s)));
+      setHeard((prev) => prev.map((v, i) => (i === index ? "" : v)));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (event: any) => {
+      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
+      let matched = false;
+      for (let alt = 0; alt < event.results[0].length; alt++) {
+        const transcript = event.results[0][alt].transcript.trim();
+        const norm = normalizeGraph(transcript).replace(/\s+/gu, "");
+        const want = normalizeGraph(syllables[index]!).replace(/\s+/gu, "");
+        if (norm === want || norm.includes(want)) {
+          best = transcript;
+          matched = true;
+          break;
+        }
+      }
+      setHeard((prev) => prev.map((v, i) => (i === index ? best : v)));
+      setStates((prev) => prev.map((s, i) => (i === index ? (matched ? "correct" : "wrong") : s)));
+    };
+    rec.onerror = () => setStates((prev) => prev.map((s, i) => (i === index ? "idle" : s)));
+    rec.onend = () => setStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
+    recRef.current = rec;
+    rec.start();
+  }
+
+  return (
+    <section className="space-y-3">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque syllabe à voix haute.</p>
+        </div>
+        <button type="button" aria-label="Recommencer" onClick={reset}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] active:scale-95">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+          </svg>
+        </button>
+      </div>
+      <div className="space-y-2">
+        {syllables.map((syl, i) => {
+          const state = states[i]!;
+          return (
+            <div
+              key={`${syl}-${i}`}
+              className={`grid grid-cols-[auto_auto_1fr] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
+                state === "correct"
+                  ? "border-[var(--color-accent-lecture)]"
+                  : state === "wrong"
+                    ? "border-red-300"
+                    : "border-[var(--color-border-default)]"
+              }`}
+            >
+              <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
+              <button
+                type="button"
+                onClick={() => startListening(i)}
+                disabled={state === "listening"}
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 ${
+                  state === "listening"
+                    ? "animate-pulse bg-red-500"
+                    : state === "correct"
+                      ? "bg-[var(--color-accent-lecture)]"
+                      : state === "wrong"
+                        ? "bg-red-400"
+                        : "bg-[var(--color-accent-lecture)]"
+                }`}
+                aria-label="Parler"
+              >
+                {state === "correct" ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                ) : state === "wrong" ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <rect x="9" y="2" width="6" height="12" rx="3" />
+                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                )}
+              </button>
+              <span className="min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
+                {syl}
+              </span>
+              {state === "wrong" && heard[i] && (
+                <p className="col-span-3 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
@@ -607,8 +754,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               key={k}
               phoneme={data.phoneme}
               letter={data.letter}
-              letterLower={data.letter.toLowerCase()}
+              letterLower=""
               exampleWord={data.exampleWord}
+              exampleImagePath={data.exampleImagePath}
             />
           );
         case "complex-grid-upper":
@@ -623,6 +771,12 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
         case "sound-audio":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
+        case "complex-syllables-cv":
+          return <ComplexSyllableGrid key={k} target={data.letter} mode="cv" />;
+        case "complex-syllables-vc":
+          return <ComplexSyllableGrid key={k} target={data.letter} mode="vc" />;
+        case "complex-syllables-mixed":
+          return <ComplexSyllableGrid key={k} target={data.letter} mode="mixed" />;
         case "pronounce-complex":
           return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
         default:

@@ -68,6 +68,7 @@ export type ComplexSoundLessonData = {
   phoneme: string;
   title: string;
   exampleWord: string;
+  exampleImagePath?: string;
   upperGrid: string[];
   lowerGrid: string[];
   upperWords: string[];
@@ -1436,6 +1437,10 @@ function grid25(items: string[]): string[] {
   return out;
 }
 
+function uniqueGrid(items: string[]): string[] {
+  return Array.from(new Set(items));
+}
+
 function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonData {
   const upperV = vowel.toUpperCase();
   const upperConsonants = SIMPLE_CONSONANTS.map((c) => c.toUpperCase());
@@ -1472,11 +1477,10 @@ export const TOOL_WORDS_LESSON: MonosyllableLessonData = {
   phoneme: "",
   title: "Mots-outils",
   grids: [
-    { key: "articles", label: "Exercice 1 - Articles et déterminants", items: grid25(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
-    { key: "possessifs-1", label: "Exercice 2 - Possessifs 1", items: grid25(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses"]) },
-    { key: "possessifs-2", label: "Exercice 3 - Possessifs 2", items: grid25(["notre", "nos", "votre", "vos", "leur", "leurs"]) },
-    { key: "pronoms-sujets", label: "Exercice 4 - Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
-    { key: "pronoms-complements", label: "Exercice 5 - Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
+    { key: "articles", label: "Exercice 1 - Articles et déterminants", items: uniqueGrid(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
+    { key: "possessifs", label: "Exercice 2 - Possessifs", items: uniqueGrid(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "notre", "nos", "votre", "vos", "leur", "leurs"]) },
+    { key: "pronoms-sujets", label: "Exercice 3 - Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
+    { key: "pronoms-complements", label: "Exercice 4 - Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
   ],
 };
 
@@ -1505,22 +1509,25 @@ function complexSoundLesson(
   title: string,
   phoneme: string,
   rows: [string, string[]][],
+  exampleImageWord?: string,
 ): ComplexSoundLessonData {
   const baseWords = rows.flatMap(([, items]) => items);
   const upper = title.split(" / ")[0]!.replace("/", "");
   const lower = upper.toLowerCase();
   const distractors = ["la", "ri", "ma", "to", "be", "su", "fe", "po", "di", "ve"];
+  const imgWord = exampleImageWord;
   return {
     type: "complex-sound",
     letter: title,
     letterLower: id,
     phoneme,
     title,
-    exampleWord: baseWords[0] ?? title.toLowerCase(),
+    exampleWord: imgWord ?? (baseWords[0] ?? title.toLowerCase()),
+    exampleImagePath: imgWord ? `/assets/words/img/${imgWord}.webp` : undefined,
     upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
     lowerGrid: grid25([lower, ...distractors]),
-    upperWords: baseWords.slice(0, 5).map((word) => word.toUpperCase()),
-    lowerWords: baseWords.slice(5, 10).map((word) => word.toLowerCase()),
+    upperWords: baseWords.map((word) => word.toUpperCase()),
+    lowerWords: baseWords.map((word) => word.toLowerCase()),
     pronunciationChain: baseWords.slice(0, 8).map((word) => ({
       phoneme: title,
       syllable: word,
@@ -1539,42 +1546,42 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
     ["Lis les mots avec ou", ["roue", "loup", "jour", "four", "cour", "souris", "bouton", "mouton", "poule", "route"]],
     ["Retrouve le son ou", ["sou", "fou", "tout", "nous", "vous", "doux", "cou", "trou", "clou", "rouge"]],
     ["Lecture melangee", ["bonjour", "toujours", "courir", "ouvrir", "soupe", "gouter", "journée", "pousser", "douze", "mouche"]],
-  ]),
+  ], "loup"),
   complexSoundLesson("an-en", "AN / EN", "/ɑ̃/", [
     ["Lis an et en", ["sans", "dans", "grand", "blanc", "vent", "temps", "enfant", "maman", "ruban", "avant"]],
     ["Avec m devant b ou p", ["jambe", "lampe", "champ", "camp", "tambour", "tempête", "emporter", "remplir", "ensemble", "emballer"]],
     ["Lecture melangee", ["manger", "orange", "dimanche", "chanson", "lent", "cent", "dent", "pendant", "vendre", "planche"]],
-  ]),
+  ], "maman"),
   complexSoundLesson("in-ain", "IN / AIN", "/ɛ̃/", [
     ["Lis in et ain", ["main", "pain", "bain", "train", "lapin", "matin", "jardin", "cousin", "chemin", "vin"]],
     ["Avec m devant b ou p", ["timbre", "simple", "impoli", "impossible", "important", "grimpe", "sympa", "imprimer", "limpide", "imbiber"]],
     ["Lecture melangee", ["demain", "soudain", "plein", "frein", "peint", "ceinture", "vingt", "fin", "linge", "inviter"]],
-  ]),
+  ], "lapin"),
   complexSoundLesson("on", "ON", "/ɔ̃/", [
     ["Lis le son on", ["pont", "rond", "son", "bon", "mon", "ton", "don", "lion", "melon", "ballon"]],
     ["Avec m devant b ou p", ["tomber", "ombre", "pompe", "compter", "complet", "nombre", "combat", "comprendre", "trompette", "plomb"]],
     ["Lecture melangee", ["maison", "poisson", "garçon", "cochon", "mouton", "long", "front", "ronde", "réponse", "monde"]],
-  ]),
+  ], "ballon"),
   complexSoundLesson("au-eau", "AU / EAU", "/o/", [
     ["Lis au", ["jaune", "chaud", "autre", "aussi", "saut", "haut", "pause", "cause", "gauche", "faute"]],
     ["Lis eau", ["eau", "bateau", "chapeau", "gâteau", "oiseau", "manteau", "cadeau", "rideau", "bureau", "tableau"]],
     ["Lecture melangee", ["beau", "nouveau", "chaussure", "pauvre", "seau", "morceau", "autobus", "anneau", "niveau", "taupe"]],
-  ]),
+  ], "bateau"),
   complexSoundLesson("oi", "OI", "/wa/", [
     ["Lis le son oi", ["roi", "toi", "moi", "fois", "bois", "noix", "voix", "doigt", "poire", "soir"]],
     ["Lecture de mots", ["oiseau", "voiture", "boite", "poisson", "histoire", "étoile", "voisin", "couloir", "miroir", "avoir"]],
     ["Lecture melangee", ["trois", "froid", "choix", "loi", "moitié", "ardoise", "boisson", "soirée", "voir", "croire"]],
-  ]),
+  ], "oiseau"),
   complexSoundLesson("ch", "CH", "/ʃ/", [
     ["Lis ch", ["chat", "chien", "chou", "cheval", "chambre", "chaise", "chemise", "chapeau", "bouche", "mouche"]],
     ["Lecture de mots", ["chercher", "chanter", "marcher", "acheter", "dimanche", "branche", "rocher", "cacher", "toucher", "fiche"]],
     ["Lecture melangee", ["chaud", "chiffre", "machine", "chocolat", "richesse", "chute", "chemin", "chance", "chariot", "château"]],
-  ]),
+  ], "chat"),
   complexSoundLesson("ph", "PH", "/f/", [
     ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "graphique", "physique"]],
     ["Lecture de mots", ["photographe", "orthographe", "géographie", "phénomène", "philosophie", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
     ["Lecture melangee", ["photo", "phare", "dauphin", "éléphant", "téléphone", "phrase", "alphabet", "pharmacie", "graphique", "sphère"]],
-  ]),
+  ], "dauphin"),
 ];
 
 export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
