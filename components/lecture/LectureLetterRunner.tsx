@@ -899,8 +899,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     if (data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable") {
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
       if (data.type === "syllable") return <SyllableReadingGridView key={k} grid={grid} />;
-      // L6.1 tool words use the mic/word/audio pronunciation rows.
-      if (data.letterLower === "outils") return <WordPronounceGrid key={k} words={grid.items} />;
+      // L6.1 tool words and L8 multisyllable words use the mic/word/audio rows.
+      if (data.letterLower === "outils" || data.type === "multisyllable") return <WordPronounceGrid key={k} words={grid.items} />;
       return <ReadingGridView key={k} grid={grid} />;
     }
     if (data.type === "complex-sound") {

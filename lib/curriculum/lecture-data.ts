@@ -1594,8 +1594,7 @@ export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
     { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: grid25(["moto", "lune", "table", "robe", "salade", "tomate", "valise", "panda", "radio", "domino"]) },
     { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: grid25(["ananas", "animal", "carotte", "papillon", "tulipe", "girafe", "banane", "cabane", "orange", "fromage"]) },
     { key: "four", label: "Exercice 3 - Mots plus longs", items: grid25(["crocodile", "ordinateur", "bibliothèque", "éléphant", "chocolat", "kangourou", "aspirateur", "hôpital", "escalier", "intercalaire"]) },
-    { key: "cut", label: "Exercice 4 - Lis en decoupant les syllabes", items: grid25(["pa-pi-llon", "ca-ro-tte", "do-mi-no", "a-na-nas", "sa-la-de", "or-di-na-teur", "bi-blio-the-que", "e-le-phant"]) },
-    { key: "review", label: "Exercice 5 - Lecture rapide", items: grid25(["animal", "domino", "papillon", "tomate", "crocodile", "valise", "fromage", "banane", "escalier", "kangourou"]) },
+    { key: "review", label: "Exercice 4 - Lecture rapide", items: grid25(["animal", "domino", "papillon", "tomate", "crocodile", "valise", "fromage", "banane", "escalier", "kangourou"]) },
   ],
 };
 
