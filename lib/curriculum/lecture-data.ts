@@ -1477,10 +1477,10 @@ export const TOOL_WORDS_LESSON: MonosyllableLessonData = {
   phoneme: "",
   title: "Mots-outils",
   grids: [
-    { key: "articles", label: "Exercice 1 - Articles et déterminants", items: uniqueGrid(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
-    { key: "possessifs", label: "Exercice 2 - Possessifs", items: uniqueGrid(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "notre", "nos", "votre", "vos", "leur", "leurs"]) },
-    { key: "pronoms-sujets", label: "Exercice 3 - Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
-    { key: "pronoms-complements", label: "Exercice 4 - Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
+    { key: "articles", label: "Articles et déterminants", items: uniqueGrid(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
+    { key: "possessifs", label: "Possessifs", items: uniqueGrid(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "notre", "nos", "votre", "vos", "leur", "leurs"]) },
+    { key: "pronoms-sujets", label: "Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
+    { key: "pronoms-complements", label: "Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
   ],
 };
 
@@ -1491,16 +1491,16 @@ export const MONOSYLLABLE_LESSON: MonosyllableLessonData = {
   phoneme: "",
   title: "Mots courants",
   grids: [
-    { key: "existants-1", label: "Exercice 1 - Mots déjà appris", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis", "chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse", "nez", "dos", "main", "pain", "jour"]) },
-    { key: "existants-2", label: "Exercice 2 - Lecture rapide", items: grid25(["nuit", "fleur", "train", "bois", "roi", "chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond", "sac", "mur", "bol"]) },
-    { key: "personnes", label: "Exercice 3 - Personnes et famille", items: grid25(["homme", "femme", "fille", "gars", "père", "mère", "frère", "sœur", "fils"]) },
-    { key: "lieux-transports", label: "Exercice 4 - Lieux et transports", items: grid25(["rue", "ville", "bus", "train", "taxi", "tram", "gare", "poste", "parc", "bar", "classe", "salle", "hall", "pont", "coin"]) },
-    { key: "maison", label: "Exercice 5 - Maison et objets", items: grid25(["clé", "lit", "sac", "table", "chaise", "porte", "mur", "sol", "verre", "bol", "plat", "four", "lampe", "douche", "bain", "savon", "livre"]) },
-    { key: "aliments", label: "Exercice 6 - Aliments", items: grid25(["pain", "riz", "lait", "eau", "thé", "jus", "sel", "soupe", "œuf", "fruit", "pomme", "poire", "noix", "miel"]) },
-    { key: "corps", label: "Exercice 7 - Corps", items: grid25(["cour", "tête", "main", "bras", "pied", "dos", "nez", "œil", "yeux", "dent", "bouche", "cou", "peau", "sang"]) },
-    { key: "vetements-couleurs", label: "Exercice 8 - Vêtements et couleurs", items: grid25(["pull", "jean", "robe", "jupe", "short", "gant", "botte", "bleu", "blanc", "noir", "vert", "gris", "brun", "rouge", "jaune", "rose"]) },
-    { key: "temps-nature", label: "Exercice 9 - Temps et nature", items: grid25(["jour", "nuit", "soir", "mois", "an", "heure", "temps", "date", "fin", "fois", "air", "eau", "feu", "terre", "ciel", "mer", "lac", "vent", "pluie", "neige", "fleur", "bois"]) },
-    { key: "qualites", label: "Exercice 10 - Adjectifs", items: grid25(["bon", "beau", "grand", "petit", "gros", "chaud", "froid", "neuf", "vieux", "jeune", "propre", "sale", "plein", "vide", "fort", "doux", "dur", "lourd"]) },
+    { key: "existants-1", label: "Mots déjà appris", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis", "chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse", "nez", "dos", "main", "pain", "jour"]) },
+    { key: "existants-2", label: "Lecture rapide", items: grid25(["nuit", "fleur", "train", "bois", "roi", "chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond", "sac", "mur", "bol"]) },
+    { key: "personnes", label: "Personnes et famille", items: grid25(["homme", "femme", "fille", "gars", "père", "mère", "frère", "sœur", "fils"]) },
+    { key: "lieux-transports", label: "Lieux et transports", items: grid25(["rue", "ville", "bus", "train", "taxi", "tram", "gare", "poste", "parc", "bar", "classe", "salle", "hall", "pont", "coin"]) },
+    { key: "maison", label: "Maison et objets", items: grid25(["clé", "lit", "sac", "table", "chaise", "porte", "mur", "sol", "verre", "bol", "plat", "four", "lampe", "douche", "bain", "savon", "livre"]) },
+    { key: "aliments", label: "Aliments", items: grid25(["pain", "riz", "lait", "eau", "thé", "jus", "sel", "soupe", "œuf", "fruit", "pomme", "poire", "noix", "miel"]) },
+    { key: "corps", label: "Corps", items: grid25(["cour", "tête", "main", "bras", "pied", "dos", "nez", "œil", "yeux", "dent", "bouche", "cou", "peau", "sang"]) },
+    { key: "vetements-couleurs", label: "Vêtements et couleurs", items: grid25(["pull", "jean", "robe", "jupe", "short", "gant", "botte", "bleu", "blanc", "noir", "vert", "gris", "brun", "rouge", "jaune", "rose"]) },
+    { key: "temps-nature", label: "Temps et nature", items: grid25(["jour", "nuit", "soir", "mois", "an", "heure", "temps", "date", "fin", "fois", "air", "eau", "feu", "terre", "ciel", "mer", "lac", "vent", "pluie", "neige", "fleur", "bois"]) },
+    { key: "qualites", label: "Adjectifs", items: grid25(["bon", "beau", "grand", "petit", "gros", "chaud", "froid", "neuf", "vieux", "jeune", "propre", "sale", "plein", "vide", "fort", "doux", "dur", "lourd"]) },
   ],
 };
 
