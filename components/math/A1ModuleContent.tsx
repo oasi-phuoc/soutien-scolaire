@@ -25,6 +25,7 @@ import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
+import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import {
   LEVEL_PASSING_GRADES,
   linearSwissGrade,
@@ -1026,44 +1027,6 @@ const READ_NUMBERS_HEADING_PIVOT: Partial<Record<PivotCode, string>> = {
   so: "Sida loo akhriyo tirooyinka",
   tr: "Sayilar nasil okunur",
   uk: "\u042f\u043a \u0447\u0438\u0442\u0430\u0442\u0438 \u0447\u0438\u0441\u043b\u0430",
-};
-
-const EVAL_INTRO_PIVOT: Record<"label" | "mastery" | "timed" | "appear" | "start", Partial<Record<PivotCode, string>>> = {
-  label: {
-    en: "Evaluation",
-    pt: "Avalia\u00e7\u00e3o",
-    so: "Qiimeyn",
-    tr: "Degerlendirme",
-    uk: "\u041e\u0446\u0456\u043d\u044e\u0432\u0430\u043d\u043d\u044f",
-  },
-  mastery: {
-    en: "Assess your mastery of this module.",
-    pt: "Avalia o teu dominio deste modulo.",
-    so: "Qiimee sida aad u taqaan module-kan.",
-    tr: "Bu moduldeki duzeyini degerlendir.",
-    uk: "\u041e\u0446\u0456\u043d\u0438 \u0441\u0432\u043e\u0454 \u043e\u043f\u0430\u043d\u0443\u0432\u0430\u043d\u043d\u044f \u0446\u044c\u043e\u0433\u043e \u043c\u043e\u0434\u0443\u043b\u044f.",
-  },
-  timed: {
-    en: "The evaluation is timed. You have 5 minutes to complete it.",
-    pt: "A avalia\u00e7\u00e3o tem tempo limitado. Tens 5 minutos para a completar.",
-    so: "Qiimeyntu waqti ayay leedahay. Waxaad haysataa 5 daqiiqo si aad u dhamaystirto.",
-    tr: "Degerlendirme surelidir. Tamamlamak icin 5 dakikan var.",
-    uk: "\u041e\u0446\u0456\u043d\u044e\u0432\u0430\u043d\u043d\u044f \u043e\u0431\u043c\u0435\u0436\u0435\u043d\u0435 \u0447\u0430\u0441\u043e\u043c. \u0423 \u0442\u0435\u0431\u0435 \u0454 5 \u0445\u0432\u0438\u043b\u0438\u043d, \u0449\u043e\u0431 \u0439\u043e\u0433\u043e \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0438.",
-  },
-  appear: {
-    en: "The exercises will appear when the timer starts.",
-    pt: "Os exercicios aparecerao quando o cronometro comecar.",
-    so: "Layliyadu waxay soo muuqan doonaan marka waqtigu bilaabmo.",
-    tr: "Sure basladiginda alistirmalar gorunecek.",
-    uk: "\u0412\u043f\u0440\u0430\u0432\u0438 \u0437\u2019\u044f\u0432\u043b\u044f\u0442\u044c\u0441\u044f \u043f\u0456\u0441\u043b\u044f \u0437\u0430\u043f\u0443\u0441\u043a\u0443 \u0442\u0430\u0439\u043c\u0435\u0440\u0430.",
-  },
-  start: {
-    en: "Start",
-    pt: "Comecar",
-    so: "Bilow",
-    tr: "Basla",
-    uk: "\u041f\u043e\u0447\u0430\u0442\u0438",
-  },
 };
 
 const A11_EVAL_CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3", Partial<Record<PivotCode, string>>> = {
@@ -2796,10 +2759,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const readNumbersHeadingText = showPivotTranslation && READ_NUMBERS_HEADING_PIVOT[pivot]
     ? READ_NUMBERS_HEADING_PIVOT[pivot]!
     : "Comment lire les nombres";
-  const evalIntroText = (key: keyof typeof EVAL_INTRO_PIVOT, fallback: string) =>
-    showPivotTranslation && EVAL_INTRO_PIVOT[key][pivot]
-      ? EVAL_INTRO_PIVOT[key][pivot]!
-      : fallback;
   const a11EvalConsigne = (key: keyof typeof A11_EVAL_CONSIGNE_PIVOT, fallback: string) =>
     showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT[key][pivot]
       ? A11_EVAL_CONSIGNE_PIVOT[key][pivot]!
@@ -4226,30 +4185,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
             {/* ── Écran de démarrage (avant Commencer) ── */}
             {!evalStarted && !evalSubmitted && (
-              <div className="flex flex-col items-center gap-8 py-8 text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
-                    <path d="M9 11l3 3L22 4" />
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                  </svg>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.label[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.label[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("label", "\u00c9valuation")}</p>
-                  <h2 className="text-xl font-bold text-[var(--color-text-primary)]" lang={hasPivotTheoryTitle ? pivot : undefined} dir={hasPivotTheoryTitle && isRtl ? "rtl" : "ltr"}>{theoryTitleText}</h2>
-                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.mastery[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.mastery[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("mastery", "\u00c9value ta ma\u00eetrise de ce module.")}</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.timed[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.timed[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("timed", "L\u2019\u00e9valuation est chronom\u00e9tr\u00e9e. Tu as 5 minutes pour compl\u00e9ter l\u2019\u00e9valuation.")}</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.appear[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.appear[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("appear", "Les exercices appara\u00eetront au d\u00e9marrage du chronom\u00e8tre.")}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPagesValidated(Array(evalTotalPages).fill(false)); setEvalTimeLeft(5 * 60); }}
-                  className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-                >{evalIntroText("start", "Commencer")}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </button>
-              </div>
+              <EvalAnnounceScreen
+                accent="var(--color-accent-alg)"
+                lessonTitle={theoryTitleText}
+                onStart={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPagesValidated(Array(evalTotalPages).fill(false)); setEvalTimeLeft(5 * 60); }}
+              />
             )}
 
             {/* ── Question page A1.2 ── */}

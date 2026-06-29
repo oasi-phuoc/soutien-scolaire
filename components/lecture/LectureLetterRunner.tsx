@@ -21,6 +21,7 @@ import { LectureEvaluation } from "./LectureEvaluation";
 import { speak } from "@/lib/utils/speech";
 import { getWordAudioPath } from "@/lib/utils/audio";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
+import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
 interface Props {
   data: LetterData;
@@ -705,27 +706,14 @@ const WordPronounceGrid = forwardRef<ResetHandle, { words: string[]; timerSecond
 
   useImperativeHandle(ref, () => ({ reset }));
 
-  // Announcement screen for evaluations (math-style), shown before starting.
+  // Announcement screen for evaluations (shared design), shown before starting.
   if (isEval && !started) {
     return (
-      <section className="space-y-3">
-        <div>
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Évaluation</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Lecture de mots à voix haute.</p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
-          <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-lecture)]">{fmt(timerSeconds ?? 0)}</p>
-          <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour lire les {count} mots</p>
-          <p className="text-xs text-[var(--color-text-secondary)]">Les mots apparaîtront au démarrage du chronomètre.</p>
-          <button
-            type="button"
-            onClick={() => setStarted(true)}
-            className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-          >
-            Commencer
-          </button>
-        </div>
-      </section>
+      <EvalAnnounceScreen
+        accent="var(--color-accent-lecture)"
+        minutes={Math.round((timerSeconds ?? 0) / 60)}
+        onStart={() => setStarted(true)}
+      />
     );
   }
 

@@ -14,6 +14,7 @@ import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
+import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
@@ -2764,33 +2765,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
 
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
-        <div className="flex flex-col gap-8 py-8">
-          <div className="flex flex-col items-center gap-8 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
-              <path d="M9 11l3 3L22 4" />
-              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-            </svg>
-          </div>
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{revisionTitle ?? lesson?.theory.title.fr}</h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {isRevisionLesson ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
-          </div>
-          <button
-            type="button"
-            onClick={startEval}
-            className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-          >
-            Commencer
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-          </div>
-        </div>
+        <EvalAnnounceScreen
+          accent="var(--color-accent-alg)"
+          lessonTitle={revisionTitle ?? lesson?.theory.title.fr}
+          minutes={isRevisionLesson ? 30 : 5}
+          onStart={startEval}
+        />
       )}
 
       {/* Pass toggle (A2/A3/other modules) */}

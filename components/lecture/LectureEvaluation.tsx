@@ -7,6 +7,7 @@ import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/sco
 import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
 import { speak } from "@/lib/utils/speech";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
+import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -1017,18 +1018,11 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
       <div className="min-h-[280px]">
         {/* Start screen */}
         {!evalStarted && !isResults && (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
-            <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-lecture)]">5:00</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
-            <button
-              type="button"
-              onClick={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
-              className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-            >
-              Commencer
-            </button>
-          </div>
+          <EvalAnnounceScreen
+            accent="var(--color-accent-lecture)"
+            minutes={5}
+            onStart={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
+          />
         )}
 
         {/* Exercises (shown only when started) */}
