@@ -21,7 +21,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "نه واده شوی او رسمي ملګری نه لري.",
         uk: "Неодружений/незаміжня і без офіційного партнера.",
       },
-      synonym: [],
+      synonym: ["seul", "non marié"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -99,7 +99,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "هغه کس چې په عاطفي اړیکه کې وي.",
         uk: "Людина, яка має романтичні стосунки.",
       },
-      synonym: [],
+      synonym: ["avec quelqu’un", "amoureux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -177,7 +177,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "هغه کس چې له واده پرته له ملګري سره ژوند کوي.",
         uk: "Людина, яка живе з партнером без шлюбу.",
       },
-      synonym: [],
+      synonym: ["vie commune", "union libre"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -256,7 +256,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "د واده لپاره کوژدن شوی.",
         uk: "Заручений/заручена для шлюбу.",
       },
-      synonym: [],
+      synonym: ["promis", "futur marié"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -337,7 +337,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "د واده له لارې قانوني تړاو لري.",
         uk: "Юридично поєднаний/поєднана шлюбом.",
       },
-      synonym: [],
+      synonym: ["uni", "époux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -418,7 +418,7 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
         ps: "د مدني شراکت له لارې تړلی.",
         uk: "Поєднаний/поєднана цивільним партнерством.",
       },
-      synonym: [],
+      synonym: ["partenaire officiel"],
       exampleSentences: {
         a1: [],
         a2: [

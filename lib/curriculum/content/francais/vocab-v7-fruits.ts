@@ -275,7 +275,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
         ps: "هغه مېوه چې خلک يې خوري.",
         uk: "Фрукт, який їдять люди.",
       },
-      synonym: [],
+      synonym: ["orangé"],
       exampleSentences: {
         a1: [],
         a2: [

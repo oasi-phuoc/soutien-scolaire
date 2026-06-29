@@ -611,7 +611,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["gobelet"],
       exampleSentences: {
         a1: [],
         a2: [

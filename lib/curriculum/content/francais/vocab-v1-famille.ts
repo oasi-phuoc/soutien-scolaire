@@ -23,7 +23,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "نارینه مور او پلار.",
         uk: "Чоловік-батько.",
       },
-      synonym: [],
+      synonym: ["papa", "parent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "ښځینه مور او پلار.",
         uk: "Жінка-мати.",
       },
-      synonym: [],
+      synonym: ["maman", "parent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "په کورنۍ کې زوی.",
         uk: "Син у сім’ї.",
       },
-      synonym: [],
+      synonym: ["enfant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "په کورنۍ کې لور.",
         uk: "Донька у сім’ї.",
       },
-      synonym: [],
+      synonym: ["enfant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "هلک يا سړی چې هماغه مور او پلار لري.",
         uk: "Хлопець або чоловік з тими самими батьками.",
       },
-      synonym: [],
+      synonym: ["demi-frère"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "نجلۍ يا ښځه چې هماغه مور او پلار لري.",
         uk: "Дівчина або жінка з тими самими батьками.",
       },
-      synonym: [],
+      synonym: ["demi-sœur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "د پلار يا مور پلار.",
         uk: "Батько тата або мами.",
       },
-      synonym: [],
+      synonym: ["papi", "grand-parent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "د پلار يا مور مور.",
         uk: "Мати тата або мами.",
       },
-      synonym: [],
+      synonym: ["mamie", "grand-parent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "ستاسو د اولاد زوی.",
         uk: "Син вашої дитини.",
       },
-      synonym: [],
+      synonym: ["petit-enfant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "ستاسو د اولاد لور.",
         uk: "Донька вашої дитини.",
       },
-      synonym: [],
+      synonym: ["petit-enfant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "د پلار يا مور ورور.",
         uk: "Брат тата або мами.",
       },
-      synonym: [],
+      synonym: ["tonton"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
         ps: "د پلار يا مور خور.",
         uk: "Сестра тата або мами.",
       },
-      synonym: [],
+      synonym: ["tata"],
       exampleSentences: {
         a1: [],
         a2: [

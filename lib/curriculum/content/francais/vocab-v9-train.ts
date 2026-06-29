@@ -23,7 +23,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["station ferroviaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["plateforme"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["comptoir"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["ticket"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["sortie"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["venue"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["voiture de train"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["agent de contrôle"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["siège"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["mouvement social"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["délai"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["changement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["ligne", "rail"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["planning", "programme"],
       exampleSentences: {
         a1: [],
         a2: [

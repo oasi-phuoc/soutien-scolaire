@@ -21,7 +21,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["préparer", "faire à manger"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -103,7 +103,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["trancher"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -185,7 +185,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["remuer", "mixer"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -513,7 +513,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["griller"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -595,7 +595,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["assaisonner"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -677,7 +677,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["déguster"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -759,7 +759,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["rincer"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -841,7 +841,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["peler"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -923,7 +923,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["mettre", "transvaser"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1005,7 +1005,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
         ps: "هغه کار چې د خوړو د تيارولو لپاره کېږي.",
         uk: "Дія для приготування їжі.",
       },
-      synonym: [],
+      synonym: ["chauffer"],
       exampleSentences: {
         a1: [],
         a2: [

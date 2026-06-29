@@ -24,7 +24,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "لوړ يا په اندازه کې لوی.",
         uk: "Високий або великий за розміром.",
       },
-      synonym: [],
+      synonym: ["haut"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -108,7 +108,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "لنډ يا په اندازه کې کوچنی.",
         uk: "Низький або малий за розміром.",
       },
-      synonym: [],
+      synonym: ["bas"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "نری، چاغ نه وي.",
         uk: "Худий, не товстий.",
       },
-      synonym: [],
+      synonym: ["fin", "maigre"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "په بدن کې لوی يا دروند.",
         uk: "Великий або важкий тілом.",
       },
-      synonym: [],
+      synonym: ["corpulent", "fort"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "چې کتل ورته خوندور وي.",
         uk: "Приємний на вигляд.",
       },
-      synonym: [],
+      synonym: ["joli", "attirant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "چې کتل ورته خوندور نه وي.",
         uk: "Неприємний на вигляд.",
       },
-      synonym: [],
+      synonym: ["moche", "vilain"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -526,7 +526,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "زوړ نه وي؛ کم عمره.",
         uk: "Не старий; молодого віку.",
       },
-      synonym: [],
+      synonym: ["adolescent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -610,7 +610,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "زوړ يا د لوړ عمر.",
         uk: "Старший або похилого віку.",
       },
-      synonym: [],
+      synonym: ["vieux", "senior"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -694,7 +694,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "ډېر ځواک لرونکی.",
         uk: "З великою силою.",
       },
-      synonym: [],
+      synonym: ["puissant", "musclé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -777,7 +777,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "کمزور، لږ ځواک لرونکی.",
         uk: "З малою силою.",
       },
-      synonym: [],
+      synonym: ["fragile"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -945,7 +945,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "ښه اغوستی او ښکلی.",
         uk: "Гарно одягнений і вишуканий.",
       },
-      synonym: [],
+      synonym: ["chic", "raffiné"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1029,7 +1029,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "اوږد نه وي.",
         uk: "Не довгий.",
       },
-      synonym: [],
+      synonym: ["bref"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1113,7 +1113,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "اوږد.",
         uk: "Довгий.",
       },
-      synonym: [],
+      synonym: ["allongé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1197,7 +1197,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "تاو تاو ويښتان لري.",
         uk: "З кучерями.",
       },
-      synonym: [],
+      synonym: ["ondulé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1281,7 +1281,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "ډېر تاو تاو.",
         uk: "Дуже кучерявий.",
       },
-      synonym: [],
+      synonym: ["crépu"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1616,7 +1616,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ps: "سور يا نارنجي ويښتان لري.",
         uk: "З рудим або помаранчевим волоссям.",
       },
-      synonym: [],
+      synonym: ["rouquin"],
       exampleSentences: {
         a1: [],
         a2: [

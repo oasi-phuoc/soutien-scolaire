@@ -24,7 +24,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
         ps: "د ۲۴ ساعتونو موده.",
         uk: "Період у 24 години.",
       },
-      synonym: [],
+      synonym: ["journée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -109,7 +109,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
         ps: "د کال له ۱۲ برخو څخه يوه.",
         uk: "Одна з 12 частин року.",
       },
-      synonym: [],
+      synonym: ["période"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -279,7 +279,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
         ps: "د ۱۲ مياشتو موده.",
         uk: "Період у 12 місяців.",
       },
-      synonym: [],
+      synonym: ["an"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -777,7 +777,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
         ps: "د اونۍ شپږمه ورځ.",
         uk: "Шостий день тижня.",
       },
-      synonym: [],
+      synonym: ["week-end"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -860,7 +860,7 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
         ps: "د اونۍ اوومه ورځ.",
         uk: "Сьомий день тижня.",
       },
-      synonym: [],
+      synonym: ["week-end"],
       exampleSentences: {
         a1: [],
         a2: [

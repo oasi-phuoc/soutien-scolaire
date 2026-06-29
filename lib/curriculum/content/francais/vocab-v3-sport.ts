@@ -275,7 +275,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "په اوبو کې د لامبو ورزش.",
         uk: "Спорт плавання у воді.",
       },
-      synonym: [],
+      synonym: ["nage"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["cyclisme", "bicyclette"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "د پښو په مټ د سرعت سيالي.",
         uk: "Змагання зі швидкості бігом.",
       },
-      synonym: [],
+      synonym: ["footing", "jogging"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "د ارامۍ، ساه اخيستلو او غځولو تمرين.",
         uk: "Практика для розслаблення, дихання і розтягування.",
       },
-      synonym: [],
+      synonym: ["relaxation", "méditation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "په طبیعت کې اوږد مزل.",
         uk: "Довга прогулянка на природі.",
       },
-      synonym: [],
+      synonym: ["marche", "promenade"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "جاپاني رزمي هنر.",
         uk: "Японське бойове мистецтво.",
       },
-      synonym: [],
+      synonym: ["art martial"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V3_SPORT_THEME: VocabTheme = {
         ps: "د چټکتيا، توازن او انعطاف ورزش.",
         uk: "Спорт на спритність, рівновагу і гнучкість.",
       },
-      synonym: [],
+      synonym: ["gym"],
       exampleSentences: {
         a1: [],
         a2: [

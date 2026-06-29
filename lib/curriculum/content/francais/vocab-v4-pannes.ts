@@ -24,7 +24,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "کله چې آله کار بند کړي.",
         uk: "Коли пристрій перестає працювати.",
       },
-      synonym: [],
+      synonym: ["problème", "dérangement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -193,7 +193,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "انرژي چې آلې پرې چلېږي.",
         uk: "Енергія для роботи приладів.",
       },
-      synonym: [],
+      synonym: ["courant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -277,7 +277,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "برېښنايي ګروپ.",
         uk: "Електрична лампочка.",
       },
-      synonym: [],
+      synonym: ["lampe"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -361,7 +361,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "سويچ چې څراغ پرې بل يا ګل کېږي.",
         uk: "Вимикач для світла.",
       },
-      synonym: [],
+      synonym: ["bouton"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -531,7 +531,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "له نل څخه د اوبو وتل.",
         uk: "Витік води з труби.",
       },
-      synonym: [],
+      synonym: ["écoulement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -616,7 +616,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه کس چې د اوبو نلونه نصب يا ترميموي.",
         uk: "Людина, яка встановлює або ремонтує водопровід.",
       },
-      synonym: [],
+      synonym: ["installateur sanitaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -700,7 +700,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه وسيله چې اوبه پرې خلاصې يا بندېږي.",
         uk: "Пристрій для відкривання або закривання води.",
       },
-      synonym: [],
+      synonym: ["vanne"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -952,7 +952,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "د اوبو يا ګاز نل.",
         uk: "Труба для води або газу.",
       },
-      synonym: [],
+      synonym: ["conduite"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1038,7 +1038,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "سيستم چې کور ګرموي.",
         uk: "Система, що обігріває житло.",
       },
-      synonym: [],
+      synonym: ["radiateur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1123,7 +1123,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه کس چې خرابې آلې ترميموي.",
         uk: "Людина, яка ремонтує зламані пристрої.",
       },
-      synonym: [],
+      synonym: ["technicien"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1207,7 +1207,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه آله چې په کوټه کې تودوخه خپروي.",
         uk: "Прилад, що віддає тепло в кімнаті.",
       },
-      synonym: [],
+      synonym: ["chauffage"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1291,7 +1291,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه آله چې تودوخه تنظيموي.",
         uk: "Пристрій для регулювання температури.",
       },
-      synonym: [],
+      synonym: ["régulateur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1377,7 +1377,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "هغه ميکانيزم چې دروازه پرې قفل کېږي.",
         uk: "Механізм для замикання дверей.",
       },
-      synonym: [],
+      synonym: ["verrou"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1546,7 +1546,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["entrée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1630,7 +1630,7 @@ export const V4_PANNES_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["clef", "badge", "accès"],
       exampleSentences: {
         a1: [],
         a2: [

@@ -23,7 +23,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["docteur", "généraliste", "spécialiste"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["soignant", "aide-soignant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["apothicaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -689,7 +689,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["physio"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -772,7 +772,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["espace d'attente"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -855,7 +855,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["visite médicale"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -938,7 +938,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["prescription"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1021,7 +1021,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["rencontre"],
       exampleSentences: {
         a1: [],
         a2: [

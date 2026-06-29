@@ -275,7 +275,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
         ps: "فارم چې ځمکه او کور لري.",
         uk: "Ферма із землею та житлом.",
       },
-      synonym: [],
+      synonym: ["exploitation agricole"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
         ps: "ودانۍ چې څو پوړونه او کورونه لري.",
         uk: "Будівля з кількома поверхами та житлами.",
       },
-      synonym: [],
+      synonym: ["bâtiment", "bloc"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
         ps: "کوچنی ساده لرګين سرپناه.",
         uk: "Маленьке просте дерев’яне укриття.",
       },
-      synonym: [],
+      synonym: ["abri", "maisonnette"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
         ps: "هغه ځای چې څوک پکې ژوند کوي.",
         uk: "Місце, де хтось живе.",
       },
-      synonym: [],
+      synonym: ["habitation", "domicile"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
         ps: "لويه کوټه چې څو کټونه لري.",
         uk: "Велика кімната з кількома ліжками.",
       },
-      synonym: [],
+      synonym: ["chambre collective"],
       exampleSentences: {
         a1: [],
         a2: [

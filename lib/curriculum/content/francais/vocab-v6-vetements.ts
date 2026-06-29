@@ -191,7 +191,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "تود پورته کالی له وړۍ يا غټې پنبې.",
         uk: "Теплий светр з вовни або товстої бавовни.",
       },
-      synonym: [],
+      synonym: ["sweater"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "کالی چې دواړه پښې پټوي.",
         uk: "Одяг, що покриває обидві ноги.",
       },
-      synonym: [],
+      synonym: ["jean"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "لنډ کالی له لستوڼو سره، مخکې خلاص.",
         uk: "Короткий одяг з рукавами, відкритий спереду.",
       },
-      synonym: [],
+      synonym: ["blouson", "jaquette"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "لنډ پتلون د سپورت يا دوبي لپاره.",
         uk: "Шорти для спорту або літа.",
       },
-      synonym: [],
+      synonym: ["bermuda"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "يو شان کالي چې يوه ډله يې اغوندي.",
         uk: "Однаковий одяг для групи.",
       },
-      synonym: [],
+      synonym: ["tenue officielle"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1370,7 +1370,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "د بدن ښکته برخې زيرجامه.",
         uk: "Нижня білизна.",
       },
-      synonym: [],
+      synonym: ["slip"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1455,7 +1455,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
         ps: "بې لستوڼي کالی.",
         uk: "Майка без рукавів.",
       },
-      synonym: [],
+      synonym: ["top"],
       exampleSentences: {
         a1: [],
         a2: [

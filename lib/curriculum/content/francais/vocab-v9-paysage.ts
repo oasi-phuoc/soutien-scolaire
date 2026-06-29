@@ -23,7 +23,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["sommet", "massif"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["océan"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["le bord de mer"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["la zone rurale"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["les bois"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["cours d’eau"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["plan d’eau"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["zone aride"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["îlot"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["environnement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["décor", "panorama"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
         ps: "طبيعي ځای يا د منظرې برخه.",
         uk: "Природне місце або елемент ландшафту.",
       },
-      synonym: [],
+      synonym: ["littoral"],
       exampleSentences: {
         a1: [],
         a2: [

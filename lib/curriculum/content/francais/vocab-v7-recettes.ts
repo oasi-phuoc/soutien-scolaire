@@ -534,7 +534,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.",
         uk: "Інгредієнт для рецепта.",
       },
-      synonym: [],
+      synonym: ["condiment"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -704,7 +704,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.",
         uk: "Інгредієнт для рецепта.",
       },
-      synonym: [],
+      synonym: ["assaisonnement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -874,7 +874,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.",
         uk: "Інгредієнт для рецепта.",
       },
-      synonym: [],
+      synonym: ["piment doux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -959,7 +959,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه خوراکي مواد چې په پخلي کې کارېږي.",
         uk: "Інгредієнт для рецепта.",
       },
-      synonym: [],
+      synonym: ["aromate"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1044,7 +1044,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه اله چې په پخلنځي کې کارېږي.",
         uk: "Інструмент для кухні.",
       },
-      synonym: [],
+      synonym: ["outil"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1129,7 +1129,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
         ps: "هغه اله چې په پخلنځي کې کارېږي.",
         uk: "Інструмент для кухні.",
       },
-      synonym: [],
+      synonym: ["marmite"],
       exampleSentences: {
         a1: [],
         a2: [

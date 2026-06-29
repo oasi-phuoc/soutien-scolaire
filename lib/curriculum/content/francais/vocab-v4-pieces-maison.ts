@@ -107,7 +107,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "اصلي کوټه د ارام لپاره.",
         uk: "Головна кімната для відпочинку.",
       },
-      synonym: [],
+      synonym: ["séjour"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["pièce", "logement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "هغه خونه چې د مینځلو او حمام لپاره کارېږي.",
         uk: "Кімната для миття і купання.",
       },
-      synonym: [],
+      synonym: ["salle d’eau"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "کوټه چې تشناب لري.",
         uk: "Кімната з туалетом.",
       },
-      synonym: [],
+      synonym: ["WC"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د کوټو ترمنځ لار.",
         uk: "Прохід між кімнатами.",
       },
-      synonym: [],
+      synonym: ["corridor"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د کور ترڅنګ هوار بهرنی ځای.",
         uk: "Плаский зовнішній простір біля дому.",
       },
-      synonym: [],
+      synonym: ["balcon", "espace extérieur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "زېرزميني کوټه د ساتلو لپاره.",
         uk: "Підземна кімната для зберігання.",
       },
-      synonym: [],
+      synonym: ["sous-sol", "réserve"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د چت لاندې د ساتلو ځای.",
         uk: "Простір під дахом для зберігання.",
       },
-      synonym: [],
+      synonym: ["combles"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د کور شاوخوا شين بهرنی ځای.",
         uk: "Зелений простір навколо дому.",
       },
-      synonym: [],
+      synonym: ["terrain", "espace vert"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د ځمکني پوړ لاندې کچه.",
         uk: "Рівень нижче першого поверху.",
       },
-      synonym: [],
+      synonym: ["cave"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["hall", "accès"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1283,7 +1283,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
         ps: "ځای چې موټر پکې درول کېږي.",
         uk: "Місце для паркування автомобіля.",
       },
-      synonym: [],
+      synonym: ["box"],
       exampleSentences: {
         a1: [],
         a2: [

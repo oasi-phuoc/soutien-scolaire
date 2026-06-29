@@ -23,7 +23,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["accueil"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["clef", "badge", "accès"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["pièce", "logement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["chambre pour deux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["chambre individuelle"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["bassin"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["nuitée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["niveau"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["lift"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["stationnement"],
       exampleSentences: {
         a1: [],
         a2: [

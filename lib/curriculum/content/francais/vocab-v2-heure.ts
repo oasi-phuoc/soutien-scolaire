@@ -23,7 +23,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "د وخت واحد چې ۶۰ دقیقې وي.",
         uk: "Одиниця часу, що дорівнює 60 хвилинам.",
       },
-      synonym: [],
+      synonym: ["temps", "moment"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "د وخت ډېر لنډ واحد.",
         uk: "Дуже коротка одиниця часу.",
       },
-      synonym: [],
+      synonym: ["instant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "د ورځې پیل.",
         uk: "Початок дня.",
       },
-      synonym: [],
+      synonym: ["matinée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "دولس بجې، د ورځې منځ.",
         uk: "Дванадцята година, середина дня.",
       },
-      synonym: [],
+      synonym: ["douze heures"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "د شپې مخکې د ورځې پای.",
         uk: "Кінець дня перед ніччю.",
       },
-      synonym: [],
+      synonym: ["soirée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: "ساعت چې وخت ښيي.",
         uk: "Годинник, який показує час.",
       },
-      synonym: [],
+      synonym: ["pendule", "montre"],
       exampleSentences: {
         a1: [],
         a2: [

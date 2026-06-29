@@ -191,7 +191,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["paquet", "emballage"],
       exampleSentences: {
         a1: [],
         a2: [

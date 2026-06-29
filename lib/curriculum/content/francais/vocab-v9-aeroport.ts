@@ -23,7 +23,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["document d’identité"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["autorisation d’entrée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["trajet aérien"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["arrivée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["aéronef"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["arrêt", "correspondance"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["bagage"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["check-in"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["montée à bord"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["entrée"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["valise", "affaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ps: "د الوتکې د سفر کلمه.",
         uk: "Слово для авіаподорожі.",
       },
-      synonym: [],
+      synonym: ["billet d'avion"],
       exampleSentences: {
         a1: [],
         a2: [

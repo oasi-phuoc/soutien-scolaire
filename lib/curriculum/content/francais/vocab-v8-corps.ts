@@ -23,7 +23,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["visage", "crâne"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -188,7 +188,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["paume"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -437,7 +437,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["patte"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -603,7 +603,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["abdomen"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -852,7 +852,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["nuque"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -935,7 +935,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["narine"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1018,7 +1018,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["lèvres"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1101,7 +1101,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["regard"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1184,7 +1184,7 @@ export const V8_CORPS_THEME: VocabTheme = {
         ps: "د انسان د بدن يوه برخه.",
         uk: "Частина людського тіла.",
       },
-      synonym: [],
+      synonym: ["ouïe"],
       exampleSentences: {
         a1: [],
         a2: [

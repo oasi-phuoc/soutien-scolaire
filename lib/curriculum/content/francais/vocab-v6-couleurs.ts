@@ -21,7 +21,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د وينې او توت زميني رنګ.",
         uk: "Колір крові й полуниці.",
       },
-      synonym: [],
+      synonym: ["écarlate"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -104,7 +104,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د اسمان او سمندر رنګ.",
         uk: "Колір неба й моря.",
       },
-      synonym: [],
+      synonym: ["azur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -187,7 +187,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د واښو او ونو رنګ.",
         uk: "Колір трави й дерев.",
       },
-      synonym: [],
+      synonym: ["verdâtre"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -269,7 +269,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د لمر او ليمو رنګ.",
         uk: "Колір сонця й лимона.",
       },
-      synonym: [],
+      synonym: ["doré"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -352,7 +352,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د شپې رنګ.",
         uk: "Колір ночі.",
       },
-      synonym: [],
+      synonym: ["sombre"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -435,7 +435,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د واورې رنګ.",
         uk: "Колір снігу.",
       },
-      synonym: [],
+      synonym: ["clair"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -518,7 +518,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د تور او سپين ترمنځ رنګ.",
         uk: "Колір між чорним і білим.",
       },
-      synonym: [],
+      synonym: ["argenté"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -600,7 +600,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د سور او سپين ترمنځ رنګ.",
         uk: "Колір між червоним і білим.",
       },
-      synonym: [],
+      synonym: ["rosé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -682,7 +682,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "هغه مېوه چې خلک يې خوري.",
         uk: "Фрукт, який їдять люди.",
       },
-      synonym: [],
+      synonym: ["orangé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -765,7 +765,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د آبي او سور ترمنځ رنګ.",
         uk: "Колір між синім і червоним.",
       },
-      synonym: [],
+      synonym: ["mauve"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -847,7 +847,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
         ps: "د چاکلېټ په شان تياره نسواري.",
         uk: "Темно-коричневий колір, як шоколад.",
       },
-      synonym: [],
+      synonym: ["brun"],
       exampleSentences: {
         a1: [],
         a2: [

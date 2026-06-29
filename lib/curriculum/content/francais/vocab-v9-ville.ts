@@ -24,7 +24,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["cité"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -108,7 +108,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["secteur", "zone"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -193,7 +193,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["centre", "cœur de la ville"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -278,7 +278,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["route"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -363,7 +363,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["boulevard"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -448,7 +448,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["siège"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -532,7 +532,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["hôtel de ville"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -617,7 +617,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "د اورګاډي د سفر کلمه.",
         uk: "Слово для подорожі потягом.",
       },
-      synonym: [],
+      synonym: ["station ferroviaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -701,7 +701,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["jardin public"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -811,7 +811,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "é é? é éé éé é éé?.",
         uk: "éé?, ééé? é? ééé? ? éé?.",
       },
-      synonym: [],
+      synonym: ["médiathèque"],
       exampleSentences: {
         a1: [],
         a2: [],
@@ -861,7 +861,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "é é? é éé éé é éé?.",
         uk: "éé?, ééé? é? ééé? ? éé?.",
       },
-      synonym: [],
+      synonym: ["galerie"],
       exampleSentences: {
         a1: [],
         a2: [],
@@ -886,7 +886,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "é é? é éé éé é éé?.",
         uk: "éé?, ééé? é? ééé? ? éé?.",
       },
-      synonym: [],
+      synonym: ["bassin"],
       exampleSentences: {
         a1: [],
         a2: [],
@@ -985,7 +985,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["boutique", "commerce"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1389,7 +1389,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["foire", "stand"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1474,7 +1474,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["clinique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1558,7 +1558,7 @@ export const V9_VILLE_THEME: VocabTheme = {
         ps: "په ښار کې ځای يا خدمت.",
         uk: "Місце або послуга в місті.",
       },
-      synonym: [],
+      synonym: ["lieu de culte"],
       exampleSentences: {
         a1: [],
         a2: [

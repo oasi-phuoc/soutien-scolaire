@@ -23,7 +23,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "هغه ستوری چې رڼا او تودوخه ورکوي.",
         uk: "Зоря, що дає світло і тепло.",
       },
-      synonym: [],
+      synonym: ["lumière"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "روښانه جسم چې د شپې په اسمان کې ښکاري.",
         uk: "Яскравий об’єкт, видимий у нічному небі.",
       },
-      synonym: [],
+      synonym: ["astre"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "اوبه چې له اسمانه راځي.",
         uk: "Вода, що падає з неба.",
       },
-      synonym: [],
+      synonym: ["averse", "précipitation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "د هوا حرکت.",
         uk: "Рух повітря.",
       },
-      synonym: [],
+      synonym: ["souffle", "courant d’air"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "کنګل شوې اوبه چې سپينې دانې راولوېږي.",
         uk: "Замерзла вода, що падає білими пластівцями.",
       },
-      synonym: [],
+      synonym: ["flocon"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "طوفان د تندر او برېښنا سره.",
         uk: "Буря з громом і блискавкою.",
       },
-      synonym: [],
+      synonym: ["tempête"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "ټيټ وريځ چې ليد کموي.",
         uk: "Низька хмара, що погіршує видимість.",
       },
-      synonym: [],
+      synonym: ["brume"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "د صفر درجې څخه ښکته تودوخه.",
         uk: "Температура нижче нуля.",
       },
-      synonym: [],
+      synonym: ["glace", "froid"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "د يخ کوچنۍ دانې چې له اسمانه راځي.",
         uk: "Маленькі кульки льоду, що падають з неба.",
       },
-      synonym: [],
+      synonym: ["grêlons"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "زموږ د سرونو پورته فضا.",
         uk: "Простір над нашими головами.",
       },
-      synonym: [],
+      synonym: ["firmament"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1197,7 +1197,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "لوند يا له اوبو ډک.",
         uk: "Вологий або повний води.",
       },
-      synonym: [],
+      synonym: ["mouillé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1280,7 +1280,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "بې رطوبته يا بې اوبو.",
         uk: "Без вологи або води.",
       },
-      synonym: [],
+      synonym: ["aride", "desséché"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1363,7 +1363,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "ملايم، نه ډېر ګرم او نه ډېر يخ.",
         uk: "Приємний, не надто теплий і не надто холодний.",
       },
-      synonym: [],
+      synonym: ["agréable", "tempéré"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1446,7 +1446,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "په لوړه تودوخه کې.",
         uk: "З високою температурою.",
       },
-      synonym: [],
+      synonym: ["brûlant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1529,7 +1529,7 @@ export const V2_METEO_THEME: VocabTheme = {
         ps: "په ټيټه تودوخه کې.",
         uk: "З низькою температурою.",
       },
-      synonym: [],
+      synonym: ["glacial"],
       exampleSentences: {
         a1: [],
         a2: [

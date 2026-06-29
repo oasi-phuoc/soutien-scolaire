@@ -191,7 +191,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["galerie"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["spectacle de musique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["expo", "présentation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["représentation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -528,7 +528,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["vocaliste"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -613,7 +613,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["comédien"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -951,7 +951,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["ticket"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1035,7 +1035,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["pièce", "local"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1119,7 +1119,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["plateau"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1203,7 +1203,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["fête", "événement"],
       exampleSentences: {
         a1: [],
         a2: [

@@ -23,7 +23,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["refroidissement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -106,7 +106,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["infection"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -189,7 +189,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["température"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -272,7 +272,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["mal", "souffrance"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -355,7 +355,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["irritation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -521,7 +521,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["entaille", "plaie"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -604,7 +604,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["blessure"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -687,7 +687,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["plaie", "lésion"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -853,7 +853,7 @@ export const V8_MALADIES_THEME: VocabTheme = {
         ps: "روغتيايي ستونزه يا نښه.",
         uk: "Проблема зі здоров’ям або симптом.",
       },
-      synonym: [],
+      synonym: ["malaise"],
       exampleSentences: {
         a1: [],
         a2: [

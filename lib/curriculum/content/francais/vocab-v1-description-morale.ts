@@ -23,7 +23,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "له نورو سره مهربان او ښه.",
         uk: "Добрий і приємний до інших.",
       },
-      synonym: [],
+      synonym: ["aimable", "sympathique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -106,7 +106,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "له نورو سره بد يا ځوروونکی.",
         uk: "Злий або образливий до інших.",
       },
-      synonym: [],
+      synonym: ["mauvais", "cruel"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -189,7 +189,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "درناوی کوونکی او با ادبه.",
         uk: "Ввічливий і вихований.",
       },
-      synonym: [],
+      synonym: ["respectueux", "bien élevé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -272,7 +272,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "بې ادبه يا بې احترامي کوونکی.",
         uk: "Неввічливий або нешанобливий.",
       },
-      synonym: [],
+      synonym: ["malpoli", "irrespectueux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -355,7 +355,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "هغه څوک چې ډېر او جدي کار کوي.",
         uk: "Той, хто багато і старанно працює.",
       },
-      synonym: [],
+      synonym: ["sérieux", "appliqué"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -438,7 +438,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "هغه څوک چې کار نه خوښوي.",
         uk: "Той, хто не любить працювати.",
       },
-      synonym: [],
+      synonym: ["fainéant", "nonchalant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -520,7 +520,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "ارام او نه ناکراره.",
         uk: "Спокійний і не схвильований.",
       },
-      synonym: [],
+      synonym: ["tranquille", "posé"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -603,7 +603,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "ناارامه، ستړی يا عصبي.",
         uk: "Знервований, напружений або схвильований.",
       },
-      synonym: [],
+      synonym: ["stressé", "tendu"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -685,7 +685,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "هغه څوک چې له خلکو سره اوسېدل خوښوي.",
         uk: "Той, хто любить бути з іншими людьми.",
       },
-      synonym: [],
+      synonym: ["ouvert", "communicatif"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -767,7 +767,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "له خلکو سره ډېر ځان ډاډه نه وي.",
         uk: "Не дуже впевнений серед інших людей.",
       },
-      synonym: [],
+      synonym: ["réservé", "discret"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -850,7 +850,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "په ارامۍ سره انتظار کولی شي.",
         uk: "Здатний спокійно чекати.",
       },
-      synonym: [],
+      synonym: ["calme", "tolérant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -933,7 +933,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "په ارامۍ سره انتظار نه شي کولی.",
         uk: "Не здатний спокійно чекати.",
       },
-      synonym: [],
+      synonym: ["pressé", "nerveux"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1016,7 +1016,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "خوشحاله او له خوښۍ ډک.",
         uk: "Щасливий і радісний.",
       },
-      synonym: [],
+      synonym: ["heureux", "gai"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1098,7 +1098,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
         ps: "خفه يا غمجن.",
         uk: "Сумний або нещасний.",
       },
-      synonym: [],
+      synonym: ["malheureux", "mélancolique"],
       exampleSentences: {
         a1: [],
         a2: [

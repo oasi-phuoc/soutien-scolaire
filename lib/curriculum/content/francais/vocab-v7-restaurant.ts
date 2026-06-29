@@ -276,7 +276,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["siège"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -444,7 +444,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["ustensile"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -780,7 +780,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["gobelet"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -864,7 +864,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["linge de table"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -948,7 +948,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["repas"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1032,7 +1032,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["pâtisserie", "douceur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1116,7 +1116,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["carte"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1200,7 +1200,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["facture"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1284,7 +1284,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["breuvage"],
       exampleSentences: {
         a1: [],
         a2: [

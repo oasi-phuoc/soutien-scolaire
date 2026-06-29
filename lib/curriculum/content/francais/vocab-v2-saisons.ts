@@ -527,7 +527,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
         ps: "د هوا وړاندوينه يا د هوا حالت.",
         uk: "Прогноз погоди або погодні умови.",
       },
-      synonym: [],
+      synonym: ["temps"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
         ps: "د تودوخې يا يخنۍ اندازه.",
         uk: "Міра тепла або холоду.",
       },
-      synonym: [],
+      synonym: ["degré"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -693,7 +693,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
         ps: "لا زیات تودېدل.",
         uk: "Ставати теплішим.",
       },
-      synonym: [],
+      synonym: ["chauffer", "augmenter"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -775,7 +775,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
         ps: "لا زیات یخېدل.",
         uk: "Ставати прохолоднішим.",
       },
-      synonym: [],
+      synonym: ["refroidir"],
       exampleSentences: {
         a1: [],
         a2: [

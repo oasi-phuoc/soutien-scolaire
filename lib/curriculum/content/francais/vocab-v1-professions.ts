@@ -26,7 +26,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې په ښوونځي يا پوهنتون کې زده کړه کوي.",
         uk: "Людина, яка навчається у школі або університеті.",
       },
-      synonym: [],
+      synonym: ["élève", "apprenant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -112,7 +112,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې درس ورکوي.",
         uk: "Людина, яка навчає.",
       },
-      synonym: [],
+      synonym: ["enseignant", "maître", "formateur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -197,7 +197,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["docteur", "généraliste", "spécialiste"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -283,7 +283,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["soignant", "aide-soignant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -369,7 +369,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې ډوډۍ پخوي او پلوري.",
         uk: "Людина, яка пече і продає хліб.",
       },
-      synonym: [],
+      synonym: ["artisan", "pâtissier"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -455,7 +455,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې توکي پلوري.",
         uk: "Людина, яка продає товари.",
       },
-      synonym: [],
+      synonym: ["commerçant", "employé de vente"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -541,7 +541,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې خواړه چمتو کوي.",
         uk: "Людина, яка готує їжу.",
       },
-      synonym: [],
+      synonym: ["chef", "cuistot"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -627,7 +627,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "تخنيکي متخصص چې عملي ستونزې حل کوي.",
         uk: "Технічний фахівець, який розв’язує практичні проблеми.",
       },
-      synonym: [],
+      synonym: ["technicien"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -713,7 +713,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس يا ځای چې له روغتيايي پاملرنې سره تړاو لري.",
         uk: "Людина або місце, пов’язане з медичною допомогою.",
       },
-      synonym: [],
+      synonym: ["apothicaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -799,7 +799,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې په رستورانت يا کافه کې پېرودونکو ته خدمت کوي.",
         uk: "Людина, яка обслуговує клієнтів у ресторані або кафе.",
       },
-      synonym: [],
+      synonym: ["garçon de café", "employé de restaurant"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -971,7 +971,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې د اوبو نلونه نصب يا ترميموي.",
         uk: "Людина, яка встановлює або ремонтує водопровід.",
       },
-      synonym: [],
+      synonym: ["installateur sanitaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1056,7 +1056,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
         ps: "هغه کس چې د دفتر او ادارې کار کوي.",
         uk: "Людина, яка виконує офісну та адміністративну роботу.",
       },
-      synonym: [],
+      synonym: ["assistant administratif", "réceptionniste"],
       exampleSentences: {
         a1: [],
         a2: [

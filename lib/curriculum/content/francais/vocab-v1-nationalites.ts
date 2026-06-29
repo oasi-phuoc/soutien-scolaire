@@ -22,7 +22,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
         ps: "هغه کس چې د سویس څخه وي.",
         uk: "Людина зі Швейцарії.",
       },
-      synonym: [],
+      synonym: ["helvétique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -349,7 +349,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
         ps: "هغه کس چې د هسپانیې څخه وي.",
         uk: "Людина з Іспанії.",
       },
-      synonym: [],
+      synonym: ["hispanique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -513,7 +513,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
         ps: "هغه کس چې د آلمان څخه وي.",
         uk: "Людина з Німеччини.",
       },
-      synonym: [],
+      synonym: ["germanique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -595,7 +595,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
         ps: "هغه کس چې د انګلستان څخه وي.",
         uk: "Людина з Англії.",
       },
-      synonym: [],
+      synonym: ["britannique"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -922,7 +922,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
         ps: "هغه کس چې د چین څخه وي.",
         uk: "Людина з Китаю.",
       },
-      synonym: [],
+      synonym: ["asiatique"],
       exampleSentences: {
         a1: [],
         a2: [

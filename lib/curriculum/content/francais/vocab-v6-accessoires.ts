@@ -24,7 +24,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
         ps: "هغه کالي چې پښې پټوي.",
         uk: "Одяг, що покриває стопи.",
       },
-      synonym: [],
+      synonym: ["bas"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -109,7 +109,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
         ps: "بوټان چې په پښو کېږي.",
         uk: "Взуття для ніг.",
       },
-      synonym: [],
+      synonym: ["souliers"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -194,7 +194,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
         ps: "لوړ بوټان چې ټخۍ يا پښه پټوي.",
         uk: "Високе взуття, що закриває щиколотку або ногу.",
       },
-      synonym: [],
+      synonym: ["bottines"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -619,7 +619,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
         ps: "نرمه خولۍ له سيورې سره.",
         uk: "М’яка кепка з козирком.",
       },
-      synonym: [],
+      synonym: ["képi"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1299,7 +1299,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
         ps: "د پيسو او کارتونو کوچنی بټوه.",
         uk: "Гаманець для грошей і карток.",
       },
-      synonym: [],
+      synonym: ["porte-monnaie"],
       exampleSentences: {
         a1: [],
         a2: [

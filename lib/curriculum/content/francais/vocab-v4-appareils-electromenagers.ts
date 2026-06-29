@@ -23,7 +23,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
         ps: "هغه آله چې خواړه يخ ساتي.",
         uk: "Прилад, що зберігає їжу холодною.",
       },
-      synonym: [],
+      synonym: ["frigo"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
         ps: "هغه آله چې خواړه کنګلوي.",
         uk: "Прилад, що заморожує їжу.",
       },
-      synonym: [],
+      synonym: ["congélo"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
         ps: "هغه آله چې اوبه جوشوي.",
         uk: "Прилад, що кип’ятить воду.",
       },
-      synonym: [],
+      synonym: ["chauffe-eau"],
       exampleSentences: {
         a1: [],
         a2: [

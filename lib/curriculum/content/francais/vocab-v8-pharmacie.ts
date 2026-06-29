@@ -22,7 +22,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["remède", "traitement"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -104,7 +104,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["prescription"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -268,7 +268,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["cachet", "pilule"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -350,7 +350,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["capsule"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -432,7 +432,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["onguent"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -514,7 +514,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["lotion"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -596,7 +596,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["bandage"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -678,7 +678,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["appareil de mesure"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -760,7 +760,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["vaporisateur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1006,7 +1006,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["dose"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1088,7 +1088,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["complément"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1170,7 +1170,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
         ps: "محصول يا شی چې د روغتيا لپاره کارېږي.",
         uk: "Засіб або предмет для медичного догляду.",
       },
-      synonym: [],
+      synonym: ["paquet", "emballage"],
       exampleSentences: {
         a1: [],
         a2: [

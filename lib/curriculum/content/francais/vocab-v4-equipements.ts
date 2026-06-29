@@ -107,7 +107,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "کلمه چې په رستورانت کې کارېږي.",
         uk: "Слово, яке використовують у ресторані.",
       },
-      synonym: [],
+      synonym: ["siège"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "اوږده نرمه څوکۍ د څو کسانو لپاره.",
         uk: "Довге м’яке сидіння для кількох людей.",
       },
-      synonym: [],
+      synonym: ["sofa"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "لوی المارۍ د کاليو ساتلو لپاره.",
         uk: "Велика шафа для одягу.",
       },
-      synonym: [],
+      synonym: ["placard"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "فرنيچر چې د خوب لپاره کارېږي.",
         uk: "Меблі для сну.",
       },
-      synonym: [],
+      synonym: ["couche"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "طاقچه چې شيان پرې اېښودل کېږي.",
         uk: "Полиця для речей.",
       },
-      synonym: [],
+      synonym: ["rayon"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
         ps: "انعکاسي سطح چې ځان پکې ګورې.",
         uk: "Відбивна поверхня, щоб бачити себе.",
       },
-      synonym: [],
+      synonym: ["glace"],
       exampleSentences: {
         a1: [],
         a2: [

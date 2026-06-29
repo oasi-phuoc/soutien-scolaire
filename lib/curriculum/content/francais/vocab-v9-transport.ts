@@ -23,7 +23,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["autobus"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["train souterrain"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["tramway"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["chemin de fer"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["auto"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["cyclisme", "bicyclette"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["motocyclette"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["aéronef"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["navire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["poids lourd"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["deux-roues"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["station"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "وسيله يا کلمه چې په ترانسپورت کې کارېږي.",
         uk: "Транспорт або слово, пов’язане з транспортом.",
       },
-      synonym: [],
+      synonym: ["billet"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["ticket"],
       exampleSentences: {
         a1: [],
         a2: [

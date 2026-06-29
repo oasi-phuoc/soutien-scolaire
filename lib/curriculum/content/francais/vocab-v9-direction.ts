@@ -359,7 +359,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["orient"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["occident"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["croisement", "intersection"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["giratoire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -695,7 +695,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["route"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["signal", "pancarte"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["feu de circulation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["issue"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1115,7 +1115,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["hall", "accès"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1199,7 +1199,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ps: "د لوري ورکولو يا پوهېدو کلمه.",
         uk: "Слово для пояснення або розуміння напрямку.",
       },
-      synonym: [],
+      synonym: ["route", "sentier"],
       exampleSentences: {
         a1: [],
         a2: [

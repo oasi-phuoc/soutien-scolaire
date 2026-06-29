@@ -23,7 +23,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "هغه ځای چې زده کوونکي پکې زده کړه کوي.",
         uk: "Місце, де учні навчаються.",
       },
-      synonym: [],
+      synonym: ["établissement scolaire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د هنر او کلتور اړوند کلمه.",
         uk: "Слово, пов’язане з мистецтвом і культурою.",
       },
-      synonym: [],
+      synonym: ["pièce", "local"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د کوټو ترمنځ لار.",
         uk: "Прохід між кімнатами.",
       },
-      synonym: [],
+      synonym: ["corridor"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د ښوونځي اداري دفتر.",
         uk: "Адміністративний офіс школи.",
       },
-      synonym: [],
+      synonym: ["bureau", "accueil"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د کتابونو د لوستلو يا پور اخيستلو ځای.",
         uk: "Кімната з книгами для читання або позики.",
       },
-      synonym: [],
+      synonym: ["médiathèque"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د سپورت تالار.",
         uk: "Зал для спорту.",
       },
-      synonym: [],
+      synonym: ["salle de sport"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -779,7 +779,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "هغه غږ چې د درس پيل يا پای ښيي.",
         uk: "Звук початку або кінця уроку.",
       },
-      synonym: [],
+      synonym: ["cloche", "signal"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "د ښوونځي ډوډۍ ځای.",
         uk: "Шкільна їдальня.",
       },
-      synonym: [],
+      synonym: ["réfectoire"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "په ښوونځي کې د لومړنۍ مرستې کوټه.",
         uk: "Шкільний медпункт.",
       },
-      synonym: [],
+      synonym: ["salle de soins"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -1031,7 +1031,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
         ps: "کلمه چې په هوټل کې کارېږي.",
         uk: "Слово, яке використовують у готелі.",
       },
-      synonym: [],
+      synonym: ["lift"],
       exampleSentences: {
         a1: [],
         a2: [

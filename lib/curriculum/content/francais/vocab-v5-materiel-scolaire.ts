@@ -23,7 +23,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د ښوونځي شيانو وړلو لپاره بکس.",
         uk: "Сумка для шкільних речей.",
       },
-      synonym: [],
+      synonym: ["cartable", "sac à dos"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -107,7 +107,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د قلمونو او پنسلونو کوچنی بکس.",
         uk: "Пенал для ручок і олівців.",
       },
-      synonym: [],
+      synonym: ["étui"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -191,7 +191,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د کورنۍ دندې او نېټو کتابچه.",
         uk: "Записник для домашніх завдань і дат.",
       },
-      synonym: [],
+      synonym: ["calendrier", "carnet"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -275,7 +275,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د کاغذونو د تنظيم فولډر.",
         uk: "Папка для впорядкування аркушів.",
       },
-      synonym: [],
+      synonym: ["dossier"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -359,7 +359,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د برخو بېلوونکې پاڼه.",
         uk: "Розділювач для частин.",
       },
-      synonym: [],
+      synonym: ["séparation"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -443,7 +443,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د ليکلو کاغذ.",
         uk: "Аркуш паперу для письма.",
       },
-      synonym: [],
+      synonym: ["papier"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -527,7 +527,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د لوستلو يا زده کړې چاپ شوی کتاب.",
         uk: "Друкована книга для читання або навчання.",
       },
-      synonym: [],
+      synonym: ["manuel", "ouvrage"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -611,7 +611,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د درسونو ليکلو کتابچه.",
         uk: "Зошит для запису уроків.",
       },
-      synonym: [],
+      synonym: ["carnet"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -863,7 +863,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د پنسل پاکولو ربړ.",
         uk: "Гумка для стирання олівця.",
       },
-      synonym: [],
+      synonym: ["effaceur"],
       exampleSentences: {
         a1: [],
         a2: [
@@ -947,7 +947,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
         ps: "د رنګولو فيلټ قلم.",
         uk: "Фломастер для розфарбовування.",
       },
-      synonym: [],
+      synonym: ["marqueur"],
       exampleSentences: {
         a1: [],
         a2: [
