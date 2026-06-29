@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const root = process.cwd();
 const publicDir = path.join(root, "public");
@@ -104,19 +105,36 @@ const routes = unique([
   ...communicationRoutes(),
 ]);
 
-const ignored = new Set(["/offline-manifest.json", "/sw.js"]);
+const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);
 const assets = unique(
   walk(publicDir)
     .map(publicUrl)
     .filter((url) => !ignored.has(url)),
 );
 
-const totalBytes = assets.reduce((sum, url) => {
-  const file = path.join(publicDir, url.slice(1));
-  return sum + fs.statSync(file).size;
-}, 0);
+function revisionFor(file) {
+  return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 16);
+}
 
-const manifest = { version: Date.now(), totalBytes, routes, assets };
+const assetEntries = assets.map((url) => {
+  const file = path.join(publicDir, url.slice(1));
+  const stats = fs.statSync(file);
+  return {
+    url,
+    size: stats.size,
+    revision: revisionFor(file),
+  };
+});
+
+const totalBytes = assetEntries.reduce((sum, asset) => sum + asset.size, 0);
+
+const manifest = {
+  version: Date.now(),
+  totalBytes,
+  routes,
+  assets,
+  assetEntries,
+};
 fs.writeFileSync(
   path.join(publicDir, "offline-manifest.json"),
   `${JSON.stringify(manifest, null, 2)}\n`,

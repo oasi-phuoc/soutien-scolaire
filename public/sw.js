@@ -1,6 +1,7 @@
 const CACHE_VERSION = "learnup-offline-v2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+const OFFLINE_META_URL = "/__learnup-offline-meta";
 
 const APP_ROUTES = [
   "/",
@@ -27,6 +28,40 @@ function canStore(response) {
   return response && response.ok && (response.type === "basic" || response.type === "default");
 }
 
+function normalizeAssetEntries(manifest) {
+  if (Array.isArray(manifest.assetEntries)) return manifest.assetEntries;
+  return (manifest.assets || []).map((url) => ({ url, size: 0, revision: null }));
+}
+
+async function readOfflineMeta(cache) {
+  const response = await cache.match(OFFLINE_META_URL);
+  if (!response) return { assets: {} };
+  try {
+    const meta = await response.json();
+    return { assets: meta.assets || {} };
+  } catch {
+    return { assets: {} };
+  }
+}
+
+async function writeOfflineMeta(cache, meta) {
+  await cache.put(
+    OFFLINE_META_URL,
+    new Response(JSON.stringify({ assets: meta.assets || {} }), {
+      headers: { "Content-Type": "application/json" },
+    }),
+  );
+}
+
+async function responseBytes(response) {
+  try {
+    const blob = await response.clone().blob();
+    return blob.size;
+  } catch {
+    return 0;
+  }
+}
+
 async function store(cacheName, request, response) {
   if (!canStore(response)) return;
   const cache = await caches.open(cacheName);
@@ -44,17 +79,10 @@ function sameOriginPath(value) {
 }
 
 async function cacheUrlWithLinkedAssets(cache, url) {
-  const response = await fetch(url, { credentials: "include" });
+  const response = await fetch(url, { credentials: "include", cache: "reload" });
   if (!canStore(response)) return 0;
 
-  let bytes = 0;
-  const clone = response.clone();
-  try {
-    const blob = await clone.blob();
-    bytes += blob.size;
-  } catch {
-    // Size is only used for progress display.
-  }
+  let bytes = await responseBytes(response);
   await cache.put(url, response.clone());
 
   const contentType = response.headers.get("content-type") || "";
@@ -79,14 +107,11 @@ async function cacheUrlWithLinkedAssets(cache, url) {
 
   await Promise.all([...linked].map(async (assetUrl) => {
     try {
-      const assetResponse = await fetch(assetUrl, { credentials: "include" });
+      const cached = await cache.match(assetUrl);
+      if (cached) return;
+      const assetResponse = await fetch(assetUrl, { credentials: "include", cache: "reload" });
       if (!canStore(assetResponse)) return;
-      try {
-        const blob = await assetResponse.clone().blob();
-        bytes += blob.size;
-      } catch {
-        // ignore size
-      }
+      bytes += await responseBytes(assetResponse);
       await cache.put(assetUrl, assetResponse.clone());
     } catch {
       // One failed linked asset must not cancel the page.
@@ -94,6 +119,22 @@ async function cacheUrlWithLinkedAssets(cache, url) {
   }));
 
   return bytes;
+}
+
+async function cacheManifestAssetIfNeeded(cache, entry, meta) {
+  const cached = await cache.match(entry.url);
+  const currentRevision = meta.assets?.[entry.url];
+  if (cached && entry.revision && currentRevision === entry.revision) {
+    return { bytes: 0, skipped: true };
+  }
+
+  const response = await fetch(entry.url, { credentials: "include", cache: "reload" });
+  if (!canStore(response)) return { bytes: 0, skipped: false };
+
+  const bytes = await responseBytes(response);
+  await cache.put(entry.url, response.clone());
+  meta.assets[entry.url] = entry.revision || `${bytes}`;
+  return { bytes, skipped: false };
 }
 
 self.addEventListener("install", (event) => {
@@ -167,21 +208,21 @@ self.addEventListener("message", (event) => {
         // Fetch the asset manifest
         const manifestRes = await fetch("/offline-manifest.json");
         const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
-        const assetUrls = manifest.assets || [];
+        const assetEntries = normalizeAssetEntries(manifest);
         const routeUrls = manifest.routes || [];
 
-        // Build full URL list: app routes + all static assets + generated lesson routes
-        const urls = [...new Set([...APP_ROUTES, ...routeUrls, ...assetUrls])];
+        const routes = [...new Set([...APP_ROUTES, ...routeUrls])];
         const cache = await caches.open(CORE_CACHE);
+        const meta = await readOfflineMeta(cache);
         let completed = 0;
         let downloadedBytes = 0;
-        const total = urls.length;
+        const total = routes.length + assetEntries.length;
         const totalBytes = manifest.totalBytes || 0;
 
-        // Download in batches of 6 for network efficiency
+        // Download routes first so all app screens are available offline.
         const BATCH = 6;
-        for (let i = 0; i < urls.length; i += BATCH) {
-          const batch = urls.slice(i, i + BATCH);
+        for (let i = 0; i < routes.length; i += BATCH) {
+          const batch = routes.slice(i, i + BATCH);
           await Promise.all(batch.map(async (url) => {
             try {
               downloadedBytes += await cacheUrlWithLinkedAssets(cache, url);
@@ -192,6 +233,23 @@ self.addEventListener("message", (event) => {
             await notifyClients({ type: "OFFLINE_PROGRESS", completed, total, downloadedBytes, totalBytes });
           }));
         }
+
+        // Download or update only changed manifest assets.
+        for (let i = 0; i < assetEntries.length; i += BATCH) {
+          const batch = assetEntries.slice(i, i + BATCH);
+          await Promise.all(batch.map(async (entry) => {
+            try {
+              const result = await cacheManifestAssetIfNeeded(cache, entry, meta);
+              downloadedBytes += result.bytes;
+            } catch {
+              // One failed asset must not cancel the whole download
+            }
+            completed += 1;
+            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total, downloadedBytes, totalBytes });
+          }));
+        }
+
+        await writeOfflineMeta(cache, meta);
 
         await notifyClients({ type: "OFFLINE_READY", downloadedBytes, totalBytes });
       } catch {
@@ -226,24 +284,28 @@ self.addEventListener("message", (event) => {
       try {
         const res = await fetch("/offline-manifest.json");
         const manifest = res.ok ? await res.json() : { assets: [] };
-        const assetUrls = manifest.assets || [];
+        const assetEntries = normalizeAssetEntries(manifest);
         const routeUrls = manifest.routes || [];
         const cache = await caches.open(CORE_CACHE);
+        const meta = await readOfflineMeta(cache);
         let cachedAssetBytes = 0;
         let missingAssets = 0;
 
-        for (const url of [...assetUrls, ...routeUrls]) {
+        for (const url of routeUrls) {
           const response = await cache.match(url);
           if (!response) {
             missingAssets += 1;
+          }
+        }
+
+        for (const entry of assetEntries) {
+          const response = await cache.match(entry.url);
+          const isCurrent = !entry.revision || meta.assets?.[entry.url] === entry.revision;
+          if (!response || !isCurrent) {
+            missingAssets += 1;
             continue;
           }
-          try {
-            const blob = await response.clone().blob();
-            cachedAssetBytes += blob.size;
-          } catch {
-            missingAssets += 1;
-          }
+          cachedAssetBytes += entry.size || await responseBytes(response);
         }
 
         await notifyClients({

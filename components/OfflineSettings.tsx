@@ -61,7 +61,7 @@ export function OfflineSettings() {
       if (event.data?.type === "OFFLINE_READY") {
         setState("ready");
         setHasCachedContent(true);
-        if (event.data.downloadedBytes) setDownloadedBytes(event.data.downloadedBytes);
+        if (typeof event.data.downloadedBytes === "number") setDownloadedBytes(event.data.downloadedBytes);
         askCacheStatus();
       }
       if (event.data?.type === "OFFLINE_CLEARED") {
@@ -130,7 +130,7 @@ export function OfflineSettings() {
   };
 
   const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
-  const bytesPct = progress.totalBytes > 0 ? Math.round((progress.downloadedBytes / progress.totalBytes) * 100) : pct;
+  const bytesPct = progress.totalBytes > 0 ? Math.min(100, Math.round((progress.downloadedBytes / progress.totalBytes) * 100)) : pct;
   const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~27 Mo";
   const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
   const cacheExpectedBytes = cacheStatus?.expectedBytes || manifestSize || 0;
