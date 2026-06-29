@@ -596,7 +596,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
     },
     {
       word: "verre",
-      image: "verre.webp",
+      image: "/vocab/images/V10/verre.webp",
       article: "le",
       gender: "m",
       definition: ["Récipient pour boire."],

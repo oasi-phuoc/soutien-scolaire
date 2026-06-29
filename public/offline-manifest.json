@@ -1,6 +1,6 @@
 {
-  "version": 1782710004211,
-  "totalBytes": 65018509,
+  "version": 1782736844711,
+  "totalBytes": 101366888,
   "routes": [
     "/",
     "/communication",
@@ -1252,10 +1252,13 @@
     "/vocab/images/V1/blond.webp",
     "/vocab/images/V1/boucle.webp",
     "/vocab/images/V1/boulanger.webp",
+    "/vocab/images/V1/brun.png",
     "/vocab/images/V1/calme.webp",
     "/vocab/images/V1/canada.webp",
     "/vocab/images/V1/celibataire.webp",
+    "/vocab/images/V1/chatain.png",
     "/vocab/images/V1/chine.webp",
+    "/vocab/images/V1/court.png",
     "/vocab/images/V1/cousin.webp",
     "/vocab/images/V1/cousine.webp",
     "/vocab/images/V1/cuisinier.webp",
@@ -1275,11 +1278,13 @@
     "/vocab/images/V1/fort.webp",
     "/vocab/images/V1/france.webp",
     "/vocab/images/V1/frere.webp",
+    "/vocab/images/V1/frise.png",
     "/vocab/images/V1/frise.webp",
     "/vocab/images/V1/gentillesse.webp",
     "/vocab/images/V1/grand-mere.webp",
     "/vocab/images/V1/grand-pere.webp",
     "/vocab/images/V1/grand.webp",
+    "/vocab/images/V1/grece.webp",
     "/vocab/images/V1/gros.webp",
     "/vocab/images/V1/impatience.webp",
     "/vocab/images/V1/impolitesse.webp",
@@ -1290,6 +1295,7 @@
     "/vocab/images/V1/jeune.webp",
     "/vocab/images/V1/joie.webp",
     "/vocab/images/V1/laid.webp",
+    "/vocab/images/V1/long.png",
     "/vocab/images/V1/marie.webp",
     "/vocab/images/V1/mechancete-v2.webp",
     "/vocab/images/V1/medecin.webp",
@@ -1310,6 +1316,7 @@
     "/vocab/images/V1/pharmacien.webp",
     "/vocab/images/V1/plombier.webp",
     "/vocab/images/V1/politesse.webp",
+    "/vocab/images/V1/pologne.webp",
     "/vocab/images/V1/portugal.webp",
     "/vocab/images/V1/professeur.webp",
     "/vocab/images/V1/roux.webp",
@@ -1319,6 +1326,7 @@
     "/vocab/images/V1/serveur.webp",
     "/vocab/images/V1/sociabilite.webp",
     "/vocab/images/V1/soeur.webp",
+    "/vocab/images/V1/somalie.webp",
     "/vocab/images/V1/suisse.webp",
     "/vocab/images/V1/syrie.webp",
     "/vocab/images/V1/tante.webp",
@@ -1330,6 +1338,30 @@
     "/vocab/images/V1/vendeur.webp",
     "/vocab/images/V1/veuf.webp",
     "/vocab/images/V1/vietnam.webp",
+    "/vocab/images/V10/addition.webp",
+    "/vocab/images/V10/assiette.webp",
+    "/vocab/images/V10/baguette.webp",
+    "/vocab/images/V10/biscuit.webp",
+    "/vocab/images/V10/boisson.webp",
+    "/vocab/images/V10/brioche.webp",
+    "/vocab/images/V10/couteau.webp",
+    "/vocab/images/V10/couvert.webp",
+    "/vocab/images/V10/cuillere.webp",
+    "/vocab/images/V10/dessert.webp",
+    "/vocab/images/V10/eclair.webp",
+    "/vocab/images/V10/fourchette.webp",
+    "/vocab/images/V10/gateau.webp",
+    "/vocab/images/V10/menu.webp",
+    "/vocab/images/V10/pain-au-chocolat.webp",
+    "/vocab/images/V10/pain.webp",
+    "/vocab/images/V10/patisserie.webp",
+    "/vocab/images/V10/plat.webp",
+    "/vocab/images/V10/sandwich.webp",
+    "/vocab/images/V10/serviette.webp",
+    "/vocab/images/V10/table.webp",
+    "/vocab/images/V10/tarte.webp",
+    "/vocab/images/V10/verre.webp",
+    "/vocab/images/V10/viennoiserie.webp",
     "/vocab/images/V2/annee.webp",
     "/vocab/images/V2/aout.webp",
     "/vocab/images/V2/apres-midi.webp",
@@ -1606,25 +1638,19 @@
     "/vocab/images/V6/violet.svg",
     "/vocab/images/V7/a-point.webp",
     "/vocab/images/V7/abricot.webp",
-    "/vocab/images/V7/addition.webp",
     "/vocab/images/V7/ail.webp",
     "/vocab/images/V7/ananas.webp",
     "/vocab/images/V7/asperge.webp",
-    "/vocab/images/V7/assiette.webp",
     "/vocab/images/V7/aubergine.webp",
-    "/vocab/images/V7/baguette.webp",
     "/vocab/images/V7/banane.webp",
     "/vocab/images/V7/betterave.webp",
     "/vocab/images/V7/beurre.webp",
     "/vocab/images/V7/bien-cuit.webp",
-    "/vocab/images/V7/biscuit.webp",
     "/vocab/images/V7/bleu.webp",
-    "/vocab/images/V7/boisson.webp",
     "/vocab/images/V7/boite.webp",
     "/vocab/images/V7/bol.webp",
     "/vocab/images/V7/bouillir.webp",
     "/vocab/images/V7/bouteille.webp",
-    "/vocab/images/V7/brioche.webp",
     "/vocab/images/V7/brocoli.webp",
     "/vocab/images/V7/carotte.webp",
     "/vocab/images/V7/casserole.webp",
@@ -1637,27 +1663,20 @@
     "/vocab/images/V7/couper.webp",
     "/vocab/images/V7/courge.webp",
     "/vocab/images/V7/courgette.webp",
-    "/vocab/images/V7/couteau.webp",
-    "/vocab/images/V7/couvert.webp",
-    "/vocab/images/V7/cuillere.webp",
     "/vocab/images/V7/cuire.webp",
     "/vocab/images/V7/cuisine.webp",
     "/vocab/images/V7/cuisiner.webp",
     "/vocab/images/V7/curry.webp",
-    "/vocab/images/V7/dessert.webp",
     "/vocab/images/V7/doseur.webp",
     "/vocab/images/V7/echalotte.webp",
-    "/vocab/images/V7/eclair.webp",
     "/vocab/images/V7/egoutter.webp",
     "/vocab/images/V7/epice.webp",
     "/vocab/images/V7/epinard.webp",
     "/vocab/images/V7/eplucher.webp",
     "/vocab/images/V7/farine.webp",
-    "/vocab/images/V7/fourchette.webp",
     "/vocab/images/V7/fraise.webp",
     "/vocab/images/V7/framboise.webp",
     "/vocab/images/V7/frire.webp",
-    "/vocab/images/V7/gateau.webp",
     "/vocab/images/V7/gouter.webp",
     "/vocab/images/V7/gramme.webp",
     "/vocab/images/V7/haricot.webp",
@@ -1672,24 +1691,19 @@
     "/vocab/images/V7/mangue.webp",
     "/vocab/images/V7/melanger.webp",
     "/vocab/images/V7/melon.webp",
-    "/vocab/images/V7/menu.webp",
     "/vocab/images/V7/morceau.webp",
     "/vocab/images/V7/navet.webp",
     "/vocab/images/V7/oeuf.webp",
     "/vocab/images/V7/oignon.webp",
     "/vocab/images/V7/orange.webp",
-    "/vocab/images/V7/pain-au-chocolat.webp",
-    "/vocab/images/V7/pain.webp",
     "/vocab/images/V7/paprika.webp",
     "/vocab/images/V7/paquet.webp",
     "/vocab/images/V7/part.webp",
     "/vocab/images/V7/pasteque.webp",
-    "/vocab/images/V7/patisserie.webp",
     "/vocab/images/V7/peche.webp",
     "/vocab/images/V7/piment.webp",
     "/vocab/images/V7/pincee.webp",
     "/vocab/images/V7/planche.webp",
-    "/vocab/images/V7/plat.webp",
     "/vocab/images/V7/poele.webp",
     "/vocab/images/V7/poire.webp",
     "/vocab/images/V7/poivre.webp",
@@ -1708,21 +1722,15 @@
     "/vocab/images/V7/saignant.webp",
     "/vocab/images/V7/salade.webp",
     "/vocab/images/V7/saler.webp",
-    "/vocab/images/V7/sandwich.webp",
     "/vocab/images/V7/sel.webp",
     "/vocab/images/V7/service.webp",
-    "/vocab/images/V7/serviette.webp",
     "/vocab/images/V7/spatule.webp",
     "/vocab/images/V7/sucre.webp",
-    "/vocab/images/V7/table.webp",
-    "/vocab/images/V7/tarte.webp",
     "/vocab/images/V7/tasse.webp",
     "/vocab/images/V7/tomate.webp",
     "/vocab/images/V7/tranche.webp",
     "/vocab/images/V7/ustensile.webp",
-    "/vocab/images/V7/verre.webp",
     "/vocab/images/V7/verser.webp",
-    "/vocab/images/V7/viennoiserie.webp",
     "/vocab/images/V8/allergie.webp",
     "/vocab/images/V8/blessure.webp",
     "/vocab/images/V8/bouche.webp",
@@ -1764,6 +1772,7 @@
     "/vocab/images/V8/urgentiste.webp",
     "/vocab/images/V8/ventre.webp",
     "/vocab/images/V9/abeille.webp",
+    "/vocab/images/V9/aeroport.png",
     "/vocab/images/V9/aigle.webp",
     "/vocab/images/V9/animal.webp",
     "/vocab/images/V9/arbre.webp",
@@ -1771,6 +1780,9 @@
     "/vocab/images/V9/avion.webp",
     "/vocab/images/V9/baleine.webp",
     "/vocab/images/V9/bateau.webp",
+    "/vocab/images/V9/bibliotheque.png",
+    "/vocab/images/V9/boucher.png",
+    "/vocab/images/V9/boulangerie.png",
     "/vocab/images/V9/bus.webp",
     "/vocab/images/V9/camion.webp",
     "/vocab/images/V9/campagne.webp",
@@ -1779,7 +1791,9 @@
     "/vocab/images/V9/cheval.webp",
     "/vocab/images/V9/chien.webp",
     "/vocab/images/V9/cochon.webp",
+    "/vocab/images/V9/coiffeur.png",
     "/vocab/images/V9/colline.webp",
+    "/vocab/images/V9/commissariat.png",
     "/vocab/images/V9/coq.webp",
     "/vocab/images/V9/crocodile.webp",
     "/vocab/images/V9/cygne.webp",
@@ -1802,6 +1816,7 @@
     "/vocab/images/V9/koala.webp",
     "/vocab/images/V9/lac.webp",
     "/vocab/images/V9/lapin.webp",
+    "/vocab/images/V9/librairie.png",
     "/vocab/images/V9/lion.webp",
     "/vocab/images/V9/loup.webp",
     "/vocab/images/V9/marche.webp",
@@ -1809,22 +1824,30 @@
     "/vocab/images/V9/montagne.webp",
     "/vocab/images/V9/moto.webp",
     "/vocab/images/V9/mouton.webp",
+    "/vocab/images/V9/musee.png",
     "/vocab/images/V9/navire.webp",
     "/vocab/images/V9/ours.webp",
     "/vocab/images/V9/panda.webp",
+    "/vocab/images/V9/papeterie.png",
     "/vocab/images/V9/pharmacie.webp",
+    "/vocab/images/V9/piscine.png",
     "/vocab/images/V9/plage.webp",
     "/vocab/images/V9/poisson.webp",
+    "/vocab/images/V9/poste.png",
     "/vocab/images/V9/poste.webp",
     "/vocab/images/V9/poule.webp",
     "/vocab/images/V9/rat.webp",
     "/vocab/images/V9/renard.webp",
     "/vocab/images/V9/requin.webp",
+    "/vocab/images/V9/restaurant.png",
     "/vocab/images/V9/riviere.webp",
     "/vocab/images/V9/rue.webp",
+    "/vocab/images/V9/salle-de-sport.png",
     "/vocab/images/V9/sapin.webp",
     "/vocab/images/V9/scooter.webp",
+    "/vocab/images/V9/supermarche.png",
     "/vocab/images/V9/train.webp",
+    "/vocab/images/V9/tribunal.png",
     "/vocab/images/V9/usine.webp",
     "/vocab/images/V9/vallee.webp",
     "/vocab/images/V9/volcan.webp",
@@ -5443,8 +5466,8 @@
     },
     {
       "url": "/vocab/images/V1/afghanistan.webp",
-      "size": 14818,
-      "revision": "97eb83a436ab1ffa"
+      "size": 58552,
+      "revision": "a76fdc28858a7334"
     },
     {
       "url": "/vocab/images/V1/age.webp",
@@ -5453,18 +5476,18 @@
     },
     {
       "url": "/vocab/images/V1/allemagne.webp",
-      "size": 7498,
-      "revision": "e3bcedb190c9652e"
+      "size": 21130,
+      "revision": "f60b3e56f2b4e678"
     },
     {
       "url": "/vocab/images/V1/angleterre.webp",
-      "size": 8670,
-      "revision": "2f6e088dfc6c5f63"
+      "size": 43928,
+      "revision": "52666d8866ba7f51"
     },
     {
       "url": "/vocab/images/V1/autriche.webp",
-      "size": 6312,
-      "revision": "d39aa1cdb254bdca"
+      "size": 20110,
+      "revision": "e271be6009322472"
     },
     {
       "url": "/vocab/images/V1/beau.webp",
@@ -5478,8 +5501,8 @@
     },
     {
       "url": "/vocab/images/V1/belgique.webp",
-      "size": 6778,
-      "revision": "ebdb6340e7c501c3"
+      "size": 22786,
+      "revision": "530df0d9f32e6d2e"
     },
     {
       "url": "/vocab/images/V1/blond.webp",
@@ -5497,14 +5520,19 @@
       "revision": "8dcce5108adabb43"
     },
     {
+      "url": "/vocab/images/V1/brun.png",
+      "size": 2090925,
+      "revision": "ccb7d99960ae70b8"
+    },
+    {
       "url": "/vocab/images/V1/calme.webp",
       "size": 15626,
       "revision": "5ded739361e0c247"
     },
     {
       "url": "/vocab/images/V1/canada.webp",
-      "size": 16760,
-      "revision": "49d03e1d93fa45c2"
+      "size": 68472,
+      "revision": "0b8914fe71b83bf7"
     },
     {
       "url": "/vocab/images/V1/celibataire.webp",
@@ -5512,9 +5540,19 @@
       "revision": "80d03b99dccce897"
     },
     {
+      "url": "/vocab/images/V1/chatain.png",
+      "size": 2062496,
+      "revision": "389f598a1e345c73"
+    },
+    {
       "url": "/vocab/images/V1/chine.webp",
       "size": 7284,
       "revision": "6279e9a705124533"
+    },
+    {
+      "url": "/vocab/images/V1/court.png",
+      "size": 1933798,
+      "revision": "925724d17acfbdfa"
     },
     {
       "url": "/vocab/images/V1/cousin.webp",
@@ -5558,18 +5596,18 @@
     },
     {
       "url": "/vocab/images/V1/erythree.webp",
-      "size": 13678,
-      "revision": "28327c881913566e"
+      "size": 42114,
+      "revision": "b2330f8a1877a46b"
     },
     {
       "url": "/vocab/images/V1/espagne.webp",
-      "size": 14696,
-      "revision": "0c571ef21a876a9c"
+      "size": 47362,
+      "revision": "6b239f83d768b662"
     },
     {
       "url": "/vocab/images/V1/etats-unis.webp",
-      "size": 11802,
-      "revision": "c799f21d3de52320"
+      "size": 55760,
+      "revision": "3aae2cc0ebe2b3c8"
     },
     {
       "url": "/vocab/images/V1/etudiant.webp",
@@ -5603,13 +5641,18 @@
     },
     {
       "url": "/vocab/images/V1/france.webp",
-      "size": 7692,
-      "revision": "8132f21e54c7f6d5"
+      "size": 23030,
+      "revision": "80f62dba6a86687e"
     },
     {
       "url": "/vocab/images/V1/frere.webp",
       "size": 15946,
       "revision": "54c3545590bf2a47"
+    },
+    {
+      "url": "/vocab/images/V1/frise.png",
+      "size": 2242191,
+      "revision": "09aeb5f7526becd9"
     },
     {
       "url": "/vocab/images/V1/frise.webp",
@@ -5635,6 +5678,11 @@
       "url": "/vocab/images/V1/grand.webp",
       "size": 26964,
       "revision": "0b5e015109113464"
+    },
+    {
+      "url": "/vocab/images/V1/grece.webp",
+      "size": 55368,
+      "revision": "e5ea0ac9e10cb3e6"
     },
     {
       "url": "/vocab/images/V1/gros.webp",
@@ -5663,13 +5711,13 @@
     },
     {
       "url": "/vocab/images/V1/iran.webp",
-      "size": 13976,
-      "revision": "50f9634330c00cbe"
+      "size": 43240,
+      "revision": "1c515dcf392df908"
     },
     {
       "url": "/vocab/images/V1/italie.webp",
-      "size": 14428,
-      "revision": "dba4de335648995a"
+      "size": 27482,
+      "revision": "b77ff614b731c687"
     },
     {
       "url": "/vocab/images/V1/jeune.webp",
@@ -5685,6 +5733,11 @@
       "url": "/vocab/images/V1/laid.webp",
       "size": 30576,
       "revision": "5279320c45f89701"
+    },
+    {
+      "url": "/vocab/images/V1/long.png",
+      "size": 2001932,
+      "revision": "922cdb484e045631"
     },
     {
       "url": "/vocab/images/V1/marie.webp",
@@ -5787,9 +5840,14 @@
       "revision": "f8325aa20bc88977"
     },
     {
+      "url": "/vocab/images/V1/pologne.webp",
+      "size": 21266,
+      "revision": "354a22d5f316c4f2"
+    },
+    {
       "url": "/vocab/images/V1/portugal.webp",
-      "size": 11372,
-      "revision": "460886185d861be2"
+      "size": 33768,
+      "revision": "16c496cb525b1a7b"
     },
     {
       "url": "/vocab/images/V1/professeur.webp",
@@ -5832,14 +5890,19 @@
       "revision": "6c07bd0e9df2b76e"
     },
     {
+      "url": "/vocab/images/V1/somalie.webp",
+      "size": 20470,
+      "revision": "f67fddf30c3e5679"
+    },
+    {
       "url": "/vocab/images/V1/suisse.webp",
-      "size": 8944,
-      "revision": "d18ba5141a5f0ba9"
+      "size": 25092,
+      "revision": "ba2b5d8c03b4e274"
     },
     {
       "url": "/vocab/images/V1/syrie.webp",
-      "size": 2440,
-      "revision": "ad16cc6ab85fc8d9"
+      "size": 19812,
+      "revision": "f6c0d02636076cc6"
     },
     {
       "url": "/vocab/images/V1/tante.webp",
@@ -5863,13 +5926,13 @@
     },
     {
       "url": "/vocab/images/V1/turquie.webp",
-      "size": 8486,
-      "revision": "3798189a867e2e67"
+      "size": 30904,
+      "revision": "c9ddfd900b6e8b9b"
     },
     {
       "url": "/vocab/images/V1/ukraine.webp",
-      "size": 7838,
-      "revision": "a15ac0d50b275e9b"
+      "size": 27198,
+      "revision": "0c640128f3c8722a"
     },
     {
       "url": "/vocab/images/V1/vendeur.webp",
@@ -5883,8 +5946,128 @@
     },
     {
       "url": "/vocab/images/V1/vietnam.webp",
-      "size": 8272,
-      "revision": "9582f74d7d559514"
+      "size": 22836,
+      "revision": "f11af03c098e5c66"
+    },
+    {
+      "url": "/vocab/images/V10/addition.webp",
+      "size": 12588,
+      "revision": "6b9cd00ec4fd8f20"
+    },
+    {
+      "url": "/vocab/images/V10/assiette.webp",
+      "size": 2288,
+      "revision": "16757b567d42db79"
+    },
+    {
+      "url": "/vocab/images/V10/baguette.webp",
+      "size": 16064,
+      "revision": "8c0406bfb91d7d64"
+    },
+    {
+      "url": "/vocab/images/V10/biscuit.webp",
+      "size": 19854,
+      "revision": "e1287a78c7836ead"
+    },
+    {
+      "url": "/vocab/images/V10/boisson.webp",
+      "size": 12450,
+      "revision": "e597b26ac9ee76f3"
+    },
+    {
+      "url": "/vocab/images/V10/brioche.webp",
+      "size": 26650,
+      "revision": "dba65f36a6445299"
+    },
+    {
+      "url": "/vocab/images/V10/couteau.webp",
+      "size": 3398,
+      "revision": "71dcee97fe6503d3"
+    },
+    {
+      "url": "/vocab/images/V10/couvert.webp",
+      "size": 7060,
+      "revision": "cdb785559a100cab"
+    },
+    {
+      "url": "/vocab/images/V10/cuillere.webp",
+      "size": 5118,
+      "revision": "5a737c5a38bcdcdd"
+    },
+    {
+      "url": "/vocab/images/V10/dessert.webp",
+      "size": 28724,
+      "revision": "fc3c57b66b5f1f43"
+    },
+    {
+      "url": "/vocab/images/V10/eclair.webp",
+      "size": 15990,
+      "revision": "e4025dff3187957f"
+    },
+    {
+      "url": "/vocab/images/V10/fourchette.webp",
+      "size": 5752,
+      "revision": "dfc05de144cb2215"
+    },
+    {
+      "url": "/vocab/images/V10/gateau.webp",
+      "size": 33300,
+      "revision": "23c66550fe8212a9"
+    },
+    {
+      "url": "/vocab/images/V10/menu.webp",
+      "size": 7316,
+      "revision": "5d804d4f639ada20"
+    },
+    {
+      "url": "/vocab/images/V10/pain-au-chocolat.webp",
+      "size": 30454,
+      "revision": "d5bf1f9d79bbe981"
+    },
+    {
+      "url": "/vocab/images/V10/pain.webp",
+      "size": 42608,
+      "revision": "baf6a51775fd279a"
+    },
+    {
+      "url": "/vocab/images/V10/patisserie.webp",
+      "size": 32740,
+      "revision": "a5b22e3521efa311"
+    },
+    {
+      "url": "/vocab/images/V10/plat.webp",
+      "size": 33044,
+      "revision": "6bd1732e4ef9e7ff"
+    },
+    {
+      "url": "/vocab/images/V10/sandwich.webp",
+      "size": 27854,
+      "revision": "5e7332287764846a"
+    },
+    {
+      "url": "/vocab/images/V10/serviette.webp",
+      "size": 2564,
+      "revision": "865c81d947f8a995"
+    },
+    {
+      "url": "/vocab/images/V10/table.webp",
+      "size": 10372,
+      "revision": "5c91c59722bab643"
+    },
+    {
+      "url": "/vocab/images/V10/tarte.webp",
+      "size": 37806,
+      "revision": "bed601547c1202d4"
+    },
+    {
+      "url": "/vocab/images/V10/verre.webp",
+      "size": 5776,
+      "revision": "e71b690fe4c4a782"
+    },
+    {
+      "url": "/vocab/images/V10/viennoiserie.webp",
+      "size": 42144,
+      "revision": "096888ae4f7895ae"
     },
     {
       "url": "/vocab/images/V2/annee.webp",
@@ -7267,11 +7450,6 @@
       "revision": "27874342857e5018"
     },
     {
-      "url": "/vocab/images/V7/addition.webp",
-      "size": 12588,
-      "revision": "6b9cd00ec4fd8f20"
-    },
-    {
       "url": "/vocab/images/V7/ail.webp",
       "size": 13146,
       "revision": "dba9abf5d9050aa8"
@@ -7287,19 +7465,9 @@
       "revision": "3fd5ab7998d389e5"
     },
     {
-      "url": "/vocab/images/V7/assiette.webp",
-      "size": 2288,
-      "revision": "16757b567d42db79"
-    },
-    {
       "url": "/vocab/images/V7/aubergine.webp",
       "size": 7674,
       "revision": "d8f285c49543daac"
-    },
-    {
-      "url": "/vocab/images/V7/baguette.webp",
-      "size": 16064,
-      "revision": "8c0406bfb91d7d64"
     },
     {
       "url": "/vocab/images/V7/banane.webp",
@@ -7322,19 +7490,9 @@
       "revision": "924573808c96bec7"
     },
     {
-      "url": "/vocab/images/V7/biscuit.webp",
-      "size": 19854,
-      "revision": "e1287a78c7836ead"
-    },
-    {
       "url": "/vocab/images/V7/bleu.webp",
       "size": 35384,
       "revision": "b77c73a5237083c1"
-    },
-    {
-      "url": "/vocab/images/V7/boisson.webp",
-      "size": 12450,
-      "revision": "e597b26ac9ee76f3"
     },
     {
       "url": "/vocab/images/V7/boite.webp",
@@ -7355,11 +7513,6 @@
       "url": "/vocab/images/V7/bouteille.webp",
       "size": 3242,
       "revision": "acd10b656e91ff7d"
-    },
-    {
-      "url": "/vocab/images/V7/brioche.webp",
-      "size": 26650,
-      "revision": "dba65f36a6445299"
     },
     {
       "url": "/vocab/images/V7/brocoli.webp",
@@ -7422,21 +7575,6 @@
       "revision": "9c358a83ec9a0a10"
     },
     {
-      "url": "/vocab/images/V7/couteau.webp",
-      "size": 3398,
-      "revision": "71dcee97fe6503d3"
-    },
-    {
-      "url": "/vocab/images/V7/couvert.webp",
-      "size": 7060,
-      "revision": "cdb785559a100cab"
-    },
-    {
-      "url": "/vocab/images/V7/cuillere.webp",
-      "size": 5118,
-      "revision": "5a737c5a38bcdcdd"
-    },
-    {
       "url": "/vocab/images/V7/cuire.webp",
       "size": 21846,
       "revision": "0b95bffe442a3b34"
@@ -7457,11 +7595,6 @@
       "revision": "96dabee206cbc9be"
     },
     {
-      "url": "/vocab/images/V7/dessert.webp",
-      "size": 28724,
-      "revision": "fc3c57b66b5f1f43"
-    },
-    {
       "url": "/vocab/images/V7/doseur.webp",
       "size": 7848,
       "revision": "6745184280ad544a"
@@ -7470,11 +7603,6 @@
       "url": "/vocab/images/V7/echalotte.webp",
       "size": 13124,
       "revision": "d3c2fbb5ef783219"
-    },
-    {
-      "url": "/vocab/images/V7/eclair.webp",
-      "size": 15990,
-      "revision": "e4025dff3187957f"
     },
     {
       "url": "/vocab/images/V7/egoutter.webp",
@@ -7502,11 +7630,6 @@
       "revision": "3f5fc79edfd9ed57"
     },
     {
-      "url": "/vocab/images/V7/fourchette.webp",
-      "size": 5752,
-      "revision": "dfc05de144cb2215"
-    },
-    {
       "url": "/vocab/images/V7/fraise.webp",
       "size": 22518,
       "revision": "85ee1a9e88fd2cf9"
@@ -7520,11 +7643,6 @@
       "url": "/vocab/images/V7/frire.webp",
       "size": 30500,
       "revision": "24bc851ddb0cec4b"
-    },
-    {
-      "url": "/vocab/images/V7/gateau.webp",
-      "size": 33300,
-      "revision": "23c66550fe8212a9"
     },
     {
       "url": "/vocab/images/V7/gouter.webp",
@@ -7597,11 +7715,6 @@
       "revision": "26fa189b01a610b9"
     },
     {
-      "url": "/vocab/images/V7/menu.webp",
-      "size": 7316,
-      "revision": "5d804d4f639ada20"
-    },
-    {
       "url": "/vocab/images/V7/morceau.webp",
       "size": 4008,
       "revision": "197991ad974da75a"
@@ -7627,16 +7740,6 @@
       "revision": "8e2a4fa172a1c878"
     },
     {
-      "url": "/vocab/images/V7/pain-au-chocolat.webp",
-      "size": 30454,
-      "revision": "d5bf1f9d79bbe981"
-    },
-    {
-      "url": "/vocab/images/V7/pain.webp",
-      "size": 42608,
-      "revision": "baf6a51775fd279a"
-    },
-    {
       "url": "/vocab/images/V7/paprika.webp",
       "size": 38220,
       "revision": "b14129dbe9e40cdc"
@@ -7657,11 +7760,6 @@
       "revision": "4ca02207bb7499b5"
     },
     {
-      "url": "/vocab/images/V7/patisserie.webp",
-      "size": 32740,
-      "revision": "a5b22e3521efa311"
-    },
-    {
       "url": "/vocab/images/V7/peche.webp",
       "size": 12148,
       "revision": "65427e66fad007e4"
@@ -7680,11 +7778,6 @@
       "url": "/vocab/images/V7/planche.webp",
       "size": 14240,
       "revision": "261c9cac61000e8f"
-    },
-    {
-      "url": "/vocab/images/V7/plat.webp",
-      "size": 33044,
-      "revision": "6bd1732e4ef9e7ff"
     },
     {
       "url": "/vocab/images/V7/poele.webp",
@@ -7777,11 +7870,6 @@
       "revision": "d8cfb7c30ced35b9"
     },
     {
-      "url": "/vocab/images/V7/sandwich.webp",
-      "size": 27854,
-      "revision": "5e7332287764846a"
-    },
-    {
       "url": "/vocab/images/V7/sel.webp",
       "size": 8530,
       "revision": "68653b3c7de1e188"
@@ -7792,11 +7880,6 @@
       "revision": "56ef4630f5681fe5"
     },
     {
-      "url": "/vocab/images/V7/serviette.webp",
-      "size": 2564,
-      "revision": "865c81d947f8a995"
-    },
-    {
       "url": "/vocab/images/V7/spatule.webp",
       "size": 3614,
       "revision": "d9fa1d1c8a129a96"
@@ -7805,16 +7888,6 @@
       "url": "/vocab/images/V7/sucre.webp",
       "size": 12922,
       "revision": "0ce37bef69e926e5"
-    },
-    {
-      "url": "/vocab/images/V7/table.webp",
-      "size": 10372,
-      "revision": "5c91c59722bab643"
-    },
-    {
-      "url": "/vocab/images/V7/tarte.webp",
-      "size": 37806,
-      "revision": "bed601547c1202d4"
     },
     {
       "url": "/vocab/images/V7/tasse.webp",
@@ -7837,19 +7910,9 @@
       "revision": "f361a8aac0942626"
     },
     {
-      "url": "/vocab/images/V7/verre.webp",
-      "size": 5776,
-      "revision": "e71b690fe4c4a782"
-    },
-    {
       "url": "/vocab/images/V7/verser.webp",
       "size": 13430,
       "revision": "eda35fd597174602"
-    },
-    {
-      "url": "/vocab/images/V7/viennoiserie.webp",
-      "size": 42144,
-      "revision": "096888ae4f7895ae"
     },
     {
       "url": "/vocab/images/V8/allergie.webp",
@@ -8057,6 +8120,11 @@
       "revision": "6227a9f489f50d1d"
     },
     {
+      "url": "/vocab/images/V9/aeroport.png",
+      "size": 1417686,
+      "revision": "4f018f7b927a5a55"
+    },
+    {
       "url": "/vocab/images/V9/aigle.webp",
       "size": 20554,
       "revision": "2a2cd74538490783"
@@ -8090,6 +8158,21 @@
       "url": "/vocab/images/V9/bateau.webp",
       "size": 11652,
       "revision": "d68ff3da670cb9d3"
+    },
+    {
+      "url": "/vocab/images/V9/bibliotheque.png",
+      "size": 1996425,
+      "revision": "cbd3d2e01d59a6ef"
+    },
+    {
+      "url": "/vocab/images/V9/boucher.png",
+      "size": 1583728,
+      "revision": "b2a8806864028dec"
+    },
+    {
+      "url": "/vocab/images/V9/boulangerie.png",
+      "size": 1753650,
+      "revision": "0d0f3673ee03ebf5"
     },
     {
       "url": "/vocab/images/V9/bus.webp",
@@ -8132,9 +8215,19 @@
       "revision": "d0bfede52d5e41d6"
     },
     {
+      "url": "/vocab/images/V9/coiffeur.png",
+      "size": 1744611,
+      "revision": "f7fb19ba18f17415"
+    },
+    {
       "url": "/vocab/images/V9/colline.webp",
       "size": 49424,
       "revision": "0382f5c7b9073018"
+    },
+    {
+      "url": "/vocab/images/V9/commissariat.png",
+      "size": 1666834,
+      "revision": "154472490e64aad3"
     },
     {
       "url": "/vocab/images/V9/coq.webp",
@@ -8247,6 +8340,11 @@
       "revision": "314dfd89d1239321"
     },
     {
+      "url": "/vocab/images/V9/librairie.png",
+      "size": 1711574,
+      "revision": "9092fe43315cc009"
+    },
+    {
       "url": "/vocab/images/V9/lion.webp",
       "size": 33618,
       "revision": "45a64b0290831592"
@@ -8282,6 +8380,11 @@
       "revision": "2938c6d7f1b11758"
     },
     {
+      "url": "/vocab/images/V9/musee.png",
+      "size": 1748547,
+      "revision": "1fe8cbc430c49ed6"
+    },
+    {
       "url": "/vocab/images/V9/navire.webp",
       "size": 35466,
       "revision": "689d62d6c3f171ed"
@@ -8297,9 +8400,19 @@
       "revision": "d2de4fad16ae0c92"
     },
     {
+      "url": "/vocab/images/V9/papeterie.png",
+      "size": 1592307,
+      "revision": "471340224bf356d4"
+    },
+    {
       "url": "/vocab/images/V9/pharmacie.webp",
       "size": 60882,
       "revision": "25aa9cfe5773641f"
+    },
+    {
+      "url": "/vocab/images/V9/piscine.png",
+      "size": 1532944,
+      "revision": "44a96113cf71842b"
     },
     {
       "url": "/vocab/images/V9/plage.webp",
@@ -8310,6 +8423,11 @@
       "url": "/vocab/images/V9/poisson.webp",
       "size": 7566,
       "revision": "bd3ebd7414b45c7b"
+    },
+    {
+      "url": "/vocab/images/V9/poste.png",
+      "size": 1486619,
+      "revision": "b301c79fa59901f3"
     },
     {
       "url": "/vocab/images/V9/poste.webp",
@@ -8337,6 +8455,11 @@
       "revision": "a3e598adbb29cf00"
     },
     {
+      "url": "/vocab/images/V9/restaurant.png",
+      "size": 1787337,
+      "revision": "d6d2ab59591cfe50"
+    },
+    {
       "url": "/vocab/images/V9/riviere.webp",
       "size": 59368,
       "revision": "5e7cb113d26f4475"
@@ -8345,6 +8468,11 @@
       "url": "/vocab/images/V9/rue.webp",
       "size": 68714,
       "revision": "b433de456354d684"
+    },
+    {
+      "url": "/vocab/images/V9/salle-de-sport.png",
+      "size": 1541791,
+      "revision": "bd8fb0eb27177a65"
     },
     {
       "url": "/vocab/images/V9/sapin.webp",
@@ -8357,9 +8485,19 @@
       "revision": "b516cc53978c15f1"
     },
     {
+      "url": "/vocab/images/V9/supermarche.png",
+      "size": 2063984,
+      "revision": "bde9b82815871217"
+    },
+    {
       "url": "/vocab/images/V9/train.webp",
       "size": 38230,
       "revision": "b717e3a082a9a85d"
+    },
+    {
+      "url": "/vocab/images/V9/tribunal.png",
+      "size": 1842780,
+      "revision": "3722e05b2c9c060e"
     },
     {
       "url": "/vocab/images/V9/usine.webp",
