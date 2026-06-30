@@ -157,12 +157,12 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
           return (
             <div
               key={`${syl}-${i}`}
-              className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 py-2 ${
+              className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border-2 px-3 py-2 transition-colors ${
                 state === "correct"
-                  ? "border-[var(--color-accent-lecture)]"
+                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
-                    ? "border-red-300"
-                    : "border-[var(--color-border-default)]"
+                    ? "border-red-300 bg-[var(--color-bg-primary)]"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
               <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
