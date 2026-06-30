@@ -294,7 +294,7 @@ function CompareQuestion({
           const isCorrect = correct === op;
           let cls = "flex h-8 w-8 items-center justify-center rounded border font-mono text-sm font-bold transition-colors ";
           if (validated) {
-            if (isCorrect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
+            if (isCorrect) cls += "border-amber-500 bg-amber-50 text-amber-600";
             else if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
           } else {
@@ -669,18 +669,30 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
   const aD = d4(a), bD = d4(b), rD = d4(result);
   const aFz = aD.findIndex(x => x !== 0);
   const bFz = bD.findIndex(x => x !== 0);
+  const rFzRaw = rD.findIndex(x => x !== 0);
+  const rFz = rFzRaw === -1 ? 3 : rFzRaw;
   const showCarry = op !== "÷";
   const carryLabel = op === "-" ? "E" : "R";
 
-  const digitInput = (col: number) => (
-    <CorrectionInput
-      value={answers[col] ?? ""}
-      onChange={v => onChange(col, v.replace(/[^0-9]/g, "").slice(-1))}
-      correct={String(rD[col])}
-      validated={validated}
-      width="w-8"
-    />
-  );
+  const digitInput = (col: number) => {
+    const correct = String(rD[col]);
+    const value = answers[col] ?? "";
+    const optionalLeadingZero = col < rFz && rD[col] === 0;
+    if (validated && optionalLeadingZero && value.trim() === "") {
+      return (
+        <span className="inline-flex h-9 w-8 items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-center font-mono text-sm" />
+      );
+    }
+    return (
+      <CorrectionInput
+        value={value}
+        onChange={v => onChange(col, v.replace(/[^0-9]/g, "").slice(-1))}
+        correct={correct}
+        validated={validated}
+        width="w-8"
+      />
+    );
+  };
 
   const inner = (
     <table className="mx-auto border-collapse">

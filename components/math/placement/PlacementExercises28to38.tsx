@@ -43,14 +43,17 @@ function randDecimalValue(): number {
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
 function CorrectionInput({
-  value, onChange, correct, validated, width = "w-16",
+  value, onChange, correct, validated, width = "w-16", variant = "line",
 }: {
   value: string; onChange: (v: string) => void; correct: string;
-  validated: boolean; width?: string; placeholder?: string;
+  validated: boolean; width?: string; placeholder?: string; variant?: "line" | "box";
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
+  const frameCls = variant === "box"
+    ? `rounded-md border-2 ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/45"} bg-transparent`
+    : `rounded-none border-0 border-b-2 ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"} bg-transparent`;
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} min-h-9 flex flex-col items-center justify-center ${frameCls} px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col items-center leading-tight">
@@ -82,7 +85,7 @@ function CorrectionInputText({
   const norm = (s: string) => s.trim().replace(/\s+/g, "").toLowerCase();
   const wrong = validated && norm(value) !== norm(correct);
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"} bg-transparent px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col items-center leading-tight">
@@ -135,7 +138,7 @@ function FracInput({
   };
 
   return (
-    <span className="inline-flex flex-col items-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5">
+    <span className="inline-flex min-h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-[var(--color-accent-alg)]/45 bg-transparent px-1 py-1">
       {cell(numVal, numCorrect, numWrong, onNumChange)}
       <span className="my-0.5 h-px w-full bg-[var(--color-text-primary)]" />
       {cell(denVal, denCorrect, denWrong, onDenChange)}
@@ -144,12 +147,13 @@ function FracInput({
 }
 
 // Fraction display helper
-function Frac({ n, d, className = "" }: { n: React.ReactNode; d: React.ReactNode; className?: string }) {
+function Frac({ n, d, className = "", bold = true }: { n: React.ReactNode; d: React.ReactNode; className?: string; bold?: boolean }) {
+  const weight = bold ? "font-bold" : "font-normal";
   return (
     <span className={`inline-flex flex-col items-center gap-[2px] align-middle ${className}`}>
-      <span className="flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm font-bold tabular-nums">{n}</span>
+      <span className={`flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm ${weight} tabular-nums`}>{n}</span>
       <span className="h-px w-full min-w-[1.5rem] bg-current" />
-      <span className="flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm font-bold tabular-nums">{d}</span>
+      <span className={`flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm ${weight} tabular-nums`}>{d}</span>
     </span>
   );
 }
@@ -470,7 +474,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const norm = (s: string) => s.trim().replace(/\s/g, "");
     const checks = [
       () => norm(answers[0] ?? "") === String(data.q1.ask === "num" ? data.q1.n : data.q1.d),
-      () => norm(answers[1] ?? "") === String(data.q2.n) && norm(answers[8] ?? "") === String(data.q2.d),
+      () => norm(answers[1] ?? "") === String(data.q2.n),
       () => { const [en,ed]=splitAns(data.q3.ans); return norm(fracNums[0]??"")=== en && norm(fracDens[0]??"")=== ed; },
       () => { const [en,ed]=splitAns(data.q4.ans); return norm(fracNums[1]??"")=== en && norm(fracDens[1]??"")=== ed; },
       () => { const [en,ed]=splitAns(data.q5.ans); return norm(fracNums[2]??"")=== en && norm(fracDens[2]??"")=== ed; },
@@ -490,6 +494,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
       correct={correct}
       validated={validated}
       width="w-14"
+      variant="box"
     />
   );
   const negFrac = (neg: boolean, n: number, d: number) =>
@@ -524,7 +529,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
           <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
           <Frac
             n={smallBox(1, String(data.q2.n))}
-            d={smallBox(8, String(data.q2.d))}
+            d={data.q2.d}
           />
         </span>
       </div>
@@ -597,8 +602,8 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
           <CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} width="w-20" />
         </div>
 
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <div className="grid items-center gap-x-2 gap-y-1" style={{ gridTemplateColumns: "max-content 1rem max-content max-content" }}>
+        <span className="pt-5 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+        <div className="grid items-center gap-x-2 gap-y-1 pt-5" style={{ gridTemplateColumns: "max-content 1rem max-content max-content" }}>
           <div className="col-span-4">{data.knownQty} kg de {data.fruitName} → {fmtDec(data.knownPrice, data.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
           <div>{data.targetQty} kg de {data.fruitName}</div>
           <span className="text-center text-[var(--color-text-secondary)]">=</span>
@@ -817,9 +822,9 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
       const a = randInt(2, 8), b = randInt(1, 12), c = randInt(1, 9);
       const numerator = d * (c - b) - a * x;
       const variants = [
-        { left: <><Frac n={`${a}x + ${numerator}`} d={d} /> + {b}</>, right: String(c), x },
-        { left: <>{a}x + <Frac n={b} d={d} /></>, right: <><Frac n={a * x * d + b} d={d} /></>, x },
-        { left: <><Frac n={`${a}x − ${b}`} d={d} /> − {c}</>, right: <><Frac n={a * x - b - c * d} d={d} /></>, x },
+        { left: <><Frac n={`${a}x + ${numerator}`} d={d} bold={false} /> + {b}</>, right: String(c), x },
+        { left: <>{a}x + <Frac n={b} d={d} bold={false} /></>, right: <><Frac n={a * x * d + b} d={d} bold={false} /></>, x },
+        { left: <><Frac n={`${a}x − ${b}`} d={d} bold={false} /> − {c}</>, right: <><Frac n={a * x - b - c * d} d={d} bold={false} /></>, x },
       ];
       return variants[randInt(0, variants.length - 1)]!;
     });

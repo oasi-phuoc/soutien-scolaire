@@ -51,14 +51,23 @@ function randOneDecimal(minTenths: number, maxTenths: number): number {
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
-function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }: {
+function CorrectionInput({ value, onChange, correct, validated, width = "w-16", compact = false, variant = "line", maxLength }: {
   value: string; onChange: (v: string) => void; correct: string;
-  validated: boolean; width?: string; placeholder?: string;
+  validated: boolean; width?: string; placeholder?: string; compact?: boolean; variant?: "line" | "box"; maxLength?: number;
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
+  const heightCls = compact ? "min-h-8" : "min-h-9";
+  const textCls = compact ? "text-[13px]" : "text-sm";
+  const inputHeightCls = compact ? "h-5" : "h-6";
+  const baseBoxCls = variant === "box"
+    ? "rounded-md border-2 border-[var(--color-accent-alg)]/45 bg-transparent"
+    : "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60";
+  const wrongBoxCls = variant === "box"
+    ? "rounded-md border-2 border-amber-500 bg-transparent"
+    : "rounded-none border-0 border-b-2 border-amber-500";
   if (wrong) {
     return (
-      <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${wrongBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
         {value.trim() && <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{value}</span>}
         <span className="font-bold text-amber-600">{correct}</span>
       </div>
@@ -66,19 +75,20 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
   }
   if (validated) {
     return (
-      <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+      <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
         <span>{value || correct}</span>
       </div>
     );
   }
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} ${heightCls} flex flex-col items-center justify-center ${baseBoxCls} px-1 py-1 text-center font-mono ${textCls} text-[var(--color-text-primary)]`}>
       <input
         type="text"
         inputMode="decimal"
         value={value}
         onChange={e => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-        className="h-6 w-full bg-transparent text-center outline-none"
+        maxLength={maxLength}
+        className={`${inputHeightCls} w-full bg-transparent text-center outline-none`}
       />
     </div>
   );
@@ -187,11 +197,11 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
 }) {
   let blankIdx = 0;
   return (
-    <div className="flex flex-wrap items-center gap-1.5">
+    <div className="flex flex-nowrap items-center gap-1 overflow-x-auto pb-1">
       {vals.map((v, i) => {
         const isVisible = i === visPos[0] || i === visPos[1];
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
-        const pillCls = "h-9 w-24 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold";
+        const pillCls = "h-8 w-[3.7rem] inline-flex items-center justify-center rounded-full px-1 font-mono text-[13px] font-semibold";
         if (isVisible) {
           return (
             <div key={i} className={`${pillCls} border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]`}>{display}</div>
@@ -202,7 +212,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const ans = answers[bi] ?? "";
         return (
           <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-            validated={validated} width="w-24 rounded-full" />
+            validated={validated} width="w-[3.7rem]" compact maxLength={isInt ? 5 : 5} />
         );
       })}
     </div>
@@ -309,14 +319,20 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
         <div className="mt-2 space-y-1">
           <p className="text-[10px] font-bold text-amber-600">Correction :</p>
           <div className="flex flex-wrap items-center gap-1.5">
-            {correctOrder.map((n, ci) => (
+            {correctOrder.map((n, ci) => {
+              const misplaced = selected[ci] !== n;
+              const chipTone = misplaced
+                ? "border-amber-500 bg-amber-50 text-amber-600"
+                : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
+              return (
               <React.Fragment key={ci}>
-                <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 px-1.5 text-base font-mono font-bold text-[var(--color-accent-alg)]`}>
+                <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold ${chipTone}`}>
                   {fmt(n)}
                 </div>
                 {ci < correctOrder.length - 1 && <span className="text-sm font-bold text-amber-400">{desc ? ">" : "<"}</span>}
               </React.Fragment>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -439,6 +455,8 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   const bValNum = parseFloat(bStr.replace(",", "."));
   const resNum = op === "+" ? aValNum + bValNum : aValNum - bValNum;
   const correctResultDigits = decStrToDigits(fmtDec(Math.round(resNum * 100) / 100, 2));
+  const correctADigits = decStrToDigits(aStr);
+  const correctBDigits = decStrToDigits(bStr);
 
   const commaCell = (key: string) => (
     <td key={key} className="w-8 text-center">
@@ -449,14 +467,32 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   const inputStyle = "h-8 w-8 rounded-none border-0 border-b-2 text-center font-mono text-sm outline-none transition-colors border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   const carryStyle = "h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
-  const rowInput = (answers: string[], onChange: (col: number, val: string) => void, col: number) => (
-    <td key={col} className="w-8 p-0.5 text-center">
-      <input type="text" inputMode="numeric" maxLength={1} value={answers[col] ?? ""}
-        disabled={validated}
-        onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-        className={inputStyle} />
-    </td>
-  );
+  const rowInput = (answers: string[], correctDigits: number[], onChange: (col: number, val: string) => void, col: number) => {
+    const correct = correctDigits[col] ?? 0;
+    const val = answers[col] ?? "";
+    const firstNz = correctDigits.findIndex(d => d !== 0);
+    const optionalLeadingZero = correct === 0 && col < (firstNz === -1 ? 2 : firstNz);
+    if (validated) {
+      const isOk = val.trim() === String(correct) || (optionalLeadingZero && (val === "" || val === "0"));
+      return (
+        <td key={col} className="w-8 p-0.5 text-center">
+          <div className={`flex h-8 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-sm ${
+            isOk ? "border-[var(--color-accent-alg)]/60 text-[var(--color-text-primary)]" : "border-amber-500 font-bold text-amber-600"
+          }`}>
+            {optionalLeadingZero && val.trim() === "" ? "" : isOk ? (val || String(correct)) : String(correct)}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 p-0.5 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val}
+          disabled={validated}
+          onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={inputStyle} />
+      </td>
+    );
+  };
 
   const resultRowInput = (col: number) => {
     const correct = correctResultDigits[col] ?? 0;
@@ -520,16 +556,16 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
           {/* Row A */}
           <tr>
             <td />
-            {rowInput(aAnswers, onAChange, 0)}{rowInput(aAnswers, onAChange, 1)}{rowInput(aAnswers, onAChange, 2)}
+            {rowInput(aAnswers, correctADigits, onAChange, 0)}{rowInput(aAnswers, correctADigits, onAChange, 1)}{rowInput(aAnswers, correctADigits, onAChange, 2)}
             {commaCell("a-comma")}
-            {rowInput(aAnswers, onAChange, 3)}{rowInput(aAnswers, onAChange, 4)}
+            {rowInput(aAnswers, correctADigits, onAChange, 3)}{rowInput(aAnswers, correctADigits, onAChange, 4)}
           </tr>
           {/* Row B */}
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
-            {rowInput(bAnswers, onBChange, 0)}{rowInput(bAnswers, onBChange, 1)}{rowInput(bAnswers, onBChange, 2)}
+            {rowInput(bAnswers, correctBDigits, onBChange, 0)}{rowInput(bAnswers, correctBDigits, onBChange, 1)}{rowInput(bAnswers, correctBDigits, onBChange, 2)}
             {commaCell("b-comma")}
-            {rowInput(bAnswers, onBChange, 3)}{rowInput(bAnswers, onBChange, 4)}
+            {rowInput(bAnswers, correctBDigits, onBChange, 3)}{rowInput(bAnswers, correctBDigits, onBChange, 4)}
           </tr>
           <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Result row */}
@@ -643,18 +679,41 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
   const bd = [Math.floor(bInt / 1000) % 10, Math.floor(bInt / 100) % 10, Math.floor(bInt / 10) % 10, bInt % 10];
   const aFz = ad.findIndex(d => d !== 0);
   const bFz = bd.findIndex(d => d !== 0);
+  const onesDigit = bInt % 10;
+  const tensDigit = Math.floor(bInt / 10) % 10;
+  const partial1Digits = String(aInt * onesDigit).padStart(4, "0").slice(-4).split("").map(Number);
+  const partial2Digits = String(aInt * tensDigit).padStart(3, "0").slice(-3).split("").map(Number);
+  const totalDigits = String(aInt * bInt).padStart(4, "0").slice(-4).split("").map(Number);
   const inputCls = "h-8 w-8 rounded-none border-0 border-b-2 text-center font-mono text-sm outline-none transition-colors border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   const carryCls = "h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
-  const cellIn = (base: number, col: number) => (
-    <td key={col} className="w-8 text-center p-0.5">
-      <input type="text" inputMode="numeric" maxLength={1}
-        value={cells[base + col] ?? ""}
-        disabled={validated}
-        onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-        className={inputCls} />
-    </td>
-  );
+  const cellIn = (base: number, col: number, correctDigits?: number[], optionalLeading = true) => {
+    const val = cells[base + col] ?? "";
+    const correct = correctDigits?.[col];
+    if (validated && correctDigits && correct !== undefined) {
+      const firstNz = correctDigits.findIndex(d => d !== 0);
+      const optionalLeadingZero = optionalLeading && correct === 0 && col < (firstNz === -1 ? correctDigits.length - 1 : firstNz);
+      const isOk = val === String(correct) || (optionalLeadingZero && (val === "" || val === "0"));
+      return (
+        <td key={col} className="w-8 text-center p-0.5">
+          <div className={`flex h-8 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-sm ${
+            isOk ? "border-[var(--color-accent-alg)]/60 text-[var(--color-text-primary)]" : "border-amber-500 font-bold text-amber-600"
+          }`}>
+            {optionalLeadingZero && val === "" ? "" : isOk ? (val || String(correct)) : String(correct)}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 text-center p-0.5">
+        <input type="text" inputMode="numeric" maxLength={1}
+          value={val}
+          disabled={validated}
+          onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={inputCls} />
+      </td>
+    );
+  };
   const carryIn = (base: number, col: number) => (
     <td key={col} className="w-8 text-center p-0.5">
       <input type="text" inputMode="numeric" maxLength={1}
@@ -730,11 +789,11 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {[0,1,2,3].map(col => cellIn(16, col))}
+            {[0,1,2,3].map(col => cellIn(16, col, partial1Digits))}
           </tr>
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
-            {[0,1,2].map(col => cellIn(20, col))}
+            {[0,1,2].map(col => cellIn(20, col, partial2Digits))}
             <td className="w-8 text-center">
               <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
             </td>
@@ -742,7 +801,7 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {[0,1,2,3].map(col => cellIn(24, col))}
+            {[0,1,2,3].map(col => cellIn(24, col, totalDigits))}
           </tr>
         </tbody>
       </table>
@@ -898,6 +957,17 @@ function DecimalDivisionGrid({
     />
   );
 
+  const correctedDigit = (value: string, correct: string) => {
+    const isOk = value === correct;
+    return (
+      <div className={`flex h-8 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-base ${
+        isOk ? "border-[var(--color-accent-alg)]/60 text-[var(--color-text-primary)]" : "border-amber-500 font-bold text-amber-600"
+      }`}>
+        {isOk ? (value || correct) : correct}
+      </div>
+    );
+  };
+
   const _fixedCell = (value: string) => (
     <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
       {value}
@@ -935,7 +1005,9 @@ function DecimalDivisionGrid({
           return (
             <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
               {hasDigit
-                ? digitInput(workFlat[flatIdx] ?? "", value => onWorkChange(stepIndex, type, relIdx, value))
+                ? validated
+                  ? correctedDigit(workFlat[flatIdx] ?? "", numStr[relIdx] ?? "")
+                  : digitInput(workFlat[flatIdx] ?? "", value => onWorkChange(stepIndex, type, relIdx, value))
                 : emptyCell()}
             </td>
           );
@@ -1048,7 +1120,7 @@ function DecimalDivisionGrid({
           onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
           className="w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
         />
-        {validated && decResult.trim() && !matchNum(decResult, parseNum(decCorrect), 0.005) && (
+        {validated && !matchNum(decResult, parseNum(decCorrect), 0.005) && (
           <span className="text-xs font-bold text-amber-500">{decCorrect}</span>
         )}
       </div>
@@ -1369,6 +1441,7 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
                     correct={String(item.n)}
                     validated={validated}
                     width="w-12"
+                    variant="box"
                   />
                   <span className="h-[2px] w-12 rounded bg-[var(--color-text-primary)]" />
                   <CorrectionInput
@@ -1377,6 +1450,7 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
                     correct={String(item.d)}
                     validated={validated}
                     width="w-12"
+                    variant="box"
                   />
                 </div>
                 <div className="flex flex-1 justify-center overflow-hidden">
