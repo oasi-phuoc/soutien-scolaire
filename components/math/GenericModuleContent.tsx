@@ -259,6 +259,8 @@ type SymbolicGroupStep = {
   instruction: string;
   mode: "input" | "true_false";
   questions: SymbolicQuestion[];
+  // Shared variable values shown once below the instruction (A9.3).
+  givens?: { letter: string; value: number }[];
 };
 
 type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
@@ -5326,10 +5328,6 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
   const vars = ["x", "y", "a", "b", "c", "m", "n", "p"];
   const riLocal = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pickLocal = <T,>(items: T[]) => items[riLocal(0, items.length - 1)]!;
-  const distinctVars = (count: number) => {
-    const shuffled = [...vars].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
   const value = () => {
     let n = 0;
     while (n === 0) n = riLocal(-9, 9);
@@ -5338,10 +5336,17 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
   const compactSigned = (n: number) => n < 0 ? ` - ${Math.abs(n)}` : ` + ${n}`;
   const sqrtChoices = [4, 9, 16, 25, 36, 49, 64, 81];
 
+  // The 5 expressions of a step all share the SAME (randomly picked) letters and
+  // values; these are shown once in a "données" block above the questions.
+  const varCount = exNum === 1 ? 2 : 3;
+  const shuffledVars = [...vars].sort(() => Math.random() - 0.5).slice(0, varCount);
+  const [u, v, w] = shuffledVars;
+  const uv = value();
+  const vv = value();
+  const wv = value();
+  const givens = shuffledVars.map((letter, i) => ({ letter, value: [uv, vv, wv][i]! }));
+
   const templates2: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
-    const [u, v] = distinctVars(2);
-    const uv = value();
-    const vv = value();
     const a = riLocal(2, 9);
     const b = riLocal(2, 9);
     const c = riLocal(-12, 12);
@@ -5356,17 +5361,10 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
         : mode === 2 ? a * uv - b * (vv + (Math.abs(c) || 1))
           : mode === 3 ? a * (uv - vv) + b * uv
             : a * uv * b - vv + c;
-    return {
-      expression: `${expression}, pour ${u} = ${uv} et ${v} = ${vv}`,
-      acceptable: symbolicVariants(String(result)),
-    };
+    return { expression, acceptable: symbolicVariants(String(result)) };
   });
 
   const templates3: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
-    const [u, v, w] = distinctVars(3);
-    const uv = value();
-    const vv = value();
-    const wv = value();
     const a = riLocal(2, 7);
     const b = riLocal(2, 7);
     const c = riLocal(2, 7);
@@ -5381,17 +5379,10 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
         : mode === 2 ? a * uv - b * (vv - wv)
           : mode === 3 ? a * uv * b + vv - c * wv
             : a * (uv - vv + wv);
-    return {
-      expression: `${expression}, pour ${u} = ${uv}, ${v} = ${vv} et ${w} = ${wv}`,
-      acceptable: symbolicVariants(String(result)),
-    };
+    return { expression, acceptable: symbolicVariants(String(result)) };
   });
 
   const templatesAdvanced: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
-    const [u, v, w] = distinctVars(3);
-    const uv = value();
-    const vv = value();
-    const wv = value();
     const a = riLocal(2, 5);
     const b = riLocal(2, 5);
     const sq = pickLocal(sqrtChoices);
@@ -5407,10 +5398,7 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
         : mode === 2 ? root + a * (uv - vv) + wv * wv
           : mode === 3 ? a * uv * uv + b * vv * vv - wv
             : a * (uv + vv) * (uv + vv) - root - wv;
-    return {
-      expression: `${expression}, pour ${u} = ${uv}, ${v} = ${vv} et ${w} = ${wv}`,
-      acceptable: symbolicVariants(String(result)),
-    };
+    return { expression, acceptable: symbolicVariants(String(result)) };
   });
 
   const source = exNum === 1 ? templates2 : exNum === 2 ? templates3 : templatesAdvanced;
@@ -5419,11 +5407,12 @@ function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number):
     lesson,
     exNum,
     instruction: exNum === 1
-      ? "Évaluez les expressions avec deux variables."
+      ? "Évaluez les expressions avec deux variables. Les 5 expressions utilisent les mêmes valeurs."
       : exNum === 2
-        ? "Évaluez les expressions avec trois variables."
-        : "Évaluez les expressions avec puissances et racines.",
+        ? "Évaluez les expressions avec trois variables. Les 5 expressions utilisent les mêmes valeurs."
+        : "Évaluez les expressions avec puissances et racines. Les 5 expressions utilisent les mêmes valeurs.",
     mode: "input",
+    givens,
     questions: shufflePick(source, 5).map((make) => make()),
   };
 }
@@ -9818,6 +9807,18 @@ export function GenericModuleContent({
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
             <p className="text-sm text-[var(--color-text-primary)]">{step.instruction}</p>
+            {step.givens && step.givens.length > 0 && (
+              <p className="text-sm text-[var(--color-text-secondary)]">
+                {step.givens.map((g, i) => (
+                  <span key={g.letter}>
+                    {i > 0 && (i === step.givens!.length - 1 ? " et " : ", ")}
+                    <span className="font-bold text-[var(--color-accent-alg)]">{g.letter}</span>
+                    {" = "}
+                    <span className="font-mono font-bold text-[var(--color-text-primary)]">{g.value}</span>
+                  </span>
+                ))}
+              </p>
+            )}
             <div className="space-y-3">
               {step.questions.map((question, index) => {
                 const value = symbolicAnswers[index] ?? "";
@@ -10215,13 +10216,14 @@ export function GenericModuleContent({
               {" = "}
               <span className="font-mono font-bold text-[var(--color-text-primary)]">{step.value}</span>
             </p>
-            <div className="space-y-3">
+            {/* Single grid for all rows so the "=" and answer boxes line up vertically. */}
+            <div className="grid w-fit grid-cols-[1.5rem_auto_1rem_4rem] items-center gap-x-3 gap-y-3">
               {step.questions.map((q, i) => {
                 const userAns = algebraGroupAnswers[i] ?? "";
                 const result = algebraGroupValidated ? (algebraGroupResults[i] ?? null) : null;
                 const isWrong = result === false;
                 return (
-                  <div key={i} className="grid w-fit grid-cols-[1.5rem_auto_1rem_4rem] items-center gap-x-3">
+                  <Fragment key={i}>
                     <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     <span className="whitespace-nowrap font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                     <span className="text-center font-mono text-sm text-[var(--color-text-primary)]">=</span>
@@ -10252,7 +10254,7 @@ export function GenericModuleContent({
                         }`}
                       />
                     )}
-                  </div>
+                  </Fragment>
                 );
               })}
             </div>
