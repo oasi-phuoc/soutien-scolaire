@@ -83,14 +83,21 @@ function getSteps(data: LetterData): Step[] {
       { key: "eval", label: "Évaluation" },
     ];
   }
+  const isC = data.letterLower === "c";
   return [
     { key: "discover", label: "Découverte" },
+    // La lettre C a deux sons (/k/ et /s/) : explication + son /s/ supplémentaire.
+    ...(isC ? [{ key: "c-sounds", label: "Les 2 sons" }] : []),
     { key: "grid-upper", label: "Majuscules" },
     { key: "grid-lower", label: "Minuscules" },
     { key: "word-upper-1", label: "Mots 1" },
     { key: "word-lower", label: "Mots (min)" },
     { key: "sound-image", label: "Images" },
     { key: "sound-audio", label: "Audio" },
+    ...(isC ? [
+      { key: "sound-image-s", label: "Images /s/" },
+      { key: "sound-audio-s", label: "Audio /s/" },
+    ] : []),
     { key: "syllables-cv", label: "Syllabes" },
     { key: "syllables-vc", label: "Syllabes inverses" },
     { key: "syllables-mixed", label: "Syllabes mixtes" },
@@ -714,6 +721,58 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   );
 });
 
+// Explains the two sounds of the letter C (/k/ and /s/). Tap a word to hear it.
+function CSoundsExplain() {
+  const groups: { sound: string; rows: { syl: string; word: string }[] }[] = [
+    { sound: "/k/", rows: [
+      { syl: "C + A", word: "carotte" },
+      { syl: "C + O", word: "cochon" },
+      { syl: "C + U", word: "cube" },
+    ] },
+    { sound: "/s/", rows: [
+      { syl: "C + E", word: "cerise" },
+      { syl: "C + I", word: "citron" },
+      { syl: "C + Y", word: "cycle" },
+      { syl: "Ç", word: "garçon" },
+    ] },
+  ];
+  const play = (word: string) => new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
+  return (
+    <section className="space-y-4">
+      <div>
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">La lettre C se prononce de 2 façons</h2>
+        <p className="text-sm text-[var(--color-text-secondary)]">Touchez un mot pour l&apos;entendre.</p>
+      </div>
+      {groups.map((g) => (
+        <div key={g.sound} className="space-y-2">
+          <p className="text-xl font-bold text-[var(--color-accent-lecture)]">{g.sound}</p>
+          <div className="space-y-2">
+            {g.rows.map((r, i) => (
+              <button
+                key={r.word}
+                type="button"
+                onClick={() => play(r.word)}
+                className="flex w-full items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2 text-left transition-colors hover:border-[var(--color-accent-lecture)]/50 active:scale-[0.99]"
+              >
+                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
+                <span className="w-16 shrink-0 text-lg font-bold text-[var(--color-text-primary)]">{r.syl}</span>
+                <span className="shrink-0 text-xs text-[var(--color-text-secondary)]">comme dans</span>
+                <span className="flex-1 text-base font-bold uppercase text-[var(--color-text-primary)]">{r.word}</span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-accent-lecture)] shadow-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  </svg>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
@@ -753,8 +812,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
   const isComplexWordStep = step.key === "complex-word-upper" || step.key === "complex-word-lower";
-  const isSoundImageStep = step.key === "sound-image";
-  const isSoundAudioStep = step.key === "sound-audio";
+  const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s";
+  const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
   const isPronounceStep = step.key === "pronounce";
   const isEvalStep = step.key === "eval";
   // Steps rendered with the mic/word/audio grids (ComplexSyllableGrid / WordPronounceGrid):
@@ -1002,10 +1061,16 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <WordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
       case "word-lower":
         return <WordSpotter key={k} ref={wordRef} target={data.letterLower} isUppercase={false} />;
+      case "c-sounds":
+        return <CSoundsExplain key={k} />;
       case "sound-image":
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
       case "sound-audio":
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
+      case "sound-image-s":
+        return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="image" />;
+      case "sound-audio-s":
+        return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="audio" />;
       case "syllables-cv":
         if (data.type !== "consonant") return null;
         return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="cv" />;
