@@ -894,12 +894,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       const cvLower = itemsOf("cv-lower");
       const vcUpper = itemsOf("vc-upper");
       const vcLower = itemsOf("vc-lower");
-      const TITLES: Record<string, string> = {
-        "cv-upper": `Consonne + ${data.letter} (majuscules)`,
-        "cv-lower": `Consonne + ${data.letterLower} (minuscules)`,
-        "vc-upper": `${data.letter} + consonne (majuscules)`,
-        "vc-lower": `${data.letterLower} + consonne (minuscules)`,
-      };
       if (step.key === "word-eval") {
         // 30 syllables: 8+7 from CV (upper/lower) and 8+7 from VC (upper/lower).
         return (
@@ -937,7 +931,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           key={k}
           ref={pronounceGridRef}
           words={grid.items}
-          title={TITLES[grid.key] ?? grid.label}
+          title="Lecture des syllabes"
           consigne="Prononcez chaque syllabe à voix haute."
         />
       );
