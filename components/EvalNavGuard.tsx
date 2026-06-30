@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 type EvalNavGuardApi = {
   /** True while at least one evaluation is in progress. */
@@ -28,11 +28,16 @@ export function useEvalNavGuard(): EvalNavGuardApi | null {
  */
 export function useRegisterEvalGuard(active: boolean) {
   const guard = useEvalNavGuard();
+  // Depend on the *stable* register/unregister callbacks (not the whole guard
+  // object, whose identity changes on every provider render) so this effect
+  // runs once per active period — registering/unregistering once, not in a loop.
+  const register = guard?.register;
+  const unregister = guard?.unregister;
   useEffect(() => {
-    if (!active || !guard) return;
-    guard.register();
-    return () => guard.unregister();
-  }, [active, guard]);
+    if (!active || !register || !unregister) return;
+    register();
+    return () => unregister();
+  }, [active, register, unregister]);
 }
 
 /**
@@ -54,13 +59,23 @@ export function EvalNavGuardProvider({ children }: { children: React.ReactNode }
 
   const active = count > 0;
 
+  // Keep requestNavigate stable (read count via a ref) so the context value's
+  // identity only changes when `active` flips — preventing register/unregister
+  // churn in consumers.
+  const countRef = useRef(0);
+  countRef.current = count;
   const requestNavigate = useCallback((run: () => void) => {
-    if (count > 0) setPending(() => run);
+    if (countRef.current > 0) setPending(() => run);
     else run();
-  }, [count]);
+  }, []);
+
+  const value = useMemo(
+    () => ({ active, register, unregister, requestNavigate }),
+    [active, register, unregister, requestNavigate],
+  );
 
   return (
-    <EvalNavGuardContext.Provider value={{ active, register, unregister, requestNavigate }}>
+    <EvalNavGuardContext.Provider value={value}>
       {children}
       {pending && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-4">
@@ -72,22 +87,22 @@ export function EvalNavGuardProvider({ children }: { children: React.ReactNode }
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => setPending(null)}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-              >
-                Continuer l&apos;évaluation
-              </button>
-              <button
-                type="button"
                 onClick={() => {
                   const run = pending;
                   setPending(null);
                   setCount(0);
                   run?.();
                 }}
-                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
                 Quitter
+              </button>
+              <button
+                type="button"
+                onClick={() => setPending(null)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-theme)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Continuer l&apos;évaluation
               </button>
             </div>
           </div>
