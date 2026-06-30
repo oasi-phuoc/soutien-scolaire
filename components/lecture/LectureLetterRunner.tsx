@@ -935,18 +935,23 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         );
       }
       if (step.key === "cv-timed" || step.key === "vc-timed") {
-        const isCv = step.key === "cv-timed";
+        // Timed reading: 10 two-syllable sequences (5 uppercase + 5 lowercase)
+        // built from the same CV/VC combos used in the previous 2-syllable step.
+        const base = step.key === "cv-timed" ? cvLower : vcLower;
+        const combos: string[] = [];
+        for (const a of base) for (const b of base) if (a !== b) combos.push(a + b);
         return (
           <WordPronounceGrid
             key={k}
             ref={pronounceGridRef}
             kind="syllable"
-            sampleSpec={isCv
-              ? [{ pool: cvUpper, n: 10 }, { pool: cvLower, n: 10 }]
-              : [{ pool: vcUpper, n: 10 }, { pool: vcLower, n: 10 }]}
+            sampleSpec={[
+              { pool: combos.map((c) => c.toUpperCase()), n: 5 },
+              { pool: combos, n: 5 },
+            ]}
             timerSeconds={120}
             title="Lecture rapide chronométré"
-            consigne="Prononcez chaque syllabe à voix haute le plus vite possible avant la fin du temps."
+            consigne="Lisez chaque suite de 2 syllabes à voix haute le plus vite possible avant la fin du temps."
             onTimeChange={setWordTimerLeft}
           />
         );
