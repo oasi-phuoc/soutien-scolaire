@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState }
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
-import { getLectureModule } from "@/lib/curriculum/lecture-data";
+import { getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
@@ -102,7 +102,8 @@ function getSteps(data: LetterData): Step[] {
     ] : []),
     { key: "syllables-cv", label: "Syllabes" },
     { key: "syllables-vc", label: "Syllabes inverses" },
-    { key: "syllables-mixed", label: "Syllabes mixtes" },
+    { key: "syll-2", label: "2 syllabes" },
+    { key: "syll-timed", label: "Lecture rapide" },
     { key: "pronounce", label: "Prononcer" },
     { key: "eval", label: "Évaluation" },
   ];
@@ -808,7 +809,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     (data.type === "multisyllable" && step.key === "review") ||
     step.key === "ms-review" ||
     step.key === "cv-timed" ||
-    step.key === "vc-timed";
+    step.key === "vc-timed" ||
+    step.key === "syll-timed";
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isComplexGridStep = step.key === "complex-grid-upper" || step.key === "complex-grid-lower";
@@ -823,7 +825,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     step.key === "complex-syllables-cv" ||
     step.key === "syllables-cv" ||
     step.key === "syllables-vc" ||
-    step.key === "syllables-mixed" ||
+    step.key === "syll-2" ||
+    step.key === "syll-timed" ||
     isWordEvalStep ||
     data.type === "syllable" ||
     data.type === "multisyllable" ||
@@ -1095,9 +1098,51 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       case "syllables-vc":
         if (data.type !== "consonant") return null;
         return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="vc" />;
-      case "syllables-mixed":
+      case "syll-2": {
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="mixed" />;
+        // 2-syllable reading built from the consonant's CV syllables (e.g. "caco").
+        const vowels = ["a", "o", "i", "e", "u", "y"];
+        const cvLower = vowels.map((v) => `${data.letterLower}${v}`);
+        const combos: string[] = [];
+        for (const a of cvLower) for (const b of cvLower) if (a !== b) combos.push(a + b);
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            kind="syllable"
+            sampleSpec={[
+              { pool: combos.map((c) => c.toUpperCase()), n: 8 },
+              { pool: combos, n: 7 },
+            ]}
+            title="Lecture de 2 syllabes"
+            consigne="Lisez chaque suite de 2 syllabes à voix haute."
+          />
+        );
+      }
+      case "syll-timed": {
+        if (data.type !== "consonant") return null;
+        // Timed rapid reading — 6 single syllables (3 upper + 3 lower), CV and VC mixed.
+        const vowels = ["a", "o", "i", "e", "u", "y"];
+        const cv = vowels.map((v) => `${data.letterLower}${v}`);
+        const vc = vowels.map((v) => `${v}${data.letterLower}`);
+        const upper = [...cv, ...vc].map((s) => s.toUpperCase());
+        const lower = [...cv, ...vc];
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            kind="syllable"
+            sampleSpec={[
+              { pool: upper, n: 3 },
+              { pool: lower, n: 3 },
+            ]}
+            timerSeconds={120}
+            title="Lecture rapide chronométré"
+            consigne="Prononcez chaque syllabe à voix haute le plus vite possible avant la fin du temps."
+            onTimeChange={setWordTimerLeft}
+          />
+        );
+      }
       case "pronounce":
         return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
       case "eval":
@@ -1148,7 +1193,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             </svg>
           </button>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable" || data.type === "complex-sound" ? data.title : `${data.letter} - ${data.letterLower} — ${data.phoneme}`}
+            {data.type === "syllable" || data.type === "monosyllable" || data.type === "multisyllable" || data.type === "complex-sound" ? data.title : `${data.letter} - ${data.letterLower} — ${lessonPhonemeLabel(data.letterLower, data.phoneme)}`}
           </h1>
         </div>
       </header>

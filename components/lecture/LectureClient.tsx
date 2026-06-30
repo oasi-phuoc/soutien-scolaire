@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LECTURE_MODULES, STORIES, getRevision } from "@/lib/curriculum/lecture-data";
+import { LECTURE_MODULES, STORIES, getRevision, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
 import {
   loadLectureProgress,
   getSubmoduleState,
@@ -171,7 +171,7 @@ function ModuleCard({
                     : letter.title}
                 </span>
                 <span className="ml-1 text-[10px] text-[var(--color-text-secondary)]">
-                  {letter.phoneme}
+                  {lessonPhonemeLabel(letter.letterLower, letter.phoneme)}
                 </span>
               </div>
               {isAvailable ? (

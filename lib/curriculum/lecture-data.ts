@@ -1717,6 +1717,19 @@ export const LECTURE_MODULES: LectureModule[] = [
   },
 ];
 
+// Letters that have two sounds — shown in the lesson title and the menu.
+export const DUAL_SOUND_LETTERS: Record<string, [string, string]> = {
+  c: ["/k/", "/s/"],
+  g: ["/g/", "/ʒ/"],
+  s: ["/s/", "/z/"],
+};
+
+/** Phoneme label for a lesson: both sounds for C/G/S, otherwise the single phoneme. */
+export function lessonPhonemeLabel(letterLower: string, phoneme: string): string {
+  const dual = DUAL_SOUND_LETTERS[letterLower];
+  return dual ? dual.join(" · ") : phoneme;
+}
+
 export function getLectureModule(id: string): LectureModule | undefined {
   return LECTURE_MODULES.find((m) => m.id === id);
 }
