@@ -519,16 +519,20 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [playingGuideIdx, setPlayingGuideIdx] = useState<number | null>(null);
   const guideIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Task 4: dialogue
-  const [dialogueIndex, setDialogueIndex] = useState(0);
+  // Task 4: dialogue (all questions shown at once)
+  const [task4Transcripts, setTask4Transcripts] = useState<string[]>(() => Array(10).fill(""));
   const [task4Lines, setTask4Lines] = useState<OralDialogueLine[]>([]);
   const [task4Done, setTask4Done] = useState(false);
   const [hintsOpen, setHintsOpen] = useState(false);
 
-  // Task 5: argumentation
+  // Task 5: argumentation (multi-phrase)
   const [argumentationTranscript, setArgumentationTranscript] = useState("");
+  const [task5Phrases, setTask5Phrases] = useState<string[]>([]);
   const [task5Lines, setTask5Lines] = useState<OralDialogueLine[]>([]);
   const [task5Done, setTask5Done] = useState(false);
+
+  // Mic toggle
+  const [micBlocked, setMicBlocked] = useState(false);
 
   // Review
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
@@ -568,9 +572,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setCurrentTranscript(text);
   }, []);
 
-  const onTask4Transcript = useCallback((text: string) => {
-    setCurrentTranscript(text);
-  }, []);
+  const setTDP = useCallback((i: number, t: string) =>
+    setTask4Transcripts((prev) => { const n = [...prev]; n[i] = t; return n; }), []);
+  const onTDP0 = useCallback((t: string) => setTDP(0, t), [setTDP]);
+  const onTDP1 = useCallback((t: string) => setTDP(1, t), [setTDP]);
+  const onTDP2 = useCallback((t: string) => setTDP(2, t), [setTDP]);
+  const onTDP3 = useCallback((t: string) => setTDP(3, t), [setTDP]);
+  const onTDP4 = useCallback((t: string) => setTDP(4, t), [setTDP]);
+  const onTDP5 = useCallback((t: string) => setTDP(5, t), [setTDP]);
+  const onTDP6 = useCallback((t: string) => setTDP(6, t), [setTDP]);
+  const onTDP7 = useCallback((t: string) => setTDP(7, t), [setTDP]);
+  const onTDP8 = useCallback((t: string) => setTDP(8, t), [setTDP]);
+  const onTDP9 = useCallback((t: string) => setTDP(9, t), [setTDP]);
 
   const onTask5Transcript = useCallback((text: string) => {
     setArgumentationTranscript(text);
@@ -592,17 +605,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const { isListening: listenIQ7, startListening: startIQ7, stopListening: stopIQ7 } = useSpeechRecognition(onIQ7);
   const { isListening: listening3, startListening: start3, stopListening: stop3 } =
     useSpeechRecognition(onTask3Transcript);
-  const { isListening: listening4, startListening: start4, stopListening: stop4 } =
-    useSpeechRecognition(onTask4Transcript);
+  const { isListening: listenTDP0, startListening: startTDP0, stopListening: stopTDP0 } = useSpeechRecognition(onTDP0);
+  const { isListening: listenTDP1, startListening: startTDP1, stopListening: stopTDP1 } = useSpeechRecognition(onTDP1);
+  const { isListening: listenTDP2, startListening: startTDP2, stopListening: stopTDP2 } = useSpeechRecognition(onTDP2);
+  const { isListening: listenTDP3, startListening: startTDP3, stopListening: stopTDP3 } = useSpeechRecognition(onTDP3);
+  const { isListening: listenTDP4, startListening: startTDP4, stopListening: stopTDP4 } = useSpeechRecognition(onTDP4);
+  const { isListening: listenTDP5, startListening: startTDP5, stopListening: stopTDP5 } = useSpeechRecognition(onTDP5);
+  const { isListening: listenTDP6, startListening: startTDP6, stopListening: stopTDP6 } = useSpeechRecognition(onTDP6);
+  const { isListening: listenTDP7, startListening: startTDP7, stopListening: stopTDP7 } = useSpeechRecognition(onTDP7);
+  const { isListening: listenTDP8, startListening: startTDP8, stopListening: stopTDP8 } = useSpeechRecognition(onTDP8);
+  const { isListening: listenTDP9, startListening: startTDP9, stopListening: stopTDP9 } = useSpeechRecognition(onTDP9);
   const { isListening: listening5, startListening: start5, stopListening: stop5 } =
     useSpeechRecognition(onTask5Transcript);
 
-  // Reset transcript + hints on phase/dialogue index change
+  // Reset transcript + hints on phase change
   useEffect(() => {
     setCurrentTranscript("");
     setHintsOpen(false);
     setImageHelpOpen(false);
-  }, [phase, dialogueIndex]);
+  }, [phase]);
 
   // ——— Step index for segmented progress bar ———
 
@@ -663,30 +684,35 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setTask2Done(true);
   }
 
-  // ——— Task 4: dialogue responses ———
+  // ——— Task 4: dialogue responses (all at once) ———
 
-  function confirmDialogue() {
-    if (!currentTranscript.trim()) return;
-    const promptText = situation.dialoguePrompts[dialogueIndex]!;
-    const newLines: OralDialogueLine[] = [
-      { role: "app", text: promptText },
-      { role: "student", text: currentTranscript },
-    ];
-    setTask4Lines((prev) => [...prev, ...newLines]);
-    setCurrentTranscript("");
-    if (dialogueIndex + 1 < situation.dialoguePrompts.length) {
-      setDialogueIndex((i) => i + 1);
-    } else {
-      setTask4Done(true);
+  function confirmTask4() {
+    const lines: OralDialogueLine[] = [];
+    for (let i = 0; i < situation.dialoguePrompts.length; i++) {
+      const text = (task4Transcripts[i] ?? "").trim();
+      lines.push(
+        { role: "app", text: situation.dialoguePrompts[i]! },
+        { role: "student", text: text || "(pas de réponse)" },
+      );
     }
+    setTask4Lines(lines);
+    setTask4Done(true);
   }
 
-  function confirmArgumentation() {
-    if (!argumentationTranscript.trim()) return;
-    setTask5Lines([
-      { role: "app", text: argumentationTopic.prompt },
-      { role: "student", text: argumentationTranscript },
-    ]);
+  // ——— Task 5: argumentation (multi-phrase) ———
+
+  function addTask5Phrase() {
+    if (!argumentationTranscript.trim() || listening5) return;
+    setTask5Phrases((prev) => [...prev, argumentationTranscript.trim()]);
+    setArgumentationTranscript("");
+  }
+
+  function validateTask5() {
+    const lines: OralDialogueLine[] = [{ role: "app", text: argumentationTopic.prompt }];
+    for (const phrase of task5Phrases) {
+      lines.push({ role: "student", text: phrase });
+    }
+    setTask5Lines(lines);
     setTask5Done(true);
   }
 
@@ -756,8 +782,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     if (phase === "task1") confirmTask1();
     else if (phase === "task2") confirmInterview();
     else if (phase === "task3") validateTask2();
-    else if (phase === "task4") confirmDialogue();
-    else if (phase === "task5") confirmArgumentation();
+    else if (phase === "task4") confirmTask4();
+    else if (phase === "task5") validateTask5();
   }
 
   const showValidate =
@@ -767,12 +793,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     (phase === "task4" && !task4Done) ||
     (phase === "task5" && !task5Done);
 
-  const validateDisabled =
-    (phase === "task1" && (!task1Transcripts.some((t) => t.trim()) || isChecking)) ||
-    (phase === "task2" && (!interviewTranscripts.some((t) => t.trim()) || isChecking)) ||
-    (phase === "task3" && (task2Phrases.length === 0 || isChecking)) ||
-    (phase === "task4" && (!currentTranscript.trim() || listening4 || isChecking)) ||
-    (phase === "task5" && (!argumentationTranscript.trim() || listening5 || isChecking));
+  const validateDisabled = false;
 
   // Free navigation: Suivant never depends on validation.
   const nextDisabled = false;
@@ -871,9 +892,33 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
-          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+          <h1 className="flex-1 text-xl font-bold text-[var(--color-text-primary)]">
             {lessonCode} — Production orale
           </h1>
+          {supported && (
+            <button
+              type="button"
+              onClick={() => setMicBlocked((v) => !v)}
+              title={micBlocked ? "Réactiver le microphone" : "Désactiver le microphone (saisie texte)"}
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${micBlocked ? "border-red-400 bg-red-50 text-red-500" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"}`}
+              aria-label={micBlocked ? "Microphone bloqué — cliquer pour réactiver" : "Cliquer pour bloquer le micro"}
+            >
+              {micBlocked ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                  <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+                  <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
+                  <line x1="12" y1="19" x2="12" y2="22" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <rect x="9" y="2" width="6" height="12" rx="3" />
+                  <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
+                </svg>
+              )}
+            </button>
+          )}
         </div>
       </header>
 
@@ -970,10 +1015,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                       {!task1Done && (
                         <ThemeMicButton
                           isListening={isListeningI}
-                          supported={supported}
+                          supported={supported && !micBlocked}
                           onStart={onStartI}
                           onStop={onStopI}
-                          disabled={isChecking}
                         />
                       )}
                     </div>
@@ -981,10 +1025,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                       <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                     ) : !task1Done ? (
                       <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
-                        {supported ? "Maintenez le micro pour enregistrer…" : ""}
+                        {(supported && !micBlocked) ? "Maintenez le micro pour enregistrer…" : ""}
                       </p>
                     ) : null}
-                    {!task1Done && !supported && (
+                    {!task1Done && (!supported || micBlocked) && (
                       <input
                         type="text"
                         value={transcript}
@@ -1046,10 +1090,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         {!interviewDone && (
                           <ThemeMicButton
                             isListening={iqListeners[i]!}
-                            supported={supported}
+                            supported={supported && !micBlocked}
                             onStart={iqStarters[i]!}
                             onStop={iqStoppers[i]!}
-                            disabled={isChecking}
                           />
                         )}
                       </div>
@@ -1057,10 +1100,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                       ) : !interviewDone ? (
                         <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
-                          {supported ? "Maintenez le micro pour enregistrer…" : ""}
+                          {(supported && !micBlocked) ? "Maintenez le micro pour enregistrer…" : ""}
                         </p>
                       ) : null}
-                      {!interviewDone && !supported && (
+                      {!interviewDone && (!supported || micBlocked) && (
                         <input
                           type="text"
                           value={transcript}
@@ -1092,9 +1135,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         <div className="flex-1 space-y-4">
           <div>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-                Partie 3 — Description d&apos;image
-              </h2>
+              <div>
+                <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+                  Partie 3 — Description d&apos;image
+                </h2>
+                <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+                  Enregistrez autant de phrases que vous voulez, puis validez.
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={() => { setImageHelpOpen(true); setOpenTranscriptIdx(null); }}
@@ -1131,10 +1179,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
                 </div>
               )}
-              {isChecking && (
-                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>
-              )}
-              {!supported && (
+              {(!supported || micBlocked) && (
                 <input
                   type="text"
                   value={currentTranscript}
@@ -1143,29 +1188,29 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
               )}
+              {currentTranscript && (
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
+                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
+                </div>
+              )}
               <div className="flex items-center gap-3">
                 <MicButton
                   isListening={listening3}
-                  supported={supported}
+                  supported={supported && !micBlocked}
                   onStart={start3}
                   onStop={stop3}
-                  disabled={isChecking}
                 />
                 <button
                   type="button"
                   onClick={addTask2Phrase}
-                  disabled={!currentTranscript.trim() || isChecking || listening3}
+                  disabled={!currentTranscript.trim() || listening3}
                   className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
                   style={{ background: ACCENT }}
                 >
                   + Ajouter
                 </button>
               </div>
-              {task2Phrases.length === 0 && (
-                <p className="text-center text-xs text-[var(--color-text-secondary)]">
-                  Enregistrez autant de phrases que vous voulez, puis validez.
-                </p>
-              )}
             </div>
           )}
 
@@ -1314,16 +1359,13 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* ——— TASK 4: Dialogue ——— */}
+      {/* ——— TASK 4: Dialogue (all questions at once) ——— */}
       {phase === "task4" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 4 — Dialogue
             </h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Écoutez la consigne de la situation.
-            </p>
           </div>
 
           {/* Image with audio icon overlay */}
@@ -1340,59 +1382,65 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           </div>
 
-          {/* Past dialogue lines */}
-          {task4Lines.length > 0 && (
+          {/* All dialogue questions shown at once (like Part 2) */}
+          {!task4Done && (() => {
+            const tdpListeners = [listenTDP0, listenTDP1, listenTDP2, listenTDP3, listenTDP4, listenTDP5, listenTDP6, listenTDP7, listenTDP8, listenTDP9];
+            const tdpStarters  = [startTDP0, startTDP1, startTDP2, startTDP3, startTDP4, startTDP5, startTDP6, startTDP7, startTDP8, startTDP9];
+            const tdpStoppers  = [stopTDP0,  stopTDP1,  stopTDP2,  stopTDP3,  stopTDP4,  stopTDP5,  stopTDP6,  stopTDP7,  stopTDP8,  stopTDP9];
+            return (
+              <div className="space-y-3">
+                {situation.dialoguePrompts.map((question, i) => {
+                  const transcript = task4Transcripts[i] ?? "";
+                  return (
+                    <div
+                      key={i}
+                      className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
+                      style={{ borderColor: ACCENT }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+                          style={{ background: ACCENT }}
+                        >
+                          {i + 1}
+                        </span>
+                        <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">{question}</span>
+                        <SpeakButton text={question} small />
+                        <ThemeMicButton
+                          isListening={tdpListeners[i]!}
+                          supported={supported && !micBlocked}
+                          onStart={tdpStarters[i]!}
+                          onStop={tdpStoppers[i]!}
+                        />
+                      </div>
+                      {transcript ? (
+                        <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
+                      ) : (supported && !micBlocked) ? (
+                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">Maintenez le micro pour enregistrer…</p>
+                      ) : null}
+                      {(!supported || micBlocked) && (
+                        <input
+                          type="text"
+                          value={transcript}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setTask4Transcripts((prev) => { const n = [...prev]; n[i] = val; return n; });
+                          }}
+                          placeholder="Votre réponse…"
+                          className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+
+          {task4Done && (
             <div className="space-y-2">
               {task4Lines.map((line, i) => <DialogueBubble key={i} line={line} />)}
             </div>
-          )}
-
-          {!task4Done && (
-            <>
-              {/* Current app prompt — voice message style */}
-              {(() => {
-                const currentHints: string[] = [];
-                return (
-                  <>
-                    <VoiceMessageBubble
-                      text={situation.dialoguePrompts[dialogueIndex]!}
-                      hints={currentHints}
-                      hintsOpen={hintsOpen}
-                      onToggleHints={() => setHintsOpen((v) => !v)}
-                    />
-                    {hintsOpen && currentHints && currentHints.length > 0 && (
-                      <HintsPanel
-                        hints={currentHints}
-                        onUseHint={(hint) => { setCurrentTranscript(hint); setHintsOpen(false); }}
-                      />
-                    )}
-                  </>
-                );
-              })()}
-
-              {currentTranscript && (
-                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
-                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
-                </div>
-              )}
-              {!supported && (
-                <input
-                  type="text"
-                  value={currentTranscript}
-                  onChange={(e) => setCurrentTranscript(e.target.value)}
-                  placeholder="Votre réponse…"
-                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-                />
-              )}
-              <MicButton
-                isListening={listening4}
-                supported={supported}
-                onStart={start4}
-                onStop={stop4}
-                disabled={isChecking}
-              />
-            </>
           )}
 
           {task4Done && (
@@ -1402,15 +1450,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           )}
         </div>
       )}
-      {/* Task 5: Argumentation */}
+      {/* ——— TASK 5: Argumentation (multi-phrase like Task 3) ——— */}
       {phase === "task5" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-              Partie 5 - Argumentation
+              Partie 5 — Argumentation
             </h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Donnez votre opinion et expliquez pourquoi.
+            <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+              Enregistrez autant de phrases que vous voulez, puis validez.
             </p>
           </div>
 
@@ -1418,7 +1466,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <div className="flex items-start gap-3">
               <div className="flex-1">
                 <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                  Theme : {argumentationTopic.theme}
+                  Thème : {argumentationTopic.theme}
                 </p>
                 <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
                   {argumentationTopic.prompt}
@@ -1428,33 +1476,69 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           </section>
 
-          {argumentationTranscript && (
-            <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-              <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
-              <p className="text-sm text-[var(--color-text-primary)]">{argumentationTranscript}</p>
+          {!task5Done && (
+            <div className="space-y-3">
+              {(!supported || micBlocked) && (
+                <input
+                  type="text"
+                  value={argumentationTranscript}
+                  onChange={(e) => setArgumentationTranscript(e.target.value)}
+                  placeholder="Tapez une phrase…"
+                  className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+                />
+              )}
+              {argumentationTranscript && (
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
+                  <p className="text-sm text-[var(--color-text-primary)]">{argumentationTranscript}</p>
+                </div>
+              )}
+              <div className="flex items-center gap-3">
+                <MicButton
+                  isListening={listening5}
+                  supported={supported && !micBlocked}
+                  onStart={start5}
+                  onStop={stop5}
+                />
+                <button
+                  type="button"
+                  onClick={addTask5Phrase}
+                  disabled={!argumentationTranscript.trim() || listening5}
+                  className="flex-1 rounded-full py-2.5 text-sm font-bold text-white disabled:opacity-35"
+                  style={{ background: ACCENT }}
+                >
+                  + Ajouter
+                </button>
+              </div>
             </div>
           )}
 
-          {!task5Done && !supported && (
-            <textarea
-              value={argumentationTranscript}
-              onChange={(event) => setArgumentationTranscript(event.target.value)}
-              placeholder="Votre reponse..."
-              className="min-h-28 w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-            />
+          {task5Phrases.length > 0 && (
+            <div className="space-y-1.5">
+              <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                {task5Done ? "Votre argumentation :" : `${task5Phrases.length} phrase${task5Phrases.length > 1 ? "s" : ""} enregistrée${task5Phrases.length > 1 ? "s" : ""} :`}
+              </p>
+              {task5Phrases.map((phrase, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-2 rounded-[var(--radius-md)] px-3 py-2"
+                  style={{ background: `color-mix(in srgb, ${ACCENT} 10%, transparent)` }}
+                >
+                  <span
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                    style={{ background: ACCENT }}
+                  >
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-[var(--color-text-primary)]">{phrase}</p>
+                </div>
+              ))}
+            </div>
           )}
 
-          {!task5Done ? (
-            <MicButton
-              isListening={listening5}
-              supported={supported}
-              onStart={start5}
-              onStop={stop5}
-              disabled={isChecking}
-            />
-          ) : (
+          {task5Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Argumentation enregistree. Appuyez sur <strong>Suivant</strong> pour voir le recapitulatif.
+              Argumentation enregistrée. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>

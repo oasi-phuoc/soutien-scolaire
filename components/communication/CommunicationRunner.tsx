@@ -26,6 +26,7 @@ import {
 } from "@/lib/curriculum/content/communication/writing-prompts";
 import { OralProductionRunner } from "@/components/communication/OralProductionRunner";
 import { FormProductionRunner } from "@/components/communication/FormProductionRunner";
+import { ComprehensionEcritRunner } from "@/components/communication/ComprehensionEcritRunner";
 
 const ACCENT = "var(--color-accent-comm)";
 const LESSONS: Record<string, CommunicationLesson> = {
@@ -438,6 +439,7 @@ export function CommunicationRunner({ lessonId }: { lessonId: string }) {
   if (lessonId === "E1-0" || lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
   if (lessonId === "PE-0") return <FormProductionRunner />;
   if (lessonId.startsWith("PO-")) return <OralProductionRunner lessonId={lessonId} />;
+  if (lessonId.startsWith("CE-")) return <ComprehensionEcritRunner lessonId={lessonId} />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
 }
 

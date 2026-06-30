@@ -56,7 +56,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">{m.description}</p>
+                  {m.description && <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">{m.description}</p>}
                 </div>
                 {allUnavailable ? (
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">

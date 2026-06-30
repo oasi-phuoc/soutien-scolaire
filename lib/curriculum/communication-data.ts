@@ -23,7 +23,7 @@ export const COMM_MODULES: CommunicationModule[] = [
     id: "PE",
     level: "PE",
     title: "Production \u00e9crite",
-    description: "Apprendre \u00e0 pr\u00e9parer, organiser, r\u00e9diger et relire un texte",
+    description: "",
     submodules: [
       { id: "PE-0", code: "PE.0", title: "Les formulaires", available: true, lessonId: "expression-e1-0" },
       { id: "PE-1", code: "PE.1", title: "Base", available: true, lessonId: "expression-e1-1" },
@@ -35,11 +35,22 @@ export const COMM_MODULES: CommunicationModule[] = [
     id: "PO",
     level: "PO",
     title: "Production orale",
-    description: "Format FLE/FIDE : questions sur th\u00e8mes, description d'image, dialogue",
+    description: "",
     submodules: [
       { id: "PO-1", code: "PO.1", title: "Base", available: true, lessonId: "production-orale-1" },
       { id: "PO-2", code: "PO.2", title: "Moyen", available: true, lessonId: "production-orale-2" },
       { id: "PO-3", code: "PO.3", title: "Avanc\u00e9", available: true, lessonId: "production-orale-3" },
+    ],
+  },
+  {
+    id: "CE",
+    level: "CE",
+    title: "Compr\u00e9hension \u00e9crite",
+    description: "",
+    submodules: [
+      { id: "CE-1", code: "CE.1", title: "Base", available: true, lessonId: "comprehension-ecrite-1" },
+      { id: "CE-2", code: "CE.2", title: "Moyen", available: true, lessonId: "comprehension-ecrite-2" },
+      { id: "CE-3", code: "CE.3", title: "Avanc\u00e9", available: true, lessonId: "comprehension-ecrite-3" },
     ],
   },
   {
