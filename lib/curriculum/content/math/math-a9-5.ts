@@ -75,6 +75,45 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
           type: "example",
           fr: "(x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6",
         },
+        {
+          type: "heading",
+          fr: "Les identités remarquables",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "Certains développements reviennent souvent : on les apprend par cœur pour aller plus vite.",
+        },
+        {
+          type: "section",
+          labelFr: "Carrés",
+          itemsFr: [
+            "**Carré d'une somme** : (a + b)² = a² + 2ab + b²",
+            "**Carré d'une différence** : (a − b)² = a² − 2ab + b²",
+            "**Différence de deux carrés** : a² − b² = (a − b)(a + b)",
+          ],
+        },
+        {
+          type: "section",
+          labelFr: "Cubes",
+          itemsFr: [
+            "**Cube d'une somme** : (a + b)³ = a³ + 3a²b + 3ab² + b³",
+            "**Cube d'une différence** : (a − b)³ = a³ − 3a²b + 3ab² − b³",
+            "**Somme de deux cubes** : a³ + b³ = (a + b)(a² − ab + b²)",
+            "**Différence de deux cubes** : a³ − b³ = (a − b)(a² + ab + b²)",
+          ],
+        },
+        {
+          type: "section",
+          labelFr: "Trois termes",
+          itemsFr: [
+            "**Carré de trois termes** : (a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc",
+          ],
+        },
+        {
+          type: "example",
+          fr: "(x + 3)² = x² + 2 × x × 3 + 3² = x² + 6x + 9",
+        },
       ],
     },
   exercises: [],

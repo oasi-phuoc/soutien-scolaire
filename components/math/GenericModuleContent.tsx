@@ -5329,28 +5329,72 @@ function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbol
     return { expression: `${neg ? "−" : ""}${k}(${sym} ${minus ? "−" : "+"} ${p})`, acceptable: symbolicVariants(polynomialText(terms)) };
   };
 
-  // Exercise 2 — remarkable identities: (a·sym ± b)² and (a·sym + b)(a·sym − b).
-  const identity = (): SymbolicQuestion => {
-    const sym = pick(letters);
-    const a = Math.random() < 0.5 ? 1 : ri(2, 5);
-    const b = ri(1, 9);
-    const aStr = a === 1 ? "" : String(a);
-    const form = ri(0, 2);
-    if (form === 2) {
-      const terms = [
-        { coefficient: a * a, literal: `${sym}²` },
-        { coefficient: -b * b, literal: "" },
-      ];
-      return { expression: `(${aStr}${sym} + ${b})(${aStr}${sym} − ${b})`, acceptable: symbolicVariants(polynomialText(terms)) };
-    }
-    const minus = form === 1;
-    const terms = [
-      { coefficient: a * a, literal: `${sym}²` },
-      { coefficient: (minus ? -1 : 1) * 2 * a * b, literal: sym },
-      { coefficient: b * b, literal: "" },
-    ];
-    return { expression: `(${aStr}${sym} ${minus ? "−" : "+"} ${b})²`, acceptable: symbolicVariants(polynomialText(terms)) };
+  // Exercise 2 — the 8 remarkable identities. Letters and numbers are randomized;
+  // answers are built in canonical (textbook) order so grading is unambiguous.
+  // buildPoly keeps the given term order (does NOT re-sort) and handles signs.
+  const buildPoly = (terms: Array<{ c: number; l: string }>): string => {
+    const nz = terms.filter((t) => t.c !== 0);
+    if (nz.length === 0) return "0";
+    return nz.map((t, i) => {
+      const body = monomialText(Math.abs(t.c), t.l);
+      if (i === 0) return t.c < 0 ? `−${body}` : body;
+      return `${t.c < 0 ? "−" : "+"} ${body}`;
+    }).join(" ");
   };
+  const threeLetters = () => {
+    const s = [...letters].sort(() => Math.random() - 0.5);
+    return [s[0]!, s[1]!, s[2]!] as const;
+  };
+  // Each entry expands a product/power into its developed, canonical form.
+  const identityForms: Array<() => SymbolicQuestion> = [
+    // Carré d'une somme : (a·sym + b)²
+    () => {
+      const sym = pick(letters); const a = Math.random() < 0.5 ? 1 : ri(2, 5); const b = ri(1, 9); const aS = a === 1 ? "" : String(a);
+      return { expression: `(${aS}${sym} + ${b})²`, acceptable: symbolicVariants(buildPoly([{ c: a * a, l: `${sym}²` }, { c: 2 * a * b, l: sym }, { c: b * b, l: "" }])) };
+    },
+    // Carré d'une différence : (a·sym − b)²
+    () => {
+      const sym = pick(letters); const a = Math.random() < 0.5 ? 1 : ri(2, 5); const b = ri(1, 9); const aS = a === 1 ? "" : String(a);
+      return { expression: `(${aS}${sym} − ${b})²`, acceptable: symbolicVariants(buildPoly([{ c: a * a, l: `${sym}²` }, { c: -2 * a * b, l: sym }, { c: b * b, l: "" }])) };
+    },
+    // Différence de deux carrés : (a·sym + b)(a·sym − b)
+    () => {
+      const sym = pick(letters); const a = Math.random() < 0.5 ? 1 : ri(2, 5); const b = ri(1, 9); const aS = a === 1 ? "" : String(a);
+      return { expression: `(${aS}${sym} + ${b})(${aS}${sym} − ${b})`, acceptable: symbolicVariants(buildPoly([{ c: a * a, l: `${sym}²` }, { c: -b * b, l: "" }])) };
+    },
+    // Cube d'une somme : (sym + k)³
+    () => {
+      const sym = pick(letters); const k = ri(1, 6);
+      return { expression: `(${sym} + ${k})³`, acceptable: symbolicVariants(buildPoly([{ c: 1, l: `${sym}³` }, { c: 3 * k, l: `${sym}²` }, { c: 3 * k * k, l: sym }, { c: k * k * k, l: "" }])) };
+    },
+    // Cube d'une différence : (sym − k)³
+    () => {
+      const sym = pick(letters); const k = ri(1, 6);
+      return { expression: `(${sym} − ${k})³`, acceptable: symbolicVariants(buildPoly([{ c: 1, l: `${sym}³` }, { c: -3 * k, l: `${sym}²` }, { c: 3 * k * k, l: sym }, { c: -k * k * k, l: "" }])) };
+    },
+    // Somme de deux cubes : (sym + k)(sym² − k·sym + k²) = sym³ + k³
+    () => {
+      const sym = pick(letters); const k = ri(2, 6); const kx = k === 1 ? sym : `${k}${sym}`;
+      return { expression: `(${sym} + ${k})(${sym}² − ${kx} + ${k * k})`, acceptable: symbolicVariants(buildPoly([{ c: 1, l: `${sym}³` }, { c: k * k * k, l: "" }])) };
+    },
+    // Différence de deux cubes : (sym − k)(sym² + k·sym + k²) = sym³ − k³
+    () => {
+      const sym = pick(letters); const k = ri(2, 6); const kx = k === 1 ? sym : `${k}${sym}`;
+      return { expression: `(${sym} − ${k})(${sym}² + ${kx} + ${k * k})`, acceptable: symbolicVariants(buildPoly([{ c: 1, l: `${sym}³` }, { c: -k * k * k, l: "" }])) };
+    },
+    // Carré de trois termes : (p + q + r)²
+    () => {
+      const [p, q, r] = threeLetters();
+      const pair = (x: string, y: string) => [x, y].sort().join("");
+      return {
+        expression: `(${p} + ${q} + ${r})²`,
+        acceptable: symbolicVariants(buildPoly([
+          { c: 1, l: `${p}²` }, { c: 1, l: `${q}²` }, { c: 1, l: `${r}²` },
+          { c: 2, l: pair(p, q) }, { c: 2, l: pair(p, r) }, { c: 2, l: pair(q, r) },
+        ])),
+      };
+    },
+  ];
 
   // Exercise 3 — complex: a(sym ± p) ± c(sym ± q), sometimes with a sym² lead.
   const complex = (): SymbolicQuestion => {
@@ -5383,14 +5427,17 @@ function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbol
     };
   };
 
-  const gen = exNum === 1 ? simple : exNum === 2 ? identity : complex;
-  const templates = Array.from({ length: 50 }, () => gen());
   const instruction = exNum === 1
     ? "Développez chaque expression. Expression simple."
     : exNum === 2
       ? "Développez chaque expression. Identité remarquable."
       : "Développez chaque expression. Expression complexe.";
-  return { kind: "symbolic_group", lesson, exNum, instruction, mode: "input", questions: shufflePick(templates, 5) };
+  // Exercise 2 draws 5 distinct identities (each with randomized letters/numbers)
+  // from the 8 remarkable-identity templates; exercises 1 & 3 use a 50-deep pool.
+  const questions = exNum === 2
+    ? shufflePick(identityForms.map((make) => make()), 5)
+    : shufflePick(Array.from({ length: 50 }, () => (exNum === 1 ? simple() : complex())), 5);
+  return { kind: "symbolic_group", lesson, exNum, instruction, mode: "input", questions };
 }
 
 function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupStep {
