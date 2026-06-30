@@ -1577,7 +1577,7 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   ], "chat"),
   complexSoundLesson("ph", "PH", "/f/", [
     ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "graphique", "physique"]],
-    ["Lecture de mots", ["photographe", "orthographe", "géographie", "phénomène", "philosophie", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
+    ["Lecture de mots", ["saphir", "nénuphar", "géographie", "phénomène", "triomphe", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
     ["Lecture melangee", ["photo", "phare", "dauphin", "éléphant", "téléphone", "phrase", "alphabet", "pharmacie", "graphique", "sphère"]],
   ], "dauphin"),
   complexSoundLesson("gn", "GN", "/ɲ/", [
@@ -1603,7 +1603,7 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   complexSoundLesson("ui", "UI", "/ɥi/", [
     ["Lis ui", ["lui", "nuit", "fruit", "huit", "bruit", "puits", "puis", "suis", "cuir", "étui"]],
     ["Lecture de mots", ["cuisine", "biscuit", "pluie", "ennui", "conduire", "construire", "fuir", "juin", "suivre", "cuivre"]],
-    ["Lecture melangee", ["minuit", "gratuit", "truite", "buisson", "ruisseau", "appui", "depuis", "produit", "circuit", "aujourd'hui"]],
+    ["Lecture melangee", ["minuit", "gratuit", "truite", "buisson", "ruisseau", "appui", "depuis", "produit", "circuit", "réduit"]],
   ], "nuit"),
   complexSoundLesson("oin", "OIN", "/wɛ̃/", [
     ["Lis oin", ["coin", "loin", "soin", "foin", "point", "joint", "moins", "besoin", "témoin", "poing"]],
@@ -1612,7 +1612,7 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   ]),
   complexSoundLesson("ien", "IEN", "/jɛ̃/", [
     ["Lis ien", ["chien", "bien", "rien", "mien", "tien", "sien", "lien", "combien", "gardien", "indien"]],
-    ["Lecture de mots", ["ancien", "italien", "musicien", "mécanicien", "pharmacien", "magicien", "électricien", "chirurgien", "parisien", "quotidien"]],
+    ["Lecture de mots", ["ancien", "italien", "musicien", "mécanicien", "pharmacien", "magicien", "comédien", "chirurgien", "parisien", "quotidien"]],
     ["Lecture melangee", ["viens", "tiens", "revient", "soutien", "entretien", "bientôt", "chrétien", "terrien", "gardien", "combien"]],
   ], "chien"),
   complexSoundLesson("un-um", "UN / UM", "/œ̃/", [
@@ -1622,8 +1622,8 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   ]),
   complexSoundLesson("tion", "TION", "/sjɔ̃/", [
     ["Lis tion", ["nation", "addition", "potion", "lotion", "portion", "station", "mention", "action", "fiction", "option"]],
-    ["Lecture de mots", ["attention", "récréation", "opération", "animation", "invitation", "fabrication", "respiration", "décoration", "information", "population"]],
-    ["Lecture melangee", ["punition", "position", "émotion", "solution", "pollution", "condition", "révolution", "natation", "éducation", "multiplication"]],
+    ["Lecture de mots", ["attention", "récréation", "opération", "animation", "invitation", "récitation", "imitation", "décoration", "invention", "population"]],
+    ["Lecture melangee", ["punition", "position", "émotion", "solution", "pollution", "condition", "révolution", "natation", "éducation", "ambition"]],
   ]),
 ];
 

@@ -43,6 +43,7 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-audio", label: "Audio" },
       { key: "complex-syllables-cv", label: "Syllabes" },
       { key: "pronounce-complex", label: "Prononcer" },
+      { key: "word-eval", label: "Évaluation" },
     ];
   }
   if (data.type === "syllable") {
@@ -131,6 +132,12 @@ function normalizeGraph(text: string) {
 
 function complexTargets(label: string) {
   const key = normalizeGraph(label);
+  // New L7 graphemes — checked first because they contain substrings ("on", "en",
+  // "oi"…) that would otherwise match the looser nasal/vowel rules below.
+  if (key.includes("tion")) return ["tion"];
+  if (key.includes("oin")) return ["oin"];
+  if (key.includes("ien")) return ["ien"];
+  if (key.includes("eu") || key.includes("oeu") || key.includes("œu")) return ["œu", "oeu", "eu"];
   if (key.includes("an") || key.includes("en")) return ["an", "en", "am", "em"];
   if (key.includes("in") || key.includes("ain")) return ["in", "ain", "ein", "im", "aim"];
   if (key.includes("on")) return ["on", "om"];
@@ -271,14 +278,16 @@ function splitComplexWord(word: string, targets: string[]) {
 const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
   function ComplexWordSpotter({ words, target, isUppercase }, ref) {
   const targets = complexTargets(target);
-  const VISIBLE = Math.min(8, words.length);
-  const [selectedWords, setSelectedWords] = useState(() => shuffle(words).slice(0, VISIBLE));
+  // Only words up to 10 letters fit on a single line; longer ones wrap, so drop them.
+  const pool = words.filter((w) => w.length <= 10);
+  const VISIBLE = Math.min(8, pool.length);
+  const [selectedWords, setSelectedWords] = useState(() => shuffle(pool).slice(0, VISIBLE));
   const displayedWords = selectedWords.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
 
   function reset() {
-    setSelectedWords(shuffle(words).slice(0, VISIBLE));
+    setSelectedWords(shuffle(pool).slice(0, VISIBLE));
     setStates({});
     setValidated(false);
   }
@@ -312,7 +321,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; targ
         {displayedWords.map((word, wordIndex) => (
           <li
             key={`${word}-${wordIndex}`}
-            className="flex flex-wrap items-center justify-center gap-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
+            className="flex flex-nowrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3"
           >
             {splitComplexWord(word, targets).map((part, partIndex) => {
               const key = `${wordIndex}-${partIndex}`;
@@ -329,7 +338,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; targ
                       [key]: prev[key] === "selected" ? "idle" : "selected",
                     }));
                   }}
-                  className={`flex min-h-8 min-w-8 items-center justify-center rounded-lg border px-1.5 text-base font-bold transition-colors ${
+                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors ${
                     state === "correct"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : state === "wrong" || state === "missed"
@@ -1023,6 +1032,23 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       );
     }
     if (data.type === "complex-sound") {
+      if (step.key === "word-eval") {
+        // L7 evaluation: read 20 words from the lesson pool (10 upper + 10 lower),
+        // timed 5 minutes — same flow as L6/L8 word evaluations.
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            kind="mots"
+            sampleSpec={[
+              { pool: data.upperWords, n: 10 },
+              { pool: data.lowerWords, n: 10 },
+            ]}
+            timerSeconds={300}
+            isEval
+          />
+        );
+      }
       switch (step.key) {
         case "discover-complex":
           return (
