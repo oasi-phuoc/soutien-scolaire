@@ -2254,7 +2254,7 @@ const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
-export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmoduleId?: string; startAtEval?: boolean } = {}) {
+export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { startSubmoduleId?: string; startAtEval?: boolean; isAdmin?: boolean } = {}) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
@@ -3072,8 +3072,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         </div>
       )}
 
-      {/* Print config button — floated right, only on theory step */}
-      {step === "theory" && (
+      {/* Print config button — floated right, only on theory step, only for admin */}
+      {isAdmin && step === "theory" && (
         <div className="float-right ml-2" data-no-print>
           <button
             type="button"

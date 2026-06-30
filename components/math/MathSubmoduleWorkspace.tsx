@@ -1891,7 +1891,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // A1-1 and A1-2 use the rich A1ModuleContent; A1-3+ use GenericModuleContent with toggle
   if (moduleId === "A1") {
     if (submoduleId === "A1-1" || submoduleId === "A1-2") {
-      return <A1ModuleContent startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
+      return <A1ModuleContent startSubmoduleId={submoduleId} startAtEval={startAtEval} isAdmin={isAdmin} />;
     }
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
