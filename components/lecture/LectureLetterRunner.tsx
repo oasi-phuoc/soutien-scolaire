@@ -101,6 +101,10 @@ function getSteps(data: LetterData): Step[] {
   ];
 }
 
+// Stable empty array so a missing `words` prop keeps the same reference across
+// renders (avoids re-running the sampling effect in WordPronounceGrid).
+const EMPTY_WORDS: string[] = [];
+
 function shuffle<T>(items: T[]): T[] {
   const next = [...items];
   for (let i = next.length - 1; i > 0; i--) {
@@ -485,14 +489,18 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   consigne?: string;
   onTimeChange?: (t: number | null) => void;
 }>(
-  function WordPronounceGrid({ words = [], timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, onTimeChange }, ref) {
-  const unique = useMemo(() => Array.from(new Set(words)), [words]);
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, onTimeChange }, ref) {
+  // Stable content keys so the sampling effect below runs once per step (and
+  // not on every render — a fresh array prop would otherwise loop forever).
+  const wordsKey = words.join("");
+  const specKey = sampleSpec ? sampleSpec.map((s) => `${s.n}:${s.pool.join(",")}`).join("|") : "";
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const unique = useMemo(() => Array.from(new Set(words)), [wordsKey]);
   const count = sampleSpec
     ? sampleSpec.reduce((sum, s) => sum + Math.min(s.n, new Set(s.pool).size), 0)
     : sampleSize
       ? Math.min(sampleSize, unique.length)
       : unique.length;
-  const specKey = sampleSpec ? sampleSpec.map((s) => `${s.n}:${s.pool.length}`).join("|") : "";
   const buildItems = () =>
     sampleSpec
       ? shuffle(sampleSpec.flatMap((s) => shuffle(Array.from(new Set(s.pool))).slice(0, s.n)))
@@ -508,13 +516,14 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   const [started, setStarted] = useState<boolean>(!isEval);
   const recRef = useRef<unknown>(null);
 
-  // Sample the words once, on mount (client only).
+  // Sample the words once, on mount (client only). Depends on stable content
+  // keys only, so it does not re-run (and re-shuffle) on every render.
   useEffect(() => {
     setItems(buildItems());
     setStates(Array(count).fill("idle"));
     setHeard(Array(count).fill(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [unique, count, specKey]);
+  }, [wordsKey, specKey, count]);
 
   // Countdown timer (timed steps only). Stops at 0; reset restarts it.
   useEffect(() => {
