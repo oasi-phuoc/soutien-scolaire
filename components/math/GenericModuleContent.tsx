@@ -5299,6 +5299,100 @@ function genSymbolicGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbo
   };
 }
 
+// A9.5 — developing expressions. Three dynamic exercises (refreshable), each a
+// pool of 50 templates that randomize both the letters and the numbers.
+function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
+  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = <T,>(items: readonly T[]) => items[ri(0, items.length - 1)]!;
+  const letters = ["x", "y", "a", "b", "m", "n", "t"] as const;
+
+  // Exercise 1 — simple distributive: k(sym ± p), −k(sym ± p) or sym(sym ± p).
+  const simple = (): SymbolicQuestion => {
+    const sym = pick(letters);
+    const p = ri(1, 12);
+    const minus = Math.random() < 0.5;
+    const s = minus ? -p : p;
+    if (Math.random() < 0.3) {
+      const terms = [
+        { coefficient: 1, literal: `${sym}²` },
+        { coefficient: s, literal: sym },
+      ];
+      return { expression: `${sym}(${sym} ${minus ? "−" : "+"} ${p})`, acceptable: symbolicVariants(polynomialText(terms)) };
+    }
+    const k = ri(2, 9);
+    const neg = Math.random() < 0.3;
+    const coef = neg ? -k : k;
+    const terms = [
+      { coefficient: coef, literal: sym },
+      { coefficient: coef * s, literal: "" },
+    ];
+    return { expression: `${neg ? "−" : ""}${k}(${sym} ${minus ? "−" : "+"} ${p})`, acceptable: symbolicVariants(polynomialText(terms)) };
+  };
+
+  // Exercise 2 — remarkable identities: (a·sym ± b)² and (a·sym + b)(a·sym − b).
+  const identity = (): SymbolicQuestion => {
+    const sym = pick(letters);
+    const a = Math.random() < 0.5 ? 1 : ri(2, 5);
+    const b = ri(1, 9);
+    const aStr = a === 1 ? "" : String(a);
+    const form = ri(0, 2);
+    if (form === 2) {
+      const terms = [
+        { coefficient: a * a, literal: `${sym}²` },
+        { coefficient: -b * b, literal: "" },
+      ];
+      return { expression: `(${aStr}${sym} + ${b})(${aStr}${sym} − ${b})`, acceptable: symbolicVariants(polynomialText(terms)) };
+    }
+    const minus = form === 1;
+    const terms = [
+      { coefficient: a * a, literal: `${sym}²` },
+      { coefficient: (minus ? -1 : 1) * 2 * a * b, literal: sym },
+      { coefficient: b * b, literal: "" },
+    ];
+    return { expression: `(${aStr}${sym} ${minus ? "−" : "+"} ${b})²`, acceptable: symbolicVariants(polynomialText(terms)) };
+  };
+
+  // Exercise 3 — complex: a(sym ± p) ± c(sym ± q), sometimes with a sym² lead.
+  const complex = (): SymbolicQuestion => {
+    const sym = pick(letters);
+    const a = ri(2, 6);
+    const c = ri(2, 6);
+    const p = ri(1, 9);
+    const q = ri(1, 9);
+    const s1 = Math.random() < 0.5 ? -p : p;
+    const s2 = Math.random() < 0.5 ? -q : q;
+    const outer = Math.random() < 0.5 ? -1 : 1;
+    if (Math.random() < 0.4) {
+      const terms = [
+        { coefficient: 1, literal: `${sym}²` },
+        { coefficient: s1 + outer * c, literal: sym },
+        { coefficient: outer * c * s2, literal: "" },
+      ];
+      return {
+        expression: `${sym}(${sym} ${s1 < 0 ? "−" : "+"} ${p}) ${outer < 0 ? "−" : "+"} ${c}(${sym} ${s2 < 0 ? "−" : "+"} ${q})`,
+        acceptable: symbolicVariants(polynomialText(terms)),
+      };
+    }
+    const terms = [
+      { coefficient: a + outer * c, literal: sym },
+      { coefficient: a * s1 + outer * c * s2, literal: "" },
+    ];
+    return {
+      expression: `${a}(${sym} ${s1 < 0 ? "−" : "+"} ${p}) ${outer < 0 ? "−" : "+"} ${c}(${sym} ${s2 < 0 ? "−" : "+"} ${q})`,
+      acceptable: symbolicVariants(polynomialText(terms)),
+    };
+  };
+
+  const gen = exNum === 1 ? simple : exNum === 2 ? identity : complex;
+  const templates = Array.from({ length: 50 }, () => gen());
+  const instruction = exNum === 1
+    ? "Développez chaque expression. Expression simple."
+    : exNum === 2
+      ? "Développez chaque expression. Identité remarquable."
+      : "Développez chaque expression. Expression complexe.";
+  return { kind: "symbolic_group", lesson, exNum, instruction, mode: "input", questions: shufflePick(templates, 5) };
+}
+
 function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupStep {
   const templates = Array.from({ length: 50 }, (_, index) => {
     const base = index % 2 === 0 ? generateProductQuestion(index) : generateReductionQuestion(index, true);
@@ -5765,6 +5859,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genSymbolicGroupStep(lesson, 2));
         steps.push(genSymbolicGroupStep(lesson, 3));
         steps.push(genSymbolicTrueFalseStep(lesson));
+      } else if (sid === "A9-5") {
+        steps.push(genDevelopGroupStep(lesson, 1));
+        steps.push(genDevelopGroupStep(lesson, 2));
+        steps.push(genDevelopGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -5784,6 +5882,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genSymbolicGroupStep(lesson, 2));
         steps.push(genSymbolicGroupStep(lesson, 3));
         steps.push(genSymbolicTrueFalseStep(lesson));
+      } else if (sid === "A9-5") {
+        steps.push(genDevelopGroupStep(lesson, 1));
+        steps.push(genDevelopGroupStep(lesson, 2));
+        steps.push(genDevelopGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -8201,9 +8303,11 @@ export function GenericModuleContent({
       const exNum = currentStep.exNum;
       const regenerated = currentStep.lesson.submoduleId === "A9-3"
         ? genEvalExpressionGroupStep(currentStep.lesson, exNum)
-        : currentStep.mode === "true_false"
-          ? genSymbolicTrueFalseStep(currentStep.lesson)
-          : genSymbolicGroupStep(currentStep.lesson, exNum);
+        : currentStep.lesson.submoduleId === "A9-5"
+          ? genDevelopGroupStep(currentStep.lesson, exNum)
+          : currentStep.mode === "true_false"
+            ? genSymbolicTrueFalseStep(currentStep.lesson)
+            : genSymbolicGroupStep(currentStep.lesson, exNum);
       setSymbolicOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
       setSymbolicAnswers([]);
       setSymbolicValidated(false);
@@ -9819,7 +9923,7 @@ export function GenericModuleContent({
                 ))}
               </p>
             )}
-            <div className="space-y-3">
+            <div className="space-y-7">
               {step.questions.map((question, index) => {
                 const value = symbolicAnswers[index] ?? "";
                 const ok = symbolicResults[index];
