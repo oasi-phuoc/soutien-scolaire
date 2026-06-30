@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState }
 import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
+import { getLectureModule } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
@@ -1093,11 +1094,24 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     }
   }
 
+  // Breadcrumb eyebrow (like français "Français · Vocabulaire · V1.1").
+  const lectureModule = getLectureModule(moduleId);
+  const lessonIndex = lectureModule ? lectureModule.letters.findIndex((l) => l.letterLower === data.letterLower) : -1;
+  const lessonNumber = lectureModule ? `${lectureModule.code}.${lessonIndex >= 0 ? lessonIndex + 1 : 1}` : "";
+  const lessonCategory =
+    data.type === "syllable" || data.type === "complex-sound"
+      ? "Syllabe"
+      : data.type === "monosyllable" || data.type === "multisyllable"
+        ? "Mot"
+        : data.type === "vowel"
+          ? "Voyelle"
+          : "Consonne";
+
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture · {isEvalStep || isWordEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : data.type === "consonant" ? "Consonne" : "Lecture"}
+          Lecture · {lessonCategory}{lessonNumber ? ` · ${lessonNumber}` : ""}
         </p>
         <div className="flex items-center gap-2">
           <button
