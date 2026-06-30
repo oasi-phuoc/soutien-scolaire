@@ -1595,6 +1595,36 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
     ["Lis ei", ["baleine", "neige", "peigne", "reine", "treize", "seize", "beige", "peine", "veine", "pleine"]],
     ["Lecture melangee", ["aimer", "faire", "plaire", "laine", "graine", "fontaine", "merveille", "beignet", "peinture", "ceinture"]],
   ], "baleine"),
+  complexSoundLesson("eu-oeu", "EU / ŒU", "/ø/", [
+    ["Lis eu", ["feu", "jeu", "deux", "bleu", "peu", "mieux", "cheveux", "jeudi", "heureux", "queue"]],
+    ["Lis eur, eul, euf", ["fleur", "peur", "beurre", "heure", "leur", "seul", "neuf", "jeune", "peuple", "meuble"]],
+    ["Lis œu et melange", ["cœur", "sœur", "œuf", "nœud", "bœuf", "docteur", "couleur", "vendeur", "pleurer", "chanteur"]],
+  ], "fleur"),
+  complexSoundLesson("ui", "UI", "/ɥi/", [
+    ["Lis ui", ["lui", "nuit", "fruit", "huit", "bruit", "puits", "puis", "suis", "cuir", "étui"]],
+    ["Lecture de mots", ["cuisine", "biscuit", "pluie", "ennui", "conduire", "construire", "fuir", "juin", "suivre", "cuivre"]],
+    ["Lecture melangee", ["minuit", "gratuit", "truite", "buisson", "ruisseau", "appui", "depuis", "produit", "circuit", "aujourd'hui"]],
+  ], "nuit"),
+  complexSoundLesson("oin", "OIN", "/wɛ̃/", [
+    ["Lis oin", ["coin", "loin", "soin", "foin", "point", "joint", "moins", "besoin", "témoin", "poing"]],
+    ["Lecture de mots", ["pointu", "pointe", "lointain", "rejoindre", "coincer", "pointer", "moindre", "adjoint", "shampoing", "groin"]],
+    ["Lecture melangee", ["coin", "loin", "point", "besoin", "moins", "soin", "témoin", "pointu", "lointain", "rejoindre"]],
+  ]),
+  complexSoundLesson("ien", "IEN", "/jɛ̃/", [
+    ["Lis ien", ["chien", "bien", "rien", "mien", "tien", "sien", "lien", "combien", "gardien", "indien"]],
+    ["Lecture de mots", ["ancien", "italien", "musicien", "mécanicien", "pharmacien", "magicien", "électricien", "chirurgien", "parisien", "quotidien"]],
+    ["Lecture melangee", ["viens", "tiens", "revient", "soutien", "entretien", "bientôt", "chrétien", "terrien", "gardien", "combien"]],
+  ], "chien"),
+  complexSoundLesson("un-um", "UN / UM", "/œ̃/", [
+    ["Lis un", ["un", "brun", "chacun", "aucun", "lundi", "commun", "défunt", "emprunt", "opportun", "tribun"]],
+    ["Lis um (parfum)", ["parfum", "humble", "brun", "lundi", "chacun", "aucun", "commun", "un", "emprunt", "défunt"]],
+    ["Lecture melangee", ["un", "brun", "lundi", "parfum", "chacun", "aucun", "commun", "emprunt", "humble", "défunt"]],
+  ]),
+  complexSoundLesson("tion", "TION", "/sjɔ̃/", [
+    ["Lis tion", ["nation", "addition", "potion", "lotion", "portion", "station", "mention", "action", "fiction", "option"]],
+    ["Lecture de mots", ["attention", "récréation", "opération", "animation", "invitation", "fabrication", "respiration", "décoration", "information", "population"]],
+    ["Lecture melangee", ["punition", "position", "émotion", "solution", "pollution", "condition", "révolution", "natation", "éducation", "multiplication"]],
+  ]),
 ];
 
 // ─── Pools de mots pour L8 (multisyllabes) ─────────────────────────────────────
@@ -1720,7 +1750,7 @@ export const LECTURE_MODULES: LectureModule[] = [
     id: "l7",
     code: "L7",
     title: "Les sons complexes",
-    description: "OU, AN/EN, IN/AIN, ON, AU/EAU, OI, CH, PH, GN, ILL, AI/EI",
+    description: "OU, AN/EN, IN/AIN, ON, AU/EAU, OI, CH, PH, GN, ILL, AI/EI, EU/ŒU, UI, OIN, IEN, UN/UM, TION",
     letters: COMPLEX_SOUND_LESSONS,
   },
   {
