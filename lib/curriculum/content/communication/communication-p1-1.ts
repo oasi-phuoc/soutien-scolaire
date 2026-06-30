@@ -1,6 +1,9 @@
 export type CommunicationTheoryBlock =
   | { type: "heading"; text: string }
   | { type: "subheading"; text: string }
+  | { type: "plain"; text: string }
+  | { type: "numbered"; items: string[] }
+  | { type: "section"; text: string }
   | { type: "table"; headers: string[]; rows: string[][] }
   | { type: "note"; text: string }
   | { type: "highlight"; title: string; items: string[] }

@@ -839,7 +839,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         />
                       )}
                     </div>
-                    {transcript ? (
+                    {transcript && (supported && !micBlocked || task1Done) ? (
                       <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                     ) : !task1Done ? (
                       <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
@@ -914,7 +914,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                           />
                         )}
                       </div>
-                      {transcript ? (
+                      {transcript && (supported && !micBlocked || interviewDone) ? (
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                       ) : !interviewDone ? (
                         <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
@@ -991,7 +991,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {!task2Done && (
             <div className="space-y-3">
-              {currentTranscript && (
+              {currentTranscript && supported && !micBlocked && (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
                   <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
                   <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
@@ -1005,12 +1005,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   placeholder="Tapez une phrase sur l'image…"
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
-              )}
-              {currentTranscript && (
-                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-                  <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
-                  <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
-                </div>
               )}
               <div className="flex items-center gap-3">
                 <MicButton

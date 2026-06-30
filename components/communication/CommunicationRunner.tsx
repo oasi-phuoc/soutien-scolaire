@@ -204,12 +204,38 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "heading":
       return (
         <div className="mb-6">
-          <h2
-            className="text-xl font-bold"
-            style={{ color: ACCENT, borderBottom: `2px solid ${ACCENT}`, paddingBottom: "0.25rem" }}
-          >
+          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
             {block.text}
           </h2>
+        </div>
+      );
+
+    case "plain":
+      return (
+        <p className="mb-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+          {block.text}
+        </p>
+      );
+
+    case "numbered":
+      return (
+        <div className="mb-5 space-y-2">
+          {block.items.map((item, i) => (
+            <p key={item} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+              <span className="font-bold" style={{ color: ACCENT }}>{i + 1}.</span>
+              <span>{item}</span>
+            </p>
+          ))}
+        </div>
+      );
+
+    case "section":
+      return (
+        <div
+          className="mb-4 border-l-2 px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]"
+          style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 6%, transparent)` }}
+        >
+          {block.text}
         </div>
       );
 
