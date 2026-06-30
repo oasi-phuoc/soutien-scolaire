@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
-import { speak } from "@/lib/utils/speech";
+import { playWord } from "@/lib/utils/audio";
 import type { PronStep } from "@/lib/curriculum/lecture-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -129,7 +129,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
           </span>
           <button
             type="button"
-            onClick={() => speak(step.word)}
+            onClick={() => playWord(step.word)}
             className="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)] transition-opacity hover:opacity-75"
             aria-label={`Écouter ${step.word}`}
           >

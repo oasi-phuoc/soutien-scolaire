@@ -42,7 +42,7 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
           aria-label="Écouter"
           onClick={() => {
             if (exampleAudioPath) {
-              new Audio(exampleAudioPath).play();
+              new Audio(exampleAudioPath).play().catch(() => speak(exampleWord));
             } else {
               speak(exampleWord);
             }
