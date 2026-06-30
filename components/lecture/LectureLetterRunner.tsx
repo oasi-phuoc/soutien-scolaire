@@ -763,6 +763,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   // these auto-validate on correct speech, so they only need a refresh action.
   const isPronounceGridStep =
     step.key === "complex-syllables-cv" ||
+    step.key === "syllables-cv" ||
+    step.key === "syllables-vc" ||
+    step.key === "syllables-mixed" ||
     isWordEvalStep ||
     data.type === "syllable" ||
     data.type === "multisyllable" ||
@@ -1009,13 +1012,13 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
       case "syllables-cv":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="cv" />;
+        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="cv" />;
       case "syllables-vc":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="vc" />;
+        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="vc" />;
       case "syllables-mixed":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} baseLetter={data.letterLower} mode="mixed" />;
+        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="mixed" />;
       case "pronounce":
         return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
       case "eval":

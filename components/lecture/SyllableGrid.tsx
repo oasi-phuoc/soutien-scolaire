@@ -1,10 +1,14 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+
+export interface SyllableGridHandle {
+  reset: () => void;
+}
 
 interface Props {
   baseLetter: string;
@@ -68,16 +72,26 @@ function matchesSyllable(transcript: string, target: string): boolean {
   return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
 }
 
-export function SyllableGrid({ baseLetter, mode = "cv" }: Props) {
+export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
+  function SyllableGrid({ baseLetter, mode = "cv" }, ref) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
   const recRef = useRef<unknown>(null);
   const [states, setStates] = useState<RecState[]>(() => Array(6).fill("idle"));
   const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
-  const syllables = useMemo(
-    () => makeSyllables(baseLetter, mode),
-    [baseLetter, mode],
-  );
+  const [syllables, setSyllables] = useState<string[]>(() => makeSyllables(baseLetter, mode));
+
+  // Refresh: regenerate a fresh sequence of syllables and clear the state.
+  function reset() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    recRef.current = null;
+    setSyllables(makeSyllables(baseLetter, mode));
+    setStates(Array(6).fill("idle"));
+    setHeard(Array(6).fill(""));
+  }
+
+  useImperativeHandle(ref, () => ({ reset }));
 
   function startListening(index: number) {
     if (typeof window === "undefined" || states[index] === "correct") return;
@@ -206,4 +220,4 @@ export function SyllableGrid({ baseLetter, mode = "cv" }: Props) {
       </div>
     </section>
   );
-}
+});
