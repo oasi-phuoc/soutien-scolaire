@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import {
   getExpressionTeachersAction,
   type TeacherOption,
@@ -270,186 +270,6 @@ const DIRECTED_INTERVIEW_GROUPS = [
   ],
 ];
 
-function waveformBars(text: string, count = 22): number[] {
-  return Array.from({ length: count }, (_, i) => {
-    const code = text.charCodeAt(i % Math.max(text.length, 1)) || 65;
-    return 0.18 + Math.abs(Math.sin(code * 0.137 + i * 1.31)) * 0.79;
-  });
-}
-
-
-function VoiceMessageBubble({
-  text,
-  hints,
-  hintsOpen,
-  onToggleHints,
-}: {
-  text: string;
-  hints?: string[];
-  hintsOpen?: boolean;
-  onToggleHints?: () => void;
-}) {
-  const [expanded, setExpanded] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const bars = useMemo(() => waveformBars(text), [text]);
-
-  useEffect(() => () => {
-    if (checkRef.current) clearInterval(checkRef.current);
-  }, []);
-
-  function handlePlay() {
-    if (isPlaying) {
-      window.speechSynthesis?.cancel();
-      setIsPlaying(false);
-      if (checkRef.current) clearInterval(checkRef.current);
-      return;
-    }
-    setIsPlaying(true);
-    speak(text);
-    checkRef.current = setInterval(() => {
-      if (!window.speechSynthesis?.speaking) {
-        setIsPlaying(false);
-        if (checkRef.current) clearInterval(checkRef.current);
-      }
-    }, 150);
-  }
-
-
-  return (
-    <div className="flex justify-start">
-      <div
-        className="w-full max-w-[85%] rounded-2xl rounded-tl-sm px-3 py-2.5"
-        style={{ background: `color-mix(in srgb, ${ACCENT} 11%, var(--color-bg-secondary))` }}
-      >
-        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>
-          Interlocuteur
-        </p>
-
-        <div className="flex items-center gap-2">
-          {/* Play / pause button */}
-          <button
-            type="button"
-            onClick={handlePlay}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm active:scale-95"
-            style={{ background: ACCENT }}
-            aria-label={isPlaying ? "Pause" : "Écouter"}
-          >
-            {isPlaying ? (
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <rect x="6" y="4" width="4" height="16" rx="1" />
-                <rect x="14" y="4" width="4" height="16" rx="1" />
-              </svg>
-            ) : (
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-            )}
-          </button>
-
-          {/* Waveform bars */}
-          <div className="flex flex-1 items-center gap-px" style={{ height: 30 }}>
-            {bars.map((h, i) => (
-              <div
-                key={i}
-                className={`flex-1 rounded-full ${isPlaying ? "animate-pulse" : ""}`}
-                style={{
-                  height: `${Math.round(h * 100)}%`,
-                  background: ACCENT,
-                  opacity: isPlaying ? 0.4 + (i % 4) * 0.15 : 0.5,
-                  animationDelay: isPlaying ? `${(i % 6) * 80}ms` : undefined,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Expand / collapse text */}
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold leading-none transition-colors"
-            style={{
-              borderColor: ACCENT,
-              color: expanded ? "white" : ACCENT,
-              background: expanded ? ACCENT : "transparent",
-            }}
-            aria-label={expanded ? "Masquer le texte" : "Afficher le texte"}
-          >
-            {expanded ? "−" : "+"}
-          </button>
-        </div>
-
-        {expanded && (
-          <p className="mt-2 border-t border-[var(--color-border-default)] pt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-            {text}
-          </p>
-        )}
-      </div>
-
-      {/* Lightbulb help button */}
-      {hints && hints.length > 0 && onToggleHints && (
-        <div className="ml-2 flex shrink-0 flex-col items-center">
-          <button
-            type="button"
-            onClick={onToggleHints}
-            className="flex h-8 w-8 items-center justify-center rounded-full border-2 transition-colors"
-            style={{
-              borderColor: hintsOpen ? ACCENT : "var(--color-border-default)",
-              background: hintsOpen ? `color-mix(in srgb, ${ACCENT} 12%, transparent)` : "var(--color-bg-secondary)",
-              color: hintsOpen ? ACCENT : "var(--color-text-secondary)",
-            }}
-            aria-label={hintsOpen ? "Masquer les suggestions" : "Voir des suggestions de réponse"}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M9 14a7 7 0 1 1 6 0H9z" />
-              <path d="M9 14v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2" />
-              <line x1="12" y1="18" x2="12" y2="21" />
-            </svg>
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function HintsPanel({
-  hints,
-  onUseHint,
-}: {
-  hints: string[];
-  onUseHint: (hint: string) => void;
-}) {
-  return (
-    <div
-      className="rounded-[var(--radius-md)] border px-3 py-2.5 space-y-2"
-      style={{ borderColor: `color-mix(in srgb, ${ACCENT} 30%, transparent)`, background: `color-mix(in srgb, ${ACCENT} 6%, var(--color-bg-secondary))` }}
-    >
-      <p className="text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-        💡 Suggestions de réponse
-      </p>
-      <ul className="space-y-1.5">
-        {hints.map((hint, i) => (
-          <li key={i} className="flex items-start gap-2">
-            <button
-              type="button"
-              onClick={() => onUseHint(hint)}
-              className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded text-[9px] font-bold text-white"
-              style={{ background: ACCENT }}
-              aria-label={`Utiliser : ${hint}`}
-            >
-              ↑
-            </button>
-            <span className="text-sm leading-snug text-[var(--color-text-primary)]">{hint}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="text-[10px] text-[var(--color-text-secondary)]">
-        Appuyez sur ↑ pour utiliser une suggestion, puis modifiez-la à votre façon.
-      </p>
-    </div>
-  );
-}
 
 // ——— Guide question bubble (audio-only, for task 2 image description) ———
 
@@ -523,7 +343,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [task4Transcripts, setTask4Transcripts] = useState<string[]>(() => Array(10).fill(""));
   const [task4Lines, setTask4Lines] = useState<OralDialogueLine[]>([]);
   const [task4Done, setTask4Done] = useState(false);
-  const [hintsOpen, setHintsOpen] = useState(false);
 
   // Task 5: argumentation (multi-phrase)
   const [argumentationTranscript, setArgumentationTranscript] = useState("");
@@ -621,7 +440,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // Reset transcript + hints on phase change
   useEffect(() => {
     setCurrentTranscript("");
-    setHintsOpen(false);
     setImageHelpOpen(false);
   }, [phase]);
 
