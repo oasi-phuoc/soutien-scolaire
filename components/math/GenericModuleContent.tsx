@@ -6523,13 +6523,16 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       const tableRows = showPivot && bt?.items?.[pivot]?.length
         ? bt.items[pivot]!.map((row) => row.split("|").map((cell) => cell.trim()))
         : block.rows;
+      // autoWidth: columns size to their content (tighter padding, table hugs
+      // its text and is centered) instead of stretching to the full width.
+      const tCellPad = block.autoWidth ? "px-2 py-1.5" : "px-3 py-2";
       return (
-        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
-          <table className="w-full text-sm">
+        <div className={`overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--color-border-default)] ${block.autoWidth ? "mx-auto w-fit max-w-full" : ""}`}>
+          <table className={`text-sm ${block.autoWidth ? "w-auto" : "w-full"}`}>
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
                 {tableHeaders.map((h, i) => (
-                  <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
+                  <th key={i} className={`${tCellPad} text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
                     {h}
                   </th>
                 ))}
@@ -6541,7 +6544,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
                   {row.map((cell, ci) => {
                     const align = block.colAligns?.[ci] ?? block.textAlignRows ?? "center";
                     return (
-                      <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)] ${align === "left" ? "text-left" : "text-center"}`} lang={textLang} dir={textDir}>
+                      <td key={ci} className={`${tCellPad} text-sm text-[var(--color-text-primary)] ${align === "left" ? "text-left" : "text-center"}`} lang={textLang} dir={textDir}>
                         {cell.trim().split(/\n/).map((line, li) => (
                           <span key={li}>{li > 0 && <br />}{renderBold(line.trim())}</span>
                         ))}

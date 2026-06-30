@@ -36,6 +36,7 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
           type: "table",
           headersFr: ["Élément", "Définition", "Exemple avec −6cd²"],
           accentHeader: true,
+          autoWidth: true,
           rows: [
             ["Monôme", "Produit d'un nombre et d'une ou plusieurs lettres", "−6cd²"],
             ["Coefficient", "Partie numérique, avec son signe", "−6"],

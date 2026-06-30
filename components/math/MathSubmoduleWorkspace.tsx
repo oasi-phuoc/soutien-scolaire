@@ -1353,8 +1353,8 @@ function BlockView({ block, blockIdx, tradBlocks, pivot = "en", showPivot = fals
         : block.rows;
       const tableCaption = usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr;
       return (
-        <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-          <table className="min-w-full text-sm">
+        <div className={`overflow-x-auto rounded-xl border border-[var(--color-border-default)] ${block.autoWidth ? "mx-auto w-fit max-w-full" : ""}`}>
+          <table className={`text-sm ${block.autoWidth ? "w-auto" : "min-w-full"}`}>
             {tableHeaders.length > 0 && (
               <thead>
                 <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>

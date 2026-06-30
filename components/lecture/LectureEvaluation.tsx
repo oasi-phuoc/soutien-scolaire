@@ -1262,7 +1262,11 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
     } else {
       onEvalStepChange?.(progressIdx, exerciseSteps.length, validated, isResults);
     }
-  }, [progressIdx, exerciseSteps.length, onEvalStepChange, evalStarted, validated, isResults]);
+    // `onEvalStepChange` is an inline parent callback (new identity every render);
+    // excluding it keeps this effect from re-running forever (the parent sets
+    // state from it, which would re-create the callback → infinite render loop).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progressIdx, exerciseSteps.length, evalStarted, validated, isResults]);
 
   return (
     <div className="w-full flex-1 pb-56">
