@@ -29,10 +29,10 @@ import { FormProductionRunner } from "@/components/communication/FormProductionR
 
 const ACCENT = "var(--color-accent-comm)";
 const LESSONS: Record<string, CommunicationLesson> = {
-  "E1-1": EXPRESSION_E1_1,
-  "E1-2": EXPRESSION_E1_2,
-  "E1-3": EXPRESSION_E1_3,
-  "E2-1": COMMUNICATION_E2_1,
+  "PE-1": EXPRESSION_E1_1,
+  "PE-2": EXPRESSION_E1_2,
+  "PE-3": EXPRESSION_E1_3,
+  "E1-1": COMMUNICATION_E2_1,
   "P1-1": COMMUNICATION_E2_1,
   "A1-1": COMMUNICATION_E2_1,
 };
@@ -91,7 +91,7 @@ function WritingExercise({
       const result = await submitExpressionAction({
         teacherId,
         lessonCode,
-        level: lessonCode === "E1.1" ? "base" : lessonCode === "E1.2" ? "moyen" : "avance",
+        level: lessonCode === "PE.1" ? "base" : lessonCode === "PE.2" ? "moyen" : "avance",
         prompt,
         text,
         aiFeedback: feedback,
@@ -435,8 +435,8 @@ function MCQExercise({
 // ——— Main component ———
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
-  if (lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
-  if (lessonId === "E1-0") return <FormProductionRunner />;
+  if (lessonId === "E1-0" || lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
+  if (lessonId === "PE-0") return <FormProductionRunner />;
   if (lessonId.startsWith("PO-")) return <OralProductionRunner lessonId={lessonId} />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
 }

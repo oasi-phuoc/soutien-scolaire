@@ -8,22 +8,16 @@ import {
   getExpressionTeachersAction,
   type TeacherOption,
 } from "@/app/actions/expression";
-import { submitOralAction, type OralDialogueLine, type OralGrammarMatch } from "@/app/actions/oral";
+import { submitOralAction, type OralDialogueLine } from "@/app/actions/oral";
 import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
+import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
 
 const ACCENT = "var(--color-accent-comm)";
 
-const IGNORED_RULES = new Set([
-  "WHITESPACE_RULE",
-  "FRENCH_WHITESPACE",
-  "COMMA_PARENTHESIS_WHITESPACE",
-  "UNPAIRED_BRACKETS",
-]);
-
-type Phase = "intro" | "task1" | "task2" | "task3" | "task4" | "review";
+type Phase = "intro" | "task1" | "task2" | "task3" | "task4" | "task5" | "review";
 
 function levelFromId(lessonId: string): OralLevel {
   if (lessonId === "PO-2") return "moyen";
@@ -122,20 +116,6 @@ function useSpeechRecognition(onTranscript: (text: string) => void) {
 }
 
 // ——— Grammar check ———
-
-async function checkGrammar(text: string): Promise<OralGrammarMatch[]> {
-  try {
-    const response = await fetch("/api/check-grammar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    const data = await response.json() as { matches?: OralGrammarMatch[] };
-    return (data.matches ?? []).filter((m) => !IGNORED_RULES.has(m.rule?.id ?? ""));
-  } catch {
-    return [];
-  }
-}
 
 // ——— Mic button (hold-to-speak) ———
 
@@ -336,6 +316,7 @@ function VoiceMessageBubble({
     }, 150);
   }
 
+
   return (
     <div className="flex justify-start">
       <div
@@ -509,6 +490,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const [prompt] = useState<OralPrompt>(() => randomOralPrompt(level));
   const [situation] = useState(() => randomOralSituation(level));
+  const [argumentationTopic] = useState(() => randomArgumentationTopic(level));
   const compactImage = /PO_(?:Chaussure|Cinema|Telephone)\.webp$/.test(situation.image);
   const imageWidth = compactImage ? 1402 : 1448;
   const imageHeight = compactImage ? 1122 : 1086;
@@ -519,7 +501,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [task1Lines, setTask1Lines] = useState<OralDialogueLine[]>([]);
   const [task1Done, setTask1Done] = useState(false);
   const [currentTranscript, setCurrentTranscript] = useState("");
-  const [isChecking, setIsChecking] = useState(false);
+  const isChecking = false;
 
   // Task 2: directed interview (all questions shown at once)
   const [interviewQuestions] = useState<string[]>(() => {
@@ -531,7 +513,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [interviewDone, setInterviewDone] = useState(false);
   const [task2Phrases, setTask2Phrases] = useState<string[]>([]);
   const [task2Lines, setTask2Lines] = useState<OralDialogueLine[]>([]);
-  const [task2Grammar, setTask2Grammar] = useState<OralGrammarMatch[]>([]);
   const [task2Done, setTask2Done] = useState(false);
   const [imageHelpOpen, setImageHelpOpen] = useState(false);
   const [openTranscriptIdx, setOpenTranscriptIdx] = useState<number | null>(null);
@@ -543,6 +524,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [task4Lines, setTask4Lines] = useState<OralDialogueLine[]>([]);
   const [task4Done, setTask4Done] = useState(false);
   const [hintsOpen, setHintsOpen] = useState(false);
+
+  // Task 5: argumentation
+  const [argumentationTranscript, setArgumentationTranscript] = useState("");
+  const [task5Lines, setTask5Lines] = useState<OralDialogueLine[]>([]);
+  const [task5Done, setTask5Done] = useState(false);
 
   // Review
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
@@ -586,6 +572,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setCurrentTranscript(text);
   }, []);
 
+  const onTask5Transcript = useCallback((text: string) => {
+    setArgumentationTranscript(text);
+  }, []);
+
   const { isListening: listenT0, supported, startListening: startT0, stopListening: stopT0 } =
     useSpeechRecognition(onT0);
   const { isListening: listenT1, startListening: startT1, stopListening: stopT1 } =
@@ -604,6 +594,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     useSpeechRecognition(onTask3Transcript);
   const { isListening: listening4, startListening: start4, stopListening: stop4 } =
     useSpeechRecognition(onTask4Transcript);
+  const { isListening: listening5, startListening: start5, stopListening: stop5 } =
+    useSpeechRecognition(onTask5Transcript);
 
   // Reset transcript + hints on phase/dialogue index change
   useEffect(() => {
@@ -617,26 +609,23 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const stepIdx =
     phase === "intro" ? 0 :
     phase === "task1" ? 1 :
-    phase === "task2" ? 2 : 3;
+    phase === "task2" ? 2 :
+    phase === "task3" ? 3 :
+    phase === "task4" ? 4 : 5;
 
-  const totalSteps = 4;
+  const totalSteps = 6;
 
   // ——— Task 1: confirm all 3 theme questions at once ———
 
-  async function confirmTask1() {
+  function confirmTask1() {
     const hasAny = task1Transcripts.some((t) => t.trim());
-    if (!hasAny || isChecking) return;
-    setIsChecking(true);
-    const grammarResults = await Promise.all(
-      task1Transcripts.map((text) => text.trim() ? checkGrammar(text) : Promise.resolve([]))
-    );
-    setIsChecking(false);
+    if (!hasAny) return;
     const lines: OralDialogueLine[] = [];
     for (let i = 0; i < 3; i++) {
       const theme = prompt.themes[i]!;
       lines.push(
-        { role: "app", text: `Thème : « ${theme.word} »` },
-        { role: "student", text: task1Transcripts[i] || "(pas de réponse)", grammar: grammarResults[i] ?? [] },
+        { role: "app", text: `Th?me : ? ${theme.word} ?` },
+        { role: "student", text: task1Transcripts[i] || "(pas de r?ponse)" },
       );
     }
     setTask1Lines(lines);
@@ -645,19 +634,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   // ——— Task 2: directed interview (all questions at once) ———
 
-  async function confirmInterview() {
+  function confirmInterview() {
     const hasAny = interviewTranscripts.some((t) => t.trim());
-    if (!hasAny || isChecking) return;
-    setIsChecking(true);
-    const grammarResults = await Promise.all(
-      interviewTranscripts.map((text) => text.trim() ? checkGrammar(text) : Promise.resolve([]))
-    );
-    setIsChecking(false);
+    if (!hasAny) return;
     const lines: OralDialogueLine[] = [];
     for (let i = 0; i < interviewQuestions.length; i++) {
       lines.push(
         { role: "app", text: interviewQuestions[i]! },
-        { role: "student", text: interviewTranscripts[i] || "(pas de réponse)", grammar: grammarResults[i] ?? [] },
+        { role: "student", text: interviewTranscripts[i] || "(pas de r?ponse)" },
       );
     }
     setInterviewLines(lines);
@@ -670,30 +654,23 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setCurrentTranscript("");
   }
 
-  async function validateTask2() {
-    if (task2Phrases.length === 0 || isChecking) return;
-    setIsChecking(true);
-    const grammar = await checkGrammar(task2Phrases.join(" "));
-    setIsChecking(false);
+  function validateTask2() {
+    if (task2Phrases.length === 0) return;
     setTask2Lines([
-      { role: "app", text: "Décrivez cette image." },
+      { role: "app", text: "D?crivez cette image." },
       ...task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase })),
     ]);
-    setTask2Grammar(grammar);
     setTask2Done(true);
   }
 
   // ——— Task 4: dialogue responses ———
 
-  async function confirmDialogue() {
-    if (!currentTranscript.trim() || isChecking) return;
-    setIsChecking(true);
-    const grammar = await checkGrammar(currentTranscript);
-    setIsChecking(false);
+  function confirmDialogue() {
+    if (!currentTranscript.trim()) return;
     const promptText = situation.dialoguePrompts[dialogueIndex]!;
     const newLines: OralDialogueLine[] = [
       { role: "app", text: promptText },
-      { role: "student", text: currentTranscript, grammar },
+      { role: "student", text: currentTranscript },
     ];
     setTask4Lines((prev) => [...prev, ...newLines]);
     setCurrentTranscript("");
@@ -704,16 +681,20 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     }
   }
 
+  function confirmArgumentation() {
+    if (!argumentationTranscript.trim()) return;
+    setTask5Lines([
+      { role: "app", text: argumentationTopic.prompt },
+      { role: "student", text: argumentationTranscript },
+    ]);
+    setTask5Done(true);
+  }
+
   // ——— All grammar matches for review ———
 
-  const allGrammar = [
-    ...task1Lines.flatMap((l) => l.grammar ?? []),
-    ...interviewLines.flatMap((l) => l.grammar ?? []),
-    ...task2Grammar,
-    ...task4Lines.flatMap((l) => l.grammar ?? []),
-  ];
+  const allGrammar: [] = [];
 
-  const fullDialogue = [...task1Lines, ...interviewLines, ...task2Lines, ...task4Lines];
+  const fullDialogue = [...task1Lines, ...interviewLines, ...task2Lines, ...task4Lines, ...task5Lines];
 
   // ——— Save progress + finish ———
 
@@ -732,7 +713,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         id: `${prompt.id}-${situation.id}`,
         imageDescription: situation.imageDescription,
         dialogueContext: situation.dialogueContext,
-        dialoguePrompts: situation.dialoguePrompts,
+        dialoguePrompts: [...situation.dialoguePrompts, argumentationTopic.prompt],
       };
       const result = await submitOralAction({
         teacherId,
@@ -755,38 +736,43 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     else if (phase === "task2") setPhase("task1");
     else if (phase === "task3") setPhase("task2");
     else if (phase === "task4") setPhase("task3");
-    else setPhase("task4");
+    else if (phase === "task5") setPhase("task4");
+    else setPhase("task5");
   }
 
-  const allTasksDone = task1Done && interviewDone && task2Done && task4Done;
+  const allTasksDone = task1Done && interviewDone && task2Done && task4Done && task5Done;
 
   function goNext() {
     if (phase === "intro") setPhase("task1");
     else if (phase === "task1") setPhase("task2");
     else if (phase === "task2") setPhase("task3");
     else if (phase === "task3") setPhase("task4");
-    else if (phase === "task4") setPhase(allTasksDone ? "review" : "task1");
+    else if (phase === "task4") setPhase("task5");
+    else if (phase === "task5") setPhase(allTasksDone ? "review" : "task1");
     else handleFinish();
   }
 
   function handleNavValidate() {
-    if (phase === "task1") void confirmTask1();
-    else if (phase === "task2") void confirmInterview();
-    else if (phase === "task3") void validateTask2();
-    else if (phase === "task4") void confirmDialogue();
+    if (phase === "task1") confirmTask1();
+    else if (phase === "task2") confirmInterview();
+    else if (phase === "task3") validateTask2();
+    else if (phase === "task4") confirmDialogue();
+    else if (phase === "task5") confirmArgumentation();
   }
 
   const showValidate =
     (phase === "task1" && !task1Done) ||
     (phase === "task2" && !interviewDone) ||
     (phase === "task3" && !task2Done) ||
-    (phase === "task4" && !task4Done);
+    (phase === "task4" && !task4Done) ||
+    (phase === "task5" && !task5Done);
 
   const validateDisabled =
     (phase === "task1" && (!task1Transcripts.some((t) => t.trim()) || isChecking)) ||
     (phase === "task2" && (!interviewTranscripts.some((t) => t.trim()) || isChecking)) ||
     (phase === "task3" && (task2Phrases.length === 0 || isChecking)) ||
-    (phase === "task4" && (!currentTranscript.trim() || listening4 || isChecking));
+    (phase === "task4" && (!currentTranscript.trim() || listening4 || isChecking)) ||
+    (phase === "task5" && (!argumentationTranscript.trim() || listening5 || isChecking));
 
   // Free navigation: Suivant never depends on validation.
   const nextDisabled = false;
@@ -857,6 +843,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           },
         ];
 
+  const argumentationTheory = {
+    title: "Partie 5 - Argumentation",
+    body: level === "base"
+      ? "Ecoutez ou lisez la question. Donnez votre avis avec une phrase simple et une raison."
+      : level === "moyen"
+      ? "Donnez votre opinion sur une question de societe ou de vie quotidienne. Expliquez votre choix avec plusieurs raisons."
+      : "Prenez position sur un sujet plus abstrait. Structurez votre reponse avec une opinion, deux arguments et un exemple.",
+  };
+  const displayedTheoryParts = [...theoryParts, argumentationTheory];
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
@@ -904,7 +899,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {/* The 3 parts detail */}
           <div className="space-y-2.5">
-            {theoryParts.map((part, i) => (
+            {displayedTheoryParts.map((part, i) => (
               <div
                 key={i}
                 className="rounded-[var(--radius-md)] px-4 py-3"
@@ -1006,8 +1001,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               })}
             </div>
 
-            {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
-
             {task1Done && (
               <p className="text-center text-sm text-[var(--color-text-secondary)]">
                 Questions enregistrées. Appuyez sur <strong>Suivant</strong> pour continuer.
@@ -1085,8 +1078,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               </div>
             );
           })()}
-
-          {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
 
           {interviewDone && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
@@ -1385,7 +1376,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   <p className="text-sm text-[var(--color-text-primary)]">{currentTranscript}</p>
                 </div>
               )}
-              {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
               {!supported && (
                 <input
                   type="text"
@@ -1407,11 +1397,69 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {task4Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Dialogue terminé. Appuyez sur <strong>Suivant</strong> pour voir le récapitulatif.
+              Dialogue terminé. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>
       )}
+      {/* Task 5: Argumentation */}
+      {phase === "task5" && (
+        <div className="flex-1 space-y-4">
+          <div>
+            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+              Partie 5 - Argumentation
+            </h2>
+            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+              Donnez votre opinion et expliquez pourquoi.
+            </p>
+          </div>
+
+          <section className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4">
+            <div className="flex items-start gap-3">
+              <div className="flex-1">
+                <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                  Theme : {argumentationTopic.theme}
+                </p>
+                <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {argumentationTopic.prompt}
+                </p>
+              </div>
+              <SpeakButton text={argumentationTopic.prompt} />
+            </div>
+          </section>
+
+          {argumentationTranscript && (
+            <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+              <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Retranscription :</p>
+              <p className="text-sm text-[var(--color-text-primary)]">{argumentationTranscript}</p>
+            </div>
+          )}
+
+          {!task5Done && !supported && (
+            <textarea
+              value={argumentationTranscript}
+              onChange={(event) => setArgumentationTranscript(event.target.value)}
+              placeholder="Votre reponse..."
+              className="min-h-28 w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
+            />
+          )}
+
+          {!task5Done ? (
+            <MicButton
+              isListening={listening5}
+              supported={supported}
+              onStart={start5}
+              onStop={stop5}
+              disabled={isChecking}
+            />
+          ) : (
+            <p className="text-center text-sm text-[var(--color-text-secondary)]">
+              Argumentation enregistree. Appuyez sur <strong>Suivant</strong> pour voir le recapitulatif.
+            </p>
+          )}
+        </div>
+      )}
+
 
       {/* ——— REVIEW ——— */}
       {phase === "review" && (
@@ -1432,6 +1480,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               { num: 2, label: "Partie 2 — Entretien dirigé",       lines: interviewLines },
               { num: 3, label: "Partie 3 — Description d'image",    lines: task2Lines },
               { num: 4, label: "Partie 4 — Dialogue",               lines: task4Lines },
+              { num: 5, label: "Partie 5 - Argumentation",           lines: task5Lines },
             ].filter(({ lines }) => lines.length > 0).map(({ num, label, lines }) => (
               <section key={num}>
                 <div className="mb-2 flex items-center gap-2">
@@ -1447,7 +1496,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 </div>
                 <div className="space-y-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
                   {lines.map((line, i) => (
-                    <DialogueBubble key={i} line={{ ...line, grammar: undefined }} />
+                    <DialogueBubble key={i} line={{ ...line }} />
                   ))}
                 </div>
               </section>

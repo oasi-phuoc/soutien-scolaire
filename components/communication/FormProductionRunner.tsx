@@ -117,7 +117,7 @@ export function FormProductionRunner() {
 
   function saveProgress() {
     try {
-      markCommunicationLessonComplete("E1-0");
+      markCommunicationLessonComplete("PE-0");
     } catch { /* local progress remains optional */ }
   }
 

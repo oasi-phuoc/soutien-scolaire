@@ -1,8 +1,8 @@
 import type { CommunicationLesson } from "./communication-p1-1";
 
 export const EXPRESSION_E1_1: CommunicationLesson = {
-  id: "E1-1",
-  code: "E1.1",
+  id: "PE-1",
+  code: "PE.1",
   title: "Base",
   theory: [
     { type: "heading", text: "Rédiger un texte simple et clair" },
@@ -68,8 +68,8 @@ export const EXPRESSION_E1_1: CommunicationLesson = {
 };
 
 export const EXPRESSION_E1_2: CommunicationLesson = {
-  id: "E1-2",
-  code: "E1.2",
+  id: "PE-2",
+  code: "PE.2",
   title: "Moyen",
   theory: [
     { type: "heading", text: "Développer et organiser ses idées" },
@@ -125,8 +125,8 @@ export const EXPRESSION_E1_2: CommunicationLesson = {
 };
 
 export const EXPRESSION_E1_3: CommunicationLesson = {
-  id: "E1-3",
-  code: "E1.3",
+  id: "PE-3",
+  code: "PE.3",
   title: "Avancé",
   theory: [
     { type: "heading", text: "Construire un texte développé et convaincant" },

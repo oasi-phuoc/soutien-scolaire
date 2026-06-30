@@ -10,7 +10,7 @@ const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ PE: true });
 
   useEffect(() => {
     try {
@@ -131,7 +131,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ PE: true });
 
   useEffect(() => {
     try {
