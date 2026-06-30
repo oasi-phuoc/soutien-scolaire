@@ -10003,7 +10003,7 @@ export function GenericModuleContent({
                         })}
                       </div>
                     ) : symbolicValidated && ok === false ? (
-                      <div className="col-start-2 flex w-28 flex-col items-center border-b-2 border-amber-500 pb-1">
+                      <div className="col-start-2 flex w-full flex-col items-center border-b-2 border-amber-500 pb-1">
                         <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value || "—"}</span>
                         <span className="text-center text-xs font-bold text-amber-600">{question.acceptable[0]}</span>
                       </div>
@@ -10018,7 +10018,7 @@ export function GenericModuleContent({
                           next[index] = numericOnly ? cleanAlgebraNumberInput(event.target.value) : event.target.value;
                           return next;
                         })}
-                        className="col-start-2 w-28 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
+                        className="col-start-2 w-full border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
                       />
                     )}
                   </div>
@@ -10367,8 +10367,9 @@ export function GenericModuleContent({
               {" = "}
               <span className="font-mono font-bold text-[var(--color-text-primary)]">{step.value}</span>
             </p>
-            {/* Single grid for all rows so the "=" and answer boxes line up vertically. */}
-            <div className="grid w-fit grid-cols-[1.5rem_auto_1rem_4rem] items-center gap-x-3 gap-y-3">
+            {/* Single grid for all rows so the "=" and answer boxes line up vertically.
+                The answer column takes all remaining width. */}
+            <div className="grid w-full grid-cols-[1.5rem_auto_1rem_minmax(0,1fr)] items-center gap-x-3 gap-y-3">
               {step.questions.map((q, i) => {
                 const userAns = algebraGroupAnswers[i] ?? "";
                 const result = algebraGroupValidated ? (algebraGroupResults[i] ?? null) : null;
@@ -10379,7 +10380,7 @@ export function GenericModuleContent({
                     <span className="whitespace-nowrap font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                     <span className="text-center font-mono text-sm text-[var(--color-text-primary)]">=</span>
                     {isWrong ? (
-                      <div className="w-16 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                      <div className="w-full flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
                         <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
                       </div>
@@ -10398,7 +10399,7 @@ export function GenericModuleContent({
                             return next;
                           });
                         }}
-                        className={`w-16 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 ${
+                        className={`w-full px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 ${
                           result === true
                             ? "border-[var(--color-accent-alg)]"
                             : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
