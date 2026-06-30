@@ -19,6 +19,13 @@ import {
 } from "@/lib/progress/lecture-progress";
 import { LectureEvaluation } from "./LectureEvaluation";
 import { playWord, playSyllable } from "@/lib/utils/audio";
+import {
+  normalizeGraph,
+  complexTargets,
+  makeComplexGrid,
+  makeComplexSyllables,
+  splitComplexWord,
+} from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
@@ -43,7 +50,7 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-audio", label: "Audio" },
       { key: "complex-syllables-cv", label: "Syllabes" },
       { key: "pronounce-complex", label: "Prononcer" },
-      { key: "word-eval", label: "Évaluation" },
+      { key: "eval", label: "Évaluation" },
     ];
   }
   if (data.type === "syllable") {
@@ -123,62 +130,6 @@ function shuffle<T>(items: T[]): T[] {
   return next;
 }
 
-function normalizeGraph(text: string) {
-  return text
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/gu, "")
-    .toLowerCase();
-}
-
-function complexTargets(label: string) {
-  const key = normalizeGraph(label);
-  // New L7 graphemes — checked first because they contain substrings ("on", "en",
-  // "oi"…) that would otherwise match the looser nasal/vowel rules below.
-  if (key.includes("tion")) return ["tion"];
-  if (key.includes("oin")) return ["oin"];
-  if (key.includes("ien")) return ["ien"];
-  if (key.includes("eu") || key.includes("oeu") || key.includes("œu")) return ["œu", "oeu", "eu"];
-  if (key.includes("an") || key.includes("en")) return ["an", "en", "am", "em"];
-  if (key.includes("in") || key.includes("ain")) return ["in", "ain", "ein", "im", "aim"];
-  if (key.includes("on")) return ["on", "om"];
-  if (key.includes("au") || key.includes("eau")) return ["au", "eau"];
-  if (key.includes("ou")) return ["ou"];
-  if (key.includes("oi")) return ["oi"];
-  if (key.includes("ch")) return ["ch"];
-  if (key.includes("ph")) return ["ph"];
-  return key.split(/\s*\/\s*/u).map((entry) => entry.replace(/[^a-z]/gu, "")).filter(Boolean);
-}
-
-function makeComplexGrid(targets: string[], isUppercase: boolean) {
-  const distractors = ["la", "ri", "ma", "to", "be", "su", "fe", "po", "di", "ve", "ra", "mi", "lo", "te", "nu"]
-    .filter((entry) => !targets.includes(entry));
-  const targetCount = 6 + Math.floor(Math.random() * 4);
-  const cells = [
-    ...Array.from({ length: targetCount }, (_, i) => targets[i % targets.length]!),
-    ...Array.from({ length: 25 - targetCount }, () => distractors[Math.floor(Math.random() * distractors.length)]!),
-  ];
-  for (let i = cells.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [cells[i], cells[j]] = [cells[j]!, cells[i]!];
-  }
-  return cells.map((cell) => (isUppercase ? cell.toUpperCase() : cell.toLowerCase()));
-}
-
-const SYLLABLE_CONSONANTS = ["b", "d", "f", "l", "m", "n", "p", "r", "s", "t", "v"];
-
-function makeComplexSyllables(targets: string[], mode: "cv" | "vc" | "mixed"): string[] {
-  const cons = shuffle([...SYLLABLE_CONSONANTS]);
-  const result: string[] = [];
-  for (let i = 0; i < 6; i++) {
-    const c1 = cons[i % cons.length]!;
-    const c2 = cons[(i + 4) % cons.length]!;
-    const g = targets[i % targets.length]!;
-    const syl = mode === "cv" ? `${c1}${g}` : mode === "vc" ? `${g}${c1}` : `${c1}${g}${c2}`;
-    result.push(Math.random() > 0.5 ? syl.toUpperCase() : syl.toLowerCase());
-  }
-  return shuffle(result);
-}
-
 const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
   target: string;
   isUppercase: boolean;
@@ -255,25 +206,6 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
     </section>
   );
 });
-
-function splitComplexWord(word: string, targets: string[]) {
-  const sorted = [...targets].sort((a, b) => b.length - a.length);
-  const chunks: Array<{ text: string; hit: boolean }> = [];
-  for (let i = 0; i < word.length;) {
-    const rest = normalizeGraph(word.slice(i));
-    const found = sorted.find((target) => rest.startsWith(target));
-    if (found) {
-      for (let offset = 0; offset < found.length; offset++) {
-        chunks.push({ text: word.slice(i + offset, i + offset + 1), hit: true });
-      }
-      i += found.length;
-    } else {
-      chunks.push({ text: word.slice(i, i + 1), hit: false });
-      i += 1;
-    }
-  }
-  return chunks;
-}
 
 const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
   function ComplexWordSpotter({ words, target, isUppercase }, ref) {
@@ -1032,24 +964,21 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       );
     }
     if (data.type === "complex-sound") {
-      if (step.key === "word-eval") {
-        // L7 evaluation: read 20 words from the lesson pool (10 upper + 10 lower),
-        // timed 5 minutes — same flow as L6/L8 word evaluations.
-        return (
-          <WordPronounceGrid
-            key={k}
-            ref={pronounceGridRef}
-            kind="mots"
-            sampleSpec={[
-              { pool: data.upperWords, n: 10 },
-              { pool: data.lowerWords, n: 10 },
-            ]}
-            timerSeconds={300}
-            isEval
-          />
-        );
-      }
       switch (step.key) {
+        case "eval":
+          // L7 evaluation: same exercises as the letter lessons (grapheme grid,
+          // word spotting, sound image/audio, syllables, pronunciation).
+          return (
+            <LectureEvaluation
+              key={k}
+              data={data}
+              onBack={goBack}
+              onDone={handleEvalDone}
+              onEvalStepChange={(idx, total, validated, isResults) => setEvalSubStep({ idx, total, validated, isResults })}
+              onEvalTimeChange={(t) => setEvalTimeLeft(t)}
+              onEvalNavigateReady={(navigate) => { evalNavigateRef.current = navigate; }}
+            />
+          );
         case "discover-complex":
           return (
             <DiscoverSound

@@ -1,17 +1,24 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
-import type { ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
+import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
+import {
+  complexTargets,
+  makeComplexGrid,
+  makeComplexSyllables,
+  normalizeGraph,
+  splitComplexWord,
+} from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Props {
-  data: VowelData | ConsonantData;
+  data: VowelData | ConsonantData | ComplexSoundLessonData;
   onBack: () => void;
   onDone: (grade: number, passed: boolean, total: number) => void;
   onEvalStepChange?: (idx: number, total: number, validated: boolean[], isResults: boolean) => void;
@@ -34,6 +41,8 @@ type ValidatedHandler = (score: number, snapshot: EvalSnapshot) => void;
 
 const BASE_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "pronounce", "results"];
 const CONSONANT_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "syllables-mixed", "pronounce", "results"];
+// L7 complex sounds reuse the same set of exercises as consonants.
+const COMPLEX_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "syllables-mixed", "pronounce", "results"];
 
 const RESULT_ROW_BY_STEP: Record<Exclude<EvalStep, "results">, { label: string; max: number }> = {
   grid: { label: "Reconnaître la lettre", max: 4 },
@@ -756,6 +765,286 @@ function PronounceExercise({
   );
 }
 
+// ─── Complex-sound variants (L7) ─────────────────────────────────────────────
+
+// Grapheme grid (4 pts / 2 pts partial) — like GridExercise but with multi-letter
+// graphemes (OU, GN, TION…) mixed among syllable distractors.
+function ComplexGridExercise({
+  label, onValidated, shouldValidate,
+}: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const targets = useMemo(() => complexTargets(label), [label]);
+  const [isUpper] = useState(() => Math.random() > 0.5);
+  const [grid] = useState(() => makeComplexGrid(targets, isUpper));
+  const [states, setStates] = useState<CellState[]>(() => Array(25).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  function validate() {
+    if (validated) return;
+    setValidated(true);
+    const newStates = states.map((s, i) => {
+      const isT = targets.includes(normalizeGraph(grid[i]!));
+      if (s === "selected") return isT ? "correct" : "wrong";
+      if (isT) return "missed" as CellState;
+      return "idle" as CellState;
+    });
+    setStates(newStates);
+    const correctCount = newStates.filter((s) => s === "correct").length;
+    const wrongCount = newStates.filter((s) => s === "wrong").length;
+    const missedCount = newStates.filter((s) => s === "missed").length;
+    const targetTotal = correctCount + missedCount;
+    const perfect = wrongCount === 0 && missedCount === 0;
+    const halfPassed = correctCount >= Math.ceil(targetTotal / 2) && wrongCount === 0;
+    const display = isUpper ? label.toUpperCase() : label.toLowerCase();
+    onValidated(perfect ? 4 : halfPassed ? 2 : 0, { kind: "grid", grid, states: newStates, upper: display, lower: display });
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function tap(i: number) {
+    if (validated) return;
+    setStates((prev) => {
+      const next = [...prev] as CellState[];
+      next[i] = prev[i] === "selected" ? "idle" : "selected";
+      return next;
+    });
+  }
+
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Reconnaître le graphème</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Touchez toutes les cases{" "}
+        <strong className="text-[var(--color-accent-lecture)]">{isUpper ? label.toUpperCase() : label.toLowerCase()}</strong>
+      </p>
+      <div className="grid grid-cols-5 gap-2">
+        {grid.map((cell, i) => {
+          const s = states[i]!;
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tap(i)}
+              disabled={validated}
+              className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
+                s === "correct" || s === "selected"
+                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
+                  : s === "wrong" || s === "missed"
+                    ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
+              }`}
+            >
+              {cell}
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// Spot the grapheme inside words (1 pt per fully-correct line × 4 lines).
+function ComplexWordsExercise({
+  label, upperWords, lowerWords, onValidated, shouldValidate,
+}: { label: string; upperWords: string[]; lowerWords: string[]; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const targets = useMemo(() => complexTargets(label), [label]);
+  const [words] = useState(() => {
+    const up = shuffle(upperWords.filter((w) => w.length <= 10));
+    const low = shuffle(lowerWords.filter((w) => w.length <= 10));
+    return [
+      (up[0] ?? label).toUpperCase(),
+      (low[0] ?? label.toLowerCase()).toLowerCase(),
+      (up[1] ?? label).toUpperCase(),
+      (low[1] ?? label.toLowerCase()).toLowerCase(),
+    ];
+  });
+  const [states, setStates] = useState<Record<string, CellState>>({});
+  const [validated, setValidated] = useState(false);
+
+  function validate() {
+    if (validated) return;
+    setValidated(true);
+    const newStates: Record<string, CellState> = {};
+    let total = 0;
+    words.forEach((word, wi) => {
+      const parts = splitComplexWord(word, targets);
+      let lineOk = true;
+      parts.forEach((part, ci) => {
+        const key = `${wi}-${ci}`;
+        const s = states[key] ?? "idle";
+        if (part.hit) {
+          newStates[key] = s === "selected" ? "correct" : "missed";
+          if (s !== "selected") lineOk = false;
+        } else if (s === "selected") {
+          newStates[key] = "wrong";
+          lineOk = false;
+        }
+      });
+      if (lineOk) total++;
+    });
+    setStates(newStates);
+    onValidated(total, { kind: "words", words, states: newStates, letter: label, letterLower: label.toLowerCase() });
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function tap(wi: number, ci: number) {
+    if (validated) return;
+    const key = `${wi}-${ci}`;
+    setStates((prev) => ({ ...prev, [key]: prev[key] === "selected" ? "idle" : "selected" }));
+  }
+
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Repérer dans les mots</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Touchez le graphème{" "}
+        <strong className="text-[var(--color-accent-lecture)]">{label}</strong> dans chaque mot
+      </p>
+      <ul className="space-y-2">
+        {words.map((word, wi) => (
+          <li key={wi} className="flex flex-nowrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-2">
+            {splitComplexWord(word, targets).map((part, ci) => {
+              const key = `${wi}-${ci}`;
+              const s = states[key] ?? "idle";
+              return (
+                <button
+                  key={ci}
+                  type="button"
+                  disabled={validated}
+                  onClick={() => tap(wi, ci)}
+                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors ${
+                    s === "correct" || s === "selected"
+                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                      : s === "wrong" || s === "missed"
+                        ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
+                        : "border-transparent text-[var(--color-text-primary)]"
+                  }`}
+                >
+                  {part.text}
+                </button>
+              );
+            })}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// Read grapheme syllables aloud (3 pts) — like SyllablesMixedExercise.
+function ComplexSyllablesExercise({
+  label, onValidated, shouldValidate,
+}: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const targets = useMemo(() => complexTargets(label), [label]);
+  const [syllables] = useState(() => makeComplexSyllables(targets, "mixed"));
+  const [recStates, setRecStates] = useState<RecState[]>(() => syllables.map(() => "idle"));
+  const [heard, setHeard] = useState<string[]>(() => syllables.map(() => ""));
+  const [scored, setScored] = useState<boolean[]>(() => syllables.map(() => false));
+  const [validated, setValidated] = useState(false);
+  const recRef = useRef<unknown>(null);
+
+  function startListening(index: number) {
+    if (validated || recStates[index] === "listening") return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rec: any = new SR();
+    rec.lang = "fr-CH";
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.maxAlternatives = 3;
+    setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "listening"; return next; });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (event: any) => {
+      let transcript = "";
+      let matched = false;
+      const want = normalizeGraph(syllables[index]!).replace(/\s+/gu, "");
+      for (let a = 0; a < event.results[0].length; a++) {
+        transcript = event.results[0][a].transcript.trim();
+        const norm = normalizeGraph(transcript).replace(/\s+/gu, "");
+        if (norm === want || norm.includes(want) || want.includes(norm)) { matched = true; break; }
+      }
+      setHeard((prev) => { const next = [...prev]; next[index] = transcript; return next; });
+      setScored((prev) => { const next = [...prev]; next[index] = true; return next; });
+      setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = matched ? "correct" : "wrong"; return next; });
+    };
+    rec.onerror = () => setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "idle"; return next; });
+    rec.onend = () => setRecStates((prev) => { const next = [...prev] as RecState[]; if (next[index] === "listening") next[index] = "idle"; return next; });
+    recRef.current = rec;
+    rec.start();
+  }
+
+  const validateRef = useRef(() => {});
+  validateRef.current = () => {
+    if (validated) return;
+    setValidated(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    const score = Math.min(3, recStates.filter((state) => state === "correct").length);
+    onValidated(score, { kind: "syllables-mixed", syllables, states: recStates, heard, score });
+  };
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
+  return (
+    <section className="space-y-3">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Prononcez les syllabes affichées.</p>
+      <div className="space-y-2">
+        {syllables.map((syllable, index) => {
+          const state = recStates[index]!;
+          return (
+            <div key={`${syllable}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
+              state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
+                : state === "wrong" ? "border-red-400 bg-red-50"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
+            }`}>
+              <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
+              <span className="flex-1 text-center text-2xl font-bold text-[var(--color-text-primary)]">{syllable}</span>
+              <button
+                type="button"
+                onClick={() => startListening(index)}
+                disabled={!srAvailable || validated || state === "listening"}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95 ${
+                  state === "listening" ? "animate-pulse bg-red-500" : "bg-[var(--color-accent-lecture)]"
+                } disabled:opacity-40`}
+                aria-label={`Prononcer ${syllable}`}
+              >
+                {state === "correct"
+                  ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                  : state === "wrong"
+                    ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+                    : <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
+                }
+              </button>
+              {!srAvailable && !scored[index] && (
+                <button
+                  type="button"
+                  disabled={validated}
+                  onClick={() => {
+                    setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "correct"; return next; });
+                    setScored((prev) => { const next = [...prev]; next[index] = true; return next; });
+                  }}
+                  className="rounded-full border border-[var(--color-accent-lecture)] px-3 py-1 text-xs font-bold text-[var(--color-accent-lecture)]"
+                >
+                  OK
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 // ─── Results Screen ───────────────────────────────────────────────────────────
 
 type ResultRow = { label: string; max: number };
@@ -870,10 +1159,14 @@ function ResultsScreen({ scores, snapshots, rows, maxScore }: { scores: (number 
 
 export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange, onEvalNavigateReady }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
+  const isComplex = data.type === "complex-sound";
   const evalSteps = useMemo(
-    () => (data.type === "consonant" ? CONSONANT_EVAL_STEPS : BASE_EVAL_STEPS),
+    () => (data.type === "complex-sound" ? COMPLEX_EVAL_STEPS : data.type === "consonant" ? CONSONANT_EVAL_STEPS : BASE_EVAL_STEPS),
     [data.type],
   );
+  // Word pools for the complex-sound spotting exercise (single grapheme lessons).
+  const complexUpperWords = data.type === "complex-sound" ? data.upperWords : [];
+  const complexLowerWords = data.type === "complex-sound" ? data.lowerWords : [];
   const exerciseSteps = useMemo(
     () => evalSteps.filter((entry): entry is Exclude<EvalStep, "results"> => entry !== "results"),
     [evalSteps],
@@ -1025,13 +1318,25 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
         {/* Exercises (shown only when started) */}
         {evalStarted && (
           <>
-            <div hidden={isResults || stepIdx !== 0}><GridExercise upper={letter} lower={letterLower} onValidated={(s, snapshot) => recordScore(0, s, snapshot)} shouldValidate={validateTarget === 0 || validateTarget === -1} /></div>
-            <div hidden={isResults || stepIdx !== 1}><WordsExercise letter={letter} letterLower={letterLower} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 0}>
+              {isComplex
+                ? <ComplexGridExercise label={letter} onValidated={(s, snapshot) => recordScore(0, s, snapshot)} shouldValidate={validateTarget === 0 || validateTarget === -1} />
+                : <GridExercise upper={letter} lower={letterLower} onValidated={(s, snapshot) => recordScore(0, s, snapshot)} shouldValidate={validateTarget === 0 || validateTarget === -1} />}
+            </div>
+            <div hidden={isResults || stepIdx !== 1}>
+              {isComplex
+                ? <ComplexWordsExercise label={letter} upperWords={complexUpperWords} lowerWords={complexLowerWords} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />
+                : <WordsExercise letter={letter} letterLower={letterLower} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />}
+            </div>
             <div hidden={isResults || stepIdx !== 2}><SoundImageExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(2, s, snapshot)} shouldValidate={validateTarget === 2 || validateTarget === -1} /></div>
             <div hidden={isResults || stepIdx !== 3}><SoundAudioExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(3, s, snapshot)} shouldValidate={validateTarget === 3 || validateTarget === -1} /></div>
-            {data.type === "consonant" ? (
+            {data.type === "consonant" || isComplex ? (
               <>
-                <div hidden={isResults || stepIdx !== 4}><SyllablesMixedExercise letter={letterLower} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} /></div>
+                <div hidden={isResults || stepIdx !== 4}>
+                  {isComplex
+                    ? <ComplexSyllablesExercise label={letter} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />
+                    : <SyllablesMixedExercise letter={letterLower} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />}
+                </div>
                 <div hidden={isResults || stepIdx !== 5}><PronounceExercise chain={pronunciationChain} onValidated={(s, snapshot) => recordScore(5, s, snapshot)} shouldValidate={validateTarget === 5 || validateTarget === -1} /></div>
               </>
             ) : (
