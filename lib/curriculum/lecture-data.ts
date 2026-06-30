@@ -1580,6 +1580,21 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
     ["Lecture de mots", ["photographe", "orthographe", "géographie", "phénomène", "philosophie", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
     ["Lecture melangee", ["photo", "phare", "dauphin", "éléphant", "téléphone", "phrase", "alphabet", "pharmacie", "graphique", "sphère"]],
   ], "dauphin"),
+  complexSoundLesson("gn", "GN", "/ɲ/", [
+    ["Lis gn", ["montagne", "ligne", "signe", "cygne", "peigne", "oignon", "agneau", "araignée", "champignon", "baigner"]],
+    ["Lecture de mots", ["gagner", "soigner", "saigner", "grogner", "cogner", "régner", "vigne", "digne", "poignet", "compagnon"]],
+    ["Lecture melangee", ["espagnol", "magnifique", "champagne", "campagne", "épargne", "rossignol", "guignol", "trognon", "beignet", "grignoter"]],
+  ], "montagne"),
+  complexSoundLesson("ill", "ILL", "/j/", [
+    ["Lis ill", ["fille", "bille", "quille", "grille", "vanille", "chenille", "gorille", "papillon", "brille", "jonquille"]],
+    ["Avec voyelle (ail, eil, ouil)", ["abeille", "soleil", "bouteille", "oreille", "paille", "médaille", "feuille", "fauteuil", "citrouille", "grenouille"]],
+    ["Lecture melangee", ["famille", "habille", "réveil", "travail", "bataille", "volaille", "écureuil", "nouille", "rouille", "papillon"]],
+  ], "papillon"),
+  complexSoundLesson("ai-ei", "AI / EI", "/ɛ/", [
+    ["Lis ai", ["maison", "lait", "fraise", "chaise", "maître", "semaine", "balai", "palais", "vaisselle", "japonais"]],
+    ["Lis ei", ["baleine", "neige", "peigne", "reine", "treize", "seize", "beige", "peine", "veine", "pleine"]],
+    ["Lecture melangee", ["aimer", "faire", "plaire", "laine", "graine", "fontaine", "merveille", "beignet", "peinture", "ceinture"]],
+  ], "baleine"),
 ];
 
 // ─── Pools de mots pour L8 (multisyllabes) ─────────────────────────────────────
@@ -1705,7 +1720,7 @@ export const LECTURE_MODULES: LectureModule[] = [
     id: "l7",
     code: "L7",
     title: "Les sons complexes",
-    description: "OU, AN/EN, IN/AIN, ON, AU/EAU, OI, CH, PH",
+    description: "OU, AN/EN, IN/AIN, ON, AU/EAU, OI, CH, PH, GN, ILL, AI/EI",
     letters: COMPLEX_SOUND_LESSONS,
   },
   {
