@@ -1,9 +1,8 @@
 "use client";
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
-import { speak } from "@/lib/utils/speech";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
-import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
+import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -92,7 +91,6 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
           {items.map((word, i) => {
             const s = states[i]!;
             const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
-            const audioSrc = getWordAudioPath(word.label);
             return (
               <button
                 key={`${word.label}-${i}`}
@@ -120,7 +118,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                   aria-label={`Écouter ${word.label}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    new Audio(audioSrc).play().catch(() => speak(word.label));
+                    playWord(word.label);
                   }}
                   className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
                 >
@@ -169,7 +167,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
     function toggle(i: number) {
       if (validated) return;
       const word = items[i]!;
-      new Audio(getWordAudioPath(word.label)).play().catch(() => speak(word.label));
+      playWord(word.label);
       setStates((prev) => {
         const next = [...prev] as CellState[];
         next[i] = prev[i] === "selected" ? "idle" : "selected";
@@ -192,7 +190,6 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const audioSrc = getWordAudioPath(word.label);
             return (
               <button
                 key={`${word.label}-${i}`}
@@ -214,7 +211,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                   aria-label={`Écouter`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    new Audio(audioSrc).play().catch(() => speak(word.label));
+                    playWord(word.label);
                   }}
                   className="absolute inset-0 m-auto flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
                 >

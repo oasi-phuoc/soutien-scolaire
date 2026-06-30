@@ -1,8 +1,7 @@
 "use client";
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
-import { speak } from "@/lib/utils/speech";
-import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
+import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -52,7 +51,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     }
 
     function playAudio(word: string) {
-      new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
+      playWord(word);
     }
 
     return (

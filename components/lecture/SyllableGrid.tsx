@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
-import { speak } from "@/lib/utils/speech";
+import { playSyllable } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -202,7 +202,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
               </span>
               <button
                 type="button"
-                onClick={() => speak(syl)}
+                onClick={() => playSyllable(syl)}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95"
                 aria-label={`Ecouter ${syl}`}
               >

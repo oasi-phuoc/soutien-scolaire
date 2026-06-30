@@ -18,8 +18,7 @@ import {
   saveEvaluationResult,
 } from "@/lib/progress/lecture-progress";
 import { LectureEvaluation } from "./LectureEvaluation";
-import { speak } from "@/lib/utils/speech";
-import { getWordAudioPath } from "@/lib/utils/audio";
+import { playWord, playSyllable } from "@/lib/utils/audio";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
@@ -461,7 +460,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
               </span>
               <button
                 type="button"
-                onClick={() => speak(syl)}
+                onClick={() => playSyllable(syl)}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/15 text-[var(--color-text-secondary)] transition-opacity hover:opacity-75 active:scale-95"
                 aria-label={`Écouter ${syl}`}
               >
@@ -576,9 +575,6 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
     );
   }
 
-  function playWord(word: string) {
-    new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
-  }
 
   function startListening(index: number) {
     if (typeof window === "undefined" || timeUp || states[index] === "correct") return;
@@ -737,7 +733,7 @@ function CSoundsExplain() {
       { syl: "Ç", word: "garçon" },
     ] },
   ];
-  const play = (word: string) => new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
+  const play = (word: string) => playWord(word);
   return (
     <section className="space-y-4">
       <div>

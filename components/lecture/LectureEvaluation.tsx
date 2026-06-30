@@ -4,8 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import type { ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
-import { getWordAssetSlug, getWordAudioPath } from "@/lib/utils/audio";
-import { speak } from "@/lib/utils/speech";
+import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 
@@ -374,7 +373,6 @@ function SoundImageExercise({
         {items.map((word, i) => {
           const s = cellStates[i]!;
           const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
-          const audioSrc = getWordAudioPath(word.label);
           return (
             <button
               key={i}
@@ -394,7 +392,7 @@ function SoundImageExercise({
               <button
                 type="button"
                 aria-label={`Écouter ${word.label}`}
-                onClick={(e) => { e.stopPropagation(); new Audio(audioSrc).play().catch(() => speak(word.label)); }}
+                onClick={(e) => { e.stopPropagation(); playWord(word.label); }}
                 className="absolute top-1 right-1 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm"
               >
                 <IconSpeaker />
@@ -442,7 +440,7 @@ function SoundAudioExercise({
   function toggle(i: number) {
     if (validated) return;
     const word = items[i]!;
-    new Audio(getWordAudioPath(word.label)).play().catch(() => speak(word.label));
+    playWord(word.label);
     setCellStates((prev) => {
       const next = [...prev] as CellState[];
       next[i] = prev[i] === "selected" ? "idle" : "selected";
@@ -460,7 +458,6 @@ function SoundAudioExercise({
       <div className="grid grid-cols-4 gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
-          const audioSrc = getWordAudioPath(word.label);
           return (
             <button
               key={i}
@@ -478,7 +475,7 @@ function SoundAudioExercise({
               <button
                 type="button"
                 aria-label="Écouter"
-                onClick={(e) => { e.stopPropagation(); new Audio(audioSrc).play().catch(() => speak(word.label)); }}
+                onClick={(e) => { e.stopPropagation(); playWord(word.label); }}
                 className={`absolute inset-0 m-auto flex h-7 w-7 items-center justify-center rounded-full shadow-sm z-10 ${
                   s === "correct" || s === "selected"
                     ? "bg-[var(--color-accent-lecture)] text-white"
@@ -713,7 +710,7 @@ function PronounceExercise({
           <span className="font-bold text-[var(--color-text-primary)]">{step.word}</span>
         </span>
         <span className="text-4xl font-bold text-[var(--color-text-primary)]">{step.word}</span>
-        <button type="button" onClick={() => speak(step.word)}
+        <button type="button" onClick={() => playWord(step.word)}
           className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)]"
           aria-label={`Écouter ${step.word}`}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
