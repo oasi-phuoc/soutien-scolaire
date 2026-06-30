@@ -52,9 +52,11 @@ function getSteps(data: LetterData): Step[] {
     return [
       { key: "cv-upper", label: labelOf("cv-upper") },
       { key: "cv-lower", label: labelOf("cv-lower") },
+      { key: "cv2", label: "2 syllabes" },
       { key: "cv-timed", label: "Lecture rapide" },
       { key: "vc-upper", label: labelOf("vc-upper") },
       { key: "vc-lower", label: labelOf("vc-lower") },
+      { key: "vc2", label: "2 syllabes" },
       { key: "vc-timed", label: "Lecture rapide" },
       { key: "word-eval", label: "Évaluation" },
     ];
@@ -492,9 +494,11 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   isEval?: boolean;
   title?: string;
   consigne?: string;
+  // Which audio folder the play button targets (words vs syllables).
+  kind?: "mots" | "syllable";
   onTimeChange?: (t: number | null) => void;
 }>(
-  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, onTimeChange }, ref) {
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, kind = "mots", onTimeChange }, ref) {
   // Stable content keys so the sampling effect below runs once per step (and
   // not on every render — a fresh array prop would otherwise loop forever).
   const wordsKey = words.join("");
@@ -698,7 +702,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
               </span>
               <button
                 type="button"
-                onClick={() => playWord(word)}
+                onClick={() => (kind === "syllable" ? playSyllable(word) : playWord(word))}
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95"
                 aria-label={`Écouter ${word}`}
               >
@@ -897,6 +901,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           <WordPronounceGrid
             key={k}
             ref={pronounceGridRef}
+            kind="syllable"
             sampleSpec={[
               { pool: cvUpper, n: 8 }, { pool: cvLower, n: 7 },
               { pool: vcUpper, n: 8 }, { pool: vcLower, n: 7 },
@@ -906,12 +911,33 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           />
         );
       }
+      if (step.key === "cv2" || step.key === "vc2") {
+        // Two-syllable reading: 8 uppercase + 7 lowercase sequences built from
+        // the CV (consonne+voyelle, e.g. "coto") or VC (e.g. "ocot") syllables.
+        const base = step.key === "cv2" ? cvLower : vcLower;
+        const combos: string[] = [];
+        for (const a of base) for (const b of base) if (a !== b) combos.push(a + b);
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            kind="syllable"
+            sampleSpec={[
+              { pool: combos.map((c) => c.toUpperCase()), n: 8 },
+              { pool: combos, n: 7 },
+            ]}
+            title="Lecture de 2 syllabes"
+            consigne="Lisez chaque suite de 2 syllabes à voix haute."
+          />
+        );
+      }
       if (step.key === "cv-timed" || step.key === "vc-timed") {
         const isCv = step.key === "cv-timed";
         return (
           <WordPronounceGrid
             key={k}
             ref={pronounceGridRef}
+            kind="syllable"
             sampleSpec={isCv
               ? [{ pool: cvUpper, n: 10 }, { pool: cvLower, n: 10 }]
               : [{ pool: vcUpper, n: 10 }, { pool: vcLower, n: 10 }]}
@@ -927,6 +953,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         <WordPronounceGrid
           key={k}
           ref={pronounceGridRef}
+          kind="syllable"
           words={grid.items}
           title="Lecture des syllabes"
           consigne="Prononcez chaque syllabe à voix haute."
