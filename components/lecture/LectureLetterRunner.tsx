@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
-import { VowelRecall } from "./VowelRecall";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
@@ -86,7 +85,6 @@ function getSteps(data: LetterData): Step[] {
   }
   return [
     { key: "discover", label: "Découverte" },
-    { key: "vowel-recall", label: "Voyelles" },
     { key: "grid-upper", label: "Majuscules" },
     { key: "grid-lower", label: "Minuscules" },
     { key: "word-upper-1", label: "Mots 1" },
@@ -985,8 +983,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             exampleAudioPath={data.exampleAudioPath}
           />
         );
-      case "vowel-recall":
-        return <VowelRecall key={k} />;
       case "grid-upper":
         return (
           <LetterGrid key={k} ref={gridRef} target={data.letter} isUppercase={true} />
