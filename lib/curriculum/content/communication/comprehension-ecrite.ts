@@ -967,10 +967,20 @@ export function createBaseSession(): CEBaseSession {
 
 export function checkFillAnswer(userInput: string, canonical: string, accept?: string[]): boolean {
   const norm = (s: string) =>
-    s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[.,!?]/g, "").trim();
+    s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[.,!?;:'"()]/g, " ").replace(/\s+/g, " ").trim();
   const user = norm(userInput);
-  const all = [canonical, ...(accept ?? [])].map(norm);
-  return all.some((a) => a !== "" && user === a);
+  if (user === "") return false;
+  // The student writes a full sentence: it's correct as long as the expected
+  // word / number appears in it (whole-word match, tolerating a trailing "h"
+  // for hours like "19h" → "19"). Multi-word answers match as a substring.
+  const words = user.split(" ");
+  const targets = [canonical, ...(accept ?? [])].map(norm).filter((t) => t !== "");
+  return targets.some((t) =>
+    t.includes(" ")
+      ? user.includes(t)
+      : words.some((w) => w === t || w.replace(/h$/, "") === t || w === t.replace(/h$/, "")),
+  );
 }
 
 // ─── Existing types for moyen / avancé ───────────────────────────────────────
