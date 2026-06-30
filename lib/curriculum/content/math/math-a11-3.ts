@@ -5,7 +5,7 @@ export const MATH_A11_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A11.3",
     theory: {
       title: {
-        fr: "",
+        fr: "Graphique dans un repère",
       },
       paragraphs: { fr: [] },
       blocks: [

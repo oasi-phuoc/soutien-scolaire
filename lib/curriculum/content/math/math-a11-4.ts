@@ -5,7 +5,7 @@ export const MATH_A11_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A11.4",
     theory: {
       title: {
-        fr: "",
+        fr: "Linéaire f(x)=ax",
       },
       paragraphs: { fr: [] },
       blocks: [

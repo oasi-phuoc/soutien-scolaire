@@ -5,7 +5,7 @@ export const MATH_A11_6_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A11.6",
     theory: {
       title: {
-        fr: "",
+        fr: "Pente et ordonnée",
       },
       paragraphs: { fr: [] },
       blocks: [

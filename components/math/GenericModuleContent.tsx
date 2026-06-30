@@ -77,6 +77,21 @@ function renderText(text: string): React.ReactNode {
   return <>{nodes}</>;
 }
 
+function formatAlgebraDisplay(text: string) {
+  return text
+    .replace(/−\s*-\s*(\d+(?:[,.]\d+)?)/g, "-(-$1)")
+    .replace(/-\s*-\s*(\d+(?:[,.]\d+)?)/g, "-(-$1)")
+    .replace(/\+\s*-\s*(\d+(?:[,.]\d+)?)/g, "+ (-$1)");
+}
+
+function cleanAlgebraNumberInput(value: string) {
+  return value
+    .replace(/−/g, "-")
+    .replace(/,/g, ".")
+    .replace(/[^0-9./-]/g, "")
+    .replace(/(?!^)-/g, "");
+}
+
 function formatCompNum(n: number): string {
   const s = n.toString();
   if (s.length <= 3) return s;
@@ -5307,6 +5322,112 @@ function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupSte
   };
 }
 
+function genEvalExpressionGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
+  const vars = ["x", "y", "a", "b", "c", "m", "n", "p"];
+  const riLocal = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pickLocal = <T,>(items: T[]) => items[riLocal(0, items.length - 1)]!;
+  const distinctVars = (count: number) => {
+    const shuffled = [...vars].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  };
+  const value = () => {
+    let n = 0;
+    while (n === 0) n = riLocal(-9, 9);
+    return n;
+  };
+  const compactSigned = (n: number) => n < 0 ? ` - ${Math.abs(n)}` : ` + ${n}`;
+  const sqrtChoices = [4, 9, 16, 25, 36, 49, 64, 81];
+
+  const templates2: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
+    const [u, v] = distinctVars(2);
+    const uv = value();
+    const vv = value();
+    const a = riLocal(2, 9);
+    const b = riLocal(2, 9);
+    const c = riLocal(-12, 12);
+    const mode = index % 5;
+    const expression = mode === 0 ? `${a}${u} + ${b}${v}${compactSigned(c)}`
+      : mode === 1 ? `${a}(${u} + ${v})${compactSigned(c)}`
+        : mode === 2 ? `${a}${u} - ${b}(${v}${compactSigned(Math.abs(c) || 1)})`
+          : mode === 3 ? `${a}(${u} - ${v}) + ${b}${u}`
+            : `${a}${u} · ${b} - ${v}${compactSigned(c)}`;
+    const result = mode === 0 ? a * uv + b * vv + c
+      : mode === 1 ? a * (uv + vv) + c
+        : mode === 2 ? a * uv - b * (vv + (Math.abs(c) || 1))
+          : mode === 3 ? a * (uv - vv) + b * uv
+            : a * uv * b - vv + c;
+    return {
+      expression: `${expression}, pour ${u} = ${uv} et ${v} = ${vv}`,
+      acceptable: symbolicVariants(String(result)),
+    };
+  });
+
+  const templates3: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
+    const [u, v, w] = distinctVars(3);
+    const uv = value();
+    const vv = value();
+    const wv = value();
+    const a = riLocal(2, 7);
+    const b = riLocal(2, 7);
+    const c = riLocal(2, 7);
+    const mode = index % 5;
+    const expression = mode === 0 ? `${a}${u} + ${b}${v} - ${c}${w}`
+      : mode === 1 ? `${a}(${u} + ${v}) - ${c}${w}`
+        : mode === 2 ? `${a}${u} - ${b}(${v} - ${w})`
+          : mode === 3 ? `${a}${u} · ${b} + ${v} - ${c}${w}`
+            : `${a}(${u} - ${v} + ${w})`;
+    const result = mode === 0 ? a * uv + b * vv - c * wv
+      : mode === 1 ? a * (uv + vv) - c * wv
+        : mode === 2 ? a * uv - b * (vv - wv)
+          : mode === 3 ? a * uv * b + vv - c * wv
+            : a * (uv - vv + wv);
+    return {
+      expression: `${expression}, pour ${u} = ${uv}, ${v} = ${vv} et ${w} = ${wv}`,
+      acceptable: symbolicVariants(String(result)),
+    };
+  });
+
+  const templatesAdvanced: Array<() => SymbolicQuestion> = Array.from({ length: 100 }, (_, index) => () => {
+    const [u, v, w] = distinctVars(3);
+    const uv = value();
+    const vv = value();
+    const wv = value();
+    const a = riLocal(2, 5);
+    const b = riLocal(2, 5);
+    const sq = pickLocal(sqrtChoices);
+    const root = Math.sqrt(sq);
+    const mode = index % 5;
+    const expression = mode === 0 ? `${u}² + ${a}${v} - √${sq}`
+      : mode === 1 ? `${a}${u}² - ${b}${v} + ${w}`
+        : mode === 2 ? `√${sq} + ${a}(${u} - ${v}) + ${w}²`
+          : mode === 3 ? `${a}${u}² + ${b}${v}² - ${w}`
+            : `${a}(${u} + ${v})² - √${sq} - ${w}`;
+    const result = mode === 0 ? uv * uv + a * vv - root
+      : mode === 1 ? a * uv * uv - b * vv + wv
+        : mode === 2 ? root + a * (uv - vv) + wv * wv
+          : mode === 3 ? a * uv * uv + b * vv * vv - wv
+            : a * (uv + vv) * (uv + vv) - root - wv;
+    return {
+      expression: `${expression}, pour ${u} = ${uv}, ${v} = ${vv} et ${w} = ${wv}`,
+      acceptable: symbolicVariants(String(result)),
+    };
+  });
+
+  const source = exNum === 1 ? templates2 : exNum === 2 ? templates3 : templatesAdvanced;
+  return {
+    kind: "symbolic_group",
+    lesson,
+    exNum,
+    instruction: exNum === 1
+      ? "Évaluez les expressions avec deux variables."
+      : exNum === 2
+        ? "Évaluez les expressions avec trois variables."
+        : "Évaluez les expressions avec puissances et racines.",
+    mode: "input",
+    questions: shufflePick(source, 5).map((make) => make()),
+  };
+}
+
 function genMonomialGroupStep(lesson: MathSubmoduleLesson): MonomialGroupStep {
   const templates = Array.from({ length: 50 }, (_, index): MonomialQuestion => {
     const first = ALGEBRA_SYMBOLS[index % ALGEBRA_SYMBOLS.length]!;
@@ -5646,6 +5767,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genMonomialGroupStep(lesson));
       } else if (sid === "A9-2") {
         steps.push(genAlgebraGroupStep(lesson));
+      } else if (sid === "A9-3") {
+        steps.push(genEvalExpressionGroupStep(lesson, 1));
+        steps.push(genEvalExpressionGroupStep(lesson, 2));
+        steps.push(genEvalExpressionGroupStep(lesson, 3));
       } else if (sid === "A9-4") {
         steps.push(genSymbolicGroupStep(lesson, 1));
         steps.push(genSymbolicGroupStep(lesson, 2));
@@ -5659,6 +5784,12 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "eval_start", lesson });
       if (sid === "A9-1") {
         steps.push(genMonomialGroupStep(lesson));
+      } else if (sid === "A9-2") {
+        steps.push(genAlgebraGroupStep(lesson));
+      } else if (sid === "A9-3") {
+        steps.push(genEvalExpressionGroupStep(lesson, 1));
+        steps.push(genEvalExpressionGroupStep(lesson, 2));
+        steps.push(genEvalExpressionGroupStep(lesson, 3));
       } else if (sid === "A9-4") {
         steps.push(genSymbolicGroupStep(lesson, 1));
         steps.push(genSymbolicGroupStep(lesson, 2));
@@ -6962,6 +7093,9 @@ export function GenericModuleContent({
   const [eqResults, setEqResults] = useState<boolean[]>([]);
   const [equationOverrideSteps, setEquationOverrideSteps] = useState<Record<number, EquationGroupStep>>({});
   const [systemOverrideSteps, setSystemOverrideSteps] = useState<Record<number, SystemEquationStep>>({});
+  const [algebraOverrideSteps, setAlgebraOverrideSteps] = useState<Record<number, AlgebraGroupStep>>({});
+  const [monomialOverrideSteps, setMonomialOverrideSteps] = useState<Record<number, MonomialGroupStep>>({});
+  const [symbolicOverrideSteps, setSymbolicOverrideSteps] = useState<Record<number, SymbolicGroupStep>>({});
   const [monomialAnswers, setMonomialAnswers] = useState<Array<{ coefficient: string; literal: string; degree: string }>>([]);
   const [monomialValidated, setMonomialValidated] = useState(false);
   const [monomialResults, setMonomialResults] = useState<Array<{ coefficient: boolean; literal: boolean; degree: boolean }>>([]);
@@ -7175,6 +7309,15 @@ export function GenericModuleContent({
     : undefined;
   const activeSystemStep = currentStep?.kind === "system_equation"
     ? (systemOverrideSteps[stepIdx] ?? currentStep)
+    : undefined;
+  const activeAlgebraStep = currentStep?.kind === "algebra_group"
+    ? (algebraOverrideSteps[stepIdx] ?? currentStep)
+    : undefined;
+  const activeMonomialStep = currentStep?.kind === "monomial_group"
+    ? (monomialOverrideSteps[stepIdx] ?? currentStep)
+    : undefined;
+  const activeSymbolicStep = currentStep?.kind === "symbolic_group"
+    ? (symbolicOverrideSteps[stepIdx] ?? currentStep)
     : undefined;
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
@@ -7990,19 +8133,25 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "algebra_group" && !algebraGroupValidated) {
-    stepCanValidate = true;
-    stepValidate = () => {
-      const step = currentStep as AlgebraGroupStep;
-      const results = step.questions.map((q, i) => {
-        const userAns = (algebraGroupAnswers[i] ?? "").trim();
-        return userAns !== "" && parseInt(userAns, 10) === q.answer;
-      });
-      setAlgebraGroupResults(results);
-      setAlgebraGroupValidated(true);
-      setExStatus("correct");
-    };
+  if (currentStep?.kind === "algebra_group") {
+    if (!algebraGroupValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        const step = activeAlgebraStep ?? currentStep;
+        const results = step.questions.map((q, i) => {
+          const userAns = (algebraGroupAnswers[i] ?? "").trim();
+          return userAns !== "" && Number(userAns) === q.answer;
+        });
+        setAlgebraGroupResults(results);
+        setAlgebraGroupValidated(true);
+        setExStatus("correct");
+      };
+    } else if (!isInEvalPhase) {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
     stepReset = () => {
+      setAlgebraOverrideSteps(prev => ({ ...prev, [stepIdx]: genAlgebraGroupStep(currentStep.lesson) }));
       setAlgebraGroupAnswers([]);
       setAlgebraGroupValidated(false);
       setAlgebraGroupResults([]);
@@ -8010,22 +8159,29 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "monomial_group" && !monomialValidated) {
-    stepCanValidate = true;
-    stepValidate = () => {
-      const results = currentStep.questions.map((question, index) => {
-        const user = monomialAnswers[index] ?? { coefficient: "", literal: "", degree: "" };
-        return {
-          coefficient: symbolicMatches(user.coefficient, question.coefficient),
-          literal: symbolicMatches(user.literal, question.literal),
-          degree: parseInt(user.degree, 10) === question.degree,
-        };
-      });
-      setMonomialResults(results);
-      setMonomialValidated(true);
-      setExStatus("correct");
-    };
+  if (currentStep?.kind === "monomial_group") {
+    if (!monomialValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        const step = activeMonomialStep ?? currentStep;
+        const results = step.questions.map((question, index) => {
+          const user = monomialAnswers[index] ?? { coefficient: "", literal: "", degree: "" };
+          return {
+            coefficient: symbolicMatches(user.coefficient, question.coefficient),
+            literal: symbolicMatches(user.literal, question.literal),
+            degree: parseInt(user.degree, 10) === question.degree,
+          };
+        });
+        setMonomialResults(results);
+        setMonomialValidated(true);
+        setExStatus("correct");
+      };
+    } else if (!isInEvalPhase) {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
     stepReset = () => {
+      setMonomialOverrideSteps(prev => ({ ...prev, [stepIdx]: genMonomialGroupStep(currentStep.lesson) }));
       setMonomialAnswers([]);
       setMonomialValidated(false);
       setMonomialResults([]);
@@ -8033,17 +8189,30 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "symbolic_group" && !symbolicValidated) {
-    stepCanValidate = true;
-    stepValidate = () => {
-      const results = currentStep.questions.map((question, index) =>
-        symbolicMatches(symbolicAnswers[index] ?? "", question.acceptable),
-      );
-      setSymbolicResults(results);
-      setSymbolicValidated(true);
-      setExStatus("correct");
-    };
+  if (currentStep?.kind === "symbolic_group") {
+    if (!symbolicValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        const step = activeSymbolicStep ?? currentStep;
+        const results = step.questions.map((question, index) =>
+          symbolicMatches(symbolicAnswers[index] ?? "", question.acceptable),
+        );
+        setSymbolicResults(results);
+        setSymbolicValidated(true);
+        setExStatus("correct");
+      };
+    } else if (!isInEvalPhase) {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
     stepReset = () => {
+      const exNum = currentStep.exNum;
+      const regenerated = currentStep.lesson.submoduleId === "A9-3"
+        ? genEvalExpressionGroupStep(currentStep.lesson, exNum)
+        : currentStep.mode === "true_false"
+          ? genSymbolicTrueFalseStep(currentStep.lesson)
+          : genSymbolicGroupStep(currentStep.lesson, exNum);
+      setSymbolicOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
       setSymbolicAnswers([]);
       setSymbolicValidated(false);
       setSymbolicResults([]);
@@ -9578,7 +9747,7 @@ export function GenericModuleContent({
 
       {/* Monomial analysis (A9.1) */}
       {!showEvalScore && currentStep?.kind === "monomial_group" && (() => {
-        const step = currentStep as MonomialGroupStep;
+        const step = activeMonomialStep ?? (currentStep as MonomialGroupStep);
         const update = (index: number, field: "coefficient" | "literal" | "degree", value: string) => {
           setMonomialAnswers((previous) => {
             const next = [...previous];
@@ -9640,7 +9809,8 @@ export function GenericModuleContent({
 
       {/* Symbolic simplification groups (A9.4) */}
       {!showEvalScore && currentStep?.kind === "symbolic_group" && (() => {
-        const step = currentStep as SymbolicGroupStep;
+        const step = activeSymbolicStep ?? (currentStep as SymbolicGroupStep);
+        const numericOnly = step.lesson.submoduleId === "A9-3";
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
@@ -9650,11 +9820,11 @@ export function GenericModuleContent({
                 const value = symbolicAnswers[index] ?? "";
                 const ok = symbolicResults[index];
                 return (
-                  <div key={index} className="grid grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-2">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{index + 1}.</span>
-                    <span className="min-w-0 font-mono text-sm text-[var(--color-text-primary)]">{question.expression}</span>
+                  <div key={index} className="grid grid-cols-[1.5rem_minmax(0,1fr)] items-start gap-x-2 gap-y-2">
+                    <span className="pt-0.5 text-xs font-bold text-[var(--color-accent-alg)]">{index + 1}.</span>
+                    <span className="min-w-0 overflow-x-auto whitespace-nowrap font-mono text-sm text-[var(--color-text-primary)]">{formatAlgebraDisplay(question.expression)}</span>
                     {step.mode === "true_false" ? (
-                      <div className="flex gap-1">
+                      <div className="col-start-2 flex gap-1">
                         {(["vrai", "faux"] as const).map((choice) => {
                           const selected = value === choice;
                           const isCorrectChoice = question.acceptable[0] === choice;
@@ -9678,21 +9848,22 @@ export function GenericModuleContent({
                         })}
                       </div>
                     ) : symbolicValidated && ok === false ? (
-                      <div className="flex w-28 flex-col items-center border-b-2 border-amber-500 pb-1">
+                      <div className="col-start-2 flex w-28 flex-col items-center border-b-2 border-amber-500 pb-1">
                         <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value || "—"}</span>
                         <span className="text-center text-xs font-bold text-amber-600">{question.acceptable[0]}</span>
                       </div>
                     ) : (
                       <input
                         type="text"
+                        inputMode={numericOnly ? "decimal" : "text"}
                         value={value}
                         disabled={symbolicValidated}
                         onChange={(event) => setSymbolicAnswers((previous) => {
                           const next = [...previous];
-                          next[index] = event.target.value;
+                          next[index] = numericOnly ? cleanAlgebraNumberInput(event.target.value) : event.target.value;
                           return next;
                         })}
-                        className="w-28 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
+                        className="col-start-2 w-28 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
                       />
                     )}
                   </div>
@@ -9763,12 +9934,12 @@ export function GenericModuleContent({
                     ) : (
                       <input
                         type="text"
-                        inputMode="text"
+                        inputMode="decimal"
                         value={userAns}
                         disabled={eqValidated || infActive || impActive}
                         onChange={e => setEqAnswers(prev => {
                           const next = [...prev];
-                          next[0] = e.target.value;
+                          next[0] = cleanAlgebraNumberInput(e.target.value);
                           return next;
                         })}
                         className={inputCls}
@@ -9830,8 +10001,8 @@ export function GenericModuleContent({
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
                     ) : (
-                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated || infA || impA}
-                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
+                      <input type="text" inputMode="decimal" value={userAns} disabled={eqValidated || infA || impA}
+                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=cleanAlgebraNumberInput(e.target.value); return n; })}
                         className={inputCls} />
                     )}
                     {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"infini"; return n; })} className={btnCls(infA)}>∞</button>}
@@ -9910,8 +10081,8 @@ export function GenericModuleContent({
                           <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrX)}</span>
                         </div>
                       ) : (
-                        <input type="text" inputMode="text" value={userX} disabled={eqValidated || isSpecialBtn}
-                          onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=e.target.value; return n; })}
+                        <input type="text" inputMode="decimal" value={userX} disabled={eqValidated || isSpecialBtn}
+                          onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[0]=cleanAlgebraNumberInput(e.target.value); return n; })}
                           className={inputCls} />
                       )}
                     </div>
@@ -9924,8 +10095,8 @@ export function GenericModuleContent({
                             <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrY)}</span>
                           </div>
                         ) : (
-                          <input type="text" inputMode="text" value={userY} disabled={eqValidated}
-                            onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[1]=e.target.value; return n; })}
+                          <input type="text" inputMode="decimal" value={userY} disabled={eqValidated}
+                            onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<2)n.push(""); n[1]=cleanAlgebraNumberInput(e.target.value); return n; })}
                             className={inputCls} />
                         )}
                       </div>
@@ -10015,8 +10186,8 @@ export function GenericModuleContent({
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
                     ) : (
-                      <input type="text" inputMode="text" value={userAns} disabled={eqValidated || infA || impA}
-                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=e.target.value; return n; })}
+                      <input type="text" inputMode="decimal" value={userAns} disabled={eqValidated || infA || impA}
+                        onChange={e => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=cleanAlgebraNumberInput(e.target.value); return n; })}
                         className={inputCls} />
                     )}
                     {!eqValidated && <button type="button" onClick={() => setEqAnswers(prev => { const n=[...prev]; while(n.length<=i)n.push(""); n[i]=infA?"":"infini"; return n; })} className={btnCls(infA)}>∞</button>}
@@ -10032,7 +10203,7 @@ export function GenericModuleContent({
 
       {/* Algebra group exercise (A9.2) */}
       {!showEvalScore && currentStep?.kind === "algebra_group" && (() => {
-        const step = currentStep as AlgebraGroupStep;
+        const step = activeAlgebraStep ?? (currentStep as AlgebraGroupStep);
         return (
           <div className="space-y-4">
             <p className="text-sm font-semibold text-[var(--color-text-primary)]">Calculez le résultat.</p>
@@ -10047,9 +10218,10 @@ export function GenericModuleContent({
                 const result = algebraGroupValidated ? (algebraGroupResults[i] ?? null) : null;
                 const isWrong = result === false;
                 return (
-                  <div key={i} className="flex items-center gap-2">
-                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr} =</span>
+                  <div key={i} className="grid w-fit grid-cols-[1.5rem_auto_1rem_4rem] items-center gap-x-3">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    <span className="whitespace-nowrap font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
+                    <span className="text-center font-mono text-sm text-[var(--color-text-primary)]">=</span>
                     {isWrong ? (
                       <div className="w-16 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
@@ -10058,11 +10230,11 @@ export function GenericModuleContent({
                     ) : (
                       <input
                         type="text"
-                        inputMode="numeric"
+                        inputMode="decimal"
                         value={userAns}
                         disabled={algebraGroupValidated}
                         onChange={e => {
-                          const val = e.target.value.replace(/[^0-9]/g, "");
+                          const val = cleanAlgebraNumberInput(e.target.value);
                           setAlgebraGroupAnswers(prev => {
                             const next = [...prev];
                             while (next.length <= i) next.push("");

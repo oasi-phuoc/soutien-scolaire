@@ -1266,6 +1266,61 @@ export const V9_DIRECTION_THEME: VocabTheme = {
         ],
       },
     },
+    {
+      word: "ici",
+      image: "ici.webp",
+      definition: ["Indique l’endroit où l’on se trouve."],
+      synonym: [],
+      exampleSentences: {
+        a1: [],
+        a2: [],
+        b1: [],
+      },
+    },
+    {
+      word: "là-bas",
+      image: "la-bas.webp",
+      definition: ["Indique un endroit plus loin."],
+      synonym: [],
+      exampleSentences: {
+        a1: [],
+        a2: [],
+        b1: [],
+      },
+    },
+    {
+      word: "tout droit",
+      image: "tout-droit.webp",
+      definition: ["Indique qu’il faut continuer sans tourner."],
+      synonym: [],
+      exampleSentences: {
+        a1: [],
+        a2: [],
+        b1: [],
+      },
+    },
+    {
+      word: "jusqu'à",
+      image: "jusqu-a.webp",
+      definition: ["Indique le point où l’on doit arriver."],
+      synonym: [],
+      exampleSentences: {
+        a1: [],
+        a2: [],
+        b1: [],
+      },
+    },
+    {
+      word: "au bout de",
+      image: "au-bout-de.webp",
+      definition: ["Indique la fin d’un chemin, d’une rue ou d’un passage."],
+      synonym: [],
+      exampleSentences: {
+        a1: [],
+        a2: [],
+        b1: [],
+      },
+    }
   ],
   sentences: [
     { sentence: "Tourne à ___ au prochain carrefour.",                   answer: "gauche" },

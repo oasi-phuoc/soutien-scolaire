@@ -48,8 +48,12 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
           fr: "Comment reconnaître les trois éléments ?",
         },
         {
+          type: "plain",
+          fr: "Dans le monôme −6cd² :",
+        },
+        {
           type: "section",
-          labelFr: "Dans le monôme −6cd² :",
+          labelFr: "",
           itemsFr: [
             "Le **coefficient** est −6.",
             "La **partie littérale** est cd².",
@@ -58,23 +62,23 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
           ],
         },
         {
+          type: "plain",
+          fr: "",
+        },
+        {
           type: "heading",
           fr: "Conventions d'écriture",
           black: true,
         },
         {
-          type: "bullets",
+          type: "section",
           labelFr: "",
           itemsFr: [
             "On omet le signe × entre un nombre et une variable : 3x signifie 3 × x",
             "Le coefficient s'écrit toujours **avant** la variable : 5x (pas x5)",
             "Le coefficient 1 est omis : 1x s'écrit simplement x",
-            "Le coefficient **−**1 s'écrit **−**x (sans le 1)",
+            "Le coefficient −1 s'écrit −x (sans le 1)",
           ],
-        },
-        {
-          type: "example",
-          fr: "Monôme : −2a²bc³\n• Coefficient : −2\n• Partie littérale : a²bc³\n• Degré : 2 + 1 + 3 = 6",
         },
       ],
     },

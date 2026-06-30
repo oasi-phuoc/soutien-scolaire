@@ -5,26 +5,25 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.3",
     theory: {
       title: {
-        fr: "",
+        fr: "Évaluer une expression",
       },
       paragraphs: { fr: [] },
       blocks: [
-        {
-          type: "heading",
-          fr: "Évaluer une expression",
-          black: true,
-        },
         {
           type: "plain",
           fr: "Évaluer une expression algébrique signifie remplacer les variables par des valeurs numériques, puis calculer le résultat en respectant les priorités opératoires.",
         },
         {
-          type: "rule",
-          titleFr: "Méthode",
+          type: "highlight",
+          fr: "Méthode",
+        },
+        {
+          type: "section",
+          labelFr: "",
           itemsFr: [
             "1. Repérer toutes les variables dans l'expression",
             "2. Remplacer chaque variable par sa valeur (entre parenthèses)",
-            "3. Calculer en respectant l'ordre : parenthèses → puissances → × et ÷ → **+** et **−**",
+            "3. Calculer en respectant l'ordre : parenthèses → puissances → × et ÷ → + et −",
           ],
         },
         {
@@ -33,8 +32,12 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
           black: true,
         },
         {
+          type: "plain",
+          fr: "Toujours mettre la valeur entre parenthèses lors de la substitution. Cela évite les erreurs de signe, surtout avec les valeurs négatives.",
+        },
+        {
           type: "highlight",
-          fr: "Exemple à une variable",
+          fr: "Avec une variable",
         },
         {
           type: "section",
@@ -48,7 +51,7 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "highlight",
-          fr: "Exemple à deux variables",
+          fr: "Avec deux variables",
         },
         {
           type: "section",
@@ -58,10 +61,6 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
             "→ (4)² **+** (**−**3)",
             "→ 16 **+** (**−**3) = **13**",
           ],
-        },
-        {
-          type: "note",
-          fr: "Toujours mettre la valeur entre parenthèses lors de la substitution. Cela évite les erreurs de signe, surtout avec les valeurs négatives.",
         },
       ],
     },

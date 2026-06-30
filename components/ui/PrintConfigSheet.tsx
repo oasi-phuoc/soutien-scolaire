@@ -71,22 +71,23 @@ export function PrintDocumentHeader({
 }) {
   return (
     <div className="print-document-header mb-[4%] w-full text-black">
-      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1.3fr)] items-start gap-[3%] border-b border-black pb-[1.5%]">
+      <div className="grid grid-cols-2 items-start gap-3 border-b border-black pb-[1.5%]">
         {/* Left: school identity */}
         <div className="text-[0.7em] leading-snug">
           <p className="text-[2em] font-bold">SCAI</p>
           <p>2025-2026</p>
           <p className="font-bold uppercase">Classes d&apos;accueil</p>
         </div>
-        {/* Centre: logo only */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo-etat-du-valais.png" alt="" className="w-auto shrink-0" style={{ height: "4.4em", objectFit: "contain" }} />
-        {/* Right: department */}
-        <div className="text-[0.7em] leading-snug">
-          <p>Département de la santé, des affaires sociales et de la culture</p>
-          <p>Service de l&apos;action sociale</p>
-          <p>Office de l&apos;asile</p>
-          <p>Centre de formation « Le Botza »</p>
+        {/* Right: logo + department, aligned with the course column below. */}
+        <div className="flex min-w-0 items-start gap-[4%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-etat-du-valais.png" alt="" className="w-auto shrink-0" style={{ height: "4.4em", objectFit: "contain" }} />
+          <div className="min-w-0 text-[0.7em] leading-snug">
+            <p>Département de la santé, des affaires sociales et de la culture</p>
+            <p>Service de l&apos;action sociale</p>
+            <p>Office de l&apos;asile</p>
+            <p>Centre de formation « Le Botza »</p>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-2 items-center gap-3 border-b border-black py-[1%] text-[1.6em] font-bold uppercase leading-tight">
@@ -227,7 +228,7 @@ function PaginatedPreview({
   const contentHeight = pageHeight - padTop - padBottom;
   // Match print scale: 10px at 794px (210mm@96dpi) so measurement matches PDF reflow.
   const baseFont = (pageWidth / 794) * 10;
-  const gap = baseFont * 1.1;
+  const gap = baseFont * 3;
 
   // Track available width responsively.
   useLayoutEffect(() => {
@@ -313,7 +314,7 @@ function PaginatedPreview({
       )}
 
       {/* Visible page sheets, stacked like a book. */}
-      <div ref={pagesContainerRef} className="preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto py-1" style={{ maxHeight: "75vh" }}>
+      <div ref={pagesContainerRef} className="preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto pb-32 pt-1" style={{ maxHeight: "calc(100vh - 14rem)" }}>
         {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
           <div
             key={pageIdx}
@@ -510,8 +511,8 @@ export function PrintConfigSheet({
         image.loading = "eager";
         image.decoding = "sync";
       });
-      // Override preview classes to exact A4 mm dimensions — identical to on-screen layout.
-      const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container{width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;display:block!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:10px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
+      // Print only the preview sheets and keep the same page box as the on-screen preview.
+      const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}body *{visibility:hidden!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container,.preview-pages-container *{visibility:visible!important;}.preview-pages-container{position:absolute!important;left:0!important;top:0!important;width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;margin:0!important;display:block!important;background:white!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:9px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
       const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${printNode.outerHTML}</body></html>`;
       openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
     }
@@ -843,7 +844,7 @@ export function PrintConfigSheet({
                 exerciseNodes={previewExercises.map((item, index) => ({
                   key: item.key,
                   node: (
-                    <div className="print-exercise border-b border-zinc-200 pb-3">
+                    <div className="print-exercise">
                       <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
                         <span className="flex-1">Exercice {index + 1}</span>
                         {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}

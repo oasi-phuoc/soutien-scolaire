@@ -5,7 +5,7 @@ export const MATH_A11_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A11.5",
     theory: {
       title: {
-        fr: "",
+        fr: "Affine f(x)=ax+b",
       },
       paragraphs: { fr: [] },
       blocks: [
