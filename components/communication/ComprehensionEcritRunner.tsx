@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 
@@ -11,6 +11,29 @@ type ChoiceTask = { kind: "choice"; prompt: string; choices: Choice[]; correct: 
 type FillTask = { kind: "fill"; prompt: string; answer: string; accept?: string[] };
 type QuestionTask = ChoiceTask | FillTask;
 type RawQuestionTask = Omit<ChoiceTask, "kind"> | Omit<FillTask, "kind">;
+type OrientationSeriesItem = {
+  context: string;
+  docs: [string, string, string][];
+  people: [string, number][];
+};
+type EmailSeriesItem = {
+  from: string;
+  subject: string;
+  body: string;
+  questions: RawQuestionTask[];
+};
+type InstructionSeriesItem = {
+  title: string;
+  image: string;
+  imageLabel: string;
+  body: string;
+  questions: RawQuestionTask[];
+}[];
+type ArticleSeriesItem = {
+  title: string;
+  sections: { heading: string; body: string; image?: string; imageLabel?: string }[];
+  questions: RawQuestionTask[];
+};
 type CEPart =
   | { id: "orientation"; title: string; points: 6; layout: "orientation"; task: TableTask }
   | { id: "email"; title: string; points: 6; layout: "email"; meta: { from: string; subject: string }; body: string; questions: QuestionTask[] }
@@ -123,7 +146,7 @@ function NavActionBar({
   );
 }
 
-const ORIENTATION_TOPICS = [
+const ORIENTATION_TOPICS: OrientationSeriesItem[] = [
   {
     context: "Avec vos amis, vous cherchez un magazine adapté à chacun.",
     docs: [
@@ -164,7 +187,7 @@ const ORIENTATION_TOPICS = [
   },
 ];
 
-const EMAIL_SERIES = [
+const EMAIL_SERIES: EmailSeriesItem[] = [
   {
     from: "paul@abc.ch",
     subject: "Samedi soir",
@@ -193,7 +216,7 @@ const EMAIL_SERIES = [
   },
 ];
 
-const INSTRUCTION_SERIES = [
+const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "Règles d'hygiène",
@@ -260,7 +283,7 @@ const INSTRUCTION_SERIES = [
   ],
 ];
 
-const ARTICLE_SERIES = [
+const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Améliorez votre mémoire !",
     sections: [
@@ -297,16 +320,328 @@ const ARTICLE_SERIES = [
   },
 ];
 
+const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
+  {
+    context: "Vous cherchez le bon lieu dans une ville suisse selon les besoins des personnes.",
+    docs: [
+      ["Centre de formation", "Cours et ateliers", "Cours de francais, informatique et aide pour les demarches."],
+      ["Espace sante", "Conseils", "Informations, prevention et rendez-vous avec une infirmiere."],
+      ["Maison des jeunes", "Loisirs", "Activites sportives, musique et jeux apres les cours."],
+      ["Office du tourisme", "Visites", "Plans de la ville, horaires des musees et excursions."],
+      ["Bibliotheque", "Lecture", "Livres faciles, journaux, ordinateurs et coin de travail calme."],
+      ["Service social", "Aide", "Conseils pour le logement, les assurances et les papiers officiels."],
+    ],
+    people: [
+      ["Nadia veut emprunter un livre facile.", 4],
+      ["Omar cherche une aide pour un formulaire.", 5],
+      ["Marta veut visiter la ville dimanche.", 3],
+      ["Yanis cherche une activite apres l'ecole.", 2],
+      ["Kateryna veut apprendre l'informatique.", 0],
+      ["Ali veut poser une question sur sa sante.", 1],
+    ],
+  },
+  {
+    context: "Vous lisez les annonces d'un centre de quartier et vous choisissez l'activite adaptee.",
+    docs: [
+      ["Atelier cuisine", "Repas simples", "Preparation de plats economiques avec des produits de saison."],
+      ["Cours de conversation", "Parler francais", "Petits groupes pour pratiquer le francais de la vie quotidienne."],
+      ["Aide aux devoirs", "Ecole", "Accompagnement pour les enfants et les adolescents apres les cours."],
+      ["Club emploi", "Travail", "Aide pour ecrire un CV et preparer un entretien."],
+      ["Sortie nature", "Marche", "Promenade facile au bord du lac avec un guide."],
+      ["Atelier couture", "Reparer", "Apprendre a recoudre un bouton et faire de petites retouches."],
+    ],
+    people: [
+      ["Selin doit preparer un entretien de travail.", 3],
+      ["Iryna veut pratiquer le francais oral.", 1],
+      ["Mahmoud aime marcher au bord de l'eau.", 4],
+      ["Fatou veut reparer un pantalon.", 5],
+      ["Luca cherche de l'aide pour son fils.", 2],
+      ["Amina veut apprendre une recette simple.", 0],
+    ],
+  },
+  {
+    context: "Dans un journal local, vous choisissez la petite annonce utile pour chaque personne.",
+    docs: [
+      ["Velo d'occasion", "Transport", "Velo en bon etat, ideal pour aller au travail ou a l'ecole."],
+      ["Chambre a louer", "Logement", "Petite chambre meublee proche de la gare, disponible en aout."],
+      ["Garde d'enfants", "Service", "Etudiante serieuse garde des enfants le soir et le mercredi."],
+      ["Cours de natation", "Sport", "Cours pour adultes debutants a la piscine communale."],
+      ["Meuble gratuit", "Maison", "Table et quatre chaises a venir chercher ce week-end."],
+      ["Reparation telephone", "Technique", "Ecran casse, batterie faible : reparations rapides en ville."],
+    ],
+    people: [
+      ["Bohdan cherche un meuble pour sa cuisine.", 4],
+      ["Rachid veut apprendre a nager.", 3],
+      ["Mila a casse l'ecran de son telephone.", 5],
+      ["Sofia cherche quelqu'un pour garder sa fille.", 2],
+      ["Erjon veut se deplacer sans voiture.", 0],
+      ["Leila cherche une chambre pres de la gare.", 1],
+    ],
+  },
+  {
+    context: "Vous choisissez une information pratique pour des personnes qui viennent d'arriver.",
+    docs: [
+      ["Carte de sejour", "Administration", "Horaires et documents necessaires pour renouveler un permis."],
+      ["Assurance maladie", "Sante", "Explications simples pour comprendre les primes et les factures."],
+      ["Cours de base", "Langue", "Francais pour debutants, alphabet, lecture et situations courantes."],
+      ["Transport public", "Bus et train", "Abonnements, reductions et horaires dans le canton."],
+      ["Garderie", "Enfants", "Accueil des petits enfants pendant les jours de cours."],
+      ["Dechetterie", "Tri", "Horaires pour jeter le papier, le verre et les objets encombrants."],
+    ],
+    people: [
+      ["Yuliia veut comprendre ses factures medicales.", 1],
+      ["Hassan cherche les horaires des bus.", 3],
+      ["Mariam doit renouveler son permis.", 0],
+      ["Aster veut apprendre a lire en francais.", 2],
+      ["Bilan veut jeter un vieux meuble.", 5],
+      ["Noor cherche une place pour son enfant.", 4],
+    ],
+  },
+  {
+    context: "Dans une ecole, vous associez chaque document a la bonne demande.",
+    docs: [
+      ["Absence", "Secretariat", "Informer l'ecole quand un enfant est malade ou absent."],
+      ["Cantine", "Repas", "Menus de la semaine, allergies et inscription aux repas de midi."],
+      ["Sport scolaire", "Activite", "Horaires des entrainements et inscription aux tournois."],
+      ["Bibliobus", "Lecture", "Passage du bus de livres devant l'ecole chaque mois."],
+      ["Sortie de classe", "Excursion", "Programme, prix et autorisation a signer par les parents."],
+      ["Cours d'appui", "Soutien", "Aide supplementaire en mathematiques et en francais."],
+    ],
+    people: [
+      ["Le fils de Vera a besoin d'aide en maths.", 5],
+      ["Amadou doit annoncer que sa fille est malade.", 0],
+      ["Lina veut connaitre le menu de midi.", 1],
+      ["Mateo doit signer un papier pour une excursion.", 4],
+      ["Irina veut emprunter des livres.", 3],
+      ["Kemal veut participer a un tournoi.", 2],
+    ],
+  },
+  {
+    context: "Vous cherchez un commerce ou un service dans un quartier.",
+    docs: [
+      ["Boulangerie", "Pain frais", "Pain, croissants et sandwichs prepares chaque matin."],
+      ["Laverie", "Lessive", "Machines a laver et sechoirs disponibles avec paiement par carte."],
+      ["Cordonnier", "Chaussures", "Reparation de chaussures, sacs et fermetures eclair."],
+      ["Salon de coiffure", "Cheveux", "Coupes pour femmes, hommes et enfants, avec ou sans rendez-vous."],
+      ["Epicerie", "Alimentation", "Produits de base, fruits, legumes et articles de menage."],
+      ["Opticien", "Vue", "Controle de la vue, lunettes et lentilles de contact."],
+    ],
+    people: [
+      ["Tariq a besoin de lunettes.", 5],
+      ["Sara veut laver une couverture.", 1],
+      ["Nino cherche du pain pour le petit-dejeuner.", 0],
+      ["Olena doit reparer une fermeture eclair.", 2],
+      ["Awa veut couper les cheveux de son fils.", 3],
+      ["Eren veut acheter des fruits.", 4],
+    ],
+  },
+  {
+    context: "Vous choisissez l'annonce culturelle qui correspond a chaque personne.",
+    docs: [
+      ["Concert gratuit", "Musique", "Groupe local sur la place du village samedi soir."],
+      ["Film en plein air", "Cinema", "Projection d'un film familial dans le parc."],
+      ["Atelier peinture", "Creativite", "Apprendre a melanger les couleurs et peindre un paysage."],
+      ["Visite du musee", "Histoire", "Decouverte guidee de la vie d'autrefois dans la region."],
+      ["Spectacle enfants", "Theatre", "Piece courte et drole pour les familles."],
+      ["Cafe lecture", "Livres", "Rencontre pour parler d'un roman facile."],
+    ],
+    people: [
+      ["Lina veut voir une piece avec ses enfants.", 4],
+      ["Hugo aime discuter de romans.", 5],
+      ["Narges veut ecouter de la musique.", 0],
+      ["Anton aime les films dehors.", 1],
+      ["Meryem veut apprendre a peindre.", 2],
+      ["Pavlo s'interesse a l'histoire locale.", 3],
+    ],
+  },
+  {
+    context: "Vous choisissez la bonne information de transport.",
+    docs: [
+      ["Bus de nuit", "Retour tardif", "Lignes speciales les vendredis et samedis apres minuit."],
+      ["Abonnement demi-tarif", "Reduction", "Billets de train moins chers pour les adultes."],
+      ["Carte junior", "Enfants", "Les enfants voyagent avec un parent pour un prix reduit."],
+      ["Train direct", "Rapide", "Liaison sans changement entre Lausanne et Sion."],
+      ["Velostation", "Parking velo", "Places surveillees pour laisser son velo pres de la gare."],
+      ["Objets trouves", "Perdu", "Service pour rechercher un sac, une veste ou un telephone oublie."],
+    ],
+    people: [
+      ["Elias a oublie son sac dans le train.", 5],
+      ["Rokhaya veut laisser son velo en securite.", 4],
+      ["Maksym voyage souvent et cherche une reduction.", 1],
+      ["Nora rentre tard le samedi soir.", 0],
+      ["Viktor veut aller a Sion sans changement.", 3],
+      ["Samia voyage avec son enfant.", 2],
+    ],
+  },
+  {
+    context: "Dans un centre sportif, vous associez chaque personne a l'activite adaptee.",
+    docs: [
+      ["Fitness doux", "Debutants", "Exercices lents pour reprendre une activite physique."],
+      ["Football", "Equipe", "Entrainement collectif deux fois par semaine."],
+      ["Yoga", "Souplesse", "Cours calme pour respirer et se detendre."],
+      ["Natation libre", "Piscine", "Acces aux bassins sans cours, selon les horaires publics."],
+      ["Danse", "Musique", "Cours de danse moderne pour adultes."],
+      ["Escalade", "Mur", "Initiation avec materiel fourni et moniteur."],
+    ],
+    people: [
+      ["Ibrahim veut jouer dans une equipe.", 1],
+      ["Daria veut se detendre calmement.", 2],
+      ["Moussa veut essayer un mur d'escalade.", 5],
+      ["Aicha aime bouger avec la musique.", 4],
+      ["Tom veut nager sans suivre un cours.", 3],
+      ["Mona reprend le sport doucement.", 0],
+    ],
+  },
+  {
+    context: "Vous lisez des informations de logement et choisissez la bonne rubrique.",
+    docs: [
+      ["Bail a loyer", "Contrat", "Informations sur la duree, le loyer et les obligations du locataire."],
+      ["Etat des lieux", "Entree", "Controle de l'appartement avant de recevoir les cles."],
+      ["Assurance menage", "Protection", "Couverture en cas de degat d'eau, vol ou incendie."],
+      ["Buanderie", "Lessive", "Planning pour utiliser les machines de l'immeuble."],
+      ["Regie", "Contact", "Adresse et telephone pour signaler un probleme dans l'appartement."],
+      ["Tri des dechets", "Immeuble", "Regles pour les sacs poubelle, le papier et le verre."],
+    ],
+    people: [
+      ["Maria veut savoir quand laver son linge.", 3],
+      ["Denys signale un radiateur casse.", 4],
+      ["Hodan veut comprendre son contrat.", 0],
+      ["Yara entre dans son nouveau logement demain.", 1],
+      ["Khaled cherche une assurance pour ses affaires.", 2],
+      ["Rima veut savoir ou jeter le verre.", 5],
+    ],
+  },
+];
+
+const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item, index) => ({
+  context: `${item.context} Lisez attentivement les nuances : plusieurs documents peuvent sembler proches.`,
+  docs: item.docs.map(([title, subtitle, body], docIndex) => [
+    title,
+    subtitle,
+    `${body} Les conditions, horaires ou publics concernes peuvent varier selon la situation ${index + 1}.${docIndex + 1}.`,
+  ]),
+  people: item.people.map(([person, answer], personIndex) => [
+    `${person} Il faut tenir compte de la contrainte precise indiquee dans le document.`,
+    (answer + (personIndex % 2 === 0 ? 0 : 0)) as number,
+  ]),
+}));
+
+function makeEmailPool(level: CELevel): EmailSeriesItem[] {
+  const scenarios = level === "avance"
+    ? [
+        ["secretariat@formation.ch", "Changement d'horaire", "Bonjour,\nLe cours de preparation a l'examen de samedi est avance a 8 h 45. Il aura lieu dans la salle 312, au troisieme etage. Apportez votre piece d'identite, un stylo bleu et les exercices termines. Les personnes absentes devront envoyer un justificatif avant lundi midi.\nCordialement,\nLe secretariat", "8 h 45", "salle 312", "piece d'identite", "lundi midi"],
+        ["logement@regie.ch", "Visite technique", "Madame, Monsieur,\nUn technicien passera mardi entre 14 h et 16 h pour controler les radiateurs. Si vous ne pouvez pas etre present, merci de laisser une cle chez un voisin et de nous envoyer son nom par courriel. Les travaux ne durent normalement pas plus de vingt minutes.\nMeilleures salutations,\nLa regie", "mardi", "radiateurs", "un voisin", "vingt minutes"],
+        ["bibliotheque@ville.ch", "Livre reserve", "Bonjour,\nLe livre que vous avez reserve est disponible jusqu'au 18 juin. Vous pouvez le retirer a l'accueil pendant les horaires d'ouverture. Si vous ne venez pas avant cette date, la reservation sera annulee et le livre sera propose a une autre personne.\nLa bibliotheque", "18 juin", "a l'accueil", "annulee", "livre"],
+        ["musee@culture.ch", "Confirmation de visite", "Bonjour,\nVotre groupe est attendu vendredi a 13 h 50 devant l'entree principale du musee. La visite guidee commencera a 14 h et durera une heure. Les sacs volumineux devront rester au vestiaire. Le paiement se fera a la caisse apres la visite.\nAccueil du musee", "vendredi", "13 h 50", "vestiaire", "apres la visite"],
+        ["transport@cff.ch", "Objet retrouve", "Bonjour,\nNous avons retrouve un sac noir correspondant a votre description. Il se trouve au guichet des objets trouves de Lausanne. Vous devez presenter une piece d'identite et payer cinq francs de frais. Le guichet ferme a 18 h 30.\nCFF", "Lausanne", "sac noir", "cinq francs", "18 h 30"],
+        ["ecole@classe.ch", "Reunion parents", "Bonjour,\nLa reunion des parents aura lieu jeudi prochain a 19 h dans la salle polyvalente. Nous parlerons du voyage scolaire, du budget et des regles de securite. Merci de confirmer votre presence avant mardi soir en repondant a ce message.\nLa direction", "jeudi prochain", "19 h", "voyage scolaire", "mardi soir"],
+        ["club@natation.ch", "Inscription au cours", "Bonjour,\nVotre place au cours de natation debutant est confirmee. Le premier cours aura lieu le 3 septembre a 17 h 15. Prenez un maillot, un bonnet de bain et une serviette. Les vestiaires ouvrent quinze minutes avant le cours.\nLe club", "3 septembre", "17 h 15", "bonnet de bain", "quinze minutes"],
+        ["commune@admin.ch", "Document manquant", "Bonjour,\nVotre dossier est presque complet, mais il manque une copie de votre assurance maladie. Vous pouvez l'envoyer par courriel ou la deposer au guichet jusqu'a vendredi 11 h. Sans ce document, le rendez-vous devra etre reporte.\nCommune", "assurance maladie", "vendredi 11 h", "guichet", "reporte"],
+        ["magasin@meubles.ch", "Livraison", "Bonjour,\nVotre armoire sera livree mercredi matin entre 8 h et 11 h. Le livreur vous appellera trente minutes avant son arrivee. Merci de verifier que l'ascenseur fonctionne et que le passage jusqu'a la chambre est libre.\nService livraison", "mercredi matin", "8 h et 11 h", "ascenseur", "trente minutes"],
+        ["centre@emploi.ch", "Atelier CV", "Bonjour,\nVous etes inscrit a l'atelier CV de lundi. La seance commence a 9 h precise dans la salle 4. Apportez vos certificats de travail et une annonce d'emploi qui vous interesse. L'atelier est gratuit mais l'inscription est obligatoire.\nCentre emploi", "lundi", "salle 4", "certificats de travail", "gratuite"],
+      ]
+    : [
+        ["ecole@cours.ch", "Cours de mardi", "Bonjour,\nLe cours de francais de mardi commence a 10 h. Il aura lieu dans la salle 12. Apportez votre cahier et votre stylo. Si vous etes absent, envoyez un message au professeur.\nMerci.", "10 h", "salle 12", "cahier", "professeur"],
+        ["gare@cff.ch", "Billet trouve", "Bonjour,\nVous avez oublie votre billet au guichet. Il est garde a la gare de Sion jusqu'a vendredi. Venez avec une piece d'identite. Le guichet ferme a 18 h.\nCFF", "Sion", "vendredi", "piece d'identite", "18 h"],
+        ["club@sport.ch", "Match samedi", "Salut,\nLe match de football a lieu samedi a 15 h. Le rendez-vous est devant la salle de sport a 14 h 30. Prenez vos chaussures et une bouteille d'eau.\nLe coach", "samedi", "15 h", "chaussures", "bouteille d'eau"],
+        ["voisine@mail.ch", "Garde du chat", "Bonjour,\nJe pars deux jours a Geneve. Peux-tu donner a manger a mon chat vendredi soir et samedi matin ? La cle est sous le pot de fleurs. Merci beaucoup.\nMina", "Geneve", "chat", "vendredi soir", "sous le pot de fleurs"],
+        ["bibliotheque@ville.ch", "Livre en retard", "Bonjour,\nVotre livre est en retard depuis lundi. Merci de le rapporter cette semaine a la bibliotheque. Vous pouvez aussi le deposer dans la boite devant l'entree.\nLa bibliotheque", "lundi", "cette semaine", "bibliotheque", "boite"],
+        ["dentiste@cabinet.ch", "Rendez-vous", "Bonjour,\nVotre rendez-vous chez le dentiste est jeudi a 8 h 30. Le cabinet se trouve rue du Rhone 14. Merci d'arriver dix minutes avant l'heure.\nCabinet dentaire", "jeudi", "8 h 30", "rue du Rhone 14", "dix minutes"],
+        ["magasin@velo.ch", "Reparation velo", "Bonjour,\nVotre velo est repare. Vous pouvez venir le chercher demain apres 13 h. Le prix est de 45 francs. Le magasin ferme a 18 h 30.\nVelo Plus", "demain", "13 h", "45 francs", "18 h 30"],
+        ["centre@quartier.ch", "Atelier cuisine", "Bonjour,\nL'atelier cuisine aura lieu mercredi de 18 h a 20 h. Nous preparons une soupe et un dessert. Apportez une boite pour emporter les restes.\nCentre de quartier", "mercredi", "18 h", "soupe", "boite"],
+        ["regie@immeuble.ch", "Buanderie", "Bonjour,\nLa buanderie sera fermee lundi matin pour nettoyage. Vous pourrez laver votre linge lundi apres 14 h ou mardi toute la journee.\nLa regie", "lundi matin", "nettoyage", "14 h", "mardi"],
+        ["ami@mail.ch", "Anniversaire", "Salut,\nJe fete mon anniversaire dimanche a midi au parc. Tu peux venir avec ta famille. Apporte une couverture si tu en as une. Il y aura des boissons et un gateau.\nSamir", "dimanche", "midi", "parc", "couverture"],
+      ];
+
+  return scenarios.map(([from, subject, body, a, b, c, d]) => ({
+    from,
+    subject,
+    body,
+    questions: [
+      { prompt: "Quelle information principale est donnee dans ce message ?", choices: [{ label: a }, { label: "Une information sans rapport" }, { label: "Une publicite" }], correct: 0 },
+      { prompt: "Quel autre detail faut-il retenir ?", choices: [{ label: "Le document ne le dit pas" }, { label: b }, { label: "Une erreur de date" }], correct: 1 },
+      { prompt: "Que faut-il apporter ou faire ?", choices: [{ label: c }, { label: "Ne rien faire" }, { label: "Telephoner a la police" }], correct: 0 },
+      { prompt: "Quel est le dernier detail important ?", choices: [{ label: "Le message est annule" }, { label: d }, { label: "La personne doit partir" }], correct: 1 },
+      { prompt: "Qui envoie le message ?", answer: from.split("@")[0] ?? from },
+      { prompt: "Quel est l'objet du message ?", answer: subject },
+    ],
+  }));
+}
+
+function makeInstructionPool(level: CELevel): InstructionSeriesItem[] {
+  const sets = [
+    [["Nettoyer une salle", "Passez le balai, videz les poubelles, puis fermez les fenetres avant de partir."], ["Preparer un rendez-vous", "Relisez le dossier, imprimez la feuille de presence et accueillez la personne a l'heure."], ["Utiliser une machine", "Branchez l'appareil, choisissez le programme court et attendez le signal de fin."]],
+    [["Faire une demande", "Completez le formulaire, signez en bas de page et ajoutez une copie de votre permis."], ["Prendre un medicament", "Prenez un comprime apres le repas du soir avec un grand verre d'eau."], ["Se rendre a un entretien", "Arrivez dix minutes avant l'heure, apportez votre CV et eteignez votre telephone."]],
+    [["Trier les dechets", "Mettez le papier dans le container bleu et le verre dans le container vert."], ["Preparer une sortie", "Verifiez la meteo, prenez une veste et gardez le numero du responsable."], ["Recevoir un colis", "Controlez le nom, signez le recu et gardez le colis au sec."]],
+    [["Faire une infusion", "Chauffez l'eau, ajoutez les plantes, puis laissez reposer cinq minutes."], ["Accueillir un client", "Saluez le client, demandez son nom et proposez une chaise."], ["Fermer un local", "Eteignez les lumieres, verifiez les robinets et fermez la porte a cle."]],
+    [["Suivre une recette", "Lavez les legumes, coupez-les en petits morceaux et faites cuire vingt minutes."], ["Utiliser la bibliotheque", "Presentez votre carte, scannez le livre et respectez la date de retour."], ["Changer un rendez-vous", "Appelez le secretariat, proposez deux dates et notez la nouvelle heure."]],
+    [["Organiser une classe", "Distribuez les feuilles, ecrivez la consigne au tableau et ramassez les cahiers."], ["Prendre le bus", "Achetez le billet avant de monter et validez-le dans le bus."], ["Aider a la cantine", "Servez les plats chauds, nettoyez les tables et rangez les plateaux."]],
+    [["Faire une lessive", "Triez les vetements, mettez la lessive et choisissez quarante degres."], ["Participer a un cours", "Installez-vous, ouvrez le cahier et posez vos questions a la fin."], ["Rendre un document", "Ecrivez votre nom, verifiez les pages et deposez le dossier au guichet."]],
+    [["S'inscrire a une activite", "Choisissez le cours, notez votre telephone et payez l'inscription."], ["Preparer un sac", "Mettez la gourde, le pique-nique et une veste de pluie."], ["Utiliser un ordinateur", "Allumez l'ecran, entrez votre mot de passe et fermez la session apres usage."]],
+    [["Respecter la securite", "Portez les gants, restez derriere la ligne jaune et signalez tout probleme."], ["Faire un achat", "Comparez les prix, gardez le ticket et verifiez la monnaie."], ["Lire un horaire", "Cherchez la ligne, regardez le quai et controlez l'heure de depart."]],
+    [["Preparer une reunion", "Reserve une salle, envoie l'ordre du jour et prepare les documents."], ["Demander une aide", "Expliquez votre situation, montrez les justificatifs et notez le prochain rendez-vous."], ["Faire un appel", "Presentez-vous, expliquez la raison de l'appel et notez la reponse."]],
+  ];
+  return sets.map((set, setIndex) =>
+    set.map(([title, body], cardIndex) => ({
+      title,
+      image: `/expression/ce/instruction-${setIndex + 1}-${cardIndex + 1}.webp`,
+      imageLabel: title,
+      body: level === "avance" ? `${body} Respectez l'ordre exact des actions et reperez la condition importante.` : body,
+      questions: [
+        { prompt: "Quelle action est demandee ?", choices: [{ label: title }, { label: "Changer de sujet" }, { label: "Ignorer le document" }], correct: 0 },
+        { prompt: "Que faut-il faire selon le texte ?", choices: [{ label: body.split(",")[0] ?? body }, { label: "Partir sans prevenir" }, { label: "Ne rien verifier" }], correct: 0 },
+      ],
+    })),
+  );
+}
+
+function makeArticlePool(level: CELevel): ArticleSeriesItem[] {
+  const topics = [
+    ["Bien dormir", "Le sommeil", "Couchez-vous a une heure reguliere et evitez les ecrans tard le soir.", "La chambre", "Une chambre calme et aeree aide a mieux se reposer.", "Le reveil", "Levez-vous doucement et buvez de l'eau."],
+    ["Manger equilibre", "Les repas", "Variez les legumes, les cereales et les proteines pendant la semaine.", "Les boissons", "L'eau reste la meilleure boisson pour le corps.", "Les habitudes", "Mangez lentement et evitez de grignoter toute la journee."],
+    ["Se deplacer en ville", "Les transports", "Le bus et le train permettent de voyager sans chercher de parking.", "Le velo", "Le velo est pratique pour les petits trajets.", "La securite", "Respectez les feux et restez visible le soir."],
+    ["Chercher un emploi", "Le CV", "Un CV clair presente les experiences et les competences utiles.", "L'entretien", "Il faut arriver a l'heure et repondre calmement.", "Le suivi", "Apres l'entretien, on peut envoyer un message de remerciement."],
+    ["Gerer son budget", "Les depenses", "Notez les factures fixes avant de faire des achats.", "Les economies", "Mettez une petite somme de cote quand c'est possible.", "Les priorites", "Payez d'abord le logement, la nourriture et les assurances."],
+    ["Proteger la nature", "Le tri", "Separez le papier, le verre et les dechets speciaux.", "L'eau", "Fermez le robinet quand vous n'utilisez pas l'eau.", "Les transports", "Marcher ou prendre le bus reduit la pollution."],
+    ["Apprendre une langue", "La pratique", "Parlez un peu chaque jour, meme avec des phrases simples.", "La lecture", "Lire des textes courts aide a memoriser les mots.", "L'ecoute", "Ecoutez des dialogues pour comprendre la prononciation."],
+    ["Vivre en immeuble", "Le bruit", "Evitez le bruit tard le soir et tot le matin.", "La buanderie", "Respectez le planning et laissez la machine propre.", "Les voisins", "Un bonjour et une discussion calme evitent beaucoup de problemes."],
+    ["Preparer un examen", "Le planning", "Divisez le travail en petites parties sur plusieurs jours.", "Les exercices", "Refaites les exercices difficiles et corrigez vos erreurs.", "Le jour J", "Dormez assez et arrivez avec le materiel necessaire."],
+    ["Utiliser Internet", "Les mots de passe", "Choisissez un mot de passe long et different pour chaque compte.", "Les messages", "Ne cliquez pas sur un lien suspect.", "Les donnees", "Ne partagez pas vos informations personnelles avec n'importe qui."],
+  ];
+
+  return topics.map(([title, h1, b1, h2, b2, h3, b3], index) => ({
+    title,
+    sections: [
+      { heading: h1, body: level === "avance" ? `${b1} Cette recommandation demande une organisation reguliere.` : b1, image: `/expression/ce/article-${index + 1}-1.webp`, imageLabel: h1 },
+      { heading: h2, body: level === "avance" ? `${b2} Elle complete les autres conseils du document.` : b2, image: `/expression/ce/article-${index + 1}-2.webp`, imageLabel: h2 },
+      { heading: h3, body: level === "avance" ? `${b3} Cela permet d'eviter des difficultes dans la vie quotidienne.` : b3, image: `/expression/ce/article-${index + 1}-3.webp`, imageLabel: h3 },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet principal du texte ?", choices: [{ label: title }, { label: "Un voyage touristique" }, { label: "Une recette de cuisine" }], correct: 0 },
+      { prompt: `Que dit la partie "${h1}" ?`, choices: [{ label: b1 }, { label: "Elle ne donne aucune information" }, { label: "Elle parle d'un autre sujet" }], correct: 0 },
+      { prompt: `Quel mot complete le conseil sur "${h2}" ?`, answer: h2 },
+      { prompt: `Que faut-il faire selon la partie "${h3}" ?`, choices: [{ label: b3 }, { label: "Arreter de lire" }, { label: "Ignorer les conseils" }], correct: 0 },
+      { prompt: "A quoi sert ce texte ?", choices: [{ label: "Donner des conseils" }, { label: "Vendre une voiture" }, { label: "Annoncer un concert" }], correct: 0 },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+      { prompt: "Quel titre convient le mieux ?", choices: [{ label: title }, { label: "Une histoire imaginaire" }, { label: "Un menu de restaurant" }], correct: 0 },
+    ],
+  }));
+}
+
 function expandSeries<T>(base: T[], count = 10): T[] {
   return Array.from({ length: count }, (_, i) => base[i % base.length]!);
 }
 
 function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
-  const orientation = pick(expandSeries(ORIENTATION_TOPICS), `${level}-${stamp}-orientation`);
-  const email = pick(expandSeries(EMAIL_SERIES), `${level}-${stamp}-email`);
-  const instructions = pick(expandSeries(INSTRUCTION_SERIES), `${level}-${stamp}-instructions`);
-  const article = pick(expandSeries(ARTICLE_SERIES), `${level}-${stamp}-article`);
+  const orientationPool = level === "base" ? expandSeries(ORIENTATION_TOPICS) : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
+  const emailPool = level === "base" ? expandSeries(EMAIL_SERIES) : makeEmailPool(level);
+  const instructionPool = level === "base" ? expandSeries(INSTRUCTION_SERIES) : makeInstructionPool(level);
+  const articlePool = level === "base" ? expandSeries(ARTICLE_SERIES) : makeArticlePool(level);
+  const orientation = pick(orientationPool, `${level}-${stamp}-orientation`);
+  const email = pick(emailPool, `${level}-${stamp}-email`);
+  const instructions = pick(instructionPool, `${level}-${stamp}-instructions`);
+  const article = pick(articlePool, `${level}-${stamp}-article`);
 
   return [
     {
@@ -390,10 +725,17 @@ function mentionFromGrade(grade: number) {
   return "À améliorer";
 }
 
-function ProgressDots({ current }: { current: number }) {
+function formatTimer(ms: number) {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+function ProgressDots({ current, count }: { current: number; count: number }) {
   return (
     <div className="flex gap-1.5">
-      {[0, 1, 2, 3].map((index) => (
+      {Array.from({ length: Math.max(1, count) }, (_, index) => (
         <div
           key={index}
           className="h-2 flex-1 rounded-full"
@@ -510,12 +852,18 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
           </div>
         ))}
       </div>
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border)] bg-white">
-        <table className="min-w-[640px] w-full border-collapse text-sm">
+      <div className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-white">
+        <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
+          <colgroup>
+            <col style={{ width: "52%" }} />
+            {part.task.documents.map((_, index) => (
+              <col key={index} style={{ width: `${48 / part.task.documents.length}%` }} />
+            ))}
+          </colgroup>
           <thead>
             <tr className="bg-slate-50">
               <th className="border border-[var(--color-border)] p-2 text-left">Personnes</th>
-              {part.task.documents.map((_, index) => <th key={index} className="border border-[var(--color-border)] p-2 text-center">Doc. {index + 1}</th>)}
+              {part.task.documents.map((_, index) => <th key={index} className="border border-[var(--color-border)] px-1 py-2 text-center leading-tight">Doc.<br />{index + 1}</th>)}
             </tr>
           </thead>
           <tbody>
@@ -688,7 +1036,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
           const score = scores[index] ?? 0;
           const isOpen = opened === part.id;
           return (
-            <div key={part.id} className="rounded-2xl border border-[var(--color-border)] bg-white/85 shadow-sm">
+            <div key={part.id} className={`overflow-hidden rounded-2xl border bg-white/85 shadow-sm ${isOpen ? "border-[var(--color-text-primary)]" : "border-[var(--color-border)]"}`}>
               <button type="button" className="flex w-full items-center gap-3 px-4 py-3 text-left" onClick={() => setOpened(isOpen ? null : part.id)}>
                 <span className="font-bold" style={{ color: ACCENT }}>{index + 1}</span>
                 <span className="flex-1 font-semibold text-[var(--color-text-primary)]">{part.title}</span>
@@ -712,36 +1060,49 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
-  const [seed, setSeed] = useState(() => Date.now());
+  const [seed] = useState(() => Date.now());
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<CEAnswers>({});
+  const [validatedIds, setValidatedIds] = useState<string[]>([]);
   const [openedResult, setOpenedResult] = useState<string | null>(null);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
   const parts = useMemo(() => buildParts(level, seed), [level, seed]);
-  const part = parts[current]!;
+  const activeParts = useMemo(() => parts.filter((item) => !validatedIds.includes(item.id)), [parts, validatedIds]);
+  const part = activeParts[Math.min(current, Math.max(0, activeParts.length - 1))] ?? activeParts[0] ?? parts[0]!;
+  const currentScore = useMemo(
+    () => parts.filter((item) => validatedIds.includes(item.id)).reduce((sum, item) => sum + scorePart(item, answers), 0),
+    [answers, parts, validatedIds],
+  );
+
+  useEffect(() => {
+    if (phase !== "exercise") return;
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [phase]);
 
   const setAnswer = useCallback((key: string, value: number | string) => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
   }, []);
 
-  const refresh = useCallback(() => {
-    setSeed(Date.now());
-    setAnswers({});
-    setCurrent(0);
-    setPhase("exercise");
-  }, []);
-
   const validate = useCallback(() => {
-    if (current === parts.length - 1) {
+    const currentPart = activeParts[current] ?? activeParts[0];
+    if (!currentPart) return;
+    const nextValidated = [...validatedIds, currentPart.id];
+    const remaining = parts.filter((item) => !nextValidated.includes(item.id));
+    setValidatedIds(nextValidated);
+    if (remaining.length === 0) {
       markCommunicationLessonComplete(lessonId);
-      setOpenedResult(parts[0]?.id ?? null);
+      setOpenedResult(null);
       setPhase("results");
     } else {
-      setCurrent((value) => Math.min(parts.length - 1, value + 1));
+      setCurrent((value) => Math.min(value, remaining.length - 1));
     }
-  }, [current, lessonId, parts]);
+  }, [activeParts, current, lessonId, parts, validatedIds]);
 
   const next = useCallback(() => {
     if (phase === "intro") {
+      setStartedAt(Date.now());
       setPhase("exercise");
       return;
     }
@@ -749,29 +1110,37 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
       router.push("/communication");
       return;
     }
-    setCurrent((value) => (value + 1) % parts.length);
-  }, [phase, parts.length, router]);
+    if (activeParts.length === 0) return;
+    setCurrent((value) => (value + 1) % activeParts.length);
+  }, [activeParts.length, phase, router]);
 
   const back = useCallback(() => {
     if (phase === "intro") return;
     if (phase === "results") {
-      setPhase("exercise");
-      setCurrent(parts.length - 1);
+      router.push("/communication");
       return;
     }
-    setCurrent((value) => (value - 1 + parts.length) % parts.length);
-  }, [phase, parts.length]);
+    if (activeParts.length === 0) return;
+    setCurrent((value) => (value - 1 + activeParts.length) % activeParts.length);
+  }, [activeParts.length, phase, router]);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 pb-28">
-      {phase === "intro" && <IntroPage level={level} onStart={() => setPhase("exercise")} />}
+      {phase === "intro" && <IntroPage level={level} onStart={() => { setStartedAt(Date.now()); setPhase("exercise"); }} />}
 
-      {phase === "exercise" && (
+      {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
           <CEHeader level={level} title="Compréhension écrite" />
-          <ProgressDots current={current} />
-          <ExercisePage part={part} index={current} answers={answers} setAnswer={setAnswer} />
-          <NavActionBar onBack={back} onRefresh={refresh} onValidate={validate} onNext={next} nextLabel={current === parts.length - 1 ? "Résultats" : "Suivant"} />
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-sm font-semibold">
+              <span style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</span>
+              <span className="rounded-full bg-white px-3 py-1 shadow-sm" style={{ color: INVERSE }}>{formatTimer(now - (startedAt ?? now))}</span>
+              <span className="text-[var(--color-text-secondary)]">{activeParts.length} exercices restants</span>
+            </div>
+            <ProgressDots current={Math.min(current, activeParts.length - 1)} count={activeParts.length} />
+          </div>
+          <ExercisePage part={part} index={parts.findIndex((item) => item.id === part.id)} answers={answers} setAnswer={setAnswer} />
+          <NavActionBar onBack={back} onValidate={validate} onNext={next} nextLabel="Suivant" />
         </div>
       )}
 
@@ -779,7 +1148,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
         <div className="space-y-6">
           <CEHeader level={level} title="Résultats" />
           <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onBack={back} onRefresh={refresh} onNext={() => router.push("/communication")} nextLabel="Terminer" />
+          <NavActionBar onNext={() => router.push("/communication")} nextLabel="Terminer" />
         </div>
       )}
     </div>

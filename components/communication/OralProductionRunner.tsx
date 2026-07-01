@@ -73,6 +73,13 @@ function ensureQuestionMark(text: string): string {
   return trimmed ? `${trimmed}?` : "";
 }
 
+function formatPoTimer(ms: number) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
 function useSpeechRecognition(onTranscript: (text: string) => void) {
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const accumulatedRef = useRef("");
@@ -315,6 +322,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const imageWidth = compactImage ? 1402 : 1448;
   const imageHeight = compactImage ? 1122 : 1086;
   const [phase, setPhase] = useState<Phase>("intro");
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
 
   // Task 1: questions on 3 themes (all shown simultaneously)
   const [task1Transcripts, setTask1Transcripts] = useState<string[]>(["", "", ""]);
@@ -443,22 +452,26 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setImageHelpOpen(false);
   }, [phase]);
 
+  useEffect(() => {
+    if (!startedAt || phase === "intro" || phase === "review") return;
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [phase, startedAt]);
+
   // ——— Step index for segmented progress bar ———
 
   const stepIdx =
-    phase === "intro" ? 0 :
-    phase === "task1" ? 1 :
-    phase === "task2" ? 2 :
-    phase === "task3" ? 3 :
-    phase === "task4" ? 4 : 5;
+    phase === "task1" ? 0 :
+    phase === "task2" ? 1 :
+    phase === "task3" ? 2 :
+    phase === "task4" ? 3 : 4;
 
-  const totalSteps = 6;
+  const totalSteps = 5;
+  const remainingMs = startedAt ? 15 * 60 * 1000 - (now - startedAt) : 15 * 60 * 1000;
 
   // ——— Task 1: confirm all 3 theme questions at once ———
 
   function confirmTask1() {
-    const hasAny = task1Transcripts.some((t) => t.trim());
-    if (!hasAny) return;
     const lines: OralDialogueLine[] = [];
     for (let i = 0; i < 3; i++) {
       const theme = prompt.themes[i]!;
@@ -474,8 +487,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Task 2: directed interview (all questions at once) ———
 
   function confirmInterview() {
-    const hasAny = interviewTranscripts.some((t) => t.trim());
-    if (!hasAny) return;
     const lines: OralDialogueLine[] = [];
     for (let i = 0; i < interviewQuestions.length; i++) {
       lines.push(
@@ -494,10 +505,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   }
 
   function validateTask2() {
-    if (task2Phrases.length === 0) return;
     setTask2Lines([
       { role: "app", text: "D?crivez cette image." },
-      ...task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase })),
+      ...(task2Phrases.length > 0
+        ? task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase }))
+        : [{ role: "student" as const, text: "(pas de rÃ©ponse)" }]),
     ]);
     setTask2Done(true);
   }
@@ -527,8 +539,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function validateTask5() {
     const lines: OralDialogueLine[] = [{ role: "app", text: argumentationTopic.prompt }];
-    for (const phrase of task5Phrases) {
-      lines.push({ role: "student", text: phrase });
+    if (task5Phrases.length === 0) {
+      lines.push({ role: "student", text: "(pas de rÃ©ponse)" });
+    } else {
+      for (const phrase of task5Phrases) {
+        lines.push({ role: "student", text: phrase });
+      }
     }
     setTask5Lines(lines);
     setTask5Done(true);
@@ -587,7 +603,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const allTasksDone = task1Done && interviewDone && task2Done && task4Done && task5Done;
 
   function goNext() {
-    if (phase === "intro") setPhase("task1");
+    if (phase === "intro") {
+      const start = Date.now();
+      setStartedAt(start);
+      setNow(start);
+      setPhase("task1");
+    }
     else if (phase === "task1") setPhase("task2");
     else if (phase === "task2") setPhase("task3");
     else if (phase === "task3") setPhase("task4");
@@ -741,15 +762,25 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       </header>
 
       {/* Segmented progress bar — hidden on recap page */}
-      {phase !== "review" && (
-        <div className="mb-6 flex gap-1">
-          {Array.from({ length: totalSteps }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
-              style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
-            />
-          ))}
+      {phase !== "intro" && phase !== "review" && (
+        <div className="mb-6 space-y-2">
+          <div className="flex items-center justify-between text-sm font-semibold">
+            <span style={{ color: ACCENT }}>
+              {stepIdx + 1} / {totalSteps}
+            </span>
+            <span className="rounded-full bg-white px-3 py-1 shadow-sm" style={{ color: ACCENT }}>
+              {formatPoTimer(remainingMs)}
+            </span>
+          </div>
+          <div className="flex gap-1">
+            {Array.from({ length: totalSteps }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+                style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+              />
+            ))}
+          </div>
         </div>
       )}
 

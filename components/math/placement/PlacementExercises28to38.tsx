@@ -119,28 +119,31 @@ function FracInput({
   const numWrong = validated && numVal.trim() !== numCorrect;
   const denWrong = validated && denVal.trim() !== denCorrect;
 
+  const cellBase = "flex h-9 w-14 items-center justify-center rounded-md border-2 bg-transparent text-center font-mono text-sm";
   const cell = (val: string, correct: string, wrong: boolean, onChange: (v: string) => void) => {
     if (validated) {
       return (
-        <span className={`block w-10 text-center font-mono text-sm leading-none ${wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}`}>
+        <span className={`${cellBase} ${wrong ? "border-amber-500 text-amber-600" : "border-[var(--color-accent-alg)]/45 text-[var(--color-text-primary)]"}`}>
           {wrong ? correct : (val || correct)}
         </span>
       );
     }
     return (
-      <input
-        type="text"
-        value={val}
-        onChange={e => onChange(e.target.value.replace(/[^0-9-]/g, ""))}
-        className="block h-6 w-10 bg-transparent text-center font-mono text-sm outline-none"
-      />
+      <span className={`${cellBase} border-[var(--color-accent-alg)]/45 text-[var(--color-text-primary)]`}>
+        <input
+          type="text"
+          value={val}
+          onChange={e => onChange(e.target.value.replace(/[^0-9-]/g, ""))}
+          className="h-6 w-full bg-transparent text-center font-mono text-sm outline-none"
+        />
+      </span>
     );
   };
 
   return (
-    <span className="inline-flex min-h-16 w-14 flex-col items-center justify-center rounded-md border-2 border-[var(--color-accent-alg)]/45 bg-transparent px-1 py-1">
+    <span className="inline-flex w-16 flex-col items-center justify-center align-middle">
       {cell(numVal, numCorrect, numWrong, onNumChange)}
-      <span className="my-0.5 h-px w-full bg-[var(--color-text-primary)]" />
+      <span className="my-0.5 h-px w-14 bg-[var(--color-text-primary)]" />
       {cell(denVal, denCorrect, denWrong, onDenChange)}
     </span>
   );
@@ -283,7 +286,7 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
+      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem minmax(0, 1fr)"}}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -474,7 +477,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const norm = (s: string) => s.trim().replace(/\s/g, "");
     const checks = [
       () => norm(answers[0] ?? "") === String(data.q1.ask === "num" ? data.q1.n : data.q1.d),
-      () => norm(answers[1] ?? "") === String(data.q2.n),
+      () => norm(answers[1] ?? "") === String(data.q2.n) && norm(answers[2] ?? "") === String(data.q2.d),
       () => { const [en,ed]=splitAns(data.q3.ans); return norm(fracNums[0]??"")=== en && norm(fracDens[0]??"")=== ed; },
       () => { const [en,ed]=splitAns(data.q4.ans); return norm(fracNums[1]??"")=== en && norm(fracDens[1]??"")=== ed; },
       () => { const [en,ed]=splitAns(data.q5.ans); return norm(fracNums[2]??"")=== en && norm(fracDens[2]??"")=== ed; },
@@ -529,7 +532,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
           <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
           <Frac
             n={smallBox(1, String(data.q2.n))}
-            d={data.q2.d}
+            d={smallBox(2, String(data.q2.d))}
           />
         </span>
       </div>
@@ -712,7 +715,7 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}
               correct={q.corr}
               validated={validated}
-              width="w-28"
+              width="w-full"
             />
           </React.Fragment>
         ))}

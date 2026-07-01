@@ -815,13 +815,12 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
         return (
           <div className="flex items-center gap-2 pt-1">
             <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
-            <input type="text" inputMode="decimal" value={decResult} disabled={validated}
+            <input type="text" inputMode="decimal" value={isWrong ? correctResultStr : decResult} disabled={validated}
               onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
               className={`w-28 rounded-none border-0 border-b-2 px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
-                isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
+                isWrong ? "border-amber-500 font-bold text-amber-600" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
               }`}
             />
-            {isWrong && <span className="text-xs font-bold text-amber-600">{correctResultStr}</span>}
           </div>
         );
       })()}
@@ -942,6 +941,7 @@ function DecimalDivisionGrid({
   const quotientStr = String(quotientInt);
   const dividendCols = dividendStr.length;
   const quotientCols = Math.max(quotientStr.length, divisorStr.length);
+  const resultWrong = validated && !matchNum(decResult, parseNum(decCorrect), 0.005);
   const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
   const CW = 34;
 
@@ -1115,14 +1115,13 @@ function DecimalDivisionGrid({
         <input
           type="text"
           inputMode="decimal"
-          value={decResult}
+          value={resultWrong ? decCorrect : decResult}
           disabled={validated}
           onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-          className="w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+          className={`w-28 rounded-none border-0 border-b-2 px-2 py-1 text-center text-sm outline-none transition-colors disabled:opacity-60 ${
+            resultWrong ? "border-amber-500 font-bold text-amber-600" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
+          }`}
         />
-        {validated && !matchNum(decResult, parseNum(decCorrect), 0.005) && (
-          <span className="text-xs font-bold text-amber-500">{decCorrect}</span>
-        )}
       </div>
     </div>
   );
