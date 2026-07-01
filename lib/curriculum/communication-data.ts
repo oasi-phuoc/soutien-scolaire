@@ -25,7 +25,6 @@ export const COMM_MODULES: CommunicationModule[] = [
     title: "Production \u00e9crite",
     description: "",
     submodules: [
-      { id: "PE-0", code: "PE.0", title: "Les formulaires", available: true, lessonId: "expression-e1-0" },
       { id: "PE-1", code: "PE.1", title: "Base", available: true, lessonId: "expression-e1-1" },
       { id: "PE-2", code: "PE.2", title: "Moyen", available: true, lessonId: "expression-e1-2" },
       { id: "PE-3", code: "PE.3", title: "Avanc\u00e9", available: true, lessonId: "expression-e1-3" },
@@ -95,7 +94,7 @@ export const COMM_MODULES: CommunicationModule[] = [
 ];
 
 const LEGACY_COMM_IDS: Record<string, string> = {
-  "E1-0": "PE-0", "E1-1": "PE-1", "E1-2": "PE-2", "E1-3": "PE-3",
+  "E1-1": "PE-1", "E1-2": "PE-2", "E1-3": "PE-3",
   "P1-0": "E1-0", "P1-1": "E1-1", "P1-2": "E1-2", "P1-3": "E1-3", "P1-4": "E1-4", "P1-5": "E1-5",
   "P2-1": "E2-1", "P2-2": "E2-2", "P2-3": "E2-3", "P2-4": "E2-4", "P2-5": "E2-5",
   "P3-1": "E3-1", "P3-2": "E3-2", "P3-3": "E3-3", "P3-4": "E3-4",

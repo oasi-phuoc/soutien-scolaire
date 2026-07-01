@@ -25,8 +25,12 @@ import {
   type WritingPrompt,
 } from "@/lib/curriculum/content/communication/writing-prompts";
 import { OralProductionRunner } from "@/components/communication/OralProductionRunner";
-import { FormProductionRunner } from "@/components/communication/FormProductionRunner";
 import { ComprehensionEcritRunner } from "@/components/communication/ComprehensionEcritRunner";
+import {
+  randomFormTemplates,
+  type FormField,
+  type FormTemplate,
+} from "@/lib/curriculum/content/communication/form-prompts";
 
 const ACCENT = "var(--color-accent-comm)";
 const LESSONS: Record<string, CommunicationLesson> = {
@@ -38,7 +42,7 @@ const LESSONS: Record<string, CommunicationLesson> = {
   "A1-1": COMMUNICATION_E2_1,
 };
 
-type Phase = "theory" | "writing" | "exercises" | "score";
+type Phase = "intro" | "theory" | "form" | "writing" | "exercises" | "score";
 
 type GrammarMatch = {
   message: string;
@@ -97,7 +101,7 @@ function WritingExercise({
         text,
         aiFeedback: feedback,
       });
-      setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
+      setSendMessage(result.ok ? "Production envoyÃ©e au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
     });
   }
@@ -113,7 +117,7 @@ function WritingExercise({
         <ul className="mt-1 space-y-1">
           {prompt.points.map((point) => (
             <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
+              <span className="text-[var(--color-accent-fr)]">â€¢</span><span>{point} ;</span>
             </li>
           ))}
         </ul>
@@ -123,7 +127,7 @@ function WritingExercise({
         <div className="mb-2 flex items-center justify-between gap-3">
           <label htmlFor="expression-text" className="text-sm font-bold text-[var(--color-text-primary)]">Votre production</label>
           <span className={`text-xs font-semibold ${inRange ? "text-emerald-600" : "text-amber-600"}`}>
-            {count} / {prompt.minWords}–{prompt.maxWords} mots
+            {count} / {prompt.minWords}â€“{prompt.maxWords} mots
           </span>
         </div>
         <textarea
@@ -136,35 +140,35 @@ function WritingExercise({
           aria-describedby="expression-word-count"
         />
         <p id="expression-word-count" className="mt-1 text-xs text-[var(--color-text-secondary)]">
-          Respectez la longueur demandée avant de valider.
+          Respectez la longueur demandÃ©e avant de valider.
         </p>
       </div>
 
-      {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en cours…</p>}
+      {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en coursâ€¦</p>}
       {checked && !checking && (
         <section className="rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
           <h3 className="font-bold text-amber-600">Pistes de correction</h3>
           {feedback.length === 0 ? (
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucune erreur évidente détectée. Relisez encore le contenu et l’organisation.</p>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucune erreur Ã©vidente dÃ©tectÃ©e. Relisez encore le contenu et lâ€™organisation.</p>
           ) : (
             <ul className="mt-2 space-y-3">
               {feedback.map((match, index) => (
                 <li key={`${match.offset}-${index}`} className="text-sm text-[var(--color-text-primary)]">
                   <span className="font-semibold text-amber-600">{match.shortMessage || match.message}</span>
                   {match.replacements?.length ? (
-                    <span className="ml-1">→ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
+                    <span className="ml-1">â†’ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
                   ) : null}
                 </li>
               ))}
             </ul>
           )}
-          <p className="mt-3 text-xs text-[var(--color-text-secondary)]">La correction automatique est une aide. Le professeur peut compléter et expliquer les corrections.</p>
+          <p className="mt-3 text-xs text-[var(--color-text-secondary)]">La correction automatique est une aide. Le professeur peut complÃ©ter et expliquer les corrections.</p>
         </section>
       )}
 
       {checked && (
         <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
-          <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
+          <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer Ã  un professeur</h3>
           {teachers.length ? (
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
               <select
@@ -184,11 +188,11 @@ function WritingExercise({
                 disabled={!teacherId || !inRange || isSending || sent}
                 className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white disabled:opacity-35"
               >
-                {sent ? "Envoyé" : isSending ? "Envoi…" : "Envoyer"}
+                {sent ? "EnvoyÃ©" : isSending ? "Envoiâ€¦" : "Envoyer"}
               </button>
             </div>
           ) : (
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur n’est encore disponible dans la liste.</p>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur nâ€™est encore disponible dans la liste.</p>
           )}
           {sendMessage && <p className={`mt-2 text-xs font-semibold ${sent ? "text-emerald-600" : "text-amber-600"}`}>{sendMessage}</p>}
         </section>
@@ -197,7 +201,129 @@ function WritingExercise({
   );
 }
 
-// ——— Theory block renderers ———
+// â€”â€”â€” Theory block renderers â€”â€”â€”
+
+function FormFieldControl({
+  field,
+  value,
+  disabled,
+  onChange,
+}: {
+  field: FormField;
+  value: string;
+  disabled: boolean;
+  onChange: (value: string) => void;
+}) {
+  const controlClass =
+    "min-h-9 w-full border-0 border-b-2 border-[var(--color-accent-fr)]/45 bg-transparent px-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-80";
+
+  return (
+    <label className={field.wide ? "col-span-1 sm:col-span-2" : ""}>
+      <span className="mb-1 block text-xs font-medium text-[var(--color-text-secondary)]">{field.label}</span>
+      {field.options ? (
+        <select value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={controlClass}>
+          <option value="">SÃ©lectionnez</option>
+          {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
+        </select>
+      ) : (
+        <input type={field.type ?? "text"} value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={controlClass} autoComplete="off" />
+      )}
+    </label>
+  );
+}
+
+function FormExercise({
+  template,
+  answers,
+  validated,
+  onChange,
+  advanced,
+}: {
+  template: FormTemplate;
+  answers: Record<string, string>;
+  validated: boolean;
+  onChange: (fieldId: string, value: string) => void;
+  advanced?: boolean;
+}) {
+  return (
+    <div className="space-y-4">
+      <p className="text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">{template.situation}</p>
+      {advanced && (
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+          Vous aidez une personne Ã  remplir ce formulaire. Lisez la situation, repÃ©rez les informations utiles et complÃ©tez seulement les champs que vous pouvez dÃ©duire.
+        </div>
+      )}
+      <section className="border border-[var(--color-border-emphasis)] bg-white px-4 py-5 shadow-sm sm:px-6">
+        <div className="mb-5 border-b-2 pb-2 text-center" style={{ borderColor: ACCENT }}>
+          <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{template.organization}</p>
+          <h2 className="mt-1 text-xl font-bold uppercase text-[var(--color-text-primary)]">{template.title}</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+          {template.fields.map((field) => (
+            <FormFieldControl
+              key={field.id}
+              field={field}
+              value={answers[field.id] ?? ""}
+              disabled={validated}
+              onChange={(value) => onChange(field.id, value)}
+            />
+          ))}
+        </div>
+        {validated && (
+          <p className="mt-5 border-t border-emerald-200 pt-3 text-center text-sm font-semibold text-emerald-600">Formulaire enregistrÃ©.</p>
+        )}
+      </section>
+    </div>
+  );
+}
+
+function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; onStart: () => void }) {
+  const [tipsOpen, setTipsOpen] = useState(false);
+  const rows = [
+    ["1", "Formulaire", "5 pts"],
+    ["2", "Texte court", "10 pts"],
+    ["3", "Texte long", "10 pts"],
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 shadow-sm">
+        <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
+        <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">3 exercices</strong> de production Ã©crite</span></li>
+          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Validez chaque exercice individuellement</span></li>
+          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Vous pouvez naviguer librement en cliquant sur la barre de progression en haut.</span></li>
+          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
+        </ul>
+        <div className="mt-5 space-y-2 border-t border-[var(--color-border)] pt-4">
+          {rows.map(([num, title, pts]) => (
+            <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
+              <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
+              <span>{title}</span>
+              <span className="font-bold" style={{ color: ACCENT }}>{pts}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
+        <button type="button" onClick={() => setTipsOpen((value) => !value)} className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]">
+          <span>Conseils pour rÃ©ussir</span>
+          <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
+        </button>
+        {tipsOpen && (
+          <div className="border-t border-[var(--color-border)] px-5 py-4">
+            {lesson.theory.map((block, index) => <TheoryBlock key={index} block={block} />)}
+          </div>
+        )}
+      </div>
+
+      <button type="button" onClick={onStart} className="min-h-12 w-full rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90" style={{ background: ACCENT }}>
+        Commencer l&apos;Ã©valuation
+      </button>
+    </div>
+  );
+}
 
 function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   switch (block.type) {
@@ -290,7 +416,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "note":
       return (
         <div className="mb-4 flex gap-2 rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-2.5 dark:border-amber-700 dark:bg-amber-950">
-          <span className="shrink-0 text-amber-600 dark:text-amber-400">⚠️</span>
+          <span className="shrink-0 text-amber-600 dark:text-amber-400">âš ï¸</span>
           <p className="text-sm text-amber-800 dark:text-amber-200">{block.text}</p>
         </div>
       );
@@ -356,7 +482,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
               <span className="shrink-0 text-sm font-bold" style={{ color: ACCENT }}>
                 {item.fr}
               </span>
-              <span className="text-sm text-[var(--color-text-secondary)]">— {item.example}</span>
+              <span className="text-sm text-[var(--color-text-secondary)]">â€” {item.example}</span>
             </div>
           ))}
         </div>
@@ -367,7 +493,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   }
 }
 
-// ——— MCQ Exercise (no internal nav — parent handles it) ———
+// â€”â€”â€” MCQ Exercise (no internal nav â€” parent handles it) â€”â€”â€”
 
 function MCQExercise({
   question,
@@ -452,18 +578,17 @@ function MCQExercise({
               : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-200"
           }`}
         >
-          {isCorrect ? "✓ Bonne réponse !" : `✗ La bonne réponse est : ${answer}`}
+          {isCorrect ? "âœ“ Bonne rÃ©ponse !" : `âœ— La bonne rÃ©ponse est : ${answer}`}
         </div>
       )}
     </div>
   );
 }
 
-// ——— Main component ———
+// â€”â€”â€” Main component â€”â€”â€”
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
   if (lessonId === "E1-0" || lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
-  if (lessonId === "PE-0") return <FormProductionRunner />;
   if (lessonId.startsWith("PO-")) return <OralProductionRunner lessonId={lessonId} />;
   if (lessonId.startsWith("CE-")) return <ComprehensionEcritRunner lessonId={lessonId} />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
@@ -473,7 +598,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const lesson = LESSONS[lessonId];
 
-  const [phase, setPhase] = useState<Phase>("theory");
+  const [phase, setPhase] = useState<Phase>(() => lesson?.writingLevel ? "intro" : "theory");
   const [exIndex, setExIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
   // Per-exercise state for free navigation
@@ -494,6 +619,11 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [grammarFeedback, setGrammarFeedback] = useState<GrammarMatch[]>([]);
   const [grammarChecking, setGrammarChecking] = useState(false);
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
+  const [formTemplate, setFormTemplate] = useState<FormTemplate | null>(() =>
+    lesson?.writingLevel ? randomFormTemplates(1)[0] ?? null : null,
+  );
+  const [formAnswers, setFormAnswers] = useState<Record<string, string>>({});
+  const [formValidated, setFormValidated] = useState(false);
 
   useEffect(() => {
     if (!lesson?.writingLevel) return;
@@ -503,7 +633,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   if (!lesson) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <p className="text-sm text-[var(--color-text-secondary)]">Leçon introuvable.</p>
+        <p className="text-sm text-[var(--color-text-secondary)]">LeÃ§on introuvable.</p>
         <button
           type="button"
           onClick={() => router.push("/communication")}
@@ -519,7 +649,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const totalEx = lesson.exercises.length;
   const totalSteps = lesson.writingLevel ? 2 : 3;
   const stepIdx =
-    phase === "theory" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
+    phase === "intro" ? 0 : phase === "theory" ? 0 : phase === "form" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
 
   function handleFinish() {
     try {
@@ -531,10 +661,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   function goBack() {
-    if (phase === "theory") {
+    if (phase === "intro" || phase === "theory") {
       router.push("/francais?tab=communication");
+    } else if (phase === "form") {
+      setPhase("intro");
     } else if (phase === "writing") {
-      setPhase("theory");
+      setPhase(lesson.writingLevel ? "form" : "theory");
       setGrammarFeedback([]);
       setExerciseValidated(false);
     } else if (phase === "exercises") {
@@ -550,6 +682,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   function handleReset() {
+    if (phase === "form" && lesson.writingLevel) {
+      setFormTemplate(randomFormTemplates(1)[0] ?? null);
+      setFormAnswers({});
+      setFormValidated(false);
+      return;
+    }
     if (phase === "writing" && lesson.writingLevel) {
       setWritingText("");
       setGrammarFeedback([]);
@@ -562,10 +700,17 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   async function handleValidate() {
+    if (phase === "form") {
+      setFormValidated(true);
+      return;
+    }
     if (phase === "writing") {
       if (!writingPrompt || exerciseValidated || grammarChecking) return;
-      const count = wordCount(writingText);
-      if (count < writingPrompt.minWords || count > writingPrompt.maxWords) return;
+      if (!writingText.trim()) {
+        setGrammarFeedback([]);
+        setExerciseValidated(true);
+        return;
+      }
       setGrammarChecking(true);
       try {
         const response = await fetch("/api/check-grammar", {
@@ -588,9 +733,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   function goNext() {
+    if (phase === "intro") {
+      setPhase(lesson.writingLevel ? "form" : "theory");
+      return;
+    }
     if (phase === "theory") {
       if (lesson.writingLevel) {
-        setPhase("writing");
+        setPhase("form");
         return;
       }
       if (totalEx === 0) {
@@ -598,6 +747,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         return;
       }
       setPhase("exercises");
+    } else if (phase === "form") {
+      setPhase("writing");
     } else if (phase === "writing") {
       if (!exerciseValidated) return;
       handleFinish();
@@ -616,11 +767,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   const isLastStep = phase === "score" || phase === "writing" || (phase === "theory" && totalEx === 0 && !lesson.writingLevel);
-  const showExerciseControls = phase === "exercises" || phase === "writing";
-  const writingCount = wordCount(writingText);
-  const writingInRange = !!writingPrompt && writingCount >= writingPrompt.minWords && writingCount <= writingPrompt.maxWords;
+  const showExerciseControls = phase === "exercises" || phase === "writing" || phase === "form";
   // Free navigation in exercises: no validation gate for Suivant
-  const nextDisabled = phase === "writing" && !exerciseValidated;
+  const nextDisabled = (phase === "writing" && !exerciseValidated) || (phase === "form" && !formValidated);
   const currentExValidated = validated[exIndex] ?? false;
 
   const score = results.filter(Boolean).length;
@@ -630,35 +779,47 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       {/* Header */}
       <header className="mb-4 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
-          {lesson.writingLevel ? "Français · Expression écrite" : "Français · Communication"}
+          {lesson.writingLevel ? "FranÃ§ais Â· Expression Ã©crite" : "FranÃ§ais Â· Communication"}
         </p>
         <div className="flex items-center gap-2">
           <Link
             href="/francais?tab=communication"
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
             style={{ background: ACCENT }}
-            aria-label="Retour au français"
+            aria-label="Retour au franÃ§ais"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {lesson.code} — {lesson.title}
+            {lesson.code} â€” {lesson.title}
           </h1>
         </div>
       </header>
 
       {/* Segmented progress bar */}
-      <div className="mb-6 flex gap-1">
-        {Array.from({ length: totalSteps }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
-            style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
-          />
-        ))}
-      </div>
+      {phase !== "intro" && phase !== "score" && (
+        <div className="mb-6 flex gap-1">
+          {Array.from({ length: totalSteps }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => {
+                if (!lesson.writingLevel) return;
+                setPhase(i === 0 ? "form" : "writing");
+              }}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
+              style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+              aria-label={`Aller Ã  l'Ã©tape ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {phase === "intro" && lesson.writingLevel && (
+        <WritingIntroPage lesson={lesson} onStart={() => setPhase("form")} />
+      )}
 
       {/* Theory phase */}
       {phase === "theory" && (
@@ -669,6 +830,19 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
             ))}
           </div>
         </div>
+      )}
+
+      {phase === "form" && formTemplate && (
+        <FormExercise
+          template={formTemplate}
+          answers={formAnswers}
+          validated={formValidated}
+          advanced={lesson.writingLevel === "avance"}
+          onChange={(fieldId, value) => {
+            if (formValidated) return;
+            setFormAnswers((prev) => ({ ...prev, [fieldId]: value }));
+          }}
+        />
       )}
 
       {phase === "writing" && writingPrompt && (
@@ -748,13 +922,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               {score === totalEx
                 ? "Parfait !"
                 : score >= totalEx * 0.75
-                  ? "Très bien !"
+                  ? "TrÃ¨s bien !"
                   : score >= totalEx * 0.5
-                    ? "Bien joué !"
-                    : "Continuez à pratiquer !"}
+                    ? "Bien jouÃ© !"
+                    : "Continuez Ã  pratiquer !"}
             </h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Vous avez {score} bonne{score > 1 ? "s" : ""} réponse{score > 1 ? "s" : ""} sur {totalEx}.
+              Vous avez {score} bonne{score > 1 ? "s" : ""} rÃ©ponse{score > 1 ? "s" : ""} sur {totalEx}.
             </p>
           </div>
           <button
@@ -774,7 +948,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* Fixed bottom nav — same pattern as math modules */}
+      {/* Fixed bottom nav â€” same pattern as math modules */}
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
@@ -784,7 +958,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               onClick={goBack}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
             >
-              ← Retour
+              â† Retour
             </button>
 
             {/* Reset + Validate (exercises only) */}
@@ -793,9 +967,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={handleReset}
-                  disabled={(phase === "exercises" ? currentExValidated : exerciseValidated) || grammarChecking}
+                  disabled={(phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
-                  aria-label="Réinitialiser"
+                  aria-label="RÃ©initialiser"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                     <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
@@ -804,7 +978,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={() => void handleValidate()}
-                  disabled={(phase === "writing" ? !writingInRange : !selected) || (phase === "exercises" ? currentExValidated : exerciseValidated) || grammarChecking}
+                  disabled={(phase === "writing" ? false : phase === "form" ? false : !selected) || (phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}
                   aria-label="Valider"
@@ -826,7 +1000,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               style={{ background: ACCENT }}
             >
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
+              {isLastStep ? "Terminer âœ“" : "Suivant â†’"}
             </button>
           </div>
         </div>

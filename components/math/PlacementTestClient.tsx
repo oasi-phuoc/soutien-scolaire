@@ -575,7 +575,7 @@ export function PlacementTestClient() {
       <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
         <div className="space-y-6">
           <header className="space-y-2" lang={introLang} dir={introDir}>
-            <p className="text-xs font-medium uppercase tracking-wide text-amber-600">{introText.subject}</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">{introText.subject}</p>
             <div className="flex items-center gap-2">
               <button
                 key="result-row"
@@ -595,23 +595,23 @@ export function PlacementTestClient() {
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
               <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
                   <span><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} {introText.exercisesLabel}</strong> {introText.coverage}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
                   <span><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
                   <span>{introText.validateLine}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
                   <span>{introText.navigateLine}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
                   <span>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} {introText.points}</strong></span>
                 </li>
               </ul>
@@ -621,7 +621,7 @@ export function PlacementTestClient() {
           <button
             type="button"
             onClick={startTest}
-            className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            className="w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             {introText.start}
           </button>

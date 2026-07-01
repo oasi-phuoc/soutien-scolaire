@@ -31,7 +31,7 @@ function lessonCodeFromId(lessonId: string): string {
   return "PO.1";
 }
 
-// ——— Web Speech API helpers ———
+// â€”â€”â€” Web Speech API helpers â€”â€”â€”
 
 type SpeechRecognitionInstance = {
   lang: string;
@@ -51,7 +51,7 @@ function getSpeechRecognition(): (new () => SpeechRecognitionInstance) | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
 
-const FRENCH_QUESTION_START = /^(?:qui|que|qu['’]est-ce (?:que|qui)|quoi|ou|où|quand|comment|pourquoi|combien|quel(?:le)?s?|est-ce que|(?:avez|etes|êtes|pouvez|voulez|savez|allez|devez)-vous|(?:as|es|peux|veux|sais|vas|dois)-tu|(?:a|est|peut|veut|sait|va|doit)-(?:il|elle|on)|dois-je|puis-je)\b/i;
+const FRENCH_QUESTION_START = /^(?:qui|que|qu['â€™]est-ce (?:que|qui)|quoi|ou|oÃ¹|quand|comment|pourquoi|combien|quel(?:le)?s?|est-ce que|(?:avez|etes|Ãªtes|pouvez|voulez|savez|allez|devez)-vous|(?:as|es|peux|veux|sais|vas|dois)-tu|(?:a|est|peut|veut|sait|va|doit)-(?:il|elle|on)|dois-je|puis-je)\b/i;
 
 function normalizeFrenchTranscript(raw: string): string {
   const cleaned = raw
@@ -62,14 +62,14 @@ function normalizeFrenchTranscript(raw: string): string {
 
   if (!cleaned) return "";
 
-  const capitalized = cleaned.replace(/[A-Za-zÀ-ÖØ-öø-ÿ]/, (letter) => letter.toUpperCase());
-  if (/[.!?…]$/.test(capitalized)) return capitalized;
+  const capitalized = cleaned.replace(/\p{L}/u, (letter) => letter.toUpperCase());
+  if (/[.!?â€¦]$/.test(capitalized)) return capitalized;
 
   return `${capitalized}${FRENCH_QUESTION_START.test(capitalized) ? "?" : "."}`;
 }
 
 function ensureQuestionMark(text: string): string {
-  const trimmed = text.trim().replace(/[.!?…]+$/, "");
+  const trimmed = text.trim().replace(/[.!?â€¦]+$/, "");
   return trimmed ? `${trimmed}?` : "";
 }
 
@@ -122,9 +122,9 @@ function useSpeechRecognition(onTranscript: (text: string) => void) {
   return { isListening, supported, startListening, stopListening };
 }
 
-// ——— Grammar check ———
+// â€”â€”â€” Grammar check â€”â€”â€”
 
-// ——— Mic button (hold-to-speak) ———
+// â€”â€”â€” Mic button (hold-to-speak) â€”â€”â€”
 
 function MicButton({
   isListening,
@@ -141,7 +141,7 @@ function MicButton({
 }) {
   if (!supported) {
     return (
-      <p className="text-xs text-amber-600">Microphone non supporté dans ce navigateur. Utilisez Chrome ou Edge.</p>
+      <p className="text-xs text-amber-600">Microphone non supportÃ© dans ce navigateur. Utilisez Chrome ou Edge.</p>
     );
   }
   return (
@@ -156,7 +156,7 @@ function MicButton({
           isListening ? "animate-pulse scale-95" : "hover:opacity-90"
         }`}
         style={{ background: isListening ? "#dc2626" : ACCENT }}
-        aria-label={isListening ? "Relâchez pour arrêter" : "Maintenez pour parler"}
+        aria-label={isListening ? "RelÃ¢chez pour arrÃªter" : "Maintenez pour parler"}
       >
         <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" className="text-white" aria-hidden>
           <rect x="9" y="2" width="6" height="12" rx="3" />
@@ -165,13 +165,13 @@ function MicButton({
         </svg>
       </button>
       <p className="text-xs font-medium text-[var(--color-text-secondary)]">
-        {isListening ? "Relâchez pour arrêter" : "Maintenez pour parler"}
+        {isListening ? "RelÃ¢chez pour arrÃªter" : "Maintenez pour parler"}
       </p>
     </div>
   );
 }
 
-// ——— Compact mic button for task 1 items ———
+// â€”â€”â€” Compact mic button for task 1 items â€”â€”â€”
 
 function ThemeMicButton({
   isListening,
@@ -198,7 +198,7 @@ function ThemeMicButton({
         isListening ? "animate-pulse scale-95" : "hover:opacity-90"
       }`}
       style={{ background: isListening ? "#dc2626" : ACCENT }}
-      aria-label={isListening ? "Relâchez pour arrêter" : "Maintenez pour parler"}
+      aria-label={isListening ? "RelÃ¢chez pour arrÃªter" : "Maintenez pour parler"}
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-white" aria-hidden>
         <rect x="9" y="2" width="6" height="12" rx="3" />
@@ -209,13 +209,13 @@ function ThemeMicButton({
   );
 }
 
-// ——— Speak button (like lecture) ———
+// â€”â€”â€” Speak button (like lecture) â€”â€”â€”
 
 function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; onLight?: boolean }) {
   return (
     <button
       type="button"
-      aria-label="Écouter"
+      aria-label="Ã‰couter"
       onClick={() => speak(text)}
       className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} text-white`}
       style={onLight ? { background: "rgba(255,255,255,0.25)" } : { background: ACCENT }}
@@ -228,23 +228,23 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
   );
 }
 
-// ——— Voice message bubble (WhatsApp-style for app prompts in task 3) ———
+// â€”â€”â€” Voice message bubble (WhatsApp-style for app prompts in task 3) â€”â€”â€”
 
 const IMAGE_GUIDE_QUESTIONS = [
   "Qu'est-ce que vous voyez sur l'image ?",
-  "Où sont les personnes ?",
+  "OÃ¹ sont les personnes ?",
   "Que font les personnes ?",
   "Comment sont les personnes ?",
   "De quoi parlent les personnes ?",
-  "Qu'est-ce qu'il y a en arrière-plan ?",
-  "Quelle est l'ambiance générale de l'image ?",
-  "Quelle est votre impression sur cette scène ?",
+  "Qu'est-ce qu'il y a en arriÃ¨re-plan ?",
+  "Quelle est l'ambiance gÃ©nÃ©rale de l'image ?",
+  "Quelle est votre impression sur cette scÃ¨ne ?",
 ];
 
 const DIRECTED_INTERVIEW_BASE = [
   "Quel est votre nom ?",
-  "Quel est votre prénom ?",
-  "Où habitez-vous ?",
+  "Quel est votre prÃ©nom ?",
+  "OÃ¹ habitez-vous ?",
   "Quelles langues parlez-vous ?",
   "Qu'avez-vous fait ce week-end ?",
 ];
@@ -256,31 +256,31 @@ const DIRECTED_INTERVIEW_GROUPS = [
     "Combien de fois par semaine faites-vous ce sport ?",
   ],
   [
-    "Quel est votre plat préféré ?",
+    "Quel est votre plat prÃ©fÃ©rÃ© ?",
     "De quoi est-il fait ?",
-    "Savez-vous le préparer ?",
+    "Savez-vous le prÃ©parer ?",
   ],
   [
-    "Quel genre de films ou de séries aimez-vous regarder ?",
+    "Quel genre de films ou de sÃ©ries aimez-vous regarder ?",
     "Pourquoi aimez-vous ce genre ?",
-    "Quel est votre film ou votre série préféré ?",
+    "Quel est votre film ou votre sÃ©rie prÃ©fÃ©rÃ© ?",
   ],
   [
     "Qui fait les courses chez vous ?",
     "Aimez-vous faire les courses et pourquoi ?",
-    "Où allez-vous faire les courses et pourquoi ?",
+    "OÃ¹ allez-vous faire les courses et pourquoi ?",
   ],
   [
     "Quel moyen de transport utilisez-vous le plus ?",
-    "Aimez-vous vous déplacer avec ce moyen de transport et pourquoi ?",
+    "Aimez-vous vous dÃ©placer avec ce moyen de transport et pourquoi ?",
     "Quel moyen de transport n'aimez-vous pas et pourquoi ?",
   ],
 ];
 
 
-// ——— Guide question bubble (audio-only, for task 2 image description) ———
+// â€”â€”â€” Guide question bubble (audio-only, for task 2 image description) â€”â€”â€”
 
-// ——— Dialogue bubble (for past lines) ———
+// â€”â€”â€” Dialogue bubble (for past lines) â€”â€”â€”
 
 function DialogueBubble({ line }: { line: OralDialogueLine }) {
   const isApp = line.role === "app";
@@ -306,9 +306,9 @@ function DialogueBubble({ line }: { line: OralDialogueLine }) {
   );
 }
 
-// ——— Grammar corrections panel ———
+// â€”â€”â€” Grammar corrections panel â€”â€”â€”
 
-// ——— Main component ———
+// â€”â€”â€” Main component â€”â€”â€”
 
 export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
@@ -324,6 +324,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
+  const [tipsOpen, setTipsOpen] = useState(false);
 
   // Task 1: questions on 3 themes (all shown simultaneously)
   const [task1Transcripts, setTask1Transcripts] = useState<string[]>(["", "", ""]);
@@ -373,7 +374,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     void getExpressionTeachersAction().then(setTeachers);
   }, []);
 
-  // ——— Speech recognition per phase ———
+  // â€”â€”â€” Speech recognition per phase â€”â€”â€”
 
   const onT0 = useCallback((t: string) => {
     setTask1Transcripts((prev) => { const n = [...prev]; n[0] = lessonId === "PO-1" ? ensureQuestionMark(t) : t; return n; });
@@ -458,7 +459,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     return () => window.clearInterval(timer);
   }, [phase, startedAt]);
 
-  // ——— Step index for segmented progress bar ———
+  // â€”â€”â€” Step index for segmented progress bar â€”â€”â€”
 
   const stepIdx =
     phase === "task1" ? 0 :
@@ -469,7 +470,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const totalSteps = 5;
   const remainingMs = startedAt ? 15 * 60 * 1000 - (now - startedAt) : 15 * 60 * 1000;
 
-  // ——— Task 1: confirm all 3 theme questions at once ———
+  // â€”â€”â€” Task 1: confirm all 3 theme questions at once â€”â€”â€”
 
   function confirmTask1() {
     const lines: OralDialogueLine[] = [];
@@ -484,7 +485,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setTask1Done(true);
   }
 
-  // ——— Task 2: directed interview (all questions at once) ———
+  // â€”â€”â€” Task 2: directed interview (all questions at once) â€”â€”â€”
 
   function confirmInterview() {
     const lines: OralDialogueLine[] = [];
@@ -509,12 +510,12 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       { role: "app", text: "D?crivez cette image." },
       ...(task2Phrases.length > 0
         ? task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase }))
-        : [{ role: "student" as const, text: "(pas de rÃ©ponse)" }]),
+        : [{ role: "student" as const, text: "(pas de rÃƒÂ©ponse)" }]),
     ]);
     setTask2Done(true);
   }
 
-  // ——— Task 4: dialogue responses (all at once) ———
+  // â€”â€”â€” Task 4: dialogue responses (all at once) â€”â€”â€”
 
   function confirmTask4() {
     const lines: OralDialogueLine[] = [];
@@ -522,14 +523,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       const text = (task4Transcripts[i] ?? "").trim();
       lines.push(
         { role: "app", text: situation.dialoguePrompts[i]! },
-        { role: "student", text: text || "(pas de réponse)" },
+        { role: "student", text: text || "(pas de rÃ©ponse)" },
       );
     }
     setTask4Lines(lines);
     setTask4Done(true);
   }
 
-  // ——— Task 5: argumentation (multi-phrase) ———
+  // â€”â€”â€” Task 5: argumentation (multi-phrase) â€”â€”â€”
 
   function addTask5Phrase() {
     if (!argumentationTranscript.trim() || listening5) return;
@@ -540,7 +541,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   function validateTask5() {
     const lines: OralDialogueLine[] = [{ role: "app", text: argumentationTopic.prompt }];
     if (task5Phrases.length === 0) {
-      lines.push({ role: "student", text: "(pas de rÃ©ponse)" });
+      lines.push({ role: "student", text: "(pas de rÃƒÂ©ponse)" });
     } else {
       for (const phrase of task5Phrases) {
         lines.push({ role: "student", text: phrase });
@@ -550,13 +551,13 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setTask5Done(true);
   }
 
-  // ——— All grammar matches for review ———
+  // â€”â€”â€” All grammar matches for review â€”â€”â€”
 
   const allGrammar: [] = [];
 
   const fullDialogue = [...task1Lines, ...interviewLines, ...task2Lines, ...task4Lines, ...task5Lines];
 
-  // ——— Save progress + finish ———
+  // â€”â€”â€” Save progress + finish â€”â€”â€”
 
   function handleFinish() {
     try {
@@ -583,16 +584,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         dialogue: fullDialogue,
         aiFeedback: allGrammar,
       });
-      setSendMessage(result.ok ? "Dialogue envoyé au professeur." : (result.reason ?? "Envoi impossible."));
+      setSendMessage(result.ok ? "Dialogue envoyÃ© au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
     });
   }
 
-  // ——— Nav bar logic ———
+  // â€”â€”â€” Nav bar logic â€”â€”â€”
 
   function goBack() {
     if (phase === "intro") router.push("/francais?tab=communication");
-    else if (phase === "task1") setPhase("intro");
+    else if (phase === "task1") setPhase("task5");
     else if (phase === "task2") setPhase("task1");
     else if (phase === "task3") setPhase("task2");
     else if (phase === "task4") setPhase("task3");
@@ -639,83 +640,20 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const isLastPhase = phase === "review";
 
-  // ——— Level labels ———
+  // â€”â€”â€” Level labels â€”â€”â€”
 
-  const levelLabel = level === "base" ? "Base" : level === "moyen" ? "Moyen" : "Avancé";
+  const levelLabel = level === "base" ? "Base" : level === "moyen" ? "Moyen" : "AvancÃ©";
 
-  // ——— Theory content per level ———
-
-  const theoryParts: { title: string; body: string }[] =
-    level === "base"
-      ? [
-          {
-            title: "Partie 1 — Questions thématiques",
-            body: "Trois mots s'affichent à l'écran. Posez une question simple sur chacun, puis validez.",
-          },
-          {
-            title: "Partie 2 — Entretien dirigé",
-            body: "Des questions vous sont posées. Écoutez les questions, puis répondez oralement en maintenant le micro.",
-          },
-          {
-            title: "Partie 3 — Description d'image",
-            body: "Une image apparaît. Décrivez l'image avec des phrases en maintenant le micro. Ajoutez des phrases pour compléter votre description. Validez quand vous avez terminé.",
-          },
-          {
-            title: "Partie 4 — Dialogue",
-            body: "Un interlocuteur vous pose des questions. Écoutez l'audio, puis répondez. Appuyez sur + pour afficher le texte si vous ne comprenez pas bien.",
-          },
-        ]
-      : level === "moyen"
-      ? [
-          {
-            title: "Partie 1 — Questions thématiques",
-            body: "Trois mots s'affichent. Formulez une question ouverte et développée sur chacun. Évitez les questions fermées (oui/non).",
-          },
-          {
-            title: "Partie 2 — Entretien dirigé",
-            body: "Répondez aux questions posées oralement. Développez vos réponses au-delà du minimum.",
-          },
-          {
-            title: "Partie 3 — Description d'image",
-            body: "Décrivez l'image avec des détails : personnes, lieu, actions et ambiance. Ajoutez phrase par phrase, puis validez.",
-          },
-          {
-            title: "Partie 4 — Dialogue",
-            body: "Participez à un dialogue sur un sujet de la vie quotidienne. Développez vos réponses et utilisez + pour lire le texte si nécessaire.",
-          },
-        ]
-      : [
-          {
-            title: "Partie 1 — Questions thématiques",
-            body: "Formulez une question argumentée et nuancée sur chaque thème proposé.",
-          },
-          {
-            title: "Partie 2 — Entretien dirigé",
-            body: "Répondez de manière développée et structurée aux questions posées.",
-          },
-          {
-            title: "Partie 3 — Description et interprétation",
-            body: "Décrivez l'image en détail et interprétez son contexte ou ses symboles éventuels.",
-          },
-          {
-            title: "Partie 4 — Dialogue argumenté",
-            body: "Développez vos idées avec des arguments et des exemples. Exprimez votre opinion et réagissez aux questions.",
-          },
-        ];
-
-  const argumentationTheory = {
-    title: "Partie 5 - Argumentation",
-    body: level === "base"
-      ? "Ecoutez ou lisez la question. Donnez votre avis avec une phrase simple et une raison."
-      : level === "moyen"
-      ? "Donnez votre opinion sur une question de societe ou de vie quotidienne. Expliquez votre choix avec plusieurs raisons."
-      : "Prenez position sur un sujet plus abstrait. Structurez votre reponse avec une opinion, deux arguments et un exemple.",
-  };
-  const displayedTheoryParts = [...theoryParts, argumentationTheory];
+  const introRows = [
+    ["1", "Questions thÃ©matiques", "3 pts"],
+    ["2", "Entretien dirigÃ©", "4 pts"],
+    ["3", "Description d'image", "5 pts"],
+    ["4", "Dialogue", "6 pts"],
+    ["5", "Argumentation", "7 pts"],
+  ];
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
-      {/* Header */}
       <header className="mb-4 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
           Français · Production orale · {levelLabel}
@@ -761,7 +699,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       </header>
 
-      {/* Segmented progress bar — hidden on recap page */}
       {phase !== "intro" && phase !== "review" && (
         <div className="mb-6 space-y-2">
           <div className="flex items-center justify-between text-sm font-semibold">
@@ -774,48 +711,69 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           </div>
           <div className="flex gap-1">
             {Array.from({ length: totalSteps }).map((_, i) => (
-              <div
+              <button
                 key={i}
+                type="button"
+                onClick={() => setPhase((["task1", "task2", "task3", "task4", "task5"] as Phase[])[i]!)}
                 className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
                 style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
+                aria-label={`Aller à l'exercice ${i + 1}`}
               />
             ))}
           </div>
         </div>
       )}
 
-      {/* ——— INTRO / THEORY ——— */}
+      {/* INTRO */}
       {phase === "intro" && (
-        <div className="flex-1 space-y-4">
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-            Comment se déroule la production orale ?
-          </h2>
+        <div className="flex-1 space-y-6">
+          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 shadow-sm">
+            <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
+            <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">5 exercices</strong> de production orale</span></li>
+              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">15 minutes</strong> pour compléter l&apos;évaluation</span></li>
+              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Validez chaque exercice individuellement</span></li>
+              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Vous pouvez naviguer librement en cliquant sur la barre de progression en haut.</span></li>
+              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
+            </ul>
 
-          {/* The 3 parts detail */}
-          <div className="space-y-2.5">
-            {displayedTheoryParts.map((part, i) => (
-              <div
-                key={i}
-                className="rounded-[var(--radius-md)] px-4 py-3"
-                style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
-              >
-                <div className="mb-1.5 flex items-center gap-2">
-                  <span
-                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
-                    style={{ background: ACCENT }}
-                  >
-                    {i + 1}
-                  </span>
-                  <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                    {part.title}
-                  </p>
+            <div className="mt-5 space-y-2 border-t border-[var(--color-border)] pt-4">
+              {introRows.map(([num, title, pts]) => (
+                <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
+                  <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
+                  <span>{title}</span>
+                  <span className="font-bold" style={{ color: ACCENT }}>{pts}</span>
                 </div>
-                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  {part.body}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setTipsOpen((v) => !v)}
+              className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]"
+            >
+              <span>Conseils pour réussir</span>
+              <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
+            </button>
+            {tipsOpen && (
+              <div className="space-y-2 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                <p>Parlez clairement et faites des phrases complètes, même si elles sont simples.</p>
+                <p>Répondez à la question, puis ajoutez une raison ou un exemple.</p>
+                <p>Si vous ne trouvez pas un mot, expliquez avec d&apos;autres mots.</p>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={goNext}
+            className="min-h-12 w-full rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90"
+            style={{ background: ACCENT }}
+          >
+            Commencer l&apos;évaluation
+          </button>
 
           {!supported && (
             <div className="rounded-[var(--radius-md)] border border-red-300 bg-red-50 px-3 py-2.5">
@@ -826,8 +784,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           )}
         </div>
       )}
-
-      {/* ——— TASK 1: Questions on themes ——— */}
+      {/* â€”â€”â€” TASK 1: Questions on themes â€”â€”â€” */}
       {phase === "task1" && (() => {
         const listenersT = [listenT0, listenT1, listenT2];
         const startersT = [startT0, startT1, startT2];
@@ -836,7 +793,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           <div className="flex-1 space-y-4">
             <div>
               <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-                Partie 1 — Questions thématiques
+                Partie 1 â€” Questions thÃ©matiques
               </h2>
             </div>
 
@@ -874,7 +831,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                       <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                     ) : !task1Done ? (
                       <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
-                        {(supported && !micBlocked) ? "Maintenez le micro pour enregistrer…" : ""}
+                        {(supported && !micBlocked) ? "Maintenez le micro pour enregistrerâ€¦" : ""}
                       </p>
                     ) : null}
                     {!task1Done && (!supported || micBlocked) && (
@@ -885,7 +842,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                           const val = e.target.value;
                           setTask1Transcripts((prev) => { const n = [...prev]; n[i] = val; return n; });
                         }}
-                        placeholder="Tapez votre question ici…"
+                        placeholder="Tapez votre question iciâ€¦"
                         className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                       />
                     )}
@@ -896,19 +853,19 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
             {task1Done && (
               <p className="text-center text-sm text-[var(--color-text-secondary)]">
-                Questions enregistrées. Appuyez sur <strong>Suivant</strong> pour continuer.
+                Questions enregistrÃ©es. Appuyez sur <strong>Suivant</strong> pour continuer.
               </p>
             )}
           </div>
         );
       })()}
 
-      {/* ——— TASK 2: Directed interview ——— */}
+      {/* â€”â€”â€” TASK 2: Directed interview â€”â€”â€” */}
       {phase === "task2" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-              Partie 2 — Entretien dirigé
+              Partie 2 â€” Entretien dirigÃ©
             </h2>
           </div>
 
@@ -949,7 +906,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                       ) : !interviewDone ? (
                         <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
-                          {(supported && !micBlocked) ? "Maintenez le micro pour enregistrer…" : ""}
+                          {(supported && !micBlocked) ? "Maintenez le micro pour enregistrerâ€¦" : ""}
                         </p>
                       ) : null}
                       {!interviewDone && (!supported || micBlocked) && (
@@ -960,7 +917,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                             const val = e.target.value;
                             setInterviewTranscripts((prev) => { const n = [...prev]; n[i] = val; return n; });
                           }}
-                          placeholder="Votre réponse…"
+                          placeholder="Votre rÃ©ponseâ€¦"
                           className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                         />
                       )}
@@ -973,20 +930,20 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {interviewDone && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Entretien terminé. Appuyez sur <strong>Suivant</strong> pour continuer.
+              Entretien terminÃ©. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>
       )}
 
-      {/* ——— TASK 3: Image description ——— */}
+      {/* â€”â€”â€” TASK 3: Image description â€”â€”â€” */}
       {phase === "task3" && (
         <div className="flex-1 space-y-4">
           <div>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-                  Partie 3 — Description d&apos;image
+                  Partie 3 â€” Description d&apos;image
                 </h2>
                 <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
                   Enregistrez autant de phrases que vous voulez, puis validez.
@@ -1033,7 +990,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   type="text"
                   value={currentTranscript}
                   onChange={(event) => setCurrentTranscript(event.target.value)}
-                  placeholder="Tapez une phrase sur l'image…"
+                  placeholder="Tapez une phrase sur l'imageâ€¦"
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
               )}
@@ -1057,7 +1014,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           )}
 
-          {/* Astuce modal — centered overlay */}
+          {/* Astuce modal â€” centered overlay */}
           {imageHelpOpen && (
             <div
               className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -1094,7 +1051,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 </button>
 
                 <p className="mb-4 pr-6 text-sm font-bold" style={{ color: ACCENT }}>
-                  Astuces — Questions guide
+                  Astuces â€” Questions guide
                 </p>
 
                 {/* 2-row table: number / audio (clicking audio shows transcript) */}
@@ -1141,7 +1098,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                               }}
                               className="mx-auto flex h-7 w-7 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95"
                               style={{ background: isPlaying ? "#dc2626" : ACCENT }}
-                              aria-label={isPlaying ? "Arrêter" : "Écouter"}
+                              aria-label={isPlaying ? "ArrÃªter" : "Ã‰couter"}
                             >
                               {isPlaying ? (
                                 <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -1174,7 +1131,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {task2Phrases.length > 0 && (
             <div className="space-y-1.5">
               <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                {task2Done ? "Vos phrases :" : `${task2Phrases.length} phrase${task2Phrases.length > 1 ? "s" : ""} enregistrée${task2Phrases.length > 1 ? "s" : ""} :`}
+                {task2Done ? "Vos phrases :" : `${task2Phrases.length} phrase${task2Phrases.length > 1 ? "s" : ""} enregistrÃ©e${task2Phrases.length > 1 ? "s" : ""} :`}
               </p>
               {task2Phrases.map((phrase, i) => (
                 <div
@@ -1196,18 +1153,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {task2Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Description enregistrée. Appuyez sur <strong>Suivant</strong> pour continuer.
+              Description enregistrÃ©e. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>
       )}
 
-      {/* ——— TASK 4: Dialogue (all questions at once) ——— */}
+      {/* â€”â€”â€” TASK 4: Dialogue (all questions at once) â€”â€”â€” */}
       {phase === "task4" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-              Partie 4 — Dialogue
+              Partie 4 â€” Dialogue
             </h2>
           </div>
 
@@ -1259,7 +1216,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                       {transcript ? (
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
                       ) : (supported && !micBlocked) ? (
-                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">Maintenez le micro pour enregistrer…</p>
+                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">Maintenez le micro pour enregistrerâ€¦</p>
                       ) : null}
                       {(!supported || micBlocked) && (
                         <input
@@ -1269,7 +1226,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                             const val = e.target.value;
                             setTask4Transcripts((prev) => { const n = [...prev]; n[i] = val; return n; });
                           }}
-                          placeholder="Votre réponse…"
+                          placeholder="Votre rÃ©ponseâ€¦"
                           className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                         />
                       )}
@@ -1288,17 +1245,17 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {task4Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Dialogue terminé. Appuyez sur <strong>Suivant</strong> pour continuer.
+              Dialogue terminÃ©. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>
       )}
-      {/* ——— TASK 5: Argumentation (multi-phrase like Task 3) ——— */}
+      {/* â€”â€”â€” TASK 5: Argumentation (multi-phrase like Task 3) â€”â€”â€” */}
       {phase === "task5" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-              Partie 5 — Argumentation
+              Partie 5 â€” Argumentation
             </h2>
             <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
               Enregistrez autant de phrases que vous voulez, puis validez.
@@ -1309,7 +1266,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             <div className="flex items-start gap-3">
               <div className="flex-1">
                 <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                  Thème : {argumentationTopic.theme}
+                  ThÃ¨me : {argumentationTopic.theme}
                 </p>
                 <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">
                   {argumentationTopic.prompt}
@@ -1326,7 +1283,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   type="text"
                   value={argumentationTranscript}
                   onChange={(e) => setArgumentationTranscript(e.target.value)}
-                  placeholder="Tapez une phrase…"
+                  placeholder="Tapez une phraseâ€¦"
                   className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                 />
               )}
@@ -1359,7 +1316,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {task5Phrases.length > 0 && (
             <div className="space-y-1.5">
               <p className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                {task5Done ? "Votre argumentation :" : `${task5Phrases.length} phrase${task5Phrases.length > 1 ? "s" : ""} enregistrée${task5Phrases.length > 1 ? "s" : ""} :`}
+                {task5Done ? "Votre argumentation :" : `${task5Phrases.length} phrase${task5Phrases.length > 1 ? "s" : ""} enregistrÃ©e${task5Phrases.length > 1 ? "s" : ""} :`}
               </p>
               {task5Phrases.map((phrase, i) => (
                 <div
@@ -1381,19 +1338,19 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {task5Done && (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
-              Argumentation enregistrée. Appuyez sur <strong>Suivant</strong> pour continuer.
+              Argumentation enregistrÃ©e. Appuyez sur <strong>Suivant</strong> pour continuer.
             </p>
           )}
         </div>
       )}
 
 
-      {/* ——— REVIEW ——— */}
+      {/* â€”â€”â€” REVIEW â€”â€”â€” */}
       {phase === "review" && (
         <div className="flex-1 space-y-5">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Récapitulatif
+              RÃ©capitulatif
             </p>
             <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">
               Votre production orale
@@ -1403,10 +1360,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           {/* Dialogue split by section */}
           <div className="space-y-5">
             {[
-              { num: 1, label: "Partie 1 — Questions thématiques", lines: task1Lines },
-              { num: 2, label: "Partie 2 — Entretien dirigé",       lines: interviewLines },
-              { num: 3, label: "Partie 3 — Description d'image",    lines: task2Lines },
-              { num: 4, label: "Partie 4 — Dialogue",               lines: task4Lines },
+              { num: 1, label: "Partie 1 â€” Questions thÃ©matiques", lines: task1Lines },
+              { num: 2, label: "Partie 2 â€” Entretien dirigÃ©",       lines: interviewLines },
+              { num: 3, label: "Partie 3 â€” Description d'image",    lines: task2Lines },
+              { num: 4, label: "Partie 4 â€” Dialogue",               lines: task4Lines },
               { num: 5, label: "Partie 5 - Argumentation",           lines: task5Lines },
             ].filter(({ lines }) => lines.length > 0).map(({ num, label, lines }) => (
               <section key={num}>
@@ -1432,7 +1389,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {/* Send to teacher */}
           <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/5 p-4">
-            <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
+            <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer Ã  un professeur</h3>
             {teachers.length ? (
               <div className="mt-3 flex flex-col gap-3 sm:flex-row">
                 <select
@@ -1454,7 +1411,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   disabled={!teacherId || isSending || sent}
                   className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-comm)] px-5 text-sm font-bold text-white disabled:opacity-35"
                 >
-                  {sent ? "Envoyé" : isSending ? "Envoi…" : "Envoyer"}
+                  {sent ? "EnvoyÃ©" : isSending ? "Envoiâ€¦" : "Envoyer"}
                 </button>
               </div>
             ) : (
@@ -1471,7 +1428,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* Fixed bottom nav — picked up by MainNav */}
+      {/* Fixed bottom nav â€” picked up by MainNav */}
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
@@ -1481,7 +1438,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               onClick={goBack}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
             >
-              ← Retour
+              â† Retour
             </button>
 
             {/* Validate (task phases only) */}
@@ -1516,7 +1473,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               style={{ background: ACCENT }}
             >
-              {isLastPhase ? "Terminer ✓" : "Suivant →"}
+              {isLastPhase ? "Terminer âœ“" : "Suivant â†’"}
             </button>
           </div>
         </div>
