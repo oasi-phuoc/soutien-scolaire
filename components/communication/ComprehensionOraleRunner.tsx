@@ -183,7 +183,7 @@ function ProgressBar({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-sm font-semibold" style={{ color: ACCENT }}>
-        <span>{formatPoints(points)} / 25 pts</span>
+        <span>{formatPoints(points)} / 25 points</span>
         <span className="rounded-full bg-[var(--color-accent-comm)]/10 px-3 py-1">{formatTimer(secondsLeft)}</span>
         <span className="text-[var(--color-text-secondary)]">{remaining.length} exercices restants</span>
       </div>
@@ -220,35 +220,50 @@ function AudioListenButton({
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [error, setError] = useState(false);
 
   function playAudio() {
-    const player = new Audio(audio);
-    audioRef.current = player;
+    const player = audioRef.current;
+    if (!player || used || playing) return;
+
+    setError(false);
     setPlaying(true);
-    player.onended = () => {
-      setPlaying(false);
-      onComplete();
-    };
-    player.onerror = () => {
-      setPlaying(false);
-    };
+    onComplete();
+    player.currentTime = 0;
     void player.play().catch(() => {
       setPlaying(false);
+      setError(true);
     });
   }
 
+  if (used && !playing) return null;
+
   return (
-    <button
-      type="button"
-      disabled={used || playing}
-      onClick={playAudio}
-      className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
-    >
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-        <path d="M8 5v14l11-7z" />
-      </svg>
-      {playing ? "Lecture..." : label}
-    </button>
+    <div className="flex-1">
+      <button
+        type="button"
+        disabled={playing}
+        onClick={playAudio}
+        className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
+      >
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        {playing ? "Lecture..." : label}
+      </button>
+      <audio
+        ref={audioRef}
+        src={audio}
+        preload="auto"
+        onEnded={() => setPlaying(false)}
+        onError={() => {
+          setPlaying(false);
+          setError(true);
+        }}
+        className="hidden"
+      />
+      {error && <p className="mt-1 text-[11px] font-semibold text-red-500">Audio indisponible.</p>}
+    </div>
   );
 }
 
@@ -267,45 +282,52 @@ function QuestionBlock({
   usedAudio: Record<string, boolean>;
   toggleAudioUse: (key: string) => void;
 }) {
-  const [openTranscript, setOpenTranscript] = useState<string | null>(null);
+  const [showTranscripts, setShowTranscripts] = useState(false);
+  const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
 
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
-        <p className="text-xs font-bold uppercase tracking-wider" style={{ color: ACCENT }}>
-          Activité {part.audioGroup.activity}
-        </p>
-        <p className="mt-1 pr-11 text-sm text-[var(--color-text-secondary)]">{part.context}</p>
-        <div className="mt-4 space-y-3">
-          {part.audioGroup.items.map((item, index) => {
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+              Écoutez l&apos;enregistrement et répondez aux questions.
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
+              {part.points} points
+            </span>
+            {hasTranscript && (
+              <button
+                type="button"
+                onClick={() => setShowTranscripts((value) => !value)}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--color-text-primary)] shadow-sm"
+                aria-label="Afficher ou masquer la transcription"
+                title="Aide : transcription"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                  <path d="M8.5 14a6 6 0 1 1 7 0c-.8.7-1.5 1.7-1.5 3h-4c0-1.3-.7-2.3-1.5-3z" />
+                </svg>
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="space-y-3">
+          {part.audioGroup.items.map((item) => {
             const firstListenKey = `${part.id}-${item.id}-listen-1`;
             const secondListenKey = `${part.id}-${item.id}-listen-2`;
             return (
-              <div key={item.id} className="relative rounded-[var(--radius-md)] border border-slate-200 bg-white p-3">
-                {item.transcript && (
-                  <button
-                    type="button"
-                    onClick={() => setOpenTranscript((value) => value === item.id ? null : item.id)}
-                    className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--color-text-primary)] shadow-sm"
-                    aria-label="Afficher ou masquer la transcription"
-                    title="Aide : transcription"
-                  >
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                      <path d="M9 18h6" />
-                      <path d="M10 22h4" />
-                      <path d="M8.5 14a6 6 0 1 1 7 0c-.8.7-1.5 1.7-1.5 3h-4c0-1.3-.7-2.3-1.5-3z" />
-                    </svg>
-                  </button>
-                )}
-                <p className="pr-10 text-xs font-semibold text-[var(--color-text-secondary)]">
-                  Audio {index + 1} · activité {item.activity}
-                </p>
-                <div className="mt-3 flex gap-3">
+              <div key={item.id} className="space-y-3">
+                <div className="flex gap-3">
                   <AudioListenButton label="Écoute 1" audio={item.audio} used={!!usedAudio[firstListenKey]} onComplete={() => toggleAudioUse(firstListenKey)} />
                   <AudioListenButton label="Écoute 2" audio={item.audio} used={!!usedAudio[secondListenKey]} onComplete={() => toggleAudioUse(secondListenKey)} />
                 </div>
-                {openTranscript === item.id && item.transcript && (
-                  <div className="mt-4 border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+                {showTranscripts && item.transcript && (
+                  <div className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
                     {item.transcript}
                   </div>
                 )}
@@ -462,7 +484,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             {partInfoFor(level).map((part, index) => (
               <div key={part.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-slate-200 bg-white px-4 py-3">
                 <span><strong>{index + 1}.</strong> {part.title}</span>
-                <span className="font-semibold" style={{ color: ACCENT }}>{part.points} pts</span>
+                <span className="font-semibold" style={{ color: ACCENT }}>{part.points} points</span>
               </div>
             ))}
           </div>
@@ -566,10 +588,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
         onSelect={selectPart}
       />
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{currentPart.title}</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">{currentPart.points} pts</span>
-        </div>
         <QuestionBlock
           part={currentPart}
           answers={savedAnswers}
