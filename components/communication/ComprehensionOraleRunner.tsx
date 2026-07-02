@@ -214,22 +214,8 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
   const [error, setError] = useState(false);
 
   function toggle() {
-    let player = audioRef.current;
-    if (!player) {
-      player = new Audio(audio);
-      player.preload = "none";
-      audioRef.current = player;
-      player.addEventListener("ended", () => setPlaying(false));
-      player.addEventListener("pause", () => setPlaying(false));
-      player.addEventListener("play", () => {
-        setError(false);
-        setPlaying(true);
-      });
-      player.addEventListener("error", () => {
-        setPlaying(false);
-        setError(true);
-      });
-    }
+    const player = audioRef.current;
+    if (!player) return;
 
     if (playing) {
       player.pause();
@@ -238,7 +224,7 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
       return;
     }
 
-    player.currentTime = 0;
+    setError(false);
     void player.play().catch(() => {
       setPlaying(false);
       setError(true);
@@ -247,6 +233,21 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
 
   return (
     <div>
+      <audio
+        ref={audioRef}
+        src={audio}
+        preload="none"
+        onPlay={() => {
+          setError(false);
+          setPlaying(true);
+        }}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+        onError={() => {
+          setPlaying(false);
+          setError(true);
+        }}
+      />
       <button
         type="button"
         onClick={toggle}
