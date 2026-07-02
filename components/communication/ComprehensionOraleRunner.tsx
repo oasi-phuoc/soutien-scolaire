@@ -6,6 +6,7 @@ import {
   randomCoGroup,
   type COAudioCategory,
   type COAudioGroup,
+  type COAudioItem,
   type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
@@ -208,82 +209,153 @@ function ProgressBar({
   );
 }
 
-function AudioPlayer({ audio, label }: { audio: string; label: string }) {
+const AUDIO_GAP_MS = 15_000;
+
+function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const timerRef = useRef<number | null>(null);
   const [playing, setPlaying] = useState(false);
-  const [error, setError] = useState(false);
+  const [waiting, setWaiting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [errorAudio, setErrorAudio] = useState<string | null>(null);
 
-  function toggle() {
+  function clearWait() {
+    if (timerRef.current !== null) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }
+
+  function stop() {
+    clearWait();
     const player = audioRef.current;
-    if (!player) return;
-
-    if (playing) {
+    if (player) {
       player.pause();
       player.currentTime = 0;
-      setPlaying(false);
+    }
+    setPlaying(false);
+    setWaiting(false);
+    setProgress(0);
+  }
+
+  function playAt(index: number) {
+    const item = items[index];
+    if (!item) {
+      stop();
+      setCurrentIndex(null);
       return;
     }
 
-    setError(false);
+    clearWait();
+    const player = new Audio(item.audio);
+    player.preload = "none";
+    audioRef.current = player;
+    setCurrentIndex(index);
+    setWaiting(false);
+    setProgress(0);
+    setErrorAudio(null);
+
+    player.addEventListener("play", () => setPlaying(true), { once: true });
+    player.addEventListener("timeupdate", () => {
+      if (!Number.isFinite(player.duration) || player.duration <= 0) {
+        setProgress(0);
+        return;
+      }
+      setProgress(Math.min(100, (player.currentTime / player.duration) * 100));
+    });
+    player.addEventListener("ended", () => {
+      setPlaying(false);
+      setProgress(100);
+      const nextIndex = index + 1;
+      if (nextIndex >= items.length) {
+        setCurrentIndex(null);
+        setProgress(0);
+        return;
+      }
+      setWaiting(true);
+      timerRef.current = window.setTimeout(() => playAt(nextIndex), AUDIO_GAP_MS);
+    }, { once: true });
+    player.addEventListener("error", () => {
+      setPlaying(false);
+      setWaiting(false);
+      setErrorAudio(item.audio);
+    }, { once: true });
+
     void player.play().catch(() => {
       setPlaying(false);
-      setError(true);
+      setWaiting(false);
+      setErrorAudio(item.audio);
     });
+  }
+
+  function toggle() {
+    if (playing || waiting) {
+      stop();
+      return;
+    }
+    playAt(0);
   }
 
   function restart() {
-    const player = audioRef.current;
-    if (!player) return;
-    setError(false);
-    player.currentTime = 0;
-    void player.play().catch(() => {
-      setPlaying(false);
-      setError(true);
-    });
+    stop();
+    playAt(0);
   }
+
+  useEffect(() => {
+    return () => {
+      clearWait();
+      const player = audioRef.current;
+      if (player) {
+        player.pause();
+        player.currentTime = 0;
+      }
+    };
+  }, [items]);
+
+  const currentItem = currentIndex !== null ? items[currentIndex] : null;
+  const label = items.length > 1 ? "Écouter la séquence" : "Écouter l'audio";
+  const activeLabel = waiting
+    ? "Pause de 15 secondes"
+    : currentItem
+      ? `Lecture ${currentItem.activity}`
+      : label;
 
   return (
     <div>
-      <audio
-        ref={audioRef}
-        src={audio}
-        preload="none"
-        onPlay={() => {
-          setError(false);
-          setPlaying(true);
-        }}
-        onPause={() => setPlaying(false)}
-        onEnded={() => setPlaying(false)}
-        onError={() => {
-          setPlaying(false);
-          setError(true);
-        }}
-      />
-      <div className="grid grid-cols-[1fr_auto] gap-2">
+      <div className="grid h-12 grid-cols-[44px_1fr_44px] items-center gap-2 rounded-full border border-[var(--color-border-default)] bg-white px-2 shadow-sm">
         <button
           type="button"
           onClick={toggle}
-          className="flex h-12 min-w-0 items-center justify-center gap-3 rounded-full border border-[var(--color-border-default)] bg-white px-5 text-sm font-bold text-[var(--color-text-primary)] shadow-sm transition-opacity hover:opacity-85 active:scale-[0.99]"
-          aria-label={playing ? `Arrêter ${label}` : `Écouter ${label}`}
+          className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85 active:scale-95"
+          style={{ background: ACCENT }}
+          aria-label={playing || waiting ? "Arrêter l'audio" : label}
         >
-          {playing ? (
+          {playing || waiting ? (
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <rect x="5" y="4" width="4" height="16" rx="1" />
               <rect x="15" y="4" width="4" height="16" rx="1" />
             </svg>
           ) : (
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <path d="M6 4l14 8-14 8V4z" />
-            </svg>
+            <path d="M6 4l14 8-14 8V4z" />
+          </svg>
           )}
-          <span className="truncate">{playing ? "Lecture en cours" : label}</span>
         </button>
+        <div className="min-w-0">
+          <p className="truncate text-xs font-bold text-[var(--color-text-primary)]">{activeLabel}</p>
+          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--color-border-default)]">
+            <div
+              className="h-full rounded-full transition-[width]"
+              style={{ width: `${waiting ? 100 : progress}%`, background: ACCENT }}
+            />
+          </div>
+        </div>
         <button
           type="button"
           onClick={restart}
-          className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-85 active:scale-95"
-          style={{ background: ACCENT }}
-          aria-label={`Recommencer ${label}`}
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)] active:scale-95"
+          aria-label="Recommencer l'audio"
           title="Recommencer"
         >
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
@@ -292,9 +364,14 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
           </svg>
         </button>
       </div>
-      {error && (
+      {items.length > 1 && (
+        <p className="mt-1 text-xs font-semibold text-[var(--color-text-secondary)]">
+          Les audios sont lus à la suite avec 15 secondes d&apos;attente entre chaque partie.
+        </p>
+      )}
+      {errorAudio && (
         <p className="mt-1 text-xs font-semibold text-red-600">
-          Audio indisponible : {audio}
+          Audio indisponible : {errorAudio}
         </p>
       )}
     </div>
@@ -348,18 +425,13 @@ function QuestionBlock({
           </div>
         </div>
         <div className="space-y-3">
-          {part.audioGroup.items.map((item) => {
-            return (
-              <div key={item.id} className="space-y-3">
-                <AudioPlayer audio={item.audio} label={part.audioGroup.items.length > 1 ? `Écouter ${item.activity}` : "Écouter l'audio"} />
-                {showTranscripts && item.transcript && (
-                  <div className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
-                    {item.transcript}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          <AudioSequencePlayer items={part.audioGroup.items} />
+          {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
+            <div key={item.id} className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+              {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
+              {item.transcript}
+            </div>
+          ) : null)}
         </div>
       </div>
 
