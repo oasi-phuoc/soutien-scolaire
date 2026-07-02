@@ -26,6 +26,7 @@ import {
 } from "@/lib/curriculum/content/communication/writing-prompts";
 import { OralProductionRunner } from "@/components/communication/OralProductionRunner";
 import { ComprehensionEcritRunner } from "@/components/communication/ComprehensionEcritRunner";
+import { ComprehensionOraleRunner } from "@/components/communication/ComprehensionOraleRunner";
 import {
   randomFormTemplates,
   type FormField,
@@ -611,6 +612,7 @@ export function CommunicationRunner({ lessonId }: { lessonId: string }) {
   if (lessonId === "E1-0" || lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
   if (lessonId.startsWith("PO-")) return <OralProductionRunner lessonId={lessonId} />;
   if (lessonId.startsWith("CE-")) return <ComprehensionEcritRunner lessonId={lessonId} />;
+  if (lessonId.startsWith("CO-") || lessonId.startsWith("comprehension-orale")) return <ComprehensionOraleRunner lessonId={lessonId} />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
 }
 

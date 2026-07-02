@@ -53,6 +53,17 @@ export const COMM_MODULES: CommunicationModule[] = [
     ],
   },
   {
+    id: "CO",
+    level: "CO",
+    title: "Compr\u00e9hension orale",
+    description: "",
+    submodules: [
+      { id: "CO-1", code: "CO.1", title: "Base", available: true, lessonId: "comprehension-orale-1" },
+      { id: "CO-2", code: "CO.2", title: "Moyen", available: true, lessonId: "comprehension-orale-2" },
+      { id: "CO-3", code: "CO.3", title: "Avanc\u00e9", available: true, lessonId: "comprehension-orale-3" },
+    ],
+  },
+  {
     id: "E1",
     level: "E1",
     title: "Expression orale - Base",
