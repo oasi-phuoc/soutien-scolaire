@@ -1,4 +1,5 @@
 export type WritingLevel = "base" | "moyen" | "avance";
+export type WritingKind = "short" | "long";
 
 export type WritingPrompt = {
   id: string;
@@ -667,7 +668,92 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
   },
 ];
 
-const PE2_PROMPTS: WritingPrompt[] = [...PE2_REPLY_PROMPTS, ...PE2_LONG_PROMPTS];
+const PE3_SHORT_PROMPTS: WritingPrompt[] = [
+  {
+    id: "pe3-short-reclamation-facture",
+    title: "Répondre à une facture contestée",
+    situation: "Vous recevez une facture de téléphone trop élevée et vous pensez qu'il y a une erreur.",
+    sourceMessage: {
+      from: "Service client",
+      subject: "Votre facture",
+      body: "Madame, Monsieur,\nVotre facture du mois est disponible dans votre espace client. Le montant à payer est de 146 francs. En cas de question, vous pouvez nous écrire.\nService client",
+    },
+    instruction: "Rédigez une réponse formelle pour demander une vérification de la facture.",
+    points: ["rappeler la facture reçue", "expliquer le problème", "demander une vérification", "demander une réponse écrite"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+  {
+    id: "pe3-short-annonce-logement",
+    title: "Répondre à une annonce de logement",
+    situation: "Vous avez trouvé une annonce pour un appartement qui correspond à votre recherche.",
+    sourceMessage: {
+      from: "Régie du Lac",
+      subject: "Appartement à louer",
+      body: "Bonjour,\nNous louons un appartement de 3 pièces près de la gare. Le loyer est de 1 250 francs charges comprises. Les visites auront lieu mardi et jeudi après-midi.\nRégie du Lac",
+    },
+    instruction: "Rédigez un courriel pour demander une visite et des informations complémentaires.",
+    points: ["vous présenter", "demander une visite", "poser deux questions utiles", "terminer poliment"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+  {
+    id: "pe3-short-refus-invitation",
+    title: "Refuser une invitation formelle",
+    situation: "Vous recevez une invitation à une réunion importante, mais vous ne pouvez pas y participer.",
+    sourceMessage: {
+      from: "Association du quartier",
+      subject: "Assemblée annuelle",
+      body: "Madame, Monsieur,\nNous vous invitons à l'assemblée annuelle de notre association vendredi à 18 h 30 à la salle communale. Votre présence serait très appréciée.\nLe comité",
+    },
+    instruction: "Rédigez une réponse pour remercier, refuser poliment et demander le compte rendu.",
+    points: ["remercier", "refuser avec une raison simple", "demander le compte rendu", "formule de politesse"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+  {
+    id: "pe3-short-proposition-activite",
+    title: "Proposer une activité",
+    situation: "Votre responsable cherche une idée pour une activité d'équipe.",
+    sourceMessage: {
+      from: "Responsable d'équipe",
+      subject: "Activité commune",
+      body: "Bonjour,\nNous aimerions organiser une activité pour renforcer l'esprit d'équipe. Si vous avez une idée simple et réalisable, merci de me l'envoyer cette semaine.\nCordialement",
+    },
+    instruction: "Rédigez un courriel pour proposer une activité et expliquer son intérêt.",
+    points: ["présenter l'activité", "expliquer l'organisation", "donner les avantages", "demander un avis"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+  {
+    id: "pe3-short-demande-remboursement",
+    title: "Demander un remboursement",
+    situation: "Vous avez payé un cours qui a été annulé sans nouvelle date.",
+    sourceMessage: {
+      from: "Centre de formation",
+      subject: "Cours annulé",
+      body: "Bonjour,\nNous vous informons que le cours prévu samedi est annulé. Nous vous remercions pour votre compréhension.\nLe secrétariat",
+    },
+    instruction: "Rédigez une réponse pour demander des informations et, si nécessaire, un remboursement.",
+    points: ["rappeler votre inscription", "demander la raison ou une nouvelle date", "demander le remboursement", "rester poli"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+  {
+    id: "pe3-short-reagir-information",
+    title: "Réagir à une information",
+    situation: "Vous recevez un message annonçant la fermeture temporaire d'un service que vous utilisez souvent.",
+    sourceMessage: {
+      from: "Bibliothèque communale",
+      subject: "Fermeture temporaire",
+      body: "Bonjour,\nLa bibliothèque sera fermée pendant trois semaines pour travaux. Les emprunts en cours sont prolongés automatiquement.\nMerci de votre compréhension.",
+    },
+    instruction: "Rédigez une réponse pour demander des solutions pendant la fermeture.",
+    points: ["montrer que vous avez compris", "expliquer votre besoin", "demander une solution", "remercier"],
+    minWords: 120,
+    maxWords: 10000,
+  },
+];
 
 const PE3_LONG_PROMPTS: WritingPrompt[] = [
   {
@@ -1014,18 +1100,164 @@ const PE3_LONG_PROMPTS: WritingPrompt[] = [
   },
 ];
 
+const PE1_SHORT_PROMPTS: WritingPrompt[] = [
+  {
+    id: "pe1-short-fete",
+    title: "Répondre à une invitation",
+    situation: "Vous recevez un message d'un ami qui organise une fête samedi.",
+    sourceMessage: { from: "Samir", subject: "Fête samedi", body: "Salut !\nJe fais une petite fête samedi soir chez moi. Tu peux venir ? Tu peux apporter quelque chose ?\nSamir" },
+    instruction: "Répondez à Samir. Dites si vous venez et ce que vous apportez.",
+    points: ["saluer", "dire que vous venez", "dire ce que vous apportez", "finir le message"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-short-vacances",
+    title: "Carte postale",
+    situation: "Vous recevez une carte d'une amie. Vous lui répondez depuis vos vacances.",
+    sourceMessage: { from: "Lina", subject: "Nouvelles", body: "Bonjour !\nTu es en vacances ? Où es-tu ? Qu'est-ce que tu fais ?\nÀ bientôt,\nLina" },
+    instruction: "Écrivez une carte postale simple à Lina.",
+    points: ["dire où vous êtes", "dire avec qui", "dire deux activités", "dire le temps qu'il fait"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-short-anniversaire",
+    title: "Invitation d'anniversaire",
+    situation: "Vous invitez un collègue francophone à votre anniversaire.",
+    sourceMessage: { from: "Nadia", subject: "Anniversaire", body: "Bonjour,\nTu m'as parlé de ton anniversaire. Peux-tu me donner les informations ?\nNadia" },
+    instruction: "Répondez à Nadia avec les informations importantes.",
+    points: ["donner la date", "donner l'heure", "donner le lieu", "dire ce qu'elle peut apporter"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-short-art",
+    title: "Nouvelle activité",
+    situation: "Vous venez de commencer une activité artistique.",
+    sourceMessage: { from: "Maya", subject: "Ton cours", body: "Salut !\nTu fais un nouveau cours ? C'est quoi ? Quand est-ce que tu y vas ?\nMaya" },
+    instruction: "Répondez à Maya. Parlez de votre cours et posez-lui une question.",
+    points: ["nommer l'activité", "dire le jour", "dire avec qui", "poser une question"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-short-loisirs",
+    title: "Parler de ses loisirs",
+    situation: "Un correspondant francophone vous demande ce que vous aimez faire.",
+    sourceMessage: { from: "Noah", subject: "Loisirs", body: "Bonjour,\nQuels sont tes loisirs ? Est-ce que tu fais du sport ou de la musique ?\nNoah" },
+    instruction: "Répondez à Noah avec des phrases simples.",
+    points: ["dire deux loisirs", "dire ce que vous aimez", "dire quand vous pratiquez", "poser une question"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-short-travail",
+    title: "Nouveau travail",
+    situation: "Vous commencez un nouveau travail et un ami vous écrit.",
+    sourceMessage: { from: "Hugo", subject: "Nouveau travail", body: "Salut !\nComment est ton nouveau travail ? Comment sont tes collègues ?\nHugo" },
+    instruction: "Répondez à Hugo.",
+    points: ["dire votre travail", "décrire les collègues", "dire vos horaires", "donner votre avis"],
+    minWords: 40,
+    maxWords: 10000,
+  },
+];
+
+const PE1_LONG_PROMPTS: WritingPrompt[] = [
+  {
+    id: "pe1-long-fete",
+    title: "Préparer une fête",
+    situation: "Votre ami organise une fête samedi soir.",
+    instruction: "Écrivez un message pour expliquer ce que vous voulez apporter et les plats simples que vous allez préparer.",
+    points: ["saluer", "dire ce que vous apportez", "décrire un plat", "poser une question sur la fête"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-carte-postale",
+    title: "Carte postale de vacances",
+    situation: "Vous êtes en vacances dans une grande ville suisse ou francophone.",
+    instruction: "Écrivez une carte postale à un ami. Dites où vous êtes, pour combien de temps, ce que vous faites et le temps qu'il fait.",
+    points: ["lieu", "durée", "activités", "météo"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-voeux",
+    title: "Carte de vœux",
+    situation: "Vous écrivez une carte de vœux à une nouvelle amie francophone.",
+    instruction: "Souhaitez une bonne année et parlez de deux choses que vous allez faire cette année.",
+    points: ["souhaiter une bonne année", "parler d'un projet", "parler d'une activité", "finir amicalement"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-anniversaire",
+    title: "Inviter à un anniversaire",
+    situation: "Vous organisez une fête pour votre anniversaire.",
+    instruction: "Écrivez à un collègue francophone pour l'inviter. Donnez le lieu, l'heure, le thème et ce qu'il doit apporter.",
+    points: ["invitation", "lieu et heure", "thème", "objet à apporter"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-ecole-art",
+    title: "École d'art",
+    situation: "Vous venez de vous inscrire dans une école d'art en Suisse.",
+    instruction: "Écrivez à une amie. Racontez les activités que vous faites, quand et avec qui. Demandez-lui si elle aime l'art.",
+    points: ["activité", "jour", "personnes", "question à l'amie"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-correspondant",
+    title: "Écrire à un correspondant",
+    situation: "Vous écrivez à un correspondant francophone.",
+    instruction: "Parlez de vos amis, de vos goûts et de vos activités. Posez des questions sur ses loisirs.",
+    points: ["amis", "goûts", "activités", "questions"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-montreal",
+    title: "Vacances au Québec",
+    situation: "Vous êtes en vacances à Montréal.",
+    instruction: "Envoyez une carte postale à un ami francophone. Parlez de vos visites, des restaurants et demandez des nouvelles.",
+    points: ["visites", "repas", "impressions", "demande de nouvelles"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+  {
+    id: "pe1-long-premier-jour",
+    title: "Premier jour de cours",
+    situation: "C'est votre premier jour dans une formation en français.",
+    instruction: "Écrivez à un ami. Parlez de vos cours, de vos professeurs et demandez ce qu'il fait ce week-end.",
+    points: ["cours", "professeurs", "impression", "question sur le week-end"],
+    minWords: 50,
+    maxWords: 10000,
+  },
+];
+
 const LEVEL_CONFIG = {
   base: { minWords: 30, maxWords: 40, format: "un petit message de 4 à 5 phrases", detailCount: 4 },
   moyen: { minWords: 60, maxWords: 80, format: "un courriel organisé", detailCount: 4 },
   avance: { minWords: 120, maxWords: 150, format: "un texte développé et structuré", detailCount: 5 },
 } as const;
 
-export function getWritingPrompt(level: WritingLevel, index: number): WritingPrompt {
+export function getWritingPrompt(level: WritingLevel, index: number, kind: WritingKind = "long"): WritingPrompt {
+  if (level === "base" && kind === "short") {
+    return PE1_SHORT_PROMPTS[((index % PE1_SHORT_PROMPTS.length) + PE1_SHORT_PROMPTS.length) % PE1_SHORT_PROMPTS.length]!;
+  }
+  if (level === "base" && kind === "long") {
+    return PE1_LONG_PROMPTS[((index % PE1_LONG_PROMPTS.length) + PE1_LONG_PROMPTS.length) % PE1_LONG_PROMPTS.length]!;
+  }
   if (level === "moyen") {
-    return PE2_PROMPTS[((index % PE2_PROMPTS.length) + PE2_PROMPTS.length) % PE2_PROMPTS.length]!;
+    const pool = kind === "short" ? PE2_REPLY_PROMPTS : PE2_LONG_PROMPTS;
+    return pool[((index % pool.length) + pool.length) % pool.length]!;
   }
   if (level === "avance") {
-    return PE3_LONG_PROMPTS[((index % PE3_LONG_PROMPTS.length) + PE3_LONG_PROMPTS.length) % PE3_LONG_PROMPTS.length]!;
+    const pool = kind === "short" ? PE3_SHORT_PROMPTS : PE3_LONG_PROMPTS;
+    return pool[((index % pool.length) + pool.length) % pool.length]!;
   }
 
   const scenario = SCENARIOS[((index % SCENARIOS.length) + SCENARIOS.length) % SCENARIOS.length]!;
@@ -1048,10 +1280,14 @@ export function getWritingPrompt(level: WritingLevel, index: number): WritingPro
   };
 }
 
-export function randomWritingPrompt(level: WritingLevel): WritingPrompt {
-  if (level === "moyen") return getWritingPrompt(level, Math.floor(Math.random() * PE2_PROMPTS.length));
-  if (level === "avance") return getWritingPrompt(level, Math.floor(Math.random() * PE3_LONG_PROMPTS.length));
-  return getWritingPrompt(level, Math.floor(Math.random() * SCENARIOS.length));
+export function randomWritingPrompt(level: WritingLevel, kind: WritingKind = "long"): WritingPrompt {
+  if (level === "base" && kind === "short") return getWritingPrompt(level, Math.floor(Math.random() * PE1_SHORT_PROMPTS.length), kind);
+  if (level === "base" && kind === "long") return getWritingPrompt(level, Math.floor(Math.random() * PE1_LONG_PROMPTS.length), kind);
+  if (level === "moyen" && kind === "short") return getWritingPrompt(level, Math.floor(Math.random() * PE2_REPLY_PROMPTS.length), kind);
+  if (level === "moyen" && kind === "long") return getWritingPrompt(level, Math.floor(Math.random() * PE2_LONG_PROMPTS.length), kind);
+  if (level === "avance" && kind === "short") return getWritingPrompt(level, Math.floor(Math.random() * PE3_SHORT_PROMPTS.length), kind);
+  if (level === "avance" && kind === "long") return getWritingPrompt(level, Math.floor(Math.random() * PE3_LONG_PROMPTS.length), kind);
+  return getWritingPrompt(level, Math.floor(Math.random() * SCENARIOS.length), kind);
 }
 
 export const WRITING_PROMPT_COUNT = SCENARIOS.length;

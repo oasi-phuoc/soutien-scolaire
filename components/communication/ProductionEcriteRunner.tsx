@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState, useTransition } from "react";
+import { useCallback, useEffect, useState, useTransition, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import {
   getExpressionTeachersAction,
@@ -73,7 +73,7 @@ function wordCount(text: string) {
 }
 
 function buildPrompt(level: WritingLevel, kind: "short" | "long"): WritingPrompt {
-  const base = randomWritingPrompt(level);
+  const base = randomWritingPrompt(level, kind);
   const minWords = minWordsFor(level, kind);
   return {
     ...base,
@@ -86,6 +86,44 @@ function buildPrompt(level: WritingLevel, kind: "short" | "long"): WritingPrompt
         ? `${base.instruction} Rédigez un texte court d'au moins ${minWords} mots.`
         : `${base.instruction} Rédigez un texte plus développé d'au moins ${minWords} mots.`,
   };
+}
+
+function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
+  if (!prompt.sourceMessage) return null;
+  const isPostcard = /carte|vacances|postale/i.test(prompt.title);
+  const isSms = /sms|message|whatsapp|week-end|anniversaire/i.test(prompt.title);
+  if (isPostcard) {
+    return (
+      <div className="mt-3 grid overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white text-sm sm:grid-cols-[1fr_150px]">
+        <div className="min-h-36 p-4 leading-relaxed text-[var(--color-text-primary)]">
+          <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
+        </div>
+        <div className="border-t border-dashed border-[var(--color-border)] p-4 sm:border-l sm:border-t-0">
+          <p className="text-xs font-semibold uppercase text-[var(--color-text-secondary)]">Carte postale</p>
+          {prompt.sourceMessage.from && <p className="mt-4 font-semibold">{prompt.sourceMessage.from}</p>}
+        </div>
+      </div>
+    );
+  }
+  if (isSms) {
+    return (
+      <div className="mt-3 rounded-[var(--radius-lg)] bg-slate-100 p-3">
+        <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-white px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)] shadow-sm">
+          {prompt.sourceMessage.from && <p className="mb-1 text-xs font-bold text-[var(--color-accent-fr)]">{prompt.sourceMessage.from}</p>}
+          <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-1 bg-slate-50 px-4 py-3">
+        {prompt.sourceMessage.from && <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>}
+        {prompt.sourceMessage.subject && <p><span className="font-semibold">Objet :</span> {prompt.sourceMessage.subject}</p>}
+      </div>
+      <div className="whitespace-pre-line border-t border-[var(--color-border)] px-4 py-3">{prompt.sourceMessage.body}</div>
+    </div>
+  );
 }
 
 async function checkGrammar(text: string): Promise<GrammarMatch[]> {
@@ -148,7 +186,7 @@ function HiddenNav({
   nextLabel?: string;
 }) {
   return (
-    <div className="hidden">
+    <div className="hidden fixed bottom-0">
       {onBack && <button type="button" data-nav-action="back" onClick={onBack}>Retour</button>}
       {onRefresh && <button type="button" data-nav-action="refresh" disabled={refreshDisabled} onClick={onRefresh}>Refresh</button>}
       {onValidate && <button type="button" data-nav-action="validate" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
@@ -281,13 +319,7 @@ function WritingExercise({
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
-        {prompt.sourceMessage && (
-          <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 p-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
-            {prompt.sourceMessage.from && <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>}
-            {prompt.sourceMessage.subject && <p><span className="font-semibold">Objet :</span> {prompt.sourceMessage.subject}</p>}
-            <div className="mt-2 whitespace-pre-line border-t border-[var(--color-border)] pt-2">{prompt.sourceMessage.body}</div>
-          </div>
-        )}
+        <SourceMessageCard prompt={prompt} />
         <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
         <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
         <ul className="mt-1 space-y-1">
@@ -336,6 +368,105 @@ function FeedbackList({ feedback }: { feedback: GrammarMatch[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function AdviceLine({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <p className="font-bold" style={{ color: ACCENT }}>{title}</p>
+      <div className="mt-1 text-[var(--color-text-primary)]">{children}</div>
+    </div>
+  );
+}
+
+function AdviceSection({ children }: { children: ReactNode }) {
+  return <div className="rounded-[var(--radius-sm)] border-l-2 border-[var(--color-accent-fr)] py-1 pl-3">{children}</div>;
+}
+
+function AdviceContent({ level }: { level: WritingLevel }) {
+  if (level === "base") {
+    return (
+      <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+        <AdviceLine title="1. Comprendre">Lire la consigne deux fois et repérer les informations demandées.</AdviceLine>
+        <AdviceLine title="2. Préparer">Noter les idées principales avec des mots-clés.</AdviceLine>
+        <AdviceLine title="3. Organiser">Mettre les idées dans un ordre logique.</AdviceLine>
+        <AdviceLine title="4. Rédiger">Écrire des phrases courtes avec un sujet et un verbe.</AdviceLine>
+        <AdviceLine title="5. Relire">Vérifier les majuscules, les points et les mots oubliés.</AdviceLine>
+        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Construire le texte</h3>
+        <AdviceLine title="1. Au début">Saluer et annoncer le sujet.</AdviceLine>
+        <AdviceSection>Bonjour Sara, je t&apos;écris pour t&apos;inviter.</AdviceSection>
+        <AdviceLine title="2. Au milieu">Donner les informations utiles selon la situation de l&apos;énoncé.</AdviceLine>
+        <AdviceSection>La fête est samedi à 15 heures chez moi.</AdviceSection>
+        <AdviceLine title="3. À la fin">Saluer et signer.</AdviceLine>
+        <AdviceSection>J&apos;espère que tu peux venir. À bientôt !</AdviceSection>
+        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
+        <p>Il faut utiliser surtout le présent. Chaque phrase commence par une majuscule et finit avec un point.</p>
+        <AdviceLine title="À éviter">Écrire une seule phrase très longue, oublier la consigne, utiliser des mots dont on ne connaît pas le sens.</AdviceLine>
+      </div>
+    );
+  }
+
+  if (level === "moyen") {
+    return (
+      <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+        <AdviceLine title="1. Comprendre">Lire la consigne et identifier le type de texte demandé : réponse, récit, description ou avis.</AdviceLine>
+        <AdviceLine title="2. Préparer">Noter les idées avec des mots-clés et choisir l&apos;ordre des informations.</AdviceLine>
+        <AdviceLine title="3. Organiser">Séparer le texte en début, milieu et fin.</AdviceLine>
+        <AdviceLine title="4. Rédiger">Faire des phrases claires et varier un peu le vocabulaire.</AdviceLine>
+        <AdviceLine title="5. Relire">Contrôler les accords, les temps et la ponctuation.</AdviceLine>
+        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Construire le texte</h3>
+        <AdviceLine title="Introduction">Quel est le sujet et pourquoi est-il important ?</AdviceLine>
+        <AdviceLine title="Développement">Quels faits, détails ou exemples expliquent mon idée ?</AdviceLine>
+        <AdviceLine title="Conclusion">Quel est mon bilan, mon avis ou ma demande ?</AdviceLine>
+        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
+        <p>Raconter avec le passé composé et décrire avec l&apos;imparfait. Parler d&apos;un projet avec le futur proche ou le futur simple. Exprimer son opinion avec à mon avis, je pense que, selon moi.</p>
+        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Rendre le texte cohérent</h3>
+        <p>Il faut organiser le texte avec des connecteurs : d&apos;abord, ensuite, puis, enfin, cependant, donc...</p>
+        <AdviceLine title="Ajouter"><AdviceSection>de plus, aussi, également.</AdviceSection></AdviceLine>
+        <AdviceLine title="Expliquer"><AdviceSection>parce que, car, en effet.</AdviceSection></AdviceLine>
+        <AdviceLine title="Opposer"><AdviceSection>mais, pourtant, cependant.</AdviceSection></AdviceLine>
+        <AdviceLine title="Conclure"><AdviceSection>donc, finalement, pour conclure.</AdviceSection></AdviceLine>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <AdviceLine title="1. Comprendre">Identifier le destinataire, le but du texte et le registre attendu.</AdviceLine>
+      <AdviceLine title="2. Préparer">Choisir deux ou trois idées fortes et prévoir des exemples précis.</AdviceLine>
+      <AdviceLine title="3. Organiser">Construire un texte avec une introduction, un développement et une conclusion.</AdviceLine>
+      <AdviceLine title="4. Rédiger">Varier les phrases simples et complexes, et garder un registre cohérent.</AdviceLine>
+      <AdviceLine title="5. Relire">Vérifier les connecteurs, les reprises, les accords et la politesse.</AdviceLine>
+      <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Construire le texte</h3>
+      <AdviceLine title="Introduction">Présenter le thème, le contexte et la question principale.</AdviceLine>
+      <AdviceLine title="Argument 1">Annoncer une idée, l&apos;expliquer et donner un exemple précis.</AdviceLine>
+      <AdviceLine title="Argument 2">Ajouter ou nuancer avec un nouveau point de vue.</AdviceLine>
+      <AdviceLine title="Conclusion">Résumer sans répéter et proposer une ouverture ou une solution.</AdviceLine>
+      <AdviceLine title="Objectifs possibles">
+        <AdviceSection>
+          Informer avec des faits exacts et bien organisés.<br />
+          Raconter en donnant un contexte, des événements et un bilan.<br />
+          Argumenter avec une opinion, des raisons et des exemples.<br />
+          Convaincre en tenant compte du lecteur et des objections possibles.
+        </AdviceSection>
+      </AdviceLine>
+      <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
+      <p>Varier les phrases simples et complexes. Choisir un registre cohérent et reprendre les idées avec des pronoms ou des synonymes. Nuancer avec certes, toutefois, en revanche, même si, bien que... Exprimer la cause et la conséquence avec puisque, grâce à, à cause de, par conséquent...</p>
+      <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Rédaction d&apos;une lettre</h3>
+      <AdviceSection>
+        <strong>Disposition :</strong> expéditeur, destinataire, lieu et date, objet, formule d&apos;appel, corps de la lettre, formule de politesse, signature.
+      </AdviceSection>
+      <AdviceSection>
+        <strong>Situations possibles :</strong> réclamer, regretter, répondre à une annonce, réagir à une information, refuser, proposer, demander, protester.
+      </AdviceSection>
+      <AdviceSection>
+        <strong>Formules d&apos;appel :</strong> Madame, Monsieur ; Monsieur le Directeur ; Chère Madame ; Cher ami.
+      </AdviceSection>
+      <AdviceSection>
+        <strong>À éviter :</strong> phrases trop longues, répétitions, registre familier dans une lettre officielle, oubli de la formule d&apos;appel ou de politesse.
+      </AdviceSection>
+    </div>
   );
 }
 
@@ -484,15 +615,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
             <span>Conseils pour réussir</span>
             <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
           </button>
-          {tipsOpen && (
-            <div className="space-y-3 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
-              <p><strong style={{ color: ACCENT }}>1. Comprendre</strong><br />Lire la consigne deux fois et repérer les informations demandées.</p>
-              <p><strong style={{ color: ACCENT }}>2. Préparer</strong><br />Noter les idées principales avec des mots-clés.</p>
-              <p><strong style={{ color: ACCENT }}>3. Organiser</strong><br />Mettre les idées dans un ordre logique.</p>
-              <p><strong style={{ color: ACCENT }}>4. Rédiger</strong><br />Écrire des phrases claires avec un sujet et un verbe.</p>
-              <p><strong style={{ color: ACCENT }}>5. Relire</strong><br />Vérifier les majuscules, les points et les mots oubliés.</p>
-            </div>
-          )}
+          {tipsOpen && <AdviceContent level={level} />}
         </section>
         <button type="button" onClick={() => setPhase("exercise")} className="w-full rounded-full px-5 py-4 font-bold text-white shadow-sm transition-opacity hover:opacity-90" style={{ background: ACCENT }}>
           Commencer l&apos;évaluation
