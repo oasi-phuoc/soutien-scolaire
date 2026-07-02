@@ -231,6 +231,17 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
     });
   }
 
+  function restart() {
+    const player = audioRef.current;
+    if (!player) return;
+    setError(false);
+    player.currentTime = 0;
+    void player.play().catch(() => {
+      setPlaying(false);
+      setError(true);
+    });
+  }
+
   return (
     <div>
       <audio
@@ -248,24 +259,39 @@ function AudioPlayer({ audio, label }: { audio: string; label: string }) {
           setError(true);
         }}
       />
-      <button
-        type="button"
-        onClick={toggle}
-        className="flex h-12 w-full items-center justify-center gap-3 rounded-full border border-[var(--color-border-default)] bg-white px-5 text-sm font-bold text-[var(--color-text-primary)] shadow-sm transition-opacity hover:opacity-85 active:scale-[0.99]"
-        aria-label={playing ? `Arrêter ${label}` : `Écouter ${label}`}
-      >
-        {playing ? (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <rect x="5" y="4" width="4" height="16" rx="1" />
-            <rect x="15" y="4" width="4" height="16" rx="1" />
+      <div className="grid grid-cols-[1fr_auto] gap-2">
+        <button
+          type="button"
+          onClick={toggle}
+          className="flex h-12 min-w-0 items-center justify-center gap-3 rounded-full border border-[var(--color-border-default)] bg-white px-5 text-sm font-bold text-[var(--color-text-primary)] shadow-sm transition-opacity hover:opacity-85 active:scale-[0.99]"
+          aria-label={playing ? `Arrêter ${label}` : `Écouter ${label}`}
+        >
+          {playing ? (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <rect x="5" y="4" width="4" height="16" rx="1" />
+              <rect x="15" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M6 4l14 8-14 8V4z" />
+            </svg>
+          )}
+          <span className="truncate">{playing ? "Lecture en cours" : label}</span>
+        </button>
+        <button
+          type="button"
+          onClick={restart}
+          className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-85 active:scale-95"
+          style={{ background: ACCENT }}
+          aria-label={`Recommencer ${label}`}
+          title="Recommencer"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+            <path d="M3 12a9 9 0 1 0 3-6.7" />
+            <path d="M3 3v6h6" />
           </svg>
-        ) : (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M6 4l14 8-14 8V4z" />
-          </svg>
-        )}
-        <span>{playing ? "Lecture en cours" : label}</span>
-      </button>
+        </button>
+      </div>
       {error && (
         <p className="mt-1 text-xs font-semibold text-red-600">
           Audio indisponible : {audio}

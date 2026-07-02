@@ -1,4 +1,4 @@
-const CACHE_VERSION = "learnup-offline-v3";
+const CACHE_VERSION = "learnup-offline-v4";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const OFFLINE_META_URL = "/__learnup-offline-meta";
@@ -164,6 +164,7 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/auth/") || url.pathname.startsWith("/admin")) return;
 
   const isNavigation = request.mode === "navigate" || request.destination === "document";
+  const isCoAudio = url.pathname.startsWith("/expression/co/") && /\.(?:mp3|wav|ogg|m4a|aac)$/i.test(url.pathname);
   const isStaticAsset = url.pathname.startsWith("/_next/static/")
     || ["style", "script", "image", "font", "audio", "video"].includes(request.destination);
 
@@ -176,6 +177,18 @@ self.addEventListener("fetch", (event) => {
       } catch {
         const cached = await caches.match(request, { ignoreSearch: true });
         return cached || caches.match("/offline.html");
+      }
+    })());
+    return;
+  }
+
+  if (isCoAudio) {
+    event.respondWith((async () => {
+      try {
+        return await fetch(request);
+      } catch {
+        const cached = await caches.match(request, { ignoreSearch: true });
+        return cached || new Response("", { status: 503, statusText: "Offline" });
       }
     })());
     return;
