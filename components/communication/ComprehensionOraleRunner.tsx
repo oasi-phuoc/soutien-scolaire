@@ -2,6 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  randomCoItem,
+  type COAudioCategory,
+  type COAudioItem,
+} from "@/lib/curriculum/content/communication/co-audio";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 
 type COLevel = "base" | "moyen" | "avance";
@@ -9,11 +14,11 @@ type ChoiceTask = { kind: "choice"; prompt: string; choices: string[]; correct: 
 type FillTask = { kind: "fill"; prompt: string; answer: string; accept?: string[] };
 type QuestionTask = ChoiceTask | FillTask;
 type COPart = {
-  id: "annonce" | "radio" | "message" | "discussion";
+  id: COAudioCategory;
   title: string;
-  points: 6 | 7;
-  audio: string;
+  points: 4 | 5 | 8;
   context: string;
+  audioItem: COAudioItem;
   questions: QuestionTask[];
 };
 type Answers = Record<string, number | string | null>;
@@ -22,141 +27,21 @@ const ACCENT = "var(--color-accent-comm)";
 const INVERSE = "var(--color-accent-comm-inverse, #f5a623)";
 const TOTAL_SECONDS = 25 * 60;
 
-const PART_INFO: Array<Pick<COPart, "id" | "title" | "points">> = [
-  { id: "annonce", title: "Comprendre une annonce", points: 6 },
-  { id: "radio", title: "Comprendre une émission de radio", points: 6 },
-  { id: "message", title: "Comprendre un message", points: 6 },
-  { id: "discussion", title: "Comprendre une discussion", points: 7 },
+const PART_INFO: Array<Omit<COPart, "audioItem" | "questions">> = [
+  { id: "message", title: "Comprendre un message", points: 4, context: "Écoutez un message vocal." },
+  { id: "annonce", title: "Comprendre une annonce", points: 4, context: "Écoutez une annonce courte." },
+  { id: "instruction", title: "Comprendre des instructions", points: 4, context: "Écoutez des consignes ou des informations pratiques." },
+  { id: "conversation", title: "Comprendre des conversations", points: 8, context: "Écoutez plusieurs échanges courts." },
+  { id: "objet", title: "Identifier des objets", points: 5, context: "Écoutez et repérez les objets ou les informations importantes." },
 ];
 
-const QUESTION_BANK: Record<COLevel, COPart[]> = {
-  base: [
-    {
-      ...PART_INFO[0],
-      audio: "/expression/co/base-annonce-1.mp3",
-      context: "Écoutez une annonce courte dans une gare.",
-      questions: [
-        { kind: "choice", prompt: "Où entend-on cette annonce ?", choices: ["À la gare", "À l'école", "Au magasin"], correct: 0 },
-        { kind: "choice", prompt: "Quel transport est concerné ?", choices: ["Le bus", "Le train", "Le taxi"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez l'heure annoncée.", answer: "14 h 20", accept: ["14h20", "14:20", "quatorze heures vingt"] },
-      ],
-    },
-    {
-      ...PART_INFO[1],
-      audio: "/expression/co/base-radio-1.mp3",
-      context: "Écoutez un court extrait de radio locale.",
-      questions: [
-        { kind: "choice", prompt: "De quoi parle l'émission ?", choices: ["De la météo", "Du sport", "D'un concert"], correct: 0 },
-        { kind: "choice", prompt: "Quel temps est annoncé ?", choices: ["Pluie", "Soleil", "Neige"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez la ville entendue.", answer: "Sion", accept: ["sion"] },
-      ],
-    },
-    {
-      ...PART_INFO[2],
-      audio: "/expression/co/base-message-1.mp3",
-      context: "Écoutez un message vocal simple.",
-      questions: [
-        { kind: "choice", prompt: "Qui téléphone ?", choices: ["Un ami", "Un médecin", "Un professeur"], correct: 0 },
-        { kind: "choice", prompt: "Pourquoi la personne appelle ?", choices: ["Pour annuler", "Pour inviter", "Pour acheter"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez le jour du rendez-vous.", answer: "samedi", accept: ["samedi"] },
-      ],
-    },
-    {
-      ...PART_INFO[3],
-      audio: "/expression/co/base-discussion-1.mp3",
-      context: "Écoutez deux personnes qui parlent d'une sortie.",
-      questions: [
-        { kind: "choice", prompt: "Où veulent-elles aller ?", choices: ["Au cinéma", "À la piscine", "Au musée"], correct: 0 },
-        { kind: "choice", prompt: "Combien de personnes participent ?", choices: ["Deux", "Trois", "Quatre"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez le prix entendu.", answer: "12 francs", accept: ["12", "12 chf", "douze francs"] },
-      ],
-    },
-  ],
-  moyen: [
-    {
-      ...PART_INFO[0],
-      audio: "/expression/co/moyen-annonce-1.mp3",
-      context: "Écoutez une annonce dans un lieu public.",
-      questions: [
-        { kind: "choice", prompt: "Quelle information principale est donnée ?", choices: ["Un changement de salle", "Une fermeture", "Une promotion"], correct: 0 },
-        { kind: "choice", prompt: "Qui doit écouter cette annonce ?", choices: ["Les voyageurs", "Les élèves", "Les clients"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez le numéro de la salle.", answer: "204", accept: ["salle 204", "deux cent quatre"] },
-      ],
-    },
-    {
-      ...PART_INFO[1],
-      audio: "/expression/co/moyen-radio-1.mp3",
-      context: "Écoutez une émission de radio sur une activité culturelle.",
-      questions: [
-        { kind: "choice", prompt: "Quel événement est présenté ?", choices: ["Une exposition", "Un match", "Un marché"], correct: 0 },
-        { kind: "choice", prompt: "Quand a lieu l'événement ?", choices: ["Vendredi soir", "Samedi après-midi", "Dimanche matin"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez le lieu annoncé.", answer: "Maison de quartier", accept: ["maison de quartier", "la maison de quartier"] },
-      ],
-    },
-    {
-      ...PART_INFO[2],
-      audio: "/expression/co/moyen-message-1.mp3",
-      context: "Écoutez un message sur un rendez-vous.",
-      questions: [
-        { kind: "choice", prompt: "Pourquoi la personne laisse-t-elle un message ?", choices: ["Elle est en retard", "Elle cherche une adresse", "Elle confirme un paiement"], correct: 0 },
-        { kind: "choice", prompt: "Que demande-t-elle ?", choices: ["D'attendre", "De rappeler", "D'envoyer un document"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez l'heure du rendez-vous.", answer: "16 h 30", accept: ["16h30", "16:30", "seize heures trente"] },
-      ],
-    },
-    {
-      ...PART_INFO[3],
-      audio: "/expression/co/moyen-discussion-1.mp3",
-      context: "Écoutez une discussion pour organiser une sortie.",
-      questions: [
-        { kind: "choice", prompt: "Quel problème les personnes rencontrent-elles ?", choices: ["Le prix est trop élevé", "Il n'y a plus de places", "Le lieu est fermé"], correct: 1 },
-        { kind: "choice", prompt: "Quelle solution choisissent-elles ?", choices: ["Changer de jour", "Changer d'activité", "Rentrer à la maison"], correct: 0 },
-        { kind: "fill", prompt: "Écrivez l'activité finalement choisie.", answer: "bowling", accept: ["le bowling"] },
-      ],
-    },
-  ],
-  avance: [
-    {
-      ...PART_INFO[0],
-      audio: "/expression/co/avance-annonce-1.mp3",
-      context: "Écoutez une annonce détaillée avec plusieurs informations.",
-      questions: [
-        { kind: "choice", prompt: "Quelle est la raison de l'annonce ?", choices: ["Un retard technique", "Une inscription obligatoire", "Une annulation définitive"], correct: 0 },
-        { kind: "choice", prompt: "Que doivent faire les personnes concernées ?", choices: ["Attendre une nouvelle annonce", "Changer immédiatement de quai", "Téléphoner au service client"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez la durée du retard.", answer: "25 minutes", accept: ["25", "vingt-cinq minutes"] },
-      ],
-    },
-    {
-      ...PART_INFO[1],
-      audio: "/expression/co/avance-radio-1.mp3",
-      context: "Écoutez une émission de radio avec une interview.",
-      questions: [
-        { kind: "choice", prompt: "Quel est le sujet principal ?", choices: ["La vie associative", "Le logement", "La santé"], correct: 0 },
-        { kind: "choice", prompt: "Quel avantage est mentionné ?", choices: ["Rencontrer des personnes", "Gagner de l'argent", "Voyager gratuitement"], correct: 0 },
-        { kind: "fill", prompt: "Écrivez le nom de l'activité citée.", answer: "atelier cuisine", accept: ["cuisine", "un atelier cuisine"] },
-      ],
-    },
-    {
-      ...PART_INFO[2],
-      audio: "/expression/co/avance-message-1.mp3",
-      context: "Écoutez un message professionnel.",
-      questions: [
-        { kind: "choice", prompt: "Quel est l'objectif du message ?", choices: ["Reporter une réunion", "Demander une facture", "Confirmer une livraison"], correct: 0 },
-        { kind: "choice", prompt: "Quelle information manque encore ?", choices: ["Le nom du client", "La nouvelle heure", "Le prix final"], correct: 1 },
-        { kind: "fill", prompt: "Écrivez le document demandé.", answer: "planning", accept: ["le planning", "un planning"] },
-      ],
-    },
-    {
-      ...PART_INFO[3],
-      audio: "/expression/co/avance-discussion-1.mp3",
-      context: "Écoutez une discussion où deux personnes donnent leur avis.",
-      questions: [
-        { kind: "choice", prompt: "Sur quel sujet les personnes ne sont-elles pas d'accord ?", choices: ["Le transport", "Le repas", "Le logement"], correct: 0 },
-        { kind: "choice", prompt: "Quel argument est utilisé ?", choices: ["La voiture coûte cher", "Le train est trop lent", "Le bus ne circule pas"], correct: 0 },
-        { kind: "fill", prompt: "Écrivez la solution proposée à la fin.", answer: "prendre le train", accept: ["train", "le train"] },
-      ],
-    },
-  ],
-};
+function makeParts(): COPart[] {
+  return PART_INFO.map((part) => ({
+    ...part,
+    audioItem: randomCoItem(part.id),
+    questions: [],
+  }));
+}
 
 function levelFromId(id: string): COLevel {
   if (id === "CO-2" || id === "comprehension-orale-2") return "moyen";
@@ -305,27 +190,92 @@ function ProgressBar({
   );
 }
 
+function AudioListenButton({
+  label,
+  audio,
+  used,
+  onUse,
+}: {
+  label: string;
+  audio: string;
+  used: boolean;
+  onUse: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={used}
+      onClick={() => {
+        onUse();
+        void new Audio(audio).play().catch(() => undefined);
+      }}
+      className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
+    >
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      {label}
+    </button>
+  );
+}
+
 function QuestionBlock({
   part,
   answers,
   onAnswer,
   readonly,
+  usedAudio,
+  toggleAudioUse,
 }: {
   part: COPart;
   answers: Answers;
   onAnswer: (key: string, value: number | string) => void;
   readonly?: boolean;
+  usedAudio: Record<string, boolean>;
+  toggleAudioUse: (key: string) => void;
 }) {
+  const [transcriptOpen, setTranscriptOpen] = useState(false);
+  const firstListenKey = `${part.id}-listen-1`;
+  const secondListenKey = `${part.id}-listen-2`;
+
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
-        <p className="text-xs font-bold uppercase tracking-wider" style={{ color: ACCENT }}>Audio</p>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{part.context}</p>
-        <audio controls preload="metadata" className="mt-3 w-full" src={part.audio}>
-          Votre navigateur ne peut pas lire cet audio.
-        </audio>
-        <p className="mt-2 text-xs text-[var(--color-text-muted)]">Fichier à ajouter : {part.audio}</p>
+      <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
+        {part.audioItem.transcript && (
+          <button
+            type="button"
+            onClick={() => setTranscriptOpen((value) => !value)}
+            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] bg-white text-[var(--color-text-primary)] shadow-sm"
+            aria-label="Afficher ou masquer la transcription"
+            title="Aide : transcription"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M9 18h6" />
+              <path d="M10 22h4" />
+              <path d="M8.5 14a6 6 0 1 1 7 0c-.8.7-1.5 1.7-1.5 3h-4c0-1.3-.7-2.3-1.5-3z" />
+            </svg>
+          </button>
+        )}
+        <p className="pr-11 text-xs font-bold uppercase tracking-wider" style={{ color: ACCENT }}>
+          Audio · activité {part.audioItem.activity}
+        </p>
+        <p className="mt-1 pr-11 text-sm text-[var(--color-text-secondary)]">{part.context}</p>
+        <div className="mt-4 flex gap-3">
+          <AudioListenButton label="Écoute 1" audio={part.audioItem.audio} used={!!usedAudio[firstListenKey]} onUse={() => toggleAudioUse(firstListenKey)} />
+          <AudioListenButton label="Écoute 2" audio={part.audioItem.audio} used={!!usedAudio[secondListenKey]} onUse={() => toggleAudioUse(secondListenKey)} />
+        </div>
+        {transcriptOpen && part.audioItem.transcript && (
+          <div className="mt-4 border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+            {part.audioItem.transcript}
+          </div>
+        )}
       </div>
+
+      {!part.questions.length && (
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-sm text-[var(--color-text-secondary)]">
+          Les questions seront ajoutées après la vérification des audios.
+        </div>
+      )}
 
       {part.questions.map((question, index) => {
         const key = `${part.id}-${index}`;
@@ -382,12 +332,13 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
-  const parts = useMemo(() => QUESTION_BANK[level], [level]);
+  const parts = useMemo(() => makeParts(), []);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
   const [currentId, setCurrentId] = useState(parts[0]!.id);
   const [answers, setAnswers] = useState<Answers>({});
   const [validatedAnswers, setValidatedAnswers] = useState<Record<string, Answers>>({});
+  const [usedAudio, setUsedAudio] = useState<Record<string, boolean>>({});
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [openResult, setOpenResult] = useState<string | null>(null);
   const [showTips, setShowTips] = useState(false);
@@ -403,14 +354,14 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   }, [phase]);
 
   const selectPart = useCallback((id: string) => {
-    if (remaining.includes(id)) setCurrentId(id as COPart["id"]);
+    if (remaining.includes(id)) setCurrentId(id as COAudioCategory);
   }, [remaining]);
 
   const move = useCallback((direction: 1 | -1) => {
     if (!remaining.length) return;
     const index = remaining.indexOf(currentId);
     const nextIndex = index === -1 ? 0 : (index + direction + remaining.length) % remaining.length;
-    setCurrentId(remaining[nextIndex]! as COPart["id"]);
+    setCurrentId(remaining[nextIndex]! as COAudioCategory);
   }, [currentId, remaining]);
 
   const validateCurrent = useCallback(() => {
@@ -428,12 +379,17 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
       setPhase("results");
       return;
     }
-    setCurrentId(nextRemaining[0]! as COPart["id"]);
+    setCurrentId(nextRemaining[0]! as COAudioCategory);
   }, [answers, currentPart, lessonCode, remaining]);
 
   function resetCurrent() {
     const prefix = `${currentId}-`;
     setAnswers((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
+    setUsedAudio((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(`${currentId}-listen-`))));
+  }
+
+  function toggleAudioUse(key: string) {
+    setUsedAudio((previous) => ({ ...previous, [key]: true }));
   }
 
   if (phase === "intro") {
@@ -443,10 +399,10 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
         <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 p-5 shadow-sm">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
-            <li><span style={{ color: ACCENT }}>•</span> <strong>4 exercices</strong> d&apos;écoute</li>
+            <li><span style={{ color: ACCENT }}>•</span> <strong>5 exercices</strong> d&apos;écoute</li>
             <li><span style={{ color: ACCENT }}>•</span> <strong>25 minutes</strong> pour compléter l&apos;évaluation</li>
+            <li><span style={{ color: ACCENT }}>•</span> Deux écoutes possibles par audio</li>
             <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
-            <li><span style={{ color: ACCENT }}>•</span> Vous pouvez naviguer librement avec la barre de progression</li>
             <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
           </ul>
           <div className="mt-5 grid gap-2">
@@ -522,11 +478,18 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
                   className="flex w-full items-center justify-between px-4 py-3 text-left font-semibold"
                 >
                   <span><span style={{ color: ACCENT }}>{index + 1}</span> {part.title}</span>
-                  <span style={{ color: ACCENT }}>{formatPoints(partScore)} / {part.points} ›</span>
+                  <span style={{ color: ACCENT }}>{formatPoints(partScore)} / {part.points} :</span>
                 </button>
                 {isOpen && (
                   <div className="border-t border-[var(--color-border)] p-4">
-                    <QuestionBlock part={part} answers={validatedAnswers[part.id] ?? {}} onAnswer={() => undefined} readonly />
+                    <QuestionBlock
+                      part={part}
+                      answers={validatedAnswers[part.id] ?? {}}
+                      onAnswer={() => undefined}
+                      readonly
+                      usedAudio={{ [`${part.id}-listen-1`]: true, [`${part.id}-listen-2`]: true }}
+                      toggleAudioUse={() => undefined}
+                    />
                   </div>
                 )}
               </section>
@@ -558,6 +521,8 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
           part={currentPart}
           answers={savedAnswers}
           onAnswer={(key, value) => setAnswers((previous) => ({ ...previous, [key]: value }))}
+          usedAudio={usedAudio}
+          toggleAudioUse={toggleAudioUse}
         />
       </section>
       <HiddenNav
