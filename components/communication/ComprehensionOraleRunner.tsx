@@ -180,6 +180,7 @@ function ProgressBar({
   secondsLeft: number;
   onSelect: (id: string) => void;
 }) {
+  const visibleParts = parts.filter((part) => remaining.includes(part.id));
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between text-sm font-semibold" style={{ color: ACCENT }}>
@@ -188,20 +189,16 @@ function ProgressBar({
         <span className="text-[var(--color-text-secondary)]">{remaining.length} exercices restants</span>
       </div>
       <div className="flex gap-1">
-        {parts.map((part) => {
-          const available = remaining.includes(part.id);
-          return (
-            <button
-              key={part.id}
-              type="button"
-              disabled={!available}
-              onClick={() => onSelect(part.id)}
-              className="h-2 flex-1 rounded-full transition-opacity disabled:opacity-30"
-              style={{ background: !available ? "var(--color-border)" : part.id === currentId ? ACCENT : `${ACCENT}55` }}
-              aria-label={part.title}
-            />
-          );
-        })}
+        {visibleParts.map((part) => (
+          <button
+            key={part.id}
+            type="button"
+            onClick={() => onSelect(part.id)}
+            className="h-2 flex-1 rounded-full transition-opacity"
+            style={{ background: part.id === currentId ? ACCENT : `${ACCENT}55` }}
+            aria-label={part.title}
+          />
+        ))}
       </div>
     </div>
   );
@@ -221,48 +218,52 @@ function AudioListenButton({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [error, setError] = useState(false);
+  const [attempted, setAttempted] = useState(false);
 
   function playAudio() {
     const player = audioRef.current;
     if (!player || used || playing) return;
 
+    setAttempted(true);
     setError(false);
     setPlaying(true);
-    onComplete();
     player.currentTime = 0;
-    void player.play().catch(() => {
-      setPlaying(false);
-      setError(true);
-    });
+    void player
+      .play()
+      .then(() => onComplete())
+      .catch(() => {
+        setPlaying(false);
+        setError(true);
+      });
   }
-
-  if (used && !playing) return null;
 
   return (
     <div className="flex-1">
-      <button
-        type="button"
-        disabled={playing}
-        onClick={playAudio}
-        className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
-      >
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <path d="M8 5v14l11-7z" />
-        </svg>
-        {playing ? "Lecture..." : label}
-      </button>
+      {!used && (
+        <button
+          type="button"
+          disabled={playing}
+          onClick={playAudio}
+          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          {playing ? "Lecture..." : label}
+        </button>
+      )}
       <audio
         ref={audioRef}
         src={audio}
-        preload="auto"
+        preload="none"
         onEnded={() => setPlaying(false)}
         onError={() => {
           setPlaying(false);
-          setError(true);
+          if (attempted) setError(true);
         }}
         className="hidden"
       />
-      {error && <p className="mt-1 text-[11px] font-semibold text-red-500">Audio indisponible.</p>}
+      {attempted && error && <p className="mt-1 text-[11px] font-semibold text-red-500">Audio indisponible.</p>}
     </div>
   );
 }
@@ -303,7 +304,8 @@ function QuestionBlock({
               <button
                 type="button"
                 onClick={() => setShowTranscripts((value) => !value)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--color-text-primary)] shadow-sm"
+                className="flex h-8 w-8 items-center justify-center rounded-full border text-white shadow-sm transition-opacity hover:opacity-85"
+                style={{ background: ACCENT, borderColor: ACCENT }}
                 aria-label="Afficher ou masquer la transcription"
                 title="Aide : transcription"
               >
@@ -451,7 +453,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   function resetCurrent() {
     const prefix = `${currentId}-`;
     setAnswers((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
-    setUsedAudio((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(`${currentId}-listen-`))));
+    setUsedAudio((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
   }
 
   function toggleAudioUse(key: string) {
@@ -474,7 +476,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
         <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 p-5 shadow-none">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
-            <li><span style={{ color: ACCENT }}>•</span> <strong>5 exercices</strong> d&apos;écoute</li>
+            <li><span style={{ color: ACCENT }}>•</span> <strong>{partInfoFor(level).length} exercices</strong> d&apos;écoute</li>
             <li><span style={{ color: ACCENT }}>•</span> <strong>25 minutes</strong> pour compléter l&apos;évaluation</li>
             <li><span style={{ color: ACCENT }}>•</span> Deux écoutes possibles par audio</li>
             <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
@@ -602,8 +604,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
         onValidate={validateCurrent}
         onNext={() => move(1)}
         nextLabel="Suivant"
-        backDisabled={remaining.length <= 1}
-        nextDisabled={remaining.length <= 1}
       />
     </main>
   );
