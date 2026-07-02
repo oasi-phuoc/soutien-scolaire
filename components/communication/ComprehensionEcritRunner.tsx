@@ -1168,7 +1168,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
   }, [activeParts.length, phase, router]);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 pb-28">
+    <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
       {phase === "intro" && <IntroPage level={level} onStart={() => { setStartedAt(Date.now()); setPhase("exercise"); }} />}
 
       {phase === "exercise" && activeParts.length > 0 && (

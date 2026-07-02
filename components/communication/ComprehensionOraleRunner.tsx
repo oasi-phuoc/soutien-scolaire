@@ -438,7 +438,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
 
   if (phase === "intro") {
     return (
-      <main className="mx-auto max-w-3xl space-y-7 px-4 pb-28 pt-6">
+      <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Compréhension orale" />
         <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 p-5 shadow-sm">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
@@ -465,7 +465,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             Conseils pour réussir
           </button>
           {showTips && (
-            <div className="mt-3 space-y-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            <div className="mt-3 space-y-2 border-l-2 bg-transparent py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-secondary)]" style={{ borderColor: ACCENT }}>
               <p>Écoutez une première fois pour comprendre la situation générale.</p>
               <p>À la deuxième écoute, repérez les noms, les lieux, les horaires et les actions demandées.</p>
               <p>Ne bloquez pas sur un mot inconnu : utilisez le contexte pour choisir la réponse la plus logique.</p>
@@ -489,7 +489,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
     const note = Math.min(6, Math.max(1, (totalPoints / 25) * 5 + 1));
     const mention = note >= 5 ? "Très bien" : note >= 4 ? "Bien" : note >= 3 ? "À renforcer" : "À améliorer";
     return (
-      <main className="mx-auto max-w-3xl space-y-6 px-4 pb-28 pt-6">
+      <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" />
         <section className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
@@ -539,7 +539,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   }
 
   return (
-    <main className="mx-auto max-w-3xl space-y-6 px-4 pb-28 pt-6">
+    <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
       <Header level={level} title="Compréhension orale" />
       <ProgressBar
         parts={parts}

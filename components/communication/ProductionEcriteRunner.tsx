@@ -278,7 +278,7 @@ function FormExercise({
     <div className="space-y-4">
       <p className="text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{template.situation}</p>
       {advanced && (
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
           Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
         </div>
       )}
@@ -315,7 +315,7 @@ function WritingExercise({
   const count = wordCount(text);
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4">
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
@@ -343,7 +343,7 @@ function WritingExercise({
           onChange={(event) => onTextChange(event.target.value)}
           readOnly={disabled}
           rows={12}
-          className="min-h-72 w-full resize-y rounded-[var(--radius-md)] border-2 border-[var(--color-accent-fr)]/45 bg-white/80 p-4 text-base leading-7 text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] read-only:bg-white/55"
+          className="min-h-72 w-full resize-y rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-base leading-7 text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-comm)] read-only:bg-white/55"
         />
         {count > 0 && count < prompt.minWords && (
           <p className="mt-1 text-xs font-semibold text-amber-600">Il est conseillé d&apos;écrire au moins {prompt.minWords} mots.</p>
@@ -381,7 +381,11 @@ function AdviceLine({ title, children }: { title: string; children: ReactNode })
 }
 
 function AdviceSection({ children }: { children: ReactNode }) {
-  return <div className="rounded-[var(--radius-sm)] border-l-2 border-[var(--color-accent-fr)] py-1 pl-3">{children}</div>;
+  return (
+    <div className="border-l-2 py-1 pl-3 text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+      {children}
+    </div>
+  );
 }
 
 function AdviceContent({ level }: { level: WritingLevel }) {
@@ -591,7 +595,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
 
   if (phase === "intro") {
     return (
-      <main className="mx-auto max-w-3xl space-y-7 px-4 pb-28 pt-6">
+      <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Production écrite" />
         <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 p-5 shadow-sm">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
@@ -627,7 +631,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
 
   if (phase === "results") {
     return (
-      <main className="mx-auto max-w-3xl space-y-6 px-4 pb-28 pt-6">
+      <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" />
         <section className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
@@ -641,7 +645,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4">
           <h2 className="font-bold text-[var(--color-text-primary)]">Texte court</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
-          <div className="mt-4 rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
+          <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
             <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
             <FeedbackList feedback={shortFeedback} />
           </div>
@@ -649,16 +653,16 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4">
           <h2 className="font-bold text-[var(--color-text-primary)]">Texte long</h2>
           <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
-          <div className="mt-4 rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
+          <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
             <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
             <FeedbackList feedback={longFeedback} />
           </div>
         </section>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
+        <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
           <h2 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h2>
           {teachers.length ? (
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-              <select value={teacherId} onChange={(event) => setTeacherId(event.target.value)} disabled={sent} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-fr)]">
+              <select value={teacherId} onChange={(event) => setTeacherId(event.target.value)} disabled={sent} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]">
                 <option value="">Choisissez un professeur</option>
                 {teachers.map((teacher) => (
                   <option key={teacher.id} value={teacher.id}>{[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}</option>
@@ -680,7 +684,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
 
   const step = STEP_META.find((item) => item.id === current)!;
   return (
-    <main className="mx-auto max-w-3xl space-y-6 px-4 pb-28 pt-6">
+    <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
       <Header level={level} title="Production écrite" />
       <ProgressBar current={current} remaining={remaining} onSelect={setCurrent} />
       <section className="space-y-4">
