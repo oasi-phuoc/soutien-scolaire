@@ -112,6 +112,19 @@ function WritingExercise({
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
+        {prompt.sourceMessage && (
+          <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 p-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+            {prompt.sourceMessage.from && (
+              <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>
+            )}
+            {prompt.sourceMessage.subject && (
+              <p><span className="font-semibold">Objet :</span> {prompt.sourceMessage.subject}</p>
+            )}
+            <div className="mt-2 whitespace-pre-line border-t border-[var(--color-border)] pt-2">
+              {prompt.sourceMessage.body}
+            </div>
+          </div>
+        )}
         <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
         <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
         <ul className="mt-1 space-y-1">
