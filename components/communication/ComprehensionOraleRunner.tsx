@@ -152,7 +152,7 @@ function HiddenNav({
   nextLabel?: string;
 }) {
   return (
-    <div className="hidden">
+    <div className="hidden fixed bottom-0 left-0 right-0">
       {onBack && <button type="button" data-nav-action="back" disabled={backDisabled} onClick={onBack}>Retour</button>}
       {onRefresh && <button type="button" data-nav-action="refresh" disabled={refreshDisabled} onClick={onRefresh}>Refresh</button>}
       {onValidate && <button type="button" data-nav-action="validate" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
@@ -182,20 +182,24 @@ function ProgressBar({
 }) {
   const visibleParts = parts.filter((part) => remaining.includes(part.id));
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between text-sm font-semibold" style={{ color: ACCENT }}>
-        <span>{formatPoints(points)} / 25 points</span>
-        <span className="rounded-full bg-[var(--color-accent-comm)]/10 px-3 py-1">{formatTimer(secondsLeft)}</span>
-        <span className="text-[var(--color-text-secondary)]">{remaining.length} exercices restants</span>
+    <div className="mb-5">
+      <div className="mb-1.5 flex items-center justify-between">
+        <p className="text-xs font-bold tabular-nums" style={{ color: ACCENT }}>{formatPoints(points)} / 25 pts</p>
+        <div className="flex items-center gap-3">
+          <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${ACCENT} 12%, white)`, color: ACCENT }}>
+            {formatTimer(secondsLeft)}
+          </span>
+          <p className="text-xs text-[var(--color-text-secondary)]">{remaining.length} exercice{remaining.length !== 1 ? "s" : ""} restant{remaining.length !== 1 ? "s" : ""}</p>
+        </div>
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-0.5">
         {visibleParts.map((part) => (
           <button
             key={part.id}
             type="button"
             onClick={() => onSelect(part.id)}
-            className="h-2 flex-1 rounded-full transition-opacity"
-            style={{ background: part.id === currentId ? ACCENT : `${ACCENT}55` }}
+            className="h-2 min-w-8 flex-1 rounded-full transition-colors"
+            style={{ background: part.id === currentId ? ACCENT : "var(--color-border-default, var(--color-border))" }}
             aria-label={part.title}
           />
         ))}
@@ -206,7 +210,8 @@ function ProgressBar({
 
 function AudioPlayer({ audio }: { audio: string }) {
   return (
-    <audio controls preload="metadata" className="w-full rounded-full" src={audio}>
+    <audio controls preload="metadata" className="w-full rounded-full">
+      <source src={audio} type="audio/mpeg" />
       Votre navigateur ne peut pas lire cet audio.
     </audio>
   );
@@ -299,7 +304,7 @@ function QuestionBlock({
                       onClick={() => onAnswer(key, choiceIndex)}
                       className="rounded-[var(--radius-sm)] border px-3 py-2 text-left text-sm transition-colors"
                       style={{
-                        borderColor: correct ? INVERSE : selected ? ACCENT : "var(--color-border)",
+                        borderColor: correct ? INVERSE : selected ? ACCENT : "var(--color-border-default)",
                         color: correct ? INVERSE : selected ? ACCENT : "var(--color-text-primary)",
                         background: selected && !readonly ? `${ACCENT}14` : "white",
                       }}
@@ -384,11 +389,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
     setCurrentId(nextRemaining[0]! as COAudioCategory);
   }, [answers, currentPart, lessonCode, remaining]);
 
-  function resetCurrent() {
-    const prefix = `${currentId}-`;
-    setAnswers((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
-  }
-
   if (phase === "intro") {
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
@@ -449,11 +449,11 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
           <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">{formatPoints(totalPoints)} / 25</p>
         </section>
         <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4 text-center">
+          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
             <p className="text-sm text-[var(--color-text-secondary)]">Points</p>
             <p className="text-2xl font-bold">{formatPoints(totalPoints)}</p>
           </div>
-          <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4 text-center">
+          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
             <p className="text-sm text-[var(--color-text-secondary)]">Note</p>
             <p className="text-2xl font-bold">{note.toFixed(1).replace(".", ",")} / 6</p>
           </div>
@@ -468,7 +468,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             const partScore = scorePart(part, validatedAnswers[part.id] ?? {});
             const isOpen = openResult === part.id;
             return (
-              <section key={part.id} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white">
+              <section key={part.id} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
                 <button
                   type="button"
                   onClick={() => setOpenResult(isOpen ? null : part.id)}
@@ -478,7 +478,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
                   <span style={{ color: ACCENT }}>{formatPoints(partScore)} / {part.points} :</span>
                 </button>
                 {isOpen && (
-                  <div className="border-t border-[var(--color-border)] p-4">
+                  <div className="border-t border-[var(--color-border-default)] p-4">
                     <QuestionBlock
                       part={part}
                       answers={validatedAnswers[part.id] ?? {}}
@@ -516,7 +516,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
       </section>
       <HiddenNav
         onBack={() => move(-1)}
-        onRefresh={resetCurrent}
         onValidate={validateCurrent}
         onNext={() => move(1)}
         nextLabel="Suivant"

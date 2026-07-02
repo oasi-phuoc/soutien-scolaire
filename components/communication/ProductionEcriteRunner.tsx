@@ -43,6 +43,13 @@ const STEP_META: Array<{ id: StepId; title: string; points: number }> = [
   { id: "short", title: "Texte à rédiger court", points: 10 },
   { id: "long", title: "Texte à rédiger long", points: 10 },
 ];
+const TOTAL_SECONDS = 45 * 60;
+
+function formatTimer(seconds: number) {
+  const min = Math.max(0, Math.floor(seconds / 60));
+  const sec = Math.max(0, seconds % 60);
+  return `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+}
 
 function levelFromId(lessonId: string): WritingLevel {
   if (lessonId === "PE-2" || lessonId === "expression-e1-2") return "moyen";
@@ -94,11 +101,11 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   const isSms = /sms|message|whatsapp|week-end|anniversaire/i.test(prompt.title);
   if (isPostcard) {
     return (
-      <div className="mt-3 grid overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white text-sm sm:grid-cols-[1fr_150px]">
+      <div className="mt-3 grid overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white text-sm sm:grid-cols-[1fr_150px]">
         <div className="min-h-36 p-4 leading-relaxed text-[var(--color-text-primary)]">
           <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
         </div>
-        <div className="border-t border-dashed border-[var(--color-border)] p-4 sm:border-l sm:border-t-0">
+        <div className="border-t border-dashed border-[var(--color-border-default)] p-4 sm:border-l sm:border-t-0">
           <p className="text-xs font-semibold uppercase text-[var(--color-text-secondary)]">Carte postale</p>
           {prompt.sourceMessage.from && <p className="mt-4 font-semibold">{prompt.sourceMessage.from}</p>}
         </div>
@@ -116,12 +123,12 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
     );
   }
   return (
-    <div className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 text-sm leading-relaxed text-[var(--color-text-primary)]">
+    <div className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/85 text-sm leading-relaxed text-[var(--color-text-primary)]">
       <div className="space-y-1 bg-slate-50 px-4 py-3">
         {prompt.sourceMessage.from && <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>}
         {prompt.sourceMessage.subject && <p><span className="font-semibold">Objet :</span> {prompt.sourceMessage.subject}</p>}
       </div>
-      <div className="whitespace-pre-line border-t border-[var(--color-border)] px-4 py-3">{prompt.sourceMessage.body}</div>
+      <div className="whitespace-pre-line border-t border-[var(--color-border-default)] px-4 py-3">{prompt.sourceMessage.body}</div>
     </div>
   );
 }
@@ -186,7 +193,7 @@ function HiddenNav({
   nextLabel?: string;
 }) {
   return (
-    <div className="hidden fixed bottom-0">
+    <div className="hidden fixed bottom-0 left-0 right-0">
       {onBack && <button type="button" data-nav-action="back" onClick={onBack}>Retour</button>}
       {onRefresh && <button type="button" data-nav-action="refresh" disabled={refreshDisabled} onClick={onRefresh}>Refresh</button>}
       {onValidate && <button type="button" data-nav-action="validate" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
@@ -202,33 +209,37 @@ function HiddenNav({
 function ProgressBar({
   current,
   remaining,
+  secondsLeft,
   onSelect,
 }: {
   current: StepId;
   remaining: StepId[];
+  secondsLeft: number;
   onSelect: (id: StepId) => void;
 }) {
+  const visibleSteps = STEP_META.filter((step) => remaining.includes(step.id));
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between text-sm font-semibold">
-        <span style={{ color: ACCENT }}>0 / 25 pts</span>
-        <span className="text-[var(--color-text-secondary)]">{remaining.length} exercices restants</span>
+    <div className="mb-5">
+      <div className="mb-1.5 flex items-center justify-between">
+        <p className="text-xs font-bold tabular-nums" style={{ color: ACCENT }}>0 / 25 pts</p>
+        <div className="flex items-center gap-3">
+          <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${ACCENT} 12%, white)`, color: ACCENT }}>
+            {formatTimer(secondsLeft)}
+          </span>
+          <p className="text-xs text-[var(--color-text-secondary)]">{remaining.length} exercice{remaining.length !== 1 ? "s" : ""} restant{remaining.length !== 1 ? "s" : ""}</p>
+        </div>
       </div>
-      <div className="flex gap-1">
-        {STEP_META.map((step) => {
-          const available = remaining.includes(step.id);
-          return (
-            <button
-              key={step.id}
-              type="button"
-              disabled={!available}
-              onClick={() => onSelect(step.id)}
-              className="h-2 flex-1 rounded-full transition-opacity disabled:opacity-30"
-              style={{ background: !available ? "var(--color-border)" : current === step.id ? ACCENT : `${ACCENT}55` }}
-              aria-label={step.title}
-            />
-          );
-        })}
+      <div className="flex gap-0.5">
+        {visibleSteps.map((step) => (
+          <button
+            key={step.id}
+            type="button"
+            onClick={() => onSelect(step.id)}
+            className="h-2 min-w-12 flex-1 rounded-full transition-colors"
+            style={{ background: current === step.id ? ACCENT : "var(--color-border-default, var(--color-border))" }}
+            aria-label={step.title}
+          />
+        ))}
       </div>
     </div>
   );
@@ -245,7 +256,7 @@ function FormFieldControl({
   disabled: boolean;
   onChange: (value: string) => void;
 }) {
-  const className = "min-h-11 w-full rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70";
+  const className = "min-h-11 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70";
   return (
     <label className={field.wide ? "sm:col-span-2" : ""}>
       <span className="mb-1 block text-xs font-semibold text-[var(--color-text-secondary)]">{field.label}</span>
@@ -278,7 +289,7 @@ function FormExercise({
     <div className="space-y-4">
       <p className="text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{template.situation}</p>
       {advanced && (
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
           Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
         </div>
       )}
@@ -315,7 +326,7 @@ function WritingExercise({
   const count = wordCount(text);
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
@@ -343,7 +354,7 @@ function WritingExercise({
           onChange={(event) => onTextChange(event.target.value)}
           readOnly={disabled}
           rows={12}
-          className="min-h-72 w-full resize-y rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-base leading-7 text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-comm)] read-only:bg-white/55"
+          className="min-h-72 w-full resize-y rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-base leading-7 text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-comm)] read-only:bg-white/55"
         />
         {count > 0 && count < prompt.minWords && (
           <p className="mt-1 text-xs font-semibold text-amber-600">Il est conseillé d&apos;écrire au moins {prompt.minWords} mots.</p>
@@ -391,7 +402,7 @@ function AdviceSection({ children }: { children: ReactNode }) {
 function AdviceContent({ level }: { level: WritingLevel }) {
   if (level === "base") {
     return (
-      <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
         <AdviceLine title="1. Comprendre">Lire la consigne deux fois et repérer les informations demandées.</AdviceLine>
         <AdviceLine title="2. Préparer">Noter les idées principales avec des mots-clés.</AdviceLine>
         <AdviceLine title="3. Organiser">Mettre les idées dans un ordre logique.</AdviceLine>
@@ -413,7 +424,7 @@ function AdviceContent({ level }: { level: WritingLevel }) {
 
   if (level === "moyen") {
     return (
-      <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
         <AdviceLine title="1. Comprendre">Lire la consigne et identifier le type de texte demandé : réponse, récit, description ou avis.</AdviceLine>
         <AdviceLine title="2. Préparer">Noter les idées avec des mots-clés et choisir l&apos;ordre des informations.</AdviceLine>
         <AdviceLine title="3. Organiser">Séparer le texte en début, milieu et fin.</AdviceLine>
@@ -436,7 +447,7 @@ function AdviceContent({ level }: { level: WritingLevel }) {
   }
 
   return (
-    <div className="space-y-4 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+    <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
       <AdviceLine title="1. Comprendre">Identifier le destinataire, le but du texte et le registre attendu.</AdviceLine>
       <AdviceLine title="2. Préparer">Choisir deux ou trois idées fortes et prévoir des exemples précis.</AdviceLine>
       <AdviceLine title="3. Organiser">Construire un texte avec une introduction, un développement et une conclusion.</AdviceLine>
@@ -485,19 +496,21 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   const level = levelFromId(lessonId);
   const code = lessonCode(level);
   const [phase, setPhase] = useState<Phase>("intro");
+  const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [tipsOpen, setTipsOpen] = useState(false);
   const [remaining, setRemaining] = useState<StepId[]>(["form", "short", "long"]);
   const [current, setCurrent] = useState<StepId>("form");
-  const [formTemplate, setFormTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
+  const [formTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
   const [formAnswers, setFormAnswers] = useState<Record<string, string>>({});
-  const [shortPrompt, setShortPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "short"));
-  const [longPrompt, setLongPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "long"));
+  const [shortPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "short"));
+  const [longPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "long"));
   const [shortText, setShortText] = useState("");
   const [longText, setLongText] = useState("");
   const [shortFeedback, setShortFeedback] = useState<GrammarMatch[]>([]);
   const [longFeedback, setLongFeedback] = useState<GrammarMatch[]>([]);
   const [validatedSteps, setValidatedSteps] = useState<Set<StepId>>(new Set());
   const [checking, setChecking] = useState(false);
+  const [openResult, setOpenResult] = useState<StepId | null>("form");
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");
@@ -507,6 +520,12 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   useEffect(() => {
     void getExpressionTeachersAction().then(setTeachers);
   }, []);
+
+  useEffect(() => {
+    if (phase !== "exercise") return;
+    const timer = window.setInterval(() => setSecondsLeft((value) => Math.max(0, value - 1)), 1000);
+    return () => window.clearInterval(timer);
+  }, [phase]);
 
   const move = useCallback((direction: 1 | -1) => {
     if (!remaining.length) return;
@@ -536,21 +555,6 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     }
     setCurrent(nextRemaining[0]!);
   }, [checking, code, current, longText, remaining, shortText, validatedSteps]);
-
-  function resetCurrent() {
-    if (current === "form") {
-      setFormTemplate(randomFormTemplates(1)[0] ?? null);
-      setFormAnswers({});
-    } else if (current === "short") {
-      setShortPrompt(buildPrompt(level, "short"));
-      setShortText("");
-      setShortFeedback([]);
-    } else {
-      setLongPrompt(buildPrompt(level, "long"));
-      setLongText("");
-      setLongFeedback([]);
-    }
-  }
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
@@ -601,6 +605,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
             <li><span style={{ color: ACCENT }}>•</span> <strong>3 exercices</strong> de production écrite</li>
+            <li><span style={{ color: ACCENT }}>•</span> <strong>45 minutes</strong> pour compléter l&apos;évaluation</li>
             <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
             <li><span style={{ color: ACCENT }}>•</span> Vous pouvez naviguer librement avec la barre de progression</li>
             <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
@@ -638,31 +643,54 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
           <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">25 pts</p>
           <p className="mt-2 text-sm text-[var(--color-text-secondary)]">À corriger par le professeur</p>
         </section>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Formulaire</h2>
-          <pre className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">{formToText(formTemplate, formAnswers)}</pre>
-        </section>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Texte court</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
-          <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
-            <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
-            <FeedbackList feedback={shortFeedback} />
-          </div>
-        </section>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white p-4">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Texte long</h2>
-          <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
-          <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
-            <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
-            <FeedbackList feedback={longFeedback} />
-          </div>
-        </section>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
+        <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
+        <div className="space-y-3">
+          {STEP_META.map((item, index) => {
+            const isOpen = openResult === item.id;
+            return (
+              <section key={item.id} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
+                <button
+                  type="button"
+                  onClick={() => setOpenResult(isOpen ? null : item.id)}
+                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold"
+                >
+                  <span><span style={{ color: ACCENT }}>{index + 1}</span> {item.title}</span>
+                  <span style={{ color: ACCENT }}>{item.points} pts</span>
+                </button>
+                {isOpen && (
+                  <div className="border-t border-[var(--color-border-default)] p-4">
+                    {item.id === "form" && (
+                      <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">{formToText(formTemplate, formAnswers)}</pre>
+                    )}
+                    {item.id === "short" && (
+                      <div>
+                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
+                        <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
+                          <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
+                          <FeedbackList feedback={shortFeedback} />
+                        </div>
+                      </div>
+                    )}
+                    {item.id === "long" && (
+                      <div>
+                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
+                        <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
+                          <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
+                          <FeedbackList feedback={longFeedback} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </section>
+            );
+          })}
+        </div>
+        <section className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
           <h2 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h2>
           {teachers.length ? (
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-              <select value={teacherId} onChange={(event) => setTeacherId(event.target.value)} disabled={sent} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]">
+              <select value={teacherId} onChange={(event) => setTeacherId(event.target.value)} disabled={sent} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]">
                 <option value="">Choisissez un professeur</option>
                 {teachers.map((teacher) => (
                   <option key={teacher.id} value={teacher.id}>{[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}</option>
@@ -686,7 +714,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   return (
     <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
       <Header level={level} title="Production écrite" />
-      <ProgressBar current={current} remaining={remaining} onSelect={setCurrent} />
+      <ProgressBar current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{step.title}</h2>
@@ -711,12 +739,9 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
       </section>
       <HiddenNav
         onBack={() => move(-1)}
-        onRefresh={resetCurrent}
         onValidate={() => void finishStep()}
         onNext={() => move(1)}
-        refreshDisabled={checking}
         validateDisabled={checking}
-        nextDisabled={remaining.length <= 1}
         nextLabel="Suivant"
       />
     </main>

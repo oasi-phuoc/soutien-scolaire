@@ -371,6 +371,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [openReview, setOpenReview] = useState<number | null>(1);
   const [isSending, startSending] = useTransition();
 
   useEffect(() => {
@@ -717,14 +718,17 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       </header>
 
       {phase !== "intro" && phase !== "review" && (
-        <div className="mb-6 space-y-2">
-          <div className="flex items-center justify-between text-sm font-semibold">
-            <span style={{ color: ACCENT }}>
+        <div className="mb-6">
+          <div className="mb-1.5 flex items-center justify-between">
+            <p className="text-xs font-bold tabular-nums" style={{ color: ACCENT }}>
               {Math.min(stepIdx + 1, totalSteps)} / {totalSteps}
-            </span>
-            <span className="rounded-full bg-white px-3 py-1 shadow-sm" style={{ color: ACCENT }}>
-              {formatPoTimer(remainingMs)}
-            </span>
+            </p>
+            <div className="flex items-center gap-3">
+              <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${ACCENT} 12%, white)`, color: ACCENT }}>
+                {formatPoTimer(remainingMs)}
+              </span>
+              <p className="text-xs text-[var(--color-text-secondary)]">{activeTaskPhases.length} exercice{activeTaskPhases.length !== 1 ? "s" : ""} restant{activeTaskPhases.length !== 1 ? "s" : ""}</p>
+            </div>
           </div>
           <div className="flex gap-0.5">
             {activeTaskPhases.map((task, i) => (
@@ -732,8 +736,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 key={task}
                 type="button"
                 onClick={() => setPhase(task)}
-                className="h-2 flex-1 rounded-full transition-colors"
-                style={{ background: i === stepIdx ? ACCENT : "var(--color-border-default)" }}
+                className="h-2 min-w-8 flex-1 rounded-full transition-colors"
+                style={{ background: i === stepIdx ? ACCENT : "var(--color-border-default, var(--color-border))" }}
                 aria-label={`Aller à l'exercice ${i + 1}`}
               />
             ))}
@@ -754,7 +758,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
             </ul>
 
-            <div className="mt-5 space-y-2 border-t border-[var(--color-border)] pt-4">
+            <div className="mt-5 space-y-2 border-t border-[var(--color-border-default)] pt-4">
               {introRows.map(([num, title, pts]) => (
                 <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
                   <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
@@ -775,7 +779,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
             </button>
             {tipsOpen && (
-              <div className="space-y-2 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <div className="space-y-2 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
                 <p>Parlez clairement et faites des phrases complètes, même si elles sont simples.</p>
                 <p>Répondez à la question, puis ajoutez une raison ou un exemple.</p>
                 <p>Si vous ne trouvez pas un mot, expliquez avec d&apos;autres mots.</p>
@@ -1374,34 +1378,38 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </h2>
           </div>
 
-          {/* Dialogue split by section */}
-          <div className="space-y-5">
+          <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur une partie pour voir le détail.</p>
+          <div className="space-y-3">
             {[
-              { num: 1, label: "Partie 1 — Questions thématiques", lines: task1Lines },
-              { num: 2, label: "Partie 2 — Entretien dirigé",       lines: interviewLines },
-              { num: 3, label: "Partie 3 — Description d'image",    lines: task2Lines },
-              { num: 4, label: "Partie 4 — Dialogue",               lines: task4Lines },
-              { num: 5, label: "Partie 5 - Argumentation",           lines: task5Lines },
-            ].filter(({ lines }) => lines.length > 0).map(({ num, label, lines }) => (
-              <section key={num}>
-                <div className="mb-2 flex items-center gap-2">
-                  <span
-                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
-                    style={{ background: ACCENT }}
+              { num: 1, label: "Partie 1 — Questions thématiques", points: 3, lines: task1Lines },
+              { num: 2, label: "Partie 2 — Entretien dirigé", points: 4, lines: interviewLines },
+              { num: 3, label: "Partie 3 — Description d'image", points: 5, lines: task2Lines },
+              { num: 4, label: "Partie 4 — Dialogue", points: 6, lines: task4Lines },
+              { num: 5, label: "Partie 5 - Argumentation", points: 7, lines: task5Lines },
+            ].map(({ num, label, points, lines }) => {
+              const isOpen = openReview === num;
+              return (
+                <section key={num} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
+                  <button
+                    type="button"
+                    onClick={() => setOpenReview(isOpen ? null : num)}
+                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold"
                   >
-                    {num}
-                  </span>
-                  <h3 className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-                    {label}
-                  </h3>
-                </div>
-                <div className="space-y-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-                  {lines.map((line, i) => (
-                    <DialogueBubble key={i} line={{ ...line }} />
-                  ))}
-                </div>
-              </section>
-            ))}
+                    <span><span style={{ color: ACCENT }}>{num}</span> {label}</span>
+                    <span style={{ color: ACCENT }}>{points} pts</span>
+                  </button>
+                  {isOpen && (
+                    <div className="space-y-2 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+                      {lines.length ? (
+                        lines.map((line, i) => <DialogueBubble key={i} line={{ ...line }} />)
+                      ) : (
+                        <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
+                      )}
+                    </div>
+                  )}
+                </section>
+              );
+            })}
           </div>
 
           {/* Send to teacher */}
@@ -1452,6 +1460,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             {/* Back button */}
             <button
               type="button"
+              data-nav-action="back"
               onClick={goBack}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
             >
@@ -1462,6 +1471,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             {showValidate ? (
               <button
                 type="button"
+                data-nav-action="validate"
                 onClick={handleNavValidate}
                 disabled={validateDisabled}
                 className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
@@ -1485,6 +1495,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             {/* Next / Finish button */}
             <button
               type="button"
+              data-nav-action="next"
+              data-nav-label={isLastPhase ? "Terminer" : "Suivant"}
               onClick={goNext}
               disabled={nextDisabled}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"

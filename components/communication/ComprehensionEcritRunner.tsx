@@ -749,8 +749,8 @@ function ProgressDots({
           type="button"
           onClick={() => onSelect?.(index)}
           disabled={!onSelect}
-          className="h-2 flex-1 rounded-full transition-colors disabled:cursor-default"
-          style={{ background: index === current ? ACCENT : "var(--color-border)" }}
+          className="h-2 min-w-8 flex-1 rounded-full transition-colors disabled:cursor-default"
+          style={{ background: index === current ? ACCENT : "var(--color-border-default, var(--color-border))" }}
           aria-label={`Aller à l'exercice ${index + 1}`}
         />
       ))}
@@ -781,7 +781,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
         </ul>
 
-        <div className="mt-5 space-y-2 border-t border-[var(--color-border)] pt-4">
+        <div className="mt-5 space-y-2 border-t border-[var(--color-border-default)] pt-4">
           {rows.map(([num, title, pts]) => (
             <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
               <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
@@ -802,7 +802,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
           <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
         </button>
         {tipsOpen && (
-          <div className="space-y-2 border-t border-[var(--color-border)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+          <div className="space-y-2 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
             <p>Lisez d&apos;abord la consigne, puis cherchez les mots importants dans le document.</p>
             <p>Pour les questions à choix, éliminez les réponses impossibles avant de choisir.</p>
             <p>Pour les réponses écrites, répondez avec les mots du texte quand c&apos;est possible.</p>
@@ -834,7 +834,7 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
             key={index}
             type="button"
             onClick={() => !correction && onChange(index)}
-            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center gap-1 text-center" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border)] text-[var(--color-text-primary)]"}`}
+            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center gap-1 text-center" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image && <ImagePlaceholder label={choice.label} path={choice.image} compact />}
             <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
@@ -895,7 +895,7 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
           </div>
         ))}
       </div>
-      <div className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-white">
+      <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white">
         <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
           <colgroup>
             <col style={{ width: "52%" }} />
@@ -905,20 +905,20 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
           </colgroup>
           <thead>
             <tr className="bg-slate-50">
-              <th className="border border-[var(--color-border)] p-2 text-left">Personnes</th>
-              {part.task.documents.map((_, index) => <th key={index} className="border border-[var(--color-border)] px-1 py-2 text-center leading-tight">Doc.<br />{index + 1}</th>)}
+              <th className="border border-[var(--color-border-default)] p-2 text-left">Personnes</th>
+              {part.task.documents.map((_, index) => <th key={index} className="border border-[var(--color-border-default)] px-1 py-2 text-center leading-tight">Doc.<br />{index + 1}</th>)}
             </tr>
           </thead>
           <tbody>
             {part.task.people.map((person, row) => (
               <tr key={person}>
-                <td className="border border-[var(--color-border)] p-2">{String.fromCharCode(97 + row)}. {person}</td>
+                <td className="border border-[var(--color-border-default)] p-2">{String.fromCharCode(97 + row)}. {person}</td>
                 {part.task.documents.map((_, col) => {
                   const key = questionKey(part, row);
                   const selected = answers[key] === col;
                   const correct = correction && part.task.answers[row] === col;
                   return (
-                    <td key={col} className="border border-[var(--color-border)] p-2 text-center">
+                    <td key={col} className="border border-[var(--color-border-default)] p-2 text-center">
                       <button
                         type="button"
                         onClick={() => !correction && setAnswer(key, col)}
@@ -956,7 +956,7 @@ function InstructionsPart({ part, answers, setAnswer, correction }: { part: Extr
   return (
     <div className="space-y-5">
       {part.cards.map((card, cardIndex) => (
-        <div key={card.title} className="rounded-xl border border-[var(--color-border)] bg-white p-4 shadow-sm">
+        <div key={card.title} className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="flex-1">
               <h3 className="text-lg font-bold" style={{ color: ACCENT }}>{card.title}</h3>
@@ -1079,7 +1079,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
           const score = scores[index] ?? 0;
           const isOpen = opened === part.id;
           return (
-            <div key={part.id} className={`overflow-hidden rounded-2xl border bg-white/85 shadow-sm ${isOpen ? "border-[var(--color-text-primary)]" : "border-[var(--color-border)]"}`}>
+            <div key={part.id} className={`overflow-hidden rounded-2xl border bg-white/85 shadow-sm ${isOpen ? "border-[var(--color-text-primary)]" : "border-[var(--color-border-default)]"}`}>
               <button type="button" className="flex w-full items-center gap-3 px-4 py-3 text-left" onClick={() => setOpened(isOpen ? null : part.id)}>
                 <span className="font-bold" style={{ color: ACCENT }}>{index + 1}</span>
                 <span className="flex-1 font-semibold text-[var(--color-text-primary)]">{part.title}</span>
@@ -1087,7 +1087,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
                 <span>›</span>
               </button>
               {isOpen && (
-                <div className="border-t border-[var(--color-border)] p-4">
+                <div className="border-t border-[var(--color-border-default)] p-4">
                   <PartView part={part} answers={answers} setAnswer={() => {}} correction />
                 </div>
               )}
@@ -1174,11 +1174,15 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
       {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
           <CEHeader level={level} title="Compréhension écrite" />
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm font-semibold">
-              <span style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</span>
-              <span className="rounded-full bg-white px-3 py-1 shadow-sm" style={{ color: INVERSE }}>{formatTimer(now - (startedAt ?? now))}</span>
-              <span className="text-[var(--color-text-secondary)]">{activeParts.length} exercices restants</span>
+          <div className="mb-5">
+            <div className="mb-1.5 flex items-center justify-between">
+              <p className="text-xs font-bold tabular-nums" style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</p>
+              <div className="flex items-center gap-3">
+                <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${INVERSE} 12%, white)`, color: INVERSE }}>
+                  {formatTimer(now - (startedAt ?? now))}
+                </span>
+                <p className="text-xs text-[var(--color-text-secondary)]">{activeParts.length} exercice{activeParts.length !== 1 ? "s" : ""} restant{activeParts.length !== 1 ? "s" : ""}</p>
+              </div>
             </div>
             <ProgressDots
               current={Math.min(current, activeParts.length - 1)}
