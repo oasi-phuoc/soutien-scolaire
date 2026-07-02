@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   randomCoGroup,
@@ -208,12 +208,69 @@ function ProgressBar({
   );
 }
 
-function AudioPlayer({ audio }: { audio: string }) {
+function AudioPlayer({ audio, label }: { audio: string; label: string }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [error, setError] = useState(false);
+
+  function toggle() {
+    let player = audioRef.current;
+    if (!player) {
+      player = new Audio(audio);
+      player.preload = "none";
+      audioRef.current = player;
+      player.addEventListener("ended", () => setPlaying(false));
+      player.addEventListener("pause", () => setPlaying(false));
+      player.addEventListener("play", () => {
+        setError(false);
+        setPlaying(true);
+      });
+      player.addEventListener("error", () => {
+        setPlaying(false);
+        setError(true);
+      });
+    }
+
+    if (playing) {
+      player.pause();
+      player.currentTime = 0;
+      setPlaying(false);
+      return;
+    }
+
+    player.currentTime = 0;
+    void player.play().catch(() => {
+      setPlaying(false);
+      setError(true);
+    });
+  }
+
   return (
-    <audio controls preload="metadata" className="w-full rounded-full">
-      <source src={audio} type="audio/mpeg" />
-      Votre navigateur ne peut pas lire cet audio.
-    </audio>
+    <div>
+      <button
+        type="button"
+        onClick={toggle}
+        className="flex h-12 w-full items-center justify-center gap-3 rounded-full border border-[var(--color-border-default)] bg-white px-5 text-sm font-bold text-[var(--color-text-primary)] shadow-sm transition-opacity hover:opacity-85 active:scale-[0.99]"
+        aria-label={playing ? `Arrêter ${label}` : `Écouter ${label}`}
+      >
+        {playing ? (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <rect x="5" y="4" width="4" height="16" rx="1" />
+            <rect x="15" y="4" width="4" height="16" rx="1" />
+          </svg>
+        ) : (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M6 4l14 8-14 8V4z" />
+          </svg>
+        )}
+        <span>{playing ? "Lecture en cours" : label}</span>
+      </button>
+      {error && (
+        <p className="mt-1 text-xs font-semibold text-red-600">
+          Audio indisponible : {audio}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -267,7 +324,7 @@ function QuestionBlock({
           {part.audioGroup.items.map((item) => {
             return (
               <div key={item.id} className="space-y-3">
-                <AudioPlayer audio={item.audio} />
+                <AudioPlayer audio={item.audio} label={part.audioGroup.items.length > 1 ? `Écouter ${item.activity}` : "Écouter l'audio"} />
                 {showTranscripts && item.transcript && (
                   <div className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
                     {item.transcript}
