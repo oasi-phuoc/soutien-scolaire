@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  randomCoItem,
+  randomCoGroup,
   type COAudioCategory,
-  type COAudioItem,
+  type COAudioGroup,
+  type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 
@@ -16,9 +17,9 @@ type QuestionTask = ChoiceTask | FillTask;
 type COPart = {
   id: COAudioCategory;
   title: string;
-  points: 4 | 5 | 8;
+  points: number;
   context: string;
-  audioItem: COAudioItem;
+  audioGroup: COAudioGroup;
   questions: QuestionTask[];
 };
 type Answers = Record<string, number | string | null>;
@@ -27,7 +28,7 @@ const ACCENT = "var(--color-accent-comm)";
 const INVERSE = "var(--color-accent-comm-inverse, #f5a623)";
 const TOTAL_SECONDS = 25 * 60;
 
-const PART_INFO: Array<Omit<COPart, "audioItem" | "questions">> = [
+const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
   { id: "message", title: "Comprendre un message", points: 4, context: "Écoutez un message vocal." },
   { id: "annonce", title: "Comprendre une annonce", points: 4, context: "Écoutez une annonce courte." },
   { id: "instruction", title: "Comprendre des instructions", points: 4, context: "Écoutez des consignes ou des informations pratiques." },
@@ -35,10 +36,26 @@ const PART_INFO: Array<Omit<COPart, "audioItem" | "questions">> = [
   { id: "objet", title: "Identifier des objets", points: 5, context: "Écoutez et repérez les objets ou les informations importantes." },
 ];
 
-function makeParts(): COPart[] {
-  return PART_INFO.map((part) => ({
+const MEDIUM_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
+  { id: "message", title: "Comprendre un message", points: 6, context: "Écoutez un message vocal." },
+  { id: "annonce", title: "Comprendre une annonce", points: 6, context: "Écoutez une série d'annonces courtes." },
+  { id: "radio", title: "Comprendre des émissions de radio", points: 6, context: "Écoutez une ou plusieurs annonces radio." },
+  { id: "conversation", title: "Comprendre des conversations", points: 7, context: "Écoutez plusieurs échanges courts." },
+];
+
+function partInfoFor(level: COLevel) {
+  return level === "moyen" ? MEDIUM_PART_INFO : BASE_PART_INFO;
+}
+
+function audioLevelFor(level: COLevel): COAudioLevel {
+  return level === "moyen" ? "moyen" : "base";
+}
+
+function makeParts(level: COLevel): COPart[] {
+  const audioLevel = audioLevelFor(level);
+  return partInfoFor(level).map((part) => ({
     ...part,
-    audioItem: randomCoItem(part.id),
+    audioGroup: randomCoGroup(audioLevel, part.id),
     questions: [],
   }));
 }
@@ -194,27 +211,43 @@ function AudioListenButton({
   label,
   audio,
   used,
-  onUse,
+  onComplete,
 }: {
   label: string;
   audio: string;
   used: boolean;
-  onUse: () => void;
+  onComplete: () => void;
 }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+
+  function playAudio() {
+    const player = new Audio(audio);
+    audioRef.current = player;
+    setPlaying(true);
+    player.onended = () => {
+      setPlaying(false);
+      onComplete();
+    };
+    player.onerror = () => {
+      setPlaying(false);
+    };
+    void player.play().catch(() => {
+      setPlaying(false);
+    });
+  }
+
   return (
     <button
       type="button"
-      disabled={used}
-      onClick={() => {
-        onUse();
-        void new Audio(audio).play().catch(() => undefined);
-      }}
+      disabled={used || playing}
+      onClick={playAudio}
       className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
     >
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
         <path d="M8 5v14l11-7z" />
       </svg>
-      {label}
+      {playing ? "Lecture..." : label}
     </button>
   );
 }
@@ -234,45 +267,56 @@ function QuestionBlock({
   usedAudio: Record<string, boolean>;
   toggleAudioUse: (key: string) => void;
 }) {
-  const [transcriptOpen, setTranscriptOpen] = useState(false);
-  const firstListenKey = `${part.id}-listen-1`;
-  const secondListenKey = `${part.id}-listen-2`;
+  const [openTranscript, setOpenTranscript] = useState<string | null>(null);
 
   return (
     <div className="space-y-5">
-      <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
-        {part.audioItem.transcript && (
-          <button
-            type="button"
-            onClick={() => setTranscriptOpen((value) => !value)}
-            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] bg-white text-[var(--color-text-primary)] shadow-sm"
-            aria-label="Afficher ou masquer la transcription"
-            title="Aide : transcription"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M9 18h6" />
-              <path d="M10 22h4" />
-              <path d="M8.5 14a6 6 0 1 1 7 0c-.8.7-1.5 1.7-1.5 3h-4c0-1.3-.7-2.3-1.5-3z" />
-            </svg>
-          </button>
-        )}
-        <p className="pr-11 text-xs font-bold uppercase tracking-wider" style={{ color: ACCENT }}>
-          Audio · activité {part.audioItem.activity}
+      <div className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
+        <p className="text-xs font-bold uppercase tracking-wider" style={{ color: ACCENT }}>
+          Activité {part.audioGroup.activity}
         </p>
         <p className="mt-1 pr-11 text-sm text-[var(--color-text-secondary)]">{part.context}</p>
-        <div className="mt-4 flex gap-3">
-          <AudioListenButton label="Écoute 1" audio={part.audioItem.audio} used={!!usedAudio[firstListenKey]} onUse={() => toggleAudioUse(firstListenKey)} />
-          <AudioListenButton label="Écoute 2" audio={part.audioItem.audio} used={!!usedAudio[secondListenKey]} onUse={() => toggleAudioUse(secondListenKey)} />
+        <div className="mt-4 space-y-3">
+          {part.audioGroup.items.map((item, index) => {
+            const firstListenKey = `${part.id}-${item.id}-listen-1`;
+            const secondListenKey = `${part.id}-${item.id}-listen-2`;
+            return (
+              <div key={item.id} className="relative rounded-[var(--radius-md)] border border-slate-200 bg-white p-3">
+                {item.transcript && (
+                  <button
+                    type="button"
+                    onClick={() => setOpenTranscript((value) => value === item.id ? null : item.id)}
+                    className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-[var(--color-text-primary)] shadow-sm"
+                    aria-label="Afficher ou masquer la transcription"
+                    title="Aide : transcription"
+                  >
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M9 18h6" />
+                      <path d="M10 22h4" />
+                      <path d="M8.5 14a6 6 0 1 1 7 0c-.8.7-1.5 1.7-1.5 3h-4c0-1.3-.7-2.3-1.5-3z" />
+                    </svg>
+                  </button>
+                )}
+                <p className="pr-10 text-xs font-semibold text-[var(--color-text-secondary)]">
+                  Audio {index + 1} · activité {item.activity}
+                </p>
+                <div className="mt-3 flex gap-3">
+                  <AudioListenButton label="Écoute 1" audio={item.audio} used={!!usedAudio[firstListenKey]} onComplete={() => toggleAudioUse(firstListenKey)} />
+                  <AudioListenButton label="Écoute 2" audio={item.audio} used={!!usedAudio[secondListenKey]} onComplete={() => toggleAudioUse(secondListenKey)} />
+                </div>
+                {openTranscript === item.id && item.transcript && (
+                  <div className="mt-4 border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+                    {item.transcript}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
-        {transcriptOpen && part.audioItem.transcript && (
-          <div className="mt-4 border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
-            {part.audioItem.transcript}
-          </div>
-        )}
       </div>
 
       {!part.questions.length && (
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4 text-sm text-[var(--color-text-secondary)]">
+        <div className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4 text-sm text-[var(--color-text-secondary)]">
           Les questions seront ajoutées après la vérification des audios.
         </div>
       )}
@@ -281,7 +325,7 @@ function QuestionBlock({
         const key = `${part.id}-${index}`;
         const answer = answers[key] ?? null;
         return (
-          <div key={key} className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/80 p-4">
+          <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
             <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
             {question.kind === "choice" ? (
               <div className="mt-3 grid gap-2 sm:grid-cols-3">
@@ -332,7 +376,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
-  const parts = useMemo(() => makeParts(), []);
+  const parts = useMemo(() => makeParts(level), [level]);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
   const [currentId, setCurrentId] = useState(parts[0]!.id);
@@ -392,11 +436,20 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
     setUsedAudio((previous) => ({ ...previous, [key]: true }));
   }
 
+  function usedAudioForResults(part: COPart) {
+    return Object.fromEntries(
+      part.audioGroup.items.flatMap((item) => [
+        [`${part.id}-${item.id}-listen-1`, true],
+        [`${part.id}-${item.id}-listen-2`, true],
+      ]),
+    );
+  }
+
   if (phase === "intro") {
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Compréhension orale" />
-        <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 p-5 shadow-sm">
+        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 p-5 shadow-none">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
             <li><span style={{ color: ACCENT }}>•</span> <strong>5 exercices</strong> d&apos;écoute</li>
@@ -406,8 +459,8 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
           </ul>
           <div className="mt-5 grid gap-2">
-            {PART_INFO.map((part, index) => (
-              <div key={part.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-4 py-3">
+            {partInfoFor(level).map((part, index) => (
+              <div key={part.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-slate-200 bg-white px-4 py-3">
                 <span><strong>{index + 1}.</strong> {part.title}</span>
                 <span className="font-semibold" style={{ color: ACCENT }}>{part.points} pts</span>
               </div>
@@ -416,7 +469,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
           <button
             type="button"
             onClick={() => setShowTips((value) => !value)}
-            className="mt-5 w-full rounded-full border border-[var(--color-border)] bg-white px-4 py-3 text-left font-semibold text-[var(--color-text-primary)]"
+            className="mt-5 w-full rounded-[var(--radius-lg)] border border-slate-200 bg-white px-4 py-3 text-left font-semibold text-[var(--color-text-primary)]"
           >
             Conseils pour réussir
           </button>
@@ -487,7 +540,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
                       answers={validatedAnswers[part.id] ?? {}}
                       onAnswer={() => undefined}
                       readonly
-                      usedAudio={{ [`${part.id}-listen-1`]: true, [`${part.id}-listen-2`]: true }}
+                      usedAudio={usedAudioForResults(part)}
                       toggleAudioUse={() => undefined}
                     />
                   </div>

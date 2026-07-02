@@ -268,7 +268,7 @@ function FormExercise({
           Vous aidez une personne à remplir ce formulaire. Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
         </div>
       )}
-      <section className="border border-[var(--color-border-emphasis)] bg-white px-4 py-5 shadow-sm sm:px-6">
+      <section className="border border-slate-200 bg-white px-4 py-5 shadow-none sm:px-6">
         <div className="mb-5 border-b-2 pb-2 text-center" style={{ borderColor: ACCENT }}>
           <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{template.organization}</p>
           <h2 className="mt-1 text-xl font-bold uppercase text-[var(--color-text-primary)]">{template.title}</h2>
@@ -302,7 +302,7 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
 
   return (
     <div className="space-y-6">
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 shadow-sm">
+      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-[var(--color-bg-card)] p-5 shadow-none">
         <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
         <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">3 exercices</strong> de production écrite</span></li>
@@ -321,7 +321,7 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
+      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
         <button type="button" onClick={() => setTipsOpen((value) => !value)} className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]">
           <span>Conseils pour réussir</span>
           <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>

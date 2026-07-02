@@ -282,7 +282,7 @@ function FormExercise({
           Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
         </div>
       )}
-      <section className="border border-[var(--color-border-emphasis)] bg-white px-4 py-5 shadow-sm sm:px-6">
+      <section className="border border-slate-200 bg-white px-4 py-5 shadow-none sm:px-6">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">{template.organization}</p>
         <h2 className="mt-1 text-center text-xl font-bold uppercase text-[var(--color-text-primary)]">{template.title}</h2>
         <div className="mt-5 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
@@ -597,7 +597,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Production écrite" />
-        <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 p-5 shadow-sm">
+        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 p-5 shadow-none">
           <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
             <li><span style={{ color: ACCENT }}>•</span> <strong>3 exercices</strong> de production écrite</li>
@@ -607,14 +607,14 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
           </ul>
           <div className="mt-5 grid gap-2">
             {STEP_META.map((step, index) => (
-              <div key={step.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white px-4 py-3">
+              <div key={step.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-slate-200 bg-white px-4 py-3">
                 <span><strong>{index + 1}.</strong> {step.title}</span>
                 <span className="font-semibold" style={{ color: ACCENT }}>{step.points} pts</span>
               </div>
             ))}
           </div>
         </section>
-        <section className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
+        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
           <button type="button" onClick={() => setTipsOpen((value) => !value)} className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]">
             <span>Conseils pour réussir</span>
             <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>

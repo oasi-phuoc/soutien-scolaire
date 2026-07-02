@@ -771,7 +771,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
     <div className="space-y-6">
       <CEHeader level={level} title="Compréhension écrite" />
 
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 shadow-sm">
+      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-[var(--color-bg-card)] p-5 shadow-none">
         <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
         <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">4 exercices</strong> de compréhension écrite</span></li>
@@ -792,7 +792,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
+      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
         <button
           type="button"
           onClick={() => setTipsOpen((v) => !v)}
