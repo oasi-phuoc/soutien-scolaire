@@ -6,7 +6,7 @@ export default async function CommunicationPage() {
   let isAdmin = false;
   if (supabase) {
     const { data: myRole } = await supabase.rpc("get_my_role");
-    isAdmin = myRole === "admin";
+    isAdmin = myRole === "admin" || myRole === "prof";
   }
   return <CommunicationHome isAdmin={isAdmin} />;
 }

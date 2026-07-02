@@ -91,7 +91,7 @@ function WritingExercise({
   const [isSending, startSending] = useTransition();
 
   function sendToTeacher() {
-    if (!teacherId || !checked || !inRange || sent) return;
+    if (!teacherId || !checked || sent) return;
     startSending(async () => {
       const result = await submitExpressionAction({
         teacherId,
@@ -101,7 +101,7 @@ function WritingExercise({
         text,
         aiFeedback: feedback,
       });
-      setSendMessage(result.ok ? "Production envoyÃ©e au professeur." : (result.reason ?? "Envoi impossible."));
+      setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
     });
   }
@@ -117,7 +117,7 @@ function WritingExercise({
         <ul className="mt-1 space-y-1">
           {prompt.points.map((point) => (
             <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">â€¢</span><span>{point} ;</span>
+              <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
             </li>
           ))}
         </ul>
@@ -127,7 +127,7 @@ function WritingExercise({
         <div className="mb-2 flex items-center justify-between gap-3">
           <label htmlFor="expression-text" className="text-sm font-bold text-[var(--color-text-primary)]">Votre production</label>
           <span className={`text-xs font-semibold ${inRange ? "text-emerald-600" : "text-amber-600"}`}>
-            {count} / {prompt.minWords}â€“{prompt.maxWords} mots
+            {count} / {prompt.minWords}–{prompt.maxWords} mots
           </span>
         </div>
         <textarea
@@ -140,35 +140,35 @@ function WritingExercise({
           aria-describedby="expression-word-count"
         />
         <p id="expression-word-count" className="mt-1 text-xs text-[var(--color-text-secondary)]">
-          Respectez la longueur demandÃ©e avant de valider.
+          Respectez la longueur demandée avant de valider.
         </p>
       </div>
 
-      {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en coursâ€¦</p>}
+      {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en cours…</p>}
       {checked && !checking && (
         <section className="rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
           <h3 className="font-bold text-amber-600">Pistes de correction</h3>
           {feedback.length === 0 ? (
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucune erreur Ã©vidente dÃ©tectÃ©e. Relisez encore le contenu et lâ€™organisation.</p>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucune erreur évidente détectée. Relisez encore le contenu et l&apos;organisation.</p>
           ) : (
             <ul className="mt-2 space-y-3">
               {feedback.map((match, index) => (
                 <li key={`${match.offset}-${index}`} className="text-sm text-[var(--color-text-primary)]">
                   <span className="font-semibold text-amber-600">{match.shortMessage || match.message}</span>
                   {match.replacements?.length ? (
-                    <span className="ml-1">â†’ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
+                    <span className="ml-1">→ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
                   ) : null}
                 </li>
               ))}
             </ul>
           )}
-          <p className="mt-3 text-xs text-[var(--color-text-secondary)]">La correction automatique est une aide. Le professeur peut complÃ©ter et expliquer les corrections.</p>
+          <p className="mt-3 text-xs text-[var(--color-text-secondary)]">La correction automatique est une aide. Le professeur peut compléter et expliquer les corrections.</p>
         </section>
       )}
 
       {checked && (
         <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
-          <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer Ã  un professeur</h3>
+          <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
           {teachers.length ? (
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
               <select
@@ -185,14 +185,14 @@ function WritingExercise({
               <button
                 type="button"
                 onClick={sendToTeacher}
-                disabled={!teacherId || !inRange || isSending || sent}
+                disabled={!teacherId || isSending || sent}
                 className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white disabled:opacity-35"
               >
-                {sent ? "EnvoyÃ©" : isSending ? "Envoiâ€¦" : "Envoyer"}
+                {sent ? "Envoyé" : isSending ? "Envoi…" : "Envoyer"}
               </button>
             </div>
           ) : (
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur nâ€™est encore disponible dans la liste.</p>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur n&apos;est encore disponible dans la liste.</p>
           )}
           {sendMessage && <p className={`mt-2 text-xs font-semibold ${sent ? "text-emerald-600" : "text-amber-600"}`}>{sendMessage}</p>}
         </section>
@@ -201,7 +201,7 @@ function WritingExercise({
   );
 }
 
-// â€”â€”â€” Theory block renderers â€”â€”â€”
+// ——— Theory block renderers ———
 
 function FormFieldControl({
   field,
@@ -222,7 +222,7 @@ function FormFieldControl({
       <span className="mb-1 block text-xs font-medium text-[var(--color-text-secondary)]">{field.label}</span>
       {field.options ? (
         <select value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={controlClass}>
-          <option value="">SÃ©lectionnez</option>
+          <option value="">Sélectionnez</option>
           {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
         </select>
       ) : (
@@ -250,7 +250,7 @@ function FormExercise({
       <p className="text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">{template.situation}</p>
       {advanced && (
         <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
-          Vous aidez une personne Ã  remplir ce formulaire. Lisez la situation, repÃ©rez les informations utiles et complÃ©tez seulement les champs que vous pouvez dÃ©duire.
+          Vous aidez une personne à remplir ce formulaire. Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
         </div>
       )}
       <section className="border border-[var(--color-border-emphasis)] bg-white px-4 py-5 shadow-sm sm:px-6">
@@ -270,7 +270,7 @@ function FormExercise({
           ))}
         </div>
         {validated && (
-          <p className="mt-5 border-t border-emerald-200 pt-3 text-center text-sm font-semibold text-emerald-600">Formulaire enregistrÃ©.</p>
+          <p className="mt-5 border-t border-emerald-200 pt-3 text-center text-sm font-semibold text-emerald-600">Formulaire enregistré.</p>
         )}
       </section>
     </div>
@@ -290,7 +290,7 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 shadow-sm">
         <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
         <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">3 exercices</strong> de production Ã©crite</span></li>
+          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">3 exercices</strong> de production écrite</span></li>
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Validez chaque exercice individuellement</span></li>
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Vous pouvez naviguer librement en cliquant sur la barre de progression en haut.</span></li>
           <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
@@ -308,7 +308,7 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white/80 shadow-sm">
         <button type="button" onClick={() => setTipsOpen((value) => !value)} className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]">
-          <span>Conseils pour rÃ©ussir</span>
+          <span>Conseils pour réussir</span>
           <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
         </button>
         {tipsOpen && (
@@ -319,7 +319,7 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
       </div>
 
       <button type="button" onClick={onStart} className="min-h-12 w-full rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90" style={{ background: ACCENT }}>
-        Commencer l&apos;Ã©valuation
+        Commencer l&apos;évaluation
       </button>
     </div>
   );
@@ -358,8 +358,8 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "section":
       return (
         <div
-          className="mb-4 border-l-2 px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]"
-          style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 6%, transparent)` }}
+          className="mb-3 whitespace-pre-line border-l-2 px-3 py-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]"
+          style={{ borderColor: ACCENT }}
         >
           {block.text}
         </div>
@@ -416,12 +416,19 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "note":
       return (
         <div className="mb-4 flex gap-2 rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-2.5 dark:border-amber-700 dark:bg-amber-950">
-          <span className="shrink-0 text-amber-600 dark:text-amber-400">âš ï¸</span>
+          <span className="shrink-0 text-amber-600 dark:text-amber-400">⚠️</span>
           <p className="text-sm text-amber-800 dark:text-amber-200">{block.text}</p>
         </div>
       );
 
     case "highlight":
+      if (block.items.length === 0) {
+        return (
+          <h3 className="mb-2 mt-4 text-sm font-bold" style={{ color: ACCENT }}>
+            {block.title}
+          </h3>
+        );
+      }
       return (
         <div
           className="mb-4 rounded-[var(--radius-md)] border-l-2 px-4 py-3"
@@ -482,7 +489,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
               <span className="shrink-0 text-sm font-bold" style={{ color: ACCENT }}>
                 {item.fr}
               </span>
-              <span className="text-sm text-[var(--color-text-secondary)]">â€” {item.example}</span>
+              <span className="text-sm text-[var(--color-text-secondary)]">— {item.example}</span>
             </div>
           ))}
         </div>
@@ -493,7 +500,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   }
 }
 
-// â€”â€”â€” MCQ Exercise (no internal nav â€” parent handles it) â€”â€”â€”
+// ——— MCQ Exercise (no internal nav — parent handles it) ———
 
 function MCQExercise({
   question,
@@ -578,14 +585,14 @@ function MCQExercise({
               : "bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-200"
           }`}
         >
-          {isCorrect ? "âœ“ Bonne rÃ©ponse !" : `âœ— La bonne rÃ©ponse est : ${answer}`}
+          {isCorrect ? "✓ Bonne réponse !" : `✗ La bonne réponse est : ${answer}`}
         </div>
       )}
     </div>
   );
 }
 
-// â€”â€”â€” Main component â€”â€”â€”
+// ——— Main component ———
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
   if (lessonId === "E1-0" || lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
@@ -633,7 +640,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   if (!lesson) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <p className="text-sm text-[var(--color-text-secondary)]">LeÃ§on introuvable.</p>
+        <p className="text-sm text-[var(--color-text-secondary)]">Leçon introuvable.</p>
         <button
           type="button"
           onClick={() => router.push("/communication")}
@@ -647,9 +654,15 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   const totalEx = lesson.exercises.length;
-  const totalSteps = lesson.writingLevel ? 2 : 3;
+  const activeWritingPhases = lesson.writingLevel
+    ? (["form", "writing"] as const).filter((item) => item === "form" ? !formValidated : !exerciseValidated)
+    : [];
+  const currentWritingStep = Math.max(0, activeWritingPhases.indexOf(phase as "form" | "writing"));
+  const totalSteps = lesson.writingLevel ? Math.max(1, activeWritingPhases.length) : 3;
   const stepIdx =
-    phase === "intro" ? 0 : phase === "theory" ? 0 : phase === "form" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
+    lesson.writingLevel
+      ? currentWritingStep
+      : phase === "intro" ? 0 : phase === "theory" ? 0 : phase === "form" ? 0 : phase === "writing" ? 1 : phase === "exercises" ? 1 : 2;
 
   function handleFinish() {
     try {
@@ -666,6 +679,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     } else if (phase === "form") {
       setPhase("intro");
     } else if (phase === "writing") {
+      if (lesson.writingLevel && formValidated) return;
       setPhase(lesson.writingLevel ? "form" : "theory");
       setGrammarFeedback([]);
       setExerciseValidated(false);
@@ -702,6 +716,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   async function handleValidate() {
     if (phase === "form") {
       setFormValidated(true);
+      if (lesson.writingLevel) setPhase("writing");
       return;
     }
     if (phase === "writing") {
@@ -779,39 +794,40 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       {/* Header */}
       <header className="mb-4 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
-          {lesson.writingLevel ? "FranÃ§ais Â· Expression Ã©crite" : "FranÃ§ais Â· Communication"}
+          {lesson.writingLevel ? "Français · Expression écrite" : "Français · Communication"}
         </p>
         <div className="flex items-center gap-2">
           <Link
             href="/francais?tab=communication"
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
             style={{ background: ACCENT }}
-            aria-label="Retour au franÃ§ais"
+            aria-label="Retour au français"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {lesson.code} â€” {lesson.title}
+            {lesson.code} — {lesson.title}
           </h1>
         </div>
       </header>
 
       {/* Segmented progress bar */}
-      {phase !== "intro" && phase !== "score" && (
-        <div className="mb-6 flex gap-1">
-          {Array.from({ length: totalSteps }).map((_, i) => (
+      {phase !== "intro" && phase !== "score" && (!lesson.writingLevel || activeWritingPhases.length > 0) && (
+        <div className="mb-6 flex gap-0.5">
+          {(lesson.writingLevel ? activeWritingPhases : Array.from({ length: totalSteps })).map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => {
                 if (!lesson.writingLevel) return;
-                setPhase(i === 0 ? "form" : "writing");
+                const target = activeWritingPhases[i];
+                if (target) setPhase(target);
               }}
               className={`h-1.5 flex-1 rounded-full transition-colors ${i > stepIdx ? "bg-[var(--color-border-default)]" : ""}`}
               style={i <= stepIdx ? { background: ACCENT, opacity: i < stepIdx ? 1 : 0.6 } : undefined}
-              aria-label={`Aller Ã  l'Ã©tape ${i + 1}`}
+              aria-label={`Aller à l'étape ${i + 1}`}
             />
           ))}
         </div>
@@ -922,13 +938,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               {score === totalEx
                 ? "Parfait !"
                 : score >= totalEx * 0.75
-                  ? "TrÃ¨s bien !"
+                  ? "Très bien !"
                   : score >= totalEx * 0.5
-                    ? "Bien jouÃ© !"
-                    : "Continuez Ã  pratiquer !"}
+                    ? "Bien joué !"
+                    : "Continuez à pratiquer !"}
             </h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Vous avez {score} bonne{score > 1 ? "s" : ""} rÃ©ponse{score > 1 ? "s" : ""} sur {totalEx}.
+              Vous avez {score} bonne{score > 1 ? "s" : ""} réponse{score > 1 ? "s" : ""} sur {totalEx}.
             </p>
           </div>
           <button
@@ -948,7 +964,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* Fixed bottom nav â€” same pattern as math modules */}
+      {/* Fixed bottom nav — same pattern as math modules */}
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
@@ -958,7 +974,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               onClick={goBack}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
             >
-              â† Retour
+              ← Retour
             </button>
 
             {/* Reset + Validate (exercises only) */}
@@ -969,7 +985,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                   onClick={handleReset}
                   disabled={(phase === "exercises" ? currentExValidated : phase === "form" ? formValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
-                  aria-label="RÃ©initialiser"
+                  aria-label="Réinitialiser"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                     <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
@@ -1000,7 +1016,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               style={{ background: ACCENT }}
             >
-              {isLastStep ? "Terminer âœ“" : "Suivant â†’"}
+              {isLastStep ? "Terminer ✓" : "Suivant →"}
             </button>
           </div>
         </div>

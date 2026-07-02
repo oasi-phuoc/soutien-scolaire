@@ -54,7 +54,7 @@ function levelFromId(id: string): CELevel {
 
 function levelLabel(level: CELevel) {
   if (level === "moyen") return "Moyen";
-  if (level === "avance") return "AvancÃ©";
+  if (level === "avance") return "Avancé";
   return "Base";
 }
 
@@ -93,7 +93,7 @@ function CEHeader({ level, title }: { level: CELevel; title: string }) {
       <button
         type="button"
         onClick={() => router.push("/communication")}
-        aria-label="Quitter la leÃ§on"
+        aria-label="Quitter la leçon"
         className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
         style={{ background: ACCENT }}
       >
@@ -103,7 +103,7 @@ function CEHeader({ level, title }: { level: CELevel; title: string }) {
       </button>
       <div className="space-y-1">
         <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>
-          FranÃ§ais Â· ComprÃ©hension Ã©crite Â· {levelLabel(level)}
+          Français · Compréhension écrite · {levelLabel(level)}
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
       </div>
@@ -134,7 +134,7 @@ function NavActionBar({
 }) {
   return (
     <div className="hidden fixed bottom-0 left-0 right-0">
-      {onBack && <button type="button" data-nav-action="back" aria-label="PrÃ©cÃ©dent" disabled={backDisabled} onClick={onBack}>PrÃ©cÃ©dent</button>}
+      {onBack && <button type="button" data-nav-action="back" aria-label="Précédent" disabled={backDisabled} onClick={onBack}>Précédent</button>}
       {onRefresh && <button type="button" data-nav-action="refresh" aria-label="Recommencer" disabled={refreshDisabled} onClick={onRefresh}>Recommencer</button>}
       {onValidate && <button type="button" data-nav-action="validate" aria-label="Valider" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
       {onNext && (
@@ -148,41 +148,41 @@ function NavActionBar({
 
 const ORIENTATION_TOPICS: OrientationSeriesItem[] = [
   {
-    context: "Avec vos amis, vous cherchez un magazine adaptÃ© Ã  chacun.",
+    context: "Avec vos amis, vous cherchez un magazine adapté à chacun.",
     docs: [
-      ["Cuisine+", "Recettes faciles", "Des plats simples, Ã©conomiques et rapides pour tous les jours."],
-      ["CinÃ©Actu", "Sorties cinÃ©ma", "Bandes-annonces, avis et nouveautÃ©s dans les salles romandes."],
-      ["CÃ©lÃ©britÃ©sMag", "Stars et musique", "Photos, interviews et nouvelles des artistes connus."],
-      ["Jeux malins", "RÃ©flexion", "Sudokus, mots croisÃ©s et jeux pour entraÃ®ner la mÃ©moire."],
-      ["JuniorStyle", "Adolescents", "Mode, sport, jeux vidÃ©o et loisirs pour les jeunes."],
-      ["AutoPlus", "Voitures", "Conseils pour acheter, rÃ©parer et comparer les vÃ©hicules."],
+      ["Cuisine+", "Recettes faciles", "Des plats simples, économiques et rapides pour tous les jours."],
+      ["CinéActu", "Sorties cinéma", "Bandes-annonces, avis et nouveautés dans les salles romandes."],
+      ["CélébritésMag", "Stars et musique", "Photos, interviews et nouvelles des artistes connus."],
+      ["Jeux malins", "Réflexion", "Sudokus, mots croisés et jeux pour entraîner la mémoire."],
+      ["JuniorStyle", "Adolescents", "Mode, sport, jeux vidéo et loisirs pour les jeunes."],
+      ["AutoPlus", "Voitures", "Conseils pour acheter, réparer et comparer les véhicules."],
     ],
     people: [
-      ["Ã‰lodie aime prÃ©parer de nouvelles recettes.", 0],
+      ["Élodie aime préparer de nouvelles recettes.", 0],
       ["Lucie cherche un magazine pour son enfant.", 4],
-      ["David veut faire des mots croisÃ©s.", 3],
-      ["Patrick s'intÃ©resse aux voitures.", 5],
-      ["Marie va souvent au cinÃ©ma.", 1],
+      ["David veut faire des mots croisés.", 3],
+      ["Patrick s'intéresse aux voitures.", 5],
+      ["Marie va souvent au cinéma.", 1],
       ["Mathilde suit la vie des chanteurs.", 2],
     ],
   },
   {
-    context: "Vous Ãªtes dans une ville suisse et vous choisissez le bon service.",
+    context: "Vous êtes dans une ville suisse et vous choisissez le bon service.",
     docs: [
-      ["BibliothÃ¨que", "Livres et journaux", "Empruntez des romans, bandes dessinÃ©es et documents."],
-      ["Piscine", "Sport et dÃ©tente", "Bassins chauffÃ©s, cours pour enfants et abonnements."],
+      ["Bibliothèque", "Livres et journaux", "Empruntez des romans, bandes dessinées et documents."],
+      ["Piscine", "Sport et détente", "Bassins chauffés, cours pour enfants et abonnements."],
       ["Office postal", "Courrier", "Envoyez des lettres, des colis et retirez vos paquets."],
-      ["Maison de quartier", "ActivitÃ©s", "Cours de langue, aide aux devoirs et rencontres."],
-      ["Pharmacie", "SantÃ©", "Conseils, mÃ©dicaments et produits de premiers soins."],
+      ["Maison de quartier", "Activités", "Cours de langue, aide aux devoirs et rencontres."],
+      ["Pharmacie", "Santé", "Conseils, médicaments et produits de premiers soins."],
       ["Gare CFF", "Transport", "Billets, horaires et informations sur les trains."],
     ],
     people: [
       ["Samir veut acheter un billet pour Sion.", 5],
       ["Oksana doit envoyer un colis.", 2],
-      ["Amina cherche un mÃ©dicament.", 4],
+      ["Amina cherche un médicament.", 4],
       ["Marta veut emprunter un roman.", 0],
       ["Youssef veut nager le mercredi.", 1],
-      ["Lina cherche un cours de franÃ§ais.", 3],
+      ["Lina cherche un cours de français.", 3],
     ],
   },
 ];
@@ -191,26 +191,26 @@ const EMAIL_SERIES: EmailSeriesItem[] = [
   {
     from: "paul@abc.ch",
     subject: "Samedi soir",
-    body: "Salut !\nJe t'Ã©cris pour notre rendez-vous samedi soir. Rose a rÃ©servÃ© au restaurant Les Arcades. On se retrouve devant le fleuriste de la place Centrale Ã  18 h 30. Nous prendrons le menu spÃ©cial, puis nous irons boire un thÃ©. Nathalie ne sait pas encore que c&apos;est une surprise. Apporte ton appareil photo pour faire quelques images.\nÃ€ samedi !\nPaul",
+    body: "Salut !\nJe t'écris pour notre rendez-vous samedi soir. Rose a réservé au restaurant Les Arcades. On se retrouve devant le fleuriste de la place Centrale à 18 h 30. Nous prendrons le menu spécial, puis nous irons boire un thé. Nathalie ne sait pas encore que c&apos;est une surprise. Apporte ton appareil photo pour faire quelques images.\nÀ samedi !\nPaul",
     questions: [
-      { prompt: "OÃ¹ faut-il se retrouver ?", choices: [{ label: "Devant le fleuriste", image: "/expression/ce/fleuriste.webp" }, { label: "Devant le restaurant", image: "/expression/ce/restaurant.webp" }, { label: "Devant la boutique", image: "/expression/ce/boutique.webp" }], correct: 0, image: true },
-      { prompt: "Ã€ quelle heure est le rendez-vous ?", choices: [{ label: "17 h 30" }, { label: "18 h 30" }, { label: "19 h 30" }], correct: 1 },
-      { prompt: "Qu'est-ce qui est une surprise ?", choices: [{ label: "Le restaurant" }, { label: "Le menu spÃ©cial" }, { label: "La soirÃ©e de Nathalie" }], correct: 2 },
+      { prompt: "Où faut-il se retrouver ?", choices: [{ label: "Devant le fleuriste", image: "/expression/ce/fleuriste.webp" }, { label: "Devant le restaurant", image: "/expression/ce/restaurant.webp" }, { label: "Devant la boutique", image: "/expression/ce/boutique.webp" }], correct: 0, image: true },
+      { prompt: "À quelle heure est le rendez-vous ?", choices: [{ label: "17 h 30" }, { label: "18 h 30" }, { label: "19 h 30" }], correct: 1 },
+      { prompt: "Qu'est-ce qui est une surprise ?", choices: [{ label: "Le restaurant" }, { label: "Le menu spécial" }, { label: "La soirée de Nathalie" }], correct: 2 },
       { prompt: "Que faut-il apporter ?", choices: [{ label: "Une rose", image: "/expression/ce/rose.webp" }, { label: "Une boisson", image: "/expression/ce/boisson.webp" }, { label: "Un appareil photo", image: "/expression/ce/appareil-photo.webp" }], correct: 2, image: true },
-      { prompt: "Qui a rÃ©servÃ© le restaurant ?", answer: "Rose", accept: ["rose"] },
+      { prompt: "Qui a réservé le restaurant ?", answer: "Rose", accept: ["rose"] },
       { prompt: "Quel jour a lieu le rendez-vous ?", answer: "samedi", accept: ["samedi soir"] },
     ],
   },
   {
     from: "fatima@ecole.ch",
-    subject: "Cours de franÃ§ais",
-    body: "Bonjour,\nLe cours de franÃ§ais de jeudi est dÃ©placÃ© dans la salle 204. Le professeur demande d'apporter le cahier bleu et un dictionnaire. Le cours commence Ã  9 h 15 et termine Ã  11 h. Si vous arrivez en retard, entrez doucement et prenez une place au fond.\nMerci.\nFatima",
+    subject: "Cours de français",
+    body: "Bonjour,\nLe cours de français de jeudi est déplacé dans la salle 204. Le professeur demande d'apporter le cahier bleu et un dictionnaire. Le cours commence à 9 h 15 et termine à 11 h. Si vous arrivez en retard, entrez doucement et prenez une place au fond.\nMerci.\nFatima",
     questions: [
       { prompt: "Dans quelle salle a lieu le cours ?", choices: [{ label: "Salle 104" }, { label: "Salle 204" }, { label: "Salle 304" }], correct: 1 },
       { prompt: "Que faut-il apporter ?", choices: [{ label: "Un cahier bleu", image: "/expression/ce/cahier-bleu.webp" }, { label: "Un sac de sport", image: "/expression/ce/sac-sport.webp" }, { label: "Un parapluie", image: "/expression/ce/parapluie.webp" }], correct: 0, image: true },
-      { prompt: "Ã€ quelle heure commence le cours ?", choices: [{ label: "9 h 15" }, { label: "10 h" }, { label: "11 h" }], correct: 0 },
-      { prompt: "OÃ¹ faut-il s'asseoir en cas de retard ?", choices: [{ label: "Devant" }, { label: "Au fond" }, { label: "Ã€ cÃ´tÃ© du professeur" }], correct: 1 },
-      { prompt: "Quel jour le cours est-il dÃ©placÃ© ?", answer: "jeudi" },
+      { prompt: "À quelle heure commence le cours ?", choices: [{ label: "9 h 15" }, { label: "10 h" }, { label: "11 h" }], correct: 0 },
+      { prompt: "Où faut-il s'asseoir en cas de retard ?", choices: [{ label: "Devant" }, { label: "Au fond" }, { label: "À côté du professeur" }], correct: 1 },
+      { prompt: "Quel jour le cours est-il déplacé ?", answer: "jeudi" },
       { prompt: "Quel autre objet faut-il prendre avec le cahier ?", answer: "dictionnaire", accept: ["un dictionnaire"] },
     ],
   },
@@ -219,27 +219,27 @@ const EMAIL_SERIES: EmailSeriesItem[] = [
 const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
-      title: "RÃ¨gles d'hygiÃ¨ne",
+      title: "Règles d'hygiène",
       image: "/expression/ce/hygiene.webp",
-      imageLabel: "HygiÃ¨ne",
-      body: "Quand vous arrivez au travail, lavez-vous les mains. Portez une tenue propre. Nettoyez votre espace aprÃ¨s chaque client.",
+      imageLabel: "Hygiène",
+      body: "Quand vous arrivez au travail, lavez-vous les mains. Portez une tenue propre. Nettoyez votre espace après chaque client.",
       questions: [
-        { prompt: "Que faut-il faire en premier ?", choices: [{ label: "Laver les mains" }, { label: "Boire un cafÃ©" }, { label: "Rentrer chez soi" }], correct: 0 },
-        { prompt: "Quand faut-il nettoyer l'espace ?", choices: [{ label: "Avant chaque pause" }, { label: "AprÃ¨s chaque client" }, { label: "Le soir seulement" }], correct: 1 },
+        { prompt: "Que faut-il faire en premier ?", choices: [{ label: "Laver les mains" }, { label: "Boire un café" }, { label: "Rentrer chez soi" }], correct: 0 },
+        { prompt: "Quand faut-il nettoyer l'espace ?", choices: [{ label: "Avant chaque pause" }, { label: "Après chaque client" }, { label: "Le soir seulement" }], correct: 1 },
       ],
     },
     {
       title: "Remplacement",
       image: "/expression/ce/remplacement.webp",
       imageLabel: "Remplacement",
-      body: "Bonjour, je suis absente aujourd'hui. Remplace-moi Ã  l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.",
+      body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.",
       questions: [
-        { prompt: "OÃ¹ faut-il remplacer la personne ?", choices: [{ label: "Ã€ l'accueil" }, { label: "Ã€ la cuisine" }, { label: "Dans la rue" }], correct: 0 },
+        { prompt: "Où faut-il remplacer la personne ?", choices: [{ label: "À l'accueil" }, { label: "À la cuisine" }, { label: "Dans la rue" }], correct: 0 },
         { prompt: "Que faire si un client arrive en retard ?", choices: [{ label: "L'annuler" }, { label: "Proposer un autre rendez-vous" }, { label: "Fermer la porte" }], correct: 1 },
       ],
     },
     {
-      title: "PrÃ©parer une infusion",
+      title: "Préparer une infusion",
       image: "/expression/ce/infusion.webp",
       imageLabel: "Infusion",
       body: "Faites chauffer l'eau. Ajoutez les plantes dans la carafe. Laissez reposer cinq minutes. Les clients peuvent demander du miel.",
@@ -251,33 +251,33 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   ],
   [
     {
-      title: "Ã€ la gare",
+      title: "À la gare",
       image: "/expression/ce/gare.webp",
       imageLabel: "Gare",
-      body: "PrÃ©sentez votre billet avant de monter. Gardez vos bagages prÃ¨s de vous. Les vÃ©los doivent rester dans la zone indiquÃ©e.",
+      body: "Présentez votre billet avant de monter. Gardez vos bagages près de vous. Les vélos doivent rester dans la zone indiquée.",
       questions: [
-        { prompt: "Que faut-il prÃ©senter ?", choices: [{ label: "Un billet" }, { label: "Une carte de bibliothÃ¨que" }, { label: "Une photo" }], correct: 0 },
-        { prompt: "OÃ¹ doivent rester les vÃ©los ?", choices: [{ label: "Dans la zone indiquÃ©e" }, { label: "Au restaurant" }, { label: "Sur les siÃ¨ges" }], correct: 0 },
+        { prompt: "Que faut-il présenter ?", choices: [{ label: "Un billet" }, { label: "Une carte de bibliothèque" }, { label: "Une photo" }], correct: 0 },
+        { prompt: "Où doivent rester les vélos ?", choices: [{ label: "Dans la zone indiquée" }, { label: "Au restaurant" }, { label: "Sur les sièges" }], correct: 0 },
       ],
     },
     {
-      title: "Consigne de sÃ©curitÃ©",
+      title: "Consigne de sécurité",
       image: "/expression/ce/securite.webp",
-      imageLabel: "SÃ©curitÃ©",
-      body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bÃ¢timent.",
+      imageLabel: "Sécurité",
+      body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bâtiment.",
       questions: [
         { prompt: "Que ne faut-il pas utiliser ?", choices: [{ label: "La porte" }, { label: "L'ascenseur" }, { label: "L'escalier" }], correct: 1 },
-        { prompt: "OÃ¹ faut-il attendre ?", choices: [{ label: "Devant le bÃ¢timent" }, { label: "Dans la classe" }, { label: "Ã€ la cave" }], correct: 0 },
+        { prompt: "Où faut-il attendre ?", choices: [{ label: "Devant le bâtiment" }, { label: "Dans la classe" }, { label: "À la cave" }], correct: 0 },
       ],
     },
     {
       title: "Atelier cuisine",
       image: "/expression/ce/cuisine.webp",
       imageLabel: "Cuisine",
-      body: "Lisez toute la recette avant de commencer. PrÃ©parez les ingrÃ©dients sur la table. Rangez le matÃ©riel aprÃ¨s l'activitÃ©.",
+      body: "Lisez toute la recette avant de commencer. Préparez les ingrédients sur la table. Rangez le matériel après l'activité.",
       questions: [
         { prompt: "Que faut-il lire avant de commencer ?", choices: [{ label: "La recette" }, { label: "Un journal" }, { label: "Un horaire" }], correct: 0 },
-        { prompt: "Quand faut-il ranger le matÃ©riel ?", choices: [{ label: "Avant l'activitÃ©" }, { label: "AprÃ¨s l'activitÃ©" }, { label: "Jamais" }], correct: 1 },
+        { prompt: "Quand faut-il ranger le matériel ?", choices: [{ label: "Avant l'activité" }, { label: "Après l'activité" }, { label: "Jamais" }], correct: 1 },
       ],
     },
   ],
@@ -285,36 +285,36 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
 
 const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
-    title: "AmÃ©liorez votre mÃ©moire !",
+    title: "Améliorez votre mémoire !",
     sections: [
-      { heading: "L'alimentation", body: "Mangez des lÃ©gumes frais, des noix et du poisson. Buvez de l'eau rÃ©guliÃ¨rement.", image: "/expression/ce/alimentation.webp", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vÃ©lo et la danse stimulent le cerveau et aident Ã  rester concentrÃ©.", image: "/expression/ce/sport.webp", imageLabel: "Sport" },
-      { heading: "L'activitÃ© mentale", body: "Jouez Ã  des jeux de sociÃ©tÃ©, lisez un texte ou racontez une histoire Ã  un ami.", image: "/expression/ce/activite-mentale.webp", imageLabel: "ActivitÃ© mentale" },
+      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/expression/ce/alimentation.webp", imageLabel: "Alimentation" },
+      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/expression/ce/sport.webp", imageLabel: "Sport" },
+      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/expression/ce/activite-mentale.webp", imageLabel: "Activité mentale" },
     ],
     questions: [
-      { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des lÃ©gumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillÃ© ?", choices: [{ label: "La marche", image: "/expression/ce/marche.webp" }, { label: "La boxe", image: "/expression/ce/boxe.webp" }, { label: "Le ski nautique", image: "/expression/ce/ski-nautique.webp" }], correct: 0, image: true },
-      { prompt: "Quelle boisson est conseillÃ©e ?", answer: "eau", accept: ["de l'eau", "l eau"] },
-      { prompt: "Quelle activitÃ© mentale peut-on faire ?", choices: [{ label: "Jouer Ã  des jeux de sociÃ©tÃ©" }, { label: "Dormir toute la journÃ©e" }, { label: "Ne rien lire" }], correct: 0 },
-      { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les rÃ¨gles" }, { label: "Pour Ã©viter les amis" }], correct: 0 },
-      { prompt: "Ã€ qui peut-on raconter une histoire ?", answer: "ami", accept: ["un ami", "Ã  un ami"] },
-      { prompt: "Quel est le sujet principal de l'article ?", choices: [{ label: "La mÃ©moire" }, { label: "Le voyage" }, { label: "La mÃ©tÃ©o" }], correct: 0 },
+      { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
+      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/expression/ce/marche.webp" }, { label: "La boxe", image: "/expression/ce/boxe.webp" }, { label: "Le ski nautique", image: "/expression/ce/ski-nautique.webp" }], correct: 0, image: true },
+      { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
+      { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
+      { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
+      { prompt: "À qui peut-on raconter une histoire ?", answer: "ami", accept: ["un ami", "à un ami"] },
+      { prompt: "Quel est le sujet principal de l'article ?", choices: [{ label: "La mémoire" }, { label: "Le voyage" }, { label: "La météo" }], correct: 0 },
     ],
   },
   {
     title: "Bien vivre en hiver",
     sections: [
-      { heading: "Se protÃ©ger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/expression/ce/froid.webp", imageLabel: "Froid" },
-      { heading: "Rester en forme", body: "MÃªme en hiver, sortez marcher un peu et aÃ©rez votre logement chaque jour.", image: "/expression/ce/hiver.webp", imageLabel: "Hiver" },
-      { heading: "Ã‰viter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous Ãªtes fatiguÃ©.", image: "/expression/ce/lavage-mains.webp", imageLabel: "Lavage des mains" },
+      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/expression/ce/froid.webp", imageLabel: "Froid" },
+      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "/expression/ce/hiver.webp", imageLabel: "Hiver" },
+      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/expression/ce/lavage-mains.webp", imageLabel: "Lavage des mains" },
     ],
     questions: [
       { prompt: "Que faut-il porter quand il fait froid ?", choices: [{ label: "Un manteau chaud" }, { label: "Un maillot de bain" }, { label: "Des sandales" }], correct: 0 },
-      { prompt: "Quelle image correspond Ã  l'hiver ?", choices: [{ label: "Neige", image: "/expression/ce/neige.webp" }, { label: "Soleil d'Ã©tÃ©", image: "/expression/ce/soleil.webp" }, { label: "Plage", image: "/expression/ce/plage.webp" }], correct: 0, image: true },
-      { prompt: "Que faut-il aÃ©rer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
-      { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenÃªtres" }], correct: 0 },
-      { prompt: "Que faire si on est fatiguÃ© ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },
-      { prompt: "Quel vÃªtement protÃ¨ge les mains ?", answer: "gants", accept: ["des gants"] },
+      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/expression/ce/neige.webp" }, { label: "Soleil d'été", image: "/expression/ce/soleil.webp" }, { label: "Plage", image: "/expression/ce/plage.webp" }], correct: 0, image: true },
+      { prompt: "Que faut-il aérer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
+      { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenêtres" }], correct: 0 },
+      { prompt: "Que faire si on est fatigué ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },
+      { prompt: "Quel vêtement protège les mains ?", answer: "gants", accept: ["des gants"] },
       { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Bien vivre en hiver" }, { label: "Acheter une voiture" }, { label: "Choisir un film" }], correct: 0 },
     ],
   },
@@ -719,10 +719,10 @@ function gradeFromScore(score: number) {
 }
 
 function mentionFromGrade(grade: number) {
-  if (grade >= 5) return "TrÃ¨s bien";
+  if (grade >= 5) return "Très bien";
   if (grade >= 4) return "Bien";
-  if (grade >= 3) return "Ã€ consolider";
-  return "Ã€ amÃ©liorer";
+  if (grade >= 3) return "À consolider";
+  return "À améliorer";
 }
 
 function formatTimer(ms: number) {
@@ -732,14 +732,26 @@ function formatTimer(ms: number) {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
-function ProgressDots({ current, count }: { current: number; count: number }) {
+function ProgressDots({
+  current,
+  count,
+  onSelect,
+}: {
+  current: number;
+  count: number;
+  onSelect?: (index: number) => void;
+}) {
   return (
-    <div className="flex gap-1.5">
+    <div className="flex gap-0.5">
       {Array.from({ length: Math.max(1, count) }, (_, index) => (
-        <div
+        <button
           key={index}
-          className="h-2 flex-1 rounded-full"
-          style={{ background: index <= current ? ACCENT : "var(--color-border)" }}
+          type="button"
+          onClick={() => onSelect?.(index)}
+          disabled={!onSelect}
+          className="h-2 flex-1 rounded-full transition-colors disabled:cursor-default"
+          style={{ background: index === current ? ACCENT : "var(--color-border)" }}
+          aria-label={`Aller à l'exercice ${index + 1}`}
         />
       ))}
     </div>
@@ -858,7 +870,7 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
         style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
       />
       {correction && !ok && (
-        <p className="text-xs font-semibold" style={{ color: INVERSE }}>RÃ©ponse attendue : {task.answer}</p>
+        <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
       )}
     </div>
   );
@@ -985,7 +997,7 @@ function ArticlePart({ part, answers, setAnswer, correction }: { part: Extract<C
                 </div>
               )}
               <div>
-                <p className="font-bold" style={{ color: INVERSE }}>âœ± {section.heading}</p>
+                <p className="font-bold" style={{ color: INVERSE }}>✱ {section.heading}</p>
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{section.body}</p>
               </div>
             </div>
@@ -1044,7 +1056,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.24em]" style={{ color: INVERSE }}>RÃ©sultats</p>
+        <p className="text-xs font-bold uppercase tracking-[0.24em]" style={{ color: INVERSE }}>Résultats</p>
         <p className="mt-2 text-4xl font-black text-[var(--color-text-primary)]">{formatScore(total)} / 25</p>
       </div>
       <div className="grid grid-cols-3 gap-3">
@@ -1072,7 +1084,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
                 <span className="font-bold" style={{ color: ACCENT }}>{index + 1}</span>
                 <span className="flex-1 font-semibold text-[var(--color-text-primary)]">{part.title}</span>
                 <span className="font-bold" style={{ color: score === part.points ? "#059669" : INVERSE }}>{formatScore(score)} / {part.points}</span>
-                <span>â€º</span>
+                <span>›</span>
               </button>
               {isOpen && (
                 <div className="border-t border-[var(--color-border)] p-4">
@@ -1161,14 +1173,18 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
 
       {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
-          <CEHeader level={level} title="ComprÃ©hension Ã©crite" />
+          <CEHeader level={level} title="Compréhension écrite" />
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm font-semibold">
               <span style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</span>
               <span className="rounded-full bg-white px-3 py-1 shadow-sm" style={{ color: INVERSE }}>{formatTimer(now - (startedAt ?? now))}</span>
               <span className="text-[var(--color-text-secondary)]">{activeParts.length} exercices restants</span>
             </div>
-            <ProgressDots current={Math.min(current, activeParts.length - 1)} count={activeParts.length} />
+            <ProgressDots
+              current={Math.min(current, activeParts.length - 1)}
+              count={activeParts.length}
+              onSelect={setCurrent}
+            />
           </div>
           <ExercisePage part={part} index={parts.findIndex((item) => item.id === part.id)} answers={answers} setAnswer={setAnswer} />
           <NavActionBar onBack={back} onValidate={validate} onNext={next} nextLabel="Suivant" />
@@ -1177,7 +1193,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
 
       {phase === "results" && (
         <div className="space-y-6">
-          <CEHeader level={level} title="RÃ©sultats" />
+          <CEHeader level={level} title="Résultats" />
           <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
           <NavActionBar onNext={() => router.push("/communication")} nextLabel="Terminer" />
         </div>

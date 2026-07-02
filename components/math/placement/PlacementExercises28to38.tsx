@@ -704,11 +704,11 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Simplifiez les expressions.</p>
-      <div className="grid items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
+      <div className="grid w-full items-center gap-x-2 gap-y-3 text-sm" style={{gridTemplateColumns:"1.5rem minmax(0, max-content) 1rem minmax(0, 1fr)"}}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono">{q.expr}</span>
+            <span className="min-w-0 font-mono">{q.expr}</span>
             <span className="text-center text-[var(--color-text-secondary)]">=</span>
             <CorrectionInputText
               value={answers[i] ?? ""}
