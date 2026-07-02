@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   randomCoGroup,
@@ -204,67 +204,11 @@ function ProgressBar({
   );
 }
 
-function AudioListenButton({
-  label,
-  audio,
-  used,
-  onComplete,
-}: {
-  label: string;
-  audio: string;
-  used: boolean;
-  onComplete: () => void;
-}) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const [error, setError] = useState(false);
-  const [attempted, setAttempted] = useState(false);
-
-  function playAudio() {
-    const player = audioRef.current;
-    if (!player || used || playing) return;
-
-    setAttempted(true);
-    setError(false);
-    setPlaying(true);
-    player.currentTime = 0;
-    void player
-      .play()
-      .then(() => onComplete())
-      .catch(() => {
-        setPlaying(false);
-        setError(true);
-      });
-  }
-
+function AudioPlayer({ audio }: { audio: string }) {
   return (
-    <div className="flex-1">
-      {!used && (
-        <button
-          type="button"
-          disabled={playing}
-          onClick={playAudio}
-          className="flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 text-sm font-bold text-[var(--color-text-primary)] shadow-sm disabled:opacity-35"
-        >
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          {playing ? "Lecture..." : label}
-        </button>
-      )}
-      <audio
-        ref={audioRef}
-        src={audio}
-        preload="none"
-        onEnded={() => setPlaying(false)}
-        onError={() => {
-          setPlaying(false);
-          if (attempted) setError(true);
-        }}
-        className="hidden"
-      />
-      {attempted && error && <p className="mt-1 text-[11px] font-semibold text-red-500">Audio indisponible.</p>}
-    </div>
+    <audio controls preload="metadata" className="w-full rounded-full" src={audio}>
+      Votre navigateur ne peut pas lire cet audio.
+    </audio>
   );
 }
 
@@ -273,15 +217,11 @@ function QuestionBlock({
   answers,
   onAnswer,
   readonly,
-  usedAudio,
-  toggleAudioUse,
 }: {
   part: COPart;
   answers: Answers;
   onAnswer: (key: string, value: number | string) => void;
   readonly?: boolean;
-  usedAudio: Record<string, boolean>;
-  toggleAudioUse: (key: string) => void;
 }) {
   const [showTranscripts, setShowTranscripts] = useState(false);
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
@@ -320,14 +260,9 @@ function QuestionBlock({
         </div>
         <div className="space-y-3">
           {part.audioGroup.items.map((item) => {
-            const firstListenKey = `${part.id}-${item.id}-listen-1`;
-            const secondListenKey = `${part.id}-${item.id}-listen-2`;
             return (
               <div key={item.id} className="space-y-3">
-                <div className="flex gap-3">
-                  <AudioListenButton label="Écoute 1" audio={item.audio} used={!!usedAudio[firstListenKey]} onComplete={() => toggleAudioUse(firstListenKey)} />
-                  <AudioListenButton label="Écoute 2" audio={item.audio} used={!!usedAudio[secondListenKey]} onComplete={() => toggleAudioUse(secondListenKey)} />
-                </div>
+                <AudioPlayer audio={item.audio} />
                 {showTranscripts && item.transcript && (
                   <div className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
                     {item.transcript}
@@ -406,7 +341,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   const [currentId, setCurrentId] = useState(parts[0]!.id);
   const [answers, setAnswers] = useState<Answers>({});
   const [validatedAnswers, setValidatedAnswers] = useState<Record<string, Answers>>({});
-  const [usedAudio, setUsedAudio] = useState<Record<string, boolean>>({});
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [openResult, setOpenResult] = useState<string | null>(null);
   const [showTips, setShowTips] = useState(false);
@@ -453,20 +387,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   function resetCurrent() {
     const prefix = `${currentId}-`;
     setAnswers((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
-    setUsedAudio((previous) => Object.fromEntries(Object.entries(previous).filter(([key]) => !key.startsWith(prefix))));
-  }
-
-  function toggleAudioUse(key: string) {
-    setUsedAudio((previous) => ({ ...previous, [key]: true }));
-  }
-
-  function usedAudioForResults(part: COPart) {
-    return Object.fromEntries(
-      part.audioGroup.items.flatMap((item) => [
-        [`${part.id}-${item.id}-listen-1`, true],
-        [`${part.id}-${item.id}-listen-2`, true],
-      ]),
-    );
   }
 
   if (phase === "intro") {
@@ -478,7 +398,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
           <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
             <li><span style={{ color: ACCENT }}>•</span> <strong>{partInfoFor(level).length} exercices</strong> d&apos;écoute</li>
             <li><span style={{ color: ACCENT }}>•</span> <strong>25 minutes</strong> pour compléter l&apos;évaluation</li>
-            <li><span style={{ color: ACCENT }}>•</span> Deux écoutes possibles par audio</li>
+            <li><span style={{ color: ACCENT }}>•</span> Les audios restent disponibles pendant tout l&apos;exercice</li>
             <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
             <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
           </ul>
@@ -564,8 +484,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
                       answers={validatedAnswers[part.id] ?? {}}
                       onAnswer={() => undefined}
                       readonly
-                      usedAudio={usedAudioForResults(part)}
-                      toggleAudioUse={() => undefined}
                     />
                   </div>
                 )}
@@ -594,8 +512,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
           part={currentPart}
           answers={savedAnswers}
           onAnswer={(key, value) => setAnswers((previous) => ({ ...previous, [key]: value }))}
-          usedAudio={usedAudio}
-          toggleAudioUse={toggleAudioUse}
         />
       </section>
       <HiddenNav
