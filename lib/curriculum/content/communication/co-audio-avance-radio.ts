@@ -149,4 +149,61 @@ D'après : www.allocine.fr/film/fichefilm-268282/critiques/spectateurs/`;
 
 export const RADIO_24 = `Quarante ans après l'ouverture du premier restaurant McDonald's en France, la chaîne de restauration rapide s'est plutôt adaptée aux habitudes alimentaires des Français que l'inverse. Venez comme vous êtes. Le slogan de la dernière campagne publicitaire de la firme américaine McDonald's, implantée en France depuis le 17 septembre 1979, donne une idée de la place du fast-food dans les habitudes alimentaires françaises. Un burger à deux étages, Big Mac, grande portion de frites, Coca géant et crème glacée, ou comment avaler 800 à 1 000 calories en moins de trente minutes. C'est la note salée et sucrée dans les principaux menus proposés par l'enseigne américaine. L'arrivée du fast-food en France s'inscrit dans un mouvement d'évolution des pratiques alimentaires. Les manières de manger se sont réinventées. On passe moins de temps assis à cuisiner. On a quitté la salle à manger pour se réfugier sur une table basse avec son plateau devant un écran ou pas. On ne déguste pas forcément la même chose, mais en gros, on mange à peu près en même temps, trois fois par jour. On se restaure aussi plus fréquemment à l'extérieur, observe Thibaut de Saint Pol, sociologue à l'École normale supérieure de Paris-Saclay. Pour autant, la consommation rapide de nourriture à toute heure de la journée que permet le fast-food n'a pas changé les habitudes des familles. C'est même l'inverse qui s'est produit. C'est le fast-food qui s'est adapté.`;
 
-export const RADIO_25 = `Triporteur ou biporteur, quel vélo choisir ? Cette bicyclette équipée d'une caisson bois à l'avant permet de transporter ses enfants. Voici ce qu'il faut savoir avant de se lancer. Souvent réservé au déplacement urbain, notamment en hypercentre, ces vélos peuvent avantageusement remplacer la voiture. Depuis que j'ai investi, finis les embouteillages et les problèmes de stationnement, explique Patrick Dinardé. Je peux emmener les enfants à l'école ou à leurs activités, faire les courses, aller à des rendez-vous, sans perdre de temps. Très lourds, plus de 100 kilos, la grande majorité sont électriques et ne permettent donc pas de faire de grandes randonnées. Le biporteur est équipé de deux roues comme un vélo classique, tandis que le triporteur en possède trois, deux à l'avant et une à l'arrière. Plus vif, plus léger, le biporteur est idéal pour deux enfants, recommande Charles Lostis, conseiller chez Amsterdam Air, spécialiste du cycle bain sur mesure. Plus stable, le triporteur permet d'emporter quatre voire davantage. À la récré, il présente l'intérêt de ne pas basculer sur le côté, mais il est plus encombrant et a une autonomie plus limitée. Vélocargo ou cargo bike, triporteur ou biporteur. À l'origine, l'idée était simplement de fixer un gros panier. Une innovation que Léon Mougeot, sous-secrétaire d'État aux postes et télégraphes, propose d'inclure dans le transport du courrier. Ainsi, en 1899, les facteurs…`;
+export const RADIO_25 = `Triporteur ou biporteur, quel vélo choisir ?
+
+Cette bicyclette équipée d'une caisse en bois à l'avant permet de transporter ses enfants. Voici ce qu'il faut savoir avant de se lancer.
+
+Souvent réservés aux déplacements urbains, notamment en hypercentre, ces vélos peuvent avantageusement remplacer la voiture. « Depuis que j'ai investi, fini les embouteillages et les problèmes de stationnement, explique Patrick Dinardais. Je peux emmener les enfants à l'école ou à leurs activités, faire les courses, aller à des rendez-vous... sans perdre de temps. » Très lourds — plus de 100 kg —, la grande majorité sont électriques et ne permettent donc pas de faire de grandes randonnées.
+
+Le biporteur est équipé de deux roues comme un vélo classique, tandis que le triporteur en possède trois : deux à l'avant et une à l'arrière. « Plus vif, plus léger, le biporteur est idéal pour deux enfants, recommande Charles L'Hostis, conseiller chez Amsterdam Air, spécialiste vendéen du cycle urbain sur mesure. Plus stable, le triporteur permet d'en porter quatre, voire davantage. À l'arrêt, il présente l'intérêt de ne pas basculer sur le côté. Mais il est plus encombrant et a une autonomie plus limitée. »
+
+Vélo cargo ou cargo bike. Triporteur ou biporteur.
+À l'origine, l'idée était simplement de fixer un gros panier au-dessus d'une des deux roues du classique tricycle. Plus tard, le modèle change avec une roue avant réduite au profit d'un panier plus volumineux. Une invention que Léon Mougeot, sous-secrétaire français d'État aux Postes et Télégraphes, propose d'inclure dans le transport du courrier. Ainsi, en 1899, les facteurs l'adoptent dans leur distribution quotidienne.
+
+Dans les années 1930, la tendance suscite un intérêt auprès des boulangers, laitiers, épiciers parisiens afin de se glisser facilement dans les ruelles de la capitale.
+
+Les vélos de fret perdent du terrain après la Seconde Guerre mondiale, remplacés par les voitures. Ils reviennent à la mode à la fin des années 1980, avec les premières considérations écologiques. À présent, l'usage est devenu familial autant que professionnel : des parents s'en servent pour transporter leurs enfants tandis que les livreurs express y mettent leurs colis.
+
+D'après : Caroline Henry, Ouest-France, 14 août 2019.`;
+
+export const RADIO_26 = `Des paléoclimatologues confirment le caractère inédit, de par son homogénéité, du réchauffement actuel de la planète.
+
+Après des jours de fortes températures, la banquise a fondu très tôt dans le fjord d'Inglefield, au nord-ouest du Groenland, le 13 juin 2019.
+
+Étudier le passé pour comprendre le présent peut s'avérer crucial en matière de climat. Grâce à une analyse systématique inégalée, une équipe de recherche internationale vient de retracer deux mille ans de variations de températures à l'échelle planétaire.
+
+Son constat : non seulement le réchauffement climatique actuel est inédit du fait de son amplitude et de sa vitesse, mais il est également sans précédent de par son caractère universel. Il y a bien eu quelques périodes de réchauffement et de refroidissement entre l'an un et la fin de l'ère préindustrielle, mais aucune n'a touché de façon simultanée l'ensemble des régions de la planète.
+
+La base de données que les chercheurs ont utilisée pour leurs analyses — publiées mercredi 24 juillet 2019 dans les revues Nature et Nature Geoscience — est « ce qui se fait de plus complet aujourd'hui », salue Valérie Masson-Delmotte, paléoclimatologue.
+
+Ce sont ainsi près de 700 indicateurs climatiques, appelés « proxy », qui ont été étudiés par les scientifiques afin de reconstruire les variations de températures passées — les observations issues d'instruments de mesure ne couvrant que les cent cinquante dernières années.
+
+Ces archives naturelles sont de plusieurs types, de la carotte de glace aux anneaux de croissance des arbres, en passant par les sédiments des lacs ou les coraux.
+
+« Il est important de collecter un maximum de données provenant d'un maximum d'archives naturelles différentes, si l'on veut pouvoir neutraliser les facteurs de confusion inhérents à chacun de ces enregistrements », précise Raphael Neukom de l'université de Berne, en Suisse, premier auteur de ces études.
+
+« Les arbres, par exemple, ne sont pas sensibles qu'aux variations de température, ils répondent aussi à la pluviométrie. »
+
+D'après : Le Monde, Sylvie Burnouf, 24 juillet 2019.`;
+
+export const RADIO_27 = `« Comment se souviendra-t-on de notre civilisation ? », s'interroge Jennifer Brandon. Cette chercheuse de la Scripps Institution of Oceanography, le plus ancien centre de recherche scientifique maritime au monde, affirme avoir observé une « explosion de pollution plastique » dans les fonds marins.
+
+Ces scientifiques ont réalisé des prélèvements à quelques centaines de mètres au large de Santa Barbara, au nord de Los Angeles, par plus de 500 m de profondeur et dans les couches de sédiments qui couvraient la période de 1834 à 2010.
+
+Leurs conclusions confirment que les matériaux plastiques, quasiment inexistants dans les sédiments avant la fin de la Seconde Guerre mondiale, y sont de plus en plus présents. La quantité de microplastiques a ainsi doublé tous les quinze ans environ.
+
+Cette hausse reflète l'essor de la production de plastique après-guerre, principalement pour les produits de consommation courante, bouteilles ou vêtements. Une grande partie des microplastiques a été transportée dans l'océan par les eaux de ruissellement ou par les flux provenant des stations d'épuration des eaux usées.
+
+Tout ce plastique ne descend pas jusqu'au fond de la mer. Une grande partie flotte à la surface ou près de la surface. Les chercheurs de l'université de San Diego ont néanmoins découvert des microplastiques dans l'eau jusqu'à 1 000 m au large de Monterey.
+
+L'explorateur Victor Vescovo a, lui, constaté une contamination humaine dans les abysses. Par 10 927 m au fond du Pacifique, il a relevé la présence d'un sac plastique et d'emballages de bonbons.
+
+Pour Jennifer Brandon, on pourrait considérer que l'humanité est entrée dans un nouvel âge.
+
+« C'est mauvais pour les animaux qui vivent au fond de l'océan : les récifs coralliens, les moules, huîtres, etc. Mais la présence de plastique dans les couches sédimentaires est plus une question existentielle. Nous apprenons à l'école qu'il a existé un âge de pierre, un âge du bronze et un âge du fer. Est-ce que cette période va être connue comme l'âge du plastique ? Il est effrayant de penser que les générations futures se souviendront de nous pour cela. »
+
+D'après : Le Monde, 5 septembre 2019.`;
+
+export const RADIO_28 = `Le groupe d'économie sociale et solidaire SOS lance jeudi un appel à projets auprès de 32 000 communes de moins de 3 500 habitants afin de créer ou reprendre 1 000 cafés en milieu rural pour en faire des lieux de vie ouverts à tous.
+
+Dans une commune, le lien social se faisait dans les cafés. C'est dans les estaminets, mais aussi dans les petits commerces, que les gens se rencontraient et que les informations...`;

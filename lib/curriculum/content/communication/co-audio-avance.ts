@@ -3,7 +3,7 @@ import { CONV_11, CONV_12, CONV_13, CONV_14, CONV_15, CONV_16, CONV_17, CONV_18 
 import {
   RADIO_1, RADIO_2, RADIO_3, RADIO_4, RADIO_5, RADIO_6, RADIO_7, RADIO_8, RADIO_9, RADIO_10,
   RADIO_11, RADIO_12, RADIO_13, RADIO_14, RADIO_15, RADIO_16, RADIO_17, RADIO_18, RADIO_19, RADIO_20,
-  RADIO_21, RADIO_22, RADIO_23, RADIO_24, RADIO_25,
+  RADIO_21, RADIO_22, RADIO_23, RADIO_24, RADIO_25, RADIO_26, RADIO_27, RADIO_28,
 } from "./co-audio-avance-radio";
 
 function avanceItem(category: "conversation" | "radio", activity: string, filename: string, transcript?: string): COAudioItem {
@@ -212,7 +212,8 @@ const RADIOS: Array<[string, string]> = [
   ["11", RADIO_11], ["12", RADIO_12], ["13", RADIO_13], ["14", RADIO_14], ["15", RADIO_15],
   ["16", RADIO_16], ["17", RADIO_17], ["18", RADIO_18], ["19", RADIO_19], ["20", RADIO_20],
   ["21", RADIO_21], ["22", RADIO_22], ["23", RADIO_23], ["24", RADIO_24], ["25", RADIO_25],
-  ...Array.from({ length: 7 }, (_, i) => [String(i + 26), placeholderRadio(i + 26)] as [string, string]),
+  ["26", RADIO_26], ["27", RADIO_27], ["28", RADIO_28],
+  ...Array.from({ length: 4 }, (_, i) => [String(i + 29), placeholderRadio(i + 29)] as [string, string]),
 ];
 
 export const CO_AUDIO_GROUPS_AVANCE: COAudioGroup[] = [

@@ -1179,9 +1179,117 @@ const RADIO_25 = buildPool("avance", "radio-25", [
     fillA: ["electriques"],
   },
   {
-    id: "ar25-q6", textQ: "Quel avantage cite Patrick Dinardé ?", text: ["Fini les embouteillages","Plus de sport extrême","Moins de courses"], textC: 0,
-    img: ["Pas embouteillages","Sport extrême","Moins courses"], imgC: 0,
-    fillQ: "Finis les _________ et les problèmes de stationnement.", fill: "embouteillages",
+    id: "ar25-q6", textQ: "Quand les vélos de fret reviennent-ils à la mode ?", text: ["À la fin des années 1980","Dans les années 1930","En 1899"], textC: 0,
+    img: ["Années 1980","Années 1930","1899"], imgC: 0,
+    fillQ: "Ils reviennent à la mode à la fin des années _________.", fill: "1980",
+  },
+]);
+
+const RADIO_26 = buildPool("avance", "radio-26", [
+  {
+    id: "ar26-q1", textQ: "Combien d'années de températures ont été retracées ?", text: ["Deux mille ans","Cent cinquante ans","Cinq cents ans"], textC: 0,
+    img: ["2000 ans","150 ans","500 ans"], imgC: 0,
+    fillQ: "Retrace de ___ mille ans de températures.", fill: "deux",
+    fillA: ["2"],
+  },
+  {
+    id: "ar26-q2", textQ: "Quel est le caractère inédit du réchauffement actuel ?", text: ["Universel et homogène","Limité au Groenland","Très lent"], textC: 0,
+    img: ["Universel","Groenland","Lent"], imgC: 0,
+    fillQ: "Il est sans précédent de par son caractère _________.", fill: "universel",
+  },
+  {
+    id: "ar26-q3", textQ: "Combien d'indicateurs climatiques ont été étudiés ?", text: ["Près de 700","Près de 70","Près de 7 000"], textC: 0,
+    img: ["700","70","7000"], imgC: 0,
+    fillQ: "Près de ___ indicateurs climatiques.", fill: "700",
+  },
+  {
+    id: "ar26-q4", textQ: "Dans quelles revues les analyses ont-elles été publiées ?", text: ["Nature et Nature Geoscience","Le Monde","Femme actuelle"], textC: 0,
+    img: ["Nature","Le Monde","Femme actuelle"], imgC: 0,
+    fillQ: "Publié dans Nature et Nature _________.", fill: "Geoscience",
+    fillA: ["geoscience"],
+  },
+  {
+    id: "ar26-q5", textQ: "Qui est la paléoclimatologue citée ?", text: ["Valérie Masson-Delmotte","Jennifer Brandon","Anne Rodier"], textC: 0,
+    img: ["Masson-Delmotte","Brandon","Rodier"], imgC: 0,
+    fillQ: "Valérie Masson-_________ est paléoclimatologue.", fill: "Delmotte",
+    fillA: ["delmotte"],
+  },
+  {
+    id: "ar26-q6", textQ: "Où la banquise a-t-elle fondu très tôt en juin 2019 ?", text: ["Dans le fjord d'Inglefield au Groenland","À Paris","En Suisse"], textC: 0,
+    img: ["Groenland","Paris","Suisse"], imgC: 0,
+    fillQ: "Fonte précoce au fjord d'_________ au Groenland.", fill: "Inglefield",
+    fillA: ["inglefield"],
+  },
+]);
+
+const RADIO_27 = buildPool("avance", "radio-27", [
+  {
+    id: "ar27-q1", textQ: "Qui est Jennifer Brandon ?", text: ["Une chercheuse en océanographie","Une paléoclimatologue","Une vétérinaire"], textC: 0,
+    img: ["Océanographie","Paléoclimat","Vétérinaire"], imgC: 0,
+    fillQ: "Chercheuse à la Scripps Institution of _________.", fill: "Oceanography",
+    fillA: ["oceanography"],
+  },
+  {
+    id: "ar27-q2", textQ: "Où les prélèvements ont-ils été réalisés ?", text: ["Au large de Santa Barbara","À Monterey uniquement","Dans le Pacifique à 10 927 m"], textC: 0,
+    img: ["Santa Barbara","Monterey","Abysses"], imgC: 0,
+    fillQ: "Prélèvements au large de Santa _________.", fill: "Barbara",
+    fillA: ["barbara"],
+  },
+  {
+    id: "ar27-q3", textQ: "À quelle fréquence les microplastiques ont-ils doublé ?", text: ["Tous les quinze ans","Tous les cinq ans","Chaque année"], textC: 0,
+    img: ["15 ans","5 ans","1 an"], imgC: 0,
+    fillQ: "Doublé tous les ___ ans environ.", fill: "quinze",
+    fillA: ["15"],
+  },
+  {
+    id: "ar27-q4", textQ: "Quand les plastiques étaient-ils quasi inexistants dans les sédiments ?", text: ["Avant la fin de la Seconde Guerre mondiale","Avant 1834","Avant 2010"], textC: 0,
+    img: ["Avant 1945","Avant 1834","Avant 2010"], imgC: 0,
+    fillQ: "Quasi inexistants avant la fin de la Seconde Guerre _________.", fill: "mondiale",
+  },
+  {
+    id: "ar27-q5", textQ: "Quel âge historique compare Jennifer Brandon ?", text: ["L'âge du plastique","L'âge du bronze","L'âge de pierre"], textC: 0,
+    img: ["Plastique","Bronze","Pierre"], imgC: 0,
+    fillQ: "Sera-t-on connus comme l'âge du _________ ?", fill: "plastique",
+  },
+  {
+    id: "ar27-q6", textQ: "Qu'a trouvé Victor Vescovo dans les abysses ?", text: ["Un sac plastique et des emballages de bonbons","Une carotte de glace","Un corail"], textC: 0,
+    img: ["Sac plastique","Carotte glace","Corail"], imgC: 0,
+    fillQ: "Il a trouvé un sac _________ et des emballages.", fill: "plastique",
+  },
+]);
+
+const RADIO_28 = buildPool("avance", "radio-28", [
+  {
+    id: "ar28-q1", textQ: "Quel groupe lance l'appel à projets ?", text: ["SOS","Nestlé","McDonald's"], textC: 0,
+    img: ["SOS","Nestlé","McDonald's"], imgC: 0,
+    fillQ: "Le groupe _________ lance l'appel.", fill: "SOS",
+  },
+  {
+    id: "ar28-q2", textQ: "Combien de cafés veut-on créer ou reprendre ?", text: ["1 000","100","10 000"], textC: 0,
+    img: ["1000","100","10000"], imgC: 0,
+    fillQ: "Créer ou reprendre ___ cafés.", fill: "1000",
+    fillA: ["1 000"],
+  },
+  {
+    id: "ar28-q3", textQ: "Dans quelles communes s'adresse l'appel ?", text: ["Moins de 3 500 habitants","Plus de 10 000 habitants","Uniquement Paris"], textC: 0,
+    img: ["< 3500 hab.","> 10000","Paris"], imgC: 0,
+    fillQ: "Communes de moins de ___ 500 habitants.", fill: "3",
+  },
+  {
+    id: "ar28-q4", textQ: "Combien de communes sont concernées ?", text: ["32 000","3 500","1 000"], textC: 0,
+    img: ["32000","3500","1000"], imgC: 0,
+    fillQ: "___ 000 communes concernées.", fill: "32",
+  },
+  {
+    id: "ar28-q5", textQ: "Quel type d'économie représente le groupe SOS ?", text: ["Économie sociale et solidaire","Économie libérale","Économie agricole"], textC: 0,
+    img: ["ESS","Libérale","Agricole"], imgC: 0,
+    fillQ: "Groupe d'économie sociale et _________.", fill: "solidaire",
+  },
+  {
+    id: "ar28-q6", textQ: "Où se faisait traditionnellement le lien social ?", text: ["Dans les cafés et estaminets","À l'école","Au travail"], textC: 0,
+    img: ["Cafés","École","Travail"], imgC: 0,
+    fillQ: "Le lien social se faisait dans les _________.", fill: "cafés",
+    fillA: ["cafes"],
   },
 ]);
 
@@ -1219,4 +1327,7 @@ export const CO_QUESTION_POOLS_AVANCE_EXTRA: Record<string, COMultiQuestion[]> =
   "avance-radio-23": RADIO_23,
   "avance-radio-24": RADIO_24,
   "avance-radio-25": RADIO_25,
+  "avance-radio-26": RADIO_26,
+  "avance-radio-27": RADIO_27,
+  "avance-radio-28": RADIO_28,
 };
