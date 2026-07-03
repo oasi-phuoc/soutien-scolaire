@@ -14,6 +14,7 @@ import {
 } from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -1360,7 +1361,10 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
 
         {/* Results (always visible when reached) */}
         {isResults && (
-          <ResultsScreen scores={scores} snapshots={snapshots} rows={resultRows} maxScore={maxScore} />
+          <>
+            <ResultsScreen scores={scores} snapshots={snapshots} rows={resultRows} maxScore={maxScore} />
+            <EvalFinishButton onClick={goNext} accent="var(--color-accent-lecture)" />
+          </>
         )}
       </div>
 

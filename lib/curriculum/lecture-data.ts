@@ -1516,7 +1516,7 @@ function complexSoundLesson(
     letterLower: id,
     phoneme,
     title,
-    exampleWord: imgWord ?? (baseWords[0] ?? title.toLowerCase()),
+    exampleWord: imgWord ?? lower,
     exampleImagePath: imgWord ? `/assets/words/img/${getWordAssetSlug(imgWord)}.webp` : undefined,
     upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
     lowerGrid: grid25([lower, ...distractors]),

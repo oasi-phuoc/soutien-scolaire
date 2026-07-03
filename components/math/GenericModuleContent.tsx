@@ -15,6 +15,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
@@ -11628,6 +11629,7 @@ export function GenericModuleContent({
               );
             })}
           </ul>
+          <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
         </div>
       )}
 

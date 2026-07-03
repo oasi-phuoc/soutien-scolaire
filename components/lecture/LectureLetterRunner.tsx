@@ -28,6 +28,7 @@ import {
 } from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import {
   ALL_TOOL_WORDS,
   monosyllablePool,
@@ -465,8 +466,9 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   onTimeChange?: (t: number | null) => void;
   onEvalStateChange?: (state: { isResults: boolean; canValidate: boolean; started: boolean }) => void;
   onValidated?: (correct: number, total: number) => void;
+  onFinish?: () => void;
 }>(
-  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", onTimeChange, onEvalStateChange, onValidated }, ref) {
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", onTimeChange, onEvalStateChange, onValidated, onFinish }, ref) {
   // Stable content keys so the sampling effect below runs once per step (and
   // not on every render — a fresh array prop would otherwise loop forever).
   const wordsKey = words.join("");
@@ -670,6 +672,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
             );
           })}
         </ul>
+        {onFinish && <EvalFinishButton onClick={onFinish} accent="var(--color-accent-lecture)" />}
       </section>
     );
   }
@@ -1058,6 +1061,13 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             onValidated={(correct, total) => {
               const grade = linearSwissGrade(correct, total);
               setWordEvalResult({ grade, passed: grade >= getPassGrade(), total: correct });
+            }}
+            onFinish={() => {
+              if (wordEvalResult) {
+                handleEvalDone(wordEvalResult.grade, wordEvalResult.passed, wordEvalResult.total);
+              } else {
+                goNext();
+              }
             }}
           />
         );

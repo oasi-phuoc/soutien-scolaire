@@ -19,6 +19,7 @@ import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -3065,6 +3066,15 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
                 );
               })}
             </div>
+            {isResults && (
+              <EvalFinishButton
+                onClick={() => {
+                  markFrenchLessonComplete(lesson.slug);
+                  router.push(returnUrl);
+                }}
+                accent="var(--color-accent-fr)"
+              />
+            )}
           </div>
         )}
       </div>

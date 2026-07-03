@@ -15,6 +15,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
@@ -1785,6 +1786,7 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
 
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode, isAdmin }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
+  const sectionBackUrl = moduleId.startsWith("G") ? "/mathematiques?tab=geometry" : "/mathematiques";
   const lesson = getLessonBySubmoduleId(submoduleId ?? "");
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
@@ -1952,7 +1954,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   }
 
   function finishEval(passed: boolean, correct?: number, total?: number) {
-    if (directRevisionMode || !lesson) { router.push("/mathematiques"); return; }
+    if (directRevisionMode || !lesson) { router.push(sectionBackUrl); return; }
     if (!isRevisionLesson) {
       const c = correct ?? (passed ? 1 : 0);
       const t = total ?? 1;
@@ -1960,7 +1962,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       const p = loadProgress();
       saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
     }
-    router.push("/mathematiques");
+    router.push(sectionBackUrl);
   }
 
   function goNext() {
@@ -1993,7 +1995,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       return;
     }
     if (isLastStep) {
-      router.push("/mathematiques");
+      router.push(sectionBackUrl);
     } else {
       goTo(stepIdx + 1);
     }
@@ -2336,6 +2338,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                 );
               })}
             </div>
+            {isResultsPage && (
+              <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
+            )}
           </div>
         );
       })()}

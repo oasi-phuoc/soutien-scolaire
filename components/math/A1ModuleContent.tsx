@@ -26,6 +26,7 @@ import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import {
   LEVEL_PASSING_GRADES,
   linearSwissGrade,
@@ -4735,6 +4736,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       );
                     })}
                   </ul>
+                  <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
                 </div>
               );
             })()}

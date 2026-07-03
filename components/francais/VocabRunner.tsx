@@ -23,6 +23,7 @@ import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 
 interface Props {
   theme: VocabTheme;
@@ -235,7 +236,7 @@ export function VocabRunner({ theme }: Props) {
       markFrenchLessonComplete(theme.slug);
       window.dispatchEvent(new CustomEvent("soutien-french-lesson-complete"));
     }
-    router.push("/francais");
+    router.push("/francais?tab=vocabulaire");
   }
 
   function goNext() {
@@ -657,6 +658,9 @@ export function VocabRunner({ theme }: Props) {
                 );
               })}
             </div>
+            {step.key === "results" && (
+              <EvalFinishButton onClick={finishResults} accent="var(--color-accent-fr)" />
+            )}
           </div>
         )}
       </div>
