@@ -509,80 +509,9 @@ const ORAL_SITUATIONS: OralSituation[] = [
   },
 ];
 
-function shuffled<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-function buildDialoguePromptPool(situation: OralSituation): string[] {
-  const context = situation.dialogueContext;
-  const image = situation.imageDescription;
-  const pool = [
-    ...situation.dialoguePrompts,
-    "Bonjour, que puis-je faire pour vous ?",
-    "Pouvez-vous expliquer votre situation ?",
-    "Pourquoi venez-vous aujourd'hui ?",
-    "De quoi avez-vous besoin exactement ?",
-    "Pouvez-vous me donner plus de details ?",
-    "Quand est-ce que cela s'est passe ?",
-    "Ou est-ce que cela s'est passe ?",
-    "Depuis combien de temps avez-vous ce probleme ?",
-    "Est-ce urgent pour vous ?",
-    "Que souhaitez-vous faire maintenant ?",
-    "Quelle solution preferez-vous ?",
-    "Avez-vous deja essaye une autre solution ?",
-    "Pouvez-vous decrire ce que vous voyez sur l'image ?",
-    `Dans cette situation, ${context.toLowerCase()}`,
-    `L'image montre: ${image.toLowerCase()} Pouvez-vous expliquer votre demande ?`,
-    "Quel est votre nom, s'il vous plait ?",
-    "Pouvez-vous repeter votre nom ?",
-    "Avez-vous une piece d'identite ?",
-    "Avez-vous un numero de telephone ?",
-    "A quelle adresse habitez-vous ?",
-    "Avez-vous un document avec vous ?",
-    "Pouvez-vous montrer votre carte ou votre billet ?",
-    "Combien cela coute-t-il ?",
-    "Quel est votre budget ?",
-    "Voulez-vous payer en especes ou par carte ?",
-    "Avez-vous une reduction ou un abonnement ?",
-    "Voulez-vous un recu ?",
-    "A quelle heure voulez-vous venir ?",
-    "Quel jour vous convient ?",
-    "Etes-vous disponible demain ?",
-    "Combien de temps cela va prendre ?",
-    "Pouvez-vous attendre quelques minutes ?",
-    "Quelle taille voulez-vous ?",
-    "Quelle couleur preferez-vous ?",
-    "Quelle quantite souhaitez-vous ?",
-    "C'est pour une personne ou pour plusieurs personnes ?",
-    "C'est pour aujourd'hui ou pour plus tard ?",
-    "Preferez-vous une solution simple ou rapide ?",
-    "Pouvez-vous expliquer ce qui est important pour vous ?",
-    "Qu'est-ce qui vous pose probleme ?",
-    "Avez-vous besoin d'aide pour remplir un formulaire ?",
-    "Souhaitez-vous prendre rendez-vous ?",
-    "Voulez-vous que je vous donne les horaires ?",
-    "Voulez-vous que je vous explique les etapes ?",
-    "Est-ce que vous comprenez les informations ?",
-    "Avez-vous une question supplementaire ?",
-    "Pouvez-vous confirmer votre choix ?",
-    "Que voulez-vous faire en premier ?",
-    "Que voulez-vous faire ensuite ?",
-    "Est-ce que cette proposition vous convient ?",
-    "Pouvez-vous reformuler votre demande ?",
-    "Comment puis-je vous contacter ?",
-    "Voulez-vous une information ecrite ?",
-    "Est-ce que vous avez besoin d'autre chose ?",
-  ];
-  return Array.from(new Set(pool));
-}
-
 export function randomOralSituation(level: "base" | "moyen" | "avance"): OralSituation {
   const pool = ORAL_SITUATIONS.filter((s) =>
     level === "base" ? s.level === "base" : s.level === "moyen"
   );
-  const situation = pool[Math.floor(Math.random() * pool.length)]!;
-  return {
-    ...situation,
-    dialoguePrompts: shuffled(buildDialoguePromptPool(situation)).slice(0, 10),
-  };
+  return pool[Math.floor(Math.random() * pool.length)]!;
 }

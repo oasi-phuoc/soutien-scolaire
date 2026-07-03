@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from "react";
 import {
   getExpressionTeachersAction,
   type TeacherOption,
@@ -12,8 +12,23 @@ import { submitOralAction, type OralDialogueLine } from "@/app/actions/oral";
 import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
 import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
+import {
+  getArgumentationResponses,
+  getImageDescriptionModel,
+  getInterviewSuggestion,
+  getThemeSuggestions,
+  IMAGE_DESCRIPTION_MEMO,
+} from "@/lib/curriculum/content/communication/po-correction-guide";
+import {
+  getPoDialogue,
+  interlocutorLines,
+  pickStudentRole,
+  roleAssignmentText,
+  studentLineIndices,
+} from "@/lib/curriculum/content/communication/po-dialogues";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
+import { TtsPlayButton, TtsSequencePlayer } from "@/components/communication/TtsSequencePlayer";
 import {
   CommunicationIntroSection,
   CommunicationResultsExercise,
@@ -239,16 +254,14 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
 
 // ——— Voice message bubble (WhatsApp-style for app prompts in task 3) ———
 
-const IMAGE_GUIDE_QUESTIONS = [
-  "Qu'est-ce que vous voyez sur l'image ?",
-  "Où sont les personnes ?",
-  "Que font les personnes ?",
-  "Comment sont les personnes ?",
-  "De quoi parlent les personnes ?",
-  "Qu'est-ce qu'il y a en arrière-plan ?",
-  "Quelle est l'ambiance générale de l'image ?",
-  "Quelle est votre impression sur cette scène ?",
-];
+function CorrectionBlock({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2.5">
+      <p className="mb-1.5 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{title}</p>
+      <div className="space-y-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]">{children}</div>
+    </div>
+  );
+}
 
 const DIRECTED_INTERVIEW_BASE = [
   "Quel est votre nom ?",
@@ -327,6 +340,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [prompt] = useState<OralPrompt>(() => randomOralPrompt(level));
   const [situation] = useState(() => randomOralSituation(level));
   const [argumentationTopic] = useState(() => randomArgumentationTopic(level));
+  const [dialogueState] = useState(() => {
+    const script = getPoDialogue(situation.id);
+    const studentRole = pickStudentRole();
+    return {
+      script,
+      studentRole,
+      studentTurns: studentLineIndices(script, studentRole),
+      roleText: roleAssignmentText(script, studentRole),
+    };
+  });
   const compactImage = /PO_(?:Chaussure|Cinema|Telephone)\.webp$/.test(situation.image);
   const imageWidth = compactImage ? 1402 : 1448;
   const imageHeight = compactImage ? 1122 : 1086;
@@ -357,8 +380,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [playingGuideIdx, setPlayingGuideIdx] = useState<number | null>(null);
   const guideIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Task 4: dialogue (all questions shown at once)
-  const [task4Transcripts, setTask4Transcripts] = useState<string[]>(() => Array(10).fill(""));
+  // Task 4: structured dialogue
+  const studentTurnCount = dialogueState.studentTurns.length;
+  const [task4Transcripts, setTask4Transcripts] = useState<string[]>(() => Array(studentTurnCount).fill(""));
+  const [task4ActiveTurn, setTask4ActiveTurn] = useState(0);
+  const task4ActiveTurnRef = useRef(0);
   const [task4Lines, setTask4Lines] = useState<OralDialogueLine[]>([]);
   const [task4Done, setTask4Done] = useState(false);
 
@@ -410,18 +436,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     setCurrentTranscript(text);
   }, []);
 
-  const setTDP = useCallback((i: number, t: string) =>
-    setTask4Transcripts((prev) => { const n = [...prev]; n[i] = t; return n; }), []);
-  const onTDP0 = useCallback((t: string) => setTDP(0, t), [setTDP]);
-  const onTDP1 = useCallback((t: string) => setTDP(1, t), [setTDP]);
-  const onTDP2 = useCallback((t: string) => setTDP(2, t), [setTDP]);
-  const onTDP3 = useCallback((t: string) => setTDP(3, t), [setTDP]);
-  const onTDP4 = useCallback((t: string) => setTDP(4, t), [setTDP]);
-  const onTDP5 = useCallback((t: string) => setTDP(5, t), [setTDP]);
-  const onTDP6 = useCallback((t: string) => setTDP(6, t), [setTDP]);
-  const onTDP7 = useCallback((t: string) => setTDP(7, t), [setTDP]);
-  const onTDP8 = useCallback((t: string) => setTDP(8, t), [setTDP]);
-  const onTDP9 = useCallback((t: string) => setTDP(9, t), [setTDP]);
+  const setTDP = useCallback((turnIdx: number, t: string) =>
+    setTask4Transcripts((prev) => { const n = [...prev]; n[turnIdx] = t; return n; }), []);
+
+  const onTask4Speech = useCallback((text: string) => {
+    const turnIdx = task4ActiveTurnRef.current;
+    setTDP(turnIdx, text);
+  }, [setTDP]);
+
+  const { isListening: listenTask4, startListening: startTask4, stopListening: stopTask4 } =
+    useSpeechRecognition(onTask4Speech);
 
   const onTask5Transcript = useCallback((text: string) => {
     setArgumentationTranscript(text);
@@ -443,16 +467,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const { isListening: listenIQ7, startListening: startIQ7, stopListening: stopIQ7 } = useSpeechRecognition(onIQ7);
   const { isListening: listening3, startListening: start3, stopListening: stop3 } =
     useSpeechRecognition(onTask3Transcript);
-  const { isListening: listenTDP0, startListening: startTDP0, stopListening: stopTDP0 } = useSpeechRecognition(onTDP0);
-  const { isListening: listenTDP1, startListening: startTDP1, stopListening: stopTDP1 } = useSpeechRecognition(onTDP1);
-  const { isListening: listenTDP2, startListening: startTDP2, stopListening: stopTDP2 } = useSpeechRecognition(onTDP2);
-  const { isListening: listenTDP3, startListening: startTDP3, stopListening: stopTDP3 } = useSpeechRecognition(onTDP3);
-  const { isListening: listenTDP4, startListening: startTDP4, stopListening: stopTDP4 } = useSpeechRecognition(onTDP4);
-  const { isListening: listenTDP5, startListening: startTDP5, stopListening: stopTDP5 } = useSpeechRecognition(onTDP5);
-  const { isListening: listenTDP6, startListening: startTDP6, stopListening: stopTDP6 } = useSpeechRecognition(onTDP6);
-  const { isListening: listenTDP7, startListening: startTDP7, stopListening: stopTDP7 } = useSpeechRecognition(onTDP7);
-  const { isListening: listenTDP8, startListening: startTDP8, stopListening: stopTDP8 } = useSpeechRecognition(onTDP8);
-  const { isListening: listenTDP9, startListening: startTDP9, stopListening: stopTDP9 } = useSpeechRecognition(onTDP9);
   const { isListening: listening5, startListening: start5, stopListening: stop5 } =
     useSpeechRecognition(onTask5Transcript);
 
@@ -491,8 +505,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     for (let i = 0; i < 3; i++) {
       const theme = prompt.themes[i]!;
       lines.push(
-        { role: "app", text: `Th?me : ? ${theme.word} ?` },
-        { role: "student", text: task1Transcripts[i] || "(pas de r?ponse)" },
+        { role: "app", text: `Thème : « ${theme.word} »` },
+        { role: "student", text: task1Transcripts[i] || "(pas de réponse)" },
       );
     }
     setTask1Lines(lines);
@@ -506,7 +520,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     for (let i = 0; i < interviewQuestions.length; i++) {
       lines.push(
         { role: "app", text: interviewQuestions[i]! },
-        { role: "student", text: interviewTranscripts[i] || "(pas de r?ponse)" },
+        { role: "student", text: interviewTranscripts[i] || "(pas de réponse)" },
       );
     }
     setInterviewLines(lines);
@@ -521,7 +535,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function validateTask2() {
     setTask2Lines([
-      { role: "app", text: "D?crivez cette image." },
+      { role: "app", text: "Décrivez cette image." },
       ...(task2Phrases.length > 0
         ? task2Phrases.map((phrase) => ({ role: "student" as const, text: phrase }))
         : [{ role: "student" as const, text: "(pas de réponse)" }]),
@@ -532,13 +546,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Task 4: dialogue responses (all at once) ———
 
   function confirmTask4() {
+    const { script, studentRole } = dialogueState;
     const lines: OralDialogueLine[] = [];
-    for (let i = 0; i < situation.dialoguePrompts.length; i++) {
-      const text = (task4Transcripts[i] ?? "").trim();
-      lines.push(
-        { role: "app", text: situation.dialoguePrompts[i]! },
-        { role: "student", text: text || "(pas de réponse)" },
-      );
+    let studentTurnIdx = 0;
+    for (const line of script.lines) {
+      const isStudent = line.role === studentRole;
+      if (isStudent) {
+        const text = (task4Transcripts[studentTurnIdx] ?? "").trim();
+        lines.push({ role: "student", text: text || "(pas de réponse)" });
+        studentTurnIdx++;
+      } else {
+        lines.push({ role: "app", text: line.text });
+      }
     }
     setTask4Lines(lines);
     setTask4Done(true);
@@ -566,6 +585,26 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   }
 
   // ——— All grammar matches for review ———
+
+  const interlocutorTtsItems = useMemo(
+    () =>
+      interlocutorLines(dialogueState.script, dialogueState.studentRole).map((line, i) => ({
+        id: String(line.index),
+        text: line.text,
+        label: `Réplique ${i + 1}`,
+      })),
+    [dialogueState],
+  );
+
+  const imageDescriptionModel = useMemo(
+    () => getImageDescriptionModel(situation.id),
+    [situation.id],
+  );
+
+  const argumentationResponses = useMemo(
+    () => getArgumentationResponses(argumentationTopic.theme),
+    [argumentationTopic.theme],
+  );
 
   const allGrammar: [] = [];
 
@@ -1045,16 +1084,14 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 </button>
 
                 <p className="mb-4 pr-6 text-sm font-bold" style={{ color: ACCENT }}>
-                  Astuces — Questions guide
+                  Structure à mémoriser
                 </p>
 
-                {/* 2-row table: number / audio (clicking audio shows transcript) */}
                 <table className="w-full border-collapse">
                   <tbody>
-                    {/* Row 1: numbers */}
                     <tr>
-                      {IMAGE_GUIDE_QUESTIONS.map((_, i) => (
-                        <td key={i} className="pb-2 text-center" style={{ width: "12.5%" }}>
+                      {IMAGE_DESCRIPTION_MEMO.map((_, i) => (
+                        <td key={i} className="pb-2 text-center">
                           <span
                             className="mx-auto flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white"
                             style={{ background: ACCENT }}
@@ -1064,9 +1101,8 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                         </td>
                       ))}
                     </tr>
-                    {/* Row 2: audio buttons */}
                     <tr>
-                      {IMAGE_GUIDE_QUESTIONS.map((q, i) => {
+                      {IMAGE_DESCRIPTION_MEMO.map((q, i) => {
                         const isPlaying = playingGuideIdx === i;
                         return (
                           <td key={i} className="text-center" style={{ width: "12.5%" }}>
@@ -1115,7 +1151,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                 {/* Transcript shown below table when an audio is active */}
                 {openTranscriptIdx !== null && (
                   <p className="mt-3 border-t border-[var(--color-border-default)] pt-3 text-sm italic leading-relaxed text-[var(--color-text-primary)]">
-                    {IMAGE_GUIDE_QUESTIONS[openTranscriptIdx]}
+                    {IMAGE_DESCRIPTION_MEMO[openTranscriptIdx]}
                   </p>
                 )}
               </div>
@@ -1153,16 +1189,18 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         </div>
       )}
 
-      {/* ——— TASK 4: Dialogue (all questions at once) ——— */}
+      {/* ——— TASK 4: Dialogue (structured script) ——— */}
       {phase === "task4" && (
         <div className="flex-1 space-y-4">
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 4 — Dialogue
             </h2>
+            <p className="mt-1 text-sm font-medium" style={{ color: ACCENT }}>
+              {dialogueState.roleText}
+            </p>
           </div>
 
-          {/* Image with audio icon overlay */}
           <div className="relative overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
             <Image
               src={situation.image}
@@ -1176,18 +1214,44 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           </div>
 
-          {/* All dialogue questions shown at once (like Part 2) */}
+          {!task4Done && interlocutorTtsItems.length > 0 && (
+            <TtsSequencePlayer
+              items={interlocutorTtsItems}
+              gapMs={3000}
+              gapHint="Les répliques de l'interlocuteur sont lues à la suite. Répondez après chaque phrase."
+            />
+          )}
+
           {!task4Done && (() => {
-            const tdpListeners = [listenTDP0, listenTDP1, listenTDP2, listenTDP3, listenTDP4, listenTDP5, listenTDP6, listenTDP7, listenTDP8, listenTDP9];
-            const tdpStarters  = [startTDP0, startTDP1, startTDP2, startTDP3, startTDP4, startTDP5, startTDP6, startTDP7, startTDP8, startTDP9];
-            const tdpStoppers  = [stopTDP0,  stopTDP1,  stopTDP2,  stopTDP3,  stopTDP4,  stopTDP5,  stopTDP6,  stopTDP7,  stopTDP8,  stopTDP9];
+            const { script, studentRole, studentTurns } = dialogueState;
+            let studentTurnIdx = 0;
             return (
               <div className="space-y-3">
-                {situation.dialoguePrompts.map((question, i) => {
-                  const transcript = task4Transcripts[i] ?? "";
+                {script.lines.map((line, lineIdx) => {
+                  const isStudent = line.role === studentRole;
+                  if (!isStudent) {
+                    const interlocutor = line.role === "A" ? script.roleA : script.roleB;
+                    return (
+                      <div
+                        key={lineIdx}
+                        className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                            {interlocutor.title}
+                          </span>
+                          <TtsPlayButton text={line.text} small />
+                        </div>
+                        <p className="mt-1 text-sm text-[var(--color-text-primary)]">{line.text}</p>
+                      </div>
+                    );
+                  }
+                  const turnIdx = studentTurnIdx++;
+                  const transcript = task4Transcripts[turnIdx] ?? "";
+                  const isActiveMic = task4ActiveTurn === turnIdx && listenTask4;
                   return (
                     <div
-                      key={i}
+                      key={lineIdx}
                       className="rounded-[var(--radius-md)] border-2 px-4 py-3 space-y-2 bg-[var(--color-bg-primary)]"
                       style={{ borderColor: ACCENT }}
                     >
@@ -1196,30 +1260,36 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                           className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
                           style={{ background: ACCENT }}
                         >
-                          {i + 1}
+                          {turnIdx + 1}
                         </span>
-                        <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">{question}</span>
-                        <SpeakButton text={question} small />
-                        <ThemeMicButton
-                          isListening={tdpListeners[i]!}
-                          supported={supported && !micBlocked}
-                          onStart={tdpStarters[i]!}
-                          onStop={tdpStoppers[i]!}
-                        />
+                        <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">
+                          Votre réplique ({studentTurns.length > 1 ? `${turnIdx + 1}/${studentTurns.length}` : "vous"})
+                        </span>
+                        {!task4Done && (
+                          <ThemeMicButton
+                            isListening={isActiveMic}
+                            supported={supported && !micBlocked}
+                            onStart={() => {
+                              setTask4ActiveTurn(turnIdx);
+                              task4ActiveTurnRef.current = turnIdx;
+                              startTask4();
+                            }}
+                            onStop={stopTask4}
+                          />
+                        )}
                       </div>
-                      {transcript ? (
+                      {transcript && (supported && !micBlocked || task4Done) ? (
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
-                      ) : (supported && !micBlocked) ? (
-                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">Maintenez le micro pour enregistrer…</p>
+                      ) : !task4Done ? (
+                        <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
+                          {(supported && !micBlocked) ? "Maintenez le micro pour répondre…" : ""}
+                        </p>
                       ) : null}
-                      {(!supported || micBlocked) && (
+                      {!task4Done && (!supported || micBlocked) && (
                         <input
                           type="text"
                           value={transcript}
-                          onChange={(e) => {
-                            const val = e.target.value;
-                            setTask4Transcripts((prev) => { const n = [...prev]; n[i] = val; return n; });
-                          }}
+                          onChange={(e) => setTDP(turnIdx, e.target.value)}
                           placeholder="Votre réponse…"
                           className="w-full rounded-[var(--radius-md)] border-2 border-[var(--color-accent-comm)]/40 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-comm)]"
                         />
@@ -1366,6 +1436,78 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                     lines.map((line, i) => <DialogueBubble key={i} line={{ ...line }} />)
                   ) : (
                     <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
+                  )}
+
+                  {num === 1 && (
+                    <CorrectionBlock title="Propositions de questions">
+                      {prompt.themes.map((theme) => (
+                        <div key={theme.word}>
+                          <p className="font-semibold">{theme.word}</p>
+                          <ul className="ml-4 list-disc text-[var(--color-text-secondary)]">
+                            {getThemeSuggestions(theme.word).map((q) => (
+                              <li key={q}>{q}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </CorrectionBlock>
+                  )}
+
+                  {num === 2 && (
+                    <CorrectionBlock title="Réponses modèles (Phuoc Van, Aproz)">
+                      {interviewQuestions.map((question) => (
+                        <p key={question}>
+                          <span className="font-semibold">{question}</span>
+                          <br />
+                          <span className="text-[var(--color-text-secondary)]">
+                            {getInterviewSuggestion(question) ?? "—"}
+                          </span>
+                        </p>
+                      ))}
+                    </CorrectionBlock>
+                  )}
+
+                  {num === 3 && imageDescriptionModel && (
+                    <CorrectionBlock title="Description modèle">
+                      <p className="mb-2 text-xs font-semibold text-[var(--color-text-secondary)]">Structure à mémoriser :</p>
+                      <ul className="mb-3 ml-4 list-disc text-[var(--color-text-secondary)]">
+                        {IMAGE_DESCRIPTION_MEMO.map((starter) => (
+                          <li key={starter}>{starter}</li>
+                        ))}
+                      </ul>
+                      <p>{imageDescriptionModel.formatted}</p>
+                    </CorrectionBlock>
+                  )}
+
+                  {num === 4 && (
+                    <CorrectionBlock title="Dialogue modèle">
+                      <p className="mb-2 font-medium">{dialogueState.roleText}</p>
+                      {dialogueState.script.lines.map((line, i) => {
+                        const speaker = line.role === "A" ? dialogueState.script.roleA : dialogueState.script.roleB;
+                        const isStudent = line.role === dialogueState.studentRole;
+                        return (
+                          <p key={i}>
+                            <span className="font-semibold">{isStudent ? "Vous" : speaker.title} :</span>{" "}
+                            <span className={isStudent ? "text-[var(--color-text-secondary)]" : ""}>{line.text}</span>
+                          </p>
+                        );
+                      })}
+                    </CorrectionBlock>
+                  )}
+
+                  {num === 5 && argumentationResponses && (
+                    <CorrectionBlock title="Propositions de réponses">
+                      <p>
+                        <span className="font-semibold text-green-700">Réponse positive :</span>
+                        <br />
+                        {argumentationResponses.positive}
+                      </p>
+                      <p>
+                        <span className="font-semibold text-red-700">Réponse négative :</span>
+                        <br />
+                        {argumentationResponses.negative}
+                      </p>
+                    </CorrectionBlock>
                   )}
                 </CommunicationResultsExercise>
               );
