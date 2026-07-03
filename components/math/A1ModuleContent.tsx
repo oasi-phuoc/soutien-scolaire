@@ -36,6 +36,7 @@ import {
   saveProgress,
   completeSubmodule,
 } from "@/lib/progress/math-progress";
+import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 
 // ─── Vocabulaire ──────────────────────────────────────────────────────────────
 
@@ -2136,15 +2137,10 @@ function legendSwatchClass(swatch: ReadAloudLegendItem["swatch"]): string {
   return "bg-[var(--color-text-primary)]";
 }
 
-function fmt(s: number): string {
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return `${m}:${sec.toString().padStart(2, "0")}`;
-}
-
 function AudioPlayer({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -2152,14 +2148,44 @@ function AudioPlayer({ src }: { src: string }) {
   const toggle = () => {
     const a = audioRef.current;
     if (!a) return;
-    if (playing) { a.pause(); } else { void a.play(); }
-    setPlaying((v) => !v);
+    if (playing) {
+      a.pause();
+      setPlaying(false);
+      setPaused(true);
+    } else {
+      void a.play();
+      setPlaying(true);
+      setPaused(false);
+    }
+  };
+
+  const restart = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.pause();
+    a.currentTime = 0;
+    setProgress(0);
+    setCurrentTime(0);
+    setPlaying(false);
+    setPaused(false);
+    void a.play();
+    setPlaying(true);
+  };
+
+  const seekTo = (percent: number) => {
+    const a = audioRef.current;
+    if (!a || !Number.isFinite(a.duration) || a.duration <= 0) return;
+    a.currentTime = (percent / 100) * a.duration;
+    setProgress(percent);
+    setCurrentTime(a.currentTime);
   };
 
   return (
-    <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+    <div>
       <audio
-        ref={audioRef} src={src} preload="metadata"
+        ref={audioRef}
+        src={src}
+        preload="metadata"
         onLoadedMetadata={() => setDuration(audioRef.current?.duration ?? 0)}
         onTimeUpdate={() => {
           const a = audioRef.current;
@@ -2167,37 +2193,25 @@ function AudioPlayer({ src }: { src: string }) {
           setCurrentTime(a.currentTime);
           setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
         }}
-        onEnded={() => { setPlaying(false); setProgress(0); setCurrentTime(0); }}
+        onEnded={() => {
+          setPlaying(false);
+          setPaused(false);
+          setProgress(0);
+          setCurrentTime(0);
+        }}
       />
-      <button type="button" onClick={toggle} aria-label={playing ? "Pause" : "Lire"}
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white"
-      >
-        {playing ? (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <rect x="5" y="4" width="4" height="16" rx="1" /><rect x="15" y="4" width="4" height="16" rx="1" />
-          </svg>
-        ) : (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M6 4l14 8-14 8V4z" />
-          </svg>
-        )}
-      </button>
-      <div className="flex flex-1 flex-col gap-1">
-        <input type="range" min={0} max={100} step={0.1} value={progress}
-          onChange={(e) => {
-            const a = audioRef.current;
-            if (!a) return;
-            const val = Number(e.target.value);
-            a.currentTime = (val / 100) * a.duration;
-            setProgress(val);
-          }}
-          className="w-full accent-[var(--color-accent-alg)]" aria-label="Progression audio"
-        />
-        <div className="flex justify-between text-[10px] text-[var(--color-text-secondary)]">
-          <span>{fmt(currentTime)}</span>
-          {duration > 0 && <span>{fmt(duration)}</span>}
-        </div>
-      </div>
+      <MediaPlayerBar
+        playing={playing}
+        paused={paused}
+        progress={progress}
+        currentTimeSec={currentTime}
+        durationSec={duration}
+        canSeek={duration > 0}
+        onToggle={toggle}
+        onSeek={seekTo}
+        onRestart={restart}
+        accentColor="var(--color-accent-alg)"
+      />
     </div>
   );
 }

@@ -312,6 +312,8 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   const [waiting, setWaiting] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [audioCurrentTime, setAudioCurrentTime] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [errorAudio, setErrorAudio] = useState<string | null>(null);
 
@@ -352,6 +354,8 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     setWaiting(false);
     setCurrentIndex(null);
     setProgress(0);
+    setAudioCurrentTime(0);
+    setAudioDuration(0);
   }
 
   function ensurePlayer() {
@@ -362,13 +366,19 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     player.preload = "metadata";
     audioRef.current = player;
 
+    player.addEventListener("loadedmetadata", () => {
+      const active = audioRef.current;
+      setAudioDuration(active && Number.isFinite(active.duration) ? active.duration : 0);
+    });
     player.addEventListener("timeupdate", () => {
       if (isSeekingRef.current) return;
       const active = audioRef.current;
       if (!active || !Number.isFinite(active.duration) || active.duration <= 0) {
         setProgress(0);
+        setAudioCurrentTime(0);
         return;
       }
+      setAudioCurrentTime(active.currentTime);
       setProgress(Math.min(100, (active.currentTime / active.duration) * 100));
     });
     player.addEventListener("ended", () => {
@@ -514,6 +524,7 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     const nextTime = (percent / 100) * player.duration;
     player.currentTime = nextTime;
     setProgress(percent);
+    setAudioCurrentTime(nextTime);
   }
 
   function selectSpeed(rate: number) {
@@ -530,6 +541,8 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
         paused={paused}
         waiting={waiting}
         progress={progress}
+        currentTimeSec={audioCurrentTime}
+        durationSec={audioDuration}
         canSeek={canSeek}
         onToggle={toggle}
         onSeek={seekTo}

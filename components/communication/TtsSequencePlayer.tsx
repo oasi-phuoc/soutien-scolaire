@@ -186,12 +186,20 @@ export function TtsSequencePlayer({ items, gapMs = 3000 }: TtsSequencePlayerProp
 
   const canSeek = items.length > 0;
 
+  const estimatedTotalSec = items.reduce(
+    (sum, item) => sum + estimateDurationMs(item.text, playbackRate) / 1000,
+    0,
+  ) + Math.max(0, items.length - 1) * (gapMs / 1000);
+  const estimatedCurrentSec = (progress / 100) * estimatedTotalSec;
+
   return (
     <MediaPlayerBar
       playing={playing}
       paused={paused}
       waiting={waiting}
       progress={progress}
+      currentTimeSec={estimatedCurrentSec}
+      durationSec={estimatedTotalSec}
       canSeek={canSeek}
       onToggle={toggle}
       onSeek={seekTo}
@@ -219,9 +227,8 @@ export function TtsPlayButton({ text, small }: { text: string; small?: boolean }
       className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} text-white`}
       style={{ background: ACCENT }}
     >
-      <svg width={small ? 14 : 16} height={small ? 14 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <svg width={small ? 14 : 16} height={small ? 14 : 16} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <path d="M6 4l14 8-14 8V4z" />
       </svg>
     </button>
   );
