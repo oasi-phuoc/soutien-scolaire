@@ -16,6 +16,7 @@ import {
   getArgumentationResponses,
   getImageDescriptionModel,
   getInterviewSuggestion,
+  getSituationDialogueSuggestions,
   getThemeSuggestions,
   IMAGE_DESCRIPTION_MEMO,
 } from "@/lib/curriculum/content/communication/po-correction-guide";
@@ -604,6 +605,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const argumentationResponses = useMemo(
     () => getArgumentationResponses(argumentationTopic.theme),
     [argumentationTopic.theme],
+  );
+
+  const dialogueSuggestions = useMemo(
+    () => getSituationDialogueSuggestions(situation.id),
+    [situation.id],
   );
 
   const allGrammar: [] = [];
@@ -1480,15 +1486,40 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                   )}
 
                   {num === 4 && (
-                    <CorrectionBlock title="Dialogue modèle">
+                    <CorrectionBlock title="Réponses proposées pour cette situation">
                       <p className="mb-2 font-medium">{dialogueState.roleText}</p>
+                      <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
+                        Niveau {level === "base" ? "PO.1 (base)" : level === "moyen" ? "PO.2 (moyen)" : "PO.3 (avancé)"} — situation : {situation.alt}
+                      </p>
+                      {([
+                        { role: "A" as const, data: dialogueSuggestions.roleA },
+                        { role: "B" as const, data: dialogueSuggestions.roleB },
+                      ]).map(({ role, data }) => {
+                        const isYourRole = role === dialogueState.studentRole;
+                        return (
+                          <div key={role} className="mb-3">
+                            <p className="font-semibold">
+                              Si vous êtes {data.title}
+                              {isYourRole ? " (votre rôle)" : ""} :
+                            </p>
+                            <ol className="ml-4 mt-1 list-decimal space-y-1 text-[var(--color-text-secondary)]">
+                              {data.responses.map((response, i) => (
+                                <li key={i} className={isYourRole ? "text-[var(--color-text-primary)]" : ""}>
+                                  {response}
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        );
+                      })}
+                      <p className="mt-2 text-xs font-semibold text-[var(--color-text-secondary)]">Dialogue complet :</p>
                       {dialogueState.script.lines.map((line, i) => {
                         const speaker = line.role === "A" ? dialogueState.script.roleA : dialogueState.script.roleB;
                         const isStudent = line.role === dialogueState.studentRole;
                         return (
-                          <p key={i}>
+                          <p key={i} className="text-sm">
                             <span className="font-semibold">{isStudent ? "Vous" : speaker.title} :</span>{" "}
-                            <span className={isStudent ? "text-[var(--color-text-secondary)]" : ""}>{line.text}</span>
+                            <span className={isStudent ? "" : "text-[var(--color-text-secondary)]"}>{line.text}</span>
                           </p>
                         );
                       })}

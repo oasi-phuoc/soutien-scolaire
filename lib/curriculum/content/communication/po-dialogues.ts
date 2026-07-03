@@ -1072,3 +1072,22 @@ export function studentLineIndices(
     .map((line, index) => (line.role === studentRole ? index : -1))
     .filter((index) => index >= 0);
 }
+
+export type SituationDialogueSuggestions = {
+  situationId: string;
+  roleA: { title: string; responses: string[] };
+  roleB: { title: string; responses: string[] };
+};
+
+export function getStudentResponses(script: PoDialogueScript, role: PoDialogueRole): string[] {
+  return script.lines.filter((line) => line.role === role).map((line) => line.text);
+}
+
+export function getSituationDialogueSuggestions(situationId: string): SituationDialogueSuggestions {
+  const script = getPoDialogue(situationId);
+  return {
+    situationId,
+    roleA: { title: script.roleA.title, responses: getStudentResponses(script, "A") },
+    roleB: { title: script.roleB.title, responses: getStudentResponses(script, "B") },
+  };
+}
