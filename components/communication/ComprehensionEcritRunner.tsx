@@ -3,6 +3,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
+import {
+  CommunicationIntroSection,
+  CommunicationResultsExercise,
+  CommunicationResultsSummary,
+  formatEvalPoints,
+  type IntroBullet,
+  type IntroRow,
+} from "@/components/communication/CommunicationEvalLayout";
 
 type CELevel = "base" | "moyen" | "avance";
 type Choice = { label: string; image?: string };
@@ -714,17 +722,6 @@ function formatScore(value: number) {
   return Number.isInteger(value) ? String(value) : value.toFixed(1).replace(".", ",");
 }
 
-function gradeFromScore(score: number) {
-  return Math.max(1, Math.min(6, 1 + (score / 25) * 5));
-}
-
-function mentionFromGrade(grade: number) {
-  if (grade >= 5) return "Très bien";
-  if (grade >= 4) return "Bien";
-  if (grade >= 3) return "À consolider";
-  return "À améliorer";
-}
-
 function formatTimer(ms: number) {
   const total = Math.max(0, Math.floor(ms / 1000));
   const minutes = Math.floor(total / 60);
@@ -759,65 +756,35 @@ function ProgressDots({
 }
 
 function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) {
-  const [tipsOpen, setTipsOpen] = useState(false);
-  const rows = [
-    ["1", "Lire pour s'orienter", "6 pts"],
-    ["2", "Lire une correspondance", "6 pts"],
-    ["3", "Lire des instructions", "6 pts"],
-    ["4", "Lire des informations", "7 pts"],
+  const introBullets: IntroBullet[] = [
+    { strong: "4 exercices", text: " de compréhension écrite" },
+    { strong: "30 minutes", text: " pour compléter l'évaluation" },
+    { text: "Validez chaque exercice individuellement" },
+    { text: "Vous pouvez naviguer librement en cliquant sur la barre de progression en haut." },
+    { before: "Score maximum : ", strong: "25 points", text: "" },
+  ];
+  const introRows: IntroRow[] = [
+    { num: "1", title: "Lire pour s'orienter", points: "6 pts" },
+    { num: "2", title: "Lire une correspondance", points: "6 pts" },
+    { num: "3", title: "Lire des instructions", points: "6 pts" },
+    { num: "4", title: "Lire des informations", points: "7 pts" },
   ];
 
   return (
     <div className="space-y-6">
       <CEHeader level={level} title="Compréhension écrite" />
-
-      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-[var(--color-bg-card)] p-5 shadow-none">
-        <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
-        <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">4 exercices</strong> de compréhension écrite</span></li>
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">30 minutes</strong> pour compléter l&apos;évaluation</span></li>
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Validez chaque exercice individuellement</span></li>
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Vous pouvez naviguer librement en cliquant sur la barre de progression en haut.</span></li>
-          <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
-        </ul>
-
-        <div className="mt-5 space-y-2 border-t border-[var(--color-border-default)] pt-4">
-          {rows.map(([num, title, pts]) => (
-            <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
-              <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
-              <span>{title}</span>
-              <span className="font-bold" style={{ color: ACCENT }}>{pts}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
-        <button
-          type="button"
-          onClick={() => setTipsOpen((v) => !v)}
-          className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]"
-        >
-          <span>Conseils pour réussir</span>
-          <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
-        </button>
-        {tipsOpen && (
-          <div className="space-y-2 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+      <CommunicationIntroSection
+        bullets={introBullets}
+        rows={introRows}
+        tips={(
+          <>
             <p>Lisez d&apos;abord la consigne, puis cherchez les mots importants dans le document.</p>
             <p>Pour les questions à choix, éliminez les réponses impossibles avant de choisir.</p>
             <p>Pour les réponses écrites, répondez avec les mots du texte quand c&apos;est possible.</p>
-          </div>
+          </>
         )}
-      </div>
-
-      <button
-        type="button"
-        onClick={onStart}
-        className="min-h-12 w-full rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90"
-        style={{ background: ACCENT }}
-      >
-        Commencer l&apos;évaluation
-      </button>
+        onStart={onStart}
+      />
       <NavActionBar onBack={() => {}} backDisabled onNext={onStart} nextLabel="Commencer" />
     </div>
   );
@@ -1052,46 +1019,25 @@ function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index
 function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; answers: CEAnswers; opened: string | null; setOpened: (id: string | null) => void }) {
   const scores = parts.map((part) => scorePart(part, answers));
   const total = scores.reduce((sum, value) => sum + value, 0);
-  const grade = gradeFromScore(total);
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.24em]" style={{ color: INVERSE }}>Résultats</p>
-        <p className="mt-2 text-4xl font-black text-[var(--color-text-primary)]">{formatScore(total)} / 25</p>
-      </div>
-      <div className="grid grid-cols-3 gap-3">
-        <div className="rounded-2xl bg-white p-4 text-center shadow-sm">
-          <p className="text-xs text-[var(--color-text-secondary)]">Points</p>
-          <p className="text-2xl font-bold">{formatScore(total)}</p>
-        </div>
-        <div className="rounded-2xl bg-white p-4 text-center shadow-sm">
-          <p className="text-xs text-[var(--color-text-secondary)]">Note</p>
-          <p className="text-2xl font-bold">{grade.toFixed(1).replace(".", ",")} / 6</p>
-        </div>
-        <div className="rounded-2xl border p-4 text-center shadow-sm" style={{ borderColor: INVERSE }}>
-          <p className="text-xs text-[var(--color-text-secondary)]">Mention</p>
-          <p className="text-sm font-bold" style={{ color: INVERSE }}>{mentionFromGrade(grade)}</p>
-        </div>
-      </div>
+      <CommunicationResultsSummary totalPoints={total} />
       <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
       <div className="space-y-3">
         {parts.map((part, index) => {
           const score = scores[index] ?? 0;
           const isOpen = opened === part.id;
           return (
-            <div key={part.id} className={`overflow-hidden rounded-2xl border bg-white/85 shadow-sm ${isOpen ? "border-[var(--color-text-primary)]" : "border-[var(--color-border-default)]"}`}>
-              <button type="button" className="flex w-full items-center gap-3 px-4 py-3 text-left" onClick={() => setOpened(isOpen ? null : part.id)}>
-                <span className="font-bold" style={{ color: ACCENT }}>{index + 1}</span>
-                <span className="flex-1 font-semibold text-[var(--color-text-primary)]">{part.title}</span>
-                <span className="font-bold" style={{ color: score === part.points ? "#059669" : INVERSE }}>{formatScore(score)} / {part.points}</span>
-                <span>›</span>
-              </button>
-              {isOpen && (
-                <div className="border-t border-[var(--color-border-default)] p-4">
-                  <PartView part={part} answers={answers} setAnswer={() => {}} correction />
-                </div>
-              )}
-            </div>
+            <CommunicationResultsExercise
+              key={part.id}
+              index={index}
+              title={part.title}
+              scoreLabel={`${formatEvalPoints(score)} / ${part.points} :`}
+              open={isOpen}
+              onToggle={() => setOpened(isOpen ? null : part.id)}
+            >
+              <PartView part={part} answers={answers} setAnswer={() => {}} correction />
+            </CommunicationResultsExercise>
           );
         })}
       </div>

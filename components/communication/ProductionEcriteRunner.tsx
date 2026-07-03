@@ -18,25 +18,19 @@ import {
   type WritingPrompt,
 } from "@/lib/curriculum/content/communication/writing-prompts";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
+import {
+  CommunicationIntroSection,
+  CommunicationResultsExercise,
+  CommunicationResultsSummary,
+  CommunicationTeacherSubmit,
+  type IntroBullet,
+  type IntroRow,
+} from "@/components/communication/CommunicationEvalLayout";
 
 type StepId = "form" | "short" | "long";
 type Phase = "intro" | "exercise" | "results";
-type GrammarMatch = {
-  message: string;
-  shortMessage?: string;
-  offset: number;
-  length: number;
-  replacements?: Array<{ value: string }>;
-  rule?: { id?: string };
-};
 
 const ACCENT = "var(--color-accent-comm)";
-const IGNORED_GRAMMAR_RULES = new Set([
-  "WHITESPACE_RULE",
-  "FRENCH_WHITESPACE",
-  "COMMA_PARENTHESIS_WHITESPACE",
-  "UNPAIRED_BRACKETS",
-]);
 
 const STEP_META: Array<{ id: StepId; title: string; points: number }> = [
   { id: "form", title: "Formulaire", points: 5 },
@@ -131,21 +125,6 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
       <div className="whitespace-pre-line border-t border-[var(--color-border-default)] px-4 py-3">{prompt.sourceMessage.body}</div>
     </div>
   );
-}
-
-async function checkGrammar(text: string): Promise<GrammarMatch[]> {
-  if (!text.trim()) return [];
-  try {
-    const response = await fetch("/api/check-grammar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    const data = await response.json() as { matches?: GrammarMatch[] };
-    return (data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? ""));
-  } catch {
-    return [];
-  }
 }
 
 function Header({ level, title }: { level: WritingLevel; title: string }) {
@@ -364,24 +343,6 @@ function WritingExercise({
   );
 }
 
-function FeedbackList({ feedback }: { feedback: GrammarMatch[] }) {
-  if (!feedback.length) {
-    return <p className="text-sm text-[var(--color-text-secondary)]">Aucune erreur évidente détectée. Relisez encore le contenu et l&apos;organisation.</p>;
-  }
-  return (
-    <ul className="space-y-3">
-      {feedback.map((match, index) => (
-        <li key={`${match.offset}-${index}`} className="text-sm text-[var(--color-text-primary)]">
-          <span className="font-semibold text-amber-600">{match.shortMessage || match.message}</span>
-          {match.replacements?.length ? (
-            <span className="ml-1">→ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
-          ) : null}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function AdviceLine({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
@@ -497,7 +458,6 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   const code = lessonCode(level);
   const [phase, setPhase] = useState<Phase>("intro");
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
-  const [tipsOpen, setTipsOpen] = useState(false);
   const [remaining, setRemaining] = useState<StepId[]>(["form", "short", "long"]);
   const [current, setCurrent] = useState<StepId>("form");
   const [formTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
@@ -506,10 +466,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   const [longPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "long"));
   const [shortText, setShortText] = useState("");
   const [longText, setLongText] = useState("");
-  const [shortFeedback, setShortFeedback] = useState<GrammarMatch[]>([]);
-  const [longFeedback, setLongFeedback] = useState<GrammarMatch[]>([]);
   const [validatedSteps, setValidatedSteps] = useState<Set<StepId>>(new Set());
-  const [checking, setChecking] = useState(false);
   const [openResult, setOpenResult] = useState<StepId | null>("form");
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
   const [teacherId, setTeacherId] = useState("");
@@ -534,12 +491,8 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     setCurrent(remaining[nextIndex]!);
   }, [current, remaining]);
 
-  const finishStep = useCallback(async () => {
-    if (checking || validatedSteps.has(current)) return;
-    setChecking(true);
-    if (current === "short") setShortFeedback(await checkGrammar(shortText));
-    if (current === "long") setLongFeedback(await checkGrammar(longText));
-    setChecking(false);
+  const finishStep = useCallback(() => {
+    if (validatedSteps.has(current)) return;
 
     const nextRemaining = remaining.filter((item) => item !== current);
     setValidatedSteps((previous) => new Set([...previous, current]));
@@ -554,7 +507,7 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     setCurrent(nextRemaining[0]!);
-  }, [checking, code, current, longText, remaining, shortText, validatedSteps]);
+  }, [code, current, remaining, validatedSteps]);
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
@@ -588,8 +541,8 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         text: combinedText,
         aiFeedback: [
           { exercise: "form", answers: formAnswers },
-          { exercise: "short", matches: shortFeedback },
-          { exercise: "long", matches: longFeedback },
+          { exercise: "short", matches: [] },
+          { exercise: "long", matches: [] },
         ],
       });
       setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
@@ -598,37 +551,28 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   }
 
   if (phase === "intro") {
+    const introBullets: IntroBullet[] = [
+      { strong: "3 exercices", text: " de production écrite" },
+      { strong: "45 minutes", text: " pour compléter l'évaluation" },
+      { text: "Validez chaque exercice individuellement" },
+      { text: "Vous pouvez naviguer librement en cliquant sur la barre de progression en haut." },
+      { before: "Score maximum : ", strong: "25 points", text: "" },
+    ];
+    const introRows: IntroRow[] = STEP_META.map((step, index) => ({
+      num: String(index + 1),
+      title: step.title,
+      points: `${step.points} pts`,
+    }));
+
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Production écrite" />
-        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 p-5 shadow-none">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
-          <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
-            <li><span style={{ color: ACCENT }}>•</span> <strong>3 exercices</strong> de production écrite</li>
-            <li><span style={{ color: ACCENT }}>•</span> <strong>45 minutes</strong> pour compléter l&apos;évaluation</li>
-            <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
-            <li><span style={{ color: ACCENT }}>•</span> Vous pouvez naviguer librement avec la barre de progression</li>
-            <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
-          </ul>
-          <div className="mt-5 grid gap-2">
-            {STEP_META.map((step, index) => (
-              <div key={step.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-slate-200 bg-white px-4 py-3">
-                <span><strong>{index + 1}.</strong> {step.title}</span>
-                <span className="font-semibold" style={{ color: ACCENT }}>{step.points} pts</span>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
-          <button type="button" onClick={() => setTipsOpen((value) => !value)} className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]">
-            <span>Conseils pour réussir</span>
-            <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
-          </button>
-          {tipsOpen && <AdviceContent level={level} />}
-        </section>
-        <button type="button" onClick={() => setPhase("exercise")} className="w-full rounded-full px-5 py-4 font-bold text-white shadow-sm transition-opacity hover:opacity-90" style={{ background: ACCENT }}>
-          Commencer l&apos;évaluation
-        </button>
+        <CommunicationIntroSection
+          bullets={introBullets}
+          rows={introRows}
+          tips={<AdviceContent level={level} />}
+          onStart={() => setPhase("exercise")}
+        />
         <HiddenNav onNext={() => setPhase("exercise")} nextLabel="Commencer" />
       </main>
     );
@@ -638,73 +582,42 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" />
-        <section className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
-          <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">25 pts</p>
-          <p className="mt-2 text-sm text-[var(--color-text-secondary)]">À corriger par le professeur</p>
-        </section>
+        <CommunicationResultsSummary totalPoints={0} pendingTeacher />
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
         <div className="space-y-3">
           {STEP_META.map((item, index) => {
             const isOpen = openResult === item.id;
             return (
-              <section key={item.id} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
-                <button
-                  type="button"
-                  onClick={() => setOpenResult(isOpen ? null : item.id)}
-                  className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold"
-                >
-                  <span><span style={{ color: ACCENT }}>{index + 1}</span> {item.title}</span>
-                  <span style={{ color: ACCENT }}>{item.points} pts</span>
-                </button>
-                {isOpen && (
-                  <div className="border-t border-[var(--color-border-default)] p-4">
-                    {item.id === "form" && (
-                      <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">{formToText(formTemplate, formAnswers)}</pre>
-                    )}
-                    {item.id === "short" && (
-                      <div>
-                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
-                        <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
-                          <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
-                          <FeedbackList feedback={shortFeedback} />
-                        </div>
-                      </div>
-                    )}
-                    {item.id === "long" && (
-                      <div>
-                        <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
-                        <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
-                          <h3 className="mb-2 font-bold text-amber-600">Pistes de correction</h3>
-                          <FeedbackList feedback={longFeedback} />
-                        </div>
-                      </div>
-                    )}
-                  </div>
+              <CommunicationResultsExercise
+                key={item.id}
+                index={index}
+                title={item.title}
+                scoreLabel={`${item.points} pts`}
+                open={isOpen}
+                onToggle={() => setOpenResult(isOpen ? null : item.id)}
+              >
+                {item.id === "form" && (
+                  <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">{formToText(formTemplate, formAnswers)}</pre>
                 )}
-              </section>
+                {item.id === "short" && (
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
+                )}
+                {item.id === "long" && (
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
+                )}
+              </CommunicationResultsExercise>
             );
           })}
         </div>
-        <section className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h2>
-          {teachers.length ? (
-            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-              <select value={teacherId} onChange={(event) => setTeacherId(event.target.value)} disabled={sent} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]">
-                <option value="">Choisissez un professeur</option>
-                {teachers.map((teacher) => (
-                  <option key={teacher.id} value={teacher.id}>{[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}</option>
-                ))}
-              </select>
-              <button type="button" onClick={sendToTeacher} disabled={!teacherId || isSending || sent} className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white disabled:opacity-35">
-                {sent ? "Envoyé" : isSending ? "Envoi..." : "Envoyer"}
-              </button>
-            </div>
-          ) : (
-            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur n&apos;est encore disponible dans la liste.</p>
-          )}
-          {sendMessage && <p className={`mt-2 text-xs font-semibold ${sent ? "text-emerald-600" : "text-amber-600"}`}>{sendMessage}</p>}
-        </section>
+        <CommunicationTeacherSubmit
+          teachers={teachers}
+          teacherId={teacherId}
+          onTeacherChange={setTeacherId}
+          onSend={sendToTeacher}
+          sent={sent}
+          isSending={isSending}
+          sendMessage={sendMessage}
+        />
         <HiddenNav onBack={() => router.push("/communication")} onNext={() => router.push("/communication")} nextLabel="Terminer" />
       </main>
     );
@@ -735,13 +648,11 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         {current === "long" && (
           <WritingExercise prompt={longPrompt} text={longText} disabled={validatedSteps.has("long")} onTextChange={setLongText} />
         )}
-        {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en cours...</p>}
       </section>
       <HiddenNav
         onBack={() => move(-1)}
-        onValidate={() => void finishStep()}
+        onValidate={() => finishStep()}
         onNext={() => move(1)}
-        validateDisabled={checking}
         nextLabel="Suivant"
       />
     </main>

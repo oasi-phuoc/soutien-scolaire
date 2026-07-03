@@ -10,6 +10,14 @@ import {
   type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
+import {
+  CommunicationIntroSection,
+  CommunicationResultsExercise,
+  CommunicationResultsSummary,
+  formatEvalPoints,
+  type IntroBullet,
+  type IntroRow,
+} from "@/components/communication/CommunicationEvalLayout";
 
 type COLevel = "base" | "moyen" | "avance";
 type ChoiceTask = { kind: "choice"; prompt: string; choices: string[]; correct: number };
@@ -698,7 +706,6 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   const [validatedAnswers, setValidatedAnswers] = useState<Record<string, Answers>>({});
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [openResult, setOpenResult] = useState<string | null>(null);
-  const [showTips, setShowTips] = useState(false);
 
   const currentPart = parts.find((part) => part.id === currentId) ?? parts[0]!;
   const savedAnswers = { ...answers, ...Object.values(validatedAnswers).reduce((acc, value) => ({ ...acc, ...value }), {}) };
@@ -740,104 +747,66 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   }, [answers, currentPart, lessonCode, remaining]);
 
   if (phase === "intro") {
+    const info = partInfoFor(level);
+    const introBullets: IntroBullet[] = [
+      { strong: `${info.length} exercices`, text: " d'écoute" },
+      { strong: "25 minutes", text: " pour compléter l'évaluation" },
+      { text: "Les audios restent disponibles pendant tout l'exercice" },
+      { text: "Validez chaque exercice individuellement" },
+      { before: "Score maximum : ", strong: "25 points", text: "" },
+    ];
+    const introRows: IntroRow[] = info.map((part, index) => ({
+      num: String(index + 1),
+      title: part.title,
+      points: `${part.points} pts`,
+    }));
+
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
         <Header level={level} title="Compréhension orale" />
-        <section className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 p-5 shadow-none">
-          <h2 className="font-bold text-[var(--color-text-primary)]">Informations</h2>
-          <ul className="mt-3 space-y-2 text-[var(--color-text-secondary)]">
-            <li><span style={{ color: ACCENT }}>•</span> <strong>{partInfoFor(level).length} exercices</strong> d&apos;écoute</li>
-            <li><span style={{ color: ACCENT }}>•</span> <strong>25 minutes</strong> pour compléter l&apos;évaluation</li>
-            <li><span style={{ color: ACCENT }}>•</span> Les audios restent disponibles pendant tout l&apos;exercice</li>
-            <li><span style={{ color: ACCENT }}>•</span> Validez chaque exercice individuellement</li>
-            <li><span style={{ color: ACCENT }}>•</span> Score maximum : <strong>25 points</strong></li>
-          </ul>
-          <div className="mt-5 grid gap-2">
-            {partInfoFor(level).map((part, index) => (
-              <div key={part.id} className="flex items-center justify-between rounded-[var(--radius-md)] border border-slate-200 bg-white px-4 py-3">
-                <span><strong>{index + 1}.</strong> {part.title}</span>
-                <span className="font-semibold" style={{ color: ACCENT }}>{part.points} points</span>
-              </div>
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={() => setShowTips((value) => !value)}
-            className="mt-5 w-full rounded-[var(--radius-lg)] border border-slate-200 bg-white px-4 py-3 text-left font-semibold text-[var(--color-text-primary)]"
-          >
-            Conseils pour réussir
-          </button>
-          {showTips && (
-            <div className="mt-3 space-y-2 border-l-2 bg-transparent py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-secondary)]" style={{ borderColor: ACCENT }}>
+        <CommunicationIntroSection
+          bullets={introBullets}
+          rows={introRows}
+          tips={(
+            <>
               <p>Écoutez une première fois pour comprendre la situation générale.</p>
               <p>À la deuxième écoute, repérez les noms, les lieux, les horaires et les actions demandées.</p>
               <p>Ne bloquez pas sur un mot inconnu : utilisez le contexte pour choisir la réponse la plus logique.</p>
-            </div>
+            </>
           )}
-        </section>
-        <button
-          type="button"
-          onClick={() => setPhase("exercise")}
-          className="w-full rounded-full px-5 py-4 font-bold text-white shadow-sm transition-opacity hover:opacity-90"
-          style={{ background: ACCENT }}
-        >
-          Commencer l&apos;évaluation
-        </button>
+          onStart={() => setPhase("exercise")}
+        />
         <HiddenNav onNext={() => setPhase("exercise")} nextLabel="Commencer" />
       </main>
     );
   }
 
   if (phase === "results") {
-    const note = Math.min(6, Math.max(1, (totalPoints / 25) * 5 + 1));
-    const mention = note >= 5 ? "Très bien" : note >= 4 ? "Bien" : note >= 3 ? "À renforcer" : "À améliorer";
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" />
-        <section className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
-          <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">{formatPoints(totalPoints)} / 25</p>
-        </section>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
-            <p className="text-sm text-[var(--color-text-secondary)]">Points</p>
-            <p className="text-2xl font-bold">{formatPoints(totalPoints)}</p>
-          </div>
-          <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
-            <p className="text-sm text-[var(--color-text-secondary)]">Note</p>
-            <p className="text-2xl font-bold">{note.toFixed(1).replace(".", ",")} / 6</p>
-          </div>
-          <div className="rounded-[var(--radius-md)] border bg-white p-4 text-center" style={{ borderColor: ACCENT }}>
-            <p className="text-sm text-[var(--color-text-secondary)]">Mention</p>
-            <p className="font-bold" style={{ color: ACCENT }}>{mention}</p>
-          </div>
-        </div>
+        <CommunicationResultsSummary totalPoints={totalPoints} />
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
         <div className="space-y-3">
           {parts.map((part, index) => {
             const partScore = scorePart(part, validatedAnswers[part.id] ?? {});
             const isOpen = openResult === part.id;
             return (
-              <section key={part.id} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
-                <button
-                  type="button"
-                  onClick={() => setOpenResult(isOpen ? null : part.id)}
-                  className="flex w-full items-center justify-between px-4 py-3 text-left font-semibold"
-                >
-                  <span><span style={{ color: ACCENT }}>{index + 1}</span> {part.title}</span>
-                  <span style={{ color: ACCENT }}>{formatPoints(partScore)} / {part.points} :</span>
-                </button>
-                {isOpen && (
-                  <div className="border-t border-[var(--color-border-default)] p-4">
-                    <QuestionBlock
-                      part={part}
-                      answers={validatedAnswers[part.id] ?? {}}
-                      onAnswer={() => undefined}
-                      readonly
-                    />
-                  </div>
-                )}
-              </section>
+              <CommunicationResultsExercise
+                key={part.id}
+                index={index}
+                title={part.title}
+                scoreLabel={`${formatEvalPoints(partScore)} / ${part.points} :`}
+                open={isOpen}
+                onToggle={() => setOpenResult(isOpen ? null : part.id)}
+              >
+                <QuestionBlock
+                  part={part}
+                  answers={validatedAnswers[part.id] ?? {}}
+                  onAnswer={() => undefined}
+                  readonly
+                />
+              </CommunicationResultsExercise>
             );
           })}
         </div>

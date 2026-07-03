@@ -14,6 +14,12 @@ import { randomOralSituation } from "@/lib/curriculum/content/communication/oral
 import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
+import {
+  CommunicationIntroSection,
+  CommunicationResultsExercise,
+  CommunicationResultsSummary,
+  CommunicationTeacherSubmit,
+} from "@/components/communication/CommunicationEvalLayout";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -327,7 +333,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
-  const [tipsOpen, setTipsOpen] = useState(false);
 
   // Task 1: questions on 3 themes (all shown simultaneously)
   const [task1Transcripts, setTask1Transcripts] = useState<string[]>(["", "", ""]);
@@ -688,7 +693,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </svg>
           </Link>
           <h1 className="flex-1 text-xl font-bold text-[var(--color-text-primary)]">
-            {lessonCode} — Production orale
+            {phase === "review" ? "Résultats" : `${lessonCode} — Production orale`}
           </h1>
           {supported && (
             <button
@@ -747,63 +752,31 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
       {/* INTRO */}
       {phase === "intro" && (
-        <div className="flex-1 space-y-6">
-          <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-[var(--color-bg-card)] p-5 shadow-none">
-            <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Informations</p>
-            <ul className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">5 exercices</strong> de production orale</span></li>
-              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span><strong className="text-[var(--color-text-primary)]">15 minutes</strong> pour compléter l&apos;évaluation</span></li>
-              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Validez chaque exercice individuellement</span></li>
-              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Vous pouvez naviguer librement en cliquant sur la barre de progression en haut.</span></li>
-              <li className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} /><span>Score maximum : <strong className="text-[var(--color-text-primary)]">25 points</strong></span></li>
-            </ul>
-
-            <div className="mt-5 space-y-2 border-t border-[var(--color-border-default)] pt-4">
-              {introRows.map(([num, title, pts]) => (
-                <div key={num} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 text-sm text-[var(--color-text-primary)]">
-                  <span className="font-bold" style={{ color: ACCENT }}>{num}.</span>
-                  <span>{title}</span>
-                  <span className="font-bold" style={{ color: ACCENT }}>{pts}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
-            <button
-              type="button"
-              onClick={() => setTipsOpen((v) => !v)}
-              className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]"
-            >
-              <span>Conseils pour réussir</span>
-              <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
-            </button>
-            {tipsOpen && (
-              <div className="space-y-2 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                <p>Parlez clairement et faites des phrases complètes, même si elles sont simples.</p>
-                <p>Répondez à la question, puis ajoutez une raison ou un exemple.</p>
-                <p>Si vous ne trouvez pas un mot, expliquez avec d&apos;autres mots.</p>
-              </div>
-            )}
-          </div>
-
-          <button
-            type="button"
-            onClick={goNext}
-            className="min-h-12 w-full rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90"
-            style={{ background: ACCENT }}
-          >
-            Commencer l&apos;évaluation
-          </button>
-
-          {!supported && (
+        <CommunicationIntroSection
+          bullets={[
+            { strong: "5 exercices", text: " de production orale" },
+            { strong: "15 minutes", text: " pour compléter l'évaluation" },
+            { text: "Validez chaque exercice individuellement" },
+            { text: "Vous pouvez naviguer librement en cliquant sur la barre de progression en haut." },
+            { before: "Score maximum : ", strong: "25 points", text: "" },
+          ]}
+          rows={introRows.map(([num, title, pts]) => ({ num, title, points: pts }))}
+          tips={(
+            <>
+              <p>Parlez clairement et faites des phrases complètes, même si elles sont simples.</p>
+              <p>Répondez à la question, puis ajoutez une raison ou un exemple.</p>
+              <p>Si vous ne trouvez pas un mot, expliquez avec d&apos;autres mots.</p>
+            </>
+          )}
+          onStart={goNext}
+          footer={!supported ? (
             <div className="rounded-[var(--radius-md)] border border-red-300 bg-red-50 px-3 py-2.5">
               <p className="text-sm text-red-700">
                 La reconnaissance vocale n&apos;est pas disponible dans ce navigateur. Utilisez Chrome ou Edge pour une meilleure expérience.
               </p>
             </div>
-          )}
-        </div>
+          ) : undefined}
+        />
       )}
       {/* ——— TASK 1: Questions on themes ——— */}
       {phase === "task1" && (() => {
@@ -1369,87 +1342,44 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
       {/* ——— REVIEW ——— */}
       {phase === "review" && (
         <div className="flex-1 space-y-5">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
-              Récapitulatif
-            </p>
-            <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">
-              Votre production orale
-            </h2>
-          </div>
-
-          <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur une partie pour voir le détail.</p>
+          <CommunicationResultsSummary totalPoints={0} pendingTeacher />
+          <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
           <div className="space-y-3">
             {[
-              { num: 1, label: "Partie 1 — Questions thématiques", points: 3, lines: task1Lines },
-              { num: 2, label: "Partie 2 — Entretien dirigé", points: 4, lines: interviewLines },
-              { num: 3, label: "Partie 3 — Description d'image", points: 5, lines: task2Lines },
-              { num: 4, label: "Partie 4 — Dialogue", points: 6, lines: task4Lines },
-              { num: 5, label: "Partie 5 - Argumentation", points: 7, lines: task5Lines },
+              { num: 1, label: "Questions thématiques", points: 3, lines: task1Lines },
+              { num: 2, label: "Entretien dirigé", points: 4, lines: interviewLines },
+              { num: 3, label: "Description d'image", points: 5, lines: task2Lines },
+              { num: 4, label: "Dialogue", points: 6, lines: task4Lines },
+              { num: 5, label: "Argumentation", points: 7, lines: task5Lines },
             ].map(({ num, label, points, lines }) => {
               const isOpen = openReview === num;
               return (
-                <section key={num} className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
-                  <button
-                    type="button"
-                    onClick={() => setOpenReview(isOpen ? null : num)}
-                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold"
-                  >
-                    <span><span style={{ color: ACCENT }}>{num}</span> {label}</span>
-                    <span style={{ color: ACCENT }}>{points} pts</span>
-                  </button>
-                  {isOpen && (
-                    <div className="space-y-2 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-                      {lines.length ? (
-                        lines.map((line, i) => <DialogueBubble key={i} line={{ ...line }} />)
-                      ) : (
-                        <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
-                      )}
-                    </div>
+                <CommunicationResultsExercise
+                  key={num}
+                  index={num - 1}
+                  title={label}
+                  scoreLabel={`${points} pts`}
+                  open={isOpen}
+                  onToggle={() => setOpenReview(isOpen ? null : num)}
+                >
+                  {lines.length ? (
+                    lines.map((line, i) => <DialogueBubble key={i} line={{ ...line }} />)
+                  ) : (
+                    <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
                   )}
-                </section>
+                </CommunicationResultsExercise>
               );
             })}
           </div>
-
-          {/* Send to teacher */}
-          <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/5 p-4">
-            <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
-            {teachers.length ? (
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-                <select
-                  value={teacherId}
-                  onChange={(e) => setTeacherId(e.target.value)}
-                  disabled={sent}
-                  className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-accent-comm)]/35 bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-                >
-                  <option value="">Choisissez un professeur</option>
-                  {teachers.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {[t.prenom, t.nom].filter(Boolean).join(" ") || "Professeur"}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  type="button"
-                  onClick={sendToTeacher}
-                  disabled={!teacherId || isSending || sent}
-                  className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-comm)] px-5 text-sm font-bold text-white disabled:opacity-35"
-                >
-                  {sent ? "Envoyé" : isSending ? "Envoi…" : "Envoyer"}
-                </button>
-              </div>
-            ) : (
-              <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                Aucun professeur n&apos;est encore disponible dans la liste.
-              </p>
-            )}
-            {sendMessage && (
-              <p className={`mt-2 text-xs font-semibold ${sent ? "text-emerald-600" : "text-amber-600"}`}>
-                {sendMessage}
-              </p>
-            )}
-          </section>
+          <CommunicationTeacherSubmit
+            teachers={teachers}
+            teacherId={teacherId}
+            onTeacherChange={setTeacherId}
+            onSend={sendToTeacher}
+            sent={sent}
+            isSending={isSending}
+            sendMessage={sendMessage}
+          />
         </div>
       )}
 
