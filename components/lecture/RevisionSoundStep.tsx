@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
-import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
+import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -78,12 +78,21 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
               >
                 {mode === "image" ? (
                   <div className="relative aspect-square w-full overflow-hidden rounded-lg">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`/assets/words/img/${getWordAssetSlug(word)}.webp`}
-                      alt=""
-                      className="h-full w-full object-contain p-1"
-                    />
+                    {(() => {
+                      const imgSrc = getLectureWordImagePath(word);
+                      return imgSrc ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={imgSrc}
+                          alt=""
+                          className="h-full w-full object-contain p-1"
+                        />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center px-1 text-center text-xs font-semibold text-[var(--color-text-primary)]">
+                          {word}
+                        </span>
+                      );
+                    })()}
                     <button
                       type="button"
                       onClick={() => playAudio(word)}

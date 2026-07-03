@@ -1,3 +1,4 @@
+import { hasLectureWordImage } from "../utils/audio";
 import { complexTargets } from "../utils/complex-grapheme";
 
 // Each word carries the list of TEACHING phonemes it actually contains
@@ -778,8 +779,9 @@ export function randomMultisyllableWords(minSyl: number, maxSyl: number | null, 
  * Random items for SoundPicker image grid.
  * Aims for ~40 % "has phoneme" / ~60 % "doesn't have phoneme".
  */
-export function randomSoundItems(phoneme: string, n = 16): WordItem[] {
-  const pool = allWordItems();
+export function randomSoundItems(phoneme: string, n = 16, forImages = false): WordItem[] {
+  let pool = allWordItems();
+  if (forImages) pool = pool.filter((w) => hasLectureWordImage(w.label));
   const yes = shuffle(pool.filter((w) => wordHasPhoneme(w, phoneme)));
   const no = shuffle(pool.filter((w) => !wordHasPhoneme(w, phoneme)));
   const yCount = Math.min(Math.round(n * 0.4) + 1, yes.length);

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, randomWordsWithGrapheme, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
-import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
+import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import {
   complexTargets,
   makeComplexGrid,
@@ -336,7 +336,7 @@ function WordsExercise({
 function SoundImageExercise({
   phoneme, onValidated, shouldValidate,
 }: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [items] = useState(() => randomSoundItems(phoneme, 4));
+  const [items] = useState(() => randomSoundItems(phoneme, 4, true));
   const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
 
@@ -382,7 +382,7 @@ function SoundImageExercise({
       <div className="grid grid-cols-4 gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
-          const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
+          const imgSrc = getLectureWordImagePath(word.label);
           return (
             <button
               key={i}
@@ -397,8 +397,14 @@ function SoundImageExercise({
                     : "border-[var(--color-border-default)]"
               }`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imgSrc} alt={word.label} className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]" />
+              {imgSrc ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={imgSrc} alt={word.label} className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]" />
+              ) : (
+                <span className="absolute inset-0 flex items-center justify-center px-1 text-center text-[10px] font-semibold text-[var(--color-text-primary)]">
+                  {word.label}
+                </span>
+              )}
               <button
                 type="button"
                 aria-label={`Écouter ${word.label}`}
@@ -1077,10 +1083,13 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
   if (snapshot.kind === "sound-image" || snapshot.kind === "sound-audio") {
     return <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{snapshot.labels.map((label, i) => (
       <div key={`${label}-${i}`} className={`flex min-h-24 flex-col items-center justify-center rounded-[var(--radius-lg)] border-2 p-2 ${correctionStateClass(snapshot.states[i]!)}`}>
-        {snapshot.kind === "sound-image" && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={`/assets/words/img/${getWordAssetSlug(label)}.webp`} alt={label} className="h-16 w-full object-contain" />
-        )}
+        {snapshot.kind === "sound-image" && (() => {
+          const imgSrc = getLectureWordImagePath(label);
+          return imgSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={imgSrc} alt={label} className="h-16 w-full object-contain" />
+          ) : null;
+        })()}
         <span className={snapshot.states[i] === "wrong" ? "text-xs line-through" : "text-xs"}>{label}</span>
         {snapshot.targets[i] && <span className="mt-1 text-center text-xs font-bold text-[var(--color-correction)]">Bonne réponse</span>}
       </div>

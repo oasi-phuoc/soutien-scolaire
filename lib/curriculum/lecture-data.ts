@@ -1,4 +1,4 @@
-import { getWordAssetSlug } from "@/lib/utils/audio";
+import { getLectureWordImagePath } from "@/lib/utils/audio";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -1517,7 +1517,7 @@ function complexSoundLesson(
     phoneme,
     title,
     exampleWord: imgWord ?? lower,
-    exampleImagePath: imgWord ? `/assets/words/img/${getWordAssetSlug(imgWord)}.webp` : undefined,
+    exampleImagePath: imgWord ? getLectureWordImagePath(imgWord) : undefined,
     upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
     lowerGrid: grid25([lower, ...distractors]),
     upperWords: [],

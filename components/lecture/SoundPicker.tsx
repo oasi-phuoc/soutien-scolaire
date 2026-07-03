@@ -2,7 +2,7 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
-import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
+import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -41,12 +41,12 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   function ImagePicker({ phoneme }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [items, setItems] = useState(() => randomSoundItems(phoneme, 16));
+    const [items, setItems] = useState(() => randomSoundItems(phoneme, 16, true));
     const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setItems(randomSoundItems(phoneme, 16));
+      setItems(randomSoundItems(phoneme, 16, true));
       setStates(Array(16).fill("idle"));
       setValidated(false);
     }, [phoneme]);
@@ -90,7 +90,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const imgSrc = `/assets/words/img/${getWordAssetSlug(word.label)}.webp`;
+            const imgSrc = getLectureWordImagePath(word.label);
             return (
               <button
                 key={`${word.label}-${i}`}
@@ -107,12 +107,18 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                         : "border-[var(--color-border-default)]"
                 }`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={imgSrc}
-                  alt={word.label}
-                  className="absolute inset-0 h-full w-full object-contain p-1 pt-7 pr-7 rounded-[var(--radius-md)]"
-                />
+                {imgSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imgSrc}
+                    alt={word.label}
+                    className="absolute inset-0 h-full w-full object-contain p-1 pt-7 pr-7 rounded-[var(--radius-md)]"
+                  />
+                ) : (
+                  <span className="absolute inset-0 flex items-center justify-center px-1 pt-6 text-center text-[10px] font-semibold leading-tight text-[var(--color-text-primary)]">
+                    {word.label}
+                  </span>
+                )}
                 <button
                   type="button"
                   aria-label={`Écouter ${word.label}`}
