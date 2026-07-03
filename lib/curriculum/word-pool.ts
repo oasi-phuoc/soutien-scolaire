@@ -243,6 +243,46 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "romarin",        phonemes: ["/r/", "/o/", "/m/", "/a/", "/ɛ̃/"] },
   { label: "salade",         phonemes: ["/s/", "/a/", "/l/", "/d/"] },
   { label: "thym",           phonemes: ["/t/", "/i/", "/m/"] },
+  // ── Sons complexes (L7) — mots concrets, facilement illustrables ───────────
+  { label: "natation",       phonemes: ["/n/", "/a/", "/t/", "/a/", "/sjɔ̃/"] },
+  { label: "pharmacie",      phonemes: ["/f/", "/a/", "/r/", "/m/", "/a/", "/s/", "/i/"] },
+  { label: "oreille",        phonemes: ["/o/", "/r/", "/e/", "/j/"] },
+  { label: "coin",           phonemes: ["/k/", "/w/", "/ɛ̃/"] },
+  { label: "groin",          phonemes: ["/g/", "/r/", "/w/", "/ɛ̃/"] },
+  { label: "poing",          phonemes: ["/p/", "/w/", "/ɛ̃/"] },
+  { label: "foin",           phonemes: ["/f/", "/w/", "/ɛ̃/"] },
+  { label: "point",          phonemes: ["/p/", "/w/", "/ɛ̃/"] },
+  { label: "pointe",         phonemes: ["/p/", "/w/", "/ɛ̃/", "/t/"] },
+  { label: "joint",          phonemes: ["/ʒ/", "/w/", "/ɛ̃/"] },
+  { label: "shampoing",      phonemes: ["/ʃ/", "/ɑ̃/", "/p/", "/w/", "/ɛ̃/"] },
+  { label: "brun",           phonemes: ["/b/", "/r/", "/œ̃/"] },
+  { label: "lundi",          phonemes: ["/l/", "/œ̃/", "/d/", "/i/"] },
+  { label: "parfum",         phonemes: ["/p/", "/a/", "/r/", "/f/", "/œ̃/"] },
+  { label: "album",          phonemes: ["/a/", "/l/", "/b/", "/œ̃/"] },
+  { label: "feu",            phonemes: ["/f/", "/ø/"] },
+  { label: "jeu",            phonemes: ["/ʒ/", "/ø/"] },
+  { label: "bleu",           phonemes: ["/b/", "/l/", "/ø/"] },
+  { label: "fruit",          phonemes: ["/f/", "/r/", "/ɥi/"] },
+  { label: "huit",           phonemes: ["/ɥi/", "/t/"] },
+  { label: "lait",           phonemes: ["/l/", "/ɛ/"] },
+  { label: "fille",          phonemes: ["/f/", "/i/", "/j/"] },
+  { label: "bille",          phonemes: ["/b/", "/i/", "/j/"] },
+  { label: "vanille",        phonemes: ["/v/", "/a/", "/n/", "/i/", "/j/"] },
+  { label: "chenille",       phonemes: ["/ʃ/", "/e/", "/n/", "/i/", "/j/"] },
+  { label: "pompier",        phonemes: ["/p/", "/ɔ̃/", "/p/", "/j/", "/e/"] },
+  { label: "jardinier",      phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/i/", "/n/", "/j/", "/e/"] },
+  { label: "panier",         phonemes: ["/p/", "/a/", "/n/", "/j/", "/e/"] },
+  { label: "soulier",        phonemes: ["/s/", "/u/", "/l/", "/j/", "/e/"] },
+  { label: "cerisier",       phonemes: ["/s/", "/e/", "/r/", "/i/", "/z/", "/j/", "/e/"] },
+  { label: "poirier",        phonemes: ["/p/", "/w/", "/a/", "/r/", "/j/", "/e/"] },
+  { label: "cuisinier",      phonemes: ["/k/", "/ɥi/", "/z/", "/i/", "/n/", "/j/", "/e/"] },
+  { label: "photo",          phonemes: ["/f/", "/o/", "/t/", "/o/"] },
+  { label: "phare",          phonemes: ["/f/", "/a/", "/r/"] },
+  { label: "phoque",         phonemes: ["/f/", "/ɔ/", "/k/"] },
+  { label: "potion",         phonemes: ["/p/", "/o/", "/t/", "/j/", "/ɔ̃/"] },
+  { label: "station",        phonemes: ["/s/", "/t/", "/a/", "/sjɔ̃/"] },
+  { label: "addition",       phonemes: ["/a/", "/d/", "/i/", "/sjɔ̃/"] },
+  { label: "lotion",         phonemes: ["/l/", "/o/", "/t/", "/j/", "/ɔ̃/"] },
 ];
 
 // ── Large word list for WordSpotter (letter recognition only, no phoneme data) ─
@@ -447,6 +487,24 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 2;
       continue;
     }
+    if (word.slice(i, i + 4) === "tion" && hasNasalEnding(word, i + 1, 3)) {
+      phonemes.add("/sjɔ̃/");
+      i += 3;
+      continue;
+    }
+    if (three === "oin" && hasNasalEnding(word, i, 3)) {
+      phonemes.add("/wɛ̃/");
+      i += 2;
+      continue;
+    }
+    if (three === "ill") {
+      const prev = word[i - 1];
+      if ((prev && isVowelChar(prev)) || word[i + 3] !== "i") {
+        phonemes.add("/j/");
+        i += 2;
+        continue;
+      }
+    }
 
     if ((two === "an" || two === "en" || two === "am" || two === "em") && hasNasalEnding(word, i, 2)) {
       phonemes.add("/ɑ̃/");
@@ -465,6 +523,11 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
 
     if ((two === "on" || two === "om") && hasNasalEnding(word, i, 2)) {
       phonemes.add("/ɔ̃/");
+      i += 1;
+      continue;
+    }
+    if ((two === "un" || two === "um") && hasNasalEnding(word, i, 2)) {
+      phonemes.add("/œ̃/");
       i += 1;
       continue;
     }
@@ -496,6 +559,34 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
     }
     if (two === "au") {
       phonemes.add("/o/");
+      i += 1;
+      continue;
+    }
+    if (three === "oeu" || three === "œu") {
+      phonemes.add("/ø/");
+      i += 2;
+      continue;
+    }
+    if (two === "eu" && !word.slice(i, i + 3).startsWith("eau") && !word.slice(i + 2).startsWith("r")) {
+      if (!word.slice(i + 2).startsWith("ill")) {
+        phonemes.add("/ø/");
+      }
+      i += 1;
+      continue;
+    }
+    if (two === "ui") {
+      phonemes.add("/ɥi/");
+      i += 1;
+      continue;
+    }
+    if (word.slice(i, i + 4) === "eill") {
+      phonemes.add("/ɛ/");
+      phonemes.add("/j/");
+      i += 3;
+      continue;
+    }
+    if (two === "ai" || two === "ei") {
+      phonemes.add("/ɛ/");
       i += 1;
       continue;
     }
