@@ -1576,9 +1576,9 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
     ["Lecture melangee", ["chaud", "chiffre", "machine", "chocolat", "richesse", "chute", "chemin", "chance", "chariot", "château"]],
   ], "chat"),
   complexSoundLesson("ph", "PH", "/f/", [
-    ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "graphique", "physique"]],
-    ["Lecture de mots", ["saphir", "nénuphar", "géographie", "phénomène", "triomphe", "sphère", "microphone", "paragraphe", "éléphant", "phase"]],
-    ["Lecture melangee", ["photo", "phare", "dauphin", "éléphant", "téléphone", "phrase", "alphabet", "pharmacie", "graphique", "sphère"]],
+    ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "éléphant", "nénuphar"]],
+    ["Lecture de mots", ["saphir", "nénuphar", "éléphant", "phoque", "phare", "photo", "pharmacie", "téléphone", "alphabet", "dauphin"]],
+    ["Lecture melangee", ["phoque", "nénuphar", "saphir", "phrase", "téléphone", "pharmacie", "phare", "éléphant", "alphabet", "dauphin"]],
   ], "dauphin"),
   complexSoundLesson("gn", "GN", "/ɲ/", [
     ["Lis gn", ["montagne", "ligne", "signe", "cygne", "peigne", "oignon", "agneau", "araignée", "champignon", "baigner"]],
@@ -1588,7 +1588,7 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
   complexSoundLesson("ill", "ILL", "/j/", [
     ["Lis ill", ["fille", "bille", "quille", "grille", "vanille", "chenille", "gorille", "papillon", "brille", "jonquille"]],
     ["Avec voyelle (ail, eil, ouil)", ["abeille", "soleil", "bouteille", "oreille", "paille", "médaille", "feuille", "fauteuil", "citrouille", "grenouille"]],
-    ["Lecture melangee", ["famille", "habille", "réveil", "travail", "bataille", "volaille", "écureuil", "nouille", "rouille", "papillon"]],
+    ["Lecture melangee", ["famille", "fille", "bille", "vanille", "chenille", "gorille", "grille", "quille", "nouille", "citrouille"]],
   ], "papillon"),
   complexSoundLesson("ai-ei", "AI / EI", "/ɛ/", [
     ["Lis ai", ["maison", "lait", "fraise", "chaise", "maître", "semaine", "balai", "palais", "vaisselle", "japonais"]],
@@ -1601,30 +1601,30 @@ export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
     ["Lis œu et melange", ["cœur", "sœur", "œuf", "nœud", "bœuf", "docteur", "couleur", "vendeur", "pleurer", "chanteur"]],
   ], "fleur"),
   complexSoundLesson("ui", "UI", "/ɥi/", [
-    ["Lis ui", ["lui", "nuit", "fruit", "huit", "bruit", "puits", "puis", "suis", "cuir", "étui"]],
-    ["Lecture de mots", ["cuisine", "biscuit", "pluie", "ennui", "conduire", "construire", "fuir", "juin", "suivre", "cuivre"]],
-    ["Lecture melangee", ["minuit", "gratuit", "truite", "buisson", "ruisseau", "appui", "depuis", "produit", "circuit", "réduit"]],
+    ["Lis ui", ["nuit", "fruit", "huit", "bruit", "puits", "cuir", "étui", "biscuit", "pluie", "juin"]],
+    ["Lecture de mots", ["cuisine", "biscuit", "pluie", "juin", "cuivre", "truite", "buisson", "fruit", "nuit", "huit"]],
+    ["Lecture melangee", ["minuit", "truite", "buisson", "fruit", "nuit", "huit", "bruit", "biscuit", "pluie", "juin"]],
   ], "nuit"),
   complexSoundLesson("oin", "OIN", "/wɛ̃/", [
-    ["Lis oin", ["coin", "loin", "soin", "foin", "point", "joint", "moins", "besoin", "témoin", "poing"]],
-    ["Lecture de mots", ["pointu", "pointe", "lointain", "rejoindre", "coincer", "pointer", "moindre", "adjoint", "shampoing", "groin"]],
-    ["Lecture melangee", ["coin", "loin", "point", "besoin", "moins", "soin", "témoin", "pointu", "lointain", "rejoindre"]],
-  ]),
+    ["Lis oin", ["coin", "groin", "poing", "foin", "joint", "point", "pointe", "shampoing", "coing", "pointu"]],
+    ["Lecture de mots", ["pointu", "groin", "poing", "foin", "shampoing", "coin", "joint", "pointe", "point", "coing"]],
+    ["Lecture melangee", ["groin", "poing", "foin", "shampoing", "pointe", "pointu", "coin", "joint", "point", "coing"]],
+  ], "groin"),
   complexSoundLesson("ien", "IEN", "/jɛ̃/", [
-    ["Lis ien", ["chien", "bien", "rien", "mien", "tien", "sien", "lien", "combien", "gardien", "indien"]],
-    ["Lecture de mots", ["ancien", "italien", "musicien", "mécanicien", "pharmacien", "magicien", "comédien", "chirurgien", "parisien", "quotidien"]],
-    ["Lecture melangee", ["viens", "tiens", "revient", "soutien", "entretien", "bientôt", "chrétien", "terrien", "gardien", "combien"]],
+    ["Lis ien", ["chien", "gardien", "indien", "combien", "lien", "jardinier", "panier", "pompier", "soulier", "cerisier"]],
+    ["Lecture de mots", ["jardinier", "panier", "soulier", "cerisier", "poirier", "pompier", "cuisinier", "gardien", "indien", "combien"]],
+    ["Lecture melangee", ["chien", "jardinier", "panier", "pompier", "soulier", "cerisier", "poirier", "cuisinier", "gardien", "combien"]],
   ], "chien"),
   complexSoundLesson("un-um", "UN / UM", "/œ̃/", [
-    ["Lis un", ["un", "brun", "chacun", "aucun", "lundi", "commun", "défunt", "emprunt", "opportun", "tribun"]],
-    ["Lis um (parfum)", ["parfum", "humble", "brun", "lundi", "chacun", "aucun", "commun", "un", "emprunt", "défunt"]],
-    ["Lecture melangee", ["un", "brun", "lundi", "parfum", "chacun", "aucun", "commun", "emprunt", "humble", "défunt"]],
-  ]),
+    ["Lis un", ["brun", "lundi", "parfum", "album", "un", "chacun", "aucun", "commun", "humble", "album"]],
+    ["Lis um (parfum)", ["parfum", "album", "humble", "brun", "lundi", "chacun", "aucun", "commun", "un", "parfum"]],
+    ["Lecture melangee", ["brun", "lundi", "parfum", "album", "humble", "chacun", "aucun", "commun", "un", "parfum"]],
+  ], "brun"),
   complexSoundLesson("tion", "TION", "/sjɔ̃/", [
-    ["Lis tion", ["nation", "addition", "potion", "lotion", "portion", "station", "mention", "action", "fiction", "option"]],
+    ["Lis tion", ["nation", "addition", "potion", "lotion", "portion", "station", "mention", "action", "fiction", "natation"]],
     ["Lecture de mots", ["attention", "récréation", "opération", "animation", "invitation", "récitation", "imitation", "décoration", "invention", "population"]],
-    ["Lecture melangee", ["punition", "position", "émotion", "solution", "pollution", "condition", "révolution", "natation", "éducation", "ambition"]],
-  ]),
+    ["Lecture melangee", ["natation", "station", "addition", "potion", "lotion", "nation", "fiction", "action", "portion", "mention"]],
+  ], "natation"),
 ];
 
 // ─── Pools de mots pour L8 (multisyllabes) ─────────────────────────────────────
