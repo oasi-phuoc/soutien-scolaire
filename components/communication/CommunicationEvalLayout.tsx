@@ -113,30 +113,20 @@ export function CommunicationResultsSummary({
   const mention = pendingTeacher ? "En attente" : mentionFromEvalGrade(note!);
 
   return (
-    <>
-      <section className="text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
-        <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">
-          {pendingTeacher ? "—" : formatEvalPoints(totalPoints)} / {maxPoints}
+    <section className="text-center">
+      <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
+      <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">
+        {pendingTeacher ? "—" : formatEvalPoints(totalPoints)} / {maxPoints}
+      </p>
+      {!pendingTeacher && note !== null && (
+        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+          Note {note.toFixed(1).replace(".", ",")} / 6
         </p>
-      </section>
-      <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
-          <p className="text-sm text-[var(--color-text-secondary)]">Points</p>
-          <p className="text-2xl font-bold">{pendingTeacher ? "—" : formatEvalPoints(totalPoints)}</p>
-        </div>
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 text-center">
-          <p className="text-sm text-[var(--color-text-secondary)]">Note</p>
-          <p className="text-2xl font-bold">
-            {pendingTeacher ? "—" : `${note!.toFixed(1).replace(".", ",")}`} / 6
-          </p>
-        </div>
-        <div className="rounded-[var(--radius-md)] border bg-white p-4 text-center" style={{ borderColor: ACCENT }}>
-          <p className="text-sm text-[var(--color-text-secondary)]">Mention</p>
-          <p className="font-bold" style={{ color: ACCENT }}>{mention}</p>
-        </div>
-      </div>
-    </>
+      )}
+      <p className={`${pendingTeacher || note !== null ? "mt-1" : "mt-2"} text-sm font-bold`} style={{ color: ACCENT }}>
+        {mention}
+      </p>
+    </section>
   );
 }
 
