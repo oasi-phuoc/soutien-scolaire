@@ -1,3 +1,5 @@
+import { getWordAssetSlug } from "@/lib/utils/audio";
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type SoundItem = { label: string; hasSound: boolean };
@@ -1521,7 +1523,7 @@ function complexSoundLesson(
     phoneme,
     title,
     exampleWord: imgWord ?? (baseWords[0] ?? title.toLowerCase()),
-    exampleImagePath: imgWord ? `/assets/words/img/${imgWord}.webp` : undefined,
+    exampleImagePath: imgWord ? `/assets/words/img/${getWordAssetSlug(imgWord)}.webp` : undefined,
     upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
     lowerGrid: grid25([lower, ...distractors]),
     upperWords: baseWords.map((word) => word.toUpperCase()),
