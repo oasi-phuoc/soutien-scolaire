@@ -1,3 +1,5 @@
+import { complexTargets } from "../utils/complex-grapheme";
+
 // Each word carries the list of TEACHING phonemes it actually contains
 // (phonetically, not orthographically).
 // imagePath → /assets/words/img/{label}.webp
@@ -243,18 +245,18 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "romarin",        phonemes: ["/r/", "/o/", "/m/", "/a/", "/ɛ̃/"] },
   { label: "salade",         phonemes: ["/s/", "/a/", "/l/", "/d/"] },
   { label: "thym",           phonemes: ["/t/", "/i/", "/m/"] },
-  // ── Sons complexes (L7) — mots concrets, facilement illustrables ───────────
-  { label: "natation",       phonemes: ["/n/", "/a/", "/t/", "/a/", "/sjɔ̃/"] },
-  { label: "pharmacie",      phonemes: ["/f/", "/a/", "/r/", "/m/", "/a/", "/s/", "/i/"] },
-  { label: "oreille",        phonemes: ["/o/", "/r/", "/e/", "/j/"] },
-  { label: "coin",           phonemes: ["/k/", "/w/", "/ɛ̃/"] },
-  { label: "groin",          phonemes: ["/g/", "/r/", "/w/", "/ɛ̃/"] },
-  { label: "poing",          phonemes: ["/p/", "/w/", "/ɛ̃/"] },
-  { label: "foin",           phonemes: ["/f/", "/w/", "/ɛ̃/"] },
-  { label: "point",          phonemes: ["/p/", "/w/", "/ɛ̃/"] },
-  { label: "pointe",         phonemes: ["/p/", "/w/", "/ɛ̃/", "/t/"] },
-  { label: "joint",          phonemes: ["/ʒ/", "/w/", "/ɛ̃/"] },
-  { label: "shampoing",      phonemes: ["/ʃ/", "/ɑ̃/", "/p/", "/w/", "/ɛ̃/"] },
+  // ── Sons complexes (L7) — mots concrets, phonèmes via phonemesFromFrenchGraphemes ─
+  { label: "natation",       phonemes: ["/n/", "/a/", "/t/", "/sjɔ̃/"] },
+  { label: "pharmacie",      phonemes: ["/f/", "/a/", "/r/", "/m/", "/s/", "/i/"] },
+  { label: "oreille",        phonemes: ["/o/", "/r/", "/ɛ/", "/j/"] },
+  { label: "coin",           phonemes: ["/k/", "/wɛ̃/"] },
+  { label: "groin",          phonemes: ["/g/", "/r/", "/wɛ̃/"] },
+  { label: "poing",          phonemes: ["/p/", "/wɛ̃/"] },
+  { label: "foin",           phonemes: ["/f/", "/wɛ̃/"] },
+  { label: "point",          phonemes: ["/p/", "/wɛ̃/"] },
+  { label: "pointe",         phonemes: ["/p/", "/wɛ̃/", "/t/"] },
+  { label: "joint",          phonemes: ["/ʒ/", "/wɛ̃/"] },
+  { label: "shampoing",      phonemes: ["/ʃ/", "/ɑ̃/", "/p/", "/wɛ̃/"] },
   { label: "brun",           phonemes: ["/b/", "/r/", "/œ̃/"] },
   { label: "lundi",          phonemes: ["/l/", "/œ̃/", "/d/", "/i/"] },
   { label: "parfum",         phonemes: ["/p/", "/a/", "/r/", "/f/", "/œ̃/"] },
@@ -263,26 +265,26 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "jeu",            phonemes: ["/ʒ/", "/ø/"] },
   { label: "bleu",           phonemes: ["/b/", "/l/", "/ø/"] },
   { label: "fruit",          phonemes: ["/f/", "/r/", "/ɥi/"] },
-  { label: "huit",           phonemes: ["/ɥi/", "/t/"] },
+  { label: "huit",           phonemes: ["/ɥi/"] },
   { label: "lait",           phonemes: ["/l/", "/ɛ/"] },
-  { label: "fille",          phonemes: ["/f/", "/i/", "/j/"] },
-  { label: "bille",          phonemes: ["/b/", "/i/", "/j/"] },
-  { label: "vanille",        phonemes: ["/v/", "/a/", "/n/", "/i/", "/j/"] },
-  { label: "chenille",       phonemes: ["/ʃ/", "/e/", "/n/", "/i/", "/j/"] },
+  { label: "fille",          phonemes: ["/f/", "/j/"] },
+  { label: "bille",          phonemes: ["/b/", "/j/"] },
+  { label: "vanille",        phonemes: ["/v/", "/a/", "/n/", "/j/"] },
+  { label: "chenille",       phonemes: ["/ʃ/", "/e/", "/n/", "/j/"] },
   { label: "pompier",        phonemes: ["/p/", "/ɔ̃/", "/p/", "/j/", "/e/"] },
-  { label: "jardinier",      phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/i/", "/n/", "/j/", "/e/"] },
+  { label: "jardinier",      phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/i/", "/n/", "/e/"] },
   { label: "panier",         phonemes: ["/p/", "/a/", "/n/", "/j/", "/e/"] },
   { label: "soulier",        phonemes: ["/s/", "/u/", "/l/", "/j/", "/e/"] },
   { label: "cerisier",       phonemes: ["/s/", "/e/", "/r/", "/i/", "/z/", "/j/", "/e/"] },
-  { label: "poirier",        phonemes: ["/p/", "/w/", "/a/", "/r/", "/j/", "/e/"] },
+  { label: "poirier",        phonemes: ["/p/", "/wa/", "/r/", "/j/", "/e/"] },
   { label: "cuisinier",      phonemes: ["/k/", "/ɥi/", "/z/", "/i/", "/n/", "/j/", "/e/"] },
-  { label: "photo",          phonemes: ["/f/", "/o/", "/t/", "/o/"] },
+  { label: "photo",          phonemes: ["/f/", "/o/", "/t/"] },
   { label: "phare",          phonemes: ["/f/", "/a/", "/r/"] },
-  { label: "phoque",         phonemes: ["/f/", "/ɔ/", "/k/"] },
-  { label: "potion",         phonemes: ["/p/", "/o/", "/t/", "/j/", "/ɔ̃/"] },
+  { label: "phoque",         phonemes: ["/f/", "/o/", "/k/"] },
+  { label: "potion",         phonemes: ["/p/", "/o/", "/sjɔ̃/"] },
   { label: "station",        phonemes: ["/s/", "/t/", "/a/", "/sjɔ̃/"] },
   { label: "addition",       phonemes: ["/a/", "/d/", "/i/", "/sjɔ̃/"] },
-  { label: "lotion",         phonemes: ["/l/", "/o/", "/t/", "/j/", "/ɔ̃/"] },
+  { label: "lotion",         phonemes: ["/l/", "/o/", "/sjɔ̃/"] },
 ];
 
 // ── Large word list for WordSpotter (letter recognition only, no phoneme data) ─
@@ -430,6 +432,19 @@ export const LETTER_WORDS: string[] = [
   // ── Z ──
   "zèbre","zigzag","zoo","zombie","zone","zapper","zénith","zinc","zircon",
   "zombie","zonard","zoologie","zouave","zut","pizza","trapèze","bronze","gazette",
+];
+
+// ── L6 mots-outils (fonctionnels) ─────────────────────────────────────────────
+
+export const TOOL_WORD_POOLS: Record<string, string[]> = {
+  articles: ["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"],
+  possessifs: ["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "notre", "nos", "votre", "vos", "leur", "leurs"],
+  "pronoms-sujets": ["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"],
+  "pronoms-complements": ["me", "te", "lui", "moi", "toi", "eux"],
+};
+
+export const ALL_TOOL_WORDS: string[] = [
+  ...new Set(Object.values(TOOL_WORD_POOLS).flat()),
 ];
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -653,6 +668,82 @@ export function wordHasPhoneme(item: WordItem, phoneme: string): boolean {
   return phonemesFromFrenchGraphemes(item.label).has(phoneme);
 }
 
+/** Teaching phonemes for a label — manual entry if present, else grapheme analysis. */
+export function teachingPhonemes(label: string): string[] {
+  const manual = WORD_ITEMS.find((w) => w.label === label);
+  if (manual) return manual.phonemes;
+  return [...phonemesFromFrenchGraphemes(label)];
+}
+
+/** Word items for mots-outils L6, phonèmes dérivés des graphèmes. */
+export const TOOL_WORD_ITEMS: WordItem[] = ALL_TOOL_WORDS.map((label) => ({
+  label,
+  phonemes: [...phonemesFromFrenchGraphemes(label)],
+}));
+
+/** Union WORD_ITEMS + mots-outils (sans doublon). */
+export function allWordItems(): WordItem[] {
+  const byLabel = new Map<string, WordItem>();
+  for (const item of WORD_ITEMS) byLabel.set(item.label, item);
+  for (const item of TOOL_WORD_ITEMS) {
+    if (!byLabel.has(item.label)) byLabel.set(item.label, item);
+  }
+  return [...byLabel.values()];
+}
+
+/** Tous les labels disponibles (LETTER_WORDS + mots-outils + WORD_ITEMS). */
+export function allPoolLabels(): string[] {
+  return [...new Set([...LETTER_WORDS, ...ALL_TOOL_WORDS, ...WORD_ITEMS.map((w) => w.label)])];
+}
+
+/** Nombre de syllabes (heuristique lecture CP). */
+export function countSyllables(word: string): number {
+  const w = normalizeWordLabel(word).replace(/-/g, "");
+  const groups = w.match(/[aeiouyàâäéèêëïîôùûüœæ]+/gi);
+  if (!groups) return 1;
+  let count = groups.length;
+  if (/e$/u.test(w) && count > 1 && !/[éèêë]$/u.test(word.normalize("NFD"))) count -= 1;
+  return Math.max(1, count);
+}
+
+/** Le mot contient le graphème complexe (ex. « OU », « AN / EN »). */
+export function wordContainsGrapheme(word: string, graphemeLabel: string): boolean {
+  const norm = normalizeWordLabel(word);
+  return complexTargets(graphemeLabel).some((target) => norm.includes(target));
+}
+
+export function monosyllablePool(): string[] {
+  return LETTER_WORDS.filter((w) => countSyllables(w) === 1 && w.length <= 9);
+}
+
+export function multisyllablePool(minSyllables: number, maxSyllables: number | null = null): string[] {
+  return LETTER_WORDS.filter((w) => {
+    const n = countSyllables(w);
+    if (n < minSyllables) return false;
+    if (maxSyllables !== null && n > maxSyllables) return false;
+    return true;
+  });
+}
+
+export function toolWordsForCategory(key: string): string[] {
+  return TOOL_WORD_POOLS[key] ?? ALL_TOOL_WORDS;
+}
+
+export function wordsPoolForLessonGrid(
+  lessonType: "monosyllable" | "multisyllable",
+  letterLower: string,
+  gridKey: string,
+): string[] {
+  if (lessonType === "monosyllable") {
+    if (letterLower === "outils") return toolWordsForCategory(gridKey);
+    return monosyllablePool();
+  }
+  if (gridKey === "two") return multisyllablePool(2, 2);
+  if (gridKey === "three") return multisyllablePool(3, 3);
+  if (gridKey === "four") return multisyllablePool(4, null);
+  return multisyllablePool(2, null);
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -669,13 +760,28 @@ export function randomWordsWithLetter(letter: string, n: number): string[] {
   return shuffle(pool).slice(0, n);
 }
 
+/** Random labels containing a complex grapheme (L7 WordSpotter / prononciation). */
+export function randomWordsWithGrapheme(graphemeLabel: string, n: number): string[] {
+  const pool = LETTER_WORDS.filter((w) => wordContainsGrapheme(w, graphemeLabel) && w.length <= 12);
+  return shuffle(pool).slice(0, n);
+}
+
+export function randomMonosyllableWords(n: number): string[] {
+  return shuffle(monosyllablePool()).slice(0, n);
+}
+
+export function randomMultisyllableWords(minSyl: number, maxSyl: number | null, n: number): string[] {
+  return shuffle(multisyllablePool(minSyl, maxSyl)).slice(0, n);
+}
+
 /**
  * Random items for SoundPicker image grid.
  * Aims for ~40 % "has phoneme" / ~60 % "doesn't have phoneme".
  */
 export function randomSoundItems(phoneme: string, n = 16): WordItem[] {
-  const yes = shuffle(WORD_ITEMS.filter((w) => wordHasPhoneme(w, phoneme)));
-  const no  = shuffle(WORD_ITEMS.filter((w) => !wordHasPhoneme(w, phoneme)));
+  const pool = allWordItems();
+  const yes = shuffle(pool.filter((w) => wordHasPhoneme(w, phoneme)));
+  const no = shuffle(pool.filter((w) => !wordHasPhoneme(w, phoneme)));
   const yCount = Math.min(Math.round(n * 0.4) + 1, yes.length);
   const nCount = Math.min(n - yCount, no.length);
   return shuffle([...yes.slice(0, yCount), ...no.slice(0, nCount)]);

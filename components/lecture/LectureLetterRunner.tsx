@@ -28,6 +28,14 @@ import {
 } from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import {
+  ALL_TOOL_WORDS,
+  monosyllablePool,
+  multisyllablePool,
+  randomWordsWithGrapheme,
+  wordsPoolForLessonGrid,
+} from "@/lib/curriculum/word-pool";
+import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 
 interface Props {
   data: LetterData;
@@ -37,6 +45,17 @@ interface Props {
 type Step = { key: string; label: string };
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 type ResetHandle = { reset: () => void };
+type WordPronounceGridHandle = ResetHandle & { validate?: () => void };
+
+function getPassGrade(): number {
+  if (typeof window === "undefined") return 4;
+  try {
+    const level = (localStorage.getItem("soutien-level") ?? "base") as LevelKey;
+    return LEVEL_PASSING_GRADES[level] ?? 4;
+  } catch {
+    return 4;
+  }
+}
 
 function getSteps(data: LetterData): Step[] {
   if (data.type === "complex-sound") {
@@ -207,19 +226,22 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
   );
 });
 
-const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
-  function ComplexWordSpotter({ words, target, isUppercase }, ref) {
+const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUppercase: boolean }>(
+  function ComplexWordSpotter({ target, isUppercase }, ref) {
   const targets = complexTargets(target);
-  // Only words up to 10 letters fit on a single line; longer ones wrap, so drop them.
-  const pool = words.filter((w) => w.length <= 10);
-  const VISIBLE = Math.min(8, pool.length);
-  const [selectedWords, setSelectedWords] = useState(() => shuffle(pool).slice(0, VISIBLE));
-  const displayedWords = selectedWords.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const VISIBLE = 8;
+  const buildWords = () =>
+    randomWordsWithGrapheme(target, 20)
+      .filter((w) => w.length <= 10)
+      .slice(0, VISIBLE)
+      .map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const [selectedWords, setSelectedWords] = useState(buildWords);
+  const displayedWords = selectedWords;
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
 
   function reset() {
-    setSelectedWords(shuffle(pool).slice(0, VISIBLE));
+    setSelectedWords(buildWords());
     setStates({});
     setValidated(false);
   }
@@ -426,7 +448,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
 
 // Word pronunciation grid — same mic/word/audio row layout as the complex-sound
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
-const WordPronounceGrid = forwardRef<ResetHandle, {
+const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   words?: string[];
   timerSeconds?: number;
   sampleSize?: number;
@@ -434,13 +456,17 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   // lowercase); each pool is shuffled and `n` items are taken, then combined.
   sampleSpec?: { pool: string[]; n: number }[];
   isEval?: boolean;
+  /** L6/L8 word-eval: validate button, results screen, auto-validate on timer. */
+  evalWithResults?: boolean;
   title?: string;
   consigne?: string;
   // Which audio folder the play button targets (words vs syllables).
   kind?: "mots" | "syllable";
   onTimeChange?: (t: number | null) => void;
+  onEvalStateChange?: (state: { isResults: boolean; canValidate: boolean; started: boolean }) => void;
+  onValidated?: (correct: number, total: number) => void;
 }>(
-  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, title, consigne, kind = "mots", onTimeChange }, ref) {
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", onTimeChange, onEvalStateChange, onValidated }, ref) {
   // Stable content keys so the sampling effect below runs once per step (and
   // not on every render — a fresh array prop would otherwise loop forever).
   const wordsKey = words.join("");
@@ -465,6 +491,8 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   const [timeLeft, setTimeLeft] = useState<number>(timerSeconds ?? 0);
   // Evaluations show an announcement screen first; the timer only starts on "Commencer".
   const [started, setStarted] = useState<boolean>(!isEval);
+  const [finished, setFinished] = useState(false);
+  const [evalCorrect, setEvalCorrect] = useState(0);
   const recRef = useRef<unknown>(null);
 
   // Sample the words once, on mount (client only). Depends on stable content
@@ -495,8 +523,29 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
   }, [timeLeft, started, timerSeconds]);
   useEffect(() => () => onTimeChange?.(null), []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Report eval state to parent (L6/L8 word-eval nav buttons).
+  useEffect(() => {
+    if (!evalWithResults || !onEvalStateChange) return;
+    onEvalStateChange({
+      isResults: finished,
+      canValidate: started && !finished,
+      started,
+    });
+  }, [evalWithResults, finished, started, onEvalStateChange]);
+
   // While the evaluation is running, guard against leaving via the main nav.
-  useRegisterEvalGuard(!!isEval && started && !timeUp);
+  useRegisterEvalGuard(!!evalWithResults && started && !finished);
+
+  function doValidate() {
+    if (!evalWithResults || finished) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    recRef.current = null;
+    const correct = states.filter((s) => s === "correct").length;
+    setEvalCorrect(correct);
+    setFinished(true);
+    onValidated?.(correct, items.length);
+  }
 
   function reset() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -505,10 +554,20 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
     setItems(buildItems());
     setStates(Array(count).fill("idle"));
     setHeard(Array(count).fill(""));
+    setFinished(false);
+    setEvalCorrect(0);
     if (timerSeconds) setTimeLeft(timerSeconds);
+    if (isEval) setStarted(false);
   }
 
-  useImperativeHandle(ref, () => ({ reset }));
+  useImperativeHandle(ref, () => ({ reset, validate: doValidate }));
+
+  // Auto-validate when the timer reaches zero (L6/L8 eval — no toast).
+  useEffect(() => {
+    if (!evalWithResults || !started || !timeUp || finished) return;
+    doValidate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalWithResults, started, timeUp, finished]);
 
   // Announcement screen for evaluations (shared design), shown before starting.
   if (isEval && !started) {
@@ -523,7 +582,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
 
 
   function startListening(index: number) {
-    if (typeof window === "undefined" || timeUp || states[index] === "correct") return;
+    if (typeof window === "undefined" || (timeUp && !evalWithResults) || finished || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -562,6 +621,59 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
     rec.start();
   }
 
+  const passGrade = getPassGrade();
+  const grade = linearSwissGrade(evalCorrect, items.length || 1);
+  const passed = grade >= passGrade;
+
+  if (evalWithResults && finished) {
+    return (
+      <section className="space-y-4">
+        <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
+        <div className="grid grid-cols-3 gap-3">
+          <div className="flex flex-col items-center justify-center p-3 text-center">
+            <p className="text-[10px] text-[var(--color-text-secondary)]">Mots lus</p>
+            <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+              {evalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{items.length}</span>
+            </p>
+            <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+              <div
+                className={`h-full rounded-full ${passed ? "bg-[var(--color-accent-lecture)]" : "bg-red-400"}`}
+                style={{ width: `${Math.round((evalCorrect / Math.max(items.length, 1)) * 100)}%` }}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center p-3 text-center">
+            <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+            <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+              {grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span>
+            </p>
+          </div>
+          <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
+            <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+            <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>{passed ? "Réussi" : "À améliorer"}</p>
+          </div>
+        </div>
+        <ul className="space-y-2">
+          {items.map((word, i) => {
+            const ok = states[i] === "correct";
+            return (
+              <li
+                key={`${word}-${i}`}
+                className={`flex items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-2 ${
+                  ok ? "border-green-300 bg-green-50/50 dark:bg-green-950/20" : "border-red-300 bg-red-50/50 dark:bg-red-950/20"
+                }`}
+              >
+                <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
+                <span className="flex-1 text-base font-bold text-[var(--color-text-primary)]">{word}</span>
+                <span className={`text-sm font-bold ${ok ? "text-green-600" : "text-red-500"}`}>{ok ? "✓" : "✗"}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    );
+  }
+
   return (
     <section className="space-y-3">
       {/* Title + consigne */}
@@ -575,7 +687,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
           main progress bar (via onTimeChange). The "restant" count sits below. */}
       {timerSeconds && (
         <div>
-          {isEval && (
+          {isEval && !evalWithResults && (
             <div className="mb-1 flex items-center justify-end">
               <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
                 timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
@@ -594,7 +706,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
           <p className="mt-1 text-right text-xs text-[var(--color-text-secondary)]">{remaining} restant(s)</p>
         </div>
       )}
-      {timeUp && (
+      {timeUp && !evalWithResults && (
         <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/20">
           Temps écoulé ! Appuyez sur recommencer pour réessayer.
         </p>
@@ -617,7 +729,7 @@ const WordPronounceGrid = forwardRef<ResetHandle, {
               <button
                 type="button"
                 onClick={() => startListening(i)}
-                disabled={state === "listening" || state === "correct" || timeUp}
+                disabled={state === "listening" || state === "correct" || (timeUp && !evalWithResults) || finished}
                 className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
@@ -722,6 +834,12 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const searchParams = useSearchParams();
   const steps = getSteps(data);
   const [stepIdx, setStepIdx] = useState(0);
+  const [resetKey, setResetKey] = useState(0);
+  const [wordTimerLeft, setWordTimerLeft] = useState<number | null>(null);
+  const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number; validated: boolean[]; isResults: boolean } | null>(null);
+  const [wordEvalState, setWordEvalState] = useState<{ isResults: boolean; canValidate: boolean; started: boolean } | null>(null);
+  const [wordEvalResult, setWordEvalResult] = useState<{ grade: number; passed: boolean; total: number } | null>(null);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
   useEffect(() => {
     if (searchParams.get("eval") === "1") {
@@ -729,16 +847,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [resetKey, setResetKey] = useState(0);
-  const [wordTimerLeft, setWordTimerLeft] = useState<number | null>(null);
-  const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number; validated: boolean[]; isResults: boolean } | null>(null);
-  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+
+  useEffect(() => {
+    setWordEvalState(null);
+    setWordEvalResult(null);
+    setWordTimerLeft(null);
+  }, [stepIdx, resetKey]);
   const evalNavigateRef = useRef<(index: number) => void>(() => {});
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
   const pronounceRef = useRef<PronunciationChainHandle>(null);
-  const pronounceGridRef = useRef<ResetHandle>(null);
+  const pronounceGridRef = useRef<WordPronounceGridHandle>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
@@ -760,6 +880,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
   const isPronounceStep = step.key === "pronounce";
   const isEvalStep = step.key === "eval";
+  const isWordEvalL6L8 = isWordEvalStep && (data.type === "monosyllable" || data.type === "multisyllable");
   // Steps rendered with the mic/word/audio grids (ComplexSyllableGrid / WordPronounceGrid):
   // these auto-validate on correct speech, so they only need a refresh action.
   const isPronounceGridStep =
@@ -768,10 +889,10 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     step.key === "syllables-vc" ||
     step.key === "syll-2" ||
     step.key === "syll-timed" ||
-    isWordEvalStep ||
+    (isWordEvalStep && !isWordEvalL6L8) ||
     data.type === "syllable" ||
-    data.type === "multisyllable" ||
-    data.type === "monosyllable";
+    (data.type === "multisyllable" && !isWordEvalL6L8) ||
+    (data.type === "monosyllable" && !isWordEvalL6L8);
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
@@ -785,6 +906,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     if (isGridStep || isComplexGridStep) gridRef.current?.validate();
     else if (isWordStep || isComplexWordStep) wordRef.current?.validate();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.validate();
+    else if (isWordEvalL6L8) pronounceGridRef.current?.validate?.();
   }
 
   function goBack() {
@@ -804,6 +926,10 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   }
 
   function goNext() {
+    if (isWordEvalL6L8 && wordEvalState?.isResults && wordEvalResult) {
+      handleEvalDone(wordEvalResult.grade, wordEvalResult.passed, wordEvalResult.total);
+      return;
+    }
     if (isLast) {
       const prog = loadLectureProgress();
       const next = markSubmoduleCompleted(prog, moduleId, data.letterLower);
@@ -911,17 +1037,34 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     }
     if (data.type === "monosyllable" || data.type === "multisyllable") {
       const isMulti = data.type === "multisyllable";
-      // Evaluation step. Multisyllable (L8): 25 words / 5 min from the pool.
-      // Monosyllable (L6): 30 words / 5 min from the combined pool.
+      const evalPool = isMulti
+        ? multisyllablePool(2, null)
+        : data.letterLower === "outils"
+          ? ALL_TOOL_WORDS
+          : monosyllablePool();
+      // Evaluation step. Multisyllable (L8): 25 words / 5 min. Monosyllable (L6): 30 words / 5 min.
       if (step.key === "word-eval") {
-        const pool = isMulti
-          ? (data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items))
-          : Array.from(new Set(data.grids.flatMap((g) => g.items)));
-        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={isMulti ? 25 : 30} isEval />;
+        return (
+          <WordPronounceGrid
+            key={k}
+            ref={pronounceGridRef}
+            words={evalPool}
+            timerSeconds={300}
+            sampleSize={isMulti ? 25 : 30}
+            isEval
+            evalWithResults
+            onTimeChange={setWordTimerLeft}
+            onEvalStateChange={setWordEvalState}
+            onValidated={(correct, total) => {
+              const grade = linearSwissGrade(correct, total);
+              setWordEvalResult({ grade, passed: grade >= getPassGrade(), total: correct });
+            }}
+          />
+        );
       }
-      // Monosyllable timed reading step (L6): 15 words / 2 min from the combined pool.
+      // Monosyllable timed reading step (L6): 15 words / 2 min.
       if (step.key === "ms-review") {
-        const pool = Array.from(new Set(data.grids.flatMap((g) => g.items)));
+        const pool = data.letterLower === "outils" ? ALL_TOOL_WORDS : monosyllablePool();
         return (
           <WordPronounceGrid
             key={k}
@@ -936,6 +1079,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         );
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      const pool = wordsPoolForLessonGrid(data.type, data.letterLower, grid.key);
       // L6 (monosyllable) and L8 (multisyllable) word steps use the mic/word/audio rows.
       // L8 grids sample 10 random words; the "review" grid is also timed (2 min).
       // L6 grids show each unique word once (refresh re-shuffles the order).
@@ -954,7 +1098,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         <WordPronounceGrid
           key={k}
           ref={pronounceGridRef}
-          words={grid.items}
+          words={pool}
           timerSeconds={timed ? 120 : undefined}
           sampleSize={isMulti ? 10 : undefined}
           title={title}
@@ -995,9 +1139,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "complex-grid-lower":
           return <ComplexGraphemeGrid key={k} ref={gridRef} target={data.letter} isUppercase={false} />;
         case "complex-word-upper":
-          return <ComplexWordSpotter key={k} ref={wordRef} words={data.upperWords} target={data.letter} isUppercase={true} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
         case "complex-word-lower":
-          return <ComplexWordSpotter key={k} ref={wordRef} words={data.lowerWords} target={data.letter} isUppercase={false} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={false} />;
         case "sound-image":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
         case "sound-audio":
@@ -1005,7 +1149,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "complex-syllables-cv":
           return <ComplexSyllableGrid key={k} ref={pronounceGridRef} target={data.letter} mode="cv" />;
         case "pronounce-complex":
-          return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+          return (
+            <PronunciationChain
+              key={k}
+              ref={pronounceRef}
+              phoneme={data.phoneme}
+              chain={randomWordsWithGrapheme(data.letter, 8).map((word) => ({
+                phoneme: data.letter,
+                syllable: word,
+                word,
+              }))}
+            />
+          );
         default:
           return null;
       }
@@ -1191,7 +1346,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         </div>
       )}
 
-      {/* Eval progress bar with timer — shown only during eval step */}
+      {/* Eval progress bar with timer — letter eval or L6/L8 word eval */}
       {isEvalStep && !evalSubStep?.isResults && (
         <EvalProgressBar
           current={evalSubStep?.idx ?? 0}
@@ -1199,6 +1354,14 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           timeLeft={evalTimeLeft}
           validated={evalSubStep?.validated}
           onNavigate={(index) => evalNavigateRef.current(index)}
+        />
+      )}
+      {isWordEvalL6L8 && wordEvalState?.started && !wordEvalState?.isResults && (
+        <EvalProgressBar
+          current={0}
+          total={1}
+          timeLeft={wordTimerLeft}
+          validated={[false]}
         />
       )}
 
@@ -1219,20 +1382,22 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               Retour
             </button>
 
-            {(showExerciseButtons || isPronounceStep || isPronounceGridStep) && (
+            {(showExerciseButtons || isPronounceStep || isPronounceGridStep || isWordEvalL6L8) && (
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Recommencer"
-                  onClick={exerciseReset}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M1 4v6h6" />
-                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
-                  </svg>
-                </button>
-                {!isPronounceStep && !isPronounceGridStep && (
+                {isPronounceGridStep && (
+                  <button
+                    type="button"
+                    aria-label="Recommencer"
+                    onClick={exerciseReset}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M1 4v6h6" />
+                      <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    </svg>
+                  </button>
+                )}
+                {(showExerciseButtons || (isWordEvalL6L8 && wordEvalState?.canValidate)) && (
                   <button
                     type="button"
                     aria-label="Valider"
@@ -1250,9 +1415,21 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             <button
               type="button"
               onClick={goNext}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              disabled={isWordEvalL6L8 && !!wordEvalState?.started && !wordEvalState?.isResults}
+              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
+                isWordEvalL6L8 && wordEvalState?.started && !wordEvalState?.isResults
+                  ? "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
+                  : "bg-[var(--color-accent-lecture)] hover:opacity-90 active:opacity-80"
+              }`}
             >
-              {isLast ? (
+              {isWordEvalL6L8 && wordEvalState?.isResults ? (
+                <>
+                  Terminer
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </>
+              ) : isLast ? (
                 <>
                   Terminer
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
