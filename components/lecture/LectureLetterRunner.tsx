@@ -25,6 +25,7 @@ import {
   makeComplexGrid,
   makeComplexSyllables,
   splitComplexWord,
+  usesGraphemeVowelSyllables,
 } from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -68,7 +69,10 @@ function getSteps(data: LetterData): Step[] {
       { key: "complex-word-lower", label: "Mots (min)" },
       { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
-      { key: "complex-syllables-cv", label: "Syllabes" },
+      {
+        key: "complex-syllables-cv",
+        label: usesGraphemeVowelSyllables(data.letterLower) ? "Son complexe + voyelle" : "Syllabes",
+      },
       { key: "pronounce-complex", label: "Prononcer" },
       { key: "eval", label: "Évaluation" },
     ];
@@ -315,7 +319,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
   },
 );
 
-const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv" | "vc" | "mixed" }>(
+const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv" | "vc" | "mixed" | "graph-vowel" }>(
   function ComplexSyllableGrid({ target, mode }, ref) {
   const targets = complexTargets(target);
   const [syllables, setSyllables] = useState(() => makeComplexSyllables(targets, mode));
@@ -377,8 +381,16 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
   return (
     <section className="space-y-3">
       <div>
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque syllabe à voix haute.</p>
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+          {mode === "graph-vowel" ? "Son complexe + voyelle" : "Lire les syllabes"}
+        </h2>
+        <p className="text-sm text-[var(--color-text-secondary)]">
+          {mode === "graph-vowel"
+            ? `Prononcez chaque syllabe à voix haute. Exemples : ${
+                normalizeGraph(target).includes("ph") ? "phi, phu, phe" : "cha, chu, cho"
+              }.`
+            : "Prononcez chaque syllabe à voix haute."}
+        </p>
       </div>
       <div className="space-y-2">
         {syllables.map((syl, i) => {
@@ -1157,7 +1169,14 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "sound-audio":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
         case "complex-syllables-cv":
-          return <ComplexSyllableGrid key={k} ref={pronounceGridRef} target={data.letter} mode="cv" />;
+          return (
+            <ComplexSyllableGrid
+              key={k}
+              ref={pronounceGridRef}
+              target={data.letter}
+              mode={usesGraphemeVowelSyllables(data.letterLower) ? "graph-vowel" : "cv"}
+            />
+          );
         case "pronounce-complex":
           return (
             <PronunciationChain

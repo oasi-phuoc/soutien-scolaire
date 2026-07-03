@@ -54,9 +54,28 @@ export function makeComplexGrid(targets: string[], isUppercase: boolean): string
 }
 
 const SYLLABLE_CONSONANTS = ["b", "d", "f", "l", "m", "n", "p", "r", "s", "t", "v"];
+const SYLLABLE_VOWELS = ["a", "o", "i", "e", "u", "y"];
+
+/** True for L7.7 (CH) and L7.8 (PH) — step 8 uses grapheme + vowel (cha, phi…). */
+export function usesGraphemeVowelSyllables(letterLower: string): boolean {
+  const key = normalizeGraph(letterLower);
+  return key === "ch" || key === "ph";
+}
 
 /** 6 syllables built around the grapheme (consonne+graphème, etc.). */
-export function makeComplexSyllables(targets: string[], mode: "cv" | "vc" | "mixed"): string[] {
+export function makeComplexSyllables(
+  targets: string[],
+  mode: "cv" | "vc" | "mixed" | "graph-vowel",
+): string[] {
+  if (mode === "graph-vowel") {
+    const g = targets[0] ?? "";
+    return shuffle(
+      SYLLABLE_VOWELS.map((v) => {
+        const syl = `${g}${v}`;
+        return Math.random() > 0.5 ? syl.toUpperCase() : syl.toLowerCase();
+      }),
+    );
+  }
   const cons = shuffle([...SYLLABLE_CONSONANTS]);
   const result: string[] = [];
   for (let i = 0; i < 6; i++) {
