@@ -815,7 +815,7 @@ const RADIO_15 = buildPool("avance", "radio-15", [
     fillQ: "Utiles en cas de marée _________.", fill: "noire",
   },
   {
-    id: "ar15-q5", textQ: "Comment Virginie Barra considère-t-elle les cheveux ?", text: ["Comme une matière noble","Comme un déchet inutile","Comme un plastique"], textC: 0,
+    id: "ar15-q5", textQ: "Comment Virginie Beasse considère-t-elle les cheveux ?", text: ["Comme une matière noble","Comme un déchet inutile","Comme un plastique"], textC: 0,
     img: ["Matière noble","Déchet","Plastique"], imgC: 0,
     fillQ: "Elle les voit comme une matière _________.", fill: "noble",
   },
@@ -828,71 +828,71 @@ const RADIO_15 = buildPool("avance", "radio-15", [
 
 const RADIO_16 = buildPool("avance", "radio-16", [
   {
-    id: "ar16-q1", textQ: "Émission radio 16 — Que faut-il faire pour bien répondre aux questions ?", text: ["Écouter attentivement l'émission","Lire sans écouter","Regarder une vidéo"], textC: 0,
-    img: ["Écouter","Lire seul","Vidéo"], imgC: 0,
-    fillQ: "Émission 16 — Il faut _________ l'émission.", fill: "écouter",
-    fillA: ["ecouter"],
+    id: "ar16-q1", textQ: "En quelle année les Grandes Écuries ont-elles été édifiées ?", text: ["1719","1834","2013"], textC: 0,
+    img: ["1719","1834","2013"], imgC: 0,
+    fillQ: "Édifiées en _________.", fill: "1719",
   },
   {
-    id: "ar16-q2", textQ: "Émission radio 16 — Quel est le support de cette activité ?", text: ["Une émission de radio","Un message écrit","Une conversation face à face"], textC: 0,
-    img: ["Radio","Message","Conversation"], imgC: 0,
-    fillQ: "Émission 16 — Il s'agit d'une émission de _________.", fill: "radio",
+    id: "ar16-q2", textQ: "Où se trouvent ces Grandes Écuries ?", text: ["À Chantilly","À Versailles","À Fontainebleau"], textC: 0,
+    img: ["Chantilly","Versailles","Fontainebleau"], imgC: 0,
+    fillQ: "Les Grandes Écuries de _________.", fill: "Chantilly",
+    fillA: ["chantilly"],
   },
   {
-    id: "ar16-q3", textQ: "Émission radio 16 — Comment progresser dans cette épreuve ?", text: ["Écouter l'émission plusieurs fois","Copier les réponses","Ignorer l'audio"], textC: 0,
-    img: ["Réécouter","Copier","Ignorer"], imgC: 0,
-    fillQ: "Émission 16 — _________ l'émission plusieurs fois.", fill: "Écouter",
-    fillA: ["ecouter"],
+    id: "ar16-q3", textQ: "Quelle est la longueur du bâtiment ?", text: ["181 mètres","28 mètres","100 mètres"], textC: 0,
+    img: ["181 m","28 m","100 m"], imgC: 0,
+    fillQ: "Le bâtiment mesure ___ mètres de long.", fill: "181",
   },
   {
-    id: "ar16-q4", textQ: "Émission radio 16 — Que doit-on retenir de l'audio ?", text: ["Les informations principales de l'émission","Seulement le début","Uniquement la musique"], textC: 0,
-    img: ["Infos principales","Début","Musique"], imgC: 0,
-    fillQ: "Émission 16 — Retenez les _________ principales.", fill: "informations",
+    id: "ar16-q4", textQ: "Quel prix hippique prestigieux est cité ?", text: ["Le Prix de Diane","Le Prix de l'Arc","Le Grand Steeple"], textC: 0,
+    img: ["Prix Diane","Arc","Steeple"], imgC: 0,
+    fillQ: "C'est le théâtre du Prix de _________.", fill: "Diane",
+    fillA: ["diane"],
   },
   {
-    id: "ar16-q5", textQ: "Émission radio 16 — Quelle attitude adopter pendant l'écoute ?", text: ["Se concentrer sur l'émission","Parler avec un voisin","Utiliser son téléphone"], textC: 0,
-    img: ["Se concentrer","Parler","Téléphone"], imgC: 0,
-    fillQ: "Émission 16 — Il faut se _________ sur l'émission.", fill: "concentrer",
+    id: "ar16-q5", textQ: "Quand le musée du Cheval a-t-il rouvert après rénovation ?", text: ["2013","1982","2006"], textC: 0,
+    img: ["2013","1982","2006"], imgC: 0,
+    fillQ: "Rouverture en _________.", fill: "2013",
   },
   {
-    id: "ar16-q6", textQ: "Émission radio 16 — Pourquoi relire les questions avant d'écouter ?", text: ["Pour savoir quoi chercher dans l'émission","Pour écrire un résumé","Pour traduire mot à mot"], textC: 0,
-    img: ["Savoir quoi chercher","Résumé","Traduire"], imgC: 0,
-    fillQ: "Émission 16 — Il faut savoir quoi _________ dans l'émission.", fill: "chercher",
+    id: "ar16-q6", textQ: "Combien de spectacles sont présentés chaque année ?", text: ["Plus de 150","Plus de 50","Plus de 500"], textC: 0,
+    img: ["150+","50+","500+"], imgC: 0,
+    fillQ: "Plus de ___ spectacles par an.", fill: "150",
   },
 ]);
 
 const RADIO_17 = buildPool("avance", "radio-17", [
   {
-    id: "ar17-q1", textQ: "Émission radio 17 — Que faut-il faire pour bien répondre aux questions ?", text: ["Écouter attentivement l'émission","Lire sans écouter","Regarder une vidéo"], textC: 0,
-    img: ["Écouter","Lire seul","Vidéo"], imgC: 0,
-    fillQ: "Émission 17 — Il faut _________ l'émission.", fill: "écouter",
-    fillA: ["ecouter"],
+    id: "ar17-q1", textQ: "Quel pourcentage de chiens souffrent d'embonpoint ?", text: ["40 %","25 %","80 %"], textC: 0,
+    img: ["40 %","25 %","80 %"], imgC: 0,
+    fillQ: "___ % des chiens sont en surpoids.", fill: "40",
   },
   {
-    id: "ar17-q2", textQ: "Émission radio 17 — Quel est le support de cette activité ?", text: ["Une émission de radio","Un message écrit","Une conversation face à face"], textC: 0,
-    img: ["Radio","Message","Conversation"], imgC: 0,
-    fillQ: "Émission 17 — Il s'agit d'une émission de _________.", fill: "radio",
+    id: "ar17-q2", textQ: "Quel pourcentage de chats est concerné ?", text: ["25 %","40 %","10 %"], textC: 0,
+    img: ["25 %","40 %","10 %"], imgC: 0,
+    fillQ: "___ % des chats souffrent d'embonpoint.", fill: "25",
   },
   {
-    id: "ar17-q3", textQ: "Émission radio 17 — Comment progresser dans cette épreuve ?", text: ["Écouter l'émission plusieurs fois","Copier les réponses","Ignorer l'audio"], textC: 0,
-    img: ["Réécouter","Copier","Ignorer"], imgC: 0,
-    fillQ: "Émission 17 — _________ l'émission plusieurs fois.", fill: "Écouter",
-    fillA: ["ecouter"],
+    id: "ar17-q3", textQ: "Quelle est la principale cause du surpoids ?", text: ["La sédentarité","La stérilisation seule","Les friandises uniquement"], textC: 0,
+    img: ["Sédentarité","Stérilisation","Friandises"], imgC: 0,
+    fillQ: "La principale cause : la _________.", fill: "sédentarité",
+    fillA: ["sedentarite"],
   },
   {
-    id: "ar17-q4", textQ: "Émission radio 17 — Que doit-on retenir de l'audio ?", text: ["Les informations principales de l'émission","Seulement le début","Uniquement la musique"], textC: 0,
-    img: ["Infos principales","Début","Musique"], imgC: 0,
-    fillQ: "Émission 17 — Retenez les _________ principales.", fill: "informations",
+    id: "ar17-q4", textQ: "Quel pourcentage de chats domestiques est stérilisé en France ?", text: ["80 %","40 %","25 %"], textC: 0,
+    img: ["80 %","40 %","25 %"], imgC: 0,
+    fillQ: "___ % des chats domestiques sont stérilisés.", fill: "80",
   },
   {
-    id: "ar17-q5", textQ: "Émission radio 17 — Quelle attitude adopter pendant l'écoute ?", text: ["Se concentrer sur l'émission","Parler avec un voisin","Utiliser son téléphone"], textC: 0,
-    img: ["Se concentrer","Parler","Téléphone"], imgC: 0,
-    fillQ: "Émission 17 — Il faut se _________ sur l'émission.", fill: "concentrer",
+    id: "ar17-q5", textQ: "Qui présente la rubrique « la minute du véto » ?", text: ["Le docteur Géraldine Blanchard","Anne Rodier","Édouard Bergeon"], textC: 0,
+    img: ["Dr Blanchard","Rodier","Bergeon"], imgC: 0,
+    fillQ: "C'est le docteur Géraldine _________.", fill: "Blanchard",
+    fillA: ["blanchard"],
   },
   {
-    id: "ar17-q6", textQ: "Émission radio 17 — Pourquoi relire les questions avant d'écouter ?", text: ["Pour savoir quoi chercher dans l'émission","Pour écrire un résumé","Pour traduire mot à mot"], textC: 0,
-    img: ["Savoir quoi chercher","Résumé","Traduire"], imgC: 0,
-    fillQ: "Émission 17 — Il faut savoir quoi _________ dans l'émission.", fill: "chercher",
+    id: "ar17-q6", textQ: "Quel conseil est donné en priorité à la fin ?", text: ["Supprimer les friandises","Donner du pain","Regarder la télé"], textC: 0,
+    img: ["Pas de friandises","Du pain","Télé"], imgC: 0,
+    fillQ: "Il faut surtout supprimer les _________.", fill: "friandises",
   },
 ]);
 
@@ -971,10 +971,10 @@ const RADIO_22 = buildPool("avance", "radio-22", [
 
 const RADIO_18 = buildPool("avance", "radio-18", [
   {
-    id: "ar18-q1", textQ: "D'où vient l'escape game ?", text: ["Du Japon","De France","Des États-Unis"], textC: 0,
-    img: ["Japon","France","USA"], imgC: 0,
-    fillQ: "Originaire du _________.", fill: "Japon",
-    fillA: ["japon"],
+    id: "ar18-q1", textQ: "Où se déroule le jeu d'évasion décrit au début ?", text: ["Au château de Vincennes","À l'Opéra Garnier","À Chinon"], textC: 0,
+    img: ["Vincennes","Opéra","Chinon"], imgC: 0,
+    fillQ: "Dans un donjon du château de _________.", fill: "Vincennes",
+    fillA: ["vincennes"],
   },
   {
     id: "ar18-q2", textQ: "Quand la tendance arrive-t-elle en France ?", text: ["En 2014","En 2018","En 2000"], textC: 0,
@@ -998,9 +998,10 @@ const RADIO_18 = buildPool("avance", "radio-18", [
     fillQ: "Hausse de plus de ___ %.", fill: "150",
   },
   {
-    id: "ar18-q6", textQ: "Quel public veut-on toucher selon Marie Grasse ?", text: ["Les 18-35 ans","Les retraités","Les enfants"], textC: 0,
-    img: ["18-35 ans","Retraités","Enfants"], imgC: 0,
-    fillQ: "Cible : public des ___-35 ans.", fill: "18",
+    id: "ar18-q6", textQ: "Quel philosophe est évoqué dans le scénario de Vincennes ?", text: ["Denis Diderot","Voltaire","Rousseau"], textC: 0,
+    img: ["Diderot","Voltaire","Rousseau"], imgC: 0,
+    fillQ: "Le philosophe Denis _________ a été empoisonné.", fill: "Diderot",
+    fillA: ["diderot"],
   },
 ]);
 
