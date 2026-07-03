@@ -1,4 +1,10 @@
 import type { COAudioGroup, COAudioItem } from "./co-audio";
+import { CONV_11, CONV_12, CONV_13, CONV_14, CONV_15, CONV_16, CONV_17, CONV_18 } from "./co-audio-avance-conv-extra";
+import {
+  RADIO_1, RADIO_2, RADIO_3, RADIO_4, RADIO_5, RADIO_6, RADIO_7, RADIO_8, RADIO_9, RADIO_10,
+  RADIO_11, RADIO_12, RADIO_13, RADIO_14, RADIO_15, RADIO_16, RADIO_17, RADIO_18, RADIO_19, RADIO_20,
+  RADIO_21, RADIO_22, RADIO_23, RADIO_24, RADIO_25,
+} from "./co-audio-avance-radio";
 
 function avanceItem(category: "conversation" | "radio", activity: string, filename: string, transcript?: string): COAudioItem {
   return {
@@ -189,15 +195,25 @@ Pour anticiper tout risque d'accident, maintenez une distance de sécurité avec
 
 Sur route, comptez deux secondes entre le passage du véhicule qui vous précède devant un repère fixe, un arbre par exemple, et votre passage devant le même repère. Vous êtes alors à 50 m de la voiture qui vous précède.
 
-Sur autoroute, prenez comme référence la longueur de deux lignes d'une bande d'arrêt d'urgence. La distance entre les deux véhicules est alors de 90 m.`;
+Sur autoroute, prenez comme référence la longueur de deux lignes d'une bande d'arrêt d'urgence. La distance entre les deux véhicules est alors de 90 m.
 
-function placeholderConversation(n: number) {
-  return `Transcription conversation ${n} — à compléter.`;
-}
+N'oubliez pas ces conseils, faites-en des règles de conduite : vous réduirez les risques d'accident !
+La vitesse, ça se contrôle !
+
+D'après : « La vitesse – La vitesse ça se contrôle », Plaquette élaborée dans le cadre du Plan Départemental d'Action de Sécurité Routière de l'Allier – Préfecture de l'Allier – www.equipement.gouv.fr`;
 
 function placeholderRadio(n: number) {
   return `Transcription émission de radio ${n} — à compléter.`;
 }
+
+const RADIOS: Array<[string, string]> = [
+  ["1", RADIO_1], ["2", RADIO_2], ["3", RADIO_3], ["4", RADIO_4], ["5", RADIO_5],
+  ["6", RADIO_6], ["7", RADIO_7], ["8", RADIO_8], ["9", RADIO_9], ["10", RADIO_10],
+  ["11", RADIO_11], ["12", RADIO_12], ["13", RADIO_13], ["14", RADIO_14], ["15", RADIO_15],
+  ["16", RADIO_16], ["17", RADIO_17], ["18", RADIO_18], ["19", RADIO_19], ["20", RADIO_20],
+  ["21", RADIO_21], ["22", RADIO_22], ["23", RADIO_23], ["24", RADIO_24], ["25", RADIO_25],
+  ...Array.from({ length: 7 }, (_, i) => [String(i + 26), placeholderRadio(i + 26)] as [string, string]),
+];
 
 export const CO_AUDIO_GROUPS_AVANCE: COAudioGroup[] = [
   avanceGroup("conversation", "1", "conversation-1.mp3", CONV_1),
@@ -210,10 +226,13 @@ export const CO_AUDIO_GROUPS_AVANCE: COAudioGroup[] = [
   avanceGroup("conversation", "8", "conversation-8.mp3", CONV_8),
   avanceGroup("conversation", "9", "conversation-9.mp3", CONV_9),
   avanceGroup("conversation", "10", "conversation-10.mp3", CONV_10),
-  ...Array.from({ length: 8 }, (_, i) =>
-    avanceGroup("conversation", String(i + 11), `conversation-${i + 11}.mp3`, placeholderConversation(i + 11)),
-  ),
-  ...Array.from({ length: 32 }, (_, i) =>
-    avanceGroup("radio", String(i + 1), `radio-${i + 1}.mp3`, placeholderRadio(i + 1)),
-  ),
+  avanceGroup("conversation", "11", "conversation-11.mp3", CONV_11),
+  avanceGroup("conversation", "12", "conversation-12.mp3", CONV_12),
+  avanceGroup("conversation", "13", "conversation-13.mp3", CONV_13),
+  avanceGroup("conversation", "14", "conversation-14.mp3", CONV_14),
+  avanceGroup("conversation", "15", "conversation-15.mp3", CONV_15),
+  avanceGroup("conversation", "16", "conversation-16.mp3", CONV_16),
+  avanceGroup("conversation", "17", "conversation-17.mp3", CONV_17),
+  avanceGroup("conversation", "18", "conversation-18.mp3", CONV_18),
+  ...RADIOS.map(([activity, transcript]) => avanceGroup("radio", activity, `radio-${activity}.mp3`, transcript)),
 ];
