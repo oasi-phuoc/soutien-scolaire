@@ -1,6 +1,6 @@
 {
-  "version": 1783109995076,
-  "totalBytes": 221019839,
+  "version": 1783112818555,
+  "totalBytes": 223236130,
   "routes": [
     "/",
     "/communication",
@@ -591,6 +591,7 @@
     "/assets/words/img/addition.webp",
     "/assets/words/img/agenda.webp",
     "/assets/words/img/aigle.webp",
+    "/assets/words/img/album.webp",
     "/assets/words/img/alphabet.webp",
     "/assets/words/img/ami.webp",
     "/assets/words/img/ananas.webp",
@@ -618,6 +619,7 @@
     "/assets/words/img/biberon.webp",
     "/assets/words/img/bijou.webp",
     "/assets/words/img/billard.webp",
+    "/assets/words/img/bille.webp",
     "/assets/words/img/biscuit.webp",
     "/assets/words/img/blanc.webp",
     "/assets/words/img/bleu.webp",
@@ -640,6 +642,7 @@
     "/assets/words/img/ceinture.webp",
     "/assets/words/img/celeri.webp",
     "/assets/words/img/cerise.webp",
+    "/assets/words/img/cerisier.webp",
     "/assets/words/img/chaise.webp",
     "/assets/words/img/chalet.webp",
     "/assets/words/img/chambre.webp",
@@ -648,6 +651,7 @@
     "/assets/words/img/chat.webp",
     "/assets/words/img/chaud.webp",
     "/assets/words/img/chemise.webp",
+    "/assets/words/img/chenille.webp",
     "/assets/words/img/cheval.webp",
     "/assets/words/img/chien.webp",
     "/assets/words/img/chou.webp",
@@ -657,6 +661,7 @@
     "/assets/words/img/citrouille.webp",
     "/assets/words/img/classeur.webp",
     "/assets/words/img/cochon.webp",
+    "/assets/words/img/coin.webp",
     "/assets/words/img/colle.webp",
     "/assets/words/img/compas.webp",
     "/assets/words/img/concombre.webp",
@@ -700,12 +705,14 @@
     "/assets/words/img/etoile.webp",
     "/assets/words/img/farine.webp",
     "/assets/words/img/fauteuil.webp",
+    "/assets/words/img/feu.webp",
     "/assets/words/img/feuille.webp",
     "/assets/words/img/feutre.webp",
     "/assets/words/img/fille.webp",
     "/assets/words/img/flamme.webp",
     "/assets/words/img/fleur.webp",
     "/assets/words/img/flute.webp",
+    "/assets/words/img/foin.webp",
     "/assets/words/img/football.webp",
     "/assets/words/img/foret.webp",
     "/assets/words/img/four.webp",
@@ -714,6 +721,7 @@
     "/assets/words/img/framboise.webp",
     "/assets/words/img/froid.webp",
     "/assets/words/img/fromage.webp",
+    "/assets/words/img/fruit.webp",
     "/assets/words/img/fuite.webp",
     "/assets/words/img/fusee.webp",
     "/assets/words/img/gare.webp",
@@ -726,6 +734,7 @@
     "/assets/words/img/gouter.webp",
     "/assets/words/img/grand.webp",
     "/assets/words/img/grenouille.webp",
+    "/assets/words/img/groin.webp",
     "/assets/words/img/guitare.webp",
     "/assets/words/img/gymnastique.webp",
     "/assets/words/img/handball.webp",
@@ -733,15 +742,19 @@
     "/assets/words/img/hibou.webp",
     "/assets/words/img/hockey.webp",
     "/assets/words/img/hopital.webp",
+    "/assets/words/img/huit.webp",
     "/assets/words/img/ibis.webp",
     "/assets/words/img/ile.webp",
     "/assets/words/img/image.webp",
     "/assets/words/img/intercalaire.webp",
     "/assets/words/img/jambe.webp",
     "/assets/words/img/jardin.webp",
+    "/assets/words/img/jardinier.webp",
     "/assets/words/img/jaune.webp",
+    "/assets/words/img/jeu.webp",
     "/assets/words/img/jeudi.webp",
     "/assets/words/img/jeune.webp",
+    "/assets/words/img/joint.webp",
     "/assets/words/img/jouet.webp",
     "/assets/words/img/jour.webp",
     "/assets/words/img/judo.webp",
@@ -760,6 +773,7 @@
     "/assets/words/img/lime.webp",
     "/assets/words/img/lion.webp",
     "/assets/words/img/livre.webp",
+    "/assets/words/img/lotion.webp",
     "/assets/words/img/loto.webp",
     "/assets/words/img/loup.webp",
     "/assets/words/img/lundi.webp",
@@ -800,26 +814,37 @@
     "/assets/words/img/oreille.webp",
     "/assets/words/img/pain.webp",
     "/assets/words/img/panda.webp",
+    "/assets/words/img/panier.webp",
     "/assets/words/img/pantalon.webp",
     "/assets/words/img/papa.webp",
     "/assets/words/img/papillon.webp",
+    "/assets/words/img/parfum.webp",
     "/assets/words/img/pasteque.webp",
     "/assets/words/img/persil.webp",
+    "/assets/words/img/phare.webp",
     "/assets/words/img/pharmacie.webp",
     "/assets/words/img/pharmacien.webp",
+    "/assets/words/img/phoque.webp",
+    "/assets/words/img/photo.webp",
     "/assets/words/img/piano.webp",
     "/assets/words/img/pied.webp",
     "/assets/words/img/piment.webp",
     "/assets/words/img/piste.webp",
     "/assets/words/img/planche.webp",
     "/assets/words/img/pluie.webp",
+    "/assets/words/img/poing.webp",
+    "/assets/words/img/point.webp",
+    "/assets/words/img/pointe.webp",
     "/assets/words/img/poire.webp",
     "/assets/words/img/poireau.webp",
+    "/assets/words/img/poirier.webp",
     "/assets/words/img/poisson.webp",
     "/assets/words/img/poivron.webp",
     "/assets/words/img/pomme-de-terre.webp",
     "/assets/words/img/pomme.webp",
+    "/assets/words/img/pompier.webp",
     "/assets/words/img/poste.webp",
+    "/assets/words/img/potion.webp",
     "/assets/words/img/poule.webp",
     "/assets/words/img/puzzle.webp",
     "/assets/words/img/radis.webp",
@@ -841,11 +866,14 @@
     "/assets/words/img/saxophone.webp",
     "/assets/words/img/semaine.webp",
     "/assets/words/img/serpent.webp",
+    "/assets/words/img/shampoing.webp",
     "/assets/words/img/singe.webp",
     "/assets/words/img/ski.webp",
     "/assets/words/img/soeur.webp",
     "/assets/words/img/soleil.webp",
+    "/assets/words/img/soulier.webp",
     "/assets/words/img/souris.webp",
+    "/assets/words/img/station.webp",
     "/assets/words/img/stylo.webp",
     "/assets/words/img/surligneur.webp",
     "/assets/words/img/tapis.webp",
@@ -863,6 +891,7 @@
     "/assets/words/img/vache.webp",
     "/assets/words/img/valise.webp",
     "/assets/words/img/vampire.webp",
+    "/assets/words/img/vanille.webp",
     "/assets/words/img/velo.webp",
     "/assets/words/img/vent.webp",
     "/assets/words/img/ventre.webp",
@@ -878,8 +907,10 @@
     "/assets/words/img/zoo.webp",
     "/assets/words/son_f/mots/abeille.mp3",
     "/assets/words/son_f/mots/abricot.mp3",
+    "/assets/words/son_f/mots/addition.mp3",
     "/assets/words/son_f/mots/agenda.mp3",
     "/assets/words/son_f/mots/aigle.mp3",
+    "/assets/words/son_f/mots/album.mp3",
     "/assets/words/son_f/mots/alphabet.mp3",
     "/assets/words/son_f/mots/ami.mp3",
     "/assets/words/son_f/mots/ananas.mp3",
@@ -904,10 +935,13 @@
     "/assets/words/son_f/mots/biberon.mp3",
     "/assets/words/son_f/mots/bijou.mp3",
     "/assets/words/son_f/mots/billard.mp3",
+    "/assets/words/son_f/mots/bille.mp3",
+    "/assets/words/son_f/mots/bleu.mp3",
     "/assets/words/son_f/mots/bouche.mp3",
     "/assets/words/son_f/mots/bouquet.mp3",
     "/assets/words/son_f/mots/bras.mp3",
     "/assets/words/son_f/mots/brocoli.mp3",
+    "/assets/words/son_f/mots/brun.mp3",
     "/assets/words/son_f/mots/bureau.mp3",
     "/assets/words/son_f/mots/cafe.mp3",
     "/assets/words/son_f/mots/cahier.mp3",
@@ -916,9 +950,11 @@
     "/assets/words/son_f/mots/casque.mp3",
     "/assets/words/son_f/mots/celeri.mp3",
     "/assets/words/son_f/mots/cerise.mp3",
+    "/assets/words/son_f/mots/cerisier.mp3",
     "/assets/words/son_f/mots/champignon.mp3",
     "/assets/words/son_f/mots/chat.mp3",
     "/assets/words/son_f/mots/chaud.mp3",
+    "/assets/words/son_f/mots/chenille.mp3",
     "/assets/words/son_f/mots/cheval.mp3",
     "/assets/words/son_f/mots/chien.mp3",
     "/assets/words/son_f/mots/chou.mp3",
@@ -928,6 +964,7 @@
     "/assets/words/son_f/mots/citrouille.mp3",
     "/assets/words/son_f/mots/classeur.mp3",
     "/assets/words/son_f/mots/cochon.mp3",
+    "/assets/words/son_f/mots/coin.mp3",
     "/assets/words/son_f/mots/colle.mp3",
     "/assets/words/son_f/mots/compa.mp3",
     "/assets/words/son_f/mots/compas.mp3",
@@ -940,6 +977,7 @@
     "/assets/words/son_f/mots/crayon.mp3",
     "/assets/words/son_f/mots/crocodile.mp3",
     "/assets/words/son_f/mots/cube.mp3",
+    "/assets/words/son_f/mots/cuisinier.mp3",
     "/assets/words/son_f/mots/cygne.mp3",
     "/assets/words/son_f/mots/danse.mp3",
     "/assets/words/son_f/mots/dauphin.mp3",
@@ -960,11 +998,14 @@
     "/assets/words/son_f/mots/escalade.mp3",
     "/assets/words/son_f/mots/escalier.mp3",
     "/assets/words/son_f/mots/farine.mp3",
+    "/assets/words/son_f/mots/feu.mp3",
     "/assets/words/son_f/mots/feuille.mp3",
     "/assets/words/son_f/mots/feutre.mp3",
+    "/assets/words/son_f/mots/fille.mp3",
     "/assets/words/son_f/mots/flamme.mp3",
     "/assets/words/son_f/mots/fleur.mp3",
     "/assets/words/son_f/mots/flute.mp3",
+    "/assets/words/son_f/mots/foin.mp3",
     "/assets/words/son_f/mots/football.mp3",
     "/assets/words/son_f/mots/foret.mp3",
     "/assets/words/son_f/mots/frais.mp3",
@@ -972,6 +1013,7 @@
     "/assets/words/son_f/mots/framboise.mp3",
     "/assets/words/son_f/mots/froid.mp3",
     "/assets/words/son_f/mots/fromage.mp3",
+    "/assets/words/son_f/mots/fruit.mp3",
     "/assets/words/son_f/mots/fusee.mp3",
     "/assets/words/son_f/mots/gare.mp3",
     "/assets/words/son_f/mots/gateau.mp3",
@@ -980,6 +1022,7 @@
     "/assets/words/son_f/mots/gomme.mp3",
     "/assets/words/son_f/mots/gorille.mp3",
     "/assets/words/son_f/mots/grenouille.mp3",
+    "/assets/words/son_f/mots/groin.mp3",
     "/assets/words/son_f/mots/guitare.mp3",
     "/assets/words/son_f/mots/gymnastique.mp3",
     "/assets/words/son_f/mots/handball.mp3",
@@ -987,12 +1030,16 @@
     "/assets/words/son_f/mots/hibou.mp3",
     "/assets/words/son_f/mots/hockey.mp3",
     "/assets/words/son_f/mots/hopital.mp3",
+    "/assets/words/son_f/mots/huit.mp3",
     "/assets/words/son_f/mots/ibis.mp3",
     "/assets/words/son_f/mots/ile.mp3",
     "/assets/words/son_f/mots/image.mp3",
     "/assets/words/son_f/mots/intercalaire.mp3",
     "/assets/words/son_f/mots/jambe.mp3",
     "/assets/words/son_f/mots/jardin.mp3",
+    "/assets/words/son_f/mots/jardinier.mp3",
+    "/assets/words/son_f/mots/jeu.mp3",
+    "/assets/words/son_f/mots/joint.mp3",
     "/assets/words/son_f/mots/jouet.mp3",
     "/assets/words/son_f/mots/judo.mp3",
     "/assets/words/son_f/mots/jus.mp3",
@@ -1001,13 +1048,16 @@
     "/assets/words/son_f/mots/kiwi.mp3",
     "/assets/words/son_f/mots/koala.mp3",
     "/assets/words/son_f/mots/lac.mp3",
+    "/assets/words/son_f/mots/lait.mp3",
     "/assets/words/son_f/mots/lapin.mp3",
     "/assets/words/son_f/mots/legume.mp3",
     "/assets/words/son_f/mots/lime.mp3",
     "/assets/words/son_f/mots/lion.mp3",
     "/assets/words/son_f/mots/livre.mp3",
+    "/assets/words/son_f/mots/lotion.mp3",
     "/assets/words/son_f/mots/loto.mp3",
     "/assets/words/son_f/mots/loup.mp3",
+    "/assets/words/son_f/mots/lundi.mp3",
     "/assets/words/son_f/mots/lune.mp3",
     "/assets/words/son_f/mots/main.mp3",
     "/assets/words/son_f/mots/maison.mp3",
@@ -1037,22 +1087,32 @@
     "/assets/words/son_f/mots/orange.mp3",
     "/assets/words/son_f/mots/oreille.mp3",
     "/assets/words/son_f/mots/panda.mp3",
+    "/assets/words/son_f/mots/panier.mp3",
     "/assets/words/son_f/mots/papa.mp3",
     "/assets/words/son_f/mots/papillon.mp3",
+    "/assets/words/son_f/mots/parfum.mp3",
     "/assets/words/son_f/mots/pasteque.mp3",
     "/assets/words/son_f/mots/persil.mp3",
+    "/assets/words/son_f/mots/phare.mp3",
     "/assets/words/son_f/mots/pharmacie.mp3",
+    "/assets/words/son_f/mots/phoque.mp3",
+    "/assets/words/son_f/mots/photo.mp3",
     "/assets/words/son_f/mots/piano.mp3",
     "/assets/words/son_f/mots/pied.mp3",
     "/assets/words/son_f/mots/piment.mp3",
     "/assets/words/son_f/mots/piste.mp3",
+    "/assets/words/son_f/mots/poing.mp3",
+    "/assets/words/son_f/mots/point.mp3",
+    "/assets/words/son_f/mots/pointe.mp3",
     "/assets/words/son_f/mots/poire.mp3",
     "/assets/words/son_f/mots/poireau.mp3",
+    "/assets/words/son_f/mots/poirier.mp3",
     "/assets/words/son_f/mots/poisson.mp3",
     "/assets/words/son_f/mots/poivron.mp3",
     "/assets/words/son_f/mots/pomme-de-terre.mp3",
     "/assets/words/son_f/mots/pomme.mp3",
     "/assets/words/son_f/mots/poste.mp3",
+    "/assets/words/son_f/mots/potion.mp3",
     "/assets/words/son_f/mots/poule.mp3",
     "/assets/words/son_f/mots/puzzle.mp3",
     "/assets/words/son_f/mots/radis.mp3",
@@ -1071,10 +1131,13 @@
     "/assets/words/son_f/mots/sapin.mp3",
     "/assets/words/son_f/mots/saxophone.mp3",
     "/assets/words/son_f/mots/serpent.mp3",
+    "/assets/words/son_f/mots/shampoing.mp3",
     "/assets/words/son_f/mots/singe.mp3",
     "/assets/words/son_f/mots/ski.mp3",
     "/assets/words/son_f/mots/soleil.mp3",
+    "/assets/words/son_f/mots/soulier.mp3",
     "/assets/words/son_f/mots/souris.mp3",
+    "/assets/words/son_f/mots/station.mp3",
     "/assets/words/son_f/mots/stylo.mp3",
     "/assets/words/son_f/mots/surligneur.mp3",
     "/assets/words/son_f/mots/tapis.mp3",
@@ -1092,6 +1155,7 @@
     "/assets/words/son_f/mots/vache.mp3",
     "/assets/words/son_f/mots/valise.mp3",
     "/assets/words/son_f/mots/vampire.mp3",
+    "/assets/words/son_f/mots/vanille.mp3",
     "/assets/words/son_f/mots/velo.mp3",
     "/assets/words/son_f/mots/ventre.mp3",
     "/assets/words/son_f/mots/violon.mp3",
@@ -2450,6 +2514,11 @@
       "revision": "2a2cd74538490783"
     },
     {
+      "url": "/assets/words/img/album.webp",
+      "size": 11112,
+      "revision": "2683e39f5376a3d1"
+    },
+    {
       "url": "/assets/words/img/alphabet.webp",
       "size": 23764,
       "revision": "357b127072239b3d"
@@ -2585,6 +2654,11 @@
       "revision": "0dcd3e5f75c96422"
     },
     {
+      "url": "/assets/words/img/bille.webp",
+      "size": 4864,
+      "revision": "bf158ceb12dc139c"
+    },
+    {
       "url": "/assets/words/img/biscuit.webp",
       "size": 19854,
       "revision": "e1287a78c7836ead"
@@ -2695,6 +2769,11 @@
       "revision": "f77d242e1f35509d"
     },
     {
+      "url": "/assets/words/img/cerisier.webp",
+      "size": 41890,
+      "revision": "949fa92eccb46681"
+    },
+    {
       "url": "/assets/words/img/chaise.webp",
       "size": 6736,
       "revision": "673f1c1ca0b17ba6"
@@ -2733,6 +2812,11 @@
       "url": "/assets/words/img/chemise.webp",
       "size": 5214,
       "revision": "5d9d9737263f0816"
+    },
+    {
+      "url": "/assets/words/img/chenille.webp",
+      "size": 15232,
+      "revision": "46a0c080728b8e30"
     },
     {
       "url": "/assets/words/img/cheval.webp",
@@ -2778,6 +2862,11 @@
       "url": "/assets/words/img/cochon.webp",
       "size": 4570,
       "revision": "d0bfede52d5e41d6"
+    },
+    {
+      "url": "/assets/words/img/coin.webp",
+      "size": 7204,
+      "revision": "2f5ac8cf8c6bfed8"
     },
     {
       "url": "/assets/words/img/colle.webp",
@@ -2995,6 +3084,11 @@
       "revision": "9def11c9ad5dbca7"
     },
     {
+      "url": "/assets/words/img/feu.webp",
+      "size": 23838,
+      "revision": "b0a30cfb92686e16"
+    },
+    {
       "url": "/assets/words/img/feuille.webp",
       "size": 14400,
       "revision": "d7b49725e4087142"
@@ -3023,6 +3117,11 @@
       "url": "/assets/words/img/flute.webp",
       "size": 5170,
       "revision": "c6a1c588329127da"
+    },
+    {
+      "url": "/assets/words/img/foin.webp",
+      "size": 46446,
+      "revision": "1e45ddfd7fba6f4c"
     },
     {
       "url": "/assets/words/img/football.webp",
@@ -3063,6 +3162,11 @@
       "url": "/assets/words/img/fromage.webp",
       "size": 6544,
       "revision": "10c8e569607dfcd2"
+    },
+    {
+      "url": "/assets/words/img/fruit.webp",
+      "size": 26310,
+      "revision": "77fef001a8be12fe"
     },
     {
       "url": "/assets/words/img/fuite.webp",
@@ -3125,6 +3229,11 @@
       "revision": "b9c7662f342b26b9"
     },
     {
+      "url": "/assets/words/img/groin.webp",
+      "size": 20836,
+      "revision": "3a033c70da912d72"
+    },
+    {
       "url": "/assets/words/img/guitare.webp",
       "size": 13702,
       "revision": "a214083cac4d9955"
@@ -3160,6 +3269,11 @@
       "revision": "b89dc892e7b3ddeb"
     },
     {
+      "url": "/assets/words/img/huit.webp",
+      "size": 8526,
+      "revision": "a4621f04139a3d4d"
+    },
+    {
       "url": "/assets/words/img/ibis.webp",
       "size": 11150,
       "revision": "213daf6d491a8ce5"
@@ -3190,9 +3304,19 @@
       "revision": "6fe22a41be35e41b"
     },
     {
+      "url": "/assets/words/img/jardinier.webp",
+      "size": 9468,
+      "revision": "d1b388d4a4b024da"
+    },
+    {
       "url": "/assets/words/img/jaune.webp",
       "size": 6440,
       "revision": "bcea18035340b9d4"
+    },
+    {
+      "url": "/assets/words/img/jeu.webp",
+      "size": 11710,
+      "revision": "ccffdc707268510b"
     },
     {
       "url": "/assets/words/img/jeudi.webp",
@@ -3203,6 +3327,11 @@
       "url": "/assets/words/img/jeune.webp",
       "size": 27424,
       "revision": "4f6e6e8e2db6bf01"
+    },
+    {
+      "url": "/assets/words/img/joint.webp",
+      "size": 6592,
+      "revision": "a18bf33ca9873209"
     },
     {
       "url": "/assets/words/img/jouet.webp",
@@ -3293,6 +3422,11 @@
       "url": "/assets/words/img/livre.webp",
       "size": 10508,
       "revision": "a38c7283e823aefd"
+    },
+    {
+      "url": "/assets/words/img/lotion.webp",
+      "size": 1290,
+      "revision": "226d6be103d30bce"
     },
     {
       "url": "/assets/words/img/loto.webp",
@@ -3495,6 +3629,11 @@
       "revision": "d2de4fad16ae0c92"
     },
     {
+      "url": "/assets/words/img/panier.webp",
+      "size": 25448,
+      "revision": "a73ccc36c67dbf80"
+    },
+    {
       "url": "/assets/words/img/pantalon.webp",
       "size": 4058,
       "revision": "9fe583e911f0a8f1"
@@ -3510,6 +3649,11 @@
       "revision": "1781d1c20a3800ef"
     },
     {
+      "url": "/assets/words/img/parfum.webp",
+      "size": 10730,
+      "revision": "cae4c22795e1ad51"
+    },
+    {
       "url": "/assets/words/img/pasteque.webp",
       "size": 30318,
       "revision": "60068fb960cffb2d"
@@ -3520,6 +3664,11 @@
       "revision": "0f9f923c4c0c743b"
     },
     {
+      "url": "/assets/words/img/phare.webp",
+      "size": 6284,
+      "revision": "8325a63b29670ef1"
+    },
+    {
       "url": "/assets/words/img/pharmacie.webp",
       "size": 60882,
       "revision": "25aa9cfe5773641f"
@@ -3528,6 +3677,16 @@
       "url": "/assets/words/img/pharmacien.webp",
       "size": 51488,
       "revision": "3ca6439ceb74d196"
+    },
+    {
+      "url": "/assets/words/img/phoque.webp",
+      "size": 19590,
+      "revision": "41333b41597f0896"
+    },
+    {
+      "url": "/assets/words/img/photo.webp",
+      "size": 24450,
+      "revision": "08d0f61f4a58eb80"
     },
     {
       "url": "/assets/words/img/piano.webp",
@@ -3560,6 +3719,21 @@
       "revision": "415443436a99b8de"
     },
     {
+      "url": "/assets/words/img/poing.webp",
+      "size": 6364,
+      "revision": "2439d066615b350f"
+    },
+    {
+      "url": "/assets/words/img/point.webp",
+      "size": 3812,
+      "revision": "4c53b4af5bc8f7f1"
+    },
+    {
+      "url": "/assets/words/img/pointe.webp",
+      "size": 4514,
+      "revision": "ae0e3410471e6aef"
+    },
+    {
       "url": "/assets/words/img/poire.webp",
       "size": 16156,
       "revision": "35d06c1cbe07cae2"
@@ -3568,6 +3742,11 @@
       "url": "/assets/words/img/poireau.webp",
       "size": 13216,
       "revision": "bb41ad6199e107dd"
+    },
+    {
+      "url": "/assets/words/img/poirier.webp",
+      "size": 36176,
+      "revision": "7de068a7226468f3"
     },
     {
       "url": "/assets/words/img/poisson.webp",
@@ -3590,9 +3769,19 @@
       "revision": "41371a02a2077f91"
     },
     {
+      "url": "/assets/words/img/pompier.webp",
+      "size": 10970,
+      "revision": "ed514b95b736fbf3"
+    },
+    {
       "url": "/assets/words/img/poste.webp",
       "size": 48886,
       "revision": "a54493e900b6ef91"
+    },
+    {
+      "url": "/assets/words/img/potion.webp",
+      "size": 10196,
+      "revision": "87f57c83bb60af32"
     },
     {
       "url": "/assets/words/img/poule.webp",
@@ -3700,6 +3889,11 @@
       "revision": "8772aa6a5326b427"
     },
     {
+      "url": "/assets/words/img/shampoing.webp",
+      "size": 2008,
+      "revision": "dc1db58fa4fbbacb"
+    },
+    {
       "url": "/assets/words/img/singe.webp",
       "size": 16966,
       "revision": "0b08a4dbefca0e5d"
@@ -3720,9 +3914,19 @@
       "revision": "4ccd99d24919a558"
     },
     {
+      "url": "/assets/words/img/soulier.webp",
+      "size": 8452,
+      "revision": "6a03bf4d3ead4e0b"
+    },
+    {
       "url": "/assets/words/img/souris.webp",
       "size": 18076,
       "revision": "6718fb9aee3fcb38"
+    },
+    {
+      "url": "/assets/words/img/station.webp",
+      "size": 19764,
+      "revision": "0267a9999af11c8b"
     },
     {
       "url": "/assets/words/img/stylo.webp",
@@ -3810,6 +4014,11 @@
       "revision": "c8492e1d579a7b01"
     },
     {
+      "url": "/assets/words/img/vanille.webp",
+      "size": 13440,
+      "revision": "e8afb1255d015256"
+    },
+    {
       "url": "/assets/words/img/velo.webp",
       "size": 22716,
       "revision": "a1c81b58ffc6ca5b"
@@ -3885,6 +4094,11 @@
       "revision": "ad90b567ee132eb0"
     },
     {
+      "url": "/assets/words/son_f/mots/addition.mp3",
+      "size": 55210,
+      "revision": "0005417b9a53ca1b"
+    },
+    {
       "url": "/assets/words/son_f/mots/agenda.mp3",
       "size": 58031,
       "revision": "95d2d97672af7ade"
@@ -3893,6 +4107,11 @@
       "url": "/assets/words/son_f/mots/aigle.mp3",
       "size": 55106,
       "revision": "1fafa3de9fd41000"
+    },
+    {
+      "url": "/assets/words/son_f/mots/album.mp3",
+      "size": 55210,
+      "revision": "842e8a421bd1ba16"
     },
     {
       "url": "/assets/words/son_f/mots/alphabet.mp3",
@@ -4015,6 +4234,16 @@
       "revision": "800232c85a092e2b"
     },
     {
+      "url": "/assets/words/son_f/mots/bille.mp3",
+      "size": 13243,
+      "revision": "700ccaf8906f7a9f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/bleu.mp3",
+      "size": 47686,
+      "revision": "c8b911ee9711cd58"
+    },
+    {
       "url": "/assets/words/son_f/mots/bouche.mp3",
       "size": 65555,
       "revision": "8756a10fe094aa4d"
@@ -4033,6 +4262,11 @@
       "url": "/assets/words/son_f/mots/brocoli.mp3",
       "size": 71824,
       "revision": "f6c449897f7bcb53"
+    },
+    {
+      "url": "/assets/words/son_f/mots/brun.mp3",
+      "size": 47686,
+      "revision": "d4621e6ec7574e6d"
     },
     {
       "url": "/assets/words/son_f/mots/bureau.mp3",
@@ -4075,6 +4309,11 @@
       "revision": "2174cb47637c54bf"
     },
     {
+      "url": "/assets/words/son_f/mots/cerisier.mp3",
+      "size": 53956,
+      "revision": "926b32363083d145"
+    },
+    {
       "url": "/assets/words/son_f/mots/champignon.mp3",
       "size": 53852,
       "revision": "e03e2131ef83698a"
@@ -4088,6 +4327,11 @@
       "url": "/assets/words/son_f/mots/chaud.mp3",
       "size": 50090,
       "revision": "c9f8d97465014925"
+    },
+    {
+      "url": "/assets/words/son_f/mots/chenille.mp3",
+      "size": 53956,
+      "revision": "f9806bbb1e612f50"
     },
     {
       "url": "/assets/words/son_f/mots/cheval.mp3",
@@ -4133,6 +4377,11 @@
       "url": "/assets/words/son_f/mots/cochon.mp3",
       "size": 52598,
       "revision": "8c31f1723e3919a6"
+    },
+    {
+      "url": "/assets/words/son_f/mots/coin.mp3",
+      "size": 47686,
+      "revision": "5d30971d0fe30103"
     },
     {
       "url": "/assets/words/son_f/mots/colle.mp3",
@@ -4193,6 +4442,11 @@
       "url": "/assets/words/son_f/mots/cube.mp3",
       "size": 64301,
       "revision": "8142dca122ef09f3"
+    },
+    {
+      "url": "/assets/words/son_f/mots/cuisinier.mp3",
+      "size": 53956,
+      "revision": "3678aa6314a24a5f"
     },
     {
       "url": "/assets/words/son_f/mots/cygne.mp3",
@@ -4295,6 +4549,11 @@
       "revision": "3a53040755e3466e"
     },
     {
+      "url": "/assets/words/son_f/mots/feu.mp3",
+      "size": 46432,
+      "revision": "7fcf01c6ec87da49"
+    },
+    {
       "url": "/assets/words/son_f/mots/feuille.mp3",
       "size": 58031,
       "revision": "f0e120ef14ba729d"
@@ -4303,6 +4562,11 @@
       "url": "/assets/words/son_f/mots/feutre.mp3",
       "size": 53852,
       "revision": "3a505fe5538dd7f0"
+    },
+    {
+      "url": "/assets/words/son_f/mots/fille.mp3",
+      "size": 52702,
+      "revision": "d8e53994d8fcf3cb"
     },
     {
       "url": "/assets/words/son_f/mots/flamme.mp3",
@@ -4318,6 +4582,11 @@
       "url": "/assets/words/son_f/mots/flute.mp3",
       "size": 17755,
       "revision": "f4488b8c82f64d59"
+    },
+    {
+      "url": "/assets/words/son_f/mots/foin.mp3",
+      "size": 56463,
+      "revision": "ba522cc8935c978e"
     },
     {
       "url": "/assets/words/son_f/mots/football.mp3",
@@ -4353,6 +4622,11 @@
       "url": "/assets/words/son_f/mots/fromage.mp3",
       "size": 58031,
       "revision": "1f3417543298c5d4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/fruit.mp3",
+      "size": 52702,
+      "revision": "9dff04d97d021b94"
     },
     {
       "url": "/assets/words/son_f/mots/fusee.mp3",
@@ -4395,6 +4669,11 @@
       "revision": "ee186f56754d58be"
     },
     {
+      "url": "/assets/words/son_f/mots/groin.mp3",
+      "size": 50194,
+      "revision": "d2307e818fc16d81"
+    },
+    {
       "url": "/assets/words/son_f/mots/guitare.mp3",
       "size": 53852,
       "revision": "520decc5065be599"
@@ -4430,6 +4709,11 @@
       "revision": "f769d022c7d1813d"
     },
     {
+      "url": "/assets/words/son_f/mots/huit.mp3",
+      "size": 50194,
+      "revision": "9dc5af489c3d3b1b"
+    },
+    {
       "url": "/assets/words/son_f/mots/ibis.mp3",
       "size": 51344,
       "revision": "06ee4559ec458e93"
@@ -4458,6 +4742,21 @@
       "url": "/assets/words/son_f/mots/jardin.mp3",
       "size": 52598,
       "revision": "b1a6e118266e02f4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/jardinier.mp3",
+      "size": 55210,
+      "revision": "caa3c29b864ef5fe"
+    },
+    {
+      "url": "/assets/words/son_f/mots/jeu.mp3",
+      "size": 47686,
+      "revision": "88859b6e26ab003a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/joint.mp3",
+      "size": 50194,
+      "revision": "edbeaf1b69a56ebf"
     },
     {
       "url": "/assets/words/son_f/mots/jouet.mp3",
@@ -4500,6 +4799,11 @@
       "revision": "a8128b8b9c5e95fc"
     },
     {
+      "url": "/assets/words/son_f/mots/lait.mp3",
+      "size": 46432,
+      "revision": "f309e05a6a9ebd99"
+    },
+    {
       "url": "/assets/words/son_f/mots/lapin.mp3",
       "size": 52598,
       "revision": "9f29a15ccd15dfdb"
@@ -4525,6 +4829,11 @@
       "revision": "34520d7a8c9798d7"
     },
     {
+      "url": "/assets/words/son_f/mots/lotion.mp3",
+      "size": 51448,
+      "revision": "a80dbdf3c9ec1676"
+    },
+    {
       "url": "/assets/words/son_f/mots/loto.mp3",
       "size": 51344,
       "revision": "7830bbcac60f5c45"
@@ -4533,6 +4842,11 @@
       "url": "/assets/words/son_f/mots/loup.mp3",
       "size": 51344,
       "revision": "51dd763097eee54f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/lundi.mp3",
+      "size": 52702,
+      "revision": "d3b8629094b8e816"
     },
     {
       "url": "/assets/words/son_f/mots/lune.mp3",
@@ -4680,6 +4994,11 @@
       "revision": "a00922de3287a452"
     },
     {
+      "url": "/assets/words/son_f/mots/panier.mp3",
+      "size": 52702,
+      "revision": "daff06d454574de2"
+    },
+    {
       "url": "/assets/words/son_f/mots/papa.mp3",
       "size": 51344,
       "revision": "7dec0f5489f176aa"
@@ -4688,6 +5007,11 @@
       "url": "/assets/words/son_f/mots/papillon.mp3",
       "size": 52598,
       "revision": "a3ee77c2318711f2"
+    },
+    {
+      "url": "/assets/words/son_f/mots/parfum.mp3",
+      "size": 53956,
+      "revision": "01daf9d337b61408"
     },
     {
       "url": "/assets/words/son_f/mots/pasteque.mp3",
@@ -4700,9 +5024,24 @@
       "revision": "2ab358e20922dbd6"
     },
     {
+      "url": "/assets/words/son_f/mots/phare.mp3",
+      "size": 52702,
+      "revision": "dc8742ce15eea936"
+    },
+    {
       "url": "/assets/words/son_f/mots/pharmacie.mp3",
       "size": 56359,
       "revision": "50d09e20cbd26de0"
+    },
+    {
+      "url": "/assets/words/son_f/mots/phoque.mp3",
+      "size": 55210,
+      "revision": "720747d315139cc4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/photo.mp3",
+      "size": 50194,
+      "revision": "71480117d71b7882"
     },
     {
       "url": "/assets/words/son_f/mots/piano.mp3",
@@ -4725,6 +5064,21 @@
       "revision": "05e539fac19d4c6a"
     },
     {
+      "url": "/assets/words/son_f/mots/poing.mp3",
+      "size": 51448,
+      "revision": "318af54db13d3c72"
+    },
+    {
+      "url": "/assets/words/son_f/mots/point.mp3",
+      "size": 51448,
+      "revision": "318af54db13d3c72"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pointe.mp3",
+      "size": 51448,
+      "revision": "64cbe2f5781782f0"
+    },
+    {
       "url": "/assets/words/son_f/mots/poire.mp3",
       "size": 52598,
       "revision": "3cdedcbb349f5bfd"
@@ -4733,6 +5087,11 @@
       "url": "/assets/words/son_f/mots/poireau.mp3",
       "size": 50090,
       "revision": "614685c6f836620c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/poirier.mp3",
+      "size": 51448,
+      "revision": "336660056831f56a"
     },
     {
       "url": "/assets/words/son_f/mots/poisson.mp3",
@@ -4758,6 +5117,11 @@
       "url": "/assets/words/son_f/mots/poste.mp3",
       "size": 58031,
       "revision": "2f4668ced45ac59b"
+    },
+    {
+      "url": "/assets/words/son_f/mots/potion.mp3",
+      "size": 53956,
+      "revision": "bb0afde7b9015417"
     },
     {
       "url": "/assets/words/son_f/mots/poule.mp3",
@@ -4850,6 +5214,11 @@
       "revision": "5cefb043b4ec3fc1"
     },
     {
+      "url": "/assets/words/son_f/mots/shampoing.mp3",
+      "size": 50194,
+      "revision": "8882216d1fe289f8"
+    },
+    {
       "url": "/assets/words/son_f/mots/singe.mp3",
       "size": 55106,
       "revision": "e8682cb5b2bcdf3c"
@@ -4865,9 +5234,19 @@
       "revision": "cfd7ae7965ad2251"
     },
     {
+      "url": "/assets/words/son_f/mots/soulier.mp3",
+      "size": 51448,
+      "revision": "a0afacaf7141aec6"
+    },
+    {
       "url": "/assets/words/son_f/mots/souris.mp3",
       "size": 50090,
       "revision": "62e743df2f1605be"
+    },
+    {
+      "url": "/assets/words/son_f/mots/station.mp3",
+      "size": 56463,
+      "revision": "2a8cc948d4398625"
     },
     {
       "url": "/assets/words/son_f/mots/stylo.mp3",
@@ -4953,6 +5332,11 @@
       "url": "/assets/words/son_f/mots/vampire.mp3",
       "size": 55106,
       "revision": "7e105f4e53fd4c41"
+    },
+    {
+      "url": "/assets/words/son_f/mots/vanille.mp3",
+      "size": 55210,
+      "revision": "8cc73e36177fcaea"
     },
     {
       "url": "/assets/words/son_f/mots/velo.mp3",

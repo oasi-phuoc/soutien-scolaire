@@ -11,21 +11,12 @@ export function getWordAssetSlug(word: string): string {
     .toLowerCase();
 }
 
-/** Illustrations Wikimedia retirées — pas d'image en lecture pour ces mots. */
-const LECTURE_NO_IMAGE_SLUGS = new Set([
-  "album", "bille", "cerisier", "chenille", "coin", "feu", "foin", "fruit", "groin",
-  "huit", "jardinier", "jeu", "joint", "lotion", "panier", "parfum", "phare", "phoque",
-  "photo", "poing", "point", "pointe", "poirier", "pompier", "potion", "shampoing",
-  "soulier", "station", "vanille",
-]);
-
-export function hasLectureWordImage(word: string): boolean {
-  return !LECTURE_NO_IMAGE_SLUGS.has(getWordAssetSlug(word));
+export function getLectureWordImagePath(word: string): string {
+  return `/assets/words/img/${getWordAssetSlug(word)}.webp`;
 }
 
-export function getLectureWordImagePath(word: string): string | undefined {
-  if (!hasLectureWordImage(word)) return undefined;
-  return `/assets/words/img/${getWordAssetSlug(word)}.webp`;
+export function hasLectureWordImage(_word: string): boolean {
+  return true;
 }
 
 type Voice = "f" | "m";
