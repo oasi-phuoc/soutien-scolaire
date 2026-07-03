@@ -35,52 +35,52 @@ function group(level: COLevel, category: COAudioCategory, activity: string, item
 
 export const CO_AUDIO_GROUPS: COAudioGroup[] = [
   group("base", "message", "1", [
-    item("base", "message", "1", "message-1.mp3", "Coucou, c'est Isabelle. Comment vas-tu ? Tu veux sortir vendredi soir ? Il y a un nouveau bar sympa au centre-ville, le Mambo. Il se trouve au 42, rue des Guerriers-Samoura?s. La d?coration est tr?s jolie et la musique est sympa. Pour aller au bar, ne prends pas le tramway, mais le bus. Rappelle-moi pour confirmer ! Bisous."),
+    item("base", "message", "1", "message-1.mp3", "Coucou, c'est Isabelle. Comment vas-tu ? Tu veux sortir vendredi soir ? Il y a un nouveau bar sympa au centre-ville, le Mambo. Il se trouve au 42, rue des Guerriers-Samouraïs. La décoration est très jolie et la musique est sympa. Pour aller au bar, ne prends pas le tramway, mais le bus. Rappelle-moi pour confirmer ! Bisous."),
   ]),
   group("base", "message", "2", [
-    item("base", "message", "2", "message-2.mp3", "Coucou, c'est La?titia. J'ai rendez-vous avec Davy et Genevi?ve ? midi et quart. On mange chez moi et apr?s nous allons ? la piscine pour nager et bronzer sur la pelouse. Si tu veux venir avec nous, appelle-moi. Si tu viens, n'oublie pas de prendre tes lunettes de soleil. Bisous !"),
+    item("base", "message", "2", "message-2.mp3", "Coucou, c'est Laëtitia. J'ai rendez-vous avec Davy et Geneviève à midi et quart. On mange chez moi et après nous allons à la piscine pour nager et bronzer sur la pelouse. Si tu veux venir avec nous, appelle-moi. Si tu viens, n'oublie pas de prendre tes lunettes de soleil. Bisous !"),
   ]),
   group("base", "message", "3", [
-    item("base", "message", "3", "message-3.mp3", "Salut, c'est Hugo. J'ai une bonne nouvelle. Florian est revenu d'Allemagne mardi. Il reste ? Toulouse pendant quatre jours. Il veut nous voir ! Je te propose de venir d?ner chez moi jeudi soir. Si tu es d'accord, est-ce que tu peux apporter des tomates pour faire une salade ? Appelle-moi ce soir ! Bises."),
+    item("base", "message", "3", "message-3.mp3", "Salut, c'est Hugo. J'ai une bonne nouvelle. Florian est revenu d'Allemagne mardi. Il reste à Toulouse pendant quatre jours. Il veut nous voir ! Je te propose de venir dîner chez moi jeudi soir. Si tu es d'accord, est-ce que tu peux apporter des tomates pour faire une salade ? Appelle-moi ce soir ! Bises."),
   ]),
   group("base", "message", "4", [
-    item("base", "message", "4", "message-4.mp3", "Bonjour, c'est Rose. Tu vas bien ? J'ai fait une r?servation ? la pizzeria Giovanni. Nous avons rendez-vous ? midi et demi. Il y a des menus ? 14 euros ou ? 17 euros. Je te donne l'adresse : 15, rue des Peupliers. Nous serons trois personnes, j'ai invit? ma soeur. Appelle-moi pour confirmer. ? demain !"),
+    item("base", "message", "4", "message-4.mp3", "Bonjour, c'est Rose. Tu vas bien ? J'ai fait une réservation à la pizzeria Giovanni. Nous avons rendez-vous à midi et demi. Il y a des menus à 14 euros ou à 17 euros. Je te donne l'adresse : 15, rue des Peupliers. Nous serons trois personnes, j'ai invité ma soeur. Appelle-moi pour confirmer. À demain !"),
   ]),
   group("base", "message", "5", [
-    item("base", "message", "5", "message-5.mp3", "Salut, c'est Alex. Je suis en retard. Je ne peux pas passer chez toi. Je te donne rendez-vous au nouveau cin?ma. Prends le bus num?ro 16, en direction du centre commercial des Fontaines. Descends ? l'arr?t Nouveau Cin?ma. Le cin?ma est rue de la Gare, au num?ro 3. Est-ce que tu peux acheter les tickets, s'il te pla?t ? La place co?te 7 euros. ? tout ? l'heure. Bisous."),
+    item("base", "message", "5", "message-5.mp3", "Salut, c'est Alex. Je suis en retard. Je ne peux pas passer chez toi. Je te donne rendez-vous au nouveau cinéma. Prends le bus numéro 16, en direction du centre commercial des Fontaines. Descends à l'arrêt Nouveau Cinéma. Le cinéma est rue de la Gare, au numéro 3. Est-ce que tu peux acheter les tickets, s'il te plaît ? La place coûte 7 euros. À tout à l'heure. Bisous."),
   ]),
   group("base", "message", "6", [
-    item("base", "message", "6", "message-6.mp3", "Salut, c'est Sylvain. Nous allons visiter Strasbourg la semaine prochaine. Tu veux venir ? ?a va ?tre sympa. Nous allons prendre le train. Il part samedi matin, ? 8 h 56. N'oublie pas ton appareil photo ! Rappelle-moi ? mon nouveau num?ro : 07 56 13 88 42. Ciao."),
+    item("base", "message", "6", "message-6.mp3", "Salut, c'est Sylvain. Nous allons visiter Strasbourg la semaine prochaine. Tu veux venir ? Ça va être sympa. Nous allons prendre le train. Il part samedi matin, à 8 h 56. N'oublie pas ton appareil photo ! Rappelle-moi à mon nouveau numéro : 07 56 13 88 42. Ciao."),
   ]),
   group("base", "message", "7", [
-    item("base", "message", "7", "message-7.mp3", "Salut, c'est Antony. J'ai deux invitations pour le cin?ma. Tu veux venir ? C'est gratuit. Je finis le travail ? 15 heures, mais je vais chez le dentiste ? 16 heures. Alors, je te propose d'aller ? la s?ance de 18 heures. Rappelle-moi quand tu as choisi le film. Apr?s, je vais faire la r?servation sur Internet. ? plus tard."),
+    item("base", "message", "7", "message-7.mp3", "Salut, c'est Antony. J'ai deux invitations pour le cinéma. Tu veux venir ? C'est gratuit. Je finis le travail à 15 heures, mais je vais chez le dentiste à 16 heures. Alors, je te propose d'aller à la séance de 18 heures. Rappelle-moi quand tu as choisi le film. Après, je vais faire la réservation sur Internet. À plus tard."),
   ]),
   group("base", "message", "8", [
-    item("base", "message", "8", "message-8.mp3", "Bonjour, c'est M?gane. Comment vas-tu ? Je t'appelle pour le 26 mars. Je suis libre ? partir de 2 heures de l'apr?s-midi. Je veux faire une activit? culturelle. On peut aller au mus?e ou au cin?ma l'apr?s-midi. Tu es d'accord ? Si tu ne peux pas, nous pouvons d?ner au restaurant vers 7 heures. Rappelle-moi aujourd'hui. Bisous !"),
+    item("base", "message", "8", "message-8.mp3", "Bonjour, c'est Mégane. Comment vas-tu ? Je t'appelle pour le 26 mars. Je suis libre à partir de 2 heures de l'après-midi. Je veux faire une activité culturelle. On peut aller au musée ou au cinéma l'après-midi. Tu es d'accord ? Si tu ne peux pas, nous pouvons dîner au restaurant vers 7 heures. Rappelle-moi aujourd'hui. Bisous !"),
   ]),
   group("base", "message", "9", [
-    item("base", "message", "9", "message-9.mp3", "Salut, c'est Adil. Je suis rentr? de voyage le lundi 5. J'ai ador? la Suisse. C'est un beau pays. J'ai fait du ski tous les jours. La nourriture est d?licieuse. J'ai mang? beaucoup de chocolat et de fondue au fromage, ?videmment ! Mais j'ai d?test? les r?stis ! On se voit ce week-end ? J'ai un cadeau pour toi : c'est une montre ! ? bient?t."),
+    item("base", "message", "9", "message-9.mp3", "Salut, c'est Adil. Je suis rentré de voyage le lundi 5. J'ai adoré la Suisse. C'est un beau pays. J'ai fait du ski tous les jours. La nourriture est délicieuse. J'ai mangé beaucoup de chocolat et de fondue au fromage, évidemment ! Mais j'ai détesté les röstis ! On se voit ce week-end ? J'ai un cadeau pour toi : c'est une montre ! À bientôt."),
   ]),
   group("base", "message", "10", [
-    item("base", "message", "10", "message-10.mp3", "Bonsoir, c'est Cristina. Je vais ? une exposition de peintures avec Armelle, jeudi soir. Est-ce que tu veux venir avec nous ? On peut se retrouver devant l'espace Matisse ? 6 heures. Pour y aller, tu peux prendre le bus 112. L'entr?e co?te 7,50 euros. Rappelle-moi au 06 79 14 78 49. Bises."),
+    item("base", "message", "10", "message-10.mp3", "Bonsoir, c'est Cristina. Je vais à une exposition de peintures avec Armelle, jeudi soir. Est-ce que tu veux venir avec nous ? On peut se retrouver devant l'espace Matisse à 6 heures. Pour y aller, tu peux prendre le bus 112. L'entrée coûte 7,50 euros. Rappelle-moi au 06 79 14 78 49. Bises."),
   ]),
   group("base", "message", "11", [
-    item("base", "message", "11", "message-11.mp3", "Bonjour, ici le garage Bolide. Votre voiture est pr?te. Vous pouvez venir la chercher aujourd'hui. Le garage ouvre de huit heures ? midi, puis d'une heure et demie ? sept heures et demie. Les r?parations sont de 223 euros. Nous vous demandons de payer par carte bancaire. Merci. Au revoir."),
+    item("base", "message", "11", "message-11.mp3", "Bonjour, ici le garage Bolide. Votre voiture est prête. Vous pouvez venir la chercher aujourd'hui. Le garage ouvre de huit heures à midi, puis d'une heure et demie à sept heures et demie. Les réparations sont de 223 euros. Nous vous demandons de payer par carte bancaire. Merci. Au revoir."),
   ]),
   group("base", "message", "12", [
-    item("base", "message", "12", "message-12.mp3", "Bonjour, ici monsieur Dujardin. Je vous confirme l'heure de la r?union de demain matin. Elle est ? dix heures et demie. Le directeur commercial et la comptable seront pr?sents. S'il y a un probl?me, vous pouvez m'appeler au 04 78 96 12 14. Merci et bonne journ?e."),
+    item("base", "message", "12", "message-12.mp3", "Bonjour, ici monsieur Dujardin. Je vous confirme l'heure de la réunion de demain matin. Elle est à dix heures et demie. Le directeur commercial et la comptable seront présents. S'il y a un problème, vous pouvez m'appeler au 04 78 96 12 14. Merci et bonne journée."),
   ]),
   group("base", "message", "13", [
-    item("base", "message", "13", "message-13.mp3", "Bonjour, ici madame Lara, de l'agence immobili?re. Je vous appelle pour votre recherche de logement. Nous avons un loft ? vous proposer. Il est situ? pr?s de la biblioth?que municipale. Si vous voulez le visiter, rappelez-moi avant mercredi, 18 heures, au 03 88 17 40 15. Merci, au revoir !"),
+    item("base", "message", "13", "message-13.mp3", "Bonjour, ici madame Lara, de l'agence immobilière. Je vous appelle pour votre recherche de logement. Nous avons un loft à vous proposer. Il est situé près de la bibliothèque municipale. Si vous voulez le visiter, rappelez-moi avant mercredi, 18 heures, au 03 88 17 40 15. Merci, au revoir !"),
   ]),
   group("base", "message", "14", [
-    item("base", "message", "14", "message-14.mp3", "Bonjour, ici le club de sports Formule +. Je vous appelle pour vous proposer un abonnement ? 40 euros par mois. Avec ce tarif, vous pouvez utiliser la salle de fitness et la piscine, du lundi au samedi. Si cette offre sp?ciale vous int?resse, venez me voir au club vendredi ou samedi. Nous fermons ? 21 heures tous les soirs de la semaine et ? 19 heures le week-end. Merci. Au revoir."),
+    item("base", "message", "14", "message-14.mp3", "Bonjour, ici le club de sports Formule +. Je vous appelle pour vous proposer un abonnement à 40 euros par mois. Avec ce tarif, vous pouvez utiliser la salle de fitness et la piscine, du lundi au samedi. Si cette offre spéciale vous intéresse, venez me voir au club vendredi ou samedi. Nous fermons à 21 heures tous les soirs de la semaine et à 19 heures le week-end. Merci. Au revoir."),
   ]),
   group("base", "message", "15", [
-    item("base", "message", "15", "message-15.mp3", "Bonjour, ici l'agence de voyages Lacrosse. Je vous confirme votre r?servation. Vous logez ? l'h?tel Gamma, ? Bruxelles, du jeudi 25 au dimanche 28. Le petit-d?jeuner et Internet sont inclus. Je vous conseille d'aller ? l'h?tel en taxi. Si vous avez des questions, appelez-moi au 01 57 32 32 33. Bonne journ?e."),
+    item("base", "message", "15", "message-15.mp3", "Bonjour, ici l'agence de voyages Lacrosse. Je vous confirme votre réservation. Vous logez à l'hôtel Gamma, à Bruxelles, du jeudi 25 au dimanche 28. Le petit-déjeuner et Internet sont inclus. Je vous conseille d'aller à l'hôtel en taxi. Si vous avez des questions, appelez-moi au 01 57 32 32 33. Bonne journée."),
   ]),
   group("base", "message", "16", [
-    item("base", "message", "16", "message-16.mp3", "Bonjour, ici le magasin M?ga J. Vous avez command? un jeu vid?o la semaine derni?re. Il est arriv? dans notre magasin. Vous pouvez venir le chercher ? partir de vendredi au 23, rue des Clochottes. Le magasin est ouvert de 9 h ? 19 h non-stop. N'oubliez pas votre pi?ce d'identit?. Merci et bonne journ?e."),
+    item("base", "message", "16", "message-16.mp3", "Bonjour, ici le magasin Méga J. Vous avez commandé un jeu vidéo la semaine dernière. Il est arrivé dans notre magasin. Vous pouvez venir le chercher à partir de vendredi au 23, rue des Clochottes. Le magasin est ouvert de 9 h à 19 h non-stop. N'oubliez pas votre pièce d'identité. Merci et bonne journée."),
   ]),
   group("base", "annonce", "1", [
     item("base", "annonce", "1", "annonce-1.mp3", "Transcription annonce 1."),
