@@ -206,4 +206,48 @@ D'après : Le Monde, 5 septembre 2019.`;
 
 export const RADIO_28 = `Le groupe d'économie sociale et solidaire SOS lance jeudi un appel à projets auprès de 32 000 communes de moins de 3 500 habitants afin de créer ou reprendre 1 000 cafés en milieu rural pour en faire des lieux de vie ouverts à tous.
 
-Dans une commune, le lien social se faisait dans les cafés. C'est dans les estaminets, mais aussi dans les petits commerces, que les gens se rencontraient et que les informations...`;
+Dans une commune, le lien social se faisait dans les cafés. C'est dans les estaminets, mais aussi dans les petits commerces, que les gens se rencontraient et que les informations circulaient. « Or, le café du village, autrefois lieu de rencontre central pour les habitants, a souvent disparu », constate Groupe SOS, une association de lutte contre l'exclusion. Ce mercredi, son président, Jean-Marc Borello, a annoncé un appel à projets auprès de 32 000 communes pour créer ou reprendre 1 000 cafés en milieu rural.
+
+Il ne s'agit pas seulement de rouvrir de simples débits de boisson. Ces lieux seront des bistrots, mais aussi des relais de poste, des points d'accès numérique, des épiceries et de dépôt de pain.
+
+Groupe SOS précise qu'ils seront aussi « un lieu de vie pour les acteurs associatifs locaux, un lieu de programmation culturelle, un relais de mobilité, un point d'accompagnement et de convivialité pour les seniors ». « L'idée n'est pas originale, tout le monde en parle depuis longtemps », nous a expliqué Jean-Marc Borello en ajoutant que « ce qui l'est, c'est que nous avons décidé de tenter le coup ».
+
+Ce jeudi 12 septembre, un appel à candidature sera lancé sur le site « 1000 Cafés ». Les maires des communes de moins de 3 500 habitants pourront poser une candidature. Pour être éligibles, leur commune ne doit disposer « d'aucun café ou avoir un café menacé de fermeture ». Ils devront aussi disposer d'un local vacant adapté à cette activité. Cette initiative a le soutien de l'État. Elle est appuyée par le gouvernement dans le cadre de l'agenda rural qui sera détaillé par Édouard Philippe, Premier Ministre, le 20 septembre lors du congrès des maires ruraux dans le Nord.
+
+D'après : Pascal SAMAMA, BFMTV journaliste, 11 septembre 2019.`;
+
+export const RADIO_29 = `Les cabines téléphoniques sont appelées progressivement à disparaître, d'autant que le gouvernement a fait savoir l'an dernier qu'« il n'y aura plus de zones blanches » d'ici 5 ans.
+
+En attendant, si les anciennes cabines sont normalement recyclées, certaines y échappent. Elles sont données à des communes qui veulent les garder pour installer un libre-service de livres, par exemple. D'autres font le bonheur des collectionneurs.
+
+Mais mettons le cap aujourd'hui sur la ville de Nantes pour vous présenter un concept particulier qui permet à des visiteurs d'écouter des œuvres littéraires dans une... cabine téléphonique.
+
+« C'est un temps que les moins de 20 ans ne peuvent pas connaître* ». Jadis, les cabines téléphoniques étaient partout à chaque coin de rue et restaient le seul et unique moyen de contacter quelqu'un hors de chez soi. Mais c'est désormais de l'histoire ancienne.
+
+Depuis, le portable est passé par là et ces cabines ont été démantelées sur le territoire, au grand dam des plus nostalgiques d'entre nous.
+
+Pourtant, dans la ville de Nantes, deux de ces cabines subsistent mais leur usage est quelque peu inhabituel. En effet, ces dernières ne permettent pas de téléphoner mais d'écouter une sélection d'œuvres littéraires, lues par leurs auteurs ou autrices.
+
+Pour « contacter » les auteurs — les voix sont des enregistrements —, il vous suffit de taper leur date de naissance, proposées sur une liste présente dans la cabine, avec le clavier du combiné puis la magie opère.
+
+Au bout du fil, vous pouvez retrouver notamment la voix de Georges Orwell, Marguerite Yourcenar ou encore Sylvain Tesson qui vous lisent quelques-unes de leurs plus belles œuvres.
+
+Ces cabines « so british » ont été importées d'Angleterre par la librairie Coiffard — une institution à Nantes — qui est à l'origine de cette initiative originale.
+
+Et à l'occasion du centenaire de l'établissement, fondé en 1919, la librairie a décidé de repeindre les cabines avec un noir du plus bel effet.
+
+Après tout, la lecture, c'est simple comme un coup de fil !
+
+* Extrait de la chanson La Bohème de Charles Aznavour.
+
+D'après : France Inter, Emmanuel Moreau, 15 octobre 2019.`;
+
+export const RADIO_30 = `Parmi ces réseaux sociaux, Instagram a une place à part. Il compte un milliard d'adeptes sur la planète, dont un bon nombre d'adolescents, et permet de mettre en ligne, en un clic, les photos prises avec un smartphone. La plupart du temps, l'effet recherché se doit d'être avantageux ou esthétique.
+
+Sur « Insta », il y a peu de place pour l'instantané et beaucoup pour la retouche photo. Souvenirs de vacances, soirée entre amis, voyage avec un petit ami..., la vie se doit d'y être jolie. Quitte à ce qu'elle soit mise en scène.
+
+Du coup, Instagram est parfois devenu un juge impitoyable de la vie des ados pas toujours très à l'aise avec leur image. Cette pression sociale est telle que l'entreprise a dû annoncer, en juillet dernier, la création de nouveaux outils contre le harcèlement. Dans six pays — mais pas en France —, le nombre de likes est même désormais caché.
+
+Plus que des espaces très narcissiques, où il suffit d'être suivi par un maximum de gens pour exister, « On se rend compte que la force d'attraction des réseaux sociaux réside dans le sentiment d'appartenir à un groupe dans un monde où le collectif n'a souvent plus sa place. C'est pourquoi il est très douloureux pour les ados d'en être exclus ».
+
+Exister par son image est un exercice nécessairement compliqué pour un adolescent dont le corps est en pleine métamorphose. Prendre un peu de recul s'impose. Pour les y aider, les parents peuvent tout d'abord s'abonner eux aussi à Instagram et suivre des comptes qu'ils aiment bien. Déco, cuisine, voyages... Il n'y aura pas de grandes difficultés à convaincre l'ado que la vraie vie ne`;

@@ -691,7 +691,7 @@ function QuestionBlock({
         <div className="space-y-3">
           <AudioSequencePlayer items={part.audioGroup.items} />
           {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
-            <div key={item.id} className="border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+            <div key={item.id} className="whitespace-pre-line border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
               {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
               {item.transcript}
             </div>

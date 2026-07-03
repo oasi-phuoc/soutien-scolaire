@@ -1260,36 +1260,108 @@ const RADIO_27 = buildPool("avance", "radio-27", [
 
 const RADIO_28 = buildPool("avance", "radio-28", [
   {
-    id: "ar28-q1", textQ: "Quel groupe lance l'appel à projets ?", text: ["SOS","Nestlé","McDonald's"], textC: 0,
-    img: ["SOS","Nestlé","McDonald's"], imgC: 0,
+    id: "ar28-q1", textQ: "Quel groupe lance l'appel à projets ?", text: ["Groupe SOS","Nestlé","McDonald's"], textC: 0,
+    img: ["Groupe SOS","Nestlé","McDonald's"], imgC: 0,
     fillQ: "Le groupe _________ lance l'appel.", fill: "SOS",
   },
   {
-    id: "ar28-q2", textQ: "Combien de cafés veut-on créer ou reprendre ?", text: ["1 000","100","10 000"], textC: 0,
+    id: "ar28-q2", textQ: "Qui est le président de Groupe SOS ?", text: ["Jean-Marc Borello","Édouard Philippe","Pascal Samama"], textC: 0,
+    img: ["Borello","Philippe","Samama"], imgC: 0,
+    fillQ: "Son président s'appelle Jean-Marc _________.", fill: "Borello",
+    fillA: ["borello"],
+  },
+  {
+    id: "ar28-q3", textQ: "Combien de cafés veut-on créer ou reprendre ?", text: ["1 000","100","10 000"], textC: 0,
     img: ["1000","100","10000"], imgC: 0,
     fillQ: "Créer ou reprendre ___ cafés.", fill: "1000",
     fillA: ["1 000"],
   },
   {
-    id: "ar28-q3", textQ: "Dans quelles communes s'adresse l'appel ?", text: ["Moins de 3 500 habitants","Plus de 10 000 habitants","Uniquement Paris"], textC: 0,
-    img: ["< 3500 hab.","> 10000","Paris"], imgC: 0,
-    fillQ: "Communes de moins de ___ 500 habitants.", fill: "3",
+    id: "ar28-q4", textQ: "Quels services auront ces lieux en plus du bistrot ?", text: ["Relais de poste, accès numérique, épicerie et dépôt de pain","Uniquement des boissons","Des salles de sport"], textC: 0,
+    img: ["Poste/numérique","Boissons","Sport"], imgC: 0,
+    fillQ: "Ce seront aussi des relais de _________.", fill: "poste",
   },
   {
-    id: "ar28-q4", textQ: "Combien de communes sont concernées ?", text: ["32 000","3 500","1 000"], textC: 0,
-    img: ["32000","3500","1000"], imgC: 0,
-    fillQ: "___ 000 communes concernées.", fill: "32",
+    id: "ar28-q5", textQ: "Sur quel site l'appel à candidature sera-t-il lancé ?", text: ["1000 Cafés","BFMTV","Le site de l'État"], textC: 0,
+    img: ["1000 Cafés","BFMTV","État"], imgC: 0,
+    fillQ: "L'appel sera lancé sur le site « ___ Cafés ».", fill: "1000",
+    fillA: ["1 000"],
   },
   {
-    id: "ar28-q5", textQ: "Quel type d'économie représente le groupe SOS ?", text: ["Économie sociale et solidaire","Économie libérale","Économie agricole"], textC: 0,
-    img: ["ESS","Libérale","Agricole"], imgC: 0,
-    fillQ: "Groupe d'économie sociale et _________.", fill: "solidaire",
+    id: "ar28-q6", textQ: "Qui détaillera l'agenda rural le 20 septembre ?", text: ["Édouard Philippe","Jean-Marc Borello","Pascal Samama"], textC: 0,
+    img: ["Philippe","Borello","Samama"], imgC: 0,
+    fillQ: "L'agenda rural sera détaillé par Édouard _________.", fill: "Philippe",
+  },
+]);
+
+const RADIO_29 = buildPool("avance", "radio-29", [
+  {
+    id: "ar29-q1", textQ: "Dans quelle ville se trouvent les cabines particulières ?", text: ["Nantes","Paris","Lyon"], textC: 0,
+    img: ["Nantes","Paris","Lyon"], imgC: 0,
+    fillQ: "Le reportage se situe à _________.", fill: "Nantes",
   },
   {
-    id: "ar28-q6", textQ: "Où se faisait traditionnellement le lien social ?", text: ["Dans les cafés et estaminets","À l'école","Au travail"], textC: 0,
-    img: ["Cafés","École","Travail"], imgC: 0,
-    fillQ: "Le lien social se faisait dans les _________.", fill: "cafés",
-    fillA: ["cafes"],
+    id: "ar29-q2", textQ: "Que peut-on faire dans ces cabines ?", text: ["Écouter des œuvres littéraires","Téléphoner","Acheter des livres"], textC: 0,
+    img: ["Écouter","Téléphoner","Acheter"], imgC: 0,
+    fillQ: "On peut écouter des œuvres _________.", fill: "littéraires",
+    fillA: ["litteraires"],
+  },
+  {
+    id: "ar29-q3", textQ: "Comment « contacter » les auteurs ?", text: ["En tapant leur date de naissance","En composant un numéro","En envoyant un SMS"], textC: 0,
+    img: ["Date naissance","Numéro","SMS"], imgC: 0,
+    fillQ: "Il faut taper leur date de _________.", fill: "naissance",
+  },
+  {
+    id: "ar29-q4", textQ: "Quels auteurs sont mentionnés ?", text: ["Georges Orwell, Marguerite Yourcenar et Sylvain Tesson","Charles Aznavour et Édouard Philippe","Victor Hugo et Molière"], textC: 0,
+    img: ["Orwell/Yourcenar/Tesson","Aznavour/Philippe","Hugo/Molière"], imgC: 0,
+    fillQ: "On entend notamment Georges _________.", fill: "Orwell",
+  },
+  {
+    id: "ar29-q5", textQ: "Quelle librairie est à l'origine de l'initiative ?", text: ["Coiffard","Gallimard","Hachette"], textC: 0,
+    img: ["Coiffard","Gallimard","Hachette"], imgC: 0,
+    fillQ: "La librairie _________ est à l'origine du projet.", fill: "Coiffard",
+    fillA: ["coiffard"],
+  },
+  {
+    id: "ar29-q6", textQ: "D'où viennent ces cabines ?", text: ["D'Angleterre","D'Écosse","D'Irlande"], textC: 0,
+    img: ["Angleterre","Écosse","Irlande"], imgC: 0,
+    fillQ: "Ces cabines ont été importées d'_________.", fill: "Angleterre",
+  },
+]);
+
+const RADIO_30 = buildPool("avance", "radio-30", [
+  {
+    id: "ar30-q1", textQ: "Combien d'adeptes compte Instagram sur la planète ?", text: ["Un milliard","Un million","Cent mille"], textC: 0,
+    img: ["1 milliard","1 million","100 000"], imgC: 0,
+    fillQ: "Instagram compte un _________ d'adeptes.", fill: "milliard",
+  },
+  {
+    id: "ar30-q2", textQ: "Quel effet recherche-t-on le plus souvent sur Insta ?", text: ["Un effet avantageux ou esthétique","Un effet spontané et brut","Un effet comique"], textC: 0,
+    img: ["Esthétique","Spontané","Comique"], imgC: 0,
+    fillQ: "L'effet recherché doit être avantageux ou _________.", fill: "esthétique",
+    fillA: ["esthetique"],
+  },
+  {
+    id: "ar30-q3", textQ: "Quand Instagram a-t-il annoncé de nouveaux outils contre le harcèlement ?", text: ["En juillet dernier","En janvier","En décembre"], textC: 0,
+    img: ["Juillet","Janvier","Décembre"], imgC: 0,
+    fillQ: "Annoncé en _________ dernier.", fill: "juillet",
+  },
+  {
+    id: "ar30-q4", textQ: "Dans combien de pays le nombre de likes est-il caché ?", text: ["Six pays","Trois pays","Dix pays"], textC: 0,
+    img: ["6 pays","3 pays","10 pays"], imgC: 0,
+    fillQ: "Le nombre de likes est caché dans ___ pays.", fill: "six",
+    fillA: ["6"],
+  },
+  {
+    id: "ar30-q5", textQ: "Pourquoi l'exclusion des réseaux sociaux est-elle douloureuse pour les ados ?", text: ["Parce qu'ils veulent appartenir à un groupe","Parce qu'ils détestent les photos","Parce qu'ils n'ont pas de smartphone"], textC: 0,
+    img: ["Appartenir groupe","Détestent photos","Pas smartphone"], imgC: 0,
+    fillQ: "La force d'attraction réside dans le sentiment d'_________ à un groupe.", fill: "appartenir",
+  },
+  {
+    id: "ar30-q6", textQ: "Que peuvent faire les parents pour aider leurs ados ?", text: ["S'abonner à Instagram et suivre des comptes","Interdire tout smartphone","Supprimer toutes les photos"], textC: 0,
+    img: ["S'abonner Insta","Interdire smartphone","Supprimer photos"], imgC: 0,
+    fillQ: "Les parents peuvent s'abonner à _________.", fill: "Instagram",
+    fillA: ["instagram", "Insta"],
   },
 ]);
 
@@ -1330,4 +1402,6 @@ export const CO_QUESTION_POOLS_AVANCE_EXTRA: Record<string, COMultiQuestion[]> =
   "avance-radio-26": RADIO_26,
   "avance-radio-27": RADIO_27,
   "avance-radio-28": RADIO_28,
+  "avance-radio-29": RADIO_29,
+  "avance-radio-30": RADIO_30,
 };
