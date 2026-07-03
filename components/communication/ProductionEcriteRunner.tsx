@@ -13,6 +13,10 @@ import {
   type FormTemplate,
 } from "@/lib/curriculum/content/communication/form-prompts";
 import {
+  getFormSampleAnswer,
+  getWritingSampleAnswer,
+} from "@/lib/curriculum/content/communication/pe-sample-answers";
+import {
   randomWritingPrompt,
   type WritingLevel,
   type WritingPrompt,
@@ -34,12 +38,22 @@ type Phase = "intro" | "exercise" | "results";
 
 const ACCENT = "var(--color-accent-comm)";
 
-const STEP_META: Array<{ id: StepId; title: string; points: number }> = [
-  { id: "form", title: "Formulaire", points: 5 },
-  { id: "short", title: "Texte à rédiger court", points: 10 },
-  { id: "long", title: "Texte à rédiger long", points: 10 },
-];
+const TOTAL_POINTS = 25;
 const TOTAL_SECONDS = 45 * 60;
+
+function getStepMeta(level: WritingLevel): Array<{ id: StepId; title: string; points: number }> {
+  if (level === "avance") {
+    return [
+      { id: "short", title: "Texte à rédiger court", points: 12 },
+      { id: "long", title: "Texte à rédiger long", points: 13 },
+    ];
+  }
+  return [
+    { id: "form", title: "Formulaire", points: 5 },
+    { id: "short", title: "Texte à rédiger court", points: 10 },
+    { id: "long", title: "Texte à rédiger long", points: 10 },
+  ];
+}
 
 function formatTimer(seconds: number) {
   const min = Math.max(0, Math.floor(seconds / 60));
@@ -187,22 +201,33 @@ function HiddenNav({
   );
 }
 
+function CorrectionBlock({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2.5">
+      <p className="mb-1.5 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{title}</p>
+      <div className="space-y-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]">{children}</div>
+    </div>
+  );
+}
+
 function ProgressBar({
+  steps,
   current,
   remaining,
   secondsLeft,
   onSelect,
 }: {
+  steps: Array<{ id: StepId; title: string; points: number }>;
   current: StepId;
   remaining: StepId[];
   secondsLeft: number;
   onSelect: (id: StepId) => void;
 }) {
-  const visibleSteps = STEP_META.filter((step) => remaining.includes(step.id));
+  const visibleSteps = steps.filter((step) => remaining.includes(step.id));
   return (
     <div className="mb-5">
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-xs font-bold tabular-nums" style={{ color: ACCENT }}>0 / 25 pts</p>
+        <p className="text-xs font-bold tabular-nums" style={{ color: ACCENT }}>0 / {TOTAL_POINTS} pts</p>
         <div className="flex items-center gap-3">
           <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${ACCENT} 12%, white)`, color: ACCENT }}>
             {formatTimer(secondsLeft)}
@@ -458,18 +483,21 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const code = lessonCode(level);
+  const stepMeta = getStepMeta(level);
+  const initialSteps = stepMeta.map((step) => step.id);
+  const hasForm = level !== "avance";
   const [phase, setPhase] = useState<Phase>("intro");
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
-  const [remaining, setRemaining] = useState<StepId[]>(["form", "short", "long"]);
-  const [current, setCurrent] = useState<StepId>("form");
-  const [formTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
+  const [remaining, setRemaining] = useState<StepId[]>(initialSteps);
+  const [current, setCurrent] = useState<StepId>(initialSteps[0]!);
+  const [formTemplate] = useState<FormTemplate | null>(() => (hasForm ? randomFormTemplates(1)[0] ?? null : null));
   const [formAnswers, setFormAnswers] = useState<Record<string, string>>({});
   const [shortPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "short"));
   const [longPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "long"));
   const [shortText, setShortText] = useState("");
   const [longText, setLongText] = useState("");
   const [validatedSteps, setValidatedSteps] = useState<Set<StepId>>(new Set());
-  const [openResult, setOpenResult] = useState<StepId | null>("form");
+  const [openResult, setOpenResult] = useState<StepId | null>(initialSteps[0]!);
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");
@@ -513,19 +541,14 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
-    const formText = formToText(formTemplate, formAnswers);
-    const combinedText = [
-      "FORMULAIRE",
-      formText,
-      "",
-      "TEXTE COURT",
-      shortPrompt.title,
-      shortText,
-      "",
-      "TEXTE LONG",
-      longPrompt.title,
-      longText,
-    ].join("\n");
+    const parts: string[] = [];
+    const feedback: Array<{ exercise: string; answers?: Record<string, string>; matches: unknown[] }> = [];
+    if (hasForm && formTemplate) {
+      parts.push("FORMULAIRE", formToText(formTemplate, formAnswers), "");
+      feedback.push({ exercise: "form", answers: formAnswers, matches: [] });
+    }
+    parts.push("TEXTE COURT", shortPrompt.title, shortText, "", "TEXTE LONG", longPrompt.title, longText);
+    feedback.push({ exercise: "short", matches: [] }, { exercise: "long", matches: [] });
     startSending(async () => {
       const result = await submitExpressionAction({
         teacherId,
@@ -534,18 +557,14 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         prompt: {
           id: `${code}-complete`,
           title: `${code} - Production écrite complète`,
-          situation: "Formulaire, texte court et texte long.",
+          situation: hasForm ? "Formulaire, texte court et texte long." : "Texte court et texte long.",
           instruction: "Correction professeur demandée.",
-          points: ["Formulaire", "Texte court", "Texte long"],
+          points: hasForm ? ["Formulaire", "Texte court", "Texte long"] : ["Texte court", "Texte long"],
           minWords: 0,
           maxWords: 10000,
         },
-        text: combinedText,
-        aiFeedback: [
-          { exercise: "form", answers: formAnswers },
-          { exercise: "short", matches: [] },
-          { exercise: "long", matches: [] },
-        ],
+        text: parts.join("\n"),
+        aiFeedback: feedback,
       });
       setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
@@ -553,14 +572,15 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   }
 
   if (phase === "intro") {
+    const exerciseCount = stepMeta.length;
     const introBullets: IntroBullet[] = [
-      { strong: "3 exercices", text: " de production écrite" },
+      { strong: `${exerciseCount} exercice${exerciseCount > 1 ? "s" : ""}`, text: " de production écrite" },
       { strong: "45 minutes", text: " pour compléter l'évaluation" },
       { text: "Validez chaque exercice individuellement" },
       { text: "Vous pouvez naviguer librement en cliquant sur la barre de progression en haut." },
-      { before: "Score maximum : ", strong: "25 points", text: "" },
+      { before: "Score maximum : ", strong: `${TOTAL_POINTS} points`, text: "" },
     ];
-    const introRows: IntroRow[] = STEP_META.map((step, index) => ({
+    const introRows: IntroRow[] = stepMeta.map((step, index) => ({
       num: String(index + 1),
       title: step.title,
       points: `${step.points} pts`,
@@ -587,8 +607,11 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
         <CommunicationResultsSummary totalPoints={0} pendingTeacher />
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
         <div className="space-y-3">
-          {STEP_META.map((item, index) => {
+          {stepMeta.map((item, index) => {
             const isOpen = openResult === item.id;
+            const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
+            const shortSample = getWritingSampleAnswer(shortPrompt.id);
+            const longSample = getWritingSampleAnswer(longPrompt.id);
             return (
               <CommunicationResultsExercise
                 key={item.id}
@@ -599,13 +622,37 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
                 onToggle={() => setOpenResult(isOpen ? null : item.id)}
               >
                 {item.id === "form" && (
-                  <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-secondary)]">{formToText(formTemplate, formAnswers)}</pre>
+                  <>
+                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">Votre production</p>
+                    <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{formToText(formTemplate, formAnswers)}</pre>
+                    {formSample && (
+                      <CorrectionBlock title="Proposition de réponse">
+                        <pre className="whitespace-pre-wrap">{formSample}</pre>
+                      </CorrectionBlock>
+                    )}
+                  </>
                 )}
                 {item.id === "short" && (
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
+                  <>
+                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{shortPrompt.title}</p>
+                    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
+                    {shortSample && (
+                      <CorrectionBlock title="Proposition de réponse">
+                        <p className="whitespace-pre-wrap">{shortSample}</p>
+                      </CorrectionBlock>
+                    )}
+                  </>
                 )}
                 {item.id === "long" && (
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
+                  <>
+                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{longPrompt.title}</p>
+                    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
+                    {longSample && (
+                      <CorrectionBlock title="Proposition de réponse">
+                        <p className="whitespace-pre-wrap">{longSample}</p>
+                      </CorrectionBlock>
+                    )}
+                  </>
                 )}
               </CommunicationResultsExercise>
             );
@@ -626,11 +673,11 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     );
   }
 
-  const step = STEP_META.find((item) => item.id === current)!;
+  const step = stepMeta.find((item) => item.id === current)!;
   return (
     <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
       <Header level={level} title="Production écrite" />
-      <ProgressBar current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
+      <ProgressBar steps={stepMeta} current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{step.title}</h2>
