@@ -210,88 +210,228 @@ function ProgressBar({
 }
 
 const AUDIO_GAP_MS = 15_000;
+const SPEED_OPTIONS = [
+  { rate: 0.5, label: "0,5×" },
+  { rate: 0.75, label: "0,75×" },
+  { rate: 1, label: "Normale" },
+] as const;
 
 function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const timerRef = useRef<number | null>(null);
+  const currentIndexRef = useRef<number | null>(null);
+  const waitTimerRef = useRef<{ timeoutId: number; endAt: number; nextIndex: number } | null>(null);
+  const pauseSnapshotRef = useRef<
+    | null
+    | { kind: "audio" }
+    | { kind: "wait"; nextIndex: number; remainingMs: number }
+  >(null);
+  const isSeekingRef = useRef(false);
+  const speedMenuRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef(items);
+
   const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
   const [waiting, setWaiting] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [errorAudio, setErrorAudio] = useState<string | null>(null);
 
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    itemsRef.current = items;
+    stop();
+    return () => {
+      clearWait();
+      audioRef.current?.pause();
+    };
+  }, [items]);
+
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.playbackRate = playbackRate;
+  }, [playbackRate]);
+
+  useEffect(() => {
+    if (!speedMenuOpen) return;
+    function onPointerDown(event: MouseEvent) {
+      if (speedMenuRef.current && !speedMenuRef.current.contains(event.target as Node)) {
+        setSpeedMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [speedMenuOpen]);
+
   function clearWait() {
-    if (timerRef.current !== null) {
-      window.clearTimeout(timerRef.current);
-      timerRef.current = null;
+    if (waitTimerRef.current) {
+      window.clearTimeout(waitTimerRef.current.timeoutId);
+      waitTimerRef.current = null;
     }
   }
 
   function stop() {
     clearWait();
+    pauseSnapshotRef.current = null;
     const player = audioRef.current;
     if (player) {
       player.pause();
       player.currentTime = 0;
     }
     setPlaying(false);
+    setPaused(false);
     setWaiting(false);
+    setCurrentIndex(null);
     setProgress(0);
+  }
+
+  function ensurePlayer() {
+    let player = audioRef.current;
+    if (player) return player;
+
+    player = new Audio();
+    player.preload = "metadata";
+    audioRef.current = player;
+
+    player.addEventListener("timeupdate", () => {
+      if (isSeekingRef.current) return;
+      const active = audioRef.current;
+      if (!active || !Number.isFinite(active.duration) || active.duration <= 0) {
+        setProgress(0);
+        return;
+      }
+      setProgress(Math.min(100, (active.currentTime / active.duration) * 100));
+    });
+    player.addEventListener("ended", () => {
+      setPlaying(false);
+      setProgress(100);
+      const idx = currentIndexRef.current;
+      if (idx === null) return;
+      const nextIndex = idx + 1;
+      if (nextIndex >= itemsRef.current.length) {
+        setCurrentIndex(null);
+        currentIndexRef.current = null;
+        setProgress(0);
+        return;
+      }
+      startWait(nextIndex);
+    });
+    player.addEventListener("error", () => {
+      setPlaying(false);
+      setWaiting(false);
+      setPaused(false);
+      const idx = currentIndexRef.current;
+      setErrorAudio(idx !== null ? itemsRef.current[idx]?.audio ?? null : null);
+    });
+
+    return player;
+  }
+
+  function startWait(nextIndex: number, delayMs = AUDIO_GAP_MS) {
+    clearWait();
+    if (nextIndex >= items.length) return;
+    setWaiting(true);
+    setPlaying(false);
+    const endAt = Date.now() + delayMs;
+    waitTimerRef.current = {
+      timeoutId: window.setTimeout(() => {
+        waitTimerRef.current = null;
+        setWaiting(false);
+        playAt(nextIndex);
+      }, delayMs),
+      endAt,
+      nextIndex,
+    };
   }
 
   function playAt(index: number) {
     const item = items[index];
     if (!item) {
       stop();
-      setCurrentIndex(null);
       return;
     }
 
     clearWait();
-    const player = new Audio(item.audio);
-    player.preload = "none";
-    audioRef.current = player;
-    setCurrentIndex(index);
+    pauseSnapshotRef.current = null;
     setWaiting(false);
-    setProgress(0);
+    setPaused(false);
     setErrorAudio(null);
 
-    player.addEventListener("play", () => setPlaying(true), { once: true });
-    player.addEventListener("timeupdate", () => {
-      if (!Number.isFinite(player.duration) || player.duration <= 0) {
-        setProgress(0);
-        return;
-      }
-      setProgress(Math.min(100, (player.currentTime / player.duration) * 100));
-    });
-    player.addEventListener("ended", () => {
-      setPlaying(false);
-      setProgress(100);
-      const nextIndex = index + 1;
-      if (nextIndex >= items.length) {
-        setCurrentIndex(null);
-        setProgress(0);
-        return;
-      }
-      setWaiting(true);
-      timerRef.current = window.setTimeout(() => playAt(nextIndex), AUDIO_GAP_MS);
-    }, { once: true });
-    player.addEventListener("error", () => {
-      setPlaying(false);
-      setWaiting(false);
-      setErrorAudio(item.audio);
-    }, { once: true });
+    const player = ensurePlayer();
+    player.src = item.audio;
+    player.playbackRate = playbackRate;
+    player.currentTime = 0;
+    setCurrentIndex(index);
+    currentIndexRef.current = index;
+    setProgress(0);
 
-    void player.play().catch(() => {
-      setPlaying(false);
+    void player.play()
+      .then(() => setPlaying(true))
+      .catch(() => {
+        setPlaying(false);
+        setErrorAudio(item.audio);
+      });
+  }
+
+  function pause() {
+    if (waiting && waitTimerRef.current) {
+      const remaining = Math.max(0, waitTimerRef.current.endAt - Date.now());
+      pauseSnapshotRef.current = {
+        kind: "wait",
+        nextIndex: waitTimerRef.current.nextIndex,
+        remainingMs: remaining,
+      };
+      clearWait();
       setWaiting(false);
-      setErrorAudio(item.audio);
-    });
+      setPaused(true);
+      setPlaying(false);
+      return;
+    }
+
+    const player = audioRef.current;
+    if (player && !player.paused) {
+      player.pause();
+      pauseSnapshotRef.current = { kind: "audio" };
+      setPlaying(false);
+      setPaused(true);
+    }
+  }
+
+  function resume() {
+    const snap = pauseSnapshotRef.current;
+    pauseSnapshotRef.current = null;
+    setPaused(false);
+
+    if (snap?.kind === "wait") {
+      startWait(snap.nextIndex, snap.remainingMs);
+      return;
+    }
+
+    const player = audioRef.current;
+    if (snap?.kind === "audio" && player && currentIndexRef.current !== null) {
+      player.playbackRate = playbackRate;
+      void player.play()
+        .then(() => setPlaying(true))
+        .catch(() => {
+          const idx = currentIndexRef.current;
+          setErrorAudio(idx !== null ? itemsRef.current[idx]?.audio ?? null : null);
+        });
+      return;
+    }
+
+    playAt(0);
   }
 
   function toggle() {
     if (playing || waiting) {
-      stop();
+      pause();
+      return;
+    }
+    if (paused) {
+      resume();
       return;
     }
     playAt(0);
@@ -302,24 +442,33 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     playAt(0);
   }
 
-  useEffect(() => {
-    return () => {
-      clearWait();
-      const player = audioRef.current;
-      if (player) {
-        player.pause();
-        player.currentTime = 0;
-      }
-    };
-  }, [items]);
+  function seekTo(percent: number) {
+    const player = audioRef.current;
+    if (!player || !Number.isFinite(player.duration) || player.duration <= 0) return;
+    const nextTime = (percent / 100) * player.duration;
+    player.currentTime = nextTime;
+    setProgress(percent);
+  }
+
+  function selectSpeed(rate: number) {
+    setPlaybackRate(rate);
+    if (audioRef.current) audioRef.current.playbackRate = rate;
+    setSpeedMenuOpen(false);
+  }
 
   const currentItem = currentIndex !== null ? items[currentIndex] : null;
   const label = items.length > 1 ? "Écouter la séquence" : "Écouter l'audio";
   const activeLabel = waiting
     ? "Pause de 15 secondes"
-    : currentItem
-      ? `Lecture ${currentItem.activity}`
-      : label;
+    : paused
+      ? currentItem
+        ? `En pause — ${currentItem.activity}`
+        : "En pause"
+      : currentItem
+        ? `Lecture ${currentItem.activity}`
+        : label;
+  const canSeek = !waiting && currentIndex !== null;
+  const showPauseIcon = playing || waiting;
 
   return (
     <div>
@@ -329,26 +478,71 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
           onClick={toggle}
           className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85 active:scale-95"
           style={{ background: ACCENT }}
-          aria-label={playing || waiting ? "Arrêter l'audio" : label}
+          aria-label={showPauseIcon ? "Pause" : paused ? "Reprendre" : label}
         >
-          {playing || waiting ? (
+          {showPauseIcon ? (
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <rect x="5" y="4" width="4" height="16" rx="1" />
               <rect x="15" y="4" width="4" height="16" rx="1" />
             </svg>
           ) : (
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M6 4l14 8-14 8V4z" />
-          </svg>
+              <path d="M6 4l14 8-14 8V4z" />
+            </svg>
           )}
         </button>
         <div className="min-w-0">
           <p className="truncate text-xs font-bold text-[var(--color-text-primary)]">{activeLabel}</p>
-          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[var(--color-border-default)]">
-            <div
-              className="h-full rounded-full transition-[width]"
-              style={{ width: `${waiting ? 100 : progress}%`, background: ACCENT }}
+          <div className="mt-1 flex items-center gap-1.5">
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={0.1}
+              value={waiting ? 100 : progress}
+              disabled={!canSeek}
+              onChange={(event) => seekTo(Number(event.target.value))}
+              onPointerDown={() => { isSeekingRef.current = true; }}
+              onPointerUp={() => { isSeekingRef.current = false; }}
+              onPointerCancel={() => { isSeekingRef.current = false; }}
+              className="h-1.5 min-w-0 flex-1 cursor-pointer appearance-none rounded-full disabled:cursor-default disabled:opacity-60"
+              style={{ accentColor: ACCENT }}
+              aria-label="Progression audio"
             />
+            <div className="relative shrink-0" ref={speedMenuRef}>
+              <button
+                type="button"
+                onClick={() => setSpeedMenuOpen((open) => !open)}
+                className="flex h-6 w-6 items-center justify-center rounded-full text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
+                aria-label="Vitesse de lecture"
+                aria-expanded={speedMenuOpen}
+                title="Vitesse de lecture"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <circle cx="12" cy="5" r="1.8" />
+                  <circle cx="12" cy="12" r="1.8" />
+                  <circle cx="12" cy="19" r="1.8" />
+                </svg>
+              </button>
+              {speedMenuOpen && (
+                <div className="absolute right-0 top-full z-20 mt-1 min-w-[7.5rem] overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white py-1 shadow-lg">
+                  {SPEED_OPTIONS.map((option) => (
+                    <button
+                      key={option.rate}
+                      type="button"
+                      onClick={() => selectSpeed(option.rate)}
+                      className={`block w-full px-3 py-1.5 text-left text-xs transition-colors hover:bg-[var(--color-bg-secondary)] ${
+                        playbackRate === option.rate
+                          ? "font-bold text-[var(--color-text-primary)]"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <button
