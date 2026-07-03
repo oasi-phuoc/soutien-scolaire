@@ -22,14 +22,13 @@ import {
 } from "@/lib/curriculum/content/communication/po-correction-guide";
 import {
   getPoDialogue,
-  interlocutorLines,
   pickStudentRole,
   roleAssignmentText,
   studentLineIndices,
 } from "@/lib/curriculum/content/communication/po-dialogues";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { speak } from "@/lib/utils/speech";
-import { TtsPlayButton, TtsSequencePlayer } from "@/components/communication/TtsSequencePlayer";
+import { HintLightbulbButton, TtsPlayButton } from "@/components/communication/TtsSequencePlayer";
 import {
   CommunicationIntroSection,
   CommunicationResultsExercise,
@@ -388,6 +387,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   const task4ActiveTurnRef = useRef(0);
   const [task4Lines, setTask4Lines] = useState<OralDialogueLine[]>([]);
   const [task4Done, setTask4Done] = useState(false);
+  const [openDialogueHint, setOpenDialogueHint] = useState<number | null>(null);
 
   // Task 5: argumentation (multi-phrase)
   const [argumentationTranscript, setArgumentationTranscript] = useState("");
@@ -475,6 +475,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   useEffect(() => {
     setCurrentTranscript("");
     setImageHelpOpen(false);
+    setOpenDialogueHint(null);
   }, [phase]);
 
   useEffect(() => {
@@ -586,16 +587,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   }
 
   // ——— All grammar matches for review ———
-
-  const interlocutorTtsItems = useMemo(
-    () =>
-      interlocutorLines(dialogueState.script, dialogueState.studentRole).map((line, i) => ({
-        id: String(line.index),
-        text: line.text,
-        label: `Réplique ${i + 1}`,
-      })),
-    [dialogueState],
-  );
 
   const imageDescriptionModel = useMemo(
     () => getImageDescriptionModel(situation.id),
@@ -1220,14 +1211,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </div>
           </div>
 
-          {!task4Done && interlocutorTtsItems.length > 0 && (
-            <TtsSequencePlayer
-              items={interlocutorTtsItems}
-              gapMs={3000}
-              gapHint="Les répliques de l'interlocuteur sont lues à la suite. Répondez après chaque phrase."
-            />
-          )}
-
           {!task4Done && (() => {
             const { script, studentRole, studentTurns } = dialogueState;
             let studentTurnIdx = 0;
@@ -1235,6 +1218,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               <div className="space-y-3">
                 {script.lines.map((line, lineIdx) => {
                   const isStudent = line.role === studentRole;
+                  const hintOpen = openDialogueHint === lineIdx;
                   if (!isStudent) {
                     const interlocutor = line.role === "A" ? script.roleA : script.roleB;
                     return (
@@ -1247,8 +1231,15 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                             {interlocutor.title}
                           </span>
                           <TtsPlayButton text={line.text} small />
+                          <div className="flex-1" />
+                          <HintLightbulbButton
+                            active={hintOpen}
+                            onClick={() => setOpenDialogueHint(hintOpen ? null : lineIdx)}
+                          />
                         </div>
-                        <p className="mt-1 text-sm text-[var(--color-text-primary)]">{line.text}</p>
+                        {hintOpen && (
+                          <p className="mt-2 text-sm text-[var(--color-text-primary)]">{line.text}</p>
+                        )}
                       </div>
                     );
                   }
@@ -1283,10 +1274,17 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                             onStop={stopTask4}
                           />
                         )}
+                        <HintLightbulbButton
+                          active={hintOpen}
+                          onClick={() => setOpenDialogueHint(hintOpen ? null : lineIdx)}
+                        />
                       </div>
+                      {hintOpen && (
+                        <p className="text-sm italic text-[var(--color-text-secondary)] pl-9">{line.text}</p>
+                      )}
                       {transcript && (supported && !micBlocked || task4Done) ? (
                         <p className="text-sm text-[var(--color-text-primary)] pl-9">{transcript}</p>
-                      ) : !task4Done ? (
+                      ) : !task4Done && !hintOpen ? (
                         <p className="text-xs italic text-[var(--color-text-secondary)] pl-9">
                           {(supported && !micBlocked) ? "Maintenez le micro pour répondre…" : ""}
                         </p>
