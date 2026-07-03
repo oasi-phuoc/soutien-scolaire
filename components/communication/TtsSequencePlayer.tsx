@@ -12,6 +12,7 @@ export type TtsSequenceItem = {
 type TtsSequencePlayerProps = {
   items: TtsSequenceItem[];
   gapMs?: number;
+  accentColor?: string;
 };
 
 function waitMs(ms: number, signal: { cancelled: boolean }) {
@@ -66,7 +67,7 @@ function speakAsync(
   });
 }
 
-export function TtsSequencePlayer({ items, gapMs = 3000 }: TtsSequencePlayerProps) {
+export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--color-accent-comm)" }: TtsSequencePlayerProps) {
   const cancelRef = useRef({ cancelled: false });
   const playingRef = useRef(false);
   const sequenceProgressRef = useRef({ itemIndex: 0, itemProgress: 0 });
@@ -206,6 +207,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000 }: TtsSequencePlayerProp
       onRestart={restart}
       playbackRate={playbackRate}
       onSpeedChange={setPlaybackRate}
+      accentColor={accentColor}
     />
   );
 }
