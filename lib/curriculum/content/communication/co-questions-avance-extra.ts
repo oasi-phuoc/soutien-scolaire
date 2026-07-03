@@ -1365,6 +1365,76 @@ const RADIO_30 = buildPool("avance", "radio-30", [
   },
 ]);
 
+const RADIO_31 = buildPool("avance", "radio-31", [
+  {
+    id: "ar31-q1", textQ: "Quel est le secret pour bien manger seul ?", text: ["L'anticipation","L'improvisation","Commander toujours à emporter"], textC: 0,
+    img: ["Anticipation","Improvisation","À emporter"], imgC: 0,
+    fillQ: "Le secret, c'est l'_________.", fill: "anticipation",
+  },
+  {
+    id: "ar31-q2", textQ: "Comment appelle-t-on aujourd'hui l'art d'accommoder les restes ?", text: ["Le slash cooking","Le batch cooking","Le slow cooking"], textC: 0,
+    img: ["Slash cooking","Batch cooking","Slow cooking"], imgC: 0,
+    fillQ: "On appelle cela le slash _________.", fill: "cooking",
+  },
+  {
+    id: "ar31-q3", textQ: "Que peut-on faire avec un bouillon de pot-au-feu congelé ?", text: ["Parfumer des ravioles ou pocher un poisson","Faire un sorbet","Remplacer le camembert"], textC: 0,
+    img: ["Ravioles/poisson","Sorbet","Camembert"], imgC: 0,
+    fillQ: "Un bouillon congelé peut parfumer des _________.", fill: "ravioles",
+  },
+  {
+    id: "ar31-q4", textQ: "Quel dessert rapide est cité ?", text: ["Le pavlova","Le tiramisu","La tarte Tatin"], textC: 0,
+    img: ["Pavlova","Tiramisu","Tarte Tatin"], imgC: 0,
+    fillQ: "Un dessert cité est le _________.", fill: "pavlova",
+  },
+  {
+    id: "ar31-q5", textQ: "Quel bénéfice d'une cuisine plus saine est mentionné ?", text: ["On dort mieux et on est plus en forme","On voyage plus","On cuisine moins"], textC: 0,
+    img: ["Dort mieux","Voyage plus","Cuisine moins"], imgC: 0,
+    fillQ: "On dort mieux, on est plus en _________.", fill: "forme",
+  },
+  {
+    id: "ar31-q6", textQ: "D'où provient ce texte ?", text: ["La Vie n° 3872","La Croix","France Inter"], textC: 0,
+    img: ["La Vie","La Croix","France Inter"], imgC: 0,
+    fillQ: "D'après : ___ Vie n° 3872.", fill: "La",
+  },
+]);
+
+const RADIO_32 = buildPool("avance", "radio-32", [
+  {
+    id: "ar32-q1", textQ: "Quel règlement est mentionné ?", text: ["Le RGPD","Le GDPR américain","Le règlement SNCF"], textC: 0,
+    img: ["RGPD","GDPR US","SNCF"], imgC: 0,
+    fillQ: "Règlement général sur la protection des _________.", fill: "données",
+  },
+  {
+    id: "ar32-q2", textQ: "Quelle entreprise est concernée ?", text: ["OUI.sncf","La Poste","Orange"], textC: 0,
+    img: ["OUI.sncf","La Poste","Orange"], imgC: 0,
+    fillQ: "Les droits concernent _________.sncf.", fill: "OUI",
+    fillA: ["oui"],
+  },
+  {
+    id: "ar32-q3", textQ: "Sous quel format les données de portabilité sont-elles transmises ?", text: ["Fichier csv","Fichier pdf","Fichier mp3"], textC: 0,
+    img: ["CSV","PDF","MP3"], imgC: 0,
+    fillQ: "Sous un format électronique fichier _________.", fill: "csv",
+    fillA: ["CSV"],
+  },
+  {
+    id: "ar32-q4", textQ: "Où envoyer une demande par courrier ?", text: ["2, place de la Défense – Paris La Défense Cedex","Gare de Lyon","1, rue de Rivoli"], textC: 0,
+    img: ["La Défense","Gare de Lyon","Rivoli"], imgC: 0,
+    fillQ: "Courrier à la place de la _________.", fill: "Défense",
+    fillA: ["Defense", "defense"],
+  },
+  {
+    id: "ar32-q5", textQ: "Comment se désinscrire des newsletters commerciales ?", text: ["En cliquant sur le lien de désinscription","En appelant le 36 35","En supprimant son compte"], textC: 0,
+    img: ["Lien désinscription","Appel 36 35","Supprimer compte"], imgC: 0,
+    fillQ: "En cliquant sur le lien de _________.", fill: "désinscription",
+    fillA: ["desinscription"],
+  },
+  {
+    id: "ar32-q6", textQ: "Que peut-on faire via son compte client ?", text: ["La plupart des opérations d'accès, correction et effacement","Uniquement acheter des billets","Rien du tout"], textC: 0,
+    img: ["Accès/correction","Acheter billets","Rien"], imgC: 0,
+    fillQ: "Via son compte _________ client.", fill: "client",
+  },
+]);
+
 export const CO_QUESTION_POOLS_AVANCE_EXTRA: Record<string, COMultiQuestion[]> = {
   "avance-conversation-11": CONVERSATION_11,
   "avance-conversation-12": CONVERSATION_12,
@@ -1404,4 +1474,6 @@ export const CO_QUESTION_POOLS_AVANCE_EXTRA: Record<string, COMultiQuestion[]> =
   "avance-radio-28": RADIO_28,
   "avance-radio-29": RADIO_29,
   "avance-radio-30": RADIO_30,
+  "avance-radio-31": RADIO_31,
+  "avance-radio-32": RADIO_32,
 };

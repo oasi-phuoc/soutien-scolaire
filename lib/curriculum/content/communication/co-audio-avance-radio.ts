@@ -250,4 +250,48 @@ Du coup, Instagram est parfois devenu un juge impitoyable de la vie des ados pas
 
 Plus que des espaces très narcissiques, où il suffit d'être suivi par un maximum de gens pour exister, « On se rend compte que la force d'attraction des réseaux sociaux réside dans le sentiment d'appartenir à un groupe dans un monde où le collectif n'a souvent plus sa place. C'est pourquoi il est très douloureux pour les ados d'en être exclus ».
 
-Exister par son image est un exercice nécessairement compliqué pour un adolescent dont le corps est en pleine métamorphose. Prendre un peu de recul s'impose. Pour les y aider, les parents peuvent tout d'abord s'abonner eux aussi à Instagram et suivre des comptes qu'ils aiment bien. Déco, cuisine, voyages... Il n'y aura pas de grandes difficultés à convaincre l'ado que la vraie vie ne`;
+Exister par son image est un exercice nécessairement compliqué pour un adolescent dont le corps est en pleine métamorphose. Prendre un peu de recul s'impose. Pour les y aider, les parents peuvent tout d'abord s'abonner eux aussi à Instagram et suivre des comptes qu'ils aiment bien. Déco, cuisine, voyages... Il n'y aura pas de grandes difficultés à convaincre l'ado que la vraie vie ne ressemble pas à ces chambres impeccablement rangées, à ces repas dignes d'un chef étoilé, et que les vacances de l'été dernier n'ont pas été qu'une succession de palmiers sur fond de coucher de soleil.
+
+D'après : La Croix, Emmanuelle Lucas, 1er octobre 2019.`;
+
+export const RADIO_31 = `Le secret, c'est l'anticipation. Établir ses menus pour la semaine et consacrer un soir à préparer plusieurs plats est une méthode particulièrement adaptée aux célibataires. C'est aussi retrouver l'art d'accommoder les restes, qu'on appelle aujourd'hui le slash cooking.
+
+Le congélateur est l'allié du solo. Savez-vous que la soupe ou le camembert se congèlent ? Un bouillon de pot-au-feu congelé, réchauffé en 5 minutes, parfumera des ravioles ou sera utilisé pour pocher un poisson. Les sauces tomate, crème citron… peuvent être coulées dans un bac à glaçons, chaque compartiment correspondant à une portion. Des bananes coupées en cubes et congelées, mixées avec un yaourt, feront un délicieux sorbet.
+
+Garnissez vos placards d'une base gourmande et d'aides culinaires : huiles parfumées noix, sésame, chanvre…, moutardes, épices et herbes aromatiques. Saupoudrez les carottes crues d'estragon ou les carottes cuites de curry par exemple ; votre poisson, de ciboulette ou de curcuma. Les fruits secs, graines de courge, de lin, pignons de pin, etc., améliorent le quotidien, introduisent du croquant. Des tomates séchées en bocal, mixées, deviennent un pesto minute. La cuisine est un jeu. Plus on pratique, plus on prend du plaisir à marier les saveurs, les textures… Faites simple et savourez.
+
+Certains desserts se réalisent en 10 minutes, tel le pavlova, une meringue émiettée dans un bol, des fruits et une crème chantilly, ou une crème au lait d'amande avec des graines de chia.
+
+Quand on s'y met, cela devient grisant. Le bénéfice d'une cuisine plus saine, sans conservateurs, se fait vite ressentir : on dort mieux, on est plus en forme, c'est un cercle vertueux. Votre plat réchauffe doucement, ce qui éveille les sens et met en appétit. Soignez l'art de la table, lâchez les écrans et savourez… Cuisiner revient à prendre soin de soi et nourrit l'estime de soi.
+
+D'après : La Vie n° 3872, 14 novembre 2019.`;
+
+export const RADIO_32 = `Conformément aux dispositions du règlement n° 2016/679, dit règlement général sur la protection des données (RGPD), vous disposez des droits suivants sur vos données et afin de vous assurer que OUI.sncf respecte ses engagements.
+
+• Droit d'accès : vous avez la possibilité de nous solliciter afin de savoir de quelles données OUI.sncf dispose à votre sujet.
+
+• Droit de correction et d'effacement : vous avez la possibilité de corriger les données vous concernant et de demander l'effacement.
+
+• Droit d'opposition : vous avez la possibilité de vous opposer à ce que OUI.sncf réalise un certain nombre de traitements.
+
+• Droit à la portabilité : vous avez la possibilité de demander à OUI.sncf que vous soient transmises les données vous concernant, données d'identification et de commande exclusivement, sous un format électronique fichier csv.
+
+Il est toutefois rappelé que l'exercice de ces droits n'est pas absolu, et peut être limité pour des motifs d'intérêt légitime, litige clients, ou légaux.
+
+Comment puis-je exercer mes droits ?
+
+Droits d'accès, de correction, d'effacement et à la portabilité :
+Si vous disposez d'un compte client, vous pouvez procéder à la plupart de ces opérations directement en vous connectant à votre compte client.
+
+Sinon, vous avez la possibilité d'envoyer vos demandes au service clients de OUI.sncf par le formulaire électronique suivant ou par courrier à l'adresse suivante : Service Clients OUI.sncf – 2, place de la Défense – CNIT 1 – BP 440 – 92053 Paris La Défense Cedex.
+
+Droit d'opposition :
+Vous pouvez exercer votre droit d'opposition des manières suivantes :
+
+• Pour les newsletters commerciales : en cliquant sur le lien de désinscription mentionné dans les newsletters qui vous sont adressées : OUI.sncf s'engage alors à ne plus vous adresser de newsletters commerciales.
+
+• Pour la personnalisation et les cookies : en utilisant le dispositif de gestion des cookies mis à votre disposition sur oui.sncf/guide/vie-privee-cookies.
+
+• Pour toute autre demande : en adressant vos demandes au service clients OUI.sncf par le formulaire électronique suivant ou par courrier à l'adresse suivante : Service Clients OUI.sncf – 2, place de la Défense – CNIT 1 – BP 440 – 92053 Paris La Défense Cedex.
+
+D'après : oui.sncf/guide/droits.`;

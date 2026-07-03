@@ -4,7 +4,7 @@ import {
   RADIO_1, RADIO_2, RADIO_3, RADIO_4, RADIO_5, RADIO_6, RADIO_7, RADIO_8, RADIO_9, RADIO_10,
   RADIO_11, RADIO_12, RADIO_13, RADIO_14, RADIO_15, RADIO_16, RADIO_17, RADIO_18, RADIO_19, RADIO_20,
   RADIO_21, RADIO_22, RADIO_23, RADIO_24, RADIO_25, RADIO_26, RADIO_27, RADIO_28,
-  RADIO_29, RADIO_30,
+  RADIO_29, RADIO_30, RADIO_31, RADIO_32,
 } from "./co-audio-avance-radio";
 
 function avanceItem(category: "conversation" | "radio", activity: string, filename: string, transcript?: string): COAudioItem {
@@ -203,9 +203,6 @@ La vitesse, ça se contrôle !
 
 D'après : « La vitesse – La vitesse ça se contrôle », Plaquette élaborée dans le cadre du Plan Départemental d'Action de Sécurité Routière de l'Allier – Préfecture de l'Allier – www.equipement.gouv.fr`;
 
-function placeholderRadio(n: number) {
-  return `Transcription émission de radio ${n} — à compléter.`;
-}
 
 const RADIOS: Array<[string, string]> = [
   ["1", RADIO_1], ["2", RADIO_2], ["3", RADIO_3], ["4", RADIO_4], ["5", RADIO_5],
@@ -214,7 +211,7 @@ const RADIOS: Array<[string, string]> = [
   ["16", RADIO_16], ["17", RADIO_17], ["18", RADIO_18], ["19", RADIO_19], ["20", RADIO_20],
   ["21", RADIO_21], ["22", RADIO_22], ["23", RADIO_23], ["24", RADIO_24], ["25", RADIO_25],
   ["26", RADIO_26], ["27", RADIO_27], ["28", RADIO_28], ["29", RADIO_29], ["30", RADIO_30],
-  ...Array.from({ length: 2 }, (_, i) => [String(i + 31), placeholderRadio(i + 31)] as [string, string]),
+  ["31", RADIO_31], ["32", RADIO_32],
 ];
 
 export const CO_AUDIO_GROUPS_AVANCE: COAudioGroup[] = [
