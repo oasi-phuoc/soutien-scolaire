@@ -17,7 +17,7 @@ function moduleStateLabel(state: "completed" | "in_progress" | "development" | "
 function ModuleStateBadge({ state }: { state: "completed" | "in_progress" | "development" | "locked" }) {
   return (
     <span
-      className="rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide"
+      className="shrink-0 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide"
       style={{
         background: state === "locked" ? "var(--color-bg-secondary)" : `color-mix(in srgb, ${ACCENT} 13%, transparent)`,
         color: state === "locked" ? "var(--color-text-secondary)" : ACCENT,
@@ -92,13 +92,11 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
                 >
                   <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                    <ModuleStateBadge state={moduleState} />
-                  </div>
-                  {m.description && <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">{m.description}</p>}
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                  {m.description && <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{m.description}</p>}
                 </div>
+                <ModuleStateBadge state={moduleState} />
                 {allUnavailable ? (
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
