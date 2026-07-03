@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -40,6 +40,7 @@ export function MediaPlayerBar({
   pauseAriaLabel = "Pause",
 }: MediaPlayerBarProps) {
   const speedMenuRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const isSeekingRef = useRef(false);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
 
@@ -54,47 +55,82 @@ export function MediaPlayerBar({
     return () => document.removeEventListener("mousedown", onPointerDown);
   }, [speedMenuOpen]);
 
+  const seekFromClientX = useCallback((clientX: number) => {
+    const bar = progressBarRef.current;
+    if (!bar) return;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+    onSeek(pct);
+  }, [onSeek]);
+
+  useEffect(() => {
+    function onPointerMove(event: PointerEvent) {
+      if (!isSeekingRef.current || !canSeek) return;
+      seekFromClientX(event.clientX);
+    }
+    function onPointerUp() {
+      isSeekingRef.current = false;
+    }
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
+    };
+  }, [canSeek, seekFromClientX]);
+
   const showPauseIcon = playing || waiting;
   const displayProgress = waiting ? 100 : progress;
 
   return (
     <div className="flex items-center gap-2 rounded-full border border-[var(--color-border-default)] bg-white px-2 py-2 shadow-sm">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85 active:scale-95"
-        style={{ background: ACCENT }}
-        aria-label={showPauseIcon ? pauseAriaLabel : paused ? "Reprendre" : playAriaLabel}
-      >
-        {showPauseIcon ? (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <rect x="5" y="4" width="4" height="16" rx="1" />
-            <rect x="15" y="4" width="4" height="16" rx="1" />
-          </svg>
-        ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-            <path d="M6 4l14 8-14 8V4z" />
-          </svg>
-        )}
-      </button>
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex h-10 w-10 shrink-0 items-center justify-center self-start rounded-full text-white transition-opacity hover:opacity-85 active:scale-95"
+          style={{ background: ACCENT }}
+          aria-label={showPauseIcon ? pauseAriaLabel : paused ? "Reprendre" : playAriaLabel}
+        >
+          {showPauseIcon ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <rect x="5" y="4" width="4" height="16" rx="1" />
+              <rect x="15" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M6 4l14 8-14 8V4z" />
+            </svg>
+          )}
+        </button>
 
-      <input
-        type="range"
-        min={0}
-        max={100}
-        step={0.1}
-        value={displayProgress}
-        disabled={!canSeek}
-        onChange={(event) => onSeek(Number(event.target.value))}
-        onPointerDown={() => { isSeekingRef.current = true; }}
-        onPointerUp={() => { isSeekingRef.current = false; }}
-        onPointerCancel={() => { isSeekingRef.current = false; }}
-        className="h-2 min-w-0 flex-1 cursor-pointer appearance-none rounded-full disabled:cursor-default disabled:opacity-50"
-        style={{ accentColor: ACCENT }}
-        aria-label="Progression audio"
-      />
+        <div
+          ref={progressBarRef}
+          role="slider"
+          aria-label="Progression audio"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(displayProgress)}
+          aria-disabled={!canSeek}
+          className={`relative h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-accent-comm)]/25 ${
+            canSeek ? "cursor-pointer" : "cursor-default opacity-50"
+          }`}
+          onPointerDown={(event) => {
+            if (!canSeek) return;
+            isSeekingRef.current = true;
+            seekFromClientX(event.clientX);
+          }}
+        >
+          <div
+            className="absolute inset-y-0 left-0 rounded-full transition-[width] duration-75 ease-linear"
+            style={{ width: `${displayProgress}%`, background: ACCENT }}
+          />
+        </div>
+      </div>
 
-      <div className="relative shrink-0" ref={speedMenuRef}>
+      <div className="relative shrink-0 self-center" ref={speedMenuRef}>
         <button
           type="button"
           onClick={() => setSpeedMenuOpen((open) => !open)}
@@ -132,7 +168,7 @@ export function MediaPlayerBar({
       <button
         type="button"
         onClick={onRestart}
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)] active:scale-95"
+        className="flex h-8 w-8 shrink-0 self-center items-center justify-center rounded-full text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)] active:scale-95"
         aria-label="Recommencer"
         title="Recommencer"
       >
