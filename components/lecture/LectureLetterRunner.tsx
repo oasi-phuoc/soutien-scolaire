@@ -28,6 +28,13 @@ import {
 } from "@/lib/utils/complex-grapheme";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
+import {
+  ALL_TOOL_WORDS,
+  monosyllablePool,
+  multisyllablePool,
+  randomWordsWithGrapheme,
+  wordsPoolForLessonGrid,
+} from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: LetterData;
@@ -207,19 +214,22 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
   );
 });
 
-const ComplexWordSpotter = forwardRef<WordSpotterHandle, { words: string[]; target: string; isUppercase: boolean }>(
-  function ComplexWordSpotter({ words, target, isUppercase }, ref) {
+const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUppercase: boolean }>(
+  function ComplexWordSpotter({ target, isUppercase }, ref) {
   const targets = complexTargets(target);
-  // Only words up to 10 letters fit on a single line; longer ones wrap, so drop them.
-  const pool = words.filter((w) => w.length <= 10);
-  const VISIBLE = Math.min(8, pool.length);
-  const [selectedWords, setSelectedWords] = useState(() => shuffle(pool).slice(0, VISIBLE));
-  const displayedWords = selectedWords.map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const VISIBLE = 8;
+  const buildWords = () =>
+    randomWordsWithGrapheme(target, 20)
+      .filter((w) => w.length <= 10)
+      .slice(0, VISIBLE)
+      .map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
+  const [selectedWords, setSelectedWords] = useState(buildWords);
+  const displayedWords = selectedWords;
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
 
   function reset() {
-    setSelectedWords(shuffle(pool).slice(0, VISIBLE));
+    setSelectedWords(buildWords());
     setStates({});
     setValidated(false);
   }
@@ -911,17 +921,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     }
     if (data.type === "monosyllable" || data.type === "multisyllable") {
       const isMulti = data.type === "multisyllable";
-      // Evaluation step. Multisyllable (L8): 25 words / 5 min from the pool.
-      // Monosyllable (L6): 30 words / 5 min from the combined pool.
+      const evalPool = isMulti
+        ? multisyllablePool(2, null)
+        : data.letterLower === "outils"
+          ? ALL_TOOL_WORDS
+          : monosyllablePool();
+      // Evaluation step. Multisyllable (L8): 25 words / 5 min. Monosyllable (L6): 30 words / 5 min.
       if (step.key === "word-eval") {
-        const pool = isMulti
-          ? (data.grids.find((g) => g.key === "review")?.items ?? data.grids.flatMap((g) => g.items))
-          : Array.from(new Set(data.grids.flatMap((g) => g.items)));
-        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={pool} timerSeconds={300} sampleSize={isMulti ? 25 : 30} isEval />;
+        return <WordPronounceGrid key={k} ref={pronounceGridRef} words={evalPool} timerSeconds={300} sampleSize={isMulti ? 25 : 30} isEval />;
       }
-      // Monosyllable timed reading step (L6): 15 words / 2 min from the combined pool.
+      // Monosyllable timed reading step (L6): 15 words / 2 min.
       if (step.key === "ms-review") {
-        const pool = Array.from(new Set(data.grids.flatMap((g) => g.items)));
+        const pool = data.letterLower === "outils" ? ALL_TOOL_WORDS : monosyllablePool();
         return (
           <WordPronounceGrid
             key={k}
@@ -936,6 +947,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         );
       }
       const grid = data.grids.find((entry) => entry.key === step.key) ?? data.grids[0]!;
+      const pool = wordsPoolForLessonGrid(data.type, data.letterLower, grid.key);
       // L6 (monosyllable) and L8 (multisyllable) word steps use the mic/word/audio rows.
       // L8 grids sample 10 random words; the "review" grid is also timed (2 min).
       // L6 grids show each unique word once (refresh re-shuffles the order).
@@ -954,7 +966,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         <WordPronounceGrid
           key={k}
           ref={pronounceGridRef}
-          words={grid.items}
+          words={pool}
           timerSeconds={timed ? 120 : undefined}
           sampleSize={isMulti ? 10 : undefined}
           title={title}
@@ -995,9 +1007,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "complex-grid-lower":
           return <ComplexGraphemeGrid key={k} ref={gridRef} target={data.letter} isUppercase={false} />;
         case "complex-word-upper":
-          return <ComplexWordSpotter key={k} ref={wordRef} words={data.upperWords} target={data.letter} isUppercase={true} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
         case "complex-word-lower":
-          return <ComplexWordSpotter key={k} ref={wordRef} words={data.lowerWords} target={data.letter} isUppercase={false} />;
+          return <ComplexWordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={false} />;
         case "sound-image":
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
         case "sound-audio":
@@ -1005,7 +1017,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         case "complex-syllables-cv":
           return <ComplexSyllableGrid key={k} ref={pronounceGridRef} target={data.letter} mode="cv" />;
         case "pronounce-complex":
-          return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+          return (
+            <PronunciationChain
+              key={k}
+              ref={pronounceRef}
+              phoneme={data.phoneme}
+              chain={randomWordsWithGrapheme(data.letter, 8).map((word) => ({
+                phoneme: data.letter,
+                syllable: word,
+                word,
+              }))}
+            />
+          );
         default:
           return null;
       }

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
-import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
+import { randomWordsWithLetter, randomSoundItems, randomWordsWithGrapheme, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { getWordAssetSlug, playWord } from "@/lib/utils/audio";
 import {
@@ -846,17 +846,18 @@ function ComplexGridExercise({
 
 // Spot the grapheme inside words (1 pt per fully-correct line × 4 lines).
 function ComplexWordsExercise({
-  label, upperWords, lowerWords, onValidated, shouldValidate,
-}: { label: string; upperWords: string[]; lowerWords: string[]; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  label, onValidated, shouldValidate,
+}: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const targets = useMemo(() => complexTargets(label), [label]);
   const [words] = useState(() => {
-    const up = shuffle(upperWords.filter((w) => w.length <= 10));
-    const low = shuffle(lowerWords.filter((w) => w.length <= 10));
+    const raw = randomWordsWithGrapheme(label, 20).filter((w) => w.length <= 10);
+    const up = shuffle(raw).slice(0, 2);
+    const low = shuffle(raw).slice(2, 4);
     return [
       (up[0] ?? label).toUpperCase(),
-      (low[0] ?? label.toLowerCase()).toLowerCase(),
+      (low[0] ?? label).toLowerCase(),
       (up[1] ?? label).toUpperCase(),
-      (low[1] ?? label.toLowerCase()).toLowerCase(),
+      (low[1] ?? label).toLowerCase(),
     ];
   });
   const [states, setStates] = useState<Record<string, CellState>>({});
@@ -1160,13 +1161,21 @@ function ResultsScreen({ scores, snapshots, rows, maxScore }: { scores: (number 
 export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange, onEvalNavigateReady }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const isComplex = data.type === "complex-sound";
+  const [complexPronChain] = useState(() =>
+    data.type === "complex-sound"
+      ? randomWordsWithGrapheme(data.letter, 8).map((word) => ({
+          phoneme: data.letter,
+          syllable: word,
+          word,
+        }))
+      : [],
+  );
   const evalSteps = useMemo(
     () => (data.type === "complex-sound" ? COMPLEX_EVAL_STEPS : data.type === "consonant" ? CONSONANT_EVAL_STEPS : BASE_EVAL_STEPS),
     [data.type],
   );
   // Word pools for the complex-sound spotting exercise (single grapheme lessons).
-  const complexUpperWords = data.type === "complex-sound" ? data.upperWords : [];
-  const complexLowerWords = data.type === "complex-sound" ? data.lowerWords : [];
+  const pronounceChain = isComplex ? complexPronChain : pronunciationChain;
   const exerciseSteps = useMemo(
     () => evalSteps.filter((entry): entry is Exclude<EvalStep, "results"> => entry !== "results"),
     [evalSteps],
@@ -1329,7 +1338,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
             </div>
             <div hidden={isResults || stepIdx !== 1}>
               {isComplex
-                ? <ComplexWordsExercise label={letter} upperWords={complexUpperWords} lowerWords={complexLowerWords} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />
+                ? <ComplexWordsExercise label={letter} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />
                 : <WordsExercise letter={letter} letterLower={letterLower} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />}
             </div>
             <div hidden={isResults || stepIdx !== 2}><SoundImageExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(2, s, snapshot)} shouldValidate={validateTarget === 2 || validateTarget === -1} /></div>
@@ -1341,7 +1350,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                     ? <ComplexSyllablesExercise label={letter} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />
                     : <SyllablesMixedExercise letter={letterLower} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />}
                 </div>
-                <div hidden={isResults || stepIdx !== 5}><PronounceExercise chain={pronunciationChain} onValidated={(s, snapshot) => recordScore(5, s, snapshot)} shouldValidate={validateTarget === 5 || validateTarget === -1} /></div>
+                <div hidden={isResults || stepIdx !== 5}><PronounceExercise chain={pronounceChain} onValidated={(s, snapshot) => recordScore(5, s, snapshot)} shouldValidate={validateTarget === 5 || validateTarget === -1} /></div>
               </>
             ) : (
               <div hidden={isResults || stepIdx !== 4}><PronounceExercise chain={pronunciationChain} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} /></div>

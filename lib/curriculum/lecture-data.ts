@@ -1437,10 +1437,6 @@ function grid25(items: string[]): string[] {
   return out;
 }
 
-function uniqueGrid(items: string[]): string[] {
-  return Array.from(new Set(items));
-}
-
 function syllableLesson(vowel: (typeof SIMPLE_VOWELS)[number]): SyllableLessonData {
   const upperV = vowel.toUpperCase();
   // CV (consonne + voyelle) : toutes les consonnes.
@@ -1475,10 +1471,10 @@ export const TOOL_WORDS_LESSON: MonosyllableLessonData = {
   phoneme: "",
   title: "Mots-outils",
   grids: [
-    { key: "articles", label: "Articles et déterminants", items: uniqueGrid(["le", "la", "les", "un", "une", "des", "ce", "cet", "cette", "ces"]) },
-    { key: "possessifs", label: "Possessifs", items: uniqueGrid(["mon", "ma", "mes", "ton", "ta", "tes", "son", "sa", "ses", "notre", "nos", "votre", "vos", "leur", "leurs"]) },
-    { key: "pronoms-sujets", label: "Pronoms sujets", items: grid25(["je", "tu", "il", "elle", "on", "nous", "vous", "ils", "elles"]) },
-    { key: "pronoms-complements", label: "Pronoms compléments", items: grid25(["me", "te", "lui", "moi", "toi", "eux"]) },
+    { key: "articles", label: "Articles et déterminants", items: [] },
+    { key: "possessifs", label: "Possessifs", items: [] },
+    { key: "pronoms-sujets", label: "Pronoms sujets", items: [] },
+    { key: "pronoms-complements", label: "Pronoms compléments", items: [] },
   ],
 };
 
@@ -1489,16 +1485,16 @@ export const MONOSYLLABLE_LESSON: MonosyllableLessonData = {
   phoneme: "",
   title: "Mots courants",
   grids: [
-    { key: "existants-1", label: "Mots déjà appris", items: grid25(["sac", "bol", "mur", "fil", "riz", "bus", "sel", "lac", "pot", "vis", "chat", "robe", "pile", "lune", "balle", "porte", "table", "vase", "moto", "tasse", "nez", "dos", "main", "pain", "jour"]) },
-    { key: "existants-2", label: "Lecture rapide", items: grid25(["nuit", "fleur", "train", "bois", "roi", "chat", "loup", "bras", "pois", "gris", "fort", "court", "grand", "petit", "rond", "sac", "mur", "bol"]) },
-    { key: "personnes", label: "Personnes et famille", items: grid25(["homme", "femme", "fille", "gars", "père", "mère", "frère", "sœur", "fils"]) },
-    { key: "lieux-transports", label: "Lieux et transports", items: grid25(["rue", "ville", "bus", "train", "taxi", "tram", "gare", "poste", "parc", "bar", "classe", "salle", "hall", "pont", "coin"]) },
-    { key: "maison", label: "Maison et objets", items: grid25(["clé", "lit", "sac", "table", "chaise", "porte", "mur", "sol", "verre", "bol", "plat", "four", "lampe", "douche", "bain", "savon", "livre"]) },
-    { key: "aliments", label: "Aliments", items: grid25(["pain", "riz", "lait", "eau", "thé", "jus", "sel", "soupe", "œuf", "fruit", "pomme", "poire", "noix", "miel"]) },
-    { key: "corps", label: "Corps", items: grid25(["cour", "tête", "main", "bras", "pied", "dos", "nez", "œil", "yeux", "dent", "bouche", "cou", "peau", "sang"]) },
-    { key: "vetements-couleurs", label: "Vêtements et couleurs", items: grid25(["pull", "jean", "robe", "jupe", "short", "gant", "botte", "bleu", "blanc", "noir", "vert", "gris", "brun", "rouge", "jaune", "rose"]) },
-    { key: "temps-nature", label: "Temps et nature", items: grid25(["jour", "nuit", "soir", "mois", "an", "heure", "temps", "date", "fin", "fois", "air", "eau", "feu", "terre", "ciel", "mer", "lac", "vent", "pluie", "neige", "fleur", "bois"]) },
-    { key: "qualites", label: "Adjectifs", items: grid25(["bon", "beau", "grand", "petit", "gros", "chaud", "froid", "neuf", "vieux", "jeune", "propre", "sale", "plein", "vide", "fort", "doux", "dur", "lourd"]) },
+    { key: "existants-1", label: "Mots déjà appris", items: [] },
+    { key: "existants-2", label: "Lecture rapide", items: [] },
+    { key: "personnes", label: "Personnes et famille", items: [] },
+    { key: "lieux-transports", label: "Lieux et transports", items: [] },
+    { key: "maison", label: "Maison et objets", items: [] },
+    { key: "aliments", label: "Aliments", items: [] },
+    { key: "corps", label: "Corps", items: [] },
+    { key: "vetements-couleurs", label: "Vêtements et couleurs", items: [] },
+    { key: "temps-nature", label: "Temps et nature", items: [] },
+    { key: "qualites", label: "Adjectifs", items: [] },
   ],
 };
 
@@ -1506,10 +1502,8 @@ function complexSoundLesson(
   id: string,
   title: string,
   phoneme: string,
-  rows: [string, string[]][],
   exampleImageWord?: string,
 ): ComplexSoundLessonData {
-  const baseWords = rows.flatMap(([, items]) => items);
   const upper = title.split(" / ")[0]!.replace("/", "");
   const lower = upper.toLowerCase();
   const distractors = ["la", "ri", "ma", "to", "be", "su", "fe", "po", "di", "ve"];
@@ -1520,160 +1514,36 @@ function complexSoundLesson(
     letterLower: id,
     phoneme,
     title,
-    exampleWord: imgWord ?? (baseWords[0] ?? title.toLowerCase()),
+    exampleWord: imgWord ?? lower,
     exampleImagePath: imgWord ? `/assets/words/img/${imgWord}.webp` : undefined,
     upperGrid: grid25([upper, ...distractors.map((s) => s.toUpperCase())]),
     lowerGrid: grid25([lower, ...distractors]),
-    upperWords: baseWords.map((word) => word.toUpperCase()),
-    lowerWords: baseWords.map((word) => word.toLowerCase()),
-    pronunciationChain: baseWords.slice(0, 8).map((word) => ({
-      phoneme: title,
-      syllable: word,
-      word,
-    })),
-    grids: rows.map(([label, items], index) => ({
-      key: `ex${index + 1}`,
-      label: `Exercice ${index + 1} - ${label}`,
-      items: grid25(items),
-    })),
+    upperWords: [],
+    lowerWords: [],
+    pronunciationChain: [],
+    grids: [],
   };
 }
 
 export const COMPLEX_SOUND_LESSONS: ComplexSoundLessonData[] = [
-  complexSoundLesson("ou", "OU", "/u/", [
-    ["Lis les mots avec ou", ["roue", "loup", "jour", "four", "cour", "souris", "bouton", "mouton", "poule", "route"]],
-    ["Retrouve le son ou", ["sou", "fou", "tout", "doux", "cou", "trou", "clou", "rouge", "chou", "flou"]],
-    ["Lecture melangee", ["couteau", "moulin", "bonjour", "soupe", "gouter", "journée", "pousser", "douze", "mouche", "coussin"]],
-  ], "loup"),
-  complexSoundLesson("an-en", "AN / EN", "/ɑ̃/", [
-    ["Lis an et en", ["sans", "dans", "grand", "blanc", "vent", "temps", "enfant", "maman", "ruban", "avant"]],
-    ["Avec m devant b ou p", ["jambe", "lampe", "champ", "camp", "tambour", "tempête", "bandeau", "banquet", "encens", "landau"]],
-    ["Lecture melangee", ["manger", "orange", "dimanche", "chanson", "lent", "cent", "dent", "planche", "fontaine", "pantalon"]],
-  ], "maman"),
-  complexSoundLesson("in-ain", "IN / AIN", "/ɛ̃/", [
-    ["Lis in et ain", ["main", "pain", "bain", "train", "lapin", "matin", "jardin", "cousin", "chemin", "vin"]],
-    ["Avec m devant b ou p", ["timbre", "simple", "grimpe", "pinson", "pintade", "poitrine", "mandarin", "incendie", "imprimante", "impasse"]],
-    ["Lecture melangee", ["demain", "soudain", "plein", "frein", "peint", "ceinture", "vingt", "fin", "linge", "sapin"]],
-  ], "lapin"),
-  complexSoundLesson("on", "ON", "/ɔ̃/", [
-    ["Lis le son on", ["pont", "rond", "son", "bon", "don", "lion", "melon", "ballon", "bidon", "cordon"]],
-    ["Avec m devant b ou p", ["ombre", "pompe", "nombre", "trompette", "plomb", "bonbon", "front", "jambon", "wagon", "tampon"]],
-    ["Lecture melangee", ["maison", "poisson", "garçon", "cochon", "mouton", "bouton", "crayon", "salon", "piston", "carton"]],
-  ], "ballon"),
-  complexSoundLesson("au-eau", "AU / EAU", "/o/", [
-    ["Lis au", ["jaune", "chaud", "saut", "haut", "pause", "gauche", "sauce", "saucisse", "chausson", "faucon"]],
-    ["Lis eau", ["eau", "bateau", "chapeau", "gâteau", "oiseau", "manteau", "cadeau", "rideau", "bureau", "tableau"]],
-    ["Lecture melangee", ["beau", "nouveau", "chaussure", "seau", "morceau", "autobus", "anneau", "taupe", "gaufre", "chaudron"]],
-  ], "bateau"),
-  complexSoundLesson("oi", "OI", "/wa/", [
-    ["Lis le son oi", ["bois", "noix", "doigt", "poire", "poireau", "moineau", "trois", "croix", "toile", "poil"]],
-    ["Lecture de mots", ["oiseau", "voiture", "boite", "poisson", "étoile", "miroir", "couloir", "ardoise", "foire", "croissant"]],
-    ["Lecture melangee", ["froid", "choix", "moitié", "boisson", "noisette", "poivron", "patinoire", "trottoir", "entonnoir", "avoine"]],
-  ], "oiseau"),
-  complexSoundLesson("ch", "CH", "/ʃ/", [
-    ["Lis ch", ["chat", "chien", "chou", "cheval", "chambre", "chaise", "chemise", "chapeau", "bouche", "mouche"]],
-    ["Lecture de mots", ["dimanche", "branche", "rocher", "chocolat", "chèvre", "chouette", "châtaigne", "chaussette", "cheminée", "chalet"]],
-    ["Lecture melangee", ["chaud", "chiffre", "machine", "chute", "chariot", "château", "chaudron", "charbon", "choucroute", "chimpanzé"]],
-  ], "chat"),
-  complexSoundLesson("ph", "PH", "/f/", [
-    ["Lis ph", ["photo", "phare", "phoque", "phrase", "téléphone", "pharmacie", "dauphin", "alphabet", "éléphant", "nénuphar"]],
-    ["Lecture de mots", ["saphir", "sphinx", "sphère", "amphore", "microphone", "pharaon", "phénix", "phonographe", "télégraphe", "triomphe"]],
-    ["Lecture melangee", ["orphée", "nymphéa", "ophrys", "chlorophylle", "alphonse", "orthophonie", "symphonie", "photographie", "graphite", "typhon"]],
-  ], "dauphin"),
-  complexSoundLesson("gn", "GN", "/ɲ/", [
-    ["Lis gn", ["montagne", "signe", "cygne", "peigne", "oignon", "agneau", "araignée", "champignon", "vigne", "gnou"]],
-    ["Lecture de mots", ["campagne", "champagne", "rossignol", "guignol", "trognon", "beignet", "espagnol", "cognac", "vignoble", "ligne"]],
-    ["Lecture melangee", ["poignet", "ognon", "campagnard", "campagnol", "agnelet", "vigneron", "montagnard", "poignée", "champenois", "montagnarde"]],
-  ], "montagne"),
-  complexSoundLesson("ill", "ILL", "/j/", [
-    ["Lis ill", ["fille", "bille", "quille", "grille", "vanille", "chenille", "gorille", "papillon", "jonquille", "famille"]],
-    ["Avec voyelle (ail, eil, ouil)", ["abeille", "soleil", "bouteille", "oreille", "paille", "médaille", "feuille", "fauteuil", "citrouille", "grenouille"]],
-    ["Lecture melangee", ["nouille", "rouille", "corbeille", "coquille", "réveil", "taille", "écureuil", "sommeil", "grillage", "vieillard"]],
-  ], "papillon"),
-  complexSoundLesson("ai-ei", "AI / EI", "/ɛ/", [
-    ["Lis ai", ["maison", "lait", "fraise", "chaise", "semaine", "balai", "palais", "chalet", "rail", "faisan"]],
-    ["Lis ei", ["baleine", "neige", "peigne", "reine", "treize", "seize", "beige", "pleine", "treille", "veille"]],
-    ["Lecture melangee", ["laine", "graine", "fontaine", "peinture", "ceinture", "raisin", "naissance", "craie", "caisse", "naïf"]],
-  ], "baleine"),
-  complexSoundLesson("eu-oeu", "EU / ŒU", "/ø/", [
-    ["Lis eu", ["feu", "jeu", "deux", "bleu", "cheveux", "jeudi", "fleur", "beurre", "neuf", "jeune"]],
-    ["Lis eur, eul, euf", ["pneu", "bleuet", "feutre", "gueule", "creuset", "feuillage", "euphorbe", "bleuets", "neveu", "euphonium"]],
-    ["Lis œu et melange", ["cœur", "sœur", "œuf", "nœud", "bœuf", "vœu", "cheveu", "liqueur", "feutrier", "bleuette"]],
-  ], "fleur"),
-  complexSoundLesson("ui", "UI", "/ɥi/", [
-    ["Lis ui", ["nuit", "fruit", "huit", "bruit", "puits", "cuir", "étui", "biscuit", "pluie", "juin"]],
-    ["Lecture de mots", ["cuisine", "cuivre", "truite", "buisson", "minuit", "bruine", "fuite", "circuit", "ruine", "suint"]],
-    ["Lecture melangee", ["juillet", "cuisinier", "cuirasse", "bruitage", "puise", "cuisson", "fruitier", "fluide", "cuirassier", "truie"]],
-  ], "nuit"),
-  complexSoundLesson("oin", "OIN", "/wɛ̃/", [
-    ["Lis oin", ["coin", "groin", "poing", "foin", "joint", "point", "pointe", "shampoing", "coing", "pointu"]],
-    ["Lecture de mots", ["pointu", "groin", "poing", "foin", "shampoing", "coin", "joint", "pointe", "point", "coing"]],
-    ["Lecture melangee", ["poignet", "appoint", "jointure", "coing", "pointu", "coin", "groin", "poing", "foin", "joint"]],
-  ], "groin"),
-  complexSoundLesson("ien", "IEN", "/jɛ̃/", [
-    ["Lis ien", ["chien", "gardien", "indien", "combien", "lien", "musicien", "magicien", "patient", "italien", "chilien"]],
-    ["Lecture de mots", ["colombien", "norvégien", "électricien", "pharmacien", "mécanicien", "parisien", "égyptien", "martien", "haitien", "mauricien"]],
-    ["Lecture melangee", ["australien", "canadien", "éthiopien", "julien", "damien", "fabien", "bactérien", "vivien", "adrien", "florien"]],
-  ], "chien"),
-  complexSoundLesson("un-um", "UN / UM", "/œ̃/", [
-    ["Lis un", ["brun", "lundi", "parfum", "album", "un", "chacun", "aucun", "commun", "humble", "brun"]],
-    ["Lis um (parfum)", ["parfum", "album", "humble", "lundi", "chacun", "aucun", "commun", "un", "brun", "album"]],
-    ["Lecture melangee", ["brun", "lundi", "parfum", "album", "humble", "chacun", "aucun", "commun", "un", "parfum"]],
-  ], "brun"),
-  complexSoundLesson("tion", "TION", "/sjɔ̃/", [
-    ["Lis tion", ["natation", "addition", "potion", "lotion", "station", "nation", "fiction", "action", "portion", "mention"]],
-    ["Lecture de mots", ["attention", "récréation", "animation", "invitation", "décoration", "invention", "tradition", "émotion", "attraction", "plantation"]],
-    ["Lecture melangee", ["télévision", "nutrition", "pollution", "question", "partition", "location", "fondation", "rotation", "collection", "explosion"]],
-  ], "natation"),
+  complexSoundLesson("ou", "OU", "/u/", "loup"),
+  complexSoundLesson("an-en", "AN / EN", "/ɑ̃/", "maman"),
+  complexSoundLesson("in-ain", "IN / AIN", "/ɛ̃/", "lapin"),
+  complexSoundLesson("on", "ON", "/ɔ̃/", "ballon"),
+  complexSoundLesson("au-eau", "AU / EAU", "/o/", "bateau"),
+  complexSoundLesson("oi", "OI", "/wa/", "oiseau"),
+  complexSoundLesson("ch", "CH", "/ʃ/", "chat"),
+  complexSoundLesson("ph", "PH", "/f/", "dauphin"),
+  complexSoundLesson("gn", "GN", "/ɲ/", "montagne"),
+  complexSoundLesson("ill", "ILL", "/j/", "papillon"),
+  complexSoundLesson("ai-ei", "AI / EI", "/ɛ/", "baleine"),
+  complexSoundLesson("eu-oeu", "EU / ŒU", "/ø/", "fleur"),
+  complexSoundLesson("ui", "UI", "/ɥi/", "nuit"),
+  complexSoundLesson("oin", "OIN", "/wɛ̃/", "groin"),
+  complexSoundLesson("ien", "IEN", "/jɛ̃/", "chien"),
+  complexSoundLesson("un-um", "UN / UM", "/œ̃/", "brun"),
+  complexSoundLesson("tion", "TION", "/sjɔ̃/", "natation"),
 ];
-
-// ─── Pools de mots pour L8 (multisyllabes) ─────────────────────────────────────
-// Utilisés par la step 4 (Lecture rapide) et l'évaluation, qui tirent un
-// échantillon aléatoire du pool combiné.
-
-export const MS_TWO_SYLLABLE_POOL: string[] = [
-  "maison", "bateau", "gâteau", "chapeau", "couteau", "rideau", "château", "oiseau", "cadeau", "morceau",
-  "pinceau", "bureau", "marteau", "robot", "vélo", "moto", "panda", "tomate", "carotte", "salade",
-  "banane", "orange", "fromage", "valise", "souris", "chemin", "jardin", "lapin", "sapin", "requin",
-  "dauphin", "poussin", "raisin", "coussin", "dessin", "matin", "copain", "ballon", "bonbon", "garçon",
-  "savon", "citron", "mouton", "bouton", "wagon", "dragon", "melon", "salon", "jambon", "crayon",
-  "rayon", "avion", "camion", "cheval", "journal", "canard", "fourmi", "tapis", "radis", "chemise",
-  "surprise", "ceinture", "voiture", "peinture", "lecture", "facture", "nature", "figure", "mesure", "chaussure",
-  "tortue", "statue", "tableau", "drapeau", "manteau",
-];
-
-export const MS_THREE_SYLLABLE_POOL: string[] = [
-  "ananas", "animal", "papillon", "domino", "éléphant", "chocolat", "hôpital", "escalier", "parapluie", "téléphone",
-  "cinéma", "caméra", "pyjama", "kimono", "numéro", "horizon", "caleçon", "hérisson", "toboggan", "pélican",
-  "océan", "capitaine", "magasin", "magazine", "parasol", "parachute", "biberon", "calepin", "médecin", "crocodile",
-  "kangourou", "tabouret", "araignée", "cheminée", "dromadaire", "perroquet", "escargot", "koala", "patinage", "jardinage",
-  "bricolage", "maquillage", "bavardage", "nettoyage", "ramassage", "arrosage", "décollage", "paysage", "pantalon", "dentifrice",
-  "ascenseur", "professeur", "directeur", "inspecteur", "spectateur", "aviateur", "radiateur", "jardinier", "cuisinier", "pâtissier",
-  "policier", "infirmier", "boulanger", "charcutier", "ouvrier", "écolier", "chevalier", "calendrier", "saladier", "épervier",
-  "balançoire", "trampoline", "mandarine", "clémentine", "aubergine",
-];
-
-export const MS_FOUR_PLUS_SYLLABLE_POOL: string[] = [
-  "ordinateur", "aspirateur", "calculatrice", "animateur", "illustrateur", "commentateur", "explorateur", "navigateur", "opérateur", "incubateur",
-  "congélateur", "ventilateur", "agitateur", "imitateur", "décorateur", "dessinateur", "éducateur", "libérateur", "modérateur", "générateur",
-  "réalisateur", "accélérateur", "hélicoptère", "réfrigérateur", "dictionnaire", "température", "bibliothèque", "intercalaire", "anniversaire", "vétérinaire",
-  "propriétaire", "imperméable", "automobile", "locomotive", "motocyclette", "aérodrome", "aéroport", "téléviseur", "télévision", "hippopotame",
-  "rhinocéros", "information", "opération", "animation", "récréation", "décoration", "fabrication", "multiplication", "explication", "application",
-  "imagination", "respiration", "observation", "préparation", "réparation", "célébration", "génération", "population", "éducation", "situation",
-  "alimentation", "administration", "communication", "organisation", "présentation", "récupération", "transformation", "décongélation", "climatisation", "vaccination",
-  "pâtisserie", "boulangerie", "épicerie", "bijouterie", "charcuterie", "quincaillerie", "parfumerie", "université", "électricité", "curiosité",
-  "personnalité", "nationalité", "généralité", "publicité", "activité", "responsabilité", "appartement", "gouvernement", "médicament", "supermarché",
-  "chocolatier", "mathématiques", "géographie", "photographie", "biographie", "américain", "dégustation", "exploration", "invitation", "réservation",
-  "atterrissage", "déménagement", "développement", "environnement", "remerciement", "rétablissement", "ralentissement", "refroidissement", "agrandissement", "applaudissement",
-  "vocabulaire", "itinéraire", "millionnaire", "questionnaire", "extraordinaire", "imaginaire", "abécédaire", "publicitaire", "documentaire", "élémentaire",
-  "alimentaire", "supplémentaire", "parlementaire", "réglementaire", "complémentaire", "géographique", "catastrophique", "scientifique", "électronique", "informatique",
-  "mathématique", "automatique", "aromatique", "antipathique", "pédagogique", "biologique", "écologique", "technologique", "psychologique", "chronologique",
-  "météorologique", "géométrique", "kilométrique", "électricien", "informaticien", "mathématicien", "collectionneur", "ambassadeur", "consommateur", "encyclopédie",
-];
-
-export const MULTISYLLABLE_POOL: string[] = Array.from(
-  new Set([...MS_TWO_SYLLABLE_POOL, ...MS_THREE_SYLLABLE_POOL, ...MS_FOUR_PLUS_SYLLABLE_POOL]),
-);
 
 export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
   type: "multisyllable",
@@ -1682,10 +1552,10 @@ export const MULTISYLLABLE_LESSON: MultisyllableLessonData = {
   phoneme: "",
   title: "Mots avec plusieurs syllabes",
   grids: [
-    { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: MS_TWO_SYLLABLE_POOL },
-    { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: MS_THREE_SYLLABLE_POOL },
-    { key: "four", label: "Exercice 3 - Mots plus longs", items: MS_FOUR_PLUS_SYLLABLE_POOL },
-    { key: "review", label: "Exercice 4 - Lecture rapide", items: MULTISYLLABLE_POOL },
+    { key: "two", label: "Exercice 1 - Mots de deux syllabes", items: [] },
+    { key: "three", label: "Exercice 2 - Mots de trois syllabes", items: [] },
+    { key: "four", label: "Exercice 3 - Mots plus longs", items: [] },
+    { key: "review", label: "Exercice 4 - Lecture rapide", items: [] },
   ],
 };
 
