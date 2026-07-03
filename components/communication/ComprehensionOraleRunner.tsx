@@ -9,6 +9,7 @@ import {
   type COAudioItem,
   type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
+import { getCoPartQuestions, type COQuestionTask } from "@/lib/curriculum/content/communication/co-questions";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   CommunicationIntroSection,
@@ -20,9 +21,7 @@ import {
 } from "@/components/communication/CommunicationEvalLayout";
 
 type COLevel = "base" | "moyen" | "avance";
-type ChoiceTask = { kind: "choice"; prompt: string; choices: string[]; correct: number };
-type FillTask = { kind: "fill"; prompt: string; answer: string; accept?: string[] };
-type QuestionTask = ChoiceTask | FillTask;
+type QuestionTask = COQuestionTask;
 type COPart = {
   id: COAudioCategory;
   title: string;
@@ -60,13 +59,16 @@ function audioLevelFor(level: COLevel): COAudioLevel {
   return level === "moyen" ? "moyen" : "base";
 }
 
-function makeParts(level: COLevel): COPart[] {
+function makeParts(level: COLevel, seed: number): COPart[] {
   const audioLevel = audioLevelFor(level);
-  return partInfoFor(level).map((part) => ({
-    ...part,
-    audioGroup: randomCoGroup(audioLevel, part.id),
-    questions: [],
-  }));
+  return partInfoFor(level).map((part) => {
+    const audioGroup = randomCoGroup(audioLevel, part.id);
+    return {
+      ...part,
+      audioGroup,
+      questions: getCoPartQuestions(audioGroup, part.points, `${seed}-${part.id}`),
+    };
+  });
 }
 
 function levelFromId(id: string): COLevel {
@@ -580,6 +582,102 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   );
 }
 
+function choiceLabel(task: Extract<QuestionTask, { kind: "choice" }>, index: number) {
+  return task.choices[index]?.label ?? "";
+}
+
+function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
+  return (
+    <div
+      className={`flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center font-semibold text-slate-500 ${compact ? "h-20 text-xs" : "h-24 text-sm"}`}
+      data-image-path={path}
+      title={path}
+    >
+      {label}
+    </div>
+  );
+}
+
+function ChoiceQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "choice" }>;
+  value: number | string | null;
+  onChange: (value: number) => void;
+  correction?: boolean;
+}) {
+  return (
+    <div className={task.image ? "grid grid-cols-3 gap-2" : "space-y-2"}>
+      {task.choices.map((choice, index) => {
+        const selected = value === index;
+        const correct = correction && index === task.correct;
+        const wrong = correction && selected && !correct;
+        return (
+          <button
+            key={`${choice.label}-${index}`}
+            type="button"
+            disabled={correction}
+            onClick={() => onChange(index)}
+            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center gap-1 text-center" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
+          >
+            {task.image && <ImagePlaceholder label={choice.label} path={choice.image} compact />}
+            <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function FillQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "fill" }>;
+  value: number | string | null;
+  onChange: (value: string) => void;
+  correction?: boolean;
+}) {
+  const ok = answerOk(task, value);
+  return (
+    <div className="space-y-1">
+      <input
+        type="text"
+        value={typeof value === "string" ? value : ""}
+        onChange={(event) => onChange(event.target.value)}
+        disabled={correction}
+        className="w-full border-0 border-b-2 bg-transparent pb-1 text-sm outline-none disabled:opacity-80"
+        style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
+      />
+      {correction && !ok && (
+        <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
+      )}
+    </div>
+  );
+}
+
+function RenderQuestion({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: QuestionTask;
+  value: number | string | null;
+  onChange: (value: number | string) => void;
+  correction?: boolean;
+}) {
+  if (task.kind === "fill") {
+    return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+  }
+  return <ChoiceQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+}
+
 function QuestionBlock({
   part,
   answers,
@@ -649,42 +747,17 @@ function QuestionBlock({
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
             <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
-            {question.kind === "choice" ? (
-              <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                {question.choices.map((choice, choiceIndex) => {
-                  const selected = answer === choiceIndex;
-                  const correct = readonly && choiceIndex === question.correct;
-                  return (
-                    <button
-                      key={choice}
-                      type="button"
-                      disabled={readonly}
-                      onClick={() => onAnswer(key, choiceIndex)}
-                      className="rounded-[var(--radius-sm)] border px-3 py-2 text-left text-sm transition-colors"
-                      style={{
-                        borderColor: correct ? INVERSE : selected ? ACCENT : "var(--color-border-default)",
-                        color: correct ? INVERSE : selected ? ACCENT : "var(--color-text-primary)",
-                        background: selected && !readonly ? `${ACCENT}14` : "white",
-                      }}
-                    >
-                      {choice}
-                    </button>
-                  );
-                })}
-              </div>
-            ) : (
-              <input
-                type="text"
-                disabled={readonly}
-                value={String(answer ?? "")}
-                onChange={(event) => onAnswer(key, event.target.value)}
-                className="mt-3 w-full border-0 border-b-2 bg-transparent px-1 py-2 text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-80"
-                style={{ borderColor: readonly && answerOk(question, answer) ? INVERSE : `${ACCENT}80` }}
+            <div className="mt-3">
+              <RenderQuestion
+                task={question}
+                value={answer}
+                onChange={(value) => onAnswer(key, value)}
+                correction={readonly}
               />
-            )}
+            </div>
             {readonly && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Réponse : {question.kind === "choice" ? question.choices[question.correct] : question.answer}
+                Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.answer}
               </p>
             )}
           </div>
@@ -698,7 +771,8 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
-  const parts = useMemo(() => makeParts(level), [level]);
+  const [sessionSeed] = useState(() => Date.now());
+  const parts = useMemo(() => makeParts(level, sessionSeed), [level, sessionSeed]);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
   const [currentId, setCurrentId] = useState(parts[0]!.id);

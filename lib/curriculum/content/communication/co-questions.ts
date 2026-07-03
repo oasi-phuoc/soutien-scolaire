@@ -1,0 +1,32 @@
+import type { COAudioGroup } from "./co-audio";
+import {
+  buildCoPartQuestions,
+  type COQuestionTask,
+  type COMultiQuestion,
+} from "./co-questions-helpers";
+import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
+import { CO_QUESTION_POOLS_BASE_OTHER } from "./co-questions-base-other";
+import { CO_QUESTION_POOLS_MOYEN } from "./co-questions-moyen";
+
+export type {
+  COFormatType,
+  COImageChoice,
+  COMultiQuestion,
+  COChoiceTask,
+  COFillTask,
+  COQuestionTask,
+  RawQ,
+} from "./co-questions-helpers";
+
+export { buildPool, buildCoPartQuestions, groupSlug } from "./co-questions-helpers";
+
+export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
+  ...CO_QUESTION_POOLS_BASE_MESSAGES,
+  ...CO_QUESTION_POOLS_BASE_OTHER,
+  ...CO_QUESTION_POOLS_MOYEN,
+};
+
+export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
+  const pool = CO_QUESTION_POOLS[group.id] ?? [];
+  return buildCoPartQuestions(group, pool, count, seed);
+}
