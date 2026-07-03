@@ -30,10 +30,12 @@ import { markCommunicationLessonComplete } from "@/lib/progress/communication-pr
 import { speak } from "@/lib/utils/speech";
 import { HintLightbulbButton, TtsPlayButton } from "@/components/communication/TtsSequencePlayer";
 import {
+  CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
   CommunicationResultsSummary,
   CommunicationTeacherSubmit,
+  EXPRESSION_TAB_HREF,
 } from "@/components/communication/CommunicationEvalLayout";
 
 const ACCENT = "var(--color-accent-comm)";
@@ -613,7 +615,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     try {
       markCommunicationLessonComplete(lessonId);
     } catch { /* ignore */ }
-    router.push("/francais?tab=communication");
+    router.push(EXPRESSION_TAB_HREF);
   }
 
   function sendToTeacher() {
@@ -642,7 +644,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Nav bar logic ———
 
   function goBack() {
-    if (phase === "intro") router.push("/francais?tab=communication");
+    if (phase === "intro") router.push(EXPRESSION_TAB_HREF);
     else if (phase === "review") setPhase(activeTaskPhases[activeTaskPhases.length - 1] ?? "task5");
     else if (activeTaskPhases.length > 0) {
       const index = activeTaskPhases.indexOf(phase as TaskPhase);
@@ -1551,6 +1553,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             isSending={isSending}
             sendMessage={sendMessage}
           />
+          <CommunicationFinishButton onClick={handleFinish} />
         </div>
       )}
 

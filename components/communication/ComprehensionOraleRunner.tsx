@@ -12,9 +12,11 @@ import {
 import { getCoPartQuestions, type COQuestionTask } from "@/lib/curriculum/content/communication/co-questions";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
+  CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
   CommunicationResultsSummary,
+  EXPRESSION_TAB_HREF,
   formatEvalPoints,
   type IntroBullet,
   type IntroRow,
@@ -761,7 +763,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
                 key={part.id}
                 index={index}
                 title={part.title}
-                scoreLabel={`${formatEvalPoints(partScore)} / ${part.points} :`}
+                scoreLabel={`${formatEvalPoints(partScore)} / ${part.points}`}
                 open={isOpen}
                 onToggle={() => setOpenResult(isOpen ? null : part.id)}
               >
@@ -775,7 +777,8 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             );
           })}
         </div>
-        <HiddenNav onBack={() => router.push("/communication")} onNext={() => router.push("/communication")} nextLabel="Terminer" />
+        <HiddenNav onBack={() => router.push(EXPRESSION_TAB_HREF)} onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
+        <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
       </main>
     );
   }

@@ -4,9 +4,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
+  CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
   CommunicationResultsSummary,
+  EXPRESSION_TAB_HREF,
   formatEvalPoints,
   type IntroBullet,
   type IntroRow,
@@ -459,7 +461,7 @@ const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
       ["Narges veut écouter de la musique.", 0],
       ["Anton aime les films dehors.", 1],
       ["Meryem veut apprendre a peindre.", 2],
-      ["Pavlo s'intéressé a l'histoire locale.", 3],
+      ["Pavlo s'intéresse à l'histoire locale.", 3],
     ],
   },
   {
@@ -537,28 +539,28 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
 function makeEmailPool(level: CELevel): EmailSeriesItem[] {
   const scenarios = level === "avance"
     ? [
-        ["secrétariat@formation.ch", "Changement d'horaire", "Bonjour,\nLe cours de preparation a l'examen de samedi est avance a 8 h 45. Il aura lieu dans la salle 312, au troisième etage. Apportez votre pièce d'identite, un stylo bleu et les exercices termines. Les personnes absentes devront envoyer un justificatif avant lundi midi.\nCordialement,\nLe secrétariat", "8 h 45", "salle 312", "pièce d'identite", "lundi midi"],
-        ["logement@régie.ch", "Visite technique", "Madame, Monsieur,\nUn technicien passera mardi entre 14 h et 16 h pour controler les radiateurs. Si vous ne pouvez pas etre present, merci de laisser une cle chez un voisin et de nous envoyer son nom par courriel. Les travaux ne durent normalement pas plus de vingt minutes.\nMeilleures salutations,\nLa régie", "mardi", "radiateurs", "un voisin", "vingt minutes"],
-        ["bibliothèque@ville.ch", "Livre réserve", "Bonjour,\nLe livre que vous avez réserve est disponible jusqu'au 18 juin. Vous pouvez le retirer a l'accueil pendant les horaires d'ouverture. Si vous ne venez pas avant cette date, la reservation sera annulee et le livre sera propose a une autre personne.\nLa bibliothèque", "18 juin", "a l'accueil", "annulee", "livre"],
-        ["musée@culture.ch", "Confirmation de visite", "Bonjour,\nVotre groupe est attendu vendredi a 13 h 50 devant l'entree principale du musée. La visite guidee commencera a 14 h et durera une heure. Les sacs volumineux devront rester au vestiaire. Le paiement se fera a la caisse après la visite.\nAccueil du musée", "vendredi", "13 h 50", "vestiaire", "après la visite"],
-        ["transport@cff.ch", "Objet retrouve", "Bonjour,\nNous avons retrouve un sac noir correspondant a votre description. Il se trouve au guichet des objets trouvés de Lausanne. Vous devez presenter une pièce d'identite et payer cinq francs de frais. Le guichet ferme a 18 h 30.\nCFF", "Lausanne", "sac noir", "cinq francs", "18 h 30"],
-        ["école@classe.ch", "Reunion parents", "Bonjour,\nLa reunion des parents aura lieu jeudi prochain a 19 h dans la salle polyvalente. Nous parlerons du voyage scolaire, du budget et des regles de sécurité. Merci de confirmer votre presence avant mardi soir en repondant a ce message.\nLa direction", "jeudi prochain", "19 h", "voyage scolaire", "mardi soir"],
-        ["club@natation.ch", "Inscription au cours", "Bonjour,\nVotre place au cours de natation debutant est confirmee. Le premier cours aura lieu le 3 septembre a 17 h 15. Prenez un maillot, un bonnet de bain et une serviette. Les vestiaires ouvrent quinze minutes avant le cours.\nLe club", "3 septembre", "17 h 15", "bonnet de bain", "quinze minutes"],
-        ["commune@admin.ch", "Document manquant", "Bonjour,\nVotre dossier est presque complet, mais il manque une copie de votre assurance maladie. Vous pouvez l'envoyer par courriel ou la deposer au guichet jusqu'a vendredi 11 h. Sans ce document, le rendez-vous devra etre reporte.\nCommune", "assurance maladie", "vendredi 11 h", "guichet", "reporte"],
-        ["magasin@meubles.ch", "Livraison", "Bonjour,\nVotre armoire sera livree mercredi matin entre 8 h et 11 h. Le livreur vous appellera trente minutes avant son arrivee. Merci de vérifier que l'ascenseur fonctionne et que le passage jusqu'a la chambre est libre.\nService livraison", "mercredi matin", "8 h et 11 h", "ascenseur", "trente minutes"],
-        ["centre@emploi.ch", "Atelier CV", "Bonjour,\nVous etes inscrit a l'atelier CV de lundi. La seance commence a 9 h precise dans la salle 4. Apportez vos certificats de travail et une annonce d'emploi qui vous intéressé. L'atelier est gratuit mais l'inscription est obligatoire.\nCentre emploi", "lundi", "salle 4", "certificats de travail", "gratuite"],
+        ["secrétariat@formation.ch", "Changement d'horaire", "Bonjour,\nLe cours de préparation à l'examen de samedi est avancé à 8 h 45. Il aura lieu dans la salle 312, au troisième étage. Apportez votre pièce d'identité, un stylo bleu et les exercices terminés. Les personnes absentes devront envoyer un justificatif avant lundi midi.\nCordialement,\nLe secrétariat", "8 h 45", "salle 312", "pièce d'identité", "lundi midi"],
+        ["logement@régie.ch", "Visite technique", "Madame, Monsieur,\nUn technicien passera mardi entre 14 h et 16 h pour contrôler les radiateurs. Si vous ne pouvez pas être présent, merci de laisser une clé chez un voisin et de nous envoyer son nom par courriel. Les travaux ne durent normalement pas plus de vingt minutes.\nMeilleures salutations,\nLa régie", "mardi", "radiateurs", "un voisin", "vingt minutes"],
+        ["bibliothèque@ville.ch", "Livre réservé", "Bonjour,\nLe livre que vous avez réservé est disponible jusqu'au 18 juin. Vous pouvez le retirer à l'accueil pendant les horaires d'ouverture. Si vous ne venez pas avant cette date, la réservation sera annulée et le livre sera proposé à une autre personne.\nLa bibliothèque", "18 juin", "à l'accueil", "annulée", "livre"],
+        ["musée@culture.ch", "Confirmation de visite", "Bonjour,\nVotre groupe est attendu vendredi à 13 h 50 devant l'entrée principale du musée. La visite guidée commencera à 14 h et durera une heure. Les sacs volumineux devront rester au vestiaire. Le paiement se fera à la caisse après la visite.\nAccueil du musée", "vendredi", "13 h 50", "vestiaire", "après la visite"],
+        ["transport@cff.ch", "Objet retrouvé", "Bonjour,\nNous avons retrouvé un sac noir correspondant à votre description. Il se trouve au guichet des objets trouvés de Lausanne. Vous devez présenter une pièce d'identité et payer cinq francs de frais. Le guichet ferme à 18 h 30.\nCFF", "Lausanne", "sac noir", "cinq francs", "18 h 30"],
+        ["école@classe.ch", "Réunion parents", "Bonjour,\nLa réunion des parents aura lieu jeudi prochain à 19 h dans la salle polyvalente. Nous parlerons du voyage scolaire, du budget et des règles de sécurité. Merci de confirmer votre présence avant mardi soir en répondant à ce message.\nLa direction", "jeudi prochain", "19 h", "voyage scolaire", "mardi soir"],
+        ["club@natation.ch", "Inscription au cours", "Bonjour,\nVotre place au cours de natation débutant est confirmée. Le premier cours aura lieu le 3 septembre à 17 h 15. Prenez un maillot, un bonnet de bain et une serviette. Les vestiaires ouvrent quinze minutes avant le cours.\nLe club", "3 septembre", "17 h 15", "bonnet de bain", "quinze minutes"],
+        ["commune@admin.ch", "Document manquant", "Bonjour,\nVotre dossier est presque complet, mais il manque une copie de votre assurance maladie. Vous pouvez l'envoyer par courriel ou la déposer au guichet jusqu'à vendredi 11 h. Sans ce document, le rendez-vous devra être reporté.\nCommune", "assurance maladie", "vendredi 11 h", "guichet", "reporté"],
+        ["magasin@meubles.ch", "Livraison", "Bonjour,\nVotre armoire sera livrée mercredi matin entre 8 h et 11 h. Le livreur vous appellera trente minutes avant son arrivée. Merci de vérifier que l'ascenseur fonctionne et que le passage jusqu'à la chambre est libre.\nService livraison", "mercredi matin", "8 h et 11 h", "ascenseur", "trente minutes"],
+        ["centre@emploi.ch", "Atelier CV", "Bonjour,\nVous êtes inscrit à l'atelier CV de lundi. La séance commence à 9 h précise dans la salle 4. Apportez vos certificats de travail et une annonce d'emploi qui vous intéresse. L'atelier est gratuit mais l'inscription est obligatoire.\nCentre emploi", "lundi", "salle 4", "certificats de travail", "gratuite"],
       ]
     : [
-        ["école@cours.ch", "Cours de mardi", "Bonjour,\nLe cours de français de mardi commence a 10 h. Il aura lieu dans la salle 12. Apportez votre cahier et votre stylo. Si vous etes absent, envoyez un message au professeur.\nMerci.", "10 h", "salle 12", "cahier", "professeur"],
-        ["gare@cff.ch", "Billet trouve", "Bonjour,\nVous avez oublié votre billet au guichet. Il est garde a la gare de Sion jusqu'a vendredi. Venez avec une pièce d'identite. Le guichet ferme a 18 h.\nCFF", "Sion", "vendredi", "pièce d'identite", "18 h"],
-        ["club@sport.ch", "Match samedi", "Salut,\nLe match de football a lieu samedi a 15 h. Le rendez-vous est devant la salle de sport a 14 h 30. Prenez vos chaussures et une bouteille d'eau.\nLe coach", "samedi", "15 h", "chaussures", "bouteille d'eau"],
-        ["voisine@mail.ch", "Garde du chat", "Bonjour,\nJe pars deux jours a Geneve. Peux-tu donner a manger a mon chat vendredi soir et samedi matin ? La cle est sous le pot de fleurs. Merci beaucoup.\nMina", "Geneve", "chat", "vendredi soir", "sous le pot de fleurs"],
-        ["bibliothèque@ville.ch", "Livre en retard", "Bonjour,\nVotre livre est en retard depuis lundi. Merci de le rapporter cette semaine a la bibliothèque. Vous pouvez aussi le deposer dans la boite devant l'entree.\nLa bibliothèque", "lundi", "cette semaine", "bibliothèque", "boite"],
-        ["dentiste@cabinet.ch", "Rendez-vous", "Bonjour,\nVotre rendez-vous chez le dentiste est jeudi a 8 h 30. Le cabinet se trouve rue du Rhone 14. Merci d'arriver dix minutes avant l'heure.\nCabinet dentaire", "jeudi", "8 h 30", "rue du Rhone 14", "dix minutes"],
-        ["magasin@vélo.ch", "Reparation vélo", "Bonjour,\nVotre vélo est repare. Vous pouvez venir le chercher demain après 13 h. Le prix est de 45 francs. Le magasin ferme a 18 h 30.\nVelo Plus", "demain", "13 h", "45 francs", "18 h 30"],
-        ["centre@quartier.ch", "Atelier cuisine", "Bonjour,\nL'atelier cuisine aura lieu mercredi de 18 h a 20 h. Nous preparons une soupe et un dessert. Apportez une boite pour emporter les restes.\nCentre de quartier", "mercredi", "18 h", "soupe", "boite"],
+        ["école@cours.ch", "Cours de mardi", "Bonjour,\nLe cours de français de mardi commence à 10 h. Il aura lieu dans la salle 12. Apportez votre cahier et votre stylo. Si vous êtes absent, envoyez un message au professeur.\nMerci.", "10 h", "salle 12", "cahier", "professeur"],
+        ["gare@cff.ch", "Billet trouvé", "Bonjour,\nVous avez oublié votre billet au guichet. Il est gardé à la gare de Sion jusqu'à vendredi. Venez avec une pièce d'identité. Le guichet ferme à 18 h.\nCFF", "Sion", "vendredi", "pièce d'identité", "18 h"],
+        ["club@sport.ch", "Match samedi", "Salut,\nLe match de football a lieu samedi à 15 h. Le rendez-vous est devant la salle de sport à 14 h 30. Prenez vos chaussures et une bouteille d'eau.\nLe coach", "samedi", "15 h", "chaussures", "bouteille d'eau"],
+        ["voisine@mail.ch", "Garde du chat", "Bonjour,\nJe pars deux jours à Genève. Peux-tu donner à manger à mon chat vendredi soir et samedi matin ? La clé est sous le pot de fleurs. Merci beaucoup.\nMina", "Genève", "chat", "vendredi soir", "sous le pot de fleurs"],
+        ["bibliothèque@ville.ch", "Livre en retard", "Bonjour,\nVotre livre est en retard depuis lundi. Merci de le rapporter cette semaine à la bibliothèque. Vous pouvez aussi le déposer dans la boîte devant l'entrée.\nLa bibliothèque", "lundi", "cette semaine", "bibliothèque", "boîte"],
+        ["dentiste@cabinet.ch", "Rendez-vous", "Bonjour,\nVotre rendez-vous chez le dentiste est jeudi à 8 h 30. Le cabinet se trouve rue du Rhône 14. Merci d'arriver dix minutes avant l'heure.\nCabinet dentaire", "jeudi", "8 h 30", "rue du Rhône 14", "dix minutes"],
+        ["magasin@vélo.ch", "Réparation vélo", "Bonjour,\nVotre vélo est réparé. Vous pouvez venir le chercher demain après 13 h. Le prix est de 45 francs. Le magasin ferme à 18 h 30.\nVélo Plus", "demain", "13 h", "45 francs", "18 h 30"],
+        ["centre@quartier.ch", "Atelier cuisine", "Bonjour,\nL'atelier cuisine aura lieu mercredi de 18 h à 20 h. Nous préparons une soupe et un dessert. Apportez une boîte pour emporter les restes.\nCentre de quartier", "mercredi", "18 h", "soupe", "boîte"],
         ["régie@immeuble.ch", "Buanderie", "Bonjour,\nLa buanderie sera fermée lundi matin pour nettoyage. Vous pourrez laver votre linge lundi après 14 h ou mardi toute la journée.\nLa régie", "lundi matin", "nettoyage", "14 h", "mardi"],
-        ["ami@mail.ch", "Anniversaire", "Salut,\nJe fête mon anniversaire dimanche a midi au parc. Tu peux venir avec ta famille. Apporte une couverture si tu en as une. Il y aura des boissons et un gâteau.\nSamir", "dimanche", "midi", "parc", "couverture"],
+        ["ami@mail.ch", "Anniversaire", "Salut,\nJe fête mon anniversaire dimanche à midi au parc. Tu peux venir avec ta famille. Apporte une couverture si tu en as une. Il y aura des boissons et un gâteau.\nSamir", "dimanche", "midi", "parc", "couverture"],
       ];
 
   return scenarios.map(([from, subject, body, a, b, c, d]) => ({
@@ -568,7 +570,7 @@ function makeEmailPool(level: CELevel): EmailSeriesItem[] {
     questions: [
       { prompt: "Quelle information principale est donnée dans ce message ?", choices: [{ label: a }, { label: "Une information sans rapport" }, { label: "Une publicité" }], correct: 0 },
       { prompt: "Quel autre détail faut-il retenir ?", choices: [{ label: "Le document ne le dit pas" }, { label: b }, { label: "Une erreur de date" }], correct: 1 },
-      { prompt: "Que faut-il apporter ou faire ?", choices: [{ label: c }, { label: "Ne rien faire" }, { label: "Telephoner a la police" }], correct: 0 },
+      { prompt: "Que faut-il apporter ou faire ?", choices: [{ label: c }, { label: "Ne rien faire" }, { label: "Téléphoner à la police" }], correct: 0 },
       { prompt: "Quel est le dernier détail important ?", choices: [{ label: "Le message est annule" }, { label: d }, { label: "La personne doit partir" }], correct: 1 },
       { prompt: "Qui envoie le message ?", answer: from.split("@")[0] ?? from },
       { prompt: "Quel est l'objet du message ?", answer: subject },
@@ -1096,7 +1098,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
       return;
     }
     if (phase === "results") {
-      router.push("/communication");
+      router.push(EXPRESSION_TAB_HREF);
       return;
     }
     if (activeParts.length === 0) return;
@@ -1106,7 +1108,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
   const back = useCallback(() => {
     if (phase === "intro") return;
     if (phase === "results") {
-      router.push("/communication");
+      router.push(EXPRESSION_TAB_HREF);
       return;
     }
     if (activeParts.length === 0) return;
@@ -1145,7 +1147,8 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
         <div className="space-y-6">
           <CEHeader level={level} title="Résultats" />
           <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onNext={() => router.push("/communication")} nextLabel="Terminer" />
+          <NavActionBar onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
+          <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
         </div>
       )}
     </div>

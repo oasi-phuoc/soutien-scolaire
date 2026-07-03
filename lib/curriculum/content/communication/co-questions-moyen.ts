@@ -32,7 +32,7 @@ const MESSAGE_26 = buildPool("moyen", "message-26", [
   {
     id: "m26-q6", textQ: "À quel étage habite Lucie ?", text: ["Au 1er étage","Au 2ème étage","Au 3ème étage"], textC: 1,
     img: ["1er","2ème","3ème"], imgC: 1,
-    fillQ: "L'appartement est au _________ étage.", fill: "2ème",
+    fillQ: "L'appartement est au _________ étage.", fill: "2e",
     fillA: ["2e","deuxième"],
   }
 ]);

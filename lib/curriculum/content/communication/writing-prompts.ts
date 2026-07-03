@@ -55,7 +55,7 @@ const GROUPS: Array<{
     ["Cours de français", "Vous cherchez un cours de français compatible avec vos horaires.", "école de langues", "demander des informations", ["votre niveau", "vos disponibilités", "votre objectif", "le format souhaité", "le prix et l'inscription"], true],
     ["Examen manqué", "Vous n'avez pas pu participer à un examen pour une raison importante.", "enseignant ou enseignante", "demander une nouvelle date", ["l'examen concerné", "la date", "la raison de l'absence", "un justificatif disponible", "vos disponibilités"], true],
     ["Projet de groupe", "Un membre de votre groupe ne participe pas au projet commun.", "enseignant ou enseignante", "expliquer la situation", ["le sujet du projet", "la répartition prévue", "le problème rencontré", "ce que vous avez déjà fait", "la solution proposée"], true],
-    ["Bibliothèque", "La bibliothèque ne possède pas un livre nécessaire à votre formation.", "bibliothécaire", "demander une solution", ["le titre du livre", "l'auteur", "le cours concerné", "la date limite", "un achat ou un prêt entre bibliothèques"], true],
+    ["Bibliothèque", "La bibliothèque ne dispose pas du livre nécessaire à votre formation.", "bibliothécaire", "demander une solution", ["le titre du livre", "l'auteur", "le cours concerné", "la date limite", "un achat ou un prêt entre bibliothèques"], true],
     ["Atelier annulé", "Un atelier auquel vous étiez inscrit a été annulé sans nouvelle date.", "organisateur", "demander des précisions", ["le nom de l'atelier", "la date prévue", "votre inscription", "l'importance pour vous", "le report ou le remboursement souhaité"], true],
   ]},
   { key: "sante", topics: [

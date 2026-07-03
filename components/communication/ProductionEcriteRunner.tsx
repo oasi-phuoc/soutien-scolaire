@@ -19,10 +19,12 @@ import {
 } from "@/lib/curriculum/content/communication/writing-prompts";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
+  CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
   CommunicationResultsSummary,
   CommunicationTeacherSubmit,
+  EXPRESSION_TAB_HREF,
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
@@ -618,7 +620,8 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
           isSending={isSending}
           sendMessage={sendMessage}
         />
-        <HiddenNav onBack={() => router.push("/communication")} onNext={() => router.push("/communication")} nextLabel="Terminer" />
+        <HiddenNav onBack={() => router.push(EXPRESSION_TAB_HREF)} onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
+        <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
       </main>
     );
   }

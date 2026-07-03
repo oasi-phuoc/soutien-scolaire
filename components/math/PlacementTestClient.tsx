@@ -782,7 +782,7 @@ export function PlacementTestClient() {
           onClick={() => router.push("/mathematiques")}
           className="mt-6 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
         >
-          Retour aux modules
+          Terminer
         </button>
       )}
 
