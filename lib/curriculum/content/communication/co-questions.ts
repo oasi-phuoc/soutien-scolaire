@@ -7,6 +7,7 @@ import {
 import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
 import { CO_QUESTION_POOLS_BASE_OTHER } from "./co-questions-base-other";
 import { CO_QUESTION_POOLS_MOYEN } from "./co-questions-moyen";
+import { CO_QUESTION_POOLS_AVANCE } from "./co-questions-avance";
 
 export type {
   COFormatType,
@@ -24,6 +25,7 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
   ...CO_QUESTION_POOLS_BASE_MESSAGES,
   ...CO_QUESTION_POOLS_BASE_OTHER,
   ...CO_QUESTION_POOLS_MOYEN,
+  ...CO_QUESTION_POOLS_AVANCE,
 };
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {

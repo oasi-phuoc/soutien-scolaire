@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   randomCoGroup,
+  randomCoGroupInRange,
   type COAudioCategory,
   type COAudioGroup,
   type COAudioItem,
@@ -26,12 +27,18 @@ import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 type COLevel = "base" | "moyen" | "avance";
 type QuestionTask = COQuestionTask;
 type COPart = {
-  id: COAudioCategory;
+  id: string;
   title: string;
   points: number;
   context: string;
   audioGroup: COAudioGroup;
   questions: QuestionTask[];
+};
+
+type AdvancedPartSpec = Omit<COPart, "audioGroup" | "questions"> & {
+  category: COAudioCategory;
+  activityMin: number;
+  activityMax: number;
 };
 type Answers = Record<string, number | string | null>;
 
@@ -47,25 +54,89 @@ const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
   { id: "objet", title: "Identifier des objets", points: 5, context: "Écoutez et repérez les objets ou les informations importantes." },
 ];
 
-const MEDIUM_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
-  { id: "message", title: "Comprendre un message", points: 6, context: "Écoutez un message vocal." },
-  { id: "annonce", title: "Comprendre une annonce", points: 6, context: "Écoutez une série d'annonces courtes." },
-  { id: "radio", title: "Comprendre des émissions de radio", points: 6, context: "Écoutez une ou plusieurs annonces radio." },
-  { id: "conversation", title: "Comprendre des conversations", points: 7, context: "Écoutez plusieurs échanges courts." },
+const MEDIUM_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions"> & { category: COAudioCategory }> = [
+  { id: "message", category: "message", title: "Comprendre un message", points: 6, context: "Écoutez un message vocal." },
+  { id: "annonce", category: "annonce", title: "Comprendre une annonce", points: 6, context: "Écoutez une série d'annonces courtes." },
+  { id: "radio", category: "radio", title: "Comprendre des émissions de radio", points: 6, context: "Écoutez une ou plusieurs annonces radio." },
+  { id: "conversation", category: "conversation", title: "Comprendre des conversations", points: 7, context: "Écoutez plusieurs échanges courts." },
 ];
 
-function partInfoFor(level: COLevel) {
-  return level === "moyen" ? MEDIUM_PART_INFO : BASE_PART_INFO;
+const ADVANCED_PART_INFO: AdvancedPartSpec[] = [
+  {
+    id: "avance-conversation-1",
+    category: "conversation",
+    activityMin: 1,
+    activityMax: 9,
+    title: "Comprendre des conversations",
+    points: 6,
+    context: "Écoutez une conversation.",
+  },
+  {
+    id: "avance-conversation-2",
+    category: "conversation",
+    activityMin: 10,
+    activityMax: 18,
+    title: "Comprendre des conversations",
+    points: 6,
+    context: "Écoutez une conversation.",
+  },
+  {
+    id: "avance-radio-1",
+    category: "radio",
+    activityMin: 1,
+    activityMax: 16,
+    title: "Comprendre des émissions de radio",
+    points: 6,
+    context: "Écoutez une émission de radio.",
+  },
+  {
+    id: "avance-radio-2",
+    category: "radio",
+    activityMin: 17,
+    activityMax: 32,
+    title: "Comprendre des émissions de radio",
+    points: 7,
+    context: "Écoutez une émission de radio.",
+  },
+];
+
+function partInfoFor(level: COLevel): Array<Omit<COPart, "audioGroup" | "questions">> {
+  if (level === "moyen") return MEDIUM_PART_INFO;
+  if (level === "avance") return ADVANCED_PART_INFO;
+  return BASE_PART_INFO;
 }
 
 function audioLevelFor(level: COLevel): COAudioLevel {
-  return level === "moyen" ? "moyen" : "base";
+  if (level === "moyen") return "moyen";
+  if (level === "avance") return "avance";
+  return "base";
 }
 
 function makeParts(level: COLevel, seed: number): COPart[] {
+  if (level === "avance") {
+    return ADVANCED_PART_INFO.map((part) => {
+      const audioGroup = randomCoGroupInRange(
+        "avance",
+        part.category,
+        part.activityMin,
+        part.activityMax,
+        `${seed}-${part.id}`,
+      );
+      return {
+        id: part.id,
+        title: part.title,
+        points: part.points,
+        context: part.context,
+        audioGroup,
+        questions: getCoPartQuestions(audioGroup, part.points, `${seed}-${part.id}`),
+      };
+    });
+  }
+
   const audioLevel = audioLevelFor(level);
   return partInfoFor(level).map((part) => {
-    const audioGroup = randomCoGroup(audioLevel, part.id);
+    const category = ("category" in part ? part.category : part.id) as COAudioCategory;
+    const audioGroup = randomCoGroup(audioLevel, category);
     return {
       ...part,
       audioGroup,
@@ -685,14 +756,14 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
   }, [phase]);
 
   const selectPart = useCallback((id: string) => {
-    if (remaining.includes(id)) setCurrentId(id as COAudioCategory);
+    if (remaining.includes(id)) setCurrentId(id);
   }, [remaining]);
 
   const move = useCallback((direction: 1 | -1) => {
     if (!remaining.length) return;
     const index = remaining.indexOf(currentId);
     const nextIndex = index === -1 ? 0 : (index + direction + remaining.length) % remaining.length;
-    setCurrentId(remaining[nextIndex]! as COAudioCategory);
+    setCurrentId(remaining[nextIndex]!);
   }, [currentId, remaining]);
 
   const validateCurrent = useCallback(() => {
@@ -710,7 +781,7 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
       setPhase("results");
       return;
     }
-    setCurrentId(nextRemaining[0]! as COAudioCategory);
+    setCurrentId(nextRemaining[0]!);
   }, [answers, currentPart, lessonCode, remaining]);
 
   if (phase === "intro") {

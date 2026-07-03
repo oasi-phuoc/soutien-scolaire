@@ -18,6 +18,8 @@ export type COAudioGroup = {
   items: COAudioItem[];
 };
 
+import { CO_AUDIO_GROUPS_AVANCE } from "./co-audio-avance";
+
 function item(level: COLevel, category: COAudioCategory, activity: string, filename: string, transcript?: string): COAudioItem {
   return {
     id: `${level}-${category}-${activity}`,
@@ -404,6 +406,7 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
   group("moyen", "conversation", "50", [
     item("moyen", "conversation", "50", "conversation-50.mp3", "Dialogue 1 — Élisa, tu peux me prêter le DVD du film Amour ? — Euh, non, désolée. — Mais pourquoi ? — Je voudrais le regarder ce week-end. Et puis, la dernière fois que je t’ai prêté un DVD, tu l’as gardé pendant 6 mois ! Alors non, je ne préfère pas ! Dialogue 2 — Salut, je te présente Coralie, c’est ma cousine ! — Salut Coralie ! c’est toi qui habites à Marseille ? — Euh, non ça c’est Magali, mon autre cousine ! Coralie habite à Nantes. Dialogue 3 — Salut Carine ! Tu sais ce qui m’est arrivé la semaine dernière ? — Non, vas-y raconte ! — J’ai vu le chanteur du groupe Phoenix dans un magasin de disques ! Il m’a tenu la porte pour sortir du magasin, et après il m’a souri ! Dialogue 4 — Excusez-moi, je cherche la bibliothèque, vous pouvez m’aider ? — Euh, oui, il faut prendre l’entrée centrale, monter au premier étage et aller à droite. La bibliothèque est au fond du couloir."),
   ]),
+  ...CO_AUDIO_GROUPS_AVANCE,
 ];
 
 export function coGroupsByLevelCategory(level: COLevel, category: COAudioCategory) {
@@ -413,4 +416,26 @@ export function coGroupsByLevelCategory(level: COLevel, category: COAudioCategor
 export function randomCoGroup(level: COLevel, category: COAudioCategory) {
   const groups = coGroupsByLevelCategory(level, category);
   return groups[Math.floor(Math.random() * groups.length)] ?? groups[0]!;
+}
+
+function hashSeed(seed: string): number {
+  let n = 0;
+  for (const char of seed) n += char.charCodeAt(0);
+  return n || 1;
+}
+
+export function randomCoGroupInRange(
+  level: COLevel,
+  category: COAudioCategory,
+  minActivity: number,
+  maxActivity: number,
+  seed: string,
+) {
+  const groups = coGroupsByLevelCategory(level, category).filter((entry) => {
+    const n = Number.parseInt(entry.activity, 10);
+    return n >= minActivity && n <= maxActivity;
+  });
+  if (!groups.length) return randomCoGroup(level, category);
+  const index = hashSeed(seed) % groups.length;
+  return groups[index]!;
 }
