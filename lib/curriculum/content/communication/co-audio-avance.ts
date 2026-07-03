@@ -141,7 +141,55 @@ const CONV_8 = `À Paris, solidarité rime avec diversité. Qu'ils soient retrai
 – Et quel est le rôle de Passerelles et Compétences ?
 – Tout d'abord il y a la rencontre avec l'association pour définir ses besoins. On diffuse une annonce pour la mission et ensuite on rencontre le bénévole qui va la réaliser. Nous restons en contact avec eux tout au long du projet pour voir si tout se passe bien.
 
-– Bonjour madame, alors... quels sont les objectifs de l'association « Voisin-Âge » ?`;
+– Bonjour madame, alors... quels sont les objectifs de l'association « Voisin-Âge » ?
+– L'association « Voisin-Âge » est une communauté sur le web. C'est le premier site de rencontres intergénérationnelles. Il met en relation les personnes âgées et leurs voisins en fonction de leur proximité et de leurs affinités. Le but est de faire connaissance, mais aussi de veiller à ce qu'aucune personne âgée du quartier ne soit trop isolée ou sans visite pendant des mois.
+– Qu'est-ce qu'on peut apporter comme actions ?
+– Ça peut être une visite, un coup de téléphone, aider la personne âgée à faire ses papiers, à faire les courses pour elle, à déjeuner avec elle.
+
+– Bonjour, pouvez-vous nous dire quels sont les objectifs de l'association « Les Tribus du 13 » ?
+– L'association Les Tribus du 13 a pour objectif de créer des liens utiles entre les habitants d'un même quartier.
+– Vous avez aussi un site Internet ?
+– Oui, il sert à rapprocher les familles et les nombreux étudiants du 13e.
+– Qu'est-ce qu'ils peuvent proposer comme activités ?
+– C'est surtout du baby-sitting, aller chercher les enfants à la crèche ou à la sortie de l'école et les aider à faire leurs devoirs, oui... c'est surtout ça.
+
+D'après : à Paris, hiver 2011-2012.`;
+
+const CONV_9 = `Ces derniers mois, peut-être à cause de la crise, on constate une nette augmentation des vols dans les lieux publics. Temps de crise ou non, il faut reconnaître qu'ils sont souvent encouragés par les victimes elles-mêmes, par leur manque de prudence. Bien des vols à la tire ou des vols à l'arraché pourraient être évités à condition d'adopter certains comportements préventifs. Un représentant de la préfecture de police nous conseille sur ce qu'il convient de faire dans différentes situations.
+
+Dans les lieux publics en général, méfiez-vous des mouvements de foule ou des bousculades, favorables aux voleurs à la tire ou « pickpockets ».
+
+Dans la rue, évitez de porter ostensiblement appareils de photo ou caméras. Assurez-vous de bien les tenir par leur courroie, même quand vous photographiez ou filmez. Mesdames, veillez à bien fermer votre sac à main, portez-le contre vous avec les fermetures tournées vers l'intérieur. Messieurs, boutonnez les poches intérieures de vos vêtements et ne mettez pas votre portefeuille dans vos poches arrière.
+
+Dans les transports en commun, surtout aux heures de pointe, soyez vigilants, faites particulièrement attention à vos affaires quand vous montez ou descendez des rames de métro ou des bus ou encore dans les escalators.
+
+Dans les cafés ou les restaurants, ne posez pas votre sac par terre, surtout pas dans le passage, même à côté de votre siège. Ne l'accrochez pas non plus au dossier de votre chaise, et surtout, fermez-le ! Placez-le là où il sera difficile à atteindre ou à subtiliser. Méfiez-vous également de toute personne qui vient s'asseoir un peu trop près de vous et qui jette, de façon apparemment négligente, son manteau ou son imperméable sur votre sac. Ne laissez pas non plus votre téléphone portable sur la table, rangez-le.
+
+Quand vous désirez vous rendre aux toilettes, au restaurant, en train ou en avion, ne laissez jamais votre sac ou un objet de valeur à votre place, sans surveillance.
+
+Quelle que soit la situation, gardez toujours un œil sur vos biens. Mieux vaut prévenir que guérir, quitte à passer pour une personne exagérément soupçonneuse !
+
+D'après : www.prefecturedepolice.interieur.gouv.fr`;
+
+const CONV_10 = `Aujourd'hui, le cours portera sur la vitesse. Sachez qu'un accident mortel sur deux est dû à une vitesse inadaptée. Accepter de réduire sa vitesse de 5 km/h, c'est diminuer de 20 % le nombre de tués.
+
+Aussi, lorsque vous conduisez, respectez les limitations de vitesse.
+N'oubliez pas de réduire votre vitesse par temps de pluie. Ne dépassez pas alors les 110 km/h sur autoroute, 100 sur les autoroutes urbaines ou les routes à deux fois deux voies, et 80 sur les autres routes.
+
+Sur tous les réseaux, si la visibilité est inférieure à 50 m, ne roulez pas à plus de 50 km/h !
+Soyez sûr de bien voir. Plus vous allez vite, plus votre perception visuelle diminue. Vérifiez votre vision de près, de loin, et sur les côtés.
+
+Plus vous roulez vite, plus les temps de réaction et de freinage augmentent.
+Votre temps de réaction varie de 1 à 2 secondes. Il dépend bien sûr des conditions de circulation et de votre expérience de la conduite, mais aussi, et je dirais même beaucoup, de votre attention, très étroitement liée à votre état physique.
+
+Si vous prenez des médicaments, vérifiez s'ils provoquent des endormissements.
+Si vous vous sentez trop fatigué ou si vous avez bu un peu trop d'alcool, ne prenez pas le volant. Demandez à quelqu'un d'autre de conduire.
+
+Pour anticiper tout risque d'accident, maintenez une distance de sécurité avec le véhicule qui vous précède.
+
+Sur route, comptez deux secondes entre le passage du véhicule qui vous précède devant un repère fixe, un arbre par exemple, et votre passage devant le même repère. Vous êtes alors à 50 m de la voiture qui vous précède.
+
+Sur autoroute, prenez comme référence la longueur de deux lignes d'une bande d'arrêt d'urgence. La distance entre les deux véhicules est alors de 90 m.`;
 
 function placeholderConversation(n: number) {
   return `Transcription conversation ${n} — à compléter.`;
@@ -160,8 +208,10 @@ export const CO_AUDIO_GROUPS_AVANCE: COAudioGroup[] = [
   avanceGroup("conversation", "6", "conversation-6.mp3", CONV_6),
   avanceGroup("conversation", "7", "conversation-7.mp3", CONV_7),
   avanceGroup("conversation", "8", "conversation-8.mp3", CONV_8),
-  ...Array.from({ length: 10 }, (_, i) =>
-    avanceGroup("conversation", String(i + 9), `conversation-${i + 9}.mp3`, placeholderConversation(i + 9)),
+  avanceGroup("conversation", "9", "conversation-9.mp3", CONV_9),
+  avanceGroup("conversation", "10", "conversation-10.mp3", CONV_10),
+  ...Array.from({ length: 8 }, (_, i) =>
+    avanceGroup("conversation", String(i + 11), `conversation-${i + 11}.mp3`, placeholderConversation(i + 11)),
   ),
   ...Array.from({ length: 32 }, (_, i) =>
     avanceGroup("radio", String(i + 1), `radio-${i + 1}.mp3`, placeholderRadio(i + 1)),

@@ -274,16 +274,85 @@ const CONVERSATION_8 = buildPool("avance", "conversation-8", [
     fillQ: "L'association met en relation les bénévoles et les _________.", fill: "associations"
   },
   {
-    id: "ac8-q5", textQ: "Quelle est la deuxième association évoquée ?", text: ["Voisin-Âge","Les Restos du Cœur","Secours populaire"], textC: 0,
-    img: ["Voisin-Âge","Restos du Cœur","Secours pop."], imgC: 0,
-    fillQ: "La deuxième association s'appelle _________.", fill: "Voisin-Âge",
-    fillA: ["voisin-age", "voisin age"],
+    id: "ac8-q5", textQ: "Qu'est-ce que Voisin-Âge ?", text: ["Un site de rencontres intergénérationnelles","Une association de restauration","Un club sportif pour seniors"], textC: 0,
+    img: ["Rencontres intergén.","Restauration","Club sportif"], imgC: 0,
+    fillQ: "Voisin-Âge est un site de rencontres _________.", fill: "intergénérationnelles",
+    fillA: ["intergenerationnelles"],
   },
   {
-    id: "ac8-q6", textQ: "Dans quelle ville se déroule le reportage ?", text: ["Paris","Lyon","Marseille"], textC: 0,
-    img: ["Paris","Lyon","Marseille"], imgC: 0,
-    fillQ: "Le reportage se passe à _________.", fill: "Paris",
-    fillA: ["paris"],
+    id: "ac8-q6", textQ: "Quelles activités propose Les Tribus du 13 ?", text: ["Du baby-sitting et de l'aide aux devoirs","Des cours de cuisine","Des visites touristiques"], textC: 0,
+    img: ["Baby-sitting","Cuisine","Visites"], imgC: 0,
+    fillQ: "L'association propose surtout du _________ et de l'aide aux devoirs.", fill: "baby-sitting",
+    fillA: ["babysitting"],
+  },
+]);
+
+const CONVERSATION_9 = buildPool("avance", "conversation-9", [
+  {
+    id: "ac9-q1", textQ: "Qu'observe-t-on ces derniers mois dans les lieux publics ?", text: ["Une augmentation des vols","Une baisse de la criminalité","Plus de policiers"], textC: 0,
+    img: ["Hausse des vols","Baisse criminalité","Plus de police"], imgC: 0,
+    fillQ: "On constate une augmentation des _________ dans les lieux publics.", fill: "vols"
+  },
+  {
+    id: "ac9-q2", textQ: "Qui donne les conseils de prévention ?", text: ["Un représentant de la préfecture de police","Un maire","Un commerçant"], textC: 0,
+    img: ["Préfecture police","Maire","Commerçant"], imgC: 0,
+    fillQ: "Les conseils viennent de la _________ de police.", fill: "préfecture",
+    fillA: ["prefecture"],
+  },
+  {
+    id: "ac9-q3", textQ: "Dans les lieux publics, à quoi faut-il se méfier ?", text: ["Des mouvements de foule et bousculades","Des musiciens de rue","Des vendeurs ambulants"], textC: 0,
+    img: ["Foule / bousculades","Musiciens","Vendeurs"], imgC: 0,
+    fillQ: "Méfiez-vous des mouvements de _________ ou des bousculades.", fill: "foule"
+  },
+  {
+    id: "ac9-q4", textQ: "Comment les femmes doivent-elles porter leur sac à main ?", text: ["Contre elles, fermetures vers l'intérieur","Sur l'épaule, ouvert","Par la poignée, en l'air"], textC: 0,
+    img: ["Contre soi","Ouvert","En l'air"], imgC: 0,
+    fillQ: "Portez le sac contre vous, fermetures vers l'_________.", fill: "intérieur",
+    fillA: ["interieur"],
+  },
+  {
+    id: "ac9-q5", textQ: "Que ne faut-il pas faire avec son sac au restaurant ?", text: ["Le poser par terre ou l'accrocher à la chaise","Le garder sur les genoux","Le fermer"], textC: 0,
+    img: ["Par terre / chaise","Sur les genoux","Fermé"], imgC: 0,
+    fillQ: "Ne posez pas votre sac par _________ au restaurant.", fill: "terre"
+  },
+  {
+    id: "ac9-q6", textQ: "Quel conseil général est donné à la fin ?", text: ["Garder toujours un œil sur ses biens","Éviter les lieux publics","Ne plus sortir seul"], textC: 0,
+    img: ["Surveiller ses biens","Éviter lieux publics","Ne plus sortir"], imgC: 0,
+    fillQ: "Gardez toujours un œil sur vos _________.", fill: "biens"
+  },
+]);
+
+const CONVERSATION_10 = buildPool("avance", "conversation-10", [
+  {
+    id: "ac10-q1", textQ: "Quel est le sujet du cours ?", text: ["La vitesse","Le stationnement","Les feux tricolores"], textC: 0,
+    img: ["Vitesse","Stationnement","Feux"], imgC: 0,
+    fillQ: "Le cours porte sur la _________.", fill: "vitesse"
+  },
+  {
+    id: "ac10-q2", textQ: "Réduire sa vitesse de 5 km/h diminue le nombre de tués de combien ?", text: ["20 %","5 %","50 %"], textC: 0,
+    img: ["20 %","5 %","50 %"], imgC: 0,
+    fillQ: "Réduire de 5 km/h diminue les tués de ___ %.", fill: "20"
+  },
+  {
+    id: "ac10-q3", textQ: "Par temps de pluie, quelle vitesse max sur autoroute ?", text: ["110 km/h","130 km/h","90 km/h"], textC: 0,
+    img: ["110 km/h","130 km/h","90 km/h"], imgC: 0,
+    fillQ: "Par temps de pluie, ne dépassez pas ___ km/h sur autoroute.", fill: "110"
+  },
+  {
+    id: "ac10-q4", textQ: "Si la visibilité est inférieure à 50 m, quelle vitesse max ?", text: ["50 km/h","80 km/h","100 km/h"], textC: 0,
+    img: ["50 km/h","80 km/h","100 km/h"], imgC: 0,
+    fillQ: "Si la visibilité est inférieure à 50 m, ne roulez pas à plus de ___ km/h.", fill: "50"
+  },
+  {
+    id: "ac10-q5", textQ: "Combien de temps dure le temps de réaction ?", text: ["De 1 à 2 secondes","5 secondes","Moins d'une seconde"], textC: 0,
+    img: ["1-2 s","5 s","< 1 s"], imgC: 0,
+    fillQ: "Le temps de réaction varie de 1 à ___ secondes.", fill: "2",
+    fillA: ["deux"],
+  },
+  {
+    id: "ac10-q6", textQ: "Sur route, quelle distance de sécurité avec 2 secondes ?", text: ["50 m","90 m","20 m"], textC: 0,
+    img: ["50 m","90 m","20 m"], imgC: 0,
+    fillQ: "Sur route, deux secondes correspondent à ___ m.", fill: "50"
   },
 ]);
 
@@ -296,4 +365,6 @@ export const CO_QUESTION_POOLS_AVANCE: Record<string, COMultiQuestion[]> = {
   "avance-conversation-6": CONVERSATION_6,
   "avance-conversation-7": CONVERSATION_7,
   "avance-conversation-8": CONVERSATION_8,
+  "avance-conversation-9": CONVERSATION_9,
+  "avance-conversation-10": CONVERSATION_10,
 };
