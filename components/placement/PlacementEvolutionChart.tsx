@@ -1,90 +1,79 @@
 "use client";
 
-import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
 import type { PlacementTotalSnapshot } from "@/lib/placement/types";
 
-const ACCENT = "var(--color-accent-quiz)";
 const MATH_COLOR = "#c06078";
 const FRENCH_COLOR = "#e8b4c0";
 
-const ZONE_COLORS: Record<string, string> = {
-  CSC: "#94a3b8",
-  CFR: "#c06078",
-  CAF: "#c06078",
-  CAP: "#c06078",
-};
+const Y_TICKS = [0, 20, 40, 60, 80, 100];
 
-const SCALE_TICKS = [0, 50, 100, 150, 200];
+function formatHalf(value: number) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
 
-export function PlacementEvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
-  const chartTop = 22;
+export function PlacementEvolutionChart({
+  history,
+  mathCounted,
+  frenchCounted,
+}: {
+  history: PlacementTotalSnapshot[];
+  mathCounted: number;
+  frenchCounted: number;
+}) {
+  const leftPad = 28;
+  const chartTop = 8;
   const chartH = 120;
   const chartBottom = chartTop + chartH;
-  const slotW = 48;
-  const gap = 10;
-  const leftPad = 4;
+  const slotW = 44;
+  const gap = 8;
   const slots = 5;
-  const maxPts = 200;
+  const maxPts = 100;
+  const barW = 12;
   const barsAreaW = slots * slotW + (slots - 1) * gap;
-  const svgW = leftPad + barsAreaW + 4;
-  const svgH = chartBottom + 20;
+  const svgW = leftPad + barsAreaW + 8;
+  const svgH = chartBottom + 4;
   const items = Array.from({ length: slots }, (_, i) => history[Math.max(0, history.length - slots) + i] ?? null);
 
-  const toY = (pts: number) => chartTop + chartH - Math.round((pts / maxPts) * chartH);
-
-  const linePoints = items
-    .map((item, i) => {
-      if (!item) return null;
-      const avg = (item.mathCounted + item.frenchCounted) / 2;
-      const x = leftPad + i * (slotW + gap) + slotW / 2;
-      const y = toY(avg);
-      return `${x},${y}`;
-    })
-    .filter(Boolean)
-    .join(" ");
-
-  const barW = 14;
+  const toY = (pts: number) => chartTop + chartH - Math.round((Math.min(pts, maxPts) / maxPts) * chartH);
 
   return (
-    <div className="space-y-1">
-      <div className="relative px-0.5" style={{ height: 14 }}>
-        {SCALE_TICKS.map((tick) => (
-          <span
-            key={tick}
-            className="absolute -translate-x-1/2 text-[9px] font-medium text-[var(--color-text-secondary)]"
-            style={{ left: `${(tick / maxPts) * 100}%` }}
-          >
-            {tick}
-          </span>
-        ))}
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-3 text-center text-sm">
+        <p className="font-semibold text-[var(--color-text-primary)]">
+          Math : <span className="tabular-nums">{formatHalf(mathCounted)}</span>
+          <span className="text-[var(--color-text-secondary)]"> / 100</span>
+        </p>
+        <p className="font-semibold text-[var(--color-text-primary)]">
+          Français : <span className="tabular-nums">{formatHalf(frenchCounted)}</span>
+          <span className="text-[var(--color-text-secondary)]"> / 100</span>
+        </p>
       </div>
       <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full overflow-visible">
-        {PLACEMENT_ZONES.map((z) => {
-          const y1 = toY(z.max);
-          const y2 = toY(z.min);
+        {Y_TICKS.map((tick) => {
+          const y = toY(tick);
           return (
-            <rect
-              key={z.zone}
-              x={leftPad}
-              y={y1}
-              width={barsAreaW}
-              height={Math.max(1, y2 - y1)}
-              fill={ZONE_COLORS[z.zone]}
-              opacity={0.08}
-            />
+            <g key={tick}>
+              <line
+                x1={leftPad}
+                y1={y}
+                x2={leftPad + barsAreaW}
+                y2={y}
+                stroke="var(--color-border-default)"
+                strokeOpacity={tick === 0 ? 1 : 0.35}
+              />
+              <text
+                x={leftPad - 6}
+                y={y + 3}
+                textAnchor="end"
+                fontSize="9"
+                fontWeight="500"
+                fill="var(--color-text-secondary)"
+              >
+                {tick}
+              </text>
+            </g>
           );
         })}
-        <line x1={leftPad} y1={chartBottom} x2={leftPad + barsAreaW} y2={chartBottom} stroke="var(--color-border-default)" />
-        {linePoints && (
-          <polyline
-            points={linePoints}
-            fill="none"
-            stroke={ACCENT}
-            strokeWidth={2}
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        )}
         {items.map((item, i) => {
           const x = leftPad + i * (slotW + gap);
           if (!item) return null;
@@ -96,8 +85,8 @@ export function PlacementEvolutionChart({ history }: { history: PlacementTotalSn
           const frenchX = x + slotW / 2 + 2;
           return (
             <g key={item.date + i}>
-              <rect x={mathX} y={mathY} width={barW} height={mathH} rx={3} fill={MATH_COLOR} opacity={0.9} />
-              <rect x={frenchX} y={frenchY} width={barW} height={frenchH} rx={3} fill={FRENCH_COLOR} opacity={0.95} />
+              <rect x={mathX} y={mathY} width={barW} height={mathH} rx={2} fill={MATH_COLOR} opacity={0.9} />
+              <rect x={frenchX} y={frenchY} width={barW} height={frenchH} rx={2} fill={FRENCH_COLOR} opacity={0.95} />
             </g>
           );
         })}
@@ -110,10 +99,6 @@ export function PlacementEvolutionChart({ history }: { history: PlacementTotalSn
         <span className="flex items-center gap-1.5">
           <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: FRENCH_COLOR }} />
           Français
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-4 rounded" style={{ background: ACCENT }} />
-          Moyenne
         </span>
       </div>
     </div>

@@ -32,9 +32,13 @@ export function frenchPendingPoints(session: Pick<PlacementFrenchSession, "pe" |
   return pending;
 }
 
+export function roundToHalf(value: number): number {
+  return Math.round(value * 2) / 2;
+}
+
 export function frenchCountedTotal(session: Pick<PlacementFrenchSession, "ce" | "co" | "pe" | "po" | "level">): number {
   const raw = frenchRawTotal(session);
-  return Math.round(raw * PLACEMENT_LEVEL_FACTOR[session.level] * 10) / 10;
+  return roundToHalf(raw * PLACEMENT_LEVEL_FACTOR[session.level]);
 }
 
 export function buildFrenchSession(
@@ -62,7 +66,7 @@ export function buildPlacementProfile(
   const frenchBest = pickBestFrenchSession(frenchSessions);
   const mathCounted = mathLatest?.points ?? 0;
   const frenchCounted = frenchBest?.countedTotal ?? 0;
-  const total = mathCounted + frenchCounted;
+  const total = roundToHalf(mathCounted + frenchCounted);
   const pendingFrench = frenchBest ? frenchPendingPoints(frenchBest) : 0;
 
   return {

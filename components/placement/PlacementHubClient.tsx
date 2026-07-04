@@ -2,15 +2,25 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { savePlacementToCloudAction } from "@/app/actions/placement";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { PlacementEvolutionChart } from "@/components/placement/PlacementEvolutionChart";
 import type { PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types";
-import { loadFrenchDraft, loadMathHistory, loadFrenchSessions, loadTotalHistory } from "@/lib/placement/storage";
+import {
+  loadFrenchDraft,
+  loadFrenchSessions,
+  loadMathHistory,
+  loadTotalHistory,
+  recomputePlacementProfile,
+  saveFrenchDraft,
+} from "@/lib/placement/storage";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
 const LEVEL_KEY = "placement-selected-level";
 const ACCENT = "var(--color-accent-quiz)";
+const CARD_TITLE = "text-[10px] font-bold uppercase tracking-wide";
+const SECTION_HEADING = "text-sm font-bold text-[var(--color-text-primary)]";
 
 const LEVEL_TOGGLE: { id: PlacementLevel; label: string }[] = [
   { id: "base", label: "A1" },
@@ -27,6 +37,10 @@ const SKILL_HEADERS: Record<FrenchSkill, string> = {
   pe: "PE",
   po: "PO",
 };
+
+function formatHalf(value: number) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
 
 function stepIndex(step: PlacementFrenchDraft["step"]) {
   if (step === "recap") return STEP_ORDER.length;
@@ -57,12 +71,54 @@ function skillScoreLabel(draft: PlacementFrenchDraft, skill: FrenchSkill): strin
   return "—";
 }
 
+function PlacementIntro() {
+  return (
+    <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+      <p>
+        Le test de placement comporte <strong className="text-[var(--color-text-primary)]">deux épreuves chronométrées de 100 points</strong> chacune :
+        un test de mathématiques et un test de français.
+      </p>
+
+      <div className="space-y-2">
+        <h2 className={SECTION_HEADING}>Test de mathématiques</h2>
+        <p>
+          Le parcours est progressif, du niveau primaire au niveau secondaire. Il couvre notamment :
+        </p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>additions, soustractions, multiplications et divisions</li>
+          <li>périmètre et aire</li>
+          <li>fractions et pourcentages</li>
+          <li>équations</li>
+        </ul>
+      </div>
+
+      <div className="space-y-2">
+        <h2 className={SECTION_HEADING}>Test de français</h2>
+        <p>Il est organisé en quatre parties :</p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>compréhension écrite</li>
+          <li>compréhension orale</li>
+          <li>production écrite</li>
+          <li>production orale</li>
+        </ul>
+        <p>
+          Le test peut être interrompu après chaque étape et repris plus tard. Les points du niveau{" "}
+          <strong className="text-[var(--color-text-primary)]">A1</strong> sont recalculés au prorata de{" "}
+          <strong className="text-[var(--color-text-primary)]">60&nbsp;%</strong>, ceux du niveau{" "}
+          <strong className="text-[var(--color-text-primary)]">A2</strong> à{" "}
+          <strong className="text-[var(--color-text-primary)]">80&nbsp;%</strong>.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function FrenchTestInProgressCard({
   draft,
-  onResume,
+  onReset,
 }: {
   draft: PlacementFrenchDraft;
-  onResume: () => void;
+  onReset: () => void;
 }) {
   const activeSkill = draft.step === "recap" ? null : (draft.step as FrenchSkill);
 
@@ -74,10 +130,19 @@ function FrenchTestInProgressCard({
         background: "color-mix(in oklch, var(--color-accent-quiz) 8%, white)",
       }}
     >
-      <p className="text-sm font-bold" style={{ color: ACCENT }}>Test de français en cours</p>
+      <div className="flex items-center justify-between gap-2">
+        <p className={CARD_TITLE} style={{ color: ACCENT }}>Test de français en cours</p>
+        <button
+          type="button"
+          onClick={onReset}
+          className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+        >
+          Reset
+        </button>
+      </div>
       <div className="mt-3 grid grid-cols-4 gap-2 text-center">
         {STEP_ORDER.map((skill) => (
-          <p key={skill} className="text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+          <p key={skill} className={CARD_TITLE} style={{ color: ACCENT }}>
             {SKILL_HEADERS[skill]}
           </p>
         ))}
@@ -91,22 +156,6 @@ function FrenchTestInProgressCard({
             {skillScoreLabel(draft, skill)}
           </p>
         ))}
-        {STEP_ORDER.map((skill) => (
-          <div key={`${skill}-action`} className="flex justify-center">
-            {activeSkill === skill ? (
-              <button
-                type="button"
-                onClick={onResume}
-                className="rounded-[var(--radius-md)] px-2 py-1 text-[10px] font-bold text-white"
-                style={{ background: ACCENT }}
-              >
-                Reprendre
-              </button>
-            ) : (
-              <span className="text-[10px] text-transparent" aria-hidden>—</span>
-            )}
-          </div>
-        ))}
       </div>
     </div>
   );
@@ -115,13 +164,15 @@ function FrenchTestInProgressCard({
 function FrenchLevelToggle({
   level,
   onChange,
+  disabled = false,
 }: {
   level: PlacementLevel;
   onChange: (next: PlacementLevel) => void;
+  disabled?: boolean;
 }) {
   return (
     <div
-      className="flex shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5"
+      className={`flex shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
       role="group"
       aria-label="Niveau du test français"
     >
@@ -129,16 +180,38 @@ function FrenchLevelToggle({
         <button
           key={opt.id}
           type="button"
-          onClick={() => onChange(opt.id)}
+          disabled={disabled}
+          onClick={() => !disabled && onChange(opt.id)}
           className={`min-w-[2.25rem] rounded-md px-2 py-1.5 text-xs font-bold transition-colors ${
             level === opt.id ? "text-white" : "text-[var(--color-text-secondary)]"
-          }`}
+          } ${disabled ? "cursor-not-allowed" : ""}`}
           style={level === opt.id ? { background: ACCENT } : undefined}
           aria-pressed={level === opt.id}
         >
           {opt.label}
         </button>
       ))}
+    </div>
+  );
+}
+
+function ScoreCard({
+  title,
+  points,
+  footer,
+}: {
+  title: string;
+  points: number;
+  footer?: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-h-[8.5rem] flex-col items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-center">
+      <p className={CARD_TITLE} style={{ color: ACCENT }}>{title}</p>
+      <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+        {formatHalf(points)}
+        <span className="text-sm font-medium text-[var(--color-text-secondary)]"> / 100</span>
+      </p>
+      {footer}
     </div>
   );
 }
@@ -157,12 +230,28 @@ export function PlacementHubClient() {
   const [history, setHistory] = useState(() => loadTotalHistory());
   const [ready, setReady] = useState(false);
 
+  const frenchInProgress = !!(draft && draft.step !== "recap");
+  const displayLevel = frenchInProgress && draft ? draft.level : level;
+
+  function refreshProfile() {
+    const profile = recomputePlacementProfile();
+    setMathCounted(profile.mathCounted);
+    setFrenchCounted(profile.frenchCounted);
+    setProfileTotal(profile.total);
+    setZone(profile.zone);
+    setPendingFrench(profile.pendingFrench);
+    setHistory(loadTotalHistory());
+    return profile;
+  }
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      const localDraft = loadFrenchDraft();
       try {
         const saved = localStorage.getItem(LEVEL_KEY) as PlacementLevel | null;
-        if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
+        if (localDraft?.level) setLevel(localDraft.level);
+        else if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
       } catch { /* ignore */ }
       const profile = await syncPlacementFromCloud();
       if (cancelled) return;
@@ -173,7 +262,7 @@ export function PlacementHubClient() {
       setProfileTotal(profile.total);
       setZone(profile.zone);
       setPendingFrench(profile.pendingFrench);
-      setDraft(loadFrenchDraft());
+      setDraft(localDraft);
       setHistory(loadTotalHistory());
       setReady(true);
     })();
@@ -181,6 +270,7 @@ export function PlacementHubClient() {
   }, []);
 
   function selectLevel(next: PlacementLevel) {
+    if (frenchInProgress) return;
     setLevel(next);
     localStorage.setItem(LEVEL_KEY, next);
   }
@@ -197,6 +287,18 @@ export function PlacementHubClient() {
     router.push(`/placement/francais?level=${resumeLevel}`);
   }
 
+  async function resetFrenchDraft() {
+    saveFrenchDraft(null);
+    setDraft(null);
+    refreshProfile();
+    void savePlacementToCloudAction({
+      mathHistory: loadMathHistory(),
+      frenchSessions: loadFrenchSessions(),
+      frenchDraft: null,
+      totalHistory: loadTotalHistory(),
+    });
+  }
+
   if (!ready) {
     return (
       <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
@@ -207,29 +309,16 @@ export function PlacementHubClient() {
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <PlacementPageHeader
-        label="Positionnement"
-        title="Test de placement"
-        subtitle="Mathématiques (100 pts) et français CE, CO, PE, PO (100 pts). Total sur 200 points."
-        backHref="/"
-      />
+      <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" />
+      <PlacementIntro />
 
-      {draft && draft.step !== "recap" && (
-        <FrenchTestInProgressCard draft={draft} onResume={resumeFrench} />
+      {frenchInProgress && draft && (
+        <FrenchTestInProgressCard draft={draft} onReset={resetFrenchDraft} />
       )}
 
       <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-3">
-          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-            <p className="text-[10px] font-bold uppercase" style={{ color: ACCENT }}>Mathématiques</p>
-            <p className="mt-1 text-2xl font-bold text-[var(--color-text-primary)]">
-              {mathCounted}
-              <span className="text-sm font-medium text-[var(--color-text-secondary)]"> / 100</span>
-            </p>
-            <p className="mt-1 text-[10px] text-[var(--color-text-secondary)]">
-              {mathDone ? "Dernier essai enregistré" : "Non fait (0)"}
-            </p>
-          </div>
+        <div className="flex flex-col gap-3">
+          <ScoreCard title="Mathématiques" points={mathCounted} />
           <button
             type="button"
             onClick={() => router.push("/placement/mathematiques")}
@@ -240,47 +329,38 @@ export function PlacementHubClient() {
           </button>
         </div>
 
-        <div className="space-y-3">
-          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-            <p className="text-[10px] font-bold uppercase" style={{ color: ACCENT }}>Français</p>
-            <div className="mt-1 flex items-start justify-between gap-2">
-              <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                {frenchCounted}
-                <span className="text-sm font-medium text-[var(--color-text-secondary)]"> / 100</span>
-              </p>
-              <FrenchLevelToggle level={level} onChange={selectLevel} />
-            </div>
-            <p className="mt-1 text-[10px] text-[var(--color-text-secondary)]">
-              {frenchDone ? "Meilleur essai enregistré" : "Non fait (0)"}
-            </p>
-          </div>
+        <div className="flex flex-col gap-3">
+          <ScoreCard
+            title="Français"
+            points={frenchCounted}
+            footer={
+              <FrenchLevelToggle
+                level={displayLevel}
+                onChange={selectLevel}
+                disabled={frenchInProgress}
+              />
+            }
+          />
           <button
             type="button"
-            onClick={launchFrench}
+            onClick={frenchInProgress ? resumeFrench : launchFrench}
             className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
             style={{ background: ACCENT }}
           >
-            {frenchDone ? "Refaire français" : "Test français"}
+            {frenchInProgress ? "Reprendre" : frenchDone ? "Refaire français" : "Test français"}
           </button>
         </div>
       </div>
 
-      <p className="text-center text-sm text-[var(--color-text-secondary)]">
-        Sélectionnez votre niveau.
-      </p>
-
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Total placement</p>
         <p className="mt-1 text-3xl font-bold text-[var(--color-text-primary)]">
-          {profileTotal}
+          {formatHalf(profileTotal)}
           <span className="text-base font-medium text-[var(--color-text-secondary)]"> / 200</span>
         </p>
         <p className="mt-1 text-sm font-semibold" style={{ color: ACCENT }}>Zone {zone}</p>
         {pendingFrench > 0 && (
           <p className="mt-2 text-xs" style={{ color: ACCENT }}>{pendingFrench} pts en attente de correction professeur</p>
-        )}
-        {!mathDone && !frenchDone && (
-          <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Parties non faites comptées à 0.</p>
         )}
         <div className="mt-4">
           <PlacementUnifiedChart total={profileTotal} />
@@ -288,9 +368,15 @@ export function PlacementHubClient() {
       </div>
 
       {history.length > 0 && (
-        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pt-4 pb-3">
-          <p className="mb-3 text-sm font-bold text-[var(--color-text-primary)]">Évolution du total</p>
-          <PlacementEvolutionChart history={history} />
+        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Évolution du total</p>
+          <div className="mt-3">
+            <PlacementEvolutionChart
+              history={history}
+              mathCounted={mathCounted}
+              frenchCounted={frenchCounted}
+            />
+          </div>
         </div>
       )}
     </main>
