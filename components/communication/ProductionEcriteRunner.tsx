@@ -788,8 +788,12 @@ export function ProductionEcriteRunner({
           isSending={isSending}
           sendMessage={sendMessage}
         />
-        <HiddenNav onBack={() => router.push(EXPRESSION_TAB_HREF)} onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
-        <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+        {mode !== "placement" && (
+          <>
+            <HiddenNav onBack={() => router.push(EXPRESSION_TAB_HREF)} onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
+            <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+          </>
+        )}
       </main>
     );
   }
