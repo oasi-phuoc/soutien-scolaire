@@ -77,44 +77,80 @@ function FrenchTestInProgressCard({
   draft: PlacementFrenchDraft;
   onReset: () => void;
 }) {
+  const [confirmReset, setConfirmReset] = useState(false);
   const activeSkill = draft.step === "recap" ? null : (draft.step as FrenchSkill);
+  const skillFill = "color-mix(in oklch, var(--color-accent-quiz) 14%, white)";
 
   return (
-    <div
-      className="rounded-[var(--radius-lg)] border p-4"
-      style={{
-        borderColor: "color-mix(in oklch, var(--color-accent-quiz) 35%, white)",
-        background: "color-mix(in oklch, var(--color-accent-quiz) 8%, white)",
-      }}
-    >
-      <div className="flex items-center justify-between gap-2">
-        <p className={CARD_TITLE} style={{ color: ACCENT }}>Test de français en cours</p>
-        <button
-          type="button"
-          onClick={onReset}
-          className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
-        >
-          Reset
-        </button>
-      </div>
-      <div className="mt-3 grid grid-cols-4 gap-2 text-center">
-        {STEP_ORDER.map((skill) => (
-          <p key={skill} className={CARD_TITLE} style={{ color: ACCENT }}>
-            {SKILL_HEADERS[skill]}
-          </p>
-        ))}
-        {STEP_ORDER.map((skill) => (
-          <p
-            key={`${skill}-score`}
-            className={`text-[10px] leading-snug ${
-              activeSkill === skill ? "font-semibold text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"
-            }`}
+    <>
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-[var(--color-bg-primary)]">
+        <div className="flex items-center justify-between gap-2">
+          <p className={CARD_TITLE} style={{ color: ACCENT }}>Test de français en cours</p>
+          <button
+            type="button"
+            onClick={() => setConfirmReset(true)}
+            className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
           >
-            {skillScoreLabel(draft, skill)}
-          </p>
-        ))}
+            Reset
+          </button>
+        </div>
+        <div className="mt-3 grid grid-cols-4 gap-2">
+          {STEP_ORDER.map((skill) => (
+            <div
+              key={skill}
+              className={`rounded-[var(--radius-md)] border p-2.5 text-center ${
+                activeSkill === skill
+                  ? "border-[var(--color-accent-quiz)]"
+                  : "border-[var(--color-border-default)]"
+              }`}
+              style={{ background: skillFill }}
+            >
+              <p className={CARD_TITLE} style={{ color: ACCENT }}>{SKILL_HEADERS[skill]}</p>
+              <p
+                className={`mt-1.5 text-sm font-semibold leading-snug ${
+                  activeSkill === skill
+                    ? "text-[var(--color-text-primary)]"
+                    : "text-[var(--color-text-secondary)]"
+                }`}
+              >
+                {skillScoreLabel(draft, skill)}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {confirmReset && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler la progression ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              Votre progression du test de français en cours sera perdue. Vous pourrez recommencer depuis le début.
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setConfirmReset(false);
+                  onReset();
+                }}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                Annuler la progression
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmReset(false)}
+                className="flex-1 rounded-[var(--radius-lg)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                style={{ background: ACCENT }}
+              >
+                Continuer le test
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
