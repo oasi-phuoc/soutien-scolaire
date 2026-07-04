@@ -188,6 +188,19 @@ function FrenchLevelToggle({
   );
 }
 
+/** Même gabarit que FrenchLevelToggle, invisible — aligne les cartes maths/français. */
+function FrenchLevelToggleSpacer() {
+  return (
+    <div className="invisible flex shrink-0 rounded-lg border border-transparent p-0.5" aria-hidden>
+      {LEVEL_TOGGLE.map((opt) => (
+        <span key={opt.id} className="min-w-[2.25rem] rounded-md px-2 py-1.5 text-xs font-bold">
+          {opt.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function ScoreCard({
   title,
   points,
@@ -198,13 +211,15 @@ function ScoreCard({
   footer?: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-[8.5rem] flex-col items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-center">
+    <div className="flex h-full min-h-[9rem] flex-1 flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-center">
       <p className={CARD_TITLE} style={{ color: ACCENT }}>{title}</p>
-      <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+      <p className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">
         {formatHalf(points)}
         <span className="text-sm font-medium text-[var(--color-text-secondary)]"> / 100</span>
       </p>
-      {footer}
+      <div className="mt-auto flex justify-center pt-2">
+        {footer ?? <FrenchLevelToggleSpacer />}
+      </div>
     </div>
   );
 }
@@ -311,9 +326,9 @@ export function PlacementHubClient() {
         <FrenchTestInProgressCard draft={draft} onReset={resetFrenchDraft} />
       )}
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 items-stretch gap-3">
         <div className="flex flex-col gap-3">
-          <ScoreCard title="Mathématiques" points={mathCounted} />
+          <ScoreCard title="Mathématiques" points={mathCounted} footer={<FrenchLevelToggleSpacer />} />
           <button
             type="button"
             onClick={() => router.push("/placement/mathematiques")}
