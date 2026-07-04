@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 
 export function PlacementBackButton({
-  href,
+  href = "/placement",
   onClick,
   ariaLabel = "Retour",
 }: {
@@ -17,47 +16,25 @@ export function PlacementBackButton({
   const evalGuard = useEvalNavGuard();
   const className =
     "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-quiz)] text-white transition-opacity hover:opacity-80";
-  const icon = (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <path d="M15 18l-6-6 6-6" />
-    </svg>
-  );
 
   const runLeave = () => {
     if (onClick) onClick();
-    else if (href) router.push(href);
+    else router.push(href);
   };
-
-  const handleLeave = (event?: { preventDefault: () => void }) => {
-    if (evalGuard?.active) {
-      event?.preventDefault();
-      evalGuard.requestNavigate(runLeave);
-      return;
-    }
-    if (event) {
-      event.preventDefault();
-      runLeave();
-    }
-  };
-
-  if (href && !onClick) {
-    return (
-      <Link
-        href={href}
-        aria-label={ariaLabel}
-        className={className}
-        onClick={(event) => {
-          if (evalGuard?.active) handleLeave(event);
-        }}
-      >
-        {icon}
-      </Link>
-    );
-  }
 
   return (
-    <button type="button" onClick={() => handleLeave()} aria-label={ariaLabel} className={className}>
-      {icon}
+    <button
+      type="button"
+      onClick={() => {
+        if (evalGuard?.active) evalGuard.requestNavigate(runLeave);
+        else runLeave();
+      }}
+      aria-label={ariaLabel}
+      className={className}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
     </button>
   );
 }
@@ -66,7 +43,7 @@ export function PlacementPageHeader({
   label,
   title,
   subtitle,
-  backHref,
+  backHref = "/placement",
   onBack,
 }: {
   label?: string;

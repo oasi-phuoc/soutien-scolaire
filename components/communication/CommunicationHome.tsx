@@ -55,7 +55,7 @@ function ModuleProgressBar({ total, completed }: { total: number; completed: num
 export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ PE: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
 
   useEffect(() => {
     try {

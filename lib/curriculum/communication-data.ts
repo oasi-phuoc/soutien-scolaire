@@ -20,50 +20,6 @@ export type CommunicationModule = {
 
 export const COMM_MODULES: CommunicationModule[] = [
   {
-    id: "PE",
-    level: "PE",
-    title: "Production \u00e9crite",
-    description: "",
-    submodules: [
-      { id: "PE-1", code: "PE.1", title: "Base", available: true, lessonId: "expression-e1-1" },
-      { id: "PE-2", code: "PE.2", title: "Moyen", available: true, lessonId: "expression-e1-2" },
-      { id: "PE-3", code: "PE.3", title: "Avanc\u00e9", available: true, lessonId: "expression-e1-3" },
-    ],
-  },
-  {
-    id: "PO",
-    level: "PO",
-    title: "Production orale",
-    description: "",
-    submodules: [
-      { id: "PO-1", code: "PO.1", title: "Base", available: true, lessonId: "production-orale-1" },
-      { id: "PO-2", code: "PO.2", title: "Moyen", available: true, lessonId: "production-orale-2" },
-      { id: "PO-3", code: "PO.3", title: "Avanc\u00e9", available: true, lessonId: "production-orale-3" },
-    ],
-  },
-  {
-    id: "CE",
-    level: "CE",
-    title: "Compr\u00e9hension \u00e9crite",
-    description: "",
-    submodules: [
-      { id: "CE-1", code: "CE.1", title: "Base", available: true, lessonId: "comprehension-ecrite-1" },
-      { id: "CE-2", code: "CE.2", title: "Moyen", available: true, lessonId: "comprehension-ecrite-2" },
-      { id: "CE-3", code: "CE.3", title: "Avanc\u00e9", available: true, lessonId: "comprehension-ecrite-3" },
-    ],
-  },
-  {
-    id: "CO",
-    level: "CO",
-    title: "Compr\u00e9hension orale",
-    description: "",
-    submodules: [
-      { id: "CO-1", code: "CO.1", title: "Base", available: true, lessonId: "comprehension-orale-1" },
-      { id: "CO-2", code: "CO.2", title: "Moyen", available: true, lessonId: "comprehension-orale-2" },
-      { id: "CO-3", code: "CO.3", title: "Avanc\u00e9", available: true, lessonId: "comprehension-orale-3" },
-    ],
-  },
-  {
     id: "E1",
     level: "E1",
     title: "Expression orale - Base",
@@ -105,7 +61,6 @@ export const COMM_MODULES: CommunicationModule[] = [
 ];
 
 const LEGACY_COMM_IDS: Record<string, string> = {
-  "E1-1": "PE-1", "E1-2": "PE-2", "E1-3": "PE-3",
   "P1-0": "E1-0", "P1-1": "E1-1", "P1-2": "E1-2", "P1-3": "E1-3", "P1-4": "E1-4", "P1-5": "E1-5",
   "P2-1": "E2-1", "P2-2": "E2-2", "P2-3": "E2-3", "P2-4": "E2-4", "P2-5": "E2-5",
   "P3-1": "E3-1", "P3-2": "E3-2", "P3-3": "E3-3", "P3-4": "E3-4",
