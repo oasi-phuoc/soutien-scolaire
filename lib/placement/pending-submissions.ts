@@ -18,6 +18,16 @@ function writeQueue(items: PendingPlacementSubmission[]) {
   localStorage.setItem(PLACEMENT_PENDING_KEY, JSON.stringify(items));
 }
 
+function isRetryablePlacementSubmit(reason?: string): boolean {
+  if (typeof navigator !== "undefined" && !navigator.onLine) return true;
+  if (!reason) return false;
+  return /fetch|network|timeout|failed to fetch|econnreset/i.test(reason);
+}
+
+export function isRetryablePlacementSubmitError(reason?: string): boolean {
+  return isRetryablePlacementSubmit(reason);
+}
+
 export function queuePlacementSubmission(item: PendingPlacementSubmission) {
   const queue = readQueue().filter((q) => !(q.sessionId === item.sessionId && q.kind === item.kind));
   queue.push(item);

@@ -132,4 +132,18 @@ ALTER TABLE public.profiles
 COMMENT ON COLUMN public.profiles.placement_total_history IS
   'Last placement /200 total snapshots for evolution chart (max ~10 entries).';
 
+-- -----------------------------------------------------------------------------
+-- 5. Fix placement_session_id : text au lieu de uuid
+-- Fichier source : 20260704170000_placement_session_id_text.sql
+-- Les ids de session placement sont des chaînes "fr-{timestamp}-{random}",
+-- pas des UUID PostgreSQL. Sans ce correctif, l'envoi PE/PO échoue silencieusement.
+-- -----------------------------------------------------------------------------
+
+ALTER TABLE public.expression_submissions
+  ALTER COLUMN placement_session_id TYPE text
+  USING placement_session_id::text;
+
+COMMENT ON COLUMN public.expression_submissions.placement_session_id IS
+  'Links PE/PO submissions to a French placement session (string id, e.g. fr-...).';
+
 -- =============================================================================

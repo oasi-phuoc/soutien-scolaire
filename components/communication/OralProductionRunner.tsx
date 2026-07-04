@@ -39,7 +39,7 @@ import {
 import { useRegisterEvalGuard, useEvalNavGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
-import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
+import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -687,7 +687,7 @@ export function OralProductionRunner({
         aiFeedback: allGrammar,
         placementSessionId: mode === "placement" ? placementSessionId : undefined,
       });
-      if (mode === "placement" && !result.ok && placementSessionId) {
+      if (mode === "placement" && !result.ok && placementSessionId && isRetryablePlacementSubmitError(result.reason)) {
         queuePlacementSubmission({
           kind: "po",
           id: `po-${placementSessionId}-${Date.now()}`,

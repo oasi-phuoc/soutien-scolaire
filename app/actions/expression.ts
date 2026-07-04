@@ -95,6 +95,12 @@ export async function submitExpressionAction(input: {
         reason: "La règle d’envoi Supabase doit être mise à jour. Exécutez la migration 20260620140000.",
       };
     }
+    if (error.message.includes("invalid input syntax for type uuid") && input.placementSessionId) {
+      return {
+        ok: false,
+        reason: "Erreur de liaison placement : exécutez la migration 20260704170000_placement_session_id_text.sql dans Supabase (placement_session_id doit être text, pas uuid).",
+      };
+    }
     return { ok: false, reason: error.message };
   }
   revalidatePath("/messagerie");

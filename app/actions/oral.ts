@@ -59,7 +59,15 @@ export async function submitOralAction(input: {
     ai_feedback: input.aiFeedback,
     placement_session_id: input.placementSessionId ?? null,
   }).select("id").single();
-  if (error) return { ok: false, reason: error.message };
+  if (error) {
+    if (error.message.includes("invalid input syntax for type uuid") && input.placementSessionId) {
+      return {
+        ok: false,
+        reason: "Erreur de liaison placement : exécutez la migration 20260704170000_placement_session_id_text.sql dans Supabase (placement_session_id doit être text, pas uuid).",
+      };
+    }
+    return { ok: false, reason: error.message };
+  }
   revalidatePath("/messagerie");
   return { ok: true, submissionId: inserted?.id };
 }

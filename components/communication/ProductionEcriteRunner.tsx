@@ -34,7 +34,7 @@ import {
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
-import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
+import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 
 type StepId = "form" | "short" | "long";
 type Phase = "intro" | "exercise" | "results";
@@ -621,7 +621,7 @@ export function ProductionEcriteRunner({
         placementSessionId: mode === "placement" ? placementSessionId : undefined,
       });
       if (mode === "placement") {
-        if (!result.ok && placementSessionId) {
+        if (!result.ok && placementSessionId && isRetryablePlacementSubmitError(result.reason)) {
           queuePlacementSubmission({
             kind: "pe",
             id: `pe-${placementSessionId}-${Date.now()}`,
