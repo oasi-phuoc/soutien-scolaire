@@ -14,7 +14,6 @@ import {
   changePasswordAction,
   getPlacementHistoryForUserAction,
 } from "@/app/actions/admin";
-import { PlacementHelpButton } from "@/components/placement/PlacementHelpPanel";
 import type { UserRow } from "./AdminTable";
 
 const LANGUE_LABELS: Record<string, string> = {
@@ -245,7 +244,6 @@ function ProgressSection({ user }: { user: UserRow }) {
               <span className="truncate">Test de placement</span>
             </button>
             <span className="flex shrink-0 items-center gap-1">
-              <PlacementHelpButton accentColor="#7c3aed" />
               {combinedProfile ? (
                 <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{formatPlacementHalf(combinedProfile.total)}/200 · {combinedProfile.zone}</span>
               ) : totalHistory.length === 0 ? (
