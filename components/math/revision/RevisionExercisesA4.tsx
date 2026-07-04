@@ -27,11 +27,11 @@ const A4_2_POOL: PoolQuestion[] = [
   { id: "a4-2-ep03", promptFr: "Simplifiez 10/15 en fraction irréductible. (ex: 2/3)", acceptable: ["2/3"] },
   { id: "a4-2-ep04", promptFr: "Simplifiez 12/16 en fraction irréductible. (ex: 3/4)", acceptable: ["3/4"] },
   { id: "a4-2-ep05", promptFr: "2/3 et 4/6 sont-elles des fractions équivalentes ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a4-2-ep06", promptFr: "Complétez : 1/2 = ?/6. Quelle est la valeur de ? ?", acceptable: ["3"] },
-  { id: "a4-2-ep07", promptFr: "Complétez : 3/4 = ?/12. Quelle est la valeur de ? ?", acceptable: ["9"] },
+  { id: "a4-2-ep06", promptFr: "Complétez : 1/2 = ?/6. Quelle est la valeur du numérateur manquant ?", acceptable: ["3"] },
+  { id: "a4-2-ep07", promptFr: "Complétez : 3/4 = ?/12. Quelle est la valeur du numérateur manquant ?", acceptable: ["9"] },
   { id: "a4-2-ep08", promptFr: "Simplifiez 8/12 en fraction irréductible. (ex: 2/3)", acceptable: ["2/3"] },
   { id: "a4-2-ep09", promptFr: "Simplifiez 15/25 en fraction irréductible. (ex: 3/5)", acceptable: ["3/5"] },
-  { id: "a4-2-ep10", promptFr: "Complétez : 2/5 = ?/10. Quelle est la valeur de ? ?", acceptable: ["4"] },
+  { id: "a4-2-ep10", promptFr: "Complétez : 2/5 = ?/10. Quelle est la valeur du numérateur manquant ?", acceptable: ["4"] },
 ];
 
 function A4Ex2(props: RevisionExerciseProps) {
