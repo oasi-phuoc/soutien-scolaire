@@ -13,7 +13,7 @@ import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curricu
 import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
 import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
 import {
-  getArgumentationResponses,
+  getArgumentationResponse,
   getImageDescriptionModel,
   getInterviewSuggestion,
   getSituationDialogueSuggestions,
@@ -594,9 +594,9 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
     [situation.id],
   );
 
-  const argumentationResponses = useMemo(
-    () => getArgumentationResponses(argumentationTopic.theme),
-    [argumentationTopic.theme],
+  const argumentationResponse = useMemo(
+    () => getArgumentationResponse(argumentationTopic.theme, argumentationTopic.prompt),
+    [argumentationTopic.prompt, argumentationTopic.theme],
   );
 
   const dialogueSuggestions = useMemo(
@@ -1525,18 +1525,11 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
                     </CorrectionBlock>
                   )}
 
-                  {num === 5 && argumentationResponses && (
-                    <CorrectionBlock title="Propositions de réponses">
-                      <p>
-                        <span className="font-semibold text-green-700">Réponse positive :</span>
-                        <br />
-                        {argumentationResponses.positive}
-                      </p>
-                      <p>
-                        <span className="font-semibold text-red-700">Réponse négative :</span>
-                        <br />
-                        {argumentationResponses.negative}
-                      </p>
+                  {num === 5 && argumentationResponse && (
+                    <CorrectionBlock title="Proposition de réponse">
+                      <div className="whitespace-pre-line">
+                        {argumentationResponse}
+                      </div>
                     </CorrectionBlock>
                   )}
                 </CommunicationResultsExercise>

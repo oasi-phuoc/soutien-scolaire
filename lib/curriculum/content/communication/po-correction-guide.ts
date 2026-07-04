@@ -675,165 +675,305 @@ export const IMAGE_DESCRIPTION_MODELS: Record<string, ImageDescriptionModel> = O
   ]),
 );
 
-// ——— Argumentation model responses (task 5) ———
+// ——— Argumentation model response (task 5) ———
 
-export const ARGUMENTATION_RESPONSES: Record<string, { positive: string; negative: string }> = {
+type ArgumentationThemeModel = {
+  thesis: string;
+  arguments: Array<{ title: string; explanation: string; example: string }>;
+  counter?: { idea: string; refutation: string };
+  conclusion: string;
+};
+
+const ARGUMENTATION_THEME_MODELS: Record<string, ArgumentationThemeModel> = {
   "transports publics": {
-    positive:
-      "J'aime les transports publics parce qu'ils sont pratiques et moins chers que la voiture. Je peux lire ou me reposer pendant le trajet. C'est aussi mieux pour l'environnement.",
-    negative:
-      "Je n'aime pas toujours les transports publics parce qu'ils sont parfois en retard ou bondés. Le soir, il y a moins de bus et c'est difficile de rentrer tard.",
+    thesis: "les transports publics doivent être encouragés, car ils rendent les déplacements plus simples, plus économiques et plus responsables",
+    arguments: [
+      { title: "ils sont pratiques au quotidien", explanation: "ils permettent de se déplacer sans chercher une place de parc et sans conduire dans les embouteillages", example: "par exemple, une personne peut prendre le bus pour aller au travail et utiliser le temps du trajet pour lire ou réviser le français" },
+      { title: "ils coûtent souvent moins cher que la voiture", explanation: "une voiture demande une assurance, de l'essence, des réparations et un parking", example: "avec un abonnement mensuel, une famille peut mieux prévoir son budget de transport" },
+      { title: "ils protègent davantage l'environnement", explanation: "un bus ou un train transporte beaucoup de personnes en même temps et réduit le nombre de voitures sur la route", example: "dans une ville, moins de voitures signifie aussi moins de bruit et un air plus agréable" },
+    ],
+    counter: { idea: "on peut dire que les transports publics sont parfois en retard ou bondés", refutation: "mais ces problèmes peuvent être améliorés avec plus de lignes, de meilleurs horaires et une organisation plus régulière" },
+    conclusion: "il faut donc les développer et les rendre accessibles à tous",
   },
   "téléphone portable": {
-    positive:
-      "J'utilise beaucoup mon téléphone parce qu'il me permet de parler avec ma famille à l'étranger, de chercher des informations et d'apprendre le français avec des applications.",
-    negative:
-      "J'utilise mon téléphone, mais pas trop, parce que je perds du temps sur les réseaux sociaux. Parfois, je préfère parler en personne.",
+    thesis: "le téléphone portable est utile s'il est utilisé avec modération et dans un but clair",
+    arguments: [
+      { title: "il facilite la communication", explanation: "il permet de rester en contact avec la famille, les amis et les services importants", example: "une personne étrangère peut appeler sa famille à l'étranger ou recevoir un message de l'école de son enfant" },
+      { title: "il aide dans la vie pratique", explanation: "il donne accès aux plans, aux horaires, aux traductions et aux démarches en ligne", example: "avec une application, on peut trouver un bus, traduire un mot ou prendre rendez-vous chez le médecin" },
+      { title: "il peut soutenir l'apprentissage", explanation: "les applications, les podcasts et les vidéos permettent de pratiquer régulièrement", example: "un apprenant peut écouter dix minutes de français chaque jour pendant son trajet" },
+    ],
+    counter: { idea: "certains pensent que le téléphone fait perdre du temps", refutation: "c'est vrai si l'on reste trop longtemps sur les réseaux sociaux, mais on peut fixer des limites et choisir des usages utiles" },
+    conclusion: "le téléphone doit rester un outil, pas une dépendance",
   },
   école: {
-    positive:
-      "J'aime l'école parce que j'apprends beaucoup de choses utiles. Les cours de français m'aident à mieux vivre en Suisse et à trouver du travail.",
-    negative:
-      "L'école est parfois difficile pour moi parce que la langue n'est pas facile. J'ai besoin de plus de temps pour comprendre les exercices.",
+    thesis: "l'école est essentielle parce qu'elle prépare à la vie professionnelle, sociale et personnelle",
+    arguments: [
+      { title: "elle transmet des connaissances", explanation: "les cours donnent des bases en langue, calcul, culture générale et organisation", example: "un cours de français aide un adulte à comprendre une lettre administrative ou à parler avec un enseignant" },
+      { title: "elle apprend à vivre avec les autres", explanation: "les élèves doivent écouter, respecter les règles et travailler en groupe", example: "dans un projet de classe, chacun doit participer et accepter les idées des autres" },
+      { title: "elle ouvre des possibilités pour l'avenir", explanation: "une bonne formation donne plus de chances de trouver un emploi ou de continuer des études", example: "un jeune qui maîtrise mieux la langue peut accéder plus facilement à un apprentissage" },
+    ],
+    counter: { idea: "l'école peut être difficile et fatigante", refutation: "mais cette difficulté fait partie de l'apprentissage et peut être accompagnée par les enseignants et la famille" },
+    conclusion: "il faut donc soutenir l'école et aider les élèves à y réussir",
   },
   sport: {
-    positive:
-      "J'aime faire du sport parce que ça me fait du bien et ça me donne de l'énergie. Le week-end, je fais du vélo avec ma famille près du lac.",
-    negative:
-      "Je ne fais pas beaucoup de sport parce que je travaille beaucoup et je suis fatigué le soir. Mais je sais que c'est important pour la santé.",
+    thesis: "le sport est important parce qu'il améliore la santé, l'équilibre mental et les relations sociales",
+    arguments: [
+      { title: "il protège la santé", explanation: "bouger régulièrement renforce le corps et diminue certains risques de maladie", example: "marcher trente minutes par jour peut déjà aider le cœur et la respiration" },
+      { title: "il réduit le stress", explanation: "après le travail ou les cours, l'activité physique aide à se détendre", example: "faire du vélo au bord du lac permet de penser à autre chose et de mieux dormir" },
+      { title: "il crée du lien social", explanation: "beaucoup de sports se pratiquent en équipe ou dans un club", example: "un club de football ou de natation permet de rencontrer des personnes du quartier" },
+    ],
+    counter: { idea: "certaines personnes disent qu'elles n'ont pas le temps", refutation: "mais il n'est pas nécessaire de faire beaucoup : de petites habitudes régulières suffisent pour commencer" },
+    conclusion: "chacun devrait choisir une activité adaptée à son âge et à son rythme",
   },
   alimentation: {
-    positive:
-      "Je préfère manger à la maison parce que c'est plus sain et moins cher. Ma femme cuisine des plats vietnamiens et parfois des plats suisses.",
-    negative:
-      "Parfois, je mange dehors parce que je n'ai pas le temps de cuisiner. C'est pratique, mais ce n'est pas toujours bon pour la santé.",
+    thesis: "une alimentation équilibrée est nécessaire pour rester en bonne santé et mieux vivre au quotidien",
+    arguments: [
+      { title: "elle donne de l'énergie", explanation: "un repas varié aide le corps à travailler, étudier et se concentrer", example: "manger des légumes, des féculents et une protéine évite d'avoir faim trop vite" },
+      { title: "elle prévient des problèmes de santé", explanation: "trop de sucre, de graisse ou de produits industriels peut avoir des conséquences à long terme", example: "cuisiner à la maison permet de contrôler le sel et la quantité d'huile" },
+      { title: "elle peut renforcer la vie familiale", explanation: "préparer et partager un repas crée un moment de discussion", example: "le dimanche, une famille peut cuisiner un plat traditionnel et le faire découvrir aux enfants" },
+    ],
+    counter: { idea: "on pense parfois que manger sainement coûte trop cher", refutation: "mais les produits simples, de saison et cuisinés soi-même peuvent rester abordables" },
+    conclusion: "il faut donc privilégier des habitudes simples, régulières et réalistes",
   },
   travail: {
-    positive:
-      "J'aime mon travail dans l'usine parce que mes collègues sont sympathiques et l'horaire est régulier. C'est un métier stable qui me permet de subvenir aux besoins de ma famille.",
-    negative:
-      "Mon travail est parfois fatigant parce que je fais des heures debout. Mais c'est nécessaire pour gagner ma vie en Suisse.",
+    thesis: "un bon travail ne se résume pas au salaire : il doit aussi offrir du respect, de la stabilité et des perspectives",
+    arguments: [
+      { title: "le salaire reste important", explanation: "il permet de payer le logement, la nourriture, les assurances et les besoins de la famille", example: "un emploi stable aide une personne à organiser son budget chaque mois" },
+      { title: "l'ambiance compte beaucoup", explanation: "des collègues respectueux et un responsable clair rendent le travail moins stressant", example: "dans une équipe solidaire, on ose poser des questions quand on ne comprend pas une tâche" },
+      { title: "la possibilité d'apprendre est essentielle", explanation: "un emploi peut aussi permettre de progresser et d'obtenir plus de responsabilités", example: "une formation interne peut aider un employé à changer de poste ou à mieux parler avec les clients" },
+    ],
+    counter: { idea: "certains choisissent seulement le travail le mieux payé", refutation: "mais un salaire élevé ne compense pas toujours une mauvaise ambiance ou une fatigue excessive" },
+    conclusion: "le meilleur emploi est donc celui qui équilibre revenu, respect et évolution",
   },
   logement: {
-    positive:
-      "J'aime mon appartement parce qu'il est calme et proche des transports. Il y a un petit jardin pour les enfants et les voisins sont gentils.",
-    negative:
-      "Mon logement est un peu petit pour une famille de quatre personnes. Le loyer est aussi assez cher dans la région.",
+    thesis: "un logement correct doit être abordable, bien situé et adapté aux besoins de la famille",
+    arguments: [
+      { title: "le prix est déterminant", explanation: "si le loyer est trop élevé, il reste peu d'argent pour les autres dépenses", example: "une famille doit aussi payer l'assurance maladie, les transports et l'alimentation" },
+      { title: "la localisation facilite la vie", explanation: "vivre près des écoles, des transports et des commerces fait gagner du temps", example: "un appartement proche d'un arrêt de bus aide les parents qui n'ont pas de voiture" },
+      { title: "l'espace influence le bien-être", explanation: "chaque personne a besoin d'un minimum de calme et d'intimité", example: "des enfants qui partagent une chambre ont aussi besoin d'un endroit pour faire leurs devoirs" },
+    ],
+    counter: { idea: "on peut accepter un logement plus petit pour payer moins cher", refutation: "c'est possible temporairement, mais à long terme le manque d'espace peut créer des tensions" },
+    conclusion: "la politique du logement doit donc aider les familles à trouver des solutions dignes",
   },
   famille: {
-    positive:
-      "La famille est très importante pour moi parce qu'elle me donne du soutien et de la joie. Le week-end, nous mangeons ensemble et nous parlons de nos projets.",
-    negative:
-      "Ma famille est importante, mais parfois c'est difficile parce que mes parents vivent loin, au Vietnam. Je les appelle souvent par téléphone.",
+    thesis: "la famille joue un rôle central parce qu'elle apporte du soutien, transmet des valeurs et construit l'identité",
+    arguments: [
+      { title: "elle soutient dans les difficultés", explanation: "quand une personne est malade, triste ou perd son emploi, la famille peut aider concrètement", example: "un parent peut garder les enfants pendant un rendez-vous ou accompagner à l'hôpital" },
+      { title: "elle transmet des repères", explanation: "les enfants apprennent la langue, les traditions et le respect à travers la vie familiale", example: "préparer un plat du pays d'origine permet de garder un lien avec son histoire" },
+      { title: "elle donne un sentiment d'appartenance", explanation: "savoir que l'on compte pour quelqu'un aide à se sentir moins seul", example: "un appel régulier aux grands-parents peut garder la relation vivante malgré la distance" },
+    ],
+    counter: { idea: "certaines familles connaissent aussi des conflits", refutation: "mais ces conflits n'effacent pas l'importance du dialogue, de l'entraide et du respect" },
+    conclusion: "la famille reste donc une base importante, même lorsque ses formes changent",
   },
   "apprentissage du français": {
-    positive:
-      "Apprendre le français n'est pas toujours facile, mais c'est très utile. Les cours, les applications et parler avec mes voisins m'aident beaucoup.",
-    negative:
-      "Le français est difficile pour moi, surtout la grammaire et la prononciation. Parfois, j'ai peur de faire des erreurs quand je parle.",
+    thesis: "apprendre le français est indispensable pour s'intégrer, travailler et participer à la vie sociale",
+    arguments: [
+      { title: "la langue facilite les démarches", explanation: "comprendre le français aide à lire les courriers, remplir des formulaires et parler avec l'administration", example: "à la commune ou chez le médecin, quelques phrases claires évitent beaucoup de malentendus" },
+      { title: "elle ouvre l'accès au travail", explanation: "beaucoup d'emplois demandent de comprendre des consignes et de communiquer avec les collègues", example: "dans un magasin ou une entreprise, parler français permet de répondre aux clients" },
+      { title: "elle crée du lien social", explanation: "oser parler avec les voisins ou les parents d'élèves rend la vie quotidienne plus agréable", example: "une conversation simple dans l'immeuble peut devenir le début d'une relation de confiance" },
+    ],
+    counter: { idea: "la grammaire et la prononciation peuvent décourager", refutation: "mais l'important est de pratiquer régulièrement, même avec des erreurs" },
+    conclusion: "il faut donc multiplier les occasions de parler dans des situations réelles",
   },
   courses: {
-    positive:
-      "Je fais les courses au supermarché et au marché le samedi. J'aime le marché parce que les légumes sont frais et le vendeur est sympathique.",
-    negative:
-      "Je n'aime pas toujours faire les courses parce que c'est long et les prix augmentent. Le week-end, les magasins sont souvent pleins.",
+    thesis: "faire les courses demande de trouver un équilibre entre prix, qualité et habitudes personnelles",
+    arguments: [
+      { title: "le prix compte pour le budget", explanation: "les dépenses alimentaires reviennent chaque semaine et peuvent peser sur une famille", example: "comparer les prix entre le marché et le supermarché aide à mieux gérer son argent" },
+      { title: "la qualité des produits est importante", explanation: "des aliments frais donnent souvent de meilleurs repas et une meilleure santé", example: "acheter des légumes de saison permet de cuisiner simplement et sainement" },
+      { title: "les courses sont aussi un moment social", explanation: "au marché ou dans les petits commerces, on peut parler avec les vendeurs", example: "demander conseil à un boulanger ou à un maraîcher aide à pratiquer le français" },
+    ],
+    counter: { idea: "le supermarché est parfois plus rapide", refutation: "c'est vrai, mais on peut varier selon le temps disponible et les produits recherchés" },
+    conclusion: "le meilleur choix dépend donc du budget, du temps et de la qualité souhaitée",
   },
   santé: {
-    positive:
-      "Pour rester en bonne santé, je mange des légumes, je dors suffisamment et je fais de la marche. Quand je suis malade, je vais chez le médecin rapidement.",
-    negative:
-      "Je fais attention à ma santé, mais ce n'est pas toujours facile ici parce que les soins sont chers et les rendez-vous prennent du temps.",
+    thesis: "préserver sa santé demande de la prévention, de bonnes habitudes et un accès clair aux soins",
+    arguments: [
+      { title: "les habitudes quotidiennes sont essentielles", explanation: "manger équilibré, dormir suffisamment et bouger diminuent les risques", example: "marcher après le repas ou prendre les escaliers sont de petits gestes utiles" },
+      { title: "la prévention évite des problèmes graves", explanation: "consulter assez tôt permet souvent de soigner plus facilement", example: "un contrôle chez le médecin peut détecter une tension trop élevée" },
+      { title: "comprendre le système de santé rassure", explanation: "assurance, rendez-vous et médicaments peuvent être difficiles pour les nouveaux arrivants", example: "une explication simple aide une personne à savoir quand appeler son médecin ou les urgences" },
+    ],
+    counter: { idea: "les soins coûtent cher et les rendez-vous prennent du temps", refutation: "mais retarder les soins peut coûter encore plus cher et aggraver la situation" },
+    conclusion: "la santé doit donc être protégée avant l'apparition des grands problèmes",
   },
   argent: {
-    positive:
-      "J'économise un peu d'argent chaque mois pour les vacances et les imprévus. J'achète surtout ce qui est nécessaire : nourriture, loyer et transport.",
-    negative:
-      "La vie est chère en Suisse, donc je dois faire attention à mes dépenses. Je n'achète pas souvent des choses qui ne sont pas essentielles.",
+    thesis: "bien gérer son argent est nécessaire pour vivre plus sereinement et éviter les difficultés",
+    arguments: [
+      { title: "un budget donne de la visibilité", explanation: "noter les revenus et les dépenses permet de savoir ce qui est possible", example: "on peut réserver une somme pour le loyer, les assurances, la nourriture et les transports" },
+      { title: "l'épargne protège contre les imprévus", explanation: "une petite réserve aide en cas de facture médicale, réparation ou perte d'emploi", example: "mettre même cinquante francs de côté chaque mois peut devenir utile" },
+      { title: "l'éducation financière évite les pièges", explanation: "comprendre les crédits, les abonnements et les intérêts empêche de s'endetter trop vite", example: "avant de signer un contrat, il faut lire les frais et la durée" },
+    ],
+    counter: { idea: "certaines personnes pensent qu'il faut profiter immédiatement", refutation: "profiter est important, mais sans organisation les problèmes arrivent vite" },
+    conclusion: "il faut donc apprendre tôt à équilibrer plaisir, besoins et sécurité",
   },
   Internet: {
-    positive:
-      "Internet est très utile pour moi parce que je peux apprendre le français, regarder des vidéos et communiquer avec ma famille au Vietnam.",
-    negative:
-      "Internet est utile, mais parfois je passe trop de temps en ligne. Il faut faire attention à ne pas oublier les activités en famille.",
+    thesis: "Internet est un outil très utile, mais il doit être utilisé avec esprit critique",
+    arguments: [
+      { title: "il facilite l'accès à l'information", explanation: "on peut trouver rapidement des horaires, des démarches et des explications", example: "une personne peut chercher comment renouveler un permis ou comprendre une facture" },
+      { title: "il aide à communiquer", explanation: "les messages et les appels vidéo rapprochent les familles éloignées", example: "des parents peuvent parler avec leurs proches restés dans un autre pays" },
+      { title: "il soutient la formation", explanation: "cours en ligne, vidéos et exercices permettent d'apprendre à son rythme", example: "un apprenant peut réviser la conjugaison ou écouter du français chaque jour" },
+    ],
+    counter: { idea: "Internet contient aussi de fausses informations et fait perdre du temps", refutation: "c'est vrai, donc il faut vérifier les sources et limiter certains usages" },
+    conclusion: "Internet est positif si l'on garde le contrôle de son temps et de ses choix",
   },
   "reseaux sociaux": {
-    positive:
-      "J'utilise les réseaux sociaux pour rester en contact avec ma famille et mes amis. C'est pratique pour voir des photos et des nouvelles.",
-    negative:
-      "Je n'utilise pas beaucoup les réseaux sociaux parce que je préfère les appels téléphoniques. Parfois, il y a trop d'informations et ce n'est pas toujours positif.",
+    thesis: "les réseaux sociaux peuvent être utiles, mais ils doivent être encadrés par des règles personnelles et collectives",
+    arguments: [
+      { title: "ils gardent le lien", explanation: "ils permettent de suivre les nouvelles de la famille, des amis et des associations", example: "une personne peut voir les photos de ses proches à l'étranger" },
+      { title: "ils diffusent rapidement des informations", explanation: "une annonce d'école, de commune ou de quartier peut toucher beaucoup de monde", example: "un groupe local peut prévenir les habitants d'un événement ou d'un changement d'horaire" },
+      { title: "ils peuvent donner une voix aux personnes", explanation: "chacun peut partager une expérience ou défendre une cause", example: "une association peut sensibiliser au tri des déchets ou à la solidarité" },
+    ],
+    counter: { idea: "ils peuvent aussi créer de la comparaison, de la dépendance et des fausses nouvelles", refutation: "c'est pourquoi il faut vérifier les informations et protéger les jeunes utilisateurs" },
+    conclusion: "les réseaux sociaux sont utiles seulement si l'on apprend à les utiliser avec recul",
   },
   environnement: {
-    positive:
-      "Je trie mes déchets et j'utilise les transports en commun. Je pense qu'il faut protéger la nature pour nos enfants et pour l'avenir.",
-    negative:
-      "Je fais quelques gestes pour l'environnement, mais ce n'est pas toujours facile. Par exemple, recycler demande du temps et de l'organisation.",
+    thesis: "protéger l'environnement est une responsabilité collective qui commence par des gestes quotidiens",
+    arguments: [
+      { title: "les ressources ne sont pas illimitées", explanation: "l'eau, l'énergie et les matières premières doivent être utilisées avec prudence", example: "éteindre les lumières et réparer plutôt que jeter réduit le gaspillage" },
+      { title: "la qualité de vie dépend de la nature", explanation: "un air propre, des parcs et moins de déchets rendent la ville plus agréable", example: "un quartier sans déchets est meilleur pour les enfants et les personnes âgées" },
+      { title: "les petits gestes se cumulent", explanation: "une seule action paraît faible, mais beaucoup de personnes changent réellement les choses", example: "trier les déchets et prendre le bus peuvent réduire la pollution" },
+    ],
+    counter: { idea: "certains trouvent ces efforts contraignants", refutation: "mais les contraintes sont acceptables si elles protègent la santé et l'avenir" },
+    conclusion: "il faut donc agir à la fois individuellement et collectivement",
   },
   ville: {
-    positive:
-      "Je préfère vivre près d'une ville comme Neuchâtel parce qu'il y a des écoles, des magasins et des transports. C'est pratique pour le travail.",
-    negative:
-      "La ville est pratique, mais parfois il y a trop de bruit et de circulation. Le week-end, j'aime aller à la campagne pour me reposer.",
+    thesis: "vivre en ville est intéressant si l'on améliore les transports, le logement et les espaces de calme",
+    arguments: [
+      { title: "la ville offre beaucoup de services", explanation: "écoles, hôpitaux, commerces et administrations sont souvent proches", example: "une famille peut aller plus facilement chez le médecin ou inscrire un enfant à une activité" },
+      { title: "elle donne plus d'opportunités", explanation: "il y a souvent plus d'emplois, de formations et de rencontres", example: "une personne qui cherche un travail peut accéder à plusieurs entreprises sans longs trajets" },
+      { title: "elle favorise la diversité", explanation: "des personnes d'origines différentes peuvent se rencontrer et apprendre les unes des autres", example: "dans un quartier, les voisins peuvent partager des fêtes ou des repas de cultures différentes" },
+    ],
+    counter: { idea: "la ville peut être bruyante et chère", refutation: "mais des parcs, des logements accessibles et de bons transports peuvent réduire ces problèmes" },
+    conclusion: "la priorité est donc de construire une ville pratique, humaine et abordable",
   },
   "temps libre": {
-    positive:
-      "Quand j'ai du temps libre, j'aime me promener au bord du lac avec ma famille. Parfois, nous regardons un film ou nous cuisinons ensemble.",
-    negative:
-      "Je n'ai pas beaucoup de temps libre parce que je travaille et j'ai des cours de français le soir. Le dimanche, je me repose surtout.",
+    thesis: "le temps libre est indispensable pour l'équilibre personnel, familial et social",
+    arguments: [
+      { title: "il permet de se reposer", explanation: "après le travail, les cours ou les démarches, le corps et l'esprit ont besoin de récupérer", example: "une promenade ou un moment calme aide à diminuer la fatigue" },
+      { title: "il renforce les relations", explanation: "passer du temps avec sa famille ou ses amis crée des souvenirs et du soutien", example: "cuisiner ensemble le dimanche peut devenir un rituel familial" },
+      { title: "il développe les intérêts personnels", explanation: "loisirs, sport, lecture ou bénévolat permettent d'apprendre autrement", example: "un club de sport aide à pratiquer le français et à rencontrer des voisins" },
+    ],
+    counter: { idea: "certains pensent que le temps libre est moins important que le travail", refutation: "mais sans repos, on devient moins efficace et plus stressé" },
+    conclusion: "il faut donc protéger du temps pour soi et pour les autres",
   },
   voyage: {
-    positive:
-      "J'aimerais voyager en Italie ou en France pour découvrir de nouveaux endroits. Voyager permet de se reposer et d'apprendre d'autres cultures.",
-    negative:
-      "Je voyage peu pour le moment parce que c'est cher et je dois travailler. Mais un jour, j'aimerais retourner au Vietnam avec mes enfants.",
+    thesis: "voyager est enrichissant si l'on respecte les lieux visités et les populations locales",
+    arguments: [
+      { title: "le voyage ouvre l'esprit", explanation: "il permet de découvrir d'autres façons de vivre, de manger et de penser", example: "visiter une autre région de Suisse peut déjà faire découvrir une autre langue et d'autres traditions" },
+      { title: "il apporte du repos et de la motivation", explanation: "changer de cadre aide à sortir de la routine", example: "quelques jours au bord d'un lac ou à la montagne peuvent redonner de l'énergie" },
+      { title: "il soutient parfois l'économie locale", explanation: "les hôtels, restaurants et commerces vivent aussi du tourisme", example: "acheter dans une petite boutique locale aide les habitants de la région" },
+    ],
+    counter: { idea: "le tourisme peut abîmer certains lieux", refutation: "c'est vrai, donc il faut voyager moins souvent mais mieux, utiliser les transports publics et respecter les règles" },
+    conclusion: "le bon voyage est celui qui apporte une découverte sans détruire ce qu'il admire",
   },
   animaux: {
-    positive:
-      "J'aime les chats parce qu'ils sont calmes et affectueux. Un animal de compagnie peut faire du bien à toute la famille.",
-    negative:
-      "Je n'ai pas d'animal parce que notre appartement est petit et un animal coûte de l'argent. C'est une grande responsabilité.",
+    thesis: "avoir un animal peut être très positif, mais seulement si l'on accepte toutes les responsabilités",
+    arguments: [
+      { title: "un animal apporte de la compagnie", explanation: "il peut réduire la solitude et créer une présence affective", example: "un chien oblige aussi à sortir et à marcher chaque jour" },
+      { title: "il apprend le respect", explanation: "s'occuper d'un animal demande de comprendre ses besoins", example: "un enfant apprend à nourrir l'animal, à nettoyer et à être patient" },
+      { title: "il structure la journée", explanation: "les repas, les promenades et les soins imposent une routine", example: "un chat ou un chien doit être nourri même quand on est fatigué" },
+    ],
+    counter: { idea: "un animal coûte de l'argent et demande du temps", refutation: "justement, il ne faut pas adopter sur un coup de tête, mais réfléchir avant" },
+    conclusion: "l'adoption doit donc être un choix responsable et durable",
   },
   lecture: {
-    positive:
-      "J'aime lire des livres simples en français pour apprendre de nouveaux mots. La lecture m'aide à mieux comprendre la langue.",
-    negative:
-      "Je ne lis pas beaucoup parce que je préfère regarder des vidéos ou écouter des podcasts. Après le travail, j'ai du mal à me concentrer.",
+    thesis: "la lecture reste importante même à l'époque des écrans, car elle développe la langue, la réflexion et l'imagination",
+    arguments: [
+      { title: "elle enrichit le vocabulaire", explanation: "lire expose à des mots et des structures que l'on n'entend pas toujours à l'oral", example: "un apprenant de français peut noter cinq mots nouveaux après chaque chapitre" },
+      { title: "elle développe la concentration", explanation: "contrairement aux vidéos rapides, un texte demande de suivre une idée dans la durée", example: "lire quinze minutes par jour entraîne l'attention" },
+      { title: "elle aide à comprendre le monde", explanation: "romans, articles et témoignages présentent des expériences différentes", example: "un livre sur la migration peut aider à mieux comprendre le parcours d'autres personnes" },
+    ],
+    counter: { idea: "certains préfèrent les vidéos car elles sont plus faciles", refutation: "les vidéos peuvent aider, mais elles ne remplacent pas l'effort et la profondeur de la lecture" },
+    conclusion: "il faut donc garder une place régulière pour les livres et les textes",
   },
   cinema: {
-    positive:
-      "J'aime aller au cinéma pour voir des comédies. C'est un bon moment en famille et on peut se détendre.",
-    negative:
-      "Je préfère regarder des films à la maison parce que c'est moins cher et plus confortable. Au cinéma, les places coûtent cher en Suisse.",
+    thesis: "le cinéma est important parce qu'il divertit, transmet des idées et crée une expérience collective",
+    arguments: [
+      { title: "il permet de se détendre", explanation: "un film peut faire rire, émouvoir ou aider à oublier les soucis pendant un moment", example: "une comédie vue en famille peut créer un souvenir agréable" },
+      { title: "il fait réfléchir", explanation: "certains films abordent des questions sociales, historiques ou morales", example: "un film sur l'école ou le travail peut ouvrir une discussion après la séance" },
+      { title: "il aide à apprendre une langue", explanation: "regarder des films en français habitue l'oreille aux accents et aux expressions", example: "avec les sous-titres, un apprenant peut associer les mots écrits et prononcés" },
+    ],
+    counter: { idea: "le cinéma coûte parfois cher", refutation: "mais on peut aussi choisir des séances moins chères, des bibliothèques ou des films à la maison" },
+    conclusion: "le cinéma reste donc un outil de plaisir, de culture et d'apprentissage",
   },
   voisinage: {
-    positive:
-      "Il faut être poli avec ses voisins, dire bonjour et respecter le calme le soir. Une bonne relation rend la vie plus agréable.",
-    negative:
-      "Parfois, c'est difficile avec les voisins parce que nous n'avons pas les mêmes habitudes. Il faut parler calmement pour trouver des solutions.",
+    thesis: "de bonnes relations de voisinage améliorent la sécurité, la solidarité et la qualité de vie",
+    arguments: [
+      { title: "le respect évite les conflits", explanation: "dire bonjour, limiter le bruit et respecter les espaces communs créent une ambiance calme", example: "prévenir ses voisins avant une fête montre que l'on pense aux autres" },
+      { title: "la solidarité aide dans les difficultés", explanation: "les voisins peuvent rendre de petits services", example: "garder un colis, aider une personne âgée ou traduire une information peut beaucoup compter" },
+      { title: "le voisinage favorise l'intégration", explanation: "parler avec les personnes de l'immeuble permet de pratiquer la langue et de comprendre les habitudes locales", example: "une discussion dans la buanderie peut expliquer les règles de l'immeuble" },
+    ],
+    counter: { idea: "certains préfèrent rester seuls", refutation: "il faut respecter la vie privée, mais un minimum de contact rend la cohabitation plus simple" },
+    conclusion: "bien vivre ensemble demande donc politesse, patience et dialogue",
   },
   technologie: {
-    positive:
-      "La technologie m'aide beaucoup au quotidien : GPS, traduction, cours en ligne. Mon téléphone est l'outil le plus utile pour moi.",
-    negative:
-      "La technologie est utile, mais elle change vite et c'est difficile de tout suivre. Parfois, je préfère les choses simples.",
+    thesis: "la technologie est positive si elle sert l'humain au lieu de le remplacer ou de l'isoler",
+    arguments: [
+      { title: "elle simplifie les tâches", explanation: "les outils numériques rendent certaines démarches plus rapides", example: "payer une facture, chercher un itinéraire ou traduire un mot prend quelques secondes" },
+      { title: "elle améliore l'accès au savoir", explanation: "cours, tutoriels et documents sont disponibles pour beaucoup de personnes", example: "un adulte peut suivre une formation en ligne après son travail" },
+      { title: "elle soutient certains métiers", explanation: "machines, logiciels et applications peuvent rendre le travail plus efficace", example: "dans la santé, un dossier numérique aide à mieux suivre un patient" },
+    ],
+    counter: { idea: "la technologie peut isoler et supprimer certains emplois", refutation: "c'est pourquoi il faut accompagner les personnes avec de la formation et garder des contacts humains" },
+    conclusion: "il faut donc choisir une technologie utile, compréhensible et responsable",
   },
   egalite: {
-    positive:
-      "Je pense que tout le monde doit être respecté, les hommes et les femmes, les jeunes et les personnes âgées. L'égalité est importante dans une société.",
-    negative:
-      "L'égalité est importante, mais je sais qu'il y a encore des différences au travail et dans la société. Il faut continuer à progresser.",
+    thesis: "l'égalité est nécessaire pour construire une société juste et permettre à chacun de développer ses capacités",
+    arguments: [
+      { title: "elle respecte la dignité", explanation: "personne ne devrait être limité à cause de son sexe, son origine, son âge ou sa situation sociale", example: "une femme et un homme doivent pouvoir postuler au même emploi avec les mêmes chances" },
+      { title: "elle améliore la société", explanation: "quand plus de personnes participent, les idées et les compétences sont plus nombreuses", example: "une entreprise mixte et diverse comprend mieux ses clients" },
+      { title: "elle protège les plus vulnérables", explanation: "des règles contre la discrimination donnent un cadre clair", example: "à l'école, chaque enfant doit être respecté, même s'il parle une autre langue" },
+    ],
+    counter: { idea: "certains pensent que l'égalité existe déjà", refutation: "mais les écarts de salaire, les préjugés et certaines discriminations montrent qu'il reste du travail" },
+    conclusion: "l'égalité demande donc des lois, de l'éducation et des comportements quotidiens respectueux",
   },
   "regles de vie": {
-    positive:
-      "Les règles sont importantes à l'école et dans la rue parce qu'elles protègent tout le monde. Par exemple, respecter les feux rouges évite les accidents.",
-    negative:
-      "Les règles sont nécessaires, mais parfois elles sont difficiles à comprendre quand on arrive dans un nouveau pays. Il faut du temps pour s'adapter.",
+    thesis: "les règles de vie sont nécessaires pour protéger la liberté de chacun et organiser la vie collective",
+    arguments: [
+      { title: "elles assurent la sécurité", explanation: "sans règles, les comportements dangereux auraient plus de conséquences", example: "respecter les feux rouges protège les piétons et les conducteurs" },
+      { title: "elles permettent de vivre ensemble", explanation: "dans une école, un immeuble ou une ville, chacun doit connaître ses limites", example: "ne pas faire de bruit la nuit permet aux voisins de dormir" },
+      { title: "elles donnent un cadre juste", explanation: "une règle claire évite les décisions arbitraires", example: "dans une classe, les mêmes règles valent pour tous les élèves" },
+    ],
+    counter: { idea: "trop de règles peuvent sembler contraignantes", refutation: "c'est vrai, mais une bonne règle doit être expliquée, utile et proportionnée" },
+    conclusion: "la liberté fonctionne mieux quand les règles protègent tout le monde sans devenir excessives",
   },
 };
 
-// ——— Helper functions ———
+const DEFAULT_ARGUMENTATION_MODEL: ArgumentationThemeModel = {
+  thesis: "ce sujet est important dans la vie quotidienne et mérite une opinion nuancée",
+  arguments: [
+    { title: "il touche des besoins concrets", explanation: "il influence l'organisation de la famille, du travail ou des démarches", example: "dans la vie en Suisse, une décision simple peut avoir des conséquences sur le budget ou le temps" },
+    { title: "il concerne les relations avec les autres", explanation: "nos choix personnels ont souvent un effet sur les proches, les voisins ou les collègues", example: "une règle respectée par chacun rend la vie collective plus agréable" },
+    { title: "il demande de penser à l'avenir", explanation: "une bonne décision doit aussi tenir compte des enfants, de la santé ou de l'environnement", example: "changer une habitude aujourd'hui peut éviter un problème demain" },
+  ],
+  counter: { idea: "on peut avoir une opinion différente selon son expérience", refutation: "mais il reste possible de défendre une position claire avec des exemples précis" },
+  conclusion: "il faut donc réfléchir, expliquer son avis et proposer des solutions réalistes",
+};
 
-export function getThemeSuggestions(word: string): string[] {
-  return THEME_QUESTION_SUGGESTIONS[word] ?? [];
+function firstSentence(text: string) {
+  return text.replace(/\s+/g, " ").split(/[.!?]\s/u)[0]?.trim() || text.replace(/\s+/g, " ").trim();
+}
+
+function buildArgumentationResponse(theme: string, prompt: string, model: ArgumentationThemeModel) {
+  const subject = firstSentence(prompt).replace(/^tu\s+/i, "on ");
+  const counter = model.counter
+    ? `Contre-argument et réfutation : on peut objecter que ${model.counter.idea}. Cependant, ${model.counter.refutation}.`
+    : "";
+
+  return [
+    `Introduction : ${subject}. Cette question pose la problématique suivante : quelle position adopter face à ce thème dans la vie quotidienne ? À mon avis, ${model.thesis}.`,
+    `Argument 1 : d'abord, ${model.arguments[0].title}. Cela signifie que ${model.arguments[0].explanation}. Par exemple, ${model.arguments[0].example}.`,
+    `Argument 2 : ensuite, ${model.arguments[1].title}. En effet, ${model.arguments[1].explanation}. Par exemple, ${model.arguments[1].example}.`,
+    `Argument 3 : enfin, ${model.arguments[2].title}. Cet aspect est important parce que ${model.arguments[2].explanation}. Par exemple, ${model.arguments[2].example}.`,
+    counter,
+    `Conclusion : pour conclure, le thème « ${theme} » ne doit pas être traité seulement de manière personnelle. Il concerne aussi la vie sociale. C'est pourquoi ${model.conclusion}.`,
+  ].filter(Boolean).join("\n\n");
+}
+
+export function getArgumentationResponse(theme: string, prompt: string): string {
+  return buildArgumentationResponse(theme, prompt, ARGUMENTATION_THEME_MODELS[theme] ?? DEFAULT_ARGUMENTATION_MODEL);
+}
+
+export function getThemeSuggestions(theme: string): string[] {
+  return THEME_QUESTION_SUGGESTIONS[theme] ?? [];
 }
 
 export function getInterviewSuggestion(question: string): string | undefined {
@@ -844,10 +984,5 @@ export function getImageDescriptionModel(situationId: string): ImageDescriptionM
   return IMAGE_DESCRIPTION_MODELS[situationId];
 }
 
-export function getArgumentationResponses(
-  theme: string,
-): { positive: string; negative: string } | undefined {
-  return ARGUMENTATION_RESPONSES[theme];
-}
 
 export { getSituationDialogueSuggestions, type SituationDialogueSuggestions } from "./po-dialogues";
