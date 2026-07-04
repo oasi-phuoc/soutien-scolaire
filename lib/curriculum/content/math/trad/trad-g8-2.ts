@@ -51,7 +51,7 @@ export const TRAD_G8_2: SubmoduleTrad = {
   consignes: {
     "g7-2-e1": { fr: "Cathètes 6 et 8 cm. Hypoténuse = ?", en: "Legs 6 et 8 cm. Hypotenuse = ?" },
     "g7-2-e2": { fr: "Cathètes 5 et 12 cm. Hypoténuse = ?", en: "Legs 5 et 12 cm. Hypotenuse = ?" },
-    "g7-2-e3": { fr: "Cathètes 3 et 4 cm. c² = 3² + 4² = ?", en: "Legs 3 and 4 cm. c? = 3? + 4? = ?" },
+    "g7-2-e3": { fr: "Cathètes 3 et 4 cm. c² = 3² + 4² = ?", en: "Legs 3 and 4 cm. c² = 3² + 4² = ?" },
     "g7-2-e4": { fr: "Est-ce un triplet pythagoricien : (8, 15, 17) ? (oui/non)", en: "Is this a Pythagorean triple: (8, 15, 17)? (yes/no)" },
     "g7-2-e5": { fr: "Cathètes 1 et 1 cm. Hypoténuse = √? cm.", en: "Legs 1 and 1 cm. Hypotenuse = ?? cm." },
   },

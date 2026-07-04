@@ -288,7 +288,7 @@ export const TRAD_G4_3: SubmoduleTrad = {
   consignes: {
     "g3-3-e1": { fr: "Aire d'un triangle : base 8 cm, hauteur 5 cm.", en: "Area of a triangle: base 8 cm, height 5 cm." },
     "g3-3-e2": { fr: "Aire d'un triangle : base 12 cm, hauteur 9 cm.", en: "Area of a triangle: base 12 cm, height 9 cm." },
-    "g3-3-e3": { fr: "Triangle d'aire 30 cm² et base 10 cm. Hauteur = ?", en: "Triangle with area 30 cm? and base 10 cm. Height = ?" },
+    "g3-3-e3": { fr: "Triangle d'aire 30 cm² et base 10 cm. Hauteur = ?", en: "Triangle with area 30 cm² and base 10 cm. Height = ?" },
     "g3-3-e4": { fr: "Aire d'un triangle rectangle : cathètes 6 et 8 cm.", en: "Area of a right triangle: legs 6 et 8 cm." },
     "g3-3-e5": { fr: "Triangle équilatéral de côté 6 cm et hauteur 5,2 cm. Aire ≈ ?", en: "Triangle equilateral de cote 6 cm et hauteur 5.2 cm. Aire ≈ ?" },
   },

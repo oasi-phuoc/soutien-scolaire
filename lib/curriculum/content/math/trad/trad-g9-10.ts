@@ -49,10 +49,10 @@ export const TRAD_G9_10: SubmoduleTrad = {
         ],
   },
   consignes: {
-    "g8-10-e1": { fr: "3 m³ = combien de dm³ ?", en: "3 m? = how many dm??" },
-    "g8-10-e2": { fr: "2000 cm³ = combien de dm³ ?", en: "2000 cm? = how many dm??" },
-    "g8-10-e3": { fr: "1 m³ = combien de litres ?", en: "1 m? = how many liters?" },
-    "g8-10-e4": { fr: "500 mL = combien de cm³ ?", en: "500 mL = how many cm??" },
-    "g8-10-e5": { fr: "2,5 L = combien de cm³ ?", en: "2.5 L = combien de cm³ ?" },
+    "g8-10-e1": { fr: "3 m³ = combien de dm³ ?", en: "3 m³ = how many dm³?" },
+    "g8-10-e2": { fr: "2000 cm³ = combien de dm³ ?", en: "2000 cm³ = how many dm³?" },
+    "g8-10-e3": { fr: "1 m³ = combien de litres ?", en: "1 m³ = how many liters?" },
+    "g8-10-e4": { fr: "500 mL = combien de cm³ ?", en: "500 mL = how many cm³?" },
+    "g8-10-e5": { fr: "2,5 L = combien de cm³ ?", en: "2.5 L = how many cm³?" },
   },
 };

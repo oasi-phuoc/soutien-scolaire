@@ -51,7 +51,7 @@ export const TRAD_G9_9: SubmoduleTrad = {
   consignes: {
     "g8-9-e1": { fr: "Cône r=3 cm, h=4 cm. V = (1/3)π×9×4 ≈ ? (π≈3,14)", en: "Cone r=3 cm, h=4 cm. V = (1/3)π×9×4 ≈ ? (π≈3.14)" },
     "g8-9-e2": { fr: "Sphère r=1 cm. V = (4/3)π ≈ ? (π≈3,14)", en: "Sphere r=1 cm. V = (4/3)π ≈ ? (π≈3.14)" },
-    "g8-9-e3": { fr: "Si un cylindre a V=90π cm³, le cône de même base et hauteur a V=?π cm³.", en: "If a cylinder has V=90? cm?, the cone with the same base and height has V=?? cm?." },
+    "g8-9-e3": { fr: "Si un cylindre a V=90π cm³, le cône de même base et hauteur a V=?π cm³.", en: "If a cylinder has V=90π cm³, the cone with the same base and height has V=?π cm³." },
     "g8-9-e4": { fr: "Sphère r=2 cm. V = (4/3)π×8 ≈ ? (π≈3,14)", en: "Sphere r=2 cm. V = (4/3)π×8 ≈ ? (π≈3.14)" },
     "g8-9-e5": { fr: "Cône r=6 cm, h=7 cm. V ≈ ? (π≈3,14)", en: "Cone r=6 cm, h=7 cm. V ≈ ? (π≈3.14)" },
   },
