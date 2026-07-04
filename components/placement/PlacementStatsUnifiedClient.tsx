@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
+import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
 import { loadPlacementProfile, migrateLegacyMathHistory, loadTotalHistory } from "@/lib/placement/storage";
@@ -16,31 +17,6 @@ const ZONE_COLORS: Record<string, string> = {
   CAF: "#c06078",
   CAP: "#c06078",
 };
-
-function UnifiedChart({ total }: { total: number }) {
-  const max = 200;
-  const h = 120;
-  const w = 280;
-  const x = Math.min(w - 8, Math.round((total / max) * w));
-  return (
-    <svg viewBox={`0 0 ${w} ${h + 24}`} className="w-full">
-      {PLACEMENT_ZONES.map((z) => {
-        const x1 = (z.min / max) * w;
-        const x2 = (z.max / max) * w;
-        return (
-          <g key={z.zone}>
-            <rect x={x1} y={8} width={x2 - x1} height={h} fill={ZONE_COLORS[z.zone]} opacity={0.12} />
-            <text x={x1 + 4} y={h + 20} fontSize="8" fontWeight="700" fill={ZONE_COLORS[z.zone]}>{z.zone}</text>
-          </g>
-        );
-      })}
-      <line x1={0} y1={h + 4} x2={w} y2={h + 4} stroke="var(--color-border-default)" />
-      <circle cx={x} cy={h / 2 + 4} r={6} fill={ACCENT} />
-      <text x={4} y={16} fontSize="9" fill="var(--color-text-secondary)">0</text>
-      <text x={w - 16} y={16} fontSize="9" fill="var(--color-text-secondary)">200</text>
-    </svg>
-  );
-}
 
 function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
   const chartH = 120;
@@ -145,7 +121,7 @@ export function PlacementStatsUnifiedClient() {
               )}
             </div>
             <div className="mt-4">
-              <UnifiedChart total={profile.total} />
+              <PlacementUnifiedChart total={profile.total} />
             </div>
           </div>
 
