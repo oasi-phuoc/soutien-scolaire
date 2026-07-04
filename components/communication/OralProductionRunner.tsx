@@ -33,7 +33,6 @@ import {
   CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
-  CommunicationResultsSummary,
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
 } from "@/components/communication/CommunicationEvalLayout";
@@ -730,7 +729,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </svg>
           </Link>
           <h1 className="flex-1 text-xl font-bold text-[var(--color-text-primary)]">
-            {phase === "review" ? "Résultats" : `${lessonCode} — Production orale`}
+            {phase === "review" ? (sent ? "En attente de correction" : "Envoi au professeur") : `${lessonCode} — Production orale`}
           </h1>
           {supported && (
             <button
@@ -1416,9 +1415,38 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
       {/* ——— REVIEW ——— */}
       {phase === "review" && (
+        sent ? (
+          <div className="flex-1 space-y-5">
+            <section className="mt-8 rounded-[var(--radius-lg)] border border-emerald-200 bg-emerald-50/80 p-6 text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700">Envoyé au professeur</p>
+              <h2 className="mt-3 text-xl font-bold text-[var(--color-text-primary)]">
+                Votre production orale est en attente de notation.
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+                Le professeur attribuera les points sur 25 et le résultat final. Vous les verrez dans la messagerie après correction.
+              </p>
+              {sendMessage && <p className="mt-4 text-sm font-semibold text-emerald-700">{sendMessage}</p>}
+            </section>
+            <button
+              type="button"
+              onClick={() => router.push("/messagerie")}
+              className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              style={{ background: ACCENT }}
+            >
+              Aller à la messagerie
+            </button>
+            <CommunicationFinishButton onClick={handleFinish} />
+          </div>
+        ) : (
         <div className="flex-1 space-y-5">
-          <CommunicationResultsSummary totalPoints={0} pendingTeacher />
-          <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
+          <section className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-700">Correction professeur requise</p>
+            <h2 className="mt-2 text-lg font-bold text-[var(--color-text-primary)]">Aucun résultat n&apos;est calculé automatiquement.</h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+              Choisissez un professeur pour envoyer votre production. Les points et le résultat final seront attribués par le professeur.
+            </p>
+          </section>
+          <p className="text-center text-sm text-[var(--color-text-secondary)]">Vous pouvez relire vos réponses avant l&apos;envoi.</p>
           <div className="space-y-3">
             {[
               { num: 1, label: "Questions thématiques", points: 3, lines: task1Lines },
@@ -1547,6 +1575,7 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
           />
           <CommunicationFinishButton onClick={handleFinish} />
         </div>
+        )
       )}
 
       {/* Fixed bottom nav — picked up by MainNav */}

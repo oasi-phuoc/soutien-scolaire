@@ -26,7 +26,6 @@ import {
   CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
-  CommunicationResultsSummary,
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
   type IntroBullet,
@@ -601,11 +600,44 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
   }
 
   if (phase === "results") {
+    if (sent) {
+      return (
+        <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-28 pt-6">
+          <Header level={level} title="En attente de correction" />
+          <section className="mt-8 rounded-[var(--radius-lg)] border border-emerald-200 bg-emerald-50/80 p-6 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700">Envoyé au professeur</p>
+            <h2 className="mt-3 text-xl font-bold text-[var(--color-text-primary)]">
+              Votre production écrite est en attente de notation.
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
+              Le professeur attribuera les points sur 25 et le résultat final. Vous les verrez dans la messagerie après correction.
+            </p>
+            {sendMessage && <p className="mt-4 text-sm font-semibold text-emerald-700">{sendMessage}</p>}
+          </section>
+          <button
+            type="button"
+            onClick={() => router.push("/messagerie")}
+            className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+            style={{ background: ACCENT }}
+          >
+            Aller à la messagerie
+          </button>
+          <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+        </main>
+      );
+    }
+
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
-        <Header level={level} title="Résultats" />
-        <CommunicationResultsSummary totalPoints={0} pendingTeacher />
-        <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir le détail.</p>
+        <Header level={level} title="Envoi au professeur" />
+        <section className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-5 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-700">Correction professeur requise</p>
+          <h2 className="mt-2 text-lg font-bold text-[var(--color-text-primary)]">Aucun résultat n&apos;est calculé automatiquement.</h2>
+          <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+            Choisissez un professeur pour envoyer votre production. Les points et le résultat final seront attribués par le professeur.
+          </p>
+        </section>
+        <p className="text-center text-sm text-[var(--color-text-secondary)]">Vous pouvez relire vos réponses avant l&apos;envoi.</p>
         <div className="space-y-3">
           {stepMeta.map((item, index) => {
             const isOpen = openResult === item.id;
