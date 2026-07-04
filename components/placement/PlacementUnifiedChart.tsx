@@ -1,15 +1,13 @@
 "use client";
 
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
+import {
+  PLACEMENT_CHART_ACCENT,
+  PLACEMENT_ZONE_FILL,
+  PLACEMENT_ZONE_LABEL,
+} from "@/lib/placement/chart-colors";
 
-const ACCENT = "var(--color-accent-quiz)";
-
-const ZONE_COLORS: Record<string, string> = {
-  CSC: "#94a3b8",
-  CFR: "#c06078",
-  CAF: "#c06078",
-  CAP: "#c06078",
-};
+const ACCENT = PLACEMENT_CHART_ACCENT;
 
 const SCALE_TICKS = [0, 50, 100, 150, 200];
 
@@ -41,14 +39,14 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
         const midX = x1 + colW / 2;
         return (
           <g key={z.zone}>
-            <rect x={x1} y={CHART_TOP} width={colW} height={CHART_H} fill={ZONE_COLORS[z.zone]} opacity={0.14} />
+            <rect x={x1} y={CHART_TOP} width={colW} height={CHART_H} fill={PLACEMENT_ZONE_FILL[z.zone]} />
             <text
               x={midX}
               y={CHART_TOP + CHART_H / 2 + 4}
               textAnchor="middle"
               fontSize="11"
               fontWeight="700"
-              fill={ZONE_COLORS[z.zone]}
+              fill={PLACEMENT_ZONE_LABEL[z.zone]}
             >
               {z.zone}
             </text>

@@ -1,10 +1,13 @@
 "use client";
 
 import type { PlacementFrenchSession, PlacementMathAttempt } from "@/lib/placement/types";
+import {
+  PLACEMENT_BAR_FILL,
+  PLACEMENT_CHART_ACCENT,
+  PLACEMENT_LINE_STROKE,
+} from "@/lib/placement/chart-colors";
 
-const ACCENT = "var(--color-accent-quiz)";
-const MATH_COLOR = "#c06078";
-const FRENCH_COLOR = "#e8b4c0";
+const ACCENT = PLACEMENT_CHART_ACCENT;
 
 const Y_TICKS = [0, 20, 40, 60, 80, 100];
 const SLOTS = 5;
@@ -123,7 +126,6 @@ function SubjectEvolutionPanel({
                 height={barHeight}
                 rx={3}
                 fill={barColor}
-                opacity={0.92}
               />
               <text
                 x={cx}
@@ -190,14 +192,14 @@ export function PlacementEvolutionChart({
     <div className="space-y-6">
       <SubjectEvolutionPanel
         label="Mathématiques"
-        barColor={MATH_COLOR}
-        lineColor={MATH_COLOR}
+        barColor={PLACEMENT_BAR_FILL}
+        lineColor={PLACEMENT_LINE_STROKE}
         items={mathItems}
       />
       <SubjectEvolutionPanel
         label="Français"
-        barColor={FRENCH_COLOR}
-        lineColor={MATH_COLOR}
+        barColor={PLACEMENT_BAR_FILL}
+        lineColor={PLACEMENT_LINE_STROKE}
         items={frenchItems}
       />
     </div>

@@ -5,18 +5,12 @@ import { useRouter } from "next/navigation";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
+import { PLACEMENT_BAR_FILL, PLACEMENT_CHART_ACCENT, PLACEMENT_ZONE_FILL } from "@/lib/placement/chart-colors";
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
 import { loadPlacementProfile, migrateLegacyMathHistory, loadTotalHistory } from "@/lib/placement/storage";
 import { PLACEMENT_LEVEL_LABELS, type PlacementTotalSnapshot } from "@/lib/placement/types";
 
-const ACCENT = "var(--color-accent-quiz)";
-
-const ZONE_COLORS: Record<string, string> = {
-  CSC: "#94a3b8",
-  CFR: "#c06078",
-  CAF: "#c06078",
-  CAP: "#c06078",
-};
+const ACCENT = PLACEMENT_CHART_ACCENT;
 
 function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
   const chartH = 120;
@@ -45,8 +39,8 @@ function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
             y={y1}
             width={barsAreaW}
             height={Math.max(1, y2 - y1)}
-            fill={ZONE_COLORS[z.zone]}
-            opacity={0.1}
+            fill={PLACEMENT_ZONE_FILL[z.zone]}
+            opacity={0.85}
           />
         );
       })}
@@ -62,7 +56,7 @@ function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
         const hBar = baseY - y;
         return (
           <g key={i}>
-            <rect x={x} y={y} width={barW} height={hBar} rx={4} fill={ACCENT} opacity={0.85} />
+            <rect x={x} y={y} width={barW} height={hBar} rx={4} fill={PLACEMENT_BAR_FILL} />
             <text x={x + barW / 2} y={baseY + 14} textAnchor="middle" fontSize="8" fill="var(--color-text-secondary)">{h.total}</text>
           </g>
         );
