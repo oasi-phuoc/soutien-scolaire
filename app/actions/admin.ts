@@ -95,20 +95,22 @@ export async function changePasswordAction(userId: string, newPassword: string) 
 export async function getPlacementHistoryForUserAction(userId: string): Promise<{
   ok: boolean;
   history: Array<{ date: string; points: number; maxPoints: number; percent: number }>;
+  totalHistory: Array<{ date: string; total: number; mathCounted: number; frenchCounted: number; zone: string }>;
   combinedProfile: { total: number; zone: string; mathCounted: number; frenchCounted: number } | null;
   error?: string;
 }> {
   const caller = await getCallerRole();
-  if (!caller) return { ok: false, history: [], combinedProfile: null, error: "Non autorisé" };
+  if (!caller) return { ok: false, history: [], totalHistory: [], combinedProfile: null, error: "Non autorisé" };
   const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, history: [], combinedProfile: null, error: "Erreur supabase" };
+  if (!supabase) return { ok: false, history: [], totalHistory: [], combinedProfile: null, error: "Erreur supabase" };
   const { data, error } = await supabase
     .from("profiles")
-    .select("placement_test_history, placement_combined_profile")
+    .select("placement_test_history, placement_combined_profile, placement_total_history")
     .eq("id", userId)
     .maybeSingle();
-  if (error) return { ok: false, history: [], combinedProfile: null, error: error.message };
+  if (error) return { ok: false, history: [], totalHistory: [], combinedProfile: null, error: error.message };
   const raw = Array.isArray(data?.placement_test_history) ? data.placement_test_history : [];
+  const rawTotal = Array.isArray(data?.placement_total_history) ? data.placement_total_history : [];
   const combined = data?.placement_combined_profile as {
     total?: number;
     zone?: string;
@@ -119,6 +121,15 @@ export async function getPlacementHistoryForUserAction(userId: string): Promise<
     ok: true,
     history: (raw as Array<{ date: string; points: number; maxPoints: number; percent: number }>)
       .map(a => ({ date: a.date, points: a.points, maxPoints: a.maxPoints, percent: a.percent })),
+    totalHistory: (rawTotal as Array<{ date: string; total: number; mathCounted: number; frenchCounted: number; zone: string }>)
+      .map(a => ({
+        date: String(a.date ?? ""),
+        total: Number(a.total ?? 0),
+        mathCounted: Number(a.mathCounted ?? 0),
+        frenchCounted: Number(a.frenchCounted ?? 0),
+        zone: String(a.zone ?? "CSC"),
+      }))
+      .filter(a => a.date.length > 0),
     combinedProfile: combined?.total !== undefined ? {
       total: Number(combined.total ?? 0),
       zone: String(combined.zone ?? "CSC"),

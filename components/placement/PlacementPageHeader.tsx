@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
+import { PlacementHelpButton } from "@/components/placement/PlacementHelpPanel";
 
 export function PlacementBackButton({
   href = "/placement",
@@ -45,12 +46,14 @@ export function PlacementPageHeader({
   subtitle,
   backHref = "/placement",
   onBack,
+  showHelp = false,
 }: {
   label?: string;
   title: string;
   subtitle?: string;
   backHref?: string;
   onBack?: () => void;
+  showHelp?: boolean;
 }) {
   return (
     <header className="space-y-2">
@@ -61,7 +64,8 @@ export function PlacementPageHeader({
       )}
       <div className="flex items-center gap-2">
         <PlacementBackButton href={backHref} onClick={onBack} />
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
+        <h1 className="min-w-0 flex-1 text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
+        {showHelp && <PlacementHelpButton />}
       </div>
       {subtitle && (
         <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{subtitle}</p>

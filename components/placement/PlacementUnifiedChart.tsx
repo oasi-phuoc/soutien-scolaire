@@ -48,19 +48,30 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
       })}
       {SCALE_TICKS.map((tick) => {
         const x = leftPad + (tick / max) * chartW;
+        const labelY = chartTop + chartH / 2;
         return (
-          <text
-            key={tick}
-            x={x}
-            y={chartBottom - 4}
-            textAnchor="middle"
-            fontSize="9"
-            fontWeight="500"
-            fill="var(--color-text-secondary)"
-            transform={`rotate(-90 ${x} ${chartBottom - 4})`}
-          >
-            {tick}
-          </text>
+          <g key={tick}>
+            <line
+              x1={x}
+              y1={chartTop}
+              x2={x}
+              y2={chartBottom}
+              stroke="var(--color-border-default)"
+              strokeOpacity={tick === 0 ? 0.8 : 0.35}
+            />
+            <text
+              x={x}
+              y={labelY}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize="9"
+              fontWeight="500"
+              fill="var(--color-text-secondary)"
+              transform={`rotate(-90 ${x} ${labelY})`}
+            >
+              {tick}
+            </text>
+          </g>
         );
       })}
       <line x1={leftPad} y1={chartBottom} x2={w} y2={chartBottom} stroke="var(--color-border-default)" />

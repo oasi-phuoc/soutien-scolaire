@@ -20,7 +20,6 @@ import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 const LEVEL_KEY = "placement-selected-level";
 const ACCENT = "var(--color-accent-quiz)";
 const CARD_TITLE = "text-[10px] font-bold uppercase tracking-wide";
-const SECTION_HEADING = "text-sm font-bold text-[var(--color-text-primary)]";
 
 const LEVEL_TOGGLE: { id: PlacementLevel; label: string }[] = [
   { id: "base", label: "A1" },
@@ -69,48 +68,6 @@ function skillScoreLabel(draft: PlacementFrenchDraft, skill: FrenchSkill): strin
   if (draft.poSent) return "En cours de correction";
   if (draft.step === "po") return "En cours";
   return "—";
-}
-
-function PlacementIntro() {
-  return (
-    <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-      <p>
-        Le test de placement comporte <strong className="text-[var(--color-text-primary)]">deux épreuves chronométrées de 100 points</strong> chacune :
-        un test de mathématiques et un test de français.
-      </p>
-
-      <div className="space-y-2">
-        <h2 className={SECTION_HEADING}>Test de mathématiques</h2>
-        <p>
-          Le parcours est progressif, du niveau primaire au niveau secondaire. Il couvre notamment :
-        </p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>additions, soustractions, multiplications et divisions</li>
-          <li>périmètre et aire</li>
-          <li>fractions et pourcentages</li>
-          <li>équations</li>
-        </ul>
-      </div>
-
-      <div className="space-y-2">
-        <h2 className={SECTION_HEADING}>Test de français</h2>
-        <p>Il est organisé en quatre parties :</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>compréhension écrite</li>
-          <li>compréhension orale</li>
-          <li>production écrite</li>
-          <li>production orale</li>
-        </ul>
-        <p>
-          Le test peut être interrompu après chaque étape et repris plus tard. Les points du niveau{" "}
-          <strong className="text-[var(--color-text-primary)]">A1</strong> sont recalculés au prorata de{" "}
-          <strong className="text-[var(--color-text-primary)]">60&nbsp;%</strong>, ceux du niveau{" "}
-          <strong className="text-[var(--color-text-primary)]">A2</strong> à{" "}
-          <strong className="text-[var(--color-text-primary)]">80&nbsp;%</strong>.
-        </p>
-      </div>
-    </div>
-  );
 }
 
 function FrenchTestInProgressCard({
@@ -309,8 +266,7 @@ export function PlacementHubClient() {
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" />
-      <PlacementIntro />
+      <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" showHelp />
 
       {frenchInProgress && draft && (
         <FrenchTestInProgressCard draft={draft} onReset={resetFrenchDraft} />
