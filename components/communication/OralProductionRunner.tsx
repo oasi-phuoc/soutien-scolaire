@@ -1533,7 +1533,7 @@ export function OralProductionRunner({
               className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
               style={{ background: ACCENT }}
             >
-              {mode === "placement" ? "Terminer la batterie française" : "Aller à la messagerie"}
+              {mode === "placement" ? "Terminer" : "Aller à la messagerie"}
             </button>
             {mode !== "placement" && <CommunicationFinishButton onClick={handleFinish} />}
           </div>
@@ -1673,7 +1673,7 @@ export function OralProductionRunner({
             isSending={isSending}
             sendMessage={sendMessage}
           />
-          <CommunicationFinishButton onClick={handleFinish} />
+          {mode !== "placement" && <CommunicationFinishButton onClick={handleFinish} />}
         </div>
         )
       )}
@@ -1718,17 +1718,20 @@ export function OralProductionRunner({
             )}
 
             {/* Next / Finish button */}
-            <button
-              type="button"
-              data-nav-action="next"
-              data-nav-label={isLastPhase ? "Terminer" : "Suivant"}
-              onClick={goNext}
-              disabled={nextDisabled}
-              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
-              style={{ background: ACCENT }}
-            >
-              {isLastPhase ? "Terminer ✓" : "Suivant →"}
-            </button>
+            {!(mode === "placement" && phase === "review") && (
+              <button
+                type="button"
+                data-nav-action="next"
+                data-nav-label={isLastPhase ? "Terminer" : "Suivant"}
+                onClick={goNext}
+                disabled={nextDisabled}
+                className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
+                style={{ background: ACCENT }}
+              >
+                {isLastPhase ? "Terminer ✓" : "Suivant →"}
+              </button>
+            )}
+            {mode === "placement" && phase === "review" && <span className="min-w-[90px]" />}
           </div>
         </div>
         <div style={{ height: 72 }} />
