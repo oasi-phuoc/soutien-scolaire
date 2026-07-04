@@ -2,6 +2,7 @@
 
 import type { PlacementFrenchSession, PlacementMathAttempt } from "@/lib/placement/types";
 
+const ACCENT = "var(--color-accent-quiz)";
 const MATH_COLOR = "#c06078";
 const FRENCH_COLOR = "#e8b4c0";
 
@@ -18,33 +19,53 @@ function lastSlots<T>(items: T[]): Array<T | null> {
 
 function SubjectEvolutionPanel({
   label,
-  color,
+  barColor,
+  lineColor,
   items,
 }: {
   label: string;
-  color: string;
+  barColor: string;
+  lineColor: string;
   items: Array<{ points: number } | null>;
 }) {
-  const leftPad = 24;
-  const chartTop = 8;
-  const chartH = 120;
+  const leftPad = 34;
+  const rightPad = 12;
+  const chartTop = 12;
+  const chartH = 130;
   const chartBottom = chartTop + chartH;
-  const slotW = 28;
-  const gap = 6;
-  const barW = 14;
-  const barsAreaW = SLOTS * slotW + (SLOTS - 1) * gap;
-  const svgW = leftPad + barsAreaW + 4;
-  const svgH = chartBottom + 4;
+  const chartW = 268;
+  const svgW = leftPad + chartW + rightPad;
+  const svgH = chartBottom + 16;
   const maxPts = 100;
+  const slotW = chartW / SLOTS;
+  const barW = Math.min(40, slotW * 0.55);
 
-  const toY = (pts: number) => chartTop + chartH - Math.round((Math.min(pts, maxPts) / maxPts) * chartH);
+  const toY = (pts: number) => chartTop + chartH - (Math.min(pts, maxPts) / maxPts) * chartH;
+  const slotCenterX = (i: number) => leftPad + i * slotW + slotW / 2;
+
+  const linePoints = items
+    .map((item, i) => (item ? { x: slotCenterX(i), y: toY(item.points) } : null))
+    .filter((p): p is { x: number; y: number } => p !== null);
+
+  const linePath = linePoints.length >= 2
+    ? linePoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ")
+    : "";
 
   return (
-    <div className="min-w-0 flex-1">
-      <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+    <div className="w-full">
+      <p
+        className="mb-3 text-xs font-bold uppercase tracking-wide"
+        style={{ color: ACCENT }}
+      >
         {label}
       </p>
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} className="mx-auto w-full max-w-[11rem] overflow-visible">
+      <svg
+        viewBox={`0 0 ${svgW} ${svgH}`}
+        className="block w-full overflow-visible"
+        style={{ aspectRatio: `${svgW} / ${svgH}` }}
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden
+      >
         {Y_TICKS.map((tick) => {
           const y = toY(tick);
           return (
@@ -52,17 +73,17 @@ function SubjectEvolutionPanel({
               <line
                 x1={leftPad}
                 y1={y}
-                x2={leftPad + barsAreaW}
+                x2={leftPad + chartW}
                 y2={y}
                 stroke="var(--color-border-default)"
                 strokeOpacity={tick === 0 ? 1 : 0.35}
               />
               <text
-                x={leftPad - 6}
-                y={y + 3}
+                x={leftPad - 8}
+                y={y + 4}
                 textAnchor="end"
-                fontSize="9"
-                fontWeight="500"
+                fontSize="11"
+                fontWeight="600"
                 fill="var(--color-text-secondary)"
               >
                 {tick}
@@ -70,8 +91,10 @@ function SubjectEvolutionPanel({
             </g>
           );
         })}
+
         {items.map((item, i) => {
-          const x = leftPad + i * (slotW + gap) + (slotW - barW) / 2;
+          const cx = slotCenterX(i);
+          const x = cx - barW / 2;
           if (!item) {
             return (
               <rect
@@ -80,33 +103,69 @@ function SubjectEvolutionPanel({
                 y={chartTop}
                 width={barW}
                 height={chartH}
-                rx={2}
+                rx={3}
                 fill="none"
                 stroke="var(--color-border-default)"
-                strokeDasharray="3,3"
-                opacity={0.5}
+                strokeDasharray="4,4"
+                opacity={0.45}
               />
             );
           }
           const barY = toY(item.points);
           const barHeight = chartBottom - barY;
+          const label = formatHalf(item.points);
           return (
-            <rect
-              key={i}
-              x={x}
-              y={barY}
-              width={barW}
-              height={barHeight}
-              rx={2}
-              fill={color}
-              opacity={0.9}
-            />
+            <g key={i}>
+              <rect
+                x={x}
+                y={barY}
+                width={barW}
+                height={barHeight}
+                rx={3}
+                fill={barColor}
+                opacity={0.92}
+              />
+              <text
+                x={cx}
+                y={barY - 6}
+                textAnchor="middle"
+                fontSize="11"
+                fontWeight="700"
+                fill="var(--color-text-primary)"
+              >
+                {label}
+              </text>
+            </g>
           );
         })}
+
+        {linePath && (
+          <path
+            d={linePath}
+            fill="none"
+            stroke={lineColor}
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity={0.95}
+          />
+        )}
+        {linePoints.map((p, i) => (
+          <circle
+            key={i}
+            cx={p.x}
+            cy={p.y}
+            r={4}
+            fill="white"
+            stroke={lineColor}
+            strokeWidth={2}
+          />
+        ))}
+
         <line
           x1={leftPad}
           y1={chartBottom}
-          x2={leftPad + barsAreaW}
+          x2={leftPad + chartW}
           y2={chartBottom}
           stroke="var(--color-border-default)"
         />
@@ -118,45 +177,29 @@ function SubjectEvolutionPanel({
 export function PlacementEvolutionChart({
   mathAttempts,
   frenchSessions,
-  mathCounted,
-  frenchCounted,
 }: {
   mathAttempts: PlacementMathAttempt[];
   frenchSessions: PlacementFrenchSession[];
-  mathCounted: number;
-  frenchCounted: number;
+  mathCounted?: number;
+  frenchCounted?: number;
 }) {
   const mathItems = lastSlots(mathAttempts).map((a) => (a ? { points: a.points } : null));
   const frenchItems = lastSlots(frenchSessions).map((s) => (s ? { points: s.countedTotal } : null));
 
   return (
-    <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-3 text-center text-sm">
-        <p className="font-semibold text-[var(--color-text-primary)]">
-          Math : <span className="tabular-nums">{formatHalf(mathCounted)}</span>
-          <span className="text-[var(--color-text-secondary)]"> / 100</span>
-        </p>
-        <p className="font-semibold text-[var(--color-text-primary)]">
-          Français : <span className="tabular-nums">{formatHalf(frenchCounted)}</span>
-          <span className="text-[var(--color-text-secondary)]"> / 100</span>
-        </p>
-      </div>
-
-      <div className="flex items-end gap-8">
-        <SubjectEvolutionPanel label="Mathématiques" color={MATH_COLOR} items={mathItems} />
-        <SubjectEvolutionPanel label="Français" color={FRENCH_COLOR} items={frenchItems} />
-      </div>
-
-      <div className="flex items-center justify-center gap-4 text-[10px] text-[var(--color-text-secondary)]">
-        <span className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: MATH_COLOR }} />
-          Maths
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: FRENCH_COLOR }} />
-          Français
-        </span>
-      </div>
+    <div className="space-y-6">
+      <SubjectEvolutionPanel
+        label="Mathématiques"
+        barColor={MATH_COLOR}
+        lineColor={MATH_COLOR}
+        items={mathItems}
+      />
+      <SubjectEvolutionPanel
+        label="Français"
+        barColor={FRENCH_COLOR}
+        lineColor={MATH_COLOR}
+        items={frenchItems}
+      />
     </div>
   );
 }
