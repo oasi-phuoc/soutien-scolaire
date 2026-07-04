@@ -250,9 +250,9 @@ export function HomeProgressCards() {
         accentColor="var(--color-accent-quiz)"
         icon={<PlacementIcon />}
         label="Placement"
-        title="Test de placement /200"
+        title="Test de placement"
         completedText={`${placementTotal} pts`}
-        totalText="CE · CO · PE · PO · TCM"
+        totalText="Test de français et de mathématiques"
         pct={placementPct}
         continuePath="/placement"
         continueLabel={placementTotal > 0 ? "Continuer" : "Commencer"}
