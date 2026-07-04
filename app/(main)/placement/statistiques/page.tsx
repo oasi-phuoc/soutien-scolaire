@@ -1,5 +1,5 @@
-import { PlacementStatsUnifiedClient } from "@/components/placement/PlacementStatsUnifiedClient";
+import { redirect } from "next/navigation";
 
 export default function PlacementStatsPage() {
-  return <PlacementStatsUnifiedClient />;
+  redirect("/placement");
 }

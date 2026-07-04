@@ -60,7 +60,7 @@ function sectionColor(pathname: string) {
 }
 
 function isPlacementHubPage(pathname: string) {
-  return pathname === "/placement" || pathname === "/placement/statistiques";
+  return pathname === "/placement";
 }
 
 function isMainSectionPage(pathname: string) {

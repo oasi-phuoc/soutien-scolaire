@@ -22,6 +22,18 @@ export function useEvalNavGuard(): EvalNavGuardApi | null {
   return useContext(EvalNavGuardContext);
 }
 
+/** Run `action` immediately, or open the quit-evaluation dialog first if a guard is active. */
+export function useGuardedNavigate() {
+  const evalGuard = useEvalNavGuard();
+  return useCallback(
+    (action: () => void) => {
+      if (evalGuard?.active) evalGuard.requestNavigate(action);
+      else action();
+    },
+    [evalGuard],
+  );
+}
+
 /**
  * Convenience hook for evaluation components: keeps the guard registered while
  * `active` is true (e.g. while the evaluation timer is running).

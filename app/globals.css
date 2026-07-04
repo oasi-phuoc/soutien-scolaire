@@ -174,9 +174,17 @@ body:has(.section-background-maths) {
   --color-correction-soft: #FFF1E7;
 }
 
-body:has(.section-background-placement) {
-  --color-correction: #C06078;
-  --color-correction-soft: #FDF0F3;
+body:has(.section-background-placement),
+.placement-tcm,
+.placement-french-runner {
+  --color-accent-alg: var(--color-accent-quiz);
+  --color-accent-comm: var(--color-accent-quiz);
+  --color-correction: #4F86D9;
+  --color-correction-soft: #EAF2FF;
+}
+
+.placement-french-runner {
+  --color-accent-comm-inverse: var(--color-correction);
 }
 
 /* Existing exercises historically use Tailwind amber/orange utilities for corrections. */

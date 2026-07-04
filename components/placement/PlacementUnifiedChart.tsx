@@ -11,27 +11,54 @@ const ZONE_COLORS: Record<string, string> = {
   CAP: "#c06078",
 };
 
+const SCALE_TICKS = [0, 50, 100, 150, 200];
+
 export function PlacementUnifiedChart({ total }: { total: number }) {
   const max = 200;
-  const h = 120;
+  const chartTop = 22;
+  const chartH = 100;
+  const chartBottom = chartTop + chartH;
   const w = 280;
-  const x = Math.min(w - 8, Math.round((total / max) * w));
+  const markerX = Math.min(w - 4, Math.round((total / max) * w));
+
   return (
-    <svg viewBox={`0 0 ${w} ${h + 24}`} className="w-full">
-      {PLACEMENT_ZONES.map((z) => {
-        const x1 = (z.min / max) * w;
-        const x2 = (z.max / max) * w;
-        return (
-          <g key={z.zone}>
-            <rect x={x1} y={8} width={x2 - x1} height={h} fill={ZONE_COLORS[z.zone]} opacity={0.12} />
-            <text x={x1 + 4} y={h + 20} fontSize="8" fontWeight="700" fill={ZONE_COLORS[z.zone]}>{z.zone}</text>
-          </g>
-        );
-      })}
-      <line x1={0} y1={h + 4} x2={w} y2={h + 4} stroke="var(--color-border-default)" />
-      <circle cx={x} cy={h / 2 + 4} r={6} fill={ACCENT} />
-      <text x={4} y={16} fontSize="9" fill="var(--color-text-secondary)">0</text>
-      <text x={w - 16} y={16} fontSize="9" fill="var(--color-text-secondary)">200</text>
-    </svg>
+    <div className="space-y-1">
+      <div className="relative px-0.5" style={{ height: 14 }}>
+        {SCALE_TICKS.map((tick) => (
+          <span
+            key={tick}
+            className="absolute -translate-x-1/2 text-[9px] font-medium text-[var(--color-text-secondary)]"
+            style={{ left: `${(tick / max) * 100}%` }}
+          >
+            {tick}
+          </span>
+        ))}
+      </div>
+      <svg viewBox={`0 0 ${w} ${chartBottom + 8}`} className="w-full">
+        {PLACEMENT_ZONES.map((z) => {
+          const x1 = (z.min / max) * w;
+          const x2 = (z.max / max) * w;
+          const colW = x2 - x1;
+          const midX = x1 + colW / 2;
+          return (
+            <g key={z.zone}>
+              <rect x={x1} y={chartTop} width={colW} height={chartH} fill={ZONE_COLORS[z.zone]} opacity={0.14} />
+              <text
+                x={midX}
+                y={chartTop + chartH / 2 + 4}
+                textAnchor="middle"
+                fontSize="11"
+                fontWeight="700"
+                fill={ZONE_COLORS[z.zone]}
+              >
+                {z.zone}
+              </text>
+            </g>
+          );
+        })}
+        <line x1={0} y1={chartBottom} x2={w} y2={chartBottom} stroke="var(--color-border-default)" />
+        <circle cx={markerX} cy={chartTop + chartH / 2} r={6} fill={ACCENT} />
+      </svg>
+    </div>
   );
 }

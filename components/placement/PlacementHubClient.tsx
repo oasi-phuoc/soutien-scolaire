@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
-import type { PlacementLevel } from "@/lib/placement/types";
-import { loadFrenchDraft, loadMathHistory, loadFrenchSessions } from "@/lib/placement/storage";
+import { PlacementEvolutionChart } from "@/components/placement/PlacementEvolutionChart";
+import type { PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types";
+import { loadFrenchDraft, loadMathHistory, loadFrenchSessions, loadTotalHistory } from "@/lib/placement/storage";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
 const LEVEL_KEY = "placement-selected-level";
@@ -18,12 +18,99 @@ const LEVEL_TOGGLE: { id: PlacementLevel; label: string }[] = [
   { id: "avance", label: "B1" },
 ];
 
-const STEP_LABELS: Record<string, string> = {
-  ce: "Compréhension écrite",
-  co: "Compréhension orale",
-  pe: "Production écrite",
-  po: "Production orale",
+const STEP_ORDER = ["ce", "co", "pe", "po"] as const;
+type FrenchSkill = (typeof STEP_ORDER)[number];
+
+const SKILL_HEADERS: Record<FrenchSkill, string> = {
+  ce: "CE",
+  co: "CO",
+  pe: "PE",
+  po: "PO",
 };
+
+function stepIndex(step: PlacementFrenchDraft["step"]) {
+  if (step === "recap") return STEP_ORDER.length;
+  return STEP_ORDER.indexOf(step as FrenchSkill);
+}
+
+function skillScoreLabel(draft: PlacementFrenchDraft, skill: FrenchSkill): string {
+  const current = stepIndex(draft.step);
+  const idx = STEP_ORDER.indexOf(skill);
+
+  if (skill === "ce") {
+    if (current > idx) return `${draft.ce ?? 0} / 25`;
+    if (draft.step === "ce") return "En cours";
+    return "—";
+  }
+  if (skill === "co") {
+    if (current > idx) return `${draft.co ?? 0} / 25`;
+    if (draft.step === "co") return "En cours";
+    return "—";
+  }
+  if (skill === "pe") {
+    if (draft.peSent) return "En cours de correction";
+    if (draft.step === "pe") return "En cours";
+    return "—";
+  }
+  if (draft.poSent) return "En cours de correction";
+  if (draft.step === "po") return "En cours";
+  return "—";
+}
+
+function FrenchTestInProgressCard({
+  draft,
+  onResume,
+}: {
+  draft: PlacementFrenchDraft;
+  onResume: () => void;
+}) {
+  const activeSkill = draft.step === "recap" ? null : (draft.step as FrenchSkill);
+
+  return (
+    <div
+      className="rounded-[var(--radius-lg)] border p-4"
+      style={{
+        borderColor: "color-mix(in oklch, var(--color-accent-quiz) 35%, white)",
+        background: "color-mix(in oklch, var(--color-accent-quiz) 8%, white)",
+      }}
+    >
+      <p className="text-sm font-bold" style={{ color: ACCENT }}>Test de français en cours</p>
+      <div className="mt-3 grid grid-cols-4 gap-2 text-center">
+        {STEP_ORDER.map((skill) => (
+          <p key={skill} className="text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+            {SKILL_HEADERS[skill]}
+          </p>
+        ))}
+        {STEP_ORDER.map((skill) => (
+          <p
+            key={`${skill}-score`}
+            className={`text-[10px] leading-snug ${
+              activeSkill === skill ? "font-semibold text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"
+            }`}
+          >
+            {skillScoreLabel(draft, skill)}
+          </p>
+        ))}
+        {STEP_ORDER.map((skill) => (
+          <div key={`${skill}-action`} className="flex justify-center">
+            {activeSkill === skill ? (
+              <button
+                type="button"
+                onClick={onResume}
+                className="rounded-[var(--radius-md)] px-2 py-1 text-[10px] font-bold text-white"
+                style={{ background: ACCENT }}
+              >
+                Reprendre
+              </button>
+            ) : (
+              <span className="text-[10px] text-transparent" aria-hidden>—</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function FrenchLevelToggle({
   level,
@@ -66,7 +153,8 @@ export function PlacementHubClient() {
   const [profileTotal, setProfileTotal] = useState(0);
   const [zone, setZone] = useState("CSC");
   const [pendingFrench, setPendingFrench] = useState(0);
-  const [draftStep, setDraftStep] = useState<string | null>(null);
+  const [draft, setDraft] = useState<PlacementFrenchDraft | null>(null);
+  const [history, setHistory] = useState(() => loadTotalHistory());
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -85,7 +173,8 @@ export function PlacementHubClient() {
       setProfileTotal(profile.total);
       setZone(profile.zone);
       setPendingFrench(profile.pendingFrench);
-      setDraftStep(loadFrenchDraft()?.step ?? null);
+      setDraft(loadFrenchDraft());
+      setHistory(loadTotalHistory());
       setReady(true);
     })();
     return () => { cancelled = true; };
@@ -102,7 +191,10 @@ export function PlacementHubClient() {
   }
 
   function resumeFrench() {
-    router.push(`/placement/francais?level=${level}`);
+    const d = loadFrenchDraft();
+    const resumeLevel = d?.level ?? level;
+    localStorage.setItem(LEVEL_KEY, resumeLevel);
+    router.push(`/placement/francais?level=${resumeLevel}`);
   }
 
   if (!ready) {
@@ -122,27 +214,8 @@ export function PlacementHubClient() {
         backHref="/"
       />
 
-      {draftStep && draftStep !== "recap" && (
-        <div
-          className="rounded-[var(--radius-lg)] border p-4"
-          style={{
-            borderColor: "color-mix(in oklch, var(--color-accent-quiz) 35%, white)",
-            background: "color-mix(in oklch, var(--color-accent-quiz) 8%, white)",
-          }}
-        >
-          <p className="text-sm font-bold" style={{ color: ACCENT }}>Batterie française en cours</p>
-          <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-            Reprendre à l&apos;étape : {STEP_LABELS[draftStep] ?? draftStep}
-          </p>
-          <button
-            type="button"
-            onClick={resumeFrench}
-            className="mt-3 rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold text-white"
-            style={{ background: ACCENT }}
-          >
-            Reprendre
-          </button>
-        </div>
+      {draft && draft.step !== "recap" && (
+        <FrenchTestInProgressCard draft={draft} onResume={resumeFrench} />
       )}
 
       <div className="grid grid-cols-2 gap-3">
@@ -214,13 +287,12 @@ export function PlacementHubClient() {
         </div>
       </div>
 
-      <Link
-        href="/placement/statistiques"
-        className="flex min-h-12 w-full items-center justify-center rounded-[var(--radius-md)] border text-sm font-semibold text-white transition-opacity hover:opacity-90"
-        style={{ background: ACCENT, borderColor: ACCENT }}
-      >
-        Voir les statistiques /200
-      </Link>
+      {history.length > 0 && (
+        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pt-4 pb-3">
+          <p className="mb-3 text-sm font-bold text-[var(--color-text-primary)]">Évolution du total</p>
+          <PlacementEvolutionChart history={history} />
+        </div>
+      )}
     </main>
   );
 }

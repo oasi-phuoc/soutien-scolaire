@@ -13,6 +13,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 
 const TOTAL_SECONDS = 45 * 60;
@@ -101,12 +102,14 @@ function toQuestionTask(question: RawQuestionTask): QuestionTask {
 
 function CEHeader({ level, title, placement = false }: { level: CELevel; title: string; placement?: boolean }) {
   const router = useRouter();
+  const guardedNavigate = useGuardedNavigate();
   const accent = placement ? "var(--color-accent-quiz)" : ACCENT;
+  const leaveHref = placement ? "/placement" : "/communication";
   return (
     <div className="flex items-start gap-3">
       <button
         type="button"
-        onClick={() => router.push(placement ? "/placement" : "/communication")}
+        onClick={() => guardedNavigate(() => router.push(leaveHref))}
         aria-label="Quitter la leçon"
         className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
         style={{ background: accent }}
@@ -1094,6 +1097,8 @@ export function ComprehensionEcritRunner({
     [answers, parts],
   );
 
+  useRegisterEvalGuard(mode === "placement" && phase === "exercise");
+
   const finishToResults = useCallback(() => {
     if (mode !== "placement") {
       markCommunicationLessonComplete(lessonId);
@@ -1164,6 +1169,7 @@ export function ComprehensionEcritRunner({
   }, [activeParts.length, mode, onPlacementComplete, phase, router, totalScore]);
 
   const runnerAccent = mode === "placement" ? "var(--color-accent-quiz)" : ACCENT;
+  const hudAccent = mode === "placement" ? runnerAccent : INVERSE;
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
@@ -1174,9 +1180,9 @@ export function ComprehensionEcritRunner({
           <CEHeader level={level} title="Compréhension écrite" placement={mode === "placement"} />
           <div className="mb-5">
             <div className="mb-1.5 flex items-center justify-between">
-              <p className="text-xs font-bold tabular-nums" style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</p>
+              <p className="text-xs font-bold tabular-nums" style={{ color: hudAccent }}>{formatScore(currentScore)} / 25 pts</p>
               <div className="flex items-center gap-3">
-                <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${INVERSE} 12%, white)`, color: INVERSE }}>
+                <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${hudAccent} 12%, white)`, color: hudAccent }}>
                   {formatTimer(secondsLeft * 1000)}
                 </span>
                 <p className="text-xs text-[var(--color-text-secondary)]">{activeParts.length} exercice{activeParts.length !== 1 ? "s" : ""} restant{activeParts.length !== 1 ? "s" : ""}</p>

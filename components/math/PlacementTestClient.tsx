@@ -6,6 +6,7 @@ import { savePlacementTestResultAction } from "@/app/actions/progress";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
 import { saveMathAttempt, loadFrenchSessions, loadMathHistory, loadTotalHistory } from "@/lib/placement/storage";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
+import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -129,6 +130,7 @@ interface PlacementProgressBarProps {
   onSegmentClick: (idx: number) => void;
   totalPoints: number;
   maxPoints: number;
+  placement?: boolean;
 }
 
 function PlacementProgressBar({
@@ -140,14 +142,17 @@ function PlacementProgressBar({
   onSegmentClick,
   totalPoints,
   maxPoints,
+  placement = false,
 }: PlacementProgressBarProps) {
+  const hudColor = placement ? "var(--color-accent-quiz)" : "var(--color-correction)";
+  const hudSoft = placement ? "color-mix(in oklch, var(--color-accent-quiz) 12%, white)" : "var(--color-correction-soft)";
   const remaining = validated.filter(v => !v).length;
   return (
     <div className="mb-5">
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-xs font-bold tabular-nums text-[var(--color-correction)]">{totalPoints} / {maxPoints} pts</p>
+        <p className="text-xs font-bold tabular-nums" style={{ color: hudColor }}>{totalPoints} / {maxPoints} pts</p>
         <div className="flex items-center gap-3">
-          <span className="rounded-full bg-[var(--color-correction-soft)] px-2 py-0.5 text-xs font-bold tabular-nums text-[var(--color-correction)]">
+          <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: hudSoft, color: hudColor }}>
             {formatTime(timeLeft)}
           </span>
           <p className="text-xs text-[var(--color-text-secondary)]">{remaining} exercice{remaining !== 1 ? "s" : ""} restant{remaining !== 1 ? "s" : ""}</p>
@@ -163,9 +168,9 @@ function PlacementProgressBar({
 
           let cls = "h-2 flex-1 rounded-full transition-colors cursor-pointer ";
           if (isCurrent) {
-            cls += "bg-[var(--color-correction)]";
+            cls += placement ? "bg-[var(--color-accent-quiz)]" : "bg-[var(--color-correction)]";
           } else if (hasTyped) {
-            cls += "bg-blue-400";
+            cls += placement ? "bg-[var(--color-accent-quiz)]/50" : "bg-blue-400";
           } else {
             cls += "bg-[var(--color-border-default)]";
           }
@@ -377,6 +382,7 @@ const PLACEMENT_INTRO_TEXTS: Record<"fr", PlacementIntroText> & Partial<Record<P
 
 export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "placement" }) {
   const router = useRouter();
+  const guardedNavigate = useGuardedNavigate();
   const accent = mode === "placement" ? "var(--color-accent-quiz)" : "var(--color-accent-alg)";
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
@@ -398,6 +404,8 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
   const [selectedResultIdx, setSelectedResultIdx] = useState(0);
   const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
   const [showPrint, setShowPrint] = useState(false);
+
+  useRegisterEvalGuard(mode === "placement" && phase === "running");
 
   const printExercisesForConfig = useMemo(() =>
     EXERCISES.map(ex => {
@@ -665,7 +673,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
   const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
   return (
-    <div className={`placement-test-font mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}`}>
+    <div className={`placement-test-font mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}${mode === "placement" ? " placement-tcm" : ""}`}>
       {phase === "results" ? (
         <ResultsScreen
           scores={scores}
@@ -677,7 +685,13 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       <div className="mb-4 flex items-center gap-2">
         <button
           type="button"
-          onClick={() => setPhase("idle")}
+          onClick={() => {
+            const leave = () => {
+              if (mode === "placement") router.push("/placement");
+              else setPhase("idle");
+            };
+            guardedNavigate(leave);
+          }}
           aria-label="Retour"
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white transition-opacity hover:opacity-80"
           style={{ background: accent }}
@@ -725,6 +739,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           onSegmentClick={handleSegmentClick}
           totalPoints={totalPoints}
           maxPoints={TOTAL_MAX_POINTS}
+          placement={mode === "placement"}
         />
       </div>
 
@@ -791,7 +806,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       {phase === "results" && (
         <button
           type="button"
-          onClick={() => router.push(mode === "placement" ? "/placement/statistiques" : "/mathematiques")}
+          onClick={() => router.push(mode === "placement" ? "/placement" : "/mathematiques")}
           className="mt-6 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
           style={{ background: accent }}
         >

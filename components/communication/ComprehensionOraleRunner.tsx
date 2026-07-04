@@ -22,6 +22,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 
@@ -191,24 +192,27 @@ function formatTimer(seconds: number) {
   return `${min}:${String(sec).padStart(2, "0")}`;
 }
 
-function Header({ level, title }: { level: COLevel; title: string }) {
+function Header({ level, title, placement = false }: { level: COLevel; title: string; placement?: boolean }) {
   const router = useRouter();
+  const guardedNavigate = useGuardedNavigate();
+  const accent = placement ? "var(--color-accent-quiz)" : ACCENT;
+  const leaveHref = placement ? "/placement" : "/communication";
   return (
     <div className="flex items-start gap-3">
       <button
         type="button"
-        onClick={() => router.push("/communication")}
+        onClick={() => guardedNavigate(() => router.push(leaveHref))}
         aria-label="Quitter la leçon"
         className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
-        style={{ background: ACCENT }}
+        style={{ background: accent }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>
-          Français · Compréhension orale · {levelLabel(level)}
+        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: accent }}>
+          {placement ? "Test de placement · CO" : "Français · Compréhension orale"} · {levelLabel(level)}
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
       </div>
@@ -768,6 +772,8 @@ export function ComprehensionOraleRunner({
   const savedAnswers = { ...answers, ...Object.values(validatedAnswers).reduce((acc, value) => ({ ...acc, ...value }), {}) };
   const totalPoints = parts.reduce((sum, part) => sum + scorePart(part, validatedAnswers[part.id] ?? {}), 0);
 
+  useRegisterEvalGuard(mode === "placement" && phase === "exercise");
+
   useEffect(() => {
     if (phase !== "exercise") return;
     const timer = window.setInterval(() => setSecondsLeft((value) => Math.max(0, value - 1)), 1000);
@@ -822,7 +828,7 @@ export function ComprehensionOraleRunner({
 
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
-        <Header level={level} title="Compréhension orale" />
+        <Header level={level} title="Compréhension orale" placement={mode === "placement"} />
         <CommunicationIntroSection
           bullets={introBullets}
           rows={introRows}
@@ -843,7 +849,7 @@ export function ComprehensionOraleRunner({
   if (phase === "results") {
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
-        <Header level={level} title="Résultats" />
+        <Header level={level} title="Résultats" placement={mode === "placement"} />
         <CommunicationResultsSummary totalPoints={totalPoints} />
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
         <div className="space-y-3">
@@ -881,7 +887,7 @@ export function ComprehensionOraleRunner({
 
   return (
     <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
-      <Header level={level} title="Compréhension orale" />
+      <Header level={level} title="Compréhension orale" placement={mode === "placement"} />
       <ProgressBar
         parts={parts}
         currentId={currentId}

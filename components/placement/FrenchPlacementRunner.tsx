@@ -213,8 +213,8 @@ export function FrenchPlacementRunner() {
           <li className="flex justify-between border-t pt-2 font-semibold"><span>Brut immédiat</span><span>{session.rawTotal} / 100</span></li>
           <li className="flex justify-between text-[var(--color-text-secondary)]"><span>Compté (prorata)</span><span>{session.countedTotal} / 100</span></li>
         </ul>
-        <button type="button" onClick={() => router.push("/placement/statistiques")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
-          Voir les statistiques
+        <button type="button" onClick={() => router.push("/placement")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
+          Retour au test de placement
         </button>
       </main>
     );
@@ -227,7 +227,7 @@ export function FrenchPlacementRunner() {
       className="placement-french-runner"
       style={{
         "--color-accent-comm": "var(--color-accent-quiz)",
-        "--color-accent-comm-inverse": "var(--color-accent-quiz)",
+        "--color-accent-comm-inverse": "var(--color-correction)",
       } as React.CSSProperties}
     >
       {step === "ce" && <ComprehensionEcritRunner lessonId={lessonId} {...runnerProps} />}

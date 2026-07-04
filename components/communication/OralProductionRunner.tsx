@@ -36,6 +36,7 @@ import {
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
 } from "@/components/communication/CommunicationEvalLayout";
+import { useRegisterEvalGuard, useEvalNavGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
 import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
@@ -342,6 +343,10 @@ export function OralProductionRunner({
   onPlacementComplete,
 }: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
+  const evalGuard = useEvalNavGuard();
+  const guardedNavigate = useGuardedNavigate();
+  const leaveHref = mode === "placement" ? "/placement" : "/francais?tab=communication";
+  const headerAccent = mode === "placement" ? "var(--color-accent-quiz)" : ACCENT;
   const level = levelFromId(lessonId);
   const lessonCode = lessonCodeFromId(lessonId);
 
@@ -413,6 +418,8 @@ export function OralProductionRunner({
   const [sent, setSent] = useState(false);
   const [openReview, setOpenReview] = useState<number | null>(1);
   const [isSending, startSending] = useTransition();
+
+  useRegisterEvalGuard(mode === "placement" && phase !== "intro" && !(phase === "review" && sent));
 
   useEffect(() => {
     void getExpressionTeachersAction().then(setTeachers);
@@ -787,20 +794,40 @@ export function OralProductionRunner({
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
       <header className="mb-4 space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
-          Français · Production orale · {levelLabel}
+        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: headerAccent }}>
+          {mode === "placement" ? "Test de placement · PO" : "Français · Production orale"} · {levelLabel}
         </p>
         <div className="flex items-center gap-2">
-          <Link
-            href="/francais?tab=communication"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
-            style={{ background: ACCENT }}
-            aria-label="Retour au français"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
+          {mode === "placement" ? (
+            <button
+              type="button"
+              onClick={() => guardedNavigate(() => router.push(leaveHref))}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: headerAccent }}
+              aria-label="Retour au placement"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+          ) : (
+            <Link
+              href={leaveHref}
+              onClick={(event) => {
+                if (evalGuard?.active) {
+                  event.preventDefault();
+                  evalGuard.requestNavigate(() => router.push(leaveHref));
+                }
+              }}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: headerAccent }}
+              aria-label="Retour au français"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </Link>
+          )}
           <h1 className="flex-1 text-xl font-bold text-[var(--color-text-primary)]">
             {phase === "review" ? (sent ? "En attente de correction" : "Envoi au professeur") : `${lessonCode} — Production orale`}
           </h1>

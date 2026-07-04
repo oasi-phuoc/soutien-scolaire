@@ -31,6 +31,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
 import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
@@ -145,24 +146,27 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   );
 }
 
-function Header({ level, title }: { level: WritingLevel; title: string }) {
+function Header({ level, title, placement = false }: { level: WritingLevel; title: string; placement?: boolean }) {
   const router = useRouter();
+  const guardedNavigate = useGuardedNavigate();
+  const accent = placement ? "var(--color-accent-quiz)" : ACCENT;
+  const leaveHref = placement ? "/placement" : "/communication";
   return (
     <div className="flex items-start gap-3">
       <button
         type="button"
-        onClick={() => router.push("/communication")}
+        onClick={() => guardedNavigate(() => router.push(leaveHref))}
         aria-label="Quitter la leçon"
         className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
-        style={{ background: ACCENT }}
+        style={{ background: accent }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>
-          Français · Production écrite · {levelLabel(level)}
+        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: accent }}>
+          {placement ? "Test de placement · PE" : "Français · Production écrite"} · {levelLabel(level)}
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
       </div>
@@ -512,6 +516,8 @@ export function ProductionEcriteRunner({
   const [placementSubmissionId, setPlacementSubmissionId] = useState<string | undefined>();
   const [isSending, startSending] = useTransition();
 
+  useRegisterEvalGuard(mode === "placement" && (phase === "exercise" || (phase === "results" && !sent)));
+
   useEffect(() => {
     void getExpressionTeachersAction().then(setTeachers);
   }, []);
@@ -657,7 +663,7 @@ export function ProductionEcriteRunner({
 
     return (
       <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
-        <Header level={level} title="Production écrite" />
+        <Header level={level} title="Production écrite" placement={mode === "placement"} />
         <CommunicationIntroSection
           bullets={introBullets}
           rows={introRows}
@@ -673,7 +679,7 @@ export function ProductionEcriteRunner({
     if (sent) {
       return (
         <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-28 pt-6">
-          <Header level={level} title="En attente de correction" />
+          <Header level={level} title="En attente de correction" placement={mode === "placement"} />
           <section className="mt-8 rounded-[var(--radius-lg)] border border-emerald-200 bg-emerald-50/80 p-6 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700">Envoyé au professeur</p>
             <h2 className="mt-3 text-xl font-bold text-[var(--color-text-primary)]">
@@ -712,7 +718,7 @@ export function ProductionEcriteRunner({
 
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
-        <Header level={level} title="Envoi au professeur" />
+        <Header level={level} title="Envoi au professeur" placement={mode === "placement"} />
         <section className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-5 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-700">Correction professeur requise</p>
           <h2 className="mt-2 text-lg font-bold text-[var(--color-text-primary)]">Aucun résultat n&apos;est calculé automatiquement.</h2>
@@ -791,7 +797,7 @@ export function ProductionEcriteRunner({
   const step = stepMeta.find((item) => item.id === current)!;
   return (
     <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
-      <Header level={level} title="Production écrite" />
+      <Header level={level} title="Production écrite" placement={mode === "placement"} />
       <ProgressBar steps={stepMeta} current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
       <section className="space-y-4">
         <div className="flex items-center justify-between">
