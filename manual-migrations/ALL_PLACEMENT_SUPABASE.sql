@@ -121,4 +121,15 @@ BEGIN
 END;
 $$;
 
+-- -----------------------------------------------------------------------------
+-- 4. Historique d'évolution /200 (snapshots placement_total_history)
+-- Fichier source : 20260704160000_placement_total_history.sql
+-- -----------------------------------------------------------------------------
+
+ALTER TABLE public.profiles
+  ADD COLUMN IF NOT EXISTS placement_total_history jsonb NOT NULL DEFAULT '[]'::jsonb;
+
+COMMENT ON COLUMN public.profiles.placement_total_history IS
+  'Last placement /200 total snapshots for evolution chart (max ~10 entries).';
+
 -- =============================================================================

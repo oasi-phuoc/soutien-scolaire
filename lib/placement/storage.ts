@@ -1,4 +1,7 @@
 import { buildPlacementProfile, buildFrenchSession } from "./scoring";
+import {
+  appendTotalSnapshot as appendSnapshot,
+} from "./total-history";
 import type {
   PlacementFrenchDraft,
   PlacementFrenchSession,
@@ -91,28 +94,12 @@ export function loadTotalHistory(): PlacementTotalSnapshot[] {
   return readJson<PlacementTotalSnapshot[]>(PLACEMENT_TOTAL_HISTORY_KEY, []);
 }
 
+export function saveTotalHistory(history: PlacementTotalSnapshot[]) {
+  writeJson(PLACEMENT_TOTAL_HISTORY_KEY, history);
+}
+
 function appendTotalSnapshot(profile: PlacementProfile) {
-  const history = loadTotalHistory();
-  const last = history[history.length - 1];
-  if (
-    last
-    && last.total === profile.total
-    && last.mathCounted === profile.mathCounted
-    && last.frenchCounted === profile.frenchCounted
-    && last.zone === profile.zone
-  ) {
-    return history;
-  }
-  const next = [
-    ...history,
-    {
-      date: profile.updatedAt,
-      total: profile.total,
-      mathCounted: profile.mathCounted,
-      frenchCounted: profile.frenchCounted,
-      zone: profile.zone,
-    },
-  ].slice(-10);
+  const next = appendSnapshot(loadTotalHistory(), profile);
   writeJson(PLACEMENT_TOTAL_HISTORY_KEY, next);
   return next;
 }

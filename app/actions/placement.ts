@@ -2,7 +2,17 @@
 
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { buildPlacementProfile, buildFrenchSession } from "@/lib/placement/scoring";
-import type { PlacementFrenchSession, PlacementMathAttempt, PlacementProfile } from "@/lib/placement/types";
+import {
+  appendTotalSnapshot,
+  mergeTotalHistories,
+  parseTotalHistory,
+} from "@/lib/placement/total-history";
+import type {
+  PlacementFrenchSession,
+  PlacementMathAttempt,
+  PlacementProfile,
+  PlacementTotalSnapshot,
+} from "@/lib/placement/types";
 import type { PlacementTestAttempt } from "@/app/actions/progress";
 
 export type CloudPlacementData = {
@@ -10,7 +20,51 @@ export type CloudPlacementData = {
   frenchSessions: PlacementFrenchSession[];
   profile: PlacementProfile;
   frenchDraft: unknown | null;
+  totalHistory: PlacementTotalSnapshot[];
 };
+
+async function readPlacementRow(supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseActionClient>>>, userId: string) {
+  return supabase
+    .from("profiles")
+    .select("placement_test_history, placement_french_history, placement_combined_profile, placement_french_draft, placement_total_history")
+    .eq("id", userId)
+    .maybeSingle();
+}
+
+function buildCloudPlacementData(data: {
+  placement_test_history?: unknown;
+  placement_french_history?: unknown;
+  placement_combined_profile?: unknown;
+  placement_french_draft?: unknown;
+  placement_total_history?: unknown;
+} | null): CloudPlacementData {
+  const mathHistory = Array.isArray(data?.placement_test_history)
+    ? data.placement_test_history as PlacementMathAttempt[]
+    : [];
+  const frenchSessions = Array.isArray(data?.placement_french_history)
+    ? data.placement_french_history as PlacementFrenchSession[]
+    : [];
+  const profile = (data?.placement_combined_profile as PlacementProfile | null)
+    ?? buildPlacementProfile(mathHistory, frenchSessions);
+  const totalHistory = parseTotalHistory(data?.placement_total_history);
+
+  return {
+    mathHistory,
+    frenchSessions,
+    profile,
+    frenchDraft: data?.placement_french_draft ?? null,
+    totalHistory,
+  };
+}
+
+function resolveTotalHistory(
+  cloudHistory: PlacementTotalSnapshot[],
+  inputHistory: PlacementTotalSnapshot[] | undefined,
+  profile: PlacementProfile,
+): PlacementTotalSnapshot[] {
+  const merged = mergeTotalHistories(cloudHistory, inputHistory ?? []);
+  return appendTotalSnapshot(merged, profile);
+}
 
 export async function loadPlacementFromCloudAction(): Promise<{ ok: boolean; data: CloudPlacementData | null; error?: string }> {
   try {
@@ -19,30 +73,10 @@ export async function loadPlacementFromCloudAction(): Promise<{ ok: boolean; dat
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { ok: false, data: null, error: "not_authenticated" };
 
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("placement_test_history, placement_french_history, placement_combined_profile, placement_french_draft")
-      .eq("id", user.id)
-      .maybeSingle();
+    const { data, error } = await readPlacementRow(supabase, user.id);
     if (error) return { ok: false, data: null, error: error.message };
 
-    const mathHistory = Array.isArray(data?.placement_test_history)
-      ? data.placement_test_history as PlacementMathAttempt[]
-      : [];
-    const frenchSessions = Array.isArray(data?.placement_french_history)
-      ? data.placement_french_history as PlacementFrenchSession[]
-      : [];
-    const profile = (data?.placement_combined_profile as PlacementProfile | null) ?? buildPlacementProfile(mathHistory, frenchSessions);
-
-    return {
-      ok: true,
-      data: {
-        mathHistory,
-        frenchSessions,
-        profile,
-        frenchDraft: data?.placement_french_draft ?? null,
-      },
-    };
+    return { ok: true, data: buildCloudPlacementData(data) };
   } catch (e) {
     return { ok: false, data: null, error: e instanceof Error ? e.message : "unknown" };
   }
@@ -52,6 +86,7 @@ export async function savePlacementToCloudAction(input: {
   mathHistory?: PlacementMathAttempt[];
   frenchSessions?: PlacementFrenchSession[];
   frenchDraft?: unknown | null;
+  totalHistory?: PlacementTotalSnapshot[];
 }): Promise<{ ok: boolean; error?: string }> {
   try {
     const supabase = await createSupabaseActionClient();
@@ -59,9 +94,14 @@ export async function savePlacementToCloudAction(input: {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { ok: false, error: "not_authenticated" };
 
-    const mathHistory = input.mathHistory ?? [];
-    const frenchSessions = input.frenchSessions ?? [];
+    const { data: existing, error: readError } = await readPlacementRow(supabase, user.id);
+    if (readError) return { ok: false, error: readError.message };
+
+    const current = buildCloudPlacementData(existing);
+    const mathHistory = input.mathHistory ?? current.mathHistory;
+    const frenchSessions = input.frenchSessions ?? current.frenchSessions;
     const profile = buildPlacementProfile(mathHistory, frenchSessions);
+    const totalHistory = resolveTotalHistory(current.totalHistory, input.totalHistory, profile);
     const now = new Date().toISOString();
     const lastMath = mathHistory.length > 0 ? mathHistory[mathHistory.length - 1] : null;
 
@@ -72,7 +112,8 @@ export async function savePlacementToCloudAction(input: {
       placement_test_updated_at: lastMath ? now : undefined,
       placement_french_history: frenchSessions as unknown as Record<string, unknown>[],
       placement_combined_profile: profile as unknown as Record<string, unknown>,
-      placement_french_draft: input.frenchDraft ?? null,
+      placement_total_history: totalHistory as unknown as Record<string, unknown>[],
+      placement_french_draft: input.frenchDraft !== undefined ? input.frenchDraft : current.frenchDraft,
       placement_updated_at: now,
       progress_updated_at: now,
       updated_at: now,
@@ -91,21 +132,13 @@ export async function saveMathPlacementAttemptAction(attempt: PlacementTestAttem
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { ok: false, error: "not_authenticated" };
 
-    const { data, error: readError } = await supabase
-      .from("profiles")
-      .select("placement_test_history, placement_french_history")
-      .eq("id", user.id)
-      .maybeSingle();
+    const { data, error: readError } = await readPlacementRow(supabase, user.id);
     if (readError) return { ok: false, error: readError.message };
 
-    const history = Array.isArray(data?.placement_test_history)
-      ? data.placement_test_history as PlacementMathAttempt[]
-      : [];
-    const frenchSessions = Array.isArray(data?.placement_french_history)
-      ? data.placement_french_history as PlacementFrenchSession[]
-      : [];
-    const nextHistory = [...history, attempt as PlacementMathAttempt].slice(-10);
-    const profile = buildPlacementProfile(nextHistory, frenchSessions);
+    const current = buildCloudPlacementData(data);
+    const nextHistory = [...current.mathHistory, attempt as PlacementMathAttempt].slice(-10);
+    const profile = buildPlacementProfile(nextHistory, current.frenchSessions);
+    const totalHistory = appendTotalSnapshot(current.totalHistory, profile);
     const now = new Date().toISOString();
 
     const { error } = await supabase.from("profiles").upsert({
@@ -114,6 +147,7 @@ export async function saveMathPlacementAttemptAction(attempt: PlacementTestAttem
       placement_test_history: nextHistory as unknown as Record<string, unknown>[],
       placement_test_updated_at: now,
       placement_combined_profile: profile as unknown as Record<string, unknown>,
+      placement_total_history: totalHistory as unknown as Record<string, unknown>[],
       placement_updated_at: now,
       progress_updated_at: now,
       updated_at: now,
@@ -137,36 +171,28 @@ export async function applyPlacementTeacherScoreAction(input: {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { ok: false, error: "not_authenticated" };
 
-    const { data, error: readError } = await supabase
-      .from("profiles")
-      .select("placement_test_history, placement_french_history")
-      .eq("id", user.id)
-      .maybeSingle();
+    const { data, error: readError } = await readPlacementRow(supabase, user.id);
     if (readError) return { ok: false, error: readError.message };
 
-    const mathHistory = Array.isArray(data?.placement_test_history)
-      ? data.placement_test_history as PlacementMathAttempt[]
-      : [];
-    const sessions = Array.isArray(data?.placement_french_history)
-      ? data.placement_french_history as PlacementFrenchSession[]
-      : [];
-
-    const idx = sessions.findIndex((s) => s.id === input.sessionId);
+    const current = buildCloudPlacementData(data);
+    const idx = current.frenchSessions.findIndex((s) => s.id === input.sessionId);
     if (idx < 0) return { ok: false, error: "session_not_found" };
 
-    const current = sessions[idx]!;
+    const session = current.frenchSessions[idx]!;
     const updated = buildFrenchSession({
-      ...current,
+      ...session,
       [input.skill]: input.points,
       [`${input.skill}SubmissionId`]: input.submissionId,
     });
-    const nextSessions = sessions.map((s, i) => (i === idx ? updated : s));
-    const profile = buildPlacementProfile(mathHistory, nextSessions);
+    const nextSessions = current.frenchSessions.map((s, i) => (i === idx ? updated : s));
+    const profile = buildPlacementProfile(current.mathHistory, nextSessions);
+    const totalHistory = appendTotalSnapshot(current.totalHistory, profile);
     const now = new Date().toISOString();
 
     const { error } = await supabase.from("profiles").update({
       placement_french_history: nextSessions as unknown as Record<string, unknown>[],
       placement_combined_profile: profile as unknown as Record<string, unknown>,
+      placement_total_history: totalHistory as unknown as Record<string, unknown>[],
       placement_updated_at: now,
       updated_at: now,
     }).eq("id", user.id);

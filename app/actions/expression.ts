@@ -228,7 +228,7 @@ export async function reviewExpressionAction(input: {
     if (skill) {
       const { data: profileRow } = await session.supabase
         .from("profiles")
-        .select("placement_test_history, placement_french_history")
+        .select("placement_test_history, placement_french_history, placement_total_history")
         .eq("id", submission.student_id)
         .maybeSingle();
       const mathHistory = Array.isArray(profileRow?.placement_test_history)
@@ -275,9 +275,15 @@ export async function reviewExpressionAction(input: {
           status: (s.pe !== null && s.pe !== undefined && s.po !== null && s.po !== undefined) ? "complete" as const : "partial" as const,
         }));
         const profile = buildPlacementProfile(mathHistory, normalized);
+        const { appendTotalSnapshot, parseTotalHistory } = await import("@/lib/placement/total-history");
+        const totalHistory = appendTotalSnapshot(
+          parseTotalHistory(profileRow?.placement_total_history),
+          profile,
+        );
         await session.supabase.from("profiles").update({
           placement_french_history: normalized as unknown as Record<string, unknown>[],
           placement_combined_profile: profile as unknown as Record<string, unknown>,
+          placement_total_history: totalHistory as unknown as Record<string, unknown>[],
           placement_updated_at: now,
           updated_at: now,
         }).eq("id", submission.student_id);

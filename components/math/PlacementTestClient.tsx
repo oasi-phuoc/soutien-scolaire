@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/navigation";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
-import { saveMathAttempt, loadFrenchSessions, loadMathHistory } from "@/lib/placement/storage";
+import { saveMathAttempt, loadFrenchSessions, loadMathHistory, loadTotalHistory } from "@/lib/placement/storage";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -536,6 +536,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       void savePlacementToCloudAction({
         mathHistory: loadMathHistory(),
         frenchSessions: loadFrenchSessions(),
+        totalHistory: loadTotalHistory(),
       });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

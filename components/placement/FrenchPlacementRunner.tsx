@@ -13,6 +13,7 @@ import {
   loadFrenchDraft,
   loadFrenchSessions,
   loadMathHistory,
+  loadTotalHistory,
   saveFrenchDraft,
   saveFrenchSession,
   recomputePlacementProfile,
@@ -104,6 +105,7 @@ export function FrenchPlacementRunner() {
     void savePlacementToCloudAction({
       mathHistory: loadMathHistory(),
       frenchSessions: loadFrenchSessions(),
+      totalHistory: loadTotalHistory(),
       frenchDraft: null,
     });
     recomputePlacementProfile();
