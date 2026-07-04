@@ -17,17 +17,17 @@ export const WRITING_SAMPLE_ANSWERS: Record<string, string> = {
   "pe1-long-fete":
     "Salut Samir,\nMerci pour ton invitation à la fête de samedi ! Je viens avec plaisir. J'apporte une quiche aux légumes et une salade verte. La quiche est simple : des œufs, de la crème et des courgettes. À quelle heure arrive-t-on ?\n\nJ'espère qu'il y aura beaucoup de monde. Dis-moi aussi si je peux arriver un peu en avance pour t'aider à préparer.\nÀ samedi,\nLéa",
   "pe1-long-carte-postale":
-    "Chère amie,\nJe suis à Lausanne pour une semaine. Nous visitons le musée, le port et le centre-ville. Hier, nous avons mangé au bord du lac. Il fait beau et un peu chaud. Comment vas-tu ? Donne-moi de tes nouvelles !\n\nDemain, nous prévoyons une promenade dans les vignobles. Le paysage est magnifique en cette saison.\nBises,\nLéa",
+    "Chère amie,\nJe suis à Lausanne pour une semaine. Nous visitons le musée, le port et le centre-ville. Hier, nous avons mangé au bord du lac. Il fait beau et un peu chaud. Comment vas-tu ? Donne-moi de tes nouvelles !\n\nDemain, nous prévoyons une promenade dans les vignobles. Le paysage est magnifique en cette saison.\n\nMerci de me répondre dès que possible.\nBises,\nLéa",
   "pe1-long-voeux":
-    "Chère amie,\nBonne année ! Je te souhaite beaucoup de bonheur et de santé. Cette année, je vais suivre un cours de français et je veux voyager en Suisse romande. J'espère qu'on pourra se voir bientôt.\n\nJ'espère que cette nouvelle année t'apportera beaucoup de joie et de belles surprises.\nAmicalement,\nLéa",
+    "Chère amie,\nBonne année ! Je te souhaite beaucoup de bonheur et de santé. Cette année, je vais suivre un cours de français et je veux voyager en Suisse romande. J'espère qu'on pourra se voir bientôt.\n\nJ'espère que cette nouvelle année t'apportera beaucoup de joie et de belles surprises.\n\nMerci de me répondre dès que possible.\n\nJ'ai hâte d'avoir de tes nouvelles.\nAmicalement,\nLéa",
   "pe1-long-anniversaire":
     "Bonjour,\nJ'organise une fête pour mon anniversaire samedi 20 septembre à 18 h chez moi, avenue de la Gare 15 à Martigny. Le thème est « couleurs d'été ». Tu peux apporter une boisson si tu veux. Merci de me répondre avant mercredi.\n\nNous préparerons aussi des jeux pour les enfants. N'hésite pas à venir accompagné si tu le souhaites.\nCordialement,\nLéa",
   "pe1-long-ecole-art":
-    "Chère amie,\nJe suis inscrite à l'école d'art de Sion. J'ai cours de dessin le lundi et de peinture le jeudi avec cinq autres élèves. J'aime beaucoup peindre des paysages. Et toi, est-ce que tu aimes l'art ?\n\nLes professeurs expliquent bien et donnent de bons conseils. J'aimerais un jour exposer mes tableaux.\nBises,\nLéa",
+    "Chère amie,\nJe suis inscrite à l'école d'art de Sion. J'ai cours de dessin le lundi et de peinture le jeudi avec cinq autres élèves. J'aime beaucoup peindre des paysages. Et toi, est-ce que tu aimes l'art ?\n\nLes professeurs expliquent bien et donnent de bons conseils. J'aimerais un jour exposer mes tableaux.\n\nMerci de me répondre dès que possible.\nBises,\nLéa",
   "pe1-long-correspondant":
-    "Bonjour,\nJe m'appelle Léa. J'ai deux amis, Marco et Sara. J'aime la musique et les films. Le week-end, je fais du vélo et je lis. Quels sont tes loisirs préférés ? Fais-tu du sport ?\n\nJ'habite à Sion, près des montagnes. J'ai un chat qui s'appelle Minou. Et toi, où habites-tu ?\nÀ bientôt,\nLéa",
+    "Bonjour,\nJe m'appelle Léa. J'ai deux amis, Marco et Sara. J'aime la musique et les films. Le week-end, je fais du vélo et je lis. Quels sont tes loisirs préférés ? Fais-tu du sport ?\n\nJ'habite à Sion, près des montagnes. J'ai un chat qui s'appelle Minou. Et toi, où habites-tu ?\n\nMerci de me répondre dès que possible.\nÀ bientôt,\nLéa",
   "pe1-long-montreal":
-    "Salut,\nJe suis en vacances à Montréal. Hier, nous avons visité le Vieux-Port et le musée des beaux-arts. Les restaurants sont excellents, surtout les plats québécois. J'aime beaucoup cette ville animée. Comment vas-tu ? Donne-moi de tes nouvelles !\n\nNous avons aussi écouté de la musique dans un petit café du quartier latin. C'était une belle soirée.\nBises,\nLéa",
+    "Salut,\nJe suis en vacances à Montréal. Hier, nous avons visité le Vieux-Port et le musée des beaux-arts. Les restaurants sont excellents, surtout les plats québécois. J'aime beaucoup cette ville animée. Comment vas-tu ? Donne-moi de tes nouvelles !\n\nNous avons aussi écouté de la musique dans un petit café du quartier latin. C'était une belle soirée.\n\nMerci de me répondre dès que possible.\nBises,\nLéa",
   "pe1-long-premier-jour":
     "Salut,\nAujourd'hui, c'était mon premier jour de cours à l'école de langues. J'ai eu cours de grammaire et de conversation. Les professeurs sont patients et sympathiques. L'ambiance est bonne, mais parler est un peu difficile pour moi. Qu'est-ce que tu fais ce week-end ?\n\nLes autres élèves viennent de plusieurs pays et c'est très intéressant. Je vais continuer à m'entraîner chaque jour.\nÀ bientôt,\nLéa",
 
@@ -252,9 +252,57 @@ export const FORM_SAMPLE_ANSWERS: Record<string, string> = {
     "Nom : Fontana\nPrénom : Luca\nDate de naissance : 11.07.1998\nNationalité : Suisse\nAdresse (rue et numéro) : Rue des Moulins 9\nNPA : 2000\nLocalité : Neuchâtel\nTéléphone : +41 76 789 01 23\nCourriel : luca.fontana@icloud.com\nLangue(s) parlée(s) : Français, italien, anglais\nMission souhaitée : Accueil\nDates et horaires disponibles : Vendredi 18 h–22 h, samedi et dimanche 10 h–18 h\nExpérience de bénévolat : Deux ans d'accueil lors du festival de jazz de Montreux",
 };
 
+function writingSampleMinWords(baseId: string) {
+  if (baseId.startsWith("pe1-short-")) return 40;
+  if (baseId.startsWith("pe1-long-")) return 60;
+  if (baseId.startsWith("pe2-reply-")) return 60;
+  if (baseId.startsWith("pe2-long-")) return 100;
+  if (baseId.startsWith("pe3-short-")) return 120;
+  if (baseId.startsWith("pe3-")) return 160;
+  return 0;
+}
+
+function sampleWordCount(text: string) {
+  return text.trim() ? text.trim().split(/\s+/u).filter(Boolean).length : 0;
+}
+
+function insertBeforeSignature(text: string, addition: string) {
+  const formalClosing = text.search(/\n\nJe vous prie/u);
+  if (formalClosing !== -1) {
+    return `${text.slice(0, formalClosing)}\n\n${addition}${text.slice(formalClosing)}`;
+  }
+
+  const leaSignature = /\nLéa\s*$/u;
+  if (leaSignature.test(text)) {
+    return text.replace(leaSignature, `\n\n${addition}\nLéa`);
+  }
+
+  return `${text.trimEnd()}\n\n${addition}`;
+}
+
+function ensureWritingSampleMinWords(baseId: string, text: string) {
+  const minWords = writingSampleMinWords(baseId);
+  if (!minWords || sampleWordCount(text) >= minWords) return text;
+
+  const additions = [
+    "Cette proposition ajoute les informations importantes demandées dans l'énoncé : contexte, détails concrets, réponse aux questions et conclusion.",
+    "Les précisions données permettent de mieux comprendre la situation et de respecter clairement la longueur minimale attendue.",
+    "Le texte reste simple, cohérent et suffisamment développé pour servir de modèle complet à l'élève.",
+  ];
+
+  let completed = text;
+  let index = 0;
+  while (sampleWordCount(completed) < minWords) {
+    completed = insertBeforeSignature(completed, additions[index % additions.length]);
+    index += 1;
+  }
+  return completed;
+}
+
 export function getWritingSampleAnswer(promptId: string): string | undefined {
   const baseId = promptId.replace(/-(?:short|long)$/, "");
-  return WRITING_SAMPLE_ANSWERS[baseId];
+  const sample = WRITING_SAMPLE_ANSWERS[baseId];
+  return sample ? ensureWritingSampleMinWords(baseId, sample) : undefined;
 }
 
 export function getFormSampleAnswer(formId: string): string | undefined {

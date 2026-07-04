@@ -11,7 +11,7 @@ const TARGET = path.join(__dirname, "../lib/curriculum/content/communication/pe-
 
 function minForKey(key) {
   if (key.startsWith("pe1-short-")) return 40;
-  if (key.startsWith("pe1-long-")) return 50;
+  if (key.startsWith("pe1-long-")) return 60;
   if (key.startsWith("pe2-reply-")) return 60;
   if (key.startsWith("pe2-long-")) return 100;
   if (key.startsWith("pe3-short-")) return 120;
