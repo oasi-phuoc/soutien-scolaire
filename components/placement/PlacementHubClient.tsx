@@ -184,7 +184,8 @@ export function PlacementHubClient() {
   const [zone, setZone] = useState("CSC");
   const [pendingFrench, setPendingFrench] = useState(0);
   const [draft, setDraft] = useState<PlacementFrenchDraft | null>(null);
-  const [history, setHistory] = useState(() => loadTotalHistory());
+  const [mathHistory, setMathHistory] = useState(() => loadMathHistory());
+  const [frenchSessions, setFrenchSessions] = useState(() => loadFrenchSessions());
   const [ready, setReady] = useState(false);
 
   const frenchInProgress = !!(draft && draft.step !== "recap");
@@ -197,7 +198,8 @@ export function PlacementHubClient() {
     setProfileTotal(profile.total);
     setZone(profile.zone);
     setPendingFrench(profile.pendingFrench);
-    setHistory(loadTotalHistory());
+    setMathHistory(loadMathHistory());
+    setFrenchSessions(loadFrenchSessions());
     return profile;
   }
 
@@ -220,7 +222,8 @@ export function PlacementHubClient() {
       setZone(profile.zone);
       setPendingFrench(profile.pendingFrench);
       setDraft(localDraft);
-      setHistory(loadTotalHistory());
+      setMathHistory(loadMathHistory());
+      setFrenchSessions(loadFrenchSessions());
       setReady(true);
     })();
     return () => { cancelled = true; };
@@ -323,12 +326,13 @@ export function PlacementHubClient() {
         </div>
       </div>
 
-      {history.length > 0 && (
+      {(mathHistory.length > 0 || frenchSessions.length > 0) && (
         <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Évolution du total</p>
           <div className="mt-3">
             <PlacementEvolutionChart
-              history={history}
+              mathAttempts={mathHistory}
+              frenchSessions={frenchSessions}
               mathCounted={mathCounted}
               frenchCounted={frenchCounted}
             />
