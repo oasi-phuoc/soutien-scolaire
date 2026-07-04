@@ -31,6 +31,9 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
+import { placementLessonCode } from "@/lib/placement/types";
+import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 
 type StepId = "form" | "short" | "long";
 type Phase = "intro" | "exercise" | "results";
@@ -478,7 +481,12 @@ function formToText(template: FormTemplate | null, answers: Record<string, strin
   return [`${template.organization} - ${template.title}`, template.situation, ...lines].join("\n");
 }
 
-export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
+export function ProductionEcriteRunner({
+  lessonId,
+  mode = "module",
+  placementSessionId,
+  onPlacementComplete,
+}: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const code = lessonCode(level);
@@ -527,16 +535,33 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     setValidatedSteps((previous) => new Set([...previous, current]));
     setRemaining(nextRemaining);
     if (!nextRemaining.length) {
-      try {
-        markCommunicationLessonComplete(code);
-      } catch {
-        /* ignore */
+      if (mode !== "placement") {
+        try {
+          markCommunicationLessonComplete(code);
+        } catch {
+          /* ignore */
+        }
       }
       setPhase("results");
       return;
     }
     setCurrent(nextRemaining[0]!);
-  }, [code, current, remaining, validatedSteps]);
+  }, [code, current, mode, remaining, validatedSteps]);
+
+  function completePlacementPe(sent: boolean, submissionId?: string, message?: string) {
+    setSendMessage(message ?? "");
+    setSent(sent);
+  }
+
+  function continuePlacementPe() {
+    onPlacementComplete?.({
+      skill: "pe",
+      points: 0,
+      maxPoints: 25,
+      pendingTeacher: true,
+      sent: true,
+    });
+  }
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
@@ -548,23 +573,65 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
     }
     parts.push("TEXTE COURT", shortPrompt.title, shortText, "", "TEXTE LONG", longPrompt.title, longText);
     feedback.push({ exercise: "short", matches: [] }, { exercise: "long", matches: [] });
+    const placementCode = mode === "placement" ? placementLessonCode("pe", level) : code;
+    const promptPayload = {
+      id: `${placementCode}-complete`,
+      title: `${placementCode} - Production écrite complète`,
+      situation: hasForm ? "Formulaire, texte court et texte long." : "Texte court et texte long.",
+      instruction: "Correction professeur demandée.",
+      points: hasForm ? ["Formulaire", "Texte court", "Texte long"] : ["Texte court", "Texte long"],
+      minWords: 0,
+      maxWords: 10000,
+    };
+    const textPayload = parts.join("\n");
+
+    if (mode === "placement" && placementSessionId && (!navigator.onLine)) {
+      queuePlacementSubmission({
+        kind: "pe",
+        id: `pe-${placementSessionId}-${Date.now()}`,
+        sessionId: placementSessionId,
+        teacherId,
+        lessonCode: placementCode,
+        level,
+        text: textPayload,
+        aiFeedback: feedback,
+        prompt: promptPayload,
+        createdAt: new Date().toISOString(),
+      });
+      completePlacementPe(true, undefined, "Production enregistrée — envoi au professeur dès la reconnexion.");
+      return;
+    }
+
     startSending(async () => {
       const result = await submitExpressionAction({
         teacherId,
-        lessonCode: code,
+        lessonCode: placementCode,
         level,
-        prompt: {
-          id: `${code}-complete`,
-          title: `${code} - Production écrite complète`,
-          situation: hasForm ? "Formulaire, texte court et texte long." : "Texte court et texte long.",
-          instruction: "Correction professeur demandée.",
-          points: hasForm ? ["Formulaire", "Texte court", "Texte long"] : ["Texte court", "Texte long"],
-          minWords: 0,
-          maxWords: 10000,
-        },
-        text: parts.join("\n"),
+        prompt: promptPayload,
+        text: textPayload,
         aiFeedback: feedback,
+        placementSessionId: mode === "placement" ? placementSessionId : undefined,
       });
+      if (mode === "placement") {
+        if (!result.ok && placementSessionId) {
+          queuePlacementSubmission({
+            kind: "pe",
+            id: `pe-${placementSessionId}-${Date.now()}`,
+            sessionId: placementSessionId,
+            teacherId,
+            lessonCode: placementCode,
+            level,
+            text: textPayload,
+            aiFeedback: feedback,
+            prompt: promptPayload,
+            createdAt: new Date().toISOString(),
+          });
+          completePlacementPe(true, undefined, "Production enregistrée — envoi au professeur dès la reconnexion.");
+          return;
+        }
+        completePlacementPe(result.ok, result.submissionId, result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
+        return;
+      }
       setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
     });
@@ -614,15 +681,28 @@ export function ProductionEcriteRunner({ lessonId }: { lessonId: string }) {
             </p>
             {sendMessage && <p className="mt-4 text-sm font-semibold text-emerald-700">{sendMessage}</p>}
           </section>
-          <button
-            type="button"
-            onClick={() => router.push("/messagerie")}
-            className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
-            style={{ background: ACCENT }}
-          >
-            Aller à la messagerie
-          </button>
-          <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+          {mode === "placement" ? (
+            <button
+              type="button"
+              onClick={continuePlacementPe}
+              className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white"
+              style={{ background: ACCENT }}
+            >
+              Continuer vers la production orale
+            </button>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => router.push("/messagerie")}
+                className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                style={{ background: ACCENT }}
+              >
+                Aller à la messagerie
+              </button>
+              <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+            </>
+          )}
         </main>
       );
     }

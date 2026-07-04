@@ -1,5 +1,5 @@
-import { PlacementStatsClient } from "@/components/math/PlacementStatsClient";
+import { redirect } from "next/navigation";
 
-export default function PlacementStatsPage() {
-  return <PlacementStatsClient />;
+export default function LegacyPlacementStatsRedirect() {
+  redirect("/placement/statistiques");
 }

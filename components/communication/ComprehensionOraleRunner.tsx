@@ -23,6 +23,7 @@ import {
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
+import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 
 type COLevel = "base" | "moyen" | "avance";
 type QuestionTask = COQuestionTask;
@@ -744,11 +745,16 @@ function QuestionBlock({
   );
 }
 
-export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
+export function ComprehensionOraleRunner({
+  lessonId,
+  mode = "module",
+  placementSeed,
+  onPlacementComplete,
+}: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
-  const [sessionSeed] = useState(() => Date.now());
+  const [sessionSeed] = useState(() => placementSeed ?? Date.now());
   const parts = useMemo(() => makeParts(level, sessionSeed), [level, sessionSeed]);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
@@ -790,12 +796,14 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
     const nextRemaining = remaining.filter((id) => id !== part.id);
     setRemaining(nextRemaining);
     if (!nextRemaining.length) {
-      void markCommunicationLessonComplete(lessonCode);
+      if (mode !== "placement") {
+        void markCommunicationLessonComplete(lessonCode);
+      }
       setPhase("results");
       return;
     }
     setCurrentId(nextRemaining[0]!);
-  }, [answers, currentPart, lessonCode, remaining]);
+  }, [answers, currentPart, lessonCode, mode, remaining]);
 
   if (phase === "intro") {
     const info = partInfoFor(level);
@@ -861,8 +869,12 @@ export function ComprehensionOraleRunner({ lessonId }: { lessonId: string }) {
             );
           })}
         </div>
-        <HiddenNav onBack={() => router.push(EXPRESSION_TAB_HREF)} onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
-        <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+        <HiddenNav
+          onBack={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: 25 }) : router.push(EXPRESSION_TAB_HREF))}
+          onNext={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: 25 }) : router.push(EXPRESSION_TAB_HREF))}
+          nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"}
+        />
+        {mode !== "placement" && <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />}
       </main>
     );
   }

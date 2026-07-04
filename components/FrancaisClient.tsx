@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import type { FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
-import { CommunicationModuleList } from "@/components/communication/CommunicationHome";
 
 type SectionDef  = { id: string; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -449,8 +448,20 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       </div>
 
       {tab === "communication" ? (
-        <section aria-label="Modules d'expression">
-          <CommunicationModuleList isAdmin={isAdmin} />
+        <section aria-label="Test de placement français" className="space-y-4">
+          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5">
+            <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">Expression</p>
+            <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">Test de placement français</h2>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+              CE, CO, PE et PO regroupés en une batterie (100 points). Accessible depuis la section placement.
+            </p>
+            <Link
+              href="/placement"
+              className="mt-4 inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-semibold text-white"
+            >
+              Ouvrir le test de placement
+            </Link>
+          </div>
         </section>
       ) : null}
 

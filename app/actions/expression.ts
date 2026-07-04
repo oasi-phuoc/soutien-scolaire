@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { WritingLevel, WritingPrompt } from "@/lib/curriculum/content/communication/writing-prompts";
+import type { PlacementMathAttempt } from "@/lib/placement/types";
 
 export type TeacherOption = { id: string; prenom: string | null; nom: string | null };
 export type ExpressionAnnotation = { start: number; end: number; text: string; comment: string };
@@ -65,7 +66,8 @@ export async function submitExpressionAction(input: {
   prompt: WritingPrompt;
   text: string;
   aiFeedback: unknown[];
-}): Promise<{ ok: boolean; reason?: string }> {
+  placementSessionId?: string;
+}): Promise<{ ok: boolean; reason?: string; submissionId?: string }> {
   const session = await currentSession();
   if (!session) return { ok: false, reason: "Vous devez être connecté." };
   const text = input.text.trim();
@@ -75,7 +77,7 @@ export async function submitExpressionAction(input: {
   }
   if (!input.teacherId) return { ok: false, reason: "Choisissez un professeur." };
 
-  const { error } = await session.supabase.from("expression_submissions").insert({
+  const { data: inserted, error } = await session.supabase.from("expression_submissions").insert({
     student_id: session.user.id,
     teacher_id: input.teacherId,
     lesson_code: input.lessonCode,
@@ -84,7 +86,8 @@ export async function submitExpressionAction(input: {
     prompt: input.prompt,
     original_text: text,
     ai_feedback: input.aiFeedback,
-  });
+    placement_session_id: input.placementSessionId ?? null,
+  }).select("id").single();
   if (error) {
     if (error.code === "42501") {
       return {
@@ -95,7 +98,7 @@ export async function submitExpressionAction(input: {
     return { ok: false, reason: error.message };
   }
   revalidatePath("/messagerie");
-  return { ok: true };
+  return { ok: true, submissionId: inserted?.id };
 }
 
 export async function getExpressionInboxAction(): Promise<ExpressionInboxRow[]> {
@@ -196,6 +199,15 @@ export async function reviewExpressionAction(input: {
   if (!finalResult) return { ok: false, reason: "Indiquez le résultat final de l’élève." };
 
   const now = new Date().toISOString();
+  const { data: submission, error: readError } = await session.supabase
+    .from("expression_submissions")
+    .select("id, lesson_code, placement_session_id, student_id")
+    .eq("id", input.id)
+    .eq("teacher_id", session.user.id)
+    .maybeSingle();
+  if (readError) return { ok: false, reason: readError.message };
+  if (!submission) return { ok: false, reason: "Soumission introuvable." };
+
   const { error } = await session.supabase.from("expression_submissions").update({
     corrected_text: input.correctedText.trim(),
     teacher_comment: input.teacherComment.trim() || null,
@@ -210,7 +222,71 @@ export async function reviewExpressionAction(input: {
     teacher_read_at: now,
   }).eq("id", input.id).eq("teacher_id", session.user.id);
   if (error) return { ok: false, reason: error.message };
+
+  if (submission.placement_session_id && submission.lesson_code?.startsWith("PLACEMENT-")) {
+    const skill = submission.lesson_code.includes("-PE-") ? "pe" : submission.lesson_code.includes("-PO-") ? "po" : null;
+    if (skill) {
+      const { data: profileRow } = await session.supabase
+        .from("profiles")
+        .select("placement_test_history, placement_french_history")
+        .eq("id", submission.student_id)
+        .maybeSingle();
+      const mathHistory = Array.isArray(profileRow?.placement_test_history)
+        ? profileRow.placement_test_history as PlacementMathAttempt[]
+        : [];
+      const sessions = Array.isArray(profileRow?.placement_french_history)
+        ? profileRow.placement_french_history as Array<Record<string, unknown>>
+        : [];
+      const idx = sessions.findIndex((s) => s.id === submission.placement_session_id);
+      if (idx >= 0) {
+        const current = sessions[idx]!;
+        const updated = {
+          ...current,
+          [skill]: points,
+          [`${skill}SubmissionId`]: submission.id,
+        };
+        const nextSessions = sessions.map((s, i) => (i === idx ? updated : s));
+        const { buildPlacementProfile, buildFrenchSession, frenchCountedTotal, frenchRawTotal } = await import("@/lib/placement/scoring");
+        const normalized = nextSessions.map((s) => buildFrenchSession({
+          id: String(s.id),
+          date: String(s.date ?? now),
+          level: s.level as "base" | "moyen" | "avance",
+          ce: Number(s.ce ?? 0),
+          co: Number(s.co ?? 0),
+          pe: s.pe === null || s.pe === undefined ? null : Number(s.pe),
+          po: s.po === null || s.po === undefined ? null : Number(s.po),
+          peSent: Boolean(s.peSent),
+          poSent: Boolean(s.poSent),
+          peSubmissionId: s.peSubmissionId ? String(s.peSubmissionId) : null,
+          poSubmissionId: s.poSubmissionId ? String(s.poSubmissionId) : null,
+          rawTotal: frenchRawTotal({
+            ce: Number(s.ce ?? 0),
+            co: Number(s.co ?? 0),
+            pe: s.pe === null || s.pe === undefined ? null : Number(s.pe),
+            po: s.po === null || s.po === undefined ? null : Number(s.po),
+          }),
+          countedTotal: frenchCountedTotal({
+            level: s.level as "base" | "moyen" | "avance",
+            ce: Number(s.ce ?? 0),
+            co: Number(s.co ?? 0),
+            pe: s.pe === null || s.pe === undefined ? null : Number(s.pe),
+            po: s.po === null || s.po === undefined ? null : Number(s.po),
+          }),
+          status: (s.pe !== null && s.pe !== undefined && s.po !== null && s.po !== undefined) ? "complete" as const : "partial" as const,
+        }));
+        const profile = buildPlacementProfile(mathHistory, normalized);
+        await session.supabase.from("profiles").update({
+          placement_french_history: normalized as unknown as Record<string, unknown>[],
+          placement_combined_profile: profile as unknown as Record<string, unknown>,
+          placement_updated_at: now,
+          updated_at: now,
+        }).eq("id", submission.student_id);
+      }
+    }
+  }
+
   revalidatePath("/messagerie");
   revalidatePath(`/messagerie/${input.id}`);
+  revalidatePath("/placement/statistiques");
   return { ok: true };
 }

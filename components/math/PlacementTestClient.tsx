@@ -3,6 +3,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
+import { savePlacementToCloudAction } from "@/app/actions/placement";
+import { saveMathAttempt, loadFrenchSessions, loadMathHistory } from "@/lib/placement/storage";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -372,7 +374,7 @@ const PLACEMENT_INTRO_TEXTS: Record<"fr", PlacementIntroText> & Partial<Record<P
   },
 };
 
-export function PlacementTestClient() {
+export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "placement" }) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
@@ -526,14 +528,15 @@ export function PlacementTestClient() {
       })),
     };
     try {
-      const raw = localStorage.getItem("tp-math-history");
-      const history: { date: string; points: number; maxPoints: number }[] = raw ? JSON.parse(raw) : [];
-      history.push({ date: attempt.date.slice(0, 10), points: pts, maxPoints: maxPts });
-      localStorage.setItem("tp-math-history", JSON.stringify(history.slice(-10)));
+      saveMathAttempt(attempt);
     } catch {}
     if (!savedResult) {
       setSavedResult(true);
       savePlacementTestResultAction(attempt);
+      void savePlacementToCloudAction({
+        mathHistory: loadMathHistory(),
+        frenchSessions: loadFrenchSessions(),
+      });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
@@ -779,7 +782,7 @@ export function PlacementTestClient() {
       {phase === "results" && (
         <button
           type="button"
-          onClick={() => router.push("/mathematiques")}
+          onClick={() => router.push(mode === "placement" ? "/placement/statistiques" : "/mathematiques")}
           className="mt-6 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
         >
           Terminer

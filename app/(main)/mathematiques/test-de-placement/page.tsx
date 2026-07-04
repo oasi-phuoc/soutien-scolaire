@@ -1,5 +1,5 @@
-import { PlacementTestClient } from "@/components/math/PlacementTestClient";
+import { redirect } from "next/navigation";
 
-export default function TestDePlacementPage() {
-  return <PlacementTestClient />;
+export default function LegacyPlacementMathRedirect() {
+  redirect("/placement/mathematiques");
 }

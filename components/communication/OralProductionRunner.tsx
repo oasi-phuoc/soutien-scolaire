@@ -36,6 +36,9 @@ import {
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
 } from "@/components/communication/CommunicationEvalLayout";
+import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
+import { placementLessonCode } from "@/lib/placement/types";
+import { queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -332,7 +335,12 @@ function DialogueBubble({ line }: { line: OralDialogueLine }) {
 
 // ——— Main component ———
 
-export function OralProductionRunner({ lessonId }: { lessonId: string }) {
+export function OralProductionRunner({
+  lessonId,
+  mode = "module",
+  placementSessionId,
+  onPlacementComplete,
+}: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = lessonCodeFromId(lessonId);
@@ -610,6 +618,16 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Save progress + finish ———
 
   function handleFinish() {
+    if (mode === "placement") {
+      onPlacementComplete?.({
+        skill: "po",
+        points: 0,
+        maxPoints: 25,
+        pendingTeacher: true,
+        sent: true,
+      });
+      return;
+    }
     try {
       markCommunicationLessonComplete(lessonId);
     } catch { /* ignore */ }
@@ -618,22 +636,74 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
+    const placementCode = mode === "placement" ? placementLessonCode("po", level) : lessonCode;
+    const submissionPrompt: OralPrompt = {
+      ...prompt,
+      id: `${prompt.id}-${situation.id}`,
+      imageDescription: situation.imageDescription,
+      dialogueContext: situation.dialogueContext,
+      dialoguePrompts: [...situation.dialoguePrompts, argumentationTopic.prompt],
+    };
+
+    if (mode === "placement" && placementSessionId && !navigator.onLine) {
+      queuePlacementSubmission({
+        kind: "po",
+        id: `po-${placementSessionId}-${Date.now()}`,
+        sessionId: placementSessionId,
+        teacherId,
+        lessonCode: placementCode,
+        level,
+        prompt: {
+          id: submissionPrompt.id,
+          level: submissionPrompt.level,
+          themes: submissionPrompt.themes.map((t) => ({ word: t.word, example: t.example })),
+          imageDescription: submissionPrompt.imageDescription,
+          dialogueContext: submissionPrompt.dialogueContext,
+          dialoguePrompts: submissionPrompt.dialoguePrompts,
+        },
+        dialogue: fullDialogue,
+        aiFeedback: allGrammar,
+        createdAt: new Date().toISOString(),
+      });
+      setSendMessage("Production enregistrée — envoi au professeur dès la reconnexion.");
+      setSent(true);
+      return;
+    }
+
     startSending(async () => {
-      const submissionPrompt: OralPrompt = {
-        ...prompt,
-        id: `${prompt.id}-${situation.id}`,
-        imageDescription: situation.imageDescription,
-        dialogueContext: situation.dialogueContext,
-        dialoguePrompts: [...situation.dialoguePrompts, argumentationTopic.prompt],
-      };
       const result = await submitOralAction({
         teacherId,
-        lessonCode,
+        lessonCode: placementCode,
         level,
         prompt: submissionPrompt,
         dialogue: fullDialogue,
         aiFeedback: allGrammar,
+        placementSessionId: mode === "placement" ? placementSessionId : undefined,
       });
+      if (mode === "placement" && !result.ok && placementSessionId) {
+        queuePlacementSubmission({
+          kind: "po",
+          id: `po-${placementSessionId}-${Date.now()}`,
+          sessionId: placementSessionId,
+          teacherId,
+          lessonCode: placementCode,
+          level,
+          prompt: {
+            id: submissionPrompt.id,
+            level: submissionPrompt.level,
+            themes: submissionPrompt.themes.map((t) => ({ word: t.word, example: t.example })),
+            imageDescription: submissionPrompt.imageDescription,
+            dialogueContext: submissionPrompt.dialogueContext,
+            dialoguePrompts: submissionPrompt.dialoguePrompts,
+          },
+          dialogue: fullDialogue,
+          aiFeedback: allGrammar,
+          createdAt: new Date().toISOString(),
+        });
+        setSendMessage("Production enregistrée — envoi au professeur dès la reconnexion.");
+        setSent(true);
+        return;
+      }
       setSendMessage(result.ok ? "Dialogue envoyé au professeur." : (result.reason ?? "Envoi impossible."));
       setSent(result.ok);
     });
@@ -642,7 +712,10 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
   // ——— Nav bar logic ———
 
   function goBack() {
-    if (phase === "intro") router.push(EXPRESSION_TAB_HREF);
+    if (phase === "intro") {
+      if (mode === "placement") return;
+      router.push(EXPRESSION_TAB_HREF);
+    }
     else if (phase === "review") setPhase(activeTaskPhases[activeTaskPhases.length - 1] ?? "task5");
     else if (activeTaskPhases.length > 0) {
       const index = activeTaskPhases.indexOf(phase as TaskPhase);
@@ -1429,13 +1502,13 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </section>
             <button
               type="button"
-              onClick={() => router.push("/messagerie")}
+              onClick={() => (mode === "placement" ? handleFinish() : router.push("/messagerie"))}
               className="mt-5 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
               style={{ background: ACCENT }}
             >
-              Aller à la messagerie
+              {mode === "placement" ? "Terminer la batterie française" : "Aller à la messagerie"}
             </button>
-            <CommunicationFinishButton onClick={handleFinish} />
+            {mode !== "placement" && <CommunicationFinishButton onClick={handleFinish} />}
           </div>
         ) : (
         <div className="flex-1 space-y-5">

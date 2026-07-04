@@ -240,6 +240,18 @@ export function HomeProgressCards() {
   return (
     <div className="space-y-3">
       <CardShell
+        href="/placement"
+        accentColor="var(--color-accent-quiz)"
+        icon={<PlacementIcon />}
+        label="Placement"
+        title="Test de placement /200"
+        completedText="Maths + Français"
+        totalText="CE · CO · PE · PO · TCM"
+        pct={0}
+        continuePath="/placement"
+        continueLabel="Commencer"
+      />
+      <CardShell
         href="/lecture"
         accentColor="var(--color-accent-lecture)"
         icon={<BookIcon />}
@@ -286,6 +298,16 @@ export function HomeProgressCards() {
         ]}
       />
     </div>
+  );
+}
+
+function PlacementIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M12 20V10" />
+      <path d="M18 20V4" />
+      <path d="M6 20v-4" />
+    </svg>
   );
 }
 

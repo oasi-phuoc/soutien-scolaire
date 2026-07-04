@@ -13,6 +13,9 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
+
+const TOTAL_SECONDS = 45 * 60;
 
 type CELevel = "base" | "moyen" | "avance";
 type Choice = { label: string; image?: string };
@@ -760,7 +763,7 @@ function ProgressDots({
 function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) {
   const introBullets: IntroBullet[] = [
     { strong: "4 exercices", text: " de compréhension écrite" },
-    { strong: "30 minutes", text: " pour compléter l'évaluation" },
+    { strong: "45 minutes", text: " pour compléter l'évaluation" },
     { text: "Validez chaque exercice individuellement" },
     { text: "Vous pouvez naviguer librement en cliquant sur la barre de progression en haut." },
     { before: "Score maximum : ", strong: "25 points", text: "" },
@@ -1047,17 +1050,21 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
   );
 }
 
-export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
+export function ComprehensionEcritRunner({
+  lessonId,
+  mode = "module",
+  placementSeed,
+  onPlacementComplete,
+}: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
-  const [seed] = useState(() => Date.now());
+  const [seed] = useState(() => placementSeed ?? Date.now());
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<CEAnswers>({});
   const [validatedIds, setValidatedIds] = useState<string[]>([]);
   const [openedResult, setOpenedResult] = useState<string | null>(null);
-  const [startedAt, setStartedAt] = useState<number | null>(null);
-  const [now, setNow] = useState(() => Date.now());
+  const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const parts = useMemo(() => buildParts(level, seed), [level, seed]);
   const activeParts = useMemo(() => parts.filter((item) => !validatedIds.includes(item.id)), [parts, validatedIds]);
   const part = activeParts[Math.min(current, Math.max(0, activeParts.length - 1))] ?? activeParts[0] ?? parts[0]!;
@@ -1065,12 +1072,30 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
     () => parts.filter((item) => validatedIds.includes(item.id)).reduce((sum, item) => sum + scorePart(item, answers), 0),
     [answers, parts, validatedIds],
   );
+  const totalScore = useMemo(
+    () => parts.reduce((sum, item) => sum + scorePart(item, answers), 0),
+    [answers, parts],
+  );
+
+  const finishToResults = useCallback(() => {
+    if (mode !== "placement") {
+      markCommunicationLessonComplete(lessonId);
+    }
+    setOpenedResult(null);
+    setPhase("results");
+  }, [lessonId, mode]);
 
   useEffect(() => {
     if (phase !== "exercise") return;
-    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    const timer = window.setInterval(() => setSecondsLeft((value) => Math.max(0, value - 1)), 1000);
     return () => window.clearInterval(timer);
   }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "exercise" || secondsLeft > 0) return;
+    setValidatedIds(parts.map((item) => item.id));
+    finishToResults();
+  }, [finishToResults, parts, phase, secondsLeft]);
 
   const setAnswer = useCallback((key: string, value: number | string) => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
@@ -1083,41 +1108,47 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
     const remaining = parts.filter((item) => !nextValidated.includes(item.id));
     setValidatedIds(nextValidated);
     if (remaining.length === 0) {
-      markCommunicationLessonComplete(lessonId);
-      setOpenedResult(null);
-      setPhase("results");
+      finishToResults();
     } else {
       setCurrent((value) => Math.min(value, remaining.length - 1));
     }
-  }, [activeParts, current, lessonId, parts, validatedIds]);
+  }, [activeParts, current, finishToResults, parts, validatedIds]);
 
   const next = useCallback(() => {
     if (phase === "intro") {
-      setStartedAt(Date.now());
+      setSecondsLeft(TOTAL_SECONDS);
       setPhase("exercise");
       return;
     }
     if (phase === "results") {
+      if (mode === "placement") {
+        onPlacementComplete?.({ skill: "ce", points: totalScore, maxPoints: 25 });
+        return;
+      }
       router.push(EXPRESSION_TAB_HREF);
       return;
     }
     if (activeParts.length === 0) return;
     setCurrent((value) => (value + 1) % activeParts.length);
-  }, [activeParts.length, phase, router]);
+  }, [activeParts.length, mode, onPlacementComplete, phase, router, totalScore]);
 
   const back = useCallback(() => {
     if (phase === "intro") return;
     if (phase === "results") {
+      if (mode === "placement") {
+        onPlacementComplete?.({ skill: "ce", points: totalScore, maxPoints: 25 });
+        return;
+      }
       router.push(EXPRESSION_TAB_HREF);
       return;
     }
     if (activeParts.length === 0) return;
     setCurrent((value) => (value - 1 + activeParts.length) % activeParts.length);
-  }, [activeParts.length, phase, router]);
+  }, [activeParts.length, mode, onPlacementComplete, phase, router, totalScore]);
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
-      {phase === "intro" && <IntroPage level={level} onStart={() => { setStartedAt(Date.now()); setPhase("exercise"); }} />}
+      {phase === "intro" && <IntroPage level={level} onStart={() => { setSecondsLeft(TOTAL_SECONDS); setPhase("exercise"); }} />}
 
       {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
@@ -1127,7 +1158,7 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
               <p className="text-xs font-bold tabular-nums" style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</p>
               <div className="flex items-center gap-3">
                 <span className="rounded-full px-2 py-0.5 text-xs font-bold tabular-nums" style={{ background: `color-mix(in srgb, ${INVERSE} 12%, white)`, color: INVERSE }}>
-                  {formatTimer(now - (startedAt ?? now))}
+                  {formatTimer(secondsLeft * 1000)}
                 </span>
                 <p className="text-xs text-[var(--color-text-secondary)]">{activeParts.length} exercice{activeParts.length !== 1 ? "s" : ""} restant{activeParts.length !== 1 ? "s" : ""}</p>
               </div>
@@ -1147,8 +1178,8 @@ export function ComprehensionEcritRunner({ lessonId }: { lessonId: string }) {
         <div className="space-y-6">
           <CEHeader level={level} title="Résultats" />
           <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onNext={() => router.push(EXPRESSION_TAB_HREF)} nextLabel="Terminer" />
-          <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />
+          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"} />
+          {mode !== "placement" && <CommunicationFinishButton onClick={next} />}
         </div>
       )}
     </div>

@@ -25,7 +25,8 @@ export async function submitOralAction(input: {
   prompt: OralPrompt;
   dialogue: OralDialogueLine[];
   aiFeedback: OralGrammarMatch[];
-}): Promise<{ ok: boolean; reason?: string }> {
+  placementSessionId?: string;
+}): Promise<{ ok: boolean; reason?: string; submissionId?: string }> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, reason: "Vous devez être connecté." };
   const { data: { user } } = await supabase.auth.getUser();
@@ -47,7 +48,7 @@ export async function submitOralAction(input: {
     maxWords: 99999,
   };
 
-  const { error } = await supabase.from("expression_submissions").insert({
+  const { data: inserted, error } = await supabase.from("expression_submissions").insert({
     student_id: user.id,
     teacher_id: input.teacherId,
     lesson_code: input.lessonCode,
@@ -56,8 +57,9 @@ export async function submitOralAction(input: {
     prompt: fakePrompt,
     original_text: transcriptText,
     ai_feedback: input.aiFeedback,
-  });
+    placement_session_id: input.placementSessionId ?? null,
+  }).select("id").single();
   if (error) return { ok: false, reason: error.message };
   revalidatePath("/messagerie");
-  return { ok: true };
+  return { ok: true, submissionId: inserted?.id };
 }
