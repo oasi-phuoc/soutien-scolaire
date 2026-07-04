@@ -16,14 +16,14 @@ function normalize(value) {
     .trim()
     .toLowerCase()
     .replace(/[’‘`]/g, "'")
-    .replace(/[â€™â€˜]/g, "'")
+    .replace(/\u00e2\u20ac[\u2122\u02dc]/g, "'")
     .normalize("NFC");
 }
 
 function fixEncoding(value) {
-  if (!/[ÃÂâØÙÛÐÑá]/.test(value)) return value;
+  if (!/[\u00c3\u00c2\u00e2\u00d8\u00d9\u00db\u00d0\u00d1\u00e1]/.test(value)) return value;
   const decoded = Buffer.from(value, "latin1").toString("utf8");
-  return decoded.includes("�") ? value : decoded;
+  return decoded.includes("\uFFFD") ? value : decoded;
 }
 
 function readDefinitions() {
