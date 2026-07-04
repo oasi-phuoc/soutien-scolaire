@@ -95,23 +95,36 @@ export async function changePasswordAction(userId: string, newPassword: string) 
 export async function getPlacementHistoryForUserAction(userId: string): Promise<{
   ok: boolean;
   history: Array<{ date: string; points: number; maxPoints: number; percent: number }>;
+  combinedProfile: { total: number; zone: string; mathCounted: number; frenchCounted: number } | null;
   error?: string;
 }> {
   const caller = await getCallerRole();
-  if (!caller) return { ok: false, history: [], error: "Non autorisé" };
+  if (!caller) return { ok: false, history: [], combinedProfile: null, error: "Non autorisé" };
   const supabase = await createSupabaseActionClient();
-  if (!supabase) return { ok: false, history: [], error: "Erreur supabase" };
+  if (!supabase) return { ok: false, history: [], combinedProfile: null, error: "Erreur supabase" };
   const { data, error } = await supabase
     .from("profiles")
-    .select("placement_test_history")
+    .select("placement_test_history, placement_combined_profile")
     .eq("id", userId)
     .maybeSingle();
-  if (error) return { ok: false, history: [], error: error.message };
+  if (error) return { ok: false, history: [], combinedProfile: null, error: error.message };
   const raw = Array.isArray(data?.placement_test_history) ? data.placement_test_history : [];
+  const combined = data?.placement_combined_profile as {
+    total?: number;
+    zone?: string;
+    mathCounted?: number;
+    frenchCounted?: number;
+  } | null;
   return {
     ok: true,
     history: (raw as Array<{ date: string; points: number; maxPoints: number; percent: number }>)
       .map(a => ({ date: a.date, points: a.points, maxPoints: a.maxPoints, percent: a.percent })),
+    combinedProfile: combined?.total !== undefined ? {
+      total: Number(combined.total ?? 0),
+      zone: String(combined.zone ?? "CSC"),
+      mathCounted: Number(combined.mathCounted ?? 0),
+      frenchCounted: Number(combined.frenchCounted ?? 0),
+    } : null,
   };
 }
 

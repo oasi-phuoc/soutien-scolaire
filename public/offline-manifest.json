@@ -1,5 +1,5 @@
 {
-  "version": 1783112818555,
+  "version": 1783173558073,
   "totalBytes": 223236130,
   "routes": [
     "/",
@@ -526,7 +526,10 @@
     "/mathematiques/test-de-placement/statistiques",
     "/messagerie",
     "/offline.html",
-    "/placement"
+    "/placement",
+    "/placement/francais",
+    "/placement/mathematiques",
+    "/placement/statistiques"
   ],
   "assets": [
     "/assets/icons/competences/icon-ce.svg",

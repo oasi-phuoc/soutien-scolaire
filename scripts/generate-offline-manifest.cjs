@@ -94,6 +94,9 @@ const baseRoutes = [
   "/compte",
   "/messagerie",
   "/placement",
+  "/placement/mathematiques",
+  "/placement/francais",
+  "/placement/statistiques",
   "/offline.html",
 ];
 

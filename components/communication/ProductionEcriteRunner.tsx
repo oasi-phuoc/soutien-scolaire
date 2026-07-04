@@ -509,6 +509,7 @@ export function ProductionEcriteRunner({
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [placementSubmissionId, setPlacementSubmissionId] = useState<string | undefined>();
   const [isSending, startSending] = useTransition();
 
   useEffect(() => {
@@ -560,6 +561,7 @@ export function ProductionEcriteRunner({
       maxPoints: 25,
       pendingTeacher: true,
       sent: true,
+      submissionId: placementSubmissionId,
     });
   }
 
@@ -630,6 +632,7 @@ export function ProductionEcriteRunner({
           return;
         }
         completePlacementPe(result.ok, result.submissionId, result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
+        if (result.submissionId) setPlacementSubmissionId(result.submissionId);
         return;
       }
       setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));

@@ -2,17 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { loadPlacementFromCloudAction } from "@/app/actions/placement";
+import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
-import {
-  loadPlacementProfile,
-  migrateLegacyMathHistory,
-  recomputePlacementProfile,
-  writePlacementJson,
-  PLACEMENT_FRENCH_SESSIONS_KEY,
-  PLACEMENT_MATH_HISTORY_KEY,
-  PLACEMENT_PROFILE_KEY,
-} from "@/lib/placement/storage";
+import { loadPlacementProfile, migrateLegacyMathHistory } from "@/lib/placement/storage";
 import { PLACEMENT_LEVEL_LABELS } from "@/lib/placement/types";
 
 const ZONE_COLORS: Record<string, string> = {
@@ -53,23 +45,12 @@ export function PlacementStatsUnifiedClient() {
   const [profile, setProfile] = useState(() => loadPlacementProfile());
 
   useEffect(() => {
-    migrateLegacyMathHistory();
     let cancelled = false;
     (async () => {
-      const cloud = await loadPlacementFromCloudAction();
-      if (!cancelled && cloud.ok && cloud.data) {
-        if (cloud.data.mathHistory.length > 0) {
-          writePlacementJson(PLACEMENT_MATH_HISTORY_KEY, cloud.data.mathHistory);
-        }
-        if (cloud.data.frenchSessions.length > 0) {
-          writePlacementJson(PLACEMENT_FRENCH_SESSIONS_KEY, cloud.data.frenchSessions);
-        }
-        if (cloud.data.profile) {
-          writePlacementJson(PLACEMENT_PROFILE_KEY, cloud.data.profile);
-        }
-      }
+      migrateLegacyMathHistory();
+      const nextProfile = await syncPlacementFromCloud();
       if (!cancelled) {
-        setProfile(recomputePlacementProfile());
+        setProfile(nextProfile);
         setReady(true);
       }
     })();

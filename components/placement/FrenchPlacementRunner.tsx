@@ -41,7 +41,11 @@ export function FrenchPlacementRunner() {
   const [sessionId] = useState(() => draft?.sessionId ?? createFrenchSessionId());
   const [seed] = useState(() => draft?.seed ?? Date.now());
   const [level] = useState<PlacementLevel>(() => draft?.level ?? paramLevel);
-  const [step, setStep] = useState<FrenchStep>(() => draft?.step ?? "intro");
+  const [step, setStep] = useState<FrenchStep>(() => {
+    const d = typeof window !== "undefined" ? loadFrenchDraft() : null;
+    if (d?.step && d.step !== "recap") return d.step;
+    return "intro";
+  });
   const [ceScore, setCeScore] = useState(draft?.ce ?? 0);
   const [coScore, setCoScore] = useState(draft?.co ?? 0);
   const [peSent, setPeSent] = useState(draft?.peSent ?? false);
@@ -115,6 +119,18 @@ export function FrenchPlacementRunner() {
     }
     if (result.skill === "co") {
       setCoScore(result.points);
+      const partial = buildFrenchSession({
+        id: sessionId,
+        date: new Date().toISOString(),
+        level,
+        ce: ceScore,
+        co: result.points,
+        pe: null,
+        po: null,
+        peSent: false,
+        poSent: false,
+      });
+      saveFrenchSession(partial);
       persistDraft({ step: "pe", co: result.points });
       setStep("pe");
       return;

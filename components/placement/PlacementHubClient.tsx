@@ -4,9 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PLACEMENT_LEVEL_LABELS, type PlacementLevel } from "@/lib/placement/types";
-import { loadMathHistory, loadFrenchSessions, loadPlacementProfile } from "@/lib/placement/storage";
+import { loadFrenchDraft, loadMathHistory, loadFrenchSessions } from "@/lib/placement/storage";
+import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
 const LEVEL_KEY = "placement-selected-level";
+
+const STEP_LABELS: Record<string, string> = {
+  ce: "Compréhension écrite",
+  co: "Compréhension orale",
+  pe: "Production écrite",
+  po: "Production orale",
+};
 
 export function PlacementHubClient() {
   const router = useRouter();
@@ -14,20 +22,29 @@ export function PlacementHubClient() {
   const [mathDone, setMathDone] = useState(false);
   const [frenchDone, setFrenchDone] = useState(false);
   const [profileTotal, setProfileTotal] = useState(0);
-  const [zone, setZone] = useState("—");
+  const [zone, setZone] = useState("CSC");
+  const [pendingFrench, setPendingFrench] = useState(0);
+  const [draftStep, setDraftStep] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(LEVEL_KEY) as PlacementLevel | null;
-      if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
-    } catch { /* ignore */ }
-    const math = loadMathHistory();
-    const french = loadFrenchSessions();
-    const profile = loadPlacementProfile();
-    setMathDone(math.length > 0);
-    setFrenchDone(french.length > 0);
-    setProfileTotal(profile.total);
-    setZone(profile.zone);
+    let cancelled = false;
+    (async () => {
+      try {
+        const saved = localStorage.getItem(LEVEL_KEY) as PlacementLevel | null;
+        if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
+      } catch { /* ignore */ }
+      const profile = await syncPlacementFromCloud();
+      if (cancelled) return;
+      setMathDone(loadMathHistory().length > 0);
+      setFrenchDone(loadFrenchSessions().length > 0);
+      setProfileTotal(profile.total);
+      setZone(profile.zone);
+      setPendingFrench(profile.pendingFrench);
+      setDraftStep(loadFrenchDraft()?.step ?? null);
+      setReady(true);
+    })();
+    return () => { cancelled = true; };
   }, []);
 
   function selectLevel(next: PlacementLevel) {
@@ -38,6 +55,18 @@ export function PlacementHubClient() {
   function launchFrench() {
     localStorage.setItem(LEVEL_KEY, level);
     router.push(`/placement/francais?level=${level}`);
+  }
+
+  function resumeFrench() {
+    router.push(`/placement/francais?level=${level}`);
+  }
+
+  if (!ready) {
+    return (
+      <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+        <p className="text-center text-sm text-[var(--color-text-secondary)]">Chargement…</p>
+      </main>
+    );
   }
 
   return (
@@ -61,11 +90,34 @@ export function PlacementHubClient() {
         </p>
       </header>
 
-      {(mathDone || frenchDone) && (
-        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Total actuel</p>
-          <p className="mt-1 text-3xl font-bold text-[var(--color-text-primary)]">{profileTotal} <span className="text-base font-medium text-[var(--color-text-secondary)]">/ 200</span></p>
-          <p className="mt-1 text-sm font-semibold text-[var(--color-accent-quiz)]">Zone {zone}</p>
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Total placement</p>
+        <p className="mt-1 text-3xl font-bold text-[var(--color-text-primary)]">
+          {profileTotal}
+          <span className="text-base font-medium text-[var(--color-text-secondary)]"> / 200</span>
+        </p>
+        <p className="mt-1 text-sm font-semibold text-[var(--color-accent-quiz)]">Zone {zone}</p>
+        {pendingFrench > 0 && (
+          <p className="mt-2 text-xs text-amber-600">{pendingFrench} pts en attente de correction professeur</p>
+        )}
+        {!mathDone && !frenchDone && (
+          <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Parties non faites comptées à 0.</p>
+        )}
+      </div>
+
+      {draftStep && draftStep !== "recap" && (
+        <div className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-4">
+          <p className="text-sm font-bold text-amber-800">Batterie française en cours</p>
+          <p className="mt-1 text-xs text-amber-700">
+            Reprendre à l&apos;étape : {STEP_LABELS[draftStep] ?? draftStep}
+          </p>
+          <button
+            type="button"
+            onClick={resumeFrench}
+            className="mt-3 rounded-[var(--radius-md)] bg-amber-600 px-4 py-2 text-sm font-semibold text-white"
+          >
+            Reprendre
+          </button>
         </div>
       )}
 

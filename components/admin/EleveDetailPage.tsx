@@ -153,10 +153,14 @@ function ProgressSection({ user }: { user: UserRow }) {
   const [lectureOpen, setLectureOpen] = useState(false);
   const [placementOpen, setPlacementOpen] = useState(false);
   const [history, setHistory] = useState<Array<{ date: string; points: number; maxPoints: number; percent: number }> | null>(null);
+  const [combinedProfile, setCombinedProfile] = useState<{ total: number; zone: string; mathCounted: number; frenchCounted: number } | null>(null);
 
   useEffect(() => {
     getPlacementHistoryForUserAction(user.id).then(res => {
-      if (res.ok) setHistory(res.history);
+      if (res.ok) {
+        setHistory(res.history);
+        setCombinedProfile(res.combinedProfile);
+      }
     });
   }, [user.id]);
 
@@ -192,13 +196,20 @@ function ProgressSection({ user }: { user: UserRow }) {
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${placementOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
               Test de placement
             </span>
-            {history.length === 0 ? (
+            {combinedProfile ? (
+              <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{combinedProfile.total}/200 · {combinedProfile.zone}</span>
+            ) : history.length === 0 ? (
               <span className="text-xs text-zinc-400">Aucun résultat</span>
             ) : (() => {
               const best = Math.max(...history.map(a => a.percent));
-              return <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{best}%</span>;
+              return <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{best}% maths</span>;
             })()}
           </button>
+          {combinedProfile && (
+            <p className="mb-2 text-xs text-zinc-500">
+              Total /200 : {combinedProfile.total} (maths {combinedProfile.mathCounted} + français {combinedProfile.frenchCounted}) · zone {combinedProfile.zone}
+            </p>
+          )}
           {history.length > 0 && (
             <Bar pct={Math.max(...history.map(a => a.percent))} color="bg-violet-500" />
           )}
