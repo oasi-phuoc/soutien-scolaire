@@ -1054,7 +1054,7 @@ function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; a
               key={part.id}
               index={index}
               title={part.title}
-              scoreLabel={`${formatEvalPoints(score)} / ${part.points} :`}
+              scoreLabel={`${formatEvalPoints(score)} / ${part.points}`}
               open={isOpen}
               onToggle={() => setOpened(isOpen ? null : part.id)}
             >
