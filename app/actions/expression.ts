@@ -34,6 +34,9 @@ export type ExpressionSubmission = {
   corrected_text: string | null;
   teacher_comment: string | null;
   annotations: ExpressionAnnotation[];
+  teacher_points: number | null;
+  teacher_max_points: number;
+  final_result: string | null;
   status: "submitted" | "reviewed";
   created_at: string;
   reviewed_at: string | null;
@@ -180,14 +183,26 @@ export async function reviewExpressionAction(input: {
   correctedText: string;
   teacherComment: string;
   annotations: ExpressionAnnotation[];
+  teacherPoints: number;
+  finalResult: string;
 }): Promise<{ ok: boolean; reason?: string }> {
   const session = await currentSession();
   if (!session || !["prof", "admin"].includes(session.role)) return { ok: false, reason: "Non autorisé." };
+  const points = Number(input.teacherPoints);
+  if (!Number.isFinite(points) || points < 0 || points > 25) {
+    return { ok: false, reason: "Les points doivent être compris entre 0 et 25." };
+  }
+  const finalResult = input.finalResult.trim();
+  if (!finalResult) return { ok: false, reason: "Indiquez le résultat final de l’élève." };
+
   const now = new Date().toISOString();
   const { error } = await session.supabase.from("expression_submissions").update({
     corrected_text: input.correctedText.trim(),
     teacher_comment: input.teacherComment.trim() || null,
     annotations: input.annotations,
+    teacher_points: points,
+    teacher_max_points: 25,
+    final_result: finalResult,
     status: "reviewed",
     reviewed_at: now,
     updated_at: now,

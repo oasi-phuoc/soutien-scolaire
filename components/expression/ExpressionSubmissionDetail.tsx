@@ -34,11 +34,14 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
   const [correctedText, setCorrectedText] = useState(item.corrected_text ?? item.original_text);
   const [teacherComment, setTeacherComment] = useState(item.teacher_comment ?? "");
   const [annotations, setAnnotations] = useState<ExpressionAnnotation[]>(item.annotations ?? []);
+  const [teacherPoints, setTeacherPoints] = useState(item.teacher_points != null ? String(item.teacher_points) : "");
+  const [finalResult, setFinalResult] = useState(item.final_result ?? "");
   const [annotationComment, setAnnotationComment] = useState("");
   const [selection, setSelection] = useState<{ start: number; end: number; text: string } | null>(null);
   const [message, setMessage] = useState("");
   const [pending, startTransition] = useTransition();
   const originalRef = useRef<HTMLDivElement>(null);
+  const maxPoints = item.teacher_max_points ?? 25;
 
   function captureSelection() {
     const sel = window.getSelection();
@@ -68,8 +71,16 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
 
   function saveReview() {
     startTransition(async () => {
-      const result = await reviewExpressionAction({ id: item.id, correctedText, teacherComment, annotations });
-      setMessage(result.ok ? "Correction renvoyée à l’élève." : (result.reason ?? "Enregistrement impossible."));
+      const points = Number(teacherPoints.replace(",", "."));
+      const result = await reviewExpressionAction({
+        id: item.id,
+        correctedText,
+        teacherComment,
+        annotations,
+        teacherPoints: points,
+        finalResult,
+      });
+      setMessage(result.ok ? "Correction et résultat renvoyés à l’élève." : (result.reason ?? "Enregistrement impossible."));
     });
   }
 
@@ -127,16 +138,58 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
             <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Les modifications apparaîtront en ambre dans la messagerie de l’élève.</p>
           </section>
 
+          <section className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
+            <h2 className="mb-3 font-bold text-[var(--color-text-primary)]">Notation professeur</h2>
+            <div className="grid gap-3 sm:grid-cols-[1fr_2fr]">
+              <label className="block">
+                <span className="mb-1 block text-sm font-semibold text-[var(--color-text-primary)]">Points sur {maxPoints}</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={teacherPoints}
+                  onChange={(event) => setTeacherPoints(event.target.value.replace(/[^0-9,.]/g, ""))}
+                  placeholder={`0 à ${maxPoints}`}
+                  className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 py-2 text-sm outline-none focus:border-amber-500"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1 block text-sm font-semibold text-[var(--color-text-primary)]">Résultat final de l’élève</span>
+                <select
+                  value={finalResult}
+                  onChange={(event) => setFinalResult(event.target.value)}
+                  className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 py-2 text-sm outline-none focus:border-amber-500"
+                >
+                  <option value="">Choisir un résultat</option>
+                  <option value="Réussi">Réussi</option>
+                  <option value="À retravailler">À retravailler</option>
+                  <option value="Non validé">Non validé</option>
+                </select>
+              </label>
+            </div>
+            <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
+              L’élève ne voit le score et le résultat final qu’après l’envoi de cette correction.
+            </p>
+          </section>
+
           <section>
             <label htmlFor="teacher-comment" className="mb-2 block font-bold text-[var(--color-text-primary)]">Commentaire général</label>
             <textarea id="teacher-comment" value={teacherComment} onChange={(event) => setTeacherComment(event.target.value)} rows={4} className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-3 text-sm outline-none focus:border-amber-500" />
           </section>
 
-          <button type="button" onClick={saveReview} disabled={pending || !correctedText.trim()} className="w-full rounded-[var(--radius-md)] bg-[var(--color-theme)] py-3 text-sm font-bold text-white disabled:opacity-40">{pending ? "Enregistrement…" : "Renvoyer la correction"}</button>
+          <button type="button" onClick={saveReview} disabled={pending || !correctedText.trim() || !teacherPoints.trim() || !finalResult.trim()} className="w-full rounded-[var(--radius-md)] bg-[var(--color-theme)] py-3 text-sm font-bold text-white disabled:opacity-40">{pending ? "Enregistrement…" : "Renvoyer la correction et le résultat"}</button>
           {message && <p className="text-center text-sm font-semibold text-[var(--color-theme)]">{message}</p>}
         </div>
       ) : (
         <div className="space-y-6">
+          {item.status === "reviewed" && item.teacher_points != null && item.final_result && (
+            <section className="rounded-[var(--radius-md)] border-2 border-emerald-200 bg-emerald-50/80 p-4">
+              <h2 className="font-bold text-emerald-700">Résultat final</h2>
+              <p className="mt-2 text-2xl font-black text-[var(--color-text-primary)]">
+                {Number(item.teacher_points).toLocaleString("fr-CH")} / {maxPoints} pts
+              </p>
+              <p className="mt-1 text-sm font-semibold text-emerald-700">{item.final_result}</p>
+            </section>
+          )}
           <section>
             <h2 className="mb-2 font-bold text-[var(--color-text-primary)]">Votre texte</h2>
             <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4"><AnnotatedOriginal text={item.original_text} annotations={item.annotations ?? []} /></div>
