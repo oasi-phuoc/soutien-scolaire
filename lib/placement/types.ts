@@ -1,5 +1,7 @@
 export type PlacementLevel = "base" | "moyen" | "avance";
 
+export type FrenchBatteryKind = "placement" | "training";
+
 export type PlacementZone = "CSC" | "CFR" | "CAF" | "CAP";
 
 export type PlacementSkill = "ce" | "co" | "pe" | "po";
@@ -27,6 +29,8 @@ export type PlacementMathAttempt = {
 export type PlacementFrenchSession = {
   id: string;
   date: string;
+  kind?: FrenchBatteryKind;
+  progressive?: boolean;
   level: PlacementLevel;
   ce: number;
   co: number;
@@ -71,6 +75,8 @@ export type PlacementSkillResult = {
 
 export type PlacementFrenchDraft = {
   sessionId: string;
+  kind?: FrenchBatteryKind;
+  progressive?: boolean;
   level: PlacementLevel;
   seed: number;
   step: "ce" | "co" | "pe" | "po" | "recap";

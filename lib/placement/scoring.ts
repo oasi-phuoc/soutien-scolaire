@@ -36,9 +36,10 @@ export function roundToHalf(value: number): number {
   return Math.round(value * 2) / 2;
 }
 
-export function frenchCountedTotal(session: Pick<PlacementFrenchSession, "ce" | "co" | "pe" | "po" | "level">): number {
+export function frenchCountedTotal(session: Pick<PlacementFrenchSession, "ce" | "co" | "pe" | "po" | "level" | "kind" | "progressive">): number {
   const raw = frenchRawTotal(session);
-  return roundToHalf(raw * PLACEMENT_LEVEL_FACTOR[session.level]);
+  if (session.kind === "training") return roundToHalf(raw);
+  return roundToHalf(raw);
 }
 
 export function buildFrenchSession(
@@ -54,8 +55,9 @@ export function buildFrenchSession(
 }
 
 export function pickBestFrenchSession(sessions: PlacementFrenchSession[]): PlacementFrenchSession | null {
-  if (sessions.length === 0) return null;
-  return sessions.reduce((best, current) => (current.countedTotal > best.countedTotal ? current : best));
+  const placementSessions = sessions.filter((s) => s.kind !== "training");
+  if (placementSessions.length === 0) return null;
+  return placementSessions.reduce((best, current) => (current.countedTotal > best.countedTotal ? current : best));
 }
 
 export function buildPlacementProfile(

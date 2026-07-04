@@ -489,22 +489,30 @@ export function ProductionEcriteRunner({
   lessonId,
   mode = "module",
   placementSessionId,
+  placementPeHybrid,
   onPlacementComplete,
 }: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
+  const isPeHybrid = mode === "placement" && !!placementPeHybrid;
   const level = levelFromId(lessonId);
   const code = lessonCode(level);
-  const stepMeta = getStepMeta(level);
+  const stepMeta = isPeHybrid
+    ? [
+        { id: "form" as StepId, title: "Formulaire", points: 5 },
+        { id: "short" as StepId, title: "Texte à rédiger court", points: 10 },
+        { id: "long" as StepId, title: "Texte à rédiger long", points: 10 },
+      ]
+    : getStepMeta(level);
   const initialSteps = stepMeta.map((step) => step.id);
-  const hasForm = level !== "avance";
+  const hasForm = isPeHybrid || level !== "avance";
   const [phase, setPhase] = useState<Phase>("intro");
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [remaining, setRemaining] = useState<StepId[]>(initialSteps);
   const [current, setCurrent] = useState<StepId>(initialSteps[0]!);
   const [formTemplate] = useState<FormTemplate | null>(() => (hasForm ? randomFormTemplates(1)[0] ?? null : null));
   const [formAnswers, setFormAnswers] = useState<Record<string, string>>({});
-  const [shortPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "short"));
-  const [longPrompt] = useState<WritingPrompt>(() => buildPrompt(level, "long"));
+  const [shortPrompt] = useState<WritingPrompt>(() => (isPeHybrid ? buildPrompt("moyen", "short") : buildPrompt(level, "short")));
+  const [longPrompt] = useState<WritingPrompt>(() => (isPeHybrid ? buildPrompt("avance", "long") : buildPrompt(level, "long")));
   const [shortText, setShortText] = useState("");
   const [longText, setLongText] = useState("");
   const [validatedSteps, setValidatedSteps] = useState<Set<StepId>>(new Set());
@@ -581,7 +589,9 @@ export function ProductionEcriteRunner({
     }
     parts.push("TEXTE COURT", shortPrompt.title, shortText, "", "TEXTE LONG", longPrompt.title, longText);
     feedback.push({ exercise: "short", matches: [] }, { exercise: "long", matches: [] });
-    const placementCode = mode === "placement" ? placementLessonCode("pe", level) : code;
+    const placementCode = mode === "placement"
+      ? (isPeHybrid ? placementLessonCode("pe", "avance").replace("-avance", "-progressive") : placementLessonCode("pe", level))
+      : code;
     const promptPayload = {
       id: `${placementCode}-complete`,
       title: `${placementCode} - Production écrite complète`,
