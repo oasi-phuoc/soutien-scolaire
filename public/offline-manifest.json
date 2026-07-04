@@ -1,22 +1,10 @@
 {
-  "version": 1783181508466,
-  "totalBytes": 223236130,
+  "version": 1783198410759,
+  "totalBytes": 225056510,
   "routes": [
     "/",
     "/communication",
-    "/communication/CE-1",
-    "/communication/CE-2",
-    "/communication/CE-3",
-    "/communication/CO-1",
-    "/communication/CO-2",
-    "/communication/CO-3",
     "/communication/communication-e2-1",
-    "/communication/comprehension-ecrite-1",
-    "/communication/comprehension-ecrite-2",
-    "/communication/comprehension-ecrite-3",
-    "/communication/comprehension-orale-1",
-    "/communication/comprehension-orale-2",
-    "/communication/comprehension-orale-3",
     "/communication/E1-0",
     "/communication/E1-1",
     "/communication/E1-2",
@@ -32,18 +20,6 @@
     "/communication/E3-2",
     "/communication/E3-3",
     "/communication/E3-4",
-    "/communication/expression-e1-1",
-    "/communication/expression-e1-2",
-    "/communication/expression-e1-3",
-    "/communication/PE-1",
-    "/communication/PE-2",
-    "/communication/PE-3",
-    "/communication/PO-1",
-    "/communication/PO-2",
-    "/communication/PO-3",
-    "/communication/production-orale-1",
-    "/communication/production-orale-2",
-    "/communication/production-orale-3",
     "/compte",
     "/francais",
     "/francais/a0-1",
@@ -1686,28 +1662,48 @@
     "/vocab/images/V1/vietnam.webp",
     "/vocab/images/V10/addition.webp",
     "/vocab/images/V10/assiette.webp",
+    "/vocab/images/V10/bagage.webp",
     "/vocab/images/V10/baguette.webp",
     "/vocab/images/V10/biscuit.webp",
     "/vocab/images/V10/boisson.webp",
     "/vocab/images/V10/brioche.webp",
+    "/vocab/images/V10/carte-d-embarquement.webp",
+    "/vocab/images/V10/chambre-double.webp",
+    "/vocab/images/V10/chambre-simple.webp",
+    "/vocab/images/V10/cle.webp",
     "/vocab/images/V10/couteau.webp",
     "/vocab/images/V10/couvert.webp",
     "/vocab/images/V10/cuillere.webp",
+    "/vocab/images/V10/demi-pension.webp",
     "/vocab/images/V10/dessert.webp",
+    "/vocab/images/V10/destination.webp",
+    "/vocab/images/V10/douane.webp",
     "/vocab/images/V10/eclair.webp",
+    "/vocab/images/V10/embarquement.webp",
     "/vocab/images/V10/fourchette.webp",
     "/vocab/images/V10/gateau.webp",
     "/vocab/images/V10/menu.webp",
     "/vocab/images/V10/pain-au-chocolat.webp",
     "/vocab/images/V10/pain.webp",
+    "/vocab/images/V10/passeport.webp",
     "/vocab/images/V10/patisserie.webp",
+    "/vocab/images/V10/pension-complete.webp",
+    "/vocab/images/V10/petit-dejeuner.webp",
     "/vocab/images/V10/plat.webp",
+    "/vocab/images/V10/reception.webp",
+    "/vocab/images/V10/receptionniste.webp",
+    "/vocab/images/V10/reservation.webp",
     "/vocab/images/V10/sandwich.webp",
+    "/vocab/images/V10/securite.webp",
     "/vocab/images/V10/serviette.webp",
     "/vocab/images/V10/table.webp",
     "/vocab/images/V10/tarte.webp",
+    "/vocab/images/V10/terminal.webp",
+    "/vocab/images/V10/valise.webp",
     "/vocab/images/V10/verre.webp",
     "/vocab/images/V10/viennoiserie.webp",
+    "/vocab/images/V10/visa.webp",
+    "/vocab/images/V10/vol.webp",
     "/vocab/images/V2/annee.webp",
     "/vocab/images/V2/aout.webp",
     "/vocab/images/V2/apres-midi.webp",
@@ -2079,53 +2075,70 @@
     "/vocab/images/V7/verser.webp",
     "/vocab/images/V8/allergie.webp",
     "/vocab/images/V8/blessure.webp",
+    "/vocab/images/V8/boite.webp",
     "/vocab/images/V8/bouche.webp",
     "/vocab/images/V8/bras.webp",
     "/vocab/images/V8/brulure.webp",
     "/vocab/images/V8/chirurgien.webp",
+    "/vocab/images/V8/comprime.webp",
     "/vocab/images/V8/consultation.webp",
     "/vocab/images/V8/cou.webp",
     "/vocab/images/V8/coupure.webp",
+    "/vocab/images/V8/creme.webp",
     "/vocab/images/V8/dent.webp",
     "/vocab/images/V8/dentiste.webp",
     "/vocab/images/V8/doigt.webp",
     "/vocab/images/V8/dos.webp",
+    "/vocab/images/V8/dosette.webp",
     "/vocab/images/V8/douleur.webp",
     "/vocab/images/V8/epaule.webp",
     "/vocab/images/V8/fievre.webp",
     "/vocab/images/V8/fracture.webp",
+    "/vocab/images/V8/gelule.webp",
     "/vocab/images/V8/genou.webp",
+    "/vocab/images/V8/goutte.webp",
     "/vocab/images/V8/grippe.webp",
     "/vocab/images/V8/infirmier.webp",
     "/vocab/images/V8/jambe.webp",
     "/vocab/images/V8/kinésithérapeute.webp",
     "/vocab/images/V8/main.webp",
     "/vocab/images/V8/medecin.webp",
+    "/vocab/images/V8/medicament.webp",
     "/vocab/images/V8/nausee.webp",
     "/vocab/images/V8/nez.webp",
     "/vocab/images/V8/oeil.webp",
     "/vocab/images/V8/ophtalmologue.webp",
     "/vocab/images/V8/ordonnance.webp",
     "/vocab/images/V8/oreille.webp",
+    "/vocab/images/V8/pansement.webp",
     "/vocab/images/V8/pediatre.webp",
+    "/vocab/images/V8/pharmacie.webp",
     "/vocab/images/V8/pharmacien.webp",
     "/vocab/images/V8/pied.webp",
+    "/vocab/images/V8/pommade.webp",
     "/vocab/images/V8/rendez-vous.webp",
     "/vocab/images/V8/rhume.webp",
     "/vocab/images/V8/salle-d-attente.webp",
+    "/vocab/images/V8/sirop.webp",
+    "/vocab/images/V8/spray.webp",
     "/vocab/images/V8/tete.webp",
+    "/vocab/images/V8/thermometre.webp",
     "/vocab/images/V8/toux.webp",
     "/vocab/images/V8/urgentiste.webp",
     "/vocab/images/V8/ventre.webp",
+    "/vocab/images/V8/vitamine.webp",
     "/vocab/images/V9/abeille.webp",
+    "/vocab/images/V9/acteur.webp",
     "/vocab/images/V9/aeroport.webp",
     "/vocab/images/V9/aigle.webp",
     "/vocab/images/V9/animal.webp",
     "/vocab/images/V9/arbre.webp",
     "/vocab/images/V9/au-bout-de.webp",
     "/vocab/images/V9/autobus.webp",
+    "/vocab/images/V9/avenue.webp",
     "/vocab/images/V9/avion.webp",
     "/vocab/images/V9/baleine.webp",
+    "/vocab/images/V9/banque.webp",
     "/vocab/images/V9/bateau.webp",
     "/vocab/images/V9/bibliotheque.webp",
     "/vocab/images/V9/boucher.webp",
@@ -2134,28 +2147,43 @@
     "/vocab/images/V9/camion.webp",
     "/vocab/images/V9/campagne.webp",
     "/vocab/images/V9/canard.webp",
+    "/vocab/images/V9/carrefour.webp",
+    "/vocab/images/V9/cascade.webp",
+    "/vocab/images/V9/centre-ville.webp",
+    "/vocab/images/V9/chanteur.webp",
     "/vocab/images/V9/chat.webp",
     "/vocab/images/V9/cheval.webp",
     "/vocab/images/V9/chien.webp",
+    "/vocab/images/V9/cinema.webp",
     "/vocab/images/V9/cochon.webp",
     "/vocab/images/V9/coiffeur.webp",
     "/vocab/images/V9/colline.webp",
     "/vocab/images/V9/commissariat.webp",
+    "/vocab/images/V9/concert.webp",
     "/vocab/images/V9/coq.webp",
+    "/vocab/images/V9/cote.webp",
     "/vocab/images/V9/crocodile.webp",
     "/vocab/images/V9/cygne.webp",
+    "/vocab/images/V9/danseur.webp",
     "/vocab/images/V9/dauphin.webp",
     "/vocab/images/V9/desert.webp",
     "/vocab/images/V9/dodo.webp",
     "/vocab/images/V9/dragon.webp",
     "/vocab/images/V9/droite.webp",
+    "/vocab/images/V9/eglise.webp",
     "/vocab/images/V9/elephant.webp",
+    "/vocab/images/V9/est.webp",
+    "/vocab/images/V9/exposition.webp",
+    "/vocab/images/V9/festival.webp",
+    "/vocab/images/V9/feu.webp",
+    "/vocab/images/V9/fleuve.webp",
     "/vocab/images/V9/foret.webp",
     "/vocab/images/V9/fusee.webp",
     "/vocab/images/V9/gare.webp",
     "/vocab/images/V9/gauche.webp",
     "/vocab/images/V9/girafe.webp",
     "/vocab/images/V9/gorille.webp",
+    "/vocab/images/V9/grotte.webp",
     "/vocab/images/V9/herbe.webp",
     "/vocab/images/V9/hibou.webp",
     "/vocab/images/V9/hopital.webp",
@@ -2171,37 +2199,60 @@
     "/vocab/images/V9/librairie.webp",
     "/vocab/images/V9/lion.webp",
     "/vocab/images/V9/loup.webp",
+    "/vocab/images/V9/magasin.webp",
     "/vocab/images/V9/marche.webp",
     "/vocab/images/V9/mer.webp",
+    "/vocab/images/V9/metro.webp",
     "/vocab/images/V9/montagne.webp",
     "/vocab/images/V9/moto.webp",
     "/vocab/images/V9/mouton.webp",
     "/vocab/images/V9/musee.webp",
+    "/vocab/images/V9/musicien.webp",
     "/vocab/images/V9/navire.webp",
+    "/vocab/images/V9/nord.webp",
+    "/vocab/images/V9/ocean.webp",
+    "/vocab/images/V9/ouest.webp",
     "/vocab/images/V9/ours.webp",
     "/vocab/images/V9/panda.webp",
+    "/vocab/images/V9/panneau.webp",
     "/vocab/images/V9/papeterie.webp",
+    "/vocab/images/V9/parc.webp",
+    "/vocab/images/V9/passage-pieton.webp",
+    "/vocab/images/V9/peintre.webp",
     "/vocab/images/V9/pharmacie.webp",
     "/vocab/images/V9/piscine.webp",
+    "/vocab/images/V9/place.webp",
     "/vocab/images/V9/plage.webp",
     "/vocab/images/V9/poisson.webp",
     "/vocab/images/V9/poste.webp",
     "/vocab/images/V9/poule.webp",
+    "/vocab/images/V9/quartier.webp",
     "/vocab/images/V9/rat.webp",
     "/vocab/images/V9/renard.webp",
     "/vocab/images/V9/requin.webp",
     "/vocab/images/V9/restaurant.webp",
     "/vocab/images/V9/riviere.webp",
+    "/vocab/images/V9/rond-point.webp",
     "/vocab/images/V9/rue.webp",
     "/vocab/images/V9/salle-de-sport.webp",
     "/vocab/images/V9/sapin.webp",
+    "/vocab/images/V9/scene.webp",
     "/vocab/images/V9/scooter.webp",
+    "/vocab/images/V9/spectacle.webp",
+    "/vocab/images/V9/sud.webp",
     "/vocab/images/V9/supermarche.webp",
+    "/vocab/images/V9/taxi.webp",
+    "/vocab/images/V9/theatre.webp",
     "/vocab/images/V9/tout-droit.webp",
     "/vocab/images/V9/train.webp",
+    "/vocab/images/V9/tram.webp",
     "/vocab/images/V9/tribunal.webp",
+    "/vocab/images/V9/trotinette.webp",
     "/vocab/images/V9/usine.webp",
     "/vocab/images/V9/vallee.webp",
+    "/vocab/images/V9/velo.webp",
+    "/vocab/images/V9/ville.webp",
+    "/vocab/images/V9/voiture.webp",
     "/vocab/images/V9/volcan.webp",
     "/vocab/images/V9/zebre.webp"
   ],
@@ -7977,6 +8028,11 @@
       "revision": "16757b567d42db79"
     },
     {
+      "url": "/vocab/images/V10/bagage.webp",
+      "size": 34768,
+      "revision": "d52d57df90c964b7"
+    },
+    {
       "url": "/vocab/images/V10/baguette.webp",
       "size": 16064,
       "revision": "8c0406bfb91d7d64"
@@ -7997,6 +8053,26 @@
       "revision": "dba65f36a6445299"
     },
     {
+      "url": "/vocab/images/V10/carte-d-embarquement.webp",
+      "size": 35172,
+      "revision": "8be2f286ca57c01b"
+    },
+    {
+      "url": "/vocab/images/V10/chambre-double.webp",
+      "size": 25832,
+      "revision": "914fd97b26b1ebdf"
+    },
+    {
+      "url": "/vocab/images/V10/chambre-simple.webp",
+      "size": 21678,
+      "revision": "0be6ae11298bfc04"
+    },
+    {
+      "url": "/vocab/images/V10/cle.webp",
+      "size": 24374,
+      "revision": "671b1d4fc78786ff"
+    },
+    {
       "url": "/vocab/images/V10/couteau.webp",
       "size": 3398,
       "revision": "71dcee97fe6503d3"
@@ -8012,14 +8088,34 @@
       "revision": "5a737c5a38bcdcdd"
     },
     {
+      "url": "/vocab/images/V10/demi-pension.webp",
+      "size": 33484,
+      "revision": "4a2f7d2c57c25b7c"
+    },
+    {
       "url": "/vocab/images/V10/dessert.webp",
       "size": 28724,
       "revision": "fc3c57b66b5f1f43"
     },
     {
+      "url": "/vocab/images/V10/destination.webp",
+      "size": 30832,
+      "revision": "a59d0c8248695dfc"
+    },
+    {
+      "url": "/vocab/images/V10/douane.webp",
+      "size": 31870,
+      "revision": "64b56fb0b771550f"
+    },
+    {
       "url": "/vocab/images/V10/eclair.webp",
       "size": 15990,
       "revision": "e4025dff3187957f"
+    },
+    {
+      "url": "/vocab/images/V10/embarquement.webp",
+      "size": 19554,
+      "revision": "2082962ca034cd15"
     },
     {
       "url": "/vocab/images/V10/fourchette.webp",
@@ -8047,9 +8143,24 @@
       "revision": "baf6a51775fd279a"
     },
     {
+      "url": "/vocab/images/V10/passeport.webp",
+      "size": 19120,
+      "revision": "2c5814c9e01bcf32"
+    },
+    {
       "url": "/vocab/images/V10/patisserie.webp",
       "size": 32740,
       "revision": "a5b22e3521efa311"
+    },
+    {
+      "url": "/vocab/images/V10/pension-complete.webp",
+      "size": 34940,
+      "revision": "841edf55336568dd"
+    },
+    {
+      "url": "/vocab/images/V10/petit-dejeuner.webp",
+      "size": 34938,
+      "revision": "90097c6d21d73769"
     },
     {
       "url": "/vocab/images/V10/plat.webp",
@@ -8057,9 +8168,29 @@
       "revision": "6bd1732e4ef9e7ff"
     },
     {
+      "url": "/vocab/images/V10/reception.webp",
+      "size": 29582,
+      "revision": "67e7509e82ec3a73"
+    },
+    {
+      "url": "/vocab/images/V10/receptionniste.webp",
+      "size": 21908,
+      "revision": "340bd4cd5ab4a909"
+    },
+    {
+      "url": "/vocab/images/V10/reservation.webp",
+      "size": 28144,
+      "revision": "864ecaea18ba5693"
+    },
+    {
       "url": "/vocab/images/V10/sandwich.webp",
       "size": 27854,
       "revision": "5e7332287764846a"
+    },
+    {
+      "url": "/vocab/images/V10/securite.webp",
+      "size": 28522,
+      "revision": "33b1aee71acf053e"
     },
     {
       "url": "/vocab/images/V10/serviette.webp",
@@ -8077,6 +8208,16 @@
       "revision": "bed601547c1202d4"
     },
     {
+      "url": "/vocab/images/V10/terminal.webp",
+      "size": 29802,
+      "revision": "7398216d86683f49"
+    },
+    {
+      "url": "/vocab/images/V10/valise.webp",
+      "size": 16100,
+      "revision": "324fc21bebf617df"
+    },
+    {
       "url": "/vocab/images/V10/verre.webp",
       "size": 5776,
       "revision": "e71b690fe4c4a782"
@@ -8085,6 +8226,16 @@
       "url": "/vocab/images/V10/viennoiserie.webp",
       "size": 42144,
       "revision": "096888ae4f7895ae"
+    },
+    {
+      "url": "/vocab/images/V10/visa.webp",
+      "size": 33052,
+      "revision": "820ce9a5b402d869"
+    },
+    {
+      "url": "/vocab/images/V10/vol.webp",
+      "size": 21152,
+      "revision": "172148328a5db854"
     },
     {
       "url": "/vocab/images/V2/annee.webp",
@@ -9942,6 +10093,11 @@
       "revision": "c048a6ae332e4a61"
     },
     {
+      "url": "/vocab/images/V8/boite.webp",
+      "size": 2856,
+      "revision": "d17ff8bec76151ff"
+    },
+    {
       "url": "/vocab/images/V8/bouche.webp",
       "size": 10278,
       "revision": "88731b5ce0bc7d64"
@@ -9962,6 +10118,11 @@
       "revision": "13a5dd5175e94c30"
     },
     {
+      "url": "/vocab/images/V8/comprime.webp",
+      "size": 2902,
+      "revision": "b200a119a35621ae"
+    },
+    {
       "url": "/vocab/images/V8/consultation.webp",
       "size": 22332,
       "revision": "ff2a438b483ef9dc"
@@ -9975,6 +10136,11 @@
       "url": "/vocab/images/V8/coupure.webp",
       "size": 9272,
       "revision": "d0b46a1759d82859"
+    },
+    {
+      "url": "/vocab/images/V8/creme.webp",
+      "size": 10672,
+      "revision": "6d77ec8d139e6e04"
     },
     {
       "url": "/vocab/images/V8/dent.webp",
@@ -9997,6 +10163,11 @@
       "revision": "16c4d0aeb2e87f48"
     },
     {
+      "url": "/vocab/images/V8/dosette.webp",
+      "size": 9160,
+      "revision": "f2963b5e76e21820"
+    },
+    {
       "url": "/vocab/images/V8/douleur.webp",
       "size": 11284,
       "revision": "3296ffb188f7386c"
@@ -10017,9 +10188,19 @@
       "revision": "ed7ce27098ca1bf6"
     },
     {
+      "url": "/vocab/images/V8/gelule.webp",
+      "size": 7602,
+      "revision": "9fc21bffa6f83fcd"
+    },
+    {
       "url": "/vocab/images/V8/genou.webp",
       "size": 6304,
       "revision": "9376853ce003d1dd"
+    },
+    {
+      "url": "/vocab/images/V8/goutte.webp",
+      "size": 4306,
+      "revision": "080d6f531ec29a61"
     },
     {
       "url": "/vocab/images/V8/grippe.webp",
@@ -10052,6 +10233,11 @@
       "revision": "91007708fd41223f"
     },
     {
+      "url": "/vocab/images/V8/medicament.webp",
+      "size": 3064,
+      "revision": "0fd1247f3110ed2d"
+    },
+    {
       "url": "/vocab/images/V8/nausee.webp",
       "size": 12612,
       "revision": "a69502c59ec21b28"
@@ -10082,19 +10268,34 @@
       "revision": "eb77d7f0c5dd0ce5"
     },
     {
+      "url": "/vocab/images/V8/pansement.webp",
+      "size": 5354,
+      "revision": "b081315f5f52a518"
+    },
+    {
       "url": "/vocab/images/V8/pediatre.webp",
       "size": 19860,
       "revision": "7abdf68cb1b726ea"
     },
     {
+      "url": "/vocab/images/V8/pharmacie.webp",
+      "size": 21948,
+      "revision": "a879eccfa1a36869"
+    },
+    {
       "url": "/vocab/images/V8/pharmacien.webp",
-      "size": 22314,
-      "revision": "c77a48b4dd67d2b2"
+      "size": 18948,
+      "revision": "6ff4825b8e4b44d8"
     },
     {
       "url": "/vocab/images/V8/pied.webp",
       "size": 4888,
       "revision": "cf4b4e6d3c2d876b"
+    },
+    {
+      "url": "/vocab/images/V8/pommade.webp",
+      "size": 10796,
+      "revision": "2591d6692cbe0076"
     },
     {
       "url": "/vocab/images/V8/rendez-vous.webp",
@@ -10112,9 +10313,24 @@
       "revision": "e03ad9305706ad3b"
     },
     {
+      "url": "/vocab/images/V8/sirop.webp",
+      "size": 10446,
+      "revision": "b8f055e41b179582"
+    },
+    {
+      "url": "/vocab/images/V8/spray.webp",
+      "size": 1730,
+      "revision": "e2083730f81bc2fc"
+    },
+    {
       "url": "/vocab/images/V8/tete.webp",
       "size": 12416,
       "revision": "ed0ad8da6f3d436c"
+    },
+    {
+      "url": "/vocab/images/V8/thermometre.webp",
+      "size": 1510,
+      "revision": "7d36faa7bc545c06"
     },
     {
       "url": "/vocab/images/V8/toux.webp",
@@ -10132,9 +10348,19 @@
       "revision": "babe8f7f39b3fd2b"
     },
     {
+      "url": "/vocab/images/V8/vitamine.webp",
+      "size": 8786,
+      "revision": "c74928362496562f"
+    },
+    {
       "url": "/vocab/images/V9/abeille.webp",
       "size": 17596,
       "revision": "6227a9f489f50d1d"
+    },
+    {
+      "url": "/vocab/images/V9/acteur.webp",
+      "size": 14042,
+      "revision": "2108467b7b56392f"
     },
     {
       "url": "/vocab/images/V9/aeroport.webp",
@@ -10167,9 +10393,14 @@
       "revision": "3e330c97ebade1e4"
     },
     {
+      "url": "/vocab/images/V9/avenue.webp",
+      "size": 41332,
+      "revision": "a492eddbb673e412"
+    },
+    {
       "url": "/vocab/images/V9/avion.webp",
-      "size": 7278,
-      "revision": "fac1e862de4478b5"
+      "size": 8388,
+      "revision": "c8621a5aa4908c50"
     },
     {
       "url": "/vocab/images/V9/baleine.webp",
@@ -10177,9 +10408,14 @@
       "revision": "8b9595c8995cb5fc"
     },
     {
+      "url": "/vocab/images/V9/banque.webp",
+      "size": 38360,
+      "revision": "732dad82397a2ca1"
+    },
+    {
       "url": "/vocab/images/V9/bateau.webp",
-      "size": 11652,
-      "revision": "d68ff3da670cb9d3"
+      "size": 23028,
+      "revision": "7221fe0cc57c7ff1"
     },
     {
       "url": "/vocab/images/V9/bibliotheque.webp",
@@ -10198,23 +10434,43 @@
     },
     {
       "url": "/vocab/images/V9/bus.webp",
-      "size": 19238,
-      "revision": "65ec8d7541b487b7"
+      "size": 20164,
+      "revision": "9d80bdcaf41e3af9"
     },
     {
       "url": "/vocab/images/V9/camion.webp",
-      "size": 16760,
-      "revision": "f2e455cb5b39324d"
+      "size": 18976,
+      "revision": "a96acc584685ac46"
     },
     {
       "url": "/vocab/images/V9/campagne.webp",
-      "size": 53560,
-      "revision": "d18460bde5f25a2e"
+      "size": 44702,
+      "revision": "51bce6147552e7cc"
     },
     {
       "url": "/vocab/images/V9/canard.webp",
       "size": 15806,
       "revision": "3f80da056101fbef"
+    },
+    {
+      "url": "/vocab/images/V9/carrefour.webp",
+      "size": 34060,
+      "revision": "7b888fc3cc5ec606"
+    },
+    {
+      "url": "/vocab/images/V9/cascade.webp",
+      "size": 48634,
+      "revision": "110a1ec7ede423c9"
+    },
+    {
+      "url": "/vocab/images/V9/centre-ville.webp",
+      "size": 56412,
+      "revision": "c7587208277327ca"
+    },
+    {
+      "url": "/vocab/images/V9/chanteur.webp",
+      "size": 17600,
+      "revision": "2302697d0e095987"
     },
     {
       "url": "/vocab/images/V9/chat.webp",
@@ -10232,6 +10488,11 @@
       "revision": "9f93971fb6808389"
     },
     {
+      "url": "/vocab/images/V9/cinema.webp",
+      "size": 45200,
+      "revision": "e5b01f0a8a960030"
+    },
+    {
       "url": "/vocab/images/V9/cochon.webp",
       "size": 4570,
       "revision": "d0bfede52d5e41d6"
@@ -10243,8 +10504,8 @@
     },
     {
       "url": "/vocab/images/V9/colline.webp",
-      "size": 49424,
-      "revision": "0382f5c7b9073018"
+      "size": 37280,
+      "revision": "f3d2597a71f9a9ff"
     },
     {
       "url": "/vocab/images/V9/commissariat.webp",
@@ -10252,9 +10513,19 @@
       "revision": "25a9f35c4aadf734"
     },
     {
+      "url": "/vocab/images/V9/concert.webp",
+      "size": 37250,
+      "revision": "2fbb92ee75ca01dd"
+    },
+    {
       "url": "/vocab/images/V9/coq.webp",
       "size": 14040,
       "revision": "41ce4a808bdb8632"
+    },
+    {
+      "url": "/vocab/images/V9/cote.webp",
+      "size": 44188,
+      "revision": "44074969589834ed"
     },
     {
       "url": "/vocab/images/V9/crocodile.webp",
@@ -10267,14 +10538,19 @@
       "revision": "c6803d251fbdfe3b"
     },
     {
+      "url": "/vocab/images/V9/danseur.webp",
+      "size": 14820,
+      "revision": "3823069f1d6f5b1e"
+    },
+    {
       "url": "/vocab/images/V9/dauphin.webp",
       "size": 9538,
       "revision": "705fff438c357097"
     },
     {
       "url": "/vocab/images/V9/desert.webp",
-      "size": 18944,
-      "revision": "c5fe13d06ba1b791"
+      "size": 23702,
+      "revision": "9e54e18f813abd82"
     },
     {
       "url": "/vocab/images/V9/dodo.webp",
@@ -10292,14 +10568,44 @@
       "revision": "8e504fc570c1c960"
     },
     {
+      "url": "/vocab/images/V9/eglise.webp",
+      "size": 28952,
+      "revision": "c49ac94a4a22d3ef"
+    },
+    {
       "url": "/vocab/images/V9/elephant.webp",
       "size": 19756,
       "revision": "fcf854feb67122b3"
     },
     {
+      "url": "/vocab/images/V9/est.webp",
+      "size": 27018,
+      "revision": "49a6e20d2b49a1ce"
+    },
+    {
+      "url": "/vocab/images/V9/exposition.webp",
+      "size": 36856,
+      "revision": "2dfe3067679f00b8"
+    },
+    {
+      "url": "/vocab/images/V9/festival.webp",
+      "size": 43114,
+      "revision": "24befa0717cec2b3"
+    },
+    {
+      "url": "/vocab/images/V9/feu.webp",
+      "size": 11994,
+      "revision": "9f09deaba3a327ea"
+    },
+    {
+      "url": "/vocab/images/V9/fleuve.webp",
+      "size": 39690,
+      "revision": "6c7263abf98d6fb1"
+    },
+    {
       "url": "/vocab/images/V9/foret.webp",
-      "size": 91624,
-      "revision": "8dce1a01e47b6ab6"
+      "size": 58036,
+      "revision": "e503356cb789487b"
     },
     {
       "url": "/vocab/images/V9/fusee.webp",
@@ -10308,8 +10614,8 @@
     },
     {
       "url": "/vocab/images/V9/gare.webp",
-      "size": 39948,
-      "revision": "edc87dd7ff7040c6"
+      "size": 32532,
+      "revision": "2414e733ae82d100"
     },
     {
       "url": "/vocab/images/V9/gauche.webp",
@@ -10327,6 +10633,11 @@
       "revision": "c693da2ea48071f6"
     },
     {
+      "url": "/vocab/images/V9/grotte.webp",
+      "size": 44382,
+      "revision": "87039726283e9caf"
+    },
+    {
       "url": "/vocab/images/V9/herbe.webp",
       "size": 21542,
       "revision": "d1e0d8ac10949429"
@@ -10338,8 +10649,8 @@
     },
     {
       "url": "/vocab/images/V9/hopital.webp",
-      "size": 55840,
-      "revision": "b89dc892e7b3ddeb"
+      "size": 33996,
+      "revision": "8cc6b967c5313301"
     },
     {
       "url": "/vocab/images/V9/ibis.webp",
@@ -10353,8 +10664,8 @@
     },
     {
       "url": "/vocab/images/V9/ile.webp",
-      "size": 37078,
-      "revision": "d1088fdde3bf712d"
+      "size": 37436,
+      "revision": "86eb3c9c74d1e1b7"
     },
     {
       "url": "/vocab/images/V9/jusqu-a.webp",
@@ -10378,8 +10689,8 @@
     },
     {
       "url": "/vocab/images/V9/lac.webp",
-      "size": 41186,
-      "revision": "279a5e1b12e6580c"
+      "size": 40546,
+      "revision": "93a487a01a8093e1"
     },
     {
       "url": "/vocab/images/V9/lapin.webp",
@@ -10402,24 +10713,34 @@
       "revision": "7a6c2b921ed1ad8d"
     },
     {
+      "url": "/vocab/images/V9/magasin.webp",
+      "size": 32096,
+      "revision": "881eb5d71953c07a"
+    },
+    {
       "url": "/vocab/images/V9/marche.webp",
-      "size": 61806,
-      "revision": "78aa13c6bb0d7ff6"
+      "size": 37676,
+      "revision": "8c94b23c2c34d391"
     },
     {
       "url": "/vocab/images/V9/mer.webp",
-      "size": 41444,
-      "revision": "c99e56d4ab6b3ef7"
+      "size": 35320,
+      "revision": "de92d793d2ecfddc"
+    },
+    {
+      "url": "/vocab/images/V9/metro.webp",
+      "size": 17788,
+      "revision": "e4350c7eddc3fe6c"
     },
     {
       "url": "/vocab/images/V9/montagne.webp",
-      "size": 12092,
-      "revision": "3679f40f8382ac32"
+      "size": 41996,
+      "revision": "ff04659c4aa8b9b7"
     },
     {
       "url": "/vocab/images/V9/moto.webp",
-      "size": 26940,
-      "revision": "7f4f8a35f214caa1"
+      "size": 28770,
+      "revision": "70e89b6261e6ce52"
     },
     {
       "url": "/vocab/images/V9/mouton.webp",
@@ -10432,9 +10753,29 @@
       "revision": "c3e99a72421e3c6f"
     },
     {
+      "url": "/vocab/images/V9/musicien.webp",
+      "size": 18352,
+      "revision": "9ba30c3105ab4b37"
+    },
+    {
       "url": "/vocab/images/V9/navire.webp",
       "size": 35466,
       "revision": "689d62d6c3f171ed"
+    },
+    {
+      "url": "/vocab/images/V9/nord.webp",
+      "size": 27594,
+      "revision": "53d970a56437c059"
+    },
+    {
+      "url": "/vocab/images/V9/ocean.webp",
+      "size": 31628,
+      "revision": "e6117a39864078c4"
+    },
+    {
+      "url": "/vocab/images/V9/ouest.webp",
+      "size": 27762,
+      "revision": "2848ffec8f972adb"
     },
     {
       "url": "/vocab/images/V9/ours.webp",
@@ -10447,9 +10788,29 @@
       "revision": "d2de4fad16ae0c92"
     },
     {
+      "url": "/vocab/images/V9/panneau.webp",
+      "size": 8404,
+      "revision": "a9dd8e1f996e415e"
+    },
+    {
       "url": "/vocab/images/V9/papeterie.webp",
       "size": 103386,
       "revision": "44a20cab2e01bdff"
+    },
+    {
+      "url": "/vocab/images/V9/parc.webp",
+      "size": 43188,
+      "revision": "f70dde044edefb5b"
+    },
+    {
+      "url": "/vocab/images/V9/passage-pieton.webp",
+      "size": 28214,
+      "revision": "5f1b056ad472537b"
+    },
+    {
+      "url": "/vocab/images/V9/peintre.webp",
+      "size": 28112,
+      "revision": "9a2cb3c0127f23cc"
     },
     {
       "url": "/vocab/images/V9/pharmacie.webp",
@@ -10462,9 +10823,14 @@
       "revision": "92527e6aed094a9c"
     },
     {
+      "url": "/vocab/images/V9/place.webp",
+      "size": 44584,
+      "revision": "719a9420c5a3e8ac"
+    },
+    {
       "url": "/vocab/images/V9/plage.webp",
-      "size": 39742,
-      "revision": "7e7e0ebb0b114cc4"
+      "size": 34090,
+      "revision": "8971bac82ec009d9"
     },
     {
       "url": "/vocab/images/V9/poisson.webp",
@@ -10480,6 +10846,11 @@
       "url": "/vocab/images/V9/poule.webp",
       "size": 29918,
       "revision": "70929afa097d69f4"
+    },
+    {
+      "url": "/vocab/images/V9/quartier.webp",
+      "size": 47408,
+      "revision": "580f6cd7e7940d4d"
     },
     {
       "url": "/vocab/images/V9/rat.webp",
@@ -10503,13 +10874,18 @@
     },
     {
       "url": "/vocab/images/V9/riviere.webp",
-      "size": 59368,
-      "revision": "5e7cb113d26f4475"
+      "size": 49122,
+      "revision": "fadd1e7b08de8b44"
+    },
+    {
+      "url": "/vocab/images/V9/rond-point.webp",
+      "size": 35892,
+      "revision": "5fe8aba5c4ce6f64"
     },
     {
       "url": "/vocab/images/V9/rue.webp",
-      "size": 68714,
-      "revision": "b433de456354d684"
+      "size": 33850,
+      "revision": "20bd31f01108c70d"
     },
     {
       "url": "/vocab/images/V9/salle-de-sport.webp",
@@ -10522,14 +10898,39 @@
       "revision": "54e9db1deb7b8de0"
     },
     {
+      "url": "/vocab/images/V9/scene.webp",
+      "size": 23348,
+      "revision": "9b6885f23c0029f0"
+    },
+    {
       "url": "/vocab/images/V9/scooter.webp",
-      "size": 12570,
-      "revision": "b516cc53978c15f1"
+      "size": 20486,
+      "revision": "20e6df084e0d38d2"
+    },
+    {
+      "url": "/vocab/images/V9/spectacle.webp",
+      "size": 39034,
+      "revision": "fc238dce35094bdf"
+    },
+    {
+      "url": "/vocab/images/V9/sud.webp",
+      "size": 21828,
+      "revision": "a2cd0888c3f17237"
     },
     {
       "url": "/vocab/images/V9/supermarche.webp",
       "size": 177546,
       "revision": "a8e10209379e66f6"
+    },
+    {
+      "url": "/vocab/images/V9/taxi.webp",
+      "size": 20228,
+      "revision": "666a3273eea9fdcd"
+    },
+    {
+      "url": "/vocab/images/V9/theatre.webp",
+      "size": 45818,
+      "revision": "5cc9948a0281f4b6"
     },
     {
       "url": "/vocab/images/V9/tout-droit.webp",
@@ -10538,13 +10939,23 @@
     },
     {
       "url": "/vocab/images/V9/train.webp",
-      "size": 38230,
-      "revision": "b717e3a082a9a85d"
+      "size": 18744,
+      "revision": "c27e565b86e30a14"
+    },
+    {
+      "url": "/vocab/images/V9/tram.webp",
+      "size": 22296,
+      "revision": "46a5787cb2dbb7b3"
     },
     {
       "url": "/vocab/images/V9/tribunal.webp",
       "size": 130258,
       "revision": "b881c43acbe37891"
+    },
+    {
+      "url": "/vocab/images/V9/trotinette.webp",
+      "size": 9190,
+      "revision": "8954ca9b1dcd45cf"
     },
     {
       "url": "/vocab/images/V9/usine.webp",
@@ -10553,13 +10964,28 @@
     },
     {
       "url": "/vocab/images/V9/vallee.webp",
-      "size": 52004,
-      "revision": "fae5b305ed4b9570"
+      "size": 53984,
+      "revision": "571ac7f8735fc6dc"
+    },
+    {
+      "url": "/vocab/images/V9/velo.webp",
+      "size": 27036,
+      "revision": "2bedf36981b645e4"
+    },
+    {
+      "url": "/vocab/images/V9/ville.webp",
+      "size": 45084,
+      "revision": "3ce72f7f2e6578e8"
+    },
+    {
+      "url": "/vocab/images/V9/voiture.webp",
+      "size": 17706,
+      "revision": "2d2251b71a7b1a8f"
     },
     {
       "url": "/vocab/images/V9/volcan.webp",
-      "size": 34658,
-      "revision": "0283ac756aed54e6"
+      "size": 38572,
+      "revision": "517e6dcd169e79bb"
     },
     {
       "url": "/vocab/images/V9/zebre.webp",
