@@ -2,16 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
 import { loadPlacementProfile, migrateLegacyMathHistory, loadTotalHistory } from "@/lib/placement/storage";
 import { PLACEMENT_LEVEL_LABELS, type PlacementTotalSnapshot } from "@/lib/placement/types";
 
+const ACCENT = "var(--color-accent-quiz)";
+
 const ZONE_COLORS: Record<string, string> = {
   CSC: "#94a3b8",
-  CFR: "#60a5fa",
-  CAF: "#34d399",
-  CAP: "#f59e0b",
+  CFR: "#c06078",
+  CAF: "#c06078",
+  CAP: "#c06078",
 };
 
 function UnifiedChart({ total }: { total: number }) {
@@ -32,7 +35,7 @@ function UnifiedChart({ total }: { total: number }) {
         );
       })}
       <line x1={0} y1={h + 4} x2={w} y2={h + 4} stroke="var(--color-border-default)" />
-      <circle cx={x} cy={h / 2 + 4} r={6} fill="var(--color-accent-quiz)" />
+      <circle cx={x} cy={h / 2 + 4} r={6} fill={ACCENT} />
       <text x={4} y={16} fontSize="9" fill="var(--color-text-secondary)">0</text>
       <text x={w - 16} y={16} fontSize="9" fill="var(--color-text-secondary)">200</text>
     </svg>
@@ -83,7 +86,7 @@ function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
         const hBar = baseY - y;
         return (
           <g key={i}>
-            <rect x={x} y={y} width={barW} height={hBar} rx={4} fill="var(--color-accent-quiz)" opacity={0.85} />
+            <rect x={x} y={y} width={barW} height={hBar} rx={4} fill={ACCENT} opacity={0.85} />
             <text x={x + barW / 2} y={baseY + 14} textAnchor="middle" fontSize="8" fill="var(--color-text-secondary)">{h.total}</text>
           </g>
         );
@@ -117,25 +120,14 @@ export function PlacementStatsUnifiedClient() {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
-      <div className="mb-6 flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => router.push("/placement")}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
-          aria-label="Retour"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Test de placement</p>
-          <h1 className="text-lg font-bold text-[var(--color-text-primary)]">Statistiques /200</h1>
-        </div>
-      </div>
+      <PlacementPageHeader
+        label="Test de placement"
+        title="Statistiques /200"
+        backHref="/placement"
+      />
 
       {!ready ? null : (
-        <div className="space-y-4">
+        <div className="mt-6 space-y-4">
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
             <div className="flex items-end justify-between gap-3">
               <div>
@@ -144,10 +136,10 @@ export function PlacementStatsUnifiedClient() {
                   {profile.total}
                   <span className="text-base font-medium text-[var(--color-text-secondary)]"> / 200</span>
                 </p>
-                <p className="mt-1 text-sm font-bold" style={{ color: ZONE_COLORS[profile.zone] }}>Zone {profile.zone}</p>
+                <p className="mt-1 text-sm font-bold" style={{ color: ACCENT }}>Zone {profile.zone}</p>
               </div>
               {profile.pendingFrench > 0 && (
-                <p className="text-right text-xs text-amber-600">
+                <p className="text-right text-xs" style={{ color: ACCENT }}>
                   {profile.pendingFrench} pts en attente professeur
                 </p>
               )}
@@ -166,12 +158,12 @@ export function PlacementStatsUnifiedClient() {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-              <p className="text-[10px] font-bold uppercase text-[var(--color-accent-alg)]">Mathématiques</p>
+              <p className="text-[10px] font-bold uppercase" style={{ color: ACCENT }}>Mathématiques</p>
               <p className="mt-1 text-2xl font-bold">{profile.mathCounted} <span className="text-sm font-medium text-[var(--color-text-secondary)]">/ 100</span></p>
               <p className="text-[10px] text-[var(--color-text-secondary)]">{math ? "Dernier essai" : "Non fait (0)"}</p>
             </div>
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-              <p className="text-[10px] font-bold uppercase text-[var(--color-accent-fr)]">Français</p>
+              <p className="text-[10px] font-bold uppercase" style={{ color: ACCENT }}>Français</p>
               <p className="mt-1 text-2xl font-bold">{profile.frenchCounted} <span className="text-sm font-medium text-[var(--color-text-secondary)]">/ 100</span></p>
               <p className="text-[10px] text-[var(--color-text-secondary)]">
                 {french ? `Meilleur · ${PLACEMENT_LEVEL_LABELS[french.level]}` : "Non fait (0)"}
@@ -208,7 +200,7 @@ export function PlacementStatsUnifiedClient() {
               type="button"
               onClick={() => router.push("/placement/mathematiques")}
               className="rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-              style={{ background: "var(--color-accent-alg)" }}
+              style={{ background: ACCENT }}
             >
               {math ? "Refaire maths" : "Test maths"}
             </button>
@@ -216,7 +208,7 @@ export function PlacementStatsUnifiedClient() {
               type="button"
               onClick={() => router.push("/placement/francais")}
               className="rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-              style={{ background: "var(--color-accent-fr)" }}
+              style={{ background: ACCENT }}
             >
               {french ? "Refaire français" : "Test français"}
             </button>

@@ -25,6 +25,9 @@ import {
   type PlacementLevel,
   type PlacementSkillResult,
 } from "@/lib/placement/types";
+import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
+
+const PLACEMENT_ACCENT = "var(--color-accent-quiz)";
 
 type FrenchStep = "intro" | "ce" | "co" | "pe" | "po" | "recap";
 
@@ -167,19 +170,17 @@ export function FrenchPlacementRunner() {
   if (step === "intro") {
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 py-8 pb-32">
-        <button type="button" onClick={() => router.push("/placement")} className="text-sm text-[var(--color-text-secondary)]">← Retour</button>
-        <header className="space-y-2">
-          <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Test de placement français</p>
-          <h1 className="text-2xl font-bold">{PLACEMENT_LEVEL_LABELS[level]}</h1>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            Parcours CE → CO → PE → PO (100 points). Les productions seront envoyées au professeur.
-          </p>
-        </header>
+        <PlacementPageHeader
+          label="Test de placement français"
+          title={PLACEMENT_LEVEL_LABELS[level]}
+          subtitle="Parcours CE → CO → PE → PO (100 points). Les productions seront envoyées au professeur."
+          backHref="/placement"
+        />
         <button
           type="button"
           onClick={() => { persistDraft({ step: "ce" }); setStep("ce"); }}
           className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-          style={{ background: "var(--color-accent-fr)" }}
+          style={{ background: PLACEMENT_ACCENT }}
         >
           Commencer
         </button>
@@ -212,7 +213,7 @@ export function FrenchPlacementRunner() {
           <li className="flex justify-between border-t pt-2 font-semibold"><span>Brut immédiat</span><span>{session.rawTotal} / 100</span></li>
           <li className="flex justify-between text-[var(--color-text-secondary)]"><span>Compté (prorata)</span><span>{session.countedTotal} / 100</span></li>
         </ul>
-        <button type="button" onClick={() => router.push("/placement/statistiques")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: "var(--color-accent-fr)" }}>
+        <button type="button" onClick={() => router.push("/placement/statistiques")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
           Voir les statistiques
         </button>
       </main>
@@ -222,7 +223,13 @@ export function FrenchPlacementRunner() {
   const lessonId = lessonIdForPlacement(step === "ce" ? "ce" : step === "co" ? "co" : step === "pe" ? "pe" : "po", level);
 
   return (
-    <div>
+    <div
+      className="placement-french-runner"
+      style={{
+        "--color-accent-comm": "var(--color-accent-quiz)",
+        "--color-accent-comm-inverse": "var(--color-accent-quiz)",
+      } as React.CSSProperties}
+    >
       {step === "ce" && <ComprehensionEcritRunner lessonId={lessonId} {...runnerProps} />}
       {step === "co" && <ComprehensionOraleRunner lessonId={lessonId} {...runnerProps} />}
       {step === "pe" && <ProductionEcriteRunner lessonId={lessonId} {...runnerProps} />}

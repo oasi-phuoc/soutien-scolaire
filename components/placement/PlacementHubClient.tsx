@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PLACEMENT_LEVEL_LABELS, type PlacementLevel } from "@/lib/placement/types";
 import { loadFrenchDraft, loadMathHistory, loadFrenchSessions } from "@/lib/placement/storage";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
 const LEVEL_KEY = "placement-selected-level";
+const ACCENT = "var(--color-accent-quiz)";
 
 const STEP_LABELS: Record<string, string> = {
   ce: "Compréhension écrite",
@@ -71,24 +73,12 @@ export function PlacementHubClient() {
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <Link
-        href="/"
-        className="inline-flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-      >
-        ← Accueil
-      </Link>
-
-      <header className="space-y-2">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-quiz)]">
-          Positionnement
-        </p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          Test de placement
-        </h1>
-        <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          Mathématiques (100 pts) et français CE, CO, PE, PO (100 pts). Total sur 200 points.
-        </p>
-      </header>
+      <PlacementPageHeader
+        label="Positionnement"
+        title="Test de placement"
+        subtitle="Mathématiques (100 pts) et français CE, CO, PE, PO (100 pts). Total sur 200 points."
+        backHref="/"
+      />
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Total placement</p>
@@ -96,9 +86,9 @@ export function PlacementHubClient() {
           {profileTotal}
           <span className="text-base font-medium text-[var(--color-text-secondary)]"> / 200</span>
         </p>
-        <p className="mt-1 text-sm font-semibold text-[var(--color-accent-quiz)]">Zone {zone}</p>
+        <p className="mt-1 text-sm font-semibold" style={{ color: ACCENT }}>Zone {zone}</p>
         {pendingFrench > 0 && (
-          <p className="mt-2 text-xs text-amber-600">{pendingFrench} pts en attente de correction professeur</p>
+          <p className="mt-2 text-xs" style={{ color: ACCENT }}>{pendingFrench} pts en attente de correction professeur</p>
         )}
         {!mathDone && !frenchDone && (
           <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Parties non faites comptées à 0.</p>
@@ -106,15 +96,22 @@ export function PlacementHubClient() {
       </div>
 
       {draftStep && draftStep !== "recap" && (
-        <div className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-4">
-          <p className="text-sm font-bold text-amber-800">Batterie française en cours</p>
-          <p className="mt-1 text-xs text-amber-700">
+        <div
+          className="rounded-[var(--radius-lg)] border p-4"
+          style={{
+            borderColor: "color-mix(in oklch, var(--color-accent-quiz) 35%, white)",
+            background: "color-mix(in oklch, var(--color-accent-quiz) 8%, white)",
+          }}
+        >
+          <p className="text-sm font-bold" style={{ color: ACCENT }}>Batterie française en cours</p>
+          <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
             Reprendre à l&apos;étape : {STEP_LABELS[draftStep] ?? draftStep}
           </p>
           <button
             type="button"
             onClick={resumeFrench}
-            className="mt-3 rounded-[var(--radius-md)] bg-amber-600 px-4 py-2 text-sm font-semibold text-white"
+            className="mt-3 rounded-[var(--radius-md)] px-4 py-2 text-sm font-semibold text-white"
+            style={{ background: ACCENT }}
           >
             Reprendre
           </button>
@@ -131,9 +128,10 @@ export function PlacementHubClient() {
               onClick={() => selectLevel(id)}
               className={`min-h-11 rounded-[var(--radius-md)] px-3 py-2 text-sm font-semibold transition-colors ${
                 level === id
-                  ? "bg-[var(--color-accent-fr)] text-white"
+                  ? "text-white"
                   : "border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
               }`}
+              style={level === id ? { background: ACCENT } : undefined}
             >
               {PLACEMENT_LEVEL_LABELS[id]}
             </button>
@@ -147,7 +145,7 @@ export function PlacementHubClient() {
           onClick={() => router.push("/placement/mathematiques")}
           className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-left transition-colors hover:bg-[var(--color-bg-secondary)]"
         >
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">Mathématiques</p>
+          <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>Mathématiques</p>
           <p className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">TCM — 100 pts</p>
           <p className="mt-1 text-xs text-[var(--color-text-secondary)]">90 minutes · 38 exercices</p>
           <p className="mt-2 text-xs font-semibold" style={{ color: mathDone ? "#059669" : "var(--color-text-secondary)" }}>
@@ -160,7 +158,7 @@ export function PlacementHubClient() {
           onClick={launchFrench}
           className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-left transition-colors hover:bg-[var(--color-bg-secondary)]"
         >
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
+          <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>Français</p>
           <p className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">TCF — 100 pts</p>
           <p className="mt-1 text-xs text-[var(--color-text-secondary)]">CE → CO → PE → PO</p>
           <p className="mt-2 text-xs font-semibold" style={{ color: frenchDone ? "#059669" : "var(--color-text-secondary)" }}>
@@ -171,7 +169,8 @@ export function PlacementHubClient() {
 
       <Link
         href="/placement/statistiques"
-        className="flex min-h-12 w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-emphasis)] text-sm font-semibold text-[var(--color-text-primary)]"
+        className="flex min-h-12 w-full items-center justify-center rounded-[var(--radius-md)] border text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        style={{ background: ACCENT, borderColor: ACCENT }}
       >
         Voir les statistiques /200
       </Link>

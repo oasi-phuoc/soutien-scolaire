@@ -1662,7 +1662,7 @@ export function OralProductionRunner({
               onClick={goBack}
               className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
             >
-              ← Retour
+              ← Précédent
             </button>
 
             {/* Validate (task phases only) */}

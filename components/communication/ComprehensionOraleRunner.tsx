@@ -239,7 +239,7 @@ function HiddenNav({
 }) {
   return (
     <div className="hidden fixed bottom-0 left-0 right-0">
-      {onBack && <button type="button" data-nav-action="back" disabled={backDisabled} onClick={onBack}>Retour</button>}
+      {onBack && <button type="button" data-nav-action="back" disabled={backDisabled} onClick={onBack} aria-label="Précédent">← Précédent</button>}
       {onRefresh && <button type="button" data-nav-action="refresh" disabled={refreshDisabled} onClick={onRefresh}>Refresh</button>}
       {onValidate && <button type="button" data-nav-action="validate" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
       {onNext && (

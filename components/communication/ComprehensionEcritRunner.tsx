@@ -99,24 +99,25 @@ function toQuestionTask(question: RawQuestionTask): QuestionTask {
   return { kind: "choice", ...question };
 }
 
-function CEHeader({ level, title }: { level: CELevel; title: string }) {
+function CEHeader({ level, title, placement = false }: { level: CELevel; title: string; placement?: boolean }) {
   const router = useRouter();
+  const accent = placement ? "var(--color-accent-quiz)" : ACCENT;
   return (
     <div className="flex items-start gap-3">
       <button
         type="button"
-        onClick={() => router.push("/communication")}
+        onClick={() => router.push(placement ? "/placement" : "/communication")}
         aria-label="Quitter la leçon"
         className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
-        style={{ background: ACCENT }}
+        style={{ background: accent }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: ACCENT }}>
-          Français · Compréhension écrite · {levelLabel(level)}
+        <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: accent }}>
+          {placement ? "Test de placement · CE" : `Français · Compréhension écrite`} · {levelLabel(level)}
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
       </div>
@@ -134,6 +135,7 @@ function NavActionBar({
   validateDisabled,
   nextDisabled,
   nextLabel,
+  accent = ACCENT,
 }: {
   onBack?: () => void;
   onRefresh?: () => void;
@@ -144,17 +146,31 @@ function NavActionBar({
   validateDisabled?: boolean;
   nextDisabled?: boolean;
   nextLabel?: string;
+  accent?: string;
 }) {
   return (
-    <div className="hidden fixed bottom-0 left-0 right-0">
-      {onBack && <button type="button" data-nav-action="back" aria-label="Précédent" disabled={backDisabled} onClick={onBack}>Précédent</button>}
-      {onRefresh && <button type="button" data-nav-action="refresh" aria-label="Recommencer" disabled={refreshDisabled} onClick={onRefresh}>Recommencer</button>}
-      {onValidate && <button type="button" data-nav-action="validate" aria-label="Valider" disabled={validateDisabled} onClick={onValidate}>Valider</button>}
-      {onNext && (
-        <button type="button" data-nav-action="next" data-nav-label={nextLabel} aria-label={nextLabel ?? "Suivant"} disabled={nextDisabled} onClick={onNext}>
-          {nextLabel ?? "Suivant"}
-        </button>
-      )}
+    <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      <div className="border-t border-[var(--color-border-default)]">
+        <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          {onBack ? (
+            <button type="button" data-nav-action="back" aria-label="Précédent" disabled={backDisabled} onClick={onBack} className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30">
+              ← Précédent
+            </button>
+          ) : <span aria-hidden />}
+          {onRefresh && <button type="button" data-nav-action="refresh" aria-label="Recommencer" disabled={refreshDisabled} onClick={onRefresh} className="hidden">Recommencer</button>}
+          {onValidate ? (
+            <button type="button" data-nav-action="validate" aria-label="Valider" disabled={validateDisabled} onClick={onValidate} className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30" style={{ background: accent }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+            </button>
+          ) : <span aria-hidden />}
+          {onNext ? (
+            <button type="button" data-nav-action="next" data-nav-label={nextLabel} aria-label={nextLabel ?? "Suivant"} disabled={nextDisabled} onClick={onNext} className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30" style={{ background: accent }}>
+              {nextLabel ?? "Suivant"} →
+            </button>
+          ) : <span aria-hidden />}
+        </div>
+      </div>
+      <div style={{ height: 72 }} />
     </div>
   );
 }
@@ -760,7 +776,8 @@ function ProgressDots({
   );
 }
 
-function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) {
+function IntroPage({ level, onStart, placement = false }: { level: CELevel; onStart: () => void; placement?: boolean }) {
+  const accent = placement ? "var(--color-accent-quiz)" : ACCENT;
   const introBullets: IntroBullet[] = [
     { strong: "4 exercices", text: " de compréhension écrite" },
     { strong: "45 minutes", text: " pour compléter l'évaluation" },
@@ -777,7 +794,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
 
   return (
     <div className="space-y-6">
-      <CEHeader level={level} title="Compréhension écrite" />
+      <CEHeader level={level} title="Compréhension écrite" placement={placement} />
       <CommunicationIntroSection
         bullets={introBullets}
         rows={introRows}
@@ -790,7 +807,7 @@ function IntroPage({ level, onStart }: { level: CELevel; onStart: () => void }) 
         )}
         onStart={onStart}
       />
-      <NavActionBar onBack={() => {}} backDisabled onNext={onStart} nextLabel="Commencer" />
+      <NavActionBar onBack={() => {}} backDisabled onNext={onStart} nextLabel="Commencer" accent={accent} />
     </div>
   );
 }
@@ -1146,13 +1163,15 @@ export function ComprehensionEcritRunner({
     setCurrent((value) => (value - 1 + activeParts.length) % activeParts.length);
   }, [activeParts.length, mode, onPlacementComplete, phase, router, totalScore]);
 
+  const runnerAccent = mode === "placement" ? "var(--color-accent-quiz)" : ACCENT;
+
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
-      {phase === "intro" && <IntroPage level={level} onStart={() => { setSecondsLeft(TOTAL_SECONDS); setPhase("exercise"); }} />}
+      {phase === "intro" && <IntroPage level={level} placement={mode === "placement"} onStart={() => { setSecondsLeft(TOTAL_SECONDS); setPhase("exercise"); }} />}
 
       {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
-          <CEHeader level={level} title="Compréhension écrite" />
+          <CEHeader level={level} title="Compréhension écrite" placement={mode === "placement"} />
           <div className="mb-5">
             <div className="mb-1.5 flex items-center justify-between">
               <p className="text-xs font-bold tabular-nums" style={{ color: INVERSE }}>{formatScore(currentScore)} / 25 pts</p>
@@ -1170,15 +1189,15 @@ export function ComprehensionEcritRunner({
             />
           </div>
           <ExercisePage part={part} index={parts.findIndex((item) => item.id === part.id)} answers={answers} setAnswer={setAnswer} />
-          <NavActionBar onBack={back} onValidate={validate} onNext={next} nextLabel="Suivant" />
+          <NavActionBar onBack={back} onValidate={validate} onNext={next} nextLabel="Suivant" accent={runnerAccent} />
         </div>
       )}
 
       {phase === "results" && (
         <div className="space-y-6">
-          <CEHeader level={level} title="Résultats" />
+          <CEHeader level={level} title="Résultats" placement={mode === "placement"} />
           <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"} />
+          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"} accent={runnerAccent} />
           {mode !== "placement" && <CommunicationFinishButton onClick={next} />}
         </div>
       )}

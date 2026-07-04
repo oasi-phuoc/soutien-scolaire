@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
 import { saveMathAttempt, loadFrenchSessions, loadMathHistory, loadTotalHistory } from "@/lib/placement/storage";
+import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -376,6 +377,7 @@ const PLACEMENT_INTRO_TEXTS: Record<"fr", PlacementIntroText> & Partial<Record<P
 
 export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "placement" }) {
   const router = useRouter();
+  const accent = mode === "placement" ? "var(--color-accent-quiz)" : "var(--color-accent-alg)";
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
   const introText = (showPivot ? PLACEMENT_INTRO_TEXTS[pivot] : undefined) ?? PLACEMENT_INTRO_TEXTS.fr;
@@ -569,7 +571,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           onClose={() => setShowPrint(false)}
           onPrint={() => {}}
           exercises={printExercisesForConfig}
-          accentColor="var(--color-accent-alg)"
+          accentColor={accent}
           lessonTitle="Test de placement"
         />
       );
@@ -578,46 +580,46 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
     return (
       <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
         <div className="space-y-6">
+          {mode === "placement" ? (
+            <PlacementPageHeader
+              label={introText.subject}
+              title={introText.title}
+              backHref="/placement"
+            />
+          ) : (
           <header className="space-y-2" lang={introLang} dir={introDir}>
-            <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">{introText.subject}</p>
+            <p className="text-xs font-medium uppercase tracking-wide" style={{ color: accent }}>{introText.subject}</p>
             <div className="flex items-center gap-2">
               <button
-                key="result-row"
                 type="button"
                 onClick={() => router.back()}
                 aria-label="Retour"
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white transition-opacity hover:opacity-80"
+                style={{ background: accent }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
               </button>
               <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{introText.title}</h1>
             </div>
           </header>
+          )}
 
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4" lang={introLang} dir={introDir}>
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
               <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} {introText.exercisesLabel}</strong> {introText.coverage}</span>
+                {[
+                  <><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} {introText.exercisesLabel}</strong> {introText.coverage}</>,
+                  <><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</>,
+                  introText.validateLine,
+                  introText.navigateLine,
+                  <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} {introText.points}</strong></>,
+                ].map((content, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
+                  <span>{content}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{introText.validateLine}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{introText.navigateLine}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} {introText.points}</strong></span>
-                </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -625,7 +627,8 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           <button
             type="button"
             onClick={startTest}
-            className="w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            className="w-full rounded-[var(--radius-lg)] py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            style={{ background: accent }}
           >
             {introText.start}
           </button>
@@ -633,7 +636,9 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           <button
             type="button"
             onClick={() => setShowPrint(true)}
-            className="flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-alg)] hover:text-[var(--color-accent-alg)]"
+            className="flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-border-emphasis)]"
+            onMouseEnter={(e) => { e.currentTarget.style.color = accent; e.currentTarget.style.borderColor = accent; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = ""; e.currentTarget.style.borderColor = ""; }}
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
@@ -674,7 +679,8 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           type="button"
           onClick={() => setPhase("idle")}
           aria-label="Retour"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white transition-opacity hover:opacity-80"
+          style={{ background: accent }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
@@ -682,7 +688,8 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
         <button
           type="button"
           onClick={() => setSkipConfirmOpen(true)}
-          className="ml-auto rounded-[var(--radius-lg)] bg-amber-500 px-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+          className="ml-auto rounded-[var(--radius-lg)] px-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+          style={{ background: accent }}
         >
           Skip
         </button>
@@ -723,7 +730,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
 
       {/* Exercise header */}
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
+        <h2 className="text-base font-bold" style={{ color: accent }}>Exercice {ex.id}</h2>
         <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
       </>
@@ -751,11 +758,12 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
                 onClick={() => setSelectedResultIdx(i)}
                 className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
                   isSelected
-                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                    ? "bg-[var(--color-bg-primary)]"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:opacity-90"
                 }`}
+                style={isSelected ? { borderColor: accent, background: `color-mix(in oklch, ${accent} 10%, white)` } : undefined}
               >
-                <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{exercise.id}</span>
+                <span className="w-5 text-xs font-bold" style={{ color: accent }}>{exercise.id}</span>
                 <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{exercise.label}</span>
                 <span className="text-xs font-bold tabular-nums text-[var(--color-text-primary)]">{pts} / {max}</span>
               </button>
@@ -763,7 +771,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
             <div key="exercise-panel" className={phase === "results" ? (isSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden") : ""}>
               {phase === "results" && (
                 <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exercise.id}</h2>
+                  <h2 className="text-base font-bold" style={{ color: accent }}>Exercice {exercise.id}</h2>
                   <span className="text-xs text-[var(--color-text-secondary)]">{pts} / {max} pt{max > 1 ? "s" : ""}</span>
                 </div>
               )}
@@ -784,13 +792,14 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
         <button
           type="button"
           onClick={() => router.push(mode === "placement" ? "/placement/statistiques" : "/mathematiques")}
-          className="mt-6 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+          className="mt-6 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+          style={{ background: accent }}
         >
           Terminer
         </button>
       )}
 
-      {/* Navigation bar (fixed bottom) */}
+      {/* Navigation bar (fixed bottom) — picked up by MainNav */}
       {phase !== "results" && (
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
@@ -799,31 +808,36 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
               type="button"
               onClick={goPrev}
               disabled={previousOpenIdx < 0}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
+              data-nav-action="back"
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
-              Retour
+              ← Précédent
             </button>
 
-            {!isCurrentValidated && (
+            {!isCurrentValidated ? (
               <button
                 type="button"
                 onClick={triggerValidate}
+                data-nav-action="validate"
                 aria-label="Valider"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-500 text-white transition-opacity hover:opacity-90 active:scale-90"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                style={{ background: accent }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5"/></svg>
               </button>
+            ) : (
+              <span aria-hidden />
             )}
 
             <button
               type="button"
               onClick={goNext}
               disabled={nextOpenIdx < 0}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-30"
+              data-nav-action="next"
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
+              style={{ background: accent }}
             >
-              Suivant
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>
+              Suivant →
             </button>
           </div>
         </div>

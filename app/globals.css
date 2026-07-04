@@ -153,6 +153,12 @@ body {
   --section-accent: #d98b19;
 }
 
+.section-background-placement {
+  --section-tint: #f5dde3;
+  --section-soft: #fff9fa;
+  --section-accent: #c06078;
+}
+
 body:has(.section-background-lecture) {
   --color-correction: #D7A32B;
   --color-correction-soft: #FFF7DA;
@@ -168,39 +174,44 @@ body:has(.section-background-maths) {
   --color-correction-soft: #FFF1E7;
 }
 
+body:has(.section-background-placement) {
+  --color-correction: #C06078;
+  --color-correction-soft: #FDF0F3;
+}
+
 /* Existing exercises historically use Tailwind amber/orange utilities for corrections. */
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-amber-400"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-amber-500"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-amber-600"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-amber-700"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-orange-400"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-orange-500"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="text-orange-600"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="dark:text-amber-400"] {
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-amber-400"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-amber-500"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-amber-600"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-amber-700"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-orange-400"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-orange-500"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="text-orange-600"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="dark:text-amber-400"] {
   color: var(--color-correction) !important;
 }
 
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="border-amber-300"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="border-amber-400"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="border-amber-500"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="border-orange-400"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="border-orange-500"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="dark:border-amber-400"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="dark:border-amber-500"] {
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="border-amber-300"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="border-amber-400"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="border-amber-500"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="border-orange-400"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="border-orange-500"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="dark:border-amber-400"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="dark:border-amber-500"] {
   border-color: var(--color-correction) !important;
 }
 
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-amber-500"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-orange-500"] {
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-amber-500"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-orange-500"] {
   background-color: var(--color-correction) !important;
 }
 
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-amber-50"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-amber-100"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-orange-50"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="bg-orange-100"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="dark:bg-amber-950/20"],
-body:has(.section-background-lecture, .section-background-francais, .section-background-maths) [class~="dark:bg-amber-950/30"] {
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-amber-50"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-amber-100"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-orange-50"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="bg-orange-100"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="dark:bg-amber-950/20"],
+body:has(.section-background-lecture, .section-background-francais, .section-background-maths, .section-background-placement) [class~="dark:bg-amber-950/30"] {
   background-color: var(--color-correction-soft) !important;
 }
 

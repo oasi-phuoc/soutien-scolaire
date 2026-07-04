@@ -59,10 +59,14 @@ function sectionColor(pathname: string) {
   return "var(--color-theme)";
 }
 
+function isPlacementHubPage(pathname: string) {
+  return pathname === "/placement" || pathname === "/placement/statistiques";
+}
+
 function isMainSectionPage(pathname: string) {
   return ["", "/", "/lecture", "/francais", "/mathematiques", "/communication"].includes(pathname)
     || pathname.startsWith("/compte")
-    || pathname.startsWith("/placement")
+    || isPlacementHubPage(pathname)
     || pathname.startsWith("/messagerie");
 }
 
@@ -84,7 +88,7 @@ function normalizedLabel(button: HTMLButtonElement) {
 function getLegacyActionButton(kind: ActionKind) {
   if (typeof document === "undefined") return undefined;
   const tests: Record<ActionKind, RegExp[]> = {
-    back: [/\bretour\b/],
+    back: [/\bretour\b/, /\bprecedent\b/],
     refresh: [/recommencer/, /reinitialiser/, /refaire/, /refresh/, /actualiser/],
     validate: [/valider/],
     next: [/suivant/, /terminer/, /imprimer/],
