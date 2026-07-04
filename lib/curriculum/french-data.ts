@@ -221,8 +221,8 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("V7", "v7-fruits",               "V7.1", "Les fruits",              "Fruits courants.",                                                 "vocabulaire"),
   lesson("V7", "v7-legumes",              "V7.2", "Les légumes",             "Légumes courants.",                                                "vocabulaire"),
   lesson("V7", "v7-cuisine",              "V7.3", "La cuisine",              "Verbes et actions en cuisine.",                                    "vocabulaire"),
-  lesson("V7", "v7-recettes",             "V7.4", "Les recettes",            "Ingr?dients de base et ustensiles.",                               "vocabulaire"),
-  lesson("V7", "v7-quantites",            "V7.5", "Les quantit?s",           "Unit?s de mesure et contenants.",                                  "vocabulaire"),
+  lesson("V7", "v7-recettes",             "V7.4", "Les recettes",            "Ingrédients de base et ustensiles.",                               "vocabulaire"),
+  lesson("V7", "v7-quantites",            "V7.5", "Les quantités",           "Unités de mesure et contenants.",                                  "vocabulaire"),
 
   // ── V8 — La santé ────────────────────────────────────────────────────────────
   lesson("V8", "v8-corps",                "V8.1", "Le corps",                "Parties du corps humain.",                                         "vocabulaire"),
