@@ -267,6 +267,16 @@ function CorrectionBlock({ title, children }: { title: string; children: ReactNo
   );
 }
 
+function SampleParagraphs({ text }: { text: string }) {
+  return (
+    <div className="space-y-3">
+      {text.split(/\n\n+/).filter(Boolean).map((paragraph, index) => (
+        <p key={index} className="leading-relaxed">{paragraph}</p>
+      ))}
+    </div>
+  );
+}
+
 const DIRECTED_INTERVIEW_BASE = [
   "Quel est votre nom ?",
   "Quel est votre prénom ?",
@@ -1655,9 +1665,7 @@ export function OralProductionRunner({
 
                   {num === 5 && argumentationResponse && (
                     <CorrectionBlock title="Proposition de réponse">
-                      <div className="whitespace-pre-line">
-                        {argumentationResponse}
-                      </div>
+                      <SampleParagraphs text={argumentationResponse} />
                     </CorrectionBlock>
                   )}
                 </CommunicationResultsExercise>
