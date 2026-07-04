@@ -80,7 +80,7 @@ function levelLabel(level: WritingLevel) {
 }
 
 function minWordsFor(level: WritingLevel, kind: "short" | "long") {
-  if (level === "base") return kind === "short" ? 40 : 60;
+  if (level === "base") return kind === "short" ? 40 : 50;
   if (level === "moyen") return kind === "short" ? 60 : 100;
   return kind === "short" ? 120 : 160;
 }

@@ -10,12 +10,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TARGET = path.join(__dirname, "../lib/curriculum/content/communication/pe-sample-answers.ts");
 
 function minForKey(key) {
-  if (key.startsWith("pe1-short-")) return 40;
-  if (key.startsWith("pe1-long-")) return 60;
-  if (key.startsWith("pe2-reply-")) return 60;
-  if (key.startsWith("pe2-long-")) return 100;
-  if (key.startsWith("pe3-short-")) return 120;
-  if (key.startsWith("pe3-")) return 160;
+  // Sample answers intentionally target a comfortable margin above the prompt minimum.
+  if (key.startsWith("pe1-short-")) return 50;
+  if (key.startsWith("pe1-long-")) return 65;
+  if (key.startsWith("pe2-reply-")) return 80;
+  if (key.startsWith("pe2-long-")) return 125;
+  if (key.startsWith("pe3-short-")) return 145;
+  if (key.startsWith("pe3-")) return 190;
   return null;
 }
 
@@ -281,17 +282,17 @@ const EXTENSIONS = {
   "pe3-compte-rendu-voyage":
     "Nous avons voyagé en train depuis Paris et loué des vélos pour explorer la côte. Les journées étaient longues mais chaque soir nous dégustions un dessert local dans un petit restaurant. Nous avons aussi visité un marché aux poissons et acheté des souvenirs artisanaux. Le climat était variable, avec du vent sur la côte, mais cela faisait partie du charme breton. Je recommande cette destination à tous ceux qui aiment la mer et l'histoire.",
   "pe3-soiree-association":
-    "Plusieurs artistes locaux ont présenté leurs œuvres et le public a pu poser des questions en fin de présentation. Le trésorier a annoncé que les comptes étaient équilibrés malgré l'augmentation des frais de location. Nous avons aussi élu deux nouveaux membres au comité. J'espère que tu pourras participer à la prochaine édition. La soirée s'est terminée tard, dans une ambiance chaleureuse.",
+    "Plusieurs artistes locaux ont présenté leurs œuvres et le public a pu poser des questions en fin de présentation. Le trésorier a annoncé que les comptes étaient équilibrés malgré l'augmentation des frais de location. Nous avons aussi élu deux nouveaux membres au comité. J'espère que tu pourras participer à la prochaine édition. La soirée s'est terminée tard, dans une ambiance chaleureuse. Les bénévoles ont apprécié les échanges avec les visiteurs, car ils donnent de nouvelles idées pour préparer le prochain programme culturel.",
   "pe3-vente-mangues":
     "Chaque équipe comptera deux vendeurs et une personne chargée de la caisse. Nous avons également prévu des affiches pour annoncer l'opération dans les commerces du quartier. Le bénéfice servira à financer la sortie annuelle du club. Merci à tous les bénévoles pour leur engagement.",
   "pe3-premiere-journee-travail":
-    "À midi, les collègues m'ont invitée à déjeuner au café d'en face et m'ont expliqué les habitudes de l'équipe. L'après-midi, j'ai commencé à classer des dossiers et à répondre à quelques courriels simples. En rentrant chez moi, je me suis sentie fatiguée mais heureuse d'avoir franchi cette étape. Demain, je rencontrerai le service informatique pour configurer mon ordinateur. Ce premier jour restera une étape importante.",
+    "À midi, les collègues m'ont invitée à déjeuner au café d'en face et m'ont expliqué les habitudes de l'équipe. L'après-midi, j'ai commencé à classer des dossiers et à répondre à quelques courriels simples. En rentrant chez moi, je me suis sentie fatiguée mais heureuse d'avoir franchi cette étape. Demain, je rencontrerai le service informatique pour configurer mon ordinateur. Ce premier jour restera une étape importante, surtout parce que j'ai compris que je pourrais apprendre progressivement sans être jugée.",
   "pe3-spectacle-chevaux":
-    "Avant le spectacle, nous avons visité les écuries et pris un verre sur la place. Les enfants étaient fascinés par les chevaux blancs et les costumes brillants. La musique mêlait des airs classiques et des rythmes modernes. Si tu viens la prochaine fois, prévois un pull car il fait frais en soirée dans l'arène. L'ambiance était vraiment magique du début à la fin.",
+    "Avant le spectacle, nous avons visité les écuries et pris un verre sur la place. Les enfants étaient fascinés par les chevaux blancs et les costumes brillants. La musique mêlait des airs classiques et des rythmes modernes. Si tu viens la prochaine fois, prévois un pull car il fait frais en soirée dans l'arène. L'ambiance était vraiment magique du début à la fin, et les organisateurs ont pris le temps de saluer le public après la dernière figure.",
   "pe3-nettoyage-plage":
     "Nous avons aussi sensibilisé les promeneurs en distribuant de petits flyers sur la protection des lacs. Plusieurs familles se sont jointes à nous spontanément en voyant notre action. Pour la prochaine journée, nous prévoyons d'inviter une classe de l'école primaire voisine. L'objectif est de réduire durablement les déchets laissés sur les rives.",
   "pe3-assemblee-immeuble":
-    "Le syndic a rappelé les règles concernant le bruit après 22 h et le tri des déchets dans les caves. Une discussion a aussi porté sur l'entretien des parties communes et la répartition des charges exceptionnelles. Si tu n'as pas pu venir, je peux te transmettre le procès-verbal complet par courriel. N'hésite pas à me poser tes questions. Les travaux débuteront probablement à l'automne.",
+    "Le syndic a rappelé les règles concernant le bruit après 22 h et le tri des déchets dans les caves. Une discussion a aussi porté sur l'entretien des parties communes et la répartition des charges exceptionnelles. Si tu n'as pas pu venir, je peux te transmettre le procès-verbal complet par courriel. N'hésite pas à me poser tes questions. Les travaux débuteront probablement à l'automne, après réception de deux devis supplémentaires demandés par les copropriétaires présents. Un vote final sera organisé avant la signature du contrat.",
   "pe3-volontariat-formation":
     "Les apprenants viennent de milieux variés : certains reprennent des études tardivement, d'autres préparent un certificat professionnel. J'ai remarqué que beaucoup manquent de confiance à l'oral, ce qui confirme l'utilité de nos échanges. Le coordinateur m'a proposé de former un nouveau bénévole le mois prochain. Je suis contente d'avoir trouvé une mission qui a du sens pour moi.",
   "pe3-conflit-classe":
