@@ -19,6 +19,14 @@ type NavItem = {
   y: number;
 };
 
+const placementItem: NavItem = {
+  href: "/placement",
+  label: "Placement",
+  icon: PlacementIcon,
+  x: 0,
+  y: -100,
+};
+
 const links: NavItem[] = [
   { href: "/", label: "Accueil", icon: HomeIcon, x: 0, y: -174 },
   { href: "/lecture", label: "Lecture", icon: LectureIcon, x: -100, y: -134 },
@@ -44,8 +52,9 @@ function isActivePath(pathname: string, href: string) {
 }
 
 function sectionColor(pathname: string) {
+  if (pathname.startsWith("/placement")) return "var(--color-accent-quiz)";
   if (pathname.startsWith("/lecture")) return "var(--color-accent-lecture)";
-  if (pathname.startsWith("/mathematiques") || pathname.startsWith("/placement")) return "var(--color-accent-alg)";
+  if (pathname.startsWith("/mathematiques")) return "var(--color-accent-alg)";
   if (pathname.startsWith("/francais") || pathname.startsWith("/communication")) return "var(--color-accent-fr)";
   return "var(--color-theme)";
 }
@@ -168,7 +177,7 @@ export function MainNav() {
 
   const navColor = sectionColor(pathname);
   const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin");
-  const menuItems = [...links, translateItem];
+  const menuItems = [...links, placementItem, translateItem];
 
   return (
     <>
@@ -263,6 +272,7 @@ export function MainNav() {
               }`}
               aria-hidden={!open}
             >
+              <SecondaryMenuLink item={placementItem} open={open} />
               <SecondaryMenuLink item={settingsItem} open={open} />
               <button
                 type="button"
@@ -355,8 +365,7 @@ export function MainNav() {
 function MainSectionButton({ item, pathname, pendingTasks = 0, unreadMessages = 0 }: { item: NavItem; pathname: string; pendingTasks?: number; unreadMessages?: number }) {
   const Icon = item.icon;
   const active = isActivePath(pathname, item.href)
-    || (item.href === "/francais" && pathname.startsWith("/communication"))
-    || (item.href === "/mathematiques" && pathname.startsWith("/placement"));
+    || (item.href === "/francais" && pathname.startsWith("/communication"));
   const totalBadge = pendingTasks + unreadMessages;
   return (
     <Link
@@ -494,6 +503,16 @@ function GearIcon({ active: _active }: { active: boolean }) {
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
       <path d="M12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" />
       <path d="M19.4 15a1.7 1.7 0 00.34 1.88l.04.04a2 2 0 01-2.83 2.83l-.04-.04A1.7 1.7 0 0015 19.4a1.7 1.7 0 00-1 1.55V21a2 2 0 01-4 0v-.06A1.7 1.7 0 009 19.4a1.7 1.7 0 00-1.88.34l-.04.04a2 2 0 01-2.83-2.83l.04-.04A1.7 1.7 0 004.6 15a1.7 1.7 0 00-1.55-1H3a2 2 0 010-4h.06A1.7 1.7 0 004.6 9a1.7 1.7 0 00-.34-1.88l-.04-.04a2 2 0 012.83-2.83l.04.04A1.7 1.7 0 009 4.6a1.7 1.7 0 001-1.55V3a2 2 0 014 0v.06A1.7 1.7 0 0015 4.6a1.7 1.7 0 001.88-.34l.04-.04a2 2 0 012.83 2.83l-.04.04A1.7 1.7 0 0019.4 9a1.7 1.7 0 001.55 1H21a2 2 0 010 4h-.06A1.7 1.7 0 0019.4 15z" />
+    </svg>
+  );
+}
+
+function PlacementIcon({ active: _active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M12 20V10" />
+      <path d="M18 20V4" />
+      <path d="M6 20v-4" />
     </svg>
   );
 }

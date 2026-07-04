@@ -26,6 +26,7 @@ export type UserRow = {
   is_admin: boolean;
   role: "eleve" | "prof" | "admin";
   placement_test_best: { points: number; maxPoints: number; percent: number } | null;
+  placement_combined: { total: number; zone: string; mathCounted: number; frenchCounted: number; pendingFrench?: number } | null;
 };
 
 const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
@@ -380,7 +381,7 @@ export function AdminTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              {["Statut", "Prénom, Nom", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Test M", ""].map((h, i) => (
+              {["Statut", "Prénom, Nom", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Placement", ""].map((h, i) => (
                 <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white">{h}</th>
               ))}
             </tr>
@@ -415,10 +416,19 @@ export function AdminTable({
                   <td className="w-28 px-4 py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
                   <td className="w-28 px-4 py-3"><ProgressCell {...french} color="bg-emerald-500" /></td>
                   <td className="w-28 px-4 py-3"><ProgressCell {...lecture} color="bg-amber-500" /></td>
-                  <td className="w-28 px-4 py-3">
-                    {row.placement_test_best
-                      ? <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
-                      : <span className="text-xs text-zinc-400">—</span>}
+                  <td className="w-32 px-4 py-3">
+                    {row.placement_combined ? (
+                      <div className="space-y-0.5">
+                        <p className="text-xs font-bold tabular-nums text-violet-700 dark:text-violet-300">
+                          {row.placement_combined.total}/200
+                        </p>
+                        <p className="text-[10px] text-zinc-500">{row.placement_combined.zone}</p>
+                      </div>
+                    ) : row.placement_test_best ? (
+                      <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
+                    ) : (
+                      <span className="text-xs text-zinc-400">—</span>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     <Link href={`/admin/eleves/${row.id}`} className="inline-flex rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">

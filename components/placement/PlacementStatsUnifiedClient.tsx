@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
-import { loadPlacementProfile, migrateLegacyMathHistory } from "@/lib/placement/storage";
-import { PLACEMENT_LEVEL_LABELS } from "@/lib/placement/types";
+import { loadPlacementProfile, migrateLegacyMathHistory, loadTotalHistory } from "@/lib/placement/storage";
+import { PLACEMENT_LEVEL_LABELS, type PlacementTotalSnapshot } from "@/lib/placement/types";
 
 const ZONE_COLORS: Record<string, string> = {
   CSC: "#94a3b8",
@@ -39,10 +39,64 @@ function UnifiedChart({ total }: { total: number }) {
   );
 }
 
+function EvolutionChart({ history }: { history: PlacementTotalSnapshot[] }) {
+  const chartH = 120;
+  const barW = 36;
+  const gap = 12;
+  const leftPad = 8;
+  const slots = 5;
+  const maxPts = 200;
+  const barsAreaW = slots * barW + (slots - 1) * gap;
+  const svgW = leftPad + barsAreaW + 8;
+  const svgH = chartH + 28;
+  const items = Array.from({ length: slots }, (_, i) => history[Math.max(0, history.length - slots) + i] ?? null);
+
+  const toY = (pts: number) => 8 + chartH - Math.round((pts / maxPts) * chartH);
+  const baseY = 8 + chartH;
+
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full overflow-visible">
+      {PLACEMENT_ZONES.map((z) => {
+        const y1 = toY(z.max);
+        const y2 = toY(z.min);
+        return (
+          <rect
+            key={z.zone}
+            x={leftPad}
+            y={y1}
+            width={barsAreaW}
+            height={Math.max(1, y2 - y1)}
+            fill={ZONE_COLORS[z.zone]}
+            opacity={0.1}
+          />
+        );
+      })}
+      <line x1={leftPad} y1={baseY} x2={leftPad + barsAreaW} y2={baseY} stroke="var(--color-border-default)" />
+      {items.map((h, i) => {
+        const x = leftPad + i * (barW + gap);
+        if (!h) {
+          return (
+            <rect key={i} x={x} y={8} width={barW} height={chartH} rx={4} fill="none" stroke="var(--color-border-default)" strokeDasharray="3,3" />
+          );
+        }
+        const y = toY(h.total);
+        const hBar = baseY - y;
+        return (
+          <g key={i}>
+            <rect x={x} y={y} width={barW} height={hBar} rx={4} fill="var(--color-accent-quiz)" opacity={0.85} />
+            <text x={x + barW / 2} y={baseY + 14} textAnchor="middle" fontSize="8" fill="var(--color-text-secondary)">{h.total}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 export function PlacementStatsUnifiedClient() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [profile, setProfile] = useState(() => loadPlacementProfile());
+  const [history, setHistory] = useState<PlacementTotalSnapshot[]>(() => loadTotalHistory());
 
   useEffect(() => {
     let cancelled = false;
@@ -51,6 +105,7 @@ export function PlacementStatsUnifiedClient() {
       const nextProfile = await syncPlacementFromCloud();
       if (!cancelled) {
         setProfile(nextProfile);
+        setHistory(loadTotalHistory());
         setReady(true);
       }
     })();
@@ -101,6 +156,13 @@ export function PlacementStatsUnifiedClient() {
               <UnifiedChart total={profile.total} />
             </div>
           </div>
+
+          {history.length > 0 && (
+            <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pt-4 pb-3">
+              <p className="mb-3 text-sm font-bold text-[var(--color-text-primary)]">Évolution du total /200</p>
+              <EvolutionChart history={history} />
+            </div>
+          )}
 
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">

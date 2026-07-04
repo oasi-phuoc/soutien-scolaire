@@ -25,6 +25,7 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { LectureProgressV2 } from "@/lib/progress/lecture-progress";
+import { loadPlacementProfile } from "@/lib/placement/storage";
 
 // ── French data helpers ──────────────────────────────────────────────────────
 const FRENCH_VOC = FRENCH_THEMES.filter((t) => t.tab === "vocabulaire");
@@ -162,10 +163,15 @@ function CardShell({
 export function HomeProgressCards() {
   const [lectureP, setLectureP] = useState<LectureProgressV2 | null>(null);
   const [mathP, setMathP] = useState<StoredProgressV1 | null>(null);
+  const [placementPct, setPlacementPct] = useState(0);
+  const [placementTotal, setPlacementTotal] = useState(0);
 
   useEffect(() => {
     setLectureP(loadLectureProgress());
     setMathP(loadProgress());
+    const profile = loadPlacementProfile();
+    setPlacementTotal(profile.total);
+    setPlacementPct(Math.round((profile.total / 200) * 100));
   }, []);
 
   // ── Lecture ──
@@ -245,11 +251,11 @@ export function HomeProgressCards() {
         icon={<PlacementIcon />}
         label="Placement"
         title="Test de placement /200"
-        completedText="Maths + Français"
+        completedText={`${placementTotal} pts`}
         totalText="CE · CO · PE · PO · TCM"
-        pct={0}
+        pct={placementPct}
         continuePath="/placement"
-        continueLabel="Commencer"
+        continueLabel={placementTotal > 0 ? "Continuer" : "Commencer"}
       />
       <CardShell
         href="/lecture"

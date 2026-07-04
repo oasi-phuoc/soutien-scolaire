@@ -4,6 +4,7 @@ import type {
   PlacementFrenchSession,
   PlacementMathAttempt,
   PlacementProfile,
+  PlacementTotalSnapshot,
 } from "./types";
 
 export const PLACEMENT_MATH_HISTORY_KEY = "placement-math-history";
@@ -12,6 +13,7 @@ export const PLACEMENT_FRENCH_SESSIONS_KEY = "placement-french-sessions";
 export const PLACEMENT_PROFILE_KEY = "placement-profile";
 export const PLACEMENT_FRENCH_DRAFT_KEY = "placement-french-draft";
 export const PLACEMENT_PENDING_KEY = "placement-pending-submissions";
+export const PLACEMENT_TOTAL_HISTORY_KEY = "placement-total-history";
 
 function readJson<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -85,9 +87,40 @@ export function loadPlacementProfile(): PlacementProfile {
   return recomputePlacementProfile();
 }
 
+export function loadTotalHistory(): PlacementTotalSnapshot[] {
+  return readJson<PlacementTotalSnapshot[]>(PLACEMENT_TOTAL_HISTORY_KEY, []);
+}
+
+function appendTotalSnapshot(profile: PlacementProfile) {
+  const history = loadTotalHistory();
+  const last = history[history.length - 1];
+  if (
+    last
+    && last.total === profile.total
+    && last.mathCounted === profile.mathCounted
+    && last.frenchCounted === profile.frenchCounted
+    && last.zone === profile.zone
+  ) {
+    return history;
+  }
+  const next = [
+    ...history,
+    {
+      date: profile.updatedAt,
+      total: profile.total,
+      mathCounted: profile.mathCounted,
+      frenchCounted: profile.frenchCounted,
+      zone: profile.zone,
+    },
+  ].slice(-10);
+  writeJson(PLACEMENT_TOTAL_HISTORY_KEY, next);
+  return next;
+}
+
 export function recomputePlacementProfile(): PlacementProfile {
   const profile = buildPlacementProfile(loadMathHistory(), loadFrenchSessions());
   writeJson(PLACEMENT_PROFILE_KEY, profile);
+  appendTotalSnapshot(profile);
   return profile;
 }
 

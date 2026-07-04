@@ -52,6 +52,14 @@ export type PlacementProfile = {
   updatedAt: string;
 };
 
+export type PlacementTotalSnapshot = {
+  date: string;
+  total: number;
+  mathCounted: number;
+  frenchCounted: number;
+  zone: PlacementZone;
+};
+
 export type PlacementSkillResult = {
   skill: PlacementSkill;
   points: number;

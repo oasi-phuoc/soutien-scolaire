@@ -141,7 +141,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const [{ data, error }, { data: authData }] = await Promise.all([
     svc
       .from("profiles")
-      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history")
+      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history, placement_combined_profile")
       .eq("id", userId)
       .single(),
     svc.auth.admin.getUserById(userId),
@@ -153,6 +153,13 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const placement_test_best = history.length > 0
     ? history.reduce((best, a) => a.percent > best.percent ? a : best)
     : null;
+  const combined = data.placement_combined_profile as {
+    total?: number;
+    zone?: string;
+    mathCounted?: number;
+    frenchCounted?: number;
+    pendingFrench?: number;
+  } | null;
 
   return {
     ok: true,
@@ -160,6 +167,13 @@ export async function getUserForAdminAction(userId: string): Promise<{
       ...data,
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
+      placement_combined: combined?.total !== undefined ? {
+        total: Number(combined.total ?? 0),
+        zone: String(combined.zone ?? "CSC"),
+        mathCounted: Number(combined.mathCounted ?? 0),
+        frenchCounted: Number(combined.frenchCounted ?? 0),
+        pendingFrench: combined.pendingFrench !== undefined ? Number(combined.pendingFrench) : undefined,
+      } : null,
     } as import("@/components/admin/AdminTable").UserRow,
   };
 }
