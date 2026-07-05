@@ -2,7 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-type OfflineState = "idle" | "preparing" | "ready" | "cleared" | "error" | "unsupported";
+type OfflineState = "idle" | "checking" | "preparing" | "ready" | "cleared" | "error" | "unsupported";
+
+type UpdatePlan = {
+  pendingCount: number;
+  pendingBytes: number;
+  skippedCount: number;
+  totalItems: number;
+  expectedBytes: number;
+  hasCache: boolean;
+};
 
 function formatBytes(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(0, Math.round(bytes / 1024))} Ko`;
@@ -12,11 +21,24 @@ function formatBytes(bytes: number) {
 export function OfflineSettings() {
   const [online, setOnline] = useState(true);
   const [state, setState] = useState<OfflineState>("idle");
-  const [progress, setProgress] = useState({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
+  const [progress, setProgress] = useState({
+    completed: 0,
+    total: 0,
+    downloadedBytes: 0,
+    pendingBytes: 0,
+    skippedCount: 0,
+  });
   const [manifestSize, setManifestSize] = useState<number | null>(null);
   const [downloadedBytes, setDownloadedBytes] = useState<number | null>(null);
-  const [cacheStatus, setCacheStatus] = useState<{ cachedAssetBytes: number; expectedBytes: number; missingAssets: number } | null>(null);
+  const [updatePlan, setUpdatePlan] = useState<UpdatePlan | null>(null);
+  const [cacheStatus, setCacheStatus] = useState<{
+    cachedAssetBytes: number;
+    expectedBytes: number;
+    missingAssets: number;
+    skippedCount: number;
+  } | null>(null);
   const [hasCachedContent, setHasCachedContent] = useState(false);
+  const [lastUpToDate, setLastUpToDate] = useState(false);
 
   const checkCachedContent = async () => {
     try {
@@ -38,6 +60,11 @@ export function OfflineSettings() {
     if (sw) sw.postMessage({ type: "GET_CACHE_STATUS" });
   };
 
+  const askUpdatePlan = () => {
+    const sw = navigator.serviceWorker?.controller;
+    if (sw) sw.postMessage({ type: "GET_OFFLINE_UPDATE_PLAN" });
+  };
+
   useEffect(() => {
     setOnline(navigator.onLine);
     void checkCachedContent();
@@ -47,28 +74,49 @@ export function OfflineSettings() {
       return;
     }
 
-    const handleOnline = () => setOnline(true);
+    const handleOnline = () => {
+      setOnline(true);
+      askUpdatePlan();
+    };
     const handleOffline = () => setOnline(false);
     const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === "OFFLINE_CHECK_START") {
+        setState("checking");
+        setLastUpToDate(false);
+      }
+      if (event.data?.type === "OFFLINE_CHECK_DONE") {
+        setProgress((prev) => ({
+          ...prev,
+          total: event.data.pendingCount ?? 0,
+          pendingBytes: event.data.pendingBytes ?? 0,
+          skippedCount: event.data.skippedCount ?? 0,
+        }));
+        setState("preparing");
+      }
       if (event.data?.type === "OFFLINE_PROGRESS") {
         setProgress({
           completed: event.data.completed,
           total: event.data.total,
           downloadedBytes: event.data.downloadedBytes ?? 0,
-          totalBytes: event.data.totalBytes ?? 0,
+          pendingBytes: event.data.pendingBytes ?? 0,
+          skippedCount: event.data.skippedCount ?? 0,
         });
       }
       if (event.data?.type === "OFFLINE_READY") {
         setState("ready");
         setHasCachedContent(true);
+        setLastUpToDate(!!event.data.upToDate);
         if (typeof event.data.downloadedBytes === "number") setDownloadedBytes(event.data.downloadedBytes);
         askCacheStatus();
+        askUpdatePlan();
       }
       if (event.data?.type === "OFFLINE_CLEARED") {
         setState("cleared");
-        setProgress({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
+        setProgress({ completed: 0, total: 0, downloadedBytes: 0, pendingBytes: 0, skippedCount: 0 });
         setDownloadedBytes(null);
+        setUpdatePlan(null);
         setHasCachedContent(false);
+        setLastUpToDate(false);
       }
       if (event.data?.type === "OFFLINE_ERROR") {
         setState("error");
@@ -76,11 +124,22 @@ export function OfflineSettings() {
       if (event.data?.type === "MANIFEST_SIZE") {
         setManifestSize(event.data.totalBytes ?? null);
       }
+      if (event.data?.type === "OFFLINE_UPDATE_PLAN") {
+        setUpdatePlan({
+          pendingCount: event.data.pendingCount ?? 0,
+          pendingBytes: event.data.pendingBytes ?? 0,
+          skippedCount: event.data.skippedCount ?? 0,
+          totalItems: event.data.totalItems ?? 0,
+          expectedBytes: event.data.expectedBytes ?? 0,
+          hasCache: !!event.data.hasCache,
+        });
+      }
       if (event.data?.type === "CACHE_STATUS") {
         setCacheStatus({
           cachedAssetBytes: event.data.cachedAssetBytes ?? 0,
           expectedBytes: event.data.expectedBytes ?? 0,
           missingAssets: event.data.missingAssets ?? 0,
+          skippedCount: event.data.skippedCount ?? 0,
         });
       }
     };
@@ -89,10 +148,10 @@ export function OfflineSettings() {
     window.addEventListener("offline", handleOffline);
     navigator.serviceWorker.addEventListener("message", handleMessage);
 
-    // Ask SW for manifest size once it's ready
     navigator.serviceWorker.ready.then(() => {
       askManifestSize();
       askCacheStatus();
+      askUpdatePlan();
     });
 
     return () => {
@@ -106,8 +165,9 @@ export function OfflineSettings() {
     try {
       if (!("serviceWorker" in navigator)) { setState("unsupported"); return; }
       if (!navigator.onLine) { setState("error"); return; }
-      setState("preparing");
-      setProgress({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
+      setState("checking");
+      setLastUpToDate(false);
+      setProgress({ completed: 0, total: 0, downloadedBytes: 0, pendingBytes: 0, skippedCount: 0 });
       if (navigator.storage?.persist) await navigator.storage.persist().catch(() => false);
       const registration = await navigator.serviceWorker.ready;
       const worker = registration.active ?? navigator.serviceWorker.controller;
@@ -130,19 +190,35 @@ export function OfflineSettings() {
   };
 
   const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
-  const bytesPct = progress.totalBytes > 0 ? Math.min(100, Math.round((progress.downloadedBytes / progress.totalBytes) * 100)) : pct;
-  const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~27 Mo";
+  const bytesDenom = progress.pendingBytes > 0 ? progress.pendingBytes : progress.downloadedBytes;
+  const bytesPct = bytesDenom > 0
+    ? Math.min(100, Math.round((progress.downloadedBytes / bytesDenom) * 100))
+    : pct;
+  const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~215 Mo";
   const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
   const cacheExpectedBytes = cacheStatus?.expectedBytes || manifestSize || 0;
   const cachedAssetBytes = cacheStatus?.cachedAssetBytes ?? 0;
   const cacheSizeMismatch = hasCachedContent && cacheExpectedBytes > 0
-    && (cacheStatus?.missingAssets ? cacheStatus.missingAssets > 0 : false
+    && ((cacheStatus?.missingAssets ?? 0) > 0
       || Math.abs(cachedAssetBytes - cacheExpectedBytes) > 1024);
   const statusDotClass = online
     ? "bg-emerald-500"
     : cacheSizeMismatch
       ? "bg-red-500"
       : "bg-amber-500";
+
+  const pendingCount = updatePlan?.pendingCount ?? 0;
+  const pendingBytes = updatePlan?.pendingBytes ?? 0;
+  const skippedCount = updatePlan?.skippedCount ?? 0;
+  const isUpToDate = hasCachedContent && pendingCount === 0;
+
+  const downloadLabel = !hasCachedContent
+    ? "Tout télécharger"
+    : pendingCount === 0
+      ? "Vérifier les mises à jour"
+      : pendingBytes > 0
+        ? `Mettre à jour (${formatBytes(pendingBytes)})`
+        : `Mettre à jour (${pendingCount} fichiers)`;
 
   return (
     <>
@@ -161,16 +237,25 @@ export function OfflineSettings() {
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-        Télécharge le contenu de l&apos;application ({sizeLabel}) pour pouvoir l&apos;utiliser sans connexion internet, même en déplacement ou sans Wi-Fi.
+        Télécharge le contenu de l&apos;application ({sizeLabel}) pour pouvoir l&apos;utiliser sans connexion internet.
+        {hasCachedContent && skippedCount > 0 && state === "idle" && (
+          <> Seuls les fichiers modifiés sont retéléchargés ({skippedCount} déjà à jour).</>
+        )}
       </p>
 
-      {/* Progress bar during download */}
-      {state === "preparing" && (
+      {state === "checking" && (
+        <p className="mt-4 text-sm text-[var(--color-text-secondary)]" role="status">
+          Vérification des fichiers en cours…
+        </p>
+      )}
+
+      {(state === "preparing" || state === "checking") && progress.total > 0 && state === "preparing" && (
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
             <span>
-              Téléchargement en cours…
+              Téléchargement…
               {progress.downloadedBytes > 0 && ` (${formatBytes(progress.downloadedBytes)})`}
+              {progress.skippedCount > 0 && ` · ${progress.skippedCount} ignorés`}
             </span>
             <span>{bytesPct}%</span>
           </div>
@@ -180,16 +265,13 @@ export function OfflineSettings() {
               style={{ width: `${bytesPct}%` }}
             />
           </div>
-          {progress.total > 0 && (
-            <p className="text-xs text-[var(--color-text-secondary)]">
-              {progress.completed} / {progress.total} fichiers
-            </p>
-          )}
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            {progress.completed} / {progress.total} fichiers à mettre à jour
+          </p>
         </div>
       )}
 
-      {/* Action buttons */}
-      {state !== "preparing" && (
+      {state !== "preparing" && state !== "checking" && (
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             type="button"
@@ -198,7 +280,7 @@ export function OfflineSettings() {
             className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--color-theme)] px-5 text-sm font-semibold text-white transition-opacity disabled:opacity-40"
           >
             <DownloadIcon />
-            {hasCachedContent ? "Mettre à jour" : "Tout télécharger"}
+            {downloadLabel}
           </button>
 
           {hasCachedContent && state !== "cleared" && (
@@ -214,9 +296,19 @@ export function OfflineSettings() {
         </div>
       )}
 
-      {state === "ready" && (
+      {state === "ready" && lastUpToDate && (
         <p className="mt-2 text-sm text-emerald-700" role="status">
-          Application disponible hors connexion.
+          Contenu déjà à jour — aucun fichier retéléchargé.
+        </p>
+      )}
+      {state === "ready" && !lastUpToDate && (
+        <p className="mt-2 text-sm text-emerald-700" role="status">
+          Mise à jour terminée{downloadedBytes ? ` (${formatBytes(downloadedBytes)} téléchargés)` : ""}.
+        </p>
+      )}
+      {state === "idle" && isUpToDate && (
+        <p className="mt-2 text-sm text-emerald-700" role="status">
+          Application disponible hors connexion — tout est à jour.
         </p>
       )}
       {state === "cleared" && (

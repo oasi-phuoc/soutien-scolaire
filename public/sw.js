@@ -1,4 +1,4 @@
-const CACHE_VERSION = "learnup-offline-v4";
+const CACHE_VERSION = "learnup-offline-v5";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const OFFLINE_META_URL = "/__learnup-offline-meta";
@@ -33,21 +33,31 @@ function normalizeAssetEntries(manifest) {
   return (manifest.assets || []).map((url) => ({ url, size: 0, revision: null }));
 }
 
+function routeMetaKey(url) {
+  return `route:${url}`;
+}
+
 async function readOfflineMeta(cache) {
   const response = await cache.match(OFFLINE_META_URL);
-  if (!response) return { assets: {} };
+  if (!response) return { assets: {}, manifestVersion: null };
   try {
     const meta = await response.json();
-    return { assets: meta.assets || {} };
+    return {
+      assets: meta.assets || {},
+      manifestVersion: meta.manifestVersion ?? null,
+    };
   } catch {
-    return { assets: {} };
+    return { assets: {}, manifestVersion: null };
   }
 }
 
 async function writeOfflineMeta(cache, meta) {
   await cache.put(
     OFFLINE_META_URL,
-    new Response(JSON.stringify({ assets: meta.assets || {} }), {
+    new Response(JSON.stringify({
+      assets: meta.assets || {},
+      manifestVersion: meta.manifestVersion ?? null,
+    }), {
       headers: { "Content-Type": "application/json" },
     }),
   );
@@ -121,20 +131,85 @@ async function cacheUrlWithLinkedAssets(cache, url) {
   return bytes;
 }
 
-async function cacheManifestAssetIfNeeded(cache, entry, meta) {
+async function assetIsCurrent(cache, entry, meta) {
   const cached = await cache.match(entry.url);
-  const currentRevision = meta.assets?.[entry.url];
-  if (cached && entry.revision && currentRevision === entry.revision) {
-    return { bytes: 0, skipped: true };
+  if (!cached) return false;
+
+  const storedRevision = meta.assets?.[entry.url];
+  if (!entry.revision || storedRevision !== entry.revision) return false;
+
+  if (entry.size > 0) {
+    const cachedSize = await responseBytes(cached);
+    if (cachedSize !== entry.size) return false;
   }
 
+  return true;
+}
+
+async function routeIsCurrent(cache, url, manifestVersion, meta) {
+  const cached = await cache.match(url);
+  if (!cached) return false;
+  if (meta.manifestVersion !== manifestVersion) return false;
+  return meta.assets?.[routeMetaKey(url)] === "ok";
+}
+
+async function analyzeOfflinePlan(cache, manifest) {
+  const meta = await readOfflineMeta(cache);
+  const assetEntries = normalizeAssetEntries(manifest);
+  const routeUrls = manifest.routes || [];
+  const routes = [...new Set([...APP_ROUTES, ...routeUrls])];
+  const manifestVersion = manifest.version || 0;
+
+  const routesToUpdate = [];
+  const assetsToUpdate = [];
+  let pendingBytes = 0;
+  let skippedCount = 0;
+
+  for (const url of routes) {
+    if (await routeIsCurrent(cache, url, manifestVersion, meta)) {
+      skippedCount += 1;
+      continue;
+    }
+    routesToUpdate.push(url);
+  }
+
+  for (const entry of assetEntries) {
+    if (await assetIsCurrent(cache, entry, meta)) {
+      skippedCount += 1;
+      continue;
+    }
+    assetsToUpdate.push(entry);
+    pendingBytes += entry.size || 0;
+  }
+
+  return {
+    meta,
+    manifestVersion,
+    routesToUpdate,
+    assetsToUpdate,
+    pendingBytes,
+    skippedCount,
+    totalWork: routesToUpdate.length + assetsToUpdate.length,
+    totalItems: routes.length + assetEntries.length,
+    expectedBytes: manifest.totalBytes || 0,
+  };
+}
+
+async function cacheManifestAsset(cache, entry, meta) {
   const response = await fetch(entry.url, { credentials: "include", cache: "reload" });
-  if (!canStore(response)) return { bytes: 0, skipped: false };
+  if (!canStore(response)) return 0;
 
   const bytes = await responseBytes(response);
   await cache.put(entry.url, response.clone());
   meta.assets[entry.url] = entry.revision || `${bytes}`;
-  return { bytes, skipped: false };
+  return bytes;
+}
+
+async function cacheRoute(cache, url, manifestVersion, meta) {
+  const bytes = await cacheUrlWithLinkedAssets(cache, url);
+  meta.assets[routeMetaKey(url)] = "ok";
+  meta.manifestVersion = manifestVersion;
+  return bytes;
 }
 
 self.addEventListener("install", (event) => {
@@ -214,59 +289,139 @@ async function notifyClients(message) {
   clients.forEach((client) => client.postMessage(message));
 }
 
+async function buildUpdatePlan() {
+  const manifestRes = await fetch("/offline-manifest.json", { cache: "no-store" });
+  const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
+  const cache = await caches.open(CORE_CACHE);
+  const plan = await analyzeOfflinePlan(cache, manifest);
+  return { manifest, plan };
+}
+
 self.addEventListener("message", (event) => {
   if (event.data?.type === "PREPARE_OFFLINE") {
     event.waitUntil((async () => {
       try {
-        // Fetch the asset manifest
-        const manifestRes = await fetch("/offline-manifest.json");
-        const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
-        const assetEntries = normalizeAssetEntries(manifest);
-        const routeUrls = manifest.routes || [];
+        await notifyClients({ type: "OFFLINE_CHECK_START" });
 
-        const routes = [...new Set([...APP_ROUTES, ...routeUrls])];
+        const { manifest, plan } = await buildUpdatePlan();
+        const {
+          meta,
+          manifestVersion,
+          routesToUpdate,
+          assetsToUpdate,
+          pendingBytes,
+          skippedCount,
+          totalWork,
+          totalItems,
+          expectedBytes,
+        } = plan;
+
+        await notifyClients({
+          type: "OFFLINE_CHECK_DONE",
+          pendingCount: totalWork,
+          pendingBytes,
+          skippedCount,
+          totalItems,
+          expectedBytes,
+        });
+
+        if (totalWork === 0) {
+          meta.manifestVersion = manifestVersion;
+          await writeOfflineMeta(await caches.open(CORE_CACHE), meta);
+          await notifyClients({
+            type: "OFFLINE_READY",
+            downloadedBytes: 0,
+            totalBytes: expectedBytes,
+            skippedCount,
+            upToDate: true,
+          });
+          return;
+        }
+
         const cache = await caches.open(CORE_CACHE);
-        const meta = await readOfflineMeta(cache);
         let completed = 0;
         let downloadedBytes = 0;
-        const total = routes.length + assetEntries.length;
-        const totalBytes = manifest.totalBytes || 0;
-
-        // Download routes first so all app screens are available offline.
         const BATCH = 6;
-        for (let i = 0; i < routes.length; i += BATCH) {
-          const batch = routes.slice(i, i + BATCH);
+
+        for (let i = 0; i < routesToUpdate.length; i += BATCH) {
+          const batch = routesToUpdate.slice(i, i + BATCH);
           await Promise.all(batch.map(async (url) => {
             try {
-              downloadedBytes += await cacheUrlWithLinkedAssets(cache, url);
+              downloadedBytes += await cacheRoute(cache, url, manifestVersion, meta);
             } catch {
-              // One failed asset must not cancel the whole download
+              // One failed route must not cancel the whole download.
             }
             completed += 1;
-            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total, downloadedBytes, totalBytes });
+            await notifyClients({
+              type: "OFFLINE_PROGRESS",
+              completed,
+              total: totalWork,
+              downloadedBytes,
+              pendingBytes,
+              skippedCount,
+            });
           }));
         }
 
-        // Download or update only changed manifest assets.
-        for (let i = 0; i < assetEntries.length; i += BATCH) {
-          const batch = assetEntries.slice(i, i + BATCH);
+        for (let i = 0; i < assetsToUpdate.length; i += BATCH) {
+          const batch = assetsToUpdate.slice(i, i + BATCH);
           await Promise.all(batch.map(async (entry) => {
             try {
-              const result = await cacheManifestAssetIfNeeded(cache, entry, meta);
-              downloadedBytes += result.bytes;
+              downloadedBytes += await cacheManifestAsset(cache, entry, meta);
             } catch {
-              // One failed asset must not cancel the whole download
+              // One failed asset must not cancel the whole download.
             }
             completed += 1;
-            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total, downloadedBytes, totalBytes });
+            await notifyClients({
+              type: "OFFLINE_PROGRESS",
+              completed,
+              total: totalWork,
+              downloadedBytes,
+              pendingBytes,
+              skippedCount,
+            });
           }));
         }
 
+        meta.manifestVersion = manifestVersion;
         await writeOfflineMeta(cache, meta);
 
-        await notifyClients({ type: "OFFLINE_READY", downloadedBytes, totalBytes });
+        await notifyClients({
+          type: "OFFLINE_READY",
+          downloadedBytes,
+          totalBytes: expectedBytes,
+          skippedCount,
+          upToDate: false,
+        });
       } catch {
         await notifyClients({ type: "OFFLINE_ERROR" });
+      }
+    })());
+  }
+
+  if (event.data?.type === "GET_OFFLINE_UPDATE_PLAN") {
+    event.waitUntil((async () => {
+      try {
+        const { plan } = await buildUpdatePlan();
+        await notifyClients({
+          type: "OFFLINE_UPDATE_PLAN",
+          pendingCount: plan.totalWork,
+          pendingBytes: plan.pendingBytes,
+          skippedCount: plan.skippedCount,
+          totalItems: plan.totalItems,
+          expectedBytes: plan.expectedBytes,
+          hasCache: plan.skippedCount > 0,
+        });
+      } catch {
+        await notifyClients({
+          type: "OFFLINE_UPDATE_PLAN",
+          pendingCount: 0,
+          pendingBytes: 0,
+          skippedCount: 0,
+          totalItems: 0,
+          expectedBytes: 0,
+          hasCache: false,
+        });
       }
     })());
   }
@@ -283,7 +438,7 @@ self.addEventListener("message", (event) => {
   if (event.data?.type === "GET_MANIFEST_SIZE") {
     event.waitUntil((async () => {
       try {
-        const res = await fetch("/offline-manifest.json");
+        const res = await fetch("/offline-manifest.json", { cache: "no-store" });
         const manifest = res.ok ? await res.json() : {};
         await notifyClients({ type: "MANIFEST_SIZE", totalBytes: manifest.totalBytes || 0 });
       } catch {
@@ -295,37 +450,25 @@ self.addEventListener("message", (event) => {
   if (event.data?.type === "GET_CACHE_STATUS") {
     event.waitUntil((async () => {
       try {
-        const res = await fetch("/offline-manifest.json");
-        const manifest = res.ok ? await res.json() : { assets: [] };
-        const assetEntries = normalizeAssetEntries(manifest);
-        const routeUrls = manifest.routes || [];
+        const { manifest, plan } = await buildUpdatePlan();
         const cache = await caches.open(CORE_CACHE);
-        const meta = await readOfflineMeta(cache);
+        const assetEntries = normalizeAssetEntries(manifest);
         let cachedAssetBytes = 0;
-        let missingAssets = 0;
-
-        for (const url of routeUrls) {
-          const response = await cache.match(url);
-          if (!response) {
-            missingAssets += 1;
-          }
-        }
 
         for (const entry of assetEntries) {
           const response = await cache.match(entry.url);
-          const isCurrent = !entry.revision || meta.assets?.[entry.url] === entry.revision;
-          if (!response || !isCurrent) {
-            missingAssets += 1;
-            continue;
+          if (!response) continue;
+          if (await assetIsCurrent(cache, entry, plan.meta)) {
+            cachedAssetBytes += entry.size || await responseBytes(response);
           }
-          cachedAssetBytes += entry.size || await responseBytes(response);
         }
 
         await notifyClients({
           type: "CACHE_STATUS",
           cachedAssetBytes,
-          expectedBytes: manifest.totalBytes || 0,
-          missingAssets,
+          expectedBytes: plan.expectedBytes,
+          missingAssets: plan.totalWork,
+          skippedCount: plan.skippedCount,
         });
       } catch {
         await notifyClients({
@@ -333,6 +476,7 @@ self.addEventListener("message", (event) => {
           cachedAssetBytes: 0,
           expectedBytes: 0,
           missingAssets: 1,
+          skippedCount: 0,
         });
       }
     })());
