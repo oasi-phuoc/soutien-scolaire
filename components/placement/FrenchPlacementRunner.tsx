@@ -209,8 +209,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     : PLACEMENT_LEVEL_LABELS[level];
 
   const introSubtitle = isPlacement
-    ? <PlacementFrenchHelpContent />
-    : `Entraînement ${PLACEMENT_LEVEL_LABELS[level]} — CE → CO → PE → PO. Les résultats ne comptent pas pour le total de placement.`;
+    ? <PlacementFrenchHelpContent mode="placement" />
+    : <PlacementFrenchHelpContent mode="training" level={level} />;
 
   if (step === "intro") {
     return (

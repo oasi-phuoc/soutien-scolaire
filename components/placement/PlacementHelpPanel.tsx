@@ -1,27 +1,60 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import type { PlacementLevel } from "@/lib/placement/types";
 
 const ACCENT = "var(--color-accent-quiz)";
 const SECTION_HEADING = "text-sm font-bold text-[var(--color-text-primary)]";
 
-export function PlacementFrenchHelpContent() {
+const LEVEL_SHORT: Record<PlacementLevel, string> = {
+  base: "A1",
+  moyen: "A2",
+  avance: "B1",
+};
+
+const FOUR_PARTS = (
+  <>
+    <p>Il est organisé en quatre parties :</p>
+    <ul className="list-disc space-y-1 pl-5">
+      <li>compréhension écrite</li>
+      <li>compréhension orale</li>
+      <li>production écrite</li>
+      <li>production orale</li>
+    </ul>
+  </>
+);
+
+export function PlacementFrenchHelpContent({
+  mode = "placement",
+  level = "base",
+  includeTrainingNote = false,
+}: {
+  mode?: "placement" | "training";
+  level?: PlacementLevel;
+  /** Affiche la mention entraînement par niveau (panneau d&apos;aide hub). */
+  includeTrainingNote?: boolean;
+}) {
+  const levelLabel = LEVEL_SHORT[level];
+
   return (
     <div className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-      <p>Il est organisé en quatre parties :</p>
-      <ul className="list-disc space-y-1 pl-5">
-        <li>compréhension écrite</li>
-        <li>compréhension orale</li>
-        <li>production écrite</li>
-        <li>production orale</li>
-      </ul>
-      <p>
-        Le test progressif mélange des exercices des niveaux A1, A2 et B1. Il peut être interrompu après
-        chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
-      </p>
-      <p>
-        L&apos;entraînement par niveau (A1, A2 ou B1) permet de s&apos;exercer sans impacter le score de placement.
-      </p>
+      {FOUR_PARTS}
+      {mode === "placement" ? (
+        <p>
+          Le test progressif mélange des exercices des niveaux A1, A2 et B1. Il peut être interrompu après
+          chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
+        </p>
+      ) : (
+        <p>
+          L&apos;entraînement {levelLabel} propose des exercices de niveau {levelLabel}. Il peut être interrompu
+          après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
+        </p>
+      )}
+      {includeTrainingNote && mode === "placement" && (
+        <p>
+          L&apos;entraînement par niveau (A1, A2 ou B1) permet de s&apos;exercer sans impacter le score de placement.
+        </p>
+      )}
     </div>
   );
 }
@@ -44,7 +77,7 @@ export function PlacementHelpContent() {
 
       <div className="space-y-2">
         <h2 className={SECTION_HEADING}>Test de français</h2>
-        <PlacementFrenchHelpContent />
+        <PlacementFrenchHelpContent includeTrainingNote />
       </div>
     </div>
   );
