@@ -13,13 +13,10 @@ const ACCENT = PLACEMENT_CHART_ACCENT;
 const STEP_W = 62;
 const STEP_H = 22;
 const ZONE_COUNT = PLACEMENT_ZONES.length;
-/** Ligne virtuelle au-dessus de 200 — pointe de flèche à 250 (invisible). */
-const ARROW_TOP_ROW = ZONE_COUNT + 1;
 const VIEW_PAD_L = 8;
 const ARROW_SHIFT = 2 * STEP_W;
 const STEP_ORIGIN = VIEW_PAD_L + ARROW_SHIFT;
 const SCORE_MAX = 200;
-const ARROW_MAX = 250;
 const BASE_Y = 118 + STEP_H;
 const VIEW_TOP = -40;
 const LABEL_ABOVE = 7;
@@ -42,30 +39,32 @@ function treadAt(rowIndex: number) {
   };
 }
 
-function arrowEndsAt(score: number) {
-  const t = score / ARROW_MAX;
+/** Flèche le long du bas de l'escalier — ne traverse pas les libellés. */
+function arrowGeometry() {
   const start = {
-    x: STEP_ORIGIN + 10 - ARROW_SHIFT,
-    y: BASE_Y - STEP_H * 0.55,
+    x: STEP_ORIGIN - ARROW_SHIFT + 8,
+    y: BASE_Y - 6,
   };
-  const end = treadAt(ARROW_TOP_ROW);
-  const endX = end.x + STEP_W - 10;
-  const endY = end.y + STEP_H * 0.45;
+  const cap = treadAt(ZONE_COUNT - 1);
+  const end = {
+    x: cap.x + STEP_W - 8,
+    y: cap.y + STEP_H * 0.72,
+  };
+  return { start, end };
+}
+
+function arrowPointAt(score: number) {
+  const { start, end } = arrowGeometry();
+  const t = Math.min(SCORE_MAX, Math.max(0, score)) / SCORE_MAX;
   return {
-    x: start.x + t * (endX - start.x),
-    y: start.y + t * (endY - start.y),
+    x: start.x + t * (end.x - start.x),
+    y: start.y + t * (end.y - start.y),
   };
 }
 
-/** Point sur la flèche (score 0 → 200 pour le marqueur). */
-function arrowPoint(score: number) {
-  const clamped = Math.min(SCORE_MAX, Math.max(0, score));
-  return arrowEndsAt(clamped);
-}
-
-function chartViewBox(arrowStart: { x: number; y: number }, arrowEnd: { x: number; y: number }) {
-  let minX = Math.min(arrowStart.x, thresholdColCenter(0) - STEP_W / 2);
-  let maxX = arrowEnd.x + 8;
+function chartViewBox() {
+  let minX = STEP_ORIGIN - ARROW_SHIFT;
+  let maxX = STEP_ORIGIN + ZONE_COUNT * STEP_W;
   let minY = VIEW_TOP;
 
   for (let i = 0; i < ZONE_COUNT; i += 1) {
@@ -76,7 +75,7 @@ function chartViewBox(arrowStart: { x: number; y: number }, arrowEnd: { x: numbe
   }
 
   const padX = 8;
-  const maxY = BASE_Y + 20;
+  const maxY = BASE_Y + 16;
   return {
     minX: minX - padX,
     minY,
@@ -86,16 +85,15 @@ function chartViewBox(arrowStart: { x: number; y: number }, arrowEnd: { x: numbe
 }
 
 export function PlacementUnifiedChart({ total }: { total: number }) {
-  const marker = arrowPoint(total);
-  const arrowStart = arrowEndsAt(0);
-  const arrowEnd = arrowEndsAt(ARROW_MAX);
-  const view = chartViewBox(arrowStart, arrowEnd);
+  const marker = arrowPointAt(total);
+  const { start, end } = arrowGeometry();
+  const view = chartViewBox();
 
   return (
     <div className="flex w-full justify-center">
       <svg
         viewBox={`${view.minX} ${view.minY} ${view.width} ${view.height}`}
-        className="block h-auto w-full max-w-full overflow-visible"
+        className="block h-auto w-full max-w-full overflow-hidden"
         preserveAspectRatio="xMidYMid meet"
         aria-hidden
       >
@@ -114,6 +112,18 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
             />
           </marker>
         </defs>
+
+        {/* Flèche derrière les marches */}
+        <line
+          x1={start.x}
+          y1={start.y}
+          x2={end.x}
+          y2={end.y}
+          stroke={PLACEMENT_LINE_STROKE}
+          strokeWidth={3}
+          strokeLinecap="round"
+          markerEnd="url(#placement-arrow-head)"
+        />
 
         {/* Marches zones CSC → CAP */}
         {PLACEMENT_ZONES.map((z, i) => {
@@ -174,18 +184,6 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
             </g>
           );
         })}
-
-        {/* Flèche 0 → 250 (250 invisible, une ligne au-dessus de 200) */}
-        <line
-          x1={arrowStart.x}
-          y1={arrowStart.y}
-          x2={arrowEnd.x}
-          y2={arrowEnd.y}
-          stroke={PLACEMENT_LINE_STROKE}
-          strokeWidth={4}
-          strokeLinecap="round"
-          markerEnd="url(#placement-arrow-head)"
-        />
 
         <circle
           cx={marker.x}
