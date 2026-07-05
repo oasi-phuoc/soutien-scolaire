@@ -11,11 +11,54 @@ type UpdatePlan = {
   totalItems: number;
   expectedBytes: number;
   hasCache: boolean;
+  manifestVersion?: number | null;
+  updatedAt?: number | null;
+};
+
+type OfflineSyncInfo = {
+  manifestVersion: number | null;
+  updatedAt: number | null;
 };
 
 function formatBytes(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(0, Math.round(bytes / 1024))} Ko`;
   return `${(bytes / (1024 * 1024)).toFixed(1).replace(".", ",")} Mo`;
+}
+
+function formatContentVersion(version: number | null): string {
+  if (!version) return "—";
+  const d = new Date(version);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}`;
+}
+
+function formatUpdateDate(ts: number | null): string {
+  if (!ts) return "—";
+  return new Date(ts).toLocaleString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function OfflineSyncDetails({ info }: { info: OfflineSyncInfo }) {
+  if (!info.updatedAt && !info.manifestVersion) return null;
+  return (
+    <div className="mt-2 space-y-0.5 text-xs text-[var(--color-text-secondary)]" role="status">
+      <p>
+        <span className="font-semibold text-[var(--color-text-primary)]">Dernière mise à jour :</span>
+        {" "}
+        {formatUpdateDate(info.updatedAt)}
+      </p>
+      <p>
+        <span className="font-semibold text-[var(--color-text-primary)]">Version du contenu :</span>
+        {" "}
+        {formatContentVersion(info.manifestVersion)}
+      </p>
+    </div>
+  );
 }
 
 export function OfflineSettings() {
@@ -39,6 +82,7 @@ export function OfflineSettings() {
   } | null>(null);
   const [hasCachedContent, setHasCachedContent] = useState(false);
   const [lastUpToDate, setLastUpToDate] = useState(false);
+  const [syncInfo, setSyncInfo] = useState<OfflineSyncInfo>({ manifestVersion: null, updatedAt: null });
 
   const checkCachedContent = async () => {
     try {
@@ -107,6 +151,10 @@ export function OfflineSettings() {
         setHasCachedContent(true);
         setLastUpToDate(!!event.data.upToDate);
         if (typeof event.data.downloadedBytes === "number") setDownloadedBytes(event.data.downloadedBytes);
+        setSyncInfo({
+          manifestVersion: event.data.manifestVersion ?? null,
+          updatedAt: event.data.updatedAt ?? null,
+        });
         askCacheStatus();
         askUpdatePlan();
       }
@@ -117,6 +165,7 @@ export function OfflineSettings() {
         setUpdatePlan(null);
         setHasCachedContent(false);
         setLastUpToDate(false);
+        setSyncInfo({ manifestVersion: null, updatedAt: null });
       }
       if (event.data?.type === "OFFLINE_ERROR") {
         setState("error");
@@ -132,7 +181,15 @@ export function OfflineSettings() {
           totalItems: event.data.totalItems ?? 0,
           expectedBytes: event.data.expectedBytes ?? 0,
           hasCache: !!event.data.hasCache,
+          manifestVersion: event.data.manifestVersion ?? null,
+          updatedAt: event.data.updatedAt ?? null,
         });
+        if (event.data.updatedAt || event.data.manifestVersion) {
+          setSyncInfo({
+            manifestVersion: event.data.manifestVersion ?? null,
+            updatedAt: event.data.updatedAt ?? null,
+          });
+        }
       }
       if (event.data?.type === "CACHE_STATUS") {
         setCacheStatus({
@@ -141,6 +198,12 @@ export function OfflineSettings() {
           missingAssets: event.data.missingAssets ?? 0,
           skippedCount: event.data.skippedCount ?? 0,
         });
+        if (event.data.updatedAt || event.data.manifestVersion) {
+          setSyncInfo({
+            manifestVersion: event.data.manifestVersion ?? null,
+            updatedAt: event.data.updatedAt ?? null,
+          });
+        }
       }
     };
 
@@ -297,19 +360,28 @@ export function OfflineSettings() {
       )}
 
       {state === "ready" && lastUpToDate && (
-        <p className="mt-2 text-sm text-emerald-700" role="status">
-          Contenu déjà à jour — aucun fichier retéléchargé.
-        </p>
+        <div className="mt-2" role="status">
+          <p className="text-sm text-emerald-700">
+            Contenu déjà à jour — aucun fichier retéléchargé.
+          </p>
+          <OfflineSyncDetails info={syncInfo} />
+        </div>
       )}
       {state === "ready" && !lastUpToDate && (
-        <p className="mt-2 text-sm text-emerald-700" role="status">
-          Mise à jour terminée{downloadedBytes ? ` (${formatBytes(downloadedBytes)} téléchargés)` : ""}.
-        </p>
+        <div className="mt-2" role="status">
+          <p className="text-sm text-emerald-700">
+            Mise à jour terminée{downloadedBytes ? ` (${formatBytes(downloadedBytes)} téléchargés)` : ""}.
+          </p>
+          <OfflineSyncDetails info={syncInfo} />
+        </div>
       )}
       {state === "idle" && isUpToDate && (
-        <p className="mt-2 text-sm text-emerald-700" role="status">
-          Application disponible hors connexion — tout est à jour.
-        </p>
+        <div className="mt-2" role="status">
+          <p className="text-sm text-emerald-700">
+            Application disponible hors connexion — tout est à jour.
+          </p>
+          <OfflineSyncDetails info={syncInfo} />
+        </div>
       )}
       {state === "cleared" && (
         <p className="mt-2 text-sm text-[var(--color-text-secondary)]" role="status">

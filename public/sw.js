@@ -39,15 +39,16 @@ function routeMetaKey(url) {
 
 async function readOfflineMeta(cache) {
   const response = await cache.match(OFFLINE_META_URL);
-  if (!response) return { assets: {}, manifestVersion: null };
+  if (!response) return { assets: {}, manifestVersion: null, updatedAt: null };
   try {
     const meta = await response.json();
     return {
       assets: meta.assets || {},
       manifestVersion: meta.manifestVersion ?? null,
+      updatedAt: meta.updatedAt ?? null,
     };
   } catch {
-    return { assets: {}, manifestVersion: null };
+    return { assets: {}, manifestVersion: null, updatedAt: null };
   }
 }
 
@@ -57,10 +58,17 @@ async function writeOfflineMeta(cache, meta) {
     new Response(JSON.stringify({
       assets: meta.assets || {},
       manifestVersion: meta.manifestVersion ?? null,
+      updatedAt: meta.updatedAt ?? null,
     }), {
       headers: { "Content-Type": "application/json" },
     }),
   );
+}
+
+function finalizeOfflineMeta(meta, manifestVersion) {
+  meta.manifestVersion = manifestVersion;
+  meta.updatedAt = Date.now();
+  return meta;
 }
 
 async function responseBytes(response) {
@@ -326,14 +334,17 @@ self.addEventListener("message", (event) => {
         });
 
         if (totalWork === 0) {
-          meta.manifestVersion = manifestVersion;
-          await writeOfflineMeta(await caches.open(CORE_CACHE), meta);
+          finalizeOfflineMeta(meta, manifestVersion);
+          const cache = await caches.open(CORE_CACHE);
+          await writeOfflineMeta(cache, meta);
           await notifyClients({
             type: "OFFLINE_READY",
             downloadedBytes: 0,
             totalBytes: expectedBytes,
             skippedCount,
             upToDate: true,
+            manifestVersion,
+            updatedAt: meta.updatedAt,
           });
           return;
         }
@@ -383,7 +394,7 @@ self.addEventListener("message", (event) => {
           }));
         }
 
-        meta.manifestVersion = manifestVersion;
+        finalizeOfflineMeta(meta, manifestVersion);
         await writeOfflineMeta(cache, meta);
 
         await notifyClients({
@@ -392,6 +403,8 @@ self.addEventListener("message", (event) => {
           totalBytes: expectedBytes,
           skippedCount,
           upToDate: false,
+          manifestVersion,
+          updatedAt: meta.updatedAt,
         });
       } catch {
         await notifyClients({ type: "OFFLINE_ERROR" });
@@ -402,7 +415,7 @@ self.addEventListener("message", (event) => {
   if (event.data?.type === "GET_OFFLINE_UPDATE_PLAN") {
     event.waitUntil((async () => {
       try {
-        const { plan } = await buildUpdatePlan();
+        const { manifest, plan } = await buildUpdatePlan();
         await notifyClients({
           type: "OFFLINE_UPDATE_PLAN",
           pendingCount: plan.totalWork,
@@ -411,6 +424,8 @@ self.addEventListener("message", (event) => {
           totalItems: plan.totalItems,
           expectedBytes: plan.expectedBytes,
           hasCache: plan.skippedCount > 0,
+          manifestVersion: plan.manifestVersion,
+          updatedAt: plan.meta.updatedAt ?? null,
         });
       } catch {
         await notifyClients({
@@ -469,6 +484,8 @@ self.addEventListener("message", (event) => {
           expectedBytes: plan.expectedBytes,
           missingAssets: plan.totalWork,
           skippedCount: plan.skippedCount,
+          manifestVersion: plan.manifestVersion,
+          updatedAt: plan.meta.updatedAt ?? null,
         });
       } catch {
         await notifyClients({
