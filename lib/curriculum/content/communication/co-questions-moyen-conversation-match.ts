@@ -101,4 +101,20 @@ export const CO_CONVERSATION_MATCH: Record<string, COConversationMatchDef> = {
       "Proposer de l'aide",
     ],
   },
+  "moyen-conversation-44": {
+    situations: [
+      "Prendre congé de quelqu'un",
+      "Proposer une sortie",
+      "Donner des indications",
+      "Commander quelque chose",
+      "Présenter quelqu'un",
+      "Refuser une sortie",
+    ],
+    correctByDialogue: [
+      "Commander quelque chose",
+      "Prendre congé de quelqu'un",
+      "Proposer une sortie",
+      "Donner des indications",
+    ],
+  },
 };
