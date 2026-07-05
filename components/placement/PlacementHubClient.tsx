@@ -340,15 +340,6 @@ export function PlacementHubClient() {
           <ScoreColumn title="Français" points={frenchCounted} />
         </div>
 
-        {placementInProgress && placementDraft && (
-          <FrenchProgressBlock
-            draft={placementDraft}
-            title="Test en cours"
-            onReset={() => void resetPlacementDraft()}
-            embedded
-          />
-        )}
-
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
@@ -367,6 +358,15 @@ export function PlacementHubClient() {
             {placementInProgress ? "Reprendre" : frenchDone ? "Refaire français" : "Test français"}
           </button>
         </div>
+
+        {placementInProgress && placementDraft && (
+          <FrenchProgressBlock
+            draft={placementDraft}
+            title="Test en cours"
+            onReset={() => void resetPlacementDraft()}
+            embedded
+          />
+        )}
       </div>
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
