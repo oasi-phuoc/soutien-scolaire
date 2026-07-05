@@ -140,6 +140,18 @@ import { A2_GR_SUBJONCTIF } from "./content/francais/grammaire-r6.5";
 import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
 import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
 import { generatedGrammarExercises } from "./content/francais/generated-grammar-exercises";
+import {
+  applyConjProfile,
+  bumpPoolSizes,
+  buildNegationExercises,
+} from "./content/francais/conj-exercise-builders";
+import {
+  getProfileForLesson,
+  getR2NegationProfile,
+  NEGATION_PASSE_COMPOSE_SLUG,
+  R2_CONJ_SLUGS,
+  TENSE_LESSON_SLUGS,
+} from "./content/francais/conj-lesson-profiles";
 
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
@@ -202,6 +214,40 @@ function addGeneratedExercises<T extends GrammarLesson | ConjLesson>(lesson: T):
   return exercises.length > 0 ? { ...lesson, exercises } : lesson;
 }
 
+/** R6/R7/R8 temps de verbe : pack R2 (8 ex.) + négation (6 ex.), 15 modèles/pool. */
+function augmentTenseLessonExercises<T extends GrammarLesson | ConjLesson>(lesson: T): T {
+  const profile = getProfileForLesson(lesson.slug);
+  if (profile) {
+    return { ...lesson, exercises: applyConjProfile(profile) };
+  }
+  return lesson;
+}
+
+/** R2 : poolSize 15 + bloc négation. Autres conj : poolSize 15 si pools suffisants. */
+function augmentConjLessonExercises(lesson: ConjLesson): ConjLesson {
+  if (TENSE_LESSON_SLUGS.has(lesson.slug)) {
+    return augmentTenseLessonExercises(lesson);
+  }
+  if (lesson.slug === NEGATION_PASSE_COMPOSE_SLUG) {
+    return { ...lesson, exercises: bumpPoolSizes(lesson.exercises) };
+  }
+  if (R2_CONJ_SLUGS.has(lesson.slug)) {
+    const negProfile = getR2NegationProfile(lesson.slug);
+    const base = bumpPoolSizes(lesson.exercises);
+    const neg = negProfile ? buildNegationExercises({ ...negProfile, negation: true }) : [];
+    return { ...lesson, exercises: [...base, ...neg] };
+  }
+  return { ...lesson, exercises: bumpPoolSizes(lesson.exercises) };
+}
+
+/** Grammaire R6/R7/R8 (temps de verbe) : même traitement que conjugaison. */
+function augmentGrammarLessonExercises(lesson: GrammarLesson): GrammarLesson {
+  if (TENSE_LESSON_SLUGS.has(lesson.slug)) {
+    return augmentTenseLessonExercises(lesson);
+  }
+  return lesson;
+}
+
 const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
   A1_GR_CEST,
@@ -245,7 +291,8 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
 
 export const GRAMMAR_LESSONS: GrammarLesson[] = BASE_GRAMMAR_LESSONS
   .map(applyReorganizedCode)
-  .map(addGeneratedExercises);
+  .map(addGeneratedExercises)
+  .map(augmentGrammarLessonExercises);
 
 // ── Registre — conjugaison ────────────────────────────────────────────────────
 
@@ -273,7 +320,8 @@ const BASE_CONJUGAISON_LESSONS: ConjLesson[] = [
 
 export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
   .map(applyReorganizedCode)
-  .map(addGeneratedExercises);
+  .map(addGeneratedExercises)
+  .map(augmentConjLessonExercises);
 
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 
@@ -293,7 +341,7 @@ export function getAllGrammarLessons(): GrammarLesson[] {
 export function getConjLesson(slug: string): ConjLesson | undefined {
   const lesson = CONJUGAISON_LESSONS.find((l) => l.slug === slug);
   if (!lesson) return undefined;
-  if (lesson.code.startsWith("R1.") || lesson.code.startsWith("R2.")) {
+  if (lesson.code.startsWith("R1.") || lesson.code.startsWith("R2.") || lesson.code.startsWith("R6.") || lesson.code.startsWith("R7.") || lesson.code.startsWith("R8.")) {
     return { ...lesson, evalExercises: lesson.exercises };
   }
   return lesson;
