@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { imageSourceFor } from "@/lib/curriculum/word-image-resolver";
 import {
+  coGroupsByLevelCategory,
   randomCoGroup,
   randomCoGroupInRange,
   type COAudioCategory,
@@ -117,6 +118,21 @@ function audioLevelFor(level: COLevel): COAudioLevel {
   return "base";
 }
 
+function makeBaseConversationPart(
+  part: Omit<COPart, "audioGroup" | "questions">,
+  seed: number,
+): COPart {
+  const groups = coGroupsByLevelCategory("base", "conversation").sort(
+    (a, b) => Number(a.activity) - Number(b.activity),
+  );
+  const questions = groups.flatMap((group) => getCoPartQuestions(group, 1, `${seed}-conv-${group.activity}`));
+  return {
+    ...part,
+    audioGroup: groups[0]!,
+    questions,
+  };
+}
+
 function makeParts(level: COLevel, seed: number): COPart[] {
   if (level === "avance") {
     return ADVANCED_PART_INFO.map((part) => {
@@ -140,6 +156,9 @@ function makeParts(level: COLevel, seed: number): COPart[] {
 
   const audioLevel = audioLevelFor(level);
   return partInfoFor(level).map((part) => {
+    if (level === "base" && part.id === "conversation") {
+      return makeBaseConversationPart(part, seed);
+    }
     const category = ("category" in part ? part.category : part.id) as COAudioCategory;
     const audioGroup = randomCoGroup(audioLevel, category);
     return {
@@ -180,6 +199,9 @@ function normalize(value: string) {
 }
 
 function answerOk(task: QuestionTask, answer: number | string | number[] | boolean[] | null) {
+  if (task.kind === "conversation_image_grid") {
+    return conversationImageGridScore(task, answer) === 1;
+  }
   if (task.kind === "match_grid") {
     if (!Array.isArray(answer) || answer.length !== 4) return false;
     return task.correctByColumn.every((row, col) => answer[col] === row);
@@ -212,8 +234,27 @@ function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, ans
   );
 }
 
+function conversationImageGridScore(
+  task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
+  answer: number | string | number[] | boolean[] | null,
+) {
+  if (!Array.isArray(answer) || answer.length !== 6) return 0;
+  return task.correctByCard.every((expected, index) => answer[index] === expected) ? 1 : 0;
+}
+
 function scorePart(part: COPart, answers: Answers) {
   if (!part.questions.length) return 0;
+  const isConversationImageGrid = part.questions.every((question) => question.kind === "conversation_image_grid");
+  if (isConversationImageGrid) {
+    return part.questions.reduce(
+      (sum, question, index) =>
+        sum +
+        (question.kind === "conversation_image_grid"
+          ? conversationImageGridScore(question, answers[`${part.id}-${index}`] ?? null)
+          : 0),
+      0,
+    );
+  }
   const single = part.questions[0]!;
   const key = `${part.id}-0`;
   if (part.questions.length === 1 && single.kind === "match_grid") {
@@ -906,6 +947,83 @@ function MatchGridQuestionView({
   );
 }
 
+function ConversationImageGridQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "conversation_image_grid" }>;
+  value: number | string | number[] | boolean[] | null;
+  onChange: (value: number[]) => void;
+  correction?: boolean;
+}) {
+  const selected: number[] =
+    Array.isArray(value) && value.length === 6 && value.every((entry) => typeof entry === "number")
+      ? (value as number[])
+      : [0, 0, 0, 0, 0, 0];
+
+  function setCard(cardIndex: number, raw: string) {
+    if (correction) return;
+    const nextValue = raw === "" ? 0 : Number.parseInt(raw, 10);
+    const next = [...selected];
+    if (nextValue >= 1 && nextValue <= 4) {
+      for (let i = 0; i < next.length; i++) {
+        if (i !== cardIndex && next[i] === nextValue) next[i] = 0;
+      }
+    }
+    next[cardIndex] = nextValue;
+    onChange(next);
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {task.cards.map((card, index) => {
+        const current = selected[index] ?? 0;
+        const expected = task.correctByCard[index] ?? 0;
+        const correct = correction && current === expected;
+        const wrong = correction && current !== expected;
+        return (
+          <div
+            key={card.suffix}
+            className={`overflow-hidden rounded-xl border-2 bg-white ${
+              correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
+            }`}
+          >
+            <ObjectCardImage src={card.image} alt={`Image ${card.suffix}`} />
+            <div className="border-t border-slate-200 p-2">
+              <select
+                value={current > 0 ? String(current) : ""}
+                disabled={correction}
+                onChange={(event) => setCard(index, event.target.value)}
+                aria-label={`Image ${card.suffix} — dialogue`}
+                className={`w-full rounded-md border bg-white px-2 py-1.5 text-sm outline-none transition ${
+                  wrong
+                    ? "border-red-300 text-red-700"
+                    : correct
+                      ? "border-amber-400 text-amber-800"
+                      : "border-slate-300 focus:border-[var(--color-accent-comm)]"
+                }`}
+              >
+                <option value="">—</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              {correction && wrong && (
+                <p className="mt-1 text-center text-xs font-semibold text-amber-700">
+                  {expected > 0 ? `Dialogue ${expected}` : "Aucun dialogue"}
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function RenderQuestion({
   task,
   value,
@@ -917,6 +1035,16 @@ function RenderQuestion({
   onChange: (value: number | string | number[] | boolean[]) => void;
   correction?: boolean;
 }) {
+  if (task.kind === "conversation_image_grid") {
+    return (
+      <ConversationImageGridQuestionView
+        task={task}
+        value={value}
+        onChange={(v) => onChange(v)}
+        correction={correction}
+      />
+    );
+  }
   if (task.kind === "match_grid") {
     return (
       <MatchGridQuestionView
@@ -958,6 +1086,8 @@ function QuestionBlock({
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
   const isMatchGrid = part.questions.length === 1 && part.questions[0]!.kind === "match_grid";
   const isObjectPick = part.questions.length === 1 && part.questions[0]!.kind === "object_pick";
+  const isConversationImageGrid =
+    part.questions.length > 0 && part.questions.every((question) => question.kind === "conversation_image_grid");
   const isSingleTask = isMatchGrid || isObjectPick;
 
   return (
@@ -967,7 +1097,9 @@ function QuestionBlock({
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              {isMatchGrid
+              {isConversationImageGrid
+                ? "Écoutez les 4 dialogues de chaque activité, puis associez chaque image au bon numéro."
+                : isMatchGrid
                 ? "Lisez les situations. Écoutez les dialogues puis répondez."
                 : isObjectPick
                   ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
@@ -996,15 +1128,17 @@ function QuestionBlock({
             )}
           </div>
         </div>
-        <div className="space-y-3">
-          <AudioSequencePlayer items={part.audioGroup.items} />
-          {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
-            <div key={item.id} className="whitespace-pre-line border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
-              {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
-              {item.transcript}
-            </div>
-          ) : null)}
-        </div>
+        {!isConversationImageGrid && (
+          <div className="space-y-3">
+            <AudioSequencePlayer items={part.audioGroup.items} />
+            {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
+              <div key={item.id} className="whitespace-pre-line border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+                {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
+                {item.transcript}
+              </div>
+            ) : null)}
+          </div>
+        )}
       </div>
 
       {!part.questions.length && (
@@ -1018,7 +1152,26 @@ function QuestionBlock({
         const answer = answers[key] ?? null;
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
-            {!isSingleTask && (
+            {isConversationImageGrid && question.kind === "conversation_image_grid" && (
+              <div className="space-y-4">
+                <h3 className="text-base font-bold" style={{ color: ACCENT }}>
+                  Activité {index + 1}
+                </h3>
+                <AudioSequencePlayer
+                  items={[
+                    {
+                      id: `base-conversation-${question.activity}`,
+                      level: "base",
+                      category: "conversation",
+                      activity: question.activity,
+                      audio: question.audio,
+                    },
+                  ]}
+                />
+                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
+              </div>
+            )}
+            {!isConversationImageGrid && !isSingleTask && (
               <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
             )}
             {isMatchGrid && question.kind === "match_grid" && (
@@ -1027,7 +1180,7 @@ function QuestionBlock({
             {isObjectPick && question.kind === "object_pick" && (
               <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
             )}
-            <div className={isSingleTask ? "mt-4" : "mt-3"}>
+            <div className={isSingleTask || isConversationImageGrid ? "mt-4" : "mt-3"}>
               <RenderQuestion
                 task={question}
                 value={answer}
@@ -1038,6 +1191,11 @@ function QuestionBlock({
             {readonly && !isSingleTask && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.kind === "fill" ? question.answer : ""}
+              </p>
+            )}
+            {readonly && isConversationImageGrid && question.kind === "conversation_image_grid" && (
+              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
+                Score activité : {formatPoints(conversationImageGridScore(question, answer))} / 1 pt
               </p>
             )}
             {readonly && isMatchGrid && question.kind === "match_grid" && (
