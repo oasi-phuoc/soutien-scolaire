@@ -9,6 +9,7 @@ import { parseSubmissionExercises } from "@/lib/curriculum/content/communication
 import type { ExerciseGrading, TeacherGrading } from "@/lib/curriculum/content/communication/expression-submission-types";
 import { PeExerciseFrame } from "@/components/expression/PeExerciseFrame";
 import { PeGradingRubric, sumGradingTotal } from "@/components/expression/PeGradingRubric";
+import { PeGradingResult } from "@/components/expression/PeGradingResult";
 
 function CorrectedText({ original, corrected }: { original: string; corrected: string }) {
   const before = original.split(/(\s+)/u);
@@ -155,6 +156,12 @@ export function ExpressionSubmissionDetail({
                   exercise={exercise}
                   grading={exerciseGrading.find((entry) => entry.exerciseId === exercise.id)}
                   onChange={updateExerciseGrading}
+                />
+              )}
+              {!isTeacher && item.status === "reviewed" && item.teacher_grading && (
+                <PeGradingResult
+                  exercise={exercise}
+                  grading={item.teacher_grading.exercises.find((entry) => entry.exerciseId === exercise.id)}
                 />
               )}
             </PeExerciseFrame>

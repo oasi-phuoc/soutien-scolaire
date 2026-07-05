@@ -24,6 +24,45 @@ ALTER TABLE public.expression_submissions
     CHECK (teacher_max_points > 0);
 
 -- -----------------------------------------------------------------------------
+-- 1b. Grille détaillée + retour des points (PE moyen A2)
+-- Fichier source : 20260705130000_expression_grading_return.sql
+-- -----------------------------------------------------------------------------
+
+ALTER TABLE public.expression_submissions
+  ADD COLUMN IF NOT EXISTS teacher_grading jsonb;
+
+CREATE OR REPLACE FUNCTION public.sync_expression_teacher_points()
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path = public
+AS $$
+DECLARE
+  rubric_total numeric;
+BEGIN
+  IF NEW.teacher_grading IS NOT NULL AND (NEW.teacher_grading ? 'totalPoints') THEN
+    rubric_total := (NEW.teacher_grading->>'totalPoints')::numeric;
+    IF rubric_total IS NOT NULL THEN
+      IF rubric_total < 0 OR rubric_total > NEW.teacher_max_points THEN
+        RAISE EXCEPTION 'totalPoints hors barème (0–%)', NEW.teacher_max_points;
+      END IF;
+      NEW.teacher_points := rubric_total;
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS expression_submissions_sync_grading ON public.expression_submissions;
+CREATE TRIGGER expression_submissions_sync_grading
+  BEFORE INSERT OR UPDATE OF teacher_grading, teacher_points, teacher_max_points
+  ON public.expression_submissions
+  FOR EACH ROW
+  EXECUTE FUNCTION public.sync_expression_teacher_points();
+
+-- (Réappliquer get_expression_inbox depuis 20260705130000_expression_grading_return.sql
+--  si la boîte de réception doit afficher la note — voir fichier complet.)
+
+-- -----------------------------------------------------------------------------
 -- 2. Test de placement unifié /200
 -- Fichier source : 20260704140000_placement_unified.sql
 -- -----------------------------------------------------------------------------

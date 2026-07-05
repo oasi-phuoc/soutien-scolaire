@@ -18,6 +18,11 @@ function rowSubject(row: ExpressionInboxRow): string {
 function rowPreview(row: ExpressionInboxRow): string {
   if (row.body) return mailboxPreview(row.body);
   if (row.kind === "task") return "Nouveau devoir attribué.";
+  if (row.status === "reviewed" && row.teacher_points != null && row.teacher_max_points) {
+    const score = Number(row.teacher_points).toLocaleString("fr-CH");
+    const result = row.final_result ? ` — ${row.final_result}` : "";
+    return `Note : ${score} / ${row.teacher_max_points} pts${result}`;
+  }
   if (row.status === "reviewed") return "Correction disponible — ouvrez le message pour voir le résultat.";
   if (row.direction === "sent") return "Production envoyée — en attente de correction.";
   return "Production reçue — à corriger.";

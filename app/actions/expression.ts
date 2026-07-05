@@ -23,6 +23,9 @@ export type ExpressionInboxRow = {
   direction: "sent" | "received";
   correspondent_name: string;
   body?: string | null;
+  teacher_points?: number | null;
+  teacher_max_points?: number | null;
+  final_result?: string | null;
 };
 export type TaskMessage = {
   id: string;
@@ -131,6 +134,8 @@ export async function getExpressionInboxAction(): Promise<ExpressionInboxRow[]> 
   const expressionRows = ((data ?? []) as ExpressionInboxRow[]).map((row) => ({
     ...row,
     kind: "expression" as const,
+    teacher_points: row.teacher_points != null ? Number(row.teacher_points) : null,
+    teacher_max_points: row.teacher_max_points != null ? Number(row.teacher_max_points) : null,
   }));
 
   const { data: taskMessages } = await session.supabase
@@ -254,6 +259,7 @@ export async function reviewExpressionAction(input: {
   if (!Number.isFinite(points) || points < 0 || points > 25) {
     return { ok: false, reason: "Les points doivent être compris entre 0 et 25." };
   }
+  const roundedPoints = Math.round(points * 2) / 2;
   const finalResult = input.finalResult.trim();
   if (!finalResult) return { ok: false, reason: "Indiquez le résultat final de l’élève." };
 
@@ -271,10 +277,12 @@ export async function reviewExpressionAction(input: {
     corrected_text: input.correctedText.trim(),
     teacher_comment: input.teacherComment.trim() || null,
     annotations: input.annotations,
-    teacher_points: points,
+    teacher_points: roundedPoints,
     teacher_max_points: 25,
     final_result: finalResult,
-    teacher_grading: input.teacherGrading ?? null,
+    teacher_grading: input.teacherGrading
+      ? { ...input.teacherGrading, totalPoints: roundedPoints }
+      : null,
     status: "reviewed",
     reviewed_at: now,
     updated_at: now,
@@ -302,7 +310,7 @@ export async function reviewExpressionAction(input: {
         const current = sessions[idx]!;
         const updated = {
           ...current,
-          [skill]: points,
+          [skill]: roundedPoints,
           [`${skill}SubmissionId`]: submission.id,
         };
         const nextSessions = sessions.map((s, i) => (i === idx ? updated : s));
