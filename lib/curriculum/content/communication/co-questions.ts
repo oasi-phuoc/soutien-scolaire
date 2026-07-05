@@ -6,6 +6,7 @@ import {
   type COMultiQuestion,
 } from "./co-questions-helpers";
 import { CO_CONVERSATION_MATCH } from "./co-questions-moyen-conversation-match";
+import { buildConversationImageMatch } from "./co-conversation-image-match";
 import { buildObjetPickTask } from "./co-questions-objet-pick";
 import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
 import { CO_QUESTION_POOLS_BASE_OTHER } from "./co-questions-base-other";
@@ -39,6 +40,10 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
   const matchDef = CO_CONVERSATION_MATCH[group.id];
   if (matchDef) {
+    // Nouvelle activité illustrée (grille d'images + listes déroulantes) quand
+    // toutes les situations ont une illustration ; sinon, ancien tableau.
+    const imageMatch = buildConversationImageMatch(matchDef, seed);
+    if (imageMatch) return [imageMatch];
     return [buildConversationMatchGrid(matchDef.situations, matchDef.correctByDialogue, seed)];
   }
   const objetPick = buildObjetPickTask(group.id);

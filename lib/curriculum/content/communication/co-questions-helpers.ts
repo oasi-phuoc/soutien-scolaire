@@ -55,7 +55,21 @@ export type COObjectPickTask = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
-export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask | COObjectPickTask;
+export type COImageMatchCard = {
+  image: string;
+  label: string;
+  /** Numéro du dialogue correspondant (1..N), ou null pour un leurre. */
+  correct: number | null;
+};
+
+export type COImageMatchTask = {
+  kind: "image_match";
+  prompt: string;
+  dialogues: number;
+  cards: COImageMatchCard[];
+};
+
+export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask | COObjectPickTask | COImageMatchTask;
 
 export type RawQ = {
   id: string;
@@ -186,6 +200,18 @@ export function buildConversationMatchGrid(
     columnLabels: ["1", "2", "3", "4"],
     weights: [1.5, 1.5, 2, 2],
     correctByColumn,
+  };
+}
+
+export function buildImageMatchTask(cards: COImageMatchCard[], seed: string, dialogues = 4): COImageMatchTask {
+  const shuffled = seededShuffle(cards, seed);
+  return {
+    kind: "image_match",
+    prompt:
+      `Vous allez entendre ${dialogues} petits dialogues. Sous chaque image, choisissez le numéro du dialogue correspondant. ` +
+      `Attention : il y a ${cards.length} images, mais ${dialogues} dialogues seulement.`,
+    dialogues,
+    cards: shuffled,
   };
 }
 
