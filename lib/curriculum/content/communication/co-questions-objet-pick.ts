@@ -69,6 +69,15 @@ export const CO_OBJET_PICK: Record<string, COObjetPickDef> = {
       { label: "gratin", heard: false },
     ],
   },
+  "base-objet-8": {
+    cards: [
+      { label: "chaise", image: "/vocab/images/V4/chaise.webp", heard: true },
+      { label: "bureau", image: "/vocab/images/V4/bureau.webp", heard: true },
+      { label: "lunettes", image: "/vocab/images/V6/lunettes.webp", heard: false },
+      { label: "médicament", image: "/vocab/images/V8/medicament.webp", heard: true },
+      { label: "ordinateur", heard: true },
+    ],
+  },
 };
 
 export function buildObjetPickTask(groupId: string) {
