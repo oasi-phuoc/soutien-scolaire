@@ -10,23 +10,32 @@ import {
 
 const ACCENT = PLACEMENT_CHART_ACCENT;
 
-const PAD_L = 28;
 const STEP_W = 62;
 const STEP_H = 22;
 const BASE_Y = 118;
+const VIEW_PAD_L = 8;
+const ARROW_SHIFT = 2 * STEP_W;
+const STEP_ORIGIN = VIEW_PAD_L + ARROW_SHIFT;
 const CHART_W = STEP_W * PLACEMENT_ZONES.length;
-const SVG_W = PAD_L + CHART_W + 16;
+const SVG_W = STEP_ORIGIN + CHART_W + 16;
 const SVG_H = BASE_Y + 22;
+const TREAD_LABEL_Y = STEP_H * 0.68;
+const LINE_UP = 14;
 
-const THRESHOLDS = [0, 50, 100, 150, 200];
+const THRESHOLDS = [0, 50, 100, 150];
+
+function arrowEnds() {
+  const x0 = STEP_ORIGIN + 10 - ARROW_SHIFT;
+  const y0 = BASE_Y - STEP_H * 0.55;
+  const x1 = STEP_ORIGIN + CHART_W - 10 - ARROW_SHIFT;
+  const y1 = BASE_Y - PLACEMENT_ZONES.length * STEP_H - STEP_H * 0.45;
+  return { x0, y0, x1, y1 };
+}
 
 /** Point sur la flèche diagonale (score 0 → 200). */
 function arrowPoint(score: number) {
   const t = Math.min(200, Math.max(0, score)) / 200;
-  const x0 = PAD_L + 10;
-  const y0 = BASE_Y - STEP_H * 0.55;
-  const x1 = PAD_L + CHART_W - 10;
-  const y1 = BASE_Y - PLACEMENT_ZONES.length * STEP_H - STEP_H * 0.45;
+  const { x0, y0, x1, y1 } = arrowEnds();
   return {
     x: x0 + t * (x1 - x0),
     y: y0 + t * (y1 - y0),
@@ -35,10 +44,8 @@ function arrowPoint(score: number) {
 
 export function PlacementUnifiedChart({ total }: { total: number }) {
   const marker = arrowPoint(total);
-  const x0 = PAD_L + 10;
-  const y0 = BASE_Y - STEP_H * 0.55;
-  const x1 = PAD_L + CHART_W - 10;
-  const y1 = BASE_Y - PLACEMENT_ZONES.length * STEP_H - STEP_H * 0.45;
+  const { x0, y0, x1, y1 } = arrowEnds();
+  const lastTreadY = BASE_Y - PLACEMENT_ZONES.length * STEP_H;
 
   return (
     <svg
@@ -66,7 +73,7 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
 
       {/* Marches */}
       {PLACEMENT_ZONES.map((z, i) => {
-        const x = PAD_L + i * STEP_W;
+        const x = STEP_ORIGIN + i * STEP_W;
         const y = BASE_Y - (i + 1) * STEP_H;
         return (
           <g key={z.zone}>
@@ -90,21 +97,20 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
               stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
               strokeWidth={1}
             />
-            {/* Seuil sur la marche */}
+            {/* Seuil — colonne à gauche de l'ancienne position */}
             <text
-              x={x + 6}
-              y={y + STEP_H * 0.68}
+              x={STEP_ORIGIN + (i - 1) * STEP_W + 6}
+              y={y + TREAD_LABEL_Y}
               fontSize="11"
               fontWeight="700"
               fill="var(--color-text-secondary)"
             >
               {THRESHOLDS[i]}
             </text>
-            {/* Niveau sous la marche */}
+            {/* Niveau — ancienne position des seuils */}
             <text
-              x={x + STEP_W / 2}
-              y={BASE_Y + 14}
-              textAnchor="middle"
+              x={x + 6}
+              y={y + TREAD_LABEL_Y}
               fontSize="11"
               fontWeight="700"
               fill={PLACEMENT_ZONE_LABEL[z.zone]}
@@ -115,10 +121,10 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
         );
       })}
 
-      {/* Seuil final 200 sur la dernière marche */}
+      {/* Seuil final 200 — une ligne au-dessus */}
       <text
-        x={PAD_L + CHART_W - 4}
-        y={BASE_Y - PLACEMENT_ZONES.length * STEP_H + STEP_H * 0.68}
+        x={STEP_ORIGIN + CHART_W - 4}
+        y={lastTreadY + TREAD_LABEL_Y - LINE_UP}
         textAnchor="end"
         fontSize="11"
         fontWeight="700"
@@ -127,7 +133,7 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
         200
       </text>
 
-      {/* Flèche de progression 0 → 200 */}
+      {/* Flèche de progression 0 → 200 (décalée 2 cases à gauche) */}
       <line
         x1={x0}
         y1={y0}
