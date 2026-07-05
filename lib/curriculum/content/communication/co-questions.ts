@@ -1,9 +1,11 @@
 import type { COAudioGroup } from "./co-audio";
 import {
   buildCoPartQuestions,
+  buildConversationMatchGrid,
   type COQuestionTask,
   type COMultiQuestion,
 } from "./co-questions-helpers";
+import { CO_CONVERSATION_MATCH } from "./co-questions-moyen-conversation-match";
 import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
 import { CO_QUESTION_POOLS_BASE_OTHER } from "./co-questions-base-other";
 import { CO_QUESTION_POOLS_MOYEN } from "./co-questions-moyen";
@@ -16,11 +18,12 @@ export type {
   COMultiQuestion,
   COChoiceTask,
   COFillTask,
+  COMatchGridTask,
   COQuestionTask,
   RawQ,
 } from "./co-questions-helpers";
 
-export { buildPool, buildCoPartQuestions, groupSlug } from "./co-questions-helpers";
+export { buildPool, buildCoPartQuestions, buildConversationMatchGrid, groupSlug } from "./co-questions-helpers";
 
 export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
   ...CO_QUESTION_POOLS_BASE_MESSAGES,
@@ -31,6 +34,10 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
 };
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
+  const matchDef = CO_CONVERSATION_MATCH[group.id];
+  if (matchDef) {
+    return [buildConversationMatchGrid(matchDef.situations, matchDef.correctByDialogue, seed)];
+  }
   const pool = CO_QUESTION_POOLS[group.id] ?? [];
   return buildCoPartQuestions(group, pool, count, seed);
 }

@@ -43,7 +43,7 @@ type AdvancedPartSpec = Omit<COPart, "audioGroup" | "questions"> & {
   activityMin: number;
   activityMax: number;
 };
-type Answers = Record<string, number | string | null>;
+type Answers = Record<string, number | string | number[] | null>;
 
 const ACCENT = "var(--color-accent-comm)";
 const INVERSE = "var(--color-accent-comm-inverse, #f5a623)";
@@ -177,15 +177,31 @@ function normalize(value: string) {
     .trim();
 }
 
-function answerOk(task: QuestionTask, answer: number | string | null) {
+function answerOk(task: QuestionTask, answer: number | string | number[] | null) {
+  if (task.kind === "match_grid") {
+    if (!Array.isArray(answer) || answer.length !== 4) return false;
+    return task.correctByColumn.every((row, col) => answer[col] === row);
+  }
   if (task.kind === "choice") return answer === task.correct;
   const value = normalize(String(answer ?? ""));
   if (!value) return false;
   return [task.answer, ...(task.accept ?? [])].map(normalize).some((expected) => value.includes(expected));
 }
 
+function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, answer: number | string | number[] | null) {
+  if (!Array.isArray(answer) || answer.length !== 4) return 0;
+  return task.weights.reduce(
+    (sum, weight, col) => sum + (answer[col] === task.correctByColumn[col] ? weight : 0),
+    0,
+  );
+}
+
 function scorePart(part: COPart, answers: Answers) {
   if (!part.questions.length) return 0;
+  if (part.questions.length === 1 && part.questions[0]!.kind === "match_grid") {
+    const key = `${part.id}-0`;
+    return matchGridScore(part.questions[0] as Extract<QuestionTask, { kind: "match_grid" }>, answers[key] ?? null);
+  }
   const each = part.points / part.questions.length;
   return part.questions.reduce((sum, question, index) => sum + (answerOk(question, answers[`${part.id}-${index}`] ?? null) ? each : 0), 0);
 }
@@ -595,7 +611,7 @@ function ChoiceQuestionView({
   correction,
 }: {
   task: Extract<QuestionTask, { kind: "choice" }>;
-  value: number | string | null;
+  value: number | string | number[] | null;
   onChange: (value: number) => void;
   correction?: boolean;
 }) {
@@ -629,7 +645,7 @@ function FillQuestionView({
   correction,
 }: {
   task: Extract<QuestionTask, { kind: "fill" }>;
-  value: number | string | null;
+  value: number | string | number[] | null;
   onChange: (value: string) => void;
   correction?: boolean;
 }) {
@@ -651,6 +667,103 @@ function FillQuestionView({
   );
 }
 
+function MatchGridQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "match_grid" }>;
+  value: number | string | number[] | null;
+  onChange: (value: number[]) => void;
+  correction?: boolean;
+}) {
+  const selected = Array.isArray(value) ? value : [-1, -1, -1, -1];
+
+  function toggle(row: number, col: number) {
+    if (correction) return;
+    const next = [...selected];
+    if (next[col] === row) {
+      next[col] = -1;
+      onChange(next);
+      return;
+    }
+    for (let c = 0; c < 4; c++) {
+      if (c !== col && next[c] === row) next[c] = -1;
+    }
+    next[col] = row;
+    onChange(next);
+  }
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[28rem] border-collapse text-sm">
+        <thead>
+          <tr>
+            <th className="border border-slate-200 bg-slate-50 px-3 py-2 text-left font-bold text-[var(--color-text-primary)]">
+              Situation
+            </th>
+            {task.columnLabels.map((label) => (
+              <th
+                key={label}
+                className="border border-slate-200 bg-slate-50 px-3 py-2 text-center font-bold"
+                style={{ color: ACCENT }}
+              >
+                {label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {task.situations.map((situation, row) => (
+            <tr key={situation}>
+              <td className="border border-slate-200 px-3 py-2.5 font-medium text-[var(--color-text-primary)]">
+                {situation}
+              </td>
+              {task.columnLabels.map((label, col) => {
+                const checked = selected[col] === row;
+                const correct = correction && task.correctByColumn[col] === row;
+                const wrong = correction && checked && !correct;
+                return (
+                  <td key={`${row}-${label}`} className="border border-slate-200 px-3 py-2.5 text-center">
+                    <button
+                      type="button"
+                      disabled={correction}
+                      onClick={() => toggle(row, col)}
+                      aria-label={`Associer « ${situation} » au dialogue ${label}`}
+                      className={`mx-auto flex h-7 w-7 items-center justify-center rounded border transition ${
+                        correct
+                          ? "border-amber-400 bg-amber-50 text-amber-700"
+                          : wrong
+                            ? "border-red-300 bg-red-50 text-red-600 line-through"
+                            : checked
+                              ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]"
+                              : "border-slate-300 bg-white text-slate-400 hover:border-[var(--color-accent-comm)]"
+                      }`}
+                    >
+                      {checked || correct ? "✓" : ""}
+                    </button>
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {correction && (
+        <div className="mt-3 space-y-1 text-xs text-[var(--color-text-secondary)]">
+          {task.columnLabels.map((label, col) => (
+            <p key={label}>
+              Dialogue {label} ({formatPoints(task.weights[col]!)} pt) :{" "}
+              <span className="font-semibold text-amber-700">{task.situations[task.correctByColumn[col]!]}</span>
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function RenderQuestion({
   task,
   value,
@@ -658,10 +771,20 @@ function RenderQuestion({
   correction,
 }: {
   task: QuestionTask;
-  value: number | string | null;
-  onChange: (value: number | string) => void;
+  value: number | string | number[] | null;
+  onChange: (value: number | string | number[]) => void;
   correction?: boolean;
 }) {
+  if (task.kind === "match_grid") {
+    return (
+      <MatchGridQuestionView
+        task={task}
+        value={value}
+        onChange={(v) => onChange(v)}
+        correction={correction}
+      />
+    );
+  }
   if (task.kind === "fill") {
     return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
   }
@@ -676,11 +799,12 @@ function QuestionBlock({
 }: {
   part: COPart;
   answers: Answers;
-  onAnswer: (key: string, value: number | string) => void;
+  onAnswer: (key: string, value: number | string | number[]) => void;
   readonly?: boolean;
 }) {
   const [showTranscripts, setShowTranscripts] = useState(false);
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
+  const isMatchGrid = part.questions.length === 1 && part.questions[0]!.kind === "match_grid";
 
   return (
     <div className="space-y-5">
@@ -689,7 +813,9 @@ function QuestionBlock({
           <div>
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              Écoutez l&apos;enregistrement et répondez aux questions.
+              {isMatchGrid
+                ? "Lisez les situations. Écoutez les dialogues puis répondez."
+                : "Écoutez l'enregistrement et répondez aux questions."}
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
@@ -736,8 +862,13 @@ function QuestionBlock({
         const answer = answers[key] ?? null;
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
-            <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
-            <div className="mt-3">
+            {!isMatchGrid && (
+              <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
+            )}
+            {isMatchGrid && question.kind === "match_grid" && (
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
+            )}
+            <div className={isMatchGrid ? "mt-4" : "mt-3"}>
               <RenderQuestion
                 task={question}
                 value={answer}
@@ -745,9 +876,14 @@ function QuestionBlock({
                 correction={readonly}
               />
             </div>
-            {readonly && (
+            {readonly && !isMatchGrid && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.answer}
+                Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.kind === "fill" ? question.answer : ""}
+              </p>
+            )}
+            {readonly && isMatchGrid && question.kind === "match_grid" && (
+              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
+                Score : {formatPoints(matchGridScore(question, answer))} / {formatPoints(part.points)} pts
               </p>
             )}
           </div>

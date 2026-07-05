@@ -32,7 +32,16 @@ export type COFillTask = {
   accept?: string[];
 };
 
-export type COQuestionTask = COChoiceTask | COFillTask;
+export type COMatchGridTask = {
+  kind: "match_grid";
+  prompt: string;
+  situations: string[];
+  columnLabels: [string, string, string, string];
+  weights: [number, number, number, number];
+  correctByColumn: [number, number, number, number];
+};
+
+export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask;
 
 export type RawQ = {
   id: string;
@@ -109,6 +118,35 @@ function multiToTask(q: COMultiQuestion, format: COFormatType): COQuestionTask {
 }
 
 const FORMATS: COFormatType[] = ["text", "image", "fill"];
+
+export function buildConversationMatchGrid(
+  situations: [string, string, string, string, string, string],
+  correctByDialogue: [string, string, string, string],
+  seed: string,
+): COMatchGridTask {
+  const shuffled = seededShuffle(
+    situations.map((label, index) => ({ label, index })),
+    seed,
+  );
+  const shuffledLabels = shuffled.map((entry) => entry.label);
+  const correctByColumn = correctByDialogue.map((label) => shuffledLabels.indexOf(label)) as [
+    number,
+    number,
+    number,
+    number,
+  ];
+
+  return {
+    kind: "match_grid",
+    prompt:
+      "Vous écoutez 4 dialogues. Cochez pour associer chaque dialogue à la situation correspondante. " +
+      "Attention : il y a 6 situations, mais seulement 4 dialogues.",
+    situations: shuffledLabels,
+    columnLabels: ["1", "2", "3", "4"],
+    weights: [1.5, 1.5, 2, 2],
+    correctByColumn,
+  };
+}
 
 export function buildCoPartQuestions(
   group: COAudioGroup,
