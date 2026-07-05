@@ -29,6 +29,7 @@ import {
   type PlacementSkillResult,
 } from "@/lib/placement/types";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
+import { PlacementFrenchHelpContent } from "@/components/placement/PlacementHelpPanel";
 
 const PLACEMENT_ACCENT = "var(--color-accent-quiz)";
 
@@ -208,7 +209,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     : PLACEMENT_LEVEL_LABELS[level];
 
   const introSubtitle = isPlacement
-    ? "Parcours CE → CO → PE → PO (100 points). Exercices tirés des niveaux A1, A2 et B1. Les productions seront envoyées au professeur."
+    ? <PlacementFrenchHelpContent />
     : `Entraînement ${PLACEMENT_LEVEL_LABELS[level]} — CE → CO → PE → PO. Les résultats ne comptent pas pour le total de placement.`;
 
   if (step === "intro") {

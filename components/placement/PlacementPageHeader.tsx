@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { PlacementHelpButton } from "@/components/placement/PlacementHelpPanel";
@@ -50,7 +51,7 @@ export function PlacementPageHeader({
 }: {
   label?: string;
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   backHref?: string;
   onBack?: () => void;
   showHelp?: boolean;
@@ -68,7 +69,7 @@ export function PlacementPageHeader({
         {showHelp && <PlacementHelpButton />}
       </div>
       {subtitle && (
-        <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{subtitle}</p>
+        <div className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{subtitle}</div>
       )}
     </header>
   );

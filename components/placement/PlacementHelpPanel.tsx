@@ -5,6 +5,27 @@ import { useEffect, useId, useRef, useState } from "react";
 const ACCENT = "var(--color-accent-quiz)";
 const SECTION_HEADING = "text-sm font-bold text-[var(--color-text-primary)]";
 
+export function PlacementFrenchHelpContent() {
+  return (
+    <div className="space-y-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+      <p>Il est organisé en quatre parties :</p>
+      <ul className="list-disc space-y-1 pl-5">
+        <li>compréhension écrite</li>
+        <li>compréhension orale</li>
+        <li>production écrite</li>
+        <li>production orale</li>
+      </ul>
+      <p>
+        Le test progressif mélange des exercices des niveaux A1, A2 et B1. Il peut être interrompu après
+        chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
+      </p>
+      <p>
+        L&apos;entraînement par niveau (A1, A2 ou B1) permet de s&apos;exercer sans impacter le score de placement.
+      </p>
+    </div>
+  );
+}
+
 export function PlacementHelpContent() {
   return (
     <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
@@ -23,20 +44,7 @@ export function PlacementHelpContent() {
 
       <div className="space-y-2">
         <h2 className={SECTION_HEADING}>Test de français</h2>
-        <p>Il est organisé en quatre parties :</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>compréhension écrite</li>
-          <li>compréhension orale</li>
-          <li>production écrite</li>
-          <li>production orale</li>
-        </ul>
-        <p>
-          Le test progressif mélange des exercices des niveaux A1, A2 et B1. Il peut être interrompu après
-          chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
-        </p>
-        <p>
-          L&apos;entraînement par niveau (A1, A2 ou B1) permet de s&apos;exercer sans impacter le score de placement.
-        </p>
+        <PlacementFrenchHelpContent />
       </div>
     </div>
   );
