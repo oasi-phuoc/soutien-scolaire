@@ -105,6 +105,15 @@ export const CO_OBJET_PICK: Record<string, COObjetPickDef> = {
       { label: "fruit", image: "/assets/words/img/fruit.webp", heard: false },
     ],
   },
+  "base-objet-12": {
+    cards: [
+      { label: "cadeau", heard: true },
+      { label: "seau", heard: false },
+      { label: "élastique", heard: true },
+      { label: "tapis", image: "/assets/words/img/tapis.webp", heard: false },
+      { label: "haltère", heard: false },
+    ],
+  },
 };
 
 export function buildObjetPickTask(groupId: string) {
