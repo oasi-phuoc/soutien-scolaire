@@ -1500,5 +1500,5 @@ const V9_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["montagne", "mer", "plage", "campagne", "forêt", "rivière", "lac", "colline", "vallée", "désert", "île", "nature", "paysage", "côte", "volcan"].map((word) => [word, landscapeDef]),
   ...["gare", "quai", "guichet", "aller-retour", "départ", "arrivée", "wagon", "contrôleur", "place", "grève", "retard", "correspondance", "voie", "horaire"].map((word) => [word, trainDef]),
   ...["bus", "métro", "tram", "train", "voiture", "vélo", "taxi", "moto", "avion", "bateau", "camion", "scooter", "arrêt", "ticket"].map((word) => [word, transportDef]),
-  ...["ville", "quartier", "centre-ville", "avenue", "marché", "mairie", "hôpital", "magasin", "banque", "parc", "boulangerie", "église"].map((word) => [word, cityDef]),
+  ...["ville", "quartier", "centre-ville", "avenue", "marché", "hôpital", "magasin", "banque", "parc", "boulangerie", "église"].map((word) => [word, cityDef]),
 ]);
