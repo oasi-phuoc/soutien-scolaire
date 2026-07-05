@@ -409,19 +409,24 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
   ...CO_AUDIO_GROUPS_AVANCE,
 ];
 
+import { hashSeedString } from "@/lib/placement/progressive-pick";
+
 export function coGroupsByLevelCategory(level: COLevel, category: COAudioCategory) {
   return CO_AUDIO_GROUPS.filter((entry) => entry.level === level && entry.category === category);
 }
 
-export function randomCoGroup(level: COLevel, category: COAudioCategory) {
+/** Tirage déterministe d'un groupe audio CO (remplace Math.random). */
+export function pickCoGroup(level: COLevel, category: COAudioCategory, seed: string): COAudioGroup {
   const groups = coGroupsByLevelCategory(level, category);
-  return groups[Math.floor(Math.random() * groups.length)] ?? groups[0]!;
+  if (!groups.length) {
+    throw new Error(`pickCoGroup: aucun groupe pour ${level}/${category}`);
+  }
+  const index = hashSeedString(seed) % groups.length;
+  return groups[index]!;
 }
 
-function hashSeed(seed: string): number {
-  let n = 0;
-  for (const char of seed) n += char.charCodeAt(0);
-  return n || 1;
+export function randomCoGroup(level: COLevel, category: COAudioCategory) {
+  return pickCoGroup(level, category, `${Date.now()}-${Math.random()}`);
 }
 
 export function randomCoGroupInRange(
@@ -435,7 +440,7 @@ export function randomCoGroupInRange(
     const n = Number.parseInt(entry.activity, 10);
     return n >= minActivity && n <= maxActivity;
   });
-  if (!groups.length) return randomCoGroup(level, category);
-  const index = hashSeed(seed) % groups.length;
+  if (!groups.length) return pickCoGroup(level, category, seed);
+  const index = hashSeedString(seed) % groups.length;
   return groups[index]!;
 }

@@ -1,4 +1,5 @@
 import { resolveWordImage, isImageableLabel } from "../../word-image-resolver";
+import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -71,20 +72,11 @@ export type RawQ = {
 };
 
 function hashSeed(seed: string): number {
-  let n = 0;
-  for (const char of seed) n += char.charCodeAt(0);
-  return n;
+  return hashSeedString(seed) || 1;
 }
 
 function seededShuffle<T>(items: T[], seed: string): T[] {
-  const arr = [...items];
-  let h = hashSeed(seed) || 1;
-  for (let i = arr.length - 1; i > 0; i--) {
-    h = (h * 1664525 + 1013904223) % 2147483647;
-    const j = h % (i + 1);
-    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
-  }
-  return arr;
+  return shuffleWithSeed(items, seed);
 }
 
 function img(level: string, groupSlug: string, qId: string, suffix: string, label: string): COImageChoice {

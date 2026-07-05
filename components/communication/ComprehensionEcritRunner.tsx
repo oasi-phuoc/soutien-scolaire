@@ -17,7 +17,7 @@ import {
 } from "@/components/communication/CommunicationEvalLayout";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
-import { pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
+import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 
 const TOTAL_SECONDS = 45 * 60;
 
@@ -73,12 +73,6 @@ function levelLabel(level: CELevel) {
   if (level === "moyen") return "Moyen";
   if (level === "avance") return "Avancé";
   return "Base";
-}
-
-function pick<T>(items: T[], seed: string) {
-  let n = 0;
-  for (const char of seed) n += char.charCodeAt(0);
-  return items[n % items.length]!;
 }
 
 function normalize(value: string) {
@@ -560,10 +554,6 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
     (answer + (personIndex % 2 === 0 ? 0 : 0)) as number,
   ]),
 }));
-
-function expandSeries<T>(base: T[], count = 10): T[] {
-  return Array.from({ length: count }, (_, i) => base[i % base.length]!);
-}
 
 // --------------------------------------------------------------------------
 // Contenu A2 authoré pour le niveau MOYEN (CE-2) : textes plus longs, avec
@@ -1158,16 +1148,16 @@ const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
   },
 ];
 
-function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
+function buildParts(level: CELevel, stamp: number): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
-  const orientationPool = level === "base" ? expandSeries(ORIENTATION_TOPICS) : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
-  const emailPool = level === "base" ? expandSeries(EMAIL_SERIES) : level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS;
-  const instructionPool = level === "base" ? expandSeries(INSTRUCTION_SERIES) : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
-  const articlePool = level === "base" ? expandSeries(ARTICLE_SERIES) : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
-  const orientation = pick(orientationPool, `${level}-${stamp}-orientation`);
-  const email = pick(emailPool, `${level}-${stamp}-email`);
-  const instructions = pick(instructionPool, `${level}-${stamp}-instructions`);
-  const article = pick(articlePool, `${level}-${stamp}-article`);
+  const orientationPool = level === "base" ? ORIENTATION_TOPICS : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
+  const emailPool = level === "base" ? EMAIL_SERIES : level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS;
+  const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
+  const articlePool = level === "base" ? ARTICLE_SERIES : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
+  const orientation = pickFromPool(orientationPool, `${level}-${stamp}-orientation`);
+  const email = pickFromPool(emailPool, `${level}-${stamp}-email`);
+  const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
+  const article = pickFromPool(articlePool, `${level}-${stamp}-article`);
 
   return [
     {
@@ -1598,7 +1588,8 @@ export function ComprehensionEcritRunner({
   const router = useRouter();
   const level = levelFromId(lessonId);
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
-  const [seed] = useState(() => placementSeed ?? Date.now());
+  const [localSeed, setLocalSeed] = useState(() => Date.now());
+  const seed = placementSeed ?? localSeed;
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<CEAnswers>({});
   const [validatedIds, setValidatedIds] = useState<string[]>([]);
@@ -1695,7 +1686,20 @@ export function ComprehensionEcritRunner({
 
   return (
     <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
-      {phase === "intro" && <IntroPage level={level} placement={mode === "placement"} onStart={() => { setSecondsLeft(TOTAL_SECONDS); setPhase("exercise"); }} />}
+      {phase === "intro" && (
+        <IntroPage
+          level={level}
+          placement={mode === "placement"}
+          onStart={() => {
+            if (placementSeed == null) setLocalSeed(Date.now());
+            setAnswers({});
+            setValidatedIds([]);
+            setCurrent(0);
+            setSecondsLeft(TOTAL_SECONDS);
+            setPhase("exercise");
+          }}
+        />
+      )}
 
       {phase === "exercise" && activeParts.length > 0 && (
         <div className="space-y-6">
