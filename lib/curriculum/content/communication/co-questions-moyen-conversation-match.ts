@@ -1,3 +1,5 @@
+import { assertConversationMatchDef } from "./co-questions-helpers";
+
 export type COConversationMatchDef = {
   situations: [string, string, string, string, string, string];
   /** Situation correcte pour chaque dialogue (colonnes 1 à 4). */
@@ -91,13 +93,13 @@ export const CO_CONVERSATION_MATCH: Record<string, COConversationMatchDef> = {
       "Se renseigner sur des horaires",
       "Conseiller quelqu'un",
       "Signaler un problème",
-      "Commander quelque chose",
+      "Demander son chemin",
       "Proposer de l'aide",
     ],
     correctByDialogue: [
       "Signaler un problème",
       "Se renseigner sur des horaires",
-      "S'excuser",
+      "Demander son chemin",
       "Proposer de l'aide",
     ],
   },
@@ -214,3 +216,7 @@ export const CO_CONVERSATION_MATCH: Record<string, COConversationMatchDef> = {
     ],
   },
 };
+
+for (const [id, def] of Object.entries(CO_CONVERSATION_MATCH)) {
+  assertConversationMatchDef(def.situations, def.correctByDialogue, id);
+}

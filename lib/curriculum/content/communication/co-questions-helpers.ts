@@ -119,11 +119,38 @@ function multiToTask(q: COMultiQuestion, format: COFormatType): COQuestionTask {
 
 const FORMATS: COFormatType[] = ["text", "image", "fill"];
 
+export function assertConversationMatchDef(
+  situations: readonly string[],
+  correctByDialogue: readonly string[],
+  id?: string,
+) {
+  const prefix = id ? `match grid (${id})` : "match grid";
+  if (situations.length !== 6) {
+    throw new Error(`${prefix}: attendu 6 situations, trouvé ${situations.length}`);
+  }
+  if (correctByDialogue.length !== 4) {
+    throw new Error(`${prefix}: attendu 4 réponses, trouvé ${correctByDialogue.length}`);
+  }
+  const used = new Set(correctByDialogue);
+  if (used.size !== 4) {
+    throw new Error(`${prefix}: les 4 dialogues doivent correspondre à 4 situations distinctes`);
+  }
+  if (correctByDialogue.some((label) => !situations.includes(label))) {
+    throw new Error(`${prefix}: une réponse correcte n'est pas dans la liste des situations`);
+  }
+  const distractorCount = situations.filter((label) => !used.has(label)).length;
+  if (distractorCount !== 2) {
+    throw new Error(`${prefix}: attendu 2 situations leurre, trouvé ${distractorCount}`);
+  }
+}
+
 export function buildConversationMatchGrid(
   situations: [string, string, string, string, string, string],
   correctByDialogue: [string, string, string, string],
   seed: string,
 ): COMatchGridTask {
+  assertConversationMatchDef(situations, correctByDialogue);
+
   const shuffled = seededShuffle(
     situations.map((label, index) => ({ label, index })),
     seed,
