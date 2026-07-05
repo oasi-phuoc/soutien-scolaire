@@ -133,4 +133,20 @@ export const CO_CONVERSATION_MATCH: Record<string, COConversationMatchDef> = {
       "Refuser une sortie",
     ],
   },
+  "moyen-conversation-46": {
+    situations: [
+      "Demander un service",
+      "Donner ses impressions",
+      "Refuser une sortie",
+      "Conseiller quelqu'un",
+      "Proposer une sortie",
+      "Annoncer une nouvelle",
+    ],
+    correctByDialogue: [
+      "Donner ses impressions",
+      "Refuser une sortie",
+      "Annoncer une nouvelle",
+      "Demander un service",
+    ],
+  },
 };
