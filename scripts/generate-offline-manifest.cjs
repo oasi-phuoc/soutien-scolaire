@@ -81,6 +81,16 @@ function communicationRoutes() {
   return routes;
 }
 
+function storyRoutes() {
+  const source = read("lib/curriculum/lecture-data.ts");
+  const block = source.split("export const STORIES")[1]?.split("export function")[0] ?? "";
+  const routes = [];
+  for (const match of block.matchAll(/id:\s*"([^"]+)"/g)) {
+    routes.push(`/lecture/histoires/${match[1]}`);
+  }
+  return routes;
+}
+
 const baseRoutes = [
   "/",
   "/lecture",
@@ -96,7 +106,10 @@ const baseRoutes = [
   "/placement",
   "/placement/mathematiques",
   "/placement/francais",
+  "/placement/francais/entrainement",
   "/placement/statistiques",
+  "/conditions-utilisation",
+  "/avant-propos",
   "/offline.html",
 ];
 
@@ -104,6 +117,7 @@ const routes = unique([
   ...baseRoutes,
   ...mathRoutes(),
   ...lectureRoutes(),
+  ...storyRoutes(),
   ...frenchRoutes(),
   ...communicationRoutes(),
 ]);
