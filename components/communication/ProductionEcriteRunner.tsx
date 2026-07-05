@@ -216,6 +216,16 @@ function CorrectionBlock({ title, children }: { title: string; children: ReactNo
   );
 }
 
+function SampleParagraphs({ text }: { text: string }) {
+  return (
+    <div className="space-y-3">
+      {text.split(/\n\n+/).filter(Boolean).map((paragraph, index) => (
+        <p key={index} className="leading-relaxed">{paragraph}</p>
+      ))}
+    </div>
+  );
+}
+
 function ProgressBar({
   steps,
   current,
@@ -769,7 +779,7 @@ export function ProductionEcriteRunner({
                     <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
                     {shortSample && (
                       <CorrectionBlock title="Proposition de réponse">
-                        <p className="whitespace-pre-wrap">{shortSample}</p>
+                        <SampleParagraphs text={shortSample} />
                       </CorrectionBlock>
                     )}
                   </>
@@ -780,7 +790,7 @@ export function ProductionEcriteRunner({
                     <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
                     {longSample && (
                       <CorrectionBlock title="Proposition de réponse">
-                        <p className="whitespace-pre-wrap">{longSample}</p>
+                        <SampleParagraphs text={longSample} />
                       </CorrectionBlock>
                     )}
                   </>

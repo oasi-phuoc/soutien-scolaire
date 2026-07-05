@@ -955,17 +955,20 @@ function firstSentence(text: string) {
 function buildArgumentationResponse(theme: string, prompt: string, model: ArgumentationThemeModel) {
   const subject = firstSentence(prompt).replace(/^tu\s+/i, "on ");
   const counter = model.counter
-    ? `Contre-argument et réfutation : on peut objecter que ${model.counter.idea}. Cependant, ${model.counter.refutation}.`
+    ? `Certes, ${model.counter.idea}. Toutefois, ${model.counter.refutation}.`
     : "";
 
-  return [
-    `Introduction : ${subject}. Cette question pose la problématique suivante : quelle position adopter face à ce thème dans la vie quotidienne ? À mon avis, ${model.thesis}.`,
-    `Argument 1 : d'abord, ${model.arguments[0].title}. Cela signifie que ${model.arguments[0].explanation}. Par exemple, ${model.arguments[0].example}.`,
-    `Argument 2 : ensuite, ${model.arguments[1].title}. En effet, ${model.arguments[1].explanation}. Par exemple, ${model.arguments[1].example}.`,
-    `Argument 3 : enfin, ${model.arguments[2].title}. Cet aspect est important parce que ${model.arguments[2].explanation}. Par exemple, ${model.arguments[2].example}.`,
-    counter,
-    `Conclusion : pour conclure, le thème « ${theme} » ne doit pas être traité seulement de manière personnelle. Il concerne aussi la vie sociale. C'est pourquoi ${model.conclusion}.`,
-  ].filter(Boolean).join("\n\n");
+  const intro = `${subject.charAt(0).toUpperCase()}${subject.slice(1)} Cette question mérite une réflexion nuancée. À mon avis, ${model.thesis}.`;
+
+  const arg1 = `Tout d'abord, ${model.arguments[0].title}. ${model.arguments[0].explanation.charAt(0).toUpperCase()}${model.arguments[0].explanation.slice(1)} Par exemple, ${model.arguments[0].example}.`;
+
+  const arg2 = `Ensuite, ${model.arguments[1].title}. ${model.arguments[1].explanation.charAt(0).toUpperCase()}${model.arguments[1].explanation.slice(1)} Ainsi, ${model.arguments[1].example.charAt(0).toLowerCase()}${model.arguments[1].example.slice(1)}`;
+
+  const arg3 = `Enfin, ${model.arguments[2].title}. ${model.arguments[2].explanation.charAt(0).toUpperCase()}${model.arguments[2].explanation.slice(1)} Concrètement, ${model.arguments[2].example.charAt(0).toLowerCase()}${model.arguments[2].example.slice(1)}`;
+
+  const conclusion = `Pour conclure, le thème « ${theme} » ne concerne pas seulement la vie individuelle : il touche aussi notre vie en société. C'est pourquoi ${model.conclusion}.`;
+
+  return [intro, arg1, arg2, arg3, counter, conclusion].filter(Boolean).join("\n\n");
 }
 
 export function getArgumentationResponse(theme: string, prompt: string): string {
