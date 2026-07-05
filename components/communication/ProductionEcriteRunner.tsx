@@ -698,15 +698,15 @@ export function ProductionEcriteRunner({
       return (
         <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-28 pt-6">
           <Header level={level} title="En attente de correction" placement={mode === "placement"} />
-          <section className="mt-8 rounded-[var(--radius-lg)] border border-emerald-200 bg-emerald-50/80 p-6 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700">Envoyé au professeur</p>
+          <section className="mt-8 rounded-[var(--radius-lg)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/10 p-6 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--color-accent-comm)]">Envoyé au professeur</p>
             <h2 className="mt-3 text-xl font-bold text-[var(--color-text-primary)]">
               Votre production écrite est en attente de notation.
             </h2>
             <p className="mt-3 text-sm leading-6 text-[var(--color-text-secondary)]">
               Le professeur attribuera les points sur 25 et le résultat final. Vous les verrez dans la messagerie après correction.
             </p>
-            {sendMessage && <p className="mt-4 text-sm font-semibold text-emerald-700">{sendMessage}</p>}
+            {sendMessage && <p className="mt-4 text-sm font-semibold text-[var(--color-accent-comm)]">{sendMessage}</p>}
           </section>
           {mode === "placement" ? (
             <button
