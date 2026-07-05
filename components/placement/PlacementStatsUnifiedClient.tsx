@@ -114,7 +114,7 @@ export function PlacementStatsUnifiedClient() {
                 </p>
               )}
             </div>
-            <div className="mt-4">
+            <div className="mt-4 w-full">
               <PlacementUnifiedChart total={profile.total} />
             </div>
           </div>

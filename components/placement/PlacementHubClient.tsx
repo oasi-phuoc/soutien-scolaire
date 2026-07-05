@@ -413,7 +413,7 @@ export function PlacementHubClient() {
         {pendingFrench > 0 && (
           <p className="mt-2 text-xs" style={{ color: ACCENT }}>{pendingFrench} pts en attente de correction professeur</p>
         )}
-        <div className="mt-4">
+        <div className="mt-4 w-full">
           <PlacementUnifiedChart total={profileTotal} />
         </div>
       </div>
