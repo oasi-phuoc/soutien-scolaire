@@ -25,8 +25,6 @@ const BASE_Y = 118 + 2 * STEP_H;
 const VIEW_TOP = -80;
 const LABEL_ABOVE = 7;
 
-const THRESHOLDS = [0, 50, 100, 150];
-
 const TOP_TREAD_FILL =
   "color-mix(in oklch, var(--color-accent-quiz) 10%, var(--color-bg-secondary))";
 
@@ -77,7 +75,7 @@ function chartViewBox(arrowEnd: { x: number; y: number }) {
   for (let i = 0; i <= TOP_ROW; i += 1) {
     const tread = treadAt(i);
     minX = Math.min(minX, tread.x);
-    if (i < ZONE_COUNT) minX = Math.min(minX, thresholdColCenter(i) - STEP_W / 2);
+    if (i === 0) minX = Math.min(minX, thresholdColCenter(0) - STEP_W / 2);
     maxX = Math.max(maxX, tread.x + STEP_W);
     minY = Math.min(minY, tread.y - LABEL_ABOVE - 10);
   }
@@ -157,17 +155,19 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
                 stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
                 strokeWidth={1}
               />
-              <text
-                x={thresholdColCenter(i)}
-                y={cy}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fontSize="11"
-                fontWeight="700"
-                fill="var(--color-text-secondary)"
-              >
-                {THRESHOLDS[i]}
-              </text>
+              {i === 0 && (
+                <text
+                  x={thresholdColCenter(0)}
+                  y={cy}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontSize="11"
+                  fontWeight="700"
+                  fill="var(--color-text-secondary)"
+                >
+                  0
+                </text>
+              )}
               <text
                 x={cx}
                 y={y - LABEL_ABOVE}
