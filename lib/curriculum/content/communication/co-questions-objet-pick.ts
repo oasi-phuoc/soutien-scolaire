@@ -33,6 +33,15 @@ export const CO_OBJET_PICK: Record<string, COObjetPickDef> = {
       { label: "carte d'identité", heard: true },
     ],
   },
+  "base-objet-4": {
+    cards: [
+      { label: "cahier", image: "/vocab/images/V5/cahier.webp", heard: false },
+      { label: "surligneur", image: "/vocab/images/V5/surligneur.webp", heard: false },
+      { label: "stylo", image: "/vocab/images/V5/stylo.webp", heard: true },
+      { label: "règle", image: "/vocab/images/V5/regle.webp", heard: true },
+      { label: "carte", heard: false },
+    ],
+  },
 };
 
 export function buildObjetPickTask(groupId: string) {
