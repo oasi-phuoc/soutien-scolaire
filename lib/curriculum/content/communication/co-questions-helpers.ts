@@ -70,6 +70,48 @@ export type RawQ = {
   fillA?: string[];
 };
 
+/** Réponses attendues qui sont un prénom, nom de famille, ville, commerce, etc. */
+function isProperNameAnswer(value: string): boolean {
+  const answer = value.trim();
+  if (/^(Le |La |Les |L'|Un |Une |Des |Du |De la )/i.test(answer)) return false;
+  if (/^[A-ZÀ-Ü][a-zà-ü]+ [A-ZÀ-Ü][a-zà-ü]/.test(answer)) return true;
+  if (/^[A-ZÀ-Ü][a-zà-üéèêëïîôùûüç\-']+$/.test(answer)) {
+    const notNames = new Set([
+      "Midi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Nouveau",
+      "Document",
+    ]);
+    if (!notNames.has(answer)) return true;
+  }
+  return false;
+}
+
+/** Questions demandant un nom de personne, ville, commerce, etc. — exclues de CE/CO. */
+export function isExcludedNameQuestion(item: Pick<RawQ, "textQ" | "text" | "textC" | "fill">): boolean {
+  const textQ = item.textQ;
+  const correctChoice = item.text[item.textC] ?? "";
+  const fillAnswer = item.fill;
+
+  if (/^comment s['']appelle/i.test(textQ)) {
+    return isProperNameAnswer(fillAnswer) || isProperNameAnswer(correctChoice);
+  }
+  if (/^quelle ville/i.test(textQ)) return true;
+  if (/^d['']où revient/i.test(textQ)) return true;
+  if (/^qui (laisse|appelle)\b/i.test(textQ)) return true;
+  if (/^qui /i.test(textQ)) {
+    if (isProperNameAnswer(correctChoice) || isProperNameAnswer(fillAnswer)) return true;
+    if (item.text.length > 0 && item.text.every(isProperNameAnswer)) return true;
+  }
+  return false;
+}
+
 function hashSeed(seed: string): number {
   let n = 0;
   for (const char of seed) n += char.charCodeAt(0);
@@ -92,7 +134,7 @@ function img(level: string, groupSlug: string, qId: string, suffix: string, labe
 }
 
 export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMultiQuestion[] {
-  return items.map((item) => ({
+  return items.filter((item) => !isExcludedNameQuestion(item)).map((item) => ({
     id: item.id,
     textQ: item.textQ,
     textChoices: item.text,
@@ -112,7 +154,7 @@ export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMu
 
 function multiToTask(q: COMultiQuestion, format: COFormatType): COQuestionTask {
   if (format === "fill") {
-    return { kind: "fill", prompt: q.fillQ, answer: q.fillAnswer, accept: q.fillAccept };
+    return { kind: "fill", prompt: q.textQ, answer: q.fillAnswer, accept: q.fillAccept };
   }
   if (format === "image") {
     return {

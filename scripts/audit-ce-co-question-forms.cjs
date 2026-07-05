@@ -1,13 +1,5 @@
 /**
- * Audit the question FORMATS available in CE (compréhension écrite) and
- * CO (compréhension orale).
- *
- * Hypothesis being checked:
- *   "Every CE/CO question is normally available in 3 forms — QCM texte,
- *    QCM image, texte à saisir."
- *
- * This script inspects the authored data and reports, per section, how many
- * questions carry all 3 forms vs a single form.
+ * Audit CE/CO question formats and name-question exclusions.
  *
  * Usage:
  *   node scripts/audit-ce-co-question-forms.cjs
@@ -19,7 +11,6 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const commDir = path.join(root, "lib/curriculum/content/communication");
 const outFile = path.join(root, "ref/ce-co-question-forms-audit.md");
 
 function read(rel) {
@@ -30,9 +21,6 @@ function countMatches(src, re) {
   return (src.match(re) || []).length;
 }
 
-// ---------------------------------------------------------------------------
-// CO — pooled questions (RawQ → COMultiQuestion via buildPool)
-// ---------------------------------------------------------------------------
 const CO_POOL_FILES = [
   "co-questions-base-messages.ts",
   "co-questions-base-other.ts",
@@ -41,8 +29,53 @@ const CO_POOL_FILES = [
   "co-questions-avance-extra.ts",
 ];
 
+function isProperNameAnswer(value) {
+  const answer = value.trim();
+  if (/^(Le |La |Les |L'|Un |Une |Des |Du |De la )/i.test(answer)) return false;
+  if (/^[A-ZÀ-Ü][a-zà-ü]+ [A-ZÀ-Ü][a-zà-ü]/.test(answer)) return true;
+  if (/^[A-ZÀ-Ü][a-zà-üéèêëïîôùûüç\-']+$/.test(answer)) {
+    const notNames = new Set([
+      "Midi", "Jeudi", "Vendredi", "Samedi", "Dimanche", "Lundi", "Mardi", "Mercredi", "Nouveau", "Document",
+    ]);
+    if (!notNames.has(answer)) return true;
+  }
+  return false;
+}
+
+function isExcludedNameQuestion(item) {
+  const textQ = item.textQ;
+  const correctChoice = item.choices[item.textC] ?? "";
+  const fillAnswer = item.fill;
+
+  if (/^comment s['']appelle/i.test(textQ)) {
+    return isProperNameAnswer(fillAnswer) || isProperNameAnswer(correctChoice);
+  }
+  if (/^quelle ville/i.test(textQ)) return true;
+  if (/^d['']où revient/i.test(textQ)) return true;
+  if (/^qui (laisse|appelle)\b/i.test(textQ)) return true;
+  if (/^qui /i.test(textQ)) {
+    if (isProperNameAnswer(correctChoice) || isProperNameAnswer(fillAnswer)) return true;
+    if (item.choices.length > 0 && item.choices.every(isProperNameAnswer)) return true;
+  }
+  return false;
+}
+
+function parseCoRawQ(src) {
+  const items = [];
+  const re =
+    /id:\s*"([^"]+)"[^}]*?textQ:\s*"([^"]+)"[^}]*?text:\s*\[([^\]]+)\][^}]*?textC:\s*(\d+)[^}]*?fill:\s*"([^"]+)"/gs;
+  let m;
+  while ((m = re.exec(src))) {
+    const choices = m[3].match(/"([^"]+)"/g).map((s) => s.slice(1, -1));
+    items.push({ id: m[1], textQ: m[2], choices, textC: +m[4], fill: m[5] });
+  }
+  return items;
+}
+
 function auditCoPools() {
   let items = 0;
+  let excluded = 0;
+  const excludedSamples = [];
   let withText = 0;
   let withImage = 0;
   let withFill = 0;
@@ -52,7 +85,7 @@ function auditCoPools() {
 
   for (const file of CO_POOL_FILES) {
     const src = read(`lib/curriculum/content/communication/${file}`);
-    // One RawQ item per `fillQ:` (unique field of RawQ).
+    const parsed = parseCoRawQ(src);
     const ids = [...src.matchAll(/id:\s*"([^"]+)"\s*,\s*textQ:/g)].map((m) => m[1]);
     const textArrays = [...src.matchAll(/\btext:\s*\[([^\]]*)\]/g)].map((m) => m[1]);
     const imgArrays = [...src.matchAll(/\bimg:\s*\[([^\]]*)\]/g)].map((m) => m[1]);
@@ -73,6 +106,11 @@ function auditCoPools() {
         emptyForm++;
         anomalies.push(`${file} · ${ids[i] || `#${i}`} — forme incomplète`);
       }
+      const raw = parsed[i];
+      if (raw && isExcludedNameQuestion(raw)) {
+        excluded++;
+        if (excludedSamples.length < 20) excludedSamples.push(`${file} · ${raw.id} — ${raw.textQ}`);
+      }
     }
 
     if (!(n === textArrays.length && n === imgArrays.length && n === fills.length)) {
@@ -82,12 +120,9 @@ function auditCoPools() {
     }
   }
 
-  return { items, withText, withImage, withFill, imgEqualsText, emptyForm, anomalies };
+  return { items, active: items - excluded, excluded, excludedSamples, withText, withImage, withFill, imgEqualsText, emptyForm, anomalies };
 }
 
-// ---------------------------------------------------------------------------
-// CO — single-format special tasks
-// ---------------------------------------------------------------------------
 function auditCoSpecial() {
   const objet = read("lib/curriculum/content/communication/co-questions-objet-pick.ts");
   const objetGroups = countMatches(objet, /^\s*"[^"]+":\s*\{\s*$/gm);
@@ -96,32 +131,53 @@ function auditCoSpecial() {
   return { objetGroups, matchGroups };
 }
 
-// ---------------------------------------------------------------------------
-// CE — authored questions (single-form each)
-// ---------------------------------------------------------------------------
 function auditCe() {
   const src = read("components/communication/ComprehensionEcritRunner.tsx");
-  // Split into per-question chunks at each `{ prompt: "..."`.
   const chunks = src.split(/\{\s*prompt:\s*"/).slice(1);
   let fill = 0;
   let choiceText = 0;
   let choiceImage = 0;
   let all3 = 0;
+  let excludedName = 0;
+  const excludedSamples = [];
 
   for (const raw of chunks) {
-    // Limit the chunk to a single question object.
     const chunk = raw.slice(0, raw.indexOf("},") >= 0 ? raw.indexOf("},") + 1 : raw.length);
+    const promptMatch = chunk.match(/^([^"]+)"/);
+    const prompt = promptMatch ? promptMatch[1] : "";
+    const answerMatch = chunk.match(/\banswer:\s*"([^"]+)"/);
+    const answer = answerMatch ? answerMatch[1] : "";
+    const choicesMatch = chunk.match(/\bchoices:\s*\[([^\]]*)\]/);
+    const choices = choicesMatch
+      ? [...choicesMatch[1].matchAll(/label:\s*"([^"]+)"/g)].map((m) => m[1])
+      : [];
+    const correctMatch = chunk.match(/\bcorrect:\s*(\d+)/);
+    const correct = correctMatch ? +correctMatch[1] : 0;
+
+    const pseudo = { textQ: prompt, choices, textC: correct, fill: answer };
+    if (isExcludedNameQuestion(pseudo)) {
+      excludedName++;
+      if (excludedSamples.length < 10) excludedSamples.push(prompt);
+    }
+
     const hasChoices = /\bchoices:\s*\[/.test(chunk);
     const hasAnswer = /\banswer:\s*"/.test(chunk);
     const hasImage = /\bimage:\s*true/.test(chunk) || /image:\s*"[^"]+"/.test(chunk);
-    // A question object that offers all three would need choices + answer + image.
     if (hasChoices && hasAnswer && hasImage) all3++;
     else if (hasAnswer && !hasChoices) fill++;
     else if (hasChoices && hasImage) choiceImage++;
     else if (hasChoices) choiceText++;
   }
 
-  return { total: fill + choiceText + choiceImage + all3, fill, choiceText, choiceImage, all3 };
+  return {
+    total: fill + choiceText + choiceImage + all3,
+    fill,
+    choiceText,
+    choiceImage,
+    all3,
+    excludedName,
+    excludedSamples,
+  };
 }
 
 function main() {
@@ -130,56 +186,66 @@ function main() {
   const ce = auditCe();
 
   const coAll3 =
-    pools.items === pools.withText && pools.items === pools.withImage && pools.items === pools.withFill && pools.emptyForm === 0;
+    pools.items === pools.withText &&
+    pools.items === pools.withImage &&
+    pools.items === pools.withFill &&
+    pools.emptyForm === 0;
 
   const lines = [];
   lines.push("# Audit des formes de questions CE / CO");
   lines.push("");
   lines.push(`_Généré par \`scripts/audit-ce-co-question-forms.cjs\` — ${new Date().toISOString().slice(0, 10)}_`);
   lines.push("");
-  lines.push("Hypothèse vérifiée : « chaque question CE/CO existe normalement sous 3 formes — **QCM texte**, **QCM image**, **texte à saisir** ».");
+  lines.push("## Règles appliquées (juillet 2026)");
+  lines.push("");
+  lines.push("1. **Questions nom/prénom/ville/commerce supprimées** — ex. « Qui laisse ce message ? », « Comment s'appelle le bar ? », « Quelle ville… »");
+  lines.push("2. **Texte à saisir** — la consigne affichée est la **question complète** (`textQ`), pas une phrase à trous (`fillQ`). L'élève répond sur un trait pleine largeur.");
+  lines.push("3. **Correction** — le mot attendu doit être **contenu** dans la réponse (`includes` après normalisation).");
   lines.push("");
 
-  lines.push("## Réponse courte");
+  lines.push("## CO — questions de pool");
   lines.push("");
-  lines.push("- **CO (compréhension orale)** : **VRAI** pour les questions de compréhension standard. Chaque question est écrite (`RawQ`) avec les 3 formes ; à l'exécution, `buildCoPartQuestions` en tire **une seule** au hasard par question.");
-  lines.push("  - **Exceptions (mono-forme par nature)** : les tâches `object_pick` (cliquer les objets entendus) et `match_grid` (associer dialogues ⇆ situations).");
-  lines.push(`  - **Nuance** : pour ${pools.imgEqualsText}/${pools.items} questions, la « QCM image » réutilise **les mêmes libellés texte** que la QCM texte (rendus en cadres texte, pas de vraie illustration).`);
-  lines.push("- **CE (compréhension écrite)** : **FAUX**. Chaque question est écrite sous **une seule** forme fixe (QCM texte **ou** QCM image **ou** texte à saisir) — il n'y a pas de structure 3-en-1.");
+  lines.push(`- Questions écrites : **${pools.items}**`);
+  lines.push(`- Questions actives (après exclusion noms) : **${pools.active}**`);
+  lines.push(`- Questions exclues (noms) : **${pools.excluded}**`);
+  lines.push(`- Format saisie : prompt = \`textQ\` (question complète)`);
+  lines.push(`- QCM image identique au QCM texte : **${pools.imgEqualsText}**`);
+  if (pools.excludedSamples.length) {
+    lines.push("");
+    lines.push("Exemples exclus :");
+    for (const s of pools.excludedSamples) lines.push(`- ${s}`);
+  }
   lines.push("");
 
-  lines.push("## CO — questions de pool (`buildPool` / `RawQ`)");
-  lines.push("");
-  lines.push(`- Questions analysées : **${pools.items}**`);
-  lines.push(`- Avec QCM texte (\`text[3]\`) : **${pools.withText}**`);
-  lines.push(`- Avec QCM image (\`img[3]\`) : **${pools.withImage}**`);
-  lines.push(`- Avec texte à saisir (\`fill\`) : **${pools.withFill}**`);
-  lines.push(`- **Les 3 formes présentes pour chaque question : ${coAll3 ? "OUI ✅" : "NON ❌"}**`);
-  lines.push(`- QCM image identique au QCM texte (libellés réutilisés) : **${pools.imgEqualsText}**`);
-  lines.push(`- Formes incomplètes/vides : **${pools.emptyForm}**`);
-  lines.push("");
   lines.push("## CO — tâches spéciales (mono-forme)");
   lines.push("");
-  lines.push(`- Groupes \`object_pick\` : **${special.objetGroups}** (5 cartes image chacun)`);
-  lines.push(`- Groupes \`match_grid\` (association) : **${special.matchGroups}**`);
-  lines.push("");
-  lines.push("## CE — questions écrites (mono-forme)");
-  lines.push("");
-  lines.push(`- Questions analysées : **${ce.total}**`);
-  lines.push(`- QCM texte seul : **${ce.choiceText}**`);
-  lines.push(`- QCM image seul : **${ce.choiceImage}**`);
-  lines.push(`- Texte à saisir seul : **${ce.fill}**`);
-  lines.push(`- Questions offrant les 3 formes : **${ce.all3}**`);
+  lines.push(`- Groupes \`object_pick\` : **${special.objetGroups}**`);
+  lines.push(`- Groupes \`match_grid\` : **${special.matchGroups}**`);
   lines.push("");
 
-  lines.push("## Où c'est défini (preuve dans le code)");
+  lines.push("## CE — questions écrites");
   lines.push("");
-  lines.push("- **CO — 3 formes garanties par le type** `RawQ` (`text[3]` + `img[3]` + `fill` obligatoires) dans `co-questions-helpers.ts` ; conversion via `multiToTask` et choix aléatoire du format dans `buildCoPartQuestions` (`FORMATS = [\"text\", \"image\", \"fill\"]`).");
-  lines.push("- **CE — mono-forme garantie par le type** `RawQuestionTask = Omit<ChoiceTask> | Omit<FillTask>` dans `ComprehensionEcritRunner.tsx` : une question est soit un `choice` (texte **ou** image via `image?`), soit un `fill` — jamais les trois.");
+  lines.push(`- Questions analysées : **${ce.total}**`);
+  lines.push(`- QCM texte : **${ce.choiceText}**`);
+  lines.push(`- QCM image : **${ce.choiceImage}**`);
+  lines.push(`- Texte à saisir : **${ce.fill}**`);
+  lines.push(`- Questions nom encore présentes (devrait être 0) : **${ce.excludedName}**`);
+  if (ce.excludedSamples.length) {
+    lines.push("");
+    lines.push("À retirer :");
+    for (const s of ce.excludedSamples) lines.push(`- ${s}`);
+  }
+  lines.push("");
+
+  lines.push("## Architecture");
+  lines.push("");
+  lines.push("- Filtre noms : `isExcludedNameQuestion()` dans `co-questions-helpers.ts`, appliqué dans `buildPool`.");
+  lines.push("- Prompt saisie CO : `multiToTask(..., \"fill\")` utilise `textQ`.");
+  lines.push("- CE : questions mono-forme dans `ComprehensionEcritRunner.tsx` ; saisie = question + trait `w-full`.");
   lines.push("");
 
   if (pools.anomalies.length) {
-    lines.push("## Anomalies détectées");
+    lines.push("## Anomalies");
     lines.push("");
     for (const a of pools.anomalies) lines.push(`- ${a}`);
     lines.push("");
@@ -189,12 +255,9 @@ function main() {
   fs.writeFileSync(outFile, lines.join("\n"), "utf8");
 
   console.log("== CO pools ==");
-  console.log(`  questions=${pools.items} text=${pools.withText} img=${pools.withImage} fill=${pools.withFill}`);
-  console.log(`  3-formes=${coAll3 ? "OUI" : "NON"} img==text=${pools.imgEqualsText} incomplètes=${pools.emptyForm}`);
-  console.log("== CO special ==");
-  console.log(`  object_pick=${special.objetGroups} match_grid=${special.matchGroups}`);
+  console.log(`  written=${pools.items} active=${pools.active} excluded=${pools.excluded}`);
   console.log("== CE ==");
-  console.log(`  total=${ce.total} texte=${ce.choiceText} image=${ce.choiceImage} saisir=${ce.fill} 3-formes=${ce.all3}`);
+  console.log(`  total=${ce.total} name-left=${ce.excludedName}`);
   console.log(`Report → ${path.relative(root, outFile)}`);
 }
 
