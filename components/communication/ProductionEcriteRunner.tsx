@@ -127,11 +127,9 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   }
   if (isSms) {
     return (
-      <div className="mt-3 rounded-[var(--radius-lg)] bg-slate-100 p-3">
-        <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-white px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)] shadow-sm">
-          {prompt.sourceMessage.from && <p className="mb-1 text-xs font-bold text-[var(--color-accent-fr)]">{prompt.sourceMessage.from}</p>}
-          <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
-        </div>
+      <div className="mt-3 rounded-2xl rounded-bl-sm border border-[var(--color-border-default)] bg-white px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+        {prompt.sourceMessage.from && <p className="mb-1 text-xs font-bold text-[var(--color-accent-fr)]">{prompt.sourceMessage.from}</p>}
+        <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
       </div>
     );
   }
