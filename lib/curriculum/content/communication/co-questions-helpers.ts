@@ -1,4 +1,4 @@
-import { resolveWordImage } from "../../word-image-resolver";
+import { resolveWordImage, isImageableLabel } from "../../word-image-resolver";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -220,7 +220,12 @@ export function buildCoPartQuestions(
   const selected = shuffled.slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    const format = FORMATS[hashSeed(`${seed}-${q.id}-${index}`) % FORMATS.length]!;
+    // The "QCM image" format is only offered when the 3 options are genuinely
+    // illustrable (object, clock/time or price). Otherwise (prénoms, villes,
+    // pays, nombres, dates…) only text and fill formats are used.
+    const imageable = q.imageChoices.every((c) => isImageableLabel(c.label));
+    const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
+    const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);
   });
 }
