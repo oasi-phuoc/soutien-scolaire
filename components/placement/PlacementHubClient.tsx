@@ -48,29 +48,20 @@ function stepIndex(step: PlacementFrenchDraft["step"]) {
   return STEP_ORDER.indexOf(step as FrenchSkill);
 }
 
-function skillScoreLabel(draft: PlacementFrenchDraft, skill: FrenchSkill): string {
+function skillPillState(draft: PlacementFrenchDraft, skill: FrenchSkill): "pending" | "active" | "done" {
   const current = stepIndex(draft.step);
   const idx = STEP_ORDER.indexOf(skill);
 
-  if (skill === "ce") {
-    if (current > idx) return `${draft.ce ?? 0} / 25`;
-    if (draft.step === "ce") return "En cours";
-    return "—";
-  }
-  if (skill === "co") {
-    if (current > idx) return `${draft.co ?? 0} / 25`;
-    if (draft.step === "co") return "En cours";
-    return "—";
-  }
-  if (skill === "pe") {
-    if (draft.peSent) return "En cours de correction";
-    if (draft.step === "pe") return "En cours";
-    return "—";
-  }
-  if (draft.poSent) return "En cours de correction";
-  if (draft.step === "po") return "En cours";
-  return "—";
+  if (current > idx) return "done";
+  if (skill === "pe" && draft.peSent) return "done";
+  if (skill === "po" && draft.poSent) return "done";
+  if (draft.step === skill) return "active";
+  return "pending";
 }
+
+const PILL_RED_LIGHT = "color-mix(in oklch, #dc2626 22%, white)";
+const PILL_RED_DONE = "color-mix(in oklch, #dc2626 68%, #7f1d1d)";
+const PILL_RED_ACTIVE = "#7f1d1d";
 
 function FrenchTestInProgressCard({
   draft,
@@ -82,8 +73,6 @@ function FrenchTestInProgressCard({
   onReset: () => void;
 }) {
   const [confirmReset, setConfirmReset] = useState(false);
-  const activeSkill = draft.step === "recap" ? null : (draft.step as FrenchSkill);
-  const skillFill = "color-mix(in oklch, var(--color-accent-quiz) 14%, white)";
 
   return (
     <>
@@ -98,29 +87,39 @@ function FrenchTestInProgressCard({
             Reset
           </button>
         </div>
-        <div className="mt-3 grid grid-cols-4 gap-2">
-          {STEP_ORDER.map((skill) => (
-            <div
-              key={skill}
-              className={`rounded-[var(--radius-md)] border p-2.5 text-center ${
-                activeSkill === skill
-                  ? "border-[var(--color-accent-quiz)]"
-                  : "border-[var(--color-border-default)]"
-              }`}
-              style={{ background: skillFill }}
-            >
-              <p className={CARD_TITLE} style={{ color: ACCENT }}>{SKILL_HEADERS[skill]}</p>
-              <p
-                className={`mt-1.5 text-sm font-semibold leading-snug ${
-                  activeSkill === skill
-                    ? "text-[var(--color-text-primary)]"
-                    : "text-[var(--color-text-secondary)]"
-                }`}
+        <div className="mt-3 flex items-center justify-center gap-3">
+          {STEP_ORDER.map((skill) => {
+            const state = skillPillState(draft, skill);
+            const pillStyle =
+              state === "pending"
+                ? { background: PILL_RED_LIGHT, color: "#991b1b" }
+                : state === "active"
+                  ? { background: PILL_RED_ACTIVE, color: "#fff" }
+                  : { background: PILL_RED_DONE, color: "#fff" };
+
+            const pill = (
+              <span
+                className="flex h-10 w-10 items-center justify-center rounded-full text-[11px] font-bold"
+                style={pillStyle}
               >
-                {skillScoreLabel(draft, skill)}
-              </p>
-            </div>
-          ))}
+                {SKILL_HEADERS[skill]}
+              </span>
+            );
+
+            if (state === "active") {
+              return (
+                <div
+                  key={skill}
+                  className="rounded-full p-0.5"
+                  style={{ boxShadow: "0 0 0 2px #7f1d1d" }}
+                >
+                  {pill}
+                </div>
+              );
+            }
+
+            return <div key={skill}>{pill}</div>;
+          })}
         </div>
       </div>
 
