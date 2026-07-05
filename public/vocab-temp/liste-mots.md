@@ -4,7 +4,7 @@ Images générées (réalistes, fond blanc, sans texte, **800×600, ratio 4:3, w
 
 Dossier **temporaire** : non branché au résolveur (qui ne scanne que `public/vocab/images` + `public/assets/words/img`). À valider puis promouvoir vers le pool définitif si besoin.
 
-**Total : 281 images, 21 thèmes.**
+**Total : 405 images, 34 thèmes.**
 
 ## Fruits (13)
 
@@ -391,3 +391,192 @@ Dossier **temporaire** : non branché au résolveur (qui ne scanne que `public/v
 | chrysanthème | `chrysantheme.webp` |
 | bleuet | `bleuet.webp` |
 | glycine | `glycine.webp` |
+
+## Instruments de musique (9)
+
+| Mot | Fichier |
+| --- | --- |
+| batterie | `batterie.webp` |
+| harpe | `harpe.webp` |
+| accordéon | `accordeon.webp` |
+| clarinette | `clarinette.webp` |
+| harmonica | `harmonica.webp` |
+| violoncelle | `violoncelle.webp` |
+| tambourin | `tambourin.webp` |
+| maracas | `maracas.webp` |
+| banjo | `banjo.webp` |
+
+## Oiseaux (19)
+
+| Mot | Fichier |
+| --- | --- |
+| moineau | `moineau.webp` |
+| corbeau | `corbeau.webp` |
+| pigeon | `pigeon.webp` |
+| mouette | `mouette.webp` |
+| paon | `paon.webp` |
+| flamant rose | `flamant-rose.webp` |
+| autruche | `autruche.webp` |
+| colombe | `colombe.webp` |
+| mésange | `mesange.webp` |
+| pie | `pie.webp` |
+| cigogne | `cigogne.webp` |
+| toucan | `toucan.webp` |
+| pélican | `pelican.webp` |
+| faucon | `faucon.webp` |
+| colibri | `colibri.webp` |
+| canari | `canari.webp` |
+| oie | `oie.webp` |
+| dinde | `dinde.webp` |
+| hirondelle | `hirondelle.webp` |
+
+## Animaux marins (14)
+
+| Mot | Fichier |
+| --- | --- |
+| méduse | `meduse.webp` |
+| pieuvre | `pieuvre.webp` |
+| crabe | `crabe.webp` |
+| homard | `homard.webp` |
+| crevette | `crevette.webp` |
+| étoile de mer | `etoile-de-mer.webp` |
+| hippocampe | `hippocampe.webp` |
+| raie | `raie.webp` |
+| otarie | `otarie.webp` |
+| tortue de mer | `tortue-de-mer.webp` |
+| corail | `corail.webp` |
+| huître | `huitre.webp` |
+| oursin | `oursin.webp` |
+| morse | `morse.webp` |
+
+## Reptiles et amphibiens (9)
+
+| Mot | Fichier |
+| --- | --- |
+| lézard | `lezard.webp` |
+| caméléon | `cameleon.webp` |
+| iguane | `iguane.webp` |
+| gecko | `gecko.webp` |
+| crapaud | `crapaud.webp` |
+| salamandre | `salamandre.webp` |
+| cobra | `cobra.webp` |
+| python | `python.webp` |
+| dragon de Komodo | `dragon-de-komodo.webp` |
+
+## Desserts et pâtisseries (13)
+
+| Mot | Fichier |
+| --- | --- |
+| muffin | `muffin.webp` |
+| cupcake | `cupcake.webp` |
+| donut | `donut.webp` |
+| brownie | `brownie.webp` |
+| mille-feuille | `mille-feuille.webp` |
+| tiramisu | `tiramisu.webp` |
+| flan | `flan.webp` |
+| cookie | `cookie.webp` |
+| gaufre | `gaufre.webp` |
+| sucette | `sucette.webp` |
+| beignet | `beignet.webp` |
+| madeleine | `madeleine.webp` |
+| meringue | `meringue.webp` |
+
+## Boissons (8)
+
+| Mot | Fichier |
+| --- | --- |
+| soda | `soda.webp` |
+| limonade | `limonade.webp` |
+| milkshake | `milkshake.webp` |
+| chocolat chaud | `chocolat-chaud.webp` |
+| smoothie | `smoothie.webp` |
+| thé glacé | `the-glace.webp` |
+| citronnade | `citronnade.webp` |
+| tisane | `tisane.webp` |
+
+## Articles de toilette (8)
+
+| Mot | Fichier |
+| --- | --- |
+| dentifrice | `dentifrice.webp` |
+| rasoir | `rasoir.webp` |
+| coton-tige | `coton-tige.webp` |
+| papier toilette | `papier-toilette.webp` |
+| brosse à cheveux | `brosse-a-cheveux.webp` |
+| gel douche | `gel-douche.webp` |
+| gant de toilette | `gant-de-toilette.webp` |
+| déodorant | `deodorant.webp` |
+
+## Fournitures de bureau (8)
+
+| Mot | Fichier |
+| --- | --- |
+| trombone | `trombone.webp` |
+| punaise | `punaise.webp` |
+| tampon encreur | `tampon-encreur.webp` |
+| post-it | `post-it.webp` |
+| marqueur | `marqueur.webp` |
+| chemise cartonnée | `chemise-cartonnee.webp` |
+| élastique de bureau | `elastique-de-bureau.webp` |
+| porte-documents | `porte-documents.webp` |
+
+## Formes géométriques (12)
+
+| Mot | Fichier |
+| --- | --- |
+| cercle | `cercle.webp` |
+| carré | `carre.webp` |
+| triangle | `triangle.webp` |
+| rectangle | `rectangle.webp` |
+| losange | `losange.webp` |
+| ovale | `ovale.webp` |
+| pentagone | `pentagone.webp` |
+| hexagone | `hexagone.webp` |
+| sphère | `sphere.webp` |
+| cylindre | `cylindre.webp` |
+| cône | `cone.webp` |
+| pyramide | `pyramide.webp` |
+
+## Espace et astronomie (9)
+
+| Mot | Fichier |
+| --- | --- |
+| planète | `planete.webp` |
+| satellite | `satellite.webp` |
+| comète | `comete.webp` |
+| galaxie | `galaxie.webp` |
+| télescope | `telescope.webp` |
+| station spatiale | `station-spatiale.webp` |
+| astéroïde | `asteroide.webp` |
+| saturne | `saturne.webp` |
+| étoile filante | `etoile-filante.webp` |
+
+## Bâtiments et lieux (7)
+
+| Mot | Fichier |
+| --- | --- |
+| château | `chateau.webp` |
+| pont | `pont.webp` |
+| moulin | `moulin.webp` |
+| gratte-ciel | `gratte-ciel.webp` |
+| grange | `grange.webp` |
+| igloo | `igloo.webp` |
+| stade | `stade.webp` |
+
+## Accessoires (4)
+
+| Mot | Fichier |
+| --- | --- |
+| boucle d'oreille | `boucle-d-oreille.webp` |
+| lunettes de soleil | `lunettes-de-soleil.webp` |
+| couronne | `couronne.webp` |
+| porte-clés | `porte-cles.webp` |
+
+## Météo et ciel (4)
+
+| Mot | Fichier |
+| --- | --- |
+| tornade | `tornade.webp` |
+| tempête | `tempete.webp` |
+| flocon de neige | `flocon-de-neige.webp` |
+| goutte de pluie | `goutte-de-pluie.webp` |
