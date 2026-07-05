@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 
 export type TaskRow = {
@@ -102,6 +103,12 @@ export async function createTaskAction(
     })),
   );
   if (messageErr) return { ok: false, reason: messageErr.message };
+
+  await Promise.all(
+    studentIds.map((studentId) =>
+      supabase.rpc("prune_user_inbox_for", { target_user: studentId, p_max: INBOX_MAX_MESSAGES }),
+    ),
+  );
 
   revalidatePath("/admin/taches");
   revalidatePath("/messagerie");

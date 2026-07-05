@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { WritingLevel, WritingPrompt } from "@/lib/curriculum/content/communication/writing-prompts";
 import type { PlacementMathAttempt } from "@/lib/placement/types";
@@ -21,6 +22,14 @@ export type ExpressionInboxRow = {
   direction: "sent" | "received";
   correspondent_name: string;
   body?: string | null;
+};
+export type TaskMessage = {
+  id: string;
+  title: string;
+  body: string | null;
+  created_at: string;
+  read_at: string | null;
+  sender_name: string;
 };
 export type ExpressionSubmission = {
   id: string;
@@ -50,6 +59,10 @@ async function currentSession() {
   if (!user) return null;
   const { data: role } = await supabase.rpc("get_my_role");
   return { supabase, user, role: String(role ?? "eleve") };
+}
+
+async function pruneInboxForUser(supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseActionClient>>>, userId: string) {
+  await supabase.rpc("prune_user_inbox_for", { target_user: userId, p_max: INBOX_MAX_MESSAGES });
 }
 
 export async function getExpressionTeachersAction(): Promise<TeacherOption[]> {
@@ -103,6 +116,7 @@ export async function submitExpressionAction(input: {
     }
     return { ok: false, reason: error.message };
   }
+  await pruneInboxForUser(session.supabase, session.user.id);
   revalidatePath("/messagerie");
   return { ok: true, submissionId: inserted?.id };
 }
@@ -110,6 +124,7 @@ export async function submitExpressionAction(input: {
 export async function getExpressionInboxAction(): Promise<ExpressionInboxRow[]> {
   const session = await currentSession();
   if (!session) return [];
+  await pruneInboxForUser(session.supabase, session.user.id);
   const { data } = await session.supabase.rpc("get_expression_inbox");
   const expressionRows = ((data ?? []) as ExpressionInboxRow[]).map((row) => ({
     ...row,
@@ -145,9 +160,9 @@ export async function getExpressionInboxAction(): Promise<ExpressionInboxRow[]> 
     };
   });
 
-  return [...expressionRows, ...taskRows].sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-  );
+  return [...expressionRows, ...taskRows]
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, INBOX_MAX_MESSAGES);
 }
 
 export async function getExpressionUnreadCountAction(): Promise<number> {
@@ -173,8 +188,43 @@ export async function openTaskMessageAction(messageId: string) {
       .is("read_at", null);
   }
   revalidatePath("/messagerie");
-  revalidatePath("/");
-  redirect("/");
+  redirect(`/messagerie/${messageId}`);
+}
+
+export async function getTaskMessageAction(id: string): Promise<TaskMessage | null> {
+  const session = await currentSession();
+  if (!session) return null;
+
+  const { data } = await session.supabase
+    .from("task_messages")
+    .select("id, title, body, created_at, read_at, sender_id")
+    .eq("id", id)
+    .eq("student_id", session.user.id)
+    .maybeSingle();
+  if (!data) return null;
+
+  if (!data.read_at) {
+    await session.supabase
+      .from("task_messages")
+      .update({ read_at: new Date().toISOString() })
+      .eq("id", id)
+      .eq("student_id", session.user.id);
+  }
+
+  const { data: profile } = await session.supabase
+    .from("profiles")
+    .select("prenom, nom")
+    .eq("id", data.sender_id as string)
+    .maybeSingle();
+
+  return {
+    id: data.id as string,
+    title: data.title as string,
+    body: (data.body as string | null) ?? null,
+    created_at: data.created_at as string,
+    read_at: (data.read_at as string | null) ?? new Date().toISOString(),
+    sender_name: [profile?.prenom, profile?.nom].filter(Boolean).join(" ") || "Professeur",
+  };
 }
 
 export async function getExpressionSubmissionAction(id: string): Promise<{ item: ExpressionSubmission | null; isTeacher: boolean }> {

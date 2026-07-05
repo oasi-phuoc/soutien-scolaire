@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { OralLevel, OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 export type OralGrammarMatch = {
@@ -68,6 +69,7 @@ export async function submitOralAction(input: {
     }
     return { ok: false, reason: error.message };
   }
+  await supabase.rpc("prune_user_inbox_for", { target_user: user.id, p_max: INBOX_MAX_MESSAGES });
   revalidatePath("/messagerie");
   return { ok: true, submissionId: inserted?.id };
 }
