@@ -241,7 +241,9 @@ export async function getExpressionSubmissionAction(id: string): Promise<{ item:
   if (!data) return { item: null, isTeacher: false };
 
   await session.supabase.rpc("mark_expression_read", { submission: id });
-  return { item: data as ExpressionSubmission, isTeacher: data.teacher_id === session.user.id };
+  const isAssignedTeacher = data.teacher_id === session.user.id;
+  const canCorrect = isAssignedTeacher && ["prof", "admin"].includes(session.role);
+  return { item: data as ExpressionSubmission, isTeacher: canCorrect };
 }
 
 export async function reviewExpressionAction(input: {
