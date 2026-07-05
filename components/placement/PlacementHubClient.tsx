@@ -332,7 +332,7 @@ export function PlacementHubClient() {
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" showHelp />
+      <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" />
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
         <div className="grid grid-cols-2 gap-3 divide-x divide-[var(--color-border-default)]">
