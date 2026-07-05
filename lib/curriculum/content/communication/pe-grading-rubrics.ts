@@ -1,0 +1,95 @@
+import type { ExerciseRubric, PeExerciseKind } from "./expression-submission-types";
+
+export const PE2_EXPERIENCE_RUBRIC: ExerciseRubric = {
+  exerciseKind: "experience",
+  criteria: [
+    {
+      id: "consigne",
+      label: "Respect de la consigne",
+      description: "En adéquation avec la situation proposée et longueur minimale respectée",
+      options: [0, 0.5, 1],
+    },
+    {
+      id: "raconter",
+      label: "Capacité à raconter",
+      description: "Description de l'environnement, des événements, des activités ou des expériences personnelles",
+      options: [0, 1, 2, 3, 4],
+    },
+    {
+      id: "impressions",
+      label: "Capacité à donner ses impressions",
+      description: "Explique pourquoi une chose plaît ou déplaît",
+      options: [0, 0.5, 1, 1.5, 2],
+    },
+    {
+      id: "lexique",
+      label: "Lexique et orthographe",
+      description: "Utilisation variée de mots et d'expressions",
+      options: [0, 0.5, 1, 1.5, 2],
+    },
+    {
+      id: "syntaxe",
+      label: "Syntaxe et grammaire",
+      description: "Utilisation des structures et formes correctes",
+      options: [0, 0.5, 1, 1.5, 2, 2.5],
+    },
+    {
+      id: "coherence",
+      label: "Cohérence et cohésion",
+      description: "Liaison entre les différentes parties",
+      options: [0, 0.5, 1, 1.5],
+    },
+  ],
+};
+
+export const PE2_REPLY_RUBRIC: ExerciseRubric = {
+  exerciseKind: "reply",
+  criteria: [
+    {
+      id: "consigne",
+      label: "Respect de la consigne",
+      description: "En adéquation avec la situation proposée et longueur minimale respectée",
+      options: [0, 0.5, 1],
+    },
+    {
+      id: "salutations",
+      label: "Salutations",
+      description: "Utilisation de formules de politesse et prise de congé",
+      options: [0, 0.5, 1],
+    },
+    {
+      id: "interagir",
+      label: "Capacité à interagir",
+      description: "Expression correcte de remerciements, excuses, propositions, etc.",
+      options: [0, 1, 2, 3, 4],
+    },
+    {
+      id: "lexique",
+      label: "Lexique et orthographe",
+      description: "Utilisation variée de mots et d'expressions",
+      options: [0, 0.5, 1, 1.5, 2],
+    },
+    {
+      id: "syntaxe",
+      label: "Syntaxe et grammaire",
+      description: "Utilisation des structures et formes correctes",
+      options: [0, 0.5, 1, 1.5, 2, 2.5],
+    },
+    {
+      id: "coherence",
+      label: "Cohérence et cohésion",
+      description: "Liaison entre les différentes parties",
+      options: [0, 0.5, 1, 1.5],
+    },
+  ],
+};
+
+export function rubricForPeExercise(kind: PeExerciseKind): ExerciseRubric | null {
+  if (kind === "experience" || kind === "long") return PE2_EXPERIENCE_RUBRIC;
+  if (kind === "reply" || kind === "short") return PE2_REPLY_RUBRIC;
+  return null;
+}
+
+export function rubricMaxPoints(rubric: ExerciseRubric): number {
+  return rubric.criteria.reduce((sum, criterion) => sum + Math.max(...criterion.options), 0);
+}

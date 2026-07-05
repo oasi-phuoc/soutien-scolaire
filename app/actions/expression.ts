@@ -6,6 +6,7 @@ import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { WritingLevel, WritingPrompt } from "@/lib/curriculum/content/communication/writing-prompts";
 import type { PlacementMathAttempt } from "@/lib/placement/types";
+import type { TeacherGrading } from "@/lib/curriculum/content/communication/expression-submission-types";
 
 export type TeacherOption = { id: string; prenom: string | null; nom: string | null };
 export type ExpressionAnnotation = { start: number; end: number; text: string; comment: string };
@@ -50,6 +51,7 @@ export type ExpressionSubmission = {
   status: "submitted" | "reviewed";
   created_at: string;
   reviewed_at: string | null;
+  teacher_grading?: TeacherGrading | null;
 };
 
 async function currentSession() {
@@ -244,10 +246,11 @@ export async function reviewExpressionAction(input: {
   annotations: ExpressionAnnotation[];
   teacherPoints: number;
   finalResult: string;
+  teacherGrading?: TeacherGrading | null;
 }): Promise<{ ok: boolean; reason?: string }> {
   const session = await currentSession();
   if (!session || !["prof", "admin"].includes(session.role)) return { ok: false, reason: "Non autorisé." };
-  const points = Number(input.teacherPoints);
+  const points = input.teacherGrading?.totalPoints ?? Number(input.teacherPoints);
   if (!Number.isFinite(points) || points < 0 || points > 25) {
     return { ok: false, reason: "Les points doivent être compris entre 0 et 25." };
   }
@@ -271,6 +274,7 @@ export async function reviewExpressionAction(input: {
     teacher_points: points,
     teacher_max_points: 25,
     final_result: finalResult,
+    teacher_grading: input.teacherGrading ?? null,
     status: "reviewed",
     reviewed_at: now,
     updated_at: now,

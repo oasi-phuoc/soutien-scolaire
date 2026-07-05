@@ -433,8 +433,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Marc", subject: "Concert", body: "Salut !\nJ'ai envie d'aller voir un concert ce soir à Lausanne. Veux-tu venir avec moi ? Réponds-moi au plus vite.\nÀ tout à l'heure !\nMarc" },
     instruction: "Répondez à Marc. Remerciez-le, acceptez son invitation, demandez plus d'informations sur le rendez-vous et proposez des idées d'artistes à écouter.",
     points: ["remercier Marc", "accepter l'invitation", "demander le lieu et l'heure", "proposer des artistes"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-nouvel-an",
@@ -443,8 +443,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Massi", subject: "Nouvel An", body: "Salut !\nC'est bientôt le Nouvel An. Je pars dans le sud pour fêter ça avec ma famille. Je te propose de venir avec nous.\nÀ bientôt !\nMassi" },
     instruction: "Répondez à votre ami. Remerciez-le, acceptez son invitation et demandez des informations sur l'organisation de la fête.",
     points: ["remercier", "accepter", "demander le programme", "demander ce qu'il faut apporter"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-weekend-montagne",
@@ -453,8 +453,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Julien", subject: "Week-end", body: "Salut,\nAvec mes parents et ma sœur Camille, nous partons ce week-end dans notre maison de vacances en montagne. Tu veux venir avec nous ?\nJulien" },
     instruction: "Répondez à Julien. Remerciez-le, acceptez, expliquez que vous devez attendre l'accord de vos parents et demandez des informations sur le programme.",
     points: ["remercier", "accepter avec réserve", "parler de l'accord des parents", "demander le programme"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-repas-breton",
@@ -463,8 +463,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Marie", subject: "Déjeuner", body: "Salut,\nLa semaine prochaine, avec des amis, nous organisons un déjeuner avec des plats bretons. Tu viens manger avec nous ?\nBisous,\nMarie" },
     instruction: "Répondez à Marie. Remerciez-la, acceptez son invitation et proposez d'apporter un plat traditionnel de votre région ou de votre pays.",
     points: ["remercier", "accepter", "proposer un plat", "demander l'heure"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-voisin-anniversaire",
@@ -473,8 +473,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Thomas", subject: "Anniversaire", body: "Cher voisin,\nJe fête mon anniversaire samedi. Je t'invite à nous rejoindre, mes amis et moi, pour faire connaissance.\nThomas" },
     instruction: "Répondez à votre voisin. Remerciez-le, acceptez l'invitation et proposez d'apporter un gâteau.",
     points: ["remercier", "accepter", "proposer un gâteau", "demander l'heure exacte"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-fete-lumieres",
@@ -483,8 +483,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Julia", subject: "Sortie à Lyon", body: "Salut !\nTu veux venir avec moi à Lyon à la fin du mois ? J'ai des billets pour la fête des Lumières. Après, nous irons danser.\nBises,\nJulia" },
     instruction: "Répondez à Julia. Remerciez-la, acceptez son invitation et proposez d'autres activités.",
     points: ["remercier", "accepter", "proposer une activité", "poser une question pratique"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-sortie-enfants",
@@ -493,8 +493,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Lucie", subject: "Sortie", body: "Bonjour,\nLa commune organise une sortie pour les enfants. Je voudrais participer. Tu veux faire ça avec moi ?\nLucie" },
     instruction: "Répondez à Lucie. Remerciez-la, acceptez de participer à la sortie et demandez plus d'informations.",
     points: ["remercier", "accepter", "demander la date", "demander les tâches à faire"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-fete-retraite",
@@ -503,8 +503,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Dorothée", subject: "Fête au travail", body: "Bonjour,\nJ'aimerais organiser une petite fête au travail pour le départ en retraite de Gérard. Est-ce que tu veux participer ?\nDorothée" },
     instruction: "Répondez à Dorothée. Félicitez-la pour son idée, acceptez de participer, posez des questions et proposez des idées.",
     points: ["féliciter", "accepter", "poser des questions", "proposer des idées"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-anniversaire-mariage",
@@ -513,8 +513,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Thérèse et Pierre", subject: "50 ans de mariage", body: "Nous vous invitons à la fête de nos 50 ans de mariage. La fête aura lieu le 4 juillet à la salle communale, à partir de 18 h." },
     instruction: "Écrivez une réponse. Remerciez vos amis, refusez poliment, excusez-vous, expliquez pourquoi vous ne pouvez pas venir et demandez des précisions sur la fête.",
     points: ["remercier", "refuser poliment", "expliquer la raison", "demander des précisions"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-match-foot",
@@ -523,8 +523,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Lucas", subject: "Match", body: "Salut, comment tu vas ?\nJ'ai deux places pour le match de football de ce soir au stade. Est-ce que tu veux venir avec moi ?\nLucas" },
     instruction: "Répondez à Lucas. Remerciez-le, refusez son invitation, expliquez pourquoi et proposez d'assister à un autre match.",
     points: ["remercier", "refuser", "expliquer la raison", "proposer une autre date"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-shopping",
@@ -533,8 +533,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Karina", subject: "Week-end", body: "Coucou, ça va ?\nTu veux venir avec moi faire les magasins ce week-end ? J'ai besoin de nouvelles affaires.\nKarina" },
     instruction: "Répondez à Karina. Refusez sa proposition, excusez-vous, expliquez pourquoi vous ne pouvez pas venir et proposez un autre rendez-vous.",
     points: ["refuser", "s'excuser", "donner une raison", "proposer un autre rendez-vous"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-mariage",
@@ -543,8 +543,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Amina", subject: "Mariage", body: "Coucou,\nTu viens avec moi au mariage de ma sœur le 10 mai ? Il y aura de la musique. On va bien s'amuser.\nAmina" },
     instruction: "Répondez à Amina. Remerciez-la, refusez son invitation, excusez-vous et expliquez pourquoi vous ne pouvez pas aller avec elle au mariage.",
     points: ["remercier", "refuser", "s'excuser", "expliquer la raison"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-diner-reussite",
@@ -553,8 +553,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Meriem", subject: "Restaurant", body: "Bonjour,\nPour fêter ma réussite, je t'invite à dîner au restaurant vendredi soir. Il y aura tous nos amis.\nMeriem" },
     instruction: "Répondez à Meriem. Remerciez-la, félicitez-la pour sa réussite et excusez-vous de ne pas pouvoir être présent.",
     points: ["remercier", "féliciter", "refuser poliment", "proposer un autre moment"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-velo",
@@ -563,8 +563,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Marie", subject: "Promenade", body: "Coucou,\nJe vais faire une promenade à vélo ce week-end. Tu viens avec moi ? Nous irons après au cinéma.\nMarie" },
     instruction: "Répondez à Marie. Remerciez-la, refusez la sortie, excusez-vous, expliquez pourquoi et proposez une autre activité.",
     points: ["remercier", "refuser", "expliquer", "proposer autre chose"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-spectacle",
@@ -573,8 +573,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Clémence", subject: "Spectacle", body: "Salut,\nJe participe à l'organisation d'un spectacle pour la fête de la ville. Tu veux participer avec moi ?\nClémence" },
     instruction: "Répondez à Clémence. Remerciez-la, refusez de participer, expliquez pourquoi et demandez plus d'informations.",
     points: ["remercier", "refuser", "expliquer", "demander des informations"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-theatre",
@@ -583,8 +583,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Hugo", subject: "Théâtre", body: "Bonjour,\nIl y a une nouvelle pièce de théâtre samedi soir. J'aimerais aller la voir. Tu viens avec moi ?\nHugo" },
     instruction: "Répondez à Hugo. Remerciez-le, refusez sa proposition, expliquez pourquoi et proposez une autre sortie.",
     points: ["remercier", "refuser", "donner une raison", "proposer une sortie"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-weekend-nora",
@@ -593,8 +593,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Nora", subject: "Week-end", body: "Salut,\nSamedi, je suis allée à l'anniversaire de Margaux. C'était génial ! Et toi, tu as passé un bon week-end ?\nNora" },
     instruction: "Répondez à Nora. Remerciez-la, posez des questions sur son week-end et racontez ce que vous avez fait.",
     points: ["remercier", "poser des questions", "raconter vos activités", "donner vos impressions"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-permis",
@@ -603,8 +603,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Émilie", subject: "Bonne nouvelle", body: "Salut,\nJ'ai réussi mon examen de conduite. Maintenant, je vais acheter une voiture. Je suis très heureuse.\nÉmilie" },
     instruction: "Répondez à Émilie. Félicitez-la, posez des questions sur son examen et sur la voiture, puis donnez de vos nouvelles.",
     points: ["féliciter", "poser des questions", "réagir à la nouvelle", "donner de vos nouvelles"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-logement",
@@ -613,8 +613,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Yasmine", subject: "Appartement", body: "Coucou,\nCamélia m'a dit que tu as un nouveau logement. Quand as-tu déménagé ? Comment est ton appartement ?\nYasmine" },
     instruction: "Répondez à Yasmine. Remerciez-la, dites quand vous avez déménagé et décrivez votre logement.",
     points: ["remercier", "donner la date", "décrire la situation géographique", "décrire les pièces ou la décoration"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-nouveau-travail",
@@ -623,8 +623,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Hélène", subject: "Travail", body: "Bonjour,\nJ'ai une bonne nouvelle : j'ai un nouveau travail. J'ai commencé la semaine dernière. Et toi, tout va bien ?\nHélène" },
     instruction: "Répondez à Hélène. Félicitez-la, posez des questions sur son nouveau travail et proposez une sortie.",
     points: ["féliciter", "poser des questions", "donner de vos nouvelles", "proposer une sortie"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-voyage-florian",
@@ -633,8 +633,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Florian", subject: "Voyage", body: "Salut !\nJe pars bientôt en voyage. Mon avion part de Genève dimanche prochain. Je voudrais te voir à mon retour.\nFlorian" },
     instruction: "Répondez à Florian. Demandez des précisions sur son voyage et proposez une sortie à son retour.",
     points: ["demander la destination", "demander les activités", "proposer une sortie", "donner vos disponibilités"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-cadeau",
@@ -643,8 +643,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Aurore", subject: "Cadeau", body: "Salut,\nBon anniversaire ! Je t'ai envoyé un petit cadeau par la poste. Tu l'as reçu ? Tu me diras ce que tu en penses.\nAurore" },
     instruction: "Répondez à Aurore. Remerciez-la, répondez à ses questions et donnez de vos nouvelles.",
     points: ["remercier", "dire si le cadeau est arrivé", "donner votre avis", "donner de vos nouvelles"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-vacances-simon",
@@ -653,8 +653,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Simon", subject: "Vacances", body: "Salut !\nAlors, tes vacances ? Ça s'est bien passé ? Moi, je suis rentré ce matin. Donne-moi de tes nouvelles !\nSimon" },
     instruction: "Répondez à Simon. Remerciez-le, posez des questions sur ses vacances et racontez ce que vous avez fait.",
     points: ["remercier", "poser des questions", "raconter vos vacances", "donner vos impressions"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
   {
     id: "pe2-reply-universite",
@@ -663,8 +663,8 @@ const PE2_REPLY_PROMPTS: MoyenWritingPromptSource[] = [
     sourceMessage: { from: "Yani", subject: "Université", body: "Coucou,\nJ'ai commencé les cours à l'université la semaine dernière. J'ai un programme très chargé. Et toi, quelles sont tes nouvelles ?\nYani" },
     instruction: "Répondez à Yani. Remerciez-le, posez des questions sur son université et racontez ce que vous avez fait.",
     points: ["remercier", "poser des questions", "donner de vos nouvelles", "parler de vos activités"],
-    minWords: 60,
-    maxWords: 80,
+    minWords: 80,
+    maxWords: 150,
   },
 ];
 
@@ -1240,7 +1240,7 @@ const PE1_LONG_PROMPTS: WritingPrompt[] = [
 
 const LEVEL_CONFIG = {
   base: { minWords: 30, maxWords: 40, format: "un petit message de 4 à 5 phrases", detailCount: 4 },
-  moyen: { minWords: 60, maxWords: 80, format: "un courriel organisé", detailCount: 4 },
+  moyen: { minWords: 80, maxWords: 100, format: "un courriel organisé", detailCount: 4 },
   avance: { minWords: 120, maxWords: 150, format: "un texte développé et structuré", detailCount: 5 },
 } as const;
 

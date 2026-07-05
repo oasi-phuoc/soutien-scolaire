@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { INBOX_MAX_MESSAGES } from "@/lib/messagerie/inbox";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import type { OralLevel, OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
+import type { SubmissionExercise } from "@/lib/curriculum/content/communication/expression-submission-types";
+import { poExercisesToOriginalText } from "@/lib/curriculum/content/communication/po-submission";
 export type OralGrammarMatch = {
   message: string;
   shortMessage?: string;
@@ -27,6 +29,7 @@ export async function submitOralAction(input: {
   dialogue: OralDialogueLine[];
   aiFeedback: OralGrammarMatch[];
   placementSessionId?: string;
+  exercises?: SubmissionExercise[];
 }): Promise<{ ok: boolean; reason?: string; submissionId?: string }> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, reason: "Vous devez être connecté." };
@@ -34,9 +37,11 @@ export async function submitOralAction(input: {
   if (!user) return { ok: false, reason: "Vous devez être connecté." };
   if (!input.teacherId) return { ok: false, reason: "Choisissez un professeur." };
 
-  const transcriptText = input.dialogue
-    .map((line) => `[${line.role === "app" ? "Interlocuteur" : "Élève"}] ${line.text}`)
-    .join("\n");
+  const transcriptText = input.exercises?.length
+    ? poExercisesToOriginalText(input.exercises)
+    : input.dialogue
+      .map((line) => `[${line.role === "app" ? "Interlocuteur" : "Élève"}] ${line.text}`)
+      .join("\n");
 
   // Reuse expression_submissions table with oral lesson codes (PO.1, PO.2, PO.3)
   const fakePrompt = {
@@ -47,6 +52,7 @@ export async function submitOralAction(input: {
     points: input.prompt.themes.map((t) => t.word),
     minWords: 1,
     maxWords: 99999,
+    exercises: input.exercises ?? [],
   };
 
   const { data: inserted, error } = await supabase.from("expression_submissions").insert({

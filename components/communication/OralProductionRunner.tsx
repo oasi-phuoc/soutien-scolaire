@@ -9,6 +9,7 @@ import {
   type TeacherOption,
 } from "@/app/actions/expression";
 import { submitOralAction, type OralDialogueLine } from "@/app/actions/oral";
+import { buildPoSubmissionExercises } from "@/lib/curriculum/content/communication/po-submission";
 import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
 import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
 import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
@@ -661,6 +662,19 @@ export function OralProductionRunner({
       dialogueContext: situation.dialogueContext,
       dialoguePrompts: [...situation.dialoguePrompts, argumentationTopic.prompt],
     };
+    const exercises = buildPoSubmissionExercises({
+      themes: prompt.themes.map((theme) => theme.word),
+      imageDescription: situation.imageDescription,
+      dialogueContext: situation.dialogueContext,
+      dialogueRoleText: dialogueState.roleText,
+      argumentationPrompt: argumentationTopic.prompt,
+      task1Lines,
+      interviewLines,
+      interviewQuestions,
+      task2Lines,
+      task4Lines,
+      task5Lines,
+    });
 
     if (mode === "placement" && placementSessionId && !navigator.onLine) {
       queuePlacementSubmission({
@@ -696,6 +710,7 @@ export function OralProductionRunner({
         dialogue: fullDialogue,
         aiFeedback: allGrammar,
         placementSessionId: mode === "placement" ? placementSessionId : undefined,
+        exercises,
       });
       if (mode === "placement" && !result.ok && placementSessionId && isRetryablePlacementSubmitError(result.reason)) {
         queuePlacementSubmission({

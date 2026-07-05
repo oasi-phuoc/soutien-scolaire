@@ -21,6 +21,12 @@ import {
   type WritingLevel,
   type WritingPrompt,
 } from "@/lib/curriculum/content/communication/writing-prompts";
+import {
+  buildPeSubmissionBundle,
+  bundleToPromptPayload,
+  exercisesToOriginalText,
+  formToText,
+} from "@/lib/curriculum/content/communication/pe-submission";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   CommunicationFinishButton,
@@ -49,6 +55,12 @@ function getStepMeta(level: WritingLevel): Array<{ id: StepId; title: string; po
     return [
       { id: "short", title: "Texte à rédiger court", points: 12 },
       { id: "long", title: "Texte à rédiger long", points: 13 },
+    ];
+  }
+  if (level === "moyen") {
+    return [
+      { id: "long", title: "Raconter une expérience", points: 13 },
+      { id: "short", title: "Répondre à un message", points: 12 },
     ];
   }
   return [
@@ -84,7 +96,7 @@ function levelLabel(level: WritingLevel) {
 
 function minWordsFor(level: WritingLevel, kind: "short" | "long") {
   if (level === "base") return kind === "short" ? 40 : 50;
-  if (level === "moyen") return kind === "short" ? 60 : 100;
+  if (level === "moyen") return 80;
   return kind === "short" ? 120 : 160;
 }
 
@@ -98,13 +110,15 @@ function buildPrompt(level: WritingLevel, kind: "short" | "long"): WritingPrompt
   return {
     ...base,
     id: `${base.id}-${kind}`,
-    title: kind === "short" ? `Texte court - ${base.title}` : `Texte long - ${base.title}`,
+    title: level === "moyen" ? base.title : kind === "short" ? `Texte court - ${base.title}` : `Texte long - ${base.title}`,
     minWords,
     maxWords: 10000,
     instruction:
-      kind === "short"
-        ? `${base.instruction} Rédigez un texte court d'au moins ${minWords} mots.`
-        : `${base.instruction} Rédigez un texte plus développé d'au moins ${minWords} mots.`,
+      level === "moyen"
+        ? `${base.instruction} Rédigez un texte d'au moins ${minWords} mots.`
+        : kind === "short"
+          ? `${base.instruction} Rédigez un texte court d'au moins ${minWords} mots.`
+          : `${base.instruction} Rédigez un texte plus développé d'au moins ${minWords} mots.`,
   };
 }
 
@@ -487,10 +501,9 @@ function AdviceContent({ level }: { level: WritingLevel }) {
   );
 }
 
-function formToText(template: FormTemplate | null, answers: Record<string, string>) {
+function formToTextLocal(template: FormTemplate | null, answers: Record<string, string>) {
   if (!template) return "";
-  const lines = template.fields.map((field) => `${field.label} : ${answers[field.id] ?? ""}`);
-  return [`${template.organization} - ${template.title}`, template.situation, ...lines].join("\n");
+  return formToText(template, answers);
 }
 
 export function ProductionEcriteRunner({
@@ -512,7 +525,7 @@ export function ProductionEcriteRunner({
       ]
     : getStepMeta(level);
   const initialSteps = stepMeta.map((step) => step.id);
-  const hasForm = isPeHybrid || level !== "avance";
+  const hasForm = isPeHybrid || level === "base";
   const [phase, setPhase] = useState<Phase>("intro");
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [remaining, setRemaining] = useState<StepId[]>(initialSteps);
@@ -589,27 +602,22 @@ export function ProductionEcriteRunner({
 
   function sendToTeacher() {
     if (!teacherId || sent) return;
-    const parts: string[] = [];
-    const feedback: Array<{ exercise: string; answers?: Record<string, string>; matches: unknown[] }> = [];
-    if (hasForm && formTemplate) {
-      parts.push("FORMULAIRE", formToText(formTemplate, formAnswers), "");
-      feedback.push({ exercise: "form", answers: formAnswers, matches: [] });
-    }
-    parts.push("TEXTE COURT", shortPrompt.title, shortText, "", "TEXTE LONG", longPrompt.title, longText);
-    feedback.push({ exercise: "short", matches: [] }, { exercise: "long", matches: [] });
     const placementCode = mode === "placement"
       ? (isPeHybrid ? placementLessonCode("pe", "avance").replace("-avance", "-progressive") : placementLessonCode("pe", level))
       : code;
-    const promptPayload = {
-      id: `${placementCode}-complete`,
-      title: `${placementCode} - Production écrite complète`,
-      situation: hasForm ? "Formulaire, texte court et texte long." : "Texte court et texte long.",
-      instruction: "Correction professeur demandée.",
-      points: hasForm ? ["Formulaire", "Texte court", "Texte long"] : ["Texte court", "Texte long"],
-      minWords: 0,
-      maxWords: 10000,
-    };
-    const textPayload = parts.join("\n");
+    const bundle = buildPeSubmissionBundle({
+      level,
+      lessonCode: placementCode,
+      formTemplate: hasForm ? formTemplate : null,
+      formAnswers,
+      shortPrompt,
+      shortText,
+      longPrompt,
+      longText,
+    });
+    const promptPayload = bundleToPromptPayload(bundle);
+    const textPayload = exercisesToOriginalText(bundle.exercises);
+    const feedback = bundle.exercises.map((exercise) => ({ exercise: exercise.id, matches: [] }));
 
     if (mode === "placement" && placementSessionId && (!navigator.onLine)) {
       queuePlacementSubmission({
@@ -763,7 +771,7 @@ export function ProductionEcriteRunner({
                 {item.id === "form" && (
                   <>
                     <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">Votre production</p>
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{formToText(formTemplate, formAnswers)}</pre>
+                    <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{formToTextLocal(formTemplate, formAnswers)}</pre>
                     {formSample && (
                       <CorrectionBlock title="Proposition de réponse">
                         <pre className="whitespace-pre-wrap">{formSample}</pre>
