@@ -13,9 +13,11 @@ const ACCENT = PLACEMENT_CHART_ACCENT;
 const STEP_W = 62;
 const STEP_H = 22;
 const ZONE_COUNT = PLACEMENT_ZONES.length;
-/** Marche au-dessus du seuil 200. */
-const TOP_ROW = ZONE_COUNT;
-/** Pointe de flèche : 2 cases verticalement au-dessus de la marche vide. */
+/** Marche au-dessus du seuil 200 (PAI). */
+const PAI_ROW = ZONE_COUNT;
+/** Marche supplémentaire au-dessus de PAI. */
+const AFP_CFC_ROW = ZONE_COUNT + 1;
+/** Pointe de flèche : 2 cases verticalement au-dessus de la marche PAI. */
 const ARROW_TARGET_ROWS_ABOVE_TOP = 2;
 const VIEW_PAD_L = 8;
 const ARROW_SHIFT = 2 * STEP_W;
@@ -43,17 +45,17 @@ function treadAt(rowIndex: number) {
   };
 }
 
-/** Flèche diagonale 0 → 2 cases au-dessus de la marche vide. */
+/** Flèche diagonale 0 → 2 cases au-dessus de la marche PAI. */
 function arrowGeometry() {
   const first = treadAt(0);
-  const top = treadAt(TOP_ROW);
+  const pai = treadAt(PAI_ROW);
   const start = {
     x: STEP_ORIGIN - ARROW_SHIFT + 8,
     y: first.y + STEP_H,
   };
   const end = {
-    x: top.cx,
-    y: top.cy - ARROW_TARGET_ROWS_ABOVE_TOP * STEP_H,
+    x: pai.cx,
+    y: pai.cy - ARROW_TARGET_ROWS_ABOVE_TOP * STEP_H,
   };
   return { start, end };
 }
@@ -72,7 +74,7 @@ function chartViewBox(arrowEnd: { x: number; y: number }) {
   let maxX = STEP_ORIGIN + (ZONE_COUNT + 1) * STEP_W;
   let minY = Math.min(VIEW_TOP, arrowEnd.y - 12);
 
-  for (let i = 0; i <= TOP_ROW; i += 1) {
+  for (let i = 0; i <= AFP_CFC_ROW; i += 1) {
     const tread = treadAt(i);
     minX = Math.min(minX, tread.x);
     if (i === 0) minX = Math.min(minX, thresholdColCenter(0) - STEP_W / 2);
@@ -90,10 +92,45 @@ function chartViewBox(arrowEnd: { x: number; y: number }) {
   };
 }
 
+function extraTreadLabel(rowIndex: number, label: string) {
+  const { x, y, cx, cy } = treadAt(rowIndex);
+  const compact = label.length > 5;
+  return (
+    <g key={label}>
+      <rect
+        x={x}
+        y={y}
+        width={2}
+        height={STEP_H}
+        fill="color-mix(in oklch, var(--color-accent-quiz) 20%, var(--color-border-default))"
+      />
+      <rect
+        x={x}
+        y={y}
+        width={STEP_W}
+        height={STEP_H}
+        fill={TOP_TREAD_FILL}
+        stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
+        strokeWidth={1}
+      />
+      <text
+        x={cx}
+        y={cy}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize={compact ? 9 : 11}
+        fontWeight="700"
+        fill="var(--color-text-secondary)"
+      >
+        {label}
+      </text>
+    </g>
+  );
+}
+
 export function PlacementUnifiedChart({ total }: { total: number }) {
   const marker = arrowPointAt(total);
   const { start, end } = arrowGeometry();
-  const top = treadAt(TOP_ROW);
   const view = chartViewBox(end);
 
   return (
@@ -194,25 +231,9 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
           );
         })}
 
-        {/* Marche vide au-dessus de 200 — cible de la flèche */}
-        <g>
-          <rect
-            x={top.x}
-            y={top.y}
-            width={2}
-            height={STEP_H}
-            fill="color-mix(in oklch, var(--color-accent-quiz) 20%, var(--color-border-default))"
-          />
-          <rect
-            x={top.x}
-            y={top.y}
-            width={STEP_W}
-            height={STEP_H}
-            fill={TOP_TREAD_FILL}
-            stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
-            strokeWidth={1}
-          />
-        </g>
+        {/* Marches au-dessus de 200 */}
+        {extraTreadLabel(PAI_ROW, "PAI")}
+        {extraTreadLabel(AFP_CFC_ROW, "AFP-CFC")}
 
         <circle
           cx={marker.x}
