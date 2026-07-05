@@ -85,127 +85,127 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
     item("base", "message", "16", "message-16.mp3", "Bonjour, ici le magasin Méga J. Vous avez commandé un jeu vidéo la semaine dernière. Il est arrivé dans notre magasin. Vous pouvez venir le chercher à partir de vendredi au 23, rue des Clochottes. Le magasin est ouvert de 9 h à 19 h non-stop. N'oubliez pas votre pièce d'identité. Merci et bonne journée."),
   ]),
   group("base", "annonce", "1", [
-    item("base", "annonce", "1", "annonce-1.mp3", "Transcription annonce 1."),
+    item("base", "annonce", "1", "annonce-1.mp3", "Le festival de théâtre « En val de Lugnes » fête ses dix ans le 20 juillet prochain. Au programme, il y a 6 pièces de théâtre. Chaque année, le festival a beaucoup de succès : 3 000 personnes assistent au spectacle. Vous pouvez réserver vos places à partir de maintenant, par téléphone ou sur Internet."),
   ]),
   group("base", "annonce", "2", [
-    item("base", "annonce", "2", "annonce-2.mp3", "Transcription annonce 2."),
+    item("base", "annonce", "2", "annonce-2.mp3", "Profitez de promotions exceptionnelles chez « Mega Jeux » : moins 10 % sur les jeux vidéo et moins 20 % sur les accessoires. Si vous dépensez 150 euros dans notre magasin, nous vous offrons une remise de 25 euros. Offre valable jusqu'au 30 janvier. Ouverture exceptionnelle le dimanche 29."),
   ]),
   group("base", "annonce", "3", [
-    item("base", "annonce", "3", "annonce-3.mp3", "Transcription annonce 3."),
+    item("base", "annonce", "3", "annonce-3.mp3", "Radio Zik. Il est 14 h. Vous pouvez gagner des places pour le festival musical Nuits sonores à Lyon. Le festival est du 27 au 31 mai. Pour jouer, appelez le 03 44 56 60 60. Vous devez écouter une chanson et dire son titre. Si vous reconnaissez la chanson, vous gagnez deux places pour le festival. Bonne chance !"),
   ]),
   group("base", "annonce", "4", [
-    item("base", "annonce", "4", "annonce-4.mp3", "Transcription annonce 4."),
+    item("base", "annonce", "4", "annonce-4.mp3", "Radio Cinéma, bonjour. Aujourd'hui, mercredi, je vous parle des nouveaux films. Pour les enfants, je recommande La Petite Fabrique du monde. Ce sont sept dessins animés sur l'émotion et l'imagination. Si vous aimez le cinéma classique, allez voir La Belle et la Bête de Jean Cocteau. Ce film est sorti en 1946 et il revient au cinéma pendant une semaine. Si vous appelez le 0 800 63 10 10, vous pouvez gagner deux places gratuites."),
   ]),
   group("base", "annonce", "5", [
-    item("base", "annonce", "5", "annonce-5.mp3", "Transcription annonce 5."),
+    item("base", "annonce", "5", "annonce-5.mp3", "Radio France, il est 10 h. Le nouveau musée d'art moderne va ouvrir jeudi prochain. Les horaires sont de 9 h à 19 h du mardi au vendredi, et de 9 h 30 à 17 h 30 le samedi et le dimanche. Radio France offre vingt places. Pour participer, appelez le 0 805 15 12 15."),
   ]),
   group("base", "annonce", "6", [
-    item("base", "annonce", "6", "annonce-6.mp3", "Transcription annonce 6."),
+    item("base", "annonce", "6", "annonce-6.mp3", "RTS, bonjour. Suivez le sport en direct ! La saison de football commence mal : l'équipe de Lausanne ne va pas participer à la Super Ligue de football. En hockey, l'équipe de Fribourg a marqué 6 buts et a gagné le match. Enfin, félicitations aux Français ! Cette année, ils gagnent la coupe d'Europe de basket. Les Français qui habitent à Genève ont célébré la victoire toute la nuit."),
   ]),
   group("base", "annonce", "7", [
-    item("base", "annonce", "7", "annonce-7.mp3", "Transcription annonce 7."),
+    item("base", "annonce", "7", "annonce-7.mp3", "Aujourd'hui, dans l'actualité musicale, nous parlons du festival Solidays. Cette année, le festival dure trois jours, du vendredi 28 au dimanche 30 juin. Plus de 170 000 personnes vont assister aux concerts de cinquante artistes. Si vous allez les voir, amusez-vous bien !"),
   ]),
   group("base", "annonce", "8", [
-    item("base", "annonce", "8", "annonce-8.mp3", "Transcription annonce 8."),
+    item("base", "annonce", "8", "annonce-8.mp3", "Radio France, bonjour. Il est 11 h 17. Aujourd'hui, il fait beau en France. Le soleil brille, la température est de 20 degrés dans le nord et 24 degrés dans le sud. Mais, dans l'ouest de la France, il y a des nuages et beaucoup de vent. Et la température est fraîche : 18 degrés seulement en Bretagne. Bonne journée !"),
   ]),
   group("base", "annonce", "9", [
-    item("base", "annonce", "9", "annonce-9.mp3", "Transcription annonce 9."),
+    item("base", "annonce", "9", "annonce-9.mp3", "Les magasins Super J ouvrent exceptionnellement ce samedi et ce dimanche, de 9 h à 19 h, sans interruption. Il y aura beaucoup de promotions : moins 10 % sur le chocolat, moins 20 % sur les vêtements et moins 25 % sur les DVD. Si vous dépensez 200 euros ou plus, Super J vous offre une clé USB."),
   ]),
   group("base", "annonce", "10", [
-    item("base", "annonce", "10", "annonce-10.mp3", "Transcription annonce 10."),
+    item("base", "annonce", "10", "annonce-10.mp3", "Mesdames, messieurs, le train à destination de Tours va partir voie numéro 5. Il s'arrête à Blois à 11 h 22, à Saint-Pierre-des-Corps à 11 h 48 et arrive à Tours, son terminus, à 12 h 03. Vous devez valider votre billet avant de monter dans le train. La SNCF vous souhaite un bon voyage."),
   ]),
   group("base", "annonce", "11", [
-    item("base", "annonce", "11", "annonce-11.mp3", "Transcription annonce 11."),
+    item("base", "annonce", "11", "annonce-11.mp3", "Aujourd'hui, votre magasin propose une promotion exceptionnelle au rayon frais : moins 20 % sur le poisson. Profitez aussi des fromages : deux euros de réduction sur le camembert, le brie et le roquefort. Dépêchez-vous, ces promotions se termineront dans quinze minutes."),
   ]),
   group("base", "annonce", "12", [
-    item("base", "annonce", "12", "annonce-12.mp3", "Transcription annonce 12."),
+    item("base", "annonce", "12", "annonce-12.mp3", "Mesdames, messieurs, bienvenue à bord du vol 354 à destination de Toulouse. Vous pouvez acheter des boissons pour 2 euros et des sandwichs pour 4 euros. Nous proposons aussi des menus à 9 euros. Des journaux sont disponibles en français et en anglais. Ils coûtent 1 euro. Nous vous souhaitons un bon voyage."),
   ]),
   group("base", "annonce", "13", [
-    item("base", "annonce", "13", "annonce-13.mp3", "Transcription annonce 13."),
+    item("base", "annonce", "13", "annonce-13.mp3", "Chers clients, le magasin ferme dans trente minutes. Merci de vous présenter à la caisse pour payer vos achats. Demain matin, le magasin ouvre à 9 h 15 et ferme à 20 h. Le magasin proposera des promotions toute la journée. Merci et bonne soirée."),
   ]),
   group("base", "annonce", "14", [
-    item("base", "annonce", "14", "annonce-14.mp3", "Transcription annonce 14."),
+    item("base", "annonce", "14", "annonce-14.mp3", "Madame, monsieur, la ligne 4 du tramway est fermée du 20 au 23 septembre, de 19 heures à 23 heures, pour cause de travaux. Pour aller à la cathédrale, vous pouvez prendre le bus numéro 13. Pour aller au centre-ville, vous pouvez prendre la ligne 8 du métro. Merci de votre compréhension."),
   ]),
   group("base", "annonce", "16", [
-    item("base", "annonce", "16", "annonce-16.mp3", "Transcription annonce 16."),
+    item("base", "annonce", "16", "annonce-16.mp3", "Mesdames, messieurs, le train numéro 8664, à destination de Nantes, départ prévu à 14 h 27, est annulé. Vous pouvez prendre le train suivant à 16 h 18, voie numéro 6. Si vous voulez, vous pouvez demander un remboursement de votre billet à l'accueil de la gare. La SNCF vous présente ses excuses et vous remercie pour votre compréhension."),
   ]),
   group("base", "annonce", "17", [
-    item("base", "annonce", "17", "annonce-17.mp3", "Transcription annonce 17."),
+    item("base", "annonce", "17", "annonce-17.mp3", "Mesdames, messieurs, l'embarquement du vol Air France numéro AF717 commence dans quinze minutes. Ce vol est à destination de Paris. Il part à 8 h 17. Il dure environ deux heures et vingt minutes. Merci de préparer votre billet et votre passeport. Les passagers qui voyagent avec des enfants peuvent embarquer maintenant. Merci."),
   ]),
   group("base", "instruction", "1", [
-    item("base", "instruction", "1", "instruction-1.mp3", "Transcription instruction 1."),
+    item("base", "instruction", "1", "instruction-1.mp3", "Bonjour, ici le cabinet dentaire. Je vous rappelle que vous avez rendez-vous le 13 janvier à 14 heures. Le rendez-vous est annulé si vous avez 10 minutes de retard. Pensez à apporter votre carte Vitale. Prenez le métro, évitez de prendre le bus ou la voiture, il y a des travaux actuellement. Au revoir."),
   ]),
   group("base", "instruction", "2", [
-    item("base", "instruction", "2", "instruction-2.mp3", "Transcription instruction 2."),
+    item("base", "instruction", "2", "instruction-2.mp3", "Salut ! Désolée, je dois annuler notre rendez-vous au restaurant ce midi. J'ai trop de travail. On peut se faire un cinéma demain à 18 heures ? J'ai aussi des entrées gratuites pour le musée le 15 ou le 25 juin. Il faut juste réserver par téléphone. Envoie-moi un SMS pour confirmer !"),
   ]),
   group("base", "instruction", "3", [
-    item("base", "instruction", "3", "instruction-3.mp3", "Transcription instruction 3."),
+    item("base", "instruction", "3", "instruction-3.mp3", "Bonjour, je vous rappelle que vous avez rendez-vous au bureau à 10 heures 30 avec M. et Mme Martin. Vous avez un déjeuner avec M. Dubois à 12 heures 30, il vous attendra au restaurant. Le comptable a annulé votre rendez-vous de 17 heures, il est à l'hôpital. N'oubliez pas l'anniversaire de votre femme ce soir, votre fille passera vous chercher."),
   ]),
   group("base", "instruction", "4", [
-    item("base", "instruction", "4", "instruction-4.mp3", "Transcription instruction 4."),
+    item("base", "instruction", "4", "instruction-4.mp3", "Salut ! J'ai oublié mes clés sur la table à manger. Tu peux venir me les apporter au bureau ? Je finis à 17 heures 30. On peut aller se promener au parc et manger chez l'italien, en face du cinéma, ensuite ? Je dois juste rentrer avant 20 heures, car j'ai une réunion très importante demain à 9 heures. Merci !"),
   ]),
   group("base", "instruction", "5", [
-    item("base", "instruction", "5", "instruction-5.mp3", "Transcription instruction 5."),
+    item("base", "instruction", "5", "instruction-5.mp3", "Bonsoir, votre commande est prête à la boulangerie. Vous pouvez la récupérer dès 15 heures. Comme tous les lundis et mardis, la boutique ferme à 18 heures 30 aujourd'hui. On ferme à 20 heures les autres jours. Je vous rappelle que nous n'acceptons pas les chèques. Bonne journée."),
   ]),
   group("base", "conversation", "1", [
-    item("base", "conversation", "1", "conversation-1.mp3", "Transcription conversation 1."),
+    item("base", "conversation", "1", "conversation-1.mp3", "Situation numéro 1\n— Bonjour monsieur, où se trouve le rayon « bandes dessinées » s'il vous plaît ?\n— Au fond à droite, à côté du rayon « autobiographies ».\n— Merci.\n\nSituation numéro 2\n— Bonjour madame, j'ai besoin de 5 kilos de tomates et de 2 kilos de pommes s'il vous plaît.\n— Voilà, et avec ceci ?\n— Je vais prendre deux melons aussi.\n— Et voilà, ça vous fera 12 euros 50.\n\nSituation numéro 3\n— Excusez-moi monsieur, où se trouve la rue Didier Clément ?\n— C'est la première à droite.\n— Merci monsieur.\n\nSituation numéro 4\n— Regarde Sophie, j'ai acheté de nouvelles chaises. Tu les trouves comment ?\n— Elles sont sympa, mais je n'aime pas trop la couleur."),
   ]),
   group("base", "conversation", "2", [
-    item("base", "conversation", "2", "conversation-2.mp3", "Transcription conversation 2."),
+    item("base", "conversation", "2", "conversation-2.mp3", "Situation numéro 1\n— Bonjour, je voudrais un billet pour Paris.\n— Vous voulez partir à quelle heure ?\n— Vers 14 heures si c'est possible.\n\nSituation numéro 2\n— Bonjour monsieur, bienvenue à l'hôtel Beaulieu.\n— Bonjour madame. J'ai réservé une chambre hier.\n— Très bien. C'est à quel nom ?\n— Monsieur Michel Dubar.\n\nSituation numéro 3\n— Bonjour, j'aimerais un café et un croissant s'il vous plaît.\n— Je vous apporte ça tout de suite mademoiselle.\n— Et l'addition aussi. Je veux payer tout de suite.\n\nSituation numéro 4\n— Bonjour, je voudrais deux pains au chocolat et trois croissants s'il vous plaît.\n— Avec ceci ? On a des baguettes qui viennent de sortir du four.\n— Non merci, ça sera tout. 3 euros s'il vous plaît."),
   ]),
   group("base", "conversation", "3", [
-    item("base", "conversation", "3", "conversation-3.mp3", "Transcription conversation 3."),
+    item("base", "conversation", "3", "conversation-3.mp3", "Situation numéro 1\n— Excusez-moi, madame, est-ce que le bus numéro 2 est passé ?\n— Non pas encore. Il doit arriver dans cinq minutes.\n— Très bien merci !\n\nSituation numéro 2\n— Bonjour madame, à quelle heure part le train pour Montréal ?\n— À 6 h 15, monsieur.\n— Merci beaucoup.\n\nSituation numéro 3\n— Qu'est-ce que tu veux boire ?\n— Un café, s'il te plaît.\n— Tu veux du sucre avec ?\n— Non merci, je le bois nature.\n\nSituation numéro 4\n— Joël, le musée ferme à quelle heure ?\n— À 17 heures 30.\n— Alors, il reste une heure avant la fermeture !"),
   ]),
   group("base", "conversation", "4", [
-    item("base", "conversation", "4", "conversation-4.mp3", "Transcription conversation 4."),
+    item("base", "conversation", "4", "conversation-4.mp3", "Situation numéro 1\n— Tu peux voir les dates du DELF sur Internet.\n— Vraiment ? À quelle adresse ?\n— www.abc-delf.fr.\n\nSituation numéro 2\n— Qu'est-ce que tu veux pour dîner ?\n— Pourquoi pas une pizza ?\n— Oui, c'est une bonne idée.\n\nSituation numéro 3\n— Quel mauvais temps aujourd'hui !\n— Oui... Il paraît que ça va durer toute la semaine !\n— Oh non ! Je voulais organiser un barbecue ce week-end...\n\nSituation numéro 4\n— Quentin, quel est notre numéro de vol ?\n— C'est le AF 340.\n— L'avion décolle dans deux heures.\n— Très bien, j'ai le temps d'aller me chercher un café."),
   ]),
   group("base", "conversation", "5", [
-    item("base", "conversation", "5", "conversation-5.mp3", "Transcription conversation 5."),
+    item("base", "conversation", "5", "conversation-5.mp3", "Situation numéro 1\n— Bonjour, monsieur Durand.\n— Bonjour Coralie. Est-ce que j'ai des messages ?\n— Oui, M. Rostand annule son rendez-vous de 11 heures.\n\nSituation numéro 2\n— Bonjour, qu'est-ce qui vous arrive ?\n— Bonjour docteur, j'ai très mal au bras.\n— Venez, on va regarder ça.\n\nSituation numéro 3\n— Le film commence bientôt ?\n— Dans vingt minutes environ.\n— Tu me gardes une place ? Je dois téléphoner avant.\n\nSituation numéro 4\n— J'espère que l'examen est facile.\n— Oh non, les examens universitaires sont difficiles.\n— Alors, nous devons étudier toute la soirée !"),
   ]),
   group("base", "conversation", "6", [
-    item("base", "conversation", "6", "conversation-6.mp3", "Transcription conversation 6."),
+    item("base", "conversation", "6", "conversation-6.mp3", "Situation numéro 1\n— Bonjour, j'ai très mal à la tête. Avez-vous de l'aspirine ?\n— Oui bien sûr monsieur, ça fera 2 euros 50 la boîte.\n\nSituation numéro 2\n— Qu'est-ce que tu fais ?\n— J'écoute de la musique.\n— J'ai besoin d'un coup de main pour ranger. Tu peux venir ?\n\nSituation numéro 3\n— Allô, madame Martin ? C'est RadioFM. Vous avez gagné un voyage en Martinique !\n— Oh, mais c'est super, je n'en reviens pas !\n— Vous recevrez vos billets d'avion bientôt !\n\nSituation numéro 4\n— Que pensez-vous de cette casquette ?\n— Elle est jolie. Mais je n'aime pas la couleur.\n— Je peux vous proposer une autre couleur si vous voulez.\n— Oui, je veux bien, s'il vous plaît."),
   ]),
   group("base", "conversation", "7", [
-    item("base", "conversation", "7", "conversation-7.mp3", "Transcription conversation 7."),
+    item("base", "conversation", "7", "conversation-7.mp3", "Situation numéro 1\n— Je m'amuse beaucoup.\n— Moi aussi. J'adore danser !\n\nSituation numéro 2\n— Qu'est-ce que tu fais ?\n— Un gâteau au chocolat.\n— Tu veux de l'aide ?\n\nSituation numéro 3\n— On regarde un film ?\n— Non. Je préfère regarder un documentaire.\n— D'accord, ça me convient.\n\nSituation numéro 4\n— Bonjour madame.\n— Bonjour. Je voudrais trois pots de miel, s'il vous plaît.\n— Et voilà.\n\nSituation numéro 5\n— À qui est le CD ?\n— C'est le mien. Je l'ai acheté ce matin. On peut l'écouter maintenant !"),
   ]),
   group("base", "conversation", "8", [
-    item("base", "conversation", "8", "conversation-8.mp3", "Transcription conversation 8."),
+    item("base", "conversation", "8", "conversation-8.mp3", "Situation numéro 1\n— Où sont les céréales ?\n— Au fond du magasin, madame.\n— D'accord, merci.\n\nSituation numéro 2\n— Oh là là, où sont mes clés ?\n— Elles sont sur la table. Comme d'habitude !\n\nSituation numéro 3\n— Tu veux voir quel film ?\n— Je ne sais pas. Pourquoi pas une comédie ?\n— Une comédie... Pourquoi pas un film d'horreur ?\n— Oh non ! Je vais mal dormir cette nuit !\n\nSituation numéro 4\n— Qu'est-ce que tu veux manger ?\n— Je vais prendre un menu du jour.\n— Moi, je n'ai pas très faim. Je vais prendre un plat du jour.\n\nSituation numéro 5\n— Tu es prête ?\n— Presque ! Je vais chercher mon casque.\n— Pas de problème ! On a le temps."),
   ]),
   group("base", "objet", "1", [
-    item("base", "objet", "1", "objet-1.mp3", "Transcription objet 1."),
+    item("base", "objet", "1", "objet-1.mp3", "Les clés de la voiture sont posées sur la table du salon à côté du pot de fleurs. N'oublie pas de sortir la poubelle, elle est dans la cuisine à droite du frigo. Éteins toutes les lumières avant de partir et fais attention sur la route, il y a des averses."),
   ]),
   group("base", "objet", "2", [
-    item("base", "objet", "2", "objet-2.mp3", "Transcription objet 2."),
+    item("base", "objet", "2", "objet-2.mp3", "J'ai acheté une jolie robe rouge avec un nœud en soie pour la fête d'anniversaire de Margot. Sally m'a gentiment prêté ses chaussures. Je vais lui chanter une belle chanson, j'apporte ma guitare. As-tu commandé le gâteau ? Elle aime le chocolat blanc et les fruits rouges. Michel s'occupe de la décoration."),
   ]),
   group("base", "objet", "3", [
-    item("base", "objet", "3", "objet-3.mp3", "Transcription objet 3."),
+    item("base", "objet", "3", "objet-3.mp3", "Pour l'inscription à l'université, il faut ramener vos relevés de notes, une carte d'identité et un chèque. Vous allez recevoir un message de confirmation quand votre dossier sera validé. N'oubliez pas de ramener une photo pour la fabrication de votre carte d'étudiant. Elle est à récupérer au guichet 320."),
   ]),
   group("base", "objet", "4", [
-    item("base", "objet", "4", "objet-4.mp3", "Transcription objet 4."),
+    item("base", "objet", "4", "objet-4.mp3", "Pour ce nouveau projet, je dois être organisé. Je vais acheter un carnet, des stylos de couleurs et une règle. J'aimerais noter tous les événements importants ainsi que les tâches à réaliser. Il faut que tout soit parfait ! Je vais coller des images du résultat final sur les murs de mon bureau."),
   ]),
   group("base", "objet", "5", [
-    item("base", "objet", "5", "objet-5.mp3", "Transcription objet 5."),
+    item("base", "objet", "5", "objet-5.mp3", "Je voyage aux États-Unis cet été, et je vais visiter la capitale et trois grandes villes. Je vais louer une voiture pour me déplacer. C'est plus facile. Je prendrai l'hélicoptère pour visiter le Grand Canyon et je prendrai plein de photos avec l'appareil photo que mes grands-parents m'ont offert à Noël."),
   ]),
   group("base", "objet", "6", [
-    item("base", "objet", "6", "objet-6.mp3", "Transcription objet 6."),
+    item("base", "objet", "6", "objet-6.mp3", "Pour cette activité créative, il nous faut du Scotch et des papiers colorés. Nous commençons par découper les formes, puis nous les collons sur du papier blanc. Les enfants adorent faire ça ! Nous pouvons également les laisser colorier les vides avec des crayons de couleur ou des feutres."),
   ]),
   group("base", "objet", "7", [
-    item("base", "objet", "7", "objet-7.mp3", "Transcription objet 7."),
+    item("base", "objet", "7", "objet-7.mp3", "Pour le repas de ce soir j'ai préparé un gâteau, une salade de fruits et un poulet rôti. Je voulais rajouter des carottes et des pommes de terre, mais je n'en ai pas à la maison. Je sais que Jasmine aime les légumes. Je lui ai fait une salade pour me faire pardonner."),
   ]),
   group("base", "objet", "8", [
-    item("base", "objet", "8", "objet-8.mp3", "Transcription objet 8."),
+    item("base", "objet", "8", "objet-8.mp3", "J'ai mal au dos à cause de mon travail. Je vais changer de chaise de bureau cette semaine, puisque la mienne est ancienne. Mon médecin m'a donné des médicaments pour calmer les douleurs. Mais je ne sens pas d'amélioration parce que je travaille tout le temps assise devant mon ordinateur."),
   ]),
   group("base", "objet", "9", [
-    item("base", "objet", "9", "objet-9.mp3", "Transcription objet 9."),
+    item("base", "objet", "9", "objet-9.mp3", "Pour le mariage de Sophie et Lucien, nous allons mettre des fleurs blanches partout ! Il y aura des draps en soie, une très grande voiture blanche et des plumes sur les chaises. Le décor va être féerique. Le gâteau sera à la vanille de Madagascar. C'est là qu'ils se sont rencontrés !"),
   ]),
   group("base", "objet", "10", [
-    item("base", "objet", "10", "objet-10.mp3", "Transcription objet 10."),
+    item("base", "objet", "10", "objet-10.mp3", "Pour l'exposé, la maîtresse nous a demandé de fabriquer un cahier de souvenirs. J'ai préparé un carnet avec des feuilles vieilles et de la corde. Je vais demander à tous mes amis de m'écrire quelque chose dedans. Je pense que je vais acheter un stylo-plume pour qu'ils écrivent tous avec !"),
   ]),
   group("base", "objet", "11", [
-    item("base", "objet", "11", "objet-11.mp3", "Transcription objet 11."),
+    item("base", "objet", "11", "objet-11.mp3", "L'anniversaire de Chanez a lieu samedi prochain. Je prépare des pizzas. Racim s'occupe du gâteau. Lara et Marie vont ramener les cacahuètes et les chips. Peux-tu apporter les boissons ? Tu peux ramener ta copine Sia, tout le monde l'apprécie et c'est toujours mieux d'être à plusieurs pour s'amuser !"),
   ]),
   group("base", "objet", "12", [
-    item("base", "objet", "12", "objet-12.mp3", "Transcription objet 12."),
+    item("base", "objet", "12", "objet-12.mp3", "Nous préparons un cadeau pour la remise des diplômes de Reda. Veux-tu participer ? Nous lui offrons une activité de saut à l'élastique. Il aime les sensations fortes, il va adorer ! Ce sera au viaduc de Saint-Georges-Le-Gaultier à 17 heures. Il faut apporter un pique-nique puisque nous allons dîner sous le pont."),
   ]),
   group("moyen", "annonce", "1", [
     item("moyen", "annonce", "1.1", "annonce-1.1.mp3", "Message aux voyageurs ! Attention, la ligne 1 du métro sera fermée tous les soirs, dès lundi prochain, à partir de 22h30 pour réparer les voies."),
