@@ -172,40 +172,40 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
     item("base", "conversation", "8", "conversation-8.mp3", "Transcription conversation 8."),
   ]),
   group("base", "objet", "1", [
-    item("base", "objet", "1", "objet-1.mp3", "Transcription objet 1."),
+    item("base", "objet", "1", "objet-1.mp3", "Les clés de la voiture sont posées sur la table du salon à côté du pot de fleurs. N'oublie pas de sortir la poubelle, elle est dans la cuisine à droite du frigo. Éteins toutes les lumières avant de partir et fais attention sur la route, il y a des averses."),
   ]),
   group("base", "objet", "2", [
-    item("base", "objet", "2", "objet-2.mp3", "Transcription objet 2."),
+    item("base", "objet", "2", "objet-2.mp3", "J'ai acheté une jolie robe rouge avec un nœud en soie pour la fête d'anniversaire de Margot. Sally m'a gentiment prêté ses chaussures. Je vais lui chanter une belle chanson, j'apporte ma guitare. As-tu commandé le gâteau ? Elle aime le chocolat blanc et les fruits rouges. Michel s'occupe de la décoration."),
   ]),
   group("base", "objet", "3", [
-    item("base", "objet", "3", "objet-3.mp3", "Transcription objet 3."),
+    item("base", "objet", "3", "objet-3.mp3", "Pour l'inscription à l'université, il faut ramener vos relevés de notes, une carte d'identité et un chèque. Vous allez recevoir un message de confirmation quand votre dossier sera validé. N'oubliez pas de ramener une photo pour la fabrication de votre carte d'étudiant. Elle est à récupérer au guichet 320."),
   ]),
   group("base", "objet", "4", [
-    item("base", "objet", "4", "objet-4.mp3", "Transcription objet 4."),
+    item("base", "objet", "4", "objet-4.mp3", "Pour ce nouveau projet, je dois être organisé. Je vais acheter un carnet, des stylos de couleurs et une règle. J'aimerais noter tous les événements importants ainsi que les tâches à réaliser. Il faut que tout soit parfait ! Je vais coller des images du résultat final sur les murs de mon bureau."),
   ]),
   group("base", "objet", "5", [
-    item("base", "objet", "5", "objet-5.mp3", "Transcription objet 5."),
+    item("base", "objet", "5", "objet-5.mp3", "Je voyage aux États-Unis cet été, et je vais visiter la capitale et trois grandes villes. Je vais louer une voiture pour me déplacer. C'est plus facile. Je prendrai l'hélicoptère pour visiter le Grand Canyon et je prendrai plein de photos avec l'appareil photo que mes grands-parents m'ont offert à Noël."),
   ]),
   group("base", "objet", "6", [
-    item("base", "objet", "6", "objet-6.mp3", "Transcription objet 6."),
+    item("base", "objet", "6", "objet-6.mp3", "Pour cette activité créative, il nous faut du Scotch et des papiers colorés. Nous commençons par découper les formes, puis nous les collons sur du papier blanc. Les enfants adorent faire ça ! Nous pouvons également les laisser colorier les vides avec des crayons de couleur ou des feutres."),
   ]),
   group("base", "objet", "7", [
-    item("base", "objet", "7", "objet-7.mp3", "Transcription objet 7."),
+    item("base", "objet", "7", "objet-7.mp3", "Pour le repas de ce soir j'ai préparé un gâteau, une salade de fruits et un poulet rôti. Je voulais rajouter des carottes et des pommes de terre, mais je n'en ai pas à la maison. Je sais que Jasmine aime les légumes. Je lui ai fait une salade pour me faire pardonner."),
   ]),
   group("base", "objet", "8", [
-    item("base", "objet", "8", "objet-8.mp3", "Transcription objet 8."),
+    item("base", "objet", "8", "objet-8.mp3", "J'ai mal au dos à cause de mon travail. Je vais changer de chaise de bureau cette semaine, puisque la mienne est ancienne. Mon médecin m'a donné des médicaments pour calmer les douleurs. Mais je ne sens pas d'amélioration parce que je travaille tout le temps assise devant mon ordinateur."),
   ]),
   group("base", "objet", "9", [
-    item("base", "objet", "9", "objet-9.mp3", "Transcription objet 9."),
+    item("base", "objet", "9", "objet-9.mp3", "Pour le mariage de Sophie et Lucien, nous allons mettre des fleurs blanches partout ! Il y aura des draps en soie, une très grande voiture blanche et des plumes sur les chaises. Le décor va être féerique. Le gâteau sera à la vanille de Madagascar. C'est là qu'ils se sont rencontrés !"),
   ]),
   group("base", "objet", "10", [
-    item("base", "objet", "10", "objet-10.mp3", "Transcription objet 10."),
+    item("base", "objet", "10", "objet-10.mp3", "Pour l'exposé, la maîtresse nous a demandé de fabriquer un cahier de souvenirs. J'ai préparé un carnet avec des feuilles vieilles et de la corde. Je vais demander à tous mes amis de m'écrire quelque chose dedans. Je pense que je vais acheter un stylo-plume pour qu'ils écrivent tous avec !"),
   ]),
   group("base", "objet", "11", [
-    item("base", "objet", "11", "objet-11.mp3", "Transcription objet 11."),
+    item("base", "objet", "11", "objet-11.mp3", "L'anniversaire de Chanez a lieu samedi prochain. Je prépare des pizzas. Racim s'occupe du gâteau. Lara et Marie vont ramener les cacahuètes et les chips. Peux-tu apporter les boissons ? Tu peux ramener ta copine Sia, tout le monde l'apprécie et c'est toujours mieux d'être à plusieurs pour s'amuser !"),
   ]),
   group("base", "objet", "12", [
-    item("base", "objet", "12", "objet-12.mp3", "Transcription objet 12."),
+    item("base", "objet", "12", "objet-12.mp3", "Nous préparons un cadeau pour la remise des diplômes de Reda. Veux-tu participer ? Nous lui offrons une activité de saut à l'élastique. Il aime les sensations fortes, il va adorer ! Ce sera au viaduc de Saint-Georges-Le-Gaultier à 17 heures. Il faut apporter un pique-nique puisque nous allons dîner sous le pont."),
   ]),
   group("moyen", "annonce", "1", [
     item("moyen", "annonce", "1.1", "annonce-1.1.mp3", "Message aux voyageurs ! Attention, la ligne 1 du métro sera fermée tous les soirs, dès lundi prochain, à partir de 22h30 pour réparer les voies."),

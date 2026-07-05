@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   randomCoGroup,
@@ -43,7 +44,7 @@ type AdvancedPartSpec = Omit<COPart, "audioGroup" | "questions"> & {
   activityMin: number;
   activityMax: number;
 };
-type Answers = Record<string, number | string | number[] | null>;
+type Answers = Record<string, number | string | number[] | boolean[] | null>;
 
 const ACCENT = "var(--color-accent-comm)";
 const INVERSE = "var(--color-accent-comm-inverse, #f5a623)";
@@ -177,10 +178,13 @@ function normalize(value: string) {
     .trim();
 }
 
-function answerOk(task: QuestionTask, answer: number | string | number[] | null) {
+function answerOk(task: QuestionTask, answer: number | string | number[] | boolean[] | null) {
   if (task.kind === "match_grid") {
     if (!Array.isArray(answer) || answer.length !== 4) return false;
     return task.correctByColumn.every((row, col) => answer[col] === row);
+  }
+  if (task.kind === "object_pick") {
+    return objectPickScore(task, answer) === task.cards.length;
   }
   if (task.kind === "choice") return answer === task.correct;
   const value = normalize(String(answer ?? ""));
@@ -188,7 +192,18 @@ function answerOk(task: QuestionTask, answer: number | string | number[] | null)
   return [task.answer, ...(task.accept ?? [])].map(normalize).some((expected) => value.includes(expected));
 }
 
-function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, answer: number | string | number[] | null) {
+function objectPickScore(
+  task: Extract<QuestionTask, { kind: "object_pick" }>,
+  answer: number | string | number[] | boolean[] | null,
+) {
+  if (!Array.isArray(answer) || answer.length !== task.cards.length) return 0;
+  return task.cards.reduce((sum, card, index) => {
+    const selected = answer[index] === true;
+    return sum + (selected === card.heard ? 1 : 0);
+  }, 0);
+}
+
+function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, answer: number | string | number[] | boolean[] | null) {
   if (!Array.isArray(answer) || answer.length !== 4) return 0;
   return task.weights.reduce(
     (sum, weight, col) => sum + (answer[col] === task.correctByColumn[col] ? weight : 0),
@@ -198,9 +213,13 @@ function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, ans
 
 function scorePart(part: COPart, answers: Answers) {
   if (!part.questions.length) return 0;
-  if (part.questions.length === 1 && part.questions[0]!.kind === "match_grid") {
-    const key = `${part.id}-0`;
-    return matchGridScore(part.questions[0] as Extract<QuestionTask, { kind: "match_grid" }>, answers[key] ?? null);
+  const single = part.questions[0]!;
+  const key = `${part.id}-0`;
+  if (part.questions.length === 1 && single.kind === "match_grid") {
+    return matchGridScore(single, answers[key] ?? null);
+  }
+  if (part.questions.length === 1 && single.kind === "object_pick") {
+    return objectPickScore(single, answers[key] ?? null);
   }
   const each = part.points / part.questions.length;
   return part.questions.reduce((sum, question, index) => sum + (answerOk(question, answers[`${part.id}-${index}`] ?? null) ? each : 0), 0);
@@ -604,6 +623,108 @@ function ImagePlaceholder({ label, path, compact }: { label: string; path?: stri
   );
 }
 
+function ObjectCardImage({ src, alt }: { src?: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (src && !failed) {
+    return (
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-white">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-contain p-1"
+          sizes="(max-width: 640px) 30vw, 160px"
+          onError={() => setFailed(true)}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className="flex aspect-[4/3] w-full items-center justify-center rounded-md bg-slate-50 text-center text-sm font-semibold text-slate-500">
+      {alt}
+    </div>
+  );
+}
+
+function ObjectPickQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "object_pick" }>;
+  value: number | string | number[] | boolean[] | null;
+  onChange: (value: boolean[]) => void;
+  correction?: boolean;
+}) {
+  const selected: boolean[] =
+    Array.isArray(value) && value.length === task.cards.length
+      ? value.map((entry) => entry === true)
+      : task.cards.map(() => false);
+
+  function toggle(index: number) {
+    if (correction) return;
+    const next = [...selected];
+    next[index] = !next[index];
+    onChange(next);
+  }
+
+  function renderCard(card: (typeof task.cards)[number], index: number) {
+    const isSelected = selected[index] === true;
+    const shouldSelect = card.heard;
+    const correct = correction && isSelected === shouldSelect;
+    const wrong = correction && isSelected !== shouldSelect;
+
+    return (
+      <button
+        key={`${card.label}-${index}`}
+        type="button"
+        disabled={correction}
+        onClick={() => toggle(index)}
+        aria-label={`${card.label}${isSelected ? " (sélectionné)" : ""}`}
+        aria-pressed={isSelected}
+        className={`w-full max-w-[9.5rem] overflow-hidden rounded-xl border-2 bg-white p-2 transition ${
+          correct
+            ? "border-amber-500"
+            : wrong
+              ? "border-red-400"
+              : isSelected
+                ? "border-red-900 shadow-sm"
+                : "border-slate-200 hover:border-slate-300"
+        }`}
+      >
+        <ObjectCardImage src={card.image} alt={card.label} />
+      </button>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 justify-items-center gap-3">
+        {task.cards.slice(0, 3).map((card, index) => renderCard(card, index))}
+      </div>
+      <div className="mx-auto grid max-w-[20rem] grid-cols-2 justify-items-center gap-3">
+        {task.cards.slice(3, 5).map((card, index) => renderCard(card, index + 3))}
+      </div>
+      {correction && (
+        <div className="space-y-1 text-xs text-[var(--color-text-secondary)]">
+          {task.cards.map((card) => (
+            <p key={card.label}>
+              <span className="font-semibold text-[var(--color-text-primary)]">{card.label}</span>
+              {" : "}
+              {card.heard ? (
+                <span className="font-semibold text-amber-700">à sélectionner</span>
+              ) : (
+                <span>ne pas sélectionner</span>
+              )}
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ChoiceQuestionView({
   task,
   value,
@@ -611,7 +732,7 @@ function ChoiceQuestionView({
   correction,
 }: {
   task: Extract<QuestionTask, { kind: "choice" }>;
-  value: number | string | number[] | null;
+  value: number | string | number[] | boolean[] | null;
   onChange: (value: number) => void;
   correction?: boolean;
 }) {
@@ -645,7 +766,7 @@ function FillQuestionView({
   correction,
 }: {
   task: Extract<QuestionTask, { kind: "fill" }>;
-  value: number | string | number[] | null;
+  value: number | string | number[] | boolean[] | null;
   onChange: (value: string) => void;
   correction?: boolean;
 }) {
@@ -674,11 +795,14 @@ function MatchGridQuestionView({
   correction,
 }: {
   task: Extract<QuestionTask, { kind: "match_grid" }>;
-  value: number | string | number[] | null;
+  value: number | string | number[] | boolean[] | null;
   onChange: (value: number[]) => void;
   correction?: boolean;
 }) {
-  const selected = Array.isArray(value) ? value : [-1, -1, -1, -1];
+  const selected: number[] =
+    Array.isArray(value) && value.length === 4 && value.every((entry) => typeof entry === "number")
+      ? (value as number[])
+      : [-1, -1, -1, -1];
 
   function toggle(row: number, col: number) {
     if (correction) return;
@@ -771,13 +895,23 @@ function RenderQuestion({
   correction,
 }: {
   task: QuestionTask;
-  value: number | string | number[] | null;
-  onChange: (value: number | string | number[]) => void;
+  value: number | string | number[] | boolean[] | null;
+  onChange: (value: number | string | number[] | boolean[]) => void;
   correction?: boolean;
 }) {
   if (task.kind === "match_grid") {
     return (
       <MatchGridQuestionView
+        task={task}
+        value={value}
+        onChange={(v) => onChange(v)}
+        correction={correction}
+      />
+    );
+  }
+  if (task.kind === "object_pick") {
+    return (
+      <ObjectPickQuestionView
         task={task}
         value={value}
         onChange={(v) => onChange(v)}
@@ -799,12 +933,14 @@ function QuestionBlock({
 }: {
   part: COPart;
   answers: Answers;
-  onAnswer: (key: string, value: number | string | number[]) => void;
+  onAnswer: (key: string, value: number | string | number[] | boolean[]) => void;
   readonly?: boolean;
 }) {
   const [showTranscripts, setShowTranscripts] = useState(false);
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
   const isMatchGrid = part.questions.length === 1 && part.questions[0]!.kind === "match_grid";
+  const isObjectPick = part.questions.length === 1 && part.questions[0]!.kind === "object_pick";
+  const isSingleTask = isMatchGrid || isObjectPick;
 
   return (
     <div className="space-y-5">
@@ -815,7 +951,9 @@ function QuestionBlock({
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
               {isMatchGrid
                 ? "Lisez les situations. Écoutez les dialogues puis répondez."
-                : "Écoutez l'enregistrement et répondez aux questions."}
+                : isObjectPick
+                  ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
+                  : "Écoutez l'enregistrement et répondez aux questions."}
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
@@ -862,13 +1000,16 @@ function QuestionBlock({
         const answer = answers[key] ?? null;
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
-            {!isMatchGrid && (
+            {!isSingleTask && (
               <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
             )}
             {isMatchGrid && question.kind === "match_grid" && (
               <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
             )}
-            <div className={isMatchGrid ? "mt-4" : "mt-3"}>
+            {isObjectPick && question.kind === "object_pick" && (
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
+            )}
+            <div className={isSingleTask ? "mt-4" : "mt-3"}>
               <RenderQuestion
                 task={question}
                 value={answer}
@@ -876,7 +1017,7 @@ function QuestionBlock({
                 correction={readonly}
               />
             </div>
-            {readonly && !isMatchGrid && (
+            {readonly && !isSingleTask && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.kind === "fill" ? question.answer : ""}
               </p>
@@ -884,6 +1025,11 @@ function QuestionBlock({
             {readonly && isMatchGrid && question.kind === "match_grid" && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Score : {formatPoints(matchGridScore(question, answer))} / {formatPoints(part.points)} pts
+              </p>
+            )}
+            {readonly && isObjectPick && question.kind === "object_pick" && (
+              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
+                Score : {formatPoints(objectPickScore(question, answer))} / {formatPoints(part.points)} pts
               </p>
             )}
           </div>

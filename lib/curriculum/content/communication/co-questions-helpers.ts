@@ -41,7 +41,20 @@ export type COMatchGridTask = {
   correctByColumn: [number, number, number, number];
 };
 
-export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask;
+export type COObjectPickCard = {
+  label: string;
+  image?: string;
+  /** L'objet est-il mentionné dans l'audio ? */
+  heard: boolean;
+};
+
+export type COObjectPickTask = {
+  kind: "object_pick";
+  prompt: string;
+  cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
+};
+
+export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask | COObjectPickTask;
 
 export type RawQ = {
   id: string;
@@ -172,6 +185,19 @@ export function buildConversationMatchGrid(
     columnLabels: ["1", "2", "3", "4"],
     weights: [1.5, 1.5, 2, 2],
     correctByColumn,
+  };
+}
+
+export function buildObjectPickTask(
+  cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard],
+): COObjectPickTask {
+  if (cards.length !== 5) {
+    throw new Error("object pick: attendu 5 cartes");
+  }
+  return {
+    kind: "object_pick",
+    prompt: "Écoutez l'enregistrement. Cliquez sur les objets que vous entendez (ne cliquez pas sur les autres).",
+    cards,
   };
 }
 
