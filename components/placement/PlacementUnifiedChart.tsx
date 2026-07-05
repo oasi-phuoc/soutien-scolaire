@@ -13,17 +13,21 @@ const ACCENT = PLACEMENT_CHART_ACCENT;
 const STEP_W = 62;
 const STEP_H = 22;
 const ZONE_COUNT = PLACEMENT_ZONES.length;
+/** Marche au-dessus du seuil 200 (cible de la flèche). */
+const TOP_ROW = ZONE_COUNT;
 const VIEW_PAD_L = 8;
 const ARROW_SHIFT = 2 * STEP_W;
 const STEP_ORIGIN = VIEW_PAD_L + ARROW_SHIFT;
 const SCORE_MAX = 200;
-const BASE_Y = 118 + STEP_H;
-const VIEW_TOP = -40;
+const BASE_Y = 118 + 2 * STEP_H;
+const VIEW_TOP = -44;
 const LABEL_ABOVE = 7;
 
 const THRESHOLDS = [0, 50, 100, 150];
 
-/** Centre horizontal d'une colonne de seuil (0 → col -1, 50 → col 0, …). */
+const TOP_TREAD_FILL =
+  "color-mix(in oklch, var(--color-accent-quiz) 10%, var(--color-bg-secondary))";
+
 function thresholdColCenter(index: number) {
   return STEP_ORIGIN + (index - 1) * STEP_W + STEP_W / 2;
 }
@@ -39,16 +43,17 @@ function treadAt(rowIndex: number) {
   };
 }
 
-/** Flèche le long du bas de l'escalier — ne traverse pas les libellés. */
+/** Flèche diagonale 0 → case au-dessus de 200. */
 function arrowGeometry() {
+  const first = treadAt(0);
+  const top = treadAt(TOP_ROW);
   const start = {
     x: STEP_ORIGIN - ARROW_SHIFT + 8,
-    y: BASE_Y - 6,
+    y: first.y + STEP_H,
   };
-  const cap = treadAt(ZONE_COUNT - 1);
   const end = {
-    x: cap.x + STEP_W - 8,
-    y: cap.y + STEP_H * 0.72,
+    x: top.cx,
+    y: top.cy,
   };
   return { start, end };
 }
@@ -64,12 +69,13 @@ function arrowPointAt(score: number) {
 
 function chartViewBox() {
   let minX = STEP_ORIGIN - ARROW_SHIFT;
-  let maxX = STEP_ORIGIN + ZONE_COUNT * STEP_W;
+  let maxX = STEP_ORIGIN + (ZONE_COUNT + 1) * STEP_W;
   let minY = VIEW_TOP;
 
-  for (let i = 0; i < ZONE_COUNT; i += 1) {
+  for (let i = 0; i <= TOP_ROW; i += 1) {
     const tread = treadAt(i);
-    minX = Math.min(minX, tread.x, thresholdColCenter(i) - STEP_W / 2);
+    minX = Math.min(minX, tread.x);
+    if (i < ZONE_COUNT) minX = Math.min(minX, thresholdColCenter(i) - STEP_W / 2);
     maxX = Math.max(maxX, tread.x + STEP_W);
     minY = Math.min(minY, tread.y - LABEL_ABOVE - 10);
   }
@@ -87,6 +93,7 @@ function chartViewBox() {
 export function PlacementUnifiedChart({ total }: { total: number }) {
   const marker = arrowPointAt(total);
   const { start, end } = arrowGeometry();
+  const top = treadAt(TOP_ROW);
   const view = chartViewBox();
 
   return (
@@ -184,6 +191,26 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
             </g>
           );
         })}
+
+        {/* Marche vide au-dessus de 200 — cible de la flèche */}
+        <g>
+          <rect
+            x={top.x}
+            y={top.y}
+            width={2}
+            height={STEP_H}
+            fill="color-mix(in oklch, var(--color-accent-quiz) 20%, var(--color-border-default))"
+          />
+          <rect
+            x={top.x}
+            y={top.y}
+            width={STEP_W}
+            height={STEP_H}
+            fill={TOP_TREAD_FILL}
+            stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
+            strokeWidth={1}
+          />
+        </g>
 
         <circle
           cx={marker.x}
