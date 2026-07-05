@@ -15,6 +15,7 @@ import {
 } from "@/components/communication/CommunicationEvalLayout";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
+import { pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 
 const TOTAL_SECONDS = 45 * 60;
 
@@ -725,6 +726,13 @@ function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
   ];
 }
 
+function buildProgressiveCEParts(stamp: number): CEPart[] {
+  return PROGRESSIVE_SKILL_LEVELS.map((lvl, i) => {
+    const pool = buildParts(lvl, stamp + i * 997);
+    return pool[pickIndex(pool.length, `${stamp}-pick-${i}`)]!;
+  });
+}
+
 function questionKey(part: CEPart, index: number, subIndex?: number) {
   return subIndex === undefined ? `${part.id}-${index}` : `${part.id}-${index}-${subIndex}`;
 }
@@ -1074,6 +1082,7 @@ export function ComprehensionEcritRunner({
   lessonId,
   mode = "module",
   placementSeed,
+  placementProgressive,
   onPlacementComplete,
 }: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
@@ -1085,7 +1094,10 @@ export function ComprehensionEcritRunner({
   const [validatedIds, setValidatedIds] = useState<string[]>([]);
   const [openedResult, setOpenedResult] = useState<string | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
-  const parts = useMemo(() => buildParts(level, seed), [level, seed]);
+  const parts = useMemo(
+    () => (mode === "placement" && placementProgressive ? buildProgressiveCEParts(seed) : buildParts(level, seed)),
+    [level, mode, placementProgressive, seed],
+  );
   const activeParts = useMemo(() => parts.filter((item) => !validatedIds.includes(item.id)), [parts, validatedIds]);
   const part = activeParts[Math.min(current, Math.max(0, activeParts.length - 1))] ?? activeParts[0] ?? parts[0]!;
   const currentScore = useMemo(

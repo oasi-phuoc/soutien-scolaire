@@ -15,6 +15,7 @@ export const LEGACY_MATH_HISTORY_KEY = "tp-math-history";
 export const PLACEMENT_FRENCH_SESSIONS_KEY = "placement-french-sessions";
 export const PLACEMENT_PROFILE_KEY = "placement-profile";
 export const PLACEMENT_FRENCH_DRAFT_KEY = "placement-french-draft";
+export const PLACEMENT_FRENCH_TRAINING_DRAFT_KEY = "placement-french-training-draft";
 export const PLACEMENT_PENDING_KEY = "placement-pending-submissions";
 export const PLACEMENT_TOTAL_HISTORY_KEY = "placement-total-history";
 
@@ -68,7 +69,8 @@ export function saveMathAttempt(attempt: PlacementMathAttempt) {
 }
 
 export function loadFrenchSessions(): PlacementFrenchSession[] {
-  return readJson<PlacementFrenchSession[]>(PLACEMENT_FRENCH_SESSIONS_KEY, []);
+  return readJson<PlacementFrenchSession[]>(PLACEMENT_FRENCH_SESSIONS_KEY, [])
+    .filter((s) => s.kind !== "training");
 }
 
 export function saveFrenchSession(session: PlacementFrenchSession) {
@@ -112,7 +114,17 @@ export function recomputePlacementProfile(): PlacementProfile {
 }
 
 export function loadFrenchDraft(): PlacementFrenchDraft | null {
-  return readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_DRAFT_KEY, null);
+  const draft = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_DRAFT_KEY, null);
+  if (!draft || draft.kind === "training") return null;
+  return draft;
+}
+
+export function loadFrenchTrainingDraft(): PlacementFrenchDraft | null {
+  const draft = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY, null);
+  if (draft) return draft;
+  const legacy = readJson<PlacementFrenchDraft | null>(PLACEMENT_FRENCH_DRAFT_KEY, null);
+  if (legacy?.kind === "training") return legacy;
+  return null;
 }
 
 export function saveFrenchDraft(draft: PlacementFrenchDraft | null) {
@@ -120,7 +132,15 @@ export function saveFrenchDraft(draft: PlacementFrenchDraft | null) {
     if (typeof window !== "undefined") localStorage.removeItem(PLACEMENT_FRENCH_DRAFT_KEY);
     return;
   }
-  writeJson(PLACEMENT_FRENCH_DRAFT_KEY, draft);
+  writeJson(PLACEMENT_FRENCH_DRAFT_KEY, { ...draft, kind: "placement" });
+}
+
+export function saveFrenchTrainingDraft(draft: PlacementFrenchDraft | null) {
+  if (!draft) {
+    if (typeof window !== "undefined") localStorage.removeItem(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY);
+    return;
+  }
+  writeJson(PLACEMENT_FRENCH_TRAINING_DRAFT_KEY, { ...draft, kind: "training" });
 }
 
 export function createFrenchSessionId(): string {

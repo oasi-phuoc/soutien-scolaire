@@ -25,6 +25,7 @@ import {
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
+import { pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 
 type COLevel = "base" | "moyen" | "avance";
 type QuestionTask = COQuestionTask;
@@ -144,6 +145,13 @@ function makeParts(level: COLevel, seed: number): COPart[] {
       audioGroup,
       questions: getCoPartQuestions(audioGroup, part.points, `${seed}-${part.id}`),
     };
+  });
+}
+
+function makeProgressiveCoParts(seed: number): COPart[] {
+  return PROGRESSIVE_SKILL_LEVELS.map((lvl, i) => {
+    const pool = makeParts(lvl, seed + i * 997);
+    return pool[pickIndex(pool.length, `${seed}-co-pick-${i}`)]!;
   });
 }
 
@@ -753,13 +761,17 @@ export function ComprehensionOraleRunner({
   lessonId,
   mode = "module",
   placementSeed,
+  placementProgressive,
   onPlacementComplete,
 }: { lessonId: string } & PlacementRunnerProps) {
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
   const [sessionSeed] = useState(() => placementSeed ?? Date.now());
-  const parts = useMemo(() => makeParts(level, sessionSeed), [level, sessionSeed]);
+  const parts = useMemo(
+    () => (mode === "placement" && placementProgressive ? makeProgressiveCoParts(sessionSeed) : makeParts(level, sessionSeed)),
+    [level, mode, placementProgressive, sessionSeed],
+  );
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
   const [currentId, setCurrentId] = useState(parts[0]!.id);

@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { FrenchPlacementRunner } from "@/components/placement/FrenchPlacementRunner";
 
-export default function PlacementFrenchPage() {
+export default function PlacementFrenchTrainingPage() {
   return (
     <Suspense fallback={<div className="p-8 text-center text-sm text-[var(--color-text-secondary)]">Chargement…</div>}>
-      <FrenchPlacementRunner batteryKind="placement" />
+      <FrenchPlacementRunner batteryKind="training" />
     </Suspense>
   );
 }

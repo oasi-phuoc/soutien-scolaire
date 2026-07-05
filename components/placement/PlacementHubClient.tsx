@@ -10,10 +10,12 @@ import type { PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types
 import {
   loadFrenchDraft,
   loadFrenchSessions,
+  loadFrenchTrainingDraft,
   loadMathHistory,
   loadTotalHistory,
   recomputePlacementProfile,
   saveFrenchDraft,
+  saveFrenchTrainingDraft,
 } from "@/lib/placement/storage";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
@@ -72,9 +74,11 @@ function skillScoreLabel(draft: PlacementFrenchDraft, skill: FrenchSkill): strin
 
 function FrenchTestInProgressCard({
   draft,
+  title = "Test de français en cours",
   onReset,
 }: {
   draft: PlacementFrenchDraft;
+  title?: string;
   onReset: () => void;
 }) {
   const [confirmReset, setConfirmReset] = useState(false);
@@ -85,7 +89,7 @@ function FrenchTestInProgressCard({
     <>
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-[var(--color-bg-primary)]">
         <div className="flex items-center justify-between gap-2">
-          <p className={CARD_TITLE} style={{ color: ACCENT }}>Test de français en cours</p>
+          <p className={CARD_TITLE} style={{ color: ACCENT }}>{title}</p>
           <button
             type="button"
             onClick={() => setConfirmReset(true)}
@@ -125,7 +129,7 @@ function FrenchTestInProgressCard({
           <div className="w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
             <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler la progression ?</p>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              Votre progression du test de français en cours sera perdue. Vous pourrez recommencer depuis le début.
+              Votre progression en cours sera perdue. Vous pourrez recommencer depuis le début.
             </p>
             <div className="flex gap-3">
               <button
@@ -167,7 +171,7 @@ function FrenchLevelToggle({
     <div
       className={`flex shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
       role="group"
-      aria-label="Niveau du test français"
+      aria-label="Niveau d'entraînement français"
     >
       {LEVEL_TOGGLE.map((opt) => (
         <button
@@ -234,13 +238,15 @@ export function PlacementHubClient() {
   const [profileTotal, setProfileTotal] = useState(0);
   const [zone, setZone] = useState("CSC");
   const [pendingFrench, setPendingFrench] = useState(0);
-  const [draft, setDraft] = useState<PlacementFrenchDraft | null>(null);
+  const [placementDraft, setPlacementDraft] = useState<PlacementFrenchDraft | null>(null);
+  const [trainingDraft, setTrainingDraft] = useState<PlacementFrenchDraft | null>(null);
   const [mathHistory, setMathHistory] = useState(() => loadMathHistory());
   const [frenchSessions, setFrenchSessions] = useState(() => loadFrenchSessions());
   const [ready, setReady] = useState(false);
 
-  const frenchInProgress = !!(draft && draft.step !== "recap");
-  const displayLevel = frenchInProgress && draft ? draft.level : level;
+  const placementInProgress = !!(placementDraft && placementDraft.step !== "recap");
+  const trainingInProgress = !!(trainingDraft && trainingDraft.step !== "recap");
+  const displayLevel = trainingInProgress && trainingDraft ? trainingDraft.level : level;
 
   function refreshProfile() {
     const profile = recomputePlacementProfile();
@@ -257,10 +263,11 @@ export function PlacementHubClient() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const localDraft = loadFrenchDraft();
+      const localPlacementDraft = loadFrenchDraft();
+      const localTrainingDraft = loadFrenchTrainingDraft();
       try {
         const saved = localStorage.getItem(LEVEL_KEY) as PlacementLevel | null;
-        if (localDraft?.level) setLevel(localDraft.level);
+        if (localTrainingDraft?.level) setLevel(localTrainingDraft.level);
         else if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
       } catch { /* ignore */ }
       const profile = await syncPlacementFromCloud();
@@ -272,7 +279,8 @@ export function PlacementHubClient() {
       setProfileTotal(profile.total);
       setZone(profile.zone);
       setPendingFrench(profile.pendingFrench);
-      setDraft(localDraft);
+      setPlacementDraft(localPlacementDraft);
+      setTrainingDraft(localTrainingDraft);
       setMathHistory(loadMathHistory());
       setFrenchSessions(loadFrenchSessions());
       setReady(true);
@@ -281,26 +289,34 @@ export function PlacementHubClient() {
   }, []);
 
   function selectLevel(next: PlacementLevel) {
-    if (frenchInProgress) return;
+    if (trainingInProgress) return;
     setLevel(next);
     localStorage.setItem(LEVEL_KEY, next);
   }
 
   function launchFrench() {
-    localStorage.setItem(LEVEL_KEY, level);
-    router.push(`/placement/francais?level=${level}`);
+    router.push("/placement/francais");
   }
 
   function resumeFrench() {
-    const d = loadFrenchDraft();
-    const resumeLevel = d?.level ?? level;
-    localStorage.setItem(LEVEL_KEY, resumeLevel);
-    router.push(`/placement/francais?level=${resumeLevel}`);
+    router.push("/placement/francais");
   }
 
-  async function resetFrenchDraft() {
+  function launchTraining() {
+    localStorage.setItem(LEVEL_KEY, level);
+    router.push(`/placement/francais/entrainement?level=${level}`);
+  }
+
+  function resumeTraining() {
+    const d = loadFrenchTrainingDraft();
+    const resumeLevel = d?.level ?? level;
+    localStorage.setItem(LEVEL_KEY, resumeLevel);
+    router.push(`/placement/francais/entrainement?level=${resumeLevel}`);
+  }
+
+  async function resetPlacementDraft() {
     saveFrenchDraft(null);
-    setDraft(null);
+    setPlacementDraft(null);
     refreshProfile();
     void savePlacementToCloudAction({
       mathHistory: loadMathHistory(),
@@ -308,6 +324,11 @@ export function PlacementHubClient() {
       frenchDraft: null,
       totalHistory: loadTotalHistory(),
     });
+  }
+
+  function resetTrainingDraft() {
+    saveFrenchTrainingDraft(null);
+    setTrainingDraft(null);
   }
 
   if (!ready) {
@@ -321,10 +342,6 @@ export function PlacementHubClient() {
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" showHelp />
-
-      {frenchInProgress && draft && (
-        <FrenchTestInProgressCard draft={draft} onReset={resetFrenchDraft} />
-      )}
 
       <div className="grid grid-cols-2 items-stretch gap-3">
         <div className="flex flex-col gap-3">
@@ -340,26 +357,62 @@ export function PlacementHubClient() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <ScoreCard
-            title="Français"
-            points={frenchCounted}
-            footer={
-              <FrenchLevelToggle
-                level={displayLevel}
-                onChange={selectLevel}
-                disabled={frenchInProgress}
-              />
-            }
-          />
+          <ScoreCard title="Français" points={frenchCounted} footer={<FrenchLevelToggleSpacer />} />
           <button
             type="button"
-            onClick={frenchInProgress ? resumeFrench : launchFrench}
+            onClick={placementInProgress ? resumeFrench : launchFrench}
             className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
             style={{ background: ACCENT }}
           >
-            {frenchInProgress ? "Reprendre" : frenchDone ? "Refaire français" : "Test français"}
+            {placementInProgress ? "Reprendre" : frenchDone ? "Refaire français" : "Test français"}
+          </button>
+          {placementInProgress && (
+            <button
+              type="button"
+              onClick={() => {
+                if (window.confirm("Annuler la progression du test de placement français ?")) {
+                  void resetPlacementDraft();
+                }
+              }}
+              className="text-center text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+            >
+              Annuler le test en cours
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
+        <div>
+          <p className={CARD_TITLE} style={{ color: ACCENT }}>Entraînement par niveau</p>
+          <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
+            Choisissez un niveau A1, A2 ou B1 pour vous entraîner. Les résultats ne comptent pas pour le total de placement.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <FrenchLevelToggle
+            level={displayLevel}
+            onChange={selectLevel}
+            disabled={trainingInProgress}
+          />
+          <button
+            type="button"
+            onClick={trainingInProgress ? resumeTraining : launchTraining}
+            className="rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-bold text-white"
+            style={{ background: ACCENT }}
+          >
+            {trainingInProgress ? "Reprendre" : "S'entraîner"}
           </button>
         </div>
+
+        {trainingInProgress && trainingDraft && (
+          <FrenchTestInProgressCard
+            draft={trainingDraft}
+            title="Entraînement français en cours"
+            onReset={resetTrainingDraft}
+          />
+        )}
       </div>
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">

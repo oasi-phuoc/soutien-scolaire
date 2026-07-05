@@ -12,15 +12,18 @@ import {
   createFrenchSessionId,
   loadFrenchDraft,
   loadFrenchSessions,
+  loadFrenchTrainingDraft,
   loadMathHistory,
   loadTotalHistory,
   saveFrenchDraft,
   saveFrenchSession,
+  saveFrenchTrainingDraft,
   recomputePlacementProfile,
 } from "@/lib/placement/storage";
 import {
   lessonIdForPlacement,
   PLACEMENT_LEVEL_LABELS,
+  type FrenchBatteryKind,
   type PlacementFrenchDraft,
   type PlacementLevel,
   type PlacementSkillResult,
@@ -36,26 +39,40 @@ function levelFromParam(value: string | null): PlacementLevel {
   return "base";
 }
 
-export function FrenchPlacementRunner() {
+function loadDraftForKind(kind: FrenchBatteryKind): PlacementFrenchDraft | null {
+  return kind === "training" ? loadFrenchTrainingDraft() : loadFrenchDraft();
+}
+
+function saveDraftForKind(kind: FrenchBatteryKind, draft: PlacementFrenchDraft | null) {
+  if (kind === "training") saveFrenchTrainingDraft(draft);
+  else saveFrenchDraft(draft);
+}
+
+export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKind?: FrenchBatteryKind }) {
   const router = useRouter();
   const params = useSearchParams();
   const paramLevel = levelFromParam(params.get("level"));
+  const isPlacement = batteryKind === "placement";
+  const isProgressive = isPlacement;
 
-  const draft = typeof window !== "undefined" ? loadFrenchDraft() : null;
-  const [sessionId] = useState(() => draft?.sessionId ?? createFrenchSessionId());
-  const [seed] = useState(() => draft?.seed ?? Date.now());
-  const [level] = useState<PlacementLevel>(() => draft?.level ?? paramLevel);
+  const initialDraft = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
+  const [sessionId] = useState(() => initialDraft?.sessionId ?? createFrenchSessionId());
+  const [seed] = useState(() => initialDraft?.seed ?? Date.now());
+  const [level] = useState<PlacementLevel>(() => {
+    if (isPlacement) return initialDraft?.level ?? "base";
+    return initialDraft?.level ?? paramLevel;
+  });
   const [step, setStep] = useState<FrenchStep>(() => {
-    const d = typeof window !== "undefined" ? loadFrenchDraft() : null;
+    const d = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
     if (d?.step && d.step !== "recap") return d.step;
     return "intro";
   });
-  const [ceScore, setCeScore] = useState(draft?.ce ?? 0);
-  const [coScore, setCoScore] = useState(draft?.co ?? 0);
-  const [peSent, setPeSent] = useState(draft?.peSent ?? false);
-  const [poSent, setPoSent] = useState(draft?.poSent ?? false);
-  const [peSubmissionId, setPeSubmissionId] = useState<string | undefined>(draft?.peSubmissionId);
-  const [poSubmissionId, setPoSubmissionId] = useState<string | undefined>(draft?.poSubmissionId);
+  const [ceScore, setCeScore] = useState(initialDraft?.ce ?? 0);
+  const [coScore, setCoScore] = useState(initialDraft?.co ?? 0);
+  const [peSent, setPeSent] = useState(initialDraft?.peSent ?? false);
+  const [poSent, setPoSent] = useState(initialDraft?.poSent ?? false);
+  const [peSubmissionId, setPeSubmissionId] = useState<string | undefined>(initialDraft?.peSubmissionId);
+  const [poSubmissionId, setPoSubmissionId] = useState<string | undefined>(initialDraft?.poSubmissionId);
 
   const persistDraft = useCallback((next: Partial<{
     step: PlacementFrenchDraft["step"];
@@ -67,8 +84,10 @@ export function FrenchPlacementRunner() {
     poSubmissionId?: string;
   }>) => {
     const draftStep = next.step ?? (step === "intro" ? "ce" : step);
-    saveFrenchDraft({
+    saveDraftForKind(batteryKind, {
       sessionId,
+      kind: batteryKind,
+      progressive: isProgressive,
       level,
       seed,
       step: draftStep,
@@ -80,9 +99,9 @@ export function FrenchPlacementRunner() {
       poSubmissionId: next.poSubmissionId ?? poSubmissionId,
       updatedAt: new Date().toISOString(),
     });
-  }, [ceScore, coScore, level, peSent, peSubmissionId, poSent, poSubmissionId, seed, sessionId, step]);
+  }, [batteryKind, ceScore, coScore, isProgressive, level, peSent, peSubmissionId, poSent, poSubmissionId, seed, sessionId, step]);
 
-  const finalizeSession = useCallback((overrides?: {
+  const finalizePlacementSession = useCallback((overrides?: {
     ce?: number;
     co?: number;
     peSent?: boolean;
@@ -93,6 +112,8 @@ export function FrenchPlacementRunner() {
     const session = buildFrenchSession({
       id: sessionId,
       date: new Date().toISOString(),
+      kind: "placement",
+      progressive: true,
       level,
       ce: overrides?.ce ?? ceScore,
       co: overrides?.co ?? coScore,
@@ -115,6 +136,10 @@ export function FrenchPlacementRunner() {
     return session;
   }, [ceScore, coScore, level, peSent, peSubmissionId, poSent, poSubmissionId, sessionId]);
 
+  const finalizeTraining = useCallback(() => {
+    saveFrenchTrainingDraft(null);
+  }, []);
+
   const onSkillComplete = useCallback((result: PlacementSkillResult) => {
     if (result.skill === "ce") {
       setCeScore(result.points);
@@ -124,18 +149,22 @@ export function FrenchPlacementRunner() {
     }
     if (result.skill === "co") {
       setCoScore(result.points);
-      const partial = buildFrenchSession({
-        id: sessionId,
-        date: new Date().toISOString(),
-        level,
-        ce: ceScore,
-        co: result.points,
-        pe: null,
-        po: null,
-        peSent: false,
-        poSent: false,
-      });
-      saveFrenchSession(partial);
+      if (isPlacement) {
+        const partial = buildFrenchSession({
+          id: sessionId,
+          date: new Date().toISOString(),
+          kind: "placement",
+          progressive: true,
+          level,
+          ce: ceScore,
+          co: result.points,
+          pe: null,
+          po: null,
+          peSent: false,
+          poSent: false,
+        });
+        saveFrenchSession(partial);
+      }
       persistDraft({ step: "pe", co: result.points });
       setStep("pe");
       return;
@@ -150,30 +179,45 @@ export function FrenchPlacementRunner() {
     if (result.skill === "po") {
       setPoSent(Boolean(result.sent));
       if (result.submissionId) setPoSubmissionId(result.submissionId);
-      finalizeSession({
-        peSent: true,
-        poSent: true,
-        peSubmissionId,
-        poSubmissionId: result.submissionId,
-      });
+      if (isPlacement) {
+        finalizePlacementSession({
+          peSent: true,
+          poSent: true,
+          peSubmissionId,
+          poSubmissionId: result.submissionId,
+        });
+      } else {
+        finalizeTraining();
+      }
       setStep("recap");
     }
-  }, [finalizeSession, peSubmissionId, persistDraft]);
+  }, [ceScore, finalizePlacementSession, finalizeTraining, isPlacement, level, peSubmissionId, persistDraft, sessionId]);
 
   const runnerProps = useMemo(() => ({
     mode: "placement" as const,
+    placementBatteryKind: batteryKind,
+    placementProgressive: isProgressive,
+    placementPeHybrid: isPlacement,
     placementSessionId: sessionId,
     placementSeed: seed,
     onPlacementComplete: onSkillComplete,
-  }), [onSkillComplete, seed, sessionId]);
+  }), [batteryKind, isPlacement, isProgressive, onSkillComplete, seed, sessionId]);
+
+  const introTitle = isPlacement
+    ? "TCF progressif"
+    : PLACEMENT_LEVEL_LABELS[level];
+
+  const introSubtitle = isPlacement
+    ? "Parcours CE → CO → PE → PO (100 points). Exercices tirés des niveaux A1, A2 et B1. Les productions seront envoyées au professeur."
+    : `Entraînement ${PLACEMENT_LEVEL_LABELS[level]} — CE → CO → PE → PO. Les résultats ne comptent pas pour le total de placement.`;
 
   if (step === "intro") {
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 py-8 pb-32">
         <PlacementPageHeader
-          label="Test de placement français"
-          title={PLACEMENT_LEVEL_LABELS[level]}
-          subtitle="Parcours CE → CO → PE → PO (100 points). Les productions seront envoyées au professeur."
+          label={isPlacement ? "Test de placement français" : "Entraînement français"}
+          title={introTitle}
+          subtitle={introSubtitle}
           backHref="/placement"
         />
         <button
@@ -192,6 +236,8 @@ export function FrenchPlacementRunner() {
     const session = buildFrenchSession({
       id: sessionId,
       date: new Date().toISOString(),
+      kind: batteryKind,
+      progressive: isProgressive,
       level,
       ce: ceScore,
       co: coScore,
@@ -204,15 +250,21 @@ export function FrenchPlacementRunner() {
     });
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 py-8 pb-32">
-        <h1 className="text-xl font-bold">Batterie française terminée</h1>
+        <h1 className="text-xl font-bold">
+          {isPlacement ? "Batterie française terminée" : "Entraînement terminé"}
+        </h1>
         <ul className="space-y-2 text-sm">
           <li className="flex justify-between"><span>CE</span><span>{ceScore} / 25</span></li>
           <li className="flex justify-between"><span>CO</span><span>{coScore} / 25</span></li>
           <li className="flex justify-between"><span>PE</span><span>{peSent ? "Envoyé — en attente" : "—"}</span></li>
           <li className="flex justify-between"><span>PO</span><span>{poSent ? "Envoyé — en attente" : "—"}</span></li>
-          <li className="flex justify-between border-t pt-2 font-semibold"><span>Brut immédiat</span><span>{session.rawTotal} / 100</span></li>
-          <li className="flex justify-between text-[var(--color-text-secondary)]"><span>Compté (prorata)</span><span>{session.countedTotal} / 100</span></li>
+          <li className="flex justify-between border-t pt-2 font-semibold"><span>Total</span><span>{session.rawTotal} / 100</span></li>
         </ul>
+        {!isPlacement && (
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            Cet entraînement ne compte pas pour votre score de placement.
+          </p>
+        )}
         <button type="button" onClick={() => router.push("/placement")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
           Retour au test de placement
         </button>
@@ -220,7 +272,11 @@ export function FrenchPlacementRunner() {
     );
   }
 
-  const lessonId = lessonIdForPlacement(step === "ce" ? "ce" : step === "co" ? "co" : step === "pe" ? "pe" : "po", level);
+  const lessonId = (() => {
+    if (step === "po" && isProgressive) return "PO-3";
+    const skill = step === "ce" ? "ce" : step === "co" ? "co" : step === "pe" ? "pe" : "po";
+    return lessonIdForPlacement(skill, isProgressive && step === "pe" ? "base" : level);
+  })();
 
   return (
     <div
@@ -233,7 +289,7 @@ export function FrenchPlacementRunner() {
       {step === "ce" && <ComprehensionEcritRunner lessonId={lessonId} {...runnerProps} />}
       {step === "co" && <ComprehensionOraleRunner lessonId={lessonId} {...runnerProps} />}
       {step === "pe" && <ProductionEcriteRunner lessonId={lessonId} {...runnerProps} />}
-      {step === "po" && <OralProductionRunner lessonId={lessonId} {...runnerProps} />}
+      {step === "po" && <OralProductionRunner lessonId={isProgressive ? "PO-3" : lessonId} {...runnerProps} />}
     </div>
   );
 }

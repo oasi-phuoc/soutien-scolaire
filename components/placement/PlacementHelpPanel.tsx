@@ -31,11 +31,11 @@ export function PlacementHelpContent() {
           <li>production orale</li>
         </ul>
         <p>
-          Le test peut être interrompu après chaque étape et repris plus tard. Les points du niveau{" "}
-          <strong className="text-[var(--color-text-primary)]">A1</strong> sont recalculés au prorata de{" "}
-          <strong className="text-[var(--color-text-primary)]">60&nbsp;%</strong>, ceux du niveau{" "}
-          <strong className="text-[var(--color-text-primary)]">A2</strong> à{" "}
-          <strong className="text-[var(--color-text-primary)]">80&nbsp;%</strong>.
+          Le test progressif mélange des exercices des niveaux A1, A2 et B1. Il peut être interrompu après
+          chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
+        </p>
+        <p>
+          L&apos;entraînement par niveau (A1, A2 ou B1) permet de s&apos;exercer sans impacter le score de placement.
         </p>
       </div>
     </div>
