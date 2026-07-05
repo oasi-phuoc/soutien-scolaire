@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Un téléphone">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="hsl(185 78% 62%)" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="hsl(37 78% 62%)" stop-opacity=".34"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1f2937" flood-opacity=".15"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="115" cy="105" r="80" fill="#fff" opacity=".45"/>
+  <circle cx="700" cy="90" r="105" fill="#fff" opacity=".25"/>
+  <path d="M0 505 C150 450 260 540 410 495 C560 450 650 495 800 450 V600 H0Z" fill="#f8fafc" opacity=".82"/>
+  <g filter="url(#soft)">
+    
+    <rect x="150" y="135" width="500" height="300" rx="25" fill="#111827" stroke="#334155" stroke-width="9"/>
+    <circle cx="400" cy="285" r="95" fill="hsl(8 78% 62%)" opacity=".75"/>
+    <circle cx="400" cy="285" r="48" fill="#f8fafc"/>
+    <rect x="300" y="448" width="200" height="32" rx="12" fill="#334155"/>
+    
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M127 500 Q113 610 79 675" fill="none"/>
+      <path d="M203 500 Q217 610 251 675" fill="none"/>
+      <path d="M91 677 h58" />
+      <path d="M201 677 h58" />
+      <path d="M107,283 49,233" />
+      <path d="M223,283 291,235" />
+    </g>
+    <path d="M87 275 Q165 225 243 275 L223 500 Q165 535 107 500 Z" fill="hsl(114 78% 62%)" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="165" cy="197" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M109 188 Q131 100 207 129 Q247 151 213 195 Q175 159 109 188Z" fill="#5b341d" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="145" cy="203" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="189" cy="203" rx="7" ry="11" fill="#263238"/>
+    <path d="M147 233 Q169 250 193 231" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="142" cy="223" r="8" fill="#ff9caf" opacity=".35"/>
+    <circle cx="197" cy="223" r="8" fill="#ff9caf" opacity=".35"/>
+  
+    
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M592 500 Q578 610 544 675" fill="none"/>
+      <path d="M668 500 Q682 610 716 675" fill="none"/>
+      <path d="M556 677 h58" />
+      <path d="M666 677 h58" />
+      <path d="M572,273 512,303" />
+      <path d="M688,273 746,303" />
+    </g>
+    <path d="M552 275 Q630 225 708 275 L688 500 Q630 535 572 500 Z" fill="hsl(315 78% 62%)" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="630" cy="197" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M574 188 Q596 100 672 129 Q712 151 678 195 Q640 159 574 188Z" fill="#b45309" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="610" cy="203" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="654" cy="203" rx="7" ry="11" fill="#263238"/>
+    <path d="M612 233 Q634 250 658 231" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="607" cy="223" r="8" fill="#ff9caf" opacity=".35"/>
+    <circle cx="662" cy="223" r="8" fill="#ff9caf" opacity=".35"/>
+  
+  
+  </g>
+</svg>

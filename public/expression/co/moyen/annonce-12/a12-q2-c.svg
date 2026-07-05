@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Parfum offert">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="hsl(227 78% 62%)" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="hsl(79 78% 62%)" stop-opacity=".34"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1f2937" flood-opacity=".15"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="115" cy="105" r="80" fill="#fff" opacity=".45"/>
+  <circle cx="700" cy="90" r="105" fill="#fff" opacity=".25"/>
+  <path d="M0 505 C150 450 260 540 410 495 C560 450 650 495 800 450 V600 H0Z" fill="#f8fafc" opacity=".82"/>
+  <g filter="url(#soft)">
+    
+    <rect x="90" y="130" width="620" height="300" rx="35" fill="#fef3c7" stroke="#40313a" stroke-width="7"/>
+    <path d="M150 168 v210" stroke="hsl(166 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M230 168 v210" stroke="hsl(219 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M310 168 v210" stroke="hsl(272 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M390 168 v210" stroke="hsl(325 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M470 168 v210" stroke="hsl(18 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M550 168 v210" stroke="hsl(71 78% 62%)" stroke-width="28" stroke-linecap="round"/><path d="M630 168 v210" stroke="hsl(124 78% 62%)" stroke-width="28" stroke-linecap="round"/>
+    <ellipse cx="405" cy="430" rx="210" ry="48" fill="#92400e"/>
+    <path d="M320 360 C350 295 455 295 490 360 Z" fill="hsl(325 78% 62%)" stroke="#40313a" stroke-width="6"/>
+    
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M152 510 Q138 620 104 685" fill="none"/>
+      <path d="M228 510 Q242 620 276 685" fill="none"/>
+      <path d="M116 687 h58" />
+      <path d="M226 687 h58" />
+      <path d="M132,293 74,243" />
+      <path d="M248,293 316,245" />
+    </g>
+    <path d="M112 285 Q190 235 268 285 L248 510 Q190 545 132 510 Z" fill="hsl(219 78% 62%)" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="190" cy="207" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M134 198 Q156 110 232 139 Q272 161 238 205 Q200 169 134 198Z" fill="#a34118" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="170" cy="213" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="214" cy="213" rx="7" ry="11" fill="#263238"/>
+    <path d="M172 243 Q194 260 218 241" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="167" cy="233" r="8" fill="#ff9caf" opacity=".35"/>
+    <circle cx="222" cy="233" r="8" fill="#ff9caf" opacity=".35"/>
+  
+    
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M572 510 Q558 620 524 685" fill="none"/>
+      <path d="M648 510 Q662 620 696 685" fill="none"/>
+      <path d="M536 687 h58" />
+      <path d="M646 687 h58" />
+      <path d="M552,283 492,313" />
+      <path d="M668,283 726,313" />
+    </g>
+    <path d="M532 285 Q610 235 688 285 L668 510 Q610 545 552 510 Z" fill="hsl(18 78% 62%)" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="610" cy="207" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M554 198 Q576 110 652 139 Q692 161 658 205 Q620 169 554 198Z" fill="#3f2a1d" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="590" cy="213" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="634" cy="213" rx="7" ry="11" fill="#263238"/>
+    <path d="M592 243 Q614 260 638 241" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="587" cy="233" r="8" fill="#ff9caf" opacity=".35"/>
+    <circle cx="642" cy="233" r="8" fill="#ff9caf" opacity=".35"/>
+  
+  
+  </g>
+</svg>

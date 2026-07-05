@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Rivoli">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="hsl(356 78% 62%)" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="hsl(208 78% 62%)" stop-opacity=".34"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1f2937" flood-opacity=".15"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="115" cy="105" r="80" fill="#fff" opacity=".45"/>
+  <circle cx="700" cy="90" r="105" fill="#fff" opacity=".25"/>
+  <path d="M0 505 C150 450 260 540 410 495 C560 450 650 495 800 450 V600 H0Z" fill="#f8fafc" opacity=".82"/>
+  <g filter="url(#soft)">
+    
+      <path d="M120 425 C250 330 520 250 705 170" stroke="#dbeafe" stroke-width="120" stroke-linecap="round"/>
+      <path d="M180 360 L630 170 L670 210 L470 360 L565 495 L510 520 L380 410 L210 470 Z" fill="#f8fafc" stroke="#334155" stroke-width="7"/>
+      <circle cx="560" cy="220" r="16" fill="#60a5fa"/><circle cx="510" cy="246" r="14" fill="#60a5fa"/>
+      
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M147 515 Q133 625 99 690" fill="none"/>
+      <path d="M223 515 Q237 625 271 690" fill="none"/>
+      <path d="M111 692 h58" />
+      <path d="M221 692 h58" />
+      <path d="M127,288 67,318" />
+      <path d="M243,288 301,318" />
+    </g>
+    <path d="M107 290 Q185 240 263 290 L243 515 Q185 550 127 515 Z" fill="hsl(46 78% 62%)" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="185" cy="212" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M129 203 Q151 115 227 144 Q267 166 233 210 Q195 174 129 203Z" fill="#5b341d" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="165" cy="218" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="209" cy="218" rx="7" ry="11" fill="#263238"/>
+    <path d="M167 248 Q189 265 213 246" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="162" cy="238" r="8" fill="#ff9caf" opacity=".35"/>
+    <circle cx="217" cy="238" r="8" fill="#ff9caf" opacity=".35"/>
+  
+    
+  </g>
+</svg>

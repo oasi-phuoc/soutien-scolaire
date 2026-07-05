@@ -228,10 +228,10 @@ const EMAIL_SERIES: EmailSeriesItem[] = [
     subject: "Samedi soir",
     body: "Salut !\nJe t'écris pour notre rendez-vous samedi soir. Rose a réservé au restaurant Les Arcades. On se retrouve devant le fleuriste de la place Centrale à 18 h 30. Nous prendrons le menu spécial, puis nous irons boire un thé. Nathalie ne sait pas encore que c&apos;est une surprise. Apporte ton appareil photo pour faire quelques images.\nÀ samedi !\nPaul",
     questions: [
-      { prompt: "Où faut-il se retrouver ?", choices: [{ label: "Devant le fleuriste", image: "/expression/ce/fleuriste.webp" }, { label: "Devant le restaurant", image: "/expression/ce/restaurant.webp" }, { label: "Devant la boutique", image: "/expression/ce/boutique.webp" }], correct: 0, image: true },
+      { prompt: "Où faut-il se retrouver ?", choices: [{ label: "Devant le fleuriste", image: "/expression/ce/fleuriste.svg" }, { label: "Devant le restaurant", image: "/expression/ce/restaurant.svg" }, { label: "Devant la boutique", image: "/expression/ce/boutique.svg" }], correct: 0, image: true },
       { prompt: "À quelle heure est le rendez-vous ?", choices: [{ label: "17 h 30" }, { label: "18 h 30" }, { label: "19 h 30" }], correct: 1 },
       { prompt: "Qu'est-ce qui est une surprise ?", choices: [{ label: "Le restaurant" }, { label: "Le menu spécial" }, { label: "La soirée de Nathalie" }], correct: 2 },
-      { prompt: "Que faut-il apporter ?", choices: [{ label: "Une rose", image: "/expression/ce/rose.webp" }, { label: "Une boisson", image: "/expression/ce/boisson.webp" }, { label: "Un appareil photo", image: "/expression/ce/appareil-photo.webp" }], correct: 2, image: true },
+      { prompt: "Que faut-il apporter ?", choices: [{ label: "Une rose", image: "/expression/ce/rose.svg" }, { label: "Une boisson", image: "/expression/ce/boisson.svg" }, { label: "Un appareil photo", image: "/expression/ce/appareil-photo.svg" }], correct: 2, image: true },
       { prompt: "Qui a réservé le restaurant ?", answer: "Rose", accept: ["rose"] },
       { prompt: "Quel jour a lieu le rendez-vous ?", answer: "samedi", accept: ["samedi soir"] },
     ],
@@ -242,7 +242,7 @@ const EMAIL_SERIES: EmailSeriesItem[] = [
     body: "Bonjour,\nLe cours de français de jeudi est déplacé dans la salle 204. Le professeur demande d'apporter le cahier bleu et un dictionnaire. Le cours commence à 9 h 15 et termine à 11 h. Si vous arrivez en retard, entrez doucement et prenez une place au fond.\nMerci.\nFatima",
     questions: [
       { prompt: "Dans quelle salle a lieu le cours ?", choices: [{ label: "Salle 104" }, { label: "Salle 204" }, { label: "Salle 304" }], correct: 1 },
-      { prompt: "Que faut-il apporter ?", choices: [{ label: "Un cahier bleu", image: "/expression/ce/cahier-bleu.webp" }, { label: "Un sac de sport", image: "/expression/ce/sac-sport.webp" }, { label: "Un parapluie", image: "/expression/ce/parapluie.webp" }], correct: 0, image: true },
+      { prompt: "Que faut-il apporter ?", choices: [{ label: "Un cahier bleu", image: "/expression/ce/cahier-bleu.svg" }, { label: "Un sac de sport", image: "/expression/ce/sac-sport.svg" }, { label: "Un parapluie", image: "/expression/ce/parapluie.svg" }], correct: 0, image: true },
       { prompt: "À quelle heure commence le cours ?", choices: [{ label: "9 h 15" }, { label: "10 h" }, { label: "11 h" }], correct: 0 },
       { prompt: "Où faut-il s'asseoir en cas de retard ?", choices: [{ label: "Devant" }, { label: "Au fond" }, { label: "À côté du professeur" }], correct: 1 },
       { prompt: "Quel jour le cours est-il déplacé ?", answer: "jeudi" },
@@ -255,7 +255,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "Règles d'hygiène",
-      image: "/expression/ce/hygiene.webp",
+      image: "/expression/ce/hygiene.svg",
       imageLabel: "Hygiène",
       body: "Quand vous arrivez au travail, lavez-vous les mains. Portez une tenue propre. Nettoyez votre espace après chaque client.",
       questions: [
@@ -265,7 +265,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Remplacement",
-      image: "/expression/ce/remplacement.webp",
+      image: "/expression/ce/remplacement.svg",
       imageLabel: "Remplacement",
       body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.",
       questions: [
@@ -275,7 +275,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Préparer une infusion",
-      image: "/expression/ce/infusion.webp",
+      image: "/expression/ce/infusion.svg",
       imageLabel: "Infusion",
       body: "Faites chauffer l'eau. Ajoutez les plantes dans la carafe. Laissez reposer cinq minutes. Les clients peuvent demander du miel.",
       questions: [
@@ -287,7 +287,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "À la gare",
-      image: "/expression/ce/gare.webp",
+      image: "/expression/ce/gare.svg",
       imageLabel: "Gare",
       body: "Présentez votre billet avant de monter. Gardez vos bagages près de vous. Les vélos doivent rester dans la zone indiquée.",
       questions: [
@@ -297,7 +297,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Consigne de sécurité",
-      image: "/expression/ce/sécurité.webp",
+      image: "/expression/ce/sécurité.svg",
       imageLabel: "Sécurité",
       body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bâtiment.",
       questions: [
@@ -307,7 +307,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Atelier cuisine",
-      image: "/expression/ce/cuisine.webp",
+      image: "/expression/ce/cuisine.svg",
       imageLabel: "Cuisine",
       body: "Lisez toute la recette avant de commencer. Préparez les ingrédients sur la table. Rangez le matériel après l'activité.",
       questions: [
@@ -322,13 +322,13 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Améliorez votre mémoire !",
     sections: [
-      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/expression/ce/alimentation.webp", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/expression/ce/sport.webp", imageLabel: "Sport" },
-      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/expression/ce/activité-mentale.webp", imageLabel: "Activité mentale" },
+      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/expression/ce/alimentation.svg", imageLabel: "Alimentation" },
+      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/expression/ce/sport.svg", imageLabel: "Sport" },
+      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/expression/ce/activité-mentale.svg", imageLabel: "Activité mentale" },
     ],
     questions: [
       { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/expression/ce/marche.webp" }, { label: "La boxe", image: "/expression/ce/boxe.webp" }, { label: "Le ski nautique", image: "/expression/ce/ski-nautique.webp" }], correct: 0, image: true },
+      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/expression/ce/marche.svg" }, { label: "La boxe", image: "/expression/ce/boxe.svg" }, { label: "Le ski nautique", image: "/expression/ce/ski-nautique.svg" }], correct: 0, image: true },
       { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
       { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
       { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
@@ -339,13 +339,13 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Bien vivre en hiver",
     sections: [
-      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/expression/ce/froid.webp", imageLabel: "Froid" },
-      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "/expression/ce/hiver.webp", imageLabel: "Hiver" },
-      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/expression/ce/lavage-mains.webp", imageLabel: "Lavage des mains" },
+      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/expression/ce/froid.svg", imageLabel: "Froid" },
+      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "/expression/ce/hiver.svg", imageLabel: "Hiver" },
+      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/expression/ce/lavage-mains.svg", imageLabel: "Lavage des mains" },
     ],
     questions: [
       { prompt: "Que faut-il porter quand il fait froid ?", choices: [{ label: "Un manteau chaud" }, { label: "Un maillot de bain" }, { label: "Des sandales" }], correct: 0 },
-      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/expression/ce/neige.webp" }, { label: "Soleil d'été", image: "/expression/ce/soleil.webp" }, { label: "Plage", image: "/expression/ce/plage.webp" }], correct: 0, image: true },
+      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/expression/ce/neige.svg" }, { label: "Soleil d'été", image: "/expression/ce/soleil.svg" }, { label: "Plage", image: "/expression/ce/plage.svg" }], correct: 0, image: true },
       { prompt: "Que faut-il aérer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
       { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenêtres" }], correct: 0 },
       { prompt: "Que faire si on est fatigué ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },
@@ -619,7 +619,7 @@ function makeInstructionPool(level: CELevel): InstructionSeriesItem[] {
   return sets.map((set, setIndex) =>
     set.map(([title, body], cardIndex) => ({
       title,
-      image: `/expression/ce/instruction-${setIndex + 1}-${cardIndex + 1}.webp`,
+      image: `/expression/ce/instruction-${setIndex + 1}-${cardIndex + 1}.svg`,
       imageLabel: title,
       body: level === "avance" ? `${body} Respectez l'ordre exact des actions et reperez la condition importante.` : body,
       questions: [
@@ -647,9 +647,9 @@ function makeArticlePool(level: CELevel): ArticleSeriesItem[] {
   return topics.map(([title, h1, b1, h2, b2, h3, b3], index) => ({
     title,
     sections: [
-      { heading: h1, body: level === "avance" ? `${b1} Cette recommandation demande une organisation régulière.` : b1, image: `/expression/ce/article-${index + 1}-1.webp`, imageLabel: h1 },
-      { heading: h2, body: level === "avance" ? `${b2} Elle complete les autres conseils du document.` : b2, image: `/expression/ce/article-${index + 1}-2.webp`, imageLabel: h2 },
-      { heading: h3, body: level === "avance" ? `${b3} Cela permet d'éviter des difficultes dans la vie quotidienne.` : b3, image: `/expression/ce/article-${index + 1}-3.webp`, imageLabel: h3 },
+      { heading: h1, body: level === "avance" ? `${b1} Cette recommandation demande une organisation régulière.` : b1, image: `/expression/ce/article-${index + 1}-1.svg`, imageLabel: h1 },
+      { heading: h2, body: level === "avance" ? `${b2} Elle complete les autres conseils du document.` : b2, image: `/expression/ce/article-${index + 1}-2.svg`, imageLabel: h2 },
+      { heading: h3, body: level === "avance" ? `${b3} Cela permet d'éviter des difficultes dans la vie quotidienne.` : b3, image: `/expression/ce/article-${index + 1}-3.svg`, imageLabel: h3 },
     ],
     questions: [
       { prompt: "Quel est le sujet principal du texte ?", choices: [{ label: title }, { label: "Un voyage touristique" }, { label: "Une recette de cuisine" }], correct: 0 },
@@ -667,6 +667,54 @@ function expandSeries<T>(base: T[], count = 10): T[] {
   return Array.from({ length: count }, (_, i) => base[i % base.length]!);
 }
 
+function scopeCEImagePath(path: string | undefined, level: CELevel) {
+  if (!path?.startsWith("/expression/ce/")) return path;
+  const scopedPrefix = `/expression/ce/${level}/`;
+  if (path.startsWith(scopedPrefix)) return path;
+  return path.replace("/expression/ce/", scopedPrefix);
+}
+
+function scopeQuestionImages(question: QuestionTask, level: CELevel): QuestionTask {
+  if (question.kind !== "choice") return question;
+  return {
+    ...question,
+    choices: question.choices.map((choice) => ({
+      ...choice,
+      image: scopeCEImagePath(choice.image, level),
+    })),
+  };
+}
+
+function scopeCEPartImages(part: CEPart, level: CELevel): CEPart {
+  if (part.layout === "email") {
+    return { ...part, questions: part.questions.map((question) => scopeQuestionImages(question, level)) };
+  }
+  if (part.layout === "instructions") {
+    return {
+      ...part,
+      cards: part.cards.map((card) => ({
+        ...card,
+        image: scopeCEImagePath(card.image, level) ?? card.image,
+        questions: card.questions.map((question) => scopeQuestionImages(question, level)),
+      })),
+    };
+  }
+  if (part.layout === "article") {
+    return {
+      ...part,
+      article: {
+        ...part.article,
+        sections: part.article.sections.map((section) => ({
+          ...section,
+          image: scopeCEImagePath(section.image, level),
+        })),
+      },
+      questions: part.questions.map((question) => scopeQuestionImages(question, level)),
+    };
+  }
+  return part;
+}
+
 function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
   const orientationPool = level === "base" ? expandSeries(ORIENTATION_TOPICS) : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
@@ -678,7 +726,7 @@ function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
   const instructions = pick(instructionPool, `${level}-${stamp}-instructions`);
   const article = pick(articlePool, `${level}-${stamp}-article`);
 
-  return [
+  const parts: CEPart[] = [
     {
       id: "orientation",
       title: "Lire pour s'orienter",
@@ -726,6 +774,7 @@ function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
       questions: article.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
     },
   ];
+  return parts.map((part) => scopeCEPartImages(part, level));
 }
 
 function buildProgressiveCEParts(stamp: number): CEPart[] {

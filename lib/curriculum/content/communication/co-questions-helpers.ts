@@ -88,7 +88,7 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
 }
 
 function img(level: string, groupSlug: string, qId: string, suffix: string, label: string): COImageChoice {
-  return { label, image: `/expression/co/${level}/${groupSlug}/${qId}-${suffix}.png` };
+  return { label, image: `/expression/co/${level}/${groupSlug}/${qId}-${suffix}.svg` };
 }
 
 export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMultiQuestion[] {

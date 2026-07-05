@@ -74,7 +74,11 @@ export function resolveWordImage(label: string | undefined | null): string | nul
 
 /** True when the path already points at a real vocab/lecture image asset. */
 export function isResolvedImagePath(path: string | undefined | null): boolean {
-  return !!path && (path.startsWith("/vocab/images/") || path.startsWith("/assets/words/img/"));
+  return !!path && (
+    path.startsWith("/vocab/images/") ||
+    path.startsWith("/assets/words/img/") ||
+    path.startsWith("/expression/")
+  );
 }
 
 /**

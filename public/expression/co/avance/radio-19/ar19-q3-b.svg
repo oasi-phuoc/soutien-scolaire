@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="2 M">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="hsl(178 78% 62%)" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="hsl(30 78% 62%)" stop-opacity=".34"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1f2937" flood-opacity=".15"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="115" cy="105" r="80" fill="#fff" opacity=".45"/>
+  <circle cx="700" cy="90" r="105" fill="#fff" opacity=".25"/>
+  <path d="M0 505 C150 450 260 540 410 495 C560 450 650 495 800 450 V600 H0Z" fill="#f8fafc" opacity=".82"/>
+  <g filter="url(#soft)">
+    
+    <circle cx="400" cy="285" r="155" fill="#fff7e8" stroke="#40313a" stroke-width="8"/>
+    <circle cx="400" cy="285" r="12" fill="#40313a"/>
+    <path d="M400 285 L400 400" stroke="#ef4444" stroke-width="10" stroke-linecap="round"/>
+    <path d="M400 285 L332 324" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="400" cy="153" r="5" fill="#40313a"/><circle cx="466" cy="171" r="5" fill="#40313a"/><circle cx="514" cy="219" r="5" fill="#40313a"/><circle cx="532" cy="285" r="5" fill="#40313a"/><circle cx="514" cy="351" r="5" fill="#40313a"/><circle cx="466" cy="399" r="5" fill="#40313a"/><circle cx="400" cy="417" r="5" fill="#40313a"/><circle cx="334" cy="399" r="5" fill="#40313a"/><circle cx="286" cy="351" r="5" fill="#40313a"/><circle cx="268" cy="285" r="5" fill="#40313a"/><circle cx="286" cy="219" r="5" fill="#40313a"/><circle cx="334" cy="171" r="5" fill="#40313a"/>
+  
+  </g>
+</svg>
