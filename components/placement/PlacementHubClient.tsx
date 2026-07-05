@@ -63,20 +63,67 @@ const PILL_RED_LIGHT = "color-mix(in oklch, #dc2626 22%, white)";
 const PILL_RED_DONE = "color-mix(in oklch, #dc2626 68%, #7f1d1d)";
 const PILL_RED_ACTIVE = "#7f1d1d";
 
-function FrenchTestInProgressCard({
+function FrenchSkillPills({ draft }: { draft: PlacementFrenchDraft }) {
+  return (
+    <div className="flex items-center justify-center gap-3">
+      {STEP_ORDER.map((skill) => {
+        const state = skillPillState(draft, skill);
+        const pillStyle =
+          state === "pending"
+            ? { background: PILL_RED_LIGHT, color: "#991b1b" }
+            : state === "active"
+              ? { background: PILL_RED_ACTIVE, color: "#fff" }
+              : { background: PILL_RED_DONE, color: "#fff" };
+
+        const pill = (
+          <span
+            className="flex h-10 w-10 items-center justify-center rounded-full text-[11px] font-bold"
+            style={pillStyle}
+          >
+            {SKILL_HEADERS[skill]}
+          </span>
+        );
+
+        if (state === "active") {
+          return (
+            <div
+              key={skill}
+              className="rounded-full p-0.5"
+              style={{ boxShadow: "0 0 0 2px #7f1d1d" }}
+            >
+              {pill}
+            </div>
+          );
+        }
+
+        return <div key={skill}>{pill}</div>;
+      })}
+    </div>
+  );
+}
+
+function FrenchProgressBlock({
   draft,
-  title = "Test de français en cours",
+  title,
   onReset,
+  embedded = false,
 }: {
   draft: PlacementFrenchDraft;
-  title?: string;
+  title: string;
   onReset: () => void;
+  embedded?: boolean;
 }) {
   const [confirmReset, setConfirmReset] = useState(false);
 
   return (
     <>
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-[var(--color-bg-primary)]">
+      <div
+        className={
+          embedded
+            ? "border-t border-[var(--color-border-default)] pt-4"
+            : "rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-[var(--color-bg-primary)]"
+        }
+      >
         <div className="flex items-center justify-between gap-2">
           <p className={CARD_TITLE} style={{ color: ACCENT }}>{title}</p>
           <button
@@ -87,39 +134,8 @@ function FrenchTestInProgressCard({
             Reset
           </button>
         </div>
-        <div className="mt-3 flex items-center justify-center gap-3">
-          {STEP_ORDER.map((skill) => {
-            const state = skillPillState(draft, skill);
-            const pillStyle =
-              state === "pending"
-                ? { background: PILL_RED_LIGHT, color: "#991b1b" }
-                : state === "active"
-                  ? { background: PILL_RED_ACTIVE, color: "#fff" }
-                  : { background: PILL_RED_DONE, color: "#fff" };
-
-            const pill = (
-              <span
-                className="flex h-10 w-10 items-center justify-center rounded-full text-[11px] font-bold"
-                style={pillStyle}
-              >
-                {SKILL_HEADERS[skill]}
-              </span>
-            );
-
-            if (state === "active") {
-              return (
-                <div
-                  key={skill}
-                  className="rounded-full p-0.5"
-                  style={{ boxShadow: "0 0 0 2px #7f1d1d" }}
-                >
-                  {pill}
-                </div>
-              );
-            }
-
-            return <div key={skill}>{pill}</div>;
-          })}
+        <div className="mt-3">
+          <FrenchSkillPills draft={draft} />
         </div>
       </div>
 
@@ -191,38 +207,14 @@ function FrenchLevelToggle({
   );
 }
 
-/** Même gabarit que FrenchLevelToggle, invisible — aligne les cartes maths/français. */
-function FrenchLevelToggleSpacer() {
+function ScoreColumn({ title, points }: { title: string; points: number }) {
   return (
-    <div className="invisible flex shrink-0 rounded-lg border border-transparent p-0.5" aria-hidden>
-      {LEVEL_TOGGLE.map((opt) => (
-        <span key={opt.id} className="min-w-[2.25rem] rounded-md px-2 py-1.5 text-xs font-bold">
-          {opt.label}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function ScoreCard({
-  title,
-  points,
-  footer,
-}: {
-  title: string;
-  points: number;
-  footer?: React.ReactNode;
-}) {
-  return (
-    <div className="flex h-full min-h-[9rem] flex-1 flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 text-center">
+    <div className="flex flex-1 flex-col py-1 text-center">
       <p className={CARD_TITLE} style={{ color: ACCENT }}>{title}</p>
       <p className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">
         {formatHalf(points)}
         <span className="text-sm font-medium text-[var(--color-text-secondary)]"> / 100</span>
       </p>
-      <div className="mt-auto flex justify-center pt-2">
-        {footer ?? <FrenchLevelToggleSpacer />}
-      </div>
     </div>
   );
 }
@@ -342,9 +334,22 @@ export function PlacementHubClient() {
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" showHelp />
 
-      <div className="grid grid-cols-2 items-stretch gap-3">
-        <div className="flex flex-col gap-3">
-          <ScoreCard title="Mathématiques" points={mathCounted} footer={<FrenchLevelToggleSpacer />} />
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
+        <div className="grid grid-cols-2 gap-3 divide-x divide-[var(--color-border-default)]">
+          <ScoreColumn title="Mathématiques" points={mathCounted} />
+          <ScoreColumn title="Français" points={frenchCounted} />
+        </div>
+
+        {placementInProgress && placementDraft && (
+          <FrenchProgressBlock
+            draft={placementDraft}
+            title="Test en cours"
+            onReset={() => void resetPlacementDraft()}
+            embedded
+          />
+        )}
+
+        <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
             onClick={() => router.push("/placement/mathematiques")}
@@ -353,10 +358,6 @@ export function PlacementHubClient() {
           >
             {mathDone ? "Refaire maths" : "Test maths"}
           </button>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <ScoreCard title="Français" points={frenchCounted} footer={<FrenchLevelToggleSpacer />} />
           <button
             type="button"
             onClick={placementInProgress ? resumeFrench : launchFrench}
@@ -365,19 +366,6 @@ export function PlacementHubClient() {
           >
             {placementInProgress ? "Reprendre" : frenchDone ? "Refaire français" : "Test français"}
           </button>
-          {placementInProgress && (
-            <button
-              type="button"
-              onClick={() => {
-                if (window.confirm("Annuler la progression du test de placement français ?")) {
-                  void resetPlacementDraft();
-                }
-              }}
-              className="text-center text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
-            >
-              Annuler le test en cours
-            </button>
-          )}
         </div>
       </div>
 
@@ -406,10 +394,11 @@ export function PlacementHubClient() {
         </div>
 
         {trainingInProgress && trainingDraft && (
-          <FrenchTestInProgressCard
+          <FrenchProgressBlock
             draft={trainingDraft}
-            title="Entraînement français en cours"
+            title="Entraînement en cours"
             onReset={resetTrainingDraft}
+            embedded
           />
         )}
       </div>
