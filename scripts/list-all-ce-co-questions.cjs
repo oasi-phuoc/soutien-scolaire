@@ -56,36 +56,8 @@ function evalArrayAfter(src, marker) {
 }
 
 // --------------------------------------------------------------------------
-// CE — reconstruct questions exactly as the component does
+// CE — read the authored pools (base / moyen / avancé) straight from the source
 // --------------------------------------------------------------------------
-function emailQuestions(from, subject, a, b, c, d) {
-  return [
-    { prompt: "Quelle information principale est donnée dans ce message ?", choices: [a, "Une information sans rapport", "Une publicité"], correct: 0 },
-    { prompt: "Quel autre détail faut-il retenir ?", choices: ["Le document ne le dit pas", b, "Une erreur de date"], correct: 1 },
-    { prompt: "Que faut-il apporter ou faire ?", choices: [c, "Ne rien faire", "Téléphoner à la police"], correct: 0 },
-    { prompt: "Quel est le dernier détail important ?", choices: ["Le message est annule", d, "La personne doit partir"], correct: 1 },
-    { prompt: "Qui envoie le message ?", answer: (from.split("@")[0] ?? from) },
-    { prompt: "Quel est l'objet du message ?", answer: subject },
-  ];
-}
-function instructionQuestions(title, body) {
-  return [
-    { prompt: "Quelle action est demandee ?", choices: [title, "Changer de sujet", "Ignorer le document"], correct: 0 },
-    { prompt: "Que faut-il faire selon le texte ?", choices: [body.split(",")[0] ?? body, "Partir sans prevenir", "Ne rien vérifier"], correct: 0 },
-  ];
-}
-function articleQuestions(title, h1, b1, h2, b2, h3, b3) {
-  return [
-    { prompt: "Quel est le sujet principal du texte ?", choices: [title, "Un voyage touristique", "Une recette de cuisine"], correct: 0 },
-    { prompt: `Que dit la partie "${h1}" ?`, choices: [b1, "Elle ne donne aucune information", "Elle parle d'un autre sujet"], correct: 0 },
-    { prompt: `Quel mot complete le conseil sur "${h2}" ?`, answer: h2 },
-    { prompt: `Que faut-il faire selon la partie "${h3}" ?`, choices: [b3, "Arreter de lire", "Ignorer les conseils"], correct: 0 },
-    { prompt: "A quoi sert ce texte ?", choices: ["Donner des conseils", "Vendre une voiture", "Annoncer un concert"], correct: 0 },
-    { prompt: "Combien de parties contient l'article ?", answer: "3" },
-    { prompt: "Quel titre convient le mieux ?", choices: [title, "Une histoire imaginaire", "Un menu de restaurant"], correct: 0 },
-  ];
-}
-
 function normQuestion(q) {
   if ("answer" in q && !q.choices) return { type: "saisie", prompt: q.prompt, answer: q.answer };
   const labels = q.choices.map((c) => (typeof c === "string" ? c : c.label));
@@ -94,67 +66,35 @@ function normQuestion(q) {
 
 function extractCe() {
   const src = read(ceFile);
-  const EMAIL_SERIES = evalArrayAfter(src, "const EMAIL_SERIES: EmailSeriesItem[] =");
-  const INSTRUCTION_SERIES = evalArrayAfter(src, "const INSTRUCTION_SERIES: InstructionSeriesItem[] =");
-  const ARTICLE_SERIES = evalArrayAfter(src, "const ARTICLE_SERIES: ArticleSeriesItem[] =");
-  const ORIENTATION_TOPICS = evalArrayAfter(src, "const ORIENTATION_TOPICS: OrientationSeriesItem[] =");
-  const ORIENTATION_MOYEN = evalArrayAfter(src, "const ORIENTATION_MOYEN: OrientationSeriesItem[] =");
-
-  // makeEmailPool scenarios (avance branch and moyen/else branch)
-  const scenIdx = src.indexOf('const scenarios = level === "avance"');
-  const avanceText = sliceArray(src, src.indexOf("? [", scenIdx));
-  const afterAvance = src.indexOf("? [", scenIdx) + avanceText.length;
-  const moyenText = sliceArray(src, src.indexOf(": [", afterAvance));
-  // eslint-disable-next-line no-eval
-  const avanceScenarios = eval("(" + avanceText + ")");
-  // eslint-disable-next-line no-eval
-  const moyenScenarios = eval("(" + moyenText + ")");
-  const setsArr = evalArrayAfter(src, "const sets =");
-  const topicsArr = evalArrayAfter(src, "const topics =");
+  const arr = (marker) => evalArrayAfter(src, marker);
 
   const orientationToItems = (pool) =>
-    pool.map((it, i) => ({
+    pool.map((it) => ({
       title: `Association — ${it.context}`,
-      questions: it.people.map(([statement, docIdx]) => ({
-        type: "association",
-        prompt: statement,
-        answer: it.docs[docIdx][0],
-      })),
+      questions: it.people.map(([statement, docIdx]) => ({ type: "association", prompt: statement, answer: it.docs[docIdx][0] })),
     }));
-
-  const staticEmails = (pool) => pool.map((it) => ({ title: `Courriel — ${it.subject} (${it.from})`, questions: it.questions.map(normQuestion) }));
-  const staticInstructions = (pool) =>
-    pool.flatMap((set, si) => set.map((card) => ({ title: `Consigne — ${card.title}`, questions: card.questions.map(normQuestion) })));
-  const staticArticles = (pool) => pool.map((it) => ({ title: `Article — ${it.title}`, questions: it.questions.map(normQuestion) }));
-
-  const genEmails = (scenarios) =>
-    scenarios.map(([from, subject, body, a, b, c, d]) => ({
-      title: `Courriel — ${subject} (${from})`,
-      questions: emailQuestions(from, subject, a, b, c, d).map(normQuestion),
-    }));
-  const genInstructions = (setsA) =>
-    setsA.flatMap((set) => set.map(([title, body]) => ({ title: `Consigne — ${title}`, questions: instructionQuestions(title, body).map(normQuestion) })));
-  const genArticles = (topics) =>
-    topics.map(([title, h1, b1, h2, b2, h3, b3]) => ({ title: `Article — ${title}`, questions: articleQuestions(title, h1, b1, h2, b2, h3, b3).map(normQuestion) }));
+  const emails = (pool) => pool.map((it) => ({ title: `Courriel — ${it.subject} (${it.from})`, questions: it.questions.map(normQuestion) }));
+  const instructions = (pool) => pool.flatMap((set) => set.map((card) => ({ title: `Consigne — ${card.title}`, questions: card.questions.map(normQuestion) })));
+  const articles = (pool) => pool.map((it) => ({ title: `Article — ${it.title}`, questions: it.questions.map(normQuestion) }));
 
   return {
     base: {
-      orientation: orientationToItems(ORIENTATION_TOPICS),
-      emails: staticEmails(EMAIL_SERIES),
-      instructions: staticInstructions(INSTRUCTION_SERIES),
-      articles: staticArticles(ARTICLE_SERIES),
+      orientation: orientationToItems(arr("const ORIENTATION_TOPICS: OrientationSeriesItem[] =")),
+      emails: emails(arr("const EMAIL_SERIES: EmailSeriesItem[] =")),
+      instructions: instructions(arr("const INSTRUCTION_SERIES: InstructionSeriesItem[] =")),
+      articles: articles(arr("const ARTICLE_SERIES: ArticleSeriesItem[] =")),
     },
     moyen: {
-      orientation: orientationToItems(ORIENTATION_MOYEN),
-      emails: genEmails(moyenScenarios),
-      instructions: genInstructions(setsArr),
-      articles: genArticles(topicsArr),
+      orientation: orientationToItems(arr("const ORIENTATION_MOYEN: OrientationSeriesItem[] =")),
+      emails: emails(arr("const CE_MOYEN_EMAILS: EmailSeriesItem[] =")),
+      instructions: instructions(arr("const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] =")),
+      articles: articles(arr("const CE_MOYEN_ARTICLES: ArticleSeriesItem[] =")),
     },
     avance: {
-      orientation: orientationToItems(ORIENTATION_MOYEN), // ORIENTATION_AVANCE dérive de MOYEN (mêmes énoncés)
-      emails: genEmails(avanceScenarios),
-      instructions: genInstructions(setsArr),
-      articles: genArticles(topicsArr),
+      orientation: orientationToItems(arr("const ORIENTATION_MOYEN: OrientationSeriesItem[] =")), // ORIENTATION_AVANCE dérive de MOYEN
+      emails: emails(arr("const CE_AVANCE_EMAILS: EmailSeriesItem[] =")),
+      instructions: instructions(arr("const CE_AVANCE_INSTRUCTIONS: InstructionSeriesItem[] =")),
+      articles: articles(arr("const CE_AVANCE_ARTICLES: ArticleSeriesItem[] =")),
     },
   };
 }

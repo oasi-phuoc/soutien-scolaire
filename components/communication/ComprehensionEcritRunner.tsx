@@ -561,108 +561,6 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
   ]),
 }));
 
-function makeEmailPool(level: CELevel): EmailSeriesItem[] {
-  const scenarios = level === "avance"
-    ? [
-        ["secrétariat@formation.ch", "Changement d'horaire", "Bonjour,\nLe cours de préparation à l'examen de samedi est avancé à 8 h 45. Il aura lieu dans la salle 312, au troisième étage. Apportez votre pièce d'identité, un stylo bleu et les exercices terminés. Les personnes absentes devront envoyer un justificatif avant lundi midi.\nCordialement,\nLe secrétariat", "8 h 45", "salle 312", "pièce d'identité", "lundi midi"],
-        ["logement@régie.ch", "Visite technique", "Madame, Monsieur,\nUn technicien passera mardi entre 14 h et 16 h pour contrôler les radiateurs. Si vous ne pouvez pas être présent, merci de laisser une clé chez un voisin et de nous envoyer son nom par courriel. Les travaux ne durent normalement pas plus de vingt minutes.\nMeilleures salutations,\nLa régie", "mardi", "radiateurs", "un voisin", "vingt minutes"],
-        ["bibliothèque@ville.ch", "Livre réservé", "Bonjour,\nLe livre que vous avez réservé est disponible jusqu'au 18 juin. Vous pouvez le retirer à l'accueil pendant les horaires d'ouverture. Si vous ne venez pas avant cette date, la réservation sera annulée et le livre sera proposé à une autre personne.\nLa bibliothèque", "18 juin", "à l'accueil", "annulée", "livre"],
-        ["musée@culture.ch", "Confirmation de visite", "Bonjour,\nVotre groupe est attendu vendredi à 13 h 50 devant l'entrée principale du musée. La visite guidée commencera à 14 h et durera une heure. Les sacs volumineux devront rester au vestiaire. Le paiement se fera à la caisse après la visite.\nAccueil du musée", "vendredi", "13 h 50", "vestiaire", "après la visite"],
-        ["transport@cff.ch", "Objet retrouvé", "Bonjour,\nNous avons retrouvé un sac noir correspondant à votre description. Il se trouve au guichet des objets trouvés de Lausanne. Vous devez présenter une pièce d'identité et payer cinq francs de frais. Le guichet ferme à 18 h 30.\nCFF", "Lausanne", "sac noir", "cinq francs", "18 h 30"],
-        ["école@classe.ch", "Réunion parents", "Bonjour,\nLa réunion des parents aura lieu jeudi prochain à 19 h dans la salle polyvalente. Nous parlerons du voyage scolaire, du budget et des règles de sécurité. Merci de confirmer votre présence avant mardi soir en répondant à ce message.\nLa direction", "jeudi prochain", "19 h", "voyage scolaire", "mardi soir"],
-        ["club@natation.ch", "Inscription au cours", "Bonjour,\nVotre place au cours de natation débutant est confirmée. Le premier cours aura lieu le 3 septembre à 17 h 15. Prenez un maillot, un bonnet de bain et une serviette. Les vestiaires ouvrent quinze minutes avant le cours.\nLe club", "3 septembre", "17 h 15", "bonnet de bain", "quinze minutes"],
-        ["commune@admin.ch", "Document manquant", "Bonjour,\nVotre dossier est presque complet, mais il manque une copie de votre assurance maladie. Vous pouvez l'envoyer par courriel ou la déposer au guichet jusqu'à vendredi 11 h. Sans ce document, le rendez-vous devra être reporté.\nCommune", "assurance maladie", "vendredi 11 h", "guichet", "reporté"],
-        ["magasin@meubles.ch", "Livraison", "Bonjour,\nVotre armoire sera livrée mercredi matin entre 8 h et 11 h. Le livreur vous appellera trente minutes avant son arrivée. Merci de vérifier que l'ascenseur fonctionne et que le passage jusqu'à la chambre est libre.\nService livraison", "mercredi matin", "8 h et 11 h", "ascenseur", "trente minutes"],
-        ["centre@emploi.ch", "Atelier CV", "Bonjour,\nVous êtes inscrit à l'atelier CV de lundi. La séance commence à 9 h précise dans la salle 4. Apportez vos certificats de travail et une annonce d'emploi qui vous intéresse. L'atelier est gratuit mais l'inscription est obligatoire.\nCentre emploi", "lundi", "salle 4", "certificats de travail", "gratuite"],
-      ]
-    : [
-        ["école@cours.ch", "Cours de mardi", "Bonjour,\nLe cours de français de mardi commence à 10 h. Il aura lieu dans la salle 12. Apportez votre cahier et votre stylo. Si vous êtes absent, envoyez un message au professeur.\nMerci.", "10 h", "salle 12", "cahier", "professeur"],
-        ["gare@cff.ch", "Billet trouvé", "Bonjour,\nVous avez oublié votre billet au guichet. Il est gardé à la gare de Sion jusqu'à vendredi. Venez avec une pièce d'identité. Le guichet ferme à 18 h.\nCFF", "Sion", "vendredi", "pièce d'identité", "18 h"],
-        ["club@sport.ch", "Match samedi", "Salut,\nLe match de football a lieu samedi à 15 h. Le rendez-vous est devant la salle de sport à 14 h 30. Prenez vos chaussures et une bouteille d'eau.\nLe coach", "samedi", "15 h", "chaussures", "bouteille d'eau"],
-        ["voisine@mail.ch", "Garde du chat", "Bonjour,\nJe pars deux jours à Genève. Peux-tu donner à manger à mon chat vendredi soir et samedi matin ? La clé est sous le pot de fleurs. Merci beaucoup.\nMina", "Genève", "chat", "vendredi soir", "sous le pot de fleurs"],
-        ["bibliothèque@ville.ch", "Livre en retard", "Bonjour,\nVotre livre est en retard depuis lundi. Merci de le rapporter cette semaine à la bibliothèque. Vous pouvez aussi le déposer dans la boîte devant l'entrée.\nLa bibliothèque", "lundi", "cette semaine", "bibliothèque", "boîte"],
-        ["dentiste@cabinet.ch", "Rendez-vous", "Bonjour,\nVotre rendez-vous chez le dentiste est jeudi à 8 h 30. Le cabinet se trouve rue du Rhône 14. Merci d'arriver dix minutes avant l'heure.\nCabinet dentaire", "jeudi", "8 h 30", "rue du Rhône 14", "dix minutes"],
-        ["magasin@vélo.ch", "Réparation vélo", "Bonjour,\nVotre vélo est réparé. Vous pouvez venir le chercher demain après 13 h. Le prix est de 45 francs. Le magasin ferme à 18 h 30.\nVélo Plus", "demain", "13 h", "45 francs", "18 h 30"],
-        ["centre@quartier.ch", "Atelier cuisine", "Bonjour,\nL'atelier cuisine aura lieu mercredi de 18 h à 20 h. Nous préparons une soupe et un dessert. Apportez une boîte pour emporter les restes.\nCentre de quartier", "mercredi", "18 h", "soupe", "boîte"],
-        ["régie@immeuble.ch", "Buanderie", "Bonjour,\nLa buanderie sera fermée lundi matin pour nettoyage. Vous pourrez laver votre linge lundi après 14 h ou mardi toute la journée.\nLa régie", "lundi matin", "nettoyage", "14 h", "mardi"],
-        ["ami@mail.ch", "Anniversaire", "Salut,\nJe fête mon anniversaire dimanche à midi au parc. Tu peux venir avec ta famille. Apporte une couverture si tu en as une. Il y aura des boissons et un gâteau.\nSamir", "dimanche", "midi", "parc", "couverture"],
-      ];
-
-  return scenarios.map(([from, subject, body, a, b, c, d]) => ({
-    from,
-    subject,
-    body,
-    questions: [
-      { prompt: "Quelle information principale est donnée dans ce message ?", choices: [{ label: a }, { label: "Une information sans rapport" }, { label: "Une publicité" }], correct: 0 },
-      { prompt: "Quel autre détail faut-il retenir ?", choices: [{ label: "Le document ne le dit pas" }, { label: b }, { label: "Une erreur de date" }], correct: 1 },
-      { prompt: "Que faut-il apporter ou faire ?", choices: [{ label: c }, { label: "Ne rien faire" }, { label: "Téléphoner à la police" }], correct: 0 },
-      { prompt: "Quel est le dernier détail important ?", choices: [{ label: "Le message est annule" }, { label: d }, { label: "La personne doit partir" }], correct: 1 },
-      { prompt: "Qui envoie le message ?", answer: from.split("@")[0] ?? from },
-      { prompt: "Quel est l'objet du message ?", answer: subject },
-    ],
-  }));
-}
-
-function makeInstructionPool(level: CELevel): InstructionSeriesItem[] {
-  const sets = [
-    [["Nettoyer une salle", "Passez le balai, videz les poubelles, puis fermez les fenetres avant de partir."], ["Preparer un rendez-vous", "Relisez le dossier, imprimez la feuille de presence et accueillez la personne a l'heure."], ["Utiliser une machine", "Branchez l'appareil, choisissez le programme court et attendez le signal de fin."]],
-    [["Faire une demande", "Completez le formulaire, signez en bas de page et ajoutez une copie de votre permis."], ["Prendre un medicament", "Prenez un comprime après le repas du soir avec un grand verre d'eau."], ["Se rendre a un entretien", "Arrivez dix minutes avant l'heure, apportez votre CV et éteignez votre téléphone."]],
-    [["Trier les déchets", "Mettez le papier dans le container bleu et le verre dans le container vert."], ["Preparer une sortie", "Verifiez la meteo, prenez une veste et gardez le numero du responsable."], ["Recevoir un colis", "Controlez le nom, signez le recu et gardez le colis au sec."]],
-    [["Faire une infusion", "Chauffez l'eau, ajoutez les plantes, puis laissez reposer cinq minutes."], ["Accueillir un client", "Saluez le client, demandez son nom et proposez une chaise."], ["Fermer un local", "Eteignez les lumières, vérifiez les robinets et fermez la porte a cle."]],
-    [["Suivre une recette", "Lavez les légumes, coupez-les en petits morceaux et faites cuire vingt minutes."], ["Utiliser la bibliothèque", "Presentez votre carte, scannez le livre et respectez la date de retour."], ["Changer un rendez-vous", "Appelez le secrétariat, proposez deux dates et notez la nouvelle heure."]],
-    [["Organiser une classe", "Distribuez les feuilles, ecrivez la consigne au tableau et ramassez les cahiers."], ["Prendre le bus", "Achetez le billet avant de monter et validez-le dans le bus."], ["Aider a la cantine", "Servez les plats chauds, nettoyez les tables et rangez les plateaux."]],
-    [["Faire une lessive", "Triez les vêtements, mettez la lessive et choisissez quarante degrés."], ["Participer a un cours", "Installez-vous, ouvrez le cahier et posez vos questions a la fin."], ["Rendre un document", "Ecrivez votre nom, vérifiez les pages et déposez le dossier au guichet."]],
-    [["S'inscrire a une activité", "Choisissez le cours, notez votre téléphone et payez l'inscription."], ["Preparer un sac", "Mettez la gourde, le pique-nique et une veste de pluie."], ["Utiliser un ordinateur", "Allumez l'écran, entrez votre mot de passe et fermez la session après usage."]],
-    [["Respecter la sécurité", "Portez les gants, restez derriere la ligne jaune et signalez tout problème."], ["Faire un achat", "Comparez les prix, gardez le ticket et vérifiez la monnaie."], ["Lire un horaire", "Cherchez la ligne, regardez le quai et controlez l'heure de départ."]],
-    [["Preparer une reunion", "Reserve une salle, envoie l'ordre du jour et prépare les documents."], ["Demander une aide", "Expliquez votre situation, montrez les justificatifs et notez le prochain rendez-vous."], ["Faire un appel", "Presentez-vous, expliquez la raison de l'appel et notez la réponse."]],
-  ];
-  return sets.map((set, setIndex) =>
-    set.map(([title, body], cardIndex) => ({
-      title,
-      image: `/expression/ce/instruction-${setIndex + 1}-${cardIndex + 1}.webp`,
-      imageLabel: title,
-      body: level === "avance" ? `${body} Respectez l'ordre exact des actions et reperez la condition importante.` : body,
-      questions: [
-        { prompt: "Quelle action est demandee ?", choices: [{ label: title }, { label: "Changer de sujet" }, { label: "Ignorer le document" }], correct: 0 },
-        { prompt: "Que faut-il faire selon le texte ?", choices: [{ label: body.split(",")[0] ?? body }, { label: "Partir sans prevenir" }, { label: "Ne rien vérifier" }], correct: 0 },
-      ],
-    })),
-  );
-}
-
-function makeArticlePool(level: CELevel): ArticleSeriesItem[] {
-  const topics = [
-    ["Bien dormir", "Le sommeil", "Couchez-vous a une heure régulière et évitez les écrans tard le soir.", "La chambre", "Une chambre calme et aeree aide a mieux se reposer.", "Le réveil", "Levez-vous doucement et buvez de l'eau."],
-    ["Manger équilibre", "Les repas", "Variez les légumes, les céréales et les protéines pendant la semaine.", "Les boissons", "L'eau reste la meilleure boisson pour le corps.", "Les habitudes", "Mangez lentement et évitez de grignoter toute la journée."],
-    ["Se déplacer en ville", "Les transports", "Le bus et le train permettent de voyager sans chercher de parking.", "Le vélo", "Le vélo est pratique pour les petits trajets.", "La sécurité", "Respectez les feux et restez visible le soir."],
-    ["Chercher un emploi", "Le CV", "Un CV clair presente les experiences et les competences utiles.", "L'entretien", "Il faut arriver a l'heure et repondre calmement.", "Le suivi", "Après l'entretien, on peut envoyer un message de remerciement."],
-    ["Gerer son budget", "Les depenses", "Notez les factures fixes avant de faire des achats.", "Les economies", "Mettez une petite somme de cote quand c&apos;est possible.", "Les priorites", "Payez d&apos;abord le logement, la nourriture et les assurances."],
-    ["Proteger la nature", "Le tri", "Separez le papier, le verre et les déchets speciaux.", "L'eau", "Fermez le robinet quand vous n'utilisez pas l'eau.", "Les transports", "Marcher ou prendre le bus réduit la pollution."],
-    ["Apprendre une langue", "La pratique", "Parlez un peu chaque jour, meme avec des phrases simples.", "La lecture", "Lire des textes courts aide a memoriser les mots.", "L'ecoute", "Ecoutez des dialogues pour comprendre la prononciation."],
-    ["Vivre en immeuble", "Le bruit", "Evitez le bruit tard le soir et tot le matin.", "La buanderie", "Respectez le planning et laissez la machine propre.", "Les voisins", "Un bonjour et une discussion calme evitent beaucoup de problèmes."],
-    ["Preparer un examen", "Le planning", "Divisez le travail en petites parties sur plusieurs jours.", "Les exercices", "Refaites les exercices difficiles et corrigez vos erreurs.", "Le jour J", "Dormez assez et arrivez avec le materiel necessaire."],
-    ["Utiliser Internet", "Les mots de passe", "Choisissez un mot de passe long et different pour chaque compte.", "Les messages", "Ne cliquez pas sur un lien suspect.", "Les données", "Ne partagez pas vos informations personnelles avec n'importe qui."],
-  ];
-
-  return topics.map(([title, h1, b1, h2, b2, h3, b3], index) => ({
-    title,
-    sections: [
-      { heading: h1, body: level === "avance" ? `${b1} Cette recommandation demande une organisation régulière.` : b1, image: `/expression/ce/article-${index + 1}-1.webp`, imageLabel: h1 },
-      { heading: h2, body: level === "avance" ? `${b2} Elle complete les autres conseils du document.` : b2, image: `/expression/ce/article-${index + 1}-2.webp`, imageLabel: h2 },
-      { heading: h3, body: level === "avance" ? `${b3} Cela permet d'éviter des difficultes dans la vie quotidienne.` : b3, image: `/expression/ce/article-${index + 1}-3.webp`, imageLabel: h3 },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet principal du texte ?", choices: [{ label: title }, { label: "Un voyage touristique" }, { label: "Une recette de cuisine" }], correct: 0 },
-      { prompt: `Que dit la partie "${h1}" ?`, choices: [{ label: b1 }, { label: "Elle ne donne aucune information" }, { label: "Elle parle d'un autre sujet" }], correct: 0 },
-      { prompt: `Quel mot complete le conseil sur "${h2}" ?`, answer: h2 },
-      { prompt: `Que faut-il faire selon la partie "${h3}" ?`, choices: [{ label: b3 }, { label: "Arreter de lire" }, { label: "Ignorer les conseils" }], correct: 0 },
-      { prompt: "A quoi sert ce texte ?", choices: [{ label: "Donner des conseils" }, { label: "Vendre une voiture" }, { label: "Annoncer un concert" }], correct: 0 },
-      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
-      { prompt: "Quel titre convient le mieux ?", choices: [{ label: title }, { label: "Une histoire imaginaire" }, { label: "Un menu de restaurant" }], correct: 0 },
-    ],
-  }));
-}
-
 function expandSeries<T>(base: T[], count = 10): T[] {
   return Array.from({ length: count }, (_, i) => base[i % base.length]!);
 }
@@ -963,12 +861,309 @@ const CE_MOYEN_ARTICLES: ArticleSeriesItem[] = [
   },
 ];
 
+// --------------------------------------------------------------------------
+// Contenu B1 authoré pour le niveau AVANCÉ (CE-3) : textes plus longs et plus
+// abstraits (administratif, opinions, hypothèses), avec connecteurs de niveau
+// B1 (cependant, afin de, bien que, c'est pourquoi, par ailleurs, grâce à) et
+// questions demandant plus d'inférence (intention, ton, sens implicite).
+// --------------------------------------------------------------------------
+const CE_AVANCE_EMAILS: EmailSeriesItem[] = [
+  {
+    from: "gerance@immeuble.ch",
+    subject: "Travaux de rénovation dans l'immeuble",
+    body:
+      "Madame, Monsieur,\nNous vous informons que d'importants travaux de rénovation commenceront le lundi 6 mai et dureront environ trois semaines. Pendant cette période, l'ascenseur sera hors service une partie de la journée, généralement entre 9 h et 16 h. Nous vous conseillons donc d'organiser vos sorties en tenant compte de cette contrainte, surtout si vous avez des difficultés à monter les escaliers. Par ailleurs, l'eau chaude pourra être coupée ponctuellement ; ces coupures seront annoncées la veille par une affiche dans le hall. Nous sommes conscients que ces désagréments peuvent être gênants, mais ils sont nécessaires pour améliorer le confort de tous. Si vous avez une situation particulière, n'hésitez pas à nous contacter avant le début du chantier.\nNous vous remercions de votre compréhension.\nLa gérance",
+    questions: [
+      { prompt: "Quel est le but principal de ce message ?", choices: [{ label: "Annoncer des travaux dans l'immeuble" }, { label: "Proposer un nouvel appartement" }, { label: "Augmenter le loyer" }], correct: 0 },
+      { prompt: "Que faut-il prévoir concernant l'ascenseur ?", choices: [{ label: "Qu'il sera indisponible une partie de la journée" }, { label: "Qu'il sera plus rapide" }, { label: "Qu'il deviendra gratuit" }], correct: 0 },
+      { prompt: "Comment les coupures d'eau chaude seront-elles annoncées ?", choices: [{ label: "Par une affiche, la veille" }, { label: "Par téléphone, le matin" }, { label: "Elles ne seront pas annoncées" }], correct: 0 },
+      { prompt: "Quel est le ton de la gérance au sujet des désagréments ?", choices: [{ label: "Elle reconnaît la gêne mais explique que c'est nécessaire" }, { label: "Elle refuse d'en parler" }, { label: "Elle s'en moque" }], correct: 0 },
+      { prompt: "Que doivent faire les personnes ayant une situation particulière ?", answer: "contacter la gérance", accept: ["contacter la gérance avant le chantier", "prévenir la gérance", "les contacter avant les travaux"] },
+      { prompt: "Pourquoi ces travaux sont-ils faits, malgré la gêne ?", answer: "pour améliorer le confort", accept: ["améliorer le confort de tous", "pour le confort", "améliorer l'immeuble"] },
+    ],
+  },
+  {
+    from: "rh@entreprise.ch",
+    subject: "Réponse à votre demande de télétravail",
+    body:
+      "Bonjour,\nÀ la suite de votre demande, nous avons étudié la possibilité pour vous de travailler depuis chez vous. Nous pouvons vous proposer deux jours de télétravail par semaine, à condition que vous restiez joignable pendant les horaires habituels et que vous participiez aux réunions importantes en présentiel. Il faudrait choisir des jours fixes, afin que l'équipe sache quand vous êtes au bureau. L'entreprise fournira un ordinateur portable, mais la connexion Internet restera à votre charge. Cette organisation sera testée pendant trois mois ; ensuite, nous ferons le point ensemble pour décider si nous la maintenons. Si ces conditions vous conviennent, merci de me renvoyer le formulaire signé avant la fin du mois.\nCordialement,\nLe service des ressources humaines",
+    questions: [
+      { prompt: "Que propose l'entreprise ?", choices: [{ label: "Deux jours de télétravail par semaine" }, { label: "Une augmentation de salaire" }, { label: "Un changement de poste" }], correct: 0 },
+      { prompt: "Quelle est une des conditions posées ?", choices: [{ label: "Rester joignable aux horaires habituels" }, { label: "Travailler la nuit" }, { label: "Venir tous les jours au bureau" }], correct: 0 },
+      { prompt: "Qui doit payer la connexion Internet ?", choices: [{ label: "L'employé" }, { label: "L'entreprise" }, { label: "Le client" }], correct: 0 },
+      { prompt: "Que se passera-t-il après trois mois ?", choices: [{ label: "On fera le point pour décider de continuer ou non" }, { label: "Le contrat s'arrêtera automatiquement" }, { label: "Rien ne sera décidé" }], correct: 0 },
+      { prompt: "Pourquoi faut-il choisir des jours fixes ?", answer: "pour que l'équipe sache quand on est au bureau", accept: ["pour l'organisation de l'équipe", "pour que les collègues sachent quand on est là", "pour organiser l'équipe"] },
+      { prompt: "Que fournit l'entreprise ?", answer: "un ordinateur portable", accept: ["un ordinateur", "un pc portable", "ordinateur portable"] },
+    ],
+  },
+  {
+    from: "association@benevoles.ch",
+    subject: "Appel à bénévoles pour la collecte",
+    body:
+      "Bonjour,\nNotre association organise chaque année une collecte de nourriture pour les familles en difficulté, et nous cherchons des bénévoles pour le week-end des 12 et 13 novembre. Il ne s'agit pas d'un travail difficile : il faut surtout accueillir les gens, trier les produits et les ranger dans des cartons. Même si vous ne pouvez venir que quelques heures, votre aide sera précieuse. Aucune expérience n'est nécessaire, car nous vous expliquerons tout sur place. Nous offrons le repas de midi aux bénévoles et, à la fin, un moment convivial pour vous remercier. Si l'idée vous intéresse, indiquez-nous vos disponibilités afin que nous puissions organiser les équipes.\nMerci d'avance pour votre générosité,\nL'équipe de l'association",
+    questions: [
+      { prompt: "Que cherche l'association ?", choices: [{ label: "Des bénévoles pour une collecte" }, { label: "Des employés payés" }, { label: "Des dons d'argent uniquement" }], correct: 0 },
+      { prompt: "En quoi consiste surtout l'aide demandée ?", choices: [{ label: "Accueillir, trier et ranger" }, { label: "Cuisiner pour cent personnes" }, { label: "Conduire un camion" }], correct: 0 },
+      { prompt: "Faut-il de l'expérience ?", choices: [{ label: "Non, tout sera expliqué sur place" }, { label: "Oui, c'est obligatoire" }, { label: "Seulement pour les responsables" }], correct: 0 },
+      { prompt: "Que reçoivent les bénévoles ?", choices: [{ label: "Le repas de midi" }, { label: "Un salaire" }, { label: "Un cadeau coûteux" }], correct: 0 },
+      { prompt: "Que faut-il indiquer si l'on est intéressé ?", answer: "ses disponibilités", accept: ["nos disponibilités", "quand on est libre", "ses horaires"] },
+      { prompt: "Peut-on aider seulement quelques heures ?", answer: "oui", accept: ["oui", "oui, c'est possible", "oui, quelques heures suffisent"] },
+    ],
+  },
+  {
+    from: "banque@service.ch",
+    subject: "Lancement de notre application mobile",
+    body:
+      "Chère cliente, cher client,\nNous avons le plaisir de vous annoncer que notre nouvelle application mobile est disponible depuis cette semaine. Grâce à elle, vous pourrez consulter vos comptes, effectuer des virements et bloquer votre carte en cas de perte, sans vous déplacer à l'agence. Pour des raisons de sécurité, la première connexion nécessite un code que vous recevrez par courrier dans les prochains jours. Nous vous rappelons que nos conseillers ne vous demanderont jamais votre mot de passe par téléphone ou par courriel : soyez donc prudents face aux messages suspects. Si vous préférez continuer à gérer vos comptes au guichet, rien ne change pour vous. Notre service d'assistance reste par ailleurs disponible du lundi au vendredi.\nAvec nos meilleures salutations,\nVotre banque",
+    questions: [
+      { prompt: "Qu'annonce la banque ?", choices: [{ label: "Une nouvelle application mobile" }, { label: "La fermeture de toutes les agences" }, { label: "Une hausse des frais" }], correct: 0 },
+      { prompt: "Que peut-on faire avec l'application ?", choices: [{ label: "Effectuer des virements" }, { label: "Retirer des billets à l'intérieur du téléphone" }, { label: "Ouvrir un commerce" }], correct: 0 },
+      { prompt: "Comment reçoit-on le code de première connexion ?", choices: [{ label: "Par courrier" }, { label: "Par SMS immédiat" }, { label: "En agence uniquement" }], correct: 0 },
+      { prompt: "Que ne demanderont jamais les conseillers ?", choices: [{ label: "Le mot de passe par téléphone ou courriel" }, { label: "Le nom du client" }, { label: "L'adresse postale" }], correct: 0 },
+      { prompt: "Que se passe-t-il pour ceux qui préfèrent le guichet ?", answer: "rien ne change", accept: ["rien ne change pour eux", "ils continuent comme avant", "rien"] },
+      { prompt: "Pourquoi faut-il se méfier des messages suspects ?", answer: "pour ne pas donner son mot de passe", accept: ["pour la sécurité", "pour éviter les fraudes", "pour ne pas se faire voler ses informations"] },
+    ],
+  },
+  {
+    from: "voyages@agence.ch",
+    subject: "Confirmation et conseils pour votre séjour",
+    body:
+      "Bonjour,\nNous vous confirmons votre séjour d'une semaine à Lisbonne, du 3 au 10 avril. Votre vol partant à 6 h 40, nous vous conseillons d'arriver à l'aéroport au moins deux heures avant. Pensez à vérifier que votre carte d'identité est encore valable, car sans document valide, l'embarquement vous serait refusé. Sur place, le climat est doux, mais les soirées peuvent être fraîches : prévoyez une veste légère. Nous vous recommandons aussi d'acheter à l'avance les billets de train pour la région, car ils sont souvent moins chers sur Internet. Un guide vous attendra à l'hôtel le premier matin afin de vous présenter le programme. En cas de problème, un numéro d'urgence figure sur votre carnet de route.\nBon voyage,\nVotre agence",
+    questions: [
+      { prompt: "De quoi parle ce message ?", choices: [{ label: "D'un séjour d'une semaine à Lisbonne" }, { label: "D'un déménagement" }, { label: "D'un achat de voiture" }], correct: 0 },
+      { prompt: "Pourquoi faut-il arriver tôt à l'aéroport ?", choices: [{ label: "Parce que le vol part très tôt et qu'il faut être là deux heures avant" }, { label: "Parce que l'avion est petit" }, { label: "Parce que c'est gratuit le matin" }], correct: 0 },
+      { prompt: "Que risque-t-on sans document d'identité valable ?", choices: [{ label: "Un refus d'embarquement" }, { label: "Une simple amende" }, { label: "Rien du tout" }], correct: 0 },
+      { prompt: "Pourquoi acheter les billets de train à l'avance ?", choices: [{ label: "Ils sont souvent moins chers sur Internet" }, { label: "Ils sont interdits sur place" }, { label: "Ils sont offerts par l'hôtel" }], correct: 0 },
+      { prompt: "Que faut-il prévoir pour les soirées ?", answer: "une veste légère", accept: ["une veste", "un vêtement chaud", "une petite veste"] },
+      { prompt: "Où trouve-t-on le numéro d'urgence ?", answer: "sur le carnet de route", accept: ["dans le carnet de route", "carnet de route"] },
+    ],
+  },
+  {
+    from: "direction@ecole.ch",
+    subject: "Réunion d'information : projet de classe verte",
+    body:
+      "Chers parents,\nNous vous invitons à une réunion d'information le mardi 18 à 19 h, afin de présenter le projet de classe verte prévu au printemps. Ce séjour de cinq jours à la montagne permettra aux élèves de découvrir la nature, mais aussi d'apprendre à vivre en groupe loin de leur famille. Le coût est de 250 francs par enfant ; toutefois, une aide est possible pour les familles qui en font la demande, de manière confidentielle. Nous comprenons que certains parents puissent hésiter à laisser partir leur enfant ; c'est pourquoi les enseignants répondront à toutes vos questions pendant la réunion. Votre présence est vivement souhaitée, car votre accord sera nécessaire pour organiser le voyage. Si vous ne pouvez pas venir, un document résumant le projet vous sera transmis.\nBien cordialement,\nLa direction",
+    questions: [
+      { prompt: "Quel est l'objet de la réunion ?", choices: [{ label: "Présenter un projet de classe verte" }, { label: "Changer les horaires de l'école" }, { label: "Annoncer une fête surprise" }], correct: 0 },
+      { prompt: "Quel est un des objectifs du séjour ?", choices: [{ label: "Apprendre à vivre en groupe" }, { label: "Gagner de l'argent" }, { label: "Rester à la maison" }], correct: 0 },
+      { prompt: "Que propose-t-on aux familles en difficulté ?", choices: [{ label: "Une aide financière confidentielle" }, { label: "Un séjour gratuit pour tous" }, { label: "Aucune solution" }], correct: 0 },
+      { prompt: "Pourquoi la présence des parents est-elle importante ?", choices: [{ label: "Leur accord est nécessaire pour organiser le voyage" }, { label: "Pour payer sur place" }, { label: "Pour préparer les repas" }], correct: 0 },
+      { prompt: "Combien coûte le séjour par enfant ?", answer: "250 francs", accept: ["250", "250 fr", "deux cent cinquante francs"] },
+      { prompt: "Que reçoivent les parents qui ne peuvent pas venir ?", answer: "un document résumant le projet", accept: ["un résumé du projet", "un document", "un document sur le projet"] },
+    ],
+  },
+];
+
+const CE_AVANCE_INSTRUCTIONS: InstructionSeriesItem[] = [
+  [
+    {
+      title: "Faire une réclamation",
+      image: "",
+      imageLabel: "Réclamation",
+      body: "Si un produit que vous avez acheté est défectueux, commencez par rassembler la facture et l'emballage. Expliquez le problème par écrit, calmement et précisément, puis envoyez votre demande au service client. Gardez une copie de votre courrier : en cas de refus, elle vous sera utile pour aller plus loin.",
+      questions: [
+        { prompt: "Que faut-il rassembler en premier ?", choices: [{ label: "La facture et l'emballage" }, { label: "Des photos de vacances" }, { label: "De l'argent liquide" }], correct: 0 },
+        { prompt: "Pourquoi garder une copie du courrier ?", choices: [{ label: "Elle sera utile en cas de refus" }, { label: "Pour la jeter plus tard" }, { label: "Pour la revendre" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Préparer un entretien téléphonique",
+      image: "",
+      imageLabel: "Téléphone",
+      body: "Choisissez un endroit calme où vous ne serez pas dérangé et vérifiez que votre téléphone est bien chargé. Ayez sous les yeux les documents importants ainsi que quelques questions à poser. Pendant l'appel, parlez lentement et n'hésitez pas à faire répéter si vous n'avez pas compris.",
+      questions: [
+        { prompt: "Où faut-il s'installer pour l'appel ?", choices: [{ label: "Dans un endroit calme" }, { label: "Dans la rue" }, { label: "Dans un magasin bruyant" }], correct: 0 },
+        { prompt: "Que faire si l'on n'a pas compris ?", choices: [{ label: "Faire répéter" }, { label: "Raccrocher aussitôt" }, { label: "Se taire" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Voyager pendant une grève",
+      image: "",
+      imageLabel: "Grève",
+      body: "Avant de partir, consultez le site de la compagnie pour connaître les trains qui circulent, car l'horaire habituel n'est pas garanti. Prévoyez plus de temps que d'ordinaire et, si possible, une solution de secours comme le covoiturage. En cas d'annulation, vous pouvez parfois demander le remboursement de votre billet.",
+      questions: [
+        { prompt: "Pourquoi consulter le site avant de partir ?", choices: [{ label: "Parce que l'horaire habituel n'est pas garanti" }, { label: "Pour acheter des souvenirs" }, { label: "Pour réserver un hôtel" }], correct: 0 },
+        { prompt: "Que peut-on parfois demander en cas d'annulation ?", choices: [{ label: "Le remboursement du billet" }, { label: "Un cadeau" }, { label: "Une place gratuite à vie" }], correct: 0 },
+      ],
+    },
+  ],
+  [
+    {
+      title: "Comprendre un contrat de location",
+      image: "",
+      imageLabel: "Contrat",
+      body: "Avant de signer, lisez attentivement le montant du loyer et ce qu'il comprend, comme les charges ou le chauffage. Vérifiez la durée du bail et les conditions pour partir, car un départ trop rapide peut coûter cher. Si une clause n'est pas claire, demandez des explications plutôt que de signer sans comprendre.",
+      questions: [
+        { prompt: "Que faut-il vérifier au sujet du loyer ?", choices: [{ label: "Ce qu'il comprend (charges, chauffage)" }, { label: "La couleur des murs" }, { label: "Le nom du voisin" }], correct: 0 },
+        { prompt: "Que faire si une clause n'est pas claire ?", choices: [{ label: "Demander des explications" }, { label: "Signer quand même" }, { label: "Partir sans rien dire" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Réagir en cas de panne d'électricité",
+      image: "",
+      imageLabel: "Panne",
+      body: "Vérifiez d'abord si la panne touche seulement votre logement ou tout le quartier, par exemple en regardant chez les voisins. S'il s'agit de votre installation, contrôlez le tableau électrique et rebranchez ce qui a sauté. Gardez une lampe de poche accessible et évitez d'ouvrir le congélateur afin de conserver le froid.",
+      questions: [
+        { prompt: "Comment savoir si la panne touche tout le quartier ?", choices: [{ label: "En regardant chez les voisins" }, { label: "En appelant la police" }, { label: "En attendant une semaine" }], correct: 0 },
+        { prompt: "Pourquoi éviter d'ouvrir le congélateur ?", choices: [{ label: "Pour conserver le froid" }, { label: "Parce que c'est dangereux" }, { label: "Pour économiser l'eau" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Acheter d'occasion en ligne",
+      image: "",
+      imageLabel: "Occasion",
+      body: "Regardez attentivement les photos et lisez bien la description avant de vous décider. Posez des questions au vendeur si un détail manque, et méfiez-vous des prix beaucoup trop bas, qui cachent parfois une arnaque. Privilégiez un paiement sécurisé plutôt que d'envoyer de l'argent à un inconnu.",
+      questions: [
+        { prompt: "De quoi faut-il se méfier ?", choices: [{ label: "Des prix beaucoup trop bas" }, { label: "Des belles photos" }, { label: "Des vendeurs polis" }], correct: 0 },
+        { prompt: "Quel mode de paiement privilégier ?", choices: [{ label: "Un paiement sécurisé" }, { label: "De l'argent liquide par la poste" }, { label: "Payer sans vérifier" }], correct: 0 },
+      ],
+    },
+  ],
+  [
+    {
+      title: "Organiser une réunion efficace",
+      image: "",
+      imageLabel: "Réunion",
+      body: "Envoyez à l'avance l'ordre du jour, afin que chacun sache de quoi on va parler et puisse se préparer. Pendant la réunion, respectez le temps prévu et notez les décisions ainsi que la personne responsable de chaque tâche. À la fin, envoyez un court compte rendu pour que tout le monde ait la même information.",
+      questions: [
+        { prompt: "Que faut-il envoyer à l'avance ?", choices: [{ label: "L'ordre du jour" }, { label: "Un cadeau" }, { label: "La liste des salaires" }], correct: 0 },
+        { prompt: "Que faire à la fin de la réunion ?", choices: [{ label: "Envoyer un court compte rendu" }, { label: "Tout oublier" }, { label: "Recommencer depuis le début" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Préparer un exposé oral",
+      image: "",
+      imageLabel: "Exposé",
+      body: "Choisissez un plan clair en trois parties et notez seulement des mots-clés sur vos fiches, pas des phrases entières. Entraînez-vous à voix haute afin de vérifier le temps et de repérer les passages difficiles. Le jour de l'exposé, regardez le public et parlez assez fort pour être entendu du fond de la salle.",
+      questions: [
+        { prompt: "Que faut-il noter sur les fiches ?", choices: [{ label: "Des mots-clés" }, { label: "Des phrases entières" }, { label: "Rien du tout" }], correct: 0 },
+        { prompt: "Pourquoi s'entraîner à voix haute ?", choices: [{ label: "Pour vérifier le temps et repérer les passages difficiles" }, { label: "Pour déranger les voisins" }, { label: "Pour perdre du temps" }], correct: 0 },
+      ],
+    },
+    {
+      title: "Aider un nouveau collègue",
+      image: "",
+      imageLabel: "Collègue",
+      body: "Le premier jour, présentez-lui l'équipe et montrez-lui les lieux importants, comme la cafétéria et les sorties de secours. Expliquez calmement les habitudes de travail et proposez-lui de poser des questions dès qu'il en a besoin. Un accueil chaleureux aide la personne à se sentir à l'aise et à devenir vite efficace.",
+      questions: [
+        { prompt: "Que faut-il montrer au nouveau collègue ?", choices: [{ label: "Les lieux importants comme la cafétéria" }, { label: "Sa propre maison" }, { label: "Son salaire" }], correct: 0 },
+        { prompt: "Pourquoi un bon accueil est-il utile ?", choices: [{ label: "Il aide la personne à se sentir à l'aise" }, { label: "Il fait perdre du temps" }, { label: "Il n'a aucun effet" }], correct: 0 },
+      ],
+    },
+  ],
+];
+
+const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
+  {
+    title: "Le télétravail : avantages et limites",
+    sections: [
+      { heading: "Plus de liberté", imageLabel: "Liberté", body: "Travailler chez soi permet d'éviter les trajets et d'organiser sa journée plus librement. Beaucoup de personnes se sentent moins stressées et gagnent du temps pour leur vie privée. Cette souplesse est particulièrement appréciée par ceux qui habitent loin de leur bureau." },
+      { heading: "Des difficultés réelles", imageLabel: "Difficultés", body: "Cependant, il n'est pas toujours facile de se concentrer à la maison, surtout quand on manque d'espace. Certains se sentent isolés et ont l'impression de ne jamais vraiment s'arrêter de travailler. La frontière entre vie privée et vie professionnelle devient alors floue." },
+      { heading: "Trouver un équilibre", imageLabel: "Équilibre", body: "Pour que le télétravail fonctionne, il vaut mieux fixer des horaires clairs et garder un contact régulier avec les collègues. Alterner quelques jours au bureau et quelques jours à la maison semble être une bonne solution pour de nombreuses entreprises." },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Les avantages et les limites du télétravail" }, { label: "Comment trouver un premier emploi" }, { label: "Les voyages d'affaires" }], correct: 0 },
+      { prompt: "Quel avantage est cité ?", choices: [{ label: "Éviter les trajets" }, { label: "Gagner beaucoup plus d'argent" }, { label: "Avoir un plus grand bureau" }], correct: 0 },
+      { prompt: "Quelle difficulté l'article mentionne-t-il ?", choices: [{ label: "Se sentir isolé" }, { label: "Avoir trop de vacances" }, { label: "Un salaire trop élevé" }], correct: 0 },
+      { prompt: "Qu'est-ce qui devient parfois flou ?", choices: [{ label: "La frontière entre vie privée et vie professionnelle" }, { label: "La couleur des murs" }, { label: "La liste des tâches" }], correct: 0 },
+      { prompt: "L'article est-il totalement favorable au télétravail ?", choices: [{ label: "Non, il présente le pour et le contre" }, { label: "Oui, il n'y voit que des avantages" }, { label: "Non, il est totalement contre" }], correct: 0 },
+      { prompt: "Quelle solution l'article propose-t-il ?", answer: "alterner bureau et maison", accept: ["alterner quelques jours au bureau et à la maison", "un équilibre entre bureau et maison", "alterner"] },
+      { prompt: "Combien de parties principales contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+  {
+    title: "Consommer moins mais mieux",
+    sections: [
+      { heading: "Acheter utile", imageLabel: "Achat", body: "Avant d'acheter, il est utile de se demander si l'on a vraiment besoin de l'objet ou s'il s'agit d'une envie passagère. Choisir un produit solide, même un peu plus cher, revient souvent moins cher à long terme, car on le remplace moins souvent." },
+      { heading: "Donner une seconde vie", imageLabel: "Réemploi", body: "Réparer, prêter ou acheter d'occasion permet d'économiser de l'argent et de limiter les déchets. De nombreux objets qui semblent inutiles peuvent servir à quelqu'un d'autre. Les magasins de seconde main et les sites d'échange se développent d'ailleurs beaucoup." },
+      { heading: "Changer ses habitudes", imageLabel: "Habitudes", body: "Consommer autrement ne signifie pas se priver de tout, mais faire des choix plus réfléchis. De petits gestes répétés, comme préparer une liste ou refuser les emballages inutiles, ont un vrai effet avec le temps." },
+    ],
+    questions: [
+      { prompt: "Quel est le message principal ?", choices: [{ label: "Consommer moins mais mieux" }, { label: "Acheter le plus possible" }, { label: "Ne plus jamais rien acheter" }], correct: 0 },
+      { prompt: "Que conseille-t-on de se demander avant d'acheter ?", choices: [{ label: "Si l'on en a vraiment besoin" }, { label: "Si le voisin en a un" }, { label: "S'il en reste beaucoup" }], correct: 0 },
+      { prompt: "Pourquoi choisir un produit solide ?", choices: [{ label: "Il revient moins cher à long terme" }, { label: "Il est toujours moins cher au départ" }, { label: "Il est plus léger" }], correct: 0 },
+      { prompt: "Que peut-on faire des objets qui nous semblent inutiles ?", choices: [{ label: "Les donner à quelqu'un d'autre" }, { label: "Les brûler" }, { label: "Les cacher" }], correct: 0 },
+      { prompt: "« Consommer autrement » signifie-t-il tout se refuser ?", choices: [{ label: "Non, faire des choix plus réfléchis" }, { label: "Oui, ne plus rien acheter" }, { label: "Oui, tout jeter" }], correct: 0 },
+      { prompt: "Cite un petit geste proposé par l'article.", answer: "préparer une liste", accept: ["refuser les emballages inutiles", "faire une liste", "préparer une liste de courses"] },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+  {
+    title: "Les réseaux sociaux : entre lien et pression",
+    sections: [
+      { heading: "Rester en contact", imageLabel: "Contact", body: "Les réseaux sociaux permettent de garder le contact avec des proches éloignés et de retrouver d'anciens amis. Ils aident aussi à s'informer rapidement et à découvrir des idées ou des passions que l'on ne connaissait pas." },
+      { heading: "Une image parfois trompeuse", imageLabel: "Image", body: "Pourtant, les gens montrent souvent le meilleur de leur vie, ce qui peut donner l'impression que les autres réussissent mieux que soi. Cette comparaison permanente crée parfois de la jalousie ou un sentiment de mal-être." },
+      { heading: "Garder le contrôle", imageLabel: "Contrôle", body: "Il est conseillé de limiter le temps passé sur les applications et de se rappeler que tout n'est pas réel derrière l'écran. Prendre du recul et privilégier les vraies rencontres aide à garder une relation saine avec ces outils." },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Les réseaux sociaux, entre lien et pression" }, { label: "L'histoire d'Internet" }, { label: "La publicité à la télévision" }], correct: 0 },
+      { prompt: "Quel avantage est cité ?", choices: [{ label: "Garder le contact avec des proches éloignés" }, { label: "Gagner de l'argent facilement" }, { label: "Mieux dormir" }], correct: 0 },
+      { prompt: "Pourquoi l'image des réseaux est-elle trompeuse ?", choices: [{ label: "Les gens montrent souvent le meilleur de leur vie" }, { label: "Les photos y sont interdites" }, { label: "Tout ce qu'on y voit est vrai" }], correct: 0 },
+      { prompt: "Quel sentiment cette comparaison peut-elle créer ?", choices: [{ label: "De la jalousie ou du mal-être" }, { label: "De la joie garantie" }, { label: "De la fatigue physique" }], correct: 0 },
+      { prompt: "Faut-il croire que tout est réel derrière l'écran ?", choices: [{ label: "Non" }, { label: "Oui, toujours" }, { label: "Seulement le week-end" }], correct: 0 },
+      { prompt: "Que conseille l'article pour garder le contrôle ?", answer: "limiter le temps passé", accept: ["limiter le temps sur les applications", "prendre du recul", "privilégier les vraies rencontres"] },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+  {
+    title: "Apprendre une langue à l'âge adulte",
+    sections: [
+      { heading: "Il n'est jamais trop tard", imageLabel: "Apprentissage", body: "Contrairement à une idée répandue, les adultes peuvent très bien apprendre une nouvelle langue. Ils ont même certains avantages : ils comprennent les règles plus vite et savent pourquoi ils apprennent, ce qui les motive." },
+      { heading: "Pratiquer régulièrement", imageLabel: "Pratique", body: "Le secret n'est pas de travailler des heures d'un coup, mais un peu chaque jour. Écouter des chansons, regarder des vidéos ou parler avec quelqu'un rend l'apprentissage plus vivant et moins ennuyeux." },
+      { heading: "Ne pas avoir peur des erreurs", imageLabel: "Erreurs", body: "Faire des fautes fait partie de l'apprentissage ; c'est même en se trompant que l'on progresse. Ceux qui osent parler, même mal, avancent souvent plus vite que ceux qui attendent d'être parfaits." },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Apprendre une langue à l'âge adulte" }, { label: "Voyager à l'étranger" }, { label: "Enseigner aux enfants" }], correct: 0 },
+      { prompt: "Quel avantage ont les adultes ?", choices: [{ label: "Ils comprennent les règles plus vite" }, { label: "Ils ont toujours plus de temps libre" }, { label: "Ils n'oublient jamais rien" }], correct: 0 },
+      { prompt: "Quel est « le secret » selon l'article ?", choices: [{ label: "Pratiquer un peu chaque jour" }, { label: "Travailler dix heures le dimanche" }, { label: "Ne jamais réviser" }], correct: 0 },
+      { prompt: "Comment rendre l'apprentissage plus vivant ?", choices: [{ label: "Écouter des chansons, regarder des vidéos" }, { label: "Lire le dictionnaire en entier" }, { label: "Ne rien faire" }], correct: 0 },
+      { prompt: "Que pense l'article des erreurs ?", choices: [{ label: "Elles font partie de l'apprentissage" }, { label: "Il faut absolument les éviter" }, { label: "Elles sont totalement inutiles" }], correct: 0 },
+      { prompt: "Qui progresse souvent plus vite ?", answer: "ceux qui osent parler", accept: ["ceux qui osent parler même mal", "ceux qui parlent", "ceux qui n'ont pas peur des erreurs"] },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+  {
+    title: "Le bénévolat, utile pour tous",
+    sections: [
+      { heading: "Aider les autres", imageLabel: "Aide", body: "Donner un peu de son temps permet de soutenir des personnes en difficulté ou des associations qui manquent de moyens. Même quelques heures par mois peuvent faire une vraie différence pour ceux qui reçoivent cette aide." },
+      { heading: "En profiter soi-même", imageLabel: "Bénéfice", body: "Le bénévolat n'apporte pas qu'aux autres : il permet de rencontrer des gens, d'apprendre de nouvelles compétences et de se sentir utile. Pour certaines personnes seules, c'est aussi une façon de retrouver un rythme et des contacts." },
+      { heading: "Comment commencer", imageLabel: "Départ", body: "Il suffit souvent de contacter une association proche de chez soi et d'expliquer ce que l'on peut offrir. Il vaut mieux commencer doucement, avec un engagement réaliste, afin de ne pas se décourager au bout de quelques semaines." },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Le bénévolat" }, { label: "Le sport de haut niveau" }, { label: "Les vacances à l'étranger" }], correct: 0 },
+      { prompt: "Combien de temps faut-il pour être utile ?", choices: [{ label: "Quelques heures par mois suffisent" }, { label: "Au moins huit heures par jour" }, { label: "Toute l'année sans pause" }], correct: 0 },
+      { prompt: "Quel bénéfice le bénévole en tire-t-il ?", choices: [{ label: "Rencontrer des gens et apprendre" }, { label: "Gagner un bon salaire" }, { label: "Voyager gratuitement" }], correct: 0 },
+      { prompt: "Pour qui est-ce aussi un moyen de retrouver des contacts ?", choices: [{ label: "Pour les personnes seules" }, { label: "Pour les enfants" }, { label: "Pour les touristes" }], correct: 0 },
+      { prompt: "Comment commencer selon l'article ?", answer: "contacter une association proche", accept: ["contacter une association", "contacter une association près de chez soi", "s'adresser à une association"] },
+      { prompt: "Pourquoi commencer doucement ?", answer: "pour ne pas se décourager", accept: ["pour ne pas se décourager", "pour tenir dans le temps", "pour éviter d'abandonner"] },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+  {
+    title: "Bien gérer son argent au quotidien",
+    sections: [
+      { heading: "Suivre ses dépenses", imageLabel: "Dépenses", body: "Noter ce que l'on dépense, même les petites sommes, aide à comprendre où part l'argent. Beaucoup de gens sont surpris en découvrant le total de dépenses qui paraissent minuscules, comme un café tous les matins." },
+      { heading: "Prévoir les imprévus", imageLabel: "Épargne", body: "Mettre de côté une petite réserve permet de faire face à une panne ou à une facture inattendue sans avoir à emprunter. Même une somme modeste, épargnée régulièrement, finit par constituer une sécurité utile." },
+      { heading: "Éviter les pièges", imageLabel: "Pièges", body: "Il faut se méfier des crédits faciles et des offres « trop belles pour être vraies », qui coûtent souvent cher au final. Avant un achat important, comparer les prix et réfléchir quelques jours évite bien des regrets." },
+    ],
+    questions: [
+      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Bien gérer son argent au quotidien" }, { label: "Devenir riche très vite" }, { label: "Ouvrir un magasin" }], correct: 0 },
+      { prompt: "Pourquoi noter ses dépenses ?", choices: [{ label: "Pour comprendre où part l'argent" }, { label: "Pour payer plus d'impôts" }, { label: "Pour impressionner ses amis" }], correct: 0 },
+      { prompt: "À quoi sert une petite réserve ?", choices: [{ label: "Faire face aux imprévus sans emprunter" }, { label: "Partir en croisière" }, { label: "Acheter une voiture de luxe" }], correct: 0 },
+      { prompt: "De quoi faut-il se méfier ?", choices: [{ label: "Des crédits faciles et des offres trop belles" }, { label: "Des magasins ouverts le samedi" }, { label: "Des tickets de caisse" }], correct: 0 },
+      { prompt: "Une petite somme épargnée régulièrement est-elle utile ?", choices: [{ label: "Oui, elle finit par constituer une sécurité" }, { label: "Non, c'est totalement inutile" }, { label: "Seulement si elle est énorme" }], correct: 0 },
+      { prompt: "Que faut-il faire avant un achat important ?", answer: "comparer les prix et réfléchir", accept: ["comparer les prix", "réfléchir quelques jours", "comparer et réfléchir"] },
+      { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
+    ],
+  },
+];
+
 function buildParts(level: CELevel, stamp = Date.now()): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
   const orientationPool = level === "base" ? expandSeries(ORIENTATION_TOPICS) : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
-  const emailPool = level === "base" ? expandSeries(EMAIL_SERIES) : level === "moyen" ? CE_MOYEN_EMAILS : makeEmailPool(level);
-  const instructionPool = level === "base" ? expandSeries(INSTRUCTION_SERIES) : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : makeInstructionPool(level);
-  const articlePool = level === "base" ? expandSeries(ARTICLE_SERIES) : level === "moyen" ? CE_MOYEN_ARTICLES : makeArticlePool(level);
+  const emailPool = level === "base" ? expandSeries(EMAIL_SERIES) : level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS;
+  const instructionPool = level === "base" ? expandSeries(INSTRUCTION_SERIES) : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
+  const articlePool = level === "base" ? expandSeries(ARTICLE_SERIES) : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
   const orientation = pick(orientationPool, `${level}-${stamp}-orientation`);
   const email = pick(emailPool, `${level}-${stamp}-email`);
   const instructions = pick(instructionPool, `${level}-${stamp}-instructions`);

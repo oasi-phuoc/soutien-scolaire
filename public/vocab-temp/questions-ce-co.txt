@@ -287,491 +287,245 @@
     6. Rima veut savoir ou jeter le verre.
         [associer] → Tri des déchets
 
-  — Courriels (60 questions dans 10 activités) —
+  — Courriels (36 questions dans 6 activités) —
 
-  • Courriel — Cours de mardi (école@cours.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        10 h ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | salle 12 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        cahier ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | professeur ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → école
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Cours de mardi
+  • Courriel — Un petit service pendant mes vacances (camille@voisins.ch)
+    1. Pourquoi Camille écrit-elle ce message ?
+        Pour inviter à un repas | Pour demander d'arroser ses plantes ✓ | Pour vendre son appartement
+    2. À quel moment de la journée faut-il arroser ?
+        Le matin | Le soir ✓ | À midi
+    3. Combien de fois par semaine faut-il arroser ?
+        Une fois | Deux fois ✓ | Tous les jours
+    4. Où se trouve la clé ?
+        Chez la gardienne ✓ | Sous le paillasson | Dans la boîte aux lettres
+    5. Que ne faut-il pas faire avec les cactus ?
+        [réponse à saisir] → trop d'eau
+    6. Quel jour Camille répond-elle le mieux au téléphone ?
+        [réponse à saisir] → le week-end
 
-  • Courriel — Billet trouvé (gare@cff.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        Sion ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | vendredi ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        pièce d'identité ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | 18 h ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → gare
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Billet trouvé
+  • Courriel — Inscription à la fête du quartier (mairie@ville.ch)
+    1. Quel est le sujet principal du message ?
+        Une fête de quartier ✓ | Un cours de cuisine | Un match de football
+    2. Que peut apporter chaque famille ?
+        Une chaise | Un plat à partager ✓ | De l'argent
+    3. Avant quelle date faut-il s'inscrire pour un stand ?
+        Le 1er juin ✓ | Le 14 juin | Le 18 juin
+    4. Que se passe-t-il s'il pleut ?
+        La fête est annulée | La fête est déplacée dans la salle communale ✓ | La fête est reportée d'une semaine
+    5. Où a lieu la fête ?
+        [réponse à saisir] → parc des Tilleuls
+    6. Les enfants peuvent-ils rester seuls aux jeux ?
+        [réponse à saisir] → non
 
-  • Courriel — Match samedi (club@sport.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        samedi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 15 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        chaussures ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | bouteille d'eau ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → club
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Match samedi
+  • Courriel — Ton nouvel horaire de travail (m.roche@magasin.ch)
+    1. À quelle heure Sofia commencera-t-elle désormais ?
+        8 h | 8 h 30 ✓ | 9 h
+    2. Pourquoi l'horaire change-t-il ?
+        Les livraisons arrivent plus tôt ✓ | Le magasin ferme plus tard | Il y a moins de clients
+    3. Quel avantage Sofia reçoit-elle en échange ?
+        Un jour de congé | Partir plus tôt le vendredi ✓ | Une augmentation
+    4. Quand faut-il prévenir en cas d'absence ?
+        Le matin même | La veille ✓ | Une semaine avant
+    5. Que faut-il faire en arrivant au travail ?
+        [réponse à saisir] → badger
+    6. Pourquoi y a-t-il une réunion le premier lundi du mois ?
+        [réponse à saisir] → organiser les vacances
 
-  • Courriel — Garde du chat (voisine@mail.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        Genève ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | chat ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        vendredi soir ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | sous le pot de fleurs ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → voisine
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Garde du chat
+  • Courriel — Sortie scolaire au musée (ecole@primaire.ch)
+    1. Où va la classe ?
+        Au zoo | Au Musée de la nature ✓ | À la piscine
+    2. À quelle heure le bus part-il ?
+        8 h 35 | 8 h 45 ✓ | 9 h
+    3. Pourquoi faut-il apporter un vêtement de pluie ?
+        Parce qu'on mangera peut-être dehors ✓ | Parce qu'il fait froid au musée | Parce que le bus est ouvert
+    4. Combien coûte la visite par enfant ?
+        5 francs | 8 francs ✓ | 10 francs
+    5. Jusqu'à quand faut-il donner l'argent ?
+        [réponse à saisir] → 15 mars
+    6. Où peuvent s'asseoir les enfants malades en bus ?
+        [réponse à saisir] → devant
 
-  • Courriel — Livre en retard (bibliothèque@ville.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        lundi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | cette semaine ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        bibliothèque ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | boîte ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → bibliothèque
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Livre en retard
+  • Courriel — Week-end à la montagne ? (noemie@amis.ch)
+    1. Que propose Noémie ?
+        Aller à la mer | Passer un week-end à la montagne ✓ | Rester en ville
+    2. Quand rentreraient-ils ?
+        Vendredi soir | Samedi | Dimanche soir ✓
+    3. Pourquoi faut-il de bonnes chaussures ?
+        Pour danser | Pour faire une randonnée ✓ | Pour visiter un musée
+    4. Que doit apporter la personne qui reçoit le message ?
+        Le fromage | Le pain et le dessert ✓ | Les boissons
+    5. Qui s'occupe du fromage pour la fondue ?
+        [réponse à saisir] → Noémie
+    6. Pourquoi faut-il répondre vite ?
+        [réponse à saisir] → réserver les places dans la voiture
 
-  • Courriel — Rendez-vous (dentiste@cabinet.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        jeudi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 8 h 30 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        rue du Rhône 14 ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | dix minutes ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → dentiste
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Rendez-vous
+  • Courriel — Nouvel atelier d'écriture (bibliotheque@ville.ch)
+    1. À qui s'adresse cet atelier ?
+        Aux enfants | Aux adultes ✓ | Aux professeurs seulement
+    2. À quelle fréquence a lieu l'atelier ?
+        Tous les jours | Un mercredi sur deux ✓ | Le week-end
+    3. Faut-il de l'expérience pour participer ?
+        Oui, beaucoup | Non, ce n'est pas nécessaire ✓ | Seulement pour les écrivains
+    4. Combien de places y a-t-il ?
+        Douze ✓ | Vingt | Trente
+    5. Combien coûte l'atelier ?
+        [réponse à saisir] → gratuit
+    6. Que se passe-t-il si on manque deux fois sans prévenir ?
+        [réponse à saisir] → on perd sa place
 
-  • Courriel — Réparation vélo (magasin@vélo.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        demain ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 13 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        45 francs ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | 18 h 30 ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → magasin
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Réparation vélo
+  — Consignes (18 questions dans 9 activités) —
 
-  • Courriel — Atelier cuisine (centre@quartier.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        mercredi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 18 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        soupe ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | boîte ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → centre
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Atelier cuisine
+  • Consigne — Utiliser le lave-linge partagé
+    1. Où faut-il mettre la lessive ?
+        Dans le bac de gauche ✓ | Directement sur le linge | Dans une poche
+    2. Quel programme choisir pour les vêtements de couleur ?
+        30 degrés ✓ | 60 degrés | 90 degrés
 
-  • Courriel — Buanderie (régie@immeuble.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        lundi matin ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | nettoyage ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        14 h ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | mardi ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → régie
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Buanderie
+  • Consigne — Recevoir une livraison
+    1. Que faut-il vérifier en premier ?
+        Le nom sur le colis ✓ | Le prix du produit | La couleur de la boîte
+    2. Quand faut-il signer ?
+        Avant d'ouvrir le colis | Après avoir vérifié le contenu ✓ | Le lendemain
 
-  • Courriel — Anniversaire (ami@mail.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        dimanche ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | midi ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        parc ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | couverture ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → ami
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Anniversaire
+  • Consigne — Préparer une salle de réunion
+    1. Comment faut-il installer les chaises ?
+        En cercle ✓ | En une seule ligne | Contre le mur
+    2. Que faut-il faire si des invités viennent de l'extérieur ?
+        Fermer la porte à clé | Prévenir l'accueil ✓ | Ne rien faire
 
-  — Consignes (60 questions dans 30 activités) —
+  • Consigne — S'inscrire à un cours de sport
+    1. Que faut-il choisir en premier ?
+        Un cours adapté à son niveau ✓ | Une couleur de tenue | Un autre club
+    2. Que peut-on faire avant de s'inscrire pour l'année ?
+        Essayer un cours gratuitement ✓ | Partir sans payer | Changer de professeur
 
-  • Consigne — Nettoyer une salle
-    1. Quelle action est demandee ?
-        Nettoyer une salle ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Passez le balai ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Préparer un rendez-vous médical
+    1. Que faut-il apporter au rendez-vous ?
+        Sa carte d'assurance ✓ | Un cadeau | Un livre
+    2. Que faut-il faire si on ne peut pas venir ?
+        Appeler au moins un jour avant ✓ | Ne rien dire | Venir le lendemain
 
-  • Consigne — Preparer un rendez-vous
-    1. Quelle action est demandee ?
-        Preparer un rendez-vous ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Relisez le dossier ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Trier ses déchets
+    1. Que faut-il faire avant de jeter les bouteilles ?
+        Les rincer ✓ | Les casser | Les remplir
+    2. Où faut-il apporter les meubles ?
+        À la déchèterie ✓ | Dans la poubelle grise | Dans la rue
 
-  • Consigne — Utiliser une machine
-    1. Quelle action est demandee ?
-        Utiliser une machine ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Branchez l'appareil ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Utiliser un distributeur de billets
+    1. Que faut-il faire avec le code secret ?
+        Le taper sans le montrer ✓ | Le dire à voix haute | L'écrire sur la carte
+    2. Quand faut-il prendre l'argent ?
+        Après avoir repris la carte ✓ | Avant de taper le code | Pendant le retrait de la carte
 
-  • Consigne — Faire une demande
-    1. Quelle action est demandee ?
-        Faire une demande ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Completez le formulaire ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Prendre soin d'une plante d'intérieur
+    1. Pourquoi éviter le soleil direct ?
+        Parce qu'il brûle les feuilles ✓ | Parce qu'il fait pousser trop vite | Parce qu'il attire les insectes
+    2. Quand faut-il arroser la plante ?
+        Quand la terre est sèche ✓ | Tous les jours | Jamais
 
-  • Consigne — Prendre un medicament
-    1. Quelle action est demandee ?
-        Prendre un medicament ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Prenez un comprime après le repas du soir avec un grand verre d'eau. ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Envoyer un colis à la poste
+    1. Où faut-il écrire son adresse ?
+        Au dos du colis ✓ | Sur le ruban adhésif | À l'intérieur
+    2. Pourquoi l'employé pèse-t-il le colis ?
+        Pour calculer le prix ✓ | Pour vérifier l'adresse | Pour l'ouvrir
 
-  • Consigne — Se rendre a un entretien
-    1. Quelle action est demandee ?
-        Se rendre a un entretien ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Arrivez dix minutes avant l'heure ✓ | Partir sans prevenir | Ne rien vérifier
+  — Articles (42 questions dans 6 activités) —
 
-  • Consigne — Trier les déchets
-    1. Quelle action est demandee ?
-        Trier les déchets ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Mettez le papier dans le container bleu et le verre dans le container vert. ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer une sortie
-    1. Quelle action est demandee ?
-        Preparer une sortie ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Verifiez la meteo ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Recevoir un colis
-    1. Quelle action est demandee ?
-        Recevoir un colis ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Controlez le nom ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire une infusion
-    1. Quelle action est demandee ?
-        Faire une infusion ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Chauffez l'eau ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Accueillir un client
-    1. Quelle action est demandee ?
-        Accueillir un client ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Saluez le client ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Fermer un local
-    1. Quelle action est demandee ?
-        Fermer un local ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Eteignez les lumières ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Suivre une recette
-    1. Quelle action est demandee ?
-        Suivre une recette ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Lavez les légumes ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Utiliser la bibliothèque
-    1. Quelle action est demandee ?
-        Utiliser la bibliothèque ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Presentez votre carte ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Changer un rendez-vous
-    1. Quelle action est demandee ?
-        Changer un rendez-vous ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Appelez le secrétariat ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Organiser une classe
-    1. Quelle action est demandee ?
-        Organiser une classe ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Distribuez les feuilles ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Prendre le bus
-    1. Quelle action est demandee ?
-        Prendre le bus ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Achetez le billet avant de monter et validez-le dans le bus. ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Aider a la cantine
-    1. Quelle action est demandee ?
-        Aider a la cantine ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Servez les plats chauds ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire une lessive
-    1. Quelle action est demandee ?
-        Faire une lessive ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Triez les vêtements ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Participer a un cours
-    1. Quelle action est demandee ?
-        Participer a un cours ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Installez-vous ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Rendre un document
-    1. Quelle action est demandee ?
-        Rendre un document ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Ecrivez votre nom ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — S'inscrire a une activité
-    1. Quelle action est demandee ?
-        S'inscrire a une activité ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Choisissez le cours ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer un sac
-    1. Quelle action est demandee ?
-        Preparer un sac ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Mettez la gourde ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Utiliser un ordinateur
-    1. Quelle action est demandee ?
-        Utiliser un ordinateur ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Allumez l'écran ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Respecter la sécurité
-    1. Quelle action est demandee ?
-        Respecter la sécurité ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Portez les gants ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire un achat
-    1. Quelle action est demandee ?
-        Faire un achat ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Comparez les prix ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Lire un horaire
-    1. Quelle action est demandee ?
-        Lire un horaire ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Cherchez la ligne ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer une reunion
-    1. Quelle action est demandee ?
-        Preparer une reunion ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Reserve une salle ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Demander une aide
-    1. Quelle action est demandee ?
-        Demander une aide ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Expliquez votre situation ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire un appel
-    1. Quelle action est demandee ?
-        Faire un appel ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Presentez-vous ✓ | Partir sans prevenir | Ne rien vérifier
-
-  — Articles (70 questions dans 10 activités) —
-
-  • Article — Bien dormir
-    1. Quel est le sujet principal du texte ?
-        Bien dormir ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le sommeil" ?
-        Couchez-vous a une heure régulière et évitez les écrans tard le soir. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La chambre" ?
-        [réponse à saisir] → La chambre
-    4. Que faut-il faire selon la partie "Le réveil" ?
-        Levez-vous doucement et buvez de l'eau. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Bien manger sans dépenser trop
+    1. Quel est le sujet principal de l'article ?
+        Bien manger sans dépenser trop ✓ | Voyager pas cher | Faire du sport à la maison
+    2. Pourquoi ne faut-il pas faire les courses en ayant faim ?
+        Parce qu'on achète plus ✓ | Parce que les magasins sont fermés | Parce que c'est interdit
+    3. Où trouve-t-on souvent les produits les moins chers ?
+        En bas des rayons ✓ | À hauteur des yeux | À la caisse
+    4. Quel est l'avantage de cuisiner soi-même ?
+        C'est moins cher et plus sain ✓ | C'est toujours plus rapide | C'est plus salé
+    5. Que peut-on faire avec les restes ?
+        [réponse à saisir] → une soupe
+    6. Comment ranger les aliments pour éviter le gaspillage ?
+        [réponse à saisir] → les plus anciens devant
+    7. Combien de parties principales contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Bien dormir ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Manger équilibre
-    1. Quel est le sujet principal du texte ?
-        Manger équilibre ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les repas" ?
-        Variez les légumes, les céréales et les protéines pendant la semaine. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les boissons" ?
-        [réponse à saisir] → Les boissons
-    4. Que faut-il faire selon la partie "Les habitudes" ?
-        Mangez lentement et évitez de grignoter toute la journée. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Mieux dormir chaque nuit
+    1. Quel est le sujet de l'article ?
+        Mieux dormir chaque nuit ✓ | Apprendre à cuisiner | Trouver un travail
+    2. Pourquoi faut-il des horaires réguliers ?
+        Parce que le corps aime les habitudes ✓ | Parce que c'est obligatoire | Parce que c'est moins cher
+    3. Que faut-il faire une demi-heure avant de dormir ?
+        Éteindre les écrans ✓ | Boire un café | Faire du sport
+    4. Comment doit être la chambre ?
+        Calme et plutôt fraîche ✓ | Chaude et éclairée | Bruyante
+    5. Que faut-il éviter le soir ?
+        [réponse à saisir] → le café
+    6. L'activité physique aide-t-elle à dormir ?
+        [réponse à saisir] → oui
+    7. Combien de conseils principaux donne l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Manger équilibre ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Se déplacer en ville
-    1. Quel est le sujet principal du texte ?
-        Se déplacer en ville ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les transports" ?
-        Le bus et le train permettent de voyager sans chercher de parking. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Le vélo" ?
-        [réponse à saisir] → Le vélo
-    4. Que faut-il faire selon la partie "La sécurité" ?
-        Respectez les feux et restez visible le soir. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Se déplacer autrement en ville
+    1. Quel est le sujet de l'article ?
+        Se déplacer autrement en ville ✓ | Acheter une voiture | Voyager à l'étranger
+    2. Quel est l'avantage d'un abonnement ?
+        On paie souvent moins cher ✓ | On va plus vite qu'en avion | On peut conduire
+    3. Pourquoi le vélo est-il conseillé pour les courts trajets ?
+        Il est rapide et bon pour la santé ✓ | Il est gratuit partout | Il n'a pas besoin d'être attaché
+    4. Que faut-il porter à vélo ?
+        Un casque ✓ | Une cravate | Des lunettes de soleil
+    5. Que peut faire une personne pressée pour marcher un peu ?
+        [réponse à saisir] → descendre un arrêt plus tôt
+    6. Marcher coûte-t-il de l'argent ?
+        [réponse à saisir] → non
+    7. Combien de moyens de transport l'article présente-t-il ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Se déplacer en ville ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Chercher un emploi
-    1. Quel est le sujet principal du texte ?
-        Chercher un emploi ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le CV" ?
-        Un CV clair presente les experiences et les competences utiles. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "L'entretien" ?
-        [réponse à saisir] → L'entretien
-    4. Que faut-il faire selon la partie "Le suivi" ?
-        Après l'entretien, on peut envoyer un message de remerciement. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Réussir un entretien d'embauche
+    1. Quel est le sujet de l'article ?
+        Réussir un entretien d'embauche ✓ | Écrire un roman | Organiser un voyage
+    2. Que faut-il faire avant l'entretien ?
+        Se renseigner sur l'entreprise ✓ | Oublier l'annonce | Arriver en retard
+    3. Que faut-il faire de son téléphone avant d'entrer ?
+        L'éteindre ✓ | Le laisser sonner | Le poser sur la table
+    4. Que faut-il faire si une question est difficile ?
+        Réfléchir un instant avant de répondre ✓ | Répondre n'importe quoi | Partir
+    5. Que peut-on envoyer après l'entretien ?
+        [réponse à saisir] → un message de remerciement
+    6. Après combien de temps peut-on rappeler poliment ?
+        [réponse à saisir] → une semaine ou deux
+    7. Combien d'étapes l'article décrit-il ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Chercher un emploi ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Gerer son budget
-    1. Quel est le sujet principal du texte ?
-        Gerer son budget ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les depenses" ?
-        Notez les factures fixes avant de faire des achats. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les economies" ?
-        [réponse à saisir] → Les economies
-    4. Que faut-il faire selon la partie "Les priorites" ?
-        Payez d&apos;abord le logement, la nourriture et les assurances. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Protéger la nature au quotidien
+    1. Quel est le sujet de l'article ?
+        Protéger la nature au quotidien ✓ | Décorer sa maison | Choisir un animal
+    2. Que faut-il faire quand on se brosse les dents ?
+        Fermer le robinet ✓ | Laisser couler l'eau | Remplir un bain
+    3. Pourquoi réparer vite un robinet qui goutte ?
+        Parce qu'il gaspille beaucoup d'eau ✓ | Parce que c'est joli | Parce que c'est obligatoire
+    4. Que peut-on faire au lieu de jeter des objets ?
+        Les réparer ou les donner ✓ | Les brûler | Les cacher
+    5. Que faut-il faire en quittant une pièce ?
+        [réponse à saisir] → éteindre la lumière
+    6. Que peut-on mettre avant d'augmenter le chauffage ?
+        [réponse à saisir] → un pull
+    7. Combien de conseils principaux l'article donne-t-il ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Gerer son budget ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Proteger la nature
-    1. Quel est le sujet principal du texte ?
-        Proteger la nature ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le tri" ?
-        Separez le papier, le verre et les déchets speciaux. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "L'eau" ?
-        [réponse à saisir] → L'eau
-    4. Que faut-il faire selon la partie "Les transports" ?
-        Marcher ou prendre le bus réduit la pollution. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Utiliser Internet en toute sécurité
+    1. Quel est le sujet de l'article ?
+        Utiliser Internet en toute sécurité ✓ | Réparer un ordinateur | Créer un jeu vidéo
+    2. Comment doit être un bon mot de passe ?
+        Long et différent pour chaque site ✓ | Court et toujours le même | Égal à sa date de naissance
+    3. Que font certains courriels dangereux ?
+        Ils imitent votre banque pour voler vos informations ✓ | Ils envoient des cadeaux | Ils réparent l'ordinateur
+    4. Que faut-il faire en cas de doute sur un message ?
+        Contacter l'entreprise par un autre moyen ✓ | Cliquer tout de suite | Envoyer de l'argent
+    5. Que faut-il faire avant de publier quelque chose ?
+        [réponse à saisir] → réfléchir
+    6. Avec qui ne faut-il pas partager ses données ?
+        [réponse à saisir] → des inconnus
+    7. Combien de conseils principaux l'article présente-t-il ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Proteger la nature ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Apprendre une langue
-    1. Quel est le sujet principal du texte ?
-        Apprendre une langue ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "La pratique" ?
-        Parlez un peu chaque jour, meme avec des phrases simples. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La lecture" ?
-        [réponse à saisir] → La lecture
-    4. Que faut-il faire selon la partie "L'ecoute" ?
-        Ecoutez des dialogues pour comprendre la prononciation. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Apprendre une langue ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Vivre en immeuble
-    1. Quel est le sujet principal du texte ?
-        Vivre en immeuble ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le bruit" ?
-        Evitez le bruit tard le soir et tot le matin. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La buanderie" ?
-        [réponse à saisir] → La buanderie
-    4. Que faut-il faire selon la partie "Les voisins" ?
-        Un bonjour et une discussion calme evitent beaucoup de problèmes. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Vivre en immeuble ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Preparer un examen
-    1. Quel est le sujet principal du texte ?
-        Preparer un examen ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le planning" ?
-        Divisez le travail en petites parties sur plusieurs jours. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les exercices" ?
-        [réponse à saisir] → Les exercices
-    4. Que faut-il faire selon la partie "Le jour J" ?
-        Dormez assez et arrivez avec le materiel necessaire. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Preparer un examen ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Utiliser Internet
-    1. Quel est le sujet principal du texte ?
-        Utiliser Internet ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les mots de passe" ?
-        Choisissez un mot de passe long et different pour chaque compte. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les messages" ?
-        [réponse à saisir] → Les messages
-    4. Que faut-il faire selon la partie "Les données" ?
-        Ne partagez pas vos informations personnelles avec n'importe qui. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Utiliser Internet ✓ | Une histoire imaginaire | Un menu de restaurant
 
 ### CE — NIVEAU AVANCÉ (CE-3)
 
@@ -917,491 +671,245 @@
     6. Rima veut savoir ou jeter le verre.
         [associer] → Tri des déchets
 
-  — Courriels (60 questions dans 10 activités) —
+  — Courriels (36 questions dans 6 activités) —
 
-  • Courriel — Changement d'horaire (secrétariat@formation.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        8 h 45 ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | salle 312 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        pièce d'identité ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | lundi midi ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → secrétariat
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Changement d'horaire
+  • Courriel — Travaux de rénovation dans l'immeuble (gerance@immeuble.ch)
+    1. Quel est le but principal de ce message ?
+        Annoncer des travaux dans l'immeuble ✓ | Proposer un nouvel appartement | Augmenter le loyer
+    2. Que faut-il prévoir concernant l'ascenseur ?
+        Qu'il sera indisponible une partie de la journée ✓ | Qu'il sera plus rapide | Qu'il deviendra gratuit
+    3. Comment les coupures d'eau chaude seront-elles annoncées ?
+        Par une affiche, la veille ✓ | Par téléphone, le matin | Elles ne seront pas annoncées
+    4. Quel est le ton de la gérance au sujet des désagréments ?
+        Elle reconnaît la gêne mais explique que c'est nécessaire ✓ | Elle refuse d'en parler | Elle s'en moque
+    5. Que doivent faire les personnes ayant une situation particulière ?
+        [réponse à saisir] → contacter la gérance
+    6. Pourquoi ces travaux sont-ils faits, malgré la gêne ?
+        [réponse à saisir] → pour améliorer le confort
 
-  • Courriel — Visite technique (logement@régie.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        mardi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | radiateurs ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        un voisin ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | vingt minutes ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → logement
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Visite technique
+  • Courriel — Réponse à votre demande de télétravail (rh@entreprise.ch)
+    1. Que propose l'entreprise ?
+        Deux jours de télétravail par semaine ✓ | Une augmentation de salaire | Un changement de poste
+    2. Quelle est une des conditions posées ?
+        Rester joignable aux horaires habituels ✓ | Travailler la nuit | Venir tous les jours au bureau
+    3. Qui doit payer la connexion Internet ?
+        L'employé ✓ | L'entreprise | Le client
+    4. Que se passera-t-il après trois mois ?
+        On fera le point pour décider de continuer ou non ✓ | Le contrat s'arrêtera automatiquement | Rien ne sera décidé
+    5. Pourquoi faut-il choisir des jours fixes ?
+        [réponse à saisir] → pour que l'équipe sache quand on est au bureau
+    6. Que fournit l'entreprise ?
+        [réponse à saisir] → un ordinateur portable
 
-  • Courriel — Livre réservé (bibliothèque@ville.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        18 juin ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | à l'accueil ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        annulée ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | livre ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → bibliothèque
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Livre réservé
+  • Courriel — Appel à bénévoles pour la collecte (association@benevoles.ch)
+    1. Que cherche l'association ?
+        Des bénévoles pour une collecte ✓ | Des employés payés | Des dons d'argent uniquement
+    2. En quoi consiste surtout l'aide demandée ?
+        Accueillir, trier et ranger ✓ | Cuisiner pour cent personnes | Conduire un camion
+    3. Faut-il de l'expérience ?
+        Non, tout sera expliqué sur place ✓ | Oui, c'est obligatoire | Seulement pour les responsables
+    4. Que reçoivent les bénévoles ?
+        Le repas de midi ✓ | Un salaire | Un cadeau coûteux
+    5. Que faut-il indiquer si l'on est intéressé ?
+        [réponse à saisir] → ses disponibilités
+    6. Peut-on aider seulement quelques heures ?
+        [réponse à saisir] → oui
 
-  • Courriel — Confirmation de visite (musée@culture.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        vendredi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 13 h 50 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        vestiaire ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | après la visite ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → musée
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Confirmation de visite
+  • Courriel — Lancement de notre application mobile (banque@service.ch)
+    1. Qu'annonce la banque ?
+        Une nouvelle application mobile ✓ | La fermeture de toutes les agences | Une hausse des frais
+    2. Que peut-on faire avec l'application ?
+        Effectuer des virements ✓ | Retirer des billets à l'intérieur du téléphone | Ouvrir un commerce
+    3. Comment reçoit-on le code de première connexion ?
+        Par courrier ✓ | Par SMS immédiat | En agence uniquement
+    4. Que ne demanderont jamais les conseillers ?
+        Le mot de passe par téléphone ou courriel ✓ | Le nom du client | L'adresse postale
+    5. Que se passe-t-il pour ceux qui préfèrent le guichet ?
+        [réponse à saisir] → rien ne change
+    6. Pourquoi faut-il se méfier des messages suspects ?
+        [réponse à saisir] → pour ne pas donner son mot de passe
 
-  • Courriel — Objet retrouvé (transport@cff.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        Lausanne ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | sac noir ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        cinq francs ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | 18 h 30 ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → transport
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Objet retrouvé
+  • Courriel — Confirmation et conseils pour votre séjour (voyages@agence.ch)
+    1. De quoi parle ce message ?
+        D'un séjour d'une semaine à Lisbonne ✓ | D'un déménagement | D'un achat de voiture
+    2. Pourquoi faut-il arriver tôt à l'aéroport ?
+        Parce que le vol part très tôt et qu'il faut être là deux heures avant ✓ | Parce que l'avion est petit | Parce que c'est gratuit le matin
+    3. Que risque-t-on sans document d'identité valable ?
+        Un refus d'embarquement ✓ | Une simple amende | Rien du tout
+    4. Pourquoi acheter les billets de train à l'avance ?
+        Ils sont souvent moins chers sur Internet ✓ | Ils sont interdits sur place | Ils sont offerts par l'hôtel
+    5. Que faut-il prévoir pour les soirées ?
+        [réponse à saisir] → une veste légère
+    6. Où trouve-t-on le numéro d'urgence ?
+        [réponse à saisir] → sur le carnet de route
 
-  • Courriel — Réunion parents (école@classe.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        jeudi prochain ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 19 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        voyage scolaire ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | mardi soir ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → école
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Réunion parents
+  • Courriel — Réunion d'information : projet de classe verte (direction@ecole.ch)
+    1. Quel est l'objet de la réunion ?
+        Présenter un projet de classe verte ✓ | Changer les horaires de l'école | Annoncer une fête surprise
+    2. Quel est un des objectifs du séjour ?
+        Apprendre à vivre en groupe ✓ | Gagner de l'argent | Rester à la maison
+    3. Que propose-t-on aux familles en difficulté ?
+        Une aide financière confidentielle ✓ | Un séjour gratuit pour tous | Aucune solution
+    4. Pourquoi la présence des parents est-elle importante ?
+        Leur accord est nécessaire pour organiser le voyage ✓ | Pour payer sur place | Pour préparer les repas
+    5. Combien coûte le séjour par enfant ?
+        [réponse à saisir] → 250 francs
+    6. Que reçoivent les parents qui ne peuvent pas venir ?
+        [réponse à saisir] → un document résumant le projet
 
-  • Courriel — Inscription au cours (club@natation.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        3 septembre ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 17 h 15 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        bonnet de bain ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | quinze minutes ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → club
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Inscription au cours
+  — Consignes (18 questions dans 9 activités) —
 
-  • Courriel — Document manquant (commune@admin.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        assurance maladie ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | vendredi 11 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        guichet ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | reporté ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → commune
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Document manquant
+  • Consigne — Faire une réclamation
+    1. Que faut-il rassembler en premier ?
+        La facture et l'emballage ✓ | Des photos de vacances | De l'argent liquide
+    2. Pourquoi garder une copie du courrier ?
+        Elle sera utile en cas de refus ✓ | Pour la jeter plus tard | Pour la revendre
 
-  • Courriel — Livraison (magasin@meubles.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        mercredi matin ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | 8 h et 11 h ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        ascenseur ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | trente minutes ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → magasin
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Livraison
+  • Consigne — Préparer un entretien téléphonique
+    1. Où faut-il s'installer pour l'appel ?
+        Dans un endroit calme ✓ | Dans la rue | Dans un magasin bruyant
+    2. Que faire si l'on n'a pas compris ?
+        Faire répéter ✓ | Raccrocher aussitôt | Se taire
 
-  • Courriel — Atelier CV (centre@emploi.ch)
-    1. Quelle information principale est donnée dans ce message ?
-        lundi ✓ | Une information sans rapport | Une publicité
-    2. Quel autre détail faut-il retenir ?
-        Le document ne le dit pas | salle 4 ✓ | Une erreur de date
-    3. Que faut-il apporter ou faire ?
-        certificats de travail ✓ | Ne rien faire | Téléphoner à la police
-    4. Quel est le dernier détail important ?
-        Le message est annule | gratuite ✓ | La personne doit partir
-    5. Qui envoie le message ?
-        [réponse à saisir] → centre
-    6. Quel est l'objet du message ?
-        [réponse à saisir] → Atelier CV
+  • Consigne — Voyager pendant une grève
+    1. Pourquoi consulter le site avant de partir ?
+        Parce que l'horaire habituel n'est pas garanti ✓ | Pour acheter des souvenirs | Pour réserver un hôtel
+    2. Que peut-on parfois demander en cas d'annulation ?
+        Le remboursement du billet ✓ | Un cadeau | Une place gratuite à vie
 
-  — Consignes (60 questions dans 30 activités) —
+  • Consigne — Comprendre un contrat de location
+    1. Que faut-il vérifier au sujet du loyer ?
+        Ce qu'il comprend (charges, chauffage) ✓ | La couleur des murs | Le nom du voisin
+    2. Que faire si une clause n'est pas claire ?
+        Demander des explications ✓ | Signer quand même | Partir sans rien dire
 
-  • Consigne — Nettoyer une salle
-    1. Quelle action est demandee ?
-        Nettoyer une salle ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Passez le balai ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Réagir en cas de panne d'électricité
+    1. Comment savoir si la panne touche tout le quartier ?
+        En regardant chez les voisins ✓ | En appelant la police | En attendant une semaine
+    2. Pourquoi éviter d'ouvrir le congélateur ?
+        Pour conserver le froid ✓ | Parce que c'est dangereux | Pour économiser l'eau
 
-  • Consigne — Preparer un rendez-vous
-    1. Quelle action est demandee ?
-        Preparer un rendez-vous ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Relisez le dossier ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Acheter d'occasion en ligne
+    1. De quoi faut-il se méfier ?
+        Des prix beaucoup trop bas ✓ | Des belles photos | Des vendeurs polis
+    2. Quel mode de paiement privilégier ?
+        Un paiement sécurisé ✓ | De l'argent liquide par la poste | Payer sans vérifier
 
-  • Consigne — Utiliser une machine
-    1. Quelle action est demandee ?
-        Utiliser une machine ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Branchez l'appareil ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Organiser une réunion efficace
+    1. Que faut-il envoyer à l'avance ?
+        L'ordre du jour ✓ | Un cadeau | La liste des salaires
+    2. Que faire à la fin de la réunion ?
+        Envoyer un court compte rendu ✓ | Tout oublier | Recommencer depuis le début
 
-  • Consigne — Faire une demande
-    1. Quelle action est demandee ?
-        Faire une demande ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Completez le formulaire ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Préparer un exposé oral
+    1. Que faut-il noter sur les fiches ?
+        Des mots-clés ✓ | Des phrases entières | Rien du tout
+    2. Pourquoi s'entraîner à voix haute ?
+        Pour vérifier le temps et repérer les passages difficiles ✓ | Pour déranger les voisins | Pour perdre du temps
 
-  • Consigne — Prendre un medicament
-    1. Quelle action est demandee ?
-        Prendre un medicament ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Prenez un comprime après le repas du soir avec un grand verre d'eau. ✓ | Partir sans prevenir | Ne rien vérifier
+  • Consigne — Aider un nouveau collègue
+    1. Que faut-il montrer au nouveau collègue ?
+        Les lieux importants comme la cafétéria ✓ | Sa propre maison | Son salaire
+    2. Pourquoi un bon accueil est-il utile ?
+        Il aide la personne à se sentir à l'aise ✓ | Il fait perdre du temps | Il n'a aucun effet
 
-  • Consigne — Se rendre a un entretien
-    1. Quelle action est demandee ?
-        Se rendre a un entretien ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Arrivez dix minutes avant l'heure ✓ | Partir sans prevenir | Ne rien vérifier
+  — Articles (42 questions dans 6 activités) —
 
-  • Consigne — Trier les déchets
-    1. Quelle action est demandee ?
-        Trier les déchets ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Mettez le papier dans le container bleu et le verre dans le container vert. ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer une sortie
-    1. Quelle action est demandee ?
-        Preparer une sortie ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Verifiez la meteo ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Recevoir un colis
-    1. Quelle action est demandee ?
-        Recevoir un colis ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Controlez le nom ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire une infusion
-    1. Quelle action est demandee ?
-        Faire une infusion ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Chauffez l'eau ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Accueillir un client
-    1. Quelle action est demandee ?
-        Accueillir un client ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Saluez le client ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Fermer un local
-    1. Quelle action est demandee ?
-        Fermer un local ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Eteignez les lumières ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Suivre une recette
-    1. Quelle action est demandee ?
-        Suivre une recette ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Lavez les légumes ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Utiliser la bibliothèque
-    1. Quelle action est demandee ?
-        Utiliser la bibliothèque ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Presentez votre carte ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Changer un rendez-vous
-    1. Quelle action est demandee ?
-        Changer un rendez-vous ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Appelez le secrétariat ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Organiser une classe
-    1. Quelle action est demandee ?
-        Organiser une classe ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Distribuez les feuilles ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Prendre le bus
-    1. Quelle action est demandee ?
-        Prendre le bus ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Achetez le billet avant de monter et validez-le dans le bus. ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Aider a la cantine
-    1. Quelle action est demandee ?
-        Aider a la cantine ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Servez les plats chauds ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire une lessive
-    1. Quelle action est demandee ?
-        Faire une lessive ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Triez les vêtements ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Participer a un cours
-    1. Quelle action est demandee ?
-        Participer a un cours ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Installez-vous ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Rendre un document
-    1. Quelle action est demandee ?
-        Rendre un document ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Ecrivez votre nom ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — S'inscrire a une activité
-    1. Quelle action est demandee ?
-        S'inscrire a une activité ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Choisissez le cours ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer un sac
-    1. Quelle action est demandee ?
-        Preparer un sac ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Mettez la gourde ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Utiliser un ordinateur
-    1. Quelle action est demandee ?
-        Utiliser un ordinateur ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Allumez l'écran ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Respecter la sécurité
-    1. Quelle action est demandee ?
-        Respecter la sécurité ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Portez les gants ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire un achat
-    1. Quelle action est demandee ?
-        Faire un achat ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Comparez les prix ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Lire un horaire
-    1. Quelle action est demandee ?
-        Lire un horaire ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Cherchez la ligne ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Preparer une reunion
-    1. Quelle action est demandee ?
-        Preparer une reunion ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Reserve une salle ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Demander une aide
-    1. Quelle action est demandee ?
-        Demander une aide ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Expliquez votre situation ✓ | Partir sans prevenir | Ne rien vérifier
-
-  • Consigne — Faire un appel
-    1. Quelle action est demandee ?
-        Faire un appel ✓ | Changer de sujet | Ignorer le document
-    2. Que faut-il faire selon le texte ?
-        Presentez-vous ✓ | Partir sans prevenir | Ne rien vérifier
-
-  — Articles (70 questions dans 10 activités) —
-
-  • Article — Bien dormir
-    1. Quel est le sujet principal du texte ?
-        Bien dormir ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le sommeil" ?
-        Couchez-vous a une heure régulière et évitez les écrans tard le soir. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La chambre" ?
-        [réponse à saisir] → La chambre
-    4. Que faut-il faire selon la partie "Le réveil" ?
-        Levez-vous doucement et buvez de l'eau. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Le télétravail : avantages et limites
+    1. Quel est le sujet de l'article ?
+        Les avantages et les limites du télétravail ✓ | Comment trouver un premier emploi | Les voyages d'affaires
+    2. Quel avantage est cité ?
+        Éviter les trajets ✓ | Gagner beaucoup plus d'argent | Avoir un plus grand bureau
+    3. Quelle difficulté l'article mentionne-t-il ?
+        Se sentir isolé ✓ | Avoir trop de vacances | Un salaire trop élevé
+    4. Qu'est-ce qui devient parfois flou ?
+        La frontière entre vie privée et vie professionnelle ✓ | La couleur des murs | La liste des tâches
+    5. L'article est-il totalement favorable au télétravail ?
+        Non, il présente le pour et le contre ✓ | Oui, il n'y voit que des avantages | Non, il est totalement contre
+    6. Quelle solution l'article propose-t-il ?
+        [réponse à saisir] → alterner bureau et maison
+    7. Combien de parties principales contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Bien dormir ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Manger équilibre
-    1. Quel est le sujet principal du texte ?
-        Manger équilibre ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les repas" ?
-        Variez les légumes, les céréales et les protéines pendant la semaine. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les boissons" ?
-        [réponse à saisir] → Les boissons
-    4. Que faut-il faire selon la partie "Les habitudes" ?
-        Mangez lentement et évitez de grignoter toute la journée. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Consommer moins mais mieux
+    1. Quel est le message principal ?
+        Consommer moins mais mieux ✓ | Acheter le plus possible | Ne plus jamais rien acheter
+    2. Que conseille-t-on de se demander avant d'acheter ?
+        Si l'on en a vraiment besoin ✓ | Si le voisin en a un | S'il en reste beaucoup
+    3. Pourquoi choisir un produit solide ?
+        Il revient moins cher à long terme ✓ | Il est toujours moins cher au départ | Il est plus léger
+    4. Que peut-on faire des objets qui nous semblent inutiles ?
+        Les donner à quelqu'un d'autre ✓ | Les brûler | Les cacher
+    5. « Consommer autrement » signifie-t-il tout se refuser ?
+        Non, faire des choix plus réfléchis ✓ | Oui, ne plus rien acheter | Oui, tout jeter
+    6. Cite un petit geste proposé par l'article.
+        [réponse à saisir] → préparer une liste
+    7. Combien de parties contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Manger équilibre ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Se déplacer en ville
-    1. Quel est le sujet principal du texte ?
-        Se déplacer en ville ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les transports" ?
-        Le bus et le train permettent de voyager sans chercher de parking. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Le vélo" ?
-        [réponse à saisir] → Le vélo
-    4. Que faut-il faire selon la partie "La sécurité" ?
-        Respectez les feux et restez visible le soir. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Les réseaux sociaux : entre lien et pression
+    1. Quel est le sujet de l'article ?
+        Les réseaux sociaux, entre lien et pression ✓ | L'histoire d'Internet | La publicité à la télévision
+    2. Quel avantage est cité ?
+        Garder le contact avec des proches éloignés ✓ | Gagner de l'argent facilement | Mieux dormir
+    3. Pourquoi l'image des réseaux est-elle trompeuse ?
+        Les gens montrent souvent le meilleur de leur vie ✓ | Les photos y sont interdites | Tout ce qu'on y voit est vrai
+    4. Quel sentiment cette comparaison peut-elle créer ?
+        De la jalousie ou du mal-être ✓ | De la joie garantie | De la fatigue physique
+    5. Faut-il croire que tout est réel derrière l'écran ?
+        Non ✓ | Oui, toujours | Seulement le week-end
+    6. Que conseille l'article pour garder le contrôle ?
+        [réponse à saisir] → limiter le temps passé
+    7. Combien de parties contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Se déplacer en ville ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Chercher un emploi
-    1. Quel est le sujet principal du texte ?
-        Chercher un emploi ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le CV" ?
-        Un CV clair presente les experiences et les competences utiles. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "L'entretien" ?
-        [réponse à saisir] → L'entretien
-    4. Que faut-il faire selon la partie "Le suivi" ?
-        Après l'entretien, on peut envoyer un message de remerciement. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Apprendre une langue à l'âge adulte
+    1. Quel est le sujet de l'article ?
+        Apprendre une langue à l'âge adulte ✓ | Voyager à l'étranger | Enseigner aux enfants
+    2. Quel avantage ont les adultes ?
+        Ils comprennent les règles plus vite ✓ | Ils ont toujours plus de temps libre | Ils n'oublient jamais rien
+    3. Quel est « le secret » selon l'article ?
+        Pratiquer un peu chaque jour ✓ | Travailler dix heures le dimanche | Ne jamais réviser
+    4. Comment rendre l'apprentissage plus vivant ?
+        Écouter des chansons, regarder des vidéos ✓ | Lire le dictionnaire en entier | Ne rien faire
+    5. Que pense l'article des erreurs ?
+        Elles font partie de l'apprentissage ✓ | Il faut absolument les éviter | Elles sont totalement inutiles
+    6. Qui progresse souvent plus vite ?
+        [réponse à saisir] → ceux qui osent parler
+    7. Combien de parties contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Chercher un emploi ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Gerer son budget
-    1. Quel est le sujet principal du texte ?
-        Gerer son budget ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les depenses" ?
-        Notez les factures fixes avant de faire des achats. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les economies" ?
-        [réponse à saisir] → Les economies
-    4. Que faut-il faire selon la partie "Les priorites" ?
-        Payez d&apos;abord le logement, la nourriture et les assurances. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Le bénévolat, utile pour tous
+    1. Quel est le sujet de l'article ?
+        Le bénévolat ✓ | Le sport de haut niveau | Les vacances à l'étranger
+    2. Combien de temps faut-il pour être utile ?
+        Quelques heures par mois suffisent ✓ | Au moins huit heures par jour | Toute l'année sans pause
+    3. Quel bénéfice le bénévole en tire-t-il ?
+        Rencontrer des gens et apprendre ✓ | Gagner un bon salaire | Voyager gratuitement
+    4. Pour qui est-ce aussi un moyen de retrouver des contacts ?
+        Pour les personnes seules ✓ | Pour les enfants | Pour les touristes
+    5. Comment commencer selon l'article ?
+        [réponse à saisir] → contacter une association proche
+    6. Pourquoi commencer doucement ?
+        [réponse à saisir] → pour ne pas se décourager
+    7. Combien de parties contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Gerer son budget ✓ | Une histoire imaginaire | Un menu de restaurant
 
-  • Article — Proteger la nature
-    1. Quel est le sujet principal du texte ?
-        Proteger la nature ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le tri" ?
-        Separez le papier, le verre et les déchets speciaux. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "L'eau" ?
-        [réponse à saisir] → L'eau
-    4. Que faut-il faire selon la partie "Les transports" ?
-        Marcher ou prendre le bus réduit la pollution. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
+  • Article — Bien gérer son argent au quotidien
+    1. Quel est le sujet de l'article ?
+        Bien gérer son argent au quotidien ✓ | Devenir riche très vite | Ouvrir un magasin
+    2. Pourquoi noter ses dépenses ?
+        Pour comprendre où part l'argent ✓ | Pour payer plus d'impôts | Pour impressionner ses amis
+    3. À quoi sert une petite réserve ?
+        Faire face aux imprévus sans emprunter ✓ | Partir en croisière | Acheter une voiture de luxe
+    4. De quoi faut-il se méfier ?
+        Des crédits faciles et des offres trop belles ✓ | Des magasins ouverts le samedi | Des tickets de caisse
+    5. Une petite somme épargnée régulièrement est-elle utile ?
+        Oui, elle finit par constituer une sécurité ✓ | Non, c'est totalement inutile | Seulement si elle est énorme
+    6. Que faut-il faire avant un achat important ?
+        [réponse à saisir] → comparer les prix et réfléchir
+    7. Combien de parties contient l'article ?
         [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Proteger la nature ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Apprendre une langue
-    1. Quel est le sujet principal du texte ?
-        Apprendre une langue ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "La pratique" ?
-        Parlez un peu chaque jour, meme avec des phrases simples. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La lecture" ?
-        [réponse à saisir] → La lecture
-    4. Que faut-il faire selon la partie "L'ecoute" ?
-        Ecoutez des dialogues pour comprendre la prononciation. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Apprendre une langue ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Vivre en immeuble
-    1. Quel est le sujet principal du texte ?
-        Vivre en immeuble ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le bruit" ?
-        Evitez le bruit tard le soir et tot le matin. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "La buanderie" ?
-        [réponse à saisir] → La buanderie
-    4. Que faut-il faire selon la partie "Les voisins" ?
-        Un bonjour et une discussion calme evitent beaucoup de problèmes. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Vivre en immeuble ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Preparer un examen
-    1. Quel est le sujet principal du texte ?
-        Preparer un examen ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Le planning" ?
-        Divisez le travail en petites parties sur plusieurs jours. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les exercices" ?
-        [réponse à saisir] → Les exercices
-    4. Que faut-il faire selon la partie "Le jour J" ?
-        Dormez assez et arrivez avec le materiel necessaire. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Preparer un examen ✓ | Une histoire imaginaire | Un menu de restaurant
-
-  • Article — Utiliser Internet
-    1. Quel est le sujet principal du texte ?
-        Utiliser Internet ✓ | Un voyage touristique | Une recette de cuisine
-    2. Que dit la partie "Les mots de passe" ?
-        Choisissez un mot de passe long et different pour chaque compte. ✓ | Elle ne donne aucune information | Elle parle d'un autre sujet
-    3. Quel mot complete le conseil sur "Les messages" ?
-        [réponse à saisir] → Les messages
-    4. Que faut-il faire selon la partie "Les données" ?
-        Ne partagez pas vos informations personnelles avec n'importe qui. ✓ | Arreter de lire | Ignorer les conseils
-    5. A quoi sert ce texte ?
-        Donner des conseils ✓ | Vendre une voiture | Annoncer un concert
-    6. Combien de parties contient l'article ?
-        [réponse à saisir] → 3
-    7. Quel titre convient le mieux ?
-        Utiliser Internet ✓ | Une histoire imaginaire | Un menu de restaurant
 
 ###############################################################
 # COMPRÉHENSION ORALE (CO)
