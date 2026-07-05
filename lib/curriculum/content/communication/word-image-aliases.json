@@ -1,0 +1,9 @@
+{
+  "_comment": "Curated aliases: normalized CE/CO word slug → target slug in word-image-index. Used when a French label does not match its image filename (English filenames, adjectives, or close synonyms). Keys and values are normalized slugs (accents stripped, lowercase, apostrophes dropped, spaces as hyphens). Only add an alias whose target slug exists in word-image-index.ts.",
+  "lampe": "lamp",
+  "sac": "sac-a-main",
+  "crayon-de-couleur": "crayon",
+  "cahier-bleu": "cahier",
+  "soleil-d-ete": "soleil",
+  "ski-nautique": "ski"
+}

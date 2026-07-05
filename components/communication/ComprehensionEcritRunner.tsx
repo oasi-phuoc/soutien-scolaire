@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { imageSourceFor } from "@/lib/curriculum/word-image-resolver";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   CommunicationFinishButton,
@@ -846,9 +848,26 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
 }
 
 function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
+  const src = imageSourceFor(label, path);
+  const [failed, setFailed] = useState(false);
+  const heightCls = compact ? "h-20" : "h-24";
+  if (src && !failed) {
+    return (
+      <div className={`relative w-full overflow-hidden rounded-lg bg-white ${heightCls}`} title={label}>
+        <Image
+          src={src}
+          alt={label}
+          fill
+          className="object-contain p-1"
+          sizes="(max-width: 640px) 40vw, 160px"
+          onError={() => setFailed(true)}
+        />
+      </div>
+    );
+  }
   return (
     <div
-      className={`flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center font-semibold text-slate-500 ${compact ? "h-20 text-xs" : "h-24 text-sm"}`}
+      className={`flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-center font-semibold text-slate-500 ${heightCls} ${compact ? "text-xs" : "text-sm"}`}
       data-image-path={path}
       title={path}
     >

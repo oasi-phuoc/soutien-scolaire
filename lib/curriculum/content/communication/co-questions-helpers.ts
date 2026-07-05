@@ -1,3 +1,4 @@
+import { resolveWordImage } from "../../word-image-resolver";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -194,10 +195,16 @@ export function buildObjectPickTask(
   if (cards.length !== 5) {
     throw new Error("object pick: attendu 5 cartes");
   }
+  // Link any card without a curated image to a matching illustration in
+  // vocabulaire / lecture (falls back to the label text when none exists).
+  const linked = cards.map((card) => ({
+    ...card,
+    image: card.image ?? resolveWordImage(card.label) ?? undefined,
+  })) as typeof cards;
   return {
     kind: "object_pick",
     prompt: "Écoutez l'enregistrement. Cliquez sur les objets que vous entendez (ne cliquez pas sur les autres).",
-    cards,
+    cards: linked,
   };
 }
 
