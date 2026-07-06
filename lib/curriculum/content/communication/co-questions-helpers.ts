@@ -1,4 +1,4 @@
-import { ceCoImageSource, isImageableLabel, resolveWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isImageableLabel, isPriceRange, isSinglePrice, resolveWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
@@ -138,6 +138,11 @@ export function isExcludedNameQuestion(item: Pick<RawQ, "textQ" | "text" | "text
     if (item.text.length > 0 && item.text.every(isProperNameAnswer)) return true;
   }
   return false;
+}
+
+function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
+  if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
+  return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
 function hashSeed(seed: string): number {
@@ -334,10 +339,9 @@ export function buildCoPartQuestions(
   const selected = shuffled.slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    // The "QCM image" format is only offered when the 3 options are genuinely
-    // illustrable (object, clock/time or price). Otherwise (prénoms, villes,
-    // pays, nombres, dates…) only text and fill formats are used.
-    const imageable = q.imageChoices.every((c) => !!ceCoImageSource(c.image, c.label));
+    // QCM image uniquement si les 3 options sont illustrables (objet ou horloge),
+    // jamais pour les prix (images supprimées).
+    const imageable = supportsImageFormat(q.imageChoices);
     const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
     const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);

@@ -247,8 +247,6 @@ export function resolveWordImage(label: string | undefined | null): string | nul
   if (!label) return null;
   const time = timeSlug(label);
   if (time && WORD_IMAGE_INDEX[time]) return WORD_IMAGE_INDEX[time];
-  const price = priceSlug(label);
-  if (price && WORD_IMAGE_INDEX[price]) return WORD_IMAGE_INDEX[price];
   for (const candidate of candidateSlugs(label)) {
     const direct = WORD_IMAGE_INDEX[candidate];
     if (direct) return direct;
@@ -259,22 +257,18 @@ export function resolveWordImage(label: string | undefined | null): string | nul
 }
 
 /**
- * True when the label can be shown as a QCM image (horloge, prix ou objet
- * concret illustré). Exclut prénoms, lieux, nombres, pourcentages, plages…
+ * True when the label can be shown as a QCM image (horloge ou objet concret illustré).
+ * Exclut prénoms, lieux, nombres, pourcentages, prix, plages…
  */
 export function isImageableLabel(label: string | undefined | null): boolean {
   if (!label?.trim()) return false;
 
   if (isPercentLabel(label) || isNumberLabel(label)) return false;
   if (isProperNameLabel(label) || isPlaceOrAddressLabel(label)) return false;
-  if (isTimeRange(label) || isPriceRange(label)) return false;
+  if (isTimeRange(label) || isPriceRange(label) || isSinglePrice(label)) return false;
 
   if (isSingleTime(label)) {
     const slug = timeSlug(label);
-    return !!slug && !!WORD_IMAGE_INDEX[slug];
-  }
-  if (isSinglePrice(label)) {
-    const slug = priceSlug(label);
     return !!slug && !!WORD_IMAGE_INDEX[slug];
   }
 
@@ -303,7 +297,7 @@ function resolveIndexedSlug(slug: string): string | null {
 export function remapExpressionImagePath(path?: string | null): string | null {
   if (!path) return null;
   const slug = slugFromAssetPath(path);
-  if (!slug) return null;
+  if (!slug || slug.startsWith("prix-")) return null;
   return resolveIndexedSlug(slug);
 }
 

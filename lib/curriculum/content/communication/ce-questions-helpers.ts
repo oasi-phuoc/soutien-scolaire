@@ -1,4 +1,4 @@
-import { ceCoImageSource, isImageableLabel, resolveWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isImageableLabel, isPriceRange, isSinglePrice, resolveWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 
 export type CEFormatType = "text" | "image" | "fill";
@@ -52,6 +52,11 @@ export function ceImgChoice(label: string): CEImageChoice {
   return { label, image: "" };
 }
 
+function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
+  if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
+  return choices.every((c) => !!ceCoImageSource(c.image, c.label));
+}
+
 function hashSeed(seed: string): number {
   return hashSeedString(seed) || 1;
 }
@@ -91,7 +96,7 @@ export function buildCeMessageQuestions(
   const selected = shuffled.slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    const imageable = q.imageChoices.every((c) => !!ceCoImageSource(c.image, c.label));
+    const imageable = supportsImageFormat(q.imageChoices);
     const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
     const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);

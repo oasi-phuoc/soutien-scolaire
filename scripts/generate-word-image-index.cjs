@@ -47,6 +47,7 @@ function addFrom(dir, urlPrefix, index) {
   for (const file of fs.readdirSync(dir).sort()) {
     if (!IMG_RE.test(file)) continue;
     const base = slug(file.replace(IMG_RE, ""));
+    if (base.startsWith("prix-")) continue;
     if (!index.has(base)) index.set(base, `${urlPrefix}/${file}`);
   }
 }
