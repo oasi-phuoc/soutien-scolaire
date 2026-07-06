@@ -1,6 +1,6 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
 
-/** CO base scolaire — exercices 1 à 20 + annonce 21 (questions du livre). */
+/** CO base scolaire — exercices 1 à 20 + annonces 21 à 25 (questions du livre). */
 
 export const SCOLAIRE_MESSAGE_1 = buildPool("base", "scolaire-message-1", [
   {
@@ -827,8 +827,211 @@ export const SCOLAIRE_MESSAGES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-message-20": SCOLAIRE_MESSAGE_20,
 };
 
+export const SCOLAIRE_ANNONCE_22 = buildPool("base", "scolaire-annonce-22", [
+  {
+    id: "sa22-q1",
+    textQ: "Quel événement fête le magasin ?",
+    text: ["La rentrée scolaire", "Un anniversaire", "Les soldes d'été"],
+    textC: 0,
+    img: ["Rentrée scolaire", "Anniversaire", "Soldes"],
+    imgC: 0,
+    fillQ: "Le magasin fête la ___ .",
+    fill: "rentrée scolaire",
+    fillA: ["rentree scolaire", "rentrée scolaire", "la rentrée"],
+  },
+  {
+    id: "sa22-q2",
+    textQ: "La réduction sur les cahiers et les crayons est de…",
+    text: ["30 %", "40 %", "50 %"],
+    textC: 2,
+    img: ["30 %", "40 %", "50 %"],
+    imgC: 2,
+    fillQ: "La réduction est de ___ %.",
+    fill: "50",
+    fillA: ["50", "cinquante"],
+  },
+  {
+    id: "sa22-q3",
+    textQ: "Que devez-vous acheter pour avoir une trousse gratuite ?",
+    text: ["Des ciseaux", "Un classeur", "Un cartable"],
+    textC: 1,
+    img: ["Ciseaux", "Classeur", "Cartable"],
+    imgC: 1,
+    fillQ: "Pour une trousse gratuite, achetez un ___ .",
+    fill: "classeur",
+    fillA: ["classeur"],
+  },
+  {
+    id: "sa22-q4",
+    textQ: "La réduction se termine à quelle heure ?",
+    text: ["18 h", "19 h", "20 h"],
+    textC: 2,
+    img: ["18 h", "19 h", "20 h"],
+    imgC: 2,
+    fillQ: "La promotion se termine à ___ heures.",
+    fill: "20h",
+    fillA: ["20 h", "20h", "20h00"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_23 = buildPool("base", "scolaire-annonce-23", [
+  {
+    id: "sa23-q1",
+    textQ: "Vous devez attendre combien de temps avant le début du film ?",
+    text: ["5 minutes", "10 minutes", "15 minutes"],
+    textC: 1,
+    img: ["5 minutes", "10 minutes", "15 minutes"],
+    imgC: 1,
+    fillQ: "Le film commence dans ___ minutes.",
+    fill: "10",
+    fillA: ["10", "dix"],
+  },
+  {
+    id: "sa23-q2",
+    textQ: "Où devez-vous aller pour acheter à boire ?",
+    text: ["Au bar", "À l'accueil", "À la caisse"],
+    textC: 0,
+    img: ["Bar", "Accueil", "Caisse"],
+    imgC: 0,
+    fillQ: "Les boissons sont au ___ .",
+    fill: "bar",
+    fillA: ["bar"],
+  },
+  {
+    id: "sa23-q3",
+    textQ: "À quel étage se trouvent les toilettes ?",
+    text: ["Au 1er", "Au 2e", "Au 3e"],
+    textC: 1,
+    img: ["1er étage", "2e étage", "3e étage"],
+    imgC: 1,
+    fillQ: "Les toilettes sont au ___ étage.",
+    fill: "2e",
+    fillA: ["2e", "2ème", "deuxième", "2"],
+  },
+  {
+    id: "sa23-q4",
+    textQ: "Où devez-vous aller à la fin du film ?",
+    text: ["Par la sortie de droite", "Par la sortie de gauche", "Par la sortie du milieu"],
+    textC: 0,
+    img: ["Sortie droite", "Sortie gauche", "Sortie milieu"],
+    imgC: 0,
+    fillQ: "À la fin, sortez par la porte de ___ .",
+    fill: "droite",
+    fillA: ["droite", "à droite"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_24 = buildPool("base", "scolaire-annonce-24", [
+  {
+    id: "sa24-q1",
+    textQ: "Le train pour Paris part de quelle voie ?",
+    text: ["Voie 1", "Voie 3", "Voie 5"],
+    textC: 1,
+    img: ["Voie 1", "Voie 3", "Voie 5"],
+    imgC: 1,
+    fillQ: "Le train part voie numéro ___ .",
+    fill: "3",
+    fillA: ["3", "trois"],
+  },
+  {
+    id: "sa24-q2",
+    textQ: "Le train passe par quelle gare ?",
+    text: ["Lyon", "Bordeaux", "Marseille"],
+    textC: 0,
+    img: ["Lyon", "Bordeaux", "Marseille"],
+    imgC: 0,
+    fillQ: "Le train s'arrête à ___ .",
+    fill: "Lyon",
+    fillA: ["lyon"],
+  },
+  {
+    id: "sa24-q3",
+    textQ: "Le train arrive à Paris à quelle heure ?",
+    text: ["11 h 22", "12 h 03", "14 h 30"],
+    textC: 1,
+    img: ["11 h 22", "12 h 03", "14 h 30"],
+    imgC: 1,
+    fillQ: "Le train arrive à Paris à ___ .",
+    fill: "12h03",
+    fillA: ["12 h 03", "12h03", "12h03"],
+  },
+  {
+    id: "sa24-q4",
+    textQ: "Que devez-vous écrire sur l'étiquette de vos bagages ?",
+    text: ["L'adresse et le téléphone", "La date et l'heure", "Le prix du billet"],
+    textC: 0,
+    img: ["Étiquette", "Adresse", "Téléphone"],
+    imgC: 0,
+    fillQ: "Il faut écrire son adresse et son ___ .",
+    fill: "numéro de téléphone",
+    fillA: ["numero de telephone", "numéro de téléphone", "telephone", "téléphone"],
+  },
+  {
+    id: "sa24-q5",
+    textQ: "Que devez-vous avoir avec vous pendant le voyage ?",
+    text: ["Un billet", "Un passeport", "Un plan"],
+    textC: 0,
+    img: ["Billet", "Passeport", "Plan"],
+    imgC: 0,
+    fillQ: "Il faut avoir son ___ avec soi.",
+    fill: "billet",
+    fillA: ["billet", "ticket"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_25 = buildPool("base", "scolaire-annonce-25", [
+  {
+    id: "sa25-q1",
+    textQ: "Dans quelle voiture est le bar ?",
+    text: ["Voiture 5", "Voiture 7", "Voiture 9"],
+    textC: 1,
+    img: ["Voiture 5", "Voiture 7", "Voiture 9"],
+    imgC: 1,
+    fillQ: "Le bar est en voiture ___ .",
+    fill: "7",
+    fillA: ["7", "sept"],
+  },
+  {
+    id: "sa25-q2",
+    textQ: "Que pouvez-vous acheter au bar ?",
+    text: ["Une salade", "Des pâtes", "Du chocolat"],
+    textC: 1,
+    img: ["Salade", "Pâtes", "Chocolat"],
+    imgC: 1,
+    fillQ: "Au bar, on peut commander des ___ .",
+    fill: "pâtes",
+    fillA: ["pates", "pâtes"],
+  },
+  {
+    id: "sa25-q3",
+    textQ: "Qu'est-ce qu'on vous offre avec le jus de fruits ?",
+    text: ["Un biscuit", "Un sandwich", "Une pomme"],
+    textC: 0,
+    img: ["Biscuit", "Sandwich", "Pomme"],
+    imgC: 0,
+    fillQ: "Avec le jus de fruits, on offre un ___ .",
+    fill: "biscuit",
+    fillA: ["biscuit"],
+  },
+  {
+    id: "sa25-q4",
+    textQ: "Que pouvez-vous acheter aussi dans le train ?",
+    text: ["Des bonbons", "Des magazines", "Des tickets de métro"],
+    textC: 1,
+    img: ["Bonbons", "Magazines", "Métro"],
+    imgC: 1,
+    fillQ: "On peut aussi acheter des ___ .",
+    fill: "magazines",
+    fillA: ["magazines", "magazine"],
+  },
+]);
+
 export const SCOLAIRE_ANNONCES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-annonce-21": SCOLAIRE_ANNONCE_21,
+  "base-scolaire-annonce-22": SCOLAIRE_ANNONCE_22,
+  "base-scolaire-annonce-23": SCOLAIRE_ANNONCE_23,
+  "base-scolaire-annonce-24": SCOLAIRE_ANNONCE_24,
+  "base-scolaire-annonce-25": SCOLAIRE_ANNONCE_25,
 };
 
 /** @deprecated Utiliser SCOLAIRE_MESSAGES_BOOK */

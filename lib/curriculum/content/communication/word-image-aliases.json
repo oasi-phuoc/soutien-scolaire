@@ -113,5 +113,17 @@
   "caisse": "caisse",
   "caisses": "caisse",
   "attendre": "attendre",
-  "aller-aux-caisses": "caisse"
+  "aller-aux-caisses": "caisse",
+  "rentrée scolaire": "rentree-scolaire",
+  "rentree-scolaire": "rentree-scolaire",
+  "soldes": "magasins",
+  "anniversaire": "anniversaire",
+  "sortie droite": "sortie-droite",
+  "sortie gauche": "sortie-gauche",
+  "sortie milieu": "sortie-milieu",
+  "étiquette": "etiquette",
+  "adresse": "etiquette",
+  "bonbons": "bonbon",
+  "ticket": "billet",
+  "tickets de metro": "metro"
 }

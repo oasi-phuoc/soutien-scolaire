@@ -130,6 +130,14 @@ function objectScene(slug, seed) {
       return `<rect x="220" y="220" width="360" height="200" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="260" y="260" width="90" height="110" fill="#bae6fd"/><rect x="370" y="260" width="90" height="110" fill="#fde68a"/><rect x="480" y="260" width="60" height="110" fill="#fca5a5"/>`;
     case "bateau":
       return `<path d="M180 380 H620 L560 280 H240 Z" fill="#2563eb" stroke="#40313a" stroke-width="7"/><rect x="340" y="220" width="120" height="70" rx="8" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><path d="M400 220 V180" stroke="#92400e" stroke-width="8"/>`;
+    case "billet":
+      return `<rect x="260" y="220" width="280" height="160" rx="16" fill="#fef3c7" stroke="#40313a" stroke-width="7"/><path d="M320 220 V380 M480 220 V380" stroke="#94a3b8" stroke-width="4" stroke-dasharray="8 6"/><text x="400" y="310" font-family="Arial" font-size="42" font-weight="700" text-anchor="middle" fill="#2563eb">SNCF</text>`;
+    case "magazines":
+      return `<rect x="280" y="200" width="90" height="120" rx="6" fill="#ef4444" stroke="#40313a" stroke-width="5"/><rect x="355" y="190" width="90" height="130" rx="6" fill="#2563eb" stroke="#40313a" stroke-width="5"/><rect x="430" y="205" width="90" height="115" rx="6" fill="#22c55e" stroke="#40313a" stroke-width="5"/>`;
+    case "chocolat":
+      return `<rect x="300" y="250" width="200" height="120" rx="12" fill="#78350f" stroke="#40313a" stroke-width="7"/><path d="M310 250 H490" stroke="#fbbf24" stroke-width="4"/><rect x="330" y="270" width="160" height="8" fill="#92400e"/>`;
+    case "biscuit":
+      return `<circle cx="400" cy="310" r="90" fill="#d97706" stroke="#40313a" stroke-width="7"/><circle cx="360" cy="280" r="10" fill="#92400e"/><circle cx="430" cy="290" r="10" fill="#92400e"/><circle cx="400" cy="340" r="10" fill="#92400e"/>`;
     default:
       return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
   }
@@ -235,6 +243,20 @@ function situationScene(slug, seed) {
       return `<rect x="160" y="300" width="480" height="40" rx="12" fill="#38bdf8" opacity=".5"/>${person(320, 180, color(seed, 1), "#4b2e1f", 0)}${person(480, 190, color(seed, 2), "#5b341d", 1)}<path d="M300 360 Q340 300 380 360" fill="none" stroke="#40313a" stroke-width="6"/>`;
     case "jeu-video":
       return `<rect x="220" y="200" width="360" height="220" rx="20" fill="#111827" stroke="#40313a" stroke-width="8"/><rect x="250" y="230" width="300" height="160" fill="#60a5fa"/>${person(620, 110, color(seed, 2), "#5b341d", 1)}`;
+    case "rentree-scolaire":
+      return `<rect x="220" y="200" width="360" height="220" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><path d="M400 120 L580 200 H220 Z" fill="#dc2626"/>${person(300, 130, color(seed, 2), "#5b341d", 1)}${person(500, 140, color(seed, 4), "#d97706", 2)}<rect x="320" y="280" width="60" height="80" fill="#2563eb"/><rect x="420" y="280" width="60" height="80" fill="#22c55e"/>`;
+    case "bar":
+      return `<rect x="150" y="200" width="500" height="220" rx="20" fill="#7c2d12" stroke="#40313a" stroke-width="7"/><rect x="220" y="260" width="360" height="50" rx="8" fill="#92400e"/>${person(400, 90, color(seed, 1), "#4b2e1f", 0)}<circle cx="320" cy="285" r="25" fill="#fbbf24"/><circle cx="480" cy="285" r="25" fill="#60a5fa"/>`;
+    case "accueil":
+      return `<rect x="180" y="220" width="440" height="180" rx="16" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="320" y="260" width="160" height="60" rx="8" fill="#dbeafe"/>${person(400, 100, color(seed, 3), "#b45309", 2)}<text x="400" y="300" font-family="Arial" font-size="28" font-weight="700" text-anchor="middle" fill="#2563eb">Info</text>`;
+    case "sortie-droite":
+      return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="560" y="320" width="60" height="80" fill="#2563eb"/><path d="M500 360 L580 360" stroke="#ef4444" stroke-width="10" marker-end="url(#arrow)"/>`;
+    case "sortie-gauche":
+      return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="180" y="320" width="60" height="80" fill="#2563eb"/><path d="M260 360 L180 360" stroke="#ef4444" stroke-width="10"/>`;
+    case "sortie-milieu":
+      return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="370" y="320" width="60" height="80" fill="#2563eb"/><path d="M400 300 L400 380" stroke="#ef4444" stroke-width="10"/>`;
+    case "etiquette":
+      return `<rect x="300" y="240" width="200" height="120" rx="12" fill="#fef3c7" stroke="#40313a" stroke-width="6"/><path d="M320 270 H480 M320 300 H450 M320 330 H420" stroke="#64748b" stroke-width="5" stroke-linecap="round"/><rect x="340" y="180" width="120" height="50" rx="6" fill="#94a3b8"/>`;
     default:
       return objectScene(slug, seed);
   }
@@ -246,7 +268,7 @@ const OBJECTS = [
   "volleyball", "basketball", "baskets", "pates", "bottes", "creme-solaire", "parapluie",
   "livre", "television", "train", "voiture", "cadeau", "saxophone", "cahier", "regle",
   "geographie", "francais", "mathematiques", "dessin", "salade",
-  "anglais", "appareil-photo", "musee", "bateau",
+  "anglais", "appareil-photo", "musee", "bateau", "billet", "magazines", "chocolat", "biscuit",
 ];
 
 const SITUATIONS = [
@@ -258,6 +280,7 @@ const SITUATIONS = [
   "professeur-de-francais", "professeur-de-maths", "devoirs", "dormir", "repas", "theatre",
   "mairie", "caisse", "attendre", "pique-nique", "visite-touristique", "jeu-de-societe",
   "cantine", "gymnase", "yoga", "jeu-video",
+  "rentree-scolaire", "bar", "accueil", "sortie-droite", "sortie-gauche", "sortie-milieu", "etiquette",
 ];
 
 function svgFor(slug, whiteBg) {

@@ -138,7 +138,7 @@ for (const [key, text] of Object.entries(transcripts)) {
   if (
     entry.qs.length >= 3
     && !(cat === "message" && ["1", "2", "3", "4", "6", "7", "8", "9", "11", "13", "14", "15", "16", "17", "19", "20"].includes(num))
-    && !(cat === "annonce" && ["21"].includes(num))
+    && !(cat === "annonce" && ["21", "22", "23", "24", "25"].includes(num))
   ) pools.push(entry);
 }
 
