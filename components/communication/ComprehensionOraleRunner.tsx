@@ -700,12 +700,13 @@ function ImagePlaceholder({ label, path, compact }: { label: string; path?: stri
 }
 
 function ObjectCardImage({ src, alt }: { src?: string; alt: string }) {
+  const resolved = ceCoImageSource(src, alt);
   const [failed, setFailed] = useState(false);
-  if (src && !failed) {
+  if (resolved && !failed) {
     return (
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-white">
         <Image
-          src={src}
+          src={resolved}
           alt={alt}
           fill
           className="object-contain p-1"
@@ -716,7 +717,11 @@ function ObjectCardImage({ src, alt }: { src?: string; alt: string }) {
     );
   }
   return (
-    <div className="flex aspect-[4/3] w-full items-center justify-center rounded-md bg-slate-50 text-center text-sm font-semibold text-slate-500">
+    <div
+      className="flex aspect-[4/3] w-full items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-2 text-center text-sm font-semibold text-slate-500"
+      data-image-path={src}
+      title={src}
+    >
       {alt}
     </div>
   );

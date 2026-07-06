@@ -1,4 +1,4 @@
-import { ceCoImageSource, isImageableLabel, resolveWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isImageableLabel, isPriceRange, isSinglePrice, resolveWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
@@ -140,6 +140,11 @@ export function isExcludedNameQuestion(item: Pick<RawQ, "textQ" | "text" | "text
   return false;
 }
 
+function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
+  if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
+  return choices.every((c) => !!ceCoImageSource(c.image, c.label));
+}
+
 function hashSeed(seed: string): number {
   return hashSeedString(seed) || 1;
 }
@@ -279,18 +284,25 @@ export function assertConversationImageGridDef(
   }
 }
 
+function conversationImagePath(imageDir: string, activity: string, suffix: string): string {
+  const base = `${imageDir}/conversation-${activity}-${suffix}`;
+  if (activity === "41" && suffix === "b" && imageDir.endsWith("/scolaire")) {
+    return `${base}.png`;
+  }
+  return `${base}.webp`;
+}
+
 export function buildConversationImageGrid(
   activity: string,
   correctByCard: [number, number, number, number, number, number],
   seed: string,
   audio?: string,
-  imageDir = "/assets/expression/images",
+  imageDir = "/assets/expression/images/scene",
 ): COConversationImageGridTask {
   assertConversationImageGridDef(correctByCard, activity);
-  const imageExt = imageDir.includes("images-temp") ? "png" : "webp";
   const entries = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
     suffix,
-    image: `${imageDir}/conversation-${activity}-${suffix}.${imageExt}`,
+    image: conversationImagePath(imageDir, activity, suffix),
     correct: correctByCard[index]!,
   }));
   const shuffled = seededShuffle(entries, seed);
@@ -334,10 +346,9 @@ export function buildCoPartQuestions(
   const selected = shuffled.slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    // The "QCM image" format is only offered when the 3 options are genuinely
-    // illustrable (object, clock/time or price). Otherwise (prénoms, villes,
-    // pays, nombres, dates…) only text and fill formats are used.
-    const imageable = q.imageChoices.every((c) => !!ceCoImageSource(c.image, c.label));
+    // QCM image uniquement si les 3 options sont illustrables (objet ou horloge),
+    // jamais pour les prix (images supprimées).
+    const imageable = supportsImageFormat(q.imageChoices);
     const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
     const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);

@@ -1095,10 +1095,14 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
             key={index}
             type="button"
             onClick={() => !correction && onChange(index)}
-            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center gap-1 text-center" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
+            aria-label={task.image ? `${String.fromCharCode(97 + index)}. ${choice.label}` : undefined}
+            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
-            {task.image && <ImagePlaceholder label={choice.label} path={choice.image} compact />}
-            <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
+            {task.image ? (
+              <ImagePlaceholder label={choice.label} path={choice.image} compact />
+            ) : (
+              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
+            )}
           </button>
         );
       })}
@@ -1255,7 +1259,8 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
 
 function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "email" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const showImage = !!part.image && !imageFailed;
+  const imageSrc = ceCoImageSource(part.image, part.meta.subject ?? part.meta.from);
+  const showImage = !!imageSrc && !imageFailed;
 
   return (
     <div className="space-y-5">
@@ -1263,7 +1268,7 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
         <div className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
           <div className="relative w-full">
             <Image
-              src={part.image}
+              src={imageSrc}
               alt="Message à lire"
               width={900}
               height={1200}

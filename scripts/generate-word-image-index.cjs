@@ -2,17 +2,16 @@
  * Generate a static index of every word illustration that exists on disk.
  *
  * Sources (in priority order):
- *   1. public/assets/words/lecture   → lecture unified word images
- *   2. public/assets/expression/images      → CE/CO manga illustrations
- *   3. public/assets/words/vocab/Vn  → vocabulaire theme images (if any)
+ *   1. public/assets/expression/co/base/scolaire  → CO scolaire conversations
+ *   2. public/assets/expression/co/base/public      → CO base conversations
+ *   3. public/assets/expression/images/scene        → CE/CO scènes manga
+ *   4. public/assets/expression/images/ce           → héros CE messages / orientation
+ *   5. public/assets/expression/images/heure        → horloges
+ *   6. public/assets/words/lecture                  → pool lecture unifié
+ *   7. public/assets/words/vocab/Vn                 → vocabulaire thématique
  *
  * Output:
  *   lib/curriculum/content/communication/word-image-index.ts
- *     export const WORD_IMAGE_INDEX: Record<string, string>
- *       slug(basename) → public URL path
- *
- * The generated file lets the runtime resolver (lib/curriculum/word-image-resolver.ts)
- * know which images actually exist without touching the filesystem.
  *
  * Re-run whenever images are added/removed:
  *   node scripts/generate-word-image-index.cjs
@@ -22,9 +21,12 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
+const coScolaireDir = path.join(root, "public/assets/expression/co/base/scolaire");
+const coPublicDir = path.join(root, "public/assets/expression/co/base/public");
+const expressionSceneDir = path.join(root, "public/assets/expression/images/scene");
+const expressionCeDir = path.join(root, "public/assets/expression/images/ce");
+const expressionHeureDir = path.join(root, "public/assets/expression/images/heure");
 const lectureDir = path.join(root, "public/assets/words/lecture");
-const expressionDir = path.join(root, "public/assets/expression/images");
-const expressionTempDir = path.join(root, "public/assets/expression/images-temp");
 const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
@@ -47,6 +49,7 @@ function addFrom(dir, urlPrefix, index) {
   for (const file of fs.readdirSync(dir).sort()) {
     if (!IMG_RE.test(file)) continue;
     const base = slug(file.replace(IMG_RE, ""));
+    if (base.startsWith("prix-")) continue;
     if (!index.has(base)) index.set(base, `${urlPrefix}/${file}`);
   }
 }
@@ -54,16 +57,13 @@ function addFrom(dir, urlPrefix, index) {
 function main() {
   const index = new Map();
 
-  // Priority 1: CO scolaire / temp manga illustrations (override expression/images when same slug).
-  addFrom(expressionTempDir, "/assets/expression/images-temp", index);
-
-  // Priority 2: CE/CO common manga illustrations.
-  addFrom(expressionDir, "/assets/expression/images", index);
-
-  // Priority 2: lecture unified pool.
+  addFrom(coScolaireDir, "/assets/expression/co/base/scolaire", index);
+  addFrom(coPublicDir, "/assets/expression/co/base/public", index);
+  addFrom(expressionSceneDir, "/assets/expression/images/scene", index);
+  addFrom(expressionCeDir, "/assets/expression/images/ce", index);
+  addFrom(expressionHeureDir, "/assets/expression/images/heure", index);
   addFrom(lectureDir, "/assets/words/lecture", index);
 
-  // Priority 3: vocabulaire theme folders (V1, V2, …).
   if (fs.existsSync(vocabDir)) {
     for (const folder of fs.readdirSync(vocabDir).sort()) {
       const dir = path.join(vocabDir, folder);
