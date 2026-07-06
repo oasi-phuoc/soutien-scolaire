@@ -19,5 +19,9 @@
   "bateau-mouche": "croisiere-bateau-mouche",
   "tour-eiffel": "pique-nique-tour-eiffel",
   "sacre-coeur": "visite-sacre-coeur",
-  "aller-au-musee": "visite-musee"
+  "aller-au-musee": "visite-musee",
+  "cantine": "dejeuner-cantine",
+  "distributeur": "distributeur-automatique",
+  "eps": "cours-eps",
+  "education-physique": "cours-eps"
 }
