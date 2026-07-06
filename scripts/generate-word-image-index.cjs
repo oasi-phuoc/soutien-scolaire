@@ -3,7 +3,7 @@
  *
  * Sources (in priority order):
  *   1. public/assets/words/lecture   → lecture unified word images
- *   2. public/expression/images      → CE/CO manga illustrations
+ *   2. public/assets/expression/images      → CE/CO manga illustrations
  *   3. public/assets/words/vocab/Vn  → vocabulaire theme images (if any)
  *
  * Output:
@@ -23,7 +23,7 @@ const path = require("path");
 
 const root = process.cwd();
 const lectureDir = path.join(root, "public/assets/words/lecture");
-const expressionDir = path.join(root, "public/expression/images");
+const expressionDir = path.join(root, "public/assets/expression/images");
 const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
@@ -54,7 +54,7 @@ function main() {
   const index = new Map();
 
   // Priority 1: CE/CO common manga illustrations.
-  addFrom(expressionDir, "/expression/images", index);
+  addFrom(expressionDir, "/assets/expression/images", index);
 
   // Priority 2: lecture unified pool.
   addFrom(lectureDir, "/assets/words/lecture", index);

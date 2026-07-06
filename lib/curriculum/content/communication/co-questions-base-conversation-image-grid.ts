@@ -3,8 +3,8 @@ import { buildConversationImageGrid } from "./co-questions-helpers";
 /**
  * Association image ↔ dialogue pour chaque activité conversation CO base.
  *
- * Fichiers : public/expression/co/base/public/conversation-{activité}-{a|b|c|d|e|f}.webp
- * Audio    : public/expression/co/base/public/conversation-{activité}.mp3
+ * Fichiers : public/assets/expression/co/base/public/conversation-{activité}-{a|b|c|d|e|f}.webp
+ * Audio    : public/assets/expression/co/base/public/conversation-{activité}.mp3
  *
  * Chaque lettre (a–f) a une image fixe qui illustre un dialogue de l'audio.
  * correctByCard[i] = numéro du dialogue (1–4) ou 0 (leurre « — ») pour la lettre a+i.

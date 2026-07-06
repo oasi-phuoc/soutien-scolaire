@@ -19,7 +19,7 @@ const path = require("path");
 
 const root = process.cwd();
 const lectureDir = path.join(root, "public/assets/words/lecture");
-const expressionDir = path.join(root, "public/expression/images");
+const expressionDir = path.join(root, "public/assets/expression/images");
 const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "ref/ce-co-image-audit.md");
 
@@ -51,7 +51,7 @@ function addFrom(dir, urlPrefix, index) {
 function buildIndex() {
   const index = new Map();
   addFrom(lectureDir, "/assets/words/lecture", index);
-  addFrom(expressionDir, "/expression/images", index);
+  addFrom(expressionDir, "/assets/expression/images", index);
   if (fs.existsSync(vocabDir)) {
     for (const folder of fs.readdirSync(vocabDir).sort()) {
       const dir = path.join(vocabDir, folder);

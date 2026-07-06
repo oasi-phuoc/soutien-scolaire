@@ -5,7 +5,7 @@ export type COObjetPickDef = {
 };
 
 function opImg(groupId: string, index: number): string {
-  return `/expression/co/base/objet-pick/${groupId}/${index}.webp`;
+  return `/assets/expression/co/base/objet-pick/${groupId}/${index}.webp`;
 }
 
 function opCards(

@@ -13,7 +13,7 @@ function avanceItem(category: "conversation" | "radio", activity: string, filena
     level: "avance",
     category,
     activity,
-    audio: `/expression/co/avance/public/${filename}`,
+    audio: `/assets/expression/co/avance/public/${filename}`,
     transcript,
   };
 }

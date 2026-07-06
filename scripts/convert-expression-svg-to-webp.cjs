@@ -29,7 +29,7 @@ async function convertOne(svgPath) {
 
 async function main() {
   if (!fs.existsSync(EXPRESSION_DIR)) {
-    console.log("No public/expression directory found.");
+    console.log("No public/assets/expression directory found.");
     return;
   }
   const svgs = walk(EXPRESSION_DIR);

@@ -283,22 +283,21 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
     path.startsWith("/assets/words/lecture/")
     || path.startsWith("/assets/words/vocab/")
-    || path.startsWith("/assets/words/lecture/")
-    || path.startsWith("/expression/images/")
-    || path.startsWith("/expression/")
+    || path.startsWith("/assets/expression/images/")
+    || path.startsWith("/assets/expression/")
   );
 }
 
 const EXPRESSION_CO_CURATED =
-  /^\/expression\/co\/base\/public\/conversation-\d+-[a-f]\.webp$/;
+  /^\/assets\/expression\/images\/conversation-\d+-[a-f]\.webp$/;
 const EXPRESSION_OBJET_PICK =
-  /^\/expression\/co\/base\/objet-pick\/[^/]+\/\d+\.webp$/;
+  /^\/assets\/expression\/images\/[^/]+\.webp$/;
 
 const EXPRESSION_CE_BASE =
-  /^\/expression\/ce\/base\//;
+  /^\/assets\/expression\/ce\/base\//;
 
 const EXPRESSION_IMAGES =
-  /^\/expression\/images\/[^/]+\.webp$/;
+  /^\/assets\/expression\/images\/[^/]+\.webp$/;
 
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
