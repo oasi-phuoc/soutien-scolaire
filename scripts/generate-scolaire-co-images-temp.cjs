@@ -90,6 +90,16 @@ function objectScene(slug, seed) {
       return `<ellipse cx="340" cy="360" rx="70" ry="40" fill="#2563eb" stroke="#40313a" stroke-width="6"/><ellipse cx="460" cy="360" rx="70" ry="40" fill="#facc15" stroke="#40313a" stroke-width="6"/>`;
     case "pates":
       return `<ellipse cx="400" cy="330" rx="180" ry="90" fill="#fde68a" stroke="#40313a" stroke-width="7"/><path d="M250 300 Q320 250 400 290 T550 300" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>`;
+    case "poisson":
+      return `<ellipse cx="400" cy="310" rx="170" ry="70" fill="#94a3b8" stroke="#40313a" stroke-width="7"/><path d="M230 310 L190 260 L190 360 Z" fill="#64748b"/><circle cx="500" cy="290" r="10" fill="#111827"/><path d="M300 250 Q400 200 500 250" fill="none" stroke="#fbbf24" stroke-width="6"/>`;
+    case "steak":
+      return `<ellipse cx="400" cy="330" rx="160" ry="80" fill="#b45309" stroke="#40313a" stroke-width="7"/><path d="M280 300 Q400 250 520 300" fill="none" stroke="#78350f" stroke-width="8"/><circle cx="350" cy="320" r="12" fill="#451a03"/><circle cx="430" cy="310" r="10" fill="#451a03"/>`;
+    case "telephone":
+      return `<rect x="320" y="180" width="160" height="280" rx="28" fill="#1f2937" stroke="#40313a" stroke-width="7"/><rect x="345" y="240" width="110" height="170" rx="12" fill="#60a5fa"/><circle cx="400" cy="450" r="18" fill="#64748b"/>`;
+    case "adresse":
+      return `<rect x="260" y="220" width="280" height="180" rx="12" fill="#fef3c7" stroke="#40313a" stroke-width="7"/><path d="M290 270 H510 M290 310 H470 M290 350 H490" stroke="#64748b" stroke-width="6" stroke-linecap="round"/><path d="M260 220 L400 150 L540 220" fill="#dc2626" stroke="#40313a" stroke-width="5"/>`;
+    case "age":
+      return `<rect x="300" y="280" width="200" height="140" rx="16" fill="#fbbf24" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 5 }, (_, i) => `<rect x="${330 + i * 28}" y="${200 - i * 8}" width="12" height="${40 + i * 12}" fill="${color(seed, i)}" rx="4"/>`).join("")}<text x="400" y="360" font-family="Arial" font-size="48" font-weight="700" text-anchor="middle" fill="#92400e">ans</text>`;
     case "bottes":
       return `<path d="M300 420 H500 M310 420 V280 Q330 220 360 220 H440 Q470 220 490 280 V420" fill="#1e3a8a" stroke="#40313a" stroke-width="7"/><rect x="300" y="360" width="90" height="60" rx="10" fill="#f8fafc" stroke="#40313a" stroke-width="5"/>`;
     case "creme-solaire":
@@ -353,6 +363,30 @@ function situationScene(slug, seed) {
       return `<rect x="220" y="240" width="360" height="200" rx="16" fill="#fef3c7" stroke="#40313a" stroke-width="7"/>${person(300, 110, color(seed, 2), "#5b341d", 1)}${person(500, 120, color(seed, 4), "#d97706", 0)}<path d="M260 300 H540 M260 340 H500 M260 380 H520" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>`;
     case "internet":
       return `<rect x="240" y="200" width="320" height="220" rx="16" fill="#1f2937" stroke="#40313a" stroke-width="7"/><rect x="270" y="230" width="260" height="160" fill="#60a5fa"/><text x="400" y="320" font-family="Arial" font-size="36" font-weight="700" text-anchor="middle" fill="#fff">www</text>`;
+    case "conversation-41-a":
+      return `<rect x="100" y="360" width="600" height="80" fill="#94a3b8"/>${person(220, 130, color(seed, 1), "#4b2e1f", 1)}${person(520, 140, color(seed, 3), "#b45309", 2)}<rect x="300" y="280" width="220" height="90" rx="30" fill="#ef4444" stroke="#40313a" stroke-width="6"/><circle cx="360" cy="380" r="28" fill="#111827"/><circle cx="460" cy="380" r="28" fill="#111827"/><rect x="340" y="240" width="140" height="50" rx="14" fill="#93c5fd"/>`;
+    case "conversation-41-b":
+      return `<rect x="250" y="120" width="300" height="380" rx="20" fill="#64748b" stroke="#40313a" stroke-width="8"/>${Array.from({ length: 4 }, (_, r) => Array.from({ length: 3 }, (_, c) => `<rect x="${280 + c * 80}" y="${170 + r * 70}" width="60" height="50" rx="6" fill="${color(seed, r + c)}"/>`).join("")).join("")}${person(180, 150, color(seed, 2), "#5b341d", 0)}`;
+    case "conversation-41-c":
+      return `<rect x="150" y="200" width="500" height="220" rx="20" fill="#fff7ed" stroke="#40313a" stroke-width="7"/><rect x="200" y="260" width="400" height="40" rx="8" fill="#e2e8f0"/>${person(280, 100, color(seed, 2), "#5b341d", 1)}${person(520, 110, color(seed, 4), "#d97706", 2)}`;
+    case "conversation-41-d":
+      return `<rect x="180" y="160" width="440" height="300" rx="20" fill="#f8fafc" stroke="#40313a" stroke-width="7"/>${person(300, 120, color(seed, 1), "#7c2d12", 0)}${person(500, 130, color(seed, 3), "#b45309", 1)}<rect x="340" y="280" width="120" height="100" rx="8" fill="#2563eb"/><text x="400" y="345" font-family="Arial" font-size="28" font-weight="700" text-anchor="middle" fill="#fff">x²</text>`;
+    case "conversation-41-e":
+      return `<ellipse cx="400" cy="450" rx="280" ry="70" fill="#22c55e"/><circle cx="400" cy="300" r="55" fill="#f8fafc" stroke="#111827" stroke-width="6"/>${person(250, 130, color(seed, 1), "#4b2e1f", 0)}${person(550, 140, color(seed, 4), "#d97706", 2)}`;
+    case "conversation-41-f":
+      return `<rect x="280" y="120" width="240" height="380" fill="#ddd6fe"/>${person(300, 140, color(seed, 2), "#5b341d", 2)}<rect x="250" y="200" width="80" height="140" rx="12" fill="#1f2937" stroke="#40313a" stroke-width="5"/>${person(500, 150, color(seed, 1), "#4b2e1f", 1)}<circle cx="520" cy="250" r="28" fill="#f8fafc" stroke="#40313a" stroke-width="4"/><path d="M520 250 L530 240 M520 250 L530 260" stroke="#ef4444" stroke-width="4"/>`;
+    case "conversation-42-a":
+      return `<rect x="120" y="140" width="560" height="300" rx="25" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="160" y="180" width="480" height="180" rx="8" fill="#22c55e"/>${person(400, 90, color(seed, 1), "#7c2d12", 0)}<rect x="420" y="200" width="60" height="80" rx="6" fill="#dc2626"/>${person(220, 220, color(seed, 2), "#5b341d", 1)}${person(300, 230, color(seed, 4), "#d97706", 2)}${person(500, 225, color(seed, 3), "#b45309", 1)}${person(580, 235, color(seed, 1), "#4b2e1f", 0)}`;
+    case "conversation-42-b":
+      return `<rect x="180" y="150" width="440" height="320" rx="20" fill="#92400e" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 5 }, (_, i) => `<rect x="${220 + i * 70}" y="190" width="40" height="220" fill="#fef3c7"/>`).join("")}${person(320, 110, color(seed, 2), "#5b341d", 1)}${person(500, 100, color(seed, 3), "#4b2e1f", 2)}<rect x="520" y="280" width="120" height="80" rx="8" fill="#e2e8f0" stroke="#40313a" stroke-width="4"/>`;
+    case "conversation-42-c":
+      return `<ellipse cx="400" cy="450" rx="300" ry="70" fill="#c2410c"/>${person(320, 130, color(seed, 2), "#5b341d", 1)}${person(500, 120, color(seed, 1), "#4b2e1f", 0)}<ellipse cx="250" cy="380" rx="40" ry="18" fill="#f8fafc"/><ellipse cx="550" cy="360" rx="35" ry="16" fill="#f8fafc"/>`;
+    case "conversation-42-d":
+      return `<rect x="160" y="180" width="480" height="280" rx="20" fill="#dbeafe" stroke="#40313a" stroke-width="7"/>${person(400, 90, color(seed, 3), "#1d4ed8", 2)}${person(250, 140, color(seed, 1), "#4b2e1f", 0)}${person(350, 150, color(seed, 2), "#5b341d", 1)}${person(450, 145, color(seed, 4), "#d97706", 2)}${person(550, 155, color(seed, 1), "#7c2d12", 1)}<ellipse cx="400" cy="320" rx="35" ry="22" fill="#f97316"/>`;
+    case "conversation-42-e":
+      return `<rect x="200" y="180" width="400" height="260" rx="16" fill="#f8fafc" stroke="#40313a" stroke-width="7"/>${person(320, 110, color(seed, 3), "#4b2e1f", 2)}${person(500, 120, color(seed, 1), "#2563eb", 1)}<rect x="240" y="320" width="320" height="60" rx="8" fill="#e2e8f0"/>`;
+    case "conversation-42-f":
+      return `<rect x="280" y="120" width="240" height="380" fill="#ddd6fe"/>${person(320, 140, color(seed, 2), "#5b341d", 1)}${person(480, 150, color(seed, 4), "#d97706", 0)}<rect x="300" y="200" width="70" height="90" rx="6" fill="#f472b6"/><rect x="420" y="210" width="70" height="80" rx="6" fill="#60a5fa"/>`;
     case "sortie-droite":
       return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="560" y="320" width="60" height="80" fill="#2563eb"/><path d="M500 360 L580 360" stroke="#ef4444" stroke-width="10" marker-end="url(#arrow)"/>`;
     case "sortie-gauche":
@@ -369,7 +403,8 @@ function situationScene(slug, seed) {
 const OBJECTS = [
   "piano", "guitare", "violon", "ballon", "eau", "casquette", "glace", "pizza", "sandwich", "gateau",
   "frere", "soeur", "cousin", "pere", "mere", "cousine",
-  "volleyball", "basketball", "baskets", "pates", "bottes", "creme-solaire", "parapluie",
+  "volleyball", "basketball", "baskets", "pates", "poisson", "steak", "telephone", "adresse", "age",
+  "bottes", "creme-solaire", "parapluie",
   "livre", "television", "train", "voiture", "cadeau", "saxophone", "cahier", "regle",
   "geographie", "francais", "mathematiques", "dessin", "salade",
   "anglais", "appareil-photo", "musee", "bateau", "billet", "magazines", "chocolat", "biscuit",
@@ -394,6 +429,8 @@ const SITUATIONS = [
   "nuit-des-musees", "fete-de-la-musique", "journee-du-livre", "courriel", "sms", "film", "parc",
   "boutique-sport", "salle-de-sport", "cours-fitness", "librairie", "conte", "danse",
   "ecrivain", "cours-ecriture", "internet",
+  "conversation-41-a", "conversation-41-b", "conversation-41-c", "conversation-41-d", "conversation-41-e", "conversation-41-f",
+  "conversation-42-a", "conversation-42-b", "conversation-42-c", "conversation-42-d", "conversation-42-e", "conversation-42-f",
 ];
 
 function svgFor(slug, whiteBg) {

@@ -6,6 +6,7 @@ import {
   type COMultiQuestion,
 } from "./co-questions-helpers";
 import { buildBaseConversationImageGrid } from "./co-questions-base-conversation-image-grid";
+import { buildScolaireConversationImageGrid } from "./co-questions-scolaire-conversation-image-grid";
 import { CO_CONVERSATION_MATCH } from "./co-questions-moyen-conversation-match";
 import { buildObjetPickTask } from "./co-questions-objet-pick";
 import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
@@ -43,6 +44,10 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
   if (group.level === "base" && group.category === "conversation" && group.source === "public") {
     const grid = buildBaseConversationImageGrid(group.activity, seed, group.items[0]?.audio);
+    if (grid) return [grid];
+  }
+  if (group.level === "base" && group.category === "conversation" && group.source === "scolaire") {
+    const grid = buildScolaireConversationImageGrid(group.activity, seed, group.items[0]?.audio);
     if (grid) return [grid];
   }
   const matchDef = CO_CONVERSATION_MATCH[group.id];

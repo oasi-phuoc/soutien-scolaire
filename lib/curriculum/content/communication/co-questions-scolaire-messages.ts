@@ -1650,6 +1650,100 @@ export const SCOLAIRE_RADIO_38 = buildPool("base", "scolaire-radio-38", [
   },
 ]);
 
+export const SCOLAIRE_RADIO_39 = buildPool("base", "scolaire-radio-39", [
+  {
+    id: "sr39-q1",
+    textQ: "Qu'est-ce qui vient d'ouvrir ?",
+    text: ["Un restaurant", "Un magasin", "Une piscine"],
+    textC: 0,
+    img: ["Restaurant", "Magasins", "Piscine"],
+    imgC: 0,
+    fillQ: "Un nouveau ___ vient d'ouvrir.",
+    fill: "restaurant",
+    fillA: ["restaurant"],
+  },
+  {
+    id: "sr39-q2",
+    textQ: "Que pouvez-vous manger ?",
+    text: ["Du poisson", "De la viande", "Des pâtes"],
+    textC: 0,
+    img: ["Poisson", "Steak", "Pâtes"],
+    imgC: 0,
+    fillQ: "On peut manger du ___ .",
+    fill: "poisson",
+    fillA: ["poisson"],
+  },
+  {
+    id: "sr39-q3",
+    textQ: "Le restaurant est fermé quel jour ?",
+    text: ["Le lundi", "Le dimanche", "Le samedi"],
+    textC: 1,
+    img: ["Lundi", "Dimanche", "Samedi"],
+    imgC: 1,
+    fillQ: "Le restaurant est fermé le ___ .",
+    fill: "dimanche",
+    fillA: ["dimanche"],
+  },
+  {
+    id: "sr39-q4",
+    textQ: "Combien coûte le menu pour les enfants ?",
+    text: ["11 €", "12 €", "13 €"],
+    textC: 1,
+    img: ["11 €", "12 €", "13 €"],
+    imgC: 1,
+    fillQ: "Le menu enfant coûte ___ euros.",
+    fill: "12",
+    fillA: ["12", "12 €", "12€"],
+  },
+]);
+
+export const SCOLAIRE_RADIO_40 = buildPool("base", "scolaire-radio-40", [
+  {
+    id: "sr40-q1",
+    textQ: "Vous pouvez gagner des places de…",
+    text: ["Concert", "Cinéma", "Match de football"],
+    textC: 1,
+    img: ["Concert", "Cinéma", "Football"],
+    imgC: 1,
+    fillQ: "Les places sont pour le ___ .",
+    fill: "cinéma",
+    fillA: ["cinema", "cinéma"],
+  },
+  {
+    id: "sr40-q2",
+    textQ: "Combien de places sont à gagner ?",
+    text: ["5 places", "10 places", "20 places"],
+    textC: 1,
+    img: ["5 places", "10 places", "20 places"],
+    imgC: 1,
+    fillQ: "Il y a ___ places à gagner.",
+    fill: "10",
+    fillA: ["10", "dix"],
+  },
+  {
+    id: "sr40-q3",
+    textQ: "Comment pouvez-vous gagner ?",
+    text: ["En téléphonant", "En envoyant un courriel", "En envoyant un SMS"],
+    textC: 1,
+    img: ["Téléphoner", "Courriel", "SMS"],
+    imgC: 1,
+    fillQ: "Il faut envoyer un ___ .",
+    fill: "courriel",
+    fillA: ["courriel", "mail", "e-mail"],
+  },
+  {
+    id: "sr40-q4",
+    textQ: "Que devez-vous écrire dans le courriel ?",
+    text: ["Votre âge", "Votre adresse", "Votre numéro de téléphone"],
+    textC: 2,
+    img: ["Âge", "Adresse", "Téléphone"],
+    imgC: 2,
+    fillQ: "Écrivez votre numéro de ___ .",
+    fill: "téléphone",
+    fillA: ["telephone", "téléphone"],
+  },
+]);
+
 export const SCOLAIRE_RADIOS_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-radio-31": SCOLAIRE_RADIO_31,
   "base-scolaire-radio-32": SCOLAIRE_RADIO_32,
@@ -1659,6 +1753,8 @@ export const SCOLAIRE_RADIOS_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-radio-36": SCOLAIRE_RADIO_36,
   "base-scolaire-radio-37": SCOLAIRE_RADIO_37,
   "base-scolaire-radio-38": SCOLAIRE_RADIO_38,
+  "base-scolaire-radio-39": SCOLAIRE_RADIO_39,
+  "base-scolaire-radio-40": SCOLAIRE_RADIO_40,
 };
 
 /** @deprecated Utiliser SCOLAIRE_MESSAGES_BOOK */

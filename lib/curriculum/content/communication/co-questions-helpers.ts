@@ -284,11 +284,12 @@ export function buildConversationImageGrid(
   correctByCard: [number, number, number, number, number, number],
   seed: string,
   audio?: string,
+  imageDir = "/assets/expression/images",
 ): COConversationImageGridTask {
   assertConversationImageGridDef(correctByCard, activity);
   const entries = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
     suffix,
-    image: `/assets/expression/images/conversation-${activity}-${suffix}.webp`,
+    image: `${imageDir}/conversation-${activity}-${suffix}.webp`,
     correct: correctByCard[index]!,
   }));
   const shuffled = seededShuffle(entries, seed);
