@@ -20,6 +20,7 @@ import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
+import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
 const TOTAL_SECONDS = 45 * 60;
 
@@ -33,6 +34,7 @@ type RawQuestionTask = Omit<ChoiceTask, "kind"> | Omit<FillTask, "kind">;
 type OrientationSeriesItem = {
   context: string;
   docs: [string, string, string][];
+  /** Index document 0–5, ou -1 si aucun document ne convient (leurre). */
   people: [string, number][];
 };
 type EmailSeriesItem = {
@@ -322,198 +324,11 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   },
 ];
 
-const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
-  {
-    context: "Vous cherchez le bon lieu dans une ville suisse selon les besoins des personnes.",
-    docs: [
-      ["Centre de formation", "Cours et ateliers", "Cours de français, informatique et aide pour les démarches."],
-      ["Espace santé", "Conseils", "Informations, prévention et rendez-vous avec une infirmière."],
-      ["Maison des jeunes", "Loisirs", "Activites sportives, musique et jeux après les cours."],
-      ["Office du tourisme", "Visites", "Plans de la ville, horaires des musees et excursions."],
-      ["Bibliothèque", "Lecture", "Livres faciles, journaux, ordinateurs et coin de travail calme."],
-      ["Service social", "Aide", "Conseils pour le logement, les assurances et les papiers officiels."],
-    ],
-    people: [
-      ["Nadia veut emprunter un livre facile.", 4],
-      ["Omar cherche une aide pour un formulaire.", 5],
-      ["Marta veut visiter la ville dimanche.", 3],
-      ["Yanis cherche une activité après l'école.", 2],
-      ["Kateryna veut apprendre l'informatique.", 0],
-      ["Ali veut poser une question sur sa santé.", 1],
-    ],
-  },
-  {
-    context: "Vous lisez les annonces d'un centre de quartier et vous choisissez l'activité adaptee.",
-    docs: [
-      ["Atelier cuisine", "Repas simples", "Preparation de plats économiques avec des produits de saison."],
-      ["Cours de conversation", "Parler français", "Petits groupes pour pratiquer le français de la vie quotidienne."],
-      ["Aide aux devoirs", "École", "Accompagnement pour les enfants et les adolescents après les cours."],
-      ["Club emploi", "Travail", "Aide pour écrire un CV et préparer un entretien."],
-      ["Sortie nature", "Marche", "Promenade facile au bord du lac avec un guide."],
-      ["Atelier couture", "Reparer", "Apprendre a recoudre un bouton et faire de petites retouches."],
-    ],
-    people: [
-      ["Selin doit préparer un entretien de travail.", 3],
-      ["Iryna veut pratiquer le français oral.", 1],
-      ["Mahmoud aime marcher au bord de l'eau.", 4],
-      ["Fatou veut reparer un pantalon.", 5],
-      ["Luca cherche de l'aide pour son fils.", 2],
-      ["Amina veut apprendre une recette simple.", 0],
-    ],
-  },
-  {
-    context: "Dans un journal local, vous choisissez la petite annonce utile pour chaque personne.",
-    docs: [
-      ["Velo d'occasion", "Transport", "Velo en bon etat, idéal pour aller au travail ou a l'école."],
-      ["Chambre a louer", "Logement", "Petite chambre meublée proche de la gare, disponible en août."],
-      ["Garde d'enfants", "Service", "Etudiante sérieuse garde des enfants le soir et le mercredi."],
-      ["Cours de natation", "Sport", "Cours pour adultes débutants a la piscine communale."],
-      ["Meuble gratuit", "Maison", "Table et quatre chaises a venir chercher ce week-end."],
-      ["Reparation téléphone", "Technique", "Ecran cassé, batterie faible : réparations rapides en ville."],
-    ],
-    people: [
-      ["Bohdan cherche un meuble pour sa cuisine.", 4],
-      ["Rachid veut apprendre a nager.", 3],
-      ["Mila a cassé l'écran de son téléphone.", 5],
-      ["Sofia cherche quelqu'un pour garder sa fille.", 2],
-      ["Erjon veut se déplacer sans voiture.", 0],
-      ["Leila cherche une chambre près de la gare.", 1],
-    ],
-  },
-  {
-    context: "Vous choisissez une information pratique pour des personnes qui viennent d'arriver.",
-    docs: [
-      ["Carte de séjour", "Administration", "Horaires et documents nécessaires pour renouveler un permis."],
-      ["Assurance maladie", "Santé", "Explications simples pour comprendre les primes et les factures."],
-      ["Cours de base", "Langue", "Français pour débutants, alphabet, lecture et situations courantes."],
-      ["Transport public", "Bus et train", "Abonnements, réductions et horaires dans le canton."],
-      ["Garderie", "Enfants", "Accueil des petits enfants pendant les jours de cours."],
-      ["Dechetterie", "Tri", "Horaires pour jeter le papier, le verre et les objets encombrants."],
-    ],
-    people: [
-      ["Yuliia veut comprendre ses factures médicales.", 1],
-      ["Hassan cherche les horaires des bus.", 3],
-      ["Mariam doit renouveler son permis.", 0],
-      ["Aster veut apprendre a lire en français.", 2],
-      ["Bilan veut jeter un vieux meuble.", 5],
-      ["Noor cherche une place pour son enfant.", 4],
-    ],
-  },
-  {
-    context: "Dans une école, vous associez chaque document a la bonne demande.",
-    docs: [
-      ["Absence", "Secretariat", "Informer l'école quand un enfant est malade ou absent."],
-      ["Cantine", "Repas", "Menus de la semaine, allergies et inscription aux repas de midi."],
-      ["Sport scolaire", "Activité", "Horaires des entraînements et inscription aux tournois."],
-      ["Bibliobus", "Lecture", "Passage du bus de livres devant l'école chaque mois."],
-      ["Sortie de classe", "Excursion", "Programme, prix et autorisation a signer par les parents."],
-      ["Cours d'appui", "Soutien", "Aide supplémentaire en mathématiques et en français."],
-    ],
-    people: [
-      ["Le fils de Vera a besoin d'aide en maths.", 5],
-      ["Amadou doit annoncer que sa fille est malade.", 0],
-      ["Lina veut connaître le menu de midi.", 1],
-      ["Mateo doit signer un papier pour une excursion.", 4],
-      ["Irina veut emprunter des livres.", 3],
-      ["Kemal veut participer a un tournoi.", 2],
-    ],
-  },
-  {
-    context: "Vous cherchez un commerce ou un service dans un quartier.",
-    docs: [
-      ["Boulangerie", "Pain frais", "Pain, croissants et sandwichs prepares chaque matin."],
-      ["Laverie", "Lessive", "Machines a laver et séchoirs disponibles avec paiement par carte."],
-      ["Cordonnier", "Chaussures", "Reparation de chaussures, sacs et fermetures éclair."],
-      ["Salon de coiffure", "Cheveux", "Coupes pour femmes, hommes et enfants, avec ou sans rendez-vous."],
-      ["Epicerie", "Alimentation", "Produits de base, fruits, légumes et articles de ménage."],
-      ["Opticien", "Vue", "Controle de la vue, lunettes et lentilles de contact."],
-    ],
-    people: [
-      ["Tariq a besoin de lunettes.", 5],
-      ["Sara veut laver une couverture.", 1],
-      ["Nino cherche du pain pour le petit-déjeuner.", 0],
-      ["Olena doit reparer une fermeture éclair.", 2],
-      ["Awa veut couper les cheveux de son fils.", 3],
-      ["Eren veut acheter des fruits.", 4],
-    ],
-  },
-  {
-    context: "Vous choisissez l'annonce culturelle qui correspond a chaque personne.",
-    docs: [
-      ["Concert gratuit", "Musique", "Groupe local sur la place du village samedi soir."],
-      ["Film en plein air", "Cinema", "Projection d'un film familial dans le parc."],
-      ["Atelier peinture", "Creativite", "Apprendre a mélanger les couleurs et peindre un paysage."],
-      ["Visite du musée", "Histoire", "Découverte guidee de la vie d'autrefois dans la région."],
-      ["Spectacle enfants", "Theatre", "Piece courte et drole pour les familles."],
-      ["Cafe lecture", "Livres", "Rencontre pour parler d'un roman facile."],
-    ],
-    people: [
-      ["Lina veut voir une pièce avec ses enfants.", 4],
-      ["Hugo aime discuter de romans.", 5],
-      ["Narges veut écouter de la musique.", 0],
-      ["Anton aime les films dehors.", 1],
-      ["Meryem veut apprendre a peindre.", 2],
-      ["Pavlo s'intéresse à l'histoire locale.", 3],
-    ],
-  },
-  {
-    context: "Vous choisissez la bonne information de transport.",
-    docs: [
-      ["Bus de nuit", "Retour tardif", "Lignes spéciales les vendredis et samedis après minuit."],
-      ["Abonnement demi-tarif", "Reduction", "Billets de train moins chers pour les adultes."],
-      ["Carte junior", "Enfants", "Les enfants voyagent avec un parent pour un prix réduit."],
-      ["Train direct", "Rapide", "Liaison sans changement entre Lausanne et Sion."],
-      ["Velostation", "Parking vélo", "Places surveillées pour laisser son vélo près de la gare."],
-      ["Objets trouves", "Perdu", "Service pour rechercher un sac, une veste ou un téléphone oublié."],
-    ],
-    people: [
-      ["Elias a oublié son sac dans le train.", 5],
-      ["Rokhaya veut laisser son vélo en sécurité.", 4],
-      ["Maksym voyage souvent et cherche une réduction.", 1],
-      ["Nora rentre tard le samedi soir.", 0],
-      ["Viktor veut aller a Sion sans changement.", 3],
-      ["Samia voyage avec son enfant.", 2],
-    ],
-  },
-  {
-    context: "Dans un centre sportif, vous associez chaque personne a l'activité adaptee.",
-    docs: [
-      ["Fitness doux", "Debutants", "Exercices lents pour reprendre une activité physique."],
-      ["Football", "Equipe", "Entrainement collectif deux fois par semaine."],
-      ["Yoga", "Souplesse", "Cours calme pour respirer et se detendre."],
-      ["Natation libre", "Piscine", "Acces aux bassins sans cours, selon les horaires publics."],
-      ["Danse", "Musique", "Cours de danse moderne pour adultes."],
-      ["Escalade", "Mur", "Initiation avec materiel fourni et moniteur."],
-    ],
-    people: [
-      ["Ibrahim veut jouer dans une equipe.", 1],
-      ["Daria veut se detendre calmement.", 2],
-      ["Moussa veut essayer un mur d'escalade.", 5],
-      ["Aicha aime bouger avec la musique.", 4],
-      ["Tom veut nager sans suivre un cours.", 3],
-      ["Mona reprend le sport doucement.", 0],
-    ],
-  },
-  {
-    context: "Vous lisez des informations de logement et choisissez la bonne rubrique.",
-    docs: [
-      ["Bail a loyer", "Contrat", "Informations sur la duree, le loyer et les obligations du locataire."],
-      ["Etat des lieux", "Entree", "Controle de l'appartement avant de recevoir les cles."],
-      ["Assurance ménage", "Protection", "Couverture en cas de degat d'eau, vol ou incendie."],
-      ["Buanderie", "Lessive", "Planning pour utiliser les machines de l'immeuble."],
-      ["Regie", "Contact", "Adresse et téléphone pour signaler un problème dans l'appartement."],
-      ["Tri des déchets", "Immeuble", "Regles pour les sacs poubelle, le papier et le verre."],
-    ],
-    people: [
-      ["Maria veut savoir quand laver son linge.", 3],
-      ["Denys signale un radiateur cassé.", 4],
-      ["Hodan veut comprendre son contrat.", 0],
-      ["Yara entre dans son nouveau logement demain.", 1],
-      ["Khaled cherche une assurance pour ses affaires.", 2],
-      ["Rima veut savoir ou jeter le verre.", 5],
-    ],
-  },
-];
+
+function orientationRowCorrect(expected: number, selected: number | string | null | undefined): boolean {
+  if (expected === -1) return selected === null || selected === undefined;
+  return selected === expected;
+}
 
 const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item, index) => ({
   context: `${item.context} Lisez attentivement les nuances : plusieurs documents peuvent sembler proches.`,
@@ -1141,7 +956,10 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       layout: "orientation",
       task: {
         kind: "table",
-        prompt: `${orientation.context} Cochez un seul document pour chaque personne.`,
+        prompt:
+          `${orientation.context} Associez chaque personne au document qui lui correspond. ` +
+          `Il y a ${orientation.people.length} personnes et ${orientation.docs.length} documents : ` +
+          `${orientation.people.filter(([, a]) => a === -1).length} personnes ne correspondent à aucun document — laissez leur ligne vide.`,
         documents: orientation.docs.map(([title, subtitle, body], i) => ({ title, subtitle, body, tone: COLORS[i % COLORS.length]! })),
         people: orientation.people.map(([person]) => person as string),
         answers: orientation.people.map(([, answer]) => answer as number),
@@ -1201,7 +1019,12 @@ function questionKey(part: CEPart, index: number, subIndex?: number) {
 
 function scorePart(part: CEPart, answers: CEAnswers) {
   if (part.layout === "orientation") {
-    return part.task.answers.reduce((sum, correct, index) => sum + (answers[questionKey(part, index)] === correct ? 1 : 0), 0);
+    const each = part.points / part.task.people.length;
+    return part.task.answers.reduce(
+      (sum, expected, index) =>
+        sum + (orientationRowCorrect(expected, answers[questionKey(part, index)]) ? each : 0),
+      0,
+    );
   }
   if (part.layout === "instructions") {
     const flat = part.cards.flatMap((card, cardIndex) => card.questions.map((question, questionIndex) => ({ question, key: questionKey(part, cardIndex, questionIndex) })));
@@ -1360,7 +1183,7 @@ function RenderQuestion({ task, value, onChange, correction }: { task: QuestionT
   return <ChoiceQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
 }
 
-function OrientationPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "orientation" }>; answers: CEAnswers; setAnswer: (key: string, value: number) => void; correction?: boolean }) {
+function OrientationPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "orientation" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void; correction?: boolean }) {
   return (
     <div className="space-y-5">
       <p className="text-sm font-semibold italic text-[var(--color-text-primary)]">{part.task.prompt}</p>
@@ -1393,26 +1216,41 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
             </tr>
           </thead>
           <tbody>
-            {part.task.people.map((person, row) => (
-              <tr key={person}>
+            {part.task.people.map((person, row) => {
+              const key = questionKey(part, row);
+              const expected = part.task.answers[row]!;
+              const selected = answers[key];
+              const rowOk = correction && orientationRowCorrect(expected, selected);
+              const rowWrong = correction && !rowOk;
+              return (
+              <tr key={person} className={rowOk ? "bg-amber-50/60" : rowWrong ? "bg-red-50/40" : undefined}>
                 <td className="border border-[var(--color-border-default)] p-2">{person}</td>
                 {part.task.documents.map((_, col) => {
-                  const key = questionKey(part, row);
-                  const selected = answers[key] === col;
-                  const correct = correction && part.task.answers[row] === col;
+                  const isSelected = selected === col;
+                  const isCorrectCell = correction && expected === col;
+                  const isWrongPick = correction && isSelected && expected !== col;
                   return (
                     <td key={col} className="border border-[var(--color-border-default)] p-1 text-center">
                       <button
                         type="button"
-                        onClick={() => !correction && setAnswer(key, col)}
-                        className={`mx-auto h-5 w-5 rounded border ${correct ? "border-amber-400 bg-amber-100" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/20" : "border-slate-300"}`}
+                        onClick={() => {
+                          if (correction) return;
+                          setAnswer(key, isSelected ? null : col);
+                        }}
+                        className={`mx-auto h-5 w-5 rounded border ${
+                          isCorrectCell ? "border-amber-500 bg-amber-100"
+                          : isWrongPick ? "border-red-400 bg-red-100"
+                          : isSelected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/20"
+                          : "border-slate-300"
+                        }`}
                         aria-label={`Document ${col + 1}`}
                       />
                     </td>
                   );
                 })}
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -1533,14 +1371,14 @@ function QuestionsList({ part, questions, answers, setAnswer, correction }: { pa
   );
 }
 
-function PartView({ part, answers, setAnswer, correction }: { part: CEPart; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
-  if (part.layout === "orientation") return <OrientationPart part={part} answers={answers} setAnswer={(key, value) => setAnswer(key, value)} correction={correction} />;
+function PartView({ part, answers, setAnswer, correction }: { part: CEPart; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void; correction?: boolean }) {
+  if (part.layout === "orientation") return <OrientationPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
   if (part.layout === "email") return <EmailPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
   if (part.layout === "instructions") return <InstructionsPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
   return <ArticlePart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
 }
 
-function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index: number; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void }) {
+function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index: number; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void }) {
   return (
     <div className="space-y-5">
       <div className="flex items-start justify-between gap-4">
@@ -1638,8 +1476,15 @@ export function ComprehensionEcritRunner({
     finishToResults();
   }, [finishToResults, parts, phase, secondsLeft]);
 
-  const setAnswer = useCallback((key: string, value: number | string) => {
-    setAnswers((prev) => ({ ...prev, [key]: value }));
+  const setAnswer = useCallback((key: string, value: number | string | null) => {
+    setAnswers((prev) => {
+      if (value === null) {
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      }
+      return { ...prev, [key]: value };
+    });
   }, []);
 
   const validate = useCallback(() => {
