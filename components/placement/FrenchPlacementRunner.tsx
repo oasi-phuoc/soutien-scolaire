@@ -57,8 +57,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
   const isProgressive = isPlacement;
 
   const initialDraft = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
-  const [sessionId] = useState(() => initialDraft?.sessionId ?? createFrenchSessionId());
-  const [seed] = useState(() => initialDraft?.seed ?? Date.now());
+  const [sessionId, setSessionId] = useState(() => initialDraft?.sessionId ?? createFrenchSessionId());
+  const [seed, setSeed] = useState(() => initialDraft?.seed ?? Date.now());
   const [level] = useState<PlacementLevel>(() => {
     if (isPlacement) return initialDraft?.level ?? "base";
     return initialDraft?.level ?? paramLevel;
@@ -77,6 +77,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
 
   const persistDraft = useCallback((next: Partial<{
     step: PlacementFrenchDraft["step"];
+    seed?: number;
     ce: number;
     co: number;
     peSent: boolean;
@@ -90,7 +91,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       kind: batteryKind,
       progressive: isProgressive,
       level,
-      seed,
+      seed: next.seed ?? seed,
       step: draftStep,
       ce: next.ce ?? ceScore,
       co: next.co ?? coScore,
@@ -101,6 +102,40 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       updatedAt: new Date().toISOString(),
     });
   }, [batteryKind, ceScore, coScore, isProgressive, level, peSent, peSubmissionId, poSent, poSubmissionId, seed, sessionId, step]);
+
+  const startBattery = useCallback(() => {
+    const activeSeed = isPlacement ? seed : Date.now();
+    if (!isPlacement) setSeed(activeSeed);
+    persistDraft({ step: "ce", seed: activeSeed });
+    setStep("ce");
+  }, [isPlacement, persistDraft, seed]);
+
+  const restartTraining = useCallback(() => {
+    const activeSeed = Date.now();
+    const nextSessionId = createFrenchSessionId();
+    setSessionId(nextSessionId);
+    setSeed(activeSeed);
+    setCeScore(0);
+    setCoScore(0);
+    setPeSent(false);
+    setPoSent(false);
+    setPeSubmissionId(undefined);
+    setPoSubmissionId(undefined);
+    saveFrenchTrainingDraft({
+      sessionId: nextSessionId,
+      kind: "training",
+      progressive: false,
+      level,
+      seed: activeSeed,
+      step: "ce",
+      ce: 0,
+      co: 0,
+      peSent: false,
+      poSent: false,
+      updatedAt: new Date().toISOString(),
+    });
+    setStep("ce");
+  }, [level]);
 
   const finalizePlacementSession = useCallback((overrides?: {
     ce?: number;
@@ -223,7 +258,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
         />
         <button
           type="button"
-          onClick={() => { persistDraft({ step: "ce" }); setStep("ce"); }}
+          onClick={startBattery}
           className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
           style={{ background: PLACEMENT_ACCENT }}
         >
@@ -266,9 +301,20 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
             Cet entraînement ne compte pas pour votre score de placement.
           </p>
         )}
-        <button type="button" onClick={() => router.push("/placement")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
-          Retour au test de placement
-        </button>
+        <div className="grid gap-3">
+          {!isPlacement && (
+            <button
+              type="button"
+              onClick={restartTraining}
+              className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-3 text-sm font-bold text-[var(--color-text-primary)]"
+            >
+              Refaire avec de nouveaux exercices
+            </button>
+          )}
+          <button type="button" onClick={() => router.push("/placement")} className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white" style={{ background: PLACEMENT_ACCENT }}>
+            Retour au test de placement
+          </button>
+        </div>
       </main>
     );
   }
@@ -287,8 +333,8 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
         "--color-accent-comm-inverse": "var(--color-correction)",
       } as React.CSSProperties}
     >
-      {step === "ce" && <ComprehensionEcritRunner lessonId={lessonId} {...runnerProps} />}
-      {step === "co" && <ComprehensionOraleRunner lessonId={lessonId} {...runnerProps} />}
+      {step === "ce" && <ComprehensionEcritRunner key={`ce-${sessionId}-${seed}`} lessonId={lessonId} {...runnerProps} />}
+      {step === "co" && <ComprehensionOraleRunner key={`co-${sessionId}-${seed}`} lessonId={lessonId} {...runnerProps} />}
       {step === "pe" && <ProductionEcriteRunner lessonId={lessonId} {...runnerProps} />}
       {step === "po" && <OralProductionRunner lessonId={isProgressive ? "PO-3" : lessonId} {...runnerProps} />}
     </div>

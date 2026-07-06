@@ -294,6 +294,7 @@ export function PlacementHubClient() {
   }
 
   function launchTraining() {
+    saveFrenchTrainingDraft(null);
     localStorage.setItem(LEVEL_KEY, level);
     router.push(`/placement/francais/entrainement?level=${level}`);
   }

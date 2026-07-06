@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { imageSourceFor } from "@/lib/curriculum/word-image-resolver";
 import {
   coGroupsByLevelCategory,
-  randomCoGroup,
+  pickCoGroup,
   randomCoGroupInRange,
   type COAudioCategory,
   type COAudioGroup,
@@ -160,7 +160,7 @@ function makeParts(level: COLevel, seed: number): COPart[] {
       return makeBaseConversationPart(part, seed);
     }
     const category = ("category" in part ? part.category : part.id) as COAudioCategory;
-    const audioGroup = randomCoGroup(audioLevel, category);
+    const audioGroup = pickCoGroup(audioLevel, category, `${seed}-${part.id}`);
     return {
       ...part,
       audioGroup,
@@ -1225,7 +1225,8 @@ export function ComprehensionOraleRunner({
   const router = useRouter();
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
-  const [sessionSeed] = useState(() => placementSeed ?? Date.now());
+  const [localSeed, setLocalSeed] = useState(() => Date.now());
+  const sessionSeed = placementSeed ?? localSeed;
   const parts = useMemo(
     () => (mode === "placement" && placementProgressive ? makeProgressiveCoParts(sessionSeed) : makeParts(level, sessionSeed)),
     [level, mode, placementProgressive, sessionSeed],
@@ -1309,7 +1310,10 @@ export function ComprehensionOraleRunner({
               <p>Ne bloquez pas sur un mot inconnu : utilisez le contexte pour choisir la réponse la plus logique.</p>
             </>
           )}
-          onStart={() => setPhase("exercise")}
+          onStart={() => {
+            if (placementSeed == null) setLocalSeed(Date.now());
+            setPhase("exercise");
+          }}
         />
         <HiddenNav onNext={() => setPhase("exercise")} nextLabel="Commencer" />
       </main>
