@@ -1,7 +1,7 @@
 /**
- * Sync word illustrations into public/assets/words/img/{slug}.webp
+ * Sync word illustrations into public/assets/words/lecture/{slug}.webp
  *
- * Source: public/vocab/images/** (copy or convert via sharp)
+ * Source: public/assets/words/vocab/** (copy or convert via sharp)
  *
  * Usage:
  *   node scripts/sync-word-images.cjs
@@ -11,8 +11,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const outDir = path.join(root, "public/assets/words/img");
-const vocabDir = path.join(root, "public/vocab/images");
+const outDir = path.join(root, "public/assets/words/lecture");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 
 let sharp;
 try {
@@ -86,7 +86,10 @@ async function toWebp(src, dest) {
     return;
   }
   await sharp(src)
-    .resize(512, 512, { fit: "inside", withoutEnlargement: true })
+    .resize(800, 600, {
+      fit: "contain",
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    })
     .webp({ quality: 85 })
     .toFile(dest);
 }

@@ -2,8 +2,9 @@
  * Generate a static index of every word illustration that exists on disk.
  *
  * Sources (in priority order):
- *   1. public/assets/words/img   → lecture unified word images
- *   2. public/vocab/images/Vn    → vocabulaire theme images
+ *   1. public/assets/words/lecture   → lecture unified word images
+ *   2. public/expression/images      → CE/CO manga illustrations
+ *   3. public/assets/words/vocab/Vn  → vocabulaire theme images (if any)
  *
  * Output:
  *   lib/curriculum/content/communication/word-image-index.ts
@@ -21,9 +22,9 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const lectureDir = path.join(root, "public/assets/words/img");
+const lectureDir = path.join(root, "public/assets/words/lecture");
 const expressionDir = path.join(root, "public/expression/images");
-const vocabDir = path.join(root, "public/vocab/images");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
 function slug(word) {
@@ -52,18 +53,18 @@ function addFrom(dir, urlPrefix, index) {
 function main() {
   const index = new Map();
 
-  // Priority 1: lecture unified pool.
-  addFrom(lectureDir, "/assets/words/img", index);
-
-  // Priority 2: CE/CO common manga illustrations.
+  // Priority 1: CE/CO common manga illustrations.
   addFrom(expressionDir, "/expression/images", index);
+
+  // Priority 2: lecture unified pool.
+  addFrom(lectureDir, "/assets/words/lecture", index);
 
   // Priority 3: vocabulaire theme folders (V1, V2, …).
   if (fs.existsSync(vocabDir)) {
     for (const folder of fs.readdirSync(vocabDir).sort()) {
       const dir = path.join(vocabDir, folder);
       if (!fs.statSync(dir).isDirectory()) continue;
-      addFrom(dir, `/vocab/images/${folder}`, index);
+      addFrom(dir, `/assets/words/vocab/${folder}`, index);
     }
   }
 

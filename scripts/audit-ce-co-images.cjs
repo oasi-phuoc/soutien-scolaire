@@ -2,8 +2,8 @@
  * Audit CE (compréhension écrite) and CO (compréhension orale) word images.
  *
  * For every word/label in CE/CO that is meant to show a picture, this script
- * tries to link it to an existing image in vocabulaire (public/vocab/images)
- * or lecture (public/assets/words/img) using the exact same resolution rules
+ * tries to link it to an existing image in vocabulaire (public/assets/words/vocab)
+ * or lecture (public/assets/words/lecture) using the exact same resolution rules
  * as lib/curriculum/word-image-resolver.ts. It then writes a report of which
  * words are linked and which are still missing an image.
  *
@@ -18,9 +18,9 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const lectureDir = path.join(root, "public/assets/words/img");
+const lectureDir = path.join(root, "public/assets/words/lecture");
 const expressionDir = path.join(root, "public/expression/images");
-const vocabDir = path.join(root, "public/vocab/images");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "ref/ce-co-image-audit.md");
 
 // ---------------------------------------------------------------------------
@@ -50,13 +50,13 @@ function addFrom(dir, urlPrefix, index) {
 
 function buildIndex() {
   const index = new Map();
-  addFrom(lectureDir, "/assets/words/img", index);
+  addFrom(lectureDir, "/assets/words/lecture", index);
   addFrom(expressionDir, "/expression/images", index);
   if (fs.existsSync(vocabDir)) {
     for (const folder of fs.readdirSync(vocabDir).sort()) {
       const dir = path.join(vocabDir, folder);
       if (!fs.statSync(dir).isDirectory()) continue;
-      addFrom(dir, `/vocab/images/${folder}`, index);
+      addFrom(dir, `/assets/words/vocab/${folder}`, index);
     }
   }
   return index;
@@ -148,8 +148,8 @@ function collectLabels() {
 // ---------------------------------------------------------------------------
 function sourceOf(path) {
   if (!path) return "";
-  if (path.startsWith("/assets/words/img/")) return "lecture";
-  if (path.startsWith("/vocab/images/")) return "vocabulaire";
+  if (path.startsWith("/assets/words/lecture/")) return "lecture";
+  if (path.startsWith("/assets/words/vocab/")) return "vocabulaire";
   return "autre";
 }
 
@@ -177,7 +177,7 @@ function main() {
   lines.push("");
   lines.push(`_Généré par \`scripts/audit-ce-co-images.cjs\` — ${new Date().toISOString().slice(0, 10)}_`);
   lines.push("");
-  lines.push("Chaque mot/étiquette des sections **Compréhension écrite (CE)** et **Compréhension orale (CO)** qui doit afficher une image est relié à une image existante dans **vocabulaire** (`public/vocab/images`) ou **lecture** (`public/assets/words/img`).");
+  lines.push("Chaque mot/étiquette des sections **Compréhension écrite (CE)** et **Compréhension orale (CO)** qui doit afficher une image est relié à une image existante dans **vocabulaire** (`public/assets/words/vocab`) ou **lecture** (`public/assets/words/lecture`).");
   lines.push("");
   lines.push("## Résumé");
   lines.push("");

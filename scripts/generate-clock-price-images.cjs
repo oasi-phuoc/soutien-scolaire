@@ -3,7 +3,7 @@
  * answers, programmatically (SVG → 800x600 webp). AI models render clock hands
  * and exact amounts unreliably, so these are drawn deterministically.
  *
- * Output → public/assets/words/img/<canonical-slug>.webp
+ * Output → public/assets/words/lecture/<canonical-slug>.webp
  *   times : horloge-HHhMM   (analog clock)
  *   prices: prix-<montant>-<eur|fr>[-ht]  (price tag showing the amount)
  *
@@ -19,7 +19,7 @@ const sharp = require("sharp");
 
 const root = process.cwd();
 const commDir = "lib/curriculum/content/communication";
-const outDir = path.join(root, "public/assets/words/img");
+const outDir = path.join(root, "public/assets/words/lecture");
 
 function read(rel) { return fs.readFileSync(path.join(root, rel), "utf8"); }
 

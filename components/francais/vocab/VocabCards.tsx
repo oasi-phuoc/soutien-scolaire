@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, Fragment, type ReactNode } from "react";
+import { resolveVocabImage } from "@/lib/curriculum/vocab-image";
 import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import Image from "next/image";
 import { playWord, SoundIcon } from "./vocabUtils";
@@ -131,9 +132,7 @@ function MfRows({ word, feminine, article }: { word: string; feminine?: string; 
 }
 
 function resolveImage(image: string | undefined, folder: string): string | undefined {
-  if (!image) return undefined;
-  if (image.startsWith("/")) return image;
-  return `/vocab/images/${folder}/${image}`;
+  return resolveVocabImage(image, folder);
 }
 
 function DefinitionToggle({

@@ -578,7 +578,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
     },
     {
       word: "panneau",
-      image: "/vocab/images/V5/panneau.webp",
+      image: "/assets/words/lecture/panneau.webp",
       article: "le",
       gender: "m",
       group: "Signalisation",

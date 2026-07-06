@@ -1,7 +1,7 @@
 /**
  * More easily-illustrable "lecture" vocabulary across NEW themes, listing the
- * words that don't yet have an image (public/vocab/images +
- * public/assets/words/img + public/vocab-temp). Same resolution rules as
+ * words that don't yet have an image (public/assets/words/vocab +
+ * public/assets/words/lecture + public/vocab-temp). Same resolution rules as
  * lib/curriculum/word-image-resolver.ts.
  *
  * Usage:  node scripts/list-lecture-themes2.cjs
@@ -12,8 +12,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const lectureDir = path.join(root, "public/assets/words/img");
-const vocabDir = path.join(root, "public/vocab/images");
+const lectureDir = path.join(root, "public/assets/words/lecture");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 const tempDir = path.join(root, "public/vocab-temp");
 const outMd = path.join(root, "ref/lecture-themes2-missing.md");
 const outJson = "/tmp/missing-lecture-themes2.json";

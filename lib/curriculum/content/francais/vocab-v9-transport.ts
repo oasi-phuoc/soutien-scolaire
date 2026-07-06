@@ -428,7 +428,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
     },
     {
       word: "vélo",
-      image: "/vocab/images/V3/velo.webp",
+      image: "/assets/words/lecture/velo.webp",
       article: "le",
       gender: "m",
       definition: ["Véhicule à deux roues que l’on fait avancer avec les jambes."],

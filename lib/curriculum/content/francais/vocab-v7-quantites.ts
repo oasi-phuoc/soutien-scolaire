@@ -932,7 +932,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
     },
     {
       word: "cuillère",
-      image: "/vocab/images/V10/cuillere.webp",
+      image: "/assets/words/lecture/cuillere.webp",
       article: "la",
       gender: "f",
       definition: ["Objet pour manger une soupe ou un dessert."],

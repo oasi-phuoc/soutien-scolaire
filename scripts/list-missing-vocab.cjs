@@ -1,7 +1,7 @@
 /**
  * List common A1/A2/B1 vocabulary words (by category) that DON'T yet have an
- * image in the app (vocabulaire public/vocab/images + lecture
- * public/assets/words/img). Uses the same resolution rules as
+ * image in the app (vocabulaire public/assets/words/vocab + lecture
+ * public/assets/words/lecture). Uses the same resolution rules as
  * lib/curriculum/word-image-resolver.ts.
  *
  * Usage:
@@ -15,8 +15,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const lectureDir = path.join(root, "public/assets/words/img");
-const vocabDir = path.join(root, "public/vocab/images");
+const lectureDir = path.join(root, "public/assets/words/lecture");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 const tempDir = path.join(root, "public/vocab-temp");
 const outMd = path.join(root, "ref/vocab-a1b1-missing.md");
 const outJson = "/tmp/missing-vocab.json";
@@ -107,7 +107,7 @@ function main() {
   report.push("");
   report.push(`_Généré par \`scripts/list-missing-vocab.cjs\` — ${new Date().toISOString().slice(0, 10)}_`);
   report.push("");
-  report.push("Mots de vocabulaire courants (A1–A2–B1) qui n'ont **pas encore** d'image dans l'app (`public/vocab/images` + `public/assets/words/img` + `public/vocab-temp`).");
+  report.push("Mots de vocabulaire courants (A1–A2–B1) qui n'ont **pas encore** d'image dans l'app (`public/assets/words/vocab` + `public/assets/words/lecture` + `public/vocab-temp`).");
   report.push("");
   report.push(`**Total à générer : ${totalMissing} mots.**`);
   report.push("");

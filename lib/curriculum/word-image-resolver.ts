@@ -281,8 +281,9 @@ export function isImageableLabel(label: string | undefined | null): boolean {
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
 export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
-    path.startsWith("/vocab/images/")
-    || path.startsWith("/assets/words/img/")
+    path.startsWith("/assets/words/lecture/")
+    || path.startsWith("/assets/words/vocab/")
+    || path.startsWith("/assets/words/lecture/")
     || path.startsWith("/expression/images/")
     || path.startsWith("/expression/")
   );
@@ -307,7 +308,7 @@ export function ceCoImageSource(path?: string | null, label?: string): string | 
     || EXPRESSION_OBJET_PICK.test(path)
     || EXPRESSION_CE_BASE.test(path)
   )) return path;
-  if (path?.startsWith("/assets/words/img/") || path?.startsWith("/vocab/images/")) return path;
+  if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
   if (label && isImageableLabel(label)) return resolveWordImage(label);
   return null;
 }
