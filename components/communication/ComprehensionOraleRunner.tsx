@@ -55,7 +55,7 @@ const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
   { id: "message", title: "Comprendre un message", points: 4, context: "Écoutez un message vocal." },
   { id: "annonce", title: "Comprendre une annonce", points: 4, context: "Écoutez une annonce courte." },
   { id: "instruction", title: "Comprendre des instructions", points: 4, context: "Écoutez des consignes ou des informations pratiques." },
-  { id: "conversation", title: "Comprendre des conversations", points: 12, context: "Écoutez 4 dialogues et associez chaque image au bon numéro." },
+  { id: "conversation", title: "Comprendre des conversations", points: 8, context: "Écoutez 4 dialogues et associez chaque image au bon numéro (2 pts par dialogue)." },
   { id: "objet", title: "Identifier des objets", points: 5, context: "Écoutez et repérez les objets ou les informations importantes." },
 ];
 
@@ -197,7 +197,7 @@ function normalize(value: string) {
 
 function answerOk(task: QuestionTask, answer: number | string | number[] | boolean[] | null) {
   if (task.kind === "conversation_image_grid") {
-    return conversationImageGridCorrectCount(task, answer) === 6;
+    return conversationImageGridFullyCorrect(task, answer);
   }
   if (task.kind === "match_grid") {
     if (!Array.isArray(answer) || answer.length !== 4) return false;
@@ -231,22 +231,30 @@ function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, ans
   );
 }
 
-function conversationImageGridCorrectCount(
+function conversationImageGridScorableCorrectCount(
   task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
   answer: number | string | number[] | boolean[] | null,
 ) {
   if (!Array.isArray(answer) || answer.length !== 6) return 0;
   return task.correctByCard.reduce(
-    (sum, expected, index) => sum + (answer[index] === expected ? 1 : 0),
+    (sum, expected, index) => sum + (expected > 0 && answer[index] === expected ? 1 : 0),
     0,
   );
+}
+
+function conversationImageGridFullyCorrect(
+  task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
+  answer: number | string | number[] | boolean[] | null,
+) {
+  if (!Array.isArray(answer) || answer.length !== 6) return false;
+  return task.correctByCard.every((expected, index) => answer[index] === expected);
 }
 
 function conversationImageGridPoints(
   task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
   answer: number | string | number[] | boolean[] | null,
 ) {
-  return conversationImageGridCorrectCount(task, answer) * 2;
+  return conversationImageGridScorableCorrectCount(task, answer) * 2;
 }
 
 function scorePart(part: COPart, answers: Answers) {
@@ -1105,7 +1113,7 @@ function QuestionBlock({
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
               {isConversationImageGrid
-                ? "Écoutez les 4 dialogues, puis associez chaque image au bon numéro (2 points par image)."
+                ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
                 : isMatchGrid
                 ? "Lisez les situations. Écoutez les dialogues puis répondez."
                 : isObjectPick
@@ -1200,7 +1208,7 @@ function QuestionBlock({
             {readonly && isConversationImageGrid && question.kind === "conversation_image_grid" && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Score : {formatPoints(conversationImageGridPoints(question, answer))} / {formatPoints(part.points)} pts
-                {" "}({conversationImageGridCorrectCount(question, answer)} / 6 images)
+                {" "}({conversationImageGridScorableCorrectCount(question, answer)} / 4 dialogues)
               </p>
             )}
             {readonly && isMatchGrid && question.kind === "match_grid" && (

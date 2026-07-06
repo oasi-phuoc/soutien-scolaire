@@ -40,7 +40,7 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
   if (group.level === "base" && group.category === "conversation") {
-    const grid = buildBaseConversationImageGrid(group.activity);
+    const grid = buildBaseConversationImageGrid(group.activity, seed);
     if (grid) return [grid];
   }
   const matchDef = CO_CONVERSATION_MATCH[group.id];
