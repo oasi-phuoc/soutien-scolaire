@@ -148,12 +148,12 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
   return shuffleWithSeed(items, seed);
 }
 
-function img(level: string, groupSlug: string, qId: string, suffix: string, label: string): COImageChoice {
+function img(_level: string, _groupSlug: string, _qId: string, _suffix: string, label: string): COImageChoice {
   if (isSingleTime(label) || isSinglePrice(label)) {
     const dedicated = resolveWordImage(label);
     if (dedicated) return { label, image: dedicated };
   }
-  return { label, image: `/expression/co/${level}/${groupSlug}/${qId}-${suffix}.webp` };
+  return { label, image: "" };
 }
 
 export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMultiQuestion[] {

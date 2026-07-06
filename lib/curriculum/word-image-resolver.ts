@@ -287,9 +287,14 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   );
 }
 
-/** CE/CO — assets /expression/ + horloges/prix programmatiques (pas le pool vocab/lecture). */
+const EXPRESSION_CO_CURATED =
+  /^\/expression\/co\/base\/public\/conversation-\d+-[a-f]\.webp$/;
+const EXPRESSION_OBJET_PICK =
+  /^\/expression\/co\/base\/objet-pick\/[^/]+\/\d+\.webp$/;
+
+/** CE/CO — conversations, objet-pick et horloges/prix uniquement (pas les QCM auto-générés). */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
-  if (path?.startsWith("/expression/")) return path;
+  if (path && (EXPRESSION_CO_CURATED.test(path) || EXPRESSION_OBJET_PICK.test(path))) return path;
   if (path && /^\/assets\/words\/img\/(horloge|prix)-/.test(path)) return path;
   if (label && (isSingleTime(label) || isSinglePrice(label))) {
     return resolveWordImage(label);

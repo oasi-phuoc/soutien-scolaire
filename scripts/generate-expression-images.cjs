@@ -350,7 +350,7 @@ function collectObjectPick() {
   return count;
 }
 
-const ceCount = collectCE();
-const coCount = collectCO();
+const ceCount = 0; // collectCE() désactivé — images CE à créer manuellement (fond blanc)
+const coCount = 0; // collectCO() désactivé — QCM CO sans images auto-générées
 const objetCount = collectObjectPick();
 console.log(`Generated ${ceCount} CE images, ${coCount} CO images and ${objetCount} object-pick images.`);
