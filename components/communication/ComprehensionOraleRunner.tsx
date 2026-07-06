@@ -1005,6 +1005,9 @@ function ConversationImageGridQuestionView({
               correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
             }`}
           >
+            <p className="bg-slate-50 py-1 text-center text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
+              {card.suffix}
+            </p>
             <ObjectCardImage src={card.image} alt={`Image ${card.suffix}`} />
             <div className="border-t border-slate-200 p-2">
               <select

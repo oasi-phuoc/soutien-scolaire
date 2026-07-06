@@ -2,8 +2,12 @@ import { buildConversationImageGrid } from "./co-questions-helpers";
 
 /**
  * Association image ↔ dialogue pour chaque activité conversation CO base.
- * Chaque entrée : 6 cartes (a–f), valeurs 1–4 = dialogue correspondant, 0 = leurre.
- * À valider visuellement avec les images et les audios.
+ *
+ * Fichiers : public/expression/co/base/public/conversation-{activité}-{a|b|c|d|e|f}.webp
+ * Audio    : public/expression/co/base/public/conversation-{activité}.mp3
+ *
+ * Chaque lettre (a–f) a une image fixe qui illustre un dialogue de l'audio.
+ * correctByCard[i] = numéro du dialogue (1–4) ou 0 (leurre « — ») pour la lettre a+i.
  */
 const CORRECT_BY_CARD: Record<string, [number, number, number, number, number, number]> = {
   "1": [1, 3, 0, 2, 4, 0],
@@ -16,8 +20,8 @@ const CORRECT_BY_CARD: Record<string, [number, number, number, number, number, n
   "8": [0, 3, 0, 1, 4, 2],
 };
 
-export function buildBaseConversationImageGrid(activity: string, seed?: string) {
+export function buildBaseConversationImageGrid(activity: string) {
   const mapping = CORRECT_BY_CARD[activity];
   if (!mapping) return null;
-  return buildConversationImageGrid(activity, mapping, seed);
+  return buildConversationImageGrid(activity, mapping);
 }
