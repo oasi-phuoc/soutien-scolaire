@@ -292,13 +292,18 @@ const EXPRESSION_CO_CURATED =
 const EXPRESSION_OBJET_PICK =
   /^\/expression\/co\/base\/objet-pick\/[^/]+\/\d+\.webp$/;
 
-/** CE/CO — conversations, objet-pick et horloges/prix uniquement (pas les QCM auto-générés). */
+const EXPRESSION_CE_MESSAGE =
+  /^\/expression\/ce\/base\/message-\d{2}\.webp$/;
+
+/** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
-  if (path && (EXPRESSION_CO_CURATED.test(path) || EXPRESSION_OBJET_PICK.test(path))) return path;
-  if (path && /^\/assets\/words\/img\/(horloge|prix)-/.test(path)) return path;
-  if (label && (isSingleTime(label) || isSinglePrice(label))) {
-    return resolveWordImage(label);
-  }
+  if (path && (
+    EXPRESSION_CO_CURATED.test(path)
+    || EXPRESSION_OBJET_PICK.test(path)
+    || EXPRESSION_CE_MESSAGE.test(path)
+  )) return path;
+  if (path?.startsWith("/assets/words/img/") || path?.startsWith("/vocab/images/")) return path;
+  if (label && isImageableLabel(label)) return resolveWordImage(label);
   return null;
 }
 

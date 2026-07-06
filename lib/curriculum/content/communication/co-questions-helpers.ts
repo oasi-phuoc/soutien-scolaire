@@ -1,4 +1,4 @@
-import { ceCoImageSource, isSinglePrice, isSingleTime, resolveWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isImageableLabel, resolveWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
@@ -149,7 +149,7 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
 }
 
 function img(_level: string, _groupSlug: string, _qId: string, _suffix: string, label: string): COImageChoice {
-  if (isSingleTime(label) || isSinglePrice(label)) {
+  if (isImageableLabel(label)) {
     const dedicated = resolveWordImage(label);
     if (dedicated) return { label, image: dedicated };
   }

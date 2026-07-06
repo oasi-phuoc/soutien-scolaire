@@ -18,6 +18,8 @@ import {
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
+import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
+import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 
 const TOTAL_SECONDS = 45 * 60;
 
@@ -53,7 +55,7 @@ type ArticleSeriesItem = {
 };
 type CEPart =
   | { id: "orientation"; title: string; points: 6; layout: "orientation"; task: TableTask }
-  | { id: "email"; title: string; points: 6; layout: "email"; meta: { from: string; subject: string }; body: string; questions: QuestionTask[] }
+  | { id: "email"; title: string; points: 6; layout: "email"; meta: { from?: string; subject?: string }; body: string; image: string; questions: QuestionTask[] }
   | { id: "instructions"; title: string; points: 6; layout: "instructions"; cards: { title: string; body: string; image: string; imageLabel: string; questions: QuestionTask[] }[] }
   | { id: "information"; title: string; points: 7; layout: "article"; article: { title: string; sections: { heading: string; body: string; image?: string; imageLabel?: string }[] }; questions: QuestionTask[] };
 
@@ -212,34 +214,6 @@ const ORIENTATION_TOPICS: OrientationSeriesItem[] = [
       ["Marta veut emprunter un roman.", 0],
       ["Youssef veut nager le mercredi.", 1],
       ["Lina cherche un cours de français.", 3],
-    ],
-  },
-];
-
-const EMAIL_SERIES: EmailSeriesItem[] = [
-  {
-    from: "paul@abc.ch",
-    subject: "Samedi soir",
-    body: "Salut !\nJe t'écris pour notre rendez-vous samedi soir. Rose a réservé au restaurant Les Arcades. On se retrouve devant le fleuriste de la place Centrale à 18 h 30. Nous prendrons le menu spécial, puis nous irons boire un thé. Nathalie ne sait pas encore que c&apos;est une surprise. Apporte ton appareil photo pour faire quelques images.\nÀ samedi !\nPaul",
-    questions: [
-      { prompt: "Où faut-il se retrouver ?", choices: [{ label: "Devant le fleuriste" }, { label: "Devant le restaurant" }, { label: "Devant la boutique" }], correct: 0 },
-      { prompt: "À quelle heure est le rendez-vous ?", choices: [{ label: "17 h 30" }, { label: "18 h 30" }, { label: "19 h 30" }], correct: 1 },
-      { prompt: "Qu'est-ce qui est une surprise ?", choices: [{ label: "Le restaurant" }, { label: "Le menu spécial" }, { label: "La soirée de Nathalie" }], correct: 2 },
-      { prompt: "Que faut-il apporter ?", choices: [{ label: "Une rose" }, { label: "Une boisson" }, { label: "Un appareil photo" }], correct: 2 },
-      { prompt: "Quel jour a lieu le rendez-vous ?", answer: "samedi", accept: ["samedi soir"] },
-    ],
-  },
-  {
-    from: "fatima@école.ch",
-    subject: "Cours de français",
-    body: "Bonjour,\nLe cours de français de jeudi est déplacé dans la salle 204. Le professeur demande d'apporter le cahier bleu et un dictionnaire. Le cours commence à 9 h 15 et termine à 11 h. Si vous arrivez en retard, entrez doucement et prenez une place au fond.\nMerci.\nFatima",
-    questions: [
-      { prompt: "Dans quelle salle a lieu le cours ?", choices: [{ label: "Salle 104" }, { label: "Salle 204" }, { label: "Salle 304" }], correct: 1 },
-      { prompt: "Que faut-il apporter ?", choices: [{ label: "Un cahier bleu" }, { label: "Un sac de sport" }, { label: "Un parapluie" }], correct: 0 },
-      { prompt: "À quelle heure commence le cours ?", choices: [{ label: "9 h 15" }, { label: "10 h" }, { label: "11 h" }], correct: 0 },
-      { prompt: "Où faut-il s'asseoir en cas de retard ?", choices: [{ label: "Devant" }, { label: "Au fond" }, { label: "À côté du professeur" }], correct: 1 },
-      { prompt: "Quel jour le cours est-il déplacé ?", answer: "jeudi" },
-      { prompt: "Quel autre objet faut-il prendre avec le cahier ?", answer: "dictionnaire", accept: ["un dictionnaire"] },
     ],
   },
 ];
@@ -1149,11 +1123,13 @@ const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
 function buildParts(level: CELevel, stamp: number): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
   const orientationPool = level === "base" ? ORIENTATION_TOPICS : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
-  const emailPool = level === "base" ? EMAIL_SERIES : level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS;
   const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
   const articlePool = level === "base" ? ARTICLE_SERIES : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
   const orientation = pickFromPool(orientationPool, `${level}-${stamp}-orientation`);
-  const email = pickFromPool(emailPool, `${level}-${stamp}-email`);
+  const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
+  const emailLegacy = level !== "base"
+    ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
+    : null;
   const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
   const article = pickFromPool(articlePool, `${level}-${stamp}-article`);
 
@@ -1176,9 +1152,14 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       title: "Lire un message",
       points: 6,
       layout: "email",
-      meta: { from: email.from, subject: email.subject },
-      body: email.body,
-      questions: email.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+      meta: emailBase
+        ? { from: emailBase.from, subject: emailBase.subject }
+        : { from: emailLegacy!.from, subject: emailLegacy!.subject },
+      body: emailBase ? emailBase.body : emailLegacy!.body,
+      image: emailBase?.image ?? "",
+      questions: emailBase
+        ? buildCeMessageQuestions(emailBase.pool, 6, `${level}-${stamp}-email`)
+        : emailLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
     },
     {
       id: "instructions",
@@ -1440,15 +1421,38 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
 }
 
 function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "email" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = !!part.image && !imageFailed;
+
   return (
     <div className="space-y-5">
-      <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
-        <div className="border-b border-slate-300 pb-2 text-sm text-[var(--color-text-secondary)]">
-          <p><span className="font-semibold">De :</span> {part.meta.from}</p>
-          <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>
+      {showImage ? (
+        <div className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
+          <div className="relative w-full">
+            <Image
+              src={part.image}
+              alt="Message à lire"
+              width={900}
+              height={1200}
+              className="h-auto w-full object-contain"
+              sizes="(max-width: 768px) 100vw, 640px"
+              onError={() => setImageFailed(true)}
+              priority
+            />
+          </div>
+          <p className="sr-only whitespace-pre-line">{part.body}</p>
         </div>
-        <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">{part.body}</div>
-      </div>
+      ) : (
+        <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
+          {(part.meta.from || part.meta.subject) && (
+            <div className="border-b border-slate-300 pb-2 text-sm text-[var(--color-text-secondary)]">
+              {part.meta.from && <p><span className="font-semibold">De :</span> {part.meta.from}</p>}
+              {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
+            </div>
+          )}
+          <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">{part.body}</div>
+        </div>
+      )}
       <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
     </div>
   );
