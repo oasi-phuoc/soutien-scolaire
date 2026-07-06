@@ -295,12 +295,16 @@ const EXPRESSION_OBJET_PICK =
 const EXPRESSION_CE_MESSAGE =
   /^\/expression\/ce\/base\/message-\d{2}\.webp$/;
 
+const EXPRESSION_CE_BASE =
+  /^\/expression\/ce\/base\//;
+
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path && (
     EXPRESSION_CO_CURATED.test(path)
     || EXPRESSION_OBJET_PICK.test(path)
     || EXPRESSION_CE_MESSAGE.test(path)
+    || EXPRESSION_CE_BASE.test(path)
   )) return path;
   if (path?.startsWith("/assets/words/img/") || path?.startsWith("/vocab/images/")) return path;
   if (label && isImageableLabel(label)) return resolveWordImage(label);

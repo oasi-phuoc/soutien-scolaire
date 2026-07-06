@@ -19,6 +19,7 @@ import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGu
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
+import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
 import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
@@ -57,6 +58,7 @@ type ArticleSeriesItem = {
 };
 type CEPart =
   | { id: "orientation"; title: string; points: 6; layout: "orientation"; task: TableTask }
+  | { id: "orientation"; title: string; points: 6; layout: "email"; meta: { from?: string; subject?: string }; body: string; image: string; questions: QuestionTask[] }
   | { id: "email"; title: string; points: 6; layout: "email"; meta: { from?: string; subject?: string }; body: string; image: string; questions: QuestionTask[] }
   | { id: "instructions"; title: string; points: 6; layout: "instructions"; cards: { title: string; body: string; image: string; imageLabel: string; questions: QuestionTask[] }[] }
   | { id: "information"; title: string; points: 7; layout: "article"; article: { title: string; sections: { heading: string; body: string; image?: string; imageLabel?: string }[] }; questions: QuestionTask[] };
@@ -178,47 +180,6 @@ function NavActionBar({
     </div>
   );
 }
-
-const ORIENTATION_TOPICS: OrientationSeriesItem[] = [
-  {
-    context: "Avec vos amis, vous cherchez un magazine adapté à chacun.",
-    docs: [
-      ["Cuisine+", "Recettes faciles", "Des plats simples, économiques et rapides pour tous les jours."],
-      ["CinéActu", "Sorties cinéma", "Bandes-annonces, avis et nouveautés dans les salles romandes."],
-      ["CélébritésMag", "Stars et musique", "Photos, interviews et nouvelles des artistes connus."],
-      ["Jeux malins", "Réflexion", "Sudokus, mots croisés et jeux pour entraîner la mémoire."],
-      ["JuniorStyle", "Adolescents", "Mode, sport, jeux vidéo et loisirs pour les jeunes."],
-      ["AutoPlus", "Voitures", "Conseils pour acheter, réparer et comparer les véhicules."],
-    ],
-    people: [
-      ["Élodie aime préparer de nouvelles recettes.", 0],
-      ["Lucie cherche un magazine pour son enfant.", 4],
-      ["David veut faire des mots croisés.", 3],
-      ["Patrick s'intéresse aux voitures.", 5],
-      ["Marie va souvent au cinéma.", 1],
-      ["Mathilde suit la vie des chanteurs.", 2],
-    ],
-  },
-  {
-    context: "Vous êtes dans une ville suisse et vous choisissez le bon service.",
-    docs: [
-      ["Bibliothèque", "Livres et journaux", "Empruntez des romans, bandes dessinées et documents."],
-      ["Piscine", "Sport et détente", "Bassins chauffés, cours pour enfants et abonnements."],
-      ["Office postal", "Courrier", "Envoyez des lettres, des colis et retirez vos paquets."],
-      ["Maison de quartier", "Activités", "Cours de langue, aide aux devoirs et rencontres."],
-      ["Pharmacie", "Santé", "Conseils, médicaments et produits de premiers soins."],
-      ["Gare CFF", "Transport", "Billets, horaires et informations sur les trains."],
-    ],
-    people: [
-      ["Samir veut acheter un billet pour Sion.", 5],
-      ["Oksana doit envoyer un colis.", 2],
-      ["Amina cherche un médicament.", 4],
-      ["Marta veut emprunter un roman.", 0],
-      ["Youssef veut nager le mercredi.", 1],
-      ["Lina cherche un cours de français.", 3],
-    ],
-  },
-];
 
 const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
@@ -937,10 +898,11 @@ const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
 
 function buildParts(level: CELevel, stamp: number): CEPart[] {
   const levelName = levelLabel(level).toLowerCase();
-  const orientationPool = level === "base" ? ORIENTATION_TOPICS : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
+  const orientationPool = level === "base" ? null : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
+  const orientationTextBase = level === "base" ? pickFromPool(CE_ORIENTATION_BASE, `${level}-${stamp}-orientation`) : null;
+  const orientation = orientationPool ? pickFromPool(orientationPool, `${level}-${stamp}-orientation`) : null;
   const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
   const articlePool = level === "base" ? ARTICLE_SERIES : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
-  const orientation = pickFromPool(orientationPool, `${level}-${stamp}-orientation`);
   const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
   const emailLegacy = level !== "base"
     ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
@@ -948,23 +910,36 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
   const article = pickFromPool(articlePool, `${level}-${stamp}-article`);
 
+  const orientationPart: CEPart = orientationTextBase
+    ? {
+        id: "orientation",
+        title: "Lire pour s'orienter",
+        points: 6,
+        layout: "email",
+        meta: { from: orientationTextBase.from, subject: orientationTextBase.subject },
+        body: orientationTextBase.body,
+        image: orientationTextBase.image,
+        questions: buildCeMessageQuestions(orientationTextBase.pool, 6, `${level}-${stamp}-orientation`),
+      }
+    : {
+        id: "orientation",
+        title: "Lire pour s'orienter",
+        points: 6,
+        layout: "orientation",
+        task: {
+          kind: "table",
+          prompt:
+            `${orientation!.context} Associez chaque personne au document qui lui correspond. ` +
+            `Il y a ${orientation!.people.length} personnes et ${orientation!.docs.length} documents : ` +
+            `${orientation!.people.filter(([, a]) => a === -1).length} personnes ne correspondent à aucun document — laissez leur ligne vide.`,
+          documents: orientation!.docs.map(([title, subtitle, body], i) => ({ title, subtitle, body, tone: COLORS[i % COLORS.length]! })),
+          people: orientation!.people.map(([person]) => person as string),
+          answers: orientation!.people.map(([, answer]) => answer as number),
+        },
+      };
+
   return [
-    {
-      id: "orientation",
-      title: "Lire pour s'orienter",
-      points: 6,
-      layout: "orientation",
-      task: {
-        kind: "table",
-        prompt:
-          `${orientation.context} Associez chaque personne au document qui lui correspond. ` +
-          `Il y a ${orientation.people.length} personnes et ${orientation.docs.length} documents : ` +
-          `${orientation.people.filter(([, a]) => a === -1).length} personnes ne correspondent à aucun document — laissez leur ligne vide.`,
-        documents: orientation.docs.map(([title, subtitle, body], i) => ({ title, subtitle, body, tone: COLORS[i % COLORS.length]! })),
-        people: orientation.people.map(([person]) => person as string),
-        answers: orientation.people.map(([, answer]) => answer as number),
-      },
-    },
+    orientationPart,
     {
       id: "email",
       title: "Lire un message",

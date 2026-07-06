@@ -98,6 +98,38 @@ export function buildCeMessageQuestions(
   });
 }
 
+/** Fabrique une question avec mini-cartes (chemins a/b/c). */
+export function ceMapQ(
+  id: string,
+  textQ: string,
+  choices: [string, string, string],
+  correct: number,
+  mapPaths: [string, string, string],
+  fillQ: string,
+  fillAnswer: string,
+  fillAccept?: string[],
+  imageQ = "Quel trajet devez-vous choisir ?",
+): CEMultiQuestion {
+  const labels: [string, string, string] = ["Trajet a", "Trajet b", "Trajet c"];
+  const imageChoices = mapPaths.map((image, i) => ({ label: labels[i]!, image })) as [
+    CEImageChoice,
+    CEImageChoice,
+    CEImageChoice,
+  ];
+  return {
+    id,
+    textQ,
+    textChoices: choices,
+    textCorrect: correct,
+    imageQ,
+    imageChoices,
+    imageCorrect: correct,
+    fillQ,
+    fillAnswer,
+    fillAccept,
+  };
+}
+
 /** Fabrique une question multi-format à partir de libellés de choix. */
 export function ceQ(
   id: string,
