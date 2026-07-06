@@ -1406,27 +1406,31 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
       <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white">
         <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
           <colgroup>
-            <col style={{ width: "52%" }} />
+            <col />
             {part.task.documents.map((_, index) => (
-              <col key={index} style={{ width: `${48 / part.task.documents.length}%` }} />
+              <col key={index} style={{ width: "2.25rem" }} />
             ))}
           </colgroup>
           <thead>
             <tr className="bg-slate-50">
               <th className="border border-[var(--color-border-default)] p-2 text-left">Personnes</th>
-              {part.task.documents.map((_, index) => <th key={index} className="border border-[var(--color-border-default)] px-1 py-2 text-center leading-tight">Doc.<br />{index + 1}</th>)}
+              {part.task.documents.map((_, index) => (
+                <th key={index} className="border border-[var(--color-border-default)] px-0 py-2 text-center font-bold">
+                  {index + 1}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {part.task.people.map((person, row) => (
               <tr key={person}>
-                <td className="border border-[var(--color-border-default)] p-2">{String.fromCharCode(97 + row)}. {person}</td>
+                <td className="border border-[var(--color-border-default)] p-2">{person}</td>
                 {part.task.documents.map((_, col) => {
                   const key = questionKey(part, row);
                   const selected = answers[key] === col;
                   const correct = correction && part.task.answers[row] === col;
                   return (
-                    <td key={col} className="border border-[var(--color-border-default)] p-2 text-center">
+                    <td key={col} className="border border-[var(--color-border-default)] p-1 text-center">
                       <button
                         type="button"
                         onClick={() => !correction && setAnswer(key, col)}
