@@ -1383,7 +1383,7 @@ type Ex12Question = { src: string; answer: number };
 function pickImage(pool: string[], folder: string): Ex12Question {
   const name = pool[Math.floor(Math.random() * pool.length)]!;
   const answer = parseInt(name.split("-").at(-1)!, 10);
-  return { src: `/images/cubes/${folder}/${name}.webp`, answer };
+  return { src: `/assets/math/cubes/${folder}/${name}.webp`, answer };
 }
 
 function generateEx12(): Ex12Question[] { return [pickImage(DECOMPOSE_IMAGES, "decompose")]; }
