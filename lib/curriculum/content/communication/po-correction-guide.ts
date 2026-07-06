@@ -815,7 +815,7 @@ const ARGUMENTATION_THEME_MODELS: Record<string, ArgumentationThemeModel> = {
     counter: { idea: "Internet contient aussi de fausses informations et fait perdre du temps", refutation: "c'est vrai, donc il faut vérifier les sources et limiter certains usages" },
     conclusion: "Internet est positif si l'on garde le contrôle de son temps et de ses choix",
   },
-  "reseaux sociaux": {
+  "réseaux sociaux": {
     thesis: "les réseaux sociaux peuvent être utiles, mais ils doivent être encadrés par des règles personnelles et collectives",
     arguments: [
       { title: "ils gardent le lien", explanation: "ils permettent de suivre les nouvelles de la famille, des amis et des associations", example: "une personne peut voir les photos de ses proches à l'étranger" },
@@ -915,7 +915,7 @@ const ARGUMENTATION_THEME_MODELS: Record<string, ArgumentationThemeModel> = {
     counter: { idea: "la technologie peut isoler et supprimer certains emplois", refutation: "c'est pourquoi il faut accompagner les personnes avec de la formation et garder des contacts humains" },
     conclusion: "il faut donc choisir une technologie utile, compréhensible et responsable",
   },
-  egalite: {
+  égalité: {
     thesis: "l'égalité est nécessaire pour construire une société juste et permettre à chacun de développer ses capacités",
     arguments: [
       { title: "elle respecte la dignité", explanation: "personne ne devrait être limité à cause de son sexe, son origine, son âge ou sa situation sociale", example: "une femme et un homme doivent pouvoir postuler au même emploi avec les mêmes chances" },
@@ -925,7 +925,7 @@ const ARGUMENTATION_THEME_MODELS: Record<string, ArgumentationThemeModel> = {
     counter: { idea: "certains pensent que l'égalité existe déjà", refutation: "mais les écarts de salaire, les préjugés et certaines discriminations montrent qu'il reste du travail" },
     conclusion: "l'égalité demande donc des lois, de l'éducation et des comportements quotidiens respectueux",
   },
-  "regles de vie": {
+  "règles de vie": {
     thesis: "les règles de vie sont nécessaires pour protéger la liberté de chacun et organiser la vie collective",
     arguments: [
       { title: "elles assurent la sécurité", explanation: "sans règles, les comportements dangereux auraient plus de conséquences", example: "respecter les feux rouges protège les piétons et les conducteurs" },

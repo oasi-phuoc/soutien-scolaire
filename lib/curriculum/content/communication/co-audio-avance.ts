@@ -58,7 +58,7 @@ const CONV_2 = `– Tiens Jacqueline, comment vas-tu ? On ne te voit plus au qi-
 – Et qu'est-ce que vous faites exactement ?
 – On commence par l'échauffement, pendant dix minutes environ. L'échauffement est très important. Il permet d'augmenter progressivement les pulsations cardiaques. Ensuite ce sont les exercices proprement dits.
 – Comme quoi ?
-– Des abdos sur des marches, des tractions accroché(e) à une barre, ou encore des pompes sur un banc... S'il y a des escalators, on les monte le plus vite possible...
+– Des abdos sur des marches, des tractions à la barre fixe, ou encore des pompes sur un banc... S'il y a des escaliers, on les monte le plus vite possible...
 – Eh bien, c'est tonique ! Et tout ça pendant une heure ?
 – Oui, et on termine par un moment de stretching et de détente pour retrouver son rythme cardiaque en douceur...
 – Là, tu pourrais faire du qi-gong... Ça n'a pas l'air mal...
@@ -170,7 +170,7 @@ Dans les lieux publics en général, méfiez-vous des mouvements de foule ou des
 
 Dans la rue, évitez de porter ostensiblement appareils de photo ou caméras. Assurez-vous de bien les tenir par leur courroie, même quand vous photographiez ou filmez. Mesdames, veillez à bien fermer votre sac à main, portez-le contre vous avec les fermetures tournées vers l'intérieur. Messieurs, boutonnez les poches intérieures de vos vêtements et ne mettez pas votre portefeuille dans vos poches arrière.
 
-Dans les transports en commun, surtout aux heures de pointe, soyez vigilants, faites particulièrement attention à vos affaires quand vous montez ou descendez des rames de métro ou des bus ou encore dans les escalators.
+Dans les transports en commun, surtout aux heures de pointe, soyez vigilants, faites particulièrement attention à vos affaires quand vous montez ou descendez des rames de métro ou des bus, ou encore dans les escaliers mécaniques.
 
 Dans les cafés ou les restaurants, ne posez pas votre sac par terre, surtout pas dans le passage, même à côté de votre siège. Ne l'accrochez pas non plus au dossier de votre chaise, et surtout, fermez-le ! Placez-le là où il sera difficile à atteindre ou à subtiliser. Méfiez-vous également de toute personne qui vient s'asseoir un peu trop près de vous et qui jette, de façon apparemment négligente, son manteau ou son imperméable sur votre sac. Ne laissez pas non plus votre téléphone portable sur la table, rangez-le.
 

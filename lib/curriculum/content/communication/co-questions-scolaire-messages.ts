@@ -143,7 +143,7 @@ export const SCOLAIRE_MESSAGE_3 = buildPool("base", "scolaire-message-3", [
 export const SCOLAIRE_MESSAGE_4 = buildPool("base", "scolaire-message-4", [
   {
     id: "sm4-q1",
-    textQ: "Mme Touret est professeur de…",
+    textQ: "Mme Touré est professeure de…",
     text: ["Piano", "Guitare", "Violon"],
     textC: 0,
     img: ["Piano", "Guitare", "Violon"],
@@ -153,7 +153,7 @@ export const SCOLAIRE_MESSAGE_4 = buildPool("base", "scolaire-message-4", [
   },
   {
     id: "sm4-q2",
-    textQ: "Mme Touret va arriver à quelle heure ?",
+    textQ: "Mme Touré va arriver à quelle heure ?",
     text: ["18 h", "18 h 15", "18 h 30"],
     textC: 1,
     img: ["18 h", "18 h 15", "18 h 30"],
@@ -164,7 +164,7 @@ export const SCOLAIRE_MESSAGE_4 = buildPool("base", "scolaire-message-4", [
   },
   {
     id: "sm4-q3",
-    textQ: "Mme Touret est en retard parce qu'…",
+    textQ: "Mme Touré est en retard parce qu'…",
     text: ["Elle a raté le bus", "Elle a oublié le cours", "Il y a un problème dans le métro"],
     textC: 2,
     img: ["Bus", "Cours", "Métro"],
@@ -482,7 +482,7 @@ export const SCOLAIRE_MESSAGE_13 = buildPool("base", "scolaire-message-13", [
 export const SCOLAIRE_MESSAGE_14 = buildPool("base", "scolaire-message-14", [
   {
     id: "sm14-q1",
-    textQ: "Quel jour est la fête de l'école ?",
+    textQ: "Quel jour Ethan propose-t-il de répéter ?",
     text: ["Mercredi", "Vendredi", "Samedi"],
     textC: 0,
     img: ["Mercredi", "Vendredi", "Samedi"],
