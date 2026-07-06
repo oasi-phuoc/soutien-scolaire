@@ -28,5 +28,8 @@
   "classe": "cours-classe",
   "couloir": "couloir-ecole-affiches",
   "geographie": "cours-geographie",
-  "gymnase": "pret-chaussures-gymnase"
+  "gymnase": "pret-chaussures-gymnase",
+  "salon": "salon-cuisine-famille",
+  "repas-en-famille": "repas-famille-vacances",
+  "chambre": "chambre-lecture-musique"
 }
