@@ -1,6 +1,6 @@
 {
-  "version": 1783335763689,
-  "totalBytes": 263677137,
+  "version": 1783336571966,
+  "totalBytes": 281280527,
   "routes": [
     "/",
     "/avant-propos",
@@ -576,6 +576,42 @@
     "/assets/expression/co/avance/public/radio-7.mp3",
     "/assets/expression/co/avance/public/radio-8.mp3",
     "/assets/expression/co/avance/public/radio-9.mp3",
+    "/assets/expression/co/base/annonce-21.mp3",
+    "/assets/expression/co/base/annonce-22.mp3",
+    "/assets/expression/co/base/annonce-23.mp3",
+    "/assets/expression/co/base/annonce-24.mp3",
+    "/assets/expression/co/base/annonce-25.mp3",
+    "/assets/expression/co/base/annonce-26.mp3",
+    "/assets/expression/co/base/annonce-27.mp3",
+    "/assets/expression/co/base/annonce-28.mp3",
+    "/assets/expression/co/base/annonce-29.mp3",
+    "/assets/expression/co/base/annonce-30.mp3",
+    "/assets/expression/co/base/conversation-41.mp3",
+    "/assets/expression/co/base/conversation-42.mp3",
+    "/assets/expression/co/base/conversation-43.mp3",
+    "/assets/expression/co/base/conversation-44.mp3",
+    "/assets/expression/co/base/conversation-45.mp3",
+    "/assets/expression/co/base/conversation-46.mp3",
+    "/assets/expression/co/base/message-1.mp3",
+    "/assets/expression/co/base/message-11.mp3",
+    "/assets/expression/co/base/message-13.mp3",
+    "/assets/expression/co/base/message-14.mp3",
+    "/assets/expression/co/base/message-15.mp3",
+    "/assets/expression/co/base/message-16.mp3",
+    "/assets/expression/co/base/message-17.mp3",
+    "/assets/expression/co/base/message-19.mp3",
+    "/assets/expression/co/base/message-2.mp3",
+    "/assets/expression/co/base/message-20.mp3",
+    "/assets/expression/co/base/message-3.mp3",
+    "/assets/expression/co/base/message-4.mp3",
+    "/assets/expression/co/base/message-6.mp3",
+    "/assets/expression/co/base/message-7.mp3",
+    "/assets/expression/co/base/message-8.mp3",
+    "/assets/expression/co/base/message-9.mp3",
+    "/assets/expression/co/base/objet-10.mp3",
+    "/assets/expression/co/base/objet-12.mp3",
+    "/assets/expression/co/base/objet-18.mp3",
+    "/assets/expression/co/base/objet-5.mp3",
     "/assets/expression/co/base/public/annonce-1.mp3",
     "/assets/expression/co/base/public/annonce-10.mp3",
     "/assets/expression/co/base/public/annonce-11.mp3",
@@ -690,6 +726,16 @@
     "/assets/expression/co/base/public/objet-7.mp3",
     "/assets/expression/co/base/public/objet-8.mp3",
     "/assets/expression/co/base/public/objet-9.mp3",
+    "/assets/expression/co/base/radio-31.mp3",
+    "/assets/expression/co/base/radio-32.mp3",
+    "/assets/expression/co/base/radio-33.mp3",
+    "/assets/expression/co/base/radio-34.mp3",
+    "/assets/expression/co/base/radio-35.mp3",
+    "/assets/expression/co/base/radio-36.mp3",
+    "/assets/expression/co/base/radio-37.mp3",
+    "/assets/expression/co/base/radio-38.mp3",
+    "/assets/expression/co/base/radio-39.mp3",
+    "/assets/expression/co/base/radio-40.mp3",
     "/assets/expression/co/moyen/public/annonce-1.1.mp3",
     "/assets/expression/co/moyen/public/annonce-1.2.mp3",
     "/assets/expression/co/moyen/public/annonce-1.3.mp3",
@@ -2651,6 +2697,186 @@
       "revision": "66cb513857841894"
     },
     {
+      "url": "/assets/expression/co/base/annonce-21.mp3",
+      "size": 359933,
+      "revision": "a96cd1d778d8d8e2"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-22.mp3",
+      "size": 300688,
+      "revision": "d1c3ba98ad03ca57"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-23.mp3",
+      "size": 292851,
+      "revision": "cc7467b0c6d38b01"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-24.mp3",
+      "size": 409775,
+      "revision": "10f0dd53bf08601b"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-25.mp3",
+      "size": 296926,
+      "revision": "c036003c1c6c159d"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-26.mp3",
+      "size": 352724,
+      "revision": "212c234101fd0c08"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-27.mp3",
+      "size": 309151,
+      "revision": "0445b7cdb3539be4"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-28.mp3",
+      "size": 343946,
+      "revision": "b3d9d7cc0764462e"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-29.mp3",
+      "size": 329213,
+      "revision": "819605add0b03df2"
+    },
+    {
+      "url": "/assets/expression/co/base/annonce-30.mp3",
+      "size": 330154,
+      "revision": "6a24bf2f6880bb76"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-41.mp3",
+      "size": 982315,
+      "revision": "39de38761a22f69c"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-42.mp3",
+      "size": 643003,
+      "revision": "2fcb54577f85bd8a"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-43.mp3",
+      "size": 976003,
+      "revision": "f6851775abf035b0"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-44.mp3",
+      "size": 683731,
+      "revision": "940800cd97bc9890"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-45.mp3",
+      "size": 677478,
+      "revision": "44c1253827ebb52c"
+    },
+    {
+      "url": "/assets/expression/co/base/conversation-46.mp3",
+      "size": 1048483,
+      "revision": "151e1b089cebe722"
+    },
+    {
+      "url": "/assets/expression/co/base/message-1.mp3",
+      "size": 484381,
+      "revision": "5ef0adf623530edc"
+    },
+    {
+      "url": "/assets/expression/co/base/message-11.mp3",
+      "size": 285328,
+      "revision": "ef63fbcea6cb59b1"
+    },
+    {
+      "url": "/assets/expression/co/base/message-13.mp3",
+      "size": 294732,
+      "revision": "6b09b42afbaf89df"
+    },
+    {
+      "url": "/assets/expression/co/base/message-14.mp3",
+      "size": 258056,
+      "revision": "632820a644406649"
+    },
+    {
+      "url": "/assets/expression/co/base/message-15.mp3",
+      "size": 230471,
+      "revision": "9461384f79c73745"
+    },
+    {
+      "url": "/assets/expression/co/base/message-16.mp3",
+      "size": 248965,
+      "revision": "75c9e35dc9244da4"
+    },
+    {
+      "url": "/assets/expression/co/base/message-17.mp3",
+      "size": 336423,
+      "revision": "7dcd36b8b16987e0"
+    },
+    {
+      "url": "/assets/expression/co/base/message-19.mp3",
+      "size": 283133,
+      "revision": "2a1ed8d01cb2125e"
+    },
+    {
+      "url": "/assets/expression/co/base/message-2.mp3",
+      "size": 324825,
+      "revision": "510b47b469dc7bd9"
+    },
+    {
+      "url": "/assets/expression/co/base/message-20.mp3",
+      "size": 307584,
+      "revision": "0d9fe760a1acb9c9"
+    },
+    {
+      "url": "/assets/expression/co/base/message-3.mp3",
+      "size": 273729,
+      "revision": "25d6b5b6a951f0e5"
+    },
+    {
+      "url": "/assets/expression/co/base/message-4.mp3",
+      "size": 243009,
+      "revision": "3ccb1cc10094b448"
+    },
+    {
+      "url": "/assets/expression/co/base/message-6.mp3",
+      "size": 259623,
+      "revision": "154e22c1018c5fdc"
+    },
+    {
+      "url": "/assets/expression/co/base/message-7.mp3",
+      "size": 290343,
+      "revision": "10b8ddc63993dcee"
+    },
+    {
+      "url": "/assets/expression/co/base/message-8.mp3",
+      "size": 345827,
+      "revision": "ffcde40035ac3717"
+    },
+    {
+      "url": "/assets/expression/co/base/message-9.mp3",
+      "size": 252100,
+      "revision": "47a202e9daafa7ec"
+    },
+    {
+      "url": "/assets/expression/co/base/objet-10.mp3",
+      "size": 278118,
+      "revision": "a78f72feb28d65a3"
+    },
+    {
+      "url": "/assets/expression/co/base/objet-12.mp3",
+      "size": 267460,
+      "revision": "176a5458e8ca15ed"
+    },
+    {
+      "url": "/assets/expression/co/base/objet-18.mp3",
+      "size": 258369,
+      "revision": "9007549ed9815d8c"
+    },
+    {
+      "url": "/assets/expression/co/base/objet-5.mp3",
+      "size": 268400,
+      "revision": "3a2e5b980b9c9e75"
+    },
+    {
       "url": "/assets/expression/co/base/public/annonce-1.mp3",
       "size": 499741,
       "revision": "b89d875a0076d8f3"
@@ -3219,6 +3445,56 @@
       "url": "/assets/expression/co/base/public/objet-9.mp3",
       "size": 281880,
       "revision": "be115ab9b95e5eec"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-31.mp3",
+      "size": 443943,
+      "revision": "85242a1a610fab1e"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-32.mp3",
+      "size": 275297,
+      "revision": "80d517bcdaf7af49"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-33.mp3",
+      "size": 315107,
+      "revision": "f45c6c284909c5f9"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-34.mp3",
+      "size": 329840,
+      "revision": "a756503117b6e4cd"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-35.mp3",
+      "size": 384384,
+      "revision": "39cc6bb2e5a34eb1"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-36.mp3",
+      "size": 304763,
+      "revision": "c7c361330bcc720a"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-37.mp3",
+      "size": 312286,
+      "revision": "7908c3de26303a55"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-38.mp3",
+      "size": 500681,
+      "revision": "08962d9705b4f136"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-39.mp3",
+      "size": 333288,
+      "revision": "909bfbcce118bc91"
+    },
+    {
+      "url": "/assets/expression/co/base/radio-40.mp3",
+      "size": 276551,
+      "revision": "04bebb626735c877"
     },
     {
       "url": "/assets/expression/co/moyen/public/annonce-1.1.mp3",
