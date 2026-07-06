@@ -4,8 +4,8 @@ _Généré le 2026-07-06_
 
 ## Résumé
 
-- Slugs uniques requis : **304**
-- Déjà dans expression/images/ : **304**
+- Slugs uniques requis : **284**
+- Déjà dans expression/images/ : **284**
 - **Manquants** (à générer manga 800×600) : **0**
 
 ## Manquants
@@ -46,25 +46,6 @@ _Aucun._
 | `carte-de-credit` | carte de crédit |
 | `carte-detudiant` | carte d'étudiant |
 | `carte-didentite` | carte d'identité |
-| `ce-message-01` | ce message 01 |
-| `ce-message-02` | ce message 02 |
-| `ce-message-03` | ce message 03 |
-| `ce-message-04` | ce message 04 |
-| `ce-message-05` | ce message 05 |
-| `ce-message-06` | ce message 06 |
-| `ce-message-07` | ce message 07 |
-| `ce-message-08` | ce message 08 |
-| `ce-orientation-01` | ce orientation 01 |
-| `ce-orientation-02` | ce orientation 02 |
-| `ce-orientation-03` | ce orientation 03 |
-| `ce-orientation-04` | ce orientation 04 |
-| `ce-orientation-05` | ce orientation 05 |
-| `ce-orientation-06` | ce orientation 06 |
-| `ce-orientation-07` | ce orientation 07 |
-| `ce-orientation-08` | ce orientation 08 |
-| `ce-orientation-09` | ce orientation 09 |
-| `ce-orientation-10` | ce orientation 10 |
-| `ce-orientation-11` | ce orientation 11 |
 | `chaise` | chaise |
 | `chambre` | Chambre |
 | `cheval` | cheval |
@@ -172,7 +153,6 @@ _Aucun._
 | `la-piscine` | La piscine |
 | `laddition` | L'addition |
 | `lampe` | lampe |
-| `lapres-midi` | L'après-midi |
 | `lavage-des-mains` | Lavage des mains |
 | `lave-linge` | Lave-linge |
 | `le-cinema` | Le cinéma |
