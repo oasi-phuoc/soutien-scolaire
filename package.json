@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "zip:expression-images": "bash scripts/zip-expression-images.sh",
     "mobile:sync": "cap sync",
     "mobile:android": "cap open android",
     "mobile:ios": "cap open ios"
