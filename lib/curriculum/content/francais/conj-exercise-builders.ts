@@ -3,6 +3,10 @@ import type { Exercise, FillItem } from "../../grammar-data";
 /** Nombre de modèles par exercice (pronoms variables + accord). */
 export const CONJ_POOL_SIZE = 15;
 
+/** Exercices négation 9–10 : 5 questions (3 aff. + 2 nég.). */
+export const NEGATION_SHORT_POOL_SIZE = 5;
+const NEGATION_QCM_AFF_COUNT = 3;
+
 /** Pronoms utilisés pour générer les 15 phrases (cycle). */
 export const STANDARD_PRONOUNS = [
   { display: "Je", elide: true },
@@ -186,7 +190,7 @@ export function buildConjugationPool(
     const p = pronounAt(i);
     const tail = tailAt(tails, i);
     const idx = i % STANDARD_PRONOUNS.length;
-    const form = conjugatedForm(v, mode, idx);
+    const answer = verbOnlyAnswer(v, mode, idx);
     const blank = mode === "futur_proche" || mode === "passe_recent"
       ? "___"
       : "___";
@@ -209,41 +213,29 @@ export function buildConjugationPool(
     } else {
       sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${parenthetical}${tail}`;
     }
-    items.push({ sentence, hint: v.infinitive, answer: form });
+    items.push({ sentence, hint: v.infinitive, answer });
   }
   return items;
 }
 
-function conjugatedForm(v: VerbConj, mode: TenseMode, idx: number): string {
+/** Réponse attendue dans le blanc : verbe/auxiliaire seul (sans pronom sujet). */
+function verbOnlyAnswer(v: VerbConj, mode: TenseMode, idx: number): string {
   if (mode === "passe_compose_avoir") {
-    const aux = ["ai", "as", "a", "a", "avons", "avez", "ont", "ont"][idx];
-    const pp = idx >= 6 && v.participeF ? v.participeF : v.participe ?? v.forms[idx];
-    const elide = idx === 0 ? "J'" : `${STANDARD_PRONOUNS[idx].display}${sep(STANDARD_PRONOUNS[idx].display, STANDARD_PRONOUNS[idx].elide)}`;
-    return `${elide.replace(/ $/, "")}${elide.endsWith("'") ? "" : " "}${aux} ${pp}`.trim().replace(/^Je /, "J'").replace(/^J' /, "J'");
+    return ["ai", "as", "a", "a", "avons", "avez", "ont", "ont"][idx];
   }
   if (mode === "passe_compose_etre") {
-    const aux = ["suis", "es", "est", "est", "sommes", "êtes", "sont", "sont"][idx];
-    const pp = idx === 3 || idx === 7 ? (v.participeF ?? v.participe ?? v.forms[idx]) : v.participe ?? v.forms[idx];
-    const p = STANDARD_PRONOUNS[idx];
-    const subj = p.display === "Je" ? "Je" : p.display;
-    return `${subj}${sep(subj, p.elide)}${aux} ${pp}`;
+    return ["suis", "es", "est", "est", "sommes", "êtes", "sont", "sont"][idx];
   }
   if (mode === "futur_proche") {
-    const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx];
-    const p = STANDARD_PRONOUNS[idx];
-    return `${p.display}${sep(p.display, p.elide)}${aller}`;
+    return ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx];
   }
   if (mode === "passe_recent") {
-    const venir = ["viens de", "viens de", "vient de", "vient de", "venons de", "venez de", "viennent de", "viennent de"][idx];
-    const p = STANDARD_PRONOUNS[idx];
-    return `${p.display}${sep(p.display, p.elide)}${venir} ${v.infinitive}`;
+    return ["viens de", "viens de", "vient de", "vient de", "venons de", "venez de", "viennent de", "viennent de"][idx];
   }
   if (v.reflexive) {
-    const p = STANDARD_PRONOUNS[idx];
-    return `${p.display}${sep(p.display, p.elide)}${v.reflexive[idx]} ${v.forms[idx]}`;
+    return `${v.reflexive[idx]} ${v.forms[idx]}`;
   }
-  const p = STANDARD_PRONOUNS[idx];
-  return `${p.display}${sep(p.display, p.elide)}${v.forms[idx]}`;
+  return v.forms[idx];
 }
 
 /** Exercice 3 — singulier → pluriel */
@@ -479,7 +471,7 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
   const qcmPool: Array<{ sentence: string; choices: string[]; correctIdx: number }> = [];
   const fillPool: FillItem[] = [];
 
-  for (let i = 0; i < CONJ_POOL_SIZE; i++) {
+  for (let i = 0; i < NEGATION_SHORT_POOL_SIZE; i++) {
     const v = verbs[i % verbs.length];
     const idx = i % STANDARD_PRONOUNS.length;
     const p = STANDARD_PRONOUNS[idx];
@@ -493,8 +485,12 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
     } else {
       neg = `${negativePresentForm(v, idx)} ${tail}`;
     }
-    qcmPool.push({ sentence: aff.replace(/\.$/, "") + ".", choices: ["Affirmative", "Négative"], correctIdx: 0 });
-    qcmPool.push({ sentence: neg.replace(/\.$/, "") + ".", choices: ["Affirmative", "Négative"], correctIdx: 1 });
+    const isAffirmative = i < NEGATION_QCM_AFF_COUNT;
+    qcmPool.push({
+      sentence: (isAffirmative ? aff : neg).replace(/\.$/, "") + ".",
+      choices: ["Affirmative", "Négative"],
+      correctIdx: isAffirmative ? 0 : 1,
+    });
     const affShort = aff.replace(/\.$/, "");
     fillPool.push({
       sentence: `${affShort}. → ${p.display} ___ ${tail}`,
@@ -510,16 +506,17 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
       instruction: "Sélectionnez la forme de la phrase (affirmative ou négative).",
       toggleChoices: true,
       items: [],
-      pool: qcmPool.slice(0, CONJ_POOL_SIZE),
-      poolSize: CONJ_POOL_SIZE,
+      pool: qcmPool,
+      poolSize: NEGATION_SHORT_POOL_SIZE,
     },
     {
       type: "fill",
       title: "Exercice 10 — Négation",
       instruction: "Mettez la phrase à la forme négative.",
       items: [],
-      pool: fillPool.slice(0, CONJ_POOL_SIZE),
-      poolSize: CONJ_POOL_SIZE,
+      pool: fillPool,
+      poolSize: NEGATION_SHORT_POOL_SIZE,
+      inputWidth: "w-[10.5rem]",
     },
     {
       type: "classify",

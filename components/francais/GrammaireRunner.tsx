@@ -970,8 +970,10 @@ function FillExercise({
         const sentLine1 = nlIdx >= 0 ? rawSentence.slice(0, nlIdx) : arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
         const sentLine2 = nlIdx >= 0 ? rawSentence.slice(nlIdx + 1) : arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
+        const inputWidth = exercise.inputWidth ?? "w-28";
+
         const inputEl = validated && !correct && revealCorrection ? (
-          <span className="inline-flex h-8 w-28 flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle">
+          <span className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
             <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
             <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500 dark:text-amber-400">{item.answer}</span>
           </span>
@@ -981,7 +983,7 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
-            className="inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]"
+            className={`inline-block h-8 ${inputWidth} rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]`}
           />
         );
 
@@ -2012,7 +2014,7 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className={`flex overflow-hidden rounded-xl border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && revealCorrection && !isRight;
@@ -2021,7 +2023,7 @@ function ClassifyExercise({
                   if (active) {
                     cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
-                    cls += "text-amber-500 dark:text-amber-400";
+                    cls += "font-semibold text-amber-500 dark:text-amber-400";
                   } else {
                     cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                   }
