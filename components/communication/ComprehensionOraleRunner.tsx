@@ -411,6 +411,7 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   >(null);
   const isSeekingRef = useRef(false);
   const itemsRef = useRef(items);
+  const itemsKey = items.map((item) => item.audio).join("|");
 
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -426,14 +427,15 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     currentIndexRef.current = currentIndex;
   }, [currentIndex]);
 
+  itemsRef.current = items;
+
   useEffect(() => {
-    itemsRef.current = items;
     stop();
     return () => {
       clearWait();
       audioRef.current?.pause();
     };
-  }, [items]);
+  }, [itemsKey]);
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = playbackRate;
@@ -1146,17 +1148,15 @@ function QuestionBlock({
             )}
           </div>
         </div>
-        {!isConversationImageGrid && (
-          <div className="space-y-3">
-            <AudioSequencePlayer items={part.audioGroup.items} />
-            {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
-              <div key={item.id} className="whitespace-pre-line border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
-                {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
-                {item.transcript}
-              </div>
-            ) : null)}
-          </div>
-        )}
+        <div className="space-y-3">
+          <AudioSequencePlayer items={part.audioGroup.items} />
+          {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
+            <div key={item.id} className="whitespace-pre-line border-l-2 py-1 pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]" style={{ borderColor: ACCENT }}>
+              {part.audioGroup.items.length > 1 && <p className="mb-1 font-bold" style={{ color: ACCENT }}>Audio {item.activity}</p>}
+              {item.transcript}
+            </div>
+          ) : null)}
+        </div>
       </div>
 
       {!part.questions.length && (
@@ -1171,20 +1171,7 @@ function QuestionBlock({
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
             {isConversationImageGrid && question.kind === "conversation_image_grid" && (
-              <div className="space-y-4">
-                <AudioSequencePlayer
-                  items={[
-                    {
-                      id: `base-conversation-${question.activity}`,
-                      level: "base",
-                      category: "conversation",
-                      activity: question.activity,
-                      audio: question.audio,
-                    },
-                  ]}
-                />
-                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
-              </div>
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
             )}
             {!isConversationImageGrid && !isSingleTask && (
               <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
