@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState, useTransition, useRef, useEffect } from "react";
 import {
   deleteInboxMessagesAction,
   type ExpressionInboxRow,
@@ -146,6 +146,20 @@ export function ExpressionMailbox({
     [rows, selectedIds],
   );
 
+  const allSelected = rows.length > 0 && selectedIds.size === rows.length;
+  const someSelected = selectedIds.size > 0 && !allSelected;
+  const selectAllRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (selectAllRef.current) {
+      selectAllRef.current.indeterminate = someSelected;
+    }
+  }, [someSelected]);
+
+  const toggleSelectAll = () => {
+    setSelectedIds(allSelected ? new Set() : new Set(rows.map((row) => row.submission_id)));
+  };
+
   const exitSelection = () => {
     setSelectionMode(false);
     setSelectedIds(new Set());
@@ -272,7 +286,20 @@ export function ExpressionMailbox({
       ) : (
         <section className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white shadow-sm">
           <div className="grid grid-cols-[1.25rem_minmax(5.5rem,7.5rem)_minmax(0,1fr)_minmax(4.5rem,6.5rem)] gap-2 border-b border-[var(--color-border-default)] bg-[var(--color-theme-light)]/40 px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-secondary)] sm:grid-cols-[1.25rem_minmax(6.5rem,8.5rem)_minmax(0,1fr)_minmax(5rem,7rem)] sm:gap-3 sm:px-4 sm:text-[11px]">
-            <span aria-hidden />
+            <div className="flex items-center justify-center">
+              {selectionMode ? (
+                <input
+                  ref={selectAllRef}
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={toggleSelectAll}
+                  aria-label="Tout sélectionner"
+                  className="h-4 w-4 accent-[var(--color-theme)]"
+                />
+              ) : (
+                <span aria-hidden />
+              )}
+            </div>
             <span>Expéditeur</span>
             <span>Objet</span>
             <span className="text-right">Note</span>
