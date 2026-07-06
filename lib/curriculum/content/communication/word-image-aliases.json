@@ -26,5 +26,7 @@
   "education-physique": "cours-eps",
   "bibliotheque": "consultation-bibliotheque",
   "classe": "cours-classe",
-  "couloir": "couloir-ecole-affiches"
+  "couloir": "couloir-ecole-affiches",
+  "geographie": "cours-geographie",
+  "gymnase": "pret-chaussures-gymnase"
 }
