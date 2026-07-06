@@ -5,6 +5,7 @@ import {
   type COQuestionTask,
   type COMultiQuestion,
 } from "./co-questions-helpers";
+import { buildBaseConversationImageGrid } from "./co-questions-base-conversation-image-grid";
 import { CO_CONVERSATION_MATCH } from "./co-questions-moyen-conversation-match";
 import { buildObjetPickTask } from "./co-questions-objet-pick";
 import { CO_QUESTION_POOLS_BASE_MESSAGES } from "./co-questions-base-messages";
@@ -22,11 +23,12 @@ export type {
   COMatchGridTask,
   COObjectPickTask,
   COObjectPickCard,
+  COConversationImageGridTask,
   COQuestionTask,
   RawQ,
 } from "./co-questions-helpers";
 
-export { buildPool, buildCoPartQuestions, buildConversationMatchGrid, buildObjectPickTask, groupSlug } from "./co-questions-helpers";
+export { buildPool, buildCoPartQuestions, buildConversationMatchGrid, buildConversationImageGrid, buildObjectPickTask, groupSlug } from "./co-questions-helpers";
 
 export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
   ...CO_QUESTION_POOLS_BASE_MESSAGES,
@@ -37,6 +39,10 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
 };
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
+  if (group.level === "base" && group.category === "conversation") {
+    const grid = buildBaseConversationImageGrid(group.activity);
+    if (grid) return [grid];
+  }
   const matchDef = CO_CONVERSATION_MATCH[group.id];
   if (matchDef) {
     return [buildConversationMatchGrid(matchDef.situations, matchDef.correctByDialogue, seed)];

@@ -55,7 +55,34 @@ export type COObjectPickTask = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
-export type COQuestionTask = COChoiceTask | COFillTask | COMatchGridTask | COObjectPickTask;
+export type COConversationImageGridCard = {
+  suffix: "a" | "b" | "c" | "d" | "e" | "f";
+  image: string;
+};
+
+export type COConversationImageGridTask = {
+  kind: "conversation_image_grid";
+  activity: string;
+  prompt: string;
+  audio: string;
+  cards: [
+    COConversationImageGridCard,
+    COConversationImageGridCard,
+    COConversationImageGridCard,
+    COConversationImageGridCard,
+    COConversationImageGridCard,
+    COConversationImageGridCard,
+  ];
+  /** 0 = leurre (aucun dialogue), 1–4 = numéro du dialogue */
+  correctByCard: [number, number, number, number, number, number];
+};
+
+export type COQuestionTask =
+  | COChoiceTask
+  | COFillTask
+  | COMatchGridTask
+  | COObjectPickTask
+  | COConversationImageGridTask;
 
 export type RawQ = {
   id: string;
@@ -228,6 +255,53 @@ export function buildConversationMatchGrid(
     columnLabels: ["1", "2", "3", "4"],
     weights: [1.5, 1.5, 2, 2],
     correctByColumn,
+  };
+}
+
+const CONVERSATION_IMAGE_SUFFIXES = ["a", "b", "c", "d", "e", "f"] as const;
+
+export function assertConversationImageGridDef(
+  correctByCard: readonly number[],
+  id?: string,
+) {
+  const prefix = id ? `conversation image grid (${id})` : "conversation image grid";
+  if (correctByCard.length !== 6) {
+    throw new Error(`${prefix}: attendu 6 cartes, trouvé ${correctByCard.length}`);
+  }
+  const used = correctByCard.filter((value) => value > 0);
+  if (used.length !== 4) {
+    throw new Error(`${prefix}: attendu 4 dialogues associés, trouvé ${used.length}`);
+  }
+  if (new Set(used).size !== 4) {
+    throw new Error(`${prefix}: chaque dialogue 1–4 doit être utilisé une seule fois`);
+  }
+  if (![1, 2, 3, 4].every((dialogue) => used.includes(dialogue))) {
+    throw new Error(`${prefix}: les dialogues 1, 2, 3 et 4 doivent tous être présents`);
+  }
+  if (correctByCard.filter((value) => value === 0).length !== 2) {
+    throw new Error(`${prefix}: attendu 2 images leurre, trouvé ${correctByCard.filter((value) => value === 0).length}`);
+  }
+}
+
+export function buildConversationImageGrid(
+  activity: string,
+  correctByCard: [number, number, number, number, number, number],
+): COConversationImageGridTask {
+  assertConversationImageGridDef(correctByCard, activity);
+  const cards = CONVERSATION_IMAGE_SUFFIXES.map((suffix) => ({
+    suffix,
+    image: `/expression/co/base/public/conversation-${activity}-${suffix}.webp`,
+  })) as COConversationImageGridTask["cards"];
+
+  return {
+    kind: "conversation_image_grid",
+    activity,
+    prompt:
+      "Écoutez les 4 dialogues. Pour chaque image, choisissez le numéro du dialogue correspondant " +
+      "(1, 2, 3 ou 4). Deux images ne correspondent à aucun dialogue : laissez « — ».",
+    audio: `/expression/co/base/public/conversation-${activity}.mp3`,
+    cards,
+    correctByCard,
   };
 }
 
