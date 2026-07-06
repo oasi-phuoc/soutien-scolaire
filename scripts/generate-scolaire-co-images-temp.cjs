@@ -73,6 +73,8 @@ function objectScene(slug, seed) {
       return `<path d="M400 140 L560 430 H240 Z" fill="#fbbf24" stroke="#40313a" stroke-width="8"/><circle cx="350" cy="320" r="22" fill="#ef4444"/><circle cx="430" cy="290" r="18" fill="#ef4444"/><circle cx="460" cy="360" r="20" fill="#ef4444"/>`;
     case "sandwich":
       return `<rect x="250" y="220" width="300" height="200" rx="35" fill="#fde68a" stroke="#40313a" stroke-width="8"/><rect x="270" y="250" width="260" height="30" rx="8" fill="#84cc16"/><rect x="270" y="300" width="260" height="30" rx="8" fill="#f87171"/>`;
+    case "gateau":
+      return `<rect x="260" y="280" width="280" height="160" rx="20" fill="#fbbf24" stroke="#40313a" stroke-width="7"/><circle cx="330" cy="340" r="18" fill="#ef4444"/><circle cx="400" cy="320" r="20" fill="#f472b6"/><circle cx="470" cy="345" r="16" fill="#22c55e"/>`;
     case "frere":
     case "soeur":
     case "cousin":
@@ -104,6 +106,22 @@ function objectScene(slug, seed) {
       return `<rect x="200" y="300" width="400" height="110" rx="40" fill="#ef4444" stroke="#40313a" stroke-width="8"/><circle cx="290" cy="410" r="40" fill="#111827"/><circle cx="510" cy="410" r="40" fill="#111827"/><rect x="280" y="250" width="240" height="70" rx="20" fill="#93c5fd"/>`;
     case "cadeau":
       return `<rect x="280" y="250" width="240" height="180" rx="12" fill="#22c55e" stroke="#40313a" stroke-width="7"/><rect x="390" y="250" width="20" height="180" fill="#ef4444"/><path d="M280 310 H520" stroke="#ef4444" stroke-width="16"/>`;
+    case "saxophone":
+      return `<path d="M280 420 Q320 300 360 220 Q400 160 440 220 Q480 300 520 420" fill="#d97706" stroke="#40313a" stroke-width="8"/><ellipse cx="360" cy="200" rx="45" ry="30" fill="#fbbf24" stroke="#40313a" stroke-width="6"/>`;
+    case "cahier":
+      return `<rect x="280" y="170" width="240" height="300" rx="8" fill="#2563eb" stroke="#40313a" stroke-width="7"/><path d="M320 170 V470 M360 170 V470 M400 170 V470" stroke="#fff" stroke-width="3" opacity=".5"/>`;
+    case "regle":
+      return `<rect x="220" y="280" width="360" height="50" rx="6" fill="#22c55e" stroke="#40313a" stroke-width="6"/><text x="400" y="315" font-family="Arial" font-size="28" text-anchor="middle" fill="#fff">cm</text>`;
+    case "geographie":
+      return `<circle cx="400" cy="300" r="130" fill="#38bdf8" stroke="#40313a" stroke-width="7"/><path d="M250 320 Q320 220 400 280 T550 320 Q480 380 400 350 T250 320" fill="#22c55e"/>`;
+    case "francais":
+      return `<rect x="280" y="200" width="240" height="280" rx="12" fill="#fef3c7" stroke="#40313a" stroke-width="7"/><text x="400" y="360" font-family="serif" font-size="96" font-weight="700" text-anchor="middle" fill="#dc2626">é</text>`;
+    case "mathematiques":
+      return `<rect x="260" y="220" width="280" height="200" rx="16" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><text x="400" y="340" font-family="Arial" font-size="72" font-weight="700" text-anchor="middle" fill="#2563eb">2+2</text>`;
+    case "dessin":
+      return `<rect x="300" y="250" width="200" height="160" rx="8" fill="#fff7ed" stroke="#40313a" stroke-width="6"/><circle cx="360" cy="310" r="25" fill="#ef4444"/><path d="M420 280 L480 340" stroke="#111827" stroke-width="8" stroke-linecap="round"/>`;
+    case "salade":
+      return `<ellipse cx="400" cy="340" rx="150" ry="90" fill="#86efac" stroke="#40313a" stroke-width="7"/><circle cx="350" cy="310" r="22" fill="#ef4444"/><circle cx="430" cy="300" r="18" fill="#f97316"/>`;
     default:
       return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
   }
@@ -163,16 +181,43 @@ function situationScene(slug, seed) {
       return `<ellipse cx="400" cy="450" rx="280" ry="70" fill="#22c55e"/>${person(300, 130, color(seed, 1), "#4b2e1f", 0)}${person(500, 140, color(seed, 3), "#b45309", 1)}<circle cx="400" cy="300" r="40" fill="#f97316"/>`;
     case "piscine":
       return `<rect x="160" y="260" width="480" height="180" rx="20" fill="#38bdf8" stroke="#0369a1" stroke-width="8"/><path d="M200 320 Q280 280 360 320 T520 320" fill="none" stroke="#fff" stroke-width="6" opacity=".6"/>`;
+    case "bibliotheque":
+      return `<rect x="180" y="150" width="440" height="320" rx="20" fill="#92400e" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 5 }, (_, i) => `<rect x="${220 + i * 70}" y="190" width="40" height="220" fill="#fef3c7"/>`).join("")}`;
+    case "ecole":
+      return `<rect x="220" y="200" width="360" height="220" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><path d="M400 120 L580 200 H220 Z" fill="#dc2626"/><rect x="350" y="280" width="100" height="140" fill="#64748b"/>`;
+    case "hopital":
+      return `<rect x="200" y="180" width="400" height="260" rx="20" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="360" y="230" width="80" height="80" fill="#ef4444"/><path d="M380 250 H420 M400 230 V270" stroke="#fff" stroke-width="12" stroke-linecap="round"/>`;
+    case "fete-fin-annee":
+      return `<rect x="120" y="360" width="560" height="100" rx="20" fill="#312e81"/>${Array.from({ length: 8 }, (_, i) => `<circle cx="${160 + i * 70}" cy="${180 + (i % 3) * 40}" r="18" fill="${color(seed, i)}"/>`).join("")}${person(400, 100, color(seed, 2), "#5b341d", 1)}`;
+    case "anniversaire":
+      return `<rect x="300" y="320" width="200" height="120" rx="12" fill="#fbbf24" stroke="#40313a" stroke-width="6"/>${Array.from({ length: 5 }, (_, i) => `<rect x="${330 + i * 28}" y="${220 - i * 8}" width="12" height="${40 + i * 12}" fill="${color(seed, i)}" rx="4"/>`).join("")}`;
+    case "jeux":
+      return `<rect x="250" y="280" width="120" height="120" rx="16" fill="#f472b6" stroke="#40313a" stroke-width="6"/><circle cx="480" cy="340" r="55" fill="#60a5fa" stroke="#40313a" stroke-width="6"/><circle cx="400" cy="260" r="35" fill="#facc15"/>`;
+    case "musique":
+      return `<circle cx="320" cy="300" r="70" fill="#111827"/><rect x="390" y="220" width="24" height="180" fill="#111827"/><circle cx="500" cy="280" r="55" fill="#ef4444"/>`;
+    case "professeur-de-francais":
+      return `${person(320, 110, color(seed, 1), "#7c2d12", 0)}<text x="520" y="320" font-family="serif" font-size="72" font-weight="700" fill="#dc2626">é</text>`;
+    case "professeur-de-maths":
+      return `${person(320, 110, color(seed, 3), "#4b2e1f", 1)}<text x="500" y="330" font-family="Arial" font-size="64" font-weight="700" fill="#2563eb">π</text>`;
+    case "devoirs":
+      return `<rect x="260" y="220" width="280" height="200" rx="12" fill="#fff7ed" stroke="#40313a" stroke-width="7"/><path d="M290 270 H510 M290 320 H480 M290 370 H500" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>`;
+    case "dormir":
+      return `${person(400, 200, color(seed, 2), "#5b341d", 0)}<text x="520" y="200" font-family="Arial" font-size="56" text-anchor="middle" fill="#64748b">Zzz</text>`;
+    case "repas":
+      return `<ellipse cx="400" cy="360" rx="180" ry="70" fill="#e2e8f0" stroke="#40313a" stroke-width="6"/><circle cx="340" cy="330" r="35" fill="#f87171"/><circle cx="430" cy="320" r="30" fill="#fbbf24"/>${person(180, 120, color(seed, 1), "#b45309", 2)}`;
+    case "theatre":
+      return `<rect x="120" y="300" width="560" height="140" rx="12" fill="#7c2d12"/><path d="M120 300 Q400 120 680 300" fill="#991b1b" stroke="#40313a" stroke-width="6"/>${person(400, 80, color(seed, 4), "#d97706", 2)}`;
     default:
       return objectScene(slug, seed);
   }
 }
 
 const OBJECTS = [
-  "piano", "guitare", "violon", "ballon", "eau", "casquette", "glace", "pizza", "sandwich",
+  "piano", "guitare", "violon", "ballon", "eau", "casquette", "glace", "pizza", "sandwich", "gateau",
   "frere", "soeur", "cousin", "pere", "mere", "cousine",
   "volleyball", "basketball", "baskets", "pates", "bottes", "creme-solaire", "parapluie",
-  "livre", "television", "train", "voiture", "cadeau",
+  "livre", "television", "train", "voiture", "cadeau", "saxophone", "cahier", "regle",
+  "geographie", "francais", "mathematiques", "dessin", "salade",
 ];
 
 const SITUATIONS = [
@@ -180,6 +225,8 @@ const SITUATIONS = [
   "gouter", "bus", "cours", "metro", "apprentissage", "couloir", "maison",
   "campagne", "mer", "montagne", "promenade", "prof-dessin", "directrice", "secretaire",
   "malade", "absente", "vacances", "cours-sport", "piscine",
+  "bibliotheque", "ecole", "hopital", "fete-fin-annee", "anniversaire", "jeux", "musique",
+  "professeur-de-francais", "professeur-de-maths", "devoirs", "dormir", "repas", "theatre",
 ];
 
 function svgFor(slug, whiteBg) {

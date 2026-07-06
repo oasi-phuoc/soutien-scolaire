@@ -135,7 +135,7 @@ for (const [key, text] of Object.entries(transcripts)) {
   if (cat === "message") entry = questionsForMessage(num, text);
   else if (cat === "annonce") entry = questionsForAnnonce(num, text);
   else entry = questionsForRadio(num, text);
-  if (entry.qs.length >= 3 && !(cat === "message" && ["1", "2", "3", "4", "6", "7", "8", "9"].includes(num))) pools.push(entry);
+  if (entry.qs.length >= 3 && !(cat === "message" && ["1", "2", "3", "4", "6", "7", "8", "9", "11", "13", "14", "15", "16"].includes(num))) pools.push(entry);
 }
 
 let out = `import { buildPool, type COMultiQuestion } from "./co-questions-helpers";

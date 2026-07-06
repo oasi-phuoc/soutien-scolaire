@@ -42,6 +42,7 @@ const CONCRETE_SINGLE = new Set([
   "fleur", "fleurs", "boutique", "fleuriste", "boisson", "infusion", "hygiene", "hygiène",
   "frere", "soeur", "cousin", "pere", "mere", "cousine", "magasins", "parc", "ballon", "casquette", "glace", "pizza", "sandwich",
   "baskets", "bottes", "parapluie", "livre", "television", "train", "voiture", "cadeau", "volleyball", "basketball", "pates",
+  "saxophone", "cahier", "regle", "geographie", "francais", "mathematiques", "dessin", "salade",
 ]);
 
 /** Homographes : mot illustrable mais utilisé comme prénom/nom propre dans CO. */
