@@ -76,3 +76,63 @@ export function mailboxPreview(text: string | null | undefined, max = 90): strin
   if (!normalized) return "";
   return normalized.length > max ? `${normalized.slice(0, max - 1)}…` : normalized;
 }
+
+export type MailboxFilter =
+  | "all"
+  | "unread"
+  | "tasks"
+  | "written"
+  | "oral"
+  | "pending"
+  | "reviewed";
+
+export const MAILBOX_FILTER_LABELS: Record<MailboxFilter, string> = {
+  all: "Tous les messages",
+  unread: "Non lus",
+  tasks: "Devoirs",
+  written: "Productions écrites",
+  oral: "Productions orales",
+  pending: "En attente de correction",
+  reviewed: "Corrigés",
+};
+
+export function filterMailboxRows<T extends {
+  kind?: "expression" | "task";
+  lesson_code: string;
+  status: string;
+  unread: boolean;
+}>(rows: T[], filter: MailboxFilter): T[] {
+  switch (filter) {
+    case "unread":
+      return rows.filter((row) => row.unread);
+    case "tasks":
+      return rows.filter((row) => row.kind === "task");
+    case "written":
+      return rows.filter((row) => row.kind === "expression" && !isOralLessonCode(row.lesson_code));
+    case "oral":
+      return rows.filter((row) => row.kind === "expression" && isOralLessonCode(row.lesson_code));
+    case "pending":
+      return rows.filter((row) => row.kind === "expression" && row.status === "submitted");
+    case "reviewed":
+      return rows.filter((row) => row.kind === "expression" && row.status === "reviewed");
+    default:
+      return rows;
+  }
+}
+
+export function countMailboxRowsByFilter<T extends {
+  kind?: "expression" | "task";
+  lesson_code: string;
+  status: string;
+  unread: boolean;
+}>(rows: T[]): Record<MailboxFilter, number> {
+  return {
+    all: rows.length,
+    unread: filterMailboxRows(rows, "unread").length,
+    tasks: filterMailboxRows(rows, "tasks").length,
+    written: filterMailboxRows(rows, "written").length,
+    oral: filterMailboxRows(rows, "oral").length,
+    pending: filterMailboxRows(rows, "pending").length,
+    reviewed: filterMailboxRows(rows, "reviewed").length,
+  };
+}

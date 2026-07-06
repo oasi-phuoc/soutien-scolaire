@@ -3,7 +3,7 @@ import { complexTargets } from "../utils/complex-grapheme";
 
 // Each word carries the list of TEACHING phonemes it actually contains
 // (phonetically, not orthographically).
-// imagePath → /assets/words/img/{label}.webp
+// imagePath → /assets/words/lecture/{label}.webp
 // audioPath → /assets/words/son/{label}.mp3
 
 export type WordItem = {

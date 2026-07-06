@@ -247,7 +247,7 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/auth/") || url.pathname.startsWith("/admin")) return;
 
   const isNavigation = request.mode === "navigate" || request.destination === "document";
-  const isCoAudio = url.pathname.startsWith("/expression/co/") && /\.(?:mp3|wav|ogg|m4a|aac)$/i.test(url.pathname);
+  const isCoAudio = url.pathname.startsWith("/assets/expression/co/") && /\.(?:mp3|wav|ogg|m4a|aac)$/i.test(url.pathname);
   const isStaticAsset = url.pathname.startsWith("/_next/static/")
     || ["style", "script", "image", "font", "audio", "video"].includes(request.destination);
 

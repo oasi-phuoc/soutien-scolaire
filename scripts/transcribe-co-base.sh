@@ -1,7 +1,7 @@
 #!/bin/bash
 # Transcribe CO.1 base audios (non-message) with whisper tiny
 export PATH="$HOME/.local/bin:$PATH"
-DIR="/workspace/public/expression/co/base/public"
+DIR="/workspace/public/assets/expression/co/base/public"
 OUT="/workspace/lib/curriculum/content/communication/co-transcripts-base.json"
 
 echo "{" > "$OUT"

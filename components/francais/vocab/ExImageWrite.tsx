@@ -6,6 +6,7 @@ import {
   ExerciseProps, pickN, normalizeText,
 } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { resolveVocabImage } from "@/lib/curriculum/vocab-image";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
@@ -77,9 +78,7 @@ export function ExImageWrite({
 
   const imageFolder = theme.imageFolder ?? theme.section;
   function resolveImg(img?: string) {
-    if (!img) return undefined;
-    if (img.startsWith("/")) return img;
-    return `/vocab/images/${imageFolder}/${img}`;
+    return resolveVocabImage(img, imageFolder);
   }
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))

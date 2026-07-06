@@ -5,6 +5,7 @@ import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import { resolveVocabImage } from "@/lib/curriculum/vocab-image";
 
 const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
 
@@ -78,9 +79,7 @@ export function ExImageMatch({
 
   const imageFolder = theme.imageFolder ?? theme.section;
   function resolveImg(img?: string) {
-    if (!img) return undefined;
-    if (img.startsWith("/")) return img;
-    return `/vocab/images/${imageFolder}/${img}`;
+    return resolveVocabImage(img, imageFolder);
   }
 
   const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 1}` : "Exercice 1";

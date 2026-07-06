@@ -2,7 +2,7 @@
  * Propose additional easily-illustrable "lecture" vocabulary across extra
  * themes (métiers, objets, meubles, nature, arbres, école, sport, jouets,
  * insectes, fleurs …) and list the ones that DON'T yet have an image
- * (public/vocab/images + public/assets/words/img + public/vocab-temp).
+ * (public/assets/words/vocab + public/assets/words/lecture + public/vocab-temp).
  *
  * Same resolution rules as lib/curriculum/word-image-resolver.ts.
  *
@@ -14,8 +14,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
-const lectureDir = path.join(root, "public/assets/words/img");
-const vocabDir = path.join(root, "public/vocab/images");
+const lectureDir = path.join(root, "public/assets/words/lecture");
+const vocabDir = path.join(root, "public/assets/words/vocab");
 const tempDir = path.join(root, "public/vocab-temp");
 const outMd = path.join(root, "ref/lecture-extra-missing.md");
 const outJson = "/tmp/missing-lecture-extra.json";
@@ -94,7 +94,7 @@ function main() {
   out.push("");
   out.push(`_Généré par \`scripts/list-lecture-extra.cjs\` — ${new Date().toISOString().slice(0, 10)}_`);
   out.push("");
-  out.push("Mots supplémentaires facilement illustrables (thèmes variés) sans image existante (`public/vocab/images` + `public/assets/words/img` + `public/vocab-temp`).");
+  out.push("Mots supplémentaires facilement illustrables (thèmes variés) sans image existante (`public/assets/words/vocab` + `public/assets/words/lecture` + `public/vocab-temp`).");
   out.push("");
   out.push(`**Total à générer : ${total} mots.**`);
   out.push("");

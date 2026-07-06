@@ -12,7 +12,7 @@ export function getWordAssetSlug(word: string): string {
 }
 
 export function getLectureWordImagePath(word: string): string {
-  return `/assets/words/img/${getWordAssetSlug(word)}.webp`;
+  return `/assets/words/lecture/${getWordAssetSlug(word)}.webp`;
 }
 
 export function hasLectureWordImage(_word: string): boolean {

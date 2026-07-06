@@ -8,7 +8,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   words: [
     {
       word: "table",
-      image: "/vocab/images/V10/table.webp",
+      image: "/assets/words/lecture/table.webp",
       article: "la",
       gender: "f",
       definition: ["Meuble sur lequel on mange."],

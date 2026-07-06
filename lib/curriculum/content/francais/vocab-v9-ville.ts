@@ -8,7 +8,7 @@ export const V9_VILLE_THEME: VocabTheme = {
   words: [
     {
       word: "ville",
-      image: "/vocab/images/V4/ville.webp",
+      image: "/assets/words/lecture/ville.webp",
       article: "la",
       gender: "f",
       group: "Ville",
@@ -177,7 +177,7 @@ export const V9_VILLE_THEME: VocabTheme = {
     },
     {
       word: "centre-ville",
-      image: "/vocab/images/V4/centre-ville.webp",
+      image: "/assets/words/lecture/centre-ville.webp",
       article: "le",
       gender: "m",
       group: "Ville",
@@ -347,7 +347,7 @@ export const V9_VILLE_THEME: VocabTheme = {
     },
     {
       word: "avenue",
-      image: "/vocab/images/V4/avenue.webp",
+      image: "/assets/words/lecture/avenue.webp",
       article: "l'",
       gender: "f",
       group: "Ville",
@@ -432,7 +432,7 @@ export const V9_VILLE_THEME: VocabTheme = {
     },
     {
       word: "place",
-      image: "/vocab/images/V4/place.webp",
+      image: "/assets/words/lecture/place.webp",
       article: "la",
       gender: "f",
       group: "Ville",

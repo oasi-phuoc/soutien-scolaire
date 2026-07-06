@@ -30,8 +30,8 @@ function baseSlug(v) { return v.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 function addFrom(dir, set) { if (!fs.existsSync(dir)) return; for (const f of fs.readdirSync(dir)) if (IMG_RE.test(f)) set.add(baseSlug(f.replace(IMG_RE, ""))); }
 function buildIndex(includeTemp) {
   const s = new Set();
-  addFrom(path.join(root, "public/assets/words/img"), s);
-  const vocab = path.join(root, "public/vocab/images");
+  addFrom(path.join(root, "public/assets/words/lecture"), s);
+  const vocab = path.join(root, "public/assets/words/vocab");
   if (fs.existsSync(vocab)) for (const d of fs.readdirSync(vocab)) { const p = path.join(vocab, d); if (fs.statSync(p).isDirectory()) addFrom(p, s); }
   if (includeTemp) addFrom(path.join(root, "public/vocab-temp"), s);
   return s;

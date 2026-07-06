@@ -253,7 +253,7 @@ function collectCE() {
   }
   for (const level of LEVELS) {
     for (const [rel, label] of paths) {
-      writeAsset(`/expression/ce/${level}/${rel}`, label);
+      writeAsset(`/assets/expression/ce/${level}/${rel}`, label);
     }
   }
   return paths.size * LEVELS.length;
@@ -322,7 +322,7 @@ function collectCO() {
         const labels = parseStringArray(item[2]);
         labels.slice(0, 3).forEach((label, index) => {
           const suffix = ["a", "b", "c"][index];
-          writeAsset(`/expression/co/${level}/${slug}/${qId}-${suffix}.svg`, label);
+          writeAsset(`/assets/expression/co/${level}/${slug}/${qId}-${suffix}.svg`, label);
           count += 1;
         });
       }
@@ -343,7 +343,7 @@ function collectObjectPick() {
     const groupId = match[1];
     const labels = [...match[2].matchAll(/label:\s*"((?:\\"|[^"])*)"/g)].map((m) => m[1].replace(/\\"/g, '"'));
     labels.forEach((label, index) => {
-      writeAsset(`/expression/co/base/objet-pick/${groupId}/${index}.svg`, label);
+      writeAsset(`/assets/expression/co/base/objet-pick/${groupId}/${index}.svg`, label);
       count += 1;
     });
   }

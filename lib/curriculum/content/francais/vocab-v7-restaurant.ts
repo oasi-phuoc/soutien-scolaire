@@ -8,7 +8,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   words: [
     {
       word: "service",
-      image: "/vocab/images/V1/serveur.webp",
+      image: "/assets/words/lecture/serveur.webp",
       article: "le",
       gender: "m",
       feminine: "serveuse",
@@ -93,7 +93,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
     },
     {
       word: "cuisine",
-      image: "/vocab/images/V1/cuisinier.webp",
+      image: "/assets/words/lecture/cuisinier.webp",
       article: "la",
       gender: "f",
       feminine: "cuisinière",

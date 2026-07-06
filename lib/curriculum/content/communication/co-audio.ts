@@ -26,7 +26,7 @@ function item(level: COLevel, category: COAudioCategory, activity: string, filen
     level,
     category,
     activity,
-    audio: `/expression/co/${level}/public/${filename}`,
+    audio: `/assets/expression/co/${level}/public/${filename}`,
     transcript,
   };
 }

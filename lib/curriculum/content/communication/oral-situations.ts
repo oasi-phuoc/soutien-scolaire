@@ -13,7 +13,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-ecole",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-l-ecole.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-l-ecole.webp",
     alt: "À l'école",
     imageDescription: "Un adulte parle avec un professeur à l'école.",
     dialogueContext: "Vous allez à l'école pour parler d'un problème simple. Vous saluez et posez une question.",
@@ -22,7 +22,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-hotel",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-l-hotel.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-l-hotel.webp",
     alt: "À l'hôtel",
     imageDescription: "Une personne arrive à la réception d'un hôtel.",
     dialogueContext: "Vous réservez une chambre à l'hôtel. Vous dites votre nom et demandez le prix.",
@@ -31,7 +31,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-bibliotheque",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-la-bibliotheque.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-la-bibliotheque.webp",
     alt: "À la bibliothèque",
     imageDescription: "Une personne cherche un livre à la bibliothèque.",
     dialogueContext: "Vous allez à la bibliothèque pour prendre un livre. Vous demandez où se trouvent les livres.",
@@ -40,7 +40,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-boucherie",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-la-boucherie.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-la-boucherie.webp",
     alt: "À la boucherie",
     imageDescription: "Un client commande de la viande à la boucherie.",
     dialogueContext: "Vous allez à la boucherie. Vous demandez un morceau de viande et son prix.",
@@ -49,7 +49,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-boulangerie",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-la-boulangerie.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-la-boulangerie.webp",
     alt: "À la boulangerie",
     imageDescription: "Un client achète du pain à la boulangerie.",
     dialogueContext: "Vous allez à la boulangerie acheter du pain. Vous demandez le prix et payez.",
@@ -58,7 +58,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-gare",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-la-gare.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-la-gare.webp",
     alt: "À la gare",
     imageDescription: "Un voyageur demande un billet à la gare.",
     dialogueContext: "Vous êtes à la gare. Vous achetez un billet simple et demandez le quai.",
@@ -67,7 +67,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-poste",
     level: "base",
-    image: "/expression/po/A1/PO.A1_A-la-poste.webp",
+    image: "/assets/expression/po/A1/PO.A1_A-la-poste.webp",
     alt: "À la poste",
     imageDescription: "Une personne envoie un colis à la poste.",
     dialogueContext: "Vous allez à la poste pour envoyer une lettre ou un colis. Vous demandez le prix.",
@@ -76,7 +76,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-accident-velo",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Accident-velo.webp",
+    image: "/assets/expression/po/A1/PO.A1_Accident-velo.webp",
     alt: "Accident de vélo",
     imageDescription: "Une personne est tombée de son vélo.",
     dialogueContext: "Vous avez eu un petit accident avec votre vélo. Vous expliquez ce qui s'est passé.",
@@ -85,7 +85,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-arret-bus",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Arret-de-bus.webp",
+    image: "/assets/expression/po/A1/PO.A1_Arret-de-bus.webp",
     alt: "À l'arrêt de bus",
     imageDescription: "Des personnes attendent le bus à un arrêt.",
     dialogueContext: "Vous attendez le bus. Vous demandez à quelqu'un quel bus prendre pour aller quelque part.",
@@ -94,7 +94,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-cafe",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-cafe.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-cafe.webp",
     alt: "Au café",
     imageDescription: "Un client commande au café.",
     dialogueContext: "Vous entrez dans un café. Vous commandez une boisson et payez.",
@@ -103,7 +103,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-cinema",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-cinema.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-cinema.webp",
     alt: "Au cinéma",
     imageDescription: "Une personne achète un ticket au cinéma.",
     dialogueContext: "Vous allez au cinéma. Vous achetez une place et demandez l'horaire du film.",
@@ -112,7 +112,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-commissariat",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-commissariat.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-commissariat.webp",
     alt: "Au commissariat",
     imageDescription: "Une personne parle à un agent de police au commissariat.",
     dialogueContext: "Vous avez perdu quelque chose. Vous allez au commissariat pour le déclarer.",
@@ -121,7 +121,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-marche",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-marche.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-marche.webp",
     alt: "Au marché",
     imageDescription: "Une personne achète des légumes au marché.",
     dialogueContext: "Vous êtes au marché. Vous achetez des fruits ou des légumes et demandez le prix.",
@@ -130,7 +130,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-restaurant",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-restaurant.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-restaurant.webp",
     alt: "Au restaurant",
     imageDescription: "Un client commande un repas au restaurant.",
     dialogueContext: "Vous êtes au restaurant. Vous regardez le menu et commandez votre repas.",
@@ -139,7 +139,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-urgence",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Au-urgence.webp",
+    image: "/assets/expression/po/A1/PO.A1_Au-urgence.webp",
     alt: "Aux urgences",
     imageDescription: "Une personne arrive aux urgences de l'hôpital.",
     dialogueContext: "Vous allez aux urgences car vous avez mal. Vous expliquez votre problème.",
@@ -148,7 +148,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-coiffeur",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Chez-le-coiffeur.webp",
+    image: "/assets/expression/po/A1/PO.A1_Chez-le-coiffeur.webp",
     alt: "Chez le coiffeur",
     imageDescription: "Une personne chez le coiffeur pour une coupe simple.",
     dialogueContext: "Vous allez chez le coiffeur. Vous demandez une coupe simple.",
@@ -157,7 +157,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-docteur",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Chez-le-docteur.webp",
+    image: "/assets/expression/po/A1/PO.A1_Chez-le-docteur.webp",
     alt: "Chez le docteur",
     imageDescription: "Un patient consulte un médecin.",
     dialogueContext: "Vous n'êtes pas bien. Vous allez chez le docteur et expliquez vos symptômes simples.",
@@ -166,7 +166,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-pediatre",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Chez-le-pediatre.webp",
+    image: "/assets/expression/po/A1/PO.A1_Chez-le-pediatre.webp",
     alt: "Chez le pédiatre",
     imageDescription: "Un parent avec son enfant chez le pédiatre.",
     dialogueContext: "Votre enfant est malade. Vous allez chez le pédiatre et décrivez les symptômes.",
@@ -175,7 +175,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-controle-train",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Controle-train.webp",
+    image: "/assets/expression/po/A1/PO.A1_Controle-train.webp",
     alt: "Contrôle dans le train",
     imageDescription: "Un contrôleur vérifie les billets dans le train.",
     dialogueContext: "Vous êtes dans le train. Le contrôleur vérifie votre billet.",
@@ -184,7 +184,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-coupure-courant",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Coupure-courant.webp",
+    image: "/assets/expression/po/A1/PO.A1_Coupure-courant.webp",
     alt: "Coupure de courant",
     imageDescription: "Une personne téléphone pour signaler une panne d'électricité.",
     dialogueContext: "Il n'y a plus d'électricité chez vous. Vous téléphonez pour signaler la panne.",
@@ -193,7 +193,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-fuite-eau",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Fuite-d-eau.webp",
+    image: "/assets/expression/po/A1/PO.A1_Fuite-d-eau.webp",
     alt: "Fuite d'eau",
     imageDescription: "Il y a une fuite d'eau dans un appartement.",
     dialogueContext: "Il y a une fuite d'eau chez vous. Vous téléphonez pour demander de l'aide.",
@@ -202,7 +202,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-inscription-club",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Inscription-club.webp",
+    image: "/assets/expression/po/A1/PO.A1_Inscription-club.webp",
     alt: "Inscription à un club",
     imageDescription: "Une personne s'inscrit dans un club de sport ou de loisirs.",
     dialogueContext: "Vous voulez vous inscrire dans un club. Vous demandez les informations de base.",
@@ -211,7 +211,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-magasin-chaussure",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Magasin-chaussure.webp",
+    image: "/assets/expression/po/A1/PO.A1_Magasin-chaussure.webp",
     alt: "Magasin de chaussures",
     imageDescription: "Un client essaie des chaussures dans un magasin.",
     dialogueContext: "Vous cherchez des chaussures. Vous demandez votre pointure et essayez une paire.",
@@ -220,7 +220,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-magasin-vetement",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Magasin-vetement.webp",
+    image: "/assets/expression/po/A1/PO.A1_Magasin-vetement.webp",
     alt: "Magasin de vêtements",
     imageDescription: "Une personne choisit des vêtements dans un magasin.",
     dialogueContext: "Vous cherchez un vêtement. Vous demandez votre taille et le prix.",
@@ -229,7 +229,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-mot-de-passe",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Mot-de-passe-oublie.webp",
+    image: "/assets/expression/po/A1/PO.A1_Mot-de-passe-oublie.webp",
     alt: "Mot de passe oublié",
     imageDescription: "Une personne demande de l'aide pour un mot de passe oublié.",
     dialogueContext: "Vous avez oublié votre mot de passe. Vous téléphonez pour demander de l'aide.",
@@ -238,7 +238,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-rendez-vous",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Prendre-rendez-vous.webp",
+    image: "/assets/expression/po/A1/PO.A1_Prendre-rendez-vous.webp",
     alt: "Prendre rendez-vous",
     imageDescription: "Une personne téléphone pour prendre un rendez-vous.",
     dialogueContext: "Vous téléphonez pour prendre un rendez-vous simple. Vous donnez votre nom et choisissez un jour.",
@@ -247,7 +247,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-logement",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Recherche-logement.webp",
+    image: "/assets/expression/po/A1/PO.A1_Recherche-logement.webp",
     alt: "Recherche de logement",
     imageDescription: "Une personne cherche un appartement.",
     dialogueContext: "Vous cherchez un appartement. Vous posez des questions simples sur le loyer et la taille.",
@@ -256,7 +256,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-permis",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Renouveller-permis.webp",
+    image: "/assets/expression/po/A1/PO.A1_Renouveller-permis.webp",
     alt: "Renouveler le permis",
     imageDescription: "Une personne renouvelle son permis de séjour.",
     dialogueContext: "Vous devez renouveler votre permis. Vous demandez les documents nécessaires.",
@@ -265,7 +265,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-telephone-docteur",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Telephone-docteur.webp",
+    image: "/assets/expression/po/A1/PO.A1_Telephone-docteur.webp",
     alt: "Téléphone au docteur",
     imageDescription: "Une personne téléphone au cabinet médical.",
     dialogueContext: "Vous téléphonez chez le docteur car vous êtes malade. Vous expliquez votre problème.",
@@ -274,7 +274,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "a1-hopital",
     level: "base",
-    image: "/expression/po/A1/PO.A1_Visite-hopital.webp",
+    image: "/assets/expression/po/A1/PO.A1_Visite-hopital.webp",
     alt: "Visite à l'hôpital",
     imageDescription: "Une personne visite quelqu'un à l'hôpital.",
     dialogueContext: "Vous venez voir quelqu'un à l'hôpital. Vous demandez où se trouve la chambre.",
@@ -285,7 +285,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "medecin",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO-Medecin.webp",
+    image: "/assets/expression/po/A2-B1/PO-Medecin.webp",
     alt: "Une consultation chez le médecin",
     imageDescription: "Une personne consulte un médecin dans son cabinet.",
     dialogueContext: "Vous ne vous sentez pas bien. Vous consultez un médecin et vous décrivez vos symptômes, leur durée et les médicaments que vous prenez.",
@@ -294,7 +294,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "accident",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Accident.webp",
+    image: "/assets/expression/po/A2-B1/PO_Accident.webp",
     alt: "Un accident de la circulation",
     imageDescription: "Un accident vient de se produire dans la rue.",
     dialogueContext: "Vous avez été témoin d'un accident. Vous téléphonez aux secours et vous expliquez le lieu, ce qui s'est passé et l'état des personnes.",
@@ -303,7 +303,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "bibliotheque",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Bibliotheque.webp",
+    image: "/assets/expression/po/A2-B1/PO_Bibliotheque.webp",
     alt: "Une bibliothèque",
     imageDescription: "Des personnes cherchent et consultent des livres dans une bibliothèque.",
     dialogueContext: "Vous souhaitez vous inscrire à la bibliothèque. Vous demandez les conditions, les horaires et la durée des prêts.",
@@ -312,7 +312,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "boucherie",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Boucherie.webp",
+    image: "/assets/expression/po/A2-B1/PO_Boucherie.webp",
     alt: "Une boucherie",
     imageDescription: "Un client commande des produits dans une boucherie.",
     dialogueContext: "Vous préparez un repas et vous allez à la boucherie. Vous demandez conseil sur la viande, la quantité, le prix et la préparation.",
@@ -321,7 +321,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "boulangerie",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Boulangerie.webp",
+    image: "/assets/expression/po/A2-B1/PO_Boulangerie.webp",
     alt: "Une boulangerie",
     imageDescription: "Une cliente choisit du pain et des pâtisseries dans une boulangerie.",
     dialogueContext: "Vous organisez un petit déjeuner pour plusieurs personnes. Vous commandez du pain et des viennoiseries et vous demandez les prix.",
@@ -330,7 +330,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "bus",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Bus.webp",
+    image: "/assets/expression/po/A2-B1/PO_Bus.webp",
     alt: "Un arrêt de bus",
     imageDescription: "Des voyageurs attendent un bus à un arrêt.",
     dialogueContext: "Vous devez vous rendre dans un quartier que vous ne connaissez pas. Vous demandez au conducteur le trajet, l'arrêt et le prix du billet.",
@@ -339,7 +339,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "cafe",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Cafe.webp",
+    image: "/assets/expression/po/A2-B1/PO_Cafe.webp",
     alt: "Un café",
     imageDescription: "Des clients prennent une boisson dans un café.",
     dialogueContext: "Vous entrez dans un café et vous commandez une boisson et quelque chose à manger. Vous demandez aussi le prix.",
@@ -348,7 +348,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "chaussure",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Chaussure.webp",
+    image: "/assets/expression/po/A2-B1/PO_Chaussure.webp",
     alt: "Un magasin de chaussures",
     imageDescription: "Une personne essaie des chaussures dans un magasin.",
     dialogueContext: "Vous cherchez des chaussures. Vous précisez votre pointure, votre budget et l'usage prévu, puis vous demandez à essayer un modèle.",
@@ -357,7 +357,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "cinema",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Cinema.webp",
+    image: "/assets/expression/po/A2-B1/PO_Cinema.webp",
     alt: "Le guichet d'un cinéma",
     imageDescription: "Des personnes choisissent un film au cinéma.",
     dialogueContext: "Vous êtes en Suisse et vous voulez voir un film. Au cinéma, vous demandez au vendeur des renseignements sur les films du moment, leur genre, leur durée, les horaires et le prix.",
@@ -366,7 +366,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "club",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Club.webp",
+    image: "/assets/expression/po/A2-B1/PO_Club.webp",
     alt: "Un club de loisirs",
     imageDescription: "Des personnes participent à une activité dans un club.",
     dialogueContext: "Vous souhaitez rejoindre un club. Vous demandez quelles activités sont proposées, les horaires, le matériel nécessaire et le prix de l'inscription.",
@@ -375,7 +375,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "coiffeur",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Coiffeur.webp",
+    image: "/assets/expression/po/A2-B1/PO_Coiffeur.webp",
     alt: "Un salon de coiffure",
     imageDescription: "Une cliente explique la coupe souhaitée à une coiffeuse.",
     dialogueContext: "Vous allez chez le coiffeur. Vous décrivez la coupe souhaitée et vous demandez la durée et le prix du service.",
@@ -384,7 +384,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "ecole",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Ecole.webp",
+    image: "/assets/expression/po/A2-B1/PO_Ecole.webp",
     alt: "L'accueil d'une école",
     imageDescription: "Un adulte demande des renseignements à l'accueil d'une école.",
     dialogueContext: "Vous voulez inscrire votre enfant dans une école. Vous demandez les documents nécessaires, les horaires et l'organisation des cours.",
@@ -393,7 +393,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "fuite",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Fuite.webp",
+    image: "/assets/expression/po/A2-B1/PO_Fuite.webp",
     alt: "Une fuite d'eau dans un logement",
     imageDescription: "Une fuite d'eau provoque des dégâts dans un logement.",
     dialogueContext: "Vous constatez une fuite d'eau chez vous. Vous appelez la régie ou un plombier et vous décrivez l'urgence et les dégâts.",
@@ -402,7 +402,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "gare",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Gare.webp",
+    image: "/assets/expression/po/A2-B1/PO_Gare.webp",
     alt: "Le guichet d'une gare",
     imageDescription: "Un voyageur demande un renseignement au guichet d'une gare.",
     dialogueContext: "Vous préparez un voyage en train. Vous demandez les horaires, les correspondances, le quai et le prix du billet.",
@@ -411,7 +411,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "hopital",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Hopital.webp",
+    image: "/assets/expression/po/A2-B1/PO_Hopital.webp",
     alt: "L'accueil d'un hôpital",
     imageDescription: "Une personne se présente à l'accueil d'un hôpital.",
     dialogueContext: "Vous accompagnez un proche à l'hôpital. Vous expliquez la situation et demandez où aller, combien de temps attendre et quels documents présenter.",
@@ -420,7 +420,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "immobilier",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Immobilier.webp",
+    image: "/assets/expression/po/A2-B1/PO_Immobilier.webp",
     alt: "Une agence immobilière",
     imageDescription: "Une personne cherche un logement dans une agence immobilière.",
     dialogueContext: "Vous cherchez un appartement. Vous précisez la ville, le nombre de pièces, votre budget et la date d'entrée souhaitée.",
@@ -429,7 +429,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "pediatre",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Pediatre.webp",
+    image: "/assets/expression/po/A2-B1/PO_Pediatre.webp",
     alt: "Une consultation chez le pédiatre",
     imageDescription: "Un parent consulte un pédiatre avec son enfant.",
     dialogueContext: "Votre enfant est malade. Vous téléphonez au pédiatre, décrivez les symptômes et demandez un rendez-vous rapide.",
@@ -438,7 +438,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "pharmacie",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Pharmacie.webp",
+    image: "/assets/expression/po/A2-B1/PO_Pharmacie.webp",
     alt: "Une pharmacie",
     imageDescription: "Une personne demande conseil à une pharmacienne.",
     dialogueContext: "Vous avez un problème de santé léger. À la pharmacie, vous décrivez vos symptômes et demandez un produit, son prix et son utilisation.",
@@ -447,7 +447,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "police",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Police.webp",
+    image: "/assets/expression/po/A2-B1/PO_Police.webp",
     alt: "Un poste de police",
     imageDescription: "Une personne fait une déclaration dans un poste de police.",
     dialogueContext: "Vous avez perdu ou vous vous êtes fait voler un objet. Vous allez à la police et vous racontez les circonstances en décrivant précisément l'objet.",
@@ -456,7 +456,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "rendez-vous",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_RendezVous.webp",
+    image: "/assets/expression/po/A2-B1/PO_RendezVous.webp",
     alt: "Une prise de rendez-vous",
     imageDescription: "Une personne téléphone pour fixer un rendez-vous.",
     dialogueContext: "Vous téléphonez pour prendre ou déplacer un rendez-vous. Vous expliquez la raison et proposez vos disponibilités.",
@@ -465,7 +465,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "restaurant",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Restaurant.webp",
+    image: "/assets/expression/po/A2-B1/PO_Restaurant.webp",
     alt: "Un restaurant",
     imageDescription: "Des clients commandent un repas dans un restaurant.",
     dialogueContext: "Vous êtes au restaurant. Vous demandez des renseignements sur les plats, signalez une préférence alimentaire et commandez votre repas.",
@@ -474,7 +474,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "telephone",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Telephone.webp",
+    image: "/assets/expression/po/A2-B1/PO_Telephone.webp",
     alt: "Un appel téléphonique à un médecin",
     imageDescription: "Une personne téléphone à un médecin pour parler d'un problème de santé.",
     dialogueContext: "Vous ne vous sentez pas bien et vous téléphonez au cabinet médical. Vous décrivez vos symptômes, dites depuis quand vous les avez et demandez un rendez-vous.",
@@ -483,7 +483,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "train",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Train.webp",
+    image: "/assets/expression/po/A2-B1/PO_Train.webp",
     alt: "Un train en gare",
     imageDescription: "Un train attend les voyageurs dans une gare suisse.",
     dialogueContext: "Vous êtes à Lausanne et vous voulez prendre le train pour Sion. Vous demandez à l'employé des CFF le prix et les réductions, la durée du trajet, les horaires et les correspondances.",
@@ -492,7 +492,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "travail",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Travail.webp",
+    image: "/assets/expression/po/A2-B1/PO_Travail.webp",
     alt: "Un entretien de travail",
     imageDescription: "Une personne participe à un entretien professionnel.",
     dialogueContext: "Vous passez un entretien d'embauche. Vous présentez votre expérience, vos compétences, vos disponibilités et vos motivations.",
@@ -501,7 +501,7 @@ const ORAL_SITUATIONS: OralSituation[] = [
   {
     id: "vetement",
     level: "moyen",
-    image: "/expression/po/A2-B1/PO_Vetement.webp",
+    image: "/assets/expression/po/A2-B1/PO_Vetement.webp",
     alt: "Un magasin de vêtements",
     imageDescription: "Une personne choisit des vêtements dans un magasin.",
     dialogueContext: "Vous cherchez un vêtement pour une occasion particulière. Vous précisez la taille, la couleur, le budget et demandez à l'essayer.",

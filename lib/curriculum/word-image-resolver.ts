@@ -281,23 +281,23 @@ export function isImageableLabel(label: string | undefined | null): boolean {
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
 export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
-    path.startsWith("/vocab/images/")
-    || path.startsWith("/assets/words/img/")
-    || path.startsWith("/expression/images/")
-    || path.startsWith("/expression/")
+    path.startsWith("/assets/words/lecture/")
+    || path.startsWith("/assets/words/vocab/")
+    || path.startsWith("/assets/expression/images/")
+    || path.startsWith("/assets/expression/")
   );
 }
 
 const EXPRESSION_CO_CURATED =
-  /^\/expression\/co\/base\/public\/conversation-\d+-[a-f]\.webp$/;
+  /^\/assets\/expression\/images\/conversation-\d+-[a-f]\.webp$/;
 const EXPRESSION_OBJET_PICK =
-  /^\/expression\/co\/base\/objet-pick\/[^/]+\/\d+\.webp$/;
+  /^\/assets\/expression\/images\/[^/]+\.webp$/;
 
 const EXPRESSION_CE_BASE =
-  /^\/expression\/ce\/base\//;
+  /^\/assets\/expression\/ce\/base\//;
 
 const EXPRESSION_IMAGES =
-  /^\/expression\/images\/[^/]+\.webp$/;
+  /^\/assets\/expression\/images\/[^/]+\.webp$/;
 
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
@@ -307,7 +307,7 @@ export function ceCoImageSource(path?: string | null, label?: string): string | 
     || EXPRESSION_OBJET_PICK.test(path)
     || EXPRESSION_CE_BASE.test(path)
   )) return path;
-  if (path?.startsWith("/assets/words/img/") || path?.startsWith("/vocab/images/")) return path;
+  if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
   if (label && isImageableLabel(label)) return resolveWordImage(label);
   return null;
 }
