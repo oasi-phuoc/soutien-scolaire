@@ -300,7 +300,7 @@ const EXPRESSION_CE_BASE =
   /^\/assets\/expression\/ce\/base\//;
 
 const EXPRESSION_IMAGES_TEMP =
-  /^\/assets\/expression\/images-temp\/[^/]+\.webp$/;
+  /^\/assets\/expression\/images-temp\/[^/]+\.(webp|png)$/;
 
 const EXPRESSION_IMAGES =
   /^\/assets\/expression\/images\/[^/]+\.webp$/;

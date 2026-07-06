@@ -9,6 +9,28 @@ const path = require("path");
 const sharp = require("sharp");
 
 const outDir = path.join(process.cwd(), "public/assets/expression/images-temp");
+const extraObjectScene = require("./objet-scenes-manga-extra.cjs");
+const opPickFile = path.join(
+  process.cwd(),
+  "lib/curriculum/content/communication/co-questions-objet-pick.ts",
+);
+
+function slugifyLabel(label) {
+  return label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['']/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+}
+
+function loadObjectPickSlugs() {
+  const src = fs.readFileSync(opPickFile, "utf8");
+  const slugs = new Set();
+  for (const m of src.matchAll(/label:\s*"([^"]+)"/g)) slugs.add(slugifyLabel(m[1]));
+  return slugs;
+}
 
 function hash(value) {
   let h = 2166136261;
@@ -54,6 +76,8 @@ function person(x, y, shirt, hair, pose = 0) {
 }
 
 function objectScene(slug, seed) {
+  const extra = extraObjectScene(slug, seed, color, person);
+  if (extra) return extra;
   switch (slug) {
     case "piano":
       return `<rect x="220" y="180" width="360" height="260" rx="12" fill="#1f2937" stroke="#40313a" stroke-width="8"/><rect x="250" y="420" width="300" height="55" rx="8" fill="#92400e"/><rect x="260" y="200" width="280" height="28" fill="#f8fafc"/>`;
@@ -498,20 +522,41 @@ function svgFor(slug, whiteBg) {
 </svg>`;
 }
 
+function isObjectSlug(slug, objectPickSlugs) {
+  if (slug.startsWith("conversation-")) return false;
+  if (objectPickSlugs.has(slug)) return true;
+  return OBJECTS.includes(slug);
+}
+
 async function main() {
   fs.mkdirSync(outDir, { recursive: true });
+  const objectPickSlugs = loadObjectPickSlugs();
+  const allSlugs = new Set([...OBJECTS, ...SITUATIONS, ...objectPickSlugs]);
+  for (const file of fs.readdirSync(outDir)) {
+    if (/\.(webp|png)$/i.test(file)) allSlugs.add(file.replace(/\.(webp|png)$/i, ""));
+  }
+
+  for (const file of fs.readdirSync(outDir)) {
+    if (/\.(webp|png)$/i.test(file)) fs.unlinkSync(path.join(outDir, file));
+  }
+
+  let objects = 0;
+  let situations = 0;
   let made = 0;
-  for (const slug of OBJECTS) {
-    const out = path.join(outDir, `${slug}.webp`);
-    await sharp(Buffer.from(svgFor(slug, true))).resize(800, 600).webp({ quality: 85 }).toFile(out);
+  for (const slug of allSlugs) {
+    const whiteBg = isObjectSlug(slug, objectPickSlugs);
+    const out = path.join(outDir, `${slug}.png`);
+    await sharp(Buffer.from(svgFor(slug, whiteBg))).resize(800, 600).png().toFile(out);
     made++;
+    if (whiteBg) objects++;
+    else situations++;
+    if (made % 25 === 0) console.log(`${made}…`);
   }
-  for (const slug of SITUATIONS) {
-    const out = path.join(outDir, `${slug}.webp`);
-    await sharp(Buffer.from(svgFor(slug, false))).resize(800, 600).webp({ quality: 85 }).toFile(out);
-    made++;
-  }
-  console.log(`Generated ${made} images → ${path.relative(process.cwd(), outDir)}`);
+  console.log(
+    `Generated ${made} PNG 800×600 (manga) → ${path.relative(process.cwd(), outDir)}`,
+  );
+  console.log(`  objets fond blanc: ${objects}`);
+  console.log(`  scènes: ${situations}`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

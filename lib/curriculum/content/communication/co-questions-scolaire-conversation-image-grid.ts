@@ -2,7 +2,7 @@ import { buildConversationImageGrid } from "./co-questions-helpers";
 
 /**
  * Association image ↔ dialogue — CO base scolaire (exercices 41–46).
- * Images : public/assets/expression/images-temp/conversation-{activité}-{a|b|c|d|e|f}.webp
+ * Images : public/assets/expression/images-temp/conversation-{activité}-{a|b|c|d|e|f}.png
  */
 const CORRECT_BY_CARD: Record<string, [number, number, number, number, number, number]> = {
   /** Maths (d), retard musique (f), voiture (a), distributeur (b) — leurre : cantine (c), ballon (e). */

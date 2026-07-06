@@ -287,9 +287,10 @@ export function buildConversationImageGrid(
   imageDir = "/assets/expression/images",
 ): COConversationImageGridTask {
   assertConversationImageGridDef(correctByCard, activity);
+  const imageExt = imageDir.includes("images-temp") ? "png" : "webp";
   const entries = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
     suffix,
-    image: `${imageDir}/conversation-${activity}-${suffix}.webp`,
+    image: `${imageDir}/conversation-${activity}-${suffix}.${imageExt}`,
     correct: correctByCard[index]!,
   }));
   const shuffled = seededShuffle(entries, seed);

@@ -15,7 +15,7 @@ function slugify(label: string): string {
 }
 
 function opImg(label: string): string {
-  return `/assets/expression/images-temp/${slugify(label)}.webp`;
+  return `/assets/expression/images-temp/${slugify(label)}.png`;
 }
 
 function opCards(
