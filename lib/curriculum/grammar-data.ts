@@ -99,6 +99,7 @@ import { A2_GR_HYPOTHESE_FUTUR } from "./content/francais/grammaire-r7.5-hypothe
 import { GR_MARQUEURS_TEMPS_COMPLET } from "./content/francais/grammaire-r9.1-marqueurs-temps";
 import { A2_GR_BON_BIEN } from "./content/francais/grammaire-r8.2-bon-bien";
 import { A2_GR_SUPERLATIF } from "./content/francais/grammaire-r8.3-superlatif";
+import { A2_GR_ADVERBES } from "./content/francais/grammaire-r10.5-adverbes";
 
 import { A1_GR_L14 } from "./content/francais/grammaire-r3.1";
 import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
@@ -195,6 +196,7 @@ const REORGANIZED_CODES: Record<string, string> = {
   "a2-gr-bon-bien-meilleur-mieux": "R10.2",
   "a2-gr-superlatif": "R10.3",
   "a2-gr-l42": "R10.4",
+  "a2-gr-adverbes-types": "R10.5",
 };
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
@@ -273,6 +275,7 @@ const BASE_GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_HYPOTHESE_FUTUR,
   A2_GR_BON_BIEN,
   A2_GR_SUPERLATIF,
+  A2_GR_ADVERBES,
   GR_MARQUEURS_TEMPS_COMPLET,
 
   A2_GR_L07,

@@ -57,16 +57,21 @@ export const A2_CONJ_L08: ConjLesson = {
       transLabel: { en: "Spelling particularities", ar: "خصوصيات إملائية", fa: "ویژگی‌های املایی", ti: "ናይ ኣጸሓሕፋ ፍሉያት", uk: "Орфографічні особливості" },
       items: [
         "Les verbes en -re perdent leur e final : prendre → je prendrai.",
+        "Les verbes en -yer : le y devient i (nettoyer → je nettoierai), sauf envoyer → j'enverrai.",
         "Certains verbes en -eler et -eter doublent la consonne : appeler → j'appellerai ; jeter → je jetterai.",
-        "D'autres prennent un accent grave : acheter → j'achèterai.",
+        "Exception : acheter → j'achèterai.",
       ],
       transItems: {
-        en: ["Verbs in -re lose their final e: prendre → je prendrai.", "Some verbs in -eler and -eter double the consonant: appeler → j'appellerai; jeter → je jetterai.", "Others take a grave accent: acheter → j'achèterai."],
-        ar: ["تفقد الأفعال في -re الـ e النهائية: prendre → je prendrai.", "بعض الأفعال في -eler و -eter تضاعف الحرف الساكن: appeler → j'appellerai ؛ jeter → je jetterai.", "أخرى تأخذ لكنة (accent grave): acheter → j'achèterai."],
-        fa: ["افعال -re حرف e پایانی خود را از دست می‌دهند: prendre → je prendrai.", "برخی افعال -eler و -eter صامت را دو برابر می‌کنند: appeler → j'appellerai ؛ jeter → je jetterai.", "برخی دیگر آکسان گرَو می‌گیرند: acheter → j'achèterai."],
-        ti: ["ግስታት -re ናይ መወዳእታ e ይስእኑ: prendre → je prendrai.", "ገሊኦም ግስታት -eler ከምኡ'ውን -eter ነቲ ተነባቢ የብዝሑ: appeler → j'appellerai ; jeter → je jetterai.", "ካልኦት ኣክሰን ግራቭ ይወስዱ: acheter → j'achèterai."],
-        uk: ["Дієслова на -re втрачають кінцеве e: prendre → je prendrai.", "Деякі дієслова на -eler та -eter подвоюють приголосний: appeler → j'appellerai; jeter → je jetterai.", "Інші отримують accent grave: acheter → j'achèterai."],
+        en: ["Verbs in -re lose their final e: prendre → je prendrai.", "-yer verbs: y becomes i (nettoyer → je nettoierai), except envoyer → j'enverrai.", "Some verbs in -eler and -eter double the consonant: appeler → j'appellerai; jeter → je jetterai.", "Exception: acheter → j'achèterai."],
+        ar: ["تفقد الأفعال في -re الـ e النهائية: prendre → je prendrai.", "أفعال -yer: y تصبح i، ما عدا envoyer → j'enverrai.", "بعض الأفعال في -eler و -eter تضاعف الحرف الساكن.", "استثناء: acheter → j'achèterai."],
+        fa: ["افعال -re حرف e پایانی خود را از دست می‌دهند: prendre → je prendrai.", "افعال -yer: y به i تبدیل می‌شود، به‌جز envoyer → j'enverrai.", "برخی افعال -eler و -eter صامت را دو برابر می‌کنند.", "استثنا: acheter → j'achèterai."],
+        ti: ["ግስታት -re ናይ መወዳእታ e ይስእኑ: prendre → je prendrai.", "ግስታት -yer: y ናብ i ትቕየር፣ ሓደ ሓደ ከም envoyer → j'enverrai ግድን።", "ገሊኦም ግስታት -eler ከምኡ'ውን -eter ነቲ ተነባቢ የብዝሑ።", "ብዘይካ: acheter → j'achèterai."],
+        uk: ["Дієслова на -re втрачають кінцеве e: prendre → je prendrai.", "Дієслова на -yer: y стає i, крім envoyer → j'enverrai.", "Деякі дієслова на -eler та -eter подвоюють приголосний.", "Виняток: acheter → j'achèterai."],
       },
+    },
+    {
+      type: "note",
+      text: "Attention : il s'agit de généralités. Il y a des exceptions (par exemple : courir → je courrai). Quand vous apprenez un nouveau verbe, vérifiez sa forme au futur simple.",
     },
   ],
   exercises: [
