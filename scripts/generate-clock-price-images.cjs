@@ -87,9 +87,10 @@ function priceSvg(display) {
 </svg>`;
 }
 
-// ---- collect distinct labels from CO pools --------------------------------
+// ---- collect distinct labels from CO pools + CE image MCQ ---------------
 const CO_FILES = ["co-questions-base-messages.ts","co-questions-base-other.ts","co-questions-moyen.ts","co-questions-avance.ts","co-questions-avance-extra.ts"];
-function distinctImgLabels() {
+
+function distinctLabelsFromCo() {
   const set = new Set();
   for (const file of CO_FILES) {
     const src = read(`${commDir}/${file}`);
@@ -100,9 +101,18 @@ function distinctImgLabels() {
   return [...set];
 }
 
+function distinctLabelsFromCe() {
+  const set = new Set();
+  const src = read("components/communication/ComprehensionEcritRunner.tsx");
+  for (const m of src.matchAll(/choices:\s*\[([^\]]*)\]/g)) {
+    for (const s of m[1].matchAll(/label:\s*"([^"]+)"/g)) set.add(s[1]);
+  }
+  return [...set];
+}
+
 async function main() {
   fs.mkdirSync(outDir, { recursive: true });
-  const labels = distinctImgLabels();
+  const labels = [...new Set([...distinctLabelsFromCo(), ...distinctLabelsFromCe()])];
 
   const clocks = new Map(); // slug -> {h,m}
   const prices = new Map(); // slug -> display
@@ -124,7 +134,7 @@ async function main() {
     made++;
   }
 
-  console.log(`Distinct CO image labels: ${labels.length}`);
+  console.log(`Distinct CO+CE labels scanned: ${labels.length}`);
   console.log(`Clock images: ${clocks.size}`);
   console.log(`Price images: ${prices.size}`);
   console.log(`Total generated: ${made} → ${path.relative(root, outDir)}`);
