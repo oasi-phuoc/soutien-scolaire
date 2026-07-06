@@ -23,5 +23,8 @@
   "cantine": "dejeuner-cantine",
   "distributeur": "distributeur-automatique",
   "eps": "cours-eps",
-  "education-physique": "cours-eps"
+  "education-physique": "cours-eps",
+  "bibliotheque": "consultation-bibliotheque",
+  "classe": "cours-classe",
+  "couloir": "couloir-ecole-affiches"
 }
