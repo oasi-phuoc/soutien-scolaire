@@ -78,6 +78,60 @@ export const A1_GR_INTERRO: GrammarLesson = {
       },
       noBulletItems: [0, 1, 2],
     },
+    { type: "heading", text: "Les trois formes d'interrogation", sub: true, accent: true, trans: { en: "The three question forms", ar: "الأشكال الثلاثة للاستفهام", fa: "سه شکل پرسشی", ti: "ሰለስተ ቅርጽታት ሕቶ", uk: "Три форми питання" } },
+    {
+      type: "grid",
+      headers: ["Forme", "Question fermée", "Question ouverte", "Usage"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Inversion{/a} verbe-sujet", "{a}As-tu{/a} faim ?", "Quand {a}viens-tu{/a} dîner chez moi ?", "Plutôt à l'écrit ou à l'oral formel"],
+        ["Avec {a}est-ce que{/a}", "{a}Est-ce que{/a} tu as faim ?", "Quand {a}est-ce que{/a} tu viens dîner chez moi ?", "À l'oral comme à l'écrit, informel ou formel"],
+        ["{a}Forme orale{/a} (intonation ↗)", "Tu as faim {a}↗{/a} ?", "Tu viens dîner chez moi {a}↗{/a} ?", "Plutôt à l'oral ou dans un message informel"],
+      ],
+      transHeaders: {
+        en: ["Form", "Closed question", "Open question", "Usage"],
+        ar: ["الشكل", "سؤال مغلق", "سؤال مفتوح", "الاستخدام"],
+        fa: ["شکل", "سوال بسته", "سوال باز", "کاربرد"],
+        ti: ["ቅርጺ", "ዕጹው ሕቶ", "ክፉት ሕቶ", "ጥቕሚ"],
+        uk: ["Форма", "Закрите питання", "Відкрите питання", "Вживання"],
+      },
+    },
+    {
+      type: "grammar_link",
+      text: "Voir aussi la leçon « Les questions fermées » pour approfondir l'inversion et le registre formel.",
+      href: "/francais/grammaire/a2-gr-l07",
+    },
+    {
+      type: "highlight",
+      label: "Attention — épreuve orale DELF A1",
+      items: [
+        "Variez vos formulations : inversion verbe-sujet, {a}est-ce que{/a} et forme orale.",
+        "Les questions {a}quel / quelle / quels / quelles{/a} ont une formulation unique : {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}",
+      ],
+      transLabel: { en: "Note — DELF A1 oral exam", ar: "انتباه — الاختبار الشفوي DELF A1", fa: "توجه — آزمون شفاهی DELF A1", ti: "ኣቓልቦ — ናይ DELF A1 ኣፋዊ ፈተነ", uk: "Увага — усний іспит DELF A1" },
+      transItems: {
+        en: ["Vary your question forms: verb-subject inversion, {a}est-ce que{/a} and the oral form.", "Questions with {a}quel / quelle / quels / quelles{/a} have a single form: {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}"],
+        ar: ["نوّع صيغ الاستفهام: القلب، {a}est-ce que{/a} والصيغة الشفوية.", "أسئلة {a}quel / quelle / quels / quelles{/a} لها صيغة واحدة: {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}"],
+        fa: ["فرمول‌بندی‌های خود را متنوع کنید: وارونگی، {a}est-ce que{/a} و شکل گفتاری.", "سوالات با {a}quel / quelle / quels / quelles{/a} یک شکل دارند: {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}"],
+        ti: ["ናይ ሕቶ ቅርጽታት ቀይር፦ ምግልባጥ፣ {a}est-ce que{/a} ከምኡ'ውን ኣፋዊ ቅርጺ።", "ሕቶታት ብ{a}quel / quelle / quels / quelles{/a} ሓደ ቅርጺ ኣለዎም፦ {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}"],
+        uk: ["Варіюйте форми питань: інверсію, {a}est-ce que{/a} та усну форму.", "Питання з {a}quel / quelle / quels / quelles{/a} мають одну форму: {a}Quel est ton nom ?{/a} · {a}Quelle est votre adresse ?{/a}"],
+      },
+    },
+    {
+      type: "plain_list",
+      label: "Répondre à une question",
+      items: [
+        "Question {a}fermée{/a} → réponse par {a}oui{/a} ou {a}non{/a} : Oui, j'ai faim.",
+        "Question {a}ouverte{/a} → réponse variable selon le mot interrogatif ({a}pourquoi ? quand ? où ? comment ? qui ?{/a}) : Je viens demain. · Je viens dîner à 20 h.",
+      ],
+      transItems: {
+        en: ["{a}Closed{/a} question → answer with {a}oui{/a} or {a}non{/a}: Oui, j'ai faim. (Yes, I am hungry.)", "{a}Open{/a} question → answer varies with the question word ({a}pourquoi ? quand ? où ? comment ? qui ?{/a}): Je viens demain. (I am coming tomorrow.) · Je viens dîner à 20 h. (I am coming for dinner at 8 p.m.)"],
+        ar: ["سؤال {a}مغلق{/a} ← الإجابة بـ {a}oui{/a} أو {a}non{/a}: Oui, j'ai faim.", "سؤال {a}مفتوح{/a} ← إجابة متنوعة حسب أداة الاستفهام: Je viens demain. · Je viens dîner à 20 h."],
+        fa: ["سوال {a}بسته{/a} ← پاسخ با {a}oui{/a} یا {a}non{/a}: Oui, j'ai faim.", "سوال {a}باز{/a} ← پاسخ بسته به کلمه‌ی پرسشی: Je viens demain. · Je viens dîner à 20 h."],
+        ti: ["{a}ዕጹው{/a} ሕቶ → መልሲ ብ{a}oui{/a} ወይ {a}non{/a}: Oui, j'ai faim.", "{a}ክፉት{/a} ሕቶ → መልሲ ከም ናይ ሕቶ ቃል ይተለዋወጥ: Je viens demain. · Je viens dîner à 20 h."],
+        uk: ["{a}Закрите{/a} питання → відповідь {a}oui{/a} або {a}non{/a}: Oui, j'ai faim.", "{a}Відкрите{/a} питання → відповідь залежить від питального слова: Je viens demain. · Je viens dîner à 20 h."],
+      },
+    },
   ],
   exercises: [
     // ── Exercise 1 — QCM toggle: Affirmative / Interrogative ─────────────────

@@ -52,6 +52,40 @@ export const A1_GR_L04: GrammarLesson = {
       noBulletItems: [0, 1, 2],
       inlineArrows: true,
     },
+    {
+      type: "plain_list",
+      items: [
+        "Ils désignent aussi une {a}catégorie générale{/a} de choses ou de personnes.",
+        "Exemples : {a}Les{/a} chiens sont des animaux fidèles. · {a}Les{/a} Canadiens sont bilingues.",
+      ],
+      transItems: {
+        en: ["They also refer to a {a}general category{/a} of things or people.", "Examples: {a}Les{/a} chiens sont des animaux fidèles. (Dogs are loyal animals.) · {a}Les{/a} Canadiens sont bilingues. (Canadians are bilingual.)"],
+        ar: ["تشير أيضاً إلى {a}فئة عامة{/a} من الأشياء أو الأشخاص.", "أمثلة: {a}Les{/a} chiens sont des animaux fidèles. · {a}Les{/a} Canadiens sont bilingues."],
+        fa: ["همچنین به {a}دسته‌ی کلی{/a} اشاره دارند.", "مثال‌ها: {a}Les{/a} chiens sont des animaux fidèles. · {a}Les{/a} Canadiens sont bilingues."],
+        ti: ["ከምኡ'ውን {a}ሓፈሻዊ ጉጅለ{/a} ዝሕብሩ።", "ኣብነታት፦ {a}Les{/a} chiens sont des animaux fidèles. · {a}Les{/a} Canadiens sont bilingues."],
+        uk: ["Вони також позначають {a}загальну категорію{/a} речей або людей.", "Приклади: {a}Les{/a} chiens sont des animaux fidèles. · {a}Les{/a} Canadiens sont bilingues."],
+      },
+    },
+    { type: "heading", text: "Contractions avec les prépositions", sub: true, accent: true, trans: { en: "Contractions with prepositions", ar: "الاختصارات مع حروف الجر", fa: "انقباض با حروف اضافه", ti: "ምስ ቅድመ-ሓበሬታ ዝተጠቓለለ", uk: "Скорочення з прийменниками" } },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}",
+        "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}",
+        "Exemples : Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur.",
+      ],
+      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
+      transItems: {
+        en: ["à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}", "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}", "Examples: Je parle {a}au{/a} professeur. (I speak to the teacher.) · Je parle {a}du{/a} professeur. (I speak about the teacher.)"],
+        ar: ["à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}", "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}", "أمثلة: Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur."],
+        fa: ["à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}", "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}", "مثال‌ها: Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur."],
+        ti: ["à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}", "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}", "ኣብነታት፦ Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur."],
+        uk: ["à + {a}le{/a} → {a}au{/a} · à + {a}les{/a} → {a}aux{/a}", "de + {a}le{/a} → {a}du{/a} · de + {a}les{/a} → {a}des{/a}", "Приклади: Je parle {a}au{/a} professeur. · Je parle {a}du{/a} professeur."],
+      },
+      noBulletItems: [0, 1, 2],
+      inlineArrows: true,
+    },
     { type: "heading", text: "Les articles indéfinis", trans: { en: "Indefinite articles", ar: "النكرات", fa: "حروف تعریف نامعین", ti: "ዘይተፈልጠ ዓንቀጽ", uk: "Неозначені артиклі" } },
     {
       type: "plain_list",
