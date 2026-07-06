@@ -154,6 +154,28 @@ function objectScene(slug, seed) {
       return `<path d="M300 240 L360 200 H440 L500 240 V430 H300 Z" fill="#7c3aed" stroke="#40313a" stroke-width="7"/><path d="M300 240 L250 300 H290 L320 260 M500 240 L550 300 H510 L480 260" fill="#7c3aed" stroke="#40313a" stroke-width="6"/>`;
     case "bouquet":
       return `<circle cx="350" cy="280" r="28" fill="#ef4444"/><circle cx="400" cy="250" r="32" fill="#f472b6"/><circle cx="450" cy="285" r="26" fill="#facc15"/><circle cx="380" cy="320" r="22" fill="#a855f7"/><rect x="385" y="340" width="30" height="120" rx="8" fill="#22c55e" stroke="#40313a" stroke-width="5"/>`;
+    case "jus-d-orange":
+      return `<rect x="310" y="160" width="180" height="320" rx="40" fill="#f97316" stroke="#c2410c" stroke-width="7" opacity=".85"/><rect x="350" y="120" width="100" height="60" rx="20" fill="#fb923c"/><ellipse cx="400" cy="300" rx="60" ry="100" fill="#fdba74" opacity=".6"/>`;
+    case "bol-cereales":
+      return `<ellipse cx="400" cy="360" rx="140" ry="50" fill="#e2e8f0" stroke="#40313a" stroke-width="7"/><ellipse cx="400" cy="320" rx="120" ry="80" fill="#fde68a" stroke="#40313a" stroke-width="6"/><circle cx="360" cy="300" r="16" fill="#ef4444"/><circle cx="420" cy="290" r="14" fill="#2563eb"/><circle cx="450" cy="310" r="12" fill="#ef4444"/>`;
+    case "tartine-confiture":
+      return `<rect x="280" y="280" width="240" height="140" rx="20" fill="#d97706" stroke="#40313a" stroke-width="7"/><path d="M300 300 H500 M310 330 H490 M300 360 H480" stroke="#991b1b" stroke-width="18" stroke-linecap="round"/>`;
+    case "fraises":
+      return `<ellipse cx="340" cy="310" rx="55" ry="45" fill="#ef4444" stroke="#40313a" stroke-width="5"/><ellipse cx="430" cy="300" rx="50" ry="40" fill="#dc2626" stroke="#40313a" stroke-width="5"/><circle cx="370" cy="280" r="14" fill="#ef4444"/><circle cx="450" cy="275" r="12" fill="#dc2626"/><path d="M340 265 Q350 230 360 265 M430 260 Q440 225 450 260" fill="#22c55e"/>`;
+    case "peches":
+      return `<circle cx="340" cy="300" r="55" fill="#fdba74" stroke="#40313a" stroke-width="6"/><circle cx="460" cy="310" r="50" fill="#fb923c" stroke="#40313a" stroke-width="6"/><path d="M310 270 Q300 230 330 250 M430 270 Q420 230 450 245" fill="#22c55e" stroke="#15803d" stroke-width="4"/>`;
+    case "pommes-poires":
+      return `<circle cx="330" cy="300" r="48" fill="#ef4444" stroke="#40313a" stroke-width="6"/><circle cx="420" cy="290" r="44" fill="#ef4444" stroke="#40313a" stroke-width="6"/><ellipse cx="500" cy="310" rx="40" ry="52" fill="#84cc16" stroke="#40313a" stroke-width="6"/>`;
+    case "espagnol":
+      return `<rect x="260" y="200" width="280" height="220" rx="16" fill="#dc2626" stroke="#40313a" stroke-width="7"/><rect x="260" y="310" width="280" height="55" fill="#facc15"/><text x="400" y="330" font-family="Arial" font-size="72" font-weight="700" text-anchor="middle" fill="#1d4ed8">ES</text>`;
+    case "italien":
+      return `<rect x="260" y="200" width="93" height="220" fill="#22c55e"/><rect x="353" y="200" width="94" height="220" fill="#f8fafc" stroke="#40313a" stroke-width="2"/><rect x="447" y="200" width="93" height="220" fill="#ef4444"/><text x="400" y="330" font-family="Arial" font-size="56" font-weight="700" text-anchor="middle" fill="#1f2937">IT</text>`;
+    case "allemand":
+      return `<rect x="260" y="200" width="280" height="73" fill="#111827"/><rect x="260" y="273" width="280" height="74" fill="#dc2626"/><rect x="260" y="347" width="280" height="73" fill="#facc15"/><text x="400" y="330" font-family="Arial" font-size="56" font-weight="700" text-anchor="middle" fill="#fff">DE</text>`;
+    case "chinois":
+      return `<rect x="260" y="200" width="280" height="220" rx="16" fill="#dc2626" stroke="#40313a" stroke-width="7"/><text x="400" y="330" font-family="Arial" font-size="72" font-weight="700" text-anchor="middle" fill="#facc15">中</text>`;
+    case "japonais":
+      return `<rect x="280" y="220" width="240" height="180" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="310" r="55" fill="#dc2626"/>`;
     default:
       return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
   }
@@ -313,6 +335,24 @@ function situationScene(slug, seed) {
       return `<rect x="220" y="200" width="360" height="220" rx="20" fill="#111827" stroke="#40313a" stroke-width="8"/><rect x="250" y="230" width="300" height="160" fill="#60a5fa"/><polygon points="370,310 370,270 410,290" fill="#fff"/>`;
     case "parc":
       return `<ellipse cx="400" cy="470" rx="300" ry="60" fill="#86efac"/><circle cx="250" cy="280" r="60" fill="#22c55e" opacity=".7"/><circle cx="550" cy="300" r="50" fill="#22c55e" opacity=".6"/><path d="M300 360 Q400 280 500 360" fill="none" stroke="#92400e" stroke-width="8"/>`;
+    case "boutique-sport":
+      return `<rect x="180" y="200" width="440" height="260" rx="20" fill="#2563eb" stroke="#40313a" stroke-width="7"/><rect x="220" y="260" width="100" height="120" fill="#f8fafc"/><circle cx="400" cy="320" r="45" fill="#f97316"/><rect x="480" y="260" width="100" height="120" fill="#22c55e"/>`;
+    case "salle-de-sport":
+      return `<rect x="160" y="180" width="480" height="280" rx="20" fill="#e2e8f0" stroke="#40313a" stroke-width="7"/>${person(300, 110, color(seed, 1), "#4b2e1f", 0)}${person(500, 120, color(seed, 3), "#b45309", 2)}<rect x="220" y="360" width="360" height="30" rx="8" fill="#64748b"/>`;
+    case "cours-fitness":
+      return `${person(350, 110, color(seed, 2), "#5b341d", 1)}<ellipse cx="500" cy="360" rx="50" ry="25" fill="#f97316"/>${person(500, 200, color(seed, 4), "#d97706", 0)}<rect x="200" y="360" width="120" height="20" rx="6" fill="#94a3b8"/>`;
+    case "librairie":
+      return `<rect x="180" y="180" width="440" height="280" rx="20" fill="#92400e" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 5 }, (_, i) => `<rect x="${220 + i * 75}" y="220" width="50" height="180" fill="${color(seed, i)}"/>`).join("")}${person(400, 90, color(seed, 2), "#5b341d", 1)}`;
+    case "conte":
+      return `${person(280, 130, color(seed, 3), "#b45309", 2)}<rect x="360" y="280" width="80" height="100" rx="8" fill="#22c55e" stroke="#40313a" stroke-width="4"/>${person(450, 200, color(seed, 1), "#4b2e1f", 0)}${person(520, 210, color(seed, 4), "#d97706", 1)}`;
+    case "danse":
+      return `${person(320, 140, color(seed, 2), "#5b341d", 1)}${person(480, 150, color(seed, 1), "#7c2d12", 0)}<circle cx="400" cy="120" r="22" fill="#f472b6"/><circle cx="430" cy="90" r="18" fill="#60a5fa"/><circle cx="370" cy="85" r="16" fill="#facc15"/>`;
+    case "ecrivain":
+      return `${person(400, 100, color(seed, 1), "#4b2e1f", 2)}<rect x="280" y="320" width="240" height="160" rx="12" fill="#fff7ed" stroke="#40313a" stroke-width="6"/><path d="M310 370 H490 M310 410 H460 M310 450 H480" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>`;
+    case "cours-ecriture":
+      return `<rect x="220" y="240" width="360" height="200" rx="16" fill="#fef3c7" stroke="#40313a" stroke-width="7"/>${person(300, 110, color(seed, 2), "#5b341d", 1)}${person(500, 120, color(seed, 4), "#d97706", 0)}<path d="M260 300 H540 M260 340 H500 M260 380 H520" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>`;
+    case "internet":
+      return `<rect x="240" y="200" width="320" height="220" rx="16" fill="#1f2937" stroke="#40313a" stroke-width="7"/><rect x="270" y="230" width="260" height="160" fill="#60a5fa"/><text x="400" y="320" font-family="Arial" font-size="36" font-weight="700" text-anchor="middle" fill="#fff">www</text>`;
     case "sortie-droite":
       return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="560" y="320" width="60" height="80" fill="#2563eb"/><path d="M500 360 L580 360" stroke="#ef4444" stroke-width="10" marker-end="url(#arrow)"/>`;
     case "sortie-gauche":
@@ -334,6 +374,8 @@ const OBJECTS = [
   "geographie", "francais", "mathematiques", "dessin", "salade",
   "anglais", "appareil-photo", "musee", "bateau", "billet", "magazines", "chocolat", "biscuit",
   "manteau", "sac-a-dos", "programme", "girafe", "tigre", "vache", "t-shirt", "bouquet",
+  "jus-d-orange", "bol-cereales", "tartine-confiture", "fraises", "peches", "pommes-poires",
+  "espagnol", "italien", "allemand", "chinois", "japonais",
 ];
 
 const SITUATIONS = [
@@ -350,6 +392,8 @@ const SITUATIONS = [
   "accident", "manifestation", "bonnet-et-lunettes",
   "nuages", "vent", "fete-des-meres", "soldes", "cours-peinture", "visite-guidee",
   "nuit-des-musees", "fete-de-la-musique", "journee-du-livre", "courriel", "sms", "film", "parc",
+  "boutique-sport", "salle-de-sport", "cours-fitness", "librairie", "conte", "danse",
+  "ecrivain", "cours-ecriture", "internet",
 ];
 
 function svgFor(slug, whiteBg) {
