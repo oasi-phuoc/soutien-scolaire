@@ -627,4 +627,237 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       ),
     ],
   },
+  {
+    id: "inscriptions-unil",
+    subject: "Inscriptions universitaires — Infos pratiques",
+    body:
+      "INSCRIPTIONS UNIVERSITAIRES\n\n" +
+      "Les inscriptions se font au bureau uniquement.\n" +
+      "Pensez à apporter une pièce d'identité.\n\n" +
+      "Le bureau des inscriptions ouvre le 30 août à une nouvelle adresse :\n" +
+      "2, rue du Simplon (métro M2, station Lausanne-Flon).\n\n" +
+      "À la sortie du métro, prenez à gauche, puis prenez la deuxième rue à droite.\n\n" +
+      "Horaires (nouveaux) :\n" +
+      "du lundi au vendredi : 9 h-12 h et 13 h-15 h (sauf le mercredi après-midi).\n\n" +
+      "Téléphone : +41 21 692 11 11\n" +
+      "inscriptions@unil.ch",
+    image: "/expression/ce/base/orientation/text-09.webp",
+    pool: [
+      ceQ(
+        "ins-q1",
+        "Où faut-il s'inscrire ?",
+        ["Au bureau uniquement", "Sur Internet seulement", "Par téléphone"],
+        0,
+        "Les inscriptions se font au _________ uniquement.",
+        "bureau",
+      ),
+      ceQ(
+        "ins-q2",
+        "Quel document faut-il apporter ?",
+        ["Une pièce d'identité", "Un livre de cours", "Un certificat médical"],
+        0,
+        "Pensez à apporter une pièce d'_________.",
+        "identité",
+        ["identite"],
+      ),
+      ceQ(
+        "ins-q3",
+        "Quelle est la nouvelle adresse du bureau ?",
+        ["2, rue du Simplon", "31 place de la Riponne", "17 rue Saint-Laurent"],
+        0,
+        "La nouvelle adresse est 2, rue du _________.",
+        "Simplon",
+        ["simplon"],
+      ),
+      ceMapQ(
+        "ins-q4",
+        "Quel chemin mène au bureau des inscriptions depuis le métro ?",
+        ["À gauche, puis deuxième rue à droite", "À droite, puis première à gauche", "Tout droit jusqu'au bout"],
+        0,
+        MAP("inscription-01"),
+        "À la sortie du métro, prenez à ___, puis la deuxième rue à droite.",
+        "gauche",
+      ),
+      ceQ(
+        "ins-q5",
+        "Quels sont les horaires le matin en semaine ?",
+        ["9 h-12 h", "8 h-11 h", "10 h-13 h"],
+        0,
+        "Le matin, le bureau est ouvert de 9 h à ___ h.",
+        "12",
+        ["12h", "midi"],
+      ),
+      ceQ(
+        "ins-q6",
+        "Quel jour l'après-midi est fermé ?",
+        ["Le mercredi", "Le lundi", "Le vendredi"],
+        0,
+        "Le bureau est fermé le ___ après-midi.",
+        "mercredi",
+      ),
+      ceQ(
+        "ins-q7",
+        "À quelle station M2 faut-il descendre ?",
+        ["Lausanne-Flon", "Riponne", "Ouchy"],
+        0,
+        "Descendez à la station Lausanne-_________.",
+        "Flon",
+        ["flon"],
+      ),
+    ],
+  },
+  {
+    id: "librairie-beauvoir",
+    subject: "Nouvelle librairie",
+    body:
+      "NOUVELLE LIBRAIRIE\n\n" +
+      "La mairie vous informe de l'ouverture de la librairie Beauvoir au 31 place de la Riponne, " +
+      "à côté de l'université de Lausanne.\n\n" +
+      "Depuis l'université, allez tout droit jusqu'à la place de la Palud, puis tournez à gauche.\n\n" +
+      "Horaires : du lundi au vendredi de 9 h à 18 h, le samedi de 10 h à 17 h.\n\n" +
+      "Ouverture exceptionnelle ce dimanche de 13 h à 18 h !\n\n" +
+      "Un concours est organisé pour gagner des tablettes numériques.",
+    image: "/expression/ce/base/orientation/text-10.webp",
+    pool: [
+      ceQ(
+        "lib-q1",
+        "Quel établissement ouvre ?",
+        ["La librairie Beauvoir", "Un restaurant", "Une piscine"],
+        0,
+        "C'est l'ouverture de la librairie _________.",
+        "Beauvoir",
+        ["beauvoir"],
+      ),
+      ceQ(
+        "lib-q2",
+        "Où se trouve la librairie ?",
+        ["31 place de la Riponne", "2 rue du Simplon", "Place de la Gare"],
+        0,
+        "La librairie est au 31 place de la _________.",
+        "Riponne",
+        ["riponne"],
+      ),
+      ceMapQ(
+        "lib-q3",
+        "Quel chemin mène à la librairie depuis l'université ?",
+        ["Tout droit jusqu'à la place de la Palud, puis à gauche", "À droite puis tout droit", "Première à gauche puis à droite"],
+        0,
+        MAP("librairie-01"),
+        "Depuis l'université, allez tout droit jusqu'à la place de la Palud, puis tournez à ___.",
+        "gauche",
+      ),
+      ceQ(
+        "lib-q4",
+        "Quels sont les horaires le samedi ?",
+        ["10 h-17 h", "9 h-18 h", "13 h-18 h"],
+        0,
+        "Le samedi, la librairie est ouverte de 10 h à ___ h.",
+        "17",
+        ["17h", "dix-sept"],
+      ),
+      ceQ(
+        "lib-q5",
+        "Quand a lieu l'ouverture exceptionnelle ?",
+        ["Ce dimanche de 13 h à 18 h", "Ce lundi matin", "Chaque mercredi"],
+        0,
+        "Ouverture exceptionnelle ce _________ de 13 h à 18 h.",
+        "dimanche",
+      ),
+      ceQ(
+        "lib-q6",
+        "Quel prix peut-on gagner au concours ?",
+        ["Des tablettes numériques", "Des livres gratuits", "Des billets de cinéma"],
+        0,
+        "Le concours permet de gagner des _________ numériques.",
+        "tablettes",
+      ),
+      ceQ(
+        "lib-q7",
+        "À côté de quel lieu se trouve la librairie ?",
+        ["L'université de Lausanne", "La gare CFF", "Le lac Léman"],
+        0,
+        "La librairie est à côté de l'université de _________.",
+        "Lausanne",
+        ["lausanne"],
+      ),
+    ],
+  },
+  {
+    id: "poste-nouvelle-adresse",
+    subject: "Bureau de poste : nouvelle adresse",
+    body:
+      "Bureau de poste : nouvelle adresse\n\n" +
+      "La Poste déménage et s'installe au 31 rue du Pont, en face du commissariat.\n\n" +
+      "De la mairie (rue de Bourg), vous prenez à droite, puis vous allez tout droit " +
+      "et vous tournez ensuite sur la deuxième rue à gauche.\n\n" +
+      "L'ancien bureau de la place de la Palud est définitivement fermé.\n\n" +
+      "Horaires : lundi-vendredi de 9 h à 18 h 30 et samedi de 10 h à 12 h 30.\n" +
+      "Derniers envois de courrier à 17 h.\n" +
+      "Contact : poste@lausanne.ch",
+    image: "/expression/ce/base/orientation/text-11.webp",
+    pool: [
+      ceQ(
+        "pos-q1",
+        "Quelle est la nouvelle adresse de la Poste ?",
+        ["31 rue du Pont", "2 rue du Simplon", "Place de la Palud"],
+        0,
+        "La Poste est au 31 rue du _________.",
+        "Pont",
+        ["pont"],
+      ),
+      ceQ(
+        "pos-q2",
+        "Qu'est-ce qui se trouve en face du nouveau bureau ?",
+        ["Le commissariat", "La mairie", "L'université"],
+        0,
+        "Le bureau est en face du _________.",
+        "commissariat",
+      ),
+      ceMapQ(
+        "pos-q3",
+        "Quel trajet mène à la poste depuis la mairie ?",
+        ["À droite, tout droit, deuxième rue à gauche", "À gauche, première à droite", "Tout droit jusqu'à la gare"],
+        0,
+        MAP("poste-01"),
+        "De la mairie, prenez à droite, tout droit, puis la deuxième rue à ___.",
+        "gauche",
+      ),
+      ceQ(
+        "pos-q4",
+        "Quel ancien bureau est fermé ?",
+        ["Celui de la place de la Palud", "Celui de la gare", "Celui de la Riponne"],
+        0,
+        "L'ancien bureau de la place de la _________ est fermé.",
+        "Palud",
+        ["palud"],
+      ),
+      ceQ(
+        "pos-q5",
+        "Jusqu'à quelle heure peut-on envoyer du courrier ?",
+        ["17 h", "18 h 30", "12 h 30"],
+        0,
+        "Derniers envois de courrier à ___ h.",
+        "17",
+        ["17h", "dix-sept"],
+      ),
+      ceQ(
+        "pos-q6",
+        "Quels sont les horaires le samedi ?",
+        ["10 h-12 h 30", "9 h-18 h 30", "Fermé"],
+        0,
+        "Le samedi, la Poste est ouverte de 10 h à 12 h ___.",
+        "30",
+        ["30h", "trente"],
+      ),
+      ceQ(
+        "pos-q7",
+        "Depuis quelle rue part-on pour aller à la poste ?",
+        ["Rue de Bourg (mairie)", "Rue du Pont", "Rue du Simplon"],
+        0,
+        "On part de la mairie, rue de _________.",
+        "Bourg",
+        ["bourg"],
+      ),
+    ],
+  },
 ];

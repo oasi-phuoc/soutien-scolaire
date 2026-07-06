@@ -27,7 +27,7 @@ function svgWrap(inner) {
 }
 
 /** Carte rue : blocs bleus + rues blanches. */
-function streetMap({ blocks, streets, route, pin, metro, label }) {
+function streetMap({ blocks, streets, route, pin, metro, label, building, post }) {
   const blockEls = blocks
     .map((b) => `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" fill="${BLOCK}" rx="2"/>`)
     .join("\n  ");
@@ -40,13 +40,19 @@ function streetMap({ blocks, streets, route, pin, metro, label }) {
   const metroEl = metro
     ? `<circle cx="${metro.x}" cy="${metro.y}" r="10" fill="${METRO}"/><text x="${metro.x}" y="${metro.y + 4}" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold" font-family="Arial,sans-serif">M</text>`
     : "";
+  const buildingEl = building
+    ? `<rect x="${building.x}" y="${building.y}" width="26" height="20" fill="#22c55e" rx="2"/><text x="${building.x + 13}" y="${building.y + 14}" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold" font-family="Arial,sans-serif">UNI</text>`
+    : "";
+  const postEl = post
+    ? `<rect x="${post.x}" y="${post.y}" width="22" height="16" fill="#fbbf24" rx="2"/><text x="${post.x + 11}" y="${post.y + 11}" text-anchor="middle" fill="#1e40af" font-size="7" font-weight="bold" font-family="Arial,sans-serif">PST</text>`
+    : "";
   const pinEl = pin
     ? `<path d="M ${pin.x} ${pin.y} c -5 -8 -10 -4 -10 2 a 10 10 0 0 0 20 0 c 0 -6 -5 -10 -10 -2 z" fill="${PIN}"/><circle cx="${pin.x}" cy="${pin.y - 2}" r="3" fill="#fff"/>`
     : "";
   const labelEl = label
     ? `<text x="${label.x}" y="${label.y}" text-anchor="middle" fill="#475569" font-size="8" font-family="Arial,sans-serif">${label.text}</text>`
     : "";
-  return svgWrap(`${blockEls}\n  ${streetEls}\n  ${routeEl}\n  ${metroEl}\n  ${pinEl}\n  ${labelEl}`);
+  return svgWrap(`${blockEls}\n  ${streetEls}\n  ${buildingEl}\n  ${postEl}\n  ${routeEl}\n  ${metroEl}\n  ${pinEl}\n  ${labelEl}`);
 }
 
 /** Carte centre commercial : grille 3×3 colorée. */
@@ -379,6 +385,135 @@ const MAPS = {
     fairMap({ route: "120,158 120,130 90,100 56,86", pin: { x: 56, y: 86 }, cameraCell: 3, fountainCell: 4 }),
     fairMap({ route: "120,158 120,130 120,100 56,86", pin: { x: 56, y: 86 }, cameraCell: 3, fountainCell: 4 }),
     fairMap({ route: "120,158 120,130 170,100 170,86", pin: { x: 170, y: 86 }, cameraCell: 3, fountainCell: 4 }),
+  ],
+  "inscription-01": [
+    streetMap({
+      blocks: [
+        { x: 15, y: 15, w: 60, h: 45 }, { x: 85, y: 15, w: 50, h: 45 }, { x: 145, y: 15, w: 80, h: 45 },
+        { x: 15, y: 70, w: 60, h: 45 }, { x: 85, y: 70, w: 50, h: 45 }, { x: 145, y: 70, w: 80, h: 45 },
+        { x: 15, y: 125, w: 60, h: 45 }, { x: 85, y: 125, w: 50, h: 45 }, { x: 145, y: 125, w: 80, h: 45 },
+      ],
+      streets: [
+        { x1: 110, y1: 155, x2: 110, y2: 20, w: 11 },
+        { x1: 110, y1: 60, x2: 200, y2: 100, w: 11 },
+        { x1: 110, y1: 60, x2: 40, y2: 100, w: 11 },
+      ],
+      metro: { x: 110, y: 155 },
+      route: "110,155 110,50 185,50",
+      pin: { x: 185, y: 50 },
+    }),
+    streetMap({
+      blocks: [
+        { x: 15, y: 15, w: 60, h: 45 }, { x: 85, y: 15, w: 50, h: 45 }, { x: 145, y: 15, w: 80, h: 45 },
+        { x: 15, y: 70, w: 60, h: 45 }, { x: 85, y: 70, w: 50, h: 45 }, { x: 145, y: 70, w: 80, h: 45 },
+        { x: 15, y: 125, w: 60, h: 45 }, { x: 85, y: 125, w: 50, h: 45 }, { x: 145, y: 125, w: 80, h: 45 },
+      ],
+      streets: [
+        { x1: 110, y1: 155, x2: 110, y2: 20, w: 11 },
+        { x1: 110, y1: 60, x2: 200, y2: 100, w: 11 },
+        { x1: 110, y1: 60, x2: 40, y2: 100, w: 11 },
+      ],
+      metro: { x: 110, y: 155 },
+      route: "110,155 110,110 180,110",
+      pin: { x: 180, y: 110 },
+    }),
+    streetMap({
+      blocks: [
+        { x: 15, y: 15, w: 60, h: 45 }, { x: 85, y: 15, w: 50, h: 45 }, { x: 145, y: 15, w: 80, h: 45 },
+        { x: 15, y: 70, w: 60, h: 45 }, { x: 85, y: 70, w: 50, h: 45 }, { x: 145, y: 70, w: 80, h: 45 },
+        { x: 15, y: 125, w: 60, h: 45 }, { x: 85, y: 125, w: 50, h: 45 }, { x: 145, y: 125, w: 80, h: 45 },
+      ],
+      streets: [
+        { x1: 110, y1: 155, x2: 110, y2: 20, w: 11 },
+        { x1: 110, y1: 60, x2: 200, y2: 100, w: 11 },
+        { x1: 110, y1: 60, x2: 40, y2: 100, w: 11 },
+      ],
+      metro: { x: 110, y: 155 },
+      route: "110,155 110,50 40,50",
+      pin: { x: 40, y: 50 },
+    }),
+  ],
+  "librairie-01": [
+    streetMap({
+      blocks: [
+        { x: 10, y: 15, w: 55, h: 40 }, { x: 75, y: 15, w: 50, h: 40 }, { x: 135, y: 15, w: 90, h: 40 },
+        { x: 10, y: 65, w: 55, h: 40 }, { x: 75, y: 65, w: 50, h: 40 }, { x: 135, y: 65, w: 90, h: 40 },
+        { x: 10, y: 115, w: 55, h: 50 }, { x: 75, y: 115, w: 50, h: 50 }, { x: 135, y: 115, w: 90, h: 50 },
+      ],
+      streets: [
+        { x1: 40, y1: 95, x2: 200, y2: 95, w: 11 },
+        { x1: 120, y1: 95, x2: 120, y2: 20, w: 11 },
+        { x1: 120, y1: 95, x2: 60, y2: 140, w: 11 },
+      ],
+      building: { x: 18, y: 82 },
+      label: { x: 120, y: 88, text: "place Palud" },
+      route: "44,95 120,95 120,35",
+      pin: { x: 120, y: 35 },
+    }),
+    streetMap({
+      blocks: [
+        { x: 10, y: 15, w: 55, h: 40 }, { x: 75, y: 15, w: 50, h: 40 }, { x: 135, y: 15, w: 90, h: 40 },
+        { x: 10, y: 65, w: 55, h: 40 }, { x: 75, y: 65, w: 50, h: 40 }, { x: 135, y: 65, w: 90, h: 40 },
+        { x: 10, y: 115, w: 55, h: 50 }, { x: 75, y: 115, w: 50, h: 50 }, { x: 135, y: 115, w: 90, h: 50 },
+      ],
+      streets: [
+        { x1: 40, y1: 95, x2: 200, y2: 95, w: 11 },
+        { x1: 120, y1: 95, x2: 120, y2: 20, w: 11 },
+        { x1: 120, y1: 95, x2: 60, y2: 140, w: 11 },
+      ],
+      building: { x: 18, y: 82 },
+      label: { x: 120, y: 88, text: "place Palud" },
+      route: "44,95 90,95 90,125 70,125",
+      pin: { x: 70, y: 125 },
+    }),
+    streetMap({
+      blocks: [
+        { x: 10, y: 15, w: 55, h: 40 }, { x: 75, y: 15, w: 50, h: 40 }, { x: 135, y: 15, w: 90, h: 40 },
+        { x: 10, y: 65, w: 55, h: 40 }, { x: 75, y: 65, w: 50, h: 40 }, { x: 135, y: 65, w: 90, h: 40 },
+        { x: 10, y: 115, w: 55, h: 50 }, { x: 75, y: 115, w: 50, h: 50 }, { x: 135, y: 115, w: 90, h: 50 },
+      ],
+      streets: [
+        { x1: 40, y1: 95, x2: 200, y2: 95, w: 11 },
+        { x1: 120, y1: 95, x2: 120, y2: 20, w: 11 },
+        { x1: 120, y1: 95, x2: 60, y2: 140, w: 11 },
+      ],
+      building: { x: 18, y: 82 },
+      label: { x: 120, y: 88, text: "place Palud" },
+      route: "44,95 170,95 170,35",
+      pin: { x: 170, y: 35 },
+    }),
+  ],
+  "poste-01": [
+    streetMap({
+      blocks: [
+        { x: 15, y: 20, w: 55, h: 40 }, { x: 80, y: 20, w: 50, h: 40 }, { x: 140, y: 20, w: 85, h: 40 },
+        { x: 15, y: 70, w: 55, h: 40 }, { x: 80, y: 70, w: 50, h: 40 }, { x: 140, y: 70, w: 85, h: 40 },
+        { x: 15, y: 120, w: 55, h: 50 }, { x: 80, y: 120, w: 50, h: 50 }, { x: 140, y: 120, w: 85, h: 50 },
+      ],
+      streets: [
+        { x1: 55, y1: 25, x2: 55, y2: 155, w: 11 },
+        { x1: 55, y1: 70, x2: 200, y2: 140, w: 11 },
+        { x1: 55, y1: 100, x2: 200, y2: 100, w: 11 },
+      ],
+      post: { x: 44, y: 38 },
+      route: "75,130 100,110 55,110 55,46",
+      pin: { x: 75, y: 130 },
+    }),
+    streetMap({
+      blocks: [
+        { x: 15, y: 20, w: 55, h: 40 }, { x: 80, y: 20, w: 50, h: 40 }, { x: 140, y: 20, w: 85, h: 40 },
+        { x: 15, y: 70, w: 55, h: 40 }, { x: 80, y: 70, w: 50, h: 40 }, { x: 140, y: 70, w: 85, h: 40 },
+        { x: 15, y: 120, w: 55, h: 50 }, { x: 80, y: 120, w: 50, h: 50 }, { x: 140, y: 120, w: 85, h: 50 },
+      ],
+      streets: [
+        { x1: 55, y1: 25, x2: 55, y2: 155, w: 11 },
+        { x1: 55, y1: 70, x2: 200, y2: 140, w: 11 },
+        { x1: 55, y1: 100, x2: 200, y2: 100, w: 11 },
+      ],
+      post: { x: 44, y: 38 },
+      route: "200,150 120,110 55,110 55,46",
+      pin: { x: 200, y: 150 },
+    }),
   ],
 };
 
