@@ -38,5 +38,13 @@
   "meteo": "verifier-meteo",
   "pluie": "verifier-meteo",
   "cantine-scolaire": "service-cantine",
-  "professeur": "remettre-cahier-professeur"
+  "professeur": "remettre-cahier-professeur",
+  "jeu-video": "jouer-jeu-video",
+  "jeux-video": "jouer-jeu-video",
+  "dauphins": "spectacle-dauphins",
+  "elephant": "nourrir-elephant",
+  "vache": "traire-vache",
+  "danser": "danser-musique",
+  "stade": "match-stade",
+  "lave-linge": "lave-linge"
 }

@@ -283,6 +283,7 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
     path.startsWith("/vocab/images/")
     || path.startsWith("/assets/words/img/")
+    || path.startsWith("/expression/images/")
     || path.startsWith("/expression/")
   );
 }
@@ -292,18 +293,18 @@ const EXPRESSION_CO_CURATED =
 const EXPRESSION_OBJET_PICK =
   /^\/expression\/co\/base\/objet-pick\/[^/]+\/\d+\.webp$/;
 
-const EXPRESSION_CE_MESSAGE =
-  /^\/expression\/ce\/base\/message-\d{2}\.webp$/;
-
 const EXPRESSION_CE_BASE =
   /^\/expression\/ce\/base\//;
+
+const EXPRESSION_IMAGES =
+  /^\/expression\/images\/[^/]+\.webp$/;
 
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path && (
-    EXPRESSION_CO_CURATED.test(path)
+    EXPRESSION_IMAGES.test(path)
+    || EXPRESSION_CO_CURATED.test(path)
     || EXPRESSION_OBJET_PICK.test(path)
-    || EXPRESSION_CE_MESSAGE.test(path)
     || EXPRESSION_CE_BASE.test(path)
   )) return path;
   if (path?.startsWith("/assets/words/img/") || path?.startsWith("/vocab/images/")) return path;
