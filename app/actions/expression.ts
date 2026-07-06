@@ -379,42 +379,60 @@ export async function deleteInboxMessagesAction(
   const unique = new Map<string, InboxDeleteItem>();
   for (const item of items) unique.set(`${item.kind}:${item.id}`, item);
 
+  const payload = [...unique.values()].map((item) => ({ id: item.id, kind: item.kind }));
+
+  const { data, error } = await session.supabase.rpc("delete_inbox_messages", { items: payload });
+
+  if (!error) {
+    const deleted = Number(data ?? 0);
+    revalidatePath("/messagerie");
+    return {
+      ok: deleted > 0,
+      deleted,
+      reason: deleted > 0 ? undefined : "Aucun message supprimé.",
+    };
+  }
+
+  const rpcMissing =
+    error.code === "42883"
+    || error.code === "PGRST202"
+    || /delete_inbox_messages/i.test(error.message);
+
+  if (!rpcMissing) {
+    return { ok: false, deleted: 0, reason: error.message };
+  }
+
+  // Repli : suppression directe (nécessite les politiques RLS DELETE).
   let deleted = 0;
   for (const item of unique.values()) {
     if (item.kind === "task") {
-      const { error, count } = await session.supabase
+      const { error: delError, count } = await session.supabase
         .from("task_messages")
         .delete({ count: "exact" })
         .eq("id", item.id)
         .eq("student_id", session.user.id);
-      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
+      if (!delError && (count ?? 0) > 0) deleted += count ?? 0;
       continue;
     }
 
-    if (session.role === "prof") {
-      const { error, count } = await session.supabase
-        .from("expression_submissions")
-        .delete({ count: "exact" })
-        .eq("id", item.id)
-        .eq("teacher_id", session.user.id);
-      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
-    } else if (session.role === "admin") {
-      const { error, count } = await session.supabase
-        .from("expression_submissions")
-        .delete({ count: "exact" })
-        .eq("id", item.id)
-        .or(`teacher_id.eq.${session.user.id},student_id.eq.${session.user.id}`);
-      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
-    } else {
-      const { error, count } = await session.supabase
-        .from("expression_submissions")
-        .delete({ count: "exact" })
-        .eq("id", item.id)
-        .eq("student_id", session.user.id);
-      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
-    }
+    const { error: delError, count } = await session.supabase
+      .from("expression_submissions")
+      .delete({ count: "exact" })
+      .eq("id", item.id)
+      .or(`teacher_id.eq.${session.user.id},student_id.eq.${session.user.id}`);
+    if (!delError && (count ?? 0) > 0) deleted += count ?? 0;
   }
 
   revalidatePath("/messagerie");
-  return { ok: deleted > 0, deleted, reason: deleted > 0 ? undefined : "Aucun message supprimé." };
+  if (deleted > 0) {
+    return { ok: true, deleted };
+  }
+
+  return {
+    ok: false,
+    deleted: 0,
+    reason:
+      "La suppression n'est pas encore activée sur la base de données. " +
+      "Exécutez la migration 20260706100000_inbox_delete_rpc.sql dans Supabase.",
+  };
 }
