@@ -63,4 +63,8 @@ export const SCOLAIRE_PLAYABLE_GROUP_IDS = new Set<string>([
   "base-scolaire-objet-18",
   "base-scolaire-conversation-41",
   "base-scolaire-conversation-42",
+  "base-scolaire-conversation-43",
+  "base-scolaire-conversation-44",
+  "base-scolaire-conversation-45",
+  "base-scolaire-conversation-46",
 ]);
