@@ -1,6 +1,6 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
 
-/** CO base scolaire — exercices 1 à 16 (messages répondeur, questions du livre). */
+/** CO base scolaire — exercices 1 à 20 + annonce 21 (questions du livre). */
 
 export const SCOLAIRE_MESSAGE_1 = buildPool("base", "scolaire-message-1", [
   {
@@ -620,6 +620,194 @@ export const SCOLAIRE_MESSAGE_16 = buildPool("base", "scolaire-message-16", [
   },
 ]);
 
+export const SCOLAIRE_MESSAGE_17 = buildPool("base", "scolaire-message-17", [
+  {
+    id: "sm17-q1",
+    textQ: "Quelle est la date de la sortie ?",
+    text: ["Le 24 juin", "Le 25 juin", "Le 26 juin"],
+    textC: 1,
+    img: ["Le 24 juin", "Le 25 juin", "Le 26 juin"],
+    imgC: 1,
+    fillQ: "La sortie est le ___ juin.",
+    fill: "25",
+    fillA: ["25", "25 juin", "lundi 25 juin"],
+  },
+  {
+    id: "sm17-q2",
+    textQ: "Quelle est l'activité du matin ?",
+    text: ["Du théâtre", "Une visite au musée", "Une visite touristique"],
+    textC: 1,
+    img: ["Théâtre", "Musée", "Visite touristique"],
+    imgC: 1,
+    fillQ: "Le matin, on visite un ___ de peinture.",
+    fill: "musée",
+    fillA: ["musee", "musée"],
+  },
+  {
+    id: "sm17-q3",
+    textQ: "Où allez-vous manger ?",
+    text: ["Au pique-nique", "Au restaurant", "Sur un bateau"],
+    textC: 0,
+    img: ["Pique-nique", "Restaurant", "Bateau"],
+    imgC: 0,
+    fillQ: "Le midi, on fait un ___ près de la tour Eiffel.",
+    fill: "pique-nique",
+    fillA: ["pique-nique", "picnic", "pic-nique"],
+  },
+  {
+    id: "sm17-q4",
+    textQ: "Combien coûte la sortie ?",
+    text: ["10 euros", "20 euros", "30 euros"],
+    textC: 1,
+    img: ["10 euros", "20 euros", "30 euros"],
+    imgC: 1,
+    fillQ: "La sortie coûte ___ euros.",
+    fill: "20",
+    fillA: ["20", "20 euros"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGE_19 = buildPool("base", "scolaire-message-19", [
+  {
+    id: "sm19-q1",
+    textQ: "Qui propose des activités ?",
+    text: ["L'école", "Le club de sport", "La mairie"],
+    textC: 0,
+    img: ["École", "Sport", "Mairie"],
+    imgC: 0,
+    fillQ: "L'___ propose des activités gratuites.",
+    fill: "école",
+    fillA: ["ecole", "école"],
+  },
+  {
+    id: "sm19-q2",
+    textQ: "Quelle activité pouvez-vous faire le lundi ?",
+    text: ["Un club de musique", "Un club photo", "Un cours de yoga"],
+    textC: 1,
+    img: ["Musique", "Photo", "Yoga"],
+    imgC: 1,
+    fillQ: "Le lundi midi, il y a un club ___.",
+    fill: "photo",
+    fillA: ["photo"],
+  },
+  {
+    id: "sm19-q3",
+    textQ: "Quel jour est le cours de tennis ?",
+    text: ["Mardi", "Jeudi", "Vendredi"],
+    textC: 1,
+    img: ["Mardi", "Jeudi", "Vendredi"],
+    imgC: 1,
+    fillQ: "Le cours de tennis est ___.",
+    fill: "jeudi",
+    fillA: ["jeudi"],
+  },
+  {
+    id: "sm19-q4",
+    textQ: "Où avez-vous rendez-vous demain ?",
+    text: ["À la cantine", "Au gymnase", "À la bibliothèque"],
+    textC: 0,
+    img: ["Cantine", "Gymnase", "Bibliothèque"],
+    imgC: 0,
+    fillQ: "On mange ensemble à la ___ demain.",
+    fill: "cantine",
+    fillA: ["cantine"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGE_20 = buildPool("base", "scolaire-message-20", [
+  {
+    id: "sm20-q1",
+    textQ: "Vous devez aider Baptiste dans quelle matière ?",
+    text: ["Les mathématiques", "Le français", "L'anglais"],
+    textC: 1,
+    img: ["Mathématiques", "Français", "Anglais"],
+    imgC: 1,
+    fillQ: "Il ne comprend pas l'exercice de ___.",
+    fill: "français",
+    fillA: ["francais", "français"],
+  },
+  {
+    id: "sm20-q2",
+    textQ: "À quelle heure Baptiste vous invite chez lui ?",
+    text: ["13 h", "14 h", "15 h"],
+    textC: 1,
+    img: ["13 h", "14 h", "15 h"],
+    imgC: 1,
+    fillQ: "Il faut venir à ___ heures.",
+    fill: "14h",
+    fillA: ["14 h", "14h", "14h00"],
+  },
+  {
+    id: "sm20-q3",
+    textQ: "Quelle activité vous propose Baptiste ?",
+    text: ["Un jeu de société", "Un jeu vidéo", "Du football"],
+    textC: 1,
+    img: ["Jeu de société", "Jeu vidéo", "Football"],
+    imgC: 1,
+    fillQ: "Après, on peut jouer à un ___ .",
+    fill: "jeu vidéo",
+    fillA: ["jeu video", "jeu vidéo"],
+  },
+  {
+    id: "sm20-q4",
+    textQ: "Comment allez-vous rentrer chez vous ?",
+    text: ["En voiture", "En train", "En bus"],
+    textC: 0,
+    img: ["Voiture", "Train", "Bus"],
+    imgC: 0,
+    fillQ: "Sa mère peut te ramener en ___.",
+    fill: "voiture",
+    fillA: ["voiture", "en voiture"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_21 = buildPool("base", "scolaire-annonce-21", [
+  {
+    id: "sa21-q1",
+    textQ: "Le magasin ferme dans combien de temps ?",
+    text: ["10 minutes", "15 minutes", "20 minutes"],
+    textC: 1,
+    img: ["10 minutes", "15 minutes", "20 minutes"],
+    imgC: 1,
+    fillQ: "Le magasin ferme dans ___ minutes.",
+    fill: "15",
+    fillA: ["15", "quinze"],
+  },
+  {
+    id: "sa21-q2",
+    textQ: "Que devez-vous faire ?",
+    text: ["Aller aux caisses", "Faire les courses", "Attendre dehors"],
+    textC: 0,
+    img: ["Caisse", "Courses", "Attendre"],
+    imgC: 0,
+    fillQ: "Il faut vous diriger vers les ___.",
+    fill: "caisses",
+    fillA: ["caisses", "caisse"],
+  },
+  {
+    id: "sa21-q3",
+    textQ: "Le magasin est fermé quel jour ?",
+    text: ["Le samedi", "Le dimanche", "Le lundi"],
+    textC: 1,
+    img: ["Samedi", "Dimanche", "Lundi"],
+    imgC: 1,
+    fillQ: "Le magasin est fermé le ___.",
+    fill: "dimanche",
+    fillA: ["dimanche"],
+  },
+  {
+    id: "sa21-q4",
+    textQ: "À quelle heure ouvre le magasin lundi ?",
+    text: ["9 h", "10 h", "11 h"],
+    textC: 1,
+    img: ["9 h", "10 h", "11 h"],
+    imgC: 1,
+    fillQ: "Le magasin ouvre lundi à ___ heures.",
+    fill: "10h",
+    fillA: ["10 h", "10h", "10h00"],
+  },
+]);
+
 export const SCOLAIRE_MESSAGES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-message-1": SCOLAIRE_MESSAGE_1,
   "base-scolaire-message-2": SCOLAIRE_MESSAGE_2,
@@ -634,6 +822,13 @@ export const SCOLAIRE_MESSAGES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-message-14": SCOLAIRE_MESSAGE_14,
   "base-scolaire-message-15": SCOLAIRE_MESSAGE_15,
   "base-scolaire-message-16": SCOLAIRE_MESSAGE_16,
+  "base-scolaire-message-17": SCOLAIRE_MESSAGE_17,
+  "base-scolaire-message-19": SCOLAIRE_MESSAGE_19,
+  "base-scolaire-message-20": SCOLAIRE_MESSAGE_20,
+};
+
+export const SCOLAIRE_ANNONCES_BOOK: Record<string, COMultiQuestion[]> = {
+  "base-scolaire-annonce-21": SCOLAIRE_ANNONCE_21,
 };
 
 /** @deprecated Utiliser SCOLAIRE_MESSAGES_BOOK */

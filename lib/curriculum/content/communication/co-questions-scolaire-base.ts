@@ -1,5 +1,5 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
-import { SCOLAIRE_MESSAGES_BOOK } from "./co-questions-scolaire-messages";
+import { SCOLAIRE_ANNONCES_BOOK, SCOLAIRE_MESSAGES_BOOK } from "./co-questions-scolaire-messages";
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */
 
@@ -54,42 +54,6 @@ const SCOLAIRE_ANNONCE_30 = buildPool("base", "scolaire-annonce-30", [
     id: "sa30-g", textQ: "Où entend-on ce message ?", text: ["À la radio uniquement", "Dans un lieu public", "Dans un cours"], textC: 1,
     img: ["À la radio uniqu…", "Dans un lieu pub…", "Dans un cours"], imgC: 1,
     fillQ: "C'est une ___ .", fill: "annonce", fillA: ["annonce"],
-  }
-]);
-
-const SCOLAIRE_MESSAGE_17 = buildPool("base", "scolaire-message-17", [
-  {
-    id: "sm17-t", textQ: "À quelle heure a lieu l'activité ?", text: ["10 h", "18 h 30", "14 h 30"], textC: 1,
-    img: ["10 h", "18 h 30", "14 h 30"], imgC: 1,
-    fillQ: "L'activité est à ___ .", fill: "18h30", fillA: ["18h30"],
-  },
-  {
-    id: "sm17-e", textQ: "Le message parle surtout de…", text: ["Les vacances", "L'école", "Le travail"], textC: 1,
-    img: ["Les vacances", "L'école", "Le travail"], imgC: 1,
-    fillQ: "Le sujet est l'___ .", fill: "école", fillA: ["école"],
-  },
-  {
-    id: "sm17-p", textQ: "Quel lieu de sortie est mentionné ?", text: ["La gare", "Le supermarché", "Le musée"], textC: 2,
-    img: ["La gare", "Le supermarché", "Le musée"], imgC: 2,
-    fillQ: "Ils vont au ___ .", fill: "musée", fillA: ["musée"],
-  }
-]);
-
-const SCOLAIRE_MESSAGE_19 = buildPool("base", "scolaire-message-19", [
-  {
-    id: "sm19-t", textQ: "À quelle heure a lieu l'activité ?", text: ["10 h", "17 h 30", "14 h 30"], textC: 1,
-    img: ["10 h", "17 h 30", "14 h 30"], imgC: 1,
-    fillQ: "L'activité est à ___ .", fill: "17h30", fillA: ["17h30"],
-  },
-  {
-    id: "sm19-e", textQ: "Le message parle surtout de…", text: ["Les vacances", "L'école", "Le travail"], textC: 1,
-    img: ["Les vacances", "L'école", "Le travail"], imgC: 1,
-    fillQ: "Le sujet est l'___ .", fill: "école", fillA: ["école"],
-  },
-  {
-    id: "sm19-g", textQ: "Quel type de message est-ce ?", text: ["Un message entre amis", "Une annonce à la radio", "Un bulletin météo"], textC: 0,
-    img: ["Un message entre…", "Une annonce à la…", "Un bulletin météo"], imgC: 0,
-    fillQ: "C'est un message ___ .", fill: "entre amis", fillA: ["entre amis"],
   }
 ]);
 
@@ -151,8 +115,7 @@ export const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQuestion[]> 
   "base-scolaire-annonce-28": SCOLAIRE_ANNONCE_28,
   "base-scolaire-annonce-29": SCOLAIRE_ANNONCE_29,
   "base-scolaire-annonce-30": SCOLAIRE_ANNONCE_30,
-  "base-scolaire-message-17": SCOLAIRE_MESSAGE_17,
-  "base-scolaire-message-19": SCOLAIRE_MESSAGE_19,
+  ...SCOLAIRE_ANNONCES_BOOK,
   ...SCOLAIRE_MESSAGES_BOOK,
   "base-scolaire-radio-34": SCOLAIRE_RADIO_34,
   "base-scolaire-radio-37": SCOLAIRE_RADIO_37,

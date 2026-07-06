@@ -135,11 +135,15 @@ for (const [key, text] of Object.entries(transcripts)) {
   if (cat === "message") entry = questionsForMessage(num, text);
   else if (cat === "annonce") entry = questionsForAnnonce(num, text);
   else entry = questionsForRadio(num, text);
-  if (entry.qs.length >= 3 && !(cat === "message" && ["1", "2", "3", "4", "6", "7", "8", "9", "11", "13", "14", "15", "16"].includes(num))) pools.push(entry);
+  if (
+    entry.qs.length >= 3
+    && !(cat === "message" && ["1", "2", "3", "4", "6", "7", "8", "9", "11", "13", "14", "15", "16", "17", "19", "20"].includes(num))
+    && !(cat === "annonce" && ["21"].includes(num))
+  ) pools.push(entry);
 }
 
 let out = `import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
-import { SCOLAIRE_MESSAGES_BOOK } from "./co-questions-scolaire-messages";
+import { SCOLAIRE_ANNONCES_BOOK, SCOLAIRE_MESSAGES_BOOK } from "./co-questions-scolaire-messages";
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */\n`;
 
@@ -154,6 +158,7 @@ out += `\nexport const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQu
 for (const [k, v] of Object.entries(exports)) {
   out += `  "${k}": ${v},\n`;
 }
+out += `  ...SCOLAIRE_ANNONCES_BOOK,\n`;
 out += `  ...SCOLAIRE_MESSAGES_BOOK,\n`;
 out += `};\n`;
 

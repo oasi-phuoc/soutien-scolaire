@@ -122,6 +122,14 @@ function objectScene(slug, seed) {
       return `<rect x="300" y="250" width="200" height="160" rx="8" fill="#fff7ed" stroke="#40313a" stroke-width="6"/><circle cx="360" cy="310" r="25" fill="#ef4444"/><path d="M420 280 L480 340" stroke="#111827" stroke-width="8" stroke-linecap="round"/>`;
     case "salade":
       return `<ellipse cx="400" cy="340" rx="150" ry="90" fill="#86efac" stroke="#40313a" stroke-width="7"/><circle cx="350" cy="310" r="22" fill="#ef4444"/><circle cx="430" cy="300" r="18" fill="#f97316"/>`;
+    case "anglais":
+      return `<rect x="260" y="200" width="280" height="220" rx="16" fill="#1d4ed8" stroke="#40313a" stroke-width="7"/><text x="400" y="340" font-family="Arial" font-size="88" font-weight="700" text-anchor="middle" fill="#fff">EN</text>`;
+    case "appareil-photo":
+      return `<rect x="300" y="240" width="200" height="150" rx="24" fill="#1f2937" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="315" r="52" fill="#374151" stroke="#94a3b8" stroke-width="8"/><circle cx="400" cy="315" r="28" fill="#60a5fa"/><rect x="360" y="210" width="80" height="40" rx="10" fill="#111827"/>`;
+    case "musee":
+      return `<rect x="220" y="220" width="360" height="200" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="260" y="260" width="90" height="110" fill="#bae6fd"/><rect x="370" y="260" width="90" height="110" fill="#fde68a"/><rect x="480" y="260" width="60" height="110" fill="#fca5a5"/>`;
+    case "bateau":
+      return `<path d="M180 380 H620 L560 280 H240 Z" fill="#2563eb" stroke="#40313a" stroke-width="7"/><rect x="340" y="220" width="120" height="70" rx="8" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><path d="M400 220 V180" stroke="#92400e" stroke-width="8"/>`;
     default:
       return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
   }
@@ -207,6 +215,26 @@ function situationScene(slug, seed) {
       return `<ellipse cx="400" cy="360" rx="180" ry="70" fill="#e2e8f0" stroke="#40313a" stroke-width="6"/><circle cx="340" cy="330" r="35" fill="#f87171"/><circle cx="430" cy="320" r="30" fill="#fbbf24"/>${person(180, 120, color(seed, 1), "#b45309", 2)}`;
     case "theatre":
       return `<rect x="120" y="300" width="560" height="140" rx="12" fill="#7c2d12"/><path d="M120 300 Q400 120 680 300" fill="#991b1b" stroke="#40313a" stroke-width="6"/>${person(400, 80, color(seed, 4), "#d97706", 2)}`;
+    case "mairie":
+      return `<rect x="240" y="220" width="320" height="220" rx="10" fill="#e2e8f0" stroke="#40313a" stroke-width="7"/><path d="M400 150 L560 220 H240 Z" fill="#dc2626"/><rect x="360" y="300" width="80" height="140" fill="#64748b"/><circle cx="400" cy="190" r="28" fill="#f8fafc" stroke="#40313a" stroke-width="4"/>`;
+    case "caisse":
+      return `<rect x="180" y="260" width="440" height="160" rx="20" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="220" y="300" width="360" height="50" rx="8" fill="#22c55e"/><rect x="500" y="220" width="80" height="60" rx="8" fill="#94a3b8"/>${person(300, 110, color(seed, 2), "#5b341d", 1)}`;
+    case "attendre":
+      return `<rect x="120" y="180" width="200" height="280" rx="12" fill="#fef3c7" stroke="#40313a" stroke-width="6"/>${person(420, 130, color(seed, 1), "#4b2e1f", 0)}${person(560, 150, color(seed, 3), "#b45309", 2)}<path d="M500 420 H680" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>`;
+    case "pique-nique":
+      return `<ellipse cx="400" cy="470" rx="300" ry="60" fill="#86efac"/><rect x="280" y="340" width="240" height="20" rx="8" fill="#92400e"/>${person(320, 150, color(seed, 2), color(seed, 4), 1)}${person(480, 160, color(seed, 1), "#5b341d", 0)}<path d="M620 180 L650 120 L680 180 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/>`;
+    case "visite-touristique":
+      return `<path d="M360 420 L400 160 L440 420 Z" fill="#f8fafc" stroke="#40313a" stroke-width="6"/><ellipse cx="400" cy="470" rx="280" ry="50" fill="#bbf7d0"/>${person(250, 180, color(seed, 2), "#5b341d", 2)}${person(550, 190, color(seed, 3), "#b45309", 1)}<rect x="360" y="200" width="80" height="60" rx="6" fill="#dc2626"/>`;
+    case "jeu-de-societe":
+      return `<rect x="250" y="280" width="300" height="200" rx="16" fill="#22c55e" stroke="#40313a" stroke-width="7"/><circle cx="330" cy="360" r="28" fill="#facc15"/><circle cx="400" cy="330" r="32" fill="#ef4444"/><circle cx="470" cy="370" r="24" fill="#60a5fa"/>${person(400, 90, color(seed, 1), "#7c2d12", 0)}`;
+    case "cantine":
+      return `<rect x="150" y="200" width="500" height="220" rx="20" fill="#fff7ed" stroke="#40313a" stroke-width="7"/><rect x="200" y="260" width="400" height="40" rx="8" fill="#e2e8f0"/>${person(280, 100, color(seed, 2), "#5b341d", 1)}${person(520, 110, color(seed, 4), "#d97706", 2)}`;
+    case "gymnase":
+      return `<ellipse cx="400" cy="450" rx="280" ry="70" fill="#22c55e"/><rect x="300" y="180" width="200" height="120" rx="10" fill="#f8fafc" stroke="#40313a" stroke-width="6"/>${person(400, 90, color(seed, 3), "#b45309", 2)}<ellipse cx="400" cy="320" rx="40" ry="25" fill="#f97316"/>`;
+    case "yoga":
+      return `<rect x="160" y="300" width="480" height="40" rx="12" fill="#38bdf8" opacity=".5"/>${person(320, 180, color(seed, 1), "#4b2e1f", 0)}${person(480, 190, color(seed, 2), "#5b341d", 1)}<path d="M300 360 Q340 300 380 360" fill="none" stroke="#40313a" stroke-width="6"/>`;
+    case "jeu-video":
+      return `<rect x="220" y="200" width="360" height="220" rx="20" fill="#111827" stroke="#40313a" stroke-width="8"/><rect x="250" y="230" width="300" height="160" fill="#60a5fa"/>${person(620, 110, color(seed, 2), "#5b341d", 1)}`;
     default:
       return objectScene(slug, seed);
   }
@@ -218,6 +246,7 @@ const OBJECTS = [
   "volleyball", "basketball", "baskets", "pates", "bottes", "creme-solaire", "parapluie",
   "livre", "television", "train", "voiture", "cadeau", "saxophone", "cahier", "regle",
   "geographie", "francais", "mathematiques", "dessin", "salade",
+  "anglais", "appareil-photo", "musee", "bateau",
 ];
 
 const SITUATIONS = [
@@ -227,6 +256,8 @@ const SITUATIONS = [
   "malade", "absente", "vacances", "cours-sport", "piscine",
   "bibliotheque", "ecole", "hopital", "fete-fin-annee", "anniversaire", "jeux", "musique",
   "professeur-de-francais", "professeur-de-maths", "devoirs", "dormir", "repas", "theatre",
+  "mairie", "caisse", "attendre", "pique-nique", "visite-touristique", "jeu-de-societe",
+  "cantine", "gymnase", "yoga", "jeu-video",
 ];
 
 function svgFor(slug, whiteBg) {
