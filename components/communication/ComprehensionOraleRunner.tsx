@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { imageSourceFor } from "@/lib/curriculum/word-image-resolver";
+import { expressionImageSource } from "@/lib/curriculum/word-image-resolver";
 import {
   coGroupsByLevelCategory,
   pickCoGroup,
@@ -654,7 +654,7 @@ function choiceLabel(task: Extract<QuestionTask, { kind: "choice" }>, index: num
 }
 
 function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
-  const src = imageSourceFor(label, path);
+  const src = expressionImageSource(path);
   const [failed, setFailed] = useState(false);
   const heightCls = compact ? "h-20" : "h-24";
   if (src && !failed) {

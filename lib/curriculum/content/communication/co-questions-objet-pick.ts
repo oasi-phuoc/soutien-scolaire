@@ -4,115 +4,126 @@ export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
+function opImg(groupId: string, index: number): string {
+  return `/expression/co/base/objet-pick/${groupId}/${index}.webp`;
+}
+
+function opCards(
+  groupId: string,
+  defs: [Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">],
+): COObjetPickDef["cards"] {
+  return defs.map((card, index) => ({ ...card, image: opImg(groupId, index) })) as COObjetPickDef["cards"];
+}
+
 /** Cartes image 5× (3 + 2) — A1 base « Identifier des objets ». */
 export const CO_OBJET_PICK: Record<string, COObjetPickDef> = {
   "base-objet-1": {
-    cards: [
-      { label: "lampe", image: "/vocab/images/V4/lamp.webp", heard: false },
+    cards: opCards("base-objet-1", [
+      { label: "lampe", heard: false },
       { label: "poubelle", heard: true },
-      { label: "fleur", image: "/assets/words/img/fleur.webp", heard: true },
-      { label: "table", image: "/vocab/images/V4/table.webp", heard: true },
-      { label: "clé", image: "/vocab/images/V4/cle.webp", heard: true },
-    ],
+      { label: "fleur", heard: true },
+      { label: "table", heard: true },
+      { label: "clé", heard: true },
+    ]),
   },
   "base-objet-2": {
-    cards: [
-      { label: "guitare", image: "/assets/words/img/guitare.webp", heard: true },
-      { label: "piano", image: "/assets/words/img/piano.webp", heard: false },
-      { label: "sac", image: "/vocab/images/V6/sac-a-main.webp", heard: false },
-      { label: "robe", image: "/vocab/images/V6/robe.webp", heard: true },
+    cards: opCards("base-objet-2", [
+      { label: "guitare", heard: true },
+      { label: "piano", heard: false },
+      { label: "sac", heard: false },
+      { label: "robe", heard: true },
       { label: "talon", heard: false },
-    ],
+    ]),
   },
   "base-objet-3": {
-    cards: [
+    cards: opCards("base-objet-3", [
       { label: "carte d'étudiant", heard: true },
-      { label: "passeport", image: "/vocab/images/V10/passeport.webp", heard: false },
-      { label: "photo", image: "/assets/words/img/photo.webp", heard: true },
+      { label: "passeport", heard: false },
+      { label: "photo", heard: true },
       { label: "carte de crédit", heard: false },
       { label: "carte d'identité", heard: true },
-    ],
+    ]),
   },
   "base-objet-4": {
-    cards: [
-      { label: "cahier", image: "/vocab/images/V5/cahier.webp", heard: false },
-      { label: "surligneur", image: "/vocab/images/V5/surligneur.webp", heard: false },
-      { label: "stylo", image: "/vocab/images/V5/stylo.webp", heard: true },
-      { label: "règle", image: "/vocab/images/V5/regle.webp", heard: true },
+    cards: opCards("base-objet-4", [
+      { label: "cahier", heard: false },
+      { label: "surligneur", heard: false },
+      { label: "stylo", heard: true },
+      { label: "règle", heard: true },
       { label: "carte", heard: false },
-    ],
+    ]),
   },
   "base-objet-5": {
-    cards: [
-      { label: "voiture", image: "/vocab/images/V9/voiture.webp", heard: true },
-      { label: "avion", image: "/assets/words/img/avion.webp", heard: false },
-      { label: "États-Unis", image: "/vocab/images/V1/etats-unis.webp", heard: true },
+    cards: opCards("base-objet-5", [
+      { label: "voiture", heard: true },
+      { label: "avion", heard: false },
+      { label: "États-Unis", heard: true },
       { label: "hélicoptère", heard: true },
       { label: "appareil photo", heard: true },
-    ],
+    ]),
   },
   "base-objet-6": {
-    cards: [
+    cards: opCards("base-objet-6", [
       { label: "scotch", heard: true },
-      { label: "feuille", image: "/vocab/images/V5/feuille.webp", heard: false },
-      { label: "ciseaux", image: "/assets/words/img/ciseaux.webp", heard: false },
-      { label: "colle", image: "/vocab/images/V5/colle.webp", heard: false },
-      { label: "crayon de couleur", image: "/vocab/images/V5/crayon.webp", heard: true },
-    ],
+      { label: "feuille", heard: false },
+      { label: "ciseaux", heard: false },
+      { label: "colle", heard: false },
+      { label: "crayon de couleur", heard: true },
+    ]),
   },
   "base-objet-7": {
-    cards: [
-      { label: "gâteau", image: "/vocab/images/V10/gateau.webp", heard: true },
+    cards: opCards("base-objet-7", [
+      { label: "gâteau", heard: true },
       { label: "poulet", heard: true },
-      { label: "radis", image: "/vocab/images/V7/radis.webp", heard: false },
-      { label: "salade", image: "/vocab/images/V7/salade.webp", heard: true },
+      { label: "radis", heard: false },
+      { label: "salade", heard: true },
       { label: "gratin", heard: false },
-    ],
+    ]),
   },
   "base-objet-8": {
-    cards: [
-      { label: "chaise", image: "/vocab/images/V4/chaise.webp", heard: true },
-      { label: "bureau", image: "/vocab/images/V4/bureau.webp", heard: true },
-      { label: "lunettes", image: "/vocab/images/V6/lunettes.webp", heard: false },
-      { label: "médicament", image: "/vocab/images/V8/medicament.webp", heard: true },
+    cards: opCards("base-objet-8", [
+      { label: "chaise", heard: true },
+      { label: "bureau", heard: true },
+      { label: "lunettes", heard: false },
+      { label: "médicament", heard: true },
       { label: "ordinateur", heard: true },
-    ],
+    ]),
   },
   "base-objet-9": {
-    cards: [
-      { label: "fleur", image: "/assets/words/img/fleur.webp", heard: true },
-      { label: "table", image: "/vocab/images/V4/table.webp", heard: false },
+    cards: opCards("base-objet-9", [
+      { label: "fleur", heard: true },
+      { label: "table", heard: false },
       { label: "plume", heard: true },
-      { label: "cheval", image: "/vocab/images/V9/cheval.webp", heard: false },
-      { label: "gâteau", image: "/vocab/images/V10/gateau.webp", heard: true },
-    ],
+      { label: "cheval", heard: false },
+      { label: "gâteau", heard: true },
+    ]),
   },
   "base-objet-10": {
-    cards: [
+    cards: opCards("base-objet-10", [
       { label: "page", heard: false },
       { label: "corde", heard: true },
-      { label: "livre", image: "/vocab/images/V5/livre.webp", heard: false },
-      { label: "fleur", image: "/assets/words/img/fleur.webp", heard: false },
-      { label: "stylo", image: "/vocab/images/V5/stylo.webp", heard: true },
-    ],
+      { label: "livre", heard: false },
+      { label: "fleur", heard: false },
+      { label: "stylo", heard: true },
+    ]),
   },
   "base-objet-11": {
-    cards: [
+    cards: opCards("base-objet-11", [
       { label: "pizza", heard: true },
       { label: "macaron", heard: false },
-      { label: "jus", image: "/assets/words/img/jus.webp", heard: false },
-      { label: "fromage", image: "/assets/words/img/fromage.webp", heard: false },
-      { label: "fruit", image: "/assets/words/img/fruit.webp", heard: false },
-    ],
+      { label: "jus", heard: false },
+      { label: "fromage", heard: false },
+      { label: "fruit", heard: false },
+    ]),
   },
   "base-objet-12": {
-    cards: [
+    cards: opCards("base-objet-12", [
       { label: "cadeau", heard: true },
       { label: "seau", heard: false },
       { label: "élastique", heard: true },
-      { label: "tapis", image: "/assets/words/img/tapis.webp", heard: false },
+      { label: "tapis", heard: false },
       { label: "haltère", heard: false },
-    ],
+    ]),
   },
 };
 

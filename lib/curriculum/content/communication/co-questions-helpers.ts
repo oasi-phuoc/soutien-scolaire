@@ -1,4 +1,4 @@
-import { resolveWordImage, isImageableLabel } from "../../word-image-resolver";
+import { expressionImageSource } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
@@ -303,16 +303,10 @@ export function buildObjectPickTask(
   if (cards.length !== 5) {
     throw new Error("object pick: attendu 5 cartes");
   }
-  // Link any card without a curated image to a matching illustration in
-  // vocabulaire / lecture (falls back to the label text when none exists).
-  const linked = cards.map((card) => ({
-    ...card,
-    image: card.image ?? resolveWordImage(card.label) ?? undefined,
-  })) as typeof cards;
   return {
     kind: "object_pick",
     prompt: "Écoutez l'enregistrement. Cliquez sur les objets que vous entendez (ne cliquez pas sur les autres).",
-    cards: linked,
+    cards,
   };
 }
 
@@ -331,7 +325,7 @@ export function buildCoPartQuestions(
     // The "QCM image" format is only offered when the 3 options are genuinely
     // illustrable (object, clock/time or price). Otherwise (prénoms, villes,
     // pays, nombres, dates…) only text and fill formats are used.
-    const imageable = q.imageChoices.every((c) => isImageableLabel(c.label));
+    const imageable = q.imageChoices.every((c) => !!expressionImageSource(c.image));
     const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
     const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);

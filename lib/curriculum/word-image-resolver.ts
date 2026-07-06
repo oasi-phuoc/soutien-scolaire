@@ -283,11 +283,18 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
     path.startsWith("/vocab/images/")
     || path.startsWith("/assets/words/img/")
+    || path.startsWith("/expression/")
   );
 }
 
-/** Best image source for a labelled choice. */
+/** CE/CO — uniquement les assets dédiés sous /expression/. */
+export function expressionImageSource(path?: string | null): string | null {
+  return path && path.startsWith("/expression/") ? path : null;
+}
+
+/** Best image source for a labelled choice (vocab/lecture/horloge/prix). */
 export function imageSourceFor(label: string, path?: string): string | null {
+  if (expressionImageSource(path)) return path!;
   if (isResolvedImagePath(path)) return path!;
   if (!isImageableLabel(label)) return null;
   return resolveWordImage(label);
