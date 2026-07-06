@@ -177,6 +177,9 @@ body:has(.section-background-maths) {
 body:has(.section-background-placement),
 .placement-tcm,
 .placement-french-runner {
+  --color-theme: var(--color-accent-quiz);
+  --color-theme-light: color-mix(in oklch, var(--color-accent-quiz) 15%, white);
+  --color-theme-muted: color-mix(in oklch, var(--color-accent-quiz) 72%, white);
   --color-accent-alg: var(--color-accent-quiz);
   --color-accent-comm: var(--color-accent-quiz);
   --color-correction: #4F86D9;

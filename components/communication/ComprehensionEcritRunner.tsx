@@ -930,6 +930,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
           kind: "table",
           prompt:
             `${orientation!.context} Associez chaque personne au document qui lui correspond. ` +
+            `Une seule case par ligne et par colonne. ` +
             `Il y a ${orientation!.people.length} personnes et ${orientation!.docs.length} documents : ` +
             `${orientation!.people.filter(([, a]) => a === -1).length} personnes ne correspondent à aucun document — laissez leur ligne vide.`,
           documents: orientation!.docs.map(([title, subtitle, body], i) => ({ title, subtitle, body, tone: COLORS[i % COLORS.length]! })),
@@ -1159,6 +1160,22 @@ function RenderQuestion({ task, value, onChange, correction }: { task: QuestionT
 }
 
 function OrientationPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "orientation" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void; correction?: boolean }) {
+  function toggle(row: number, col: number) {
+    if (correction) return;
+    const key = questionKey(part, row);
+    const selected = answers[key];
+    if (selected === col) {
+      setAnswer(key, null);
+      return;
+    }
+    part.task.people.forEach((_, otherRow) => {
+      if (otherRow !== row && answers[questionKey(part, otherRow)] === col) {
+        setAnswer(questionKey(part, otherRow), null);
+      }
+    });
+    setAnswer(key, col);
+  }
+
   return (
     <div className="space-y-5">
       <p className="text-sm font-semibold italic text-[var(--color-text-primary)]">{part.task.prompt}</p>
@@ -1208,18 +1225,21 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
                     <td key={col} className="border border-[var(--color-border-default)] p-1 text-center">
                       <button
                         type="button"
-                        onClick={() => {
-                          if (correction) return;
-                          setAnswer(key, isSelected ? null : col);
-                        }}
-                        className={`mx-auto h-5 w-5 rounded border ${
-                          isCorrectCell ? "border-amber-500 bg-amber-100"
-                          : isWrongPick ? "border-red-400 bg-red-100"
-                          : isSelected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/20"
-                          : "border-slate-300"
-                        }`}
+                        disabled={correction}
+                        onClick={() => toggle(row, col)}
                         aria-label={`Document ${col + 1}`}
-                      />
+                        className={`mx-auto flex h-7 w-7 items-center justify-center rounded border transition ${
+                          isCorrectCell
+                            ? "border-amber-400 bg-amber-50 text-amber-700"
+                            : isWrongPick
+                              ? "border-red-300 bg-red-50 text-red-600 line-through"
+                              : isSelected
+                                ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]"
+                                : "border-slate-300 bg-white text-slate-400 hover:border-[var(--color-accent-comm)]"
+                        }`}
+                      >
+                        {isSelected || isCorrectCell ? "✓" : ""}
+                      </button>
                     </td>
                   );
                 })}

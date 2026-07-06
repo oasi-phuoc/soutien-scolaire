@@ -282,15 +282,18 @@ export function assertConversationImageGridDef(
 export function buildConversationImageGrid(
   activity: string,
   correctByCard: [number, number, number, number, number, number],
+  seed: string,
+  audio?: string,
 ): COConversationImageGridTask {
   assertConversationImageGridDef(correctByCard, activity);
-  const cards = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
+  const entries = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
     suffix,
     image: `/assets/expression/images/conversation-${activity}-${suffix}.webp`,
     correct: correctByCard[index]!,
   }));
-  const cardViews = cards.map(({ suffix, image }) => ({ suffix, image })) as COConversationImageGridTask["cards"];
-  const answers = cards.map((entry) => entry.correct) as COConversationImageGridTask["correctByCard"];
+  const shuffled = seededShuffle(entries, seed);
+  const cardViews = shuffled.map(({ suffix, image }) => ({ suffix, image })) as COConversationImageGridTask["cards"];
+  const answers = shuffled.map((entry) => entry.correct) as COConversationImageGridTask["correctByCard"];
 
   return {
     kind: "conversation_image_grid",
@@ -298,7 +301,7 @@ export function buildConversationImageGrid(
     prompt:
       "Écoutez les 4 dialogues. Pour chaque image, choisissez le numéro du dialogue correspondant " +
       "(1, 2, 3 ou 4). Deux images ne correspondent à aucun dialogue : laissez « — ».",
-    audio: `/assets/expression/co/base/public/conversation-${activity}.mp3`,
+    audio: audio ?? `/assets/expression/co/base/public/conversation-${activity}.mp3`,
     cards: cardViews,
     correctByCard: answers,
   };
