@@ -184,7 +184,7 @@ export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
     people: [
       ["Daryna aime nager.", 0],
       ["Mariam adore les animaux.", 2],
-      ["Tomislav fait de la course à pied.", -1],
+      ["Emre fait de la course à pied.", -1],
       ["Hassan veut faire du sport chez lui.", -1],
       ["Ibrahim veut jouer dans une équipe.", 3],
       ["Lucía aime les sports extrêmes.", 4],
@@ -327,7 +327,7 @@ export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
       ["Oksana aime toutes les danses.", 2],
       ["Matteo veut apprendre à peindre.", 5],
       ["Fatou veut faire du jogging en groupe.", -1],
-      ["Tomislav cherche un cours de natation.", -1],
+      ["Emre cherche un cours de natation.", -1],
     ],
   },
   {
@@ -458,7 +458,7 @@ export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
       ],
     ],
     people: [
-      ["Sofia adore les gâteaux.", 1],
+      ["Leyla adore les gâteaux.", 1],
       ["Matteo aime les plats italiens.", 2],
       ["Zahra aime la viande.", 0],
       ["Pablo adore les fruits de mer.", 4],
@@ -506,7 +506,7 @@ export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
     people: [
       ["Fatou veut faire les courses.", 4],
       ["Layla aime les films romantiques.", 1],
-      ["Tomislav veut s'acheter une télévision.", 0],
+      ["Emre veut s'acheter une télévision.", 0],
       ["Nasir a envie de changer de mobile.", 2],
       ["Kateryna aimerait s'acheter de nouveaux vêtements.", 3],
       ["Inês adore lire des romans.", 5],

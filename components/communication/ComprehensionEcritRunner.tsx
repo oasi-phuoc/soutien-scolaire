@@ -197,7 +197,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
       title: "Remplacement",
       image: "",
       imageLabel: "Remplacement",
-      body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.",
+      body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.\n— Samira",
       questions: [
         { prompt: "Où faut-il remplacer la personne ?", choices: [{ label: "À l'accueil" }, { label: "À la cuisine" }, { label: "Dans la rue" }], correct: 0 },
         { prompt: "Que faire si un client arrive en retard ?", choices: [{ label: "L'annuler" }, { label: "Proposer un autre rendez-vous" }, { label: "Fermer la porte" }], correct: 1 },
@@ -311,17 +311,17 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
 // --------------------------------------------------------------------------
 const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
   {
-    from: "camille@voisins.ch",
+    from: "leyla@voisins.ch",
     subject: "Un petit service pendant mes vacances",
     body:
-      "Bonjour,\nComme je pars en vacances la semaine prochaine, j'aimerais te demander un service. Peux-tu arroser mes plantes pendant mon absence ? Il faut le faire deux fois par semaine, le mardi et le samedi, mais seulement le soir, quand il fait moins chaud. La clé de l'appartement sera chez la gardienne, au rez-de-chaussée. Attention : ne donne pas trop d'eau aux cactus, sinon ils vont pourrir. Si tu as un problème, tu peux m'appeler, mais je répondrai surtout le week-end.\nMerci beaucoup, je te rapporterai un souvenir !\nCamille",
+      "Bonjour,\nComme je pars en vacances la semaine prochaine, j'aimerais te demander un service. Peux-tu arroser mes plantes pendant mon absence ? Il faut le faire deux fois par semaine, le mardi et le samedi, mais seulement le soir, quand il fait moins chaud. La clé de l'appartement sera chez la gardienne, au rez-de-chaussée. Attention : ne donne pas trop d'eau aux cactus, sinon ils vont pourrir. Si tu as un problème, tu peux m'appeler, mais je répondrai surtout le week-end.\nMerci beaucoup, je te rapporterai un souvenir !\nLeyla",
     questions: [
-      { prompt: "Pourquoi Camille écrit-elle ce message ?", choices: [{ label: "Pour inviter à un repas" }, { label: "Pour demander d'arroser ses plantes" }, { label: "Pour vendre son appartement" }], correct: 1 },
+      { prompt: "Pourquoi Leyla écrit-elle ce message ?", choices: [{ label: "Pour inviter à un repas" }, { label: "Pour demander d'arroser ses plantes" }, { label: "Pour vendre son appartement" }], correct: 1 },
       { prompt: "À quel moment de la journée faut-il arroser ?", choices: [{ label: "Le matin" }, { label: "Le soir" }, { label: "À midi" }], correct: 1 },
       { prompt: "Combien de fois par semaine faut-il arroser ?", choices: [{ label: "Une fois" }, { label: "Deux fois" }, { label: "Tous les jours" }], correct: 1 },
       { prompt: "Où se trouve la clé ?", choices: [{ label: "Chez la gardienne" }, { label: "Sous le paillasson" }, { label: "Dans la boîte aux lettres" }], correct: 0 },
       { prompt: "Que ne faut-il pas faire avec les cactus ?", answer: "trop d'eau", accept: ["donner trop d'eau", "trop arroser", "trop les arroser"] },
-      { prompt: "Quel jour Camille répond-elle le mieux au téléphone ?", answer: "le week-end", accept: ["week-end", "samedi ou dimanche"] },
+      { prompt: "Quel jour Leyla répond-elle le mieux au téléphone ?", answer: "le week-end", accept: ["week-end", "samedi ou dimanche"] },
     ],
   },
   {
@@ -342,11 +342,11 @@ const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
     from: "m.roche@magasin.ch",
     subject: "Ton nouvel horaire de travail",
     body:
-      "Bonjour Sofia,\nÀ partir de lundi prochain, ton horaire change un peu. Tu commenceras à 8 h 30 au lieu de 9 h, parce que nous recevons les livraisons plus tôt. En échange, tu pourras partir à 16 h le vendredi. N'oublie pas de porter l'uniforme et de badger en arrivant. Si tu ne peux pas venir un jour, préviens-moi la veille, et non le matin même. Enfin, nous ferons une réunion d'équipe le premier lundi du mois pour organiser les vacances d'été.\nBonne journée,\nM. Roche",
+      "Bonjour Oksana,\nÀ partir de lundi prochain, ton horaire change un peu. Tu commenceras à 8 h 30 au lieu de 9 h, parce que nous recevons les livraisons plus tôt. En échange, tu pourras partir à 16 h le vendredi. N'oublie pas de porter l'uniforme et de badger en arrivant. Si tu ne peux pas venir un jour, préviens-moi la veille, et non le matin même. Enfin, nous ferons une réunion d'équipe le premier lundi du mois pour organiser les vacances d'été.\nBonne journée,\nM. Roche",
     questions: [
-      { prompt: "À quelle heure Sofia commencera-t-elle désormais ?", choices: [{ label: "8 h" }, { label: "8 h 30" }, { label: "9 h" }], correct: 1 },
+      { prompt: "À quelle heure Oksana commencera-t-elle désormais ?", choices: [{ label: "8 h" }, { label: "8 h 30" }, { label: "9 h" }], correct: 1 },
       { prompt: "Pourquoi l'horaire change-t-il ?", choices: [{ label: "Les livraisons arrivent plus tôt" }, { label: "Le magasin ferme plus tard" }, { label: "Il y a moins de clients" }], correct: 0 },
-      { prompt: "Quel avantage Sofia reçoit-elle en échange ?", choices: [{ label: "Un jour de congé" }, { label: "Partir plus tôt le vendredi" }, { label: "Une augmentation" }], correct: 1 },
+      { prompt: "Quel avantage Oksana reçoit-elle en échange ?", choices: [{ label: "Un jour de congé" }, { label: "Partir plus tôt le vendredi" }, { label: "Une augmentation" }], correct: 1 },
       { prompt: "Quand faut-il prévenir en cas d'absence ?", choices: [{ label: "Le matin même" }, { label: "La veille" }, { label: "Une semaine avant" }], correct: 1 },
       { prompt: "Que faut-il faire en arrivant au travail ?", answer: "badger", accept: ["badger", "porter l'uniforme et badger", "pointer"] },
       { prompt: "Pourquoi y a-t-il une réunion le premier lundi du mois ?", answer: "organiser les vacances", accept: ["pour organiser les vacances d'été", "les vacances d'été", "organiser les vacances"] },
@@ -367,16 +367,16 @@ const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
     ],
   },
   {
-    from: "noemie@amis.ch",
+    from: "ines@amis.ch",
     subject: "Week-end à la montagne ?",
     body:
-      "Salut !\nÇa te dirait de venir à la montagne le week-end prochain ? Mes parents nous prêtent leur chalet à Verbier. On partirait vendredi après le travail et on rentrerait dimanche soir. Il faut prévoir de bonnes chaussures, parce qu'on aimerait faire une randonnée samedi, s'il ne pleut pas. Pour la nourriture, chacun apporte quelque chose : moi, je m'occupe du fromage pour la fondue, et toi, tu pourrais prendre le pain et le dessert. Réponds-moi vite, car il faut réserver les places dans la voiture de Léa.\nBisous,\nNoémie",
+      "Salut !\nÇa te dirait de venir à la montagne le week-end prochain ? Mes parents nous prêtent leur chalet à Verbier. On partirait vendredi après le travail et on rentrerait dimanche soir. Il faut prévoir de bonnes chaussures, parce qu'on aimerait faire une randonnée samedi, s'il ne pleut pas. Pour la nourriture, chacun apporte quelque chose : moi, je m'occupe du fromage pour la fondue, et toi, tu pourrais prendre le pain et le dessert. Réponds-moi vite, car il faut réserver les places dans la voiture de Mariam.\nBisous,\nInês",
     questions: [
-      { prompt: "Que propose Noémie ?", choices: [{ label: "Aller à la mer" }, { label: "Passer un week-end à la montagne" }, { label: "Rester en ville" }], correct: 1 },
+      { prompt: "Que propose Inês ?", choices: [{ label: "Aller à la mer" }, { label: "Passer un week-end à la montagne" }, { label: "Rester en ville" }], correct: 1 },
       { prompt: "Quand rentreraient-ils ?", choices: [{ label: "Vendredi soir" }, { label: "Samedi" }, { label: "Dimanche soir" }], correct: 2 },
       { prompt: "Pourquoi faut-il de bonnes chaussures ?", choices: [{ label: "Pour danser" }, { label: "Pour faire une randonnée" }, { label: "Pour visiter un musée" }], correct: 1 },
       { prompt: "Que doit apporter la personne qui reçoit le message ?", choices: [{ label: "Le fromage" }, { label: "Le pain et le dessert" }, { label: "Les boissons" }], correct: 1 },
-      { prompt: "Pourquoi faut-il répondre vite ?", answer: "réserver les places dans la voiture", accept: ["pour réserver les places", "réserver la voiture", "les places dans la voiture de léa"] },
+      { prompt: "Pourquoi faut-il répondre vite ?", answer: "réserver les places dans la voiture", accept: ["pour réserver les places", "réserver la voiture", "les places dans la voiture de mariam"] },
     ],
   },
   {
@@ -401,7 +401,7 @@ const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] = [
       title: "Utiliser le lave-linge partagé",
       image: "",
       imageLabel: "Lave-linge",
-      body: "Avant de lancer une machine, vérifiez qu'elle est vide et propre. Mettez votre linge, ajoutez la lessive dans le bac de gauche, puis choisissez le programme à 30 degrés pour les vêtements de couleur. Quand la machine est finie, sortez vite votre linge pour laisser la place aux autres et notez votre nom sur le tableau pour réserver le créneau suivant.",
+      body: "Avant de lancer une machine, vérifiez qu'elle est vide et propre. Mettez votre linge, ajoutez la lessive dans le bac de gauche, puis choisissez le programme à 30 degrés pour les vêtements de couleur. Quand la machine est finie, sortez vite votre linge pour laisser la place aux autres et notez votre nom sur le tableau pour réserver le créneau suivant. — Fatou",
       questions: [
         { prompt: "Où faut-il mettre la lessive ?", choices: [{ label: "Dans le bac de gauche" }, { label: "Directement sur le linge" }, { label: "Dans une poche" }], correct: 0 },
         { prompt: "Quel programme choisir pour les vêtements de couleur ?", choices: [{ label: "30 degrés" }, { label: "60 degrés" }, { label: "90 degrés" }], correct: 0 },
@@ -624,7 +624,7 @@ const CE_AVANCE_EMAILS: EmailSeriesItem[] = [
     from: "rh@entreprise.ch",
     subject: "Réponse à votre demande de télétravail",
     body:
-      "Bonjour,\nÀ la suite de votre demande, nous avons étudié la possibilité pour vous de travailler depuis chez vous. Nous pouvons vous proposer deux jours de télétravail par semaine, à condition que vous restiez joignable pendant les horaires habituels et que vous participiez aux réunions importantes en présentiel. Il faudrait choisir des jours fixes, afin que l'équipe sache quand vous êtes au bureau. L'entreprise fournira un ordinateur portable, mais la connexion Internet restera à votre charge. Cette organisation sera testée pendant trois mois ; ensuite, nous ferons le point ensemble pour décider si nous la maintenons. Si ces conditions vous conviennent, merci de me renvoyer le formulaire signé avant la fin du mois.\nCordialement,\nLe service des ressources humaines",
+      "Bonjour Mme Yuliia,\nÀ la suite de votre demande, nous avons étudié la possibilité pour vous de travailler depuis chez vous. Nous pouvons vous proposer deux jours de télétravail par semaine, à condition que vous restiez joignable pendant les horaires habituels et que vous participiez aux réunions importantes en présentiel. Il faudrait choisir des jours fixes, afin que l'équipe sache quand vous êtes au bureau. L'entreprise fournira un ordinateur portable, mais la connexion Internet restera à votre charge. Cette organisation sera testée pendant trois mois ; ensuite, nous ferons le point ensemble pour décider si nous la maintenons. Si ces conditions vous conviennent, merci de me renvoyer le formulaire signé avant la fin du mois.\nCordialement,\nLe service des ressources humaines",
     questions: [
       { prompt: "Que propose l'entreprise ?", choices: [{ label: "Deux jours de télétravail par semaine" }, { label: "Une augmentation de salaire" }, { label: "Un changement de poste" }], correct: 0 },
       { prompt: "Quelle est une des conditions posées ?", choices: [{ label: "Rester joignable aux horaires habituels" }, { label: "Travailler la nuit" }, { label: "Venir tous les jours au bureau" }], correct: 0 },
@@ -698,7 +698,7 @@ const CE_AVANCE_INSTRUCTIONS: InstructionSeriesItem[] = [
       title: "Faire une réclamation",
       image: "",
       imageLabel: "Réclamation",
-      body: "Si un produit que vous avez acheté est défectueux, commencez par rassembler la facture et l'emballage. Expliquez le problème par écrit, calmement et précisément, puis envoyez votre demande au service client. Gardez une copie de votre courrier : en cas de refus, elle vous sera utile pour aller plus loin.",
+      body: "Si un produit que vous avez acheté est défectueux, commencez par rassembler la facture et l'emballage. Expliquez le problème par écrit, calmement et précisément, puis envoyez votre demande au service client. Gardez une copie de votre courrier : en cas de refus, elle vous sera utile pour aller plus loin. Ahmad, conseiller clientèle.",
       questions: [
         { prompt: "Que faut-il rassembler en premier ?", choices: [{ label: "La facture et l'emballage" }, { label: "Des photos de vacances" }, { label: "De l'argent liquide" }], correct: 0 },
         { prompt: "Pourquoi garder une copie du courrier ?", choices: [{ label: "Elle sera utile en cas de refus" }, { label: "Pour la jeter plus tard" }, { label: "Pour la revendre" }], correct: 0 },

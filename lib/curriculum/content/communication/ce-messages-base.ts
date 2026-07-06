@@ -77,18 +77,18 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     ],
   },
   {
-    id: "estelle-courgettes",
-    from: "estelle@fmail.frr",
+    id: "ines-courgettes",
+    from: "ines@fmail.ch",
     subject: "Ce soir",
     body:
       "Salut,\nJ'ai une réunion importante au bureau sur le matériel informatique. Je ne peux pas acheter les ingrédients pour faire la tarte aux courgettes. " +
       "Peux-tu acheter du parmesan, deux piments et de l'huile ? Je rentre du travail à 18 heures, est-ce que tu peux venir à 19 heures ? " +
-      "Nous serons quatre ce soir. Mes cousines Fabienne et Félice viennent dîner à 20 heures.\nMerci.\nEstelle",
+      "Nous serons quatre ce soir. Mes cousines Lucía et Carmen viennent dîner à 20 heures.\nMerci.\nInês",
     image: "/expression/ce/base/message-02.webp",
     pool: [
       ceQ(
         "est-q1",
-        "Pourquoi Estelle ne peut-elle pas faire les courses ?",
+        "Pourquoi Inês ne peut-elle pas faire les courses ?",
         ["Elle est malade", "Elle a une réunion au bureau", "Elle part en voyage"],
         1,
         "Elle a une réunion importante au _________.",
@@ -112,7 +112,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "est-q4",
-        "À quelle heure Estelle rentre-t-elle du travail ?",
+        "À quelle heure Inês rentre-t-elle du travail ?",
         ["18 h", "19 h", "20 h"],
         0,
         "Elle rentre à ___ heures.",
@@ -150,14 +150,14 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
   },
   {
     id: "club-sport",
-    from: "thpicot@sportsetco.fr",
+    from: "emre@sportlausanne.ch",
     subject: "Bienvenue",
     body:
       "Bienvenue au club de sport !\n\nPour utiliser la salle, vous devez avoir l'équipement suivant :\n" +
       "— un haut (tee-shirt, débardeur) ;\n— un bas (short, jogging) ;\n— des baskets propres.\n\n" +
       "Nous vous rappelons que les chaussures de ville (bottines, talons…) sont interdites dans la salle.\n" +
-      "Apportez de l'eau et votre propre serviette. Accès aux douches pour 3 €.\n\n" +
-      "La salle ouvre tous les jours de 7 h à 21 h, sauf le dimanche : fermeture à 13 h.\n\nThomas Picot\nResponsable",
+      "Apportez de l'eau et votre propre serviette. Accès aux douches pour 3 CHF.\n\n" +
+      "La salle ouvre tous les jours de 7 h à 21 h, sauf le dimanche : fermeture à 13 h.\n\nEmre Yilmaz\nResponsable",
     image: "/expression/ce/base/message-03.webp",
     pool: [
       ceQ(
@@ -187,9 +187,9 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ceQ(
         "spo-q4",
         "Combien coûte l'accès aux douches ?",
-        ["3 €", "5 €", "10 €"],
+        ["3 CHF", "5 CHF", "10 CHF"],
         0,
-        "Les douches coûtent ___ €.",
+        "Les douches coûtent ___ CHF.",
         "3",
         ["trois"],
       ),
@@ -223,12 +223,12 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     ],
   },
   {
-    id: "ben-nacera-spectacle",
+    id: "samir-nacera-spectacle",
     subject: "Sortie",
     body:
-      "Salut !\nNous allons manger un croque-monsieur chez Mamie's, rue de la Victoire. Après, nous allons assister au spectacle de Dany B. " +
-      "Tu sais, l'humoriste très connu ! Ça commence à 20 h 30. La salle de spectacle est à côté du musée d'Art contemporain, sur la place de la Bastille. " +
-      "Tu peux réserver une place en ligne. Elle coûte 10 €.\nSi tu viens, rendez-vous place des Ternes vers 19 h. À plus !\nBen et Nacera",
+      "Salut !\nNous allons manger un croque-monsieur au café du Flon, place de la Riponne. Après, nous allons assister au spectacle de Gaspard Palsy à la salle Métropole. " +
+      "Tu sais, l'humoriste très connu ! Ça commence à 20 h 30. La salle est à côté du musée Arlaud, sur le boulevard de la Gare. " +
+      "Tu peux réserver une place en ligne. Elle coûte 25 CHF.\nSi tu viens, rendez-vous devant la station M2 Riponne vers 19 h. À plus !\nSamir et Nacera",
     image: "/expression/ce/base/message-04.webp",
     pool: [
       ceQ(
@@ -251,19 +251,20 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ceQ(
         "bn-q3",
         "Combien coûte une place ?",
-        ["5 €", "10 €", "20 €"],
+        ["15 CHF", "25 CHF", "40 CHF"],
         1,
-        "Une place coûte ___ €.",
-        "10",
-        ["dix"],
+        "Une place coûte ___ CHF.",
+        "25",
+        ["vingt-cinq"],
       ),
       ceQ(
         "bn-q4",
         "Où se trouve la salle de spectacle ?",
-        ["Près du musée d'Art contemporain", "Près de la gare", "Dans un parc"],
+        ["Près du musée Arlaud", "Près de la gare CFF", "Dans un parc"],
         0,
-        "La salle est à côté du musée d'Art _________.",
-        "contemporain",
+        "La salle est à côté du musée _________.",
+        "Arlaud",
+        ["arlaud"],
       ),
       ceQ(
         "bn-q5",
@@ -285,31 +286,31 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ceQ(
         "bn-q7",
         "Qui organise la sortie ?",
-        ["Claire et Marc", "Ben et Nacera", "Julia et Paul"],
+        ["Yuliia et Kwame", "Samir et Nacera", "Mariam et Emre"],
         1,
-        "Le message est signé Ben et _________.",
+        "Le message est signé Samir et _________.",
         "Nacera",
         ["nacera"],
       ),
     ],
   },
   {
-    id: "claire-anniversaire",
+    id: "yuliia-anniversaire",
     subject: "Invitation",
     body:
-      "Paris, 3 janvier\n\nSalut, j'ai bientôt vingt ans, le 1er février.\n" +
+      "Lausanne, 3 janvier\n\nSalut, j'ai bientôt vingt ans, le 1er février.\n" +
       "J'organise une fête le 30 janvier chez moi pour célébrer ça, à partir de 20 heures.\n\n" +
       "Tu peux venir ? Tu peux apporter des bouteilles de jus de fruit ou des gâteaux apéritifs.\n\n" +
-      "Voici mon adresse : 17 rue de la Paix. J'habite juste à côté d'un arrêt du bus 166. Le métro est un peu loin...\n\n" +
-      "Confirme ta présence par texto, s'il te plaît.\n\nClaire",
+      "Voici mon adresse : 17 rue du Simplon. J'habite juste à côté de l'arrêt du bus 1. Le métro M2 est à cinq minutes à pied.\n\n" +
+      "Confirme ta présence par texto, s'il te plaît.\n\nYuliia",
     image: "/expression/ce/base/message-05.webp",
     pool: [
       ceQ(
         "cl-q1",
-        "Quel âge aura Claire bientôt ?",
+        "Quel âge aura Yuliia bientôt ?",
         ["Dix-huit ans", "Vingt ans", "Trente ans"],
         1,
-        "Claire aura bientôt ___ ans.",
+        "Yuliia aura bientôt ___ ans.",
         "vingt",
         ["20"],
       ),
@@ -342,11 +343,12 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "cl-q5",
-        "Quel transport passe près de chez Claire ?",
-        ["Le tramway", "Le bus 166", "Le métro"],
+        "Quel transport passe près de chez Yuliia ?",
+        ["Le tramway", "Le bus 1", "Le train CFF"],
         1,
         "Le bus ___ passe devant chez elle.",
-        "166",
+        "1",
+        ["un"],
       ),
       ceQ(
         "cl-q6",
@@ -359,41 +361,42 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "cl-q7",
-        "Dans quelle ville habite Claire ?",
-        ["Lyon", "Paris", "Marseille"],
+        "Dans quelle ville habite Yuliia ?",
+        ["Genève", "Lausanne", "Berne"],
         1,
-        "Claire habite à _________.",
-        "Paris",
-        ["paris"],
+        "Yuliia habite à _________.",
+        "Lausanne",
+        ["lausanne"],
       ),
     ],
   },
   {
-    id: "marco-barbecue",
-    from: "marco@jmail.fr",
+    id: "kwame-barbecue",
+    from: "kwame@amis.ch",
     subject: "Barbecue",
     body:
-      "Bonjour !\n\nL'été arrive, j'organise un barbecue entre amis au bord de la mer samedi à 14 h.\n\n" +
+      "Bonjour !\n\nL'été arrive, j'organise un barbecue entre amis au bord du lac Léman samedi à 14 h.\n\n" +
       "Tu peux apporter à boire ? J'apporte à manger. On va organiser des jeux avec des équipes.\n\n" +
       "Des surprises sont à gagner !\n\nTu peux me confirmer ta présence par courriel, s'il te plaît ? " +
-      "Ne m'appelle pas ou n'envoie pas de SMS, mon téléphone est cassé !\n\nÀ bientôt,\nMarc",
+      "Ne m'appelle pas ou n'envoie pas de SMS, mon téléphone est cassé !\n\nÀ bientôt,\nKwame",
     image: "/expression/ce/base/message-06.webp",
     pool: [
       ceQ(
         "mb-q1",
-        "Qu'est-ce que Marc organise ?",
+        "Qu'est-ce que Kwame organise ?",
         ["Un barbecue", "Un anniversaire", "Une réunion"],
         0,
-        "Marc organise un _________.",
+        "Kwame organise un _________.",
         "barbecue",
       ),
       ceQ(
         "mb-q2",
         "Où aura lieu l'événement ?",
-        ["Au bord de la mer", "Dans un restaurant", "Dans un parc"],
+        ["Au bord du lac Léman", "Dans un restaurant", "Dans un parc"],
         0,
-        "C'est au bord de la _________.",
-        "mer",
+        "C'est au bord du lac _________.",
+        "Léman",
+        ["leman"],
       ),
       ceQ(
         "mb-q3",
@@ -423,7 +426,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "mb-q6",
-        "Pourquoi ne faut-il pas appeler Marc ?",
+        "Pourquoi ne faut-il pas appeler Kwame ?",
         ["Il est en voyage", "Son téléphone est cassé", "Il n'a pas de numéro"],
         1,
         "Son téléphone est _________.",
@@ -441,27 +444,27 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     ],
   },
   {
-    id: "elisa-gateau",
+    id: "daryna-gateau",
     subject: "Courses",
     body:
-      "Pour les 18 ans de Guillaume, je fais un gâteau aux fruits. Est-ce que tu peux acheter :\n" +
+      "Pour les 18 ans de Mateo, je fais un gâteau aux fruits. Est-ce que tu peux acheter :\n" +
       "– de la farine ;\n– 6 œufs ;\n– un litre de lait ;\n– du sucre vanillé ?\n" +
       "J'ai les autres ingrédients. Je te rappelle qu'on a rendez-vous à 19 heures ! " +
-      "Il faut que tu sois là avant 17 heures, car je dois préparer le gâteau juste avant la fête.\nÉlisa",
+      "Il faut que tu sois là avant 17 heures, car je dois préparer le gâteau juste avant la fête.\nDaryna",
     image: "/expression/ce/base/message-07.webp",
     pool: [
       ceQ(
         "el-q1",
         "Pour qui est la fête ?",
-        ["Guillaume", "Élisa", "Fabienne"],
+        ["Mateo", "Daryna", "Lucía"],
         0,
         "C'est pour les 18 ans de _________.",
-        "Guillaume",
-        ["guillaume"],
+        "Mateo",
+        ["mateo"],
       ),
       ceQ(
         "el-q2",
-        "Quel gâteau Élisa prépare-t-elle ?",
+        "Quel gâteau Daryna prépare-t-elle ?",
         ["Un gâteau aux fruits", "Une tarte aux pommes", "Un gâteau au chocolat"],
         0,
         "Elle fait un gâteau aux _________.",
@@ -513,24 +516,24 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     ],
   },
   {
-    id: "julia-arrivee",
-    from: "julia@voyage.fr",
+    id: "mariam-arrivee",
+    from: "mariam@voyage.ch",
     subject: "Arrivée",
     body:
-      "Salut !\n\nMon vol atterrit à Paris le jeudi 12 à 14 h 30. Tu peux venir me chercher en voiture ? " +
-      "J'ai deux grosses valises avec moi, je ne veux pas prendre le métro ou le bus. " +
+      "Salut !\n\nMon vol atterrit à Genève le jeudi 12 à 14 h 30. Tu peux venir me chercher en voiture ? " +
+      "J'ai deux grosses valises avec moi, je ne veux pas prendre le train ou le bus. " +
       "J'ai rendez-vous le jour même pour couper mes cheveux à 17 h.\n\n" +
-      "Ça te dit qu'on aille voir l'expo Dali le 16 ? Je peux avoir des places moins chères. Appelle-moi !\n\nJulia",
+      "Ça te dit qu'on aille voir l'expo Dali à Lausanne le 16 ? Je peux avoir des places moins chères. Appelle-moi !\n\nMariam",
     image: "/expression/ce/base/message-08.webp",
     pool: [
       ceQ(
         "jul-q1",
-        "Où atterrit le vol de Julia ?",
-        ["À Lyon", "À Paris", "À Genève"],
+        "Où atterrit le vol de Mariam ?",
+        ["À Lyon", "À Genève", "À Zurich"],
         1,
         "Le vol atterrit à _________.",
-        "Paris",
-        ["paris"],
+        "Genève",
+        ["geneve", "genève"],
       ),
       ceQ(
         "jul-q2",
@@ -543,7 +546,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "jul-q3",
-        "Quel moyen de transport Julia demande-t-elle ?",
+        "Quel moyen de transport Mariam demande-t-elle ?",
         ["La voiture", "Le métro", "Le bus"],
         0,
         "Elle demande une _________.",
@@ -551,8 +554,8 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "jul-q4",
-        "Pourquoi ne veut-elle pas prendre le métro ?",
-        ["Elle a deux grosses valises", "Elle est en retard", "Elle n'aime pas Paris"],
+        "Pourquoi ne veut-elle pas prendre le train ?",
+        ["Elle a deux grosses valises", "Elle est en retard", "Elle n'aime pas Genève"],
         0,
         "Elle a deux grosses _________.",
         "valises",
@@ -580,7 +583,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
         "Comment doit-on la contacter ?",
         ["Par texto", "En l'appelant", "Par courrier"],
         1,
-        "Julia dit : _________-moi !",
+        "Mariam dit : _________-moi !",
         "Appelle",
         ["appelle"],
       ),

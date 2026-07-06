@@ -321,7 +321,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
   },
   {
     id: "ski-bibliotheque",
-    from: "pauline@fmail.ch",
+    from: "rita@fmail.ch",
     subject: "Ski",
     body:
       "Salut,\n\n" +
@@ -330,12 +330,12 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "quand tu sors de chez toi, prends la rue du Grand-Chêne. " +
       "Marche jusqu'à la place Saint-François, puis tu tournes à droite, rue du Portail-Neuf. " +
       "La bibliothèque est en face d'une pharmacie, à côté du métro M2.\n\n" +
-      "Appelle-moi !\n\nPauline",
+      "Appelle-moi !\n\nRita",
     image: "/expression/ce/base/orientation/text-05.webp",
     pool: [
       ceQ(
         "ski-q1",
-        "Où Pauline part-elle en vacances ?",
+        "Où Rita part-elle en vacances ?",
         ["À Villars", "À Genève", "À Paris"],
         0,
         "Elle part au ski à _________.",
@@ -344,7 +344,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "ski-q2",
-        "Où Pauline propose-t-elle de passer prendre son ami ?",
+        "Où Rita propose-t-elle de passer prendre son ami ?",
         ["À la bibliothèque", "À la gare", "Au ski"],
         0,
         "Elle passe te chercher à la _________.",
@@ -386,7 +386,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       ),
       ceQ(
         "ski-q7",
-        "Quel jour part Pauline au ski ?",
+        "Quel jour part Rita au ski ?",
         ["Samedi", "Dimanche", "Vendredi"],
         0,
         "Elle part _________.",
@@ -405,7 +405,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Depuis le métro, tu vas tout droit, puis tu prends la première à droite et la deuxième à gauche. " +
       "C'est en face du cinéma Pathé sur le boulevard de Grancy. " +
       "Ensuite, on pourra aller dîner, je connais un endroit rue du Port, juste à côté. " +
-      "Appelle-moi !",
+      "Appelle-moi !\n\nSamira",
     image: "/expression/ce/base/orientation/text-06.webp",
     pool: [
       ceQ(
@@ -563,7 +563,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "C'est à côté du stand photo avec le clown.\n\n" +
       "L'entrée coûte 14 CHF, mais si tu réserves sur Internet, c'est 7 CHF. " +
       "Appelle-moi pour confirmer !\n\n" +
-      "P.-S. : Tu prends un parapluie ? On annonce de la pluie.",
+      "P.-S. : Tu prends un parapluie ? On annonce de la pluie.\n\nFatou",
     image: "/expression/ce/base/orientation/text-08.webp",
     pool: [
       ceQ(
