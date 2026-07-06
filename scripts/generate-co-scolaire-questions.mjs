@@ -135,10 +135,11 @@ for (const [key, text] of Object.entries(transcripts)) {
   if (cat === "message") entry = questionsForMessage(num, text);
   else if (cat === "annonce") entry = questionsForAnnonce(num, text);
   else entry = questionsForRadio(num, text);
-  if (entry.qs.length >= 3) pools.push(entry);
+  if (entry.qs.length >= 3 && !(cat === "message" && ["1", "2", "3", "4"].includes(num))) pools.push(entry);
 }
 
 let out = `import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
+import { SCOLAIRE_MESSAGES_1_TO_4 } from "./co-questions-scolaire-messages";
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */\n`;
 
@@ -153,6 +154,7 @@ out += `\nexport const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQu
 for (const [k, v] of Object.entries(exports)) {
   out += `  "${k}": ${v},\n`;
 }
+out += `  ...SCOLAIRE_MESSAGES_1_TO_4,\n`;
 out += `};\n`;
 
 fs.writeFileSync("lib/curriculum/content/communication/co-questions-scolaire-base.ts", out);

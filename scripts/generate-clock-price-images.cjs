@@ -88,7 +88,15 @@ function priceSvg(display) {
 }
 
 // ---- collect distinct labels from CO pools + CE image MCQ ---------------
-const CO_FILES = ["co-questions-base-messages.ts","co-questions-base-other.ts","co-questions-moyen.ts","co-questions-avance.ts","co-questions-avance-extra.ts"];
+const CO_FILES = [
+  "co-questions-base-messages.ts",
+  "co-questions-base-other.ts",
+  "co-questions-moyen.ts",
+  "co-questions-avance.ts",
+  "co-questions-avance-extra.ts",
+  "co-questions-scolaire-messages.ts",
+  "co-questions-scolaire-base.ts",
+];
 
 function distinctLabelsFromCo() {
   const set = new Set();

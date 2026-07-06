@@ -1,0 +1,160 @@
+/**
+ * Illustrations manga CO scolaire (exercices 1–4) → public/assets/expression/images-temp/
+ * Objets : fond blanc. Situations : décor coloré.
+ * Usage: node scripts/generate-scolaire-co-images-temp.cjs
+ */
+/* eslint-disable @typescript-eslint/no-require-imports */
+const fs = require("fs");
+const path = require("path");
+const sharp = require("sharp");
+
+const outDir = path.join(process.cwd(), "public/assets/expression/images-temp");
+
+function hash(value) {
+  let h = 2166136261;
+  for (const char of value) {
+    h ^= char.charCodeAt(0);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function color(seed, offset = 0) {
+  const h = (seed + offset * 53) % 360;
+  return `hsl(${h} 78% 62%)`;
+}
+
+function xml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function person(x, y, shirt, hair, pose = 0) {
+  const armLeft = pose % 2 === 0 ? `${x - 58},${y + 178} ${x - 116},${y + 128}` : `${x - 58},${y + 168} ${x - 118},${y + 198}`;
+  const armRight = pose % 3 === 0 ? `${x + 58},${y + 178} ${x + 126},${y + 130}` : `${x + 58},${y + 168} ${x + 116},${y + 198}`;
+  return `
+    <g stroke="#40313a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M${x - 38} ${y + 395} Q${x - 52} ${y + 505} ${x - 86} ${y + 570}" fill="none"/>
+      <path d="M${x + 38} ${y + 395} Q${x + 52} ${y + 505} ${x + 86} ${y + 570}" fill="none"/>
+      <path d="M${x - 74} ${y + 572} h58" />
+      <path d="M${x + 36} ${y + 572} h58" />
+      <path d="M${armLeft}" />
+      <path d="M${armRight}" />
+    </g>
+    <path d="M${x - 78} ${y + 170} Q${x} ${y + 120} ${x + 78} ${y + 170} L${x + 58} ${y + 395} Q${x} ${y + 430} ${x - 58} ${y + 395} Z" fill="${shirt}" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="${x}" cy="${y + 92}" rx="55" ry="62" fill="#ffd1a7" stroke="#40313a" stroke-width="5"/>
+    <path d="M${x - 56} ${y + 83} Q${x - 34} ${y - 5} ${x + 42} ${y + 24} Q${x + 82} ${y + 46} ${x + 48} ${y + 90} Q${x + 10} ${y + 54} ${x - 56} ${y + 83}Z" fill="${hair}" stroke="#40313a" stroke-width="5"/>
+    <ellipse cx="${x - 20}" cy="${y + 98}" rx="7" ry="11" fill="#263238"/>
+    <ellipse cx="${x + 24}" cy="${y + 98}" rx="7" ry="11" fill="#263238"/>
+    <path d="M${x - 18} ${y + 128} Q${x + 4} ${y + 145} ${x + 28} ${y + 126}" fill="none" stroke="#a64b5d" stroke-width="4" stroke-linecap="round"/>
+  `;
+}
+
+function objectScene(slug, seed) {
+  switch (slug) {
+    case "piano":
+      return `<rect x="220" y="180" width="360" height="260" rx="12" fill="#1f2937" stroke="#40313a" stroke-width="8"/><rect x="250" y="420" width="300" height="55" rx="8" fill="#92400e"/><rect x="260" y="200" width="280" height="28" fill="#f8fafc"/>`;
+    case "guitare":
+      return `<ellipse cx="400" cy="360" rx="120" ry="145" fill="#d97706" stroke="#40313a" stroke-width="8"/><rect x="385" y="120" width="30" height="250" rx="10" fill="#78350f"/><circle cx="400" cy="360" r="42" fill="#111827"/>`;
+    case "violon":
+      return `<ellipse cx="400" cy="330" rx="95" ry="130" fill="#b45309" stroke="#40313a" stroke-width="7"/><path d="M400 200 L400 120" stroke="#40313a" stroke-width="10"/><path d="M360 420 Q400 470 440 420" fill="none" stroke="#40313a" stroke-width="8"/>`;
+    case "ballon":
+      return `<circle cx="400" cy="310" r="150" fill="#f8fafc" stroke="#111827" stroke-width="10"/><path d="M400 460 L400 520 M370 520 H430" stroke="#40313a" stroke-width="8" stroke-linecap="round"/><path d="M250 250 Q400 120 550 250" fill="none" stroke="#111827" stroke-width="6"/>`;
+    case "eau":
+      return `<rect x="310" y="160" width="180" height="320" rx="40" fill="#bae6fd" stroke="#0369a1" stroke-width="8"/><rect x="350" y="120" width="100" height="60" rx="20" fill="#0ea5e9" stroke="#0369a1" stroke-width="6"/>`;
+    case "casquette":
+      return `<ellipse cx="400" cy="360" rx="170" ry="45" fill="#1d4ed8" stroke="#40313a" stroke-width="7"/><path d="M280 360 Q400 180 520 360 Z" fill="#2563eb" stroke="#40313a" stroke-width="7"/>`;
+    case "glace":
+      return `<path d="M360 420 L400 160 L440 420 Z" fill="#f9a8d4" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="150" r="55" fill="#fda4af" stroke="#40313a" stroke-width="6"/>`;
+    case "pizza":
+      return `<path d="M400 140 L560 430 H240 Z" fill="#fbbf24" stroke="#40313a" stroke-width="8"/><circle cx="350" cy="320" r="22" fill="#ef4444"/><circle cx="430" cy="290" r="18" fill="#ef4444"/><circle cx="460" cy="360" r="20" fill="#ef4444"/>`;
+    case "sandwich":
+      return `<rect x="250" y="220" width="300" height="200" rx="35" fill="#fde68a" stroke="#40313a" stroke-width="8"/><rect x="270" y="250" width="260" height="30" rx="8" fill="#84cc16"/><rect x="270" y="300" width="260" height="30" rx="8" fill="#f87171"/>`;
+    case "frere":
+    case "soeur":
+    case "cousin":
+    case "pere":
+      return person(400, 120, color(seed, 1), color(seed, 3), slug === "pere" ? 1 : 0);
+    default:
+      return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
+  }
+}
+
+function situationScene(slug, seed) {
+  switch (slug) {
+    case "cinema":
+      return `${person(180, 110, color(seed, 2), "#5b341d", 0)}<rect x="300" y="150" width="380" height="220" rx="20" fill="#111827"/><rect x="330" y="180" width="320" height="160" fill="#60a5fa"/>`;
+    case "concert":
+      return `<rect x="120" y="380" width="560" height="120" rx="20" fill="#312e81"/><circle cx="280" cy="200" r="40" fill="#facc15"/><circle cx="400" cy="170" r="50" fill="#f472b6"/><circle cx="520" cy="200" r="40" fill="#38bdf8"/>${person(400, 90, color(seed, 4), "#7c2d12", 2)}`;
+    case "football":
+      return `<ellipse cx="400" cy="430" rx="280" ry="70" fill="#22c55e"/><circle cx="400" cy="300" r="55" fill="#f8fafc" stroke="#111827" stroke-width="6"/>${person(250, 120, color(seed, 1), "#4b2e1f", 0)}${person(550, 130, color(seed, 3), "#b45309", 1)}`;
+    case "magasins":
+      return `<rect x="100" y="140" width="600" height="280" rx="30" fill="#fef3c7" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 6 }, (_, i) => `<rect x="${150 + i * 90}" y="200" width="60" height="140" rx="10" fill="${color(seed, i)}"/>`).join("")}${person(200, 100, color(seed, 2), "#5b341d", 0)}`;
+    case "restaurant":
+      return `<rect x="150" y="180" width="500" height="220" rx="25" fill="#fff7ed" stroke="#40313a" stroke-width="7"/><circle cx="320" cy="290" r="50" fill="#f87171"/><circle cx="480" cy="290" r="55" fill="#fbbf24"/>${person(620, 110, color(seed, 1), "#7c2d12", 1)}`;
+    case "sport-au-parc":
+      return `<ellipse cx="400" cy="450" rx="300" ry="80" fill="#86efac"/><rect x="180" y="250" width="40" height="180" fill="#854d0e"/><circle cx="200" cy="230" r="70" fill="#22c55e" opacity=".7"/>${person(420, 110, color(seed, 2), "#5b341d", 2)}`;
+    case "se-reposer":
+      return `<rect x="180" y="320" width="440" height="90" rx="20" fill="#38bdf8" opacity=".35"/>${person(400, 180, color(seed, 1), "#4b2e1f", 0)}`;
+    case "gouter":
+      return `<rect x="250" y="350" width="300" height="30" rx="10" fill="#92400e"/><circle cx="330" cy="310" r="35" fill="#fbbf24"/><circle cx="470" cy="300" r="40" fill="#fb923c"/>${person(400, 100, color(seed, 3), "#b45309", 1)}`;
+    case "bus":
+      return `<rect x="120" y="220" width="560" height="170" rx="40" fill="#facc15" stroke="#40313a" stroke-width="8"/><circle cx="240" cy="400" r="35" fill="#1f2937"/><circle cx="560" cy="400" r="35" fill="#1f2937"/>`;
+    case "cours":
+      return `<rect x="120" y="140" width="560" height="300" rx="25" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="180" y="190" width="200" height="120" fill="#dbeafe"/>${person(500, 100, color(seed, 2), "#5b341d", 0)}`;
+    case "metro":
+      return `<rect x="100" y="280" width="600" height="120" rx="20" fill="#94a3b8"/><rect x="180" y="200" width="440" height="90" rx="30" fill="#ef4444" stroke="#40313a" stroke-width="6"/><text x="400" y="260" font-family="Arial" font-size="42" font-weight="700" text-anchor="middle" fill="#fff">M</text>`;
+    case "apprentissage":
+      return `<rect x="220" y="200" width="360" height="240" rx="20" fill="#fef3c7" stroke="#40313a" stroke-width="6"/><path d="M260 260 H540 M260 310 H500 M260 360 H520" stroke="#64748b" stroke-width="8" stroke-linecap="round"/>${person(400, 80, color(seed, 1), "#4b2e1f", 0)}`;
+    case "couloir":
+      return `<rect x="280" y="120" width="240" height="380" fill="#e2e8f0"/><rect x="320" y="160" width="80" height="120" fill="#bfdbfe"/><rect x="420" y="160" width="80" height="120" fill="#bbf7d0"/>`;
+    case "maison":
+      return `<path d="M400 120 L580 260 V430 H220 V260 Z" fill="#fde68a" stroke="#40313a" stroke-width="8"/><rect x="350" y="320" width="100" height="110" fill="#92400e"/>`;
+    default:
+      return objectScene(slug, seed);
+  }
+}
+
+const OBJECTS = [
+  "piano", "guitare", "violon", "ballon", "eau", "casquette", "glace", "pizza", "sandwich",
+  "frere", "soeur", "cousin", "pere",
+];
+
+const SITUATIONS = [
+  "cinema", "concert", "football", "magasins", "restaurant", "sport-au-parc", "se-reposer",
+  "gouter", "bus", "cours", "metro", "apprentissage", "couloir", "maison",
+];
+
+function svgFor(slug, whiteBg) {
+  const seed = hash(slug);
+  const body = whiteBg ? objectScene(slug, seed) : situationScene(slug, seed);
+  const bg = whiteBg
+    ? `<rect width="800" height="600" fill="#ffffff"/>`
+    : `<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="${color(seed, 0)}" stop-opacity=".25"/><stop offset="100%" stop-color="${color(seed, 4)}" stop-opacity=".4"/></linearGradient></defs><rect width="800" height="600" fill="url(#bg)"/><path d="M0 505 C150 450 260 540 410 495 C560 450 650 495 800 450 V600 H0Z" fill="#f8fafc" opacity=".75"/>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="${xml(slug)}">
+  ${bg}
+  <g>${body}</g>
+</svg>`;
+}
+
+async function main() {
+  fs.mkdirSync(outDir, { recursive: true });
+  let made = 0;
+  for (const slug of OBJECTS) {
+    const out = path.join(outDir, `${slug}.webp`);
+    await sharp(Buffer.from(svgFor(slug, true))).resize(800, 600).webp({ quality: 85 }).toFile(out);
+    made++;
+  }
+  for (const slug of SITUATIONS) {
+    const out = path.join(outDir, `${slug}.webp`);
+    await sharp(Buffer.from(svgFor(slug, false))).resize(800, 600).webp({ quality: 85 }).toFile(out);
+    made++;
+  }
+  console.log(`Generated ${made} images → ${path.relative(process.cwd(), outDir)}`);
+}
+
+main().catch((e) => { console.error(e); process.exit(1); });

@@ -1,4 +1,5 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
+import { SCOLAIRE_MESSAGES_1_TO_4 } from "./co-questions-scolaire-messages";
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */
 
@@ -182,42 +183,6 @@ const SCOLAIRE_MESSAGE_19 = buildPool("base", "scolaire-message-19", [
   }
 ]);
 
-const SCOLAIRE_MESSAGE_1 = buildPool("base", "scolaire-message-1", [
-  {
-    id: "sm1-t", textQ: "À quelle heure a lieu l'activité ?", text: ["10 h", "15 h", "14 h 30"], textC: 1,
-    img: ["10 h", "15 h", "14 h 30"], imgC: 1,
-    fillQ: "L'activité est à ___ .", fill: "15h", fillA: ["15h"],
-  },
-  {
-    id: "sm1-a", textQ: "Quel sport est mentionné ?", text: ["Tennis", "Basket", "Football"], textC: 2,
-    img: ["Tennis", "Basket", "Football"], imgC: 2,
-    fillQ: "Il s'agit de ___ .", fill: "football", fillA: ["football"],
-  },
-  {
-    id: "sm1-g", textQ: "Quel type de message est-ce ?", text: ["Un message entre amis", "Une annonce à la radio", "Un bulletin météo"], textC: 0,
-    img: ["Un message entre…", "Une annonce à la…", "Un bulletin météo"], imgC: 0,
-    fillQ: "C'est un message ___ .", fill: "entre amis", fillA: ["entre amis"],
-  }
-]);
-
-const SCOLAIRE_MESSAGE_4 = buildPool("base", "scolaire-message-4", [
-  {
-    id: "sm4-t", textQ: "À quelle heure a lieu l'activité ?", text: ["10 h", "18 h 15", "14 h 30"], textC: 1,
-    img: ["10 h", "18 h 15", "14 h 30"], imgC: 1,
-    fillQ: "L'activité est à ___ .", fill: "18h15", fillA: ["18h15"],
-  },
-  {
-    id: "sm4-e", textQ: "Le message parle surtout de…", text: ["Les vacances", "L'école", "Le travail"], textC: 1,
-    img: ["Les vacances", "L'école", "Le travail"], imgC: 1,
-    fillQ: "Le sujet est l'___ .", fill: "école", fillA: ["école"],
-  },
-  {
-    id: "sm4-x", textQ: "Y a-t-il un problème ou un changement ?", text: ["Oui", "Non", "Un voyage"], textC: 0,
-    img: ["Oui", "Non", "Un voyage"], imgC: 0,
-    fillQ: "Il y a un ___ .", fill: "problème", fillA: ["problème"],
-  }
-]);
-
 const SCOLAIRE_MESSAGE_6 = buildPool("base", "scolaire-message-6", [
   {
     id: "sm6-a", textQ: "Quel sport est mentionné ?", text: ["Tennis", "Basket", "Football"], textC: 2,
@@ -337,8 +302,7 @@ export const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQuestion[]> 
   "base-scolaire-message-16": SCOLAIRE_MESSAGE_16,
   "base-scolaire-message-17": SCOLAIRE_MESSAGE_17,
   "base-scolaire-message-19": SCOLAIRE_MESSAGE_19,
-  "base-scolaire-message-1": SCOLAIRE_MESSAGE_1,
-  "base-scolaire-message-4": SCOLAIRE_MESSAGE_4,
+  ...SCOLAIRE_MESSAGES_1_TO_4,
   "base-scolaire-message-6": SCOLAIRE_MESSAGE_6,
   "base-scolaire-message-8": SCOLAIRE_MESSAGE_8,
   "base-scolaire-message-9": SCOLAIRE_MESSAGE_9,

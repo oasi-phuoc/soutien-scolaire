@@ -40,6 +40,7 @@ const CONCRETE_SINGLE = new Set([
   "ordinateur", "photo", "appareil", "camera", "caméra", "cle", "clé", "carte", "passeport",
   "neige", "plage", "soleil", "boxe", "marche", "ski", "haltere", "haltère", "guitare", "piano",
   "fleur", "fleurs", "boutique", "fleuriste", "boisson", "infusion", "hygiene", "hygiène",
+  "frere", "soeur", "cousin", "pere", "magasins", "parc", "ballon", "casquette", "glace", "pizza", "sandwich",
 ]);
 
 /** Homographes : mot illustrable mais utilisé comme prénom/nom propre dans CO. */
@@ -296,18 +297,23 @@ const EXPRESSION_OBJET_PICK =
 const EXPRESSION_CE_BASE =
   /^\/assets\/expression\/ce\/base\//;
 
+const EXPRESSION_IMAGES_TEMP =
+  /^\/assets\/expression\/images-temp\/[^/]+\.webp$/;
+
 const EXPRESSION_IMAGES =
   /^\/assets\/expression\/images\/[^/]+\.webp$/;
 
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path && (
-    EXPRESSION_IMAGES.test(path)
+    EXPRESSION_IMAGES_TEMP.test(path)
+    || EXPRESSION_IMAGES.test(path)
     || EXPRESSION_CO_CURATED.test(path)
     || EXPRESSION_OBJET_PICK.test(path)
     || EXPRESSION_CE_BASE.test(path)
   )) return path;
   if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
+  if (path?.startsWith("/assets/expression/images-temp/")) return path;
   if (label && isImageableLabel(label)) return resolveWordImage(label);
   return null;
 }

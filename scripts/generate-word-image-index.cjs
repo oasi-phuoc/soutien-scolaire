@@ -24,6 +24,7 @@ const path = require("path");
 const root = process.cwd();
 const lectureDir = path.join(root, "public/assets/words/lecture");
 const expressionDir = path.join(root, "public/assets/expression/images");
+const expressionTempDir = path.join(root, "public/assets/expression/images-temp");
 const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
@@ -53,7 +54,10 @@ function addFrom(dir, urlPrefix, index) {
 function main() {
   const index = new Map();
 
-  // Priority 1: CE/CO common manga illustrations.
+  // Priority 1: CO scolaire / temp manga illustrations (override expression/images when same slug).
+  addFrom(expressionTempDir, "/assets/expression/images-temp", index);
+
+  // Priority 2: CE/CO common manga illustrations.
   addFrom(expressionDir, "/assets/expression/images", index);
 
   // Priority 2: lecture unified pool.
