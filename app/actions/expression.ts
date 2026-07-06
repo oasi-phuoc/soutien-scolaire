@@ -366,3 +366,55 @@ export async function reviewExpressionAction(input: {
   revalidatePath("/placement/statistiques");
   return { ok: true };
 }
+
+export type InboxDeleteItem = { id: string; kind: "expression" | "task" };
+
+export async function deleteInboxMessagesAction(
+  items: InboxDeleteItem[],
+): Promise<{ ok: boolean; deleted: number; reason?: string }> {
+  const session = await currentSession();
+  if (!session) return { ok: false, deleted: 0, reason: "Vous devez être connecté." };
+  if (!items.length) return { ok: false, deleted: 0, reason: "Aucun message sélectionné." };
+
+  const unique = new Map<string, InboxDeleteItem>();
+  for (const item of items) unique.set(`${item.kind}:${item.id}`, item);
+
+  let deleted = 0;
+  for (const item of unique.values()) {
+    if (item.kind === "task") {
+      const { error, count } = await session.supabase
+        .from("task_messages")
+        .delete({ count: "exact" })
+        .eq("id", item.id)
+        .eq("student_id", session.user.id);
+      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
+      continue;
+    }
+
+    if (session.role === "prof") {
+      const { error, count } = await session.supabase
+        .from("expression_submissions")
+        .delete({ count: "exact" })
+        .eq("id", item.id)
+        .eq("teacher_id", session.user.id);
+      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
+    } else if (session.role === "admin") {
+      const { error, count } = await session.supabase
+        .from("expression_submissions")
+        .delete({ count: "exact" })
+        .eq("id", item.id)
+        .or(`teacher_id.eq.${session.user.id},student_id.eq.${session.user.id}`);
+      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
+    } else {
+      const { error, count } = await session.supabase
+        .from("expression_submissions")
+        .delete({ count: "exact" })
+        .eq("id", item.id)
+        .eq("student_id", session.user.id);
+      if (!error && (count ?? 0) > 0) deleted += count ?? 0;
+    }
+  }
+
+  revalidatePath("/messagerie");
+  return { ok: deleted > 0, deleted, reason: deleted > 0 ? undefined : "Aucun message supprimé." };
+}
