@@ -86,7 +86,10 @@ export const A2_GR_L36: GrammarLesson = {
       rows: [
         ["Partitif (du / de la / de l')", "Je mange du pain.", "J'{a}en{/a} mange."],
         ["Article indéfini (des / un / une)", "J'ai des amis.", "J'{a}en{/a} ai."],
+        ["un / une (affirmatif)", "As-tu un ordinateur ?", "Oui, j'{a}en{/a} ai {a}un{/a}."],
+        ["un / une (négatif)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."],
         ["De + nom (verbe + de)", "J'ai besoin de temps.", "J'{a}en{/a} ai besoin."],
+        ["Verbe + de (instrument)", "Je joue du violon.", "Ça fait combien de temps que tu {a}en{/a} joues ?"],
         ["De + lieu", "Je reviens de Paris.", "J'{a}en{/a} reviens."],
       ],
       transHeaders: {
@@ -97,11 +100,27 @@ export const A2_GR_L36: GrammarLesson = {
         uk: ["Що замінює EN", "Початкове речення", "→ Із EN"],
       },
       transRows: {
-        en: [["Partitive (du / de la / de l')", "Je mange du pain. (I eat bread.)", "J'{a}en{/a} mange. (I eat some.)"], ["Indefinite article (des / un / une)", "J'ai des amis. (I have friends.)", "J'{a}en{/a} ai. (I have some.)"], ["De + noun (verb + de)", "J'ai besoin de temps. (I need time.)", "J'{a}en{/a} ai besoin. (I need some.)"], ["De + place", "Je reviens de Paris. (I come back from Paris.)", "J'{a}en{/a} reviens. (I come back from there.)"]],
-        ar: [["تجزئة (du / de la / de l')", "Je mange du pain. (آكل خبزاً.)", "J'{a}en{/a} mange. (آكل منه.)"], ["أداة نكرة (des / un / une)", "J'ai des amis. (لديّ أصدقاء.)", "J'{a}en{/a} ai. (لديّ منهم.)"], ["De + اسم (فعل + de)", "J'ai besoin de temps. (أحتاج إلى وقت.)", "J'{a}en{/a} ai besoin. (أحتاج إليه.)"], ["De + مكان", "Je reviens de Paris. (أعود من باريس.)", "J'{a}en{/a} reviens. (أعود منها.)"]],
-        fa: [["جزئی (du / de la / de l')", "Je mange du pain. (نان می‌خورم.)", "J'{a}en{/a} mange. (مقداری از آن می‌خورم.)"], ["حرف نکره (des / un / une)", "J'ai des amis. (دوستانی دارم.)", "J'{a}en{/a} ai. (تعدادی دارم.)"], ["De + اسم (فعل + de)", "J'ai besoin de temps. (به زمان نیاز دارم.)", "J'{a}en{/a} ai besoin. (به آن نیاز دارم.)"], ["De + مکان", "Je reviens de Paris. (از پاریس برمی‌گردم.)", "J'{a}en{/a} reviens. (از آنجا برمی‌گردم.)"]],
-        ti: [["ኸፋላዊ (du / de la / de l')", "Je mange du pain. (ባኒ እበልዕ።)", "J'{a}en{/a} mange. (ካብኡ እበልዕ።)"], ["ዘይተወሰነ ኣርቲክል (des / un / une)", "J'ai des amis. (ኣዕሩኽ ኣለዉኒ።)", "J'{a}en{/a} ai. (ገሊኦም ኣለዉኒ።)"], ["De + ስም (ግሲ + de)", "J'ai besoin de temps. (ግዜ የድልየኒ።)", "J'{a}en{/a} ai besoin. (ንዕኡ የድልየኒ።)"], ["De + ቦታ", "Je reviens de Paris. (ካብ ፓሪስ እምለስ።)", "J'{a}en{/a} reviens. (ካብኡ እምለስ።)"]],
-        uk: [["Частковий (du / de la / de l')", "Je mange du pain. (Я їм хліб.)", "J'{a}en{/a} mange. (Я їм трохи.)"], ["Неозначений артикль (des / un / une)", "J'ai des amis. (У мене є друзі.)", "J'{a}en{/a} ai. (У мене є кілька.)"], ["De + іменник (дієслово + de)", "J'ai besoin de temps. (Мені потрібен час.)", "J'{a}en{/a} ai besoin. (Мені це потрібно.)"], ["De + місце", "Je reviens de Paris. (Я повертаюся з Парижа.)", "J'{a}en{/a} reviens. (Я звідти повертаюся.)"]],
+        en: [["Partitive (du / de la / de l')", "Je mange du pain. (I eat bread.)", "J'{a}en{/a} mange. (I eat some.)"], ["Indefinite article (des / un / une)", "J'ai des amis. (I have friends.)", "J'{a}en{/a} ai. (I have some.)"], ["un / une (affirmative)", "As-tu un ordinateur ? (Do you have a computer?)", "Oui, j'{a}en{/a} ai {a}un{/a}. (Yes, I have one.)"], ["un / une (negative)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."], ["De + noun (verb + de)", "J'ai besoin de temps. (I need time.)", "J'{a}en{/a} ai besoin. (I need some.)"], ["Verb + de (instrument)", "Je joue du violon. (I play the violin.)", "Ça fait combien de temps que tu {a}en{/a} joues ?"], ["De + place", "Je reviens de Paris. (I come back from Paris.)", "J'{a}en{/a} reviens. (I come back from there.)"]],
+        ar: [["تجزئة (du / de la / de l')", "Je mange du pain. (آكل خبزاً.)", "J'{a}en{/a} mange. (آكل منه.)"], ["أداة نكرة (des / un / une)", "J'ai des amis. (لديّ أصدقاء.)", "J'{a}en{/a} ai. (لديّ منهم.)"], ["un / une (مثبت)", "As-tu un ordinateur ?", "Oui, j'{a}en{/a} ai {a}un{/a}."], ["un / une (منفي)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."], ["De + اسم (فعل + de)", "J'ai besoin de temps. (أحتاج إلى وقت.)", "J'{a}en{/a} ai besoin. (أحتاج إليه.)"], ["فعل + de", "Je joue du violon.", "Ça fait combien de temps que tu {a}en{/a} joues ?"], ["De + مكان", "Je reviens de Paris. (أعود من باريس.)", "J'{a}en{/a} reviens. (أعود منها.)"]],
+        fa: [["جزئی (du / de la / de l')", "Je mange du pain. (نان می‌خورم.)", "J'{a}en{/a} mange. (مقداری از آن می‌خورم.)"], ["حرف نکره (des / un / une)", "J'ai des amis. (دوستانی دارم.)", "J'{a}en{/a} ai. (تعدادی دارم.)"], ["un / une (مثبت)", "As-tu un ordinateur ?", "Oui, j'{a}en{/a} ai {a}un{/a}."], ["un / une (منفی)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."], ["De + اسم (فعل + de)", "J'ai besoin de temps. (به زمان نیاز دارم.)", "J'{a}en{/a} ai besoin. (به آن نیاز دارم.)"], ["فعل + de", "Je joue du violon.", "Ça fait combien de temps que tu {a}en{/a} joues ?"], ["De + مکان", "Je reviens de Paris. (از پاریس برمی‌گردم.)", "J'{a}en{/a} reviens. (از آنجا برمی‌گردم.)"]],
+        ti: [["ኸፋላዊ (du / de la / de l')", "Je mange du pain. (ባኒ እበልዕ።)", "J'{a}en{/a} mange. (ካብኡ እበልዕ።)"], ["ዘይተወሰነ ኣርቲክል (des / un / une)", "J'ai des amis. (ኣዕሩኽ ኣለዉኒ።)", "J'{a}en{/a} ai. (ገሊኦም ኣለዉኒ።)"], ["un / une (ኣረጋጋጺ)", "As-tu un ordinateur ?", "Oui, j'{a}en{/a} ai {a}un{/a}."], ["un / une (ኣሉታዊ)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."], ["De + ስም (ግሲ + de)", "J'ai besoin de temps. (ግዜ የድልየኒ።)", "J'{a}en{/a} ai besoin. (ንዕኡ የድልየኒ።)"], ["ግሲ + de", "Je joue du violon.", "Ça fait combien de temps que tu {a}en{/a} joues ?"], ["De + ቦታ", "Je reviens de Paris. (ካብ ፓሪስ እምለስ።)", "J'{a}en{/a} reviens. (ካብኡ እምለስ።)"]],
+        uk: [["Частковий (du / de la / de l')", "Je mange du pain. (Я їм хліб.)", "J'{a}en{/a} mange. (Я їм трохи.)"], ["Неозначений артикль (des / un / une)", "J'ai des amis. (У мене є друзі.)", "J'{a}en{/a} ai. (У мене є кілька.)"], ["un / une (ствердження)", "As-tu un ordinateur ?", "Oui, j'{a}en{/a} ai {a}un{/a}."], ["un / une (заперечення)", "As-tu un ordinateur ?", "Non, je n'{a}en{/a} ai pas."], ["De + іменник (дієслово + de)", "J'ai besoin de temps. (Мені потрібен час.)", "J'{a}en{/a} ai besoin. (Мені це потрібно.)"], ["Дієслово + de", "Je joue du violon.", "Ça fait combien de temps que tu {a}en{/a} joues ?"], ["De + місце", "Je reviens de Paris. (Я повертаюся з Парижа.)", "J'{a}en{/a} reviens. (Я звідти повертаюся.)"]],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Avec un / une : affirmatif vs négatif",
+      items: [
+        "À la forme affirmative ou interrogative, on peut répéter {a}un{/a} ou {a}une{/a} : Oui, j'en ai {a}un{/a}.",
+        "À la forme négative, on ne répète pas : Non, je n'en ai pas.",
+      ],
+      transLabel: { en: "With un / une: affirmative vs negative", ar: "مع un / une: المثبت والمنفي", fa: "با un / une: مثبت و منفی", ti: "ምስ un / une: ኣረጋጋጺን ኣሉታዊን", uk: "З un / une: стверджувальна та заперечна форми" },
+      transItems: {
+        en: ["In the affirmative or interrogative, you can repeat {a}un{/a} or {a}une{/a}: Oui, j'en ai {a}un{/a}.", "In the negative, do not repeat: Non, je n'en ai pas."],
+        ar: ["في المثبت أو الاستفهام، يمكن تكرار {a}un{/a} أو {a}une{/a}.", "في المنفي، لا نكرّر."],
+        fa: ["در مثبت یا پرسشی، می‌توان {a}un{/a} یا {a}une{/a} را تکرار کرد.", "در منفی، تکرار نمی‌شود."],
+        ti: ["ኣብ ኣረጋጋጺ ወይ ሕቶ፣ {a}un{/a} ወይ {a}une{/a} ክትድገም ይኽእል።", "ኣብ ኣሉታዊ፣ ኣይትድገምን።"],
+        uk: ["У ствердженні чи питанні можна повторити {a}un{/a} або {a}une{/a}.", "У запереченні не повторюють."],
       },
     },
     {

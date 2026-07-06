@@ -57,6 +57,7 @@ export const A2_GR_L19: GrammarLesson = {
       },
       rows: [
         ["J'ai un ami. Cet ami parle japonais.", "J'ai un ami {a}qui{/a} parle japonais."],
+        ["Tu vois l'homme. L'homme porte une veste bleue.", "Tu vois l'homme {a}qui{/a} porte une veste bleue ?"],
         ["C'est une école. Cette école est connue.", "C'est une école {a}qui{/a} est connue."],
         ["Je cherche un appartement. Il est proche du centre.", "Je cherche un appartement {a}qui{/a} est proche du centre."],
       ],

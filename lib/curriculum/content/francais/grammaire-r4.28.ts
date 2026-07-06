@@ -4,7 +4,7 @@ export const A2_GR_L52: GrammarLesson = {
   slug: "a2-gr-l52",
   code: "R5.11",
   level: "A2",
-  title: "Les relations logiques — Cause et conséquence",
+  title: "Les relations logiques — Cause, conséquence et connecteurs",
   theory: [
     { type: "heading", text: "Exprimer la cause", trans: { en: "Expressing cause", ar: "التعبير عن السبب", fa: "بیان علت", ti: "ምኽንያት ምግላጽ", uk: "Вираження причини" } },
     {
@@ -130,6 +130,52 @@ export const A2_GR_L52: GrammarLesson = {
         fa: [["علت → نتیجه", "Il pleut {a}donc{/a} je reste. (باران می‌بارد پس می‌مانم.)"], ["نتیجه ← علت", "Je reste {a}parce qu'{/a}il pleut. (می‌مانم چون باران می‌بارد.)"], ["علت + نتیجهٔ پیوسته", "{a}Comme{/a} il pleut, {a}c'est pourquoi{/a} je reste. (چون باران می‌بارد، به همین دلیل می‌مانم.)"]],
         ti: [["ምኽንያት → ሳዕቤን", "Il pleut {a}donc{/a} je reste. (ዝናብ ይዘንብ ስለዚ እጸንሕ።)"], ["ሳዕቤን ← ምኽንያት", "Je reste {a}parce qu'{/a}il pleut. (ዝናብ ስለ ዝዘንብ እጸንሕ።)"], ["ምኽንያትን ሳዕቤንን ዝተኣሳሰሩ", "{a}Comme{/a} il pleut, {a}c'est pourquoi{/a} je reste. (ዝናብ ስለ ዝዘንብ፣ በዚ ምኽንያት እጸንሕ።)"]],
         uk: [["Причина → наслідок", "Il pleut {a}donc{/a} je reste. (Іде дощ, тож я залишаюся.)"], ["Наслідок ← причина", "Je reste {a}parce qu'{/a}il pleut. (Я залишаюся, бо йде дощ.)"], ["Причина + наслідок пов'язані", "{a}Comme{/a} il pleut, {a}c'est pourquoi{/a} je reste. (Оскільки йде дощ, ось чому я залишаюся.)"]],
+      },
+    },
+    { type: "heading", text: "Autres connecteurs utiles", sub: true, accent: true, trans: { en: "Other useful connectors", ar: "أدوات ربط أخرى مفيدة", fa: "رابط‌های مفید دیگر", ti: "ካልኦት ጠቐሚ መራኸቢታት", uk: "Інші корисні сполучники" } },
+    {
+      type: "plain_list",
+      label: "Énumération",
+      items: [
+        "{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}",
+        "Exemple : {a}D'abord{/a}, j'ai pris ma douche. {a}Après{/a}, je me suis rasé. {a}Ensuite{/a}, j'ai déjeuné. {a}Enfin{/a}, je suis allé au travail.",
+      ],
+      transItems: {
+        en: ["{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}", "Example: {a}First{/a} I showered. {a}Then{/a} I shaved. {a}Next{/a} I had breakfast. {a}Finally{/a} I went to work."],
+        ar: ["{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}", "مثال على ترتيب الأحداث."],
+        fa: ["{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}", "مثال برای ترتیب رویدادها."],
+        ti: ["{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}", "ኣብነት ናይ ተኻታዊ ፍጻመታት።"],
+        uk: ["{a}d'abord{/a}, {a}après{/a}, {a}ensuite{/a}, {a}enfin{/a}", "Приклад послідовності подій."],
+      },
+    },
+    {
+      type: "plain_list",
+      label: "Opposition",
+      items: [
+        "{a}mais{/a}",
+        "Exemple : J'accepte ton invitation, {a}mais{/a} j'arriverai chez toi à 21 h.",
+      ],
+      transItems: {
+        en: ["{a}mais{/a} (but)", "Example: I accept your invitation, {a}but{/a} I'll arrive at 9 p.m."],
+        ar: ["{a}mais{/a}", "مثال على التعارض."],
+        fa: ["{a}mais{/a}", "مثال تضاد."],
+        ti: ["{a}mais{/a}", "ኣብነት ተቓውማ።"],
+        uk: ["{a}mais{/a}", "Приклад протиставлення."],
+      },
+    },
+    {
+      type: "plain_list",
+      label: "Addition",
+      items: [
+        "{a}et{/a}, {a}alors{/a}",
+        "Exemple : Appelle-moi ! {a}Alors{/a} nous pourrons organiser la fête {a}et{/a} choisir un cadeau pour Mathilde.",
+      ],
+      transItems: {
+        en: ["{a}et{/a}, {a}alors{/a}", "Example: Call me! {a}Then{/a} we can plan the party {a}and{/a} choose a gift for Mathilde."],
+        ar: ["{a}et{/a}, {a}alors{/a}", "مثال على الإضافة."],
+        fa: ["{a}et{/a}, {a}alors{/a}", "مثال افزودن."],
+        ti: ["{a}et{/a}, {a}alors{/a}", "ኣብነት ወሰኽ።"],
+        uk: ["{a}et{/a}, {a}alors{/a}", "Приклад додавання."],
       },
     },
   ],

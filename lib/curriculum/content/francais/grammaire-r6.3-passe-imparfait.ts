@@ -8,6 +8,19 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
   theory: [
     { type: "heading", text: "Passé composé ou imparfait ?", trans: { en: "Passé composé or imparfait?", ar: "الماضي المركّب أم الماضي الناقص؟", fa: "گذشته‌ی نقلی یا ماضی استمراری؟", ti: "ሕሉፍ ግዜ ወይ ሕሉፍ ቀጻሊ?", uk: "Passé composé чи imparfait?" } },
     {
+      type: "plain_list",
+      items: [
+        "Au niveau A2, il est important de bien {a}conjuguer{/a} et bien {a}utiliser{/a} le passé composé et l'imparfait pour raconter des événements passés.",
+      ],
+      transItems: {
+        en: ["At A2 level, it is important to {a}conjugate{/a} and {a}use{/a} the passé composé and imparfait correctly to talk about past events."],
+        ar: ["في المستوى A2، من المهم {a}تصريف{/a} و{a}استخدام{/a} الماضي المركّب والماضي الناقص بشكل صحيح لسرد أحداث الماضي."],
+        fa: ["در سطح A2، {a}صرف{/a} و {a}استفاده{/a} درست از گذشتهٔ نقلی و ماضی استمراری برای روایت گذشته مهم است."],
+        ti: ["ኣብ ደረጃ A2፣ ንሕሉፍ ፍጻመታት ንምዝራብ passé composéን imparfaitን ብኹሉ {a}ምስረዝ{/a}ን {a}ጥቕሚ{/a}ን ኣገዳሲ እዩ።"],
+        uk: ["На рівні A2 важливо правильно {a}відмінювати{/a} та {a}вживати{/a} passé composé й imparfait, щоб розповідати про минулі події."],
+      },
+    },
+    {
       type: "grid",
       headers: ["Imparfait", "Passé composé"],
       rows: [
@@ -31,6 +44,52 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
         ti: [["ልምዲ ወይ ምድጋም", "ሓደ ግዜ ዝፍጸም ፍጻመ"], ["መግለጺን ኩነትን", "ቀንዲ ተግባር"], ["ኣብ ምስልሳል ዘሎ ተግባር", "ዝቋርጽ ተግባር"], ["Avant, je marchais chaque jour. (ቅድሚኡ፣ ኩሉ መዓልቲ እኸይድ ነይረ።)", "Hier, j'ai marché dix kilomètres. (ትማሊ፣ ዓሰርተ ኪሎሜተር ተጓዒዘ።)"]],
         uk: [["звичка або повторення", "одноразова подія"], ["опис і контекст", "головна дія"], ["дія, що триває", "дія, що перериває"], ["Avant, je marchais chaque jour. (Раніше я ходив пішки щодня.)", "Hier, j'ai marché dix kilomètres. (Вчора я пройшов десять кілометрів.)"]],
       },
+    },
+    { type: "heading", text: "Les emplois du passé composé", sub: true, accent: true, trans: { en: "Uses of the passé composé", ar: "استخدامات الماضي المركّب", fa: "کاربردهای گذشتهٔ نقلی", ti: "ጥቕሚታት passé composé", uk: "Вживання passé composé" } },
+    {
+      type: "plain_list",
+      items: [
+        "Raconter un {a}événement ponctuel{/a} : Hier, j'{a}ai vu{/a} Lola dans la rue.",
+        "Parler d'une action sur une {a}période de temps définie{/a} : Je suis née en 1985. · J'ai fait du sport pendant 2 heures. · J'ai fait du sport de 14 h à 16 h.",
+      ],
+      transItems: {
+        en: ["Tell a {a}one-off event{/a}: Hier, j'{a}ai vu{/a} Lola dans la rue. (Yesterday I saw Lola in the street.)", "Talk about an action over a {a}defined period{/a}: Je suis née en 1985. · J'ai fait du sport pendant 2 heures."],
+        ar: ["سرد {a}حدث لحظي{/a}: Hier, j'{a}ai vu{/a} Lola dans la rue.", "الحديث عن فعل في {a}فترة زمنية محددة{/a}."],
+        fa: ["روایت {a}رویداد لحظه‌ای{/a}: Hier, j'{a}ai vu{/a} Lola dans la rue.", "صحبت دربارهٔ عمل در {a}بازهٔ زمانی مشخص{/a}."],
+        ti: ["{a}ሓደ ግዜ ዝፍጸም ፍጻመ{/a} ምዝራብ: Hier, j'{a}ai vu{/a} Lola dans la rue.", "ኣብ {a}ዝተወሰነ ግዜ{/a} ዝተገብረ ተግባር ምዝራብ።"],
+        uk: ["Розповісти про {a}разову подію{/a}: Hier, j'{a}ai vu{/a} Lola dans la rue.", "Говорити про дію протягом {a}визначеного періоду{/a}."],
+      },
+    },
+    { type: "heading", text: "Les emplois de l'imparfait", sub: true, accent: true, trans: { en: "Uses of the imparfait", ar: "استخدامات الماضي الناقص", fa: "کاربردهای ماضی استمراری", ti: "ጥቕሚታት imparfait", uk: "Вживання imparfait" } },
+    {
+      type: "plain_list",
+      items: [
+        "Exprimer une {a}habitude dans le passé{/a} : Tous les matins, je {a}mangeais{/a} un pain au chocolat avec un verre de jus de fruits.",
+        "Faire une {a}description{/a} : Lydie {a}était{/a} douce et gentille. · Quand j'étais petit, ma chambre {a}paraissait{/a} très grande.",
+      ],
+      transItems: {
+        en: ["Express a {a}past habit{/a}: Tous les matins, je {a}mangeais{/a} un pain au chocolat…", "Give a {a}description{/a}: Lydie {a}était{/a} douce et gentille."],
+        ar: ["التعبير عن {a}عادة في الماضي{/a}.", "إعطاء {a}وصف{/a}."],
+        fa: ["بیان {a}عادت گذشته{/a}.", "ارائهٔ {a}توصیف{/a}."],
+        ti: ["{a}ኣብ ሕሉፍ ልምዲ{/a} ምግላጽ።", "{a}መግለጺ{/a} ምቅራብ።"],
+        uk: ["Виразити {a}минулу звичку{/a}.", "Дати {a}опис{/a}."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Dans un récit au passé, on utilise souvent les deux temps",
+      items: [
+        "Quand j'{a}ai vu{/a} Lola (= événement ponctuel), la rue {a}était{/a} déserte (= description).",
+      ],
+      transLabel: { en: "In a past narrative, both tenses are often used", ar: "في سرد الماضي، يُستعمل الزمانان معاً", fa: "در روایت گذشته، هر دو زمان به‌کار می‌روند", ti: "ኣብ ሕሉፍ ዛንታ መብዛሕትኡ ግዜ ክልቲኡ ግዜ ይጥቀሙ", uk: "У минулому наративі часто вживають обидва часи" },
+      transItems: {
+        en: ["Quand j'{a}ai vu{/a} Lola (= one-off event), la rue {a}était{/a} déserte (= description). (When I saw Lola, the street was empty.)"],
+        ar: ["Quand j'{a}ai vu{/a} Lola (= حدث لحظي)، la rue {a}était{/a} déserte (= وصف)."],
+        fa: ["Quand j'{a}ai vu{/a} Lola (= رویداد لحظه‌ای)، la rue {a}était{/a} déserte (= توصیف)."],
+        ti: ["Quand j'{a}ai vu{/a} Lola (= ሓደ ግዜ ፍጻመ)፣ la rue {a}était{/a} déserte (= መግለጺ)።"],
+        uk: ["Quand j'{a}ai vu{/a} Lola (= разова подія), la rue {a}était{/a} déserte (= опис)."],
+      },
+      noBulletItems: [0],
     },
     {
       type: "highlight",

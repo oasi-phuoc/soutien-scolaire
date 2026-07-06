@@ -32,6 +32,41 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
         uk: [["aller (теперішній) + інфінітив", "інфінітив або неправильна основа + закінчення"], ["неминуча дія", "віддаленіша дія"], ["вже вирішений намір", "передбачення, обіцянка або майбутній факт"], ["Je vais partir maintenant. (Я зараз піду.)", "Je partirai l'année prochaine. (Я поїду наступного року.)"]],
       },
     },
+    { type: "heading", text: "Les emplois du futur proche", sub: true, accent: true, trans: { en: "Uses of the near future", ar: "استخدامات المستقبل القريب", fa: "کاربردهای آیندهٔ نزدیک", ti: "ጥቕሚታት ቀረባ መጻኢ", uk: "Вживання найближчого майбутнього" } },
+    {
+      type: "highlight",
+      label: "Futur proche",
+      items: [
+        "Une action qui va se passer dans un {a}avenir proche{/a} : Ne t'inquiète pas, je {a}vais t'apporter{/a} ces documents.",
+        "Un {a}projet probable{/a}, déjà décidé : C'est décidé ! Je {a}vais faire{/a} du sport.",
+      ],
+      transLabel: { en: "Near future", ar: "المستقبل القريب", fa: "آیندهٔ نزدیک", ti: "ቀረባ መጻኢ", uk: "Найближче майбутнє" },
+      transItems: {
+        en: ["An action in the {a}near future{/a}: Ne t'inquiète pas, je {a}vais t'apporter{/a} ces documents.", "A {a}likely plan{/a}, already decided: C'est décidé ! Je {a}vais faire{/a} du sport."],
+        ar: ["فعل سيحدث في {a}مستقبل قريب{/a}.", "{a}مشروع محتمل{/a}، مقرّر مسبقاً."],
+        fa: ["عملی در {a}آیندهٔ نزدیک{/a}.", "{a}برنامهٔ محتمل{/a}، از پیش تصمیم‌گرفته."],
+        ti: ["ኣብ {a}ቀረባ መጻኢ{/a} ዝፍጸም ተግባር።", "ድሮ ዝተወሰነ {a}ሓሳብ{/a}።"],
+        uk: ["Дія в {a}найближчому майбутньому{/a}.", "{a}Ймовірний план{/a}, уже вирішений."],
+      },
+    },
+    { type: "heading", text: "Les emplois du futur simple", sub: true, accent: true, trans: { en: "Uses of the simple future", ar: "استخدامات المستقبل البسيط", fa: "کاربردهای آیندهٔ ساده", ti: "ጥቕሚታት ቀሊል መጻኢ", uk: "Вживання простого майбутнього" } },
+    {
+      type: "highlight",
+      label: "Futur simple",
+      items: [
+        "Une action à venir, un projet ou une {a}prévision{/a} : On {a}ira{/a} rendre visite à David le mois prochain.",
+        "Un {a}ordre{/a} ou un règlement : J'{a}irai{/a} au marché et toi, tu {a}feras{/a} le ménage !",
+        "Une action soumise à une {a}condition{/a} : Si tu finis tôt, on {a}pourra{/a} aller au cinéma.",
+      ],
+      transLabel: { en: "Simple future", ar: "المستقبل البسيط", fa: "آیندهٔ ساده", ti: "ቀሊል መጻኢ", uk: "Просте майбутнє" },
+      transItems: {
+        en: ["A future action, plan or {a}prediction{/a}: On {a}ira{/a} rendre visite à David le mois prochain.", "An {a}order{/a} or rule: J'{a}irai{/a} au marché et toi, tu {a}feras{/a} le ménage !", "An action with a {a}condition{/a}: Si tu finis tôt, on {a}pourra{/a} aller au cinéma."],
+        ar: ["فعل مستقبلي أو مشروع أو {a}توقع{/a}.", "{a}أمر{/a} أو قاعدة.", "فعل مشروط بـ{a}شرط{/a}."],
+        fa: ["عمل آینده، برنامه یا {a}پیش‌بینی{/a}.", "{a}دستور{/a} یا قاعده.", "عمل با {a}شرط{/a}."],
+        ti: ["ዝመጽእ ተግባር፣ ሓሳብ ወይ {a}ትንበያ{/a}።", "{a}ትእዛዝ{/a} ወይ ሕጊ።", "ብ{a}ሸጥምቲ{/a} ዝተሓሓቐ ተግባር።"],
+        uk: ["Майбутня дія, план або {a}передбачення{/a}.", "{a}Наказ{/a} або правило.", "Дія за {a}умови{/a}."],
+      },
+    },
     { type: "highlight", label: "Le contexte décide", items: ["Les deux futurs peuvent parfois être possibles ; le choix dépend de la proximité et de l'intention du locuteur."],
       transLabel: { en: "Context decides", ar: "السياق هو الفاصل", fa: "بافت تعیین‌کننده است", ti: "ኩነት ይውስን", uk: "Контекст вирішує" },
       transItems: {
