@@ -1226,10 +1226,13 @@ export function ComprehensionOraleRunner({
   const level = levelFromId(lessonId);
   const lessonCode = level === "base" ? "CO.1" : level === "moyen" ? "CO.2" : "CO.3";
   const [localSeed, setLocalSeed] = useState(() => Date.now());
+  const [runId, setRunId] = useState(0);
   const sessionSeed = placementSeed ?? localSeed;
+  /** Change à chaque essai pour remélanger images / situations (conversations). */
+  const effectiveSeed = sessionSeed + runId * 1_000_003;
   const parts = useMemo(
-    () => (mode === "placement" && placementProgressive ? makeProgressiveCoParts(sessionSeed) : makeParts(level, sessionSeed)),
-    [level, mode, placementProgressive, sessionSeed],
+    () => (mode === "placement" && placementProgressive ? makeProgressiveCoParts(effectiveSeed) : makeParts(level, effectiveSeed)),
+    [effectiveSeed, level, mode, placementProgressive],
   );
   const [phase, setPhase] = useState<"intro" | "exercise" | "results">("intro");
   const [remaining, setRemaining] = useState<string[]>(() => parts.map((part) => part.id));
@@ -1238,6 +1241,21 @@ export function ComprehensionOraleRunner({
   const [validatedAnswers, setValidatedAnswers] = useState<Record<string, Answers>>({});
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [openResult, setOpenResult] = useState<string | null>(null);
+
+  const beginEvaluation = useCallback(() => {
+    if (placementSeed == null) setLocalSeed(Date.now());
+    setRunId((id) => id + 1);
+    setPhase("exercise");
+  }, [placementSeed]);
+
+  useEffect(() => {
+    if (phase !== "exercise" || runId === 0) return;
+    setRemaining(parts.map((part) => part.id));
+    setCurrentId(parts[0]!.id);
+    setAnswers({});
+    setValidatedAnswers({});
+    setSecondsLeft(TOTAL_SECONDS);
+  }, [phase, parts, runId]);
 
   const currentPart = parts.find((part) => part.id === currentId) ?? parts[0]!;
   const savedAnswers = { ...answers, ...Object.values(validatedAnswers).reduce((acc, value) => ({ ...acc, ...value }), {}) };
@@ -1311,12 +1329,9 @@ export function ComprehensionOraleRunner({
               <p>Ne bloquez pas sur un mot inconnu : utilisez le contexte pour choisir la réponse la plus logique.</p>
             </>
           )}
-          onStart={() => {
-            if (placementSeed == null) setLocalSeed(Date.now());
-            setPhase("exercise");
-          }}
+          onStart={beginEvaluation}
         />
-        <HiddenNav onNext={() => setPhase("exercise")} nextLabel="Commencer" />
+        <HiddenNav onNext={beginEvaluation} nextLabel="Commencer" />
       </main>
     );
   }
