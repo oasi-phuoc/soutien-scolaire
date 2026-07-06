@@ -2761,13 +2761,6 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => setShowCancelConfirm(false)}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-              >
-                Continuer l&apos;évaluation
-              </button>
-              <button
-                type="button"
                 onClick={() => {
                   if (isEvalPhase) {
                     setStepIdx(evalAnnounceIdx);
@@ -2781,9 +2774,16 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
                   setExerciseKey((k) => k + 1);
                   setShowCancelConfirm(false);
                 }}
-                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
                 Annuler
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Continuer l&apos;évaluation
               </button>
             </div>
           </div>
