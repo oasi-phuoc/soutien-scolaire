@@ -284,4 +284,280 @@ export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
       ["Carla veut vivre avec quelqu'un.", 4],
     ],
   },
+  {
+    context:
+      "Vous êtes en Suisse. Vos amis doivent choisir une activité proposée par le centre culturel de votre quartier. Vous lisez le programme.",
+    docs: [
+      [
+        "Cours de guitare",
+        "Musique",
+        "Vous voulez apprendre à jouer de la guitare ? Le centre culturel propose un cours d'initiation le mardi soir. Infos : +41 21 315 68 20.",
+      ],
+      [
+        "Nuit d'impro",
+        "Théâtre",
+        "Développez votre créativité sur scène : soirée d'improvisation théâtrale chaque mercredi à 21 h au centre de la Riponne.",
+      ],
+      [
+        "Danse classique et moderne",
+        "Danse",
+        "Exprimez vos émotions avec la danse classique ou la danse moderne. Cours pour tous les niveaux, dès 14 ans.",
+      ],
+      [
+        "Atelier cuisine",
+        "Gastronomie",
+        "Apprenez à faire des plats délicieux et variés : quiches, tartes et terrines avec des produits locaux vaudois.",
+      ],
+      [
+        "Club Papyrus",
+        "Lecture",
+        "Pour découvrir de nouveaux livres, inscrivez-vous au club de lecture Papyrus ! Rencontre mensuelle à la bibliothèque municipale.",
+      ],
+      [
+        "Atelier peinture",
+        "Arts plastiques",
+        "Initiez-vous à la peinture à l'huile et à l'aquarelle. Matériel fourni pour la première séance. Inscriptions : +41 21 315 68 21.",
+      ],
+    ],
+    people: [
+      ["Samira adore le théâtre.", 1],
+      ["Carmen aime la cuisine.", 3],
+      ["Ahmad veut faire de la musique.", 0],
+      ["Inês adore la lecture.", 4],
+      ["Oksana aime toutes les danses.", 2],
+      ["Matteo veut apprendre à peindre.", 5],
+      ["Fatou veut faire du jogging en groupe.", -1],
+      ["Tomislav cherche un cours de natation.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes à Lausanne. Vous consultez un site Internet pour proposer une sortie musée à vos amis.",
+    docs: [
+      [
+        "Musée d'ethnographie",
+        "Arts du monde",
+        "Pour découvrir les arts d'Afrique, d'Amérique, d'Asie et d'Océanie. Ouvert du mardi au dimanche.",
+      ],
+      [
+        "Technorama",
+        "Sciences",
+        "Expériences interactives pour comprendre les sciences et les technologies. À Winterthur, accessible en train depuis Lausanne.",
+      ],
+      [
+        "Château de Chillon",
+        "Histoire",
+        "Venez admirer les collections médiévales dans une forteresse du XIIIe siècle, au bord du lac Léman.",
+      ],
+      [
+        "Musée de la musique",
+        "Instruments",
+        "Plus de 900 instruments de musique. Ateliers de découverte et d'apprentissage pour tous les âges.",
+      ],
+      [
+        "Musée Olympique",
+        "Sport",
+        "Athlètes, footballeurs, sportifs de légende… Venez voir les objets et histoires de vos champions préférés !",
+      ],
+      [
+        "Muséum d'histoire naturelle",
+        "Nature",
+        "Découvrez la faune, la flore et les minéraux de Suisse. Exposition permanente sur les animaux des Alpes.",
+      ],
+    ],
+    people: [
+      ["Youssef joue de la guitare.", 3],
+      ["Layla est passionnée d'histoire.", 2],
+      ["Nasir fait des études scientifiques.", 1],
+      ["Aissatou aime les œuvres d'art du monde entier.", 0],
+      ["Miguel est fan d'un footballeur célèbre.", 4],
+      ["Mariam adore les animaux.", 5],
+      ["Kateryna veut aller au cinéma.", -1],
+      ["Lorenzo cherche des magasins de mode.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous étudiez en Suisse. Vous conseillez un menu à vos amis en lisant les cartes des restaurants du quartier.",
+    docs: [
+      [
+        "Chez Luigi",
+        "Italien",
+        "La meilleure pizza italienne de Lausanne ! Pour une pizza à 18 CHF, bénéficiez de 40 % de réduction sur la deuxième.",
+      ],
+      [
+        "Café du matin",
+        "Petit-déjeuner",
+        "Formule café et croissant : 3,50 CHF tous les matins de 6 h à 11 h. Idéal avant les cours !",
+      ],
+      [
+        "Sakura",
+        "Fruits de mer",
+        "Menu « produits de la mer » pour 2 personnes : soupe miso, plateau de sushis et makis, dessert. 52 CHF.",
+      ],
+      [
+        "Le Jardin",
+        "Végétarien",
+        "Menu du jour : soupe de poivrons, crumble de courgettes, fondant au chocolat. Sans viande. 15 CHF.",
+      ],
+      [
+        "Snack du parc",
+        "À emporter",
+        "Menu pas cher à emporter : formule sandwich jambon-beurre + boisson. 6,50 CHF. Parfait pour un pique-nique !",
+      ],
+      [
+        "Chalet suisse",
+        "Spécialité locale",
+        "Fondue moitié-moitié pour 2 personnes avec salade et dessert. Réservation conseillée : +41 21 311 47 90.",
+      ],
+    ],
+    people: [
+      ["Nour ne veut pas manger de viande.", 3],
+      ["Marco adore le petit-déjeuner.", 1],
+      ["Rashid adore le poisson.", 2],
+      ["Farid veut manger au parc.", 4],
+      ["Giulia et Lorenzo aiment la cuisine italienne.", 0],
+      ["Olena veut goûter un plat typiquement suisse.", 5],
+      ["Samir veut se faire livrer une pizza à domicile.", -1],
+      ["Awa préfère cuisiner chez elle.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes dans un restaurant en Suisse avec des amis. Vous lisez la carte pour leur proposer un plat.",
+    docs: [
+      [
+        "Bœuf braisé",
+        "Viande",
+        "Viande de bœuf mijotée avec des pommes de terre et des carottes, spécialité de la maison.",
+      ],
+      [
+        "Fondant au chocolat",
+        "Dessert",
+        "Gâteau au chocolat presque liquide à l'intérieur, servi tiède avec une boule de glace vanille.",
+      ],
+      [
+        "Spaghetti au pesto",
+        "Italien",
+        "Pâtes fraîches avec une sauce au basilic, tomates cerises et parmesan. Recette italienne authentique.",
+      ],
+      [
+        "Sorbet au cassis",
+        "Dessert frais",
+        "Glace aux fruits rouges du Valais, légère et rafraîchissante. Parfait après un repas copieux.",
+      ],
+      [
+        "Paella aux fruits de mer",
+        "Poisson",
+        "Riz épicé avec des crevettes, des moules et du poisson frais. Pour les amateurs de cuisine méditerranéenne.",
+      ],
+      [
+        "Rösti du paysan",
+        "Suisse",
+        "Galette de pommes de terre croustillante servie avec des œufs au plat et du fromage grison.",
+      ],
+    ],
+    people: [
+      ["Sofia adore les gâteaux.", 1],
+      ["Matteo aime les plats italiens.", 2],
+      ["Zahra aime la viande.", 0],
+      ["Pablo adore les fruits de mer.", 4],
+      ["Hassan préfère les desserts frais.", 3],
+      ["Ana veut goûter un plat typiquement suisse.", 5],
+      ["Daryna ne mange pas de produits laitiers.", -1],
+      ["Ibrahim veut commander un hamburger.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous lisez les offres d'un catalogue du grand magasin Manor en Suisse. Quelles offres allez-vous proposer à vos amis ?",
+    docs: [
+      [
+        "Électroménager −50 %",
+        "Promo week-end",
+        "50 % sur l'électroménager tout le week-end ! Lave-linge, télévision, réfrigérateur : profitez-en vite.",
+      ],
+      [
+        "DVD Amour",
+        "Cinéma",
+        "Retrouvez le film Amour en DVD ! Prix spécial : 12 CHF au lieu de 19 CHF.",
+      ],
+      [
+        "Téléphone + housse",
+        "High-tech",
+        "Pour tout téléphone acheté, la housse de protection est offerte ! Renseignements : +41 58 565 70 00.",
+      ],
+      [
+        "Pantalons −30 %",
+        "Mode",
+        "30 % de réduction sur les pantalons jusqu'au 7 juin ! Hommes, femmes et enfants.",
+      ],
+      [
+        "Bon d'achat Migros",
+        "Courses",
+        "10 CHF de réduction en bons d'achat pour 150 CHF d'achats dans votre supermarché Migros partenaire.",
+      ],
+      [
+        "Romans −20 %",
+        "Livres",
+        "20 % sur tous les romans et bandes dessinées jusqu'à la fin du mois. Rayon librairie, 2e étage.",
+      ],
+    ],
+    people: [
+      ["Fatou veut faire les courses.", 4],
+      ["Layla aime les films romantiques.", 1],
+      ["Tomislav veut s'acheter une télévision.", 0],
+      ["Nasir a envie de changer de mobile.", 2],
+      ["Kateryna aimerait s'acheter de nouveaux vêtements.", 3],
+      ["Inês adore lire des romans.", 5],
+      ["Miguel cherche un vélo électrique en promotion.", -1],
+      ["Mariam veut acheter des jouets pour enfants.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes en Suisse. Vous consultez un catalogue de cadeaux sur Internet pour plusieurs amis.",
+    docs: [
+      [
+        "Chaussures Ribic",
+        "Mode",
+        "Chaussures de loisir Ribic pour un style chic et décontracté ! Disponibles du 36 au 46. 79 CHF.",
+      ],
+      [
+        "Robe Zarah",
+        "Vêtements",
+        "Robe Zarah, bleue ou noire. Tailles du 34 au 44. Livraison gratuite en Suisse. 45 CHF.",
+      ],
+      [
+        "Jeu Devin'up",
+        "Jeux",
+        "Faites deviner des objets, des animaux et des métiers à vos amis ! À partir de 8 ans. 22 CHF.",
+      ],
+      [
+        "Pyjamas bébé",
+        "Naissance",
+        "Lot de 3 pyjamas avec des éléphants. Tailles : naissance à 6 mois. Coton bio. 28 CHF.",
+      ],
+      [
+        "Du côté de chez Swann",
+        "Littérature",
+        "Grand classique de Marcel Proust. Belle édition reliée, traduction française. 32 CHF.",
+      ],
+      [
+        "Coffret chocolat",
+        "Gourmandise",
+        "Assortiment de chocolats suisses Lindt : 24 pralines dans une boîte cadeau. Idéal pour les fêtes. 35 CHF.",
+      ],
+    ],
+    people: [
+      ["Carla est passionnée de littérature.", 4],
+      ["Amadou a eu un bébé la semaine dernière.", 3],
+      ["Lucía adore les vêtements.", 1],
+      ["Beatriz aime faire des jeux de société.", 2],
+      ["Ahmad a besoin de nouvelles chaussures.", 0],
+      ["Giada adore le chocolat suisse.", 5],
+      ["Olena cherche un ordinateur portable.", -1],
+      ["Youssef collectionne les timbres.", -1],
+    ],
+  },
 ];
