@@ -4,15 +4,25 @@ export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
-function opImg(groupId: string, index: number): string {
-  return `/assets/expression/co/base/objet-pick/${groupId}/${index}.webp`;
+function slugify(label: string): string {
+  return label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['']/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+}
+
+function opImg(label: string): string {
+  return `/assets/expression/images/${slugify(label)}.webp`;
 }
 
 function opCards(
   groupId: string,
   defs: [Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">, Omit<COObjectPickCard, "image">],
 ): COObjetPickDef["cards"] {
-  return defs.map((card, index) => ({ ...card, image: opImg(groupId, index) })) as COObjetPickDef["cards"];
+  return defs.map((card) => ({ ...card, image: opImg(card.label) })) as COObjetPickDef["cards"];
 }
 
 /** Cartes image 5× (3 + 2) — A1 base « Identifier des objets ». */

@@ -1,14 +1,14 @@
 # Questions à image — CE & CO (liste complète)
 
-_Généré par `scripts/list-ce-co-image-questions.cjs` — 2026-07-05_
+_Généré par `scripts/list-ce-co-image-questions.cjs` — 2026-07-06_
 
 Pour chaque activité : le numéro de question et les libellés des 3 images (la bonne réponse est marquée ✅).
 
 ## Totaux
 
 - CO — QCM image (pools) : **950** questions dans **157** activités
-- CO — object-pick (5 images/activité) : **12** activités
-- CE — QCM image : **5** questions
+- CO — object-pick (5 images/activité) : **0** activités
+- CE — QCM image : **0** questions
 
 > Note CO : dans les pools, **chaque** question possède une variante « QCM image » (tableau `img`) ; le format présenté (texte / image / saisie) est tiré au hasard à l'exécution.
 
@@ -1449,23 +1449,6 @@ Pour chaque activité : le numéro de question et les libellés des 3 images (la
 
 _Chaque activité montre 5 images ; celles à sélectionner (entendues) sont marquées ✅._
 
-- **base-objet-1** : lampe · poubelle ✅ · fleur ✅ · table ✅ · clé ✅
-- **base-objet-2** : guitare ✅ · piano · sac · robe ✅ · talon
-- **base-objet-3** : carte d'étudiant ✅ · passeport · photo ✅ · carte de crédit · carte d'identité ✅
-- **base-objet-4** : cahier · surligneur · stylo ✅ · règle ✅ · carte
-- **base-objet-5** : voiture ✅ · avion · États-Unis ✅ · hélicoptère ✅ · appareil photo ✅
-- **base-objet-6** : scotch ✅ · feuille · ciseaux · colle · crayon de couleur ✅
-- **base-objet-7** : gâteau ✅ · poulet ✅ · radis · salade ✅ · gratin
-- **base-objet-8** : chaise ✅ · bureau ✅ · lunettes · médicament ✅ · ordinateur ✅
-- **base-objet-9** : fleur ✅ · table · plume ✅ · cheval · gâteau ✅
-- **base-objet-10** : page · corde ✅ · livre · fleur · stylo ✅
-- **base-objet-11** : pizza ✅ · macaron · jus · fromage · fruit
-- **base-objet-12** : cadeau ✅ · seau · élastique ✅ · tapis · haltère
 
 ## CE — QCM image
 
-- question 1 — « Où faut-il se retrouver ? » : Devant le fleuriste ✅ · Devant le restaurant · Devant la boutique
-- question 2 — « Que faut-il apporter ? » : Une rose · Une boisson · Un appareil photo ✅
-- question 3 — « Que faut-il apporter ? » : Un cahier bleu ✅ · Un sac de sport · Un parapluie
-- question 4 — « Quel sport est conseillé ? » : La marche ✅ · La boxe · Le ski nautique
-- question 5 — « Quelle image correspond à l'hiver ? » : Neige ✅ · Soleil d'été · Plage

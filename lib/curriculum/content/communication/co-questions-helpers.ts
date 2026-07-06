@@ -286,7 +286,7 @@ export function buildConversationImageGrid(
   assertConversationImageGridDef(correctByCard, activity);
   const cards = CONVERSATION_IMAGE_SUFFIXES.map((suffix, index) => ({
     suffix,
-    image: `/assets/expression/co/base/public/conversation-${activity}-${suffix}.webp`,
+    image: `/assets/expression/images/conversation-${activity}-${suffix}.webp`,
     correct: correctByCard[index]!,
   }));
   const cardViews = cards.map(({ suffix, image }) => ({ suffix, image })) as COConversationImageGridTask["cards"];
