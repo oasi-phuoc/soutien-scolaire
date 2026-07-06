@@ -281,6 +281,32 @@ export function isImageableLabel(label: string | undefined | null): boolean {
   return isLikelyIllustrableObject(label);
 }
 
+/** Slug extrait du nom de fichier d'un chemin d'asset public. */
+export function slugFromAssetPath(path: string): string | null {
+  const m = path.match(/\/([^/]+)\.(webp|png|jpe?g|svg)$/i);
+  return m ? baseSlug(m[1]!) : null;
+}
+
+/** Cherche une image indexée par slug (direct ou alias). */
+function resolveIndexedSlug(slug: string): string | null {
+  const direct = WORD_IMAGE_INDEX[slug];
+  if (direct) return direct;
+  const alias = ALIASES[slug];
+  if (alias && WORD_IMAGE_INDEX[alias]) return WORD_IMAGE_INDEX[alias];
+  return null;
+}
+
+/**
+ * Remappe un chemin CE/CO (ancien plat ou nouveau scene/ce/heure/temp)
+ * vers l'URL réelle dans l'index, ou null si aucune image adéquate.
+ */
+export function remapExpressionImagePath(path?: string | null): string | null {
+  if (!path) return null;
+  const slug = slugFromAssetPath(path);
+  if (!slug) return null;
+  return resolveIndexedSlug(slug);
+}
+
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
 export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
@@ -291,31 +317,19 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   );
 }
 
-const EXPRESSION_CO_CURATED =
-  /^\/assets\/expression\/images\/conversation-\d+-[a-f]\.webp$/;
-const EXPRESSION_OBJET_PICK =
-  /^\/assets\/expression\/images\/[^/]+\.webp$/;
-
 const EXPRESSION_CE_BASE =
   /^\/assets\/expression\/ce\/base\//;
 
-const EXPRESSION_IMAGES_TEMP =
-  /^\/assets\/expression\/images-temp\/[^/]+\.(webp|png)$/;
-
-const EXPRESSION_IMAGES =
-  /^\/assets\/expression\/images\/[^/]+\.webp$/;
-
 /** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
-  if (path && (
-    EXPRESSION_IMAGES_TEMP.test(path)
-    || EXPRESSION_IMAGES.test(path)
-    || EXPRESSION_CO_CURATED.test(path)
-    || EXPRESSION_OBJET_PICK.test(path)
-    || EXPRESSION_CE_BASE.test(path)
-  )) return path;
-  if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
-  if (path?.startsWith("/assets/expression/images-temp/")) return path;
+  if (path) {
+    const remapped = remapExpressionImagePath(path);
+    if (remapped) return remapped;
+    if (path.startsWith("/assets/words/lecture/") || path.startsWith("/assets/words/vocab/")) {
+      return path;
+    }
+    if (EXPRESSION_CE_BASE.test(path)) return path;
+  }
   if (label && isImageableLabel(label)) return resolveWordImage(label);
   return null;
 }
@@ -327,8 +341,9 @@ export function expressionImageSource(path?: string | null): string | null {
 
 /** Best image source for a labelled choice (vocab/lecture/horloge/prix). */
 export function imageSourceFor(label: string, path?: string): string | null {
-  if (expressionImageSource(path)) return path!;
-  if (isResolvedImagePath(path)) return path!;
+  const remapped = remapExpressionImagePath(path);
+  if (remapped) return remapped;
+  if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
   if (!isImageableLabel(label)) return null;
   return resolveWordImage(label);
 }

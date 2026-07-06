@@ -284,7 +284,7 @@ export function buildConversationImageGrid(
   correctByCard: [number, number, number, number, number, number],
   seed: string,
   audio?: string,
-  imageDir = "/assets/expression/images",
+  imageDir = "/assets/expression/images/scene",
 ): COConversationImageGridTask {
   assertConversationImageGridDef(correctByCard, activity);
   const imageExt = imageDir.includes("images-temp") ? "png" : "webp";

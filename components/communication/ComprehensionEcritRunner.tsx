@@ -1255,7 +1255,8 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
 
 function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "email" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const showImage = !!part.image && !imageFailed;
+  const imageSrc = ceCoImageSource(part.image, part.meta.subject ?? part.meta.from);
+  const showImage = !!imageSrc && !imageFailed;
 
   return (
     <div className="space-y-5">
@@ -1263,7 +1264,7 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
         <div className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
           <div className="relative w-full">
             <Image
-              src={part.image}
+              src={imageSrc}
               alt="Message à lire"
               width={900}
               height={1200}
