@@ -1,4 +1,4 @@
-import { expressionImageSource } from "../../word-image-resolver";
+import { ceCoImageSource, isSinglePrice, isSingleTime, resolveWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import type { COAudioGroup } from "./co-audio";
 
@@ -149,6 +149,10 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
 }
 
 function img(level: string, groupSlug: string, qId: string, suffix: string, label: string): COImageChoice {
+  if (isSingleTime(label) || isSinglePrice(label)) {
+    const dedicated = resolveWordImage(label);
+    if (dedicated) return { label, image: dedicated };
+  }
   return { label, image: `/expression/co/${level}/${groupSlug}/${qId}-${suffix}.webp` };
 }
 
@@ -325,7 +329,7 @@ export function buildCoPartQuestions(
     // The "QCM image" format is only offered when the 3 options are genuinely
     // illustrable (object, clock/time or price). Otherwise (prénoms, villes,
     // pays, nombres, dates…) only text and fill formats are used.
-    const imageable = q.imageChoices.every((c) => !!expressionImageSource(c.image));
+    const imageable = q.imageChoices.every((c) => !!ceCoImageSource(c.image, c.label));
     const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
     const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
     return multiToTask(q, format);

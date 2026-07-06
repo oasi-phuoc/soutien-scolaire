@@ -287,9 +287,19 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
   );
 }
 
-/** CE/CO — uniquement les assets dédiés sous /expression/. */
+/** CE/CO — assets /expression/ + horloges/prix programmatiques (pas le pool vocab/lecture). */
+export function ceCoImageSource(path?: string | null, label?: string): string | null {
+  if (path?.startsWith("/expression/")) return path;
+  if (path && /^\/assets\/words\/img\/(horloge|prix)-/.test(path)) return path;
+  if (label && (isSingleTime(label) || isSinglePrice(label))) {
+    return resolveWordImage(label);
+  }
+  return null;
+}
+
+/** @deprecated Préférer ceCoImageSource */
 export function expressionImageSource(path?: string | null): string | null {
-  return path && path.startsWith("/expression/") ? path : null;
+  return ceCoImageSource(path);
 }
 
 /** Best image source for a labelled choice (vocab/lecture/horloge/prix). */

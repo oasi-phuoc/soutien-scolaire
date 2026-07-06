@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { expressionImageSource } from "@/lib/curriculum/word-image-resolver";
+import { ceCoImageSource } from "@/lib/curriculum/word-image-resolver";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   CommunicationFinishButton,
@@ -1327,7 +1327,7 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
 }
 
 function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
-  const src = expressionImageSource(path);
+  const src = ceCoImageSource(path, label);
   const [failed, setFailed] = useState(false);
   const heightCls = compact ? "h-20" : "h-24";
   if (src && !failed) {
