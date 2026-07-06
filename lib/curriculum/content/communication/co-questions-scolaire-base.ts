@@ -3,42 +3,6 @@ import { SCOLAIRE_ANNONCES_BOOK, SCOLAIRE_MESSAGES_BOOK } from "./co-questions-s
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */
 
-const SCOLAIRE_ANNONCE_28 = buildPool("base", "scolaire-annonce-28", [
-  {
-    id: "sa28-f", textQ: "Un lieu est-il fermé ?", text: ["Oui", "Non", "On ne sait pas"], textC: 0,
-    img: ["Oui", "Non", "On ne sait pas"], imgC: 0,
-    fillQ: "Réponse : ___", fill: "oui", fillA: ["oui"],
-  },
-  {
-    id: "sa28-p", textQ: "Quel lieu public est concerné ?", text: ["Le zoo", "La bibliothèque", "La poste"], textC: 0,
-    img: ["Le zoo", "La bibliothèque", "La poste"], imgC: 0,
-    fillQ: "Lieu : ___", fill: "zoo", fillA: ["zoo"],
-  },
-  {
-    id: "sa28-g", textQ: "Où entend-on ce message ?", text: ["À la radio uniquement", "Dans un lieu public", "Dans un cours"], textC: 1,
-    img: ["À la radio uniqu…", "Dans un lieu pub…", "Dans un cours"], imgC: 1,
-    fillQ: "C'est une ___ .", fill: "annonce", fillA: ["annonce"],
-  }
-]);
-
-const SCOLAIRE_ANNONCE_29 = buildPool("base", "scolaire-annonce-29", [
-  {
-    id: "sa29-f", textQ: "Un lieu est-il fermé ?", text: ["Oui", "Non", "On ne sait pas"], textC: 0,
-    img: ["Oui", "Non", "On ne sait pas"], imgC: 0,
-    fillQ: "Réponse : ___", fill: "oui", fillA: ["oui"],
-  },
-  {
-    id: "sa29-t", textQ: "Le message concerne les transports ?", text: ["Oui", "Non", "La cuisine"], textC: 0,
-    img: ["Oui", "Non", "La cuisine"], imgC: 0,
-    fillQ: "C'est une info sur les ___ .", fill: "transports", fillA: ["transports"],
-  },
-  {
-    id: "sa29-g", textQ: "Où entend-on ce message ?", text: ["À la radio uniquement", "Dans un lieu public", "Dans un cours"], textC: 1,
-    img: ["À la radio uniqu…", "Dans un lieu pub…", "Dans un cours"], imgC: 1,
-    fillQ: "C'est une ___ .", fill: "annonce", fillA: ["annonce"],
-  }
-]);
-
 const SCOLAIRE_ANNONCE_30 = buildPool("base", "scolaire-annonce-30", [
   {
     id: "sa30-p", textQ: "Quel lieu public est concerné ?", text: ["La bibliothèque", "La poste", "Le stade"], textC: 2,
@@ -112,8 +76,6 @@ const SCOLAIRE_RADIO_39 = buildPool("base", "scolaire-radio-39", [
 ]);
 
 export const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQuestion[]> = {
-  "base-scolaire-annonce-28": SCOLAIRE_ANNONCE_28,
-  "base-scolaire-annonce-29": SCOLAIRE_ANNONCE_29,
   "base-scolaire-annonce-30": SCOLAIRE_ANNONCE_30,
   ...SCOLAIRE_ANNONCES_BOOK,
   ...SCOLAIRE_MESSAGES_BOOK,

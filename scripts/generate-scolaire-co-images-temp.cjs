@@ -138,6 +138,18 @@ function objectScene(slug, seed) {
       return `<rect x="300" y="250" width="200" height="120" rx="12" fill="#78350f" stroke="#40313a" stroke-width="7"/><path d="M310 250 H490" stroke="#fbbf24" stroke-width="4"/><rect x="330" y="270" width="160" height="8" fill="#92400e"/>`;
     case "biscuit":
       return `<circle cx="400" cy="310" r="90" fill="#d97706" stroke="#40313a" stroke-width="7"/><circle cx="360" cy="280" r="10" fill="#92400e"/><circle cx="430" cy="290" r="10" fill="#92400e"/><circle cx="400" cy="340" r="10" fill="#92400e"/>`;
+    case "manteau":
+      return `<path d="M280 220 L400 170 L520 220 V430 H280 Z" fill="#dc2626" stroke="#40313a" stroke-width="7"/><path d="M320 220 V430 M480 220 V430" stroke="#991b1b" stroke-width="5"/><rect x="360" y="200" width="80" height="40" rx="12" fill="#7f1d1d"/>`;
+    case "sac-a-dos":
+      return `<rect x="300" y="220" width="200" height="240" rx="30" fill="#7f1d1d" stroke="#40313a" stroke-width="7"/><path d="M340 220 Q400 160 460 220" fill="none" stroke="#92400e" stroke-width="10"/><rect x="350" y="300" width="100" height="60" rx="8" fill="#991b1b"/><rect x="330" y="380" width="140" height="20" rx="6" fill="#92400e"/>`;
+    case "programme":
+      return `<rect x="280" y="180" width="240" height="300" rx="12" fill="#f97316" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="300" r="70" fill="#facc15"/><text x="400" y="315" font-family="Arial" font-size="28" font-weight="700" text-anchor="middle" fill="#fff">PROGRAMME</text>`;
+    case "girafe":
+      return `<ellipse cx="400" cy="360" rx="70" ry="50" fill="#fbbf24" stroke="#40313a" stroke-width="6"/><rect x="385" y="180" width="30" height="180" rx="12" fill="#fbbf24" stroke="#40313a" stroke-width="5"/><circle cx="400" cy="170" r="35" fill="#fbbf24" stroke="#40313a" stroke-width="5"/><circle cx="385" cy="155" r="8" fill="#92400e"/><circle cx="415" cy="155" r="8" fill="#92400e"/>`;
+    case "tigre":
+      return `<ellipse cx="400" cy="340" rx="110" ry="80" fill="#f97316" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="220" r="55" fill="#f97316" stroke="#40313a" stroke-width="6"/><path d="M330 300 H470 M350 260 H450 M340 380 H460" stroke="#111827" stroke-width="6" stroke-linecap="round"/><circle cx="380" cy="210" r="8" fill="#111827"/><circle cx="420" cy="210" r="8" fill="#111827"/>`;
+    case "vache":
+      return `<ellipse cx="400" cy="340" rx="120" ry="80" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><circle cx="400" cy="230" r="50" fill="#f8fafc" stroke="#40313a" stroke-width="6"/><ellipse cx="350" cy="310" rx="25" ry="18" fill="#111827"/><ellipse cx="450" cy="320" rx="22" ry="16" fill="#111827"/><circle cx="380" cy="220" r="6" fill="#111827"/><circle cx="420" cy="220" r="6" fill="#111827"/>`;
     default:
       return `<circle cx="400" cy="300" r="120" fill="${color(seed, 2)}" opacity=".5"/>`;
   }
@@ -249,6 +261,28 @@ function situationScene(slug, seed) {
       return `<rect x="150" y="200" width="500" height="220" rx="20" fill="#7c2d12" stroke="#40313a" stroke-width="7"/><rect x="220" y="260" width="360" height="50" rx="8" fill="#92400e"/>${person(400, 90, color(seed, 1), "#4b2e1f", 0)}<circle cx="320" cy="285" r="25" fill="#fbbf24"/><circle cx="480" cy="285" r="25" fill="#60a5fa"/>`;
     case "accueil":
       return `<rect x="180" y="220" width="440" height="180" rx="16" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="320" y="260" width="160" height="60" rx="8" fill="#dbeafe"/>${person(400, 100, color(seed, 3), "#b45309", 2)}<text x="400" y="300" font-family="Arial" font-size="28" font-weight="700" text-anchor="middle" fill="#2563eb">Info</text>`;
+    case "porte-1":
+      return `<rect x="280" y="140" width="240" height="360" rx="8" fill="#92400e" stroke="#40313a" stroke-width="7"/><circle cx="480" cy="320" r="12" fill="#facc15"/><text x="400" y="340" font-family="Arial" font-size="96" font-weight="700" text-anchor="middle" fill="#fef3c7">1</text>`;
+    case "devant-entree":
+      return `<rect x="200" y="180" width="400" height="280" rx="16" fill="#e2e8f0" stroke="#40313a" stroke-width="7"/><rect x="340" y="300" width="120" height="160" fill="#64748b"/>${person(300, 120, color(seed, 2), "#5b341d", 1)}${person(500, 130, color(seed, 4), "#d97706", 2)}`;
+    case "1er-etage":
+      return `<rect x="220" y="120" width="360" height="380" rx="12" fill="#f8fafc" stroke="#40313a" stroke-width="7"/><rect x="260" y="160" width="280" height="80" fill="#dbeafe"/><text x="400" y="215" font-family="Arial" font-size="42" font-weight="700" text-anchor="middle" fill="#2563eb">1er</text><path d="M400 240 V420" stroke="#94a3b8" stroke-width="8" stroke-dasharray="12 8"/>`;
+    case "manger":
+      return `${person(400, 110, color(seed, 1), color(seed, 3), 0)}<path d="M360 420 L400 160 L440 420 Z" fill="#fbbf24" stroke="#40313a" stroke-width="6"/><circle cx="380" cy="350" r="14" fill="#ef4444"/><circle cx="420" cy="340" r="12" fill="#ef4444"/>`;
+    case "telephoner":
+      return `${person(400, 110, color(seed, 2), "#5b341d", 1)}<rect x="470" y="250" width="50" height="90" rx="10" fill="#1f2937" stroke="#40313a" stroke-width="5"/><rect x="478" y="260" width="34" height="50" rx="4" fill="#60a5fa"/>`;
+    case "vestiaire":
+      return `<rect x="160" y="160" width="480" height="320" rx="20" fill="#e2e8f0" stroke="#40313a" stroke-width="7"/>${Array.from({ length: 6 }, (_, i) => `<rect x="${200 + i * 70}" y="200" width="50" height="220" rx="6" fill="#94a3b8"/><circle cx="${225 + i * 70}" cy="230" r="14" fill="#64748b"/>`).join("")}`;
+    case "sortie":
+      return `<rect x="300" y="160" width="200" height="320" rx="8" fill="#64748b" stroke="#40313a" stroke-width="7"/><rect x="340" y="200" width="120" height="200" fill="#38bdf8" opacity=".4"/><text x="400" y="420" font-family="Arial" font-size="36" font-weight="700" text-anchor="middle" fill="#fff">SORTIE</text>`;
+    case "travaux":
+      return `<rect x="120" y="360" width="560" height="80" fill="#94a3b8"/><path d="M200 360 L240 280 H320 L360 360 Z" fill="#facc15" stroke="#40313a" stroke-width="5"/><rect x="420" y="300" width="180" height="60" rx="8" fill="#f97316"/><text x="510" y="340" font-family="Arial" font-size="28" font-weight="700" text-anchor="middle" fill="#fff">TRAVAUX</text>`;
+    case "accident":
+      return `<rect x="200" y="300" width="400" height="120" rx="12" fill="#64748b"/><rect x="280" y="240" width="240" height="80" rx="20" fill="#ef4444" stroke="#40313a" stroke-width="6"/><path d="M340 280 H460 M400 240 V320" stroke="#fff" stroke-width="10" stroke-linecap="round"/>`;
+    case "manifestation":
+      return `${person(250, 130, color(seed, 1), "#4b2e1f", 0)}${person(400, 120, color(seed, 3), "#b45309", 2)}${person(550, 140, color(seed, 2), "#5b341d", 1)}<rect x="300" y="360" width="200" height="50" rx="8" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><text x="400" y="395" font-family="Arial" font-size="22" font-weight="700" text-anchor="middle" fill="#dc2626">MANIF</text>`;
+    case "bonnet-et-lunettes":
+      return `<ellipse cx="340" cy="300" rx="55" ry="30" fill="#dc2626" stroke="#40313a" stroke-width="5"/><path d="M310 300 Q340 220 370 300 Z" fill="#ef4444" stroke="#40313a" stroke-width="5"/><ellipse cx="480" cy="310" rx="70" ry="25" fill="#60a5fa" stroke="#0369a1" stroke-width="6"/><path d="M420 310 H540" stroke="#0369a1" stroke-width="5"/>`;
     case "sortie-droite":
       return `<rect x="120" y="300" width="560" height="120" rx="12" fill="#7c2d12"/><rect x="200" y="180" width="400" height="140" fill="#f8fafc" stroke="#40313a" stroke-width="5"/><rect x="560" y="320" width="60" height="80" fill="#2563eb"/><path d="M500 360 L580 360" stroke="#ef4444" stroke-width="10" marker-end="url(#arrow)"/>`;
     case "sortie-gauche":
@@ -269,6 +303,7 @@ const OBJECTS = [
   "livre", "television", "train", "voiture", "cadeau", "saxophone", "cahier", "regle",
   "geographie", "francais", "mathematiques", "dessin", "salade",
   "anglais", "appareil-photo", "musee", "bateau", "billet", "magazines", "chocolat", "biscuit",
+  "manteau", "sac-a-dos", "programme", "girafe", "tigre", "vache",
 ];
 
 const SITUATIONS = [
@@ -281,6 +316,8 @@ const SITUATIONS = [
   "mairie", "caisse", "attendre", "pique-nique", "visite-touristique", "jeu-de-societe",
   "cantine", "gymnase", "yoga", "jeu-video",
   "rentree-scolaire", "bar", "accueil", "sortie-droite", "sortie-gauche", "sortie-milieu", "etiquette",
+  "porte-1", "devant-entree", "1er-etage", "manger", "telephoner", "vestiaire", "sortie", "travaux",
+  "accident", "manifestation", "bonnet-et-lunettes",
 ];
 
 function svgFor(slug, whiteBg) {

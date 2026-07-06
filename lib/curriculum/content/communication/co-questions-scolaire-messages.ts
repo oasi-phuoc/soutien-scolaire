@@ -1,6 +1,6 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
 
-/** CO base scolaire — exercices 1 à 20 + annonces 21 à 25 (questions du livre). */
+/** CO base scolaire — exercices 1 à 20 + annonces 21 à 29 (questions du livre). */
 
 export const SCOLAIRE_MESSAGE_1 = buildPool("base", "scolaire-message-1", [
   {
@@ -1026,12 +1026,204 @@ export const SCOLAIRE_ANNONCE_25 = buildPool("base", "scolaire-annonce-25", [
   },
 ]);
 
+export const SCOLAIRE_ANNONCE_26 = buildPool("base", "scolaire-annonce-26", [
+  {
+    id: "sa26-q1",
+    textQ: "Que devez-vous laisser à l'accueil ?",
+    text: ["Un appareil photo", "Un manteau", "Un sac à dos"],
+    textC: 2,
+    img: ["Appareil photo", "Manteau", "Sac à dos"],
+    imgC: 2,
+    fillQ: "Il faut laisser son ___ à l'accueil.",
+    fill: "sac à dos",
+    fillA: ["sac a dos", "sac à dos"],
+  },
+  {
+    id: "sa26-q2",
+    textQ: "Où devez-vous aller pour commencer la visite ?",
+    text: ["À la porte 1", "Devant l'entrée", "Au premier étage"],
+    textC: 0,
+    img: ["Porte 1", "Devant l'entrée", "1er étage"],
+    imgC: 0,
+    fillQ: "La visite commence à la ___ .",
+    fill: "porte 1",
+    fillA: ["porte 1", "porte numéro 1", "porte numéro un"],
+  },
+  {
+    id: "sa26-q3",
+    textQ: "Combien de temps dure la visite ?",
+    text: ["30 minutes", "45 minutes", "1 heure"],
+    textC: 1,
+    img: ["30 minutes", "45 minutes", "1 heure"],
+    imgC: 1,
+    fillQ: "La visite dure ___ minutes.",
+    fill: "45",
+    fillA: ["45", "quarante-cinq"],
+  },
+  {
+    id: "sa26-q4",
+    textQ: "Qu'est-ce qui est interdit pendant la visite ?",
+    text: ["Manger", "Prendre des photos", "Téléphoner"],
+    textC: 1,
+    img: ["Manger", "Appareil photo", "Téléphoner"],
+    imgC: 1,
+    fillQ: "Il est interdit de ___ dans les salles.",
+    fill: "prendre des photos",
+    fillA: ["prendre des photos", "faire des photos", "photographier"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_27 = buildPool("base", "scolaire-annonce-27", [
+  {
+    id: "sa27-q1",
+    textQ: "La piscine ferme dans combien de temps ?",
+    text: ["10 minutes", "15 minutes", "30 minutes"],
+    textC: 1,
+    img: ["10 minutes", "15 minutes", "30 minutes"],
+    imgC: 1,
+    fillQ: "La piscine ferme dans ___ minutes.",
+    fill: "15",
+    fillA: ["15", "quinze"],
+  },
+  {
+    id: "sa27-q2",
+    textQ: "Où devez-vous aller ?",
+    text: ["Aux vestiaires", "À l'accueil", "Vers la sortie"],
+    textC: 0,
+    img: ["Vestiaires", "Accueil", "Sortie"],
+    imgC: 0,
+    fillQ: "Il faut aller aux ___ .",
+    fill: "vestiaires",
+    fillA: ["vestiaires", "vestiaire"],
+  },
+  {
+    id: "sa27-q3",
+    textQ: "Demain la piscine est ouverte…",
+    text: ["De 8 h à 18 h 30", "De 8 h 30 à 18 h 30", "De 9 h 30 à 18 h"],
+    textC: 1,
+    img: ["8 h – 18 h 30", "8 h 30 – 18 h 30", "9 h 30 – 18 h"],
+    imgC: 1,
+    fillQ: "Demain, la piscine ouvre à ___ .",
+    fill: "8h30",
+    fillA: ["8 h 30", "8h30", "8:30"],
+  },
+  {
+    id: "sa27-q4",
+    textQ: "Que pouvez-vous prendre en sortant ?",
+    text: ["Un bonnet et des lunettes", "Une bouteille d'eau", "Le programme"],
+    textC: 2,
+    img: ["Bonnet et lunettes", "Eau", "Programme"],
+    imgC: 2,
+    fillQ: "En sortant, prenez le ___ des activités.",
+    fill: "programme",
+    fillA: ["programme"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_28 = buildPool("base", "scolaire-annonce-28", [
+  {
+    id: "sa28-q1",
+    textQ: "À quelle heure ferme le zoo ?",
+    text: ["16 h", "17 h", "18 h"],
+    textC: 2,
+    img: ["16 h", "17 h", "18 h"],
+    imgC: 2,
+    fillQ: "Le zoo ferme à ___ heures.",
+    fill: "18h",
+    fillA: ["18 h", "18h", "18h00"],
+  },
+  {
+    id: "sa28-q2",
+    textQ: "Quels bébés animaux pouvez-vous voir ?",
+    text: ["Une girafe", "Des tigres", "Des veaux"],
+    textC: 0,
+    img: ["Girafe", "Tigre", "Vache"],
+    imgC: 0,
+    fillQ: "On peut voir une petite ___ .",
+    fill: "girafe",
+    fillA: ["girafe"],
+  },
+  {
+    id: "sa28-q3",
+    textQ: "Quelle activité pouvez-vous faire à 12 h ?",
+    text: ["Voir un spectacle de dauphins", "Nourrir un éléphant", "Traire une vache"],
+    textC: 1,
+    img: ["Spectacle dauphins", "Nourrir éléphant", "Traire vache"],
+    imgC: 1,
+    fillQ: "À midi, on peut ___ les éléphants.",
+    fill: "nourrir",
+    fillA: ["nourrir", "donner à manger"],
+  },
+  {
+    id: "sa28-q4",
+    textQ: "Avec Elsa, vous pouvez…",
+    text: ["Faire des dessins", "Prendre des photos", "Monter sur des chevaux"],
+    textC: 0,
+    img: ["Dessin", "Appareil photo", "Cheval"],
+    imgC: 0,
+    fillQ: "Avec l'animatrice, on apprend à ___ .",
+    fill: "dessiner",
+    fillA: ["dessiner", "faire des dessins"],
+  },
+]);
+
+export const SCOLAIRE_ANNONCE_29 = buildPool("base", "scolaire-annonce-29", [
+  {
+    id: "sa29-q1",
+    textQ: "Quelle station de métro est fermée sur la ligne 8 ?",
+    text: ["République", "Bastille", "Nation"],
+    textC: 0,
+    img: ["République", "Bastille", "Nation"],
+    imgC: 0,
+    fillQ: "La fermeture concerne la ligne ___ .",
+    fill: "8",
+    fillA: ["8", "huit"],
+  },
+  {
+    id: "sa29-q2",
+    textQ: "Pourquoi la station est-elle fermée ?",
+    text: ["Pour des travaux", "À cause d'un accident", "Pour une manifestation"],
+    textC: 0,
+    img: ["Travaux", "Accident", "Manifestation"],
+    imgC: 0,
+    fillQ: "La station est fermée pour des ___ .",
+    fill: "travaux",
+    fillA: ["travaux"],
+  },
+  {
+    id: "sa29-q3",
+    textQ: "Vous pouvez prendre la ligne 9 jusqu'à…",
+    text: ["20 h", "23 h", "Minuit"],
+    textC: 1,
+    img: ["20 h", "23 h", "Minuit"],
+    imgC: 1,
+    fillQ: "La ligne 9 circule jusqu'à ___ heures.",
+    fill: "23h",
+    fillA: ["23 h", "23h", "23h00"],
+  },
+  {
+    id: "sa29-q4",
+    textQ: "Quelle ligne est encore ouverte à 2 h du matin ?",
+    text: ["La ligne 9", "La ligne 10", "La ligne 11"],
+    textC: 2,
+    img: ["Ligne 9", "Ligne 10", "Ligne 11"],
+    imgC: 2,
+    fillQ: "La ligne ___ circule toute la nuit.",
+    fill: "11",
+    fillA: ["11", "onze", "ligne 11"],
+  },
+]);
+
 export const SCOLAIRE_ANNONCES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-annonce-21": SCOLAIRE_ANNONCE_21,
   "base-scolaire-annonce-22": SCOLAIRE_ANNONCE_22,
   "base-scolaire-annonce-23": SCOLAIRE_ANNONCE_23,
   "base-scolaire-annonce-24": SCOLAIRE_ANNONCE_24,
   "base-scolaire-annonce-25": SCOLAIRE_ANNONCE_25,
+  "base-scolaire-annonce-26": SCOLAIRE_ANNONCE_26,
+  "base-scolaire-annonce-27": SCOLAIRE_ANNONCE_27,
+  "base-scolaire-annonce-28": SCOLAIRE_ANNONCE_28,
+  "base-scolaire-annonce-29": SCOLAIRE_ANNONCE_29,
 };
 
 /** @deprecated Utiliser SCOLAIRE_MESSAGES_BOOK */
