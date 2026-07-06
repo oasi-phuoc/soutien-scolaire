@@ -99,22 +99,22 @@ export function EvalNavGuardProvider({ children }: { children: React.ReactNode }
             <div className="flex gap-3">
               <button
                 type="button"
+                onClick={() => setPending(null)}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                Continuer l&apos;évaluation
+              </button>
+              <button
+                type="button"
                 onClick={() => {
                   const run = pending;
                   setPending(null);
                   setCount(0);
                   run?.();
                 }}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-              >
-                Quitter
-              </button>
-              <button
-                type="button"
-                onClick={() => setPending(null)}
                 className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-theme)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
-                Continuer l&apos;évaluation
+                Quitter
               </button>
             </div>
           </div>
