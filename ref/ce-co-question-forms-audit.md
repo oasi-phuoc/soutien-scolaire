@@ -1,6 +1,6 @@
 # Audit des formes de questions CE / CO
 
-_Généré par `scripts/audit-ce-co-question-forms.cjs` — 2026-07-05_
+_Généré par `scripts/audit-ce-co-question-forms.cjs` — 2026-07-06_
 
 ## Règles appliquées (juillet 2026)
 
@@ -45,10 +45,10 @@ Exemples exclus :
 
 ## CE — questions écrites
 
-- Questions analysées : **228**
-- QCM texte : **162**
-- QCM image : **5**
-- Texte à saisir : **61**
+- Questions analysées : **217**
+- QCM texte : **159**
+- QCM image : **0**
+- Texte à saisir : **58**
 - Questions nom encore présentes (devrait être 0) : **0**
 
 ## Architecture

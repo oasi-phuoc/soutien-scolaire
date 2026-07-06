@@ -2,9 +2,9 @@ import type { CEMessageItem } from "./ce-questions-helpers";
 import { ceMapQ, ceQ } from "./ce-questions-helpers";
 
 const MAP = (id: string): [string, string, string] => [
-  `/assets/expression/ce/base/orientation/${id}-a.webp`,
-  `/assets/expression/ce/base/orientation/${id}-b.webp`,
-  `/assets/expression/ce/base/orientation/${id}-c.webp`,
+  `/assets/expression/images/${id}-a.webp`,
+  `/assets/expression/images/${id}-b.webp`,
+  `/assets/expression/images/${id}-c.webp`,
 ];
 
 /** Textes CE base — « Lire pour s'orienter » (messages + itinéraires). */

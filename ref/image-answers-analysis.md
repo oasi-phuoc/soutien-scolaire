@@ -1,8 +1,8 @@
 # Analyse des réponses « QCM image » (CO)
 
-_Généré par `scripts/analyze-image-answers.cjs` — 2026-07-05_
+_Généré par `scripts/analyze-image-answers.cjs` — 2026-07-06_
 
-Index d'images utilisé : **pool câblé uniquement** (901 slugs).
+Index d'images utilisé : **pool câblé uniquement** (910 slugs).
 
 Questions CO à image analysées : **950** · libellés distincts : **1884**
 
