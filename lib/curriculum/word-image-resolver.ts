@@ -1,4 +1,4 @@
-import { WORD_IMAGE_INDEX } from "./content/communication/word-image-index";
+import { LECTURE_IMAGE_INDEX, WORD_IMAGE_INDEX } from "./content/communication/word-image-index";
 import aliasesJson from "./content/communication/word-image-aliases.json";
 
 const ALIASES = aliasesJson as Record<string, string>;
@@ -239,6 +239,84 @@ function isLikelyIllustrableObject(label: string): boolean {
   return false;
 }
 
+function isVocabImagePath(path: string): boolean {
+  return path.startsWith("/assets/words/vocab/");
+}
+
+function resolveLectureSlug(slug: string): string | null {
+  const direct = LECTURE_IMAGE_INDEX[slug];
+  if (direct) return direct;
+  const alias = ALIASES[slug];
+  if (alias && LECTURE_IMAGE_INDEX[alias]) return LECTURE_IMAGE_INDEX[alias];
+  return null;
+}
+
+/** CE/CO : expression/horloge d'abord, puis lecture — jamais vocabulaire. */
+function resolveCeCoIndexedSlug(slug: string): string | null {
+  const direct = WORD_IMAGE_INDEX[slug];
+  if (direct && !isVocabImagePath(direct)) return direct;
+  const alias = ALIASES[slug];
+  if (alias) {
+    const aliased = WORD_IMAGE_INDEX[alias];
+    if (aliased && !isVocabImagePath(aliased)) return aliased;
+  }
+  return resolveLectureSlug(slug);
+}
+
+function isCeCoLikelyIllustrableObject(label: string): boolean {
+  const raw = label.trim();
+  const tokens = tokenize(raw);
+  const stripped = stripDeterminers(tokens);
+  const core = stripped.join(" ");
+
+  if (WEEKDAYS.has(core) || GEOGRAPHY.has(core)) return false;
+  if (stripped.some((tok) => WEEKDAYS.has(tok) || GEOGRAPHY.has(tok))) return false;
+  if (stripped.length === 1 && PROPER_NAME_HOMOGRAPHS.has(stripped[0]!) && tokens.length === stripped.length) {
+    return false;
+  }
+
+  if (tokens.length !== stripped.length) return resolveCeCoWordImage(label) !== null;
+  if (stripped.length >= 2) return resolveCeCoWordImage(label) !== null;
+  if (stripped.length === 1 && CONCRETE_SINGLE.has(stripped[0]!)) return resolveCeCoWordImage(label) !== null;
+
+  return false;
+}
+
+/**
+ * Resolve a CE/CO object label: scènes manga / horloges, puis pool lecture — pas vocabulaire.
+ */
+export function resolveCeCoWordImage(label: string | undefined | null): string | null {
+  if (!label) return null;
+  const time = timeSlug(label);
+  if (time) {
+    const clock = resolveCeCoIndexedSlug(time);
+    if (clock) return clock;
+  }
+  for (const candidate of candidateSlugs(label)) {
+    const resolved = resolveCeCoIndexedSlug(candidate);
+    if (resolved) return resolved;
+  }
+  return null;
+}
+
+/**
+ * True when a label can be shown as a CE/CO QCM image (horloge ou objet, sans vocabulaire).
+ */
+export function isCeCoImageableLabel(label: string | undefined | null): boolean {
+  if (!label?.trim()) return false;
+
+  if (isPercentLabel(label) || isNumberLabel(label)) return false;
+  if (isProperNameLabel(label) || isPlaceOrAddressLabel(label)) return false;
+  if (isTimeRange(label) || isPriceRange(label) || isSinglePrice(label)) return false;
+
+  if (isSingleTime(label)) {
+    const slug = timeSlug(label);
+    return !!slug && !!resolveCeCoIndexedSlug(slug);
+  }
+
+  return isCeCoLikelyIllustrableObject(label);
+}
+
 /**
  * Resolve a French word/label to an existing image in vocabulaire, lecture,
  * or a generated clock/price image.
@@ -281,15 +359,6 @@ export function slugFromAssetPath(path: string): string | null {
   return m ? baseSlug(m[1]!) : null;
 }
 
-/** Cherche une image indexée par slug (direct ou alias). */
-function resolveIndexedSlug(slug: string): string | null {
-  const direct = WORD_IMAGE_INDEX[slug];
-  if (direct) return direct;
-  const alias = ALIASES[slug];
-  if (alias && WORD_IMAGE_INDEX[alias]) return WORD_IMAGE_INDEX[alias];
-  return null;
-}
-
 /**
  * Remappe un chemin CE/CO (ancien plat ou scene/ce/heure)
  * vers l'URL réelle dans l'index, ou null si aucune image adéquate.
@@ -298,7 +367,7 @@ export function remapExpressionImagePath(path?: string | null): string | null {
   if (!path) return null;
   const slug = slugFromAssetPath(path);
   if (!slug || slug.startsWith("prix-")) return null;
-  return resolveIndexedSlug(slug);
+  return resolveCeCoIndexedSlug(slug);
 }
 
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
@@ -314,18 +383,16 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
 const EXPRESSION_CE_BASE =
   /^\/assets\/expression\/ce\/base\//;
 
-/** CE/CO — messages CE, conversations, objet-pick, vocab/lecture, horloges/prix. */
+/** CE/CO — scènes, conversations, objet-pick, horloges ; fallback lecture uniquement. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
     if (path.startsWith("/assets/expression/co/")) return path;
-    if (path.startsWith("/assets/words/lecture/") || path.startsWith("/assets/words/vocab/")) {
-      return path;
-    }
+    if (path.startsWith("/assets/words/lecture/")) return path;
     if (EXPRESSION_CE_BASE.test(path)) return path;
   }
-  if (label && isImageableLabel(label)) return resolveWordImage(label);
+  if (label && isCeCoImageableLabel(label)) return resolveCeCoWordImage(label);
   return null;
 }
 
@@ -338,7 +405,7 @@ export function expressionImageSource(path?: string | null): string | null {
 export function imageSourceFor(label: string, path?: string): string | null {
   const remapped = remapExpressionImagePath(path);
   if (remapped) return remapped;
-  if (path?.startsWith("/assets/words/lecture/") || path?.startsWith("/assets/words/vocab/")) return path;
-  if (!isImageableLabel(label)) return null;
-  return resolveWordImage(label);
+  if (path?.startsWith("/assets/words/lecture/")) return path;
+  if (!isCeCoImageableLabel(label)) return null;
+  return resolveCeCoWordImage(label);
 }

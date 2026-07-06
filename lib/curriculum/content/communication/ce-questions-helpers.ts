@@ -1,4 +1,4 @@
-import { ceCoImageSource, isImageableLabel, isPriceRange, isSinglePrice, resolveWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 
 export type CEFormatType = "text" | "image" | "fill";
@@ -45,8 +45,8 @@ export type CEMessageItem = {
 };
 
 export function ceImgChoice(label: string): CEImageChoice {
-  if (isImageableLabel(label)) {
-    const dedicated = resolveWordImage(label);
+  if (isCeCoImageableLabel(label)) {
+    const dedicated = resolveCeCoWordImage(label);
     if (dedicated) return { label, image: dedicated };
   }
   return { label, image: "" };
