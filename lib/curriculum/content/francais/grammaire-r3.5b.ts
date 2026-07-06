@@ -96,6 +96,39 @@ export const A1_GR_L19: GrammarLesson = {
         uk: ["{a}son{/a} = його або її залежно від контексту.", "Marco parle à {a}son{/a} ami. (= друг Марко)", "Aiko parle à {a}son{/a} ami. (= друг Айко)"],
       },
     },
+    {
+      type: "highlight",
+      label: "leur / leurs — plusieurs possesseurs",
+      items: [
+        "{a}leur{/a} et {a}leurs{/a} quand il y a {a}plusieurs possesseurs{/a}.",
+        "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.",
+        "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens.",
+      ],
+      transLabel: { en: "leur / leurs — multiple owners", ar: "leur / leurs — عدة مالكين", fa: "leur / leurs — چند مالک", ti: "leur / leurs — ብዙሕ ዋናታት", uk: "leur / leurs — кілька власників" },
+      transItems: {
+        en: ["{a}leur{/a} and {a}leurs{/a} when there are {a}several owners{/a}.", "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.", "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens."],
+        ar: ["{a}leur{/a} و {a}leurs{/a} عندما يوجد {a}عدة مالكين{/a}.", "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.", "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens."],
+        fa: ["{a}leur{/a} و {a}leurs{/a} وقتی {a}چند مالک{/a} وجود دارد.", "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.", "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens."],
+        ti: ["{a}leur{/a} ን {a}leurs{/a} {a}ብዙሕ ዋናታት{/a} ምስ ዘለዉ።", "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.", "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens."],
+        uk: ["{a}leur{/a} і {a}leurs{/a}, коли є {a}кілька власників{/a}.", "Le mariage de Samuel et Anne-Sophie → {a}leur{/a} mariage.", "Les chiens d'Angélique et ses enfants → {a}leurs{/a} chiens."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Remarque",
+      items: [
+        "On n'utilise pas d'adjectif possessif pour une partie du corps dans cette expression.",
+        "On dit « J'ai mal à la tête » (et non *ma tête* ici).",
+      ],
+      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Примітка" },
+      transItems: {
+        en: ["Possessive adjectives are not used for body parts in this expression.", "We say « J'ai mal à la tête » (not *ma tête* here)."],
+        ar: ["لا نستخدم صفة الملكية لأجزاء الجسم في هذا التعبير.", "نقول « J'ai mal à la tête »."],
+        fa: ["در این ساختار برای اعضای بدن از صفت ملکی استفاده نمی‌شود.", "می‌گوییم « J'ai mal à la tête »."],
+        ti: ["ንኽፋል ኣካላት ኣብዚ ሓረድታ ናይ ዋንነት ቅጽሊ ኣይንጥቀምን።", "ንገላጸ « J'ai mal à la tête » ንብል።"],
+        uk: ["У цьому виразі присвійні прикметники для частин тіла не вживають.", "Кажемо « J'ai mal à la tête »."],
+      },
+    },
   ],
   exercises: [],
 };

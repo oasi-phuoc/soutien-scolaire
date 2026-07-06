@@ -226,6 +226,20 @@ export const A1_CONJ_L07: ConjLesson = {
     {
       type: "plain_list",
       items: [
+        "En général, les verbes en {a}-er{/a} ont {a}une base verbale{/a}. On ajoute la terminaison à cette base.",
+        "Exemple {a}chanter{/a} : je chant{a}e{/a} · tu chant{a}es{/a} · il chant{a}e{/a} · nous chant{a}ons{/a} · vous chant{a}ez{/a} · ils chant{a}ent{/a}.",
+      ],
+      transItems: {
+        en: ["In general, {a}-er{/a} verbs have {a}one verbal stem{/a}. The ending is added to this stem.", "Example {a}chanter{/a}: je chante · tu chantes · il chante · nous chantons · vous chantez · ils chantent."],
+        ar: ["عادةً، أفعال {a}-er{/a} لها {a}جذر واحد{/a}. تُضاف النهاية إلى هذا الجذر.", "مثال {a}chanter{/a}: je chante · tu chantes · il chante · nous chantons · vous chantez · ils chantent."],
+        fa: ["معمولاً افعال {a}-er{/a} {a}یک ریشه{/a} دارند. پایانه به این ریشه اضافه می‌شود.", "مثال {a}chanter{/a}: je chante · tu chantes · il chante · nous chantons · vous chantez · ils chantent."],
+        ti: ["ብሓፈሻ፣ ግሲታት {a}-er{/a} {a}ሓደ መሰረታዊ ቃል{/a} ኣለዎም። ነቲ መወዳእታ ኣብዚ መሰረት ይወስኽ።", "ኣብነት {a}chanter{/a}: je chante · tu chantes · il chante · nous chantons · vous chantez · ils chantent."],
+        uk: ["Зазвичай дієслова на {a}-er{/a} мають {a}одну основу{/a}. До неї додається закінчення.", "Приклад {a}chanter{/a}: je chante · tu chantes · il chante · nous chantons · vous chantez · ils chantent."],
+      },
+    },
+    {
+      type: "plain_list",
+      items: [
         "On prend le verbe et on enlève {a}-er{/a}.",
       ],
       transItems: {

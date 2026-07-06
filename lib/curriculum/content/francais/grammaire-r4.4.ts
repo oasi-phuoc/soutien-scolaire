@@ -22,6 +22,54 @@ export const A1_CONJ_L29: ConjLesson = {
       },
     },
     {
+      type: "highlight",
+      label: "Formule",
+      items: [
+        "{a}SUJET + AVOIR (au présent) + PARTICIPE PASSÉ{/a}",
+        "Exemples : J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film.",
+      ],
+      transLabel: { en: "Formula", ar: "الصيغة", fa: "فرمول", ti: "ኣፈጣጥራ", uk: "Формула" },
+      transItems: {
+        en: ["{a}SUBJECT + AVOIR (present) + PAST PARTICIPLE{/a}", "Examples: J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film."],
+        ar: ["{a}الفاعل + AVOIR (المضارع) + اسم المفعول{/a}", "أمثلة: J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film."],
+        fa: ["{a}فاعل + AVOIR (حال) + اسم مفعول{/a}", "مثال‌ها: J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film."],
+        ti: ["{a}ርእሲ + AVOIR (ህሉው) + ክፍሊ-ግሲ{/a}", "ኣብነታት፦ J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film."],
+        uk: ["{a}ПІДМЕТ + AVOIR (теперішній) + ДІЄПРИКМЕТНИК{/a}", "Приклади: J'{a}ai vu{/a} mon père hier. · Il {a}a adoré{/a} ce film."],
+      },
+      noBulletItems: [0, 1],
+    },
+    { type: "heading", text: "Les emplois du passé composé", sub: true, accent: true, trans: { en: "Uses of the passé composé", ar: "استخدامات الماضي المركّب", fa: "کاربردهای ماضی نقلی", ti: "ጥቕሚታት passé composé", uk: "Вживання passé composé" } },
+    {
+      type: "plain_list",
+      items: [
+        "Raconter un événement {a}ponctuel{/a} dans le passé.",
+        "Parler d'une action sur une {a}période de temps définie{/a} : Je suis née en 1985. · J'ai fait du sport pendant 2 heures.",
+      ],
+      transItems: {
+        en: ["Tell a {a}one-off{/a} event in the past.", "Talk about an action over a {a}defined time period{/a}: Je suis née en 1985. · J'ai fait du sport pendant 2 heures."],
+        ar: ["سرد حدث {a}لحظي{/a} في الماضي.", "الحديث عن فعل في {a}فترة زمنية محددة{/a}."],
+        fa: ["روایت رویداد {a}مقطعی{/a} در گذشته.", "صحبت درباره‌ی عملی در {a}بازه‌ی زمانی مشخص{/a}."],
+        ti: ["{a}ነጠላ{/a} ፍጻመ ኣብ ሕሉፍ ምዝራብ።", "ኣብ {a}ዝተወሰነ ግዜ{/a} ዝተገብረ ተግባር ምዝራብ።"],
+        uk: ["Розповісти про {a}разову{/a} подію в минулому.", "Говорити про дію протягом {a}визначеного періоду{/a}."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Accord avec avoir",
+      items: [
+        "Avec {a}avoir{/a}, le participe passé {a}ne s'accorde pas{/a} en genre ni en nombre.",
+        "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film.",
+      ],
+      transLabel: { en: "Agreement with avoir", ar: "المطابقة مع avoir", fa: "مطابقت با avoir", ti: "ምስምማዕ ምስ avoir", uk: "Узгодження з avoir" },
+      transItems: {
+        en: ["With {a}avoir{/a}, the past participle {a}does not agree{/a} in gender or number.", "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film."],
+        ar: ["مع {a}avoir{/a}، اسم المفعول {a}لا يطابق{/a} في الجنس والعدد.", "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film."],
+        fa: ["با {a}avoir{/a}، اسم مفعول {a}در جنسیت و تعداد مطابقت نمی‌یابد{/a}.", "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film."],
+        ti: ["ምስ {a}avoir{/a}፣ ክፍሊ-ግሲ {a}ብጾታን ቁጽሪን ኣይሰማምዕን{/a}።", "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film."],
+        uk: ["З {a}avoir{/a} дієприкметник {a}не узгоджується{/a} за родом і числом.", "Il/Elle a adoré ce film. · Ils/Elles ont adoré ce film."],
+      },
+    },
+    {
       type: "table",
       tables: [
         {

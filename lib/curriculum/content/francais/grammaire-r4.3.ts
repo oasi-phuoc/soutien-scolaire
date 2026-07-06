@@ -118,6 +118,38 @@ export const A1_CONJ_L28: ConjLesson = {
         uk: ["{a}Недавнє минуле{/a} → venir de + інф.: Elle vient de téléphoner. (Вона щойно зателефонувала.)", "{a}Простий теперішній{/a} → теперішній: Elle téléphone. (Вона телефонує.)", "{a}Найближче майбутнє{/a} → aller + інф.: Elle va téléphoner. (Вона зараз зателефонує.)"],
       },
     },
+    { type: "heading", text: "Les emplois du passé composé et du passé récent", sub: true, accent: true, trans: { en: "Uses of the passé composé and the recent past", ar: "استخدامات الماضي المركّب والماضي القريب", fa: "کاربردهای ماضی نقلی و گذشته‌ی نزدیک", ti: "ጥቕሚታት passé composéን passé récentን", uk: "Вживання passé composé та passé récent" } },
+    {
+      type: "plain_list",
+      items: [
+        "Le {a}passé composé{/a} raconte un événement {a}ponctuel{/a} : J'ai vu Lola dans la rue. · J'ai dîné avec ma famille lundi dernier.",
+        "On l'utilise aussi quand la {a}période de temps est définie{/a} : Je suis née en 1985. · J'ai fait du sport de 14 h à 16 h.",
+        "Le {a}passé récent{/a} décrit une action qui vient de se passer — {a}surtout à l'oral{/a} : Je viens de téléphoner à Zachary.",
+      ],
+      transItems: {
+        en: ["The {a}passé composé{/a} tells a {a}one-off{/a} event: J'ai vu Lola dans la rue. · J'ai dîné avec ma famille lundi dernier.", "It is also used when the {a}time period is defined{/a}: Je suis née en 1985. · J'ai fait du sport de 14 h à 16 h.", "The {a}recent past{/a} describes an action that has just happened — {a}especially in speech{/a}: Je viens de téléphoner à Zachary."],
+        ar: ["{a}الماضي المركّب{/a} يروي حدثاً {a}لحظياً{/a}.", "يُستخدم أيضاً عندما تكون {a}الفترة الزمنية محددة{/a}.", "{a}الماضي القريب{/a} يصف فعلاً انتهى للتو — {a}خصوصاً في الكلام{/a}."],
+        fa: ["{a}ماضی نقلی{/a} رویدادی {a}مقطعی{/a} را روایت می‌کند.", "وقتی {a}بازه‌ی زمانی مشخص{/a} است نیز به کار می‌رود.", "{a}گذشته‌ی نزدیک{/a} عملی را که همین حالا رخ داده توصیف می‌کند — {a}به‌ویژه در گفتار{/a}."],
+        ti: ["{a}passé composé{/a} {a}ነጠላ{/a} ፍጻመ ይዛርብ።", "እቲ {a}ግዜ ዝተወሰነ{/a} እንትከውን ይጥቀም።", "{a}passé récent{/a} ሕጂ ዝተወድአ ተግባር የገልጽ — {a}ብፍላይ ኣብ ኣፋዊ{/a}።"],
+        uk: ["{a}Passé composé{/a} розповідає про {a}разову{/a} подію.", "Вживається також, коли {a}період часу визначений{/a}.", "{a}Passé récent{/a} описує дію, що щойно відбулася — {a}переважно в мовленні{/a}."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "Impossible de dire : {s}Hier, je viens de téléphoner à Zachary.{/s}",
+        "Le passé récent exprime un passé {a}immédiat{/a}, pas un passé éloigné comme {a}hier{/a}.",
+      ],
+      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
+      transItems: {
+        en: ["You cannot say: {s}Hier, je viens de téléphoner à Zachary.{/s}", "The recent past expresses an {a}immediate{/a} past, not a distant one like {a}hier{/a} (yesterday)."],
+        ar: ["لا يمكن القول: {s}Hier, je viens de téléphoner à Zachary.{/s}", "الماضي القريب يعبّر عن ماضٍ {a}فوري{/a}، وليس ماضياً بعيداً مثل {a}hier{/a}."],
+        fa: ["نمی‌توان گفت: {s}Hier, je viens de téléphoner à Zachary.{/s}", "گذشته‌ی نزدیک گذشته‌ی {a}فوری{/a} را بیان می‌کند، نه گذشته‌ی دور مثل {a}hier{/a}."],
+        ti: ["ክትበል ኣይትኽእልን፦ {s}Hier, je viens de téléphoner à Zachary.{/s}", "passé récent {a}ቀረባ{/a} ሕሉፍ የገልጽ፣ ከም {a}hier{/a} ዝኣመሰለ ዝረፈ ሕሉፍ ኣይኮነን።"],
+        uk: ["Неможливо сказати: {s}Hier, je viens de téléphoner à Zachary.{/s}", "Passé récent виражає {a}безпосереднє{/a} минуле, а не віддалене на кшталт {a}hier{/a}."],
+      },
+    },
   ],
   exercises: [
     {

@@ -107,7 +107,7 @@ export const A1_CONJ_L20: ConjLesson = {
       label: "Quand utiliser le futur proche ?",
       items: [
         "Action prévue dans un futur proche : Je vais appeler demain.",
-        "Intention certaine : Nous allons déménager.",
+        "Intention certaine ou projet probable : Nous allons déménager. · C'est décidé ! Je vais faire du sport.",
         "Événement imminent : Attention, tu vas tomber !",
         "Programme établi : Le train va partir dans 2 minutes.",
       ],
