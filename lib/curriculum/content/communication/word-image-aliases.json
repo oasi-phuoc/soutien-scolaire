@@ -36,5 +36,7 @@
   "reparer-le-velo": "reparation-velo",
   "fleurs": "admirer-fleurs",
   "meteo": "verifier-meteo",
-  "pluie": "verifier-meteo"
+  "pluie": "verifier-meteo",
+  "cantine-scolaire": "service-cantine",
+  "professeur": "remettre-cahier-professeur"
 }
