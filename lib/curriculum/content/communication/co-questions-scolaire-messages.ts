@@ -1,6 +1,6 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
 
-/** CO base scolaire — exercices 1 à 4 (messages répondeur, questions du livre). */
+/** CO base scolaire — exercices 1 à 9 (messages répondeur, questions du livre). */
 
 export const SCOLAIRE_MESSAGE_1 = buildPool("base", "scolaire-message-1", [
   {
@@ -186,9 +186,215 @@ export const SCOLAIRE_MESSAGE_4 = buildPool("base", "scolaire-message-4", [
   },
 ]);
 
-export const SCOLAIRE_MESSAGES_1_TO_4: Record<string, COMultiQuestion[]> = {
+export const SCOLAIRE_MESSAGE_6 = buildPool("base", "scolaire-message-6", [
+  {
+    id: "sm6-q1",
+    textQ: "Quelle activité vous propose Thomas ?",
+    text: ["Jouer au foot", "Jouer au volley", "Jouer au basket"],
+    textC: 0,
+    img: ["Football", "Volleyball", "Basketball"],
+    imgC: 0,
+    fillQ: "Thomas propose de jouer au ___.",
+    fill: "foot",
+    fillA: ["foot", "football"],
+  },
+  {
+    id: "sm6-q2",
+    textQ: "À quelle heure devez-vous venir ?",
+    text: ["14 h", "16 h", "18 h"],
+    textC: 1,
+    img: ["14 h", "16 h", "18 h"],
+    imgC: 1,
+    fillQ: "Il faut venir à ___ heures.",
+    fill: "16h",
+    fillA: ["16 h", "16h", "16h00"],
+  },
+  {
+    id: "sm6-q3",
+    textQ: "Qu'allez-vous manger chez Thomas ?",
+    text: ["Des pâtes", "Une pizza", "Un sandwich"],
+    textC: 0,
+    img: ["Pâtes", "Pizza", "Sandwich"],
+    imgC: 0,
+    fillQ: "Le père va préparer des ___.",
+    fill: "pâtes",
+    fillA: ["pates", "pâtes"],
+  },
+  {
+    id: "sm6-q4",
+    textQ: "Que devez-vous apporter ?",
+    text: ["Un ballon", "Des baskets", "Une casquette"],
+    textC: 1,
+    img: ["Ballon", "Baskets", "Casquette"],
+    imgC: 1,
+    fillQ: "Il faut apporter tes ___.",
+    fill: "baskets",
+    fillA: ["baskets", "chaussures de sport"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGE_7 = buildPool("base", "scolaire-message-7", [
+  {
+    id: "sm7-q1",
+    textQ: "Où habitent les grands-parents d'Alicia ?",
+    text: ["À la campagne", "Au bord de la mer", "À la montagne"],
+    textC: 2,
+    img: ["Campagne", "Mer", "Montagne"],
+    imgC: 2,
+    fillQ: "Les grands-parents habitent à la ___.",
+    fill: "montagne",
+    fillA: ["montagne"],
+  },
+  {
+    id: "sm7-q2",
+    textQ: "Comment est-ce qu'Alicia va chez ses grands-parents ?",
+    text: ["En bus", "En train", "En voiture"],
+    textC: 1,
+    img: ["Bus", "Train", "Voiture"],
+    imgC: 1,
+    fillQ: "Elle prend le ___ de 10 heures.",
+    fill: "train",
+    fillA: ["train"],
+  },
+  {
+    id: "sm7-q3",
+    textQ: "Qu'est-ce que vous devez prendre ?",
+    text: ["Des bottes", "De la crème solaire", "Un parapluie"],
+    textC: 0,
+    img: ["Bottes", "Crème solaire", "Parapluie"],
+    imgC: 0,
+    fillQ: "Il faut prendre des ___.",
+    fill: "bottes",
+    fillA: ["bottes"],
+  },
+  {
+    id: "sm7-q4",
+    textQ: "Le soir vous allez…",
+    text: ["Lire des livres", "Vous promener", "Regarder la télévision"],
+    textC: 2,
+    img: ["Livre", "Promenade", "Télévision"],
+    imgC: 2,
+    fillQ: "Le soir, on va regarder la ___.",
+    fill: "télé",
+    fillA: ["tele", "télé", "télévision", "television"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGE_8 = buildPool("base", "scolaire-message-8", [
+  {
+    id: "sm8-q1",
+    textQ: "Qui est Mme Martin ?",
+    text: ["La professeure de dessin", "La directrice des cours de dessin", "La secrétaire des cours de dessin"],
+    textC: 1,
+    img: ["Professeure de dessin", "Directrice", "Secrétaire"],
+    imgC: 1,
+    fillQ: "C'est la ___ des cours de dessin.",
+    fill: "directrice",
+    fillA: ["directrice"],
+  },
+  {
+    id: "sm8-q2",
+    textQ: "Le cours de dessin est annulé parce que la professeure…",
+    text: ["Est malade", "Est absente", "Est en vacances"],
+    textC: 0,
+    img: ["Malade", "Absente", "Vacances"],
+    imgC: 0,
+    fillQ: "La professeure est ___.",
+    fill: "malade",
+    fillA: ["malade"],
+  },
+  {
+    id: "sm8-q3",
+    textQ: "Mme Martin vous propose un autre cours quel jour ?",
+    text: ["Jeudi", "Vendredi", "Samedi"],
+    textC: 1,
+    img: ["Jeudi", "Vendredi", "Samedi"],
+    imgC: 1,
+    fillQ: "Le cours est reporté ___.",
+    fill: "vendredi",
+    fillA: ["vendredi"],
+  },
+  {
+    id: "sm8-q4",
+    textQ: "À quelle heure ?",
+    text: ["11 h", "12 h", "13 h"],
+    textC: 1,
+    img: ["11 h", "12 h", "13 h"],
+    imgC: 1,
+    fillQ: "Le nouveau cours est à ___ heures.",
+    fill: "12h",
+    fillA: ["12 h", "12h", "midi"],
+  },
+  {
+    id: "sm8-q5",
+    textQ: "Quel est le numéro de Mme Martin ?",
+    text: ["02 65 18 90 32", "02 56 18 90 32", "06 65 18 90 32"],
+    textC: 0,
+    img: ["02 65 18 90 32", "02 56 18 90 32", "06 65 18 90 32"],
+    imgC: 0,
+    fillQ: "Le numéro à rappeler est ___.",
+    fill: "02 65 18 90 32",
+    fillA: ["0265189032", "02-65-18-90-32", "02.65.18.90.32"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGE_9 = buildPool("base", "scolaire-message-9", [
+  {
+    id: "sm9-q1",
+    textQ: "Où va Nina à 14 h ?",
+    text: ["Chez Pauline", "Dans un magasin", "À un cours de sport"],
+    textC: 1,
+    img: ["Magasins", "Cours de sport", "Piscine"],
+    imgC: 0,
+    fillQ: "Elle va faire des ___ l'après-midi.",
+    fill: "courses",
+    fillA: ["courses", "achats"],
+  },
+  {
+    id: "sm9-q2",
+    textQ: "Nina doit acheter un cadeau pour l'anniversaire de…",
+    text: ["Sa mère", "Son frère", "Sa cousine"],
+    textC: 1,
+    img: ["Mère", "Frère", "Cousine"],
+    imgC: 1,
+    fillQ: "C'est l'anniversaire de son ___.",
+    fill: "frère",
+    fillA: ["frere", "frère"],
+  },
+  {
+    id: "sm9-q3",
+    textQ: "À quelle heure est-ce que vous allez à la piscine ?",
+    text: ["14 h", "16 h", "16 h 30"],
+    textC: 2,
+    img: ["14 h", "16 h", "16 h 30"],
+    imgC: 2,
+    fillQ: "La piscine est à ___ .",
+    fill: "16h30",
+    fillA: ["16 h 30", "16h30", "16:30"],
+  },
+  {
+    id: "sm9-q4",
+    textQ: "Comment allez-vous à la piscine ?",
+    text: ["En bus", "En train", "En voiture"],
+    textC: 2,
+    img: ["Bus", "Train", "Voiture"],
+    imgC: 2,
+    fillQ: "On y va en ___.",
+    fill: "voiture",
+    fillA: ["voiture", "en voiture"],
+  },
+]);
+
+export const SCOLAIRE_MESSAGES_BOOK: Record<string, COMultiQuestion[]> = {
   "base-scolaire-message-1": SCOLAIRE_MESSAGE_1,
   "base-scolaire-message-2": SCOLAIRE_MESSAGE_2,
   "base-scolaire-message-3": SCOLAIRE_MESSAGE_3,
   "base-scolaire-message-4": SCOLAIRE_MESSAGE_4,
+  "base-scolaire-message-6": SCOLAIRE_MESSAGE_6,
+  "base-scolaire-message-7": SCOLAIRE_MESSAGE_7,
+  "base-scolaire-message-8": SCOLAIRE_MESSAGE_8,
+  "base-scolaire-message-9": SCOLAIRE_MESSAGE_9,
 };
+
+/** @deprecated Utiliser SCOLAIRE_MESSAGES_BOOK */
+export const SCOLAIRE_MESSAGES_1_TO_4 = SCOLAIRE_MESSAGES_BOOK;

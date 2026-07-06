@@ -1,5 +1,5 @@
 import { buildPool, type COMultiQuestion } from "./co-questions-helpers";
-import { SCOLAIRE_MESSAGES_1_TO_4 } from "./co-questions-scolaire-messages";
+import { SCOLAIRE_MESSAGES_BOOK } from "./co-questions-scolaire-messages";
 
 /** Pools QCM / saisie — CO base scolaire (généré depuis transcriptions). */
 
@@ -183,60 +183,6 @@ const SCOLAIRE_MESSAGE_19 = buildPool("base", "scolaire-message-19", [
   }
 ]);
 
-const SCOLAIRE_MESSAGE_6 = buildPool("base", "scolaire-message-6", [
-  {
-    id: "sm6-a", textQ: "Quel sport est mentionné ?", text: ["Tennis", "Basket", "Football"], textC: 2,
-    img: ["Tennis", "Basket", "Football"], imgC: 2,
-    fillQ: "Il s'agit de ___ .", fill: "football", fillA: ["football"],
-  },
-  {
-    id: "sm6-m", textQ: "Y a-t-il un repas ou un goûter ?", text: ["Oui", "Non", "Peut-être"], textC: 0,
-    img: ["Oui", "Non", "Peut-être"], imgC: 0,
-    fillQ: "Réponse : ___", fill: "oui", fillA: ["oui"],
-  },
-  {
-    id: "sm6-g", textQ: "Quel type de message est-ce ?", text: ["Un message entre amis", "Une annonce à la radio", "Un bulletin météo"], textC: 0,
-    img: ["Un message entre…", "Une annonce à la…", "Un bulletin météo"], imgC: 0,
-    fillQ: "C'est un message ___ .", fill: "entre amis", fillA: ["entre amis"],
-  }
-]);
-
-const SCOLAIRE_MESSAGE_8 = buildPool("base", "scolaire-message-8", [
-  {
-    id: "sm8-e", textQ: "Le message parle surtout de…", text: ["Les vacances", "L'école", "Le travail"], textC: 1,
-    img: ["Les vacances", "L'école", "Le travail"], imgC: 1,
-    fillQ: "Le sujet est l'___ .", fill: "école", fillA: ["école"],
-  },
-  {
-    id: "sm8-x", textQ: "Y a-t-il un problème ou un changement ?", text: ["Oui", "Non", "Un voyage"], textC: 0,
-    img: ["Oui", "Non", "Un voyage"], imgC: 0,
-    fillQ: "Il y a un ___ .", fill: "problème", fillA: ["problème"],
-  },
-  {
-    id: "sm8-g", textQ: "Quel type de message est-ce ?", text: ["Un message entre amis", "Une annonce à la radio", "Un bulletin météo"], textC: 0,
-    img: ["Un message entre…", "Une annonce à la…", "Un bulletin météo"], imgC: 0,
-    fillQ: "C'est un message ___ .", fill: "entre amis", fillA: ["entre amis"],
-  }
-]);
-
-const SCOLAIRE_MESSAGE_9 = buildPool("base", "scolaire-message-9", [
-  {
-    id: "sm9-t", textQ: "À quelle heure a lieu l'activité ?", text: ["10 h", "16 h 30", "14 h 30"], textC: 1,
-    img: ["10 h", "16 h 30", "14 h 30"], imgC: 1,
-    fillQ: "L'activité est à ___ .", fill: "16h30", fillA: ["16h30"],
-  },
-  {
-    id: "sm9-e", textQ: "Le message parle surtout de…", text: ["Les vacances", "L'école", "Le travail"], textC: 1,
-    img: ["Les vacances", "L'école", "Le travail"], imgC: 1,
-    fillQ: "Le sujet est l'___ .", fill: "école", fillA: ["école"],
-  },
-  {
-    id: "sm9-p", textQ: "Quel lieu de sortie est mentionné ?", text: ["La gare", "La piscine", "Le supermarché"], textC: 1,
-    img: ["La gare", "La piscine", "Le supermarché"], imgC: 1,
-    fillQ: "Ils vont au ___ .", fill: "piscine", fillA: ["piscine"],
-  }
-]);
-
 const SCOLAIRE_RADIO_34 = buildPool("base", "scolaire-radio-34", [
   {
     id: "sr34-m", textQ: "Le message parle de musique ?", text: ["Oui", "Non", "De cuisine"], textC: 0,
@@ -302,10 +248,7 @@ export const CO_QUESTION_POOLS_SCOLAIRE_BASE: Record<string, COMultiQuestion[]> 
   "base-scolaire-message-16": SCOLAIRE_MESSAGE_16,
   "base-scolaire-message-17": SCOLAIRE_MESSAGE_17,
   "base-scolaire-message-19": SCOLAIRE_MESSAGE_19,
-  ...SCOLAIRE_MESSAGES_1_TO_4,
-  "base-scolaire-message-6": SCOLAIRE_MESSAGE_6,
-  "base-scolaire-message-8": SCOLAIRE_MESSAGE_8,
-  "base-scolaire-message-9": SCOLAIRE_MESSAGE_9,
+  ...SCOLAIRE_MESSAGES_BOOK,
   "base-scolaire-radio-34": SCOLAIRE_RADIO_34,
   "base-scolaire-radio-37": SCOLAIRE_RADIO_37,
   "base-scolaire-radio-39": SCOLAIRE_RADIO_39,
