@@ -285,11 +285,7 @@ export function assertConversationImageGridDef(
 }
 
 function conversationImagePath(imageDir: string, activity: string, suffix: string): string {
-  const base = `${imageDir}/conversation-${activity}-${suffix}`;
-  if (activity === "41" && suffix === "b" && imageDir.endsWith("/scolaire")) {
-    return `${base}.png`;
-  }
-  return `${base}.webp`;
+  return `${imageDir}/conversation-${activity}-${suffix}.webp`;
 }
 
 export function buildConversationImageGrid(

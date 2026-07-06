@@ -81,7 +81,7 @@ export function PrintDocumentHeader({
         {/* Right: logo + department, aligned with the course column below. */}
         <div className="flex min-w-0 items-start gap-[4%]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-etat-du-valais.png" alt="" className="w-auto shrink-0" style={{ height: "4.4em", objectFit: "contain" }} />
+          <img src="/logo-etat-du-valais.webp" alt="" className="w-auto shrink-0" style={{ height: "4.4em", objectFit: "contain" }} />
           <div className="min-w-0 text-[0.7em] leading-snug">
             <p>Département de la santé, des affaires sociales et de la culture</p>
             <p>Service de l&apos;action sociale</p>
@@ -163,7 +163,7 @@ export function PrintDocumentFooter({
       <div className="flex items-center gap-1.5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/logo-pied-page.png"
+          src="/logo-pied-page.webp"
           alt=""
           style={{ height: "2.714em", objectFit: "contain" }}
           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
