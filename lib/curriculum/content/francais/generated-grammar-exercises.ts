@@ -3,6 +3,7 @@ import type {
   ExerciseDifficulty,
   FillItem,
 } from "../../grammar-data";
+import { fillBlank, withPronounElision } from "../../../french-elision";
 
 type GrammarCase = {
   sentence: string;
@@ -116,10 +117,11 @@ function levelPool(profile: GrammarProfile, difficulty: ExerciseDifficulty, case
   return Array.from({ length: 20 }, (_, index) => {
     const sample = src[index % src.length]!;
     const prefix = profile.noPrefixes ? "" : LEVEL_PREFIXES[difficulty][index < 10 ? 0 : 1];
+    const sentence = prefix ? `${prefix}${lowerFirst(sample.sentence)}` : sample.sentence;
     return {
-      sentence: prefix ? `${prefix}${lowerFirst(sample.sentence)}` : sample.sentence,
+      sentence,
       hint: profile.choices.join(" / "),
-      answer: sample.answer,
+      answer: withPronounElision(sentence, sample.answer),
       difficulty,
     };
   });
@@ -134,7 +136,7 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
     ? (["A1", "A2", "B1"] as const).flatMap((level) => levelPool(profile, level, profile.casesAll))
     : fillPool;
   const orderPool = fillPool.map((item) => {
-    const sentence = item.sentence.replace("___", item.answer);
+    const sentence = fillBlank(item.sentence, item.answer);
     return {
       sentence,
       words: sentence.split(/\s+/u),
@@ -145,7 +147,7 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
     (["A1", "A2", "B1"] as const).map((level) => [
       level,
       levelPool(profile, level).map((item) => {
-        const completed = item.sentence.replace("___", item.answer);
+        const completed = fillBlank(item.sentence, item.answer);
         if (level === "A1") {
           return `Écrivez une phrase simple sur le même modèle : « ${completed} »`;
         }
@@ -164,7 +166,7 @@ function buildExercises(slug: string, profile: GrammarProfile): Exercise[] {
     (["A1", "A2", "B1"] as const).map((level) => [
       level,
       levelPool(profile, level).map((item, index) => {
-        const sentence = item.sentence.replace("___", item.answer);
+        const sentence = fillBlank(item.sentence, item.answer);
         return `${tasks[index % tasks.length]} : « ${sentence} »`;
       }),
     ]),
@@ -616,7 +618,7 @@ const PROFILES: Record<string, GrammarProfile> = {
   },
   "a2-gr-l35": {
     label: "Les pronoms COD et COI",
-    choices: ["le", "la", "les", "lui", "leur"],
+    choices: ["le", "la", "l'", "les", "lui", "leur"],
     cases: [
       { sentence: "Je prends le bus. Je ___ prends à sept heures.", answer: "le" },
       { sentence: "J'appelle Marie. Je ___ appelle ce soir.", answer: "la" },
