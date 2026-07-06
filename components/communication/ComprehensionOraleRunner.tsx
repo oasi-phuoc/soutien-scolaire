@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ceCoImageSource } from "@/lib/curriculum/word-image-resolver";
 import {
-  coGroupsByLevelCategory,
   pickCoGroup,
   randomCoGroupInRange,
   type COAudioCategory,
@@ -56,7 +55,7 @@ const BASE_PART_INFO: Array<Omit<COPart, "audioGroup" | "questions">> = [
   { id: "message", title: "Comprendre un message", points: 4, context: "Écoutez un message vocal." },
   { id: "annonce", title: "Comprendre une annonce", points: 4, context: "Écoutez une annonce courte." },
   { id: "instruction", title: "Comprendre des instructions", points: 4, context: "Écoutez des consignes ou des informations pratiques." },
-  { id: "conversation", title: "Comprendre des conversations", points: 8, context: "Écoutez plusieurs échanges courts." },
+  { id: "conversation", title: "Comprendre des conversations", points: 12, context: "Écoutez 4 dialogues et associez chaque image au bon numéro." },
   { id: "objet", title: "Identifier des objets", points: 5, context: "Écoutez et repérez les objets ou les informations importantes." },
 ];
 
@@ -122,13 +121,11 @@ function makeBaseConversationPart(
   part: Omit<COPart, "audioGroup" | "questions">,
   seed: number,
 ): COPart {
-  const groups = coGroupsByLevelCategory("base", "conversation").sort(
-    (a, b) => Number(a.activity) - Number(b.activity),
-  );
-  const questions = groups.flatMap((group) => getCoPartQuestions(group, 1, `${seed}-conv-${group.activity}`));
+  const audioGroup = pickCoGroup("base", "conversation", `${seed}-conversation`);
+  const questions = getCoPartQuestions(audioGroup, 1, `${seed}-conv-${audioGroup.activity}`);
   return {
     ...part,
-    audioGroup: groups[0]!,
+    audioGroup,
     questions,
   };
 }
@@ -200,7 +197,7 @@ function normalize(value: string) {
 
 function answerOk(task: QuestionTask, answer: number | string | number[] | boolean[] | null) {
   if (task.kind === "conversation_image_grid") {
-    return conversationImageGridScore(task, answer) === 1;
+    return conversationImageGridCorrectCount(task, answer) === 6;
   }
   if (task.kind === "match_grid") {
     if (!Array.isArray(answer) || answer.length !== 4) return false;
@@ -234,12 +231,22 @@ function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, ans
   );
 }
 
-function conversationImageGridScore(
+function conversationImageGridCorrectCount(
   task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
   answer: number | string | number[] | boolean[] | null,
 ) {
   if (!Array.isArray(answer) || answer.length !== 6) return 0;
-  return task.correctByCard.every((expected, index) => answer[index] === expected) ? 1 : 0;
+  return task.correctByCard.reduce(
+    (sum, expected, index) => sum + (answer[index] === expected ? 1 : 0),
+    0,
+  );
+}
+
+function conversationImageGridPoints(
+  task: Extract<QuestionTask, { kind: "conversation_image_grid" }>,
+  answer: number | string | number[] | boolean[] | null,
+) {
+  return conversationImageGridCorrectCount(task, answer) * 2;
 }
 
 function scorePart(part: COPart, answers: Answers) {
@@ -250,7 +257,7 @@ function scorePart(part: COPart, answers: Answers) {
       (sum, question, index) =>
         sum +
         (question.kind === "conversation_image_grid"
-          ? conversationImageGridScore(question, answers[`${part.id}-${index}`] ?? null)
+          ? conversationImageGridPoints(question, answers[`${part.id}-${index}`] ?? null)
           : 0),
       0,
     );
@@ -1087,7 +1094,7 @@ function QuestionBlock({
   const isMatchGrid = part.questions.length === 1 && part.questions[0]!.kind === "match_grid";
   const isObjectPick = part.questions.length === 1 && part.questions[0]!.kind === "object_pick";
   const isConversationImageGrid =
-    part.questions.length > 0 && part.questions.every((question) => question.kind === "conversation_image_grid");
+    part.questions.length === 1 && part.questions[0]!.kind === "conversation_image_grid";
   const isSingleTask = isMatchGrid || isObjectPick;
 
   return (
@@ -1098,7 +1105,7 @@ function QuestionBlock({
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
               {isConversationImageGrid
-                ? "Écoutez les 4 dialogues de chaque activité, puis associez chaque image au bon numéro."
+                ? "Écoutez les 4 dialogues, puis associez chaque image au bon numéro (2 points par image)."
                 : isMatchGrid
                 ? "Lisez les situations. Écoutez les dialogues puis répondez."
                 : isObjectPick
@@ -1154,9 +1161,6 @@ function QuestionBlock({
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
             {isConversationImageGrid && question.kind === "conversation_image_grid" && (
               <div className="space-y-4">
-                <h3 className="text-base font-bold" style={{ color: ACCENT }}>
-                  Activité {index + 1}
-                </h3>
                 <AudioSequencePlayer
                   items={[
                     {
@@ -1195,7 +1199,8 @@ function QuestionBlock({
             )}
             {readonly && isConversationImageGrid && question.kind === "conversation_image_grid" && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Score activité : {formatPoints(conversationImageGridScore(question, answer))} / 1 pt
+                Score : {formatPoints(conversationImageGridPoints(question, answer))} / {formatPoints(part.points)} pts
+                {" "}({conversationImageGridCorrectCount(question, answer)} / 6 images)
               </p>
             )}
             {readonly && isMatchGrid && question.kind === "match_grid" && (
@@ -1242,6 +1247,7 @@ export function ComprehensionOraleRunner({
   const currentPart = parts.find((part) => part.id === currentId) ?? parts[0]!;
   const savedAnswers = { ...answers, ...Object.values(validatedAnswers).reduce((acc, value) => ({ ...acc, ...value }), {}) };
   const totalPoints = parts.reduce((sum, part) => sum + scorePart(part, validatedAnswers[part.id] ?? {}), 0);
+  const maxModulePoints = useMemo(() => parts.reduce((sum, part) => sum + part.points, 0), [parts]);
 
   useRegisterEvalGuard(mode === "placement" && phase === "exercise");
 
@@ -1350,8 +1356,8 @@ export function ComprehensionOraleRunner({
           })}
         </div>
         <HiddenNav
-          onBack={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: 25 }) : router.push(EXPRESSION_TAB_HREF))}
-          onNext={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: 25 }) : router.push(EXPRESSION_TAB_HREF))}
+          onBack={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
+          onNext={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
           nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"}
         />
         {mode !== "placement" && <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />}
