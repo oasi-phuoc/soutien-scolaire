@@ -1,11 +1,13 @@
 export type COLevel = "base" | "moyen" | "avance";
 export type COAudioCategory = "message" | "annonce" | "instruction" | "conversation" | "objet" | "radio";
+export type COAudioSource = "public" | "scolaire";
 
 export type COAudioItem = {
   id: string;
   level: COLevel;
   category: COAudioCategory;
   activity: string;
+  source: COAudioSource;
   audio: string;
   transcript?: string;
 };
@@ -15,10 +17,12 @@ export type COAudioGroup = {
   level: COLevel;
   category: COAudioCategory;
   activity: string;
+  source: COAudioSource;
   items: COAudioItem[];
 };
 
 import { CO_AUDIO_GROUPS_AVANCE } from "./co-audio-avance";
+import { CO_AUDIO_GROUPS_SCOLAIRE_BASE, SCOLAIRE_PLAYABLE_GROUP_IDS } from "./co-audio-scolaire-base";
 
 function item(level: COLevel, category: COAudioCategory, activity: string, filename: string, transcript?: string): COAudioItem {
   return {
@@ -26,13 +30,19 @@ function item(level: COLevel, category: COAudioCategory, activity: string, filen
     level,
     category,
     activity,
+    source: "public",
     audio: `/assets/expression/co/${level}/public/${filename}`,
     transcript,
   };
 }
 
 function group(level: COLevel, category: COAudioCategory, activity: string, items: COAudioItem[]): COAudioGroup {
-  return { id: `${level}-${category}-${activity}`, level, category, activity, items };
+  return { id: `${level}-${category}-${activity}`, level, category, activity, source: "public", items };
+}
+
+export function isCoGroupPlayable(group: COAudioGroup): boolean {
+  if (group.source === "scolaire") return SCOLAIRE_PLAYABLE_GROUP_IDS.has(group.id);
+  return true;
 }
 
 export const CO_AUDIO_GROUPS: COAudioGroup[] = [
@@ -407,15 +417,16 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
     item("moyen", "conversation", "50", "conversation-50.mp3", "Dialogue 1\n— Élisa, tu peux me prêter le DVD du film Amour ?\n— Euh, non, désolée.\n— Mais pourquoi ?\n— Je voudrais le regarder ce week-end. Et puis, la dernière fois que je t’ai prêté un DVD, tu l’as gardé pendant 6 mois ! Alors non, je ne préfère pas !\n\nDialogue 2\n— Salut, je te présente Coralie, c’est ma cousine !\n— Salut Coralie ! c’est toi qui habites à Marseille ?\n— Euh, non ça c’est Magali, mon autre cousine ! Coralie habite à Nantes.\n\nDialogue 3\n— Salut Carine ! Tu sais ce qui m’est arrivé la semaine dernière ?\n— Non, vas-y raconte !\n— J’ai vu le chanteur du groupe Phoenix dans un magasin de disques ! Il m’a tenu la porte pour sortir du magasin, et après il m’a souri !\n\nDialogue 4\n— Excusez-moi, je cherche la bibliothèque, vous pouvez m’aider ?\n— Euh, oui, il faut prendre l’entrée centrale, monter au premier étage et aller à droite. La bibliothèque est au fond du couloir."),
   ]),
   ...CO_AUDIO_GROUPS_AVANCE,
+  ...CO_AUDIO_GROUPS_SCOLAIRE_BASE,
 ];
 
 import { hashSeedString } from "@/lib/placement/progressive-pick";
 
 export function coGroupsByLevelCategory(level: COLevel, category: COAudioCategory) {
-  return CO_AUDIO_GROUPS.filter((entry) => entry.level === level && entry.category === category);
+  return CO_AUDIO_GROUPS.filter((entry) => entry.level === level && entry.category === category && isCoGroupPlayable(entry));
 }
 
-/** Tirage déterministe d'un groupe audio CO (remplace Math.random). */
+/** Tirage déterministe d'un groupe audio CO (pool public + scolaire). */
 export function pickCoGroup(level: COLevel, category: COAudioCategory, seed: string): COAudioGroup {
   const groups = coGroupsByLevelCategory(level, category);
   if (!groups.length) {
@@ -436,7 +447,8 @@ export function randomCoGroupInRange(
   maxActivity: number,
   seed: string,
 ) {
-  const groups = coGroupsByLevelCategory(level, category).filter((entry) => {
+  const groups = CO_AUDIO_GROUPS.filter((entry) => {
+    if (entry.level !== level || entry.category !== category || !isCoGroupPlayable(entry)) return false;
     const n = Number.parseInt(entry.activity, 10);
     return n >= minActivity && n <= maxActivity;
   });

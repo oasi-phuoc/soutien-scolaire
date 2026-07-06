@@ -13,6 +13,7 @@ import { CO_QUESTION_POOLS_BASE_OTHER } from "./co-questions-base-other";
 import { CO_QUESTION_POOLS_MOYEN } from "./co-questions-moyen";
 import { CO_QUESTION_POOLS_AVANCE } from "./co-questions-avance";
 import { CO_QUESTION_POOLS_AVANCE_EXTRA } from "./co-questions-avance-extra";
+import { CO_QUESTION_POOLS_SCOLAIRE_BASE } from "./co-questions-scolaire-base";
 
 export type {
   COFormatType,
@@ -36,11 +37,12 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
   ...CO_QUESTION_POOLS_MOYEN,
   ...CO_QUESTION_POOLS_AVANCE,
   ...CO_QUESTION_POOLS_AVANCE_EXTRA,
+  ...CO_QUESTION_POOLS_SCOLAIRE_BASE,
 };
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
-  if (group.level === "base" && group.category === "conversation") {
-    const grid = buildBaseConversationImageGrid(group.activity);
+  if (group.level === "base" && group.category === "conversation" && group.source === "public") {
+    const grid = buildBaseConversationImageGrid(group.activity, seed, group.items[0]?.audio);
     if (grid) return [grid];
   }
   const matchDef = CO_CONVERSATION_MATCH[group.id];

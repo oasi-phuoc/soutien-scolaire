@@ -135,6 +135,46 @@ export const CO_OBJET_PICK: Record<string, COObjetPickDef> = {
       { label: "haltère", heard: false },
     ]),
   },
+  /** CO base scolaire — exercice 5 (sac à dos, veste, appareil photo, chips, pomme). */
+  "base-scolaire-objet-5": {
+    cards: opCards("base-scolaire-objet-5", [
+      { label: "sac à dos", heard: false },
+      { label: "veste", heard: false },
+      { label: "appareil photo", heard: true },
+      { label: "chips", heard: false },
+      { label: "pomme", heard: false },
+    ]),
+  },
+  /** CO base scolaire — exercice 10 (guitare, salade de fruits, livre, pizza, jeu de société). */
+  "base-scolaire-objet-10": {
+    cards: opCards("base-scolaire-objet-10", [
+      { label: "guitare", heard: true },
+      { label: "salade de fruits", heard: false },
+      { label: "livre", heard: false },
+      { label: "pizza", heard: true },
+      { label: "jeu de société", heard: true },
+    ]),
+  },
+  /** CO base scolaire — exercice 12 (sortie scolaire en forêt). */
+  "base-scolaire-objet-12": {
+    cards: opCards("base-scolaire-objet-12", [
+      { label: "chaussures de sport", heard: true },
+      { label: "casquette", heard: true },
+      { label: "sandwich", heard: true },
+      { label: "bouteille d'eau", heard: true },
+      { label: "gâteau", heard: true },
+    ]),
+  },
+  /** CO base scolaire — exercice 18 (post-it, ciseaux, stylo, crayon de couleur, peinture). */
+  "base-scolaire-objet-18": {
+    cards: opCards("base-scolaire-objet-18", [
+      { label: "post-it", heard: false },
+      { label: "ciseaux", heard: true },
+      { label: "stylo", heard: false },
+      { label: "crayon de couleur", heard: true },
+      { label: "peinture", heard: false },
+    ]),
+  },
 };
 
 export function buildObjetPickTask(groupId: string) {

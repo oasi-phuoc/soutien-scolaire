@@ -20,8 +20,8 @@ const CORRECT_BY_CARD: Record<string, [number, number, number, number, number, n
   "8": [0, 3, 0, 1, 4, 2],
 };
 
-export function buildBaseConversationImageGrid(activity: string) {
+export function buildBaseConversationImageGrid(activity: string, seed: string, audio?: string) {
   const mapping = CORRECT_BY_CARD[activity];
   if (!mapping) return null;
-  return buildConversationImageGrid(activity, mapping);
+  return buildConversationImageGrid(activity, mapping, seed, audio);
 }

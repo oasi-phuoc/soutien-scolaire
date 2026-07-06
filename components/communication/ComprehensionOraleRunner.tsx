@@ -1002,27 +1002,24 @@ function ConversationImageGridQuestionView({
         const wrong = correction && current !== expected;
         return (
           <div
-            key={card.suffix}
-            className={`overflow-hidden rounded-xl border-2 bg-white ${
+            key={`${card.suffix}-${index}`}
+            className={`overflow-hidden rounded-xl border bg-white ${
               correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
             }`}
           >
-            <p className="bg-slate-50 py-1 text-center text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              {card.suffix}
-            </p>
-            <ObjectCardImage src={card.image} alt={`Image ${card.suffix}`} />
-            <div className="border-t border-slate-200 p-2">
+            <ObjectCardImage src={card.image} alt={`Situation ${index + 1}`} />
+            <div className="border-t border-slate-100 p-2">
               <select
                 value={current > 0 ? String(current) : ""}
                 disabled={correction}
                 onChange={(event) => setCard(index, event.target.value)}
-                aria-label={`Image ${card.suffix} — dialogue`}
-                className={`w-full rounded-md border bg-white px-2 py-1.5 text-sm outline-none transition ${
+                aria-label={`Image ${index + 1} — dialogue`}
+                className={`w-full cursor-pointer rounded-xl border bg-white px-2 py-1.5 text-center text-sm outline-none transition focus:ring-2 focus:ring-[var(--color-accent-comm)]/15 ${
                   wrong
                     ? "border-red-300 text-red-700"
                     : correct
                       ? "border-amber-400 text-amber-800"
-                      : "border-slate-300 focus:border-[var(--color-accent-comm)]"
+                      : "border-zinc-200 focus:border-[var(--color-accent-comm)]"
                 }`}
               >
                 <option value="">—</option>

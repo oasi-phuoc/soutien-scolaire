@@ -13,6 +13,7 @@ function avanceItem(category: "conversation" | "radio", activity: string, filena
     level: "avance",
     category,
     activity,
+    source: "public",
     audio: `/assets/expression/co/avance/public/${filename}`,
     transcript,
   };
@@ -24,6 +25,7 @@ function avanceGroup(category: "conversation" | "radio", activity: string, filen
     level: "avance",
     category,
     activity,
+    source: "public",
     items: [avanceItem(category, activity, filename, transcript)],
   };
 }

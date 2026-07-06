@@ -4,6 +4,8 @@ import { PLACEMENT_ZONES } from "@/lib/placement/scoring";
 import {
   PLACEMENT_CHART_ACCENT,
   PLACEMENT_LINE_STROKE,
+  PLACEMENT_TREAD_FILL,
+  PLACEMENT_TOP_TREAD_LABEL,
   PLACEMENT_ZONE_FILL,
   PLACEMENT_ZONE_LABEL,
 } from "@/lib/placement/chart-colors";
@@ -11,7 +13,7 @@ import {
 const ACCENT = PLACEMENT_CHART_ACCENT;
 
 const STEP_W = 62;
-const STEP_H = 22;
+const STEP_H = 30;
 const ZONE_COUNT = PLACEMENT_ZONES.length;
 /** Marche au-dessus du seuil 200 (PAI). */
 const PAI_ROW = ZONE_COUNT;
@@ -26,9 +28,7 @@ const SCORE_MAX = 200;
 const BASE_Y = 118 + 2 * STEP_H;
 const VIEW_TOP = -80;
 const LABEL_ABOVE = 7;
-
-const TOP_TREAD_FILL =
-  "color-mix(in oklch, var(--color-accent-quiz) 10%, var(--color-bg-secondary))";
+const LABEL_FONT = 11;
 
 function thresholdColCenter(index: number) {
   return STEP_ORIGIN + (index - 1) * STEP_W + STEP_W / 2;
@@ -92,11 +92,11 @@ function chartViewBox(arrowEnd: { x: number; y: number }) {
   };
 }
 
-function extraTreadLabel(rowIndex: number, label: string) {
+function extraTreadLabel(rowIndex: number, lines: [string, string] | [string]) {
   const { x, y, cx, cy } = treadAt(rowIndex);
-  const compact = label.length > 5;
+  const fill = PLACEMENT_TREAD_FILL[rowIndex]!;
   return (
-    <g key={label}>
+    <g key={lines.join("-")}>
       <rect
         x={x}
         y={y}
@@ -109,21 +109,36 @@ function extraTreadLabel(rowIndex: number, label: string) {
         y={y}
         width={STEP_W}
         height={STEP_H}
-        fill={TOP_TREAD_FILL}
+        fill={fill}
         stroke="color-mix(in oklch, var(--color-accent-quiz) 15%, var(--color-border-default))"
         strokeWidth={1}
       />
-      <text
-        x={cx}
-        y={cy}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontSize={compact ? 9 : 11}
-        fontWeight="700"
-        fill="var(--color-text-secondary)"
-      >
-        {label}
-      </text>
+      {lines.length === 1 ? (
+        <text
+          x={cx}
+          y={cy}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize={LABEL_FONT}
+          fontWeight="700"
+          fill={PLACEMENT_TOP_TREAD_LABEL}
+        >
+          {lines[0]}
+        </text>
+      ) : (
+        <text
+          x={cx}
+          y={cy}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize={LABEL_FONT}
+          fontWeight="700"
+          fill={PLACEMENT_TOP_TREAD_LABEL}
+        >
+          <tspan x={cx} dy="-0.35em">{lines[0]}</tspan>
+          <tspan x={cx} dy="1.15em">{lines[1]}</tspan>
+        </text>
+      )}
     </g>
   );
 }
@@ -198,7 +213,7 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
                   y={cy}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  fontSize="11"
+                  fontSize={LABEL_FONT}
                   fontWeight="700"
                   fill="var(--color-text-secondary)"
                 >
@@ -210,7 +225,7 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
                 y={y - LABEL_ABOVE}
                 textAnchor="middle"
                 dominantBaseline="auto"
-                fontSize="11"
+                fontSize={LABEL_FONT}
                 fontWeight="700"
                 fill="var(--color-text-secondary)"
               >
@@ -221,7 +236,7 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
                 y={cy}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fontSize="11"
+                fontSize={LABEL_FONT}
                 fontWeight="700"
                 fill={PLACEMENT_ZONE_LABEL[z.zone]}
               >
@@ -232,8 +247,8 @@ export function PlacementUnifiedChart({ total }: { total: number }) {
         })}
 
         {/* Marches au-dessus de 200 */}
-        {extraTreadLabel(PAI_ROW, "PAI")}
-        {extraTreadLabel(AFP_CFC_ROW, "AFP-CFC")}
+        {extraTreadLabel(PAI_ROW, ["PAI"])}
+        {extraTreadLabel(AFP_CFC_ROW, ["AFP", "CFC"])}
 
         <circle
           cx={marker.x}
