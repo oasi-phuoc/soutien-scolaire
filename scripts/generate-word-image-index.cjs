@@ -22,6 +22,7 @@ const path = require("path");
 
 const root = process.cwd();
 const lectureDir = path.join(root, "public/assets/words/img");
+const loisirsDir = path.join(root, "public/expression/loisirs");
 const vocabDir = path.join(root, "public/vocab/images");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
@@ -54,7 +55,10 @@ function main() {
   // Priority 1: lecture unified pool.
   addFrom(lectureDir, "/assets/words/img", index);
 
-  // Priority 2: vocabulaire theme folders (V1, V2, …).
+  // Priority 2: loisirs activity illustrations (manga/anime scenes).
+  addFrom(loisirsDir, "/expression/loisirs", index);
+
+  // Priority 3: vocabulaire theme folders (V1, V2, …).
   if (fs.existsSync(vocabDir)) {
     for (const folder of fs.readdirSync(vocabDir).sort()) {
       const dir = path.join(vocabDir, folder);
