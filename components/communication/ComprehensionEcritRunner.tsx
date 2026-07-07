@@ -81,6 +81,14 @@ function levelLabel(level: CELevel) {
   return "Base";
 }
 
+function ceOrientationTitle(level: CELevel) {
+  return level === "moyen" ? "Lire des annonces" : "Lire pour s'orienter";
+}
+
+function ceMessageTitle(level: CELevel) {
+  return level === "moyen" ? "Lire des messages" : "Lire un message";
+}
+
 function normalize(value: string) {
   return value
     .toLowerCase()
@@ -913,7 +921,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const orientationPart: CEPart = orientationTextBase
     ? {
         id: "orientation",
-        title: "Lire pour s'orienter",
+        title: ceOrientationTitle(level),
         points: 6,
         layout: "email",
         meta: { from: orientationTextBase.from, subject: orientationTextBase.subject },
@@ -923,7 +931,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       }
     : {
         id: "orientation",
-        title: "Lire pour s'orienter",
+        title: ceOrientationTitle(level),
         points: 6,
         layout: "orientation",
         task: {
@@ -943,7 +951,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
     orientationPart,
     {
       id: "email",
-      title: "Lire un message",
+      title: ceMessageTitle(level),
       points: 6,
       layout: "email",
       meta: emailBase
@@ -1058,8 +1066,8 @@ function IntroPage({ level, onStart, placement = false }: { level: CELevel; onSt
     { before: "Score maximum : ", strong: "25 points", text: "" },
   ];
   const introRows: IntroRow[] = [
-    { num: "1", title: "Lire pour s'orienter", points: "6 pts" },
-    { num: "2", title: "Lire un message", points: "6 pts" },
+    { num: "1", title: ceOrientationTitle(level), points: "6 pts" },
+    { num: "2", title: ceMessageTitle(level), points: "6 pts" },
     { num: "3", title: "Lire des instructions", points: "6 pts" },
     { num: "4", title: "Lire des informations", points: "7 pts" },
   ];
