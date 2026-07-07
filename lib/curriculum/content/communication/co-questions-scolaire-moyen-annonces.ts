@@ -127,6 +127,17 @@ export const SCOLAIRE_MOYEN_ANNONCE_37 = buildPool("moyen", "scolaire-annonce-37
     fill: "18h",
     fillA: ["18 h", "18h", "18h00"],
   },
+  {
+    id: "sma37-q6",
+    textQ: "Qu'oubliez-vous surtout pas d'apporter ?",
+    text: ["Vos gants", "Votre ordinateur", "Votre livre de maths"],
+    textC: 0,
+    img: ["Gants", "Ordinateur", "Livre"],
+    imgC: 0,
+    fillQ: "N'oubliez pas vos bonbons et surtout vos ___.",
+    fill: "gants",
+    fillA: ["gants"],
+  },
 ]);
 
 export const SCOLAIRE_MOYEN_ANNONCE_38 = buildPool("moyen", "scolaire-annonce-38", [
@@ -380,6 +391,17 @@ export const SCOLAIRE_MOYEN_ANNONCE_46 = buildPool("moyen", "scolaire-annonce-46
     fillQ: "Si vous achetez quatre articles, le cinquième est ___.",
     fill: "offert",
     fillA: ["offert", "gratuit"],
+  },
+  {
+    id: "sma46-q6",
+    textQ: "Jusqu'à quelle heure dure la promotion ?",
+    text: ["Jusqu'à 20 h", "Jusqu'à 18 h", "Jusqu'à midi"],
+    textC: 0,
+    img: ["20 h", "18 h", "Midi"],
+    imgC: 0,
+    fillQ: "Les réductions sont de 14 heures à ___ heures.",
+    fill: "20h",
+    fillA: ["20 h", "20h", "20h00"],
   },
 ]);
 

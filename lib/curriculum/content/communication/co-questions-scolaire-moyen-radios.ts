@@ -58,6 +58,17 @@ export const SCOLAIRE_MOYEN_RADIO_34 = buildPool("moyen", "scolaire-radio-34", [
     fill: "seconde",
     fillA: ["seconde", "2nde"],
   },
+  {
+    id: "smr34-q6",
+    textQ: "Quel âge a Julien ?",
+    text: ["15 ans", "13 ans", "18 ans"],
+    textC: 0,
+    img: ["15 ans", "13 ans", "18 ans"],
+    imgC: 0,
+    fillQ: "Julien a ___ ans.",
+    fill: "15",
+    fillA: ["15", "quinze"],
+  },
 ]);
 
 export const SCOLAIRE_MOYEN_RADIO_35 = buildPool("moyen", "scolaire-radio-35", [
@@ -115,6 +126,17 @@ export const SCOLAIRE_MOYEN_RADIO_35 = buildPool("moyen", "scolaire-radio-35", [
     fillQ: "Au petit-déjeuner, il prend du pain avec du ___ et du lait.",
     fill: "chocolat",
     fillA: ["chocolat"],
+  },
+  {
+    id: "smr35-q6",
+    textQ: "Comment s'appelle l'émission ?",
+    text: ["Roulez jeunesse", "Graines de jeunes", "Sport et vie"],
+    textC: 0,
+    img: ["Radio", "Télévision", "Magazine"],
+    imgC: 0,
+    fillQ: "L'émission s'appelle Roulez ___.",
+    fill: "jeunesse",
+    fillA: ["jeunesse"],
   },
 ]);
 

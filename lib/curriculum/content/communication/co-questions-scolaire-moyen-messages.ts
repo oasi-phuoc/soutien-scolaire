@@ -58,6 +58,17 @@ export const SCOLAIRE_MOYEN_MESSAGE_41 = buildPool("moyen", "scolaire-message-41
     fill: "électronique",
     fillA: ["electronique", "électronique"],
   },
+  {
+    id: "smm41-q6",
+    textQ: "Quel jeu avez-vous commandé ?",
+    text: ["Voyage en Espagne", "Voyage en Italie", "Voyage au Portugal"],
+    textC: 0,
+    img: ["Espagne", "Italie", "Portugal"],
+    imgC: 0,
+    fillQ: "Le jeu s'appelle Voyage en ___.",
+    fill: "Espagne",
+    fillA: ["espagne"],
+  },
 ]);
 
 export const SCOLAIRE_MOYEN_MESSAGE_42 = buildPool("moyen", "scolaire-message-42", [
