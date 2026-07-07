@@ -686,3 +686,35 @@ export const CARTESIAN_FIGURES: CartesianFigure[] = [
     ],
   },
 ];
+
+/** Figures du 1er quadrant pour G6.1 ex. 3 — contours seuls, sommets à lire */
+export type Q1CartesianFigure = {
+  id: string;
+  name: string;
+  polygons: Array<{ points: [number, number][] }>;
+  /** Sommets disponibles pour tirer les points a–d */
+  vertices: [number, number][];
+};
+
+export const Q1_CARTESIAN_FIGURES: Q1CartesianFigure[] = [
+  { id: "q1-tri", name: "triangle", polygons: [{ points: [[5, 5], [25, 5], [15, 22]] }], vertices: [[5, 5], [25, 5], [15, 22], [10, 10], [20, 10], [15, 15]] },
+  { id: "q1-rect", name: "rectangle", polygons: [{ points: [[5, 8], [28, 8], [28, 18], [5, 18]] }], vertices: [[5, 8], [28, 8], [28, 18], [5, 18], [15, 8], [15, 18]] },
+  { id: "q1-trap", name: "trapèze", polygons: [{ points: [[8, 6], [22, 6], [26, 18], [4, 18]] }], vertices: [[8, 6], [22, 6], [26, 18], [4, 18], [15, 6], [15, 18]] },
+  { id: "q1-house", name: "maison", polygons: [{ points: [[6, 12], [16, 4], [26, 12], [26, 22], [6, 22]] }], vertices: [[6, 12], [16, 4], [26, 12], [26, 22], [6, 22], [16, 12]] },
+  { id: "q1-pent", name: "pentagone", polygons: [{ points: [[16, 4], [26, 12], [22, 24], [10, 24], [6, 12]] }], vertices: [[16, 4], [26, 12], [22, 24], [10, 24], [6, 12], [16, 16]] },
+  { id: "q1-hex", name: "hexagone", polygons: [{ points: [[10, 8], [20, 8], [26, 15], [20, 22], [10, 22], [4, 15]] }], vertices: [[10, 8], [20, 8], [26, 15], [20, 22], [10, 22], [4, 15], [15, 15]] },
+  { id: "q1-arrow", name: "flèche", polygons: [{ points: [[16, 24], [22, 14], [18, 14], [18, 6], [14, 6], [14, 14], [10, 14]] }], vertices: [[16, 24], [22, 14], [18, 14], [18, 6], [14, 6], [14, 14], [10, 14]] },
+  { id: "q1-l", name: "forme en L", polygons: [{ points: [[5, 5], [12, 5], [12, 14], [22, 14], [22, 22], [5, 22]] }], vertices: [[5, 5], [12, 5], [12, 14], [22, 14], [22, 22], [5, 22], [8, 14]] },
+  { id: "q1-kite", name: "cerf-volant", polygons: [{ points: [[16, 4], [24, 14], [16, 24], [8, 14]] }], vertices: [[16, 4], [24, 14], [16, 24], [8, 14], [16, 14], [20, 10]] },
+  { id: "q1-para", name: "parallélogramme", polygons: [{ points: [[6, 8], [22, 8], [28, 20], [12, 20]] }], vertices: [[6, 8], [22, 8], [28, 20], [12, 20], [14, 14], [24, 14]] },
+  { id: "q1-boat", name: "bateau", polygons: [{ points: [[4, 10], [8, 6], [24, 6], [28, 10], [24, 14], [8, 14]] }], vertices: [[4, 10], [8, 6], [24, 6], [28, 10], [24, 14], [8, 14], [16, 6]] },
+  { id: "q1-chev", name: "chevron", polygons: [{ points: [[6, 18], [16, 6], [26, 18], [20, 18], [16, 12], [12, 18]] }], vertices: [[6, 18], [16, 6], [26, 18], [20, 18], [16, 12], [12, 18]] },
+  { id: "q1-flag", name: "drapeau", polygons: [{ points: [[6, 5], [24, 10], [24, 18], [6, 22], [6, 5]] }], vertices: [[6, 5], [24, 10], [24, 18], [6, 22], [15, 14], [6, 14]] },
+  { id: "q1-cross", name: "croix", polygons: [{ points: [[12, 5], [20, 5], [20, 12], [27, 12], [27, 20], [20, 20], [20, 27], [12, 27], [12, 20], [5, 20], [5, 12], [12, 12]] }], vertices: [[12, 5], [20, 5], [20, 12], [27, 12], [27, 20], [20, 20], [12, 20], [5, 12]] },
+  { id: "q1-step", name: "marches", polygons: [{ points: [[5, 5], [15, 5], [15, 12], [25, 12], [25, 22], [5, 22]] }], vertices: [[5, 5], [15, 5], [15, 12], [25, 12], [25, 22], [5, 22], [10, 12]] },
+  { id: "q1-diam", name: "losange", polygons: [{ points: [[16, 4], [26, 14], [16, 24], [6, 14]] }], vertices: [[16, 4], [26, 14], [16, 24], [6, 14], [16, 14], [21, 9]] },
+  { id: "q1-arch", name: "arche", polygons: [{ points: [[6, 8], [6, 20], [26, 20], [26, 8], [22, 8], [22, 16], [10, 16], [10, 8]] }], vertices: [[6, 8], [6, 20], [26, 20], [26, 8], [22, 8], [10, 8], [16, 20]] },
+  { id: "q1-comp", name: "figure composée", polygons: [{ points: [[5, 10], [15, 10], [15, 5], [25, 5], [25, 20], [5, 20]] }], vertices: [[5, 10], [15, 10], [15, 5], [25, 5], [25, 20], [5, 20], [10, 15]] },
+  { id: "q1-sail", name: "voilier", polygons: [{ points: [[8, 6], [20, 6], [24, 18], [4, 18]] }, { points: [[14, 6], [18, 6], [16, 22]] }], vertices: [[8, 6], [20, 6], [24, 18], [4, 18], [14, 6], [18, 6], [16, 22], [16, 12]] },
+  { id: "q1-star", name: "étoile", polygons: [{ points: [[16, 4], [19, 12], [28, 12], [21, 17], [24, 26], [16, 21], [8, 26], [11, 17], [4, 12], [13, 12]] }], vertices: [[16, 4], [19, 12], [28, 12], [21, 17], [24, 26], [16, 21], [8, 26], [11, 17]] },
+];

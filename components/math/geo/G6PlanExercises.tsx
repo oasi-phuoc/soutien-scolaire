@@ -16,6 +16,7 @@ import {
   REBEUVELIER_PLACE_POINTS,
   REBEUVELIER_QUESTION_POOL,
   REBEUVELIER_READ_POINTS,
+  Q1_CARTESIAN_FIGURES,
   type GridCell,
   type MapQuestion,
   type ShapeIcon,
@@ -141,6 +142,171 @@ function GridCoordFields({
       <span className="text-[var(--color-text-secondary)]">)</span>
     </div>
   );
+}
+
+type XYAnswer = { x: string; y: string };
+
+function xyAnswerOk(answer: XYAnswer, x: number, y: number): boolean {
+  const px = parseInt(answer.x.trim(), 10);
+  const py = parseInt(answer.y.trim(), 10);
+  return !Number.isNaN(px) && !Number.isNaN(py) && px === x && py === y;
+}
+
+function GridXYFields({
+  label,
+  answer,
+  correctX,
+  correctY,
+  validated,
+  wrong,
+  onChange,
+}: {
+  label: string;
+  answer: XYAnswer;
+  correctX: number;
+  correctY: number;
+  validated: boolean;
+  wrong: boolean;
+  onChange: (next: XYAnswer) => void;
+}) {
+  const inputCls = `h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
+  return (
+    <div className="flex items-center gap-2">
+      <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{label}</span>
+      <div className="flex items-center gap-1 text-sm">
+        <span className="text-[var(--color-text-secondary)]">(</span>
+        {wrong ? (
+          <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+            <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.x || "—"}</span>
+            <span className="text-xs font-bold leading-none text-amber-600">{correctX}</span>
+          </div>
+        ) : (
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={2}
+            value={answer.x}
+            disabled={validated}
+            onChange={(e) => onChange({ ...answer, x: e.target.value.replace(/[^0-9]/g, "") })}
+            className={inputCls}
+            aria-label={`Abscisse du point ${label}`}
+          />
+        )}
+        <span className="text-[var(--color-text-secondary)]">;</span>
+        {wrong ? (
+          <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+            <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.y || "—"}</span>
+            <span className="text-xs font-bold leading-none text-amber-600">{correctY}</span>
+          </div>
+        ) : (
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={2}
+            value={answer.y}
+            disabled={validated}
+            onChange={(e) => onChange({ ...answer, y: e.target.value.replace(/[^0-9]/g, "") })}
+            className={inputCls}
+            aria-label={`Ordonnée du point ${label}`}
+          />
+        )}
+        <span className="text-[var(--color-text-secondary)]">)</span>
+      </div>
+    </div>
+  );
+}
+
+function q1ToSvg(x: number, y: number, cx: number, cy: number, unit: number): [number, number] {
+  return [cx + x * unit, cy - y * unit];
+}
+
+function Q1FigurePlane({
+  xMax,
+  yMax,
+  polygons,
+  points,
+  unit = 10,
+  gridStep = 5,
+}: {
+  xMax: number;
+  yMax: number;
+  polygons: Array<{ points: [number, number][] }>;
+  points: Array<{ label: string; x: number; y: number }>;
+  unit?: number;
+  gridStep?: number;
+}) {
+  const pad = 22;
+  const w = pad * 2 + xMax * unit;
+  const h = pad * 2 + yMax * unit;
+  const cx = pad;
+  const cy = h - pad;
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="mx-auto w-full max-w-md rounded-lg border border-[var(--color-border-default)] bg-white">
+      {Array.from({ length: Math.floor(xMax / gridStep) + 1 }, (_, i) => i * gridStep).map((x) => (
+        <line key={`gx-${x}`}
+          x1={cx + x * unit} y1={pad - 2}
+          x2={cx + x * unit} y2={cy + 2}
+          stroke="#e2e8f0" strokeWidth={x === 0 ? 0 : 0.5} />
+      ))}
+      {Array.from({ length: Math.floor(yMax / gridStep) + 1 }, (_, i) => i * gridStep).map((y) => (
+        <line key={`gy-${y}`}
+          x1={pad - 2} y1={cy - y * unit}
+          x2={cx + xMax * unit + 2} y2={cy - y * unit}
+          stroke="#e2e8f0" strokeWidth={y === 0 ? 0 : 0.5} />
+      ))}
+      <line x1={pad - 2} y1={cy} x2={cx + xMax * unit + 2} y2={cy} stroke="#334155" strokeWidth="1.5" />
+      <line x1={cx} y1={pad - 2} x2={cx} y2={cy + 2} stroke="#334155" strokeWidth="1.5" />
+      {Array.from({ length: Math.floor(xMax / gridStep) + 1 }, (_, i) => i * gridStep)
+        .filter((x) => x > 0)
+        .map((x) => (
+          <text key={`tx-${x}`} x={cx + x * unit} y={cy + 14} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
+        ))}
+      {Array.from({ length: Math.floor(yMax / gridStep) + 1 }, (_, i) => i * gridStep)
+        .filter((y) => y > 0)
+        .map((y) => (
+          <text key={`ty-${y}`} x={cx - 8} y={cy - y * unit + 2} textAnchor="middle" fontSize="7" fill="#64748b">{y}</text>
+        ))}
+      <text x={cx + xMax * unit + 4} y={cy + 4} fontSize="8" fontWeight="bold" fill="#334155">x</text>
+      <text x={cx + 4} y={pad - 4} fontSize="8" fontWeight="bold" fill="#334155">y</text>
+
+      {polygons.map((poly, i) => (
+        <polygon
+          key={i}
+          points={poly.points.map(([x, y]) => q1ToSvg(x, y, cx, cy, unit).join(",")).join(" ")}
+          fill="none"
+          stroke="#334155"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      ))}
+
+      {points.map((p) => {
+        const [px, py] = q1ToSvg(p.x, p.y, cx, cy, unit);
+        return (
+          <g key={p.label}>
+            <circle cx={px} cy={py} r="3.5" fill="#3b82f6" stroke="#fff" strokeWidth="1" />
+            <text x={px + 5} y={py - 3} fontSize="9" fontWeight="bold" fill="#1e40af">{p.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function genQ1FigureExercise() {
+  const figure = pickN(Q1_CARTESIAN_FIGURES, 1)[0]!;
+  const verts = pickN(figure.vertices, 4);
+  const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
+    label,
+    x: verts[i]![0],
+    y: verts[i]![1],
+  }));
+  const maxX = Math.max(...figure.vertices.map((v) => v[0]));
+  const maxY = Math.max(...figure.vertices.map((v) => v[1]));
+  const xMax = Math.max(15, Math.ceil((maxX + 5) / 5) * 5);
+  const yMax = Math.max(15, Math.ceil((maxY + 5) / 5) * 5);
+  return { figure, askedPoints, xMax, yMax };
 }
 
 // ── Grille lettres/chiffres ───────────────────────────────────────────────────
@@ -448,7 +614,57 @@ export function G6MedievalLocateExercise({ exNum, validateCommand, onValidated }
   );
 }
 
-// ── Exercice 4 : coordonnées sur figure ──────────────────────────────────────
+// ── Exercice 3 (G6.1) : coordonnées sur figure — 1er quadrant ───────────────
+
+export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const [{ figure, askedPoints, xMax, yMax }] = useState(() => genQ1FigureExercise());
+  const [answers, setAnswers] = useState<XYAnswer[]>(() =>
+    askedPoints.map(() => ({ x: "", y: "" })),
+  );
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prev = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res = askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y));
+    setResults(res);
+    setValidated(true);
+    onValidated(res.filter(Boolean).length, res.length);
+  }, [validated, askedPoints, answers, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Je note les coordonnées des points (x ; y). Les axes sont gradués de 5 en 5.
+      </p>
+      <Q1FigurePlane xMax={xMax} yMax={yMax} polygons={figure.polygons} points={askedPoints} />
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+        {askedPoints.map((pt, i) => {
+          const answer = answers[i] ?? { x: "", y: "" };
+          const wrong = validated && !results[i];
+          return (
+            <GridXYFields
+              key={pt.label}
+              label={pt.label}
+              answer={answer}
+              correctX={pt.x}
+              correctY={pt.y}
+              validated={validated}
+              wrong={wrong}
+              onChange={(next) => setAnswers((p) => p.map((a, j) => (j === i ? next : a)))}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Exercice 4 (G6.2) : coordonnées sur figure — repère large ────────────────
 
 function parseCoord(raw: string): [number, number] | null {
   const s = raw.trim().replace(/\s+/g, "").replace(/[()]/g, "");

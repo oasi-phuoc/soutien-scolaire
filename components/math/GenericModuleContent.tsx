@@ -36,6 +36,7 @@ import {
   G6GridPlaceExercise,
   G6MedievalLocateExercise,
   G6CartesianCoordsExercise,
+  G6Q1FigureCoordsExercise,
   G6MapGenevaExercise,
   G6MapBielExercise,
   G6RebeuvelierExercise,
@@ -5633,10 +5634,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const pushG6GridSet = () => {
         steps.push({ kind: "g6_plan", lesson, variant: 1, exNum: 1 });
         steps.push({ kind: "g6_plan", lesson, variant: 2, exNum: 2 });
-        steps.push({ kind: "g6_plan", lesson, variant: 3, exNum: 3 });
-        steps.push({ kind: "g6_plan", lesson, variant: 5, exNum: 4 });
-        steps.push({ kind: "g6_plan", lesson, variant: 6, exNum: 5 });
-        steps.push({ kind: "g6_plan", lesson, variant: 7, exNum: 6 });
+        steps.push({ kind: "g6_plan", lesson, variant: 4, exNum: 3 });
       };
       pushG6GridSet();
       steps.push({ kind: "eval_start", lesson });
@@ -11072,7 +11070,11 @@ export function GenericModuleContent({
             <G6MedievalLocateExercise key={`g6m-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
           )}
-          {currentStep.variant === 4 && (
+          {currentStep.variant === 4 && currentStep.lesson.submoduleId === "G6-1" && (
+            <G6Q1FigureCoordsExercise key={`g6q1-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 4 && currentStep.lesson.submoduleId !== "G6-1" && (
             <G6CartesianCoordsExercise key={`g6c-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
           )}
