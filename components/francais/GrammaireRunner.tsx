@@ -2785,7 +2785,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
                 onClick={() => setShowCancelConfirm(false)}
                 className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
-                Continuer l&apos;évaluation
+                Continuer
               </button>
             </div>
           </div>

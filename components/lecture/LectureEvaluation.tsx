@@ -1321,7 +1321,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                 onClick={() => setShowCancelConfirm(false)}
                 className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
-                Continuer l&apos;évaluation
+                Continuer
               </button>
             </div>
           </div>

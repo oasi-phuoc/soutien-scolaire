@@ -114,7 +114,7 @@ export function EvalNavGuardProvider({ children }: { children: React.ReactNode }
                 onClick={() => setPending(null)}
                 className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-theme)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
-                Continuer l&apos;évaluation
+                Continuer
               </button>
             </div>
           </div>
