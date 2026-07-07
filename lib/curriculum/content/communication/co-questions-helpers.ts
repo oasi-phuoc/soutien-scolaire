@@ -1,9 +1,11 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import { pickCoQuestionFormat } from "./ce-co-question-formats";
+import { hasBlockedImageChoices, isExcludedCeCoQuestion } from "./ce-co-question-filters";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
+export type COFillMode = "stem" | "full";
 
 export type COImageChoice = { label: string; image: string };
 
@@ -30,9 +32,14 @@ export type COChoiceTask = {
 
 export type COFillTask = {
   kind: "fill";
+  /** Question identique au QCM texte. */
   prompt: string;
   answer: string;
   accept?: string[];
+  /** Base : phrase amorcée avec mot manquant ; moyen : phrase complète. */
+  fillMode: COFillMode;
+  /** Phrase amorcée (base uniquement), ex. « Le train part à 8 h _________. » */
+  stem?: string;
 };
 
 export type COMatchGridTask = {
@@ -100,49 +107,11 @@ export type RawQ = {
 };
 
 /** Réponses attendues qui sont un prénom, nom de famille, ville, commerce, etc. */
-function isProperNameAnswer(value: string): boolean {
-  const answer = value.trim();
-  if (/^(Le |La |Les |L'|Un |Une |Des |Du |De la )/i.test(answer)) return false;
-  if (/^[A-ZÀ-Ü][a-zà-ü]+ [A-ZÀ-Ü][a-zà-ü]/.test(answer)) return true;
-  if (/^[A-ZÀ-Ü][a-zà-üéèêëïîôùûüç\-']+$/.test(answer)) {
-    const notNames = new Set([
-      "Midi",
-      "Jeudi",
-      "Vendredi",
-      "Samedi",
-      "Dimanche",
-      "Lundi",
-      "Mardi",
-      "Mercredi",
-      "Nouveau",
-      "Document",
-    ]);
-    if (!notNames.has(answer)) return true;
-  }
-  return false;
-}
-
-/** Questions demandant un nom de personne, ville, commerce, etc. — exclues de CE/CO. */
-export function isExcludedNameQuestion(item: Pick<RawQ, "textQ" | "text" | "textC" | "fill">): boolean {
-  const textQ = item.textQ;
-  const correctChoice = item.text[item.textC] ?? "";
-  const fillAnswer = item.fill;
-
-  if (/^comment s['']appelle/i.test(textQ)) {
-    return isProperNameAnswer(fillAnswer) || isProperNameAnswer(correctChoice);
-  }
-  if (/^quelle ville/i.test(textQ)) return true;
-  if (/^d['']où revient/i.test(textQ)) return true;
-  if (/^qui (laisse|appelle)\b/i.test(textQ)) return true;
-  if (/^qui /i.test(textQ)) {
-    if (isProperNameAnswer(correctChoice) || isProperNameAnswer(fillAnswer)) return true;
-    if (item.text.length > 0 && item.text.every(isProperNameAnswer)) return true;
-  }
-  return false;
-}
+export { isProperNameAnswer, isExcludedCeCoQuestion as isExcludedNameQuestion } from "./ce-co-question-filters";
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
   if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
+  if (hasBlockedImageChoices(choices.map((c) => c.label))) return false;
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
@@ -159,7 +128,7 @@ function img(_level: string, _groupSlug: string, _qId: string, _suffix: string, 
 }
 
 export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMultiQuestion[] {
-  return items.filter((item) => !isExcludedNameQuestion(item)).map((item) => ({
+  return items.filter((item) => !isExcludedCeCoQuestion(item)).map((item) => ({
     id: item.id,
     textQ: item.textQ,
     textChoices: item.text,
@@ -177,9 +146,16 @@ export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMu
   }));
 }
 
-function multiToTask(q: COMultiQuestion, format: COFormatType): COQuestionTask {
+function multiToTask(q: COMultiQuestion, format: COFormatType, fillMode: COFillMode): COQuestionTask {
   if (format === "fill") {
-    return { kind: "fill", prompt: q.textQ, answer: q.fillAnswer, accept: q.fillAccept };
+    return {
+      kind: "fill",
+      prompt: q.textQ,
+      stem: fillMode === "stem" ? q.fillQ : undefined,
+      fillMode,
+      answer: q.fillAnswer,
+      accept: q.fillAccept,
+    };
   }
   if (format === "image") {
     return {
@@ -330,6 +306,7 @@ export function buildCoPartQuestions(
   pool: COMultiQuestion[],
   count: number,
   seed: string,
+  fillMode: COFillMode = group.level === "moyen" ? "full" : "stem",
 ): COQuestionTask[] {
   if (!pool.length || count <= 0) return [];
 
@@ -339,7 +316,7 @@ export function buildCoPartQuestions(
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
     const format = pickCoQuestionFormat(index, seed, q.id, imageable);
-    return multiToTask(q, format);
+    return multiToTask(q, format, fillMode);
   });
 }
 

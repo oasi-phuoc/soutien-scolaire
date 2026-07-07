@@ -27,6 +27,7 @@ import {
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 import { COTranscriptView } from "@/components/communication/COTranscriptView";
+import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-question-filters";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 
@@ -857,14 +858,44 @@ function FillQuestionView({
   correction?: boolean;
 }) {
   const ok = answerOk(task, value);
+  const inputValue = typeof value === "string" ? value : "";
+  const inputCls =
+    "border-0 border-b-2 bg-transparent pb-1 text-sm outline-none disabled:opacity-80";
+  const stemParts = task.fillMode === "stem" && task.stem ? parseFillStem(task.stem) : null;
+
+  if (stemParts) {
+    return (
+      <div className="space-y-1">
+        <div className="flex flex-wrap items-baseline gap-x-1 gap-y-2 text-sm text-[var(--color-text-primary)]">
+          <span>{stemParts.before}</span>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(event) => onChange(event.target.value)}
+            disabled={correction}
+            className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
+            style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
+          />
+          {stemParts.after ? <span>{stemParts.after}</span> : null}
+        </div>
+        {correction && !ok && (
+          <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-1">
+      {task.fillMode === "full" && (
+        <p className="text-xs text-[var(--color-text-secondary)]">Écrivez une phrase complète contenant la réponse.</p>
+      )}
       <input
         type="text"
-        value={typeof value === "string" ? value : ""}
+        value={inputValue}
         onChange={(event) => onChange(event.target.value)}
         disabled={correction}
-        className="w-full border-0 border-b-2 bg-transparent pb-1 text-sm outline-none disabled:opacity-80"
+        className={`w-full ${inputCls}`}
         style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
       />
       {correction && !ok && (
