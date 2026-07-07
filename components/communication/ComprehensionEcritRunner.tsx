@@ -1181,12 +1181,29 @@ function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index
   );
 }
 
-function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; answers: CEAnswers; opened: string | null; setOpened: (id: string | null) => void }) {
+function ResultsPage({
+  parts,
+  answers,
+  opened,
+  setOpened,
+  onContinue,
+  continueLabel,
+}: {
+  parts: CEPart[];
+  answers: CEAnswers;
+  opened: string | null;
+  setOpened: (id: string | null) => void;
+  onContinue?: () => void;
+  continueLabel?: string;
+}) {
   const scores = parts.map((part) => scorePart(part, answers));
   const total = scores.reduce((sum, value) => sum + value, 0);
   return (
     <div className="space-y-6">
       <CommunicationResultsSummary totalPoints={total} />
+      {onContinue && (
+        <CommunicationFinishButton onClick={onContinue} label={continueLabel ?? "Continuer"} />
+      )}
       <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
       <div className="space-y-3">
         {parts.map((part, index) => {
@@ -1367,9 +1384,15 @@ export function ComprehensionEcritRunner({
       {phase === "results" && (
         <div className="space-y-6">
           <CEHeader level={level} title="Résultats" placement={mode === "placement"} />
-          <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"} accent={runnerAccent} />
-          {mode !== "placement" && <CommunicationFinishButton onClick={next} />}
+          <ResultsPage
+            parts={parts}
+            answers={answers}
+            opened={openedResult}
+            setOpened={setOpenedResult}
+            onContinue={next}
+            continueLabel={mode === "placement" ? "Continuer" : "Terminer"}
+          />
+          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Continuer" : "Terminer"} accent={runnerAccent} />
         </div>
       )}
     </div>

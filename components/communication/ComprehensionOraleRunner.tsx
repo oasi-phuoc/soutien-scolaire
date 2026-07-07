@@ -1517,6 +1517,16 @@ export function ComprehensionOraleRunner({
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" placement={mode === "placement"} />
         <CommunicationResultsSummary totalPoints={totalPoints} />
+        <CommunicationFinishButton
+          onClick={() => {
+            if (mode === "placement") {
+              onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints });
+              return;
+            }
+            router.push(EXPRESSION_TAB_HREF);
+          }}
+          label={mode === "placement" ? "Continuer" : "Terminer"}
+        />
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
         <div className="space-y-3">
           {parts.map((part, index) => {
@@ -1544,9 +1554,8 @@ export function ComprehensionOraleRunner({
         <HiddenNav
           onBack={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
           onNext={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
-          nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"}
+          nextLabel={mode === "placement" ? "Continuer" : "Terminer"}
         />
-        {mode !== "placement" && <CommunicationFinishButton onClick={() => router.push(EXPRESSION_TAB_HREF)} />}
       </main>
     );
   }
