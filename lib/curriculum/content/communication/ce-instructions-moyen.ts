@@ -54,11 +54,11 @@ export const CE_INSTRUCTIONS_MOYEN: CEInstructionItem[] = [
         body:
           "Cuisson : 20 minutes.\n\n" +
           "5. Enfournez pendant environ 20 minutes.\n" +
-          "6. À la sortie du four, le gâteau peut sembler pas assez cuit : c'est normal. Laissez-le refroidir avant de le démouler.\n\n" +
+          "6. À la sortie du four, le gâteau peut sembler ne pas assez cuit : c'est normal. Laissez-le refroidir avant de le démouler.\n\n" +
           "Note : pour aller plus vite, vous pouvez faire fondre le chocolat et le beurre au micro-ondes.",
         pool: [
           ceQ("gateau-q3", "Combien de temps dure la cuisson ?", ["10 minutes", "20 minutes", "40 minutes"], 1, "La cuisson dure environ ___ minutes.", "20", ["vingt"]),
-          ceQ("gateau-q7", "Que faire si le gâteau semble pas assez cuit à la sortie du four ?", ["Le laisser refroidir", "Le remettre tout de suite au four", "Le jeter"], 0, "Il faut le laisser _________.", "refroidir"),
+          ceQ("gateau-q7", "Que faire si le gâteau ne semble pas assez cuit à la sortie du four ?", ["Le laisser refroidir", "Le remettre tout de suite au four", "Le jeter"], 0, "Il faut le laisser _________.", "refroidir"),
           ceQ("gateau-q8", "Quand faut-il démouler le gâteau ?", ["Après refroidissement", "Dès la sortie du four", "Avant la cuisson"], 0, "On démoule après le _________.", "refroidissement", ["refroidir"]),
           ceQ("gateau-q9", "Que peut-on utiliser pour aller plus vite ?", ["Le micro-ondes", "Le four", "La casserole"], 0, "On peut utiliser le micro-_________.", "ondes"),
         ],
@@ -122,7 +122,7 @@ export const CE_INSTRUCTIONS_MOYEN: CEInstructionItem[] = [
         imageLabel: "Espace",
         body:
           "Salut à tous les élèves de 3e !\n\n" +
-          "Dans le journal de l'école, je vous donne des idées pour l'exposé sur l'espace que a demandé M. Hassan, le prof de sciences. Vous pourriez parler :\n" +
+          "Dans le journal de l'école, je vous donne des idées pour l'exposé sur l'espace qu'a demandé M. Hassan, le prof de sciences. Vous pourriez parler :\n" +
           "– du Système solaire ;\n– de l'Agence spatiale européenne ;\n– d'un astronaute, par exemple Thomas Pesquet ;\n– du premier homme sur la Lune.\n\n" +
           "Bon courage pour vos recherches !\nOksana",
         pool: [
@@ -154,13 +154,13 @@ export const CE_INSTRUCTIONS_MOYEN: CEInstructionItem[] = [
         imageLabel: "Écologie",
         body:
           "Conseils d'Amadou :\n\n" +
-          "– Si je dois imprimer, j'imprime en noir et blanc et en recto verso.\n" +
+          "– Si je dois imprimer, j'imprime en noir et blanc et en recto-verso.\n" +
           "– J'utilise des cahiers en papier recyclé.\n" +
           "– En classe, je trie les déchets.\n" +
           "– Je participe aux projets pour la protection de la planète.\n" +
           "– Au restaurant scolaire, je ne gaspille pas : je me sers juste ce qu'il faut !",
         pool: [
-          ceQ("journal-q7", "Pour utiliser moins de papier, il faut…", ["Imprimer en recto verso", "Recycler ses papiers", "Utiliser de vieux cahiers"], 0, "Il faut imprimer en recto _________.", "verso"),
+          ceQ("journal-q7", "Pour utiliser moins de papier, il faut…", ["Imprimer en recto-verso", "Recycler ses papiers", "Utiliser de vieux cahiers"], 0, "Il faut imprimer en recto-_________.", "verso"),
           ceQ("journal-q8", "Pourquoi se servir « juste ce qu'il faut » à la cantine ?", ["Pour ne pas gaspiller la nourriture", "Pour mieux trier les déchets", "Pour partager avec les autres"], 0, "C'est pour ne pas _________ la nourriture.", "gaspiller"),
           ceQ("journal-q12", "Que fait-on des déchets en classe ?", ["On les trie", "On les mange", "On les cache"], 0, "En classe, on _________ les déchets.", "trie", ["les trie"]),
           ceQ("journal-q13", "Pourquoi participer aux projets écolo ?", ["Pour protéger la planète", "Pour gagner de l'argent", "Pour manger plus"], 0, "Les projets protègent la _________.", "planète", ["planete"]),

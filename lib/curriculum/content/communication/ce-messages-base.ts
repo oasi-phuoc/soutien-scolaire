@@ -107,9 +107,11 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     from: "ines@fmail.ch",
     subject: "Ce soir",
     body:
-      "Salut,\nJ'ai une réunion importante au bureau sur le matériel informatique. Je ne peux pas acheter les ingrédients pour faire la tarte aux courgettes. " +
-      "Peux-tu acheter du parmesan, deux piments et de l'huile ? Je rentre du travail à 18 heures, est-ce que tu peux venir à 19 heures ? " +
-      "Nous serons quatre ce soir. Mes cousines Lucía et Carmen viennent dîner à 20 heures.\nMerci.\nInês",
+      "Salut,\n\n" +
+      "J'ai une réunion importante au bureau sur le matériel informatique. Je ne peux pas acheter les ingrédients pour faire la tarte aux courgettes.\n\n" +
+      "Peux-tu acheter du parmesan, deux piments et de l'huile ? Je rentre du travail à 18 heures, est-ce que tu peux venir à 19 heures ?\n\n" +
+      "Nous serons quatre ce soir. Mes cousines Lucía et Carmen viennent dîner à 20 heures.\n\n" +
+      "Merci.\nInês",
     image: "/assets/expression/images/ce/ce-message-02.webp",
     pool: [
       ceQ(
@@ -301,9 +303,12 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
     id: "samir-nacera-spectacle",
     subject: "Sortie",
     body:
-      "Salut !\nNous allons manger un croque-monsieur au café du Flon, place de la Riponne. Après, nous allons assister au spectacle de Gaspard Palsy à la salle Métropole. " +
-      "Tu sais, l'humoriste très connu ! Ça commence à 20 h 30. La salle est à côté du musée Arlaud, sur le boulevard de la Gare. " +
-      "Tu peux réserver une place en ligne. Elle coûte 25 CHF.\nSi tu viens, rendez-vous devant la station M2 Riponne vers 19 h. À plus !\nSamir et Nacera",
+      "Salut !\n\n" +
+      "Nous allons manger un croque-monsieur au café du Flon, place de la Riponne. Après, nous allons assister au spectacle de Gaspard Palsy à la salle Métropole. " +
+      "Tu sais, l'humoriste très connu ! Ça commence à 20 h 30. La salle est à côté du musée Arlaud, sur le boulevard de la Gare.\n\n" +
+      "Tu peux réserver une place en ligne. Elle coûte 25 CHF.\n\n" +
+      "Si tu viens, rendez-vous devant la station M2 Riponne vers 19 h.\n\n" +
+      "À plus !\nSamir et Nacera",
     image: "/assets/expression/images/ce/ce-message-04.webp",
     pool: [
       ceQ(
@@ -598,7 +603,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Pour les 18 ans de Mateo, je fais un gâteau aux fruits. Est-ce que tu peux acheter :\n" +
       "– de la farine ;\n– 6 œufs ;\n– un litre de lait ;\n– du sucre vanillé ?\n" +
       "J'ai les autres ingrédients. Je te rappelle qu'on a rendez-vous à 19 heures ! " +
-      "Il faut que tu sois là avant 17 heures, car je dois préparer le gâteau juste avant la fête.\nDaryna",
+      "Il faut que tu sois là avant 17 heures, car je dois préparer le gâteau juste avant la fête.\n\nDaryna",
     image: "/assets/expression/images/ce/ce-message-07.webp",
     pool: [
       ceQ(
@@ -756,9 +761,8 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
         "Comment doit-on la contacter ?",
         ["En l'appelant", "Par texto", "Par courrier"],
         0,
-        "Il faut la _________.",
-        "contacter",
-        ["appeler"],
+        "Il faut l'_________.",
+        "appeler",
       ),
       ceQ(
         "jul-q8",

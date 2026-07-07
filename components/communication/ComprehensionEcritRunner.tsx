@@ -317,10 +317,10 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
   docs: item.docs.map(([title, subtitle, body], docIndex) => [
     title,
     subtitle,
-    `${body} Les conditions, horaires ou publics concernes peuvent varier selon la situation ${index + 1}.${docIndex + 1}.`,
+    `${body} Les conditions, horaires ou publics concernés peuvent varier selon la situation ${index + 1}.${docIndex + 1}.`,
   ]),
   people: item.people.map(([person, answer], personIndex) => [
-    `${person} Il faut tenir compte de la contrainte precise indiquee dans le document.`,
+    `${person} Il faut tenir compte de la contrainte précise indiquée dans le document.`,
     (answer + (personIndex % 2 === 0 ? 0 : 0)) as number,
   ]),
 }));
