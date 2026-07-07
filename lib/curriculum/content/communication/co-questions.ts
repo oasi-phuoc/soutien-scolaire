@@ -7,6 +7,7 @@ import {
 } from "./co-questions-helpers";
 import { buildBaseConversationImageGrid } from "./co-questions-base-conversation-image-grid";
 import { buildScolaireConversationImageGrid } from "./co-questions-scolaire-conversation-image-grid";
+import { buildConversationImageMatch } from "./co-conversation-image-match";
 import { CO_CONVERSATION_MATCH } from "./co-questions-moyen-conversation-match";
 import { CO_CONVERSATION_MATCH_SCOLAIRE_MOYEN } from "./co-questions-scolaire-moyen-conversation-match";
 import { buildObjetPickTask } from "./co-questions-objet-pick";
@@ -29,6 +30,8 @@ export type {
   COObjectPickTask,
   COObjectPickCard,
   COConversationImageGridTask,
+  COImageMatchTask,
+  COImageMatchCard,
   COQuestionTask,
   RawQ,
 } from "./co-questions-helpers";
@@ -57,6 +60,8 @@ export function getCoPartQuestions(group: COAudioGroup, count: number, seed: str
   }
   const matchDef = CO_CONVERSATION_MATCH[group.id] ?? CO_CONVERSATION_MATCH_SCOLAIRE_MOYEN[group.id];
   if (matchDef) {
+    const imageMatch = buildConversationImageMatch(matchDef, seed);
+    if (imageMatch) return [imageMatch];
     return [buildConversationMatchGrid(matchDef.situations, matchDef.correctByDialogue, seed)];
   }
   const objetPick = buildObjetPickTask(group.id);

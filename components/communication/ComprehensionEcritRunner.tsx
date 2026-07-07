@@ -206,7 +206,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "Règles d'hygiène",
-      image: "",
+      image: "/expression/ce/hygiene.webp",
       imageLabel: "Hygiène",
       body: "Quand vous arrivez au travail, lavez-vous les mains. Portez une tenue propre. Nettoyez votre espace après chaque client.",
       questions: [
@@ -216,7 +216,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Remplacement",
-      image: "",
+      image: "/expression/ce/remplacement.webp",
       imageLabel: "Remplacement",
       body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.\n— Samira",
       questions: [
@@ -226,7 +226,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Préparer une infusion",
-      image: "",
+      image: "/expression/ce/infusion.webp",
       imageLabel: "Infusion",
       body: "Faites chauffer l'eau. Ajoutez les plantes dans la carafe. Laissez reposer cinq minutes. Les clients peuvent demander du miel.",
       questions: [
@@ -238,7 +238,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "À la gare",
-      image: "",
+      image: "/expression/ce/gare.webp",
       imageLabel: "Gare",
       body: "Présentez votre billet avant de monter. Gardez vos bagages près de vous. Les vélos doivent rester dans la zone indiquée.",
       questions: [
@@ -248,7 +248,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Consigne de sécurité",
-      image: "",
+      image: "/expression/ce/sécurité.webp",
       imageLabel: "Sécurité",
       body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bâtiment.",
       questions: [
@@ -258,7 +258,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Atelier cuisine",
-      image: "",
+      image: "/expression/ce/cuisine.webp",
       imageLabel: "Cuisine",
       body: "Lisez toute la recette avant de commencer. Préparez les ingrédients sur la table. Rangez le matériel après l'activité.",
       questions: [
@@ -273,13 +273,13 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Améliorez votre mémoire !",
     sections: [
-      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", imageLabel: "Sport" },
-      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", imageLabel: "Activité mentale" },
+      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/expression/ce/alimentation.webp", imageLabel: "Alimentation" },
+      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/expression/ce/sport.webp", imageLabel: "Sport" },
+      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/expression/ce/activité-mentale.webp", imageLabel: "Activité mentale" },
     ],
     questions: [
       { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche" }, { label: "La boxe" }, { label: "Le ski nautique" }], correct: 0 },
+      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/expression/ce/marche.webp" }, { label: "La boxe", image: "/expression/ce/boxe.webp" }, { label: "Le ski nautique", image: "/expression/ce/ski-nautique.webp" }], correct: 0, image: true },
       { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
       { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
       { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
@@ -290,13 +290,13 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Bien vivre en hiver",
     sections: [
-      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", imageLabel: "Froid" },
-      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", imageLabel: "Hiver" },
-      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", imageLabel: "Lavage des mains" },
+      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/expression/ce/froid.webp", imageLabel: "Froid" },
+      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "/expression/ce/hiver.webp", imageLabel: "Hiver" },
+      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/expression/ce/lavage-mains.webp", imageLabel: "Lavage des mains" },
     ],
     questions: [
       { prompt: "Que faut-il porter quand il fait froid ?", choices: [{ label: "Un manteau chaud" }, { label: "Un maillot de bain" }, { label: "Des sandales" }], correct: 0 },
-      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige" }, { label: "Soleil d'été" }, { label: "Plage" }], correct: 0 },
+      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/expression/ce/neige.webp" }, { label: "Soleil d'été", image: "/expression/ce/soleil.webp" }, { label: "Plage", image: "/expression/ce/plage.webp" }], correct: 0, image: true },
       { prompt: "Que faut-il aérer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
       { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenêtres" }], correct: 0 },
       { prompt: "Que faire si on est fatigué ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },

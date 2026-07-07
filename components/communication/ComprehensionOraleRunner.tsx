@@ -208,6 +208,9 @@ function answerOk(task: QuestionTask, answer: number | string | number[] | boole
   if (task.kind === "object_pick") {
     return objectPickScore(task, answer) === task.cards.length;
   }
+  if (task.kind === "image_match") {
+    return imageMatchCount(task, answer) === task.dialogues;
+  }
   if (task.kind === "choice") return answer === task.correct;
   const value = normalize(String(answer ?? ""));
   if (!value) return false;
@@ -231,6 +234,19 @@ function matchGridScore(task: Extract<QuestionTask, { kind: "match_grid" }>, ans
     (sum, weight, col) => sum + (answer[col] === task.correctByColumn[col] ? weight : 0),
     0,
   );
+}
+
+function imageMatchCount(
+  task: Extract<QuestionTask, { kind: "image_match" }>,
+  answer: number | string | number[] | boolean[] | null,
+) {
+  if (!Array.isArray(answer) || answer.length !== task.cards.length) return 0;
+  let count = 0;
+  for (let d = 1; d <= task.dialogues; d++) {
+    const cardIndex = task.cards.findIndex((c) => c.correct === d);
+    if (cardIndex >= 0 && answer[cardIndex] === d) count++;
+  }
+  return count;
 }
 
 function conversationImageGridScorableCorrectCount(
@@ -279,6 +295,9 @@ function scorePart(part: COPart, answers: Answers) {
   }
   if (part.questions.length === 1 && single.kind === "object_pick") {
     return objectPickScore(single, answers[key] ?? null);
+  }
+  if (part.questions.length === 1 && single.kind === "image_match") {
+    return (imageMatchCount(single, answers[key] ?? null) / single.dialogues) * part.points;
   }
   const each = part.points / part.questions.length;
   return part.questions.reduce((sum, question, index) => sum + (answerOk(question, answers[`${part.id}-${index}`] ?? null) ? each : 0), 0);
@@ -1005,6 +1024,79 @@ function MatchGridQuestionView({
   );
 }
 
+function ImageMatchQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+}: {
+  task: Extract<QuestionTask, { kind: "image_match" }>;
+  value: number | string | number[] | boolean[] | null;
+  onChange: (value: number[]) => void;
+  correction?: boolean;
+}) {
+  const selected: number[] =
+    Array.isArray(value) && value.length === task.cards.length && value.every((v) => typeof v === "number")
+      ? (value as number[])
+      : task.cards.map(() => 0);
+  const dialogues = Array.from({ length: task.dialogues }, (_, i) => i + 1);
+
+  function setCard(index: number, num: number) {
+    if (correction) return;
+    const next = [...selected];
+    if (num !== 0) {
+      for (let i = 0; i < next.length; i++) if (i !== index && next[i] === num) next[i] = 0;
+    }
+    next[index] = num;
+    onChange(next);
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+      {task.cards.map((card, index) => {
+        const chosen = selected[index] ?? 0;
+        const isCorrect = correction && card.correct !== null && chosen === card.correct;
+        const isWrong = correction && ((chosen !== 0 && chosen !== card.correct) || (card.correct !== null && chosen !== card.correct));
+        return (
+          <div
+            key={index}
+            className={`overflow-hidden rounded-xl border-2 bg-white ${isCorrect ? "border-amber-400" : isWrong ? "border-red-300" : "border-slate-200"}`}
+          >
+            <ObjectCardImage src={card.image} alt={card.label} />
+            <div className="border-t border-slate-200 p-2">
+              <select
+                value={chosen}
+                disabled={correction}
+                onChange={(e) => setCard(index, Number(e.target.value))}
+                aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
+                className="w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent-comm)]"
+              >
+                <option value={0}>— n°</option>
+                {dialogues.map((d) => {
+                  const takenElsewhere = selected.some((v, i) => i !== index && v === d);
+                  return (
+                    <option key={d} value={d} disabled={takenElsewhere && chosen !== d}>
+                      {d}
+                    </option>
+                  );
+                })}
+              </select>
+              {correction && (
+                <p
+                  className="mt-1 text-center text-xs font-semibold"
+                  style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? "#16a34a" : INVERSE }}
+                >
+                  {card.correct === null ? "Aucun (leurre)" : `Dialogue ${card.correct}`}
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function ConversationImageGridQuestionView({
   task,
   value,
@@ -1123,6 +1215,9 @@ function RenderQuestion({
       />
     );
   }
+  if (task.kind === "image_match") {
+    return <ImageMatchQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+  }
   if (task.kind === "fill") {
     return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
   }
@@ -1146,7 +1241,8 @@ function QuestionBlock({
   const isObjectPick = part.questions.length === 1 && part.questions[0]!.kind === "object_pick";
   const isConversationImageGrid =
     part.questions.length === 1 && part.questions[0]!.kind === "conversation_image_grid";
-  const isSingleTask = isMatchGrid || isObjectPick;
+  const isImageMatch = part.questions.length === 1 && part.questions[0]!.kind === "image_match";
+  const isSingleTask = isMatchGrid || isObjectPick || isImageMatch;
 
   return (
     <div className="space-y-5">
@@ -1157,7 +1253,9 @@ function QuestionBlock({
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
               {isConversationImageGrid
                 ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
-                : isMatchGrid
+                : isImageMatch
+                  ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
+                  : isMatchGrid
                 ? "Lisez les situations. Écoutez les dialogues puis répondez."
                 : isObjectPick
                   ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
@@ -1222,6 +1320,9 @@ function QuestionBlock({
             {isObjectPick && question.kind === "object_pick" && (
               <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
             )}
+            {isImageMatch && question.kind === "image_match" && (
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
+            )}
             <div className={isSingleTask || isConversationImageGrid ? "mt-4" : "mt-3"}>
               <RenderQuestion
                 task={question}
@@ -1249,6 +1350,11 @@ function QuestionBlock({
             {readonly && isObjectPick && question.kind === "object_pick" && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Score : {formatPoints(objectPickScore(question, answer))} / {formatPoints(part.points)} pts
+              </p>
+            )}
+            {readonly && isImageMatch && question.kind === "image_match" && (
+              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
+                Score : {imageMatchCount(question, answer)} / {question.dialogues} dialogues
               </p>
             )}
           </div>
