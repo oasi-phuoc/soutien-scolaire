@@ -1,5 +1,6 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
-import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
+import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
+import { pickCeCoQuestionFormat } from "./ce-co-question-formats";
 
 export type CEFormatType = "text" | "image" | "fill";
 
@@ -57,10 +58,6 @@ function supportsImageFormat(choices: { label: string; image: string }[]): boole
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
-function hashSeed(seed: string): number {
-  return hashSeedString(seed) || 1;
-}
-
 function multiToTask(q: CEMultiQuestion, format: CEFormatType): CEQuestionTask {
   if (format === "fill") {
     return { kind: "fill", prompt: q.fillQ, answer: q.fillAnswer, accept: q.fillAccept };
@@ -82,8 +79,6 @@ function multiToTask(q: CEMultiQuestion, format: CEFormatType): CEQuestionTask {
   };
 }
 
-const FORMATS: CEFormatType[] = ["text", "image", "fill"];
-
 /** Construit les questions d'un message CE (texte / image / remplissage). */
 export function buildCeMessageQuestions(
   pool: CEMultiQuestion[],
@@ -97,8 +92,7 @@ export function buildCeMessageQuestions(
 
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
-    const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
-    const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
+    const format = pickCeCoQuestionFormat(index, seed, q.id, imageable);
     return multiToTask(q, format);
   });
 }

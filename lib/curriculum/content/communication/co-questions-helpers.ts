@@ -1,5 +1,6 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
-import { hashSeedString, seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
+import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
+import { pickCeCoQuestionFormat } from "./ce-co-question-formats";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -145,10 +146,6 @@ function supportsImageFormat(choices: { label: string; image: string }[]): boole
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
-function hashSeed(seed: string): number {
-  return hashSeedString(seed) || 1;
-}
-
 function seededShuffle<T>(items: T[], seed: string): T[] {
   return shuffleWithSeed(items, seed);
 }
@@ -200,8 +197,6 @@ function multiToTask(q: COMultiQuestion, format: COFormatType): COQuestionTask {
     correct: q.textCorrect,
   };
 }
-
-const FORMATS: COFormatType[] = ["text", "image", "fill"];
 
 export function assertConversationMatchDef(
   situations: readonly string[],
@@ -342,11 +337,8 @@ export function buildCoPartQuestions(
   const selected = shuffled.slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    // QCM image uniquement si les 3 options sont illustrables (objet ou horloge),
-    // jamais pour les prix (images supprimées).
     const imageable = supportsImageFormat(q.imageChoices);
-    const formats = imageable ? FORMATS : FORMATS.filter((f) => f !== "image");
-    const format = formats[hashSeed(`${seed}-${q.id}-${index}`) % formats.length]!;
+    const format = pickCeCoQuestionFormat(index, seed, q.id, imageable);
     return multiToTask(q, format);
   });
 }
