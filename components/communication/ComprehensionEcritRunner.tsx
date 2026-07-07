@@ -22,7 +22,7 @@ import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-mess
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
 import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
 import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce-instructions-moyen";
-import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
+import { buildCeInstructionQuestions, buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
 const TOTAL_SECONDS = 45 * 60;
@@ -770,16 +770,16 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       points: 6,
       layout: "instructions",
       cards: instructionMoyen
-        ? instructionMoyen.cards.map((card, cardIndex, cards) => ({
-            title: card.title,
-            body: card.body,
-            image: "",
-            imageLabel: card.imageLabel,
-            questions:
-              cardIndex === cards.length - 1
-                ? buildCeMessageQuestions(instructionMoyen.pool, 6, `${level}-${stamp}-instructions`)
-                : [],
-          }))
+        ? (() => {
+            const perCard = buildCeInstructionQuestions(instructionMoyen.cards, `${level}-${stamp}-instructions`);
+            return instructionMoyen.cards.map((card, cardIndex) => ({
+              title: card.title,
+              body: card.body,
+              image: "",
+              imageLabel: card.imageLabel,
+              questions: perCard[cardIndex] ?? [],
+            }));
+          })()
         : instructions!.map((card) => ({
             ...card,
             body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
