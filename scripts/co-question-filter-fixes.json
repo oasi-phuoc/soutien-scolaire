@@ -1,0 +1,312 @@
+{
+  "smm41-q6": {
+    "textQ": "Quel type de produit avez-vous commandé ?",
+    "text": ["Un jeu vidéo", "Un téléphone portable", "Un ordinateur"],
+    "textC": 0,
+    "img": ["Jeu vidéo", "Téléphone", "Ordinateur"],
+    "imgC": 0,
+    "fillQ": "Vous avez commandé un ___ vidéo.",
+    "fill": "jeu",
+    "fillA": ["jeu"]
+  },
+  "smm41-q8": {
+    "textQ": "Quel type de magasin vous contacte ?",
+    "text": ["Un magasin d'électronique", "Une librairie", "Un magasin de vêtements"],
+    "textC": 0,
+    "img": ["Électronique", "Livre", "Vêtements"],
+    "imgC": 0,
+    "fillQ": "C'est un magasin d'___.",
+    "fill": "électronique",
+    "fillA": ["electronique", "électronique"]
+  },
+  "smm41-q10": {
+    "textQ": "Que devez-vous apporter pour retirer la commande ?",
+    "text": ["Le bon de commande et une carte d'identité", "Un chèque uniquement", "Rien du tout"],
+    "textC": 0,
+    "img": ["Carte et bon", "Chèque", "Rien"],
+    "imgC": 0,
+    "fillQ": "Il faut le bon de commande et la carte d'___.",
+    "fill": "identité",
+    "fillA": ["identite", "identité"]
+  },
+  "smm42-q3": {
+    "textQ": "Où se situe le centre par rapport à la gare ?",
+    "text": ["En face de la gare", "Loin de la gare", "Dans la gare"],
+    "textC": 0,
+    "img": ["Face à la gare", "Loin", "Dans la gare"],
+    "imgC": 0,
+    "fillQ": "Le centre est en face de la gare et du ___.",
+    "fill": "train",
+    "fillA": ["train"]
+  },
+  "smm42-q7": {
+    "textQ": "Quel type d'activité avez-vous réservée ?",
+    "text": ["Un jeu d'évasion", "Un concert", "Un film"],
+    "textC": 0,
+    "img": ["Évasion", "Concert", "Film"],
+    "imgC": 0,
+    "fillQ": "Vous avez réservé un jeu d'___.",
+    "fill": "évasion",
+    "fillA": ["evasion", "évasion"]
+  },
+  "smm42-q9": {
+    "textQ": "Comment trouver le centre facilement ?",
+    "text": ["Il est en face de la gare", "Il est au centre commercial", "Il est près de la plage"],
+    "textC": 0,
+    "img": ["Gare", "Centre commercial", "Plage"],
+    "imgC": 0,
+    "fillQ": "Pour nous retrouver, c'est très ___.",
+    "fill": "facile",
+    "fillA": ["facile"]
+  },
+  "smm48-q7": {
+    "textQ": "Quel type de musée visitez-vous ?",
+    "text": ["Un musée de bande dessinée", "Un musée de peinture", "Un musée de sciences"],
+    "textC": 0,
+    "img": ["Bande dessinée", "Peinture", "Sciences"],
+    "imgC": 0,
+    "fillQ": "C'est le musée de la bande ___.",
+    "fill": "dessinée",
+    "fillA": ["dessinee", "dessinée"]
+  },
+  "sma37-q9": {
+    "textQ": "Où entend-on cette annonce ?",
+    "text": ["Dans une école", "Dans un bus", "À la piscine"],
+    "textC": 0,
+    "img": ["École", "Bus", "Piscine"],
+    "imgC": 0,
+    "fillQ": "L'annonce est dans l'___ de votre correspondant.",
+    "fill": "école",
+    "fillA": ["ecole", "école"]
+  },
+  "sma38-q7": {
+    "textQ": "Annonce 1 : que pouvez-vous garder avec vous dans le bus ?",
+    "text": ["Vos petits sacs", "Vos gros sacs", "Tous vos sacs"],
+    "textC": 0,
+    "img": ["Petit sac", "Gros sac", "Tous les sacs"],
+    "imgC": 0,
+    "fillQ": "Vous pouvez prendre vos petits sacs à votre ___.",
+    "fill": "siège",
+    "fillA": ["siege", "siège", "place assise"]
+  },
+  "smr34-q8": {
+    "textQ": "Où part-il pour ses compétitions le mois prochain ?",
+    "text": ["À l'étranger", "Dans sa région", "À l'école"],
+    "textC": 0,
+    "img": ["Avion", "Région", "École"],
+    "imgC": 0,
+    "fillQ": "Il a des compétitions ___ le mois prochain.",
+    "fill": "à l'étranger",
+    "fillA": ["a l'etranger", "à l'étranger", "etranger"]
+  },
+  "smr35-q6": {
+    "textQ": "Quel est le thème de l'émission ?",
+    "text": ["L'alimentation des adolescents", "Le sport à l'école", "Les vacances"],
+    "textC": 0,
+    "img": ["Alimentation", "Sport", "Vacances"],
+    "imgC": 0,
+    "fillQ": "L'émission parle de l'___ des adolescents.",
+    "fill": "alimentation",
+    "fillA": ["alimentation"]
+  },
+  "smr35-q10": {
+    "textQ": "Quel est le plat préféré de l'adolescent ?",
+    "text": ["La pizza", "Le hamburger-frites", "Les pâtes"],
+    "textC": 0,
+    "img": ["Pizza", "Hamburger", "Pâtes"],
+    "imgC": 0,
+    "fillQ": "Son plat préféré, c'est la ___.",
+    "fill": "pizza",
+    "fillA": ["pizza"]
+  },
+  "smr51-q8": {
+    "textQ": "Document 2 : quel type d'établissement est mentionné ?",
+    "text": ["Un restaurant", "Un musée", "Une gare"],
+    "textC": 0,
+    "img": ["Restaurant", "Musée", "Gare"],
+    "imgC": 0,
+    "fillQ": "Le restaurant est situé dans un monument ___.",
+    "fill": "célèbre",
+    "fillA": ["celebre", "célèbre", "connu"]
+  },
+  "smr51-q9": {
+    "textQ": "Document 2 : que peut-on admirer au restaurant ?",
+    "text": ["Une belle vue", "Un jardin", "Une piscine"],
+    "textC": 0,
+    "img": ["Vue", "Jardin", "Piscine"],
+    "imgC": 0,
+    "fillQ": "On profite de la plus belle ___ .",
+    "fill": "vue",
+    "fillA": ["vue"]
+  },
+  "smr52-q7": {
+    "textQ": "Où va ouvrir le nouveau centre sportif ?",
+    "text": ["À l'ouest de la ville", "Au centre-ville", "À l'est de la ville"],
+    "textC": 0,
+    "img": ["Ouest", "Centre", "Est"],
+    "imgC": 0,
+    "fillQ": "Le centre va ouvrir à l'___ de la ville.",
+    "fill": "ouest",
+    "fillA": ["ouest"]
+  },
+  "smr52-q8": {
+    "textQ": "Quel type de lieu va ouvrir ?",
+    "text": ["Un centre sportif", "Un cinéma", "Une bibliothèque"],
+    "textC": 0,
+    "img": ["Sport", "Cinéma", "Livre"],
+    "imgC": 0,
+    "fillQ": "C'est un nouveau centre ___.",
+    "fill": "sportif",
+    "fillA": ["sportif"]
+  },
+  "smr54-q9": {
+    "textQ": "Quel style de musique joue Dionysos ?",
+    "text": ["Du rock", "Du jazz", "De la musique classique"],
+    "textC": 0,
+    "img": ["Rock", "Jazz", "Classique"],
+    "imgC": 0,
+    "fillQ": "Le groupe Dionysos joue de la musique ___.",
+    "fill": "rock",
+    "fillA": ["rock"]
+  },
+  "smr55-q10": {
+    "textQ": "Document 1 : quel événement a lieu cette semaine ?",
+    "text": ["Un salon du tatouage", "Un salon du livre", "Un salon de l'auto"],
+    "textC": 0,
+    "img": ["Tatouage", "Livre", "Auto"],
+    "imgC": 0,
+    "fillQ": "Cette semaine, il y a le salon du ___.",
+    "fill": "tatouage",
+    "fillA": ["tatouage"]
+  },
+  "saa30-q1": {
+    "textQ": "Quel type de lieu est Le Studio ?",
+    "text": ["Un cinéma", "Un théâtre", "Un musée"],
+    "textC": 0,
+    "img": ["Cinéma", "Théâtre", "Musée"],
+    "imgC": 0,
+    "fillQ": "Le Studio est un ___.",
+    "fill": "cinéma",
+    "fillA": ["cinema", "cinéma"]
+  },
+  "saa30-q3": {
+    "textQ": "Quel type de film est Hors norme ?",
+    "text": ["Une comédie", "Un documentaire", "Un dessin animé"],
+    "textC": 0,
+    "img": ["Comédie", "Documentaire", "Dessin animé"],
+    "imgC": 0,
+    "fillQ": "Hors norme est une ___ .",
+    "fill": "comédie",
+    "fillA": ["comedie", "comédie"]
+  },
+  "saa31-q2": {
+    "textQ": "Quel type de magasin est concerné ?",
+    "text": ["Un magasin de bricolage", "Une boulangerie", "Une pharmacie"],
+    "textC": 0,
+    "img": ["Bricolage", "Boulangerie", "Pharmacie"],
+    "imgC": 0,
+    "fillQ": "C'est un magasin de ___.",
+    "fill": "bricolage",
+    "fillA": ["bricolage"]
+  },
+  "saa32-q3": {
+    "textQ": "Quel type d'établissement est concerné ?",
+    "text": ["Une école", "Un hôpital", "Une mairie"],
+    "textC": 0,
+    "img": ["École", "Hôpital", "Mairie"],
+    "imgC": 0,
+    "fillQ": "M. Chary travaille dans une ___.",
+    "fill": "école",
+    "fillA": ["ecole", "école"]
+  },
+  "saa32-q4": {
+    "textQ": "Quel type de visite est organisé ?",
+    "text": ["Une visite d'école", "Une visite de musée", "Une visite d'usine"],
+    "textC": 0,
+    "img": ["École", "Musée", "Usine"],
+    "imgC": 0,
+    "fillQ": "La visite concerne une ___.",
+    "fill": "école",
+    "fillA": ["ecole", "école"]
+  },
+  "saa33-q4": {
+    "textQ": "Quel type d'espace accueille les professionnels ?",
+    "text": ["Un espace de rencontre", "Une salle de sport", "Un parking"],
+    "textC": 0,
+    "img": ["Rencontre", "Sport", "Parking"],
+    "imgC": 0,
+    "fillQ": "Les professionnels se retrouvent dans un espace de ___.",
+    "fill": "rencontre",
+    "fillA": ["rencontre"]
+  },
+  "saa33-q5": {
+    "textQ": "Quel type d'atelier est proposé ?",
+    "text": ["Un atelier de dessin", "Un atelier de cuisine", "Un atelier de danse"],
+    "textC": 0,
+    "img": ["Dessin", "Cuisine", "Danse"],
+    "imgC": 0,
+    "fillQ": "L'atelier est un atelier de ___ collectif.",
+    "fill": "dessin",
+    "fillA": ["dessin"]
+  },
+  "saa34-q1": {
+    "textQ": "Quel type de parc est annoncé ?",
+    "text": ["Un parc d'attractions", "Un parc naturel", "Un parc aquatique"],
+    "textC": 0,
+    "img": ["Attractions", "Nature", "Aquatique"],
+    "imgC": 0,
+    "fillQ": "C'est un parc d'___.",
+    "fill": "attractions",
+    "fillA": ["attractions", "attraction"]
+  },
+  "saa34-q3": {
+    "textQ": "Quel type d'attraction est nouveau ?",
+    "text": ["Un simulateur", "Un manège", "Un spectacle"],
+    "textC": 0,
+    "img": ["Simulateur", "Manège", "Spectacle"],
+    "imgC": 0,
+    "fillQ": "Il y a un nouveau ___ .",
+    "fill": "simulateur",
+    "fillA": ["simulateur"]
+  },
+  "saa34-q9": {
+    "textQ": "Que propose-t-on pour les petites faims ?",
+    "text": ["Un snack", "Un restaurant gastronomique", "Un buffet"],
+    "textC": 0,
+    "img": ["Snack", "Restaurant", "Buffet"],
+    "imgC": 0,
+    "fillQ": "Un ___ est prévu pour les petites faims.",
+    "fill": "snack",
+    "fillA": ["snack"]
+  },
+  "saa35-q5": {
+    "textQ": "Où Angèle va-t-elle passer plus de temps ?",
+    "text": ["Dans une autre ville", "À la campagne", "À la mer"],
+    "textC": 0,
+    "img": ["Ville", "Campagne", "Mer"],
+    "imgC": 0,
+    "fillQ": "Elle va passer plus de temps dans une autre ___.",
+    "fill": "ville",
+    "fillA": ["ville"]
+  },
+  "sar27-q1": {
+    "textQ": "À quel public est destinée cette émission ?",
+    "text": ["Aux adolescents", "Aux retraités", "Aux enfants"],
+    "textC": 0,
+    "img": ["Adolescents", "Retraités", "Enfants"],
+    "imgC": 0,
+    "fillQ": "L'émission est destinée aux ___.",
+    "fill": "ados",
+    "fillA": ["ados", "adolescents", "jeunes"]
+  },
+  "sac1-q3": {
+    "textQ": "Avant son déménagement, où habitait Antony ?",
+    "text": ["Dans une grande ville à l'étranger", "À la campagne", "Dans un petit village"],
+    "textC": 0,
+    "img": ["Ville", "Campagne", "Village"],
+    "imgC": 0,
+    "fillQ": "Il habitait dans une grande ___ à l'étranger.",
+    "fill": "ville",
+    "fillA": ["ville"]
+  }
+}
