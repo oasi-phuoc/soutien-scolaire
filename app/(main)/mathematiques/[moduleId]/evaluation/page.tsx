@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { getMathModule } from "@/lib/curriculum/math-data";
+import { getMathModule, isMathModuleAccessibleToStudent } from "@/lib/curriculum/math-data";
 import { ModuleRevisionEval } from "@/components/math/ModuleRevisionEval";
+import { MathModuleComingSoon } from "@/components/math/MathModuleComingSoon";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = { params: Promise<{ moduleId: string }> };
 
@@ -12,9 +14,25 @@ export default async function ModuleEvaluationPage({ params }: Props) {
   const mod = getMathModule(upper);
   if (!mod) notFound();
 
+  const supabase = await createSupabaseServerClient();
+  let isAdmin = false;
+  if (supabase) {
+    const { data: myRole } = await supabase.rpc("get_my_role");
+    isAdmin = myRole === "admin" || myRole === "prof";
+  }
+
   const isGeometry = mod.branch === "geometry";
-  const tabLabel = isGeometry ? "Formes" : "Calculs";
   const backHref = isGeometry ? "/mathematiques?tab=geometry" : "/mathematiques";
+
+  if (!isAdmin && !isMathModuleAccessibleToStudent(mod)) {
+    return (
+      <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+        <MathModuleComingSoon moduleCode={mod.code} moduleTitle={mod.title} backHref={backHref} />
+      </main>
+    );
+  }
+
+  const tabLabel = isGeometry ? "Formes" : "Calculs";
   const pageStyle = isGeometry
     ? ({ "--color-accent-alg": "var(--color-accent-geo)" } as CSSProperties)
     : undefined;

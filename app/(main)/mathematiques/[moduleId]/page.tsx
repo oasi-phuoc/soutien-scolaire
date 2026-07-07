@@ -2,7 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
-import { getMathModule } from "@/lib/curriculum/math-data";
+import { MathModuleComingSoon } from "@/components/math/MathModuleComingSoon";
+import { getMathModule, isMathModuleAccessibleToStudent } from "@/lib/curriculum/math-data";
 import {
   getLessonsForModule,
   getLessonBySubmoduleId,
@@ -27,6 +28,14 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   // If it's a module ID (A4, G1…), redirect to its first submodule
   const mod = getMathModule(upper);
   if (mod) {
+    if (!isAdmin && !isMathModuleAccessibleToStudent(mod)) {
+      const backHref = mod.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
+      return (
+        <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+          <MathModuleComingSoon moduleCode={mod.code} moduleTitle={mod.title} backHref={backHref} />
+        </main>
+      );
+    }
     const lessons = getLessonsForModule(upper);
     if (lessons && lessons.length > 0) {
       redirect(`/mathematiques/${lessons[0]!.submoduleId}`);
@@ -43,6 +52,14 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   const parentMod = getMathModule(parentModuleId!);
   // RA/RG revision modules are not in MATH_MODULES — allow them through
   if (!parentMod && !parentModuleId!.startsWith("RA")) notFound();
+  if (parentMod && !isAdmin && !isMathModuleAccessibleToStudent(parentMod)) {
+    const backHref = parentMod.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
+    return (
+      <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+        <MathModuleComingSoon moduleCode={parentMod.code} moduleTitle={parentMod.title} backHref={backHref} />
+      </main>
+    );
+  }
 
   const isGeometry = parentMod?.branch === "geometry";
   const tabLabel = isGeometry ? "Formes" : "Calculs";

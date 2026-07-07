@@ -39,7 +39,7 @@ function nextInSequence(order: string[], p: StoredProgressV1): string | undefine
   const done = completedPassingIds(p);
   for (const id of order) {
     const m = getMathModule(id);
-    if (!m) continue;
+    if (!m || m.comingSoon) continue;
     if (done.has(id)) continue;
     const pre = prerequisitesMet(m, done);
     if (pre.ok) return id;
@@ -102,7 +102,7 @@ export function computeRecommendation(
   if (tab === "geometry") {
     for (const id of order) {
       const m = getMathModule(id);
-      if (!m) continue;
+      if (!m || m.comingSoon) continue;
       const pre = prerequisitesMet(m, done);
       if (!pre.ok && pre.missing.some((mid) => mid.startsWith("A"))) {
         const need = pre.missing.find((mid) => mid.startsWith("A"))!;
@@ -126,7 +126,11 @@ export function computeRecommendation(
     }
   }
 
-  const allDone = order.every((id) => done.has(id));
+  const releasable = order.filter((id) => {
+    const m = getMathModule(id);
+    return !m || !m.comingSoon;
+  });
+  const allDone = releasable.every((id) => done.has(id));
   if (allDone) {
     return {
       moduleId: null,
@@ -184,6 +188,8 @@ export function findPendingEvaluationModule(
 ): string | undefined {
   const order = tab === "algebra" ? MATH_ALGEBRA_ORDER : MATH_GEOMETRY_TAB_ORDER;
   for (const id of order) {
+    const m = getMathModule(id);
+    if (!m || m.comingSoon) continue;
     if (moduleNeedsEvaluation(id, p)) return id;
   }
   return undefined;

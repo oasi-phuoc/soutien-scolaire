@@ -211,7 +211,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                         <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
                       </div>
                       <span className="shrink-0 rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
-                        En développement
+                        En cours de développement
                       </span>
                     </div>
                   </div>

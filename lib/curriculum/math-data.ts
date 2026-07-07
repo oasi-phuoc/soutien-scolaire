@@ -402,6 +402,11 @@ export function getMathModule(id: string): MathModule | undefined {
   return MATH_MODULES.find((m) => m.id === id);
 }
 
+/** Module visible dans la liste mais pas encore ouvert aux élèves (G7–G11, etc.). */
+export function isMathModuleAccessibleToStudent(mod: MathModule | undefined): boolean {
+  return !!mod && !mod.comingSoon;
+}
+
 export function prerequisitesMet(
   module: MathModule,
   completed: Set<string>,
