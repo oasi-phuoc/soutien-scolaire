@@ -16,7 +16,7 @@ export function PeGradingRubric({
   grading?: ExerciseGrading;
   onChange: (grading: ExerciseGrading) => void;
 }) {
-  const rubric = rubricForPeExercise(exercise.kind);
+  const rubric = rubricForPeExercise(exercise.kind, exercise.maxPoints);
   if (!rubric) return null;
 
   const current = new Map((grading?.criteria ?? []).map((entry) => [entry.id, entry.points]));

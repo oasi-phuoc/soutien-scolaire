@@ -32,9 +32,8 @@ export function ExpressionSubmissionDetail({
     [item.prompt, item.original_text],
   );
   const isOral = item.lesson_code.startsWith("PO");
-  const isMoyenPe = !isOral && item.level === "moyen";
-  const rubricExercises = exercises.filter((exercise) => rubricForPeExercise(exercise.kind));
-  const hasRubric = isTeacher && isMoyenPe && rubricExercises.length > 0;
+  const rubricExercises = exercises.filter((exercise) => rubricForPeExercise(exercise.kind, exercise.maxPoints));
+  const hasRubric = isTeacher && !isOral && rubricExercises.length > 0;
 
   const [blockReviews, setBlockReviews] = useState<ExerciseBlockReview[]>(() =>
     initBlockReviews(exercises, item.corrected_text, item.teacher_grading, item.annotations ?? []),
@@ -178,7 +177,7 @@ export function ExpressionSubmissionDetail({
                   <PeExerciseFrame key={exercise.id} exercise={exercise} index={index}>
                     {isTeacher && review && (
                       <>
-                        {hasRubric && rubricForPeExercise(exercise.kind) && (
+                        {hasRubric && rubricForPeExercise(exercise.kind, exercise.maxPoints) && (
                           <PeGradingRubric
                             exercise={exercise}
                             grading={exerciseGrading.find((entry) => entry.exerciseId === exercise.id)}
@@ -189,7 +188,7 @@ export function ExpressionSubmissionDetail({
                           exercise={exercise}
                           review={review}
                           editable
-                          hidePoints={hasRubric && Boolean(rubricForPeExercise(exercise.kind))}
+                          hidePoints={hasRubric && Boolean(rubricForPeExercise(exercise.kind, exercise.maxPoints))}
                           onChange={updateBlockReview}
                         />
                       </>

@@ -12,7 +12,7 @@ export function PeGradingResult({
   exercise: SubmissionExercise;
   grading?: ExerciseGrading;
 }) {
-  const rubric = rubricForPeExercise(exercise.kind);
+  const rubric = rubricForPeExercise(exercise.kind, exercise.maxPoints);
   if (!rubric || !grading) return null;
 
   const scoreMap = new Map(grading.criteria.map((entry) => [entry.id, entry.points]));
