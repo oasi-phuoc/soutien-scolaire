@@ -1,4 +1,4 @@
-/** Pool « Lire pour s'orienter » — CE moyen (6 documents × 8 personnes, 2 leurres). */
+/** Pool « Lire des annonces » — CE moyen (6 documents × 8 personnes, 2 leurres). */
 
 export type OrientationSeriesItem = {
   context: string;
@@ -8,6 +8,328 @@ export type OrientationSeriesItem = {
 };
 
 export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
+  {
+    context:
+      "Vous êtes au Salon des métiers à Genève avec des amis. Vous lisez le programme des ateliers proposés sur place.",
+    docs: [
+      [
+        "Atelier image",
+        "Cinéma",
+        "Vous rêvez de réaliser des courts-métrages ? Découvrez les bases du tournage, du montage et du son avec des professionnels du cinéma suisse.",
+      ],
+      [
+        "Atelier scène",
+        "Théâtre",
+        "Envie de monter sur scène ? Cet atelier d'improvisation et de jeu théâtral vous aide à gagner en confiance devant un public.",
+      ],
+      [
+        "Atelier numérique",
+        "Informatique",
+        "Apprenez à créer un site Internet et à programmer en Python. Initiation pour débutants, matériel fourni sur place.",
+      ],
+      [
+        "Atelier cuisine",
+        "Restauration",
+        "Cet atelier propose une initiation aux métiers de la restauration avec le chef Gustave Lemoine. Plats salés, service en salle et travail d'équipe.",
+      ],
+      [
+        "Atelier gourmand",
+        "Pâtisserie",
+        "Comment faire de délicieux pains au chocolat ? Venez découvrir les secrets de la boulangerie-pâtisserie avec un maître artisan genevois.",
+      ],
+      [
+        "Atelier couleur",
+        "Arts plastiques",
+        "Initiez-vous à la peinture à l'huile et à l'aquarelle. Matériel fourni pour la première séance au centre culturel.",
+      ],
+    ],
+    people: [
+      ["Oksana aimerait faire des films.", 0],
+      ["Carmen est passionnée de théâtre.", 1],
+      ["Emre aime beaucoup l'informatique.", 2],
+      ["Hassan adore cuisiner, mais n'aime pas beaucoup les pâtisseries.", 3],
+      ["Inês aimerait devenir boulangère.", 4],
+      ["Matteo aime faire de la peinture.", 5],
+      ["Kwame est passionné de voitures.", -1],
+      ["Mariam adore regarder des films de science-fiction.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes en Suisse. Vos amis doivent choisir un des six stages d'une semaine proposés par l'école.",
+    docs: [
+      [
+        "Stage créativité",
+        "Arts et spectacles",
+        "Développez votre imagination avec le théâtre, le cirque, la musique et le cinéma. Une semaine pour créer et jouer sur scène.",
+      ],
+      [
+        "Stage sport",
+        "Plein air",
+        "À la découverte de nouvelles disciplines : VTT, escalade, équitation et voile sur le lac Léman. À la montagne ou au bord du lac.",
+      ],
+      [
+        "Stage nature",
+        "Écologie",
+        "Pour comprendre et respecter l'environnement. Séjour en plein air : observer un paysage, connaître les fleurs, les plantes et les animaux des Alpes.",
+      ],
+      [
+        "Stage sciences",
+        "Astronomie",
+        "Découvrez l'astronomie et la météorologie. Observez les étoiles au télescope et apprenez à mesurer le vent et la température.",
+      ],
+      [
+        "Stage histoire",
+        "Patrimoine suisse",
+        "Visites de châteaux et de musées pour mieux connaître la préhistoire, le Moyen Âge et les grandes périodes de l'histoire de la Suisse.",
+      ],
+      [
+        "Stage musique",
+        "Chorale",
+        "Apprenez à chanter en groupe et découvrez différents instruments. Concert de fin de semaine devant les parents.",
+      ],
+    ],
+    people: [
+      ["Lorenzo adore l'histoire.", 4],
+      ["Matteo aime l'art et les spectacles.", 0],
+      ["Rashid veut faire un stage sportif.", 1],
+      ["Nasir aime toutes les sciences.", 3],
+      ["Fatou adore la nature.", 2],
+      ["Yuliia aime la musique.", 5],
+      ["Emre veut apprendre l'informatique.", -1],
+      ["Awa adore les jeux vidéo.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes à l'école en Suisse romande. Vous lisez le programme des clubs proposés par votre établissement.",
+    docs: [
+      [
+        "Club théâtre",
+        "Scène",
+        "Venez jouer des pièces classiques et modernes avec Mme Janin, professeure de français. Mercredi 14 h–16 h, salle 325.",
+      ],
+      [
+        "Club animaux",
+        "Nature",
+        "Vous voulez tout savoir sur les chats, les chiens, les oiseaux ou les lapins ? Posez vos questions à M. Raymond, vétérinaire. Jeudi 12 h 30–13 h, salle 147.",
+      ],
+      [
+        "Club cuisine",
+        "Gastronomie",
+        "Apprenez à cuisiner des plats sucrés ou salés et composez des menus de fête avec notre chef. Samedi 10 h–12 h dans la cantine.",
+      ],
+      [
+        "Club dessin",
+        "Arts plastiques",
+        "Techniques au feutre, au crayon et à la peinture pour réaliser de beaux tableaux ! Vendredi 12 h–13 h avec Mme Collet, salle 228.",
+      ],
+      [
+        "Club chinois",
+        "Langues",
+        "Apprenez le chinois tous les jeudis midi avec M. Wang. Attention : 10 élèves maximum. Jeudi 12 h 30–13 h 30, salle 114.",
+      ],
+      [
+        "Club football",
+        "Sport",
+        "Entraînement et matchs amicaux chaque mardi après les cours. Ouvert à tous les niveaux, au terrain derrière l'école.",
+      ],
+    ],
+    people: [
+      ["Hassan voudrait devenir acteur.", 0],
+      ["Inês aime beaucoup préparer des desserts.", 2],
+      ["Marco adore dessiner.", 3],
+      ["Amadou s'intéresse aux animaux.", 1],
+      ["Kateryna voudrait apprendre une nouvelle langue.", 4],
+      ["Miguel aime jouer au football.", 5],
+      ["Olena veut faire de la natation.", -1],
+      ["Farid adore le ski de compétition.", -1],
+    ],
+  },
+  {
+    context:
+      "Le professeur de français demande aux élèves de faire un exposé. Il propose plusieurs thèmes, en classe, en Suisse.",
+    docs: [
+      [
+        "Exposé n° 1",
+        "Géographie",
+        "La Suisse et ses cantons : la montagne, les lacs et les collines. Découvrez les paysages de chaque région.",
+      ],
+      [
+        "Exposé n° 2",
+        "Personnages célèbres",
+        "Les grandes figures de l'histoire et des arts en Suisse : hommes politiques, musiciens, écrivains et acteurs.",
+      ],
+      [
+        "Exposé n° 3",
+        "Gastronomie",
+        "Les spécialités suisses selon les cantons : plats, fromages et desserts. Que mange-t-on à Genève ou en Valais ?",
+      ],
+      [
+        "Exposé n° 4",
+        "Francophonie",
+        "On parle français dans beaucoup de pays. Quelle est la carte d'identité de la francophonie dans le monde ?",
+      ],
+      [
+        "Exposé n° 5",
+        "Cinéma",
+        "Les films francophones depuis 1980 : comédies, films fantastiques et films d'action.",
+      ],
+      [
+        "Exposé n° 6",
+        "Écologie",
+        "Que fait-on en Suisse pour sauver la planète ? Comment moins polluer les lacs, la terre et l'air.",
+      ],
+    ],
+    people: [
+      ["Layla s'intéresse au français dans le monde.", 3],
+      ["Giulia adore la cuisine suisse.", 2],
+      ["Samira est passionnée de cinéma.", 4],
+      ["Pablo est fasciné par les personnages célèbres.", 1],
+      ["Oksana aime la géographie.", 0],
+      ["Nour veut protéger la Terre.", 5],
+      ["Matteo aime la musique classique.", -1],
+      ["Mariam adore la lecture de romans.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes en Suisse. Vous choisissez une activité à faire avec vos amis ce week-end.",
+    docs: [
+      [
+        "Activité n° 1",
+        "Cinéma",
+        "Ce soir à 20 h au cinéma ABC, venez voir le film Tout ce qui brille. La place est à 8 CHF pour les moins de 18 ans.",
+      ],
+      [
+        "Activité n° 2",
+        "Bowling",
+        "Au centre sportif des Minimes, parties de bowling à 6 joueurs. Salle de jeux et billard disponibles.",
+      ],
+      [
+        "Activité n° 3",
+        "Shopping",
+        "Grandes soldes dans les boutiques de la rue du Centre. Tous les vêtements et les chaussures à moins de 50 % !",
+      ],
+      [
+        "Activité n° 4",
+        "Piscine",
+        "À la piscine municipale, de 14 h à 19 h : nage libre et cours de natation. L'entrée est à 5 CHF.",
+      ],
+      [
+        "Activité n° 5",
+        "Discothèque",
+        "À la discothèque Modji, tous les samedis et dimanches après-midi : venez danser et écouter vos musiques préférées !",
+      ],
+      [
+        "Activité n° 6",
+        "Randonnée",
+        "Sortie en groupe dans les Alpes vaudoises. Départ à 8 h depuis la gare. Prévoir de bonnes chaussures et un pique-nique.",
+      ],
+    ],
+    people: [
+      ["Lucía veut faire du shopping.", 2],
+      ["Carmen adore le cinéma.", 0],
+      ["Beatriz aime écouter de la musique et danser.", 4],
+      ["Daryna aime les jeux de groupe.", 1],
+      ["Ibrahim veut faire du sport.", 3],
+      ["Kwame adore la randonnée en montagne.", 5],
+      ["Emre veut aller au musée.", -1],
+      ["Aissatou adore cuisiner à la maison.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous êtes en voyage à Zurich avec des amis. Vous consultez le programme des comédies musicales au théâtre.",
+    docs: [
+      [
+        "Le Roi Lion",
+        "Afrique",
+        "Tous les animaux d'Afrique sont réunis pour la naissance du lion Simba. Un jour, il deviendra le roi des animaux, mais Scar veut prendre le pouvoir.",
+      ],
+      [
+        "Le Fantôme de l'Opéra",
+        "Romance",
+        "Une célèbre histoire d'amour à Paris. Un homme aime passionnément l'actrice Christine Daaé. Il porte un masque : on l'appelle le fantôme de l'opéra.",
+      ],
+      [
+        "Cats",
+        "Danse et chant",
+        "L'histoire des chats Jellicle qui se réunissent une fois par an pour un grand bal. Ils dansent et chantent pour gagner la vie éternelle.",
+      ],
+      [
+        "Les Misérables",
+        "Histoire",
+        "Les personnages du roman de Victor Hugo : Jean Valjean, Cosette, Gavroche… Une comédie musicale pleine d'émotions dans le Paris du XIXe siècle.",
+      ],
+      [
+        "Billy Elliot",
+        "Danse",
+        "Dans une petite ville d'Angleterre, un garçon de 11 ans rêve de devenir danseur de ballet, mais son père n'est pas d'accord. Il se bat pour vivre sa passion.",
+      ],
+      [
+        "Mamma Mia",
+        "Musique",
+        "Une comédie musicale pleine de chansons célèbres. Une jeune femme cherche son père avant son mariage sur une île grecque ensoleillée.",
+      ],
+    ],
+    people: [
+      ["Giada adore la littérature et l'histoire.", 3],
+      ["Amadou adore l'Afrique.", 0],
+      ["Matteo adore la danse.", 4],
+      ["Rita aime les chats.", 2],
+      ["Hassan adore les histoires romantiques.", 1],
+      ["Lucía aime chanter et danser.", 5],
+      ["Nasir adore le rap américain.", -1],
+      ["Olena préfère regarder le sport à la télé.", -1],
+    ],
+  },
+  {
+    context:
+      "Vous habitez en Suisse. Vous lisez le programme d'activités de la commune pendant les vacances d'été.",
+    docs: [
+      [
+        "Activité n° 1",
+        "Sports d'équipe",
+        "Venez jouer au football, au handball et au volley-ball avec vos amis au stade municipal tous les jours de 10 h à 19 h.",
+      ],
+      [
+        "Activité n° 2",
+        "Sortie au lac",
+        "Sortie au lac le jeudi 25 juillet de 9 h à 19 h. N'oubliez pas vos maillots pour aller vous baigner !",
+      ],
+      [
+        "Activité n° 3",
+        "Bibliothèque",
+        "Écoutez des histoires racontées par nos bibliothécaires tous les samedis matin de juillet. Vous pouvez aussi emprunter des romans !",
+      ],
+      [
+        "Activité n° 4",
+        "Cinéma",
+        "Le cinéma Ciné-Culture propose des séances à tarif réduit pour les jeunes tous les matins à 11 h en juillet et en août.",
+      ],
+      [
+        "Activité n° 5",
+        "Jeux de société",
+        "Scrabble, Monopoly, cartes… il y en a pour tout le monde à l'atelier jeux du vendredi après-midi !",
+      ],
+      [
+        "Activité n° 6",
+        "Atelier cuisine",
+        "Apprenez à préparer des plats simples et des desserts suisses avec un chef. Mardi de 14 h à 16 h, salle polyvalente.",
+      ],
+    ],
+    people: [
+      ["Elena adore nager.", 1],
+      ["Youssef aime les sports d'équipe.", 0],
+      ["Inês est passionnée de lecture.", 2],
+      ["Carla adore jouer aux jeux de société.", 4],
+      ["Mateo aime regarder des films.", 3],
+      ["Carmen aime cuisiner.", 5],
+      ["Rashid veut faire du vélo de montagne seul.", -1],
+      ["Mariam adore observer les animaux sauvages.", -1],
+    ],
+  },
   {
     context:
       "Avec des amis, vous voulez vous abonner à un magazine en Suisse romande. Vous lisez cette publicité sur Internet.",

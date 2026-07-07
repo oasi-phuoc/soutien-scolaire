@@ -19,8 +19,11 @@ import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGu
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
+import { CE_MESSAGES_MOYEN } from "@/lib/curriculum/content/communication/ce-messages-moyen";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
-import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
+import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
+import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce-instructions-moyen";
+import { buildCeInstructionQuestions, buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-question-filters";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
@@ -87,6 +90,14 @@ function levelLabel(level: CELevel) {
   if (level === "moyen") return "Moyen";
   if (level === "avance") return "Avancé";
   return "Base";
+}
+
+function ceOrientationTitle(level: CELevel) {
+  return level === "moyen" ? "Lire des annonces" : "Lire pour s'orienter";
+}
+
+function ceMessageTitle(level: CELevel) {
+  return level === "moyen" ? "Lire des messages" : "Lire un message";
 }
 
 function normalize(value: string) {
@@ -313,301 +324,6 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
     (answer + (personIndex % 2 === 0 ? 0 : 0)) as number,
   ]),
 }));
-
-// --------------------------------------------------------------------------
-// Contenu A2 authoré pour le niveau MOYEN (CE-2) : textes plus longs, avec
-// connecteurs (parce que, si, quand, mais, donc…) et temps variés (passé
-// composé, futur), et questions/réponses adaptées (compréhension fine + saisie).
-// --------------------------------------------------------------------------
-const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
-  {
-    from: "leyla@voisins.ch",
-    subject: "Un petit service pendant mes vacances",
-    body:
-      "Bonjour,\nComme je pars en vacances la semaine prochaine, j'aimerais te demander un service. Peux-tu arroser mes plantes pendant mon absence ? Il faut le faire deux fois par semaine, le mardi et le samedi, mais seulement le soir, quand il fait moins chaud. La clé de l'appartement sera chez la gardienne, au rez-de-chaussée. Attention : ne donne pas trop d'eau aux cactus, sinon ils vont pourrir. Si tu as un problème, tu peux m'appeler, mais je répondrai surtout le week-end.\nMerci beaucoup, je te rapporterai un souvenir !\nLeyla",
-    questions: [
-      { prompt: "Pourquoi Leyla écrit-elle ce message ?", choices: [{ label: "Pour inviter à un repas" }, { label: "Pour demander d'arroser ses plantes" }, { label: "Pour vendre son appartement" }], correct: 1 },
-      { prompt: "À quel moment de la journée faut-il arroser ?", choices: [{ label: "Le matin" }, { label: "Le soir" }, { label: "À midi" }], correct: 1 },
-      { prompt: "Combien de fois par semaine faut-il arroser ?", choices: [{ label: "Une fois" }, { label: "Deux fois" }, { label: "Tous les jours" }], correct: 1 },
-      { prompt: "Où se trouve la clé ?", choices: [{ label: "Chez la gardienne" }, { label: "Sous le paillasson" }, { label: "Dans la boîte aux lettres" }], correct: 0 },
-      { prompt: "Que ne faut-il pas faire avec les cactus ?", answer: "trop d'eau", accept: ["donner trop d'eau", "trop arroser", "trop les arroser"] },
-      { prompt: "Quel jour Leyla répond-elle le mieux au téléphone ?", answer: "le week-end", accept: ["week-end", "samedi ou dimanche"] },
-    ],
-  },
-  {
-    from: "mairie@ville.ch",
-    subject: "Inscription à la fête du quartier",
-    body:
-      "Bonjour,\nLa fête du quartier aura lieu le samedi 14 juin, de 11 h à 18 h, dans le parc des Tilleuls. Cette année, chaque famille peut préparer un plat à partager avec les autres. Si vous voulez tenir un stand, vous devez vous inscrire avant le 1er juin en répondant à ce courriel. Les enfants pourront participer à des jeux gratuits l'après-midi, mais ils doivent rester accompagnés d'un adulte. En cas de pluie, la fête sera déplacée dans la salle communale, juste à côté du parc.\nNous comptons sur votre bonne humeur !\nLa mairie",
-    questions: [
-      { prompt: "Quel est le sujet principal du message ?", choices: [{ label: "Une fête de quartier" }, { label: "Un cours de cuisine" }, { label: "Un match de football" }], correct: 0 },
-      { prompt: "Que peut apporter chaque famille ?", choices: [{ label: "Une chaise" }, { label: "Un plat à partager" }, { label: "De l'argent" }], correct: 1 },
-      { prompt: "Avant quelle date faut-il s'inscrire pour un stand ?", choices: [{ label: "Le 1er juin" }, { label: "Le 14 juin" }, { label: "Le 18 juin" }], correct: 0 },
-      { prompt: "Que se passe-t-il s'il pleut ?", choices: [{ label: "La fête est annulée" }, { label: "La fête est déplacée dans la salle communale" }, { label: "La fête est reportée d'une semaine" }], correct: 1 },
-      { prompt: "Où a lieu la fête ?", answer: "parc des Tilleuls", accept: ["au parc", "le parc des tilleuls", "parc"] },
-      { prompt: "Les enfants peuvent-ils rester seuls aux jeux ?", answer: "non", accept: ["non, avec un adulte", "ils doivent être accompagnés", "accompagnés d'un adulte"] },
-    ],
-  },
-  {
-    from: "m.roche@magasin.ch",
-    subject: "Ton nouvel horaire de travail",
-    body:
-      "Bonjour Oksana,\nÀ partir de lundi prochain, ton horaire change un peu. Tu commenceras à 8 h 30 au lieu de 9 h, parce que nous recevons les livraisons plus tôt. En échange, tu pourras partir à 16 h le vendredi. N'oublie pas de porter l'uniforme et de badger en arrivant. Si tu ne peux pas venir un jour, préviens-moi la veille, et non le matin même. Enfin, nous ferons une réunion d'équipe le premier lundi du mois pour organiser les vacances d'été.\nBonne journée,\nM. Roche",
-    questions: [
-      { prompt: "À quelle heure Oksana commencera-t-elle désormais ?", choices: [{ label: "8 h" }, { label: "8 h 30" }, { label: "9 h" }], correct: 1 },
-      { prompt: "Pourquoi l'horaire change-t-il ?", choices: [{ label: "Les livraisons arrivent plus tôt" }, { label: "Le magasin ferme plus tard" }, { label: "Il y a moins de clients" }], correct: 0 },
-      { prompt: "Quel avantage Oksana reçoit-elle en échange ?", choices: [{ label: "Un jour de congé" }, { label: "Partir plus tôt le vendredi" }, { label: "Une augmentation" }], correct: 1 },
-      { prompt: "Quand faut-il prévenir en cas d'absence ?", choices: [{ label: "Le matin même" }, { label: "La veille" }, { label: "Une semaine avant" }], correct: 1 },
-      { prompt: "Que faut-il faire en arrivant au travail ?", answer: "badger", accept: ["badger", "porter l'uniforme et badger", "pointer"] },
-      { prompt: "Pourquoi y a-t-il une réunion le premier lundi du mois ?", answer: "organiser les vacances", accept: ["pour organiser les vacances d'été", "les vacances d'été", "organiser les vacances"] },
-    ],
-  },
-  {
-    from: "ecole@primaire.ch",
-    subject: "Sortie scolaire au musée",
-    body:
-      "Chers parents,\nLa classe de votre enfant visitera le Musée de la nature le jeudi 22 mars. Le départ se fera en bus devant l'école à 8 h 45 ; merci d'arriver dix minutes plus tôt. Chaque enfant doit apporter un pique-nique, une bouteille d'eau et un vêtement de pluie, car nous mangerons dehors si le temps le permet. La visite coûte 8 francs par enfant ; vous pouvez donner l'argent à l'enseignant jusqu'au 15 mars. Les enfants qui ont mal au cœur en bus peuvent s'asseoir devant.\nMerci de votre confiance,\nL'équipe enseignante",
-    questions: [
-      { prompt: "Où va la classe ?", choices: [{ label: "Au zoo" }, { label: "Au Musée de la nature" }, { label: "À la piscine" }], correct: 1 },
-      { prompt: "À quelle heure le bus part-il ?", choices: [{ label: "8 h 35" }, { label: "8 h 45" }, { label: "9 h" }], correct: 1 },
-      { prompt: "Pourquoi faut-il apporter un vêtement de pluie ?", choices: [{ label: "Parce qu'on mangera peut-être dehors" }, { label: "Parce qu'il fait froid au musée" }, { label: "Parce que le bus est ouvert" }], correct: 0 },
-      { prompt: "Combien coûte la visite par enfant ?", choices: [{ label: "5 francs" }, { label: "8 francs" }, { label: "10 francs" }], correct: 1 },
-      { prompt: "Jusqu'à quand faut-il donner l'argent ?", answer: "15 mars", accept: ["le 15 mars", "jusqu'au 15 mars"] },
-      { prompt: "Où peuvent s'asseoir les enfants malades en bus ?", answer: "devant", accept: ["devant", "à l'avant"] },
-    ],
-  },
-  {
-    from: "ines@amis.ch",
-    subject: "Week-end à la montagne ?",
-    body:
-      "Salut !\nÇa te dirait de venir à la montagne le week-end prochain ? Mes parents nous prêtent leur chalet à Verbier. On partirait vendredi après le travail et on rentrerait dimanche soir. Il faut prévoir de bonnes chaussures, parce qu'on aimerait faire une randonnée samedi, s'il ne pleut pas. Pour la nourriture, chacun apporte quelque chose : moi, je m'occupe du fromage pour la fondue, et toi, tu pourrais prendre le pain et le dessert. Réponds-moi vite, car il faut réserver les places dans la voiture de Mariam.\nBisous,\nInês",
-    questions: [
-      { prompt: "Que propose Inês ?", choices: [{ label: "Aller à la mer" }, { label: "Passer un week-end à la montagne" }, { label: "Rester en ville" }], correct: 1 },
-      { prompt: "Quand rentreraient-ils ?", choices: [{ label: "Vendredi soir" }, { label: "Samedi" }, { label: "Dimanche soir" }], correct: 2 },
-      { prompt: "Pourquoi faut-il de bonnes chaussures ?", choices: [{ label: "Pour danser" }, { label: "Pour faire une randonnée" }, { label: "Pour visiter un musée" }], correct: 1 },
-      { prompt: "Que doit apporter la personne qui reçoit le message ?", choices: [{ label: "Le fromage" }, { label: "Le pain et le dessert" }, { label: "Les boissons" }], correct: 1 },
-      { prompt: "Pourquoi faut-il répondre vite ?", answer: "réserver les places dans la voiture", accept: ["pour réserver les places", "réserver la voiture", "les places dans la voiture de mariam"] },
-    ],
-  },
-  {
-    from: "bibliotheque@ville.ch",
-    subject: "Nouvel atelier d'écriture",
-    body:
-      "Bonjour,\nNous organisons un nouvel atelier d'écriture pour les adultes, un mercredi sur deux, de 18 h à 19 h 30. Le premier atelier commencera le 5 octobre et sera animé par un écrivain de la région. Il n'est pas nécessaire d'avoir de l'expérience : le but est surtout de prendre du plaisir et de progresser ensemble. Les places sont limitées à douze personnes, donc inscrivez-vous rapidement à l'accueil ou par téléphone. L'atelier est gratuit, mais si vous êtes inscrit et que vous ne venez pas deux fois sans prévenir, votre place sera donnée à une autre personne.\nÀ bientôt,\nLa bibliothèque",
-    questions: [
-      { prompt: "À qui s'adresse cet atelier ?", choices: [{ label: "Aux enfants" }, { label: "Aux adultes" }, { label: "Aux professeurs seulement" }], correct: 1 },
-      { prompt: "À quelle fréquence a lieu l'atelier ?", choices: [{ label: "Tous les jours" }, { label: "Un mercredi sur deux" }, { label: "Le week-end" }], correct: 1 },
-      { prompt: "Faut-il de l'expérience pour participer ?", choices: [{ label: "Oui, beaucoup" }, { label: "Non, ce n'est pas nécessaire" }, { label: "Seulement pour les écrivains" }], correct: 1 },
-      { prompt: "Combien de places y a-t-il ?", choices: [{ label: "Douze" }, { label: "Vingt" }, { label: "Trente" }], correct: 0 },
-      { prompt: "Combien coûte l'atelier ?", answer: "gratuit", accept: ["c'est gratuit", "rien", "0 franc"] },
-      { prompt: "Que se passe-t-il si on manque deux fois sans prévenir ?", answer: "on perd sa place", accept: ["la place est donnée à une autre personne", "on perd sa place", "perdre sa place"] },
-    ],
-  },
-];
-
-const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] = [
-  [
-    {
-      title: "Utiliser le lave-linge partagé",
-      image: "",
-      imageLabel: "Lave-linge",
-      body: "Avant de lancer une machine, vérifiez qu'elle est vide et propre. Mettez votre linge, ajoutez la lessive dans le bac de gauche, puis choisissez le programme à 30 degrés pour les vêtements de couleur. Quand la machine est finie, sortez vite votre linge pour laisser la place aux autres et notez votre nom sur le tableau pour réserver le créneau suivant. — Fatou",
-      questions: [
-        { prompt: "Où faut-il mettre la lessive ?", choices: [{ label: "Dans le bac de gauche" }, { label: "Directement sur le linge" }, { label: "Dans une poche" }], correct: 0 },
-        { prompt: "Quel programme choisir pour les vêtements de couleur ?", choices: [{ label: "30 degrés" }, { label: "60 degrés" }, { label: "90 degrés" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Recevoir une livraison",
-      image: "",
-      imageLabel: "Livraison",
-      body: "Quand le livreur arrive, vérifiez d'abord que le nom écrit sur le colis est bien le vôtre. Si c'est possible, ouvrez le paquet devant lui pour contrôler que rien n'est cassé. Signez seulement après avoir vérifié, puis gardez le ticket, au cas où vous devriez faire une réclamation.",
-      questions: [
-        { prompt: "Que faut-il vérifier en premier ?", choices: [{ label: "Le nom sur le colis" }, { label: "Le prix du produit" }, { label: "La couleur de la boîte" }], correct: 0 },
-        { prompt: "Quand faut-il signer ?", choices: [{ label: "Avant d'ouvrir le colis" }, { label: "Après avoir vérifié le contenu" }, { label: "Le lendemain" }], correct: 1 },
-      ],
-    },
-    {
-      title: "Préparer une salle de réunion",
-      image: "",
-      imageLabel: "Réunion",
-      body: "Arrivez un quart d'heure avant le début pour installer les chaises en cercle. Vérifiez que le projecteur fonctionne et posez une bouteille d'eau devant chaque place. Si des invités viennent de l'extérieur, prévenez l'accueil, afin qu'on puisse leur ouvrir la porte à l'heure.",
-      questions: [
-        { prompt: "Comment faut-il installer les chaises ?", choices: [{ label: "En cercle" }, { label: "En une seule ligne" }, { label: "Contre le mur" }], correct: 0 },
-        { prompt: "Que faut-il faire si des invités viennent de l'extérieur ?", choices: [{ label: "Fermer la porte à clé" }, { label: "Prévenir l'accueil" }, { label: "Ne rien faire" }], correct: 1 },
-      ],
-    },
-  ],
-  [
-    {
-      title: "S'inscrire à un cours de sport",
-      image: "",
-      imageLabel: "Inscription",
-      body: "Pour vous inscrire, choisissez d'abord un cours qui correspond à votre niveau. Remplissez la fiche avec votre nom et votre numéro de téléphone, puis payez la première séance à l'accueil. Vous pouvez essayer un cours gratuitement, mais après, l'inscription pour l'année est obligatoire.",
-      questions: [
-        { prompt: "Que faut-il choisir en premier ?", choices: [{ label: "Un cours adapté à son niveau" }, { label: "Une couleur de tenue" }, { label: "Un autre club" }], correct: 0 },
-        { prompt: "Que peut-on faire avant de s'inscrire pour l'année ?", choices: [{ label: "Essayer un cours gratuitement" }, { label: "Partir sans payer" }, { label: "Changer de professeur" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Préparer un rendez-vous médical",
-      image: "",
-      imageLabel: "Rendez-vous",
-      body: "Notez la date et l'heure du rendez-vous sur votre calendrier. Le jour même, arrivez dix minutes avant et apportez votre carte d'assurance ainsi que la liste des médicaments que vous prenez. Si vous ne pouvez pas venir, appelez au moins un jour avant, sinon la consultation vous sera peut-être facturée.",
-      questions: [
-        { prompt: "Que faut-il apporter au rendez-vous ?", choices: [{ label: "Sa carte d'assurance" }, { label: "Un cadeau" }, { label: "Un livre" }], correct: 0 },
-        { prompt: "Que faut-il faire si on ne peut pas venir ?", choices: [{ label: "Appeler au moins un jour avant" }, { label: "Ne rien dire" }, { label: "Venir le lendemain" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Trier ses déchets",
-      image: "",
-      imageLabel: "Tri",
-      body: "Séparez le papier, le verre et les déchets de cuisine dans trois poubelles différentes. Rincez les bouteilles avant de les jeter et enlevez les bouchons. Les objets trop grands, comme les meubles, ne vont pas dans la poubelle : il faut les apporter à la déchèterie.",
-      questions: [
-        { prompt: "Que faut-il faire avant de jeter les bouteilles ?", choices: [{ label: "Les rincer" }, { label: "Les casser" }, { label: "Les remplir" }], correct: 0 },
-        { prompt: "Où faut-il apporter les meubles ?", choices: [{ label: "À la déchèterie" }, { label: "Dans la poubelle grise" }, { label: "Dans la rue" }], correct: 0 },
-      ],
-    },
-  ],
-  [
-    {
-      title: "Utiliser un distributeur de billets",
-      image: "",
-      imageLabel: "Distributeur",
-      body: "Introduisez votre carte dans la fente, puis tapez votre code secret sans le montrer à personne. Choisissez le montant que vous voulez retirer et attendez que la machine rende la carte avant de prendre l'argent. N'oubliez pas de reprendre le ticket si vous en avez besoin pour vos comptes.",
-      questions: [
-        { prompt: "Que faut-il faire avec le code secret ?", choices: [{ label: "Le taper sans le montrer" }, { label: "Le dire à voix haute" }, { label: "L'écrire sur la carte" }], correct: 0 },
-        { prompt: "Quand faut-il prendre l'argent ?", choices: [{ label: "Après avoir repris la carte" }, { label: "Avant de taper le code" }, { label: "Pendant le retrait de la carte" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Prendre soin d'une plante d'intérieur",
-      image: "",
-      imageLabel: "Plante",
-      body: "Placez la plante près d'une fenêtre, mais évitez le soleil direct qui brûle les feuilles. Arrosez-la quand la terre est sèche, environ une fois par semaine, avec de l'eau à température ambiante. Enlevez les feuilles mortes de temps en temps pour aider la plante à rester en bonne santé.",
-      questions: [
-        { prompt: "Pourquoi éviter le soleil direct ?", choices: [{ label: "Parce qu'il brûle les feuilles" }, { label: "Parce qu'il fait pousser trop vite" }, { label: "Parce qu'il attire les insectes" }], correct: 0 },
-        { prompt: "Quand faut-il arroser la plante ?", choices: [{ label: "Quand la terre est sèche" }, { label: "Tous les jours" }, { label: "Jamais" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Envoyer un colis à la poste",
-      image: "",
-      imageLabel: "Colis",
-      body: "Emballez bien vos objets et fermez la boîte avec du ruban adhésif solide. Écrivez lisiblement l'adresse complète du destinataire et la vôtre au dos. Au guichet, l'employé pèsera le colis pour calculer le prix ; vous pouvez payer un envoi rapide si le colis est urgent.",
-      questions: [
-        { prompt: "Où faut-il écrire son adresse ?", choices: [{ label: "Au dos du colis" }, { label: "Sur le ruban adhésif" }, { label: "À l'intérieur" }], correct: 0 },
-        { prompt: "Pourquoi l'employé pèse-t-il le colis ?", choices: [{ label: "Pour calculer le prix" }, { label: "Pour vérifier l'adresse" }, { label: "Pour l'ouvrir" }], correct: 0 },
-      ],
-    },
-  ],
-];
-
-const CE_MOYEN_ARTICLES: ArticleSeriesItem[] = [
-  {
-    title: "Bien manger sans dépenser trop",
-    sections: [
-      { heading: "Faire les courses", imageLabel: "Courses", body: "Avant d'aller au magasin, préparez une liste et ne partez pas le ventre vide, car on achète plus quand on a faim. Comparez les prix au kilo et regardez les produits placés en bas des rayons : ils sont souvent moins chers que ceux à hauteur des yeux." },
-      { heading: "Cuisiner soi-même", imageLabel: "Cuisine", body: "Les plats déjà préparés coûtent cher et contiennent beaucoup de sel. En cuisinant vous-même des légumes de saison, vous payez moins et vous mangez plus sainement. Vous pouvez aussi cuisiner en grande quantité, puis congeler des portions pour les jours où vous avez peu de temps." },
-      { heading: "Éviter le gaspillage", imageLabel: "Gaspillage", body: "Rangez les aliments les plus anciens devant, pour les utiliser en premier. Avec les restes, on peut préparer une soupe ou une omelette. Ainsi, on jette moins et on économise de l'argent chaque semaine." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet principal de l'article ?", choices: [{ label: "Bien manger sans dépenser trop" }, { label: "Voyager pas cher" }, { label: "Faire du sport à la maison" }], correct: 0 },
-      { prompt: "Pourquoi ne faut-il pas faire les courses en ayant faim ?", choices: [{ label: "Parce qu'on achète plus" }, { label: "Parce que les magasins sont fermés" }, { label: "Parce que c'est interdit" }], correct: 0 },
-      { prompt: "Où trouve-t-on souvent les produits les moins chers ?", choices: [{ label: "En bas des rayons" }, { label: "À hauteur des yeux" }, { label: "À la caisse" }], correct: 0 },
-      { prompt: "Quel est l'avantage de cuisiner soi-même ?", choices: [{ label: "C'est moins cher et plus sain" }, { label: "C'est toujours plus rapide" }, { label: "C'est plus salé" }], correct: 0 },
-      { prompt: "Que peut-on faire avec les restes ?", answer: "une soupe", accept: ["une soupe ou une omelette", "soupe", "omelette"] },
-      { prompt: "Comment ranger les aliments pour éviter le gaspillage ?", answer: "les plus anciens devant", accept: ["mettre les plus anciens devant", "les anciens devant"] },
-      { prompt: "Combien de parties principales contient l'article ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Mieux dormir chaque nuit",
-    sections: [
-      { heading: "Des horaires réguliers", imageLabel: "Sommeil", body: "Notre corps aime les habitudes. Si vous vous couchez et vous levez à peu près à la même heure chaque jour, même le week-end, vous vous endormez plus facilement. Une petite routine avant le coucher, comme lire quelques pages, prépare le cerveau au sommeil." },
-      { heading: "Une chambre calme", imageLabel: "Chambre", body: "La lumière et le bruit dérangent le sommeil. Fermez les rideaux, éteignez les écrans une demi-heure avant de dormir et gardez la chambre plutôt fraîche. Si votre voisin fait du bruit, des bouchons d'oreille peuvent aider." },
-      { heading: "Attention le soir", imageLabel: "Soir", body: "Évitez le café et les repas trop lourds le soir, parce qu'ils empêchent de bien dormir. Un peu d'activité physique dans la journée aide au contraire à trouver le sommeil, mais il vaut mieux ne pas faire de sport juste avant de se coucher." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Mieux dormir chaque nuit" }, { label: "Apprendre à cuisiner" }, { label: "Trouver un travail" }], correct: 0 },
-      { prompt: "Pourquoi faut-il des horaires réguliers ?", choices: [{ label: "Parce que le corps aime les habitudes" }, { label: "Parce que c'est obligatoire" }, { label: "Parce que c'est moins cher" }], correct: 0 },
-      { prompt: "Que faut-il faire une demi-heure avant de dormir ?", choices: [{ label: "Éteindre les écrans" }, { label: "Boire un café" }, { label: "Faire du sport" }], correct: 0 },
-      { prompt: "Comment doit être la chambre ?", choices: [{ label: "Calme et plutôt fraîche" }, { label: "Chaude et éclairée" }, { label: "Bruyante" }], correct: 0 },
-      { prompt: "Que faut-il éviter le soir ?", answer: "le café", accept: ["le café et les repas lourds", "café", "repas trop lourds"] },
-      { prompt: "L'activité physique aide-t-elle à dormir ?", answer: "oui", accept: ["oui, pendant la journée", "oui dans la journée", "oui"] },
-      { prompt: "Combien de conseils principaux donne l'article ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Se déplacer autrement en ville",
-    sections: [
-      { heading: "Les transports publics", imageLabel: "Transports", body: "Le bus et le tram permettent de se déplacer sans chercher une place de parking. Avec un abonnement, on paie souvent moins cher qu'en achetant un billet à chaque fois. De plus, on peut lire ou se reposer pendant le trajet." },
-      { heading: "Le vélo", imageLabel: "Vélo", body: "Pour les courts trajets, le vélo est rapide et bon pour la santé. Beaucoup de villes ont maintenant des pistes cyclables et des vélos à louer. Il faut penser à porter un casque et à bien attacher son vélo quand on le laisse dehors." },
-      { heading: "Marcher plus souvent", imageLabel: "Marche", body: "Quand la distance est courte, marcher ne coûte rien et fait du bien. On découvre mieux son quartier et on évite les embouteillages. Pour les personnes pressées, il suffit parfois de descendre un arrêt plus tôt." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Se déplacer autrement en ville" }, { label: "Acheter une voiture" }, { label: "Voyager à l'étranger" }], correct: 0 },
-      { prompt: "Quel est l'avantage d'un abonnement ?", choices: [{ label: "On paie souvent moins cher" }, { label: "On va plus vite qu'en avion" }, { label: "On peut conduire" }], correct: 0 },
-      { prompt: "Pourquoi le vélo est-il conseillé pour les courts trajets ?", choices: [{ label: "Il est rapide et bon pour la santé" }, { label: "Il est gratuit partout" }, { label: "Il n'a pas besoin d'être attaché" }], correct: 0 },
-      { prompt: "Que faut-il porter à vélo ?", choices: [{ label: "Un casque" }, { label: "Une cravate" }, { label: "Des lunettes de soleil" }], correct: 0 },
-      { prompt: "Que peut faire une personne pressée pour marcher un peu ?", answer: "descendre un arrêt plus tôt", accept: ["descendre plus tôt", "descendre un arrêt avant"] },
-      { prompt: "Marcher coûte-t-il de l'argent ?", answer: "non", accept: ["non, c'est gratuit", "rien", "non"] },
-      { prompt: "Combien de moyens de transport l'article présente-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Réussir un entretien d'embauche",
-    sections: [
-      { heading: "Bien se préparer", imageLabel: "Préparation", body: "Avant l'entretien, renseignez-vous sur l'entreprise et relisez l'annonce. Préparez quelques phrases pour expliquer votre expérience et pour dire pourquoi ce poste vous intéresse. Choisissez aussi une tenue propre et correcte la veille." },
-      { heading: "Le jour de l'entretien", imageLabel: "Entretien", body: "Arrivez toujours en avance et éteignez votre téléphone avant d'entrer. Dites bonjour, souriez et regardez la personne qui vous parle. Répondez calmement, même si une question est difficile ; il vaut mieux réfléchir un instant que répondre n'importe quoi." },
-      { heading: "Après l'entretien", imageLabel: "Suivi", body: "Vous pouvez envoyer un court message pour remercier la personne de vous avoir reçu. Si vous n'avez pas de réponse après une semaine ou deux, il est possible de rappeler poliment pour demander des nouvelles." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Réussir un entretien d'embauche" }, { label: "Écrire un roman" }, { label: "Organiser un voyage" }], correct: 0 },
-      { prompt: "Que faut-il faire avant l'entretien ?", choices: [{ label: "Se renseigner sur l'entreprise" }, { label: "Oublier l'annonce" }, { label: "Arriver en retard" }], correct: 0 },
-      { prompt: "Que faut-il faire de son téléphone avant d'entrer ?", choices: [{ label: "L'éteindre" }, { label: "Le laisser sonner" }, { label: "Le poser sur la table" }], correct: 0 },
-      { prompt: "Que faut-il faire si une question est difficile ?", choices: [{ label: "Réfléchir un instant avant de répondre" }, { label: "Répondre n'importe quoi" }, { label: "Partir" }], correct: 0 },
-      { prompt: "Que peut-on envoyer après l'entretien ?", answer: "un message de remerciement", accept: ["un message pour remercier", "un remerciement", "un mail de remerciement"] },
-      { prompt: "Après combien de temps peut-on rappeler poliment ?", answer: "une semaine ou deux", accept: ["une à deux semaines", "après une semaine", "une semaine"] },
-      { prompt: "Combien d'étapes l'article décrit-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Protéger la nature au quotidien",
-    sections: [
-      { heading: "Économiser l'eau", imageLabel: "Eau", body: "On peut faire attention à l'eau sans changer toute sa vie. Fermez le robinet quand vous vous brossez les dents et prenez plutôt une douche courte qu'un bain. Réparez vite les robinets qui gouttent, car ils gaspillent beaucoup d'eau en une année." },
-      { heading: "Réduire les déchets", imageLabel: "Déchets", body: "Achetez des produits avec moins d'emballage et utilisez un sac réutilisable pour les courses. Beaucoup d'objets peuvent être réparés ou donnés au lieu d'être jetés. Composter les déchets de cuisine permet aussi de nourrir les plantes." },
-      { heading: "Consommer moins d'énergie", imageLabel: "Énergie", body: "Éteignez les lumières quand vous quittez une pièce et débranchez les appareils que vous n'utilisez pas. En hiver, mettez un pull avant d'augmenter le chauffage. Ces petits gestes font baisser la facture et aident la planète." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Protéger la nature au quotidien" }, { label: "Décorer sa maison" }, { label: "Choisir un animal" }], correct: 0 },
-      { prompt: "Que faut-il faire quand on se brosse les dents ?", choices: [{ label: "Fermer le robinet" }, { label: "Laisser couler l'eau" }, { label: "Remplir un bain" }], correct: 0 },
-      { prompt: "Pourquoi réparer vite un robinet qui goutte ?", choices: [{ label: "Parce qu'il gaspille beaucoup d'eau" }, { label: "Parce que c'est joli" }, { label: "Parce que c'est obligatoire" }], correct: 0 },
-      { prompt: "Que peut-on faire au lieu de jeter des objets ?", choices: [{ label: "Les réparer ou les donner" }, { label: "Les brûler" }, { label: "Les cacher" }], correct: 0 },
-      { prompt: "Que faut-il faire en quittant une pièce ?", answer: "éteindre la lumière", accept: ["éteindre les lumières", "éteindre la lumière", "fermer la lumière"] },
-      { prompt: "Que peut-on mettre avant d'augmenter le chauffage ?", answer: "un pull", accept: ["un pull", "un vêtement chaud"] },
-      { prompt: "Combien de conseils principaux l'article donne-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Utiliser Internet en toute sécurité",
-    sections: [
-      { heading: "Des mots de passe solides", imageLabel: "Mot de passe", body: "Un bon mot de passe est long et différent pour chaque site important. Évitez votre date de naissance ou le mot « motdepasse », trop faciles à deviner. Si c'est difficile à retenir, un carnet gardé à la maison ou une application spéciale peut vous aider." },
-      { heading: "Se méfier des messages", imageLabel: "Messages", body: "Certains courriels imitent votre banque ou un magasin pour voler vos informations. Ne cliquez pas sur un lien si le message vous semble bizarre ou vous demande vite de l'argent. En cas de doute, contactez directement l'entreprise par un autre moyen." },
-      { heading: "Protéger ses données", imageLabel: "Données", body: "Ne partagez pas votre adresse ou vos photos avec des inconnus. Réfléchissez avant de publier quelque chose, car c'est souvent difficile à effacer ensuite. Vérifiez aussi qui peut voir ce que vous mettez en ligne." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Utiliser Internet en toute sécurité" }, { label: "Réparer un ordinateur" }, { label: "Créer un jeu vidéo" }], correct: 0 },
-      { prompt: "Comment doit être un bon mot de passe ?", choices: [{ label: "Long et différent pour chaque site" }, { label: "Court et toujours le même" }, { label: "Égal à sa date de naissance" }], correct: 0 },
-      { prompt: "Que font certains courriels dangereux ?", choices: [{ label: "Ils imitent votre banque pour voler vos informations" }, { label: "Ils envoient des cadeaux" }, { label: "Ils réparent l'ordinateur" }], correct: 0 },
-      { prompt: "Que faut-il faire en cas de doute sur un message ?", choices: [{ label: "Contacter l'entreprise par un autre moyen" }, { label: "Cliquer tout de suite" }, { label: "Envoyer de l'argent" }], correct: 0 },
-      { prompt: "Que faut-il faire avant de publier quelque chose ?", answer: "réfléchir", accept: ["réfléchir avant de publier", "bien réfléchir", "réfléchir"] },
-      { prompt: "Avec qui ne faut-il pas partager ses données ?", answer: "des inconnus", accept: ["avec des inconnus", "les inconnus", "inconnus"] },
-      { prompt: "Combien de conseils principaux l'article présente-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-];
 
 // --------------------------------------------------------------------------
 // Contenu B1 authoré pour le niveau AVANCÉ (CE-3) : textes plus longs et plus
@@ -911,19 +627,27 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const orientationPool = level === "base" ? null : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
   const orientationTextBase = level === "base" ? pickFromPool(CE_ORIENTATION_BASE, `${level}-${stamp}-orientation`) : null;
   const orientation = orientationPool ? pickFromPool(orientationPool, `${level}-${stamp}-orientation`) : null;
-  const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
-  const articlePool = level === "base" ? ARTICLE_SERIES : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
-  const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
-  const emailLegacy = level !== "base"
-    ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
+  const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "avance" ? CE_AVANCE_INSTRUCTIONS : null;
+  const emailBase =
+    level === "base"
+      ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`)
+      : level === "moyen"
+        ? pickFromPool(CE_MESSAGES_MOYEN, `${level}-${stamp}-email`)
+        : null;
+  const emailLegacy = level === "avance"
+    ? pickFromPool(CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
     : null;
-  const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
-  const article = pickFromPool(articlePool, `${level}-${stamp}-article`);
+  const instructionMoyen = level === "moyen" ? pickFromPool(CE_INSTRUCTIONS_MOYEN, `${level}-${stamp}-instructions`) : null;
+  const instructions = instructionPool ? pickFromPool(instructionPool, `${level}-${stamp}-instructions`) : null;
+  const articleMoyen = level === "moyen" ? pickFromPool(CE_ARTICLES_MOYEN, `${level}-${stamp}-article`) : null;
+  const articleLegacy = level !== "moyen"
+    ? pickFromPool(level === "base" ? ARTICLE_SERIES : CE_AVANCE_ARTICLES, `${level}-${stamp}-article`)
+    : null;
 
   const orientationPart: CEPart = orientationTextBase
     ? {
         id: "orientation",
-        title: "Lire pour s'orienter",
+        title: ceOrientationTitle(level),
         points: 6,
         layout: "email",
         meta: { from: orientationTextBase.from, subject: orientationTextBase.subject },
@@ -933,7 +657,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       }
     : {
         id: "orientation",
-        title: "Lire pour s'orienter",
+        title: ceOrientationTitle(level),
         points: 6,
         layout: "orientation",
         task: {
@@ -953,7 +677,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
     orientationPart,
     {
       id: "email",
-      title: "Lire un message",
+      title: ceMessageTitle(level),
       points: 6,
       layout: "email",
       meta: emailBase
@@ -962,7 +686,12 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       body: emailBase ? emailBase.body : emailLegacy!.body,
       image: "",
       questions: emailBase
-        ? buildCeMessageQuestions(emailBase.pool, 6, `${level}-${stamp}-email`)
+        ? buildCeMessageQuestions(
+            emailBase.pool,
+            6,
+            `${level}-${stamp}-email`,
+            level === "moyen" ? "full" : "stem",
+          )
         : emailLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
     },
     {
@@ -970,24 +699,42 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       title: "Lire des instructions",
       points: 6,
       layout: "instructions",
-      cards: instructions.map((card) => ({
-        ...card,
-        body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
-        questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
-      })),
+      cards: instructionMoyen
+        ? (() => {
+            const perCard = buildCeInstructionQuestions(instructionMoyen.cards, `${level}-${stamp}-instructions`);
+            return instructionMoyen.cards.map((card, cardIndex) => ({
+              title: card.title,
+              body: card.body,
+              image: "",
+              imageLabel: card.imageLabel,
+              questions: perCard[cardIndex] ?? [],
+            }));
+          })()
+        : instructions!.map((card) => ({
+            ...card,
+            body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
+            questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+          })),
     },
     {
       id: "information",
       title: "Lire des informations",
       points: 7,
       layout: "article",
-      article: {
-        title: article.title,
-        sections: level === "base"
-          ? article.sections
-          : article.sections.map((section) => ({ ...section, body: `${section.body} Cette information est importante pour comprendre le texte de niveau ${levelName}.` })),
-      },
-      questions: article.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+      article: articleMoyen
+        ? { title: articleMoyen.title, sections: articleMoyen.sections }
+        : {
+            title: articleLegacy!.title,
+            sections: level === "base"
+              ? articleLegacy!.sections
+              : articleLegacy!.sections.map((section) => ({
+                  ...section,
+                  body: `${section.body} Cette information est importante pour comprendre le texte de niveau ${levelName}.`,
+                })),
+          },
+      questions: articleMoyen
+        ? buildCeMessageQuestions(articleMoyen.pool, 7, `${level}-${stamp}-article`, "full")
+        : articleLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
     },
   ];
 }
@@ -1068,8 +815,8 @@ function IntroPage({ level, onStart, placement = false }: { level: CELevel; onSt
     { before: "Score maximum : ", strong: "25 points", text: "" },
   ];
   const introRows: IntroRow[] = [
-    { num: "1", title: "Lire pour s'orienter", points: "6 pts" },
-    { num: "2", title: "Lire un message", points: "6 pts" },
+    { num: "1", title: ceOrientationTitle(level), points: "6 pts" },
+    { num: "2", title: ceMessageTitle(level), points: "6 pts" },
     { num: "3", title: "Lire des instructions", points: "6 pts" },
     { num: "4", title: "Lire des informations", points: "7 pts" },
   ];

@@ -263,25 +263,6 @@ function resolveCeCoIndexedSlug(slug: string): string | null {
   return resolveLectureSlug(slug);
 }
 
-function isCeCoLikelyIllustrableObject(label: string): boolean {
-  const raw = label.trim();
-  const tokens = tokenize(raw);
-  const stripped = stripDeterminers(tokens);
-  const core = stripped.join(" ");
-
-  if (WEEKDAYS.has(core) || GEOGRAPHY.has(core)) return false;
-  if (stripped.some((tok) => WEEKDAYS.has(tok) || GEOGRAPHY.has(tok))) return false;
-  if (stripped.length === 1 && PROPER_NAME_HOMOGRAPHS.has(stripped[0]!) && tokens.length === stripped.length) {
-    return false;
-  }
-
-  if (tokens.length !== stripped.length) return resolveCeCoWordImage(label) !== null;
-  if (stripped.length >= 2) return resolveCeCoWordImage(label) !== null;
-  if (stripped.length === 1 && CONCRETE_SINGLE.has(stripped[0]!)) return resolveCeCoWordImage(label) !== null;
-
-  return false;
-}
-
 /**
  * Resolve a CE/CO object label: scènes manga / horloges, puis pool lecture — pas vocabulaire.
  */
@@ -314,7 +295,7 @@ export function isCeCoImageableLabel(label: string | undefined | null): boolean 
     return !!slug && !!resolveCeCoIndexedSlug(slug);
   }
 
-  return isCeCoLikelyIllustrableObject(label);
+  return !!resolveCeCoWordImage(label);
 }
 
 /**

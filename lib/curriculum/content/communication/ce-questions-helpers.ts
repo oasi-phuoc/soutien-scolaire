@@ -1,7 +1,63 @@
-import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
-import { pickCeCoQuestionFormat } from "./ce-co-question-formats";
+import { pickCeCoQuestionFormat, type CeCoFormatType } from "./ce-co-question-formats";
 import { hasBlockedImageChoices, isExcludedCeCoQuestion } from "./ce-co-question-filters";
+
+/** DELF instructions : 2 formats différents par texte (jamais 2× le même format sur un texte). */
+const INSTRUCTION_TEXT_FORMAT_PAIRS: [CeCoFormatType, CeCoFormatType][] = [
+  ["fill", "image"],
+  ["image", "text"],
+  ["text", "fill"],
+];
+
+function fallbackInstructionFormat(
+  preferred: CeCoFormatType,
+  sibling: CeCoFormatType,
+  imageable: boolean,
+): CeCoFormatType {
+  if (preferred === "image" && !imageable) {
+    const opts: CeCoFormatType[] = ["text", "fill"];
+    return opts.find((f) => f !== sibling) ?? "text";
+  }
+  return preferred;
+}
+
+/**
+ * Construit les questions « Lire des instructions » : 3 textes × 2 questions.
+ * Chaque texte utilise une paire de formats distincts (saisie / QCM image / QCM texte).
+ */
+export function buildCeInstructionQuestions(
+  cards: { pool: CEMultiQuestion[] }[],
+  seed: string,
+): CEQuestionTask[][] {
+  return cards.map((card, cardIndex) => {
+    const shuffled = shuffleWithSeed(card.pool, `${seed}-instr-card-${cardIndex}`);
+    const selected = shuffled.slice(0, Math.min(2, card.pool.length));
+    const pair = INSTRUCTION_TEXT_FORMAT_PAIRS[cardIndex % INSTRUCTION_TEXT_FORMAT_PAIRS.length]!;
+
+    const resolved: CeCoFormatType[] = [];
+    for (let qi = 0; qi < selected.length; qi++) {
+      const imageable = supportsImageFormat(selected[qi]!.imageChoices);
+      const sibling = qi === 0 ? pair[1]! : resolved[0]!;
+      resolved.push(fallbackInstructionFormat(pair[qi]!, sibling, imageable));
+    }
+
+    return selected.map((q, qi) => {
+      const format = resolved[qi]!;
+      if (format === "fill") {
+        return {
+          kind: "fill" as const,
+          prompt: q.fillQ,
+          fillMode: "full" as const,
+          answer: q.fillAnswer,
+          accept: q.fillAccept,
+        };
+      }
+      return multiToTask(q, format, "full");
+    });
+  });
+}
+
 
 export type CEFormatType = "text" | "image" | "fill";
 export type CEFillMode = "stem" | "full";
@@ -52,11 +108,8 @@ export type CEMessageItem = {
 };
 
 export function ceImgChoice(label: string): CEImageChoice {
-  if (isCeCoImageableLabel(label)) {
-    const dedicated = resolveCeCoWordImage(label);
-    if (dedicated) return { label, image: dedicated };
-  }
-  return { label, image: "" };
+  const image = resolveCeCoWordImage(label) ?? "";
+  return { label, image };
 }
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
