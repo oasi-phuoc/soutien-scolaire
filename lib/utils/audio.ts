@@ -1,5 +1,7 @@
 import { speak } from "@/lib/utils/speech";
 
+import { LECTURE_IMAGE_INDEX } from "@/lib/curriculum/content/communication/word-image-index";
+
 export function getWordAssetSlug(word: string): string {
   return word
     .normalize("NFD")
@@ -15,8 +17,8 @@ export function getLectureWordImagePath(word: string): string {
   return `/assets/words/lecture/${getWordAssetSlug(word)}.webp`;
 }
 
-export function hasLectureWordImage(_word: string): boolean {
-  return true;
+export function hasLectureWordImage(word: string): boolean {
+  return !!LECTURE_IMAGE_INDEX[getWordAssetSlug(word)];
 }
 
 type Voice = "f" | "m";
