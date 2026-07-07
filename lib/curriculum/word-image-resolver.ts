@@ -262,17 +262,21 @@ function resolveVocabSlug(slug: string): string | null {
   return null;
 }
 
-/** CE/CO : expression/horloge, puis lecture, puis vocabulaire en dernier recours. */
+/** CE/CO : alias scène (prioritaire), expression/horloge, lecture, vocabulaire. */
 function resolveCeCoIndexedSlug(slug: string): string | null {
-  const direct = WORD_IMAGE_INDEX[slug];
-  if (direct && !isVocabImagePath(direct)) return direct;
   const alias = ALIASES[slug];
   if (alias) {
     const aliased = WORD_IMAGE_INDEX[alias];
     if (aliased && !isVocabImagePath(aliased)) return aliased;
   }
+  const direct = WORD_IMAGE_INDEX[slug];
+  if (direct && !isVocabImagePath(direct)) return direct;
   const lecture = resolveLectureSlug(slug);
   if (lecture) return lecture;
+  if (alias) {
+    const aliased = WORD_IMAGE_INDEX[alias];
+    if (aliased) return aliased;
+  }
   return resolveVocabSlug(slug);
 }
 
