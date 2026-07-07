@@ -7511,7 +7511,7 @@ export function GenericModuleContent({
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || isInEvalPhase || showEvalScore;
   const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
 
-  // Exercices chronométrés (ex. A2.1/A2.2 ex. 2 et 5) : 8 questions — le tableau doit suivre.
+  // Exercices chronométrés (8 questions) : A2.1/A2.2 ex. 2 et 5, A3.1/A3.3 ex. 2 et 4.
   useEffect(() => {
     if (currentStep?.kind !== "arithmetic_group") return;
     const cfg = arithOverrideConfigs[stepIdx] ?? currentStep.config;
