@@ -894,6 +894,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s";
   const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
   const isPronounceStep = step.key === "pronounce";
+  const isPronounceComplexStep = step.key === "pronounce-complex";
   const isEvalStep = step.key === "eval";
   const isWordEvalL6L8 = isWordEvalStep && (data.type === "monosyllable" || data.type === "multisyllable");
   // Steps rendered with the mic/word/audio grids (ComplexSyllableGrid / WordPronounceGrid):
@@ -909,11 +910,14 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     (data.type === "multisyllable" && !isWordEvalL6L8) ||
     (data.type === "monosyllable" && !isWordEvalL6L8);
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
+  const showRefreshButton =
+    showExerciseButtons || isPronounceStep || isPronounceComplexStep || isPronounceGridStep;
 
   function exerciseReset() {
     if (isGridStep || isComplexGridStep) gridRef.current?.reset();
     else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
+    else if (isPronounceComplexStep) setResetKey((k) => k + 1);
     else if (isPronounceStep) pronounceRef.current?.reset();
     else if (isPronounceGridStep) pronounceGridRef.current?.reset();
   }
@@ -1411,9 +1415,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               Retour
             </button>
 
-            {(showExerciseButtons || isPronounceStep || isPronounceGridStep || isWordEvalL6L8) && (
+            {(showExerciseButtons || isPronounceStep || isPronounceComplexStep || isPronounceGridStep || isWordEvalL6L8) && (
               <div className="flex items-center gap-2">
-                {isPronounceGridStep && (
+                {showRefreshButton && (
                   <button
                     type="button"
                     aria-label="Recommencer"
