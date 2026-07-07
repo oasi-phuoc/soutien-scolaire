@@ -49,7 +49,7 @@ function mp3Stems(level) {
 }
 
 const EXPECTED_MOYEN = 10;
-const EXPECTED_AVANCE = 12;
+const EXPECTED_AVANCE = 15;
 const moyenT = JSON.parse(fs.readFileSync("lib/curriculum/content/communication/co-transcripts-scolaire-moyen.json", "utf8"));
 const avanceT = JSON.parse(fs.readFileSync("lib/curriculum/content/communication/co-transcripts-scolaire-avance.json", "utf8"));
 
@@ -117,7 +117,7 @@ console.log(`Problèmes: ${avance.issues.length}`);
 if (avance.issues.length) console.log(avance.issues.slice(0, 30).join("\n"));
 if (avance.issues.length > 30) console.log(`... et ${avance.issues.length - 30} autres`);
 
-console.log("\nFormats avancé (12 positions, critère B1):");
+console.log("\nFormats avancé (15 positions, critère B1):");
 console.log("  alternance QCM texte / saisie (pas de QCM image)");
 
 process.exit(moyen.issues.length + avance.issues.length > 0 ? 1 : 0);

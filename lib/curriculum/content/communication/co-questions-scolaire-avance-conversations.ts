@@ -147,6 +147,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_1 = buildPool("avance", "scolaire-conv
     fill: "concerts",
     fillA: ["concert", "concerts", "instrument", "salle", "pas habituel", "prof", "genial"],
   },
+  {
+    id: "sac1-q13",
+    textQ: "Sur quelle fréquence émet la radio du lycée ?",
+    text: ["103,2 FM", "93,2 FM", "113,2 FM"],
+    textC: 0,
+    img: ["103,2", "93,2", "113,2"],
+    imgC: 0,
+    fillQ: "Les ondes de la radio, c'est 103,2 ___.",
+    fill: "FM",
+    fillA: ["fm", "FM"],
+  },
+  {
+    id: "sac1-q14",
+    textQ: "De quelle façon Antony peut-il participer à la radio ?",
+    text: ["Comme chanteur invité ou animateur", "Comme directeur", "Comme professeur de musique"],
+    textC: 0,
+    img: ["Chanteur", "Directeur", "Professeur"],
+    imgC: 0,
+    fillQ: "Tu peux participer en tant que chanteur invité ou animer une ___.",
+    fill: "émission",
+    fillA: ["emission", "émission"],
+  },
+  {
+    id: "sac1-q15",
+    textQ: "Comment Antony se sent-il au début du dialogue ?",
+    text: ["Un peu perdu", "Très confiant", "En colère"],
+    textC: 0,
+    img: ["Perdu", "Confiant", "Colère"],
+    imgC: 0,
+    fillQ: "Antony a l'air un peu ___.",
+    fill: "perdu",
+    fillA: ["perdu"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_2 = buildPool("avance", "scolaire-conversation-2", [
@@ -282,6 +315,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_2 = buildPool("avance", "scolaire-conv
     fill: "espagnol",
     fillA: ["espagnol"],
   },
+  {
+    id: "sac2-q13",
+    textQ: "Combien de temps après les autres la mère rejoindra-t-elle la famille ?",
+    text: ["Deux mois", "Un mois", "Six mois"],
+    textC: 0,
+    img: ["2 mois", "1 mois", "6 mois"],
+    imgC: 0,
+    fillQ: "Sa mère les rejoindra dans deux ___.",
+    fill: "mois",
+    fillA: ["mois"],
+  },
+  {
+    id: "sac2-q14",
+    textQ: "Quel examen Ophélie pourra passer au Mexique ?",
+    text: ["Le baccalauréat", "Le brevet", "Un examen d'espagnol"],
+    textC: 0,
+    img: ["Bac", "Brevet", "Espagnol"],
+    imgC: 0,
+    fillQ: "Elle pourra même passer son ___ là-bas.",
+    fill: "baccalauréat",
+    fillA: ["bac", "baccalaureat", "baccalauréat"],
+  },
+  {
+    id: "sac2-q15",
+    textQ: "Que souhaiterait Laura faire, d'après elle ?",
+    text: ["Partir à l'autre bout du monde", "Rester en France", "Apprendre l'espagnol"],
+    textC: 0,
+    img: ["Voyage lointain", "Rester", "Espagnol"],
+    imgC: 0,
+    fillQ: "Moi j'aimerais bien partir comme ça à l'autre bout du ___.",
+    fill: "monde",
+    fillA: ["monde"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_3 = buildPool("avance", "scolaire-conversation-3", [
@@ -417,6 +483,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_3 = buildPool("avance", "scolaire-conv
     fill: "invitation",
     fillA: ["invitation", "inviter"],
   },
+  {
+    id: "sac3-q13",
+    textQ: "Pendant combien de jours les parents laissent-ils les enfants seuls ?",
+    text: ["Deux jours", "Trois jours", "Une semaine"],
+    textC: 0,
+    img: ["2 jours", "3 jours", "1 semaine"],
+    imgC: 0,
+    fillQ: "Ils nous laissent tout seuls pendant deux ___.",
+    fill: "jours",
+    fillA: ["jour", "jours"],
+  },
+  {
+    id: "sac3-q14",
+    textQ: "Quel examen le frère d'Ingrid doit-il passer ?",
+    text: ["L'examen de fin d'année", "Un examen de guitare", "Le brevet"],
+    textC: 0,
+    img: ["Fin d'année", "Guitare", "Brevet"],
+    imgC: 0,
+    fillQ: "Il doit passer son examen de fin d'___.",
+    fill: "année",
+    fillA: ["annee", "année"],
+  },
+  {
+    id: "sac3-q15",
+    textQ: "Quelle activité Ingrid aimerait-elle organiser ?",
+    text: ["Un barbecue", "Un voyage", "Un cours de guitare"],
+    textC: 0,
+    img: ["Barbecue", "Voyage", "Guitare"],
+    imgC: 0,
+    fillQ: "Elle aimerait organiser un ___.",
+    fill: "barbecue",
+    fillA: ["barbecue", "bbq"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_4 = buildPool("avance", "scolaire-conversation-4", [
@@ -552,6 +651,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_4 = buildPool("avance", "scolaire-conv
     fill: "rôles",
     fillA: ["roles", "rôles"],
   },
+  {
+    id: "sac4-q13",
+    textQ: "Quelle langue manquait dans l'ancienne école de Noémie ?",
+    text: ["L'allemand", "L'anglais", "L'espagnol"],
+    textC: 0,
+    img: ["Allemand", "Anglais", "Espagnol"],
+    imgC: 0,
+    fillQ: "Il n'y avait pas ___ .",
+    fill: "allemand",
+    fillA: ["allemand", "l'allemand"],
+  },
+  {
+    id: "sac4-q14",
+    textQ: "Quel professeur Noémie appréciait-elle dans son ancienne école ?",
+    text: ["Le professeur d'histoire", "Le professeur de maths", "Le professeur de sport"],
+    textC: 0,
+    img: ["Histoire", "Maths", "Sport"],
+    imgC: 0,
+    fillQ: "Si un seul, le prof d'___.",
+    fill: "histoire",
+    fillA: ["histoire"],
+  },
+  {
+    id: "sac4-q15",
+    textQ: "Quand la pièce de théâtre sera-t-elle jouée ?",
+    text: ["À la fin de l'année", "En début d'année", "Pendant les vacances"],
+    textC: 0,
+    img: ["Fin d'année", "Début", "Vacances"],
+    imgC: 0,
+    fillQ: "À la fin de l'année, on va jouer notre pièce dans un ___.",
+    fill: "festival",
+    fillA: ["festival"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_5 = buildPool("avance", "scolaire-conversation-5", [
@@ -687,6 +819,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_5 = buildPool("avance", "scolaire-conv
     fill: "dessin",
     fillA: ["dessin"],
   },
+  {
+    id: "sac5-q13",
+    textQ: "Quel tableau célèbre Sammy associe-t-il à Dali ?",
+    text: ["Les montres molles", "La Joconde", "Le tableau noir"],
+    textC: 0,
+    img: ["Montres molles", "Joconde", "Tableau"],
+    imgC: 0,
+    fillQ: "Celui qui a peint les montres ___ !",
+    fill: "molles",
+    fillA: ["molles", "molle"],
+  },
+  {
+    id: "sac5-q14",
+    textQ: "Quelle impression donnent les tableaux impressionnistes ?",
+    text: ["Une impression de mouvement", "Une impression de calme", "Une impression de tristesse"],
+    textC: 0,
+    img: ["Mouvement", "Calme", "Tristesse"],
+    imgC: 0,
+    fillQ: "Ces tableaux donnaient une impression de ___.",
+    fill: "mouvement",
+    fillA: ["mouvement"],
+  },
+  {
+    id: "sac5-q15",
+    textQ: "De quelle nationalité est Picasso, d'après Sammy ?",
+    text: ["Espagnol", "Français", "Italien"],
+    textC: 0,
+    img: ["Espagnol", "Français", "Italien"],
+    imgC: 0,
+    fillQ: "Picasso est ___ et il a vécu à Paris.",
+    fill: "espagnol",
+    fillA: ["espagnol", "espagnole"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_6 = buildPool("avance", "scolaire-conversation-6", [
@@ -822,6 +987,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_6 = buildPool("avance", "scolaire-conv
     fill: "notes",
     fillA: ["notes"],
   },
+  {
+    id: "sac6-q13",
+    textQ: "Quel autre thème faut-il réviser avec l'Égypte antique ?",
+    text: ["L'antiquité grecque", "Le Moyen Âge", "La Révolution"],
+    textC: 0,
+    img: ["Grèce", "Moyen Âge", "Révolution"],
+    imgC: 0,
+    fillQ: "Il faut réviser aussi l'antiquité ___.",
+    fill: "grecque",
+    fillA: ["grecque", "greque"],
+  },
+  {
+    id: "sac6-q14",
+    textQ: "Quel film Maxime propose-t-il pour occuper la petite sœur ?",
+    text: ["La Momie", "Le Roi Lion", "Toy Story"],
+    textC: 0,
+    img: ["Momie", "Roi Lion", "Toy Story"],
+    imgC: 0,
+    fillQ: "On peut la mettre devant le film « La ___ ».",
+    fill: "momie",
+    fillA: ["momie", "Momie"],
+  },
+  {
+    id: "sac6-q15",
+    textQ: "Où faut-il aller chercher la petite sœur de Lilian ?",
+    text: ["À l'école", "Au cinéma", "Au parc"],
+    textC: 0,
+    img: ["École", "Cinéma", "Parc"],
+    imgC: 0,
+    fillQ: "Il faut d'abord aller chercher ma sœur à l'___.",
+    fill: "école",
+    fillA: ["ecole", "école"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_7 = buildPool("avance", "scolaire-conversation-7", [
@@ -957,6 +1155,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_7 = buildPool("avance", "scolaire-conv
     fill: "temps",
     fillA: ["temps"],
   },
+  {
+    id: "sac7-q13",
+    textQ: "Combien de rivières coulent dans le quartier du Grund ?",
+    text: ["Deux", "Une", "Trois"],
+    textC: 0,
+    img: ["2", "1", "3"],
+    imgC: 0,
+    fillQ: "Dans le Grund, il coule deux ___.",
+    fill: "rivières",
+    fillA: ["rivieres", "rivières", "riviere"],
+  },
+  {
+    id: "sac7-q14",
+    textQ: "Quand le palais grand-ducal est-il surtout ouvert ?",
+    text: ["En été", "En hiver", "Toute l'année"],
+    textC: 0,
+    img: ["Été", "Hiver", "Année"],
+    imgC: 0,
+    fillQ: "Il n'est pas souvent ouvert, seulement l'___.",
+    fill: "été",
+    fillA: ["ete", "été"],
+  },
+  {
+    id: "sac7-q15",
+    textQ: "Combien de temps Faustine et Maxine restent-elles sur place ?",
+    text: ["Un jour et demi", "Trois jours", "Une semaine"],
+    textC: 0,
+    img: ["1,5 jour", "3 jours", "1 semaine"],
+    imgC: 0,
+    fillQ: "Nous ne restons qu'un jour et ___.",
+    fill: "demi",
+    fillA: ["demi", "demie"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_8 = buildPool("avance", "scolaire-conversation-8", [
@@ -1092,6 +1323,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_8 = buildPool("avance", "scolaire-conv
     fill: "6",
     fillA: ["6", "six"],
   },
+  {
+    id: "sac8-q13",
+    textQ: "Combien coûte le jus de fruits commandé par Nicolas ?",
+    text: ["3,50 €", "3 €", "4,50 €"],
+    textC: 0,
+    img: ["3,50", "3", "4,50"],
+    imgC: 0,
+    fillQ: "Un jus de fruits à ___ €.",
+    fill: "3,50",
+    fillA: ["3,50", "3.50", "3,5"],
+  },
+  {
+    id: "sac8-q14",
+    textQ: "Combien Aurore doit-elle payer au total ?",
+    text: ["12,5 €", "15 €", "10 €"],
+    textC: 0,
+    img: ["12,5", "15", "10"],
+    imgC: 0,
+    fillQ: "Aurore ___ € aussi.",
+    fill: "12,5",
+    fillA: ["12,5", "12.5", "12,50"],
+  },
+  {
+    id: "sac8-q15",
+    textQ: "Combien coûte la salade verte de Ludivine ?",
+    text: ["6 €", "5 €", "7 €"],
+    textC: 0,
+    img: ["6", "5", "7"],
+    imgC: 0,
+    fillQ: "Une salade verte à ___ €.",
+    fill: "6",
+    fillA: ["6", "six"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_9 = buildPool("avance", "scolaire-conversation-9", [
@@ -1227,6 +1491,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_9 = buildPool("avance", "scolaire-conv
     fill: "punk",
     fillA: ["punk"],
   },
+  {
+    id: "sac9-q13",
+    textQ: "Dans combien de minutes commence le concert de reggae ?",
+    text: ["Dans 10 minutes", "Dans 30 minutes", "Dans une heure"],
+    textC: 0,
+    img: ["10 min", "30 min", "1 h"],
+    imgC: 0,
+    fillQ: "Un concert génial commence dans ___ minutes.",
+    fill: "10",
+    fillA: ["10", "dix"],
+  },
+  {
+    id: "sac9-q14",
+    textQ: "Où se déroule le festival ?",
+    text: ["Au bord du lac", "En ville", "Dans un gymnase"],
+    textC: 0,
+    img: ["Lac", "Ville", "Gymnase"],
+    imgC: 0,
+    fillQ: "J'ai adoré le lieu, au bord du ___.",
+    fill: "lac",
+    fillA: ["lac"],
+  },
+  {
+    id: "sac9-q15",
+    textQ: "Quelle chanson électro Sophie a-t-elle trouvée sympa ?",
+    text: ["« Laisse parler ton cœur »", "« La mouche voleuse »", "« Crache ton destin »"],
+    textC: 0,
+    img: ["Cœur", "Mouche", "Destin"],
+    imgC: 0,
+    fillQ: "Tu as aimé « Laisse parler ton ___ » ?",
+    fill: "cœur",
+    fillA: ["coeur", "cœur"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_10 = buildPool("avance", "scolaire-conversation-10", [
@@ -1362,6 +1659,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_10 = buildPool("avance", "scolaire-con
     fill: "camarades",
     fillA: ["camarades", "copains", "amis"],
   },
+  {
+    id: "sac10-q13",
+    textQ: "Quelle note Loïc a-t-il obtenue en anglais ?",
+    text: ["16 sur 20", "9 sur 20", "12 sur 20"],
+    textC: 0,
+    img: ["16", "9", "12"],
+    imgC: 0,
+    fillQ: "J'ai eu ___ en anglais.",
+    fill: "16",
+    fillA: ["16", "seize"],
+  },
+  {
+    id: "sac10-q14",
+    textQ: "Que suggère la mère pour améliorer les notes de Loïc en sciences ?",
+    text: ["Réviser avec Mathias", "Changer de classe", "Arrêter la physique"],
+    textC: 0,
+    img: ["Réviser", "Changer", "Arrêter"],
+    imgC: 0,
+    fillQ: "Invite-le à la maison, comme ça, vous réviserez ___.",
+    fill: "ensemble",
+    fillA: ["ensemble"],
+  },
+  {
+    id: "sac10-q15",
+    textQ: "D'après Loïc, pourquoi presque personne n'a la moyenne en physique ?",
+    text: ["Le professeur est très sévère", "Les cours sont trop faciles", "Personne n'étudie"],
+    textC: 0,
+    img: ["Sévère", "Facile", "Pas d'étude"],
+    imgC: 0,
+    fillQ: "Le prof est super ___.",
+    fill: "sévère",
+    fillA: ["severe", "sévère"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_11 = buildPool("avance", "scolaire-conversation-11", [
@@ -1497,6 +1827,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_11 = buildPool("avance", "scolaire-con
     fill: "longtemps",
     fillA: ["longtemps", "long"],
   },
+  {
+    id: "sac11-q13",
+    textQ: "Combien de jours a duré le stage d'escalade ?",
+    text: ["4 jours", "6 jours", "2 jours"],
+    textC: 0,
+    img: ["4", "6", "2"],
+    imgC: 0,
+    fillQ: "Ce que tu as fait pendant ces ___ jours.",
+    fill: "4",
+    fillA: ["4", "quatre"],
+  },
+  {
+    id: "sac11-q14",
+    textQ: "Combien de temps de marche avant d'arriver sur les lieux d'escalade ?",
+    text: ["Une demi-heure", "Une heure", "Deux heures"],
+    textC: 0,
+    img: ["30 min", "1 h", "2 h"],
+    imgC: 0,
+    fillQ: "Il y avait toujours une demi-heure de ___.",
+    fill: "marche",
+    fillA: ["marche"],
+  },
+  {
+    id: "sac11-q15",
+    textQ: "Comment était l'eau de la rivière après l'escalade ?",
+    text: ["Glacée", "Tiède", "Chaude"],
+    textC: 0,
+    img: ["Glacée", "Tiède", "Chaude"],
+    imgC: 0,
+    fillQ: "L'eau était ___ mais c'était rafraîchissant.",
+    fill: "glacée",
+    fillA: ["glacee", "glacée"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_12 = buildPool("avance", "scolaire-conversation-12", [
@@ -1632,6 +1995,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_12 = buildPool("avance", "scolaire-con
     fill: "volontaire",
     fillA: ["volontaire", "ami", "copain"],
   },
+  {
+    id: "sac12-q13",
+    textQ: "Comment Margot conseille-t-elle d'envoyer les invitations ?",
+    text: ["Par message", "Par courrier postal", "Par téléphone uniquement"],
+    textC: 0,
+    img: ["Message", "Courrier", "Téléphone"],
+    imgC: 0,
+    fillQ: "Envoie un ___ à tous.",
+    fill: "message",
+    fillA: ["message", "sms"],
+  },
+  {
+    id: "sac12-q14",
+    textQ: "Quelle solution Margot propose-t-elle pour le repas ?",
+    text: ["Un restaurant-traiteur", "Cuisiner seul", "Demander à sa mère"],
+    textC: 0,
+    img: ["Traiteur", "Cuisiner", "Mère"],
+    imgC: 0,
+    fillQ: "Tu fais appel à un restaurant-___.",
+    fill: "traiteur",
+    fillA: ["traiteur"],
+  },
+  {
+    id: "sac12-q15",
+    textQ: "Que va préparer Margot pour la soirée ?",
+    text: ["Une compilation musicale", "Les invitations", "Le barbecue"],
+    textC: 0,
+    img: ["Musique", "Invitations", "Barbecue"],
+    imgC: 0,
+    fillQ: "Je te prépare une super compilation avec ta musique et la ___.",
+    fill: "mienne",
+    fillA: ["mienne"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_13 = buildPool("avance", "scolaire-conversation-13", [
@@ -1767,6 +2163,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_13 = buildPool("avance", "scolaire-con
     fill: "gourmande",
     fillA: ["gourmande", "gourmand"],
   },
+  {
+    id: "sac13-q13",
+    textQ: "Quel repas Erwan propose-t-il à Louise ce midi ?",
+    text: ["Une galette bretonne", "Une pizza", "Un couscous"],
+    textC: 0,
+    img: ["Galette", "Pizza", "Couscous"],
+    imgC: 0,
+    fillQ: "Ce midi, je t'emmène manger une galette ___.",
+    fill: "bretonne",
+    fillA: ["bretonne"],
+  },
+  {
+    id: "sac13-q14",
+    textQ: "De quelle couleur est le sable des plages ?",
+    text: ["Blanc", "Noir", "Gris"],
+    textC: 0,
+    img: ["Blanc", "Noir", "Gris"],
+    imgC: 0,
+    fillQ: "De belles plages avec du sable ___.",
+    fill: "blanc",
+    fillA: ["blanc", "blanche"],
+  },
+  {
+    id: "sac13-q15",
+    textQ: "Quelle activité Erwan préfère-t-il sur la côte ?",
+    text: ["Les randonnées", "Le surf", "La plongée"],
+    textC: 0,
+    img: ["Randonnée", "Surf", "Plongée"],
+    imgC: 0,
+    fillQ: "Je préfère les randonnées sur les sentiers de la ___.",
+    fill: "côte",
+    fillA: ["cote", "côte"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATION_14 = buildPool("avance", "scolaire-conversation-14", [
@@ -1902,6 +2331,39 @@ export const SCOLAIRE_AVANCE_CONVERSATION_14 = buildPool("avance", "scolaire-con
     fill: "accepte",
     fillA: ["accepte", "accepte"],
   },
+  {
+    id: "sac14-q13",
+    textQ: "Quel sport collectif Léa pratique-t-elle en cours de sport ?",
+    text: ["Le basket", "Le football", "Le volley"],
+    textC: 0,
+    img: ["Basket", "Football", "Volley"],
+    imgC: 0,
+    fillQ: "On fait beaucoup de sports collectifs, en particulier du ___.",
+    fill: "basket",
+    fillA: ["basket", "basketball"],
+  },
+  {
+    id: "sac14-q14",
+    textQ: "Où travaille le père de Sarah ?",
+    text: ["Dans une ambassade", "Dans un hôpital", "Dans une banque"],
+    textC: 0,
+    img: ["Ambassade", "Hôpital", "Banque"],
+    imgC: 0,
+    fillQ: "Son père travaille dans une ___.",
+    fill: "ambassade",
+    fillA: ["ambassade"],
+  },
+  {
+    id: "sac14-q15",
+    textQ: "Quand Léa proposera-t-elle une autre invitation à Sarah ?",
+    text: ["Le samedi suivant", "Ce week-end", "Demain"],
+    textC: 0,
+    img: ["Samedi suivant", "Ce week-end", "Demain"],
+    imgC: 0,
+    fillQ: "On lui proposera de venir à la maison le ___ suivant.",
+    fill: "samedi",
+    fillA: ["samedi"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_CONVERSATIONS_BOOK: Record<string, COMultiQuestion[]> = {

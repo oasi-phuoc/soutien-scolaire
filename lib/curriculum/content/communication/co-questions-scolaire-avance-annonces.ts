@@ -135,6 +135,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_30 = buildPool("avance", "scolaire-annonce-
     fill: "14",
     fillA: ["14", "quatorze"],
   },
+  {
+    id: "saa30-q13",
+    textQ: "Combien de minutes dure le film Hors norme ?",
+    text: ["155 minutes", "153 minutes", "142 minutes"],
+    textC: 0,
+    img: ["155", "153", "142"],
+    imgC: 0,
+    fillQ: "Hors norme dure ___ minutes.",
+    fill: "155",
+    fillA: ["155", "cent cinquante-cinq"],
+  },
+  {
+    id: "saa30-q14",
+    textQ: "Depuis combien de temps Bruno et Malik vivent-ils dans ce monde ?",
+    text: ["Vingt ans", "Dix ans", "Cinq ans"],
+    textC: 0,
+    img: ["20 ans", "10 ans", "5 ans"],
+    imgC: 0,
+    fillQ: "Bruno et Malik vivent depuis ___ ans dans ce monde.",
+    fill: "vingt",
+    fillA: ["vingt", "20"],
+  },
+  {
+    id: "saa30-q15",
+    textQ: "Depuis combien de temps Edmond n'a-t-il rien écrit ?",
+    text: ["Deux ans", "Un an", "Six mois"],
+    textC: 0,
+    img: ["2 ans", "1 an", "6 mois"],
+    imgC: 0,
+    fillQ: "Edmond n'a rien écrit depuis ___ ans.",
+    fill: "deux",
+    fillA: ["deux", "2"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_31 = buildPool("avance", "scolaire-annonce-31", [
@@ -270,6 +303,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_31 = buildPool("avance", "scolaire-annonce-
     fill: "sortie",
     fillA: ["sortie"],
   },
+  {
+    id: "saa31-q13",
+    textQ: "Où s'adresser pour être conseillée dans ses achats ?",
+    text: ["Au point accueil et information", "À la caisse", "Au rayon téléphonie"],
+    textC: 0,
+    img: ["Accueil", "Caisse", "Téléphonie"],
+    imgC: 0,
+    fillQ: "Vous pouvez vous adresser au point accueil et ___.",
+    fill: "information",
+    fillA: ["information"],
+  },
+  {
+    id: "saa31-q14",
+    textQ: "À quelle date a lieu le tirage au sort du concours ?",
+    text: ["Le 1er août", "Le 10 juillet", "Le 1er juillet"],
+    textC: 0,
+    img: ["1er août", "10 juillet", "1er juillet"],
+    imgC: 0,
+    fillQ: "Le tirage au sort a lieu le 1er ___.",
+    fill: "août",
+    fillA: ["aout", "août"],
+  },
+  {
+    id: "saa31-q15",
+    textQ: "Que propose le séjour offert par le concours ?",
+    text: ["Sérénité et relaxation", "Des jeux vidéo", "Un ordinateur"],
+    textC: 0,
+    img: ["Relaxation", "Jeux", "Ordinateur"],
+    imgC: 0,
+    fillQ: "Au programme : sérénité et ___.",
+    fill: "relaxation",
+    fillA: ["relaxation"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_32 = buildPool("avance", "scolaire-annonce-32", [
@@ -405,6 +471,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_32 = buildPool("avance", "scolaire-annonce-
     fill: "3",
     fillA: ["3", "trois"],
   },
+  {
+    id: "saa32-q13",
+    textQ: "Que contient le repas sans viande proposé chaque jour ?",
+    text: ["Du poisson", "Uniquement des légumes", "De la viande blanche"],
+    textC: 0,
+    img: ["Poisson", "Légumes", "Viande"],
+    imgC: 0,
+    fillQ: "Le repas sans viande contient quand même du ___.",
+    fill: "poisson",
+    fillA: ["poisson"],
+  },
+  {
+    id: "saa32-q14",
+    textQ: "Où sont préparés les repas des cantines de Rouen ?",
+    text: ["Dans une cuisine centrale", "Dans chaque école", "Dans un restaurant"],
+    textC: 0,
+    img: ["Cuisine centrale", "École", "Restaurant"],
+    imgC: 0,
+    fillQ: "Les repas sont préparés par une cuisine ___.",
+    fill: "centrale",
+    fillA: ["centrale"],
+  },
+  {
+    id: "saa32-q15",
+    textQ: "Pourquoi la cantine reste difficile pour les enfants végétaliens ?",
+    text: ["À cause du stockage et de la logistique", "Parce qu'il n'y a pas de poisson", "Parce que la loi l'interdit"],
+    textC: 0,
+    img: ["Logistique", "Poisson", "Loi"],
+    imgC: 0,
+    fillQ: "On ne peut pas diversifier autant pour des raisons de stockage et de ___.",
+    fill: "logistique",
+    fillA: ["logistique"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_33 = buildPool("avance", "scolaire-annonce-33", [
@@ -540,6 +639,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_33 = buildPool("avance", "scolaire-annonce-
     fill: "15",
     fillA: ["15", "quinze"],
   },
+  {
+    id: "saa33-q13",
+    textQ: "Le spectacle de danse asiatique mêle quoi ?",
+    text: ["Dessin de théâtre et musique", "Cinéma et danse", "Peinture et sculpture"],
+    textC: 0,
+    img: ["Théâtre et musique", "Cinéma", "Peinture"],
+    imgC: 0,
+    fillQ: "Le spectacle mêle dessin de théâtre et ___.",
+    fill: "musique",
+    fillA: ["musique"],
+  },
+  {
+    id: "saa33-q14",
+    textQ: "Combien de sessions d'atelier « Dessine ton histoire » sont prévues ?",
+    text: ["Deux", "Une", "Trois"],
+    textC: 0,
+    img: ["2", "1", "3"],
+    imgC: 0,
+    fillQ: "Il y aura une session à 19 heures et une autre à 21 ___.",
+    fill: "heures",
+    fillA: ["heures", "heure"],
+  },
+  {
+    id: "saa33-q15",
+    textQ: "Que recevront les lauréats du concours de BD ?",
+    text: ["Des cadeaux et une édition de leurs œuvres", "Un voyage au Japon", "Un ordinateur portable"],
+    textC: 0,
+    img: ["Cadeaux", "Voyage", "Ordinateur"],
+    imgC: 0,
+    fillQ: "Leurs œuvres seront ___ par la maison d'édition.",
+    fill: "éditées",
+    fillA: ["editees", "éditées"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_34 = buildPool("avance", "scolaire-annonce-34", [
@@ -675,6 +807,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_34 = buildPool("avance", "scolaire-annonce-
     fill: "lumière",
     fillA: ["lumiere", "lumière"],
   },
+  {
+    id: "saa34-q13",
+    textQ: "Quelle sensation le simulateur X-MAD-3D peut-il provoquer ?",
+    text: ["Du vent", "De la chaleur", "Du silence"],
+    textC: 0,
+    img: ["Vent", "Chaleur", "Silence"],
+    imgC: 0,
+    fillQ: "Les sièges bougent et vous sentez du ___, une tempête de neige…",
+    fill: "vent",
+    fillA: ["vent"],
+  },
+  {
+    id: "saa34-q14",
+    textQ: "Par quoi les visiteurs sont-ils propulsés dans l'attraction Adrénaline ?",
+    text: ["Un élastique", "Un moteur", "Une corde"],
+    textC: 0,
+    img: ["Élastique", "Moteur", "Corde"],
+    imgC: 0,
+    fillQ: "Vous êtes propulsés grâce à un ___.",
+    fill: "élastique",
+    fillA: ["elastique", "élastique"],
+  },
+  {
+    id: "saa34-q15",
+    textQ: "Quel snack reste ouvert toute la journée ?",
+    text: ["Le snack Mini Loop", "La cafétéria", "Le train fantôme"],
+    textC: 0,
+    img: ["Mini Loop", "Cafétéria", "Train"],
+    imgC: 0,
+    fillQ: "Le snack Mini Loop est ouvert toute la ___.",
+    fill: "journée",
+    fillA: ["journee", "journée"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_35 = buildPool("avance", "scolaire-annonce-35", [
@@ -810,6 +975,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_35 = buildPool("avance", "scolaire-annonce-
     fill: "21",
     fillA: ["21", "vingt-et-un"],
   },
+  {
+    id: "saa35-q13",
+    textQ: "Où Angèle a-t-elle commencé à se faire connaître ?",
+    text: ["Dans des bars vides", "À la télévision", "Dans des stades"],
+    textC: 0,
+    img: ["Bars", "Télévision", "Stades"],
+    imgC: 0,
+    fillQ: "Elle a commencé sur Instagram avec de petits concerts dans des bars ___.",
+    fill: "vides",
+    fillA: ["vides", "vide"],
+  },
+  {
+    id: "saa35-q14",
+    textQ: "Qui a été la première à suivre Angèle sur Instagram ?",
+    text: ["Sa babysitter", "Son frère", "Sa mère"],
+    textC: 0,
+    img: ["Babysitter", "Frère", "Mère"],
+    imgC: 0,
+    fillQ: "Sa babysitter a été la première à la ___.",
+    fill: "suivre",
+    fillA: ["suivre"],
+  },
+  {
+    id: "saa35-q15",
+    textQ: "Comment Angèle décrit-elle la vitesse de son succès ?",
+    text: ["Très rapide", "Très lente", "Normale"],
+    textC: 0,
+    img: ["Rapide", "Lente", "Normale"],
+    imgC: 0,
+    fillQ: "Ça a été vraiment ___.",
+    fill: "vite",
+    fillA: ["vite", "rapide"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCE_36 = buildPool("avance", "scolaire-annonce-36", [
@@ -945,6 +1143,39 @@ export const SCOLAIRE_AVANCE_ANNONCE_36 = buildPool("avance", "scolaire-annonce-
     fill: "centimes",
     fillA: ["centimes", "centime"],
   },
+  {
+    id: "saa36-q13",
+    textQ: "Que n'utilise pas l'agriculture biologique ?",
+    text: ["Des produits chimiques", "De l'eau", "Du soleil"],
+    textC: 0,
+    img: ["Chimiques", "Eau", "Soleil"],
+    imgC: 0,
+    fillQ: "Sans produits ___, le bio favorise la biodiversité.",
+    fill: "chimiques",
+    fillA: ["chimiques", "chimique"],
+  },
+  {
+    id: "saa36-q14",
+    textQ: "Où se concentrent aussi les minéraux des légumes bio ?",
+    text: ["Sous la peau", "Dans les graines", "Dans l'eau de cuisson"],
+    textC: 0,
+    img: ["Peau", "Graines", "Eau"],
+    imgC: 0,
+    fillQ: "C'est sous la peau que se concentrent les vitamines et les ___.",
+    fill: "minéraux",
+    fillA: ["mineraux", "minéraux"],
+  },
+  {
+    id: "saa36-q15",
+    textQ: "Que favorise l'agriculture bio pour la nature ?",
+    text: ["La biodiversité", "Les pesticides", "La monoculture"],
+    textC: 0,
+    img: ["Biodiversité", "Pesticides", "Monoculture"],
+    imgC: 0,
+    fillQ: "Le bio favorise la ___.",
+    fill: "biodiversité",
+    fillA: ["biodiversite", "biodiversité"],
+  }
 ]);
 
 export const SCOLAIRE_AVANCE_ANNONCES_BOOK: Record<string, COMultiQuestion[]> = {
