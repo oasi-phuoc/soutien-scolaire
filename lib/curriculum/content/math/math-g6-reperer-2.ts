@@ -13,17 +13,25 @@ export const MATH_G6_REPERER_2_LESSON: MathSubmoduleLesson = {
         fr: "Pour trouver un point sur la grille, on regarde d'abord sur la **ligne horizontale (x)**, puis sur la **ligne verticale (y)**.",
       },
 
-      { type: "highlight", fr: "Exemple : trouver les coordonnées du point A" },
       {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "1. Je regarde, sur la ligne des **X**, la graduation.",
-          "2. Le point est placé à **2**.",
-          "3. Je regarde, sur la ligne des **Y**, la graduation.",
-          "4. Le point est placé à **4**.",
-          "5. Les coordonnées du point A sont donc **(2 ; 4)**.",
-        ],
+        type: "plain",
+        fr: "1. Je regarde, sur la ligne des **X**, la graduation.",
+      },
+      {
+        type: "plain",
+        fr: "2. Le point est placé à **2**.",
+      },
+      {
+        type: "plain",
+        fr: "3. Je regarde, sur la ligne des **Y**, la graduation.",
+      },
+      {
+        type: "plain",
+        fr: "4. Le point est placé à **4**.",
+      },
+      {
+        type: "plain",
+        fr: "5. Les coordonnées du point A sont donc **(2 ; 4)**.",
       },
 
       {
@@ -81,10 +89,10 @@ export const MATH_G6_REPERER_2_LESSON: MathSubmoduleLesson = {
         markup: `<svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;display:block;margin:0 auto">
   <line x1="120" y1="20" x2="120" y2="180" stroke="#334155" stroke-width="2"/>
   <line x1="20" y1="100" x2="220" y2="100" stroke="#334155" stroke-width="2"/>
-  <text x="175" y="55" font-size="9" fill="var(--color-accent-alg)" font-weight="bold">1er (+;+)</text>
-  <text x="45" y="55" font-size="9" fill="var(--color-accent-alg)" font-weight="bold">2e (−;+)</text>
-  <text x="45" y="150" font-size="9" fill="var(--color-accent-alg)" font-weight="bold">3e (−;−)</text>
-  <text x="165" y="150" font-size="9" fill="var(--color-accent-alg)" font-weight="bold">4e (+;−)</text>
+  <text x="170" y="60" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">1er (+ ; +)</text>
+  <text x="70" y="60" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">2e (− ; +)</text>
+  <text x="70" y="140" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">3e (− ; −)</text>
+  <text x="170" y="140" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">4e (+ ; −)</text>
   <text x="210" y="108" font-size="11" font-weight="bold">x</text>
   <text x="126" y="28" font-size="11" font-weight="bold">y</text>
   <circle cx="120" cy="100" r="3" fill="#f97316"/>
@@ -93,16 +101,6 @@ export const MATH_G6_REPERER_2_LESSON: MathSubmoduleLesson = {
       },
 
       { type: "plain", fr: "" },
-
-      {
-        type: "rule",
-        titleFr: "À retenir",
-        itemsFr: [
-          "Repère cartésien : **(x ; y)** — d'abord x, puis y",
-          "L'**origine** est le point **(0 ; 0)**",
-          "Les signes de x et y indiquent le **quadrant**",
-        ],
-      },
     ],
   },
   exercises: [],
