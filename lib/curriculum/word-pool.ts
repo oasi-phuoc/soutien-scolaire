@@ -1,5 +1,14 @@
 import { hasLectureWordImage } from "../utils/audio";
 import { complexTargets } from "../utils/complex-grapheme";
+import { isImageableLabel } from "./word-image-resolver";
+import graphemePoolsData from "./grapheme-word-pools-data.json";
+
+type GraphemePoolsData = {
+  complex: Record<string, string[]>;
+  letters: Record<string, string[]>;
+};
+
+const GRAPHEME_POOLS = graphemePoolsData as GraphemePoolsData;
 
 // Each word carries the list of TEACHING phonemes it actually contains
 // (phonetically, not orthographically).
@@ -448,6 +457,55 @@ export const ALL_TOOL_WORDS: string[] = [
   ...new Set(Object.values(TOOL_WORD_POOLS).flat()),
 ];
 
+const TOOL_WORD_SET = new Set(ALL_TOOL_WORDS.map((w) => w.toLowerCase()));
+
+/** Mappe un label de graphème (« OU », « AN / EN ») vers l'id de leçon L7. */
+export function complexGraphemeId(label: string): string | null {
+  const key = label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+  if (key.includes("tion")) return "tion";
+  if (key.includes("oin")) return "oin";
+  if (key.includes("ien")) return "ien";
+  if (key.includes("eu") || key.includes("oeu") || key.includes("œu")) return "eu-oeu";
+  if (key.includes("an") || key.includes("en")) return "an-en";
+  if (key.includes("in") || key.includes("ain")) return "in-ain";
+  if (key.includes("on")) return "on";
+  if (key.includes("au") || key.includes("eau")) return "au-eau";
+  if (key.includes("ou")) return "ou";
+  if (key.includes("oi")) return "oi";
+  if (key.includes("ch")) return "ch";
+  if (key.includes("ph")) return "ph";
+  if (key.includes("gn")) return "gn";
+  if (key.includes("ill")) return "ill";
+  if (key.includes("ai") || key.includes("ei")) return "ai-ei";
+  if (key.includes("ui")) return "ui";
+  if (key.includes("un") || key.includes("um")) return "un-um";
+  return null;
+}
+
+/** Pool de mots pour un son complexe (étapes 4-5 L7), 1–10 lettres, sans mots-outils. */
+export function wordsForComplexGrapheme(graphemeLabel: string): string[] {
+  const id = complexGraphemeId(graphemeLabel);
+  if (id && GRAPHEME_POOLS.complex[id]?.length) return GRAPHEME_POOLS.complex[id]!;
+  return LETTER_WORDS.filter((w) => wordContainsGrapheme(w, graphemeLabel) && w.length <= 10);
+}
+
+/** Pool de mots pour une lettre (étapes 4-5 L1-L4), 1–10 lettres. */
+export function wordsForLetter(letter: string): string[] {
+  const lc = letter.toLowerCase();
+  if (GRAPHEME_POOLS.letters[lc]?.length) return GRAPHEME_POOLS.letters[lc]!;
+  return LETTER_WORDS.filter((w) => w.toLowerCase().includes(lc) && w.length <= 10);
+}
+
+/** Mots utilisables dans les exercices « entendre le son » (étapes 6-7) : pas de pronoms/articles. */
+export function isLectureSoundPoolWord(label: string): boolean {
+  const lc = label.toLowerCase();
+  if (TOOL_WORD_SET.has(lc)) return false;
+  return isImageableLabel(label);
+}
+
 // ── helpers ───────────────────────────────────────────────────────────────────
 
 function normalizeWordLabel(label: string): string {
@@ -756,14 +814,13 @@ function shuffle<T>(arr: T[]): T[] {
 
 /** Random labels (for WordSpotter): words whose written form contains the letter. */
 export function randomWordsWithLetter(letter: string, n: number): string[] {
-  const lc = letter.toLowerCase();
-  const pool = LETTER_WORDS.filter((w) => w.toLowerCase().includes(lc));
+  const pool = wordsForLetter(letter).filter((w) => w.length <= 10);
   return shuffle(pool).slice(0, n);
 }
 
 /** Random labels containing a complex grapheme (L7 WordSpotter / prononciation). */
 export function randomWordsWithGrapheme(graphemeLabel: string, n: number): string[] {
-  const pool = LETTER_WORDS.filter((w) => wordContainsGrapheme(w, graphemeLabel) && w.length <= 12);
+  const pool = wordsForComplexGrapheme(graphemeLabel).filter((w) => w.length <= 10);
   return shuffle(pool).slice(0, n);
 }
 
@@ -780,7 +837,7 @@ export function randomMultisyllableWords(minSyl: number, maxSyl: number | null, 
  * Aims for ~40 % "has phoneme" / ~60 % "doesn't have phoneme".
  */
 export function randomSoundItems(phoneme: string, n = 16, forImages = false): WordItem[] {
-  let pool = allWordItems();
+  let pool = allWordItems().filter((w) => isLectureSoundPoolWord(w.label));
   if (forImages) pool = pool.filter((w) => hasLectureWordImage(w.label));
   const yes = shuffle(pool.filter((w) => wordHasPhoneme(w, phoneme)));
   const no = shuffle(pool.filter((w) => !wordHasPhoneme(w, phoneme)));
