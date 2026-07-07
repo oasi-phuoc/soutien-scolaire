@@ -7454,6 +7454,8 @@ export function GenericModuleContent({
   const [geoValidateTrigger, setGeoValidateTrigger] = useState(0);
   const [geoResults, setGeoResults] = useState<boolean[]>([]);
   const [geoAnswerSnapshot, setGeoAnswerSnapshot] = useState<G6EvalSnapshot | null>(null);
+  const geoSnapshotRef = useRef<G6EvalSnapshot | null>(null);
+  const pendingG6EvalRef = useRef<Record<number, { results: boolean[]; snapshot: G6EvalSnapshot }>>({});
   const [geoResetKey, setGeoResetKey] = useState(0);
 
   // Eval timer
@@ -7509,6 +7511,24 @@ export function GenericModuleContent({
   const revealCorrection = !isInEvalPhase;
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || isInEvalPhase || showEvalScore;
   const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
+
+  const handleG6Validated = useCallback((
+    score: number,
+    max: number,
+    results?: boolean[],
+    snapshot?: G6EvalSnapshot,
+  ) => {
+    const res = results ?? Array.from({ length: max }, (_, i) => i < score);
+    setGeoResults(res);
+    if (snapshot) {
+      geoSnapshotRef.current = snapshot;
+      setGeoAnswerSnapshot(snapshot);
+      if (isInEvalPhase && evalStepOffset >= 0) {
+        pendingG6EvalRef.current[evalStepOffset] = { results: res, snapshot };
+      }
+    }
+    setGeoValidated(true);
+  }, [isInEvalPhase, evalStepOffset]);
 
   // Exercices chronométrés (8 questions) : A2.1/A2.2 ex. 2 et 5, A3.1/A3.3 ex. 2 et 4.
   useEffect(() => {
@@ -7645,6 +7665,7 @@ export function GenericModuleContent({
     setGeoValidateTrigger(0);
     setGeoResults([]);
     setGeoAnswerSnapshot(null);
+    geoSnapshotRef.current = null;
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalSavedResults({});
@@ -8123,9 +8144,14 @@ export function GenericModuleContent({
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
       } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan") {
         const fallbackLen = currentStep.kind === "g6_plan" ? 4 : 2;
-        currentResults = geoResults.length > 0 ? geoResults : Array(fallbackLen).fill(false);
-        if (currentStep.kind === "g6_plan" && geoAnswerSnapshot) {
-          setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: geoAnswerSnapshot }));
+        const pending = currentStep.kind === "g6_plan" ? pendingG6EvalRef.current[evalStepOffset] : undefined;
+        currentResults = pending?.results
+          ?? (geoResults.length > 0 ? geoResults : Array(fallbackLen).fill(false));
+        if (currentStep.kind === "g6_plan") {
+          const snap = pending?.snapshot ?? geoSnapshotRef.current ?? geoAnswerSnapshot;
+          if (snap) {
+            setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: snap }));
+          }
         }
       }
       const newSavedDict = { ...evalSavedResults, [evalStepOffset]: currentResults };
@@ -8638,6 +8664,7 @@ export function GenericModuleContent({
       setGeoValidateTrigger(0);
       setGeoResults([]);
       setGeoAnswerSnapshot(null);
+      geoSnapshotRef.current = null;
       setGeoResetKey((k) => k + 1);
     };
   }
@@ -11107,19 +11134,11 @@ export function GenericModuleContent({
         <EvalRevealContext.Provider value={revealCorrection}>
           {currentStep.variant === 1 && (
             <G6GridReadExercise key={`g6r-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max, results, snapshot) => {
-                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
-                if (snapshot) setGeoAnswerSnapshot(snapshot);
-                setGeoValidated(true);
-              }} />
+              onValidated={handleG6Validated} />
           )}
           {currentStep.variant === 2 && (
             <G6GridPlaceExercise key={`g6p-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max, results, snapshot) => {
-                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
-                if (snapshot) setGeoAnswerSnapshot(snapshot);
-                setGeoValidated(true);
-              }} />
+              onValidated={handleG6Validated} />
           )}
           {currentStep.variant === 3 && (
             <G6MedievalLocateExercise key={`g6m-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11127,11 +11146,7 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId === "G6-1" && (
             <G6Q1FigureCoordsExercise key={`g6q1-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max, results, snapshot) => {
-                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
-                if (snapshot) setGeoAnswerSnapshot(snapshot);
-                setGeoValidated(true);
-              }} />
+              onValidated={handleG6Validated} />
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId !== "G6-1" && (
             <G6CartesianCoordsExercise key={`g6c-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11139,19 +11154,11 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 14 && (
             <G6Q2FigureCoordsExercise key={`g6q2a-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} half="q12" validateCommand={geoValidateTrigger}
-              onValidated={(score, max, results, snapshot) => {
-                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
-                if (snapshot) setGeoAnswerSnapshot(snapshot);
-                setGeoValidated(true);
-              }} />
+              onValidated={handleG6Validated} />
           )}
           {currentStep.variant === 15 && (
             <G6Q2FigureCoordsExercise key={`g6q2b-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} half="q34" validateCommand={geoValidateTrigger}
-              onValidated={(score, max, results, snapshot) => {
-                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
-                if (snapshot) setGeoAnswerSnapshot(snapshot);
-                setGeoValidated(true);
-              }} />
+              onValidated={handleG6Validated} />
           )}
           {currentStep.variant === 5 && (
             <G6MapGenevaExercise key={`g6g-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}

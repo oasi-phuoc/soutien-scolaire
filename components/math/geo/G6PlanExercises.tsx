@@ -268,20 +268,45 @@ function GridXYFields({
   );
 }
 
+function pickSpacedVerts(vertices: [number, number][], count: number, minGap = 2): [number, number][] {
+  const picked: [number, number][] = [];
+  for (const v of shuffle(vertices)) {
+    if (picked.every((p) => Math.max(Math.abs(p[0] - v[0]), Math.abs(p[1] - v[1])) >= minGap)) {
+      picked.push(v);
+      if (picked.length >= count) break;
+    }
+  }
+  return picked;
+}
+
+function PointLabel({ px, py, label }: { px: number; py: number; label: string }) {
+  const tx = px + 6;
+  const ty = py - 1;
+  const w = 9;
+  const h = 11;
+  return (
+    <g>
+      <circle cx={px} cy={py} r="3.5" fill="var(--color-accent-alg)" stroke="#fff" strokeWidth="1" />
+      <rect x={tx - 1} y={ty - h + 2} width={w} height={h} fill="white" />
+      <text x={tx + 3} y={ty} textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--color-accent-alg)">{label}</text>
+    </g>
+  );
+}
+
 function q1ToSvg(x: number, y: number, cx: number, cy: number, unit: number): [number, number] {
   return [cx + x * unit, cy - y * unit];
 }
 
 function Q1FigurePlane({
-  xMax,
-  yMax,
+  xMax = 20,
+  yMax = 20,
   polygons,
   points,
   unit = 10,
   labelStep = 5,
 }: {
-  xMax: number;
-  yMax: number;
+  xMax?: number;
+  yMax?: number;
   polygons: Array<{ points: [number, number][] }>;
   points: Array<{ label: string; x: number; y: number }>;
   unit?: number;
@@ -336,36 +361,25 @@ function Q1FigurePlane({
 
       {points.map((p) => {
         const [px, py] = q1ToSvg(p.x, p.y, cx, cy, unit);
-        return (
-          <g key={p.label}>
-            <circle cx={px} cy={py} r="3.5" fill="#3b82f6" stroke="#fff" strokeWidth="1" />
-            <text x={px + 5} y={py - 3} fontSize="9" fontWeight="bold" fill="#1e40af">{p.label}</text>
-          </g>
-        );
+        return <PointLabel key={p.label} px={px} py={py} label={p.label} />;
       })}
     </svg>
   );
 }
 
 function genQ1FigureExercise() {
-  const pool = Q1_CARTESIAN_FIGURES.filter((f) => f.vertices.length >= 4);
+  const pool = Q1_CARTESIAN_FIGURES.filter((f) => pickSpacedVerts(f.vertices, 4, 2).length >= 4);
   const figure = pickN(pool, 1)[0]!;
-  const verts = pickN(figure.vertices, 4);
-  const askedPoints = (["a", "b", "c", "d"] as const).slice(0, verts.length).map((label, i) => ({
+  const verts = pickSpacedVerts(figure.vertices, 4, 2);
+  const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
     label,
     x: verts[i]![0],
     y: verts[i]![1],
   }));
-  const maxX = Math.max(...figure.vertices.map((v) => v[0]));
-  const maxY = Math.max(...figure.vertices.map((v) => v[1]));
-  const xMax = Math.min(20, Math.max(10, Math.ceil((maxX + 2) / 5) * 5));
-  const yMax = Math.min(20, Math.max(10, Math.ceil((maxY + 2) / 5) * 5));
-  return { figure, askedPoints, xMax, yMax };
+  return { figure, askedPoints, xMax: 20, yMax: 20 };
 }
 
-function signedToSvg(x: number, y: number, cx: number, cy: number, unit: number): [number, number] {
-  return [cx + x * unit, cy - y * unit];
-}
+const signedToSvg = q1ToSvg;
 
 function SignedFigurePlane({
   xMin,
@@ -434,21 +448,17 @@ function SignedFigurePlane({
 
       {points.map((p) => {
         const [px, py] = signedToSvg(p.x, p.y, cx, cy, unit);
-        return (
-          <g key={p.label}>
-            <circle cx={px} cy={py} r="3.5" fill="#3b82f6" stroke="#fff" strokeWidth="1" />
-            <text x={px + 5} y={py - 3} fontSize="9" fontWeight="bold" fill="#1e40af">{p.label}</text>
-          </g>
-        );
+        return <PointLabel key={p.label} px={px} py={py} label={p.label} />;
       })}
     </svg>
   );
 }
 
 function genQ2FigureExercise(half: "q12" | "q34") {
-  const pool = half === "q12" ? Q12_CARTESIAN_FIGURES : Q34_CARTESIAN_FIGURES;
+  const pool = (half === "q12" ? Q12_CARTESIAN_FIGURES : Q34_CARTESIAN_FIGURES)
+    .filter((f) => pickSpacedVerts(f.vertices, 4, 2).length >= 4);
   const figure = pickN(pool, 1)[0]!;
-  const verts = pickN(figure.vertices, 4);
+  const verts = pickSpacedVerts(figure.vertices, 4, 2);
   const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
     label,
     x: verts[i]![0],

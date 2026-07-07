@@ -698,122 +698,31 @@ export type Q1CartesianFigure = {
   vertices: [number, number][];
 };
 
-function q1Verts(polygons: Array<{ points: [number, number][] }>): [number, number][] {
-  const seen = new Set<string>();
-  const out: [number, number][] = [];
-  for (const poly of polygons) {
-    for (const pt of poly.points) {
-      const k = `${pt[0]},${pt[1]}`;
-      if (!seen.has(k)) {
-        seen.add(k);
-        out.push(pt);
-      }
-    }
-  }
-  return out;
-}
-
-function q1Figure(
-  id: string,
-  name: string,
-  polygons: Array<{ points: [number, number][] }>,
-): Q1CartesianFigure {
-  return { id, name, polygons, vertices: q1Verts(polygons) };
+function q1Hex6(id: string, name: string, pts: [number, number][]): Q1CartesianFigure {
+  return { id, name, polygons: [{ points: pts }], vertices: pts };
 }
 
 export const Q1_CARTESIAN_FIGURES: Q1CartesianFigure[] = [
-  q1Figure("q1-house", "maison", [
-    { points: [[4, 12], [10, 4], [16, 12], [16, 18], [4, 18]] },
-    { points: [[7, 18], [7, 14], [13, 14], [13, 18]] },
-  ]),
-  q1Figure("q1-boat", "bateau", [
-    { points: [[2, 10], [5, 6], [15, 6], [18, 10], [15, 12], [5, 12]] },
-    { points: [[10, 6], [10, 2], [12, 6]] },
-  ]),
-  q1Figure("q1-tree", "arbre", [
-    { points: [[9, 8], [11, 8], [11, 4], [9, 4]] },
-    { points: [[10, 16], [16, 8], [4, 8]] },
-  ]),
-  q1Figure("q1-flower", "fleur", [
-    { points: [[9, 6], [11, 6], [11, 2], [9, 2]] },
-    { points: [[10, 10], [13, 7], [16, 10], [13, 13]] },
-    { points: [[10, 10], [7, 13], [4, 10], [7, 7]] },
-  ]),
-  q1Figure("q1-plane", "avion", [
-    { points: [[2, 10], [14, 10], [16, 12], [14, 14], [2, 14]] },
-    { points: [[8, 10], [10, 16], [12, 10]] },
-    { points: [[14, 10], [18, 6], [18, 10]] },
-  ]),
-  q1Figure("q1-car", "voiture", [
-    { points: [[3, 8], [17, 8], [17, 12], [3, 12]] },
-    { points: [[6, 12], [6, 14], [8, 14], [8, 12]] },
-    { points: [[12, 12], [12, 14], [14, 14], [14, 12]] },
-    { points: [[5, 8], [7, 6], [13, 6], [15, 8]] },
-  ]),
-  q1Figure("q1-fish", "poisson", [
-    { points: [[4, 8], [12, 6], [12, 14], [4, 12]] },
-    { points: [[12, 10], [18, 6], [18, 14], [12, 10]] },
-  ]),
-  q1Figure("q1-sun", "soleil", [
-    { points: [[8, 8], [12, 8], [12, 12], [8, 12]] },
-    { points: [[9, 14], [11, 14], [10, 16]] },
-    { points: [[9, 4], [11, 4], [10, 6]] },
-    { points: [[14, 9], [16, 9], [14, 11]] },
-    { points: [[4, 9], [6, 9], [4, 11]] },
-    { points: [[13, 12], [15, 14], [13, 14]] },
-    { points: [[7, 12], [5, 14], [7, 14]] },
-    { points: [[13, 8], [15, 6], [13, 6]] },
-    { points: [[7, 8], [5, 6], [7, 6]] },
-  ]),
-  q1Figure("q1-cloud", "nuage", [
-    { points: [[4, 10], [4, 14], [16, 14], [16, 10], [14, 8], [12, 10], [8, 8], [6, 10]] },
-  ]),
-  q1Figure("q1-kite", "cerf-volant", [
-    { points: [[10, 16], [14, 10], [10, 4], [6, 10]] },
-    { points: [[10, 4], [10, 2], [12, 4]] },
-  ]),
-  q1Figure("q1-rocket", "fusée", [
-    { points: [[8, 16], [12, 16], [12, 6], [8, 6]] },
-    { points: [[10, 16], [14, 12], [6, 12]] },
-    { points: [[8, 6], [10, 2], [12, 6]] },
-  ]),
-  q1Figure("q1-umbrella", "parapluie", [
-    { points: [[4, 12], [6, 14], [8, 12], [10, 14], [12, 12], [14, 14], [16, 12]] },
-    { points: [[9, 12], [11, 12], [11, 4], [9, 4]] },
-  ]),
-  q1Figure("q1-castle", "château", [
-    { points: [[4, 8], [4, 16], [16, 16], [16, 8], [14, 8], [14, 10], [12, 10], [12, 8], [8, 8], [8, 10], [6, 10], [6, 8]] },
-    { points: [[7, 16], [7, 12], [13, 12], [13, 16]] },
-  ]),
-  q1Figure("q1-mountain", "montagne", [
-    { points: [[2, 6], [8, 16], [10, 10], [14, 16], [18, 6]] },
-  ]),
-  q1Figure("q1-snail", "escargot", [
-    { points: [[4, 4], [12, 4], [12, 10], [8, 10], [8, 8], [10, 8], [10, 6], [6, 6], [6, 8], [4, 8]] },
-    { points: [[2, 4], [4, 4], [4, 2], [2, 2]] },
-  ]),
-  q1Figure("q1-butterfly", "papillon", [
-    { points: [[10, 10], [4, 14], [4, 8], [10, 10], [16, 8], [16, 14]] },
-    { points: [[9, 10], [9, 6], [11, 6], [11, 10]] },
-  ]),
-  q1Figure("q1-cup", "gobelet", [
-    { points: [[6, 6], [14, 6], [12, 16], [8, 16]] },
-    { points: [[8, 16], [8, 18], [12, 18], [12, 16]] },
-  ]),
-  q1Figure("q1-candle", "bougie", [
-    { points: [[8, 4], [12, 4], [12, 14], [8, 14]] },
-    { points: [[10, 4], [12, 2], [8, 2]] },
-  ]),
-  q1Figure("q1-chair", "chaise", [
-    { points: [[6, 6], [14, 6], [14, 10], [6, 10]] },
-    { points: [[6, 10], [6, 16], [8, 16], [8, 10]] },
-    { points: [[12, 10], [12, 16], [14, 16], [14, 10]] },
-    { points: [[8, 6], [8, 2], [12, 2], [12, 6]] },
-  ]),
-  q1Figure("q1-icecream", "glace", [
-    { points: [[8, 10], [12, 10], [10, 16]] },
-    { points: [[7, 6], [13, 6], [13, 10], [7, 10]] },
-  ]),
+  q1Hex6("q1-boat", "bateau", [[2, 7], [6, 11], [14, 11], [18, 7], [13, 4], [7, 4]]),
+  q1Hex6("q1-house", "maison", [[5, 9], [10, 18], [15, 9], [15, 15], [5, 15], [5, 12]]),
+  q1Hex6("q1-tree", "arbre", [[7, 16], [10, 4], [13, 16], [12, 10], [8, 10], [9, 13]]),
+  q1Hex6("q1-flower", "fleur", [[6, 10], [10, 16], [14, 10], [12, 6], [8, 6], [10, 12]]),
+  q1Hex6("q1-plane", "avion", [[2, 10], [8, 13], [16, 13], [18, 10], [14, 7], [6, 7]]),
+  q1Hex6("q1-car", "voiture", [[3, 8], [7, 12], [14, 12], [17, 8], [13, 5], [6, 5]]),
+  q1Hex6("q1-fish", "poisson", [[3, 10], [9, 13], [15, 10], [17, 7], [11, 5], [6, 7]]),
+  q1Hex6("q1-kite", "cerf-volant", [[6, 14], [10, 18], [14, 14], [12, 8], [8, 8], [10, 12]]),
+  q1Hex6("q1-rocket", "fusée", [[8, 4], [12, 4], [13, 12], [10, 18], [7, 12], [8, 8]]),
+  q1Hex6("q1-castle", "château", [[4, 8], [4, 16], [10, 16], [10, 12], [16, 16], [16, 8]]),
+  q1Hex6("q1-mountain", "montagne", [[3, 6], [8, 16], [11, 10], [14, 16], [17, 6], [10, 8]]),
+  q1Hex6("q1-butterfly", "papillon", [[4, 10], [8, 16], [10, 10], [12, 16], [16, 10], [10, 6]]),
+  q1Hex6("q1-cup", "gobelet", [[7, 6], [13, 6], [14, 14], [10, 17], [6, 14], [7, 10]]),
+  q1Hex6("q1-candle", "bougie", [[8, 4], [12, 4], [13, 12], [10, 16], [7, 12], [8, 8]]),
+  q1Hex6("q1-chair", "chaise", [[6, 6], [14, 6], [14, 10], [12, 16], [8, 16], [6, 10]]),
+  q1Hex6("q1-icecream", "glace", [[8, 6], [12, 6], [13, 12], [10, 17], [7, 12], [8, 10]]),
+  q1Hex6("q1-cloud", "nuage", [[4, 10], [7, 14], [11, 15], [15, 12], [16, 9], [8, 8]]),
+  q1Hex6("q1-snail", "escargot", [[4, 6], [8, 4], [13, 6], [14, 11], [9, 15], [5, 11]]),
+  q1Hex6("q1-umbrella", "parapluie", [[4, 12], [8, 15], [12, 15], [16, 12], [12, 6], [8, 6]]),
+  q1Hex6("q1-star", "étoile", [[10, 16], [14, 10], [18, 6], [12, 4], [6, 4], [4, 10]]),
 ];
 
 /** Figures 6 sommets pour G6.2 — cadrants 1 et 2 (y > 0, x ∈ [−10 ; 10]) */
