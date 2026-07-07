@@ -85,18 +85,23 @@ function GridCoordFields({
   validated,
   wrong,
   onChange,
+  readOnly = false,
 }: {
   answer: CoordAnswer;
   correct: GridCell;
   validated: boolean;
   wrong: boolean;
   onChange: (next: CoordAnswer) => void;
+  readOnly?: boolean;
 }) {
   const inputCls = `h-8 w-8 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
+  const displayCls = "flex h-8 w-8 items-center justify-center text-sm font-mono font-semibold text-[var(--color-text-primary)]";
   return (
     <div className="flex items-center gap-1 text-sm">
       <span className="text-[var(--color-text-secondary)]">(</span>
-      {wrong ? (
+      {readOnly ? (
+        <span className={displayCls}>{correct.col.toLowerCase()}</span>
+      ) : wrong ? (
         <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
           <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.col || "—"}</span>
           <span className="text-xs font-bold leading-none text-amber-600">{correct.col.toUpperCase()}</span>
@@ -114,7 +119,9 @@ function GridCoordFields({
         />
       )}
       <span className="text-[var(--color-text-secondary)]">;</span>
-      {wrong ? (
+      {readOnly ? (
+        <span className={displayCls}>{correct.row}</span>
+      ) : wrong ? (
         <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
           <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.row || "—"}</span>
           <span className="text-xs font-bold leading-none text-amber-600">{correct.row}</span>
@@ -285,8 +292,8 @@ type PlaceItem = { shape: ShapeIcon; cell: GridCell };
 function genPlaceItems(): PlaceItem[] {
   const cols = ["a", "b", "c", "d", "e", "f"];
   const rows = [1, 2, 3, 4, 5, 6];
-  const cells = randomCells(cols, rows, 4);
-  return pickN(GRID_SHAPES, 4).map((shape, i) => ({ shape, cell: cells[i]! }));
+  const cells = randomCells(cols, rows, 3);
+  return pickN(GRID_SHAPES, 3).map((shape, i) => ({ shape, cell: cells[i]! }));
 }
 
 export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExProps) {
@@ -332,38 +339,49 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Dessine les formes dans les bonnes cases. Clique sur une forme, puis sur la case.</p>
-      <div className="flex flex-col gap-4 md:flex-row">
-        <div className="space-y-2 md:w-40">
-          {items.map((it) => {
-            const isSel = selected === it.shape.id;
-            const ok = validated ? results[items.indexOf(it)] : null;
-            return (
-              <button key={it.shape.id} type="button" disabled={validated}
-                onClick={() => setSelected(it.shape.id)}
-                className={`flex w-full items-center gap-2 rounded-lg border px-2 py-1.5 text-left text-sm transition-colors ${
-                  isSel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" :
-                  ok === false ? "border-amber-400" : "border-[var(--color-border-default)]"
-                }`}
-              >
-                <ShapeGlyph shape={it.shape} className="h-6 w-6 shrink-0" />
-                <span>({formatCell(it.cell)})</span>
-              </button>
-            );
-          })}
-        </div>
-        <div className="flex-1">
-          <LetterGrid
-            cols={["a", "b", "c", "d", "e", "f"]}
-            rows={[1, 2, 3, 4, 5, 6]}
-            placements={displayPlacements}
-            onCellClick={onCellClick}
-            selectedShape={selected}
-          />
-        </div>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Place chaque forme dans la case indiquée. Clique sur une forme, puis sur la grille.
+      </p>
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+        {items.map((it, i) => {
+          const isSel = selected === it.shape.id;
+          const ok = validated ? results[i] : null;
+          const placed = placements[it.shape.id] !== null;
+          return (
+            <button
+              key={it.shape.id}
+              type="button"
+              disabled={validated}
+              onClick={() => setSelected(it.shape.id)}
+              className={`flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors ${
+                isSel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" :
+                ok === false ? "border-amber-400" :
+                placed ? "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5" :
+                "border-[var(--color-border-default)]"
+              }`}
+            >
+              <ShapeGlyph shape={it.shape} className="h-9 w-9 shrink-0" />
+              <GridCoordFields
+                answer={{ col: "", row: "" }}
+                correct={it.cell}
+                validated={validated}
+                wrong={false}
+                onChange={() => {}}
+                readOnly
+              />
+            </button>
+          );
+        })}
       </div>
+      <LetterGrid
+        cols={["a", "b", "c", "d", "e", "f"]}
+        rows={[1, 2, 3, 4, 5, 6]}
+        placements={displayPlacements}
+        onCellClick={onCellClick}
+        selectedShape={selected}
+      />
       {validated && results.some((r) => !r) && (
-        <p className="text-xs text-amber-600">Les bonnes cases sont indiquées à gauche.</p>
+        <p className="text-xs text-amber-600">Les bonnes cases sont indiquées au-dessus de la grille.</p>
       )}
     </div>
   );
