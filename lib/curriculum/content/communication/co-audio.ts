@@ -22,12 +22,14 @@ export type COAudioGroup = {
 };
 
 import { CO_AUDIO_GROUPS_AVANCE } from "./co-audio-avance";
+import { CO_AUDIO_GROUPS_SCOLAIRE_AVANCE, SCOLAIRE_PLAYABLE_GROUP_IDS_AVANCE } from "./co-audio-scolaire-avance";
 import { CO_AUDIO_GROUPS_SCOLAIRE_BASE, SCOLAIRE_PLAYABLE_GROUP_IDS } from "./co-audio-scolaire-base";
 import { CO_AUDIO_GROUPS_SCOLAIRE_MOYEN, SCOLAIRE_PLAYABLE_GROUP_IDS_MOYEN } from "./co-audio-scolaire-moyen";
 
 const SCOLAIRE_PLAYABLE_GROUP_IDS_ALL = new Set<string>([
   ...SCOLAIRE_PLAYABLE_GROUP_IDS,
   ...SCOLAIRE_PLAYABLE_GROUP_IDS_MOYEN,
+  ...SCOLAIRE_PLAYABLE_GROUP_IDS_AVANCE,
 ]);
 
 function item(level: COLevel, category: COAudioCategory, activity: string, filename: string, transcript?: string): COAudioItem {
@@ -425,6 +427,7 @@ export const CO_AUDIO_GROUPS: COAudioGroup[] = [
   ...CO_AUDIO_GROUPS_AVANCE,
   ...CO_AUDIO_GROUPS_SCOLAIRE_BASE,
   ...CO_AUDIO_GROUPS_SCOLAIRE_MOYEN,
+  ...CO_AUDIO_GROUPS_SCOLAIRE_AVANCE,
 ];
 
 import { hashSeedString } from "@/lib/placement/progressive-pick";
