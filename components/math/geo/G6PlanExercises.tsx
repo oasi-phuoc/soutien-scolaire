@@ -19,6 +19,7 @@ import {
   Q1_CARTESIAN_FIGURES,
   type GridCell,
   type MapQuestion,
+  type Q1CartesianFigure,
   type ShapeIcon,
   type TopoQuestion,
   cellKey,
@@ -33,10 +34,37 @@ const MATH_TEXT_INPUT_BASE =
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
+type CoordAnswer = { col: string; row: string };
+type XYAnswer = { x: string; y: string };
+
+export type G6GridReadSnapshot = {
+  kind: "g6_read";
+  items: Array<{ shape: ShapeIcon; cell: GridCell; answer: string }>;
+  answers: CoordAnswer[];
+};
+
+export type G6GridPlaceSnapshot = {
+  kind: "g6_place";
+  items: Array<{ shape: ShapeIcon; cell: GridCell }>;
+  placements: Record<string, GridCell | null>;
+};
+
+export type G6Q1FigureSnapshot = {
+  kind: "g6_q1_figure";
+  figure: Q1CartesianFigure;
+  askedPoints: Array<{ label: string; x: number; y: number }>;
+  xMax: number;
+  yMax: number;
+  answers: XYAnswer[];
+};
+
+export type G6EvalSnapshot = G6GridReadSnapshot | G6GridPlaceSnapshot | G6Q1FigureSnapshot;
+
 type ExProps = {
   exNum: number;
   validateCommand: number;
-  onValidated: (score: number, max: number) => void;
+  onValidated: (score: number, max: number, results?: boolean[], snapshot?: G6EvalSnapshot) => void;
+  reviewSnapshot?: G6EvalSnapshot;
 };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -81,8 +109,6 @@ function ShapeGlyph({ shape, className, fill = SHAPE_FILL }: { shape: ShapeIcon;
 }
 
 const SHAPE_CELL_FILL = "color-mix(in srgb, var(--color-accent-alg) 22%, white)";
-
-type CoordAnswer = { col: string; row: string };
 
 function coordAnswerOk(answer: CoordAnswer, cell: GridCell): boolean {
   const col = answer.col.trim().toUpperCase();
@@ -153,8 +179,6 @@ function GridCoordFields({
     </div>
   );
 }
-
-type XYAnswer = { x: string; y: string };
 
 function xyAnswerOk(answer: XYAnswer, x: number, y: number): boolean {
   const px = parseInt(answer.x.trim(), 10);
@@ -445,24 +469,27 @@ function genReadItems(): ReadItem[] {
   }));
 }
 
-export function G6GridReadExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [items] = useState(() => genReadItems());
+export function G6GridReadExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_read";
+  const [items] = useState(() => (readOnly ? reviewSnapshot.items : genReadItems()));
   const [answers, setAnswers] = useState<CoordAnswer[]>(() =>
-    items.map(() => ({ col: "", row: "" })),
+    readOnly ? reviewSnapshot.answers : items.map(() => ({ col: "", row: "" })),
   );
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly ? items.map((it, i) => coordAnswerOk(answers[i] ?? { col: "", row: "" }, it.cell)) : [],
+  );
   const prev = useRef(-1);
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = items.map((it, i) => coordAnswerOk(answers[i] ?? { col: "", row: "" }, it.cell));
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, items, answers, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, { kind: "g6_read", items, answers });
+  }, [validated, readOnly, items, answers, onValidated]);
 
-  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+  useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
 
   return (
     <div className="space-y-4">
@@ -506,18 +533,28 @@ function genPlaceItems(): PlaceItem[] {
   return pickN(GRID_SHAPES, 4).map((shape, i) => ({ shape, cell: cells[i]! }));
 }
 
-export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [items] = useState(() => genPlaceItems());
+export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_place";
+  const [items] = useState(() => (readOnly ? reviewSnapshot.items : genPlaceItems()));
   const [selected, setSelected] = useState<string | null>(null);
   const [placements, setPlacements] = useState<Record<string, GridCell | null>>(() =>
-    Object.fromEntries(items.map((it) => [it.shape.id, null])),
+    readOnly
+      ? reviewSnapshot.placements
+      : Object.fromEntries(items.map((it) => [it.shape.id, null])),
   );
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? items.map((it) => {
+          const p = placements[it.shape.id];
+          return p !== null && cellKey(p) === cellKey(it.cell);
+        })
+      : [],
+  );
   const prev = useRef(-1);
 
   const onCellClick = (cell: GridCell) => {
-    if (validated || !selected) return;
+    if (readOnly || validated || !selected) return;
     setPlacements((p) => {
       const next = { ...p };
       for (const k of Object.keys(next)) {
@@ -530,17 +567,17 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
   };
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = items.map((it) => {
       const p = placements[it.shape.id];
       return p !== null && cellKey(p) === cellKey(it.cell);
     });
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, items, placements, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, { kind: "g6_place", items, placements });
+  }, [validated, readOnly, items, placements, onValidated]);
 
-  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+  useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
 
   const displayPlacements: GridPlacement[] = items
     .filter((it) => placements[it.shape.id])
@@ -671,24 +708,45 @@ export function G6MedievalLocateExercise({ exNum, validateCommand, onValidated }
 
 // ── Exercice 3 (G6.1) : coordonnées sur figure — 1er quadrant ───────────────
 
-export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated }: ExProps) {
-  const [{ figure, askedPoints, xMax, yMax }] = useState(() => genQ1FigureExercise());
-  const [answers, setAnswers] = useState<XYAnswer[]>(() =>
-    askedPoints.map(() => ({ x: "", y: "" })),
+export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_q1_figure";
+  const [{ figure, askedPoints, xMax, yMax }] = useState(() =>
+    readOnly
+      ? {
+          figure: reviewSnapshot.figure,
+          askedPoints: reviewSnapshot.askedPoints,
+          xMax: reviewSnapshot.xMax,
+          yMax: reviewSnapshot.yMax,
+        }
+      : genQ1FigureExercise(),
   );
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [answers, setAnswers] = useState<XYAnswer[]>(() =>
+    readOnly ? reviewSnapshot.answers : askedPoints.map(() => ({ x: "", y: "" })),
+  );
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y))
+      : [],
+  );
   const prev = useRef(-1);
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y));
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, askedPoints, answers, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_q1_figure",
+      figure,
+      askedPoints,
+      xMax,
+      yMax,
+      answers,
+    });
+  }, [validated, readOnly, askedPoints, answers, onValidated, figure, xMax, yMax]);
 
-  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+  useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
 
   return (
     <div className="space-y-4">

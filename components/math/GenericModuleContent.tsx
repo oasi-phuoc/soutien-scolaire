@@ -40,6 +40,7 @@ import {
   G6MapGenevaExercise,
   G6MapBielExercise,
   G6RebeuvelierExercise,
+  type G6EvalSnapshot,
 } from "@/components/math/geo/G6PlanExercises";
 import {
   G6PolygonIntExercise,
@@ -7451,6 +7452,7 @@ export function GenericModuleContent({
   const [geoValidated, setGeoValidated] = useState(false);
   const [geoValidateTrigger, setGeoValidateTrigger] = useState(0);
   const [geoResults, setGeoResults] = useState<boolean[]>([]);
+  const [geoAnswerSnapshot, setGeoAnswerSnapshot] = useState<G6EvalSnapshot | null>(null);
   const [geoResetKey, setGeoResetKey] = useState(0);
 
   // Eval timer
@@ -7641,6 +7643,7 @@ export function GenericModuleContent({
     setGeoValidated(false);
     setGeoValidateTrigger(0);
     setGeoResults([]);
+    setGeoAnswerSnapshot(null);
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalSavedResults({});
@@ -8118,8 +8121,11 @@ export function GenericModuleContent({
         });
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
       } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan") {
-        currentResults = geoResults.length > 0 ? geoResults : [false, false];
-        // No raw per-field answers available — see renderEvalReviewDetail default case.
+        const fallbackLen = currentStep.kind === "g6_plan" ? 4 : 2;
+        currentResults = geoResults.length > 0 ? geoResults : Array(fallbackLen).fill(false);
+        if (currentStep.kind === "g6_plan" && geoAnswerSnapshot) {
+          setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: geoAnswerSnapshot }));
+        }
       }
       const newSavedDict = { ...evalSavedResults, [evalStepOffset]: currentResults };
       setEvalSavedResults(newSavedDict);
@@ -8172,6 +8178,7 @@ export function GenericModuleContent({
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : es?.kind === "word_problems" ? "Problèmes"
                 : es?.kind === "geo_placement" || es?.kind === "volume_placement" ? es.label
+                : es?.kind === "g6_plan" ? `Exercice ${es.exNum}`
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -8629,6 +8636,7 @@ export function GenericModuleContent({
       setGeoValidated(false);
       setGeoValidateTrigger(0);
       setGeoResults([]);
+      setGeoAnswerSnapshot(null);
       setGeoResetKey((k) => k + 1);
     };
   }
@@ -9771,10 +9779,46 @@ export function GenericModuleContent({
       // so detailed review is intentionally not available for these kinds.
       case "geo_placement":
       case "volume_placement":
-      case "g6_plan":
         return (
           <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
         );
+      case "g6_plan": {
+        const snap = snapshot as G6EvalSnapshot | undefined;
+        if (!snap) return null;
+        if (step.variant === 1 && snap.kind === "g6_read") {
+          return (
+            <G6GridReadExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 2 && snap.kind === "g6_place") {
+          return (
+            <G6GridPlaceExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 4 && step.lesson.submoduleId === "G6-1" && snap.kind === "g6_q1_figure") {
+          return (
+            <G6Q1FigureCoordsExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        return (
+          <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
+        );
+      }
       // comparison_ex is never produced inside evalSteps (it's an A1.4 training-only exercise,
       // not part of the timed eval flow) — defensive no-op, should be unreachable here.
       case "comparison_ex":
@@ -11051,11 +11095,19 @@ export function GenericModuleContent({
         <EvalRevealContext.Provider value={revealCorrection}>
           {currentStep.variant === 1 && (
             <G6GridReadExercise key={`g6r-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max, results, snapshot) => {
+                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
+                if (snapshot) setGeoAnswerSnapshot(snapshot);
+                setGeoValidated(true);
+              }} />
           )}
           {currentStep.variant === 2 && (
             <G6GridPlaceExercise key={`g6p-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max, results, snapshot) => {
+                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
+                if (snapshot) setGeoAnswerSnapshot(snapshot);
+                setGeoValidated(true);
+              }} />
           )}
           {currentStep.variant === 3 && (
             <G6MedievalLocateExercise key={`g6m-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11063,7 +11115,11 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId === "G6-1" && (
             <G6Q1FigureCoordsExercise key={`g6q1-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max, results, snapshot) => {
+                setGeoResults(results ?? Array.from({ length: max }, (_, i) => i < score));
+                if (snapshot) setGeoAnswerSnapshot(snapshot);
+                setGeoValidated(true);
+              }} />
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId !== "G6-1" && (
             <G6CartesianCoordsExercise key={`g6c-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
