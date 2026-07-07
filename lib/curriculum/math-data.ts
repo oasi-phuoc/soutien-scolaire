@@ -234,7 +234,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G6",
     title: "Se repérer dans le plan",
     branch: "geometry",
-    prerequisiteIds: ["G5"],
+    prerequisiteIds: [],
     algebraRefs: ["A3"],
     submodules: [
       sm("G6.1", "Se repérer dans le plan"),
