@@ -342,56 +342,58 @@ export const REBEUVELIER_PATHS: Array<[number, number][]> = [
 
 export type ShapeIcon = { id: string; label: string; svg: string };
 
+const SHAPE_FILL = "var(--color-accent-alg)";
+
 export const GRID_SHAPES: ShapeIcon[] = [
   {
     id: "heart",
     label: "cœur",
-    svg: `<path d="M20 32 C20 22 28 16 36 22 C44 16 52 22 52 32 C52 44 36 54 36 54 C36 54 20 44 20 32Z" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>`,
+    svg: `<path d="M20 32 C20 22 28 16 36 22 C44 16 52 22 52 32 C52 44 36 54 36 54 C36 54 20 44 20 32Z" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "star",
     label: "étoile",
-    svg: `<polygon points="36,14 42,28 58,28 46,38 50,54 36,44 22,54 26,38 14,28 30,28" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,14 42,28 58,28 46,38 50,54 36,44 22,54 26,38 14,28 30,28" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "circle",
     label: "cercle",
-    svg: `<circle cx="36" cy="36" r="16" fill="#60a5fa" stroke="#2563eb" stroke-width="1.5"/>`,
+    svg: `<circle cx="36" cy="36" r="16" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "triangle",
     label: "triangle",
-    svg: `<polygon points="36,14 54,54 18,54" fill="#34d399" stroke="#059669" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,14 54,54 18,54" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "square",
     label: "carré",
-    svg: `<rect x="18" y="18" width="36" height="36" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5"/>`,
+    svg: `<rect x="18" y="18" width="36" height="36" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "diamond",
     label: "losange",
-    svg: `<polygon points="36,12 56,36 36,60 16,36" fill="#fb923c" stroke="#ea580c" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,12 56,36 36,60 16,36" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "arrow",
     label: "flèche",
-    svg: `<polygon points="36,12 52,40 44,40 44,56 28,56 28,40 20,40" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,12 52,40 44,40 44,56 28,56 28,40 20,40" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "cross",
     label: "croix",
-    svg: `<path d="M30 18 H42 V30 H54 V42 H42 V54 H30 V42 H18 V30 H30 Z" fill="#f87171" stroke="#dc2626" stroke-width="1.5"/>`,
+    svg: `<path d="M30 18 H42 V30 H54 V42 H42 V54 H30 V42 H18 V30 H30 Z" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "pentagon",
     label: "pentagone",
-    svg: `<polygon points="36,12 54,30 46,56 26,56 18,30" fill="#2dd4bf" stroke="#0d9488" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,12 54,30 46,56 26,56 18,30" fill="${SHAPE_FILL}"/>`,
   },
   {
     id: "hexagon",
     label: "hexagone",
-    svg: `<polygon points="36,10 54,22 54,46 36,58 18,46 18,22" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,10 54,22 54,46 36,58 18,46 18,22" fill="${SHAPE_FILL}"/>`,
   },
 ];
 
@@ -687,34 +689,129 @@ export const CARTESIAN_FIGURES: CartesianFigure[] = [
   },
 ];
 
-/** Figures du 1er quadrant pour G6.1 ex. 3 — contours seuls, sommets à lire */
+/** Figures du 1er quadrant pour G6.1 ex. 3 — dessins reconnaissables, sommets aux coins */
 export type Q1CartesianFigure = {
   id: string;
   name: string;
   polygons: Array<{ points: [number, number][] }>;
-  /** Sommets disponibles pour tirer les points a–d */
+  /** Sommets (coins des polygones) pour tirer les points a–d */
   vertices: [number, number][];
 };
 
+function q1Verts(polygons: Array<{ points: [number, number][] }>): [number, number][] {
+  const seen = new Set<string>();
+  const out: [number, number][] = [];
+  for (const poly of polygons) {
+    for (const pt of poly.points) {
+      const k = `${pt[0]},${pt[1]}`;
+      if (!seen.has(k)) {
+        seen.add(k);
+        out.push(pt);
+      }
+    }
+  }
+  return out;
+}
+
+function q1Figure(
+  id: string,
+  name: string,
+  polygons: Array<{ points: [number, number][] }>,
+): Q1CartesianFigure {
+  return { id, name, polygons, vertices: q1Verts(polygons) };
+}
+
 export const Q1_CARTESIAN_FIGURES: Q1CartesianFigure[] = [
-  { id: "q1-tri", name: "triangle", polygons: [{ points: [[5, 5], [25, 5], [15, 22]] }], vertices: [[5, 5], [25, 5], [15, 22], [10, 10], [20, 10], [15, 15]] },
-  { id: "q1-rect", name: "rectangle", polygons: [{ points: [[5, 8], [28, 8], [28, 18], [5, 18]] }], vertices: [[5, 8], [28, 8], [28, 18], [5, 18], [15, 8], [15, 18]] },
-  { id: "q1-trap", name: "trapèze", polygons: [{ points: [[8, 6], [22, 6], [26, 18], [4, 18]] }], vertices: [[8, 6], [22, 6], [26, 18], [4, 18], [15, 6], [15, 18]] },
-  { id: "q1-house", name: "maison", polygons: [{ points: [[6, 12], [16, 4], [26, 12], [26, 22], [6, 22]] }], vertices: [[6, 12], [16, 4], [26, 12], [26, 22], [6, 22], [16, 12]] },
-  { id: "q1-pent", name: "pentagone", polygons: [{ points: [[16, 4], [26, 12], [22, 24], [10, 24], [6, 12]] }], vertices: [[16, 4], [26, 12], [22, 24], [10, 24], [6, 12], [16, 16]] },
-  { id: "q1-hex", name: "hexagone", polygons: [{ points: [[10, 8], [20, 8], [26, 15], [20, 22], [10, 22], [4, 15]] }], vertices: [[10, 8], [20, 8], [26, 15], [20, 22], [10, 22], [4, 15], [15, 15]] },
-  { id: "q1-arrow", name: "flèche", polygons: [{ points: [[16, 24], [22, 14], [18, 14], [18, 6], [14, 6], [14, 14], [10, 14]] }], vertices: [[16, 24], [22, 14], [18, 14], [18, 6], [14, 6], [14, 14], [10, 14]] },
-  { id: "q1-l", name: "forme en L", polygons: [{ points: [[5, 5], [12, 5], [12, 14], [22, 14], [22, 22], [5, 22]] }], vertices: [[5, 5], [12, 5], [12, 14], [22, 14], [22, 22], [5, 22], [8, 14]] },
-  { id: "q1-kite", name: "cerf-volant", polygons: [{ points: [[16, 4], [24, 14], [16, 24], [8, 14]] }], vertices: [[16, 4], [24, 14], [16, 24], [8, 14], [16, 14], [20, 10]] },
-  { id: "q1-para", name: "parallélogramme", polygons: [{ points: [[6, 8], [22, 8], [28, 20], [12, 20]] }], vertices: [[6, 8], [22, 8], [28, 20], [12, 20], [14, 14], [24, 14]] },
-  { id: "q1-boat", name: "bateau", polygons: [{ points: [[4, 10], [8, 6], [24, 6], [28, 10], [24, 14], [8, 14]] }], vertices: [[4, 10], [8, 6], [24, 6], [28, 10], [24, 14], [8, 14], [16, 6]] },
-  { id: "q1-chev", name: "chevron", polygons: [{ points: [[6, 18], [16, 6], [26, 18], [20, 18], [16, 12], [12, 18]] }], vertices: [[6, 18], [16, 6], [26, 18], [20, 18], [16, 12], [12, 18]] },
-  { id: "q1-flag", name: "drapeau", polygons: [{ points: [[6, 5], [24, 10], [24, 18], [6, 22], [6, 5]] }], vertices: [[6, 5], [24, 10], [24, 18], [6, 22], [15, 14], [6, 14]] },
-  { id: "q1-cross", name: "croix", polygons: [{ points: [[12, 5], [20, 5], [20, 12], [27, 12], [27, 20], [20, 20], [20, 27], [12, 27], [12, 20], [5, 20], [5, 12], [12, 12]] }], vertices: [[12, 5], [20, 5], [20, 12], [27, 12], [27, 20], [20, 20], [12, 20], [5, 12]] },
-  { id: "q1-step", name: "marches", polygons: [{ points: [[5, 5], [15, 5], [15, 12], [25, 12], [25, 22], [5, 22]] }], vertices: [[5, 5], [15, 5], [15, 12], [25, 12], [25, 22], [5, 22], [10, 12]] },
-  { id: "q1-diam", name: "losange", polygons: [{ points: [[16, 4], [26, 14], [16, 24], [6, 14]] }], vertices: [[16, 4], [26, 14], [16, 24], [6, 14], [16, 14], [21, 9]] },
-  { id: "q1-arch", name: "arche", polygons: [{ points: [[6, 8], [6, 20], [26, 20], [26, 8], [22, 8], [22, 16], [10, 16], [10, 8]] }], vertices: [[6, 8], [6, 20], [26, 20], [26, 8], [22, 8], [10, 8], [16, 20]] },
-  { id: "q1-comp", name: "figure composée", polygons: [{ points: [[5, 10], [15, 10], [15, 5], [25, 5], [25, 20], [5, 20]] }], vertices: [[5, 10], [15, 10], [15, 5], [25, 5], [25, 20], [5, 20], [10, 15]] },
-  { id: "q1-sail", name: "voilier", polygons: [{ points: [[8, 6], [20, 6], [24, 18], [4, 18]] }, { points: [[14, 6], [18, 6], [16, 22]] }], vertices: [[8, 6], [20, 6], [24, 18], [4, 18], [14, 6], [18, 6], [16, 22], [16, 12]] },
-  { id: "q1-star", name: "étoile", polygons: [{ points: [[16, 4], [19, 12], [28, 12], [21, 17], [24, 26], [16, 21], [8, 26], [11, 17], [4, 12], [13, 12]] }], vertices: [[16, 4], [19, 12], [28, 12], [21, 17], [24, 26], [16, 21], [8, 26], [11, 17]] },
+  q1Figure("q1-house", "maison", [
+    { points: [[4, 12], [10, 4], [16, 12], [16, 18], [4, 18]] },
+    { points: [[7, 18], [7, 14], [13, 14], [13, 18]] },
+  ]),
+  q1Figure("q1-boat", "bateau", [
+    { points: [[2, 10], [5, 6], [15, 6], [18, 10], [15, 12], [5, 12]] },
+    { points: [[10, 6], [10, 2], [12, 6]] },
+  ]),
+  q1Figure("q1-tree", "arbre", [
+    { points: [[9, 8], [11, 8], [11, 4], [9, 4]] },
+    { points: [[10, 16], [16, 8], [4, 8]] },
+  ]),
+  q1Figure("q1-flower", "fleur", [
+    { points: [[9, 6], [11, 6], [11, 2], [9, 2]] },
+    { points: [[10, 10], [13, 7], [16, 10], [13, 13]] },
+    { points: [[10, 10], [7, 13], [4, 10], [7, 7]] },
+  ]),
+  q1Figure("q1-plane", "avion", [
+    { points: [[2, 10], [14, 10], [16, 12], [14, 14], [2, 14]] },
+    { points: [[8, 10], [10, 16], [12, 10]] },
+    { points: [[14, 10], [18, 6], [18, 10]] },
+  ]),
+  q1Figure("q1-car", "voiture", [
+    { points: [[3, 8], [17, 8], [17, 12], [3, 12]] },
+    { points: [[6, 12], [6, 14], [8, 14], [8, 12]] },
+    { points: [[12, 12], [12, 14], [14, 14], [14, 12]] },
+    { points: [[5, 8], [7, 6], [13, 6], [15, 8]] },
+  ]),
+  q1Figure("q1-fish", "poisson", [
+    { points: [[4, 8], [12, 6], [12, 14], [4, 12]] },
+    { points: [[12, 10], [18, 6], [18, 14], [12, 10]] },
+  ]),
+  q1Figure("q1-sun", "soleil", [
+    { points: [[8, 8], [12, 8], [12, 12], [8, 12]] },
+    { points: [[9, 14], [11, 14], [10, 16]] },
+    { points: [[9, 4], [11, 4], [10, 6]] },
+    { points: [[14, 9], [16, 9], [14, 11]] },
+    { points: [[4, 9], [6, 9], [4, 11]] },
+    { points: [[13, 12], [15, 14], [13, 14]] },
+    { points: [[7, 12], [5, 14], [7, 14]] },
+    { points: [[13, 8], [15, 6], [13, 6]] },
+    { points: [[7, 8], [5, 6], [7, 6]] },
+  ]),
+  q1Figure("q1-cloud", "nuage", [
+    { points: [[4, 10], [4, 14], [16, 14], [16, 10], [14, 8], [12, 10], [8, 8], [6, 10]] },
+  ]),
+  q1Figure("q1-kite", "cerf-volant", [
+    { points: [[10, 16], [14, 10], [10, 4], [6, 10]] },
+    { points: [[10, 4], [10, 2], [12, 4]] },
+  ]),
+  q1Figure("q1-rocket", "fusée", [
+    { points: [[8, 16], [12, 16], [12, 6], [8, 6]] },
+    { points: [[10, 16], [14, 12], [6, 12]] },
+    { points: [[8, 6], [10, 2], [12, 6]] },
+  ]),
+  q1Figure("q1-umbrella", "parapluie", [
+    { points: [[4, 12], [6, 14], [8, 12], [10, 14], [12, 12], [14, 14], [16, 12]] },
+    { points: [[9, 12], [11, 12], [11, 4], [9, 4]] },
+  ]),
+  q1Figure("q1-castle", "château", [
+    { points: [[4, 8], [4, 16], [16, 16], [16, 8], [14, 8], [14, 10], [12, 10], [12, 8], [8, 8], [8, 10], [6, 10], [6, 8]] },
+    { points: [[7, 16], [7, 12], [13, 12], [13, 16]] },
+  ]),
+  q1Figure("q1-mountain", "montagne", [
+    { points: [[2, 6], [8, 16], [10, 10], [14, 16], [18, 6]] },
+  ]),
+  q1Figure("q1-snail", "escargot", [
+    { points: [[4, 4], [12, 4], [12, 10], [8, 10], [8, 8], [10, 8], [10, 6], [6, 6], [6, 8], [4, 8]] },
+    { points: [[2, 4], [4, 4], [4, 2], [2, 2]] },
+  ]),
+  q1Figure("q1-butterfly", "papillon", [
+    { points: [[10, 10], [4, 14], [4, 8], [10, 10], [16, 8], [16, 14]] },
+    { points: [[9, 10], [9, 6], [11, 6], [11, 10]] },
+  ]),
+  q1Figure("q1-cup", "gobelet", [
+    { points: [[6, 6], [14, 6], [12, 16], [8, 16]] },
+    { points: [[8, 16], [8, 18], [12, 18], [12, 16]] },
+  ]),
+  q1Figure("q1-candle", "bougie", [
+    { points: [[8, 4], [12, 4], [12, 14], [8, 14]] },
+    { points: [[10, 4], [12, 2], [8, 2]] },
+  ]),
+  q1Figure("q1-chair", "chaise", [
+    { points: [[6, 6], [14, 6], [14, 10], [6, 10]] },
+    { points: [[6, 10], [6, 16], [8, 16], [8, 10]] },
+    { points: [[12, 10], [12, 16], [14, 16], [14, 10]] },
+    { points: [[8, 6], [8, 2], [12, 2], [12, 6]] },
+  ]),
+  q1Figure("q1-icecream", "glace", [
+    { points: [[8, 10], [12, 10], [10, 16]] },
+    { points: [[7, 6], [13, 6], [13, 10], [7, 10]] },
+  ]),
 ];

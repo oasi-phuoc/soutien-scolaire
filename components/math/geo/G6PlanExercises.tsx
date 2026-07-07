@@ -62,10 +62,20 @@ function randomCells(cols: string[], rows: number[], count: number): GridCell[] 
   return pickN(all, count);
 }
 
-function ShapeGlyph({ shape, className }: { shape: ShapeIcon; className?: string }) {
+const SHAPE_FILL = "var(--color-accent-alg)";
+const SHAPE_CORRECTION_FILL = "#d97706";
+
+function themedShapeSvg(svg: string, fill: string): string {
+  return svg
+    .replace(/\sstroke="[^"]*"/g, "")
+    .replace(/\sstroke-width="[^"]*"/g, "")
+    .replace(/fill="[^"]*"/g, `fill="${fill}"`);
+}
+
+function ShapeGlyph({ shape, className, fill = SHAPE_FILL }: { shape: ShapeIcon; className?: string; fill?: string }) {
   return (
     <svg viewBox="0 0 72 72" className={className} aria-hidden>
-      <g dangerouslySetInnerHTML={{ __html: shape.svg }} />
+      <g dangerouslySetInnerHTML={{ __html: themedShapeSvg(shape.svg, fill) }} />
     </svg>
   );
 }
@@ -226,14 +236,14 @@ function Q1FigurePlane({
   polygons,
   points,
   unit = 10,
-  gridStep = 5,
+  labelStep = 5,
 }: {
   xMax: number;
   yMax: number;
   polygons: Array<{ points: [number, number][] }>;
   points: Array<{ label: string; x: number; y: number }>;
   unit?: number;
-  gridStep?: number;
+  labelStep?: number;
 }) {
   const pad = 22;
   const w = pad * 2 + xMax * unit;
@@ -243,32 +253,33 @@ function Q1FigurePlane({
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="mx-auto w-full max-w-md rounded-lg border border-[var(--color-border-default)] bg-white">
-      {Array.from({ length: Math.floor(xMax / gridStep) + 1 }, (_, i) => i * gridStep).map((x) => (
+      {Array.from({ length: xMax + 1 }, (_, i) => i).map((x) => (
         <line key={`gx-${x}`}
           x1={cx + x * unit} y1={pad - 2}
           x2={cx + x * unit} y2={cy + 2}
-          stroke="#e2e8f0" strokeWidth={x === 0 ? 0 : 0.5} />
+          stroke={x % labelStep === 0 ? "#e2e8f0" : "#f1f5f9"}
+          strokeWidth={x === 0 ? 0 : x % labelStep === 0 ? 0.5 : 0.25} />
       ))}
-      {Array.from({ length: Math.floor(yMax / gridStep) + 1 }, (_, i) => i * gridStep).map((y) => (
+      {Array.from({ length: yMax + 1 }, (_, i) => i).map((y) => (
         <line key={`gy-${y}`}
           x1={pad - 2} y1={cy - y * unit}
           x2={cx + xMax * unit + 2} y2={cy - y * unit}
-          stroke="#e2e8f0" strokeWidth={y === 0 ? 0 : 0.5} />
+          stroke={y % labelStep === 0 ? "#e2e8f0" : "#f1f5f9"}
+          strokeWidth={y === 0 ? 0 : y % labelStep === 0 ? 0.5 : 0.25} />
       ))}
       <line x1={pad - 2} y1={cy} x2={cx + xMax * unit + 2} y2={cy} stroke="#334155" strokeWidth="1.5" />
       <line x1={cx} y1={pad - 2} x2={cx} y2={cy + 2} stroke="#334155" strokeWidth="1.5" />
-      {Array.from({ length: Math.floor(xMax / gridStep) + 1 }, (_, i) => i * gridStep)
+      <text x={cx - 6} y={cy + 10} textAnchor="middle" fontSize="7" fill="#64748b">0</text>
+      {Array.from({ length: Math.floor(xMax / labelStep) + 1 }, (_, i) => i * labelStep)
         .filter((x) => x > 0)
         .map((x) => (
           <text key={`tx-${x}`} x={cx + x * unit} y={cy + 14} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
         ))}
-      {Array.from({ length: Math.floor(yMax / gridStep) + 1 }, (_, i) => i * gridStep)
+      {Array.from({ length: Math.floor(yMax / labelStep) + 1 }, (_, i) => i * labelStep)
         .filter((y) => y > 0)
         .map((y) => (
           <text key={`ty-${y}`} x={cx - 8} y={cy - y * unit + 2} textAnchor="middle" fontSize="7" fill="#64748b">{y}</text>
         ))}
-      <text x={cx + xMax * unit + 4} y={cy + 4} fontSize="8" fontWeight="bold" fill="#334155">x</text>
-      <text x={cx + 4} y={pad - 4} fontSize="8" fontWeight="bold" fill="#334155">y</text>
 
       {polygons.map((poly, i) => (
         <polygon
@@ -295,27 +306,32 @@ function Q1FigurePlane({
 }
 
 function genQ1FigureExercise() {
-  const figure = pickN(Q1_CARTESIAN_FIGURES, 1)[0]!;
+  const pool = Q1_CARTESIAN_FIGURES.filter((f) => f.vertices.length >= 4);
+  const figure = pickN(pool, 1)[0]!;
   const verts = pickN(figure.vertices, 4);
-  const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
+  const askedPoints = (["a", "b", "c", "d"] as const).slice(0, verts.length).map((label, i) => ({
     label,
     x: verts[i]![0],
     y: verts[i]![1],
   }));
   const maxX = Math.max(...figure.vertices.map((v) => v[0]));
   const maxY = Math.max(...figure.vertices.map((v) => v[1]));
-  const xMax = Math.max(15, Math.ceil((maxX + 5) / 5) * 5);
-  const yMax = Math.max(15, Math.ceil((maxY + 5) / 5) * 5);
+  const xMax = Math.min(20, Math.max(10, Math.ceil((maxX + 2) / 5) * 5));
+  const yMax = Math.min(20, Math.max(10, Math.ceil((maxY + 2) / 5) * 5));
   return { figure, askedPoints, xMax, yMax };
 }
 
 // ── Grille lettres/chiffres ───────────────────────────────────────────────────
+
+type GridPlacement = { cell: GridCell; shape: ShapeIcon; fill?: string; key?: string };
 
 function LetterGrid({
   cols,
   rows,
   cellSize = 40,
   placements,
+  correctionPlacements,
+  wrongCells,
   highlight,
   onCellClick,
   selectedShape,
@@ -324,7 +340,9 @@ function LetterGrid({
   cols: string[];
   rows: number[];
   cellSize?: number;
-  placements?: Array<{ cell: GridCell; shape: ShapeIcon }>;
+  placements?: GridPlacement[];
+  correctionPlacements?: GridPlacement[];
+  wrongCells?: GridCell[];
   highlight?: GridCell[];
   onCellClick?: (cell: GridCell) => void;
   selectedShape?: string | null;
@@ -333,9 +351,25 @@ function LetterGrid({
   const w = 28 + cols.length * cellSize;
   const h = 24 + rows.length * cellSize;
   const placementMap = new Map(
-    (placements ?? []).map((p) => [cellKey(p.cell), p.shape]),
+    (placements ?? []).map((p) => [cellKey(p.cell), p]),
   );
   const highlightSet = new Set((highlight ?? []).map(cellKey));
+  const wrongSet = new Set((wrongCells ?? []).map(cellKey));
+
+  const renderShape = (placement: GridPlacement, x: number, y: number) => (
+    <svg
+      key={placement.key ?? `${cellKey(placement.cell)}-${placement.shape.id}`}
+      x={x + 1}
+      y={y + 1}
+      width={cellSize - 2}
+      height={cellSize - 2}
+      viewBox="0 0 72 72"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden
+    >
+      <g dangerouslySetInnerHTML={{ __html: themedShapeSvg(placement.shape.svg, placement.fill ?? SHAPE_FILL) }} />
+    </svg>
+  );
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="mx-auto w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
@@ -353,35 +387,45 @@ function LetterGrid({
           const key = cellKey(cell);
           const x = 28 + ci * cellSize;
           const y = 24 + ri * cellSize;
-          const shape = placementMap.get(key);
+          const placement = placementMap.get(key);
           const isHi = highlightSet.has(key);
+          const isWrong = wrongSet.has(key);
           return (
             <g key={key}>
               <rect
                 x={x + 1} y={y + 1} width={cellSize - 2} height={cellSize - 2}
-                fill={isHi ? "#fef08a" : shape ? SHAPE_CELL_FILL : "#fff"}
+                fill={isHi ? "#fef08a" : placement ? SHAPE_CELL_FILL : "#fff"}
                 stroke={onCellClick ? (selectedShape ? "var(--color-accent-alg)" : "#cbd5e1") : "#cbd5e1"}
                 strokeWidth={onCellClick ? 1.5 : 1}
                 className={onCellClick ? "cursor-pointer" : undefined}
                 onClick={() => onCellClick?.(cell)}
               />
-              {shape && (
-                <svg
-                  x={x + 1}
-                  y={y + 1}
-                  width={cellSize - 2}
-                  height={cellSize - 2}
-                  viewBox="0 0 72 72"
-                  preserveAspectRatio="xMidYMid meet"
-                  aria-hidden
+              {placement && renderShape(placement, x, y)}
+              {isWrong && (
+                <text
+                  x={x + cellSize / 2}
+                  y={y + cellSize / 2 + 5}
+                  textAnchor="middle"
+                  fontSize="22"
+                  fontWeight="bold"
+                  fill="#dc2626"
+                  pointerEvents="none"
                 >
-                  <g dangerouslySetInnerHTML={{ __html: shape.svg }} />
-                </svg>
+                  ×
+                </text>
               )}
             </g>
           );
         }),
       )}
+      {(correctionPlacements ?? []).map((placement) => {
+        const ci = cols.findIndex((c) => c.toLowerCase() === placement.cell.col.toLowerCase());
+        const ri = rows.indexOf(placement.cell.row);
+        if (ci < 0 || ri < 0) return null;
+        const x = 28 + ci * cellSize;
+        const y = 24 + ri * cellSize;
+        return renderShape({ ...placement, fill: placement.fill ?? SHAPE_CORRECTION_FILL, key: `corr-${placement.shape.id}` }, x, y);
+      })}
     </svg>
   );
 }
@@ -458,8 +502,8 @@ type PlaceItem = { shape: ShapeIcon; cell: GridCell };
 function genPlaceItems(): PlaceItem[] {
   const cols = ["a", "b", "c", "d", "e", "f"];
   const rows = [1, 2, 3, 4, 5, 6];
-  const cells = randomCells(cols, rows, 3);
-  return pickN(GRID_SHAPES, 3).map((shape, i) => ({ shape, cell: cells[i]! }));
+  const cells = randomCells(cols, rows, 4);
+  return pickN(GRID_SHAPES, 4).map((shape, i) => ({ shape, cell: cells[i]! }));
 }
 
 export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExProps) {
@@ -498,9 +542,21 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
 
   useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
 
-  const displayPlacements = items
+  const displayPlacements: GridPlacement[] = items
     .filter((it) => placements[it.shape.id])
     .map((it) => ({ cell: placements[it.shape.id]!, shape: it.shape }));
+
+  const correctionPlacements: GridPlacement[] = validated
+    ? items
+        .filter((it, i) => !results[i])
+        .map((it) => ({ cell: it.cell, shape: it.shape, fill: SHAPE_CORRECTION_FILL }))
+    : [];
+
+  const wrongCells: GridCell[] = validated
+    ? items
+        .filter((it, i) => !results[i] && placements[it.shape.id])
+        .map((it) => placements[it.shape.id]!)
+    : [];
 
   return (
     <div className="space-y-4">
@@ -508,7 +564,7 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
       <p className="text-sm text-[var(--color-text-secondary)]">
         Place chaque forme dans la case indiquée. Clique sur une forme, puis sur la grille.
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
         {items.map((it, i) => {
           const isSel = selected === it.shape.id;
           const ok = validated ? results[i] : null;
@@ -543,12 +599,11 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
         cols={["a", "b", "c", "d", "e", "f"]}
         rows={[1, 2, 3, 4, 5, 6]}
         placements={displayPlacements}
+        correctionPlacements={correctionPlacements}
+        wrongCells={wrongCells}
         onCellClick={onCellClick}
         selectedShape={selected}
       />
-      {validated && results.some((r) => !r) && (
-        <p className="text-xs text-amber-600">Les bonnes cases sont indiquées au-dessus de la grille.</p>
-      )}
     </div>
   );
 }
@@ -639,7 +694,7 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated }
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Je note les coordonnées des points (x ; y). Les axes sont gradués de 5 en 5.
+        Je note les coordonnées des points. Les axes sont gradués de 5 en 5.
       </p>
       <Q1FigurePlane xMax={xMax} yMax={yMax} polygons={figure.polygons} points={askedPoints} />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
