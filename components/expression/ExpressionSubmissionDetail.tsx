@@ -1,27 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { reviewExpressionAction, type ExpressionAnnotation, type ExpressionSubmission } from "@/app/actions/expression";
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { reviewExpressionAction, type ExpressionSubmission } from "@/app/actions/expression";
 import { formatMailboxFullDate } from "@/lib/messagerie/inbox";
 import { rubricForPeExercise } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
+import {
+  flattenBlockAnnotations,
+  initBlockReviews,
+  joinCorrectedText,
+  sumBlockPoints,
+} from "@/lib/curriculum/content/communication/pe-block-review";
 import { parseSubmissionExercises } from "@/lib/curriculum/content/communication/pe-submission";
-import type { ExerciseGrading, TeacherGrading } from "@/lib/curriculum/content/communication/expression-submission-types";
+import type { ExerciseBlockReview, ExerciseGrading, TeacherGrading } from "@/lib/curriculum/content/communication/expression-submission-types";
+import { PeExerciseCorrection } from "@/components/expression/PeExerciseCorrection";
 import { PeExerciseFrame } from "@/components/expression/PeExerciseFrame";
 import { PeGradingRubric, sumGradingTotal } from "@/components/expression/PeGradingRubric";
 import { PeGradingResult } from "@/components/expression/PeGradingResult";
-
-function CorrectedText({ original, corrected }: { original: string; corrected: string }) {
-  const before = original.split(/(\s+)/u);
-  const after = corrected.split(/(\s+)/u);
-  return (
-    <p className="whitespace-pre-wrap text-base leading-7 text-[var(--color-text-primary)]">
-      {after.map((token, index) => (
-        <span key={index} className={token !== before[index] && token.trim() ? "font-semibold text-amber-600" : undefined}>{token}</span>
-      ))}
-    </p>
-  );
-}
 
 export function ExpressionSubmissionDetail({
   item,
@@ -41,28 +36,35 @@ export function ExpressionSubmissionDetail({
   const rubricExercises = exercises.filter((exercise) => rubricForPeExercise(exercise.kind));
   const hasRubric = isTeacher && isMoyenPe && rubricExercises.length > 0;
 
-  const [correctedText, setCorrectedText] = useState(item.corrected_text ?? item.original_text);
+  const [blockReviews, setBlockReviews] = useState<ExerciseBlockReview[]>(() =>
+    initBlockReviews(exercises, item.corrected_text, item.teacher_grading, item.annotations ?? []),
+  );
   const [teacherComment, setTeacherComment] = useState(item.teacher_comment ?? "");
-  const [annotations, setAnnotations] = useState<ExpressionAnnotation[]>(item.annotations ?? []);
   const [teacherPoints, setTeacherPoints] = useState(item.teacher_points != null ? String(item.teacher_points) : "");
   const [finalResult, setFinalResult] = useState(item.final_result ?? "");
   const [exerciseGrading, setExerciseGrading] = useState<ExerciseGrading[]>(
     () => item.teacher_grading?.exercises ?? [],
   );
-  const [annotationComment, setAnnotationComment] = useState("");
-  const [selection, setSelection] = useState<{ start: number; end: number; text: string } | null>(null);
   const [message, setMessage] = useState("");
   const [pending, startTransition] = useTransition();
-  const originalRef = useRef<HTMLDivElement>(null);
   const maxPoints = item.teacher_max_points ?? 25;
 
   const rubricTotal = sumGradingTotal(exerciseGrading);
+  const blockTotal = sumBlockPoints(blockReviews);
 
   useEffect(() => {
     if (hasRubric && rubricTotal > 0) {
       setTeacherPoints(String(rubricTotal));
+      setBlockReviews((current) => current.map((review) => {
+        const grading = exerciseGrading.find((entry) => entry.exerciseId === review.exerciseId);
+        return grading ? { ...review, points: grading.total } : review;
+      }));
+      return;
     }
-  }, [hasRubric, rubricTotal]);
+    if (blockTotal > 0) {
+      setTeacherPoints(String(blockTotal));
+    }
+  }, [hasRubric, rubricTotal, blockTotal, exerciseGrading]);
 
   const kindLabel = isOral ? "Production orale" : "Production écrite";
   const subject = isTeacher
@@ -73,30 +75,24 @@ export function ExpressionSubmissionDetail({
   const from = isTeacher ? (correspondentName || "Élève") : item.status === "reviewed" ? (correspondentName || "Professeur") : "Moi";
   const to = isTeacher ? "Moi" : (correspondentName || "Professeur");
 
-  function captureSelection() {
-    const sel = window.getSelection();
-    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
-    const range = sel.getRangeAt(0);
-    const container = originalRef.current;
-    if (!container || !container.contains(range.commonAncestorContainer)) return;
-    const preRange = range.cloneRange();
-    preRange.selectNodeContents(container);
-    preRange.setEnd(range.startContainer, range.startOffset);
-    const start = preRange.toString().length;
-    const selectedText = range.toString();
-    if (selectedText.trim()) setSelection({ start, end: start + selectedText.length, text: selectedText });
-  }
+  const storedBlockReviews = item.teacher_grading?.blockReviews;
+  const studentBlockReviews = useMemo(
+    () => storedBlockReviews?.length
+      ? exercises.map((exercise) => {
+          const match = storedBlockReviews.find((entry) => entry.exerciseId === exercise.id);
+          return match ?? {
+            exerciseId: exercise.id,
+            correctedText: "",
+            annotations: [],
+            points: item.teacher_grading?.exercises.find((entry) => entry.exerciseId === exercise.id)?.total ?? 0,
+          };
+        })
+      : initBlockReviews(exercises, item.corrected_text, item.teacher_grading, item.annotations ?? []),
+    [storedBlockReviews, exercises, item.corrected_text, item.teacher_grading, item.annotations],
+  );
 
-  function addAnnotation() {
-    if (!selection || !annotationComment.trim()) return;
-    setAnnotations((current) => [...current, {
-      start: selection.start,
-      end: selection.end,
-      text: selection.text,
-      comment: annotationComment.trim(),
-    }]);
-    setSelection(null);
-    setAnnotationComment("");
+  function updateBlockReview(review: ExerciseBlockReview) {
+    setBlockReviews((current) => current.map((entry) => (entry.exerciseId === review.exerciseId ? review : entry)));
   }
 
   function updateExerciseGrading(grading: ExerciseGrading) {
@@ -108,10 +104,14 @@ export function ExpressionSubmissionDetail({
 
   function saveReview() {
     startTransition(async () => {
-      const points = Number(teacherPoints.replace(",", "."));
-      const teacherGrading: TeacherGrading | null = hasRubric && exerciseGrading.length > 0
-        ? { exercises: exerciseGrading, totalPoints: points }
-        : null;
+      const points = hasRubric && rubricTotal > 0 ? rubricTotal : blockTotal;
+      const correctedText = joinCorrectedText(exercises, blockReviews);
+      const annotations = flattenBlockAnnotations(blockReviews);
+      const teacherGrading: TeacherGrading = {
+        exercises: exerciseGrading,
+        blockReviews,
+        totalPoints: points,
+      };
       const result = await reviewExpressionAction({
         id: item.id,
         correctedText,
@@ -124,6 +124,9 @@ export function ExpressionSubmissionDetail({
       setMessage(result.ok ? "Correction et résultat renvoyés à l'élève." : (result.reason ?? "Enregistrement impossible."));
     });
   }
+
+  const allBlocksCorrected = blockReviews.every((review) => review.correctedText.trim());
+  const hasPoints = hasRubric ? rubricTotal > 0 || blockTotal > 0 : blockTotal > 0 || teacherPoints.trim();
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-3 pb-28 pt-4 sm:px-4 sm:pt-6">
@@ -167,104 +170,66 @@ export function ExpressionSubmissionDetail({
 
           {exercises.length > 0 ? (
             <div className="space-y-5">
-              {exercises.map((exercise, index) => (
-                <PeExerciseFrame key={exercise.id} exercise={exercise} index={index}>
-                  {hasRubric && rubricForPeExercise(exercise.kind) && (
-                    <PeGradingRubric
-                      exercise={exercise}
-                      grading={exerciseGrading.find((entry) => entry.exerciseId === exercise.id)}
-                      onChange={updateExerciseGrading}
-                    />
-                  )}
-                  {!isTeacher && item.status === "reviewed" && item.teacher_grading && (
-                    <PeGradingResult
-                      exercise={exercise}
-                      grading={item.teacher_grading.exercises.find((entry) => entry.exerciseId === exercise.id)}
-                    />
-                  )}
-                </PeExerciseFrame>
-              ))}
+              {exercises.map((exercise, index) => {
+                const review = isTeacher
+                  ? blockReviews.find((entry) => entry.exerciseId === exercise.id)
+                  : studentBlockReviews.find((entry) => entry.exerciseId === exercise.id);
+                return (
+                  <PeExerciseFrame key={exercise.id} exercise={exercise} index={index}>
+                    {isTeacher && review && (
+                      <>
+                        {hasRubric && rubricForPeExercise(exercise.kind) && (
+                          <PeGradingRubric
+                            exercise={exercise}
+                            grading={exerciseGrading.find((entry) => entry.exerciseId === exercise.id)}
+                            onChange={updateExerciseGrading}
+                          />
+                        )}
+                        <PeExerciseCorrection
+                          exercise={exercise}
+                          review={review}
+                          editable
+                          hidePoints={hasRubric && Boolean(rubricForPeExercise(exercise.kind))}
+                          onChange={updateBlockReview}
+                        />
+                      </>
+                    )}
+                    {!isTeacher && item.status === "reviewed" && (
+                      <>
+                        {item.teacher_grading && (
+                          <PeGradingResult
+                            exercise={exercise}
+                            grading={item.teacher_grading.exercises.find((entry) => entry.exerciseId === exercise.id)}
+                          />
+                        )}
+                        {review && (
+                          <PeExerciseCorrection
+                            exercise={exercise}
+                            review={review}
+                            editable={false}
+                          />
+                        )}
+                      </>
+                    )}
+                  </PeExerciseFrame>
+                );
+              })}
             </div>
           ) : null}
 
           {isTeacher ? (
             <div className="space-y-6 border-t border-[var(--color-border-default)] pt-6">
-              <section>
-                <h2 className="mb-2 font-bold text-[var(--color-text-primary)]">
-                  {isOral ? "Transcription de la production" : "Texte de l'élève"}
-                </h2>
-                <div
-                  ref={originalRef}
-                  onMouseUp={captureSelection}
-                  onTouchEnd={() => setTimeout(captureSelection, 0)}
-                  className="w-full cursor-text select-text whitespace-pre-wrap rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-base leading-7 [&::selection]:bg-amber-200"
-                >
-                  {item.original_text}
-                </div>
-                {selection && (
-                  <p className="mt-1 truncate rounded bg-amber-50 px-2 py-1 text-xs text-amber-700">
-                    Sélectionné : <strong>« {selection.text} »</strong>
-                  </p>
-                )}
-                <div className="mt-2 flex gap-2">
-                  <input
-                    value={annotationComment}
-                    onChange={(event) => setAnnotationComment(event.target.value)}
-                    placeholder="Commentaire sur le passage sélectionné"
-                    className="min-h-10 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-amber-500"
-                  />
-                  <button
-                    type="button"
-                    onClick={addAnnotation}
-                    disabled={!selection || !annotationComment.trim()}
-                    className="rounded-[var(--radius-md)] bg-amber-500 px-4 text-sm font-bold text-white disabled:opacity-35"
-                  >
-                    Annoter
-                  </button>
-                </div>
-                {annotations.length > 0 && (
-                  <ul className="mt-3 space-y-2">
-                    {annotations.map((annotation, index) => (
-                      <li key={index} className="flex items-start justify-between gap-3 rounded-lg bg-amber-50 px-3 py-2 text-xs">
-                        <span><strong>« {annotation.text} »</strong> : {annotation.comment}</span>
-                        <button
-                          type="button"
-                          onClick={() => setAnnotations((current) => current.filter((_, i) => i !== index))}
-                          className="font-bold text-amber-700"
-                          aria-label="Supprimer l'annotation"
-                        >
-                          ×
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-
-              <section>
-                <label htmlFor="corrected-text" className="mb-2 block font-bold text-[var(--color-text-primary)]">
-                  Version corrigée
-                </label>
-                <textarea
-                  id="corrected-text"
-                  value={correctedText}
-                  onChange={(event) => setCorrectedText(event.target.value)}
-                  rows={10}
-                  className="w-full rounded-[var(--radius-md)] border-2 border-amber-300 bg-white p-4 text-base leading-7 outline-none focus:border-amber-500"
-                />
-                <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                  Les modifications apparaîtront en ambre dans la messagerie de l&apos;élève.
-                </p>
-              </section>
-
               <section className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
                 <h2 className="mb-3 font-bold text-[var(--color-text-primary)]">Notation professeur</h2>
-                {hasRubric && (
-                  <p className="mb-3 text-sm text-[var(--color-text-secondary)]">
-                    Total grille : <strong className="text-[var(--color-theme)]">{rubricTotal.toLocaleString("fr-CH")} / {maxPoints} pts</strong>
-                    {" "}— vous pouvez ajuster le total ci-dessous si besoin.
-                  </p>
-                )}
+                <p className="mb-3 text-sm text-[var(--color-text-secondary)]">
+                  Total des blocs :{" "}
+                  <strong className="text-[var(--color-theme)]">
+                    {(hasRubric && rubricTotal > 0 ? rubricTotal : blockTotal).toLocaleString("fr-CH")} / {maxPoints} pts
+                  </strong>
+                  {hasRubric && rubricTotal > 0 && blockTotal !== rubricTotal && (
+                    <span> — grille : {rubricTotal.toLocaleString("fr-CH")} pts</span>
+                  )}
+                </p>
                 <div className="grid gap-3 sm:grid-cols-[1fr_2fr]">
                   <label className="block">
                     <span className="mb-1 block text-sm font-semibold text-[var(--color-text-primary)]">Points sur {maxPoints}</span>
@@ -292,7 +257,7 @@ export function ExpressionSubmissionDetail({
                   </label>
                 </div>
                 <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
-                  L&apos;élève ne voit le score et le résultat final qu&apos;après l&apos;envoi de cette correction.
+                  Les points de chaque exercice sont additionnés automatiquement. L&apos;élève ne voit le score qu&apos;après l&apos;envoi.
                 </p>
               </section>
 
@@ -312,7 +277,7 @@ export function ExpressionSubmissionDetail({
               <button
                 type="button"
                 onClick={saveReview}
-                disabled={pending || !correctedText.trim() || !teacherPoints.trim() || !finalResult.trim()}
+                disabled={pending || !allBlocksCorrected || !hasPoints || !finalResult.trim()}
                 className="w-full rounded-[var(--radius-md)] bg-[var(--color-theme)] py-3 text-sm font-bold text-white disabled:opacity-40"
               >
                 {pending ? "Enregistrement…" : "Renvoyer la correction et le résultat"}
@@ -330,14 +295,7 @@ export function ExpressionSubmissionDetail({
                   <p className="mt-1 text-sm font-semibold text-[var(--color-theme)]">{item.final_result}</p>
                 </section>
               )}
-              {item.corrected_text ? (
-                <section>
-                  <h3 className="mb-2 font-bold text-amber-600">Version corrigée</h3>
-                  <div className="rounded-[var(--radius-md)] border-2 border-amber-300 bg-white p-4">
-                    <CorrectedText original={item.original_text} corrected={item.corrected_text} />
-                  </div>
-                </section>
-              ) : !isOral && (
+              {item.status !== "reviewed" && !isOral && (
                 <p className="rounded-[var(--radius-md)] bg-amber-50 p-4 text-sm text-amber-700">
                   Votre professeur n&apos;a pas encore renvoyé sa correction.
                 </p>

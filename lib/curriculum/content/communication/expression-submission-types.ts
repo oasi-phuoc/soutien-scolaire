@@ -41,7 +41,21 @@ export type ExerciseGrading = {
   total: number;
 };
 
+export type BlockAnnotation = {
+  label: string;
+  comment: string;
+  quotedText?: string;
+};
+
+export type ExerciseBlockReview = {
+  exerciseId: string;
+  correctedText: string;
+  annotations: BlockAnnotation[];
+  points: number;
+};
+
 export type TeacherGrading = {
   exercises: ExerciseGrading[];
+  blockReviews?: ExerciseBlockReview[];
   totalPoints: number;
 };
