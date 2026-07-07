@@ -17,9 +17,12 @@ import {
   REBEUVELIER_QUESTION_POOL,
   REBEUVELIER_READ_POINTS,
   Q1_CARTESIAN_FIGURES,
+  Q12_CARTESIAN_FIGURES,
+  Q34_CARTESIAN_FIGURES,
   type GridCell,
   type MapQuestion,
   type Q1CartesianFigure,
+  type SignedCartesianFigure,
   type ShapeIcon,
   type TopoQuestion,
   cellKey,
@@ -58,7 +61,15 @@ export type G6Q1FigureSnapshot = {
   answers: XYAnswer[];
 };
 
-export type G6EvalSnapshot = G6GridReadSnapshot | G6GridPlaceSnapshot | G6Q1FigureSnapshot;
+export type G6Q2FigureSnapshot = {
+  kind: "g6_q2_figure";
+  half: "q12" | "q34";
+  figure: SignedCartesianFigure;
+  askedPoints: Array<{ label: string; x: number; y: number }>;
+  answers: XYAnswer[];
+};
+
+export type G6EvalSnapshot = G6GridReadSnapshot | G6GridPlaceSnapshot | G6Q1FigureSnapshot | G6Q2FigureSnapshot;
 
 type ExProps = {
   exNum: number;
@@ -186,6 +197,9 @@ function xyAnswerOk(answer: XYAnswer, x: number, y: number): boolean {
   return !Number.isNaN(px) && !Number.isNaN(py) && px === x && py === y;
 }
 
+const SIGNED_XY_FILTER = /[^0-9\-]/g;
+const UNSIGNED_XY_FILTER = /[^0-9]/g;
+
 function GridXYFields({
   label,
   answer,
@@ -194,6 +208,7 @@ function GridXYFields({
   validated,
   wrong,
   onChange,
+  signed = false,
 }: {
   label: string;
   answer: XYAnswer;
@@ -202,8 +217,11 @@ function GridXYFields({
   validated: boolean;
   wrong: boolean;
   onChange: (next: XYAnswer) => void;
+  signed?: boolean;
 }) {
   const inputCls = `h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
+  const filter = signed ? SIGNED_XY_FILTER : UNSIGNED_XY_FILTER;
+  const maxLen = signed ? 3 : 2;
   return (
     <div className="flex items-center gap-2">
       <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{label}</span>
@@ -218,10 +236,10 @@ function GridXYFields({
           <input
             type="text"
             inputMode="numeric"
-            maxLength={2}
+            maxLength={maxLen}
             value={answer.x}
             disabled={validated}
-            onChange={(e) => onChange({ ...answer, x: e.target.value.replace(/[^0-9]/g, "") })}
+            onChange={(e) => onChange({ ...answer, x: e.target.value.replace(filter, "") })}
             className={inputCls}
             aria-label={`Abscisse du point ${label}`}
           />
@@ -236,10 +254,10 @@ function GridXYFields({
           <input
             type="text"
             inputMode="numeric"
-            maxLength={2}
+            maxLength={maxLen}
             value={answer.y}
             disabled={validated}
-            onChange={(e) => onChange({ ...answer, y: e.target.value.replace(/[^0-9]/g, "") })}
+            onChange={(e) => onChange({ ...answer, y: e.target.value.replace(filter, "") })}
             className={inputCls}
             aria-label={`Ordonnée du point ${label}`}
           />
@@ -343,6 +361,100 @@ function genQ1FigureExercise() {
   const xMax = Math.min(20, Math.max(10, Math.ceil((maxX + 2) / 5) * 5));
   const yMax = Math.min(20, Math.max(10, Math.ceil((maxY + 2) / 5) * 5));
   return { figure, askedPoints, xMax, yMax };
+}
+
+function signedToSvg(x: number, y: number, cx: number, cy: number, unit: number): [number, number] {
+  return [cx + x * unit, cy - y * unit];
+}
+
+function SignedFigurePlane({
+  xMin,
+  xMax,
+  yMin,
+  yMax,
+  polygons,
+  points,
+  unit = 11,
+  labelStep = 5,
+}: {
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+  polygons: Array<{ points: [number, number][] }>;
+  points: Array<{ label: string; x: number; y: number }>;
+  unit?: number;
+  labelStep?: number;
+}) {
+  const pad = 24;
+  const w = pad * 2 + (xMax - xMin) * unit;
+  const h = pad * 2 + (yMax - yMin) * unit;
+  const cx = pad - xMin * unit;
+  const cy = h - pad + yMin * unit;
+
+  const xLines = Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i);
+  const yLines = Array.from({ length: yMax - yMin + 1 }, (_, i) => yMin + i);
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="mx-auto w-full max-w-lg rounded-lg border border-[var(--color-border-default)] bg-white">
+      {xLines.map((x) => (
+        <line key={`gx-${x}`}
+          x1={cx + x * unit} y1={pad - 2}
+          x2={cx + x * unit} y2={h - pad + 2}
+          stroke={x % labelStep === 0 ? "#e2e8f0" : "#f1f5f9"}
+          strokeWidth={x === 0 ? 0 : x % labelStep === 0 ? 0.5 : 0.25} />
+      ))}
+      {yLines.map((y) => (
+        <line key={`gy-${y}`}
+          x1={pad - 2} y1={cy - y * unit}
+          x2={w - pad + 2} y2={cy - y * unit}
+          stroke={y % labelStep === 0 ? "#e2e8f0" : "#f1f5f9"}
+          strokeWidth={y === 0 ? 0 : y % labelStep === 0 ? 0.5 : 0.25} />
+      ))}
+      <line x1={pad - 2} y1={cy} x2={w - pad + 2} y2={cy} stroke="#334155" strokeWidth="1.5" />
+      <line x1={cx} y1={pad - 2} x2={cx} y2={h - pad + 2} stroke="#334155" strokeWidth="1.5" />
+      <text x={cx - 6} y={cy + (yMin < 0 ? -4 : 10)} textAnchor="middle" fontSize="7" fill="#64748b">0</text>
+      {xLines.filter((x) => x !== 0 && x % labelStep === 0).map((x) => (
+        <text key={`tx-${x}`} x={cx + x * unit} y={cy + (yMin < 0 ? -6 : 14)} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
+      ))}
+      {yLines.filter((y) => y !== 0 && y % labelStep === 0).map((y) => (
+        <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit + 2} textAnchor="middle" fontSize="7" fill="#64748b">{y}</text>
+      ))}
+
+      {polygons.map((poly, i) => (
+        <polygon
+          key={i}
+          points={poly.points.map(([x, y]) => signedToSvg(x, y, cx, cy, unit).join(",")).join(" ")}
+          fill="none"
+          stroke="#334155"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      ))}
+
+      {points.map((p) => {
+        const [px, py] = signedToSvg(p.x, p.y, cx, cy, unit);
+        return (
+          <g key={p.label}>
+            <circle cx={px} cy={py} r="3.5" fill="#3b82f6" stroke="#fff" strokeWidth="1" />
+            <text x={px + 5} y={py - 3} fontSize="9" fontWeight="bold" fill="#1e40af">{p.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function genQ2FigureExercise(half: "q12" | "q34") {
+  const pool = half === "q12" ? Q12_CARTESIAN_FIGURES : Q34_CARTESIAN_FIGURES;
+  const figure = pickN(pool, 1)[0]!;
+  const verts = pickN(figure.vertices, 4);
+  const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
+    label,
+    x: verts[i]![0],
+    y: verts[i]![1],
+  }));
+  return { figure, askedPoints, half };
 }
 
 // ── Grille lettres/chiffres ───────────────────────────────────────────────────
@@ -768,6 +880,92 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
               correctY={pt.y}
               validated={validated}
               wrong={wrong}
+              onChange={(next) => setAnswers((p) => p.map((a, j) => (j === i ? next : a)))}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Exercices G6.2 : coordonnées sur figure — cadrants 1–2 ou 3–4 ─────────
+
+type Q2ExProps = ExProps & {
+  half: "q12" | "q34";
+};
+
+export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot, half }: Q2ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_q2_figure";
+  const [{ figure, askedPoints, half: activeHalf }] = useState(() =>
+    readOnly
+      ? {
+          figure: reviewSnapshot.figure,
+          askedPoints: reviewSnapshot.askedPoints,
+          half: reviewSnapshot.half,
+        }
+      : genQ2FigureExercise(half),
+  );
+  const bounds = activeHalf === "q12"
+    ? { xMin: -10, xMax: 10, yMin: 0, yMax: 10 }
+    : { xMin: -10, xMax: 10, yMin: -10, yMax: 0 };
+  const [answers, setAnswers] = useState<XYAnswer[]>(() =>
+    readOnly ? reviewSnapshot.answers : askedPoints.map(() => ({ x: "", y: "" })),
+  );
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y))
+      : [],
+  );
+  const prev = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    if (validated || readOnly) return;
+    const res = askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y));
+    setResults(res);
+    setValidated(true);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_q2_figure",
+      half: activeHalf,
+      figure,
+      askedPoints,
+      answers,
+    });
+  }, [validated, readOnly, askedPoints, answers, onValidated, figure, activeHalf]);
+
+  useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
+
+  const quadrantLabel = activeHalf === "q12" ? "1er et 2e quadrants" : "3e et 4e quadrants";
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Je note les coordonnées des points ({quadrantLabel}). Les axes sont gradués de 5 en 5.
+      </p>
+      <SignedFigurePlane
+        xMin={bounds.xMin}
+        xMax={bounds.xMax}
+        yMin={bounds.yMin}
+        yMax={bounds.yMax}
+        polygons={figure.polygons}
+        points={askedPoints}
+      />
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+        {askedPoints.map((pt, i) => {
+          const answer = answers[i] ?? { x: "", y: "" };
+          const wrong = validated && !results[i];
+          return (
+            <GridXYFields
+              key={pt.label}
+              label={pt.label}
+              answer={answer}
+              correctX={pt.x}
+              correctY={pt.y}
+              validated={validated}
+              wrong={wrong}
+              signed
               onChange={(next) => setAnswers((p) => p.map((a, j) => (j === i ? next : a)))}
             />
           );

@@ -62,26 +62,6 @@ export const MATH_G6_REPERER_2_LESSON: MathSubmoduleLesson = {
         type: "plain",
         fr: "Un **plan** est la représentation graphique vue d'en haut. C'est une grande grille quadrillée avec deux droites perpendiculaires qui forment **quatre quadrants**.",
       },
-      {
-        type: "table",
-        headersFr: ["Quadrant", "Signes (x ; y)"],
-        accentHeader: true,
-        rows: [
-          ["1er quadrant (en haut à droite)", "( + ; + )"],
-          ["2e quadrant (en haut à gauche)", "( − ; + )"],
-          ["3e quadrant (en bas à gauche)", "( − ; − )"],
-          ["4e quadrant (en bas à droite)", "( + ; − )"],
-        ],
-      },
-      {
-        type: "bullets",
-        labelFr: "Vocabulaire",
-        itemsFr: [
-          "L'axe horizontal (abscisses) s'appelle l'**axe des x**.",
-          "L'axe vertical (ordonnées) s'appelle l'**axe des y**.",
-          "Le point central se nomme l'**origine** (0 ; 0).",
-        ],
-      },
 
       {
         type: "svg",

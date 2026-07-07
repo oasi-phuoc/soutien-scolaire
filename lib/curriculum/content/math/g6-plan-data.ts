@@ -815,3 +815,45 @@ export const Q1_CARTESIAN_FIGURES: Q1CartesianFigure[] = [
     { points: [[7, 6], [13, 6], [13, 10], [7, 10]] },
   ]),
 ];
+
+/** Figures 6 sommets pour G6.2 — cadrants 1 et 2 (y > 0, x ∈ [−10 ; 10]) */
+export type SignedCartesianFigure = {
+  id: string;
+  name: string;
+  polygons: Array<{ points: [number, number][] }>;
+  vertices: [number, number][];
+};
+
+function hex6Figure(id: string, name: string, pts: [number, number][]): SignedCartesianFigure {
+  return { id, name, polygons: [{ points: pts }], vertices: pts };
+}
+
+export const Q12_CARTESIAN_FIGURES: SignedCartesianFigure[] = [
+  hex6Figure("q12-a", "figure A", [[-8, 2], [-4, 7], [0, 8], [5, 6], [7, 3], [-3, 2]]),
+  hex6Figure("q12-b", "figure B", [[-9, 4], [-5, 3], [-1, 6], [3, 8], [7, 5], [2, 2]]),
+  hex6Figure("q12-c", "figure C", [[-7, 5], [-3, 8], [2, 9], [8, 6], [6, 2], [-2, 3]]),
+  hex6Figure("q12-d", "figure D", [[-6, 3], [-2, 7], [4, 7], [8, 4], [5, 2], [-4, 2]]),
+  hex6Figure("q12-e", "figure E", [[-8, 6], [-4, 4], [0, 7], [5, 9], [9, 5], [3, 2]]),
+  hex6Figure("q12-f", "figure F", [[-9, 3], [-6, 6], [-2, 5], [3, 7], [8, 4], [4, 2]]),
+  hex6Figure("q12-g", "figure G", [[-7, 2], [-3, 5], [1, 8], [6, 7], [9, 4], [2, 2]]),
+  hex6Figure("q12-h", "figure H", [[-5, 4], [-8, 7], [-2, 9], [4, 8], [7, 5], [1, 3]]),
+  hex6Figure("q12-i", "figure I", [[-6, 5], [-1, 3], [3, 6], [7, 8], [9, 4], [2, 2]]),
+  hex6Figure("q12-j", "figure J", [[-9, 5], [-5, 8], [0, 6], [4, 9], [8, 3], [-2, 2]]),
+  hex6Figure("q12-k", "figure K", [[-8, 4], [-4, 2], [0, 5], [5, 8], [8, 6], [3, 3]]),
+  hex6Figure("q12-l", "figure L", [[-7, 3], [-2, 6], [2, 8], [6, 6], [9, 3], [1, 2]]),
+  hex6Figure("q12-m", "figure M", [[-6, 6], [-3, 3], [1, 5], [5, 8], [8, 5], [0, 2]]),
+  hex6Figure("q12-n", "figure N", [[-9, 2], [-5, 5], [-1, 7], [4, 6], [7, 3], [2, 2]]),
+  hex6Figure("q12-o", "figure O", [[-8, 7], [-4, 4], [1, 7], [5, 9], [9, 6], [3, 2]]),
+  hex6Figure("q12-p", "figure P", [[-7, 4], [-3, 7], [2, 6], [6, 8], [8, 3], [0, 2]]),
+  hex6Figure("q12-q", "figure Q", [[-6, 2], [-2, 4], [2, 7], [7, 6], [9, 4], [1, 3]]),
+  hex6Figure("q12-r", "figure R", [[-9, 6], [-5, 3], [0, 4], [4, 8], [8, 5], [2, 2]]),
+  hex6Figure("q12-s", "figure S", [[-8, 3], [-4, 6], [0, 8], [5, 5], [7, 2], [-2, 2]]),
+  hex6Figure("q12-t", "figure T", [[-7, 5], [-1, 3], [3, 6], [7, 8], [9, 4], [-3, 2]]),
+];
+
+export const Q34_CARTESIAN_FIGURES: SignedCartesianFigure[] = Q12_CARTESIAN_FIGURES.map((f) => ({
+  id: f.id.replace("q12-", "q34-"),
+  name: f.name,
+  polygons: [{ points: f.polygons[0]!.points.map(([x, y]) => [x, -y] as [number, number]) }],
+  vertices: f.vertices.map(([x, y]) => [x, -y] as [number, number]),
+}));
