@@ -7105,19 +7105,10 @@ function TheoryView({ lesson, pivot, showPivot }: {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
   const isRtl = pivot === "ar" || pivot === "fa";
-  const pivotTitle = showPivot ? trad?.title?.[pivot] ?? theory.title[pivot] : undefined;
   const pivotParas = showPivot ? trad?.paragraphs?.[pivot] ?? theory.paragraphs[pivot] : undefined;
-  const title = pivotTitle ?? theory.title.fr;
   const paragraphs = pivotParas?.length ? pivotParas : theory.paragraphs.fr;
   return (
     <div className="space-y-4">
-      {title && (
-        <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
-            {title}
-          </h2>
-        </div>
-      )}
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
           {theory.blocks.map((block, i) => (
