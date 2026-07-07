@@ -59,3 +59,8 @@ export function pickCoQuestionFormat(
 ): CeCoFormatType {
   return pickFormatFromCore(CO_CORE_FORMATS, index, seed, questionId, imageable);
 }
+
+/** CO scolaire avancé / B1 — alternance QCM texte et saisie (pas d'image). */
+export function pickCoScolaireAvanceQuestionFormat(index: number): CeCoFormatType {
+  return index % 2 === 0 ? "text" : "fill";
+}

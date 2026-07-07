@@ -1,5 +1,6 @@
 import type { COAudioCategory, COAudioGroup, COAudioItem, COLevel } from "./co-audio";
 import { CO_TRANSCRIPTS_SCOLAIRE_AVANCE } from "./co-transcripts-scolaire-avance";
+import { CO_QUESTION_POOLS_SCOLAIRE_AVANCE } from "./co-questions-scolaire-avance";
 
 function scolaireItem(
   level: COLevel,
@@ -62,4 +63,6 @@ export const CO_AUDIO_GROUPS_SCOLAIRE_AVANCE: COAudioGroup[] = [
 ];
 
 /** Groupes scolaire avance prêts pour le tirage (questions configurées). */
-export const SCOLAIRE_PLAYABLE_GROUP_IDS_AVANCE = new Set<string>([]);
+export const SCOLAIRE_PLAYABLE_GROUP_IDS_AVANCE = new Set<string>([
+  ...Object.keys(CO_QUESTION_POOLS_SCOLAIRE_AVANCE),
+]);

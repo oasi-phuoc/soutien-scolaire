@@ -1,6 +1,6 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
-import { pickCoQuestionFormat } from "./ce-co-question-formats";
+import { pickCoQuestionFormat, pickCoScolaireAvanceQuestionFormat } from "./ce-co-question-formats";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -325,6 +325,10 @@ export function buildObjectPickTask(
   };
 }
 
+function isScolaireAvanceGroup(group: COAudioGroup): boolean {
+  return group.source === "scolaire" && group.level === "avance";
+}
+
 export function buildCoPartQuestions(
   group: COAudioGroup,
   pool: COMultiQuestion[],
@@ -333,12 +337,15 @@ export function buildCoPartQuestions(
 ): COQuestionTask[] {
   if (!pool.length || count <= 0) return [];
 
-  const shuffled = seededShuffle(pool, seed);
-  const selected = shuffled.slice(0, Math.min(count, pool.length));
+  const scolaireAvance = isScolaireAvanceGroup(group);
+  const selected = scolaireAvance
+    ? pool.slice(0, Math.min(count, pool.length))
+    : seededShuffle(pool, seed).slice(0, Math.min(count, pool.length));
 
   return selected.map((q, index) => {
-    const imageable = supportsImageFormat(q.imageChoices);
-    const format = pickCoQuestionFormat(index, seed, q.id, imageable);
+    const format = scolaireAvance
+      ? pickCoScolaireAvanceQuestionFormat(index)
+      : pickCoQuestionFormat(index, seed, q.id, supportsImageFormat(q.imageChoices));
     return multiToTask(q, format);
   });
 }
