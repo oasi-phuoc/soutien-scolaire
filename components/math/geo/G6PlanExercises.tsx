@@ -9,9 +9,17 @@ import {
   GENEVA_QUESTION_POOL,
   GRID_SHAPES,
   MEDIEVAL_ITEMS,
+  REBEUVELIER_FOREST_ZONES,
+  REBEUVELIER_MAP,
+  REBEUVELIER_MAP_LABELS,
+  REBEUVELIER_PATHS,
+  REBEUVELIER_PLACE_POINTS,
+  REBEUVELIER_QUESTION_POOL,
+  REBEUVELIER_READ_POINTS,
   type GridCell,
   type MapQuestion,
   type ShapeIcon,
+  type TopoQuestion,
   cellKey,
   colIndex,
   formatCell,
@@ -632,5 +640,244 @@ export function G6MapBielExercise(props: ExProps) {
       pool={BIEL_QUESTION_POOL}
       questionCount={6}
     />
+  );
+}
+
+// ── Exercice 7 : carte topographique Rebeuvelier ─────────────────────────────
+
+function topoToSvg(x: number, y: number, cell: number, padL: number, padB: number, mapH: number): [number, number] {
+  return [padL + x * cell, mapH - padB - y * cell];
+}
+
+function checkTopoAnswer(q: TopoQuestion, raw: string): boolean {
+  const v = raw.trim();
+  if (q.type === "yes_no_at") {
+    const n = normText(v);
+    return (q.answer && (n === "oui" || n === "o" || n === "vrai")) ||
+      (!q.answer && (n === "non" || n === "n" || n === "faux"));
+  }
+  const n = normText(v);
+  return q.answers.some((a) => {
+    const na = normText(a);
+    return n === na || n.includes(na) || na.includes(n);
+  });
+}
+
+export function G6RebeuvelierExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const cell = 22;
+  const padL = 28;
+  const padB = 24;
+  const padT = 12;
+  const mapH = padT + REBEUVELIER_MAP.maxY * cell + padB;
+
+  const [selected, setSelected] = useState<string | null>(null);
+  const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>(() =>
+    Object.fromEntries(REBEUVELIER_PLACE_POINTS.map((p) => [p.label, null])),
+  );
+  const [readAnswers, setReadAnswers] = useState<Record<string, { x: string; y: string }>>(() =>
+    Object.fromEntries(REBEUVELIER_READ_POINTS.map((p) => [p.label, { x: "", y: "" }])),
+  );
+  const [questions] = useState(() => pickN(REBEUVELIER_QUESTION_POOL, 6));
+  const [poolAnswers, setPoolAnswers] = useState<Record<number, string>>({});
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prev = useRef(-1);
+
+  const onMapClick = (e: React.MouseEvent<SVGSVGElement>) => {
+    if (validated || !selected) return;
+    const svg = e.currentTarget;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const loc = pt.matrixTransform(ctm.inverse());
+    const gx = Math.round((loc.x - padL) / cell);
+    const gy = Math.round((mapH - padB - loc.y) / cell);
+    if (gx < 0 || gx > REBEUVELIER_MAP.maxX || gy < 0 || gy > REBEUVELIER_MAP.maxY) return;
+    setPlacements((p) => {
+      const next = { ...p };
+      for (const k of Object.keys(next)) {
+        if (next[k]?.x === gx && next[k]?.y === gy) next[k] = null;
+      }
+      next[selected] = { x: gx, y: gy };
+      return next;
+    });
+    setSelected(null);
+  };
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res: boolean[] = [];
+    for (const pt of REBEUVELIER_PLACE_POINTS) {
+      const p = placements[pt.label];
+      res.push(p !== null && p.x === pt.x && p.y === pt.y);
+    }
+    for (const pt of REBEUVELIER_READ_POINTS) {
+      const a = readAnswers[pt.label] ?? { x: "", y: "" };
+      const x = parseInt(a.x.trim(), 10);
+      const y = parseInt(a.y.trim(), 10);
+      res.push(x === pt.x && y === pt.y);
+    }
+    questions.forEach((q, i) => {
+      res.push(checkTopoAnswer(q, poolAnswers[i] ?? ""));
+    });
+    setResults(res);
+    setValidated(true);
+    onValidated(res.filter(Boolean).length, res.length);
+  }, [validated, placements, readAnswers, questions, poolAnswers, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+
+  const placedDisplay = REBEUVELIER_PLACE_POINTS
+    .filter((p) => placements[p.label])
+    .map((p) => ({ label: p.label, x: placements[p.label]!.x, y: placements[p.label]!.y }));
+
+  let ri = 0;
+  const placeResults = REBEUVELIER_PLACE_POINTS.map(() => results[ri++] ?? false);
+  const readResults = REBEUVELIER_READ_POINTS.map(() => results[ri++] ?? false);
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">{REBEUVELIER_MAP.title} — repère (x ; y), origine en bas à gauche.</p>
+
+      <div className="cursor-crosshair" onClick={() => {}}>
+        <svg viewBox={`0 0 ${padL + REBEUVELIER_MAP.maxX * cell + 12} ${mapH}`}
+          className="mx-auto w-full max-w-2xl rounded-lg border border-[var(--color-border-default)] bg-[#f5f0e6]"
+          onClick={onMapClick}
+        >
+          {Array.from({ length: REBEUVELIER_MAP.maxX + 1 }, (_, x) => (
+            <line key={`vx-${x}`} x1={padL + x * cell} y1={padT} x2={padL + x * cell} y2={mapH - padB}
+              stroke="#d4c4a8" strokeWidth={x % 5 === 0 ? 1 : 0.4} />
+          ))}
+          {Array.from({ length: REBEUVELIER_MAP.maxY + 1 }, (_, y) => (
+            <line key={`hy-${y}`} x1={padL} y1={mapH - padB - y * cell} x2={padL + REBEUVELIER_MAP.maxX * cell + 8} y2={mapH - padB - y * cell}
+              stroke="#d4c4a8" strokeWidth={y % 5 === 0 ? 1 : 0.4} />
+          ))}
+          {Array.from({ length: REBEUVELIER_MAP.maxX + 1 }, (_, x) => (
+            <text key={`tx-${x}`} x={padL + x * cell} y={mapH - 6} textAnchor="middle" fontSize="8" fill="#78716c">{x}</text>
+          ))}
+          {Array.from({ length: REBEUVELIER_MAP.maxY + 1 }, (_, y) => (
+            <text key={`ty-${y}`} x={padL - 8} y={mapH - padB - y * cell + 3} textAnchor="middle" fontSize="8" fill="#78716c">{y}</text>
+          ))}
+          {REBEUVELIER_FOREST_ZONES.map((z, i) => {
+            const [x1, y1] = topoToSvg(z.x, z.y + z.h, cell, padL, padB, mapH);
+            return <rect key={`f-${i}`} x={x1} y={y1} width={z.w * cell} height={z.h * cell} fill="#86efac" fillOpacity="0.35" />;
+          })}
+          {REBEUVELIER_PATHS.map((path, i) => (
+            <polyline key={`p-${i}`}
+              points={path.map(([x, y]) => topoToSvg(x, y, cell, padL, padB, mapH).join(",")).join(" ")}
+              fill="none" stroke="#a8a29e" strokeWidth="1" strokeDasharray="3 2" />
+          ))}
+          {REBEUVELIER_MAP_LABELS.map((lb, i) => {
+            const [cx, cy] = topoToSvg(lb.x, lb.y, cell, padL, padB, mapH);
+            return <text key={`lb-${i}`} x={cx} y={cy} fontSize={lb.size ?? 7} fill={lb.forest ? "#166534" : "#57534e"}>{lb.text}</text>;
+          })}
+          {REBEUVELIER_READ_POINTS.map((pt) => {
+            const [cx, cy] = topoToSvg(pt.x, pt.y, cell, padL, padB, mapH);
+            return (
+              <g key={pt.label}>
+                <circle cx={cx} cy={cy} r="4" fill="#dc2626" stroke="#fff" strokeWidth="1" />
+                <text x={cx + 6} y={cy - 4} fontSize="9" fontWeight="bold" fill="#dc2626">{pt.label}</text>
+              </g>
+            );
+          })}
+          {placedDisplay.map((pt) => {
+            const [cx, cy] = topoToSvg(pt.x, pt.y, cell, padL, padB, mapH);
+            const isDA = pt.label === "D" || pt.label === "A";
+            return (
+              <g key={`pl-${pt.label}`}>
+                <circle cx={cx} cy={cy} r="4.5" fill={isDA ? "#2563eb" : "#dc2626"} stroke="#fff" strokeWidth="1.2" />
+                <text x={cx + 6} y={cy + 3} fontSize="9" fontWeight="bold" fill={isDA ? "#2563eb" : "#dc2626"}>{pt.label}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-semibold">Placez sur la carte le départ D, l&apos;arrivée A et les postes P1, P3, P4 et P6.</p>
+        <div className="flex flex-wrap gap-2">
+          {REBEUVELIER_PLACE_POINTS.map((pt, i) => {
+            const isSel = selected === pt.label;
+            const ok = validated ? placeResults[i] : null;
+            return (
+              <button key={pt.label} type="button" disabled={validated}
+                onClick={() => setSelected(pt.label)}
+                className={`rounded-lg border px-2 py-1 text-xs transition-colors ${
+                  isSel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" :
+                  ok === false ? "border-amber-400" : "border-[var(--color-border-default)]"
+                }`}
+              >
+                {pt.label} ({pt.x} ; {pt.y})
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur un point, puis sur la carte à l&apos;intersection voulue.</p>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-semibold">Complétez les coordonnées des postes P2, P5, P7 et P8.</p>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {REBEUVELIER_READ_POINTS.map((pt, i) => {
+            const a = readAnswers[pt.label] ?? { x: "", y: "" };
+            const wrong = validated && !readResults[i];
+            return (
+              <div key={pt.label} className="flex items-center gap-2 text-sm">
+                <span className="w-8 font-bold text-[var(--color-accent-alg)]">{pt.label}</span>
+                <span>(</span>
+                {wrong ? (
+                  <div className={`w-10 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+                    <span className="text-[10px] text-[var(--color-text-secondary)]">{a.x || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600">{pt.x}</span>
+                  </div>
+                ) : (
+                  <input type="text" inputMode="numeric" value={a.x} disabled={validated}
+                    onChange={(e) => setReadAnswers((p) => ({ ...p, [pt.label]: { ...a, x: e.target.value.replace(/[^0-9\-]/g, "") } }))}
+                    className={`w-10 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+                )}
+                <span>;</span>
+                {wrong ? (
+                  <div className={`w-10 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+                    <span className="text-[10px] text-[var(--color-text-secondary)]">{a.y || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600">{pt.y}</span>
+                  </div>
+                ) : (
+                  <input type="text" inputMode="numeric" value={a.y} disabled={validated}
+                    onChange={(e) => setReadAnswers((p) => ({ ...p, [pt.label]: { ...a, y: e.target.value.replace(/[^0-9\-]/g, "") } }))}
+                    className={`w-10 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+                )}
+                <span>)</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-semibold">Questions sur la carte</p>
+        {questions.map((q, i) => {
+          const wrong = validated && !results[REBEUVELIER_PLACE_POINTS.length + REBEUVELIER_READ_POINTS.length + i];
+          const correctAns = q.type === "yes_no_at" ? (q.answer ? "Oui" : "Non") : q.answers[0];
+          return (
+            <div key={i} className="space-y-1 rounded-lg border border-[var(--color-border-default)] p-3">
+              <p className="text-sm">{i + 1}. {q.prompt}</p>
+              {wrong ? (
+                <div className={`w-full max-w-xs px-0 pb-1 ${CLS_WRONG} flex flex-col`}>
+                  <span className="text-[10px] text-[var(--color-text-secondary)]">{poolAnswers[i] || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600">{correctAns}</span>
+                </div>
+              ) : (
+                <input type="text" inputMode="text" value={poolAnswers[i] ?? ""} disabled={validated}
+                  onChange={(e) => setPoolAnswers((p) => ({ ...p, [i]: e.target.value }))}
+                  className={`w-full max-w-xs px-0 pb-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

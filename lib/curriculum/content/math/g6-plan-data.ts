@@ -259,6 +259,85 @@ function buildBielPool(): MapQuestion[] {
 export const GENEVA_QUESTION_POOL = buildGenevaPool();
 export const BIEL_QUESTION_POOL = buildBielPool();
 
+// ── Carte topographique Rebeuvelier (exercice 7) ─────────────────────────────
+
+export type XYPoint = { label: string; x: number; y: number };
+
+export const REBEUVELIER_MAP = {
+  maxX: 15,
+  maxY: 10,
+  title: "Carte de Rebeuvelier",
+};
+
+/** Points à placer à partir des coordonnées données */
+export const REBEUVELIER_PLACE_POINTS: XYPoint[] = [
+  { label: "D", x: 5, y: 1 },
+  { label: "A", x: 4, y: 3 },
+  { label: "P1", x: 11, y: 2 },
+  { label: "P3", x: 12, y: 6 },
+  { label: "P4", x: 15, y: 8 },
+  { label: "P6", x: 6, y: 9 },
+];
+
+/** Points affichés sur la carte — l'élève complète les coordonnées */
+export const REBEUVELIER_READ_POINTS: XYPoint[] = [
+  { label: "P2", x: 13, y: 5 },
+  { label: "P5", x: 10, y: 9 },
+  { label: "P7", x: 3, y: 7 },
+  { label: "P8", x: 4, y: 5 },
+];
+
+export type TopoQuestion =
+  | { type: "text_at"; prompt: string; x: number; y: number; answers: string[] }
+  | { type: "yes_no_at"; prompt: string; x: number; y: number; answer: boolean };
+
+export const REBEUVELIER_QUESTION_POOL: TopoQuestion[] = [
+  { type: "text_at", prompt: "Comment s'appelle le champ en (13 ; 1) ?", x: 13, y: 1, answers: ["Les Neufs Champs", "Neufs Champs"] },
+  { type: "text_at", prompt: "Vous voyez quel chiffre en (15 ; 2) ?", x: 15, y: 2, answers: ["704"] },
+  { type: "yes_no_at", prompt: "En (8 ; 3), vous êtes dans la forêt ?", x: 8, y: 3, answer: false },
+  { type: "yes_no_at", prompt: "Il y a un chemin pour aller en (3 ; 3) ?", x: 3, y: 3, answer: true },
+  { type: "text_at", prompt: "Vous voyez quel chiffre en (12 ; 6) ?", x: 12, y: 6, answers: ["689"] },
+  { type: "text_at", prompt: "Vous voyez quels mots en (3 ; 3) ?", x: 3, y: 3, answers: ["Aux Esserts", "Esserts"] },
+  { type: "text_at", prompt: "Quel village se trouve vers (7 ; 3) ?", x: 7, y: 3, answers: ["Rebeuvelier"] },
+  { type: "text_at", prompt: "Quel lieu est indiqué en (12 ; 6) ?", x: 12, y: 6, answers: ["Moton"] },
+  { type: "text_at", prompt: "Quel chiffre voyez-vous près de (13 ; 5) ?", x: 13, y: 5, answers: ["754"] },
+  { type: "yes_no_at", prompt: "La forêt de Rosé se trouve-t-elle en (10 ; 9) ?", x: 10, y: 9, answer: true },
+  { type: "text_at", prompt: "Quel nom est écrit en (4 ; 5) ?", x: 4, y: 5, answers: ["Côte du Tairetsche", "Tairetsche"] },
+  { type: "text_at", prompt: "Quel nom est écrit en (3 ; 7) ?", x: 3, y: 7, answers: ["Côte sous Rosé", "Rosé"] },
+];
+
+/** Labels affichés sur la carte SVG (position approximative) */
+export const REBEUVELIER_MAP_LABELS: Array<{ text: string; x: number; y: number; size?: number; forest?: boolean }> = [
+  { text: "Les Neufs Champs", x: 13, y: 1, size: 7 },
+  { text: "704", x: 15, y: 2.5, size: 8 },
+  { text: "La Grange", x: 14.5, y: 2, size: 6 },
+  { text: "Aux Esserts", x: 3, y: 3, size: 7 },
+  { text: "Rebeuvelier", x: 7, y: 3, size: 8 },
+  { text: "Do la Baume", x: 6, y: 4, size: 6 },
+  { text: "Les Maichières", x: 9, y: 4, size: 6 },
+  { text: "Sur Moton", x: 13, y: 5, size: 7 },
+  { text: "754", x: 13.5, y: 5.5, size: 8 },
+  { text: "Moton", x: 12, y: 6, size: 7 },
+  { text: "689", x: 12.5, y: 6.5, size: 8 },
+  { text: "La Sarasine", x: 11, y: 3, size: 6 },
+  { text: "Les Rises", x: 14, y: 4, size: 6 },
+  { text: "Côte du Tairetsche", x: 4, y: 5, size: 6 },
+  { text: "Côte sous Rosé", x: 3, y: 7, size: 6 },
+  { text: "Forêt de Rosé", x: 10, y: 8.5, size: 7, forest: true },
+];
+
+export const REBEUVELIER_FOREST_ZONES: Array<{ x: number; y: number; w: number; h: number }> = [
+  { x: 8, y: 7, w: 5, h: 3 },
+  { x: 10, y: 5, w: 4, h: 3 },
+  { x: 0, y: 6, w: 3, h: 4 },
+];
+
+export const REBEUVELIER_PATHS: Array<[number, number][]> = [
+  [[3, 3], [4, 3], [5, 4], [6, 3], [7, 3]],
+  [[3, 3], [3, 4], [2, 5]],
+  [[11, 2], [12, 4], [12, 6]],
+];
+
 // ── Formes pour exercices 1–2 ────────────────────────────────────────────────
 
 export type ShapeIcon = { id: string; label: string; svg: string };
