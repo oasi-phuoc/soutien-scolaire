@@ -20,6 +20,7 @@ import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
+import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
 import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
@@ -502,111 +503,6 @@ const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] = [
   ],
 ];
 
-const CE_MOYEN_ARTICLES: ArticleSeriesItem[] = [
-  {
-    title: "Bien manger sans dépenser trop",
-    sections: [
-      { heading: "Faire les courses", imageLabel: "Courses", body: "Avant d'aller au magasin, préparez une liste et ne partez pas le ventre vide, car on achète plus quand on a faim. Comparez les prix au kilo et regardez les produits placés en bas des rayons : ils sont souvent moins chers que ceux à hauteur des yeux." },
-      { heading: "Cuisiner soi-même", imageLabel: "Cuisine", body: "Les plats déjà préparés coûtent cher et contiennent beaucoup de sel. En cuisinant vous-même des légumes de saison, vous payez moins et vous mangez plus sainement. Vous pouvez aussi cuisiner en grande quantité, puis congeler des portions pour les jours où vous avez peu de temps." },
-      { heading: "Éviter le gaspillage", imageLabel: "Gaspillage", body: "Rangez les aliments les plus anciens devant, pour les utiliser en premier. Avec les restes, on peut préparer une soupe ou une omelette. Ainsi, on jette moins et on économise de l'argent chaque semaine." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet principal de l'article ?", choices: [{ label: "Bien manger sans dépenser trop" }, { label: "Voyager pas cher" }, { label: "Faire du sport à la maison" }], correct: 0 },
-      { prompt: "Pourquoi ne faut-il pas faire les courses en ayant faim ?", choices: [{ label: "Parce qu'on achète plus" }, { label: "Parce que les magasins sont fermés" }, { label: "Parce que c'est interdit" }], correct: 0 },
-      { prompt: "Où trouve-t-on souvent les produits les moins chers ?", choices: [{ label: "En bas des rayons" }, { label: "À hauteur des yeux" }, { label: "À la caisse" }], correct: 0 },
-      { prompt: "Quel est l'avantage de cuisiner soi-même ?", choices: [{ label: "C'est moins cher et plus sain" }, { label: "C'est toujours plus rapide" }, { label: "C'est plus salé" }], correct: 0 },
-      { prompt: "Que peut-on faire avec les restes ?", answer: "une soupe", accept: ["une soupe ou une omelette", "soupe", "omelette"] },
-      { prompt: "Comment ranger les aliments pour éviter le gaspillage ?", answer: "les plus anciens devant", accept: ["mettre les plus anciens devant", "les anciens devant"] },
-      { prompt: "Combien de parties principales contient l'article ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Mieux dormir chaque nuit",
-    sections: [
-      { heading: "Des horaires réguliers", imageLabel: "Sommeil", body: "Notre corps aime les habitudes. Si vous vous couchez et vous levez à peu près à la même heure chaque jour, même le week-end, vous vous endormez plus facilement. Une petite routine avant le coucher, comme lire quelques pages, prépare le cerveau au sommeil." },
-      { heading: "Une chambre calme", imageLabel: "Chambre", body: "La lumière et le bruit dérangent le sommeil. Fermez les rideaux, éteignez les écrans une demi-heure avant de dormir et gardez la chambre plutôt fraîche. Si votre voisin fait du bruit, des bouchons d'oreille peuvent aider." },
-      { heading: "Attention le soir", imageLabel: "Soir", body: "Évitez le café et les repas trop lourds le soir, parce qu'ils empêchent de bien dormir. Un peu d'activité physique dans la journée aide au contraire à trouver le sommeil, mais il vaut mieux ne pas faire de sport juste avant de se coucher." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Mieux dormir chaque nuit" }, { label: "Apprendre à cuisiner" }, { label: "Trouver un travail" }], correct: 0 },
-      { prompt: "Pourquoi faut-il des horaires réguliers ?", choices: [{ label: "Parce que le corps aime les habitudes" }, { label: "Parce que c'est obligatoire" }, { label: "Parce que c'est moins cher" }], correct: 0 },
-      { prompt: "Que faut-il faire une demi-heure avant de dormir ?", choices: [{ label: "Éteindre les écrans" }, { label: "Boire un café" }, { label: "Faire du sport" }], correct: 0 },
-      { prompt: "Comment doit être la chambre ?", choices: [{ label: "Calme et plutôt fraîche" }, { label: "Chaude et éclairée" }, { label: "Bruyante" }], correct: 0 },
-      { prompt: "Que faut-il éviter le soir ?", answer: "le café", accept: ["le café et les repas lourds", "café", "repas trop lourds"] },
-      { prompt: "L'activité physique aide-t-elle à dormir ?", answer: "oui", accept: ["oui, pendant la journée", "oui dans la journée", "oui"] },
-      { prompt: "Combien de conseils principaux donne l'article ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Se déplacer autrement en ville",
-    sections: [
-      { heading: "Les transports publics", imageLabel: "Transports", body: "Le bus et le tram permettent de se déplacer sans chercher une place de parking. Avec un abonnement, on paie souvent moins cher qu'en achetant un billet à chaque fois. De plus, on peut lire ou se reposer pendant le trajet." },
-      { heading: "Le vélo", imageLabel: "Vélo", body: "Pour les courts trajets, le vélo est rapide et bon pour la santé. Beaucoup de villes ont maintenant des pistes cyclables et des vélos à louer. Il faut penser à porter un casque et à bien attacher son vélo quand on le laisse dehors." },
-      { heading: "Marcher plus souvent", imageLabel: "Marche", body: "Quand la distance est courte, marcher ne coûte rien et fait du bien. On découvre mieux son quartier et on évite les embouteillages. Pour les personnes pressées, il suffit parfois de descendre un arrêt plus tôt." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Se déplacer autrement en ville" }, { label: "Acheter une voiture" }, { label: "Voyager à l'étranger" }], correct: 0 },
-      { prompt: "Quel est l'avantage d'un abonnement ?", choices: [{ label: "On paie souvent moins cher" }, { label: "On va plus vite qu'en avion" }, { label: "On peut conduire" }], correct: 0 },
-      { prompt: "Pourquoi le vélo est-il conseillé pour les courts trajets ?", choices: [{ label: "Il est rapide et bon pour la santé" }, { label: "Il est gratuit partout" }, { label: "Il n'a pas besoin d'être attaché" }], correct: 0 },
-      { prompt: "Que faut-il porter à vélo ?", choices: [{ label: "Un casque" }, { label: "Une cravate" }, { label: "Des lunettes de soleil" }], correct: 0 },
-      { prompt: "Que peut faire une personne pressée pour marcher un peu ?", answer: "descendre un arrêt plus tôt", accept: ["descendre plus tôt", "descendre un arrêt avant"] },
-      { prompt: "Marcher coûte-t-il de l'argent ?", answer: "non", accept: ["non, c'est gratuit", "rien", "non"] },
-      { prompt: "Combien de moyens de transport l'article présente-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Réussir un entretien d'embauche",
-    sections: [
-      { heading: "Bien se préparer", imageLabel: "Préparation", body: "Avant l'entretien, renseignez-vous sur l'entreprise et relisez l'annonce. Préparez quelques phrases pour expliquer votre expérience et pour dire pourquoi ce poste vous intéresse. Choisissez aussi une tenue propre et correcte la veille." },
-      { heading: "Le jour de l'entretien", imageLabel: "Entretien", body: "Arrivez toujours en avance et éteignez votre téléphone avant d'entrer. Dites bonjour, souriez et regardez la personne qui vous parle. Répondez calmement, même si une question est difficile ; il vaut mieux réfléchir un instant que répondre n'importe quoi." },
-      { heading: "Après l'entretien", imageLabel: "Suivi", body: "Vous pouvez envoyer un court message pour remercier la personne de vous avoir reçu. Si vous n'avez pas de réponse après une semaine ou deux, il est possible de rappeler poliment pour demander des nouvelles." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Réussir un entretien d'embauche" }, { label: "Écrire un roman" }, { label: "Organiser un voyage" }], correct: 0 },
-      { prompt: "Que faut-il faire avant l'entretien ?", choices: [{ label: "Se renseigner sur l'entreprise" }, { label: "Oublier l'annonce" }, { label: "Arriver en retard" }], correct: 0 },
-      { prompt: "Que faut-il faire de son téléphone avant d'entrer ?", choices: [{ label: "L'éteindre" }, { label: "Le laisser sonner" }, { label: "Le poser sur la table" }], correct: 0 },
-      { prompt: "Que faut-il faire si une question est difficile ?", choices: [{ label: "Réfléchir un instant avant de répondre" }, { label: "Répondre n'importe quoi" }, { label: "Partir" }], correct: 0 },
-      { prompt: "Que peut-on envoyer après l'entretien ?", answer: "un message de remerciement", accept: ["un message pour remercier", "un remerciement", "un mail de remerciement"] },
-      { prompt: "Après combien de temps peut-on rappeler poliment ?", answer: "une semaine ou deux", accept: ["une à deux semaines", "après une semaine", "une semaine"] },
-      { prompt: "Combien d'étapes l'article décrit-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Protéger la nature au quotidien",
-    sections: [
-      { heading: "Économiser l'eau", imageLabel: "Eau", body: "On peut faire attention à l'eau sans changer toute sa vie. Fermez le robinet quand vous vous brossez les dents et prenez plutôt une douche courte qu'un bain. Réparez vite les robinets qui gouttent, car ils gaspillent beaucoup d'eau en une année." },
-      { heading: "Réduire les déchets", imageLabel: "Déchets", body: "Achetez des produits avec moins d'emballage et utilisez un sac réutilisable pour les courses. Beaucoup d'objets peuvent être réparés ou donnés au lieu d'être jetés. Composter les déchets de cuisine permet aussi de nourrir les plantes." },
-      { heading: "Consommer moins d'énergie", imageLabel: "Énergie", body: "Éteignez les lumières quand vous quittez une pièce et débranchez les appareils que vous n'utilisez pas. En hiver, mettez un pull avant d'augmenter le chauffage. Ces petits gestes font baisser la facture et aident la planète." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Protéger la nature au quotidien" }, { label: "Décorer sa maison" }, { label: "Choisir un animal" }], correct: 0 },
-      { prompt: "Que faut-il faire quand on se brosse les dents ?", choices: [{ label: "Fermer le robinet" }, { label: "Laisser couler l'eau" }, { label: "Remplir un bain" }], correct: 0 },
-      { prompt: "Pourquoi réparer vite un robinet qui goutte ?", choices: [{ label: "Parce qu'il gaspille beaucoup d'eau" }, { label: "Parce que c'est joli" }, { label: "Parce que c'est obligatoire" }], correct: 0 },
-      { prompt: "Que peut-on faire au lieu de jeter des objets ?", choices: [{ label: "Les réparer ou les donner" }, { label: "Les brûler" }, { label: "Les cacher" }], correct: 0 },
-      { prompt: "Que faut-il faire en quittant une pièce ?", answer: "éteindre la lumière", accept: ["éteindre les lumières", "éteindre la lumière", "fermer la lumière"] },
-      { prompt: "Que peut-on mettre avant d'augmenter le chauffage ?", answer: "un pull", accept: ["un pull", "un vêtement chaud"] },
-      { prompt: "Combien de conseils principaux l'article donne-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-  {
-    title: "Utiliser Internet en toute sécurité",
-    sections: [
-      { heading: "Des mots de passe solides", imageLabel: "Mot de passe", body: "Un bon mot de passe est long et différent pour chaque site important. Évitez votre date de naissance ou le mot « motdepasse », trop faciles à deviner. Si c'est difficile à retenir, un carnet gardé à la maison ou une application spéciale peut vous aider." },
-      { heading: "Se méfier des messages", imageLabel: "Messages", body: "Certains courriels imitent votre banque ou un magasin pour voler vos informations. Ne cliquez pas sur un lien si le message vous semble bizarre ou vous demande vite de l'argent. En cas de doute, contactez directement l'entreprise par un autre moyen." },
-      { heading: "Protéger ses données", imageLabel: "Données", body: "Ne partagez pas votre adresse ou vos photos avec des inconnus. Réfléchissez avant de publier quelque chose, car c'est souvent difficile à effacer ensuite. Vérifiez aussi qui peut voir ce que vous mettez en ligne." },
-    ],
-    questions: [
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Utiliser Internet en toute sécurité" }, { label: "Réparer un ordinateur" }, { label: "Créer un jeu vidéo" }], correct: 0 },
-      { prompt: "Comment doit être un bon mot de passe ?", choices: [{ label: "Long et différent pour chaque site" }, { label: "Court et toujours le même" }, { label: "Égal à sa date de naissance" }], correct: 0 },
-      { prompt: "Que font certains courriels dangereux ?", choices: [{ label: "Ils imitent votre banque pour voler vos informations" }, { label: "Ils envoient des cadeaux" }, { label: "Ils réparent l'ordinateur" }], correct: 0 },
-      { prompt: "Que faut-il faire en cas de doute sur un message ?", choices: [{ label: "Contacter l'entreprise par un autre moyen" }, { label: "Cliquer tout de suite" }, { label: "Envoyer de l'argent" }], correct: 0 },
-      { prompt: "Que faut-il faire avant de publier quelque chose ?", answer: "réfléchir", accept: ["réfléchir avant de publier", "bien réfléchir", "réfléchir"] },
-      { prompt: "Avec qui ne faut-il pas partager ses données ?", answer: "des inconnus", accept: ["avec des inconnus", "les inconnus", "inconnus"] },
-      { prompt: "Combien de conseils principaux l'article présente-t-il ?", answer: "3", accept: ["trois"] },
-    ],
-  },
-];
-
 // --------------------------------------------------------------------------
 // Contenu B1 authoré pour le niveau AVANCÉ (CE-3) : textes plus longs et plus
 // abstraits (administratif, opinions, hypothèses), avec connecteurs de niveau
@@ -910,13 +806,15 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const orientationTextBase = level === "base" ? pickFromPool(CE_ORIENTATION_BASE, `${level}-${stamp}-orientation`) : null;
   const orientation = orientationPool ? pickFromPool(orientationPool, `${level}-${stamp}-orientation`) : null;
   const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
-  const articlePool = level === "base" ? ARTICLE_SERIES : level === "moyen" ? CE_MOYEN_ARTICLES : CE_AVANCE_ARTICLES;
   const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
   const emailLegacy = level !== "base"
     ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
     : null;
   const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
-  const article = pickFromPool(articlePool, `${level}-${stamp}-article`);
+  const articleMoyen = level === "moyen" ? pickFromPool(CE_ARTICLES_MOYEN, `${level}-${stamp}-article`) : null;
+  const articleLegacy = level !== "moyen"
+    ? pickFromPool(level === "base" ? ARTICLE_SERIES : CE_AVANCE_ARTICLES, `${level}-${stamp}-article`)
+    : null;
 
   const orientationPart: CEPart = orientationTextBase
     ? {
@@ -979,13 +877,20 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       title: "Lire des informations",
       points: 7,
       layout: "article",
-      article: {
-        title: article.title,
-        sections: level === "base"
-          ? article.sections
-          : article.sections.map((section) => ({ ...section, body: `${section.body} Cette information est importante pour comprendre le texte de niveau ${levelName}.` })),
-      },
-      questions: article.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+      article: articleMoyen
+        ? { title: articleMoyen.title, sections: articleMoyen.sections }
+        : {
+            title: articleLegacy!.title,
+            sections: level === "base"
+              ? articleLegacy!.sections
+              : articleLegacy!.sections.map((section) => ({
+                  ...section,
+                  body: `${section.body} Cette information est importante pour comprendre le texte de niveau ${levelName}.`,
+                })),
+          },
+      questions: articleMoyen
+        ? buildCeMessageQuestions(articleMoyen.pool, 7, `${level}-${stamp}-article`)
+        : articleLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
     },
   ];
 }
