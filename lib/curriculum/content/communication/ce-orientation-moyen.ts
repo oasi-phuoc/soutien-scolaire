@@ -1,4 +1,4 @@
-/** Pool « Lire pour s'orienter » — CE moyen (6 documents × 8 personnes, 2 leurres). */
+/** Pool « Lire des annonces » — CE moyen (6 documents × 8 personnes, 2 leurres). */
 
 export type OrientationSeriesItem = {
   context: string;
@@ -8,6 +8,52 @@ export type OrientationSeriesItem = {
 };
 
 export const ORIENTATION_MOYEN: OrientationSeriesItem[] = [
+  {
+    context:
+      "Vous êtes au Salon des métiers à Genève avec des amis. Vous lisez le programme des ateliers proposés sur place.",
+    docs: [
+      [
+        "Atelier image",
+        "Cinéma",
+        "Vous rêvez de réaliser des courts-métrages ? Découvrez les bases du tournage, du montage et du son avec des professionnels du cinéma suisse.",
+      ],
+      [
+        "Atelier scène",
+        "Théâtre",
+        "Envie de monter sur scène ? Cet atelier d'improvisation et de jeu théâtral vous aide à gagner en confiance devant un public.",
+      ],
+      [
+        "Atelier numérique",
+        "Informatique",
+        "Apprenez à créer un site Internet et à programmer en Python. Initiation pour débutants, matériel fourni sur place.",
+      ],
+      [
+        "Atelier cuisine",
+        "Restauration",
+        "Cet atelier propose une initiation aux métiers de la restauration avec le chef Gustave Lemoine. Plats salés, service en salle et travail d'équipe.",
+      ],
+      [
+        "Atelier gourmand",
+        "Pâtisserie",
+        "Comment faire de délicieux pains au chocolat ? Venez découvrir les secrets de la boulangerie-pâtisserie avec un maître artisan genevois.",
+      ],
+      [
+        "Atelier couleur",
+        "Arts plastiques",
+        "Initiez-vous à la peinture à l'huile et à l'aquarelle. Matériel fourni pour la première séance au centre culturel.",
+      ],
+    ],
+    people: [
+      ["Oksana aimerait faire des films.", 0],
+      ["Carmen est passionnée de théâtre.", 1],
+      ["Emre aime beaucoup l'informatique.", 2],
+      ["Hassan adore cuisiner, mais n'aime pas beaucoup les pâtisseries.", 3],
+      ["Inês aimerait devenir boulangère.", 4],
+      ["Matteo aime faire de la peinture.", 5],
+      ["Kwame est passionné de voitures.", -1],
+      ["Mariam adore regarder des films de science-fiction.", -1],
+    ],
+  },
   {
     context:
       "Avec des amis, vous voulez vous abonner à un magazine en Suisse romande. Vous lisez cette publicité sur Internet.",
