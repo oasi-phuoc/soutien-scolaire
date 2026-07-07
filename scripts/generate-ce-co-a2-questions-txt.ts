@@ -2,94 +2,29 @@
  * Génère public/assets/expression/ce-co-questions-a2.txt
  * Usage : npx --yes tsx scripts/generate-ce-co-a2-questions-txt.ts
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { CO_CORE_SLOT_LABELS } from "../lib/curriculum/content/communication/ce-co-question-formats";
-import type { CEMultiQuestion } from "../lib/curriculum/content/communication/ce-questions-helpers";
+import { CO_CORE_SLOT_LABELS, CE_CORE_SLOT_LABELS } from "../lib/curriculum/content/communication/ce-co-question-formats";
+import type { CEMessageItem, CEMultiQuestion } from "../lib/curriculum/content/communication/ce-questions-helpers";
 import { ORIENTATION_MOYEN, type OrientationSeriesItem } from "../lib/curriculum/content/communication/ce-orientation-moyen";
+import { CE_MESSAGES_MOYEN } from "../lib/curriculum/content/communication/ce-messages-moyen";
+import { CE_INSTRUCTIONS_MOYEN } from "../lib/curriculum/content/communication/ce-instructions-moyen";
+import { CE_ARTICLES_MOYEN } from "../lib/curriculum/content/communication/ce-articles-moyen";
 import { CO_QUESTION_POOLS_MOYEN } from "../lib/curriculum/content/communication/co-questions-moyen";
 import { CO_CONVERSATION_MATCH } from "../lib/curriculum/content/communication/co-questions-moyen-conversation-match";
 import type { COMultiQuestion } from "../lib/curriculum/content/communication/co-questions-helpers";
 import { ceCoImageSource } from "../lib/curriculum/word-image-resolver";
 
 const OUT = resolve(process.cwd(), "public/assets/expression/ce-co-questions-a2.txt");
-const CE_RUNNER = resolve(process.cwd(), "components/communication/ComprehensionEcritRunner.tsx");
 
 type MultiQ = CEMultiQuestion | COMultiQuestion;
 
-type RawCeQuestion =
-  | { prompt: string; choices: { label: string }[]; correct: number }
-  | { prompt: string; answer: string; accept?: string[] };
-
-type InstructionSeriesItem = {
-  title: string;
-  body: string;
-  questions: RawCeQuestion[];
-}[];
-
-type ArticleSeriesItem = {
-  title: string;
-  sections: { heading: string; body: string }[];
-  questions: RawCeQuestion[];
-};
-
-type EmailSeriesItem = {
-  from: string;
-  subject: string;
-  body: string;
-  questions: RawCeQuestion[];
-};
-
-function sliceArray(src: string, fromIndex: number): string | null {
-  const start = src.indexOf("[", fromIndex);
-  if (start === -1) return null;
-  let depth = 0;
-  let inStr = false;
-  for (let i = start; i < src.length; i++) {
-    const ch = src[i];
-    if (inStr) {
-      if (ch === "\\") { i++; continue; }
-      if (ch === '"') inStr = false;
-      continue;
-    }
-    if (ch === '"') inStr = true;
-    else if (ch === "[") depth++;
-    else if (ch === "]") { depth--; if (depth === 0) return src.slice(start, i + 1); }
-  }
-  return null;
-}
-
-function evalArrayAfter(src: string, marker: string): unknown {
-  const idx = src.indexOf(marker);
-  if (idx === -1) throw new Error(`Marqueur introuvable : ${marker}`);
-  const text = sliceArray(src, idx + marker.length);
-  if (!text) throw new Error(`Tableau introuvable après : ${marker}`);
-  // eslint-disable-next-line no-eval
-  return eval(`(${text})`);
-}
-
 function loadCeMoyenArrays() {
-  const src = readFileSync(CE_RUNNER, "utf8");
   return {
-    emails: evalArrayAfter(src, "const CE_MOYEN_EMAILS: EmailSeriesItem[] =") as EmailSeriesItem[],
-    instructions: evalArrayAfter(src, "const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] =") as InstructionSeriesItem[],
-    articles: evalArrayAfter(src, "const CE_MOYEN_ARTICLES: ArticleSeriesItem[] =") as ArticleSeriesItem[],
+    emails: CE_MESSAGES_MOYEN,
+    instructions: CE_INSTRUCTIONS_MOYEN,
+    articles: CE_ARTICLES_MOYEN,
   };
-}
-
-function renderStaticQuestion(q: RawCeQuestion, index: number): string[] {
-  const lines: string[] = [];
-  if ("choices" in q) {
-    lines.push(`  • Q${index + 1} — Forme : QCM texte`);
-    lines.push(`    Question : ${q.prompt}`);
-    lines.push(`    Choix : ${q.choices.map((c, i) => `${String.fromCharCode(97 + i)}) ${c.label}`).join(" | ")}`);
-    lines.push(`    Correct : ${String.fromCharCode(97 + q.correct)}`);
-  } else {
-    lines.push(`  • Q${index + 1} — Forme : saisie`);
-    lines.push(`    Question : ${q.prompt}`);
-    lines.push(`    Réponse : ${q.answer}${q.accept?.length ? ` (accepté : ${q.accept.join(", ")})` : ""}`);
-  }
-  return lines;
 }
 
 function isImageable(q: MultiQ): boolean {
@@ -133,16 +68,18 @@ function renderOrientationBlock(item: OrientationSeriesItem, index: number): str
   return lines;
 }
 
-function renderEmailBlock(item: EmailSeriesItem, index: number): string[] {
+function renderMessageBlock(item: CEMessageItem, index: number): string[] {
   const lines: string[] = [];
   lines.push(`--- Message ${index + 1} : ${item.subject} ---`);
-  lines.push(`De : ${item.from}`);
-  lines.push(`Objet : ${item.subject}`);
-  lines.push(`Format : QCM texte ou saisie (pas de QCM image)`);
+  lines.push(`De : ${item.from ?? "—"}`);
+  lines.push(`Objet : ${item.subject ?? "—"}`);
+  lines.push(`Format : pool multi-format (6 questions tirées à l'éval)`);
   lines.push(`Texte :`);
   lines.push(item.body.split("\n").map((l) => `  ${l}`).join("\n"));
-  lines.push(`Questions (${item.questions.length}) :`);
-  item.questions.forEach((q, qi) => lines.push(...renderStaticQuestion(q, qi)));
+  lines.push(`Pool (${item.pool.length} questions) :`);
+  for (const q of item.pool) {
+    lines.push(...renderMultiQuestion(q, CE_CORE_SLOT_LABELS));
+  }
   lines.push("");
   return lines;
 }
@@ -197,33 +134,35 @@ function main() {
   out.push("");
   ORIENTATION_MOYEN.forEach((item, i) => out.push(...renderOrientationBlock(item, i)));
 
-  out.push("### Exercice 2 — Lire un message");
+  out.push("### Exercice 2 — Lire des messages");
   out.push("");
-  out.push("Format : QCM texte ou saisie (pas de QCM image).");
+  out.push("Format : pool multi-format (QCM texte / QCM image / saisie), 6 questions tirées à l'éval.");
   out.push(`Nombre de messages : ${emails.length}`);
   out.push("");
-  emails.forEach((item, i) => out.push(...renderEmailBlock(item, i)));
+  emails.forEach((item, i) => out.push(...renderMessageBlock(item, i)));
 
   out.push("### Exercice 3 — Lire des instructions");
   out.push("");
-  out.push("Format : QCM texte uniquement (pas de QCM image ni saisie).");
+  out.push("Format : 3 textes × 2 questions (formats distincts par texte), pool 4 Q par carte.");
   out.push(`Nombre de séries : ${instructions.length}`);
   out.push("");
   instructions.forEach((series, seriesIdx) => {
-    out.push(`--- Série ${seriesIdx + 1} (${series.length} cartes) ---`);
-    series.forEach((card, cardIdx) => {
+    out.push(`--- Série ${seriesIdx + 1} (${series.cards.length} cartes) — ${series.id} ---`);
+    series.cards.forEach((card, cardIdx) => {
       out.push(`Carte ${cardIdx + 1} : ${card.title}`);
       out.push(`Texte :`);
       out.push(card.body.split("\n").map((l) => `  ${l}`).join("\n"));
-      out.push(`Questions (${card.questions.length}) :`);
-      card.questions.forEach((q, qi) => out.push(...renderStaticQuestion(q, qi)));
+      out.push(`Pool (${card.pool.length} questions) :`);
+      for (const q of card.pool) {
+        out.push(...renderMultiQuestion(q, CE_CORE_SLOT_LABELS));
+      }
       out.push("");
     });
   });
 
   out.push("### Exercice 4 — Lire des informations");
   out.push("");
-  out.push("Format : QCM texte ou saisie (pas de QCM image).");
+  out.push("Format : pool multi-format, 7 questions tirées à l'éval.");
   out.push(`Nombre d'articles : ${articles.length}`);
   out.push("");
   articles.forEach((article, articleIdx) => {
@@ -231,8 +170,10 @@ function main() {
     article.sections.forEach((section) => {
       out.push(`  [${section.heading}] ${section.body}`);
     });
-    out.push(`Questions (${article.questions.length}) :`);
-    article.questions.forEach((q, qi) => out.push(...renderStaticQuestion(q, qi)));
+    out.push(`Pool (${article.pool.length} questions) :`);
+    for (const q of article.pool) {
+      out.push(...renderMultiQuestion(q, CE_CORE_SLOT_LABELS));
+    }
     out.push("");
   });
 

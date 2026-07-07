@@ -19,6 +19,7 @@ import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGu
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
+import { CE_MESSAGES_MOYEN } from "@/lib/curriculum/content/communication/ce-messages-moyen";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
 import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
 import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce-instructions-moyen";
@@ -313,97 +314,6 @@ const ORIENTATION_AVANCE: OrientationSeriesItem[] = ORIENTATION_MOYEN.map((item,
     (answer + (personIndex % 2 === 0 ? 0 : 0)) as number,
   ]),
 }));
-
-// --------------------------------------------------------------------------
-// Contenu A2 authoré pour le niveau MOYEN (CE-2) : textes plus longs, avec
-// connecteurs (parce que, si, quand, mais, donc…) et temps variés (passé
-// composé, futur), et questions/réponses adaptées (compréhension fine + saisie).
-// --------------------------------------------------------------------------
-const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
-  {
-    from: "leyla@voisins.ch",
-    subject: "Un petit service pendant mes vacances",
-    body:
-      "Bonjour,\nComme je pars en vacances la semaine prochaine, j'aimerais te demander un service. Peux-tu arroser mes plantes pendant mon absence ? Il faut le faire deux fois par semaine, le mardi et le samedi, mais seulement le soir, quand il fait moins chaud. La clé de l'appartement sera chez la gardienne, au rez-de-chaussée. Attention : ne donne pas trop d'eau aux cactus, sinon ils vont pourrir. Si tu as un problème, tu peux m'appeler, mais je répondrai surtout le week-end.\nMerci beaucoup, je te rapporterai un souvenir !\nLeyla",
-    questions: [
-      { prompt: "Pourquoi Leyla écrit-elle ce message ?", choices: [{ label: "Pour inviter à un repas" }, { label: "Pour demander d'arroser ses plantes" }, { label: "Pour vendre son appartement" }], correct: 1 },
-      { prompt: "À quel moment de la journée faut-il arroser ?", choices: [{ label: "Le matin" }, { label: "Le soir" }, { label: "À midi" }], correct: 1 },
-      { prompt: "Combien de fois par semaine faut-il arroser ?", choices: [{ label: "Une fois" }, { label: "Deux fois" }, { label: "Tous les jours" }], correct: 1 },
-      { prompt: "Où se trouve la clé ?", choices: [{ label: "Chez la gardienne" }, { label: "Sous le paillasson" }, { label: "Dans la boîte aux lettres" }], correct: 0 },
-      { prompt: "Que ne faut-il pas faire avec les cactus ?", answer: "trop d'eau", accept: ["donner trop d'eau", "trop arroser", "trop les arroser"] },
-      { prompt: "Quel jour Leyla répond-elle le mieux au téléphone ?", answer: "le week-end", accept: ["week-end", "samedi ou dimanche"] },
-    ],
-  },
-  {
-    from: "mairie@ville.ch",
-    subject: "Inscription à la fête du quartier",
-    body:
-      "Bonjour,\nLa fête du quartier aura lieu le samedi 14 juin, de 11 h à 18 h, dans le parc des Tilleuls. Cette année, chaque famille peut préparer un plat à partager avec les autres. Si vous voulez tenir un stand, vous devez vous inscrire avant le 1er juin en répondant à ce courriel. Les enfants pourront participer à des jeux gratuits l'après-midi, mais ils doivent rester accompagnés d'un adulte. En cas de pluie, la fête sera déplacée dans la salle communale, juste à côté du parc.\nNous comptons sur votre bonne humeur !\nLa mairie",
-    questions: [
-      { prompt: "Quel est le sujet principal du message ?", choices: [{ label: "Une fête de quartier" }, { label: "Un cours de cuisine" }, { label: "Un match de football" }], correct: 0 },
-      { prompt: "Que peut apporter chaque famille ?", choices: [{ label: "Une chaise" }, { label: "Un plat à partager" }, { label: "De l'argent" }], correct: 1 },
-      { prompt: "Avant quelle date faut-il s'inscrire pour un stand ?", choices: [{ label: "Le 1er juin" }, { label: "Le 14 juin" }, { label: "Le 18 juin" }], correct: 0 },
-      { prompt: "Que se passe-t-il s'il pleut ?", choices: [{ label: "La fête est annulée" }, { label: "La fête est déplacée dans la salle communale" }, { label: "La fête est reportée d'une semaine" }], correct: 1 },
-      { prompt: "Où a lieu la fête ?", answer: "parc des Tilleuls", accept: ["au parc", "le parc des tilleuls", "parc"] },
-      { prompt: "Les enfants peuvent-ils rester seuls aux jeux ?", answer: "non", accept: ["non, avec un adulte", "ils doivent être accompagnés", "accompagnés d'un adulte"] },
-    ],
-  },
-  {
-    from: "m.roche@magasin.ch",
-    subject: "Ton nouvel horaire de travail",
-    body:
-      "Bonjour Oksana,\nÀ partir de lundi prochain, ton horaire change un peu. Tu commenceras à 8 h 30 au lieu de 9 h, parce que nous recevons les livraisons plus tôt. En échange, tu pourras partir à 16 h le vendredi. N'oublie pas de porter l'uniforme et de badger en arrivant. Si tu ne peux pas venir un jour, préviens-moi la veille, et non le matin même. Enfin, nous ferons une réunion d'équipe le premier lundi du mois pour organiser les vacances d'été.\nBonne journée,\nM. Roche",
-    questions: [
-      { prompt: "À quelle heure Oksana commencera-t-elle désormais ?", choices: [{ label: "8 h" }, { label: "8 h 30" }, { label: "9 h" }], correct: 1 },
-      { prompt: "Pourquoi l'horaire change-t-il ?", choices: [{ label: "Les livraisons arrivent plus tôt" }, { label: "Le magasin ferme plus tard" }, { label: "Il y a moins de clients" }], correct: 0 },
-      { prompt: "Quel avantage Oksana reçoit-elle en échange ?", choices: [{ label: "Un jour de congé" }, { label: "Partir plus tôt le vendredi" }, { label: "Une augmentation" }], correct: 1 },
-      { prompt: "Quand faut-il prévenir en cas d'absence ?", choices: [{ label: "Le matin même" }, { label: "La veille" }, { label: "Une semaine avant" }], correct: 1 },
-      { prompt: "Que faut-il faire en arrivant au travail ?", answer: "badger", accept: ["badger", "porter l'uniforme et badger", "pointer"] },
-      { prompt: "Pourquoi y a-t-il une réunion le premier lundi du mois ?", answer: "organiser les vacances", accept: ["pour organiser les vacances d'été", "les vacances d'été", "organiser les vacances"] },
-    ],
-  },
-  {
-    from: "ecole@primaire.ch",
-    subject: "Sortie scolaire au musée",
-    body:
-      "Chers parents,\nLa classe de votre enfant visitera le Musée de la nature le jeudi 22 mars. Le départ se fera en bus devant l'école à 8 h 45 ; merci d'arriver dix minutes plus tôt. Chaque enfant doit apporter un pique-nique, une bouteille d'eau et un vêtement de pluie, car nous mangerons dehors si le temps le permet. La visite coûte 8 francs par enfant ; vous pouvez donner l'argent à l'enseignant jusqu'au 15 mars. Les enfants qui ont mal au cœur en bus peuvent s'asseoir devant.\nMerci de votre confiance,\nL'équipe enseignante",
-    questions: [
-      { prompt: "Où va la classe ?", choices: [{ label: "Au zoo" }, { label: "Au Musée de la nature" }, { label: "À la piscine" }], correct: 1 },
-      { prompt: "À quelle heure le bus part-il ?", choices: [{ label: "8 h 35" }, { label: "8 h 45" }, { label: "9 h" }], correct: 1 },
-      { prompt: "Pourquoi faut-il apporter un vêtement de pluie ?", choices: [{ label: "Parce qu'on mangera peut-être dehors" }, { label: "Parce qu'il fait froid au musée" }, { label: "Parce que le bus est ouvert" }], correct: 0 },
-      { prompt: "Combien coûte la visite par enfant ?", choices: [{ label: "5 francs" }, { label: "8 francs" }, { label: "10 francs" }], correct: 1 },
-      { prompt: "Jusqu'à quand faut-il donner l'argent ?", answer: "15 mars", accept: ["le 15 mars", "jusqu'au 15 mars"] },
-      { prompt: "Où peuvent s'asseoir les enfants malades en bus ?", answer: "devant", accept: ["devant", "à l'avant"] },
-    ],
-  },
-  {
-    from: "ines@amis.ch",
-    subject: "Week-end à la montagne ?",
-    body:
-      "Salut !\nÇa te dirait de venir à la montagne le week-end prochain ? Mes parents nous prêtent leur chalet à Verbier. On partirait vendredi après le travail et on rentrerait dimanche soir. Il faut prévoir de bonnes chaussures, parce qu'on aimerait faire une randonnée samedi, s'il ne pleut pas. Pour la nourriture, chacun apporte quelque chose : moi, je m'occupe du fromage pour la fondue, et toi, tu pourrais prendre le pain et le dessert. Réponds-moi vite, car il faut réserver les places dans la voiture de Mariam.\nBisous,\nInês",
-    questions: [
-      { prompt: "Que propose Inês ?", choices: [{ label: "Aller à la mer" }, { label: "Passer un week-end à la montagne" }, { label: "Rester en ville" }], correct: 1 },
-      { prompt: "Quand rentreraient-ils ?", choices: [{ label: "Vendredi soir" }, { label: "Samedi" }, { label: "Dimanche soir" }], correct: 2 },
-      { prompt: "Pourquoi faut-il de bonnes chaussures ?", choices: [{ label: "Pour danser" }, { label: "Pour faire une randonnée" }, { label: "Pour visiter un musée" }], correct: 1 },
-      { prompt: "Que doit apporter la personne qui reçoit le message ?", choices: [{ label: "Le fromage" }, { label: "Le pain et le dessert" }, { label: "Les boissons" }], correct: 1 },
-      { prompt: "Pourquoi faut-il répondre vite ?", answer: "réserver les places dans la voiture", accept: ["pour réserver les places", "réserver la voiture", "les places dans la voiture de mariam"] },
-    ],
-  },
-  {
-    from: "bibliotheque@ville.ch",
-    subject: "Nouvel atelier d'écriture",
-    body:
-      "Bonjour,\nNous organisons un nouvel atelier d'écriture pour les adultes, un mercredi sur deux, de 18 h à 19 h 30. Le premier atelier commencera le 5 octobre et sera animé par un écrivain de la région. Il n'est pas nécessaire d'avoir de l'expérience : le but est surtout de prendre du plaisir et de progresser ensemble. Les places sont limitées à douze personnes, donc inscrivez-vous rapidement à l'accueil ou par téléphone. L'atelier est gratuit, mais si vous êtes inscrit et que vous ne venez pas deux fois sans prévenir, votre place sera donnée à une autre personne.\nÀ bientôt,\nLa bibliothèque",
-    questions: [
-      { prompt: "À qui s'adresse cet atelier ?", choices: [{ label: "Aux enfants" }, { label: "Aux adultes" }, { label: "Aux professeurs seulement" }], correct: 1 },
-      { prompt: "À quelle fréquence a lieu l'atelier ?", choices: [{ label: "Tous les jours" }, { label: "Un mercredi sur deux" }, { label: "Le week-end" }], correct: 1 },
-      { prompt: "Faut-il de l'expérience pour participer ?", choices: [{ label: "Oui, beaucoup" }, { label: "Non, ce n'est pas nécessaire" }, { label: "Seulement pour les écrivains" }], correct: 1 },
-      { prompt: "Combien de places y a-t-il ?", choices: [{ label: "Douze" }, { label: "Vingt" }, { label: "Trente" }], correct: 0 },
-      { prompt: "Combien coûte l'atelier ?", answer: "gratuit", accept: ["c'est gratuit", "rien", "0 franc"] },
-      { prompt: "Que se passe-t-il si on manque deux fois sans prévenir ?", answer: "on perd sa place", accept: ["la place est donnée à une autre personne", "on perd sa place", "perdre sa place"] },
-    ],
-  },
-];
 
 // --------------------------------------------------------------------------
 // Contenu B1 authoré pour le niveau AVANCÉ (CE-3) : textes plus longs et plus
@@ -708,9 +618,14 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const orientationTextBase = level === "base" ? pickFromPool(CE_ORIENTATION_BASE, `${level}-${stamp}-orientation`) : null;
   const orientation = orientationPool ? pickFromPool(orientationPool, `${level}-${stamp}-orientation`) : null;
   const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "avance" ? CE_AVANCE_INSTRUCTIONS : null;
-  const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
-  const emailLegacy = level !== "base"
-    ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
+  const emailBase =
+    level === "base"
+      ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`)
+      : level === "moyen"
+        ? pickFromPool(CE_MESSAGES_MOYEN, `${level}-${stamp}-email`)
+        : null;
+  const emailLegacy = level === "avance"
+    ? pickFromPool(CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
     : null;
   const instructionMoyen = level === "moyen" ? pickFromPool(CE_INSTRUCTIONS_MOYEN, `${level}-${stamp}-instructions`) : null;
   const instructions = instructionPool ? pickFromPool(instructionPool, `${level}-${stamp}-instructions`) : null;

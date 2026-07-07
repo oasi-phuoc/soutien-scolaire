@@ -64,9 +64,22 @@ function normQuestion(q) {
   return { type: "qcm", prompt: q.prompt, choices: labels, correct: q.correct };
 }
 
+function normMultiQuestion(q) {
+  return {
+    type: "pool",
+    id: q.id,
+    textQ: q.textQ,
+    textChoices: q.textChoices,
+    textCorrect: q.textCorrect,
+    fillQ: q.fillQ,
+    fillAnswer: q.fillAnswer,
+  };
+}
+
 function extractCe() {
   const src = read(ceFile);
   const arr = (marker) => evalArrayAfter(src, marker);
+  const arrFile = (rel, marker) => evalArrayAfter(read(`${commDir}/${rel}`), marker);
 
   const orientationToItems = (pool) =>
     pool.map((it) => ({
@@ -74,8 +87,25 @@ function extractCe() {
       questions: it.people.map(([statement, docIdx]) => ({ type: "association", prompt: statement, answer: it.docs[docIdx][0] })),
     }));
   const emails = (pool) => pool.map((it) => ({ title: `Courriel — ${it.subject} (${it.from})`, questions: it.questions.map(normQuestion) }));
+  const messagesFromPool = (pool) =>
+    pool.map((it) => ({
+      title: `Message — ${it.subject} (${it.from ?? ""})`,
+      questions: it.pool.map(normMultiQuestion),
+    }));
   const instructions = (pool) => pool.flatMap((set) => set.map((card) => ({ title: `Consigne — ${card.title}`, questions: card.questions.map(normQuestion) })));
+  const instructionsMoyen = (pool) =>
+    pool.flatMap((series) =>
+      series.cards.map((card) => ({
+        title: `Consigne — ${card.title}`,
+        questions: card.pool.map(normMultiQuestion),
+      })),
+    );
   const articles = (pool) => pool.map((it) => ({ title: `Article — ${it.title}`, questions: it.questions.map(normQuestion) }));
+  const articlesMoyen = (pool) =>
+    pool.map((it) => ({
+      title: `Article — ${it.title}`,
+      questions: it.pool.map(normMultiQuestion),
+    }));
 
   return {
     base: {
@@ -85,10 +115,10 @@ function extractCe() {
       articles: articles(arr("const ARTICLE_SERIES: ArticleSeriesItem[] =")),
     },
     moyen: {
-      orientation: orientationToItems(arr("const ORIENTATION_MOYEN: OrientationSeriesItem[] =")),
-      emails: emails(arr("const CE_MOYEN_EMAILS: EmailSeriesItem[] =")),
-      instructions: instructions(arr("const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] =")),
-      articles: articles(arr("const CE_MOYEN_ARTICLES: ArticleSeriesItem[] =")),
+      orientation: orientationToItems(arrFile("ce-orientation-moyen.ts", "export const ORIENTATION_MOYEN: OrientationSeriesItem[] =")),
+      emails: messagesFromPool(arrFile("ce-messages-moyen.ts", "export const CE_MESSAGES_MOYEN: CEMessageItem[] =")),
+      instructions: instructionsMoyen(arrFile("ce-instructions-moyen.ts", "export const CE_INSTRUCTIONS_MOYEN: CEInstructionItem[] =")),
+      articles: articlesMoyen(arrFile("ce-articles-moyen.ts", "export const CE_ARTICLES_MOYEN: CEArticleItem[] =")),
     },
     avance: {
       orientation: orientationToItems(arr("const ORIENTATION_MOYEN: OrientationSeriesItem[] =")), // ORIENTATION_AVANCE dérive de MOYEN
@@ -157,6 +187,10 @@ function extractMatch() {
 // Render
 // --------------------------------------------------------------------------
 function fmtQuestion(n, q) {
+  if (q.type === "pool") {
+    const opts = q.textChoices.map((c, i) => (i === q.textCorrect ? `${c} ✓` : c)).join(" | ");
+    return `    ${n}. [${q.id}] QCM : ${q.textQ}\n        ${opts}\n        Saisie : ${q.fillQ} → ${q.fillAnswer}`;
+  }
   if (q.type === "saisie") return `    ${n}. ${q.prompt}\n        [réponse à saisir] → ${q.answer}`;
   if (q.type === "association") return `    ${n}. ${q.prompt}\n        [associer] → ${q.answer}`;
   const opts = q.choices.map((c, i) => (i === q.correct ? `${c} ✓` : c)).join(" | ");

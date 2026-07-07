@@ -1,4 +1,4 @@
-import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
+import { ceCoImageSource, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import { pickCeCoQuestionFormat, type CeCoFormatType } from "./ce-co-question-formats";
 
@@ -89,11 +89,8 @@ export type CEMessageItem = {
 };
 
 export function ceImgChoice(label: string): CEImageChoice {
-  if (isCeCoImageableLabel(label)) {
-    const dedicated = resolveCeCoWordImage(label);
-    if (dedicated) return { label, image: dedicated };
-  }
-  return { label, image: "" };
+  const image = resolveCeCoWordImage(label) ?? "";
+  return { label, image };
 }
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
