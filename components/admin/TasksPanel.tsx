@@ -70,8 +70,8 @@ const RAW_CURRICULUM: MatiereOpt[] = [
         { id: "A8.4", label: "A8.4 — Racine carrée" },
         { id: "A8.5", label: "A8.5 — Priorité des opérations" },
       ]},
-      { id: "G1", label: "G1 — Figures planes", lessons: [
-        { id: "G1.1", label: "G1.1 — Reconnaître les figures" },
+      { id: "G1", label: "G1 — Formes", lessons: [
+        { id: "G1.1", label: "G1.1 — Reconnaissance" },
         { id: "G1.2", label: "G1.2 — Propriétés des figures" },
       ]},
       { id: "G2", label: "G2 — Conversions d'unités", lessons: [

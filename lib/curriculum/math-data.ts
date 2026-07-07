@@ -161,11 +161,11 @@ export const MATH_MODULES: MathModule[] = [
   {
     id: "G1",
     code: "G1",
-    title: "Formes planes et reconnaissance visuelle",
+    title: "Formes",
     branch: "geometry",
     prerequisiteIds: [],
     submodules: [
-      sm("G1.1", "Formes"),
+      sm("G1.1", "Reconnaissance"),
       sm("G1.2", "Propriétés"),
     ],
   },

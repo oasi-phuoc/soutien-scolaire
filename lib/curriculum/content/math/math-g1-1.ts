@@ -4,7 +4,7 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-1",
   submoduleCode: "G1.1",
   theory: {
-    title: { fr: "Formes" },
+    title: { fr: "Reconnaissance" },
     blocks: [
       { type: "heading", fr: "Les polygones réguliers", black: true },
 
