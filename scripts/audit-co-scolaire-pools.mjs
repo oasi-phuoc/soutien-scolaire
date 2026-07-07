@@ -48,7 +48,8 @@ function mp3Stems(level) {
   return fs.readdirSync(dir).filter((f) => f.endsWith(".mp3")).map((f) => f.replace(/\.mp3$/, ""));
 }
 
-const EXPECTED = 10;
+const EXPECTED_MOYEN = 10;
+const EXPECTED_AVANCE = 15;
 const moyenT = JSON.parse(fs.readFileSync("lib/curriculum/content/communication/co-transcripts-scolaire-moyen.json", "utf8"));
 const avanceT = JSON.parse(fs.readFileSync("lib/curriculum/content/communication/co-transcripts-scolaire-avance.json", "utf8"));
 
@@ -64,7 +65,7 @@ const avancePools = {
   ...countPoolQuestions("lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts"),
 };
 
-function auditLevel(name, transcripts, pools, qcmOnly) {
+function auditLevel(name, transcripts, pools, qcmOnly, expectedCount) {
   const issues = [];
   const keys = Object.keys(transcripts).filter((k) => !k.startsWith("conversation") || !qcmOnly);
   const qcmKeys = Object.keys(transcripts).filter((k) => {
@@ -78,7 +79,7 @@ function auditLevel(name, transcripts, pools, qcmOnly) {
     if (qcmOnly && isConv) continue;
     const n = pools[poolSlug];
     if (n === undefined) issues.push(`POOL MANQUANT: ${poolSlug}`);
-    else if (n !== EXPECTED) issues.push(`${poolSlug}: ${n} questions (attendu ${EXPECTED})`);
+    else if (n !== expectedCount) issues.push(`${poolSlug}: ${n} questions (attendu ${expectedCount})`);
   }
 
   for (const slug of Object.keys(pools)) {
@@ -97,8 +98,8 @@ function auditLevel(name, transcripts, pools, qcmOnly) {
   return { issues, poolCount: Object.keys(pools).length, transcriptCount: Object.keys(transcripts).length };
 }
 
-const moyen = auditLevel("moyen", moyenT, moyenPools, true);
-const avance = auditLevel("avance", avanceT, avancePools, false);
+const moyen = auditLevel("moyen", moyenT, moyenPools, true, EXPECTED_MOYEN);
+const avance = auditLevel("avance", avanceT, avancePools, false, EXPECTED_AVANCE);
 
 console.log("=== CO SCOLAIRE MOYEN ===");
 console.log(`Transcripts: ${moyen.transcriptCount}, Pools QCM: ${moyen.poolCount}`);
@@ -116,7 +117,7 @@ console.log(`Problèmes: ${avance.issues.length}`);
 if (avance.issues.length) console.log(avance.issues.slice(0, 30).join("\n"));
 if (avance.issues.length > 30) console.log(`... et ${avance.issues.length - 30} autres`);
 
-console.log("\nFormats avancé (10 positions, critère B1):");
+console.log("\nFormats avancé (15 positions, critère B1):");
 console.log("  alternance QCM texte / saisie (pas de QCM image)");
 
 process.exit(moyen.issues.length + avance.issues.length > 0 ? 1 : 0);
