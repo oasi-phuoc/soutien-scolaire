@@ -2783,9 +2783,10 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
               <button
                 type="button"
                 onClick={() => setShowCancelConfirm(false)}
-                className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                className="flex h-11 flex-1 items-center justify-center rounded-xl px-4 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90"
+                style={{ background: "var(--color-accent-fr)" }}
               >
-                Continuer l&apos;évaluation
+                Continuer
               </button>
             </div>
           </div>
