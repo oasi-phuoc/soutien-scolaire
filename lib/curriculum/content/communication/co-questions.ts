@@ -17,6 +17,7 @@ import { CO_QUESTION_POOLS_AVANCE } from "./co-questions-avance";
 import { CO_QUESTION_POOLS_AVANCE_EXTRA } from "./co-questions-avance-extra";
 import { CO_QUESTION_POOLS_SCOLAIRE_BASE } from "./co-questions-scolaire-base";
 import { CO_QUESTION_POOLS_SCOLAIRE_MOYEN } from "./co-questions-scolaire-moyen";
+import { CO_QUESTION_POOLS_SCOLAIRE_AVANCE } from "./co-questions-scolaire-avance";
 
 export type {
   COFormatType,
@@ -42,6 +43,7 @@ export const CO_QUESTION_POOLS: Record<string, COMultiQuestion[]> = {
   ...CO_QUESTION_POOLS_AVANCE_EXTRA,
   ...CO_QUESTION_POOLS_SCOLAIRE_BASE,
   ...CO_QUESTION_POOLS_SCOLAIRE_MOYEN,
+  ...CO_QUESTION_POOLS_SCOLAIRE_AVANCE,
 };
 
 export function getCoPartQuestions(group: COAudioGroup, count: number, seed: string): COQuestionTask[] {
