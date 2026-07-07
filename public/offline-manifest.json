@@ -1,6 +1,6 @@
 {
-  "version": 1783376445698,
-  "totalBytes": 333499513,
+  "version": 1783405262034,
+  "totalBytes": 364926584,
   "routes": [
     "/",
     "/avant-propos",
@@ -864,6 +864,41 @@
     "/assets/expression/co/moyen/public/radio-24.mp3",
     "/assets/expression/co/moyen/public/radio-25.mp3",
     "/assets/expression/co/moyen/scolaire/.gitkeep",
+    "/assets/expression/co/moyen/scolaire/annonce-36.mp3",
+    "/assets/expression/co/moyen/scolaire/annonce-37.mp3",
+    "/assets/expression/co/moyen/scolaire/annonce-38.mp3",
+    "/assets/expression/co/moyen/scolaire/annonce-39.mp3",
+    "/assets/expression/co/moyen/scolaire/annonce-40.mp3",
+    "/assets/expression/co/moyen/scolaire/annonce-46.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-1.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-12.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-15.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-18.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-20.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-22.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-25.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-29.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-30.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-32.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-33.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-6.mp3",
+    "/assets/expression/co/moyen/scolaire/conversation-8.mp3",
+    "/assets/expression/co/moyen/scolaire/message-41.mp3",
+    "/assets/expression/co/moyen/scolaire/message-42.mp3",
+    "/assets/expression/co/moyen/scolaire/message-43.mp3",
+    "/assets/expression/co/moyen/scolaire/message-44.mp3",
+    "/assets/expression/co/moyen/scolaire/message-45.mp3",
+    "/assets/expression/co/moyen/scolaire/message-47.mp3",
+    "/assets/expression/co/moyen/scolaire/message-48.mp3",
+    "/assets/expression/co/moyen/scolaire/message-49.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-34.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-35.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-50.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-51.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-52.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-53.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-54.mp3",
+    "/assets/expression/co/moyen/scolaire/radio-55.mp3",
     "/assets/expression/images/ce/ce-message-01.webp",
     "/assets/expression/images/ce/ce-message-02.webp",
     "/assets/expression/images/ce/ce-message-03.webp",
@@ -5037,6 +5072,181 @@
       "url": "/assets/expression/co/moyen/scolaire/.gitkeep",
       "size": 0,
       "revision": "e3b0c44298fc1c14"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-36.mp3",
+      "size": 1544613,
+      "revision": "90bcfa2850ddf6a4"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-37.mp3",
+      "size": 656240,
+      "revision": "ec78c0555d130a9f"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-38.mp3",
+      "size": 1268446,
+      "revision": "42a9a64a8955779c"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-39.mp3",
+      "size": 626461,
+      "revision": "da5b8ef94663ea48"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-40.mp3",
+      "size": 1326124,
+      "revision": "d86fac163633bb89"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/annonce-46.mp3",
+      "size": 635238,
+      "revision": "47fb66740058b324"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-1.mp3",
+      "size": 1053720,
+      "revision": "01a4a88d9f8fa975"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-12.mp3",
+      "size": 1075349,
+      "revision": "fad83ee76a23f724"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-15.mp3",
+      "size": 1007953,
+      "revision": "97a669e411985433"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-18.mp3",
+      "size": 1207633,
+      "revision": "ed311afde286c056"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-20.mp3",
+      "size": 1208887,
+      "revision": "7f8bd46925778268"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-22.mp3",
+      "size": 1038360,
+      "revision": "9b3cc80dfd30893e"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-25.mp3",
+      "size": 1235218,
+      "revision": "4a747c2214c3a4ec"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-29.mp3",
+      "size": 779434,
+      "revision": "64eebc6b2cdcae26"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-30.mp3",
+      "size": 1067512,
+      "revision": "13ecb3fcf81d94cb"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-32.mp3",
+      "size": 982248,
+      "revision": "b2afb8e8dd81c76a"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-33.mp3",
+      "size": 903881,
+      "revision": "c8723151fd4930aa"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-6.mp3",
+      "size": 945259,
+      "revision": "bbec346152c15793"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/conversation-8.mp3",
+      "size": 1026448,
+      "revision": "fa08edbcc75481fc"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-41.mp3",
+      "size": 521448,
+      "revision": "cae491191637a426"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-42.mp3",
+      "size": 645269,
+      "revision": "558f6c4facf985a0"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-43.mp3",
+      "size": 511104,
+      "revision": "b71ab169c7da8ec8"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-44.mp3",
+      "size": 509850,
+      "revision": "3d5953e058fcf34a"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-45.mp3",
+      "size": 507656,
+      "revision": "5cfdceb0ed802340"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-47.mp3",
+      "size": 1334588,
+      "revision": "a4431f87ae61175f"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-48.mp3",
+      "size": 606085,
+      "revision": "9f6f17e4e8878025"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/message-49.mp3",
+      "size": 545586,
+      "revision": "c1b7ec577e0b38aa"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-34.mp3",
+      "size": 868773,
+      "revision": "449228fbaf9b6bb9"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-35.mp3",
+      "size": 934915,
+      "revision": "41d12e4b673d5412"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-50.mp3",
+      "size": 890402,
+      "revision": "5f5797e2f30866a3"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-51.mp3",
+      "size": 878804,
+      "revision": "1d81d8cc10b73ccf"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-52.mp3",
+      "size": 650911,
+      "revision": "ea3062ec1e3ec511"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-53.mp3",
+      "size": 920495,
+      "revision": "6b088a9bc9dd9573"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-54.mp3",
+      "size": 694484,
+      "revision": "3991f29fac0a1880"
+    },
+    {
+      "url": "/assets/expression/co/moyen/scolaire/radio-55.mp3",
+      "size": 817677,
+      "revision": "0dc3afbbc24a5514"
     },
     {
       "url": "/assets/expression/images/ce/ce-message-01.webp",
