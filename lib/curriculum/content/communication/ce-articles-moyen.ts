@@ -682,4 +682,215 @@ export const CE_ARTICLES_MOYEN: CEArticleItem[] = [
       ),
     ],
   },
+  {
+    id: "velo-suisse",
+    title: "Près de deux Suisses sur cinq font du vélo",
+    sections: [
+      {
+        heading: "Pourquoi le vélo ?",
+        imageLabel: "Vélo",
+        body:
+          "Les Suisses pédalent de plus en plus. Six personnes sur dix font du vélo surtout pour faire du sport régulièrement. " +
+          "La deuxième raison, c'est le plaisir. Laisser la voiture au garage permet aussi d'économiser du carburant.",
+      },
+      {
+        heading: "En ville",
+        imageLabel: "Ville",
+        body:
+          "Dans les villes avec beaucoup de circulation, le vélo est souvent plus rapide que la voiture ou le bus. " +
+          "Faire du vélo, ce n'est pas seulement pour protéger l'environnement.",
+      },
+      {
+        heading: "Les vélotafeurs",
+        imageLabel: "Trajet",
+        body:
+          "La proportion de cyclistes est plus élevée dans les grandes villes. " +
+          "Une personne sur cinq dans les villes de plus de 100 000 habitants va au travail à vélo. " +
+          "Ces personnes s'appellent des « vélotafeurs ».",
+      },
+    ],
+    pool: [
+      ceQ("velo-q1", "Combien de Suisses sur cinq font du vélo tous les jours ?", ["Deux", "Quatre", "Cinq"], 0, "Près de ___ Suisses sur cinq font du vélo.", "deux", ["2"]),
+      ceQ("velo-q2", "Pourquoi six personnes sur dix font-elles du vélo ?", ["Pour faire du sport", "Pour dormir", "Pour cuisiner"], 0, "La première raison, c'est le _________.", "sport", ["faire du sport"]),
+      ceQ("velo-q3", "Que peut-on économiser avec le vélo ?", ["Du carburant", "De l'eau", "Du papier"], 0, "On économise du _________.", "carburant"),
+      ceQ("velo-q4", "En ville, le vélo est souvent plus rapide que…", ["La voiture ou le bus", "L'avion", "Le train"], 0, "Le vélo est plus rapide que la voiture ou le _________.", "bus"),
+      ceQ("velo-q5", "Faire du vélo sert-il seulement à protéger la planète ?", ["Non", "Oui", "On ne sait pas"], 0, "Ce n'est pas seulement pour protéger l'_________.", "environnement"),
+      ceQ("velo-q6", "Où y a-t-il plus de cyclistes ?", ["Dans les grandes villes", "À la campagne", "À la mer"], 0, "Il y a plus de cyclistes dans les grandes _________.", "villes"),
+      ceQ("velo-q7", "Combien de personnes sur cinq vont au travail à vélo en grande ville ?", ["Une", "Trois", "Cinq"], 0, "Une personne sur ___ va au travail à vélo.", "cinq", ["5"]),
+      ceQ("velo-q8", "Comment s'appellent les personnes qui vont au travail à vélo ?", ["Des vélotafeurs", "Des conducteurs", "Des passagers"], 0, "On les appelle des _________.", "vélotafeurs", ["velotafeurs"]),
+      ceQ("velo-q9", "Quelle est la deuxième raison de faire du vélo ?", ["Le plaisir", "Le bruit", "La fatigue"], 0, "La deuxième raison, c'est le _________.", "plaisir"),
+      ceQ("velo-q10", "Que laissent les cyclistes au garage ?", ["La voiture", "Le vélo", "Le bus"], 0, "Ils laissent la _________ au garage.", "voiture"),
+      ceQ("velo-q11", "Combien de personnes sur dix font du vélo pour le sport ?", ["Six", "Deux", "Dix"], 0, "___ personnes sur dix font du vélo pour le sport.", "six", ["6"]),
+      ceQ("velo-q12", "Dans quelles villes y a-t-il plus de cyclistes ?", ["Les villes de plus de 100 000 habitants", "Les petits villages", "Les stations de ski"], 0, "C'est dans les grandes _________.", "villes"),
+    ],
+  },
+  {
+    id: "geneve-jeunes-talents",
+    title: "Genève Jeunes Talents",
+    sections: [
+      {
+        heading: "Le concours",
+        imageLabel: "Art",
+        body:
+          "Vous êtes artiste amateur et vous rêvez de devenir professionnel ? Le prix Genève Jeunes Talents vous aide à commencer. " +
+          "L'aide financière est entre 500 et 1 500 CHF. Vous pouvez louer une salle de musique ou acheter des costumes de théâtre. " +
+          "Il faut avoir moins de 30 ans.",
+      },
+      {
+        heading: "Comment participer",
+        imageLabel: "Inscription",
+        body:
+          "Choisissez une catégorie : audiovisuel, musique ou spectacle vivant. " +
+          "Remplissez le formulaire en ligne et présentez votre projet par écrit.",
+      },
+      {
+        heading: "Calendrier",
+        imageLabel: "Dates",
+        body:
+          "15 novembre : ouverture des inscriptions sur www.jeunes-geneve.ch. " +
+          "1er février à minuit : fin des inscriptions. " +
+          "Printemps : première sélection. Mai-juin : auditions des finalistes devant un jury. " +
+          "Fin juin : soirée Genève Jeunes Talents à l'Hôtel de ville.",
+      },
+    ],
+    pool: [
+      ceQ("gjt-q1", "À qui s'adresse le concours ?", ["Aux artistes amateurs", "Aux professionnels", "Aux enfants de moins de 10 ans"], 0, "Le concours s'adresse aux artistes _________.", "amateurs"),
+      ceQ("gjt-q2", "Quel âge maximum pour participer ?", ["Moins de 30 ans", "Plus de 30 ans", "Exactement 30 ans"], 0, "Il faut avoir moins de ___ ans.", "30", ["trente"]),
+      ceQ("gjt-q3", "Combien d'aide financière maximum ?", ["1 500 CHF", "500 CHF", "3 000 CHF"], 0, "L'aide va jusqu'à 1 500 _________.", "CHF"),
+      ceQ("gjt-q4", "Quelle catégorie est proposée ?", ["Musique", "Sport", "Pâtisserie"], 0, "On peut choisir la _________.", "musique"),
+      ceQ("gjt-q5", "Comment s'inscrire ?", ["Sur Internet", "Par téléphone seulement", "Par courrier postal"], 0, "Il faut remplir le formulaire en _________.", "ligne", ["sur internet", "internet"]),
+      ceQ("gjt-q6", "Que faut-il présenter avec le formulaire ?", ["Un projet par écrit", "Un plat cuisiné", "Un billet de train"], 0, "Il faut présenter un projet par _________.", "écrit", ["ecrit"]),
+      ceQ("gjt-q7", "Quand commencent les inscriptions ?", ["Le 15 novembre", "Le 1er février", "En juin"], 0, "Les inscriptions commencent le ___ novembre.", "15", ["quinze"]),
+      ceQ("gjt-q8", "Peut-on s'inscrire le 13 février ?", ["Non", "Oui", "Seulement le matin"], 0, "Après le 1er février, les inscriptions sont _________.", "fermées", ["fermees", "closes"]),
+      ceQ("gjt-q9", "Où a lieu la soirée des lauréats ?", ["À l'Hôtel de ville", "Au zoo", "À la piscine"], 0, "La soirée est dans un grand bâtiment _________.", "officiel", ["public"]),
+      ceQ("gjt-q10", "Quand ont lieu les auditions des finalistes ?", ["Mai-juin", "Novembre", "Septembre"], 0, "Les auditions ont lieu au _________.", "printemps"),
+      ceQ("gjt-q11", "Avec l'aide, on peut acheter…", ["Des costumes de théâtre", "Une voiture", "Un appartement"], 0, "On peut acheter des costumes de _________.", "théâtre", ["theatre"]),
+      ceQ("gjt-q12", "Quelle est l'aide minimum ?", ["500 CHF", "1 500 CHF", "100 CHF"], 0, "L'aide commence à ___ CHF.", "500", ["cinq cents"]),
+    ],
+  },
+  {
+    id: "loisirs-jeunes",
+    title: "Les loisirs préférés des jeunes en Suisse",
+    sections: [
+      {
+        heading: "Sorties et écrans",
+        imageLabel: "Cinéma",
+        body:
+          "Les jeunes aiment sortir ensemble, surtout au cinéma. De 11 à 14 ans, ils préfèrent les films de science-fiction, policiers ou d'aventure. " +
+          "De 15 à 19 ans, ils préfèrent les films d'amour ou à suspense. Ils aiment aussi les fêtes pour danser, jouer de la musique ou jouer aux jeux vidéo.",
+      },
+      {
+        heading: "Internet et lecture",
+        imageLabel: "Internet",
+        body:
+          "Ils s'intéressent à la technologie : beaucoup ont un blog et utilisent les réseaux sociaux. " +
+          "Pour s'informer, ils préfèrent Internet à la bibliothèque. " +
+          "Ils lisent surtout des magazines spécialisés, parfois des bandes dessinées, mais rarement des romans.",
+      },
+      {
+        heading: "Musique et voyages",
+        imageLabel: "Musique",
+        body:
+          "La musique est très importante : écouter de la musique ou regarder des vidéos les aide à penser à autre chose que l'école. " +
+          "Ils adorent aussi voyager avec des amis ou la famille et rencontrer de nouvelles personnes.",
+      },
+    ],
+    pool: [
+      ceQ("lois-q1", "Quels films préfèrent les 15-19 ans ?", ["Films d'amour ou à suspense", "Films de science-fiction", "Films historiques"], 0, "Les 15-19 ans préfèrent les films d'_________.", "amour"),
+      ceQ("lois-q2", "Où vont les jeunes pour danser ?", ["Aux fêtes", "À la bibliothèque", "Au musée"], 0, "Ils dansent aux _________.", "fêtes", ["fetes"]),
+      ceQ("lois-q3", "Les jeunes utilisent-ils Internet pour s'informer ?", ["Oui", "Non", "Jamais"], 0, "Ils préfèrent Internet à la _________.", "bibliothèque"),
+      ceQ("lois-q4", "Que lisent-ils le plus ?", ["Des magazines", "Des romans", "Des journaux anciens"], 0, "Ils lisent surtout des _________.", "magazines"),
+      ceQ("lois-q5", "Pourquoi écoutent-ils de la musique ?", ["Pour penser à autre chose que l'école", "Pour faire les devoirs", "Pour dormir"], 0, "La musique aide à penser à autre chose que l'_________.", "école", ["ecole"]),
+      ceQ("lois-q6", "Pourquoi aiment-ils voyager ?", ["Pour rencontrer des gens", "Pour éviter l'école", "Pour travailler"], 0, "Les voyages permettent de rencontrer des _________.", "gens"),
+      ceQ("lois-q7", "Quels films préfèrent les 11-14 ans ?", ["Science-fiction et aventure", "Romans filmés", "Documentaires"], 0, "Les plus jeunes aiment la science-_________.", "fiction"),
+      ceQ("lois-q8", "Que font-ils aux fêtes ?", ["Danser et jouer", "Dormir", "Étudier"], 0, "Aux fêtes, ils dansent et _________.", "jouent", ["jouer"]),
+      ceQ("lois-q9", "Lisent-ils souvent des romans ?", ["Non, rarement", "Oui, toujours", "Oui, chaque jour"], 0, "Ils lisent rarement des _________.", "romans"),
+      ceQ("lois-q10", "Que regardent-ils en plus de la musique ?", ["Des vidéos", "La télévision d'information", "Des documentaires scientifiques"], 0, "Ils regardent aussi des _________.", "vidéos", ["videos"]),
+      ceQ("lois-q11", "Ont-ils des blogs ?", ["Oui, beaucoup", "Non, jamais", "Seulement les adultes"], 0, "Beaucoup ont un _________.", "blog"),
+      ceQ("lois-q12", "Avec qui voyagent-ils ?", ["Amis ou famille", "Seuls toujours", "Seulement des collègues"], 0, "Ils voyagent avec des amis ou la _________.", "famille"),
+    ],
+  },
+  {
+    id: "campagne-ville",
+    title: "Campagne ou ville ?",
+    sections: [
+      {
+        heading: "Pour la campagne",
+        imageLabel: "Nature",
+        body:
+          "Oksana aime la campagne : c'est tranquille, il y a des arbres et des fleurs, moins de pollution et l'air est pur. " +
+          "Fatou ne supporte pas la foule en ville : il y a trop de monde.",
+      },
+      {
+        heading: "Pour la ville",
+        imageLabel: "Ville",
+        body:
+          "Carmen préfère la ville : plus de choses à faire, moins de temps pour aller à l'école ou aux magasins. " +
+          "Hassan aime tout près de la maison : boulangerie, supermarché, école, sport. " +
+          "Matteo choisit la ville pour le cinéma, le théâtre et les concerts.",
+      },
+      {
+        heading: "Les deux",
+        imageLabel: "Avis",
+        body:
+          "Hassan trouve aussi la campagne belle et tranquille. Matteo habite à la campagne et trouve qu'il n'y a rien à faire, " +
+          "mais il reconnaît qu'il y a moins de pollution et moins de stress.",
+      },
+    ],
+    pool: [
+      ceQ("cv-q1", "Pourquoi Oksana préfère-t-elle la campagne ?", ["Moins de pollution", "Plus de stress", "Plus de monde"], 0, "Elle aime l'air pur et moins de _________.", "pollution"),
+      ceQ("cv-q2", "Carmen et Hassan préfèrent-ils la ville ?", ["Oui", "Non", "On ne sait pas"], 0, "Ils préfèrent la _________.", "ville"),
+      ceQ("cv-q3", "Qui dit que la campagne est tranquille ?", ["Oksana et Fatou", "Matteo seulement", "Personne"], 0, "La campagne est _________.", "tranquille"),
+      ceQ("cv-q4", "Que déteste Fatou en ville ?", ["La foule", "La pollution", "La circulation"], 0, "Elle ne supporte pas la _________.", "foule"),
+      ceQ("cv-q5", "Où Matteo aimerait-il habiter ?", ["Dans une grande ville", "À la campagne", "Dans un village"], 0, "Il aime le cinéma et les concerts en _________.", "ville"),
+      ceQ("cv-q6", "Qu'est-ce qu'il y a près de chez Hassan en ville ?", ["Boulangerie et supermarché", "Une forêt", "Une plage"], 0, "Tout est près : boulangerie, supermarché, _________.", "école", ["ecole"]),
+      ceQ("cv-q7", "Pourquoi Carmen préfère la ville ?", ["Moins de temps pour l'école", "Plus de pollution", "Moins d'activités"], 0, "On met moins de temps pour aller à l'_________.", "école", ["ecole"]),
+      ceQ("cv-q8", "Matteo habite où actuellement ?", ["À la campagne", "En ville", "À l'étranger"], 0, "Il habite à la _________.", "campagne"),
+      ceQ("cv-q9", "Qu'avantage reconnaît Matteo à la campagne ?", ["Moins de stress", "Plus de concerts", "Plus de magasins"], 0, "Il y a moins de _________ à la campagne.", "stress"),
+      ceQ("cv-q10", "Quelles activités Matteo cherche-t-il en ville ?", ["Cinéma et théâtre", "Ski et randonnée", "Pêche"], 0, "Il aime le cinéma, le théâtre et les _________.", "concerts"),
+      ceQ("cv-q11", "Qu'est-ce qu'Oksana trouve en campagne ?", ["Des arbres et des fleurs", "Beaucoup de magasins", "Des embouteillages"], 0, "Il y a des arbres et des _________.", "fleurs"),
+      ceQ("cv-q12", "Hassan trouve-t-il aussi la campagne agréable ?", ["Oui, belle et tranquille", "Non, jamais", "Il n'en parle pas"], 0, "Hassan trouve la campagne belle et _________.", "tranquille"),
+    ],
+  },
+  {
+    id: "carnaval-suisse",
+    title: "Le temps du carnaval",
+    sections: [
+      {
+        heading: "Les carnavals",
+        imageLabel: "Fête",
+        body:
+          "Beaucoup de villes organisent un carnaval en février. En Suisse, on connaît bien le carnaval de Bâle, celui de Lucerne ou celui de Montreux. " +
+          "Pendant le carnaval, les gens se déguisent, chantent et dansent. C'est une période de fête.",
+      },
+      {
+        heading: "Traditions",
+        imageLabel: "Déguisements",
+        body:
+          "Les carnavals existent depuis très longtemps. Avant, on inversait tout : les jeunes se déguisaient en vieux, les riches en pauvres. " +
+          "Aujourd'hui, les déguisements sont variés : clowns, animaux, super-héros. À Bâle, beaucoup de gens portent des masques.",
+      },
+      {
+        heading: "Mardi gras",
+        imageLabel: "Crêpes",
+        body:
+          "Le mardi gras est le jour le plus important : on mange des crêpes avant le carême, une période où on mangeait moins. " +
+          "Le carnaval permet à tout le monde de faire la fête et d'oublier les problèmes.",
+      },
+    ],
+    pool: [
+      ceQ("car-q1", "Y a-t-il des carnavals dans le monde ?", ["Oui, dans beaucoup de villes", "Non, seulement en Suisse", "Non, nulle part"], 0, "Beaucoup de villes organisent un _________.", "carnaval"),
+      ceQ("car-q2", "Que font les gens pendant le carnaval ?", ["Se déguiser et danser", "Dormir", "Travailler"], 0, "Ils se déguisent, chantent et _________.", "dansent"),
+      ceQ("car-q3", "Les carnavals sont-ils récents ?", ["Non, ils existent depuis longtemps", "Oui, depuis un an", "Oui, depuis hier"], 0, "Les carnavals existent depuis très _________.", "longtemps"),
+      ceQ("car-q4", "Comment s'habillaient les enfants avant ?", ["En adultes", "En clowns seulement", "En animaux seulement"], 0, "Les jeunes se déguisaient en _________.", "vieux", ["en adultes"]),
+      ceQ("car-q5", "Que portent beaucoup de gens à Bâle ?", ["Des masques", "Des uniformes", "Des maillots de bain"], 0, "À Bâle, on porte des _________.", "masques"),
+      ceQ("car-q6", "Que mange-t-on le mardi gras ?", ["Des crêpes", "De la fondue", "Du chocolat"], 0, "Le mardi gras, on mange des _________.", "crêpes", ["crepes"]),
+      ceQ("car-q7", "Quel jour est le plus important ?", ["Le mardi gras", "Le lundi", "Le vendredi"], 0, "Le jour le plus important est le mardi _________.", "gras"),
+      ceQ("car-q8", "Le carnaval aide à…", ["Oublier les problèmes", "Étudier plus", "Travailler plus"], 0, "On oublie les _________.", "problèmes", ["problemes"]),
+      ceQ("car-q9", "Quel type de carnaval suisse est cité ?", ["Un carnaval avec masques", "Un carnaval de plage", "Un carnaval de neige"], 0, "À Bâle, beaucoup de gens portent des _________.", "masques"),
+      ceQ("car-q10", "Quels déguisements trouve-t-on aujourd'hui ?", ["Clowns et animaux", "Seulement des robes", "Seulement des uniformes"], 0, "On trouve des clowns, des animaux, des super-_________.", "héros", ["heros"]),
+      ceQ("car-q11", "Le carnaval est une période de…", ["Fête", "Travail", "Silence"], 0, "C'est une période de _________.", "fête", ["fete"]),
+      ceQ("car-q12", "Que suit le mardi gras ?", ["Le carême", "Les vacances d'été", "Noël"], 0, "Après le mardi gras vient le _________.", "carême", ["careme"]),
+    ],
+  },
 ];
