@@ -159,22 +159,6 @@ export const MATH_MODULES: MathModule[] = [
     ],
   },
   {
-    id: "A11",
-    code: "A11",
-    title: "Fonctions (introduction)",
-    branch: "algebra",
-    prerequisiteIds: ["A10", "A7"],
-    submodules: [
-      sm("A11.1", "Notion de fonction"),
-      sm("A11.2", "Tableau de valeurs"),
-      sm("A11.3", "Graphique dans un repère"),
-      sm("A11.4", "Linéaire f(x)=ax"),
-      sm("A11.5", "Affine f(x)=ax+b"),
-      sm("A11.6", "Pente et ordonnée"),
-      sm("A11.7", "Lecture graphique"),
-    ],
-  },
-  {
     id: "G1",
     code: "G1",
     title: "Formes planes et reconnaissance visuelle",
@@ -391,7 +375,7 @@ export const ALGEBRA_LEGACY_ID_MAP: Record<string, string> = {
   A9: "A10",
   A10: "A10",
   A11: "A10",
-  A12: "A11",
+  A12: "A10",
 };
 
 export function getMathModule(id: string): MathModule | undefined {

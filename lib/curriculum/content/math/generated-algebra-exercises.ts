@@ -4,7 +4,6 @@ export const GENERATED_ALGEBRA_LESSONS = new Set([
   "A6-4", "A6-5", "A7-5",
   "A9-1", "A9-2", "A9-3", "A9-4", "A9-5", "A9-6",
   "A10-1", "A10-2", "A10-3", "A10-4", "A10-5",
-  "A11-1", "A11-2", "A11-3", "A11-4", "A11-5", "A11-6", "A11-7",
 ]);
 
 const ri = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -127,33 +126,6 @@ function generateOne(lessonId: string, id: string): MathExerciseItem {
       const first = ri(1, 20);
       const second = ri(1, 20);
       return item(id, `La somme de deux nombres est ${first + second} et leur différence est ${Math.abs(first - second)}. Quel est le plus grand nombre ?`, Math.max(first, second));
-    }
-    case "A11-1":
-    case "A11-2":
-    case "A11-3": {
-      const result = a * x + b;
-      const wording = lessonId === "A11-3" ? `Sur la droite f(x) = ${expression(a, "x", b)}, quelle est l'ordonnée du point d'abscisse ${x} ?` : `f(x) = ${expression(a, "x", b)}. Calculez f(${x}).`;
-      return item(id, wording, result);
-    }
-    case "A11-4": {
-      if (Math.random() < 0.25) return item(id, `f(x) = ${a}x. Quel est le coefficient directeur ?`, a);
-      return item(id, `f(x) = ${a}x. Calculez f(${x}).`, a * x);
-    }
-    case "A11-5": {
-      const askSlope = Math.random() < 0.5;
-      return item(id, `f(x) = ${expression(a, "x", b)}. ${askSlope ? "Quel est le coefficient directeur ?" : "Quelle est l'ordonnée à l'origine ?"}`, askSlope ? a : b);
-    }
-    case "A11-6": {
-      const x1 = ri(-4, 4);
-      const x2 = x1 + ri(1, 5);
-      const y1 = a * x1 + b;
-      const y2 = a * x2 + b;
-      return item(id, `Points A(${x1} ; ${y1}) et B(${x2} ; ${y2}). Calculez la pente.`, a);
-    }
-    case "A11-7": {
-      if (Math.random() < 0.5) return item(id, `f(x) = ${expression(a, "x", b)}. Calculez f(${x}).`, a * x + b);
-      const target = a * x + b;
-      return item(id, `f(x) = ${expression(a, "x", b)}. Pour quelle valeur de x a-t-on f(x) = ${target} ?`, x);
     }
     default:
       return item(id, `Calculez ${a} × ${Math.abs(x)}.`, a * Math.abs(x));
