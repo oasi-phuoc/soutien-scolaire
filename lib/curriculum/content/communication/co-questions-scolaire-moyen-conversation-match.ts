@@ -40,22 +40,6 @@ export const CO_CONVERSATION_MATCH_SCOLAIRE_MOYEN: Record<string, COConversation
       "Demander des informations pratiques",
     ],
   },
-  "moyen-scolaire-conversation-7": {
-    situations: [
-      "Demander un service",
-      "Demander des explications au professeur",
-      "S'excuser d'être en retard",
-      "Présenter une nouvelle personne",
-      "Refuser une invitation",
-      "Proposer une sortie",
-    ],
-    correctByDialogue: [
-      "Demander un service",
-      "Demander des explications au professeur",
-      "S'excuser d'être en retard",
-      "Présenter une nouvelle personne",
-    ],
-  },
   "moyen-scolaire-conversation-8": {
     situations: [
       "Demander un service",

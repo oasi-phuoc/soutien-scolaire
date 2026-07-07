@@ -54,7 +54,7 @@ export const CO_AUDIO_GROUPS_SCOLAIRE_MOYEN: COAudioGroup[] = [
   ...scolaireGroups(
     "moyen",
     "conversation",
-    ["1", "6", "7", "8", "12", "15", "18", "20", "22", "25", "29", "30", "32", "33"],
+    ["1", "6", "8", "12", "15", "18", "20", "22", "25", "29", "30", "32", "33"],
     "conversation",
   ),
 ];

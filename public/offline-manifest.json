@@ -1,6 +1,6 @@
 {
-  "version": 1783404119246,
-  "totalBytes": 366105064,
+  "version": 1783405262034,
+  "totalBytes": 364926584,
   "routes": [
     "/",
     "/avant-propos",
@@ -882,7 +882,6 @@
     "/assets/expression/co/moyen/scolaire/conversation-32.mp3",
     "/assets/expression/co/moyen/scolaire/conversation-33.mp3",
     "/assets/expression/co/moyen/scolaire/conversation-6.mp3",
-    "/assets/expression/co/moyen/scolaire/conversation-7.mp3",
     "/assets/expression/co/moyen/scolaire/conversation-8.mp3",
     "/assets/expression/co/moyen/scolaire/message-41.mp3",
     "/assets/expression/co/moyen/scolaire/message-42.mp3",
@@ -5163,11 +5162,6 @@
       "url": "/assets/expression/co/moyen/scolaire/conversation-6.mp3",
       "size": 945259,
       "revision": "bbec346152c15793"
-    },
-    {
-      "url": "/assets/expression/co/moyen/scolaire/conversation-7.mp3",
-      "size": 1178480,
-      "revision": "68e27eaaef750ffd"
     },
     {
       "url": "/assets/expression/co/moyen/scolaire/conversation-8.mp3",
