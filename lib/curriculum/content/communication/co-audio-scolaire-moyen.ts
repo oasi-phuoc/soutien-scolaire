@@ -1,4 +1,7 @@
 import type { COAudioCategory, COAudioGroup, COAudioItem, COLevel } from "./co-audio";
+import { CO_TRANSCRIPTS_SCOLAIRE_MOYEN } from "./co-transcripts-scolaire-moyen";
+import { CO_QUESTION_POOLS_SCOLAIRE_MOYEN } from "./co-questions-scolaire-moyen";
+import { CO_CONVERSATION_MATCH_SCOLAIRE_MOYEN } from "./co-questions-scolaire-moyen-conversation-match";
 
 function scolaireItem(
   level: COLevel,
@@ -6,6 +9,7 @@ function scolaireItem(
   activity: string,
   filename: string,
 ): COAudioItem {
+  const stem = filename.replace(/\.mp3$/, "");
   return {
     id: `${level}-scolaire-${category}-${activity}`,
     level,
@@ -13,6 +17,7 @@ function scolaireItem(
     activity,
     source: "scolaire",
     audio: `/assets/expression/co/${level}/scolaire/${filename}`,
+    transcript: CO_TRANSCRIPTS_SCOLAIRE_MOYEN[stem],
   };
 }
 
@@ -55,4 +60,7 @@ export const CO_AUDIO_GROUPS_SCOLAIRE_MOYEN: COAudioGroup[] = [
 ];
 
 /** Groupes scolaire moyen prêts pour le tirage (questions configurées). */
-export const SCOLAIRE_PLAYABLE_GROUP_IDS_MOYEN = new Set<string>([]);
+export const SCOLAIRE_PLAYABLE_GROUP_IDS_MOYEN = new Set<string>([
+  ...Object.keys(CO_QUESTION_POOLS_SCOLAIRE_MOYEN),
+  ...Object.keys(CO_CONVERSATION_MATCH_SCOLAIRE_MOYEN),
+]);
