@@ -37,6 +37,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTrainingElementsBlock";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
@@ -431,8 +432,10 @@ function AdviceContent({ level }: { level: WritingLevel }) {
         <AdviceSection>La fête est samedi à 15 heures chez moi.</AdviceSection>
         <AdviceLine title="3. À la fin">Saluer et signer.</AdviceLine>
         <AdviceSection>J&apos;espère que tu peux venir. À bientôt !</AdviceSection>
-        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
-        <p>Il faut utiliser surtout le présent. Chaque phrase commence par une majuscule et finit avec un point.</p>
+        <FrenchTrainingElementsBlock
+          level={level}
+          intro="Pour rédiger un texte A1, utilisez surtout le présent. Chaque phrase commence par une majuscule et finit par un point. Voici les points de grammaire, conjugaison et vocabulaire à maîtriser :"
+        />
         <AdviceLine title="À éviter">Écrire une seule phrase très longue, oublier la consigne, utiliser des mots dont on ne connaît pas le sens.</AdviceLine>
       </div>
     );
@@ -450,8 +453,10 @@ function AdviceContent({ level }: { level: WritingLevel }) {
         <AdviceLine title="Introduction">Quel est le sujet et pourquoi est-il important ?</AdviceLine>
         <AdviceLine title="Développement">Quels faits, détails ou exemples expliquent mon idée ?</AdviceLine>
         <AdviceLine title="Conclusion">Quel est mon bilan, mon avis ou ma demande ?</AdviceLine>
-        <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
-        <p>Raconter avec le passé composé et décrire avec l&apos;imparfait. Parler d&apos;un projet avec le futur proche ou le futur simple. Exprimer son opinion avec à mon avis, je pense que, selon moi.</p>
+        <FrenchTrainingElementsBlock
+          level={level}
+          intro="Pour un texte A2, variez les temps (passé composé, imparfait, futur) et exprimez votre opinion (à mon avis, je pense que…). Points essentiels du niveau :"
+        />
         <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Rendre le texte cohérent</h3>
         <p>Il faut organiser le texte avec des connecteurs : d&apos;abord, ensuite, puis, enfin, cependant, donc...</p>
         <AdviceLine title="Ajouter"><AdviceSection>de plus, aussi, également.</AdviceSection></AdviceLine>
@@ -482,8 +487,10 @@ function AdviceContent({ level }: { level: WritingLevel }) {
           Convaincre en tenant compte du lecteur et des objections possibles.
         </AdviceSection>
       </AdviceLine>
-      <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Éléments à connaître</h3>
-      <p>Varier les phrases simples et complexes. Choisir un registre cohérent et reprendre les idées avec des pronoms ou des synonymes. Nuancer avec certes, toutefois, en revanche, même si, bien que... Exprimer la cause et la conséquence avec puisque, grâce à, à cause de, par conséquent...</p>
+      <FrenchTrainingElementsBlock
+        level={level}
+        intro="Pour un texte B1, structurez votre argumentation et adaptez le registre au destinataire. Révisez les points suivants :"
+      />
       <h3 className="pt-2 font-bold text-[var(--color-text-primary)]">Rédaction d&apos;une lettre</h3>
       <AdviceSection>
         <strong>Disposition :</strong> expéditeur, destinataire, lieu et date, objet, formule d&apos;appel, corps de la lettre, formule de politesse, signature.

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTrainingElementsBlock";
 import type { PlacementLevel } from "@/lib/placement/types";
 
 const ACCENT = "var(--color-accent-quiz)";
@@ -45,10 +46,16 @@ export function PlacementFrenchHelpContent({
           chaque étape et repris plus tard. Les points obtenus comptent directement pour le total de placement.
         </p>
       ) : (
-        <p>
-          L&apos;entraînement {levelLabel} propose des exercices de niveau {levelLabel}. Il peut être interrompu
-          après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
-        </p>
+        <>
+          <p>
+            L&apos;entraînement {levelLabel} propose des exercices de niveau {levelLabel}. Il peut être interrompu
+            après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
+          </p>
+          <FrenchTrainingElementsBlock
+            level={level}
+            className="border-t border-[var(--color-border-default)] pt-3"
+          />
+        </>
       )}
       {includeTrainingNote && mode === "placement" && (
         <p>
