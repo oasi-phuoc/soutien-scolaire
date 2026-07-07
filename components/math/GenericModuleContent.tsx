@@ -5630,24 +5630,30 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "eval_start", lesson });
       pushVolumeSet();
     } else if (sid === "G6-1") {
-      const pushG6Set = () => {
+      const pushG6GridSet = () => {
         steps.push({ kind: "g6_plan", lesson, variant: 1, exNum: 1 });
         steps.push({ kind: "g6_plan", lesson, variant: 2, exNum: 2 });
         steps.push({ kind: "g6_plan", lesson, variant: 3, exNum: 3 });
-        steps.push({ kind: "g6_plan", lesson, variant: 4, exNum: 4 });
-        steps.push({ kind: "g6_plan", lesson, variant: 5, exNum: 5 });
-        steps.push({ kind: "g6_plan", lesson, variant: 6, exNum: 6 });
-        steps.push({ kind: "g6_plan", lesson, variant: 7, exNum: 7 });
-        steps.push({ kind: "g6_plan", lesson, variant: 8, exNum: 8 });
-        steps.push({ kind: "g6_plan", lesson, variant: 9, exNum: 9 });
-        steps.push({ kind: "g6_plan", lesson, variant: 10, exNum: 10 });
-        steps.push({ kind: "g6_plan", lesson, variant: 11, exNum: 11 });
-        steps.push({ kind: "g6_plan", lesson, variant: 12, exNum: 12 });
-        steps.push({ kind: "g6_plan", lesson, variant: 13, exNum: 13 });
+        steps.push({ kind: "g6_plan", lesson, variant: 5, exNum: 4 });
+        steps.push({ kind: "g6_plan", lesson, variant: 6, exNum: 5 });
+        steps.push({ kind: "g6_plan", lesson, variant: 7, exNum: 6 });
       };
-      pushG6Set();
+      pushG6GridSet();
       steps.push({ kind: "eval_start", lesson });
-      pushG6Set();
+      pushG6GridSet();
+    } else if (sid === "G6-2") {
+      const pushG6CartesianSet = () => {
+        steps.push({ kind: "g6_plan", lesson, variant: 4, exNum: 1 });
+        steps.push({ kind: "g6_plan", lesson, variant: 8, exNum: 2 });
+        steps.push({ kind: "g6_plan", lesson, variant: 9, exNum: 3 });
+        steps.push({ kind: "g6_plan", lesson, variant: 10, exNum: 4 });
+        steps.push({ kind: "g6_plan", lesson, variant: 11, exNum: 5 });
+        steps.push({ kind: "g6_plan", lesson, variant: 12, exNum: 6 });
+        steps.push({ kind: "g6_plan", lesson, variant: 13, exNum: 7 });
+      };
+      pushG6CartesianSet();
+      steps.push({ kind: "eval_start", lesson });
+      pushG6CartesianSet();
     } else if (sid === "G5-10") {
       steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", false, 1) });
       steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", true, 2) });
@@ -6002,6 +6008,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A10-1" || l.submoduleId === "A10-2" ||
     l.submoduleId === "A10-3" || l.submoduleId === "A10-4" || l.submoduleId === "A10-5" ||
     l.submoduleId === "G6-1" ||
+    l.submoduleId === "G6-2" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
     GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)

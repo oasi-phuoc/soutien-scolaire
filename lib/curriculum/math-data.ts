@@ -237,7 +237,8 @@ export const MATH_MODULES: MathModule[] = [
     prerequisiteIds: ["G5"],
     algebraRefs: ["A3"],
     submodules: [
-      sm("G6.1", "Se repérer dans le plan"),
+      sm("G6.1", "Grilles et cartes"),
+      sm("G6.2", "Repère cartésien"),
     ],
   },
   {
