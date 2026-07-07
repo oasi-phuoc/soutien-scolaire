@@ -155,7 +155,7 @@ function FrenchProgressBlock({
                 }}
                 className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
-                Annuler la progression
+                Annuler
               </button>
               <button
                 type="button"
@@ -163,7 +163,7 @@ function FrenchProgressBlock({
                 className="flex-1 rounded-[var(--radius-lg)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
                 style={{ background: ACCENT }}
               >
-                Continuer le test
+                Continuer
               </button>
             </div>
           </div>
