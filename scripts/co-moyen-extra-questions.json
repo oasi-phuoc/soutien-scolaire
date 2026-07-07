@@ -1,0 +1,135 @@
+{
+  "message-41": [
+    {"id":"smm41-q7","textQ":"Où avez-vous entendu ce message ?","text":["Sur votre répondeur","À la radio","Dans un magasin"],"textC":0,"img":["Répondeur","Radio","Magasin"],"imgC":0,"fillQ":"Vous entendez ce message sur votre ___.","fill":"répondeur","fillA":["repondeur","répondeur"]},
+    {"id":"smm41-q8","textQ":"Comment s'appelle le magasin ?","text":["Euro Vidéo","Euro Sport","Euro Jeux"],"textC":0,"img":["Magasin","Téléphone","Jeu"],"imgC":0,"fillQ":"C'est le magasin d'électronique ___.","fill":"Euro Vidéo","fillA":["euro video","euro vidéo"]},
+    {"id":"smm41-q9","textQ":"Jusqu'à quel jour pouvez-vous venir chercher la commande ?","text":["Le vendredi","Le samedi","Le dimanche"],"textC":0,"img":["Vendredi","Samedi","Dimanche"],"imgC":0,"fillQ":"Vous pouvez venir du mardi au ___.","fill":"vendredi","fillA":["vendredi"]},
+    {"id":"smm41-q10","textQ":"Dans quel pays habitez-vous ?","text":["En France","En Belgique","En Suisse"],"textC":0,"img":["France","Belgique","Suisse"],"imgC":0,"fillQ":"Vous habitez en ___.","fill":"France","fillA":["france"]}
+  ],
+  "message-42": [
+    {"id":"smm42-q7","textQ":"Quel est le nom du jeu réservé ?","text":["Opération Paris","Futur Évasion","Opération Nice"],"textC":0,"img":["Paris","Nice","Jeu"],"imgC":0,"fillQ":"Vous avez réservé le jeu Opération ___.","fill":"Paris","fillA":["paris"]},
+    {"id":"smm42-q8","textQ":"À quelle date a lieu le jeu ?","text":["Le 6 janvier","Le 6 février","Le 16 janvier"],"textC":0,"img":["6 janvier","6 février","16 janvier"],"imgC":0,"fillQ":"La réservation est pour le 6 ___.","fill":"janvier","fillA":["janvier"]},
+    {"id":"smm42-q9","textQ":"Quelle est l'adresse du centre ?","text":["8 rue Thiers","8 rue Saint-Rome","8 avenue de l'Europe"],"textC":0,"img":["Rue","Gare","Plage"],"imgC":0,"fillQ":"Le centre est au 8 rue ___.","fill":"Thiers","fillA":["thiers"]},
+    {"id":"smm42-q10","textQ":"Pourquoi devez-vous arriver à 17 h 30 ?","text":["Pour connaître les règles du jeu","Pour payer","Pour manger"],"textC":0,"img":["Règles","Argent","Repas"],"imgC":0,"fillQ":"On vous expliquera les ___ du jeu.","fill":"règles","fillA":["regles","règles"]}
+  ],
+  "message-43": [
+    {"id":"smm43-q7","textQ":"À quelle heure le père vient-il vous chercher ?","text":["Vers 22 h","Vers 18 h","Vers 20 h"],"textC":0,"img":["22 h","18 h","20 h"],"imgC":0,"fillQ":"Le père vient en voiture vers ___ heures.","fill":"22h","fillA":["22 h","22h","22h00"]},
+    {"id":"smm43-q8","textQ":"Où le père attend-il au retour ?","text":["Devant l'entrée du cinéma","À la station de métro","Chez Max"],"textC":0,"img":["Cinéma","Métro","Maison"],"imgC":0,"fillQ":"Il attendra devant l'entrée du ___.","fill":"cinéma","fillA":["cinema","cinéma"]},
+    {"id":"smm43-q9","textQ":"Quel jour a lieu la sortie ?","text":["Mercredi","Mardi","Jeudi"],"textC":0,"img":["Mercredi","Mardi","Jeudi"],"imgC":0,"fillQ":"C'est ___ prochain qu'on va au cinéma.","fill":"mercredi","fillA":["mercredi"]},
+    {"id":"smm43-q10","textQ":"Quel est le nom de la station de métro ?","text":["Jean-Jaurès","République","Gare"],"textC":0,"img":["Métro","Gare","Bus"],"imgC":0,"fillQ":"Rendez-vous à la station ___.","fill":"Jean-Jaurès","fillA":["jean-jaures","jean jaurès","jean-jaurès"]}
+  ],
+  "message-44": [
+    {"id":"smm44-q7","textQ":"Quel jour partez-vous ?","text":["Vendredi","Samedi","Dimanche"],"textC":0,"img":["Vendredi","Samedi","Dimanche"],"imgC":0,"fillQ":"On part ___ avec les parents.","fill":"vendredi","fillA":["vendredi"]},
+    {"id":"smm44-q8","textQ":"Quelle boisson chaude propose-t-on ?","text":["Du chocolat chaud","Du thé","Du café"],"textC":0,"img":["Chocolat","Thé","Café"],"imgC":0,"fillQ":"On boira des chocolats chauds devant la ___.","fill":"cheminée","fillA":["cheminee","cheminée"]},
+    {"id":"smm44-q9","textQ":"Qui vous invite ?","text":["Une amie","Un professeur","Un voisin"],"textC":0,"img":["Amie","Professeur","Voisin"],"imgC":0,"fillQ":"C'est un message de votre ___.","fill":"amie","fillA":["amie","ami"]},
+    {"id":"smm44-q10","textQ":"Pourquoi faut-il dormir dans la voiture ?","text":["Pour ne pas être fatigués lundi","Parce qu'il n'y a pas de chambres","Parce qu'il fait nuit"],"textC":0,"img":["Voiture","Lit","Nuit"],"imgC":0,"fillQ":"On rentre dimanche vers ___.","fill":"minuit","fillA":["minuit"]}
+  ],
+  "message-45": [
+    {"id":"smm45-q7","textQ":"Qui envoie ce message ?","text":["Votre professeur de tennis","Votre professeur de maths","Le directeur du club"],"textC":0,"img":["Tennis","Maths","Club"],"imgC":0,"fillQ":"C'est votre professeur de ___.","fill":"tennis","fillA":["tennis"]},
+    {"id":"smm45-q8","textQ":"Que fournit le club pour la fête ?","text":["Des gâteaux et des bonbons","Des boissons","Des décorations"],"textC":0,"img":["Gâteau","Boisson","Décoration"],"imgC":0,"fillQ":"Le club fournit les gâteaux et les ___.","fill":"bonbons","fillA":["bonbons","bonbon"]},
+    {"id":"smm45-q9","textQ":"Qui sera présent pour prendre des photos ?","text":["Un photographe","Un journaliste","Un parent"],"textC":0,"img":["Photo","Journal","Parent"],"imgC":0,"fillQ":"Un ___ fera des photos souvenirs.","fill":"photographe","fillA":["photographe"]},
+    {"id":"smm45-q10","textQ":"Pourquoi le cours commence-t-il plus tôt ?","text":["Pour organiser une fête après","Pour cause de pluie","Pour un tournoi"],"textC":0,"img":["Fête","Pluie","Tournoi"],"imgC":0,"fillQ":"Le cours commence à 14 h car on organise une ___ après.","fill":"fête","fillA":["fete","fête"]}
+  ],
+  "message-47": [
+    {"id":"smm47-q7","textQ":"Annonce 1 : combien de questions faut-il répondre pour gagner ?","text":["Deux","Trois","Cinq"],"textC":0,"img":["2","3","5"],"imgC":0,"fillQ":"Gagnez des cadeaux en répondant à ___ questions.","fill":"deux","fillA":["deux","2"]},
+    {"id":"smm47-q8","textQ":"Annonce 2 : où peut-on goûter des pâtisseries ?","text":["À la boulangerie L'Oréan","Au café","Au rayon fruits"],"textC":0,"img":["Boulangerie","Café","Fruits"],"imgC":0,"fillQ":"Valérie vous fera goûter des ___ à la boulangerie.","fill":"pâtisseries","fillA":["patisseries","pâtisseries"]},
+    {"id":"smm47-q9","textQ":"Annonce 3 : combien coûte la petite assiette de salade ?","text":["6 euros","9 euros","10 euros"],"textC":0,"img":["6 €","9 €","10 €"],"imgC":0,"fillQ":"La petite assiette de salade coûte ___ euros.","fill":"6","fillA":["6","six"]},
+    {"id":"smm47-q10","textQ":"Annonce 4 : pour quelle fête propose-t-on une carte cadeau ?","text":["La fête des mères","La fête des pères","Noël"],"textC":0,"img":["Mère","Père","Noël"],"imgC":0,"fillQ":"C'est pour la fête des ___.","fill":"mères","fillA":["meres","mères","mère"]}
+  ],
+  "message-48": [
+    {"id":"smm48-q7","textQ":"Dans quelle ville êtes-vous ?","text":["Bruxelles","Paris","Lyon"],"textC":0,"img":["Bruxelles","Paris","Lyon"],"imgC":0,"fillQ":"Vous êtes au musée de Bruxelles en ___.","fill":"Belgique","fillA":["belgique"]},
+    {"id":"smm48-q8","textQ":"Où devez-vous déposer vos sacs avant la visite ?","text":["À la consigne","À l'accueil","Dans la cafétéria"],"textC":0,"img":["Consigne","Accueil","Café"],"imgC":0,"fillQ":"Passez à la ___ pour déposer vos sacs.","fill":"consigne","fillA":["consigne"]},
+    {"id":"smm48-q9","textQ":"Que devez-vous faire avec votre téléphone ?","text":["L'éteindre","Le mettre en silencieux","Le laisser allumé"],"textC":0,"img":["Éteindre","Silencieux","Allumé"],"imgC":0,"fillQ":"Merci de les ___.","fill":"éteindre","fillA":["eteindre","éteindre"]},
+    {"id":"smm48-q10","textQ":"Peut-on utiliser le flash pour les photos ?","text":["Non","Oui","Seulement à l'extérieur"],"textC":0,"img":["Non","Oui","Extérieur"],"imgC":0,"fillQ":"Vous pouvez prendre des photos sans ___.","fill":"flash","fillA":["flash"]}
+  ],
+  "message-49": [
+    {"id":"smm49-q7","textQ":"Quelle heure est-il quand vous entendez le message ?","text":["18 h 30","19 h","17 h 30"],"textC":0,"img":["18 h 30","19 h","17 h 30"],"imgC":0,"fillQ":"Il est déjà ___ h 30.","fill":"18h30","fillA":["18 h 30","18h30","18:30"]},
+    {"id":"smm49-q10","textQ":"La piscine est-elle ouverte pendant les vacances scolaires ?","text":["Oui","Non","Seulement le mercredi"],"textC":0,"img":["Oui","Non","Mercredi"],"imgC":0,"fillQ":"La piscine est ouverte même les vacances ___.","fill":"scolaires","fillA":["scolaires","scolaire"]},
+    {"id":"smm49-q8","textQ":"À quelle heure ouvre la piscine chaque jour ?","text":["À 9 h","À 10 h","À 8 h"],"textC":0,"img":["9 h","10 h","8 h"],"imgC":0,"fillQ":"La piscine ouvre à ___ heures.","fill":"9h","fillA":["9 h","9h","9h00"]},
+    {"id":"smm49-q9","textQ":"Que ne devez-vous pas oublier dans les vestiaires ?","text":["Vos affaires","Votre bonnet","Votre serviette"],"textC":0,"img":["Affaires","Bonnet","Serviette"],"imgC":0,"fillQ":"N'oubliez rien dans les ___.","fill":"vestiaires","fillA":["vestiaires","vestiaire"]}
+  ],
+  "annonce-36": [
+    {"id":"sma36-q7","textQ":"Annonce 1 : où trouver les nouvelles salles de classe ?","text":["Sur le tableau d'informations","Au secrétariat","Dans le bâtiment C"],"textC":0,"img":["Tableau","Secrétariat","Bâtiment"],"imgC":0,"fillQ":"Les salles sont indiquées sur le tableau d'___ à l'entrée.","fill":"informations","fillA":["informations","information"]},
+    {"id":"sma36-q8","textQ":"Annonce 2 : avant quelle date faut-il envoyer le dessin ?","text":["Le 12 mars","Le 14 janvier","Le 22 mai"],"textC":0,"img":["12 mars","14 janv.","22 mai"],"imgC":0,"fillQ":"Envoyez votre dessin avant le 12 ___.","fill":"mars","fillA":["mars"]},
+    {"id":"sma36-q9","textQ":"Annonce 3 : où a lieu la conférence ?","text":["Dans l'auditorium","Dans la cour","Dans la bibliothèque"],"textC":0,"img":["Auditorium","Cour","Bibliothèque"],"imgC":0,"fillQ":"La conférence est dans l'___ du collège.","fill":"auditorium","fillA":["auditorium"]},
+    {"id":"sma36-q10","textQ":"Annonce 4 : où doit-on se retrouver ?","text":["Dans la cour","Dans la classe","Devant l'école"],"textC":0,"img":["Cour","Classe","École"],"imgC":0,"fillQ":"On se retrouve dans la ___.","fill":"cour","fillA":["cour"]}
+  ],
+  "annonce-37": [
+    {"id":"sma37-q7","textQ":"À quelle heure commence la sortie ?","text":["À 10 h","À 8 h","À 16 h"],"textC":0,"img":["10 h","8 h","16 h"],"imgC":0,"fillQ":"Nous commençons à ___ heures.","fill":"10h","fillA":["10 h","10h","10h00"]},
+    {"id":"sma37-q8","textQ":"Que devez-vous aussi apporter en plus du pique-nique ?","text":["Des bonbons et des gants","Un livre","De l'argent"],"textC":0,"img":["Bonbons","Livre","Argent"],"imgC":0,"fillQ":"N'oubliez pas vos bonbons et surtout vos ___.","fill":"gants","fillA":["gants"]},
+    {"id":"sma37-q9","textQ":"Où se déroule l'annonce ?","text":["Dans une école en France","Dans un bus","À la piscine"],"textC":0,"img":["École","Bus","Piscine"],"imgC":0,"fillQ":"Vous êtes chez votre correspondant en ___.","fill":"France","fillA":["france"]},
+    {"id":"sma37-q10","textQ":"Quel jour a lieu la sortie ?","text":["Mercredi","Lundi","Vendredi"],"textC":0,"img":["Mercredi","Lundi","Vendredi"],"imgC":0,"fillQ":"La sortie est ce ___.","fill":"mercredi","fillA":["mercredi"]}
+  ],
+  "annonce-38": [
+    {"id":"sma38-q7","textQ":"Annonce 1 : que pouvez-vous garder à votre place ?","text":["Vos petits sacs","Vos gros sacs","Rien"],"textC":0,"img":["Petit sac","Gros sac","Vide"],"imgC":0,"fillQ":"Vous pouvez prendre vos petits sacs à votre ___.","fill":"place","fillA":["place"]},
+    {"id":"sma38-q8","textQ":"Annonce 2 : à quelle heure faut-il venir aider ?","text":["À 13 h","À 10 h","À 16 h"],"textC":0,"img":["13 h","10 h","16 h"],"imgC":0,"fillQ":"Venez nous aider mardi à ___ heures.","fill":"13h","fillA":["13 h","13h","13h00"]},
+    {"id":"sma38-q9","textQ":"Annonce 5 : quel plat marocain est proposé ?","text":["Du couscous","De la paella","Des pâtes"],"textC":0,"img":["Couscous","Paella","Pâtes"],"imgC":0,"fillQ":"Le cuisinier propose du couscous ___.","fill":"marocain","fillA":["marocain"]},
+    {"id":"sma38-q10","textQ":"Annonce 4 : que peut-on visiter à la bibliothèque ?","text":["Le nouveau rayon BD","Le gymnase","La cantine"],"textC":0,"img":["BD","Gymnase","Cantine"],"imgC":0,"fillQ":"Visitez le nouveau rayon ___.","fill":"BD","fillA":["bd","BD","bande dessinée"]}
+  ],
+  "annonce-39": [
+    {"id":"sma39-q6","textQ":"Quel jour les pompiers viennent-ils ?","text":["Mercredi","Lundi","Vendredi"],"textC":0,"img":["Mercredi","Lundi","Vendredi"],"imgC":0,"fillQ":"Les pompiers viennent ___ au collège.","fill":"mercredi","fillA":["mercredi"]},
+    {"id":"sma39-q7","textQ":"Quelle association organise l'événement ?","text":["Apprendre et agir","Sourire d'enfant","Les Restos du cœur"],"textC":0,"img":["Association","Enfants","Repas"],"imgC":0,"fillQ":"C'est organisé par l'association Apprendre et ___.","fill":"agir","fillA":["agir"]},
+    {"id":"sma39-q8","textQ":"Que vont apprendre les élèves ?","text":["Des gestes qui sauvent","À cuisiner","À nager"],"textC":0,"img":["Gestes","Cuisine","Natation"],"imgC":0,"fillQ":"Vous apprendrez les gestes qui peuvent sauver des ___.","fill":"vies","fillA":["vies","vie"]},
+    {"id":"sma39-q9","textQ":"L'événement aide les citoyens à devenir…","text":["Responsables","Athlètes","Artistes"],"textC":0,"img":["Responsable","Sport","Art"],"imgC":0,"fillQ":"L'association aide les citoyens à devenir ___.","fill":"responsables","fillA":["responsables","responsable"]},
+    {"id":"sma39-q10","textQ":"Où a lieu l'événement ?","text":["Au collège","Au stade","À la mairie"],"textC":0,"img":["Collège","Stade","Mairie"],"imgC":0,"fillQ":"Les pompiers viennent dans notre ___.","fill":"collège","fillA":["college","collège"]}
+  ],
+  "annonce-40": [
+    {"id":"sma40-q7","textQ":"Annonce 1 : jusqu'à quand faut-il se prévenir au secrétariat ?","text":["Demain à 14 h","Aujourd'hui à midi","Lundi matin"],"textC":0,"img":["14 h","Midi","Lundi"],"imgC":0,"fillQ":"Prévenez le secrétariat avant demain à ___ heures.","fill":"14h","fillA":["14 h","14h","14h00"]},
+    {"id":"sma40-q8","textQ":"Annonce 2 : quel professeur est absent ?","text":["Monsieur Lemaître","Madame Lenfant","Monsieur Damien"],"textC":0,"img":["Histoire","Chant","Italien"],"imgC":0,"fillQ":"Le professeur d'___ est absent aujourd'hui.","fill":"histoire","fillA":["histoire"]},
+    {"id":"sma40-q9","textQ":"Annonce 3 : quand a lieu la sortie au musée ?","text":["Le 5 novembre","Le 12 mars","Le 22 mai"],"textC":0,"img":["5 nov.","12 mars","22 mai"],"imgC":0,"fillQ":"La sortie au musée est le 5 ___.","fill":"novembre","fillA":["novembre"]},
+    {"id":"sma40-q10","textQ":"Annonce 6 : avant quelle heure faut-il aller à la bibliothèque ?","text":["16 h ce soir","14 h demain","Midi"],"textC":0,"img":["16 h","14 h","Midi"],"imgC":0,"fillQ":"Rendez-vous à la bibliothèque avant ce soir à ___ heures.","fill":"16h","fillA":["16 h","16h","16h00"]}
+  ],
+  "annonce-46": [
+    {"id":"sma46-q7","textQ":"À partir de quelle heure a lieu la promotion ?","text":["14 h","10 h","Midi"],"textC":0,"img":["14 h","10 h","Midi"],"imgC":0,"fillQ":"Les réductions sont de ___ heures à 20 heures.","fill":"14h","fillA":["14 h","14h","14h00"]},
+    {"id":"sma46-q8","textQ":"Dans quel type de magasin entend-on l'annonce ?","text":["Un grand magasin","Une pharmacie","Une librairie"],"textC":0,"img":["Magasin","Pharmacie","Livre"],"imgC":0,"fillQ":"Vous êtes dans un grand ___ en France.","fill":"magasin","fillA":["magasin"]},
+    {"id":"sma46-q9","textQ":"Quel rayon est concerné par les réductions ?","text":["Sport et nature","Alimentation","Électronique"],"textC":0,"img":["Sport","Alimentation","Électronique"],"imgC":0,"fillQ":"C'est au rayon sport et ___ .","fill":"nature","fillA":["nature"]},
+    {"id":"sma46-q10","textQ":"Combien d'articles faut-il acheter pour avoir le cinquième offert ?","text":["4","3","5"],"textC":0,"img":["4","3","5"],"imgC":0,"fillQ":"Si vous achetez ___ articles, le cinquième est offert.","fill":"quatre","fillA":["quatre","4"]}
+  ],
+  "radio-34": [
+    {"id":"smr34-q7","textQ":"Où s'entraîne Julien pour le surf ?","text":["Dans l'eau","À la salle de sport","Sur la plage"],"textC":0,"img":["Eau","Gym","Plage"],"imgC":0,"fillQ":"Il passe beaucoup de temps dans l'___.","fill":"eau","fillA":["eau"]},
+    {"id":"smr34-q8","textQ":"Dans quel pays a-t-il des compétitions le mois prochain ?","text":["En Australie","En France","Au Brésil"],"textC":0,"img":["Australie","France","Brésil"],"imgC":0,"fillQ":"Ses compétitions sont en ___.","fill":"Australie","fillA":["australie"]},
+    {"id":"smr34-q9","textQ":"Julien trouve-t-il sa vie difficile ?","text":["Non, il adore le surf","Oui, tout est difficile","Il abandonne les études"],"textC":0,"img":["Surf","Difficile","École"],"imgC":0,"fillQ":"Il n'y trouve pas cela ___ parce qu'il adore le surf.","fill":"difficile","fillA":["difficile"]},
+    {"id":"smr34-q10","textQ":"Quel type d'école fréquente-t-il ?","text":["Une école pour sportifs","Une école normale","Une école d'art"],"textC":0,"img":["Sportif","École","Art"],"imgC":0,"fillQ":"Il est dans une école spécialisée pour ___.","fill":"sportifs","fillA":["sportifs","sportif"]}
+  ],
+  "radio-35": [
+    {"id":"smr35-q7","textQ":"Quel repas populaire est mentionné en premier ?","text":["Le hamburger-frites","La pizza","Les pâtes"],"textC":0,"img":["Hamburger","Pizza","Pâtes"],"imgC":0,"fillQ":"Le repas préféré des adolescents, le ___, est populaire.","fill":"hamburger-frites","fillA":["hamburger-frites","hamburger frites"]},
+    {"id":"smr35-q8","textQ":"Quels fruits aime-t-il ?","text":["Les fraises et les bananes","Les pommes","Les poires"],"textC":0,"img":["Fraises","Pommes","Poires"],"imgC":0,"fillQ":"Il aime les fraises, les bananes et les ___.","fill":"oranges","fillA":["oranges","orange"]},
+    {"id":"smr35-q9","textQ":"Que préfère-t-il plutôt que manger des fruits ?","text":["Boire des jus de fruits","Manger des légumes","Prendre des vitamines"],"textC":0,"img":["Jus","Légumes","Vitamines"],"imgC":0,"fillQ":"Il préfère boire des ___ de fruits.","fill":"jus","fillA":["jus"]},
+    {"id":"smr35-q10","textQ":"Comment s'appelle l'adolescent interviewé ?","text":["Johan","Julien","Martin"],"textC":0,"img":["Johan","Julien","Martin"],"imgC":0,"fillQ":"L'adolescent s'appelle ___.","fill":"Johan","fillA":["johan"]}
+  ],
+  "radio-50": [
+    {"id":"smr50-q7","textQ":"Document 1 : quel temps fait-il malgré la chaleur ?","text":["Il y a des nuages gris","Il neige","Il y a du brouillard"],"textC":0,"img":["Nuages","Neige","Brouillard"],"imgC":0,"fillQ":"De gros nuages ___ sont au rendez-vous.","fill":"gris","fillA":["gris","grises"]},
+    {"id":"smr50-q8","textQ":"Document 2 : quel événement organise la ville ?","text":["La fête de la nature","Un marathon","Un salon du livre"],"textC":0,"img":["Nature","Marathon","Livre"],"imgC":0,"fillQ":"C'est pour la fête de la ___.","fill":"nature","fillA":["nature"]},
+    {"id":"smr50-q9","textQ":"Document 3 : combien d'invitations sont offertes ?","text":["Dix","Cinq","Vingt"],"textC":0,"img":["10","5","20"],"imgC":0,"fillQ":"Les dix premiers reçoivent une ___.","fill":"invitation","fillA":["invitation"]},
+    {"id":"smr50-q10","textQ":"Document 3 : à quel numéro envoyer le SMS ?","text":["10 20 30","06 12 34 56","15 20 30"],"textC":0,"img":["10 20 30","06 12","15 20"],"imgC":0,"fillQ":"Envoyez le mot SAÏA au ___.","fill":"10 20 30","fillA":["102030","10 20 30","10-20-30"]}
+  ],
+  "radio-51": [
+    {"id":"smr51-q7","textQ":"Document 1 : que peut-on faire avec BlaBlaLang ?","text":["Apprendre des langues","Acheter des billets","Réserver un hôtel"],"textC":0,"img":["Langue","Billet","Hôtel"],"imgC":0,"fillQ":"On peut voyager ou apprendre des langues ___.","fill":"étrangères","fillA":["etrangeres","étrangères"]},
+    {"id":"smr51-q8","textQ":"Document 2 : comment s'appelle le restaurant ?","text":["Jules Verne","Tour Eiffel","BlaBlaLang"],"textC":0,"img":["Restaurant","Tour","Site"],"imgC":0,"fillQ":"Découvrez le restaurant ___.","fill":"Jules Verne","fillA":["jules verne"]},
+    {"id":"smr51-q9","textQ":"Document 2 : quelle vue offre le restaurant ?","text":["La plus belle vue de Paris","La mer","La campagne"],"textC":0,"img":["Paris","Mer","Campagne"],"imgC":0,"fillQ":"Profitez de la plus belle vue de ___.","fill":"Paris","fillA":["paris"]},
+    {"id":"smr51-q10","textQ":"Document 3 : sur quelle radio passe l'émission ?","text":["France FM","Europe 1","RTL"],"textC":0,"img":["Radio","Télé","Web"],"imgC":0,"fillQ":"L'émission spéciale est sur ___.","fill":"France FM","fillA":["france fm","franceFM"]}
+  ],
+  "radio-52": [
+    {"id":"smr52-q7","textQ":"Dans quelle ville est le nouveau centre ?","text":["Marseille","Paris","Nice"],"textC":0,"img":["Marseille","Paris","Nice"],"imgC":0,"fillQ":"Vous êtes à ___.","fill":"Marseille","fillA":["marseille"]},
+    {"id":"smr52-q8","textQ":"Comment s'appelle le centre sportif ?","text":["La Plaine","Futur Évasion","Bercy"],"textC":0,"img":["Plaine","Évasion","Bercy"],"imgC":0,"fillQ":"Le centre sportif de la ___ va ouvrir.","fill":"Plaine","fillA":["plaine"]},
+    {"id":"smr52-q9","textQ":"Quand ouvre-t-il ?","text":["Dans une semaine","Demain","Le mois prochain"],"textC":0,"img":["Semaine","Demain","Mois"],"imgC":0,"fillQ":"Il ouvre dans une ___.","fill":"semaine","fillA":["semaine"]},
+    {"id":"smr52-q10","textQ":"Qui donne des informations le jour de l'ouverture ?","text":["Les clubs","Les pompiers","Les professeurs"],"textC":0,"img":["Club","Pompiers","Professeur"],"imgC":0,"fillQ":"Les ___ seront là pour donner des informations.","fill":"clubs","fillA":["clubs","club"]}
+  ],
+  "radio-53": [
+    {"id":"smr53-q7","textQ":"Document 1 : jusqu'à quelle heure est ouvert le musée ?","text":["20 h","18 h","22 h"],"textC":0,"img":["20 h","18 h","22 h"],"imgC":0,"fillQ":"Le musée vous attend de 9 heures à ___ heures.","fill":"20h","fillA":["20 h","20h","20h00"]},
+    {"id":"smr53-q8","textQ":"Document 1 : jusqu'à quelle heure la cafétéria est-elle ouverte ?","text":["19 h","18 h","20 h"],"textC":0,"img":["19 h","18 h","20 h"],"imgC":0,"fillQ":"La cafétéria est ouverte jusqu'à ___ heures.","fill":"19h","fillA":["19 h","19h","19h00"]},
+    {"id":"smr53-q9","textQ":"Document 3 : quels jours a lieu le salon Inde Culture ?","text":["Vendredi et samedi","Samedi et dimanche","Lundi et mardi"],"textC":0,"img":["Ven.–sam.","Sam.–dim.","Lun.–mar."],"imgC":0,"fillQ":"Venez au salon Inde Culture vendredi et ___.","fill":"samedi","fillA":["samedi"]},
+    {"id":"smr53-q10","textQ":"Document 3 : quelles activités sont gratuites après l'entrée ?","text":["Goûter, danser et voir des films","Seulement les films","Rien"],"textC":0,"img":["Ateliers","Films","Entrée"],"imgC":0,"fillQ":"Vous pourrez participer à des ateliers de ___ gratuitement.","fill":"danse","fillA":["danse"]}
+  ],
+  "radio-54": [
+    {"id":"smr54-q7","textQ":"Quel jour a lieu le concert de David Guetta ?","text":["Samedi","Vendredi","Dimanche"],"textC":0,"img":["Samedi","Vendredi","Dimanche"],"imgC":0,"fillQ":"Le concert est ___ à 21 heures.","fill":"samedi","fillA":["samedi"]},
+    {"id":"smr54-q8","textQ":"Pourquoi faut-il réserver vite pour Bercy ?","text":["Il reste peu de places","C'est gratuit","C'est annulé"],"textC":0,"img":["Places","Gratuit","Annulé"],"imgC":0,"fillQ":"Il reste très peu de ___.","fill":"places","fillA":["places","place"]},
+    {"id":"smr54-q9","textQ":"Où joue Dionysos ?","text":["À Toulouse","À Nice","À Paris"],"textC":0,"img":["Toulouse","Nice","Paris"],"imgC":0,"fillQ":"Dionysos se produit à ___.","fill":"Toulouse","fillA":["toulouse"]},
+    {"id":"smr54-q10","textQ":"Jusqu'à quand Dionysos joue-t-il à Toulouse ?","text":["Vendredi soir","Samedi soir","Dimanche soir"],"textC":0,"img":["Vendredi","Samedi","Dimanche"],"imgC":0,"fillQ":"Ils jouent jusqu'à ___ soir.","fill":"vendredi","fillA":["vendredi"]}
+  ],
+  "radio-55": [
+    {"id":"smr55-q7","textQ":"Document 1 : qui va surtout au salon du tatouage ?","text":["Les jeunes de 18 à 35 ans","Les enfants","Les retraités"],"textC":0,"img":["Jeunes","Enfants","Retraités"],"imgC":0,"fillQ":"Ce sont surtout des jeunes de 18 à ___ ans.","fill":"35","fillA":["35","trente-cinq"]},
+    {"id":"smr55-q8","textQ":"Document 2 : combien d'adolescents utilisent TikTok dans le monde ?","text":["Plus de 700 millions","100 millions","50 millions"],"textC":0,"img":["700 M","100 M","50 M"],"imgC":0,"fillQ":"Plus de 700 millions d'___ utilisent TikTok.","fill":"adolescents","fillA":["adolescents","adolescent"]},
+    {"id":"smr55-q9","textQ":"Document 3 : quels styles musicaux peut-on entendre ?","text":["Pop, électro et classique","Seulement du rock","Seulement du jazz"],"textC":0,"img":["Pop","Rock","Jazz"],"imgC":0,"fillQ":"Pop, électro, classique : il y en a pour tous les ___.","fill":"goûts","fillA":["gouts","goûts"]},
+    {"id":"smr55-q10","textQ":"Document 1 : où a lieu le salon du tatouage ?","text":["À Paris","À Nice","À Toulouse"],"textC":0,"img":["Paris","Nice","Toulouse"],"imgC":0,"fillQ":"Cette semaine à ___, il y a le salon du tatouage.","fill":"Paris","fillA":["paris"]}
+  ]
+}

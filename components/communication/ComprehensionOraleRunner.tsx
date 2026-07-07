@@ -13,6 +13,7 @@ import {
   type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
 import { getCoPartQuestions, type COQuestionTask } from "@/lib/curriculum/content/communication/co-questions";
+import { CO_SCOLAIRE_MOYEN_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-moyen";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   CommunicationFinishButton,
@@ -132,6 +133,22 @@ function makeBaseConversationPart(
   };
 }
 
+function partQuestionCount(
+  level: COLevel,
+  category: COAudioCategory,
+  audioGroup: COAudioGroup,
+  defaultPoints: number,
+): number {
+  if (
+    level === "moyen" &&
+    audioGroup.source === "scolaire" &&
+    (category === "message" || category === "annonce" || category === "radio")
+  ) {
+    return CO_SCOLAIRE_MOYEN_QUESTIONS_PER_AUDIO;
+  }
+  return defaultPoints;
+}
+
 function makeParts(level: COLevel, seed: number): COPart[] {
   if (level === "avance") {
     return ADVANCED_PART_INFO.map((part) => {
@@ -160,10 +177,12 @@ function makeParts(level: COLevel, seed: number): COPart[] {
     }
     const category = ("category" in part ? part.category : part.id) as COAudioCategory;
     const audioGroup = pickCoGroup(audioLevel, category, `${seed}-${part.id}`);
+    const questionCount = partQuestionCount(level, category, audioGroup, part.points);
     return {
       ...part,
+      points: questionCount,
       audioGroup,
-      questions: getCoPartQuestions(audioGroup, part.points, `${seed}-${part.id}`),
+      questions: getCoPartQuestions(audioGroup, questionCount, `${seed}-${part.id}`),
     };
   });
 }
