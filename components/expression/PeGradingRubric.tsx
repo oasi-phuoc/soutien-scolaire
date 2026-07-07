@@ -1,6 +1,6 @@
 "use client";
 
-import { rubricForPeExercise } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
+import { rubricForPeExercise, rubricMaxPoints } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
 import type { ExerciseGrading, SubmissionExercise } from "@/lib/curriculum/content/communication/expression-submission-types";
 
 function formatPoints(value: number): string {
@@ -21,13 +21,14 @@ export function PeGradingRubric({
 
   const current = new Map((grading?.criteria ?? []).map((entry) => [entry.id, entry.points]));
   const rubricDef = rubric;
+  const cap = exercise.maxPoints > 0 ? exercise.maxPoints : rubricMaxPoints(rubricDef);
 
   function setCriterion(id: string, points: number) {
     const criteria = rubricDef.criteria.map((criterion) => ({
       id: criterion.id,
       points: criterion.id === id ? points : (current.get(criterion.id) ?? 0),
     }));
-    const total = criteria.reduce((sum, entry) => sum + entry.points, 0);
+    const total = Math.min(cap, criteria.reduce((sum, entry) => sum + entry.points, 0));
     onChange({ exerciseId: exercise.id, criteria, total });
   }
 

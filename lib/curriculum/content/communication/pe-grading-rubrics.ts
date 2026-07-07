@@ -24,6 +24,31 @@ export const PE_FORM_RUBRIC: ExerciseRubric = {
   ],
 };
 
+/** Niveau base : texte court / long à 10 pts (consigne + syntaxe + orthographe). */
+export const PE1_WRITING_RUBRIC: ExerciseRubric = {
+  exerciseKind: "short",
+  criteria: [
+    {
+      id: "consigne",
+      label: "Respect de la consigne",
+      description: "En adéquation avec la situation proposée et longueur minimale respectée",
+      options: [0, 0.5, 1, 1.5, 2],
+    },
+    {
+      id: "syntaxe",
+      label: "Syntaxe et grammaire",
+      description: "Utilisation des structures et formes correctes",
+      options: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    },
+    {
+      id: "orthographe",
+      label: "Lexique et orthographe",
+      description: "Utilisation variée de mots et d'expressions",
+      options: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    },
+  ],
+};
+
 export const PE1_REPLY_RUBRIC: ExerciseRubric = {
   exerciseKind: "reply",
   criteria: [
@@ -194,16 +219,10 @@ export const PE2_REPLY_RUBRIC: ExerciseRubric = {
 
 export function rubricForPeExercise(kind: PeExerciseKind, maxPoints = 0): ExerciseRubric | null {
   if (kind === "form") return PE_FORM_RUBRIC;
-
-  const isReplyLike = kind === "reply" || kind === "short";
-  const isExperienceLike = kind === "experience" || kind === "long";
-
-  if (isReplyLike) {
-    return maxPoints <= 10 ? PE1_REPLY_RUBRIC : PE2_REPLY_RUBRIC;
-  }
-  if (isExperienceLike) {
-    return maxPoints <= 10 ? PE1_EXPERIENCE_RUBRIC : PE2_EXPERIENCE_RUBRIC;
-  }
+  if (kind === "reply") return maxPoints <= 10 ? PE1_REPLY_RUBRIC : PE2_REPLY_RUBRIC;
+  if (kind === "experience") return maxPoints <= 10 ? PE1_EXPERIENCE_RUBRIC : PE2_EXPERIENCE_RUBRIC;
+  if (kind === "short") return maxPoints <= 10 ? PE1_WRITING_RUBRIC : PE2_REPLY_RUBRIC;
+  if (kind === "long") return maxPoints <= 10 ? PE1_WRITING_RUBRIC : PE2_EXPERIENCE_RUBRIC;
   return null;
 }
 

@@ -621,6 +621,7 @@ export function ProductionEcriteRunner({
       shortText,
       longPrompt,
       longText,
+      peHybrid: isPeHybrid,
     });
     const promptPayload = bundleToPromptPayload(bundle);
     const textPayload = exercisesToOriginalText(bundle.exercises);

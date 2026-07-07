@@ -49,6 +49,8 @@ export function buildPeSubmissionBundle(input: {
   shortText?: string;
   longPrompt?: WritingPrompt;
   longText?: string;
+  /** Placement progressif : réponse (10) + expérience (10) au lieu de short/long génériques. */
+  peHybrid?: boolean;
 }): SubmissionBundle {
   const exercises: SubmissionExercise[] = [];
 
@@ -64,7 +66,30 @@ export function buildPeSubmissionBundle(input: {
     });
   }
 
-  if (input.level === "moyen") {
+  if (input.peHybrid) {
+    if (input.shortPrompt) {
+      exercises.push({
+        id: "reply",
+        kind: "reply",
+        title: "Répondre à un message",
+        maxPoints: 10,
+        consigne: buildWritingConsigne(input.shortPrompt),
+        text: input.shortText ?? "",
+        prompt: input.shortPrompt,
+      });
+    }
+    if (input.longPrompt) {
+      exercises.push({
+        id: "experience",
+        kind: "experience",
+        title: "Texte à rédiger long",
+        maxPoints: 10,
+        consigne: buildWritingConsigne(input.longPrompt),
+        text: input.longText ?? "",
+        prompt: input.longPrompt,
+      });
+    }
+  } else if (input.level === "moyen") {
     if (input.longPrompt) {
       exercises.push({
         id: "experience",
