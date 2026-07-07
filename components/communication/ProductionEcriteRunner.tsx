@@ -745,7 +745,7 @@ export function ProductionEcriteRunner({
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Envoi au professeur" placement={mode === "placement"} />
-        <section className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50/80 p-5 text-center">
+        <section className="rounded-[var(--radius-lg)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/10 p-5 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--color-accent-comm)]">Correction professeur requise</p>
           <h2 className="mt-2 text-lg font-bold text-[var(--color-text-primary)]">Aucun résultat n&apos;est calculé automatiquement.</h2>
           <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
