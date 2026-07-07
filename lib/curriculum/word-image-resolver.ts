@@ -251,7 +251,18 @@ function resolveLectureSlug(slug: string): string | null {
   return null;
 }
 
-/** CE/CO : expression/horloge d'abord, puis lecture — jamais vocabulaire. */
+function resolveVocabSlug(slug: string): string | null {
+  const direct = WORD_IMAGE_INDEX[slug];
+  if (direct && isVocabImagePath(direct)) return direct;
+  const alias = ALIASES[slug];
+  if (alias) {
+    const aliased = WORD_IMAGE_INDEX[alias];
+    if (aliased && isVocabImagePath(aliased)) return aliased;
+  }
+  return null;
+}
+
+/** CE/CO : expression/horloge, puis lecture, puis vocabulaire en dernier recours. */
 function resolveCeCoIndexedSlug(slug: string): string | null {
   const direct = WORD_IMAGE_INDEX[slug];
   if (direct && !isVocabImagePath(direct)) return direct;
@@ -260,11 +271,13 @@ function resolveCeCoIndexedSlug(slug: string): string | null {
     const aliased = WORD_IMAGE_INDEX[alias];
     if (aliased && !isVocabImagePath(aliased)) return aliased;
   }
-  return resolveLectureSlug(slug);
+  const lecture = resolveLectureSlug(slug);
+  if (lecture) return lecture;
+  return resolveVocabSlug(slug);
 }
 
 /**
- * Resolve a CE/CO object label: scènes manga / horloges, puis pool lecture — pas vocabulaire.
+ * Resolve a CE/CO object label: scènes manga / horloges, lecture, puis vocabulaire.
  */
 export function resolveCeCoWordImage(label: string | undefined | null): string | null {
   if (!label) return null;
@@ -283,7 +296,7 @@ export function resolveCeCoWordImage(label: string | undefined | null): string |
 }
 
 /**
- * True when a label can be shown as a CE/CO QCM image (horloge ou objet, sans vocabulaire).
+ * True when a label can be shown as a CE/CO QCM image (horloge ou objet illustré).
  */
 export function isCeCoImageableLabel(label: string | undefined | null): boolean {
   if (!label?.trim()) return false;
@@ -413,7 +426,7 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
 const EXPRESSION_CE_BASE =
   /^\/assets\/expression\/ce\/base\//;
 
-/** CE/CO — scènes, conversations, objet-pick, horloges ; fallback lecture uniquement. */
+/** CE/CO — scènes, conversations, objet-pick, horloges ; fallback lecture puis vocabulaire. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
     if (path.startsWith("/expression/ce/") || path.startsWith("/expression/co/")) return path;
@@ -421,6 +434,7 @@ export function ceCoImageSource(path?: string | null, label?: string): string | 
     if (remapped) return remapped;
     if (path.startsWith("/assets/expression/co/")) return path;
     if (path.startsWith("/assets/words/lecture/")) return path;
+    if (path.startsWith("/assets/words/vocab/")) return path;
     if (EXPRESSION_CE_BASE.test(path)) return path;
   }
   if (label && isCeCoImageableLabel(label)) return resolveCeCoWordImage(label);
