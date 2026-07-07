@@ -918,7 +918,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         layout: "email",
         meta: { from: orientationTextBase.from, subject: orientationTextBase.subject },
         body: orientationTextBase.body,
-        image: orientationTextBase.image,
+        image: "",
         questions: buildCeMessageQuestions(orientationTextBase.pool, 6, `${level}-${stamp}-orientation`),
       }
     : {
@@ -950,7 +950,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         ? { from: emailBase.from, subject: emailBase.subject }
         : { from: emailLegacy!.from, subject: emailLegacy!.subject },
       body: emailBase ? emailBase.body : emailLegacy!.body,
-      image: emailBase?.image ?? "",
+      image: "",
       questions: emailBase
         ? buildCeMessageQuestions(emailBase.pool, 6, `${level}-${stamp}-email`)
         : emailLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
