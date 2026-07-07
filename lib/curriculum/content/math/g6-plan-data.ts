@@ -405,7 +405,208 @@ export const MEDIEVAL_ITEMS: ShapeIcon[] = [
   },
 ];
 
-// ── Figures dynamiques pour exercice 4 (repère cartésien) ────────────────────
+// ── Exercices 8–13 : repère cartésien (4 quadrants) ─────────────────────────
+
+export type LabeledPoint = { label: string; x: number; y: number };
+
+/** Pentagones — coordonnées entières */
+export const POLYGON_INT_TEMPLATES: LabeledPoint[][] = [
+  [
+    { label: "A", x: -7, y: 2 },
+    { label: "B", x: -3, y: 6 },
+    { label: "C", x: 4, y: 2 },
+    { label: "D", x: 0, y: -5 },
+    { label: "E", x: -3, y: 2 },
+  ],
+  [
+    { label: "A", x: -5, y: 8 },
+    { label: "B", x: 4, y: 8 },
+    { label: "C", x: 2, y: 2 },
+    { label: "D", x: -3, y: 0 },
+    { label: "E", x: -3, y: 5 },
+  ],
+  [
+    { label: "A", x: -5, y: -1 },
+    { label: "B", x: 4, y: 6 },
+    { label: "C", x: 2, y: -6 },
+    { label: "D", x: 7, y: 3 },
+    { label: "E", x: 0, y: 5 },
+  ],
+];
+
+/** Pentagones — coordonnées avec demi-unités */
+export const POLYGON_HALF_TEMPLATES: LabeledPoint[][] = [
+  [
+    { label: "A", x: 2.5, y: -1 },
+    { label: "B", x: 0.5, y: 4 },
+    { label: "C", x: 0.5, y: 6 },
+    { label: "D", x: -3, y: 6 },
+    { label: "E", x: -3, y: 4 },
+  ],
+  [
+    { label: "A", x: -1, y: 4 },
+    { label: "B", x: -7, y: 0 },
+    { label: "C", x: -2, y: -4.5 },
+    { label: "D", x: 0.5, y: -4.5 },
+    { label: "E", x: 0.5, y: 0 },
+  ],
+];
+
+export type SegmentLine = { id: string; color: string; x1: number; y1: number; x2: number; y2: number; label: string };
+
+export type LineScenarioQuestion =
+  | { type: "coord"; prompt: string; answer: [number, number]; tolerance?: number }
+  | { type: "bool"; prompt: string; answer: boolean };
+
+export type LineScenario = {
+  id: string;
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+  lines: SegmentLine[];
+  questions: LineScenarioQuestion[];
+};
+
+export const LINE_SCENARIOS: LineScenario[] = [
+  {
+    id: "couleurs1",
+    xMin: -12,
+    xMax: 16,
+    yMin: -12,
+    yMax: 12,
+    lines: [
+      { id: "violette", color: "#9333ea", x1: -11, y1: 0, x2: 1, y2: 12, label: "violette" },
+      { id: "orange", color: "#f97316", x1: -5.5, y1: 0, x2: 0, y2: -11, label: "orange" },
+      { id: "verte", color: "#22c55e", x1: 5, y1: 0, x2: -1, y2: -6, label: "verte" },
+      { id: "bleue", color: "#3b82f6", x1: 15, y1: -12, x2: 15, y2: 12, label: "bleue" },
+    ],
+    questions: [
+      { type: "coord", prompt: "La droite violette et la droite orange se croisent en", answer: [-7, 3], tolerance: 1 },
+      { type: "coord", prompt: "La droite verte et la droite bleue se croisent en", answer: [15, 10] },
+      { type: "coord", prompt: "La droite orange et la droite verte se croisent en", answer: [-2, -7], tolerance: 1 },
+      { type: "coord", prompt: "La droite bleue croise l'axe des X en", answer: [15, 0] },
+      { type: "coord", prompt: "La droite violette croise l'axe des Y en", answer: [0, 11] },
+    ],
+  },
+  {
+    id: "couleurs2",
+    xMin: -10,
+    xMax: 10,
+    yMin: -10,
+    yMax: 10,
+    lines: [
+      { id: "rouge", color: "#dc2626", x1: -8, y1: 5, x2: 8, y2: 1, label: "rouge" },
+      { id: "orange", color: "#f97316", x1: -2.5, y1: 0, x2: 0, y2: 3, label: "orange" },
+      { id: "rose", color: "#ec4899", x1: 5, y1: 0, x2: 1, y2: 8, label: "rose" },
+      { id: "grise", color: "#6b7280", x1: 0, y1: -1, x2: 4, y2: -3, label: "grise" },
+    ],
+    questions: [
+      { type: "coord", prompt: "La droite rouge et la droite orange se croisent en", answer: [0, 3] },
+      { type: "coord", prompt: "La droite grise et la droite rose se croisent en", answer: [2, -2.5], tolerance: 0.6 },
+      { type: "coord", prompt: "La droite orange croise l'axe des X en", answer: [-2.5, 0], tolerance: 0.6 },
+      { type: "bool", prompt: "La droite rose et la droite orange sont perpendiculaires.", answer: false },
+      { type: "bool", prompt: "La droite grise et la droite rose sont parallèles.", answer: false },
+    ],
+  },
+];
+
+/** Pools de points à placer sur le repère */
+export const CARTESIAN_PLACE_POOLS: LabeledPoint[][] = [
+  [
+    { label: "A", x: 5, y: -7 },
+    { label: "B", x: -3, y: 3 },
+    { label: "C", x: -6, y: -3 },
+    { label: "D", x: -5, y: 1 },
+    { label: "E", x: -1, y: 2 },
+    { label: "F", x: -2, y: -2 },
+  ],
+  [
+    { label: "K", x: -1, y: 1.5 },
+    { label: "L", x: 1.5, y: -3 },
+    { label: "M", x: 0, y: 4 },
+    { label: "N", x: -4, y: 2.5 },
+    { label: "O", x: 3, y: -4 },
+    { label: "P", x: 3, y: -2 },
+  ],
+  [
+    { label: "A", x: -5, y: -1 },
+    { label: "B", x: 4, y: 6 },
+    { label: "C", x: 2, y: -6 },
+    { label: "D", x: 7, y: 3 },
+    { label: "E", x: 0, y: 5 },
+    { label: "H", x: 5, y: 0 },
+  ],
+];
+
+export type VertexPuzzle = {
+  type: "square" | "parallelogram";
+  prompt: string;
+  points: LabeledPoint[];
+  missing: string;
+  answer: { x: number; y: number };
+  shapeName?: string;
+};
+
+export const VERTEX_PUZZLES: VertexPuzzle[] = [
+  {
+    type: "square",
+    prompt: "Le carré [ABCD] passe par A, B et C. Où se trouve D ?",
+    points: [
+      { label: "A", x: -14, y: 9 },
+      { label: "B", x: -9, y: 4 },
+      { label: "C", x: -14, y: 4 },
+    ],
+    missing: "D",
+    answer: { x: -9, y: 9 },
+    shapeName: "carré",
+  },
+  {
+    type: "parallelogram",
+    prompt: "Parallèle à [AB] par C et parallèle à [AC] par B se croisent en D. Coordonnées de D ?",
+    points: [
+      { label: "A", x: -2, y: 6 },
+      { label: "B", x: 5, y: 8 },
+      { label: "C", x: -6, y: -5 },
+    ],
+    missing: "D",
+    answer: { x: 1, y: -3 },
+    shapeName: "parallélogramme",
+  },
+  {
+    type: "parallelogram",
+    prompt: "Le parallélogramme [ABCD] a pour sommets connus A, B et C. Trouvez D.",
+    points: [
+      { label: "A", x: -3, y: 2 },
+      { label: "B", x: 2, y: 5 },
+      { label: "C", x: 6, y: 1 },
+    ],
+    missing: "D",
+    answer: { x: 1, y: -2 },
+    shapeName: "parallélogramme",
+  },
+];
+
+/** Points à lire sur repère 4 quadrants (style A–J) */
+export const QUADRANT_READ_POOLS: LabeledPoint[][] = [
+  [
+    { label: "A", x: -5, y: -1 },
+    { label: "B", x: 4, y: 6 },
+    { label: "C", x: 2, y: -6 },
+    { label: "D", x: 7, y: 3 },
+    { label: "E", x: 0, y: 5 },
+    { label: "F", x: -7, y: -8 },
+  ],
+  [
+    { label: "G", x: -6, y: 5 },
+    { label: "H", x: 5, y: 0 },
+    { label: "I", x: -3, y: -4 },
+    { label: "J", x: -9, y: 7 },
+    { label: "K", x: 1.5, y: 4.5 },
+    { label: "L", x: -1.5, y: 1 },
+  ],
+];
+
 
 export type CartesianFigure = {
   id: string;

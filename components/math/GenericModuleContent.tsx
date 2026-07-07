@@ -40,6 +40,14 @@ import {
   G6MapBielExercise,
   G6RebeuvelierExercise,
 } from "@/components/math/geo/G6PlanExercises";
+import {
+  G6PolygonIntExercise,
+  G6PolygonHalfExercise,
+  G6LineIntersectExercise,
+  G6CartesianPlaceExercise,
+  G6FindVertexExercise,
+  G6QuadrantReadExercise,
+} from "@/components/math/geo/G6CartesianExercises";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
@@ -244,7 +252,7 @@ type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | 
 type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
 type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
-type G6PlanStep = { kind: "g6_plan"; lesson: MathSubmoduleLesson; variant: 1 | 2 | 3 | 4 | 5 | 6 | 7; exNum: number };
+type G6PlanStep = { kind: "g6_plan"; lesson: MathSubmoduleLesson; variant: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13; exNum: number };
 
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
@@ -5626,6 +5634,12 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push({ kind: "g6_plan", lesson, variant: 5, exNum: 5 });
         steps.push({ kind: "g6_plan", lesson, variant: 6, exNum: 6 });
         steps.push({ kind: "g6_plan", lesson, variant: 7, exNum: 7 });
+        steps.push({ kind: "g6_plan", lesson, variant: 8, exNum: 8 });
+        steps.push({ kind: "g6_plan", lesson, variant: 9, exNum: 9 });
+        steps.push({ kind: "g6_plan", lesson, variant: 10, exNum: 10 });
+        steps.push({ kind: "g6_plan", lesson, variant: 11, exNum: 11 });
+        steps.push({ kind: "g6_plan", lesson, variant: 12, exNum: 12 });
+        steps.push({ kind: "g6_plan", lesson, variant: 13, exNum: 13 });
       };
       pushG6Set();
       steps.push({ kind: "eval_start", lesson });
@@ -11040,6 +11054,30 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 7 && (
             <G6RebeuvelierExercise key={`g6rv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 8 && (
+            <G6PolygonIntExercise key={`g6pi-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 9 && (
+            <G6PolygonHalfExercise key={`g6ph-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 10 && (
+            <G6LineIntersectExercise key={`g6li-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 11 && (
+            <G6CartesianPlaceExercise key={`g6cp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 12 && (
+            <G6FindVertexExercise key={`g6fv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+          )}
+          {currentStep.variant === 13 && (
+            <G6QuadrantReadExercise key={`g6qr-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
           )}
         </EvalRevealContext.Provider>
