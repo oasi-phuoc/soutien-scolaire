@@ -21,6 +21,7 @@ import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placeme
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
 import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
+import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-question-filters";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
 const TOTAL_SECONDS = 45 * 60;
@@ -29,7 +30,14 @@ type CELevel = "base" | "moyen" | "avance";
 type Choice = { label: string; image?: string };
 type TableTask = { kind: "table"; prompt: string; documents: { title: string; subtitle: string; body: string; tone: string }[]; people: string[]; answers: number[] };
 type ChoiceTask = { kind: "choice"; prompt: string; choices: Choice[]; correct: number; image?: boolean };
-type FillTask = { kind: "fill"; prompt: string; answer: string; accept?: string[] };
+type FillTask = {
+  kind: "fill";
+  prompt: string;
+  answer: string;
+  accept?: string[];
+  fillMode?: "stem" | "full";
+  stem?: string;
+};
 type QuestionTask = ChoiceTask | FillTask;
 type RawQuestionTask = Omit<ChoiceTask, "kind"> | Omit<FillTask, "kind">;
 type OrientationSeriesItem = {
@@ -99,7 +107,9 @@ function answerOk(task: QuestionTask, answer: number | string | null) {
 }
 
 function toQuestionTask(question: RawQuestionTask): QuestionTask {
-  if ("answer" in question) return { kind: "fill", ...question };
+  if ("answer" in question) {
+    return { kind: "fill", fillMode: "full", ...question };
+  }
   return { kind: "choice", ...question };
 }
 
@@ -1141,14 +1151,43 @@ function ImagePlaceholder({ label, path, compact }: { label: string; path?: stri
 
 function FillQuestionView({ task, value, onChange, correction }: { task: FillTask; value: number | string | null; onChange: (value: string) => void; correction?: boolean }) {
   const ok = answerOk(task, value);
+  const inputValue = typeof value === "string" ? value : "";
+  const inputCls = "border-0 border-b-2 bg-transparent pb-1 text-sm outline-none";
+  const stemParts = task.fillMode !== "full" && task.stem ? parseFillStem(task.stem) : null;
+
+  if (stemParts) {
+    return (
+      <div className="space-y-1">
+        <div className="flex flex-wrap items-baseline gap-x-1 gap-y-2 text-sm text-[var(--color-text-primary)]">
+          <span>{stemParts.before}</span>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(event) => onChange(event.target.value)}
+            disabled={correction}
+            className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
+            style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
+          />
+          {stemParts.after ? <span>{stemParts.after}</span> : null}
+        </div>
+        {correction && !ok && (
+          <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-1">
+      {task.fillMode === "full" && (
+        <p className="text-xs text-[var(--color-text-secondary)]">Écrivez une phrase complète contenant la réponse.</p>
+      )}
       <input
         type="text"
-        value={typeof value === "string" ? value : ""}
+        value={inputValue}
         onChange={(event) => onChange(event.target.value)}
         disabled={correction}
-        className="w-full border-0 border-b-2 bg-transparent pb-1 text-sm outline-none"
+        className={`w-full ${inputCls}`}
         style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
       />
       {correction && !ok && (

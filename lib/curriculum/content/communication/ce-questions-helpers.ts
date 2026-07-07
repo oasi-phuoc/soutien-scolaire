@@ -1,8 +1,10 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import { pickCeCoQuestionFormat } from "./ce-co-question-formats";
+import { hasBlockedImageChoices, isExcludedCeCoQuestion } from "./ce-co-question-filters";
 
 export type CEFormatType = "text" | "image" | "fill";
+export type CEFillMode = "stem" | "full";
 
 export type CEImageChoice = { label: string; image: string };
 
@@ -29,9 +31,13 @@ export type CEChoiceTask = {
 
 export type CEFillTask = {
   kind: "fill";
+  /** Question identique au QCM texte. */
   prompt: string;
   answer: string;
   accept?: string[];
+  fillMode: CEFillMode;
+  /** Phrase amorcée (base uniquement). */
+  stem?: string;
 };
 
 export type CEQuestionTask = CEChoiceTask | CEFillTask;
@@ -55,12 +61,20 @@ export function ceImgChoice(label: string): CEImageChoice {
 
 function supportsImageFormat(choices: { label: string; image: string }[]): boolean {
   if (choices.some((c) => isSinglePrice(c.label) || isPriceRange(c.label))) return false;
+  if (hasBlockedImageChoices(choices.map((c) => c.label))) return false;
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
-function multiToTask(q: CEMultiQuestion, format: CEFormatType): CEQuestionTask {
+function multiToTask(q: CEMultiQuestion, format: CEFormatType, fillMode: CEFillMode): CEQuestionTask {
   if (format === "fill") {
-    return { kind: "fill", prompt: q.fillQ, answer: q.fillAnswer, accept: q.fillAccept };
+    return {
+      kind: "fill",
+      prompt: q.textQ,
+      stem: fillMode === "stem" ? q.fillQ : undefined,
+      fillMode,
+      answer: q.fillAnswer,
+      accept: q.fillAccept,
+    };
   }
   if (format === "image") {
     return {
@@ -84,16 +98,28 @@ export function buildCeMessageQuestions(
   pool: CEMultiQuestion[],
   count: number,
   seed: string,
+  fillMode: CEFillMode = "stem",
 ): CEQuestionTask[] {
-  if (!pool.length || count <= 0) return [];
+  const eligible = pool.filter(
+    (q) =>
+      !isExcludedCeCoQuestion({
+        textQ: q.textQ,
+        text: q.textChoices,
+        textC: q.textCorrect,
+        img: q.imageChoices.map((c) => c.label) as [string, string, string],
+        fill: q.fillAnswer,
+        fillQ: q.fillQ,
+      }),
+  );
+  if (!eligible.length || count <= 0) return [];
 
-  const shuffled = shuffleWithSeed(pool, seed);
-  const selected = shuffled.slice(0, Math.min(count, pool.length));
+  const shuffled = shuffleWithSeed(eligible, seed);
+  const selected = shuffled.slice(0, Math.min(count, eligible.length));
 
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
     const format = pickCeCoQuestionFormat(index, seed, q.id, imageable);
-    return multiToTask(q, format);
+    return multiToTask(q, format, fillMode);
   });
 }
 
