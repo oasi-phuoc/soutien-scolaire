@@ -2008,6 +2008,10 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
   return { questions: qs, exNum, op, range, missingOperand, ...(timer !== undefined ? { timer } : {}) };
 }
 
+function arithAnswerSlotCount(cfg: ArithGroupConfig | undefined): number {
+  return cfg?.questions.length ?? 5;
+}
+
 // ── Rounding generators ──────────────────────────────────────────────────────
 function roundTo10(n: number) { return Math.round(n / 10) * 10; }
 function roundTo100(n: number) { return Math.round(n / 100) * 100; }
@@ -7531,9 +7535,13 @@ export function GenericModuleContent({
     setCompValidated(false);
     setExprCompAnswers(Array(5).fill(null));
     setExprCompValidated(false);
-    setArithAnswers(Array(5).fill(""));
+    const targetStep = steps[idx];
+    const arithN = targetStep?.kind === "arithmetic_group"
+      ? arithAnswerSlotCount(arithOverrideConfigs[idx] ?? targetStep.config)
+      : 5;
+    setArithAnswers(Array(arithN).fill(""));
     setArithValidated(false);
-    setArithResults(Array(5).fill(false));
+    setArithResults(Array(arithN).fill(false));
     setGridAnswers(emptyGrid());
     setGridCarryInputs(emptyCarryGrid());
     setGridValidated(false);
@@ -7631,7 +7639,7 @@ export function GenericModuleContent({
       setEvalTotalPts_state(0);
       setEvalRowData([]);
     }
-  }, [evalStartIdx]);
+  }, [evalStartIdx, steps, arithOverrideConfigs]);
 
   const goBack = useCallback(() => {
     if (isInEvalPhase) {
@@ -8445,10 +8453,12 @@ export function GenericModuleContent({
       setArithValidated(true);
     };
     stepReset = () => {
-      setArithOverrideConfigs(prev => ({ ...prev, [stepIdx]: genArithGroup(cfg.op, cfg.range, cfg.exNum, cfg.missingOperand, cfg.timer) }));
-      setArithAnswers(Array(5).fill(""));
+      const nextCfg = genArithGroup(cfg.op, cfg.range, cfg.exNum, cfg.missingOperand, cfg.timer);
+      const n = arithAnswerSlotCount(nextCfg);
+      setArithOverrideConfigs(prev => ({ ...prev, [stepIdx]: nextCfg }));
+      setArithAnswers(Array(n).fill(""));
       setArithValidated(false);
-      setArithResults(Array(5).fill(false));
+      setArithResults(Array(n).fill(false));
       setArithResetKey(k => k + 1);
     };
   }
@@ -11123,7 +11133,10 @@ export function GenericModuleContent({
           answers={arithAnswers}
           validated={arithValidated}
           results={arithResults}
-          onChange={(i, val) => setArithAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+          onChange={(i, val) => setArithAnswers(prev => {
+            const n = Math.max(prev.length, i + 1, activeArithConfig?.questions.length ?? 0);
+            return Array.from({ length: n }, (_, j) => (j === i ? val : (prev[j] ?? "")));
+          })}
           onTimerExpired={stepValidate}
           hideTimerDisplay={!isInEvalPhase}
           onTimeUpdate={!isInEvalPhase ? (t) => setTrainingTimerLeft(t) : undefined}
