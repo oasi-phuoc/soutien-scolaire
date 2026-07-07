@@ -61,6 +61,81 @@ function randomCells(cols: string[], rows: number[], count: number): GridCell[] 
   return pickN(all, count);
 }
 
+function ShapeGlyph({ shape, className }: { shape: ShapeIcon; className?: string }) {
+  return (
+    <svg viewBox="0 0 72 72" className={className} aria-hidden>
+      <g dangerouslySetInnerHTML={{ __html: shape.svg }} />
+    </svg>
+  );
+}
+
+const SHAPE_CELL_FILL = "color-mix(in srgb, var(--color-accent-alg) 22%, white)";
+
+type CoordAnswer = { col: string; row: string };
+
+function coordAnswerOk(answer: CoordAnswer, cell: GridCell): boolean {
+  const col = answer.col.trim().toUpperCase();
+  const row = answer.row.trim();
+  return col === cell.col.toUpperCase() && row === String(cell.row);
+}
+
+function GridCoordFields({
+  answer,
+  correct,
+  validated,
+  wrong,
+  onChange,
+}: {
+  answer: CoordAnswer;
+  correct: GridCell;
+  validated: boolean;
+  wrong: boolean;
+  onChange: (next: CoordAnswer) => void;
+}) {
+  const inputCls = `h-8 w-8 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
+  return (
+    <div className="flex items-center gap-1 text-sm">
+      <span className="text-[var(--color-text-secondary)]">(</span>
+      {wrong ? (
+        <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+          <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.col || "—"}</span>
+          <span className="text-xs font-bold leading-none text-amber-600">{correct.col.toUpperCase()}</span>
+        </div>
+      ) : (
+        <input
+          type="text"
+          inputMode="text"
+          maxLength={1}
+          value={answer.col}
+          disabled={validated}
+          onChange={(e) => onChange({ ...answer, col: e.target.value.replace(/[^a-zA-Z]/g, "").slice(-1) })}
+          className={inputCls}
+          aria-label="Colonne"
+        />
+      )}
+      <span className="text-[var(--color-text-secondary)]">;</span>
+      {wrong ? (
+        <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+          <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.row || "—"}</span>
+          <span className="text-xs font-bold leading-none text-amber-600">{correct.row}</span>
+        </div>
+      ) : (
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={1}
+          value={answer.row}
+          disabled={validated}
+          onChange={(e) => onChange({ ...answer, row: e.target.value.replace(/[^0-9]/g, "").slice(-1) })}
+          className={inputCls}
+          aria-label="Ligne"
+        />
+      )}
+      <span className="text-[var(--color-text-secondary)]">)</span>
+    </div>
+  );
+}
+
 // ── Grille lettres/chiffres ───────────────────────────────────────────────────
 
 function LetterGrid({
@@ -111,16 +186,24 @@ function LetterGrid({
             <g key={key}>
               <rect
                 x={x + 1} y={y + 1} width={cellSize - 2} height={cellSize - 2}
-                fill={isHi ? "#fef08a" : shape ? "#f1f5f9" : "#fff"}
+                fill={isHi ? "#fef08a" : shape ? SHAPE_CELL_FILL : "#fff"}
                 stroke={onCellClick ? (selectedShape ? "var(--color-accent-alg)" : "#cbd5e1") : "#cbd5e1"}
                 strokeWidth={onCellClick ? 1.5 : 1}
                 className={onCellClick ? "cursor-pointer" : undefined}
                 onClick={() => onCellClick?.(cell)}
               />
               {shape && (
-                <g transform={`translate(${x}, ${y}) scale(${(cellSize - 4) / 72})`}>
+                <svg
+                  x={x + 1}
+                  y={y + 1}
+                  width={cellSize - 2}
+                  height={cellSize - 2}
+                  viewBox="0 0 72 72"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden
+                >
                   <g dangerouslySetInnerHTML={{ __html: shape.svg }} />
-                </g>
+                </svg>
               )}
             </g>
           );
@@ -147,14 +230,16 @@ function genReadItems(): ReadItem[] {
 
 export function G6GridReadExercise({ exNum, validateCommand, onValidated }: ExProps) {
   const [items] = useState(() => genReadItems());
-  const [answers, setAnswers] = useState<string[]>(() => Array(items.length).fill(""));
+  const [answers, setAnswers] = useState<CoordAnswer[]>(() =>
+    items.map(() => ({ col: "", row: "" })),
+  );
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prev = useRef(-1);
 
   const doValidate = useCallback(() => {
     if (validated) return;
-    const res = items.map((it, i) => parseCellInput(answers[i] ?? "") === cellKey(it.cell));
+    const res = items.map((it, i) => coordAnswerOk(answers[i] ?? { col: "", row: "" }, it.cell));
     setResults(res);
     setValidated(true);
     onValidated(res.filter(Boolean).length, res.length);
@@ -171,27 +256,20 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated }: ExPr
         rows={[1, 2, 3, 4, 5, 6]}
         placements={items.map((it) => ({ cell: it.cell, shape: it.shape }))}
       />
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
-          const v = answers[i] ?? "";
+          const answer = answers[i] ?? { col: "", row: "" };
           const wrong = validated && !results[i];
           return (
-            <div key={it.shape.id} className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded bg-slate-100">
-                <svg viewBox="0 0 72 72" className="h-6 w-6" dangerouslySetInnerHTML={{ __html: it.shape.svg }} />
-              </span>
-              <span className="text-sm">(</span>
-              {wrong ? (
-                <div className={`w-20 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-                  <span className="text-[10px] text-[var(--color-text-secondary)]">{v || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600">{formatCell(it.cell)}</span>
-                </div>
-              ) : (
-                <input type="text" inputMode="text" value={v} disabled={validated}
-                  onChange={(e) => setAnswers((p) => p.map((a, j) => j === i ? e.target.value : a))}
-                  className={`w-20 px-0 pb-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
-              )}
-              <span className="text-sm">)</span>
+            <div key={it.shape.id} className="flex items-center gap-3">
+              <ShapeGlyph shape={it.shape} className="h-9 w-9 shrink-0" />
+              <GridCoordFields
+                answer={answer}
+                correct={it.cell}
+                validated={validated}
+                wrong={wrong}
+                onChange={(next) => setAnswers((p) => p.map((a, j) => (j === i ? next : a)))}
+              />
             </div>
           );
         })}
@@ -268,7 +346,7 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated }: ExP
                   ok === false ? "border-amber-400" : "border-[var(--color-border-default)]"
                 }`}
               >
-                <svg viewBox="0 0 72 72" className="h-6 w-6 shrink-0" dangerouslySetInnerHTML={{ __html: it.shape.svg }} />
+                <ShapeGlyph shape={it.shape} className="h-6 w-6 shrink-0" />
                 <span>({formatCell(it.cell)})</span>
               </button>
             );

@@ -346,42 +346,52 @@ export const GRID_SHAPES: ShapeIcon[] = [
   {
     id: "heart",
     label: "cœur",
-    svg: `<path d="M20 32 C20 22 28 16 36 22 C44 16 52 22 52 32 C52 44 36 54 36 54 C36 54 20 44 20 32Z" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<path d="M20 32 C20 22 28 16 36 22 C44 16 52 22 52 32 C52 44 36 54 36 54 C36 54 20 44 20 32Z" fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>`,
   },
   {
     id: "star",
     label: "étoile",
-    svg: `<polygon points="36,14 42,28 58,28 46,38 50,54 36,44 22,54 26,38 14,28 30,28" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,14 42,28 58,28 46,38 50,54 36,44 22,54 26,38 14,28 30,28" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>`,
   },
   {
     id: "circle",
     label: "cercle",
-    svg: `<circle cx="36" cy="36" r="16" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<circle cx="36" cy="36" r="16" fill="#60a5fa" stroke="#2563eb" stroke-width="1.5"/>`,
   },
   {
     id: "triangle",
     label: "triangle",
-    svg: `<polygon points="36,14 54,54 18,54" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,14 54,54 18,54" fill="#34d399" stroke="#059669" stroke-width="1.5"/>`,
   },
   {
     id: "square",
     label: "carré",
-    svg: `<rect x="18" y="18" width="36" height="36" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<rect x="18" y="18" width="36" height="36" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5"/>`,
   },
   {
     id: "diamond",
     label: "losange",
-    svg: `<polygon points="36,12 56,36 36,60 16,36" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,12 56,36 36,60 16,36" fill="#fb923c" stroke="#ea580c" stroke-width="1.5"/>`,
   },
   {
     id: "arrow",
     label: "flèche",
-    svg: `<polygon points="36,12 52,40 44,40 44,56 28,56 28,40 20,40" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<polygon points="36,12 52,40 44,40 44,56 28,56 28,40 20,40" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>`,
   },
   {
     id: "cross",
     label: "croix",
-    svg: `<path d="M30 18 H42 V30 H54 V42 H42 V54 H30 V42 H18 V30 H30 Z" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>`,
+    svg: `<path d="M30 18 H42 V30 H54 V42 H42 V54 H30 V42 H18 V30 H30 Z" fill="#f87171" stroke="#dc2626" stroke-width="1.5"/>`,
+  },
+  {
+    id: "pentagon",
+    label: "pentagone",
+    svg: `<polygon points="36,12 54,30 46,56 26,56 18,30" fill="#2dd4bf" stroke="#0d9488" stroke-width="1.5"/>`,
+  },
+  {
+    id: "hexagon",
+    label: "hexagone",
+    svg: `<polygon points="36,10 54,22 54,46 36,58 18,46 18,22" fill="#c084fc" stroke="#9333ea" stroke-width="1.5"/>`,
   },
 ];
 
