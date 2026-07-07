@@ -21,6 +21,7 @@ import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placeme
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
 import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
+import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce-instructions-moyen";
 import { buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
@@ -404,105 +405,6 @@ const CE_MOYEN_EMAILS: EmailSeriesItem[] = [
   },
 ];
 
-const CE_MOYEN_INSTRUCTIONS: InstructionSeriesItem[] = [
-  [
-    {
-      title: "Utiliser le lave-linge partagé",
-      image: "",
-      imageLabel: "Lave-linge",
-      body: "Avant de lancer une machine, vérifiez qu'elle est vide et propre. Mettez votre linge, ajoutez la lessive dans le bac de gauche, puis choisissez le programme à 30 degrés pour les vêtements de couleur. Quand la machine est finie, sortez vite votre linge pour laisser la place aux autres et notez votre nom sur le tableau pour réserver le créneau suivant. — Fatou",
-      questions: [
-        { prompt: "Où faut-il mettre la lessive ?", choices: [{ label: "Dans le bac de gauche" }, { label: "Directement sur le linge" }, { label: "Dans une poche" }], correct: 0 },
-        { prompt: "Quel programme choisir pour les vêtements de couleur ?", choices: [{ label: "30 degrés" }, { label: "60 degrés" }, { label: "90 degrés" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Recevoir une livraison",
-      image: "",
-      imageLabel: "Livraison",
-      body: "Quand le livreur arrive, vérifiez d'abord que le nom écrit sur le colis est bien le vôtre. Si c'est possible, ouvrez le paquet devant lui pour contrôler que rien n'est cassé. Signez seulement après avoir vérifié, puis gardez le ticket, au cas où vous devriez faire une réclamation.",
-      questions: [
-        { prompt: "Que faut-il vérifier en premier ?", choices: [{ label: "Le nom sur le colis" }, { label: "Le prix du produit" }, { label: "La couleur de la boîte" }], correct: 0 },
-        { prompt: "Quand faut-il signer ?", choices: [{ label: "Avant d'ouvrir le colis" }, { label: "Après avoir vérifié le contenu" }, { label: "Le lendemain" }], correct: 1 },
-      ],
-    },
-    {
-      title: "Préparer une salle de réunion",
-      image: "",
-      imageLabel: "Réunion",
-      body: "Arrivez un quart d'heure avant le début pour installer les chaises en cercle. Vérifiez que le projecteur fonctionne et posez une bouteille d'eau devant chaque place. Si des invités viennent de l'extérieur, prévenez l'accueil, afin qu'on puisse leur ouvrir la porte à l'heure.",
-      questions: [
-        { prompt: "Comment faut-il installer les chaises ?", choices: [{ label: "En cercle" }, { label: "En une seule ligne" }, { label: "Contre le mur" }], correct: 0 },
-        { prompt: "Que faut-il faire si des invités viennent de l'extérieur ?", choices: [{ label: "Fermer la porte à clé" }, { label: "Prévenir l'accueil" }, { label: "Ne rien faire" }], correct: 1 },
-      ],
-    },
-  ],
-  [
-    {
-      title: "S'inscrire à un cours de sport",
-      image: "",
-      imageLabel: "Inscription",
-      body: "Pour vous inscrire, choisissez d'abord un cours qui correspond à votre niveau. Remplissez la fiche avec votre nom et votre numéro de téléphone, puis payez la première séance à l'accueil. Vous pouvez essayer un cours gratuitement, mais après, l'inscription pour l'année est obligatoire.",
-      questions: [
-        { prompt: "Que faut-il choisir en premier ?", choices: [{ label: "Un cours adapté à son niveau" }, { label: "Une couleur de tenue" }, { label: "Un autre club" }], correct: 0 },
-        { prompt: "Que peut-on faire avant de s'inscrire pour l'année ?", choices: [{ label: "Essayer un cours gratuitement" }, { label: "Partir sans payer" }, { label: "Changer de professeur" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Préparer un rendez-vous médical",
-      image: "",
-      imageLabel: "Rendez-vous",
-      body: "Notez la date et l'heure du rendez-vous sur votre calendrier. Le jour même, arrivez dix minutes avant et apportez votre carte d'assurance ainsi que la liste des médicaments que vous prenez. Si vous ne pouvez pas venir, appelez au moins un jour avant, sinon la consultation vous sera peut-être facturée.",
-      questions: [
-        { prompt: "Que faut-il apporter au rendez-vous ?", choices: [{ label: "Sa carte d'assurance" }, { label: "Un cadeau" }, { label: "Un livre" }], correct: 0 },
-        { prompt: "Que faut-il faire si on ne peut pas venir ?", choices: [{ label: "Appeler au moins un jour avant" }, { label: "Ne rien dire" }, { label: "Venir le lendemain" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Trier ses déchets",
-      image: "",
-      imageLabel: "Tri",
-      body: "Séparez le papier, le verre et les déchets de cuisine dans trois poubelles différentes. Rincez les bouteilles avant de les jeter et enlevez les bouchons. Les objets trop grands, comme les meubles, ne vont pas dans la poubelle : il faut les apporter à la déchèterie.",
-      questions: [
-        { prompt: "Que faut-il faire avant de jeter les bouteilles ?", choices: [{ label: "Les rincer" }, { label: "Les casser" }, { label: "Les remplir" }], correct: 0 },
-        { prompt: "Où faut-il apporter les meubles ?", choices: [{ label: "À la déchèterie" }, { label: "Dans la poubelle grise" }, { label: "Dans la rue" }], correct: 0 },
-      ],
-    },
-  ],
-  [
-    {
-      title: "Utiliser un distributeur de billets",
-      image: "",
-      imageLabel: "Distributeur",
-      body: "Introduisez votre carte dans la fente, puis tapez votre code secret sans le montrer à personne. Choisissez le montant que vous voulez retirer et attendez que la machine rende la carte avant de prendre l'argent. N'oubliez pas de reprendre le ticket si vous en avez besoin pour vos comptes.",
-      questions: [
-        { prompt: "Que faut-il faire avec le code secret ?", choices: [{ label: "Le taper sans le montrer" }, { label: "Le dire à voix haute" }, { label: "L'écrire sur la carte" }], correct: 0 },
-        { prompt: "Quand faut-il prendre l'argent ?", choices: [{ label: "Après avoir repris la carte" }, { label: "Avant de taper le code" }, { label: "Pendant le retrait de la carte" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Prendre soin d'une plante d'intérieur",
-      image: "",
-      imageLabel: "Plante",
-      body: "Placez la plante près d'une fenêtre, mais évitez le soleil direct qui brûle les feuilles. Arrosez-la quand la terre est sèche, environ une fois par semaine, avec de l'eau à température ambiante. Enlevez les feuilles mortes de temps en temps pour aider la plante à rester en bonne santé.",
-      questions: [
-        { prompt: "Pourquoi éviter le soleil direct ?", choices: [{ label: "Parce qu'il brûle les feuilles" }, { label: "Parce qu'il fait pousser trop vite" }, { label: "Parce qu'il attire les insectes" }], correct: 0 },
-        { prompt: "Quand faut-il arroser la plante ?", choices: [{ label: "Quand la terre est sèche" }, { label: "Tous les jours" }, { label: "Jamais" }], correct: 0 },
-      ],
-    },
-    {
-      title: "Envoyer un colis à la poste",
-      image: "",
-      imageLabel: "Colis",
-      body: "Emballez bien vos objets et fermez la boîte avec du ruban adhésif solide. Écrivez lisiblement l'adresse complète du destinataire et la vôtre au dos. Au guichet, l'employé pèsera le colis pour calculer le prix ; vous pouvez payer un envoi rapide si le colis est urgent.",
-      questions: [
-        { prompt: "Où faut-il écrire son adresse ?", choices: [{ label: "Au dos du colis" }, { label: "Sur le ruban adhésif" }, { label: "À l'intérieur" }], correct: 0 },
-        { prompt: "Pourquoi l'employé pèse-t-il le colis ?", choices: [{ label: "Pour calculer le prix" }, { label: "Pour vérifier l'adresse" }, { label: "Pour l'ouvrir" }], correct: 0 },
-      ],
-    },
-  ],
-];
-
 // --------------------------------------------------------------------------
 // Contenu B1 authoré pour le niveau AVANCÉ (CE-3) : textes plus longs et plus
 // abstraits (administratif, opinions, hypothèses), avec connecteurs de niveau
@@ -805,12 +707,13 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
   const orientationPool = level === "base" ? null : level === "moyen" ? ORIENTATION_MOYEN : ORIENTATION_AVANCE;
   const orientationTextBase = level === "base" ? pickFromPool(CE_ORIENTATION_BASE, `${level}-${stamp}-orientation`) : null;
   const orientation = orientationPool ? pickFromPool(orientationPool, `${level}-${stamp}-orientation`) : null;
-  const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "moyen" ? CE_MOYEN_INSTRUCTIONS : CE_AVANCE_INSTRUCTIONS;
+  const instructionPool = level === "base" ? INSTRUCTION_SERIES : level === "avance" ? CE_AVANCE_INSTRUCTIONS : null;
   const emailBase = level === "base" ? pickFromPool(CE_MESSAGES_BASE, `${level}-${stamp}-email`) : null;
   const emailLegacy = level !== "base"
     ? pickFromPool(level === "moyen" ? CE_MOYEN_EMAILS : CE_AVANCE_EMAILS, `${level}-${stamp}-email`)
     : null;
-  const instructions = pickFromPool(instructionPool, `${level}-${stamp}-instructions`);
+  const instructionMoyen = level === "moyen" ? pickFromPool(CE_INSTRUCTIONS_MOYEN, `${level}-${stamp}-instructions`) : null;
+  const instructions = instructionPool ? pickFromPool(instructionPool, `${level}-${stamp}-instructions`) : null;
   const articleMoyen = level === "moyen" ? pickFromPool(CE_ARTICLES_MOYEN, `${level}-${stamp}-article`) : null;
   const articleLegacy = level !== "moyen"
     ? pickFromPool(level === "base" ? ARTICLE_SERIES : CE_AVANCE_ARTICLES, `${level}-${stamp}-article`)
@@ -866,11 +769,22 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
       title: "Lire des instructions",
       points: 6,
       layout: "instructions",
-      cards: instructions.map((card) => ({
-        ...card,
-        body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
-        questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
-      })),
+      cards: instructionMoyen
+        ? instructionMoyen.cards.map((card, cardIndex, cards) => ({
+            title: card.title,
+            body: card.body,
+            image: "",
+            imageLabel: card.imageLabel,
+            questions:
+              cardIndex === cards.length - 1
+                ? buildCeMessageQuestions(instructionMoyen.pool, 6, `${level}-${stamp}-instructions`)
+                : [],
+          }))
+        : instructions!.map((card) => ({
+            ...card,
+            body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
+            questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+          })),
     },
     {
       id: "information",
