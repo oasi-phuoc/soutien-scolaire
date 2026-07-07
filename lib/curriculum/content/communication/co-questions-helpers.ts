@@ -1,6 +1,6 @@
 import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, resolveCeCoWordImage } from "../../word-image-resolver";
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
-import { pickCeCoQuestionFormat } from "./ce-co-question-formats";
+import { pickCoQuestionFormat } from "./ce-co-question-formats";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -338,7 +338,7 @@ export function buildCoPartQuestions(
 
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
-    const format = pickCeCoQuestionFormat(index, seed, q.id, imageable);
+    const format = pickCoQuestionFormat(index, seed, q.id, imageable);
     return multiToTask(q, format);
   });
 }
