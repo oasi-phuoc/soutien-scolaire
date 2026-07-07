@@ -1,5 +1,6 @@
 import {
   ALGEBRA_LEGACY_ID_MAP,
+  GEOMETRY_LEGACY_ID_MAP,
   MATH_MODULES,
   prerequisitesMet as _prerequisitesMet,
   getMathModule,
@@ -52,6 +53,14 @@ function mapAlgebraModuleId(id: string): string {
   return id in ALGEBRA_LEGACY_ID_MAP ? ALGEBRA_LEGACY_ID_MAP[id]! : id;
 }
 
+function mapGeometryModuleId(id: string): string {
+  return id in GEOMETRY_LEGACY_ID_MAP ? GEOMETRY_LEGACY_ID_MAP[id]! : id;
+}
+
+function mapLegacyModuleId(id: string): string {
+  return mapGeometryModuleId(mapAlgebraModuleId(id));
+}
+
 function remapNumericRecordByAlgebraId(
   rec: Record<string, number> | undefined,
   merge: (a: number, b: number) => number,
@@ -59,7 +68,7 @@ function remapNumericRecordByAlgebraId(
   if (!rec) return {};
   const out: Record<string, number> = {};
   for (const [k, v] of Object.entries(rec)) {
-    const nk = mapAlgebraModuleId(k);
+    const nk = mapLegacyModuleId(k);
     out[nk] = out[nk] === undefined ? v : merge(out[nk]!, v);
   }
   return out;
@@ -71,7 +80,7 @@ function remapIsoRecordByAlgebraId(
   if (!rec) return undefined;
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(rec)) {
-    const nk = mapAlgebraModuleId(k);
+    const nk = mapLegacyModuleId(k);
     const prev = out[nk];
     if (!prev || Date.parse(v) > Date.parse(prev)) out[nk] = v;
   }
@@ -82,15 +91,17 @@ function remapIsoRecordByAlgebraId(
 export function migrateProgressV1ToV2(p: StoredProgressV1): StoredProgressV1 {
   const math = defaultMathRecord();
   const algebraId = /^A\d+$/;
+  const geometryId = /^G\d+$/;
   for (const m of MATH_MODULES) {
     const vid = m.id;
-    if (!algebraId.test(vid)) {
+    if (!algebraId.test(vid) && !geometryId.test(vid)) {
       const ex = p.math[vid];
       if (ex) math[vid] = { ...ex, subTotal: m.submodules.length };
       continue;
     }
     let merged: MathModuleProgress = math[vid]!;
-    for (const [oldId, newId] of Object.entries(ALGEBRA_LEGACY_ID_MAP)) {
+    const legacyMaps = algebraId.test(vid) ? ALGEBRA_LEGACY_ID_MAP : GEOMETRY_LEGACY_ID_MAP;
+    for (const [oldId, newId] of Object.entries(legacyMaps)) {
       if (newId !== vid) continue;
       const ex = p.math[oldId];
       if (ex) merged = pickRicherProgress(merged, { ...ex, subTotal: m.submodules.length });
@@ -101,7 +112,7 @@ export function migrateProgressV1ToV2(p: StoredProgressV1): StoredProgressV1 {
   const evaluationSnoozeUntil = remapIsoRecordByAlgebraId(p.evaluationSnoozeUntil);
   const lastCompleted =
     p.lastCompletedMathModuleId !== undefined
-      ? mapAlgebraModuleId(p.lastCompletedMathModuleId)
+      ? mapLegacyModuleId(p.lastCompletedMathModuleId)
       : undefined;
   return recomputeLocks({
     ...p,
