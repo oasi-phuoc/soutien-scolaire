@@ -168,15 +168,15 @@ export function CommunicationResultsExercise({
 
 export const EXPRESSION_TAB_HREF = "/francais?tab=communication";
 
-export function CommunicationFinishButton({ onClick }: { onClick: () => void }) {
+export function CommunicationFinishButton({ onClick, label = "Terminer" }: { onClick: () => void; label?: string }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="mt-6 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+      className="mt-4 w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
       style={{ background: ACCENT }}
     >
-      Terminer
+      {label}
     </button>
   );
 }

@@ -28,6 +28,8 @@ import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-ques
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 
 const TOTAL_SECONDS = 45 * 60;
+const CE_BODY_TEXT = "text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
+const CE_BODY_TEXT_PRE = "whitespace-pre-line text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
 
 type CELevel = "base" | "moyen" | "avance";
 type Choice = { label: string; image?: string };
@@ -975,7 +977,7 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
             <p className="text-lg font-bold" style={{ color: doc.tone }}>Document {index + 1}</p>
             <p className="font-semibold text-[var(--color-text-primary)]">{doc.title}</p>
             <p className="text-sm font-medium text-[var(--color-text-secondary)]">{doc.subtitle}</p>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{doc.body}</p>
+            <p className={`mt-2 ${CE_BODY_TEXT}`}>{doc.body}</p>
           </div>
         ))}
       </div>
@@ -1064,7 +1066,7 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
               priority
             />
           </div>
-          <p className="sr-only whitespace-pre-line">{part.body}</p>
+          <p className={`sr-only ${CE_BODY_TEXT_PRE}`}>{part.body}</p>
         </div>
       ) : (
         <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
@@ -1074,7 +1076,7 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
               {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
             </div>
           )}
-          <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">{part.body}</div>
+          <div className={`mt-3 ${CE_BODY_TEXT_PRE}`}>{part.body}</div>
         </div>
       )}
       <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
@@ -1090,7 +1092,7 @@ function InstructionsPart({ part, answers, setAnswer, correction }: { part: Extr
           <div className="flex items-start gap-4">
             <div className="flex-1">
               <h3 className="text-lg font-bold" style={{ color: ACCENT }}>{card.title}</h3>
-              <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-primary)]">{card.body}</p>
+              <p className={`mt-2 ${CE_BODY_TEXT_PRE}`}>{card.body}</p>
             </div>
             <div className="w-24 shrink-0">
               <ImagePlaceholder label={card.imageLabel} path={card.image} />
@@ -1128,7 +1130,7 @@ function ArticlePart({ part, answers, setAnswer, correction }: { part: Extract<C
               )}
               <div>
                 <p className="font-bold" style={{ color: INVERSE }}>✱ {section.heading}</p>
-                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{section.body}</p>
+                <p className={CE_BODY_TEXT}>{section.body}</p>
               </div>
             </div>
           ))}
@@ -1179,12 +1181,29 @@ function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index
   );
 }
 
-function ResultsPage({ parts, answers, opened, setOpened }: { parts: CEPart[]; answers: CEAnswers; opened: string | null; setOpened: (id: string | null) => void }) {
+function ResultsPage({
+  parts,
+  answers,
+  opened,
+  setOpened,
+  onContinue,
+  continueLabel,
+}: {
+  parts: CEPart[];
+  answers: CEAnswers;
+  opened: string | null;
+  setOpened: (id: string | null) => void;
+  onContinue?: () => void;
+  continueLabel?: string;
+}) {
   const scores = parts.map((part) => scorePart(part, answers));
   const total = scores.reduce((sum, value) => sum + value, 0);
   return (
     <div className="space-y-6">
       <CommunicationResultsSummary totalPoints={total} />
+      {onContinue && (
+        <CommunicationFinishButton onClick={onContinue} label={continueLabel ?? "Continuer"} />
+      )}
       <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
       <div className="space-y-3">
         {parts.map((part, index) => {
@@ -1365,9 +1384,15 @@ export function ComprehensionEcritRunner({
       {phase === "results" && (
         <div className="space-y-6">
           <CEHeader level={level} title="Résultats" placement={mode === "placement"} />
-          <ResultsPage parts={parts} answers={answers} opened={openedResult} setOpened={setOpenedResult} />
-          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Étape suivante" : "Terminer"} accent={runnerAccent} />
-          {mode !== "placement" && <CommunicationFinishButton onClick={next} />}
+          <ResultsPage
+            parts={parts}
+            answers={answers}
+            opened={openedResult}
+            setOpened={setOpenedResult}
+            onContinue={next}
+            continueLabel={mode === "placement" ? "Continuer" : "Terminer"}
+          />
+          <NavActionBar onNext={next} nextLabel={mode === "placement" ? "Continuer" : "Terminer"} accent={runnerAccent} />
         </div>
       )}
     </div>
