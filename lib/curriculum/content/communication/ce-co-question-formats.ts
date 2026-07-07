@@ -8,6 +8,15 @@ const CE_CORE_FORMATS: CeCoFormatType[] = ["fill", "image", "text", "text"];
 /** CO — 4 premières questions : QCM image, 2× QCM texte, saisie. */
 const CO_CORE_FORMATS: CeCoFormatType[] = ["image", "text", "text", "fill"];
 
+export const CE_CORE_SLOT_LABELS = CE_CORE_FORMATS.map((f) => formatLabel(f));
+export const CO_CORE_SLOT_LABELS = CO_CORE_FORMATS.map((f) => formatLabel(f));
+
+function formatLabel(fmt: CeCoFormatType): string {
+  if (fmt === "fill") return "saisie";
+  if (fmt === "image") return "QCM image";
+  return "QCM texte";
+}
+
 const ALL_FORMATS: CeCoFormatType[] = ["text", "image", "fill"];
 
 function hashSeed(seed: string): number {
