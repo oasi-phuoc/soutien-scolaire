@@ -464,31 +464,22 @@ export const POLYGON_HALF_TEMPLATES: LabeledPoint[][] = [
   ],
 ];
 
-/** Pools de points à placer sur le repère */
+/** Pools de 3 points à placer sur le repère (−10…+10), 2 abscisses distinctes */
 export const CARTESIAN_PLACE_POOLS: LabeledPoint[][] = [
   [
-    { label: "A", x: 5, y: -7 },
-    { label: "B", x: -3, y: 3 },
-    { label: "C", x: -6, y: -3 },
-    { label: "D", x: -5, y: 1 },
-    { label: "E", x: -1, y: 2 },
-    { label: "F", x: -2, y: -2 },
+    { label: "K", x: 3, y: 5 },
+    { label: "L", x: 3, y: -2 },
+    { label: "M", x: -4, y: 1 },
   ],
   [
-    { label: "K", x: -1, y: 1.5 },
-    { label: "L", x: 1.5, y: -3 },
-    { label: "M", x: 0, y: 4 },
-    { label: "N", x: -4, y: 2.5 },
-    { label: "O", x: 3, y: -4 },
-    { label: "P", x: 3, y: -2 },
+    { label: "A", x: -6, y: 4 },
+    { label: "B", x: -6, y: -3 },
+    { label: "C", x: 2, y: 7 },
   ],
   [
-    { label: "A", x: -5, y: -1 },
-    { label: "B", x: 4, y: 6 },
-    { label: "C", x: 2, y: -6 },
-    { label: "D", x: 7, y: 3 },
-    { label: "E", x: 0, y: 5 },
-    { label: "H", x: 5, y: 0 },
+    { label: "P", x: 5, y: -8 },
+    { label: "Q", x: 5, y: 2 },
+    { label: "R", x: -2, y: -5 },
   ],
 ];
 

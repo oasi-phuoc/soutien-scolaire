@@ -19,6 +19,9 @@ const MATH_TEXT_INPUT_BASE =
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const COORD_CELL_CLS = `h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
+const PLACE_CELL_FILL = "color-mix(in srgb, var(--color-accent-alg) 22%, white)";
+const PLACE_POINT_FILL = "var(--color-accent-alg)";
+const PLACE_CORRECTION_FILL = "#d97706";
 
 type ExProps = {
   exNum: number;
@@ -109,6 +112,8 @@ function CartesianPlane({
   polygon,
   points,
   placedPoints,
+  wrongPlacements,
+  correctionPoints,
   onClick,
   gridStep = 1,
   labelStep = 1,
@@ -122,6 +127,8 @@ function CartesianPlane({
   polygon?: LabeledPoint[];
   points?: LabeledPoint[];
   placedPoints?: LabeledPoint[];
+  wrongPlacements?: LabeledPoint[];
+  correctionPoints?: LabeledPoint[];
   onClick?: (x: number, y: number) => void;
   gridStep?: number;
   labelStep?: number;
@@ -207,8 +214,28 @@ function CartesianPlane({
         const [px, py] = toSvg(p.x, p.y, cx, cy, unit);
         return (
           <g key={`pl-${p.label}`}>
-            <circle cx={px} cy={py} r="4.5" fill="#dc2626" stroke="#fff" strokeWidth="1.2" />
-            <text x={px + 6} y={py + 3} fontSize="9" fontWeight="bold" fill="#dc2626">{p.label}</text>
+            <circle cx={px} cy={py} r="4.5" fill={PLACE_POINT_FILL} stroke="#fff" strokeWidth="1.2" />
+            <text x={px + 6} y={py + 3} fontSize="9" fontWeight="bold" fill={PLACE_POINT_FILL}>{p.label}</text>
+          </g>
+        );
+      })}
+
+      {(wrongPlacements ?? []).map((p) => {
+        const [px, py] = toSvg(p.x, p.y, cx, cy, unit);
+        return (
+          <g key={`wr-${p.label}`} pointerEvents="none">
+            <circle cx={px} cy={py} r="4.5" fill={PLACE_POINT_FILL} stroke="#fff" strokeWidth="1.2" opacity="0.35" />
+            <text x={px} y={py + 5} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#dc2626">×</text>
+          </g>
+        );
+      })}
+
+      {(correctionPoints ?? []).map((p) => {
+        const [px, py] = toSvg(p.x, p.y, cx, cy, unit);
+        return (
+          <g key={`corr-${p.label}`} pointerEvents="none">
+            <circle cx={px} cy={py} r="4.5" fill={PLACE_CORRECTION_FILL} stroke="#fff" strokeWidth="1.2" />
+            <text x={px + 6} y={py + 3} fontSize="9" fontWeight="bold" fill={PLACE_CORRECTION_FILL}>{p.label}</text>
           </g>
         );
       })}
@@ -630,10 +657,10 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
 
-  const xMin = Math.min(-10, ...targets.map((p) => p.x)) - 1;
-  const xMax = Math.max(10, ...targets.map((p) => p.x)) + 1;
-  const yMin = Math.min(-10, ...targets.map((p) => p.y)) - 1;
-  const yMax = Math.max(10, ...targets.map((p) => p.y)) + 1;
+  const xMin = -10;
+  const xMax = 10;
+  const yMin = -10;
+  const yMax = 10;
 
   const onMapClick = (gx: number, gy: number) => {
     if (validated || !selected) return;
@@ -662,32 +689,70 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
   useValidateTrigger(validateCommand, doValidate);
 
   const placed = targets
-    .filter((t) => placements[t.label])
+    .filter((t, i) => placements[t.label] && (!validated || results[i]))
     .map((t) => ({ label: t.label, x: placements[t.label]!.x, y: placements[t.label]!.y }));
+
+  const wrongPlacements = validated
+    ? targets
+        .filter((t, i) => !results[i] && placements[t.label])
+        .map((t) => ({ label: t.label, x: placements[t.label]!.x, y: placements[t.label]!.y }))
+    : [];
+
+  const correctionPoints = validated
+    ? targets
+        .filter((t, i) => !results[i])
+        .map((t) => ({ label: t.label, x: t.x, y: t.y }))
+    : [];
 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Graduez les axes de 1 en 1 et placez les points sur le plan." />
-      <CartesianPlane xMin={xMin} xMax={xMax} yMin={yMin} yMax={yMax} placedPoints={placed} onClick={onMapClick} />
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-2">
         {targets.map((pt, i) => {
           const isSel = selected === pt.label;
           const ok = validated ? results[i] : null;
+          const placedOnGrid = placements[pt.label] !== null;
+          const onAccent = placedOnGrid && !isSel && ok !== false;
           return (
-            <button key={pt.label} type="button" disabled={validated}
+            <button
+              key={pt.label}
+              type="button"
+              disabled={validated}
               onClick={() => setSelected(pt.label)}
-              className={`mr-2 rounded-lg border px-2 py-1 text-xs ${
-                isSel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" :
-                ok === false ? "border-amber-400" : "border-[var(--color-border-default)]"
+              className={`flex h-9 items-center gap-2 rounded-lg border px-2 text-sm font-mono transition-colors ${
+                isSel
+                  ? `border-[var(--color-accent-alg)] ${PLACE_CELL_FILL}`
+                  : ok === false
+                    ? "border-amber-400 bg-white"
+                    : placedOnGrid
+                      ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]"
+                      : "border-[var(--color-border-default)] bg-white"
               }`}
             >
-              {pt.label} est en {formatXY(pt.x, pt.y)}
+              <span className={`w-5 shrink-0 font-bold ${onAccent ? "text-white" : "text-[var(--color-accent-alg)]"}`}>
+                {pt.label}
+              </span>
+              <span className={onAccent ? "text-white" : "text-[var(--color-text-primary)]"}>
+                {formatXY(pt.x, pt.y)}
+              </span>
             </button>
           );
         })}
       </div>
+      <CartesianPlane
+        xMin={xMin}
+        xMax={xMax}
+        yMin={yMin}
+        yMax={yMax}
+        unit={12}
+        labelStep={2}
+        placedPoints={placed}
+        wrongPlacements={wrongPlacements}
+        correctionPoints={correctionPoints}
+        onClick={onMapClick}
+      />
       <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur un point, puis sur le repère.</p>
     </div>
   );
