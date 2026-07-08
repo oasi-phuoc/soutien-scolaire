@@ -39,8 +39,14 @@ export type ClassStudentSuiviRow = {
   nom: string | null;
   classe: string | null;
   progress_updated_at: string | null;
+  math_done: number;
+  math_total: number;
   math_pct: number;
+  french_done: number;
+  french_total: number;
   french_pct: number;
+  lecture_done: number;
+  lecture_total: number;
   lecture_pct: number;
   placement_total: number | null;
   placement_zone: string | null;
@@ -193,7 +199,8 @@ export async function getClassStudentsSuiviAction(classLabel: string): Promise<{
     .select("id, prenom, nom, classe, progress_updated_at, progress_data, placement_combined_profile")
     .eq("role", "eleve")
     .eq("classe", classLabel)
-    .order("nom");
+    .order("nom")
+    .limit(20);
 
   if (pErr) return { ok: false, students: [], error: pErr.message };
 
@@ -248,6 +255,9 @@ export async function getClassStudentsSuiviAction(classLabel: string): Promise<{
 
   const students: ClassStudentSuiviRow[] = (profiles ?? []).map((p) => {
     const pd = p.progress_data as StoredProgressV1 | null;
+    const math = mathProgress(pd);
+    const french = frenchProgress(pd);
+    const lecture = lectureProgress(pd);
     const placement = p.placement_combined_profile as { total?: number; zone?: string } | null;
     const ot = onTimeMap.get(p.id as string);
     const onTimePct = ot && ot.withDue > 0 ? Math.round((ot.onTime / ot.withDue) * 100) : null;
@@ -258,9 +268,15 @@ export async function getClassStudentsSuiviAction(classLabel: string): Promise<{
       nom: (p.nom as string | null) ?? null,
       classe: (p.classe as string | null) ?? null,
       progress_updated_at: (p.progress_updated_at as string | null) ?? null,
-      math_pct: mathProgress(pd).pct,
-      french_pct: frenchProgress(pd).pct,
-      lecture_pct: lectureProgress(pd).pct,
+      math_done: math.done,
+      math_total: math.total,
+      math_pct: math.pct,
+      french_done: french.done,
+      french_total: french.total,
+      french_pct: french.pct,
+      lecture_done: lecture.done,
+      lecture_total: lecture.total,
+      lecture_pct: lecture.pct,
       placement_total: placement?.total ?? null,
       placement_zone: placement?.zone ?? null,
       pending_tasks: pendingMap.get(p.id as string) ?? 0,
