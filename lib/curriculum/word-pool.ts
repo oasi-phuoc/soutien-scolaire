@@ -555,9 +555,8 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 2;
       continue;
     }
-    if (three === "ien" && hasNasalEnding(word, i + 1, 2)) {
-      phonemes.add("/i/");
-      phonemes.add("/ɛ̃/");
+    if (three === "ien") {
+      phonemes.add("/jɛ̃/");
       i += 2;
       continue;
     }
@@ -724,6 +723,7 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
 }
 
 export function wordHasPhoneme(item: WordItem, phoneme: string): boolean {
+  if (item.phonemes?.length) return item.phonemes.includes(phoneme);
   return phonemesFromFrenchGraphemes(item.label).has(phoneme);
 }
 

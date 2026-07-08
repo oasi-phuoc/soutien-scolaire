@@ -2,8 +2,7 @@
 
 ## TODO
 
-- Quand une tache/devoir est affecte depuis le tableau de bord admin, envoyer aussi un message dans la messagerie des eleves concernes.
-- Faire un audit complet des phonemes dans la section Lecture : corriger tous les mots et leurs phonemes selon les graphemes de la lecture francaise (sons simples, sons complexes, lettres muettes, graphies comme ou/an-en/in-ain/on/au-eau/oi/ch/ph).
+_(Aucun TODO ouvert — voir historique git pour messagerie devoirs et audit phonèmes Lecture.)_
 
 ## Blocs de contenu math (`MathRichBlock`)
 

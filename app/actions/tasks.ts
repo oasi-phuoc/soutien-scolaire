@@ -99,7 +99,7 @@ export async function createTaskAction(
       student_id: assignment.student_id,
       sender_id: user.id,
       title: `Nouveau devoir : ${title.trim()}`,
-      body: details || "Un nouveau devoir vous a ete attribue.",
+      body: details || "Un nouveau devoir vous a été attribué.",
     })),
   );
   if (messageErr) return { ok: false, reason: messageErr.message };
