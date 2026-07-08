@@ -402,33 +402,41 @@ function LineQuestionBlock({
   lines: SegmentLine[];
 }) {
   if (q.type === "bool") {
+    const userAns = answer.trim();
+    const correctAns = q.answer ? "Oui" : "Non";
     return (
       <LineQuestionLayout
         n={i + 1}
         head={<span>{q.prompt}</span>}
         body={(
-          <div className="flex gap-4">
-            {(["Oui", "Non"] as const).map((opt) => {
-              const isCorrect = (opt === "Oui") === q.answer;
-              const checked = validated ? isCorrect : answer === opt;
-              const showWrong = validated && wrong && answer === opt && !isCorrect;
-              return (
-                <label
-                  key={opt}
-                  className={`flex items-center gap-2 ${showWrong ? "text-amber-600" : validated && isCorrect ? "font-semibold" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name={`lq-${i}`}
-                    disabled={validated}
-                    checked={checked}
-                    onChange={() => onChange(opt)}
-                  />
-                  {opt}
-                </label>
-              );
-            })}
-          </div>
+          validated && wrong ? (
+            <div className={`h-8 w-14 ${CLS_WRONG} flex flex-col items-center justify-center`}>
+              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
+              <span className="text-xs font-bold leading-none text-amber-600">{correctAns}</span>
+            </div>
+          ) : (
+            <div className="flex gap-4">
+              {(["Oui", "Non"] as const).map((opt) => {
+                const isCorrect = (opt === "Oui") === q.answer;
+                const checked = validated ? isCorrect : answer === opt;
+                return (
+                  <label
+                    key={opt}
+                    className={`flex items-center gap-2 ${validated && isCorrect ? "font-semibold" : ""}`}
+                  >
+                    <input
+                      type="radio"
+                      name={`lq-${i}`}
+                      disabled={validated}
+                      checked={checked}
+                      onChange={() => onChange(opt)}
+                    />
+                    {opt}
+                  </label>
+                );
+              })}
+            </div>
+          )
         )}
       />
     );
@@ -470,7 +478,7 @@ function LineQuestionBlock({
     );
   }
 
-  if (q.type === "parallel_to") {
+  if (q.type === "parallel_to" || q.type === "perpendicular_to") {
     const otherLines = lines.filter((l) => l.id !== q.lineId);
     const options = [
       ...otherLines.map((l) => ({ id: l.id, label: `la droite ${l.label}` })),
@@ -502,14 +510,14 @@ function LineQuestionBlock({
           <span>(</span>
           {wrong ? (
             <>
-              <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-                <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
-                <span className="text-xs font-bold text-amber-600">{q.answer[0]}</span>
+              <div className={`h-8 w-10 ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{q.answer[0]}</span>
               </div>
               <span>;</span>
-              <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-                <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
-                <span className="text-xs font-bold text-amber-600">{q.answer[1]}</span>
+              <div className={`h-8 w-10 ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{q.answer[1]}</span>
               </div>
             </>
           ) : (
@@ -524,7 +532,7 @@ function LineQuestionBlock({
                   parts[0] = e.target.value.replace(/[^0-9,\.\-]/g, "");
                   onChange(parts.join("|"));
                 }}
-                className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+                className={`h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
               />
               <span>;</span>
               <input
@@ -537,7 +545,7 @@ function LineQuestionBlock({
                   parts[1] = e.target.value.replace(/[^0-9,\.\-]/g, "");
                   onChange(parts.join("|"));
                 }}
-                className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+                className={`h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
               />
             </>
           )}
@@ -558,7 +566,7 @@ function checkLineAnswer(q: LineScenarioQuestion, raw: string): boolean {
     if (!g1 || !g2) return false;
     return [g1, g2].sort().join("|") === [...q.answer].sort().join("|");
   }
-  if (q.type === "parallel_to") {
+  if (q.type === "parallel_to" || q.type === "perpendicular_to") {
     return raw === q.answer;
   }
   const [xRaw, yRaw] = raw.split("|");
