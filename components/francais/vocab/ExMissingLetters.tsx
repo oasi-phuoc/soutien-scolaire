@@ -80,7 +80,7 @@ export function ExMissingLetters({
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Choisissez les lettres manquantes pour compléter le mot.
       </p>

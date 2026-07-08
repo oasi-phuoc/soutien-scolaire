@@ -1586,7 +1586,9 @@ export function OralProductionRunner({
                   key={num}
                   index={num - 1}
                   title={label}
-                  scoreLabel={`${points} pts`}
+                  correct={0}
+                  total={points}
+                  scoreLabel={`0 / ${points}`}
                   open={isOpen}
                   onToggle={() => setOpenReview(isOpen ? null : num)}
                 >

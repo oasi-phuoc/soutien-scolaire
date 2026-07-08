@@ -16,6 +16,12 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
@@ -2213,65 +2219,22 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         const totalPts = exIndices.reduce((s, i) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
         const resGrade = linearSwissGrade(totalCorrect, totalPts);
         const resPassed = resGrade >= PASSING_GRADE;
-        const resPct = totalPts > 0 ? Math.round((totalCorrect / totalPts) * 100) : 0;
-        const mention = resPct >= 96 ? "Excellent" : resPct >= 80 ? "Très bien" : resPct >= 60 ? "Bien" : resPct >= 50 ? "Passable" : "Insuffisant";
-        const medalEmoji = resPct >= 96 ? "🥇" : resPct >= 80 ? "🥈" : resPct >= 60 ? "🥉" : "—";
         return (
           <div>
-            {/* Score header — results only, 3-column layout */}
             {isResultsPage && (
-              <div className="mb-6">
-                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
-                <div className="grid grid-cols-3 gap-3">
-                  {/* Col 1: Points + bar — no frame */}
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                      {totalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{totalPts}</span>
-                    </p>
-                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                      <div className={`h-full rounded-full transition-all duration-700 ${resPassed ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`} style={{ width: `${resPct}%` }} />
-                    </div>
-                  </div>
-                  {/* Col 2: Note — no frame */}
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                  </div>
-                  {/* Col 3: Mention — framed */}
-                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
-                    isFreeNavModule
-                      ? resPassed ? "border-green-500" : "border-red-400"
-                      : "border-[var(--color-border-default)]"
-                  }`}>
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                    {isFreeNavModule ? (
-                      <p className={`mt-1 text-sm font-bold ${resPassed ? "text-green-600" : "text-red-500"}`}>
-                        {resPassed ? "Réussi" : "À améliorer"}
-                      </p>
-                    ) : (
-                      <>
-                        <p className="text-2xl">{medalEmoji}</p>
-                        <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{mention}</p>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
-                  Cliquez sur un exercice pour voir la correction.
-                </p>
+              <div className="mb-6 space-y-4">
+                <EvalResultsSummary
+                  accent="var(--color-accent-alg)"
+                  points={totalCorrect}
+                  maxPoints={totalPts}
+                  grade={resGrade}
+                  passed={resPassed}
+                />
+                <EvalResultsHint />
               </div>
             )}
 
-            {/* Section label */}
-            {isResultsPage && (
-              <div className="mb-3">
-                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
-              </div>
-            )}
-
-            {/* Exercise list — each item has row button + inline exercise panel */}
-            <div className={isResultsPage ? "space-y-2" : ""}>
+            <EvalExerciseResultList>
               {evalExSteps.map((evalStep, i) => {
                 const absIdx = evalStartIdx + 1 + i;
                 const isActiveEval = isInEvalExercises && stepIdx === absIdx;
@@ -2279,65 +2242,63 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                 const sc = evalScores[absIdx];
                 const c = sc?.c ?? 0;
                 const t = stepExpectedTotal(evalStep, sc);
-                const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
                 return (
                   <div key={`evalex-${evalKey}-${i}`}
-                    className={isInEvalExercises && !isActiveEval ? "hidden" : "space-y-2"}>
-                    {/* Row button — results only */}
+                    className={isInEvalExercises && !isActiveEval ? "hidden" : ""}>
                     {isResultsPage && (
-                      <button
-                        type="button"
-                        onClick={() => setSelectedResultIdx(isResultsSelected ? null : i)}
-                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                          isResultsSelected
-                            ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                        }`}
+                      <EvalExerciseResultRow
+                        index={i}
+                        correct={c}
+                        total={t}
+                        accent="var(--color-accent-alg)"
+                        isSelected={isResultsSelected}
+                        onToggle={() => setSelectedResultIdx(isResultsSelected ? null : i)}
                       >
-                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</span>
-                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">Exercice {i + 1}</span>
-                        <span className={`shrink-0 text-xs font-bold tabular-nums ${color}`}>{c}/{t}</span>
-                        <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isResultsSelected ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
-                      </button>
+                        <EvalRevealContext.Provider value={isResultsPage}>
+                          {renderEvalStep(
+                            evalStep,
+                            isResultsSelected ? (evalValidateCommands[i] ?? 0) : 0,
+                            () => {},
+                          )}
+                        </EvalRevealContext.Provider>
+                      </EvalExerciseResultRow>
                     )}
-                    {/* Exercise panel — active during eval, inline under row during results */}
-                    <div className={
-                      isInEvalExercises && isActiveEval ? "" :
-                      (isResultsSelected ? "px-1 py-3 [&_h2]:hidden" : "hidden")
-                    }>
-                      <EvalRevealContext.Provider value={isResultsPage}>
-                      {renderEvalStep(
-                        evalStep,
-                        isActiveEval ? (evalValidateCommands[i] ?? 0) : (isResultsSelected ? (evalValidateCommands[i] ?? 0) : 0),
-                        (ok, correct, total) => {
-                          const rc = correct ?? (ok ? 1 : 0);
-                          const rt = total ?? stepExpectedTotal(evalStep, undefined);
-                          setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
-                          const newValidated = { ...evalExValidated, [i]: true };
-                          setEvalExValidated(newValidated);
-                          if (isActiveEval) {
-                            const allDone = evalExerciseTotal > 0 &&
-                              Array.from({ length: evalExerciseTotal }, (_, j) => !!newValidated[j]).every(Boolean);
-                            if (allDone && resultsIdx >= 0) {
-                              setTimeout(() => goTo(resultsIdx), 500);
-                            } else {
-                              const nextJ = Array.from({ length: evalExerciseTotal }, (_, j) => j)
-                                .find(j => j > i && !newValidated[j])
-                                ?? Array.from({ length: evalExerciseTotal }, (_, j) => j)
-                                  .find(j => !newValidated[j]);
-                              if (nextJ !== undefined) {
-                                setTimeout(() => goTo(evalStartIdx + 1 + nextJ), 500);
+                    {!isResultsPage && (
+                      <div className={isInEvalExercises && isActiveEval ? "" : "hidden"}>
+                        <EvalRevealContext.Provider value={false}>
+                          {renderEvalStep(
+                            evalStep,
+                            isActiveEval ? (evalValidateCommands[i] ?? 0) : 0,
+                            (ok, correct, total) => {
+                              const rc = correct ?? (ok ? 1 : 0);
+                              const rt = total ?? stepExpectedTotal(evalStep, undefined);
+                              setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
+                              const newValidated = { ...evalExValidated, [i]: true };
+                              setEvalExValidated(newValidated);
+                              if (isActiveEval) {
+                                const allDone = evalExerciseTotal > 0 &&
+                                  Array.from({ length: evalExerciseTotal }, (_, j) => !!newValidated[j]).every(Boolean);
+                                if (allDone && resultsIdx >= 0) {
+                                  setTimeout(() => goTo(resultsIdx), 500);
+                                } else {
+                                  const nextJ = Array.from({ length: evalExerciseTotal }, (_, j) => j)
+                                    .find(j => j > i && !newValidated[j])
+                                    ?? Array.from({ length: evalExerciseTotal }, (_, j) => j)
+                                      .find(j => !newValidated[j]);
+                                  if (nextJ !== undefined) {
+                                    setTimeout(() => goTo(evalStartIdx + 1 + nextJ), 500);
+                                  }
+                                }
                               }
-                            }
-                          }
-                        }
-                      )}
-                      </EvalRevealContext.Provider>
-                    </div>
+                            },
+                          )}
+                        </EvalRevealContext.Provider>
+                      </div>
+                    )}
                   </div>
                 );
               })}
-            </div>
+            </EvalExerciseResultList>
             {isResultsPage && (
               <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
             )}

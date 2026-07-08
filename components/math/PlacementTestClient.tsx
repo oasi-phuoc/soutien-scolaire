@@ -2,6 +2,13 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { linearSwissGrade } from "@/lib/scoring";
+import {
+  EvalExerciseResultButton,
+  EvalExerciseResultDetail,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
 import { saveMathAttempt, loadFrenchSessions, loadMathHistory, loadTotalHistory } from "@/lib/placement/storage";
@@ -194,37 +201,30 @@ function PlacementProgressBar({
 
 // ── Results screen ────────────────────────────────────────────────────────────
 
-interface ResultsScreenProps {
+function ResultsScreen({
+  scores,
+  exercises,
+  accent,
+}: {
   scores: Array<{ points: number; maxPoints: number } | null>;
   exercises: ExerciseMeta[];
-}
-
-function ResultsScreen({ scores, exercises }: ResultsScreenProps) {
+  accent: string;
+}) {
   const totalPoints = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
   const maxPoints = exercises.reduce((s, e) => s + e.maxPoints, 0);
-  const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
+  const grade = linearSwissGrade(totalPoints, maxPoints);
+  const passed = grade >= 4;
 
   return (
-    <div className="space-y-6">
-      <div className="text-center space-y-1">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
-        <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-          {totalPoints} <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
-        </p>
-      </div>
-
-      {/* Score bar */}
-      <div className="h-3 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
-        <div
-          className="h-full rounded-full bg-[var(--color-correction)] transition-all duration-700"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Cliquez sur un exercice dans le détail des points pour afficher l&apos;énoncé, vos réponses et les corrections.
-      </p>
-
+    <div className="space-y-4">
+      <EvalResultsSummary
+        accent={accent}
+        points={totalPoints}
+        maxPoints={maxPoints}
+        grade={grade}
+        passed={passed}
+      />
+      <EvalResultsHint />
     </div>
   );
 }
@@ -678,6 +678,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
         <ResultsScreen
           scores={scores}
           exercises={EXERCISES}
+          accent={accent}
         />
       ) : (
       <>
@@ -749,53 +750,35 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       </>
       )}
 
-      {phase === "results" && (
-        <div className="mt-6 space-y-3">
-          <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
-        </div>
-      )}
-
-      {/* All exercises stay mounted so the results screen can reuse the original answers. */}
       <div className={phase === "results" ? "mt-2 space-y-2" : ""}>
       {EXERCISES.map((exercise, i) => {
         const Comp = exercise.component;
-        const sc = scores[i];
-        const pts = sc?.points ?? 0;
+        const pts = scores[i]?.points ?? 0;
         const max = exercise.maxPoints;
         const isSelected = i === selectedResultIdx;
         return (
-          <div key={exercise.id} className={phase === "results" ? "space-y-2" : (i !== displayExerciseIdx ? "hidden" : "")}>
+          <div
+            key={exercise.id}
+            className={phase === "results" ? "space-y-2" : i !== displayExerciseIdx ? "hidden" : ""}
+          >
             {phase === "results" && (
-              <button
-                type="button"
-                onClick={() => setSelectedResultIdx(i)}
-                className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                  isSelected
-                    ? "bg-[var(--color-bg-primary)]"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:opacity-90"
-                }`}
-                style={isSelected ? { borderColor: accent, background: `color-mix(in oklch, ${accent} 10%, white)` } : undefined}
-              >
-                <span className="w-5 text-xs font-bold" style={{ color: accent }}>{exercise.id}</span>
-                <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{exercise.label}</span>
-                <span className="text-xs font-bold tabular-nums text-[var(--color-text-primary)]">{pts} / {max}</span>
-              </button>
+              <EvalExerciseResultButton
+                index={i}
+                correct={pts}
+                total={max}
+                accent={accent}
+                isSelected={isSelected}
+                onToggle={() => setSelectedResultIdx(i)}
+              />
             )}
-            <div key="exercise-panel" className={phase === "results" ? (isSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden") : ""}>
-              {phase === "results" && (
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-base font-bold" style={{ color: accent }}>Exercice {exercise.id}</h2>
-                  <span className="text-xs text-[var(--color-text-secondary)]">{pts} / {max} pt{max > 1 ? "s" : ""}</span>
-                </div>
-              )}
+        <EvalExerciseResultDetail hidden={phase === "results" && !isSelected} hideTitle={phase === "results"}>
               <Comp
-                key="comp"
                 exerciseKey={exerciseKeys[i]!}
-                validated={phase === "results"}
-                onValidated={(pts, max) => handleValidated(i, pts, max)}
+                validated={phase === "results" || (validated[i] ?? false)}
+                onValidated={(p, m) => handleValidated(i, p, m)}
                 validateTrigger={validateTriggers[i] ?? 0}
               />
-            </div>
+            </EvalExerciseResultDetail>
           </div>
         );
       })}

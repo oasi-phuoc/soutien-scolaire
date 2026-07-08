@@ -16,6 +16,12 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
@@ -11785,74 +11791,36 @@ export function GenericModuleContent({
       {/* Eval score screen */}
       {showEvalScore && evalFinalGrade !== null && (
         <div className="space-y-4">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
-          {/* 3-column score summary */}
-          <div className="grid grid-cols-3 gap-3">
-            {/* Col 1: Points — no frame */}
-            <div className="flex flex-col items-center justify-center p-3 text-center">
-              <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-              <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                {evalEarnedPts}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalTotalPts_state}</span>
-              </p>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                <div className={`h-full rounded-full transition-all duration-700 ${evalFinalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
-                  style={{ width: `${evalTotalPts_state > 0 ? Math.round((evalEarnedPts / evalTotalPts_state) * 100) : 0}%` }} />
-              </div>
-            </div>
-            {/* Col 2: Note — no frame */}
-            <div className="flex flex-col items-center justify-center p-3 text-center">
-              <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-              <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-            </div>
-            {/* Col 3: Mention — framed */}
-            <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
-              evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "border-green-500" : "border-red-400"
-            }`}>
-              <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-              <p className={`mt-1 text-sm font-bold ${evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "text-green-600" : "text-red-500"}`}>
-                {evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "Réussi" : "À améliorer"}
-              </p>
-            </div>
-          </div>
-          <p className="text-xs text-center text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
-          {/* Exercise detail list */}
-          <ul className="space-y-2">
+          <EvalResultsSummary
+            accent="var(--color-accent-alg)"
+            points={evalEarnedPts}
+            maxPoints={evalTotalPts_state}
+            grade={evalFinalGrade}
+            passed={evalFinalGrade >= PASSING_GRADE}
+          />
+          <EvalResultsHint />
+          <EvalExerciseResultList>
             {evalRowData.map((row, i) => {
-              const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
               const isSelected = selectedResultIdx === i;
               return (
-                <li key={i}>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedResultIdx(isSelected ? null : i)}
-                    className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 min-h-[44px] text-left transition-colors ${
-                      isSelected
-                        ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                    }`}
-                  >
-                    <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                    <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{row.score}/{row.max}</span>
-                    <svg
-                      className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`}
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
-                    >
-                      <path d="M9 18l6-6-6-6" />
-                    </svg>
-                  </button>
-                  {isSelected && (
-                    <div className="px-1 py-3">
-                      <EvalRevealContext.Provider value={true}>
-                        {renderEvalReviewDetail(i) ?? (
-                          <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
-                        )}
-                      </EvalRevealContext.Provider>
-                    </div>
-                  )}
-                </li>
+                <EvalExerciseResultRow
+                  key={i}
+                  index={i}
+                  correct={row.score}
+                  total={row.max}
+                  accent="var(--color-accent-alg)"
+                  isSelected={isSelected}
+                  onToggle={() => setSelectedResultIdx(isSelected ? null : i)}
+                >
+                  <EvalRevealContext.Provider value={true}>
+                    {renderEvalReviewDetail(i) ?? (
+                      <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
+                    )}
+                  </EvalRevealContext.Provider>
+                </EvalExerciseResultRow>
               );
             })}
-          </ul>
+          </EvalExerciseResultList>
           <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
         </div>
       )}

@@ -2,6 +2,13 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  EvalExerciseResultButton,
+  EvalExerciseResultDetail,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
+import { linearSwissGrade } from "@/lib/scoring";
 import type { RevisionExerciseMeta } from "./RevisionCommon";
 
 const TIMER_SECONDS = 30 * 60;
@@ -79,26 +86,19 @@ function ResultsScreen({
 }) {
   const totalPoints = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
   const maxPoints = exercises.reduce((s, e) => s + e.maxPoints, 0);
-  const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
+  const grade = linearSwissGrade(totalPoints, maxPoints);
+  const passed = grade >= 4;
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-1 text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
-        <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-          {totalPoints}{" "}
-          <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
-        </p>
-      </div>
-      <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-        <div
-          className="h-full rounded-full bg-[var(--color-correction)] transition-all duration-700"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Cliquez sur un exercice pour afficher l&apos;énoncé et la correction.
-      </p>
+    <div className="space-y-4">
+      <EvalResultsSummary
+        accent="var(--color-accent-alg)"
+        points={totalPoints}
+        maxPoints={maxPoints}
+        grade={grade}
+        passed={passed}
+      />
+      <EvalResultsHint />
     </div>
   );
 }
@@ -328,64 +328,28 @@ export function RevisionTestClient({
         </>
       )}
 
-      {phase === "results" && (
-        <div className="mt-6 space-y-3">
-          <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points</h3>
-        </div>
-      )}
-
       <div className={phase === "results" ? "mt-2 space-y-2" : ""}>
         {exercises.map((exercise, i) => {
           const Comp = exercise.component;
-          const sc = scores[i];
-          const pts = sc?.points ?? 0;
+          const pts = scores[i]?.points ?? 0;
           const max = exercise.maxPoints;
           const isSelected = i === selectedResultIdx;
           return (
             <div
               key={exercise.id}
-              className={
-                phase === "results" ? "space-y-2" : i !== displayExerciseIdx ? "hidden" : ""
-              }
+              className={phase === "results" ? "space-y-2" : i !== displayExerciseIdx ? "hidden" : ""}
             >
               {phase === "results" && (
-                <button
-                  type="button"
-                  onClick={() => setSelectedResultIdx(i)}
-                  className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                    isSelected
-                      ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                  }`}
-                >
-                  <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">
-                    {exercise.id}
-                  </span>
-                  <span className="flex-1" />
-                  <span className="text-xs font-bold tabular-nums text-[var(--color-text-primary)]">
-                    {pts} / {max}
-                  </span>
-                </button>
+                <EvalExerciseResultButton
+                  index={i}
+                  correct={pts}
+                  total={max}
+                  accent="var(--color-accent-alg)"
+                  isSelected={isSelected}
+                  onToggle={() => setSelectedResultIdx(i)}
+                />
               )}
-              <div
-                className={
-                  phase === "results"
-                    ? isSelected
-                      ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4"
-                      : "hidden"
-                    : ""
-                }
-              >
-                {phase === "results" && (
-                  <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-base font-bold text-[var(--color-accent-alg)]">
-                      Exercice {exercise.id}
-                    </h2>
-                    <span className="text-xs text-[var(--color-text-secondary)]">
-                      {pts} / {max} pt{max > 1 ? "s" : ""}
-                    </span>
-                  </div>
-                )}
+              <EvalExerciseResultDetail hidden={phase === "results" && !isSelected} hideTitle={phase === "results"}>
                 <Comp
                   key={`${i}-${sessionKey}`}
                   exerciseKey={exerciseKeys[i]!}
@@ -393,7 +357,7 @@ export function RevisionTestClient({
                   onValidated={(p, m) => handleValidated(i, p, m)}
                   validateTrigger={validateTriggers[i] ?? 0}
                 />
-              </div>
+              </EvalExerciseResultDetail>
             </div>
           );
         })}

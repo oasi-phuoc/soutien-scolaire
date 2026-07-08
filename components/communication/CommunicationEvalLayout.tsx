@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import {
+  EvalExerciseResultRow,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -110,30 +114,26 @@ export function CommunicationResultsSummary({
   pendingTeacher?: boolean;
 }) {
   const note = pendingTeacher ? null : gradeFromEvalScore(totalPoints);
-  const mention = pendingTeacher ? "En attente" : mentionFromEvalGrade(note!);
+  const passed = note !== null && note >= 4;
 
   return (
-    <section className="text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.35em]" style={{ color: ACCENT }}>Résultats</p>
-      <p className="mt-3 text-4xl font-bold text-[var(--color-text-primary)]">
-        {pendingTeacher ? "—" : formatEvalPoints(totalPoints)} / {maxPoints}
-      </p>
-      {!pendingTeacher && note !== null && (
-        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-          Note {note.toFixed(1).replace(".", ",")} / 6
-        </p>
-      )}
-      <p className={`${pendingTeacher || note !== null ? "mt-1" : "mt-2"} text-sm font-bold`} style={{ color: ACCENT }}>
-        {mention}
-      </p>
-    </section>
+    <EvalResultsSummary
+      accent={ACCENT}
+      points={totalPoints}
+      maxPoints={maxPoints}
+      grade={note ?? 0}
+      passed={passed}
+      mentionOverride={pendingTeacher ? "En attente" : undefined}
+    />
   );
 }
 
 export function CommunicationResultsExercise({
   index,
-  title,
+  title: _title,
   scoreLabel,
+  correct,
+  total,
   open,
   onToggle,
   children,
@@ -141,28 +141,24 @@ export function CommunicationResultsExercise({
   index: number;
   title: string;
   scoreLabel: string;
+  correct: number;
+  total: number;
   open: boolean;
   onToggle: () => void;
   children: ReactNode;
 }) {
   return (
-    <section className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center justify-between px-4 py-3 text-left font-semibold"
-      >
-        <span>
-          <span style={{ color: ACCENT }}>{index + 1}</span> {title}
-        </span>
-        <span style={{ color: ACCENT }}>{scoreLabel}</span>
-      </button>
-      {open && (
-        <div className="border-t border-[var(--color-border-default)] p-4">
-          {children}
-        </div>
-      )}
-    </section>
+    <EvalExerciseResultRow
+      index={index}
+      correct={correct}
+      total={total}
+      accent={ACCENT}
+      isSelected={open}
+      onToggle={onToggle}
+      scoreLabel={scoreLabel}
+    >
+      {children}
+    </EvalExerciseResultRow>
   );
 }
 

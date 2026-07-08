@@ -20,6 +20,12 @@ import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -2956,36 +2962,17 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
           <div>
             {/* Score header — results only */}
             {isResults && (
-              <div className="mb-6">
-                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                      {evalPassedCount}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalExercises.length}</span>
-                    </p>
-                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                      <div
-                        className={`h-full rounded-full transition-all duration-700 ${evalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
-                        style={{ width: `${evalExercises.length > 0 ? Math.round((evalPassedCount / evalExercises.length) * 100) : 0}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                  </div>
-                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${evalGrade >= PASSING_GRADE ? "border-green-500" : "border-red-400"}`}>
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                    <p className={`mt-1 text-sm font-bold ${evalGrade >= PASSING_GRADE ? "text-green-600" : "text-red-500"}`}>
-                      {evalGrade >= PASSING_GRADE ? "Réussi" : "À améliorer"}
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
+              <div className="mb-6 space-y-4">
+                <EvalResultsSummary
+                  accent="var(--color-accent-fr)"
+                  points={evalPassedCount}
+                  maxPoints={evalExercises.length}
+                  grade={evalGrade}
+                  passed={evalGrade >= PASSING_GRADE}
+                />
+                <EvalResultsHint />
               </div>
             )}
-
 
             {/* Eval progress bar (only during eval phase) */}
             {isEvalPhase && (
@@ -3010,65 +2997,51 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
               </div>
             )}
 
-            {/* All eval exercises — inline expansion under each row */}
-            <div className={isResults ? "space-y-2" : ""}>
+            <EvalExerciseResultList>
               {evalExercises.map((ex, i) => {
                 const isActive = isEvalPhase && i === evalIdx;
                 const isSelectedResult = isResults && selectedResultIdx === i;
+                const correct = evalPassed[i] ? 1 : 0;
                 return (
                   <div
                     key={`eval-${evalSessionKey}-${i}`}
-                    className={isEvalPhase && !isActive ? "hidden" : "space-y-2"}
+                    className={isEvalPhase && !isActive ? "hidden" : ""}
                   >
-                    {/* Row button — results only */}
                     {isResults && (
-                      <button
-                        type="button"
-                        onClick={() => setSelectedResultIdx(isSelectedResult ? null : i)}
-                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                          isSelectedResult
-                            ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10"
-                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-fr)]/60"
-                        }`}
+                      <EvalExerciseResultRow
+                        index={i}
+                        correct={correct}
+                        total={1}
+                        accent="var(--color-accent-fr)"
+                        isSelected={isSelectedResult}
+                        onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
                       >
-                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
-                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{ex.title}</span>
-                        <span className={`shrink-0 text-xs font-bold mr-1 ${
-                          !evalValidated[i] ? "text-zinc-400" : evalPassed[i] ? "text-green-600" : "text-red-500"
-                        }`}>
-                          {!evalValidated[i] ? "—" : evalPassed[i] ? "✓" : "✗"}
-                        </span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelectedResult ? "rotate-90" : ""}`} aria-hidden>
-                          <path d="M9 18l6-6-6-6" />
-                        </svg>
-                      </button>
+                        <EvalRevealContext.Provider value={isResults}>
+                          <ExerciseView
+                            exercise={ex}
+                            onValidated={handleEvalValidated}
+                            validateCommand={evalValidateCommands[i] ?? 0}
+                            onCanValidateChange={() => {}}
+                          />
+                        </EvalRevealContext.Provider>
+                      </EvalExerciseResultRow>
                     )}
-                    {/* Exercise panel — active during eval, inline under row during results */}
-                    <div className={
-                      isEvalPhase && isActive ? "" :
-                      (isSelectedResult ? "px-1 py-3" : "hidden")
-                    }>
-                      {isSelectedResult && (
-                        <div className="mb-4 flex items-center justify-between">
-                          <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
-                          <span className={`text-sm font-bold ${evalPassed[i] ? "text-green-600" : "text-red-500"}`}>
-                            {evalPassed[i] ? "✓ Réussi" : "✗ Non réussi"}
-                          </span>
-                        </div>
-                      )}
-                      <EvalRevealContext.Provider value={isResults}>
-                        <ExerciseView
-                          exercise={ex}
-                          onValidated={handleEvalValidated}
-                          validateCommand={evalValidateCommands[i] ?? 0}
-                          onCanValidateChange={isActive ? setCanValidate : () => {}}
-                        />
-                      </EvalRevealContext.Provider>
-                    </div>
+                    {isEvalPhase && (
+                      <div className={isActive ? "" : "hidden"}>
+                        <EvalRevealContext.Provider value={false}>
+                          <ExerciseView
+                            exercise={ex}
+                            onValidated={handleEvalValidated}
+                            validateCommand={evalValidateCommands[i] ?? 0}
+                            onCanValidateChange={isActive ? setCanValidate : () => {}}
+                          />
+                        </EvalRevealContext.Provider>
+                      </div>
+                    )}
                   </div>
                 );
               })}
-            </div>
+            </EvalExerciseResultList>
             {isResults && (
               <EvalFinishButton
                 onClick={() => {

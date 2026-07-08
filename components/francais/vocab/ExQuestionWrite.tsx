@@ -194,7 +194,7 @@ export function ExQuestionWrite({
           Décrivez quelque chose pour pouvoir corriger la phrase.
         </div>
       )}
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez une question avec le mot proposé. Utilisez un mot interrogatif (
         <strong className="font-bold text-[var(--color-accent-fr)]">qui</strong>,{" "}

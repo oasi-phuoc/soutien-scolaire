@@ -24,6 +24,12 @@ import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { pickVocabTitle } from "@/lib/curriculum/vocab-theme-utils";
@@ -46,16 +52,6 @@ const EVAL_EXERCISE_STEPS: StepDef[] = [
   { key: "results",   label: "Résultats", isTheory: true },
 ];
 const EVAL_ONLY_STEPS = EVAL_EXERCISE_STEPS.filter((s) => s.isEval);
-
-const VOCAB_EVAL_LABELS = [
-  "Article",
-  "Lettres manquantes",
-  "Phrases à compléter",
-  "Mot (image)",
-  "Dictée",
-  "Phrase libre",
-  "Question libre",
-];
 
 function buildSteps(theme: { words: Array<{ feminine?: string }> }): StepDef[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
@@ -585,90 +581,61 @@ export function VocabRunner({ theme }: Props) {
           <div>
             {/* Score header — results only */}
             {step.key === "results" && (
-              <div className="mb-6">
-                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                      {totalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{totalItems}</span>
-                    </p>
-                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                      <div className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`} style={{ width: `${totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0}%` }} />
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-3 text-center">
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                  </div>
-                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
-                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                    <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>
-                      {passed ? "Réussi" : "À améliorer"}
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
-                  Cliquez sur un exercice pour voir la correction.
-                </p>
+              <div className="mb-6 space-y-4">
+                <EvalResultsSummary
+                  accent="var(--color-accent-fr)"
+                  points={totalCorrect}
+                  maxPoints={totalItems}
+                  grade={grade}
+                  passed={passed}
+                />
+                <EvalResultsHint />
               </div>
             )}
 
-            {/* Section label */}
-            {step.key === "results" && (
-              <div className="mb-3">
-                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
-              </div>
-            )}
-
-            {/* Exercise list — each item contains its own expansion panel */}
-            <div className={step.key === "results" ? "space-y-2" : ""}>
+            <EvalExerciseResultList>
               {EVAL_ONLY_STEPS.map((exStep, i) => {
                 const isActive = isInEvalPhase && evalExIdx === i;
                 const isSelectedResult = step.key === "results" && selectedResultIdx === i;
                 const score = evalScores[i];
                 return (
                   <div key={`eval-${evalSessionKey}-${i}`}
-                    className={isInEvalPhase && !isActive ? "hidden" : "space-y-2"}>
-                    {/* Row button — results only */}
-                    {step.key === "results" && (
-                      <button
-                        type="button"
-                        onClick={() => setSelectedResultIdx(isSelectedResult ? null : i)}
-                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                          isSelectedResult
-                            ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10"
-                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-fr)]/60"
-                        }`}
+                    className={isInEvalPhase && !isActive ? "hidden" : ""}>
+                    {step.key === "results" && score && (
+                      <EvalExerciseResultRow
+                        index={i}
+                        correct={score.correct}
+                        total={score.total}
+                        accent="var(--color-accent-fr)"
+                        isSelected={isSelectedResult}
+                        onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
                       >
-                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
-                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{VOCAB_EVAL_LABELS[i] ?? `Exercice ${i + 1}`}</span>
-                        {score && (
-                          <span className={`shrink-0 text-xs font-bold tabular-nums ${score.correct === score.total ? "text-green-600" : score.correct > 0 ? "text-amber-600" : "text-red-500"}`}>
-                            {score.correct}/{score.total}
-                          </span>
-                        )}
-                        <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelectedResult ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
-                      </button>
+                        <EvalRevealContext.Provider value={step.key === "results"}>
+                          {renderEvalExercise(
+                            exStep,
+                            0,
+                            () => {},
+                            () => {},
+                          )}
+                        </EvalRevealContext.Provider>
+                      </EvalExerciseResultRow>
                     )}
-                    {/* Exercise panel — active during eval, inline under row during results */}
-                    <div className={
-                      isInEvalPhase && isActive ? "" :
-                      (isSelectedResult ? "px-1 py-3 [&_h2]:hidden" : "hidden")
-                    }>
-                      <EvalRevealContext.Provider value={step.key === "results"}>
-                        {renderEvalExercise(
-                          exStep,
-                          isActive ? (evalValidateCommands[i] ?? 0) : 0,
-                          isActive ? setCanValidate : () => {},
-                          (correct, total) => handleEvalValidated(i, correct, total)
-                        )}
-                      </EvalRevealContext.Provider>
-                    </div>
+                    {step.key !== "results" && (
+                      <div className={isInEvalPhase && isActive ? "" : "hidden"}>
+                        <EvalRevealContext.Provider value={false}>
+                          {renderEvalExercise(
+                            exStep,
+                            isActive ? (evalValidateCommands[i] ?? 0) : 0,
+                            isActive ? setCanValidate : () => {},
+                            (correct, total) => handleEvalValidated(i, correct, total),
+                          )}
+                        </EvalRevealContext.Provider>
+                      </div>
+                    )}
                   </div>
                 );
               })}
-            </div>
+            </EvalExerciseResultList>
             {step.key === "results" && (
               <EvalFinishButton onClick={finishResults} accent="var(--color-accent-fr)" />
             )}

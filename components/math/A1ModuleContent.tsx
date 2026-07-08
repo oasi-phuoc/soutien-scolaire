@@ -28,6 +28,13 @@ import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import {
+  EvalExerciseResultButton,
+  EvalExerciseResultDetail,
+  EvalExerciseResultList,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
+import {
   LEVEL_PASSING_GRADES,
   linearSwissGrade,
   type LevelKey,
@@ -4676,51 +4683,29 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
               }
               return (
                 <div className="space-y-4">
-                  <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="flex flex-col items-center justify-center p-3 text-center">
-                      <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-                      <p className="text-2xl font-bold text-[var(--color-text-primary)]">
-                        {earnedPts}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalTotalPts}</span>
-                      </p>
-                      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                        <div className={`h-full rounded-full transition-all duration-700 ${evalGrade >= passingGrade ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
-                          style={{ width: `${evalTotalPts > 0 ? Math.round((earnedPts / evalTotalPts) * 100) : 0}%` }} />
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-center p-3 text-center">
-                      <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-                      <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                    </div>
-                    <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${evalGrade >= passingGrade ? "border-green-500" : "border-red-400"}`}>
-                      <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                      <p className={`mt-1 text-sm font-bold ${evalGrade >= passingGrade ? "text-green-600" : "text-red-500"}`}>
-                        {evalGrade >= passingGrade ? "Réussi" : "À améliorer"}
-                      </p>
-                    </div>
-                  </div>
-                  <ul className="space-y-2">
+                  <EvalResultsSummary
+                    accent="var(--color-accent-alg)"
+                    points={earnedPts}
+                    maxPoints={evalTotalPts}
+                    grade={evalGrade}
+                    passed={evalGrade >= passingGrade}
+                  />
+                  <EvalResultsHint />
+                  <EvalExerciseResultList>
                     {rows.map((row, i) => {
-                      const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
                       const isOpen = evalExpandedRow === i;
                       return (
-                        <li key={i}>
-                          <button type="button"
-                            onClick={() => setEvalExpandedRow(isOpen ? null : i)}
-                            className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
-                              isOpen
-                                ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                            }`}>
-                            <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                            <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{row.score}/{row.max}</span>
-                            <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isOpen ? "rotate-90" : ""}`}
-                              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                              <path d="M9 18l6-6-6-6" />
-                            </svg>
-                          </button>
-                          {isOpen && (
-                            <div className="space-y-2 px-1 py-3">
+                        <div key={i} className="space-y-2">
+                          <EvalExerciseResultButton
+                            index={i}
+                            correct={row.score}
+                            total={row.max}
+                            accent="var(--color-accent-alg)"
+                            isSelected={isOpen}
+                            onToggle={() => setEvalExpandedRow(isOpen ? null : i)}
+                          />
+                          <EvalExerciseResultDetail hidden={!isOpen}>
+                            <div className="space-y-2">
                               {row.detail.map((d, di) => (
                                 <div key={di} className="text-sm">
                                   <p className="text-[var(--color-text-secondary)]">{d.q}</p>
@@ -4731,11 +4716,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                                 </div>
                               ))}
                             </div>
-                          )}
-                        </li>
+                          </EvalExerciseResultDetail>
+                        </div>
                       );
                     })}
-                  </ul>
+                  </EvalExerciseResultList>
                   <EvalFinishButton onClick={goNext} accent="var(--color-accent-alg)" />
                 </div>
               );

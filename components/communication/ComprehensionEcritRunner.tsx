@@ -15,6 +15,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { EvalExerciseResultList, EvalResultsHint } from "@/components/ui/EvalResultsUI";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
@@ -1200,12 +1201,12 @@ function ResultsPage({
   const total = scores.reduce((sum, value) => sum + value, 0);
   return (
     <div className="space-y-6">
-      <CommunicationResultsSummary totalPoints={total} />
+      <CommunicationResultsSummary totalPoints={total} maxPoints={parts.reduce((s, p) => s + p.points, 0)} />
       {onContinue && (
         <CommunicationFinishButton onClick={onContinue} label={continueLabel ?? "Continuer"} />
       )}
-      <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
-      <div className="space-y-3">
+      <EvalResultsHint />
+      <EvalExerciseResultList>
         {parts.map((part, index) => {
           const score = scores[index] ?? 0;
           const isOpen = opened === part.id;
@@ -1214,6 +1215,8 @@ function ResultsPage({
               key={part.id}
               index={index}
               title={part.title}
+              correct={score}
+              total={part.points}
               scoreLabel={`${formatEvalPoints(score)} / ${part.points}`}
               open={isOpen}
               onToggle={() => setOpened(isOpen ? null : part.id)}
@@ -1222,7 +1225,7 @@ function ResultsPage({
             </CommunicationResultsExercise>
           );
         })}
-      </div>
+      </EvalExerciseResultList>
     </div>
   );
 }

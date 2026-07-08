@@ -15,6 +15,12 @@ import {
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import {
+  EvalExerciseResultList,
+  EvalExerciseResultRow,
+  EvalResultsHint,
+  EvalResultsSummary,
+} from "@/components/ui/EvalResultsUI";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -1128,40 +1134,33 @@ function ResultsScreen({ scores, snapshots, rows, maxScore }: { scores: (number 
 
   return (
     <section className="space-y-4">
-      <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
-      <div className="grid grid-cols-3 gap-3">
-        <div className="flex flex-col items-center justify-center p-3 text-center">
-          <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
-          <p className="text-2xl font-bold text-[var(--color-text-primary)]">{total}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{maxScore}</span></p>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]"><div className={`h-full rounded-full ${passed ? "bg-[var(--color-accent-lecture)]" : "bg-red-400"}`} style={{ width: `${Math.round((total / maxScore) * 100)}%` }} /></div>
-        </div>
-        <div className="flex flex-col items-center justify-center p-3 text-center">
-          <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
-          <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-        </div>
-        <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
-          <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-          <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>{passed ? "Réussi" : "À améliorer"}</p>
-        </div>
-      </div>
-      <p className="text-center text-xs text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
-      <ul className="space-y-2">
+      <EvalResultsSummary
+        accent="var(--color-accent-lecture)"
+        points={total}
+        maxPoints={maxScore}
+        grade={grade}
+        passed={passed}
+      />
+      <EvalResultsHint />
+      <EvalExerciseResultList>
         {rows.map((row, i) => {
           const s = scores[i] ?? 0;
-          const color = s === row.max ? "text-green-600" : s > 0 ? "text-amber-600" : "text-red-500";
           const isSelected = selectedResultIdx === i;
           return (
-            <li key={i}>
-              <button type="button" onClick={() => setSelectedResultIdx(isSelected ? null : i)} className={`flex min-h-11 w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${isSelected ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
-                <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                <span className={`text-sm font-bold ${color}`}>{s}/{row.max}</span>
-                <svg className={`h-3 w-3 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
-              </button>
-              {isSelected && <div className="px-1 py-3"><ReviewDetail snapshot={snapshots[i] ?? undefined} /></div>}
-            </li>
+            <EvalExerciseResultRow
+              key={i}
+              index={i}
+              correct={s}
+              total={row.max}
+              accent="var(--color-accent-lecture)"
+              isSelected={isSelected}
+              onToggle={() => setSelectedResultIdx(isSelected ? null : i)}
+            >
+              <ReviewDetail snapshot={snapshots[i] ?? undefined} />
+            </EvalExerciseResultRow>
           );
         })}
-      </ul>
+      </EvalExerciseResultList>
     </section>
   );
 }

@@ -772,7 +772,9 @@ export function ProductionEcriteRunner({
                 key={item.id}
                 index={index}
                 title={item.title}
-                scoreLabel={`${item.points} pts`}
+                correct={0}
+                total={item.points}
+                scoreLabel={`0 / ${item.points}`}
                 open={isOpen}
                 onToggle={() => setOpenResult(isOpen ? null : item.id)}
               >

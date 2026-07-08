@@ -26,6 +26,7 @@ import {
   type IntroBullet,
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
+import { EvalExerciseResultList, EvalResultsHint } from "@/components/ui/EvalResultsUI";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
 import { COTranscriptView } from "@/components/communication/COTranscriptView";
@@ -1516,7 +1517,7 @@ export function ComprehensionOraleRunner({
     return (
       <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
         <Header level={level} title="Résultats" placement={mode === "placement"} />
-        <CommunicationResultsSummary totalPoints={totalPoints} />
+        <CommunicationResultsSummary totalPoints={totalPoints} maxPoints={maxModulePoints} />
         <CommunicationFinishButton
           onClick={() => {
             if (mode === "placement") {
@@ -1527,8 +1528,8 @@ export function ComprehensionOraleRunner({
           }}
           label={mode === "placement" ? "Continuer" : "Terminer"}
         />
-        <p className="text-center text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
-        <div className="space-y-3">
+        <EvalResultsHint />
+        <EvalExerciseResultList>
           {parts.map((part, index) => {
             const partScore = scorePart(part, validatedAnswers[part.id] ?? {});
             const isOpen = openResult === part.id;
@@ -1537,6 +1538,8 @@ export function ComprehensionOraleRunner({
                 key={part.id}
                 index={index}
                 title={part.title}
+                correct={partScore}
+                total={part.points}
                 scoreLabel={`${formatEvalPoints(partScore)} / ${part.points}`}
                 open={isOpen}
                 onToggle={() => setOpenResult(isOpen ? null : part.id)}
@@ -1550,7 +1553,7 @@ export function ComprehensionOraleRunner({
               </CommunicationResultsExercise>
             );
           })}
-        </div>
+        </EvalExerciseResultList>
         <HiddenNav
           onBack={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
           onNext={() => (mode === "placement" ? onPlacementComplete?.({ skill: "co", points: totalPoints, maxPoints: maxModulePoints }) : router.push(EXPRESSION_TAB_HREF))}
