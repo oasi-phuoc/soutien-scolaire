@@ -72,12 +72,26 @@ export type G6Q2FigureSnapshot = {
 
 export type G6EvalSnapshot = G6GridReadSnapshot | G6GridPlaceSnapshot | G6Q1FigureSnapshot | G6Q2FigureSnapshot;
 
-type ExProps = {
+type ConsigneProps = {
+  consigne?: string;
+  consigneLang?: string;
+  consigneDir?: "ltr" | "rtl";
+};
+
+type ExProps = ConsigneProps & {
   exNum: number;
   validateCommand: number;
   onValidated: (score: number, max: number, results?: boolean[], snapshot?: G6EvalSnapshot) => void;
   reviewSnapshot?: G6EvalSnapshot;
 };
+
+function G6Consigne({ consigne, consigneLang, consigneDir, fallback }: ConsigneProps & { fallback: string }) {
+  return (
+    <p className="text-sm text-[var(--color-text-secondary)]" lang={consigneLang} dir={consigneDir ?? "ltr"}>
+      {consigne ?? fallback}
+    </p>
+  );
+}
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -487,7 +501,7 @@ function genQAllFigureExercise() {
 
 // ── Exercice 3 (G6.2) : coordonnées sur figure — 4 quadrants ────────────────
 
-export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated }: ExProps) {
+export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
   const [{ figure, askedPoints }] = useState(() => genQAllFigureExercise());
   const bounds = { xMin: -10, xMax: 10, yMin: -10, yMax: 10 };
   const [answers, setAnswers] = useState<XYAnswer[]>(() => askedPoints.map(() => ({ x: "", y: "" })));
@@ -508,7 +522,8 @@ export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
           const answer = answers[i] ?? { x: "", y: "" };
@@ -664,7 +679,7 @@ function genReadItems(): ReadItem[] {
   }));
 }
 
-export function G6GridReadExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+export function G6GridReadExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
   const readOnly = reviewSnapshot?.kind === "g6_read";
   const [items] = useState(() => (readOnly ? reviewSnapshot.items : genReadItems()));
   const [answers, setAnswers] = useState<CoordAnswer[]>(() =>
@@ -689,7 +704,8 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated, review
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
           const answer = answers[i] ?? { col: "", row: "" };
@@ -728,7 +744,7 @@ function genPlaceItems(): PlaceItem[] {
   return pickN(GRID_SHAPES, 4).map((shape, i) => ({ shape, cell: cells[i]! }));
 }
 
-export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
   const readOnly = reviewSnapshot?.kind === "g6_place";
   const [items] = useState(() => (readOnly ? reviewSnapshot.items : genPlaceItems()));
   const [selected, setSelected] = useState<string | null>(null);
@@ -793,9 +809,8 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, revie
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Cliquez sur les formes et placez-les dans les coordonnées indiquées.
-      </p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Cliquez sur les formes et placez-les dans les coordonnées indiquées." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
           const isSel = selected === it.shape.id;
@@ -912,7 +927,7 @@ export function G6MedievalLocateExercise({ exNum, validateCommand, onValidated }
 
 // ── Exercice 3 (G6.1) : coordonnées sur figure — 1er quadrant ───────────────
 
-export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot }: ExProps) {
+export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
   const readOnly = reviewSnapshot?.kind === "g6_q1_figure";
   const [{ figure, askedPoints, xMax, yMax }] = useState(() =>
     readOnly
@@ -955,9 +970,8 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Notez les coordonnées des points.
-      </p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
           const answer = answers[i] ?? { x: "", y: "" };
@@ -987,7 +1001,7 @@ type Q2ExProps = ExProps & {
   half: "q12" | "q34";
 };
 
-export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot, half }: Q2ExProps) {
+export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot, half, consigne, consigneLang, consigneDir }: Q2ExProps) {
   const readOnly = reviewSnapshot?.kind === "g6_q2_figure";
   const [{ figure, askedPoints, half: activeHalf }] = useState(() =>
     readOnly
@@ -1031,7 +1045,8 @@ export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
           const answer = answers[i] ?? { x: "", y: "" };

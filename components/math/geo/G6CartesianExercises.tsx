@@ -23,7 +23,23 @@ type ExProps = {
   exNum: number;
   validateCommand: number;
   onValidated: (score: number, max: number) => void;
+  consigne?: string;
+  consigneLang?: string;
+  consigneDir?: "ltr" | "rtl";
 };
+
+function G6Consigne({ consigne, consigneLang, consigneDir, fallback }: {
+  consigne?: string;
+  consigneLang?: string;
+  consigneDir?: "ltr" | "rtl";
+  fallback: string;
+}) {
+  return (
+    <p className="text-sm text-[var(--color-text-secondary)]" lang={consigneLang} dir={consigneDir ?? "ltr"}>
+      {consigne ?? fallback}
+    </p>
+  );
+}
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -552,7 +568,7 @@ function checkLineAnswer(q: LineScenarioQuestion, raw: string): boolean {
   return Math.abs(x - q.answer[0]) < 0.01 && Math.abs(y - q.answer[1]) < 0.01;
 }
 
-export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }: ExProps) {
+export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
   const [scenario] = useState(() => pick1(LINE_SCENARIOS));
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [validated, setValidated] = useState(false);
@@ -571,7 +587,8 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Observe les droites sur le repère et réponds aux questions.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Observe les droites sur le repère et réponds aux questions." />
       <CartesianPlane
         xMin={scenario.xMin} xMax={scenario.xMax}
         yMin={scenario.yMin} yMax={scenario.yMax}
@@ -595,7 +612,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
 
 // ── Ex 11 : placer des points ─────────────────────────────────────────────────
 
-export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated }: ExProps) {
+export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
   const [targets] = useState(() => pick1(CARTESIAN_PLACE_POOLS));
   const [selected, setSelected] = useState<string | null>(null);
   const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>(() =>
@@ -642,7 +659,8 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Graduez les axes de 1 en 1 et placez les points sur le plan.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Graduez les axes de 1 en 1 et placez les points sur le plan." />
       <CartesianPlane xMin={xMin} xMax={xMax} yMin={yMin} yMax={yMax} placedPoints={placed} onClick={onMapClick} />
       <div className="space-y-2">
         {targets.map((pt, i) => {
@@ -668,7 +686,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated }
 
 // ── Ex 12 : trouver un sommet manquant ────────────────────────────────────────
 
-export function G6FindVertexExercise({ exNum, validateCommand, onValidated }: ExProps) {
+export function G6FindVertexExercise({ exNum, validateCommand, onValidated, consigneLang, consigneDir }: ExProps) {
   const [puzzle] = useState(() => pick1(VERTEX_PUZZLES));
   const [answer, setAnswer] = useState({ x: "", y: "" });
   const [validated, setValidated] = useState(false);
@@ -695,7 +713,12 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated }: Ex
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">{puzzle.prompt}</p>
+      <G6Consigne
+        consigne={consigneLang ? puzzle.promptPivot?.[consigneLang] : undefined}
+        consigneLang={consigneLang}
+        consigneDir={consigneDir}
+        fallback={puzzle.prompt}
+      />
       <CartesianPlane xMin={xMin} xMax={xMax} yMin={yMin} yMax={yMax}
         polygon={puzzle.points} points={puzzle.points} />
       <div className="flex items-center gap-2 text-sm">
@@ -733,7 +756,7 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated }: Ex
 
 // ── Ex 13 : lire des points sur 4 quadrants ─────────────────────────────────
 
-export function G6QuadrantReadExercise({ exNum, validateCommand, onValidated }: ExProps) {
+export function G6QuadrantReadExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
   const [points] = useState(() => pick1(QUADRANT_READ_POOLS));
   const [answers, setAnswers] = useState<Record<string, { x: string; y: string }>>(() =>
     Object.fromEntries(points.map((p) => [p.label, { x: "", y: "" }])),
@@ -759,7 +782,8 @@ export function G6QuadrantReadExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Graduez les axes de 1 en 1 et écrivez les coordonnées des points.</p>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Graduez les axes de 1 en 1 et écrivez les coordonnées des points." />
       <CartesianPlane xMin={-12} xMax={12} yMin={-12} yMax={12} points={points} />
       <CoordInputs points={points} answers={answers} validated={validated} results={results} allowDecimal
         onChange={(label, field, val) => setAnswers((p) => ({ ...p, [label]: { ...p[label]!, [field]: val } }))} />

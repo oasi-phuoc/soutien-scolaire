@@ -1,58 +1,156 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const I = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G6_1: SubmoduleTrad = {
   submoduleId: "G6-1",
-  title: {
-    fr: "Symétrie axiale",
-    en: "Axial symmetry",
-    ar: "التناظر المحوري",
-    fa: "تقارن محوری",
-    ti: "ናይ ሕርሚ ምስምሳል",
-    uk: "Осьова симетрія",
-  },
-  paragraphs: {
-    fr: [
-          "La symétrie axiale (ou réflexion) est une transformation qui associe à chaque point M son symétrique M' par rapport à un axe d, tel que d est la médiatrice de [MM'].",
-          "Propriétés : conservation des distances, des angles et des aires. La figure image est le miroir de la figure originale.",
-          "Construction : pour trouver le symétrique d'un point M par rapport à une droite d, tracer la perpendiculaire de M à d et reporter la même distance de l'autre côté.",
-          "Applications : papier plié, figures décoratives, architecture.",
+  title: S(
+    "Se repérer dans le plan",
+    "Finding your way on the grid",
+    "تحديد الموضع في المستوى",
+    "مکان‌یابی در صفحه",
+    "ኣብ መጠና ምርኻብ",
+    "Орієнтування на площині",
+    "Localizar-se no plano",
+    "Ku jihaynta goobta",
+    "Düzlemde konum bulma",
+    "په مسطح کې موقعیت موندل",
+  ),
+  blocks: [
+    { text: S(
+      "Repérer une position",
+      "Finding a position",
+      "تحديد موضع",
+      "یافتن یک موقعیت",
+      "ኣቀማምጣ ምርኻብ",
+      "Визначення положення",
+      "Localizar uma posição",
+      "Helitaanka booska",
+      "Bir konum bulma",
+      "موقعیت موندل",
+    ) },
+    { text: S(
+      "Pour localiser une case sur une grille, on utilise une **colonne** (lettre) et une **ligne** (chiffre).",
+      "To locate a square on a grid, we use a **column** (letter) and a **row** (number).",
+      "لتحديد خانة على شبكة، نستخدم **عموداً** (حرفاً) و**صفاً** (رقماً).",
+      "برای یافتن یک خانه روی شبکه، از یک **ستون** (حرف) و یک **سطر** (عدد) استفاده می‌کنیم.",
+      "ኣብ መርበብ ሓደ ክፍሊ ንምርኻብ **ኮለም** (ፊደል) ከምካይ **መስመር** (ቁጽሪ) ንጥቀም።",
+      "Щоб знайти клітинку на сітці, використовуємо **стовпець** (літеру) та **ряд** (число).",
+      "Para localizar uma casa numa grelha, usamos uma **coluna** (letra) e uma **linha** (número).",
+      "Si aad u hesho goob cell ah oo shabakad ah, waxaan isticmaalnaa **tiir** (xaraf) iyo **safka** (tiro).",
+      "Bir ızgarada bir kareyi bulmak için bir **sütun** (harf) ve bir **satır** (sayı) kullanırız.",
+      "په یوې شبکې کې د یوې خانې موقعیت موندلو لپاره **ستون** (حرف) او **قطار** (شمېره) کاروو.",
+    ) },
+    { text: S(
+      "On écrit sa position sous la forme **(colonne ; ligne)**, par exemple **(d ; 1)**.",
+      "We write its position as **(column ; row)**, for example **(d ; 1)**.",
+      "نكتب موضعه بالشكل **(عمود ; صف)**، مثلاً **(d ; 1)**.",
+      "موقعیت را به صورت **(ستون ; سطر)** می‌نویسیم، مثلاً **(d ; 1)**.",
+      "ኣቀማምጣና ብሓደ **(ኮለም ; መስመር)** ንጽሕፎ፣ ከም **(d ; 1)**።",
+      "Записуємо положення у вигляді **(стовпець ; ряд)**, наприклад **(d ; 1)**.",
+      "Escrevemos a posição como **(coluna ; linha)**, por exemplo **(d ; 1)**.",
+      "Booska waxaa loo qoraa **(tiir ; saf)** sida **(d ; 1)**.",
+      "Konumunu **(sütun ; satır)** olarak yazarız, örneğin **(d ; 1)**.",
+      "موقعیت یې په **(ستون ; قطار)** بڼه لیکو، لکه **(d ; 1)**.",
+    ) },
+    { text: S(
+      "Observer les tableaux",
+      "Reading the grids",
+      "مراقبة الجداول",
+      "خواندن جدول‌ها",
+      "መርበባት ምንባብ",
+      "Читання таблиць",
+      "Observar as grelhas",
+      "Akhrinta shabakadaha",
+      "Tabloları okuma",
+      "جدولونه کتل",
+    ) },
+    {
+      items: I(
+        [
+          "La case **jaune** est sur l'emplacement **(B ; 3)**.",
+          "On lit d'abord la **colonne**, puis la **ligne**.",
         ],
-    en: [
-          "Axial symmetry (reflection) maps each point M to M' across line d, where d is the perpendicular bisector of [MM'].",
-          "Properties: distances, angles, and areas are preserved. The image is a mirror of the original.",
-          "Construction: draw perpendicular from M to d; mark same distance on the other side.",
-          "Applications: folded paper, decorative patterns, architecture.",
+        [
+          "The **yellow** square is at **(B ; 3)**.",
+          "We read the **column** first, then the **row**.",
         ],
-    ar: [
-          "التناظر المحوري يربط كل نقطة M بصورتها M' على محور d حيث d منصف MM'.",
-          "الخصائص: حفظ المسافات والزوايا والمساحات. الصورة مرآة الأصل.",
-          "الإنشاء: ارسم عموداً من M على d وانقل نفس المسافة للجانب الآخر.",
-          "التطبيقات: ورق مطوي، نقوش، هندسة معمارية.",
+        [
+          "الخانة **الصفراء** في الموضع **(B ; 3)**.",
+          "نقرأ **العمود** أولاً، ثم **الصف**.",
         ],
-    fa: [
-          "تقارن محوری (بازتاب) هر نقطه M را به M' نسبت به خط d نگاشت می‌کند، جایی که d نیمساز عمود [MM'] است.",
-          "ویژگی‌ها: فاصله‌ها، زوایا و مساحت‌ها حفظ می‌شوند.",
-          "ساخت: از M عمود بر d بکش و همان فاصله را طرف دیگر علامت بزن.",
-          "کاربردها: کاغذ تا شده، نقوش تزئینی، معماری.",
+        [
+          "خانه **زرد** در موقعیت **(B ; 3)** است.",
+          "اول **ستون**، بعد **سطر** را می‌خوانیم.",
         ],
-    ti: [
-          "ናይ ሕርሚ ምስምሳል ነፍሲ ወከፍ ነጥቢ M ናብ M' ኣብ ሕርሚ d ዘቕርብ ዩ.",
-          "ንብረታት: ርሕቀት, ኩርናዓት ን ሰፊሓ ዕቃቤ. ምስሊ ናይ ናህሰ መስታዊ ዩ.",
-          "ምህናጽ: ካብ M ናብ d ቀጥታ ምምሃዝ ሓደ ርሕቀት ናብ ካሊእ ሸነኽ.",
-          "ኣሰፋ: ዝቅጸነ ወረቀት, ናይ ዕምቋ ቕርጺ.",
+        [
+          "እቲ **ብጫውሕ** ክፍሊ ኣብ **(B ; 3)** ይርከብ።",
+          "ቀዳማይ **ኮለም**፣ ድሕሪኡ **መስመር** ንኽንብብ።",
         ],
-    uk: [
-          "Осьова симетрія (відображення) відображає кожну точку M в M' відносно прямої d, де d — серединний перпендикуляр [MM'].",
-          "Властивості: зберігаються відстані, кути та площі. Образ — дзеркальне відображення.",
-          "Побудова: провести перпендикуляр з M на d і відкласти ту саму відстань з іншого боку.",
-          "Застосування: складений папір, декоративні орнаменти, архітектура.",
+        [
+          "Жовта клітинка знаходиться в **(B ; 3)**.",
+          "Спочатку читаємо **стовпець**, потім **ряд**.",
         ],
-  },
+        [
+          "A casa **amarela** está em **(B ; 3)**.",
+          "Lemos primeiro a **coluna**, depois a **linha**.",
+        ],
+        [
+          "Cell-ka **jaalle** wuxuu ku yaalaa **(B ; 3)**.",
+          "Marka hore waxaan akhrinaa **tiirka**, kadib **safka**.",
+        ],
+        [
+          "**Sarı** kare **(B ; 3)** konumundadır.",
+          "Önce **sütunu**, sonra **satırı** okuruz.",
+        ],
+        [
+          "**ژیړه** خانې په **(B ; 3)** کې ده.",
+          "لومړی **ستون**، بیا **قطار** څیړو.",
+        ],
+      ),
+    },
+    {},
+  ],
   consignes: {
-    "g5-1-e1": { fr: "La symétrie axiale conserve-t-elle les distances ? (oui/non)", en: "Does axial symmetry preserve distances? (yes/no)" },
-    "g5-1-e2": { fr: "Le symétrique du point (3 ; 2) par rapport à l'axe y est le point (? ; 2).", en: "The reflection of point (3 ; 2) across the y-axis is the point (? ; 2)." },
-    "g5-1-e3": { fr: "Le symétrique du point (4 ; 5) par rapport à l'axe x est le point (4 ; ?).", en: "The reflection of point (4 ; 5) across the x-axis is the point (4 ; ?)." },
-    "g5-1-e4": { fr: "Une figure et son image par symétrie axiale ont-elles la même aire ? (oui/non)", en: "Do a figure and its image by axial symmetry have the same area? (yes/no)" },
-    "g5-1-e5": { fr: "Quelle est la figure qui est son propre symétrique par rapport à un axe ?", en: "What figure is its own reflection across an axis?" },
+    g6GridRead: S(
+      "Notez les coordonnées des points.",
+      "Write down the coordinates of the points.",
+      "اكتب إحداثيات النقاط.",
+      "مختصات نقاط را بنویسید.",
+      "ናይ ነጥብታት ኮኦርድነታት ጽሓፉ።",
+      "Запишіть координати точок.",
+      "Anote as coordenadas dos pontos.",
+      "Qor xuduudaha dhibcaha.",
+      "Noktaların koordinatlarını yazın.",
+      "د نقطو همغږي ولیکئ.",
+    ),
+    g6GridPlace: S(
+      "Cliquez sur les formes et placez-les dans les coordonnées indiquées.",
+      "Click the shapes and place them at the given coordinates.",
+      "انقر على الأشكال وضعها في الإحداثيات المطلوبة.",
+      "روی شکل‌ها کلیک کنید و آن‌ها را در مختصات داده‌شده قرار دهید.",
+      "ኣብ እቶም ቅርጺታት ጠውቑ ኣብ እተነጸሩ ኮኦርድነታት ኣቐምጦም።",
+      "Натисніть на фігури та розмістіть їх у вказаних координатах.",
+      "Clique nas formas e coloque-as nas coordenadas indicadas.",
+      "Guji qaababka oo ku dhig xuduudaha la bixiyay.",
+      "Şekillere tıklayın ve verilen koordinatlara yerleştirin.",
+      "په شکلونو کلیک وکړئ او په ورکړل شویو همغږیو کې یې ځای پر ځای کړئ.",
+    ),
+    g6Q1FigureCoords: S(
+      "Notez les coordonnées des points.",
+      "Write down the coordinates of the points.",
+      "اكتب إحداثيات النقاط.",
+      "مختصات نقاط را بنویسید.",
+      "ናይ ነጥብታት ኮኦርድነታት ጽሓፉ።",
+      "Запишіть координати точок.",
+      "Anote as coordenadas dos pontos.",
+      "Qor xuduudaha dhibcaha.",
+      "Noktaların koordinatlarını yazın.",
+      "د نقطو همغږي ولیکئ.",
+    ),
   },
 };
