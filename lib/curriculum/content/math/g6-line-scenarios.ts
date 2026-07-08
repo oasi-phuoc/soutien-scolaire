@@ -258,12 +258,19 @@ function buildQuestions(lines: RawLine[], seed: number): LineScenarioQuestion[] 
       answer,
     };
   } else {
-    const other = lines.find((l) => l.id !== focus.id)!;
-    q4 = {
-      type: "bool",
-      prompt: `Les droites ${focus.label} et ${other.label} sont parallèles.`,
-      answer: isParallel(focus, other),
-    };
+    const relPairQ4 = relPairs[(seed + 1) % relPairs.length]!;
+    const askParallelQ4 = (seed >> 1) % 2 === 0;
+    q4 = askParallelQ4
+      ? {
+          type: "bool",
+          prompt: `Les droites ${relPairQ4[0].label} et ${relPairQ4[1].label} sont parallèles.`,
+          answer: isParallel(relPairQ4[0], relPairQ4[1]),
+        }
+      : {
+          type: "bool",
+          prompt: `Les droites ${relPairQ4[0].label} et ${relPairQ4[1].label} sont perpendiculaires.`,
+          answer: isPerpendicular(relPairQ4[0], relPairQ4[1]),
+        };
   }
 
   return [q1, q2, q3, q4];
