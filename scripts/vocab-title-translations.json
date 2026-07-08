@@ -1,0 +1,942 @@
+{
+  "v1-nationalites": {
+    "en": "Nationalities",
+    "ar": "الجنسيات",
+    "fa": "ملیت‌ها",
+    "ti": "ዜግነታት",
+    "uk": "Національності",
+    "pt": "Nacionalidades",
+    "so": "Jinsiyadaha",
+    "tr": "Milliyetler",
+    "ps": "ملیتونه"
+  },
+  "v1-professions": {
+    "en": "Professions",
+    "ar": "المهن",
+    "fa": "مشاغل",
+    "ti": "ሞያታት",
+    "uk": "Професії",
+    "pt": "Profissões",
+    "so": "Xirfadaha",
+    "tr": "Meslekler",
+    "ps": "مسلکونه"
+  },
+  "v1-famille": {
+    "en": "Family",
+    "ar": "الأسرة",
+    "fa": "خانواده",
+    "ti": "ስድራ",
+    "uk": "Сім'я",
+    "pt": "Família",
+    "so": "Qoyska",
+    "tr": "Aile",
+    "ps": "کورنۍ"
+  },
+  "v1-etat-civil": {
+    "en": "Civil Status",
+    "ar": "الحالة المدنية",
+    "fa": "وضعیت مدنی",
+    "ti": "ሲቪላዊ ኩነታት",
+    "uk": "Сімейний стан",
+    "pt": "Estado civil",
+    "so": "Xaaladda madaniga",
+    "tr": "Medeni durum",
+    "ps": "مدني حالت"
+  },
+  "v1-description-physique": {
+    "en": "Physical Description",
+    "ar": "الوصف الجسدي",
+    "fa": "توصیف ظاهری",
+    "ti": "ኣካላዊ መግለጺ",
+    "uk": "Фізичний опис",
+    "pt": "Descrição física",
+    "so": "Sharaxaadda muuqaalka",
+    "tr": "Fiziksel betimleme",
+    "ps": "فزیکي تشریح"
+  },
+  "v1-description-morale": {
+    "en": "Personality Description",
+    "ar": "الوصف المعنوي",
+    "fa": "توصیف شخصیتی",
+    "ti": "ባህርያዊ መግለጺ",
+    "uk": "Опис характеру",
+    "pt": "Descrição da personalidade",
+    "so": "Sharaxaadda dabeecadda",
+    "tr": "Kişilik tanımı",
+    "ps": "د شخصیت تشریح"
+  },
+  "v2-jours-mois-dates": {
+    "en": "Days, Months and Dates",
+    "ar": "الأيام والأشهر والتواريخ",
+    "fa": "روزها، ماه‌ها و تاریخ‌ها",
+    "ti": "መዓልታት፣ ኣዋርሕን ዕለታትን",
+    "uk": "Дні, Місяці та Дати",
+    "pt": "Dias, Meses e Datas",
+    "so": "Maalmaha, Bilaha iyo Taariikhaha",
+    "tr": "Günler, Aylar ve Tarihler",
+    "ps": "ورځې، میاشتې او نېټې"
+  },
+  "v2-heure": {
+    "en": "Time",
+    "ar": "الوقت",
+    "fa": "ساعت",
+    "ti": "ሰዓት",
+    "uk": "Час",
+    "pt": "As horas",
+    "so": "Saacadda",
+    "tr": "Saat",
+    "ps": "وخت"
+  },
+  "v2-saisons": {
+    "en": "Seasons",
+    "ar": "الفصول",
+    "fa": "فصل‌ها",
+    "ti": "ወቕታት",
+    "uk": "Пори року",
+    "pt": "Estações",
+    "so": "Xilliyada",
+    "tr": "Mevsimler",
+    "ps": "فصلونه"
+  },
+  "v2-meteo": {
+    "en": "Weather",
+    "ar": "الطقس",
+    "fa": "آب‌وهوا",
+    "ti": "ኩነታት ኣየር",
+    "uk": "Погода",
+    "pt": "O tempo",
+    "so": "Cimilada",
+    "tr": "Hava durumu",
+    "ps": "هوا"
+  },
+  "v3-sport": {
+    "en": "Sport",
+    "ar": "الرياضة",
+    "fa": "ورزش",
+    "ti": "ስፖርት",
+    "uk": "Спорт",
+    "pt": "Esporte",
+    "so": "Isboortiga",
+    "tr": "Spor",
+    "ps": "سپورت"
+  },
+  "v4-type-logement": {
+    "en": "Types of Housing",
+    "ar": "أنواع السكن",
+    "fa": "انواع مسکن",
+    "ti": "ዓይነታት መንበሪ",
+    "uk": "Типи житла",
+    "pt": "Tipos de moradia",
+    "so": "Noocyada guryaha",
+    "tr": "Konut türleri",
+    "ps": "د استوګنې ډولونه"
+  },
+  "v4-pieces-maison": {
+    "en": "Rooms of the House",
+    "ar": "غرف المنزل",
+    "fa": "اتاق‌های خانه",
+    "ti": "ክፍልታት ገዛ",
+    "uk": "Кімнати в будинку",
+    "pt": "Cômodos da casa",
+    "so": "Qolalka guriga",
+    "tr": "Evin odaları",
+    "ps": "د کور خونې"
+  },
+  "v4-equipements": {
+    "en": "Furniture",
+    "ar": "الأثاث",
+    "fa": "مبلمان",
+    "ti": "ኣቑሑ ገዛ",
+    "uk": "Меблі",
+    "pt": "Móveis",
+    "so": "Alaabta guriga",
+    "tr": "Mobilyalar",
+    "ps": "فرنیچر"
+  },
+  "v4-appareils-electromenagers": {
+    "en": "Household Appliances",
+    "ar": "الأجهزة المنزلية الكهربائية",
+    "fa": "لوازم خانگی برقی",
+    "ti": "ኤሌክትሪካዊ ናውቲ ገዛ",
+    "uk": "Побутова техніка",
+    "pt": "Eletrodomésticos",
+    "so": "Qalabka korontada ee guriga",
+    "tr": "Ev aletleri",
+    "ps": "برقي کورني وسایل"
+  },
+  "v4-pannes": {
+    "en": "Breakdowns",
+    "ar": "الأعطال",
+    "fa": "خرابی‌ها",
+    "ti": "ብልሽታት",
+    "uk": "Поломки",
+    "pt": "Avarias",
+    "so": "Cilladaha",
+    "tr": "Arızalar",
+    "ps": "خرابۍ"
+  },
+  "v5-matieres": {
+    "en": "School Subjects",
+    "ar": "المواد الدراسية",
+    "fa": "درس‌های مدرسه",
+    "ti": "ናይ ቤት ትምህርቲ ትምህርትታት",
+    "uk": "Шкільні предмети",
+    "pt": "Matérias escolares",
+    "so": "Maaddooyinka dugsiga",
+    "tr": "Okul dersleri",
+    "ps": "د ښوونځي مضامین"
+  },
+  "v5-materiel-scolaire": {
+    "en": "School Supplies",
+    "ar": "الأدوات المدرسية",
+    "fa": "لوازم مدرسه",
+    "ti": "ናውቲ ቤት ትምህርቲ",
+    "uk": "Шкільне приладдя",
+    "pt": "Material escolar",
+    "so": "Qalabka dugsiga",
+    "tr": "Okul malzemeleri",
+    "ps": "د ښوونځي وسایل"
+  },
+  "v5-structure-ecole": {
+    "en": "School Structure",
+    "ar": "بنية المدرسة",
+    "fa": "ساختار مدرسه",
+    "ti": "ኣወቃቕራ ቤት ትምህርቲ",
+    "uk": "Структура школи",
+    "pt": "Estrutura da escola",
+    "so": "Qaab-dhismeedka dugsiga",
+    "tr": "Okulun yapısı",
+    "ps": "د ښوونځي جوړښت"
+  },
+  "v6-vetements": {
+    "en": "Clothes",
+    "ar": "الملابس",
+    "fa": "لباس‌ها",
+    "ti": "ክዳውንቲ",
+    "uk": "Одяг",
+    "pt": "Roupas",
+    "so": "Dharka",
+    "tr": "Kıyafetler",
+    "ps": "کالي"
+  },
+  "v6-accessoires": {
+    "en": "Accessories",
+    "ar": "الإكسسوارات",
+    "fa": "لوازم جانبی",
+    "ti": "ኣክሰሰዋራት",
+    "uk": "Аксесуари",
+    "pt": "Acessórios",
+    "so": "Agabka dheeraadka ah",
+    "tr": "Aksesuarlar",
+    "ps": "لوازم"
+  },
+  "v6-couleurs": {
+    "en": "Colors",
+    "ar": "الألوان",
+    "fa": "رنگ‌ها",
+    "ti": "ሕብርታት",
+    "uk": "Кольори",
+    "pt": "Cores",
+    "so": "Midabada",
+    "tr": "Renkler",
+    "ps": "رنګونه"
+  },
+  "v6-matieres": {
+    "en": "Materials",
+    "ar": "المواد",
+    "fa": "جنس‌ها",
+    "ti": "ንጥረ ነገራት",
+    "uk": "Матеріали",
+    "pt": "Materiais",
+    "so": "Walxaha",
+    "tr": "Malzemeler",
+    "ps": "مواد"
+  },
+  "v7-fruits": {
+    "en": "Fruits",
+    "ar": "الفواكه",
+    "fa": "میوه‌ها",
+    "ti": "ፍረታት",
+    "uk": "Фрукти",
+    "pt": "Frutas",
+    "so": "Miraha",
+    "tr": "Meyveler",
+    "ps": "مېوې"
+  },
+  "v7-legumes": {
+    "en": "Vegetables",
+    "ar": "الخضروات",
+    "fa": "سبزیجات",
+    "ti": "ኣሕምልቲ",
+    "uk": "Овочі",
+    "pt": "Legumes",
+    "so": "Khudaarta",
+    "tr": "Sebzeler",
+    "ps": "سبزيجات"
+  },
+  "v7-cuisine": {
+    "en": "Cooking",
+    "ar": "الطبخ",
+    "fa": "آشپزی",
+    "ti": "ምብሳሕ",
+    "uk": "Кулінарія",
+    "pt": "Cozinha",
+    "so": "Karinta",
+    "tr": "Mutfak",
+    "ps": "آشپزي"
+  },
+  "v7-recettes": {
+    "en": "Recipes",
+    "ar": "الوصفات",
+    "fa": "دستورهای پخت",
+    "ti": "ናይ ምብሳሕ ኣሰራርሓታት",
+    "uk": "Рецепти",
+    "pt": "Receitas",
+    "so": "Cunto-karisyada",
+    "tr": "Tarifler",
+    "ps": "ترکیبونه"
+  },
+  "v7-quantites": {
+    "en": "Quantities",
+    "ar": "الكميات",
+    "fa": "مقدارها",
+    "ti": "መጠናት",
+    "uk": "Кількості",
+    "pt": "Quantidades",
+    "so": "Qiyaasaha",
+    "tr": "Miktarlar",
+    "ps": "مقدارونه"
+  },
+  "v8-corps": {
+    "en": "Body",
+    "ar": "الجسم",
+    "fa": "بدن",
+    "ti": "ኣካል",
+    "uk": "Тіло",
+    "pt": "Corpo",
+    "so": "Jirka",
+    "tr": "Vücut",
+    "ps": "بدن"
+  },
+  "v8-maladies": {
+    "en": "Illnesses",
+    "ar": "الأمراض",
+    "fa": "بیماری‌ها",
+    "ti": "ሕማማት",
+    "uk": "Хвороби",
+    "pt": "Doenças",
+    "so": "Cudurrada",
+    "tr": "Hastalıklar",
+    "ps": "ناروغۍ"
+  },
+  "v8-medecins": {
+    "en": "Doctors",
+    "ar": "الأطباء",
+    "fa": "پزشکان",
+    "ti": "ሓካይም",
+    "uk": "Лікарі",
+    "pt": "Médicos",
+    "so": "Dhakhaatiirta",
+    "tr": "Doktorlar",
+    "ps": "ډاکټران"
+  },
+  "v8-pharmacie": {
+    "en": "Pharmacy",
+    "ar": "الصيدلية",
+    "fa": "داروخانه",
+    "ti": "ፋርማሲ",
+    "uk": "Аптека",
+    "pt": "Farmácia",
+    "so": "Farmashiyaha",
+    "tr": "Eczane",
+    "ps": "درملتون"
+  },
+  "v9-ville": {
+    "en": "City",
+    "ar": "المدينة",
+    "fa": "شهر",
+    "ti": "ከተማ",
+    "uk": "Місто",
+    "pt": "Cidade",
+    "so": "Magaalada",
+    "tr": "Şehir",
+    "ps": "ښار"
+  },
+  "v9-transport": {
+    "en": "Transport",
+    "ar": "النقل",
+    "fa": "حمل‌ونقل",
+    "ti": "መጓዓዝያ",
+    "uk": "Транспорт",
+    "pt": "Transporte",
+    "so": "Gaadiidka",
+    "tr": "Ulaşım",
+    "ps": "ترانسپورټ"
+  },
+  "v9-direction": {
+    "en": "Directions",
+    "ar": "الاتجاهات",
+    "fa": "جهت‌ها",
+    "ti": "ኣንፈታት",
+    "uk": "Напрямки",
+    "pt": "Direções",
+    "so": "Jihooyinka",
+    "tr": "Yönler",
+    "ps": "لارښوونې"
+  },
+  "v9-espace-culturel": {
+    "en": "Cultural Space",
+    "ar": "الفضاء الثقافي",
+    "fa": "فضای فرهنگی",
+    "ti": "ባህላዊ ቦታ",
+    "uk": "Культурний простір",
+    "pt": "Espaço cultural",
+    "so": "Goobta dhaqanka",
+    "tr": "Kültürel alan",
+    "ps": "کلتوري فضا"
+  },
+  "v9-paysage": {
+    "en": "Landscape",
+    "ar": "المنظر الطبيعي",
+    "fa": "چشم‌انداز",
+    "ti": "መልክዕ ተፈጥሮ",
+    "uk": "Пейзаж",
+    "pt": "Paisagem",
+    "so": "Muuqaalka dhulka",
+    "tr": "Manzara",
+    "ps": "منظره"
+  },
+  "v9-train": {
+    "en": "Train Station",
+    "ar": "محطة القطار",
+    "fa": "ایستگاه قطار",
+    "ti": "መደበር ባቡር",
+    "uk": "Залізничний вокзал",
+    "pt": "Estação ferroviária",
+    "so": "Saldhigga tareenka",
+    "tr": "Tren istasyonu",
+    "ps": "د اورګاډي تمځای"
+  },
+  "v9-train-display": {
+    "en": "Train Station",
+    "ar": "محطة القطار",
+    "fa": "ایستگاه قطار",
+    "ti": "መደበር ባቡር",
+    "uk": "Залізничний вокзал",
+    "pt": "Estação ferroviária",
+    "so": "Saldhigga tareenka",
+    "tr": "Tren istasyonu",
+    "ps": "د اورګاډي تمځای"
+  },
+  "v9-aeroport": {
+    "en": "Airport",
+    "ar": "المطار",
+    "fa": "فرودگاه",
+    "ti": "መዕርፎ ነፈርቲ",
+    "uk": "Аеропорт",
+    "pt": "Aeroporto",
+    "so": "Garoonka diyaaradaha",
+    "tr": "Havalimanı",
+    "ps": "هوايي ډګر"
+  },
+  "v9-hotel": {
+    "en": "Hotel",
+    "ar": "الفندق",
+    "fa": "هتل",
+    "ti": "ሆቴል",
+    "uk": "Готель",
+    "pt": "Hotel",
+    "so": "Hoteelka",
+    "tr": "Otel",
+    "ps": "هوټل"
+  },
+  "v7-restaurant": {
+    "en": "Restaurant",
+    "ar": "المطعم",
+    "fa": "رستوران",
+    "ti": "ረስቶራንት",
+    "uk": "Ресторан",
+    "pt": "Restaurante",
+    "so": "Makhaayadda",
+    "tr": "Restoran",
+    "ps": "رستورانت"
+  },
+  "v7-boulangerie": {
+    "en": "Bakery",
+    "ar": "المخبز",
+    "fa": "نانوایی",
+    "ti": "ቤት እንጌራ",
+    "uk": "Пекарня",
+    "pt": "Padaria",
+    "so": "Dukaanka rootiga",
+    "tr": "Fırın",
+    "ps": "نانوايي"
+  },
+  "theory-v2-heure": [
+    {
+      "type": "section",
+      "title": {
+        "en": "How to tell the time",
+        "ar": "كيف نقرأ الساعة",
+        "fa": "چگونه ساعت را بخوانیم",
+        "ti": "ሰዓት ከመይ ንንበቦ",
+        "uk": "Як читати час",
+        "pt": "Como dizer as horas",
+        "so": "Sida saacadda loo akhriyo",
+        "tr": "Saat nasıl söylenir",
+        "ps": "وخت څنګه ولولو"
+      },
+      "items": {
+        "en": [
+          "To ask the time: What time is it? / What time is it now?",
+          "To answer: It is + time."
+        ],
+        "ar": [
+          "لسؤال الوقت: كم الساعة؟ / ما الوقت الآن؟",
+          "للإجابة: الساعة + ..."
+        ],
+        "fa": [
+          "برای پرسیدن ساعت: ساعت چند است؟ / الآن ساعت چند است؟",
+          "برای پاسخ: ساعت + ..."
+        ],
+        "ti": [
+          "ንሰዓት ምሕታት፦ ክንደይ ሰዓት እዩ? / ሕጂ ክንደይ ሰዓት እዩ?",
+          "ንምምላስ፦ ሰዓት + ..."
+        ],
+        "uk": [
+          "Щоб запитати час: Котра година? / Яка зараз година?",
+          "Щоб відповісти: Зараз + [час]."
+        ],
+        "pt": [
+          "Para perguntar as horas: Que horas são? / Agora são que horas?",
+          "Para responder: São + horas."
+        ],
+        "so": [
+          "Si waqtiga loo weydiiyo: Waa imisa saacaddu? / Hadda waa imisa?",
+          "Si looga jawaabo: Waa + saacad."
+        ],
+        "tr": [
+          "Saati sormak için: Saat kaç? / Şu an saat kaç?",
+          "Cevap vermek için: Saat + ..."
+        ],
+        "ps": [
+          "د وخت پوښتلو لپاره: څو بجې دي؟ / اوس څو بجې دي؟",
+          "د ځواب لپاره: ... بجې دي."
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "headers": {
+        "en": [
+          "Official time",
+          "Informal time",
+          "Key expression"
+        ],
+        "ar": [
+          "الوقت الرسمي",
+          "الوقت غير الرسمي",
+          "العبارة الأساسية"
+        ],
+        "fa": [
+          "زمان رسمی",
+          "زمان غیررسمی",
+          "عبارت کلیدی"
+        ],
+        "ti": [
+          "ወግዓዊ ሰዓት",
+          "ዘይወግዓዊ ሰዓት",
+          "ቁልፊ ሓረግ"
+        ],
+        "uk": [
+          "Офіційний час",
+          "Неофіційний час",
+          "Ключовий вираз"
+        ],
+        "pt": [
+          "Hora oficial",
+          "Hora informal",
+          "Expressão-chave"
+        ],
+        "so": [
+          "Waqtiga rasmiga ah",
+          "Waqtiga aan rasmiga ahayn",
+          "Weedha muhiimka ah"
+        ],
+        "tr": [
+          "Resmî saat",
+          "Günlük saat",
+          "Ana ifade"
+        ],
+        "ps": [
+          "رسمي وخت",
+          "نا رسمي وخت",
+          "مهمه اصطلاح"
+        ]
+      },
+      "rows": {
+        "en": [
+          [
+            "8h00",
+            "eight o'clock (in the morning)",
+            "o'clock"
+          ],
+          [
+            "8h15",
+            "quarter past eight",
+            "quarter past"
+          ],
+          [
+            "8h30",
+            "half past eight",
+            "half past"
+          ],
+          [
+            "8h45",
+            "quarter to nine",
+            "quarter to"
+          ],
+          [
+            "12h00",
+            "noon",
+            "—"
+          ],
+          [
+            "0h00",
+            "midnight",
+            "—"
+          ]
+        ],
+        "ar": [
+          [
+            "8h00",
+            "الثامنة صباحًا",
+            "تمامًا"
+          ],
+          [
+            "8h15",
+            "الثامنة والربع",
+            "والربع"
+          ],
+          [
+            "8h30",
+            "الثامنة والنصف",
+            "والنصف"
+          ],
+          [
+            "8h45",
+            "التاسعة إلا الربع",
+            "إلا الربع"
+          ],
+          [
+            "12h00",
+            "الظهر",
+            "—"
+          ],
+          [
+            "0h00",
+            "منتصف الليل",
+            "—"
+          ]
+        ],
+        "fa": [
+          [
+            "8h00",
+            "هشت صبح",
+            "دقیق"
+          ],
+          [
+            "8h15",
+            "هشت و ربع",
+            "و ربع"
+          ],
+          [
+            "8h30",
+            "هشت و نیم",
+            "و نیم"
+          ],
+          [
+            "8h45",
+            "یک ربع به نه",
+            "یک ربع مانده"
+          ],
+          [
+            "12h00",
+            "ظهر",
+            "—"
+          ],
+          [
+            "0h00",
+            "نیمه‌شب",
+            "—"
+          ]
+        ],
+        "ti": [
+          [
+            "8h00",
+            "ሸሞንተ ሰዓት ንግሆ",
+            "ብልክዕ"
+          ],
+          [
+            "8h15",
+            "ሸሞንተን ርብዕን",
+            "ርብዕ"
+          ],
+          [
+            "8h30",
+            "ሸሞንተን ፈረቓን",
+            "ፈረቓ"
+          ],
+          [
+            "8h45",
+            "ትሽዓተ ካብ ርብዕ ጎደለ",
+            "ካብ ርብዕ ጎደለ"
+          ],
+          [
+            "12h00",
+            "ፍርቂ መዓልቲ",
+            "—"
+          ],
+          [
+            "0h00",
+            "ፍርቂ ለይቲ",
+            "—"
+          ]
+        ],
+        "uk": [
+          [
+            "8h00",
+            "восьма година ранку",
+            "рівно"
+          ],
+          [
+            "8h15",
+            "чверть по восьмій",
+            "чверть по"
+          ],
+          [
+            "8h30",
+            "пів на дев'яту",
+            "пів на"
+          ],
+          [
+            "8h45",
+            "без чверті дев'ята",
+            "без чверті"
+          ],
+          [
+            "12h00",
+            "полудень",
+            "—"
+          ],
+          [
+            "0h00",
+            "північ",
+            "—"
+          ]
+        ],
+        "pt": [
+          [
+            "8h00",
+            "oito horas (da manhã)",
+            "em ponto"
+          ],
+          [
+            "8h15",
+            "oito e um quarto",
+            "e um quarto"
+          ],
+          [
+            "8h30",
+            "oito e meia",
+            "e meia"
+          ],
+          [
+            "8h45",
+            "nove menos um quarto",
+            "menos um quarto"
+          ],
+          [
+            "12h00",
+            "meio-dia",
+            "—"
+          ],
+          [
+            "0h00",
+            "meia-noite",
+            "—"
+          ]
+        ],
+        "so": [
+          [
+            "8h00",
+            "sideedda subaxnimo",
+            "saacad dhan"
+          ],
+          [
+            "8h15",
+            "sideed iyo rubuc",
+            "iyo rubuc"
+          ],
+          [
+            "8h30",
+            "sideed iyo badh",
+            "iyo badh"
+          ],
+          [
+            "8h45",
+            "sagaal wax ka rubuc",
+            "wax ka rubuc"
+          ],
+          [
+            "12h00",
+            "duhur",
+            "—"
+          ],
+          [
+            "0h00",
+            "saqda dhexe",
+            "—"
+          ]
+        ],
+        "tr": [
+          [
+            "8h00",
+            "saat sekiz (sabah)",
+            "tam"
+          ],
+          [
+            "8h15",
+            "sekizi çeyrek geçiyor",
+            "çeyrek geçiyor"
+          ],
+          [
+            "8h30",
+            "sekiz buçuk",
+            "buçuk"
+          ],
+          [
+            "8h45",
+            "dokuza çeyrek var",
+            "çeyrek var"
+          ],
+          [
+            "12h00",
+            "öğle",
+            "—"
+          ],
+          [
+            "0h00",
+            "gece yarısı",
+            "—"
+          ]
+        ],
+        "ps": [
+          [
+            "8h00",
+            "اته بجې سهار",
+            "پر بجو"
+          ],
+          [
+            "8h15",
+            "اته بجې او ربع",
+            "او ربع"
+          ],
+          [
+            "8h30",
+            "اته بجې او نیم",
+            "او نیم"
+          ],
+          [
+            "8h45",
+            "نه بجې ته ربع کم",
+            "ربع کم"
+          ],
+          [
+            "12h00",
+            "غرمه",
+            "—"
+          ],
+          [
+            "0h00",
+            "نیمه شپه",
+            "—"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "clocks",
+      "labels": {
+        "en": [
+          "8h00 — o'clock",
+          "8h15 — quarter past",
+          "8h30 — half past",
+          "8h45 — quarter to"
+        ],
+        "ar": [
+          "8h00 — تمامًا",
+          "8h15 — والربع",
+          "8h30 — والنصف",
+          "8h45 — إلا الربع"
+        ],
+        "fa": [
+          "8h00 — دقیق",
+          "8h15 — و ربع",
+          "8h30 — و نیم",
+          "8h45 — یک ربع مانده"
+        ],
+        "ti": [
+          "8h00 — ብልክዕ",
+          "8h15 — ርብዕ",
+          "8h30 — ፈረቓ",
+          "8h45 — ካብ ርብዕ ጎደለ"
+        ],
+        "uk": [
+          "8h00 — рівно",
+          "8h15 — чверть по",
+          "8h30 — пів на",
+          "8h45 — без чверті"
+        ],
+        "pt": [
+          "8h00 — em ponto",
+          "8h15 — e um quarto",
+          "8h30 — e meia",
+          "8h45 — menos um quarto"
+        ],
+        "so": [
+          "8h00 — saacad dhan",
+          "8h15 — iyo rubuc",
+          "8h30 — iyo badh",
+          "8h45 — wax ka rubuc"
+        ],
+        "tr": [
+          "8h00 — tam",
+          "8h15 — çeyrek geçiyor",
+          "8h30 — buçuk",
+          "8h45 — çeyrek var"
+        ],
+        "ps": [
+          "8h00 — پر بجو",
+          "8h15 — او ربع",
+          "8h30 — او نیم",
+          "8h45 — ربع کم"
+        ]
+      }
+    },
+    {
+      "type": "note",
+      "text": {
+        "en": "Official time (formal): 14h30 = fourteen thirty. Informal time: 14h30 = half past two in the afternoon.",
+        "ar": "الوقت الرسمي (الفصيح): 14h30 = الرابعة عشرة وثلاثون دقيقة. الوقت غير الرسمي: 14h30 = الثانية والنصف بعد الظهر.",
+        "fa": "زمان رسمی: 14h30 = چهارده و سی دقیقه. زمان غیررسمی: 14h30 = دو و نیم بعدازظهر.",
+        "ti": "ወግዓዊ ሰዓት፦ 14h30 = ዓሰርተ ኣርባዕተን ሰላሳን። ዘይወግዓዊ ሰዓት፦ 14h30 = ክልተን ፈረቓን ድሕሪ ቀትሪ።",
+        "uk": "Офіційний час: 14h30 = чотирнадцята тридцять. Неофіційний час: 14h30 = пів на третю дня.",
+        "pt": "Hora oficial (formal): 14h30 = catorze horas e trinta. Hora informal: 14h30 = duas e meia da tarde.",
+        "so": "Waqtiga rasmiga ah: 14h30 = afar iyo toban iyo soddon. Waqtiga aan rasmiga ahayn: 14h30 = laba iyo badh galabnimo.",
+        "tr": "Resmî saat: 14h30 = on dört otuz. Günlük kullanım: 14h30 = öğleden sonra iki buçuk.",
+        "ps": "رسمي وخت: 14h30 = څوارلس بجې او دېرش دقیقې. نا رسمي وخت: 14h30 = د ماسپښين دوه نيمې بجې."
+      }
+    }
+  ]
+}
