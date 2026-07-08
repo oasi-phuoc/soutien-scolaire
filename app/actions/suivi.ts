@@ -89,7 +89,7 @@ export async function getSuiviContextAction(): Promise<SuiviContext | null> {
 
   return {
     role,
-    hasAccess: !!hasAccess,
+    hasAccess: role === "admin" ? true : !!hasAccess,
     classes,
     primaryClassId,
     primaryClassLabel,
