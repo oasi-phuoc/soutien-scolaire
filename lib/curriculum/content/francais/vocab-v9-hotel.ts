@@ -4,6 +4,17 @@ export const V9_HOTEL_THEME: VocabTheme = {
   slug: "v9-hotel",
   code: "V9.7",
   title: "L'hôtel",
+  titlePivot: {
+    en: "Hotel",
+    ar: "الفندق",
+    fa: "هتل",
+    ti: "ሆቴል",
+    uk: "Готель",
+    pt: "Hotel",
+    so: "Hoteelka",
+    tr: "Otel",
+    ps: "هوټل",
+  },
   section: "V9",
   words: [
     {

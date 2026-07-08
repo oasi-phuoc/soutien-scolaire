@@ -4,6 +4,17 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
   slug: "v1-description-morale",
   code: "V1.6",
   title: "La description morale",
+  titlePivot: {
+    en: "Personality Description",
+    ar: "الوصف المعنوي",
+    fa: "توصیف شخصیتی",
+    ti: "ባህርያዊ መግለጺ",
+    uk: "Опис характеру",
+    pt: "Descrição da personalidade",
+    so: "Sharaxaadda dabeecadda",
+    tr: "Kişilik tanımı",
+    ps: "د شخصیت تشریح",
+  },
   section: "V1",
   cardLayout: "mf",
   words: [

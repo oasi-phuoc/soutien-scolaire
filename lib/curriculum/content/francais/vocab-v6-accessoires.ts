@@ -4,6 +4,17 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
   slug: "v6-accessoires",
   code: "V6.2",
   title: "Les accessoires",
+  titlePivot: {
+    en: "Accessories",
+    ar: "الإكسسوارات",
+    fa: "لوازم جانبی",
+    ti: "ኣክሰሰዋራት",
+    uk: "Аксесуари",
+    pt: "Acessórios",
+    so: "Agabka dheeraadka ah",
+    tr: "Aksesuarlar",
+    ps: "لوازم",
+  },
   section: "V6",
   words: [
     {

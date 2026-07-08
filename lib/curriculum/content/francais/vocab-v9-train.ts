@@ -4,6 +4,17 @@ export const V9_TRAIN_THEME: VocabTheme = {
   slug: "v9-train",
   code: "V9.5",
   title: "Le train",
+  titlePivot: {
+    en: "Train Station",
+    ar: "محطة القطار",
+    fa: "ایستگاه قطار",
+    ti: "መደበር ባቡር",
+    uk: "Залізничний вокзал",
+    pt: "Estação ferroviária",
+    so: "Saldhigga tareenka",
+    tr: "Tren istasyonu",
+    ps: "د اورګاډي تمځای",
+  },
   section: "V9",
   words: [
     {

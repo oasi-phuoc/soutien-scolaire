@@ -4,6 +4,17 @@ export const V1_FAMILLE_THEME: VocabTheme = {
   slug: "v1-famille",
   code: "V1.3",
   title: "La famille",
+  titlePivot: {
+    en: "Family",
+    ar: "الأسرة",
+    fa: "خانواده",
+    ti: "ስድራ",
+    uk: "Сім'я",
+    pt: "Família",
+    so: "Qoyska",
+    tr: "Aile",
+    ps: "کورنۍ",
+  },
   section: "V1",
   words: [
     {

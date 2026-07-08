@@ -7,6 +7,7 @@ import { playWord, SoundIcon } from "./vocabUtils";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { definitionLabel, pickWordDefinition } from "@/lib/curriculum/vocab-definition-utils";
+import { pickVocabTitle, resolveVocabTheoryBlock } from "@/lib/curriculum/vocab-theme-utils";
 
 function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
   const cx = size / 2, cy = size / 2, r = size * 0.44;
@@ -301,6 +302,10 @@ interface Props {
 }
 
 export function VocabCards({ theme, onCanValidateChange }: Props) {
+  const pivot = usePivotLang();
+  const { showPivot } = useTranslation();
+  const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+  const displayTitle = pickVocabTitle(theme, pivot, showPivot);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(false); }, []);
 
@@ -317,8 +322,12 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
 
   return (
     <div>
-      <p className="mb-4 text-xl font-bold text-[var(--color-text-primary)]">
-        Vocabulaire
+      <p
+        className="mb-4 text-xl font-bold text-[var(--color-text-primary)]"
+        lang={showPivot && pivot !== "fr" ? pivot : "fr"}
+        dir={isRtl ? "rtl" : "ltr"}
+      >
+        {displayTitle}
       </p>
       <div className="space-y-4">
         {sections.map((sec, si) => (
@@ -338,7 +347,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
           <p className="text-sm font-bold text-[var(--color-accent-fr)]">Théorie</p>
           {theme.theory.map((block, i) => (
             <Fragment key={i}>
-              <TheoryBlock block={block} />
+              <TheoryBlock block={resolveVocabTheoryBlock(block, i, theme, pivot, showPivot)} />
             </Fragment>
           ))}
         </div>

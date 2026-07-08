@@ -4,6 +4,17 @@ export const V6_COULEURS_THEME: VocabTheme = {
   slug: "v6-couleurs",
   code: "V6.3",
   title: "Les couleurs",
+  titlePivot: {
+    en: "Colors",
+    ar: "الألوان",
+    fa: "رنگ‌ها",
+    ti: "ሕብርታት",
+    uk: "Кольори",
+    pt: "Cores",
+    so: "Midabada",
+    tr: "Renkler",
+    ps: "رنګونه",
+  },
   section: "V6",
   words: [
     {

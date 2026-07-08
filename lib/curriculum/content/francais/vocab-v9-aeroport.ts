@@ -4,6 +4,17 @@ export const V9_AEROPORT_THEME: VocabTheme = {
   slug: "v9-aeroport",
   code: "V9.6",
   title: "L'aéroport",
+  titlePivot: {
+    en: "Airport",
+    ar: "المطار",
+    fa: "فرودگاه",
+    ti: "መዕርፎ ነፈርቲ",
+    uk: "Аеропорт",
+    pt: "Aeroporto",
+    so: "Garoonka diyaaradaha",
+    tr: "Havalimanı",
+    ps: "هوايي ډګر",
+  },
   section: "V9",
   words: [
     {

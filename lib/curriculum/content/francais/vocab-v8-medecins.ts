@@ -4,6 +4,17 @@ export const V8_MEDECINS_THEME: VocabTheme = {
   slug: "v8-medecins",
   code: "V8.3",
   title: "Les médecins",
+  titlePivot: {
+    en: "Doctors",
+    ar: "الأطباء",
+    fa: "پزشکان",
+    ti: "ሓካይም",
+    uk: "Лікарі",
+    pt: "Médicos",
+    so: "Dhakhaatiirta",
+    tr: "Doktorlar",
+    ps: "ډاکټران",
+  },
   section: "V8",
   words: [
     {

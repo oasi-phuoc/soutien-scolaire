@@ -4,6 +4,17 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
   slug: "v5-structure-ecole",
   code: "V5.3",
   title: "La structure de l'école",
+  titlePivot: {
+    en: "School Structure",
+    ar: "بنية المدرسة",
+    fa: "ساختار مدرسه",
+    ti: "ኣወቃቕራ ቤት ትምህርቲ",
+    uk: "Структура школи",
+    pt: "Estrutura da escola",
+    so: "Qaab-dhismeedka dugsiga",
+    tr: "Okulun yapısı",
+    ps: "د ښوونځي جوړښت",
+  },
   section: "V5",
   words: [
     {

@@ -4,6 +4,17 @@ export const V2_SAISONS_THEME: VocabTheme = {
   slug: "v2-saisons",
   code: "V2.3",
   title: "Les saisons",
+  titlePivot: {
+    en: "Seasons",
+    ar: "الفصول",
+    fa: "فصل‌ها",
+    ti: "ወቕታት",
+    uk: "Пори року",
+    pt: "Estações",
+    so: "Xilliyada",
+    tr: "Mevsimler",
+    ps: "فصلونه",
+  },
   section: "V2",
   words: [
     {

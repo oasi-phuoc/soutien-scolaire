@@ -4,6 +4,17 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
   slug: "v9-transport",
   code: "V9.2",
   title: "Le transport",
+  titlePivot: {
+    en: "Transport",
+    ar: "النقل",
+    fa: "حمل‌ونقل",
+    ti: "መጓዓዝያ",
+    uk: "Транспорт",
+    pt: "Transporte",
+    so: "Gaadiidka",
+    tr: "Ulaşım",
+    ps: "ترانسپورټ",
+  },
   section: "V9",
   words: [
     {

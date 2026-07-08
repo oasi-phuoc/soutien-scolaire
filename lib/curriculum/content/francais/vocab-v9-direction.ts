@@ -4,6 +4,17 @@ export const V9_DIRECTION_THEME: VocabTheme = {
   slug: "v9-direction",
   code: "V9.3",
   title: "La direction",
+  titlePivot: {
+    en: "Directions",
+    ar: "الاتجاهات",
+    fa: "جهت‌ها",
+    ti: "ኣንፈታት",
+    uk: "Напрямки",
+    pt: "Direções",
+    so: "Jihooyinka",
+    tr: "Yönler",
+    ps: "لارښوونې",
+  },
   section: "V9",
   words: [
     {

@@ -4,6 +4,17 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
   slug: "v1-nationalites",
   code: "V1.1",
   title: "Les nationalités",
+  titlePivot: {
+    en: "Nationalities",
+    ar: "الجنسيات",
+    fa: "ملیت‌ها",
+    ti: "ዜግነታት",
+    uk: "Національності",
+    pt: "Nacionalidades",
+    so: "Jinsiyadaha",
+    tr: "Milliyetler",
+    ps: "ملیتونه",
+  },
   section: "V1",
   words: [
     {

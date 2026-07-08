@@ -4,6 +4,17 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
   slug: "v8-pharmacie",
   code: "V8.4",
   title: "La pharmacie",
+  titlePivot: {
+    en: "Pharmacy",
+    ar: "الصيدلية",
+    fa: "داروخانه",
+    ti: "ፋርማሲ",
+    uk: "Аптека",
+    pt: "Farmácia",
+    so: "Farmashiyaha",
+    tr: "Eczane",
+    ps: "درملتون",
+  },
   section: "V8",
   words: [
     {

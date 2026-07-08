@@ -4,6 +4,17 @@ export const V2_METEO_THEME: VocabTheme = {
   slug: "v2-meteo",
   code: "V2.4",
   title: "La météo",
+  titlePivot: {
+    en: "Weather",
+    ar: "الطقس",
+    fa: "آب‌وهوا",
+    ti: "ኩነታት ኣየር",
+    uk: "Погода",
+    pt: "O tempo",
+    so: "Cimilada",
+    tr: "Hava durumu",
+    ps: "هوا",
+  },
   section: "V2",
   words: [
     {

@@ -4,6 +4,17 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
   slug: "v2-jours-mois-dates",
   code: "V2.1",
   title: "Jours, Mois et Dates",
+  titlePivot: {
+    en: "Days, Months and Dates",
+    ar: "الأيام والأشهر والتواريخ",
+    fa: "روزها، ماه‌ها و تاریخ‌ها",
+    ti: "መዓልታት፣ ኣዋርሕን ዕለታትን",
+    uk: "Дні, Місяці та Дати",
+    pt: "Dias, Meses e Datas",
+    so: "Maalmaha, Bilaha iyo Taariikhaha",
+    tr: "Günler, Aylar ve Tarihler",
+    ps: "ورځې، میاشتې او نېټې",
+  },
   section: "V2",
   words: [
     {

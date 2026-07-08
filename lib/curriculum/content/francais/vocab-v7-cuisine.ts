@@ -4,6 +4,17 @@ export const V7_CUISINE_THEME: VocabTheme = {
   slug: "v7-cuisine",
   code: "V7.5",
   title: "La cuisine",
+  titlePivot: {
+    en: "Cooking",
+    ar: "الطبخ",
+    fa: "آشپزی",
+    ti: "ምብሳሕ",
+    uk: "Кулінарія",
+    pt: "Cozinha",
+    so: "Karinta",
+    tr: "Mutfak",
+    ps: "آشپزي",
+  },
   section: "V7",
   words: [
     {

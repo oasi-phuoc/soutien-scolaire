@@ -4,6 +4,17 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
   slug: "v5-materiel-scolaire",
   code: "V5.2",
   title: "Le matériel scolaire",
+  titlePivot: {
+    en: "School Supplies",
+    ar: "الأدوات المدرسية",
+    fa: "لوازم مدرسه",
+    ti: "ናውቲ ቤት ትምህርቲ",
+    uk: "Шкільне приладдя",
+    pt: "Material escolar",
+    so: "Qalabka dugsiga",
+    tr: "Okul malzemeleri",
+    ps: "د ښوونځي وسایل",
+  },
   section: "V5",
   words: [
     {

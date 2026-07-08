@@ -4,6 +4,17 @@ export const V4_PANNES_THEME: VocabTheme = {
   slug: "v4-pannes",
   code: "V4.5",
   title: "Les pannes",
+  titlePivot: {
+    en: "Breakdowns",
+    ar: "الأعطال",
+    fa: "خرابی‌ها",
+    ti: "ብልሽታት",
+    uk: "Поломки",
+    pt: "Avarias",
+    so: "Cilladaha",
+    tr: "Arızalar",
+    ps: "خرابۍ",
+  },
   section: "V4",
   words: [
     // Les problèmes électriques

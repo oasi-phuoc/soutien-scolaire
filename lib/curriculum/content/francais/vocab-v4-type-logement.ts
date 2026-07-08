@@ -4,6 +4,17 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
   slug: "v4-type-logement",
   code: "V4.1",
   title: "Les types de logement",
+  titlePivot: {
+    en: "Types of Housing",
+    ar: "أنواع السكن",
+    fa: "انواع مسکن",
+    ti: "ዓይነታት መንበሪ",
+    uk: "Типи житла",
+    pt: "Tipos de moradia",
+    so: "Noocyada guryaha",
+    tr: "Konut türleri",
+    ps: "د استوګنې ډولونه",
+  },
   section: "V4",
   words: [
     {

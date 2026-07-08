@@ -4,6 +4,17 @@ export const V9_VILLE_THEME: VocabTheme = {
   slug: "v9-ville",
   code: "V9.1",
   title: "La ville",
+  titlePivot: {
+    en: "City",
+    ar: "المدينة",
+    fa: "شهر",
+    ti: "ከተማ",
+    uk: "Місто",
+    pt: "Cidade",
+    so: "Magaalada",
+    tr: "Şehir",
+    ps: "ښار",
+  },
   section: "V9",
   words: [
     {

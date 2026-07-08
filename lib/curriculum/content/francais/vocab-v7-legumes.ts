@@ -4,6 +4,17 @@ export const V7_LEGUMES_THEME: VocabTheme = {
   slug: "v7-legumes",
   code: "V7.2",
   title: "Les légumes",
+  titlePivot: {
+    en: "Vegetables",
+    ar: "الخضروات",
+    fa: "سبزیجات",
+    ti: "ኣሕምልቲ",
+    uk: "Овочі",
+    pt: "Legumes",
+    so: "Khudaarta",
+    tr: "Sebzeler",
+    ps: "سبزيجات",
+  },
   section: "V7",
   words: [
     {

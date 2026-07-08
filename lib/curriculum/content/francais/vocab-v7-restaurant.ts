@@ -4,6 +4,17 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   slug: "v7-restaurant",
   code: "V7.3",
   title: "Le restaurant",
+  titlePivot: {
+    en: "Restaurant",
+    ar: "المطعم",
+    fa: "رستوران",
+    ti: "ረስቶራንት",
+    uk: "Ресторан",
+    pt: "Restaurante",
+    so: "Makhaayadda",
+    tr: "Restoran",
+    ps: "رستورانت",
+  },
   section: "V7",
   words: [
     {

@@ -4,6 +4,17 @@ export const V3_SPORT_THEME: VocabTheme = {
   slug: "v3-sport",
   code: "V3.1",
   title: "Le sport",
+  titlePivot: {
+    en: "Sport",
+    ar: "الرياضة",
+    fa: "ورزش",
+    ti: "ስፖርት",
+    uk: "Спорт",
+    pt: "Esporte",
+    so: "Isboortiga",
+    tr: "Spor",
+    ps: "سپورت",
+  },
   section: "V3",
   words: [
     {

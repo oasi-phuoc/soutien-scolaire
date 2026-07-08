@@ -4,6 +4,17 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   slug: "v4-equipements",
   code: "V4.3",
   title: "Les meubles",
+  titlePivot: {
+    en: "Furniture",
+    ar: "الأثاث",
+    fa: "مبلمان",
+    ti: "ኣቑሑ ገዛ",
+    uk: "Меблі",
+    pt: "Móveis",
+    so: "Alaabta guriga",
+    tr: "Mobilyalar",
+    ps: "فرنیچر",
+  },
   section: "V4",
   words: [
     {

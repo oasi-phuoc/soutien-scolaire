@@ -4,6 +4,17 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
   slug: "v6-vetements",
   code: "V6.1",
   title: "Les vêtements",
+  titlePivot: {
+    en: "Clothes",
+    ar: "الملابس",
+    fa: "لباس‌ها",
+    ti: "ክዳውንቲ",
+    uk: "Одяг",
+    pt: "Roupas",
+    so: "Dharka",
+    tr: "Kıyafetler",
+    ps: "کالي",
+  },
   section: "V6",
   words: [
     {

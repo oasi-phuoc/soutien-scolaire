@@ -4,6 +4,17 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
   slug: "v4-pieces-maison",
   code: "V4.2",
   title: "Les pièces de la maison",
+  titlePivot: {
+    en: "Rooms of the House",
+    ar: "غرف المنزل",
+    fa: "اتاق‌های خانه",
+    ti: "ክፍልታት ገዛ",
+    uk: "Кімнати в будинку",
+    pt: "Cômodos da casa",
+    so: "Qolalka guriga",
+    tr: "Evin odaları",
+    ps: "د کور خونې",
+  },
   section: "V4",
   words: [
     {

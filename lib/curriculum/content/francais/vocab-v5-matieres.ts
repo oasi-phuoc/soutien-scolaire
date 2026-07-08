@@ -4,6 +4,17 @@ export const V5_MATIERES_THEME: VocabTheme = {
   slug: "v5-matieres",
   code: "V5.1",
   title: "Les matières scolaires",
+  titlePivot: {
+    en: "School Subjects",
+    ar: "المواد الدراسية",
+    fa: "درس‌های مدرسه",
+    ti: "ናይ ቤት ትምህርቲ ትምህርትታት",
+    uk: "Шкільні предмети",
+    pt: "Matérias escolares",
+    so: "Maaddooyinka dugsiga",
+    tr: "Okul dersleri",
+    ps: "د ښوونځي مضامین",
+  },
   section: "V5",
   words: [
     {

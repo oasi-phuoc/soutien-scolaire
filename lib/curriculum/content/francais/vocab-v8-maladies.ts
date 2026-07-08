@@ -4,6 +4,17 @@ export const V8_MALADIES_THEME: VocabTheme = {
   slug: "v8-maladies",
   code: "V8.2",
   title: "Les maladies",
+  titlePivot: {
+    en: "Illnesses",
+    ar: "الأمراض",
+    fa: "بیماری‌ها",
+    ti: "ሕማማት",
+    uk: "Хвороби",
+    pt: "Doenças",
+    so: "Cudurrada",
+    tr: "Hastalıklar",
+    ps: "ناروغۍ",
+  },
   section: "V8",
   words: [
     {

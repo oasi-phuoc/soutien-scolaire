@@ -4,6 +4,17 @@ export const V7_FRUITS_THEME: VocabTheme = {
   slug: "v7-fruits",
   code: "V7.1",
   title: "Les fruits",
+  titlePivot: {
+    en: "Fruits",
+    ar: "الفواكه",
+    fa: "میوه‌ها",
+    ti: "ፍረታት",
+    uk: "Фрукти",
+    pt: "Frutas",
+    so: "Miraha",
+    tr: "Meyveler",
+    ps: "مېوې",
+  },
   section: "V7",
   words: [
     {

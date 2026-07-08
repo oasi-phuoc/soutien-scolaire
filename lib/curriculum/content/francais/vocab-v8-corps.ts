@@ -4,6 +4,17 @@ export const V8_CORPS_THEME: VocabTheme = {
   slug: "v8-corps",
   code: "V8.1",
   title: "Le corps",
+  titlePivot: {
+    en: "Body",
+    ar: "الجسم",
+    fa: "بدن",
+    ti: "ኣካል",
+    uk: "Тіло",
+    pt: "Corpo",
+    so: "Jirka",
+    tr: "Vücut",
+    ps: "بدن",
+  },
   section: "V8",
   words: [
     {

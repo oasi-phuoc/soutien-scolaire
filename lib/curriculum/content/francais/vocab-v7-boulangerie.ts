@@ -4,6 +4,17 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
   slug: "v7-boulangerie",
   code: "V7.4",
   title: "La boulangerie",
+  titlePivot: {
+    en: "Bakery",
+    ar: "المخبز",
+    fa: "نانوایی",
+    ti: "ቤት እንጌራ",
+    uk: "Пекарня",
+    pt: "Padaria",
+    so: "Dukaanka rootiga",
+    tr: "Fırın",
+    ps: "نانوايي",
+  },
   section: "V7",
   words: [
     {

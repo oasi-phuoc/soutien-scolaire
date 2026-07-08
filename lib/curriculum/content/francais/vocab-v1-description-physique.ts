@@ -4,6 +4,17 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
   slug: "v1-description-physique",
   code: "V1.5",
   title: "La description physique",
+  titlePivot: {
+    en: "Physical Description",
+    ar: "الوصف الجسدي",
+    fa: "توصیف ظاهری",
+    ti: "ኣካላዊ መግለጺ",
+    uk: "Фізичний опис",
+    pt: "Descrição física",
+    so: "Sharaxaadda muuqaalka",
+    tr: "Fiziksel betimleme",
+    ps: "فزیکي تشریح",
+  },
   section: "V1",
   cardLayout: "mf",
   words: [

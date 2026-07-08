@@ -30,13 +30,21 @@ export type VocabTheme = {
   slug: string;
   code: string;
   title: string;
+  titlePivot?: Partial<Record<PivotCode, string>>;
   section: "A0" | "A1" | "A2" | "B1" | "B2" | "V1" | "V2" | "V3" | "V4" | "V5" | "V6" | "V7" | "V8" | "V9" | "V10";
   words: VocabWord[];
   sentences?: VocabSentence[];
   theory?: VocabTheoryBlock[];
+  theoryPivot?: TheoryPivotBlock[];
   cardLayout?: "mf";
   imageFolder?: string;
 };
+
+export type TheoryPivotBlock =
+  | { type: "table"; headers?: Partial<Record<PivotCode, string[]>>; rows?: Partial<Record<PivotCode, string[][]>> }
+  | { type: "clocks"; labels?: Partial<Record<PivotCode, string[]>> }
+  | { type: "section"; title?: Partial<Record<PivotCode, string>>; items?: Partial<Record<PivotCode, string[]>> }
+  | { type: "note"; text?: Partial<Record<PivotCode, string>> };
 
 import { V1_NATIONALITES_THEME } from "./content/francais/vocab-v1-nationalites";
 import { V1_PROFESSIONS_THEME } from "./content/francais/vocab-v1-professions";
@@ -80,9 +88,17 @@ import { V9_TRAIN_THEME } from "./content/francais/vocab-v9-train";
 import { V9_AEROPORT_THEME } from "./content/francais/vocab-v9-aeroport";
 import { V9_HOTEL_THEME } from "./content/francais/vocab-v9-hotel";
 import { V9_PAYSAGE_THEME } from "./content/francais/vocab-v9-paysage";
+import { VOCAB_TITLE_PIVOT_OVERRIDES } from "./vocab-theme-pivots";
+import { getVocabThemePivots } from "./vocab-theme-pivots";
 
-function movedTheme(theme: VocabTheme, section: VocabTheme["section"], code: string, title?: string): VocabTheme {
-  return { ...theme, section, code, title: title ?? theme.title };
+function movedTheme(theme: VocabTheme, section: VocabTheme["section"], code: string, title?: string, titlePivot?: VocabTheme["titlePivot"]): VocabTheme {
+  return {
+    ...theme,
+    section,
+    code,
+    title: title ?? theme.title,
+    titlePivot: titlePivot ?? theme.titlePivot,
+  };
 }
 
 export const VOCAB_THEMES: VocabTheme[] = [
@@ -125,11 +141,16 @@ export const VOCAB_THEMES: VocabTheme[] = [
   movedTheme(V9_PAYSAGE_THEME, "V9", "V9.5"),
   movedTheme(V7_RESTAURANT_THEME, "V10", "V10.1"),
   movedTheme(V7_BOULANGERIE_THEME, "V10", "V10.2"),
-  movedTheme(V9_TRAIN_THEME, "V10", "V10.3", "La gare"),
+  movedTheme(V9_TRAIN_THEME, "V10", "V10.3", "La gare", VOCAB_TITLE_PIVOT_OVERRIDES["v9-train-display"]),
   movedTheme(V9_AEROPORT_THEME, "V10", "V10.4"),
   movedTheme(V9_HOTEL_THEME, "V10", "V10.5"),
 ];
 
 export function getVocabTheme(slug: string): VocabTheme | undefined {
-  return VOCAB_THEMES.find((t) => t.slug === slug);
+  const theme = VOCAB_THEMES.find((t) => t.slug === slug);
+  if (!theme) return undefined;
+  if (theme.titlePivot || theme.theoryPivot) return theme;
+  const pivots = getVocabThemePivots(slug);
+  if (!pivots) return theme;
+  return { ...theme, ...pivots };
 }

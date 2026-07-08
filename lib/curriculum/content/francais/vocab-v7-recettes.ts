@@ -4,6 +4,17 @@ export const V7_RECETTES_THEME: VocabTheme = {
   slug: "v7-recettes",
   code: "V7.6",
   title: "Les recettes",
+  titlePivot: {
+    en: "Recipes",
+    ar: "الوصفات",
+    fa: "دستورهای پخت",
+    ti: "ናይ ምብሳሕ ኣሰራርሓታት",
+    uk: "Рецепти",
+    pt: "Receitas",
+    so: "Cunto-karisyada",
+    tr: "Tarifler",
+    ps: "ترکیبونه",
+  },
   section: "V7",
   words: [
     {

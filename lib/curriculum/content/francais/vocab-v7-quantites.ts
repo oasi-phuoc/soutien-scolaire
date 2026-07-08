@@ -4,6 +4,17 @@ export const V7_QUANTITES_THEME: VocabTheme = {
   slug: "v7-quantites",
   code: "V7.7",
   title: "Les quantités",
+  titlePivot: {
+    en: "Quantities",
+    ar: "الكميات",
+    fa: "مقدارها",
+    ti: "መጠናት",
+    uk: "Кількості",
+    pt: "Quantidades",
+    so: "Qiyaasaha",
+    tr: "Miktarlar",
+    ps: "مقدارونه",
+  },
   section: "V7",
   words: [
     {

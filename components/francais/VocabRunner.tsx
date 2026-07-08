@@ -24,6 +24,9 @@ import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import { pickVocabTitle } from "@/lib/curriculum/vocab-theme-utils";
 
 interface Props {
   theme: VocabTheme;
@@ -120,6 +123,10 @@ function VocabHintPopup({ hint, onClose }: { hint: string; onClose: () => void }
 
 export function VocabRunner({ theme }: Props) {
   const router = useRouter();
+  const pivot = usePivotLang();
+  const { showPivot } = useTranslation();
+  const displayTitle = pickVocabTitle(theme, pivot, showPivot);
+  const titleRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
   const evalGuard = useEvalNavGuard();
   const [steps] = useState<StepDef[]>(() => buildSteps(theme));
   const evalAnnounceIdx = steps.findIndex((s) => s.key === "eval-announce");
@@ -441,8 +448,12 @@ export function VocabRunner({ theme }: Props) {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </Link>
-          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {theme.title}
+          <h1
+            className="text-xl font-bold text-[var(--color-text-primary)]"
+            lang={showPivot && pivot !== "fr" ? pivot : "fr"}
+            dir={titleRtl ? "rtl" : "ltr"}
+          >
+            {displayTitle}
           </h1>
         </div>
       </header>
@@ -550,7 +561,7 @@ export function VocabRunner({ theme }: Props) {
           <PrintConfigSheet
             onClose={() => setShowPrintConfig(false)}
             onPrint={handlePrint}
-            lessonTitle={theme.title}
+            lessonTitle={displayTitle}
             theoryPreview={<VocabCards theme={theme} onCanValidateChange={noop} />}
             exercises={steps
               .filter((candidate) => !candidate.isTheory && !candidate.isEval)

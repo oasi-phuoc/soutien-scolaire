@@ -4,6 +4,17 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
   slug: "v4-appareils-electromenagers",
   code: "V4.4",
   title: "Les appareils électroménagers",
+  titlePivot: {
+    en: "Household Appliances",
+    ar: "الأجهزة المنزلية الكهربائية",
+    fa: "لوازم خانگی برقی",
+    ti: "ኤሌክትሪካዊ ናውቲ ገዛ",
+    uk: "Побутова техніка",
+    pt: "Eletrodomésticos",
+    so: "Qalabka korontada ee guriga",
+    tr: "Ev aletleri",
+    ps: "برقي کورني وسایل",
+  },
   section: "V4",
   words: [
     {

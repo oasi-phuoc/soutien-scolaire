@@ -112,7 +112,16 @@ function auditVocab() {
       missing.push({ file: base, issue: "no_definitionPivot" });
     }
     if (!/theoryPivot:|titlePivot:/.test(src) && /theory:|title:/.test(src)) {
-      missing.push({ file: base, issue: "theme_theory_title_not_translated" });
+      const slugM = src.match(/slug:\s*"([^"]+)"/);
+      const slug = slugM?.[1];
+      const hasCentral = slug && fs.existsSync(path.join(ROOT, "scripts/vocab-title-translations.json"))
+        && (() => {
+          try {
+            const j = JSON.parse(fs.readFileSync(path.join(ROOT, "scripts/vocab-title-translations.json"), "utf8"));
+            return !!j[slug];
+          } catch { return false; }
+        })();
+      if (!hasCentral) missing.push({ file: base, issue: "theme_theory_title_not_translated" });
     }
   }
   return { themeCount: files.length, withPivot, withoutPivot, issues: missing };

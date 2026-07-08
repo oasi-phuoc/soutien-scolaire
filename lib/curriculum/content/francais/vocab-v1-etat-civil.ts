@@ -4,6 +4,17 @@ export const V1_ETAT_CIVIL_THEME: VocabTheme = {
   slug: "v1-etat-civil",
   code: "V1.4",
   title: "L'état civil",
+  titlePivot: {
+    en: "Civil Status",
+    ar: "الحالة المدنية",
+    fa: "وضعیت مدنی",
+    ti: "ሲቪላዊ ኩነታት",
+    uk: "Сімейний стан",
+    pt: "Estado civil",
+    so: "Xaaladda madaniga",
+    tr: "Medeni durum",
+    ps: "مدني حالت",
+  },
   section: "V1",
   words: [
     {

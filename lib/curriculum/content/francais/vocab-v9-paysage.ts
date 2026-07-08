@@ -4,6 +4,17 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
   slug: "v9-paysage",
   code: "V9.8",
   title: "Le paysage",
+  titlePivot: {
+    en: "Landscape",
+    ar: "المنظر الطبيعي",
+    fa: "چشم‌انداز",
+    ti: "መልክዕ ተፈጥሮ",
+    uk: "Пейзаж",
+    pt: "Paisagem",
+    so: "Muuqaalka dhulka",
+    tr: "Manzara",
+    ps: "منظره",
+  },
   section: "V9",
   words: [
     {

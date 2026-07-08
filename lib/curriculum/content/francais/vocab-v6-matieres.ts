@@ -4,6 +4,17 @@ export const V6_MATIERES_THEME: VocabTheme = {
   slug: "v6-matieres",
   code: "V6.4",
   title: "Les matières",
+  titlePivot: {
+    en: "Materials",
+    ar: "المواد",
+    fa: "جنس‌ها",
+    ti: "ንጥረ ነገራት",
+    uk: "Матеріали",
+    pt: "Materiais",
+    so: "Walxaha",
+    tr: "Malzemeler",
+    ps: "مواد",
+  },
   section: "V6",
   words: [
     {

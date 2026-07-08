@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T10:16:35.626Z",
+  "generatedAt": "2026-07-08T11:51:01.122Z",
   "math": {
     "algebra": {
       "domain": "A",
@@ -103,10 +103,6 @@
         },
         {
           "file": "trad-a5-4.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a5-4.ts",
           "type": "no_consignes"
         },
         {
@@ -123,23 +119,11 @@
         },
         {
           "file": "trad-a6-2.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a6-2.ts",
           "type": "no_consignes"
         },
         {
           "file": "trad-a6-3.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a6-3.ts",
           "type": "no_consignes"
-        },
-        {
-          "file": "trad-a6-4.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-a6-4.ts",
@@ -175,15 +159,7 @@
         },
         {
           "file": "trad-a8-1.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a8-1.ts",
           "type": "no_consignes"
-        },
-        {
-          "file": "trad-a8-2.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-a8-2.ts",
@@ -191,23 +167,11 @@
         },
         {
           "file": "trad-a8-3.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a8-3.ts",
           "type": "no_consignes"
         },
         {
           "file": "trad-a8-4.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-a8-4.ts",
           "type": "no_consignes"
-        },
-        {
-          "file": "trad-a8-5.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-a8-5.ts",
@@ -301,31 +265,11 @@
         },
         {
           "file": "trad-g2-1.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g2-1.ts",
           "type": "no_consignes"
         },
         {
           "file": "trad-g2-2.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g2-2.ts",
           "type": "no_consignes"
-        },
-        {
-          "file": "trad-g6-1.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g6-2.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g6-3.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-g6-3.ts",
@@ -333,15 +277,7 @@
         },
         {
           "file": "trad-g6-4.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g6-4.ts",
           "type": "no_theory_trad"
-        },
-        {
-          "file": "trad-g6-5.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-g6-5.ts",
@@ -349,15 +285,7 @@
         },
         {
           "file": "trad-g6-6.ts",
-          "type": "title_en_missing"
-        },
-        {
-          "file": "trad-g6-6.ts",
           "type": "no_theory_trad"
-        },
-        {
-          "file": "trad-g6-7.ts",
-          "type": "title_en_missing"
         },
         {
           "file": "trad-g6-7.ts",
@@ -441,187 +369,13 @@
   "francais": {
     "grammaire": {
       "lessonCount": 56,
-      "issues": [
-        {
-          "file": "grammaire-r1.5.ts",
-          "issue": "exercises_trans_partial (4/5)"
-        }
-      ]
+      "issues": []
     },
     "vocab": {
       "themeCount": 42,
       "withPivot": 42,
       "withoutPivot": 0,
-      "issues": [
-        {
-          "file": "vocab-v1-description-morale.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v1-description-physique.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v1-etat-civil.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v1-famille.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v1-nationalites.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v1-professions.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v2-heure.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v2-jours-mois-dates.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v2-meteo.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v2-saisons.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v3-sport.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v4-appareils-electromenagers.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v4-equipements.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v4-pannes.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v4-pieces-maison.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v4-type-logement.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v5-materiel-scolaire.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v5-matieres.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v5-structure-ecole.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v6-accessoires.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v6-couleurs.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v6-matieres.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v6-vetements.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-boulangerie.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-cuisine.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-fruits.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-legumes.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-quantites.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-recettes.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v7-restaurant.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v8-corps.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v8-maladies.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v8-medecins.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v8-pharmacie.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-aeroport.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-direction.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-espace-culturel.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-hotel.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-paysage.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-train.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-transport.ts",
-          "issue": "theme_theory_title_not_translated"
-        },
-        {
-          "file": "vocab-v9-ville.ts",
-          "issue": "theme_theory_title_not_translated"
-        }
-      ]
+      "issues": []
     }
   }
 }

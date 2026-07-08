@@ -4,6 +4,17 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   slug: "v1-professions",
   code: "V1.2",
   title: "Les professions",
+  titlePivot: {
+    en: "Professions",
+    ar: "المهن",
+    fa: "مشاغل",
+    ti: "ሞያታት",
+    uk: "Професії",
+    pt: "Profissões",
+    so: "Xirfadaha",
+    tr: "Meslekler",
+    ps: "مسلکونه",
+  },
   section: "V1",
   cardLayout: "mf",
   words: [

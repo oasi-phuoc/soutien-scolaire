@@ -4,6 +4,17 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
   slug: "v9-espace-culturel",
   code: "V9.4",
   title: "L'espace culturel",
+  titlePivot: {
+    en: "Cultural Space",
+    ar: "الفضاء الثقافي",
+    fa: "فضای فرهنگی",
+    ti: "ባህላዊ ቦታ",
+    uk: "Культурний простір",
+    pt: "Espaço cultural",
+    so: "Goobta dhaqanka",
+    tr: "Kültürel alan",
+    ps: "کلتوري فضا",
+  },
   section: "V9",
   words: [
     {
