@@ -99,7 +99,9 @@ BEGIN
 END;
 $$;
 
--- Enriched class dashboard
+-- Enriched class dashboard (return type extended vs platform_features migration)
+DROP FUNCTION IF EXISTS public.get_class_dashboard(text);
+
 CREATE OR REPLACE FUNCTION public.get_class_dashboard(p_class_label text)
 RETURNS TABLE(
   student_count      bigint,
@@ -180,7 +182,9 @@ BEGIN
 END;
 $$;
 
--- Replace get_school_classes to respect teacher scope
+-- Replace get_school_classes to respect teacher scope (body change; signature unchanged)
+DROP FUNCTION IF EXISTS public.get_school_classes();
+
 CREATE OR REPLACE FUNCTION public.get_school_classes()
 RETURNS TABLE(
   class_id     uuid,

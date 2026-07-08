@@ -239,6 +239,12 @@ CREATE POLICY "eval_attempts_insert" ON public.eval_attempts FOR INSERT TO authe
   WITH CHECK (user_id = auth.uid());
 
 -- ── Updated RPCs ──────────────────────────────────────────────────────────────
+-- Return types changed vs 20260615000000_add_tasks — must drop before replace.
+DROP FUNCTION IF EXISTS public.get_teacher_tasks();
+DROP FUNCTION IF EXISTS public.get_my_tasks();
+DROP FUNCTION IF EXISTS public.get_class_dashboard(text);
+DROP FUNCTION IF EXISTS public.get_school_classes();
+
 CREATE OR REPLACE FUNCTION public.get_teacher_tasks()
 RETURNS TABLE(
   task_id        uuid,
