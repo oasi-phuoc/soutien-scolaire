@@ -342,16 +342,16 @@ function Q1FigurePlane({
       ))}
       <line x1={pad - 2} y1={cy} x2={cx + xMax * unit + 2} y2={cy} stroke="#334155" strokeWidth="1.5" />
       <line x1={cx} y1={pad - 2} x2={cx} y2={cy + 2} stroke="#334155" strokeWidth="1.5" />
-      <text x={cx - 6} y={cy + 10} textAnchor="middle" fontSize="7" fill="#64748b">0</text>
+      <text x={cx - 6} y={cy + 10} textAnchor="middle" dominantBaseline="hanging" fontSize="7" fill="#64748b">0</text>
       {Array.from({ length: Math.floor(xMax / labelStep) + 1 }, (_, i) => i * labelStep)
         .filter((x) => x > 0)
         .map((x) => (
-          <text key={`tx-${x}`} x={cx + x * unit} y={cy + 14} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
+          <text key={`tx-${x}`} x={cx + x * unit} y={cy + 10} textAnchor="middle" dominantBaseline="hanging" fontSize="7" fill="#64748b">{x}</text>
         ))}
       {Array.from({ length: Math.floor(yMax / labelStep) + 1 }, (_, i) => i * labelStep)
         .filter((y) => y > 0)
         .map((y) => (
-          <text key={`ty-${y}`} x={cx - 8} y={cy - y * unit + 2} textAnchor="middle" fontSize="7" fill="#64748b">{y}</text>
+          <text key={`ty-${y}`} x={cx - 8} y={cy - y * unit} textAnchor="middle" dominantBaseline="middle" fontSize="7" fill="#64748b">{y}</text>
         ))}
 
       {polygons.map((poly, i) => (
@@ -433,12 +433,12 @@ function SignedFigurePlane({
       ))}
       <line x1={pad - 2} y1={cy} x2={w - pad + 2} y2={cy} stroke="#334155" strokeWidth="1.5" />
       <line x1={cx} y1={pad - 2} x2={cx} y2={h - pad + 2} stroke="#334155" strokeWidth="1.5" />
-      <text x={cx - 6} y={cy + (yMin < 0 ? -4 : 10)} textAnchor="middle" fontSize="7" fill="#64748b">0</text>
+      <text x={cx - 6} y={cy + (yMin < 0 ? -4 : 10)} textAnchor="middle" dominantBaseline={yMin < 0 ? "auto" : "hanging"} fontSize="7" fill="#64748b">0</text>
       {xLines.filter((x) => x !== 0 && x % labelStep === 0).map((x) => (
-        <text key={`tx-${x}`} x={cx + x * unit} y={cy + (yMin < 0 ? -6 : 14)} textAnchor="middle" fontSize="7" fill="#64748b">{x}</text>
+        <text key={`tx-${x}`} x={cx + x * unit} y={cy + (yMin < 0 ? -6 : 10)} textAnchor="middle" dominantBaseline={yMin < 0 ? "auto" : "hanging"} fontSize="7" fill="#64748b">{x}</text>
       ))}
       {yLines.filter((y) => y !== 0 && y % labelStep === 0).map((y) => (
-        <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit + 2} textAnchor="middle" fontSize="7" fill="#64748b">{y}</text>
+        <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit} textAnchor="middle" dominantBaseline="middle" fontSize="7" fill="#64748b">{y}</text>
       ))}
 
       {polygons.map((poly, i) => (
