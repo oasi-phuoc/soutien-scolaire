@@ -119,6 +119,12 @@ CREATE TABLE IF NOT EXISTS public.eval_attempts (
 CREATE INDEX IF NOT EXISTS eval_attempts_user_idx ON public.eval_attempts (user_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS eval_attempts_lesson_idx ON public.eval_attempts (user_id, lesson_key);
 
+-- Drop RPCs early so a re-run still clears old signatures before policies/DDL fail.
+DROP FUNCTION IF EXISTS public.get_teacher_tasks() CASCADE;
+DROP FUNCTION IF EXISTS public.get_my_tasks() CASCADE;
+DROP FUNCTION IF EXISTS public.get_class_dashboard(text) CASCADE;
+DROP FUNCTION IF EXISTS public.get_school_classes() CASCADE;
+
 -- ── RLS ───────────────────────────────────────────────────────────────────────
 ALTER TABLE public.school_classes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.class_members ENABLE ROW LEVEL SECURITY;
@@ -129,36 +135,43 @@ ALTER TABLE public.learning_sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.eval_attempts ENABLE ROW LEVEL SECURITY;
 
 -- Classes: prof/admin read; admin manage
+DROP POLICY IF EXISTS "school_classes_select" ON public.school_classes;
 CREATE POLICY "school_classes_select" ON public.school_classes FOR SELECT TO authenticated
   USING (
     EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('prof', 'admin'))
   );
 
+DROP POLICY IF EXISTS "school_classes_manage" ON public.school_classes;
 CREATE POLICY "school_classes_manage" ON public.school_classes FOR ALL TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'))
   WITH CHECK (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
+DROP POLICY IF EXISTS "class_members_select" ON public.class_members;
 CREATE POLICY "class_members_select" ON public.class_members FOR SELECT TO authenticated
   USING (
     student_id = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('prof', 'admin'))
   );
 
+DROP POLICY IF EXISTS "class_members_manage" ON public.class_members;
 CREATE POLICY "class_members_manage" ON public.class_members FOR ALL TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'))
   WITH CHECK (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
+DROP POLICY IF EXISTS "class_teachers_select" ON public.class_teachers;
 CREATE POLICY "class_teachers_select" ON public.class_teachers FOR SELECT TO authenticated
   USING (
     teacher_id = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
   );
 
+DROP POLICY IF EXISTS "class_teachers_manage" ON public.class_teachers;
 CREATE POLICY "class_teachers_manage" ON public.class_teachers FOR ALL TO authenticated
   USING (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'))
   WITH CHECK (EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'));
 
 -- Attachments: teacher on own tasks; student on assigned tasks
+DROP POLICY IF EXISTS "task_attachments_select" ON public.task_attachments;
 CREATE POLICY "task_attachments_select" ON public.task_attachments FOR SELECT TO authenticated
   USING (
     EXISTS (
@@ -171,6 +184,7 @@ CREATE POLICY "task_attachments_select" ON public.task_attachments FOR SELECT TO
     )
   );
 
+DROP POLICY IF EXISTS "task_attachments_insert" ON public.task_attachments;
 CREATE POLICY "task_attachments_insert" ON public.task_attachments FOR INSERT TO authenticated
   WITH CHECK (
     uploaded_by = auth.uid()
@@ -183,6 +197,7 @@ CREATE POLICY "task_attachments_insert" ON public.task_attachments FOR INSERT TO
     )
   );
 
+DROP POLICY IF EXISTS "task_attachments_delete" ON public.task_attachments;
 CREATE POLICY "task_attachments_delete" ON public.task_attachments FOR DELETE TO authenticated
   USING (
     uploaded_by = auth.uid()
@@ -190,24 +205,28 @@ CREATE POLICY "task_attachments_delete" ON public.task_attachments FOR DELETE TO
   );
 
 -- Control bank: prof/admin CRUD own items; admin sees all
+DROP POLICY IF EXISTS "control_bank_select" ON public.control_bank_items;
 CREATE POLICY "control_bank_select" ON public.control_bank_items FOR SELECT TO authenticated
   USING (
     created_by = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
   );
 
+DROP POLICY IF EXISTS "control_bank_insert" ON public.control_bank_items;
 CREATE POLICY "control_bank_insert" ON public.control_bank_items FOR INSERT TO authenticated
   WITH CHECK (
     auth.uid() = created_by
     AND EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('prof', 'admin'))
   );
 
+DROP POLICY IF EXISTS "control_bank_update" ON public.control_bank_items;
 CREATE POLICY "control_bank_update" ON public.control_bank_items FOR UPDATE TO authenticated
   USING (
     created_by = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
   );
 
+DROP POLICY IF EXISTS "control_bank_delete" ON public.control_bank_items;
 CREATE POLICY "control_bank_delete" ON public.control_bank_items FOR DELETE TO authenticated
   USING (
     created_by = auth.uid()
@@ -215,35 +234,40 @@ CREATE POLICY "control_bank_delete" ON public.control_bank_items FOR DELETE TO a
   );
 
 -- Sessions: own rows; prof/admin read all
+DROP POLICY IF EXISTS "learning_sessions_select" ON public.learning_sessions;
 CREATE POLICY "learning_sessions_select" ON public.learning_sessions FOR SELECT TO authenticated
   USING (
     user_id = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('prof', 'admin'))
   );
 
+DROP POLICY IF EXISTS "learning_sessions_insert" ON public.learning_sessions;
 CREATE POLICY "learning_sessions_insert" ON public.learning_sessions FOR INSERT TO authenticated
   WITH CHECK (user_id = auth.uid());
 
+DROP POLICY IF EXISTS "learning_sessions_update" ON public.learning_sessions;
 CREATE POLICY "learning_sessions_update" ON public.learning_sessions FOR UPDATE TO authenticated
   USING (user_id = auth.uid())
   WITH CHECK (user_id = auth.uid());
 
 -- Eval attempts: own rows; prof/admin read all
+DROP POLICY IF EXISTS "eval_attempts_select" ON public.eval_attempts;
 CREATE POLICY "eval_attempts_select" ON public.eval_attempts FOR SELECT TO authenticated
   USING (
     user_id = auth.uid()
     OR EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role IN ('prof', 'admin'))
   );
 
+DROP POLICY IF EXISTS "eval_attempts_insert" ON public.eval_attempts;
 CREATE POLICY "eval_attempts_insert" ON public.eval_attempts FOR INSERT TO authenticated
   WITH CHECK (user_id = auth.uid());
 
 -- ── Updated RPCs ──────────────────────────────────────────────────────────────
 -- Return types changed vs 20260615000000_add_tasks — must drop before replace.
-DROP FUNCTION IF EXISTS public.get_teacher_tasks();
-DROP FUNCTION IF EXISTS public.get_my_tasks();
-DROP FUNCTION IF EXISTS public.get_class_dashboard(text);
-DROP FUNCTION IF EXISTS public.get_school_classes();
+DROP FUNCTION IF EXISTS public.get_teacher_tasks() CASCADE;
+DROP FUNCTION IF EXISTS public.get_my_tasks() CASCADE;
+DROP FUNCTION IF EXISTS public.get_class_dashboard(text) CASCADE;
+DROP FUNCTION IF EXISTS public.get_school_classes() CASCADE;
 
 CREATE OR REPLACE FUNCTION public.get_teacher_tasks()
 RETURNS TABLE(
