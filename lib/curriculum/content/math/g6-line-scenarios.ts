@@ -95,7 +95,7 @@ const RAW_CONFIGS: RawLine[][] = [
   [
     { id: "violette", color: "#9333ea", label: "violette", x1: -4, y1: -10, x2: 6, y2: 10 },
     { id: "bleue", color: "#2563eb", label: "bleue", x1: -10, y1: -4, x2: 10, y2: 6 },
-    { id: "verte", color: "#16a34a", label: "verte", x1: 0, y1: -10, x2: 0, y2: 10 },
+    { id: "verte", color: "#16a34a", label: "verte", x1: -3, y1: -10, x2: 5, y2: 10 },
     { id: "orange", color: "#ea580c", label: "orange", x1: 8, y1: -10, x2: -4, y2: 10 },
   ],
   [
@@ -114,12 +114,12 @@ const RAW_CONFIGS: RawLine[][] = [
     { id: "orange", color: "#ea580c", label: "orange", x1: -10, y1: 8, x2: 8, y2: -10 },
     { id: "bleue", color: "#2563eb", label: "bleue", x1: -8, y1: -8, x2: 8, y2: 8 },
     { id: "violette", color: "#9333ea", label: "violette", x1: 4, y1: -10, x2: 4, y2: 10 },
-    { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: 0, x2: 10, y2: 0 },
+    { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: -3, x2: 10, y2: 5 },
   ],
   [
     { id: "rouge", color: "#dc2626", label: "rouge", x1: -6, y1: 10, x2: 8, y2: -4 },
-    { id: "verte", color: "#16a34a", label: "verte", x1: -10, y1: 0, x2: 10, y2: 0 },
-    { id: "bleue", color: "#2563eb", label: "bleue", x1: 0, y1: -10, x2: 0, y2: 10 },
+    { id: "verte", color: "#16a34a", label: "verte", x1: -10, y1: 4, x2: 10, y2: -2 },
+    { id: "bleue", color: "#2563eb", label: "bleue", x1: -3, y1: -10, x2: -3, y2: 10 },
     { id: "orange", color: "#ea580c", label: "orange", x1: -10, y1: 8, x2: 10, y2: -6 },
   ],
   [
@@ -143,8 +143,8 @@ const RAW_CONFIGS: RawLine[][] = [
   [
     { id: "orange", color: "#ea580c", label: "orange", x1: -10, y1: 10, x2: 10, y2: -10 },
     { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: -10, x2: 10, y2: 10 },
-    { id: "bleue", color: "#2563eb", label: "bleue", x1: -10, y1: 0, x2: 10, y2: 0 },
-    { id: "verte", color: "#16a34a", label: "verte", x1: 0, y1: -10, x2: 0, y2: 10 },
+    { id: "bleue", color: "#2563eb", label: "bleue", x1: -10, y1: 4, x2: 10, y2: -4 },
+    { id: "verte", color: "#16a34a", label: "verte", x1: 4, y1: -10, x2: 4, y2: 10 },
   ],
   [
     { id: "rouge", color: "#dc2626", label: "rouge", x1: -4, y1: -10, x2: -4, y2: 10 },
@@ -191,11 +191,11 @@ const RAW_CONFIGS: RawLine[][] = [
   [
     { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: -4, x2: 10, y2: 8 },
     { id: "bleue", color: "#2563eb", label: "bleue", x1: -10, y1: 8, x2: 10, y2: -4 },
-    { id: "orange", color: "#ea580c", label: "orange", x1: 0, y1: -10, x2: 0, y2: 10 },
-    { id: "jaune", color: "#ca8a04", label: "jaune", x1: -10, y1: 0, x2: 10, y2: 0 },
+    { id: "orange", color: "#ea580c", label: "orange", x1: 5, y1: -10, x2: 5, y2: 10 },
+    { id: "jaune", color: "#ca8a04", label: "jaune", x1: -10, y1: -6, x2: 10, y2: 6 },
   ],
   [
-    { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: 0, x2: 10, y2: 0 },
+    { id: "rouge", color: "#dc2626", label: "rouge", x1: -10, y1: -3, x2: 10, y2: 5 },
     { id: "bleue", color: "#2563eb", label: "bleue", x1: -10, y1: 6, x2: 10, y2: -6 },
     { id: "verte", color: "#16a34a", label: "verte", x1: -6, y1: -10, x2: 6, y2: 10 },
     { id: "violette", color: "#9333ea", label: "violette", x1: -10, y1: -8, x2: 10, y2: 2 },
