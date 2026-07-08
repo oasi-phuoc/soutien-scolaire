@@ -14,6 +14,8 @@ import {
   changePasswordAction,
   getPlacementHistoryForUserAction,
 } from "@/app/actions/admin";
+import { EleveEngagementPanel } from "@/components/admin/EleveEngagementPanel";
+import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { UserRow } from "./AdminTable";
 
 const LANGUE_LABELS: Record<string, string> = {
@@ -36,8 +38,6 @@ const MATH_SUB_IDS_BY_BRANCH = {
   stats: new Set(MATH_MODULES.filter(m => m.branch === "stats").flatMap(m => m.submodules.map(s => s.id))),
 };
 const TOTAL_MATH_SUBS = MATH_MODULES.reduce((n, m) => n + m.submodules.length, 0);
-
-import type { StoredProgressV1 } from "@/lib/curriculum/types";
 
 function mathPct(data: StoredProgressV1 | null) {
   const allIds = new Set([...MATH_SUB_IDS_BY_BRANCH.algebra, ...MATH_SUB_IDS_BY_BRANCH.geometry, ...MATH_SUB_IDS_BY_BRANCH.stats]);
@@ -226,7 +226,11 @@ function ProgressSection({ user }: { user: UserRow }) {
           </button>
           <Bar pct={stat.pct} color={color} />
           {open && (
-            <p className="mt-2 text-xs text-zinc-400">Détail à compléter.</p>
+            label === "Maths" ? (
+              <EleveEngagementPanel userId={user.id} progress={user.progress_data} />
+            ) : (
+              <p className="mt-2 text-xs text-zinc-400">Progression : {stat.done}/{stat.total} leçons.</p>
+            )
           )}
         </div>
       ))}

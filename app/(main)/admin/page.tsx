@@ -54,6 +54,18 @@ export default async function AdminPage() {
         </div>
         <div className="flex items-center gap-2">
           <Link
+            href="/admin/classes"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme)]/10"
+          >
+            Classes
+          </Link>
+          <Link
+            href="/admin/banque-controle"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme)]/10"
+          >
+            Banque
+          </Link>
+          <Link
             href="/admin/taches/apercu"
             className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
           >

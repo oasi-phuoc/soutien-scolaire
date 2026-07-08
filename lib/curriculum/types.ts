@@ -97,4 +97,19 @@ export type StoredProgressV1 = {
     evaluations?: Record<string, { grade: number; passed: boolean; total: number; date: string }>;
     revisions?: Record<string, string>;
   };
+  /** Historique local des tentatives d'évaluation (sync cloud via eval_attempts). */
+  attemptHistory?: {
+    version: 1;
+    attempts: Array<{
+      subject: string;
+      moduleId?: string;
+      lessonId?: string;
+      lessonKey: string;
+      score: number;
+      maxScore: number;
+      grade?: number;
+      attemptNumber: number;
+      at: string;
+    }>;
+  };
 };

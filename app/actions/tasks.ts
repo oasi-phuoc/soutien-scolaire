@@ -11,6 +11,9 @@ export type TaskRow = {
   due_date: string | null;
   module_ref: string | null;
   lesson_ref: string | null;
+  subject: string | null;
+  module_id: string | null;
+  lesson_id: string | null;
   created_at: string;
   total_students: number;
   done_count: number;
@@ -24,8 +27,24 @@ export type AssignmentRow = {
   due_date: string | null;
   module_ref: string | null;
   lesson_ref: string | null;
+  subject: string | null;
+  module_id: string | null;
+  lesson_id: string | null;
   status: "pending" | "done";
   done_at: string | null;
+  proof_type: string | null;
+  proof_grade: number | null;
+  auto_completed: boolean;
+  created_at: string;
+};
+
+export type TaskAttachmentRow = {
+  id: string;
+  task_id: string;
+  file_name: string;
+  storage_path: string;
+  mime_type: string | null;
+  size_bytes: number | null;
   created_at: string;
 };
 
@@ -53,7 +72,12 @@ export async function createTaskAction(
   studentIds: string[],
   moduleRef: string | null,
   lessonRef: string | null,
-): Promise<{ ok: boolean; reason?: string }> {
+  structured?: {
+    subject?: string | null;
+    moduleId?: string | null;
+    lessonId?: string | null;
+  },
+): Promise<{ ok: boolean; taskId?: string; reason?: string }> {
   if (!title.trim()) return { ok: false, reason: "Le titre est obligatoire." };
   if (!studentIds.length) return { ok: false, reason: "Sélectionne au moins un élève." };
 
@@ -74,6 +98,9 @@ export async function createTaskAction(
       due_date: dueDate || null,
       module_ref: moduleRef || null,
       lesson_ref: lessonRef || null,
+      subject: structured?.subject ?? null,
+      module_id: structured?.moduleId ?? null,
+      lesson_id: structured?.lessonId ?? null,
       created_by: user.id,
     })
     .select("id")
@@ -112,7 +139,7 @@ export async function createTaskAction(
 
   revalidatePath("/admin/taches");
   revalidatePath("/messagerie");
-  return { ok: true };
+  return { ok: true, taskId: task.id as string };
 }
 
 export async function updateTaskAction(
@@ -282,4 +309,157 @@ export async function getPendingTaskCountAction(): Promise<number> {
     .eq("status", "pending");
 
   return count ?? 0;
+}
+
+export async function uploadTaskAttachmentAction(
+  taskId: string,
+  formData: FormData,
+): Promise<{ ok: boolean; attachmentId?: string; reason?: string }> {
+  const role = await getCallerRole();
+  if (!role) return { ok: false, reason: "Non autorisé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Erreur serveur." };
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, reason: "Non authentifié." };
+
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) {
+    return { ok: false, reason: "Fichier invalide." };
+  }
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 120);
+  const storagePath = `${taskId}/${Date.now()}-${safeName}`;
+
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const { error: upErr } = await supabase.storage
+    .from("task-attachments")
+    .upload(storagePath, buffer, { contentType: file.type || "application/octet-stream", upsert: false });
+
+  if (upErr) return { ok: false, reason: upErr.message };
+
+  const { data, error } = await supabase
+    .from("task_attachments")
+    .insert({
+      task_id: taskId,
+      file_name: file.name,
+      storage_path: storagePath,
+      mime_type: file.type || null,
+      size_bytes: file.size,
+      uploaded_by: user.id,
+    })
+    .select("id")
+    .single();
+
+  if (error || !data) return { ok: false, reason: error?.message ?? "Erreur enregistrement." };
+
+  revalidatePath("/admin/taches");
+  return { ok: true, attachmentId: data.id as string };
+}
+
+export async function getTaskAttachmentsAction(taskId: string): Promise<{
+  ok: boolean;
+  attachments: TaskAttachmentRow[];
+  error?: string;
+}> {
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, attachments: [], error: "Erreur serveur." };
+
+  const { data, error } = await supabase
+    .from("task_attachments")
+    .select("id, task_id, file_name, storage_path, mime_type, size_bytes, created_at")
+    .eq("task_id", taskId)
+    .order("created_at", { ascending: false });
+
+  if (error) return { ok: false, attachments: [], error: error.message };
+  return { ok: true, attachments: (data ?? []) as TaskAttachmentRow[] };
+}
+
+export async function getTaskAttachmentUrlAction(storagePath: string): Promise<{
+  ok: boolean;
+  url?: string;
+  error?: string;
+}> {
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, error: "Erreur serveur." };
+
+  const { data, error } = await supabase.storage
+    .from("task-attachments")
+    .createSignedUrl(storagePath, 3600);
+
+  if (error || !data?.signedUrl) return { ok: false, error: error?.message ?? "URL indisponible." };
+  return { ok: true, url: data.signedUrl };
+}
+
+/** Auto-complete pending tasks when linked lesson is done in progress. */
+export async function syncTaskProofFromProgressAction(
+  progressData: import("@/lib/curriculum/types").StoredProgressV1,
+): Promise<{ ok: boolean; completed: number }> {
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, completed: 0 };
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, completed: 0 };
+
+  const { data: assignments, error } = await supabase
+    .from("task_assignments")
+    .select("id, status, task_id")
+    .eq("student_id", user.id)
+    .eq("status", "pending");
+
+  if (error || !assignments?.length) return { ok: true, completed: 0 };
+
+  const taskIds = [...new Set(assignments.map((a) => a.task_id as string))];
+  const { data: tasks } = await supabase
+    .from("tasks")
+    .select("id, subject, module_id, lesson_id")
+    .in("id", taskIds);
+
+  const taskMap = new Map((tasks ?? []).map((t) => [t.id as string, t]));
+
+  const { checkLessonCompletion, buildProofData } = await import("@/lib/tasks/task-proof");
+  let completed = 0;
+
+  for (const row of assignments) {
+    const task = taskMap.get(row.task_id as string);
+    if (!task?.subject || !task.lesson_id) continue;
+
+    const proof = checkLessonCompletion(
+      progressData,
+      task.subject as string,
+      task.module_id as string | null,
+      task.lesson_id as string,
+    );
+    if (!proof.complete) continue;
+
+    const proofData = buildProofData(
+      task.subject as string,
+      (task.module_id as string) ?? "",
+      task.lesson_id as string,
+      proof,
+    );
+    const { error: upErr } = await supabase
+      .from("task_assignments")
+      .update({
+        status: "done",
+        done_at: new Date().toISOString(),
+        proof_type: "auto_lesson",
+        proof_score: proof.score ?? null,
+        proof_grade: proof.grade ?? null,
+        proof_data: proofData,
+        auto_completed: true,
+      })
+      .eq("id", row.id as string)
+      .eq("student_id", user.id);
+
+    if (!upErr) completed += 1;
+  }
+
+  if (completed > 0) {
+    revalidatePath("/");
+    revalidatePath("/messagerie");
+  }
+
+  return { ok: true, completed };
 }

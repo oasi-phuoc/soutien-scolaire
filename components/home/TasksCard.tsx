@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState, useTransition } from "react";
-import { getMyAssignmentsAction, markAssignmentDoneAction, type AssignmentRow } from "@/app/actions/tasks";
+import Link from "next/link";
+import { getMyAssignmentsAction, getTaskAttachmentsAction, getTaskAttachmentUrlAction, markAssignmentDoneAction, type AssignmentRow } from "@/app/actions/tasks";
+import { resolveLessonHref } from "@/lib/curriculum/lesson-routes";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
@@ -40,6 +42,14 @@ export function TasksCard() {
     });
   }
 
+  async function openAttachment(taskId: string) {
+    const res = await getTaskAttachmentsAction(taskId);
+    const first = res.attachments[0];
+    if (!first) return;
+    const urlRes = await getTaskAttachmentUrlAction(first.storage_path);
+    if (urlRes.ok && urlRes.url) window.open(urlRes.url, "_blank");
+  }
+
   return (
     <section className="rounded-[var(--radius-lg)] border border-[var(--color-theme)]/20 bg-[var(--color-theme-light)] p-4">
       <div className="mb-3 flex items-center gap-2">
@@ -57,11 +67,11 @@ export function TasksCard() {
         </h2>
       </div>
 
-      {/* Pending tasks */}
       {pending.length > 0 && (
         <ul className="space-y-2">
           {pending.map((a) => {
             const overdue = isOverdue(a.due_date);
+            const lessonHref = resolveLessonHref(a.subject, a.module_id, a.lesson_id);
             return (
               <li key={a.assignment_id} className="flex items-start gap-3 rounded-xl bg-white px-3 py-2.5 shadow-sm dark:bg-zinc-900">
                 <div className="min-w-0 flex-1">
@@ -75,6 +85,23 @@ export function TasksCard() {
                       {formatDate(a.due_date)}
                     </p>
                   )}
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {lessonHref && (
+                      <Link
+                        href={lessonHref}
+                        className="rounded-full bg-[var(--color-theme)] px-3 py-1 text-[10px] font-bold text-white"
+                      >
+                        Ouvrir la leçon
+                      </Link>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => void openAttachment(a.task_id)}
+                      className="rounded-full border border-zinc-200 px-3 py-1 text-[10px] font-semibold text-zinc-600"
+                    >
+                      Pièce jointe
+                    </button>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -90,17 +117,15 @@ export function TasksCard() {
         </ul>
       )}
 
-      {/* Done tasks (collapsed summary) */}
       {done.length > 0 && (
         <p className="mt-2 text-xs text-[var(--color-theme)]">
-          {done.length} tâche{done.length !== 1 ? "s" : ""} terminée{done.length !== 1 ? "s" : ""} ✓
+          {done.length} tâche{done.length !== 1 ? "s" : ""} terminée{done.length !== 1 ? "s" : ""}
+          {done.some((d) => d.auto_completed) ? " (certaines validées automatiquement)" : ""} ✓
         </p>
       )}
 
       {pending.length === 0 && done.length > 0 && (
-        <p className="text-center text-sm font-semibold text-[var(--color-theme)]">
-          Toutes les tâches sont terminées 🎉
-        </p>
+        <p className="text-sm text-[var(--color-theme)]">Toutes les tâches sont terminées ✓</p>
       )}
     </section>
   );

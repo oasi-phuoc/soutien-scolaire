@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { createTaskAction, type StudentOption } from "@/app/actions/tasks";
+import { createTaskAction, uploadTaskAttachmentAction, type StudentOption } from "@/app/actions/tasks";
+import { subjectFromMatiere } from "@/lib/curriculum/lesson-routes";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 
 // ─── Curriculum options for module selector ────────────────────────────────
@@ -323,6 +324,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   const [expandedClasses, setExpandedClasses] = useState<Set<string>>(new Set());
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [attachmentFiles, setAttachmentFiles] = useState<File[]>([]);
   const [isPending, startTransition] = useTransition();
 
   // Derived curriculum options
@@ -395,15 +397,27 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
     setFormError(null);
     setFormSuccess(false);
     startTransition(async () => {
+      const subject = subjectFromMatiere(matiere);
       const res = await createTaskAction(
         title, description, dueDate || null,
         Array.from(selectedIds),
         moduleRef, lessonRef,
+        subject && moduleId && lessonId
+          ? { subject, moduleId, lessonId }
+          : undefined,
       );
       if (!res.ok) { setFormError(res.reason ?? "Erreur inconnue."); return; }
+      if (res.taskId && attachmentFiles.length > 0) {
+        for (const file of attachmentFiles) {
+          const fd = new FormData();
+          fd.append("file", file);
+          await uploadTaskAttachmentAction(res.taskId, fd);
+        }
+      }
       setTitle(""); setDescription(""); setDueDate("");
       setMatiere(""); setModuleId(""); setLessonId("");
       setSelectedIds(new Set());
+      setAttachmentFiles([]);
       setFormSuccess(true);
       setTimeout(() => setFormSuccess(false), 3000);
     });
@@ -468,6 +482,20 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
       <div>
         <label className="mb-1 block text-xs font-semibold text-zinc-500 dark:text-zinc-400">Date limite (optionnel)</label>
         <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className={inputCls} />
+      </div>
+
+      {/* Attachments */}
+      <div>
+        <label className="mb-1 block text-xs font-semibold text-zinc-500 dark:text-zinc-400">Pièces jointes (optionnel)</label>
+        <input
+          type="file"
+          multiple
+          onChange={(e) => setAttachmentFiles(Array.from(e.target.files ?? []))}
+          className="block w-full text-sm text-zinc-600 file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--color-theme)]/10 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-[var(--color-theme)]"
+        />
+        {attachmentFiles.length > 0 && (
+          <p className="mt-1 text-xs text-zinc-500">{attachmentFiles.length} fichier(s) sélectionné(s)</p>
+        )}
       </div>
 
       {/* Student selector */}
