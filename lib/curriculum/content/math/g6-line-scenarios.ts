@@ -221,7 +221,7 @@ function buildQuestions(lines: RawLine[], seed: number): LineScenarioQuestion[] 
 
   const q2: LineScenarioQuestion = {
     type: "color_pair",
-    prompt: `Ces droites se croisent en ${fmtCoord(p2[2][0], p2[2][1])}.`,
+    prompt: `se croisent en ${fmtCoord(p2[2][0], p2[2][1])}.`,
     point: p2[2],
     answer: [p2[0].id, p2[1].id],
   };
