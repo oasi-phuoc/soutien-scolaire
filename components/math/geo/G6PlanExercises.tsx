@@ -19,6 +19,7 @@ import {
   Q1_CARTESIAN_FIGURES,
   Q12_CARTESIAN_FIGURES,
   Q34_CARTESIAN_FIGURES,
+  Q_ALL_CARTESIAN_FIGURES,
   type GridCell,
   type MapQuestion,
   type Q1CartesianFigure,
@@ -470,6 +471,73 @@ function genQ2FigureExercise(half: "q12" | "q34") {
     y: verts[i]![1],
   }));
   return { figure, askedPoints, half };
+}
+
+function genQAllFigureExercise() {
+  const pool = Q_ALL_CARTESIAN_FIGURES.filter((f) => pickSpacedVerts(f.vertices, 4, 2).length >= 4);
+  const figure = pickN(pool, 1)[0]!;
+  const verts = pickSpacedVerts(figure.vertices, 4, 2);
+  const askedPoints = (["a", "b", "c", "d"] as const).map((label, i) => ({
+    label,
+    x: verts[i]![0],
+    y: verts[i]![1],
+  }));
+  return { figure, askedPoints };
+}
+
+// ── Exercice 3 (G6.2) : coordonnées sur figure — 4 quadrants ────────────────
+
+export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const [{ figure, askedPoints }] = useState(() => genQAllFigureExercise());
+  const bounds = { xMin: -10, xMax: 10, yMin: -10, yMax: 10 };
+  const [answers, setAnswers] = useState<XYAnswer[]>(() => askedPoints.map(() => ({ x: "", y: "" })));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prev = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res = askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y));
+    setResults(res);
+    setValidated(true);
+    onValidated(res.filter(Boolean).length, res.length);
+  }, [validated, askedPoints, answers, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+        {askedPoints.map((pt, i) => {
+          const answer = answers[i] ?? { x: "", y: "" };
+          const wrong = validated && !results[i];
+          return (
+            <GridXYFields
+              key={pt.label}
+              label={pt.label}
+              answer={answer}
+              correctX={pt.x}
+              correctY={pt.y}
+              validated={validated}
+              wrong={wrong}
+              signed
+              onChange={(next) => setAnswers((p) => p.map((a, j) => (j === i ? next : a)))}
+            />
+          );
+        })}
+      </div>
+      <SignedFigurePlane
+        xMin={bounds.xMin}
+        xMax={bounds.xMax}
+        yMin={bounds.yMin}
+        yMax={bounds.yMax}
+        polygons={figure.polygons}
+        points={askedPoints}
+      />
+    </div>
+  );
 }
 
 // ── Grille lettres/chiffres ───────────────────────────────────────────────────
@@ -960,22 +1028,10 @@ export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, 
 
   useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
 
-  const quadrantLabel = activeHalf === "q12" ? "1er et 2e quadrants" : "3e et 4e quadrants";
-
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Je note les coordonnées des points ({quadrantLabel}). Les axes sont gradués de 5 en 5.
-      </p>
-      <SignedFigurePlane
-        xMin={bounds.xMin}
-        xMax={bounds.xMax}
-        yMin={bounds.yMin}
-        yMax={bounds.yMax}
-        polygons={figure.polygons}
-        points={askedPoints}
-      />
+      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
           const answer = answers[i] ?? { x: "", y: "" };
@@ -995,6 +1051,14 @@ export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, 
           );
         })}
       </div>
+      <SignedFigurePlane
+        xMin={bounds.xMin}
+        xMax={bounds.xMax}
+        yMin={bounds.yMin}
+        yMax={bounds.yMax}
+        polygons={figure.polygons}
+        points={askedPoints}
+      />
     </div>
   );
 }

@@ -38,13 +38,13 @@ import {
   G6CartesianCoordsExercise,
   G6Q1FigureCoordsExercise,
   G6Q2FigureCoordsExercise,
+  G6QAllFigureCoordsExercise,
   G6MapGenevaExercise,
   G6MapBielExercise,
   G6RebeuvelierExercise,
   type G6EvalSnapshot,
 } from "@/components/math/geo/G6PlanExercises";
 import {
-  G6PolygonIntExercise,
   G6LineIntersectExercise,
   G6CartesianPlaceExercise,
   G6FindVertexExercise,
@@ -11172,7 +11172,7 @@ export function GenericModuleContent({
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
           )}
           {currentStep.variant === 8 && (
-            <G6PolygonIntExercise key={`g6pi-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+            <G6QAllFigureCoordsExercise key={`g6qall-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
           )}
           {currentStep.variant === 10 && (

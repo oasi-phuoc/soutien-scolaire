@@ -464,65 +464,6 @@ export const POLYGON_HALF_TEMPLATES: LabeledPoint[][] = [
   ],
 ];
 
-export type SegmentLine = { id: string; color: string; x1: number; y1: number; x2: number; y2: number; label: string };
-
-export type LineScenarioQuestion =
-  | { type: "coord"; prompt: string; answer: [number, number]; tolerance?: number }
-  | { type: "bool"; prompt: string; answer: boolean };
-
-export type LineScenario = {
-  id: string;
-  xMin: number;
-  xMax: number;
-  yMin: number;
-  yMax: number;
-  lines: SegmentLine[];
-  questions: LineScenarioQuestion[];
-};
-
-export const LINE_SCENARIOS: LineScenario[] = [
-  {
-    id: "couleurs1",
-    xMin: -12,
-    xMax: 16,
-    yMin: -12,
-    yMax: 12,
-    lines: [
-      { id: "violette", color: "#9333ea", x1: -11, y1: 0, x2: 1, y2: 12, label: "violette" },
-      { id: "orange", color: "#f97316", x1: -5.5, y1: 0, x2: 0, y2: -11, label: "orange" },
-      { id: "verte", color: "#22c55e", x1: 5, y1: 0, x2: -1, y2: -6, label: "verte" },
-      { id: "bleue", color: "#3b82f6", x1: 15, y1: -12, x2: 15, y2: 12, label: "bleue" },
-    ],
-    questions: [
-      { type: "coord", prompt: "La droite violette et la droite orange se croisent en", answer: [-7, 3], tolerance: 1 },
-      { type: "coord", prompt: "La droite verte et la droite bleue se croisent en", answer: [15, 10] },
-      { type: "coord", prompt: "La droite orange et la droite verte se croisent en", answer: [-2, -7], tolerance: 1 },
-      { type: "coord", prompt: "La droite bleue croise l'axe des X en", answer: [15, 0] },
-      { type: "coord", prompt: "La droite violette croise l'axe des Y en", answer: [0, 11] },
-    ],
-  },
-  {
-    id: "couleurs2",
-    xMin: -10,
-    xMax: 10,
-    yMin: -10,
-    yMax: 10,
-    lines: [
-      { id: "rouge", color: "#dc2626", x1: -8, y1: 5, x2: 8, y2: 1, label: "rouge" },
-      { id: "orange", color: "#f97316", x1: -2.5, y1: 0, x2: 0, y2: 3, label: "orange" },
-      { id: "rose", color: "#ec4899", x1: 5, y1: 0, x2: 1, y2: 8, label: "rose" },
-      { id: "grise", color: "#6b7280", x1: 0, y1: -1, x2: 4, y2: -3, label: "grise" },
-    ],
-    questions: [
-      { type: "coord", prompt: "La droite rouge et la droite orange se croisent en", answer: [0, 3] },
-      { type: "coord", prompt: "La droite grise et la droite rose se croisent en", answer: [2, -2.5], tolerance: 0.6 },
-      { type: "coord", prompt: "La droite orange croise l'axe des X en", answer: [-2.5, 0], tolerance: 0.6 },
-      { type: "bool", prompt: "La droite rose et la droite orange sont perpendiculaires.", answer: false },
-      { type: "bool", prompt: "La droite grise et la droite rose sont parallèles.", answer: false },
-    ],
-  },
-];
-
 /** Pools de points à placer sur le repère */
 export const CARTESIAN_PLACE_POOLS: LabeledPoint[][] = [
   [
@@ -766,3 +707,34 @@ export const Q34_CARTESIAN_FIGURES: SignedCartesianFigure[] = Q12_CARTESIAN_FIGU
   polygons: [{ points: f.polygons[0]!.points.map(([x, y]) => [x, -y] as [number, number]) }],
   vertices: f.vertices.map(([x, y]) => [x, -y] as [number, number]),
 }));
+
+function polyFigure(id: string, name: string, pts: [number, number][]): SignedCartesianFigure {
+  return { id, name, polygons: [{ points: pts }], vertices: pts };
+}
+
+/** Figures 5–8 sommets pour G6.2 ex. 3 — 4 quadrants */
+export const Q_ALL_CARTESIAN_FIGURES: SignedCartesianFigure[] = [
+  polyFigure("qall-01", "figure 1", [[-8, 7], [-3, 9], [4, 6], [7, -2], [-2, -6], [-7, 0]]),
+  polyFigure("qall-02", "figure 2", [[-9, 2], [-5, 8], [0, 6], [6, 9], [8, 2]]),
+  polyFigure("qall-03", "figure 3", [[-7, -4], [-2, 6], [3, 8], [8, 3], [5, -6], [-4, -8]]),
+  polyFigure("qall-04", "figure 4", [[-6, 5], [0, 9], [5, 4], [9, -3], [2, -7], [-5, -2]]),
+  polyFigure("qall-05", "figure 5", [[-8, -2], [-4, 7], [2, 9], [7, 5], [6, -4], [0, -8], [-6, -6]]),
+  polyFigure("qall-06", "figure 6", [[-9, 6], [-3, 3], [2, 8], [8, 6], [6, 0], [0, -5]]),
+  polyFigure("qall-07", "figure 7", [[-7, 8], [-1, 4], [4, 7], [9, 2], [3, -6], [-6, -3]]),
+  polyFigure("qall-08", "figure 8", [[-8, 4], [-5, -6], [0, -8], [5, -2], [8, 4], [2, 8]]),
+  polyFigure("qall-09", "figure 9", [[-6, 6], [-2, 9], [3, 7], [7, 2], [4, -5], [-4, -4]]),
+  polyFigure("qall-10", "figure 10", [[-9, -3], [-4, 5], [1, 8], [6, 4], [8, -2], [2, -7], [-6, -6]]),
+  polyFigure("qall-11", "figure 11", [[-7, 2], [-2, 7], [3, 9], [8, 4], [5, -3], [-3, -5]]),
+  polyFigure("qall-12", "figure 12", [[-8, 6], [-3, 2], [2, 6], [7, 8], [9, 0], [4, -6], [-5, -4]]),
+  polyFigure("qall-13", "figure 13", [[-6, -8], [-2, 4], [4, 7], [8, 2], [6, -4]]),
+  polyFigure("qall-14", "figure 14", [[-9, 4], [-4, 8], [0, 5], [5, 8], [8, 2], [3, -4], [-5, -2]]),
+  polyFigure("qall-15", "figure 15", [[-7, -6], [-2, 3], [3, 6], [7, 0], [4, -7], [-4, -4]]),
+  polyFigure("qall-16", "figure 16", [[-8, 3], [-4, 9], [2, 7], [6, 3], [8, -4], [0, -8], [-6, -5]]),
+  polyFigure("qall-17", "figure 17", [[-6, 7], [0, 9], [5, 5], [8, -2], [2, -6]]),
+  polyFigure("qall-18", "figure 18", [[-9, -2], [-5, 6], [0, 8], [6, 4], [8, -3], [2, -7], [-4, -6]]),
+  polyFigure("qall-19", "figure 19", [[-7, 5], [-1, 8], [4, 6], [7, 0], [3, -6], [-5, -3]]),
+  polyFigure("qall-20", "figure 20", [[-8, 8], [-3, 4], [2, 7], [7, 5], [9, -2], [4, -7], [-2, -5], [-6, 0]]),
+];
+
+export type { SegmentLine, LineScenarioQuestion, LineScenario } from "./g6-line-scenarios";
+export { LINE_SCENARIOS, parallelToLabel } from "./g6-line-scenarios";

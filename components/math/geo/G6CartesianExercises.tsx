@@ -8,6 +8,7 @@ import {
   POLYGON_INT_TEMPLATES,
   QUADRANT_READ_POOLS,
   VERTEX_PUZZLES,
+  parallelToLabel,
   type LabeledPoint,
   type LineScenarioQuestion,
   type SegmentLine,
@@ -38,21 +39,6 @@ function pick1<T>(arr: T[]): T {
   return shuffle(arr)[0]!;
 }
 
-function parseXY(raw: string): [number, number] | null {
-  const s = raw.trim().replace(/\s+/g, "").replace(/[()]/g, "");
-  const parts = s.split(/[;,]/).filter(Boolean);
-  if (parts.length !== 2) return null;
-  const x = parseFloat(parts[0]!.replace(",", "."));
-  const y = parseFloat(parts[1]!.replace(",", "."));
-  if (Number.isNaN(x) || Number.isNaN(y)) return null;
-  return [x, y];
-}
-
-function coordsMatch(got: [number, number] | null, exp: [number, number], tol = 0): boolean {
-  if (!got) return false;
-  return Math.abs(got[0] - exp[0]) <= tol && Math.abs(got[1] - exp[1]) <= tol;
-}
-
 function formatXY(x: number, y: number): string {
   const fx = Number.isInteger(x) ? String(x) : String(x).replace(".", ",");
   const fy = Number.isInteger(y) ? String(y) : String(y).replace(".", ",");
@@ -61,6 +47,40 @@ function formatXY(x: number, y: number): string {
 
 function toSvg(x: number, y: number, cx: number, cy: number, unit: number): [number, number] {
   return [cx + x * unit, cy - y * unit];
+}
+
+function clipLineToRect(
+  ax: number, ay: number, bx: number, by: number,
+  xMin: number, xMax: number, yMin: number, yMax: number,
+): [number, number, number, number] | null {
+  const dx = bx - ax;
+  const dy = by - ay;
+  if (Math.abs(dx) < 1e-9 && Math.abs(dy) < 1e-9) return null;
+  const pts: [number, number][] = [];
+  const add = (x: number, y: number) => {
+    if (x >= xMin - 1e-6 && x <= xMax + 1e-6 && y >= yMin - 1e-6 && y <= yMax + 1e-6) {
+      const k = `${Math.round(x * 1000)}:${Math.round(y * 1000)}`;
+      if (!pts.some(([px, py]) => `${Math.round(px * 1000)}:${Math.round(py * 1000)}` === k)) pts.push([x, y]);
+    }
+  };
+  if (Math.abs(dx) < 1e-9) {
+    if (ax >= xMin && ax <= xMax) return [ax, yMin, ax, yMax];
+    return null;
+  }
+  if (Math.abs(dy) < 1e-9) {
+    if (ay >= yMin && ay <= yMax || by >= yMin && by <= yMax) return [xMin, ay, xMax, ay];
+    return null;
+  }
+  for (const x of [xMin, xMax]) {
+    const t = (x - ax) / dx;
+    add(x, ay + t * dy);
+  }
+  for (const y of [yMin, yMax]) {
+    const t = (y - ay) / dy;
+    add(ax + t * dx, y);
+  }
+  if (pts.length < 2) return null;
+  return [pts[0]![0], pts[0]![1], pts[pts.length - 1]![0], pts[pts.length - 1]![1]];
 }
 
 function CartesianPlane({
@@ -75,6 +95,7 @@ function CartesianPlane({
   placedPoints,
   onClick,
   gridStep = 1,
+  labelStep = 1,
 }: {
   xMin: number;
   xMax: number;
@@ -87,6 +108,7 @@ function CartesianPlane({
   placedPoints?: LabeledPoint[];
   onClick?: (x: number, y: number) => void;
   gridStep?: number;
+  labelStep?: number;
 }) {
   const pad = 28;
   const w = pad * 2 + (xMax - xMin) * unit;
@@ -127,13 +149,13 @@ function CartesianPlane({
       ))}
       <line x1={pad - 4} y1={cy} x2={w - pad + 4} y2={cy} stroke="#334155" strokeWidth="2" />
       <line x1={cx} y1={pad - 4} x2={cx} y2={h - pad + 4} stroke="#334155" strokeWidth="2" />
-      {Array.from({ length: Math.floor((xMax - xMin) / gridStep) + 1 }, (_, i) => xMin + i * gridStep)
-        .filter((x) => x !== 0 && Math.abs(x) <= 12)
+      {Array.from({ length: Math.floor((xMax - xMin) / labelStep) + 1 }, (_, i) => xMin + i * labelStep)
+        .filter((x) => x !== 0)
         .map((x) => (
           <text key={`tx-${x}`} x={cx + x * unit} y={cy + 16} textAnchor="middle" fontSize="8" fill="#64748b">{x}</text>
         ))}
-      {Array.from({ length: Math.floor((yMax - yMin) / gridStep) + 1 }, (_, i) => yMin + i * gridStep)
-        .filter((y) => y !== 0 && Math.abs(y) <= 12)
+      {Array.from({ length: Math.floor((yMax - yMin) / labelStep) + 1 }, (_, i) => yMin + i * labelStep)
+        .filter((y) => y !== 0)
         .map((y) => (
           <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit + 3} textAnchor="middle" fontSize="8" fill="#64748b">{y}</text>
         ))}
@@ -141,9 +163,12 @@ function CartesianPlane({
       <text x={cx + 4} y={pad - 6} fontSize="10" fontWeight="bold" fill="#334155">y</text>
 
       {lines?.map((ln) => {
-        const [x1, y1] = toSvg(ln.x1, ln.y1, cx, cy, unit);
-        const [x2, y2] = toSvg(ln.x2, ln.y2, cx, cy, unit);
-        return <line key={ln.id} x1={x1} y1={y1} x2={x2} y2={y2} stroke={ln.color} strokeWidth="2.5" />;
+        const clipped = clipLineToRect(ln.x1, ln.y1, ln.x2, ln.y2, xMin, xMax, yMin, yMax);
+        if (!clipped) return null;
+        const [sx1, sy1, sx2, sy2] = clipped;
+        const [px1, py1] = toSvg(sx1, sy1, cx, cy, unit);
+        const [px2, py2] = toSvg(sx2, sy2, cx, cy, unit);
+        return <line key={ln.id} x1={px1} y1={py1} x2={px2} y2={py2} stroke={ln.color} strokeWidth="2.5" />;
       })}
 
       {polygon && polygon.length > 1 && (
@@ -324,6 +349,7 @@ function LineQuestionBlock({
   validated,
   wrong,
   onChange,
+  lines,
 }: {
   q: LineScenarioQuestion;
   i: number;
@@ -331,6 +357,7 @@ function LineQuestionBlock({
   validated: boolean;
   wrong: boolean;
   onChange: (v: string) => void;
+  lines: SegmentLine[];
 }) {
   if (q.type === "bool") {
     return (
@@ -353,23 +380,135 @@ function LineQuestionBlock({
       </div>
     );
   }
-  const correct = formatXY(q.answer[0], q.answer[1]);
+
+  if (q.type === "color_pair") {
+    const [a1 = "", a2 = ""] = answer.split("|");
+    const options = lines.map((l) => ({ id: l.id, label: `la droite ${l.label}` }));
+    const setPart = (idx: 0 | 1, val: string) => {
+      const parts = answer.split("|");
+      parts[idx] = val;
+      onChange(parts.join("|"));
+    };
+    const match = (got: string) => {
+      const [g1, g2] = got.split("|");
+      if (!g1 || !g2) return false;
+      const s1 = [g1, g2].sort().join("|");
+      const s2 = [...q.answer].sort().join("|");
+      return s1 === s2;
+    };
+    const isWrong = validated && !match(answer);
+    return (
+      <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
+        <p className="text-sm">{i + 1}. {q.prompt}</p>
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <select disabled={validated} value={a1} onChange={(e) => setPart(0, e.target.value)}
+            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
+            <option value="">—</option>
+            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+          </select>
+          <span>et</span>
+          <select disabled={validated} value={a2} onChange={(e) => setPart(1, e.target.value)}
+            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
+            <option value="">—</option>
+            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+          </select>
+        </div>
+        {isWrong && (
+          <p className="text-xs font-bold text-amber-600">
+            {`la droite ${lines.find((l) => l.id === q.answer[0])?.label} et la droite ${lines.find((l) => l.id === q.answer[1])?.label}`}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  if (q.type === "parallel_to") {
+    const otherLines = lines.filter((l) => l.id !== q.lineId);
+    const options = [
+      ...otherLines.map((l) => ({ id: l.id, label: `la droite ${l.label}` })),
+      { id: "axis_x", label: "l'axe des X" },
+      { id: "axis_y", label: "l'axe des Y" },
+    ];
+    const correctLabel = parallelToLabel(q.answer, lines);
+    return (
+      <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
+        <p className="text-sm">{i + 1}. {q.prompt}</p>
+        {wrong ? (
+          <div className="flex flex-col gap-1">
+            <span className="text-sm text-[var(--color-text-secondary)]">{options.find((o) => o.id === answer)?.label ?? "—"}</span>
+            <span className="text-xs font-bold text-amber-600">{correctLabel}</span>
+          </div>
+        ) : (
+          <select disabled={validated} value={answer} onChange={(e) => onChange(e.target.value)}
+            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
+            <option value="">—</option>
+            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+          </select>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
       <p className="text-sm">{i + 1}. {q.prompt}</p>
-      {wrong ? (
-        <div className={`w-32 px-0 pb-1 ${CLS_WRONG} flex flex-col`}>
-          <span className="text-[10px] text-[var(--color-text-secondary)]">{answer || "—"}</span>
-          <span className="text-xs font-bold text-amber-600">{correct}</span>
-        </div>
-      ) : (
-        <input type="text" inputMode="decimal" value={answer} disabled={validated}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="(x ; y)"
-          className={`w-32 px-0 pb-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
-      )}
+      <div className="flex items-center gap-1 text-sm">
+        <span>(</span>
+        {wrong ? (
+          <>
+            <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+              <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
+              <span className="text-xs font-bold text-amber-600">{q.answer[0]}</span>
+            </div>
+            <span>;</span>
+            <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+              <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
+              <span className="text-xs font-bold text-amber-600">{q.answer[1]}</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <input type="text" inputMode="numeric" value={answer.split("|")[0] ?? ""} disabled={validated}
+              onChange={(e) => {
+                const parts = answer.split("|");
+                parts[0] = e.target.value.replace(/[^0-9,\.\-]/g, "");
+                onChange(parts.join("|"));
+              }}
+              className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+            <span>;</span>
+            <input type="text" inputMode="numeric" value={answer.split("|")[1] ?? ""} disabled={validated}
+              onChange={(e) => {
+                const parts = answer.split("|");
+                parts[1] = e.target.value.replace(/[^0-9,\.\-]/g, "");
+                onChange(parts.join("|"));
+              }}
+              className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+          </>
+        )}
+        <span>)</span>
+      </div>
     </div>
   );
+}
+
+function checkLineAnswer(q: LineScenarioQuestion, raw: string): boolean {
+  if (q.type === "bool") {
+    const n = raw.trim().toLowerCase();
+    return (q.answer && n === "oui") || (!q.answer && n === "non");
+  }
+  if (q.type === "color_pair") {
+    const [g1, g2] = raw.split("|");
+    if (!g1 || !g2) return false;
+    return [g1, g2].sort().join("|") === [...q.answer].sort().join("|");
+  }
+  if (q.type === "parallel_to") {
+    return raw === q.answer;
+  }
+  const [xRaw, yRaw] = raw.split("|");
+  const x = parseFloat((xRaw ?? "").replace(",", "."));
+  const y = parseFloat((yRaw ?? "").replace(",", "."));
+  if (Number.isNaN(x) || Number.isNaN(y)) return false;
+  return Math.abs(x - q.answer[0]) < 0.01 && Math.abs(y - q.answer[1]) < 0.01;
 }
 
 export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }: ExProps) {
@@ -380,15 +519,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
 
   const doValidate = useCallback(() => {
     if (validated) return;
-    const res = scenario.questions.map((q, i) => {
-      const raw = answers[i] ?? "";
-      if (q.type === "bool") {
-        const n = raw.trim().toLowerCase();
-        return (q.answer && n === "oui") || (!q.answer && n === "non");
-      }
-      const tol = q.tolerance ?? 0;
-      return coordsMatch(parseXY(raw), q.answer, tol);
-    });
+    const res = scenario.questions.map((q, i) => checkLineAnswer(q, answers[i] ?? ""));
     setResults(res);
     setValidated(true);
     onValidated(res.filter(Boolean).length, res.length);
@@ -399,11 +530,13 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Graduez les axes de 1 en 1 et répondez aux questions sur les droites.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Observe les droites sur le repère et réponds aux questions.</p>
       <CartesianPlane
         xMin={scenario.xMin} xMax={scenario.xMax}
         yMin={scenario.yMin} yMax={scenario.yMax}
         lines={scenario.lines}
+        gridStep={1}
+        labelStep={2}
       />
       <div className="space-y-3">
         {scenario.questions.map((q, i) => (
@@ -411,6 +544,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
             answer={answers[i] ?? ""}
             validated={validated}
             wrong={validated && !results[i]}
+            lines={scenario.lines}
             onChange={(v) => setAnswers((p) => ({ ...p, [i]: v }))} />
         ))}
       </div>
