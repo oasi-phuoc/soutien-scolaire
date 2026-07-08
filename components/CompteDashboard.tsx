@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { updateRemotePivotLang, changePasswordAction } from "@/app/actions/account";
+import { updateRemotePivotLang } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
 import { syncProgressToCloud } from "@/app/actions/progress";
 import { OfflineSettings } from "@/components/OfflineSettings";
@@ -102,11 +102,6 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
   const [genre, setGenreState] = useState<GenreKey>("f");
   const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
   const [syncError, setSyncError] = useState<string | null>(null);
-  const [pwdOpen, setPwdOpen] = useState(false);
-  const [newPwd, setNewPwd] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
-  const [pwdStatus, setPwdStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
-  const [pwdMsg, setPwdMsg] = useState<string | null>(null);
 
   useEffect(() => {
     const prog = loadProgress();
@@ -147,22 +142,6 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
     } catch (e) {
       setSyncStatus("error");
       setSyncError(e instanceof Error ? e.message : "Erreur inconnue");
-    }
-  }
-
-  async function handlePasswordChange() {
-    setPwdStatus("loading");
-    setPwdMsg(null);
-    const result = await changePasswordAction(newPwd, confirmPwd);
-    if (result.ok) {
-      setPwdStatus("ok");
-      setPwdMsg("Mot de passe mis à jour.");
-      setNewPwd("");
-      setConfirmPwd("");
-      window.setTimeout(() => { setPwdStatus("idle"); setPwdMsg(null); setPwdOpen(false); }, 2500);
-    } else {
-      setPwdStatus("error");
-      setPwdMsg(result.reason);
     }
   }
 
@@ -234,16 +213,12 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
               </p>
             )}
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              {isAdmin && (
-                <Link href="/admin" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90">
-                  Comptes
-                </Link>
-              )}
-              {hasSuiviAccess && (
-                <Link href="/suivi" className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)] px-4 font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]">
-                  Suivi
-                </Link>
-              )}
+              <Link
+                href="/compte/mon-compte"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
+              >
+                Mon compte
+              </Link>
               <button
                 type="button"
                 onClick={() => void forceSync()}
@@ -294,77 +269,37 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         )}
       </Card>
 
+      {supabaseConfigured && user && (isAdmin || hasSuiviAccess) && (
+        <Card>
+          <SectionTitle>Gestion</SectionTitle>
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+            Outils réservés aux enseignants et administrateurs.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
+              >
+                Admin
+              </Link>
+            )}
+            {hasSuiviAccess && (
+              <Link
+                href="/suivi"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)] px-4 font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
+              >
+                Suivi
+              </Link>
+            )}
+          </div>
+        </Card>
+      )}
+
       {/* Hors connexion */}
       <Card>
         <OfflineSettings />
       </Card>
-
-      {/* Mot de passe */}
-      {supabaseConfigured && user && (
-        <Card>
-          <button
-            type="button"
-            onClick={() => { setPwdOpen((v) => !v); setPwdStatus("idle"); setPwdMsg(null); }}
-            className="flex w-full items-center justify-between text-left"
-          >
-            <SectionTitle>Changer le mot de passe</SectionTitle>
-            <svg
-              width="18" height="18" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-              className={`shrink-0 text-zinc-400 transition-transform ${pwdOpen ? "rotate-90" : ""}`}
-              aria-hidden
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-
-          {pwdOpen && (
-            <div className="mt-4 space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Mot de passe</label>
-                <input
-                  type="password"
-                  value={newPwd}
-                  onChange={(e) => { setNewPwd(e.target.value); setPwdMsg(null); }}
-                  autoComplete="new-password"
-                  className="min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-4 text-base outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15"
-                />
-                <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Au moins 8 caractères.</p>
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-[var(--color-text-primary)]">Confirmer le mot de passe</label>
-                <input
-                  type="password"
-                  value={confirmPwd}
-                  onChange={(e) => { setConfirmPwd(e.target.value); setPwdMsg(null); }}
-                  autoComplete="new-password"
-                  className={`min-h-12 w-full rounded-xl border bg-white px-4 text-base outline-none focus:ring-2 ${
-                    confirmPwd.length > 0 && confirmPwd !== newPwd
-                      ? "border-red-400 focus:border-red-500 focus:ring-red-500/15"
-                      : "border-zinc-300 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/15"
-                  }`}
-                />
-                {confirmPwd.length > 0 && confirmPwd !== newPwd && (
-                  <p className="mt-1 text-xs text-red-600">Les mots de passe ne correspondent pas.</p>
-                )}
-              </div>
-              <button
-                type="button"
-                onClick={() => void handlePasswordChange()}
-                disabled={pwdStatus === "loading" || newPwd.length < 8 || newPwd !== confirmPwd}
-                className="min-h-12 w-full rounded-xl bg-[var(--color-accent-alg)] px-4 text-base font-semibold text-white transition-opacity disabled:opacity-50"
-              >
-                {pwdStatus === "loading" ? "Enregistrement…" : "Enregistrer"}
-              </button>
-              {pwdMsg && (
-                <p className={`text-sm ${pwdStatus === "ok" ? "text-emerald-700" : "text-red-600"}`} role="status">
-                  {pwdMsg}
-                </p>
-              )}
-            </div>
-          )}
-        </Card>
-      )}
 
       {/* Langue d'aide */}
       <Card>
