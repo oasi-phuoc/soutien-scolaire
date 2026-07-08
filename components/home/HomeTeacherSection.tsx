@@ -15,8 +15,8 @@ export async function HomeTeacherSection() {
   const { data: hasAccess } = await supabase.rpc("has_suivi_access");
   if (role === "prof" && !hasAccess) {
     return (
-      <section className="rounded-[var(--radius-lg)] border border-dashed border-zinc-300 bg-white/60 p-5 text-center dark:border-zinc-700 dark:bg-zinc-950/60">
-        <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+      <section className="rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 text-center">
+        <p className="text-xs text-[var(--color-text-secondary)]">
           Aucune classe affectée. Contactez l&apos;administrateur pour accéder au suivi pédagogique.
         </p>
       </section>
