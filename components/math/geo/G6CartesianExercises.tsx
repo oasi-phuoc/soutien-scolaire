@@ -18,6 +18,7 @@ const MATH_TEXT_INPUT_BASE =
   "text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
+const COORD_CELL_CLS = `h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
 
 type ExProps = {
   exNum: number;
@@ -506,18 +507,18 @@ function LineQuestionBlock({
       n={i + 1}
       head={<span>{q.prompt}</span>}
       body={(
-        <div className="flex items-center gap-1">
+        <div className="flex h-9 items-center gap-1">
           <span>(</span>
           {wrong ? (
             <>
-              <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-                <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
-                <span className="text-xs font-bold text-amber-600">{q.answer[0]}</span>
+              <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{q.answer[0]}</span>
               </div>
               <span>;</span>
-              <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-                <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
-                <span className="text-xs font-bold text-amber-600">{q.answer[1]}</span>
+              <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
+                <span className="text-xs font-bold leading-none text-amber-600">{q.answer[1]}</span>
               </div>
             </>
           ) : (
@@ -532,7 +533,7 @@ function LineQuestionBlock({
                   parts[0] = e.target.value.replace(/[^0-9,\.\-]/g, "");
                   onChange(parts.join("|"));
                 }}
-                className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+                className={COORD_CELL_CLS}
               />
               <span>;</span>
               <input
@@ -545,7 +546,7 @@ function LineQuestionBlock({
                   parts[1] = e.target.value.replace(/[^0-9,\.\-]/g, "");
                   onChange(parts.join("|"));
                 }}
-                className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+                className={COORD_CELL_CLS}
               />
             </>
           )}
