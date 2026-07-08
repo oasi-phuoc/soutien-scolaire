@@ -43,7 +43,7 @@ function intersect(l1: RawLine, l2: RawLine): [number, number] | null {
   if (Math.abs(denom) < 1e-9) return null;
   const px = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denom;
   const py = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denom;
-  return [Math.round(px * 2) / 2, Math.round(py * 2) / 2];
+  return [Math.round(px), Math.round(py)];
 }
 
 function intersectLineAxis(l: RawLine, axis: "axis_x" | "axis_y"): [number, number] | null {
@@ -52,13 +52,13 @@ function intersectLineAxis(l: RawLine, axis: "axis_x" | "axis_y"): [number, numb
     if (Math.abs(y2 - y1) < 1e-9) return null;
     const t = -y1 / (y2 - y1);
     const x = x1 + t * (x2 - x1);
-    const pt: [number, number] = [Math.round(x * 2) / 2, 0];
+    const pt: [number, number] = [Math.round(x), 0];
     return inGrid(pt) ? pt : null;
   }
   if (Math.abs(x2 - x1) < 1e-9) return null;
   const t = -x1 / (x2 - x1);
   const y = y1 + t * (y2 - y1);
-  const pt: [number, number] = [0, Math.round(y * 2) / 2];
+  const pt: [number, number] = [0, Math.round(y)];
   return inGrid(pt) ? pt : null;
 }
 
@@ -98,6 +98,10 @@ function inGrid([x, y]: [number, number]): boolean {
   return x >= GRID.xMin && x <= GRID.xMax && y >= GRID.yMin && y <= GRID.yMax;
 }
 
+function isIntegerCoord([x, y]: [number, number]): boolean {
+  return Number.isInteger(x) && Number.isInteger(y);
+}
+
 function fmtCoord(x: number, y: number): string {
   const fx = Number.isInteger(x) ? String(x) : String(x).replace(".", ",");
   const fy = Number.isInteger(y) ? String(y) : String(y).replace(".", ",");
@@ -128,13 +132,13 @@ function collectIntersectionPairs(lines: RawLine[]): Array<[EntityId, EntityId, 
   for (let i = 0; i < lines.length; i++) {
     for (let j = i + 1; j < lines.length; j++) {
       const pt = intersect(lines[i]!, lines[j]!);
-      if (pt && inGrid(pt)) pairs.push([lines[i]!.id, lines[j]!.id, pt]);
+      if (pt && inGrid(pt) && isIntegerCoord(pt)) pairs.push([lines[i]!.id, lines[j]!.id, pt]);
     }
   }
   for (const l of lines) {
     for (const ax of ["axis_x", "axis_y"] as const) {
       const pt = intersectLineAxis(l, ax);
-      if (pt) pairs.push([l.id, ax, pt]);
+      if (pt && isIntegerCoord(pt)) pairs.push([l.id, ax, pt]);
     }
   }
   pairs.push(["axis_x", "axis_y", [0, 0]]);

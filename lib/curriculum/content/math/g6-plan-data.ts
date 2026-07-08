@@ -587,6 +587,90 @@ export const VERTEX_PUZZLES: VertexPuzzle[] = [
   vtxTrap([-7, 3], [7, 3], [5, -3], [-5, -3]),
 ];
 
+type Coord = { x: number; y: number };
+
+function dot2(ax: number, ay: number, bx: number, by: number): number {
+  return ax * bx + ay * by;
+}
+
+function cross2(ax: number, ay: number, bx: number, by: number): number {
+  return ax * by - ay * bx;
+}
+
+function dist2(a: Coord, b: Coord): number {
+  const dx = a.x - b.x;
+  const dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function samePoint(a: Coord, b: Coord): boolean {
+  return a.x === b.x && a.y === b.y;
+}
+
+/** Vérifie que D complète A-B-C en forme demandée (sommets dans l'ordre A→B→C→D). */
+export function isValidVertexPlacement(
+  type: VertexPuzzleType,
+  a: Coord,
+  b: Coord,
+  c: Coord,
+  d: Coord,
+): boolean {
+  if (samePoint(d, a) || samePoint(d, b) || samePoint(d, c)) return false;
+
+  const parallelogram = d.x === a.x + c.x - b.x && d.y === a.y + c.y - b.y;
+
+  switch (type) {
+    case "parallelogram":
+      return parallelogram;
+    case "rectangle":
+      if (!parallelogram) return false;
+      return Math.abs(dot2(a.x - b.x, a.y - b.y, c.x - b.x, c.y - b.y)) < 1e-6;
+    case "square":
+      if (!parallelogram) return false;
+      return (
+        Math.abs(dot2(a.x - b.x, a.y - b.y, c.x - b.x, c.y - b.y)) < 1e-6
+        && Math.abs(dist2(a, b) - dist2(b, c)) < 1e-6
+      );
+    case "rhombus":
+      if (!parallelogram) return false;
+      return Math.abs(dist2(a, b) - dist2(b, c)) < 1e-6;
+    case "isosceles_trapezoid": {
+      const abx = b.x - a.x;
+      const aby = b.y - a.y;
+      const cdx = d.x - c.x;
+      const cdy = d.y - c.y;
+      if (Math.abs(cross2(abx, aby, cdx, cdy)) > 1e-6) return false;
+      return Math.abs(dist2(a, d) - dist2(b, c)) < 1e-6;
+    }
+  }
+}
+
+export function inCartesianGrid(x: number, y: number, bound = 10): boolean {
+  return x >= -bound && x <= bound && y >= -bound && y <= bound;
+}
+
+/** [CD] ⊥ [AB], D ≠ C, coordonnées entières dans la grille. */
+export function isValidPerpParallelD(a: Coord, b: Coord, c: Coord, d: Coord): boolean {
+  if (samePoint(d, c)) return false;
+  if (!inCartesianGrid(d.x, d.y)) return false;
+  const abx = b.x - a.x;
+  const aby = b.y - a.y;
+  const cdx = d.x - c.x;
+  const cdy = d.y - c.y;
+  return Math.abs(dot2(abx, aby, cdx, cdy)) < 1e-6 && (Math.abs(cdx) > 1e-6 || Math.abs(cdy) > 1e-6);
+}
+
+/** [CE] ∥ [AB], E ≠ C, coordonnées entières dans la grille. */
+export function isValidPerpParallelE(a: Coord, b: Coord, c: Coord, e: Coord): boolean {
+  if (samePoint(e, c)) return false;
+  if (!inCartesianGrid(e.x, e.y)) return false;
+  const abx = b.x - a.x;
+  const aby = b.y - a.y;
+  const cex = e.x - c.x;
+  const cey = e.y - c.y;
+  return Math.abs(cross2(abx, aby, cex, cey)) < 1e-6 && (Math.abs(cex) > 1e-6 || Math.abs(cey) > 1e-6);
+}
+
 /** G6.2 ex. 7 — placer D et E : [CD] ⊥ [AB], [CE] ∥ [AB] */
 export type PerpParallelScenario = {
   a: LabeledPoint;

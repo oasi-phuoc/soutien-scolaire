@@ -10,6 +10,10 @@ import {
   PERP_PARALLEL_SCENARIOS,
   VERTEX_PUZZLES,
   vertexExercisePrompt,
+  isValidPerpParallelD,
+  isValidPerpParallelE,
+  isValidVertexPlacement,
+  inCartesianGrid,
   type LabeledPoint,
   type LineScenarioQuestion,
   type SegmentLine,
@@ -712,7 +716,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Placez les points sur le plan." />
-      <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+      <div className="flex flex-wrap items-center gap-1.5">
         {targets.map((pt, i) => {
           const isSel = selected === pt.label;
           const ok = validated ? results[i] : null;
@@ -724,7 +728,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
               type="button"
               disabled={validated}
               onClick={() => setSelected(pt.label)}
-              className={`flex h-9 items-center gap-2 rounded-lg border px-2 text-sm font-mono transition-colors ${
+              className={`flex h-8 items-center gap-1 rounded-lg border px-1.5 text-xs font-mono transition-colors ${
                 isSel
                   ? `border-[var(--color-accent-alg)] ${PLACE_CELL_FILL}`
                   : ok === false
@@ -734,7 +738,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
                       : "border-[var(--color-border-default)] bg-white"
               }`}
             >
-              <span className={`w-5 shrink-0 font-bold ${onAccent ? "text-white" : "text-[var(--color-accent-alg)]"}`}>
+              <span className={`w-4 shrink-0 font-bold ${onAccent ? "text-white" : "text-[var(--color-accent-alg)]"}`}>
                 {pt.label}
               </span>
               <span className={onAccent ? "text-white" : "text-[var(--color-text-primary)]"}>
@@ -756,7 +760,6 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
         correctionPoints={correctionPoints}
         onClick={onMapClick}
       />
-      <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur un point, puis sur le repère.</p>
     </div>
   );
 }
@@ -765,31 +768,62 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
 
 export function G6FindVertexExercise({ exNum, validateCommand, onValidated, consigneLang, consigneDir }: ExProps) {
   const [puzzle] = useState(() => pick1(VERTEX_PUZZLES));
-  const [answer, setAnswer] = useState({ x: "", y: "" });
+  const [selected, setSelected] = useState<string>("D");
+  const [placement, setPlacement] = useState<{ x: number; y: number } | null>(null);
   const [validated, setValidated] = useState(false);
   const [ok, setOk] = useState(false);
 
   const [a, b, c] = puzzle.points;
   const openSides: SegmentLine[] = [
-    { id: "ab", x1: a!.x, y1: a!.y, x2: b!.x, y2: b!.y, color: "#3b82f6", label: "AB" },
-    { id: "bc", x1: b!.x, y1: b!.y, x2: c!.x, y2: c!.y, color: "#3b82f6", label: "BC" },
+    { id: "ab", x1: a!.x, y1: a!.y, x2: b!.x, y2: b!.y, color: PLACE_POINT_FILL, label: "AB" },
+    { id: "bc", x1: b!.x, y1: b!.y, x2: c!.x, y2: c!.y, color: PLACE_POINT_FILL, label: "BC" },
   ];
+
+  const onMapClick = (gx: number, gy: number) => {
+    if (validated || selected !== "D") return;
+    setPlacement({ x: gx, y: gy });
+    setSelected("D");
+  };
 
   const doValidate = useCallback(() => {
     if (validated) return;
-    const x = parseFloat(answer.x.replace(",", "."));
-    const y = parseFloat(answer.y.replace(",", "."));
-    const res = Math.abs(x - puzzle.answer.x) < 0.01 && Math.abs(y - puzzle.answer.y) < 0.01;
+    const d = placement;
+    const res = d !== null
+      && inCartesianGrid(d.x, d.y)
+      && isValidVertexPlacement(puzzle.type, a!, b!, c!, d);
     setOk(res);
     setValidated(true);
     onValidated(res ? 1 : 0, 1);
-  }, [validated, answer, puzzle, onValidated]);
+  }, [validated, placement, puzzle, a, b, c, onValidated]);
 
   useValidateTrigger(validateCommand, doValidate);
 
+  const placed = placement && (!validated || ok)
+    ? [{ label: "D", x: placement.x, y: placement.y }]
+    : [];
+
+  const wrongPlacements = validated && !ok && placement
+    ? [{ label: "D", x: placement.x, y: placement.y }]
+    : [];
+
   const correctionPoints = validated && !ok
     ? [{ label: "D", x: puzzle.answer.x, y: puzzle.answer.y }]
-    : undefined;
+    : [];
+
+  const previewLines: SegmentLine[] = [];
+  if (placement) {
+    previewLines.push(
+      { id: "cd", x1: c!.x, y1: c!.y, x2: placement.x, y2: placement.y, color: PLACE_PREVIEW_LINE, label: "CD" },
+      { id: "da", x1: placement.x, y1: placement.y, x2: a!.x, y2: a!.y, color: PLACE_PREVIEW_LINE, label: "DA" },
+    );
+  }
+
+  const correctionLines: SegmentLine[] = validated && !ok
+    ? [
+        { id: "cd-corr", x1: c!.x, y1: c!.y, x2: puzzle.answer.x, y2: puzzle.answer.y, color: PLACE_CORRECTION_FILL, label: "CD" },
+        { id: "da-corr", x1: puzzle.answer.x, y1: puzzle.answer.y, x2: a!.x, y2: a!.y, color: PLACE_CORRECTION_FILL, label: "DA" },
+      ]
+    : [];
 
   return (
     <div className="space-y-4">
@@ -800,44 +834,23 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
         consigneDir={consigneDir}
         fallback={vertexExercisePrompt(puzzle.type)}
       />
-      <div className="flex items-center gap-2 text-sm">
-        <span className="font-bold text-[var(--color-accent-alg)]">D</span>
-        <span>:</span>
-        <span>(</span>
-        {validated && !ok ? (
-          <>
-            <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.x || "—"}</span>
-              <span className="text-xs font-bold leading-none text-amber-600">{puzzle.answer.x}</span>
-            </div>
-            <span>;</span>
-            <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.y || "—"}</span>
-              <span className="text-xs font-bold leading-none text-amber-600">{puzzle.answer.y}</span>
-            </div>
-          </>
-        ) : (
-          <>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={answer.x}
-              disabled={validated}
-              onChange={(e) => setAnswer((prev) => ({ ...prev, x: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
-              className={COORD_CELL_CLS}
-            />
-            <span>;</span>
-            <input
-              type="text"
-              inputMode="decimal"
-              value={answer.y}
-              disabled={validated}
-              onChange={(e) => setAnswer((prev) => ({ ...prev, y: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
-              className={COORD_CELL_CLS}
-            />
-          </>
-        )}
-        <span>)</span>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          disabled={validated}
+          onClick={() => setSelected("D")}
+          className={`flex h-9 min-w-[3rem] items-center justify-center rounded-lg border px-4 text-sm font-bold transition-colors ${
+            selected === "D" && !validated
+              ? `border-[var(--color-accent-alg)] ${PLACE_CELL_FILL} text-[var(--color-accent-alg)]`
+              : validated && !ok
+                ? "border-amber-400 bg-white text-[var(--color-accent-alg)]"
+                : placement
+                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                  : "border-[var(--color-border-default)] bg-white text-[var(--color-accent-alg)]"
+          }`}
+        >
+          D
+        </button>
       </div>
       <CartesianPlane
         xMin={-10}
@@ -846,9 +859,12 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
         yMax={10}
         unit={12}
         labelStep={2}
-        lines={openSides}
+        lines={[...openSides, ...previewLines, ...correctionLines]}
         points={puzzle.points}
+        placedPoints={placed}
+        wrongPlacements={wrongPlacements}
         correctionPoints={correctionPoints}
+        onClick={onMapClick}
       />
     </div>
   );
@@ -885,14 +901,13 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
 
   const doValidate = useCallback(() => {
     if (validated) return;
-    const targets = [
-      { label: "D" as const, point: scenario.d },
-      { label: "E" as const, point: scenario.e },
+    const { a, b, c } = scenario;
+    const dPt = placements.D;
+    const ePt = placements.E;
+    const res = [
+      dPt !== null && isValidPerpParallelD(a, b, c, dPt),
+      ePt !== null && isValidPerpParallelE(a, b, c, ePt),
     ];
-    const res = targets.map(({ label, point }) => {
-      const p = placements[label];
-      return p !== null && p.x === point.x && p.y === point.y;
-    });
     setResults(res);
     setValidated(true);
     onValidated(res.filter(Boolean).length, res.length);
