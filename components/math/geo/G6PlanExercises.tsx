@@ -621,7 +621,7 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated, review
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Écris le code de chaque forme (colonne ; ligne).</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Notez les coordonnées des points.</p>
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
           const answer = answers[i] ?? { col: "", row: "" };
@@ -726,7 +726,7 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, revie
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Place chaque forme dans la case indiquée. Clique sur une forme, puis sur la grille.
+        Cliquez sur les formes et placez-les dans les coordonnées indiquées.
       </p>
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
@@ -888,7 +888,7 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Je note les coordonnées des points. Les axes sont gradués de 5 en 5.
+        Notez les coordonnées des points.
       </p>
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
