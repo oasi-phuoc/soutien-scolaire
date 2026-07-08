@@ -100,7 +100,7 @@ END;
 $$;
 
 -- Enriched class dashboard (return type extended vs platform_features migration)
-DROP FUNCTION IF EXISTS public.get_class_dashboard(text);
+DROP FUNCTION IF EXISTS public.get_class_dashboard(text) CASCADE;
 
 CREATE OR REPLACE FUNCTION public.get_class_dashboard(p_class_label text)
 RETURNS TABLE(
@@ -183,7 +183,7 @@ END;
 $$;
 
 -- Replace get_school_classes to respect teacher scope (body change; signature unchanged)
-DROP FUNCTION IF EXISTS public.get_school_classes();
+DROP FUNCTION IF EXISTS public.get_school_classes() CASCADE;
 
 CREATE OR REPLACE FUNCTION public.get_school_classes()
 RETURNS TABLE(
