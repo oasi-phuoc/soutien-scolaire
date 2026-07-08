@@ -190,6 +190,18 @@ export const TRAD_G6_2: SubmoduleTrad = {
       "Noktaları düzleme yerleştir.",
       "نقطې په مسطحه کې ځای پر ځای کړئ.",
     ),
+    g6PerpParallelPlace: S(
+      "Placez D et E sur le plan.",
+      "Place D and E on the plane.",
+      "ضع D و E على المستوى.",
+      "D و E را روی صفحه قرار بده.",
+      "Dንን ከ Eን ኣብ መጠና ኣቐምጥ።",
+      "Розмістіть D і E на площині.",
+      "Coloque D e E no plano.",
+      "Dhig D iyo E goobta.",
+      "D ve E noktalarını düzleme yerleştir.",
+      "D او E په مسطحه کې ځای پر ځای کړئ.",
+    ),
     g6QuadrantRead: S(
       "Graduez les axes de 1 en 1 et écrivez les coordonnées des points.",
       "Mark the axes in steps of 1 and write the coordinates of the points.",

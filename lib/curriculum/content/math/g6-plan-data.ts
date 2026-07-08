@@ -587,6 +587,44 @@ export const VERTEX_PUZZLES: VertexPuzzle[] = [
   vtxTrap([-7, 3], [7, 3], [5, -3], [-5, -3]),
 ];
 
+/** G6.2 ex. 7 — placer D et E : [CD] ⊥ [AB], [CE] ∥ [AB] */
+export type PerpParallelScenario = {
+  a: LabeledPoint;
+  b: LabeledPoint;
+  c: LabeledPoint;
+  d: LabeledPoint;
+  e: LabeledPoint;
+};
+
+function ppScenario(
+  a: [number, number],
+  b: [number, number],
+  c: [number, number],
+  d: [number, number],
+  e: [number, number],
+): PerpParallelScenario {
+  return {
+    a: { label: "A", x: a[0], y: a[1] },
+    b: { label: "B", x: b[0], y: b[1] },
+    c: { label: "C", x: c[0], y: c[1] },
+    d: { label: "D", x: d[0], y: d[1] },
+    e: { label: "E", x: e[0], y: e[1] },
+  };
+}
+
+export const PERP_PARALLEL_SCENARIOS: PerpParallelScenario[] = [
+  ppScenario([-7, 3], [5, 3], [-2, -4], [-2, 1], [4, -4]),
+  ppScenario([-5, -2], [3, 2], [4, -3], [2, 1], [10, 0]),
+  ppScenario([1, 6], [1, -2], [-4, 1], [-7, 1], [-4, 5]),
+  ppScenario([-8, 0], [-2, 6], [2, -2], [-1, 1], [6, 2]),
+  ppScenario([3, -6], [9, 0], [-1, 2], [-5, 6], [2, 5]),
+  ppScenario([-4, 5], [4, 5], [0, -3], [0, 2], [5, -3]),
+  ppScenario([-6, -4], [2, 4], [-3, 0], [-7, 4], [1, 4]),
+  ppScenario([5, 1], [5, -7], [0, -2], [-4, -2], [0, -6]),
+  ppScenario([-3, -5], [5, 3], [2, -1], [-1, 2], [6, 3]),
+  ppScenario([-2, 4], [6, -4], [1, 1], [4, 4], [4, -2]),
+];
+
 /** Points à lire sur repère 4 quadrants (style A–J) */
 export const QUADRANT_READ_POOLS: LabeledPoint[][] = [
   [

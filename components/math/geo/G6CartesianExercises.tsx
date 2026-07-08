@@ -7,6 +7,7 @@ import {
   POLYGON_HALF_TEMPLATES,
   POLYGON_INT_TEMPLATES,
   QUADRANT_READ_POOLS,
+  PERP_PARALLEL_SCENARIOS,
   VERTEX_PUZZLES,
   vertexExercisePrompt,
   type LabeledPoint,
@@ -23,6 +24,7 @@ const COORD_CELL_CLS = `h-8 w-10 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE
 const PLACE_CELL_FILL = "color-mix(in srgb, var(--color-accent-alg) 22%, white)";
 const PLACE_POINT_FILL = "var(--color-accent-alg)";
 const PLACE_CORRECTION_FILL = "#d97706";
+const PLACE_PREVIEW_LINE = "#93c5fd";
 
 type ExProps = {
   exNum: number;
@@ -852,7 +854,165 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
   );
 }
 
-// ── Ex 13 : lire des points sur 4 quadrants ─────────────────────────────────
+// ── Ex 13 : perpendiculaire / parallèle — placer D et E ─────────────────────
+
+const PERP_PARALLEL_TARGETS = ["D", "E"] as const;
+
+export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
+  const [scenario] = useState(() => pick1(PERP_PARALLEL_SCENARIOS));
+  const [selected, setSelected] = useState<string | null>(null);
+  const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>({
+    D: null,
+    E: null,
+  });
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+
+  const fixedPoints = [scenario.a, scenario.b, scenario.c];
+
+  const onMapClick = (gx: number, gy: number) => {
+    if (validated || !selected) return;
+    setPlacements((p) => {
+      const next = { ...p };
+      for (const k of Object.keys(next)) {
+        if (next[k]?.x === gx && next[k]?.y === gy) next[k] = null;
+      }
+      next[selected] = { x: gx, y: gy };
+      return next;
+    });
+    setSelected(null);
+  };
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const targets = [
+      { label: "D" as const, point: scenario.d },
+      { label: "E" as const, point: scenario.e },
+    ];
+    const res = targets.map(({ label, point }) => {
+      const p = placements[label];
+      return p !== null && p.x === point.x && p.y === point.y;
+    });
+    setResults(res);
+    setValidated(true);
+    onValidated(res.filter(Boolean).length, res.length);
+  }, [validated, placements, scenario, onValidated]);
+
+  useValidateTrigger(validateCommand, doValidate);
+
+  const placed = PERP_PARALLEL_TARGETS
+    .filter((label, i) => placements[label] && (!validated || results[i]))
+    .map((label) => ({ label, x: placements[label]!.x, y: placements[label]!.y }));
+
+  const wrongPlacements = validated
+    ? PERP_PARALLEL_TARGETS
+        .filter((label, i) => !results[i] && placements[label])
+        .map((label) => ({ label, x: placements[label]!.x, y: placements[label]!.y }))
+    : [];
+
+  const correctionPoints = validated
+    ? PERP_PARALLEL_TARGETS
+        .filter((label, i) => !results[i])
+        .map((label) => {
+          const pt = label === "D" ? scenario.d : scenario.e;
+          return { label, x: pt.x, y: pt.y };
+        })
+    : [];
+
+  const abLine: SegmentLine = {
+    id: "ab",
+    x1: scenario.a.x,
+    y1: scenario.a.y,
+    x2: scenario.b.x,
+    y2: scenario.b.y,
+    color: PLACE_POINT_FILL,
+    label: "AB",
+  };
+
+  const previewLines: SegmentLine[] = [];
+  const c = scenario.c;
+  if (placements.D) {
+    const d = placements.D;
+    previewLines.push({ id: "cd", x1: c.x, y1: c.y, x2: d.x, y2: d.y, color: PLACE_PREVIEW_LINE, label: "CD" });
+  }
+  if (placements.E) {
+    const e = placements.E;
+    previewLines.push({ id: "ce", x1: c.x, y1: c.y, x2: e.x, y2: e.y, color: PLACE_PREVIEW_LINE, label: "CE" });
+  }
+
+  const correctionLines: SegmentLine[] = validated
+    ? PERP_PARALLEL_TARGETS
+        .filter((label, i) => !results[i])
+        .map((label) => {
+          const t = label === "D" ? scenario.d : scenario.e;
+          return {
+            id: label === "D" ? "cd-corr" : "ce-corr",
+            x1: c.x,
+            y1: c.y,
+            x2: t.x,
+            y2: t.y,
+            color: PLACE_CORRECTION_FILL,
+            label,
+          };
+        })
+    : [];
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
+        fallback="Placez D et E sur le plan." />
+      <ol className="list-inside list-decimal space-y-1 text-sm text-[var(--color-text-secondary)]">
+        <li>[CD] doit être perpendiculaire à [AB].</li>
+        <li>[CE] doit être parallèle à [AB].</li>
+      </ol>
+      <div className="flex flex-wrap gap-2">
+        {PERP_PARALLEL_TARGETS.map((label, i) => {
+          const isSel = selected === label;
+          const ok = validated ? results[i] : null;
+          const placedOnGrid = placements[label] !== null;
+          const onAccent = placedOnGrid && !isSel && ok !== false;
+          return (
+            <button
+              key={label}
+              type="button"
+              disabled={validated}
+              onClick={() => setSelected(label)}
+              className={`flex h-9 min-w-[3rem] items-center justify-center rounded-lg border px-4 text-sm font-bold transition-colors ${
+                isSel
+                  ? `border-[var(--color-accent-alg)] ${PLACE_CELL_FILL} text-[var(--color-accent-alg)]`
+                  : ok === false
+                    ? "border-amber-400 bg-white text-[var(--color-accent-alg)]"
+                    : placedOnGrid
+                      ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                      : "border-[var(--color-border-default)] bg-white text-[var(--color-accent-alg)]"
+              }`}
+            >
+              <span className={onAccent ? "text-white" : undefined}>{label}</span>
+            </button>
+          );
+        })}
+      </div>
+      <CartesianPlane
+        xMin={-10}
+        xMax={10}
+        yMin={-10}
+        yMax={10}
+        unit={12}
+        labelStep={2}
+        lines={[abLine, ...previewLines, ...correctionLines]}
+        points={fixedPoints}
+        placedPoints={placed}
+        wrongPlacements={wrongPlacements}
+        correctionPoints={correctionPoints}
+        onClick={onMapClick}
+      />
+      <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur une pastille, puis sur le repère.</p>
+    </div>
+  );
+}
+
+// ── Ex 14 : lire des points sur 4 quadrants ─────────────────────────────────
 
 export function G6QuadrantReadExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
   const [points] = useState(() => pick1(QUADRANT_READ_POOLS));

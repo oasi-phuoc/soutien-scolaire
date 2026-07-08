@@ -48,7 +48,7 @@ import {
   G6LineIntersectExercise,
   G6CartesianPlaceExercise,
   G6FindVertexExercise,
-  G6QuadrantReadExercise,
+  G6PerpParallelPlaceExercise,
 } from "@/components/math/geo/G6CartesianExercises";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
@@ -11201,9 +11201,9 @@ export function GenericModuleContent({
               consigneDir={showPivotTranslation && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"} />
           )}
           {currentStep.variant === 13 && (
-            <G6QuadrantReadExercise key={`g6qr-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
+            <G6PerpParallelPlaceExercise key={`g6pp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
-              {...g6Cons("g6QuadrantRead")} />
+              {...g6Cons("g6PerpParallelPlace")} />
           )}
         </EvalRevealContext.Provider>
       )}
