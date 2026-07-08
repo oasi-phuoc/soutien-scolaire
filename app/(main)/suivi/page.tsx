@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SuiviClassesClient } from "@/components/suivi/SuiviClassesClient";
@@ -28,16 +27,6 @@ export default async function SuiviPage() {
         subtitle={subtitle}
         backHref="/"
         backLabel="accueil"
-        actions={
-          role === "admin" ? (
-            <Link
-              href="/admin"
-              className="rounded-xl border border-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-600 dark:border-zinc-700"
-            >
-              Comptes
-            </Link>
-          ) : null
-        }
       />
       <SuiviClassesClient />
     </main>
