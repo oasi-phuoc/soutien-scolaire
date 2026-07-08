@@ -277,6 +277,19 @@ function boolQuestion(
   };
 }
 
+function parallelToQuestion(lines: RawLine[], seed: number): LineScenarioQuestion {
+  const focus = lines[seed % lines.length]!;
+  const axisTarget = parallelTarget(focus);
+  const other = lines.find((l) => l.id !== focus.id && isParallelEntities(focus.id, l.id, lines));
+  const answer = axisTarget ?? other?.id ?? "axis_x";
+  return {
+    type: "parallel_to",
+    prompt: `La droite ${focus.label} est parallèle à`,
+    lineId: focus.id,
+    answer,
+  };
+}
+
 function buildQuestions(lines: RawLine[], seed: number): LineScenarioQuestion[] {
   const intPairs = collectIntersectionPairs(lines);
   const lineLinePairs = intPairs.filter(
@@ -310,38 +323,14 @@ function buildQuestions(lines: RawLine[], seed: number): LineScenarioQuestion[] 
   };
 
   const entityPairs = allEntityPairs(lines);
-  const relPairQ3 = entityPairs[seed % entityPairs.length]!;
-  const askParallelQ3 = seed % 2 === 0;
-  const q3 = boolQuestion(
-    relPairQ3[0],
-    relPairQ3[1],
-    lines,
-    askParallelQ3 ? "parallel" : "perpendicular",
-  );
+  const relPairPerp = entityPairs[(seed + 3) % entityPairs.length]!;
+  const perpBool = boolQuestion(relPairPerp[0], relPairPerp[1], lines, "perpendicular");
+  const parSelect = parallelToQuestion(lines, seed);
 
-  const focus = lines[seed % lines.length]!;
-  const askParallelTo = seed % 2 === 0;
-  let q4: LineScenarioQuestion;
-  if (askParallelTo) {
-    const axisTarget = parallelTarget(focus);
-    const other = lines.find((l) => l.id !== focus.id && isParallelEntities(focus.id, l.id, lines));
-    const answer = axisTarget ?? other?.id ?? "axis_x";
-    q4 = {
-      type: "parallel_to",
-      prompt: `La droite ${focus.label} est parallèle à`,
-      lineId: focus.id,
-      answer,
-    };
-  } else {
-    const relPairQ4 = entityPairs[(seed + 3) % entityPairs.length]!;
-    const askParallelQ4 = (seed >> 1) % 2 === 0;
-    q4 = boolQuestion(
-      relPairQ4[0],
-      relPairQ4[1],
-      lines,
-      askParallelQ4 ? "parallel" : "perpendicular",
-    );
-  }
+  // Q3/Q4 : toujours 1 perpendiculaire (vrai/faux) + 1 parallèle (menu), ordre alterné
+  const [q3, q4] = seed % 2 === 0
+    ? [perpBool, parSelect]
+    : [parSelect, perpBool];
 
   return [q1, q2, q3, q4];
 }
