@@ -8,7 +8,6 @@ import {
   POLYGON_INT_TEMPLATES,
   QUADRANT_READ_POOLS,
   VERTEX_PUZZLES,
-  parallelToLabel,
   type LabeledPoint,
   type LineScenarioQuestion,
   type SegmentLine,
@@ -342,6 +341,13 @@ export function G6PolygonHalfExercise({ exNum, validateCommand, onValidated }: E
 
 // ── Ex 10 : intersections de droites ────────────────────────────────────────
 
+const LINE_SELECT_CLS = "rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm";
+const LINE_SELECT_WRONG = "rounded border border-amber-500 bg-white px-2 py-1 text-sm font-semibold text-amber-600";
+
+function LineQNum({ n }: { n: number }) {
+  return <span className="font-bold text-[var(--color-accent-alg)]">{n}.</span>;
+}
+
 function LineQuestionBlock({
   q,
   i,
@@ -361,17 +367,26 @@ function LineQuestionBlock({
 }) {
   if (q.type === "bool") {
     return (
-      <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
-        <p className="text-sm">{i + 1}. {q.prompt}</p>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+        <LineQNum n={i + 1} />
+        <span>{q.prompt}</span>
         <div className="flex gap-4">
           {(["Oui", "Non"] as const).map((opt) => {
-            const sel = answer === opt;
-            const showWrong = validated && sel && ((opt === "Oui") !== q.answer);
-            const showRight = validated && ((opt === "Oui") === q.answer);
+            const isCorrect = (opt === "Oui") === q.answer;
+            const checked = validated ? isCorrect : answer === opt;
+            const showWrong = validated && wrong && answer === opt && !isCorrect;
             return (
-              <label key={opt} className={`flex items-center gap-2 text-sm ${showWrong ? "text-amber-600" : showRight ? "font-semibold text-green-700" : ""}`}>
-                <input type="radio" name={`lq-${i}`} disabled={validated} checked={sel}
-                  onChange={() => onChange(opt)} />
+              <label
+                key={opt}
+                className={`flex items-center gap-2 ${showWrong ? "text-amber-600" : validated && isCorrect ? "font-semibold" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name={`lq-${i}`}
+                  disabled={validated}
+                  checked={checked}
+                  onChange={() => onChange(opt)}
+                />
                 {opt}
               </label>
             );
@@ -389,35 +404,22 @@ function LineQuestionBlock({
       parts[idx] = val;
       onChange(parts.join("|"));
     };
-    const match = (got: string) => {
-      const [g1, g2] = got.split("|");
-      if (!g1 || !g2) return false;
-      const s1 = [g1, g2].sort().join("|");
-      const s2 = [...q.answer].sort().join("|");
-      return s1 === s2;
-    };
-    const isWrong = validated && !match(answer);
+    const display1 = validated && wrong ? q.answer[0]! : a1;
+    const display2 = validated && wrong ? q.answer[1]! : a2;
+    const selectCls = validated && wrong ? LINE_SELECT_WRONG : LINE_SELECT_CLS;
     return (
-      <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
-        <p className="text-sm">{i + 1}. {q.prompt}</p>
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          <select disabled={validated} value={a1} onChange={(e) => setPart(0, e.target.value)}
-            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
-            <option value="">—</option>
-            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-          </select>
-          <span>et</span>
-          <select disabled={validated} value={a2} onChange={(e) => setPart(1, e.target.value)}
-            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
-            <option value="">—</option>
-            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-          </select>
-        </div>
-        {isWrong && (
-          <p className="text-xs font-bold text-amber-600">
-            {`la droite ${lines.find((l) => l.id === q.answer[0])?.label} et la droite ${lines.find((l) => l.id === q.answer[1])?.label}`}
-          </p>
-        )}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+        <LineQNum n={i + 1} />
+        <select disabled={validated} value={display1} onChange={(e) => setPart(0, e.target.value)} className={selectCls}>
+          <option value="">—</option>
+          {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+        </select>
+        <span>et</span>
+        <select disabled={validated} value={display2} onChange={(e) => setPart(1, e.target.value)} className={selectCls}>
+          <option value="">—</option>
+          {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+        </select>
+        <span>{q.prompt}</span>
       </div>
     );
   }
@@ -429,64 +431,67 @@ function LineQuestionBlock({
       { id: "axis_x", label: "l'axe des X" },
       { id: "axis_y", label: "l'axe des Y" },
     ];
-    const correctLabel = parallelToLabel(q.answer, lines);
+    const display = validated && wrong ? q.answer : answer;
+    const selectCls = validated && wrong ? LINE_SELECT_WRONG : LINE_SELECT_CLS;
     return (
-      <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
-        <p className="text-sm">{i + 1}. {q.prompt}</p>
-        {wrong ? (
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-[var(--color-text-secondary)]">{options.find((o) => o.id === answer)?.label ?? "—"}</span>
-            <span className="text-xs font-bold text-amber-600">{correctLabel}</span>
-          </div>
-        ) : (
-          <select disabled={validated} value={answer} onChange={(e) => onChange(e.target.value)}
-            className="rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm">
-            <option value="">—</option>
-            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-          </select>
-        )}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+        <LineQNum n={i + 1} />
+        <span>{q.prompt}</span>
+        <select disabled={validated} value={display} onChange={(e) => onChange(e.target.value)} className={selectCls}>
+          <option value="">—</option>
+          {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+        </select>
       </div>
     );
   }
 
   return (
-    <div className="space-y-2 rounded-lg border border-[var(--color-border-default)] p-3">
-      <p className="text-sm">{i + 1}. {q.prompt}</p>
-      <div className="flex items-center gap-1 text-sm">
-        <span>(</span>
-        {wrong ? (
-          <>
-            <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-              <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
-              <span className="text-xs font-bold text-amber-600">{q.answer[0]}</span>
-            </div>
-            <span>;</span>
-            <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-              <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
-              <span className="text-xs font-bold text-amber-600">{q.answer[1]}</span>
-            </div>
-          </>
-        ) : (
-          <>
-            <input type="text" inputMode="numeric" value={answer.split("|")[0] ?? ""} disabled={validated}
-              onChange={(e) => {
-                const parts = answer.split("|");
-                parts[0] = e.target.value.replace(/[^0-9,\.\-]/g, "");
-                onChange(parts.join("|"));
-              }}
-              className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
-            <span>;</span>
-            <input type="text" inputMode="numeric" value={answer.split("|")[1] ?? ""} disabled={validated}
-              onChange={(e) => {
-                const parts = answer.split("|");
-                parts[1] = e.target.value.replace(/[^0-9,\.\-]/g, "");
-                onChange(parts.join("|"));
-              }}
-              className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
-          </>
-        )}
-        <span>)</span>
-      </div>
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+      <LineQNum n={i + 1} />
+      <span>{q.prompt}</span>
+      <span>(</span>
+      {wrong ? (
+        <>
+          <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+            <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[0] ?? "") || "—"}</span>
+            <span className="text-xs font-bold text-amber-600">{q.answer[0]}</span>
+          </div>
+          <span>;</span>
+          <div className={`w-12 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
+            <span className="text-[10px] text-[var(--color-text-secondary)]">{(answer.split("|")[1] ?? "") || "—"}</span>
+            <span className="text-xs font-bold text-amber-600">{q.answer[1]}</span>
+          </div>
+        </>
+      ) : (
+        <>
+          <input
+            type="text"
+            inputMode="numeric"
+            value={answer.split("|")[0] ?? ""}
+            disabled={validated}
+            onChange={(e) => {
+              const parts = answer.split("|");
+              parts[0] = e.target.value.replace(/[^0-9,\.\-]/g, "");
+              onChange(parts.join("|"));
+            }}
+            className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+          />
+          <span>;</span>
+          <input
+            type="text"
+            inputMode="numeric"
+            value={answer.split("|")[1] ?? ""}
+            disabled={validated}
+            onChange={(e) => {
+              const parts = answer.split("|");
+              parts[1] = e.target.value.replace(/[^0-9,\.\-]/g, "");
+              onChange(parts.join("|"));
+            }}
+            className={`w-12 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`}
+          />
+        </>
+      )}
+      <span>)</span>
     </div>
   );
 }
@@ -538,7 +543,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated }:
         gridStep={1}
         labelStep={2}
       />
-      <div className="space-y-3">
+      <div className="space-y-4">
         {scenario.questions.map((q, i) => (
           <LineQuestionBlock key={i} q={q} i={i}
             answer={answers[i] ?? ""}
