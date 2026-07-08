@@ -495,6 +495,7 @@ export const CARTESIAN_PLACE_POOLS: LabeledPoint[][] = [
 export type VertexPuzzle = {
   type: "square" | "parallelogram";
   prompt: string;
+  promptPivot?: Partial<Record<string, string>>;
   points: LabeledPoint[];
   missing: string;
   answer: { x: number; y: number };
@@ -505,6 +506,11 @@ export const VERTEX_PUZZLES: VertexPuzzle[] = [
   {
     type: "square",
     prompt: "Le carré [ABCD] passe par A, B et C. Où se trouve D ?",
+    promptPivot: {
+      en: "Square [ABCD] passes through A, B and C. Where is D?",
+      ar: "المربع [ABCD] يمر بـ A و B و C. أين يقع D؟",
+      fa: "مربع [ABCD] از A و B و C می‌گذرد. D کجاست؟",
+    },
     points: [
       { label: "A", x: -14, y: 9 },
       { label: "B", x: -9, y: 4 },
@@ -517,6 +523,11 @@ export const VERTEX_PUZZLES: VertexPuzzle[] = [
   {
     type: "parallelogram",
     prompt: "Parallèle à [AB] par C et parallèle à [AC] par B se croisent en D. Coordonnées de D ?",
+    promptPivot: {
+      en: "Line parallel to [AB] through C and line parallel to [AC] through B meet at D. Coordinates of D?",
+      ar: "مستقيم موازٍ لـ [AB] يمر بـ C ومستقيم موازٍ لـ [AC] يمر بـ B يلتقيان عند D. إحداثيات D؟",
+      fa: "موازی [AB] از C و موازی [AC] از B در D به هم می‌رسند. مختصات D؟",
+    },
     points: [
       { label: "A", x: -2, y: 6 },
       { label: "B", x: 5, y: 8 },
@@ -529,6 +540,11 @@ export const VERTEX_PUZZLES: VertexPuzzle[] = [
   {
     type: "parallelogram",
     prompt: "Le parallélogramme [ABCD] a pour sommets connus A, B et C. Trouvez D.",
+    promptPivot: {
+      en: "Parallelogram [ABCD] has known vertices A, B and C. Find D.",
+      ar: "متوازي الأضلاع [ABCD] له رؤوس معروفة A و B و C. جد D.",
+      fa: "متوازی‌الاضلاع [ABCD] رئوس A و B و C را دارد. D را بیابید.",
+    },
     points: [
       { label: "A", x: -3, y: 2 },
       { label: "B", x: 2, y: 5 },

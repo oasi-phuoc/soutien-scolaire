@@ -9878,6 +9878,14 @@ export function GenericModuleContent({
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
+  const g6Cons = (key: string) => {
+    const t = showPivotTranslation ? currentStepTrad?.consignes?.[key]?.[pivot] : undefined;
+    return {
+      consigne: t,
+      consigneLang: t ? pivot : undefined,
+      consigneDir: (t && (pivot === "ar" || pivot === "fa" || pivot === "ps")) ? "rtl" as const : "ltr" as const,
+    };
+  };
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
   const currentStepTitle = currentStepHasPivotTitle
@@ -11133,11 +11141,11 @@ export function GenericModuleContent({
         <EvalRevealContext.Provider value={revealCorrection}>
           {currentStep.variant === 1 && (
             <G6GridReadExercise key={`g6r-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={handleG6Validated} />
+              onValidated={handleG6Validated} {...g6Cons("g6GridRead")} />
           )}
           {currentStep.variant === 2 && (
             <G6GridPlaceExercise key={`g6p-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={handleG6Validated} />
+              onValidated={handleG6Validated} {...g6Cons("g6GridPlace")} />
           )}
           {currentStep.variant === 3 && (
             <G6MedievalLocateExercise key={`g6m-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11145,7 +11153,7 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId === "G6-1" && (
             <G6Q1FigureCoordsExercise key={`g6q1-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={handleG6Validated} />
+              onValidated={handleG6Validated} {...g6Cons("g6Q1FigureCoords")} />
           )}
           {currentStep.variant === 4 && currentStep.lesson.submoduleId !== "G6-1" && (
             <G6CartesianCoordsExercise key={`g6c-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11153,11 +11161,11 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 14 && (
             <G6Q2FigureCoordsExercise key={`g6q2a-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} half="q12" validateCommand={geoValidateTrigger}
-              onValidated={handleG6Validated} />
+              onValidated={handleG6Validated} {...g6Cons("g6Q2FigureCoords")} />
           )}
           {currentStep.variant === 15 && (
             <G6Q2FigureCoordsExercise key={`g6q2b-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} half="q34" validateCommand={geoValidateTrigger}
-              onValidated={handleG6Validated} />
+              onValidated={handleG6Validated} {...g6Cons("g6Q2FigureCoords")} />
           )}
           {currentStep.variant === 5 && (
             <G6MapGenevaExercise key={`g6g-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
@@ -11173,23 +11181,29 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 8 && (
             <G6QAllFigureCoordsExercise key={`g6qall-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              {...g6Cons("g6QAllFigureCoords")} />
           )}
           {currentStep.variant === 10 && (
             <G6LineIntersectExercise key={`g6li-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              {...g6Cons("g6LineIntersect")} />
           )}
           {currentStep.variant === 11 && (
             <G6CartesianPlaceExercise key={`g6cp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              {...g6Cons("g6CartesianPlace")} />
           )}
           {currentStep.variant === 12 && (
             <G6FindVertexExercise key={`g6fv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              consigneLang={showPivotTranslation ? pivot : undefined}
+              consigneDir={showPivotTranslation && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"} />
           )}
           {currentStep.variant === 13 && (
             <G6QuadrantReadExercise key={`g6qr-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }} />
+              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              {...g6Cons("g6QuadrantRead")} />
           )}
         </EvalRevealContext.Provider>
       )}
