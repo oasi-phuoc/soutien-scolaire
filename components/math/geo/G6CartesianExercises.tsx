@@ -151,15 +151,15 @@ function CartesianPlane({
       {Array.from({ length: Math.floor((xMax - xMin) / labelStep) + 1 }, (_, i) => xMin + i * labelStep)
         .filter((x) => x !== 0)
         .map((x) => (
-          <text key={`tx-${x}`} x={cx + x * unit} y={cy + 16} textAnchor="middle" fontSize="8" fill="#64748b">{x}</text>
+          <text key={`tx-${x}`} x={cx + x * unit} y={cy + 10} textAnchor="middle" dominantBaseline="hanging" fontSize="8" fill="#64748b">{x}</text>
         ))}
       {Array.from({ length: Math.floor((yMax - yMin) / labelStep) + 1 }, (_, i) => yMin + i * labelStep)
         .filter((y) => y !== 0)
         .map((y) => (
-          <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit + 3} textAnchor="middle" fontSize="8" fill="#64748b">{y}</text>
+          <text key={`ty-${y}`} x={cx - 10} y={cy - y * unit} textAnchor="middle" dominantBaseline="middle" fontSize="8" fill="#64748b">{y}</text>
         ))}
-      <text x={w - pad + 2} y={cy + 4} fontSize="10" fontWeight="bold" fill="#334155">x</text>
-      <text x={cx + 4} y={pad - 6} fontSize="10" fontWeight="bold" fill="#334155">y</text>
+      <text x={w - pad + 6} y={cy} textAnchor="start" dominantBaseline="middle" fontSize="10" fontWeight="bold" fill="#334155">x</text>
+      <text x={cx} y={pad - 8} textAnchor="middle" dominantBaseline="auto" fontSize="10" fontWeight="bold" fill="#334155">y</text>
 
       {lines?.map((ln) => {
         const clipped = clipLineToRect(ln.x1, ln.y1, ln.x2, ln.y2, xMin, xMax, yMin, yMax);
