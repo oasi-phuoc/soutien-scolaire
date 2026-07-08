@@ -161,6 +161,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez le mot négatif utilisé dans chaque phrase.",
+      transInstruction: { en: "Sort the negative word used in each sentence.", ar: "صنّف كلمة النفي المستخدمة في كل جملة.", fa: "کلمه‌ی منفی به‌کاررفته در هر جمله را دسته‌بندی کنید.", ti: "ኣብ ነፍሲ ወከፍ ሓሳብ ዝተጠቀመሉ ኣሉታዊ ቃል ሸነኽ።", uk: "Розсортуйте заперечне слово, вжите в кожному реченні." },
       categories: ["ne … pas", "ne … jamais", "ne … plus", "ne … rien"],
       items: [],
       pool: [
@@ -181,6 +182,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase négative correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct negative sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة سلبية صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی منفی درست بسازید.", ti: "ነተን ቃላት ቅኑዕ ኣሉታዊ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне заперечне речення." },
       items: [],
       pool: [
         { sentence: "Je n'ai pas mangé ce matin.", words: ["Je", "n'ai", "pas", "mangé", "ce", "matin."] },
@@ -196,6 +198,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase au passé composé à la forme négative (ne … pas, ne … jamais, ne … plus ou ne … rien).\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence in the passé composé in the negative (ne … pas, ne … jamais, ne … plus or ne … rien).\nUse the verb provided.", ar: "اكتب جملة في الماضي المركب بصيغة النفي (ne … pas، ne … jamais، ne … plus أو ne … rien).\nاستخدم الفعل المقترح.", fa: "یک جمله در گذشته‌ی مرکب به‌صورت منفی بنویسید (ne … pas، ne … jamais، ne … plus یا ne … rien).\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብሕሉፍ ውሁድ ብኣሉታዊ ቅርጺ (ne … pas፣ ne … jamais፣ ne … plus ወይ ne … rien) ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення в passé composé у заперечній формі (ne … pas, ne … jamais, ne … plus або ne … rien).\nВикористайте запропоноване дієслово." },
       verbPool: ["manger", "venir", "voir", "finir", "faire", "aller", "comprendre"],
       verbPoolSize: 3,
     },

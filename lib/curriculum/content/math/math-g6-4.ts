@@ -17,10 +17,10 @@ export const MATH_G6_4_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "g5-4-e1", promptFr: "La rotation conserve-t-elle les distances ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-4-e2", promptFr: "Une rotation de 360° ramène la figure à sa position initiale ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-4-e3", promptFr: "Rotation de 90° antihoraire : le point (3 ; 0) devient ?", type: "short_text", acceptable: ["(0;3)", "(0 ; 3)"] },
-      { id: "g5-4-e4", promptFr: "Une rotation de 180° est équivalente à quelle transformation ?", type: "short_text", acceptable: ["symétrie centrale"] },
-      { id: "g5-4-e5", promptFr: "Après une rotation, la figure est-elle de même taille ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g6-4-e1", promptFr: "La rotation conserve-t-elle les distances ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g6-4-e2", promptFr: "Une rotation de 360° ramène la figure à sa position initiale ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g6-4-e3", promptFr: "Rotation de 90° antihoraire : le point (3 ; 0) devient ?", type: "short_text", acceptable: ["(0;3)", "(0 ; 3)"] },
+      { id: "g6-4-e4", promptFr: "Une rotation de 180° est équivalente à quelle transformation ?", type: "short_text", acceptable: ["symétrie centrale"] },
+      { id: "g6-4-e5", promptFr: "Après une rotation, la figure est-elle de même taille ? (oui/non)", type: "short_text", acceptable: ["oui"] },
     ],
   };

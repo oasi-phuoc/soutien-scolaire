@@ -61,12 +61,13 @@ function auditMathTrad(prefix, lessonGlob) {
     const hasBlocks = /blocks:\s*\[/.test(src);
     const hasParagraphs = /paragraphs:\s*\{/.test(src);
     const hasConsignes = /consignes:\s*\{/.test(src);
-    const hasEnTitle = /title:\s*[\s\S]*?en:/.test(src);
+    const hasEnTitle = /title:\s*[\s\S]*?en:/.test(src) || /title:\s*S\(/.test(src);
     const blockCount = hasBlocks ? (src.match(/\{\s*text:|label:|items:|caption:|^\s*\{\s*\}/gm) || []).length : 0;
 
     if (!hasEnTitle) issues.push({ file: tf, type: "title_en_missing" });
     if (!hasBlocks && !hasParagraphs) issues.push({ file: tf, type: "no_theory_trad" });
     if (hasBlocks && !/en:/.test(src)) issues.push({ file: tf, type: "blocks_no_en" });
+    if (hasParagraphs && !/paragraphs:[\s\S]*?en:/.test(src)) issues.push({ file: tf, type: "paragraphs_no_en" });
 
     // stale consignes keys (g5-* in g6 files)
     if (/consignes:[\s\S]*g5-/.test(src) && tf.includes("g6-")) {

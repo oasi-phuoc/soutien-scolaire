@@ -62,6 +62,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec la terminaison correcte de l'imparfait.",
+      transInstruction: { en: "Complete with the correct imperfect ending.", ar: "أكمل بنهاية الماضي الناقص الصحيحة.", fa: "با پایانه‌ی درست گذشته‌ی ناتمام کامل کنید.", ti: "ብቅኑዕ መወዳእታ ዘይተዛዘመ ግዜ ምላእ።", uk: "Доповніть правильним закінченням imparfait." },
       items: [],
       pool: [
         { sentence: "Je parl___", hint: "-ais / -ais / -ait / -ions / -iez / -aient", answer: "ais" },
@@ -86,6 +87,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe à l'imparfait.",
+      transInstruction: { en: "Conjugate the verb in the imperfect.", ar: "صرّف الفعل في الماضي الناقص.", fa: "فعل را در زمان گذشته‌ی ناتمام صرف کنید.", ti: "ነቲ ግሲ ኣብ ዘይተዛዘመ ግዜ ኣጻርይ።", uk: "Відмінюйте дієслово в imparfait." },
       items: [],
       pool: [
         { sentence: "Je ___ (parler) souvent avec ma famille.", hint: "parl- + ais", answer: "parlais" },
@@ -107,6 +109,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Transformez la phrase au présent en phrase à l'imparfait.",
+      transInstruction: { en: "Transform the present tense sentence into an imperfect sentence.", ar: "حوّل الجملة في المضارع إلى جملة في الماضي الناقص.", fa: "جمله‌ی حال را به جمله‌ی گذشته‌ی ناتمام تبدیل کنید.", ti: "ነቲ ኣብ ሕጂ ግዜ ዘሎ ሓሳብ ናብ ዘይተዛዘመ ግዜ ቀይር።", uk: "Перетворіть речення в теперішньому часі на речення в imparfait." },
       items: [],
       pool: [
         { sentence: "Je mange. → Avant, je ___ tous les jours.", hint: "imparfait de manger", answer: "mangeais" },
@@ -123,6 +126,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez chaque terminaison dans la bonne personne.",
+      transInstruction: { en: "Sort each ending into the correct person.", ar: "صنّف كل نهاية في الشخص الصحيح.", fa: "هر پایانه را در شخص درست قرار دهید.", ti: "ነፍሲ ወከፍ መወዳእታ ናብ ቅኑዕ ሰብ ኣእቱ.", uk: "Розподіліть кожне закінчення за правильною особою." },
       categories: ["je / tu", "il / elle / on", "nous", "vous", "ils / elles"],
       items: [
         { word: "-ais", categoryIdx: 0 },
@@ -136,6 +140,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Avant, je parlais souvent français.", words: ["Avant,", "je", "parlais", "souvent", "français."] },
@@ -150,6 +155,7 @@ export const A2_CONJ_L07: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Décrivez une habitude passée en utilisant l'imparfait.\nCommencez par « Avant, » ou « Quand j'étais enfant, ».",
+      transInstruction: { en: "Describe a past habit using the imperfect.\nStart with « Avant, » or « Quand j'étais enfant, ».", ar: "صف عادة في الماضي باستخدام الماضي الناقص.\nابدأ بـ « Avant, » أو « Quand j'étais enfant, ».", fa: "یک عادت گذشته را با زمان گذشته‌ی ناتمام توصیف کنید.\nبا « Avant, » یا « Quand j'étais enfant, » شروع کنید.", ti: "ሓደ ዝሓለፈ ልማድ ብዘይተዛዘመ ግዜ ግልጽ።\nብ « Avant, » ወይ « Quand j'étais enfant, » ጀምር።", uk: "Опишіть минулу звичку, використовуючи imparfait.\nПочніть з « Avant, » або « Quand j'étais enfant, »." },
       verbPool: ["jouer", "manger", "habiter", "travailler", "étudier", "regarder", "chanter", "parler"],
       verbPoolSize: 3,
     },

@@ -303,6 +303,7 @@ export const A1_GR_L04: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez l'article correct.",
+      transInstruction: { en: "Choose the correct article.", ar: "اختر الأداة الصحيحة.", fa: "حرف تعریف درست را انتخاب کنید.", ti: "ቅኑዕ ዓንቀጽ ምረጽ።", uk: "Оберіть правильний артикль." },
       items: [],
       poolSize: 5,
       pool: [
@@ -322,6 +323,7 @@ export const A1_GR_L04: GrammarLesson = {
       type: "classify",
       title: "Évaluation — Question 2",
       instruction: "Classez chaque article : défini ou indéfini.",
+      transInstruction: { en: "Sort each article: definite or indefinite.", ar: "صنّف كل أداة: معرفة أم نكرة.", fa: "هر حرف تعریف را دسته‌بندی کنید: معین یا نامعین.", ti: "ነፍሲ ወከፍ ዓንቀጽ ሸነኽ፦ ዝተፈልጠ ወይ ዘይተፈልጠ።", uk: "Розсортуйте кожен артикль: означений чи неозначений." },
       categories: ["Article défini", "Article indéfini"],
       items: [],
       poolSize: 8,

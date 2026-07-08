@@ -17,10 +17,10 @@ export const MATH_G6_6_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "g5-6-e1", promptFr: "La translation est-elle une isométrie ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-6-e2", promptFr: "L'homothétie de rapport 2 est-elle une isométrie ? (oui/non)", type: "short_text", acceptable: ["non"] },
-      { id: "g5-6-e3", promptFr: "Cite deux isométries directes.", type: "short_text", acceptable: ["translation et rotation", "rotation et translation"] },
-      { id: "g5-6-e4", promptFr: "Une isométrie conserve-t-elle les aires ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-6-e5", promptFr: "Combien d'isométries du plan existe-t-il (types fondamentaux) ?", type: "number", acceptable: ["4"] },
+      { id: "g6-6-e1", promptFr: "La translation est-elle une isométrie ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g6-6-e2", promptFr: "L'homothétie de rapport 2 est-elle une isométrie ? (oui/non)", type: "short_text", acceptable: ["non"] },
+      { id: "g6-6-e3", promptFr: "Cite deux isométries directes.", type: "short_text", acceptable: ["translation et rotation", "rotation et translation"] },
+      { id: "g6-6-e4", promptFr: "Une isométrie conserve-t-elle les aires ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g6-6-e5", promptFr: "Combien d'isométries du plan existe-t-il (types fondamentaux) ?", type: "number", acceptable: ["4"] },
     ],
   };

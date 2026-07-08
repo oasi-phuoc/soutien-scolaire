@@ -43,6 +43,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Donnez la base irrégulière du futur simple.",
+      transInstruction: { en: "Give the irregular stem of the simple future.", ar: "أعطِ الجذر الشاذ للمستقبل البسيط.", fa: "ریشه‌ی بی‌قاعده‌ی آینده‌ی ساده را بنویسید.", ti: "ዘይስሩዕ መሰረት ቀሊል መጻኢ ሃብ።", uk: "Напишіть неправильну основу futur simple." },
       items: [
         { sentence: "être → base : ___", hint: "je serai", answer: "ser-" },
         { sentence: "avoir → base : ___", hint: "tu auras", answer: "aur-" },
@@ -58,6 +59,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe irrégulier au futur simple.",
+      transInstruction: { en: "Conjugate the irregular verb in the simple future.", ar: "صرّف الفعل الشاذ في المستقبل البسيط.", fa: "فعل بی‌قاعده را در آینده‌ی ساده صرف کنید.", ti: "ነቲ ዘይስሩዕ ግሲ ኣብ ቀሊል መጻኢ ኣጻርይ።", uk: "Відмінюйте неправильне дієслово в futur simple." },
       items: [],
       pool: [
         { sentence: "Je ___ (être) là demain.", hint: "ser- + -ai", answer: "serai" },
@@ -79,6 +81,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "qcm",
       title: "Exercice 3",
       instruction: "Choisissez la forme correcte au futur simple.",
+      transInstruction: { en: "Choose the correct simple future form.", ar: "اختر الصيغة الصحيحة في المستقبل البسيط.", fa: "صورت درست در آینده‌ی ساده را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ኣብ ቀሊል መጻኢ ምረጽ።", uk: "Оберіть правильну форму в futur simple." },
       items: [],
       pool: [
         { sentence: "Demain, je ___ au cinéma.", choices: ["irai", "allerai", "vais", "allons"], correctIdx: 0 },
@@ -94,6 +97,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Associez chaque verbe à sa base irrégulière au futur.",
+      transInstruction: { en: "Match each verb to its irregular future stem.", ar: "اربط كل فعل بجذره الشاذ في المستقبل.", fa: "هر فعل را با ریشه‌ی بی‌قاعده‌ی آن در آینده مطابقت دهید.", ti: "ነፍሲ ወከፍ ግሲ ምስ ዘይስሩዕ መጻኢ መሰረት ኣሰማማዕ።", uk: "Поєднайте кожне дієслово з його неправильною основою в futur." },
       categories: ["ser-", "aur-", "ir-", "fer-"],
       items: [
         { word: "être", categoryIdx: 0 },
@@ -106,6 +110,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase au futur simple.",
+      transInstruction: { en: "Put the words back in the correct order to form a simple future sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة في المستقبل البسيط.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی آینده‌ی ساده بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ቀሊል መጻኢ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення в futur simple." },
       items: [],
       pool: [
         { sentence: "Demain, il fera beau.", words: ["Demain,", "il", "fera", "beau."] },
@@ -120,6 +125,7 @@ export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase au futur simple avec un verbe irrégulier.\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence in the simple future with an irregular verb.\nUse the verb provided.", ar: "اكتب جملة في المستقبل البسيط بفعل شاذ.\nاستخدم الفعل المقترح.", fa: "یک جمله در آینده‌ی ساده با فعل بی‌قاعده بنویسید.\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብቀሊል መጻኢ ምስ ዘይስሩዕ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення в futur simple з неправильним дієсловом.\nВикористайте запропоноване дієслово." },
       verbPool: ["être", "avoir", "aller", "faire", "pouvoir", "vouloir", "venir", "voir"],
       verbPoolSize: 2,
     },

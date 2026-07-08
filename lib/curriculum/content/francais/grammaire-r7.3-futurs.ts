@@ -83,6 +83,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Choisissez : futur proche ou futur simple ?",
+      transInstruction: { en: "Choose: near future or simple future?", ar: "اختر: المستقبل القريب أم المستقبل البسيط؟", fa: "انتخاب کنید: آینده‌ی نزدیک یا آینده‌ی ساده؟", ti: "ምረጽ፦ ቀረባ መጻኢ ወይ ቀሊል መጻኢ?", uk: "Оберіть: futur proche чи futur simple?" },
       items: [],
       pool: [
         { sentence: "Attention ! Tu ___ tomber ! [imminent]", choices: ["vas", "tomberas", "tombes", "tomberais"], correctIdx: 0 },
@@ -100,6 +101,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez au bon temps (futur proche ou futur simple) selon le contexte.",
+      transInstruction: { en: "Conjugate in the correct tense (near future or simple future) according to the context.", ar: "صرّف في الزمن الصحيح (المستقبل القريب أو البسيط) حسب السياق.", fa: "فعل را در زمان درست (آینده‌ی نزدیک یا ساده) بر اساس متن صرف کنید.", ti: "ብቅኑዕ ግዜ (ቀረባ መጻኢ ወይ ቀሊል መጻኢ) ብኣውድ ኣጻርይ።", uk: "Відмінюйте в правильному часі (futur proche або futur simple) залежно від контексту." },
       items: [],
       pool: [
         { sentence: "Regarde, il ___ (pleuvoir) ! [imminent]", hint: "futur proche → va", answer: "va pleuvoir" },
@@ -117,6 +119,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase selon le type de futur utilisé.",
+      transInstruction: { en: "Sort each sentence according to the type of future used.", ar: "صنّف كل جملة حسب نوع المستقبل المستخدم.", fa: "هر جمله را بر اساس نوع آینده‌ی به‌کاررفته دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብዓይነት ዝተጠቀመሉ መጻኢ ሸነኽ።", uk: "Розсортуйте кожне речення за типом майбутнього часу." },
       categories: ["Futur proche (aller + inf.)", "Futur simple"],
       items: [],
       pool: [
@@ -135,6 +138,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Je vais appeler dans cinq minutes.", words: ["Je", "vais", "appeler", "dans", "cinq", "minutes."] },
@@ -149,6 +153,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez : futur proche (jaune) et futur simple (rouge).",
+      transInstruction: { en: "Select a color, then identify: near future (yellow) and simple future (red).", ar: "اختر لوناً، ثم حدّد: المستقبل القريب (أصفر) والمستقبل البسيط (أحمر).", fa: "یک رنگ انتخاب کنید، سپس مشخص کنید: آینده‌ی نزدیک (زرد) و آینده‌ی ساده (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ቀረባ መጻኢ (ብጫ)ን ቀሊል መጻኢ (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте: futur proche (жовтий) і futur simple (червоний)." },
       colors: ["Futur proche", "Futur simple"],
       items: [
         {
@@ -169,6 +174,7 @@ export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase avec futur proche ET une phrase avec futur simple.\nExprimez une action imminente et une action éloignée.",
+      transInstruction: { en: "Write one sentence with the near future AND one with the simple future.\nExpress an imminent action and a distant action.", ar: "اكتب جملة بالمستقبل القريب وجملة بالمستقبل البسيط.\nعبّر عن فعل وشيك وآخر بعيد.", fa: "یک جمله با آینده‌ی نزدیک و یک جمله با آینده‌ی ساده بنویسید.\nیک عمل نزدیک و یک عمل دور را بیان کنید.", ti: "ሓደ ሓሳብ ብቀረባ መጻኢን ሓደ ብቀሊል መጻኢን ጽሓፍ።\nቀረባን ርሑቕን ተግባር ግልጽ።", uk: "Напишіть одне речення в futur proche І одне в futur simple.\nВиразіть негайну дію та віддалену дію." },
       verbPool: ["partir", "manger", "voyager", "finir", "apprendre", "vivre"],
       verbPoolSize: 2,
     },

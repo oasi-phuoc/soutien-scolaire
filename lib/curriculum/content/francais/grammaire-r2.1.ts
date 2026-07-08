@@ -1098,6 +1098,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec la terminaison des verbes.",
+      transInstruction: { en: "Complete with the verb endings.", ar: "أكمل بنهايات الأفعال.", fa: "با پایانه‌های فعل کامل کنید.", ti: "ብመወዳእታ ግሲታት ምላእ።", uk: "Доповніть закінченнями дієслів." },
       items: [],
       pool: ex1Pool,
       poolSize: 8,
@@ -1108,6 +1109,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez les verbes entre parenthèses.",
+      transInstruction: { en: "Conjugate the verbs in parentheses.", ar: "صرّف الأفعال الموجودة بين القوسين.", fa: "افعال داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘለዉ ግሲታት ኣጻርይ።", uk: "Відмінюйте дієслова в дужках." },
       items: [],
       pool: ex2Pool,
       poolSize: 8,
@@ -1118,6 +1120,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Mettez les phrases au pluriel.",
+      transInstruction: { en: "Put the sentences in the plural.", ar: "حوّل الجمل إلى صيغة الجمع.", fa: "جمله‌ها را به جمع تبدیل کنید.", ti: "ነተን ሓሳባት ናብ ብዙሕ ቁጽሪ ቀይሮ።", uk: "Поставте речення у множину." },
       items: [],
       pool: ex3Pool,
       poolSize: 8,
@@ -1128,6 +1131,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez chaque élément en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort each item in bold into the correct category.", ar: "صنّف كل عنصر بالخط العريض في الفئة الصحيحة.", fa: "هر عنصر پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ብትር ዘሎ ኣካል ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожен виділений жирним елемент у правильну категорію." },
       categories: ["Sujet", "Verbe", "Complément"],
       pool: [
         // Sentence 1 : Marie arrive à l'école.
@@ -1160,6 +1164,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "classify",
       title: "Exercice 5",
       instruction: "Identifiez le type du complément en gras.",
+      transInstruction: { en: "Identify the type of the complement in bold.", ar: "حدّد نوع المتمّم بالخط العريض.", fa: "نوع متمم پررنگ را مشخص کنید.", ti: "ዓይነት ናይቲ ብትር ዘሎ መመላእታ ፍለ።", uk: "Визначте тип виділеного жирним додатка." },
       categories: ["COD", "CC de lieu", "CC de temps / manière"],
       items: [
         { word: "Elle monte {a}les bagages{/a}.",        categoryIdx: 0 },
@@ -1176,6 +1181,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "word_order",
       title: "Exercice 6",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       poolSize: 5,
       pool: [
@@ -1220,6 +1226,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 7",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل (قرمز)، متمم (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)." },
       colors: ["Sujet", "Verbe", "Complément"],
       items: [
         {
@@ -1242,6 +1249,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "write",
       title: "Exercice 8",
       instruction: "Écrivez une phrase avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe et un complément.\nElle commence par une majuscule et se termine par un point.",
+      transInstruction: { en: "Write a sentence with the verb provided.\nThe sentence must have a subject, a verb and a complement.\nIt starts with a capital letter and ends with a full stop.", ar: "اكتب جملة باستخدام الفعل المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.", fa: "یک جمله با فعل پیشنهادی بنویسید.\nجمله باید فاعل، فعل و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.", ti: "ሓደ ሓሳብ ብእቲ ዝቐረበ ግሲ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ግሲን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።", uk: "Напишіть речення із запропонованим дієсловом.\nРечення повинно мати підмет, дієслово та додаток.\nВоно починається з великої літери і закінчується крапкою." },
       verbPool: [
         "aller", "venir", "partir", "arriver", "entrer",
         "sortir", "monter", "descendre", "marcher", "courir",
@@ -1255,6 +1263,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Complétez avec la bonne préposition (à, en, au, aux, chez, de, du, des, de chez).",
+      transInstruction: { en: "Complete with the correct preposition (à, en, au, aux, chez, de, du, des, de chez).", ar: "أكمل بحرف الجر الصحيح (à, en, au, aux, chez, de, du, des, de chez).", fa: "با حرف اضافه‌ی درست کامل کنید (à, en, au, aux, chez, de, du, des, de chez).", ti: "ብቅኑዕ ቅድመ-ስም ምላእ (à, en, au, aux, chez, de, du, des, de chez).", uk: "Доповніть правильним прийменником (à, en, au, aux, chez, de, du, des, de chez)." },
       items: [],
       poolSize: 6,
       pool: [
@@ -1276,6 +1285,7 @@ export const A1_CONJ_L08: ConjLesson = {
       type: "qcm",
       title: "Évaluation — Question 2",
       instruction: "Choisissez la bonne préposition ou contraction.",
+      transInstruction: { en: "Choose the correct preposition or contraction.", ar: "اختر حرف الجر أو الاندماج الصحيح.", fa: "حرف اضافه یا شکل ادغام‌شده‌ی درست را انتخاب کنید.", ti: "ቅኑዕ ቅድመ-ስም ወይ ምትእስሳር ምረጽ።", uk: "Оберіть правильний прийменник або скорочення." },
       items: [],
       poolSize: 5,
       pool: [

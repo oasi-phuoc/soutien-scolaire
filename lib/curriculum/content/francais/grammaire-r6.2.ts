@@ -180,6 +180,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe au conditionnel présent.",
+      transInstruction: { en: "Conjugate the verb in the present conditional.", ar: "صرّف الفعل في صيغة الشرط الحاضرة.", fa: "فعل را در حالت شرطی حال صرف کنید.", ti: "ነቲ ግሲ ኣብ ሕጂ ኮንዲሲዮነል ኣጻርይ።", uk: "Відмінюйте дієслово в conditionnel présent." },
       items: [],
       pool: [
         { sentence: "Je ___ (vouloir) un café, s'il vous plaît.", hint: "voudr- + -ais", answer: "voudrais" },
@@ -197,6 +198,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "qcm",
       title: "Exercice 2",
       instruction: "Identifiez le type de phrase avec « si ». Choisissez la forme correcte.",
+      transInstruction: { en: "Identify the type of sentence with « si ». Choose the correct form.", ar: "حدّد نوع الجملة مع « si ». اختر الصيغة الصحيحة.", fa: "نوع جمله با « si » را مشخص کنید. صورت درست را انتخاب کنید.", ti: "ዓይነት ሓሳብ ምስ « si » ፍለ። ቅኑዕ ቅርጺ ምረጽ።", uk: "Визначте тип речення з « si ». Оберіть правильну форму." },
       items: [],
       pool: [
         { sentence: "Si tu viens, nous ___ au cinéma. [probable]", choices: ["irons (futur)", "irions (conditionnel)", "allions (subj.)", "allons (présent)"], correctIdx: 0 },
@@ -211,6 +213,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase selon le type d'hypothèse.",
+      transInstruction: { en: "Sort each sentence according to the type of hypothesis.", ar: "صنّف كل جملة حسب نوع الفرضية.", fa: "هر جمله را بر اساس نوع فرضیه دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብዓይነት ሃይፎቴዚስ ሸነኽ።", uk: "Розсортуйте кожне речення за типом гіпотези." },
       categories: ["Si + présent → futur (probable)", "Si + imparfait → cond. présent (improbable)", "Si + pqp → cond. passé (impossible)"],
       items: [],
       pool: [
@@ -229,6 +232,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase hypothétique correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct hypothetical sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة افتراضية صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی فرضی درست بسازید.", ti: "ነተን ቃላት ቅኑዕ ሃይፎቴዚስ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне гіпотетичне речення." },
       items: [],
       pool: [
         { sentence: "Si tu viens, nous mangerons ensemble.", words: ["Si", "tu", "viens,", "nous", "mangerons", "ensemble."] },
@@ -243,6 +247,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez : la proposition si (jaune) et la proposition principale au conditionnel (rouge).",
+      transInstruction: { en: "Select a color, then identify: the si clause (yellow) and the main clause in the conditional (red).", ar: "اختر لوناً، ثم حدّد: جملة si (أصفر) والجملة الرئيسية بصيغة الشرط (أحمر).", fa: "یک رنگ انتخاب کنید، سپس مشخص کنید: بند si (زرد) و بند اصلی در حالت شرطی (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ክፋል si (ብጫ)ን ቀንዲ ክፋል ኮንዲሲዮነል (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте: речення з si (жовтий) і головне речення в conditionnel (червоний)." },
       colors: ["Proposition si", "Proposition principale"],
       items: [
         {
@@ -263,6 +268,7 @@ export const A2_GR_CONDITIONNEL: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase hypothétique avec « si ».\nChoisissez le type : probable (si + présent) ou improbable (si + imparfait).",
+      transInstruction: { en: "Write a hypothetical sentence with « si ».\nChoose the type: likely (si + present) or unlikely (si + imperfect).", ar: "اكتب جملة افتراضية مع « si ».\nاختر النوع: محتمل (si + مضارع) أو غير محتمل (si + ماضٍ ناقص).", fa: "یک جمله‌ی فرضی با « si » بنویسید.\nنوع را انتخاب کنید: محتمل (si + حال) یا غیرمحتمل (si + گذشته‌ی ناتمام).", ti: "ሓደ ሃይፎቴዚስ ሓሳብ ምስ « si » ጽሓፍ።\nዓይነት ምረጽ፦ ምክንያታዊ (si + ሕጂ) ወይ ዘይምክንያታዊ (si + ዘይተዛዘመ).", uk: "Напишіть гіпотетичне речення з « si ».\nОберіть тип: ймовірний (si + présent) або малоймовірний (si + imparfait)." },
       verbPool: ["venir", "avoir", "être", "faire", "pouvoir", "vouloir"],
       verbPoolSize: 2,
     },

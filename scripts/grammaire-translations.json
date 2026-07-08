@@ -1,0 +1,1080 @@
+{
+  "Accordez correctement le participe passé du verbe pronominal.": {
+    "en": "Agree the past participle of the reflexive verb correctly.",
+    "ar": "أعرب اسم المفعول للفعل الانعكاسي بشكل صحيح.",
+    "fa": "صفت مفعولی فعل انعکاسی را به‌درستی مطابقت دهید.",
+    "ti": "ናይ ሕሉፍ ተሳታፋይ ናይ ርእሰ-ግሲ ብትኽክል ኣሰማማዕ።",
+    "uk": "Правильно узгодьте дієприкметник зворотного дієслова."
+  },
+  "Accordez le participe passé avec le sujet.": {
+    "en": "Agree the past participle with the subject.",
+    "ar": "أعرب اسم المفعول مع الفاعل.",
+    "fa": "صفت مفعولی را با فاعل مطابقت دهید.",
+    "ti": "ናይ ሕሉፍ ተሳታፋይ ምስ ርእሲ ኣሰማማዕ።",
+    "uk": "Узгодьте дієприкметник із підметом."
+  },
+  "Associez chaque définition à la bonne préposition. Choisissez la lettre correspondante.": {
+    "en": "Match each definition to the correct preposition. Choose the corresponding letter.",
+    "ar": "اربط كل تعريف بالحرف الجر الصحيح. اختر الحرف المناسب.",
+    "fa": "هر تعریف را با حرف اضافه‌ی درست مطابقت دهید. حرف مربوطه را انتخاب کنید.",
+    "ti": "ነፍሲ ወከፍ ትርጉም ምስ ቅኑዕ ቅድመ-ስም ኣሰማማዕ። እቲ ተዛማዲ ፊደል ምረጽ።",
+    "uk": "Поєднайте кожне визначення з правильним прийменником. Оберіть відповідну літеру."
+  },
+  "Associez chaque verbe à sa base à l'imparfait.": {
+    "en": "Match each verb to its imperfect stem.",
+    "ar": "اربط كل فعل بجذره في الماضي الناقص.",
+    "fa": "هر فعل را با ریشه‌ی آن در زمان گذشته‌ی ناتمام مطابقت دهید.",
+    "ti": "ነፍሲ ወከፍ ግሲ ምስ ናይ ዘይተዛዘመ ግዜ መሰረት ኣሰማማዕ።",
+    "uk": "Поєднайте кожне дієслово з його основою в imparfait."
+  },
+  "Associez chaque verbe à sa base irrégulière au futur.": {
+    "en": "Match each verb to its irregular future stem.",
+    "ar": "اربط كل فعل بجذره الشاذ في المستقبل.",
+    "fa": "هر فعل را با ریشه‌ی بی‌قاعده‌ی آن در آینده مطابقت دهید.",
+    "ti": "ነፍሲ ወከፍ ግሲ ምስ ዘይስሩዕ መጻኢ መሰረት ኣሰማማዕ።",
+    "uk": "Поєднайте кожне дієслово з його неправильною основою в futur."
+  },
+  "Ce verbe utilise être ou avoir au passé composé ?": {
+    "en": "Does this verb use être or avoir in the passé composé?",
+    "ar": "هل يستخدم هذا الفعل être أو avoir في الماضي المركب؟",
+    "fa": "این فعل در گذشته‌ی مرکب از être یا avoir استفاده می‌کند؟",
+    "ti": "እዚ ግሲ ኣብ ሕሉፍ ውሁድ être ወይ avoir ይጥቀም?",
+    "uk": "Це дієслово в passé composé вживає être чи avoir?"
+  },
+  "Choisis le bon verbe pour compléter la phrase.": {
+    "en": "Choose the correct verb to complete the sentence.",
+    "ar": "اختر الفعل الصحيح لإكمال الجملة.",
+    "fa": "فعل درست را برای کامل کردن جمله انتخاب کنید.",
+    "ti": "ንሓሳብ ንምምላእ ቅኑዕ ግሲ ምረጽ።",
+    "uk": "Оберіть правильне дієслово, щоб доповнити речення."
+  },
+  "Choisissez : futur proche ou futur simple ?": {
+    "en": "Choose: near future or simple future?",
+    "ar": "اختر: المستقبل القريب أم المستقبل البسيط؟",
+    "fa": "انتخاب کنید: آینده‌ی نزدیک یا آینده‌ی ساده؟",
+    "ti": "ምረጽ፦ ቀረባ መጻኢ ወይ ቀሊል መጻኢ?",
+    "uk": "Оберіть: futur proche чи futur simple?"
+  },
+  "Choisissez : indicatif ou subjonctif ?": {
+    "en": "Choose: indicative or subjunctive?",
+    "ar": "اختر: المضارع أم صيغة الشرط؟",
+    "fa": "انتخاب کنید: حالت خبری یا وجه شرطی؟",
+    "ti": "ምረጽ፦ ኢንዲካቲቭ ወይ ሳብዥንቲቭ?",
+    "uk": "Оберіть: indicatif чи subjonctif?"
+  },
+  "Choisissez : passé composé ou imparfait ?": {
+    "en": "Choose: passé composé or imparfait?",
+    "ar": "اختر: الماضي المركب أم الماضي الناقص؟",
+    "fa": "انتخاب کنید: گذشته‌ی مرکب یا گذشته‌ی ناتمام؟",
+    "ti": "ምረጽ፦ ሕሉፍ ውሁድ ወይ ዘይተዛዘመ ግዜ?",
+    "uk": "Оберіть: passé composé чи imparfait?"
+  },
+  "Choisissez C'est ou Il / Elle est.": {
+    "en": "Choose C'est or Il / Elle est.",
+    "ar": "اختر C'est أو Il / Elle est.",
+    "fa": "C'est یا Il / Elle est را انتخاب کنید.",
+    "ti": "C'est ወይ Il / Elle est ምረጽ።",
+    "uk": "Оберіть C'est або Il / Elle est."
+  },
+  "Choisissez être ou avoir et la bonne forme.": {
+    "en": "Choose être or avoir and the correct form.",
+    "ar": "اختر être أو avoir والصيغة الصحيحة.",
+    "fa": "être یا avoir و صورت درست را انتخاب کنید.",
+    "ti": "être ወይ avoirን ቅኑዕ ቅርጺ ምረጽ።",
+    "uk": "Оберіть être або avoir і правильну форму."
+  },
+  "Choisissez l'article correct.": {
+    "en": "Choose the correct article.",
+    "ar": "اختر الأداة الصحيحة.",
+    "fa": "حرف تعریف درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ዓንቀጽ ምረጽ።",
+    "uk": "Оберіть правильний артикль."
+  },
+  "Choisissez l'auxiliaire correct : être ou avoir.": {
+    "en": "Choose the correct auxiliary: être or avoir.",
+    "ar": "اختر الفعل المساعد الصحيح: être أو avoir.",
+    "fa": "فعل کمکی درست را انتخاب کنید: être یا avoir.",
+    "ti": "ቅኑዕ ሓጋዚ ግሲ ምረጽ፦ être ወይ avoir.",
+    "uk": "Оберіть правильне допоміжне дієслово: être або avoir."
+  },
+  "Choisissez la bonne conjugaison du verbe en -er.": {
+    "en": "Choose the correct conjugation of the -er verb.",
+    "ar": "اختر التصريف الصحيح للفعل المنتهي بـ -er.",
+    "fa": "صرف درست فعل -er را انتخاب کنید.",
+    "ti": "ቅኑዕ ናይ -er ግሲ ምጥቃም ምረጽ።",
+    "uk": "Оберіть правильне відмінювання дієслова на -er."
+  },
+  "Choisissez la bonne forme au passé composé avec être.": {
+    "en": "Choose the correct passé composé form with être.",
+    "ar": "اختر الصيغة الصحيحة في الماضي المركب مع être.",
+    "fa": "صورت درست گذشته‌ی مرکب با être را انتخاب کنید.",
+    "ti": "ቅኑዕ ቅርጺ ሕሉፍ ውሁድ ምስ être ምረጽ።",
+    "uk": "Оберіть правильну форму passé composé з être."
+  },
+  "Choisissez la bonne forme négative.": {
+    "en": "Choose the correct negative form.",
+    "ar": "اختر صيغة النفي الصحيحة.",
+    "fa": "صورت منفی درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ኣሉታዊ ቅርጺ ምረጽ።",
+    "uk": "Оберіть правильну заперечну форму."
+  },
+  "Choisissez la bonne préposition de lieu.": {
+    "en": "Choose the correct preposition of place.",
+    "ar": "اختر حرف الجر الصحيح للمكان.",
+    "fa": "حرف اضافه‌ی مکانی درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ናይ ቦታ ቅድመ-ስም ምረጽ።",
+    "uk": "Оберіть правильний прийменник місця."
+  },
+  "Choisissez la bonne préposition ou contraction.": {
+    "en": "Choose the correct preposition or contraction.",
+    "ar": "اختر حرف الجر أو الاندماج الصحيح.",
+    "fa": "حرف اضافه یا شکل ادغام‌شده‌ی درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ቅድመ-ስም ወይ ምትእስሳር ምረጽ።",
+    "uk": "Оберіть правильний прийменник або скорочення."
+  },
+  "Choisissez la forme correcte à l'imparfait.": {
+    "en": "Choose the correct imperfect form.",
+    "ar": "اختر الصيغة الصحيحة في الماضي الناقص.",
+    "fa": "صورت درست در زمان گذشته‌ی ناتمام را انتخاب کنید.",
+    "ti": "ቅኑዕ ቅርጺ ኣብ ዘይተዛዘመ ግዜ ምረጽ።",
+    "uk": "Оберіть правильну форму в imparfait."
+  },
+  "Choisissez la forme correcte au futur simple.": {
+    "en": "Choose the correct simple future form.",
+    "ar": "اختر الصيغة الصحيحة في المستقبل البسيط.",
+    "fa": "صورت درست در آینده‌ی ساده را انتخاب کنید.",
+    "ti": "ቅኑዕ ቅርጺ ኣብ ቀሊል መጻኢ ምረጽ።",
+    "uk": "Оберіть правильну форму в futur simple."
+  },
+  "Choisissez la forme correcte dans la phrase avec « si ».": {
+    "en": "Choose the correct form in the sentence with « si ».",
+    "ar": "اختر الصيغة الصحيحة في الجملة مع « si ».",
+    "fa": "صورت درست را در جمله با « si » انتخاب کنید.",
+    "ti": "ኣብ ሓሳብ ምስ « si » ቅኑዕ ቅርጺ ምረጽ።",
+    "uk": "Оберіть правильну форму в реченні з « si »."
+  },
+  "Choisissez la forme correcte.": {
+    "en": "Choose the correct form.",
+    "ar": "اختر الصيغة الصحيحة.",
+    "fa": "صورت درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ቅርጺ ምረጽ።",
+    "uk": "Оберіть правильну форму."
+  },
+  "Choisissez le bon pronom personnel sujet.": {
+    "en": "Choose the correct subject personal pronoun.",
+    "ar": "اختر ضمير الفاعل الشخصي الصحيح.",
+    "fa": "ضمیر شخصی فاعلی درست را انتخاب کنید.",
+    "ti": "ቅኑዕ ናይ ርእሲ ውልቃዊ ጸጋ ቃል ምረጽ።",
+    "uk": "Оберіть правильний особовий займенник підмета."
+  },
+  "Classez chaque article : défini ou indéfini.": {
+    "en": "Sort each article: definite or indefinite.",
+    "ar": "صنّف كل أداة: معرفة أم نكرة.",
+    "fa": "هر حرف تعریف را دسته‌بندی کنید: معین یا نامعین.",
+    "ti": "ነፍሲ ወከፍ ዓንቀጽ ሸነኽ፦ ዝተፈልጠ ወይ ዘይተፈልጠ።",
+    "uk": "Розсортуйте кожен артикль: означений чи неозначений."
+  },
+  "Classez chaque déclencheur : indicatif ou subjonctif ?": {
+    "en": "Sort each trigger: indicative or subjunctive?",
+    "ar": "صنّف كل محفّز: مضارع أم صيغة الشرط؟",
+    "fa": "هر محرک را دسته‌بندی کنید: حالت خبری یا وجه شرطی؟",
+    "ti": "ነፍሲ ወከፍ ምኽንያት ሸነኽ፦ ኢንዲካቲቭ ወይ ሳብዥንቲቭ?",
+    "uk": "Розсортуйте кожен тригер: indicatif чи subjonctif?"
+  },
+  "Classez chaque élément : Sujet, Verbe ou Complément.": {
+    "en": "Sort each element: Subject, Verb or Complement.",
+    "ar": "صنّف كل عنصر: فاعل، فعل أو متمّم.",
+    "fa": "هر عنصر را دسته‌بندی کنید: فاعل، فعل یا متمم.",
+    "ti": "ነፍሲ ወከፍ ኣካል ሸነኽ፦ ርእሲ፣ ግሲ ወይ መመላእታ።",
+    "uk": "Розсортуйте кожен елемент: Підмет, Дієслово чи Додаток."
+  },
+  "Classez chaque élément en gras dans la bonne catégorie.": {
+    "en": "Sort each item in bold into the correct category.",
+    "ar": "صنّف كل عنصر بالخط العريض في الفئة الصحيحة.",
+    "fa": "هر عنصر پررنگ را در دسته‌ی درست قرار دهید.",
+    "ti": "ነፍሲ ወከፍ ብትር ዘሎ ኣካል ናብ ቅኑዕ ምድብ ኣእቱ.",
+    "uk": "Розподіліть кожен виділений жирним елемент у правильну категорію."
+  },
+  "Classez chaque mot : masculin ou féminin.": {
+    "en": "Sort each word: masculine or feminine.",
+    "ar": "صنّف كل كلمة: مذكر أم مؤنث.",
+    "fa": "هر کلمه را دسته‌بندی کنید: مذکر یا مؤنث.",
+    "ti": "ነፍሲ ወከፍ ቃል ሸነኽ፦ ተባዕታይ ወይ ኣንስታይ።",
+    "uk": "Розсортуйте кожне слово: чоловічий чи жіночий рід."
+  },
+  "Classez chaque mot en gras dans la bonne catégorie.": {
+    "en": "Sort each word in bold into the correct category.",
+    "ar": "صنّف كل كلمة بالخط العريض في الفئة الصحيحة.",
+    "fa": "هر کلمه‌ی پررنگ را در دسته‌ی درست قرار دهید.",
+    "ti": "ነፍሲ ወከፍ ብትር ዘሎ ቃል ናብ ቅኑዕ ምድብ ኣእቱ.",
+    "uk": "Розподіліть кожне виділене жирним слово у правильну категорію."
+  },
+  "Classez chaque mot ou groupe en gras dans la bonne catégorie.": {
+    "en": "Sort each word or group in bold into the correct category.",
+    "ar": "صنّف كل كلمة أو مجموعة بالخط العريض في الفئة الصحيحة.",
+    "fa": "هر کلمه یا گروه پررنگ را در دسته‌ی درست قرار دهید.",
+    "ti": "ነፍሲ ወከፍ ብትር ዘሎ ቃል ወይ ጉጅለ ናብ ቅኑዕ ምድብ ኣእቱ.",
+    "uk": "Розподіліть кожне слово або групу, виділені жирним, у правильну категорію."
+  },
+  "Classez chaque partie de phrase selon sa fonction.": {
+    "en": "Sort each part of the sentence according to its function.",
+    "ar": "صنّف كل جزء من الجملة حسب وظيفته.",
+    "fa": "هر بخش جمله را بر اساس نقش آن دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ክፋል ሓሳብ ብተግባሩ ሸነኽ።",
+    "uk": "Розсортуйте кожну частину речення за її функцією."
+  },
+  "Classez chaque phrase : être (sans COD) ou avoir (avec COD) ?": {
+    "en": "Sort each sentence: être (without COD) or avoir (with COD)?",
+    "ar": "صنّف كل جملة: être (بدون مفعول مباشر) أم avoir (مع مفعول مباشر)؟",
+    "fa": "هر جمله را دسته‌بندی کنید: être (بدون مفعول مستقیم) یا avoir (با مفعول مستقیم)؟",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ être (ብዘይ COD) ወይ avoir (ምስ COD)?",
+    "uk": "Розсортуйте кожне речення: être (без COD) чи avoir (з COD)?"
+  },
+  "Classez chaque phrase : identification ou description.": {
+    "en": "Sort each sentence: identification or description.",
+    "ar": "صنّف كل جملة: تعريف أم وصف.",
+    "fa": "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።",
+    "uk": "Розсортуйте кожне речення: ідентифікація чи опис."
+  },
+  "Classez chaque phrase dans la bonne catégorie.": {
+    "en": "Sort each sentence into the correct category.",
+    "ar": "صنّف كل جملة في الفئة الصحيحة.",
+    "fa": "هر جمله را در دسته‌ی درست قرار دهید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ናብ ቅኑዕ ምድብ ኣእቱ.",
+    "uk": "Розподіліть кожне речення у правильну категорію."
+  },
+  "Classez chaque phrase selon l'usage du conditionnel.": {
+    "en": "Sort each sentence according to the use of the conditional.",
+    "ar": "صنّف كل جملة حسب استخدام صيغة الشرط.",
+    "fa": "هر جمله را بر اساس کاربرد حالت شرطی دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብኣጠቓቕማ ኮንዲሲዮነል ሸነኽ።",
+    "uk": "Розсортуйте кожне речення за вживанням conditionnel."
+  },
+  "Classez chaque phrase selon l'usage du temps du passé.": {
+    "en": "Sort each sentence according to the use of the past tense.",
+    "ar": "صنّف كل جملة حسب استخدام زمن الماضي.",
+    "fa": "هر جمله را بر اساس کاربرد زمان گذشته دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብኣጠቓቕማ ናይ ሕሉፍ ግዜ ሸነኽ።",
+    "uk": "Розсортуйте кожне речення за вживанням минулого часу."
+  },
+  "Classez chaque phrase selon le temps utilisé.": {
+    "en": "Sort each sentence according to the tense used.",
+    "ar": "صنّف كل جملة حسب الزمن المستخدم.",
+    "fa": "هر جمله را بر اساس زمان به‌کاررفته دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብዝተጠቀመሉ ግዜ ሸነኽ።",
+    "uk": "Розсортуйте кожне речення за використаним часом."
+  },
+  "Classez chaque phrase selon le type d'hypothèse.": {
+    "en": "Sort each sentence according to the type of hypothesis.",
+    "ar": "صنّف كل جملة حسب نوع الفرضية.",
+    "fa": "هر جمله را بر اساس نوع فرضیه دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብዓይነት ሃይፎቴዚስ ሸነኽ።",
+    "uk": "Розсортуйте кожне речення за типом гіпотези."
+  },
+  "Classez chaque phrase selon le type de futur utilisé.": {
+    "en": "Sort each sentence according to the type of future used.",
+    "ar": "صنّف كل جملة حسب نوع المستقبل المستخدم.",
+    "fa": "هر جمله را بر اساس نوع آینده‌ی به‌کاررفته دسته‌بندی کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብዓይነት ዝተጠቀመሉ መጻኢ ሸነኽ።",
+    "uk": "Розсортуйте кожне речення за типом майбутнього часу."
+  },
+  "Classez chaque pronom : singulier ou pluriel.": {
+    "en": "Sort each pronoun: singular or plural.",
+    "ar": "صنّف كل ضمير: مفرد أم جمع.",
+    "fa": "هر ضمیر را دسته‌بندی کنید: مفرد یا جمع.",
+    "ti": "ነፍሲ ወከፍ ጸጋ ቃል ሸነኽ፦ ነጠላ ወይ ብዙሕ።",
+    "uk": "Розсортуйте кожен займенник: однина чи множина."
+  },
+  "Classez chaque terminaison dans la bonne personne.": {
+    "en": "Sort each ending into the correct person.",
+    "ar": "صنّف كل نهاية في الشخص الصحيح.",
+    "fa": "هر پایانه را در شخص درست قرار دهید.",
+    "ti": "ነፍሲ ወከፍ መወዳእታ ናብ ቅኑዕ ሰብ ኣእቱ.",
+    "uk": "Розподіліть кожне закінчення за правильною особою."
+  },
+  "Classez l'élément en gras dans la bonne catégorie.": {
+    "en": "Sort the item in bold into the correct category.",
+    "ar": "صنّف العنصر بالخط العريض في الفئة الصحيحة.",
+    "fa": "عنصر پررنگ را در دسته‌ی درست قرار دهید.",
+    "ti": "ነቲ ብትር ዘሎ ኣካል ናብ ቅኑዕ ምድብ ኣእቱ.",
+    "uk": "Розподіліть виділений жирним елемент у правильну категорію."
+  },
+  "Classez le mot négatif utilisé dans chaque phrase.": {
+    "en": "Sort the negative word used in each sentence.",
+    "ar": "صنّف كلمة النفي المستخدمة في كل جملة.",
+    "fa": "کلمه‌ی منفی به‌کاررفته در هر جمله را دسته‌بندی کنید.",
+    "ti": "ኣብ ነፍሲ ወከፍ ሓሳብ ዝተጠቀመሉ ኣሉታዊ ቃል ሸነኽ።",
+    "uk": "Розсортуйте заперечне слово, вжите в кожному реченні."
+  },
+  "Classez selon l'usage de l'impératif.": {
+    "en": "Sort according to the use of the imperative.",
+    "ar": "صنّف حسب استخدام صيغة الأمر.",
+    "fa": "بر اساس کاربرد حالت امری دسته‌بندی کنید.",
+    "ti": "ብኣጠቓቕማ ኢምፔራቲቭ ሸነኽ።",
+    "uk": "Розсортуйте за вживанням imperative."
+  },
+  "Classez selon le sens exprimé par le gérondif.": {
+    "en": "Sort according to the meaning expressed by the gerund.",
+    "ar": "صنّف حسب المعنى الذي يعبر عنه صيغة المصدر.",
+    "fa": "بر اساس معنای بیان‌شده با مصدر فعل دسته‌بندی کنید.",
+    "ti": "ብትርጉም ጄሮንዲቭ ዝገልጾ ሸነኽ።",
+    "uk": "Розсортуйте за значенням, яке виражає gérondif."
+  },
+  "Classez selon le type de verbe.": {
+    "en": "Sort according to the type of verb.",
+    "ar": "صنّف حسب نوع الفعل.",
+    "fa": "بر اساس نوع فعل دسته‌بندی کنید.",
+    "ti": "ብዓይነት ግሲ ሸነኽ።",
+    "uk": "Розсортуйте за типом дієслова."
+  },
+  "Complétez avec « être en train de » (ou d') suivi de l'infinitif.": {
+    "en": "Complete with « être en train de » (or d') followed by the infinitive.",
+    "ar": "أكمل بـ « être en train de » (أو d') متبوعاً بالمصدر.",
+    "fa": "با « être en train de » (یا d') به‌علاوه‌ی مصدر کامل کنید.",
+    "ti": "ብ « être en train de » (ወይ d') ተኸታሊ ኢንፊኒቲቭ ምላእ።",
+    "uk": "Доповніть « être en train de » (або d') з інфінітивом."
+  },
+  "Complétez avec c'est ou il est.": {
+    "en": "Complete with c'est or il est.",
+    "ar": "أكمل بـ c'est أو il est.",
+    "fa": "با c'est یا il est کامل کنید.",
+    "ti": "ብ c'est ወይ il est ምላእ።",
+    "uk": "Доповніть c'est або il est."
+  },
+  "Complétez avec C'est, Il est ou Elle est.": {
+    "en": "Complete with C'est, Il est or Elle est.",
+    "ar": "أكمل بـ C'est أو Il est أو Elle est.",
+    "fa": "با C'est، Il est یا Elle est کامل کنید.",
+    "ti": "ብ C'est፣ Il est ወይ Elle est ምላእ።",
+    "uk": "Доповніть C'est, Il est або Elle est."
+  },
+  "Complétez avec la bonne forme d'être ou avoir.": {
+    "en": "Complete with the correct form of être or avoir.",
+    "ar": "أكمل بالصيغة الصحيحة من être أو avoir.",
+    "fa": "با صورت درست être یا avoir کامل کنید.",
+    "ti": "ብቅኑዕ ቅርጺ être ወይ avoir ምላእ።",
+    "uk": "Доповніть правильною формою être або avoir."
+  },
+  "Complétez avec la bonne forme de « venir de ».": {
+    "en": "Complete with the correct form of « venir de ».",
+    "ar": "أكمل بالصيغة الصحيحة من « venir de ».",
+    "fa": "با صورت درست « venir de » کامل کنید.",
+    "ti": "ብቅኑዕ ቅርጺ « venir de » ምላእ።",
+    "uk": "Доповніть правильною формою « venir de »."
+  },
+  "Complétez avec la bonne préposition (à, en, au, aux, chez, de, du, des, de chez).": {
+    "en": "Complete with the correct preposition (à, en, au, aux, chez, de, du, des, de chez).",
+    "ar": "أكمل بحرف الجر الصحيح (à, en, au, aux, chez, de, du, des, de chez).",
+    "fa": "با حرف اضافه‌ی درست کامل کنید (à, en, au, aux, chez, de, du, des, de chez).",
+    "ti": "ብቅኑዕ ቅድመ-ስም ምላእ (à, en, au, aux, chez, de, du, des, de chez).",
+    "uk": "Доповніть правильним прийменником (à, en, au, aux, chez, de, du, des, de chez)."
+  },
+  "Complétez avec la bonne préposition de lieu.": {
+    "en": "Complete with the correct preposition of place.",
+    "ar": "أكمل بحرف الجر الصحيح للمكان.",
+    "fa": "با حرف اضافه‌ی مکانی درست کامل کنید.",
+    "ti": "ብቅኑዕ ናይ ቦታ ቅድመ-ስም ምላእ።",
+    "uk": "Доповніть правильним прийменником місця."
+  },
+  "Complétez avec la terminaison correcte de l'imparfait.": {
+    "en": "Complete with the correct imperfect ending.",
+    "ar": "أكمل بنهاية الماضي الناقص الصحيحة.",
+    "fa": "با پایانه‌ی درست گذشته‌ی ناتمام کامل کنید.",
+    "ti": "ብቅኑዕ መወዳእታ ዘይተዛዘመ ግዜ ምላእ።",
+    "uk": "Доповніть правильним закінченням imparfait."
+  },
+  "Complétez avec la terminaison correcte du futur simple.": {
+    "en": "Complete with the correct simple future ending.",
+    "ar": "أكمل بنهاية المستقبل البسيط الصحيحة.",
+    "fa": "با پایانه‌ی درست آینده‌ی ساده کامل کنید.",
+    "ti": "ብቅኑዕ መወዳእታ ቀሊል መጻኢ ምላእ።",
+    "uk": "Доповніть правильним закінченням futur simple."
+  },
+  "Complétez avec la terminaison des verbes.": {
+    "en": "Complete with the verb endings.",
+    "ar": "أكمل بنهايات الأفعال.",
+    "fa": "با پایانه‌های فعل کامل کنید.",
+    "ti": "ብመወዳእታ ግሲታት ምላእ።",
+    "uk": "Доповніть закінченнями дієслів."
+  },
+  "Complétez avec le bon pronom personnel.": {
+    "en": "Complete with the correct personal pronoun.",
+    "ar": "أكمل بالضمير الشخصي الصحيح.",
+    "fa": "با ضمیر شخصی درست کامل کنید.",
+    "ti": "ብቅኑዕ ውልቃዊ ጸጋ ቃል ምላእ።",
+    "uk": "Доповніть правильним особовим займенником."
+  },
+  "Complétez chaque phrase avec Est-ce que ou Est-ce qu'.": {
+    "en": "Complete each sentence with Est-ce que or Est-ce qu'.",
+    "ar": "أكمل كل جملة بـ Est-ce que أو Est-ce qu'.",
+    "fa": "هر جمله را با Est-ce que یا Est-ce qu' کامل کنید.",
+    "ti": "ነፍሲ ወከፍ ሓሳብ ብ Est-ce que ወይ Est-ce qu' ምላእ።",
+    "uk": "Доповніть кожне речення Est-ce que або Est-ce qu'."
+  },
+  "Complétez la phrase avec le gérondif du verbe entre parenthèses.": {
+    "en": "Complete the sentence with the gerund of the verb in parentheses.",
+    "ar": "أكمل الجملة بصيغة المصدر للفعل بين القوسين.",
+    "fa": "جمله را با مصدر فعل داخل پرانتز کامل کنید.",
+    "ti": "ነቲ ሓሳብ ብጄሮንዲቭ ናይቲ ኣብ ቅንፍ ዘሎ ግሲ ምላእ።",
+    "uk": "Доповніть речення gérondif дієслова в дужках."
+  },
+  "Complétez la proposition conditionnelle avec le verbe au présent.": {
+    "en": "Complete the conditional clause with the verb in the present tense.",
+    "ar": "أكمل الجملة الشرطية بالفعل في المضارع.",
+    "fa": "بند شرطی را با فعل در زمان حال کامل کنید.",
+    "ti": "ነቲ ኮንዲሲዮነል ክፋል ብግሲ ኣብ ሕጂ ግዜ ምላእ።",
+    "uk": "Доповніть умовне речення дієсловом у теперішньому часі."
+  },
+  "Complétez la proposition principale avec le verbe au futur simple.": {
+    "en": "Complete the main clause with the verb in the simple future.",
+    "ar": "أكمل الجملة الرئيسية بالفعل في المستقبل البسيط.",
+    "fa": "بند اصلی را با فعل در آینده‌ی ساده کامل کنید.",
+    "ti": "ነቲ ቀንዲ ክፋል ብግሲ ኣብ ቀሊል መጻኢ ምላእ።",
+    "uk": "Доповніть головне речення дієсловом у futur simple."
+  },
+  "Complétez la terminaison des verbes.": {
+    "en": "Complete the verb endings.",
+    "ar": "أكمل نهايات الأفعال.",
+    "fa": "پایانه‌های فعل را کامل کنید.",
+    "ti": "መወዳእታ ግሲታት ምላእ።",
+    "uk": "Доповніть закінчення дієслів."
+  },
+  "Complétez les phrases avec le bon article (du, de la, de l', des).": {
+    "en": "Complete the sentences with the correct article (du, de la, de l', des).",
+    "ar": "أكمل الجمل بالأداة الصحيحة (du, de la, de l', des).",
+    "fa": "جمله‌ها را با حرف تعریف درست کامل کنید (du, de la, de l', des).",
+    "ti": "ሓሳባት ብቅኑዕ ዓንቀጽ ምላእ (du, de la, de l', des).",
+    "uk": "Доповніть речення правильним артиклем (du, de la, de l', des)."
+  },
+  "Conjuguez au bon temps (futur proche ou futur simple) selon le contexte.": {
+    "en": "Conjugate in the correct tense (near future or simple future) according to the context.",
+    "ar": "صرّف في الزمن الصحيح (المستقبل القريب أو البسيط) حسب السياق.",
+    "fa": "فعل را در زمان درست (آینده‌ی نزدیک یا ساده) بر اساس متن صرف کنید.",
+    "ti": "ብቅኑዕ ግዜ (ቀረባ መጻኢ ወይ ቀሊል መጻኢ) ብኣውድ ኣጻርይ።",
+    "uk": "Відмінюйте в правильному часі (futur proche або futur simple) залежно від контексту."
+  },
+  "Conjuguez le verbe « aller » au présent pour former le futur proche.": {
+    "en": "Conjugate the verb « aller » in the present to form the near future.",
+    "ar": "صرّف الفعل « aller » في المضارع لتكوين المستقبل القريب.",
+    "fa": "فعل « aller » را در زمان حال صرف کنید تا آینده‌ی نزدیک بسازید.",
+    "ti": "ቀረባ መጻኢ ንምግባር « aller » ኣብ ሕጂ ግዜ ኣጻርይ።",
+    "uk": "Відмінюйте « aller » у теперішньому часі, щоб утворити futur proche."
+  },
+  "Conjuguez le verbe à l'imparfait.": {
+    "en": "Conjugate the verb in the imperfect.",
+    "ar": "صرّف الفعل في الماضي الناقص.",
+    "fa": "فعل را در زمان گذشته‌ی ناتمام صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ዘይተዛዘመ ግዜ ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в imparfait."
+  },
+  "Conjuguez le verbe au conditionnel présent.": {
+    "en": "Conjugate the verb in the present conditional.",
+    "ar": "صرّف الفعل في صيغة الشرط الحاضرة.",
+    "fa": "فعل را در حالت شرطی حال صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ሕጂ ኮንዲሲዮነል ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в conditionnel présent."
+  },
+  "Conjuguez le verbe au futur simple.": {
+    "en": "Conjugate the verb in the simple future.",
+    "ar": "صرّف الفعل في المستقبل البسيط.",
+    "fa": "فعل را در آینده‌ی ساده صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ቀሊል መጻኢ ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в futur simple."
+  },
+  "Conjuguez le verbe au passé composé avec avoir.": {
+    "en": "Conjugate the verb in the passé composé with avoir.",
+    "ar": "صرّف الفعل في الماضي المركب مع avoir.",
+    "fa": "فعل را در گذشته‌ی مرکب با avoir صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ምስ avoir ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в passé composé з avoir."
+  },
+  "Conjuguez le verbe au passé composé avec être. Accordez le participe passé.": {
+    "en": "Conjugate the verb in the passé composé with être. Agree the past participle.",
+    "ar": "صرّف الفعل في الماضي المركب مع être. أعرب اسم المفعول.",
+    "fa": "فعل را در گذشته‌ی مرکب با être صرف کنید. صفت مفعولی را مطابقت دهید.",
+    "ti": "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ምስ être ኣጻርይ። ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።",
+    "uk": "Відмінюйте дієслово в passé composé з être. Узгодьте дієприкметник."
+  },
+  "Conjuguez le verbe au passé composé ou à l'imparfait selon le contexte.": {
+    "en": "Conjugate the verb in the passé composé or imparfait according to the context.",
+    "ar": "صرّف الفعل في الماضي المركب أو الناقص حسب السياق.",
+    "fa": "فعل را در گذشته‌ی مرکب یا ناتمام بر اساس متن صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ወይ ዘይተዛዘመ ግዜ ብኣውድ ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в passé composé або imparfait залежно від контексту."
+  },
+  "Conjuguez le verbe au passé composé. Choisissez être ou avoir selon le contexte.": {
+    "en": "Conjugate the verb in the passé composé. Choose être or avoir according to the context.",
+    "ar": "صرّف الفعل في الماضي المركب. اختر être أو avoir حسب السياق.",
+    "fa": "فعل را در گذشته‌ی مرکب صرف کنید. بر اساس متن être یا avoir را انتخاب کنید.",
+    "ti": "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ኣጻርይ። ብኣውድ être ወይ avoir ምረጽ።",
+    "uk": "Відмінюйте дієслово в passé composé. Оберіть être або avoir залежно від контексту."
+  },
+  "Conjuguez le verbe au subjonctif présent.": {
+    "en": "Conjugate the verb in the present subjunctive.",
+    "ar": "صرّف الفعل في صيغة الشرط الحاضرة.",
+    "fa": "فعل را در وجه شرطی حال صرف کنید.",
+    "ti": "ነቲ ግሲ ኣብ ሕጂ ሳብዥንቲቭ ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в subjonctif présent."
+  },
+  "Conjuguez le verbe entre parenthèses.": {
+    "en": "Conjugate the verb in parentheses.",
+    "ar": "صرّف الفعل الموجود بين القوسين.",
+    "fa": "فعل داخل پرانتز را صرف کنید.",
+    "ti": "ኣብ ቅንፍ ዘሎ ግሲ ኣጻርይ።",
+    "uk": "Відмінюйте дієслово в дужках."
+  },
+  "Conjuguez le verbe irrégulier à l'imparfait.": {
+    "en": "Conjugate the irregular verb in the imperfect.",
+    "ar": "صرّف الفعل الشاذ في الماضي الناقص.",
+    "fa": "فعل بی‌قاعده را در زمان گذشته‌ی ناتمام صرف کنید.",
+    "ti": "ነቲ ዘይስሩዕ ግሲ ኣብ ዘይተዛዘመ ግዜ ኣጻርይ።",
+    "uk": "Відмінюйте неправильне дієслово в imparfait."
+  },
+  "Conjuguez le verbe irrégulier au futur simple.": {
+    "en": "Conjugate the irregular verb in the simple future.",
+    "ar": "صرّف الفعل الشاذ في المستقبل البسيط.",
+    "fa": "فعل بی‌قاعده را در آینده‌ی ساده صرف کنید.",
+    "ti": "ነቲ ዘይስሩዕ ግሲ ኣብ ቀሊል መጻኢ ኣጻርይ።",
+    "uk": "Відмінюйте неправильне дієслово в futur simple."
+  },
+  "Conjuguez le verbe pronominal au passé composé. Accordez le participe passé si nécessaire.": {
+    "en": "Conjugate the reflexive verb in the passé composé. Agree the past participle if necessary.",
+    "ar": "صرّف الفعل الانعكاسي في الماضي المركب. أعرب اسم المفعول عند الضرورة.",
+    "fa": "فعل انعکاسی را در گذشته‌ی مرکب صرف کنید. در صورت لزوم صفت مفعولی را مطابقت دهید.",
+    "ti": "ነቲ ርእሰ-ግሲ ኣብ ሕሉፍ ውሁድ ኣጻርይ። ኣድላዪ እንተኾነ ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።",
+    "uk": "Відмінюйте зворотне дієслово в passé composé. Узгодьте дієприкметник за потреби."
+  },
+  "Conjuguez les verbes entre parenthèses.": {
+    "en": "Conjugate the verbs in parentheses.",
+    "ar": "صرّف الأفعال الموجودة بين القوسين.",
+    "fa": "افعال داخل پرانتز را صرف کنید.",
+    "ti": "ኣብ ቅንፍ ዘለዉ ግሲታት ኣጻርይ።",
+    "uk": "Відмінюйте дієслова в дужках."
+  },
+  "Décrivez une habitude passée en utilisant l'imparfait.\nCommencez par « Avant, » ou « Quand j'étais enfant, ».": {
+    "en": "Describe a past habit using the imperfect.\nStart with « Avant, » or « Quand j'étais enfant, ».",
+    "ar": "صف عادة في الماضي باستخدام الماضي الناقص.\nابدأ بـ « Avant, » أو « Quand j'étais enfant, ».",
+    "fa": "یک عادت گذشته را با زمان گذشته‌ی ناتمام توصیف کنید.\nبا « Avant, » یا « Quand j'étais enfant, » شروع کنید.",
+    "ti": "ሓደ ዝሓለፈ ልማድ ብዘይተዛዘመ ግዜ ግልጽ።\nብ « Avant, » ወይ « Quand j'étais enfant, » ጀምር።",
+    "uk": "Опишіть минулу звичку, використовуючи imparfait.\nПочніть з « Avant, » або « Quand j'étais enfant, »."
+  },
+  "Donnez la base de l'imparfait pour chaque verbe irrégulier.": {
+    "en": "Give the imperfect stem for each irregular verb.",
+    "ar": "أعطِ جذر الماضي الناقص لكل فعل شاذ.",
+    "fa": "ریشه‌ی گذشته‌ی ناتمام هر فعل بی‌قاعده را بنویسید.",
+    "ti": "ንነፍሲ ወከፍ ዘይስሩዕ ግሲ መሰረት ዘይተዛዘመ ግዜ ሃብ።",
+    "uk": "Напишіть основу imparfait для кожного неправильного дієслова."
+  },
+  "Donnez la base irrégulière du futur simple.": {
+    "en": "Give the irregular stem of the simple future.",
+    "ar": "أعطِ الجذر الشاذ للمستقبل البسيط.",
+    "fa": "ریشه‌ی بی‌قاعده‌ی آینده‌ی ساده را بنویسید.",
+    "ti": "ዘይስሩዕ መሰረት ቀሊል መጻኢ ሃብ።",
+    "uk": "Напишіть неправильну основу futur simple."
+  },
+  "Donnez la forme impérative du verbe.": {
+    "en": "Give the imperative form of the verb.",
+    "ar": "أعطِ صيغة الأمر للفعل.",
+    "fa": "صورت امری فعل را بنویسید.",
+    "ti": "ናይ ኢምፔራቲቭ ቅርጺ ናይቲ ግሲ ሃብ።",
+    "uk": "Напишіть форму imperative дієслова."
+  },
+  "Donnez le participe passé du verbe entre parenthèses.": {
+    "en": "Give the past participle of the verb in parentheses.",
+    "ar": "أعطِ اسم المفعول للفعل بين القوسين.",
+    "fa": "صفت مفعولی فعل داخل پرانتز را بنویسید.",
+    "ti": "ናይ ሕሉፍ ተሳታፋይ ናይቲ ኣብ ቅንፍ ዘሎ ግሲ ሃብ።",
+    "uk": "Напишіть дієприкметник дієслова в дужках."
+  },
+  "Écris la bonne forme de être ou avoir.": {
+    "en": "Write the correct form of être or avoir.",
+    "ar": "اكتب الصيغة الصحيحة من être أو avoir.",
+    "fa": "صورت درست être یا avoir را بنویسید.",
+    "ti": "ቅኑዕ ቅርጺ être ወይ avoir ጽሓፍ።",
+    "uk": "Напишіть правильну форму être або avoir."
+  },
+  "Écris la bonne forme du verbe avoir.": {
+    "en": "Write the correct form of the verb avoir.",
+    "ar": "اكتب الصيغة الصحيحة للفعل avoir.",
+    "fa": "صورت درست فعل avoir را بنویسید.",
+    "ti": "ቅኑዕ ቅርጺ ናይቲ ግሲ avoir ጽሓፍ።",
+    "uk": "Напишіть правильну форму дієслова avoir."
+  },
+  "Écris la bonne forme du verbe être.": {
+    "en": "Write the correct form of the verb être.",
+    "ar": "اكتب الصيغة الصحيحة للفعل être.",
+    "fa": "صورت درست فعل être را بنویسید.",
+    "ti": "ቅኑዕ ቅርጺ ናይቲ ግሲ être ጽሓፍ።",
+    "uk": "Напишіть правильну форму дієслова être."
+  },
+  "Écrivez 2 phrases avec le verbe avoir.": {
+    "en": "Write 2 sentences with the verb avoir.",
+    "ar": "اكتب جملتين باستخدام الفعل avoir.",
+    "fa": "۲ جمله با فعل avoir بنویسید.",
+    "ti": "2 ሓሳባት ብግሲ avoir ጽሓፍ።",
+    "uk": "Напишіть 2 речення з дієсловом avoir."
+  },
+  "Écrivez 2 phrases avec le verbe être.": {
+    "en": "Write 2 sentences with the verb être.",
+    "ar": "اكتب جملتين باستخدام الفعل être.",
+    "fa": "۲ جمله با فعل être بنویسید.",
+    "ti": "2 ሓሳባት ብግሲ être ጽሓፍ።",
+    "uk": "Напишіть 2 речення з дієсловом être."
+  },
+  "Écrivez un conseil ou un ordre à l'impératif (affirmatif ou négatif).\nUtilisez « tu » ou « vous ».": {
+    "en": "Write a piece of advice or an order in the imperative (affirmative or negative).\nUse « tu » or « vous ».",
+    "ar": "اكتب نصيحة أو أمراً بصيغة الأمر (إيجابية أو سلبية).\nاستخدم « tu » أو « vous ».",
+    "fa": "یک توصیه یا دستور در حالت امری (مثبت یا منفی) بنویسید.\nاز « tu » یا « vous » استفاده کنید.",
+    "ti": "ሓደ ምክር ወይ ትእዛዝ ብኢምፔራቲቭ (ኣረጋግጺ ወይ ኣሉታዊ) ጽሓፍ።\n« tu » ወይ « vous » ተጠቐም።",
+    "uk": "Напишіть пораду або наказ у imperative (стверджувальній або заперечній формі).\nВикористайте « tu » або « vous »."
+  },
+  "Écrivez une demande polie ou un souhait au conditionnel.\nCommencez par « Je voudrais… », « Tu pourrais… » ou « J'aimerais… ».": {
+    "en": "Write a polite request or wish in the conditional.\nStart with « Je voudrais… », « Tu pourrais… » or « J'aimerais… ».",
+    "ar": "اكتب طلباً مهذباً أو أمنية بصيغة الشرط.\nابدأ بـ « Je voudrais… » أو « Tu pourrais… » أو « J'aimerais… ».",
+    "fa": "یک درخواست مودبانه یا آرزو در حالت شرطی بنویسید.\nبا « Je voudrais… »، « Tu pourrais… » یا « J'aimerais… » شروع کنید.",
+    "ti": "ሓደ ክብሪ ዘለዎ ሕቶ ወይ ድሌት ብኮንዲሲዮነል ጽሓፍ።\nብ « Je voudrais… »፣ « Tu pourrais… » ወይ « J'aimerais… » ጀምር።",
+    "uk": "Напишіть ввічливе прохання або побажання в conditionnel.\nПочніть з « Je voudrais… », « Tu pourrais… » або « J'aimerais… »."
+  },
+  "Écrivez une phrase à l'imparfait avec un verbe irrégulier.\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence in the imperfect with an irregular verb.\nUse the verb provided.",
+    "ar": "اكتب جملة في الماضي الناقص بفعل شاذ.\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله در زمان گذشته‌ی ناتمام با فعل بی‌قاعده بنویسید.\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብዘይተዛዘመ ግዜ ምስ ዘይስሩዕ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення в imparfait з неправильним дієсловом.\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase au futur proche pour exprimer une intention ou un plan.\nCommencez par un pronom sujet.": {
+    "en": "Write a sentence in the near future to express an intention or plan.\nStart with a subject pronoun.",
+    "ar": "اكتب جملة في المستقبل القريب للتعبير عن نية أو خطة.\nابدأ بضمير الفاعل.",
+    "fa": "یک جمله در آینده‌ی نزدیک برای بیان قصد یا برنامه بنویسید.\nبا ضمیر فاعل شروع کنید.",
+    "ti": "ሓደ ሓሳብ ብቀረባ መጻኢ ንድሌ ወይ ዕቅዲ ንምግላጽ ጽሓፍ።\nብርእሲ ጸጋ ቃል ጀምር።",
+    "uk": "Напишіть речення в futur proche, щоб виразити намір або план.\nПочніть із займенника підмета."
+  },
+  "Écrivez une phrase au futur simple avec un verbe irrégulier.\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence in the simple future with an irregular verb.\nUse the verb provided.",
+    "ar": "اكتب جملة في المستقبل البسيط بفعل شاذ.\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله در آینده‌ی ساده با فعل بی‌قاعده بنویسید.\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብቀሊል መጻኢ ምስ ዘይስሩዕ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення в futur simple з неправильним дієсловом.\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase au futur simple pour décrire un plan ou une prévision.\nCommencez par « Demain, » ou « L'année prochaine, ».": {
+    "en": "Write a sentence in the simple future to describe a plan or forecast.\nStart with « Demain, » or « L'année prochaine, ».",
+    "ar": "اكتب جملة في المستقبل البسيط لوصف خطة أو توقع.\nابدأ بـ « Demain, » أو « L'année prochaine, ».",
+    "fa": "یک جمله در آینده‌ی ساده برای توصیف برنامه یا پیش‌بینی بنویسید.\nبا « Demain, » یا « L'année prochaine, » شروع کنید.",
+    "ti": "ሓደ ሓሳብ ብቀሊል መጻኢ ዕቅዲ ወይ ትንቢት ንምግላጽ ጽሓፍ።\nብ « Demain, » ወይ « L'année prochaine, » ጀምር።",
+    "uk": "Напишіть речення в futur simple, щоб описати план або прогноз.\nПочніть з « Demain, » або « L'année prochaine, »."
+  },
+  "Écrivez une phrase au passé composé à la forme négative (ne … pas, ne … jamais, ne … plus ou ne … rien).\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence in the passé composé in the negative (ne … pas, ne … jamais, ne … plus or ne … rien).\nUse the verb provided.",
+    "ar": "اكتب جملة في الماضي المركب بصيغة النفي (ne … pas، ne … jamais، ne … plus أو ne … rien).\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله در گذشته‌ی مرکب به‌صورت منفی بنویسید (ne … pas، ne … jamais، ne … plus یا ne … rien).\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብሕሉፍ ውሁድ ብኣሉታዊ ቅርጺ (ne … pas፣ ne … jamais፣ ne … plus ወይ ne … rien) ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення в passé composé у заперечній формі (ne … pas, ne … jamais, ne … plus або ne … rien).\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase au passé composé avec avoir.\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence in the passé composé with avoir.\nUse the verb provided.",
+    "ar": "اكتب جملة في الماضي المركب مع avoir.\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله در گذشته‌ی مرکب با avoir بنویسید.\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ avoir ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення в passé composé з avoir.\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase au passé composé avec être.\nAccordez le participe passé avec le sujet.": {
+    "en": "Write a sentence in the passé composé with être.\nAgree the past participle with the subject.",
+    "ar": "اكتب جملة في الماضي المركب مع être.\nأعرب اسم المفعول مع الفاعل.",
+    "fa": "یک جمله در گذشته‌ی مرکب با être بنویسید.\nصفت مفعولی را با فاعل مطابقت دهید.",
+    "ti": "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ être ጽሓፍ።\nናይ ሕሉፍ ተሳታፋይ ምስ ርእሲ ኣሰማማዕ።",
+    "uk": "Напишіть речення в passé composé з être.\nУзгодьте дієприкметник із підметом."
+  },
+  "Écrivez une phrase au passé composé avec un verbe à double auxiliaire.\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence in the passé composé with a verb that can take both auxiliaries.\nUse the verb provided.",
+    "ar": "اكتب جملة في الماضي المركب بفعل له مساعدان.\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله در گذشته‌ی مرکب با فعلی که دو فعل کمکی دارد بنویسید.\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ ክልተ ሓጋዚ ዘለዎ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення в passé composé з дієсловом із подвійним допоміжним.\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase avec « venir de » ou « être en train de ».\nUtilisez le verbe proposé.": {
+    "en": "Write a sentence with « venir de » or « être en train de ».\nUse the verb provided.",
+    "ar": "اكتب جملة بـ « venir de » أو « être en train de ».\nاستخدم الفعل المقترح.",
+    "fa": "یک جمله با « venir de » یا « être en train de » بنویسید.\nاز فعل پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሓሳብ ብ « venir de » ወይ « être en train de » ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።",
+    "uk": "Напишіть речення з « venir de » або « être en train de ».\nВикористайте запропоноване дієслово."
+  },
+  "Écrivez une phrase avec futur proche ET une phrase avec futur simple.\nExprimez une action imminente et une action éloignée.": {
+    "en": "Write one sentence with the near future AND one with the simple future.\nExpress an imminent action and a distant action.",
+    "ar": "اكتب جملة بالمستقبل القريب وجملة بالمستقبل البسيط.\nعبّر عن فعل وشيك وآخر بعيد.",
+    "fa": "یک جمله با آینده‌ی نزدیک و یک جمله با آینده‌ی ساده بنویسید.\nیک عمل نزدیک و یک عمل دور را بیان کنید.",
+    "ti": "ሓደ ሓሳብ ብቀረባ መጻኢን ሓደ ብቀሊል መጻኢን ጽሓፍ።\nቀረባን ርሑቕን ተግባር ግልጽ።",
+    "uk": "Напишіть одне речення в futur proche І одне в futur simple.\nВиразіть негайну дію та віддалену дію."
+  },
+  "Écrivez une phrase avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe et un complément.\nElle commence par une majuscule et se termine par un point.": {
+    "en": "Write a sentence with the verb provided.\nThe sentence must have a subject, a verb and a complement.\nIt starts with a capital letter and ends with a full stop.",
+    "ar": "اكتب جملة باستخدام الفعل المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.",
+    "fa": "یک جمله با فعل پیشنهادی بنویسید.\nجمله باید فاعل، فعل و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.",
+    "ti": "ሓደ ሓሳብ ብእቲ ዝቐረበ ግሲ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ግሲን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።",
+    "uk": "Напишіть речення із запропонованим дієсловом.\nРечення повинно мати підмет, дієслово та додаток.\nВоно починається з великої літери і закінчується крапкою."
+  },
+  "Écrivez une phrase avec les mots proposés.": {
+    "en": "Write a sentence with the words provided.",
+    "ar": "اكتب جملة بالكلمات المقترحة.",
+    "fa": "یک جمله با کلمات پیشنهادی بنویسید.",
+    "ti": "ብዝቐረቡ ቃላት ሓደ ሓሳብ ጽሓፍ።",
+    "uk": "Напишіть речення з запропонованими словами."
+  },
+  "Écrivez une phrase avec un gérondif pour exprimer deux actions simultanées.\nCommencez par un sujet.": {
+    "en": "Write a sentence with a gerund to express two simultaneous actions.\nStart with a subject.",
+    "ar": "اكتب جملة بصيغة المصدر للتعبير عن فعلين متزامنين.\nابدأ بفاعل.",
+    "fa": "یک جمله با مصدر فعل بنویسید تا دو عمل همزمان را بیان کنید.\nبا فاعل شروع کنید.",
+    "ti": "ሓደ ሓሳብ ብጄሮንዲቭ ክልተ ተሳሳዒ ተግባራት ንምግላጽ ጽሓፍ።\nብርእሲ ጀምር።",
+    "uk": "Напишіть речення з gérondif, щоб виразити дві одночасні дії.\nПочніть із підмета."
+  },
+  "Écrivez une phrase avec un subjonctif.\nCommencez par « Il faut que… », « Je veux que… » ou « Bien que… ».": {
+    "en": "Write a sentence with a subjunctive.\nStart with « Il faut que… », « Je veux que… » or « Bien que… ».",
+    "ar": "اكتب جملة بصيغة الشرط.\nابدأ بـ « Il faut que… » أو « Je veux que… » أو « Bien que… ».",
+    "fa": "یک جمله با وجه شرطی بنویسید.\nبا « Il faut que… »، « Je veux que… » یا « Bien que… » شروع کنید.",
+    "ti": "ሓደ ሓሳብ ብሳብዥንቲቭ ጽሓፍ።\nብ « Il faut que… »፣ « Je veux que… » ወይ « Bien que… » ጀምር።",
+    "uk": "Напишіть речення з subjonctif.\nПочніть з « Il faut que… », « Je veux que… » або « Bien que… »."
+  },
+  "Écrivez une phrase avec un verbe pronominal au passé composé.\nN'oubliez pas d'accorder le participe passé si nécessaire.": {
+    "en": "Write a sentence with a reflexive verb in the passé composé.\nDon't forget to agree the past participle if necessary.",
+    "ar": "اكتب جملة بفعل انعكاسي في الماضي المركب.\nلا تنسَ إعراب اسم المفعول عند الضرورة.",
+    "fa": "یک جمله با فعل انعکاسی در گذشته‌ی مرکب بنویسید.\nدر صورت لزوم صفت مفعولی را مطابقت دهید.",
+    "ti": "ሓደ ሓሳብ ብርእሰ-ግሲ ኣብ ሕሉፍ ውሁድ ጽሓፍ።\nኣድላዪ እንተኾነ ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።",
+    "uk": "Напишіть речення із зворотним дієсловом у passé composé.\nНе забудьте узгодити дієприкметник за потреби."
+  },
+  "Écrivez une phrase en utilisant passé composé et imparfait.\nCommencez par « Quand… » ou « Pendant que… ».": {
+    "en": "Write a sentence using passé composé and imparfait.\nStart with « Quand… » or « Pendant que… ».",
+    "ar": "اكتب جملة باستخدام الماضي المركب والناقص.\nابدأ بـ « Quand… » أو « Pendant que… ».",
+    "fa": "یک جمله با گذشته‌ی مرکب و ناتمام بنویسید.\nبا « Quand… » یا « Pendant que… » شروع کنید.",
+    "ti": "ሓደ ሓሳብ ብሕሉፍ ውሁድን ዘይተዛዘመ ግዜን ጽሓፍ።\nብ « Quand… » ወይ « Pendant que… » ጀምር።",
+    "uk": "Напишіть речення, використовуючи passé composé та imparfait.\nПочніть з « Quand… » або « Pendant que… »."
+  },
+  "Écrivez une phrase hypothétique avec « si ».\nChoisissez le type : probable (si + présent) ou improbable (si + imparfait).": {
+    "en": "Write a hypothetical sentence with « si ».\nChoose the type: likely (si + present) or unlikely (si + imperfect).",
+    "ar": "اكتب جملة افتراضية مع « si ».\nاختر النوع: محتمل (si + مضارع) أو غير محتمل (si + ماضٍ ناقص).",
+    "fa": "یک جمله‌ی فرضی با « si » بنویسید.\nنوع را انتخاب کنید: محتمل (si + حال) یا غیرمحتمل (si + گذشته‌ی ناتمام).",
+    "ti": "ሓደ ሃይፎቴዚስ ሓሳብ ምስ « si » ጽሓፍ።\nዓይነት ምረጽ፦ ምክንያታዊ (si + ሕጂ) ወይ ዘይምክንያታዊ (si + ዘይተዛዘመ).",
+    "uk": "Напишіть гіпотетичне речення з « si ».\nОберіть тип: ймовірний (si + présent) або малоймовірний (si + imparfait)."
+  },
+  "Écrivez une phrase hypothétique complète avec « si + présent → futur ».\nUtilisez les verbes proposés.": {
+    "en": "Write a complete hypothetical sentence with « si + présent → futur ».\nUse the verbs provided.",
+    "ar": "اكتب جملة افتراضية كاملة مع « si + مضارع → مستقبل ».\nاستخدم الأفعال المقترحة.",
+    "fa": "یک جمله‌ی فرضی کامل با « si + حال → آینده » بنویسید.\nاز افعال پیشنهادی استفاده کنید.",
+    "ti": "ሓደ ሙሉእ ሃይፎቴዚስ ሓሳብ ምስ « si + ሕጂ → መጻኢ » ጽሓፍ።\nእቶም ዝቐረቡ ግሲታት ተጠቐም።",
+    "uk": "Напишіть повне гіпотетичне речення з « si + présent → futur ».\nВикористайте запропоновані дієслова."
+  },
+  "Écrivez une phrase négative avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe à la forme négative (ne … pas) et un complément.\nElle commence par une majuscule et se termine par un point.": {
+    "en": "Write a negative sentence with the verb provided.\nThe sentence must have a subject, a verb in the negative form (ne … pas) and a complement.\nIt starts with a capital letter and ends with a full stop.",
+    "ar": "اكتب جملة سلبية باستخدام الفعل المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل بصيغة النفي (ne … pas) ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.",
+    "fa": "یک جمله‌ی منفی با فعل پیشنهادی بنویسید.\nجمله باید فاعل، فعل به‌صورت منفی (ne … pas) و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.",
+    "ti": "ሓደ ኣሉታዊ ሓሳብ ብእቲ ዝቐረበ ግሲ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ኣሉታዊ ግሲ (ne … pas)ን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።",
+    "uk": "Напишіть заперечне речення із запропонованим дієсловом.\nРечення повинно мати підмет, дієслово у заперечній формі (ne … pas) та додаток.\nВоно починається з великої літери і закінчується крапкою."
+  },
+  "Écrivez une question avec le verbe proposé en utilisant « Est-ce que ».\nLa phrase doit avoir un sujet et un verbe conjugué.\nElle commence par « Est-ce que » et se termine par un point d'interrogation (?).": {
+    "en": "Write a question with the verb provided using « Est-ce que ».\nThe sentence must have a subject and a conjugated verb.\nIt starts with « Est-ce que » and ends with a question mark (?).",
+    "ar": "اكتب سؤالاً باستخدام الفعل المقترح مع « Est-ce que ».\nيجب أن تحتوي الجملة على فاعل وفعل مصرف.\nتبدأ بـ « Est-ce que » وتنتهي بعلامة استفهام (?).",
+    "fa": "یک سؤال با فعل پیشنهادی با استفاده از « Est-ce que » بنویسید.\nجمله باید فاعل و فعل صرف‌شده داشته باشد.\nبا « Est-ce que » شروع و با علامت سؤال (?) تمام می‌شود.",
+    "ti": "ሕቶ ብእቲ ዝቐረበ ግሲ ብ « Est-ce que » ጽሓፍ።\nእቲ ሓሳብ ርእሲን ዝተኣጻጸረ ግሲን ክህልዎ ኣለዎ።\nብ « Est-ce que » ይጅምር ብሕቶ ምልክት (?) ይውዳእ።",
+    "uk": "Напишіть запитання із запропонованим дієсловом, використовуючи « Est-ce que ».\nРечення повинно мати підмет і відмінене дієслово.\nВоно починається з « Est-ce que » і закінчується знаком питання (?)."
+  },
+  "Formez le gérondif du verbe.": {
+    "en": "Form the gerund of the verb.",
+    "ar": "كوّن صيغة المصدر للفعل.",
+    "fa": "مصدر فعل را بسازید.",
+    "ti": "ጄሮንዲቭ ናይቲ ግሲ ፍጠር።",
+    "uk": "Утворіть gérondif дієслова."
+  },
+  "Formez une question correcte.": {
+    "en": "Form a correct question.",
+    "ar": "كوّن سؤالاً صحيحاً.",
+    "fa": "یک سؤال درست بسازید.",
+    "ti": "ትኽክለኛ ሕቶ ፍጠር።",
+    "uk": "Утворіть правильне запитання."
+  },
+  "Identifiez le type de phrase avec « si ». Choisissez la forme correcte.": {
+    "en": "Identify the type of sentence with « si ». Choose the correct form.",
+    "ar": "حدّد نوع الجملة مع « si ». اختر الصيغة الصحيحة.",
+    "fa": "نوع جمله با « si » را مشخص کنید. صورت درست را انتخاب کنید.",
+    "ti": "ዓይነት ሓሳብ ምስ « si » ፍለ። ቅኑዕ ቅርጺ ምረጽ።",
+    "uk": "Визначте тип речення з « si ». Оберіть правильну форму."
+  },
+  "Identifiez le type du complément en gras.": {
+    "en": "Identify the type of the complement in bold.",
+    "ar": "حدّد نوع المتمّم بالخط العريض.",
+    "fa": "نوع متمم پررنگ را مشخص کنید.",
+    "ti": "ዓይነት ናይቲ ብትር ዘሎ መመላእታ ፍለ።",
+    "uk": "Визначте тип виділеного жирним додатка."
+  },
+  "Le pronom réfléchi est-il COD (accord du participe) ou COI (pas d'accord) ?": {
+    "en": "Is the reflexive pronoun a COD (participle agreement) or COI (no agreement)?",
+    "ar": "هل الضمير الانعكاسي مفعولاً مباشراً (إعراب اسم المفعول) أم غير مباشر (بدون إعراب)؟",
+    "fa": "آیا ضمیر انعکاسی مفعول مستقیم است (مطابقت صفت مفعولی) یا غیرمستقیم (بدون مطابقت)؟",
+    "ti": "ናይ ርእሲ ጸጋ COD (ምስማዕ ናይ ሕሉፍ ተሳታፋይ) ወይ COI (ዘይምስማዕ) ድዩ?",
+    "uk": "Зворотний займенник — COD (узгодження дієприкметника) чи COI (без узгодження)?"
+  },
+  "Mettez l'impératif à la forme négative.": {
+    "en": "Put the imperative in the negative form.",
+    "ar": "حوّل صيغة الأمر إلى صيغة النفي.",
+    "fa": "حالت امری را به‌صورت منفی بنویسید.",
+    "ti": "ኢምፔራቲቭ ናብ ኣሉታዊ ቅርጺ ቀይር።",
+    "uk": "Поставте imperative у заперечній формі."
+  },
+  "Mettez la phrase à la forme négative (ne … pas).": {
+    "en": "Put the sentence in the negative form (ne … pas).",
+    "ar": "حوّل الجملة إلى صيغة النفي (ne … pas).",
+    "fa": "جمله را به‌صورت منفی (ne … pas) بنویسید.",
+    "ti": "ነቲ ሓሳብ ናብ ኣሉታዊ ቅርጺ (ne … pas) ቀይር።",
+    "uk": "Поставте речення у заперечній формі (ne … pas)."
+  },
+  "Mettez la phrase à la forme négative avec ne … pas.": {
+    "en": "Put the sentence in the negative form with ne … pas.",
+    "ar": "حوّل الجملة إلى صيغة النفي مع ne … pas.",
+    "fa": "جمله را به‌صورت منفی با ne … pas بنویسید.",
+    "ti": "ነቲ ሓሳብ ብ ne … pas ኣሉታዊ ቅርጺ ቀይር።",
+    "uk": "Поставте речення у заперечній формі з ne … pas."
+  },
+  "Mettez la phrase à la forme négative.": {
+    "en": "Put the sentence in the negative form.",
+    "ar": "حوّل الجملة إلى صيغة النفي.",
+    "fa": "جمله را به‌صورت منفی بنویسید.",
+    "ti": "ነቲ ሓሳብ ናብ ኣሉታዊ ቅርጺ ቀይር።",
+    "uk": "Поставте речення у заперечній формі."
+  },
+  "Mettez le futur proche à la forme négative.": {
+    "en": "Put the near future in the negative form.",
+    "ar": "حوّل المستقبل القريب إلى صيغة النفي.",
+    "fa": "آینده‌ی نزدیک را به‌صورت منفی بنویسید.",
+    "ti": "ቀረባ መጻኢ ናብ ኣሉታዊ ቅርጺ ቀይር።",
+    "uk": "Поставте futur proche у заперечній формі."
+  },
+  "Mettez les phrases au pluriel.": {
+    "en": "Put the sentences in the plural.",
+    "ar": "حوّل الجمل إلى صيغة الجمع.",
+    "fa": "جمله‌ها را به جمع تبدیل کنید.",
+    "ti": "ነተን ሓሳባት ናብ ብዙሕ ቁጽሪ ቀይሮ።",
+    "uk": "Поставте речення у множину."
+  },
+  "Quelle est la formulation interrogative correcte ?": {
+    "en": "What is the correct interrogative form?",
+    "ar": "ما هي الصيغة الاستفهامية الصحيحة؟",
+    "fa": "صورت پرسشی درست کدام است؟",
+    "ti": "እቲ ቅኑዕ ናይ ሕቶ ቅርጺ እንታይ እዩ?",
+    "uk": "Яка правильна питальна форма?"
+  },
+  "Quelle préposition est illustrée ?": {
+    "en": "Which preposition is illustrated?",
+    "ar": "أي حرف جر يُوضَّح؟",
+    "fa": "کدام حرف اضافه نشان داده شده است؟",
+    "ti": "እቲ ዝተረኣየ ቅድመ-ስም እንታይ እዩ?",
+    "uk": "Який прийменник ілюструється?"
+  },
+  "Regardez l'image et sélectionnez Vrai ou Faux.": {
+    "en": "Look at the image and select True or False.",
+    "ar": "انظر إلى الصورة واختر صحيح أو خطأ.",
+    "fa": "به تصویر نگاه کنید و درست یا نادرست را انتخاب کنید.",
+    "ti": "ነቲ ምስሊ ርአ ትክክል ወይ ሓሶት ምረጽ።",
+    "uk": "Подивіться на зображення та оберіть Правда або Неправда."
+  },
+  "Regardez l'image. Écrivez une phrase complète qui décrit la position des deux objets.\nLa phrase commence par une majuscule et se termine par un point.": {
+    "en": "Look at the image. Write a complete sentence describing the position of the two objects.\nThe sentence starts with a capital letter and ends with a full stop.",
+    "ar": "انظر إلى الصورة. اكتب جملة كاملة تصف موضع الشيئين.\nتبدأ الجملة بحرف كبير وتنتهي بنقطة.",
+    "fa": "به تصویر نگاه کنید. یک جمله‌ی کامل بنویسید که موقعیت دو شیء را توصیف کند.\nجمله با حرف بزرگ شروع و با نقطه تمام می‌شود.",
+    "ti": "ነቲ ምስሊ ርአ። ነቲ ኣቀማምጣ ክልተ ኣቕሑት ዝገልጽ ሙሉእ ሓሳብ ጽሓፍ።\nእቲ ሓሳብ ብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።",
+    "uk": "Подивіться на зображення. Напишіть повне речення, що описує положення двох предметів.\nРечення починається з великої літери і закінчується крапкою."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase à l'impératif.": {
+    "en": "Put the words back in the correct order to form an imperative sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة بصيغة الأمر.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی امری بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ኢምፔራቲቭ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити речення в imperative."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase au conditionnel.": {
+    "en": "Put the words back in the correct order to form a conditional sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة بصيغة الشرط.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی شرطی بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ኮንዲሲዮነል ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити речення в conditionnel."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase au futur proche.": {
+    "en": "Put the words back in the correct order to form a near future sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة في المستقبل القريب.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی آینده‌ی نزدیک بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ቀረባ መጻኢ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити речення в futur proche."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase au futur simple.": {
+    "en": "Put the words back in the correct order to form a simple future sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة في المستقبل البسيط.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی آینده‌ی ساده بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ቀሊል መጻኢ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити речення в futur simple."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase avec un gérondif.": {
+    "en": "Put the words back in the correct order to form a sentence with a gerund.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة بصيغة المصدر.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ای با مصدر فعل بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ምስ ጄሮንዲቭ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити речення з gérondif."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase correcte.": {
+    "en": "Put the words back in the correct order to form a correct sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة صحيحة.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити правильне речення."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase hypothétique complète.": {
+    "en": "Put the words back in the correct order to form a complete hypothetical sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة افتراضية كاملة.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی فرضی کامل بسازید.",
+    "ti": "ነተን ቃላት ሙሉእ ሃይፎቴዚስ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити повне гіпотетичне речення."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase hypothétique correcte.": {
+    "en": "Put the words back in the correct order to form a correct hypothetical sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة افتراضية صحيحة.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی فرضی درست بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ሃይፎቴዚስ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити правильне гіпотетичне речення."
+  },
+  "Remettez les mots dans le bon ordre pour former une phrase négative correcte.": {
+    "en": "Put the words back in the correct order to form a correct negative sentence.",
+    "ar": "أعد ترتيب الكلمات لتكوين جملة سلبية صحيحة.",
+    "fa": "کلمات را به ترتیب درست بچینید تا جمله‌ی منفی درست بسازید.",
+    "ti": "ነተን ቃላት ቅኑዕ ኣሉታዊ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити правильне заперечне речення."
+  },
+  "Remettez les mots dans le bon ordre pour former une question avec l'inversion.": {
+    "en": "Put the words back in the correct order to form a question with inversion.",
+    "ar": "أعد ترتيب الكلمات لتكوين سؤال بالانقلاب.",
+    "fa": "کلمات را به ترتیب درست بچینید تا سؤالی با وارونگی بسازید.",
+    "ti": "ነተን ቃላት ሕቶ ምስ ምትእስሳር ንምግባር ብቅኑዕ ስርዓት መድብ።",
+    "uk": "Розставте слова у правильному порядку, щоб утворити запитання з інверсією."
+  },
+  "Remettez les mots dans le bon ordre.": {
+    "en": "Put the words back in the correct order.",
+    "ar": "أعد ترتيب الكلمات.",
+    "fa": "کلمات را به ترتیب صحیح بگذارید.",
+    "ti": "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።",
+    "uk": "Розставте слова в правильному порядку."
+  },
+  "Sélectionnez la forme de la phrase.": {
+    "en": "Select the form of the sentence.",
+    "ar": "اختر صيغة الجملة.",
+    "fa": "صورت جمله را انتخاب کنید.",
+    "ti": "ቅርጺ ናይቲ ሓሳብ ምረጽ።",
+    "uk": "Оберіть форму речення."
+  },
+  "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Auxiliaire avoir (rouge), Participe passé (vert).": {
+    "en": "Select a color, then click each word to identify it: Subject (yellow), Auxiliary avoir (red), Past participle (green).",
+    "ar": "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل المساعد avoir (أحمر)، اسم المفعول (أخضر).",
+    "fa": "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل کمکی avoir (قرمز)، صفت مفعولی (سبز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ሓጋዚ avoir (ቀይሕ)፣ ናይ ሕሉፍ ተሳታፋይ (ቀጠልያ).",
+    "uk": "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Допоміжне avoir (червоний), Дієприкметник (зелений)."
+  },
+  "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).": {
+    "en": "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).",
+    "ar": "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).",
+    "fa": "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل (قرمز)، متمم (سبز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).",
+    "uk": "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)."
+  },
+  "Sélectionnez une couleur, puis identifiez : futur proche (jaune) et futur simple (rouge).": {
+    "en": "Select a color, then identify: near future (yellow) and simple future (red).",
+    "ar": "اختر لوناً، ثم حدّد: المستقبل القريب (أصفر) والمستقبل البسيط (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس مشخص کنید: آینده‌ی نزدیک (زرد) و آینده‌ی ساده (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ቀረባ መጻኢ (ብጫ)ን ቀሊል መጻኢ (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте: futur proche (жовтий) і futur simple (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez : la proposition si (jaune) et la proposition principale au conditionnel (rouge).": {
+    "en": "Select a color, then identify: the si clause (yellow) and the main clause in the conditional (red).",
+    "ar": "اختر لوناً، ثم حدّد: جملة si (أصفر) والجملة الرئيسية بصيغة الشرط (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس مشخص کنید: بند si (زرد) و بند اصلی در حالت شرطی (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ክፋል si (ብጫ)ን ቀንዲ ክፋል ኮንዲሲዮነል (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте: речення з si (жовтий) і головне речення в conditionnel (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez : le déclencheur (jaune) et le verbe au subjonctif (rouge).": {
+    "en": "Select a color, then identify: the trigger (yellow) and the verb in the subjunctive (red).",
+    "ar": "اختر لوناً، ثم حدّد: المحفّز (أصفر) والفعل بصيغة الشرط (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس مشخص کنید: محرک (زرد) و فعل در وجه شرطی (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ምኽንያት (ብጫ)ን ግሲ ሳብዥንቲቭ (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте: тригер (жовтий) і дієслово в subjonctif (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez : le verbe à l'impératif (jaune) et la négation ne…pas (rouge).": {
+    "en": "Select a color, then identify: the verb in the imperative (yellow) and the negation ne…pas (red).",
+    "ar": "اختر لوناً، ثم حدّد: الفعل بصيغة الأمر (أصفر) والنفي ne…pas (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس مشخص کنید: فعل در حالت امری (زرد) و نفی ne…pas (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ግሲ ኢምፔራቲቭ (ብጫ)ን ኣሉታ ne…pas (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте: дієслово в imperative (жовтий) і заперечення ne…pas (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez : le verbe aller (jaune) et l'infinitif (rouge).": {
+    "en": "Select a color, then identify: the verb aller (yellow) and the infinitive (red).",
+    "ar": "اختر لوناً، ثم حدّد: الفعل aller (أصفر) والمصدر (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس مشخص کنید: فعل aller (زرد) و مصدر (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ግሲ aller (ብጫ)ን ኢንፊኒቲቭ (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте: дієслово aller (жовтий) і інфінітив (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez dans chaque verbe : la base (jaune) et la terminaison (rouge).": {
+    "en": "Select a color, then identify in each verb: the stem (yellow) and the ending (red).",
+    "ar": "اختر لوناً، ثم حدّد في كل فعل: الجذر (أصفر) والنهاية (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس در هر فعل مشخص کنید: ریشه (زرد) و پایانه (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ግሲ ፍለ፦ መሰረት (ብጫ)ን መወዳእታ (ቀይሕ)ን።",
+    "uk": "Виберіть колір, потім визначте в кожному дієслові: основу (жовтий) і закінчення (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez le gérondif (« en + participe présent ») dans chaque phrase.": {
+    "en": "Select a color, then identify the gerund (« en + present participle ») in each sentence.",
+    "ar": "اختر لوناً، ثم حدّد صيغة المصدر (« en + اسم الفاعل ») في كل جملة.",
+    "fa": "یک رنگ انتخاب کنید، سپس gérondif (« en + صفت فاعلی ») را در هر جمله مشخص کنید.",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ሓሳብ ጄሮንዲቭ (« en + ሕጂ ተሳታፋይ ») ፍለ።",
+    "uk": "Виберіть колір, потім визначте gérondif (« en + participe présent ») у кожному реченні."
+  },
+  "Sélectionnez une couleur, puis identifiez les verbes : Imparfait (jaune), Passé composé (rouge).": {
+    "en": "Select a color, then identify the verbs: Imparfait (yellow), Passé composé (red).",
+    "ar": "اختر لوناً، ثم حدّد الأفعال: الماضي الناقص (أصفر)، الماضي المركب (أحمر).",
+    "fa": "یک رنگ انتخاب کنید، سپس افعال را مشخص کنید: گذشته‌ی ناتمام (زرد)، گذشته‌ی مرکب (قرمز).",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ግሲታት ፍለ፦ ዘይተዛዘመ ግዜ (ብጫ)፣ ሕሉፍ ውሁድ (ቀይሕ).",
+    "uk": "Виберіть колір, потім визначте дієслова: Imparfait (жовтий), Passé composé (червоний)."
+  },
+  "Sélectionnez une couleur, puis identifiez les verbes au conditionnel dans chaque phrase.": {
+    "en": "Select a color, then identify the verbs in the conditional in each sentence.",
+    "ar": "اختر لوناً، ثم حدّد الأفعال بصيغة الشرط في كل جملة.",
+    "fa": "یک رنگ انتخاب کنید، سپس افعال در حالت شرطی را در هر جمله مشخص کنید.",
+    "ti": "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ሓሳብ ኮንዲሲዮነል ግሲታት ፍለ።",
+    "uk": "Виберіть колір, потім визначте дієслова в conditionnel у кожному реченні."
+  },
+  "Transformez avec il est / elle est.\nExemple : C'est un homme gentil. → Il est gentil.": {
+    "en": "Transform with il est / elle est.\nExample: C'est un homme gentil. → Il est gentil.",
+    "ar": "حوّل باستخدام il est / elle est.\nمثال: C'est un homme gentil. → Il est gentil.",
+    "fa": "با il est / elle est تبدیل کنید.\nمثال: C'est un homme gentil. → Il est gentil.",
+    "ti": "ብ il est / elle est ቀይር።\nኣብነት፦ C'est un homme gentil. → Il est gentil.",
+    "uk": "Перетворіть з il est / elle est.\nПриклад: C'est un homme gentil. → Il est gentil."
+  },
+  "Transformez la demande directe en demande polie au conditionnel.": {
+    "en": "Transform the direct request into a polite request in the conditional.",
+    "ar": "حوّل الطلب المباشر إلى طلب مهذب بصيغة الشرط.",
+    "fa": "درخواست مستقیم را به درخواست مودبانه در حالت شرطی تبدیل کنید.",
+    "ti": "ቀጥታ ሕቶ ናብ ክብሪ ዘለዎ ሕቶ ኮንዲሲዮነል ቀይር።",
+    "uk": "Перетворіть пряме прохання на ввічливе в conditionnel."
+  },
+  "Transformez la phrase au présent en phrase à l'imparfait.": {
+    "en": "Transform the present tense sentence into an imperfect sentence.",
+    "ar": "حوّل الجملة في المضارع إلى جملة في الماضي الناقص.",
+    "fa": "جمله‌ی حال را به جمله‌ی گذشته‌ی ناتمام تبدیل کنید.",
+    "ti": "ነቲ ኣብ ሕጂ ግዜ ዘሎ ሓሳብ ናብ ዘይተዛዘመ ግዜ ቀይር።",
+    "uk": "Перетворіть речення в теперішньому часі на речення в imparfait."
+  },
+  "Transformez la phrase en question avec « Est-ce que » ou « Est-ce qu' ».": {
+    "en": "Transform the sentence into a question with « Est-ce que » or « Est-ce qu' ».",
+    "ar": "حوّل الجملة إلى سؤال بـ « Est-ce que » أو « Est-ce qu' ».",
+    "fa": "جمله را به سؤال با « Est-ce que » یا « Est-ce qu' » تبدیل کنید.",
+    "ti": "ነቲ ሓሳብ ናብ ሕቶ ብ « Est-ce que » ወይ « Est-ce qu' » ቀይር።",
+    "uk": "Перетворіть речення на запитання з « Est-ce que » або « Est-ce qu' »."
+  },
+  "Transformez les phrases avec c'est.\nExemple : Il est mon ami. → C'est mon ami.": {
+    "en": "Transform the sentences with c'est.\nExample: Il est mon ami. → C'est mon ami.",
+    "ar": "حوّل الجمل باستخدام c'est.\nمثال: Il est mon ami. → C'est mon ami.",
+    "fa": "جمله‌ها را با c'est تبدیل کنید.\nمثال: Il est mon ami. → C'est mon ami.",
+    "ti": "ሓሳባት ብ c'est ቀይር።\nኣብነት፦ Il est mon ami. → C'est mon ami.",
+    "uk": "Перетворіть речення з c'est.\nПриклад: Il est mon ami. → C'est mon ami."
+  }
+}

@@ -186,6 +186,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe au subjonctif présent.",
+      transInstruction: { en: "Conjugate the verb in the present subjunctive.", ar: "صرّف الفعل في صيغة الشرط الحاضرة.", fa: "فعل را در وجه شرطی حال صرف کنید.", ti: "ነቲ ግሲ ኣብ ሕጂ ሳብዥንቲቭ ኣጻርይ።", uk: "Відмінюйте дієслово в subjonctif présent." },
       items: [],
       pool: [
         { sentence: "Il faut que je ___ (parler) à mon chef.", hint: "que je parle", answer: "parle" },
@@ -207,6 +208,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "qcm",
       title: "Exercice 2",
       instruction: "Choisissez : indicatif ou subjonctif ?",
+      transInstruction: { en: "Choose: indicative or subjunctive?", ar: "اختر: المضارع أم صيغة الشرط؟", fa: "انتخاب کنید: حالت خبری یا وجه شرطی؟", ti: "ምረጽ፦ ኢንዲካቲቭ ወይ ሳብዥንቲቭ?", uk: "Оберіть: indicatif чи subjonctif?" },
       items: [],
       pool: [
         { sentence: "Je sais qu'il ___ raison.", choices: ["a (ind.)", "ait (subj.)", "aurait (cond.)", "aura (futur)"], correctIdx: 0 },
@@ -222,6 +224,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque déclencheur : indicatif ou subjonctif ?",
+      transInstruction: { en: "Sort each trigger: indicative or subjunctive?", ar: "صنّف كل محفّز: مضارع أم صيغة الشرط؟", fa: "هر محرک را دسته‌بندی کنید: حالت خبری یا وجه شرطی؟", ti: "ነፍሲ ወከፍ ምኽንያት ሸነኽ፦ ኢንዲካቲቭ ወይ ሳብዥንቲቭ?", uk: "Розсортуйте кожен тригер: indicatif чи subjonctif?" },
       categories: ["Indicatif (certitude)", "Subjonctif (doute / volonté / sentiment)"],
       items: [
         { word: "Je sais que…", categoryIdx: 0 },
@@ -238,6 +241,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Il faut que tu finisses ton travail.", words: ["Il", "faut", "que", "tu", "finisses", "ton", "travail."] },
@@ -252,6 +256,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez : le déclencheur (jaune) et le verbe au subjonctif (rouge).",
+      transInstruction: { en: "Select a color, then identify: the trigger (yellow) and the verb in the subjunctive (red).", ar: "اختر لوناً، ثم حدّد: المحفّز (أصفر) والفعل بصيغة الشرط (أحمر).", fa: "یک رنگ انتخاب کنید، سپس مشخص کنید: محرک (زرد) و فعل در وجه شرطی (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ምኽንያት (ብጫ)ን ግሲ ሳብዥንቲቭ (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте: тригер (жовтий) і дієслово в subjonctif (червоний)." },
       colors: ["Déclencheur", "Subjonctif"],
       items: [
         {
@@ -272,6 +277,7 @@ export const A2_GR_SUBJONCTIF: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase avec un subjonctif.\nCommencez par « Il faut que… », « Je veux que… » ou « Bien que… ».",
+      transInstruction: { en: "Write a sentence with a subjunctive.\nStart with « Il faut que… », « Je veux que… » or « Bien que… ».", ar: "اكتب جملة بصيغة الشرط.\nابدأ بـ « Il faut que… » أو « Je veux que… » أو « Bien que… ».", fa: "یک جمله با وجه شرطی بنویسید.\nبا « Il faut que… »، « Je veux que… » یا « Bien que… » شروع کنید.", ti: "ሓደ ሓሳብ ብሳብዥንቲቭ ጽሓፍ።\nብ « Il faut que… »፣ « Je veux que… » ወይ « Bien que… » ጀምር።", uk: "Напишіть речення з subjonctif.\nПочніть з « Il faut que… », « Je veux que… » або « Bien que… »." },
       verbPool: ["venir", "faire", "être", "avoir", "partir", "finir"],
       verbPoolSize: 2,
     },

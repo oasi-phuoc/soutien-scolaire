@@ -170,6 +170,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "classify",
       title: "Exercice 1",
       instruction: "Classez chaque mot en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort each word in bold into the correct category.", ar: "صنّف كل كلمة بالخط العريض في الفئة الصحيحة.", fa: "هر کلمه‌ی پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ብትር ዘሎ ቃል ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожне виділене жирним слово у правильну категорію." },
       categories: ["Sujet", "Verbe", "Complément"],
       items: [
         { word: "Marie {a}mange{/a} une salade.", categoryIdx: 1 },
@@ -183,6 +184,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "classify",
       title: "Exercice 2",
       instruction: "Identifiez le type du complément en gras.",
+      transInstruction: { en: "Identify the type of the complement in bold.", ar: "حدّد نوع المتمّم بالخط العريض.", fa: "نوع متمم پررنگ را مشخص کنید.", ti: "ዓይነት ናይቲ ብትር ዘሎ መመላእታ ፍለ።", uk: "Визначте тип виділеного жирним додатка." },
       categories: ["COD", "COI", "CC"],
       items: [
         { word: "Je mange {a}une pomme{/a}.", categoryIdx: 0 },
@@ -240,6 +242,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 4",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل (قرمز)، متمم (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)." },
       colors: ["Sujet", "Verbe", "Complément"],
       items: [
         {
@@ -260,6 +263,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "write",
       title: "Exercice 5",
       instruction: "Écrivez une phrase avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe et un complément.\nElle commence par une majuscule et se termine par un point.",
+      transInstruction: { en: "Write a sentence with the verb provided.\nThe sentence must have a subject, a verb and a complement.\nIt starts with a capital letter and ends with a full stop.", ar: "اكتب جملة باستخدام الفعل المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.", fa: "یک جمله با فعل پیشنهادی بنویسید.\nجمله باید فاعل، فعل و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.", ti: "ሓደ ሓሳብ ብእቲ ዝቐረበ ግሲ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ግሲን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።", uk: "Напишіть речення із запропонованим дієсловом.\nРечення повинно мати підмет, дієслово та додаток.\nВоно починається з великої літери і закінчується крапкою." },
       verbPool: [
         "parler", "manger", "habiter", "aimer", "écouter",
         "regarder", "travailler", "chanter", "danser", "jouer",
@@ -275,6 +279,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "word_order",
       title: "Évaluation — Question 1",
       instruction: "Remettez les mots dans le bon ordre.",
+      transInstruction: { en: "Put the words back in the correct order.", ar: "أعد ترتيب الكلمات.", fa: "کلمات را به ترتیب صحیح بگذارید.", ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።", uk: "Розставте слова в правильному порядку." },
       allowPartialValidation: true,
       items: [],
       poolSize: 4,
@@ -293,6 +298,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
       type: "classify",
       title: "Évaluation — Question 2",
       instruction: "Classez chaque élément : Sujet, Verbe ou Complément.",
+      transInstruction: { en: "Sort each element: Subject, Verb or Complement.", ar: "صنّف كل عنصر: فاعل، فعل أو متمّم.", fa: "هر عنصر را دسته‌بندی کنید: فاعل، فعل یا متمم.", ti: "ነፍሲ ወከፍ ኣካል ሸነኽ፦ ርእሲ፣ ግሲ ወይ መመላእታ።", uk: "Розсортуйте кожен елемент: Підмет, Дієслово чи Додаток." },
       categories: ["Sujet", "Verbe", "Complément"],
       items: [],
       poolSize: 6,

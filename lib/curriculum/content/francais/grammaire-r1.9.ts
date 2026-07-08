@@ -260,6 +260,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "classify",
       title: "Exercice 1",
       instruction: "Classez chaque phrase : identification ou description.",
+      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
       categories: ["Identification (C'est)", "Description (Il / Elle est)"],
       items: [],
       poolSize: 5,
@@ -304,6 +305,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "qcm",
       title: "Exercice 2",
       instruction: "Choisissez C'est ou Il / Elle est.",
+      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", ti: "C'est ወይ Il / Elle est ምረጽ።", uk: "Оберіть C'est або Il / Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -368,6 +370,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Complétez avec c'est ou il est.",
+      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", ti: "ብ c'est ወይ il est ምላእ።", uk: "Доповніть c'est або il est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -410,6 +413,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Exercice 4",
       instruction: "Complétez avec C'est, Il est ou Elle est.",
+      transInstruction: { en: "Complete with C'est, Il est or Elle est.", ar: "أكمل بـ C'est أو Il est أو Elle est.", fa: "با C'est، Il est یا Elle est کامل کنید.", ti: "ብ C'est፣ Il est ወይ Elle est ምላእ።", uk: "Доповніть C'est, Il est або Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -452,6 +456,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre.",
+      transInstruction: { en: "Put the words back in the correct order.", ar: "أعد ترتيب الكلمات.", fa: "کلمات را به ترتیب صحیح بگذارید.", ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።", uk: "Розставте слова в правильному порядку." },
       allowPartialValidation: true,
       items: [],
       poolSize: 5,
@@ -475,6 +480,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Transformez les phrases avec c'est.\nExemple : Il est mon ami. → C'est mon ami.",
+      transInstruction: { en: "Transform the sentences with c'est.\nExample: Il est mon ami. → C'est mon ami.", ar: "حوّل الجمل باستخدام c'est.\nمثال: Il est mon ami. → C'est mon ami.", fa: "جمله‌ها را با c'est تبدیل کنید.\nمثال: Il est mon ami. → C'est mon ami.", ti: "ሓሳባት ብ c'est ቀይር።\nኣብነት፦ Il est mon ami. → C'est mon ami.", uk: "Перетворіть речення з c'est.\nПриклад: Il est mon ami. → C'est mon ami." },
       promptLayout: "stacked",
       promptPool: [
         "Il est mon frère. →",
@@ -497,6 +503,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 7",
       instruction: "Transformez avec il est / elle est.\nExemple : C'est un homme gentil. → Il est gentil.",
+      transInstruction: { en: "Transform with il est / elle est.\nExample: C'est un homme gentil. → Il est gentil.", ar: "حوّل باستخدام il est / elle est.\nمثال: C'est un homme gentil. → Il est gentil.", fa: "با il est / elle est تبدیل کنید.\nمثال: C'est un homme gentil. → Il est gentil.", ti: "ብ il est / elle est ቀይር።\nኣብነት፦ C'est un homme gentil. → Il est gentil.", uk: "Перетворіть з il est / elle est.\nПриклад: C'est un homme gentil. → Il est gentil." },
       promptLayout: "stacked",
       promptPool: [
         "C'est une femme sympathique. →",
@@ -519,6 +526,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 8",
       instruction: "Écrivez une phrase avec les mots proposés.",
+      transInstruction: { en: "Write a sentence with the words provided.", ar: "اكتب جملة بالكلمات المقترحة.", fa: "یک جمله با کلمات پیشنهادی بنویسید.", ti: "ብዝቐረቡ ቃላት ሓደ ሓሳብ ጽሓፍ።", uk: "Напишіть речення з запропонованими словами." },
       promptLayout: "stacked",
       prompts: [
         "Alona :",
@@ -536,6 +544,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez C'est ou Il / Elle est.",
+      transInstruction: { en: "Choose C'est or Il / Elle est.", ar: "اختر C'est أو Il / Elle est.", fa: "C'est یا Il / Elle est را انتخاب کنید.", ti: "C'est ወይ Il / Elle est ምረጽ።", uk: "Оберіть C'est або Il / Elle est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -567,6 +576,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 2",
       instruction: "Complétez avec c'est ou il est.",
+      transInstruction: { en: "Complete with c'est or il est.", ar: "أكمل بـ c'est أو il est.", fa: "با c'est یا il est کامل کنید.", ti: "ብ c'est ወይ il est ምላእ።", uk: "Доповніть c'est або il est." },
       items: [],
       poolSize: 5,
       pool: [
@@ -598,6 +608,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "classify",
       title: "Évaluation — Question 3",
       instruction: "Classez chaque phrase : identification ou description.",
+      transInstruction: { en: "Sort each sentence: identification or description.", ar: "صنّف كل جملة: تعريف أم وصف.", fa: "هر جمله را دسته‌بندی کنید: شناسایی یا توصیف.", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ መለለዪ ወይ መግለጺ።", uk: "Розсортуйте кожне речення: ідентифікація чи опис." },
       categories: ["Identification (C'est)", "Description (Il / Elle est)"],
       items: [],
       poolSize: 5,

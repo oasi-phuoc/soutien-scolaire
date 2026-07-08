@@ -114,6 +114,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe au passé composé avec être. Accordez le participe passé.",
+      transInstruction: { en: "Conjugate the verb in the passé composé with être. Agree the past participle.", ar: "صرّف الفعل في الماضي المركب مع être. أعرب اسم المفعول.", fa: "فعل را در گذشته‌ی مرکب با être صرف کنید. صفت مفعولی را مطابقت دهید.", ti: "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ምስ être ኣጻርይ። ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።", uk: "Відмінюйте дієслово в passé composé з être. Узгодьте дієприкметник." },
       items: [],
       pool: [
         { sentence: "Il ___ (aller) au marché.", hint: "est + allé", answer: "est allé" },
@@ -135,6 +136,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Accordez le participe passé avec le sujet.",
+      transInstruction: { en: "Agree the past participle with the subject.", ar: "أعرب اسم المفعول مع الفاعل.", fa: "صفت مفعولی را با فاعل مطابقت دهید.", ti: "ናይ ሕሉፍ ተሳታፋይ ምስ ርእሲ ኣሰማማዕ።", uk: "Узгодьте дієприкметник із підметом." },
       items: [],
       pool: [
         { sentence: "Marie est ___ (partir).", hint: "féminin singulier", answer: "partie" },
@@ -152,6 +154,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "qcm",
       title: "Exercice 3",
       instruction: "Choisissez la bonne forme au passé composé avec être.",
+      transInstruction: { en: "Choose the correct passé composé form with être.", ar: "اختر الصيغة الصحيحة في الماضي المركب مع être.", fa: "صورت درست گذشته‌ی مرکب با être را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ሕሉፍ ውሁድ ምስ être ምረጽ።", uk: "Оберіть правильну форму passé composé з être." },
       items: [],
       pool: [
         { sentence: "Elle ___ à Paris.", choices: ["est allée", "est allé", "a allé", "est allées"], correctIdx: 0 },
@@ -169,6 +172,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Ce verbe utilise être ou avoir au passé composé ?",
+      transInstruction: { en: "Does this verb use être or avoir in the passé composé?", ar: "هل يستخدم هذا الفعل être أو avoir في الماضي المركب؟", fa: "این فعل در گذشته‌ی مرکب از être یا avoir استفاده می‌کند؟", ti: "እዚ ግሲ ኣብ ሕሉፍ ውሁድ être ወይ avoir ይጥቀም?", uk: "Це дієслово в passé composé вживає être чи avoir?" },
       categories: ["Auxiliaire être", "Auxiliaire avoir"],
       items: [],
       pool: [
@@ -195,6 +199,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Elle est allée au marché.", words: ["Elle", "est", "allée", "au", "marché."] },
@@ -210,6 +215,7 @@ export const A1_CONJ_L30: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase au passé composé avec être.\nAccordez le participe passé avec le sujet.",
+      transInstruction: { en: "Write a sentence in the passé composé with être.\nAgree the past participle with the subject.", ar: "اكتب جملة في الماضي المركب مع être.\nأعرب اسم المفعول مع الفاعل.", fa: "یک جمله در گذشته‌ی مرکب با être بنویسید.\nصفت مفعولی را با فاعل مطابقت دهید.", ti: "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ être ጽሓፍ።\nናይ ሕሉፍ ተሳታፋይ ምስ ርእሲ ኣሰማማዕ።", uk: "Напишіть речення в passé composé з être.\nУзгодьте дієприкметник із підметом." },
       verbPool: ["aller", "venir", "partir", "arriver", "rester", "sortir", "naître", "tomber"],
       verbPoolSize: 3,
     },

@@ -79,6 +79,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec la terminaison correcte du futur simple.",
+      transInstruction: { en: "Complete with the correct simple future ending.", ar: "أكمل بنهاية المستقبل البسيط الصحيحة.", fa: "با پایانه‌ی درست آینده‌ی ساده کامل کنید.", ti: "ብቅኑዕ መወዳእታ ቀሊል መጻኢ ምላእ።", uk: "Доповніть правильним закінченням futur simple." },
       items: [],
       pool: [
         { sentence: "Je parler___", hint: "-ai / -as / -a / -ons / -ez / -ont", answer: "ai" },
@@ -100,6 +101,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe au futur simple.",
+      transInstruction: { en: "Conjugate the verb in the simple future.", ar: "صرّف الفعل في المستقبل البسيط.", fa: "فعل را در آینده‌ی ساده صرف کنید.", ti: "ነቲ ግሲ ኣብ ቀሊል መጻኢ ኣጻርይ።", uk: "Відмінюйте дієслово в futur simple." },
       items: [],
       pool: [
         { sentence: "Demain, je ___ (parler) à mon professeur.", hint: "parler + -ai", answer: "parlerai" },
@@ -121,6 +123,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez selon le type de verbe.",
+      transInstruction: { en: "Sort according to the type of verb.", ar: "صنّف حسب نوع الفعل.", fa: "بر اساس نوع فعل دسته‌بندی کنید.", ti: "ብዓይነት ግሲ ሸነኽ።", uk: "Розсортуйте за типом дієслова." },
       categories: ["Verbe en -er", "Verbe en -ir", "Verbe en -re"],
       items: [],
       pool: [
@@ -140,6 +143,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase au futur simple.",
+      transInstruction: { en: "Put the words back in the correct order to form a simple future sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة في المستقبل البسيط.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی آینده‌ی ساده بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ቀሊል መጻኢ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення в futur simple." },
       items: [],
       pool: [
         { sentence: "Demain, je parlerai à mon professeur.", words: ["Demain,", "je", "parlerai", "à", "mon", "professeur."] },
@@ -154,6 +158,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez dans chaque verbe : la base (jaune) et la terminaison (rouge).",
+      transInstruction: { en: "Select a color, then identify in each verb: the stem (yellow) and the ending (red).", ar: "اختر لوناً، ثم حدّد في كل فعل: الجذر (أصفر) والنهاية (أحمر).", fa: "یک رنگ انتخاب کنید، سپس در هر فعل مشخص کنید: ریشه (زرد) و پایانه (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ግሲ ፍለ፦ መሰረት (ብጫ)ን መወዳእታ (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте в кожному дієслові: основу (жовтий) і закінчення (червоний)." },
       colors: ["Base", "Terminaison"],
       items: [
         {
@@ -174,6 +179,7 @@ export const A2_CONJ_L08: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase au futur simple pour décrire un plan ou une prévision.\nCommencez par « Demain, » ou « L'année prochaine, ».",
+      transInstruction: { en: "Write a sentence in the simple future to describe a plan or forecast.\nStart with « Demain, » or « L'année prochaine, ».", ar: "اكتب جملة في المستقبل البسيط لوصف خطة أو توقع.\nابدأ بـ « Demain, » أو « L'année prochaine, ».", fa: "یک جمله در آینده‌ی ساده برای توصیف برنامه یا پیش‌بینی بنویسید.\nبا « Demain, » یا « L'année prochaine, » شروع کنید.", ti: "ሓደ ሓሳብ ብቀሊል መጻኢ ዕቅዲ ወይ ትንቢት ንምግላጽ ጽሓፍ።\nብ « Demain, » ወይ « L'année prochaine, » ጀምር።", uk: "Напишіть речення в futur simple, щоб описати план або прогноз.\nПочніть з « Demain, » або « L'année prochaine, »." },
       verbPool: ["parler", "finir", "voyager", "habiter", "choisir", "travailler"],
       verbPoolSize: 2,
     },

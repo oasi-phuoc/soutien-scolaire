@@ -129,6 +129,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Choisissez : passé composé ou imparfait ?",
+      transInstruction: { en: "Choose: passé composé or imparfait?", ar: "اختر: الماضي المركب أم الماضي الناقص؟", fa: "انتخاب کنید: گذشته‌ی مرکب یا گذشته‌ی ناتمام؟", ti: "ምረጽ፦ ሕሉፍ ውሁድ ወይ ዘይተዛዘመ ግዜ?", uk: "Оберіть: passé composé чи imparfait?" },
       items: [],
       pool: [
         { sentence: "Avant, je ___ tous les matins. [habitude]", choices: ["courais", "ai couru", "courrais", "cours"], correctIdx: 0 },
@@ -148,6 +149,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe au passé composé ou à l'imparfait selon le contexte.",
+      transInstruction: { en: "Conjugate the verb in the passé composé or imparfait according to the context.", ar: "صرّف الفعل في الماضي المركب أو الناقص حسب السياق.", fa: "فعل را در گذشته‌ی مرکب یا ناتمام بر اساس متن صرف کنید.", ti: "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ወይ ዘይተዛዘመ ግዜ ብኣውድ ኣጻርይ።", uk: "Відмінюйте дієслово в passé composé або imparfait залежно від контексту." },
       items: [],
       pool: [
         { sentence: "Quand j'étais enfant, je ___ (jouer) au foot tous les jours.", hint: "habitude → imparfait", answer: "jouais" },
@@ -168,6 +170,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase selon l'usage du temps du passé.",
+      transInstruction: { en: "Sort each sentence according to the use of the past tense.", ar: "صنّف كل جملة حسب استخدام زمن الماضي.", fa: "هر جمله را بر اساس کاربرد زمان گذشته دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብኣጠቓቕማ ናይ ሕሉፍ ግዜ ሸነኽ።", uk: "Розсортуйте кожне речення за вживанням минулого часу." },
       categories: ["Imparfait (habitude / description)", "Passé composé (événement)"],
       items: [],
       pool: [
@@ -188,6 +191,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Hier, il faisait beau et nous sommes sortis.", words: ["Hier,", "il", "faisait", "beau", "et", "nous", "sommes", "sortis."] },
@@ -202,6 +206,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez les verbes : Imparfait (jaune), Passé composé (rouge).",
+      transInstruction: { en: "Select a color, then identify the verbs: Imparfait (yellow), Passé composé (red).", ar: "اختر لوناً، ثم حدّد الأفعال: الماضي الناقص (أصفر)، الماضي المركب (أحمر).", fa: "یک رنگ انتخاب کنید، سپس افعال را مشخص کنید: گذشته‌ی ناتمام (زرد)، گذشته‌ی مرکب (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ግሲታት ፍለ፦ ዘይተዛዘመ ግዜ (ብጫ)፣ ሕሉፍ ውሁድ (ቀይሕ).", uk: "Виберіть колір, потім визначте дієслова: Imparfait (жовтий), Passé composé (червоний)." },
       colors: ["Imparfait", "Passé composé"],
       items: [
         {
@@ -222,6 +227,7 @@ export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase en utilisant passé composé et imparfait.\nCommencez par « Quand… » ou « Pendant que… ».",
+      transInstruction: { en: "Write a sentence using passé composé and imparfait.\nStart with « Quand… » or « Pendant que… ».", ar: "اكتب جملة باستخدام الماضي المركب والناقص.\nابدأ بـ « Quand… » أو « Pendant que… ».", fa: "یک جمله با گذشته‌ی مرکب و ناتمام بنویسید.\nبا « Quand… » یا « Pendant que… » شروع کنید.", ti: "ሓደ ሓሳብ ብሕሉፍ ውሁድን ዘይተዛዘመ ግዜን ጽሓፍ።\nብ « Quand… » ወይ « Pendant que… » ጀምር።", uk: "Напишіть речення, використовуючи passé composé та imparfait.\nПочніть з « Quand… » або « Pendant que… »." },
       verbPool: ["parler", "manger", "travailler", "dormir", "regarder", "lire"],
       verbPoolSize: 2,
     },

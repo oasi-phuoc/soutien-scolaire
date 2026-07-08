@@ -190,6 +190,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Donnez le participe passé du verbe entre parenthèses.",
+      transInstruction: { en: "Give the past participle of the verb in parentheses.", ar: "أعطِ اسم المفعول للفعل بين القوسين.", fa: "صفت مفعولی فعل داخل پرانتز را بنویسید.", ti: "ናይ ሕሉፍ ተሳታፋይ ናይቲ ኣብ ቅንፍ ዘሎ ግሲ ሃብ።", uk: "Напишіть дієприкметник дієслова в дужках." },
       items: [],
       pool: [
         { sentence: "parler → ___", hint: "-er → -é", answer: "parlé" },
@@ -214,6 +215,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe au passé composé avec avoir.",
+      transInstruction: { en: "Conjugate the verb in the passé composé with avoir.", ar: "صرّف الفعل في الماضي المركب مع avoir.", fa: "فعل را در گذشته‌ی مرکب با avoir صرف کنید.", ti: "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ምስ avoir ኣጻርይ።", uk: "Відмінюйте дієслово в passé composé з avoir." },
       items: [],
       pool: [
         { sentence: "J'___ (manger) une pomme.", hint: "ai + mangé", answer: "ai mangé" },
@@ -235,6 +237,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Mettez la phrase à la forme négative (ne … pas).",
+      transInstruction: { en: "Put the sentence in the negative form (ne … pas).", ar: "حوّل الجملة إلى صيغة النفي (ne … pas).", fa: "جمله را به‌صورت منفی (ne … pas) بنویسید.", ti: "ነቲ ሓሳብ ናብ ኣሉታዊ ቅርጺ (ne … pas) ቀይር።", uk: "Поставте речення у заперечній формі (ne … pas)." },
       items: [],
       pool: [
         { sentence: "Il ___ (ne pas manger) ce matin.", hint: "ne + avoir + pas + participe", answer: "n'a pas mangé" },
@@ -252,6 +255,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez l'élément en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort the item in bold into the correct category.", ar: "صنّف العنصر بالخط العريض في الفئة الصحيحة.", fa: "عنصر پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነቲ ብትር ዘሎ ኣካል ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть виділений жирним елемент у правильну категорію." },
       categories: ["Sujet", "Auxiliaire avoir", "Participe passé"],
       items: [],
       pool: [
@@ -274,6 +278,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "J'ai mangé une pomme.", words: ["J'ai", "mangé", "une", "pomme."] },
@@ -290,6 +295,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 6",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Auxiliaire avoir (rouge), Participe passé (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Auxiliary avoir (red), Past participle (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل المساعد avoir (أحمر)، اسم المفعول (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل کمکی avoir (قرمز)، صفت مفعولی (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ሓጋዚ avoir (ቀይሕ)፣ ናይ ሕሉፍ ተሳታፋይ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Допоміжне avoir (червоний), Дієприкметник (зелений)." },
       colors: ["Sujet", "Auxiliaire avoir", "Participe passé"],
       items: [
         {
@@ -310,6 +316,7 @@ export const A1_CONJ_L29: ConjLesson = {
       type: "write",
       title: "Exercice 7",
       instruction: "Écrivez une phrase au passé composé avec avoir.\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence in the passé composé with avoir.\nUse the verb provided.", ar: "اكتب جملة في الماضي المركب مع avoir.\nاستخدم الفعل المقترح.", fa: "یک جمله در گذشته‌ی مرکب با avoir بنویسید.\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ avoir ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення в passé composé з avoir.\nВикористайте запропоноване дієслово." },
       verbPool: ["manger", "voir", "prendre", "finir", "faire", "lire", "écrire", "dire"],
       verbPoolSize: 3,
     },

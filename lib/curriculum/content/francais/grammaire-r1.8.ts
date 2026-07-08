@@ -139,6 +139,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Sélectionnez la forme de la phrase.",
+      transInstruction: { en: "Select the form of the sentence.", ar: "اختر صيغة الجملة.", fa: "صورت جمله را انتخاب کنید.", ti: "ቅርጺ ናይቲ ሓሳብ ምረጽ።", uk: "Оберіть форму речення." },
       toggleChoices: true,
       items: [],
       pool: [
@@ -217,6 +218,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Transformez la phrase en question avec « Est-ce que » ou « Est-ce qu' ».",
+      transInstruction: { en: "Transform the sentence into a question with « Est-ce que » or « Est-ce qu' ».", ar: "حوّل الجملة إلى سؤال بـ « Est-ce que » أو « Est-ce qu' ».", fa: "جمله را به سؤال با « Est-ce que » یا « Est-ce qu' » تبدیل کنید.", ti: "ነቲ ሓሳብ ናብ ሕቶ ብ « Est-ce que » ወይ « Est-ce qu' » ቀይር።", uk: "Перетворіть речення на запитання з « Est-ce que » або « Est-ce qu' »." },
       items: [],
       pool: [
         // être (15)
@@ -275,6 +277,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque mot ou groupe en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort each word or group in bold into the correct category.", ar: "صنّف كل كلمة أو مجموعة بالخط العريض في الفئة الصحيحة.", fa: "هر کلمه یا گروه پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ብትር ዘሎ ቃል ወይ ጉጅለ ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожне слово або групу, виділені жирним, у правильну категорію." },
       categories: ["Sujet", "Verbe", "Complément"],
       items: [],
       pool: [
@@ -345,6 +348,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل (قرمز)، متمم (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)." },
       colors: ["Sujet", "Verbe", "Complément"],
       items: [
         {
@@ -366,6 +370,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une question avec le verbe proposé en utilisant « Est-ce que ».\nLa phrase doit avoir un sujet et un verbe conjugué.\nElle commence par « Est-ce que » et se termine par un point d'interrogation (?).",
+      transInstruction: { en: "Write a question with the verb provided using « Est-ce que ».\nThe sentence must have a subject and a conjugated verb.\nIt starts with « Est-ce que » and ends with a question mark (?).", ar: "اكتب سؤالاً باستخدام الفعل المقترح مع « Est-ce que ».\nيجب أن تحتوي الجملة على فاعل وفعل مصرف.\nتبدأ بـ « Est-ce que » وتنتهي بعلامة استفهام (?).", fa: "یک سؤال با فعل پیشنهادی با استفاده از « Est-ce que » بنویسید.\nجمله باید فاعل و فعل صرف‌شده داشته باشد.\nبا « Est-ce que » شروع و با علامت سؤال (?) تمام می‌شود.", ti: "ሕቶ ብእቲ ዝቐረበ ግሲ ብ « Est-ce que » ጽሓፍ።\nእቲ ሓሳብ ርእሲን ዝተኣጻጸረ ግሲን ክህልዎ ኣለዎ።\nብ « Est-ce que » ይጅምር ብሕቶ ምልክት (?) ይውዳእ።", uk: "Напишіть запитання із запропонованим дієсловом, використовуючи « Est-ce que ».\nРечення повинно мати підмет і відмінене дієслово.\nВоно починається з « Est-ce que » і закінчується знаком питання (?)." },
       verbPool: [
         "parler", "manger", "habiter", "aimer", "écouter",
         "regarder", "travailler", "chanter", "danser", "jouer",
@@ -382,6 +387,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Quelle est la formulation interrogative correcte ?",
+      transInstruction: { en: "What is the correct interrogative form?", ar: "ما هي الصيغة الاستفهامية الصحيحة؟", fa: "صورت پرسشی درست کدام است؟", ti: "እቲ ቅኑዕ ናይ ሕቶ ቅርጺ እንታይ እዩ?", uk: "Яка правильна питальна форма?" },
       items: [],
       poolSize: 5,
       pool: [
@@ -422,6 +428,7 @@ export const A1_GR_INTERRO: GrammarLesson = {
       type: "word_order",
       title: "Évaluation — Question 2",
       instruction: "Formez une question correcte.",
+      transInstruction: { en: "Form a correct question.", ar: "كوّن سؤالاً صحيحاً.", fa: "یک سؤال درست بسازید.", ti: "ትኽክለኛ ሕቶ ፍጠር።", uk: "Утворіть правильне запитання." },
       allowPartialValidation: true,
       items: [],
       poolSize: 4,

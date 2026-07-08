@@ -128,6 +128,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Formez le gérondif du verbe.",
+      transInstruction: { en: "Form the gerund of the verb.", ar: "كوّن صيغة المصدر للفعل.", fa: "مصدر فعل را بسازید.", ti: "ጄሮንዲቭ ናይቲ ግሲ ፍጠር።", uk: "Утворіть gérondif дієслова." },
       items: [],
       pool: [
         { sentence: "parler → ___", hint: "nous parlons → parl-ant → en parlant", answer: "en parlant" },
@@ -147,6 +148,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Complétez la phrase avec le gérondif du verbe entre parenthèses.",
+      transInstruction: { en: "Complete the sentence with the gerund of the verb in parentheses.", ar: "أكمل الجملة بصيغة المصدر للفعل بين القوسين.", fa: "جمله را با مصدر فعل داخل پرانتز کامل کنید.", ti: "ነቲ ሓሳብ ብጄሮንዲቭ ናይቲ ኣብ ቅንፍ ዘሎ ግሲ ምላእ።", uk: "Доповніть речення gérondif дієслова в дужках." },
       items: [],
       pool: [
         { sentence: "Il écoute de la musique ___ (faire) la vaisselle.", hint: "en faisant", answer: "en faisant" },
@@ -164,6 +166,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez selon le sens exprimé par le gérondif.",
+      transInstruction: { en: "Sort according to the meaning expressed by the gerund.", ar: "صنّف حسب المعنى الذي يعبر عنه صيغة المصدر.", fa: "بر اساس معنای بیان‌شده با مصدر فعل دسته‌بندی کنید.", ti: "ብትርጉም ጄሮንዲቭ ዝገልጾ ሸነኽ።", uk: "Розсортуйте за значенням, яке виражає gérondif." },
       categories: ["Simultanéité (deux actions en même temps)", "Manière (comment ?)", "Cause / condition"],
       items: [],
       pool: [
@@ -182,6 +185,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase avec un gérondif.",
+      transInstruction: { en: "Put the words back in the correct order to form a sentence with a gerund.", ar: "أعد ترتيب الكلمات لتكوين جملة بصيغة المصدر.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ای با مصدر فعل بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ምስ ጄሮንዲቭ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення з gérondif." },
       items: [],
       pool: [
         { sentence: "Il écoute de la musique en faisant la vaisselle.", words: ["Il", "écoute", "de", "la", "musique", "en", "faisant", "la", "vaisselle."] },
@@ -196,6 +200,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez le gérondif (« en + participe présent ») dans chaque phrase.",
+      transInstruction: { en: "Select a color, then identify the gerund (« en + present participle ») in each sentence.", ar: "اختر لوناً، ثم حدّد صيغة المصدر (« en + اسم الفاعل ») في كل جملة.", fa: "یک رنگ انتخاب کنید، سپس gérondif (« en + صفت فاعلی ») را در هر جمله مشخص کنید.", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ሓሳብ ጄሮንዲቭ (« en + ሕጂ ተሳታፋይ ») ፍለ።", uk: "Виберіть колір, потім визначте gérondif (« en + participe présent ») у кожному реченні." },
       colors: ["Gérondif"],
       items: [
         {
@@ -216,6 +221,7 @@ export const A2_GR_GERONDIF: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase avec un gérondif pour exprimer deux actions simultanées.\nCommencez par un sujet.",
+      transInstruction: { en: "Write a sentence with a gerund to express two simultaneous actions.\nStart with a subject.", ar: "اكتب جملة بصيغة المصدر للتعبير عن فعلين متزامنين.\nابدأ بفاعل.", fa: "یک جمله با مصدر فعل بنویسید تا دو عمل همزمان را بیان کنید.\nبا فاعل شروع کنید.", ti: "ሓደ ሓሳብ ብጄሮንዲቭ ክልተ ተሳሳዒ ተግባራት ንምግላጽ ጽሓፍ።\nብርእሲ ጀምር።", uk: "Напишіть речення з gérondif, щоб виразити дві одночасні дії.\nПочніть із підмета." },
       verbPool: ["travailler", "manger", "courir", "lire", "écouter", "parler"],
       verbPoolSize: 2,
     },

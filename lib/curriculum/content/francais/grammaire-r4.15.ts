@@ -165,6 +165,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Donnez la forme impérative du verbe.",
+      transInstruction: { en: "Give the imperative form of the verb.", ar: "أعطِ صيغة الأمر للفعل.", fa: "صورت امری فعل را بنویسید.", ti: "ናይ ኢምፔራቲቭ ቅርጺ ናይቲ ግሲ ሃብ።", uk: "Напишіть форму imperative дієслова." },
       items: [],
       pool: [
         { sentence: "parler → tu : ___", hint: "pas de -s pour les verbes en -er", answer: "Parle !" },
@@ -184,6 +185,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Mettez l'impératif à la forme négative.",
+      transInstruction: { en: "Put the imperative in the negative form.", ar: "حوّل صيغة الأمر إلى صيغة النفي.", fa: "حالت امری را به‌صورت منفی بنویسید.", ti: "ኢምፔራቲቭ ናብ ኣሉታዊ ቅርጺ ቀይር።", uk: "Поставте imperative у заперечній формі." },
       items: [],
       pool: [
         { sentence: "Parle ! → ___ !", hint: "ne...pas encadre le verbe", answer: "Ne parle pas" },
@@ -199,6 +201,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez selon l'usage de l'impératif.",
+      transInstruction: { en: "Sort according to the use of the imperative.", ar: "صنّف حسب استخدام صيغة الأمر.", fa: "بر اساس کاربرد حالت امری دسته‌بندی کنید.", ti: "ብኣጠቓቕማ ኢምፔራቲቭ ሸነኽ።", uk: "Розсортуйте за вживанням imperative." },
       categories: ["Ordre / interdiction", "Conseil", "Invitation"],
       items: [],
       pool: [
@@ -217,6 +220,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase à l'impératif.",
+      transInstruction: { en: "Put the words back in the correct order to form an imperative sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة بصيغة الأمر.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی امری بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ኢምፔራቲቭ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення в imperative." },
       items: [],
       pool: [
         { sentence: "Parle plus lentement !", words: ["Parle", "plus", "lentement"] },
@@ -231,6 +235,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez : le verbe à l'impératif (jaune) et la négation ne…pas (rouge).",
+      transInstruction: { en: "Select a color, then identify: the verb in the imperative (yellow) and the negation ne…pas (red).", ar: "اختر لوناً، ثم حدّد: الفعل بصيغة الأمر (أصفر) والنفي ne…pas (أحمر).", fa: "یک رنگ انتخاب کنید، سپس مشخص کنید: فعل در حالت امری (زرد) و نفی ne…pas (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ግሲ ኢምፔራቲቭ (ብጫ)ን ኣሉታ ne…pas (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте: дієслово в imperative (жовтий) і заперечення ne…pas (червоний)." },
       colors: ["Verbe impératif", "Négation"],
       items: [
         {
@@ -251,6 +256,7 @@ export const A2_CONJ_L05: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez un conseil ou un ordre à l'impératif (affirmatif ou négatif).\nUtilisez « tu » ou « vous ».",
+      transInstruction: { en: "Write a piece of advice or an order in the imperative (affirmative or negative).\nUse « tu » or « vous ».", ar: "اكتب نصيحة أو أمراً بصيغة الأمر (إيجابية أو سلبية).\nاستخدم « tu » أو « vous ».", fa: "یک توصیه یا دستور در حالت امری (مثبت یا منفی) بنویسید.\nاز « tu » یا « vous » استفاده کنید.", ti: "ሓደ ምክር ወይ ትእዛዝ ብኢምፔራቲቭ (ኣረጋግጺ ወይ ኣሉታዊ) ጽሓፍ።\n« tu » ወይ « vous » ተጠቐም።", uk: "Напишіть пораду або наказ у imperative (стверджувальній або заперечній формі).\nВикористайте « tu » або « vous »." },
       verbPool: ["parler", "finir", "manger", "écouter", "travailler", "partir"],
       verbPoolSize: 2,
     },

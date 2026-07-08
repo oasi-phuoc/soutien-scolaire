@@ -146,6 +146,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez la proposition principale avec le verbe au futur simple.",
+      transInstruction: { en: "Complete the main clause with the verb in the simple future.", ar: "أكمل الجملة الرئيسية بالفعل في المستقبل البسيط.", fa: "بند اصلی را با فعل در آینده‌ی ساده کامل کنید.", ti: "ነቲ ቀንዲ ክፋል ብግሲ ኣብ ቀሊል መጻኢ ምላእ።", uk: "Доповніть головне речення дієсловом у futur simple." },
       items: [],
       pool: [
         { sentence: "Si tu travailles bien, tu ___ (réussir) ton examen.", hint: "futur simple de réussir", answer: "réussiras" },
@@ -163,6 +164,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Complétez la proposition conditionnelle avec le verbe au présent.",
+      transInstruction: { en: "Complete the conditional clause with the verb in the present tense.", ar: "أكمل الجملة الشرطية بالفعل في المضارع.", fa: "بند شرطی را با فعل در زمان حال کامل کنید.", ti: "ነቲ ኮንዲሲዮነል ክፋል ብግሲ ኣብ ሕጂ ግዜ ምላእ።", uk: "Доповніть умовне речення дієсловом у теперішньому часі." },
       items: [],
       pool: [
         { sentence: "Si tu ___ (travailler) bien, tu réussiras.", hint: "présent de travailler", answer: "travailles" },
@@ -179,6 +181,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "qcm",
       title: "Exercice 3",
       instruction: "Choisissez la forme correcte dans la phrase avec « si ».",
+      transInstruction: { en: "Choose the correct form in the sentence with « si ».", ar: "اختر الصيغة الصحيحة في الجملة مع « si ».", fa: "صورت درست را در جمله با « si » انتخاب کنید.", ti: "ኣብ ሓሳብ ምስ « si » ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму в реченні з « si »." },
       items: [],
       pool: [
         { sentence: "Si tu ___, nous pourrons partir.", choices: ["viens", "viendras", "venais", "viendrais"], correctIdx: 0 },
@@ -193,6 +196,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez chaque partie de phrase selon sa fonction.",
+      transInstruction: { en: "Sort each part of the sentence according to its function.", ar: "صنّف كل جزء من الجملة حسب وظيفته.", fa: "هر بخش جمله را بر اساس نقش آن دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ክፋል ሓሳብ ብተግባሩ ሸነኽ።", uk: "Розсортуйте кожну частину речення за її функцією." },
       categories: ["Proposition si (présent)", "Proposition principale (futur)"],
       items: [],
       pool: [
@@ -211,6 +215,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase hypothétique complète.",
+      transInstruction: { en: "Put the words back in the correct order to form a complete hypothetical sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة افتراضية كاملة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی فرضی کامل بسازید.", ti: "ነተን ቃላት ሙሉእ ሃይፎቴዚስ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити повне гіпотетичне речення." },
       items: [],
       pool: [
         { sentence: "Si tu viens, nous mangerons ensemble.", words: ["Si", "tu", "viens,", "nous", "mangerons", "ensemble."] },
@@ -224,6 +229,7 @@ export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase hypothétique complète avec « si + présent → futur ».\nUtilisez les verbes proposés.",
+      transInstruction: { en: "Write a complete hypothetical sentence with « si + présent → futur ».\nUse the verbs provided.", ar: "اكتب جملة افتراضية كاملة مع « si + مضارع → مستقبل ».\nاستخدم الأفعال المقترحة.", fa: "یک جمله‌ی فرضی کامل با « si + حال → آینده » بنویسید.\nاز افعال پیشنهادی استفاده کنید.", ti: "ሓደ ሙሉእ ሃይፎቴዚስ ሓሳብ ምስ « si + ሕጂ → መጻኢ » ጽሓፍ።\nእቶም ዝቐረቡ ግሲታት ተጠቐም።", uk: "Напишіть повне гіпотетичне речення з « si + présent → futur ».\nВикористайте запропоновані дієслова." },
       verbPool: ["travailler", "partir", "venir", "avoir", "faire", "étudier"],
       verbPoolSize: 2,
     },

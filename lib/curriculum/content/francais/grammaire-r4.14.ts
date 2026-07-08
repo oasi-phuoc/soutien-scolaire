@@ -113,6 +113,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe au conditionnel présent.",
+      transInstruction: { en: "Conjugate the verb in the present conditional.", ar: "صرّف الفعل في صيغة الشرط الحاضرة.", fa: "فعل را در حالت شرطی حال صرف کنید.", ti: "ነቲ ግሲ ኣብ ሕጂ ኮንዲሲዮነል ኣጻርይ።", uk: "Відмінюйте дієслово в conditionnel présent." },
       items: [],
       pool: [
         { sentence: "J'___ (aimer) voyager en Italie.", hint: "aimer + -ais", answer: "aimerais" },
@@ -132,6 +133,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Transformez la demande directe en demande polie au conditionnel.",
+      transInstruction: { en: "Transform the direct request into a polite request in the conditional.", ar: "حوّل الطلب المباشر إلى طلب مهذب بصيغة الشرط.", fa: "درخواست مستقیم را به درخواست مودبانه در حالت شرطی تبدیل کنید.", ti: "ቀጥታ ሕቶ ናብ ክብሪ ዘለዎ ሕቶ ኮንዲሲዮነል ቀይር።", uk: "Перетворіть пряме прохання на ввічливе в conditionnel." },
       items: [],
       pool: [
         { sentence: "Donnez-moi un café ! → Je ___ (vouloir) un café, s'il vous plaît.", hint: "voudr- + -ais", answer: "voudrais" },
@@ -146,6 +148,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase selon l'usage du conditionnel.",
+      transInstruction: { en: "Sort each sentence according to the use of the conditional.", ar: "صنّف كل جملة حسب استخدام صيغة الشرط.", fa: "هر جمله را بر اساس کاربرد حالت شرطی دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብኣጠቓቕማ ኮንዲሲዮነል ሸነኽ።", uk: "Розсортуйте кожне речення за вживанням conditionnel." },
       categories: ["Demande polie", "Conseil", "Souhait / rêve"],
       items: [],
       pool: [
@@ -164,6 +167,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase au conditionnel.",
+      transInstruction: { en: "Put the words back in the correct order to form a conditional sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة بصيغة الشرط.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی شرطی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ኮንዲሲዮነል ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення в conditionnel." },
       items: [],
       pool: [
         { sentence: "Je voudrais un café, s'il vous plaît.", words: ["Je", "voudrais", "un", "café,", "s'il", "vous", "plaît."] },
@@ -178,6 +182,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez les verbes au conditionnel dans chaque phrase.",
+      transInstruction: { en: "Select a color, then identify the verbs in the conditional in each sentence.", ar: "اختر لوناً، ثم حدّد الأفعال بصيغة الشرط في كل جملة.", fa: "یک رنگ انتخاب کنید، سپس افعال در حالت شرطی را در هر جمله مشخص کنید.", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ኣብ ነፍሲ ወከፍ ሓሳብ ኮንዲሲዮነል ግሲታት ፍለ።", uk: "Виберіть колір, потім визначте дієслова в conditionnel у кожному реченні." },
       colors: ["Conditionnel"],
       items: [
         {
@@ -198,6 +203,7 @@ export const A2_CONJ_L04: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une demande polie ou un souhait au conditionnel.\nCommencez par « Je voudrais… », « Tu pourrais… » ou « J'aimerais… ».",
+      transInstruction: { en: "Write a polite request or wish in the conditional.\nStart with « Je voudrais… », « Tu pourrais… » or « J'aimerais… ».", ar: "اكتب طلباً مهذباً أو أمنية بصيغة الشرط.\nابدأ بـ « Je voudrais… » أو « Tu pourrais… » أو « J'aimerais… ».", fa: "یک درخواست مودبانه یا آرزو در حالت شرطی بنویسید.\nبا « Je voudrais… »، « Tu pourrais… » یا « J'aimerais… » شروع کنید.", ti: "ሓደ ክብሪ ዘለዎ ሕቶ ወይ ድሌት ብኮንዲሲዮነል ጽሓፍ።\nብ « Je voudrais… »፣ « Tu pourrais… » ወይ « J'aimerais… » ጀምር።", uk: "Напишіть ввічливе прохання або побажання в conditionnel.\nПочніть з « Je voudrais… », « Tu pourrais… » або « J'aimerais… »." },
       verbPool: ["vouloir", "pouvoir", "aimer", "devoir", "préférer", "faire"],
       verbPoolSize: 2,
     },

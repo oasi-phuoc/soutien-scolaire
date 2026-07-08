@@ -137,6 +137,7 @@ export const A2_GR_L07: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Complétez chaque phrase avec Est-ce que ou Est-ce qu'.",
+      transInstruction: { en: "Complete each sentence with Est-ce que or Est-ce qu'.", ar: "أكمل كل جملة بـ Est-ce que أو Est-ce qu'.", fa: "هر جمله را با Est-ce que یا Est-ce qu' کامل کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብ Est-ce que ወይ Est-ce qu' ምላእ።", uk: "Доповніть кожне речення Est-ce que або Est-ce qu'." },
       items: [],
       poolSize: 5,
       pool: [
@@ -155,6 +156,7 @@ export const A2_GR_L07: GrammarLesson = {
       type: "word_order",
       title: "Évaluation — Question 2",
       instruction: "Remettez les mots dans le bon ordre pour former une question avec l'inversion.",
+      transInstruction: { en: "Put the words back in the correct order to form a question with inversion.", ar: "أعد ترتيب الكلمات لتكوين سؤال بالانقلاب.", fa: "کلمات را به ترتیب درست بچینید تا سؤالی با وارونگی بسازید.", ti: "ነተን ቃላት ሕቶ ምስ ምትእስሳር ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити запитання з інверсією." },
       allowPartialValidation: true,
       items: [],
       poolSize: 4,

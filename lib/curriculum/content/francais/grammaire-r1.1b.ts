@@ -510,6 +510,7 @@ export const A1_CONJ_L00: ConjLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez le bon pronom personnel sujet.",
+      transInstruction: { en: "Choose the correct subject personal pronoun.", ar: "اختر ضمير الفاعل الشخصي الصحيح.", fa: "ضمیر شخصی فاعلی درست را انتخاب کنید.", ti: "ቅኑዕ ናይ ርእሲ ውልቃዊ ጸጋ ቃል ምረጽ።", uk: "Оберіть правильний особовий займенник підмета." },
       items: [],
       poolSize: 5,
       pool: [
@@ -529,6 +530,7 @@ export const A1_CONJ_L00: ConjLesson = {
       type: "fill",
       title: "Évaluation — Question 2",
       instruction: "Complétez avec le bon pronom personnel.",
+      transInstruction: { en: "Complete with the correct personal pronoun.", ar: "أكمل بالضمير الشخصي الصحيح.", fa: "با ضمیر شخصی درست کامل کنید.", ti: "ብቅኑዕ ውልቃዊ ጸጋ ቃል ምላእ።", uk: "Доповніть правильним особовим займенником." },
       items: [],
       poolSize: 5,
       pool: [
@@ -548,6 +550,7 @@ export const A1_CONJ_L00: ConjLesson = {
       type: "classify",
       title: "Évaluation — Question 3",
       instruction: "Classez chaque pronom : singulier ou pluriel.",
+      transInstruction: { en: "Sort each pronoun: singular or plural.", ar: "صنّف كل ضمير: مفرد أم جمع.", fa: "هر ضمیر را دسته‌بندی کنید: مفرد یا جمع.", ti: "ነፍሲ ወከፍ ጸጋ ቃል ሸነኽ፦ ነጠላ ወይ ብዙሕ።", uk: "Розсортуйте кожен займенник: однина чи множина." },
       categories: ["Singulier", "Pluriel"],
       items: [],
       poolSize: 6,

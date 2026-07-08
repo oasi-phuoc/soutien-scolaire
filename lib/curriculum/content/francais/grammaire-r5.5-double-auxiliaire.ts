@@ -84,6 +84,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Choisissez l'auxiliaire correct : être ou avoir.",
+      transInstruction: { en: "Choose the correct auxiliary: être or avoir.", ar: "اختر الفعل المساعد الصحيح: être أو avoir.", fa: "فعل کمکی درست را انتخاب کنید: être یا avoir.", ti: "ቅኑዕ ሓጋዚ ግሲ ምረጽ፦ être ወይ avoir.", uk: "Оберіть правильне допоміжне дієслово: être або avoir." },
       items: [],
       pool: [
         { sentence: "Elle ___ sortie de la maison.", choices: ["est", "a", "sont", "ont"], correctIdx: 0 },
@@ -105,6 +106,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe au passé composé. Choisissez être ou avoir selon le contexte.",
+      transInstruction: { en: "Conjugate the verb in the passé composé. Choose être or avoir according to the context.", ar: "صرّف الفعل في الماضي المركب. اختر être أو avoir حسب السياق.", fa: "فعل را در گذشته‌ی مرکب صرف کنید. بر اساس متن être یا avoir را انتخاب کنید.", ti: "ነቲ ግሲ ኣብ ሕሉፍ ውሁድ ኣጻርይ። ብኣውድ être ወይ avoir ምረጽ።", uk: "Відмінюйте дієслово в passé composé. Оберіть être або avoir залежно від контексту." },
       items: [],
       pool: [
         { sentence: "Elle ___ (sortir) de la maison.", hint: "sans COD → être", answer: "est sortie" },
@@ -124,6 +126,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase : être (sans COD) ou avoir (avec COD) ?",
+      transInstruction: { en: "Sort each sentence: être (without COD) or avoir (with COD)?", ar: "صنّف كل جملة: être (بدون مفعول مباشر) أم avoir (مع مفعول مباشر)؟", fa: "هر جمله را دسته‌بندی کنید: être (بدون مفعول مستقیم) یا avoir (با مفعول مستقیم)؟", ti: "ነፍሲ ወከፍ ሓሳብ ሸነኽ፦ être (ብዘይ COD) ወይ avoir (ምስ COD)?", uk: "Розсортуйте кожне речення: être (без COD) чи avoir (з COD)?" },
       categories: ["être (sans COD)", "avoir (avec COD)"],
       items: [],
       pool: [
@@ -146,6 +149,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Elle est sortie de la maison.", words: ["Elle", "est", "sortie", "de", "la", "maison."] },
@@ -161,6 +165,7 @@ export const A1_GR_DOUBLE_AUXILIAIRE: GrammarLesson = {
       type: "write",
       title: "Exercice 5",
       instruction: "Écrivez une phrase au passé composé avec un verbe à double auxiliaire.\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence in the passé composé with a verb that can take both auxiliaries.\nUse the verb provided.", ar: "اكتب جملة في الماضي المركب بفعل له مساعدان.\nاستخدم الفعل المقترح.", fa: "یک جمله در گذشته‌ی مرکب با فعلی که دو فعل کمکی دارد بنویسید.\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብሕሉፍ ውሁድ ምስ ክልተ ሓጋዚ ዘለዎ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення в passé composé з дієсловом із подвійним допоміжним.\nВикористайте запропоноване дієслово." },
       verbPool: ["sortir", "monter", "descendre", "rentrer", "retourner", "passer"],
       verbPoolSize: 2,
     },

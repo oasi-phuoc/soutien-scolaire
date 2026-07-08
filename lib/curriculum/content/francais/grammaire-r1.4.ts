@@ -318,6 +318,7 @@ export const A1_GR_L03: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez la forme correcte.",
+      transInstruction: { en: "Choose the correct form.", ar: "اختر الصيغة الصحيحة.", fa: "صورت درست را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть правильну форму." },
       items: [],
       poolSize: 5,
       pool: [
@@ -337,6 +338,7 @@ export const A1_GR_L03: GrammarLesson = {
       type: "classify",
       title: "Évaluation — Question 2",
       instruction: "Classez chaque mot : masculin ou féminin.",
+      transInstruction: { en: "Sort each word: masculine or feminine.", ar: "صنّف كل كلمة: مذكر أم مؤنث.", fa: "هر کلمه را دسته‌بندی کنید: مذکر یا مؤنث.", ti: "ነፍሲ ወከፍ ቃል ሸነኽ፦ ተባዕታይ ወይ ኣንስታይ።", uk: "Розсортуйте кожне слово: чоловічий чи жіночий рід." },
       categories: ["Masculin", "Féminin"],
       items: [],
       poolSize: 6,

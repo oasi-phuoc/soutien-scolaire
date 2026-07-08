@@ -63,6 +63,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Donnez la base de l'imparfait pour chaque verbe irrégulier.",
+      transInstruction: { en: "Give the imperfect stem for each irregular verb.", ar: "أعطِ جذر الماضي الناقص لكل فعل شاذ.", fa: "ریشه‌ی گذشته‌ی ناتمام هر فعل بی‌قاعده را بنویسید.", ti: "ንነፍሲ ወከፍ ዘይስሩዕ ግሲ መሰረት ዘይተዛዘመ ግዜ ሃብ።", uk: "Напишіть основу imparfait для кожного неправильного дієслова." },
       items: [
         { sentence: "être → base : ___", hint: "totalement irrégulier", answer: "ét-" },
         { sentence: "avoir → base : ___", hint: "nous avons → av-", answer: "av-" },
@@ -76,6 +77,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe irrégulier à l'imparfait.",
+      transInstruction: { en: "Conjugate the irregular verb in the imperfect.", ar: "صرّف الفعل الشاذ في الماضي الناقص.", fa: "فعل بی‌قاعده را در زمان گذشته‌ی ناتمام صرف کنید.", ti: "ነቲ ዘይስሩዕ ግሲ ኣብ ዘይተዛዘመ ግዜ ኣጻርይ።", uk: "Відмінюйте неправильне дієслово в imparfait." },
       items: [],
       pool: [
         { sentence: "Il ___ (être) content.", hint: "ét- + ait", answer: "était" },
@@ -102,6 +104,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "qcm",
       title: "Exercice 3",
       instruction: "Choisissez la forme correcte à l'imparfait.",
+      transInstruction: { en: "Choose the correct imperfect form.", ar: "اختر الصيغة الصحيحة في الماضي الناقص.", fa: "صورت درست در زمان گذشته‌ی ناتمام را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ኣብ ዘይተዛዘመ ግዜ ምረጽ።", uk: "Оберіть правильну форму в imparfait." },
       items: [],
       pool: [
         { sentence: "Il ___ froid cet hiver-là.", choices: ["faisait", "fesait", "faisaient", "ferait"], correctIdx: 0 },
@@ -117,6 +120,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Associez chaque verbe à sa base à l'imparfait.",
+      transInstruction: { en: "Match each verb to its imperfect stem.", ar: "اربط كل فعل بجذره في الماضي الناقص.", fa: "هر فعل را با ریشه‌ی آن در زمان گذشته‌ی ناتمام مطابقت دهید.", ti: "ነፍሲ ወከፍ ግሲ ምስ ናይ ዘይተዛዘመ ግዜ መሰረት ኣሰማማዕ።", uk: "Поєднайте кожне дієслово з його основою в imparfait." },
       categories: ["ét-", "av-", "fais-", "all-"],
       items: [
         { word: "être", categoryIdx: 0 },
@@ -129,6 +133,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Il faisait beau tous les étés.", words: ["Il", "faisait", "beau", "tous", "les", "étés."] },
@@ -144,6 +149,7 @@ export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase à l'imparfait avec un verbe irrégulier.\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence in the imperfect with an irregular verb.\nUse the verb provided.", ar: "اكتب جملة في الماضي الناقص بفعل شاذ.\nاستخدم الفعل المقترح.", fa: "یک جمله در زمان گذشته‌ی ناتمام با فعل بی‌قاعده بنویسید.\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብዘይተዛዘመ ግዜ ምስ ዘይስሩዕ ግሲ ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення в imparfait з неправильним дієсловом.\nВикористайте запропоноване дієслово." },
       verbPool: ["être", "avoir", "faire", "aller", "venir", "prendre"],
       verbPoolSize: 2,
     },

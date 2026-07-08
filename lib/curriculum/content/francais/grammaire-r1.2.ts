@@ -204,6 +204,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "qcm",
       title: "Exercice 1 — Être ou avoir ?",
       instruction: "Choisis le bon verbe pour compléter la phrase.",
+      transInstruction: { en: "Choose the correct verb to complete the sentence.", ar: "اختر الفعل الصحيح لإكمال الجملة.", fa: "فعل درست را برای کامل کردن جمله انتخاب کنید.", ti: "ንሓሳብ ንምምላእ ቅኑዕ ግሲ ምረጽ።", uk: "Оберіть правильне дієслово, щоб доповнити речення." },
       items: [],
       poolSize: 5,
       toggleChoices: true,
@@ -264,6 +265,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "fill",
       title: "Exercice 2 — Complétez avec être",
       instruction: "Écris la bonne forme du verbe être.",
+      transInstruction: { en: "Write the correct form of the verb être.", ar: "اكتب الصيغة الصحيحة للفعل être.", fa: "صورت درست فعل être را بنویسید.", ti: "ቅኑዕ ቅርጺ ናይቲ ግሲ être ጽሓፍ።", uk: "Напишіть правильну форму дієслова être." },
       items: [],
       poolSize: 5,
       pool: [
@@ -323,6 +325,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "fill",
       title: "Exercice 3 — Complétez avec avoir",
       instruction: "Écris la bonne forme du verbe avoir.",
+      transInstruction: { en: "Write the correct form of the verb avoir.", ar: "اكتب الصيغة الصحيحة للفعل avoir.", fa: "صورت درست فعل avoir را بنویسید.", ti: "ቅኑዕ ቅርጺ ናይቲ ግሲ avoir ጽሓፍ።", uk: "Напишіть правильну форму дієслова avoir." },
       items: [],
       poolSize: 5,
       pool: [
@@ -382,6 +385,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "fill",
       title: "Exercice 4 — Conjuguez le verbe",
       instruction: "Écris la bonne forme de être ou avoir.",
+      transInstruction: { en: "Write the correct form of être or avoir.", ar: "اكتب الصيغة الصحيحة من être أو avoir.", fa: "صورت درست être یا avoir را بنویسید.", ti: "ቅኑዕ ቅርጺ être ወይ avoir ጽሓፍ።", uk: "Напишіть правильну форму être або avoir." },
       items: [],
       poolSize: 5,
       pool: [
@@ -440,6 +444,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "write",
       title: "Exercice 5 — Écrivez avec être",
       instruction: "Écrivez 2 phrases avec le verbe être.",
+      transInstruction: { en: "Write 2 sentences with the verb être.", ar: "اكتب جملتين باستخدام الفعل être.", fa: "۲ جمله با فعل être بنویسید.", ti: "2 ሓሳባት ብግሲ être ጽሓፍ።", uk: "Напишіть 2 речення з дієсловом être." },
       prompts: ["Phrase 1 :", "Phrase 2 :"],
       verb: "être",
     },
@@ -447,6 +452,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "write",
       title: "Exercice 6 — Écrivez avec avoir",
       instruction: "Écrivez 2 phrases avec le verbe avoir.",
+      transInstruction: { en: "Write 2 sentences with the verb avoir.", ar: "اكتب جملتين باستخدام الفعل avoir.", fa: "۲ جمله با فعل avoir بنویسید.", ti: "2 ሓሳባት ብግሲ avoir ጽሓፍ።", uk: "Напишіть 2 речення з дієсловом avoir." },
       prompts: ["Phrase 1 :", "Phrase 2 :"],
       verb: "avoir",
     },
@@ -457,6 +463,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez être ou avoir et la bonne forme.",
+      transInstruction: { en: "Choose être or avoir and the correct form.", ar: "اختر être أو avoir والصيغة الصحيحة.", fa: "être یا avoir و صورت درست را انتخاب کنید.", ti: "être ወይ avoirን ቅኑዕ ቅርጺ ምረጽ።", uk: "Оберіть être або avoir і правильну форму." },
       items: [],
       poolSize: 5,
       pool: [
@@ -476,6 +483,7 @@ export const A1_CONJ_L01: ConjLesson = {
       type: "fill",
       title: "Évaluation — Question 2",
       instruction: "Complétez avec la bonne forme d'être ou avoir.",
+      transInstruction: { en: "Complete with the correct form of être or avoir.", ar: "أكمل بالصيغة الصحيحة من être أو avoir.", fa: "با صورت درست être یا avoir کامل کنید.", ti: "ብቅኑዕ ቅርጺ être ወይ avoir ምላእ።", uk: "Доповніть правильною формою être або avoir." },
       items: [],
       poolSize: 5,
       pool: [

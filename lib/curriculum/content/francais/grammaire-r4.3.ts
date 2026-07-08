@@ -156,6 +156,7 @@ export const A1_CONJ_L28: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec la bonne forme de « venir de ».",
+      transInstruction: { en: "Complete with the correct form of « venir de ».", ar: "أكمل بالصيغة الصحيحة من « venir de ».", fa: "با صورت درست « venir de » کامل کنید.", ti: "ብቅኑዕ ቅርጺ « venir de » ምላእ።", uk: "Доповніть правильною формою « venir de »." },
       items: [],
       pool: [
         { sentence: "Je ___ manger.", hint: "venir de (je)", answer: "viens de" },
@@ -175,6 +176,7 @@ export const A1_CONJ_L28: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Complétez avec « être en train de » (ou d') suivi de l'infinitif.",
+      transInstruction: { en: "Complete with « être en train de » (or d') followed by the infinitive.", ar: "أكمل بـ « être en train de » (أو d') متبوعاً بالمصدر.", fa: "با « être en train de » (یا d') به‌علاوه‌ی مصدر کامل کنید.", ti: "ብ « être en train de » (ወይ d') ተኸታሊ ኢንፊኒቲቭ ምላእ።", uk: "Доповніть « être en train de » (або d') з інфінітивом." },
       items: [],
       pool: [
         { sentence: "Je ___ travailler sur ce projet.", hint: "suis en train de", answer: "suis en train de" },
@@ -194,6 +196,7 @@ export const A1_CONJ_L28: ConjLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase dans la bonne catégorie.",
+      transInstruction: { en: "Sort each sentence into the correct category.", ar: "صنّف كل جملة في الفئة الصحيحة.", fa: "هر جمله را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ሓሳብ ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожне речення у правильну категорію." },
       categories: ["Passé récent", "Présent continu", "Futur proche"],
       items: [],
       pool: [
@@ -215,6 +218,7 @@ export const A1_CONJ_L28: ConjLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Je viens de manger.", words: ["Je", "viens", "de", "manger."] },
@@ -231,6 +235,7 @@ export const A1_CONJ_L28: ConjLesson = {
       type: "write",
       title: "Exercice 5",
       instruction: "Écrivez une phrase avec « venir de » ou « être en train de ».\nUtilisez le verbe proposé.",
+      transInstruction: { en: "Write a sentence with « venir de » or « être en train de ».\nUse the verb provided.", ar: "اكتب جملة بـ « venir de » أو « être en train de ».\nاستخدم الفعل المقترح.", fa: "یک جمله با « venir de » یا « être en train de » بنویسید.\nاز فعل پیشنهادی استفاده کنید.", ti: "ሓደ ሓሳብ ብ « venir de » ወይ « être en train de » ጽሓፍ።\nእቲ ዝቐረበ ግሲ ተጠቐም።", uk: "Напишіть речення з « venir de » або « être en train de ».\nВикористайте запропоноване дієслово." },
       verbPool: ["manger", "travailler", "arriver", "finir", "partir", "étudier", "lire", "cuisiner"],
       verbPoolSize: 3,
     },

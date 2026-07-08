@@ -17,10 +17,10 @@ export const MATH_G6_7_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "g5-7-e1", promptFr: "Deux figures semblables, k = 4. Un côté de 3 cm → côté image = ?", type: "number", acceptable: ["12"] },
-      { id: "g5-7-e2", promptFr: "k = 3. Rapport des aires = ?", type: "number", acceptable: ["9"] },
-      { id: "g5-7-e3", promptFr: "k = 2. Périmètre original = 10 cm. Périmètre image = ?", type: "number", acceptable: ["20"] },
-      { id: "g5-7-e4", promptFr: "k = 1/3. Un côté de 9 cm → côté image = ?", type: "number", acceptable: ["3"] },
-      { id: "g5-7-e5", promptFr: "k = 2. Aire originale = 8 cm². Aire image = ?", type: "number", acceptable: ["32"] },
+      { id: "g6-7-e1", promptFr: "Deux figures semblables, k = 4. Un côté de 3 cm → côté image = ?", type: "number", acceptable: ["12"] },
+      { id: "g6-7-e2", promptFr: "k = 3. Rapport des aires = ?", type: "number", acceptable: ["9"] },
+      { id: "g6-7-e3", promptFr: "k = 2. Périmètre original = 10 cm. Périmètre image = ?", type: "number", acceptable: ["20"] },
+      { id: "g6-7-e4", promptFr: "k = 1/3. Un côté de 9 cm → côté image = ?", type: "number", acceptable: ["3"] },
+      { id: "g6-7-e5", promptFr: "k = 2. Aire originale = 8 cm². Aire image = ?", type: "number", acceptable: ["32"] },
     ],
   };

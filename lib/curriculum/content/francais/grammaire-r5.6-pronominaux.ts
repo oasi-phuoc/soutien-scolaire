@@ -62,6 +62,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe pronominal au passé composé. Accordez le participe passé si nécessaire.",
+      transInstruction: { en: "Conjugate the reflexive verb in the passé composé. Agree the past participle if necessary.", ar: "صرّف الفعل الانعكاسي في الماضي المركب. أعرب اسم المفعول عند الضرورة.", fa: "فعل انعکاسی را در گذشته‌ی مرکب صرف کنید. در صورت لزوم صفت مفعولی را مطابقت دهید.", ti: "ነቲ ርእሰ-ግሲ ኣብ ሕሉፍ ውሁድ ኣጻርይ። ኣድላዪ እንተኾነ ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።", uk: "Відмінюйте зворотне дієслово в passé composé. Узгодьте дієприкметник за потреби." },
       items: [],
       pool: [
         { sentence: "Je ___ (se lever) tôt. [masc.]", hint: "me suis levé", answer: "me suis levé" },
@@ -80,6 +81,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Accordez correctement le participe passé du verbe pronominal.",
+      transInstruction: { en: "Agree the past participle of the reflexive verb correctly.", ar: "أعرب اسم المفعول للفعل الانعكاسي بشكل صحيح.", fa: "صفت مفعولی فعل انعکاسی را به‌درستی مطابقت دهید.", ti: "ናይ ሕሉፍ ተሳታፋይ ናይ ርእሰ-ግሲ ብትኽክል ኣሰማማዕ።", uk: "Правильно узгодьте дієприкметник зворотного дієслова." },
       items: [],
       pool: [
         { sentence: "Elle s'est ___ (laver).", hint: "se = COD → accord fém.", answer: "lavée" },
@@ -95,6 +97,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Mettez la phrase à la forme négative.",
+      transInstruction: { en: "Put the sentence in the negative form.", ar: "حوّل الجملة إلى صيغة النفي.", fa: "جمله را به‌صورت منفی بنویسید.", ti: "ነቲ ሓሳብ ናብ ኣሉታዊ ቅርጺ ቀይር።", uk: "Поставте речення у заперечній формі." },
       items: [],
       pool: [
         { sentence: "Je ___ (ne pas se lever) tôt.", hint: "ne me suis pas levé(e)", answer: "ne me suis pas levé" },
@@ -109,6 +112,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Le pronom réfléchi est-il COD (accord du participe) ou COI (pas d'accord) ?",
+      transInstruction: { en: "Is the reflexive pronoun a COD (participle agreement) or COI (no agreement)?", ar: "هل الضمير الانعكاسي مفعولاً مباشراً (إعراب اسم المفعول) أم غير مباشر (بدون إعراب)؟", fa: "آیا ضمیر انعکاسی مفعول مستقیم است (مطابقت صفت مفعولی) یا غیرمستقیم (بدون مطابقت)؟", ti: "ናይ ርእሲ ጸጋ COD (ምስማዕ ናይ ሕሉፍ ተሳታፋይ) ወይ COI (ዘይምስማዕ) ድዩ?", uk: "Зворотний займенник — COD (узгодження дієприкметника) чи COI (без узгодження)?" },
       categories: ["Pronom = COD → accord", "Pronom = COI → pas d'accord"],
       items: [
         { word: "Elle s'est lavée.", categoryIdx: 0 },
@@ -123,6 +127,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       pool: [
         { sentence: "Elle s'est levée tôt.", words: ["Elle", "s'est", "levée", "tôt."] },
@@ -137,6 +142,7 @@ export const A1_GR_PRONOMINAUX_PASSE: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase avec un verbe pronominal au passé composé.\nN'oubliez pas d'accorder le participe passé si nécessaire.",
+      transInstruction: { en: "Write a sentence with a reflexive verb in the passé composé.\nDon't forget to agree the past participle if necessary.", ar: "اكتب جملة بفعل انعكاسي في الماضي المركب.\nلا تنسَ إعراب اسم المفعول عند الضرورة.", fa: "یک جمله با فعل انعکاسی در گذشته‌ی مرکب بنویسید.\nدر صورت لزوم صفت مفعولی را مطابقت دهید.", ti: "ሓደ ሓሳብ ብርእሰ-ግሲ ኣብ ሕሉፍ ውሁድ ጽሓፍ።\nኣድላዪ እንተኾነ ናይ ሕሉፍ ተሳታፋይ ኣሰማማዕ።", uk: "Напишіть речення із зворотним дієсловом у passé composé.\nНе забудьте узгодити дієприкметник за потреби." },
       verbPool: ["se lever", "se coucher", "se préparer", "se rencontrer", "s'habiller", "se souvenir"],
       verbPoolSize: 2,
     },

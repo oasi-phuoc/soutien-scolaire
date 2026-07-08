@@ -274,6 +274,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Quelle préposition est illustrée ?",
+      transInstruction: { en: "Which preposition is illustrated?", ar: "أي حرف جر يُوضَّح؟", fa: "کدام حرف اضافه نشان داده شده است؟", ti: "እቲ ዝተረኣየ ቅድመ-ስም እንታይ እዩ?", uk: "Який прийменник ілюструється?" },
       svgChoiceLayout: "stacked",
       items: [],
       pool: [
@@ -302,6 +303,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "fill_select",
       title: "Exercice 2",
       instruction: "Associez chaque définition à la bonne préposition. Choisissez la lettre correspondante.",
+      transInstruction: { en: "Match each definition to the correct preposition. Choose the corresponding letter.", ar: "اربط كل تعريف بالحرف الجر الصحيح. اختر الحرف المناسب.", fa: "هر تعریف را با حرف اضافه‌ی درست مطابقت دهید. حرف مربوطه را انتخاب کنید.", ti: "ነፍሲ ወከፍ ትርጉም ምስ ቅኑዕ ቅድመ-ስም ኣሰማማዕ። እቲ ተዛማዲ ፊደል ምረጽ።", uk: "Поєднайте кожне визначення з правильним прийменником. Оберіть відповідну літеру." },
       letterSelect: true,
       wordBank: ["sur", "sous", "dans", "devant", "derrière", "entre", "à côté de", "en face de"],
       items: [],
@@ -323,6 +325,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "fill_select",
       title: "Exercice 3",
       instruction: "Complétez les phrases avec le bon article (du, de la, de l', des).",
+      transInstruction: { en: "Complete the sentences with the correct article (du, de la, de l', des).", ar: "أكمل الجمل بالأداة الصحيحة (du, de la, de l', des).", fa: "جمله‌ها را با حرف تعریف درست کامل کنید (du, de la, de l', des).", ti: "ሓሳባት ብቅኑዕ ዓንቀጽ ምላእ (du, de la, de l', des).", uk: "Доповніть речення правильним артиклем (du, de la, de l', des)." },
       hideWordBank: true,
       wordBank: ["du", "de la", "de l'", "des"],
       items: [],
@@ -369,6 +372,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "trueFalse",
       title: "Exercice 4",
       instruction: "Regardez l'image et sélectionnez Vrai ou Faux.",
+      transInstruction: { en: "Look at the image and select True or False.", ar: "انظر إلى الصورة واختر صحيح أو خطأ.", fa: "به تصویر نگاه کنید و درست یا نادرست را انتخاب کنید.", ti: "ነቲ ምስሊ ርአ ትክክል ወይ ሓሶት ምረጽ።", uk: "Подивіться на зображення та оберіть Правда або Неправда." },
       items: [],
       poolSize: 5,
       imagePool: [
@@ -591,6 +595,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre.",
+      transInstruction: { en: "Put the words back in the correct order.", ar: "أعد ترتيب الكلمات.", fa: "کلمات را به ترتیب صحیح بگذارید.", ti: "ቃላት ናብ ቅኑዕ ቅደም-ሰዓብ ምለሶም።", uk: "Розставте слова в правильному порядку." },
       items: [],
       pool: [
         // A1 — prépositions simples, objets courants
@@ -635,6 +640,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Regardez l'image. Écrivez une phrase complète qui décrit la position des deux objets.\nLa phrase commence par une majuscule et se termine par un point.",
+      transInstruction: { en: "Look at the image. Write a complete sentence describing the position of the two objects.\nThe sentence starts with a capital letter and ends with a full stop.", ar: "انظر إلى الصورة. اكتب جملة كاملة تصف موضع الشيئين.\nتبدأ الجملة بحرف كبير وتنتهي بنقطة.", fa: "به تصویر نگاه کنید. یک جمله‌ی کامل بنویسید که موقعیت دو شیء را توصیف کند.\nجمله با حرف بزرگ شروع و با نقطه تمام می‌شود.", ti: "ነቲ ምስሊ ርአ። ነቲ ኣቀማምጣ ክልተ ኣቕሑት ዝገልጽ ሙሉእ ሓሳብ ጽሓፍ።\nእቲ ሓሳብ ብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።", uk: "Подивіться на зображення. Напишіть повне речення, що описує положення двох предметів.\nРечення починається з великої літери і закінчується крапкою." },
       promptLayout: "stacked",
       promptPoolSize: 5,
       imagePool: [
@@ -702,6 +708,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 1",
       instruction: "Choisissez la bonne préposition de lieu.",
+      transInstruction: { en: "Choose the correct preposition of place.", ar: "اختر حرف الجر الصحيح للمكان.", fa: "حرف اضافه‌ی مکانی درست را انتخاب کنید.", ti: "ቅኑዕ ናይ ቦታ ቅድመ-ስም ምረጽ።", uk: "Оберіть правильний прийменник місця." },
       items: [],
       poolSize: 5,
       pool: [
@@ -721,6 +728,7 @@ export const A1_GR_L11: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 2",
       instruction: "Complétez avec la bonne préposition de lieu.",
+      transInstruction: { en: "Complete with the correct preposition of place.", ar: "أكمل بحرف الجر الصحيح للمكان.", fa: "با حرف اضافه‌ی مکانی درست کامل کنید.", ti: "ብቅኑዕ ናይ ቦታ ቅድመ-ስም ምላእ።", uk: "Доповніть правильним прийменником місця." },
       items: [],
       poolSize: 5,
       pool: [

@@ -214,6 +214,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Sélectionnez la forme de la phrase.",
+      transInstruction: { en: "Select the form of the sentence.", ar: "اختر صيغة الجملة.", fa: "صورت جمله را انتخاب کنید.", ti: "ቅርጺ ናይቲ ሓሳብ ምረጽ።", uk: "Оберіть форму речення." },
       toggleChoices: true,
       items: [],
       pool: [
@@ -276,6 +277,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Mettez la phrase à la forme négative.",
+      transInstruction: { en: "Put the sentence in the negative form.", ar: "حوّل الجملة إلى صيغة النفي.", fa: "جمله را به‌صورت منفی بنویسید.", ti: "ነቲ ሓሳብ ናብ ኣሉታዊ ቅርጺ ቀይር።", uk: "Поставте речення у заперечній формі." },
       items: [],
       pool: [
         // être (15)
@@ -334,6 +336,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque mot ou groupe en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort each word or group in bold into the correct category.", ar: "صنّف كل كلمة أو مجموعة بالخط العريض في الفئة الصحيحة.", fa: "هر کلمه یا گروه پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ብትር ዘሎ ቃል ወይ ጉጅለ ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожне слово або групу, виділені жирним, у правильну категорію." },
       categories: ["Sujet", "Verbe", "Complément"],
       items: [],
       pool: [
@@ -360,6 +363,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase négative correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct negative sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة سلبية صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی منفی درست بسازید.", ti: "ነተን ቃላት ቅኑዕ ኣሉታዊ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити правильне заперечне речення." },
       items: [],
       poolSize: 5,
       pool: [
@@ -403,6 +407,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید: فاعل (زرد)، فعل (قرمز)، متمم (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ፍለ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)." },
       colors: ["Sujet", "Verbe", "Complément"],
       items: [
         {
@@ -424,6 +429,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase négative avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe à la forme négative (ne … pas) et un complément.\nElle commence par une majuscule et se termine par un point.",
+      transInstruction: { en: "Write a negative sentence with the verb provided.\nThe sentence must have a subject, a verb in the negative form (ne … pas) and a complement.\nIt starts with a capital letter and ends with a full stop.", ar: "اكتب جملة سلبية باستخدام الفعل المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل بصيغة النفي (ne … pas) ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.", fa: "یک جمله‌ی منفی با فعل پیشنهادی بنویسید.\nجمله باید فاعل، فعل به‌صورت منفی (ne … pas) و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.", ti: "ሓደ ኣሉታዊ ሓሳብ ብእቲ ዝቐረበ ግሲ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ኣሉታዊ ግሲ (ne … pas)ን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።", uk: "Напишіть заперечне речення із запропонованим дієсловом.\nРечення повинно мати підмет, дієслово у заперечній формі (ne … pas) та додаток.\nВоно починається з великої літери і закінчується крапкою." },
       verbPool: [
         "parler", "manger", "habiter", "aimer", "écouter",
         "regarder", "travailler", "chanter", "danser", "jouer",
@@ -440,6 +446,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Mettez la phrase à la forme négative avec ne … pas.",
+      transInstruction: { en: "Put the sentence in the negative form with ne … pas.", ar: "حوّل الجملة إلى صيغة النفي مع ne … pas.", fa: "جمله را به‌صورت منفی با ne … pas بنویسید.", ti: "ነቲ ሓሳብ ብ ne … pas ኣሉታዊ ቅርጺ ቀይር።", uk: "Поставте речення у заперечній формі з ne … pas." },
       items: [],
       poolSize: 5,
       pool: [
@@ -458,6 +465,7 @@ export const A1_GR_L02: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 2",
       instruction: "Choisissez la bonne forme négative.",
+      transInstruction: { en: "Choose the correct negative form.", ar: "اختر صيغة النفي الصحيحة.", fa: "صورت منفی درست را انتخاب کنید.", ti: "ቅኑዕ ኣሉታዊ ቅርጺ ምረጽ።", uk: "Оберіть правильну заперечну форму." },
       items: [],
       poolSize: 5,
       pool: [

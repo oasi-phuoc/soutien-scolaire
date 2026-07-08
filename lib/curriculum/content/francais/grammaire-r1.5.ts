@@ -485,6 +485,7 @@ export const A1_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez la terminaison des verbes.",
+      transInstruction: { en: "Complete the verb endings.", ar: "أكمل نهايات الأفعال.", fa: "پایانه‌های فعل را کامل کنید.", ti: "መወዳእታ ግሲታት ምላእ።", uk: "Доповніть закінчення дієслів." },
       items: [],
       pool: EX1_POOL,
       poolSize: 8,
@@ -493,6 +494,7 @@ export const A1_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez les verbes entre parenthèses.",
+      transInstruction: { en: "Conjugate the verbs in parentheses.", ar: "صرّف الأفعال الموجودة بين القوسين.", fa: "افعال داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘለዉ ግሲታት ኣጻርይ።", uk: "Відмінюйте дієслова в дужках." },
       items: [],
       pool: EX2_POOL,
       poolSize: 8,
@@ -512,6 +514,7 @@ export const A1_CONJ_L07: ConjLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Conjuguez le verbe entre parenthèses.",
+      transInstruction: { en: "Conjugate the verb in parentheses.", ar: "صرّف الفعل الموجود بين القوسين.", fa: "فعل داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘሎ ግሲ ኣጻርይ።", uk: "Відмінюйте дієслово в дужках." },
       items: [],
       poolSize: 6,
       pool: [
@@ -533,6 +536,7 @@ export const A1_CONJ_L07: ConjLesson = {
       type: "qcm",
       title: "Évaluation — Question 2",
       instruction: "Choisissez la bonne conjugaison du verbe en -er.",
+      transInstruction: { en: "Choose the correct conjugation of the -er verb.", ar: "اختر التصريف الصحيح للفعل المنتهي بـ -er.", fa: "صرف درست فعل -er را انتخاب کنید.", ti: "ቅኑዕ ናይ -er ግሲ ምጥቃም ምረጽ።", uk: "Оберіть правильне відмінювання дієслова на -er." },
       items: [],
       poolSize: 5,
       pool: [

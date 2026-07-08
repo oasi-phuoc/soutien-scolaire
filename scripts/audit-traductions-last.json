@@ -1,0 +1,627 @@
+{
+  "generatedAt": "2026-07-08T10:16:35.626Z",
+  "math": {
+    "algebra": {
+      "domain": "A",
+      "tradCount": 64,
+      "issues": [
+        {
+          "file": "trad-a1-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a1-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a10-1.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-a10-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a10-2.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-a10-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a10-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a10-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a10-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a11-7.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a2-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a2-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a2-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a3-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a3-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a3-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a3-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a5-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a5-4.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a5-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a5-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a5-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-2.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a6-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-3.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a6-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-4.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a6-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a6-7.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a7-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a7-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a7-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a7-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a7-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a8-1.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a8-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a8-2.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a8-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a8-3.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a8-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a8-4.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a8-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a8-5.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-a8-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-a9-6.ts",
+          "type": "no_consignes"
+        }
+      ]
+    },
+    "geometry": {
+      "domain": "G",
+      "tradCount": 67,
+      "issues": [
+        {
+          "file": "trad-g10-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-7.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g10-8.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g11-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g2-1.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g2-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g2-2.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g2-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-g6-1.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-2.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-3.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-3.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-g6-4.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-4.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-g6-5.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-5.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-g6-6.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-6.ts",
+          "type": "no_theory_trad"
+        },
+        {
+          "file": "trad-g6-7.ts",
+          "type": "title_en_missing"
+        },
+        {
+          "file": "trad-g6-7.ts",
+          "type": "no_theory_trad"
+        }
+      ]
+    },
+    "statistics": {
+      "domain": "S",
+      "tradCount": 14,
+      "issues": [
+        {
+          "file": "trad-s1-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s1-7.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-1.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-2.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-3.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-4.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-5.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-6.ts",
+          "type": "no_consignes"
+        },
+        {
+          "file": "trad-s2-7.ts",
+          "type": "no_consignes"
+        }
+      ]
+    },
+    "g6_reperer": {
+      "note": "G6-1/G6-2 trad files should match math-g6-reperer-*.ts blocks (6 and 12)",
+      "g61_blocks_expected": 6,
+      "g62_blocks_expected": 12
+    },
+    "geo_custom_exercises": {
+      "note": "G1-G6 plan/cartesian exercise components need consignes wiring (done for G6.1/G6.2)",
+      "status": "G6.1/G6.2 wired via g6Cons() keys"
+    },
+    "renumbering_warning": "trad-g7+ may not match live lessons after G6 reperer insertion — manual review needed"
+  },
+  "francais": {
+    "grammaire": {
+      "lessonCount": 56,
+      "issues": [
+        {
+          "file": "grammaire-r1.5.ts",
+          "issue": "exercises_trans_partial (4/5)"
+        }
+      ]
+    },
+    "vocab": {
+      "themeCount": 42,
+      "withPivot": 42,
+      "withoutPivot": 0,
+      "issues": [
+        {
+          "file": "vocab-v1-description-morale.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v1-description-physique.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v1-etat-civil.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v1-famille.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v1-nationalites.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v1-professions.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v2-heure.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v2-jours-mois-dates.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v2-meteo.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v2-saisons.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v3-sport.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v4-appareils-electromenagers.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v4-equipements.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v4-pannes.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v4-pieces-maison.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v4-type-logement.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v5-materiel-scolaire.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v5-matieres.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v5-structure-ecole.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v6-accessoires.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v6-couleurs.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v6-matieres.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v6-vetements.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-boulangerie.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-cuisine.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-fruits.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-legumes.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-quantites.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-recettes.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v7-restaurant.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v8-corps.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v8-maladies.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v8-medecins.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v8-pharmacie.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-aeroport.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-direction.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-espace-culturel.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-hotel.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-paysage.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-train.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-transport.ts",
+          "issue": "theme_theory_title_not_translated"
+        },
+        {
+          "file": "vocab-v9-ville.ts",
+          "issue": "theme_theory_title_not_translated"
+        }
+      ]
+    }
+  }
+}

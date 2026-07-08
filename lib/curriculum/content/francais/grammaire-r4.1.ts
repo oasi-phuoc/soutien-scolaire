@@ -126,6 +126,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Conjuguez le verbe « aller » au présent pour former le futur proche.",
+      transInstruction: { en: "Conjugate the verb « aller » in the present to form the near future.", ar: "صرّف الفعل « aller » في المضارع لتكوين المستقبل القريب.", fa: "فعل « aller » را در زمان حال صرف کنید تا آینده‌ی نزدیک بسازید.", ti: "ቀረባ መጻኢ ንምግባር « aller » ኣብ ሕጂ ግዜ ኣጻርይ።", uk: "Відмінюйте « aller » у теперішньому часі, щоб утворити futur proche." },
       items: [],
       pool: [
         { sentence: "Je ___ manger une pizza.", hint: "aller → vais", answer: "vais" },
@@ -144,6 +145,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Mettez le futur proche à la forme négative.",
+      transInstruction: { en: "Put the near future in the negative form.", ar: "حوّل المستقبل القريب إلى صيغة النفي.", fa: "آینده‌ی نزدیک را به‌صورت منفی بنویسید.", ti: "ቀረባ መጻኢ ናብ ኣሉታዊ ቅርጺ ቀይር።", uk: "Поставте futur proche у заперечній формі." },
       items: [],
       pool: [
         { sentence: "Je ___ manger ça. (ne...pas)", hint: "ne vais pas", answer: "ne vais pas" },
@@ -159,6 +161,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase selon le temps utilisé.",
+      transInstruction: { en: "Sort each sentence according to the tense used.", ar: "صنّف كل جملة حسب الزمن المستخدم.", fa: "هر جمله را بر اساس زمان به‌کاررفته دسته‌بندی کنید.", ti: "ነፍሲ ወከፍ ሓሳብ ብዝተጠቀመሉ ግዜ ሸነኽ።", uk: "Розсортуйте кожне речення за використаним часом." },
       categories: ["Futur proche (aller + inf.)", "Présent de l'indicatif"],
       items: [],
       pool: [
@@ -177,6 +180,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase au futur proche.",
+      transInstruction: { en: "Put the words back in the correct order to form a near future sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة في المستقبل القريب.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی آینده‌ی نزدیک بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ቀረባ መጻኢ ንምግባር ብቅኑዕ ስርዓት መድብ።", uk: "Розставте слова у правильному порядку, щоб утворити речення в futur proche." },
       items: [],
       pool: [
         { sentence: "Je vais appeler demain.", words: ["Je", "vais", "appeler", "demain."] },
@@ -191,6 +195,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 5",
       instruction: "Sélectionnez une couleur, puis identifiez : le verbe aller (jaune) et l'infinitif (rouge).",
+      transInstruction: { en: "Select a color, then identify: the verb aller (yellow) and the infinitive (red).", ar: "اختر لوناً، ثم حدّد: الفعل aller (أصفر) والمصدر (أحمر).", fa: "یک رنگ انتخاب کنید، سپس مشخص کنید: فعل aller (زرد) و مصدر (قرمز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ፍለ፦ ግሲ aller (ብጫ)ን ኢንፊኒቲቭ (ቀይሕ)ን።", uk: "Виберіть колір, потім визначте: дієслово aller (жовтий) і інфінітив (червоний)." },
       colors: ["aller (auxiliaire)", "infinitif"],
       items: [
         {
@@ -211,6 +216,7 @@ export const A1_CONJ_L20: ConjLesson = {
       type: "write",
       title: "Exercice 6",
       instruction: "Écrivez une phrase au futur proche pour exprimer une intention ou un plan.\nCommencez par un pronom sujet.",
+      transInstruction: { en: "Write a sentence in the near future to express an intention or plan.\nStart with a subject pronoun.", ar: "اكتب جملة في المستقبل القريب للتعبير عن نية أو خطة.\nابدأ بضمير الفاعل.", fa: "یک جمله در آینده‌ی نزدیک برای بیان قصد یا برنامه بنویسید.\nبا ضمیر فاعل شروع کنید.", ti: "ሓደ ሓሳብ ብቀረባ መጻኢ ንድሌ ወይ ዕቅዲ ንምግላጽ ጽሓፍ።\nብርእሲ ጸጋ ቃል ጀምር።", uk: "Напишіть речення в futur proche, щоб виразити намір або план.\nПочніть із займенника підмета." },
       verbPool: ["manger", "partir", "travailler", "étudier", "appeler", "voyager"],
       verbPoolSize: 2,
     },
