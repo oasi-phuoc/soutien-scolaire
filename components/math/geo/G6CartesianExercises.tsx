@@ -8,6 +8,7 @@ import {
   POLYGON_INT_TEMPLATES,
   QUADRANT_READ_POOLS,
   VERTEX_PUZZLES,
+  vertexExercisePrompt,
   type LabeledPoint,
   type LineScenarioQuestion,
   type SegmentLine,
@@ -766,11 +767,11 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
   const [validated, setValidated] = useState(false);
   const [ok, setOk] = useState(false);
 
-  const allPoints = [...puzzle.points];
-  const xMin = Math.min(-15, ...allPoints.map((p) => p.x)) - 1;
-  const xMax = Math.max(10, ...allPoints.map((p) => p.x)) + 1;
-  const yMin = Math.min(-10, ...allPoints.map((p) => p.y)) - 1;
-  const yMax = Math.max(12, ...allPoints.map((p) => p.y)) + 1;
+  const [a, b, c] = puzzle.points;
+  const openSides: SegmentLine[] = [
+    { id: "ab", x1: a!.x, y1: a!.y, x2: b!.x, y2: b!.y, color: "#3b82f6", label: "AB" },
+    { id: "bc", x1: b!.x, y1: b!.y, x2: c!.x, y2: c!.y, color: "#3b82f6", label: "BC" },
+  ];
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -784,46 +785,69 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
 
   useValidateTrigger(validateCommand, doValidate);
 
+  const correctionPoints = validated && !ok
+    ? [{ label: "D", x: puzzle.answer.x, y: puzzle.answer.y }]
+    : undefined;
+
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne
-        consigne={consigneLang ? puzzle.promptPivot?.[consigneLang] : undefined}
+        consigne={consigneLang ? vertexExercisePrompt(puzzle.type, consigneLang) : undefined}
         consigneLang={consigneLang}
         consigneDir={consigneDir}
-        fallback={puzzle.prompt}
+        fallback={vertexExercisePrompt(puzzle.type)}
       />
-      <CartesianPlane xMin={xMin} xMax={xMax} yMin={yMin} yMax={yMax}
-        polygon={puzzle.points} points={puzzle.points} />
       <div className="flex items-center gap-2 text-sm">
-        <span className="font-bold text-[var(--color-accent-alg)]">{puzzle.missing}</span>
+        <span className="font-bold text-[var(--color-accent-alg)]">D</span>
         <span>:</span>
         <span>(</span>
         {validated && !ok ? (
           <>
-            <div className={`w-14 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-              <span className="text-[10px] text-[var(--color-text-secondary)]">{answer.x || "—"}</span>
-              <span className="text-xs font-bold text-amber-600">{puzzle.answer.x}</span>
+            <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.x || "—"}</span>
+              <span className="text-xs font-bold leading-none text-amber-600">{puzzle.answer.x}</span>
             </div>
             <span>;</span>
-            <div className={`w-14 px-0 pb-1 ${CLS_WRONG} flex flex-col items-center`}>
-              <span className="text-[10px] text-[var(--color-text-secondary)]">{answer.y || "—"}</span>
-              <span className="text-xs font-bold text-amber-600">{puzzle.answer.y}</span>
+            <div className={`${COORD_CELL_CLS} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{answer.y || "—"}</span>
+              <span className="text-xs font-bold leading-none text-amber-600">{puzzle.answer.y}</span>
             </div>
           </>
         ) : (
           <>
-            <input type="text" inputMode="decimal" value={answer.x} disabled={validated}
-              onChange={(e) => setAnswer((a) => ({ ...a, x: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
-              className={`w-14 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+            <input
+              type="text"
+              inputMode="decimal"
+              value={answer.x}
+              disabled={validated}
+              onChange={(e) => setAnswer((prev) => ({ ...prev, x: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
+              className={COORD_CELL_CLS}
+            />
             <span>;</span>
-            <input type="text" inputMode="decimal" value={answer.y} disabled={validated}
-              onChange={(e) => setAnswer((a) => ({ ...a, y: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
-              className={`w-14 px-0 pb-1 text-sm text-center ${MATH_TEXT_INPUT_BASE}`} />
+            <input
+              type="text"
+              inputMode="decimal"
+              value={answer.y}
+              disabled={validated}
+              onChange={(e) => setAnswer((prev) => ({ ...prev, y: e.target.value.replace(/[^0-9,.\-]/g, "") }))}
+              className={COORD_CELL_CLS}
+            />
           </>
         )}
         <span>)</span>
       </div>
+      <CartesianPlane
+        xMin={-10}
+        xMax={10}
+        yMin={-10}
+        yMax={10}
+        unit={12}
+        labelStep={2}
+        lines={openSides}
+        points={puzzle.points}
+        correctionPoints={correctionPoints}
+      />
     </div>
   );
 }

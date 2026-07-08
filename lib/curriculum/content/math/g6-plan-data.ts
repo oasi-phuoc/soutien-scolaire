@@ -483,68 +483,108 @@ export const CARTESIAN_PLACE_POOLS: LabeledPoint[][] = [
   ],
 ];
 
+export type VertexPuzzleType = "square" | "rectangle" | "rhombus" | "parallelogram" | "isosceles_trapezoid";
+
 export type VertexPuzzle = {
-  type: "square" | "parallelogram";
-  prompt: string;
-  promptPivot?: Partial<Record<string, string>>;
+  type: VertexPuzzleType;
+  shapeName: string;
   points: LabeledPoint[];
-  missing: string;
+  missing: "D";
   answer: { x: number; y: number };
-  shapeName?: string;
 };
 
+export const VERTEX_SHAPE_LABELS: Record<VertexPuzzleType, Partial<Record<string, string>> & { fr: string }> = {
+  square: { fr: "carré", en: "square", ar: "مربعًا", fa: "مربع" },
+  rectangle: { fr: "rectangle", en: "rectangle", ar: "مستطيلًا", fa: "مستطیل" },
+  rhombus: { fr: "losange", en: "rhombus", ar: "معينًا", fa: "لوزی" },
+  parallelogram: { fr: "parallélogramme", en: "parallelogram", ar: "متوازي أضلاع", fa: "متوازی‌الاضلاع" },
+  isosceles_trapezoid: { fr: "trapèze isocèle", en: "isosceles trapezoid", ar: "شبه منحرف متساوي الساقين", fa: "ذوزنقه متسازی‌الساق" },
+};
+
+export function vertexExercisePrompt(type: VertexPuzzleType, lang?: string): string {
+  const shape = (lang && VERTEX_SHAPE_LABELS[type][lang]) || VERTEX_SHAPE_LABELS[type].fr;
+  if (lang === "en") return `Place D on the plane to form a ${shape}.`;
+  if (lang === "ar") return `ضع D على المستوى لتشكيل ${shape}.`;
+  if (lang === "fa") return `D را روی صفحه قرار دهید تا یک ${shape} تشکیل شود.`;
+  return `Placez D sur le plan pour former un ${shape}.`;
+}
+
+function vtxQuad(
+  type: Exclude<VertexPuzzleType, "isosceles_trapezoid">,
+  shapeName: string,
+  a: [number, number],
+  b: [number, number],
+  c: [number, number],
+): VertexPuzzle {
+  return {
+    type,
+    shapeName,
+    points: [
+      { label: "A", x: a[0], y: a[1] },
+      { label: "B", x: b[0], y: b[1] },
+      { label: "C", x: c[0], y: c[1] },
+    ],
+    missing: "D",
+    answer: { x: a[0] + c[0] - b[0], y: a[1] + c[1] - b[1] },
+  };
+}
+
+function vtxTrap(
+  a: [number, number],
+  b: [number, number],
+  c: [number, number],
+  d: [number, number],
+): VertexPuzzle {
+  return {
+    type: "isosceles_trapezoid",
+    shapeName: "trapèze isocèle",
+    points: [
+      { label: "A", x: a[0], y: a[1] },
+      { label: "B", x: b[0], y: b[1] },
+      { label: "C", x: c[0], y: c[1] },
+    ],
+    missing: "D",
+    answer: { x: d[0], y: d[1] },
+  };
+}
+
+/** 6 gabarits par forme — A relié à B, B à C (pas A à C), D à trouver */
 export const VERTEX_PUZZLES: VertexPuzzle[] = [
-  {
-    type: "square",
-    prompt: "Le carré [ABCD] passe par A, B et C. Où se trouve D ?",
-    promptPivot: {
-      en: "Square [ABCD] passes through A, B and C. Where is D?",
-      ar: "المربع [ABCD] يمر بـ A و B و C. أين يقع D؟",
-      fa: "مربع [ABCD] از A و B و C می‌گذرد. D کجاست؟",
-    },
-    points: [
-      { label: "A", x: -14, y: 9 },
-      { label: "B", x: -9, y: 4 },
-      { label: "C", x: -14, y: 4 },
-    ],
-    missing: "D",
-    answer: { x: -9, y: 9 },
-    shapeName: "carré",
-  },
-  {
-    type: "parallelogram",
-    prompt: "Parallèle à [AB] par C et parallèle à [AC] par B se croisent en D. Coordonnées de D ?",
-    promptPivot: {
-      en: "Line parallel to [AB] through C and line parallel to [AC] through B meet at D. Coordinates of D?",
-      ar: "مستقيم موازٍ لـ [AB] يمر بـ C ومستقيم موازٍ لـ [AC] يمر بـ B يلتقيان عند D. إحداثيات D؟",
-      fa: "موازی [AB] از C و موازی [AC] از B در D به هم می‌رسند. مختصات D؟",
-    },
-    points: [
-      { label: "A", x: -2, y: 6 },
-      { label: "B", x: 5, y: 8 },
-      { label: "C", x: -6, y: -5 },
-    ],
-    missing: "D",
-    answer: { x: 1, y: -3 },
-    shapeName: "parallélogramme",
-  },
-  {
-    type: "parallelogram",
-    prompt: "Le parallélogramme [ABCD] a pour sommets connus A, B et C. Trouvez D.",
-    promptPivot: {
-      en: "Parallelogram [ABCD] has known vertices A, B and C. Find D.",
-      ar: "متوازي الأضلاع [ABCD] له رؤوس معروفة A و B و C. جد D.",
-      fa: "متوازی‌الاضلاع [ABCD] رئوس A و B و C را دارد. D را بیابید.",
-    },
-    points: [
-      { label: "A", x: -3, y: 2 },
-      { label: "B", x: 2, y: 5 },
-      { label: "C", x: 6, y: 1 },
-    ],
-    missing: "D",
-    answer: { x: 1, y: -2 },
-    shapeName: "parallélogramme",
-  },
+  // Carré
+  vtxQuad("square", "carré", [-4, 1], [-1, 1], [-1, 4]),
+  vtxQuad("square", "carré", [2, -3], [6, -3], [6, 1]),
+  vtxQuad("square", "carré", [-8, -5], [-3, -5], [-3, 0]),
+  vtxQuad("square", "carré", [-2, 5], [0, 5], [0, 7]),
+  vtxQuad("square", "carré", [1, -8], [7, -8], [7, -2]),
+  vtxQuad("square", "carré", [-6, 2], [-2, 2], [-2, 6]),
+  // Rectangle
+  vtxQuad("rectangle", "rectangle", [-5, -2], [2, -2], [2, 3]),
+  vtxQuad("rectangle", "rectangle", [-3, 1], [4, 1], [4, 4]),
+  vtxQuad("rectangle", "rectangle", [0, -6], [5, -6], [5, -2]),
+  vtxQuad("rectangle", "rectangle", [-8, -3], [-2, -3], [-2, 2]),
+  vtxQuad("rectangle", "rectangle", [2, 3], [8, 3], [8, 6]),
+  vtxQuad("rectangle", "rectangle", [-4, -7], [3, -7], [3, -4]),
+  // Losange
+  vtxQuad("rhombus", "losange", [-3, 1], [1, 3], [5, 1]),
+  vtxQuad("rhombus", "losange", [-6, 0], [-3, 2], [0, 0]),
+  vtxQuad("rhombus", "losange", [2, 4], [5, 6], [8, 4]),
+  vtxQuad("rhombus", "losange", [-4, -2], [-1, 0], [2, -2]),
+  vtxQuad("rhombus", "losange", [-2, 6], [1, 8], [4, 6]),
+  vtxQuad("rhombus", "losange", [3, -5], [6, -3], [9, -5]),
+  // Parallélogramme
+  vtxQuad("parallelogram", "parallélogramme", [-5, 0], [0, 3], [4, 1]),
+  vtxQuad("parallelogram", "parallélogramme", [-4, -3], [1, 0], [5, -2]),
+  vtxQuad("parallelogram", "parallélogramme", [2, -4], [7, -1], [10, -4]),
+  vtxQuad("parallelogram", "parallélogramme", [-8, 1], [-3, 4], [1, 2]),
+  vtxQuad("parallelogram", "parallélogramme", [-2, -5], [3, -2], [7, -5]),
+  vtxQuad("parallelogram", "parallélogramme", [0, 2], [5, 5], [9, 2]),
+  // Trapèze isocèle
+  vtxTrap([-5, 2], [5, 2], [3, -2], [-3, -2]),
+  vtxTrap([-4, 3], [4, 3], [2, -1], [-2, -1]),
+  vtxTrap([-3, 1], [3, 1], [2, -2], [-2, -2]),
+  vtxTrap([-6, 4], [6, 4], [4, -1], [-4, -1]),
+  vtxTrap([-2, 2], [2, 2], [1, -1], [-1, -1]),
+  vtxTrap([-7, 3], [7, 3], [5, -3], [-5, -3]),
 ];
 
 /** Points à lire sur repère 4 quadrants (style A–J) */
