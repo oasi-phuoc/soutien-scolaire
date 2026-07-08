@@ -300,15 +300,10 @@ function pickSpacedVerts(vertices: [number, number][], count: number, minGap = 2
 }
 
 function PointLabel({ px, py, label }: { px: number; py: number; label: string }) {
-  const tx = px + 6;
-  const ty = py - 1;
-  const w = 9;
-  const h = 11;
   return (
     <g>
       <circle cx={px} cy={py} r="3.5" fill="var(--color-accent-alg)" stroke="#fff" strokeWidth="1" />
-      <rect x={tx - 1} y={ty - h + 2} width={w} height={h} fill="white" />
-      <text x={tx + 3} y={ty} textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--color-accent-alg)">{label}</text>
+      <text x={px + 6} y={py - 1} fontSize="9" fontWeight="bold" fill="var(--color-accent-alg)">{label}</text>
     </g>
   );
 }
