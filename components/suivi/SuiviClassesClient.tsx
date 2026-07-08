@@ -54,6 +54,12 @@ export function SuiviClassesClient() {
         )}
       </div>
 
+      {role === "admin" && classes.length > 0 && (
+        <p className="text-sm text-zinc-500">
+          En tant qu&apos;administrateur, vous accédez à toutes les classes sans affectation préalable.
+        </p>
+      )}
+
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {classes.map((cls) => (
           <div

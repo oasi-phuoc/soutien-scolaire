@@ -42,7 +42,9 @@ function TeacherHomeLinks({ role, classCount }: { role: "admin" | "prof"; classC
         href="/suivi"
         className="inline-flex items-center justify-center rounded-xl bg-[var(--color-theme)] px-5 py-2.5 text-sm font-bold text-white hover:opacity-90"
       >
-        {classCount > 0 ? "Voir mes classes" : "Ouvrir le suivi"}
+        {role === "admin"
+          ? (classCount > 0 ? `Voir les ${classCount} classes` : "Ouvrir le suivi")
+          : (classCount > 0 ? "Voir mes classes" : "Ouvrir le suivi")}
       </Link>
       {role === "admin" && (
         <Link
@@ -100,15 +102,33 @@ export function TeacherHomeCard() {
   }
 
   if (!ctx.primaryClassLabel) {
+    const isAdmin = ctx.role === "admin";
     return (
       <TeacherHomeShell
-        title={ctx.role === "admin" ? "Toutes les classes" : "Mes classes"}
+        title={isAdmin ? "Toutes les classes" : "Mes classes"}
         subtitle={
           ctx.classes.length === 0
             ? "Aucune classe enregistrée pour le moment. Les classes apparaissent à partir des profils élèves."
-            : "Choisissez une classe principale dans le suivi pour l'afficher ici."
+            : isAdmin
+              ? `Vous voyez les ${ctx.classes.length} classe${ctx.classes.length !== 1 ? "s" : ""} de l'établissement. La classe principale est optionnelle — elle sert seulement à personnaliser cet accueil.`
+              : "Choisissez une classe principale dans le suivi pour l'afficher ici."
         }
       >
+        {ctx.classes.length > 0 && (
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {ctx.classes.map((cls) => (
+              <li key={cls.class_id}>
+                <Link
+                  href={`/suivi/classes/${encodeURIComponent(cls.label)}`}
+                  className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white/80 px-3 py-2.5 text-sm font-medium text-zinc-800 hover:border-[var(--color-theme)] dark:border-zinc-700 dark:bg-zinc-950/80 dark:text-zinc-100"
+                >
+                  <span>{cls.label}</span>
+                  <span className="text-xs text-zinc-500">{cls.student_count} él.</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
         <TeacherHomeLinks role={ctx.role} classCount={ctx.classes.length} />
       </TeacherHomeShell>
     );
@@ -156,7 +176,7 @@ export function TeacherHomeCard() {
         Voir le suivi détaillé →
       </Link>
       <Link href="/suivi" className="mt-2 block text-center text-xs font-semibold text-[var(--color-theme)] hover:underline sm:text-left">
-        Toutes mes classes
+        {ctx.role === "admin" ? "Toutes les classes" : "Toutes mes classes"}
       </Link>
       {ctx.role === "admin" && (
         <Link href="/admin" className="mt-1 block text-center text-xs font-semibold text-zinc-500 hover:underline sm:text-left">

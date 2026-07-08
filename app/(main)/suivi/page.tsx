@@ -15,13 +15,17 @@ export default async function SuiviPage() {
   if (role !== "admin" && role !== "prof") redirect("/");
 
   const { data: hasAccess } = await supabase.rpc("has_suivi_access");
-  if (!hasAccess) redirect("/");
+  if (!hasAccess && role !== "admin") redirect("/");
+
+  const subtitle = role === "admin"
+    ? "Toutes les classes de l'établissement"
+    : "Classes, progression et devoirs";
 
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 pb-28">
       <SuiviPageHeader
         title="Suivi pédagogique"
-        subtitle="Classes, progression et devoirs"
+        subtitle={subtitle}
         backHref="/"
         backLabel="accueil"
         actions={
