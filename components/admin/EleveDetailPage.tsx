@@ -1,23 +1,16 @@
 "use client";
 
-import { useState, useTransition, useEffect } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { MATH_MODULES } from "@/lib/curriculum/math-data";
-import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
-import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
-import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 import {
   changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
   changePasswordAction,
-  getPlacementHistoryForUserAction,
 } from "@/app/actions/admin";
-import { EleveEngagementPanel } from "@/components/admin/EleveEngagementPanel";
+import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
-import { frenchProgress as frenchProgressSuivi } from "@/lib/suivi/progress-metrics";
-import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { UserRow } from "./AdminTable";
 
 const LANGUE_LABELS: Record<string, string> = {
@@ -28,44 +21,6 @@ const LANGUE_LABELS: Record<string, string> = {
 
 const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
 const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
-
-// ── Progress helpers ────────────────────────────────────────────────────────
-
-const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
-const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
-const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
-const MATH_SUB_IDS_BY_BRANCH = {
-  algebra: new Set(MATH_MODULES.filter(m => m.branch === "algebra").flatMap(m => m.submodules.map(s => s.id))),
-  geometry: new Set(MATH_MODULES.filter(m => m.branch === "geometry").flatMap(m => m.submodules.map(s => s.id))),
-  stats: new Set(MATH_MODULES.filter(m => m.branch === "stats").flatMap(m => m.submodules.map(s => s.id))),
-};
-const TOTAL_MATH_SUBS = MATH_MODULES.reduce((n, m) => n + m.submodules.length, 0);
-
-function mathPct(data: StoredProgressV1 | null) {
-  const allIds = new Set([...MATH_SUB_IDS_BY_BRANCH.algebra, ...MATH_SUB_IDS_BY_BRANCH.geometry, ...MATH_SUB_IDS_BY_BRANCH.stats]);
-  const done = data?.submoduleStates
-    ? Object.entries(data.submoduleStates).filter(([id, s]) => allIds.has(id) && s === "completed").length
-    : 0;
-  return { done, total: TOTAL_MATH_SUBS, pct: Math.round((done / TOTAL_MATH_SUBS) * 100) };
-}
-
-function frenchPct(data: StoredProgressV1 | null) {
-  const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
-  const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
-  const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
-  const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
-  const done = vocDone + gramDone + commDone;
-  const total = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_SUBMODULES.length;
-  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
-}
-
-function lecturePct(data: StoredProgressV1 | null) {
-  const subs = data?.lectureProgress?.submodules ?? {};
-  const total = LECTURE_MODULES.reduce((sum, m) => sum + m.letters.length, 0);
-  const done = LECTURE_MODULES.reduce((sum, m) =>
-    sum + m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length, 0);
-  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
-}
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -79,52 +34,6 @@ function lastSeen(iso: string | null): string {
   if (days < 30) return `Il y a ${days} j`;
   return d.toLocaleDateString("fr-CH", { day: "2-digit", month: "short", year: "numeric" });
 }
-
-function Bar({ pct, color }: { pct: number; color: string }) {
-  return (
-    <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-      <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
-    </div>
-  );
-}
-
-function formatPlacementHalf(value: number) {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1);
-}
-
-function PlacementSubjectBar({
-  points,
-  fillClass,
-  circleClass,
-}: {
-  points: number;
-  fillClass: string;
-  circleClass: string;
-}) {
-  const pct = Math.min(100, Math.max(0, (points / 100) * 100));
-  const circleLeft = `clamp(0px, calc(${pct}% - 10px), calc(100% - 20px))`;
-  return (
-    <div className="relative h-6 flex-1 overflow-visible">
-      <div className="absolute inset-x-0 top-1/2 h-2 -translate-y-1/2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-        <div className={`h-full rounded-full ${fillClass}`} style={{ width: `${pct}%` }} />
-      </div>
-      <div
-        className={`absolute top-1/2 flex h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white px-0.5 text-[7px] font-bold leading-none text-white shadow-sm dark:border-zinc-900 ${circleClass}`}
-        style={{ left: circleLeft }}
-      >
-        {formatPlacementHalf(points)}
-      </div>
-    </div>
-  );
-}
-
-type PlacementTotalRow = {
-  date: string;
-  total: number;
-  mathCounted: number;
-  frenchCounted: number;
-  zone: string;
-};
 
 // ── Icons ───────────────────────────────────────────────────────────────────
 
@@ -178,130 +87,6 @@ function PasswordSection({ userId }: { userId: string }) {
         </button>
       </div>
       {msg && <p className={`mt-1.5 text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>{msg.text}</p>}
-    </div>
-  );
-}
-
-// ── Progress section ────────────────────────────────────────────────────────
-
-function ProgressSection({ user, suiviMode }: { user: UserRow; suiviMode?: boolean }) {
-  const math = mathPct(user.progress_data);
-  const french = suiviMode
-    ? frenchProgressSuivi(user.progress_data)
-    : frenchPct(user.progress_data);
-  const lecture = lecturePct(user.progress_data);
-  const [mathOpen, setMathOpen] = useState(false);
-  const [frenchOpen, setFrenchOpen] = useState(false);
-  const [lectureOpen, setLectureOpen] = useState(false);
-  const [placementOpen, setPlacementOpen] = useState(false);
-  const [totalHistory, setTotalHistory] = useState<PlacementTotalRow[] | null>(null);
-  const [combinedProfile, setCombinedProfile] = useState<{ total: number; zone: string; mathCounted: number; frenchCounted: number } | null>(null);
-
-  useEffect(() => {
-    getPlacementHistoryForUserAction(user.id).then(res => {
-      if (res.ok) {
-        setTotalHistory(res.totalHistory);
-        setCombinedProfile(res.combinedProfile);
-      }
-    });
-  }, [user.id]);
-
-  const placementRows = totalHistory ? [...totalHistory].reverse().slice(0, 5) : [];
-  const placementPct = combinedProfile
-    ? Math.round((combinedProfile.total / 200) * 100)
-    : 0;
-
-  const rows: { label: string; stat: { done: number; total: number; pct: number }; color: string; open: boolean; toggle: () => void }[] = [
-    { label: "Maths", stat: math, color: "bg-blue-500", open: mathOpen, toggle: () => setMathOpen(o => !o) },
-    { label: "Français", stat: french, color: "bg-emerald-500", open: frenchOpen, toggle: () => setFrenchOpen(o => !o) },
-    { label: "Lecture", stat: lecture, color: "bg-amber-500", open: lectureOpen, toggle: () => setLectureOpen(o => !o) },
-  ];
-
-  return (
-    <div className="space-y-4">
-      {rows.map(({ label, stat, color, open, toggle }) => (
-        <div key={label} className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
-          <button onClick={toggle} className="mb-2 flex w-full items-center justify-between text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-            <span className="flex items-center gap-1.5">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${open ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
-              {label}
-            </span>
-            <span className="font-mono text-xs">{stat.done}/{stat.total} — {stat.pct}%</span>
-          </button>
-          <Bar pct={stat.pct} color={color} />
-          {open && (
-            label === "Maths" ? (
-              <EleveEngagementPanel userId={user.id} progress={user.progress_data} />
-            ) : (
-              <p className="mt-2 text-xs text-zinc-400">Progression : {stat.done}/{stat.total} leçons.</p>
-            )
-          )}
-        </div>
-      ))}
-
-      {/* Test de placement */}
-      {totalHistory !== null && (
-        <div className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
-          <div className="mb-2 flex w-full items-center justify-between gap-2">
-            <button
-              type="button"
-              onClick={() => setPlacementOpen(o => !o)}
-              className="flex min-w-0 items-center gap-1.5 text-sm font-semibold text-zinc-700 dark:text-zinc-300"
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`shrink-0 transition-transform ${placementOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
-              <span className="truncate">Test de placement</span>
-            </button>
-            <span className="flex shrink-0 items-center gap-1">
-              {combinedProfile ? (
-                <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{formatPlacementHalf(combinedProfile.total)}/200 · {combinedProfile.zone}</span>
-              ) : totalHistory.length === 0 ? (
-                <span className="text-xs text-zinc-400">Aucun résultat</span>
-              ) : null}
-            </span>
-          </div>
-          {combinedProfile && (
-            <p className="mb-2 text-xs text-zinc-500">
-              Total /200 : {formatPlacementHalf(combinedProfile.total)} (maths {formatPlacementHalf(combinedProfile.mathCounted)} + français {formatPlacementHalf(combinedProfile.frenchCounted)}) · zone {combinedProfile.zone}
-            </p>
-          )}
-          {combinedProfile && (
-            <Bar pct={placementPct} color="bg-violet-500" />
-          )}
-          {placementOpen && placementRows.length > 0 && (
-            <div className="mt-3 space-y-2">
-              <div className="grid grid-cols-[3.5rem_1fr_1fr_3.5rem] items-center gap-2 px-0.5">
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-zinc-400">Date</span>
-                <span className="text-center text-[10px] font-semibold uppercase tracking-wide text-zinc-400">Math</span>
-                <span className="text-center text-[10px] font-semibold uppercase tracking-wide text-zinc-400">Français</span>
-                <span className="text-right text-[10px] font-semibold uppercase tracking-wide text-zinc-400">Total</span>
-              </div>
-              {placementRows.map((row, i) => {
-                const d = new Date(row.date);
-                return (
-                  <div key={`${row.date}-${i}`} className="grid grid-cols-[3.5rem_1fr_1fr_3.5rem] items-center gap-2">
-                    <span className="text-[11px] tabular-nums text-zinc-400">
-                      {d.toLocaleDateString("fr-CH", { day: "2-digit", month: "2-digit", year: "2-digit" })}
-                    </span>
-                    <PlacementSubjectBar
-                      points={row.mathCounted}
-                      fillClass="bg-blue-400"
-                      circleClass="bg-blue-500"
-                    />
-                    <PlacementSubjectBar
-                      points={row.frenchCounted}
-                      fillClass="bg-emerald-400"
-                      circleClass="bg-emerald-500"
-                    />
-                    <span className="text-right text-[11px] font-semibold tabular-nums text-zinc-700 dark:text-zinc-200">
-                      {formatPlacementHalf(row.total)}/200
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
@@ -603,7 +388,7 @@ export function EleveDetailPage({
         {/* Right column — Progress */}
         <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
           <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Progression</h2>
-          <ProgressSection user={user} suiviMode={isSuivi} />
+          <StudentProgressDetail userId={user.id} progressData={user.progress_data} />
         </div>
       </div>
 

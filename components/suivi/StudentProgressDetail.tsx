@@ -194,17 +194,27 @@ type PlacementRow = {
   zone: string;
 };
 
-export function StudentProgressDetail({ userId }: { userId: string }) {
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState<StoredProgressV1 | null>(null);
+type PlacementProfile = {
+  total: number;
+  zone: string;
+  mathCounted: number;
+  frenchCounted: number;
+};
+
+export function StudentProgressDetail({
+  userId,
+  progressData: progressDataProp,
+}: {
+  userId: string;
+  progressData?: StoredProgressV1 | null;
+}) {
+  const hasInitialProgress = progressDataProp !== undefined;
+  const [loading, setLoading] = useState(!hasInitialProgress);
+  const [fetchedProgress, setFetchedProgress] = useState<StoredProgressV1 | null>(null);
+  const progress = hasInitialProgress ? (progressDataProp ?? null) : fetchedProgress;
   const [time7d, setTime7d] = useState<number | null>(null);
   const [placementRows, setPlacementRows] = useState<PlacementRow[]>([]);
-  const [combinedProfile, setCombinedProfile] = useState<{
-    total: number;
-    zone: string;
-    mathCounted: number;
-    frenchCounted: number;
-  } | null>(null);
+  const [combinedProfile, setCombinedProfile] = useState<PlacementProfile | null>(null);
 
   const [openSubject, setOpenSubject] = useState<"math" | "french" | "lecture" | "placement" | null>(null);
   const [mathBranch, setMathBranch] = useState<"algebra" | "geometry">("algebra");
@@ -213,24 +223,29 @@ export function StudentProgressDetail({ userId }: { userId: string }) {
   const [frenchListOpen, setFrenchListOpen] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     setOpenSubject(null);
     setMathListOpen(false);
     setFrenchListOpen(false);
+
+    if (!hasInitialProgress) setLoading(true);
+
     void Promise.all([
-      getStudentProgressDetailAction(userId),
-      getUserTimeStatsAction(userId),
-      getPlacementHistoryForUserAction(userId),
-    ]).then(([progressRes, timeRes, placementRes]) => {
-      if (progressRes.ok) setProgress(progressRes.progress_data);
-      if (timeRes.ok) setTime7d(timeRes.last7DaysSec);
-      if (placementRes.ok) {
-        setPlacementRows(placementRes.totalHistory);
-        setCombinedProfile(placementRes.combinedProfile);
-      }
-      setLoading(false);
-    });
-  }, [userId]);
+      hasInitialProgress
+        ? Promise.resolve()
+        : getStudentProgressDetailAction(userId).then((res) => {
+            if (res.ok) setFetchedProgress(res.progress_data);
+          }),
+      getUserTimeStatsAction(userId).then((res) => {
+        if (res.ok) setTime7d(res.last7DaysSec);
+      }),
+      getPlacementHistoryForUserAction(userId).then((res) => {
+        if (res.ok) {
+          setPlacementRows(res.totalHistory);
+          setCombinedProfile(res.combinedProfile);
+        }
+      }),
+    ]).then(() => setLoading(false));
+  }, [userId, hasInitialProgress]);
 
   if (loading) {
     return (
