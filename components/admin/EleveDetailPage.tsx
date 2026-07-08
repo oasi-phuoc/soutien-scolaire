@@ -15,6 +15,8 @@ import {
   getPlacementHistoryForUserAction,
 } from "@/app/actions/admin";
 import { EleveEngagementPanel } from "@/components/admin/EleveEngagementPanel";
+import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
+import { frenchProgress as frenchProgressSuivi } from "@/lib/suivi/progress-metrics";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { UserRow } from "./AdminTable";
 
@@ -182,9 +184,11 @@ function PasswordSection({ userId }: { userId: string }) {
 
 // ── Progress section ────────────────────────────────────────────────────────
 
-function ProgressSection({ user }: { user: UserRow }) {
+function ProgressSection({ user, suiviMode }: { user: UserRow; suiviMode?: boolean }) {
   const math = mathPct(user.progress_data);
-  const french = frenchPct(user.progress_data);
+  const french = suiviMode
+    ? frenchProgressSuivi(user.progress_data)
+    : frenchPct(user.progress_data);
   const lecture = lecturePct(user.progress_data);
   const [mathOpen, setMathOpen] = useState(false);
   const [frenchOpen, setFrenchOpen] = useState(false);
@@ -434,10 +438,14 @@ export function EleveDetailPage({
   user: initialUser,
   currentUserId,
   currentUserRole,
+  context = "admin",
+  backHref,
 }: {
   user: UserRow;
   currentUserId: string;
   currentUserRole: "admin" | "prof";
+  context?: "admin" | "suivi";
+  backHref?: string;
 }) {
   const router = useRouter();
   const [user, setUser] = useState(initialUser);
@@ -449,9 +457,12 @@ export function EleveDetailPage({
   const location = [user.npa, user.localite].filter(Boolean).join(" ") || null;
   const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
 
+  const isSuivi = context === "suivi";
   const isSelf = user.id === currentUserId;
-  const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
-  const canChangeRole = currentUserRole === "admin" && !isSelf;
+  const canDelete = !isSuivi && currentUserRole === "admin" && !isSelf && user.role !== "admin";
+  const canChangeRole = !isSuivi && currentUserRole === "admin" && !isSelf;
+  const canEditAccount = !isSuivi && currentUserRole === "admin";
+  const showTeacherAssignment = !isSuivi && currentUserRole === "admin" && user.role === "prof";
 
   function handleChangeRole(newRole: "eleve" | "prof" | "admin") {
     startTransition(async () => {
@@ -465,9 +476,12 @@ export function EleveDetailPage({
 
       {/* Back button + Header */}
       <div className="mb-6">
-        <button onClick={() => router.back()} className="mb-4 flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200">
+        <button
+          onClick={() => (backHref ? router.push(backHref) : router.back())}
+          className="mb-4 flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M15 18l-6-6 6-6" /></svg>
-          Retour à la liste
+          {isSuivi ? "Retour à la classe" : "Retour à la liste"}
         </button>
 
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -494,9 +508,11 @@ export function EleveDetailPage({
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            <button onClick={() => setEditing(true)} className="flex items-center gap-1.5 rounded-xl bg-[var(--color-theme-light)] px-3 py-2 text-sm font-semibold text-[var(--color-theme)] hover:opacity-90 dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]">
-              <IconEdit /> Modifier
-            </button>
+            {canEditAccount && (
+              <button onClick={() => setEditing(true)} className="flex items-center gap-1.5 rounded-xl bg-[var(--color-theme-light)] px-3 py-2 text-sm font-semibold text-[var(--color-theme)] hover:opacity-90 dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]">
+                <IconEdit /> Modifier
+              </button>
+            )}
             {canDelete && (
               <button onClick={() => setConfirming(true)} className="flex items-center gap-1.5 rounded-xl bg-red-100 px-3 py-2 text-sm font-semibold text-red-700 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-300">
                 <IconTrash /> Supprimer
@@ -548,7 +564,7 @@ export function EleveDetailPage({
           </div>
 
           {/* Password */}
-          {user.role !== "admin" && (
+          {user.role !== "admin" && canEditAccount && (
             <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Sécurité</h2>
               <PasswordSection userId={user.id} />
@@ -556,6 +572,13 @@ export function EleveDetailPage({
           )}
 
           {/* Role change */}
+          {showTeacherAssignment && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Classes affectées</h2>
+              <TeacherClassAssignment teacherId={user.id} />
+            </div>
+          )}
+
           {canChangeRole && (
             <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Rôle</h2>
@@ -580,7 +603,7 @@ export function EleveDetailPage({
         {/* Right column — Progress */}
         <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
           <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Progression</h2>
-          <ProgressSection user={user} />
+          <ProgressSection user={user} suiviMode={isSuivi} />
         </div>
       </div>
 
@@ -595,7 +618,7 @@ export function EleveDetailPage({
         <DeleteConfirm
           user={user}
           onClose={() => setConfirming(false)}
-          onDeleted={() => router.replace("/admin")}
+          onDeleted={() => router.replace(isSuivi ? "/suivi" : "/admin")}
         />
       )}
     </main>

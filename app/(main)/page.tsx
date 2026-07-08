@@ -1,25 +1,39 @@
-import { HomeProgressCards } from "@/components/home/HomeProgressCards";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { HomeTeacherSection } from "@/components/home/HomeTeacherSection";
 import { TasksCard } from "@/components/home/TasksCard";
 import { ExpressionMailboxCard } from "@/components/expression/ExpressionMailboxCard";
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
+async function isTeacherAccount(): Promise<boolean> {
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return false;
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return false;
+  const { data: role } = await supabase.rpc("get_my_role");
+  return role === "admin" || role === "prof";
+}
+
 export default async function HomePage({ searchParams }: Props) {
   const q = (await searchParams) ?? {};
+  const teacher = await isTeacherAccount();
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 pt-8 pb-32">
+    <main className={`mx-auto w-full flex-1 space-y-6 px-4 pt-8 pb-32 ${teacher ? "max-w-2xl" : "max-w-xl"}`}>
       {q.msg ? (
         <p className="rounded-xl border border-indigo-300 bg-indigo-50 px-4 py-3 text-sm text-indigo-950 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-50">
           {q.msg}
         </p>
       ) : null}
 
-      <TasksCard />
+      {!teacher ? (
+        <>
+          <TasksCard />
+          <ExpressionMailboxCard />
+        </>
+      ) : null}
 
-      <ExpressionMailboxCard />
-
-      <HomeProgressCards />
+      <HomeTeacherSection />
     </main>
   );
 }

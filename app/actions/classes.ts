@@ -178,6 +178,7 @@ export async function createSchoolClassAction(
 
   if (error) return { ok: false, reason: error.message };
   revalidatePath("/admin/classes");
+  revalidatePath("/suivi");
   return { ok: true };
 }
 
@@ -209,5 +210,6 @@ export async function syncClassMembersAction(classLabel: string): Promise<{ ok: 
   if (error) return { ok: false, synced: 0, reason: error.message };
 
   revalidatePath("/admin/classes");
+  revalidatePath("/suivi");
   return { ok: true, synced: rows.length };
 }

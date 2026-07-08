@@ -9,7 +9,7 @@ function sectionForPath(pathname: string): SectionKey {
   if (pathname.startsWith("/lecture")) return "lecture";
   if (pathname.startsWith("/mathematiques")) return "maths";
   if (pathname.startsWith("/francais") || pathname.startsWith("/communication")) return "francais";
-  if (pathname.startsWith("/compte") || pathname.startsWith("/admin")) return "settings";
+  if (pathname.startsWith("/compte") || pathname.startsWith("/admin") || pathname.startsWith("/suivi")) return "settings";
   return "home";
 }
 

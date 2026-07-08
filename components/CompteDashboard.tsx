@@ -89,9 +89,10 @@ export type CompteDashboardProps = {
   profilePivot: PivotCode | null;
   supabaseConfigured: boolean;
   isAdmin?: boolean;
+  hasSuiviAccess?: boolean;
 };
 
-export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmin }: CompteDashboardProps) {
+export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmin, hasSuiviAccess }: CompteDashboardProps) {
   const [code, setCode] = useState<PivotCode>(
     profilePivot && PIVOT_LANGS.some((l) => l.code === profilePivot) ? profilePivot : "ar",
   );
@@ -235,7 +236,12 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
             <div className="mt-4 flex flex-wrap items-center gap-3">
               {isAdmin && (
                 <Link href="/admin" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90">
-                  Admin
+                  Comptes
+                </Link>
+              )}
+              {hasSuiviAccess && (
+                <Link href="/suivi" className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)] px-4 font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]">
+                  Suivi
                 </Link>
               )}
               <button

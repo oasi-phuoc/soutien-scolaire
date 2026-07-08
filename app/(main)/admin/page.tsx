@@ -12,7 +12,7 @@ export default async function AdminPage() {
   if (!user) redirect("/connexion");
 
   const { data: myRole } = await supabase.rpc("get_my_role");
-  if (myRole !== "admin" && myRole !== "prof") redirect("/");
+  if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
 
   const { data: users } = await supabase.rpc("get_users_for_admin") as {
     data: (Omit<UserRow, "progress_data" | "login_id" | "placement_test_best" | "placement_combined"> & {
@@ -45,43 +45,25 @@ export default async function AdminPage() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-              Administration
+              Comptes
             </h1>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
               {rows.length} compte{rows.length !== 1 ? "s" : ""} enregistré{rows.length !== 1 ? "s" : ""}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/admin/classes"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme)]/10"
-          >
-            Classes
-          </Link>
-          <Link
-            href="/admin/banque-controle"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme)]/10"
-          >
-            Banque
-          </Link>
-          <Link
-            href="/admin/taches/apercu"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M9 11l3 3L22 4" />
-              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-            </svg>
-            Affectation
-          </Link>
-        </div>
+        <Link
+          href="/suivi"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+        >
+          Suivi pédagogique
+        </Link>
       </div>
 
       <AdminTable
         initialRows={rows}
         currentUserId={user.id}
-        currentUserRole={myRole as "admin" | "prof"}
+        currentUserRole="admin"
       />
     </main>
   );

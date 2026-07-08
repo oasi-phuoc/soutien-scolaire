@@ -10,7 +10,8 @@ const PUBLIC_PATHS = new Set([
 ]);
 
 const ADMIN_PREFIX = "/admin";
-const TEACHER_PATHS = ["/messagerie", "/admin"];
+const SUIVI_PREFIX = "/suivi";
+const TEACHER_PATHS = ["/messagerie"];
 
 function isPublicAsset(path: string): boolean {
   return /\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|ico)$/i.test(path);
@@ -72,9 +73,28 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/connexion", request.url));
   }
 
-  if (user && (path.startsWith(ADMIN_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
+  if (user && (path.startsWith(ADMIN_PREFIX) || path.startsWith(SUIVI_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
     const { data: role } = await supabase.rpc("get_my_role");
-    if (path.startsWith(ADMIN_PREFIX) && role !== "admin" && role !== "prof") {
+
+    if (path.startsWith(ADMIN_PREFIX)) {
+      if (role !== "admin") {
+        return NextResponse.redirect(new URL(role === "prof" ? "/suivi" : "/", request.url));
+      }
+    }
+
+    if (path.startsWith(SUIVI_PREFIX)) {
+      if (role !== "admin" && role !== "prof") {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+      if (role === "prof") {
+        const { data: hasAccess } = await supabase.rpc("has_suivi_access");
+        if (!hasAccess) {
+          return NextResponse.redirect(new URL("/", request.url));
+        }
+      }
+    }
+
+    if (TEACHER_PATHS.some((p) => path.startsWith(p)) && role !== "admin" && role !== "prof") {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

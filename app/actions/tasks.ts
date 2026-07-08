@@ -138,6 +138,8 @@ export async function createTaskAction(
   );
 
   revalidatePath("/admin/taches");
+  revalidatePath("/suivi/devoirs");
+  revalidatePath("/suivi/devoirs/apercu");
   revalidatePath("/messagerie");
   return { ok: true, taskId: task.id as string };
 }
@@ -156,6 +158,8 @@ export async function updateTaskAction(
   if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/admin/taches");
+  revalidatePath("/suivi/devoirs");
+  revalidatePath("/suivi/devoirs/apercu");
   return { ok: true };
 }
 
@@ -170,6 +174,8 @@ export async function deleteTaskAction(taskId: string): Promise<{ ok: boolean; r
   if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/admin/taches");
+  revalidatePath("/suivi/devoirs");
+  revalidatePath("/suivi/devoirs/apercu");
   return { ok: true };
 }
 
@@ -355,6 +361,8 @@ export async function uploadTaskAttachmentAction(
   if (error || !data) return { ok: false, reason: error?.message ?? "Erreur enregistrement." };
 
   revalidatePath("/admin/taches");
+  revalidatePath("/suivi/devoirs");
+  revalidatePath("/suivi/devoirs/apercu");
   return { ok: true, attachmentId: data.id as string };
 }
 

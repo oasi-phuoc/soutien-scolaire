@@ -89,6 +89,7 @@ export async function createControlBankItemAction(input: {
 
   if (error || !data) return { ok: false, reason: error?.message ?? "Erreur création." };
   revalidatePath("/admin/banque-controle");
+  revalidatePath("/suivi/banque-controle");
   return { ok: true, id: data.id as string };
 }
 
@@ -103,5 +104,6 @@ export async function deleteControlBankItemAction(id: string): Promise<{ ok: boo
   if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/admin/banque-controle");
+  revalidatePath("/suivi/banque-controle");
   return { ok: true };
 }

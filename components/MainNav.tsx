@@ -155,7 +155,7 @@ export function MainNav() {
   }, [open]);
 
   useEffect(() => {
-    if (isMainSectionPage(pathname) || pathname.startsWith("/admin")) return;
+    if (isMainSectionPage(pathname) || pathname.startsWith("/admin") || pathname.startsWith("/suivi")) return;
 
     let frame = 0;
     const syncActions = () => {
@@ -180,7 +180,7 @@ export function MainNav() {
   }, [pathname]);
 
   const navColor = sectionColor(pathname);
-  const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin");
+  const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin") && !pathname.startsWith("/suivi");
   const menuItems = [...links, placementItem, translateItem];
 
   return (
