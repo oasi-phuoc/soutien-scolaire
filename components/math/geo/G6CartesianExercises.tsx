@@ -709,7 +709,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
-        fallback="Graduez les axes de 1 en 1 et placez les points sur le plan." />
+        fallback="Placez les points sur le plan." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-2">
         {targets.map((pt, i) => {
           const isSel = selected === pt.label;
