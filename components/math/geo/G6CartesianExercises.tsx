@@ -420,7 +420,11 @@ function LineQuestionBlock({
 
   if (q.type === "color_pair") {
     const [a1 = "", a2 = ""] = answer.split("|");
-    const options = lines.map((l) => ({ id: l.id, label: `la droite ${l.label}` }));
+    const options = [
+      ...lines.map((l) => ({ id: l.id, label: `la droite ${l.label}` })),
+      { id: "axis_x", label: "l'axe des X" },
+      { id: "axis_y", label: "l'axe des Y" },
+    ];
     const setPart = (idx: 0 | 1, val: string) => {
       const parts = answer.split("|");
       parts[idx] = val;
