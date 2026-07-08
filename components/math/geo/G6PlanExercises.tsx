@@ -134,6 +134,7 @@ function GridCoordFields({
   wrong,
   onChange,
   readOnly = false,
+  onAccent = false,
 }: {
   answer: CoordAnswer;
   correct: GridCell;
@@ -141,12 +142,16 @@ function GridCoordFields({
   wrong: boolean;
   onChange: (next: CoordAnswer) => void;
   readOnly?: boolean;
+  onAccent?: boolean;
 }) {
   const inputCls = `h-8 w-8 px-0 text-sm text-center ${MATH_TEXT_INPUT_BASE}`;
-  const displayCls = "flex h-8 w-8 items-center justify-center text-sm font-mono font-semibold text-[var(--color-text-primary)]";
+  const displayCls = `flex h-8 w-8 items-center justify-center text-sm font-mono font-semibold ${
+    onAccent ? "text-white" : "text-[var(--color-text-primary)]"
+  }`;
+  const parenCls = onAccent ? "text-white/75" : "text-[var(--color-text-secondary)]";
   return (
     <div className="flex items-center gap-1 text-sm">
-      <span className="text-[var(--color-text-secondary)]">(</span>
+      <span className={parenCls}>(</span>
       {readOnly ? (
         <span className={displayCls}>{correct.col.toLowerCase()}</span>
       ) : wrong ? (
@@ -166,7 +171,7 @@ function GridCoordFields({
           aria-label="Colonne"
         />
       )}
-      <span className="text-[var(--color-text-secondary)]">;</span>
+      <span className={parenCls}>;</span>
       {readOnly ? (
         <span className={displayCls}>{correct.row}</span>
       ) : wrong ? (
@@ -186,7 +191,7 @@ function GridCoordFields({
           aria-label="Ligne"
         />
       )}
-      <span className="text-[var(--color-text-secondary)]">)</span>
+      <span className={parenCls}>)</span>
     </div>
   );
 }
@@ -223,7 +228,7 @@ function GridXYFields({
   const filter = signed ? SIGNED_XY_FILTER : UNSIGNED_XY_FILTER;
   const maxLen = signed ? 3 : 2;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex h-9 items-center gap-2">
       <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{label}</span>
       <div className="flex items-center gap-1 text-sm">
         <span className="text-[var(--color-text-secondary)]">(</span>
@@ -617,17 +622,12 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated, review
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Écris le code de chaque forme (colonne ; ligne).</p>
-      <LetterGrid
-        cols={["a", "b", "c", "d", "e", "f"]}
-        rows={[1, 2, 3, 4, 5, 6]}
-        placements={items.map((it) => ({ cell: it.cell, shape: it.shape }))}
-      />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
           const answer = answers[i] ?? { col: "", row: "" };
           const wrong = validated && !results[i];
           return (
-            <div key={it.shape.id} className="flex items-center gap-3">
+            <div key={it.shape.id} className="flex h-9 items-center gap-3">
               <ShapeGlyph shape={it.shape} className="h-9 w-9 shrink-0" />
               <GridCoordFields
                 answer={answer}
@@ -640,6 +640,11 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated, review
           );
         })}
       </div>
+      <LetterGrid
+        cols={["a", "b", "c", "d", "e", "f"]}
+        rows={[1, 2, 3, 4, 5, 6]}
+        placements={items.map((it) => ({ cell: it.cell, shape: it.shape }))}
+      />
     </div>
   );
 }
@@ -723,25 +728,33 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, revie
       <p className="text-sm text-[var(--color-text-secondary)]">
         Place chaque forme dans la case indiquée. Clique sur une forme, puis sur la grille.
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {items.map((it, i) => {
           const isSel = selected === it.shape.id;
           const ok = validated ? results[i] : null;
           const placed = placements[it.shape.id] !== null;
+          const onAccent = placed && !isSel && ok !== false;
           return (
             <button
               key={it.shape.id}
               type="button"
               disabled={validated}
               onClick={() => setSelected(it.shape.id)}
-              className={`flex items-center gap-2 rounded-lg border px-3 py-2 transition-colors ${
-                isSel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" :
-                ok === false ? "border-amber-400" :
-                placed ? "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5" :
-                "border-[var(--color-border-default)]"
+              className={`flex h-9 items-center gap-2 rounded-lg border px-2 transition-colors ${
+                isSel
+                  ? `border-[var(--color-accent-alg)] ${SHAPE_CELL_FILL}`
+                  : ok === false
+                    ? "border-amber-400 bg-white"
+                    : placed
+                      ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]"
+                      : "border-[var(--color-border-default)] bg-white"
               }`}
             >
-              <ShapeGlyph shape={it.shape} className="h-9 w-9 shrink-0" />
+              <ShapeGlyph
+                shape={it.shape}
+                className="h-8 w-8 shrink-0"
+                fill={onAccent ? "#fff" : SHAPE_FILL}
+              />
               <GridCoordFields
                 answer={{ col: "", row: "" }}
                 correct={it.cell}
@@ -749,6 +762,7 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, revie
                 wrong={false}
                 onChange={() => {}}
                 readOnly
+                onAccent={onAccent}
               />
             </button>
           );
@@ -876,7 +890,6 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
       <p className="text-sm text-[var(--color-text-secondary)]">
         Je note les coordonnées des points. Les axes sont gradués de 5 en 5.
       </p>
-      <Q1FigurePlane xMax={xMax} yMax={yMax} polygons={figure.polygons} points={askedPoints} />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
         {askedPoints.map((pt, i) => {
           const answer = answers[i] ?? { x: "", y: "" };
@@ -895,6 +908,7 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
           );
         })}
       </div>
+      <Q1FigurePlane xMax={xMax} yMax={yMax} polygons={figure.polygons} points={askedPoints} />
     </div>
   );
 }
