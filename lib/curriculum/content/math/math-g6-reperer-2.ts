@@ -63,23 +63,6 @@ export const MATH_G6_REPERER_2_LESSON: MathSubmoduleLesson = {
         fr: "Un **plan** est la représentation graphique vue d'en haut. C'est une grande grille quadrillée avec deux droites perpendiculaires qui forment **quatre quadrants**.",
       },
 
-      {
-        type: "svg",
-        captionFr: "Les quatre quadrants",
-        markup: `<svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;display:block;margin:0 auto">
-  <line x1="120" y1="20" x2="120" y2="180" stroke="#334155" stroke-width="2"/>
-  <line x1="20" y1="100" x2="220" y2="100" stroke="#334155" stroke-width="2"/>
-  <text x="170" y="60" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">1er (+ ; +)</text>
-  <text x="70" y="60" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">2e (− ; +)</text>
-  <text x="70" y="140" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">3e (− ; −)</text>
-  <text x="170" y="140" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--color-accent-alg)" font-weight="bold">4e (+ ; −)</text>
-  <text x="210" y="108" font-size="11" font-weight="bold">x</text>
-  <text x="126" y="28" font-size="11" font-weight="bold">y</text>
-  <circle cx="120" cy="100" r="3" fill="#f97316"/>
-  <text x="126" y="104" font-size="9" fill="#f97316">O</text>
-</svg>`,
-      },
-
       { type: "plain", fr: "" },
     ],
   },

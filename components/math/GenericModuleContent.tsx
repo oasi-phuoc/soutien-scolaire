@@ -5642,14 +5642,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       pushG6GridSet();
     } else if (sid === "G6-2") {
       const pushG6CartesianSet = () => {
-        steps.push({ kind: "g6_plan", lesson, variant: 4, exNum: 1 });
-        steps.push({ kind: "g6_plan", lesson, variant: 14, exNum: 2 });
-        steps.push({ kind: "g6_plan", lesson, variant: 15, exNum: 3 });
-        steps.push({ kind: "g6_plan", lesson, variant: 8, exNum: 4 });
-        steps.push({ kind: "g6_plan", lesson, variant: 10, exNum: 5 });
-        steps.push({ kind: "g6_plan", lesson, variant: 11, exNum: 6 });
-        steps.push({ kind: "g6_plan", lesson, variant: 12, exNum: 7 });
-        steps.push({ kind: "g6_plan", lesson, variant: 13, exNum: 8 });
+        steps.push({ kind: "g6_plan", lesson, variant: 14, exNum: 1 });
+        steps.push({ kind: "g6_plan", lesson, variant: 15, exNum: 2 });
+        steps.push({ kind: "g6_plan", lesson, variant: 8, exNum: 3 });
+        steps.push({ kind: "g6_plan", lesson, variant: 10, exNum: 4 });
+        steps.push({ kind: "g6_plan", lesson, variant: 11, exNum: 5 });
+        steps.push({ kind: "g6_plan", lesson, variant: 12, exNum: 6 });
+        steps.push({ kind: "g6_plan", lesson, variant: 13, exNum: 7 });
       };
       pushG6CartesianSet();
       steps.push({ kind: "eval_start", lesson });
