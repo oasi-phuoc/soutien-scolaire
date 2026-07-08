@@ -179,7 +179,7 @@ export function TeacherHomeCard() {
 
   const loadStudents = useCallback(async (label: string) => {
     setStudentsLoading(true);
-    const result = await getClassStudentsSuiviAction(label);
+    const result = await getClassStudentsSuiviAction(label, 20);
     if (result.ok) setStudents(result.students);
     else setStudents([]);
     setStudentsLoading(false);

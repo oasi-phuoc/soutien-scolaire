@@ -180,7 +180,10 @@ export async function getClassDashboardFullAction(classLabel: string): Promise<{
   };
 }
 
-export async function getClassStudentsSuiviAction(classLabel: string): Promise<{
+export async function getClassStudentsSuiviAction(
+  classLabel: string,
+  limit?: number,
+): Promise<{
   ok: boolean;
   students: ClassStudentSuiviRow[];
   error?: string;
@@ -194,13 +197,16 @@ export async function getClassStudentsSuiviAction(classLabel: string): Promise<{
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, students: [], error: "Erreur serveur." };
 
-  const { data: profiles, error: pErr } = await supabase
+  let query = supabase
     .from("profiles")
     .select("id, prenom, nom, classe, progress_updated_at, progress_data, placement_combined_profile")
     .eq("role", "eleve")
     .eq("classe", classLabel)
-    .order("nom")
-    .limit(20);
+    .order("nom");
+
+  if (limit != null) query = query.limit(limit);
+
+  const { data: profiles, error: pErr } = await query;
 
   if (pErr) return { ok: false, students: [], error: pErr.message };
 
@@ -387,6 +393,31 @@ export async function getTeacherClassAssignmentsAction(teacherId: string): Promi
     ok: true,
     classIds: (rows ?? []).map((r) => r.class_id as string),
     primaryClassId: (profile?.primary_class_id as string | null) ?? null,
+  };
+}
+
+export async function getStudentProgressDetailAction(userId: string): Promise<{
+  ok: boolean;
+  progress_data: StoredProgressV1 | null;
+  error?: string;
+}> {
+  const canAccess = await canAccessStudentAction(userId);
+  if (!canAccess) return { ok: false, progress_data: null, error: "Accès refusé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, progress_data: null, error: "Erreur serveur." };
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("progress_data")
+    .eq("id", userId)
+    .eq("role", "eleve")
+    .maybeSingle();
+
+  if (error) return { ok: false, progress_data: null, error: error.message };
+  return {
+    ok: true,
+    progress_data: (data?.progress_data as StoredProgressV1 | null) ?? null,
   };
 }
 
