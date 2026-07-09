@@ -5505,10 +5505,10 @@ function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbol
   };
 
   const instruction = exNum === 1
-    ? "Développez chaque expression. Expression simple."
+    ? "Développez les expressions."
     : exNum === 2
-      ? "Développez chaque expression. Identité remarquable."
-      : "Développez chaque expression. Expression complexe.";
+      ? "Développez les identités remarquables."
+      : "Développez les expressions.";
   // Exercise 2 draws 5 distinct identities (each with randomized letters/numbers)
   // from the 8 remarkable-identity templates; exercises 1 & 3 use a 50-deep pool.
   const questions = exNum === 2
