@@ -202,3 +202,36 @@ export async function updateUserProfileAction(
   revalidatePath("/admin");
   return { ok: true };
 }
+
+export async function getPlacementModuleEnabledAction(): Promise<{ ok: boolean; enabled: boolean }> {
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: true, enabled: true };
+  const { data, error } = await supabase.rpc("get_placement_module_enabled");
+  if (error) return { ok: false, enabled: true };
+  return { ok: true, enabled: data !== false };
+}
+
+export async function setPlacementModuleEnabledAction(enabled: boolean): Promise<{ ok: boolean; reason?: string }> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Supabase non configuré" };
+  const { error } = await supabase.rpc("set_placement_module_enabled", { p_enabled: enabled });
+  if (error) return { ok: false, reason: error.message };
+  revalidatePath("/admin");
+  revalidatePath("/placement");
+  revalidatePath("/");
+  return { ok: true };
+}
+
+export async function getPlacementNavVisibilityAction(): Promise<{ ok: boolean; visible: boolean }> {
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: true, visible: true };
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: true, visible: true };
+  const { data: role } = await supabase.rpc("get_my_role");
+  if (role === "admin" || role === "prof") return { ok: true, visible: true };
+  const { data: enabled, error } = await supabase.rpc("get_placement_module_enabled");
+  if (error) return { ok: true, visible: true };
+  return { ok: true, visible: enabled !== false };
+}

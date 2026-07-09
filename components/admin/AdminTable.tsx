@@ -7,7 +7,7 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
-import { resetAllElevesAction } from "@/app/actions/admin";
+import { resetAllElevesAction, setPlacementModuleEnabledAction } from "@/app/actions/admin";
 
 export type UserRow = {
   id: string;
@@ -279,18 +279,59 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
   );
 }
 
+function PlacementModuleToggle({
+  enabled,
+  disabled,
+  onChange,
+}: {
+  enabled: boolean;
+  disabled?: boolean;
+  onChange: (enabled: boolean) => void;
+}) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={enabled}
+        aria-label="Module TCF / TCM"
+        disabled={disabled}
+        onClick={() => onChange(!enabled)}
+        className={`relative h-7 w-12 shrink-0 rounded-full transition-colors disabled:opacity-50 ${
+          enabled ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
+        }`}
+      >
+        <span
+          className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
+            enabled ? "translate-x-[22px]" : "translate-x-0.5"
+          }`}
+        />
+      </button>
+      <span className="text-sm text-zinc-600 dark:text-zinc-300">
+        Module TCF / TCM{" "}
+        <span className="font-semibold text-zinc-800 dark:text-zinc-100">{enabled ? "actif" : "inactif"}</span>
+      </span>
+    </div>
+  );
+}
+
 // ── Main Component ──────────────────────────────────────────────────────────
 
 export function AdminTable({
   initialRows,
   currentUserId: _currentUserId,
   currentUserRole,
+  initialPlacementEnabled = true,
 }: {
   initialRows: UserRow[];
   currentUserId: string;
   currentUserRole: "admin" | "prof";
+  initialPlacementEnabled?: boolean;
 }) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
+  const [placementEnabled, setPlacementEnabled] = useState(initialPlacementEnabled);
+  const [placementMsg, setPlacementMsg] = useState<string | null>(null);
+  const [placementPending, startPlacementTransition] = useTransition();
   const [filterClasse, setFilterClasse] = useState<string>("");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
@@ -314,6 +355,21 @@ export function AdminTable({
     return na.localeCompare(nb, "fr");
   });
 
+  function togglePlacementModule(next: boolean) {
+    setPlacementMsg(null);
+    const prev = placementEnabled;
+    setPlacementEnabled(next);
+    startPlacementTransition(async () => {
+      const res = await setPlacementModuleEnabledAction(next);
+      if (!res.ok) {
+        setPlacementEnabled(prev);
+        setPlacementMsg(res.reason ?? "Erreur lors de la mise à jour.");
+        return;
+      }
+      setPlacementMsg(next ? "Module TCF / TCM activé pour les élèves." : "Module TCF / TCM désactivé pour les élèves.");
+    });
+  }
+
   return (
     <>
       {/* Filters */}
@@ -335,14 +391,26 @@ export function AdminTable({
           {currentUserRole === "admin" && (
             <button
               onClick={() => setResetConfirming(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
               aria-label="Archiver les élèves"
               title="Archiver les élèves"
             >
               <IconArchive />
             </button>
           )}
+          {currentUserRole === "admin" && (
+            <PlacementModuleToggle
+              enabled={placementEnabled}
+              disabled={placementPending}
+              onChange={togglePlacementModule}
+            />
+          )}
         </div>
+        {placementMsg && (
+          <p className={`mb-2 text-sm ${placementMsg.includes("Erreur") ? "text-red-600" : "text-emerald-700"}`} role="status">
+            {placementMsg}
+          </p>
+        )}
         <div className="flex flex-wrap items-center gap-2">
           <div className={`flex overflow-hidden rounded-full p-0.5 border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800`}>
             <button onClick={() => {

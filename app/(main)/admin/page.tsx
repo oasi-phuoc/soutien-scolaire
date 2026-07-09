@@ -23,6 +23,7 @@ export default async function AdminPage() {
     })[] | null;
     error: unknown;
   };
+  const { data: placementEnabled } = await supabase.rpc("get_placement_module_enabled");
 
   const rows: UserRow[] = (users ?? []).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
@@ -56,6 +57,7 @@ export default async function AdminPage() {
         initialRows={rows}
         currentUserId={user.id}
         currentUserRole="admin"
+        initialPlacementEnabled={placementEnabled !== false}
       />
     </main>
   );

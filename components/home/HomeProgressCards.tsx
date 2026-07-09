@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
 import {
   loadLectureProgress,
@@ -165,6 +166,7 @@ export function HomeProgressCards() {
   const [mathP, setMathP] = useState<StoredProgressV1 | null>(null);
   const [placementPct, setPlacementPct] = useState(0);
   const [placementTotal, setPlacementTotal] = useState(0);
+  const [placementVisible, setPlacementVisible] = useState(true);
 
   useEffect(() => {
     setLectureP(loadLectureProgress());
@@ -172,6 +174,9 @@ export function HomeProgressCards() {
     const profile = loadPlacementProfile();
     setPlacementTotal(profile.total);
     setPlacementPct(Math.round((profile.total / 200) * 100));
+    getPlacementNavVisibilityAction().then((res) => {
+      if (res.ok) setPlacementVisible(res.visible);
+    }).catch(() => {});
   }, []);
 
   // ── Lecture ──
@@ -245,18 +250,20 @@ export function HomeProgressCards() {
 
   return (
     <div className="space-y-3">
-      <CardShell
-        href="/placement"
-        accentColor="var(--color-accent-quiz)"
-        icon={<PlacementIcon />}
-        label="Placement"
-        title="Test de placement"
-        completedText={`${placementTotal} pts`}
-        totalText="Test de français et de mathématiques"
-        pct={placementPct}
-        continuePath="/placement"
-        continueLabel={placementTotal > 0 ? "Continuer" : "Commencer"}
-      />
+      {placementVisible && (
+        <CardShell
+          href="/placement"
+          accentColor="var(--color-accent-quiz)"
+          icon={<PlacementIcon />}
+          label="Placement"
+          title="Test de placement"
+          completedText={`${placementTotal} pts`}
+          totalText="Test de français et de mathématiques"
+          pct={placementPct}
+          continuePath="/placement"
+          continueLabel={placementTotal > 0 ? "Continuer" : "Commencer"}
+        />
+      )}
       <CardShell
         href="/lecture"
         accentColor="var(--color-accent-lecture)"

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
+import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 
@@ -135,10 +136,14 @@ export function MainNav() {
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [actions, setActions] = useState<ActionAvailability>(emptyActionAvailability);
+  const [placementVisible, setPlacementVisible] = useState(true);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
+    getPlacementNavVisibilityAction().then((res) => {
+      if (res.ok) setPlacementVisible(res.visible);
+    }).catch(() => {});
   }, [pathname]);
 
   useEffect(() => {
@@ -181,7 +186,7 @@ export function MainNav() {
 
   const navColor = sectionColor(pathname);
   const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin") && !pathname.startsWith("/suivi");
-  const menuItems = [...links, placementItem, translateItem];
+  const menuItems = [...links, ...(placementVisible ? [placementItem] : []), translateItem];
 
   return (
     <>
@@ -276,7 +281,7 @@ export function MainNav() {
               }`}
               aria-hidden={!open}
             >
-              <SecondaryMenuLink item={placementItem} open={open} />
+              {placementVisible && <SecondaryMenuLink item={placementItem} open={open} />}
               <SecondaryMenuLink item={settingsItem} open={open} />
               <button
                 type="button"
