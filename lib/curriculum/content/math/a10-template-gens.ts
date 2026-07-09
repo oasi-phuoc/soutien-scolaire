@@ -1421,6 +1421,9 @@ export function pickA102FracQuestion(): EquationQuestion {
 
 const IR_ACCEPT = ["ir", "s=ir", "infini", "infinité"];
 const IMP_ACCEPT = ["impossible", "s=∅", "vide", "∅"];
+const A103_PHASE_ISOLATE = "Isoler une inconnue";
+const A103_PHASE_SUBSTITUTE = "Substituer sa valeur";
+const A103_PHASE_OTHER = "Chercher l'autre inconnue";
 
 function subSys(
   eq1: [number, number, number],
@@ -1460,10 +1463,10 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const d = ri(3, 8), e = ri(3, 9), eqF = d * x0 - e * y0;
     if (e === 0) return null;
     const dev = [
-      "isoler y dans I", `${a}x + y = ${c}`, `y = ${c} - ${a}x`, "injecter I → II et résoudre",
+      A103_PHASE_ISOLATE, `${a}x + y = ${c}`, `y = ${c} - ${a}x`, A103_PHASE_SUBSTITUTE,
       `${d}x - ${e}(${c} - ${a}x) = ${eqF}`, `${d}x - ${e * c} + ${e * a}x = ${eqF}`,
       `${d + e * a}x - ${e * c} = ${eqF}`, `${d + e * a}x = ${eqF + e * c}`, `x = ${x0}`,
-      "chercher la valeur de y", `y = ${c} - ${a}x`, `y = ${c} - ${a} · (${x0}) = ${y0}`,
+      A103_PHASE_OTHER, `y = ${c} - ${a}x`, `y = ${c} - ${a} · (${x0}) = ${y0}`,
     ];
     const ops = ["", `- ${a}x`, "", "", "effectuer", "réduire", `+ ${e * c}`, `: ${d + e * a}`, "", "", "", ""];
     return subSys([a, b, c], [d, -e, eqF], 1, "y", x0, 1, y0, 1, dev, ops);
@@ -1475,11 +1478,11 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const a = ri(2, 4), b = ri(3, 6), c = a * x0 + b * y0;
     const d = 1, e = ri(5, 10), eqF = -e * y0 - x0;
     const dev = [
-      "isoler x dans II", `${e}y = ${-x0 - e * y0} - x`, `${e}y + ${-x0 - e * y0} = -x`, `- ${e}y - ${-x0 - e * y0} = x`,
-      "injecter II → I et résoudre", `${a}(-${e}y - ${-x0 - e * y0}) + ${b}y = ${c}`,
+      A103_PHASE_ISOLATE, `${e}y = ${-x0 - e * y0} - x`, `${e}y + ${-x0 - e * y0} = -x`, `- ${e}y - ${-x0 - e * y0} = x`,
+      A103_PHASE_SUBSTITUTE, `${a}(-${e}y - ${-x0 - e * y0}) + ${b}y = ${c}`,
       `-${a * e}y - ${a * (-x0 - e * y0)} + ${b}y = ${c}`, `-${a * e + b}y - ${a * (-x0 - e * y0)} = ${c}`,
       `-${a * e + b}y = ${c + a * (-x0 - e * y0)}`, `y = ${y0}`,
-      "chercher la valeur de x", `- ${e}y - ${-x0 - e * y0} = x`, `x = ${x0}`,
+      A103_PHASE_OTHER, `- ${e}y - ${-x0 - e * y0} = x`, `x = ${x0}`,
     ];
     return subSys([a, b, c], [-d, -e, eqF], 2, "x", x0, 1, y0, 1, dev, ["", "+ " + (-x0 - e * y0), "· (-1)", "", "", "effectuer", "réduire", "+ " + (a * (-x0 - e * y0)), `: (${-(a * e + b)})`, "", "", ""]);
   }),
@@ -1490,10 +1493,10 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const a = ri(2, 5), c = a * x0 - y0;
     const d = ri(3, 7), e = ri(2, 5), eqF = d * x0 + e * y0;
     const dev = [
-      "isoler y dans I", `${a}x - y = ${c}`, `-y = ${c} - ${a}x`, `y = ${-c} + ${a}x`,
-      "injecter I → II et résoudre", `${d}x + ${e}(${-c} + ${a}x) = ${eqF}`,
+      A103_PHASE_ISOLATE, `${a}x - y = ${c}`, `-y = ${c} - ${a}x`, `y = ${-c} + ${a}x`,
+      A103_PHASE_SUBSTITUTE, `${d}x + ${e}(${-c} + ${a}x) = ${eqF}`,
       `${d}x + ${-e * c} + ${e * a}x = ${eqF}`, `${d + e * a}x + ${-e * c} = ${eqF}`,
-      `${d + e * a}x = ${eqF - (-e * c)}`, `x = ${x0}`, "chercher la valeur de y",
+      `${d + e * a}x = ${eqF - (-e * c)}`, `x = ${x0}`, A103_PHASE_OTHER,
       `y = ${-c} + ${a}x`, `y = ${-c} + ${a} · (${x0}) = ${y0}`,
     ];
     return subSys([a, -1, c], [d, e, eqF], 1, "y", x0, 1, y0, 1, dev, ["", `- ${a}x`, "· (-1)", "", "", "effectuer", "réduire", `- ${-e * c}`, `: ${d + e * a}`, "", "", ""]);
@@ -1505,10 +1508,10 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const c = x0 + 2 * y0;
     const a = ri(3, 6), b = ri(3, 6), d = a * x0 + b * y0;
     const dev = [
-      "isoler x dans II", `x + 2y = ${c}`, `x = ${c} - 2y`, "injecter II → I et résoudre",
+      A103_PHASE_ISOLATE, `x + 2y = ${c}`, `x = ${c} - 2y`, A103_PHASE_SUBSTITUTE,
       `${a}(${c} - 2y) + ${b}y = ${d}`, `${a * c} - ${2 * a}y + ${b}y = ${d}`,
       `${a * c} - ${2 * a - b}y = ${d}`, `-${2 * a - b}y = ${d - a * c}`, `y = ${y0}`,
-      "chercher la valeur de x", `x = ${c} - 2y`, `x = ${c} - 2 · ${y0} = ${x0}`,
+      A103_PHASE_OTHER, `x = ${c} - 2y`, `x = ${c} - 2 · ${y0} = ${x0}`,
     ];
     return subSys([a, b, d], [1, 2, c], 2, "x", x0, 1, y0, 1, dev, ["", "- 2y", "", "", "effectuer", "réduire", `- ${a * c}`, `: (${-(2 * a - b)})`, "", "", ""]);
   }),
@@ -1524,12 +1527,12 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const eqF = Math.round(d * x0 - e * y0);
     const xs = `${xn}/${xd}`, ys = `${yn}/${yd}`;
     const dev = [
-      "isoler y dans II", `${c - a}x = ${e}y + ${eqF}`, `y = ${-e}x + ${c}`, "injecter II → I et résoudre",
+      A103_PHASE_ISOLATE, `${c - a}x = ${e}y + ${eqF}`, `y = ${-e}x + ${c}`, A103_PHASE_SUBSTITUTE,
       `${b}(${-e}x + ${c}) - ${d}x = ${Math.round(b * y0 - d * x0)}`,
       `-${b * e}x + ${b * c} - ${d}x = ${Math.round(b * y0 - d * x0)}`,
       `-${b * e + d}x + ${b * c} = ${Math.round(b * y0 - d * x0)}`,
       `-${b * e + d}x = ${Math.round(b * y0 - d * x0 - b * c)}`, `x = ${f(xn, xd)}`,
-      "chercher la valeur de y", `y = -${e}x + ${c}`, `y = -${e} · ${f(xn, xd)} + ${c} = ${f(yn, yd)}`,
+      A103_PHASE_OTHER, `y = -${e}x + ${c}`, `y = -${e} · ${f(xn, xd)} + ${c} = ${f(yn, yd)}`,
     ];
     return {
       equations: [`${b}y - ${d}x = ${Math.round(b * y0 - d * x0)}`, `${c - a} - y = ${e}x + ${eqF}`] as [string, string],
@@ -1545,7 +1548,7 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const a = ri(3, 6);
     const d2 = -a * 4, c2 = ri(5, 15);
     const dev2 = [
-      "y est déjà isolé dans I", "injecter I → II et résoudre",
+      A103_PHASE_ISOLATE, A103_PHASE_SUBSTITUTE,
       `-4(${a}x + ${c2}) + 40 = ${d2}x`, `-${4 * a}x - ${4 * c2} + 40 = ${d2}x`, `-${4 * a}x = ${d2}x`, "0 = 0", "infini",
     ];
     return {
@@ -1576,11 +1579,11 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const ansFrac = xd === 1 ? xs : f(xn, xd);
     const ansFracY = yd === 1 ? ys : f(yn, yd);
     const dev = [
-      "isoler y dans I", `${a}x + ${b}y = ${c}`, `${b}y = ${c} - ${a}x`, `y = ${(c / b)} - ${a / b}x`.replace(`${(c / b)}`, `${Math.round(c / b)}`).replace(`${a / b}`, `${a}/${b}`),
-      "injecter I → II et résoudre", `${d}x + ${e}((${c} - ${a}x) / ${b}) = ${eqF}`,
+      A103_PHASE_ISOLATE, `${a}x + ${b}y = ${c}`, `${b}y = ${c} - ${a}x`, `y = ${(c / b)} - ${a / b}x`.replace(`${(c / b)}`, `${Math.round(c / b)}`).replace(`${a / b}`, `${a}/${b}`),
+      A103_PHASE_SUBSTITUTE, `${d}x + ${e}((${c} - ${a}x) / ${b}) = ${eqF}`,
       `${d}x + ${Math.round(e * c / b)} - ${Math.round(e * a / b)}x = ${eqF}`,
       `${d - Math.round(e * a / b)}x = ${eqF - Math.round(e * c / b)}`, `x = ${ansFrac}`,
-      "chercher la valeur de y", `y = ${c} - ${a}x`, `y = ${c} - ${a} · ${ansFrac} = ${ansFracY}`,
+      A103_PHASE_OTHER, `y = ${c} - ${a}x`, `y = ${c} - ${a} · ${ansFrac} = ${ansFracY}`,
     ];
     // Fix dev to use integer arithmetic
     const yIso = b === 1 ? `${c} - ${a}x` : `(${c} - ${a}x) / ${b}`;
@@ -1616,8 +1619,8 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
     const a = ri(3, 6), b = ri(3, 6), c = ri(5, 15);
     const d = b * 5, e = -a * 5;
     const dev = [
-      "isoler x dans I", `${b}y - x = ${c}`, `-x = ${c} - ${b}y`, `x = ${-c} + ${b}y`,
-      "injecter I → II et résoudre", `${d}(-${c} + ${b}y) - ${Math.abs(e)} = ${-a * 40}y`,
+      A103_PHASE_ISOLATE, `${b}y - x = ${c}`, `-x = ${c} - ${b}y`, `x = ${-c} + ${b}y`,
+      A103_PHASE_SUBSTITUTE, `${d}(-${c} + ${b}y) - ${Math.abs(e)} = ${-a * 40}y`,
       `${-d * c} + ${d * b}y - ${Math.abs(e)} = ${-a * 40}y`, `${d * b}y = ${a * 40}y`, "-5 = 0", "impossible !",
     ];
     return {
