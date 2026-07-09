@@ -39,7 +39,6 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
           "Addition avec II : 6x − 4y + 8x + 4y = 2 + 68",
           "→ 14x = 70  :14  →  **x = 5**",
           "Substitution dans I : 3(5) − 2y = 1  →  2y = 14  →  **y = 7**",
-          "**S = {(5 ; 7)}**",
         ],
       },
       { type: "heading", fr: "Exemple 2 — multiplication des deux équations", black: true },
@@ -59,7 +58,6 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
           "II × 5 : 15x − 25y = 35",
           "Addition : −16y = 32  : (−16)  →  **y = −2**",
           "Substitution dans II : 3x − 5(−2) = 7  →  3x = −3  →  **x = −1**",
-          "**S = {(−1 ; −2)}**",
         ],
       },
       {
