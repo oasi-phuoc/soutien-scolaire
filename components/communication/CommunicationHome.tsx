@@ -79,7 +79,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 
         return (
           <li key={m.id}>
-            <div className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] border-[var(--color-border-default)] ${allUnavailable ? "opacity-50" : ""}`}>
+            <div className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] border-[var(--color-border-default)] ${allUnavailable ? "opacity-50" : ""}`}>
               <div
                 className="module-list-header"
                 style={{ "--module-header-accent": ACCENT } as React.CSSProperties}

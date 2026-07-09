@@ -473,4 +473,20 @@ input[type=number] {
   --module-header-accent: var(--color-theme);
   background: color-mix(in oklch, var(--module-header-accent) 11%, white);
   border-bottom: 1px solid color-mix(in oklch, var(--module-header-accent) 20%, transparent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.module-list-header button {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Carte repliée : seul l'en-tête est visible → coins inférieurs arrondis aussi */
+.rounded-\[var\(--radius-lg\)\]:not(:has(.border-t)) .module-list-header,
+.rounded-\[var\(--radius-lg\)\]:not(:has(.border-t)) .module-list-header button {
+  border-radius: var(--radius-lg);
+}
+
+.module-list-header button:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-text-primary);
 }
