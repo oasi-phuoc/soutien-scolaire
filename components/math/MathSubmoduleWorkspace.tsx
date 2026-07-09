@@ -1412,7 +1412,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot = "en", showPivot = fals
           {sectionItems.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {sectionItems.map((item, ii) => (
-                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
+                <li key={ii} className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
                   {renderFracText(item)}
                 </li>
               ))}

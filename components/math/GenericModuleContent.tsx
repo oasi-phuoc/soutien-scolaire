@@ -5282,6 +5282,46 @@ function generateProductQuestion(templateIndex: number): SymbolicQuestion {
   return { expression: factors.join(" · "), acceptable: symbolicVariants(result) };
 }
 
+function buildProductTerm(templateSeed: number): { coefficient: number; literal: string; factorDisplay: string } {
+  const powers: Record<string, number> = {};
+  let numeric = 1;
+  const factorParts: string[] = [];
+  const factorCount = 1 + (templateSeed % 3);
+  for (let j = 0; j < factorCount; j++) {
+    const seed = templateSeed + j * 7;
+    const useNumeric = seed % 2 === 0 || (j === factorCount - 1 && factorParts.length === 0);
+    if (useNumeric) {
+      const val = 2 + (seed % 6);
+      numeric *= val;
+      factorParts.push(String(val));
+    } else {
+      const letter = ALGEBRA_SYMBOLS[seed % ALGEBRA_SYMBOLS.length]!;
+      const exponent = seed % 5 === 0 ? 2 : 1;
+      powers[letter] = (powers[letter] ?? 0) + exponent;
+      factorParts.push(`${letter}${SUPER_DIGITS[exponent]}`);
+    }
+  }
+  return { coefficient: numeric, literal: literalText(powers), factorDisplay: factorParts.join(" · ") };
+}
+
+function generateProductAddSubQuestion(templateIndex: number): SymbolicQuestion {
+  const termCount = 2 + (templateIndex % 2);
+  const terms: Array<{ coefficient: number; literal: string; display: string }> = [];
+  for (let i = 0; i < termCount; i++) {
+    const built = buildProductTerm(templateIndex * 5 + i * 11);
+    const sign = i === 0 ? 1 : (templateIndex + i) % 2 === 0 ? -1 : 1;
+    terms.push({
+      coefficient: built.coefficient * sign,
+      literal: built.literal,
+      display: built.factorDisplay,
+    });
+  }
+  return {
+    expression: expressionFromTerms(terms),
+    acceptable: symbolicVariants(polynomialText(terms)),
+  };
+}
+
 function generateReductionQuestion(templateIndex: number, mixed: boolean): SymbolicQuestion {
   const termCount = 4 + (templateIndex % 4);
   const literals = [
@@ -5314,7 +5354,11 @@ function generateReductionQuestion(templateIndex: number, mixed: boolean): Symbo
 
 function genSymbolicGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
   const templates = Array.from({ length: 50 }, (_, index) => {
-    if (exNum === 1) return generateProductQuestion(index);
+    if (exNum === 1) {
+      return index % 2 === 0
+        ? generateProductQuestion(index)
+        : generateProductAddSubQuestion(index);
+    }
     return generateReductionQuestion(index, exNum === 3);
   });
   const instruction = exNum === 1
@@ -5960,7 +6004,6 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genSymbolicGroupStep(lesson, 1));
         steps.push(genSymbolicGroupStep(lesson, 2));
         steps.push(genSymbolicGroupStep(lesson, 3));
-        steps.push(genSymbolicTrueFalseStep(lesson));
       } else if (sid === "A9-5") {
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
@@ -5983,7 +6026,6 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genSymbolicGroupStep(lesson, 1));
         steps.push(genSymbolicGroupStep(lesson, 2));
         steps.push(genSymbolicGroupStep(lesson, 3));
-        steps.push(genSymbolicTrueFalseStep(lesson));
       } else if (sid === "A9-5") {
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
@@ -6781,7 +6823,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           {items.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {items.map((item, ii) => (
-                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
+                <li key={ii} className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
                   {renderText(item)}
                 </li>
               ))}
