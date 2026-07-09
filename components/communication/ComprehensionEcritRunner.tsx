@@ -219,7 +219,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Remplacement",
-      image: "/assets/words/lecture/remplacement.webp",
+      image: "/assets/words/lecture/comptoire.webp",
       imageLabel: "Remplacement",
       body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.\n— Samira",
       questions: [
@@ -251,7 +251,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Consigne de sécurité",
-      image: "/assets/words/lecture/securite.webp",
+      image: "/assets/words/lecture/sortie-secours.webp",
       imageLabel: "Sécurité",
       body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bâtiment.",
       questions: [
@@ -261,7 +261,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Atelier cuisine",
-      image: "/assets/words/lecture/cuisine.webp",
+      image: "/assets/words/lecture/aliments.webp",
       imageLabel: "Cuisine",
       body: "Lisez toute la recette avant de commencer. Préparez les ingrédients sur la table. Rangez le matériel après l'activité.",
       questions: [
@@ -277,12 +277,12 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
     title: "Améliorez votre mémoire !",
     sections: [
       { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/assets/words/lecture/alimentation.webp", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/assets/words/lecture/sport.webp", imageLabel: "Sport" },
+      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/assets/words/lecture/velo.webp", imageLabel: "Sport" },
       { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/assets/words/lecture/activite-mentale.webp", imageLabel: "Activité mentale" },
     ],
     questions: [
       { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/assets/words/lecture/marche.webp" }, { label: "La boxe", image: "/assets/words/lecture/boxe.webp" }, { label: "Le ski nautique", image: "/assets/words/lecture/ski-nautique.webp" }], correct: 0, image: true },
+      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/assets/words/lecture/chaussures.webp" }, { label: "La boxe", image: "/assets/words/lecture/gant-boxe.webp" }, { label: "Le ski nautique", image: "/assets/expression/images/scene/faire-ski.webp" }], correct: 0, image: true },
       { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
       { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
       { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
@@ -293,13 +293,13 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
   {
     title: "Bien vivre en hiver",
     sections: [
-      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/assets/words/lecture/froid.webp", imageLabel: "Froid" },
+      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "/assets/words/lecture/veste-hiver.webp", imageLabel: "Froid" },
       { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "/assets/words/lecture/hiver.webp", imageLabel: "Hiver" },
-      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/assets/words/lecture/lavage-mains.webp", imageLabel: "Lavage des mains" },
+      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "/assets/words/lecture/lavabo.webp", imageLabel: "Lavage des mains" },
     ],
     questions: [
       { prompt: "Que faut-il porter quand il fait froid ?", choices: [{ label: "Un manteau chaud" }, { label: "Un maillot de bain" }, { label: "Des sandales" }], correct: 0 },
-      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/assets/words/lecture/neige.webp" }, { label: "Soleil d'été", image: "/assets/words/lecture/soleil.webp" }, { label: "Plage", image: "/assets/words/lecture/plage.webp" }], correct: 0, image: true },
+      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/assets/expression/images/scene/neige.webp" }, { label: "Soleil d'été", image: "/assets/words/lecture/soleil.webp" }, { label: "Plage", image: "/assets/words/lecture/plage.webp" }], correct: 0, image: true },
       { prompt: "Que faut-il aérer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
       { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenêtres" }], correct: 0 },
       { prompt: "Que faire si on est fatigué ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },
