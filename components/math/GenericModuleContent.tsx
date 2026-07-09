@@ -4633,7 +4633,7 @@ function genFracEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): Equat
     ({ expr, solution, development, operations });
   const commonOps = (mult: number, more: string[]) => [
     "même dénominateur",
-    `· ${mult}\n(«explosion de fractions»)`,
+    `· ${mult}`,
     "réduire",
     ...more,
   ];
