@@ -110,7 +110,7 @@ export function SuiviClassAssignmentsClient() {
   }
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-6 pb-32">
       {CLASS_LEVELS.map((level) => {
         const levelClasses = grouped[level];
         if (levelClasses.length === 0) return null;
@@ -186,7 +186,7 @@ export function SuiviClassAssignmentsClient() {
         </p>
       )}
 
-      <div className="fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] z-20 flex justify-end px-4 lg:bottom-6">
+      <div className="fixed inset-x-0 bottom-[calc(5.75rem+env(safe-area-inset-bottom,0px))] z-20 flex justify-end px-4 lg:bottom-6">
         <button
           type="button"
           onClick={save}

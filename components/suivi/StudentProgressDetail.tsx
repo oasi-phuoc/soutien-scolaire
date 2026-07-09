@@ -98,53 +98,86 @@ function BranchToggle<T extends string>({
   );
 }
 
-function RecentLessons({ items }: { items: { code: string; title: string; gradeLabel: string | null }[] }) {
-  if (items.length === 0) {
+function RecentLesson({ item }: { item: { code: string; title: string; gradeLabel: string | null } | null }) {
+  if (!item) {
     return <p className="text-xs text-zinc-400">Aucune leçon complétée récemment.</p>;
   }
   return (
-    <ul className="space-y-1">
-      {items.map((item) => (
-        <li key={item.code} className="flex items-center justify-between gap-2 text-xs">
-          <span className="min-w-0 truncate text-zinc-700 dark:text-zinc-200">
-            <span className="font-semibold text-zinc-500">{item.code}</span>
-            {" — "}
-            {item.title}
-          </span>
-          {item.gradeLabel && (
-            <span className="shrink-0 font-bold tabular-nums text-zinc-600 dark:text-zinc-300">{item.gradeLabel}</span>
-          )}
-        </li>
-      ))}
-    </ul>
+    <div className="flex min-w-0 items-center justify-between gap-2 text-xs">
+      <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-200" title={`${item.code} — ${item.title}`}>
+        <span className="font-semibold text-zinc-500">{item.code}</span>
+        {" — "}
+        {item.title}
+      </span>
+      {item.gradeLabel && (
+        <span className="shrink-0 font-bold tabular-nums text-zinc-600 dark:text-zinc-300">{item.gradeLabel}</span>
+      )}
+    </div>
   );
 }
 
+const MODULE_ROW_BG = [
+  "bg-zinc-50 dark:bg-zinc-900/40",
+  "bg-white dark:bg-zinc-950",
+] as const;
+
 function ModuleLessonList({ groups }: { groups: ModuleProgressGroup[] }) {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
   if (groups.length === 0) {
     return <p className="text-xs text-zinc-400">Aucune leçon dans cette section.</p>;
   }
+
+  function toggleModule(moduleId: string) {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(moduleId)) next.delete(moduleId);
+      else next.add(moduleId);
+      return next;
+    });
+  }
+
   return (
-    <div className="space-y-3">
-      {groups.map((group) => (
-        <div key={group.moduleId}>
-          <p className="text-xs font-bold text-[var(--color-theme)]">Module {group.moduleCode}</p>
-          <ul className="mt-1 divide-y divide-zinc-100 dark:divide-zinc-800">
-            {group.lessons.map((lesson) => (
-              <li key={lesson.id} className="flex items-center justify-between gap-2 py-1.5 text-xs">
-                <span className="min-w-0 truncate text-zinc-700 dark:text-zinc-200">
-                  <span className="font-semibold text-zinc-500">{lesson.code}</span>
-                  {" — "}
-                  {lesson.title}
-                </span>
-                <span className={`shrink-0 font-bold tabular-nums ${lesson.gradeLabel ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-300"}`}>
-                  {lesson.gradeLabel ?? "—"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className="min-w-0 space-y-1 overflow-hidden">
+      {groups.map((group, idx) => {
+        const isOpen = expanded.has(group.moduleId);
+        return (
+          <div key={group.moduleId} className={`overflow-hidden rounded-lg ${MODULE_ROW_BG[idx % 2]}`}>
+            <button
+              type="button"
+              onClick={() => toggleModule(group.moduleId)}
+              className="flex w-full min-w-0 items-center justify-between gap-2 px-2.5 py-2 text-left"
+              aria-expanded={isOpen}
+            >
+              <span className="min-w-0 truncate text-xs font-bold text-[var(--color-theme)]">
+                Module {group.moduleCode}
+              </span>
+              <span className="shrink-0 text-base font-light leading-none text-zinc-400" aria-hidden>
+                {isOpen ? "−" : "+"}
+              </span>
+            </button>
+            {isOpen && (
+              <ul className="divide-y divide-zinc-100 border-t border-zinc-100/80 px-2 dark:divide-zinc-800 dark:border-zinc-800">
+                {group.lessons.map((lesson) => (
+                  <li key={lesson.id} className="flex min-w-0 items-center justify-between gap-2 py-1.5 text-xs">
+                    <span
+                      className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-200"
+                      title={`${lesson.code} — ${lesson.title}`}
+                    >
+                      <span className="font-semibold text-zinc-500">{lesson.code}</span>
+                      {" — "}
+                      {lesson.title}
+                    </span>
+                    <span className={`shrink-0 font-bold tabular-nums ${lesson.gradeLabel ? "text-zinc-700 dark:text-zinc-200" : "text-zinc-300"}`}>
+                      {lesson.gradeLabel ?? "—"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -182,7 +215,7 @@ function SubjectBlock({
       <div className="px-3 pb-1">
         <Bar pct={stat.pct} fill={fill} />
       </div>
-      {open && <div className="space-y-3 border-t border-zinc-100 px-3 py-3 dark:border-zinc-800">{children}</div>}
+      {open && <div className="min-w-0 space-y-3 overflow-hidden border-t border-zinc-100 px-3 py-3 dark:border-zinc-800">{children}</div>}
     </div>
   );
 }
@@ -269,7 +302,7 @@ export function StudentProgressDetail({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="min-w-0 max-w-full space-y-3 overflow-hidden">
       <SubjectBlock
         label="Maths"
         stat={math}
@@ -282,8 +315,8 @@ export function StudentProgressDetail({
           <p className="text-lg font-bold text-zinc-800 dark:text-zinc-100">{formatDuration(time7d ?? 0)}</p>
         </div>
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
-          <RecentLessons items={getRecentMathLessons(progress)} />
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernière leçon complétée</p>
+          <RecentLesson item={getRecentMathLessons(progress, 1)[0] ?? null} />
         </div>
         <BranchToggle
           options={[
@@ -293,7 +326,7 @@ export function StudentProgressDetail({
           selected={mathBranch}
           onToggle={(id) => toggleBranch(mathBranch, id, setMathBranch)}
         />
-        {mathBranch && <ModuleLessonList groups={getMathModuleGroups(progress, mathBranch)} />}
+        {mathBranch && <ModuleLessonList key={mathBranch} groups={getMathModuleGroups(progress, mathBranch)} />}
       </SubjectBlock>
 
       <SubjectBlock
@@ -304,8 +337,8 @@ export function StudentProgressDetail({
         onToggle={() => setOpenSubject((s) => (s === "french" ? null : "french"))}
       >
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
-          <RecentLessons items={getRecentFrenchLessons(progress)} />
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernière leçon complétée</p>
+          <RecentLesson item={getRecentFrenchLessons(progress, 1)[0] ?? null} />
         </div>
         <BranchToggle
           options={[
@@ -316,7 +349,7 @@ export function StudentProgressDetail({
           selected={frenchTab}
           onToggle={(id) => toggleBranch(frenchTab, id, setFrenchTab)}
         />
-        {frenchTab && <ModuleLessonList groups={getFrenchModuleGroups(progress, frenchTab)} />}
+        {frenchTab && <ModuleLessonList key={frenchTab} groups={getFrenchModuleGroups(progress, frenchTab)} />}
       </SubjectBlock>
 
       <SubjectBlock
@@ -327,15 +360,15 @@ export function StudentProgressDetail({
         onToggle={() => setOpenSubject((s) => (s === "lecture" ? null : "lecture"))}
       >
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
-          <RecentLessons items={getRecentLectureLessons(progress)} />
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernière leçon complétée</p>
+          <RecentLesson item={getRecentLectureLessons(progress, 1)[0] ?? null} />
         </div>
         <BranchToggle
           options={[{ id: "apprendre" as const, label: "Apprendre" }]}
           selected={lectureSection}
           onToggle={(id) => toggleBranch(lectureSection, id, setLectureSection)}
         />
-        {lectureSection && <ModuleLessonList groups={getLectureModuleGroups(progress)} />}
+        {lectureSection && <ModuleLessonList key="apprendre" groups={getLectureModuleGroups(progress)} />}
       </SubjectBlock>
 
       <div className="rounded-xl border border-zinc-100 dark:border-zinc-800">

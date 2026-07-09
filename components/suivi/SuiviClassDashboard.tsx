@@ -225,7 +225,7 @@ export function SuiviClassDashboard({
                     )}
                     {progressOpen && (
                       <tr className="bg-zinc-50 dark:bg-zinc-900/50">
-                        <td colSpan={7} className="px-4 py-4">
+                        <td colSpan={7} className="max-w-0 px-4 py-4">
                           <StudentProgressDetail userId={s.id} />
                         </td>
                       </tr>
