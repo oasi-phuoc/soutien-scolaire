@@ -289,7 +289,7 @@ function PlacementModuleToggle({
   onChange: (enabled: boolean) => void;
 }) {
   return (
-    <div className="flex items-center gap-2.5">
+    <label className="flex shrink-0 cursor-pointer items-center gap-3 select-none">
       <button
         type="button"
         role="switch"
@@ -297,21 +297,21 @@ function PlacementModuleToggle({
         aria-label="Module TCF / TCM"
         disabled={disabled}
         onClick={() => onChange(!enabled)}
-        className={`relative h-7 w-12 shrink-0 rounded-full transition-colors disabled:opacity-50 ${
+        className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
           enabled ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
         }`}
       >
         <span
-          className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
-            enabled ? "translate-x-[22px]" : "translate-x-0.5"
+          className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
+            enabled ? "translate-x-4" : "translate-x-0"
           }`}
         />
       </button>
-      <span className="text-sm text-zinc-600 dark:text-zinc-300">
+      <span className="whitespace-nowrap text-sm text-zinc-600 dark:text-zinc-300">
         Module TCF / TCM{" "}
         <span className="font-semibold text-zinc-800 dark:text-zinc-100">{enabled ? "actif" : "inactif"}</span>
       </span>
-    </div>
+    </label>
   );
 }
 
@@ -374,7 +374,7 @@ export function AdminTable({
     <>
       {/* Filters */}
       <div className="mb-4">
-        <div className="mb-2 flex items-center gap-2">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
           <div className="relative flex-1 max-w-sm">
             <input
               type="search"
