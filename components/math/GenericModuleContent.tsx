@@ -6987,7 +6987,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       const items = itemsFor(block.itemsFr, bt?.items?.[pivot]);
       return (
         <div className="space-y-1.5">
-          {label && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{label}</p>}
+          {label && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderText(label)}</p>}
           {items.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {items.map((item, ii) => (
