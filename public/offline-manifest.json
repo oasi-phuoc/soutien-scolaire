@@ -1,6 +1,6 @@
 {
-  "version": 1783608248986,
-  "totalBytes": 204272091,
+  "version": 1783608640181,
+  "totalBytes": 204313889,
   "routes": [
     "/",
     "/avant-propos",
@@ -1139,6 +1139,7 @@
     "/assets/words/lecture/ail.webp",
     "/assets/words/lecture/album.webp",
     "/assets/words/lecture/alimentation.webp",
+    "/assets/words/lecture/aliments.webp",
     "/assets/words/lecture/allumette.webp",
     "/assets/words/lecture/alphabet.webp",
     "/assets/words/lecture/ambulance.webp",
@@ -1218,7 +1219,6 @@
     "/assets/words/lecture/boussole.webp",
     "/assets/words/lecture/bouteille.webp",
     "/assets/words/lecture/boutique.webp",
-    "/assets/words/lecture/boxe.webp",
     "/assets/words/lecture/bracelet.webp",
     "/assets/words/lecture/bras.webp",
     "/assets/words/lecture/briquet.webp",
@@ -1331,6 +1331,7 @@
     "/assets/words/lecture/comete.webp",
     "/assets/words/lecture/commode.webp",
     "/assets/words/lecture/compas.webp",
+    "/assets/words/lecture/comptoire.webp",
     "/assets/words/lecture/concombre.webp",
     "/assets/words/lecture/cone.webp",
     "/assets/words/lecture/confiture.webp",
@@ -1366,7 +1367,6 @@
     "/assets/words/lecture/cube-1.webp",
     "/assets/words/lecture/cube.webp",
     "/assets/words/lecture/cuir.webp",
-    "/assets/words/lecture/cuisine.webp",
     "/assets/words/lecture/cuisinier.webp",
     "/assets/words/lecture/culotte.webp",
     "/assets/words/lecture/cupcake.webp",
@@ -1459,12 +1459,12 @@
     "/assets/words/lecture/fraise.webp",
     "/assets/words/lecture/framboise.webp",
     "/assets/words/lecture/frites.webp",
-    "/assets/words/lecture/froid.webp",
     "/assets/words/lecture/fromage.webp",
     "/assets/words/lecture/fruit.webp",
     "/assets/words/lecture/fuite.webp",
     "/assets/words/lecture/fusee.webp",
     "/assets/words/lecture/galaxie.webp",
+    "/assets/words/lecture/gant-boxe.webp",
     "/assets/words/lecture/gants.webp",
     "/assets/words/lecture/gare.webp",
     "/assets/words/lecture/gateau.webp",
@@ -1629,8 +1629,8 @@
     "/assets/words/lecture/lampe.webp",
     "/assets/words/lecture/langue.webp",
     "/assets/words/lecture/lapin.webp",
+    "/assets/words/lecture/lavabo.webp",
     "/assets/words/lecture/lavage-des-mains.webp",
-    "/assets/words/lecture/lavage-mains.webp",
     "/assets/words/lecture/lavande.webp",
     "/assets/words/lecture/lave-vaisselle.webp",
     "/assets/words/lecture/legging.webp",
@@ -1672,7 +1672,6 @@
     "/assets/words/lecture/manteau.webp",
     "/assets/words/lecture/maracas.webp",
     "/assets/words/lecture/marais.webp",
-    "/assets/words/lecture/marche.webp",
     "/assets/words/lecture/marguerite.webp",
     "/assets/words/lecture/marionnette.webp",
     "/assets/words/lecture/marmite.webp",
@@ -1719,7 +1718,6 @@
     "/assets/words/lecture/navet.webp",
     "/assets/words/lecture/navire.webp",
     "/assets/words/lecture/nectarine.webp",
-    "/assets/words/lecture/neige.webp",
     "/assets/words/lecture/nenuphar.webp",
     "/assets/words/lecture/neveu.webp",
     "/assets/words/lecture/nez.webp",
@@ -1866,7 +1864,6 @@
     "/assets/words/lecture/rectangle.webp",
     "/assets/words/lecture/refrigerateur.webp",
     "/assets/words/lecture/regle.webp",
-    "/assets/words/lecture/remplacement.webp",
     "/assets/words/lecture/renard.webp",
     "/assets/words/lecture/requin.webp",
     "/assets/words/lecture/restaurant.webp",
@@ -1903,7 +1900,6 @@
     "/assets/words/lecture/scotch.webp",
     "/assets/words/lecture/seau.webp",
     "/assets/words/lecture/seche-cheveux.webp",
-    "/assets/words/lecture/securite.webp",
     "/assets/words/lecture/semaine.webp",
     "/assets/words/lecture/sentier.webp",
     "/assets/words/lecture/sequoia.webp",
@@ -1914,7 +1910,6 @@
     "/assets/words/lecture/sifflet.webp",
     "/assets/words/lecture/singe.webp",
     "/assets/words/lecture/skateboard.webp",
-    "/assets/words/lecture/ski-nautique.webp",
     "/assets/words/lecture/ski.webp",
     "/assets/words/lecture/smartphone.webp",
     "/assets/words/lecture/smoothie.webp",
@@ -1923,6 +1918,7 @@
     "/assets/words/lecture/soeur.webp",
     "/assets/words/lecture/soie.webp",
     "/assets/words/lecture/soleil.webp",
+    "/assets/words/lecture/sortie-secours.webp",
     "/assets/words/lecture/soulier.webp",
     "/assets/words/lecture/soupe.webp",
     "/assets/words/lecture/source.webp",
@@ -1931,7 +1927,6 @@
     "/assets/words/lecture/sous-marin.webp",
     "/assets/words/lecture/soutien-gorge.webp",
     "/assets/words/lecture/sphere.webp",
-    "/assets/words/lecture/sport.webp",
     "/assets/words/lecture/stade.webp",
     "/assets/words/lecture/station-spatiale.webp",
     "/assets/words/lecture/station.webp",
@@ -2002,6 +1997,7 @@
     "/assets/words/lecture/ver-de-terre.webp",
     "/assets/words/lecture/verre.webp",
     "/assets/words/lecture/vert.webp",
+    "/assets/words/lecture/veste-hiver.webp",
     "/assets/words/lecture/veste.webp",
     "/assets/words/lecture/veterinaire.webp",
     "/assets/words/lecture/viande.webp",
@@ -2136,6 +2132,7 @@
     "/assets/words/vocab/V10/receptionniste.webp",
     "/assets/words/vocab/V10/reservation.webp",
     "/assets/words/vocab/V10/sandwich.webp",
+    "/assets/words/vocab/V10/securite.webp",
     "/assets/words/vocab/V10/serviette.webp",
     "/assets/words/vocab/V10/table.webp",
     "/assets/words/vocab/V10/tarte.webp",
@@ -2156,6 +2153,7 @@
     "/assets/words/vocab/V2/decembre.webp",
     "/assets/words/vocab/V2/ete.webp",
     "/assets/words/vocab/V2/fevrier.webp",
+    "/assets/words/vocab/V2/froid.webp",
     "/assets/words/vocab/V2/gel.webp",
     "/assets/words/vocab/V2/grele.webp",
     "/assets/words/vocab/V2/heure.webp",
@@ -2198,6 +2196,7 @@
     "/assets/words/vocab/V4/centre-ville.webp",
     "/assets/words/vocab/V4/chaudiere.webp",
     "/assets/words/vocab/V4/congelateur.webp",
+    "/assets/words/vocab/V4/cuisine.webp",
     "/assets/words/vocab/V4/cuisiniere.webp",
     "/assets/words/vocab/V4/dortoir.webp",
     "/assets/words/vocab/V4/electricite.webp",
@@ -2214,7 +2213,6 @@
     "/assets/words/vocab/V4/informatique.webp",
     "/assets/words/vocab/V4/interrupteur.webp",
     "/assets/words/vocab/V4/lamp.webp",
-    "/assets/words/vocab/V4/lavabo.webp",
     "/assets/words/vocab/V4/lave-linge.webp",
     "/assets/words/vocab/V4/lave-vaiselle.webp",
     "/assets/words/vocab/V4/lit.webp",
@@ -2268,6 +2266,7 @@
     "/assets/words/vocab/V5/salle.webp",
     "/assets/words/vocab/V5/secretariat.webp",
     "/assets/words/vocab/V5/sonnerie.webp",
+    "/assets/words/vocab/V5/sport.webp",
     "/assets/words/vocab/V5/taille-crayon.webp",
     "/assets/words/vocab/V6/debardeur.webp",
     "/assets/words/vocab/V6/gilet.webp",
@@ -2372,6 +2371,7 @@
     "/assets/words/vocab/V9/la-bas.webp",
     "/assets/words/vocab/V9/librairie.webp",
     "/assets/words/vocab/V9/magasin.webp",
+    "/assets/words/vocab/V9/marche.webp",
     "/assets/words/vocab/V9/musee.webp",
     "/assets/words/vocab/V9/musicien.webp",
     "/assets/words/vocab/V9/nord.webp",
@@ -5521,6 +5521,11 @@
       "revision": "9c1f9d6c89b5b129"
     },
     {
+      "url": "/assets/words/lecture/aliments.webp",
+      "size": 45980,
+      "revision": "f9ea47bbc88b9689"
+    },
+    {
       "url": "/assets/words/lecture/allumette.webp",
       "size": 2594,
       "revision": "c71f39930d13e4b5"
@@ -5914,11 +5919,6 @@
       "url": "/assets/words/lecture/boutique.webp",
       "size": 25060,
       "revision": "25eb890003f524e4"
-    },
-    {
-      "url": "/assets/words/lecture/boxe.webp",
-      "size": 20608,
-      "revision": "dff4c4e90ab9892f"
     },
     {
       "url": "/assets/words/lecture/bracelet.webp",
@@ -6481,6 +6481,11 @@
       "revision": "fdb334067d146637"
     },
     {
+      "url": "/assets/words/lecture/comptoire.webp",
+      "size": 18714,
+      "revision": "f8ef5d885001011e"
+    },
+    {
       "url": "/assets/words/lecture/concombre.webp",
       "size": 19086,
       "revision": "a1bfb9e1d6b2ab4e"
@@ -6654,11 +6659,6 @@
       "url": "/assets/words/lecture/cuir.webp",
       "size": 45420,
       "revision": "b6a04f8575a3168e"
-    },
-    {
-      "url": "/assets/words/lecture/cuisine.webp",
-      "size": 45980,
-      "revision": "f9ea47bbc88b9689"
     },
     {
       "url": "/assets/words/lecture/cuisinier.webp",
@@ -7121,11 +7121,6 @@
       "revision": "7168bdf5a7b4fee9"
     },
     {
-      "url": "/assets/words/lecture/froid.webp",
-      "size": 37008,
-      "revision": "394debcb358210d5"
-    },
-    {
       "url": "/assets/words/lecture/fromage.webp",
       "size": 11544,
       "revision": "cf7da78dc92b05ba"
@@ -7149,6 +7144,11 @@
       "url": "/assets/words/lecture/galaxie.webp",
       "size": 58744,
       "revision": "3fd69638ba4bf39d"
+    },
+    {
+      "url": "/assets/words/lecture/gant-boxe.webp",
+      "size": 20608,
+      "revision": "dff4c4e90ab9892f"
     },
     {
       "url": "/assets/words/lecture/gants.webp",
@@ -7971,14 +7971,14 @@
       "revision": "1112e76e4c0cbac0"
     },
     {
+      "url": "/assets/words/lecture/lavabo.webp",
+      "size": 8036,
+      "revision": "fb4ab0e9ea1825ee"
+    },
+    {
       "url": "/assets/words/lecture/lavage-des-mains.webp",
       "size": 8950,
       "revision": "97a56607125237f6"
-    },
-    {
-      "url": "/assets/words/lecture/lavage-mains.webp",
-      "size": 8036,
-      "revision": "fb4ab0e9ea1825ee"
     },
     {
       "url": "/assets/words/lecture/lavande.webp",
@@ -8184,11 +8184,6 @@
       "url": "/assets/words/lecture/marais.webp",
       "size": 63252,
       "revision": "718bc8a5d2a3983b"
-    },
-    {
-      "url": "/assets/words/lecture/marche.webp",
-      "size": 38974,
-      "revision": "bce19da738a755be"
     },
     {
       "url": "/assets/words/lecture/marguerite.webp",
@@ -8419,11 +8414,6 @@
       "url": "/assets/words/lecture/nectarine.webp",
       "size": 30786,
       "revision": "bbd9b534c3e24d12"
-    },
-    {
-      "url": "/assets/words/lecture/neige.webp",
-      "size": 34886,
-      "revision": "6df1f8ebfcc99ae0"
     },
     {
       "url": "/assets/words/lecture/nenuphar.webp",
@@ -9156,11 +9146,6 @@
       "revision": "e003eb2fa10a08c5"
     },
     {
-      "url": "/assets/words/lecture/remplacement.webp",
-      "size": 18714,
-      "revision": "f8ef5d885001011e"
-    },
-    {
       "url": "/assets/words/lecture/renard.webp",
       "size": 26652,
       "revision": "b98153b9ba3392cf"
@@ -9341,11 +9326,6 @@
       "revision": "6a880c6a381b392c"
     },
     {
-      "url": "/assets/words/lecture/securite.webp",
-      "size": 8660,
-      "revision": "3fa80aeae209325e"
-    },
-    {
       "url": "/assets/words/lecture/semaine.webp",
       "size": 12868,
       "revision": "3a31eccafc21e27b"
@@ -9396,11 +9376,6 @@
       "revision": "0178d0ddc1020dcf"
     },
     {
-      "url": "/assets/words/lecture/ski-nautique.webp",
-      "size": 7924,
-      "revision": "da93fc9b64da4dbb"
-    },
-    {
       "url": "/assets/words/lecture/ski.webp",
       "size": 19242,
       "revision": "16499edaae7c1ec9"
@@ -9441,6 +9416,11 @@
       "revision": "7669e631989abcc4"
     },
     {
+      "url": "/assets/words/lecture/sortie-secours.webp",
+      "size": 8660,
+      "revision": "3fa80aeae209325e"
+    },
+    {
       "url": "/assets/words/lecture/soulier.webp",
       "size": 12646,
       "revision": "30dfb42db215f029"
@@ -9479,11 +9459,6 @@
       "url": "/assets/words/lecture/sphere.webp",
       "size": 7912,
       "revision": "566fab393bda0191"
-    },
-    {
-      "url": "/assets/words/lecture/sport.webp",
-      "size": 40128,
-      "revision": "52c436acf4fb02b9"
     },
     {
       "url": "/assets/words/lecture/stade.webp",
@@ -9834,6 +9809,11 @@
       "url": "/assets/words/lecture/vert.webp",
       "size": 9662,
       "revision": "e78ea050f6bb7e59"
+    },
+    {
+      "url": "/assets/words/lecture/veste-hiver.webp",
+      "size": 37008,
+      "revision": "394debcb358210d5"
     },
     {
       "url": "/assets/words/lecture/veste.webp",
@@ -10506,6 +10486,11 @@
       "revision": "5e7332287764846a"
     },
     {
+      "url": "/assets/words/vocab/V10/securite.webp",
+      "size": 28522,
+      "revision": "33b1aee71acf053e"
+    },
+    {
       "url": "/assets/words/vocab/V10/serviette.webp",
       "size": 2564,
       "revision": "865c81d947f8a995"
@@ -10604,6 +10589,11 @@
       "url": "/assets/words/vocab/V2/fevrier.webp",
       "size": 75506,
       "revision": "9419587875b02bed"
+    },
+    {
+      "url": "/assets/words/vocab/V2/froid.webp",
+      "size": 44382,
+      "revision": "64d214a42e0a8d9e"
     },
     {
       "url": "/assets/words/vocab/V2/gel.webp",
@@ -10816,6 +10806,11 @@
       "revision": "c28e3c573ded3fb8"
     },
     {
+      "url": "/assets/words/vocab/V4/cuisine.webp",
+      "size": 20628,
+      "revision": "5c3eeb63925bc344"
+    },
+    {
       "url": "/assets/words/vocab/V4/cuisiniere.webp",
       "size": 3828,
       "revision": "0b68b7a76d2e2e89"
@@ -10894,11 +10889,6 @@
       "url": "/assets/words/vocab/V4/lamp.webp",
       "size": 3118,
       "revision": "3967931ee73848ae"
-    },
-    {
-      "url": "/assets/words/vocab/V4/lavabo.webp",
-      "size": 3356,
-      "revision": "61f0e5cef19e19bd"
     },
     {
       "url": "/assets/words/vocab/V4/lave-linge.webp",
@@ -11164,6 +11154,11 @@
       "url": "/assets/words/vocab/V5/sonnerie.webp",
       "size": 14176,
       "revision": "e3494e495bc85c1f"
+    },
+    {
+      "url": "/assets/words/vocab/V5/sport.webp",
+      "size": 35858,
+      "revision": "035b039d177287bb"
     },
     {
       "url": "/assets/words/vocab/V5/taille-crayon.webp",
@@ -11684,6 +11679,11 @@
       "url": "/assets/words/vocab/V9/magasin.webp",
       "size": 32096,
       "revision": "881eb5d71953c07a"
+    },
+    {
+      "url": "/assets/words/vocab/V9/marche.webp",
+      "size": 37676,
+      "revision": "8c94b23c2c34d391"
     },
     {
       "url": "/assets/words/vocab/V9/musee.webp",
