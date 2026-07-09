@@ -123,7 +123,7 @@ function EquationCorrectionLines({
   operations?: string[];
 }) {
   const rows = lines
-    .map((line, i) => ({ line, op: operations[i] ?? "" }))
+    .map((line, i) => ({ line, op: operations[i]?.trim() ?? "" }))
     .filter(({ line }) => !isSolutionSetLine(line));
 
   const parsed = rows.map(({ line, op }) => {
@@ -142,39 +142,41 @@ function EquationCorrectionLines({
     (max, r) => (r.hasEquation ? Math.max(max, r.lhs.length) : max),
     0,
   );
-  const lhsWidthCh = Math.max(maxLhsLen + 0.5, 3);
-  const hasOps = parsed.some(r => r.op.trim().length > 0);
+  const lhsWidthCh = Math.max(maxLhsLen + 0.5, 2);
+  const maxOpLen = parsed.reduce((max, r) => Math.max(max, r.op.length), 0);
+  const opWidthCh = Math.max(maxOpLen + 0.5, 3);
 
   return (
-    <div className="space-y-1 text-left font-mono text-sm text-amber-600">
-      {parsed.map(({ hasEquation, lhs, rhs, full, op }, i) => (
-        <div key={`${full}-${i}`} className="flex items-start gap-4">
-          <div className="min-w-0">
-            {hasEquation ? (
-              <span className="inline-flex items-baseline whitespace-nowrap">
-                <span
-                  className="inline-block shrink-0 text-right tabular-nums"
-                  style={{ width: `${lhsWidthCh}ch` }}
-                >
-                  {renderText(lhs)}
-                </span>
-                <span className="mx-1 shrink-0">=</span>
-                <span>{renderText(rhs)}</span>
-              </span>
-            ) : (
-              <span className="font-bold">{renderText(full)}</span>
-            )}
-          </div>
-          {hasOps && (
-            <span
-              className={`min-h-5 shrink-0 whitespace-pre-line border-l border-amber-500 pl-3 text-left ${op.trim() ? "" : "text-transparent"}`}
+    <table className="mx-auto w-full max-w-full border-collapse font-mono text-sm text-amber-600">
+      <tbody>
+        {parsed.map(({ hasEquation, lhs, rhs, full, op }, i) => (
+          <tr key={`${full}-${i}`}>
+            <td
+              className="align-top pr-4 text-right text-xs leading-5 text-amber-600/90 whitespace-nowrap"
+              style={{ width: `${opWidthCh}ch` }}
             >
-              {op.trim() || "."}
-            </span>
-          )}
-        </div>
-      ))}
-    </div>
+              {op ? renderText(op) : "\u00A0"}
+            </td>
+            <td className="align-top text-left leading-5">
+              {hasEquation ? (
+                <span className="inline-flex items-baseline whitespace-nowrap">
+                  <span
+                    className="inline-block shrink-0 text-right tabular-nums"
+                    style={{ width: `${lhsWidthCh}ch` }}
+                  >
+                    {renderText(lhs)}
+                  </span>
+                  <span className="mx-1 shrink-0">=</span>
+                  <span>{renderText(rhs)}</span>
+                </span>
+              ) : (
+                <span className="font-bold">{renderText(full)}</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
