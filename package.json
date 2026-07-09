@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "audit:phonemes": "npx tsx scripts/audit-lecture-phonemes.ts",
+    "generate:lecture-words": "npx tsx scripts/generate-lecture-word-items.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "mobile:sync": "cap sync",
