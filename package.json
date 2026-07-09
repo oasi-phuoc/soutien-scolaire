@@ -9,6 +9,7 @@
     "lint": "eslint",
     "audit:phonemes": "npx tsx scripts/audit-lecture-phonemes.ts",
     "generate:lecture-words": "npx tsx scripts/generate-lecture-word-items.ts",
+    "generate:offline-manifest": "node scripts/generate-offline-manifest.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "mobile:sync": "cap sync",

@@ -1,3 +1,11 @@
+/**
+ * Génère offline-manifest.json pour le mode hors connexion.
+ *
+ * N'inclut que les assets réellement référencés dans l'app (index images,
+ * contenu curriculum, icônes UI, math, lettres…) — pas tout le dossier public/.
+ *
+ * Usage: node scripts/generate-offline-manifest.cjs
+ */
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -5,29 +13,94 @@ const crypto = require("crypto");
 const root = process.cwd();
 const publicDir = path.join(root, "public");
 
+const IMAGE_RE = /\.(webp|png|svg|jpe?g)$/i;
+const SOURCE_DIRS = ["lib", "components", "app"];
+const STATIC_IMAGE_DIRS = [
+  "assets/icons",
+  "assets/math",
+  "assets/letters/img",
+];
+
+const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);
+
 function read(rel) {
   return fs.readFileSync(path.join(root, rel), "utf8");
 }
 
-function walk(dir) {
-  const out = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      out.push(...walk(full));
-    } else {
-      out.push(full);
-    }
+function unique(values) {
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b, "fr"));
+}
+
+function publicUrl(absPath) {
+  return `/${path.relative(publicDir, absPath).replace(/\\/g, "/")}`;
+}
+
+function fileExists(url) {
+  return fs.existsSync(path.join(publicDir, url.slice(1)));
+}
+
+function walkSourceFiles(dir, out = []) {
+  const full = path.join(root, dir);
+  if (!fs.existsSync(full)) return out;
+  for (const entry of fs.readdirSync(full, { withFileTypes: true })) {
+    if (entry.name === "node_modules" || entry.name === ".next") continue;
+    const child = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkSourceFiles(child, out);
+    else if (/\.(ts|tsx)$/.test(entry.name)) out.push(child);
   }
   return out;
 }
 
-function publicUrl(file) {
-  return `/${path.relative(publicDir, file).replace(/\\/g, "/")}`;
+function walkPublicImages(relDir, urlPrefix) {
+  const abs = path.join(publicDir, relDir);
+  if (!fs.existsSync(abs)) return [];
+  const out = [];
+  function walk(currentAbs, currentPrefix) {
+    for (const entry of fs.readdirSync(currentAbs, { withFileTypes: true })) {
+      const childAbs = path.join(currentAbs, entry.name);
+      const childUrl = `${currentPrefix}/${entry.name}`;
+      if (entry.isDirectory()) walk(childAbs, childUrl);
+      else if (IMAGE_RE.test(entry.name)) out.push(childUrl);
+    }
+  }
+  walk(abs, urlPrefix);
+  return out;
 }
 
-function unique(values) {
-  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+/** Toutes les URLs d'images dans word-image-index.ts (lecture, vocab, CE/CO). */
+function imageUrlsFromWordIndex() {
+  const source = read("lib/curriculum/content/communication/word-image-index.ts");
+  const urls = [];
+  for (const match of source.matchAll(/"(\/[^"]+\.(?:webp|png|svg|jpe?g))"/gi)) {
+    urls.push(match[1]);
+  }
+  return urls;
+}
+
+/** Chemins d'images cités explicitement dans le code source. */
+function imageUrlsFromSourceScan() {
+  const urls = [];
+  const pattern = /"(\/(?:assets|gram|expression|vocab|logo)[^"]+\.(?:webp|png|svg|jpe?g))"/gi;
+  for (const rel of SOURCE_DIRS) {
+    for (const file of walkSourceFiles(rel)) {
+      const source = fs.readFileSync(path.join(root, file), "utf8");
+      for (const match of source.matchAll(pattern)) urls.push(match[1]);
+    }
+  }
+  return urls;
+}
+
+function collectReferencedAssets() {
+  const assets = new Set([
+    ...imageUrlsFromWordIndex(),
+    ...imageUrlsFromSourceScan(),
+    ...STATIC_IMAGE_DIRS.flatMap((dir) => walkPublicImages(dir, `/${dir}`)),
+    "/offline.html",
+  ]);
+
+  return unique(
+    [...assets].filter((url) => !ignored.has(url) && fileExists(url)),
+  );
 }
 
 function mathRoutes() {
@@ -58,9 +131,7 @@ function frenchRoutes() {
   const routes = [];
   const lessonPattern = /lesson\(\s*"[^"]+",\s*"([^"]+)"[\s\S]*?"(vocabulaire|grammaire|conjugaison)"\s*\)/g;
   for (const match of source.matchAll(lessonPattern)) {
-    const slug = match[1];
-    const tab = match[2];
-    routes.push(`/francais/${tab}/${slug}`);
+    routes.push(`/francais/${match[2]}/${match[1]}`);
   }
   const generalPattern = /t\(\s*"[^"]+",\s*"([^"]+)"/g;
   for (const match of source.matchAll(generalPattern)) {
@@ -122,16 +193,11 @@ const routes = unique([
   ...communicationRoutes(),
 ]);
 
-const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);
-const assets = unique(
-  walk(publicDir)
-    .map(publicUrl)
-    .filter((url) => !ignored.has(url)),
-);
-
 function revisionFor(file) {
   return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 16);
 }
+
+const assets = collectReferencedAssets();
 
 const assetEntries = assets.map((url) => {
   const file = path.join(publicDir, url.slice(1));
@@ -152,9 +218,11 @@ const manifest = {
   assets,
   assetEntries,
 };
+
 fs.writeFileSync(
   path.join(publicDir, "offline-manifest.json"),
   `${JSON.stringify(manifest, null, 2)}\n`,
 );
 
-console.log(`Generated offline manifest: ${routes.length} routes, ${assets.length} assets.`);
+const mb = (totalBytes / 1024 / 1024).toFixed(1);
+console.log(`Generated offline manifest: ${routes.length} routes, ${assets.length} image assets (${mb} Mo).`);
