@@ -26,7 +26,7 @@ export const MATH_A10_2_LESSON: MathSubmoduleLesson = {
             blocks: [
               {
                 type: "section",
-                labelFr: "Exemple : x/2 + 3 = 7",
+                labelFr: "Exemple : [[frac:x/2]] + 3 = 7",
                 itemsFr: [
                   "Le dénominateur est 2.",
                   "On multiplie tous les termes par 2.",
@@ -41,9 +41,10 @@ export const MATH_A10_2_LESSON: MathSubmoduleLesson = {
             blocks: [
               {
                 type: "section",
-                labelFr: "Exemple : x/3 + x/6 = 5",
+                labelFr: "Exemple : [[frac:x/3]] + [[frac:x/6]] = 5",
                 itemsFr: [
                   "Le dénominateur commun de 3 et 6 est 6.",
+                  "[[frac:2x/6]] + [[frac:x/6]] = [[frac:30/6]]",
                   "On multiplie tous les termes par 6.",
                   "2x + x = 30",
                   "3x = 30",
