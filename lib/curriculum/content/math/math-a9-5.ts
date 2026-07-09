@@ -31,6 +31,45 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
           ],
         },
         {
+          type: "highlight",
+          fr: "Facteur négatif devant une parenthèse",
+        },
+        {
+          type: "plain",
+          fr: "Quand le facteur est négatif, tous les signes à l'intérieur de la parenthèse s'inversent.",
+        },
+        {
+          type: "section",
+          labelFr: "Exemples avec facteur négatif",
+          itemsFr: [
+            "**−**2(x **−** 3) = **−**2x **+** 6  (le **−** × **−** donne **+**)",
+            "**−**(x **−** 5) = **−**x **+** 5",
+            "**−**(2x **+** 7) = **−**2x **−** 7",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Double distribution",
+        },
+        {
+          type: "plain",
+          fr: "(a **+** b)(c **+** d)",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "(a **+** b)(c **+** d) = ac **+** ad **+** bc **+** bd",
+          ],
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "(x **+** 2)(x **+** 3) = x² **+** 3x **+** 2x **+** 6 = x² **+** 5x **+** 6",
+          ],
+        },
+        {
           type: "heading",
           fr: "Exemples fondamentaux",
           black: true,
@@ -47,40 +86,6 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "heading",
-          fr: "Facteur négatif devant une parenthèse",
-          black: true,
-        },
-        {
-          type: "plain",
-          fr: "Quand le facteur est négatif, tous les signes à l'intérieur de la parenthèse s'inversent.",
-        },
-        {
-          type: "section",
-          labelFr: "Exemples avec facteur négatif",
-          itemsFr: [
-            "**−**2(x **−** 3) = **−**2x **+** 6  (le **−** × **−** donne **+**)",
-            "**−**(x **−** 5) = **−**x **+** 5",
-            "**−**(2x **+** 7) = **−**2x **−** 7",
-          ],
-        },
-        {
-          type: "heading",
-          fr: "Double distribution",
-          black: true,
-        },
-        {
-          type: "rule",
-          titleFr: "(a + b)(c + d)",
-          itemsFr: [
-            "(a **+** b)(c **+** d) = ac **+** ad **+** bc **+** bd",
-          ],
-        },
-        {
-          type: "example",
-          fr: "(x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6",
-        },
-        {
-          type: "heading",
           fr: "Les identités remarquables",
           black: true,
         },
@@ -89,34 +94,92 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
           fr: "Certains développements reviennent souvent : on les apprend par cœur pour aller plus vite.",
         },
         {
-          type: "section",
-          labelFr: "Carrés",
-          itemsFr: [
-            "**Carré d'une somme** : (a + b)² = a² + 2ab + b²",
-            "**Carré d'une différence** : (a − b)² = a² − 2ab + b²",
-            "**Différence de deux carrés** : a² − b² = (a − b)(a + b)",
-          ],
+          type: "highlight",
+          fr: "Carré d'une somme",
         },
         {
           type: "section",
-          labelFr: "Cubes",
+          labelFr: "",
           itemsFr: [
-            "**Cube d'une somme** : (a + b)³ = a³ + 3a²b + 3ab² + b³",
-            "**Cube d'une différence** : (a − b)³ = a³ − 3a²b + 3ab² − b³",
-            "**Somme de deux cubes** : a³ + b³ = (a + b)(a² − ab + b²)",
-            "**Différence de deux cubes** : a³ − b³ = (a − b)(a² + ab + b²)",
+            "(a **+** b)² = a² **+** 2ab **+** b²",
           ],
+        },
+        {
+          type: "highlight",
+          fr: "Carré d'une différence",
         },
         {
           type: "section",
-          labelFr: "Trois termes",
+          labelFr: "",
           itemsFr: [
-            "**Carré de trois termes** : (a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc",
+            "(a **−** b)² = a² **−** 2ab **+** b²",
           ],
         },
         {
-          type: "example",
-          fr: "(x + 3)² = x² + 2 × x × 3 + 3² = x² + 6x + 9",
+          type: "highlight",
+          fr: "Différence de deux carrés",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "a² **−** b² = (a **−** b)(a **+** b)",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Cube d'une somme",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "(a **+** b)³ = a³ **+** 3a²b **+** 3ab² **+** b³",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Cube d'une différence",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "(a **−** b)³ = a³ **−** 3a²b **+** 3ab² **−** b³",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Somme de deux cubes",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "a³ **+** b³ = (a **+** b)(a² **−** ab **+** b²)",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Différence de deux cubes",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "a³ **−** b³ = (a **−** b)(a² **+** ab **+** b²)",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Carré de trois termes",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "(a **+** b **+** c)² = a² **+** b² **+** c² **+** 2ab **+** 2ac **+** 2bc",
+          ],
         },
       ],
     },
