@@ -12,6 +12,7 @@ import type {
   MatchPair,
 } from "@/lib/curriculum/conjugation-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
@@ -1126,21 +1127,22 @@ function FillSelectExercise({
                       <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{correctLetter}</span>
                     </div>
                   ) : (
-                    <select
+                    <AppSelect
                       value={userLetter}
-                      onChange={e => {
+                      onChange={(v) => {
                         if (validated) return;
-                        const v = e.target.value;
-                        setSelected(prev => prev.map((s, j) => j === i ? v : s));
+                        setSelected((prev) => prev.map((s, j) => (j === i ? v : s)));
                       }}
+                      options={exercise.wordBank.map((_, wi) => ({
+                        value: FILL_SELECT_LETTERS[wi]!,
+                        label: FILL_SELECT_LETTERS[wi]!,
+                      }))}
+                      placeholder=""
+                      emptyOption={{ value: "", label: "" }}
                       disabled={validated}
-                      className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
-                    >
-                      <option value=""></option>
-                      {exercise.wordBank.map((_, wi) => (
-                        <option key={wi} value={FILL_SELECT_LETTERS[wi]}>{FILL_SELECT_LETTERS[wi]}</option>
-                      ))}
-                    </select>
+                      size="sm"
+                      className="w-20"
+                    />
                   )}
                 </div>
               </div>
@@ -1162,21 +1164,19 @@ function FillSelectExercise({
                 <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
               </span>
             ) : (
-              <select
+              <AppSelect
                 value={userAnswer}
-                onChange={e => {
+                onChange={(v) => {
                   if (validated) return;
-                  const v = e.target.value;
-                  setSelected(prev => prev.map((s, j) => j === i ? v : s));
+                  setSelected((prev) => prev.map((s, j) => (j === i ? v : s)));
                 }}
+                options={exercise.wordBank.map((w) => ({ value: w, label: w }))}
+                placeholder=""
+                emptyOption={{ value: "", label: "" }}
                 disabled={validated}
-                className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
-              >
-                <option value=""></option>
-                {exercise.wordBank.map((w, wi) => (
-                  <option key={wi} value={w}>{w}</option>
-                ))}
-              </select>
+                size="sm"
+                className="mx-1 inline-block w-28"
+              />
             );
 
             return (

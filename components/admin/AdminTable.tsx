@@ -8,6 +8,7 @@ import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction } from "@/app/actions/admin";
+import { AppSelect } from "@/components/ui/AppSelect";
 
 export type UserRow = {
   id: string;
@@ -137,72 +138,9 @@ function Spinner() {
   );
 }
 
-function AdminClassSelect({
-  value,
-  options,
-  onChange,
-}: {
-  value: string;
-  options: string[];
-  onChange: (value: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const label = value || "Classe";
-
-  return (
-    <div className="relative w-52">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex h-10 w-full items-center justify-between rounded-[22px] border bg-white px-4 text-left text-sm shadow-sm outline-none transition-colors dark:bg-zinc-900 ${
-          open ? "border-[var(--color-theme)] ring-2 ring-[var(--color-theme)]/20" : "border-[var(--color-theme-muted)]/40 dark:border-[var(--color-theme)]/40"
-        }`}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-      >
-        <span className={value ? "text-zinc-800 dark:text-zinc-100" : "text-zinc-500"}>{label}</span>
-        <svg className={`text-[var(--color-theme)] transition-transform ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
-      {open && (
-        <div className="absolute right-0 z-30 mt-1 max-h-72 w-full overflow-y-auto rounded-b-[22px] rounded-t-md bg-white py-2 shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30" role="listbox">
-          <button
-            type="button"
-            onClick={() => {
-              onChange("");
-              setOpen(false);
-            }}
-            className={`block w-full px-5 py-2 text-left text-sm ${value === "" ? "font-semibold text-[var(--color-theme)]" : "text-zinc-700 hover:bg-[var(--color-theme-light)] dark:text-zinc-200 dark:hover:bg-[var(--color-theme)]/10"}`}
-            role="option"
-            aria-selected={value === ""}
-          >
-            Toutes les classes
-          </button>
-          {options.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => {
-                onChange(c);
-                setOpen(false);
-              }}
-              className={`block w-full px-5 py-2 text-left text-sm ${value === c ? "font-semibold text-[var(--color-theme)]" : "text-zinc-700 hover:bg-[var(--color-theme-light)] dark:text-zinc-200 dark:hover:bg-[var(--color-theme)]/10"}`}
-              role="option"
-              aria-selected={value === c}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+// ── Main Component ──────────────────────────────────────────────────────────
 
 const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
-
-// ── Reset All Eleves Confirm ────────────────────────────────────────────────
 
 function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleveCount: number; onClose: () => void; onReset: () => void; onArchive: () => void }) {
   const [pending, startTransition] = useTransition();
@@ -384,7 +322,15 @@ export function AdminTable({
             />
           </div>
           {classes.length > 0 && (
-            <AdminClassSelect value={filterClasse} options={classes} onChange={setFilterClasse} />
+            <AppSelect
+              value={filterClasse}
+              onChange={setFilterClasse}
+              options={classes}
+              placeholder="Classe"
+              emptyOption={{ value: "", label: "Toutes les classes" }}
+              className="w-52"
+              aria-label="Filtrer par classe"
+            />
           )}
           {currentUserRole === "admin" && (
             <button

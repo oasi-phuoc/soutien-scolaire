@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { createTaskAction, uploadTaskAttachmentAction, type StudentOption } from "@/app/actions/tasks";
 import { subjectFromMatiere } from "@/lib/curriculum/lesson-routes";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 
 // ─── Curriculum options for module selector ────────────────────────────────
@@ -424,7 +425,6 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   }
 
   const inputCls = "w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition-colors focus:border-[var(--color-theme)] focus:ring-2 focus:ring-[var(--color-theme)]/15 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
-  const selectCls = `${inputCls} cursor-pointer`;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
@@ -458,18 +458,32 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
       <div className="space-y-2">
         <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400">Leçon à affecter *</label>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-          <select value={matiere} onChange={(e) => handleMatiereChange(e.target.value)} className={selectCls}>
-            <option value="">— Matière —</option>
-            {CURRICULUM.map((m) => <option key={m.matiere} value={m.matiere}>{m.matiere}</option>)}
-          </select>
-          <select value={moduleId} onChange={(e) => handleModuleChange(e.target.value)} disabled={!matiere} className={selectCls}>
-            <option value="">— Module —</option>
-            {(matiereOpt?.modules ?? []).map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}
-          </select>
-          <select value={lessonId} onChange={(e) => setLessonId(e.target.value)} disabled={!moduleId} className={selectCls}>
-            <option value="">— Leçon —</option>
-            {(moduleOpt?.lessons ?? []).map((l) => <option key={l.id} value={l.id}>{l.label}</option>)}
-          </select>
+          <AppSelect
+            value={matiere}
+            onChange={handleMatiereChange}
+            options={CURRICULUM.map((m) => ({ value: m.matiere, label: m.matiere }))}
+            placeholder="— Matière —"
+            emptyOption={{ value: "", label: "— Matière —" }}
+            className="w-full"
+          />
+          <AppSelect
+            value={moduleId}
+            onChange={handleModuleChange}
+            options={(matiereOpt?.modules ?? []).map((m) => ({ value: m.id, label: m.label }))}
+            placeholder="— Module —"
+            emptyOption={{ value: "", label: "— Module —" }}
+            disabled={!matiere}
+            className="w-full"
+          />
+          <AppSelect
+            value={lessonId}
+            onChange={setLessonId}
+            options={(moduleOpt?.lessons ?? []).map((l) => ({ value: l.id, label: l.label }))}
+            placeholder="— Leçon —"
+            emptyOption={{ value: "", label: "— Leçon —" }}
+            disabled={!moduleId}
+            className="w-full"
+          />
         </div>
         {moduleRef && (
           <p className="text-xs text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]">

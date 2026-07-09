@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const WORD_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -111,17 +112,16 @@ export function ExDefinitionMatch({
                     <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{WORD_LETTERS[correctIdx]}</span>
                   </div>
                 ) : (
-                  <select
+                  <AppSelect
                     value={s.answer}
+                    onChange={(v) => handleSelect(w.word, v)}
+                    options={WORD_LETTERS.map((letter) => ({ value: letter, label: letter }))}
+                    placeholder=""
+                    emptyOption={{ value: "", label: "" }}
                     disabled={s.checked}
-                    onChange={(e) => handleSelect(w.word, e.target.value)}
-                    className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
-                  >
-                    <option value=""></option>
-                    {WORD_LETTERS.map((letter) => (
-                      <option key={letter} value={letter}>{letter}</option>
-                    ))}
-                  </select>
+                    size="sm"
+                    className="w-20"
+                  />
                 )}
               </div>
             </div>

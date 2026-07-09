@@ -11,8 +11,14 @@ import {
 } from "@/app/actions/admin";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
+
+const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
+  value: String(i + 1),
+  label: String(i + 1).padStart(2, "0"),
+}));
 
 const LANGUE_LABELS: Record<string, string> = {
   fr: "Français",
@@ -143,14 +149,22 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
           <div>
             <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Classe</label>
             <div className="grid grid-cols-2 gap-2">
-              <select value={form.classeType} onChange={e => setForm(f => ({ ...f, classeType: e.target.value }))} className={inputCls}>
-                <option value="">Filière</option>
-                {["CSC", "CFR", "EPL", "CPR"].map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <select value={form.classeNum} onChange={e => setForm(f => ({ ...f, classeNum: e.target.value }))} className={inputCls}>
-                <option value="">N°</option>
-                {Array.from({ length: 20 }, (_, i) => <option key={i} value={String(i + 1)}>{String(i + 1).padStart(2, "0")}</option>)}
-              </select>
+              <AppSelect
+                value={form.classeType}
+                onChange={(v) => setForm((f) => ({ ...f, classeType: v }))}
+                options={["CSC", "CFR", "EPL", "CPR"]}
+                placeholder="Filière"
+                emptyOption={{ value: "", label: "Filière" }}
+                className="w-full"
+              />
+              <AppSelect
+                value={form.classeNum}
+                onChange={(v) => setForm((f) => ({ ...f, classeNum: v }))}
+                options={CLASSE_NUM_OPTIONS}
+                placeholder="N°"
+                emptyOption={{ value: "", label: "N°" }}
+                className="w-full"
+              />
             </div>
           </div>
           <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Adresse</label><input type="text" value={form.adresse} onChange={e => setForm(f => ({ ...f, adresse: e.target.value }))} className={inputCls} /></div>
@@ -161,9 +175,12 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
           <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Téléphone</label><input type="text" placeholder="+41 79 …" value={form.telephone} onChange={e => setForm(f => ({ ...f, telephone: e.target.value }))} className={inputCls} /></div>
           <div>
             <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Langue parlée</label>
-            <select value={form.langue} onChange={e => setForm(f => ({ ...f, langue: e.target.value }))} className={inputCls}>
-              {LANGUES_OPTIONS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
-            </select>
+            <AppSelect
+              value={form.langue}
+              onChange={(v) => setForm((f) => ({ ...f, langue: v }))}
+              options={LANGUES_OPTIONS.map((l) => ({ value: l.code, label: l.label }))}
+              className="w-full"
+            />
           </div>
         </div>
         {err && <p className="mt-3 text-sm text-red-600">{err}</p>}

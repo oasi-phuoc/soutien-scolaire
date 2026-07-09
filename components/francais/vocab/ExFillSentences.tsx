@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -117,23 +118,22 @@ export function ExFillSentences({
                   <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
                 </span>
               ) : (
-                <select
+                <AppSelect
                   value={s.answer}
-                  disabled={s.checked}
-                  onChange={(e) =>
+                  onChange={(v) =>
                     setStates((prev) =>
                       prev.map((st, j) =>
-                        j === i ? { ...st, answer: e.target.value, checked: false, correct: false } : st
+                        j === i ? { ...st, answer: v, checked: false, correct: false } : st
                       )
                     )
                   }
-                  className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
-                >
-                  <option value=""></option>
-                  {bankWords.map((word) => (
-                    <option key={word} value={word}>{word}</option>
-                  ))}
-                </select>
+                  options={bankWords.map((word) => ({ value: word, label: word }))}
+                  placeholder=""
+                  emptyOption={{ value: "", label: "" }}
+                  disabled={s.checked}
+                  size="sm"
+                  className="mx-1 inline-block w-28"
+                />
               )}
               <span className="text-[var(--color-text-primary)]">{after}</span>
             </div>

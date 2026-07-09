@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signUpAction } from "@/app/actions/auth";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { buildLoginId } from "@/lib/auth/identifier";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
@@ -15,6 +16,11 @@ const LANGUES = [
   if (b.code === "other") return -1;
   return a.label.localeCompare(b.label, "fr");
 });
+
+const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
+  value: String(i + 1),
+  label: String(i + 1).padStart(2, "0"),
+}));
 
 const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
 const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";
@@ -114,6 +120,18 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
       setFormError("Les mots de passe ne correspondent pas.");
       return;
     }
+    if (!classeType) {
+      setFormError("Veuillez sélectionner une filière.");
+      return;
+    }
+    if (!isAncien && !classeNum) {
+      setFormError("Veuillez sélectionner un numéro de classe.");
+      return;
+    }
+    if (!langue) {
+      setFormError("Veuillez sélectionner une langue.");
+      return;
+    }
     setFormError(null);
     const formData = new FormData(e.currentTarget);
     startTransition(async () => {
@@ -190,46 +208,44 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
         <div>
           <label className={labelCls}>Classe{reqTag}</label>
           <div className="mt-1 grid grid-cols-2 gap-2">
-            <select
-              name="classe_type" required value={classeType}
-              onChange={e => { setClasseType(e.target.value); if (e.target.value === "ancien") setClasseNum(""); }}
-              className={inputCls}
-            >
-              <option value="" disabled>Filière</option>
-              {["CSC", "CFR", "EPL", "CPR"].map(c => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-              <option value="ancien">Ancien élève</option>
-            </select>
-            <select
-              name="classe_num" required={!isAncien}
-              disabled={isAncien}
+            <AppSelect
+              name="classe_type"
+              value={classeType}
+              onChange={(v) => { setClasseType(v); if (v === "ancien") setClasseNum(""); }}
+              options={[
+                ...["CSC", "CFR", "EPL", "CPR"].map((c) => ({ value: c, label: c })),
+                { value: "ancien", label: "Ancien élève" },
+              ]}
+              placeholder="Filière"
+              emptyOption={{ value: "", label: "Filière" }}
+              className="w-full"
+            />
+            <AppSelect
+              name="classe_num"
               value={isAncien ? "" : classeNum}
-              onChange={e => setClasseNum(e.target.value)}
-              className={`${inputCls} ${isAncien ? "opacity-40 cursor-not-allowed" : ""}`}
-            >
-              <option value="" disabled>{isAncien ? "—" : "N° de la classe"}</option>
-              {!isAncien && Array.from({ length: 20 }, (_, i) => {
-                const n = String(i + 1).padStart(2, "0");
-                return <option key={n} value={String(i + 1)}>{n}</option>;
-              })}
-            </select>
+              onChange={setClasseNum}
+              options={CLASSE_NUM_OPTIONS}
+              placeholder={isAncien ? "—" : "N° de la classe"}
+              emptyOption={{ value: "", label: isAncien ? "—" : "N° de la classe" }}
+              disabled={isAncien}
+              className={`w-full ${isAncien ? "opacity-40" : ""}`}
+            />
           </div>
         </div>
 
         {/* Langue */}
         <div>
           <label htmlFor="langue" className={labelCls}>Langue parlée{reqTag}</label>
-          <select
-            id="langue" name="langue" required value={langue}
-            onChange={e => setLangue(e.target.value)}
-            className={inputCls}
-          >
-            <option value="" disabled>Sélectionner une langue</option>
-            {LANGUES.map(l => (
-              <option key={l.code} value={l.code}>{l.label}</option>
-            ))}
-          </select>
+          <AppSelect
+            id="langue"
+            name="langue"
+            value={langue}
+            onChange={setLangue}
+            options={LANGUES.map((l) => ({ value: l.code, label: l.label }))}
+            placeholder="Sélectionner une langue"
+            emptyOption={{ value: "", label: "Sélectionner une langue" }}
+            className="mt-1 w-full"
+          />
         </div>
 
         {/* Mot de passe */}

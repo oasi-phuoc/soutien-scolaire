@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ceCoImageSource } from "@/lib/curriculum/word-image-resolver";
+import { AppSelect } from "@/components/ui/AppSelect";
 import {
   pickCoGroup,
   randomCoGroupInRange,
@@ -1092,23 +1093,24 @@ function ImageMatchQuestionView({
           >
             <ObjectCardImage src={card.image} alt={card.label} />
             <div className="border-t border-slate-200 p-2">
-              <select
-                value={chosen}
-                disabled={correction}
-                onChange={(e) => setCard(index, Number(e.target.value))}
-                aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
-                className="w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent-comm)]"
-              >
-                <option value={0}>— n°</option>
-                {dialogues.map((d) => {
-                  const takenElsewhere = selected.some((v, i) => i !== index && v === d);
-                  return (
-                    <option key={d} value={d} disabled={takenElsewhere && chosen !== d}>
-                      {d}
-                    </option>
-                  );
+              <AppSelect
+                value={String(chosen)}
+                onChange={(v) => setCard(index, Number(v))}
+                options={dialogues.map((d) => {
+                  const takenElsewhere = selected.some((val, i) => i !== index && val === d);
+                  return {
+                    value: String(d),
+                    label: String(d),
+                    disabled: takenElsewhere && chosen !== d,
+                  };
                 })}
-              </select>
+                placeholder="— n°"
+                emptyOption={{ value: "0", label: "— n°" }}
+                disabled={correction}
+                size="sm"
+                className="w-full"
+                aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
+              />
               {correction && (
                 <p
                   className="mt-1 text-center text-xs font-semibold"
@@ -1170,25 +1172,23 @@ function ConversationImageGridQuestionView({
           >
             <ObjectCardImage src={card.image} alt={`Situation ${index + 1}`} />
             <div className="border-t border-slate-100 p-2">
-              <select
+              <AppSelect
                 value={current > 0 ? String(current) : ""}
+                onChange={(v) => setCard(index, v)}
+                options={[
+                  { value: "1", label: "1" },
+                  { value: "2", label: "2" },
+                  { value: "3", label: "3" },
+                  { value: "4", label: "4" },
+                ]}
+                placeholder="—"
+                emptyOption={{ value: "", label: "—" }}
                 disabled={correction}
-                onChange={(event) => setCard(index, event.target.value)}
+                error={correction && wrong}
+                size="sm"
+                className="w-full"
                 aria-label={`Image ${index + 1} — dialogue`}
-                className={`w-full cursor-pointer rounded-xl border bg-white px-2 py-1.5 text-center text-sm outline-none transition focus:ring-2 focus:ring-[var(--color-accent-comm)]/15 ${
-                  wrong
-                    ? "border-red-300 text-red-700"
-                    : correct
-                      ? "border-amber-400 text-amber-800"
-                      : "border-zinc-200 focus:border-[var(--color-accent-comm)]"
-                }`}
-              >
-                <option value="">—</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
+              />
               {correction && wrong && (
                 <p className="mt-1 text-center text-xs font-semibold text-amber-700">
                   {expected > 0 ? `Dialogue ${expected}` : "Aucun dialogue"}

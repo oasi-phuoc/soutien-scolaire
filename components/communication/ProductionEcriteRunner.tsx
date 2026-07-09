@@ -7,6 +7,7 @@ import {
   submitExpressionAction,
   type TeacherOption,
 } from "@/app/actions/expression";
+import { AppSelect } from "@/components/ui/AppSelect";
 import {
   randomFormTemplates,
   type FormField,
@@ -296,10 +297,15 @@ function FormFieldControl({
     <label className={field.wide ? "sm:col-span-2" : ""}>
       <span className="mb-1 block text-xs font-semibold text-[var(--color-text-secondary)]">{field.label}</span>
       {field.options?.length ? (
-        <select value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={className}>
-          <option value="">Choisir</option>
-          {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
-        </select>
+        <AppSelect
+          value={value}
+          onChange={onChange}
+          options={field.options}
+          placeholder="Choisir"
+          emptyOption={{ value: "", label: "Choisir" }}
+          disabled={disabled}
+          className="w-full"
+        />
       ) : (
         <input type={field.type ?? "text"} value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={className} />
       )}

@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 // ── Shape data ─────────────────────────────────────────────────────────────────
@@ -256,15 +257,16 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
                     <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
                   </div>
                 ) : (
-                  <select
+                  <AppSelect
                     value={s.answer}
+                    onChange={(v) => handleSelect(shape.id, v)}
+                    options={LETTERS.slice(0, allShapes.length).map((l) => ({ value: l, label: l }))}
+                    placeholder=""
+                    emptyOption={{ value: "", label: "" }}
                     disabled={s.checked}
-                    onChange={e => handleSelect(shape.id, e.target.value)}
-                    className="h-8 w-16 appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
-                  >
-                    <option value="" />
-                    {LETTERS.slice(0, allShapes.length).map(l => <option key={l} value={l}>{l}</option>)}
-                  </select>
+                    size="sm"
+                    className="w-16"
+                  />
                 )}
               </div>
             </div>
@@ -352,15 +354,16 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
                   <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
                 </div>
               ) : (
-                <select
+                <AppSelect
                   value={state.answer}
+                  onChange={(v) => handleSelect(shape.id, v)}
+                  options={LETTERS.slice(0, allShapes.length).map((l) => ({ value: l, label: l }))}
+                  placeholder=""
+                  emptyOption={{ value: "", label: "" }}
                   disabled={state.checked}
-                  onChange={e => handleSelect(shape.id, e.target.value)}
-                  className="h-9 w-full appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
-                >
-                  <option value="" />
-                  {LETTERS.slice(0, allShapes.length).map(l => <option key={l} value={l}>{l}</option>)}
-                </select>
+                  size="sm"
+                  className="w-full"
+                />
               )}
             </div>
           );
@@ -453,16 +456,17 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
                         <span className="text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{s.name[pos]}</span>
                       </div>
                     ) : (
-                      <select
+                      <AppSelect
                         key={pos}
                         value={state.blanks[pos] ?? ""}
+                        onChange={(v) => setBlank(s.id, pos, v)}
+                        options={ALPHABET_FR.map((l) => ({ value: l, label: l }))}
+                        placeholder=""
+                        emptyOption={{ value: "", label: "" }}
                         disabled={state.checked}
-                        onChange={e => setBlank(s.id, pos, e.target.value)}
-                        className="h-8 w-7 appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-xs font-bold text-[var(--color-accent-alg)] outline-none"
-                      >
-                        <option value="" />
-                        {ALPHABET_FR.map(l => <option key={l} value={l}>{l}</option>)}
-                      </select>
+                        size="sm"
+                        className="w-7"
+                      />
                     )
                   ) : (
                     <span key={pos} className="flex h-8 w-6 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]">

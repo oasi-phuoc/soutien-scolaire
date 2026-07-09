@@ -18,6 +18,7 @@ import {
   type LineScenarioQuestion,
   type SegmentLine,
 } from "@/lib/curriculum/content/math/g6-plan-data";
+import { AppSelect } from "@/components/ui/AppSelect";
 
 const MATH_TEXT_INPUT_BASE =
   "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 " +
@@ -392,9 +393,6 @@ export function G6PolygonHalfExercise({ exNum, validateCommand, onValidated }: E
 
 // ── Ex 10 : intersections de droites ────────────────────────────────────────
 
-const LINE_SELECT_CLS = "rounded border border-[var(--color-border-default)] bg-white px-2 py-1 text-sm";
-const LINE_SELECT_WRONG = "rounded border border-amber-500 bg-white px-2 py-1 text-sm font-semibold text-amber-600";
-
 function LineQNum({ n }: { n: number }) {
   return <span className="w-5 shrink-0 font-bold text-[var(--color-accent-alg)]">{n}.</span>;
 }
@@ -491,21 +489,35 @@ function LineQuestionBlock({
     };
     const display1 = validated && wrong ? q.answer[0]! : a1;
     const display2 = validated && wrong ? q.answer[1]! : a2;
-    const selectCls = validated && wrong ? LINE_SELECT_WRONG : LINE_SELECT_CLS;
+    const isWrong = validated && wrong;
     return (
       <LineQuestionLayout
         n={i + 1}
         head={(
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <select disabled={validated} value={display1} onChange={(e) => setPart(0, e.target.value)} className={selectCls}>
-              <option value="">—</option>
-              {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
+            <AppSelect
+              disabled={validated}
+              value={display1}
+              onChange={(v) => setPart(0, v)}
+              options={options.map((o) => ({ value: o.id, label: o.label }))}
+              placeholder="—"
+              emptyOption={{ value: "", label: "—" }}
+              error={isWrong}
+              size="sm"
+              className="min-w-[8rem]"
+            />
             <span>et</span>
-            <select disabled={validated} value={display2} onChange={(e) => setPart(1, e.target.value)} className={selectCls}>
-              <option value="">—</option>
-              {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
+            <AppSelect
+              disabled={validated}
+              value={display2}
+              onChange={(v) => setPart(1, v)}
+              options={options.map((o) => ({ value: o.id, label: o.label }))}
+              placeholder="—"
+              emptyOption={{ value: "", label: "—" }}
+              error={isWrong}
+              size="sm"
+              className="min-w-[8rem]"
+            />
           </div>
         )}
         body={<span>{q.prompt}</span>}
@@ -521,16 +533,22 @@ function LineQuestionBlock({
       { id: "axis_y", label: "l'axe des Y" },
     ];
     const display = validated && wrong ? q.answer : answer;
-    const selectCls = validated && wrong ? LINE_SELECT_WRONG : LINE_SELECT_CLS;
     return (
       <LineQuestionLayout
         n={i + 1}
         head={<span>{q.prompt}</span>}
         body={(
-          <select disabled={validated} value={display} onChange={(e) => onChange(e.target.value)} className={selectCls}>
-            <option value="">—</option>
-            {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-          </select>
+          <AppSelect
+            disabled={validated}
+            value={display}
+            onChange={onChange}
+            options={options.map((o) => ({ value: o.id, label: o.label }))}
+            placeholder="—"
+            emptyOption={{ value: "", label: "—" }}
+            error={validated && wrong}
+            size="sm"
+            className="min-w-[8rem]"
+          />
         )}
       />
     );

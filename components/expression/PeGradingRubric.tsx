@@ -1,6 +1,7 @@
 "use client";
 
 import { rubricForPeExercise, rubricMaxPoints } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
+import { AppSelect } from "@/components/ui/AppSelect";
 import type { ExerciseGrading, SubmissionExercise } from "@/lib/curriculum/content/communication/expression-submission-types";
 
 function formatPoints(value: number): string {
@@ -45,15 +46,15 @@ export function PeGradingRubric({
           <label key={criterion.id} className="block rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 py-2.5">
             <span className="block text-sm font-semibold text-[var(--color-text-primary)]">{criterion.label}</span>
             <span className="mt-0.5 block text-xs text-[var(--color-text-secondary)]">{criterion.description}</span>
-            <select
+            <AppSelect
               value={String(current.get(criterion.id) ?? 0)}
-              onChange={(event) => setCriterion(criterion.id, Number(event.target.value))}
-              className="mt-2 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-2 py-1.5 text-sm outline-none focus:border-[var(--color-theme)]"
-            >
-              {criterion.options.map((option) => (
-                <option key={option} value={option}>{formatPoints(option)} pt{option > 1 ? "s" : ""}</option>
-              ))}
-            </select>
+              onChange={(v) => setCriterion(criterion.id, Number(v))}
+              options={criterion.options.map((option) => ({
+                value: String(option),
+                label: `${formatPoints(option)} pt${option > 1 ? "s" : ""}`,
+              }))}
+              className="mt-2 w-full"
+            />
           </label>
         ))}
       </div>

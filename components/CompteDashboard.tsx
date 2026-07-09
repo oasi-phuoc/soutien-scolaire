@@ -7,6 +7,7 @@ import { signOutAction } from "@/app/actions/auth";
 import { syncProgressToCloud } from "@/app/actions/progress";
 import { OfflineSettings } from "@/components/OfflineSettings";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { PIVOT_LANGS, type PivotCode } from "@/lib/pivot-langs";
 import { loadProgress, saveProgress, setLevel } from "@/lib/progress/math-progress";
 import { LEVEL_LABELS, type LevelKey } from "@/lib/scoring";
@@ -47,50 +48,6 @@ function IconLogOut() {
       <polyline points="16 17 21 12 16 7" />
       <line x1="21" y1="12" x2="9" y2="12" />
     </svg>
-  );
-}
-
-function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (value: PivotCode) => void }) {
-  const [open, setOpen] = useState(false);
-  const selected = PIVOT_LANGS.find((l) => l.code === value) ?? PIVOT_LANGS[0]!;
-
-  return (
-    <div className="relative mt-4">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex min-h-12 w-full items-center justify-between rounded-[24px] border bg-white px-4 text-left text-base text-[var(--color-theme)] shadow-sm outline-none transition-colors dark:bg-zinc-950 ${
-          open ? "border-[var(--color-theme)] ring-2 ring-[var(--color-theme)]/15" : "border-[var(--color-theme)]/40"
-        }`}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-      >
-        <span>{selected.labelFr} - {selected.label}</span>
-        <svg className={`transition-transform ${open ? "rotate-180" : ""}`} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
-      {open && (
-        <div className="absolute bottom-full z-20 mb-1 max-h-64 w-full overflow-y-auto rounded-t-[24px] rounded-b-md border border-[var(--color-theme)]/15 bg-white py-2 shadow-lg dark:bg-zinc-950" role="listbox">
-          {PIVOT_LANGS.map((l) => (
-            <button
-              key={l.code}
-              type="button"
-              onClick={() => { onChange(l.code); setOpen(false); }}
-              className={`block w-full px-5 py-2 text-left text-sm transition-colors ${
-                l.code === value
-                  ? "font-semibold text-[var(--color-theme)]"
-                  : "text-zinc-700 hover:bg-[var(--color-theme-light)] dark:text-zinc-200 dark:hover:bg-[var(--color-theme)]/10"
-              }`}
-              role="option"
-              aria-selected={l.code === value}
-            >
-              {l.labelFr} - {l.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -322,12 +279,13 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Choix enregistré sur cet appareil{user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
         </p>
-        <HelpLanguageSelect value={code} onChange={(next) => void savePivot(next)} />
-        <select value={code} onChange={e => void savePivot(e.target.value as PivotCode)} className="hidden">
-          {PIVOT_LANGS.map((l) => (
-            <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
-          ))}
-        </select>
+        <AppSelect
+          value={code}
+          onChange={(next) => void savePivot(next as PivotCode)}
+          options={PIVOT_LANGS.map((l) => ({ value: l.code, label: `${l.labelFr} - ${l.label}` }))}
+          placement="top"
+          className="mt-4 w-full"
+        />
         {saved && <p className="mt-2 text-sm text-emerald-700" role="status">Choix enregistré.</p>}
         {pivotMsg && <p className="mt-2 text-sm text-amber-800" role="status">{pivotMsg}</p>}
       </Card>

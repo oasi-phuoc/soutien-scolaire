@@ -461,6 +461,29 @@ input[type=number] {
   }
 }
 
+/* Scrollbar inside AppSelect dropdown lists */
+.app-select-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--color-theme) 35%, transparent) transparent;
+  padding-right: 0.35rem;
+}
+
+.app-select-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-select-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 0.5rem;
+}
+
+.app-select-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-theme) 40%, #c5c5c5);
+  background-clip: padding-box;
+}
+
 .app-shell-bar {
   box-sizing: border-box;
   margin-inline: auto;

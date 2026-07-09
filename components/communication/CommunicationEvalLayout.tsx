@@ -5,6 +5,7 @@ import {
   EvalExerciseResultRow,
   EvalResultsSummary,
 } from "@/components/ui/EvalResultsUI";
+import { AppSelect } from "@/components/ui/AppSelect";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -199,19 +200,18 @@ export function CommunicationTeacherSubmit({
       <h2 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h2>
       {teachers.length ? (
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-          <select
+          <AppSelect
             value={teacherId}
-            onChange={(event) => onTeacherChange(event.target.value)}
+            onChange={onTeacherChange}
+            options={teachers.map((teacher) => ({
+              value: teacher.id,
+              label: [teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur",
+            }))}
+            placeholder="Choisissez un professeur"
+            emptyOption={{ value: "", label: "Choisissez un professeur" }}
             disabled={sent}
-            className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)]"
-          >
-            <option value="">Choisissez un professeur</option>
-            {teachers.map((teacher) => (
-              <option key={teacher.id} value={teacher.id}>
-                {[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}
-              </option>
-            ))}
-          </select>
+            className="min-h-11 flex-1"
+          />
           <button
             type="button"
             onClick={onSend}

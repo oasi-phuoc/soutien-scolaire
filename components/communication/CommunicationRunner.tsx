@@ -9,6 +9,7 @@ import {
   type TeacherOption,
 } from "@/app/actions/expression";
 import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
   COMMUNICATION_E2_1,
@@ -186,17 +187,18 @@ function WritingExercise({
           <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
           {teachers.length ? (
             <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-              <select
+              <AppSelect
                 value={teacherId}
-                onChange={(event) => setTeacherId(event.target.value)}
+                onChange={setTeacherId}
+                options={teachers.map((teacher) => ({
+                  value: teacher.id,
+                  label: [teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur",
+                }))}
+                placeholder="Choisissez un professeur"
+                emptyOption={{ value: "", label: "Choisissez un professeur" }}
                 disabled={sent}
-                className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-fr)]"
-              >
-                <option value="">Choisissez un professeur</option>
-                {teachers.map((teacher) => (
-                  <option key={teacher.id} value={teacher.id}>{[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}</option>
-                ))}
-              </select>
+                className="min-h-11 flex-1"
+              />
               <button
                 type="button"
                 onClick={sendToTeacher}
@@ -236,10 +238,15 @@ function FormFieldControl({
     <label className={field.wide ? "col-span-1 sm:col-span-2" : ""}>
       <span className="mb-1 block text-xs font-medium text-[var(--color-text-secondary)]">{field.label}</span>
       {field.options ? (
-        <select value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={controlClass}>
-          <option value="">Sélectionnez</option>
-          {field.options.map((option) => <option key={option} value={option}>{option}</option>)}
-        </select>
+        <AppSelect
+          value={value}
+          onChange={onChange}
+          options={field.options}
+          placeholder="Sélectionnez"
+          emptyOption={{ value: "", label: "Sélectionnez" }}
+          disabled={disabled}
+          className="w-full"
+        />
       ) : (
         <input type={field.type ?? "text"} value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={controlClass} autoComplete="off" />
       )}

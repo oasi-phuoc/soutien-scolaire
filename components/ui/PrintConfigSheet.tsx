@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export interface PrintExercise {
@@ -768,41 +769,35 @@ export function PrintConfigSheet({
                     <label htmlFor="print-class-level" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
                       Classe
                     </label>
-                    <select
-                      id="print-class-level"
+                    <AppSelect
                       value={classLevel}
-                      onChange={(event) => setClassLevel(event.target.value as PrintHeaderConfig["classLevel"])}
-                      className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                    >
-                      {CLASS_LEVELS.map((level) => <option key={level} value={level}>{level}</option>)}
-                    </select>
+                      onChange={(v) => setClassLevel(v as PrintHeaderConfig["classLevel"])}
+                      options={CLASS_LEVELS.map((level) => ({ value: level, label: level }))}
+                      className="w-full"
+                    />
                   </div>
                   <div>
                     <label htmlFor="print-class-number" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
                       Numéro
                     </label>
-                    <select
-                      id="print-class-number"
+                    <AppSelect
                       value={classNumber}
-                      onChange={(event) => setClassNumber(event.target.value)}
-                      className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                    >
-                      {CLASS_NUMBERS.map((number) => <option key={number} value={number}>{number}</option>)}
-                    </select>
+                      onChange={setClassNumber}
+                      options={CLASS_NUMBERS.map((number) => ({ value: number, label: number }))}
+                      className="w-full"
+                    />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="print-course" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">
                     Cours
                   </label>
-                  <select
-                    id="print-course"
+                  <AppSelect
                     value={course}
-                    onChange={(event) => setCourse(event.target.value)}
-                    className="min-h-12 w-full rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 text-sm outline-none"
-                  >
-                    {COURSES.map((item) => <option key={item} value={item}>{item}</option>)}
-                  </select>
+                    onChange={setCourse}
+                    options={COURSES.map((item) => ({ value: item, label: item }))}
+                    className="w-full"
+                  />
                 </div>
                 <div>
                   <label htmlFor="print-title" className="mb-1.5 block text-sm font-medium text-[var(--color-text-primary)]">

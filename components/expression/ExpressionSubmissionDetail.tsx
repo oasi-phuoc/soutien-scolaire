@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { reviewExpressionAction, type ExpressionSubmission } from "@/app/actions/expression";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { formatMailboxFullDate } from "@/lib/messagerie/inbox";
 import { rubricForPeExercise } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
 import {
@@ -243,16 +244,18 @@ export function ExpressionSubmissionDetail({
                   </label>
                   <label className="block">
                     <span className="mb-1 block text-sm font-semibold text-[var(--color-text-primary)]">Résultat final de l&apos;élève</span>
-                    <select
+                    <AppSelect
                       value={finalResult}
-                      onChange={(event) => setFinalResult(event.target.value)}
-                      className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 py-2 text-sm outline-none focus:border-amber-500"
-                    >
-                      <option value="">Choisir un résultat</option>
-                      <option value="Réussi">Réussi</option>
-                      <option value="À retravailler">À retravailler</option>
-                      <option value="Non validé">Non validé</option>
-                    </select>
+                      onChange={setFinalResult}
+                      options={[
+                        { value: "Réussi", label: "Réussi" },
+                        { value: "À retravailler", label: "À retravailler" },
+                        { value: "Non validé", label: "Non validé" },
+                      ]}
+                      placeholder="Choisir un résultat"
+                      emptyOption={{ value: "", label: "Choisir un résultat" }}
+                      className="w-full"
+                    />
                   </label>
                 </div>
                 <p className="mt-2 text-xs text-[var(--color-text-secondary)]">

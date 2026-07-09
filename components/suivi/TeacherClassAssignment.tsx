@@ -6,6 +6,7 @@ import {
   getTeacherClassAssignmentsAction,
   setTeacherClassesAction,
 } from "@/app/actions/suivi";
+import { AppSelect } from "@/components/ui/AppSelect";
 
 export function TeacherClassAssignment({ teacherId }: { teacherId: string }) {
   const [allClasses, setAllClasses] = useState<{ class_id: string; label: string }[]>([]);
@@ -89,15 +90,12 @@ export function TeacherClassAssignment({ teacherId }: { teacherId: string }) {
       {selectedList.length > 0 && (
         <div>
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">Classe principale</p>
-          <select
+          <AppSelect
             value={primaryId ?? selectedList[0]?.class_id ?? ""}
-            onChange={(e) => setPrimaryId(e.target.value || null)}
-            className="w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950"
-          >
-            {selectedList.map((c) => (
-              <option key={c.class_id} value={c.class_id}>{c.label}</option>
-            ))}
-          </select>
+            onChange={(v) => setPrimaryId(v || null)}
+            options={selectedList.map((c) => ({ value: c.class_id, label: c.label }))}
+            className="w-full"
+          />
         </div>
       )}
 

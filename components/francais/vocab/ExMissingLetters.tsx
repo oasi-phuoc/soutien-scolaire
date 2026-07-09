@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const VOWELS = "aeiouàâäèéêëîïôùûüœæ";
@@ -101,18 +102,17 @@ export function ExMissingLetters({
                         <span className="mt-0.5 text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{w.word[pos]}</span>
                       </div>
                     ) : (
-                      <select
+                      <AppSelect
                         key={pos}
                         value={s.blanks[pos] ?? ""}
+                        onChange={(v) => setBlank(w.word, pos, v)}
+                        options={ALPHABET.map((l) => ({ value: l, label: l }))}
+                        placeholder=""
+                        emptyOption={{ value: "", label: "" }}
                         disabled={s.checked}
-                        onChange={(e) => setBlank(w.word, pos, e.target.value)}
-                        className="h-8 w-7 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center [text-align-last:center] text-sm font-bold text-[var(--color-accent-fr)] outline-none"
-                      >
-                        <option value=""></option>
-                        {ALPHABET.map((l) => (
-                          <option key={l} value={l}>{l}</option>
-                        ))}
-                      </select>
+                        size="sm"
+                        className="w-7"
+                      />
                     )
                   ) : (
                     // Known letter tile

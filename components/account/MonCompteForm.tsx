@@ -7,7 +7,13 @@ import {
   updateMyProfileAction,
   type MyProfile,
 } from "@/app/actions/account";
+import { AppSelect } from "@/components/ui/AppSelect";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
+
+const CLASSE_NUM_OPTIONS = Array.from({ length: 20 }, (_, i) => ({
+  value: String(i + 1),
+  label: String(i + 1).padStart(2, "0"),
+}));
 
 const LANGUES_OPTIONS = [
   ...PIVOT_LANGS.map((l) => ({ code: l.code, label: l.labelFr })),
@@ -175,13 +181,17 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
             <div>
               <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Classe</label>
               <div className="grid grid-cols-2 gap-2">
-                <select value={form.classeType} onChange={(e) => setForm((f) => ({ ...f, classeType: e.target.value, classeNum: e.target.value === "ancien" ? f.classeNum : f.classeNum }))} className={inputCls}>
-                  <option value="">Filière</option>
-                  {["CSC", "CFR", "EPL", "CPR"].map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                  <option value="ancien">Ancien élève</option>
-                </select>
+                <AppSelect
+                  value={form.classeType}
+                  onChange={(v) => setForm((f) => ({ ...f, classeType: v, classeNum: v === "ancien" ? f.classeNum : f.classeNum }))}
+                  options={[
+                    ...["CSC", "CFR", "EPL", "CPR"].map((c) => ({ value: c, label: c })),
+                    { value: "ancien", label: "Ancien élève" },
+                  ]}
+                  placeholder="Filière"
+                  emptyOption={{ value: "", label: "Filière" }}
+                  className="w-full"
+                />
                 {form.classeType === "ancien" ? (
                   <input
                     type="text"
@@ -191,12 +201,14 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
                     className={inputCls}
                   />
                 ) : (
-                  <select value={form.classeNum} onChange={(e) => setForm((f) => ({ ...f, classeNum: e.target.value }))} className={inputCls}>
-                    <option value="">N°</option>
-                    {Array.from({ length: 20 }, (_, i) => (
-                      <option key={i} value={String(i + 1)}>{String(i + 1).padStart(2, "0")}</option>
-                    ))}
-                  </select>
+                  <AppSelect
+                    value={form.classeNum}
+                    onChange={(v) => setForm((f) => ({ ...f, classeNum: v }))}
+                    options={CLASSE_NUM_OPTIONS}
+                    placeholder="N°"
+                    emptyOption={{ value: "", label: "N°" }}
+                    className="w-full"
+                  />
                 )}
               </div>
             </div>
@@ -222,11 +234,12 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
           </div>
           <div>
             <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Langue parlée</label>
-            <select value={form.langue} onChange={(e) => setForm((f) => ({ ...f, langue: e.target.value }))} className={inputCls}>
-              {LANGUES_OPTIONS.map((l) => (
-                <option key={l.code} value={l.code}>{l.label}</option>
-              ))}
-            </select>
+            <AppSelect
+              value={form.langue}
+              onChange={(v) => setForm((f) => ({ ...f, langue: v }))}
+              options={LANGUES_OPTIONS.map((l) => ({ value: l.code, label: l.label }))}
+              className="w-full"
+            />
           </div>
         </div>
 

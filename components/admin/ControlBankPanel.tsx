@@ -7,6 +7,7 @@ import {
   getControlBankItemsAction,
   type ControlBankItem,
 } from "@/app/actions/control-bank";
+import { AppSelect } from "@/components/ui/AppSelect";
 
 export function ControlBankPanel() {
   const [items, setItems] = useState<ControlBankItem[]>([]);
@@ -61,15 +62,16 @@ export function ControlBankPanel() {
             required
             className="rounded-xl border border-zinc-200 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
           />
-          <select
+          <AppSelect
             value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            className="rounded-xl border border-zinc-200 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-          >
-            <option value="maths">Maths</option>
-            <option value="francais">Français</option>
-            <option value="lecture">Lecture</option>
-          </select>
+            onChange={setSubject}
+            options={[
+              { value: "maths", label: "Maths" },
+              { value: "francais", label: "Français" },
+              { value: "lecture", label: "Lecture" },
+            ]}
+            className="w-full"
+          />
         </div>
         <textarea
           value={questionText}
