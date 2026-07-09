@@ -106,44 +106,49 @@ function ModuleCard({
       }`}
     >
       {/* Module header */}
-      <button
-        type="button"
-        onClick={() => isCollapsible && setExpanded((e) => !e)}
-        className={`flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left ${isCollapsible ? "" : "cursor-default"}`}
+      <div
+        className="module-list-header"
+        style={{ "--module-header-accent": "var(--color-accent-lecture)" } as React.CSSProperties}
       >
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10">
-          <span className="text-sm font-bold text-[var(--color-accent-lecture)]">{mod.code}</span>
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-bold text-[var(--color-text-primary)]">{mod.title}</p>
-        </div>
-        <ModuleStateBadge state={modState} />
-        {isCollapsible && (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        )}
-      </button>
-
-      {/* Progress bar (in_progress only) */}
-      {expanded && modState === "in_progress" && hydrated && (
-        <div className="px-4 pb-2">
-          <div className="flex gap-1">
-            {mod.letters.map((letter) => {
-              const subState = getSubmoduleState(progress, mod.id, letter.letterLower);
-              const isDone = subState === "completed";
-              const isCurrent = subState === "available";
-              return (
-                <div
-                  key={letter.letterLower}
-                  className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
-                  style={isDone || isCurrent ? { background: "var(--color-accent-lecture)" } : undefined}
-                />
-              );
-            })}
+        <button
+          type="button"
+          onClick={() => isCollapsible && setExpanded((e) => !e)}
+          className={`flex w-full items-center gap-3 px-4 py-3 text-left ${isCollapsible ? "" : "cursor-default"}`}
+        >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+            <span className="text-sm font-bold text-[var(--color-accent-lecture)]">{mod.code}</span>
           </div>
-        </div>
-      )}
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-[var(--color-text-primary)]">{mod.title}</p>
+          </div>
+          <ModuleStateBadge state={modState} />
+          {isCollapsible && (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          )}
+        </button>
+
+        {/* Progress bar (in_progress only) */}
+        {expanded && modState === "in_progress" && hydrated && (
+          <div className="px-4 pb-3">
+            <div className="flex gap-1">
+              {mod.letters.map((letter) => {
+                const subState = getSubmoduleState(progress, mod.id, letter.letterLower);
+                const isDone = subState === "completed";
+                const isCurrent = subState === "available";
+                return (
+                  <div
+                    key={letter.letterLower}
+                    className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
+                    style={isDone || isCurrent ? { background: "var(--color-accent-lecture)" } : undefined}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Submodule list */}
       {expanded && <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">

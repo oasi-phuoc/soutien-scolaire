@@ -238,10 +238,7 @@ function SectionCard({
   }
 
   const iconBox = (
-    <div
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-      style={{ background: "color-mix(in srgb, var(--color-accent-fr) 15%, transparent)" }}
-    >
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
       <span className="text-sm font-bold text-[var(--color-accent-fr)]">{sec.code}</span>
     </div>
   );
@@ -257,54 +254,59 @@ function SectionCard({
       }`}
     >
       {/* Header */}
-      {inProgress ? (
-        <div className="flex w-full items-center gap-3 px-4 pt-4 pb-3">
-          {iconBox}
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+      <div
+        className="module-list-header"
+        style={{ "--module-header-accent": "var(--color-accent-fr)" } as React.CSSProperties}
+      >
+        {inProgress ? (
+          <div className="flex w-full items-center gap-3 px-4 py-3">
+            {iconBox}
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+            </div>
+            <SectionStateBadge state={state} comingSoon={comingSoon} />
           </div>
-          <SectionStateBadge state={state} comingSoon={comingSoon} />
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setExpanded((e) => !e)}
-          className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
-        >
-          {iconBox}
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
-          </div>
-          <SectionStateBadge state={state} comingSoon={comingSoon} />
-          <svg
-            width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" strokeWidth="2"
-            className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
-            aria-hidden
+        ) : (
+          <button
+            type="button"
+            onClick={() => setExpanded((e) => !e)}
+            className="flex w-full items-center gap-3 px-4 py-3 text-left"
           >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      )}
+            {iconBox}
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+            </div>
+            <SectionStateBadge state={state} comingSoon={comingSoon} />
+            <svg
+              width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2"
+              className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
+              aria-hidden
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        )}
 
-      {/* Progress bar (in_progress only) */}
-      {inProgress && hydrated && themes.length > 0 && (
-        <div className="px-4 pb-2">
-          <div className="flex gap-1">
-            {themes.map((th) => {
-              const isDone = completedSlugs.has(th.slug);
-              const isCurrent = th.slug === firstAvailableSlug;
-              return (
-                <div
-                  key={th.id}
-                  className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
-                  style={isDone || isCurrent ? { background: "var(--color-accent-fr)" } : undefined}
-                />
-              );
-            })}
+        {/* Progress bar (in_progress only) */}
+        {inProgress && hydrated && themes.length > 0 && (
+          <div className="px-4 pb-3">
+            <div className="flex gap-1">
+              {themes.map((th) => {
+                const isDone = completedSlugs.has(th.slug);
+                const isCurrent = th.slug === firstAvailableSlug;
+                return (
+                  <div
+                    key={th.id}
+                    className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
+                    style={isDone || isCurrent ? { background: "var(--color-accent-fr)" } : undefined}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Lesson list */}
       {showContent && (

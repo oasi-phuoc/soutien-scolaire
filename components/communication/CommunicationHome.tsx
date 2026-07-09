@@ -80,38 +80,40 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
         return (
           <li key={m.id}>
             <div className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] border-[var(--color-border-default)] ${allUnavailable ? "opacity-50" : ""}`}>
-              <button
-                type="button"
-                onClick={allUnavailable ? undefined : () => toggleExpanded(m.id)}
-                disabled={allUnavailable}
-                className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
+              <div
+                className="module-list-header"
+                style={{ "--module-header-accent": ACCENT } as React.CSSProperties}
               >
-                <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                  style={{ background: `color-mix(in srgb, ${ACCENT} 15%, transparent)` }}
+                <button
+                  type="button"
+                  onClick={allUnavailable ? undefined : () => toggleExpanded(m.id)}
+                  disabled={allUnavailable}
+                  className="flex w-full items-center gap-3 px-4 py-3 text-left"
                 >
-                  <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                  {m.description && <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{m.description}</p>}
-                </div>
-                <ModuleStateBadge state={moduleState} />
-                {allUnavailable ? (
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                      <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                    <span className="text-sm font-bold" style={{ color: ACCENT }}>{m.level}</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                    {m.description && <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">{m.description}</p>}
+                  </div>
+                  <ModuleStateBadge state={moduleState} />
+                  {allUnavailable ? (
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                        <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                      </svg>
+                    </span>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                      className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isExpanded ? "rotate-90" : ""}`} aria-hidden>
+                      <path d="M9 18l6-6-6-6" />
                     </svg>
-                  </span>
-                ) : (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                    className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isExpanded ? "rotate-90" : ""}`} aria-hidden>
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                )}
-              </button>
+                  )}
+                </button>
 
-              {!allUnavailable && <ModuleProgressBar total={m.submodules.length} completed={completedCount} />}
+                {!allUnavailable && <ModuleProgressBar total={m.submodules.length} completed={completedCount} />}
+              </div>
 
               {isExpanded && (
                 <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">

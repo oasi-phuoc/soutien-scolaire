@@ -467,3 +467,10 @@ input[type=number] {
     padding-inline: clamp(1.25rem, 2.5vw, 3rem);
   }
 }
+
+/* Module list cards — tinted header band (lecture / français / maths) */
+.module-list-header {
+  --module-header-accent: var(--color-theme);
+  background: color-mix(in oklch, var(--module-header-accent) 11%, white);
+  border-bottom: 1px solid color-mix(in oklch, var(--module-header-accent) 20%, transparent);
+}

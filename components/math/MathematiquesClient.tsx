@@ -200,19 +200,21 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               return (
                 <li key={m.id}>
                   <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] opacity-50">
-                    <div className="flex w-full items-center gap-3 px-4 py-4">
-                      <div
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                        style={{ background: `color-mix(in srgb, ${accentColor} 15%, transparent)` }}
-                      >
-                        <span className="text-sm font-bold" style={{ color: accentColor }}>{m.code}</span>
+                    <div
+                      className="module-list-header"
+                      style={{ "--module-header-accent": accentColor } as React.CSSProperties}
+                    >
+                      <div className="flex w-full items-center gap-3 px-4 py-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                          <span className="text-sm font-bold" style={{ color: accentColor }}>{m.code}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                        </div>
+                        <span className="shrink-0 rounded-full border border-[var(--color-border-default)] bg-white/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)] dark:bg-zinc-900/40">
+                          En cours de développement
+                        </span>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                      </div>
-                      <span className="shrink-0 rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
-                        En cours de développement
-                      </span>
                     </div>
                   </div>
                 </li>
@@ -270,68 +272,70 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                   }`}
                 >
                   {/* Module header */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (displayState === "in_progress" || displayState === "available") {
-                        const target = firstAvailableSubIdx >= 0
-                          ? m.submodules[firstAvailableSubIdx]
-                          : m.submodules[0];
-                        if (target) router.push(`/mathematiques/${target.id}`);
-                      } else {
-                        toggleModule(m.id, displayState);
-                      }
-                    }}
-                    className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
+                  <div
+                    className="module-list-header"
+                    style={{ "--module-header-accent": accentColor } as React.CSSProperties}
                   >
-                    <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                      style={{ background: `color-mix(in srgb, ${accentColor} 15%, transparent)` }}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (displayState === "in_progress" || displayState === "available") {
+                          const target = firstAvailableSubIdx >= 0
+                            ? m.submodules[firstAvailableSubIdx]
+                            : m.submodules[0];
+                          if (target) router.push(`/mathematiques/${target.id}`);
+                        } else {
+                          toggleModule(m.id, displayState);
+                        }
+                      }}
+                      className="flex w-full items-center gap-3 px-4 py-3 text-left"
                     >
-                      <span className="text-sm font-bold" style={{ color: accentColor }}>
-                        {m.code}
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-2">
-                      {prog?.medal ? (
-                        <span className="text-sm">{prog.medal}</span>
-                      ) : null}
-                      <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
-                      {displayState === "completed" && (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
-                          <path d="M9 18l6-6-6-6" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-
-                  {/* Progress bar (in_progress only, when expanded) */}
-                  {expanded && displayState === "in_progress" && hydrated && (
-                    <div className="px-4 pb-2">
-                      <div className="flex gap-1">
-                        {m.submodules.map((sub, si) => (
-                          <div
-                            key={sub.id}
-                            className={`h-1.5 flex-1 rounded-full transition-colors ${
-                              completedSubIds.has(sub.id)
-                                ? ""
-                                : si === firstAvailableSubIdx
-                                  ? "opacity-60"
-                                  : "bg-[var(--color-border-default)]"
-                            }`}
-                            style={
-                              completedSubIds.has(sub.id) || si === firstAvailableSubIdx
-                                ? { background: accentColor }
-                                : undefined
-                            }
-                          />
-                        ))}
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                        <span className="text-sm font-bold" style={{ color: accentColor }}>
+                          {m.code}
+                        </span>
                       </div>
-                    </div>
-                  )}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                      </div>
+                      <div className="flex shrink-0 items-center gap-2">
+                        {prog?.medal ? (
+                          <span className="text-sm">{prog.medal}</span>
+                        ) : null}
+                        <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
+                        {displayState === "completed" && (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
+                            <path d="M9 18l6-6-6-6" />
+                          </svg>
+                        )}
+                      </div>
+                    </button>
+
+                    {/* Progress bar (in_progress only, when expanded) */}
+                    {expanded && displayState === "in_progress" && hydrated && (
+                      <div className="px-4 pb-3">
+                        <div className="flex gap-1">
+                          {m.submodules.map((sub, si) => (
+                            <div
+                              key={sub.id}
+                              className={`h-1.5 flex-1 rounded-full transition-colors ${
+                                completedSubIds.has(sub.id)
+                                  ? ""
+                                  : si === firstAvailableSubIdx
+                                    ? "opacity-60"
+                                    : "bg-[var(--color-border-default)]"
+                              }`}
+                              style={
+                                completedSubIds.has(sub.id) || si === firstAvailableSubIdx
+                                  ? { background: accentColor }
+                                  : undefined
+                              }
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Revision evaluation button */}
                   {expanded && hydrated && (isAdmin || allNonRevisionCompleted) && (
