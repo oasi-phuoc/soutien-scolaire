@@ -8078,6 +8078,10 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "monomial_group") {
         currentResults = monomialResults.map((result) => result.coefficient && result.literal && result.degree);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: monomialAnswers } }));
+      } else if (currentStep.kind === "algebra_group") {
+        const step = activeAlgebraStep ?? currentStep;
+        currentResults = algebraGroupResults.slice(0, step.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: algebraGroupAnswers } }));
       } else if (currentStep.kind === "symbolic_group") {
         currentResults = symbolicResults.slice(0, currentStep.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
@@ -8358,8 +8362,12 @@ export function GenericModuleContent({
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
-                : es?.kind === "monomial_group" ? "Coefficient, partie littérale et degré"
-                : es?.kind === "symbolic_group" ? es.instruction
+                : es?.kind === "monomial_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.monomial_group?.[pivot]) || "Coefficient, partie littérale et degré")
+                : es?.kind === "algebra_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.algebra_group?.[pivot]) || "Calculez le résultat.")
+                : es?.kind === "symbolic_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.[`symbolic_${es.exNum}`]?.[pivot]) || es.instruction)
                 : es?.kind === "equation_group" ? "Équations"
                 : es?.kind === "system_equation" ? "Systèmes d'équations"
                 : es?.kind === "arithmetic_group"
@@ -8444,7 +8452,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, eqAnswers, eqWorkAnswers, eqResults, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, eqAnswers, eqWorkAnswers, eqResults, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults, monomialResults, monomialAnswers, algebraGroupResults, algebraGroupAnswers, symbolicResults, symbolicAnswers, activeAlgebraStep, pivot, showPivotTranslation]);
 
   const goNextRef = useRef<() => void>(() => {});
   useEffect(() => { goNextRef.current = goNext; });
@@ -9274,6 +9282,21 @@ export function GenericModuleContent({
             })}
           </div>
         );
+      case "algebra_group":
+        if (!snapshot) return null;
+        return (
+          <div className="space-y-1 text-xs">
+            {step.questions.map((question, index) => (
+              <p key={index}>
+                <span className="font-mono">{question.expr}</span>
+                <span className="text-[var(--color-text-secondary)]"> = </span>
+                <span className="text-amber-600">{snapshot.answers?.[index] || "—"}</span>
+                <span className="text-[var(--color-text-secondary)]"> → </span>
+                <span className="font-bold text-[var(--color-accent-alg)]">{question.answer}</span>
+              </p>
+            ))}
+          </div>
+        );
       case "symbolic_group":
         if (!snapshot) return null;
         return (
@@ -10078,6 +10101,12 @@ export function GenericModuleContent({
       consigneDir: (t && (pivot === "ar" || pivot === "fa" || pivot === "ps")) ? "rtl" as const : "ltr" as const,
     };
   };
+  const stepCons = (key: string, fallback: string) =>
+    (showPivotTranslation ? currentStepTrad?.consignes?.[key]?.[pivot] : undefined) ?? fallback;
+  const stepConsLang = (key: string) =>
+    showPivotTranslation && currentStepTrad?.consignes?.[key]?.[pivot] ? pivot : undefined;
+  const stepConsDir = (key: string) =>
+    stepConsLang(key) && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" as const : "ltr" as const;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
   const currentStepTitle = currentStepHasPivotTitle
@@ -10245,12 +10274,18 @@ export function GenericModuleContent({
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
-            <p className="text-sm text-[var(--color-text-primary)]">
-              Indiquez le coefficient, la partie littérale et le degré de chaque monôme.
+            <p className="text-sm text-[var(--color-text-primary)]" lang={stepConsLang("monomial_group")} dir={stepConsDir("monomial_group")}>
+              {stepCons("monomial_group", "Indiquez le coefficient, la partie littérale et le degré de chaque monôme.")}
             </p>
             <div className="overflow-x-auto">
               <div className="grid min-w-[34rem] grid-cols-[2rem_minmax(6rem,1fr)_8rem_10rem_5rem] items-stretch text-sm">
-                {["", "Monôme", "Coefficient", "Partie littérale", "Degré"].map((heading) => (
+                {[
+                  "",
+                  stepCons("monomial_col_monomial", "Monôme"),
+                  stepCons("monomial_col_coefficient", "Coefficient"),
+                  stepCons("monomial_col_literal", "Partie littérale"),
+                  stepCons("monomial_col_degree", "Degré"),
+                ].map((heading) => (
                   <div key={heading} className="border-b border-[var(--color-border-default)] px-2 py-2 text-center text-xs font-bold text-[var(--color-text-secondary)]">
                     {heading}
                   </div>
@@ -10300,7 +10335,9 @@ export function GenericModuleContent({
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
-            <p className="text-sm text-[var(--color-text-primary)]">{step.instruction}</p>
+            <p className="text-sm text-[var(--color-text-primary)]" lang={stepConsLang(`symbolic_${step.exNum}`)} dir={stepConsDir(`symbolic_${step.exNum}`)}>
+              {stepCons(`symbolic_${step.exNum}`, step.instruction)}
+            </p>
             {step.givens && step.givens.length > 0 && (
               <p className="text-sm text-[var(--color-text-secondary)]">
                 {step.givens.map((g, i) => (
@@ -10704,7 +10741,9 @@ export function GenericModuleContent({
         const step = activeAlgebraStep ?? (currentStep as AlgebraGroupStep);
         return (
           <div className="space-y-4">
-            <p className="text-sm font-semibold text-[var(--color-text-primary)]">Calculez le résultat.</p>
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]" lang={stepConsLang("algebra_group")} dir={stepConsDir("algebra_group")}>
+              {stepCons("algebra_group", "Calculez le résultat.")}
+            </p>
             <p className="text-sm text-[var(--color-text-secondary)]">
               <span className="font-bold text-[var(--color-accent-alg)]">{step.letter}</span>
               {" = "}
