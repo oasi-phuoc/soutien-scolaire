@@ -24,12 +24,14 @@ export const TRAD_A9_5: SubmoduleTrad = {
     {
       text: {
         fr: "Propriété distributive",
-      },
+      }
+    },
+    {
       items: {
         fr: [
-            "a(b **+** c) = ab **+** ac",
-            "a(b **−** c) = ab **−** ac",
-          ],
+          "a(b **+** c) = ab **+** ac",
+          "a(b **−** c) = ab **−** ac",
+        ],
       }
     },
     {

@@ -19,8 +19,12 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
           fr: "Développer signifie supprimer les parenthèses en distribuant la multiplication sur chaque terme à l'intérieur.",
         },
         {
-          type: "rule",
-          titleFr: "Propriété distributive",
+          type: "highlight",
+          fr: "Propriété distributive",
+        },
+        {
+          type: "section",
+          labelFr: "",
           itemsFr: [
             "a(b **+** c) = ab **+** ac",
             "a(b **−** c) = ab **−** ac",
@@ -47,7 +51,7 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
           black: true,
         },
         {
-          type: "note",
+          type: "plain",
           fr: "Quand le facteur est négatif, tous les signes à l'intérieur de la parenthèse s'inversent.",
         },
         {
