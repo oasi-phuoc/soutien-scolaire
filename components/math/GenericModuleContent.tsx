@@ -6716,12 +6716,11 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       const tableRows = showPivot && bt?.items?.[pivot]?.length
         ? bt.items[pivot]!.map((row) => row.split("|").map((cell) => cell.trim()))
         : block.rows;
-      // autoWidth: columns size to their content (tighter padding, table hugs
-      // its text and is centered) instead of stretching to the full width.
-      const tCellPad = block.autoWidth ? "px-2 py-1.5" : "px-3 py-2";
+      // autoWidth: compact on mobile; full-width flexible columns on desktop (lg+).
+      const tCellPad = block.autoWidth ? "px-2 py-1.5 lg:px-3 lg:py-2" : "px-3 py-2";
       return (
-        <div className={`overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--color-border-default)] ${block.autoWidth ? "mx-auto w-fit max-w-full" : ""}`}>
-          <table className={`text-sm ${block.autoWidth ? "w-auto" : "w-full"}`}>
+        <div className={`overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--color-border-default)] ${block.autoWidth ? "mx-auto w-fit max-w-full lg:mx-0 lg:w-full" : "w-full"}`}>
+          <table className={`text-sm ${block.autoWidth ? "w-auto lg:w-full" : "w-full"}`}>
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
                 {tableHeaders.map((h, i) => (
