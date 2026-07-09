@@ -24,14 +24,26 @@ export const TRAD_A9_6: SubmoduleTrad = {
     {
       text: {
         fr: "Méthode de factorisation",
-      },
-      items: {
-        fr: [
-            "1. Identifier le plus grand facteur commun (PGCD) de tous les termes",
-            "2. Le placer devant une parenthèse",
-            "3. Écrire à l'intérieur ce qui reste après division par ce facteur",
-            "4. Vérifier en développant",
-          ],
+      }
+    },
+    {
+      text: {
+        fr: "**1.** Identifier le plus grand facteur commun (PGCD) de tous les termes",
+      }
+    },
+    {
+      text: {
+        fr: "**2.** Le placer devant une parenthèse",
+      }
+    },
+    {
+      text: {
+        fr: "**3.** Écrire à l'intérieur ce qui reste après division par ce facteur",
+      }
+    },
+    {
+      text: {
+        fr: "**4.** Vérifier en développant",
       }
     },
     {
@@ -46,16 +58,17 @@ export const TRAD_A9_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "Vérification",
+        fr: "3(2x **+** 3) = 6x **+** 9 ✓",
       }
     },
     {
-      items: {
-        fr: [
-            "3(2x **+** 3) = 6x **+** 9 ✓",
-            "5(2a **−** 3) = 10a **−** 15 ✓",
-            "4x(x **+** 2) = 4x² **+** 8x ✓",
-          ],
+      text: {
+        fr: "5(2a **−** 3) = 10a **−** 15 ✓",
+      }
+    },
+    {
+      text: {
+        fr: "4x(x **+** 2) = 4x² **+** 8x ✓",
       }
     },
     {

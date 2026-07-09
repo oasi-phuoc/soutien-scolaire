@@ -5,7 +5,7 @@ export const MATH_A9_6_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A9.6",
     theory: {
       title: {
-        fr: "",
+        fr: "Factorisation",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -19,14 +19,24 @@ export const MATH_A9_6_LESSON: MathSubmoduleLesson = {
           fr: "Factoriser est l'opération inverse du développement : on met un facteur commun en évidence. On passe d'une somme à un produit.",
         },
         {
-          type: "rule",
-          titleFr: "Méthode de factorisation",
-          itemsFr: [
-            "1. Identifier le plus grand facteur commun (PGCD) de tous les termes",
-            "2. Le placer devant une parenthèse",
-            "3. Écrire à l'intérieur ce qui reste après division par ce facteur",
-            "4. Vérifier en développant",
-          ],
+          type: "highlight",
+          fr: "Méthode de factorisation",
+        },
+        {
+          type: "plain",
+          fr: "**1.** Identifier le plus grand facteur commun (PGCD) de tous les termes",
+        },
+        {
+          type: "plain",
+          fr: "**2.** Le placer devant une parenthèse",
+        },
+        {
+          type: "plain",
+          fr: "**3.** Écrire à l'intérieur ce qui reste après division par ce facteur",
+        },
+        {
+          type: "plain",
+          fr: "**4.** Vérifier en développant",
         },
         {
           type: "heading",
@@ -45,20 +55,19 @@ export const MATH_A9_6_LESSON: MathSubmoduleLesson = {
           ],
         },
         {
-          type: "highlight",
-          fr: "Vérification",
+          type: "plain",
+          fr: "3(2x **+** 3) = 6x **+** 9 ✓",
         },
         {
-          type: "section",
-          labelFr: "",
-          itemsFr: [
-            "3(2x **+** 3) = 6x **+** 9 ✓",
-            "5(2a **−** 3) = 10a **−** 15 ✓",
-            "4x(x **+** 2) = 4x² **+** 8x ✓",
-          ],
+          type: "plain",
+          fr: "5(2a **−** 3) = 10a **−** 15 ✓",
         },
         {
-          type: "note",
+          type: "plain",
+          fr: "4x(x **+** 2) = 4x² **+** 8x ✓",
+        },
+        {
+          type: "plain",
           fr: "La vérification est indispensable : en développant le résultat factorisé, on doit retrouver exactement l'expression de départ.",
         },
       ],
