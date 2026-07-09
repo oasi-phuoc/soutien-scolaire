@@ -14,6 +14,7 @@ import {
   getRecentMathLessons,
   type ModuleProgressGroup,
 } from "@/lib/suivi/lesson-progress-views";
+import { PROGRESS_ACCENT, PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 
 function formatDuration(sec: number): string {
@@ -36,33 +37,33 @@ function IconLoupe({ className }: { className?: string }) {
   );
 }
 
-function Bar({ pct, color }: { pct: number; color: string }) {
+function Bar({ pct, fill }: { pct: number; fill: string }) {
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-      <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+      <div className="h-full rounded-full" style={{ width: `${pct}%`, background: fill }} />
     </div>
   );
 }
 
 function PlacementSubjectBar({
   points,
-  fillClass,
-  circleClass,
+  fill,
+  accent,
 }: {
   points: number;
-  fillClass: string;
-  circleClass: string;
+  fill: string;
+  accent: string;
 }) {
   const pct = Math.min(100, Math.max(0, (points / 100) * 100));
   const circleLeft = `clamp(0px, calc(${pct}% - 10px), calc(100% - 20px))`;
   return (
     <div className="relative h-6 flex-1 overflow-visible">
       <div className="absolute inset-x-0 top-1/2 h-2 -translate-y-1/2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-        <div className={`h-full rounded-full ${fillClass}`} style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full" style={{ width: `${pct}%`, background: fill }} />
       </div>
       <div
-        className={`absolute top-1/2 flex h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white px-0.5 text-[7px] font-bold leading-none text-white shadow-sm dark:border-zinc-900 ${circleClass}`}
-        style={{ left: circleLeft }}
+        className="absolute top-1/2 flex h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white px-0.5 text-[7px] font-bold leading-none text-white shadow-sm dark:border-zinc-900"
+        style={{ left: circleLeft, background: accent }}
       >
         {formatPlacementHalf(points)}
       </div>
@@ -70,14 +71,14 @@ function PlacementSubjectBar({
   );
 }
 
-function PillToggle<T extends string>({
+function BranchToggle<T extends string>({
   options,
-  value,
-  onChange,
+  selected,
+  onToggle,
 }: {
   options: { id: T; label: string }[];
-  value: T;
-  onChange: (v: T) => void;
+  selected: T | null;
+  onToggle: (id: T) => void;
 }) {
   return (
     <div className="flex overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700">
@@ -85,10 +86,10 @@ function PillToggle<T extends string>({
         <button
           key={opt.id}
           type="button"
-          onClick={() => onChange(opt.id)}
+          onClick={() => onToggle(opt.id)}
           className={`flex-1 px-3 py-1.5 text-xs font-semibold transition-colors ${
             i > 0 ? "border-l border-zinc-200 dark:border-zinc-700" : ""
-          } ${value === opt.id ? "bg-[var(--color-theme)] text-white" : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900"}`}
+          } ${selected === opt.id ? "bg-[var(--color-theme)] text-white" : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900"}`}
         >
           {opt.label}
         </button>
@@ -151,14 +152,14 @@ function ModuleLessonList({ groups }: { groups: ModuleProgressGroup[] }) {
 function SubjectBlock({
   label,
   stat,
-  color,
+  fill,
   open,
   onToggle,
   children,
 }: {
   label: string;
   stat: { done: number; total: number; pct: number };
-  color: string;
+  fill: string;
   open: boolean;
   onToggle: () => void;
   children: React.ReactNode;
@@ -179,7 +180,7 @@ function SubjectBlock({
         </span>
       </button>
       <div className="px-3 pb-1">
-        <Bar pct={stat.pct} color={color} />
+        <Bar pct={stat.pct} fill={fill} />
       </div>
       {open && <div className="space-y-3 border-t border-zinc-100 px-3 py-3 dark:border-zinc-800">{children}</div>}
     </div>
@@ -217,15 +218,15 @@ export function StudentProgressDetail({
   const [combinedProfile, setCombinedProfile] = useState<PlacementProfile | null>(null);
 
   const [openSubject, setOpenSubject] = useState<"math" | "french" | "lecture" | "placement" | null>(null);
-  const [mathBranch, setMathBranch] = useState<"algebra" | "geometry">("algebra");
-  const [frenchTab, setFrenchTab] = useState<"vocabulaire" | "grammaire" | "communication">("vocabulaire");
-  const [mathListOpen, setMathListOpen] = useState(false);
-  const [frenchListOpen, setFrenchListOpen] = useState(false);
+  const [mathBranch, setMathBranch] = useState<"algebra" | "geometry" | null>(null);
+  const [frenchTab, setFrenchTab] = useState<"vocabulaire" | "grammaire" | "communication" | null>(null);
+  const [lectureSection, setLectureSection] = useState<"apprendre" | null>(null);
 
   useEffect(() => {
     setOpenSubject(null);
-    setMathListOpen(false);
-    setFrenchListOpen(false);
+    setMathBranch(null);
+    setFrenchTab(null);
+    setLectureSection(null);
 
     if (!hasInitialProgress) setLoading(true);
 
@@ -263,22 +264,18 @@ export function StudentProgressDetail({
   const placementPct = combinedProfile ? Math.round((combinedProfile.total / 200) * 100) : 0;
   const placementHistory = [...placementRows].reverse().slice(0, 5);
 
+  function toggleBranch<T extends string>(current: T | null, id: T, setter: (v: T | null) => void) {
+    setter(current === id ? null : id);
+  }
+
   return (
     <div className="space-y-3">
       <SubjectBlock
         label="Maths"
         stat={math}
-        color="bg-blue-500"
+        fill={PROGRESS_FILL.math}
         open={openSubject === "math"}
-        onToggle={() => {
-          setOpenSubject((s) => {
-            if (s === "math") {
-              setMathListOpen(false);
-              return null;
-            }
-            return "math";
-          });
-        }}
+        onToggle={() => setOpenSubject((s) => (s === "math" ? null : "math"))}
       >
         <div className="rounded-lg border border-zinc-100 p-3 dark:border-zinc-800">
           <p className="text-[10px] uppercase tracking-wide text-zinc-400">Temps · 7 derniers jours</p>
@@ -288,58 +285,44 @@ export function StudentProgressDetail({
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
           <RecentLessons items={getRecentMathLessons(progress)} />
         </div>
-        <PillToggle
+        <BranchToggle
           options={[
             { id: "algebra" as const, label: "Algèbre" },
             { id: "geometry" as const, label: "Géométrie" },
           ]}
-          value={mathBranch}
-          onChange={(v) => {
-            setMathBranch(v);
-            setMathListOpen(true);
-          }}
+          selected={mathBranch}
+          onToggle={(id) => toggleBranch(mathBranch, id, setMathBranch)}
         />
-        {mathListOpen && <ModuleLessonList groups={getMathModuleGroups(progress, mathBranch)} />}
+        {mathBranch && <ModuleLessonList groups={getMathModuleGroups(progress, mathBranch)} />}
       </SubjectBlock>
 
       <SubjectBlock
         label="Français"
         stat={french}
-        color="bg-emerald-500"
+        fill={PROGRESS_FILL.french}
         open={openSubject === "french"}
-        onToggle={() => {
-          setOpenSubject((s) => {
-            if (s === "french") {
-              setFrenchListOpen(false);
-              return null;
-            }
-            return "french";
-          });
-        }}
+        onToggle={() => setOpenSubject((s) => (s === "french" ? null : "french"))}
       >
         <div>
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
           <RecentLessons items={getRecentFrenchLessons(progress)} />
         </div>
-        <PillToggle
+        <BranchToggle
           options={[
             { id: "vocabulaire" as const, label: "Vocabulaire" },
             { id: "grammaire" as const, label: "Grammaire" },
             { id: "communication" as const, label: "Expression" },
           ]}
-          value={frenchTab}
-          onChange={(v) => {
-            setFrenchTab(v);
-            setFrenchListOpen(true);
-          }}
+          selected={frenchTab}
+          onToggle={(id) => toggleBranch(frenchTab, id, setFrenchTab)}
         />
-        {frenchListOpen && <ModuleLessonList groups={getFrenchModuleGroups(progress, frenchTab)} />}
+        {frenchTab && <ModuleLessonList groups={getFrenchModuleGroups(progress, frenchTab)} />}
       </SubjectBlock>
 
       <SubjectBlock
         label="Lecture"
         stat={lecture}
-        color="bg-amber-500"
+        fill={PROGRESS_FILL.lecture}
         open={openSubject === "lecture"}
         onToggle={() => setOpenSubject((s) => (s === "lecture" ? null : "lecture"))}
       >
@@ -347,8 +330,12 @@ export function StudentProgressDetail({
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">Dernières leçons complétées</p>
           <RecentLessons items={getRecentLectureLessons(progress)} />
         </div>
-        <p className="text-xs font-bold text-amber-700 dark:text-amber-300">Apprendre</p>
-        <ModuleLessonList groups={getLectureModuleGroups(progress)} />
+        <BranchToggle
+          options={[{ id: "apprendre" as const, label: "Apprendre" }]}
+          selected={lectureSection}
+          onToggle={(id) => toggleBranch(lectureSection, id, setLectureSection)}
+        />
+        {lectureSection && <ModuleLessonList groups={getLectureModuleGroups(progress)} />}
       </SubjectBlock>
 
       <div className="rounded-xl border border-zinc-100 dark:border-zinc-800">
@@ -362,22 +349,17 @@ export function StudentProgressDetail({
             Test de placement
           </span>
           {combinedProfile ? (
-            <span className="font-mono text-xs text-violet-600 dark:text-violet-400">
-              {formatPlacementHalf(combinedProfile.total)}/200 · {combinedProfile.zone}
+            <span className="font-mono text-xs text-zinc-600 dark:text-zinc-300">
+              {formatPlacementHalf(combinedProfile.total)} / 200 · zone {combinedProfile.zone}
             </span>
           ) : (
             <span className="text-xs text-zinc-400">Aucun résultat</span>
           )}
         </button>
         {combinedProfile && (
-          <>
-            <p className="px-3 pb-2 text-xs text-zinc-500">
-              Total /200 : {formatPlacementHalf(combinedProfile.total)} (maths {formatPlacementHalf(combinedProfile.mathCounted)} + français {formatPlacementHalf(combinedProfile.frenchCounted)}) · zone {combinedProfile.zone}
-            </p>
-            <div className="px-3 pb-2">
-              <Bar pct={placementPct} color="bg-violet-500" />
-            </div>
-          </>
+          <div className="px-3 pb-2">
+            <Bar pct={placementPct} fill={PROGRESS_FILL.placement} />
+          </div>
         )}
         {openSubject === "placement" && placementHistory.length > 0 && (
           <div className="space-y-2 border-t border-zinc-100 px-3 py-3 dark:border-zinc-800">
@@ -394,8 +376,16 @@ export function StudentProgressDetail({
                   <span className="text-[11px] tabular-nums text-zinc-400">
                     {d.toLocaleDateString("fr-CH", { day: "2-digit", month: "2-digit", year: "2-digit" })}
                   </span>
-                  <PlacementSubjectBar points={row.mathCounted} fillClass="bg-blue-400" circleClass="bg-blue-500" />
-                  <PlacementSubjectBar points={row.frenchCounted} fillClass="bg-emerald-400" circleClass="bg-emerald-500" />
+                  <PlacementSubjectBar
+                    points={row.mathCounted}
+                    fill={PROGRESS_FILL.math}
+                    accent={PROGRESS_ACCENT.math}
+                  />
+                  <PlacementSubjectBar
+                    points={row.frenchCounted}
+                    fill={PROGRESS_FILL.french}
+                    accent={PROGRESS_ACCENT.french}
+                  />
                   <span className="text-right text-[11px] font-semibold tabular-nums text-zinc-700 dark:text-zinc-200">
                     {formatPlacementHalf(row.total)}/200
                   </span>

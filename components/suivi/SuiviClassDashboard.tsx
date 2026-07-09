@@ -7,6 +7,7 @@ import {
 } from "@/app/actions/suivi";
 import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/StudentPersonalInfoCard";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
+import { PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -21,10 +22,10 @@ function lastSeen(iso: string | null): string {
   return d.toLocaleDateString("fr-CH", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-function ProgressBar({ pct, color }: { pct: number; color: string }) {
+function ProgressBar({ pct, fill }: { pct: number; fill: string }) {
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-      <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+      <div className="h-full rounded-full" style={{ width: `${pct}%`, background: fill }} />
     </div>
   );
 }
@@ -33,12 +34,12 @@ function ProgressCell({
   done,
   total,
   pct,
-  color,
+  fill,
 }: {
   done: number;
   total: number;
   pct: number;
-  color: string;
+  fill: string;
 }) {
   return (
     <div
@@ -48,7 +49,7 @@ function ProgressCell({
       <span className="hidden text-[10px] font-semibold tabular-nums text-zinc-800 sm:block dark:text-zinc-200">
         {done}/{total}
       </span>
-      <ProgressBar pct={pct} color={color} />
+      <ProgressBar pct={pct} fill={fill} />
     </div>
   );
 }
@@ -206,13 +207,13 @@ export function SuiviClassDashboard({
                         {lastSeen(s.progress_updated_at)}
                       </td>
                       <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
-                        <ProgressCell done={s.math_done} total={s.math_total} pct={s.math_pct} color="bg-blue-500" />
+                        <ProgressCell done={s.math_done} total={s.math_total} pct={s.math_pct} fill={PROGRESS_FILL.math} />
                       </td>
                       <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
-                        <ProgressCell done={s.french_done} total={s.french_total} pct={s.french_pct} color="bg-emerald-500" />
+                        <ProgressCell done={s.french_done} total={s.french_total} pct={s.french_pct} fill={PROGRESS_FILL.french} />
                       </td>
                       <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
-                        <ProgressCell done={s.lecture_done} total={s.lecture_total} pct={s.lecture_pct} color="bg-amber-500" />
+                        <ProgressCell done={s.lecture_done} total={s.lecture_total} pct={s.lecture_pct} fill={PROGRESS_FILL.lecture} />
                       </td>
                     </tr>
                     {infoOpen && (
