@@ -5517,6 +5517,139 @@ function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbol
   return { kind: "symbolic_group", lesson, exNum, instruction, mode: "input", questions };
 }
 
+// A9.6 — factoring expressions. Three dynamic exercises (refreshable), each a
+// pool of 50 templates that randomize both the letters and the numbers.
+function factorAnswerVariants(
+  outerNum: number,
+  outerLit: string,
+  innerCoef: number,
+  sym: string,
+  innerConst: number,
+  minus: boolean,
+): string[] {
+  const sign = minus ? "−" : "+";
+  const innerVar = innerCoef === 1 ? sym : `${innerCoef}${sym}`;
+  const bases = [
+    `${outerNum}${outerLit}(${innerVar} ${sign} ${innerConst})`,
+    `${outerNum}${outerLit}(${innerVar}${sign}${innerConst})`,
+  ];
+  if (innerCoef === 1) {
+    bases.push(`${outerNum}${outerLit}(${sym}${sign}${innerConst})`);
+  }
+  return [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))];
+}
+
+function genFactorGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
+  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = <T,>(items: readonly T[]) => items[ri(0, items.length - 1)]!;
+  const letters = ["x", "y", "a", "b", "m", "n", "t"] as const;
+
+  const binomialTerm = (coef: number, sym: string, minus: boolean, magnitude: number) =>
+    `${coef}${sym}${minus ? " − " : " + "}${magnitude}`;
+
+  // Exercise 1 — simple: numeric GCF only, k·(a·sym ± c).
+  const simple = (): SymbolicQuestion => {
+    const sym = pick(letters);
+    const factor = ri(2, 9);
+    const innerCoef = ri(1, 9);
+    const innerConst = ri(1, 12);
+    const minus = Math.random() < 0.5;
+    return {
+      expression: binomialTerm(factor * innerCoef, sym, minus, factor * innerConst),
+      acceptable: factorAnswerVariants(factor, "", innerCoef, sym, innerConst, minus),
+    };
+  };
+
+  // Exercise 2 — medium: k·sym·(a·sym ± c) or larger numeric GCF.
+  const medium = (): SymbolicQuestion => {
+    if (Math.random() < 0.55) {
+      const sym = pick(letters);
+      const k = ri(2, 6);
+      const a = ri(1, 4);
+      const b = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const exprCoef2 = k * b;
+      const expr = `${k * a}${sym}² ${minus ? "−" : "+"} ${exprCoef2}${sym}`;
+      return {
+        expression: expr,
+        acceptable: factorAnswerVariants(k, sym, a, sym, b, minus),
+      };
+    }
+    const sym = pick(letters);
+    const factor = ri(4, 12);
+    const innerCoef = ri(2, 9);
+    const innerConst = ri(2, 15);
+    const minus = Math.random() < 0.5;
+    return {
+      expression: binomialTerm(factor * innerCoef, sym, minus, factor * innerConst),
+      acceptable: factorAnswerVariants(factor, "", innerCoef, sym, innerConst, minus),
+    };
+  };
+
+  // Exercise 3 — advanced: two variables, sym² factor, or three-term numeric GCF.
+  const advanced = (): SymbolicQuestion => {
+    const mode = ri(0, 2);
+    if (mode === 0) {
+      const [sym1, sym2] = [...letters].sort(() => Math.random() - 0.5).slice(0, 2) as [string, string];
+      const k = ri(2, 6);
+      const a = ri(2, 5);
+      const b = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const expr = `${k * a}${sym1}${sym2} ${minus ? "−" : "+"} ${k * b}${sym2}`;
+      return {
+        expression: expr,
+        acceptable: factorAnswerVariants(k, sym2, a, sym1, b, minus),
+      };
+    }
+    if (mode === 1) {
+      const sym = pick(letters);
+      const k = ri(2, 6);
+      const c = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const expr = `${k}${sym}³ ${minus ? "−" : "+"} ${k * c}${sym}²`;
+      const sign = minus ? "−" : "+";
+      const bases = [
+        `${k}${sym}²(${sym} ${sign} ${c})`,
+        `${k}${sym}²(${sym}${sign}${c})`,
+      ];
+      return {
+        expression: expr,
+        acceptable: [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))],
+      };
+    }
+    const sym = pick(letters);
+    const k = ri(2, 5);
+    const a = ri(1, 3);
+    const b = ri(2, 6);
+    const c = ri(2, 9);
+    const minus1 = Math.random() < 0.5;
+    const minus2 = Math.random() < 0.5;
+    const term1 = `${k * a}${sym}²`;
+    const term2 = `${minus1 ? "−" : "+"} ${k * b}${sym}`;
+    const term3 = `${minus2 ? "−" : "+"} ${k * c}`;
+    const innerParts = [
+      a === 1 ? `${sym}²` : `${a}${sym}²`,
+      `${minus1 ? "−" : "+"} ${b === 1 ? sym : `${b}${sym}`}`,
+      `${minus2 ? "−" : "+"} ${c}`,
+    ].join(" ");
+    const bases = [`${k}(${innerParts})`];
+    return {
+      expression: `${term1} ${term2} ${term3}`,
+      acceptable: [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))],
+    };
+  };
+
+  const generator = exNum === 1 ? simple : exNum === 2 ? medium : advanced;
+  return {
+    kind: "symbolic_group",
+    lesson,
+    exNum,
+    instruction: "Factorisez les expressions.",
+    mode: "input",
+    questions: shufflePick(Array.from({ length: 50 }, generator), 5),
+  };
+}
+
 function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupStep {
   const templates = Array.from({ length: 50 }, (_, index) => {
     const base = index % 2 === 0 ? generateProductQuestion(index) : generateReductionQuestion(index, true);
@@ -6008,6 +6141,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
         steps.push(genDevelopGroupStep(lesson, 3));
+      } else if (sid === "A9-6") {
+        steps.push(genFactorGroupStep(lesson, 1));
+        steps.push(genFactorGroupStep(lesson, 2));
+        steps.push(genFactorGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -6030,6 +6167,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
         steps.push(genDevelopGroupStep(lesson, 3));
+      } else if (sid === "A9-6") {
+        steps.push(genFactorGroupStep(lesson, 1));
+        steps.push(genFactorGroupStep(lesson, 2));
+        steps.push(genFactorGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -8492,9 +8633,11 @@ export function GenericModuleContent({
         ? genEvalExpressionGroupStep(currentStep.lesson, exNum)
         : currentStep.lesson.submoduleId === "A9-5"
           ? genDevelopGroupStep(currentStep.lesson, exNum)
-          : currentStep.mode === "true_false"
-            ? genSymbolicTrueFalseStep(currentStep.lesson)
-            : genSymbolicGroupStep(currentStep.lesson, exNum);
+          : currentStep.lesson.submoduleId === "A9-6"
+            ? genFactorGroupStep(currentStep.lesson, exNum)
+            : currentStep.mode === "true_false"
+              ? genSymbolicTrueFalseStep(currentStep.lesson)
+              : genSymbolicGroupStep(currentStep.lesson, exNum);
       setSymbolicOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
       setSymbolicAnswers([]);
       setSymbolicValidated(false);
