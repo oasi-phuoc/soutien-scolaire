@@ -210,12 +210,22 @@ export function ProfessorAttributionsClient() {
     setDrafts((prev) => {
       const current = prev[teacherId];
       if (!current) return prev;
+
+      const next: Record<string, DraftRow> = { ...prev };
+
+      if (primaryClassId) {
+        for (const [otherId, otherDraft] of Object.entries(next)) {
+          if (otherId !== teacherId && otherDraft.primaryClassId === primaryClassId) {
+            next[otherId] = { ...otherDraft, primaryClassId: null };
+          }
+        }
+      }
+
       const secondaryClassIds = new Set(current.secondaryClassIds);
       if (primaryClassId) secondaryClassIds.delete(primaryClassId);
-      return {
-        ...prev,
-        [teacherId]: { primaryClassId, secondaryClassIds },
-      };
+
+      next[teacherId] = { primaryClassId, secondaryClassIds };
+      return next;
     });
   }
 
@@ -266,6 +276,7 @@ export function ProfessorAttributionsClient() {
     <div className="space-y-4 pb-32">
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
         Affectez en une fois la classe principale (titulariat) et les classes secondaires de chaque professeur.
+        Une classe ne peut avoir qu&apos;un seul professeur titulaire.
       </p>
 
       <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">

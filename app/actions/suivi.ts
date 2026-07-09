@@ -767,21 +767,21 @@ export async function setTeacherClassesAction(
   const supabase = await createSupabaseActionClient();
   if (!supabase) return { ok: false, reason: "Erreur serveur." };
 
-  await supabase.from("class_teachers").delete().eq("teacher_id", teacherId);
+  const secondary = primaryClassId
+    ? classIds.filter((id) => id !== primaryClassId)
+    : classIds;
 
-  if (classIds.length > 0) {
-    const { error } = await supabase.from("class_teachers").insert(
-      classIds.map((class_id) => ({ class_id, teacher_id: teacherId })),
-    );
-    if (error) return { ok: false, reason: error.message };
-  }
+  const { error } = await supabase.rpc("admin_save_teacher_attributions", {
+    p_updates: [
+      {
+        teacher_id: teacherId,
+        primary_class_id: primaryClassId ?? null,
+        secondary_class_ids: secondary,
+      },
+    ],
+  });
 
-  if (primaryClassId !== undefined) {
-    await supabase
-      .from("profiles")
-      .update({ primary_class_id: primaryClassId || null })
-      .eq("id", teacherId);
-  }
+  if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/admin");
   revalidatePath("/suivi");
@@ -984,17 +984,35 @@ export async function saveProfessorAttributionsAction(
   const role = await getCallerRole();
   if (role !== "admin") return { ok: false, reason: "Réservé aux administrateurs." };
 
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Erreur serveur." };
+
+  const primarySet = new Set<string>();
   for (const row of updates) {
-    const secondary = row.secondaryClassIds.filter((id) => id !== row.primaryClassId);
-    const classIds = [
-      ...new Set([
-        ...(row.primaryClassId ? [row.primaryClassId] : []),
-        ...secondary,
-      ]),
-    ];
-    const res = await setTeacherClassesAction(row.teacherId, classIds, row.primaryClassId);
-    if (!res.ok) return res;
+    if (!row.primaryClassId) continue;
+    if (primarySet.has(row.primaryClassId)) {
+      return {
+        ok: false,
+        reason: "Deux professeurs ne peuvent pas être titulaires de la même classe.",
+      };
+    }
+    primarySet.add(row.primaryClassId);
   }
+
+  const payload = updates.map((row) => {
+    const secondary = row.secondaryClassIds.filter((id) => id !== row.primaryClassId);
+    return {
+      teacher_id: row.teacherId,
+      primary_class_id: row.primaryClassId,
+      secondary_class_ids: secondary,
+    };
+  });
+
+  const { error } = await supabase.rpc("admin_save_teacher_attributions", {
+    p_updates: payload,
+  });
+
+  if (error) return { ok: false, reason: error.message };
 
   revalidatePath("/admin");
   revalidatePath("/admin/attribution-professeurs");
