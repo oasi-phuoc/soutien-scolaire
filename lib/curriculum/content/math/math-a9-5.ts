@@ -53,6 +53,10 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "plain",
+          fr: "La double distributivité consiste à multiplier chaque terme du premier membre par chaque terme du second membre.",
+        },
+        {
+          type: "plain",
           fr: "(a **+** b)(c **+** d)",
         },
         {

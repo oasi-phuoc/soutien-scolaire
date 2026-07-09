@@ -35,6 +35,7 @@ export const TRAD_A9_5: SubmoduleTrad = {
       },
     },
     { text: { fr: "Double distribution" } },
+    { text: { fr: "La double distributivité consiste à multiplier chaque terme du premier membre par chaque terme du second membre." } },
     { text: { fr: "(a **+** b)(c **+** d)" } },
     {
       items: {
