@@ -163,13 +163,14 @@ export function SuiviClassesClient() {
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Détail" />
               <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Classe</th>
+              <th className="hidden px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell">Titulaire</th>
               <th className="hidden px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell">Élèves</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
             {displayClasses.length === 0 ? (
               <tr>
-                <td colSpan={3} className="px-3 py-8 text-center text-sm text-zinc-400">
+                <td colSpan={4} className="px-3 py-8 text-center text-sm text-zinc-400">
                   {search.trim().length >= 2 ? "Aucune classe trouvée." : "Aucune classe."}
                 </td>
               </tr>
@@ -188,6 +189,9 @@ export function SuiviClassesClient() {
                     </button>
                   </td>
                   <td className="px-2 py-2 font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">{cls.label}</td>
+                  <td className="hidden px-3 py-2.5 text-zinc-600 sm:table-cell dark:text-zinc-300">
+                    {cls.titulaire ?? "—"}
+                  </td>
                   <td className="hidden px-3 py-2.5 text-center tabular-nums text-zinc-600 sm:table-cell dark:text-zinc-300">{cls.student_count}</td>
                 </tr>
               ))

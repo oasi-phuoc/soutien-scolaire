@@ -16,6 +16,8 @@ export type TeacherClassRow = {
   student_count: number;
   is_primary: boolean;
   is_secondary: boolean;
+  /** Professeur ayant cette classe en classe principale */
+  titulaire: string | null;
 };
 
 export type SuiviContext = {
@@ -80,6 +82,52 @@ async function getCallerRole(): Promise<"admin" | "prof" | null> {
   return null;
 }
 
+function formatPersonName(prenom: string | null | undefined, nom: string | null | undefined): string | null {
+  const name = [prenom, nom].filter(Boolean).join(" ").trim();
+  return name || null;
+}
+
+async function fetchTitulairesByClassId(
+  supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseActionClient>>>,
+  classIds: string[],
+): Promise<Map<string, string>> {
+  const realIds = [...new Set(classIds.filter((id) => !id.startsWith("label:")))];
+  if (realIds.length === 0) return new Map();
+
+  const { data: rows } = await supabase
+    .from("profiles")
+    .select("prenom, nom, primary_class_id")
+    .in("role", ["prof", "admin"])
+    .in("primary_class_id", realIds);
+
+  const byClass = new Map<string, string[]>();
+  for (const row of rows ?? []) {
+    const classId = row.primary_class_id as string | null;
+    if (!classId) continue;
+    const name = formatPersonName(row.prenom as string | null, row.nom as string | null);
+    if (!name) continue;
+    const list = byClass.get(classId) ?? [];
+    list.push(name);
+    byClass.set(classId, list);
+  }
+
+  const result = new Map<string, string>();
+  for (const [classId, names] of byClass) {
+    result.set(classId, names.join(", "));
+  }
+  return result;
+}
+
+function attachTitulaires(
+  classes: Omit<TeacherClassRow, "titulaire">[],
+  titulaires: Map<string, string>,
+): TeacherClassRow[] {
+  return classes.map((c) => ({
+    ...c,
+    titulaire: titulaires.get(c.class_id) ?? null,
+  }));
+}
+
 export async function getSuiviContextAction(): Promise<SuiviContext | null> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return null;
@@ -97,10 +145,15 @@ export async function getSuiviContextAction(): Promise<SuiviContext | null> {
     .select("class_id")
     .eq("teacher_id", user.id);
   const secondaryIds = new Set((assignedRows ?? []).map((r) => r.class_id as string));
-  const classes = ((classesRaw ?? []) as Omit<TeacherClassRow, "is_secondary">[]).map((c) => ({
+  const classesBase = ((classesRaw ?? []) as Omit<TeacherClassRow, "is_secondary" | "titulaire">[]).map((c) => ({
     ...c,
     is_secondary: secondaryIds.has(c.class_id),
   }));
+  const titulaires = await fetchTitulairesByClassId(
+    supabase,
+    classesBase.map((c) => c.class_id),
+  );
+  const classes = attachTitulaires(classesBase, titulaires);
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -178,7 +231,7 @@ export async function getAttributionClassesAction(): Promise<{
     .maybeSingle();
   const primaryId = (profile?.primary_class_id as string | null) ?? null;
 
-  const classes: TeacherClassRow[] = [];
+  const classesBase: Omit<TeacherClassRow, "titulaire">[] = [];
   for (const label of labels) {
     const classId = schoolByLabel.get(label) ?? `label:${label}`;
     const { count } = await supabase
@@ -187,7 +240,7 @@ export async function getAttributionClassesAction(): Promise<{
       .eq("role", "eleve")
       .eq("classe", label);
 
-    classes.push({
+    classesBase.push({
       class_id: classId,
       label,
       student_count: count ?? 0,
@@ -195,6 +248,12 @@ export async function getAttributionClassesAction(): Promise<{
       is_secondary: secondaryIds.has(classId),
     });
   }
+
+  const titulaires = await fetchTitulairesByClassId(
+    supabase,
+    classesBase.map((c) => c.class_id),
+  );
+  const classes = attachTitulaires(classesBase, titulaires);
 
   return { ok: true, classes };
 }
@@ -681,15 +740,19 @@ export async function getClassRowByLabelAction(classLabel: string): Promise<{
     .eq("teacher_id", user.id);
   const secondarySet = new Set((allAssigned ?? []).map((r) => r.class_id as string));
 
+  const rowBase = {
+    class_id: classId,
+    label: classLabel,
+    student_count: count ?? 0,
+    is_primary: (profile?.primary_class_id as string | null) === classId,
+    is_secondary: secondarySet.has(classId),
+  };
+  const titulaires = await fetchTitulairesByClassId(supabase, [classId]);
+  const [row] = attachTitulaires([rowBase], titulaires);
+
   return {
     ok: true,
-    row: {
-      class_id: classId,
-      label: classLabel,
-      student_count: count ?? 0,
-      is_primary: (profile?.primary_class_id as string | null) === classId,
-      is_secondary: secondarySet.has(classId),
-    },
+    row,
   };
 }
 
