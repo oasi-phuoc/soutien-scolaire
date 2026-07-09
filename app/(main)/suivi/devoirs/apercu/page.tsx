@@ -23,7 +23,7 @@ export default async function SuiviDevoirsApercuPage() {
   return (
     <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
       <SuiviPageHeader
-        title="Aperçu des devoirs"
+        title="Suivi des devoirs"
         subtitle={`${tasks.length} tâche${tasks.length !== 1 ? "s" : ""} assignée${tasks.length !== 1 ? "s" : ""}`}
         actions={
           <Link

@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { TasksPanel } from "@/components/admin/TasksPanel";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
@@ -28,14 +27,6 @@ export default async function SuiviDevoirsPage() {
       <SuiviPageHeader
         title="Affecter un devoir"
         subtitle="Assignez des tâches aux élèves"
-        actions={
-          <Link
-            href="/suivi/devoirs/apercu"
-            className="rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)]"
-          >
-            Suivi des devoirs
-          </Link>
-        }
       />
       <TasksPanel students={students ?? []} />
     </main>

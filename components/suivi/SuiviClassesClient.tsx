@@ -121,14 +121,8 @@ export function SuiviClassesClient() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
-        <Link href="/suivi/devoirs" className="rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-white">
+        <Link href="/suivi/devoirs/apercu" className="rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-white">
           Devoirs
-        </Link>
-        <Link
-          href="/suivi/devoirs/apercu"
-          className="rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)]"
-        >
-          Suivi des devoirs
         </Link>
       </div>
 

@@ -10,6 +10,10 @@ export type SuiviLevelClassItem = {
   student_count?: number;
 };
 
+function studentLabel(count: number) {
+  return count === 1 ? "1 élève" : `${count} élèves`;
+}
+
 export function SuiviLevelBlocks({
   classes,
   classHref = (label) => `/suivi/classes/${encodeURIComponent(label)}`,
@@ -33,19 +37,25 @@ export function SuiviLevelBlocks({
               className="flex w-full items-center gap-3 py-1 text-left transition-opacity hover:opacity-80"
               aria-expanded={isOpen}
             >
-              <SuiviIconLoupe active={isOpen} />
               <span className="text-lg font-bold tracking-wide text-zinc-900 dark:text-zinc-50">{level}</span>
               <span className="ml-auto text-xs tabular-nums text-zinc-500">
                 {levelClasses.length} classe{levelClasses.length !== 1 ? "s" : ""}
               </span>
             </button>
             {isOpen && (
-              <ul className="mt-2 space-y-0.5">
+              <ul className="mt-2 overflow-hidden rounded-lg border border-[var(--color-border-default)]">
                 {levelClasses.length === 0 ? (
-                  <li className="py-1 text-sm text-zinc-400">Aucune classe {level}.</li>
+                  <li className="px-3 py-2 text-sm text-zinc-400">Aucune classe {level}.</li>
                 ) : (
-                  levelClasses.map((c) => (
-                    <li key={c.label} className="flex items-center gap-2 py-1.5">
+                  levelClasses.map((c, index) => (
+                    <li
+                      key={c.label}
+                      className={`flex items-center gap-2 border-t border-[var(--color-border-default)] px-2 py-2 first:border-t-0 ${
+                        index % 2 === 0
+                          ? "bg-white dark:bg-zinc-950"
+                          : "bg-[var(--color-bg-secondary)]/60 dark:bg-zinc-900/50"
+                      }`}
+                    >
                       <Link
                         href={classHref(c.label)}
                         className="inline-flex rounded-lg p-1.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
@@ -58,8 +68,8 @@ export function SuiviLevelBlocks({
                         {c.label}
                       </span>
                       {c.student_count != null && (
-                        <span className="shrink-0 text-xs tabular-nums text-zinc-400">
-                          {c.student_count} él.
+                        <span className="shrink-0 text-xs tabular-nums text-zinc-500">
+                          {studentLabel(c.student_count)}
                         </span>
                       )}
                     </li>

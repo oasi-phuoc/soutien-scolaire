@@ -97,7 +97,7 @@ export function TeacherHomeCard() {
         </Link>
       </div>
 
-      <div className="px-4 pb-4">
+      <div className="px-4 pb-4 pt-3">
         <SuiviLevelBlocks
           classes={ctx.classes.map((c) => ({
             label: c.label,

@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
-import { getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
+import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
@@ -18,7 +18,21 @@ function isDueSoon(iso: string | null) {
   return due.getTime() - now.getTime() < 3 * 24 * 60 * 60 * 1000;
 }
 
-function TaskDetailPanel({ task, onClose }: { task: TaskRow; onClose: () => void }) {
+function isTaskSettled(task: TaskRow) {
+  return task.total_students > 0 && task.done_count >= task.total_students;
+}
+
+function IconTrash() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+      <path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+    </svg>
+  );
+}
+
+function TaskDetailPanel({ task, onClose, onDeleted }: { task: TaskRow; onClose: () => void; onDeleted?: () => void }) {
   const router = useRouter();
   const [students, setStudents] = useState<TaskStudentStatus[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -30,6 +44,8 @@ function TaskDetailPanel({ task, onClose }: { task: TaskRow; onClose: () => void
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveOk, setSaveOk] = useState(false);
   const [isSaving, startSave] = useTransition();
+  const [isDeleting, startDelete] = useTransition();
+  const settled = isTaskSettled(task);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,6 +74,21 @@ function TaskDetailPanel({ task, onClose }: { task: TaskRow; onClose: () => void
       setSaveOk(true);
       router.refresh();
       setTimeout(() => setSaveOk(false), 2500);
+    });
+  }
+
+  function handleDelete() {
+    if (!settled) return;
+    if (!window.confirm(`Supprimer le devoir « ${task.title} » ?`)) return;
+    startDelete(async () => {
+      const res = await deleteTaskAction(task.task_id);
+      if (!res.ok) {
+        setSaveError(res.reason ?? "Impossible de supprimer.");
+        return;
+      }
+      onDeleted?.();
+      onClose();
+      router.refresh();
     });
   }
 
@@ -103,6 +134,17 @@ function TaskDetailPanel({ task, onClose }: { task: TaskRow; onClose: () => void
           >
             Fermer
           </button>
+          {settled && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 disabled:opacity-50 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/30"
+            >
+              <IconTrash />
+              {isDeleting ? "Suppression…" : "Supprimer"}
+            </button>
+          )}
           {saveOk && <span className="text-xs text-green-600 dark:text-green-400">Enregistré ✓</span>}
           {saveError && <span className="text-xs text-red-500">{saveError}</span>}
         </div>
@@ -157,8 +199,10 @@ function TaskDetailPanel({ task, onClose }: { task: TaskRow; onClose: () => void
 }
 
 export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [openTaskId, setOpenTaskId] = useState<string | null>(null);
+  const [isDeleting, startDelete] = useTransition();
 
   const q = search.toLowerCase();
   const filtered = q
@@ -169,6 +213,17 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
           (t.lesson_ref ?? "").toLowerCase().includes(q)
       )
     : tasks;
+
+  function handleDeleteTask(task: TaskRow) {
+    if (!isTaskSettled(task)) return;
+    if (!window.confirm(`Supprimer le devoir « ${task.title} » ?`)) return;
+    startDelete(async () => {
+      const res = await deleteTaskAction(task.task_id);
+      if (!res.ok) return;
+      if (openTaskId === task.task_id) setOpenTaskId(null);
+      router.refresh();
+    });
+  }
 
   return (
     <div className="space-y-4">
@@ -207,7 +262,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
               <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
               <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
               <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
-              <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Détail" />
+              <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Actions" />
             </tr>
           </thead>
           <tbody>
@@ -226,6 +281,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                   task.done_count < task.total_students;
                 const soon = !overdue && isDueSoon(task.due_date);
                 const isOpen = openTaskId === task.task_id;
+                const settled = isTaskSettled(task);
                 return (
                   <Fragment key={task.task_id}>
                     <tr className={`align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
@@ -268,22 +324,36 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="w-9 shrink-0 text-right text-xs tabular-nums text-zinc-500">{pct}%</span>
                         </div>
                       </td>
-                      <td className="px-3 py-3">
-                        <button
-                          type="button"
-                          onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
-                          className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
-                            isOpen
-                              ? "bg-[var(--color-theme-light)] text-[var(--color-theme)] dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]"
-                              : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-                          }`}
-                          aria-label={isOpen ? "Fermer le détail" : "Voir et modifier la tâche"}
-                          title={isOpen ? "Fermer" : "Voir / modifier"}
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                          </svg>
-                        </button>
+                      <td className="px-2 py-3 sm:px-3">
+                        <div className="flex items-center justify-end gap-1">
+                          {settled && (
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteTask(task)}
+                              disabled={isDeleting}
+                              className="flex h-7 w-7 items-center justify-center rounded-lg text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-950/30"
+                              aria-label={`Supprimer le devoir ${task.title}`}
+                              title="Supprimer (devoir terminé)"
+                            >
+                              <IconTrash />
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
+                            className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
+                              isOpen
+                                ? "bg-[var(--color-theme-light)] text-[var(--color-theme)] dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]"
+                                : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                            }`}
+                            aria-label={isOpen ? "Fermer le détail" : "Voir et modifier la tâche"}
+                            title={isOpen ? "Fermer" : "Voir / modifier"}
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+                            </svg>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                     {isOpen && (
@@ -292,6 +362,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <TaskDetailPanel
                             task={task}
                             onClose={() => setOpenTaskId(null)}
+                            onDeleted={() => setOpenTaskId(null)}
                           />
                         </td>
                       </tr>
