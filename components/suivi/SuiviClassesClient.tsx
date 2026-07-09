@@ -218,14 +218,14 @@ export function SuiviClassesClient() {
       )}
 
       <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="w-full min-w-[32rem] text-sm">
+        <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="w-10 px-2 py-2.5" aria-label="Détail" />
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">Classe</th>
-              <th className="px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white">Élèves</th>
-              <th className="w-24 px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white">Principal</th>
-              <th className="w-24 px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white">Secondaire</th>
+              <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Détail" />
+              <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Classe</th>
+              <th className="hidden px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell">Élèves</th>
+              <th className="w-16 px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:w-24 sm:px-3 sm:py-2.5">Principal</th>
+              <th className="hidden w-16 px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white md:table-cell md:w-24 md:px-3 md:py-2.5">Secondaire</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
@@ -253,9 +253,9 @@ export function SuiviClassesClient() {
                           <IconLoupe active={isExpanded} />
                         </button>
                       </td>
-                      <td className="px-3 py-2.5 font-semibold text-zinc-800 dark:text-zinc-100">{cls.label}</td>
-                      <td className="px-3 py-2.5 text-center tabular-nums text-zinc-600 dark:text-zinc-300">{cls.student_count}</td>
-                      <td className="px-3 py-2.5 text-center">
+                      <td className="px-2 py-2 font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">{cls.label}</td>
+                      <td className="hidden px-3 py-2.5 text-center tabular-nums text-zinc-600 sm:table-cell dark:text-zinc-300">{cls.student_count}</td>
+                      <td className="px-2 py-2 text-center sm:px-3 sm:py-2.5">
                         <input
                           type="radio"
                           name="suivi-primary-class"
@@ -266,7 +266,7 @@ export function SuiviClassesClient() {
                           aria-label={`Classe principale : ${cls.label}`}
                         />
                       </td>
-                      <td className="px-3 py-2.5 text-center">
+                      <td className="hidden px-2 py-2 text-center md:table-cell md:px-3 md:py-2.5">
                         <input
                           type="checkbox"
                           checked={cls.is_secondary}

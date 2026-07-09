@@ -10,7 +10,6 @@ import {
 } from "@/app/actions/suivi";
 
 const ACCENT = "var(--color-theme)";
-const PROGRESS_COL_W = "w-[5.5rem]";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -45,8 +44,11 @@ function ProgressCell({
   color: string;
 }) {
   return (
-    <div className={`flex flex-col gap-1 ${PROGRESS_COL_W}`}>
-      <span className="text-[10px] font-semibold tabular-nums text-zinc-800 dark:text-zinc-200">
+    <div
+      className="flex w-10 flex-col gap-0.5 sm:w-[5.5rem] sm:gap-1"
+      title={`${done}/${total} (${pct} %)`}
+    >
+      <span className="hidden text-[10px] font-semibold tabular-nums text-zinc-800 sm:block dark:text-zinc-200">
         {done}/{total}
       </span>
       <ProgressBar pct={pct} color={color} />
@@ -115,14 +117,24 @@ function StudentsTable({
 }) {
   return (
     <div className="mt-4 overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-      <table className="w-full min-w-[32rem] text-sm">
+      <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-            {["Prénom, Nom", "Dernier accès", "Maths", "Français", "Lecture"].map((h) => (
-              <th key={h} className="whitespace-nowrap px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-                {h}
-              </th>
-            ))}
+            <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">
+              Prénom, Nom
+            </th>
+            <th className="hidden px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white md:table-cell">
+              Dernier accès
+            </th>
+            <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
+              Maths
+            </th>
+            <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
+              Français
+            </th>
+            <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
+              Lecture
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
@@ -137,19 +149,19 @@ function StudentsTable({
               const fullName = [s.prenom, s.nom].filter(Boolean).join(" ") || "—";
               return (
                 <tr key={s.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-900">
-                  <td className="max-w-[9rem] px-3 py-2.5">
+                  <td className="max-w-[9rem] px-2 py-2 sm:max-w-none sm:px-3 sm:py-2.5">
                     <span className="block truncate font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400">
+                  <td className="hidden whitespace-nowrap px-3 py-2.5 text-xs text-zinc-500 md:table-cell dark:text-zinc-400">
                     {lastSeen(s.progress_updated_at)}
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
                     <ProgressCell done={s.math_done} total={s.math_total} pct={s.math_pct} color="bg-blue-500" />
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
                     <ProgressCell done={s.french_done} total={s.french_total} pct={s.french_pct} color="bg-emerald-500" />
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
                     <ProgressCell done={s.lecture_done} total={s.lecture_total} pct={s.lecture_pct} color="bg-amber-500" />
                   </td>
                 </tr>

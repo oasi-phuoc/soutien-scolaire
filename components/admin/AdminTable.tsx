@@ -91,8 +91,8 @@ function Bar({ pct, color }: { pct: number; color: string }) {
 
 function ProgressCell({ done, total, pct, color }: { done: number; total: number; pct: number; color: string }) {
   return (
-    <div className="flex flex-col gap-1">
-      <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{done}/{total}</span>
+    <div className="flex w-10 flex-col gap-0.5 sm:w-28 sm:gap-1" title={`${done}/${total} (${pct} %)`}>
+      <span className="hidden text-xs font-semibold text-zinc-800 sm:block dark:text-zinc-200">{done}/{total}</span>
       <Bar pct={pct} color={color} />
     </div>
   );
@@ -381,9 +381,15 @@ export function AdminTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              {["Statut", "Prénom, Nom", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Placement", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white">{h}</th>
-              ))}
+              <th className="hidden whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Statut</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Prénom, Nom</th>
+              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell">Classe</th>
+              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Dernier accès</th>
+              <th className="hidden whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Maths</th>
+              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
+              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
+              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Placement</th>
+              <th className="w-10 px-2 py-2 sm:px-4 sm:py-3" aria-label="Détail" />
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
@@ -397,7 +403,7 @@ export function AdminTable({
               const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
               return (
                 <tr key={row.id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                  <td className="px-4 py-3">
+                  <td className="hidden px-3 py-2.5 sm:table-cell sm:px-4 sm:py-3">
                     <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
                       row.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
                       : row.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
@@ -406,17 +412,17 @@ export function AdminTable({
                       {ROLE_LABELS[row.role]}
                     </span>
                   </td>
-                  <td className="px-4 py-3">
-                    <span className="font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
+                  <td className="max-w-[10rem] px-2 py-2 sm:max-w-none sm:px-4 sm:py-3">
+                    <span className="block truncate font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="hidden px-4 py-3 sm:table-cell">
                     {row.classe ? <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{row.classe}</span> : <span className="text-zinc-400">—</span>}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-zinc-500 dark:text-zinc-400">{lastSeen(activity)}</td>
-                  <td className="w-28 px-4 py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
-                  <td className="w-28 px-4 py-3"><ProgressCell {...french} color="bg-emerald-500" /></td>
-                  <td className="w-28 px-4 py-3"><ProgressCell {...lecture} color="bg-amber-500" /></td>
-                  <td className="w-32 px-4 py-3">
+                  <td className="hidden whitespace-nowrap px-4 py-3 text-zinc-500 md:table-cell dark:text-zinc-400">{lastSeen(activity)}</td>
+                  <td className="hidden px-3 py-2.5 sm:table-cell sm:px-4 sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
+                  <td className="hidden px-4 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
+                  <td className="hidden px-4 py-3 lg:table-cell"><ProgressCell {...lecture} color="bg-amber-500" /></td>
+                  <td className="hidden w-32 px-4 py-3 lg:table-cell">
                     {row.placement_combined ? (
                       <div className="space-y-0.5">
                         <p className="text-xs font-bold tabular-nums text-violet-700 dark:text-violet-300">
@@ -430,7 +436,7 @@ export function AdminTable({
                       <span className="text-xs text-zinc-400">—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-2 py-2 sm:px-4 sm:py-3">
                     <Link href={`/admin/eleves/${row.id}`} className="inline-flex rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
                     </Link>

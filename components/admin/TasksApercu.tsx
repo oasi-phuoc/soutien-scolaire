@@ -202,9 +202,12 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              {["Titre", "Module / Leçon", "Date limite", "Élèves", "Avancement", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white">{h}</th>
-              ))}
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
+              <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
+              <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
+              <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
+              <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
+              <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Détail" />
             </tr>
           </thead>
           <tbody>
@@ -226,13 +229,13 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                 return (
                   <Fragment key={task.task_id}>
                     <tr className={`align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
-                      <td className="max-w-[200px] px-4 py-3">
+                      <td className="max-w-[10rem] px-2 py-2.5 sm:max-w-[200px] sm:px-4 sm:py-3">
                         <span className="block truncate font-medium text-zinc-800 dark:text-zinc-200" title={task.title}>{task.title}</span>
                         {task.description && (
-                          <span className="block truncate text-xs text-zinc-400" title={task.description}>{task.description}</span>
+                          <span className="hidden truncate text-xs text-zinc-400 sm:block" title={task.description}>{task.description}</span>
                         )}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="hidden px-4 py-3 md:table-cell">
                         {task.module_ref || task.lesson_ref ? (
                           <div className="space-y-0.5">
                             {task.module_ref && <span className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">{task.module_ref}</span>}
@@ -242,7 +245,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-3">
+                      <td className="whitespace-nowrap px-2 py-2.5 sm:px-4 sm:py-3">
                         {task.due_date ? (
                           <span className={`text-xs font-medium ${overdue ? "text-red-600 dark:text-red-400" : soon ? "text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400"}`}>
                             {overdue && "⚠ "}{formatDate(task.due_date)}
@@ -251,10 +254,10 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-3 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                      <td className="whitespace-nowrap px-2 py-2.5 text-xs font-semibold text-zinc-700 sm:px-4 sm:py-3 dark:text-zinc-300">
                         {task.done_count}/{task.total_students}
                       </td>
-                      <td className="w-36 px-4 py-3">
+                      <td className="hidden w-36 px-4 py-3 lg:table-cell">
                         <div className="flex items-center gap-2">
                           <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                             <div
