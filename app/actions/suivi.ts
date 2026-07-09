@@ -785,7 +785,7 @@ export async function setTeacherClassesAction(
 
   revalidatePath("/admin");
   revalidatePath("/suivi");
-  revalidatePath("/suivi");
+  revalidatePath("/admin/attribution-professeurs");
   return { ok: true };
 }
 
@@ -883,4 +883,121 @@ export async function getPrimaryClassSummaryAction(): Promise<{
   }
   const dash = await getClassDashboardFullAction(ctx.primaryClassLabel);
   return { ok: dash.ok, label: ctx.primaryClassLabel, stats: dash.stats };
+}
+
+export type ProfessorAttributionRow = {
+  id: string;
+  prenom: string | null;
+  nom: string | null;
+  email: string;
+  primaryClassId: string | null;
+  secondaryClassIds: string[];
+};
+
+export type ProfessorClassOption = {
+  class_id: string;
+  label: string;
+};
+
+export async function getProfessorAttributionsAction(): Promise<{
+  ok: boolean;
+  professors: ProfessorAttributionRow[];
+  classes: ProfessorClassOption[];
+  error?: string;
+}> {
+  const role = await getCallerRole();
+  if (role !== "admin") {
+    return { ok: false, professors: [], classes: [], error: "Réservé aux administrateurs." };
+  }
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, professors: [], classes: [], error: "Erreur serveur." };
+
+  const { data: classRows, error: classErr } = await supabase.rpc("get_school_classes");
+  if (classErr) return { ok: false, professors: [], classes: [], error: classErr.message };
+
+  const classes: ProfessorClassOption[] = ((classRows ?? []) as { class_id: string; label: string }[])
+    .map((c) => ({ class_id: c.class_id, label: c.label }))
+    .sort((a, b) => a.label.localeCompare(b.label, "fr"));
+
+  const { data: profRows, error: profErr } = await supabase
+    .from("profiles")
+    .select("id, prenom, nom, email, primary_class_id")
+    .eq("role", "prof")
+    .order("nom");
+
+  if (profErr) return { ok: false, professors: [], classes: [], error: profErr.message };
+
+  const profIds = (profRows ?? []).map((p) => p.id as string);
+  const assignmentMap = new Map<string, Set<string>>();
+
+  if (profIds.length > 0) {
+    const { data: assignRows, error: assignErr } = await supabase
+      .from("class_teachers")
+      .select("teacher_id, class_id")
+      .in("teacher_id", profIds);
+
+    if (assignErr) return { ok: false, professors: [], classes: [], error: assignErr.message };
+
+    for (const row of assignRows ?? []) {
+      const tid = row.teacher_id as string;
+      const cid = row.class_id as string;
+      const set = assignmentMap.get(tid) ?? new Set<string>();
+      set.add(cid);
+      assignmentMap.set(tid, set);
+    }
+  }
+
+  const professors: ProfessorAttributionRow[] = (profRows ?? []).map((p) => {
+    const id = p.id as string;
+    const primaryClassId = (p.primary_class_id as string | null) ?? null;
+    const assigned = assignmentMap.get(id) ?? new Set<string>();
+    const secondaryClassIds = [...assigned].filter((cid) => cid !== primaryClassId);
+    return {
+      id,
+      prenom: (p.prenom as string | null) ?? null,
+      nom: (p.nom as string | null) ?? null,
+      email: (p.email as string) ?? "",
+      primaryClassId,
+      secondaryClassIds,
+    };
+  });
+
+  professors.sort((a, b) => {
+    const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
+    const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
+    return na.localeCompare(nb, "fr");
+  });
+
+  return { ok: true, professors, classes };
+}
+
+export type ProfessorAttributionUpdate = {
+  teacherId: string;
+  primaryClassId: string | null;
+  secondaryClassIds: string[];
+};
+
+export async function saveProfessorAttributionsAction(
+  updates: ProfessorAttributionUpdate[],
+): Promise<{ ok: boolean; reason?: string }> {
+  const role = await getCallerRole();
+  if (role !== "admin") return { ok: false, reason: "Réservé aux administrateurs." };
+
+  for (const row of updates) {
+    const secondary = row.secondaryClassIds.filter((id) => id !== row.primaryClassId);
+    const classIds = [
+      ...new Set([
+        ...(row.primaryClassId ? [row.primaryClassId] : []),
+        ...secondary,
+      ]),
+    ];
+    const res = await setTeacherClassesAction(row.teacherId, classIds, row.primaryClassId);
+    if (!res.ok) return res;
+  }
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/attribution-professeurs");
+  revalidatePath("/suivi");
+  return { ok: true };
 }
