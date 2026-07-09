@@ -33,21 +33,6 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "heading",
-          fr: "Exemples de réduction",
-          black: true,
-        },
-        {
-          type: "table",
-          headersFr: ["Expression", "Réduction", "Résultat"],
-          accentHeader: true,
-          rows: [
-            ["3x **+** 5x", "(**+**3 **+** 5)x", "8x"],
-            ["7a **−** 2a", "(7 **−** 2)a", "5a"],
-            ["4x **+** 3 **+** 2x **−** 1", "(4 **+** 2)x **+** (3 **−** 1)", "6x **+** 2"],
-          ],
-        },
-        {
-          type: "heading",
           fr: "Termes NON semblables",
           black: true,
         },
@@ -66,6 +51,21 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
             "**3x** et **3x²**    (exposants différents)",
             "**4x** et **4y**     (variables différentes)",
             "**5a** et **5** (l'un a une variable, l'autre non)",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Exemples de réduction",
+          black: true,
+        },
+        {
+          type: "table",
+          headersFr: ["Expression", "Réduction", "Résultat"],
+          accentHeader: true,
+          rows: [
+            ["3x **+** 5x", "(**+**3 **+** 5)x", "8x"],
+            ["7a **−** 2a", "(7 **−** 2)a", "5a"],
+            ["4x **+** 3 **+** 2x **−** 1", "(4 **+** 2)x **+** (3 **−** 1)", "6x **+** 2"],
           ],
         },
       ],

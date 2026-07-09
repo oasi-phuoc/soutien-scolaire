@@ -37,16 +37,6 @@ export const TRAD_A9_4: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "Exemples de réduction",
-      }
-    },
-    {
-      headers: {
-        fr: ["Expression", "Réduction", "Résultat"],
-      }
-    },
-    {
-      text: {
         fr: "Termes NON semblables",
       }
     },
@@ -67,6 +57,16 @@ export const TRAD_A9_4: SubmoduleTrad = {
           "**4x** et **4y** (variables différentes)",
           "**5a** et **5** (l'un a une variable, l'autre non)",
         ],
+      }
+    },
+    {
+      text: {
+        fr: "Exemples de réduction",
+      }
+    },
+    {
+      headers: {
+        fr: ["Expression", "Réduction", "Résultat"],
       }
     },
   ],
