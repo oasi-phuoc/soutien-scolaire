@@ -33,7 +33,7 @@ export function StudentPersonalInfoCard({ student }: { student: ClassStudentSuiv
           <div className="flex gap-2">
             <dt className="w-28 shrink-0 text-zinc-400">Langue</dt>
             <dd className="font-medium text-zinc-700 dark:text-zinc-300">
-              🌐 {LANGUE_LABELS[student.langue] ?? student.langue}
+              {LANGUE_LABELS[student.langue] ?? student.langue}
             </dd>
           </div>
         )}

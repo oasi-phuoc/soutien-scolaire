@@ -319,7 +319,7 @@ export function EleveDetailPage({
               {user.langue && (
                 <div className="flex gap-2">
                   <dt className="w-28 shrink-0 text-zinc-400">Langue</dt>
-                  <dd className="font-medium text-zinc-700 dark:text-zinc-300">🌐 {LANGUE_LABELS[user.langue] ?? user.langue}</dd>
+                  <dd className="font-medium text-zinc-700 dark:text-zinc-300">{LANGUE_LABELS[user.langue] ?? user.langue}</dd>
                 </div>
               )}
               {user.adresse && (
