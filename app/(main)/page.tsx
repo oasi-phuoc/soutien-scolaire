@@ -19,7 +19,7 @@ export default async function HomePage({ searchParams }: Props) {
   const teacher = await isTeacherAccount();
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 pt-8 pb-32">
+    <main className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
       {q.msg ? (
         <p className="rounded-xl border border-indigo-300 bg-indigo-50 px-4 py-3 text-sm text-indigo-950 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-50">
           {q.msg}

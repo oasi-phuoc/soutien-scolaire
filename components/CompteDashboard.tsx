@@ -40,6 +40,16 @@ function IconRefresh({ spinning = false }: { spinning?: boolean }) {
   );
 }
 
+function IconLogOut() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  );
+}
+
 function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (value: PivotCode) => void }) {
   const [open, setOpen] = useState(false);
   const selected = PIVOT_LANGS.find((l) => l.code === value) ?? PIVOT_LANGS[0]!;
@@ -165,7 +175,7 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
   }
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-4 px-4 pt-8 pb-32">
+    <main className="app-shell flex-1 space-y-4 pt-8 pb-32 lg:pb-28">
       {/* Header */}
       <div className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-4" style={{ background: "color-mix(in oklch, var(--color-theme) 11%, white)" }}>
         <div className="pointer-events-none absolute -bottom-3 -right-4 text-[var(--color-theme)]" aria-hidden>
@@ -238,8 +248,13 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
                 {syncStatus === "syncing" ? "Synchronisation…" : syncStatus === "ok" ? "Synchronisé !" : "Sync progression"}
               </button>
               <form action={signOutAction}>
-                <button type="submit" className="min-h-11 rounded-xl border border-zinc-300 px-4 font-semibold">
-                  Déconnexion
+                <button
+                  type="submit"
+                  aria-label="Déconnexion"
+                  title="Déconnexion"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-300 text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+                >
+                  <IconLogOut />
                 </button>
               </form>
             </div>

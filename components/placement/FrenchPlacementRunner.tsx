@@ -249,7 +249,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
 
   if (step === "intro") {
     return (
-      <main className="mx-auto w-full max-w-xl space-y-6 px-4 py-8 pb-32">
+      <main className="app-shell space-y-6 py-8 pb-32 lg:pb-28">
         <PlacementPageHeader
           label={isPlacement ? "Test de placement français" : "Entraînement français"}
           title={introTitle}
@@ -285,7 +285,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       poSubmissionId: poSubmissionId ?? null,
     });
     return (
-      <main className="mx-auto w-full max-w-xl space-y-6 px-4 py-8 pb-32">
+      <main className="app-shell space-y-6 py-8 pb-32 lg:pb-28">
         <h1 className="text-xl font-bold">
           {isPlacement ? "Batterie française terminée" : "Entraînement terminé"}
         </h1>

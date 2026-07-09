@@ -350,10 +350,11 @@ export function OfflineSettings() {
             <button
               type="button"
               onClick={() => void clearOffline()}
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              aria-label="Supprimer le contenu hors ligne"
+              title="Supprimer le contenu hors ligne"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
             >
               <TrashIcon />
-              Supprimer
             </button>
           )}
         </div>

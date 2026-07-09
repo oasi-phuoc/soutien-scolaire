@@ -29,7 +29,7 @@ export default function StoryReaderPage({
   );
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6">
+    <div className="app-shell app-shell--reader py-6">
       <Link
         href="/lecture/histoires"
         className="mb-4 inline-flex items-center gap-1 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent-lecture)]"

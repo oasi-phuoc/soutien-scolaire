@@ -133,7 +133,7 @@ export function MonCompteForm({ profile }: { profile: MyProfile }) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-4 px-4 pt-8 pb-32">
+    <main className="app-shell flex-1 space-y-4 pt-8 pb-32 lg:pb-28">
       <div className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-4" style={{ background: "color-mix(in oklch, var(--color-theme) 11%, white)" }}>
         <div className="relative z-10 flex items-center gap-3">
           <Link

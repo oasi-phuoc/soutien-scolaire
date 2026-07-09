@@ -31,7 +31,7 @@ export default async function AdminPage() {
   });
 
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 pb-28">
+    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
       <div className="mb-6 flex items-center gap-2">
         <Link
           href="/compte"

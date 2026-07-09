@@ -403,7 +403,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   }, []);
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 pt-8 pb-32">
+    <main className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
       <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-fr) 11%, white)" }}>
         <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-fr)]" aria-hidden>
           <svg width="108" height="108" viewBox="0 0 100 100" fill="none">

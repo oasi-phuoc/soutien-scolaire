@@ -171,7 +171,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 
 export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
+    <div className="app-shell flex-1 space-y-6 py-8 pb-32 lg:pb-28">
       <header className="space-y-1">
         <p
           className="text-xs font-medium uppercase tracking-wide"

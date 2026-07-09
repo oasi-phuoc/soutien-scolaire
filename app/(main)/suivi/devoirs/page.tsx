@@ -24,7 +24,7 @@ export default async function SuiviDevoirsPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-10 pb-28">
+    <main className="app-shell app-shell--reader flex-1 py-10 pb-28">
       <SuiviPageHeader
         title="Affecter un devoir"
         subtitle="Assignez des tâches aux élèves"

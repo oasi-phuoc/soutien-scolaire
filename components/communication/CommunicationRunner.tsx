@@ -807,7 +807,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const score = results.filter(Boolean).length;
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
+    <div className="app-shell flex min-h-screen flex-col pt-4 pb-32 lg:pb-28">
       {/* Header */}
       <header className="mb-4 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide" style={{ color: ACCENT }}>
@@ -984,7 +984,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       {/* Fixed bottom nav — same pattern as math modules */}
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          <div className="app-shell-bar flex items-center justify-between py-3">
             {/* Back button */}
             <button
               type="button"

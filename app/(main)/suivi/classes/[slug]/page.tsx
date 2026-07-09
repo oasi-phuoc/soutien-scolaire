@@ -24,7 +24,7 @@ export default async function SuiviClassPage({ params }: { params: Promise<{ slu
   if (!canAccess) notFound();
 
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 pb-28">
+    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
       <SuiviPageHeader title={classLabel} subtitle="Tableau de bord de la classe" />
       <SuiviClassDashboard classLabel={classLabel} />
     </main>

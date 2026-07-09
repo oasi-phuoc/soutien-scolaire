@@ -325,14 +325,14 @@ export function PlacementHubClient() {
 
   if (!ready) {
     return (
-      <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+      <main className="app-shell flex-1 py-8 pb-32 lg:pb-28">
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Chargement…</p>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
+    <main className="app-shell flex-1 space-y-6 py-8 pb-32 lg:pb-28">
       <PlacementPageHeader label="Positionnement" title="Test de placement" backHref="/" />
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">

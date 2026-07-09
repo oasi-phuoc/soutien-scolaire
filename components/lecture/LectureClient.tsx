@@ -344,7 +344,7 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
     : null;
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 pt-8 pb-32">
+    <div className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
       <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-lecture) 11%, white)" }}>
         <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-lecture)]" aria-hidden>
           <svg width="120" height="108" viewBox="0 0 110 100" fill="none">

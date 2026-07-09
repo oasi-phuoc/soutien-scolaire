@@ -314,7 +314,7 @@ export function ExpressionMailbox({
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-3 pb-28 pt-4 sm:px-4 sm:pt-6">
+    <main className="app-shell app-shell--wide flex flex-1 flex-col pb-28 pt-4 sm:pt-6">
       <header className="mb-4 flex items-center gap-3 border-b border-[var(--color-border-default)] pb-4">
         <Link
           href="/"

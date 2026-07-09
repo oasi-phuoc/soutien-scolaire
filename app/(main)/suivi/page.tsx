@@ -21,7 +21,7 @@ export default async function SuiviPage() {
     : "Classes, progression et devoirs";
 
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 pb-28">
+    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
       <SuiviPageHeader
         title="Suivi pédagogique"
         subtitle={subtitle}

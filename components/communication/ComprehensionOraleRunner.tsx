@@ -1494,7 +1494,7 @@ export function ComprehensionOraleRunner({
     }));
 
     return (
-      <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
+      <main className="app-shell space-y-7 pb-28 pt-6">
         <Header level={level} title="Compréhension orale" placement={mode === "placement"} />
         <CommunicationIntroSection
           bullets={introBullets}
@@ -1515,7 +1515,7 @@ export function ComprehensionOraleRunner({
 
   if (phase === "results") {
     return (
-      <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
+      <main className="app-shell space-y-6 pb-28 pt-6">
         <Header level={level} title="Résultats" placement={mode === "placement"} />
         <CommunicationResultsSummary totalPoints={totalPoints} maxPoints={maxModulePoints} />
         <CommunicationFinishButton
@@ -1564,7 +1564,7 @@ export function ComprehensionOraleRunner({
   }
 
   return (
-    <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
+    <main className="app-shell space-y-6 pb-28 pt-6">
       <Header level={level} title="Compréhension orale" placement={mode === "placement"} />
       <ProgressBar
         parts={parts}

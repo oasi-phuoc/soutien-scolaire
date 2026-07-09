@@ -288,7 +288,7 @@ export function RevisionTestClient({
   const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
   return (
-    <div className={`mx-auto w-full max-w-xl flex-1 ${phase === "results" ? "py-2 pb-8" : "py-2 pb-40"}`}>
+    <div className={`app-shell flex-1 ${phase === "results" ? "py-2 pb-8" : "py-2 pb-40"}`}>
       {phase === "results" ? (
         <ResultsScreen scores={scores} exercises={exercises} />
       ) : (
@@ -376,7 +376,7 @@ export function RevisionTestClient({
       {phase !== "results" && (
         <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
           <div className="border-t border-[var(--color-border-default)]">
-            <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            <div className="app-shell-bar flex items-center justify-between py-3">
               <button
                 type="button"
                 onClick={goPrev}

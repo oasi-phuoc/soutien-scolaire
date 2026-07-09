@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ConditionsUtilisationPage() {
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 px-4 pt-8 pb-32">
+    <main className="app-shell flex-1 pt-8 pb-32 lg:pb-28">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3">

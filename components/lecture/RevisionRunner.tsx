@@ -155,7 +155,7 @@ export function RevisionRunner({ data }: Props) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+    <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Révision
@@ -186,7 +186,7 @@ export function RevisionRunner({ data }: Props) {
       {/* Fixed nav bar */}
       <div className="hidden fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          <div className="app-shell-bar flex items-center justify-between py-3">
             <button
               type="button"
               onClick={goBack}

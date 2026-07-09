@@ -194,7 +194,7 @@ export function PlacementStatsClient() {
   const hasMore = history.length > HISTORY_VISIBLE;
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+    <div className="app-shell flex-1 py-8 pb-32 lg:pb-28">
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
         <button

@@ -9,7 +9,7 @@ export default function EvaluationPage() {
   const ev = VOWEL_EVALUATION;
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-8 px-4 py-8 pb-32">
+    <main className="app-shell flex-1 space-y-8 py-8 pb-32 lg:pb-28">
       <div className="flex items-center gap-3">
         <Link
           href="/lecture"

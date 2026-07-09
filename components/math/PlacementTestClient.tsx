@@ -586,7 +586,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
     }
 
     return (
-      <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+      <div className="placement-test-font app-shell flex-1 py-8 pb-32 lg:pb-28">
         <div className="space-y-6">
           {mode === "placement" ? (
             <PlacementPageHeader
@@ -673,7 +673,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
   const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
   return (
-    <div className={`placement-test-font mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}${mode === "placement" ? " placement-tcm" : ""}`}>
+    <div className={`placement-test-font app-shell flex-1 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}${mode === "placement" ? " placement-tcm" : ""}`}>
       {phase === "results" ? (
         <ResultsScreen
           scores={scores}
@@ -799,7 +799,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       {phase !== "results" && (
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          <div className="app-shell-bar flex items-center justify-between py-3">
             <button
               type="button"
               onClick={goPrev}

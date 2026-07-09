@@ -696,7 +696,7 @@ export function ProductionEcriteRunner({
     }));
 
     return (
-      <main className="mx-auto w-full max-w-xl space-y-7 px-4 pb-28 pt-6">
+      <main className="app-shell space-y-7 pb-28 pt-6">
         <Header level={level} title="Production écrite" placement={mode === "placement"} />
         <CommunicationIntroSection
           bullets={introBullets}
@@ -712,7 +712,7 @@ export function ProductionEcriteRunner({
   if (phase === "results") {
     if (sent) {
       return (
-        <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 pb-28 pt-6">
+        <main className="app-shell flex flex-1 flex-col pb-28 pt-6">
           <Header level={level} title="En attente de correction" placement={mode === "placement"} />
           <section className="mt-8 rounded-[var(--radius-lg)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/10 p-6 text-center">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--color-accent-comm)]">Envoyé au professeur</p>
@@ -751,7 +751,7 @@ export function ProductionEcriteRunner({
     }
 
     return (
-      <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
+      <main className="app-shell space-y-6 pb-28 pt-6">
         <Header level={level} title="Envoi au professeur" placement={mode === "placement"} />
         <section className="rounded-[var(--radius-lg)] border border-[var(--color-accent-comm)]/25 bg-[var(--color-accent-comm)]/10 p-5 text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--color-accent-comm)]">Correction professeur requise</p>
@@ -836,7 +836,7 @@ export function ProductionEcriteRunner({
 
   const step = stepMeta.find((item) => item.id === current)!;
   return (
-    <main className="mx-auto w-full max-w-xl space-y-6 px-4 pb-28 pt-6">
+    <main className="app-shell space-y-6 pb-28 pt-6">
       <Header level={level} title="Production écrite" placement={mode === "placement"} />
       <ProgressBar steps={stepMeta} current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
       <section className="space-y-4">

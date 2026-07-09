@@ -257,7 +257,7 @@ export function EleveDetailPage({
   }
 
   return (
-    <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8 pb-28">
+    <main className="app-shell app-shell--detail flex-1 py-8 pb-28">
 
       {/* Back button + Header */}
       <div className="mb-6">

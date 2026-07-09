@@ -181,7 +181,7 @@ function NavActionBar({
   return (
     <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
       <div className="border-t border-[var(--color-border-default)]">
-        <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+        <div className="app-shell-bar flex items-center justify-between py-3">
           {onBack ? (
             <button type="button" data-nav-action="back" aria-label="Précédent" disabled={backDisabled} onClick={onBack} className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30">
               ← Précédent
@@ -1344,7 +1344,7 @@ export function ComprehensionEcritRunner({
   const hudAccent = mode === "placement" ? runnerAccent : INVERSE;
 
   return (
-    <div className="mx-auto w-full max-w-xl px-4 py-8 pb-28">
+    <div className="app-shell py-8 pb-28">
       {phase === "intro" && (
         <IntroPage
           level={level}

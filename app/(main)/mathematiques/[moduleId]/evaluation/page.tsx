@@ -26,7 +26,7 @@ export default async function ModuleEvaluationPage({ params }: Props) {
 
   if (!isAdmin && !isMathModuleAccessibleToStudent(mod)) {
     return (
-      <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+      <main className="math-module-page app-shell flex-1 py-8 pb-32 lg:pb-28">
         <MathModuleComingSoon moduleCode={mod.code} moduleTitle={mod.title} backHref={backHref} />
       </main>
     );
@@ -38,7 +38,7 @@ export default async function ModuleEvaluationPage({ params }: Props) {
     : undefined;
 
   return (
-    <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32" style={pageStyle}>
+    <main className="math-module-page app-shell flex-1 py-8 pb-32 lg:pb-28" style={pageStyle}>
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
           Mathématiques · {tabLabel} · {mod.code}

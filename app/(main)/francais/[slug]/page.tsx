@@ -32,7 +32,7 @@ export default async function FrenchThemePage({ params }: Props) {
 
   // Fallback: competence overview page for lessons without detailed content yet
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
+    <main className="app-shell flex-1 space-y-6 py-8 pb-32 lg:pb-28">
       <div className="flex items-center gap-3">
         <Link
           href="/francais"

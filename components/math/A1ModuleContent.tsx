@@ -5399,7 +5399,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
       {/* ── Fixed bottom nav ──────────────────────────────────────────────────── */}
       <div className={`hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]${step === "eval" && !evalStarted && !evalSubmitted ? " hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          <div className="app-shell-bar flex items-center justify-between py-3">
             {!(step === "eval" && evalSubmitted) ? (
               <button
                 type="button"

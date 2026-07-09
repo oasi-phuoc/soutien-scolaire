@@ -2063,7 +2063,7 @@ export function A4ModuleContent() {
       {/* Fixed bottom nav */}
       <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+          <div className="app-shell-bar flex items-center justify-between py-3">
             <button type="button" onClick={goBack} disabled={isFirstStep}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>

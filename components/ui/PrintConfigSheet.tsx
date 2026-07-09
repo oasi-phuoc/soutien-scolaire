@@ -561,7 +561,7 @@ export function PrintConfigSheet({
     >
       {/* Header */}
       <header className="shrink-0 border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]/95 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-20 w-full max-w-xl items-center gap-4 px-5 py-4">
+        <div className="app-shell flex min-h-20 w-full items-center gap-4 py-4">
           <button
             type="button"
             onClick={handleBack}
@@ -584,7 +584,7 @@ export function PrintConfigSheet({
             </p>
           </div>
         </div>
-        <div className="mx-auto w-full max-w-xl px-5 pb-4">
+        <div className="app-shell w-full pb-4">
           <div className="flex gap-2" aria-label="Progression de l'impression">
             {stepLabels.map((label, index) => (
               <button
@@ -609,7 +609,7 @@ export function PrintConfigSheet({
 
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
-        <main className="mx-auto w-full max-w-xl px-5 pb-32 pt-6">
+        <main className="app-shell pb-32 pt-6">
 
           {step === 0 && (
             <>

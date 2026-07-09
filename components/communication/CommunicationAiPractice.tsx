@@ -202,7 +202,7 @@ export function CommunicationAiPractice() {
   }
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
+    <div className="app-shell flex min-h-screen flex-col pt-4 pb-32 lg:pb-28">
       <header className="mb-4 flex items-center gap-3">
         <button
           type="button"
@@ -284,7 +284,7 @@ export function CommunicationAiPractice() {
       )}
 
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-        <div className="mx-auto flex max-w-xl flex-col gap-2 px-4 py-3">
+        <div className="app-shell-bar flex flex-col gap-2 py-3">
           {(interim || input) && (
             <div className="rounded-lg bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)]">
               {input}

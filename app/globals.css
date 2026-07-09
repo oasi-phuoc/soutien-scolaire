@@ -372,3 +372,51 @@ input[type=number] {
 .print-layout-context .print-ex-content :is(div, span, p, li, label, button, input, textarea, td, th) {
   font-size: 1em !important;
 }
+
+/* ── Responsive page shell (mobile étroit · desktop pleine largeur) ───────── */
+
+.app-shell {
+  box-sizing: border-box;
+  margin-inline: auto;
+  width: 100%;
+  flex: 1 1 0%;
+  padding-inline: 1rem;
+  max-width: 36rem;
+}
+
+.app-shell--wide {
+  max-width: 72rem;
+}
+
+.app-shell--detail {
+  max-width: 56rem;
+}
+
+.app-shell--reader {
+  max-width: 42rem;
+}
+
+@media (min-width: 1024px) {
+  .app-shell,
+  .app-shell--wide,
+  .app-shell--detail,
+  .app-shell--reader {
+    max-width: none;
+    padding-inline: clamp(1.25rem, 2.5vw, 3rem);
+  }
+}
+
+.app-shell-bar {
+  box-sizing: border-box;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 36rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .app-shell-bar {
+    max-width: none;
+    padding-inline: clamp(1.25rem, 2.5vw, 3rem);
+  }
+}

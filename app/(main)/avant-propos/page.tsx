@@ -256,7 +256,7 @@ export default function AvantProposPage() {
   const isRtl = c.dir === "rtl";
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 px-4 pt-8 pb-32" dir={c.dir}>
+    <main className="app-shell flex-1 pt-8 pb-32 lg:pb-28" dir={c.dir}>
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3">
