@@ -97,7 +97,7 @@ function ModuleCard({
 
   return (
     <div
-      className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
+      className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
         locked
           ? "border-[var(--color-border-default)] opacity-50"
           : highlighted

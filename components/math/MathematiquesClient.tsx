@@ -199,7 +199,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
             if (m.comingSoon && !isAdmin) {
               return (
                 <li key={m.id}>
-                  <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] opacity-50">
+                  <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] opacity-50">
                     <div
                       className="module-list-header"
                       style={{ "--module-header-accent": accentColor } as React.CSSProperties}
@@ -263,7 +263,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
             return (
               <li key={m.id}>
                 <div
-                  className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
+                  className={`overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
                     isLocked
                       ? "border-[var(--color-border-default)] opacity-60"
                       : recoHighlight
