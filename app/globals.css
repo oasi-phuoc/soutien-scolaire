@@ -411,7 +411,7 @@ input[type=number] {
   font-size: 1em !important;
 }
 
-/* ── Responsive page shell (mobile étroit · desktop pleine largeur) ───────── */
+/* ── Responsive page shell (mobile étroit · desktop largeur max) ─────────── */
 
 .app-shell {
   box-sizing: border-box;
@@ -435,12 +435,21 @@ input[type=number] {
 }
 
 @media (min-width: 1024px) {
-  .app-shell,
-  .app-shell--wide,
-  .app-shell--detail,
-  .app-shell--reader {
-    max-width: none;
+  .app-shell {
+    max-width: 48rem;
     padding-inline: clamp(1.25rem, 2.5vw, 3rem);
+  }
+
+  .app-shell--wide {
+    max-width: 72rem;
+  }
+
+  .app-shell--detail {
+    max-width: 56rem;
+  }
+
+  .app-shell--reader {
+    max-width: 42rem;
   }
 }
 
@@ -454,7 +463,7 @@ input[type=number] {
 
 @media (min-width: 1024px) {
   .app-shell-bar {
-    max-width: none;
+    max-width: 48rem;
     padding-inline: clamp(1.25rem, 2.5vw, 3rem);
   }
 }
