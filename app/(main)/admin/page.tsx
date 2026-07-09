@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { AdminTable, type UserRow } from "@/components/admin/AdminTable";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
+import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 export default async function AdminPage() {
   const supabase = await createSupabaseServerClient();
@@ -32,7 +33,7 @@ export default async function AdminPage() {
   });
 
   return (
-    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
+    <main className={`${APP_SHELL_FULL} flex-1 py-10 pb-28`}>
       <div className="mb-6 flex items-center gap-2">
         <Link
           href="/compte"

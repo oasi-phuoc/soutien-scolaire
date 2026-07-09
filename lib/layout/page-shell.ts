@@ -4,6 +4,8 @@ export const APP_SHELL = "app-shell";
 export const APP_SHELL_WIDE = "app-shell app-shell--wide";
 export const APP_SHELL_DETAIL = "app-shell app-shell--detail";
 export const APP_SHELL_READER = "app-shell app-shell--reader";
+/** Admin / suivi — tableaux larges, sans plafond de largeur */
+export const APP_SHELL_FULL = "app-shell app-shell--full";
 export const APP_SHELL_BAR = "app-shell-bar";
 
 export const PB_DEFAULT = "pb-32 lg:pb-28";

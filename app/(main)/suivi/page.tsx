@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SuiviClassesClient } from "@/components/suivi/SuiviClassesClient";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
+import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 function AttributionsIcon() {
   return (
@@ -32,7 +33,7 @@ export default async function SuiviPage() {
     : "Classes, progression et devoirs";
 
   return (
-    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
+    <main className={`${APP_SHELL_FULL} flex-1 py-10 pb-28`}>
       <SuiviPageHeader
         title="Suivi pédagogique"
         subtitle={subtitle}

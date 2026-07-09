@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import {
   APP_SHELL,
   APP_SHELL_DETAIL,
+  APP_SHELL_FULL,
   APP_SHELL_READER,
   APP_SHELL_WIDE,
   PB_ADMIN,
@@ -9,7 +10,7 @@ import {
   PB_RUNNER,
 } from "@/lib/layout/page-shell";
 
-type Variant = "default" | "wide" | "detail" | "reader";
+type Variant = "default" | "wide" | "detail" | "reader" | "full";
 type Padding = "default" | "runner" | "admin" | "none";
 
 const SHELL: Record<Variant, string> = {
@@ -17,6 +18,7 @@ const SHELL: Record<Variant, string> = {
   wide: APP_SHELL_WIDE,
   detail: APP_SHELL_DETAIL,
   reader: APP_SHELL_READER,
+  full: APP_SHELL_FULL,
 };
 
 const PB: Record<Padding, string> = {

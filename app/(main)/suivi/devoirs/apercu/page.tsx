@@ -4,6 +4,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getTeacherTasksAction } from "@/app/actions/tasks";
 import { TasksApercu } from "@/components/admin/TasksApercu";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
+import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 export default async function SuiviDevoirsApercuPage() {
   const supabase = await createSupabaseServerClient();
@@ -21,7 +22,7 @@ export default async function SuiviDevoirsApercuPage() {
   const { tasks } = await getTeacherTasksAction();
 
   return (
-    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
+    <main className={`${APP_SHELL_FULL} flex-1 py-10 pb-28`}>
       <SuiviPageHeader
         title="Suivi des devoirs"
         subtitle={`${tasks.length} tâche${tasks.length !== 1 ? "s" : ""} assignée${tasks.length !== 1 ? "s" : ""}`}

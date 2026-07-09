@@ -434,6 +434,10 @@ input[type=number] {
   max-width: 42rem;
 }
 
+.app-shell--full {
+  max-width: none;
+}
+
 @media (min-width: 1024px) {
   .app-shell {
     max-width: 48rem;
@@ -450,6 +454,10 @@ input[type=number] {
 
   .app-shell--reader {
     max-width: 42rem;
+  }
+
+  .app-shell--full {
+    max-width: none;
   }
 }
 

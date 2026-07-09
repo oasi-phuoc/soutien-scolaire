@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { SuiviClassAssignmentsClient } from "@/components/suivi/SuiviClassAssignmentsClient";
 import { SuiviPageHeader } from "@/components/suivi/SuiviPageHeader";
+import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 
 export default async function SuiviAttributionsPage() {
   const supabase = await createSupabaseServerClient();
@@ -17,7 +18,7 @@ export default async function SuiviAttributionsPage() {
   if (!hasAccess && role !== "admin") redirect("/");
 
   return (
-    <main className="app-shell app-shell--wide flex-1 py-10 pb-28">
+    <main className={`${APP_SHELL_FULL} flex-1 py-10 pb-28`}>
       <SuiviPageHeader
         title="Attribution des classes"
         subtitle="Classe principale et classes secondaires"

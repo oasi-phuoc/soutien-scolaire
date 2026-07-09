@@ -11,6 +11,7 @@ import {
 } from "@/app/actions/admin";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
+import { APP_SHELL_FULL } from "@/lib/layout/page-shell";
 import type { UserRow } from "./AdminTable";
 
 const LANGUE_LABELS: Record<string, string> = {
@@ -257,7 +258,7 @@ export function EleveDetailPage({
   }
 
   return (
-    <main className="app-shell app-shell--detail flex-1 py-8 pb-28">
+    <main className={`${APP_SHELL_FULL} flex-1 py-8 pb-28`}>
 
       {/* Back button + Header */}
       <div className="mb-6">
