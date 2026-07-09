@@ -37,6 +37,7 @@ import {
   randomWordsWithGrapheme,
   wordsPoolForLessonGrid,
 } from "@/lib/curriculum/word-pool";
+import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 
 interface Props {
@@ -234,10 +235,10 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
 const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUppercase: boolean }>(
   function ComplexWordSpotter({ target, isUppercase }, ref) {
   const targets = complexTargets(target);
+  const maxLength = useLectureWordMaxLength();
   const VISIBLE = 8;
   const buildWords = () =>
-    randomWordsWithGrapheme(target, 20)
-      .filter((w) => w.length <= 10)
+    randomWordsWithGrapheme(target, 20, maxLength)
       .slice(0, VISIBLE)
       .map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
   const [selectedWords, setSelectedWords] = useState(buildWords);
@@ -280,7 +281,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
         {displayedWords.map((word, wordIndex) => (
           <li
             key={`${word}-${wordIndex}`}
-            className="flex flex-nowrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3"
+            className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3 md:px-4"
           >
             {splitComplexWord(word, targets).map((part, partIndex) => {
               const key = `${wordIndex}-${partIndex}`;
@@ -297,7 +298,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
                       [key]: prev[key] === "selected" ? "idle" : "selected",
                     }));
                   }}
-                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors ${
+                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors md:h-7 md:min-w-6 md:text-sm ${
                     state === "correct"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : state === "wrong" || state === "missed"
@@ -855,6 +856,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const [wordEvalState, setWordEvalState] = useState<{ isResults: boolean; canValidate: boolean; started: boolean } | null>(null);
   const [wordEvalResult, setWordEvalResult] = useState<{ grade: number; passed: boolean; total: number } | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const wordMaxLength = useLectureWordMaxLength();
 
   useEffect(() => {
     if (searchParams.get("eval") === "1") {
@@ -1187,7 +1189,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               key={k}
               ref={pronounceRef}
               phoneme={data.phoneme}
-              chain={randomWordsWithGrapheme(data.letter, 8).map((word) => ({
+              chain={randomWordsWithGrapheme(data.letter, 8, wordMaxLength).map((word) => ({
                 phoneme: data.letter,
                 syllable: word,
                 word,

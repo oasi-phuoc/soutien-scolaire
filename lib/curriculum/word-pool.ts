@@ -486,18 +486,32 @@ export function complexGraphemeId(label: string): string | null {
   return null;
 }
 
-/** Pool de mots pour un son complexe (étapes 4-5 L7), 1–10 lettres, sans mots-outils. */
-export function wordsForComplexGrapheme(graphemeLabel: string): string[] {
+/** Longueur max des mots dans les exercices « repérer la lettre / le graphème ». */
+export const LECTURE_WORD_MAX_LENGTH_MOBILE = 10;
+export const LECTURE_WORD_MAX_LENGTH_DESKTOP = 24;
+
+/** Pool de mots pour un son complexe (étapes 4-5 L7), sans mots-outils. */
+export function wordsForComplexGrapheme(
+  graphemeLabel: string,
+  maxLength = LECTURE_WORD_MAX_LENGTH_MOBILE,
+): string[] {
   const id = complexGraphemeId(graphemeLabel);
-  if (id && GRAPHEME_POOLS.complex[id]?.length) return GRAPHEME_POOLS.complex[id]!;
-  return LETTER_WORDS.filter((w) => wordContainsGrapheme(w, graphemeLabel) && w.length <= 10);
+  const base = id && GRAPHEME_POOLS.complex[id]?.length
+    ? GRAPHEME_POOLS.complex[id]!
+    : (maxLength > LECTURE_WORD_MAX_LENGTH_MOBILE
+      ? extendedSpotterWordLabels()
+      : LETTER_WORDS).filter((w) => wordContainsGrapheme(w, graphemeLabel));
+  return base.filter((w) => w.length <= maxLength);
 }
 
-/** Pool de mots pour une lettre (étapes 4-5 L1-L4), 1–10 lettres. */
-export function wordsForLetter(letter: string): string[] {
+/** Pool de mots pour une lettre (étapes 4-5 L1-L4). */
+export function wordsForLetter(letter: string, maxLength = LECTURE_WORD_MAX_LENGTH_MOBILE): string[] {
   const lc = letter.toLowerCase();
-  if (GRAPHEME_POOLS.letters[lc]?.length) return GRAPHEME_POOLS.letters[lc]!;
-  return LETTER_WORDS.filter((w) => w.toLowerCase().includes(lc) && w.length <= 10);
+  if (maxLength <= LECTURE_WORD_MAX_LENGTH_MOBILE && GRAPHEME_POOLS.letters[lc]?.length) {
+    return GRAPHEME_POOLS.letters[lc]!.filter((w) => w.length <= maxLength);
+  }
+  const pool = maxLength > LECTURE_WORD_MAX_LENGTH_MOBILE ? extendedSpotterWordLabels() : LETTER_WORDS;
+  return pool.filter((w) => w.toLowerCase().includes(lc) && w.length <= maxLength);
 }
 
 /** Mots utilisables dans les exercices « entendre le son » (étapes 6-7) : pas de pronoms/articles. */
@@ -760,6 +774,11 @@ export function allWordItems(): WordItem[] {
   return [...byLabel.values()];
 }
 
+/** Labels étendus pour le pool bureau (mots illustrés + liste lecture). */
+function extendedSpotterWordLabels(): string[] {
+  return [...new Set([...LETTER_WORDS, ...allWordItems().map((w) => w.label)])];
+}
+
 /** Tous les labels disponibles (LETTER_WORDS + mots-outils + WORD_ITEMS). */
 export function allPoolLabels(): string[] {
   return [...new Set([...LETTER_WORDS, ...ALL_TOOL_WORDS, ...WORD_ITEMS.map((w) => w.label)])];
@@ -823,15 +842,21 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 /** Random labels (for WordSpotter): words whose written form contains the letter. */
-export function randomWordsWithLetter(letter: string, n: number): string[] {
-  const pool = wordsForLetter(letter).filter((w) => w.length <= 10);
-  return shuffle(pool).slice(0, n);
+export function randomWordsWithLetter(
+  letter: string,
+  n: number,
+  maxLength = LECTURE_WORD_MAX_LENGTH_MOBILE,
+): string[] {
+  return shuffle(wordsForLetter(letter, maxLength)).slice(0, n);
 }
 
 /** Random labels containing a complex grapheme (L7 WordSpotter / prononciation). */
-export function randomWordsWithGrapheme(graphemeLabel: string, n: number): string[] {
-  const pool = wordsForComplexGrapheme(graphemeLabel).filter((w) => w.length <= 10);
-  return shuffle(pool).slice(0, n);
+export function randomWordsWithGrapheme(
+  graphemeLabel: string,
+  n: number,
+  maxLength = LECTURE_WORD_MAX_LENGTH_MOBILE,
+): string[] {
+  return shuffle(wordsForComplexGrapheme(graphemeLabel, maxLength)).slice(0, n);
 }
 
 export function randomMonosyllableWords(n: number): string[] {

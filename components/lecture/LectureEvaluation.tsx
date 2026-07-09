@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, randomWordsWithGrapheme, wordHasPhoneme } from "@/lib/curriculum/word-pool";
+import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import {
@@ -246,9 +247,10 @@ function GridExercise({
 function WordsExercise({
   letter, letterLower, onValidated, shouldValidate,
 }: { letter: string; letterLower: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  const maxLength = useLectureWordMaxLength(9);
   const [words] = useState(() => {
-    const raw = randomWordsWithLetter(letterLower, 20);
-    const pool = shuffle(raw.filter((w) => w.length <= 9)).slice(0, 4);
+    const raw = randomWordsWithLetter(letterLower, 20, maxLength);
+    const pool = shuffle(raw.filter((w) => w.length <= maxLength)).slice(0, 4);
     return [
       (pool[0] ?? "MAISON").toUpperCase(),
       (pool[1] ?? "maison").toLowerCase(),
@@ -862,8 +864,9 @@ function ComplexWordsExercise({
   label, onValidated, shouldValidate,
 }: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const targets = useMemo(() => complexTargets(label), [label]);
+  const maxLength = useLectureWordMaxLength();
   const [words] = useState(() => {
-    const raw = randomWordsWithGrapheme(label, 20).filter((w) => w.length <= 10);
+    const raw = randomWordsWithGrapheme(label, 20, maxLength);
     const up = shuffle(raw).slice(0, 2);
     const low = shuffle(raw).slice(2, 4);
     return [

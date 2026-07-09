@@ -2,6 +2,7 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { randomWordsWithLetter } from "@/lib/curriculum/word-pool";
+import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -21,11 +22,11 @@ type CharState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
 const WORD_COUNT = 5;
 
-function buildWords(letterA: string, letterB: string, isUppercase: boolean): string[] {
+function buildWords(letterA: string, letterB: string, isUppercase: boolean, maxLength: number): string[] {
   const a = letterA.toLowerCase();
   const b = letterB.toLowerCase();
-  const rawA = randomWordsWithLetter(a, 15).filter((w) => w.length <= 9);
-  const rawB = randomWordsWithLetter(b, 15).filter((w) => w.length <= 9);
+  const rawA = randomWordsWithLetter(a, 15, maxLength);
+  const rawB = randomWordsWithLetter(b, 15, maxLength);
   const merged = [...new Set([...rawA, ...rawB])].slice(0, WORD_COUNT);
   return merged.map((w) => (isUppercase ? w.toUpperCase() : w.toLowerCase()));
 }
@@ -34,18 +35,19 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
   function RevisionWordSpotter({ letterA, letterB, isUppercase }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
+    const maxLength = useLectureWordMaxLength(9);
     const a = isUppercase ? letterA : letterA.toLowerCase();
     const b = isUppercase ? letterB : letterB.toLowerCase();
 
-    const [words, setWords] = useState(() => buildWords(letterA, letterB, isUppercase));
+    const [words, setWords] = useState(() => buildWords(letterA, letterB, isUppercase, maxLength));
     const [states, setStates] = useState<Record<string, CharState>>({});
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setWords(buildWords(letterA, letterB, isUppercase));
+      setWords(buildWords(letterA, letterB, isUppercase, maxLength));
       setStates({});
       setValidated(false);
-    }, [letterA, letterB, isUppercase]);
+    }, [letterA, letterB, isUppercase, maxLength]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -102,7 +104,7 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
           {words.map((word, wi) => (
             <li
               key={wi}
-              className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
+              className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 md:px-4"
             >
               {word.split("").map((char, li) => {
                 const key = `${wi}-${li}`;
@@ -113,7 +115,7 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
                     type="button"
                     disabled={validated}
                     onClick={() => tap(wi, li)}
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors md:h-7 md:w-7 md:text-sm ${
                       s === "correct"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
