@@ -5517,6 +5517,139 @@ function genDevelopGroupStep(lesson: MathSubmoduleLesson, exNum: number): Symbol
   return { kind: "symbolic_group", lesson, exNum, instruction, mode: "input", questions };
 }
 
+// A9.6 — factoring expressions. Three dynamic exercises (refreshable), each a
+// pool of 50 templates that randomize both the letters and the numbers.
+function factorAnswerVariants(
+  outerNum: number,
+  outerLit: string,
+  innerCoef: number,
+  sym: string,
+  innerConst: number,
+  minus: boolean,
+): string[] {
+  const sign = minus ? "−" : "+";
+  const innerVar = innerCoef === 1 ? sym : `${innerCoef}${sym}`;
+  const bases = [
+    `${outerNum}${outerLit}(${innerVar} ${sign} ${innerConst})`,
+    `${outerNum}${outerLit}(${innerVar}${sign}${innerConst})`,
+  ];
+  if (innerCoef === 1) {
+    bases.push(`${outerNum}${outerLit}(${sym}${sign}${innerConst})`);
+  }
+  return [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))];
+}
+
+function genFactorGroupStep(lesson: MathSubmoduleLesson, exNum: number): SymbolicGroupStep {
+  const ri = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = <T,>(items: readonly T[]) => items[ri(0, items.length - 1)]!;
+  const letters = ["x", "y", "a", "b", "m", "n", "t"] as const;
+
+  const binomialTerm = (coef: number, sym: string, minus: boolean, magnitude: number) =>
+    `${coef}${sym}${minus ? " − " : " + "}${magnitude}`;
+
+  // Exercise 1 — simple: numeric GCF only, k·(a·sym ± c).
+  const simple = (): SymbolicQuestion => {
+    const sym = pick(letters);
+    const factor = ri(2, 9);
+    const innerCoef = ri(1, 9);
+    const innerConst = ri(1, 12);
+    const minus = Math.random() < 0.5;
+    return {
+      expression: binomialTerm(factor * innerCoef, sym, minus, factor * innerConst),
+      acceptable: factorAnswerVariants(factor, "", innerCoef, sym, innerConst, minus),
+    };
+  };
+
+  // Exercise 2 — medium: k·sym·(a·sym ± c) or larger numeric GCF.
+  const medium = (): SymbolicQuestion => {
+    if (Math.random() < 0.55) {
+      const sym = pick(letters);
+      const k = ri(2, 6);
+      const a = ri(1, 4);
+      const b = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const exprCoef2 = k * b;
+      const expr = `${k * a}${sym}² ${minus ? "−" : "+"} ${exprCoef2}${sym}`;
+      return {
+        expression: expr,
+        acceptable: factorAnswerVariants(k, sym, a, sym, b, minus),
+      };
+    }
+    const sym = pick(letters);
+    const factor = ri(4, 12);
+    const innerCoef = ri(2, 9);
+    const innerConst = ri(2, 15);
+    const minus = Math.random() < 0.5;
+    return {
+      expression: binomialTerm(factor * innerCoef, sym, minus, factor * innerConst),
+      acceptable: factorAnswerVariants(factor, "", innerCoef, sym, innerConst, minus),
+    };
+  };
+
+  // Exercise 3 — advanced: two variables, sym² factor, or three-term numeric GCF.
+  const advanced = (): SymbolicQuestion => {
+    const mode = ri(0, 2);
+    if (mode === 0) {
+      const [sym1, sym2] = [...letters].sort(() => Math.random() - 0.5).slice(0, 2) as [string, string];
+      const k = ri(2, 6);
+      const a = ri(2, 5);
+      const b = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const expr = `${k * a}${sym1}${sym2} ${minus ? "−" : "+"} ${k * b}${sym2}`;
+      return {
+        expression: expr,
+        acceptable: factorAnswerVariants(k, sym2, a, sym1, b, minus),
+      };
+    }
+    if (mode === 1) {
+      const sym = pick(letters);
+      const k = ri(2, 6);
+      const c = ri(1, 9);
+      const minus = Math.random() < 0.5;
+      const expr = `${k}${sym}³ ${minus ? "−" : "+"} ${k * c}${sym}²`;
+      const sign = minus ? "−" : "+";
+      const bases = [
+        `${k}${sym}²(${sym} ${sign} ${c})`,
+        `${k}${sym}²(${sym}${sign}${c})`,
+      ];
+      return {
+        expression: expr,
+        acceptable: [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))],
+      };
+    }
+    const sym = pick(letters);
+    const k = ri(2, 5);
+    const a = ri(1, 3);
+    const b = ri(2, 6);
+    const c = ri(2, 9);
+    const minus1 = Math.random() < 0.5;
+    const minus2 = Math.random() < 0.5;
+    const term1 = `${k * a}${sym}²`;
+    const term2 = `${minus1 ? "−" : "+"} ${k * b}${sym}`;
+    const term3 = `${minus2 ? "−" : "+"} ${k * c}`;
+    const innerParts = [
+      a === 1 ? `${sym}²` : `${a}${sym}²`,
+      `${minus1 ? "−" : "+"} ${b === 1 ? sym : `${b}${sym}`}`,
+      `${minus2 ? "−" : "+"} ${c}`,
+    ].join(" ");
+    const bases = [`${k}(${innerParts})`];
+    return {
+      expression: `${term1} ${term2} ${term3}`,
+      acceptable: [...new Set(bases.flatMap((answer) => symbolicVariants(answer)))],
+    };
+  };
+
+  const generator = exNum === 1 ? simple : exNum === 2 ? medium : advanced;
+  return {
+    kind: "symbolic_group",
+    lesson,
+    exNum,
+    instruction: "Factorisez les expressions.",
+    mode: "input",
+    questions: shufflePick(Array.from({ length: 50 }, generator), 5),
+  };
+}
+
 function genSymbolicTrueFalseStep(lesson: MathSubmoduleLesson): SymbolicGroupStep {
   const templates = Array.from({ length: 50 }, (_, index) => {
     const base = index % 2 === 0 ? generateProductQuestion(index) : generateReductionQuestion(index, true);
@@ -6008,6 +6141,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
         steps.push(genDevelopGroupStep(lesson, 3));
+      } else if (sid === "A9-6") {
+        steps.push(genFactorGroupStep(lesson, 1));
+        steps.push(genFactorGroupStep(lesson, 2));
+        steps.push(genFactorGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "practice").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -6030,6 +6167,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push(genDevelopGroupStep(lesson, 1));
         steps.push(genDevelopGroupStep(lesson, 2));
         steps.push(genDevelopGroupStep(lesson, 3));
+      } else if (sid === "A9-6") {
+        steps.push(genFactorGroupStep(lesson, 1));
+        steps.push(genFactorGroupStep(lesson, 2));
+        steps.push(genFactorGroupStep(lesson, 3));
       } else {
         generateAlgebraQuestions(sid, 5, "evaluation").forEach(item =>
           steps.push({ kind: "exercise", lesson, item }),
@@ -7937,6 +8078,10 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "monomial_group") {
         currentResults = monomialResults.map((result) => result.coefficient && result.literal && result.degree);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: monomialAnswers } }));
+      } else if (currentStep.kind === "algebra_group") {
+        const step = activeAlgebraStep ?? currentStep;
+        currentResults = algebraGroupResults.slice(0, step.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: algebraGroupAnswers } }));
       } else if (currentStep.kind === "symbolic_group") {
         currentResults = symbolicResults.slice(0, currentStep.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
@@ -8217,8 +8362,12 @@ export function GenericModuleContent({
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
-                : es?.kind === "monomial_group" ? "Coefficient, partie littérale et degré"
-                : es?.kind === "symbolic_group" ? es.instruction
+                : es?.kind === "monomial_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.monomial_group?.[pivot]) || "Coefficient, partie littérale et degré")
+                : es?.kind === "algebra_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.algebra_group?.[pivot]) || "Calculez le résultat.")
+                : es?.kind === "symbolic_group"
+                  ? ((showPivotTranslation && getTrad(es.lesson.submoduleId)?.consignes?.[`symbolic_${es.exNum}`]?.[pivot]) || es.instruction)
                 : es?.kind === "equation_group" ? "Équations"
                 : es?.kind === "system_equation" ? "Systèmes d'équations"
                 : es?.kind === "arithmetic_group"
@@ -8303,7 +8452,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, eqAnswers, eqWorkAnswers, eqResults, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, eqAnswers, eqWorkAnswers, eqResults, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults, monomialResults, monomialAnswers, algebraGroupResults, algebraGroupAnswers, symbolicResults, symbolicAnswers, activeAlgebraStep, pivot, showPivotTranslation]);
 
   const goNextRef = useRef<() => void>(() => {});
   useEffect(() => { goNextRef.current = goNext; });
@@ -8492,9 +8641,11 @@ export function GenericModuleContent({
         ? genEvalExpressionGroupStep(currentStep.lesson, exNum)
         : currentStep.lesson.submoduleId === "A9-5"
           ? genDevelopGroupStep(currentStep.lesson, exNum)
-          : currentStep.mode === "true_false"
-            ? genSymbolicTrueFalseStep(currentStep.lesson)
-            : genSymbolicGroupStep(currentStep.lesson, exNum);
+          : currentStep.lesson.submoduleId === "A9-6"
+            ? genFactorGroupStep(currentStep.lesson, exNum)
+            : currentStep.mode === "true_false"
+              ? genSymbolicTrueFalseStep(currentStep.lesson)
+              : genSymbolicGroupStep(currentStep.lesson, exNum);
       setSymbolicOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
       setSymbolicAnswers([]);
       setSymbolicValidated(false);
@@ -9129,6 +9280,21 @@ export function GenericModuleContent({
                 </p>
               );
             })}
+          </div>
+        );
+      case "algebra_group":
+        if (!snapshot) return null;
+        return (
+          <div className="space-y-1 text-xs">
+            {step.questions.map((question, index) => (
+              <p key={index}>
+                <span className="font-mono">{question.expr}</span>
+                <span className="text-[var(--color-text-secondary)]"> = </span>
+                <span className="text-amber-600">{snapshot.answers?.[index] || "—"}</span>
+                <span className="text-[var(--color-text-secondary)]"> → </span>
+                <span className="font-bold text-[var(--color-accent-alg)]">{question.answer}</span>
+              </p>
+            ))}
           </div>
         );
       case "symbolic_group":
@@ -9935,6 +10101,12 @@ export function GenericModuleContent({
       consigneDir: (t && (pivot === "ar" || pivot === "fa" || pivot === "ps")) ? "rtl" as const : "ltr" as const,
     };
   };
+  const stepCons = (key: string, fallback: string) =>
+    (showPivotTranslation ? currentStepTrad?.consignes?.[key]?.[pivot] : undefined) ?? fallback;
+  const stepConsLang = (key: string) =>
+    showPivotTranslation && currentStepTrad?.consignes?.[key]?.[pivot] ? pivot : undefined;
+  const stepConsDir = (key: string) =>
+    stepConsLang(key) && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" as const : "ltr" as const;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
   const currentStepTitle = currentStepHasPivotTitle
@@ -10102,12 +10274,18 @@ export function GenericModuleContent({
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
-            <p className="text-sm text-[var(--color-text-primary)]">
-              Indiquez le coefficient, la partie littérale et le degré de chaque monôme.
+            <p className="text-sm text-[var(--color-text-primary)]" lang={stepConsLang("monomial_group")} dir={stepConsDir("monomial_group")}>
+              {stepCons("monomial_group", "Indiquez le coefficient, la partie littérale et le degré de chaque monôme.")}
             </p>
             <div className="overflow-x-auto">
               <div className="grid min-w-[34rem] grid-cols-[2rem_minmax(6rem,1fr)_8rem_10rem_5rem] items-stretch text-sm">
-                {["", "Monôme", "Coefficient", "Partie littérale", "Degré"].map((heading) => (
+                {[
+                  "",
+                  stepCons("monomial_col_monomial", "Monôme"),
+                  stepCons("monomial_col_coefficient", "Coefficient"),
+                  stepCons("monomial_col_literal", "Partie littérale"),
+                  stepCons("monomial_col_degree", "Degré"),
+                ].map((heading) => (
                   <div key={heading} className="border-b border-[var(--color-border-default)] px-2 py-2 text-center text-xs font-bold text-[var(--color-text-secondary)]">
                     {heading}
                   </div>
@@ -10157,7 +10335,9 @@ export function GenericModuleContent({
         return (
           <div className="space-y-4">
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
-            <p className="text-sm text-[var(--color-text-primary)]">{step.instruction}</p>
+            <p className="text-sm text-[var(--color-text-primary)]" lang={stepConsLang(`symbolic_${step.exNum}`)} dir={stepConsDir(`symbolic_${step.exNum}`)}>
+              {stepCons(`symbolic_${step.exNum}`, step.instruction)}
+            </p>
             {step.givens && step.givens.length > 0 && (
               <p className="text-sm text-[var(--color-text-secondary)]">
                 {step.givens.map((g, i) => (
@@ -10561,7 +10741,9 @@ export function GenericModuleContent({
         const step = activeAlgebraStep ?? (currentStep as AlgebraGroupStep);
         return (
           <div className="space-y-4">
-            <p className="text-sm font-semibold text-[var(--color-text-primary)]">Calculez le résultat.</p>
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]" lang={stepConsLang("algebra_group")} dir={stepConsDir("algebra_group")}>
+              {stepCons("algebra_group", "Calculez le résultat.")}
+            </p>
             <p className="text-sm text-[var(--color-text-secondary)]">
               <span className="font-bold text-[var(--color-accent-alg)]">{step.letter}</span>
               {" = "}
