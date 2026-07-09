@@ -4450,7 +4450,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
     operations.push(opMoveX(c));
     if (leftAfterMove === 0) {
       if (b === d) {
-        development.push("une infinité de possibilités !");
+        development.push("infini");
         operations.push("");
         return { expr, solution: { kind: "infinite" }, development, operations };
       }
@@ -4510,11 +4510,11 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
     { expr: "5x + (x - 3) · 2 = 3(x - 7) + 4x", solution: { kind: "impossible" }, development: ["5x + 2x - 6 = 3x - 21 + 4x", "7x - 6 = 7x - 21", "-6 = -21", "impossible !"], operations: ["effectuer", "réduire", "- 7x", "", ""] },
     { expr: "3x² + 4x - 2 = 3x(x - 3) + 1", solution: rat(3, 13), development: ["3x² + 4x - 2 = 3x² - 9x + 1", "4x - 2 = -9x + 1", "13x - 2 = 1", "13x = 3", "x = 3/13"], operations: ["effectuer", "- 3x²", "+ 9x", "+ 2", ": 13", ""] },
     { expr: "5x · 2 - 3x · (-2) + 1 = 10", solution: rat(9, 16), development: ["10x + 6x + 1 = 10", "16x + 1 = 10", "16x = 9", "x = 9/16"], operations: ["effectuer", "réduire", "- 1", ": 16", ""] },
-    { expr: "6(x - 3) + 2 · 5 = 3(x - 2) + 3x - 2", solution: { kind: "infinite" }, development: ["6x - 18 + 10 = 3x - 6 + 3x - 2", "6x - 8 = 6x - 8", "-8 = -8", "une infinité de possibilités !"], operations: ["effectuer", "réduire", "- 6x", "", ""] },
+    { expr: "6(x - 3) + 2 · 5 = 3(x - 2) + 3x - 2", solution: { kind: "infinite" }, development: ["6x - 18 + 10 = 3x - 6 + 3x - 2", "6x - 8 = 6x - 8", "-8 = -8", "infini"], operations: ["effectuer", "réduire", "- 6x", "", ""] },
     { expr: "4x · (x - 3) - 4x² = (5 + 2x) · 7", solution: rat(-35, 26), development: ["4x² - 12x - 4x² = 35 + 14x", "-12x = 35 + 14x", "-26x = 35", "x = -35/26"], operations: ["effectuer", "réduire", "- 14x", ": (-26)", ""] },
     { expr: "10x - 3 · (-2x) + 5 = 7x · 3 - 2", solution: rat(7, 5), development: ["10x + 6x + 5 = 21x - 2", "16x + 5 = 21x - 2", "-5x + 5 = -2", "-5x = -7", "x = 7/5"], operations: ["effectuer", "réduire", "- 21x", "- 5", ": (-5)", ""] },
     { expr: "(x - 7) - 2(x + 2) = (x - 3) · 2", solution: rat(-5, 3), development: ["x - 7 - 2x - 4 = 2x - 6", "-x - 11 = 2x - 6", "-3x - 11 = -6", "-3x = 5", "x = -5/3"], operations: ["effectuer", "réduire", "- 2x", "+ 11", ": (-3)", ""] },
-    { expr: "5x · 3 + 2 - x = 7(1 + 2x) - 5", solution: { kind: "infinite" }, development: ["15x + 2 - x = 7 + 14x - 5", "14x + 2 = 2 + 14x", "2 = 2", "une infinité de possibilités !"], operations: ["effectuer", "réduire", "- 14x", ""] },
+    { expr: "5x · 3 + 2 - x = 7(1 + 2x) - 5", solution: { kind: "infinite" }, development: ["15x + 2 - x = 7 + 14x - 5", "14x + 2 = 2 + 14x", "2 = 2", "infini"], operations: ["effectuer", "réduire", "- 14x", ""] },
     { expr: "5x² · 3 · (-4x) + 2 = x(5x + 2)", solution: rat(-1, 5), development: ["5x² + 12x + 2 = 5x² + 2x", "12x + 2 = 2x", "10x + 2 = 0", "10x = -2", "x = -1/5"], operations: ["effectuer", "- 5x²", "- 2x", "- 2", ": 10", ""] },
     { expr: "(x + 2) · 3 - 1 = x · 3 - 1 - 1", solution: { kind: "impossible" }, development: ["3x + 6 - 1 = 3x - 2", "3x + 5 = 3x - 2", "5 = -2", "impossible !"], operations: ["effectuer", "réduire", "- 3x", "", ""] },
     { expr: "8x - (3x - 1) + 2 = (x - 3) · 4", solution: rat(-15, 1), development: ["8x - 3x + 1 + 2 = 4x - 12", "5x + 3 = 4x - 12", "x + 3 = -12", "x = -15"], operations: ["effectuer", "réduire", "- 4x", "- 3", ""] },
@@ -4526,11 +4526,11 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
     { expr: "5 · (-3x) - 3(2 + 4x) = 5(1 - x) + 2x", solution: rat(11, -24), development: ["-15x - 6 - 12x = 5 - 5x + 2x", "-27x - 6 = 5 - 3x", "-24x - 6 = 5", "-24x = 11", "x = -11/24"], operations: ["effectuer", "réduire", "+ 3x", "+ 6", ": (-24)", ""] },
     { expr: "7 · (-3) + 4 · (-2x) = 5 · (-1) - 3 · (-x)", solution: rat(-16, 11), development: ["-21 - 8x = -5 + 3x", "-21 - 11x = -5", "-11x = 16", "x = -16/11"], operations: ["effectuer", "- 3x", "+ 21", ": (-11)", ""] },
     { expr: "8 - (2x - 1) - 1 = 7x · 3 + 4", solution: rat(-4, 23), development: ["8 - 2x + 1 - 1 = 21x + 4", "8 - 2x = 21x + 4", "8 - 23x = 4", "-23x = -4", "x = 4/23"], operations: ["effectuer", "réduire", "- 21x", "- 8", ": (-23)", ""] },
-    { expr: "10x · 3 + 7 · (2 + x) = 3 · (4 + 10x) + 2 + 7x", solution: { kind: "infinite" }, development: ["30x + 14 + 7x = 12 + 30x + 2 + 7x", "37x + 14 = 14 + 37x", "14 = 14", "une infinité de possibilités !"], operations: ["effectuer", "réduire", "- 37x", "", ""] },
+    { expr: "10x · 3 + 7 · (2 + x) = 3 · (4 + 10x) + 2 + 7x", solution: { kind: "infinite" }, development: ["30x + 14 + 7x = 12 + 30x + 2 + 7x", "37x + 14 = 14 + 37x", "14 = 14", "infini"], operations: ["effectuer", "réduire", "- 37x", "", ""] },
     { expr: "(x - 3) · 10 + 2 = 5 · (2x + 3) - 1", solution: { kind: "impossible" }, development: ["10x - 30 + 2 = 10x + 15 - 1", "10x - 28 = 10x + 14", "-28 = 14", "impossible !"], operations: ["effectuer", "réduire", "- 10x", "", ""] },
     { expr: "8 - (10 - 3x) = 3(x + 4) - 2", solution: { kind: "impossible" }, development: ["8 - 10 + 3x = 3x + 12 - 2", "-2 + 3x = 3x + 10", "-2 = 10", "impossible !"], operations: ["effectuer", "réduire", "- 3x", "", ""] },
     { expr: "(x - 7) - (8x + 6) = 3 · (-5x)", solution: rat(13, 8), development: ["x - 7 - 8x - 6 = -15x", "-7x - 13 = -15x", "-13 = -8x", "x = 13/8"], operations: ["effectuer", "réduire", "+ 7x", ": (-8)", ""] },
-    { expr: "2x · 3x - x + 2 = 6x(x - 1) + 5x + 2", solution: { kind: "infinite" }, development: ["6x² - x + 2 = 6x² - 6x + 5x + 2", "6x² - x + 2 = 6x² - x + 2", "2 = 2", "une infinité de possibilités !"], operations: ["effectuer", "réduire", "- 6x²", "+ x", ""] },
+    { expr: "2x · 3x - x + 2 = 6x(x - 1) + 5x + 2", solution: { kind: "infinite" }, development: ["6x² - x + 2 = 6x² - 6x + 5x + 2", "6x² - x + 2 = 6x² - x + 2", "2 = 2", "infini"], operations: ["effectuer", "réduire", "- 6x²", "+ x", ""] },
     { expr: "(x - 2) · (-2) - 4(5 + x) = 0", solution: rat(-8, 3), development: ["-2x + 4 - 20 - 4x = 0", "-6x - 16 = 0", "-6x = 16", "x = -8/3"], operations: ["effectuer", "réduire", "+ 16", ": (-6)", ""] },
     { expr: "(8x - 2) · 3 - 2(x + 4) = 2 · (-7)", solution: rat(0, 1), development: ["24x - 6 - 2x - 8 = -14", "22x - 14 = -14", "22x = 0", "x = 0"], operations: ["effectuer", "réduire", "+ 14", ": 22", ""] },
     { expr: "(x - 7) · (-3) - 1 = (x + 2) · 2 + x", solution: rat(8, 3), development: ["-3x + 21 - 1 = 2x + 4 + x", "-3x + 20 = 3x + 4", "-6x + 20 = 4", "-6x = -16", "x = 8/3"], operations: ["effectuer", "réduire", "- 3x", "- 20", ": (-6)", ""] },
@@ -4798,7 +4798,7 @@ function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep 
       "y = -4x + 7", `y = -4 · ${f("46", "37")} + 7 = ${f("75", "37")}`,
     ], ["", "- 10", "· (-1)", "", "", "effectuer", "réduire", "- 56", ": (-37)", "", ""]),
     sys(["5x + 10 = y", "-4y + 40 = -20x"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
-      "y est déjà isolé dans I", "injecter I → II et résoudre", "-4(5x + 10) + 40 = -20x", "-20x - 40 + 40 = -20x", "-20x = -20x", "0 = 0", "infinité de possibilités !",
+      "y est déjà isolé dans I", "injecter I → II et résoudre", "-4(5x + 10) + 40 = -20x", "-20x - 40 + 40 = -20x", "-20x = -20x", "0 = 0", "infini",
     ], ["", "", "effectuer", "réduire", "+ 20x", "", ""]),
     sys(["15 - 3y = 5x + 2", "8y + 7 = 12 - x"], `{(${f("89", "37")} ; ${f("12", "37")})}`, acceptPair("89/37", "12/37"), [
       "isoler x dans II", "8y + 7 = 12 - x", "8y - 5 = -x", "-8y + 5 = x", "injecter II → I et résoudre",
@@ -4822,7 +4822,7 @@ function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep 
       "chercher la valeur de y", "-4x + 2 = y", `-4 · ${f("1", "3")} + 2 = y`, `y = ${f("2", "3")}`,
     ], ["", "- 5", "· (-1)", "", "", "effectuer", "réduire", "- 8x", "- 15", ": (-36)", ""]),
     sys(["5y + x = 7", "10y = 14 - 2x"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
-      "isoler x dans I", "5y + x = 7", "x = 7 - 5y", "injecter II → I et résoudre", "10y = 14 - 2(7 - 5y)", "10y = 14 - 14 + 10y", "10y = 10y", "0 = 0", "infinité de possibilités !",
+      "isoler x dans I", "5y + x = 7", "x = 7 - 5y", "injecter II → I et résoudre", "10y = 14 - 2(7 - 5y)", "10y = 14 - 14 + 10y", "10y = 10y", "0 = 0", "infini",
     ], ["", "- 5y", "", "", "effectuer", "réduire", "- 10y", ""]),
     sys(["y - 7 = 5x + 19", "3x - 8 = 2y + 1"], `{(${f("-61", "7")} ; ${f("-123", "7")})}`, acceptPair("-61/7", "-123/7"), [
       "isoler y dans I", "y - 7 = 5x + 19", "y = 5x + 26", "injecter I → II et résoudre", "3x - 8 = 2(5x + 26) + 1", "3x - 8 = 10x + 52 + 1", "-8 = 7x + 53", "-61 = 7x", `x = ${f("-61", "7")}`,
@@ -4847,7 +4847,7 @@ function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep 
       "isoler x dans I", "8x = 24", "x = 3", "injecter I → II et résoudre", "5 · 3 - 3y = 36", "-3y = 21", "y = -7",
     ], ["", ": 8", "", "", "- 15", ": (-3)", ""]),
     sys(["8y = 15 + x", "-3x = 45 - 24y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
-      "isoler x dans I", "8y = 15 + x", "8y - 15 = x", "injecter I → II et résoudre", "-3(8y - 15) = 45 - 24y", "-24y + 45 = 45 - 24y", "45 = 45", "infinité de possibilités !",
+      "isoler x dans I", "8y = 15 + x", "8y - 15 = x", "injecter I → II et résoudre", "-3(8y - 15) = 45 - 24y", "-24y + 45 = 45 - 24y", "45 = 45", "infini",
     ], ["", "- 15", "", "", "effectuer", "+ 24y", ""]),
     sys(["5y - 2x = 3", "10x + y = 7"], `{(${f("8", "13")} ; ${f("11", "13")})}`, acceptPair("8/13", "11/13"), [
       "isoler y dans II", "10x + y = 7", "y = 7 - 10x", "injecter II → I et résoudre", "5(7 - 10x) - 2x = 3", "35 - 50x - 2x = 3", "35 - 52x = 3", "-52x = -32", `x = ${f("8", "13")}`,
@@ -4907,7 +4907,7 @@ function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationSt
     sys(["7y + 1 = 4x - 8", "-12x + 27 = -21y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
       "mettre dans le même ordre", "I : -4x + 7y = -9", "II : -12x + 21y = -27",
       "I · 3", "-12x + 21y = -27", "II", "-12x + 21y = -27", "0 = 0",
-      "infinité de possibilités !",
+      "infini",
     ], ["", "- 4x / - 9", "+ 21y / - 27", "· 3", "", "", "", "", ""]),
     sys(["3x + 8y = 1", "5x - 2y = 1"], `{(5/23 ; 1/23)}`, acceptPair("5/23", "1/23"), [
       "I · 5", "15x + 40y = 5", "II · 3", "15x - 6y = 3", "46y = 2", "y = [[frac:1/23]]",
@@ -4941,7 +4941,7 @@ function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationSt
     sys(["8y - 3 = 4x + 3", "-2x - 3 = -4y"], `IR`, ["ir", "s=ir", "infini", "infinité"], [
       "mettre dans le même ordre", "I : -4x + 8y = 6", "II : 2x - 4y = 3",
       "II · 2", "4x - 8y = 6", "I", "-4x + 8y = 6", "0 = 0",
-      "infinité de possibilités !",
+      "infini",
     ], ["- 4x / + 3", "+ 4y / + 3", "", "· 2", "", "", "", "", ""]),
     sys(["5y - 2x = 10", "15 - 7y = 5(x + 8)"], `{(-5 ; 0)}`, acceptPair("-5", "0"), [
       "effectuer", "I : 5y - 2x = 10", "II : -7y - 5x = 25",
@@ -5115,7 +5115,7 @@ function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationSt
       "I · 3  : 3x + 6y = 12",
       "II     : 3x + 6y = 12",
       "soustraction II − I·3  →  0 = 0",
-      "identité : infinité de solutions !",
+      "infini",
     ], ["× 3", "", "II − I·3", "", ""]),
     // ── T16: II·2 + I → 7x=21 → x=3, y=2  (3+2·2=7✓  3·3−2=7✓) ────────────
     sys(["x + 2y = 7", "3x − y = 7"], `{(3 ; 2)}`, acceptPair("3", "2"), [
