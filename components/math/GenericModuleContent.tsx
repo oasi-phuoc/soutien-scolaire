@@ -59,6 +59,8 @@ import {
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
+const ALG_FIELD_H = "min-h-9";
+const WRONG_FIELD_STACK = `${CLS_WRONG} ${ALG_FIELD_H} flex flex-col items-center justify-center`;
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 const MATH_NUMBER_INPUT_BASE = `${MATH_TEXT_INPUT_BASE} appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
 
@@ -2835,7 +2837,7 @@ function WordProblemsExercise({
   revealCorrection?: boolean;
   noFrame?: boolean;
 }) {
-  const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
+  const inputCls = `w-28 ${ALG_FIELD_H} px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
     <div className="space-y-5">
       <div>
@@ -2855,7 +2857,7 @@ function WordProblemsExercise({
               <div className="flex items-center gap-3 pl-2">
                 <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
                 {wrong ? (
-                  <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                  <div className={`w-28 ${WRONG_FIELD_STACK}`}>
                     <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
                     <span className="text-xs font-bold leading-none text-amber-600">{q.answer.toLocaleString("fr-CH")}</span>
                   </div>
@@ -10082,9 +10084,9 @@ export function GenericModuleContent({
                     ...fields.map((field) => (
                       <div key={`${index}-${field.key}`} className="flex min-h-12 items-center justify-center border-b border-[var(--color-border-default)] px-2 py-1">
                         {monomialValidated && field.ok === false ? (
-                          <div className="flex min-w-16 flex-col items-center border-b-2 border-amber-500 pb-1">
-                            <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{field.value || "—"}</span>
-                            <span className="font-bold text-amber-600">{field.correct}</span>
+                          <div className={`${WRONG_FIELD_STACK} min-w-16 px-0`}>
+                            <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{field.value || "—"}</span>
+                            <span className="text-xs font-bold leading-none text-amber-600">{field.correct}</span>
                           </div>
                         ) : (
                           <input
@@ -10093,7 +10095,7 @@ export function GenericModuleContent({
                             value={field.value}
                             disabled={monomialValidated}
                             onChange={(event) => update(index, field.key, event.target.value)}
-                            className="w-full min-w-0 border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center outline-none focus:border-amber-500"
+                            className={`w-full min-w-0 ${ALG_FIELD_H} border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center outline-none focus:border-amber-500`}
                           />
                         )}
                       </div>
@@ -10159,9 +10161,9 @@ export function GenericModuleContent({
                         })}
                       </div>
                     ) : symbolicValidated && ok === false ? (
-                      <div className="col-start-2 flex w-full flex-col items-center border-b-2 border-amber-500 pb-1">
-                        <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value || "—"}</span>
-                        <span className="text-center text-xs font-bold text-amber-600">{question.acceptable[0]}</span>
+                      <div className={`col-start-2 w-full ${WRONG_FIELD_STACK} px-0`}>
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{value || "—"}</span>
+                        <span className="text-center text-xs font-bold leading-none text-amber-600">{question.acceptable[0]}</span>
                       </div>
                     ) : (
                       <input
@@ -10174,7 +10176,7 @@ export function GenericModuleContent({
                           next[index] = numericOnly ? cleanAlgebraNumberInput(event.target.value) : event.target.value;
                           return next;
                         })}
-                        className="col-start-2 w-full border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500"
+                        className={`col-start-2 w-full ${ALG_FIELD_H} border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-transparent px-1 pb-1 text-center font-mono text-sm outline-none focus:border-amber-500`}
                       />
                     )}
                   </div>
@@ -10194,7 +10196,7 @@ export function GenericModuleContent({
         const formatXSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "infini" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
-        const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const inputCls = `w-24 ${ALG_FIELD_H} px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]`;
         const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
         const singleQuestion = step.questions.length === 1 && !!step.questions[0]?.development;
         if (singleQuestion) {
@@ -10238,7 +10240,7 @@ export function GenericModuleContent({
                   <div className="grid grid-cols-[auto_8rem] items-end justify-center gap-2 pt-2">
                     <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
                     {isWrong ? (
-                      <div className="flex flex-col items-center border-b-2 border-amber-500 pb-1">
+                      <div className={`w-24 ${WRONG_FIELD_STACK} px-0`}>
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{userAns || "—"}</span>
                         <span className="text-xs font-bold leading-none text-amber-600">{formatXSol(q.solution)}</span>
                       </div>
@@ -10307,7 +10309,7 @@ export function GenericModuleContent({
                     <span className="font-mono text-sm text-[var(--color-text-primary)]">{renderText(q.expr)}</span>
                     <span className="text-sm text-[var(--color-text-secondary)] mx-1">x =</span>
                     {isWrong ? (
-                      <div className="w-24 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                      <div className={`w-24 ${WRONG_FIELD_STACK} px-0`}>
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
@@ -10333,7 +10335,7 @@ export function GenericModuleContent({
         const q = step.question;
         const result = eqValidated ? (eqResults[0] ?? null) : null;
         const isWrong = result === false;
-        const inputCls = "w-28 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const inputCls = `w-28 ${ALG_FIELD_H} px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]`;
         const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
         return (
           <div className="space-y-5">
@@ -10387,7 +10389,7 @@ export function GenericModuleContent({
                     <div className="flex items-end justify-center gap-2">
                       <span className="text-sm font-semibold text-[var(--color-text-primary)]">x =</span>
                       {isWrong ? (
-                        <div className="w-28 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                        <div className={`w-28 ${WRONG_FIELD_STACK} px-0`}>
                           <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userX || "—"}</span>
                           <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrX)}</span>
                         </div>
@@ -10401,7 +10403,7 @@ export function GenericModuleContent({
                       <div className="flex items-end justify-center gap-2">
                         <span className="text-sm font-semibold text-[var(--color-text-primary)]">y =</span>
                         {isWrong ? (
-                          <div className="w-28 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                          <div className={`w-28 ${WRONG_FIELD_STACK} px-0`}>
                             <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userY || "—"}</span>
                             <span className="text-xs font-bold leading-none text-amber-600">{renderText(corrY)}</span>
                           </div>
@@ -10453,7 +10455,7 @@ export function GenericModuleContent({
         const formatSol = (sol: EquationSolution) =>
           sol.kind === "impossible" ? "impossible" : sol.kind === "infinite" ? "infini" :
           sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
-        const inputCls = "w-24 px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]";
+        const inputCls = `w-24 ${ALG_FIELD_H} px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]`;
         // Render a side (list of terms) as inline fraction elements
         const renderTerm = (t: { num: number; den: number; xMul: number }, idx: number) => {
           const isNeg = t.num < 0;
@@ -10492,7 +10494,7 @@ export function GenericModuleContent({
                     </span>
                     <span className="text-sm text-[var(--color-text-secondary)] mx-1">x =</span>
                     {isWrong ? (
-                      <div className="w-24 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                      <div className={`w-24 ${WRONG_FIELD_STACK} px-0`}>
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
                         <span className="text-xs font-bold leading-none text-amber-600">{formatSol(q.solution)}</span>
                       </div>
@@ -10536,7 +10538,7 @@ export function GenericModuleContent({
                     <span className="whitespace-nowrap font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                     <span className="text-center font-mono text-sm text-[var(--color-text-primary)]">=</span>
                     {isWrong ? (
-                      <div className="w-full flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                      <div className={`w-full ${WRONG_FIELD_STACK} px-0`}>
                         <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAns || "—"}</span>
                         <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
                       </div>
@@ -10555,7 +10557,7 @@ export function GenericModuleContent({
                             return next;
                           });
                         }}
-                        className={`w-full px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 ${
+                        className={`w-full ${ALG_FIELD_H} px-0 pb-1 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 ${
                           result === true
                             ? "border-[var(--color-accent-alg)]"
                             : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
