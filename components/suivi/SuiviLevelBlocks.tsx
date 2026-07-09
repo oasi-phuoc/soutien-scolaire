@@ -21,20 +21,16 @@ export function SuiviLevelBlocks({
   const [openLevel, setOpenLevel] = useState<ClassLevelCode | null>(null);
 
   return (
-    <div className="space-y-2">
+    <div className="divide-y divide-[var(--color-border-default)]">
       {CLASS_LEVELS.map((level) => {
         const levelClasses = grouped[level];
         const isOpen = openLevel === level;
         return (
-          <div key={level}>
+          <div key={level} className="py-3 first:pt-0 last:pb-0">
             <button
               type="button"
               onClick={() => setOpenLevel(isOpen ? null : level)}
-              className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
-                isOpen
-                  ? "border-[var(--color-theme)] bg-[var(--color-theme-light)]/40 dark:bg-[var(--color-theme)]/10"
-                  : "border-[var(--color-border-default)] bg-white hover:bg-[var(--color-bg-secondary)] dark:bg-zinc-950 dark:hover:bg-zinc-900"
-              }`}
+              className="flex w-full items-center gap-3 py-1 text-left transition-opacity hover:opacity-80"
               aria-expanded={isOpen}
             >
               <SuiviIconLoupe active={isOpen} />
@@ -44,12 +40,12 @@ export function SuiviLevelBlocks({
               </span>
             </button>
             {isOpen && (
-              <ul className="mt-1 space-y-0.5 border-l-2 border-[var(--color-theme)]/25 py-1 pl-3 ml-4">
+              <ul className="mt-2 space-y-0.5">
                 {levelClasses.length === 0 ? (
-                  <li className="py-2 text-sm text-zinc-400">Aucune classe {level}.</li>
+                  <li className="py-1 text-sm text-zinc-400">Aucune classe {level}.</li>
                 ) : (
                   levelClasses.map((c) => (
-                    <li key={c.label} className="flex items-center gap-2 rounded-lg py-1.5 pr-2">
+                    <li key={c.label} className="flex items-center gap-2 py-1.5">
                       <Link
                         href={classHref(c.label)}
                         className="inline-flex rounded-lg p-1.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"

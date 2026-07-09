@@ -470,6 +470,67 @@ export async function toggleSecondaryClassAction(
   return { ok: true };
 }
 
+export async function saveMyClassAttributionsAction(
+  primaryClassId: string | null,
+  secondaryClassIds: string[],
+): Promise<{ ok: boolean; reason?: string }> {
+  const role = await getCallerRole();
+  if (!role) return { ok: false, reason: "Non autorisé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Erreur serveur." };
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, reason: "Non authentifié." };
+
+  const isRealId = (id: string) => !id.startsWith("label:");
+  const secondary = [...new Set(secondaryClassIds.filter(isRealId))];
+  const desired = new Set(secondary);
+  if (primaryClassId && isRealId(primaryClassId)) {
+    desired.add(primaryClassId);
+  }
+
+  const { data: currentRows, error: readErr } = await supabase
+    .from("class_teachers")
+    .select("class_id")
+    .eq("teacher_id", user.id);
+
+  if (readErr) return { ok: false, reason: readErr.message };
+
+  const currentIds = (currentRows ?? []).map((r) => r.class_id as string);
+
+  for (const id of currentIds) {
+    if (!desired.has(id)) {
+      const { error } = await supabase
+        .from("class_teachers")
+        .delete()
+        .eq("teacher_id", user.id)
+        .eq("class_id", id);
+      if (error) return { ok: false, reason: error.message };
+    }
+  }
+
+  for (const id of desired) {
+    const { error } = await supabase
+      .from("class_teachers")
+      .upsert({ class_id: id, teacher_id: user.id }, { onConflict: "class_id,teacher_id" });
+    if (error) return { ok: false, reason: error.message };
+  }
+
+  const nextPrimary = primaryClassId && isRealId(primaryClassId) ? primaryClassId : null;
+  const { error: profileErr } = await supabase
+    .from("profiles")
+    .update({ primary_class_id: nextPrimary })
+    .eq("id", user.id);
+
+  if (profileErr) return { ok: false, reason: profileErr.message };
+
+  revalidatePath("/");
+  revalidatePath("/suivi");
+  revalidatePath("/suivi/attributions");
+  return { ok: true };
+}
+
 export type SuiviSearchStudent = {
   id: string;
   prenom: string | null;

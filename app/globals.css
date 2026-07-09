@@ -66,6 +66,44 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-nunito), system-ui, sans-serif;
+  text-align: justify;
+}
+
+/* Conserver l'alignement explicite centré ou à gauche */
+[class~="text-center"],
+.text-center {
+  text-align: center;
+}
+
+[class~="text-left"],
+.text-left {
+  text-align: left;
+}
+
+[class~="text-right"],
+.text-right {
+  text-align: right;
+}
+
+input,
+textarea,
+select {
+  text-align: start;
+}
+
+button,
+[role="button"] {
+  text-align: center;
+}
+
+th[class~="text-center"],
+td[class~="text-center"] {
+  text-align: center;
+}
+
+th[class~="text-left"],
+td[class~="text-left"] {
+  text-align: left;
 }
 
 html,
