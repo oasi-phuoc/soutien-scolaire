@@ -364,9 +364,7 @@ export function AdminTable({
       if (!res.ok) {
         setPlacementEnabled(prev);
         setPlacementMsg(res.reason ?? "Erreur lors de la mise à jour.");
-        return;
       }
-      setPlacementMsg(next ? "Module TCF / TCM activé pour les élèves." : "Module TCF / TCM désactivé pour les élèves.");
     });
   }
 
@@ -407,7 +405,7 @@ export function AdminTable({
           )}
         </div>
         {placementMsg && (
-          <p className={`mb-2 text-sm ${placementMsg.includes("Erreur") ? "text-red-600" : "text-emerald-700"}`} role="status">
+          <p className="mb-2 text-sm text-red-600" role="status">
             {placementMsg}
           </p>
         )}
