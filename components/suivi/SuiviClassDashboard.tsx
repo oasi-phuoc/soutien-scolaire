@@ -8,6 +8,7 @@ import {
 import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/StudentPersonalInfoCard";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { PROGRESS_FILL } from "@/lib/suivi/progress-colors";
+import { formatPlacementScore, PLACEMENT_SUBJECT_MAX } from "@/lib/suivi/placement-best";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -48,6 +49,24 @@ function ProgressCell({
     >
       <span className="hidden text-[10px] font-semibold tabular-nums text-zinc-800 sm:block dark:text-zinc-200">
         {done}/{total}
+      </span>
+      <ProgressBar pct={pct} fill={fill} />
+    </div>
+  );
+}
+
+function PlacementScoreCell({ score, fill }: { score: number | null; fill: string }) {
+  if (score == null) {
+    return <span className="text-xs text-zinc-400">—</span>;
+  }
+  const pct = Math.min(100, Math.max(0, Math.round((score / PLACEMENT_SUBJECT_MAX) * 100)));
+  return (
+    <div
+      className="flex w-10 flex-col gap-0.5 sm:w-[3.25rem] sm:gap-1"
+      title={`${formatPlacementScore(score)} / ${PLACEMENT_SUBJECT_MAX}`}
+    >
+      <span className="hidden text-[10px] font-semibold tabular-nums text-zinc-800 sm:block dark:text-zinc-200">
+        {formatPlacementScore(score)}/{PLACEMENT_SUBJECT_MAX}
       </span>
       <ProgressBar pct={pct} fill={fill} />
     </div>
@@ -155,7 +174,13 @@ export function SuiviClassDashboard({
                 Maths
               </th>
               <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
+                TCM
+              </th>
+              <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
                 Français
+              </th>
+              <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
+                TCF
               </th>
               <th className="hidden px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-3 sm:py-2.5">
                 Lecture
@@ -165,7 +190,7 @@ export function SuiviClassDashboard({
           <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
             {filteredStudents.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-3 py-8 text-center text-sm text-zinc-400">
+                <td colSpan={9} className="px-3 py-8 text-center text-sm text-zinc-400">
                   {studentSearch.trim() ? "Aucun élève trouvé." : "Aucun élève dans cette classe."}
                 </td>
               </tr>
@@ -210,7 +235,13 @@ export function SuiviClassDashboard({
                         <ProgressCell done={s.math_done} total={s.math_total} pct={s.math_pct} fill={PROGRESS_FILL.math} />
                       </td>
                       <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
+                        <PlacementScoreCell score={s.tcm_best} fill={PROGRESS_FILL.math} />
+                      </td>
+                      <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
                         <ProgressCell done={s.french_done} total={s.french_total} pct={s.french_pct} fill={PROGRESS_FILL.french} />
+                      </td>
+                      <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
+                        <PlacementScoreCell score={s.tcf_best} fill={PROGRESS_FILL.french} />
                       </td>
                       <td className="hidden px-2 py-2 sm:table-cell sm:px-3 sm:py-2.5">
                         <ProgressCell done={s.lecture_done} total={s.lecture_total} pct={s.lecture_pct} fill={PROGRESS_FILL.lecture} />
@@ -218,14 +249,14 @@ export function SuiviClassDashboard({
                     </tr>
                     {infoOpen && (
                       <tr className="bg-zinc-50 dark:bg-zinc-900/50">
-                        <td colSpan={7} className="px-4 py-4">
+                        <td colSpan={9} className="px-4 py-4">
                           <StudentPersonalInfoCard student={s} />
                         </td>
                       </tr>
                     )}
                     {progressOpen && (
                       <tr className="bg-zinc-50 dark:bg-zinc-900/50">
-                        <td colSpan={7} className="max-w-0 px-4 py-4">
+                        <td colSpan={9} className="max-w-0 px-4 py-4">
                           <StudentProgressDetail userId={s.id} />
                         </td>
                       </tr>

@@ -3,7 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { frenchProgress, lectureProgress, mathProgress } from "@/lib/suivi/progress-metrics";
+import {
+  bestFrenchPlacementFromLast5,
+  bestMathPlacementFromLast5,
+} from "@/lib/suivi/placement-best";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
+import type { PlacementFrenchSession, PlacementMathAttempt } from "@/lib/placement/types";
 
 export type TeacherClassRow = {
   class_id: string;
@@ -54,6 +59,8 @@ export type ClassStudentSuiviRow = {
   lecture_done: number;
   lecture_total: number;
   lecture_pct: number;
+  tcm_best: number | null;
+  tcf_best: number | null;
   placement_total: number | null;
   placement_zone: string | null;
   pending_tasks: number;
@@ -289,7 +296,7 @@ export async function getClassStudentsSuiviAction(
 
   let query = supabase
     .from("profiles")
-    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile")
+    .select("id, prenom, nom, classe, adresse, npa, localite, telephone, langue, progress_updated_at, progress_data, placement_combined_profile, placement_test_history, placement_french_history")
     .eq("role", "eleve")
     .eq("classe", classLabel)
     .order("nom");
@@ -355,6 +362,8 @@ export async function getClassStudentsSuiviAction(
     const french = frenchProgress(pd);
     const lecture = lectureProgress(pd);
     const placement = p.placement_combined_profile as { total?: number; zone?: string } | null;
+    const mathHistory = p.placement_test_history as PlacementMathAttempt[] | null;
+    const frenchHistory = p.placement_french_history as PlacementFrenchSession[] | null;
     const ot = onTimeMap.get(p.id as string);
     const onTimePct = ot && ot.withDue > 0 ? Math.round((ot.onTime / ot.withDue) * 100) : null;
 
@@ -378,6 +387,8 @@ export async function getClassStudentsSuiviAction(
       lecture_done: lecture.done,
       lecture_total: lecture.total,
       lecture_pct: lecture.pct,
+      tcm_best: bestMathPlacementFromLast5(mathHistory),
+      tcf_best: bestFrenchPlacementFromLast5(frenchHistory),
       placement_total: placement?.total ?? null,
       placement_zone: placement?.zone ?? null,
       pending_tasks: pendingMap.get(p.id as string) ?? 0,
