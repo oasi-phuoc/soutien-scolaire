@@ -1,7 +1,8 @@
-import { hasLectureWordImage } from "../utils/audio";
+import { getWordAssetSlug, hasLectureWordImage } from "../utils/audio";
 import { complexTargets } from "../utils/complex-grapheme";
 import { isImageableLabel } from "./word-image-resolver";
 import graphemePoolsData from "./grapheme-word-pools-data.json";
+import lectureImageWordItemsData from "./lecture-image-word-items.json";
 
 type GraphemePoolsData = {
   complex: Record<string, string[]>;
@@ -503,6 +504,7 @@ export function wordsForLetter(letter: string): string[] {
 export function isLectureSoundPoolWord(label: string): boolean {
   const lc = label.toLowerCase();
   if (TOOL_WORD_SET.has(lc)) return false;
+  if (hasLectureWordImage(label)) return true;
   return isImageableLabel(label);
 }
 
@@ -740,12 +742,20 @@ export const TOOL_WORD_ITEMS: WordItem[] = ALL_TOOL_WORDS.map((label) => ({
   phonemes: [...phonemesFromFrenchGraphemes(label)],
 }));
 
-/** Union WORD_ITEMS + mots-outils (sans doublon). */
+/** Mots avec image lecture — phonèmes auto-générés (scripts/generate-lecture-word-items.ts). */
+export const LECTURE_IMAGE_WORD_ITEMS: WordItem[] = lectureImageWordItemsData as WordItem[];
+
+/** Union WORD_ITEMS + mots-outils + images lecture (sans doublon, manuel prioritaire). */
 export function allWordItems(): WordItem[] {
   const byLabel = new Map<string, WordItem>();
   for (const item of WORD_ITEMS) byLabel.set(item.label, item);
   for (const item of TOOL_WORD_ITEMS) {
     if (!byLabel.has(item.label)) byLabel.set(item.label, item);
+  }
+  for (const item of LECTURE_IMAGE_WORD_ITEMS) {
+    const slug = getWordAssetSlug(item.label);
+    const duplicate = [...byLabel.values()].some((w) => getWordAssetSlug(w.label) === slug);
+    if (!duplicate) byLabel.set(item.label, item);
   }
   return [...byLabel.values()];
 }

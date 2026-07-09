@@ -285,8 +285,6 @@ function resolveCeCoIndexedSlug(slug: string): string | null {
  */
 export function resolveCeCoWordImage(label: string | undefined | null): string | null {
   if (!label) return null;
-  const dedicated = resolveCeExpressionImage(label);
-  if (dedicated) return dedicated;
   const time = timeSlug(label);
   if (time) {
     const clock = resolveCeCoIndexedSlug(time);
@@ -370,51 +368,6 @@ export function remapExpressionImagePath(path?: string | null): string | null {
   return resolveCeCoIndexedSlug(slug);
 }
 
-/** Images CE dédiées (fond blanc) — public/expression/ce/*.webp */
-const CE_EXPRESSION_IMAGE_INDEX: Record<string, string> = {
-  "activite-mentale": "/expression/ce/activité-mentale.webp",
-  alimentation: "/expression/ce/alimentation.webp",
-  "appareil-photo": "/expression/ce/appareil-photo.webp",
-  boisson: "/expression/ce/boisson.webp",
-  boutique: "/expression/ce/boutique.webp",
-  boxe: "/expression/ce/boxe.webp",
-  "cahier-bleu": "/expression/ce/cahier-bleu.webp",
-  cuisine: "/expression/ce/cuisine.webp",
-  fleuriste: "/expression/ce/fleuriste.webp",
-  froid: "/expression/ce/froid.webp",
-  gare: "/expression/ce/gare.webp",
-  hiver: "/expression/ce/hiver.webp",
-  hygiene: "/expression/ce/hygiene.webp",
-  infusion: "/expression/ce/infusion.webp",
-  "lavage-mains": "/expression/ce/lavage-mains.webp",
-  marche: "/expression/ce/marche.webp",
-  neige: "/expression/ce/neige.webp",
-  parapluie: "/expression/ce/parapluie.webp",
-  plage: "/expression/ce/plage.webp",
-  remplacement: "/expression/ce/remplacement.webp",
-  restaurant: "/expression/ce/restaurant.webp",
-  rose: "/expression/ce/rose.webp",
-  "sac-sport": "/expression/ce/sac-sport.webp",
-  "ski-nautique": "/expression/ce/ski-nautique.webp",
-  soleil: "/expression/ce/soleil.webp",
-  sport: "/expression/ce/sport.webp",
-  securite: "/expression/ce/sécurité.webp",
-};
-
-function resolveCeExpressionImage(label: string): string | null {
-  const tokens = tokenize(label);
-  const stripped = stripDeterminers(tokens);
-  for (const tok of [...stripped, ...tokens]) {
-    const hit = CE_EXPRESSION_IMAGE_INDEX[tok];
-    if (hit) return hit;
-  }
-  for (const candidate of candidateSlugs(label)) {
-    const hit = CE_EXPRESSION_IMAGE_INDEX[candidate];
-    if (hit) return hit;
-  }
-  return null;
-}
-
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
 export function isResolvedImagePath(path: string | undefined | null): boolean {
   return !!path && (
@@ -422,8 +375,6 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
     || path.startsWith("/assets/words/vocab/")
     || path.startsWith("/assets/expression/images/")
     || path.startsWith("/assets/expression/")
-    || path.startsWith("/expression/ce/")
-    || path.startsWith("/expression/co/")
   );
 }
 
@@ -433,13 +384,13 @@ const EXPRESSION_CE_BASE =
 /** CE/CO — scènes, conversations, objet-pick, horloges ; fallback lecture puis vocabulaire. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
-    if (path.startsWith("/expression/ce/") || path.startsWith("/expression/co/")) return path;
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
     if (path.startsWith("/assets/expression/co/")) return path;
     if (path.startsWith("/assets/words/lecture/")) return path;
     if (path.startsWith("/assets/words/vocab/")) return path;
     if (EXPRESSION_CE_BASE.test(path)) return path;
+    if (path.startsWith("/assets/expression/images/")) return path;
   }
   if (label && isCeCoImageableLabel(label)) return resolveCeCoWordImage(label);
   return null;

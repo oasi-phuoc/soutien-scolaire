@@ -257,7 +257,7 @@ export function OfflineSettings() {
   const bytesPct = bytesDenom > 0
     ? Math.min(100, Math.round((progress.downloadedBytes / bytesDenom) * 100))
     : pct;
-  const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~215 Mo";
+  const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~195 Mo";
   const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
   const cacheExpectedBytes = cacheStatus?.expectedBytes || manifestSize || 0;
   const cachedAssetBytes = cacheStatus?.cachedAssetBytes ?? 0;

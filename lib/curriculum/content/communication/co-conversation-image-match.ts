@@ -1,8 +1,9 @@
 import { buildImageMatchTask, type COImageMatchCard, type COImageMatchTask } from "./co-questions-helpers";
 import type { COConversationMatchDef } from "./co-questions-moyen-conversation-match";
+import { remapExpressionImagePath } from "@/lib/curriculum/word-image-resolver";
 
 /**
- * Illustration (dossier public/expression/co/situations) pour chaque type de
+ * Illustration (public/assets/expression/images/scene) pour chaque type de
  * situation de conversation. Les mêmes situations réutilisent la même image.
  */
 const SITUATION_IMAGE: Record<string, string> = {
@@ -79,8 +80,8 @@ const SITUATION_IMAGE: Record<string, string> = {
   "Être en colère": "signaler-probleme",
 };
 
-function imagePath(slug: string): string {
-  return `/expression/co/situations/${slug}.webp`;
+function imagePath(slug: string): string | null {
+  return remapExpressionImagePath(`/expression/co/situations/${slug}.webp`);
 }
 
 /**
@@ -93,9 +94,11 @@ export function buildConversationImageMatch(def: COConversationMatchDef, seed: s
   for (const situation of def.situations) {
     const slug = SITUATION_IMAGE[situation];
     if (!slug) return null;
+    const image = imagePath(slug);
+    if (!image) return null;
     const dialogue = def.correctByDialogue.indexOf(situation);
     cards.push({
-      image: imagePath(slug),
+      image,
       label: situation,
       correct: dialogue >= 0 ? dialogue + 1 : null,
     });

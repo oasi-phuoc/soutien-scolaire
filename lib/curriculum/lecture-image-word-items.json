@@ -1,0 +1,7187 @@
+[
+  {
+    "label": "accordeon",
+    "phonemes": [
+      "/a/",
+      "/k/",
+      "/o/",
+      "/r/",
+      "/d/",
+      "/e/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "activite-mentale",
+    "phonemes": [
+      "/a/",
+      "/k/",
+      "/t/",
+      "/i/",
+      "/v/",
+      "/e/",
+      "/m/",
+      "/ɑ̃/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "agriculteur",
+    "phonemes": [
+      "/a/",
+      "/g/",
+      "/r/",
+      "/i/",
+      "/k/",
+      "/y/",
+      "/l/",
+      "/t/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "ail",
+    "phonemes": [
+      "/ɛ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "alimentation",
+    "phonemes": [
+      "/a/",
+      "/l/",
+      "/i/",
+      "/m/",
+      "/ɑ̃/",
+      "/t/",
+      "/sjɔ̃/"
+    ]
+  },
+  {
+    "label": "aliments",
+    "phonemes": [
+      "/a/",
+      "/l/",
+      "/i/",
+      "/m/",
+      "/ɑ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "allumette",
+    "phonemes": [
+      "/a/",
+      "/l/",
+      "/y/",
+      "/m/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "ambulance",
+    "phonemes": [
+      "/ɑ̃/",
+      "/b/",
+      "/y/",
+      "/l/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "appareil-photo",
+    "phonemes": [
+      "/a/",
+      "/p/",
+      "/r/",
+      "/ɛ/",
+      "/l/",
+      "/f/",
+      "/o/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "arc",
+    "phonemes": [
+      "/a/",
+      "/r/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "architecte",
+    "phonemes": [
+      "/a/",
+      "/r/",
+      "/ʃ/",
+      "/i/",
+      "/t/",
+      "/e/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "ardoise",
+    "phonemes": [
+      "/a/",
+      "/r/",
+      "/d/",
+      "/wa/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "arrosoir",
+    "phonemes": [
+      "/a/",
+      "/r/",
+      "/o/",
+      "/z/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "artichaut",
+    "phonemes": [
+      "/a/",
+      "/r/",
+      "/t/",
+      "/i/",
+      "/ʃ/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "asteroide",
+    "phonemes": [
+      "/a/",
+      "/s/",
+      "/t/",
+      "/e/",
+      "/r/",
+      "/wa/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "astronaute",
+    "phonemes": [
+      "/a/",
+      "/s/",
+      "/t/",
+      "/r/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "atlas",
+    "phonemes": [
+      "/a/",
+      "/t/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "autruche",
+    "phonemes": [
+      "/o/",
+      "/t/",
+      "/r/",
+      "/y/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "bague",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/g/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "baignoire",
+    "phonemes": [
+      "/b/",
+      "/ɛ/",
+      "/ɲ/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "balai",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/l/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "balance",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/l/",
+      "/ɑ̃/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "ballon-1",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "ballon-2",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "ballon-3",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "bambou",
+    "phonemes": [
+      "/b/",
+      "/ɑ̃/",
+      "/u/"
+    ]
+  },
+  {
+    "label": "banc",
+    "phonemes": [
+      "/b/",
+      "/ɑ̃/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "banjo",
+    "phonemes": [
+      "/b/",
+      "/ɑ̃/",
+      "/ʒ/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "baskets",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/s/",
+      "/k/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "batte",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "batterie",
+    "phonemes": [
+      "/b/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "beau",
+    "phonemes": [
+      "/b/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "beige",
+    "phonemes": [
+      "/b/",
+      "/ɛ/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "beignet",
+    "phonemes": [
+      "/b/",
+      "/ɛ/",
+      "/ɲ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "berceau",
+    "phonemes": [
+      "/b/",
+      "/e/",
+      "/r/",
+      "/s/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "beret",
+    "phonemes": [
+      "/b/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "beurre",
+    "phonemes": [
+      "/b/",
+      "/e/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "biscuit",
+    "phonemes": [
+      "/b/",
+      "/i/",
+      "/s/",
+      "/k/",
+      "/ɥi/"
+    ]
+  },
+  {
+    "label": "blanc",
+    "phonemes": [
+      "/b/",
+      "/l/",
+      "/ɑ̃/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "bleuet",
+    "phonemes": [
+      "/b/",
+      "/l/",
+      "/ø/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "blouson",
+    "phonemes": [
+      "/b/",
+      "/l/",
+      "/u/",
+      "/z/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "bocal",
+    "phonemes": [
+      "/b/",
+      "/o/",
+      "/k/",
+      "/a/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "bois",
+    "phonemes": [
+      "/b/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "boisson",
+    "phonemes": [
+      "/b/",
+      "/wa/",
+      "/s/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "boite",
+    "phonemes": [
+      "/b/",
+      "/wa/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "bonbon",
+    "phonemes": [
+      "/b/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "bonnet",
+    "phonemes": [
+      "/b/",
+      "/o/",
+      "/n/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "bordeaux",
+    "phonemes": [
+      "/b/",
+      "/o/",
+      "/r/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "bottes",
+    "phonemes": [
+      "/b/",
+      "/o/",
+      "/t/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "bottines",
+    "phonemes": [
+      "/b/",
+      "/o/",
+      "/t/",
+      "/i/",
+      "/n/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "boucle-d-oreille",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/k/",
+      "/l/",
+      "/e/",
+      "/d/",
+      "/o/",
+      "/r/",
+      "/ɛ/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "boucles-d-oreilles",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/k/",
+      "/l/",
+      "/e/",
+      "/s/",
+      "/d/",
+      "/o/",
+      "/r/",
+      "/ɛ/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "bougie",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/ʒ/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "bouleau",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/l/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "boussole",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/s/",
+      "/o/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "bouteille",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/t/",
+      "/ɛ/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "boutique",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/t/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "bracelet",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/a/",
+      "/s/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "briquet",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/i/",
+      "/k/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "brosse",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/o/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "brosse-a-dents",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/o/",
+      "/s/",
+      "/e/",
+      "/a/",
+      "/d/",
+      "/ɑ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "brouette",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/w/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "brownie",
+    "phonemes": [
+      "/b/",
+      "/r/",
+      "/o/",
+      "/w/",
+      "/n/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "buffet",
+    "phonemes": [
+      "/b/",
+      "/y/",
+      "/f/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "bus",
+    "phonemes": [
+      "/b/",
+      "/y/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "but",
+    "phonemes": [
+      "/b/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "cadeau",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/d/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "cadenas",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/d/",
+      "/e/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "cahier-bleu",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/∅/",
+      "/i/",
+      "/e/",
+      "/r/",
+      "/b/",
+      "/l/",
+      "/ø/"
+    ]
+  },
+  {
+    "label": "caissier",
+    "phonemes": [
+      "/k/",
+      "/ɛ/",
+      "/s/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "calculatrice",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/l/",
+      "/y/",
+      "/t/",
+      "/r/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "calecon",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/l/",
+      "/e/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "cameleon",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/m/",
+      "/e/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "camion",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/m/",
+      "/i/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "camion-de-pompier",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/m/",
+      "/i/",
+      "/ɔ̃/",
+      "/d/",
+      "/e/",
+      "/p/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "campagne",
+    "phonemes": [
+      "/k/",
+      "/ɑ̃/",
+      "/p/",
+      "/a/",
+      "/ɲ/"
+    ]
+  },
+  {
+    "label": "canari",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/n/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "canyon",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/n/",
+      "/i/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "caoutchouc",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/u/",
+      "/t/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "caravane",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/v/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "carre",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cartable",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/b/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "carte",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "carte-d-etudiant",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/y/",
+      "/i/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "carte-d-identite",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/i/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "carte-de-credit",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "casque-1",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/s/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "casque-2",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/s/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "casquette",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/s/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "cassis",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/s/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "ceinture",
+    "phonemes": [
+      "/s/",
+      "/ɛ̃/",
+      "/t/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cerceau",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "cercle",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/k/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "cerf",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "cerf-volant",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/f/",
+      "/v/",
+      "/o/",
+      "/l/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "cerveau",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/v/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "chaise",
+    "phonemes": [
+      "/ʃ/",
+      "/ɛ/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "chalet",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "chambre",
+    "phonemes": [
+      "/ʃ/",
+      "/ɑ̃/",
+      "/b/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "champ",
+    "phonemes": [
+      "/ʃ/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "chapeau",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/p/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "chargeur",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/r/",
+      "/ʒ/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "charpentier",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/r/",
+      "/p/",
+      "/ɑ̃/",
+      "/t/",
+      "/i/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "chataignier",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/t/",
+      "/ɛ/",
+      "/ɲ/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "chateau",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/t/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "chateau-de-sable",
+    "phonemes": [
+      "/ʃ/",
+      "/a/",
+      "/t/",
+      "/o/",
+      "/d/",
+      "/e/",
+      "/s/",
+      "/b/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "chauffeur",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/f/",
+      "/e/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "chaussettes",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/s/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "chaussons",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/s/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "chaussures",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/s/",
+      "/y/",
+      "/r/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "cheminee",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/m/",
+      "/i/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "chemise",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/m/",
+      "/i/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "chene",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "cheval-a-bascule",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/v/",
+      "/a/",
+      "/l/",
+      "/b/",
+      "/s/",
+      "/k/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "cheveux",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/v/",
+      "/ø/"
+    ]
+  },
+  {
+    "label": "chevre",
+    "phonemes": [
+      "/ʃ/",
+      "/e/",
+      "/v/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "chocolat",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/k/",
+      "/l/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "chocolat-chaud",
+    "phonemes": [
+      "/ʃ/",
+      "/o/",
+      "/k/",
+      "/l/",
+      "/a/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "chou-fleur",
+    "phonemes": [
+      "/ʃ/",
+      "/u/",
+      "/f/",
+      "/l/",
+      "/e/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "chronometre",
+    "phonemes": [
+      "/ʃ/",
+      "/r/",
+      "/o/",
+      "/n/",
+      "/m/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "chrysantheme",
+    "phonemes": [
+      "/ʃ/",
+      "/r/",
+      "/i/",
+      "/z/",
+      "/ɑ̃/",
+      "/t/",
+      "/e/",
+      "/m/"
+    ]
+  },
+  {
+    "label": "cible",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/b/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "cigogne",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/g/",
+      "/o/",
+      "/ɲ/"
+    ]
+  },
+  {
+    "label": "citron-vert",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/t/",
+      "/r/",
+      "/ɔ̃/",
+      "/v/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "citronnade",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/t/",
+      "/r/",
+      "/o/",
+      "/n/",
+      "/a/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "clarinette",
+    "phonemes": [
+      "/k/",
+      "/l/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/n/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "clavier",
+    "phonemes": [
+      "/k/",
+      "/l/",
+      "/a/",
+      "/v/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "clementine",
+    "phonemes": [
+      "/k/",
+      "/l/",
+      "/e/",
+      "/m/",
+      "/ɑ̃/",
+      "/t/",
+      "/i/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "climatiseur",
+    "phonemes": [
+      "/k/",
+      "/l/",
+      "/i/",
+      "/m/",
+      "/a/",
+      "/t/",
+      "/z/",
+      "/e/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "clou",
+    "phonemes": [
+      "/k/",
+      "/l/",
+      "/u/"
+    ]
+  },
+  {
+    "label": "cobra",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/b/",
+      "/r/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "coccinelle",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/s/",
+      "/i/",
+      "/n/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "coeur",
+    "phonemes": [
+      "/k/",
+      "/ø/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "coffre",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/f/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "coing",
+    "phonemes": [
+      "/k/",
+      "/wɛ̃/",
+      "/g/"
+    ]
+  },
+  {
+    "label": "colibri",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/l/",
+      "/i/",
+      "/b/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "collier",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/l/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "colline",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/l/",
+      "/i/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "colombe",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/l/",
+      "/ɔ̃/",
+      "/b/"
+    ]
+  },
+  {
+    "label": "comete",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/m/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "commode",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/m/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "comptoire",
+    "phonemes": [
+      "/k/",
+      "/ɔ̃/",
+      "/p/",
+      "/t/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cone",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "confiture",
+    "phonemes": [
+      "/k/",
+      "/ɔ̃/",
+      "/f/",
+      "/i/",
+      "/t/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cookie",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "coquelicot",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/e/",
+      "/l/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "corail",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/r/",
+      "/ɛ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "corbeau",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/r/",
+      "/b/"
+    ]
+  },
+  {
+    "label": "corde",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/r/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "corde-a-sauter",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/r/",
+      "/d/",
+      "/e/",
+      "/a/",
+      "/s/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "cote",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "coton",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/t/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "coton-tige",
+    "phonemes": [
+      "/k/",
+      "/o/",
+      "/t/",
+      "/ɔ̃/",
+      "/i/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "couloir",
+    "phonemes": [
+      "/k/",
+      "/u/",
+      "/l/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cour",
+    "phonemes": [
+      "/k/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "couronne",
+    "phonemes": [
+      "/k/",
+      "/u/",
+      "/r/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "cousin",
+    "phonemes": [
+      "/k/",
+      "/u/",
+      "/z/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "couteau",
+    "phonemes": [
+      "/k/",
+      "/u/",
+      "/t/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "crabe",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/a/",
+      "/b/"
+    ]
+  },
+  {
+    "label": "craie",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "crapaud",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/a/",
+      "/p/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "cravate",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/a/",
+      "/v/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "crepe",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/e/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "crevette",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/e/",
+      "/v/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "criquet",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/i/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "croissant",
+    "phonemes": [
+      "/k/",
+      "/r/",
+      "/wa/",
+      "/s/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "cube-1",
+    "phonemes": [
+      "/k/",
+      "/y/",
+      "/b/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "cuir",
+    "phonemes": [
+      "/k/",
+      "/ɥi/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "culotte",
+    "phonemes": [
+      "/k/",
+      "/y/",
+      "/l/",
+      "/o/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "cupcake",
+    "phonemes": [
+      "/k/",
+      "/y/",
+      "/p/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "cyan",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "cylindre",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/l/",
+      "/ɛ̃/",
+      "/d/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "cypres",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/p/",
+      "/r/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "datte",
+    "phonemes": [
+      "/d/",
+      "/a/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "de",
+    "phonemes": [
+      "/d/"
+    ]
+  },
+  {
+    "label": "dent",
+    "phonemes": [
+      "/d/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "dentifrice",
+    "phonemes": [
+      "/d/",
+      "/ɑ̃/",
+      "/t/",
+      "/i/",
+      "/f/",
+      "/r/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "deodorant",
+    "phonemes": [
+      "/d/",
+      "/e/",
+      "/o/",
+      "/r/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "desert",
+    "phonemes": [
+      "/d/",
+      "/e/",
+      "/z/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "devant-la-boutique",
+    "phonemes": [
+      "/d/",
+      "/e/",
+      "/v/",
+      "/ɑ̃/",
+      "/t/",
+      "/l/",
+      "/a/",
+      "/b/",
+      "/u/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "devant-le-fleuriste",
+    "phonemes": [
+      "/d/",
+      "/e/",
+      "/v/",
+      "/ɑ̃/",
+      "/t/",
+      "/l/",
+      "/f/",
+      "/y/",
+      "/r/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "devant-le-restaurant",
+    "phonemes": [
+      "/d/",
+      "/e/",
+      "/v/",
+      "/ɑ̃/",
+      "/t/",
+      "/l/",
+      "/r/",
+      "/s/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "dictionnaire",
+    "phonemes": [
+      "/d/",
+      "/i/",
+      "/k/",
+      "/t/",
+      "/o/",
+      "/n/",
+      "/ɛ/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "dimanche",
+    "phonemes": [
+      "/d/",
+      "/i/",
+      "/m/",
+      "/ɑ̃/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "dinde",
+    "phonemes": [
+      "/d/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "donut",
+    "phonemes": [
+      "/d/",
+      "/o/",
+      "/n/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "douche",
+    "phonemes": [
+      "/d/",
+      "/u/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "dune",
+    "phonemes": [
+      "/d/",
+      "/y/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "eau",
+    "phonemes": [
+      "/o/"
+    ]
+  },
+  {
+    "label": "echalotte",
+    "phonemes": [
+      "/e/",
+      "/ʃ/",
+      "/a/",
+      "/l/",
+      "/o/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "echarpe",
+    "phonemes": [
+      "/e/",
+      "/ʃ/",
+      "/a/",
+      "/r/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "echelle",
+    "phonemes": [
+      "/e/",
+      "/ʃ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "ecouteurs",
+    "phonemes": [
+      "/e/",
+      "/k/",
+      "/u/",
+      "/t/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "ecureuil",
+    "phonemes": [
+      "/e/",
+      "/k/",
+      "/y/",
+      "/r/",
+      "/ø/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "elastique",
+    "phonemes": [
+      "/e/",
+      "/l/",
+      "/a/",
+      "/s/",
+      "/t/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "elastique-1",
+    "phonemes": [
+      "/e/",
+      "/l/",
+      "/a/",
+      "/s/",
+      "/t/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "electricien",
+    "phonemes": [
+      "/e/",
+      "/l/",
+      "/k/",
+      "/t/",
+      "/r/",
+      "/i/",
+      "/s/",
+      "/jɛ̃/"
+    ]
+  },
+  {
+    "label": "enceinte",
+    "phonemes": [
+      "/ɑ̃/",
+      "/s/",
+      "/ɛ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "encre",
+    "phonemes": [
+      "/ɑ̃/",
+      "/k/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "entonnoir",
+    "phonemes": [
+      "/ɑ̃/",
+      "/t/",
+      "/o/",
+      "/n/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "enveloppe",
+    "phonemes": [
+      "/ɑ̃/",
+      "/v/",
+      "/e/",
+      "/l/",
+      "/o/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "eponge",
+    "phonemes": [
+      "/e/",
+      "/p/",
+      "/ɔ̃/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "erable",
+    "phonemes": [
+      "/e/",
+      "/r/",
+      "/a/",
+      "/b/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "escargot",
+    "phonemes": [
+      "/e/",
+      "/s/",
+      "/k/",
+      "/a/",
+      "/r/",
+      "/g/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "etang",
+    "phonemes": [
+      "/e/",
+      "/t/",
+      "/ɑ̃/",
+      "/g/"
+    ]
+  },
+  {
+    "label": "etoile",
+    "phonemes": [
+      "/e/",
+      "/t/",
+      "/wa/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "etoile-de-mer",
+    "phonemes": [
+      "/e/",
+      "/t/",
+      "/wa/",
+      "/l/",
+      "/d/",
+      "/m/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "facteur",
+    "phonemes": [
+      "/f/",
+      "/a/",
+      "/k/",
+      "/t/",
+      "/e/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "falaise",
+    "phonemes": [
+      "/f/",
+      "/a/",
+      "/l/",
+      "/ɛ/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "faucon",
+    "phonemes": [
+      "/f/",
+      "/o/",
+      "/k/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "fauteuil",
+    "phonemes": [
+      "/f/",
+      "/o/",
+      "/t/",
+      "/ø/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "fenetre",
+    "phonemes": [
+      "/f/",
+      "/e/",
+      "/n/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "fenouil",
+    "phonemes": [
+      "/f/",
+      "/e/",
+      "/n/",
+      "/w/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "fermier",
+    "phonemes": [
+      "/f/",
+      "/e/",
+      "/r/",
+      "/m/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "ferry",
+    "phonemes": [
+      "/f/",
+      "/e/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "figue",
+    "phonemes": [
+      "/f/",
+      "/i/",
+      "/g/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "filet",
+    "phonemes": [
+      "/f/",
+      "/i/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "flamant-rose",
+    "phonemes": [
+      "/f/",
+      "/l/",
+      "/a/",
+      "/m/",
+      "/ɑ̃/",
+      "/t/",
+      "/r/",
+      "/o/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "flan",
+    "phonemes": [
+      "/f/",
+      "/l/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "fleche",
+    "phonemes": [
+      "/f/",
+      "/l/",
+      "/e/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "fleuriste",
+    "phonemes": [
+      "/f/",
+      "/l/",
+      "/e/",
+      "/y/",
+      "/r/",
+      "/i/",
+      "/s/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "flocon",
+    "phonemes": [
+      "/f/",
+      "/l/",
+      "/o/",
+      "/k/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "foulard",
+    "phonemes": [
+      "/f/",
+      "/u/",
+      "/l/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "four",
+    "phonemes": [
+      "/f/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "fourmi",
+    "phonemes": [
+      "/f/",
+      "/u/",
+      "/r/",
+      "/m/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "frites",
+    "phonemes": [
+      "/f/",
+      "/r/",
+      "/i/",
+      "/t/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "fuite",
+    "phonemes": [
+      "/f/",
+      "/ɥi/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "galaxie",
+    "phonemes": [
+      "/g/",
+      "/a/",
+      "/l/",
+      "/ks/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "gant-boxe",
+    "phonemes": [
+      "/g/",
+      "/ɑ̃/",
+      "/t/",
+      "/b/",
+      "/o/",
+      "/ks/"
+    ]
+  },
+  {
+    "label": "gants",
+    "phonemes": [
+      "/g/",
+      "/ɑ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "gauche",
+    "phonemes": [
+      "/g/",
+      "/o/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "gaufre",
+    "phonemes": [
+      "/g/",
+      "/o/",
+      "/f/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "gecko",
+    "phonemes": [
+      "/ʒ/",
+      "/e/",
+      "/k/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "glace",
+    "phonemes": [
+      "/g/",
+      "/l/",
+      "/a/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "glacier",
+    "phonemes": [
+      "/g/",
+      "/l/",
+      "/a/",
+      "/s/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "globe",
+    "phonemes": [
+      "/g/",
+      "/l/",
+      "/o/",
+      "/b/"
+    ]
+  },
+  {
+    "label": "glycine",
+    "phonemes": [
+      "/g/",
+      "/l/",
+      "/i/",
+      "/s/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "gouffre",
+    "phonemes": [
+      "/g/",
+      "/u/",
+      "/f/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "gouter",
+    "phonemes": [
+      "/g/",
+      "/u/",
+      "/t/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "goutte",
+    "phonemes": [
+      "/g/",
+      "/u/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "grand",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "grange",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/ɑ̃/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "gratin",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/a/",
+      "/t/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "gratte-ciel",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/s/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "grenade",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/e/",
+      "/n/",
+      "/a/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "grille-pain",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/j/",
+      "/e/",
+      "/p/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "gris",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "groseille",
+    "phonemes": [
+      "/g/",
+      "/r/",
+      "/o/",
+      "/z/",
+      "/ɛ/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "guepe",
+    "phonemes": [
+      "/g/",
+      "/y/",
+      "/e/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "haltere",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/l/",
+      "/t/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "halteres",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/l/",
+      "/t/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "hamac",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/m/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "hamburger",
+    "phonemes": [
+      "/∅/",
+      "/ɑ̃/",
+      "/b/",
+      "/y/",
+      "/r/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "hanneton",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/n/",
+      "/e/",
+      "/t/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "haricot",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/k/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "haricot-vert",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/k/",
+      "/o/",
+      "/t/",
+      "/v/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "harmonica",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/r/",
+      "/m/",
+      "/o/",
+      "/n/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "harpe",
+    "phonemes": [
+      "/∅/",
+      "/a/",
+      "/r/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "helicoptere",
+    "phonemes": [
+      "/∅/",
+      "/e/",
+      "/l/",
+      "/i/",
+      "/k/",
+      "/o/",
+      "/p/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "herisson",
+    "phonemes": [
+      "/∅/",
+      "/e/",
+      "/r/",
+      "/i/",
+      "/s/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "hetre",
+    "phonemes": [
+      "/∅/",
+      "/e/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "hexagone",
+    "phonemes": [
+      "/∅/",
+      "/e/",
+      "/ks/",
+      "/a/",
+      "/g/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "hippocampe",
+    "phonemes": [
+      "/∅/",
+      "/i/",
+      "/p/",
+      "/o/",
+      "/k/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "hirondelle",
+    "phonemes": [
+      "/∅/",
+      "/i/",
+      "/r/",
+      "/ɔ̃/",
+      "/d/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "hiver",
+    "phonemes": [
+      "/∅/",
+      "/i/",
+      "/v/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "homard",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/m/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "horloge-00h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-01h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-01h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-02h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-05h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-07h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-07h25",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-07h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-08h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-08h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-08h35",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-08h45",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-08h56",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-09h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-09h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-09h25",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-09h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-10h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-10h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-10h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h20",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h22",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h25",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h45",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-11h55",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h02",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h03",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h10",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-12h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-13h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-13h12",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-13h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-13h45",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-14h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-14h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-14h20",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-14h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-15h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-15h05",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-15h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-15h50",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-16h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-16h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-16h40",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-17h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-17h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-17h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-18h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-18h15",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-18h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-18h45",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-19h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-19h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-20h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-20h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-21h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-22h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-22h30",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "horloge-23h00",
+    "phonemes": [
+      "/∅/",
+      "/o/",
+      "/r/",
+      "/l/",
+      "/ʒ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "huile",
+    "phonemes": [
+      "/∅/",
+      "/ɥi/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "huitre",
+    "phonemes": [
+      "/∅/",
+      "/ɥi/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "hygiene",
+    "phonemes": [
+      "/∅/",
+      "/i/",
+      "/ʒ/",
+      "/jɛ̃/"
+    ]
+  },
+  {
+    "label": "igloo",
+    "phonemes": [
+      "/i/",
+      "/g/",
+      "/l/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "iguane",
+    "phonemes": [
+      "/i/",
+      "/g/",
+      "/y/",
+      "/a/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "imprimante",
+    "phonemes": [
+      "/ɛ̃/",
+      "/p/",
+      "/r/",
+      "/i/",
+      "/m/",
+      "/ɑ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "infusion",
+    "phonemes": [
+      "/ɛ̃/",
+      "/f/",
+      "/y/",
+      "/z/",
+      "/i/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "iris",
+    "phonemes": [
+      "/i/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "jacinthe",
+    "phonemes": [
+      "/ʒ/",
+      "/a/",
+      "/s/",
+      "/ɛ̃/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "jaune",
+    "phonemes": [
+      "/ʒ/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "javelot",
+    "phonemes": [
+      "/ʒ/",
+      "/a/",
+      "/v/",
+      "/e/",
+      "/l/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "jeudi",
+    "phonemes": [
+      "/ʒ/",
+      "/ø/",
+      "/d/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "jeune",
+    "phonemes": [
+      "/ʒ/",
+      "/ø/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "jonquille",
+    "phonemes": [
+      "/ʒ/",
+      "/ɔ̃/",
+      "/k/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "jour",
+    "phonemes": [
+      "/ʒ/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "journaliste",
+    "phonemes": [
+      "/ʒ/",
+      "/u/",
+      "/r/",
+      "/n/",
+      "/a/",
+      "/l/",
+      "/i/",
+      "/s/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "juge",
+    "phonemes": [
+      "/ʒ/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "juillet",
+    "phonemes": [
+      "/ʒ/",
+      "/ɥi/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "juin",
+    "phonemes": [
+      "/ʒ/",
+      "/ɥi/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "jumelles",
+    "phonemes": [
+      "/ʒ/",
+      "/y/",
+      "/m/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "jupe",
+    "phonemes": [
+      "/ʒ/",
+      "/y/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "jus-d-orange",
+    "phonemes": [
+      "/ʒ/",
+      "/y/",
+      "/s/",
+      "/d/",
+      "/o/",
+      "/r/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "kaki",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "kaleidoscope",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/l/",
+      "/ɛ/",
+      "/d/",
+      "/o/",
+      "/s/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "laine",
+    "phonemes": [
+      "/l/",
+      "/ɛ/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "laitue",
+    "phonemes": [
+      "/l/",
+      "/ɛ/",
+      "/t/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "lampe",
+    "phonemes": [
+      "/l/",
+      "/ɑ̃/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "lampe-de-poche",
+    "phonemes": [
+      "/l/",
+      "/ɑ̃/",
+      "/p/",
+      "/e/",
+      "/d/",
+      "/o/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "langue",
+    "phonemes": [
+      "/l/",
+      "/ɑ̃/",
+      "/g/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "lavabo",
+    "phonemes": [
+      "/l/",
+      "/a/",
+      "/v/",
+      "/b/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "lavage-des-mains",
+    "phonemes": [
+      "/l/",
+      "/a/",
+      "/v/",
+      "/ʒ/",
+      "/e/",
+      "/d/",
+      "/s/",
+      "/m/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "lavande",
+    "phonemes": [
+      "/l/",
+      "/a/",
+      "/v/",
+      "/ɑ̃/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "lave-vaisselle",
+    "phonemes": [
+      "/l/",
+      "/a/",
+      "/v/",
+      "/e/",
+      "/ɛ/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "legging",
+    "phonemes": [
+      "/l/",
+      "/e/",
+      "/g/",
+      "/ʒ/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "lentille",
+    "phonemes": [
+      "/l/",
+      "/ɑ̃/",
+      "/t/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "lezard",
+    "phonemes": [
+      "/l/",
+      "/e/",
+      "/z/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "libellule",
+    "phonemes": [
+      "/l/",
+      "/i/",
+      "/b/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "limace",
+    "phonemes": [
+      "/l/",
+      "/i/",
+      "/m/",
+      "/a/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "limonade",
+    "phonemes": [
+      "/l/",
+      "/i/",
+      "/m/",
+      "/o/",
+      "/n/",
+      "/a/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "litchi",
+    "phonemes": [
+      "/l/",
+      "/i/",
+      "/t/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "losange",
+    "phonemes": [
+      "/l/",
+      "/o/",
+      "/z/",
+      "/ɑ̃/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "loupe",
+    "phonemes": [
+      "/l/",
+      "/u/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "luciole",
+    "phonemes": [
+      "/l/",
+      "/y/",
+      "/s/",
+      "/i/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "lunettes",
+    "phonemes": [
+      "/l/",
+      "/y/",
+      "/n/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "lunettes-de-soleil",
+    "phonemes": [
+      "/l/",
+      "/y/",
+      "/n/",
+      "/e/",
+      "/t/",
+      "/s/",
+      "/d/",
+      "/o/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "lys",
+    "phonemes": [
+      "/l/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "macaron",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/k/",
+      "/r/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "machine-a-laver",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/ʃ/",
+      "/i/",
+      "/n/",
+      "/e/",
+      "/l/",
+      "/v/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "macon",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/k/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "madeleine",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/d/",
+      "/e/",
+      "/l/",
+      "/ɛ/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "maillot",
+    "phonemes": [
+      "/m/",
+      "/ɛ/",
+      "/l/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "maillot-de-bain",
+    "phonemes": [
+      "/m/",
+      "/ɛ/",
+      "/l/",
+      "/o/",
+      "/t/",
+      "/d/",
+      "/e/",
+      "/b/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "main",
+    "phonemes": [
+      "/m/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "mais",
+    "phonemes": [
+      "/m/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "mandarine",
+    "phonemes": [
+      "/m/",
+      "/ɑ̃/",
+      "/d/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "manette",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/n/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "mante-religieuse",
+    "phonemes": [
+      "/m/",
+      "/ɑ̃/",
+      "/t/",
+      "/e/",
+      "/r/",
+      "/l/",
+      "/i/",
+      "/ʒ/",
+      "/ø/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "manteau",
+    "phonemes": [
+      "/m/",
+      "/ɑ̃/",
+      "/t/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "maracas",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "marais",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "marguerite",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/g/",
+      "/y/",
+      "/e/",
+      "/i/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "marionnette",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/o/",
+      "/n/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "marmite",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/i/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "marqueur",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/k/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "marron",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "marronnier",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/o/",
+      "/n/",
+      "/i/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "marteau",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "matin",
+    "phonemes": [
+      "/m/",
+      "/a/",
+      "/t/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "mecanicien",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/k/",
+      "/a/",
+      "/n/",
+      "/i/",
+      "/s/",
+      "/jɛ̃/"
+    ]
+  },
+  {
+    "label": "medaille",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/d/",
+      "/ɛ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "meduse",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/d/",
+      "/y/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "mer",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "meringue",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/r/",
+      "/ɛ̃/",
+      "/g/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "mesange",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/z/",
+      "/ɑ̃/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "metal",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/t/",
+      "/a/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "metro",
+    "phonemes": [
+      "/m/",
+      "/e/",
+      "/t/",
+      "/r/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "micro-ondes",
+    "phonemes": [
+      "/m/",
+      "/i/",
+      "/k/",
+      "/r/",
+      "/o/",
+      "/ɔ̃/",
+      "/d/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "miel",
+    "phonemes": [
+      "/m/",
+      "/i/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "milkshake",
+    "phonemes": [
+      "/m/",
+      "/i/",
+      "/l/",
+      "/k/",
+      "/s/",
+      "/∅/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "mille-feuille",
+    "phonemes": [
+      "/m/",
+      "/j/",
+      "/e/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "minuit",
+    "phonemes": [
+      "/m/",
+      "/i/",
+      "/n/",
+      "/ɥi/"
+    ]
+  },
+  {
+    "label": "moineau",
+    "phonemes": [
+      "/m/",
+      "/wa/",
+      "/n/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "montgolfiere",
+    "phonemes": [
+      "/m/",
+      "/ɔ̃/",
+      "/t/",
+      "/g/",
+      "/o/",
+      "/l/",
+      "/f/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "montre",
+    "phonemes": [
+      "/m/",
+      "/ɔ̃/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "montre-connectee",
+    "phonemes": [
+      "/m/",
+      "/ɔ̃/",
+      "/t/",
+      "/r/",
+      "/e/",
+      "/k/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "morceau",
+    "phonemes": [
+      "/m/",
+      "/o/",
+      "/r/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "morse",
+    "phonemes": [
+      "/m/",
+      "/o/",
+      "/r/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "mouche",
+    "phonemes": [
+      "/m/",
+      "/u/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "mouette",
+    "phonemes": [
+      "/m/",
+      "/w/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "moulin",
+    "phonemes": [
+      "/m/",
+      "/u/",
+      "/l/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "moustique",
+    "phonemes": [
+      "/m/",
+      "/u/",
+      "/s/",
+      "/t/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "muffin",
+    "phonemes": [
+      "/m/",
+      "/y/",
+      "/f/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "muguet",
+    "phonemes": [
+      "/m/",
+      "/y/",
+      "/g/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "mur",
+    "phonemes": [
+      "/m/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "navet",
+    "phonemes": [
+      "/n/",
+      "/a/",
+      "/v/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "nenuphar",
+    "phonemes": [
+      "/n/",
+      "/e/",
+      "/y/",
+      "/f/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "neveu",
+    "phonemes": [
+      "/n/",
+      "/e/",
+      "/v/",
+      "/ø/"
+    ]
+  },
+  {
+    "label": "nez",
+    "phonemes": [
+      "/n/",
+      "/e/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "noeud-papillon",
+    "phonemes": [
+      "/n/",
+      "/ø/",
+      "/d/",
+      "/p/",
+      "/a/",
+      "/j/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "noir",
+    "phonemes": [
+      "/n/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "noisetier",
+    "phonemes": [
+      "/n/",
+      "/wa/",
+      "/z/",
+      "/e/",
+      "/t/",
+      "/i/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "noix-de-coco",
+    "phonemes": [
+      "/n/",
+      "/wa/",
+      "/ks/",
+      "/d/",
+      "/e/",
+      "/k/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "nylon",
+    "phonemes": [
+      "/n/",
+      "/i/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "oeil",
+    "phonemes": [
+      "/o/",
+      "/ɛ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "oeillet",
+    "phonemes": [
+      "/o/",
+      "/ɛ/",
+      "/j/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "oeuf",
+    "phonemes": [
+      "/ø/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "oie",
+    "phonemes": [
+      "/wa/"
+    ]
+  },
+  {
+    "label": "olivier",
+    "phonemes": [
+      "/o/",
+      "/l/",
+      "/i/",
+      "/v/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "orchidee",
+    "phonemes": [
+      "/o/",
+      "/r/",
+      "/ʃ/",
+      "/i/",
+      "/d/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "ordinateur",
+    "phonemes": [
+      "/o/",
+      "/r/",
+      "/d/",
+      "/i/",
+      "/n/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "ordinateur-portable",
+    "phonemes": [
+      "/o/",
+      "/r/",
+      "/d/",
+      "/i/",
+      "/n/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/y/",
+      "/p/",
+      "/b/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "otarie",
+    "phonemes": [
+      "/o/",
+      "/t/",
+      "/a/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "oursin",
+    "phonemes": [
+      "/u/",
+      "/r/",
+      "/s/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "ovale",
+    "phonemes": [
+      "/o/",
+      "/v/",
+      "/a/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "page",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "pain",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "palmier",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/l/",
+      "/m/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pamplemousse",
+    "phonemes": [
+      "/p/",
+      "/ɑ̃/",
+      "/l/",
+      "/e/",
+      "/m/",
+      "/u/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "panier-de-basket",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/n/",
+      "/i/",
+      "/e/",
+      "/r/",
+      "/d/",
+      "/b/",
+      "/s/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "pantalon",
+    "phonemes": [
+      "/p/",
+      "/ɑ̃/",
+      "/t/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "paon",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "papaye",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "papier",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "papier-toilette",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/i/",
+      "/e/",
+      "/r/",
+      "/t/",
+      "/wa/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "paquebot",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/k/",
+      "/e/",
+      "/b/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "paquerette",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/k/",
+      "/e/",
+      "/r/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "parapluie",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/r/",
+      "/l/",
+      "/ɥi/"
+    ]
+  },
+  {
+    "label": "parasol",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/r/",
+      "/z/",
+      "/o/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "passoire",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/s/",
+      "/wa/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "patate-douce",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/u/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "pates",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/t/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "patins-a-roulettes",
+    "phonemes": [
+      "/p/",
+      "/a/",
+      "/t/",
+      "/ɛ̃/",
+      "/s/",
+      "/r/",
+      "/u/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "peche",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "pecheur",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/ʃ/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "peigne",
+    "phonemes": [
+      "/p/",
+      "/ɛ/",
+      "/ɲ/"
+    ]
+  },
+  {
+    "label": "peinture",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/",
+      "/t/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pelican",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/l/",
+      "/i/",
+      "/k/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "pelle",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "peluche",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/l/",
+      "/y/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "penderie",
+    "phonemes": [
+      "/p/",
+      "/ɑ̃/",
+      "/d/",
+      "/e/",
+      "/r/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "pentagone",
+    "phonemes": [
+      "/p/",
+      "/ɑ̃/",
+      "/t/",
+      "/a/",
+      "/g/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "perroquet",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/r/",
+      "/o/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "petit-pois",
+    "phonemes": [
+      "/p/",
+      "/e/",
+      "/t/",
+      "/i/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "peuplier",
+    "phonemes": [
+      "/p/",
+      "/ø/",
+      "/l/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pharmacien",
+    "phonemes": [
+      "/f/",
+      "/a/",
+      "/r/",
+      "/m/",
+      "/s/",
+      "/jɛ̃/"
+    ]
+  },
+  {
+    "label": "photographe",
+    "phonemes": [
+      "/f/",
+      "/o/",
+      "/t/",
+      "/g/",
+      "/r/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "photographie",
+    "phonemes": [
+      "/f/",
+      "/o/",
+      "/t/",
+      "/g/",
+      "/r/",
+      "/a/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "pie",
+    "phonemes": [
+      "/p/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "pied",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "pieuvre",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/ø/",
+      "/v/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pigeon",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/ʒ/",
+      "/e/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "pile",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "pilote",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/l/",
+      "/o/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "pin",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "pinceau",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/",
+      "/s/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "pingouin",
+    "phonemes": [
+      "/p/",
+      "/ɛ̃/",
+      "/g/",
+      "/w/"
+    ]
+  },
+  {
+    "label": "pissenlit",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/s/",
+      "/ɑ̃/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "pivoine",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/v/",
+      "/wa/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "pizza",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/z/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "plage",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/a/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "planche",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɑ̃/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "planche-a-decouper",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɑ̃/",
+      "/ʃ/",
+      "/e/",
+      "/a/",
+      "/d/",
+      "/k/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "planche-de-surf",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɑ̃/",
+      "/ʃ/",
+      "/e/",
+      "/d/",
+      "/s/",
+      "/y/",
+      "/r/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "planete",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/a/",
+      "/n/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "plastique",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/a/",
+      "/s/",
+      "/t/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "pluie",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/ɥi/"
+    ]
+  },
+  {
+    "label": "plume",
+    "phonemes": [
+      "/p/",
+      "/l/",
+      "/y/",
+      "/m/"
+    ]
+  },
+  {
+    "label": "pois-chiche",
+    "phonemes": [
+      "/p/",
+      "/wa/",
+      "/s/",
+      "/ʃ/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "policier",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/l/",
+      "/i/",
+      "/s/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pommier",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/m/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pont",
+    "phonemes": [
+      "/p/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "porte-cles",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/k/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "porte-documents",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/k/",
+      "/y/",
+      "/m/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "porte-manteau",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/m/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "porte-mine",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/m/",
+      "/i/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "portefeuille",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/f/",
+      "/j/"
+    ]
+  },
+  {
+    "label": "post-it",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/s/",
+      "/t/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "poste",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/s/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "potiron",
+    "phonemes": [
+      "/p/",
+      "/o/",
+      "/t/",
+      "/i/",
+      "/r/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "poubelle",
+    "phonemes": [
+      "/p/",
+      "/u/",
+      "/b/",
+      "/e/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "poulet",
+    "phonemes": [
+      "/p/",
+      "/u/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "poupee",
+    "phonemes": [
+      "/p/",
+      "/u/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "prairie",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/ɛ/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "prix-1-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-10-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-10-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-10-fr",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "prix-100-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-11-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-12-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-123-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-13-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-14-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-15-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-150-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-16-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-17-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-19-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-199-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-2-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-2-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-20-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-200-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-2000-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-223-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-25-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-28-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-29-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-299-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-3-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-3-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-30-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-30-eur-ht",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/",
+      "/∅/"
+    ]
+  },
+  {
+    "label": "prix-32-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-323-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-35-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-38-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-39-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-40-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-45-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-45-eur-ht",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/",
+      "/∅/"
+    ]
+  },
+  {
+    "label": "prix-48-eur-ht",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/",
+      "/∅/"
+    ]
+  },
+  {
+    "label": "prix-499-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-5-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-5-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-5-fr",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "prix-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-500-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-59-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-60-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-7-50-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-7-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-8-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-8-fr",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/f/"
+    ]
+  },
+  {
+    "label": "prix-89-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prix-9-eur",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/i/",
+      "/ks/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "prune",
+    "phonemes": [
+      "/p/",
+      "/r/",
+      "/y/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "pull",
+    "phonemes": [
+      "/p/",
+      "/y/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "punaise",
+    "phonemes": [
+      "/p/",
+      "/y/",
+      "/n/",
+      "/ɛ/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "pupitre",
+    "phonemes": [
+      "/p/",
+      "/y/",
+      "/i/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "pyjama",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/ʒ/",
+      "/a/",
+      "/m/"
+    ]
+  },
+  {
+    "label": "pyramide",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/r/",
+      "/a/",
+      "/m/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "python",
+    "phonemes": [
+      "/p/",
+      "/i/",
+      "/t/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "radio",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/d/",
+      "/i/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "raie",
+    "phonemes": [
+      "/r/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "randonnee",
+    "phonemes": [
+      "/r/",
+      "/ɑ̃/",
+      "/d/",
+      "/o/",
+      "/n/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "rapporteur",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/p/",
+      "/o/",
+      "/t/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "raquette-1",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/k/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "raquette-2",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/k/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "rasoir",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/z/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "rateau",
+    "phonemes": [
+      "/r/",
+      "/a/",
+      "/t/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "rectangle",
+    "phonemes": [
+      "/r/",
+      "/e/",
+      "/k/",
+      "/t/",
+      "/ɑ̃/",
+      "/g/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "refrigerateur",
+    "phonemes": [
+      "/r/",
+      "/e/",
+      "/f/",
+      "/i/",
+      "/ʒ/",
+      "/a/",
+      "/t/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "regle",
+    "phonemes": [
+      "/r/",
+      "/e/",
+      "/g/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "restaurant",
+    "phonemes": [
+      "/r/",
+      "/e/",
+      "/s/",
+      "/t/",
+      "/o/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "reveil",
+    "phonemes": [
+      "/r/",
+      "/e/",
+      "/v/",
+      "/ɛ/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "rideau",
+    "phonemes": [
+      "/r/",
+      "/i/",
+      "/d/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "riz",
+    "phonemes": [
+      "/r/",
+      "/i/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "robe",
+    "phonemes": [
+      "/r/",
+      "/o/",
+      "/b/"
+    ]
+  },
+  {
+    "label": "rocher",
+    "phonemes": [
+      "/r/",
+      "/o/",
+      "/ʃ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "rouge",
+    "phonemes": [
+      "/r/",
+      "/u/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "ruisseau",
+    "phonemes": [
+      "/r/",
+      "/ɥi/",
+      "/s/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "sac-a-main",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/k/",
+      "/m/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "sac-de-sport",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/k/",
+      "/d/",
+      "/e/",
+      "/p/",
+      "/o/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "sac-sport",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/k/",
+      "/p/",
+      "/o/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "salamandre",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/l/",
+      "/m/",
+      "/ɑ̃/",
+      "/d/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "salon",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "sandales",
+    "phonemes": [
+      "/s/",
+      "/ɑ̃/",
+      "/d/",
+      "/a/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "satellite",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/l/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "saturne",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/t/",
+      "/y/",
+      "/r/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "saule-pleureur",
+    "phonemes": [
+      "/s/",
+      "/o/",
+      "/l/",
+      "/e/",
+      "/p/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "sauterelle",
+    "phonemes": [
+      "/s/",
+      "/o/",
+      "/t/",
+      "/e/",
+      "/r/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "savon",
+    "phonemes": [
+      "/s/",
+      "/a/",
+      "/v/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "scarabee",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/a/",
+      "/r/",
+      "/b/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "scientifique",
+    "phonemes": [
+      "/s/",
+      "/jɛ̃/",
+      "/t/",
+      "/i/",
+      "/f/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "scooter",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/o/",
+      "/t/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "scorpion",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/o/",
+      "/r/",
+      "/p/",
+      "/i/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "scotch",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/o/",
+      "/t/",
+      "/ʃ/"
+    ]
+  },
+  {
+    "label": "seau",
+    "phonemes": [
+      "/s/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "seche-cheveux",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/ʃ/",
+      "/v/",
+      "/ø/"
+    ]
+  },
+  {
+    "label": "semaine",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/m/",
+      "/ɛ/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "sentier",
+    "phonemes": [
+      "/s/",
+      "/ɑ̃/",
+      "/t/",
+      "/i/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "sequoia",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/k/",
+      "/wa/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "serveuse",
+    "phonemes": [
+      "/s/",
+      "/e/",
+      "/r/",
+      "/v/",
+      "/ø/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "short",
+    "phonemes": [
+      "/s/",
+      "/∅/",
+      "/o/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "sifflet",
+    "phonemes": [
+      "/s/",
+      "/i/",
+      "/f/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "skateboard",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/a/",
+      "/t/",
+      "/e/",
+      "/b/",
+      "/o/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "ski",
+    "phonemes": [
+      "/s/",
+      "/k/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "smartphone",
+    "phonemes": [
+      "/s/",
+      "/m/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/f/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "smoothie",
+    "phonemes": [
+      "/s/",
+      "/m/",
+      "/o/",
+      "/t/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "snowboard",
+    "phonemes": [
+      "/s/",
+      "/n/",
+      "/o/",
+      "/w/",
+      "/b/",
+      "/a/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "soda",
+    "phonemes": [
+      "/s/",
+      "/o/",
+      "/d/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "soeur",
+    "phonemes": [
+      "/s/",
+      "/ø/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "soie",
+    "phonemes": [
+      "/s/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "sortie-secours",
+    "phonemes": [
+      "/s/",
+      "/o/",
+      "/r/",
+      "/t/",
+      "/i/",
+      "/e/",
+      "/k/",
+      "/u/"
+    ]
+  },
+  {
+    "label": "soupe",
+    "phonemes": [
+      "/s/",
+      "/u/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "source",
+    "phonemes": [
+      "/s/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "souris-grise",
+    "phonemes": [
+      "/s/",
+      "/u/",
+      "/r/",
+      "/i/",
+      "/g/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "sous-marin",
+    "phonemes": [
+      "/s/",
+      "/u/",
+      "/m/",
+      "/a/",
+      "/r/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "soutien-gorge",
+    "phonemes": [
+      "/s/",
+      "/u/",
+      "/t/",
+      "/jɛ̃/",
+      "/g/",
+      "/o/",
+      "/r/",
+      "/ʒ/"
+    ]
+  },
+  {
+    "label": "sphere",
+    "phonemes": [
+      "/s/",
+      "/f/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "stade",
+    "phonemes": [
+      "/s/",
+      "/t/",
+      "/a/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "station-spatiale",
+    "phonemes": [
+      "/s/",
+      "/t/",
+      "/a/",
+      "/sjɔ̃/",
+      "/p/",
+      "/i/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "stylo-plume",
+    "phonemes": [
+      "/s/",
+      "/t/",
+      "/i/",
+      "/l/",
+      "/o/",
+      "/p/",
+      "/y/",
+      "/m/"
+    ]
+  },
+  {
+    "label": "sucette",
+    "phonemes": [
+      "/s/",
+      "/y/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "surligneur",
+    "phonemes": [
+      "/s/",
+      "/y/",
+      "/r/",
+      "/l/",
+      "/i/",
+      "/ɲ/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "t-shirt",
+    "phonemes": [
+      "/t/",
+      "/s/",
+      "/∅/",
+      "/i/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "table-de-nuit",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/b/",
+      "/l/",
+      "/e/",
+      "/d/",
+      "/n/",
+      "/ɥi/"
+    ]
+  },
+  {
+    "label": "tableau",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/b/",
+      "/l/",
+      "/o/"
+    ]
+  },
+  {
+    "label": "tablette",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/b/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "talon",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/l/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "tambour",
+    "phonemes": [
+      "/t/",
+      "/ɑ̃/",
+      "/b/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "tambourin",
+    "phonemes": [
+      "/t/",
+      "/ɑ̃/",
+      "/b/",
+      "/u/",
+      "/r/",
+      "/ɛ̃/"
+    ]
+  },
+  {
+    "label": "tampon",
+    "phonemes": [
+      "/t/",
+      "/ɑ̃/",
+      "/p/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "tapis-1",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/p/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "taxi",
+    "phonemes": [
+      "/t/",
+      "/a/",
+      "/ks/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "telecommande",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/l/",
+      "/k/",
+      "/o/",
+      "/m/",
+      "/ɑ̃/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "telepherique",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/l/",
+      "/f/",
+      "/r/",
+      "/i/",
+      "/k/"
+    ]
+  },
+  {
+    "label": "telephone",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/l/",
+      "/f/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "telescope",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/l/",
+      "/s/",
+      "/k/",
+      "/o/",
+      "/p/"
+    ]
+  },
+  {
+    "label": "television",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/l/",
+      "/v/",
+      "/i/",
+      "/z/",
+      "/ɔ̃/"
+    ]
+  },
+  {
+    "label": "tempete",
+    "phonemes": [
+      "/t/",
+      "/ɑ̃/",
+      "/p/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "tennis",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/n/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "tente",
+    "phonemes": [
+      "/t/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "tete",
+    "phonemes": [
+      "/t/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "the",
+    "phonemes": [
+      "/t/"
+    ]
+  },
+  {
+    "label": "the-glace",
+    "phonemes": [
+      "/t/",
+      "/e/",
+      "/g/",
+      "/l/",
+      "/a/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "timbre",
+    "phonemes": [
+      "/t/",
+      "/ɛ̃/",
+      "/b/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "tiramisu",
+    "phonemes": [
+      "/t/",
+      "/i/",
+      "/r/",
+      "/a/",
+      "/m/",
+      "/z/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "tisane",
+    "phonemes": [
+      "/t/",
+      "/i/",
+      "/z/",
+      "/a/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "toit",
+    "phonemes": [
+      "/t/",
+      "/wa/"
+    ]
+  },
+  {
+    "label": "tornade",
+    "phonemes": [
+      "/t/",
+      "/o/",
+      "/r/",
+      "/n/",
+      "/a/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "tortue-1",
+    "phonemes": [
+      "/t/",
+      "/o/",
+      "/r/",
+      "/y/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "toucan",
+    "phonemes": [
+      "/t/",
+      "/u/",
+      "/k/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "toupie",
+    "phonemes": [
+      "/t/",
+      "/u/",
+      "/p/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "tournesol",
+    "phonemes": [
+      "/t/",
+      "/u/",
+      "/r/",
+      "/n/",
+      "/e/",
+      "/z/",
+      "/o/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "tournevis",
+    "phonemes": [
+      "/t/",
+      "/u/",
+      "/r/",
+      "/n/",
+      "/e/",
+      "/v/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "tracteur",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/a/",
+      "/k/",
+      "/e/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "train-miniature",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/ɛ̃/",
+      "/m/",
+      "/i/",
+      "/n/",
+      "/a/",
+      "/y/"
+    ]
+  },
+  {
+    "label": "tram",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "tramway",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/ɑ̃/",
+      "/w/",
+      "/a/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "triangle",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/i/",
+      "/ɑ̃/",
+      "/g/",
+      "/l/"
+    ]
+  },
+  {
+    "label": "trombone",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/ɔ̃/",
+      "/b/",
+      "/o/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "trompette",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/ɔ̃/",
+      "/p/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "trophee",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/o/",
+      "/f/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "trottinette",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/o/",
+      "/i/",
+      "/n/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "trousse",
+    "phonemes": [
+      "/t/",
+      "/r/",
+      "/u/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "turquoise",
+    "phonemes": [
+      "/t/",
+      "/y/",
+      "/r/",
+      "/k/",
+      "/wa/",
+      "/z/"
+    ]
+  },
+  {
+    "label": "vallee",
+    "phonemes": [
+      "/v/",
+      "/a/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "velours",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/l/",
+      "/u/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "vent",
+    "phonemes": [
+      "/v/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "ventre",
+    "phonemes": [
+      "/v/",
+      "/ɑ̃/",
+      "/t/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "ver-de-terre",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/r/",
+      "/d/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "verre",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "vert",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "veste",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/s/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "veste-hiver",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/s/",
+      "/t/",
+      "/∅/",
+      "/i/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "veterinaire",
+    "phonemes": [
+      "/v/",
+      "/e/",
+      "/t/",
+      "/r/",
+      "/i/",
+      "/n/",
+      "/ɛ/"
+    ]
+  },
+  {
+    "label": "viande",
+    "phonemes": [
+      "/v/",
+      "/i/",
+      "/ɑ̃/",
+      "/d/"
+    ]
+  },
+  {
+    "label": "violet",
+    "phonemes": [
+      "/v/",
+      "/i/",
+      "/o/",
+      "/l/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "violette",
+    "phonemes": [
+      "/v/",
+      "/i/",
+      "/o/",
+      "/l/",
+      "/e/",
+      "/t/"
+    ]
+  },
+  {
+    "label": "violoncelle",
+    "phonemes": [
+      "/v/",
+      "/i/",
+      "/o/",
+      "/l/",
+      "/ɔ̃/",
+      "/s/",
+      "/e/"
+    ]
+  },
+  {
+    "label": "vitrine",
+    "phonemes": [
+      "/v/",
+      "/i/",
+      "/t/",
+      "/r/",
+      "/n/"
+    ]
+  },
+  {
+    "label": "voiture",
+    "phonemes": [
+      "/v/",
+      "/wa/",
+      "/t/",
+      "/y/",
+      "/r/"
+    ]
+  },
+  {
+    "label": "voiture-de-police",
+    "phonemes": [
+      "/v/",
+      "/wa/",
+      "/t/",
+      "/y/",
+      "/r/",
+      "/e/",
+      "/d/",
+      "/p/",
+      "/o/",
+      "/l/",
+      "/i/",
+      "/s/"
+    ]
+  },
+  {
+    "label": "voiture-miniature",
+    "phonemes": [
+      "/v/",
+      "/wa/",
+      "/t/",
+      "/y/",
+      "/r/",
+      "/e/",
+      "/m/",
+      "/i/",
+      "/n/",
+      "/a/"
+    ]
+  },
+  {
+    "label": "volant",
+    "phonemes": [
+      "/v/",
+      "/o/",
+      "/l/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "volcan",
+    "phonemes": [
+      "/v/",
+      "/o/",
+      "/l/",
+      "/k/",
+      "/ɑ̃/"
+    ]
+  },
+  {
+    "label": "volleyball",
+    "phonemes": [
+      "/v/",
+      "/o/",
+      "/l/",
+      "/e/",
+      "/i/",
+      "/b/",
+      "/a/"
+    ]
+  }
+]
