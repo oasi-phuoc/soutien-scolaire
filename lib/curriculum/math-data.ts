@@ -140,8 +140,8 @@ export const MATH_MODULES: MathModule[] = [
       sm("A9.2", "Variable et inconnue"),
       sm("A9.3", "Substitution"),
       sm("A9.4", "Réduction"),
-      sm("A9.5", "Développement simple"),
-      sm("A9.6", "Factorisation simple"),
+      sm("A9.5", "Développement"),
+      sm("A9.6", "Factorisation"),
     ],
   },
   {
