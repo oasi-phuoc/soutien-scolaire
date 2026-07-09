@@ -1,0 +1,79 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { CLASS_LEVELS, groupClassesByLevel, type ClassLevelCode } from "@/lib/suivi/class-levels";
+import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
+
+export type SuiviLevelClassItem = {
+  label: string;
+  student_count?: number;
+};
+
+export function SuiviLevelBlocks({
+  classes,
+  classHref = (label) => `/suivi/classes/${encodeURIComponent(label)}`,
+}: {
+  classes: SuiviLevelClassItem[];
+  classHref?: (label: string) => string;
+}) {
+  const grouped = groupClassesByLevel(classes);
+  const [openLevel, setOpenLevel] = useState<ClassLevelCode | null>(null);
+
+  return (
+    <div className="space-y-2">
+      {CLASS_LEVELS.map((level) => {
+        const levelClasses = grouped[level];
+        const isOpen = openLevel === level;
+        return (
+          <div key={level}>
+            <button
+              type="button"
+              onClick={() => setOpenLevel(isOpen ? null : level)}
+              className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
+                isOpen
+                  ? "border-[var(--color-theme)] bg-[var(--color-theme-light)]/40 dark:bg-[var(--color-theme)]/10"
+                  : "border-[var(--color-border-default)] bg-white hover:bg-[var(--color-bg-secondary)] dark:bg-zinc-950 dark:hover:bg-zinc-900"
+              }`}
+              aria-expanded={isOpen}
+            >
+              <SuiviIconLoupe active={isOpen} />
+              <span className="text-lg font-bold tracking-wide text-zinc-900 dark:text-zinc-50">{level}</span>
+              <span className="ml-auto text-xs tabular-nums text-zinc-500">
+                {levelClasses.length} classe{levelClasses.length !== 1 ? "s" : ""}
+              </span>
+            </button>
+            {isOpen && (
+              <ul className="mt-1 space-y-0.5 border-l-2 border-[var(--color-theme)]/25 py-1 pl-3 ml-4">
+                {levelClasses.length === 0 ? (
+                  <li className="py-2 text-sm text-zinc-400">Aucune classe {level}.</li>
+                ) : (
+                  levelClasses.map((c) => (
+                    <li key={c.label} className="flex items-center gap-2 rounded-lg py-1.5 pr-2">
+                      <Link
+                        href={classHref(c.label)}
+                        className="inline-flex rounded-lg p-1.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        aria-label={`Voir la classe ${c.label}`}
+                        title={`Voir ${c.label}`}
+                      >
+                        <SuiviIconLoupe />
+                      </Link>
+                      <span className="min-w-0 flex-1 truncate text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                        {c.label}
+                      </span>
+                      {c.student_count != null && (
+                        <span className="shrink-0 text-xs tabular-nums text-zinc-400">
+                          {c.student_count} él.
+                        </span>
+                      )}
+                    </li>
+                  ))
+                )}
+              </ul>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}

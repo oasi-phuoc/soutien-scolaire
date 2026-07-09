@@ -116,6 +116,82 @@ export async function getSuiviContextAction(): Promise<SuiviContext | null> {
   };
 }
 
+export async function getAttributionClassesAction(): Promise<{
+  ok: boolean;
+  classes: TeacherClassRow[];
+  error?: string;
+}> {
+  const ctx = await getSuiviContextAction();
+  if (!ctx) return { ok: false, classes: [], error: "Non autorisé." };
+  if (!ctx.hasAccess) return { ok: false, classes: [], error: "Aucune classe affectée." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, classes: [], error: "Erreur serveur." };
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, classes: [], error: "Non authentifié." };
+
+  const { data: pupilRows, error: pupilErr } = await supabase
+    .from("profiles")
+    .select("classe")
+    .eq("role", "eleve")
+    .not("classe", "is", null);
+
+  if (pupilErr) return { ok: false, classes: [], error: pupilErr.message };
+
+  const labels = [
+    ...new Set(
+      (pupilRows ?? [])
+        .map((p) => String(p.classe ?? "").trim())
+        .filter(Boolean),
+    ),
+  ].sort((a, b) => a.localeCompare(b, "fr"));
+
+  if (labels.length === 0) return { ok: true, classes: [] };
+
+  const { data: schoolRows } = await supabase
+    .from("school_classes")
+    .select("id, label")
+    .in("label", labels);
+
+  const schoolByLabel = new Map(
+    (schoolRows ?? []).map((r) => [r.label as string, r.id as string]),
+  );
+
+  const { data: assignedRows } = await supabase
+    .from("class_teachers")
+    .select("class_id")
+    .eq("teacher_id", user.id);
+  const secondaryIds = new Set((assignedRows ?? []).map((r) => r.class_id as string));
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("primary_class_id")
+    .eq("id", user.id)
+    .maybeSingle();
+  const primaryId = (profile?.primary_class_id as string | null) ?? null;
+
+  const classes: TeacherClassRow[] = [];
+  for (const label of labels) {
+    const classId = schoolByLabel.get(label) ?? `label:${label}`;
+    const { count } = await supabase
+      .from("profiles")
+      .select("id", { count: "exact", head: true })
+      .eq("role", "eleve")
+      .eq("classe", label);
+
+    classes.push({
+      class_id: classId,
+      label,
+      student_count: count ?? 0,
+      is_primary: classId === primaryId,
+      is_secondary: secondaryIds.has(classId),
+    });
+  }
+
+  return { ok: true, classes };
+}
+
 export async function canAccessClassAction(classLabel: string): Promise<boolean> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return false;
@@ -347,6 +423,7 @@ export async function setPrimaryClassAction(classId: string): Promise<{ ok: bool
   if (error) return { ok: false, reason: error.message };
   revalidatePath("/");
   revalidatePath("/suivi");
+  revalidatePath("/suivi/attributions");
   return { ok: true };
 }
 
@@ -389,6 +466,7 @@ export async function toggleSecondaryClassAction(
 
   revalidatePath("/");
   revalidatePath("/suivi");
+  revalidatePath("/suivi/attributions");
   return { ok: true };
 }
 

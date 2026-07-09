@@ -1,49 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getClassRowByLabelAction,
   getSuiviContextAction,
   searchSuiviAction,
-  setPrimaryClassAction,
-  toggleSecondaryClassAction,
   type SuiviSearchStudent,
   type TeacherClassRow,
 } from "@/app/actions/suivi";
-import { SuiviClassDashboard } from "@/components/suivi/SuiviClassDashboard";
-
-function IconLoupe({ active }: { active?: boolean }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className={active ? "text-[var(--color-theme)]" : "text-zinc-400"}
-      aria-hidden
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
-  );
-}
-
-function isRealClassId(classId: string) {
-  return !classId.startsWith("label:");
-}
+import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
 
 export function SuiviClassesClient() {
+  const router = useRouter();
   const [classes, setClasses] = useState<TeacherClassRow[]>([]);
   const [extraClasses, setExtraClasses] = useState<TeacherClassRow[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [expandedLabel, setExpandedLabel] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [searchStudents, setSearchStudents] = useState<SuiviSearchStudent[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [isPending, startTransition] = useTransition();
 
   const reload = useCallback(async () => {
     const ctx = await getSuiviContextAction();
@@ -134,35 +110,8 @@ export function SuiviClassesClient() {
     }));
   }, [search, searchStudents]);
 
-  function setPrimary(classId: string) {
-    if (!isRealClassId(classId)) return;
-    startTransition(async () => {
-      await setPrimaryClassAction(classId);
-      await reload();
-    });
-  }
-
-  function toggleSecondary(classId: string, enabled: boolean) {
-    if (!isRealClassId(classId)) return;
-    startTransition(async () => {
-      await toggleSecondaryClassAction(classId, enabled);
-      await reload();
-      if (enabled) {
-        const rowRes = await getClassRowByLabelAction(
-          displayClasses.find((c) => c.class_id === classId)?.label ?? "",
-        );
-        if (rowRes.ok && rowRes.row && !classes.some((c) => c.label === rowRes.row!.label)) {
-          setExtraClasses((prev) => {
-            if (prev.some((c) => c.class_id === classId)) return prev;
-            return [...prev, rowRes.row!];
-          });
-        }
-      }
-    });
-  }
-
   function openClass(label: string) {
-    setExpandedLabel((cur) => (cur === label ? null : label));
+    router.push(`/suivi/classes/${encodeURIComponent(label)}`);
   }
 
   if (error) {
@@ -202,10 +151,7 @@ export function SuiviClassesClient() {
             <p key={hit.label}>
               <button
                 type="button"
-                onClick={() => {
-                  setExpandedLabel(hit.label);
-                  setSearch(hit.label);
-                }}
+                onClick={() => openClass(hit.label)}
                 className="font-semibold text-[var(--color-theme)] hover:underline"
               >
                 {hit.label}
@@ -224,72 +170,33 @@ export function SuiviClassesClient() {
               <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Détail" />
               <th className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-2.5">Classe</th>
               <th className="hidden px-3 py-2.5 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:table-cell">Élèves</th>
-              <th className="w-16 px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white sm:w-24 sm:px-3 sm:py-2.5">Principal</th>
-              <th className="hidden w-16 px-2 py-2 text-center text-[10px] font-semibold uppercase tracking-wide text-white md:table-cell md:w-24 md:px-3 md:py-2.5">Secondaire</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
             {displayClasses.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-3 py-8 text-center text-sm text-zinc-400">
+                <td colSpan={3} className="px-3 py-8 text-center text-sm text-zinc-400">
                   {search.trim().length >= 2 ? "Aucune classe trouvée." : "Aucune classe."}
                 </td>
               </tr>
             ) : (
-              displayClasses.map((cls) => {
-                const isExpanded = expandedLabel === cls.label;
-                const canAssign = isRealClassId(cls.class_id);
-                return (
-                  <Fragment key={cls.class_id}>
-                    <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900">
-                      <td className="px-2 py-2.5">
-                        <button
-                          type="button"
-                          onClick={() => openClass(cls.label)}
-                          className="inline-flex rounded-lg p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                          aria-label={isExpanded ? "Masquer le détail" : "Voir le détail de la classe"}
-                          aria-expanded={isExpanded}
-                        >
-                          <IconLoupe active={isExpanded} />
-                        </button>
-                      </td>
-                      <td className="px-2 py-2 font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">{cls.label}</td>
-                      <td className="hidden px-3 py-2.5 text-center tabular-nums text-zinc-600 sm:table-cell dark:text-zinc-300">{cls.student_count}</td>
-                      <td className="px-2 py-2 text-center sm:px-3 sm:py-2.5">
-                        <input
-                          type="radio"
-                          name="suivi-primary-class"
-                          checked={cls.is_primary}
-                          disabled={isPending || !canAssign}
-                          onChange={() => setPrimary(cls.class_id)}
-                          className="h-4 w-4 accent-[var(--color-theme)]"
-                          aria-label={`Classe principale : ${cls.label}`}
-                        />
-                      </td>
-                      <td className="hidden px-2 py-2 text-center md:table-cell md:px-3 md:py-2.5">
-                        <input
-                          type="checkbox"
-                          checked={cls.is_secondary}
-                          disabled={isPending || !canAssign}
-                          onChange={(e) => toggleSecondary(cls.class_id, e.target.checked)}
-                          className="h-4 w-4 accent-[var(--color-theme)]"
-                          aria-label={`Classe secondaire : ${cls.label}`}
-                        />
-                      </td>
-                    </tr>
-                    {isExpanded && (
-                      <tr className="bg-zinc-50 dark:bg-zinc-900/50">
-                        <td colSpan={5} className="px-4 py-4">
-                          <SuiviClassDashboard
-                            classLabel={cls.label}
-                            initialStudentQuery={searchStudents.some((s) => s.classLabel === cls.label) ? search.trim() : ""}
-                          />
-                        </td>
-                      </tr>
-                    )}
-                  </Fragment>
-                );
-              })
+              displayClasses.map((cls) => (
+                <tr key={cls.class_id} className="hover:bg-zinc-50 dark:hover:bg-zinc-900">
+                  <td className="px-2 py-2.5">
+                    <button
+                      type="button"
+                      onClick={() => openClass(cls.label)}
+                      className="inline-flex rounded-lg p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                      aria-label={`Voir la classe ${cls.label}`}
+                      title={`Voir ${cls.label}`}
+                    >
+                      <SuiviIconLoupe />
+                    </button>
+                  </td>
+                  <td className="px-2 py-2 font-semibold text-zinc-800 sm:px-3 sm:py-2.5 dark:text-zinc-100">{cls.label}</td>
+                  <td className="hidden px-3 py-2.5 text-center tabular-nums text-zinc-600 sm:table-cell dark:text-zinc-300">{cls.student_count}</td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
