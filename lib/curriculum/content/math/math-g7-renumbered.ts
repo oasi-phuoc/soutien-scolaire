@@ -1,5 +1,6 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 import { MATH_G6_LESSONS } from "./math-g6";
+import { MATH_G7_REPRODUCE_LESSON } from "./math-g7-reproduce-1";
 
 function asG7Lesson(lesson: MathSubmoduleLesson, index: number): MathSubmoduleLesson {
   const code = `G7.${index + 1}`;
@@ -13,4 +14,8 @@ function asG7Lesson(lesson: MathSubmoduleLesson, index: number): MathSubmoduleLe
   };
 }
 
-export const MATH_G7_RENUMBERED_LESSONS: MathSubmoduleLesson[] = MATH_G6_LESSONS.map(asG7Lesson);
+/** G7.1 = reproduction de figures ; G7.2–G7.8 = anciennes leçons G7.1–G7.7 (transformations). */
+export const MATH_G7_RENUMBERED_LESSONS: MathSubmoduleLesson[] = [
+  MATH_G7_REPRODUCE_LESSON,
+  ...MATH_G6_LESSONS.map((lesson, i) => asG7Lesson(lesson, i + 1)),
+];

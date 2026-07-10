@@ -62,6 +62,7 @@ import {
   G6FindVertexExercise,
   G6PerpParallelPlaceExercise,
 } from "@/components/math/geo/G6CartesianExercises";
+import { G7ReproduceExercise } from "@/components/math/geo/G7ReproduceExercises";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
@@ -338,6 +339,7 @@ type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; ge
 type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
 type G6PlanStep = { kind: "g6_plan"; lesson: MathSubmoduleLesson; variant: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15; exNum: number };
+type G7ReproduceStep = { kind: "g7_reproduce"; lesson: MathSubmoduleLesson; variant: 1 | 2; exNum: number };
 
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
@@ -367,7 +369,7 @@ type SymbolicGroupStep = {
   givens?: { letter: string; value: number }[];
 };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | G6PlanStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | G6PlanStep | G7ReproduceStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -5233,6 +5235,15 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       pushG6GridSet();
       steps.push({ kind: "eval_start", lesson });
       pushG6GridSet();
+    } else if (sid === "G7-1") {
+      const pushG7ReproduceSet = () => {
+        steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 1 });
+        steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 2 });
+        steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 3 });
+      };
+      pushG7ReproduceSet();
+      steps.push({ kind: "eval_start", lesson });
+      pushG7ReproduceSet();
     } else if (sid === "G6-2") {
       const pushG6CartesianSet = () => {
         steps.push({ kind: "g6_plan", lesson, variant: 14, exNum: 1 });
@@ -5611,6 +5622,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A10-3" || l.submoduleId === "A10-4" || l.submoduleId === "A10-5" ||
     l.submoduleId === "G6-1" ||
     l.submoduleId === "G6-2" ||
+    l.submoduleId === "G7-1" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
     GENERATED_ALGEBRA_LESSONS.has(l.submoduleId)
@@ -7747,8 +7759,8 @@ export function GenericModuleContent({
           return numericAnswerMatches(v, String(q.answer));
         });
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
-      } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan") {
-        const fallbackLen = currentStep.kind === "g6_plan" ? 4 : 2;
+      } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan" || currentStep.kind === "g7_reproduce") {
+        const fallbackLen = currentStep.kind === "g6_plan" ? 4 : currentStep.kind === "g7_reproduce" ? 1 : 2;
         const pending = currentStep.kind === "g6_plan" ? pendingG6EvalRef.current[evalStepOffset] : undefined;
         currentResults = pending?.results
           ?? (geoResults.length > 0 ? geoResults : Array(fallbackLen).fill(false));
@@ -7814,7 +7826,7 @@ export function GenericModuleContent({
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : es?.kind === "word_problems" ? "Problèmes"
                 : es?.kind === "geo_placement" || es?.kind === "volume_placement" ? es.label
-                : es?.kind === "g6_plan" ? `Exercice ${es.exNum}`
+                : es?.kind === "g6_plan" || es?.kind === "g7_reproduce" ? `Exercice ${es.exNum}`
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -8266,7 +8278,7 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "geo_placement" || currentStep?.kind === "volume_placement" || currentStep?.kind === "g6_plan") {
+  if (currentStep?.kind === "geo_placement" || currentStep?.kind === "volume_placement" || currentStep?.kind === "g6_plan" || currentStep?.kind === "g7_reproduce") {
     stepCanValidate = !geoValidated;
     stepValidate = geoValidated ? () => {} : () => {
       setGeoValidateTrigger((n) => n + 1);
@@ -9434,6 +9446,7 @@ export function GenericModuleContent({
       // so detailed review is intentionally not available for these kinds.
       case "geo_placement":
       case "volume_placement":
+      case "g7_reproduce":
         return (
           <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
         );
@@ -10809,6 +10822,21 @@ export function GenericModuleContent({
               onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
               {...g6Cons("g6PerpParallelPlace")} />
           )}
+        </EvalRevealContext.Provider>
+      )}
+
+      {!showEvalScore && currentStep?.kind === "g7_reproduce" && (
+        <EvalRevealContext.Provider value={revealCorrection}>
+          <G7ReproduceExercise
+            key={`g7rep-${stepIdx}-${geoResetKey}`}
+            exNum={currentStep.exNum}
+            variant={currentStep.variant}
+            validateCommand={geoValidateTrigger}
+            onValidated={(score, max) => {
+              setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+              setGeoValidated(true);
+            }}
+          />
         </EvalRevealContext.Provider>
       )}
 
