@@ -59,12 +59,6 @@ function fracMarkup(n: number | string, d: number | string): string {
 }
 const f = fracMarkup;
 
-function solText(sol: EquationSolution): string {
-  if (sol.kind === "impossible") return "∅";
-  if (sol.kind === "infinite") return "infini";
-  if (sol.den === 1) return `${sol.num}`;
-  return `${sol.num}/${sol.den}`;
-}
 
 function acceptPair(x: string, y: string): string[] {
   return [
@@ -176,22 +170,27 @@ function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
         operations: ["effectuer", `- ${r}x`, `: ${pq - r}`, ""],
       };
     }
-    // both_paren
+    // both_paren — solution x0 choisie d'abord
     const a = ri(2, 4), c = ri(2, 4);
-    const kb = ri(1, 4), kd = ri(1, 4);
-    const num = c * kd - a * kb;
+    if (a === c) return null;
+    const kb = ri(1, 4);
+    const kdNum = x0 * (a - c) + a * kb;
+    if (kdNum % c !== 0) return null;
+    const kd = kdNum / c;
+    if (kd < 1 || kd > 8) return null;
     const den = a - c;
-    if (den === 0) return null;
-    const xn = num, xd = den;
-    if (Math.abs(xn) > 30) return null;
     const expr = `${a}(x${s102(kb)}) = ${c}(x${s102(kd)})`;
     return {
       expr,
-      solution: rat(xn, xd),
-      development: [`${a}x${s102(a * kb)} = ${c}x${s102(c * kd)}`, `${den}x = ${c * kd - a * kb}`, `x = ${solText(rat(xn, xd))}`],
+      solution: rat(x0, 1),
+      development: [`${a}x${s102(a * kb)} = ${c}x${s102(c * kd)}`, `${den}x = ${c * kd - a * kb}`, `x = ${x0}`],
       operations: ["effectuer", `- ${c}x`, `: ${den}`, ""],
     };
   });
+}
+
+function lcm(a: number, b: number): number {
+  return Math.abs(a * b) / gcd(a, b);
 }
 
 export const a102EasyGens: Array<() => EquationQuestion> = EASY102_SHAPES.map(buildEasy102);
@@ -203,73 +202,96 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
     const x0 = pickIntSolution();
     switch (shape % 10) {
       case 0: {
-        const d1 = 4, d2 = 2, mult = 4, n1 = 3;
-        const expr = `${f(n1, d1)} x - ${f("x", d2)} = ${x0}`;
+        const d1 = ri(3, 9), d2 = ri(2, 7);
+        if (d1 === d2) return null;
+        const n1 = ri(1, d1 - 1), n2 = 1;
+        const mult = lcm(d1, d2);
+        const coefNum = n1 * mult / d1 - n2 * mult / d2;
+        if (!Number.isInteger(coefNum) || coefNum === 0) return null;
+        const rhsNum = coefNum * x0;
+        if (!Number.isInteger(rhsNum)) return null;
+        const rhs = rhsNum / mult;
+        const lhs1 = n1 * mult / d1, lhs2 = n2 * mult / d2;
+        const expr = Number.isInteger(rhs)
+          ? `${f(n1, d1)} x - ${f(n2, d2)} x = ${rhs}`
+          : `${f(n1, d1)} x - ${f(n2, d2)} x = ${f(rhsNum, mult)}`;
         return {
           expr, solution: rat(x0, 1),
-          development: [`${f(n1 + "x", mult)} - ${f("2x", mult)} = ${f(String(x0), mult)}`, `${n1}x - 2x = ${x0}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 4", "réduire", ""],
+          development: [`${f(String(lhs1) + "x", mult)} - ${f(String(lhs2) + "x", mult)} = ${f(String(rhsNum), mult)}`, `${lhs1}x - ${lhs2}x = ${rhsNum}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", ""],
         };
       }
       case 1: {
-        const d1 = 2, d2 = 2;
-        const p = ri(1, 3), q = ri(2, 6);
-        const n = 2 * (1 - (p * x0 + q) / d1);
-        if (!Number.isInteger(n)) return null;
+        const d1 = ri(2, 5), d2 = ri(2, 5);
+        const p = ri(1, 3), q = ri(1, 6);
+        const mult = lcm(d1, d2);
+        const coefNum = p * mult / d1;
+        if (!Number.isInteger(coefNum)) return null;
+        const constPart = mult - q * mult / d1;
+        if (!Number.isInteger(constPart)) return null;
+        const nNum = constPart - coefNum * x0;
+        if (nNum % (mult / d2) !== 0) return null;
+        const n = nNum * d2 / mult;
+        if (!Number.isInteger(n) || Math.abs(n) > 20) return null;
         const expr = `1 - ${f(p + "x + " + q, d1)} = ${f(n, d2)}`;
         return {
           expr, solution: rat(x0, 1),
-          development: [`2 - ${p}x - ${q} = ${n}`, `-${p}x = ${n - 2 + q}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 2", "réduire", `+ ${2 + q - n}`, `: (${-p})`, ""],
+          development: [`${mult} - ${coefNum}x - ${q * mult / d1} = ${n * mult / d2}`, `-${coefNum}x = ${n * mult / d2 + q * mult / d1 - mult}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `+ ${mult - n * mult / d2 - q * mult / d1}`, `: (${-coefNum})`, ""],
         };
       }
       case 2: {
-        const d1 = 3, d2 = 9, b = ri(1, 5);
+        const d1 = ri(2, 5), d2 = ri(d1 + 1, d1 * 3);
+        const b = ri(1, 6);
         const a = (x0 * (d2 - d1) - d1 * b) / d2;
         if (!Number.isInteger(a) || a < 1) return null;
+        const mult = lcm(d1, d2);
         const expr = `${f("x - " + a, d1)} = ${f("x + " + b, d2)}`;
         return {
           expr, solution: rat(x0, 1),
-          development: [`${d2}x - ${d2 * a} = ${d1}x + ${d1 * b}`, `${d2 - d1}x = ${d1 * b + d2 * a}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 9", "réduire", `- ${d1}x`, `+ ${d2 * a}`, `: ${d2 - d1}`, ""],
+          development: [`${d2 * mult / d2}x - ${d2 * a * mult / d2} = ${d1 * mult / d1}x + ${d1 * b * mult / d1}`, `${d2 - d1}x = ${d1 * b + d2 * a}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${d1}x`, `+ ${d2 * a}`, `: ${d2 - d1}`, ""],
         };
       }
       case 3: {
-        const d = 3;
-        const a = ri(3, 8), b = ri(2, 5), B = ri(15, 30);
-        const A = Math.round(B + a - b * x0);
+        const d = ri(2, 5);
+        const a = ri(3, 8), b = ri(2, 5), B = ri(10, 35);
+        const A = B + a - b * x0;
         const expr = `${A} = ${B} + ${f(a + " - " + b + "x", d)}`;
         return {
           expr, solution: rat(x0, 1),
           development: [`${A} = ${B} + ${a} - ${b}x`, `${A - B - a} = -${b}x`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 3", "réduire", `- ${B}`, `: (-${b})`, ""],
+          operations: ["même dénominateur", `· ${d}`, "réduire", `- ${B}`, `: (-${b})`, ""],
         };
       }
       case 4: {
-        const d1 = 2, d2 = 8, mult = 8;
-        const a = ri(8, 12), c = ri(3, 8);
+        const d1 = ri(2, 4), d2 = ri(4, 10);
+        const mult = lcm(d1, d2);
+        const a = ri(5, 12), c = ri(2, 8);
         const bNum = a * x0 * d2 - (x0 + c) * d1;
         if (bNum % d2 !== 0) return null;
         const b = bNum / d2;
         if (b < 1) return null;
         const expr = `${f(a + "x - " + b, d1)} = ${f("x + " + c, d2)}`;
-        const coef = a * mult / d1 - 1;
+        const coef = a * mult / d1 - mult / d2;
         return {
           expr, solution: rat(x0, 1),
-          development: [`${a * mult / d1}x - ${b * mult / d1} = x + ${c}`, `${coef}x = ${c + b * mult / d1}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 8", "réduire", "- x", `+ ${b * mult / d1}`, `: ${coef}`, ""],
+          development: [`${a * mult / d1}x - ${b * mult / d1} = ${mult / d2}x + ${c * mult / d2}`, `${coef}x = ${c * mult / d2 + b * mult / d1}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${mult / d2}x`, `+ ${b * mult / d1}`, `: ${coef}`, ""],
         };
       }
       case 5: {
-        const d1 = 5, d2 = 2, k = 5, n = 3, p = 2;
+        const d1 = ri(3, 7), d2 = ri(2, 4);
+        const k = ri(4, 7), p = ri(1, k - 1), n = ri(1, d1 - 1);
+        const mult = lcm(d1, d2);
         const n2Num = d2 * ((k - p) * x0 * d1 - n);
         if (n2Num % d1 !== 0) return null;
         const n2 = n2Num / d1;
         const expr = `${k}x - ${f(n, d1)} = ${f(n2, d2)} + ${p}x`;
         return {
           expr, solution: rat(x0, 1),
-          development: [`${k}x - ${n / d1} = ${n2 / d2} + ${p}x`, `${k - p}x - ${n / d1} = ${n2 / d2}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 10", "réduire", `- ${p}x`, `+ ${n / d1}`, `: ${k - p}`, ""],
+          development: [`${k}x - ${n * mult / d1} = ${n2 * mult / d2} + ${p}x`, `${k - p}x - ${n * mult / d1} = ${n2 * mult / d2}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${p}x`, `+ ${n * mult / d1}`, `: ${k - p}`, ""],
         };
       }
       case 6: {
@@ -288,46 +310,51 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         };
       }
       case 7: {
-        const d1 = 7, d2 = 4, mult = 28, k = 5, n = 1, m = 3;
-        const c = ((k * mult - n * mult / d1 - m * mult / d2) * x0) / mult;
+        const d1 = ri(4, 9), d2 = ri(3, 7);
+        const mult = lcm(d1, d2);
+        const k = ri(4, 7), n = ri(1, d1 - 1), m = ri(1, d2 - 1);
+        const coef = k * mult - n * mult / d1 - m * mult / d2;
+        if (!Number.isInteger(coef) || coef === 0) return null;
+        const c = coef * x0;
         if (!Number.isInteger(c)) return null;
         const expr = `${k}x - ${f(n, d1)} x = ${f(m, d2)} x + ${c}`;
-        const coef = k * mult - n * mult / d1 - m * mult / d2;
         return {
           expr, solution: rat(x0, 1),
           development: [`${coef}x = ${c}`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 28", "réduire", `: ${coef}`, ""],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `: ${coef}`, ""],
         };
       }
       case 8: {
-        const d1 = 3, d2 = 5, b = 2, cVal = 2;
+        const d1 = ri(2, 5), d2 = ri(3, 7);
+        const mult = lcm(d1, d2);
+        const b = ri(2, 4), cVal = ri(1, 4);
         const cNum = b * x0 * d1 + (x0 - cVal) * d2 - d1 * d2;
         if (cNum % d1 !== 0) return null;
         const c = cNum / d1;
         const expr = `${f("x - " + cVal, d1)} + ${f(b + "x - " + c, d2)} = 1`;
+        const sumCoef = d2 + b * d1;
         return {
           expr, solution: rat(x0, 1),
-          development: [`5x - ${5 * cVal} + 3x - ${3 * c} = 15`, `8x - ${5 * cVal + 3 * c} = 15`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 15", "réduire", `+ ${5 * cVal + 3 * c}`, ": 8", ""],
+          development: [`${d2 * mult / d2}x - ${cVal * mult / d1} + ${b * mult / d1}x - ${c * mult / d2} = ${mult}`, `${sumCoef}x - ${cVal * mult / d1 + c * mult / d2} = ${mult}`, `x = ${x0}`],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `+ ${cVal * mult / d1 + c * mult / d2}`, `: ${sumCoef}`, ""],
         };
       }
       default: {
-        const d1 = 4, d2 = 5, mult = 20;
-        const p = ri(4, 8), q = ri(2, 6), n = 3;
-        const A = Math.round(n * mult / d1 - p * mult / d2 * x0 + q * mult / d2);
+        const d1 = ri(3, 6), d2 = ri(4, 8);
+        const mult = lcm(d1, d2);
+        const p = ri(2, 8), q = ri(1, 6), n = ri(2, d1 - 1);
+        const rhsNum = n * mult / d1 - p * mult / d2 * x0 + q * mult / d2;
+        if (!Number.isInteger(rhsNum)) return null;
+        const A = rhsNum;
         const expr = `${A} = ${f(n, d1)} - ${f(p + "x - " + q, d2)}`;
         return {
           expr, solution: rat(x0, 1),
           development: [`${A} = ${n * mult / d1} - ${p * mult / d2}x + ${q * mult / d2}`, `${A - n * mult / d1 - q * mult / d2} = -${p * mult / d2}x`, `x = ${x0}`],
-          operations: ["même dénominateur", "· 20", "réduire", `: (-${p * mult / d2})`, ""],
+          operations: ["même dénominateur", `· ${mult}`, "réduire", `: (-${p * mult / d2})`, ""],
         };
       }
     }
   });
-}
-
-function lcm(a: number, b: number): number {
-  return Math.abs(a * b) / gcd(a, b);
 }
 
 export const a102FracEasyGens: Array<() => EquationQuestion> = Array.from({ length: 20 }, (_, i) => buildEasyFrac(i));
@@ -342,65 +369,27 @@ type A103Cfg = {
   negXY?: boolean;
 };
 
-const A103_EASY_CFG: A103Cfg[] = [
-  { a1: 2, b1: 1, d2: 3, e2: 4, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 1, d2: 4, e2: 2, isoVar: "y", isoEq: 1 },
-  { a1: 4, b1: 1, d2: 2, e2: 5, isoVar: "y", isoEq: 1 },
-  { a1: 5, b1: 1, d2: 3, e2: 3, isoVar: "y", isoEq: 1 },
-  { a1: 2, b1: -1, d2: 3, e2: 4, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: -1, d2: 5, e2: 2, isoVar: "y", isoEq: 1 },
-  { a1: 4, b1: -1, d2: 2, e2: 3, isoVar: "y", isoEq: 1 },
-  { a1: 1, b1: 2, d2: 3, e2: 4, isoVar: "x", isoEq: 1 },
-  { a1: 1, b1: 3, d2: 4, e2: 2, isoVar: "x", isoEq: 1 },
-  { a1: 1, b1: 4, d2: 2, e2: 5, isoVar: "x", isoEq: 1 },
-  { a1: 1, b1: -2, d2: 3, e2: 4, isoVar: "x", isoEq: 1 },
-  { a1: 2, b1: 2, d2: 3, e2: 1, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 2, d2: 4, e2: 1, isoVar: "y", isoEq: 1 },
-  { a1: 2, b1: 1, d2: 1, e2: 3, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 1, d2: 1, e2: 4, isoVar: "y", isoEq: 1 },
-  { a1: 2, b1: 1, d2: 3, e2: -2, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 1, d2: 2, e2: -3, isoVar: "y", isoEq: 1 },
-  { a1: 1, b1: 2, d2: 4, e2: -1, isoVar: "x", isoEq: 1 },
-  { a1: 2, b1: 1, d2: 5, e2: 1, isoVar: "x", isoEq: 2 },
-  { a1: 3, b1: 1, d2: 4, e2: 2, isoVar: "x", isoEq: 2 },
-  { a1: 4, b1: 1, d2: 3, e2: 3, isoVar: "x", isoEq: 2 },
-  { a1: 2, b1: -1, d2: 5, e2: 1, isoVar: "x", isoEq: 2 },
-  { a1: 1, b1: 3, d2: 2, e2: 2, isoVar: "y", isoEq: 2 },
-  { a1: 1, b1: 2, d2: 3, e2: 3, isoVar: "y", isoEq: 2 },
-  { a1: 2, b1: 1, d2: 3, e2: 4, isoVar: "y", isoEq: 1, negXY: true },
-  { a1: 3, b1: -1, d2: 2, e2: 5, isoVar: "y", isoEq: 1, negXY: true },
-  { a1: 1, b1: 2, d2: 4, e2: 3, isoVar: "x", isoEq: 1, negXY: true },
-  { a1: 2, b1: 3, d2: 1, e2: 4, isoVar: "x", isoEq: 1 },
-  { a1: 3, b1: 2, d2: 1, e2: 5, isoVar: "x", isoEq: 1 },
-  { a1: 1, b1: 1, d2: 2, e2: 3, isoVar: "y", isoEq: 1 },
-];
+function genA103Cfg(variant: number, hard: boolean): A103Cfg {
+  const v = variant % 10;
+  const negXY = hard && variant % 4 === 0;
+  const sign = (variant % 2 === 0 ? 1 : -1);
+  switch (v) {
+    case 0: return { a1: ri(2, 6), b1: 1, d2: ri(2, 6), e2: ri(2, 5), isoVar: "y", isoEq: 1, negXY };
+    case 1: return { a1: ri(2, 6), b1: -1, d2: ri(2, 6), e2: ri(2, 5), isoVar: "y", isoEq: 1, negXY };
+    case 2: return { a1: 1, b1: sign * ri(2, 5), d2: ri(2, 6), e2: ri(2, 5), isoVar: "x", isoEq: 1, negXY };
+    case 3: return { a1: ri(2, 5), b1: sign * ri(2, 4), d2: ri(2, 6), e2: ri(2, 5), isoVar: "y", isoEq: 1, negXY };
+    case 4: return { a1: ri(2, 6), b1: 1, d2: 1, e2: ri(2, 6), isoVar: "y", isoEq: 1, negXY };
+    case 5: return { a1: ri(2, 6), b1: 1, d2: ri(2, 5), e2: sign * ri(2, 4), isoVar: "y", isoEq: 1, negXY };
+    case 6: return { a1: ri(2, 6), b1: -1, d2: ri(2, 5), e2: sign * ri(2, 4), isoVar: "y", isoEq: 1, negXY };
+    case 7: return { a1: ri(2, 6), b1: 1, d2: ri(2, 5), e2: ri(2, 5), isoVar: "x", isoEq: 2, negXY };
+    case 8: return { a1: ri(2, 6), b1: 1, d2: 1, e2: ri(2, 6), isoVar: "x", isoEq: 2, negXY };
+    default: return { a1: ri(2, 6), b1: sign * ri(2, 4), d2: ri(2, 5), e2: ri(2, 5), isoVar: "x", isoEq: 2, negXY };
+  }
+}
 
-const A103_HARD_CFG: A103Cfg[] = [
-  ...A103_EASY_CFG.slice(0, 10).map(c => ({ ...c, negXY: true as const })),
-  { a1: 4, b1: 2, d2: 5, e2: 3, isoVar: "y", isoEq: 1 },
-  { a1: 5, b1: 2, d2: 3, e2: 4, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 3, d2: 4, e2: 2, isoVar: "y", isoEq: 1 },
-  { a1: 2, b1: 3, d2: 5, e2: 1, isoVar: "x", isoEq: 1 },
-  { a1: 1, b1: 5, d2: 3, e2: 2, isoVar: "x", isoEq: 1 },
-  { a1: 5, b1: -2, d2: 3, e2: 4, isoVar: "y", isoEq: 1 },
-  { a1: 4, b1: -3, d2: 2, e2: 5, isoVar: "x", isoEq: 2 },
-  { a1: 2, b1: 4, d2: 3, e2: -2, isoVar: "y", isoEq: 2 },
-  { a1: 3, b1: 2, d2: -2, e2: 4, isoVar: "x", isoEq: 2 },
-  { a1: 1, b1: 4, d2: 5, e2: -3, isoVar: "y", isoEq: 2 },
-  { a1: 6, b1: 1, d2: 4, e2: 3, isoVar: "y", isoEq: 1 },
-  { a1: 5, b1: 1, d2: 6, e2: 2, isoVar: "x", isoEq: 2 },
-  { a1: 4, b1: 3, d2: 2, e2: 5, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 4, d2: 5, e2: 1, isoVar: "x", isoEq: 1 },
-  { a1: 2, b1: 5, d2: 4, e2: 2, isoVar: "y", isoEq: 2 },
-  { a1: 1, b1: 6, d2: 3, e2: 4, isoVar: "x", isoEq: 2 },
-  { a1: 7, b1: -1, d2: 2, e2: 5, isoVar: "y", isoEq: 1 },
-  { a1: 5, b1: -2, d2: 4, e2: 3, isoVar: "x", isoEq: 2 },
-  { a1: 4, b1: 4, d2: 3, e2: 2, isoVar: "y", isoEq: 1 },
-  { a1: 3, b1: 5, d2: 2, e2: 4, isoVar: "x", isoEq: 1 },
-];
-
-function buildA103(cfg: A103Cfg): () => SystemEquationQuestion {
+function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
   return () => retry(() => {
+    const cfg = mkCfg();
     const x0 = cfg.negXY ? ri(-8, -1) : pickIntSolution();
     const y0 = cfg.negXY ? ri(-8, -1) : pickIntSolution();
     const c1 = cfg.a1 * x0 + cfg.b1 * y0;
@@ -494,9 +483,12 @@ function buildA103(cfg: A103Cfg): () => SystemEquationQuestion {
   });
 }
 
-export const a103EasyGens: Array<() => SystemEquationQuestion> = A103_EASY_CFG.map(buildA103);
+export const a103EasyGens: Array<() => SystemEquationQuestion> = Array.from(
+  { length: 30 },
+  (_, i) => buildA103(() => genA103Cfg(i, false)),
+);
 export const a103HardGens: Array<() => SystemEquationQuestion> = [
-  ...A103_HARD_CFG.map(buildA103),
+  ...Array.from({ length: 30 }, (_, i) => buildA103(() => genA103Cfg(i, true))),
   // infini / impossible (formes distinctes)
   () => ({
     equations: [`${ri(3, 6)}x + y = ${ri(5, 15)}`, `-4y + 40 = ${-4 * ri(3, 6)}x`] as [string, string],
@@ -516,18 +508,33 @@ export const a103HardGens: Array<() => SystemEquationQuestion> = [
 
 type A104Cfg = { a: number; b: number; d: number; e: number; m1: number; m2: number; elim: "x" | "y" };
 
-const A104_EASY_CFG: A104Cfg[] = Array.from({ length: 30 }, (_, i) => ({
-  a: 2 + (i % 5),
-  b: (i % 3 === 0 ? -1 : 1) * (2 + (i % 4)),
-  d: 3 + (i % 4),
-  e: 2 + ((i + 1) % 5),
-  m1: i % 4 === 0 ? 3 : 2,
-  m2: 1,
-  elim: i % 2 === 0 ? "y" as const : "x" as const,
-}));
+function genA104EasyCfg(variant: number): A104Cfg {
+  return {
+    a: ri(2, 6),
+    b: (variant % 3 === 0 ? -1 : 1) * ri(2, 5),
+    d: ri(2, 6),
+    e: ri(2, 6),
+    m1: variant % 4 === 0 ? ri(2, 3) : 2,
+    m2: 1,
+    elim: variant % 2 === 0 ? "y" : "x",
+  };
+}
 
-function buildA104(cfg: A104Cfg): () => SystemEquationQuestion {
+function genA104HardCfg(variant: number): A104Cfg {
+  return {
+    a: ri(2, 7),
+    b: (variant % 2 === 0 ? 1 : -1) * ri(2, 6),
+    d: ri(2, 7),
+    e: (variant % 3 === 0 ? -1 : 1) * ri(2, 6),
+    m1: ri(2, 4),
+    m2: ri(1, 3),
+    elim: variant % 2 === 0 ? "y" : "x",
+  };
+}
+
+function buildA104(mkCfg: () => A104Cfg): () => SystemEquationQuestion {
   return () => retry(() => {
+    const cfg = mkCfg();
     const x0 = pickIntSolution(), y0 = pickIntSolution();
     const c = cfg.a * x0 + cfg.b * y0;
     const f2 = cfg.d * x0 + cfg.e * y0;
@@ -564,17 +571,12 @@ function buildA104(cfg: A104Cfg): () => SystemEquationQuestion {
   });
 }
 
-export const a104EasyGens: Array<() => SystemEquationQuestion> = A104_EASY_CFG.map(buildA104);
+export const a104EasyGens: Array<() => SystemEquationQuestion> = Array.from(
+  { length: 30 },
+  (_, i) => buildA104(() => genA104EasyCfg(i)),
+);
 export const a104HardGens: Array<() => SystemEquationQuestion> = [
-  ...Array.from({ length: 28 }, (_, i) => buildA104({
-    a: [3, -5, 4, -2, 5, 3, -4, 2][i % 8]!,
-    b: [-2, 3, -3, 5, 2, -5, 7, -3][i % 8]!,
-    d: [8, 3, -2, 5, -5, 7, 3, -5][i % 8]!,
-    e: [4, -5, 7, 8, -7, 1, 21, 4][i % 8]!,
-    m1: [2, 3, 5, 3, 5, 2, 3, 4][i % 8]!,
-    m2: [1, 5, 2, 2, 2, 4, 1, 2][i % 8]!,
-    elim: i % 2 === 0 ? "y" : "x",
-  })),
+  ...Array.from({ length: 28 }, (_, i) => buildA104(() => genA104HardCfg(i))),
   () => ({
     equations: [`7y + -4x = -9`, `-12x + 21y = -27`] as [string, string],
     answer: "IR", acceptable: IR_ACCEPT,
