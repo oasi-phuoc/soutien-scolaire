@@ -16,12 +16,15 @@ export function G7SymmetryReflectExercise({
   exNum,
   validateCommand,
   onValidated,
+  seed = 0,
 }: {
   exNum: number;
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
+  /** Change à chaque refresh pour tirer un autre modèle du pool. */
+  seed?: number;
 }) {
-  const [task] = useState(() => pickSymmetryTask(exNum * 883 + 11));
+  const [task] = useState(() => pickSymmetryTask(exNum * 883 + 11 + seed * 23));
   const lockedSegments = useMemo(() => {
     const s = new Set(task.sourceSegments.map(segmentKey));
     for (const h of task.hintSegments ?? []) s.add(segmentKey(h));

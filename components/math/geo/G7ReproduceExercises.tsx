@@ -156,13 +156,16 @@ export function G7ReproduceExercise({
   variant,
   validateCommand,
   onValidated,
+  seed = 0,
 }: {
   exNum: number;
   variant: 1 | 2;
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
+  /** Change à chaque refresh pour tirer un autre modèle du pool. */
+  seed?: number;
 }) {
-  const [task] = useState<ReproduceTask>(() => pickReproduceTask(variant, exNum * 997 + variant * 13));
+  const [task] = useState<ReproduceTask>(() => pickReproduceTask(variant, exNum * 997 + variant * 13 + seed * 17));
   const expected = useMemo(() => expectedFromTask(task), [task]);
 
   const [userDots, setUserDots] = useState<Set<string>>(() => new Set((task.hintDots ?? []).map(pointKey)));

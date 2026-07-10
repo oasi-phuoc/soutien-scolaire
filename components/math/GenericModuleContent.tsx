@@ -10850,6 +10850,7 @@ export function GenericModuleContent({
             key={`g7rep-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
             variant={currentStep.variant}
+            seed={geoResetKey}
             validateCommand={geoValidateTrigger}
             onValidated={(score, max) => {
               setGeoResults(Array.from({ length: max }, (_, i) => i < score));
@@ -10864,6 +10865,7 @@ export function GenericModuleContent({
           <G7FriezeExercise
             key={`g7fri-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
+            seed={geoResetKey}
             validateCommand={geoValidateTrigger}
             onValidated={(score, max) => {
               setGeoResults(Array.from({ length: max }, (_, i) => i < score));
@@ -10878,6 +10880,7 @@ export function GenericModuleContent({
           <G7SymmetryReflectExercise
             key={`g7sym-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
+            seed={geoResetKey}
             validateCommand={geoValidateTrigger}
             onValidated={(score, max) => {
               setGeoResults(Array.from({ length: max }, (_, i) => i < score));

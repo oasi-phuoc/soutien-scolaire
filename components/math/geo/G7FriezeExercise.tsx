@@ -15,12 +15,15 @@ export function G7FriezeExercise({
   exNum,
   validateCommand,
   onValidated,
+  seed = 0,
 }: {
   exNum: number;
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
+  /** Change à chaque refresh pour tirer un autre modèle du pool. */
+  seed?: number;
 }) {
-  const [task] = useState(() => pickFriezeTask(exNum * 991 + 7));
+  const [task] = useState(() => pickFriezeTask(exNum * 991 + 7 + seed * 19));
   const lockedSegments = useMemo(
     () => new Set(task.starterSegments.map(segmentKey)),
     [task],
