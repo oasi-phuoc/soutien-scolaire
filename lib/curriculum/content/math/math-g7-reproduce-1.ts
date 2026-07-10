@@ -31,6 +31,16 @@ export const MATH_G7_REPRODUCE_LESSON: MathSubmoduleLesson = {
           "Tous les points se placent en multipliant leurs coordonnées par le même facteur.",
         ],
       },
+      { type: "highlight", fr: "Compléter une frise" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Observez le motif qui se répète (carrés, lignes, dents de scie…).",
+          "Prolongez le dessin en respectant la même règle sur toute la frise.",
+          "Les traits déjà tracés (gris) font partie du modèle : ne les modifiez pas.",
+        ],
+      },
       {
         type: "note",
         fr: "Cliquez deux intersections pour tracer un segment. Double-cliquez le même point (deux clics) pour placer un point.",

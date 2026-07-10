@@ -3,6 +3,10 @@ export type GridPoint = { x: number; y: number };
 
 export type GridSegment = { x1: number; y1: number; x2: number; y2: number };
 
+export type G7SymAxis =
+  | { kind: "vertical"; x: number }
+  | { kind: "horizontal"; y: number };
+
 export type GridFigure = {
   /** Nombre de cases par côté (intersections de 0 à size). */
   size: number;
