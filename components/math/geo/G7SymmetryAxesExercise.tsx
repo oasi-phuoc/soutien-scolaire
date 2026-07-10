@@ -174,16 +174,23 @@ export function G7SymmetryAxesExercise({
             </g>
           ))}
 
-          {task.polygons.map((poly, i) => (
-            <polygon
-              key={`poly-${i}`}
-              points={poly.map((pt) => `${MARGIN + pt.x * CELL},${MARGIN + pt.y * CELL}`).join(" ")}
-              fill={FILL}
-              stroke={STROKE}
-              strokeWidth={2}
-              strokeLinejoin="round"
-            />
-          ))}
+          {/* evenodd : polygones concentriques (cadre, anneau…) apparaissent creux */}
+          <path
+            d={task.polygons
+              .map((poly) => {
+                if (poly.length === 0) return "";
+                const [first, ...rest] = poly;
+                return `M ${MARGIN + first!.x * CELL} ${MARGIN + first!.y * CELL} ${rest
+                  .map((pt) => `L ${MARGIN + pt.x * CELL} ${MARGIN + pt.y * CELL}`)
+                  .join(" ")} Z`;
+              })
+              .join(" ")}
+            fill={FILL}
+            fillRule="evenodd"
+            stroke={STROKE}
+            strokeWidth={2}
+            strokeLinejoin="round"
+          />
 
           {userAxes.map((axis) => {
             const key = axisKey(axis);

@@ -62,7 +62,7 @@ function main() {
 </head>
 <body>
   <h1>G7.2 — Pool exercice 1 : ${tasks.length} figures (grille 10×10)</h1>
-  <p>Axes de symétrie indiqués en rouge semi-transparent (aperçu)</p>
+  <p>Axes de symétrie indiqués en rouge semi-transparent (aperçu) — dont figures à 4 axes</p>
   <div class="grid">
 ${cards}
   </div>
