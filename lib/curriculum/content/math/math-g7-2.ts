@@ -33,7 +33,17 @@ export const MATH_G7_2_LESSON: MathSubmoduleLesson = {
       },
       {
         type: "note",
-        fr: "Cliquez deux intersections pour tracer un axe. Retracez le même axe pour l'effacer. Dessinez tous les axes de la figure.",
+        fr: "Exercice 1 : cliquez deux intersections pour tracer un axe. Exercice 2 : complétez la figure de l'autre côté de l'axe bleu.",
+      },
+      { type: "highlight", fr: "Compléter par symétrie" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "L'axe vertical bleu est un **miroir** au centre de la grille.",
+          "Chaque point de la figure donnée a son image à **égale distance** de l'autre côté.",
+          "La moitié peut être à **gauche** ou à **droite** de l'axe : reproduisez l'autre moitié.",
+        ],
       },
     ],
     paragraphs: { fr: [] },
