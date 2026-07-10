@@ -80,6 +80,8 @@ export type PlacementFrenchDraft = {
   level: PlacementLevel;
   seed: number;
   step: "ce" | "co" | "pe" | "po" | "recap";
+  /** Entraînement limité à une seule compétence (CE/CO/PE/PO). */
+  singleSkill?: PlacementSkill;
   ce?: number;
   co?: number;
   peSent?: boolean;

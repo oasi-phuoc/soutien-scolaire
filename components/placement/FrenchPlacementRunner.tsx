@@ -26,6 +26,7 @@ import {
   type FrenchBatteryKind,
   type PlacementFrenchDraft,
   type PlacementLevel,
+  type PlacementSkill,
   type PlacementSkillResult,
 } from "@/lib/placement/types";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
@@ -40,6 +41,18 @@ function levelFromParam(value: string | null): PlacementLevel {
   return "base";
 }
 
+function skillFromParam(value: string | null): PlacementSkill | undefined {
+  if (value === "ce" || value === "co" || value === "pe" || value === "po") return value;
+  return undefined;
+}
+
+const SKILL_LABELS: Record<PlacementSkill, string> = {
+  ce: "CE",
+  co: "CO",
+  pe: "PE",
+  po: "PO",
+};
+
 function loadDraftForKind(kind: FrenchBatteryKind): PlacementFrenchDraft | null {
   return kind === "training" ? loadFrenchTrainingDraft() : loadFrenchDraft();
 }
@@ -53,6 +66,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
   const router = useRouter();
   const params = useSearchParams();
   const paramLevel = levelFromParam(params.get("level"));
+  const paramSkill = skillFromParam(params.get("skill"));
   const isPlacement = batteryKind === "placement";
   const isProgressive = isPlacement;
 
@@ -62,6 +76,10 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
   const [level] = useState<PlacementLevel>(() => {
     if (isPlacement) return initialDraft?.level ?? "base";
     return initialDraft?.level ?? paramLevel;
+  });
+  const [singleSkill] = useState<PlacementSkill | undefined>(() => {
+    if (isPlacement) return undefined;
+    return initialDraft?.singleSkill ?? paramSkill;
   });
   const [step, setStep] = useState<FrenchStep>(() => {
     const d = typeof window !== "undefined" ? loadDraftForKind(batteryKind) : null;
@@ -85,7 +103,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     peSubmissionId?: string;
     poSubmissionId?: string;
   }>) => {
-    const draftStep = next.step ?? (step === "intro" ? "ce" : step);
+    const draftStep = next.step ?? (step === "intro" ? (singleSkill ?? "ce") : step);
     saveDraftForKind(batteryKind, {
       sessionId,
       kind: batteryKind,
@@ -93,6 +111,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       level,
       seed: next.seed ?? seed,
       step: draftStep,
+      singleSkill,
       ce: next.ce ?? ceScore,
       co: next.co ?? coScore,
       peSent: next.peSent ?? peSent,
@@ -101,18 +120,20 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       poSubmissionId: next.poSubmissionId ?? poSubmissionId,
       updatedAt: new Date().toISOString(),
     });
-  }, [batteryKind, ceScore, coScore, isProgressive, level, peSent, peSubmissionId, poSent, poSubmissionId, seed, sessionId, step]);
+  }, [batteryKind, ceScore, coScore, isProgressive, level, peSent, peSubmissionId, poSent, poSubmissionId, seed, sessionId, singleSkill, step]);
 
   const startBattery = useCallback(() => {
     const activeSeed = isPlacement ? seed : Date.now();
+    const firstStep = singleSkill ?? "ce";
     if (!isPlacement) setSeed(activeSeed);
-    persistDraft({ step: "ce", seed: activeSeed });
-    setStep("ce");
-  }, [isPlacement, persistDraft, seed]);
+    persistDraft({ step: firstStep, seed: activeSeed });
+    setStep(firstStep);
+  }, [isPlacement, persistDraft, seed, singleSkill]);
 
   const restartTraining = useCallback(() => {
     const activeSeed = Date.now();
     const nextSessionId = createFrenchSessionId();
+    const firstStep = singleSkill ?? "ce";
     setSessionId(nextSessionId);
     setSeed(activeSeed);
     setCeScore(0);
@@ -127,15 +148,16 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       progressive: false,
       level,
       seed: activeSeed,
-      step: "ce",
+      step: firstStep,
+      singleSkill,
       ce: 0,
       co: 0,
       peSent: false,
       poSent: false,
       updatedAt: new Date().toISOString(),
     });
-    setStep("ce");
-  }, [level]);
+    setStep(firstStep);
+  }, [level, singleSkill]);
 
   const finalizePlacementSession = useCallback((overrides?: {
     ce?: number;
@@ -176,7 +198,26 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
     saveFrenchTrainingDraft(null);
   }, []);
 
+  const finishSingleSkillTraining = useCallback((result: PlacementSkillResult) => {
+    if (result.skill === "ce") setCeScore(result.points);
+    if (result.skill === "co") setCoScore(result.points);
+    if (result.skill === "pe") {
+      setPeSent(Boolean(result.sent));
+      if (result.submissionId) setPeSubmissionId(result.submissionId);
+    }
+    if (result.skill === "po") {
+      setPoSent(Boolean(result.sent));
+      if (result.submissionId) setPoSubmissionId(result.submissionId);
+    }
+    finalizeTraining();
+    setStep("recap");
+  }, [finalizeTraining]);
+
   const onSkillComplete = useCallback((result: PlacementSkillResult) => {
+    if (!isPlacement && singleSkill) {
+      finishSingleSkillTraining(result);
+      return;
+    }
     if (result.skill === "ce") {
       setCeScore(result.points);
       persistDraft({ step: "co", ce: result.points });
@@ -227,7 +268,7 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
       }
       setStep("recap");
     }
-  }, [ceScore, finalizePlacementSession, finalizeTraining, isPlacement, level, peSubmissionId, persistDraft, sessionId]);
+  }, [ceScore, finishSingleSkillTraining, finalizePlacementSession, finalizeTraining, isPlacement, level, peSubmissionId, persistDraft, sessionId, singleSkill]);
 
   const runnerProps = useMemo(() => ({
     mode: "placement" as const,
@@ -241,7 +282,9 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
 
   const introTitle = isPlacement
     ? "TCF progressif"
-    : PLACEMENT_LEVEL_LABELS[level];
+    : singleSkill
+      ? `${PLACEMENT_LEVEL_LABELS[level]} · ${SKILL_LABELS[singleSkill]}`
+      : PLACEMENT_LEVEL_LABELS[level];
 
   const introSubtitle = isPlacement
     ? <PlacementFrenchHelpContent mode="placement" />
@@ -290,11 +333,21 @@ export function FrenchPlacementRunner({ batteryKind = "placement" }: { batteryKi
           {isPlacement ? "Batterie française terminée" : "Entraînement terminé"}
         </h1>
         <ul className="space-y-2 text-sm">
-          <li className="flex justify-between"><span>CE</span><span>{ceScore} / 25</span></li>
-          <li className="flex justify-between"><span>CO</span><span>{coScore} / 25</span></li>
-          <li className="flex justify-between"><span>PE</span><span>{peSent ? "Envoyé — en attente" : "—"}</span></li>
-          <li className="flex justify-between"><span>PO</span><span>{poSent ? "Envoyé — en attente" : "—"}</span></li>
-          <li className="flex justify-between border-t pt-2 font-semibold"><span>Total</span><span>{session.rawTotal} / 100</span></li>
+          {(!singleSkill || singleSkill === "ce") && (
+            <li className="flex justify-between"><span>CE</span><span>{ceScore} / 25</span></li>
+          )}
+          {(!singleSkill || singleSkill === "co") && (
+            <li className="flex justify-between"><span>CO</span><span>{coScore} / 25</span></li>
+          )}
+          {(!singleSkill || singleSkill === "pe") && (
+            <li className="flex justify-between"><span>PE</span><span>{peSent ? "Envoyé — en attente" : "—"}</span></li>
+          )}
+          {(!singleSkill || singleSkill === "po") && (
+            <li className="flex justify-between"><span>PO</span><span>{poSent ? "Envoyé — en attente" : "—"}</span></li>
+          )}
+          {!singleSkill && (
+            <li className="flex justify-between border-t pt-2 font-semibold"><span>Total</span><span>{session.rawTotal} / 100</span></li>
+          )}
         </ul>
         {!isPlacement && (
           <p className="text-xs text-[var(--color-text-secondary)]">

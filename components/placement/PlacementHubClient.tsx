@@ -207,6 +207,55 @@ function FrenchLevelToggle({
   );
 }
 
+function IndividualModeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <rect x="3" y="3" width="7" height="7" rx="1.5" opacity="0.35" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" opacity="0.35" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor" stroke="none" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" opacity="0.35" />
+    </svg>
+  );
+}
+
+function FrenchSkillSelector({
+  selected,
+  onChange,
+  disabled = false,
+}: {
+  selected: FrenchSkill;
+  onChange: (next: FrenchSkill) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-center gap-2" role="group" aria-label="Compétence à entraîner">
+      {STEP_ORDER.map((skill) => {
+        const active = selected === skill;
+        return (
+          <button
+            key={skill}
+            type="button"
+            disabled={disabled}
+            onClick={() => !disabled && onChange(skill)}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-[11px] font-bold transition-colors ${
+              disabled ? "cursor-not-allowed opacity-50" : ""
+            }`}
+            style={
+              active
+                ? { background: ACCENT, color: "#fff" }
+                : { background: "color-mix(in oklch, var(--color-accent-quiz) 18%, white)", color: "#991b1b" }
+            }
+            aria-pressed={active}
+            aria-label={SKILL_HEADERS[skill]}
+          >
+            {SKILL_HEADERS[skill]}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function ScoreColumn({ title, points }: { title: string; points: number }) {
   return (
     <div className="flex flex-1 flex-col py-1 text-center">
@@ -234,6 +283,8 @@ export function PlacementHubClient() {
   const [mathHistory, setMathHistory] = useState(() => loadMathHistory());
   const [frenchSessions, setFrenchSessions] = useState(() => loadFrenchSessions());
   const [ready, setReady] = useState(false);
+  const [individualMode, setIndividualMode] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState<FrenchSkill>("ce");
 
   const placementInProgress = !!(placementDraft && placementDraft.step !== "recap");
   const trainingInProgress = !!(trainingDraft && trainingDraft.step !== "recap");
@@ -272,6 +323,10 @@ export function PlacementHubClient() {
       setPendingFrench(profile.pendingFrench);
       setPlacementDraft(localPlacementDraft);
       setTrainingDraft(localTrainingDraft);
+      if (localTrainingDraft?.singleSkill) {
+        setIndividualMode(true);
+        setSelectedSkill(localTrainingDraft.singleSkill);
+      }
       setMathHistory(loadMathHistory());
       setFrenchSessions(loadFrenchSessions());
       setReady(true);
@@ -296,14 +351,16 @@ export function PlacementHubClient() {
   function launchTraining() {
     saveFrenchTrainingDraft(null);
     localStorage.setItem(LEVEL_KEY, level);
-    router.push(`/placement/francais/entrainement?level=${level}`);
+    const skillParam = individualMode ? `&skill=${selectedSkill}` : "";
+    router.push(`/placement/francais/entrainement?level=${level}${skillParam}`);
   }
 
   function resumeTraining() {
     const d = loadFrenchTrainingDraft();
     const resumeLevel = d?.level ?? level;
     localStorage.setItem(LEVEL_KEY, resumeLevel);
-    router.push(`/placement/francais/entrainement?level=${resumeLevel}`);
+    const skillParam = d?.singleSkill ? `&skill=${d.singleSkill}` : "";
+    router.push(`/placement/francais/entrainement?level=${resumeLevel}${skillParam}`);
   }
 
   async function resetPlacementDraft() {
@@ -379,11 +436,31 @@ export function PlacementHubClient() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <FrenchLevelToggle
-            level={displayLevel}
-            onChange={selectLevel}
-            disabled={trainingInProgress}
-          />
+          <div className="flex flex-wrap items-center gap-2">
+            <FrenchLevelToggle
+              level={displayLevel}
+              onChange={selectLevel}
+              disabled={trainingInProgress}
+            />
+            <button
+              type="button"
+              onClick={() => setIndividualMode((v) => !v)}
+              disabled={trainingInProgress}
+              aria-label={individualMode ? "Désactiver le mode individuel" : "Activer le mode individuel (CE, CO, PE, PO)"}
+              aria-pressed={individualMode}
+              title={individualMode ? "Mode individuel actif" : "Entraîner une seule compétence"}
+              className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg border transition-colors ${
+                trainingInProgress ? "cursor-not-allowed opacity-50" : "hover:border-[var(--color-accent-quiz)]"
+              } ${
+                individualMode
+                  ? "border-transparent text-white"
+                  : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+              }`}
+              style={individualMode ? { background: ACCENT } : undefined}
+            >
+              <IndividualModeIcon />
+            </button>
+          </div>
           <button
             type="button"
             onClick={trainingInProgress ? resumeTraining : launchTraining}
@@ -393,6 +470,14 @@ export function PlacementHubClient() {
             {trainingInProgress ? "Reprendre" : "S'entraîner"}
           </button>
         </div>
+
+        {individualMode && (
+          <FrenchSkillSelector
+            selected={selectedSkill}
+            onChange={setSelectedSkill}
+            disabled={trainingInProgress}
+          />
+        )}
 
         {trainingInProgress && trainingDraft && (
           <FrenchProgressBlock
