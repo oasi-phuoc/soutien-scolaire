@@ -7,23 +7,41 @@ import {
   isDrawSide,
   pickSymmetryReflectTask,
   reflectConsigne,
+  type SymmetryReflectTask,
 } from "@/lib/curriculum/content/math/g7-symmetry-reflect-data";
+import {
+  expectedReflectionH,
+  isDrawSideH,
+  pickSymmetryReflectHTask,
+  reflectHConsigne,
+  type SymmetryReflectHTask,
+} from "@/lib/curriculum/content/math/g7-symmetry-reflect-h-data";
 import { G7GridCanvas } from "@/components/math/geo/g7-grid-canvas";
 
 const ACCENT = "var(--color-accent-alg)";
+
+type ReflectAxis = "vertical" | "horizontal";
 
 export function G7SymmetryReflectExercise({
   exNum,
   validateCommand,
   onValidated,
   seed = 0,
+  axis = "vertical",
 }: {
   exNum: number;
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
   seed?: number;
+  /** vertical = ex.2 (20×10) · horizontal = ex.3 (20×20) */
+  axis?: ReflectAxis;
 }) {
-  const [task] = useState(() => pickSymmetryReflectTask(exNum * 701 + 19 + seed * 29));
+  const [task] = useState<SymmetryReflectTask | SymmetryReflectHTask>(() =>
+    axis === "horizontal"
+      ? pickSymmetryReflectHTask(exNum * 709 + 31 + seed * 37)
+      : pickSymmetryReflectTask(exNum * 701 + 19 + seed * 29),
+  );
+
   const lockedSegments = useMemo(
     () => new Set(task.sourceSegments.map(segmentKey)),
     [task],
@@ -32,7 +50,12 @@ export function G7SymmetryReflectExercise({
     () => new Set(task.sourceDots.map(pointKey)),
     [task],
   );
-  const expected = useMemo(() => expectedReflection(task), [task]);
+  const expected = useMemo(
+    () => (axis === "horizontal"
+      ? expectedReflectionH(task as SymmetryReflectHTask)
+      : expectedReflection(task as SymmetryReflectTask)),
+    [axis, task],
+  );
 
   const [userSegments, setUserSegments] = useState<Set<string>>(() => new Set());
   const [userDots, setUserDots] = useState<Set<string>>(() => new Set());
@@ -41,9 +64,15 @@ export function G7SymmetryReflectExercise({
   const [wrongSegments, setWrongSegments] = useState<Set<string>>(new Set());
   const [wrongDots, setWrongDots] = useState<Set<string>>(new Set());
 
+  const canDraw = useCallback((p: GridPoint) => {
+    return axis === "horizontal"
+      ? isDrawSideH(p, task as SymmetryReflectHTask)
+      : isDrawSide(p, task as SymmetryReflectTask);
+  }, [axis, task]);
+
   const onPointClick = useCallback((p: GridPoint) => {
     if (validated) return;
-    if (!isDrawSide(p, task)) {
+    if (!canDraw(p)) {
       setPending(null);
       return;
     }
@@ -52,7 +81,7 @@ export function G7SymmetryReflectExercise({
       setPending(p);
       return;
     }
-    if (!isDrawSide(pending, task)) {
+    if (!canDraw(pending)) {
       setPending(p);
       return;
     }
@@ -78,7 +107,7 @@ export function G7SymmetryReflectExercise({
       });
     }
     setPending(null);
-  }, [lockedDots, lockedSegments, pending, task, validated]);
+  }, [canDraw, lockedDots, lockedSegments, pending, validated]);
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -116,21 +145,33 @@ export function G7SymmetryReflectExercise({
     [lockedDots, userDots],
   );
 
+  const consigne = axis === "horizontal"
+    ? reflectHConsigne(task as SymmetryReflectHTask)
+    : reflectConsigne(task as SymmetryReflectTask);
+
+  const axisProp = axis === "horizontal"
+    ? { kind: "horizontal" as const, y: (task as SymmetryReflectHTask).axisY }
+    : { kind: "vertical" as const, x: (task as SymmetryReflectTask).axisX };
+
+  // Grille 20×20 : cellules un peu plus petites pour tenir à l'écran
+  const cellSize = axis === "horizontal" ? 18 : undefined;
+
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">{reflectConsigne(task)}</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       <div className="overflow-x-auto rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
         <G7GridCanvas
           width={task.width}
           height={task.height}
+          cellSize={cellSize}
           segments={displaySegments}
           dots={displayDots}
           lockedSegments={lockedSegments}
           lockedDots={lockedDots}
           interactive={!validated}
           pending={pending}
-          axis={{ kind: "vertical", x: task.axisX }}
+          axis={axisProp}
           axisColor="#2563eb"
           wrongSegments={validated ? wrongSegments : undefined}
           wrongDots={validated ? wrongDots : undefined}
