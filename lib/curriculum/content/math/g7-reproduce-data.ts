@@ -8,7 +8,7 @@ export type G7SymAxis =
   | { kind: "horizontal"; y: number };
 
 export type GridFigure = {
-  /** Nombre de cases par côté (intersections de 0 à size). */
+  /** Nombre de cases par côté (intersections de 0 à size). Toujours 12 pour G7.1. */
   size: number;
   dots: GridPoint[];
   segments: GridSegment[];
@@ -21,12 +21,13 @@ export type ReproduceTask = {
   kind: ReproduceTaskKind;
   label: string;
   reference: GridFigure;
-  /** Taille de la grille de travail (cases). */
+  /** Taille de la grille de travail (cases) — toujours 12. */
   targetSize: number;
-  /** Indices déjà tracés sur la grille cible (aide). */
   hintDots?: GridPoint[];
   hintSegments?: GridSegment[];
 };
+
+export const G7_GRID_SIZE = 12;
 
 export function pointKey(p: GridPoint): string {
   return `${p.x},${p.y}`;
@@ -38,347 +39,777 @@ export function segmentKey(s: GridSegment): string {
   return a < b ? `${a}|${b}` : `${b}|${a}`;
 }
 
-export function scalePoint(p: GridPoint, fromSize: number, toSize: number): GridPoint {
-  if (fromSize === toSize) return { ...p };
-  const k = toSize / fromSize;
+export function scalePoint(p: GridPoint, k: number): GridPoint {
   return { x: Math.round(p.x * k), y: Math.round(p.y * k) };
 }
 
-export function scaleSegment(s: GridSegment, fromSize: number, toSize: number): GridSegment {
-  const p1 = scalePoint({ x: s.x1, y: s.y1 }, fromSize, toSize);
-  const p2 = scalePoint({ x: s.x2, y: s.y2 }, fromSize, toSize);
+export function scaleSegment(s: GridSegment, k: number): GridSegment {
+  const p1 = scalePoint({ x: s.x1, y: s.y1 }, k);
+  const p2 = scalePoint({ x: s.x2, y: s.y2 }, k);
   return { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y };
 }
 
 export function expectedFromTask(task: ReproduceTask): { dots: Set<string>; segments: Set<string> } {
-  const { reference, targetSize, kind } = task;
-  const from = reference.size;
-  const to = targetSize;
-  const mapDots = reference.dots.map((p) => pointKey(scalePoint(p, from, kind === "scale_down" ? to : kind === "scale_up" ? to : from)));
-  const mapSegs = reference.segments.map((s) => segmentKey(scaleSegment(s, from, kind === "copy" ? from : to)));
-  return { dots: new Set(mapDots), segments: new Set(mapSegs) };
+  const { reference, kind } = task;
+  const k = kind === "scale_up" ? 2 : kind === "scale_down" ? 0.5 : 1;
+  return {
+    dots: new Set(reference.dots.map((p) => pointKey(scalePoint(p, k)))),
+    segments: new Set(reference.segments.map((s) => segmentKey(scaleSegment(s, k)))),
+  };
 }
 
-// ── Figures de référence (style manuel CFR) ─────────────────────────────────
+function fig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
+  return { size: G7_GRID_SIZE, dots, segments };
+}
 
-const FIG_ROCKET: GridFigure = {
-  size: 6,
-  dots: [{ x: 3, y: 2 }],
-  segments: [
-    { x1: 3, y1: 0, x2: 2, y2: 2 },
-    { x1: 3, y1: 0, x2: 4, y2: 2 },
-    { x1: 2, y1: 2, x2: 4, y2: 2 },
-    { x1: 2, y1: 2, x2: 2, y2: 5 },
-    { x1: 4, y1: 2, x2: 4, y2: 5 },
-    { x1: 2, y1: 5, x2: 4, y2: 5 },
-    { x1: 2, y1: 5, x2: 1, y2: 6 },
-    { x1: 4, y1: 5, x2: 5, y2: 6 },
-  ],
-};
+function poly(pts: Array<[number, number]>): GridSegment[] {
+  const segs: GridSegment[] = [];
+  for (let i = 0; i < pts.length; i++) {
+    const [x1, y1] = pts[i]!;
+    const [x2, y2] = pts[(i + 1) % pts.length]!;
+    segs.push({ x1, y1, x2, y2 });
+  }
+  return segs;
+}
 
-const FIG_DIAMOND: GridFigure = {
-  size: 6,
-  dots: [],
-  segments: [
-    { x1: 3, y1: 1, x2: 1, y2: 3 },
-    { x1: 1, y1: 3, x2: 3, y2: 5 },
-    { x1: 3, y1: 5, x2: 5, y2: 3 },
-    { x1: 5, y1: 3, x2: 3, y2: 1 },
-  ],
-};
+function line(...pts: Array<[number, number]>): GridSegment[] {
+  const segs: GridSegment[] = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x1, y1] = pts[i]!;
+    const [x2, y2] = pts[i + 1]!;
+    segs.push({ x1, y1, x2, y2 });
+  }
+  return segs;
+}
 
-const FIG_TREE: GridFigure = {
-  size: 8,
-  dots: [{ x: 4, y: 2 }, { x: 3, y: 4 }],
-  segments: [
-    { x1: 4, y1: 0, x2: 2, y2: 4 },
-    { x1: 4, y1: 0, x2: 6, y2: 4 },
-    { x1: 2, y1: 4, x2: 6, y2: 4 },
-    { x1: 4, y1: 4, x2: 4, y2: 7 },
-    { x1: 3, y1: 7, x2: 5, y2: 7 },
-  ],
-};
+function rect(x: number, y: number, w: number, h: number): GridSegment[] {
+  return poly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]);
+}
 
-const FIG_DOTS_ROW: GridFigure = {
-  size: 8,
-  dots: [{ x: 1, y: 4 }, { x: 3, y: 4 }, { x: 5, y: 4 }, { x: 7, y: 4 }],
-  segments: [],
-};
+// ── 50 figures figuratives sur grille 12×12 ─────────────────────────────────
 
-const FIG_FOX: GridFigure = {
-  size: 6,
-  dots: [{ x: 2, y: 2 }, { x: 4, y: 2 }, { x: 3, y: 4 }],
-  segments: [
-    { x1: 1, y1: 5, x2: 3, y2: 1 },
-    { x1: 5, y1: 5, x2: 3, y2: 1 },
-    { x1: 1, y1: 5, x2: 5, y2: 5 },
-    { x1: 2, y1: 0, x2: 1, y2: 2 },
-    { x1: 4, y1: 0, x2: 5, y2: 2 },
-  ],
-};
+const FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
+  {
+    id: "house",
+    label: "Maison",
+    figure: fig([
+      ...poly([[2, 6], [6, 2], [10, 6]]),
+      ...rect(3, 6, 6, 5),
+      ...rect(5, 8, 2, 3),
+      ...rect(4, 7, 1, 1),
+      ...rect(7, 7, 1, 1),
+    ]),
+  },
+  {
+    id: "rocket",
+    label: "Fusée",
+    figure: fig([
+      ...poly([[6, 1], [4, 4], [8, 4]]),
+      ...rect(4, 4, 4, 5),
+      ...line([4, 9], [2, 11]),
+      ...line([8, 9], [10, 11]),
+      ...line([4, 9], [8, 9]),
+      ...rect(5, 5, 2, 2),
+    ], [{ x: 6, y: 6 }]),
+  },
+  {
+    id: "cat",
+    label: "Chat",
+    figure: fig([
+      ...poly([[3, 5], [4, 2], [5, 5], [7, 5], [8, 2], [9, 5], [10, 7], [9, 10], [3, 10], [2, 7]]),
+      ...line([5, 8], [6, 9], [7, 8]),
+      ...line([4, 10], [4, 11]),
+      ...line([8, 10], [8, 11]),
+    ], [{ x: 4, y: 6 }, { x: 8, y: 6 }]),
+  },
+  {
+    id: "fish",
+    label: "Poisson",
+    figure: fig([
+      ...poly([[2, 6], [5, 3], [9, 4], [11, 6], [9, 8], [5, 9]]),
+      ...poly([[11, 6], [12, 4], [12, 8]]),
+      ...line([5, 5], [6, 6], [5, 7]),
+    ], [{ x: 4, y: 5 }]),
+  },
+  {
+    id: "tree",
+    label: "Arbre",
+    figure: fig([
+      ...poly([[6, 1], [2, 5], [4, 5], [1, 8], [11, 8], [8, 5], [10, 5]]),
+      ...rect(5, 8, 2, 3),
+      ...line([4, 11], [8, 11]),
+    ]),
+  },
+  {
+    id: "car",
+    label: "Voiture",
+    figure: fig([
+      ...poly([[1, 7], [3, 4], [8, 4], [10, 7], [11, 7], [11, 9], [1, 9]]),
+      ...line([3, 4], [3, 7]),
+      ...line([8, 4], [8, 7]),
+      ...rect(3, 5, 2, 1),
+      ...rect(6, 5, 2, 1),
+    ], [{ x: 3, y: 10 }, { x: 9, y: 10 }]),
+  },
+  {
+    id: "bird",
+    label: "Oiseau",
+    figure: fig([
+      ...poly([[2, 6], [4, 3], [7, 2], [10, 4], [11, 6], [9, 8], [6, 9], [3, 8]]),
+      ...poly([[10, 4], [12, 3], [11, 6]]),
+      ...line([5, 9], [5, 11]),
+      ...line([7, 9], [7, 11]),
+      ...rect(7, 4, 1, 1),
+    ], [{ x: 7, y: 4 }]),
+  },
+  {
+    id: "boat",
+    label: "Bateau",
+    figure: fig([
+      ...poly([[2, 8], [4, 10], [10, 10], [11, 8]]),
+      ...line([6, 8], [6, 2]),
+      ...poly([[6, 2], [10, 7], [6, 7]]),
+      ...line([1, 11], [11, 11]),
+    ]),
+  },
+  {
+    id: "flower",
+    label: "Fleur",
+    figure: fig([
+      ...poly([[6, 1], [5, 3], [6, 4], [7, 3]]),
+      ...poly([[6, 4], [4, 3], [3, 5], [5, 5]]),
+      ...poly([[6, 4], [8, 3], [9, 5], [7, 5]]),
+      ...poly([[6, 4], [4, 6], [5, 8], [7, 8], [8, 6]]),
+      ...line([6, 8], [6, 11]),
+      ...line([6, 10], [3, 9]),
+      ...line([6, 10], [9, 9]),
+    ], [{ x: 6, y: 5 }]),
+  },
+  {
+    id: "dog",
+    label: "Chien",
+    figure: fig([
+      ...poly([[3, 5], [5, 3], [7, 3], [8, 5], [8, 7], [3, 7]]),
+      ...poly([[8, 5], [11, 4], [11, 6], [8, 7]]),
+      ...line([4, 7], [4, 10]),
+      ...line([7, 7], [7, 10]),
+      ...line([3, 6], [1, 5]),
+      ...line([3, 6], [1, 7]),
+    ], [{ x: 10, y: 5 }]),
+  },
+  {
+    id: "castle",
+    label: "Château",
+    figure: fig([
+      ...rect(2, 5, 8, 6),
+      ...line([2, 5], [2, 3], [3, 3], [3, 5]),
+      ...line([5, 5], [5, 2], [7, 2], [7, 5]),
+      ...line([9, 5], [9, 3], [10, 3], [10, 5]),
+      ...poly([[5, 2], [6, 0], [7, 2]]),
+      ...rect(5, 8, 2, 3),
+      ...rect(3, 6, 1, 1),
+      ...rect(8, 6, 1, 1),
+    ]),
+  },
+  {
+    id: "umbrella",
+    label: "Parapluie",
+    figure: fig([
+      ...poly([[1, 5], [6, 1], [11, 5]]),
+      ...line([1, 5], [11, 5]),
+      ...line([3, 5], [3, 4]),
+      ...line([6, 5], [6, 3]),
+      ...line([9, 5], [9, 4]),
+      ...line([6, 5], [6, 10], [8, 11]),
+    ]),
+  },
+  {
+    id: "butterfly",
+    label: "Papillon",
+    figure: fig([
+      ...poly([[6, 3], [2, 1], [1, 4], [3, 6], [6, 5]]),
+      ...poly([[6, 3], [10, 1], [11, 4], [9, 6], [6, 5]]),
+      ...poly([[6, 5], [3, 7], [2, 10], [5, 9], [6, 7]]),
+      ...poly([[6, 5], [9, 7], [10, 10], [7, 9], [6, 7]]),
+      ...line([6, 3], [6, 9]),
+    ], [{ x: 6, y: 2 }]),
+  },
+  {
+    id: "airplane",
+    label: "Avion",
+    figure: fig([
+      ...poly([[2, 6], [5, 5], [9, 5], [11, 6], [9, 7], [5, 7]]),
+      ...line([6, 5], [3, 2]),
+      ...line([6, 7], [3, 10]),
+      ...line([6, 5], [6, 7]),
+      ...line([9, 5], [10, 3]),
+      ...line([9, 7], [10, 9]),
+      ...poly([[11, 6], [12, 5], [12, 7]]),
+    ]),
+  },
+  {
+    id: "star",
+    label: "Étoile",
+    figure: fig(poly([
+      [6, 1], [7, 4], [11, 4], [8, 6], [9, 10], [6, 8], [3, 10], [4, 6], [1, 4], [5, 4],
+    ])),
+  },
+  {
+    id: "heart",
+    label: "Cœur",
+    figure: fig(poly([
+      [6, 11], [1, 6], [1, 3], [3, 1], [6, 3], [9, 1], [11, 3], [11, 6],
+    ])),
+  },
+  {
+    id: "mushroom",
+    label: "Champignon",
+    figure: fig([
+      ...poly([[2, 5], [6, 1], [10, 5]]),
+      ...line([2, 5], [10, 5]),
+      ...rect(4, 5, 4, 5),
+      ...line([3, 10], [9, 10]),
+    ], [{ x: 4, y: 3 }, { x: 7, y: 3 }, { x: 6, y: 4 }]),
+  },
+  {
+    id: "snail",
+    label: "Escargot",
+    figure: fig([
+      ...poly([[4, 4], [7, 2], [10, 4], [10, 7], [7, 9], [4, 7]]),
+      ...line([7, 2], [7, 9]),
+      ...line([4, 4], [10, 7]),
+      ...line([10, 4], [4, 7]),
+      ...line([4, 7], [2, 8], [1, 10], [3, 11], [8, 11], [10, 10]),
+      ...line([2, 8], [1, 6], [2, 5]),
+    ], [{ x: 2, y: 5 }]),
+  },
+  {
+    id: "robot",
+    label: "Robot",
+    figure: fig([
+      ...rect(4, 1, 4, 3),
+      ...rect(3, 4, 6, 5),
+      ...line([3, 6], [1, 5], [1, 8], [3, 7]),
+      ...line([9, 6], [11, 5], [11, 8], [9, 7]),
+      ...line([5, 9], [5, 11]),
+      ...line([7, 9], [7, 11]),
+      ...rect(5, 5, 1, 1),
+      ...rect(7, 5, 1, 1),
+      ...line([5, 7], [8, 7]),
+    ], [{ x: 5, y: 2 }, { x: 7, y: 2 }]),
+  },
+  {
+    id: "crown",
+    label: "Couronne",
+    figure: fig([
+      ...poly([[2, 8], [2, 4], [4, 6], [6, 2], [8, 6], [10, 4], [10, 8]]),
+      ...line([2, 8], [10, 8]),
+      ...line([3, 8], [3, 9], [9, 9], [9, 8]),
+    ], [{ x: 4, y: 5 }, { x: 6, y: 4 }, { x: 8, y: 5 }]),
+  },
+  {
+    id: "key",
+    label: "Clé",
+    figure: fig([
+      ...poly([[3, 2], [5, 2], [6, 3], [6, 5], [5, 6], [3, 6], [2, 5], [2, 3]]),
+      ...line([5, 4], [11, 4]),
+      ...line([11, 4], [11, 6]),
+      ...line([9, 4], [9, 6]),
+      ...line([3, 2], [3, 6]),
+    ]),
+  },
+  {
+    id: "anchor",
+    label: "Ancre",
+    figure: fig([
+      ...poly([[5, 1], [7, 1], [7, 3], [5, 3]]),
+      ...line([6, 3], [6, 10]),
+      ...line([2, 7], [10, 7]),
+      ...poly([[2, 7], [1, 9], [3, 10], [4, 8]]),
+      ...poly([[10, 7], [11, 9], [9, 10], [8, 8]]),
+      ...line([5, 10], [7, 10]),
+    ]),
+  },
+  {
+    id: "lamp",
+    label: "Lampe",
+    figure: fig([
+      ...poly([[4, 1], [8, 1], [9, 4], [3, 4]]),
+      ...line([6, 4], [6, 8]),
+      ...rect(4, 8, 4, 2),
+      ...line([3, 10], [9, 10]),
+      ...line([4, 2], [8, 2]),
+    ]),
+  },
+  {
+    id: "ice-cream",
+    label: "Glace",
+    figure: fig([
+      ...poly([[4, 5], [6, 1], [8, 5]]),
+      ...poly([[3, 5], [9, 5], [6, 11]]),
+      ...line([4, 5], [5, 3], [7, 3], [8, 5]),
+    ], [{ x: 5, y: 3 }, { x: 7, y: 3 }]),
+  },
+  {
+    id: "turtle",
+    label: "Tortue",
+    figure: fig([
+      ...poly([[3, 4], [6, 2], [9, 4], [10, 7], [6, 9], [2, 7]]),
+      ...line([6, 2], [6, 9]),
+      ...line([3, 4], [9, 7]),
+      ...line([9, 4], [3, 7]),
+      ...poly([[9, 5], [11, 4], [12, 6], [10, 7]]),
+      ...line([3, 7], [1, 8]),
+      ...line([4, 9], [3, 11]),
+      ...line([8, 9], [9, 11]),
+    ], [{ x: 11, y: 5 }]),
+  },
+  {
+    id: "guitar",
+    label: "Guitare",
+    figure: fig([
+      ...poly([[4, 5], [6, 4], [8, 5], [9, 8], [6, 11], [3, 8]]),
+      ...line([6, 4], [6, 1]),
+      ...line([5, 1], [7, 1]),
+      ...line([5, 2], [7, 2]),
+      ...rect(5, 6, 2, 2),
+    ], [{ x: 6, y: 7 }]),
+  },
+  {
+    id: "mountain",
+    label: "Montagnes",
+    figure: fig([
+      ...poly([[1, 10], [4, 3], [7, 10]]),
+      ...poly([[5, 10], [8, 2], [11, 10]]),
+      ...line([1, 10], [11, 10]),
+      ...line([4, 3], [5, 5], [3, 5], [4, 3]),
+      ...line([8, 2], [9, 4], [7, 4], [8, 2]),
+    ]),
+  },
+  {
+    id: "sun",
+    label: "Soleil",
+    figure: fig([
+      ...poly([[4, 4], [6, 3], [8, 4], [9, 6], [8, 8], [6, 9], [4, 8], [3, 6]]),
+      ...line([6, 3], [6, 1]),
+      ...line([6, 9], [6, 11]),
+      ...line([3, 6], [1, 6]),
+      ...line([9, 6], [11, 6]),
+      ...line([4, 4], [2, 2]),
+      ...line([8, 4], [10, 2]),
+      ...line([4, 8], [2, 10]),
+      ...line([8, 8], [10, 10]),
+    ]),
+  },
+  {
+    id: "moon",
+    label: "Lune",
+    figure: fig([
+      ...poly([[7, 1], [4, 2], [2, 5], [2, 8], [4, 11], [7, 11], [5, 9], [4, 6], [5, 3], [7, 2]]),
+    ], [{ x: 8, y: 3 }, { x: 9, y: 5 }, { x: 8, y: 7 }]),
+  },
+  {
+    id: "cup",
+    label: "Tasse",
+    figure: fig([
+      ...poly([[3, 3], [9, 3], [8, 9], [4, 9]]),
+      ...line([9, 4], [11, 4], [11, 7], [9, 7]),
+      ...line([3, 10], [9, 10]),
+      ...line([4, 3], [4, 9]),
+      ...line([8, 3], [8, 9]),
+    ]),
+  },
+  {
+    id: "hat",
+    label: "Chapeau",
+    figure: fig([
+      ...poly([[4, 6], [4, 2], [8, 2], [8, 6]]),
+      ...line([1, 6], [11, 6]),
+      ...line([1, 6], [1, 7], [11, 7], [11, 6]),
+      ...line([4, 4], [8, 4]),
+    ]),
+  },
+  {
+    id: "leaf",
+    label: "Feuille",
+    figure: fig([
+      ...poly([[6, 1], [3, 3], [2, 6], [4, 9], [6, 11], [8, 9], [10, 6], [9, 3]]),
+      ...line([6, 1], [6, 11]),
+      ...line([6, 4], [3, 3]),
+      ...line([6, 4], [9, 3]),
+      ...line([6, 7], [2, 6]),
+      ...line([6, 7], [10, 6]),
+      ...line([6, 9], [4, 9]),
+      ...line([6, 9], [8, 9]),
+    ]),
+  },
+  {
+    id: "fox",
+    label: "Renard",
+    figure: fig([
+      ...poly([[2, 3], [4, 1], [5, 3], [7, 3], [8, 1], [10, 3], [11, 6], [9, 10], [3, 10], [1, 6]]),
+      ...poly([[5, 6], [6, 8], [7, 6]]),
+      ...line([4, 10], [4, 11]),
+      ...line([8, 10], [8, 11]),
+    ], [{ x: 4, y: 5 }, { x: 8, y: 5 }]),
+  },
+  {
+    id: "truck",
+    label: "Camion",
+    figure: fig([
+      ...rect(1, 4, 7, 5),
+      ...poly([[8, 6], [10, 6], [11, 8], [11, 9], [8, 9]]),
+      ...rect(8, 7, 1, 1),
+      ...line([1, 9], [11, 9]),
+    ], [{ x: 3, y: 10 }, { x: 6, y: 10 }, { x: 9, y: 10 }]),
+  },
+  {
+    id: "tent",
+    label: "Tente",
+    figure: fig([
+      ...poly([[1, 10], [6, 2], [11, 10]]),
+      ...line([1, 10], [11, 10]),
+      ...line([6, 2], [6, 10]),
+      ...line([4, 10], [4, 7], [8, 7], [8, 10]),
+    ]),
+  },
+  {
+    id: "candle",
+    label: "Bougie",
+    figure: fig([
+      ...rect(5, 4, 2, 6),
+      ...poly([[5, 4], [6, 1], [7, 4]]),
+      ...line([4, 10], [8, 10]),
+      ...line([3, 11], [9, 11]),
+      ...line([6, 2], [6, 3]),
+    ]),
+  },
+  {
+    id: "bee",
+    label: "Abeille",
+    figure: fig([
+      ...poly([[3, 5], [6, 3], [9, 5], [9, 8], [6, 10], [3, 8]]),
+      ...line([5, 3], [5, 10]),
+      ...line([7, 3], [7, 10]),
+      ...poly([[3, 5], [1, 3], [1, 6], [3, 7]]),
+      ...poly([[9, 5], [11, 3], [11, 6], [9, 7]]),
+      ...line([6, 10], [6, 11]),
+    ], [{ x: 5, y: 5 }, { x: 7, y: 5 }]),
+  },
+  {
+    id: "ladder",
+    label: "Échelle",
+    figure: fig([
+      ...line([3, 1], [3, 11]),
+      ...line([9, 1], [9, 11]),
+      ...line([3, 2], [9, 2]),
+      ...line([3, 4], [9, 4]),
+      ...line([3, 6], [9, 6]),
+      ...line([3, 8], [9, 8]),
+      ...line([3, 10], [9, 10]),
+    ]),
+  },
+  {
+    id: "bridge",
+    label: "Pont",
+    figure: fig([
+      ...line([1, 8], [3, 5], [6, 3], [9, 5], [11, 8]),
+      ...line([1, 8], [11, 8]),
+      ...line([3, 8], [3, 5]),
+      ...line([6, 8], [6, 3]),
+      ...line([9, 8], [9, 5]),
+      ...line([1, 9], [1, 11]),
+      ...line([11, 9], [11, 11]),
+      ...line([1, 10], [11, 10]),
+    ]),
+  },
+  {
+    id: "windmill",
+    label: "Moulin",
+    figure: fig([
+      ...poly([[4, 6], [6, 4], [8, 6], [8, 11], [4, 11]]),
+      ...line([6, 4], [6, 1]),
+      ...line([6, 4], [2, 2]),
+      ...line([6, 4], [10, 2]),
+      ...line([6, 4], [3, 7]),
+      ...line([6, 4], [9, 7]),
+      ...rect(5, 8, 2, 3),
+    ]),
+  },
+  {
+    id: "apple",
+    label: "Pomme",
+    figure: fig([
+      ...poly([[6, 3], [3, 4], [2, 7], [3, 10], [6, 11], [9, 10], [10, 7], [9, 4]]),
+      ...line([6, 3], [6, 1], [8, 2]),
+      ...line([6, 3], [5, 2]),
+    ]),
+  },
+  {
+    id: "kite",
+    label: "Cerf-volant",
+    figure: fig([
+      ...poly([[6, 1], [9, 5], [6, 9], [3, 5]]),
+      ...line([6, 1], [6, 9]),
+      ...line([3, 5], [9, 5]),
+      ...line([6, 9], [5, 11], [7, 10], [6, 11]),
+    ]),
+  },
+  {
+    id: "clock",
+    label: "Horloge",
+    figure: fig([
+      ...poly([[4, 2], [8, 2], [10, 4], [10, 8], [8, 10], [4, 10], [2, 8], [2, 4]]),
+      ...line([6, 6], [6, 3]),
+      ...line([6, 6], [8, 7]),
+      ...line([6, 2], [6, 1]),
+      ...line([6, 10], [6, 11]),
+      ...line([2, 6], [1, 6]),
+      ...line([10, 6], [11, 6]),
+    ], [{ x: 6, y: 6 }]),
+  },
+  {
+    id: "sword",
+    label: "Épée",
+    figure: fig([
+      ...poly([[5, 1], [7, 1], [7, 7], [5, 7]]),
+      ...line([3, 7], [9, 7]),
+      ...line([3, 7], [3, 8], [9, 8], [9, 7]),
+      ...rect(5, 8, 2, 2),
+      ...line([5, 10], [7, 10], [6, 11], [5, 10]),
+    ]),
+  },
+  {
+    id: "dragon",
+    label: "Dragon",
+    figure: fig([
+      ...poly([[1, 7], [3, 4], [5, 5], [7, 2], [9, 4], [11, 3], [10, 6], [11, 8], [8, 9], [6, 8], [4, 10], [2, 9]]),
+      ...line([7, 2], [8, 1]),
+      ...line([9, 4], [10, 2]),
+      ...line([4, 10], [3, 11]),
+      ...line([6, 8], [7, 11]),
+    ], [{ x: 4, y: 5 }, { x: 8, y: 5 }]),
+  },
+  {
+    id: "bicycle",
+    label: "Vélo",
+    figure: fig([
+      ...poly([[2, 7], [4, 5], [4, 9], [2, 9]]),
+      ...poly([[8, 7], [10, 5], [10, 9], [8, 9]]),
+      ...line([4, 7], [6, 4], [8, 7]),
+      ...line([6, 4], [6, 3], [5, 3]),
+      ...line([4, 7], [7, 7]),
+      ...line([6, 4], [7, 7]),
+    ], [{ x: 3, y: 7 }, { x: 9, y: 7 }]),
+  },
+  {
+    id: "owl",
+    label: "Hibou",
+    figure: fig([
+      ...poly([[3, 4], [4, 1], [5, 3], [7, 3], [8, 1], [9, 4], [10, 7], [8, 11], [4, 11], [2, 7]]),
+      ...poly([[4, 5], [5, 4], [6, 5], [5, 6]]),
+      ...poly([[6, 5], [7, 4], [8, 5], [7, 6]]),
+      ...line([5, 8], [6, 9], [7, 8]),
+      ...line([4, 11], [4, 12]),
+      ...line([8, 11], [8, 12]),
+    ], [{ x: 5, y: 5 }, { x: 7, y: 5 }]),
+  },
+  {
+    id: "lighthouse",
+    label: "Phare",
+    figure: fig([
+      ...poly([[4, 10], [5, 3], [7, 3], [8, 10]]),
+      ...rect(4, 1, 4, 2),
+      ...line([6, 1], [6, 0]),
+      ...line([3, 10], [9, 10]),
+      ...line([2, 11], [10, 11]),
+      ...rect(5, 5, 2, 1),
+      ...rect(5, 7, 2, 1),
+    ]),
+  },
+  {
+    id: "crab",
+    label: "Crabe",
+    figure: fig([
+      ...poly([[3, 5], [5, 3], [7, 3], [9, 5], [9, 8], [7, 9], [5, 9], [3, 8]]),
+      ...line([3, 5], [1, 3]),
+      ...line([3, 6], [1, 5]),
+      ...line([9, 5], [11, 3]),
+      ...line([9, 6], [11, 5]),
+      ...line([4, 9], [3, 11]),
+      ...line([5, 9], [5, 11]),
+      ...line([7, 9], [7, 11]),
+      ...line([8, 9], [9, 11]),
+    ], [{ x: 5, y: 5 }, { x: 7, y: 5 }]),
+  },
+  {
+    id: "present",
+    label: "Cadeau",
+    figure: fig([
+      ...rect(2, 4, 8, 7),
+      ...line([6, 4], [6, 11]),
+      ...line([2, 7], [10, 7]),
+      ...poly([[4, 4], [5, 2], [6, 4], [7, 2], [8, 4]]),
+    ]),
+  },
+];
 
-const FIG_CAR: GridFigure = {
-  size: 8,
-  dots: [{ x: 2, y: 6 }, { x: 6, y: 6 }],
-  segments: [
-    { x1: 1, y1: 5, x2: 3, y2: 3 },
-    { x1: 3, y1: 3, x2: 7, y2: 3 },
-    { x1: 1, y1: 5, x2: 7, y2: 5 },
-    { x1: 1, y1: 5, x2: 1, y2: 6 },
-    { x1: 7, y1: 5, x2: 7, y2: 6 },
-  ],
-};
+const COPY_TASKS: ReproduceTask[] = FIGURES.map(({ id, label, figure }) => ({
+  id: `copy-${id}`,
+  kind: "copy" as const,
+  label,
+  reference: figure,
+  targetSize: G7_GRID_SIZE,
+}));
 
-const FIG_ARROW: GridFigure = {
-  size: 6,
-  dots: [],
-  segments: [
-    { x1: 1, y1: 3, x2: 4, y2: 3 },
-    { x1: 4, y1: 3, x2: 4, y2: 1 },
-    { x1: 4, y1: 1, x2: 6, y2: 3 },
-    { x1: 4, y1: 3, x2: 6, y2: 5 },
-  ],
-};
+/** Figures compactes (coords ≤ 6) pour agrandissement ×2 sur grille 12×12. */
+const SCALE_UP_FIGS: Array<{ id: string; label: string; figure: GridFigure }> = [
+  {
+    id: "house-sm",
+    label: "Maison agrandie",
+    figure: fig([
+      ...poly([[1, 3], [3, 1], [5, 3]]),
+      ...rect(1, 3, 4, 3),
+      ...rect(2, 4, 1, 2),
+    ]),
+  },
+  {
+    id: "rocket-sm",
+    label: "Fusée agrandie",
+    figure: fig([
+      ...poly([[3, 0], [2, 2], [4, 2]]),
+      ...rect(2, 2, 2, 3),
+      ...line([2, 5], [1, 6]),
+      ...line([4, 5], [5, 6]),
+    ], [{ x: 3, y: 3 }]),
+  },
+  {
+    id: "tree-sm",
+    label: "Arbre agrandi",
+    figure: fig([
+      ...poly([[3, 0], [1, 3], [5, 3]]),
+      ...rect(2, 3, 2, 2),
+    ]),
+  },
+  {
+    id: "boat-sm",
+    label: "Bateau agrandi",
+    figure: fig([
+      ...poly([[1, 4], [2, 5], [5, 5], [6, 4]]),
+      ...line([3, 4], [3, 1]),
+      ...poly([[3, 1], [5, 3], [3, 3]]),
+    ]),
+  },
+  {
+    id: "star-sm",
+    label: "Étoile agrandie",
+    figure: fig(poly([[3, 0], [4, 2], [6, 2], [4, 3], [5, 5], [3, 4], [1, 5], [2, 3], [0, 2], [2, 2]])),
+  },
+  {
+    id: "fish-sm",
+    label: "Poisson agrandi",
+    figure: fig([
+      ...poly([[0, 3], [2, 1], [4, 2], [5, 3], [4, 4], [2, 5]]),
+      ...poly([[5, 3], [6, 2], [6, 4]]),
+    ], [{ x: 2, y: 2 }]),
+  },
+  {
+    id: "flower-sm",
+    label: "Fleur agrandie",
+    figure: fig([
+      ...poly([[3, 0], [2, 2], [3, 3], [4, 2]]),
+      ...poly([[3, 3], [1, 2], [1, 4], [3, 4]]),
+      ...poly([[3, 3], [5, 2], [5, 4], [3, 4]]),
+      ...line([3, 4], [3, 6]),
+    ], [{ x: 3, y: 3 }]),
+  },
+  {
+    id: "cat-sm",
+    label: "Chat agrandi",
+    figure: fig([
+      ...poly([[1, 2], [2, 0], [3, 2], [4, 2], [5, 0], [6, 2], [6, 5], [1, 5]]),
+    ], [{ x: 2, y: 3 }, { x: 5, y: 3 }]),
+  },
+];
 
-/** Ex. 2 — quatre points légèrement incurvés (colonne). */
-const FIG_DOTS_CURVE: GridFigure = {
-  size: 6,
-  dots: [{ x: 2, y: 1 }, { x: 3, y: 2 }, { x: 2, y: 3 }, { x: 3, y: 4 }],
-  segments: [],
-};
-
-/** Ex. 2 — deux points (yeux) sur la moitié supérieure. */
-const FIG_EYES: GridFigure = {
-  size: 6,
-  dots: [{ x: 2, y: 2 }, { x: 4, y: 2 }],
-  segments: [],
-};
-
-/** Ex. 2 — sapin de Noël avec points marqués. */
-const FIG_XMAS_TREE: GridFigure = {
-  size: 8,
-  dots: [{ x: 4, y: 1 }, { x: 3, y: 3 }, { x: 5, y: 3 }, { x: 4, y: 5 }],
-  segments: [
-    { x1: 4, y1: 0, x2: 2, y2: 4 },
-    { x1: 4, y1: 0, x2: 6, y2: 4 },
-    { x1: 2, y1: 4, x2: 6, y2: 4 },
-    { x1: 3, y1: 4, x2: 4, y2: 6 },
-    { x1: 5, y1: 4, x2: 4, y2: 6 },
-    { x1: 2, y1: 4, x2: 3, y2: 6 },
-    { x1: 6, y1: 4, x2: 5, y2: 6 },
-    { x1: 3, y1: 6, x2: 5, y2: 6 },
-    { x1: 4, y1: 6, x2: 4, y2: 8 },
-    { x1: 3, y1: 8, x2: 5, y2: 8 },
-  ],
-};
-
-/** Ex. 2 — suite de triangles inversés + crochet. */
-const FIG_TRIANGLES_HOOK: GridFigure = {
-  size: 10,
-  dots: [{ x: 1, y: 3 }, { x: 3, y: 3 }, { x: 5, y: 3 }, { x: 7, y: 3 }, { x: 9, y: 3 }],
-  segments: [
-    { x1: 0, y1: 4, x2: 2, y2: 4 },
-    { x1: 1, y1: 4, x2: 1, y2: 2 },
-    { x1: 0, y1: 4, x2: 1, y2: 2 },
-    { x1: 2, y1: 4, x2: 1, y2: 2 },
-    { x1: 2, y1: 4, x2: 4, y2: 4 },
-    { x1: 3, y1: 4, x2: 3, y2: 2 },
-    { x1: 2, y1: 4, x2: 3, y2: 2 },
-    { x1: 4, y1: 4, x2: 3, y2: 2 },
-    { x1: 4, y1: 4, x2: 6, y2: 4 },
-    { x1: 5, y1: 4, x2: 5, y2: 2 },
-    { x1: 4, y1: 4, x2: 5, y2: 2 },
-    { x1: 6, y1: 4, x2: 5, y2: 2 },
-    { x1: 6, y1: 4, x2: 8, y2: 4 },
-    { x1: 7, y1: 4, x2: 7, y2: 2 },
-    { x1: 6, y1: 4, x2: 7, y2: 2 },
-    { x1: 8, y1: 4, x2: 7, y2: 2 },
-    { x1: 8, y1: 4, x2: 10, y2: 4 },
-    { x1: 9, y1: 4, x2: 9, y2: 2 },
-    { x1: 8, y1: 4, x2: 9, y2: 2 },
-    { x1: 10, y1: 4, x2: 9, y2: 2 },
-    { x1: 8, y1: 4, x2: 10, y2: 6 },
-    { x1: 10, y1: 6, x2: 10, y2: 8 },
-    { x1: 8, y1: 6, x2: 10, y2: 8 },
-  ],
-};
-
-/** Ex. 3 — maison (reproduction partielle type fenêtre). */
-const FIG_HOUSE: GridFigure = {
-  size: 8,
-  dots: [{ x: 4, y: 5 }],
-  segments: [
-    { x1: 2, y1: 5, x2: 4, y2: 2 },
-    { x1: 4, y1: 2, x2: 6, y2: 5 },
-    { x1: 2, y1: 5, x2: 6, y2: 5 },
-    { x1: 2, y1: 5, x2: 2, y2: 7 },
-    { x1: 6, y1: 5, x2: 6, y2: 7 },
-    { x1: 2, y1: 7, x2: 6, y2: 7 },
-    { x1: 3, y1: 7, x2: 3, y2: 5 },
-    { x1: 5, y1: 7, x2: 5, y2: 5 },
-  ],
-};
-
-/** Ex. 4 — couronne / montagne (agrandissement). */
-const FIG_CROWN: GridFigure = {
-  size: 6,
-  dots: [],
-  segments: [
-    { x1: 3, y1: 0, x2: 1, y2: 2 },
-    { x1: 3, y1: 0, x2: 5, y2: 2 },
-    { x1: 1, y1: 2, x2: 5, y2: 2 },
-    { x1: 1, y1: 2, x2: 2, y2: 4 },
-    { x1: 2, y1: 4, x2: 3, y2: 3 },
-    { x1: 3, y1: 3, x2: 4, y2: 4 },
-    { x1: 4, y1: 4, x2: 5, y2: 2 },
-    { x1: 1, y1: 4, x2: 5, y2: 4 },
-  ],
-};
-
-/** Ex. 4 — botte (réduction). */
-const FIG_BOOT: GridFigure = {
-  size: 12,
-  dots: [],
-  segments: [
-    { x1: 5, y1: 2, x2: 5, y2: 7 },
-    { x1: 5, y1: 2, x2: 7, y2: 2 },
-    { x1: 7, y1: 2, x2: 7, y2: 6 },
-    { x1: 5, y1: 7, x2: 7, y2: 6 },
-    { x1: 5, y1: 7, x2: 4, y2: 7 },
-    { x1: 4, y1: 7, x2: 4, y2: 9 },
-    { x1: 4, y1: 9, x2: 10, y2: 9 },
-    { x1: 10, y1: 9, x2: 10, y2: 8 },
-    { x1: 10, y1: 8, x2: 6, y2: 8 },
-    { x1: 6, y1: 8, x2: 6, y2: 7 },
-  ],
-};
-
-/** Ex. 5 — oiseau (réduction). */
-const FIG_BIRD: GridFigure = {
-  size: 10,
-  dots: [{ x: 6, y: 3 }],
-  segments: [
-    { x1: 2, y1: 5, x2: 3, y2: 3 },
-    { x1: 3, y1: 3, x2: 6, y2: 2 },
-    { x1: 6, y1: 2, x2: 9, y2: 4 },
-    { x1: 9, y1: 4, x2: 8, y2: 7 },
-    { x1: 8, y1: 7, x2: 5, y2: 8 },
-    { x1: 5, y1: 8, x2: 2, y2: 5 },
-    { x1: 6, y1: 3, x2: 7, y2: 3 },
-    { x1: 7, y1: 3, x2: 7, y2: 4 },
-    { x1: 7, y1: 4, x2: 6, y2: 4 },
-    { x1: 6, y1: 4, x2: 6, y2: 3 },
-    { x1: 9, y1: 4, x2: 10, y2: 3 },
-    { x1: 5, y1: 8, x2: 5, y2: 10 },
-    { x1: 7, y1: 8, x2: 7, y2: 10 },
-  ],
-};
-
-/** Ex. 5 — fleur (agrandissement). */
-const FIG_FLOWER: GridFigure = {
-  size: 6,
-  dots: [{ x: 3, y: 2 }],
-  segments: [
-    { x1: 3, y1: 0, x2: 2, y2: 1 },
-    { x1: 3, y1: 0, x2: 4, y2: 1 },
-    { x1: 2, y1: 1, x2: 4, y2: 1 },
-    { x1: 2, y1: 1, x2: 1, y2: 2 },
-    { x1: 4, y1: 1, x2: 5, y2: 2 },
-    { x1: 1, y1: 2, x2: 5, y2: 2 },
-    { x1: 2, y1: 1, x2: 3, y2: 2 },
-    { x1: 4, y1: 1, x2: 3, y2: 2 },
-    { x1: 3, y1: 2, x2: 3, y2: 5 },
-    { x1: 3, y1: 4, x2: 1, y2: 5 },
-    { x1: 3, y1: 4, x2: 5, y2: 5 },
-  ],
-};
-
-const COPY_TASKS: ReproduceTask[] = [
-  { id: "copy-rocket", kind: "copy", label: "Fusée", reference: FIG_ROCKET, targetSize: 6 },
-  { id: "copy-diamond", kind: "copy", label: "Losange", reference: FIG_DIAMOND, targetSize: 6 },
-  { id: "copy-tree", kind: "copy", label: "Arbre", reference: FIG_TREE, targetSize: 8 },
-  { id: "copy-dots", kind: "copy", label: "Points alignés", reference: FIG_DOTS_ROW, targetSize: 8 },
-  { id: "copy-fox", kind: "copy", label: "Renard", reference: FIG_FOX, targetSize: 6 },
-  { id: "copy-car", kind: "copy", label: "Voiture", reference: FIG_CAR, targetSize: 8, hintSegments: [{ x1: 3, y1: 3, x2: 7, y2: 3 }] },
-  { id: "copy-arrow", kind: "copy", label: "Flèche", reference: FIG_ARROW, targetSize: 6 },
-  { id: "copy-dots-curve", kind: "copy", label: "Points incurvés", reference: FIG_DOTS_CURVE, targetSize: 6 },
-  { id: "copy-eyes", kind: "copy", label: "Deux points", reference: FIG_EYES, targetSize: 6 },
-  { id: "copy-xmas-tree", kind: "copy", label: "Sapin", reference: FIG_XMAS_TREE, targetSize: 8 },
-  { id: "copy-triangles-hook", kind: "copy", label: "Triangles et crochet", reference: FIG_TRIANGLES_HOOK, targetSize: 10 },
-  { id: "copy-house", kind: "copy", label: "Maison", reference: FIG_HOUSE, targetSize: 8, hintDots: [{ x: 4, y: 5 }] },
+/** Figures sur coords paires pour réduction ÷2. */
+const SCALE_DOWN_FIGS: Array<{ id: string; label: string; figure: GridFigure }> = [
+  {
+    id: "house-lg",
+    label: "Maison réduite",
+    figure: fig([
+      ...poly([[2, 6], [6, 2], [10, 6]]),
+      ...rect(2, 6, 8, 6),
+      ...rect(5, 8, 2, 4),
+    ]),
+  },
+  {
+    id: "rocket-lg",
+    label: "Fusée réduite",
+    figure: fig([
+      ...poly([[6, 0], [4, 4], [8, 4]]),
+      ...rect(4, 4, 4, 6),
+      ...line([4, 10], [2, 12]),
+      ...line([8, 10], [10, 12]),
+    ], [{ x: 6, y: 6 }]),
+  },
+  {
+    id: "tree-lg",
+    label: "Arbre réduit",
+    figure: fig([
+      ...poly([[6, 0], [2, 6], [10, 6]]),
+      ...rect(4, 6, 4, 4),
+    ]),
+  },
+  {
+    id: "car-lg",
+    label: "Voiture réduite",
+    figure: fig([
+      ...poly([[0, 6], [2, 4], [8, 4], [10, 6], [12, 6], [12, 8], [0, 8]]),
+      ...line([2, 4], [2, 6]),
+      ...line([8, 4], [8, 6]),
+    ], [{ x: 2, y: 10 }, { x: 10, y: 10 }]),
+  },
+  {
+    id: "star-lg",
+    label: "Étoile réduite",
+    figure: fig(poly([
+      [6, 0], [8, 4], [12, 4], [8, 6], [10, 12], [6, 8], [2, 12], [4, 6], [0, 4], [4, 4],
+    ])),
+  },
+  {
+    id: "boat-lg",
+    label: "Bateau réduit",
+    figure: fig([
+      ...poly([[2, 8], [4, 10], [10, 10], [12, 8]]),
+      ...line([6, 8], [6, 2]),
+      ...poly([[6, 2], [10, 6], [6, 6]]),
+    ]),
+  },
+  {
+    id: "heart-lg",
+    label: "Cœur réduit",
+    figure: fig(poly([
+      [6, 12], [0, 6], [0, 2], [2, 0], [6, 2], [10, 0], [12, 2], [12, 6],
+    ])),
+  },
 ];
 
 const SCALE_TASKS: ReproduceTask[] = [
-  {
-    id: "scale-diamond-up",
-    kind: "scale_up",
-    label: "Losange agrandi",
-    reference: { ...FIG_DIAMOND, size: 4 },
-    targetSize: 8,
-    hintSegments: [{ x1: 6, y1: 2, x2: 2, y2: 6 }],
-  },
-  {
-    id: "scale-rocket-up",
-    kind: "scale_up",
-    label: "Fusée agrandie",
-    reference: { ...FIG_ROCKET, size: 4 },
-    targetSize: 8,
-    hintDots: [{ x: 6, y: 4 }],
-  },
-  {
-    id: "scale-tree-down",
-    kind: "scale_down",
-    label: "Arbre réduit",
-    reference: FIG_TREE,
-    targetSize: 4,
-    hintSegments: [{ x1: 2, y1: 3, x2: 2, y2: 4 }],
-  },
-  {
-    id: "scale-diamond-down",
-    kind: "scale_down",
-    label: "Losange réduit",
-    reference: FIG_DIAMOND,
-    targetSize: 3,
-  },
-  {
-    id: "scale-arrow-up",
-    kind: "scale_up",
-    label: "Flèche agrandie",
-    reference: { ...FIG_ARROW, size: 3 },
-    targetSize: 6,
-  },
-  {
-    id: "scale-crown-up",
-    kind: "scale_up",
-    label: "Couronne agrandie",
-    reference: { ...FIG_CROWN, size: 4 },
-    targetSize: 8,
-    hintSegments: [{ x1: 6, y1: 2, x2: 2, y2: 6 }],
-  },
-  {
-    id: "scale-boot-down",
-    kind: "scale_down",
-    label: "Botte réduite",
-    reference: FIG_BOOT,
-    targetSize: 6,
-    hintSegments: [{ x1: 2, y1: 4, x2: 2, y2: 5 }, { x1: 2, y1: 5, x2: 4, y2: 5 }],
-  },
-  {
-    id: "scale-bird-down",
-    kind: "scale_down",
-    label: "Oiseau réduit",
-    reference: FIG_BIRD,
-    targetSize: 5,
-    hintSegments: [{ x1: 1, y1: 4, x2: 2, y2: 2 }],
-  },
-  {
-    id: "scale-flower-up",
-    kind: "scale_up",
-    label: "Fleur agrandie",
-    reference: { ...FIG_FLOWER, size: 3 },
-    targetSize: 6,
-    hintDots: [{ x: 6, y: 4 }],
-  },
+  ...SCALE_UP_FIGS.map(({ id, label, figure }) => ({
+    id: `scale-up-${id}`,
+    kind: "scale_up" as const,
+    label,
+    reference: figure,
+    targetSize: G7_GRID_SIZE,
+  })),
+  ...SCALE_DOWN_FIGS.map(({ id, label, figure }) => ({
+    id: `scale-down-${id}`,
+    kind: "scale_down" as const,
+    label,
+    reference: figure,
+    targetSize: G7_GRID_SIZE,
+  })),
 ];
 
 export function pickReproduceTask(variant: 1 | 2, seed: number): ReproduceTask {

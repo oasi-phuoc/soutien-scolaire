@@ -74,7 +74,7 @@ function GridCanvas({
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
-      className="mx-auto w-full max-w-[220px]"
+      className="mx-auto w-full max-w-[320px]"
       onClick={(e) => {
         if (!interactive || !onPointClick) return;
         const rect = e.currentTarget.getBoundingClientRect();
@@ -246,15 +246,12 @@ export function G7ReproduceExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{taskConsigne(task)}</p>
-      <p className="text-xs font-semibold text-[var(--color-text-primary)]">{task.label}</p>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
-          <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">Modèle</p>
           <GridCanvas size={task.reference.size} dots={refDots} segments={refSegments} />
         </div>
         <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
-          <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-wide" style={{ color: ACCENT }}>Votre figure</p>
           <GridCanvas
             size={task.targetSize}
             dots={userDots}
