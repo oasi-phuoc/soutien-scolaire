@@ -32,19 +32,9 @@ export const MATH_G7_REPRODUCE_LESSON: MathSubmoduleLesson = {
           "Tous les points se placent en multipliant leurs coordonnées par le même facteur.",
         ],
       },
-      { type: "highlight", fr: "Compléter une frise" },
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Observez le motif de **cases colorées** qui se répète.",
-          "Coloriez les cases suivantes pour prolonger le même motif.",
-          "Les cases grises sont déjà données : ne les modifiez pas.",
-        ],
-      },
       {
         type: "note",
-        fr: "Reproduction : cliquez deux intersections pour un segment, deux fois le même point pour un point. Frise : cliquez une case pour la colorier.",
+        fr: "Cliquez deux intersections pour tracer un segment ; cliquez deux fois le même point pour placer ou retirer un point.",
       },
     ],
     paragraphs: { fr: [] },

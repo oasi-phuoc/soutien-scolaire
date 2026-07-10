@@ -336,6 +336,11 @@ export function pickReproduceTask(variant: 1 | 2 | 3, seed: number): ReproduceTa
   return pool[Math.abs(seed) % pool.length]!;
 }
 
+/** Liste stable des tâches d'un pool (pour audit / aperçu). */
+export function listReproduceTasks(variant: 1 | 2 | 3): ReproduceTask[] {
+  return variant === 1 ? [...COPY_TASKS] : variant === 2 ? [...SCALE_DOWN_TASKS] : [...SCALE_UP_TASKS];
+}
+
 export function taskConsigne(task: ReproduceTask): string {
   if (task.kind === "copy") {
     return "Reproduisez la figure à l'identique sur le quadrillage de droite. Cliquez deux points pour tracer un segment ; cliquez deux fois le même point pour placer un point.";
