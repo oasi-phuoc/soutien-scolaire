@@ -3,6 +3,7 @@
 import {
   type A10ExerciseLevel,
   pickByLevel,
+  alignOps,
   a102EasyGens,
   a102FracEasyGens,
   a103EasyGens,
@@ -109,8 +110,8 @@ function pairAnswer(x: string, y: string): string {
   return `{(${x} ; ${y})}`;
 }
 
-function commonOps(mult: number, more: string[]): string[] {
-  return ["même dénominateur", `· ${mult}`, "réduire", ...more];
+function commonOps(mult: number, more: string[], dev: string[]): string[] {
+  return alignOps(dev, ["même dénominateur", `· ${mult}`, "réduire", ...more]);
 }
 
 function _pickFrom<T>(arr: Array<() => T>): T {
@@ -151,7 +152,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${rhs}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${r + 1}x`, `+ ${p * q}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${r + 1}x`, `+ ${p * q}`, `: ${coef}`, ""]) };
   }),
 
   // T2: A - (B - Cx) = Dx + (Ex - F)·H
@@ -176,7 +177,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${leftCoef}x = ${rhs}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${D + E * H}x`, `+ ${A - B}`, `: (${leftCoef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${D + E * H}x`, `+ ${A - B}`, `: (${leftCoef})`, ""]) };
   }),
 
   // T3: k·x = -(a+b)
@@ -195,7 +196,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${k}x = ${rhs}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `: ${k}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `: ${k}`, ""]) };
   }),
 
   // T4: impossible — ax + b(x-c) = d(x-e) + fx, same x coef, diff constants
@@ -213,7 +214,7 @@ const a102Gens: Array<() => EquationQuestion> = [
         `${lc2} = ${rc2}`,
         "impossible !",
       ];
-      return { expr, solution: IMP, development, operations: ["effectuer", "réduire", `- ${L2}x`, "", ""] };
+      return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", `- ${L2}x`, "", ""]) };
     }
     const expr = `${a}x + (x - ${c}) · ${b} = ${d}(x - ${e}) + ${f}x`;
     const development = [
@@ -222,7 +223,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${lc} = ${rc}`,
       "impossible !",
     ];
-    return { expr, solution: IMP, development, operations: ["effectuer", "réduire", `- ${L}x`, "", ""] };
+    return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", `- ${L}x`, "", ""]) };
   },
 
   // T5: ax² + bx - c = ax(x-d) + e
@@ -246,7 +247,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "- x²", `+ ${a * d}x`, `+ ${c}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "- x²", `+ ${a * d}x`, `+ ${c}`, `: ${coef}`, ""]) };
   }),
 
   // T6: ax·b - cx·(-d) + e = rhs  (minus negative → plus)
@@ -264,7 +265,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${rhs - e}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${e}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${e}`, `: ${coef}`, ""]) };
   }),
 
   // T7: infinite — a(x-c)+bd = e(x-f)+gx-h with matching coef & const
@@ -283,7 +284,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `-${leftConst} = -${leftConst}`,
       "infini",
     ];
-    return { expr, solution: INF, development, operations: ["effectuer", "réduire", `- ${G}x`, "", ""] };
+    return { expr, solution: INF, development, operations: alignOps(development, ["effectuer", "réduire", `- ${G}x`, "", ""]) };
   }),
 
   // T8: ax·(x-b) - ax² = (c+dx)·e
@@ -305,7 +306,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${d * e}x`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${d * e}x`, `: (${coef})`, ""]) };
   }),
 
   // T9: ax - b·(-cx) + d = ex·f - g
@@ -330,7 +331,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${rightCoef}x`, `- ${d}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${rightCoef}x`, `- ${d}`, `: (${coef})`, ""]) };
   }),
 
   // T10: (x-a) - b(x+c) = d(x-e)
@@ -352,7 +353,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef1}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${d}x`, `+ ${a + b * c}`, `: (${coef1})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${d}x`, `+ ${a + b * c}`, `: (${coef1})`, ""]) };
   }),
 
   // T11: infinite — ax·b + c - x = d(1+ex) - f
@@ -371,7 +372,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${c} = ${c}`,
       "infini",
     ];
-    return { expr, solution: INF, development, operations: ["effectuer", "réduire", `- ${de}x`, ""] };
+    return { expr, solution: INF, development, operations: alignOps(development, ["effectuer", "réduire", `- ${de}x`, ""]) };
   }),
 
   // T12: ax² + bx + c = ax² + dx (x² cancels)
@@ -393,7 +394,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${-c}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "- x²", `- ${d}x`, `- ${c}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "- x²", `- ${d}x`, `- ${c}`, `: ${coef}`, ""]) };
   }),
 
   // T13: impossible — (x+a)·b - c = x·b - d
@@ -408,7 +409,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${a * b - c} = -${d}`,
       "impossible !",
     ];
-    return { expr, solution: IMP, development, operations: ["effectuer", "réduire", `- ${b}x`, "", ""] };
+    return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", `- ${b}x`, "", ""]) };
   },
 
   // T14: ax - (bx - c) + d = (x - e)·f
@@ -430,7 +431,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x + ${constL} = -${e * f}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${f}x`, `- ${constL}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${f}x`, `- ${constL}`, ""]) };
   }),
 
   // T15: 3x - a = (x+b) - (cx - d)
@@ -452,7 +453,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num + a}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${c}x`, `+ ${a}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${c}x`, `+ ${a}`, `: ${coef}`, ""]) };
   }),
 
   // T16: a(x-b) + c(d + ex) = 0
@@ -475,7 +476,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${-constL}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${constL >= 0 ? constL : `(${constL})`}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${constL >= 0 ? constL : `(${constL})`}`, `: ${coef}`, ""]) };
   }),
 
   // T17: A - b(x-c) = (d + ex)·f
@@ -499,7 +500,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `-${b + e * f}x = ${-(A + b * c - rhs)}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${e * f}x`, `- ${A + b * c}`, `: (${-(b + e * f)})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${e * f}x`, `- ${A + b * c}`, `: (${-(b + e * f)})`, ""]) };
   }),
 
   // T18: ax·bx - c = dx² + e - x(x+f)  (x² cancels)
@@ -522,7 +523,7 @@ const a102Gens: Array<() => EquationQuestion> = [
     development2[3] = `-${c - e2} = -${f}x`;
     development2[4] = `x = ${xn}`;
     const sol = rat(xn, 1);
-    return { expr: expr2, solution: sol, development: development2, operations: ["effectuer", "réduire", "- x²", "- 2", "· (-1)", ""] };
+    return { expr: expr2, solution: sol, development: development2, operations: alignOps(development2, ["effectuer", "réduire", "- x²", "- 2", "· (-1)", ""]) };
   }),
 
   // T19: impossible — (A - bx) - (C - bx) = D
@@ -536,7 +537,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${A - C} = ${D}`,
       "impossible !",
     ];
-    return { expr, solution: IMP, development, operations: ["effectuer", "réduire", "", ""] };
+    return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", "", ""]) };
   },
 
   // T20: p·(-qx) - a(b + cx) = d(1 - x) + ex
@@ -562,7 +563,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${-rightCoef}x`, `+ ${a * b}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-rightCoef}x`, `+ ${a * b}`, `: (${coef})`, ""]) };
   }),
 
   // T21: A·(-B) + C·(-Dx) = E·(-F) - G·(-x)
@@ -588,7 +589,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", `- ${G}x`, `+ ${A * B}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", `- ${G}x`, `+ ${A * B}`, `: (${coef})`, ""]) };
   }),
 
   // T22: A - (Bx - C) - D = Ex·F + G
@@ -615,7 +616,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${E * F}x`, `- ${leftConst}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${E * F}x`, `- ${leftConst}`, `: (${coef})`, ""]) };
   }),
 
   // T23: infinite — ax·b + c·(d+x) = e·(f+gx) + h + ix
@@ -636,7 +637,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${leftK} = ${rightK}`,
       "infini",
     ];
-    return { expr, solution: INF, development, operations: ["effectuer", "réduire", `- ${rc}x`, "", ""] };
+    return { expr, solution: INF, development, operations: alignOps(development, ["effectuer", "réduire", `- ${rc}x`, "", ""]) };
   }),
 
   // T24: impossible — (x-a)·b + c = d·(ex+f) - g
@@ -656,7 +657,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${lc} = ${rc2}`,
       "impossible !",
     ];
-    return { expr, solution: IMP, development, operations: ["effectuer", "réduire", `- ${d * e}x`, "", ""] };
+    return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", `- ${d * e}x`, "", ""]) };
   }),
 
   // T25: impossible — A - (B - cx) = d(x+e) - f
@@ -675,7 +676,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${lc} = ${rc}`,
       "impossible !",
     ];
-    return { expr, solution: IMP, development, operations: ["effectuer", "réduire", `- ${d}x`, "", ""] };
+    return { expr, solution: IMP, development, operations: alignOps(development, ["effectuer", "réduire", `- ${d}x`, "", ""]) };
   }),
 
   // T26: (x-a) - (bx+c) = d·(-ex)
@@ -698,7 +699,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `-${a + c} = ${rightCoef - leftCoef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${-leftCoef}x`, `: (${rightCoef - leftCoef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-leftCoef}x`, `: (${rightCoef - leftCoef})`, ""]) };
   }),
 
   // T27: infinite — ax·bx - x + c = ax(x-d)+ex + c (x² cancels)
@@ -715,7 +716,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       "infini",
     ];
     if (inner !== 1) return null;
-    return { expr: expr2, solution: INF, development, operations: ["effectuer", "réduire", "- x²", "+ x", ""] };
+    return { expr: expr2, solution: INF, development, operations: alignOps(development, ["effectuer", "réduire", "- x²", "+ x", ""]) };
   }),
 
   // T28: (x-a)·(-b) - c(d+x) = 0
@@ -737,7 +738,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${-constL}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${-constL}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-constL}`, `: (${coef})`, ""]) };
   }),
 
   // T29: (ax-b)·c - d(x+e) = f·(-g)
@@ -758,7 +759,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${coef * xn}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${b * c + d * e}`, `: ${coef}`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${b * c + d * e}`, `: ${coef}`, ""]) };
   }),
 
   // T30: (x-a)·(-b) - c = (x+d)·e + x
@@ -784,7 +785,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num + constL}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `- ${rightCoef}x`, `- ${constL}`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `- ${rightCoef}x`, `- ${constL}`, `: (${coef})`, ""]) };
   }),
 
   // T31: ax·b - c·dx = A - (B + ex)
@@ -810,7 +811,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${e}x`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${e}x`, `: (${coef})`, ""]) };
   }),
 
   // T32: ax·(-b) - cx = dx + e - fx + g
@@ -836,7 +837,7 @@ const a102Gens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: ["effectuer", "réduire", `+ ${-rightCoef}x`, `: (${coef})`, ""] };
+    return { expr, solution: sol, development, operations: alignOps(development, ["effectuer", "réduire", `+ ${-rightCoef}x`, `: (${coef})`, ""]) };
   }),
 ];
 
@@ -889,7 +890,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x = ${rhs}`,
       `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n3 * mult / d3}x`, `- ${n2 * mult / d2}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n3 * mult / d3}x`, `- ${n2 * mult / d2}`, `: ${coef}`, ""], development) };
   }),
 
   // T2: (x-a)/d1 - 1 = (px+q)/d2
@@ -911,7 +912,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x - ${lhsConst} = ${rhsConst}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * d2}x`, `+ ${lhsConst}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * d2}x`, `+ ${lhsConst}`, `: ${coef}`, ""], development) };
   }),
 
   // T3: (ax-b)/d1 - (c-dx)/d2 = 0
@@ -935,7 +936,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x = ${num}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-constL}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-constL}`, `: ${coef}`, ""], development) };
   }),
 
   // T4: n1/d1·x - x/d2 = integer
@@ -949,7 +950,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${n1}x - 2x = ${xn}`,
       `x = ${xn}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [""], development) };
   }),
 
   // T5: (a-bx)/d1 + n/d2 = x/d3
@@ -972,7 +973,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} = ${-coef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `: ${-coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `: ${-coef}`, ""], development) };
   }),
 
   // T6: kx + n/d1 = A - (B-cx)/d2
@@ -995,7 +996,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x = ${num - n * mult / d1}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${c * mult / d2}x`, `- ${n * mult / d1}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${c * mult / d2}x`, `- ${n * mult / d1}`, `: ${coef}`, ""], development) };
   }),
 
   // T7: 1 - (px+q)/d1 = n/d2
@@ -1013,7 +1014,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `-${p}x = ${n - 2 + q}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 1", `: (${-p})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 1", `: (${-p})`, ""], development) };
   }),
 
   // T8: A = n/d1 - (px-q)/d2
@@ -1031,7 +1032,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${A - n * mult / d1 - q * mult / d2} = -${p * mult / d2}x`,
       `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n * mult / d1 + q * mult / d2}`, `: -${p * mult / d2}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n * mult / d1 + q * mult / d2}`, `: -${p * mult / d2}`, ""], development) };
   }),
 
   // T9: kx - (a-x)/d = (x+b)/d2 - c
@@ -1054,7 +1055,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} = ${-coef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${k * mult}x`, `: (${-coef})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${k * mult}x`, `: (${-coef})`, ""], development) };
   }),
 
   // T10: (x-a)/d1 = (x+b)/d2
@@ -1073,7 +1074,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${d2 - d1}x - ${d2 * a} = ${d1 * b}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${d2 * a}`, `: ${d2 - d1}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${d2 * a}`, `: ${d2 - d1}`, ""], development) };
   }),
 
   // T11: kx - n/d1·x = m/d2·x + c
@@ -1092,7 +1093,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x = ${c}`,
       `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${m * mult / d2}x`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${m * mult / d2}x`, `: ${coef}`, ""], development) };
   }),
 
   // T12: (ax-b)/d1 = -x + n/d2
@@ -1114,7 +1115,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x - ${b * mult / d1} = ${n * mult / d2}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 33x", `+ ${b * mult / d1}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 33x", `+ ${b * mult / d1}`, `: ${coef}`, ""], development) };
   }),
 
   // T13: (x-a)/d1 - (-b+cx)/d2 = n/d3·x
@@ -1135,7 +1136,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} = ${-coef}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${mult / d1 - c * mult / d2 - n * mult / d3}x`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${mult / d1 - c * mult / d2 - n * mult / d3}x`, `: ${coef}`, ""], development) };
   }),
 
   // T14: A = B + (a-bx)/d
@@ -1153,7 +1154,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${A - B - a} = -${b}x`,
       `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${B}`, `: (-${b})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${B}`, `: (-${b})`, ""], development) };
   }),
 
   // T15: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x
@@ -1175,7 +1176,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${constL} + ${coef}x = ${constR}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `- ${constL}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `- ${constL}`, `: ${coef}`, ""], development) };
   }),
 
   // T16: (x-a)/d1 = (b-cx)/d2
@@ -1195,7 +1196,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x - ${10 * a} = ${3 * b}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${3 * c}x`, `+ ${10 * a}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${3 * c}x`, `+ ${10 * a}`, `: ${coef}`, ""], development) };
   }),
 
   // T17: kx - n/d1 = n2/d2 + x
@@ -1215,7 +1216,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x - ${n * mult / d1} = ${n2 * mult / d2}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 24x", `+ ${n * mult / d1}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 24x", `+ ${n * mult / d1}`, `: ${coef}`, ""], development) };
   }),
 
   // T18: (ax-b)/d1 = (x+c)/d2
@@ -1237,7 +1238,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
         `${a * mult / d1 - 1}x - ${b * mult / d1} = ${c}`,
         `x = ${solText(sol)}`,
       ];
-      return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${b * mult / d1}`, `: ${a * mult / d1 - 1}`, ""]) };
+      return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${b * mult / d1}`, `: ${a * mult / d1 - 1}`, ""], development) };
     }
     return null;
   }),
@@ -1258,7 +1259,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${A * mult - q * mult / d1 - c * mult} - ${p * mult / d1 + n * mult / d2}x = 0`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n * mult / d2}x`, `- ${A * mult - q * mult / d1}`, `: (${coef})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n * mult / d2}x`, `- ${A * mult - q * mult / d1}`, `: (${coef})`, ""], development) };
   }),
 
   // T20: kx - n/d1 = n2/d2 + px
@@ -1278,7 +1279,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${coef}x - ${n} = ${n2}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p}x`, `+ ${n}`, `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p}x`, `+ ${n}`, `: ${coef}`, ""], development) };
   }),
 
   // T21: n1/d1 - n2/d2·x = n3 + px
@@ -1300,7 +1301,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult - n1 * mult / d1}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""], development) };
   }),
 
   // T22: n1/d1 - n2/d2·x = n3/d1 + px
@@ -1320,7 +1321,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n2 * mult / d2}x`, `: ${-n2 * mult / d2 - p * mult}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n2 * mult / d2}x`, `: ${-n2 * mult / d2 - p * mult}`, ""], development) };
   }),
 
   // T23: kx - n/d1 = n2/d2 + px (variant)
@@ -1339,7 +1340,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${(k - 1) * mult}x - ${n * mult / d1} = ${n2 * mult / d2}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `+ ${n * mult / d1}`, `: ${(k - 1) * mult}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `+ ${n * mult / d1}`, `: ${(k - 1) * mult}`, ""], development) };
   }),
 
   // T24: n1/d1 - n2/d2·x = n3/d1 + px (simplified shape)
@@ -1359,7 +1360,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""], development) };
   }),
 
   // T25: (ax-b)/d1 + n/d2 = rhs
@@ -1380,7 +1381,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${a * mult / d1}x - ${b * mult / d1 - n * mult / d2} = ${rhs * mult}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${b * mult / d1 - n * mult / d2}`, `: ${a * mult / d1}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${b * mult / d1 - n * mult / d2}`, `: ${a * mult / d1}`, ""], development) };
   }),
 
   // T26: A - n/d1·x = n2/d2 + x
@@ -1401,7 +1402,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `x = ${solText(sol)}`,
     ];
     const coef = -(n * mult / d1 + mult);
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${A * mult - n2 * mult / d2}`, `: (${coef})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${A * mult - n2 * mult / d2}`, `: (${coef})`, ""], development) };
   }),
 
   // T27: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x (variant coef)
@@ -1420,7 +1421,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${n1 * mult / d1 - n3 * mult / d1} = ${(n4 - n2) * mult / d2}x`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n4 * mult / d2}x`, `- ${n1 * mult / d1 - n3 * mult / d1}`, `: ${(n4 - n2) * mult / d2}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n4 * mult / d2}x`, `- ${n1 * mult / d1 - n3 * mult / d1}`, `: ${(n4 - n2) * mult / d2}`, ""], development) };
   }),
 
   // T28: (x-a)/d1 + (bx-c)/d2 = 1
@@ -1440,7 +1441,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `${5 + 3 * b}x - ${5 * a + 3 * c} = 15`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${5 * a + 3 * c}`, `: ${5 + 3 * b}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${5 * a + 3 * c}`, `: ${5 + 3 * b}`, ""], development) };
   }),
 
   // T29: n1/d1 - n2/d2·x = n3/d1 + px (neg coef)
@@ -1460,7 +1461,7 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
       `-${n2 * mult / d2 + mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
       `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${n1 * mult / d1}`, `: (${-(n2 * mult / d2 + mult)})`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${n1 * mult / d1}`, `: (${-(n2 * mult / d2 + mult)})`, ""], development) };
   }),
 
   // T30: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x + c  (same as balanced form)
@@ -1473,15 +1474,19 @@ const _legacyA102FracGens: Array<() => EquationQuestion> = [
     const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} - ${f(n4, d2)} x`;
+    const lhs1 = n1 * mult / d1;
+    const lhs2 = n2 * mult / d2;
+    const rhs1 = n3 * mult / d1;
+    const rhs2 = n4 * mult / d2;
+    const xCoef = lhs2 - rhs2;
+    const constDiff = lhs1 - rhs1;
     const development = [
-      `${f("5x - " + 5 * 2, mult)} + ${f("6x - " + 6 * 3, mult)} = ${f("15", mult)}`.replace("5 * 2", "10").replace("6 * 3", "18"),
-      `${f("5x - 10", mult)} + ${f("6x - 9", mult)} = ${f("15", mult)}`,
-      `11x - 19 = 15`,
+      `${f(String(lhs1), mult)} - ${f(String(lhs2) + "x", mult)} = ${f(String(rhs1), mult)} - ${f(String(rhs2) + "x", mult)}`,
+      `${lhs1} - ${lhs2}x = ${rhs1} - ${rhs2}x`,
+      `${xCoef}x = ${constDiff}`,
       `x = ${solText(sol)}`,
     ];
-    development[1] = `${f("5x - 10", mult)} + ${f("6x - 9", mult)} = ${f("15", mult)}`;
-    development[2] = `11x - 19 = 15`;
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 19", ": 11", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${rhs2}x`, `- ${constDiff}`, `: ${xCoef}`, ""], development) };
   }),
 ];
 

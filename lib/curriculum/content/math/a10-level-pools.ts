@@ -104,6 +104,16 @@ function s102(n: number): string {
   return n < 0 ? ` − ${-n}` : ` + ${n}`;
 }
 
+function opAdd(n: number): string {
+  return n < 0 ? `- ${Math.abs(n)}` : `+ ${n}`;
+}
+
+export function alignOps(dev: string[], ops: string[] = []): string[] {
+  if (ops.length === dev.length) return ops;
+  if (ops.length > dev.length) return ops.slice(0, dev.length);
+  return [...ops, ...Array.from({ length: dev.length - ops.length }, () => "")];
+}
+
 function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
   return () => retry(() => {
     const x0 = pickIntSolution();
@@ -129,7 +139,7 @@ function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
         expr,
         solution: rat(x0, 1),
         development: dev,
-        operations: ["", `- ${c}x`, `- ${b}`, `: ${coef}`, ""],
+        operations: alignOps(dev, ["", `- ${c}x`, `- ${b}`, `: ${coef}`]),
       };
     }
     if (shape.kind === "paren") {
@@ -146,15 +156,29 @@ function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
         `${a - c}x = ${d - a * k * (shape.variant === 1 ? -1 : 1)}`,
         `x = ${x0}`,
       ];
-      return { expr, solution: rat(x0, 1), development: dev, operations: ["effectuer", "réduire", `- ${c}x`, `: ${a - c}`, ""] };
+      return { expr, solution: rat(x0, 1), development: dev, operations: alignOps(dev, ["effectuer", "réduire", `- ${c}x`, `: ${a - c}`]) };
     }
     if (shape.kind === "reverse") {
       const a = ri(2, 6), c = ri(1, 9);
       const b = ri(1, 8);
       const d = a * x0 + b - c;
-      const expr = shape.variant === 0 ? `${a * x0 + b} = ${c}x${s102(d)}` : `${c} = ${a}x${s102(b)}`;
-      const dev = [`${a}x${s102(b)} = ${c}x${s102(d)}`, `${a - c}x${s102(b)} = ${d}`, `x = ${x0}`];
-      return { expr, solution: rat(x0, 1), development: dev, operations: ["", `- ${c}x`, `: ${a - c}`, ""] };
+      if (shape.variant === 0) {
+        const lhsConst = a * x0 + b;
+        const expr = `${lhsConst} = ${c}x${s102(d)}`;
+        const dev = [
+          `${lhsConst} = ${c}x${s102(d)}`,
+          `${lhsConst - d} = ${c}x`,
+          `x = ${x0}`,
+        ];
+        return { expr, solution: rat(x0, 1), development: dev, operations: alignOps(dev, ["", opAdd(-d), `: ${c}`]) };
+      }
+      const expr = `${c} = ${a}x${s102(b)}`;
+      const dev = [
+        `${c} = ${a}x${s102(b)}`,
+        `${c - b} = ${a}x`,
+        `x = ${x0}`,
+      ];
+      return { expr, solution: rat(x0, 1), development: dev, operations: alignOps(dev, ["", opAdd(-b), `: ${a}`]) };
     }
     if (shape.kind === "product") {
       const p = ri(2, 4), q = ri(2, 4);
@@ -167,7 +191,7 @@ function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
         expr,
         solution: rat(x0, 1),
         development: [`${pq}x${s102(c)} = ${r}x${s102(e)}`, `${pq - r}x = ${e - c}`, `x = ${x0}`],
-        operations: ["effectuer", `- ${r}x`, `: ${pq - r}`, ""],
+        operations: alignOps([`${pq}x${s102(c)} = ${r}x${s102(e)}`, `${pq - r}x = ${e - c}`, `x = ${x0}`], ["effectuer", `- ${r}x`, `: ${pq - r}`]),
       };
     }
     // both_paren — solution x0 choisie d'abord
@@ -180,11 +204,12 @@ function buildEasy102(shape: Easy102Shape): () => EquationQuestion {
     if (kd < 1 || kd > 8) return null;
     const den = a - c;
     const expr = `${a}(x${s102(kb)}) = ${c}(x${s102(kd)})`;
+    const dev = [`${a}x${s102(a * kb)} = ${c}x${s102(c * kd)}`, `${den}x = ${c * kd - a * kb}`, `x = ${x0}`];
     return {
       expr,
       solution: rat(x0, 1),
-      development: [`${a}x${s102(a * kb)} = ${c}x${s102(c * kd)}`, `${den}x = ${c * kd - a * kb}`, `x = ${x0}`],
-      operations: ["effectuer", `- ${c}x`, `: ${den}`, ""],
+      development: dev,
+      operations: alignOps(dev, ["effectuer", `- ${c}x`, `: ${den}`]),
     };
   });
 }
@@ -215,10 +240,14 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const expr = Number.isInteger(rhs)
           ? `${f(n1, d1)} x - ${f(n2, d2)} x = ${rhs}`
           : `${f(n1, d1)} x - ${f(n2, d2)} x = ${f(rhsNum, mult)}`;
+        const dev = [
+          `${f(String(lhs1) + "x", mult)} - ${f(String(lhs2) + "x", mult)} = ${f(String(rhsNum), mult)}`,
+          `${lhs1}x - ${lhs2}x = ${rhsNum}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${f(String(lhs1) + "x", mult)} - ${f(String(lhs2) + "x", mult)} = ${f(String(rhsNum), mult)}`, `${lhs1}x - ${lhs2}x = ${rhsNum}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, "réduire", ""]),
         };
       }
       case 1: {
@@ -234,10 +263,14 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const n = nNum * d2 / mult;
         if (!Number.isInteger(n) || Math.abs(n) > 20) return null;
         const expr = `1 - ${f(p + "x + " + q, d1)} = ${f(n, d2)}`;
+        const dev = [
+          `${mult} - ${coefNum}x - ${q * mult / d1} = ${n * mult / d2}`,
+          `-${coefNum}x = ${n * mult / d2 + q * mult / d1 - mult}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${mult} - ${coefNum}x - ${q * mult / d1} = ${n * mult / d2}`, `-${coefNum}x = ${n * mult / d2 + q * mult / d1 - mult}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `+ ${mult - n * mult / d2 - q * mult / d1}`, `: (${-coefNum})`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, opAdd(mult - n * mult / d2 - q * mult / d1), `: (${-coefNum})`]),
         };
       }
       case 2: {
@@ -247,10 +280,15 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         if (!Number.isInteger(a) || a < 1) return null;
         const mult = lcm(d1, d2);
         const expr = `${f("x - " + a, d1)} = ${f("x + " + b, d2)}`;
+        const x1 = mult / d1, x2 = mult / d2;
+        const dev = [
+          `${x1}x - ${x1 * a} = ${x2}x + ${x2 * b}`,
+          `${d2 - d1}x = ${d1 * b + d2 * a}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${d2 * mult / d2}x - ${d2 * a * mult / d2} = ${d1 * mult / d1}x + ${d1 * b * mult / d1}`, `${d2 - d1}x = ${d1 * b + d2 * a}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${d1}x`, `+ ${d2 * a}`, `: ${d2 - d1}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `- ${d1}x`, `: ${d2 - d1}`]),
         };
       }
       case 3: {
@@ -258,10 +296,10 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const a = ri(3, 8), b = ri(2, 5), B = ri(10, 35);
         const A = B + a - b * x0;
         const expr = `${A} = ${B} + ${f(a + " - " + b + "x", d)}`;
+        const dev = [`${A} = ${B} + ${a} - ${b}x`, `${A - B - a} = -${b}x`, `x = ${x0}`];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${A} = ${B} + ${a} - ${b}x`, `${A - B - a} = -${b}x`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${d}`, "réduire", `- ${B}`, `: (-${b})`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${d}`, opAdd(-(A - B - a)), `: (-${b})`]),
         };
       }
       case 4: {
@@ -274,10 +312,14 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         if (b < 1) return null;
         const expr = `${f(a + "x - " + b, d1)} = ${f("x + " + c, d2)}`;
         const coef = a * mult / d1 - mult / d2;
+        const dev = [
+          `${a * mult / d1}x - ${b * mult / d1} = ${mult / d2}x + ${c * mult / d2}`,
+          `${coef}x = ${c * mult / d2 + b * mult / d1}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${a * mult / d1}x - ${b * mult / d1} = ${mult / d2}x + ${c * mult / d2}`, `${coef}x = ${c * mult / d2 + b * mult / d1}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${mult / d2}x`, `+ ${b * mult / d1}`, `: ${coef}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `- ${mult / d2}x`, `: ${coef}`]),
         };
       }
       case 5: {
@@ -288,10 +330,14 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         if (n2Num % d1 !== 0) return null;
         const n2 = n2Num / d1;
         const expr = `${k}x - ${f(n, d1)} = ${f(n2, d2)} + ${p}x`;
+        const dev = [
+          `${k}x - ${n * mult / d1} = ${n2 * mult / d2} + ${p}x`,
+          `${k - p}x - ${n * mult / d1} = ${n2 * mult / d2}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${k}x - ${n * mult / d1} = ${n2 * mult / d2} + ${p}x`, `${k - p}x - ${n * mult / d1} = ${n2 * mult / d2}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${p}x`, `+ ${n * mult / d1}`, `: ${k - p}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `- ${p}x`, `: ${k - p}`]),
         };
       }
       case 6: {
@@ -303,10 +349,10 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const expr = `${f("x - " + a, d1)} - 1 = ${f(p + "x + " + q, d2)}`;
         const coef = d2 - p * d2;
         const lhs = d2 * a + d1;
+        const dev = [`${d2}x - ${lhs} = ${p * d2}x + ${q * d2}`, `${coef}x = ${q * d2 + lhs}`, `x = ${x0}`];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${d2}x - ${lhs} = ${p * d2}x + ${q * d2}`, `${coef}x = ${q * d2 + lhs}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `- ${p * d2}x`, `+ ${lhs}`, `: ${coef}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `- ${p * d2}x`, `: ${coef}`]),
         };
       }
       case 7: {
@@ -318,10 +364,10 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const c = coef * x0;
         if (!Number.isInteger(c)) return null;
         const expr = `${k}x - ${f(n, d1)} x = ${f(m, d2)} x + ${c}`;
+        const dev = [`${coef}x = ${c}`, `x = ${x0}`];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${coef}x = ${c}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `: ${coef}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `: ${coef}`]),
         };
       }
       case 8: {
@@ -333,10 +379,16 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         const c = cNum / d1;
         const expr = `${f("x - " + cVal, d1)} + ${f(b + "x - " + c, d2)} = 1`;
         const sumCoef = d2 + b * d1;
+        const x1 = mult / d1, x2 = mult / d2;
+        const constSum = x1 * cVal + c * x2;
+        const dev = [
+          `${x1}x - ${x1 * cVal} + ${b * x2}x - ${c * x2} = ${mult}`,
+          `${sumCoef}x - ${constSum} = ${mult}`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${d2 * mult / d2}x - ${cVal * mult / d1} + ${b * mult / d1}x - ${c * mult / d2} = ${mult}`, `${sumCoef}x - ${cVal * mult / d1 + c * mult / d2} = ${mult}`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `+ ${cVal * mult / d1 + c * mult / d2}`, `: ${sumCoef}`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, opAdd(constSum), `: ${sumCoef}`]),
         };
       }
       default: {
@@ -347,10 +399,14 @@ function buildEasyFrac(shape: number): () => EquationQuestion {
         if (!Number.isInteger(rhsNum)) return null;
         const A = rhsNum;
         const expr = `${A} = ${f(n, d1)} - ${f(p + "x - " + q, d2)}`;
+        const dev = [
+          `${A} = ${n * mult / d1} - ${p * mult / d2}x + ${q * mult / d2}`,
+          `${A - n * mult / d1 - q * mult / d2} = -${p * mult / d2}x`,
+          `x = ${x0}`,
+        ];
         return {
-          expr, solution: rat(x0, 1),
-          development: [`${A} = ${n * mult / d1} - ${p * mult / d2}x + ${q * mult / d2}`, `${A - n * mult / d1 - q * mult / d2} = -${p * mult / d2}x`, `x = ${x0}`],
-          operations: ["même dénominateur", `· ${mult}`, "réduire", `: (-${p * mult / d2})`, ""],
+          expr, solution: rat(x0, 1), development: dev,
+          operations: alignOps(dev, [`· ${mult}`, `: (-${p * mult / d2})`, ""]),
         };
       }
     }
@@ -403,12 +459,12 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
         `${cfg.d2}x + ${cfg.e2 * c1} - ${cfg.e2 * cfg.a1}x = ${f2}`,
         `${cfg.d2 - cfg.e2 * cfg.a1}x + ${cfg.e2 * c1} = ${f2}`,
         `${cfg.d2 - cfg.e2 * cfg.a1}x = ${f2 - cfg.e2 * c1}`, `x = ${x0}`,
-        A103_PHASE_OTHER, `y = ${c1} - ${cfg.a1}x`, `y = ${c1} - ${cfg.a1} · ${x0} = ${y0}`,
+        A103_PHASE_OTHER, `y = ${c1} - ${cfg.a1}x`, `y = ${c1} - ${cfg.a1} · ${x0}`, `y = ${y0}`,
       ];
       return {
         equations: [fmtLin(cfg.a1, 1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", `- ${cfg.a1}x`, "", "", "effectuer", "réduire", `- ${cfg.e2 * c1}`, `: ${cfg.d2 - cfg.e2 * cfg.a1}`, "", "", ""],
+        operations: alignOps(dev, ["", `- ${cfg.a1}x`, "", "", "effectuer", "réduire", `- ${cfg.e2 * c1}`, `: ${cfg.d2 - cfg.e2 * cfg.a1}`, "", "", ""]),
       };
     }
     if (cfg.isoVar === "y" && cfg.isoEq === 1 && cfg.b1 === -1) {
@@ -422,7 +478,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(cfg.a1, -1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", `- ${cfg.a1}x`, "· (-1)", "", "", "effectuer", "réduire", `- ${-cfg.e2 * c1}`, `: ${cfg.d2 + cfg.e2 * cfg.a1}`, "", "", ""],
+        operations: alignOps(dev, ["", `- ${cfg.a1}x`, "· (-1)", "", "", "effectuer", "réduire", `- ${-cfg.e2 * c1}`, `: ${cfg.d2 + cfg.e2 * cfg.a1}`, "", "", ""]),
       };
     }
     if (cfg.isoVar === "x" && cfg.isoEq === 1 && cfg.a1 === 1) {
@@ -436,7 +492,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(1, cfg.b1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", `- ${cfg.b1}y`, "", "", "effectuer", "réduire", `- ${cfg.d2 * c1}`, `: (${-(cfg.d2 * cfg.b1 - cfg.e2)})`, "", "", ""],
+        operations: alignOps(dev, ["", `- ${cfg.b1}y`, "", "", "effectuer", "réduire", `- ${cfg.d2 * c1}`, `: (${-(cfg.d2 * cfg.b1 - cfg.e2)})`, "", "", ""]),
       };
     }
     if (cfg.isoVar === "y" && cfg.isoEq === 1 && cfg.b1 !== 1 && cfg.b1 !== -1) {
@@ -450,7 +506,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(cfg.a1, cfg.b1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", `- ${cfg.a1}x`, `: ${cfg.b1}`, "", "", "effectuer", "", "", "", ""],
+        operations: alignOps(dev, ["", `- ${cfg.a1}x`, `: ${cfg.b1}`, "", "", "effectuer", "", "", "", ""]),
       };
     }
     if (cfg.isoVar === "x" && cfg.isoEq === 2 && cfg.d2 === 1) {
@@ -464,7 +520,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(cfg.a1, cfg.b1, c1), fmtLin(1, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", "+ x", "", "", "effectuer", "réduire", `- ${cfg.a1 * rhs}`, "", "", ""],
+        operations: alignOps(dev, ["", "+ x", "", "", "effectuer", "réduire", `- ${cfg.a1 * rhs}`, "", "", ""]),
       };
     }
     if (cfg.isoVar === "x" && cfg.isoEq === 2) {
@@ -476,7 +532,7 @@ function buildA103(mkCfg: () => A103Cfg): () => SystemEquationQuestion {
       return {
         equations: [fmtLin(cfg.a1, cfg.b1, c1), fmtLin(cfg.d2, cfg.e2, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: ["", `- ${cfg.e2}y`, `: ${cfg.d2}`, "", "", "", "", "", ""],
+        operations: alignOps(dev, ["", `- ${cfg.e2}y`, `: ${cfg.d2}`, "", "", "", "", "", ""]),
       };
     }
     return null;
@@ -549,24 +605,24 @@ function buildA104(mkCfg: () => A104Cfg): () => SystemEquationQuestion {
         cfg.m1 > 1 ? `I · ${cfg.m1}` : "I", fmtLin(cfg.a * cfg.m1, cfg.b * cfg.m1, c * cfg.m1),
         cfg.m2 > 1 ? `II · ${cfg.m2}` : "II", fmtLin(cfg.d * cfg.m2, cfg.e * cfg.m2, f2 * cfg.m2),
         `${yCoef}y = ${c * cfg.m1 + f2 * cfg.m2 - xCoef * x0}`, `y = ${y0}`, "dans I",
-        fmtLin(cfg.a, cfg.b, c), `${cfg.a}x + ${cfg.b} · ${y0} = ${c}`, `${cfg.a}x = ${c - cfg.b * y0}`, `x = ${x0}`,
+        fmtLin(cfg.a, cfg.b, c), `${cfg.a}x + ${cfg.b} · ${y0}`, `${cfg.a}x + ${cfg.b * y0} = ${c}`, `${cfg.a}x = ${c - cfg.b * y0}`, `x = ${x0}`,
       ];
       return {
         equations: [fmtLin(cfg.a, cfg.b, c), fmtLin(cfg.d, cfg.e, f2)] as [string, string],
         answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-        operations: [`· ${cfg.m1}`, "", cfg.m2 > 1 ? `· ${cfg.m2}` : "", "", `: ${yCoef}`, "", "", "", `- ${cfg.b * y0}`, `: ${cfg.a}`, "", ""],
+        operations: alignOps(dev, [`· ${cfg.m1}`, "", cfg.m2 > 1 ? `· ${cfg.m2}` : "", "", `: ${yCoef}`, "", "", "", `- ${cfg.b * y0}`, `: ${cfg.a}`, ""]),
       };
     }
     const dev = [
       cfg.m1 > 1 ? `I · ${cfg.m1}` : "I", fmtLin(cfg.a * cfg.m1, cfg.b * cfg.m1, c * cfg.m1),
       cfg.m2 > 1 ? `II · ${cfg.m2}` : "II", fmtLin(cfg.d * cfg.m2, cfg.e * cfg.m2, f2 * cfg.m2),
       `${xCoef}x = ${c * cfg.m1 + f2 * cfg.m2 - yCoef * y0}`, `x = ${x0}`, "dans II",
-      fmtLin(cfg.d, cfg.e, f2), `${cfg.d}x + ${cfg.e} · ${y0} = ${f2}`, `y = ${y0}`,
+      fmtLin(cfg.d, cfg.e, f2), `${cfg.d}x + ${cfg.e} · ${y0}`, `${cfg.d}x + ${cfg.e * y0} = ${f2}`, `y = ${y0}`,
     ];
     return {
       equations: [fmtLin(cfg.a, cfg.b, c), fmtLin(cfg.d, cfg.e, f2)] as [string, string],
       answer: pairAnswer(xs, ys), acceptable: acceptPair(xs, ys), development: dev,
-      operations: [`· ${cfg.m1}`, "", cfg.m2 > 1 ? `· ${cfg.m2}` : "", "", `: ${xCoef}`, "", "", "", "", "", ""],
+      operations: alignOps(dev, [`· ${cfg.m1}`, "", cfg.m2 > 1 ? `· ${cfg.m2}` : "", "", `: ${xCoef}`, "", "", "", "", ""]),
     };
   });
 }
