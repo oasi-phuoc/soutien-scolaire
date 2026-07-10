@@ -4515,7 +4515,7 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
     return { kind: "equation_group", lesson, exNum, questions: [a101Templates[Math.floor(Math.random() * a101Templates.length)]!()] };
   }
   if (lesson.submoduleId === "A10-1" && exNum === 2) {
-    return { kind: "equation_group", lesson, exNum, questions: [pickA102Question()] };
+    return { kind: "equation_group", lesson, exNum, questions: [pickA102Question(exNum as 1 | 2)] };
   }
   const imp: EquationSolution = { kind: "impossible" };
   const inf: EquationSolution = { kind: "infinite" };
@@ -4595,15 +4595,15 @@ function genEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationG
 
 // ── Fraction equation group (A10.2) ───────────────────────────────────────
 function genFracEquationGroupStep(lesson: MathSubmoduleLesson, exNum = 1): EquationGroupStep {
-  return { kind: "equation_group", lesson, exNum, questions: [pickA102FracQuestion()] };
+  return { kind: "equation_group", lesson, exNum, questions: [pickA102FracQuestion(exNum as 1 | 2)] };
 }
 
-function genSystemEquationStep(lesson: MathSubmoduleLesson): SystemEquationStep {
-  return { kind: "system_equation", lesson, exNum: 1, question: pickA103SystemQuestion() };
+function genSystemEquationStep(lesson: MathSubmoduleLesson, exNum = 1): SystemEquationStep {
+  return { kind: "system_equation", lesson, exNum, question: pickA103SystemQuestion(exNum as 1 | 2) };
 }
 
-function genLinearCombinationStep(lesson: MathSubmoduleLesson): SystemEquationStep {
-  return { kind: "system_equation", lesson, exNum: 1, question: pickA104SystemQuestion() };
+function genLinearCombinationStep(lesson: MathSubmoduleLesson, exNum = 1): SystemEquationStep {
+  return { kind: "system_equation", lesson, exNum, question: pickA104SystemQuestion(exNum as 1 | 2) };
 }
 
 const ALGEBRA_SYMBOLS = ["a", "b", "c", "m", "n", "x", "y"] as const;
@@ -5517,13 +5517,17 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push(genFracEquationGroupStep(lesson, 1));
       steps.push(genFracEquationGroupStep(lesson, 2));
     } else if (sid === "A10-3") {
-      steps.push(genSystemEquationStep(lesson));
+      steps.push(genSystemEquationStep(lesson, 1));
+      steps.push(genSystemEquationStep(lesson, 2));
       steps.push({ kind: "eval_start", lesson });
-      steps.push(genSystemEquationStep(lesson));
+      steps.push(genSystemEquationStep(lesson, 1));
+      steps.push(genSystemEquationStep(lesson, 2));
     } else if (sid === "A10-4") {
-      steps.push(genLinearCombinationStep(lesson));
+      steps.push(genLinearCombinationStep(lesson, 1));
+      steps.push(genLinearCombinationStep(lesson, 2));
       steps.push({ kind: "eval_start", lesson });
-      steps.push(genLinearCombinationStep(lesson));
+      steps.push(genLinearCombinationStep(lesson, 1));
+      steps.push(genLinearCombinationStep(lesson, 2));
     } else if (sid === "A10-5") {
       steps.push({ kind: "word_problems", lesson, config: genWP("eq_e", 1) });
       steps.push({ kind: "word_problems", lesson, config: genWP("eq_m", 2) });
@@ -7959,9 +7963,10 @@ export function GenericModuleContent({
       stepValidate = () => {};
     }
     stepReset = () => {
+      const exNum = (currentStep.exNum ?? 1) as 1 | 2;
       const regenerated = currentStep.lesson.submoduleId === "A10-4"
-        ? genLinearCombinationStep(currentStep.lesson)
-        : genSystemEquationStep(currentStep.lesson);
+        ? genLinearCombinationStep(currentStep.lesson, exNum)
+        : genSystemEquationStep(currentStep.lesson, exNum);
       setSystemOverrideSteps(prev => ({ ...prev, [stepIdx]: regenerated }));
       setEqAnswers([]);
       setEqWorkAnswers([]);

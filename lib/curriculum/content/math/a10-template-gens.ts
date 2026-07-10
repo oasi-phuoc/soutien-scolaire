@@ -1,5 +1,18 @@
 // Parameterized A10 exercise generators — manual development steps per template shape.
 
+import {
+  type A10ExerciseLevel,
+  pickByLevel,
+  a102EasyGens,
+  a102FracEasyGens,
+  a103EasyGens,
+  a103HardGens,
+  a104EasyGens,
+  a104HardGens,
+} from "./a10-level-pools";
+
+export type { A10ExerciseLevel };
+
 export type EquationSolution =
   | { kind: "rational"; num: number; den: number }
   | { kind: "impossible" }
@@ -100,7 +113,7 @@ function commonOps(mult: number, more: string[]): string[] {
   return ["même dénominateur", `· ${mult}`, "réduire", ...more];
 }
 
-function pickFrom<T>(arr: Array<() => T>): T {
+function _pickFrom<T>(arr: Array<() => T>): T {
   return arr[ri(0, arr.length - 1)]!();
 }
 
@@ -830,7 +843,31 @@ const a102Gens: Array<() => EquationQuestion> = [
 
 // ── A10.2 fraction equations (30 templates) ─────────────────────────────────
 
-const a102FracGens: Array<() => EquationQuestion> = [
+function pickXInt(): number {
+  return pickIntSolution();
+}
+
+function intDiv(num: number, den: number): number | null {
+  if (num % den !== 0) return null;
+  return num / den;
+}
+
+/** q such that (xn-a)/d1 - 1 = (p·xn+q)/d2 */
+function solveQ_T2(d1: number, d2: number, xn: number, a: number, p: number): number | null {
+  return intDiv(d2 * (xn - a) - d1 * d2 - p * xn * d1, d1);
+}
+
+/** c such that (ax-b)/d1 = (c-dx)/d2 at x = x0 */
+function solveC_T3(d1: number, d2: number, a: number, b: number, d: number, x0: number): number | null {
+  return intDiv(d2 * (a * x0 - b) + d * x0 * d1, d1);
+}
+
+/** a such that (a-bx)/d1 + n/d2 = x/d3 at x = x0 */
+function solveA_T5(d1: number, d2: number, d3: number, b: number, n: number, x0: number): number | null {
+  return intDiv(b * x0 * d1 + x0 * d1 * d3 - n * d1 * d3, d3);
+}
+
+const _legacyA102FracGens: Array<() => EquationQuestion> = [
   // T1: -x/d1 + n2/d2 = n3/d3·x - n4/d2
   () => retry(() => {
     const d1 = ri(2, 5), d2 = ri(3, 7), d3 = ri(2, 5);
@@ -858,34 +895,37 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T2: (x-a)/d1 - 1 = (px+q)/d2
   () => retry(() => {
     const d1 = ri(2, 5), d2 = ri(3, 7), mult = lcm(d1, d2);
-    const xn = pickIntSolution();
+    const xn = pickXInt();
     const a = ri(2, 8), p = ri(1, 3);
-    const q = Math.round((xn - a) / d1 * d2 - d2 - p * xn);
-    if (Math.abs((xn - a) / d1 - 1 - (p * xn + q) / d2) > 1e-9) return null;
+    const q = solveQ_T2(d1, d2, xn, a, p);
+    if (q === null || Math.abs(q) > 30) return null;
     const sol = rat(xn, 1);
+    if (!okRat(sol)) return null;
     const expr = `${f("x - " + a, d1)} - 1 = ${f(p + "x + " + q, d2)}`;
+    const lhsConst = d2 * a + d1;
+    const coef = d2 - p * d2;
+    const rhsConst = q * d2;
     const development = [
-      `${f(mult / d2 + "x - " + mult * a / d2, mult)} - ${f(mult / d1, mult)} = ${f(p * mult / d2 + "x + " + q * mult / d2, mult)}`,
-      `${mult / d2 / (mult / d1) * (mult / d1)}x - ${mult * a / d2} - ${mult / d1} = ${p}x + ${q}`.replace(`${mult / d2 / (mult / d1) * (mult / d1)}`, `${d2 / d1}`),
-      `${d2 / d1}x - ${d2 * a / d1 + d2} = ${p}x + ${q}`,
+      `${f(d2 + "x - " + lhsConst, mult)} = ${f(p * d2 + "x + " + rhsConst, mult)}`,
+      `${d2}x - ${lhsConst} = ${p * d2}x + ${rhsConst}`,
+      `${coef}x - ${lhsConst} = ${rhsConst}`,
       `x = ${solText(sol)}`,
     ];
-    development[1] = `${d2 / d1}x - ${d2 * a / d1 + d2} = ${p}x + ${q}`;
-    const coef = d2 / d1 - p;
-    development[2] = `${coef}x - ${d2 * a / d1 + d2} = ${q}`;
-    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p}x`, `+ ${d2 * a / d1 + d2}`, "· (-1)", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * d2}x`, `+ ${lhsConst}`, `: ${coef}`, ""]) };
   }),
 
   // T3: (ax-b)/d1 - (c-dx)/d2 = 0
   () => retry(() => {
     const d1 = 2, d2 = ri(5, 9), mult = lcm(d1, d2);
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const a = ri(1, 3), b = ri(2, 8), c = ri(1, 6), d = ri(2, 5);
+    const x0 = pickXInt();
+    const a = ri(1, 3), b = ri(2, 8), d = ri(2, 5);
+    const c = solveC_T3(d1, d2, a, b, d, x0);
+    if (c === null || c < 1 || c > 20) return null;
     const coef = (a * mult) / d1 + (d * mult) / d2;
     const constL = (-b * mult) / d1 - (c * mult) / d2;
-    const num = coef * xn / xd;
+    const num = coef * x0;
     if (!Number.isInteger(num) || num !== -constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(a + "x - " + b, d1)} - ${f(c + " - " + d + "x", d2)} = 0`;
     const development = [
@@ -893,7 +933,7 @@ const a102FracGens: Array<() => EquationQuestion> = [
       `${a * mult / d1}x - ${b * mult / d1} - ${c * mult / d2} + ${d * mult / d2}x = 0`,
       `${coef}x - ${-constL} = 0`,
       `${coef}x = ${num}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-constL}`, `: ${coef}`, ""]) };
   }),
@@ -915,20 +955,22 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T5: (a-bx)/d1 + n/d2 = x/d3
   () => retry(() => {
     const d1 = ri(7, 11), d2 = 2, d3 = 4, mult = lcm(lcm(d1, d2), d3);
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const b = ri(5, 10), a = ri(10, 25), n = ri(1, 4);
+    const x0 = pickXInt();
+    const b = ri(5, 10), n = ri(1, 4);
+    const a = solveA_T5(d1, d2, d3, b, n, x0);
+    if (a === null || a < 10 || a > 40) return null;
     const coef = (-b * mult) / d1 - mult / d3;
     const constL = (a * mult) / d1 + (n * mult) / d2;
-    const num = coef * xn / xd;
+    const num = coef * x0;
     if (!Number.isInteger(num) || num !== -constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(a + " - " + b + "x", d1)} + ${f(n, d2)} = ${f("x", d3)}`;
     const development = [
       `${f(a * mult / d1 + " - " + b * mult / d1 + "x", mult)} + ${f(n * mult / d2, mult)} = ${f(mult / d3 + "x", mult)}`,
       `${a * mult / d1} - ${b * mult / d1}x + ${n * mult / d2} = ${mult / d3}x`,
       `${constL} = ${-coef}x`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `: ${-coef}`, ""]) };
   }),
@@ -936,13 +978,14 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T6: kx + n/d1 = A - (B-cx)/d2
   () => retry(() => {
     const d1 = 5, d2 = 6, mult = 30;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const k = ri(6, 10), n = ri(1, 4), B = ri(5, 10), c = ri(2, 4), A = ri(5, 10);
+    const x0 = pickXInt();
+    const k = ri(6, 10), n = ri(1, 4), B = ri(5, 10), c = ri(2, 4);
+    const A = Math.round(k * x0 + n / d1 + (B - c * x0) / d2);
     const coef = k * mult + (c * mult) / d2;
     const constR = A * mult - B * mult / d2 + n * mult / d1;
-    const num = coef * xn / xd;
+    const num = coef * x0;
     if (!Number.isInteger(num) || num !== constR) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${k}x + ${f(n, d1)} = ${A} - ${f(B + " - " + c + "x", d2)}`;
     const development = [
@@ -950,7 +993,7 @@ const a102FracGens: Array<() => EquationQuestion> = [
       `${k * mult}x + ${n * mult / d1} = ${A * mult} - ${B * mult / d2} + ${c * mult / d2}x`,
       `${coef}x + ${n * mult / d1} = ${constR}`,
       `${coef}x = ${num - n * mult / d1}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${c * mult / d2}x`, `- ${n * mult / d1}`, `: ${coef}`, ""]) };
   }),
@@ -994,21 +1037,22 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T9: kx - (a-x)/d = (x+b)/d2 - c
   () => retry(() => {
     const d = 2, d2 = 3, mult = 6;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const k = ri(5, 8), a = ri(5, 12), b = ri(2, 6), c = 1;
+    const x0 = pickXInt();
+    const k = ri(5, 8), b = ri(2, 6), c = 1;
+    const a = Math.round(x0 + d * (k * x0 - (x0 + b) / d2 + c));
     const coef = k * mult + mult / d - mult / d2;
     const constL = (-a * mult) / d;
     const constR = (b * mult) / d2 - c * mult;
-    const num = coef * xn / xd;
+    const num = coef * x0;
     if (!Number.isInteger(num) || num !== constR - constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${k}x - ${f(a + " - x", d)} = ${f("x + " + b, d2)} - ${c}`;
     const development = [
       `${f(k * mult + "x", mult)} - ${f(a * mult / d + " - " + mult / d + "x", mult)} = ${f(mult / d2 + "x + " + b * mult / d2, mult)} - ${f(c * mult, mult)}`,
       `${k * mult}x - ${a * mult / d} + ${mult / d}x = ${mult / d2}x + ${b * mult / d2} - ${c * mult}`,
       `${constL} = ${-coef}x`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${k * mult}x`, `: (${-coef})`, ""]) };
   }),
@@ -1016,17 +1060,18 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T10: (x-a)/d1 = (x+b)/d2
   () => retry(() => {
     const d1 = 3, d2 = 9, mult = 9;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const a = ri(4, 10), b = ri(1, 5);
-    if (Math.abs((xn / xd - a) / d1 - (xn / xd + b) / d2) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const x0 = pickXInt();
+    const b = ri(1, 5);
+    const a = intDiv(x0 * (d2 - d1) - d1 * b, d2);
+    if (a === null || a < 1 || a > 12) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f("x - " + a, d1)} = ${f("x + " + b, d2)}`;
     const development = [
       `${f(d2 + "x - " + d2 * a, mult)} = ${f(d1 + "x + " + d1 * b, mult)}`,
       `${d2}x - ${d2 * a} = ${d1}x + ${d1 * b}`,
       `${d2 - d1}x - ${d2 * a} = ${d1 * b}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${d2 * a}`, `: ${d2 - d1}`, ""]) };
   }),
@@ -1053,21 +1098,21 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T12: (ax-b)/d1 = -x + n/d2
   () => retry(() => {
     const d1 = 3, d2 = 11, mult = 33, a = 2;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const b = ri(5, 12), n = ri(1, 8);
+    const x0 = pickXInt();
+    const n = ri(1, 8);
+    const bPart = intDiv(d1 * n, d2);
+    if (bPart === null) return null;
+    const b = a * x0 + d1 * x0 - bPart;
+    if (!Number.isInteger(b) || b < 5 || b > 20) return null;
     const coef = (a * mult) / d1 + mult;
-    const constL = (-b * mult) / d1;
-    const constR = (n * mult) / d2;
-    const num = coef * xn / xd;
-    if (!Number.isInteger(num) || num !== constR - constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(a + "x - " + b, d1)} = -x + ${f(n, d2)}`;
     const development = [
       `${f(a * mult / d1 + "x - " + b * mult / d1, mult)} = ${f("-33x", mult)} + ${f(n * mult / d2, mult)}`,
       `${a * mult / d1}x - ${b * mult / d1} = -${mult}x + ${n * mult / d2}`,
       `${coef}x - ${b * mult / d1} = ${n * mult / d2}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, ["+ 33x", `+ ${b * mult / d1}`, `: ${coef}`, ""]) };
   }),
@@ -1075,20 +1120,20 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T13: (x-a)/d1 - (-b+cx)/d2 = n/d3·x
   () => retry(() => {
     const d1 = 7, d2 = 6, d3 = 2, mult = 42;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
+    const x0 = pickXInt();
     const a = ri(4, 10), b = ri(5, 10), c = ri(1, 3), n = 1;
     const coef = mult / d1 - (c * mult) / d2 - (n * mult) / d3;
     const constL = (-a * mult) / d1 + (b * mult) / d2;
-    const num = coef * xn / xd;
+    const num = coef * x0;
     if (!Number.isInteger(num) || num !== -constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f("x - " + a, d1)} - ${f("-" + b + " + " + c + "x", d2)} = ${f(n, d3)} x`;
     const development = [
       `${f(mult / d1 + "x - " + a * mult / d1, mult)} - ${f("-" + b * mult / d2 + " + " + c * mult / d2 + "x", mult)} = ${f(n * mult / d3 + "x", mult)}`,
       `${mult / d1}x - ${a * mult / d1} + ${b * mult / d2} - ${c * mult / d2}x = ${n * mult / d3}x`,
       `${constL} = ${-coef}x`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${mult / d1 - c * mult / d2 - n * mult / d3}x`, `: ${coef}`, ""]) };
   }),
@@ -1114,165 +1159,179 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T15: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x
   () => retry(() => {
     const d1 = 7, d2 = 2, mult = 14;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const n1 = ri(10, 20), n2 = 1, n3 = 3, n4 = 3;
+    const x0 = pickXInt();
+    const n2 = 1, n3 = 3, n4 = 3;
     const coef = (-n2 * mult) / d2 + (n4 * mult) / d2;
+    const n1 = n3 + intDiv(d1 * (n2 - n4) * x0, d2)!;
+    if (!Number.isInteger(n1) || n1 < 5 || n1 > 30) return null;
     const constL = (n1 * mult) / d1;
     const constR = (n3 * mult) / d1;
-    const num = coef * xn / xd;
-    if (!Number.isInteger(num) || num !== constR - constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} - ${f(n4, d2)} x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult / d1, mult)} - ${f(n4 * mult / d2 + "x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult / d1} - ${n4 * mult / d2}x`,
       `${constL} + ${coef}x = ${constR}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 21x", "- 16", `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${-coef}x`, `- ${constL}`, `: ${coef}`, ""]) };
   }),
 
   // T16: (x-a)/d1 = (b-cx)/d2
   () => retry(() => {
     const d1 = 3, d2 = 10, mult = 30;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const a = ri(1, 4), b = ri(5, 12), c = ri(2, 5);
-    if (Math.abs((xn / xd - a) / d1 - (b - c * (xn / xd)) / d2) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const x0 = pickXInt();
+    const a = ri(1, 4), c = ri(2, 5);
+    const b = intDiv(d2 * (x0 - a) + c * x0 * d1, d1);
+    if (b === null || b < 5 || b > 20) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
+    const coef = d2 + c * d1;
     const expr = `${f("x - " + a, d1)} = ${f(b + " - " + c + "x", d2)}`;
-    const coef = 10 + 3 * c;
     const development = [
       `${f("10x - " + 10 * a, mult)} = ${f("3x + " + 3 * b + " - " + 3 * c + "x", mult)}`,
       `10x - ${10 * a} = ${3 * b} - ${3 * c}x`,
       `${coef}x - ${10 * a} = ${3 * b}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 9x", "+ 10", `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${3 * c}x`, `+ ${10 * a}`, `: ${coef}`, ""]) };
   }),
 
   // T17: kx - n/d1 = n2/d2 + x
   () => retry(() => {
-    const d1 = 8, d2 = 3, mult = 24, k = 5, n = 3, n2 = 1;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
+    const d1 = 8, d2 = 3, mult = 24, k = 5, n = 3;
+    const x0 = pickXInt();
+    const n2Num = d2 * (k - 1) * x0 * d1 - n * d2;
+    const n2 = intDiv(n2Num, d1);
+    if (n2 === null || n2 < 1 || n2 > 10) return null;
     const coef = (k - 1) * mult;
-    const constL = (-n * mult) / d1;
-    const constR = (n2 * mult) / d2;
-    const num = coef * xn / xd;
-    if (!Number.isInteger(num) || num !== constR - constL) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${k}x - ${f(n, d1)} = ${f(n2, d2)} + x`;
     const development = [
       `${f(k * mult + "x", mult)} - ${f(n * mult / d1, mult)} = ${f(n2 * mult / d2, mult)} + ${f("24x", mult)}`,
       `${k * mult}x - ${n * mult / d1} = ${n2 * mult / d2} + ${mult}x`,
       `${coef}x - ${n * mult / d1} = ${n2 * mult / d2}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 24x", "+ 9", `: ${coef}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 24x", `+ ${n * mult / d1}`, `: ${coef}`, ""]) };
   }),
 
   // T18: (ax-b)/d1 = (x+c)/d2
   () => retry(() => {
     const d1 = 2, d2 = 8, mult = 8;
-    const xn = ri(1, 5);
-    const a = ri(8, 15), c = ri(3, 10);
-    const b = a * xn - (xn + c) * d1 / d2;
-    if (!Number.isInteger(b) || b < 1) return null;
-    const sol = rat(xn, 1);
-    const expr = `${f(a + "x - " + b, d1)} = ${f("x + " + c, d2)}`;
-    const development = [
-      `${f(a * mult / d1 + "x - " + b * mult / d1, mult)} = ${f("x + " + c, d2)}`,
-      `${a * mult / d1}x - ${b * mult / d1} = x + ${c}`,
-      `${a * mult / d1 - 1}x - ${b * mult / d1} = ${c}`,
-      `x = ${solText(sol)}`,
-    ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${b * mult / d1}`, `: ${a * mult / d1 - 1}`, ""]) };
+    for (let t = 0; t < 30; t++) {
+      const xn = ri(2, 12);
+      const a = ri(8, 15), c = ri(3, 10);
+      const bNum = a * xn * d2 - (xn + c) * d1;
+      if (bNum % d2 !== 0) continue;
+      const b = bNum / d2;
+      if (b < 1 || b > 25) continue;
+      const sol = rat(xn, 1);
+      if (!okRat(sol)) continue;
+      const expr = `${f(a + "x - " + b, d1)} = ${f("x + " + c, d2)}`;
+      const development = [
+        `${f(a * mult / d1 + "x - " + b * mult / d1, mult)} = ${f("x + " + c, d2)}`,
+        `${a * mult / d1}x - ${b * mult / d1} = x + ${c}`,
+        `${a * mult / d1 - 1}x - ${b * mult / d1} = ${c}`,
+        `x = ${solText(sol)}`,
+      ];
+      return { expr, solution: sol, development, operations: commonOps(mult, ["- x", `+ ${b * mult / d1}`, `: ${a * mult / d1 - 1}`, ""]) };
+    }
+    return null;
   }),
 
   // T19: A - (px+q)/d1 = n/d2·x + c
   () => retry(() => {
     const d1 = 5, d2 = 4, mult = 20;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const p = 2, q = 3, n = 1, A = 7, c = 2;
-    if (Math.abs(A - (p * (xn / xd) + q) / d1 - (n / d2) * (xn / xd) - c) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const x0 = pickXInt();
+    const p = 2, q = 3, n = 1, c = 2;
+    const A = Math.round((p * x0 + q) / d1 + (n / d2) * x0 + c);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
-    const expr = `${A} - ${f(p + "x + " + q, d1)} = ${f(n, d2)} x + ${c}`;
     const coef = -p * mult / d1 - n * mult / d2;
+    const expr = `${A} - ${f(p + "x + " + q, d1)} = ${f(n, d2)} x + ${c}`;
     const development = [
       `${f(String(A * mult), mult)} - ${f(p * mult / d1 + "x + " + q * mult / d1, mult)} = ${f(n * mult / d2 + "x", mult)} + ${f(c * mult, mult)}`,
       `${A * mult} - ${p * mult / d1}x - ${q * mult / d1} = ${n * mult / d2}x + ${c * mult}`,
       `${A * mult - q * mult / d1 - c * mult} - ${p * mult / d1 + n * mult / d2}x = 0`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${n * mult / d2}x`, `- ${A * mult - q * mult / d1}`, `: (${coef})`, ""]) };
   }),
 
   // T20: kx - n/d1 = n2/d2 + px
   () => retry(() => {
-    const d1 = 2, d2 = 2, mult = 2, k = 5, n = 3, n2 = 1, p = 2;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
+    const d1 = 2, d2 = 2, mult = 2, k = 5, n = 3, p = 2;
+    const x0 = pickXInt();
+    const n2Num = d2 * ((k - p) * x0 * d1 - n);
+    const n2 = intDiv(n2Num, d1);
+    if (n2 === null || n2 < 1 || n2 > 12) return null;
     const coef = k - p;
-    const lhs = coef * (xn / xd) - n / d1;
-    const rhs = n2 / d2;
-    if (Math.abs(lhs - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${k}x - ${f(n, d1)} = ${f(n2, d2)} + ${p}x`;
     const development = [
       `${f(k + "x", mult)} - ${f(n, mult)} = ${f(n2, mult)} + ${f(p + "x", mult)}`,
       `${k}x - ${n} = ${n2} + ${p}x`,
       `${coef}x - ${n} = ${n2}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p}x`, `+ ${n}`, `: ${coef}`, ""]) };
   }),
 
   // T21: n1/d1 - n2/d2·x = n3 + px
   () => retry(() => {
-    const d1 = 5, d2 = 2, mult = 10, n1 = 8, n2 = 3, n3 = 7, p = 5;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const lhs = n1 / d1 - (n2 / d2) * (xn / xd);
-    const rhs = n3 + p * (xn / xd);
-    if (Math.abs(lhs - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 5, d2 = 2, mult = 10, n2 = 3, n3 = 7, p = 5;
+    const x0 = pickXInt();
+    const n1Part = intDiv(n2 * d1 * x0, d2);
+    if (n1Part === null) return null;
+    const n1Num = d1 * n3 + d1 * p * x0 + n1Part;
+    if (!Number.isInteger(n1Num)) return null;
+    const n1 = n1Num;
+    if (n1 < 5 || n1 > 40) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${n3} + ${p}x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult, mult)} + ${f(p + "x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult} + ${p * mult}x`,
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult - n1 * mult / d1}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""]) };
   }),
 
   // T22: n1/d1 - n2/d2·x = n3/d1 + px
   () => retry(() => {
-    const d1 = 7, d2 = 2, mult = 14, n1 = 12, n2 = 14, n3 = 6, p = 7;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const lhs = n1 / d1 - (n2 / d2) * (xn / xd);
-    const rhs = n3 / d1 + p * (xn / xd);
-    if (Math.abs(lhs - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 7, d2 = 2, mult = 14, n2 = 14, n3 = 6, p = 7;
+    const x0 = pickXInt();
+    const n1Part = intDiv(n2 * x0 * d1, d2);
+    if (n1Part === null) return null;
+    const n1 = n3 + p * x0 * d1 + n1Part;
+    if (n1 < 5 || n1 > 50) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} + ${p}x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult / d1, mult)} + ${f(p + "x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult / d1} + ${p * mult}x`,
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n2 * mult / d2}x`, `: ${-n2 * mult / d2 - p * mult}`, ""]) };
   }),
 
   // T23: kx - n/d1 = n2/d2 + px (variant)
   () => retry(() => {
-    const d1 = 5, d2 = 3, mult = 15, k = 4, n = 1, n2 = 2;
-    const xn = ri(10, 30);
-    const sol = rat(xn, 1);
+    const d1 = 5, d2 = 3, mult = 15, k = 4, n = 1, p = 1;
+    const x0 = pickXInt();
+    const n2Num = d2 * ((k - p) * x0 * d1 - n);
+    const n2 = intDiv(n2Num, d1);
+    if (n2 === null || n2 < 1 || n2 > 12) return null;
+    const sol = rat(x0, 1);
+    if (!okRat(sol)) return null;
     const expr = `${k}x - ${f(n, d1)} = ${f(n2, d2)} + x`;
     const development = [
       `${f(k * mult + "x", mult)} - ${f(n * mult / d1, mult)} = ${f(n2 * mult / d2, mult)} + ${f("15x", mult)}`,
@@ -1280,23 +1339,25 @@ const a102FracGens: Array<() => EquationQuestion> = [
       `${(k - 1) * mult}x - ${n * mult / d1} = ${n2 * mult / d2}`,
       `x = ${solText(sol)}`,
     ];
-    if (Math.abs((k - 1) * xn - n * mult / d1 - n2 * mult / d2) > 1e-9) return null;
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", "- 60", ": (-18)", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `+ ${n * mult / d1}`, `: ${(k - 1) * mult}`, ""]) };
   }),
 
   // T24: n1/d1 - n2/d2·x = n3/d1 + px (simplified shape)
   () => retry(() => {
-    const d1 = 3, d2 = 2, mult = 6, n1 = 4, n2 = 5, n3 = 2, p = 3;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    if (Math.abs(n1 / d1 - (n2 / d2) * (xn / xd) - n3 / d1 - p * (xn / xd)) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 3, d2 = 2, mult = 6, n2 = 5, n3 = 2, p = 3;
+    const x0 = pickXInt();
+    const n1Part = intDiv(n2 * x0 * d1, d2);
+    if (n1Part === null) return null;
+    const n1 = n3 + p * x0 * d1 + n1Part;
+    if (n1 < 2 || n1 > 30) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} + ${p}x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult / d1, mult)} + ${f(p + "x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult / d1} + ${p * mult}x`,
       `-${n2 * mult / d2 + p * mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     return { expr, solution: sol, development, operations: commonOps(mult, [`- ${p * mult}x`, `- ${n1 * mult / d1}`, `: (-${Math.abs(n2 * mult / d2 + p * mult)})`, ""]) };
   }),
@@ -1304,107 +1365,119 @@ const a102FracGens: Array<() => EquationQuestion> = [
   // T25: (ax-b)/d1 + n/d2 = rhs
   () => retry(() => {
     const d1 = 3, d2 = 4, mult = 12;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const a = 7, b = 2, n = 1, rhs = 2;
-    if (Math.abs((a * (xn / xd) - b) / d1 + n / d2 - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const x0 = pickXInt();
+    const a = 7, b = 2, n = 1;
+    const rhsNum = (a * x0 - b) * mult / d1 + n * mult / d2;
+    if (!Number.isInteger(rhsNum) || rhsNum % mult !== 0) return null;
+    const rhs = rhsNum / mult;
+    if (rhs < 1 || rhs > 15) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(a + "x - " + b, d1)} + ${f(n, d2)} = ${rhs}`;
     const development = [
       `${f(a * mult / d1 + "x - " + b * mult / d1, mult)} + ${f(n * mult / d2, mult)} = ${f(rhs * mult, mult)}`,
       `${a * mult / d1}x - ${b * mult / d1} + ${n * mult / d2} = ${rhs * mult}`,
       `${a * mult / d1}x - ${b * mult / d1 - n * mult / d2} = ${rhs * mult}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["+ 5", `: ${a * mult / d1}`, ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${b * mult / d1 - n * mult / d2}`, `: ${a * mult / d1}`, ""]) };
   }),
 
   // T26: A - n/d1·x = n2/d2 + x
   () => retry(() => {
-    const d1 = 5, d2 = 3, mult = 15, A = 4, n = 1, n2 = 2;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    if (Math.abs(A - (n / d1) * (xn / xd) - n2 / d2 - xn / xd) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 5, d2 = 3, mult = 15, n = 1, n2 = 2;
+    const x0 = pickXInt();
+    const ANum = x0 * d1 * d2 + n2 * d1 + n * x0 * d2;
+    if (ANum % (d1 * d2) !== 0) return null;
+    const A = ANum / (d1 * d2);
+    if (A < 2 || A > 20) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${A} - ${f(n, d1)} x = ${f(n2, d2)} + x`;
     const development = [
       `${f(A * mult, mult)} - ${f(n * mult / d1 + "x", mult)} = ${f(n2 * mult / d2, mult)} + ${f("15x", mult)}`,
       `${A * mult} - ${n * mult / d1}x = ${n2 * mult / d2} + ${mult}x`,
       `${A * mult - n2 * mult / d2} - ${n * mult / d1 + mult}x = 0`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", "- 60", ": (-18)", ""]) };
+    const coef = -(n * mult / d1 + mult);
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${A * mult - n2 * mult / d2}`, `: (${coef})`, ""]) };
   }),
 
   // T27: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x (variant coef)
   () => retry(() => {
-    const d1 = 3, d2 = 5, mult = 15, n1 = 8, n2 = 5, n3 = 2, n4 = 3;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const lhs = n1 / d1 - (n2 / d2) * (xn / xd);
-    const rhs = n3 / d1 - (n4 / d2) * (xn / xd);
-    if (Math.abs(lhs - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 3, d2 = 5, mult = 15, n2 = 5, n3 = 2, n4 = 3;
+    const x0 = pickXInt();
+    const n1Num = n3 * d2 + (n4 - n2) * x0 * d1;
+    const n1 = intDiv(n1Num, d2);
+    if (n1 === null || n1 < 3 || n1 > 30) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} - ${f(n4, d2)} x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult / d1, mult)} - ${f(n4 * mult / d2 + "x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult / d1} - ${n4 * mult / d2}x`,
       `${n1 * mult / d1 - n3 * mult / d1} = ${(n4 - n2) * mult / d2}x`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n4 * mult / d2}x`, "- 5", ": 45", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${n4 * mult / d2}x`, `- ${n1 * mult / d1 - n3 * mult / d1}`, `: ${(n4 - n2) * mult / d2}`, ""]) };
   }),
 
   // T28: (x-a)/d1 + (bx-c)/d2 = 1
   () => retry(() => {
     const d1 = 3, d2 = 5, mult = 15;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const a = 2, b = 2, c = 3;
-    if (Math.abs((xn / xd - a) / d1 + (b * (xn / xd) - c) / d2 - 1) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const x0 = pickXInt();
+    const a = 2, b = 2;
+    const cNum = b * x0 * d1 + (x0 - a) * d2 - d1 * d2;
+    const c = intDiv(cNum, d1);
+    if (c === null || c < 1 || c > 20) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f("x - " + a, d1)} + ${f(b + "x - " + c, d2)} = 1`;
     const development = [
       `${f("5x - " + 5 * a, mult)} + ${f("3x - " + 3 * c, mult)} = ${f("15", mult)}`,
       `5x - ${5 * a} + 3x - ${3 * c} = 15`,
-      `8x - ${5 * a + 3 * c} = 15`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `${5 + 3 * b}x - ${5 * a + 3 * c} = 15`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${5 * a + 3 * c}`, ": 11", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, [`+ ${5 * a + 3 * c}`, `: ${5 + 3 * b}`, ""]) };
   }),
 
   // T29: n1/d1 - n2/d2·x = n3/d1 + px (neg coef)
   () => retry(() => {
-    const d1 = 5, d2 = 3, mult = 15, n1 = 8, n2 = 3, n3 = 10, p = 1;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    if (Math.abs(n1 / d1 - (n2 / d2) * (xn / xd) - n3 / d1 - p * (xn / xd)) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 5, d2 = 3, mult = 15, n2 = 3, n3 = 10;
+    const x0 = pickXInt();
+    const n1Part = intDiv(n2 * x0 * d1, d2);
+    if (n1Part === null) return null;
+    const n1 = n3 + d1 * x0 + n1Part;
+    if (!Number.isInteger(n1) || n1 < 5 || n1 > 40) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} + x`;
     const development = [
       `${f(n1 * mult / d1, mult)} - ${f(n2 * mult / d2 + "x", mult)} = ${f(n3 * mult / d1, mult)} + ${f("15x", mult)}`,
       `${n1 * mult / d1} - ${n2 * mult / d2}x = ${n3 * mult / d1} + ${mult}x`,
       `-${n2 * mult / d2 + mult}x = ${n3 * mult / d1 - n1 * mult / d1}`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
-    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", "- 60", ": (-18)", ""]) };
+    return { expr, solution: sol, development, operations: commonOps(mult, ["- 15x", `- ${n1 * mult / d1}`, `: (${-(n2 * mult / d2 + mult)})`, ""]) };
   }),
 
-  // T30: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x + c
+  // T30: n1/d1 - n2/d2·x = n3/d1 - n4/d2·x + c  (same as balanced form)
   () => retry(() => {
-    const d1 = 3, d2 = 5, mult = 15, n1 = 8, n2 = 5, n3 = 2, n4 = 3;
-    const { num: xn, den: xd } = pickCoprimeNumDen();
-    const lhs = n1 / d1 - (n2 / d2) * (xn / xd);
-    const rhs = n3 / d1 - (n4 / d2) * (xn / xd);
-    if (Math.abs(lhs - rhs) > 1e-9) return null;
-    const sol = rat(xn, xd);
+    const d1 = 3, d2 = 5, mult = 15, n2 = 5, n3 = 2, n4 = 3;
+    const x0 = pickXInt();
+    const n1Num = n3 * d2 + (n4 - n2) * x0 * d1;
+    const n1 = intDiv(n1Num, d2);
+    if (n1 === null || n1 < 3 || n1 > 30) return null;
+    const sol = rat(x0, 1);
     if (!okRat(sol)) return null;
     const expr = `${f(n1, d1)} - ${f(n2, d2)} x = ${f(n3, d1)} - ${f(n4, d2)} x`;
     const development = [
       `${f("5x - " + 5 * 2, mult)} + ${f("6x - " + 6 * 3, mult)} = ${f("15", mult)}`.replace("5 * 2", "10").replace("6 * 3", "18"),
       `${f("5x - 10", mult)} + ${f("6x - 9", mult)} = ${f("15", mult)}`,
       `11x - 19 = 15`,
-      `x = ${sol.den === 1 ? sol.num : f(sol.num, sol.den)}`,
+      `x = ${solText(sol)}`,
     ];
     development[1] = `${f("5x - 10", mult)} + ${f("6x - 9", mult)} = ${f("15", mult)}`;
     development[2] = `11x - 19 = 15`;
@@ -1412,8 +1485,9 @@ const a102FracGens: Array<() => EquationQuestion> = [
   }),
 ];
 
-export function pickA102FracQuestion(): EquationQuestion {
-  return pickFrom(a102FracGens);
+
+export function pickA102FracQuestion(level: A10ExerciseLevel = 1): EquationQuestion {
+  return pickByLevel(a102FracEasyGens, _legacyA102FracGens, level);
 }
 
 
@@ -1455,7 +1529,7 @@ function subSys(
   };
 }
 
-const a103Gens: Array<() => SystemEquationQuestion> = [
+const _legacyA103Gens: Array<() => SystemEquationQuestion> = [
   // T1: isolate y in I
   () => retry(() => {
     const x0 = pickIntSolution(), y0 = pickIntSolution();
@@ -1633,8 +1707,8 @@ const a103Gens: Array<() => SystemEquationQuestion> = [
   },
 ];
 
-export function pickA103SystemQuestion(): SystemEquationQuestion {
-  return pickFrom(a103Gens);
+export function pickA103SystemQuestion(level: A10ExerciseLevel = 1): SystemEquationQuestion {
+  return pickByLevel(a103EasyGens, a103HardGens, level);
 }
 
 
@@ -1666,7 +1740,7 @@ function combSys(
   };
 }
 
-const a104Gens: Array<() => SystemEquationQuestion> = [
+const _legacyA104Gens: Array<() => SystemEquationQuestion> = [
   // T1: I·2 + II
   () => retry(() => {
     const x0 = ri(2, 10), y0 = ri(2, 10);
@@ -1841,10 +1915,10 @@ const a104Gens: Array<() => SystemEquationQuestion> = [
   }),
 ];
 
-export function pickA104SystemQuestion(): SystemEquationQuestion {
-  return pickFrom(a104Gens);
+export function pickA104SystemQuestion(level: A10ExerciseLevel = 1): SystemEquationQuestion {
+  return pickByLevel(a104EasyGens, a104HardGens, level);
 }
 
-export function pickA102Question(): EquationQuestion {
-  return pickFrom(a102Gens);
+export function pickA102Question(level: A10ExerciseLevel = 1): EquationQuestion {
+  return pickByLevel(a102EasyGens, a102Gens, level);
 }
