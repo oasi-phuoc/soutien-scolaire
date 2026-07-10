@@ -1,58 +1,47 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string) =>
+  ({ fr, en, ar, fa, ti, uk });
+
 export const TRAD_G7_3: SubmoduleTrad = {
   submoduleId: "G7-3",
-  title: {
-    fr: "Distance réelle",
-    en: "Real distance",
-    ar: "المسافة الحقيقية",
-    fa: "فاصله واقعی",
-    ti: "ናህሰ ርሕቀት",
-    uk: "Реальна відстань",
-  },
+  title: S(
+    "Symétrie centrale",
+    "Central symmetry",
+    "التماثل المركزي",
+    "تقارن مرکزی",
+    "ማእከላይ ምትእስሳር",
+    "Центральна симетрія",
+  ),
+  blocks: [
+    { text: S("Centre de symétrie", "Center of symmetry", "مركز التماثل", "مرکز تقارن", "ናይ ምትእስሳር ማእከል", "Центр симетрії") },
+    { text: S(
+      "La symétrie centrale de centre O associe à chaque point M son image M' telle que O est le milieu de [MM']. C'est une rotation de 180° autour de O.",
+      "Central symmetry with center O maps each point M to M' so that O is the midpoint of [MM']. It is a 180° rotation about O.",
+      "التماثل المركزي ذو المركز O يربط كل نقطة M بصورتها M' بحيث يكون O منتصف [MM']. وهو دوران 180° حول O.",
+      "تقارن مرکزی با مرکز O هر نقطه M را به M' می‌برد طوری که O وسط [MM'] است. این چرخش ۱۸۰° حول O است.",
+      "ማእከላይ ምትእስሳር ናይ O ማእከል ነፍሲ ወከፍ M ናብ M' የሰጋግር፣ O ማእከል ናይ [MM'] እዩ። 180° ምምቕቃሉ እዩ።",
+      "Центральна симетрія з центром O відображає M у M' так, що O — середина [MM']. Це поворот на 180° навколо O.",
+    ) },
+    { text: S("Propriétés", "Properties", "الخصائص", "ویژگی‌ها", "ንብረታት", "Властивості") },
+    { label: S("", "", "", "", "", ""), items: {
+      fr: ["Conservation des distances, des angles et des aires.", "O est le milieu de chaque [MM']."],
+      en: ["Distances, angles and areas are preserved.", "O is the midpoint of each [MM']."],
+      ar: ["حفظ المسافات والزوايا والمساحات.", "O منتصف كل [MM']."],
+      fa: ["فاصله‌ها، زوایا و مساحت‌ها حفظ می‌شوند.", "O وسط هر [MM'] است."],
+      ti: ["ርሕቀት፣ ኩርናዓትን ሰፊሓን ይሕለዉ።", "O ማእከል ናይ ነፍሲ ወከፍ [MM'] እዩ።"],
+      uk: ["Зберігаються відстані, кути й площі.", "O — середина кожного [MM']."],
+    } },
+  ],
   paragraphs: {
-    fr: [
-          "Pour trouver une distance réelle à partir d'une carte ou d'un plan : mesurer la distance sur le dessin (en cm) puis multiplier par le dénominateur de l'échelle.",
-          "Attention aux conversions : si l'échelle est 1:50 000, 1 cm sur la carte = 50 000 cm = 500 m = 0,5 km.",
-          "Tableau de conversions : 1 km = 1 000 m = 100 000 cm. 1 m = 100 cm. 1 cm = 10 mm.",
-          "Exemple : sur une carte 1:25 000, deux villes séparées de 8 cm → distance réelle = 8 × 25 000 = 200 000 cm = 2 km.",
-        ],
-    en: [
-          "To find a real distance: measure on the drawing (cm) then multiply by the scale denominator.",
-          "Unit care: 1:50,000 means 1 cm = 500 m = 0.5 km.",
-          "Conversions: 1 km = 1,000 m = 100,000 cm.",
-          "Example: 8 cm on a 1:25,000 map → 200,000 cm = 2 km.",
-        ],
-    ar: [
-          "لإيجاد المسافة الحقيقية: قس على الرسم (سم) ثم اضرب في مقام المقياس.",
-          "تحويل: 1:50000 → 1 سم = 500 م = 0.5 كم.",
-          "1 كم = 1000 م = 100000 سم.",
-          "مثال: 8 سم على خريطة 1:25000 → 2 كم.",
-        ],
-    fa: [
-          "برای یافتن فاصله واقعی: فاصله روی نقشه (سانتیمتر) را اندازه بگیر، سپس در مخرج مقیاس ضرب کن.",
-          "توجه: 1:50000 یعنی 1 سانتیمتر = 500 متر = 0.5 کیلومتر.",
-          "تبدیل: 1 کیلومتر = 1000 متر = 100000 سانتیمتر.",
-          "مثال: 8 سانتیمتر روی نقشه 1:25000 → 2 کیلومتر.",
-        ],
-    ti: [
-          "ናህሰ ርሕቀት ምርካብ: ናይ ምስሳሉ ርሕቀት (ሰም) ዕቃቤ ብናይ ስኬል ቀሪባ ምርባሕ.",
-          "ምቕያር: 1:50000 → 1 ሰም = 500 ም = 0.5 ኪ.ሜ.",
-          "1 ኪ.ሜ = 1000 ም = 100000 ሰም.",
-          "ምሳሌ: 8 ሰም ናብ 1:25000 ካርታ → 2 ኪ.ሜ.",
-        ],
-    uk: [
-          "Для знаходження реальної відстані: виміряти на кресленні (в см), помножити на знаменник масштабу.",
-          "Перетворення: 1:50 000 → 1 см = 500 м = 0,5 км.",
-          "1 км = 1 000 м = 100 000 см.",
-          "Приклад: 8 см на карті 1:25 000 → 2 км.",
-        ],
+    fr: ["Symétrie centrale = rotation de 180° autour du centre O."],
+    en: ["Central symmetry = 180° rotation about center O."],
   },
   consignes: {
-    "g6-3-e1": { fr: "Carte 1:50000. Distance sur carte : 3 cm. Distance réelle en km ?", en: "Map 1:50000. Distance sur carte : 3 cm. Distance reelle en km ?" },
-    "g6-3-e2": { fr: "Carte 1:25000. Distance sur carte : 4 cm. Distance réelle en m ?", en: "Map 1:25000. Distance sur carte : 4 cm. Distance reelle en m ?" },
-    "g6-3-e3": { fr: "Plan 1:200. Longueur dessinée : 7 cm. Longueur réelle en m ?", en: "Plan 1:200. Drawn length: 7 cm. Real length in m?" },
-    "g6-3-e4": { fr: "Carte 1:100000. 2 cm sur la carte. Réalité en km ?", en: "Map 1:100000. 2 cm sur la carte. Realite en km ?" },
-    "g6-3-e5": { fr: "1 km = combien de cm ?", en: "1 km = how many cm?" },
+    "g7-3-e1": S("La symétrie centrale conserve-t-elle les longueurs ? (oui/non)", "Does central symmetry preserve lengths? (yes/no)", "هل يحفظ التماثل المركزي الأطوال؟ (نعم/لا)", "آیا تقارن مرکزی طول‌ها را حفظ می‌کند؟ (بله/خیر)", "ማእከላይ ምትእስሳር ንውሓታት ይሕልዮ ድዩ? (እወ/ኣይፋል)", "Чи зберігає центральна симетрія довжини? (так/ні)"),
+    "g7-3-e2": S("Le symétrique du point (2 ; 3) par rapport à O(0,0) est ?", "The image of (2 ; 3) through O(0,0) is?", "صورة النقطة (2 ؛ 3) بالنسبة إلى O(0,0)؟", "قرینه نقطه (۲ ؛ ۳) نسبت به O(۰,۰)؟", "ናይ (2 ; 3) ምስል ብO(0,0) እንታይ እዩ?", "Образ точки (2 ; 3) відносно O(0,0)?"),
+    "g7-3-e3": S("Un triangle a-t-il généralement un centre de symétrie ? (oui/non)", "Does a triangle usually have a center of symmetry? (yes/no)", "هل للمثلث عادة مركز تماثل؟ (نعم/لا)", "آیا مثلث معمولاً مرکز تقارن دارد؟ (بله/خیر)", "ስሉሳይ ብተደጋጋሚ ማእከል ምትእስሳር ኣለዎ ድዩ? (እወ/ኣይፋል)", "Чи має трикутник зазвичай центр симетрії? (так/ні)"),
+    "g7-3-e4": S("Un parallélogramme a-t-il un centre de symétrie ? (oui/non)", "Does a parallelogram have a center of symmetry? (yes/no)", "هل لمتوازي الأضلاع مركز تماثل؟ (نعم/لا)", "آیا متوازی‌الاضلاع مرکز تقارن دارد؟ (بله/خیر)", "ፓራለሎግራም ማእከል ምትእስሳር ኣለዎ ድዩ? (እወ/ኣይፋል)", "Чи має паралелограм центр симетрії? (так/ні)"),
+    "g7-3-e5": S("La symétrie centrale est une rotation de combien de degrés ?", "Central symmetry is a rotation of how many degrees?", "التماثل المركزي دوران بكم درجة؟", "تقارن مرکزی چند درجه چرخش است؟", "ማእከላይ ምትእስሳር ክንደይ ዲግሪ ምምቕቃሉ እዩ?", "Центральна симетрія — поворот на скільки градусів?"),
   },
 };
