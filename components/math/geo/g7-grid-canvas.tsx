@@ -141,6 +141,26 @@ export function G7GridCanvas({
           strokeWidth={3}
         />
       )}
+      {(axis?.kind === "diag_main" || axis?.kind === "diag_anti") && (() => {
+        const pts: { x: number; y: number }[] = [];
+        for (let x = 0; x <= width; x++) {
+          const y = axis.kind === "diag_main" ? x + axis.c : axis.c - x;
+          if (y >= 0 && y <= height) pts.push({ x, y });
+        }
+        if (pts.length < 2) return null;
+        const a = pts[0]!;
+        const b = pts[pts.length - 1]!;
+        return (
+          <line
+            x1={G7_MARGIN + a.x * G7_CELL}
+            y1={G7_MARGIN + a.y * G7_CELL}
+            x2={G7_MARGIN + b.x * G7_CELL}
+            y2={G7_MARGIN + b.y * G7_CELL}
+            stroke="#dc2626"
+            strokeWidth={3}
+          />
+        );
+      })()}
 
       {[...lockedSegments].map((key) => renderSeg(`lock-s-${key}`, "#64748b"))}
       {[...segments].map((key) => {

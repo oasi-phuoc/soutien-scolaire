@@ -63,7 +63,7 @@ import {
   G6PerpParallelPlaceExercise,
 } from "@/components/math/geo/G6CartesianExercises";
 import { G7ReproduceExercise } from "@/components/math/geo/G7ReproduceExercises";
-import { G7SymmetryReflectExercise } from "@/components/math/geo/G7SymmetryReflectExercise";
+import { G7SymmetryAxesExercise } from "@/components/math/geo/G7SymmetryAxesExercise";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
@@ -5249,8 +5249,6 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "G7-2") {
       const pushG7SymSet = () => {
         steps.push({ kind: "g7_symmetry", lesson, exNum: 1 });
-        steps.push({ kind: "g7_symmetry", lesson, exNum: 2 });
-        steps.push({ kind: "g7_symmetry", lesson, exNum: 3 });
       };
       pushG7SymSet();
       steps.push({ kind: "eval_start", lesson });
@@ -10859,7 +10857,7 @@ export function GenericModuleContent({
 
       {!showEvalScore && currentStep?.kind === "g7_symmetry" && (
         <EvalRevealContext.Provider value={revealCorrection}>
-          <G7SymmetryReflectExercise
+          <G7SymmetryAxesExercise
             key={`g7sym-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
             seed={geoResetKey}
