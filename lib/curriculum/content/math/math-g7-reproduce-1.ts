@@ -27,7 +27,8 @@ export const MATH_G7_REPRODUCE_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "Chaque segment du modèle doit être **plus long** (agrandir) ou **plus court** (réduire) dans les mêmes proportions.",
-          "Exemple : si le modèle fait 2 cases, la figure agrandie ×2 fera 4 cases.",
+          "Réduire ÷2 : modèle sur grille **10×10**, reproduction sur grille **5×5**.",
+          "Agrandir ×2 : modèle sur grille **5×5**, reproduction sur grille **10×10**.",
           "Tous les points se placent en multipliant leurs coordonnées par le même facteur.",
         ],
       },

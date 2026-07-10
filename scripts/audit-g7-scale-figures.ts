@@ -1,5 +1,8 @@
 /**
- * Audit G7.1 exercices 2 (÷2) et 3 (×2) — figures sur grille 12×12.
+ * Audit G7.1 exercices 1–3 — tailles de grille et échelles.
+ * Ex1 : modèle 10×10 → cible 10×10 (copie)
+ * Ex2 : modèle 10×10 (coords paires) → cible 5×5 (÷2)
+ * Ex3 : modèle 5×5 → cible 10×10 (×2)
  * Usage: npx tsx scripts/audit-g7-scale-figures.ts
  */
 import {
@@ -8,6 +11,7 @@ import {
   segmentKey,
   pointKey,
   G7_GRID_SIZE,
+  G7_HALF_SIZE,
   type ReproduceTask,
   type GridSegment,
 } from "../lib/curriculum/content/math/g7-reproduce-data";
@@ -25,11 +29,20 @@ function collectPool(variant: 1 | 2 | 3): ReproduceTask[] {
 }
 
 function auditTask(t: ReproduceTask) {
-  const { reference: fig, kind, id } = t;
+  const { reference: fig, kind, id, targetSize } = t;
   const add = (msg: string) => issues.push({ id, kind, msg });
 
-  if (fig.size !== G7_GRID_SIZE) add(`reference.size=${fig.size} (attendu ${G7_GRID_SIZE})`);
-  if (t.targetSize !== G7_GRID_SIZE) add(`targetSize=${t.targetSize} (attendu ${G7_GRID_SIZE})`);
+  const expectedRefSize =
+    kind === "scale_up" ? G7_HALF_SIZE : G7_GRID_SIZE;
+  const expectedTargetSize =
+    kind === "scale_down" ? G7_HALF_SIZE : G7_GRID_SIZE;
+
+  if (fig.size !== expectedRefSize) {
+    add(`reference.size=${fig.size} (attendu ${expectedRefSize})`);
+  }
+  if (targetSize !== expectedTargetSize) {
+    add(`targetSize=${targetSize} (attendu ${expectedTargetSize})`);
+  }
   if (fig.segments.length === 0 && fig.dots.length === 0) add("figure vide");
 
   const coords: number[] = [];
@@ -41,7 +54,7 @@ function auditTask(t: ReproduceTask) {
 
   for (const v of coords) {
     if (!Number.isInteger(v)) add(`coord non entière ${v}`);
-    if (v < 0 || v > G7_GRID_SIZE) add(`coord hors 0..${G7_GRID_SIZE}: ${v}`);
+    if (v < 0 || v > fig.size) add(`coord hors 0..${fig.size}: ${v}`);
   }
 
   if (kind === "scale_down") {
@@ -51,7 +64,7 @@ function auditTask(t: ReproduceTask) {
   }
   if (kind === "scale_up") {
     for (const v of coords) {
-      if (v < 0 || v > 5) add(`coord hors 0..5 pour ×2: ${v}`);
+      if (v < 0 || v > G7_HALF_SIZE) add(`coord hors 0..${G7_HALF_SIZE} pour ×2: ${v}`);
     }
   }
 
@@ -79,16 +92,16 @@ function auditTask(t: ReproduceTask) {
       if (!Number.isInteger(x) || !Number.isInteger(y)) {
         add(`attendu non entier après ×${factor}: ${key}`);
       }
-      if (x < 0 || y < 0 || x > G7_GRID_SIZE || y > G7_GRID_SIZE) {
-        add(`attendu hors grille 12×12: ${key}`);
+      if (x < 0 || y < 0 || x > targetSize || y > targetSize) {
+        add(`attendu hors grille ${targetSize}×${targetSize}: ${key}`);
       }
     }
   }
   for (const key of exp.dots) {
     const [x, y] = key.split(",").map(Number) as [number, number];
     if (!Number.isInteger(x) || !Number.isInteger(y)) add(`point attendu non entier: ${key}`);
-    if (x < 0 || y < 0 || x > G7_GRID_SIZE || y > G7_GRID_SIZE) {
-      add(`point attendu hors grille: ${key}`);
+    if (x < 0 || y < 0 || x > targetSize || y > targetSize) {
+      add(`point attendu hors grille ${targetSize}×${targetSize}: ${key}`);
     }
   }
 
@@ -116,7 +129,6 @@ function auditTask(t: ReproduceTask) {
     if (dx + dy < 2) add(`figure attendue trop petite (dx=${dx}, dy=${dy})`);
   }
 
-  // Round-trip: source → scale → scale inverse should recover (for even/small figures)
   if (kind === "scale_down") {
     for (const s of fig.segments) {
       const scaled: GridSegment = {
@@ -161,7 +173,10 @@ function main() {
   const copy = collectPool(1);
   const down = collectPool(2);
   const up = collectPool(3);
-  console.log(`Pool ex1 (copie): ${copy.length} | ex2 (÷2): ${down.length} | ex3 (×2): ${up.length} | GRID=${G7_GRID_SIZE}`);
+  console.log(
+    `Pool ex1 (copie): ${copy.length} | ex2 (÷2): ${down.length} | ex3 (×2): ${up.length}` +
+      ` | ref/cible: 10→10 / 10→5 / 5→10`,
+  );
 
   for (const t of copy) auditTask(t);
   for (const t of down) auditTask(t);
@@ -197,7 +212,7 @@ function main() {
   if (issues.length > 0) {
     process.exitCode = 1;
   } else {
-    console.log("\n✓ Audit OK — 50+50+50 figures valides sur grille 10×10 (≥1 point chacune).");
+    console.log("\n✓ Audit OK — grilles ex1 10→10, ex2 10→5, ex3 5→10 (≥1 point chacune).");
   }
 }
 
