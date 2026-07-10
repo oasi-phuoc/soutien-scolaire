@@ -1230,7 +1230,7 @@ const SCALE_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = 
 
 for (const { id, figure } of SCALE_FIGURES) assertEvenFigure(id, figure);
 
-const SCALE_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure }) => ({
+const SCALE_DOWN_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure }) => ({
   id: `scale-down-${id}`,
   kind: "scale_down" as const,
   label,
@@ -1238,8 +1238,571 @@ const SCALE_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure }) =
   targetSize: G7_GRID_SIZE,
 }));
 
-export function pickReproduceTask(variant: 1 | 2, seed: number): ReproduceTask {
-  const pool = variant === 1 ? COPY_TASKS : SCALE_TASKS;
+/**
+ * Exercice 3 — 50 figures compactes (coords 0…6) pour agrandissement exact ×2
+ * sur grille 12×12 (6×2 = 12).
+ */
+function sfig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
+  return { size: G7_GRID_SIZE, dots, segments };
+}
+
+function assertSmallFigure(id: string, figure: GridFigure) {
+  const vals: number[] = [];
+  for (const s of figure.segments) vals.push(s.x1, s.y1, s.x2, s.y2);
+  for (const d of figure.dots) vals.push(d.x, d.y);
+  const bad = vals.filter((v) => !Number.isInteger(v) || v < 0 || v > 6);
+  if (bad.length) throw new Error(`Figure ${id}: coords hors 0…6: ${bad.join(",")}`);
+}
+
+const SCALE_UP_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
+  {
+    id: "hut",
+    label: "Hutte",
+    figure: sfig([
+      ...poly([[1, 3], [3, 1], [5, 3]]),
+      ...rect(1, 3, 4, 2),
+      ...rect(2, 4, 1, 1),
+    ]),
+  },
+  {
+    id: "missile",
+    label: "Missile",
+    figure: sfig([
+      ...poly([[3, 0], [2, 2], [4, 2]]),
+      ...rect(2, 2, 2, 2),
+      ...line([2, 4], [1, 6]),
+      ...line([4, 4], [5, 6]),
+      ...line([2, 4], [4, 4]),
+    ], [{ x: 3, y: 3 }]),
+  },
+  {
+    id: "puppy",
+    label: "Chiot",
+    figure: sfig([
+      ...poly([[1, 2], [2, 1], [4, 1], [5, 2], [5, 4], [1, 4]]),
+      ...poly([[5, 2], [6, 1], [6, 3], [5, 3]]),
+      ...line([2, 4], [2, 6]),
+      ...line([4, 4], [4, 6]),
+    ], [{ x: 6, y: 2 }]),
+  },
+  {
+    id: "trout",
+    label: "Truite",
+    figure: sfig([
+      ...poly([[0, 3], [2, 1], [4, 2], [5, 3], [4, 4], [2, 5]]),
+      ...poly([[5, 3], [6, 2], [6, 4]]),
+    ], [{ x: 2, y: 2 }]),
+  },
+  {
+    id: "fir",
+    label: "Sapinette",
+    figure: sfig([
+      ...poly([[3, 0], [1, 2], [2, 2], [0, 4], [6, 4], [4, 2], [5, 2]]),
+      ...rect(2, 4, 2, 2),
+    ]),
+  },
+  {
+    id: "van",
+    label: "Fourgon",
+    figure: sfig([
+      ...rect(0, 2, 6, 2),
+      ...rect(1, 2, 1, 1),
+      ...rect(3, 2, 1, 1),
+      ...rect(5, 2, 1, 1),
+    ], [{ x: 1, y: 5 }, { x: 3, y: 5 }, { x: 5, y: 5 }]),
+  },
+  {
+    id: "sparrow",
+    label: "Moineau",
+    figure: sfig([
+      ...poly([[1, 3], [2, 1], [4, 0], [5, 2], [6, 2], [5, 4], [3, 5], [1, 4]]),
+      ...poly([[5, 2], [6, 0], [6, 3]]),
+      ...line([2, 5], [2, 6]),
+      ...line([4, 5], [4, 6]),
+    ], [{ x: 4, y: 2 }]),
+  },
+  {
+    id: "skiff",
+    label: "Skiff",
+    figure: sfig([
+      ...poly([[0, 4], [1, 5], [5, 5], [6, 4]]),
+      ...line([3, 4], [3, 0]),
+      ...poly([[3, 0], [5, 3], [3, 3]]),
+    ]),
+  },
+  {
+    id: "daisy",
+    label: "Marguerite",
+    figure: sfig([
+      ...poly([[3, 0], [2, 1], [3, 2], [4, 1]]),
+      ...poly([[3, 2], [1, 1], [1, 3], [3, 3]]),
+      ...poly([[3, 2], [5, 1], [5, 3], [3, 3]]),
+      ...poly([[3, 3], [1, 4], [2, 5], [4, 5], [5, 4]]),
+      ...line([3, 5], [3, 6]),
+    ], [{ x: 3, y: 3 }]),
+  },
+  {
+    id: "pony",
+    label: "Poney",
+    figure: sfig([
+      ...poly([[1, 2], [2, 1], [4, 1], [5, 2], [5, 4], [1, 4]]),
+      ...poly([[5, 2], [6, 1], [6, 3], [5, 3]]),
+      ...line([2, 4], [2, 6]),
+      ...line([4, 4], [4, 6]),
+      ...line([1, 3], [0, 2]),
+    ], [{ x: 6, y: 2 }]),
+  },
+  {
+    id: "keep",
+    label: "Donjon",
+    figure: sfig([
+      ...rect(1, 2, 4, 3),
+      ...line([1, 2], [1, 1], [2, 1], [2, 2]),
+      ...line([4, 2], [4, 1], [5, 1], [5, 2]),
+      ...poly([[2, 2], [3, 0], [4, 2]]),
+      ...rect(2, 4, 2, 1),
+    ]),
+  },
+  {
+    id: "brolly",
+    label: "Ombrelle",
+    figure: sfig([
+      ...poly([[0, 3], [3, 0], [6, 3]]),
+      ...line([0, 3], [6, 3]),
+      ...line([1, 3], [1, 2]),
+      ...line([3, 3], [3, 1]),
+      ...line([5, 3], [5, 2]),
+      ...line([3, 3], [3, 6]),
+    ]),
+  },
+  {
+    id: "mothling",
+    label: "Petite mite",
+    figure: sfig([
+      ...poly([[3, 1], [0, 0], [0, 2], [2, 3], [3, 2]]),
+      ...poly([[3, 1], [6, 0], [6, 2], [4, 3], [3, 2]]),
+      ...poly([[3, 2], [1, 4], [0, 6], [2, 5], [3, 4]]),
+      ...poly([[3, 2], [5, 4], [6, 6], [4, 5], [3, 4]]),
+      ...line([3, 1], [3, 5]),
+    ]),
+  },
+  {
+    id: "glider",
+    label: "Planeur",
+    figure: sfig([
+      ...poly([[0, 3], [2, 2], [5, 2], [6, 3], [5, 4], [2, 4]]),
+      ...line([3, 2], [1, 0]),
+      ...line([3, 4], [1, 6]),
+      ...line([5, 2], [6, 0]),
+      ...line([5, 4], [6, 6]),
+    ]),
+  },
+  {
+    id: "spark",
+    label: "Étincelle",
+    figure: sfig(poly([
+      [3, 0], [4, 2], [6, 2], [4, 3], [5, 6], [3, 4], [1, 6], [2, 3], [0, 2], [2, 2],
+    ])),
+  },
+  {
+    id: "badge",
+    label: "Écusson",
+    figure: sfig([
+      ...poly([[1, 0], [5, 0], [6, 2], [3, 6], [0, 2]]),
+      ...line([3, 0], [3, 6]),
+      ...line([1, 0], [3, 2], [5, 0]),
+    ]),
+  },
+  {
+    id: "toad",
+    label: "Crapaud",
+    figure: sfig([
+      ...poly([[0, 3], [3, 0], [6, 3]]),
+      ...line([0, 3], [6, 3]),
+      ...rect(2, 3, 2, 2),
+      ...line([1, 5], [5, 5]),
+    ], [{ x: 1, y: 1 }, { x: 3, y: 1 }, { x: 5, y: 1 }]),
+  },
+  {
+    id: "spiral",
+    label: "Spirale",
+    figure: sfig([
+      ...poly([[1, 2], [3, 0], [5, 2], [5, 4], [3, 6], [1, 4]]),
+      ...line([3, 0], [3, 6]),
+      ...line([1, 2], [5, 4]),
+      ...line([5, 2], [1, 4]),
+    ]),
+  },
+  {
+    id: "bot",
+    label: "Petit robot",
+    figure: sfig([
+      ...rect(2, 0, 2, 1),
+      ...rect(1, 1, 4, 3),
+      ...line([1, 2], [0, 1], [0, 4], [1, 3]),
+      ...line([5, 2], [6, 1], [6, 4], [5, 3]),
+      ...line([2, 4], [2, 6]),
+      ...line([4, 4], [4, 6]),
+      ...rect(2, 2, 1, 1),
+      ...rect(3, 2, 1, 1),
+    ]),
+  },
+  {
+    id: "diadem",
+    label: "Diadème",
+    figure: sfig([
+      ...poly([[0, 4], [0, 2], [1, 3], [2, 1], [3, 3], [4, 1], [5, 3], [6, 2], [6, 4]]),
+      ...line([0, 4], [6, 4]),
+      ...line([1, 4], [1, 5], [5, 5], [5, 4]),
+    ], [{ x: 2, y: 2 }, { x: 4, y: 2 }]),
+  },
+  {
+    id: "latchkey",
+    label: "Clef",
+    figure: sfig([
+      ...poly([[1, 0], [3, 0], [4, 1], [4, 2], [3, 3], [1, 3], [0, 2], [0, 1]]),
+      ...line([3, 1], [6, 1]),
+      ...line([6, 1], [6, 3]),
+      ...line([4, 1], [4, 3]),
+      ...line([5, 1], [5, 2]),
+    ]),
+  },
+  {
+    id: "hook",
+    label: "Crochet",
+    figure: sfig([
+      ...rect(2, 0, 2, 1),
+      ...line([3, 1], [3, 5]),
+      ...line([0, 3], [6, 3]),
+      ...poly([[0, 3], [0, 5], [1, 6], [2, 4]]),
+      ...poly([[6, 3], [6, 5], [5, 6], [4, 4]]),
+      ...line([2, 5], [4, 5]),
+    ]),
+  },
+  {
+    id: "lantern",
+    label: "Lanterne",
+    figure: sfig([
+      ...poly([[1, 0], [5, 0], [6, 2], [0, 2]]),
+      ...line([3, 2], [3, 4]),
+      ...rect(1, 4, 4, 1),
+      ...line([0, 5], [6, 5]),
+    ]),
+  },
+  {
+    id: "scoop",
+    label: "Cornet glacé",
+    figure: sfig([
+      ...poly([[1, 2], [3, 0], [5, 2]]),
+      ...poly([[0, 2], [6, 2], [3, 6]]),
+      ...line([1, 2], [2, 1], [4, 1], [5, 2]),
+    ], [{ x: 2, y: 1 }, { x: 4, y: 1 }]),
+  },
+  {
+    id: "terrapin",
+    label: "Tortue naine",
+    figure: sfig([
+      ...poly([[1, 2], [3, 0], [5, 2], [6, 3], [5, 4], [3, 5], [1, 4], [0, 3]]),
+      ...line([3, 0], [3, 5]),
+      ...line([1, 2], [5, 4]),
+      ...line([5, 2], [1, 4]),
+      ...poly([[5, 2], [6, 1], [6, 3]]),
+      ...line([1, 4], [0, 5]),
+      ...line([2, 5], [1, 6]),
+      ...line([4, 5], [5, 6]),
+    ], [{ x: 6, y: 2 }]),
+  },
+  {
+    id: "uke",
+    label: "Ukulélé",
+    figure: sfig([
+      ...poly([[1, 2], [2, 1], [4, 1], [5, 2], [5, 4], [4, 6], [2, 6], [1, 4]]),
+      ...line([3, 1], [3, 0]),
+      ...line([2, 0], [4, 0]),
+      ...rect(2, 3, 2, 1),
+    ], [{ x: 3, y: 4 }]),
+  },
+  {
+    id: "hills",
+    label: "Collines",
+    figure: sfig([
+      ...poly([[0, 6], [1, 2], [3, 6]]),
+      ...poly([[2, 6], [4, 0], [6, 6]]),
+      ...line([0, 6], [6, 6]),
+      ...line([1, 2], [2, 3], [0, 3], [1, 2]),
+      ...line([4, 0], [5, 2], [3, 2], [4, 0]),
+    ]),
+  },
+  {
+    id: "ray",
+    label: "Rayon",
+    figure: sfig([
+      ...poly([[1, 2], [2, 1], [4, 1], [5, 2], [5, 4], [4, 5], [2, 5], [1, 4]]),
+      ...line([3, 1], [3, 0]),
+      ...line([3, 5], [3, 6]),
+      ...line([1, 3], [0, 3]),
+      ...line([5, 3], [6, 3]),
+      ...line([1, 2], [0, 1]),
+      ...line([5, 2], [6, 1]),
+      ...line([1, 4], [0, 5]),
+      ...line([5, 4], [6, 5]),
+    ]),
+  },
+  {
+    id: "slice",
+    label: "Croissant lune",
+    figure: sfig([
+      ...poly([[4, 0], [2, 0], [0, 2], [0, 4], [2, 6], [4, 6], [2, 5], [1, 3], [2, 1], [4, 1]]),
+    ], [{ x: 5, y: 1 }, { x: 6, y: 2 }, { x: 6, y: 4 }, { x: 5, y: 5 }]),
+  },
+  {
+    id: "beaker",
+    label: "Gobelet",
+    figure: sfig([
+      ...poly([[1, 1], [4, 1], [4, 5], [1, 5]]),
+      ...line([4, 2], [6, 2], [6, 4], [4, 4]),
+      ...line([0, 6], [5, 6]),
+      ...line([1, 1], [1, 5]),
+      ...line([3, 1], [3, 5]),
+    ]),
+  },
+  {
+    id: "bowler",
+    label: "Chapeau melon",
+    figure: sfig([
+      ...rect(1, 1, 4, 3),
+      ...line([0, 4], [6, 4]),
+      ...line([0, 4], [0, 5], [6, 5], [6, 4]),
+      ...line([1, 2], [5, 2]),
+    ]),
+  },
+  {
+    id: "fern",
+    label: "Fougère",
+    figure: sfig([
+      ...poly([[3, 0], [1, 1], [0, 3], [1, 4], [2, 5], [3, 6], [4, 5], [5, 4], [6, 3], [5, 1]]),
+      ...line([3, 0], [3, 6]),
+      ...line([3, 2], [1, 1]),
+      ...line([3, 2], [5, 1]),
+      ...line([3, 4], [0, 3]),
+      ...line([3, 4], [6, 3]),
+    ]),
+  },
+  {
+    id: "cub",
+    label: "Renardeau",
+    figure: sfig([
+      ...poly([[0, 1], [1, 0], [2, 1], [4, 1], [5, 0], [6, 1], [6, 3], [5, 5], [1, 5], [0, 3]]),
+      ...poly([[2, 3], [3, 4], [4, 3]]),
+      ...line([1, 5], [1, 6]),
+      ...line([5, 5], [5, 6]),
+    ], [{ x: 1, y: 2 }, { x: 5, y: 2 }]),
+  },
+  {
+    id: "pickup",
+    label: "Pick-up",
+    figure: sfig([
+      ...rect(0, 1, 4, 3),
+      ...poly([[4, 2], [5, 2], [6, 3], [6, 4], [4, 4]]),
+      ...rect(4, 2, 1, 1),
+    ], [{ x: 1, y: 5 }, { x: 3, y: 5 }, { x: 5, y: 5 }]),
+  },
+  {
+    id: "wigwam",
+    label: "Wigwam",
+    figure: sfig([
+      ...poly([[0, 6], [3, 0], [6, 6]]),
+      ...line([0, 6], [6, 6]),
+      ...line([3, 0], [3, 6]),
+      ...line([1, 6], [1, 4], [5, 4], [5, 6]),
+    ]),
+  },
+  {
+    id: "flare",
+    label: "Flambeau",
+    figure: sfig([
+      ...rect(2, 2, 2, 3),
+      ...poly([[2, 2], [3, 0], [4, 2]]),
+      ...line([1, 5], [5, 5]),
+      ...line([0, 6], [6, 6]),
+    ]),
+  },
+  {
+    id: "hornet",
+    label: "Frelon",
+    figure: sfig([
+      ...poly([[1, 2], [3, 0], [5, 2], [5, 4], [3, 6], [1, 4]]),
+      ...line([2, 0], [2, 6]),
+      ...line([4, 0], [4, 6]),
+      ...poly([[1, 2], [0, 0], [0, 3], [1, 3]]),
+      ...poly([[5, 2], [6, 0], [6, 3], [5, 3]]),
+    ], [{ x: 2, y: 2 }, { x: 4, y: 2 }]),
+  },
+  {
+    id: "steps",
+    label: "Marches",
+    figure: sfig([
+      ...line([1, 0], [1, 6]),
+      ...line([5, 0], [5, 6]),
+      ...line([1, 0], [5, 0]),
+      ...line([1, 1], [5, 1]),
+      ...line([1, 2], [5, 2]),
+      ...line([1, 3], [5, 3]),
+      ...line([1, 4], [5, 4]),
+      ...line([1, 5], [5, 5]),
+      ...line([1, 6], [5, 6]),
+    ]),
+  },
+  {
+    id: "span",
+    label: "Passerelle",
+    figure: sfig([
+      ...line([0, 5], [1, 2], [3, 0], [5, 2], [6, 5]),
+      ...line([0, 5], [6, 5]),
+      ...line([1, 5], [1, 2]),
+      ...line([3, 5], [3, 0]),
+      ...line([5, 5], [5, 2]),
+      ...line([0, 6], [0, 5]),
+      ...line([6, 6], [6, 5]),
+    ]),
+  },
+  {
+    id: "turbine",
+    label: "Turbine",
+    figure: sfig([
+      ...poly([[1, 3], [3, 1], [5, 3], [5, 6], [1, 6]]),
+      ...line([3, 1], [3, 0]),
+      ...line([3, 1], [0, 0]),
+      ...line([3, 1], [6, 0]),
+      ...line([3, 1], [0, 3]),
+      ...line([3, 1], [6, 3]),
+      ...rect(2, 4, 2, 2),
+    ]),
+  },
+  {
+    id: "plum",
+    label: "Prune",
+    figure: sfig([
+      ...poly([[3, 1], [1, 2], [0, 4], [1, 6], [3, 6], [5, 6], [6, 4], [5, 2]]),
+      ...line([3, 1], [3, 0], [4, 0]),
+      ...line([3, 1], [2, 0]),
+    ]),
+  },
+  {
+    id: "flyer",
+    label: "Cerf-volant mini",
+    figure: sfig([
+      ...poly([[3, 0], [5, 2], [3, 5], [1, 2]]),
+      ...line([3, 0], [3, 5]),
+      ...line([1, 2], [5, 2]),
+      ...line([3, 5], [2, 6], [4, 6], [3, 5]),
+    ]),
+  },
+  {
+    id: "timer",
+    label: "Chrono",
+    figure: sfig([
+      ...poly([[1, 1], [5, 1], [6, 2], [6, 4], [5, 5], [1, 5], [0, 4], [0, 2]]),
+      ...line([3, 3], [3, 1]),
+      ...line([3, 3], [5, 3]),
+      ...line([3, 1], [3, 0]),
+      ...line([3, 5], [3, 6]),
+      ...line([0, 3], [1, 3]),
+      ...line([5, 3], [6, 3]),
+    ], [{ x: 3, y: 3 }]),
+  },
+  {
+    id: "blade",
+    label: "Lame",
+    figure: sfig([
+      ...poly([[2, 0], [4, 0], [4, 3], [2, 3]]),
+      ...line([0, 3], [6, 3]),
+      ...line([0, 3], [0, 4], [6, 4], [6, 3]),
+      ...rect(2, 4, 2, 1),
+      ...poly([[2, 5], [4, 5], [3, 6]]),
+    ]),
+  },
+  {
+    id: "viper",
+    label: "Vipère",
+    figure: sfig([
+      ...poly([[0, 3], [1, 1], [3, 2], [4, 0], [6, 1], [5, 3], [6, 4], [4, 5], [2, 4], [1, 6], [0, 4]]),
+      ...line([4, 0], [5, 0]),
+    ], [{ x: 2, y: 2 }, { x: 5, y: 2 }]),
+  },
+  {
+    id: "kick",
+    label: "Trotti",
+    figure: sfig([
+      ...poly([[0, 3], [1, 2], [1, 4], [0, 4]]),
+      ...poly([[4, 3], [5, 2], [5, 4], [4, 4]]),
+      ...line([1, 3], [3, 1], [4, 3]),
+      ...line([3, 1], [3, 0], [2, 0]),
+      ...line([1, 3], [4, 3]),
+    ], [{ x: 0, y: 3 }, { x: 4, y: 3 }]),
+  },
+  {
+    id: "owlet",
+    label: "Hibouneau",
+    figure: sfig([
+      ...poly([[1, 1], [2, 0], [3, 1], [4, 0], [5, 1], [6, 3], [5, 6], [1, 6], [0, 3]]),
+      ...poly([[1, 2], [2, 1], [3, 2], [2, 3]]),
+      ...poly([[3, 2], [4, 1], [5, 2], [4, 3]]),
+      ...line([2, 4], [3, 5], [4, 4]),
+    ], [{ x: 2, y: 2 }, { x: 4, y: 2 }]),
+  },
+  {
+    id: "tower",
+    label: "Tourelle",
+    figure: sfig([
+      ...poly([[1, 5], [2, 1], [4, 1], [5, 5]]),
+      ...rect(1, 0, 4, 1),
+      ...line([3, 0], [3, 1]),
+      ...line([0, 5], [6, 5]),
+      ...line([0, 6], [6, 6]),
+      ...rect(2, 2, 2, 1),
+      ...rect(2, 3, 2, 1),
+    ]),
+  },
+  {
+    id: "claw",
+    label: "Pince",
+    figure: sfig([
+      ...poly([[1, 2], [2, 1], [4, 1], [5, 2], [5, 4], [4, 5], [2, 5], [1, 4]]),
+      ...line([1, 2], [0, 0]),
+      ...line([1, 3], [0, 2]),
+      ...line([5, 2], [6, 0]),
+      ...line([5, 3], [6, 2]),
+      ...line([2, 5], [1, 6]),
+      ...line([2, 5], [2, 6]),
+      ...line([4, 5], [4, 6]),
+      ...line([4, 5], [5, 6]),
+    ], [{ x: 2, y: 2 }, { x: 4, y: 2 }]),
+  },
+  {
+    id: "parcel",
+    label: "Colis",
+    figure: sfig([
+      ...rect(0, 1, 6, 4),
+      ...line([3, 1], [3, 5]),
+      ...line([0, 3], [6, 3]),
+      ...poly([[1, 1], [2, 0], [3, 1], [4, 0], [5, 1]]),
+    ]),
+  },
+];
+
+for (const { id, figure } of SCALE_UP_FIGURES) assertSmallFigure(id, figure);
+
+const SCALE_UP_TASKS: ReproduceTask[] = SCALE_UP_FIGURES.map(({ id, label, figure }) => ({
+  id: `scale-up-${id}`,
+  kind: "scale_up" as const,
+  label,
+  reference: figure,
+  targetSize: G7_GRID_SIZE,
+}));
+
+export function pickReproduceTask(variant: 1 | 2 | 3, seed: number): ReproduceTask {
+  const pool = variant === 1 ? COPY_TASKS : variant === 2 ? SCALE_DOWN_TASKS : SCALE_UP_TASKS;
   return pool[Math.abs(seed) % pool.length]!;
 }
 
@@ -1248,7 +1811,7 @@ export function taskConsigne(task: ReproduceTask): string {
     return "Reproduisez la figure à l'identique sur le quadrillage de droite. Cliquez deux points pour tracer un segment ; cliquez deux fois le même point pour placer un point.";
   }
   if (task.kind === "scale_up") {
-    return "Reproduisez la figure en plus grand sur le quadrillage de droite (même forme, taille doublée).";
+    return "Reproduisez la figure en plus grand (×2) sur le quadrillage de droite.";
   }
   return "Reproduisez la figure en plus petit (rapport 2:1) sur le quadrillage de droite.";
 }

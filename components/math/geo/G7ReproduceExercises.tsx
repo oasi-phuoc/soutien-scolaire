@@ -159,7 +159,7 @@ export function G7ReproduceExercise({
   seed = 0,
 }: {
   exNum: number;
-  variant: 1 | 2;
+  variant: 1 | 2 | 3;
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
   /** Change à chaque refresh pour tirer un autre modèle du pool. */

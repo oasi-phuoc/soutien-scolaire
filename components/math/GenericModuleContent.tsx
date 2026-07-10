@@ -341,7 +341,7 @@ type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; ge
 type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
 type G6PlanStep = { kind: "g6_plan"; lesson: MathSubmoduleLesson; variant: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15; exNum: number };
-type G7ReproduceStep = { kind: "g7_reproduce"; lesson: MathSubmoduleLesson; variant: 1 | 2; exNum: number };
+type G7ReproduceStep = { kind: "g7_reproduce"; lesson: MathSubmoduleLesson; variant: 1 | 2 | 3; exNum: number };
 type G7FriezeStep = { kind: "g7_frieze"; lesson: MathSubmoduleLesson; exNum: number };
 type G7SymmetryStep = { kind: "g7_symmetry"; lesson: MathSubmoduleLesson; exNum: number };
 
@@ -5243,7 +5243,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const pushG7ReproduceSet = () => {
         steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 1 });
         steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 2 });
-        steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 3 });
+        steps.push({ kind: "g7_reproduce", lesson, variant: 3, exNum: 3 });
         steps.push({ kind: "g7_frieze", lesson, exNum: 4 });
       };
       pushG7ReproduceSet();
