@@ -44,6 +44,7 @@ export function G7GridCanvas({
   expectedSegments,
   validated,
   axis,
+  axisColor = "#dc2626",
   onPointClick,
   maxWidthClass = "max-w-[320px]",
 }: {
@@ -61,6 +62,7 @@ export function G7GridCanvas({
   expectedSegments?: Set<string>;
   validated?: boolean;
   axis?: G7SymAxis;
+  axisColor?: string;
   onPointClick?: (p: GridPoint) => void;
   maxWidthClass?: string;
 }) {
@@ -127,7 +129,7 @@ export function G7GridCanvas({
           y1={G7_MARGIN}
           x2={G7_MARGIN + axis.x * G7_CELL}
           y2={G7_MARGIN + height * G7_CELL}
-          stroke="#dc2626"
+          stroke={axisColor}
           strokeWidth={3}
         />
       )}
@@ -137,7 +139,7 @@ export function G7GridCanvas({
           y1={G7_MARGIN + axis.y * G7_CELL}
           x2={G7_MARGIN + width * G7_CELL}
           y2={G7_MARGIN + axis.y * G7_CELL}
-          stroke="#dc2626"
+          stroke={axisColor}
           strokeWidth={3}
         />
       )}
@@ -156,7 +158,7 @@ export function G7GridCanvas({
             y1={G7_MARGIN + a.y * G7_CELL}
             x2={G7_MARGIN + b.x * G7_CELL}
             y2={G7_MARGIN + b.y * G7_CELL}
-            stroke="#dc2626"
+            stroke={axisColor}
             strokeWidth={3}
           />
         );
