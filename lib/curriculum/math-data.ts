@@ -246,8 +246,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G7",
     title: "Transformations du plan",
     branch: "geometry",
-    comingSoon: true,
-    prerequisiteIds: ["G1", "G6", "A3"],
+    prerequisiteIds: [],
     algebraRefs: ["A3", "A6"],
     submodules: [
       sm("G7.1", "Reproduction de figures"),
