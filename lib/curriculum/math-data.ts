@@ -255,9 +255,6 @@ export const MATH_MODULES: MathModule[] = [
       sm("G7.3", "Symétrie centrale"),
       sm("G7.4", "Translation"),
       sm("G7.5", "Rotation"),
-      sm("G7.6", "Homothétie"),
-      sm("G7.7", "Isométries"),
-      sm("G7.8", "Homothétie et longueurs"),
     ],
   },
   {

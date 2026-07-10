@@ -15,9 +15,13 @@ function asG7Lesson(lesson: MathSubmoduleLesson, index: number): MathSubmoduleLe
   };
 }
 
-/** G7.1 = reproduction ; G7.2 = axes de symétrie ; G7.3+ = anciennes leçons G6.2+. */
+/**
+ * G7.1 = reproduction ; G7.2 = axes ;
+ * G7.3–G7.5 = anciennes G6.2–G6.4 (symétrie centrale, translation, rotation).
+ * G7.6–G7.8 retirés.
+ */
 export const MATH_G7_RENUMBERED_LESSONS: MathSubmoduleLesson[] = [
   MATH_G7_REPRODUCE_LESSON,
   MATH_G7_2_LESSON,
-  ...MATH_G6_LESSONS.slice(1).map((lesson, i) => asG7Lesson(lesson, i + 2)),
+  ...MATH_G6_LESSONS.slice(1, 4).map((lesson, i) => asG7Lesson(lesson, i + 2)),
 ];
