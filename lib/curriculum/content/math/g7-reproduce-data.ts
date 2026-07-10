@@ -59,7 +59,32 @@ export function expectedFromTask(task: ReproduceTask): { dots: Set<string>; segm
 }
 
 function fig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
-  return { size: G7_GRID_SIZE, dots, segments };
+  return { size: G7_GRID_SIZE, dots: dedupeDots(dots), segments: dedupeSegments(segments) };
+}
+
+function dedupeSegments(segments: GridSegment[]): GridSegment[] {
+  const seen = new Set<string>();
+  const out: GridSegment[] = [];
+  for (const s of segments) {
+    if (s.x1 === s.x2 && s.y1 === s.y2) continue;
+    const k = segmentKey(s);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push(s);
+  }
+  return out;
+}
+
+function dedupeDots(dots: GridPoint[]): GridPoint[] {
+  const seen = new Set<string>();
+  const out: GridPoint[] = [];
+  for (const d of dots) {
+    const k = pointKey(d);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push(d);
+  }
+  return out;
 }
 
 function poly(pts: Array<[number, number]>): GridSegment[] {
@@ -667,7 +692,7 @@ const COPY_TASKS: ReproduceTask[] = FIGURES.map(({ id, label, figure }) => ({
  * pour une réduction exacte 2:1 (÷2 sans demi-case).
  */
 function efig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
-  return { size: G7_GRID_SIZE, dots, segments };
+  return { size: G7_GRID_SIZE, dots: dedupeDots(dots), segments: dedupeSegments(segments) };
 }
 
 function assertEvenFigure(id: string, figure: GridFigure) {
@@ -1243,7 +1268,7 @@ const SCALE_DOWN_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure
  * sur grille 12×12 (6×2 = 12).
  */
 function sfig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
-  return { size: G7_GRID_SIZE, dots, segments };
+  return { size: G7_GRID_SIZE, dots: dedupeDots(dots), segments: dedupeSegments(segments) };
 }
 
 function assertSmallFigure(id: string, figure: GridFigure) {
