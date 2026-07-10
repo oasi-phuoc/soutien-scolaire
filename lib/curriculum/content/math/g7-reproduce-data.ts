@@ -662,155 +662,581 @@ const COPY_TASKS: ReproduceTask[] = FIGURES.map(({ id, label, figure }) => ({
   targetSize: G7_GRID_SIZE,
 }));
 
-/** Figures compactes (coords ≤ 6) pour agrandissement ×2 sur grille 12×12. */
-const SCALE_UP_FIGS: Array<{ id: string; label: string; figure: GridFigure }> = [
-  {
-    id: "house-sm",
-    label: "Maison agrandie",
-    figure: fig([
-      ...poly([[1, 3], [3, 1], [5, 3]]),
-      ...rect(1, 3, 4, 3),
-      ...rect(2, 4, 1, 2),
-    ]),
-  },
-  {
-    id: "rocket-sm",
-    label: "Fusée agrandie",
-    figure: fig([
-      ...poly([[3, 0], [2, 2], [4, 2]]),
-      ...rect(2, 2, 2, 3),
-      ...line([2, 5], [1, 6]),
-      ...line([4, 5], [5, 6]),
-    ], [{ x: 3, y: 3 }]),
-  },
-  {
-    id: "tree-sm",
-    label: "Arbre agrandi",
-    figure: fig([
-      ...poly([[3, 0], [1, 3], [5, 3]]),
-      ...rect(2, 3, 2, 2),
-    ]),
-  },
-  {
-    id: "boat-sm",
-    label: "Bateau agrandi",
-    figure: fig([
-      ...poly([[1, 4], [2, 5], [5, 5], [6, 4]]),
-      ...line([3, 4], [3, 1]),
-      ...poly([[3, 1], [5, 3], [3, 3]]),
-    ]),
-  },
-  {
-    id: "star-sm",
-    label: "Étoile agrandie",
-    figure: fig(poly([[3, 0], [4, 2], [6, 2], [4, 3], [5, 5], [3, 4], [1, 5], [2, 3], [0, 2], [2, 2]])),
-  },
-  {
-    id: "fish-sm",
-    label: "Poisson agrandi",
-    figure: fig([
-      ...poly([[0, 3], [2, 1], [4, 2], [5, 3], [4, 4], [2, 5]]),
-      ...poly([[5, 3], [6, 2], [6, 4]]),
-    ], [{ x: 2, y: 2 }]),
-  },
-  {
-    id: "flower-sm",
-    label: "Fleur agrandie",
-    figure: fig([
-      ...poly([[3, 0], [2, 2], [3, 3], [4, 2]]),
-      ...poly([[3, 3], [1, 2], [1, 4], [3, 4]]),
-      ...poly([[3, 3], [5, 2], [5, 4], [3, 4]]),
-      ...line([3, 4], [3, 6]),
-    ], [{ x: 3, y: 3 }]),
-  },
-  {
-    id: "cat-sm",
-    label: "Chat agrandi",
-    figure: fig([
-      ...poly([[1, 2], [2, 0], [3, 2], [4, 2], [5, 0], [6, 2], [6, 5], [1, 5]]),
-    ], [{ x: 2, y: 3 }, { x: 5, y: 3 }]),
-  },
-];
+/**
+ * Exercice 2 — 50 figures distinctes, toutes les coordonnées paires (0,2,…,12)
+ * pour une réduction exacte 2:1 (÷2 sans demi-case).
+ */
+function efig(segments: GridSegment[], dots: GridPoint[] = []): GridFigure {
+  return { size: G7_GRID_SIZE, dots, segments };
+}
 
-/** Figures sur coords paires pour réduction ÷2. */
-const SCALE_DOWN_FIGS: Array<{ id: string; label: string; figure: GridFigure }> = [
+function assertEvenFigure(id: string, figure: GridFigure) {
+  const vals: number[] = [];
+  for (const s of figure.segments) vals.push(s.x1, s.y1, s.x2, s.y2);
+  for (const d of figure.dots) vals.push(d.x, d.y);
+  const bad = vals.filter((v) => v % 2 !== 0 || v < 0 || v > 12);
+  if (bad.length) throw new Error(`Figure ${id}: coords non paires ou hors grille: ${bad.join(",")}`);
+}
+
+const SCALE_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
   {
-    id: "house-lg",
-    label: "Maison réduite",
-    figure: fig([
+    id: "cabin",
+    label: "Cabane",
+    figure: efig([
       ...poly([[2, 6], [6, 2], [10, 6]]),
-      ...rect(2, 6, 8, 6),
-      ...rect(5, 8, 2, 4),
+      ...rect(2, 6, 8, 4),
+      ...rect(4, 8, 2, 2),
+      ...rect(8, 8, 2, 2),
     ]),
   },
   {
-    id: "rocket-lg",
-    label: "Fusée réduite",
-    figure: fig([
+    id: "shuttle",
+    label: "Navette",
+    figure: efig([
       ...poly([[6, 0], [4, 4], [8, 4]]),
-      ...rect(4, 4, 4, 6),
-      ...line([4, 10], [2, 12]),
-      ...line([8, 10], [10, 12]),
+      ...rect(4, 4, 4, 4),
+      ...line([4, 8], [2, 12]),
+      ...line([8, 8], [10, 12]),
+      ...line([4, 8], [8, 8]),
+      ...rect(4, 4, 4, 2),
     ], [{ x: 6, y: 6 }]),
   },
   {
-    id: "tree-lg",
-    label: "Arbre réduit",
-    figure: fig([
-      ...poly([[6, 0], [2, 6], [10, 6]]),
-      ...rect(4, 6, 4, 4),
+    id: "wolf",
+    label: "Loup",
+    figure: efig([
+      ...poly([[2, 4], [4, 0], [6, 4], [8, 4], [10, 0], [12, 4], [10, 8], [8, 10], [4, 10], [2, 8]]),
+      ...line([4, 10], [4, 12]),
+      ...line([8, 10], [8, 12]),
+      ...poly([[4, 6], [6, 8], [8, 6]]),
+    ], [{ x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "whale",
+    label: "Baleine",
+    figure: efig([
+      ...poly([[0, 6], [4, 2], [10, 2], [12, 6], [10, 8], [4, 8]]),
+      ...poly([[12, 6], [12, 2], [10, 4]]),
+      ...poly([[12, 6], [12, 10], [10, 8]]),
+      ...line([2, 8], [0, 10]),
+    ], [{ x: 4, y: 4 }]),
+  },
+  {
+    id: "pine",
+    label: "Sapin",
+    figure: efig([
+      ...poly([[6, 0], [2, 4], [4, 4], [0, 8], [12, 8], [8, 4], [10, 4]]),
+      ...rect(4, 8, 4, 4),
     ]),
   },
   {
-    id: "car-lg",
-    label: "Voiture réduite",
-    figure: fig([
-      ...poly([[0, 6], [2, 4], [8, 4], [10, 6], [12, 6], [12, 8], [0, 8]]),
-      ...line([2, 4], [2, 6]),
-      ...line([8, 4], [8, 6]),
-    ], [{ x: 2, y: 10 }, { x: 10, y: 10 }]),
+    id: "bus",
+    label: "Bus",
+    figure: efig([
+      ...rect(0, 4, 12, 4),
+      ...rect(2, 4, 2, 2),
+      ...rect(6, 4, 2, 2),
+      ...rect(10, 4, 2, 2),
+      ...line([0, 8], [12, 8]),
+    ], [{ x: 2, y: 10 }, { x: 6, y: 10 }, { x: 10, y: 10 }]),
   },
   {
-    id: "star-lg",
-    label: "Étoile réduite",
-    figure: fig(poly([
+    id: "eagle",
+    label: "Aigle",
+    figure: efig([
+      ...poly([[2, 6], [4, 2], [8, 0], [10, 4], [12, 4], [10, 8], [6, 10], [2, 8]]),
+      ...poly([[10, 4], [12, 0], [12, 6]]),
+      ...line([4, 10], [4, 12]),
+      ...line([8, 10], [8, 12]),
+    ], [{ x: 8, y: 4 }]),
+  },
+  {
+    id: "sailboat",
+    label: "Voilier",
+    figure: efig([
+      ...poly([[0, 8], [2, 10], [10, 10], [12, 8]]),
+      ...line([6, 8], [6, 0]),
+      ...poly([[6, 0], [10, 6], [6, 6]]),
+      ...poly([[6, 2], [2, 6], [6, 6]]),
+    ]),
+  },
+  {
+    id: "rose",
+    label: "Rose",
+    figure: efig([
+      ...poly([[6, 0], [4, 2], [6, 4], [8, 2]]),
+      ...poly([[6, 4], [2, 2], [2, 6], [6, 6]]),
+      ...poly([[6, 4], [10, 2], [10, 6], [6, 6]]),
+      ...poly([[6, 6], [2, 8], [4, 10], [8, 10], [10, 8]]),
+      ...line([6, 10], [6, 12]),
+      ...line([6, 10], [2, 10]),
+      ...line([6, 10], [10, 10]),
+    ], [{ x: 6, y: 6 }]),
+  },
+  {
+    id: "horse",
+    label: "Cheval",
+    figure: efig([
+      ...poly([[2, 4], [4, 2], [8, 2], [10, 4], [10, 8], [2, 8]]),
+      ...poly([[10, 4], [12, 2], [12, 6], [10, 6]]),
+      ...line([4, 8], [4, 12]),
+      ...line([8, 8], [8, 12]),
+      ...line([2, 6], [0, 4]),
+      ...line([12, 2], [12, 0]),
+    ], [{ x: 12, y: 4 }]),
+  },
+  {
+    id: "fortress",
+    label: "Forteresse",
+    figure: efig([
+      ...rect(2, 4, 8, 6),
+      ...line([2, 4], [2, 2], [4, 2], [4, 4]),
+      ...line([8, 4], [8, 2], [10, 2], [10, 4]),
+      ...poly([[4, 4], [6, 0], [8, 4]]),
+      ...rect(4, 8, 4, 2),
+      ...rect(2, 6, 2, 2),
+      ...rect(8, 6, 2, 2),
+    ]),
+  },
+  {
+    id: "parasol",
+    label: "Parasol",
+    figure: efig([
+      ...poly([[0, 6], [6, 0], [12, 6]]),
+      ...line([0, 6], [12, 6]),
+      ...line([2, 6], [2, 4]),
+      ...line([6, 6], [6, 2]),
+      ...line([10, 6], [10, 4]),
+      ...line([6, 6], [6, 12]),
+    ]),
+  },
+  {
+    id: "moth",
+    label: "Papillon de nuit",
+    figure: efig([
+      ...poly([[6, 2], [0, 0], [0, 4], [4, 6], [6, 4]]),
+      ...poly([[6, 2], [12, 0], [12, 4], [8, 6], [6, 4]]),
+      ...poly([[6, 4], [2, 8], [0, 12], [4, 10], [6, 8]]),
+      ...poly([[6, 4], [10, 8], [12, 12], [8, 10], [6, 8]]),
+      ...line([6, 2], [6, 10]),
+    ]),
+  },
+  {
+    id: "jet",
+    label: "Jet",
+    figure: efig([
+      ...poly([[0, 6], [4, 4], [10, 4], [12, 6], [10, 8], [4, 8]]),
+      ...line([6, 4], [2, 0]),
+      ...line([6, 8], [2, 12]),
+      ...line([10, 4], [12, 0]),
+      ...line([10, 8], [12, 12]),
+    ]),
+  },
+  {
+    id: "diamond-star",
+    label: "Étoile losange",
+    figure: efig(poly([
       [6, 0], [8, 4], [12, 4], [8, 6], [10, 12], [6, 8], [2, 12], [4, 6], [0, 4], [4, 4],
     ])),
   },
   {
-    id: "boat-lg",
-    label: "Bateau réduit",
-    figure: fig([
-      ...poly([[2, 8], [4, 10], [10, 10], [12, 8]]),
-      ...line([6, 8], [6, 2]),
-      ...poly([[6, 2], [10, 6], [6, 6]]),
+    id: "shield",
+    label: "Bouclier",
+    figure: efig([
+      ...poly([[2, 0], [10, 0], [12, 4], [6, 12], [0, 4]]),
+      ...line([6, 0], [6, 12]),
+      ...line([2, 0], [6, 4], [10, 0]),
     ]),
   },
   {
-    id: "heart-lg",
-    label: "Cœur réduit",
-    figure: fig(poly([
-      [6, 12], [0, 6], [0, 2], [2, 0], [6, 2], [10, 0], [12, 2], [12, 6],
-    ])),
+    id: "toadstool",
+    label: "Amanite",
+    figure: efig([
+      ...poly([[0, 6], [6, 0], [12, 6]]),
+      ...line([0, 6], [12, 6]),
+      ...rect(4, 6, 4, 4),
+      ...line([2, 10], [10, 10]),
+    ], [{ x: 2, y: 2 }, { x: 6, y: 2 }, { x: 10, y: 2 }, { x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "shell",
+    label: "Coquillage",
+    figure: efig([
+      ...poly([[2, 4], [6, 0], [10, 4], [10, 8], [6, 12], [2, 8]]),
+      ...line([6, 0], [6, 12]),
+      ...line([2, 4], [10, 8]),
+      ...line([10, 4], [2, 8]),
+      ...line([4, 2], [8, 2]),
+      ...line([2, 6], [10, 6]),
+    ]),
+  },
+  {
+    id: "android",
+    label: "Androïde",
+    figure: efig([
+      ...rect(4, 0, 4, 2),
+      ...rect(2, 2, 8, 6),
+      ...line([2, 4], [0, 2], [0, 8], [2, 6]),
+      ...line([10, 4], [12, 2], [12, 8], [10, 6]),
+      ...line([4, 8], [4, 12]),
+      ...line([8, 8], [8, 12]),
+      ...rect(4, 4, 2, 2),
+      ...rect(6, 4, 2, 2),
+    ], [{ x: 4, y: 0 }, { x: 8, y: 0 }]),
+  },
+  {
+    id: "tiara",
+    label: "Tiare",
+    figure: efig([
+      ...poly([[0, 8], [0, 4], [2, 6], [4, 2], [6, 6], [8, 2], [10, 6], [12, 4], [12, 8]]),
+      ...line([0, 8], [12, 8]),
+      ...line([2, 8], [2, 10], [10, 10], [10, 8]),
+    ], [{ x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "skeleton-key",
+    label: "Passe-partout",
+    figure: efig([
+      ...poly([[2, 0], [6, 0], [8, 2], [8, 4], [6, 6], [2, 6], [0, 4], [0, 2]]),
+      ...line([6, 2], [12, 2]),
+      ...line([12, 2], [12, 6]),
+      ...line([8, 2], [8, 6]),
+      ...line([10, 2], [10, 4]),
+    ]),
+  },
+  {
+    id: "mooring",
+    label: "Ancre marine",
+    figure: efig([
+      ...rect(4, 0, 4, 2),
+      ...line([6, 2], [6, 10]),
+      ...line([0, 6], [12, 6]),
+      ...poly([[0, 6], [0, 10], [2, 12], [4, 8]]),
+      ...poly([[12, 6], [12, 10], [10, 12], [8, 8]]),
+      ...line([4, 10], [8, 10]),
+    ]),
+  },
+  {
+    id: "desk-lamp",
+    label: "Lampe de bureau",
+    figure: efig([
+      ...poly([[2, 0], [10, 0], [12, 4], [0, 4]]),
+      ...line([6, 4], [6, 8]),
+      ...rect(2, 8, 8, 2),
+      ...line([0, 10], [12, 10]),
+    ]),
+  },
+  {
+    id: "cone",
+    label: "Cornet",
+    figure: efig([
+      ...poly([[2, 4], [6, 0], [10, 4]]),
+      ...poly([[0, 4], [12, 4], [6, 12]]),
+      ...line([2, 4], [4, 2], [8, 2], [10, 4]),
+    ], [{ x: 4, y: 2 }, { x: 8, y: 2 }]),
+  },
+  {
+    id: "tortoise",
+    label: "Tortue marine",
+    figure: efig([
+      ...poly([[2, 4], [6, 0], [10, 4], [12, 6], [10, 8], [6, 10], [2, 8], [0, 6]]),
+      ...line([6, 0], [6, 10]),
+      ...line([2, 4], [10, 8]),
+      ...line([10, 4], [2, 8]),
+      ...poly([[10, 4], [12, 2], [12, 6]]),
+      ...line([2, 8], [0, 10]),
+      ...line([4, 10], [2, 12]),
+      ...line([8, 10], [10, 12]),
+    ], [{ x: 12, y: 4 }]),
+  },
+  {
+    id: "violin",
+    label: "Violon",
+    figure: efig([
+      ...poly([[2, 4], [4, 2], [8, 2], [10, 4], [10, 8], [8, 12], [4, 12], [2, 8]]),
+      ...line([6, 2], [6, 0]),
+      ...line([4, 0], [8, 0]),
+      ...rect(4, 6, 4, 2),
+    ], [{ x: 6, y: 8 }]),
+  },
+  {
+    id: "peaks",
+    label: "Sommets",
+    figure: efig([
+      ...poly([[0, 12], [2, 4], [6, 12]]),
+      ...poly([[4, 12], [8, 0], [12, 12]]),
+      ...line([0, 12], [12, 12]),
+      ...line([2, 4], [4, 6], [0, 6], [2, 4]),
+      ...line([8, 0], [10, 4], [6, 4], [8, 0]),
+    ]),
+  },
+  {
+    id: "sunrise",
+    label: "Soleil levant",
+    figure: efig([
+      ...poly([[2, 4], [4, 2], [8, 2], [10, 4], [10, 8], [8, 10], [4, 10], [2, 8]]),
+      ...line([6, 2], [6, 0]),
+      ...line([6, 10], [6, 12]),
+      ...line([2, 6], [0, 6]),
+      ...line([10, 6], [12, 6]),
+      ...line([2, 4], [0, 2]),
+      ...line([10, 4], [12, 2]),
+      ...line([2, 8], [0, 10]),
+      ...line([10, 8], [12, 10]),
+    ]),
+  },
+  {
+    id: "crescent",
+    label: "Croissant",
+    figure: efig([
+      ...poly([[8, 0], [4, 0], [0, 4], [0, 8], [4, 12], [8, 12], [4, 10], [2, 6], [4, 2], [8, 2]]),
+    ], [{ x: 10, y: 2 }, { x: 12, y: 4 }, { x: 12, y: 8 }, { x: 10, y: 10 }]),
+  },
+  {
+    id: "mug",
+    label: "Mug",
+    figure: efig([
+      ...poly([[2, 2], [8, 2], [8, 10], [2, 10]]),
+      ...line([8, 4], [12, 4], [12, 8], [8, 8]),
+      ...line([0, 12], [10, 12]),
+      ...line([2, 2], [2, 10]),
+      ...line([6, 2], [6, 10]),
+    ]),
+  },
+  {
+    id: "top-hat",
+    label: "Haut-de-forme",
+    figure: efig([
+      ...rect(2, 2, 8, 6),
+      ...line([0, 8], [12, 8]),
+      ...line([0, 8], [0, 10], [12, 10], [12, 8]),
+      ...line([2, 4], [10, 4]),
+    ]),
+  },
+  {
+    id: "maple",
+    label: "Érable",
+    figure: efig([
+      ...poly([[6, 0], [2, 2], [0, 6], [2, 8], [4, 10], [6, 12], [8, 10], [10, 8], [12, 6], [10, 2]]),
+      ...line([6, 0], [6, 12]),
+      ...line([6, 4], [2, 2]),
+      ...line([6, 4], [10, 2]),
+      ...line([6, 8], [0, 6]),
+      ...line([6, 8], [12, 6]),
+    ]),
+  },
+  {
+    id: "lynx",
+    label: "Lynx",
+    figure: efig([
+      ...poly([[0, 2], [2, 0], [4, 2], [8, 2], [10, 0], [12, 2], [12, 6], [10, 10], [2, 10], [0, 6]]),
+      ...poly([[4, 6], [6, 8], [8, 6]]),
+      ...line([2, 10], [2, 12]),
+      ...line([10, 10], [10, 12]),
+    ], [{ x: 2, y: 4 }, { x: 10, y: 4 }]),
+  },
+  {
+    id: "lorry",
+    label: "Camion benne",
+    figure: efig([
+      ...rect(0, 2, 8, 6),
+      ...poly([[8, 4], [10, 4], [12, 6], [12, 8], [8, 8]]),
+      ...rect(8, 4, 2, 2),
+    ], [{ x: 2, y: 10 }, { x: 6, y: 10 }, { x: 10, y: 10 }]),
+  },
+  {
+    id: "teepee",
+    label: "Tipi",
+    figure: efig([
+      ...poly([[0, 12], [6, 0], [12, 12]]),
+      ...line([0, 12], [12, 12]),
+      ...line([6, 0], [6, 12]),
+      ...line([2, 12], [2, 8], [10, 8], [10, 12]),
+    ]),
+  },
+  {
+    id: "torch",
+    label: "Torche",
+    figure: efig([
+      ...rect(4, 4, 4, 6),
+      ...poly([[4, 4], [6, 0], [8, 4]]),
+      ...line([2, 10], [10, 10]),
+      ...line([0, 12], [12, 12]),
+    ]),
+  },
+  {
+    id: "wasp",
+    label: "Guêpe",
+    figure: efig([
+      ...poly([[2, 4], [6, 0], [10, 4], [10, 8], [6, 12], [2, 8]]),
+      ...line([4, 0], [4, 12]),
+      ...line([8, 0], [8, 12]),
+      ...poly([[2, 4], [0, 0], [0, 6], [2, 6]]),
+      ...poly([[10, 4], [12, 0], [12, 6], [10, 6]]),
+    ], [{ x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "rungs",
+    label: "Échelle double",
+    figure: efig([
+      ...line([2, 0], [2, 12]),
+      ...line([10, 0], [10, 12]),
+      ...line([2, 0], [10, 0]),
+      ...line([2, 2], [10, 2]),
+      ...line([2, 4], [10, 4]),
+      ...line([2, 6], [10, 6]),
+      ...line([2, 8], [10, 8]),
+      ...line([2, 10], [10, 10]),
+      ...line([2, 12], [10, 12]),
+    ]),
+  },
+  {
+    id: "arch",
+    label: "Arche",
+    figure: efig([
+      ...line([0, 10], [2, 4], [6, 0], [10, 4], [12, 10]),
+      ...line([0, 10], [12, 10]),
+      ...line([2, 10], [2, 4]),
+      ...line([6, 10], [6, 0]),
+      ...line([10, 10], [10, 4]),
+      ...line([0, 12], [0, 10]),
+      ...line([12, 12], [12, 10]),
+    ]),
+  },
+  {
+    id: "mill",
+    label: "Moulin à vent",
+    figure: efig([
+      ...poly([[2, 6], [6, 2], [10, 6], [10, 12], [2, 12]]),
+      ...line([6, 2], [6, 0]),
+      ...line([6, 2], [0, 0]),
+      ...line([6, 2], [12, 0]),
+      ...line([6, 2], [0, 6]),
+      ...line([6, 2], [12, 6]),
+      ...rect(4, 8, 4, 4),
+    ]),
+  },
+  {
+    id: "pear",
+    label: "Poire",
+    figure: efig([
+      ...poly([[6, 2], [2, 4], [0, 8], [2, 12], [6, 12], [10, 12], [12, 8], [10, 4]]),
+      ...line([6, 2], [6, 0], [8, 0]),
+      ...line([6, 2], [4, 0]),
+    ]),
+  },
+  {
+    id: "diamond-kite",
+    label: "Cerf-volant losange",
+    figure: efig([
+      ...poly([[6, 0], [10, 4], [6, 10], [2, 4]]),
+      ...line([6, 0], [6, 10]),
+      ...line([2, 4], [10, 4]),
+      ...line([6, 10], [4, 12], [8, 12], [6, 10]),
+    ]),
+  },
+  {
+    id: "watch",
+    label: "Montre",
+    figure: efig([
+      ...poly([[2, 2], [10, 2], [12, 4], [12, 8], [10, 10], [2, 10], [0, 8], [0, 4]]),
+      ...line([6, 6], [6, 2]),
+      ...line([6, 6], [10, 6]),
+      ...line([6, 2], [6, 0]),
+      ...line([6, 10], [6, 12]),
+      ...line([0, 6], [2, 6]),
+      ...line([10, 6], [12, 6]),
+    ], [{ x: 6, y: 6 }]),
+  },
+  {
+    id: "dagger",
+    label: "Dague",
+    figure: efig([
+      ...poly([[4, 0], [8, 0], [8, 6], [4, 6]]),
+      ...line([0, 6], [12, 6]),
+      ...line([0, 6], [0, 8], [12, 8], [12, 6]),
+      ...rect(4, 8, 4, 2),
+      ...poly([[4, 10], [8, 10], [6, 12]]),
+    ]),
+  },
+  {
+    id: "serpent",
+    label: "Serpent",
+    figure: efig([
+      ...poly([[0, 6], [2, 2], [6, 4], [8, 0], [12, 2], [10, 6], [12, 8], [8, 10], [4, 8], [2, 12], [0, 8]]),
+      ...line([8, 0], [10, 0]),
+    ], [{ x: 4, y: 4 }, { x: 10, y: 4 }]),
+  },
+  {
+    id: "scooter",
+    label: "Trottinette",
+    figure: efig([
+      ...poly([[0, 6], [2, 4], [2, 8], [0, 8]]),
+      ...poly([[8, 6], [10, 4], [10, 8], [8, 8]]),
+      ...line([2, 6], [6, 2], [8, 6]),
+      ...line([6, 2], [6, 0], [4, 0]),
+      ...line([2, 6], [8, 6]),
+    ], [{ x: 0, y: 6 }, { x: 8, y: 6 }]),
+  },
+  {
+    id: "barn-owl",
+    label: "Chouette",
+    figure: efig([
+      ...poly([[2, 2], [4, 0], [6, 2], [8, 0], [10, 2], [12, 6], [10, 12], [2, 12], [0, 6]]),
+      ...poly([[2, 4], [4, 2], [6, 4], [4, 6]]),
+      ...poly([[6, 4], [8, 2], [10, 4], [8, 6]]),
+      ...line([4, 8], [6, 10], [8, 8]),
+    ], [{ x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "beacon",
+    label: "Balise",
+    figure: efig([
+      ...poly([[2, 10], [4, 2], [8, 2], [10, 10]]),
+      ...rect(2, 0, 8, 2),
+      ...line([6, 0], [6, 2]),
+      ...line([0, 10], [12, 10]),
+      ...line([0, 12], [12, 12]),
+      ...rect(4, 4, 4, 2),
+      ...rect(4, 6, 4, 2),
+    ]),
+  },
+  {
+    id: "lobster",
+    label: "Homard",
+    figure: efig([
+      ...poly([[2, 4], [4, 2], [8, 2], [10, 4], [10, 8], [8, 10], [4, 10], [2, 8]]),
+      ...line([2, 4], [0, 0]),
+      ...line([2, 6], [0, 4]),
+      ...line([10, 4], [12, 0]),
+      ...line([10, 6], [12, 4]),
+      ...line([4, 10], [2, 12]),
+      ...line([4, 10], [4, 12]),
+      ...line([8, 10], [8, 12]),
+      ...line([8, 10], [10, 12]),
+    ], [{ x: 4, y: 4 }, { x: 8, y: 4 }]),
+  },
+  {
+    id: "gift-box",
+    label: "Paquet-cadeau",
+    figure: efig([
+      ...rect(0, 2, 12, 8),
+      ...line([6, 2], [6, 10]),
+      ...line([0, 6], [12, 6]),
+      ...poly([[2, 2], [4, 0], [6, 2], [8, 0], [10, 2]]),
+    ]),
   },
 ];
 
-const SCALE_TASKS: ReproduceTask[] = [
-  ...SCALE_UP_FIGS.map(({ id, label, figure }) => ({
-    id: `scale-up-${id}`,
-    kind: "scale_up" as const,
-    label,
-    reference: figure,
-    targetSize: G7_GRID_SIZE,
-  })),
-  ...SCALE_DOWN_FIGS.map(({ id, label, figure }) => ({
-    id: `scale-down-${id}`,
-    kind: "scale_down" as const,
-    label,
-    reference: figure,
-    targetSize: G7_GRID_SIZE,
-  })),
-];
+for (const { id, figure } of SCALE_FIGURES) assertEvenFigure(id, figure);
+
+const SCALE_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure }) => ({
+  id: `scale-down-${id}`,
+  kind: "scale_down" as const,
+  label,
+  reference: figure,
+  targetSize: G7_GRID_SIZE,
+}));
 
 export function pickReproduceTask(variant: 1 | 2, seed: number): ReproduceTask {
   const pool = variant === 1 ? COPY_TASKS : SCALE_TASKS;
@@ -824,5 +1250,5 @@ export function taskConsigne(task: ReproduceTask): string {
   if (task.kind === "scale_up") {
     return "Reproduisez la figure en plus grand sur le quadrillage de droite (même forme, taille doublée).";
   }
-  return "Reproduisez la figure en plus petit sur le quadrillage de droite.";
+  return "Reproduisez la figure en plus petit (rapport 2:1) sur le quadrillage de droite.";
 }

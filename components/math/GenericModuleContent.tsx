@@ -5242,7 +5242,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "G7-1") {
       const pushG7ReproduceSet = () => {
         steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 1 });
-        steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 2 });
+        steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 2 });
         steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 3 });
         steps.push({ kind: "g7_frieze", lesson, exNum: 4 });
       };
