@@ -330,7 +330,7 @@ function IndividualModeIcon() {
   );
 }
 
-function FrenchSkillSelector({
+function FrenchSkillToggle({
   selected,
   onChange,
   disabled = false,
@@ -340,30 +340,27 @@ function FrenchSkillSelector({
   disabled?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-center gap-2" role="group" aria-label="Compétence à entraîner">
-      {STEP_ORDER.map((skill) => {
-        const active = selected === skill;
-        return (
-          <button
-            key={skill}
-            type="button"
-            disabled={disabled}
-            onClick={() => !disabled && onChange(skill)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full text-[11px] font-bold transition-colors ${
-              disabled ? "cursor-not-allowed opacity-50" : ""
-            }`}
-            style={
-              active
-                ? { background: ACCENT, color: "#fff" }
-                : { background: "color-mix(in oklch, var(--color-accent-quiz) 18%, white)", color: "#991b1b" }
-            }
-            aria-pressed={active}
-            aria-label={SKILL_HEADERS[skill]}
-          >
-            {SKILL_HEADERS[skill]}
-          </button>
-        );
-      })}
+    <div
+      className={`flex w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
+      role="group"
+      aria-label="Compétence à entraîner"
+    >
+      {STEP_ORDER.map((skill) => (
+        <button
+          key={skill}
+          type="button"
+          disabled={disabled}
+          onClick={() => !disabled && onChange(skill)}
+          className={`min-w-0 flex-1 rounded-md px-2 py-1.5 text-xs font-bold transition-colors ${
+            selected === skill ? "text-white" : "text-[var(--color-text-secondary)]"
+          } ${disabled ? "cursor-not-allowed" : ""}`}
+          style={selected === skill ? { background: ACCENT } : undefined}
+          aria-pressed={selected === skill}
+          aria-label={SKILL_HEADERS[skill]}
+        >
+          {SKILL_HEADERS[skill]}
+        </button>
+      ))}
     </div>
   );
 }
@@ -618,30 +615,39 @@ export function PlacementHubClient() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <FrenchLevelToggle
-              level={displayLevel}
-              onChange={selectLevel}
-              disabled={trainingInProgress}
-            />
-            <button
-              type="button"
-              onClick={() => setIndividualMode((v) => !v)}
-              disabled={trainingInProgress}
-              aria-label={individualMode ? "Désactiver le mode individuel" : "Activer le mode individuel (CE, CO, PE, PO)"}
-              aria-pressed={individualMode}
-              title={individualMode ? "Mode individuel actif" : "Entraîner une seule compétence"}
-              className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg border transition-colors ${
-                trainingInProgress ? "cursor-not-allowed opacity-50" : "hover:border-[var(--color-accent-quiz)]"
-              } ${
-                individualMode
-                  ? "border-transparent text-white"
-                  : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
-              }`}
-              style={individualMode ? { background: ACCENT } : undefined}
-            >
-              <IndividualModeIcon />
-            </button>
+          <div className="inline-flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <FrenchLevelToggle
+                level={displayLevel}
+                onChange={selectLevel}
+                disabled={trainingInProgress}
+              />
+              <button
+                type="button"
+                onClick={() => setIndividualMode((v) => !v)}
+                disabled={trainingInProgress}
+                aria-label={individualMode ? "Désactiver le mode individuel" : "Activer le mode individuel (CE, CO, PE, PO)"}
+                aria-pressed={individualMode}
+                title={individualMode ? "Mode individuel actif" : "Entraîner une seule compétence"}
+                className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg border transition-colors ${
+                  trainingInProgress ? "cursor-not-allowed opacity-50" : "hover:border-[var(--color-accent-quiz)]"
+                } ${
+                  individualMode
+                    ? "border-transparent text-white"
+                    : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                }`}
+                style={individualMode ? { background: ACCENT } : undefined}
+              >
+                <IndividualModeIcon />
+              </button>
+            </div>
+            {individualMode && (
+              <FrenchSkillToggle
+                selected={selectedSkill}
+                onChange={setSelectedSkill}
+                disabled={trainingInProgress}
+              />
+            )}
           </div>
           <button
             type="button"
@@ -652,14 +658,6 @@ export function PlacementHubClient() {
             {trainingInProgress ? "Reprendre" : "S'entraîner"}
           </button>
         </div>
-
-        {individualMode && (
-          <FrenchSkillSelector
-            selected={selectedSkill}
-            onChange={setSelectedSkill}
-            disabled={trainingInProgress}
-          />
-        )}
 
         {trainingInProgress && trainingDraft && (
           <FrenchProgressBlock
