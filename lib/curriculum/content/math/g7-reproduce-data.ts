@@ -8,7 +8,7 @@ export type G7SymAxis =
   | { kind: "horizontal"; y: number };
 
 export type GridFigure = {
-  /** Nombre de cases par côté (intersections de 0 à size). Toujours 10 pour G7.1. */
+  /** Nombre de cases par côté (intersections de 0 à size). */
   size: number;
   dots: GridPoint[];
   segments: GridSegment[];
@@ -21,15 +21,18 @@ export type ReproduceTask = {
   kind: ReproduceTaskKind;
   label: string;
   reference: GridFigure;
-  /** Taille de la grille de travail (cases) — toujours 10. */
+  /**
+   * Taille de la grille de travail (cases).
+   * Ex1 copie : 10 · Ex2 réduction : 5 · Ex3 agrandissement : 10.
+   */
   targetSize: number;
   hintDots?: GridPoint[];
   hintSegments?: GridSegment[];
 };
 
-/** Grille G7.1 : 10×10 cases → intersections 0…10. */
+/** Grille pleine G7.1 : 10×10 cases → intersections 0…10. */
 export const G7_GRID_SIZE = 10;
-/** Demi-grille pour figures à agrandir ×2 (0…5 → 0…10). */
+/** Demi-grille 5×5 (ex.2 cible ÷2, ex.3 modèle ×2). */
 export const G7_HALF_SIZE = 5;
 
 export function pointKey(p: GridPoint): string {
@@ -86,10 +89,10 @@ function dedupeDots(dots: GridPoint[]): GridPoint[] {
   return out;
 }
 
-function fig(segments: GridSegment[], dots: GridPoint[]): GridFigure {
+function fig(segments: GridSegment[], dots: GridPoint[], size: number = G7_GRID_SIZE): GridFigure {
   const d = dedupeDots(dots);
   if (d.length === 0) throw new Error("Chaque figure doit contenir au moins un point");
-  return { size: G7_GRID_SIZE, dots: d, segments: dedupeSegments(segments) };
+  return { size, dots: d, segments: dedupeSegments(segments) };
 }
 
 function poly(pts: Array<[number, number]>): GridSegment[] {
@@ -190,10 +193,10 @@ const COPY_TASKS: ReproduceTask[] = FIGURES.map(({ id, label, figure }) => ({
   targetSize: G7_GRID_SIZE,
 }));
 
-// ── Exercice 2 — 50 figures ÷2 (coords paires 0…10, ≥1 point) ──────────────
+// ── Exercice 2 — 50 figures ÷2 (modèle 10×10 coords paires → grille 5×5) ───
 
 function efig(segments: GridSegment[], dots: GridPoint[]): GridFigure {
-  return fig(segments, dots);
+  return fig(segments, dots, G7_GRID_SIZE);
 }
 
 const SCALE_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
@@ -256,13 +259,13 @@ const SCALE_DOWN_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure
   kind: "scale_down" as const,
   label,
   reference: figure,
-  targetSize: G7_GRID_SIZE,
+  targetSize: G7_HALF_SIZE,
 }));
 
-// ── Exercice 3 — 50 figures ×2 (coords 0…5, ≥1 point) ──────────────────────
+// ── Exercice 3 — 50 figures ×2 (modèle 5×5 → grille 10×10) ─────────────────
 
 function sfig(segments: GridSegment[], dots: GridPoint[]): GridFigure {
-  return fig(segments, dots);
+  return fig(segments, dots, G7_HALF_SIZE);
 }
 
 const SCALE_UP_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
@@ -338,7 +341,7 @@ export function taskConsigne(task: ReproduceTask): string {
     return "Reproduisez la figure à l'identique sur le quadrillage de droite. Cliquez deux points pour tracer un segment ; cliquez deux fois le même point pour placer un point.";
   }
   if (task.kind === "scale_up") {
-    return "Reproduisez la figure en plus grand (×2) sur le quadrillage de droite.";
+    return "Le modèle est sur une grille 5×5. Reproduisez la figure en plus grand (×2) sur la grille 10×10 de droite.";
   }
-  return "Reproduisez la figure en plus petit (rapport 2:1) sur le quadrillage de droite.";
+  return "Reproduisez la figure en plus petit (rapport 2:1) sur la grille 5×5 de droite.";
 }
