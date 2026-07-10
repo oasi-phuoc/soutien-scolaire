@@ -2,6 +2,7 @@ import type { MathSubmoduleLesson } from "./math-a1-types";
 import { MATH_G6_LESSONS } from "./math-g6";
 import { MATH_G7_REPRODUCE_LESSON } from "./math-g7-reproduce-1";
 import { MATH_G7_2_LESSON } from "./math-g7-2";
+import { MATH_G7_3_LESSON } from "./math-g7-3";
 
 function asG7Lesson(lesson: MathSubmoduleLesson, index: number): MathSubmoduleLesson {
   const code = `G7.${index + 1}`;
@@ -15,9 +16,10 @@ function asG7Lesson(lesson: MathSubmoduleLesson, index: number): MathSubmoduleLe
   };
 }
 
-/** G7.1 = reproduction ; G7.2 = axes de symétrie ; G7.3+ = anciennes leçons G6.2+. */
+/** G7.1 = reproduction ; G7.2 = axes ; G7.3 = symétrie centrale ; G7.4+ = anciennes leçons G6.3+. */
 export const MATH_G7_RENUMBERED_LESSONS: MathSubmoduleLesson[] = [
   MATH_G7_REPRODUCE_LESSON,
   MATH_G7_2_LESSON,
-  ...MATH_G6_LESSONS.slice(1).map((lesson, i) => asG7Lesson(lesson, i + 2)),
+  MATH_G7_3_LESSON,
+  ...MATH_G6_LESSONS.slice(2).map((lesson, i) => asG7Lesson(lesson, i + 3)),
 ];

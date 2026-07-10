@@ -1,26 +1,41 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_G7_3_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G7-3",
-    submoduleCode: "G7.3",
-    theory: {
-      title: {
-        fr: "Distance réelle",
+  submoduleId: "G7-3",
+  submoduleCode: "G7.3",
+  theory: {
+    title: { fr: "Symétrie centrale" },
+    blocks: [
+      { type: "heading", fr: "Centre de symétrie", black: true },
+      {
+        type: "plain",
+        fr: "La symétrie centrale de centre O associe à chaque point M son image M' telle que **O est le milieu** du segment [MM']. C'est une rotation de **180°** autour de O.",
       },
-      paragraphs: {
-        fr: [
-          "Pour trouver une distance réelle à partir d'une carte ou d'un plan : mesurer la distance sur le dessin (en cm) puis multiplier par le dénominateur de l'échelle.",
-          "Attention aux conversions : si l'échelle est 1:50 000, 1 cm sur la carte = 50 000 cm = 500 m = 0,5 km.",
-          "Tableau de conversions : 1 km = 1 000 m = 100 000 cm. 1 m = 100 cm. 1 cm = 10 mm.",
-          "Exemple : sur une carte 1:25 000, deux villes séparées de 8 cm → distance réelle = 8 × 25 000 = 200 000 cm = 2 km.",
+      { type: "highlight", fr: "Construire l'image" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Repérer le **centre O** (point bleu sur le quadrillage).",
+          "Pour un point M, tracer la droite (OM) et reporter la même distance de l'autre côté de O → on obtient M'.",
+          "Sur le quadrillage : si O = (10 ; 10) et M = (x ; y), alors M' = (**20 − x** ; **20 − y**).",
         ],
       },
-    },
-    exercises: [
-      { id: "g6-3-e1", promptFr: "Carte 1:50000. Distance sur carte : 3 cm. Distance réelle en km ?", type: "number", acceptable: ["1,5", "1.5"] },
-      { id: "g6-3-e2", promptFr: "Carte 1:25000. Distance sur carte : 4 cm. Distance réelle en m ?", type: "number", acceptable: ["1000"] },
-      { id: "g6-3-e3", promptFr: "Plan 1:200. Longueur dessinée : 7 cm. Longueur réelle en m ?", type: "number", acceptable: ["14"] },
-      { id: "g6-3-e4", promptFr: "Carte 1:100000. 2 cm sur la carte. Réalité en km ?", type: "number", acceptable: ["2"] },
-      { id: "g6-3-e5", promptFr: "1 km = combien de cm ?", type: "number", acceptable: ["100000"] },
+      { type: "highlight", fr: "Propriétés" },
+      {
+        type: "bullets",
+        itemsFr: [
+          "Conservation des **distances**, des **angles** et des **aires**",
+          "Les segments [MM'] passent tous par O (O milieu)",
+          "Équivalente à une **rotation de 180°**",
+        ],
+      },
+      {
+        type: "note",
+        fr: "Exercice : une moitié de figure est donnée. Complétez l'image par symétrie centrale. Un exemple (trait en pointillés) montre comment un point et son image sont alignés avec O.",
+      },
     ],
-  };
+    paragraphs: { fr: [] },
+  },
+  exercises: [],
+};
