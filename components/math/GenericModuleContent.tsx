@@ -9510,6 +9510,56 @@ export function GenericModuleContent({
             />
           );
         }
+        if (step.variant === 8 && snap.kind === "g6_qall_figure") {
+          return (
+            <G6QAllFigureCoordsExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 10 && snap.kind === "g6_line_intersect") {
+          return (
+            <G6LineIntersectExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 11 && snap.kind === "g6_cartesian_place") {
+          return (
+            <G6CartesianPlaceExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 12 && snap.kind === "g6_find_vertex") {
+          return (
+            <G6FindVertexExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 13 && snap.kind === "g6_perp_parallel") {
+          return (
+            <G6PerpParallelPlaceExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
         return (
           <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
         );
@@ -10814,28 +10864,28 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 8 && (
             <G6QAllFigureCoordsExercise key={`g6qall-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6QAllFigureCoords")} />
           )}
           {currentStep.variant === 10 && (
             <G6LineIntersectExercise key={`g6li-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6LineIntersect")} />
           )}
           {currentStep.variant === 11 && (
             <G6CartesianPlaceExercise key={`g6cp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6CartesianPlace")} />
           )}
           {currentStep.variant === 12 && (
             <G6FindVertexExercise key={`g6fv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               consigneLang={showPivotTranslation ? pivot : undefined}
               consigneDir={showPivotTranslation && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"} />
           )}
           {currentStep.variant === 13 && (
             <G6PerpParallelPlaceExercise key={`g6pp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6PerpParallelPlace")} />
           )}
         </EvalRevealContext.Provider>
