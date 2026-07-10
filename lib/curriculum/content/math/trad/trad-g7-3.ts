@@ -38,10 +38,13 @@ export const TRAD_G7_3: SubmoduleTrad = {
     en: ["Central symmetry = 180° rotation about center O."],
   },
   consignes: {
-    "g7-3-e1": S("La symétrie centrale conserve-t-elle les longueurs ? (oui/non)", "Does central symmetry preserve lengths? (yes/no)", "هل يحفظ التماثل المركزي الأطوال؟ (نعم/لا)", "آیا تقارن مرکزی طول‌ها را حفظ می‌کند؟ (بله/خیر)", "ማእከላይ ምትእስሳር ንውሓታት ይሕልዮ ድዩ? (እወ/ኣይፋል)", "Чи зберігає центральна симетрія довжини? (так/ні)"),
-    "g7-3-e2": S("Le symétrique du point (2 ; 3) par rapport à O(0,0) est ?", "The image of (2 ; 3) through O(0,0) is?", "صورة النقطة (2 ؛ 3) بالنسبة إلى O(0,0)؟", "قرینه نقطه (۲ ؛ ۳) نسبت به O(۰,۰)؟", "ናይ (2 ; 3) ምስል ብO(0,0) እንታይ እዩ?", "Образ точки (2 ; 3) відносно O(0,0)?"),
-    "g7-3-e3": S("Un triangle a-t-il généralement un centre de symétrie ? (oui/non)", "Does a triangle usually have a center of symmetry? (yes/no)", "هل للمثلث عادة مركز تماثل؟ (نعم/لا)", "آیا مثلث معمولاً مرکز تقارن دارد؟ (بله/خیر)", "ስሉሳይ ብተደጋጋሚ ማእከል ምትእስሳር ኣለዎ ድዩ? (እወ/ኣይፋል)", "Чи має трикутник зазвичай центр симетрії? (так/ні)"),
-    "g7-3-e4": S("Un parallélogramme a-t-il un centre de symétrie ? (oui/non)", "Does a parallelogram have a center of symmetry? (yes/no)", "هل لمتوازي الأضلاع مركز تماثل؟ (نعم/لا)", "آیا متوازی‌الاضلاع مرکز تقارن دارد؟ (بله/خیر)", "ፓራለሎግራም ማእከል ምትእስሳር ኣለዎ ድዩ? (እወ/ኣይፋል)", "Чи має паралелограм центр симетрії? (так/ні)"),
-    "g7-3-e5": S("La symétrie centrale est une rotation de combien de degrés ?", "Central symmetry is a rotation of how many degrees?", "التماثل المركزي دوران بكم درجة؟", "تقارن مرکزی چند درجه چرخش است؟", "ማእከላይ ምትእስሳር ክንደይ ዲግሪ ምምቕቃሉ እዩ?", "Центральна симетрія — поворот на скільки градусів?"),
+    g7Central: S(
+      "Complétez la figure par symétrie centrale autour du point bleu O.",
+      "Complete the figure by central symmetry about the blue point O.",
+      "أكمل الشكل بالتماثل المركزي حول النقطة الزرقاء O.",
+      "شکل را با تقارن مرکزی حول نقطه آبی O کامل کنید.",
+      "ነቲ ስእሊ ብማእከላይ ምትእስሳር ኣብ ዙርያ ሰማያዊ ነጥቢ O ምልእ።",
+      "Доповніть фігуру центральною симетрією відносно синьої точки O.",
+    ),
   },
 };

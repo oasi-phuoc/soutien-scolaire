@@ -39,14 +39,12 @@ export const MATH_G7_3_LESSON: MathSubmoduleLesson = {
           "Pas le triangle en général",
         ],
       },
+      {
+        type: "note",
+        fr: "Exercice : complétez la figure par symétrie centrale autour du point bleu O. Un exemple en pointillés montre M et M'. Cliquez deux intersections pour tracer un segment.",
+      },
     ],
     paragraphs: { fr: [] },
   },
-  exercises: [
-    { id: "g7-3-e1", promptFr: "La symétrie centrale conserve-t-elle les longueurs ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g7-3-e2", promptFr: "Le symétrique du point (2 ; 3) par rapport à O(0,0) est le point (? ; ?).", type: "short_text", acceptable: ["(-2;-3)", "(−2;−3)", "-2,-3"] },
-    { id: "g7-3-e3", promptFr: "Un triangle a-t-il généralement un centre de symétrie ? (oui/non)", type: "short_text", acceptable: ["non"] },
-    { id: "g7-3-e4", promptFr: "Un parallélogramme a-t-il un centre de symétrie ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g7-3-e5", promptFr: "La symétrie centrale est équivalente à une rotation de combien de degrés ?", type: "number", acceptable: ["180"] },
-  ],
+  exercises: [],
 };
