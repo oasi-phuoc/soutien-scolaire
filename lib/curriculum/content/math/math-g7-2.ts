@@ -33,16 +33,16 @@ export const MATH_G7_2_LESSON: MathSubmoduleLesson = {
       },
       {
         type: "note",
-        fr: "Exercice 1 : cliquez deux intersections pour tracer un axe. Exercice 2 : complétez la figure de l'autre côté de l'axe bleu.",
+        fr: "Exercice 1 : tracer les axes. Exercice 2 : compléter à gauche/droite d'un axe vertical bleu. Exercice 3 : compléter en haut/bas d'un axe horizontal bleu.",
       },
       { type: "highlight", fr: "Compléter par symétrie" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "L'axe vertical bleu est un **miroir** au centre de la grille.",
+          "L'axe bleu est un **miroir** au centre de la grille.",
           "Chaque point de la figure donnée a son image à **égale distance** de l'autre côté.",
-          "La moitié peut être à **gauche** ou à **droite** de l'axe : reproduisez l'autre moitié.",
+          "Axe **vertical** (ex. 2) : moitié gauche ou droite. Axe **horizontal** (ex. 3) : moitié haute ou basse.",
         ],
       },
     ],

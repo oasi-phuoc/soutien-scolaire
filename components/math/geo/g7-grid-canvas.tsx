@@ -5,13 +5,20 @@ import type { GridPoint, GridSegment, G7SymAxis } from "@/lib/curriculum/content
 export const G7_CELL = 24;
 export const G7_MARGIN = 20;
 
-export function snapGridPoint(px: number, py: number, width: number, height: number): GridPoint | null {
+export function snapGridPoint(
+  px: number,
+  py: number,
+  width: number,
+  height: number,
+  cell: number = G7_CELL,
+  margin: number = G7_MARGIN,
+): GridPoint | null {
   let best: GridPoint | null = null;
-  let bestD = 14;
+  let bestD = Math.max(10, cell * 0.55);
   for (let x = 0; x <= width; x++) {
     for (let y = 0; y <= height; y++) {
-      const cx = G7_MARGIN + x * G7_CELL;
-      const cy = G7_MARGIN + y * G7_CELL;
+      const cx = margin + x * cell;
+      const cy = margin + y * cell;
       const d = Math.hypot(px - cx, py - cy);
       if (d < bestD) {
         bestD = d;
@@ -32,6 +39,7 @@ function parseSeg(key: string): GridSegment {
 export function G7GridCanvas({
   width,
   height,
+  cellSize = G7_CELL,
   dots = new Set<string>(),
   segments = new Set<string>(),
   lockedSegments = new Set<string>(),
@@ -50,6 +58,7 @@ export function G7GridCanvas({
 }: {
   width: number;
   height: number;
+  cellSize?: number;
   dots?: Set<string>;
   segments?: Set<string>;
   lockedSegments?: Set<string>;
@@ -66,19 +75,22 @@ export function G7GridCanvas({
   onPointClick?: (p: GridPoint) => void;
   maxWidthClass?: string;
 }) {
-  const w = G7_MARGIN * 2 + width * G7_CELL;
-  const h = G7_MARGIN * 2 + height * G7_CELL;
-  const pt = (p: GridPoint) => ({ cx: G7_MARGIN + p.x * G7_CELL, cy: G7_MARGIN + p.y * G7_CELL });
+  const cell = cellSize;
+  const margin = G7_MARGIN;
+  const w = margin * 2 + width * cell;
+  const h = margin * 2 + height * cell;
+  const pt = (p: GridPoint) => ({ cx: margin + p.x * cell, cy: margin + p.y * cell });
+  const dotR = cell >= 22 ? 4 : 3;
 
   const renderSeg = (key: string, stroke: string, dash?: string) => {
     const s = parseSeg(key);
     return (
       <line
         key={key}
-        x1={G7_MARGIN + s.x1 * G7_CELL}
-        y1={G7_MARGIN + s.y1 * G7_CELL}
-        x2={G7_MARGIN + s.x2 * G7_CELL}
-        y2={G7_MARGIN + s.y2 * G7_CELL}
+        x1={margin + s.x1 * cell}
+        y1={margin + s.y1 * cell}
+        x2={margin + s.x2 * cell}
+        y2={margin + s.y2 * cell}
         stroke={stroke}
         strokeWidth={2}
         strokeDasharray={dash}
@@ -96,17 +108,24 @@ export function G7GridCanvas({
         const rect = e.currentTarget.getBoundingClientRect();
         const scaleX = w / rect.width;
         const scaleY = h / rect.height;
-        const p = snapGridPoint((e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY, width, height);
+        const p = snapGridPoint(
+          (e.clientX - rect.left) * scaleX,
+          (e.clientY - rect.top) * scaleY,
+          width,
+          height,
+          cell,
+          margin,
+        );
         if (p) onPointClick(p);
       }}
     >
       {Array.from({ length: width + 1 }, (_, i) => (
         <line
           key={`vx-${i}`}
-          x1={G7_MARGIN + i * G7_CELL}
-          y1={G7_MARGIN}
-          x2={G7_MARGIN + i * G7_CELL}
-          y2={G7_MARGIN + height * G7_CELL}
+          x1={margin + i * cell}
+          y1={margin}
+          x2={margin + i * cell}
+          y2={margin + height * cell}
           stroke="#e2e8f0"
           strokeWidth={1}
         />
@@ -114,10 +133,10 @@ export function G7GridCanvas({
       {Array.from({ length: height + 1 }, (_, i) => (
         <line
           key={`hy-${i}`}
-          x1={G7_MARGIN}
-          y1={G7_MARGIN + i * G7_CELL}
-          x2={G7_MARGIN + width * G7_CELL}
-          y2={G7_MARGIN + i * G7_CELL}
+          x1={margin}
+          y1={margin + i * cell}
+          x2={margin + width * cell}
+          y2={margin + i * cell}
           stroke="#e2e8f0"
           strokeWidth={1}
         />
@@ -125,20 +144,20 @@ export function G7GridCanvas({
 
       {axis?.kind === "vertical" && (
         <line
-          x1={G7_MARGIN + axis.x * G7_CELL}
-          y1={G7_MARGIN}
-          x2={G7_MARGIN + axis.x * G7_CELL}
-          y2={G7_MARGIN + height * G7_CELL}
+          x1={margin + axis.x * cell}
+          y1={margin}
+          x2={margin + axis.x * cell}
+          y2={margin + height * cell}
           stroke={axisColor}
           strokeWidth={3}
         />
       )}
       {axis?.kind === "horizontal" && (
         <line
-          x1={G7_MARGIN}
-          y1={G7_MARGIN + axis.y * G7_CELL}
-          x2={G7_MARGIN + width * G7_CELL}
-          y2={G7_MARGIN + axis.y * G7_CELL}
+          x1={margin}
+          y1={margin + axis.y * cell}
+          x2={margin + width * cell}
+          y2={margin + axis.y * cell}
           stroke={axisColor}
           strokeWidth={3}
         />
@@ -154,10 +173,10 @@ export function G7GridCanvas({
         const b = pts[pts.length - 1]!;
         return (
           <line
-            x1={G7_MARGIN + a.x * G7_CELL}
-            y1={G7_MARGIN + a.y * G7_CELL}
-            x2={G7_MARGIN + b.x * G7_CELL}
-            y2={G7_MARGIN + b.y * G7_CELL}
+            x1={margin + a.x * cell}
+            y1={margin + a.y * cell}
+            x2={margin + b.x * cell}
+            y2={margin + b.y * cell}
             stroke={axisColor}
             strokeWidth={3}
           />
@@ -175,7 +194,7 @@ export function G7GridCanvas({
 
       {[...lockedDots].map((key) => {
         const [x, y] = key.split(",").map(Number);
-        return <circle key={`lock-d-${key}`} cx={G7_MARGIN + x! * G7_CELL} cy={G7_MARGIN + y! * G7_CELL} r={4} fill="#64748b" />;
+        return <circle key={`lock-d-${key}`} cx={margin + x! * cell} cy={margin + y! * cell} r={dotR} fill="#64748b" />;
       })}
       {[...dots].map((key) => {
         if (lockedDots.has(key)) return null;
@@ -183,9 +202,9 @@ export function G7GridCanvas({
         return (
           <circle
             key={`d-${key}`}
-            cx={G7_MARGIN + x! * G7_CELL}
-            cy={G7_MARGIN + y! * G7_CELL}
-            r={4}
+            cx={margin + x! * cell}
+            cy={margin + y! * cell}
+            r={dotR}
             fill={wrongDots?.has(key) ? "#d97706" : "#1e293b"}
           />
         );
@@ -194,7 +213,7 @@ export function G7GridCanvas({
         .filter((k) => !dots.has(k) && !lockedDots.has(k))
         .map((key) => {
           const [x, y] = key.split(",").map(Number);
-          return <circle key={`exp-d-${key}`} cx={G7_MARGIN + x! * G7_CELL} cy={G7_MARGIN + y! * G7_CELL} r={4} fill="#d97706" />;
+          return <circle key={`exp-d-${key}`} cx={margin + x! * cell} cy={margin + y! * cell} r={dotR} fill="#d97706" />;
         })}
 
       {pending && <circle {...pt(pending)} r={6} fill="none" stroke="var(--color-accent-alg)" strokeWidth={2} />}

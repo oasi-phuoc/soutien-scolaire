@@ -5251,6 +5251,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const pushG7SymSet = () => {
         steps.push({ kind: "g7_symmetry", lesson, exNum: 1 });
         steps.push({ kind: "g7_symmetry", lesson, exNum: 2 });
+        steps.push({ kind: "g7_symmetry", lesson, exNum: 3 });
       };
       pushG7SymSet();
       steps.push({ kind: "eval_start", lesson });
@@ -10875,9 +10876,26 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "g7_symmetry" && currentStep.exNum === 2 && (
         <EvalRevealContext.Provider value={revealCorrection}>
           <G7SymmetryReflectExercise
-            key={`g7sym-ref-${stepIdx}-${geoResetKey}`}
+            key={`g7sym-ref-v-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
             seed={geoResetKey}
+            axis="vertical"
+            validateCommand={geoValidateTrigger}
+            onValidated={(score, max) => {
+              setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+              setGeoValidated(true);
+            }}
+          />
+        </EvalRevealContext.Provider>
+      )}
+
+      {!showEvalScore && currentStep?.kind === "g7_symmetry" && currentStep.exNum === 3 && (
+        <EvalRevealContext.Provider value={revealCorrection}>
+          <G7SymmetryReflectExercise
+            key={`g7sym-ref-h-${stepIdx}-${geoResetKey}`}
+            exNum={currentStep.exNum}
+            seed={geoResetKey}
+            axis="horizontal"
             validateCommand={geoValidateTrigger}
             onValidated={(score, max) => {
               setGeoResults(Array.from({ length: max }, (_, i) => i < score));
