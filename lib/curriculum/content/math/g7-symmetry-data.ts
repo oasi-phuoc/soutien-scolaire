@@ -273,10 +273,194 @@ const AXES_TASKS: SymmetryAxesTask[] = [
     ],
     axes: [V(5), H(5), DM(0), DA(10)],
   },
+
+  // ── 20 figures supplémentaires (> 2 axes, ici 4) ─────────────────────────
+  {
+    id: "square-sm",
+    label: "Petit carré",
+    polygons: [p([4, 4], [6, 4], [6, 6], [4, 6])],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "square-lg",
+    label: "Grand carré",
+    polygons: [p([2, 2], [8, 2], [8, 8], [2, 8])],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "octagon",
+    label: "Octogone",
+    polygons: [p([3, 1], [7, 1], [9, 3], [9, 7], [7, 9], [3, 9], [1, 7], [1, 3])],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "frame-sq",
+    label: "Carré bordé",
+    polygons: [
+      p([2, 2], [8, 2], [8, 8], [2, 8]),
+      p([3, 3], [7, 3], [7, 7], [3, 7]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "diamond-sm",
+    label: "Petit losange",
+    polygons: [p([5, 3], [7, 5], [5, 7], [3, 5])],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "diamond-ring",
+    label: "Double losange",
+    polygons: [
+      p([5, 1], [9, 5], [5, 9], [1, 5]),
+      p([5, 3], [7, 5], [5, 7], [3, 5]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "cross-thick",
+    label: "Croix épaisse",
+    polygons: [
+      p([1, 3], [9, 3], [9, 7], [1, 7]),
+      p([3, 1], [7, 1], [7, 9], [3, 9]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "plus-wide",
+    label: "Plus large",
+    polygons: [
+      p([3, 1], [7, 1], [7, 9], [3, 9]),
+      p([1, 3], [9, 3], [9, 7], [1, 7]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "star4",
+    label: "Étoile 4 branches",
+    polygons: [p(
+      [5, 0], [6, 4], [10, 5], [6, 6], [5, 10], [4, 6], [0, 5], [4, 4],
+    )],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "petals4",
+    label: "4 pétales",
+    polygons: [
+      p([5, 1], [6, 3], [5, 4], [4, 3]),
+      p([5, 6], [6, 7], [5, 9], [4, 7]),
+      p([1, 5], [3, 4], [4, 5], [3, 6]),
+      p([6, 5], [7, 4], [9, 5], [7, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "corners4",
+    label: "4 coins",
+    polygons: [
+      p([1, 1], [3, 1], [3, 3], [1, 3]),
+      p([7, 1], [9, 1], [9, 3], [7, 3]),
+      p([1, 7], [3, 7], [3, 9], [1, 9]),
+      p([7, 7], [9, 7], [9, 9], [7, 9]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "window4",
+    label: "Fenêtre 4 carreaux",
+    polygons: [
+      p([2, 2], [8, 2], [8, 8], [2, 8]),
+      p([4, 2], [6, 2], [6, 8], [4, 8]),
+      p([2, 4], [8, 4], [8, 6], [2, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "target-sq",
+    label: "Cible carrée",
+    polygons: [
+      p([1, 1], [9, 1], [9, 9], [1, 9]),
+      p([2, 2], [8, 2], [8, 8], [2, 8]),
+      p([4, 4], [6, 4], [6, 6], [4, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "x-thick",
+    label: "X épais",
+    polygons: [
+      p([1, 1], [3, 1], [9, 7], [9, 9], [7, 9], [1, 3]),
+      p([7, 1], [9, 1], [9, 3], [3, 9], [1, 9], [1, 7]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "plus-center-sq",
+    label: "Plus à centre",
+    polygons: [
+      p([4, 0], [6, 0], [6, 10], [4, 10]),
+      p([0, 4], [10, 4], [10, 6], [0, 6]),
+      p([3, 3], [7, 3], [7, 7], [3, 7]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "diamond-cross",
+    label: "Losange croisé",
+    polygons: [
+      p([5, 1], [9, 5], [5, 9], [1, 5]),
+      p([4, 4], [6, 4], [6, 6], [4, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "ring-oct",
+    label: "Anneau octogonal",
+    polygons: [
+      p([3, 1], [7, 1], [9, 3], [9, 7], [7, 9], [3, 9], [1, 7], [1, 3]),
+      p([4, 2], [6, 2], [8, 4], [8, 6], [6, 8], [4, 8], [2, 6], [2, 4]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "spokes4",
+    label: "4 rayons",
+    polygons: [
+      p([4, 4], [6, 4], [6, 6], [4, 6]),
+      p([4, 0], [6, 0], [6, 3], [4, 3]),
+      p([4, 7], [6, 7], [6, 10], [4, 10]),
+      p([0, 4], [3, 4], [3, 6], [0, 6]),
+      p([7, 4], [10, 4], [10, 6], [7, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "bowtie4",
+    label: "Nœud 4 directions",
+    polygons: [
+      p([5, 2], [7, 4], [5, 5], [3, 4]),
+      p([5, 5], [7, 6], [5, 8], [3, 6]),
+      p([2, 5], [4, 3], [5, 5], [4, 7]),
+      p([5, 5], [6, 3], [8, 5], [6, 7]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
+  {
+    id: "hash",
+    label: "Grille #",
+    polygons: [
+      p([2, 2], [8, 2], [8, 3], [2, 3]),
+      p([2, 7], [8, 7], [8, 8], [2, 8]),
+      p([2, 2], [3, 2], [3, 8], [2, 8]),
+      p([7, 2], [8, 2], [8, 8], [7, 8]),
+      p([4, 4], [6, 4], [6, 6], [4, 6]),
+    ],
+    axes: [V(5), H(5), DM(0), DA(10)],
+  },
 ];
 
-if (AXES_TASKS.length !== 30) {
-  throw new Error(`G7.2 axes pool: attendu 30, got ${AXES_TASKS.length}`);
+if (AXES_TASKS.length !== 50) {
+  throw new Error(`G7.2 axes pool: attendu 50, got ${AXES_TASKS.length}`);
 }
 
 export function pickSymmetryAxesTask(seed: number): SymmetryAxesTask {
