@@ -98,50 +98,6 @@ import { TRAD_G7_2 } from "./trad-g7-2";
 import { TRAD_G7_3 } from "./trad-g7-3";
 import { TRAD_G7_4 } from "./trad-g7-4";
 import { TRAD_G7_5 } from "./trad-g7-5";
-import { TRAD_G8_1 } from "./trad-g8-1";
-import { TRAD_G8_2 } from "./trad-g8-2";
-import { TRAD_G8_3 } from "./trad-g8-3";
-import { TRAD_G8_4 } from "./trad-g8-4";
-import { TRAD_G8_5 } from "./trad-g8-5";
-import { TRAD_G8_6 } from "./trad-g8-6";
-import { TRAD_G9_1 } from "./trad-g9-1";
-import { TRAD_G9_2 } from "./trad-g9-2";
-import { TRAD_G9_3 } from "./trad-g9-3";
-import { TRAD_G9_4 } from "./trad-g9-4";
-import { TRAD_G9_5 } from "./trad-g9-5";
-import { TRAD_G9_6 } from "./trad-g9-6";
-import { TRAD_G9_7 } from "./trad-g9-7";
-import { TRAD_G9_8 } from "./trad-g9-8";
-import { TRAD_G9_9 } from "./trad-g9-9";
-import { TRAD_G9_10 } from "./trad-g9-10";
-import { TRAD_G10_1 } from "./trad-g10-1";
-import { TRAD_G10_2 } from "./trad-g10-2";
-import { TRAD_G10_3 } from "./trad-g10-3";
-import { TRAD_G10_4 } from "./trad-g10-4";
-import { TRAD_G10_5 } from "./trad-g10-5";
-import { TRAD_G10_6 } from "./trad-g10-6";
-import { TRAD_G10_7 } from "./trad-g10-7";
-import { TRAD_G10_8 } from "./trad-g10-8";
-import { TRAD_G11_1 } from "./trad-g11-1";
-import { TRAD_G11_2 } from "./trad-g11-2";
-import { TRAD_G11_3 } from "./trad-g11-3";
-import { TRAD_G11_4 } from "./trad-g11-4";
-import { TRAD_G11_5 } from "./trad-g11-5";
-import { TRAD_G11_6 } from "./trad-g11-6";
-import { TRAD_S1_1 } from "./trad-s1-1";
-import { TRAD_S1_2 } from "./trad-s1-2";
-import { TRAD_S1_3 } from "./trad-s1-3";
-import { TRAD_S1_4 } from "./trad-s1-4";
-import { TRAD_S1_5 } from "./trad-s1-5";
-import { TRAD_S1_6 } from "./trad-s1-6";
-import { TRAD_S1_7 } from "./trad-s1-7";
-import { TRAD_S2_1 } from "./trad-s2-1";
-import { TRAD_S2_2 } from "./trad-s2-2";
-import { TRAD_S2_3 } from "./trad-s2-3";
-import { TRAD_S2_4 } from "./trad-s2-4";
-import { TRAD_S2_5 } from "./trad-s2-5";
-import { TRAD_S2_6 } from "./trad-s2-6";
-import { TRAD_S2_7 } from "./trad-s2-7";
 
 const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_A1_1, TRAD_A1_2, TRAD_A1_3, TRAD_A1_4, TRAD_A1_5,
@@ -162,12 +118,6 @@ const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_G5_1, TRAD_G5_2, TRAD_G5_3, TRAD_G5_4, TRAD_G5_5, TRAD_G5_6,
   TRAD_G6_1, TRAD_G6_2, TRAD_G6_3, TRAD_G6_4, TRAD_G6_5, TRAD_G6_6, TRAD_G6_7,
   TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5,
-  TRAD_G8_1, TRAD_G8_2, TRAD_G8_3, TRAD_G8_4, TRAD_G8_5, TRAD_G8_6,
-  TRAD_G9_1, TRAD_G9_2, TRAD_G9_3, TRAD_G9_4, TRAD_G9_5, TRAD_G9_6, TRAD_G9_7, TRAD_G9_8, TRAD_G9_9, TRAD_G9_10,
-  TRAD_G10_1, TRAD_G10_2, TRAD_G10_3, TRAD_G10_4, TRAD_G10_5, TRAD_G10_6, TRAD_G10_7, TRAD_G10_8,
-  TRAD_G11_1, TRAD_G11_2, TRAD_G11_3, TRAD_G11_4, TRAD_G11_5, TRAD_G11_6,
-  TRAD_S1_1, TRAD_S1_2, TRAD_S1_3, TRAD_S1_4, TRAD_S1_5, TRAD_S1_6, TRAD_S1_7,
-  TRAD_S2_1, TRAD_S2_2, TRAD_S2_3, TRAD_S2_4, TRAD_S2_5, TRAD_S2_6, TRAD_S2_7,
 ];
 
 const TRAD_MAP = new Map<string, SubmoduleTrad>(
