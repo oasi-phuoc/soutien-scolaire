@@ -11,111 +11,34 @@ import {
 } from "@/components/ui/EvalResultsUI";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
-import { saveMathAttempt, loadFrenchSessions, loadMathHistory, loadTotalHistory } from "@/lib/placement/storage";
+import {
+  saveMathAttempt,
+  loadFrenchSessions,
+  loadMathHistory,
+  loadTotalHistory,
+  loadMathTrainingDraft,
+  saveMathTrainingDraft,
+  createMathTrainingSessionId,
+} from "@/lib/placement/storage";
+import {
+  PLACEMENT_MATH_EXERCISES,
+  PLACEMENT_MATH_TOTAL_POINTS,
+  type PlacementMathExerciseMeta,
+} from "@/lib/placement/math-exercises";
+import {
+  getMathExercisesForLevel,
+  MATH_TRAINING_LEVEL_LABELS,
+} from "@/lib/placement/math-training-levels";
+import type { MathTrainingLevel } from "@/lib/placement/types";
 import { PlacementPageHeader, PlacementBackButton } from "@/components/placement/PlacementPageHeader";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
-import {
-  Exercise1,
-  Exercise2,
-  Exercise3,
-  Exercise4,
-  Exercise5,
-  Exercise6,
-  Exercise8,
-  Exercise9,
-  Exercise10,
-  Exercise11,
-  Exercise12,
-  Exercise13,
-  Exercise14,
-  Exercise15,
-} from "@/components/math/placement/PlacementExercises1to15";
-import type { PlacementExerciseProps } from "@/components/math/placement/PlacementExercises1to15";
-import {
-  Exercise16,
-  Exercise17,
-  Exercise18,
-  Exercise19,
-  Exercise20,
-  Exercise21,
-  Exercise22,
-  ExerciseFracRead,
-  Exercise23,
-  Exercise24,
-  Exercise25,
-  Exercise26,
-  Exercise27,
-} from "@/components/math/placement/PlacementExercises16to27";
-import {
-  Exercise28,
-  Exercise29,
-  Exercise30,
-  Exercise31,
-  Exercise32,
-  Exercise33,
-  Exercise34,
-  Exercise35,
-  Exercise36,
-  Exercise37,
-  Exercise38,
-} from "@/components/math/placement/PlacementExercises28to38";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
-// ── Exercise registry ─────────────────────────────────────────────────────────
+type ExerciseMeta = PlacementMathExerciseMeta;
 
-interface ExerciseMeta {
-  id: number;
-  label: string;
-  maxPoints: number;
-  component: React.ComponentType<PlacementExerciseProps>;
-}
-
-const EXERCISES: ExerciseMeta[] = [
-  { id: 1, label: "Compter les formes", maxPoints: 2, component: Exercise1 },
-  { id: 2, label: "Comparer (11–99)", maxPoints: 2, component: Exercise2 },
-  { id: 3, label: "Suites numériques", maxPoints: 2, component: Exercise3 },
-  { id: 4, label: "Additions et soustractions", maxPoints: 2, component: Exercise4 },
-  { id: 5, label: "Opérande manquant", maxPoints: 4, component: Exercise5 },
-  { id: 6, label: "Calcul en colonnes (99–999)", maxPoints: 2, component: Exercise6 },
-  { id: 7, label: "Dizaines et unités", maxPoints: 2, component: Exercise8 },
-  { id: 8, label: "Comparer (101–999)", maxPoints: 2, component: Exercise9 },
-  { id: 9, label: "Grandes suites", maxPoints: 2, component: Exercise10 },
-  { id: 10, label: "Calcul mixte", maxPoints: 3, component: Exercise11 },
-  { id: 11, label: "Décomposition", maxPoints: 2, component: Exercise12 },
-  { id: 12, label: "Colonnes (1000–9999)", maxPoints: 2, component: Exercise13 },
-  { id: 13, label: "Multiplication en colonnes", maxPoints: 2, component: Exercise14 },
-  { id: 14, label: "Division en colonnes", maxPoints: 2, component: Exercise15 },
-  { id: 15, label: "Rectangle", maxPoints: 2, component: Exercise16 },
-  { id: 16, label: "Suites (grands nombres)", maxPoints: 3, component: Exercise17 },
-  { id: 17, label: "Trier des nombres", maxPoints: 2, component: Exercise18 },
-  { id: 18, label: "Additions et soustrations décimales", maxPoints: 4, component: Exercise19 },
-  { id: 19, label: "Multiplication décimale", maxPoints: 4, component: Exercise20 },
-  { id: 20, label: "Division décimale", maxPoints: 4, component: Exercise21 },
-  { id: 21, label: "Colorier les fractions", maxPoints: 2, component: Exercise22 },
-  { id: 22, label: "Lire les fractions", maxPoints: 2, component: ExerciseFracRead },
-  { id: 23, label: "Conversions de longueur", maxPoints: 4, component: Exercise23 },
-  { id: 24, label: "Calculs décimaux", maxPoints: 4, component: Exercise24 },
-  { id: 25, label: "Parallélogramme", maxPoints: 2, component: Exercise25 },
-  { id: 26, label: "Triangle rectangle", maxPoints: 2, component: Exercise26 },
-  { id: 27, label: "Losange", maxPoints: 2, component: Exercise27 },
-  { id: 28, label: "Puissances et racines", maxPoints: 4, component: Exercise28 },
-  { id: 29, label: "Priorité des opérations", maxPoints: 2, component: Exercise29 },
-  { id: 30, label: "Nombres relatifs", maxPoints: 4, component: Exercise30 },
-  { id: 31, label: "Fractions", maxPoints: 4, component: Exercise31 },
-  { id: 32, label: "Pourcentages et règle de trois", maxPoints: 2, component: Exercise32 },
-  { id: 33, label: "Simplification algébrique", maxPoints: 4, component: Exercise33 },
-  { id: 34, label: "Évaluer des expressions", maxPoints: 2, component: Exercise34 },
-  { id: 35, label: "Résoudre des équations", maxPoints: 2, component: Exercise35 },
-  { id: 36, label: "Conversions d'unités", maxPoints: 4, component: Exercise36 },
-  { id: 37, label: "Trapèze", maxPoints: 2, component: Exercise37 },
-  { id: 38, label: "Cercle", maxPoints: 2, component: Exercise38 },
-];
-
-const TOTAL_EXERCISES = EXERCISES.length;
-const TOTAL_MAX_POINTS = EXERCISES.reduce((s, e) => s + e.maxPoints, 0);
 const TIMER_SECONDS = 90 * 60; // 90 minutes
 
 // ── Timer formatter ───────────────────────────────────────────────────────────
@@ -380,35 +303,90 @@ const PLACEMENT_INTRO_TEXTS: Record<"fr", PlacementIntroText> & Partial<Record<P
   },
 };
 
-export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "placement" }) {
+export function PlacementTestClient({
+  mode = "module",
+  trainingLevel,
+}: {
+  mode?: "module" | "placement";
+  trainingLevel?: MathTrainingLevel;
+}) {
   const router = useRouter();
   const guardedNavigate = useGuardedNavigate();
+  const isTraining = Boolean(trainingLevel);
+  const exercises = useMemo(
+    () => (trainingLevel ? getMathExercisesForLevel(trainingLevel) : PLACEMENT_MATH_EXERCISES),
+    [trainingLevel],
+  );
+  const exerciseCount = exercises.length;
+  const maxPointsTotal = useMemo(
+    () => exercises.reduce((s, e) => s + e.maxPoints, 0),
+    [exercises],
+  );
+
+  const initialTrainingDraft = (() => {
+    if (!trainingLevel || typeof window === "undefined") return null;
+    const draft = loadMathTrainingDraft();
+    return draft?.level === trainingLevel && draft.phase === "running" ? draft : null;
+  })();
+
   const accent = mode === "placement" ? "var(--color-accent-quiz)" : "var(--color-accent-alg)";
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
   const introText = (showPivot ? PLACEMENT_INTRO_TEXTS[pivot] : undefined) ?? PLACEMENT_INTRO_TEXTS.fr;
   const introLang = showPivot ? pivot : "fr";
   const introDir = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr";
-  const [phase, setPhase] = useState<TestPhase>("idle");
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
-  const [validated, setValidated] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
-  const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(() => Array(TOTAL_EXERCISES).fill(null));
-  const [validateTriggers, setValidateTriggers] = useState<number[]>(() => Array(TOTAL_EXERCISES).fill(0));
-  const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
-  const [sessionKey, setSessionKey] = useState(1);
+  const [phase, setPhase] = useState<TestPhase>(() => (initialTrainingDraft ? "running" : "idle"));
+  const [currentIdx, setCurrentIdx] = useState(() => initialTrainingDraft?.currentIdx ?? 0);
+  const [timeLeft, setTimeLeft] = useState(() => initialTrainingDraft?.timeLeft ?? TIMER_SECONDS);
+  const [validated, setValidated] = useState<boolean[]>(
+    () => initialTrainingDraft?.validated ?? Array(exerciseCount).fill(false),
+  );
+  const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(
+    () => initialTrainingDraft?.scores ?? Array(exerciseCount).fill(null),
+  );
+  const [validateTriggers, setValidateTriggers] = useState<number[]>(
+    () => initialTrainingDraft?.validateTriggers ?? Array(exerciseCount).fill(0),
+  );
+  const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(exerciseCount).fill(false));
+  const [sessionKey, setSessionKey] = useState(() => initialTrainingDraft?.sessionKey ?? 1);
+  const [trainingSessionId] = useState(
+    () => initialTrainingDraft?.sessionId ?? createMathTrainingSessionId(),
+  );
   const [skipConfirmOpen, setSkipConfirmOpen] = useState(false);
   const [skipAccepted, setSkipAccepted] = useState(false);
   const [skipRequested, setSkipRequested] = useState(false);
   const [savedResult, setSavedResult] = useState(false);
   const [selectedResultIdx, setSelectedResultIdx] = useState(0);
-  const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
+  const exerciseKeys = useMemo(() => exercises.map((_, i) => sessionKey * 100 + i), [exercises, sessionKey]);
   const [showPrint, setShowPrint] = useState(false);
 
   useRegisterEvalGuard(mode === "placement" && phase === "running");
 
+  const persistTrainingDraft = useCallback((patch: {
+    currentIdx?: number;
+    timeLeft?: number;
+    validated?: boolean[];
+    scores?: Array<{ points: number; maxPoints: number } | null>;
+    validateTriggers?: number[];
+    sessionKey?: number;
+  }) => {
+    if (!isTraining || !trainingLevel) return;
+    saveMathTrainingDraft({
+      sessionId: trainingSessionId,
+      level: trainingLevel,
+      phase: "running",
+      currentIdx: patch.currentIdx ?? currentIdx,
+      timeLeft: patch.timeLeft ?? timeLeft,
+      validated: patch.validated ?? validated,
+      scores: patch.scores ?? scores,
+      validateTriggers: patch.validateTriggers ?? validateTriggers,
+      sessionKey: patch.sessionKey ?? sessionKey,
+      updatedAt: new Date().toISOString(),
+    });
+  }, [currentIdx, isTraining, scores, sessionKey, timeLeft, trainingLevel, trainingSessionId, validateTriggers, validated]);
+
   const printExercisesForConfig = useMemo(() =>
-    EXERCISES.map(ex => {
+    exercises.map(ex => {
       const ExComp = ex.component;
       return {
         id: String(ex.id),
@@ -423,7 +401,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
         ),
       };
     }),
-    [] // EXERCISES is a module-level constant
+    [exercises]
   );
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -452,10 +430,10 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
 
   function findOpenExercise(from: number, direction: 1 | -1, list = validated): number {
     if (list.every(Boolean)) return -1;
-    let idx = (from + direction + TOTAL_EXERCISES) % TOTAL_EXERCISES;
+    let idx = (from + direction + exerciseCount) % exerciseCount;
     while (idx !== from) {
       if (!list[idx]) return idx;
-      idx = (idx + direction + TOTAL_EXERCISES) % TOTAL_EXERCISES;
+      idx = (idx + direction + exerciseCount) % exerciseCount;
     }
     if (!list[from]) return from;
     return -1;
@@ -499,9 +477,15 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       if (next >= 0) setCurrentIdx(next);
       else if (prevOpen >= 0) setCurrentIdx(prevOpen);
       else setPhase("results");
+      persistTrainingDraft({ validated: n, currentIdx: next >= 0 ? next : prevOpen >= 0 ? prevOpen : exIdx });
       return n;
     });
-    setScores(prev => { const n = [...prev]; n[exIdx] = { points, maxPoints }; return n; });
+    setScores(prev => {
+      const n = [...prev];
+      n[exIdx] = { points, maxPoints };
+      persistTrainingDraft({ scores: n });
+      return n;
+    });
   }
 
   // Check if all exercises validated → show results
@@ -519,18 +503,21 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
     setSkipRequested(false);
   }, [skipRequested, phase, validated]);
 
-  // Save result to localStorage history when results screen appears
+  // Save result to localStorage history when results screen appears (placement test only)
   useEffect(() => {
-    if (phase !== "results") return;
+    if (phase !== "results" || isTraining) {
+      if (phase === "results" && isTraining) saveMathTrainingDraft(null);
+      return;
+    }
     const pts = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
-    const maxPts = EXERCISES.reduce((s, e) => s + e.maxPoints, 0);
+    const maxPts = exercises.reduce((s, e) => s + e.maxPoints, 0);
     const percent = maxPts > 0 ? Math.round((pts / maxPts) * 100) : 0;
     const attempt = {
       date: new Date().toISOString(),
       points: pts,
       maxPoints: maxPts,
       percent,
-      scores: EXERCISES.map((ex, i) => ({
+      scores: exercises.map((ex, i) => ({
         exerciseId: ex.id,
         label: ex.label,
         points: scores[i]?.points ?? 0,
@@ -550,18 +537,37 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase]);
+  }, [phase, isTraining]);
 
   function startTest() {
-    setSessionKey(k => k + 1);
-    setValidated(Array(TOTAL_EXERCISES).fill(false));
-    setScores(Array(TOTAL_EXERCISES).fill(null));
-    setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
+    if (isTraining) saveMathTrainingDraft(null);
+    const nextSessionKey = sessionKey + 1;
+    setSessionKey(nextSessionKey);
+    const emptyValidated = Array(exerciseCount).fill(false);
+    const emptyScores = Array(exerciseCount).fill(null);
+    const emptyTriggers = Array(exerciseCount).fill(0);
+    setValidated(emptyValidated);
+    setScores(emptyScores);
+    setValidateTriggers(emptyTriggers);
     setCurrentIdx(0);
     setSelectedResultIdx(0);
     setTimeLeft(TIMER_SECONDS);
     setSavedResult(false);
     setPhase("running");
+    if (isTraining) {
+      saveMathTrainingDraft({
+        sessionId: trainingSessionId,
+        level: trainingLevel!,
+        phase: "running",
+        currentIdx: 0,
+        timeLeft: TIMER_SECONDS,
+        validated: emptyValidated,
+        scores: emptyScores,
+        validateTriggers: emptyTriggers,
+        sessionKey: nextSessionKey,
+        updatedAt: new Date().toISOString(),
+      });
+    }
   }
 
   function confirmSkipAll() {
@@ -591,7 +597,8 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           {mode === "placement" ? (
             <PlacementPageHeader
               label={introText.subject}
-              title={introText.title}
+              title={isTraining && trainingLevel ? MATH_TRAINING_LEVEL_LABELS[trainingLevel] : introText.title}
+              subtitle={isTraining ? "Les résultats ne comptent pas pour votre score de placement." : undefined}
               backHref="/placement"
             />
           ) : (
@@ -616,13 +623,19 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
               <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
-                {[
-                  <><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} {introText.exercisesLabel}</strong> {introText.coverage}</>,
+                {(isTraining ? [
+                  <><strong className="text-[var(--color-text-primary)]">{exerciseCount} {introText.exercisesLabel}</strong> pour ce niveau</>,
+                  introText.validateLine,
+                  introText.navigateLine,
+                  <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{maxPointsTotal} {introText.points}</strong></>,
+                  "Cet entraînement ne compte pas pour le total de placement.",
+                ] : [
+                  <><strong className="text-[var(--color-text-primary)]">{exerciseCount} {introText.exercisesLabel}</strong> {introText.coverage}</>,
                   <><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</>,
                   introText.validateLine,
                   introText.navigateLine,
-                  <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} {introText.points}</strong></>,
-                ].map((content, i) => (
+                  <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{PLACEMENT_MATH_TOTAL_POINTS} {introText.points}</strong></>,
+                ]).map((content, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
                   <span>{content}</span>
@@ -638,9 +651,10 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
             className="w-full rounded-[var(--radius-lg)] py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
             style={{ background: accent }}
           >
-            {introText.start}
+            {isTraining ? "Commencer l'entraînement" : introText.start}
           </button>
 
+          {!isTraining && (
           <button
             type="button"
             onClick={() => setShowPrint(true)}
@@ -653,8 +667,9 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
               <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
               <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
             </svg>
-            Imprimer le test ({TOTAL_EXERCISES} exercices)
+            Imprimer le test ({exerciseCount} exercices)
           </button>
+          )}
         </div>
       </div>
     );
@@ -666,7 +681,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
 
   // ── Running phase ──────────────────────────────────────────────────────────
 
-  const ex = EXERCISES[currentIdx]!;
+  const ex = exercises[currentIdx]!;
   const isCurrentValidated = validated[currentIdx] ?? false;
   const previousOpenIdx = findOpenExercise(currentIdx, -1);
   const nextOpenIdx = findOpenExercise(currentIdx, 1);
@@ -677,7 +692,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       {phase === "results" ? (
         <ResultsScreen
           scores={scores}
-          exercises={EXERCISES}
+          exercises={exercises}
           accent={accent}
         />
       ) : (
@@ -697,7 +712,9 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         )}
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
+          {isTraining && trainingLevel ? MATH_TRAINING_LEVEL_LABELS[trainingLevel] : "Test de placement"}
+        </h1>
         <button
           type="button"
           onClick={() => setSkipConfirmOpen(true)}
@@ -731,13 +748,13 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       <div data-no-print>
         <PlacementProgressBar
           current={currentIdx}
-          total={TOTAL_EXERCISES}
+          total={exerciseCount}
           timeLeft={timeLeft}
           validated={validated}
           hasInput={hasInput}
           onSegmentClick={handleSegmentClick}
           totalPoints={totalPoints}
-          maxPoints={TOTAL_MAX_POINTS}
+          maxPoints={maxPointsTotal}
           placement={mode === "placement"}
         />
       </div>
@@ -751,7 +768,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       )}
 
       <div className={phase === "results" ? "mt-2 space-y-2" : ""}>
-      {EXERCISES.map((exercise, i) => {
+      {exercises.map((exercise, i) => {
         const Comp = exercise.component;
         const pts = scores[i]?.points ?? 0;
         const max = exercise.maxPoints;
@@ -785,6 +802,12 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
       </div>
 
       {phase === "results" && (
+        <>
+        {isTraining && (
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            Cet entraînement ne compte pas pour votre score de placement.
+          </p>
+        )}
         <button
           type="button"
           onClick={() => router.push(mode === "placement" ? "/placement" : "/mathematiques")}
@@ -793,6 +816,7 @@ export function PlacementTestClient({ mode = "module" }: { mode?: "module" | "pl
         >
           Terminer
         </button>
+        </>
       )}
 
       {/* Navigation bar (fixed bottom) — picked up by MainNav */}

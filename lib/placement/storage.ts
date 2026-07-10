@@ -8,6 +8,7 @@ import type {
   PlacementMathAttempt,
   PlacementProfile,
   PlacementTotalSnapshot,
+  MathTrainingDraft,
 } from "./types";
 
 export const PLACEMENT_MATH_HISTORY_KEY = "placement-math-history";
@@ -16,6 +17,7 @@ export const PLACEMENT_FRENCH_SESSIONS_KEY = "placement-french-sessions";
 export const PLACEMENT_PROFILE_KEY = "placement-profile";
 export const PLACEMENT_FRENCH_DRAFT_KEY = "placement-french-draft";
 export const PLACEMENT_FRENCH_TRAINING_DRAFT_KEY = "placement-french-training-draft";
+export const PLACEMENT_MATH_TRAINING_DRAFT_KEY = "placement-math-training-draft";
 export const PLACEMENT_PENDING_KEY = "placement-pending-submissions";
 export const PLACEMENT_TOTAL_HISTORY_KEY = "placement-total-history";
 
@@ -145,4 +147,20 @@ export function saveFrenchTrainingDraft(draft: PlacementFrenchDraft | null) {
 
 export function createFrenchSessionId(): string {
   return `fr-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+export function loadMathTrainingDraft(): MathTrainingDraft | null {
+  return readJson<MathTrainingDraft | null>(PLACEMENT_MATH_TRAINING_DRAFT_KEY, null);
+}
+
+export function saveMathTrainingDraft(draft: MathTrainingDraft | null) {
+  if (!draft) {
+    if (typeof window !== "undefined") localStorage.removeItem(PLACEMENT_MATH_TRAINING_DRAFT_KEY);
+    return;
+  }
+  writeJson(PLACEMENT_MATH_TRAINING_DRAFT_KEY, draft);
+}
+
+export function createMathTrainingSessionId(): string {
+  return `math-tr-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }

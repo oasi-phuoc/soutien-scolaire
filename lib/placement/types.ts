@@ -6,6 +6,8 @@ export type PlacementZone = "CSC" | "CFR" | "CAF" | "CAP";
 
 export type PlacementSkill = "ce" | "co" | "pe" | "po";
 
+export type MathTrainingLevel = "I" | "II" | "III" | "IV";
+
 export const PLACEMENT_LEVEL_LABELS: Record<PlacementLevel, string> = {
   base: "A1 — Base",
   moyen: "A2 — Moyen",
@@ -88,6 +90,19 @@ export type PlacementFrenchDraft = {
   poSent?: boolean;
   peSubmissionId?: string;
   poSubmissionId?: string;
+  updatedAt: string;
+};
+
+export type MathTrainingDraft = {
+  sessionId: string;
+  level: MathTrainingLevel;
+  phase: "running";
+  currentIdx: number;
+  timeLeft: number;
+  validated: boolean[];
+  scores: Array<{ points: number; maxPoints: number } | null>;
+  validateTriggers: number[];
+  sessionKey: number;
   updatedAt: string;
 };
 
