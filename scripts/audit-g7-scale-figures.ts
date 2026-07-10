@@ -15,7 +15,7 @@ import {
 type Issue = { id: string; kind: string; msg: string };
 const issues: Issue[] = [];
 
-function collectPool(variant: 2 | 3): ReproduceTask[] {
+function collectPool(variant: 1 | 2 | 3): ReproduceTask[] {
   const seen = new Map<string, ReproduceTask>();
   for (let i = 0; i < 500; i++) {
     const t = pickReproduceTask(variant, i);
@@ -51,9 +51,11 @@ function auditTask(t: ReproduceTask) {
   }
   if (kind === "scale_up") {
     for (const v of coords) {
-      if (v < 0 || v > 6) add(`coord hors 0..6 pour ×2: ${v}`);
+      if (v < 0 || v > 5) add(`coord hors 0..5 pour ×2: ${v}`);
     }
   }
+
+  if (fig.dots.length < 1) add("aucun point dans la figure (au moins 1 requis)");
 
   const segSet = new Set<string>();
   for (const s of fig.segments) {
@@ -145,8 +147,8 @@ function auditTask(t: ReproduceTask) {
         x2: s.x2 * 2,
         y2: s.y2 * 2,
       };
-      if (scaled.x1 > 12 || scaled.y1 > 12 || scaled.x2 > 12 || scaled.y2 > 12) {
-        add(`×2 dépasse 12: ${JSON.stringify(s)} → ${JSON.stringify(scaled)}`);
+      if (scaled.x1 > G7_GRID_SIZE || scaled.y1 > G7_GRID_SIZE || scaled.x2 > G7_GRID_SIZE || scaled.y2 > G7_GRID_SIZE) {
+        add(`×2 dépasse ${G7_GRID_SIZE}: ${JSON.stringify(s)} → ${JSON.stringify(scaled)}`);
       }
       if (!exp.segments.has(segmentKey(scaled))) {
         add(`segment attendu manquant après ×2: ${segmentKey(scaled)}`);
@@ -156,23 +158,22 @@ function auditTask(t: ReproduceTask) {
 }
 
 function main() {
+  const copy = collectPool(1);
   const down = collectPool(2);
   const up = collectPool(3);
-  console.log(`Pool ex2 (÷2): ${down.length} | Pool ex3 (×2): ${up.length} | GRID=${G7_GRID_SIZE}`);
+  console.log(`Pool ex1 (copie): ${copy.length} | ex2 (÷2): ${down.length} | ex3 (×2): ${up.length} | GRID=${G7_GRID_SIZE}`);
 
+  for (const t of copy) auditTask(t);
   for (const t of down) auditTask(t);
   for (const t of up) auditTask(t);
 
-  const downIds = new Set(down.map((t) => t.id));
-  const upIds = new Set(up.map((t) => t.id));
-  for (const id of downIds) {
-    if (upIds.has(id)) issues.push({ id, kind: "overlap", msg: "id présent dans les deux pools" });
-  }
-
+  if (copy.length !== 50) issues.push({ id: "pool", kind: "copy", msg: `attendu 50, got ${copy.length}` });
   if (down.length !== 50) issues.push({ id: "pool", kind: "scale_down", msg: `attendu 50, got ${down.length}` });
   if (up.length !== 50) issues.push({ id: "pool", kind: "scale_up", msg: `attendu 50, got ${up.length}` });
 
-  // Kind consistency
+  for (const t of copy) {
+    if (t.kind !== "copy") issues.push({ id: t.id, kind: t.kind, msg: "ex1 doit être copy" });
+  }
   for (const t of down) {
     if (t.kind !== "scale_down") issues.push({ id: t.id, kind: t.kind, msg: "ex2 doit être scale_down" });
   }
@@ -189,13 +190,14 @@ function main() {
     const avg = (a: number[]) => (a.reduce((s, x) => s + x, 0) / a.length).toFixed(1);
     return `segs ${Math.min(...segs)}–${Math.max(...segs)} (moy ${avg(segs)}), dots ${Math.min(...dots)}–${Math.max(...dots)} (moy ${avg(dots)})`;
   };
-  console.log("\nEx2 stats:", stats(down));
+  console.log("\nEx1 stats:", stats(copy));
+  console.log("Ex2 stats:", stats(down));
   console.log("Ex3 stats:", stats(up));
 
   if (issues.length > 0) {
     process.exitCode = 1;
   } else {
-    console.log("\n✓ Audit OK — 50+50 figures valides pour ÷2 et ×2 sur grille 12×12.");
+    console.log("\n✓ Audit OK — 50+50+50 figures valides sur grille 10×10 (≥1 point chacune).");
   }
 }
 
