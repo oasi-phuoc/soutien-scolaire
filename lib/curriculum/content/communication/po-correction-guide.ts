@@ -1,5 +1,8 @@
 // Correction suggestions for French oral production (PO) exercises.
 
+import type { OralLevel } from "./speaking-prompts";
+import { getArgumentationResponseByLevel } from "./argumentation-level-responses";
+
 export const IMAGE_DESCRIPTION_MEMO: string[] = [
   "Je vois…",
   "La scène se passe…",
@@ -971,7 +974,11 @@ function buildArgumentationResponse(theme: string, prompt: string, model: Argume
   return [intro, arg1, arg2, arg3, counter, conclusion].filter(Boolean).join("\n\n");
 }
 
-export function getArgumentationResponse(theme: string, prompt: string): string {
+export function getArgumentationResponse(theme: string, prompt: string, level?: OralLevel): string {
+  if (level === "base" || level === "moyen") {
+    const simple = getArgumentationResponseByLevel(theme, level);
+    if (simple) return simple;
+  }
   return buildArgumentationResponse(theme, prompt, ARGUMENTATION_THEME_MODELS[theme] ?? DEFAULT_ARGUMENTATION_MODEL);
 }
 

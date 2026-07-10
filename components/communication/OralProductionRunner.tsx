@@ -620,8 +620,8 @@ export function OralProductionRunner({
   );
 
   const argumentationResponse = useMemo(
-    () => getArgumentationResponse(argumentationTopic.theme, argumentationTopic.prompt),
-    [argumentationTopic.prompt, argumentationTopic.theme],
+    () => getArgumentationResponse(argumentationTopic.theme, argumentationTopic.prompt, level),
+    [argumentationTopic.theme, argumentationTopic.prompt, level],
   );
 
   const dialogueSuggestions = useMemo(
