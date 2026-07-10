@@ -53,6 +53,9 @@ export function G7GridCanvas({
   validated,
   axis,
   axisColor = "#dc2626",
+  /** Flèche de translation (vecteur) en couleur thème. */
+  arrow,
+  arrowColor = "#2563eb",
   onPointClick,
   maxWidthClass = "max-w-[320px]",
 }: {
@@ -72,6 +75,8 @@ export function G7GridCanvas({
   validated?: boolean;
   axis?: G7SymAxis;
   axisColor?: string;
+  arrow?: { x1: number; y1: number; x2: number; y2: number } | null;
+  arrowColor?: string;
   onPointClick?: (p: GridPoint) => void;
   maxWidthClass?: string;
 }) {
@@ -180,6 +185,36 @@ export function G7GridCanvas({
             stroke={axisColor}
             strokeWidth={3}
           />
+        );
+      })()}
+
+      {arrow && (() => {
+        const x1 = margin + arrow.x1 * cell;
+        const y1 = margin + arrow.y1 * cell;
+        const x2 = margin + arrow.x2 * cell;
+        const y2 = margin + arrow.y2 * cell;
+        const ang = Math.atan2(y2 - y1, x2 - x1);
+        const head = Math.max(8, cell * 0.45);
+        const p1x = x2 - head * Math.cos(ang - Math.PI / 7);
+        const p1y = y2 - head * Math.sin(ang - Math.PI / 7);
+        const p2x = x2 - head * Math.cos(ang + Math.PI / 7);
+        const p2y = y2 - head * Math.sin(ang + Math.PI / 7);
+        return (
+          <g>
+            <line
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke={arrowColor}
+              strokeWidth={3}
+              strokeLinecap="round"
+            />
+            <polygon
+              points={`${x2},${y2} ${p1x},${p1y} ${p2x},${p2y}`}
+              fill={arrowColor}
+            />
+          </g>
         );
       })()}
 

@@ -1,26 +1,41 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_G7_4_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G7-4",
-    submoduleCode: "G7.4",
-    theory: {
-      title: {
-        fr: "Représentation à l'échelle",
+  submoduleId: "G7-4",
+  submoduleCode: "G7.4",
+  theory: {
+    title: { fr: "Translation" },
+    blocks: [
+      { type: "heading", fr: "Vecteur de translation", black: true },
+      {
+        type: "plain",
+        fr: "Une translation déplace toute la figure dans une **direction** et d'une **distance** fixées, sans rotation ni retournement.",
       },
-      paragraphs: {
-        fr: [
-          "Pour créer un dessin à l'échelle : (1) choisir une échelle adaptée ; (2) diviser chaque mesure réelle par le dénominateur de l'échelle pour obtenir la mesure à dessiner.",
-          "Formule : distance dessinée = distance réelle ÷ dénominateur.",
-          "Exemple : dessiner une pièce de 6 m × 4 m à l'échelle 1:50. → 6 m = 600 cm → 600 ÷ 50 = 12 cm ; 4 m = 400 cm → 400 ÷ 50 = 8 cm. Dessiner un rectangle 12 cm × 8 cm.",
-          "Vérification : remultiplier les mesures du dessin par le dénominateur doit redonner les mesures réelles.",
+      { type: "highlight", fr: "Définition" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Elle est définie par un **vecteur** →v = (a ; b).",
+          "Chaque point M(x ; y) a pour image M'(**x + a** ; **y + b**).",
+          "Sur le quadrillage, la flèche bleue indique le sens et la longueur du vecteur.",
         ],
       },
-    },
-    exercises: [
-      { id: "g6-4-e1", promptFr: "Échelle 1:100. Pièce réelle 8 m de long. Dessin : ? cm.", type: "number", acceptable: ["8"] },
-      { id: "g6-4-e2", promptFr: "Échelle 1:50. Mur réel 3 m. Dessin : ? cm.", type: "number", acceptable: ["6"] },
-      { id: "g6-4-e3", promptFr: "Échelle 1:200. Jardin réel 20 m. Dessin : ? cm.", type: "number", acceptable: ["10"] },
-      { id: "g6-4-e4", promptFr: "Échelle 1:25. Objet réel 1 m = 100 cm. Dessin : ? cm.", type: "number", acceptable: ["4"] },
-      { id: "g6-4-e5", promptFr: "Échelle 1:500. Route réelle 5 km = 500000 cm. Dessin : ? cm.", type: "number", acceptable: ["1000"] },
+      { type: "highlight", fr: "Propriétés" },
+      {
+        type: "bullets",
+        itemsFr: [
+          "Conservation des **distances**, des **angles** et des **aires**",
+          "Les segments [MM'] sont tous **parallèles** et de **même longueur**",
+          "La figure image a la **même taille** et la **même orientation**",
+        ],
+      },
+      {
+        type: "note",
+        fr: "Exercice : une figure est donnée. Reproduisez son image en suivant la flèche bleue (vecteur de translation).",
+      },
     ],
-  };
+    paragraphs: { fr: [] },
+  },
+  exercises: [],
+};
