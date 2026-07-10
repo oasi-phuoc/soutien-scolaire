@@ -36,14 +36,14 @@ export const MATH_G7_REPRODUCE_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Observez le motif qui se répète (carrés, lignes, dents de scie…).",
-          "Prolongez le dessin en respectant la même règle sur toute la frise.",
-          "Les traits déjà tracés (gris) font partie du modèle : ne les modifiez pas.",
+          "Observez le motif de **cases colorées** qui se répète.",
+          "Coloriez les cases suivantes pour prolonger le même motif.",
+          "Les cases grises sont déjà données : ne les modifiez pas.",
         ],
       },
       {
         type: "note",
-        fr: "Cliquez deux intersections pour tracer un segment. Double-cliquez le même point (deux clics) pour placer un point.",
+        fr: "Reproduction : cliquez deux intersections pour un segment, deux fois le même point pour un point. Frise : cliquez une case pour la colorier.",
       },
     ],
     paragraphs: { fr: [] },
