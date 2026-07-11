@@ -450,7 +450,7 @@ export const G7_COPY_FIGURES: Array<{ id: string; label: string; figure: GridFig
 
 // assertBounds + COPY_TASKS + SCALE_DOWN : après figures ×2 issues de l'ex.3 (voir plus bas)
 
-// ── Exercice 3 — figures ×2 (modèle 5×5 → grille 10×10) ────────────────────
+// ── Seed figures 5×5 (injectées en ×2 dans l'ex.1 ; base des ex.2 / ex.3) ──
 
 function sfig(segments: GridSegment[], dots: GridPoint[]): GridFigure {
   return fig(segments, dots, G7_HALF_SIZE);
@@ -645,14 +645,6 @@ const SCALE_UP_FIGURES: Array<{ id: string; label: string; figure: GridFigure }>
 
 for (const { id, figure } of SCALE_UP_FIGURES) assertBounds(id, figure, G7_HALF_SIZE, false);
 
-const SCALE_UP_TASKS: ReproduceTask[] = SCALE_UP_FIGURES.map(({ id, label, figure }) => ({
-  id: `scale-up-${id}`,
-  kind: "scale_up" as const,
-  label,
-  reference: figure,
-  targetSize: G7_GRID_SIZE,
-}));
-
 /** Agrandit une figure 5×5 → 10×10 (coords ×2) pour le pool copie ex.1. */
 function scaleFigureUp(figure: GridFigure, k: number = 2): GridFigure {
   return fig(
@@ -662,7 +654,16 @@ function scaleFigureUp(figure: GridFigure, k: number = 2): GridFigure {
   );
 }
 
-// Ex.1 : reprendre les figures de l'ex.3 agrandies sur grille 10×10
+/** Réduit une figure 10×10 (coords paires) → modèle 5×5 pour l'ex.3. */
+function scaleFigureDown(figure: GridFigure, k: number = 0.5): GridFigure {
+  return fig(
+    figure.segments.map((s) => scaleSegment(s, k)),
+    figure.dots.map((p) => scalePoint(p, k)),
+    Math.round(figure.size * k),
+  );
+}
+
+// Ex.1 : injecter les figures seed agrandies ×2 dans le pool copie
 for (const { id, label, figure } of SCALE_UP_FIGURES) {
   G7_COPY_FIGURES.push({
     id: `x2-${id}`,
@@ -689,19 +690,31 @@ function canScaleDown(figure: GridFigure): boolean {
   return vals.every((v) => Number.isInteger(v) && v >= 0 && v <= G7_GRID_SIZE && v % 2 === 0);
 }
 
-// ── Exercice 2 — réduction ÷2 : mêmes figures que l'ex.1, si coords paires ──
+const REDUCIBLE_COPY_FIGURES = G7_COPY_FIGURES.filter(({ figure }) => canScaleDown(figure));
 
-const SCALE_DOWN_TASKS: ReproduceTask[] = G7_COPY_FIGURES
-  .filter(({ figure }) => canScaleDown(figure))
-  .map(({ id, label, figure }) => ({
-    id: `scale-down-${id}`,
-    kind: "scale_down" as const,
-    label,
-    reference: figure,
-    targetSize: G7_HALF_SIZE,
-  }));
+// ── Exercice 2 — réduction ÷2 : modèle 10×10 → grille 5×5 ─────────────────
+
+const SCALE_DOWN_TASKS: ReproduceTask[] = REDUCIBLE_COPY_FIGURES.map(({ id, label, figure }) => ({
+  id: `scale-down-${id}`,
+  kind: "scale_down" as const,
+  label,
+  reference: figure,
+  targetSize: G7_HALF_SIZE,
+}));
 
 for (const task of SCALE_DOWN_TASKS) assertBounds(task.id, task.reference, G7_GRID_SIZE, true);
+
+// ── Exercice 3 — agrandissement ×2 : mêmes figures, modèle 5×5 → 10×10 ────
+
+const SCALE_UP_TASKS: ReproduceTask[] = REDUCIBLE_COPY_FIGURES.map(({ id, label, figure }) => ({
+  id: `scale-up-${id}`,
+  kind: "scale_up" as const,
+  label,
+  reference: scaleFigureDown(figure, 0.5),
+  targetSize: G7_GRID_SIZE,
+}));
+
+for (const task of SCALE_UP_TASKS) assertBounds(task.id, task.reference, G7_HALF_SIZE, false);
 
 export function pickReproduceTask(variant: 1 | 2 | 3, seed: number): ReproduceTask {
   const pool = variant === 1 ? COPY_TASKS : variant === 2 ? SCALE_DOWN_TASKS : SCALE_UP_TASKS;
