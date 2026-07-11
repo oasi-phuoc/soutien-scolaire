@@ -61,6 +61,14 @@ function main() {
   const lectureOnly = new Map();
 
   addFrom(expressionTempDir, "/assets/expression/images-temp", index);
+  // Sous-dossiers temps (ex. itinéraires CE)
+  if (fs.existsSync(expressionTempDir)) {
+    for (const folder of fs.readdirSync(expressionTempDir).sort()) {
+      const dir = path.join(expressionTempDir, folder);
+      if (!fs.statSync(dir).isDirectory()) continue;
+      addFrom(dir, `/assets/expression/images-temp/${folder}`, index);
+    }
+  }
   addFrom(coScolaireDir, "/assets/expression/co/base/scolaire", index);
   addFrom(coPublicDir, "/assets/expression/co/base/public", index);
   addFrom(expressionSceneDir, "/assets/expression/images/scene", index);

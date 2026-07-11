@@ -387,6 +387,7 @@ export function ceCoImageSource(path?: string | null, label?: string): string | 
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
     if (path.startsWith("/assets/expression/co/")) return path;
+    if (path.startsWith("/assets/expression/images-temp/")) return path;
     if (path.startsWith("/assets/words/lecture/")) return path;
     if (path.startsWith("/assets/words/vocab/")) return path;
     if (EXPRESSION_CE_BASE.test(path)) return path;
