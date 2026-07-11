@@ -98,9 +98,6 @@ import { TRAD_G7_2 } from "./trad-g7-2";
 import { TRAD_G7_3 } from "./trad-g7-3";
 import { TRAD_G7_4 } from "./trad-g7-4";
 import { TRAD_G7_5 } from "./trad-g7-5";
-import { TRAD_G7_6 } from "./trad-g7-6";
-import { TRAD_G7_7 } from "./trad-g7-7";
-import { TRAD_G7_8 } from "./trad-g7-8";
 
 const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_A1_1, TRAD_A1_2, TRAD_A1_3, TRAD_A1_4, TRAD_A1_5,
@@ -120,7 +117,7 @@ const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_G4_1, TRAD_G4_2, TRAD_G4_3, TRAD_G4_4, TRAD_G4_5, TRAD_G4_6, TRAD_G4_7, TRAD_G4_8,
   TRAD_G5_1, TRAD_G5_2, TRAD_G5_3, TRAD_G5_4, TRAD_G5_5, TRAD_G5_6,
   TRAD_G6_1, TRAD_G6_2, TRAD_G6_3, TRAD_G6_4, TRAD_G6_5, TRAD_G6_6, TRAD_G6_7,
-  TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5, TRAD_G7_6, TRAD_G7_7, TRAD_G7_8,
+  TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5,
 ];
 
 const TRAD_MAP = new Map<string, SubmoduleTrad>(
