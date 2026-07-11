@@ -1,5 +1,5 @@
 /**
- * Aperçu HTML des 50 figures G7.2 ex.3 (réflexion horizontale).
+ * Aperçu HTML des figures G7.2 ex.3 (réflexion horizontale, grille 10×20).
  * Usage: npx tsx scripts/preview-g7-reflect-h-figures.ts
  */
 import { writeFileSync, mkdirSync } from "fs";
@@ -51,7 +51,7 @@ h1{font-size:20px;margin:0 0 8px}p{margin:0 0 16px;color:#64748b;font-size:14px}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px;text-align:center}
 .label{font-size:10px;font-weight:600;margin-bottom:4px}span{font-weight:400;color:#64748b}
 </style></head><body>
-<h1>G7.2 — Exercice 3 : ${tasks.length} figures (grille 20×20)</h1>
+  <h1>G7.2 — Exercice 3 : ${tasks.length} figures (grille 10×20)</h1>
 <p>Axe bleu horizontal au centre (y=10) · H = moitié haute · B = moitié basse</p>
 <div class="grid">${cards}</div>
 </body></html>`;

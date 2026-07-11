@@ -33,7 +33,7 @@ export function G7SymmetryReflectExercise({
   validateCommand: number;
   onValidated: (score: number, maxPoints: number) => void;
   seed?: number;
-  /** vertical = ex.2 (20×10) · horizontal = ex.3 (20×20) */
+  /** vertical = ex.2 (20×10) · horizontal = ex.3 (10×20) */
   axis?: ReflectAxis;
 }) {
   const [task] = useState<SymmetryReflectTask | SymmetryReflectHTask>(() =>
@@ -153,8 +153,8 @@ export function G7SymmetryReflectExercise({
     ? { kind: "horizontal" as const, y: (task as SymmetryReflectHTask).axisY }
     : { kind: "vertical" as const, x: (task as SymmetryReflectTask).axisX };
 
-  // Grille 20×20 : cellules un peu plus petites pour tenir à l'écran
-  const cellSize = axis === "horizontal" ? 18 : undefined;
+  // Grille 10×20 : cellules un peu plus petites pour tenir à l'écran
+  const cellSize = axis === "horizontal" ? 20 : undefined;
 
   return (
     <div className="space-y-4">
