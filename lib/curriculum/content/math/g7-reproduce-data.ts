@@ -448,27 +448,7 @@ export const G7_COPY_FIGURES: Array<{ id: string; label: string; figure: GridFig
   ], [{ x: 6, y: 4 }, { x: 9, y: 4 }]) },
 ];
 
-// assertBounds + COPY_TASKS : après ajout des figures ×2 issues de l'ex.3 (voir plus bas)
-
-// ── Exercice 2 — 50 figures ÷2 (modèle 10×10 coords paires → grille 5×5) ───
-
-function efig(segments: GridSegment[], dots: GridPoint[]): GridFigure {
-  return fig(segments, dots, G7_GRID_SIZE);
-}
-
-const SCALE_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
-  // Pool vide — figures à fournir ultérieurement
-];
-
-for (const { id, figure } of SCALE_FIGURES) assertBounds(id, figure, G7_GRID_SIZE, true);
-
-const SCALE_DOWN_TASKS: ReproduceTask[] = SCALE_FIGURES.map(({ id, label, figure }) => ({
-  id: `scale-down-${id}`,
-  kind: "scale_down" as const,
-  label,
-  reference: figure,
-  targetSize: G7_HALF_SIZE,
-}));
+// assertBounds + COPY_TASKS + SCALE_DOWN : après figures ×2 issues de l'ex.3 (voir plus bas)
 
 // ── Exercice 3 — figures ×2 (modèle 5×5 → grille 10×10) ────────────────────
 
@@ -700,6 +680,28 @@ const COPY_TASKS: ReproduceTask[] = G7_COPY_FIGURES.map(({ id, label, figure }) 
   reference: figure,
   targetSize: G7_GRID_SIZE,
 }));
+
+/** True si toutes les coords sont entières paires 0…10 → réductible ÷2 vers grille 5×5. */
+function canScaleDown(figure: GridFigure): boolean {
+  const vals: number[] = [];
+  for (const s of figure.segments) vals.push(s.x1, s.y1, s.x2, s.y2);
+  for (const d of figure.dots) vals.push(d.x, d.y);
+  return vals.every((v) => Number.isInteger(v) && v >= 0 && v <= G7_GRID_SIZE && v % 2 === 0);
+}
+
+// ── Exercice 2 — réduction ÷2 : mêmes figures que l'ex.1, si coords paires ──
+
+const SCALE_DOWN_TASKS: ReproduceTask[] = G7_COPY_FIGURES
+  .filter(({ figure }) => canScaleDown(figure))
+  .map(({ id, label, figure }) => ({
+    id: `scale-down-${id}`,
+    kind: "scale_down" as const,
+    label,
+    reference: figure,
+    targetSize: G7_HALF_SIZE,
+  }));
+
+for (const task of SCALE_DOWN_TASKS) assertBounds(task.id, task.reference, G7_GRID_SIZE, true);
 
 export function pickReproduceTask(variant: 1 | 2 | 3, seed: number): ReproduceTask {
   const pool = variant === 1 ? COPY_TASKS : variant === 2 ? SCALE_DOWN_TASKS : SCALE_UP_TASKS;

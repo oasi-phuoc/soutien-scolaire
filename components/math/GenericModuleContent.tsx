@@ -5248,7 +5248,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "G7-1") {
       const pushG7ReproduceSet = () => {
         steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 1 });
-        // Ex.2 (réduction ÷2) : omis tant que le pool SCALE_FIGURES est vide
+        // Ex.2 (réduction ÷2) : figures de l'ex.1 aux coords paires uniquement
         if (listReproduceTasks(2).length > 0) {
           steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 2 });
         }
