@@ -1,4 +1,4 @@
-import type { CommunicationLesson } from "./communication-p1-1";
+import type { CommunicationLesson } from "./express-types";
 
 export const EXPRESSION_E1_1: CommunicationLesson = {
   id: "PE-1",

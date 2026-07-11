@@ -12,10 +12,12 @@ import { CommunicationAiPractice } from "@/components/communication/Communicatio
 import { AppSelect } from "@/components/ui/AppSelect";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import {
-  COMMUNICATION_E2_1,
+  type CommunicationExercise,
   type CommunicationLesson,
   type CommunicationTheoryBlock,
-} from "@/lib/curriculum/content/communication/communication-p1-1";
+  pickProgressiveExercises,
+} from "@/lib/curriculum/content/communication/express-types";
+import { EXPRESS_ORAL_BY_ID } from "@/lib/curriculum/content/communication/express-index";
 import {
   EXPRESSION_E1_1,
   EXPRESSION_E1_2,
@@ -40,9 +42,10 @@ const LESSONS: Record<string, CommunicationLesson> = {
   "PE-1": EXPRESSION_E1_1,
   "PE-2": EXPRESSION_E1_2,
   "PE-3": EXPRESSION_E1_3,
-  "E1-1": COMMUNICATION_E2_1,
-  "P1-1": COMMUNICATION_E2_1,
-  "A1-1": COMMUNICATION_E2_1,
+  ...EXPRESS_ORAL_BY_ID,
+  // Alias legacy
+  "P1-1": EXPRESS_ORAL_BY_ID["E1-1"]!,
+  "A1-1": EXPRESS_ORAL_BY_ID["E1-1"]!,
 };
 
 type Phase = "intro" | "theory" | "form" | "writing" | "exercises" | "score";
@@ -347,12 +350,29 @@ function WritingIntroPage({ lesson, onStart }: { lesson: CommunicationLesson; on
   );
 }
 
+function renderInlineBold(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="font-bold" style={{ color: ACCENT }}>
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   switch (block.type) {
     case "heading":
       return (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
+          <h2
+            className={`text-xl font-bold ${block.black ? "text-[var(--color-text-primary)]" : ""}`}
+            style={block.black ? undefined : { color: ACCENT }}
+          >
             {block.text}
           </h2>
         </div>
@@ -361,7 +381,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "plain":
       return (
         <p className="mb-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
-          {block.text}
+          {renderInlineBold(block.text)}
         </p>
       );
 
@@ -371,19 +391,47 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
           {block.items.map((item, i) => (
             <p key={item} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
               <span className="font-bold" style={{ color: ACCENT }}>{i + 1}.</span>
-              <span>{item}</span>
+              <span>{renderInlineBold(item)}</span>
             </p>
           ))}
         </div>
       );
 
-    case "section":
+    case "section": {
+      const lines = block.items ?? (block.text ? block.text.split("\n") : []);
       return (
-        <div
-          className="mb-3 whitespace-pre-line border-l-2 px-3 py-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]"
-          style={{ borderColor: ACCENT }}
-        >
-          {block.text}
+        <div className="mb-4">
+          {block.label ? (
+            <p className="mb-1 text-sm font-bold" style={{ color: ACCENT }}>{block.label}</p>
+          ) : null}
+          <div
+            className="space-y-1.5 border-l-2 px-3 py-1.5"
+            style={{ borderColor: ACCENT }}
+          >
+            {lines.map((line, i) => (
+              <p key={i} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                {renderInlineBold(line)}
+              </p>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    case "bullets":
+      return (
+        <div className="mb-4">
+          {block.label ? (
+            <p className="mb-1 text-sm font-bold" style={{ color: ACCENT }}>{block.label}</p>
+          ) : null}
+          <ul className="space-y-1.5">
+            {block.items.map((item, i) => (
+              <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: ACCENT }} />
+                <span>{renderInlineBold(item)}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       );
 
@@ -409,7 +457,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
                 {block.headers.map((h) => (
                   <th
                     key={h}
-                    className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide"
+                    className={`px-3 py-2 text-left text-xs font-semibold tracking-wide ${block.accentHeader ? "uppercase" : ""}`}
                     style={{ color: ACCENT }}
                   >
                     {h}
@@ -425,7 +473,7 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
                 >
                   {row.map((cell, ci) => (
                     <td key={ci} className="px-3 py-2 text-[var(--color-text-primary)]">
-                      {cell}
+                      {renderInlineBold(cell)}
                     </td>
                   ))}
                 </tr>
@@ -438,13 +486,14 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
     case "note":
       return (
         <div className="mb-4 flex gap-2 rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-2.5 dark:border-amber-700 dark:bg-amber-950">
-          <span className="shrink-0 text-amber-600 dark:text-amber-400">⚠️</span>
-          <p className="text-sm text-amber-800 dark:text-amber-200">{block.text}</p>
+          <span className="shrink-0 text-amber-600 dark:text-amber-400">!</span>
+          <p className="text-sm text-amber-800 dark:text-amber-200">{renderInlineBold(block.text)}</p>
         </div>
       );
 
-    case "highlight":
-      if (block.items.length === 0) {
+    case "highlight": {
+      const items = block.items ?? [];
+      if (items.length === 0) {
         return (
           <h3 className="mb-2 mt-4 text-sm font-bold" style={{ color: ACCENT }}>
             {block.title}
@@ -458,15 +507,16 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
         >
           <h3 className="mb-2 text-sm font-bold" style={{ color: ACCENT }}>{block.title}</h3>
           <ul className="space-y-1.5">
-            {block.items.map((item, i) => (
+            {items.map((item, i) => (
               <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: ACCENT }} />
-                <span>{item}</span>
+                <span>{renderInlineBold(item)}</span>
               </li>
             ))}
           </ul>
         </div>
       );
+    }
 
     case "dialogue":
       return (
@@ -629,18 +679,27 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const lesson = LESSONS[lessonId];
 
+  const [activeExercises] = useState<CommunicationExercise[]>(() => {
+    if (!lesson) return [];
+    if (lesson.writingLevel) return [];
+    const pool = lesson.exercisePool ?? [];
+    if (pool.length > 0) {
+      const seed = Date.now() % 100000;
+      return pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, seed);
+    }
+    return lesson.exercises ?? [];
+  });
+
   const [phase, setPhase] = useState<Phase>(() => lesson?.writingLevel ? "intro" : "theory");
   const [exIndex, setExIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
-  // Per-exercise state for free navigation
   const [answers, setAnswers] = useState<(string | null)[]>(() =>
-    lesson ? Array(lesson.exercises.length).fill(null) : []
+    Array(activeExercises.length).fill(null)
   );
   const [validated, setValidated] = useState<boolean[]>(() =>
-    lesson ? Array(lesson.exercises.length).fill(false) : []
+    Array(activeExercises.length).fill(false)
   );
   const [exerciseValidated, setExerciseValidated] = useState(false);
-  // Derived per-exercise state (for backwards compat with writing phase logic)
   const selected = answers[exIndex] ?? null;
 
   const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
@@ -677,7 +736,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     );
   }
 
-  const totalEx = lesson.exercises.length;
+  const totalEx = activeExercises.length;
   const activeWritingPhases = lesson.writingLevel
     ? (["form", "writing"] as const).filter((item) => item === "form" ? !formValidated : !exerciseValidated)
     : [];
@@ -796,7 +855,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
         setExIndex(exIndex + 1);
       } else {
         // Last exercise: compute score from all answers and go to score
-        const newResults = lesson.exercises.map((ex, i) => answers[i] === ex.answer);
+        const newResults = activeExercises.map((ex, i) => answers[i] === ex.answer);
         setResults(newResults);
         setPhase("score");
       }
@@ -903,12 +962,12 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       )}
 
       {/* Exercises phase */}
-      {phase === "exercises" && lesson.exercises[exIndex] && (
+      {phase === "exercises" && activeExercises[exIndex] && (
         <>
           {/* Exercise dot navigator */}
           {totalEx > 1 && (
             <div className="mb-4 flex items-center justify-center gap-2">
-              {lesson.exercises.map((_, i) => (
+              {activeExercises.map((_, i) => (
                 <button
                   key={i}
                   type="button"
@@ -930,10 +989,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
           )}
           <MCQExercise
             key={exIndex}
-            question={lesson.exercises[exIndex]!.question}
-            instruction={lesson.exercises[exIndex]!.instruction}
-            choices={lesson.exercises[exIndex]!.choices}
-            answer={lesson.exercises[exIndex]!.answer}
+            question={activeExercises[exIndex]!.question}
+            instruction={activeExercises[exIndex]!.instruction}
+            choices={activeExercises[exIndex]!.choices}
+            answer={activeExercises[exIndex]!.answer}
             exNum={exIndex + 1}
             total={totalEx}
             selected={selected}
