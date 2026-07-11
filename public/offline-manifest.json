@@ -1,6 +1,6 @@
 {
-  "version": 1783761441774,
-  "totalBytes": 222281557,
+  "version": 1783766964196,
+  "totalBytes": 237883759,
   "routes": [
     "/",
     "/avant-propos",
@@ -2359,6 +2359,206 @@
     "/assets/words/vocab/V9/tout-droit.webp",
     "/assets/words/vocab/V9/tribunal.webp",
     "/assets/words/vocab/V9/trotinette.webp",
+    "/expression/co/situations/accepter-invitation.webp",
+    "/expression/co/situations/acheter-au-marche.webp",
+    "/expression/co/situations/acheter-billet-cinema.webp",
+    "/expression/co/situations/acheter-billet-train.webp",
+    "/expression/co/situations/acheter-cafe.webp",
+    "/expression/co/situations/acheter-fleurs.webp",
+    "/expression/co/situations/acheter-glace.webp",
+    "/expression/co/situations/acheter-livre.webp",
+    "/expression/co/situations/acheter-medicament.webp",
+    "/expression/co/situations/acheter-pain.webp",
+    "/expression/co/situations/acheter-place-concert.webp",
+    "/expression/co/situations/acheter-place-theatre.webp",
+    "/expression/co/situations/acheter-souvenir.webp",
+    "/expression/co/situations/acheter-titre-transport.webp",
+    "/expression/co/situations/aider-personne-agee.webp",
+    "/expression/co/situations/aider-poussette.webp",
+    "/expression/co/situations/aider-touriste.webp",
+    "/expression/co/situations/aller-pharmacie.webp",
+    "/expression/co/situations/aller-plage.webp",
+    "/expression/co/situations/aller-poste.webp",
+    "/expression/co/situations/aller-travail.webp",
+    "/expression/co/situations/annoncer-evenement.webp",
+    "/expression/co/situations/annoncer-nouvelle.webp",
+    "/expression/co/situations/annuler-rdv.webp",
+    "/expression/co/situations/appeler-plombier.webp",
+    "/expression/co/situations/appeler-taxi.webp",
+    "/expression/co/situations/arriver-en-retard.webp",
+    "/expression/co/situations/arroser-plantes.webp",
+    "/expression/co/situations/attendre-quelquun.webp",
+    "/expression/co/situations/ceder-place.webp",
+    "/expression/co/situations/changer-devise.webp",
+    "/expression/co/situations/charger-telephone.webp",
+    "/expression/co/situations/check-in-hotel.webp",
+    "/expression/co/situations/check-in-vol.webp",
+    "/expression/co/situations/check-out-hotel.webp",
+    "/expression/co/situations/chercher-appartement.webp",
+    "/expression/co/situations/choisir-cadeau.webp",
+    "/expression/co/situations/choisir-restaurant.webp",
+    "/expression/co/situations/commander-a-emporter.webp",
+    "/expression/co/situations/commander.webp",
+    "/expression/co/situations/comparer-produits.webp",
+    "/expression/co/situations/complimenter.webp",
+    "/expression/co/situations/confirmer-rdv.webp",
+    "/expression/co/situations/conseiller.webp",
+    "/expression/co/situations/consoler.webp",
+    "/expression/co/situations/consulter-medecin.webp",
+    "/expression/co/situations/courir-parc.webp",
+    "/expression/co/situations/cuisiner-ensemble.webp",
+    "/expression/co/situations/danser-fete.webp",
+    "/expression/co/situations/declarer-sinistre.webp",
+    "/expression/co/situations/decrire-personne.webp",
+    "/expression/co/situations/demander-addition.webp",
+    "/expression/co/situations/demander-aide-devoirs.webp",
+    "/expression/co/situations/demander-aide-urgence.webp",
+    "/expression/co/situations/demander-arret-bus.webp",
+    "/expression/co/situations/demander-chemin.webp",
+    "/expression/co/situations/demander-conge.webp",
+    "/expression/co/situations/demander-direction-aeroport.webp",
+    "/expression/co/situations/demander-heure.webp",
+    "/expression/co/situations/demander-informations.webp",
+    "/expression/co/situations/demander-menu.webp",
+    "/expression/co/situations/demander-nouvelles.webp",
+    "/expression/co/situations/demander-plan-metro.webp",
+    "/expression/co/situations/demander-plan-ville.webp",
+    "/expression/co/situations/demander-prix.webp",
+    "/expression/co/situations/demander-quai.webp",
+    "/expression/co/situations/demander-reduction.webp",
+    "/expression/co/situations/demander-service.webp",
+    "/expression/co/situations/demander-siege-fenetre.webp",
+    "/expression/co/situations/demander-taille.webp",
+    "/expression/co/situations/demander-temoin.webp",
+    "/expression/co/situations/demander-toilettes.webp",
+    "/expression/co/situations/demander-une-facture.webp",
+    "/expression/co/situations/demander-wifi-cafe.webp",
+    "/expression/co/situations/demander-wifi.webp",
+    "/expression/co/situations/discuter-parc.webp",
+    "/expression/co/situations/donner-avis-film.webp",
+    "/expression/co/situations/donner-avis-restaurant.webp",
+    "/expression/co/situations/donner-impressions.webp",
+    "/expression/co/situations/donner-indications.webp",
+    "/expression/co/situations/echanger-article.webp",
+    "/expression/co/situations/ecouter-musique.webp",
+    "/expression/co/situations/emprunter-livre-bibliotheque.webp",
+    "/expression/co/situations/encourager.webp",
+    "/expression/co/situations/envoyer-carte-postale.webp",
+    "/expression/co/situations/envoyer-colis.webp",
+    "/expression/co/situations/envoyer-sms.webp",
+    "/expression/co/situations/essayer-vetement.webp",
+    "/expression/co/situations/etre-daccord.webp",
+    "/expression/co/situations/expliquer-recette.webp",
+    "/expression/co/situations/expliquer-symptomes.webp",
+    "/expression/co/situations/exprimer-colere.webp",
+    "/expression/co/situations/exprimer-gouts.webp",
+    "/expression/co/situations/exprimer-joie.webp",
+    "/expression/co/situations/exprimer-surprise.webp",
+    "/expression/co/situations/exprimer-tristesse.webp",
+    "/expression/co/situations/faire-connaissance.webp",
+    "/expression/co/situations/faire-courses.webp",
+    "/expression/co/situations/faire-marche.webp",
+    "/expression/co/situations/faire-randonnee.webp",
+    "/expression/co/situations/faire-velo.webp",
+    "/expression/co/situations/faire-yoga.webp",
+    "/expression/co/situations/feliciter.webp",
+    "/expression/co/situations/fixer-heure-rdv.webp",
+    "/expression/co/situations/horaires.webp",
+    "/expression/co/situations/inviter.webp",
+    "/expression/co/situations/jouer-cartes.webp",
+    "/expression/co/situations/jouer-foot.webp",
+    "/expression/co/situations/jouer-sport.webp",
+    "/expression/co/situations/jouer-tennis.webp",
+    "/expression/co/situations/laisser-message-vocal.webp",
+    "/expression/co/situations/lire-journal.webp",
+    "/expression/co/situations/louer-velo.webp",
+    "/expression/co/situations/louer-voiture.webp",
+    "/expression/co/situations/montrer-piece-identite.webp",
+    "/expression/co/situations/nager-piscine.webp",
+    "/expression/co/situations/negocier-prix.webp",
+    "/expression/co/situations/nettoyer-maison.webp",
+    "/expression/co/situations/offrir-cadeau.webp",
+    "/expression/co/situations/organiser-demenagement.webp",
+    "/expression/co/situations/organiser-fete.webp",
+    "/expression/co/situations/organiser-pique-nique.webp",
+    "/expression/co/situations/oublier-telephone.webp",
+    "/expression/co/situations/ouvrir-cadeau.webp",
+    "/expression/co/situations/ouvrir-un-compte-bancaire.webp",
+    "/expression/co/situations/parler-de-la-famille.webp",
+    "/expression/co/situations/parler-des-hobbies.webp",
+    "/expression/co/situations/parler-du-travail.webp",
+    "/expression/co/situations/parler-du-week-end.webp",
+    "/expression/co/situations/parler-meteo.webp",
+    "/expression/co/situations/partager-addition.webp",
+    "/expression/co/situations/partager-parapluie.webp",
+    "/expression/co/situations/participer-reunion.webp",
+    "/expression/co/situations/pas-daccord.webp",
+    "/expression/co/situations/passer-appel-video.webp",
+    "/expression/co/situations/passer-appel.webp",
+    "/expression/co/situations/passer-douane.webp",
+    "/expression/co/situations/passer-entretien.webp",
+    "/expression/co/situations/payer-par-carte.webp",
+    "/expression/co/situations/perdre-cles.webp",
+    "/expression/co/situations/planter-arbre.webp",
+    "/expression/co/situations/porter-sac.webp",
+    "/expression/co/situations/postuler-emploi.webp",
+    "/expression/co/situations/prendre-conge.webp",
+    "/expression/co/situations/prendre-des-nouvelles-sante.webp",
+    "/expression/co/situations/prendre-petit-dejeuner.webp",
+    "/expression/co/situations/prendre-photo-groupe.webp",
+    "/expression/co/situations/prendre-rdv.webp",
+    "/expression/co/situations/prendre-rendez-vous-dentiste.webp",
+    "/expression/co/situations/presenter-collegue.webp",
+    "/expression/co/situations/presenter.webp",
+    "/expression/co/situations/prolonger-emprunt.webp",
+    "/expression/co/situations/promener-chien.webp",
+    "/expression/co/situations/proposer-activite.webp",
+    "/expression/co/situations/proposer-aide.webp",
+    "/expression/co/situations/proposer-film.webp",
+    "/expression/co/situations/proposer-sortie.webp",
+    "/expression/co/situations/raconter-un-voyage.webp",
+    "/expression/co/situations/raconter-une-journee.webp",
+    "/expression/co/situations/recevoir-colis.webp",
+    "/expression/co/situations/recharger-carte-transport.webp",
+    "/expression/co/situations/refuser.webp",
+    "/expression/co/situations/regarder-match.webp",
+    "/expression/co/situations/regarder-television.webp",
+    "/expression/co/situations/remercier.webp",
+    "/expression/co/situations/remplir-formulaire.webp",
+    "/expression/co/situations/rencontrer-ami.webp",
+    "/expression/co/situations/rendre-article.webp",
+    "/expression/co/situations/rendre-devoir.webp",
+    "/expression/co/situations/renouveler-passeport.webp",
+    "/expression/co/situations/rentrer-maison.webp",
+    "/expression/co/situations/repondre-email.webp",
+    "/expression/co/situations/reporter-rdv.webp",
+    "/expression/co/situations/reserver-hotel.webp",
+    "/expression/co/situations/reserver-musee.webp",
+    "/expression/co/situations/reserver-table-restaurant.webp",
+    "/expression/co/situations/reserver-visite-guidee.webp",
+    "/expression/co/situations/retirer-de-largent.webp",
+    "/expression/co/situations/retrouver-cles.webp",
+    "/expression/co/situations/retrouver-objet-perdu.webp",
+    "/expression/co/situations/s-excuser.webp",
+    "/expression/co/situations/saluer.webp",
+    "/expression/co/situations/signaler-allergie.webp",
+    "/expression/co/situations/signaler-objet-perdu.webp",
+    "/expression/co/situations/signaler-panne.webp",
+    "/expression/co/situations/signaler-probleme.webp",
+    "/expression/co/situations/signaler-retard-train.webp",
+    "/expression/co/situations/signer-bail.webp",
+    "/expression/co/situations/sincrire-assurances.webp",
+    "/expression/co/situations/sincrire-club-sport.webp",
+    "/expression/co/situations/sinscrire-cours.webp",
+    "/expression/co/situations/souhaiter-bon-anniversaire.webp",
+    "/expression/co/situations/souhaiter-bonne-annee.webp",
+    "/expression/co/situations/souhaiter-bonnes-vacances.webp",
+    "/expression/co/situations/tenir-porte.webp",
+    "/expression/co/situations/traduire-menu.webp",
+    "/expression/co/situations/trier-dechets.webp",
+    "/expression/co/situations/visiter-appartement.webp",
+    "/expression/co/situations/visiter-exposition.webp",
+    "/expression/co/situations/visiter-zoo.webp",
     "/gram/images/R2/description-1.webp",
     "/gram/images/R2/description-2.webp",
     "/gram/images/R2/description-3.webp",
@@ -11969,6 +12169,1006 @@
       "url": "/assets/words/vocab/V9/trotinette.webp",
       "size": 9190,
       "revision": "8954ca9b1dcd45cf"
+    },
+    {
+      "url": "/expression/co/situations/accepter-invitation.webp",
+      "size": 58784,
+      "revision": "b2e48f2a4e2a333c"
+    },
+    {
+      "url": "/expression/co/situations/acheter-au-marche.webp",
+      "size": 120424,
+      "revision": "b26aa73911b166b5"
+    },
+    {
+      "url": "/expression/co/situations/acheter-billet-cinema.webp",
+      "size": 77574,
+      "revision": "f02eb5214ffd5dd6"
+    },
+    {
+      "url": "/expression/co/situations/acheter-billet-train.webp",
+      "size": 71414,
+      "revision": "62bb76f44975c983"
+    },
+    {
+      "url": "/expression/co/situations/acheter-cafe.webp",
+      "size": 74604,
+      "revision": "37d059404f174a07"
+    },
+    {
+      "url": "/expression/co/situations/acheter-fleurs.webp",
+      "size": 130792,
+      "revision": "d068fed665aa00d5"
+    },
+    {
+      "url": "/expression/co/situations/acheter-glace.webp",
+      "size": 75504,
+      "revision": "b71fdf3f88198891"
+    },
+    {
+      "url": "/expression/co/situations/acheter-livre.webp",
+      "size": 91470,
+      "revision": "071aae5e16b729fd"
+    },
+    {
+      "url": "/expression/co/situations/acheter-medicament.webp",
+      "size": 75110,
+      "revision": "264e15cae1b73cf6"
+    },
+    {
+      "url": "/expression/co/situations/acheter-pain.webp",
+      "size": 117272,
+      "revision": "1be59b36f5fdeaf3"
+    },
+    {
+      "url": "/expression/co/situations/acheter-place-concert.webp",
+      "size": 81376,
+      "revision": "0b51c5605aa95f9d"
+    },
+    {
+      "url": "/expression/co/situations/acheter-place-theatre.webp",
+      "size": 52960,
+      "revision": "e1cc1118041cadaf"
+    },
+    {
+      "url": "/expression/co/situations/acheter-souvenir.webp",
+      "size": 92360,
+      "revision": "5de69a52370501fb"
+    },
+    {
+      "url": "/expression/co/situations/acheter-titre-transport.webp",
+      "size": 85696,
+      "revision": "44cb7f8843bd1eea"
+    },
+    {
+      "url": "/expression/co/situations/aider-personne-agee.webp",
+      "size": 101174,
+      "revision": "f2aa92562833b206"
+    },
+    {
+      "url": "/expression/co/situations/aider-poussette.webp",
+      "size": 88118,
+      "revision": "1cb4b2e261261580"
+    },
+    {
+      "url": "/expression/co/situations/aider-touriste.webp",
+      "size": 90960,
+      "revision": "adce9b9ae118eb44"
+    },
+    {
+      "url": "/expression/co/situations/aller-pharmacie.webp",
+      "size": 77154,
+      "revision": "ed2f2777ccf9b664"
+    },
+    {
+      "url": "/expression/co/situations/aller-plage.webp",
+      "size": 66840,
+      "revision": "bdb56f8b5774e355"
+    },
+    {
+      "url": "/expression/co/situations/aller-poste.webp",
+      "size": 55784,
+      "revision": "8da2046caa75f0a1"
+    },
+    {
+      "url": "/expression/co/situations/aller-travail.webp",
+      "size": 62758,
+      "revision": "f4ddcca848b0a443"
+    },
+    {
+      "url": "/expression/co/situations/annoncer-evenement.webp",
+      "size": 87002,
+      "revision": "5749ae60a5f38598"
+    },
+    {
+      "url": "/expression/co/situations/annoncer-nouvelle.webp",
+      "size": 75652,
+      "revision": "34f7d8c482230ee3"
+    },
+    {
+      "url": "/expression/co/situations/annuler-rdv.webp",
+      "size": 52660,
+      "revision": "3c3b6db35b1ae510"
+    },
+    {
+      "url": "/expression/co/situations/appeler-plombier.webp",
+      "size": 68210,
+      "revision": "0d382761c0f7c41f"
+    },
+    {
+      "url": "/expression/co/situations/appeler-taxi.webp",
+      "size": 128800,
+      "revision": "b80534179a625fda"
+    },
+    {
+      "url": "/expression/co/situations/arriver-en-retard.webp",
+      "size": 49620,
+      "revision": "5a6ebc7226d941c7"
+    },
+    {
+      "url": "/expression/co/situations/arroser-plantes.webp",
+      "size": 105058,
+      "revision": "cc98648ee87a0c1a"
+    },
+    {
+      "url": "/expression/co/situations/attendre-quelquun.webp",
+      "size": 97404,
+      "revision": "044fece2d9f9e6a7"
+    },
+    {
+      "url": "/expression/co/situations/ceder-place.webp",
+      "size": 88084,
+      "revision": "f5c65bf521f3e935"
+    },
+    {
+      "url": "/expression/co/situations/changer-devise.webp",
+      "size": 68574,
+      "revision": "61736ffb699130f5"
+    },
+    {
+      "url": "/expression/co/situations/charger-telephone.webp",
+      "size": 54142,
+      "revision": "54a7045c90f91457"
+    },
+    {
+      "url": "/expression/co/situations/check-in-hotel.webp",
+      "size": 80742,
+      "revision": "b32e4f0fb39ad995"
+    },
+    {
+      "url": "/expression/co/situations/check-in-vol.webp",
+      "size": 71146,
+      "revision": "d9b1b52074ddd050"
+    },
+    {
+      "url": "/expression/co/situations/check-out-hotel.webp",
+      "size": 80542,
+      "revision": "ebaf933a8662d8d3"
+    },
+    {
+      "url": "/expression/co/situations/chercher-appartement.webp",
+      "size": 75842,
+      "revision": "fddf74afd6af81f6"
+    },
+    {
+      "url": "/expression/co/situations/choisir-cadeau.webp",
+      "size": 97866,
+      "revision": "2885a58cb747c676"
+    },
+    {
+      "url": "/expression/co/situations/choisir-restaurant.webp",
+      "size": 89594,
+      "revision": "b5c1a7e6452e092f"
+    },
+    {
+      "url": "/expression/co/situations/commander-a-emporter.webp",
+      "size": 72920,
+      "revision": "50469a2f6cfbee40"
+    },
+    {
+      "url": "/expression/co/situations/commander.webp",
+      "size": 79510,
+      "revision": "99d1570a5c745fac"
+    },
+    {
+      "url": "/expression/co/situations/comparer-produits.webp",
+      "size": 99588,
+      "revision": "5cb3b9455ac8ab06"
+    },
+    {
+      "url": "/expression/co/situations/complimenter.webp",
+      "size": 89428,
+      "revision": "0cf708b7e5389475"
+    },
+    {
+      "url": "/expression/co/situations/confirmer-rdv.webp",
+      "size": 84396,
+      "revision": "4f057839f32e5ce5"
+    },
+    {
+      "url": "/expression/co/situations/conseiller.webp",
+      "size": 94560,
+      "revision": "ba6822835b7ff092"
+    },
+    {
+      "url": "/expression/co/situations/consoler.webp",
+      "size": 61142,
+      "revision": "aeaa92049d2da1c9"
+    },
+    {
+      "url": "/expression/co/situations/consulter-medecin.webp",
+      "size": 70422,
+      "revision": "ff1974614d63fabc"
+    },
+    {
+      "url": "/expression/co/situations/courir-parc.webp",
+      "size": 67750,
+      "revision": "d1e628ed7f7ed181"
+    },
+    {
+      "url": "/expression/co/situations/cuisiner-ensemble.webp",
+      "size": 89352,
+      "revision": "99ae421787b7cea6"
+    },
+    {
+      "url": "/expression/co/situations/danser-fete.webp",
+      "size": 78286,
+      "revision": "223101ee0aac45c0"
+    },
+    {
+      "url": "/expression/co/situations/declarer-sinistre.webp",
+      "size": 63748,
+      "revision": "0881fb79232df7a9"
+    },
+    {
+      "url": "/expression/co/situations/decrire-personne.webp",
+      "size": 95476,
+      "revision": "a381e2c061a3bb88"
+    },
+    {
+      "url": "/expression/co/situations/demander-addition.webp",
+      "size": 87132,
+      "revision": "a2db941dae3d3c1a"
+    },
+    {
+      "url": "/expression/co/situations/demander-aide-devoirs.webp",
+      "size": 87826,
+      "revision": "335e1d659bd60073"
+    },
+    {
+      "url": "/expression/co/situations/demander-aide-urgence.webp",
+      "size": 83258,
+      "revision": "e73c250e9c40b3c9"
+    },
+    {
+      "url": "/expression/co/situations/demander-arret-bus.webp",
+      "size": 72360,
+      "revision": "e5f5205d72ca2d68"
+    },
+    {
+      "url": "/expression/co/situations/demander-chemin.webp",
+      "size": 106918,
+      "revision": "35a18fe59ca5e894"
+    },
+    {
+      "url": "/expression/co/situations/demander-conge.webp",
+      "size": 63042,
+      "revision": "9d0a2f4bbcfe1c6c"
+    },
+    {
+      "url": "/expression/co/situations/demander-direction-aeroport.webp",
+      "size": 93174,
+      "revision": "899f194b3d57f8b2"
+    },
+    {
+      "url": "/expression/co/situations/demander-heure.webp",
+      "size": 112348,
+      "revision": "e57d04bb536f0ebb"
+    },
+    {
+      "url": "/expression/co/situations/demander-informations.webp",
+      "size": 88764,
+      "revision": "d90b19bf9ffcf5cd"
+    },
+    {
+      "url": "/expression/co/situations/demander-menu.webp",
+      "size": 69828,
+      "revision": "89bbaa33d0df9bd2"
+    },
+    {
+      "url": "/expression/co/situations/demander-nouvelles.webp",
+      "size": 89064,
+      "revision": "e71b20ee91a00e88"
+    },
+    {
+      "url": "/expression/co/situations/demander-plan-metro.webp",
+      "size": 75382,
+      "revision": "6f74929291e0364d"
+    },
+    {
+      "url": "/expression/co/situations/demander-plan-ville.webp",
+      "size": 94620,
+      "revision": "53bd3a111d31a843"
+    },
+    {
+      "url": "/expression/co/situations/demander-prix.webp",
+      "size": 93144,
+      "revision": "3683faaeed847ab4"
+    },
+    {
+      "url": "/expression/co/situations/demander-quai.webp",
+      "size": 84488,
+      "revision": "1fc37a02f3a6dfc3"
+    },
+    {
+      "url": "/expression/co/situations/demander-reduction.webp",
+      "size": 95236,
+      "revision": "46995151cfdf5e7e"
+    },
+    {
+      "url": "/expression/co/situations/demander-service.webp",
+      "size": 78942,
+      "revision": "6b4411331b54ad16"
+    },
+    {
+      "url": "/expression/co/situations/demander-siege-fenetre.webp",
+      "size": 68410,
+      "revision": "133e1e2169ed44b1"
+    },
+    {
+      "url": "/expression/co/situations/demander-taille.webp",
+      "size": 76228,
+      "revision": "44982386a40f312d"
+    },
+    {
+      "url": "/expression/co/situations/demander-temoin.webp",
+      "size": 59534,
+      "revision": "6ef26c94b2b33cb3"
+    },
+    {
+      "url": "/expression/co/situations/demander-toilettes.webp",
+      "size": 72190,
+      "revision": "bc8a3d6454f1aaff"
+    },
+    {
+      "url": "/expression/co/situations/demander-une-facture.webp",
+      "size": 82240,
+      "revision": "55ef793161704424"
+    },
+    {
+      "url": "/expression/co/situations/demander-wifi-cafe.webp",
+      "size": 64066,
+      "revision": "fd1bdd1a4ca4db77"
+    },
+    {
+      "url": "/expression/co/situations/demander-wifi.webp",
+      "size": 75430,
+      "revision": "aa72ba8dc74fd2c7"
+    },
+    {
+      "url": "/expression/co/situations/discuter-parc.webp",
+      "size": 80752,
+      "revision": "e35daf18c793f4b7"
+    },
+    {
+      "url": "/expression/co/situations/donner-avis-film.webp",
+      "size": 60996,
+      "revision": "b6101593f935b5a1"
+    },
+    {
+      "url": "/expression/co/situations/donner-avis-restaurant.webp",
+      "size": 90968,
+      "revision": "f475fe44698e9e16"
+    },
+    {
+      "url": "/expression/co/situations/donner-impressions.webp",
+      "size": 85970,
+      "revision": "ce98dd7433fe621d"
+    },
+    {
+      "url": "/expression/co/situations/donner-indications.webp",
+      "size": 89512,
+      "revision": "6aa7e06db94a71fc"
+    },
+    {
+      "url": "/expression/co/situations/echanger-article.webp",
+      "size": 65976,
+      "revision": "0e32820baeb6383d"
+    },
+    {
+      "url": "/expression/co/situations/ecouter-musique.webp",
+      "size": 48458,
+      "revision": "afb3df8ae24c3f7f"
+    },
+    {
+      "url": "/expression/co/situations/emprunter-livre-bibliotheque.webp",
+      "size": 75288,
+      "revision": "627469f0ad2ad7de"
+    },
+    {
+      "url": "/expression/co/situations/encourager.webp",
+      "size": 76092,
+      "revision": "182a6f563b60f76a"
+    },
+    {
+      "url": "/expression/co/situations/envoyer-carte-postale.webp",
+      "size": 67722,
+      "revision": "57e562299bc2c6af"
+    },
+    {
+      "url": "/expression/co/situations/envoyer-colis.webp",
+      "size": 77206,
+      "revision": "834478af75bba486"
+    },
+    {
+      "url": "/expression/co/situations/envoyer-sms.webp",
+      "size": 81162,
+      "revision": "0ac5c0c1e3bacfa0"
+    },
+    {
+      "url": "/expression/co/situations/essayer-vetement.webp",
+      "size": 70796,
+      "revision": "b6020be2958f34cc"
+    },
+    {
+      "url": "/expression/co/situations/etre-daccord.webp",
+      "size": 79608,
+      "revision": "cffaa1fcbe4b138d"
+    },
+    {
+      "url": "/expression/co/situations/expliquer-recette.webp",
+      "size": 78140,
+      "revision": "95271880f9a19781"
+    },
+    {
+      "url": "/expression/co/situations/expliquer-symptomes.webp",
+      "size": 70420,
+      "revision": "ea751c431eda1e75"
+    },
+    {
+      "url": "/expression/co/situations/exprimer-colere.webp",
+      "size": 46188,
+      "revision": "8cdce1c613bd0817"
+    },
+    {
+      "url": "/expression/co/situations/exprimer-gouts.webp",
+      "size": 91490,
+      "revision": "1faefb92d3ae19e4"
+    },
+    {
+      "url": "/expression/co/situations/exprimer-joie.webp",
+      "size": 102208,
+      "revision": "0e2f6d6df44f515a"
+    },
+    {
+      "url": "/expression/co/situations/exprimer-surprise.webp",
+      "size": 83146,
+      "revision": "6f1008c839578de3"
+    },
+    {
+      "url": "/expression/co/situations/exprimer-tristesse.webp",
+      "size": 52928,
+      "revision": "89284701780a72d9"
+    },
+    {
+      "url": "/expression/co/situations/faire-connaissance.webp",
+      "size": 63520,
+      "revision": "da0f65509af43627"
+    },
+    {
+      "url": "/expression/co/situations/faire-courses.webp",
+      "size": 104522,
+      "revision": "4ef04f2054b2cf4f"
+    },
+    {
+      "url": "/expression/co/situations/faire-marche.webp",
+      "size": 93608,
+      "revision": "7ed1ce1dde83ec95"
+    },
+    {
+      "url": "/expression/co/situations/faire-randonnee.webp",
+      "size": 127594,
+      "revision": "e07423acb4598f33"
+    },
+    {
+      "url": "/expression/co/situations/faire-velo.webp",
+      "size": 82126,
+      "revision": "ee2f003591cf60cf"
+    },
+    {
+      "url": "/expression/co/situations/faire-yoga.webp",
+      "size": 60674,
+      "revision": "64767cfd6a52f7e0"
+    },
+    {
+      "url": "/expression/co/situations/feliciter.webp",
+      "size": 66424,
+      "revision": "53218ec8d5cb7c39"
+    },
+    {
+      "url": "/expression/co/situations/fixer-heure-rdv.webp",
+      "size": 87106,
+      "revision": "8e1c1d22dea56037"
+    },
+    {
+      "url": "/expression/co/situations/horaires.webp",
+      "size": 62260,
+      "revision": "f7b7719714d8f8f5"
+    },
+    {
+      "url": "/expression/co/situations/inviter.webp",
+      "size": 49810,
+      "revision": "fe72373cb4f486cf"
+    },
+    {
+      "url": "/expression/co/situations/jouer-cartes.webp",
+      "size": 85450,
+      "revision": "e1e0f49be259e0a3"
+    },
+    {
+      "url": "/expression/co/situations/jouer-foot.webp",
+      "size": 93408,
+      "revision": "786b95c40b1c22bf"
+    },
+    {
+      "url": "/expression/co/situations/jouer-sport.webp",
+      "size": 134354,
+      "revision": "470b626220abc4eb"
+    },
+    {
+      "url": "/expression/co/situations/jouer-tennis.webp",
+      "size": 76178,
+      "revision": "d436a65da413466d"
+    },
+    {
+      "url": "/expression/co/situations/laisser-message-vocal.webp",
+      "size": 42418,
+      "revision": "67359a6f7e532454"
+    },
+    {
+      "url": "/expression/co/situations/lire-journal.webp",
+      "size": 60222,
+      "revision": "00424fa607ec9cf2"
+    },
+    {
+      "url": "/expression/co/situations/louer-velo.webp",
+      "size": 126530,
+      "revision": "d32ee65d718525a2"
+    },
+    {
+      "url": "/expression/co/situations/louer-voiture.webp",
+      "size": 70816,
+      "revision": "f422ce4dc4e5d65b"
+    },
+    {
+      "url": "/expression/co/situations/montrer-piece-identite.webp",
+      "size": 49556,
+      "revision": "8be19cc14bd870a6"
+    },
+    {
+      "url": "/expression/co/situations/nager-piscine.webp",
+      "size": 74258,
+      "revision": "100dcf56bb92bd4f"
+    },
+    {
+      "url": "/expression/co/situations/negocier-prix.webp",
+      "size": 93038,
+      "revision": "7a54068a111ae64a"
+    },
+    {
+      "url": "/expression/co/situations/nettoyer-maison.webp",
+      "size": 82466,
+      "revision": "8500394ea6b303e7"
+    },
+    {
+      "url": "/expression/co/situations/offrir-cadeau.webp",
+      "size": 72306,
+      "revision": "fe7b92eb780bad97"
+    },
+    {
+      "url": "/expression/co/situations/organiser-demenagement.webp",
+      "size": 75500,
+      "revision": "1639193759a848a0"
+    },
+    {
+      "url": "/expression/co/situations/organiser-fete.webp",
+      "size": 84572,
+      "revision": "229ead159c9d744a"
+    },
+    {
+      "url": "/expression/co/situations/organiser-pique-nique.webp",
+      "size": 155784,
+      "revision": "68cdb16cad367a8e"
+    },
+    {
+      "url": "/expression/co/situations/oublier-telephone.webp",
+      "size": 56382,
+      "revision": "1b96b2ad0e4037a0"
+    },
+    {
+      "url": "/expression/co/situations/ouvrir-cadeau.webp",
+      "size": 68642,
+      "revision": "099ef3647aec7aa8"
+    },
+    {
+      "url": "/expression/co/situations/ouvrir-un-compte-bancaire.webp",
+      "size": 79028,
+      "revision": "1a0d72493feefee7"
+    },
+    {
+      "url": "/expression/co/situations/parler-de-la-famille.webp",
+      "size": 76766,
+      "revision": "85f0ff032b1dfbc2"
+    },
+    {
+      "url": "/expression/co/situations/parler-des-hobbies.webp",
+      "size": 124084,
+      "revision": "478758fd1da1c81f"
+    },
+    {
+      "url": "/expression/co/situations/parler-du-travail.webp",
+      "size": 84734,
+      "revision": "7a27dfa21c2eb35b"
+    },
+    {
+      "url": "/expression/co/situations/parler-du-week-end.webp",
+      "size": 82148,
+      "revision": "f948f4b7fb1ed09a"
+    },
+    {
+      "url": "/expression/co/situations/parler-meteo.webp",
+      "size": 70758,
+      "revision": "de64366018c75e94"
+    },
+    {
+      "url": "/expression/co/situations/partager-addition.webp",
+      "size": 88948,
+      "revision": "fd4f26c48531c463"
+    },
+    {
+      "url": "/expression/co/situations/partager-parapluie.webp",
+      "size": 75978,
+      "revision": "79c198c7bf69f3db"
+    },
+    {
+      "url": "/expression/co/situations/participer-reunion.webp",
+      "size": 83776,
+      "revision": "1af374f5271e08a2"
+    },
+    {
+      "url": "/expression/co/situations/pas-daccord.webp",
+      "size": 84960,
+      "revision": "0a1972127a67ef8c"
+    },
+    {
+      "url": "/expression/co/situations/passer-appel-video.webp",
+      "size": 60732,
+      "revision": "b813c2e815a71f4b"
+    },
+    {
+      "url": "/expression/co/situations/passer-appel.webp",
+      "size": 62124,
+      "revision": "e8a1647d8ca4f663"
+    },
+    {
+      "url": "/expression/co/situations/passer-douane.webp",
+      "size": 64348,
+      "revision": "d50d694884ad2bcb"
+    },
+    {
+      "url": "/expression/co/situations/passer-entretien.webp",
+      "size": 54214,
+      "revision": "c679f24c5bfd4b0e"
+    },
+    {
+      "url": "/expression/co/situations/payer-par-carte.webp",
+      "size": 93122,
+      "revision": "bfe5bd866139119d"
+    },
+    {
+      "url": "/expression/co/situations/perdre-cles.webp",
+      "size": 52550,
+      "revision": "b4e67110e3b970c8"
+    },
+    {
+      "url": "/expression/co/situations/planter-arbre.webp",
+      "size": 133172,
+      "revision": "7bad17fcb92588a2"
+    },
+    {
+      "url": "/expression/co/situations/porter-sac.webp",
+      "size": 91894,
+      "revision": "5c363609fd0719ac"
+    },
+    {
+      "url": "/expression/co/situations/postuler-emploi.webp",
+      "size": 58052,
+      "revision": "534a13db0d488499"
+    },
+    {
+      "url": "/expression/co/situations/prendre-conge.webp",
+      "size": 72592,
+      "revision": "a6550b5ff2d4d07d"
+    },
+    {
+      "url": "/expression/co/situations/prendre-des-nouvelles-sante.webp",
+      "size": 57402,
+      "revision": "07c28a039d067d60"
+    },
+    {
+      "url": "/expression/co/situations/prendre-petit-dejeuner.webp",
+      "size": 74890,
+      "revision": "8d6dabf9924c8662"
+    },
+    {
+      "url": "/expression/co/situations/prendre-photo-groupe.webp",
+      "size": 100900,
+      "revision": "5ef5943e7b3e9380"
+    },
+    {
+      "url": "/expression/co/situations/prendre-rdv.webp",
+      "size": 55200,
+      "revision": "43af2d72134744c9"
+    },
+    {
+      "url": "/expression/co/situations/prendre-rendez-vous-dentiste.webp",
+      "size": 73614,
+      "revision": "22c6d8738269c3d2"
+    },
+    {
+      "url": "/expression/co/situations/presenter-collegue.webp",
+      "size": 80766,
+      "revision": "dad24d349c5ac52a"
+    },
+    {
+      "url": "/expression/co/situations/presenter.webp",
+      "size": 67282,
+      "revision": "0890a2fb3f3210ee"
+    },
+    {
+      "url": "/expression/co/situations/prolonger-emprunt.webp",
+      "size": 84582,
+      "revision": "b692b76deff4e5ce"
+    },
+    {
+      "url": "/expression/co/situations/promener-chien.webp",
+      "size": 109066,
+      "revision": "7497d868381bd20e"
+    },
+    {
+      "url": "/expression/co/situations/proposer-activite.webp",
+      "size": 89840,
+      "revision": "b1ab568567d34f89"
+    },
+    {
+      "url": "/expression/co/situations/proposer-aide.webp",
+      "size": 94176,
+      "revision": "d1590000cc906a1b"
+    },
+    {
+      "url": "/expression/co/situations/proposer-film.webp",
+      "size": 52314,
+      "revision": "f9c21465e0b33be2"
+    },
+    {
+      "url": "/expression/co/situations/proposer-sortie.webp",
+      "size": 57298,
+      "revision": "03d0bd38e67f3b8c"
+    },
+    {
+      "url": "/expression/co/situations/raconter-un-voyage.webp",
+      "size": 94518,
+      "revision": "bf22496526ecb684"
+    },
+    {
+      "url": "/expression/co/situations/raconter-une-journee.webp",
+      "size": 77818,
+      "revision": "111884d93a4d3e82"
+    },
+    {
+      "url": "/expression/co/situations/recevoir-colis.webp",
+      "size": 46144,
+      "revision": "797933c64bd74f00"
+    },
+    {
+      "url": "/expression/co/situations/recharger-carte-transport.webp",
+      "size": 63306,
+      "revision": "e3c887988bbfbcf1"
+    },
+    {
+      "url": "/expression/co/situations/refuser.webp",
+      "size": 61092,
+      "revision": "321ee855115b9535"
+    },
+    {
+      "url": "/expression/co/situations/regarder-match.webp",
+      "size": 67072,
+      "revision": "9dd6c20f10ea24aa"
+    },
+    {
+      "url": "/expression/co/situations/regarder-television.webp",
+      "size": 54230,
+      "revision": "0a7c5cf19b6bcb7e"
+    },
+    {
+      "url": "/expression/co/situations/remercier.webp",
+      "size": 69096,
+      "revision": "1d51a0db725b9ca7"
+    },
+    {
+      "url": "/expression/co/situations/remplir-formulaire.webp",
+      "size": 62384,
+      "revision": "28bbdd73eefec4a2"
+    },
+    {
+      "url": "/expression/co/situations/rencontrer-ami.webp",
+      "size": 66248,
+      "revision": "bc655cf1fbed4da0"
+    },
+    {
+      "url": "/expression/co/situations/rendre-article.webp",
+      "size": 74180,
+      "revision": "f6990634254f14e2"
+    },
+    {
+      "url": "/expression/co/situations/rendre-devoir.webp",
+      "size": 59066,
+      "revision": "0b96cd79f4a6f225"
+    },
+    {
+      "url": "/expression/co/situations/renouveler-passeport.webp",
+      "size": 64376,
+      "revision": "9df1276dd07f7b77"
+    },
+    {
+      "url": "/expression/co/situations/rentrer-maison.webp",
+      "size": 41944,
+      "revision": "43c855e3d8fb647b"
+    },
+    {
+      "url": "/expression/co/situations/repondre-email.webp",
+      "size": 60530,
+      "revision": "dd3a77013d2a63e9"
+    },
+    {
+      "url": "/expression/co/situations/reporter-rdv.webp",
+      "size": 53508,
+      "revision": "a78d9cd0146abcd7"
+    },
+    {
+      "url": "/expression/co/situations/reserver-hotel.webp",
+      "size": 77442,
+      "revision": "ca45d49179f4c108"
+    },
+    {
+      "url": "/expression/co/situations/reserver-musee.webp",
+      "size": 64242,
+      "revision": "7b6e81ceab829a7c"
+    },
+    {
+      "url": "/expression/co/situations/reserver-table-restaurant.webp",
+      "size": 73736,
+      "revision": "dc89008a490b7f21"
+    },
+    {
+      "url": "/expression/co/situations/reserver-visite-guidee.webp",
+      "size": 75538,
+      "revision": "9d235356da296e9a"
+    },
+    {
+      "url": "/expression/co/situations/retirer-de-largent.webp",
+      "size": 74956,
+      "revision": "49b187b014608ff9"
+    },
+    {
+      "url": "/expression/co/situations/retrouver-cles.webp",
+      "size": 73880,
+      "revision": "3dbeeff8d6ed9eae"
+    },
+    {
+      "url": "/expression/co/situations/retrouver-objet-perdu.webp",
+      "size": 66264,
+      "revision": "e7a319cc055ba9de"
+    },
+    {
+      "url": "/expression/co/situations/s-excuser.webp",
+      "size": 43822,
+      "revision": "7f04956b63028543"
+    },
+    {
+      "url": "/expression/co/situations/saluer.webp",
+      "size": 78946,
+      "revision": "2644dd4cd6d846dd"
+    },
+    {
+      "url": "/expression/co/situations/signaler-allergie.webp",
+      "size": 63894,
+      "revision": "2e8fdf71c081896c"
+    },
+    {
+      "url": "/expression/co/situations/signaler-objet-perdu.webp",
+      "size": 59784,
+      "revision": "2c9c0591bd8f3a2c"
+    },
+    {
+      "url": "/expression/co/situations/signaler-panne.webp",
+      "size": 76750,
+      "revision": "608586f56b1cd2d4"
+    },
+    {
+      "url": "/expression/co/situations/signaler-probleme.webp",
+      "size": 64998,
+      "revision": "54db0645d4f30469"
+    },
+    {
+      "url": "/expression/co/situations/signaler-retard-train.webp",
+      "size": 81546,
+      "revision": "266da80be18ca998"
+    },
+    {
+      "url": "/expression/co/situations/signer-bail.webp",
+      "size": 68198,
+      "revision": "ae8f7c70babc9548"
+    },
+    {
+      "url": "/expression/co/situations/sincrire-assurances.webp",
+      "size": 80438,
+      "revision": "f01e572af6c4cff0"
+    },
+    {
+      "url": "/expression/co/situations/sincrire-club-sport.webp",
+      "size": 81424,
+      "revision": "9fa5e1f29e6daf0a"
+    },
+    {
+      "url": "/expression/co/situations/sinscrire-cours.webp",
+      "size": 75900,
+      "revision": "4e37215924838d33"
+    },
+    {
+      "url": "/expression/co/situations/souhaiter-bon-anniversaire.webp",
+      "size": 99618,
+      "revision": "d8375fd1542c82d1"
+    },
+    {
+      "url": "/expression/co/situations/souhaiter-bonne-annee.webp",
+      "size": 86864,
+      "revision": "5aa773ce4c8e527d"
+    },
+    {
+      "url": "/expression/co/situations/souhaiter-bonnes-vacances.webp",
+      "size": 60290,
+      "revision": "b168558f251a8cfc"
+    },
+    {
+      "url": "/expression/co/situations/tenir-porte.webp",
+      "size": 45530,
+      "revision": "14bca3200397bb69"
+    },
+    {
+      "url": "/expression/co/situations/traduire-menu.webp",
+      "size": 92316,
+      "revision": "2904bfe8392e7567"
+    },
+    {
+      "url": "/expression/co/situations/trier-dechets.webp",
+      "size": 68512,
+      "revision": "205ebf3285b2d621"
+    },
+    {
+      "url": "/expression/co/situations/visiter-appartement.webp",
+      "size": 61862,
+      "revision": "2c28681cabf91210"
+    },
+    {
+      "url": "/expression/co/situations/visiter-exposition.webp",
+      "size": 70622,
+      "revision": "1794bce64b53ed42"
+    },
+    {
+      "url": "/expression/co/situations/visiter-zoo.webp",
+      "size": 114190,
+      "revision": "7973f598506eee85"
     },
     {
       "url": "/gram/images/R2/description-1.webp",

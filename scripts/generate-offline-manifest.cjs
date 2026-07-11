@@ -20,6 +20,7 @@ const STATIC_IMAGE_DIRS = [
   "assets/math",
   "assets/letters/img",
   "assets/expression/images-temp",
+  "expression/co/situations",
 ];
 
 const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);
