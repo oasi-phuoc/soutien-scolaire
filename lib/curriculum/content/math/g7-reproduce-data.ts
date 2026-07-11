@@ -134,7 +134,8 @@ function assertBounds(id: string, figure: GridFigure, max: number, evenOnly: boo
 
 // ── Exercice 1 — 50 figures copie (grille 10×10, ≥1 point) ─────────────────
 
-const FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
+/** Pool copie 10×10 — aussi réutilisé par G7.5 (rotation). */
+export const G7_COPY_FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
   // Conservées / améliorées
   { id: "house", label: "Maison", figure: fig([...poly([[2, 5], [5, 2], [8, 5]]), ...rect(2, 5, 6, 4), ...rect(4, 7, 2, 2), ...rect(3, 6, 1, 1), ...rect(6, 6, 1, 1)], [{ x: 5, y: 6 }]) },
   // Fusée (modèle fourni)
@@ -330,9 +331,9 @@ const FIGURES: Array<{ id: string; label: string; figure: GridFigure }> = [
   ], [{ x: 5, y: 3 }]) },
 ];
 
-for (const { id, figure } of FIGURES) assertBounds(id, figure, G7_GRID_SIZE, false);
+for (const { id, figure } of G7_COPY_FIGURES) assertBounds(id, figure, G7_GRID_SIZE, false);
 
-const COPY_TASKS: ReproduceTask[] = FIGURES.map(({ id, label, figure }) => ({
+const COPY_TASKS: ReproduceTask[] = G7_COPY_FIGURES.map(({ id, label, figure }) => ({
   id: `copy-${id}`,
   kind: "copy" as const,
   label,

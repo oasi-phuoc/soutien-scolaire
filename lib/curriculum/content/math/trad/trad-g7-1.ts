@@ -1,58 +1,59 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string) =>
+  ({ fr, en, ar, fa, ti, uk });
+
 export const TRAD_G7_1: SubmoduleTrad = {
   submoduleId: "G7-1",
-  title: {
-    fr: "Notion d'échelle",
-    en: "Notion of scale",
-    ar: "مفهوم المقياس",
-    fa: "مفهوم مقیاس",
-    ti: "ናይ ስኬል ሓሳብ",
-    uk: "Поняття масштабу",
-  },
+  title: S(
+    "Reproduction de figures",
+    "Reproducing figures",
+    "إعادة رسم الأشكال",
+    "بازتولید شکل‌ها",
+    "ምድጋም ስእልታት",
+    "Відтворення фігур",
+  ),
+  blocks: [
+    { text: S("Reproduire sur un quadrillage", "Reproducing on a grid", "إعادة الرسم على شبكة", "بازتولید روی شبکه", "ኣብ ካርታ ምድጋም", "Відтворення на сітці") },
+    { text: S(
+      "Sur un quadrillage, une figure est formée de segments droits et parfois de points marqués aux intersections.",
+      "On a grid, a figure is made of straight segments and sometimes dots at intersections.",
+      "على الشبكة، يتكوّن الشكل من قطع مستقيمة وأحيانًا نقاط عند التقاطعات.",
+      "روی شبکه، شکل از پاره‌خط‌ها و گاهی نقاط در تقاطع‌ها ساخته می‌شود.",
+      "ኣብ ካርታ፣ ስእሊ ካብ ቀጥታዊ መስመራትን ነጥብታትን ዝቖመ ዩ።",
+      "На сітці фігура складається з відрізків і іноді точок на перетинах.",
+    ) },
+    { text: S("Reproduire à l'identique", "Copy exactly", "النسخ بنفس الحجم", "کپی دقیق", "ብተመሳሳሊ ምድጋም", "Точне копіювання") },
+    { label: S("", "", "", "", "", ""), items: {
+      fr: ["Observer la figure modèle.", "Compter les cases pour placer chaque segment.", "Vérifier la même taille et la même orientation."],
+      en: ["Observe the model figure.", "Count squares to place each segment.", "Check the same size and orientation."],
+      ar: ["لاحظ الشكل النموذجي.", "عدّ المربعات لوضع كل قطعة.", "تحقق من نفس الحجم والاتجاه."],
+      fa: ["شکل مدل را ببینید.", "خانه‌ها را بشمارید تا هر پاره‌خط را بگذارید.", "همان اندازه و جهت را بررسی کنید."],
+      ti: ["ነቲ ሞዴል ስእሊ ተዓዘብ።", "ነፍሲ ወከፍ መስመር ንምቕማጥ ካርታታት ቁጸር።", "ተመሳሳሊ ዓቐንን ኣንፈትን ኣረጋግጽ።"],
+      uk: ["Спостерігайте модель.", "Рахуйте клітинки для кожного відрізка.", "Перевірте розмір і орієнтацію."],
+    } },
+    { text: S("Agrandir ou réduire", "Enlarge or reduce", "التكبير أو التصغير", "بزرگ‌نمایی یا کوچک‌نمایی", "ምዕባይ ወይ ምንኣስ", "Збільшити або зменшити") },
+    { label: S("", "", "", "", "", ""), items: {
+      fr: ["Réduire ÷2 : modèle 10×10 → grille 5×5.", "Agrandir ×2 : modèle 5×5 → grille 10×10."],
+      en: ["Reduce ÷2: 10×10 model → 5×5 grid.", "Enlarge ×2: 5×5 model → 10×10 grid."],
+      ar: ["تصغير ÷2: نموذج 10×10 → شبكة 5×5.", "تكبير ×2: نموذج 5×5 → شبكة 10×10."],
+      fa: ["کاهش ÷2: مدل ۱۰×۱۰ → شبکه ۵×۵.", "بزرگ‌نمایی ×۲: مدل ۵×۵ → شبکه ۱۰×۱۰."],
+      ti: ["ምንኣስ ÷2: ሞዴል 10×10 → ካርታ 5×5.", "ምዕባይ ×2: ሞዴል 5×5 → ካርታ 10×10."],
+      uk: ["Зменшити ÷2: модель 10×10 → сітка 5×5.", "Збільшити ×2: модель 5×5 → сітка 10×10."],
+    } },
+  ],
   paragraphs: {
-    fr: [
-          "Une échelle est le rapport entre la mesure sur un plan (ou une carte) et la mesure réelle. Échelle = distance dessinée / distance réelle.",
-          "Exemple : échelle 1:100 signifie que 1 cm sur le plan correspond à 100 cm = 1 m en réalité.",
-          "Une carte à l'échelle 1:50 000 signifie que 1 cm représente 50 000 cm = 500 m = 0,5 km.",
-          "Échelle de réduction : échelle < 1 (ex. plan de maison). Échelle d'agrandissement : échelle > 1 (ex. plan de cellule biologique).",
-        ],
-    en: [
-          "A scale is the ratio of a drawn measurement to the real measurement. Scale = drawn distance / real distance.",
-          "Example: 1:100 means 1 cm on the plan = 100 cm = 1 m in reality.",
-          "A 1:50,000 map: 1 cm represents 500 m.",
-          "Reduction scale < 1 (house plan). Enlargement scale > 1 (cell diagram).",
-        ],
-    ar: [
-          "المقياس هو نسبة المسافة المرسومة إلى المسافة الحقيقية.",
-          "مثال: 1:100 يعني 1 سم على الخطة = 100 سم = 1 م.",
-          "خريطة 1:50000: 1 سم يمثل 500 م.",
-          "مقياس التصغير < 1. مقياس التكبير > 1.",
-        ],
-    fa: [
-          "مقیاس نسبت فاصله رسم‌شده به فاصله واقعی است.",
-          "مثال: 1:100 یعنی 1 سانتیمتر روی نقشه = 1 متر در واقعیت.",
-          "نقشه 1:50000: 1 سانتیمتر نشان‌دهنده 500 متر است.",
-          "مقیاس کوچک‌سازی < 1. مقیاس بزرگ‌سازی > 1.",
-        ],
-    ti: [
-          "ስኬል ናይ ስዕሊ ርሕቀት ናብ ናህሰ ርሕቀት ሕጊ ዩ.",
-          "ምሳሌ: 1:100 ዘምልክት 1 ሰም ናብ ሰሌዳ = 100 ሰም = 1 ም ኣብ ሓቂ ዓለም.",
-          "ናይ 1:50000 ካርታ: 1 ሰም 500 ም ዘርኢ ዩ.",
-          "ምቕናስ ስኬል < 1. ምዕባይ ስኬል > 1.",
-        ],
-    uk: [
-          "Масштаб — відношення відстані на плані до реальної відстані.",
-          "Приклад: 1:100 означає, що 1 см на плані = 1 м у реальності.",
-          "Карта 1:50 000: 1 см = 500 м.",
-          "Масштаб зменшення < 1; збільшення > 1.",
-        ],
+    fr: ["Reproduire une figure sur un quadrillage : à l'identique, en agrandissant ou en réduisant."],
+    en: ["Reproduce a figure on a grid: exactly, enlarged, or reduced."],
   },
   consignes: {
-    "g6-1-e1": { fr: "Échelle 1:100. 3 cm sur le plan = combien de cm en réalité ?", en: "Scale 1:100. 3 cm sur le plan = combien de cm en realite ?" },
-    "g6-1-e2": { fr: "Échelle 1:1000. 5 cm sur la carte = combien de m en réalité ?", en: "Scale 1:1000. 5 cm sur la carte = combien de m en realite ?" },
-    "g6-1-e3": { fr: "Quelle est la signification de l'échelle 1:200 ?", en: "What is the meaning of the scale 1:200?" },
-    "g6-1-e4": { fr: "Une échelle de 1:50 est-elle un agrandissement ou une réduction ?", en: "Is a scale of 1:50 an enlargement or a reduction?" },
-    "g6-1-e5": { fr: "Échelle 1:500. 4 cm sur le plan = ? m en réalité.", en: "Scale 1:500. 4 cm sur le plan = ? m en realite." },
+    g7Reproduce: S(
+      "Reproduisez la figure sur le quadrillage.",
+      "Reproduce the figure on the grid.",
+      "أعد رسم الشكل على الشبكة.",
+      "شکل را روی شبکه بازتولید کنید.",
+      "ነቲ ስእሊ ኣብ ካርታ ድገም።",
+      "Відтворіть фігуру на сітці.",
+    ),
   },
 };

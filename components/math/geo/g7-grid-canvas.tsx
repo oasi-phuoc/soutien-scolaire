@@ -53,6 +53,12 @@ export function G7GridCanvas({
   validated,
   axis,
   axisColor = "#dc2626",
+  /** Point central (symétrie centrale) — disque bleu. */
+  centerPoint,
+  centerColor = "#2563eb",
+  /** Trait d'exemple (pointillés), ex. M → M' via le centre. */
+  guideLine,
+  guideColor = "#93c5fd",
   /** Flèche de translation (vecteur) en couleur thème. */
   arrow,
   arrowColor = "#2563eb",
@@ -75,6 +81,10 @@ export function G7GridCanvas({
   validated?: boolean;
   axis?: G7SymAxis;
   axisColor?: string;
+  centerPoint?: GridPoint | null;
+  centerColor?: string;
+  guideLine?: { x1: number; y1: number; x2: number; y2: number } | null;
+  guideColor?: string;
   arrow?: { x1: number; y1: number; x2: number; y2: number } | null;
   arrowColor?: string;
   onPointClick?: (p: GridPoint) => void;
@@ -187,6 +197,28 @@ export function G7GridCanvas({
           />
         );
       })()}
+
+      {guideLine && (
+        <line
+          x1={margin + guideLine.x1 * cell}
+          y1={margin + guideLine.y1 * cell}
+          x2={margin + guideLine.x2 * cell}
+          y2={margin + guideLine.y2 * cell}
+          stroke={guideColor}
+          strokeWidth={2}
+          strokeDasharray="5 4"
+          strokeLinecap="round"
+        />
+      )}
+
+      {centerPoint && (
+        <circle
+          cx={margin + centerPoint.x * cell}
+          cy={margin + centerPoint.y * cell}
+          r={Math.max(5, dotR + 2)}
+          fill={centerColor}
+        />
+      )}
 
       {arrow && (() => {
         const x1 = margin + arrow.x1 * cell;
