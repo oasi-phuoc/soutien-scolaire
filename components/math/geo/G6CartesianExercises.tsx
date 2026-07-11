@@ -15,8 +15,11 @@ import {
   isValidVertexPlacement,
   inCartesianGrid,
   type LabeledPoint,
+  type LineScenario,
   type LineScenarioQuestion,
+  type PerpParallelScenario,
   type SegmentLine,
+  type VertexPuzzle,
 } from "@/lib/curriculum/content/math/g6-plan-data";
 import { AppSelect } from "@/components/ui/AppSelect";
 
@@ -31,10 +34,41 @@ const PLACE_POINT_FILL = "var(--color-accent-alg)";
 const PLACE_CORRECTION_FILL = "#d97706";
 const PLACE_PREVIEW_LINE = "#93c5fd";
 
+export type G6LineIntersectSnapshot = {
+  kind: "g6_line_intersect";
+  scenario: LineScenario;
+  answers: Record<number, string>;
+};
+
+export type G6CartesianPlaceSnapshot = {
+  kind: "g6_cartesian_place";
+  targets: LabeledPoint[];
+  placements: Record<string, { x: number; y: number } | null>;
+};
+
+export type G6FindVertexSnapshot = {
+  kind: "g6_find_vertex";
+  puzzle: VertexPuzzle;
+  placement: { x: number; y: number } | null;
+};
+
+export type G6PerpParallelSnapshot = {
+  kind: "g6_perp_parallel";
+  scenario: PerpParallelScenario;
+  placements: Record<string, { x: number; y: number } | null>;
+};
+
+export type G6CartesianEvalSnapshot =
+  | G6LineIntersectSnapshot
+  | G6CartesianPlaceSnapshot
+  | G6FindVertexSnapshot
+  | G6PerpParallelSnapshot;
+
 type ExProps = {
   exNum: number;
   validateCommand: number;
-  onValidated: (score: number, max: number) => void;
+  onValidated: (score: number, max: number, results?: boolean[], snapshot?: G6CartesianEvalSnapshot) => void;
+  reviewSnapshot?: G6CartesianEvalSnapshot;
   consigne?: string;
   consigneLang?: string;
   consigneDir?: "ltr" | "rtl";
@@ -194,9 +228,11 @@ function CartesianPlane({
       <text x={cx} y={pad - 8} textAnchor="middle" dominantBaseline="auto" fontSize="10" fontWeight="bold" fill="#334155">y</text>
 
       {lines?.map((ln) => {
-        const clipped = clipLineToRect(ln.x1, ln.y1, ln.x2, ln.y2, xMin, xMax, yMin, yMax);
-        if (!clipped) return null;
-        const [sx1, sy1, sx2, sy2] = clipped;
+        const seg = ln.infinite
+          ? clipLineToRect(ln.x1, ln.y1, ln.x2, ln.y2, xMin, xMax, yMin, yMax)
+          : [ln.x1, ln.y1, ln.x2, ln.y2] as [number, number, number, number];
+        if (!seg) return null;
+        const [sx1, sy1, sx2, sy2] = seg;
         const [px1, py1] = toSvg(sx1, sy1, cx, cy, unit);
         const [px2, py2] = toSvg(sx2, sy2, cx, cy, unit);
         return <line key={ln.id} x1={px1} y1={py1} x2={px2} y2={py2} stroke={ln.color} strokeWidth="2.5" />;
@@ -504,7 +540,7 @@ function LineQuestionBlock({
               emptyOption={{ value: "", label: "—" }}
               error={isWrong}
               size="sm"
-              className="min-w-[8rem]"
+              className="min-w-[13rem]"
             />
             <span>et</span>
             <AppSelect
@@ -516,7 +552,7 @@ function LineQuestionBlock({
               emptyOption={{ value: "", label: "—" }}
               error={isWrong}
               size="sm"
-              className="min-w-[8rem]"
+              className="min-w-[13rem]"
             />
           </div>
         )}
@@ -629,19 +665,30 @@ function checkLineAnswer(q: LineScenarioQuestion, raw: string): boolean {
   return Math.abs(x - q.answer[0]) < 0.01 && Math.abs(y - q.answer[1]) < 0.01;
 }
 
-export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
-  const [scenario] = useState(() => pick1(LINE_SCENARIOS));
-  const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_line_intersect";
+  const [scenario] = useState(() => (readOnly ? reviewSnapshot.scenario : pick1(LINE_SCENARIOS)));
+  const [answers, setAnswers] = useState<Record<number, string>>(() =>
+    readOnly ? reviewSnapshot.answers : {},
+  );
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? scenario.questions.map((q, i) => checkLineAnswer(q, answers[i] ?? ""))
+      : [],
+  );
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = scenario.questions.map((q, i) => checkLineAnswer(q, answers[i] ?? ""));
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, scenario, answers, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_line_intersect",
+      scenario,
+      answers,
+    });
+  }, [validated, readOnly, scenario, answers, onValidated]);
 
   useValidateTrigger(validateCommand, doValidate);
 
@@ -653,7 +700,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, c
       <CartesianPlane
         xMin={scenario.xMin} xMax={scenario.xMax}
         yMin={scenario.yMin} yMax={scenario.yMax}
-        lines={scenario.lines}
+        lines={scenario.lines.map((l) => ({ ...l, infinite: true }))}
         gridStep={1}
         labelStep={2}
       />
@@ -673,14 +720,24 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, c
 
 // ── Ex 11 : placer des points ─────────────────────────────────────────────────
 
-export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
-  const [targets] = useState(() => pick1(CARTESIAN_PLACE_POOLS));
+export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_cartesian_place";
+  const [targets] = useState(() => (readOnly ? reviewSnapshot.targets : pick1(CARTESIAN_PLACE_POOLS)));
   const [selected, setSelected] = useState<string | null>(null);
   const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>(() =>
-    Object.fromEntries(targets.map((p) => [p.label, null])),
+    readOnly
+      ? reviewSnapshot.placements
+      : Object.fromEntries(targets.map((p) => [p.label, null])),
   );
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? targets.map((pt) => {
+          const p = placements[pt.label];
+          return p !== null && p.x === pt.x && p.y === pt.y;
+        })
+      : [],
+  );
 
   const xMin = -10;
   const xMax = 10;
@@ -688,7 +745,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
   const yMax = 10;
 
   const onMapClick = (gx: number, gy: number) => {
-    if (validated || !selected) return;
+    if (validated || readOnly || !selected) return;
     setPlacements((p) => {
       const next = { ...p };
       for (const k of Object.keys(next)) {
@@ -701,15 +758,19 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
   };
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = targets.map((pt) => {
       const p = placements[pt.label];
       return p !== null && p.x === pt.x && p.y === pt.y;
     });
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, targets, placements, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_cartesian_place",
+      targets,
+      placements,
+    });
+  }, [validated, readOnly, targets, placements, onValidated]);
 
   useValidateTrigger(validateCommand, doValidate);
 
@@ -744,7 +805,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
             <button
               key={pt.label}
               type="button"
-              disabled={validated}
+              disabled={validated || readOnly}
               onClick={() => setSelected(pt.label)}
               className={`flex h-8 items-center gap-1 rounded-lg border px-1.5 text-xs font-mono transition-colors ${
                 isSel
@@ -776,7 +837,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
         placedPoints={placed}
         wrongPlacements={wrongPlacements}
         correctionPoints={correctionPoints}
-        onClick={onMapClick}
+        onClick={readOnly ? undefined : onMapClick}
       />
     </div>
   );
@@ -784,35 +845,45 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
 
 // ── Ex 12 : trouver un sommet manquant ────────────────────────────────────────
 
-export function G6FindVertexExercise({ exNum, validateCommand, onValidated, consigneLang, consigneDir }: ExProps) {
-  const [puzzle] = useState(() => pick1(VERTEX_PUZZLES));
-  const [selected, setSelected] = useState<string>("D");
-  const [placement, setPlacement] = useState<{ x: number; y: number } | null>(null);
-  const [validated, setValidated] = useState(false);
-  const [ok, setOk] = useState(false);
-
+export function G6FindVertexExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigneLang, consigneDir }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_find_vertex";
+  const [puzzle] = useState(() => (readOnly ? reviewSnapshot.puzzle : pick1(VERTEX_PUZZLES)));
+  const [selected, setSelected] = useState<string | null>(null);
+  const [placement, setPlacement] = useState<{ x: number; y: number } | null>(() =>
+    readOnly ? reviewSnapshot.placement : null,
+  );
   const [a, b, c] = puzzle.points;
+  const initialOk = readOnly && placement !== null
+    && inCartesianGrid(placement.x, placement.y)
+    && isValidVertexPlacement(puzzle.type, a!, b!, c!, placement);
+  const [validated, setValidated] = useState(readOnly);
+  const [ok, setOk] = useState(!!initialOk);
+
   const openSides: SegmentLine[] = [
     { id: "ab", x1: a!.x, y1: a!.y, x2: b!.x, y2: b!.y, color: PLACE_POINT_FILL, label: "AB" },
     { id: "bc", x1: b!.x, y1: b!.y, x2: c!.x, y2: c!.y, color: PLACE_POINT_FILL, label: "BC" },
   ];
 
   const onMapClick = (gx: number, gy: number) => {
-    if (validated || selected !== "D") return;
+    if (validated || readOnly || selected !== "D") return;
     setPlacement({ x: gx, y: gy });
-    setSelected("D");
+    setSelected(null);
   };
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const d = placement;
     const res = d !== null
       && inCartesianGrid(d.x, d.y)
       && isValidVertexPlacement(puzzle.type, a!, b!, c!, d);
     setOk(res);
     setValidated(true);
-    onValidated(res ? 1 : 0, 1);
-  }, [validated, placement, puzzle, a, b, c, onValidated]);
+    onValidated(res ? 1 : 0, 1, [res], {
+      kind: "g6_find_vertex",
+      puzzle,
+      placement,
+    });
+  }, [validated, readOnly, placement, puzzle, a, b, c, onValidated]);
 
   useValidateTrigger(validateCommand, doValidate);
 
@@ -829,7 +900,7 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
     : [];
 
   const previewLines: SegmentLine[] = [];
-  if (placement) {
+  if (placement && (!validated || ok)) {
     previewLines.push(
       { id: "cd", x1: c!.x, y1: c!.y, x2: placement.x, y2: placement.y, color: PLACE_PREVIEW_LINE, label: "CD" },
       { id: "da", x1: placement.x, y1: placement.y, x2: a!.x, y2: a!.y, color: PLACE_PREVIEW_LINE, label: "DA" },
@@ -855,7 +926,7 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          disabled={validated}
+          disabled={validated || readOnly}
           onClick={() => setSelected("D")}
           className={`flex h-9 min-w-[3rem] items-center justify-center rounded-lg border px-4 text-sm font-bold transition-colors ${
             selected === "D" && !validated
@@ -870,6 +941,9 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
           D
         </button>
       </div>
+      {!readOnly && (
+        <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur D, puis sur le repère.</p>
+      )}
       <CartesianPlane
         xMin={-10}
         xMax={10}
@@ -882,7 +956,7 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
         placedPoints={placed}
         wrongPlacements={wrongPlacements}
         correctionPoints={correctionPoints}
-        onClick={onMapClick}
+        onClick={readOnly ? undefined : onMapClick}
       />
     </div>
   );
@@ -892,20 +966,29 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, cons
 
 const PERP_PARALLEL_TARGETS = ["D", "E"] as const;
 
-export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
-  const [scenario] = useState(() => pick1(PERP_PARALLEL_SCENARIOS));
+export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_perp_parallel";
+  const [scenario] = useState(() => (readOnly ? reviewSnapshot.scenario : pick1(PERP_PARALLEL_SCENARIOS)));
   const [selected, setSelected] = useState<string | null>(null);
-  const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>({
-    D: null,
-    E: null,
+  const [placements, setPlacements] = useState<Record<string, { x: number; y: number } | null>>(() =>
+    readOnly ? reviewSnapshot.placements : { D: null, E: null },
+  );
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() => {
+    if (!readOnly) return [];
+    const { a, b, c } = scenario;
+    const dPt = placements.D;
+    const ePt = placements.E;
+    return [
+      dPt !== null && isValidPerpParallelD(a, b, c, dPt),
+      ePt !== null && isValidPerpParallelE(a, b, c, ePt),
+    ];
   });
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
 
   const fixedPoints = [scenario.a, scenario.b, scenario.c];
 
   const onMapClick = (gx: number, gy: number) => {
-    if (validated || !selected) return;
+    if (validated || readOnly || !selected) return;
     setPlacements((p) => {
       const next = { ...p };
       for (const k of Object.keys(next)) {
@@ -918,7 +1001,7 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
   };
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const { a, b, c } = scenario;
     const dPt = placements.D;
     const ePt = placements.E;
@@ -928,8 +1011,12 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
     ];
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, placements, scenario, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_perp_parallel",
+      scenario,
+      placements,
+    });
+  }, [validated, readOnly, placements, scenario, onValidated]);
 
   useValidateTrigger(validateCommand, doValidate);
 
@@ -964,11 +1051,11 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
 
   const previewLines: SegmentLine[] = [];
   const c = scenario.c;
-  if (placements.D) {
+  if (placements.D && (!validated || results[0])) {
     const d = placements.D;
     previewLines.push({ id: "cd", x1: c.x, y1: c.y, x2: d.x, y2: d.y, color: PLACE_PREVIEW_LINE, label: "CD" });
   }
-  if (placements.E) {
+  if (placements.E && (!validated || results[1])) {
     const e = placements.E;
     previewLines.push({ id: "ce", x1: c.x, y1: c.y, x2: e.x, y2: e.y, color: PLACE_PREVIEW_LINE, label: "CE" });
   }
@@ -1009,7 +1096,7 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
             <button
               key={label}
               type="button"
-              disabled={validated}
+              disabled={validated || readOnly}
               onClick={() => setSelected(label)}
               className={`flex h-9 min-w-[3rem] items-center justify-center rounded-lg border px-4 text-sm font-bold transition-colors ${
                 isSel
@@ -1038,9 +1125,11 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
         placedPoints={placed}
         wrongPlacements={wrongPlacements}
         correctionPoints={correctionPoints}
-        onClick={onMapClick}
+        onClick={readOnly ? undefined : onMapClick}
       />
-      <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur une pastille, puis sur le repère.</p>
+      {!readOnly && (
+        <p className="text-xs text-[var(--color-text-secondary)]">Cliquez sur une pastille, puis sur le repère.</p>
+      )}
     </div>
   );
 }

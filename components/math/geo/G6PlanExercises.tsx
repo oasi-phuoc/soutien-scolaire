@@ -31,6 +31,7 @@ import {
   formatCell,
   parseCellInput,
 } from "@/lib/curriculum/content/math/g6-plan-data";
+import type { G6CartesianEvalSnapshot } from "@/components/math/geo/G6CartesianExercises";
 
 const MATH_TEXT_INPUT_BASE =
   "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 " +
@@ -70,7 +71,20 @@ export type G6Q2FigureSnapshot = {
   answers: XYAnswer[];
 };
 
-export type G6EvalSnapshot = G6GridReadSnapshot | G6GridPlaceSnapshot | G6Q1FigureSnapshot | G6Q2FigureSnapshot;
+export type G6QAllFigureSnapshot = {
+  kind: "g6_qall_figure";
+  figure: SignedCartesianFigure;
+  askedPoints: Array<{ label: string; x: number; y: number }>;
+  answers: XYAnswer[];
+};
+
+export type G6EvalSnapshot =
+  | G6GridReadSnapshot
+  | G6GridPlaceSnapshot
+  | G6Q1FigureSnapshot
+  | G6Q2FigureSnapshot
+  | G6QAllFigureSnapshot
+  | G6CartesianEvalSnapshot;
 
 type ConsigneProps = {
   consigne?: string;
@@ -496,23 +510,39 @@ function genQAllFigureExercise() {
 
 // ── Exercice 3 (G6.2) : coordonnées sur figure — 4 quadrants ────────────────
 
-export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated, consigne, consigneLang, consigneDir }: ExProps) {
-  const [{ figure, askedPoints }] = useState(() => genQAllFigureExercise());
+export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated, reviewSnapshot, consigne, consigneLang, consigneDir }: ExProps) {
+  const readOnly = reviewSnapshot?.kind === "g6_qall_figure";
+  const [{ figure, askedPoints }] = useState(() =>
+    readOnly
+      ? { figure: reviewSnapshot.figure, askedPoints: reviewSnapshot.askedPoints }
+      : genQAllFigureExercise(),
+  );
   const bounds = { xMin: -10, xMax: 10, yMin: -10, yMax: 10 };
-  const [answers, setAnswers] = useState<XYAnswer[]>(() => askedPoints.map(() => ({ x: "", y: "" })));
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
+  const [answers, setAnswers] = useState<XYAnswer[]>(() =>
+    readOnly ? reviewSnapshot.answers : askedPoints.map(() => ({ x: "", y: "" })),
+  );
+  const [validated, setValidated] = useState(readOnly);
+  const [results, setResults] = useState<boolean[]>(() =>
+    readOnly
+      ? askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y))
+      : [],
+  );
   const prev = useRef(-1);
 
   const doValidate = useCallback(() => {
-    if (validated) return;
+    if (validated || readOnly) return;
     const res = askedPoints.map((pt, i) => xyAnswerOk(answers[i] ?? { x: "", y: "" }, pt.x, pt.y));
     setResults(res);
     setValidated(true);
-    onValidated(res.filter(Boolean).length, res.length);
-  }, [validated, askedPoints, answers, onValidated]);
+    onValidated(res.filter(Boolean).length, res.length, res, {
+      kind: "g6_qall_figure",
+      figure,
+      askedPoints,
+      answers,
+    });
+  }, [validated, readOnly, askedPoints, answers, onValidated, figure]);
 
-  useEffect(() => { if (validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [validateCommand, doValidate]);
+  useEffect(() => { if (!readOnly && validateCommand > 0 && validateCommand !== prev.current) { prev.current = validateCommand; doValidate(); } }, [readOnly, validateCommand, doValidate]);
 
   return (
     <div className="space-y-4">
