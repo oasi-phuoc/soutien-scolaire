@@ -448,15 +448,7 @@ export const G7_COPY_FIGURES: Array<{ id: string; label: string; figure: GridFig
   ], [{ x: 6, y: 4 }, { x: 9, y: 4 }]) },
 ];
 
-for (const { id, figure } of G7_COPY_FIGURES) assertBounds(id, figure, G7_GRID_SIZE, false);
-
-const COPY_TASKS: ReproduceTask[] = G7_COPY_FIGURES.map(({ id, label, figure }) => ({
-  id: `copy-${id}`,
-  kind: "copy" as const,
-  label,
-  reference: figure,
-  targetSize: G7_GRID_SIZE,
-}));
+// assertBounds + COPY_TASKS : après ajout des figures ×2 issues de l'ex.3 (voir plus bas)
 
 // ── Exercice 2 — 50 figures ÷2 (modèle 10×10 coords paires → grille 5×5) ───
 
@@ -676,6 +668,34 @@ for (const { id, figure } of SCALE_UP_FIGURES) assertBounds(id, figure, G7_HALF_
 const SCALE_UP_TASKS: ReproduceTask[] = SCALE_UP_FIGURES.map(({ id, label, figure }) => ({
   id: `scale-up-${id}`,
   kind: "scale_up" as const,
+  label,
+  reference: figure,
+  targetSize: G7_GRID_SIZE,
+}));
+
+/** Agrandit une figure 5×5 → 10×10 (coords ×2) pour le pool copie ex.1. */
+function scaleFigureUp(figure: GridFigure, k: number = 2): GridFigure {
+  return fig(
+    figure.segments.map((s) => scaleSegment(s, k)),
+    figure.dots.map((p) => scalePoint(p, k)),
+    figure.size * k,
+  );
+}
+
+// Ex.1 : reprendre les figures de l'ex.3 agrandies sur grille 10×10
+for (const { id, label, figure } of SCALE_UP_FIGURES) {
+  G7_COPY_FIGURES.push({
+    id: `x2-${id}`,
+    label,
+    figure: scaleFigureUp(figure, 2),
+  });
+}
+
+for (const { id, figure } of G7_COPY_FIGURES) assertBounds(id, figure, G7_GRID_SIZE, false);
+
+const COPY_TASKS: ReproduceTask[] = G7_COPY_FIGURES.map(({ id, label, figure }) => ({
+  id: `copy-${id}`,
+  kind: "copy" as const,
   label,
   reference: figure,
   targetSize: G7_GRID_SIZE,
