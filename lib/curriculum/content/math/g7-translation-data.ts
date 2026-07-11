@@ -1,8 +1,16 @@
-import type { GridPoint, GridSegment } from "./g7-reproduce-data";
-import { pointKey, segmentKey } from "./g7-reproduce-data";
+import type { GridFigure, GridPoint, GridSegment } from "./g7-reproduce-data";
+import {
+  G7_COPY_FIGURES,
+  G7_GRID_SIZE,
+  pointKey,
+  segmentKey,
+} from "./g7-reproduce-data";
 
 /** Grille translation G7.4 : 20×20. */
 export const G7_TRANSLATION_SIZE = 20;
+
+/** Décalage pour centrer une figure 10×10 (coords 0…10) sur la grille 20×20. */
+const CENTER_OFFSET = (G7_TRANSLATION_SIZE - G7_GRID_SIZE) / 2; // 5
 
 export type TranslationVector = { dx: number; dy: number };
 
@@ -39,87 +47,118 @@ export function expectedTranslation(task: TranslationTask): {
   };
 }
 
-/** Zone de dessin : toute la grille sauf les points source verrouillés (géré côté UI). */
+/** Zone de dessin : toute la grille (les points source restent verrouillés côté UI). */
 export function isDrawSideTranslation(_p: GridPoint, _task: TranslationTask): boolean {
   return true;
 }
 
-function task(
+function offsetSeg(s: GridSegment, dx: number, dy: number): GridSegment {
+  return { x1: s.x1 + dx, y1: s.y1 + dy, x2: s.x2 + dx, y2: s.y2 + dy };
+}
+
+function offsetDot(p: GridPoint, dx: number, dy: number): GridPoint {
+  return { x: p.x + dx, y: p.y + dy };
+}
+
+function fmtSigned(n: number): string {
+  return n > 0 ? `+${n}` : `${n}`;
+}
+
+/** Vecteurs sûrs pour une figure centrée dans [5, 15] → image dans [0, 20]. */
+const TRANSLATION_VECTORS: TranslationVector[] = [
+  { dx: 4, dy: 0 },
+  { dx: 0, dy: 4 },
+  { dx: 5, dy: 2 },
+  { dx: 3, dy: 3 },
+  { dx: 4, dy: -2 },
+  { dx: -4, dy: 0 },
+  { dx: 0, dy: -4 },
+  { dx: -3, dy: 2 },
+  { dx: 4, dy: -3 },
+  { dx: -5, dy: -2 },
+  { dx: 2, dy: 5 },
+  { dx: -2, dy: 4 },
+  { dx: 5, dy: -1 },
+  { dx: -4, dy: 3 },
+  { dx: 1, dy: -5 },
+  { dx: -5, dy: 1 },
+  { dx: 3, dy: -4 },
+  { dx: -1, dy: 5 },
+  { dx: 5, dy: 0 },
+  { dx: 0, dy: 5 },
+  { dx: -5, dy: 0 },
+  { dx: 0, dy: -5 },
+  { dx: 2, dy: -4 },
+  { dx: -3, dy: -3 },
+  { dx: 4, dy: 2 },
+];
+
+/** Place la flèche pour que la pointe tombe dans un coin cohérent avec le vecteur. */
+function makeArrowFrom(v: TranslationVector): GridPoint {
+  const tipX = v.dx >= 0 ? G7_TRANSLATION_SIZE : 0;
+  const tipY = v.dy >= 0 ? G7_TRANSLATION_SIZE : 0;
+  return { x: tipX - v.dx, y: tipY - v.dy };
+}
+
+function collectCoords(segs: GridSegment[], dots: GridPoint[]): number[] {
+  const vals: number[] = [];
+  for (const s of segs) vals.push(s.x1, s.y1, s.x2, s.y2);
+  for (const d of dots) vals.push(d.x, d.y);
+  return vals;
+}
+
+function assertInGrid(id: string, segs: GridSegment[], dots: GridPoint[], v?: TranslationVector) {
+  const checkSegs = v ? segs.map((s) => translateSegment(s, v)) : segs;
+  const checkDots = v ? dots.map((p) => translatePoint(p, v)) : dots;
+  const vals = collectCoords(checkSegs, checkDots);
+  const bad = vals.filter((n) => !Number.isInteger(n) || n < 0 || n > G7_TRANSLATION_SIZE);
+  if (bad.length) {
+    throw new Error(`${id}: coords hors grille 0…${G7_TRANSLATION_SIZE}: ${bad.slice(0, 8).join(",")}`);
+  }
+}
+
+function figureToTask(
   id: string,
   label: string,
-  dx: number,
-  dy: number,
-  arrowFrom: GridPoint,
-  segs: GridSegment[],
-  dots: GridPoint[] = [],
+  figure: GridFigure,
+  vector: TranslationVector,
 ): TranslationTask {
+  const sourceSegments = figure.segments.map((s) => offsetSeg(s, CENTER_OFFSET, CENTER_OFFSET));
+  const sourceDots = figure.dots.map((p) => offsetDot(p, CENTER_OFFSET, CENTER_OFFSET));
+  assertInGrid(`src-${id}`, sourceSegments, sourceDots);
+  assertInGrid(`img-${id}`, sourceSegments, sourceDots, vector);
+  const arrowFrom = makeArrowFrom(vector);
+  if (
+    arrowFrom.x < 0 || arrowFrom.x > G7_TRANSLATION_SIZE ||
+    arrowFrom.y < 0 || arrowFrom.y > G7_TRANSLATION_SIZE ||
+    arrowFrom.x + vector.dx < 0 || arrowFrom.x + vector.dx > G7_TRANSLATION_SIZE ||
+    arrowFrom.y + vector.dy < 0 || arrowFrom.y + vector.dy > G7_TRANSLATION_SIZE
+  ) {
+    throw new Error(`${id}: flèche hors grille`);
+  }
   return {
-    id,
-    label,
+    id: `T-${id}`,
+    label: `${label} (${fmtSigned(vector.dx)} ; ${fmtSigned(vector.dy)})`,
     width: G7_TRANSLATION_SIZE,
     height: G7_TRANSLATION_SIZE,
-    vector: { dx, dy },
+    vector,
     arrowFrom,
-    sourceSegments: segs,
-    sourceDots: dots,
+    sourceSegments,
+    sourceDots,
   };
 }
 
-const TRANSLATION_TASKS: TranslationTask[] = [
-  task("T01-maison", "Maison (+4 ; +0)", 4, 0, { x: 16, y: 20 }, [{ x1: 0, y1: 3, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 3 }, { x1: 4, y1: 3, x2: 4, y2: 6 }, { x1: 4, y1: 6, x2: 0, y2: 6 }, { x1: 0, y1: 6, x2: 0, y2: 3 }, { x1: 1, y1: 6, x2: 1, y2: 4 }, { x1: 1, y1: 4, x2: 3, y2: 4 }, { x1: 3, y1: 4, x2: 3, y2: 6 }, { x1: 2, y1: 0, x2: 2, y2: 3 }], [{ x: 2, y: 2 }]),
-  task("T02-fleche", "Flèche (+0 ; +4)", 0, 4, { x: 20, y: 16 }, [{ x1: 2, y1: 0, x2: 2, y2: 5 }, { x1: 0, y1: 2, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 2 }, { x1: 4, y1: 2, x2: 0, y2: 2 }, { x1: 1, y1: 5, x2: 3, y2: 5 }, { x1: 3, y1: 5, x2: 3, y2: 6 }, { x1: 3, y1: 6, x2: 1, y2: 6 }], [{ x: 2, y: 3 }]),
-  task("T03-escalier", "Escalier (+5 ; +2)", 5, 2, { x: 15, y: 18 }, [{ x1: 0, y1: 6, x2: 0, y2: 4 }, { x1: 0, y1: 4, x2: 2, y2: 4 }, { x1: 2, y1: 4, x2: 2, y2: 2 }, { x1: 2, y1: 2, x2: 4, y2: 2 }, { x1: 4, y1: 2, x2: 4, y2: 0 }, { x1: 4, y1: 0, x2: 6, y2: 0 }], [{ x: 2, y: 4 }]),
-  task("T04-triangle", "Triangle (+3 ; +3)", 3, 3, { x: 17, y: 17 }, [{ x1: 0, y1: 5, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 6, y2: 5 }, { x1: 6, y1: 5, x2: 0, y2: 5 }, { x1: 1, y1: 4, x2: 5, y2: 4 }], [{ x: 3, y: 2 }]),
-  task("T05-croix", "Croix (+6 ; +1)", 6, 1, { x: 14, y: 19 }, [{ x1: 2, y1: 0, x2: 2, y2: 6 }, { x1: 0, y1: 2, x2: 4, y2: 2 }, { x1: 1, y1: 0, x2: 3, y2: 0 }, { x1: 1, y1: 6, x2: 3, y2: 6 }, { x1: 0, y1: 1, x2: 0, y2: 3 }, { x1: 4, y1: 1, x2: 4, y2: 3 }], [{ x: 2, y: 2 }]),
-  task("T06-u", "U (-4 ; +0)", -4, 0, { x: 20, y: 20 }, [{ x1: 4, y1: 0, x2: 4, y2: 5 }, { x1: 4, y1: 5, x2: 9, y2: 5 }, { x1: 9, y1: 5, x2: 9, y2: 0 }, { x1: 5, y1: 5, x2: 5, y2: 1 }, { x1: 5, y1: 1, x2: 8, y2: 1 }, { x1: 8, y1: 1, x2: 8, y2: 5 }], [{ x: 6, y: 3 }]),
-  task("T07-losange", "Losange (+0 ; -4)", 0, -4, { x: 20, y: 20 }, [{ x1: 3, y1: 4, x2: 6, y2: 7 }, { x1: 6, y1: 7, x2: 3, y2: 10 }, { x1: 3, y1: 10, x2: 0, y2: 7 }, { x1: 0, y1: 7, x2: 3, y2: 4 }, { x1: 3, y1: 4, x2: 3, y2: 10 }], [{ x: 3, y: 7 }]),
-  task("T08-te", "Té (-3 ; +2)", -3, 2, { x: 20, y: 18 }, [{ x1: 3, y1: 0, x2: 9, y2: 0 }, { x1: 6, y1: 0, x2: 6, y2: 6 }, { x1: 4, y1: 2, x2: 8, y2: 2 }, { x1: 5, y1: 6, x2: 7, y2: 6 }], [{ x: 6, y: 2 }]),
-  task("T09-zigzag", "Zigzag (+4 ; -3)", 4, -3, { x: 16, y: 20 }, [{ x1: 0, y1: 3, x2: 2, y2: 6 }, { x1: 2, y1: 6, x2: 4, y2: 3 }, { x1: 4, y1: 3, x2: 6, y2: 6 }, { x1: 6, y1: 6, x2: 6, y2: 8 }, { x1: 6, y1: 8, x2: 0, y2: 8 }], [{ x: 3, y: 5 }]),
-  task("T10-cadre", "Cadre (-5 ; -2)", -5, -2, { x: 20, y: 20 }, [{ x1: 5, y1: 2, x2: 10, y2: 2 }, { x1: 10, y1: 2, x2: 10, y2: 7 }, { x1: 10, y1: 7, x2: 5, y2: 7 }, { x1: 5, y1: 7, x2: 5, y2: 2 }, { x1: 6, y1: 3, x2: 9, y2: 3 }, { x1: 9, y1: 3, x2: 9, y2: 6 }, { x1: 9, y1: 6, x2: 6, y2: 6 }, { x1: 6, y1: 6, x2: 6, y2: 3 }, { x1: 5, y1: 2, x2: 6, y2: 3 }, { x1: 10, y1: 7, x2: 9, y2: 6 }], [{ x: 7, y: 4 }]),
-  task("T11-bateau", "Bateau (+7 ; +0)", 7, 0, { x: 13, y: 20 }, [{ x1: 0, y1: 3, x2: 1, y2: 5 }, { x1: 1, y1: 5, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 0, y2: 3 }, { x1: 3, y1: 3, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 5, y2: 2 }, { x1: 5, y1: 2, x2: 3, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T12-etoile", "Étoile (+0 ; +6)", 0, 6, { x: 20, y: 14 }, [{ x1: 3, y1: 0, x2: 3, y2: 6 }, { x1: 0, y1: 3, x2: 6, y2: 3 }, { x1: 1, y1: 1, x2: 5, y2: 5 }, { x1: 5, y1: 1, x2: 1, y2: 5 }], [{ x: 3, y: 3 }]),
-  task("T13-l", "L (+5 ; -4)", 5, -4, { x: 15, y: 20 }, [{ x1: 0, y1: 4, x2: 0, y2: 10 }, { x1: 0, y1: 10, x2: 4, y2: 10 }, { x1: 1, y1: 4, x2: 1, y2: 9 }, { x1: 1, y1: 9, x2: 4, y2: 9 }, { x1: 0, y1: 4, x2: 1, y2: 4 }, { x1: 4, y1: 9, x2: 4, y2: 10 }], [{ x: 1, y: 7 }]),
-  task("T14-pentagone", "Pentagone (-4 ; +5)", -4, 5, { x: 20, y: 15 }, [{ x1: 7, y1: 0, x2: 10, y2: 2 }, { x1: 10, y1: 2, x2: 9, y2: 5 }, { x1: 9, y1: 5, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 4, y2: 2 }, { x1: 4, y1: 2, x2: 7, y2: 0 }], [{ x: 7, y: 2 }]),
-  task("T15-flecheh", "FlècheH (+3 ; -5)", 3, -5, { x: 17, y: 20 }, [{ x1: 0, y1: 7, x2: 4, y2: 7 }, { x1: 4, y1: 5, x2: 6, y2: 7 }, { x1: 6, y1: 7, x2: 4, y2: 9 }, { x1: 4, y1: 9, x2: 4, y2: 5 }, { x1: 0, y1: 6, x2: 0, y2: 8 }], [{ x: 2, y: 7 }]),
-  task("T16-trapeze", "Trapèze (+8 ; +2)", 8, 2, { x: 12, y: 18 }, [{ x1: 1, y1: 0, x2: 5, y2: 0 }, { x1: 5, y1: 0, x2: 6, y2: 4 }, { x1: 6, y1: 4, x2: 0, y2: 4 }, { x1: 0, y1: 4, x2: 1, y2: 0 }, { x1: 2, y1: 2, x2: 4, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T17-fusee", "Fusée (-6 ; +3)", -6, 3, { x: 20, y: 17 }, [{ x1: 8, y1: 0, x2: 10, y2: 2 }, { x1: 10, y1: 2, x2: 10, y2: 5 }, { x1: 10, y1: 5, x2: 8, y2: 5 }, { x1: 8, y1: 5, x2: 6, y2: 2 }, { x1: 6, y1: 2, x2: 8, y2: 0 }, { x1: 7, y1: 5, x2: 7, y2: 6 }, { x1: 7, y1: 6, x2: 9, y2: 6 }, { x1: 9, y1: 6, x2: 9, y2: 5 }, { x1: 8, y1: 2, x2: 8, y2: 4 }], [{ x: 8, y: 3 }]),
-  task("T18-pont", "Pont (+2 ; +7)", 2, 7, { x: 18, y: 13 }, [{ x1: 0, y1: 4, x2: 0, y2: 2 }, { x1: 0, y1: 2, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 0 }, { x1: 4, y1: 0, x2: 6, y2: 2 }, { x1: 6, y1: 2, x2: 6, y2: 4 }, { x1: 0, y1: 4, x2: 6, y2: 4 }, { x1: 2, y1: 4, x2: 2, y2: 2 }, { x1: 4, y1: 4, x2: 4, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T19-maison", "Maison (-2 ; -6)", -2, -6, { x: 20, y: 20 }, [{ x1: 2, y1: 9, x2: 4, y2: 6 }, { x1: 4, y1: 6, x2: 6, y2: 9 }, { x1: 6, y1: 9, x2: 6, y2: 12 }, { x1: 6, y1: 12, x2: 2, y2: 12 }, { x1: 2, y1: 12, x2: 2, y2: 9 }, { x1: 3, y1: 12, x2: 3, y2: 10 }, { x1: 3, y1: 10, x2: 5, y2: 10 }, { x1: 5, y1: 10, x2: 5, y2: 12 }, { x1: 4, y1: 6, x2: 4, y2: 9 }], [{ x: 4, y: 8 }]),
-  task("T20-fleche", "Flèche (+6 ; +6)", 6, 6, { x: 14, y: 14 }, [{ x1: 2, y1: 0, x2: 2, y2: 5 }, { x1: 0, y1: 2, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 2 }, { x1: 4, y1: 2, x2: 0, y2: 2 }, { x1: 1, y1: 5, x2: 3, y2: 5 }, { x1: 3, y1: 5, x2: 3, y2: 6 }, { x1: 3, y1: 6, x2: 1, y2: 6 }], [{ x: 2, y: 3 }]),
-  task("T21-escalier", "Escalier (-7 ; -1)", -7, -1, { x: 7, y: 20 }, [{ x1: 7, y1: 7, x2: 7, y2: 5 }, { x1: 7, y1: 5, x2: 9, y2: 5 }, { x1: 9, y1: 5, x2: 9, y2: 3 }, { x1: 9, y1: 3, x2: 11, y2: 3 }, { x1: 11, y1: 3, x2: 11, y2: 1 }, { x1: 11, y1: 1, x2: 13, y2: 1 }], [{ x: 9, y: 5 }]),
-  task("T22-triangle", "Triangle (+4 ; +5)", 4, 5, { x: 16, y: 15 }, [{ x1: 0, y1: 5, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 6, y2: 5 }, { x1: 6, y1: 5, x2: 0, y2: 5 }, { x1: 1, y1: 4, x2: 5, y2: 4 }], [{ x: 3, y: 2 }]),
-  task("T23-croix", "Croix (-5 ; +4)", -5, 4, { x: 20, y: 16 }, [{ x1: 7, y1: 0, x2: 7, y2: 6 }, { x1: 5, y1: 2, x2: 9, y2: 2 }, { x1: 6, y1: 0, x2: 8, y2: 0 }, { x1: 6, y1: 6, x2: 8, y2: 6 }, { x1: 5, y1: 1, x2: 5, y2: 3 }, { x1: 9, y1: 1, x2: 9, y2: 3 }], [{ x: 7, y: 2 }]),
-  task("T24-u", "U (+1 ; -7)", 1, -7, { x: 19, y: 20 }, [{ x1: 0, y1: 7, x2: 0, y2: 12 }, { x1: 0, y1: 12, x2: 5, y2: 12 }, { x1: 5, y1: 12, x2: 5, y2: 7 }, { x1: 1, y1: 12, x2: 1, y2: 8 }, { x1: 1, y1: 8, x2: 4, y2: 8 }, { x1: 4, y1: 8, x2: 4, y2: 12 }], [{ x: 2, y: 10 }]),
-  task("T25-losange", "Losange (+9 ; +0)", 9, 0, { x: 11, y: 20 }, [{ x1: 3, y1: 0, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 3, y2: 6 }, { x1: 3, y1: 6, x2: 0, y2: 3 }, { x1: 0, y1: 3, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 3, y2: 6 }], [{ x: 3, y: 3 }]),
-  task("T26-te", "Té (+4 ; +0)", 4, 0, { x: 16, y: 20 }, [{ x1: 0, y1: 0, x2: 6, y2: 0 }, { x1: 3, y1: 0, x2: 3, y2: 6 }, { x1: 1, y1: 2, x2: 5, y2: 2 }, { x1: 2, y1: 6, x2: 4, y2: 6 }], [{ x: 3, y: 2 }]),
-  task("T27-zigzag", "Zigzag (+0 ; +4)", 0, 4, { x: 20, y: 16 }, [{ x1: 0, y1: 0, x2: 2, y2: 3 }, { x1: 2, y1: 3, x2: 4, y2: 0 }, { x1: 4, y1: 0, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 6, y2: 5 }, { x1: 6, y1: 5, x2: 0, y2: 5 }], [{ x: 3, y: 2 }]),
-  task("T28-cadre", "Cadre (+5 ; +2)", 5, 2, { x: 15, y: 18 }, [{ x1: 0, y1: 0, x2: 5, y2: 0 }, { x1: 5, y1: 0, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 0, y2: 5 }, { x1: 0, y1: 5, x2: 0, y2: 0 }, { x1: 1, y1: 1, x2: 4, y2: 1 }, { x1: 4, y1: 1, x2: 4, y2: 4 }, { x1: 4, y1: 4, x2: 1, y2: 4 }, { x1: 1, y1: 4, x2: 1, y2: 1 }, { x1: 0, y1: 0, x2: 1, y2: 1 }, { x1: 5, y1: 5, x2: 4, y2: 4 }], [{ x: 2, y: 2 }]),
-  task("T29-bateau", "Bateau (+3 ; +3)", 3, 3, { x: 17, y: 17 }, [{ x1: 0, y1: 3, x2: 1, y2: 5 }, { x1: 1, y1: 5, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 0, y2: 3 }, { x1: 3, y1: 3, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 5, y2: 2 }, { x1: 5, y1: 2, x2: 3, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T30-etoile", "Étoile (+6 ; +1)", 6, 1, { x: 14, y: 19 }, [{ x1: 3, y1: 0, x2: 3, y2: 6 }, { x1: 0, y1: 3, x2: 6, y2: 3 }, { x1: 1, y1: 1, x2: 5, y2: 5 }, { x1: 5, y1: 1, x2: 1, y2: 5 }], [{ x: 3, y: 3 }]),
-  task("T31-l", "L (-4 ; +0)", -4, 0, { x: 20, y: 20 }, [{ x1: 4, y1: 0, x2: 4, y2: 6 }, { x1: 4, y1: 6, x2: 8, y2: 6 }, { x1: 5, y1: 0, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 8, y2: 5 }, { x1: 4, y1: 0, x2: 5, y2: 0 }, { x1: 8, y1: 5, x2: 8, y2: 6 }], [{ x: 5, y: 3 }]),
-  task("T32-pentagone", "Pentagone (+0 ; -4)", 0, -4, { x: 20, y: 20 }, [{ x1: 3, y1: 4, x2: 6, y2: 6 }, { x1: 6, y1: 6, x2: 5, y2: 9 }, { x1: 5, y1: 9, x2: 1, y2: 9 }, { x1: 1, y1: 9, x2: 0, y2: 6 }, { x1: 0, y1: 6, x2: 3, y2: 4 }], [{ x: 3, y: 6 }]),
-  task("T33-flecheh", "FlècheH (-3 ; +2)", -3, 2, { x: 20, y: 18 }, [{ x1: 3, y1: 2, x2: 7, y2: 2 }, { x1: 7, y1: 0, x2: 9, y2: 2 }, { x1: 9, y1: 2, x2: 7, y2: 4 }, { x1: 7, y1: 4, x2: 7, y2: 0 }, { x1: 3, y1: 1, x2: 3, y2: 3 }], [{ x: 5, y: 2 }]),
-  task("T34-trapeze", "Trapèze (+4 ; -3)", 4, -3, { x: 16, y: 20 }, [{ x1: 1, y1: 3, x2: 5, y2: 3 }, { x1: 5, y1: 3, x2: 6, y2: 7 }, { x1: 6, y1: 7, x2: 0, y2: 7 }, { x1: 0, y1: 7, x2: 1, y2: 3 }, { x1: 2, y1: 5, x2: 4, y2: 5 }], [{ x: 3, y: 4 }]),
-  task("T35-fusee", "Fusée (-5 ; -2)", -5, -2, { x: 20, y: 20 }, [{ x1: 7, y1: 2, x2: 9, y2: 4 }, { x1: 9, y1: 4, x2: 9, y2: 7 }, { x1: 9, y1: 7, x2: 7, y2: 7 }, { x1: 7, y1: 7, x2: 5, y2: 4 }, { x1: 5, y1: 4, x2: 7, y2: 2 }, { x1: 6, y1: 7, x2: 6, y2: 8 }, { x1: 6, y1: 8, x2: 8, y2: 8 }, { x1: 8, y1: 8, x2: 8, y2: 7 }, { x1: 7, y1: 4, x2: 7, y2: 6 }], [{ x: 7, y: 5 }]),
-  task("T36-pont", "Pont (+7 ; +0)", 7, 0, { x: 13, y: 20 }, [{ x1: 0, y1: 4, x2: 0, y2: 2 }, { x1: 0, y1: 2, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 0 }, { x1: 4, y1: 0, x2: 6, y2: 2 }, { x1: 6, y1: 2, x2: 6, y2: 4 }, { x1: 0, y1: 4, x2: 6, y2: 4 }, { x1: 2, y1: 4, x2: 2, y2: 2 }, { x1: 4, y1: 4, x2: 4, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T37-maison", "Maison (+0 ; +6)", 0, 6, { x: 20, y: 14 }, [{ x1: 0, y1: 3, x2: 2, y2: 0 }, { x1: 2, y1: 0, x2: 4, y2: 3 }, { x1: 4, y1: 3, x2: 4, y2: 6 }, { x1: 4, y1: 6, x2: 0, y2: 6 }, { x1: 0, y1: 6, x2: 0, y2: 3 }, { x1: 1, y1: 6, x2: 1, y2: 4 }, { x1: 1, y1: 4, x2: 3, y2: 4 }, { x1: 3, y1: 4, x2: 3, y2: 6 }, { x1: 2, y1: 0, x2: 2, y2: 3 }], [{ x: 2, y: 2 }]),
-  task("T38-fleche", "Flèche (+5 ; -4)", 5, -4, { x: 15, y: 20 }, [{ x1: 2, y1: 4, x2: 2, y2: 9 }, { x1: 0, y1: 6, x2: 2, y2: 4 }, { x1: 2, y1: 4, x2: 4, y2: 6 }, { x1: 4, y1: 6, x2: 0, y2: 6 }, { x1: 1, y1: 9, x2: 3, y2: 9 }, { x1: 3, y1: 9, x2: 3, y2: 10 }, { x1: 3, y1: 10, x2: 1, y2: 10 }], [{ x: 2, y: 7 }]),
-  task("T39-escalier", "Escalier (-4 ; +5)", -4, 5, { x: 20, y: 15 }, [{ x1: 4, y1: 6, x2: 4, y2: 4 }, { x1: 4, y1: 4, x2: 6, y2: 4 }, { x1: 6, y1: 4, x2: 6, y2: 2 }, { x1: 6, y1: 2, x2: 8, y2: 2 }, { x1: 8, y1: 2, x2: 8, y2: 0 }, { x1: 8, y1: 0, x2: 10, y2: 0 }], [{ x: 6, y: 4 }]),
-  task("T40-triangle", "Triangle (+3 ; -5)", 3, -5, { x: 17, y: 20 }, [{ x1: 0, y1: 10, x2: 3, y2: 5 }, { x1: 3, y1: 5, x2: 6, y2: 10 }, { x1: 6, y1: 10, x2: 0, y2: 10 }, { x1: 1, y1: 9, x2: 5, y2: 9 }], [{ x: 3, y: 7 }]),
-  task("T41-croix", "Croix (+8 ; +2)", 8, 2, { x: 12, y: 18 }, [{ x1: 2, y1: 0, x2: 2, y2: 6 }, { x1: 0, y1: 2, x2: 4, y2: 2 }, { x1: 1, y1: 0, x2: 3, y2: 0 }, { x1: 1, y1: 6, x2: 3, y2: 6 }, { x1: 0, y1: 1, x2: 0, y2: 3 }, { x1: 4, y1: 1, x2: 4, y2: 3 }], [{ x: 2, y: 2 }]),
-  task("T42-u", "U (-6 ; +3)", -6, 3, { x: 20, y: 17 }, [{ x1: 6, y1: 0, x2: 6, y2: 5 }, { x1: 6, y1: 5, x2: 11, y2: 5 }, { x1: 11, y1: 5, x2: 11, y2: 0 }, { x1: 7, y1: 5, x2: 7, y2: 1 }, { x1: 7, y1: 1, x2: 10, y2: 1 }, { x1: 10, y1: 1, x2: 10, y2: 5 }], [{ x: 8, y: 3 }]),
-  task("T43-losange", "Losange (+2 ; +7)", 2, 7, { x: 18, y: 13 }, [{ x1: 3, y1: 0, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 3, y2: 6 }, { x1: 3, y1: 6, x2: 0, y2: 3 }, { x1: 0, y1: 3, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 3, y2: 6 }], [{ x: 3, y: 3 }]),
-  task("T44-te", "Té (-2 ; -6)", -2, -6, { x: 20, y: 20 }, [{ x1: 2, y1: 6, x2: 8, y2: 6 }, { x1: 5, y1: 6, x2: 5, y2: 12 }, { x1: 3, y1: 8, x2: 7, y2: 8 }, { x1: 4, y1: 12, x2: 6, y2: 12 }], [{ x: 5, y: 8 }]),
-  task("T45-zigzag", "Zigzag (+6 ; +6)", 6, 6, { x: 14, y: 14 }, [{ x1: 0, y1: 0, x2: 2, y2: 3 }, { x1: 2, y1: 3, x2: 4, y2: 0 }, { x1: 4, y1: 0, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 6, y2: 5 }, { x1: 6, y1: 5, x2: 0, y2: 5 }], [{ x: 3, y: 2 }]),
-  task("T46-cadre", "Cadre (-7 ; -1)", -7, -1, { x: 20, y: 20 }, [{ x1: 7, y1: 1, x2: 12, y2: 1 }, { x1: 12, y1: 1, x2: 12, y2: 6 }, { x1: 12, y1: 6, x2: 7, y2: 6 }, { x1: 7, y1: 6, x2: 7, y2: 1 }, { x1: 8, y1: 2, x2: 11, y2: 2 }, { x1: 11, y1: 2, x2: 11, y2: 5 }, { x1: 11, y1: 5, x2: 8, y2: 5 }, { x1: 8, y1: 5, x2: 8, y2: 2 }, { x1: 7, y1: 1, x2: 8, y2: 2 }, { x1: 12, y1: 6, x2: 11, y2: 5 }], [{ x: 9, y: 3 }]),
-  task("T47-bateau", "Bateau (+4 ; +5)", 4, 5, { x: 16, y: 15 }, [{ x1: 0, y1: 3, x2: 1, y2: 5 }, { x1: 1, y1: 5, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 6, y2: 3 }, { x1: 6, y1: 3, x2: 0, y2: 3 }, { x1: 3, y1: 3, x2: 3, y2: 0 }, { x1: 3, y1: 0, x2: 5, y2: 2 }, { x1: 5, y1: 2, x2: 3, y2: 2 }], [{ x: 3, y: 1 }]),
-  task("T48-etoile", "Étoile (-5 ; +4)", -5, 4, { x: 20, y: 16 }, [{ x1: 8, y1: 0, x2: 8, y2: 6 }, { x1: 5, y1: 3, x2: 11, y2: 3 }, { x1: 6, y1: 1, x2: 10, y2: 5 }, { x1: 10, y1: 1, x2: 6, y2: 5 }], [{ x: 8, y: 3 }]),
-  task("T49-l", "L (+1 ; -7)", 1, -7, { x: 19, y: 20 }, [{ x1: 0, y1: 7, x2: 0, y2: 13 }, { x1: 0, y1: 13, x2: 4, y2: 13 }, { x1: 1, y1: 7, x2: 1, y2: 12 }, { x1: 1, y1: 12, x2: 4, y2: 12 }, { x1: 0, y1: 7, x2: 1, y2: 7 }, { x1: 4, y1: 12, x2: 4, y2: 13 }], [{ x: 1, y: 10 }]),
-  task("T50-pentagone", "Pentagone (+9 ; +0)", 9, 0, { x: 11, y: 20 }, [{ x1: 3, y1: 0, x2: 6, y2: 2 }, { x1: 6, y1: 2, x2: 5, y2: 5 }, { x1: 5, y1: 5, x2: 1, y2: 5 }, { x1: 1, y1: 5, x2: 0, y2: 2 }, { x1: 0, y1: 2, x2: 3, y2: 0 }], [{ x: 3, y: 2 }]),
-];
+/**
+ * Mêmes figures que G7.1 ex.1, centrées sur la grille 20×20.
+ * L'élève effectue la translation indiquée par le vecteur (flèche bleue).
+ */
+const TRANSLATION_TASKS: TranslationTask[] = G7_COPY_FIGURES.map(({ id, label, figure }, i) => {
+  const vector = TRANSLATION_VECTORS[i % TRANSLATION_VECTORS.length]!;
+  return figureToTask(id, label, figure, vector);
+});
 
-if (TRANSLATION_TASKS.length !== 50) {
-  throw new Error(`G7.4 translation pool: attendu 50, got ${TRANSLATION_TASKS.length}`);
+if (TRANSLATION_TASKS.length === 0) {
+  throw new Error("G7.4 translation pool: aucune figure (G7_COPY_FIGURES vide)");
 }
 
 export function pickTranslationTask(seed: number): TranslationTask {
@@ -132,7 +171,5 @@ export function listTranslationTasks(): TranslationTask[] {
 
 export function translationConsigne(task: TranslationTask): string {
   const { dx, dy } = task.vector;
-  const sx = dx > 0 ? `+${dx}` : `${dx}`;
-  const sy = dy > 0 ? `+${dy}` : `${dy}`;
-  return `Complétez la figure par translation. La flèche bleue indique le vecteur de translation (${sx} ; ${sy}). Cliquez deux points pour tracer un segment ; deux fois le même point pour un point.`;
+  return `Effectuez la translation selon le vecteur (${fmtSigned(dx)} ; ${fmtSigned(dy)}). La figure modèle est au centre ; la flèche bleue indique le déplacement. Cliquez deux points pour tracer un segment ; deux fois le même point pour un point.`;
 }
