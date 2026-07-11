@@ -655,7 +655,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         layout: "email",
         meta: { from: orientationTextBase.from, subject: orientationTextBase.subject },
         body: orientationTextBase.body,
-        image: "",
+        image: orientationTextBase.image || "",
         questions: buildCeMessageQuestions(orientationTextBase.pool, 6, `${level}-${stamp}-orientation`),
       }
     : {
@@ -687,7 +687,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         ? { from: emailBase.from, subject: emailBase.subject }
         : { from: emailLegacy!.from, subject: emailLegacy!.subject },
       body: emailBase ? emailBase.body : emailLegacy!.body,
-      image: "",
+      image: emailBase ? (emailBase.image || "") : "",
       questions: emailBase
         ? buildCeMessageQuestions(
             emailBase.pool,
@@ -1053,33 +1053,31 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
 
   return (
     <div className="space-y-5">
-      {showImage ? (
+      {showImage && (
         <div className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
           <div className="relative w-full">
             <Image
               src={imageSrc}
-              alt="Message à lire"
+              alt=""
               width={900}
-              height={1200}
+              height={600}
               className="h-auto w-full object-contain"
               sizes="(max-width: 768px) 100vw, 640px"
               onError={() => setImageFailed(true)}
               priority
             />
           </div>
-          <p className={`sr-only ${CE_BODY_TEXT_PRE}`}>{part.body}</p>
-        </div>
-      ) : (
-        <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
-          {(part.meta.from || part.meta.subject) && (
-            <div className="border-b border-slate-300 pb-2 text-sm text-[var(--color-text-secondary)]">
-              {part.meta.from && <p><span className="font-semibold">De :</span> {part.meta.from}</p>}
-              {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
-            </div>
-          )}
-          <div className={`mt-3 ${CE_BODY_TEXT_PRE}`}>{part.body}</div>
         </div>
       )}
+      <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
+        {(part.meta.from || part.meta.subject) && (
+          <div className="border-b border-slate-300 pb-2 text-sm text-[var(--color-text-secondary)]">
+            {part.meta.from && <p><span className="font-semibold">De :</span> {part.meta.from}</p>}
+            {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
+          </div>
+        )}
+        <div className={`mt-3 ${CE_BODY_TEXT_PRE}`}>{part.body}</div>
+      </div>
       <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
     </div>
   );
