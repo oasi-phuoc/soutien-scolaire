@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Convert generated PNGs to 800x600 WebP in public/expression/co/situations-2/."""
+"""Convert generated PNGs to 800x600 WebP in public/expression/co/situation-2/."""
 from __future__ import annotations
 import sys
 from pathlib import Path
 from PIL import Image
 
-OUT = Path("public/expression/co/situations-2")
+OUT = Path("public/expression/co/situation-2")
 ART = Path("/opt/cursor/artifacts/assets")
 SIZE = (800, 600)
 
