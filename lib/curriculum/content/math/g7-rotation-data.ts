@@ -57,8 +57,8 @@ export function expectedFromRotation(task: RotationTask): { dots: Set<string>; s
   };
 }
 
-/** 50 figures (pool copie G7.1) × 3 orientations = tâches possibles. */
-const ROTATION_FIGURES = G7_COPY_FIGURES.slice(0, 50);
+/** Pool copie G7.1 × 3 orientations = tâches possibles. */
+const ROTATION_FIGURES = G7_COPY_FIGURES;
 
 export function pickRotationTask(seed: number): RotationTask {
   const figIdx = Math.abs(seed) % ROTATION_FIGURES.length;
