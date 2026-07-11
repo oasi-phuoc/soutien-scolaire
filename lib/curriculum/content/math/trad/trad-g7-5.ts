@@ -25,12 +25,12 @@ export const TRAD_G7_5: SubmoduleTrad = {
     ) },
     { text: S("Le trait bleu", "The blue mark", "العلامة الزرقاء", "علامت آبی", "ሰማያዊ መስመር", "Синя мітка") },
     { label: S("", "", "", "", "", ""), items: {
-      fr: ["Sur le modèle, le trait bleu est à gauche.", "Sur la grille vide : en haut (90°), à droite (180°) ou en bas (270°) horaire."],
-      en: ["On the model, the blue mark is on the left.", "On the empty grid: top (90°), right (180°) or bottom (270°) clockwise."],
-      ar: ["على النموذج، العلامة الزرقاء على اليسار.", "على الشبكة الفارغة: أعلى (90°) أو يمين (180°) أو أسفل (270°) باتجاه عقارب الساعة."],
-      fa: ["روی مدل، علامت آبی سمت چپ است.", "روی شبکه خالی: بالا (۹۰°)، راست (۱۸۰°) یا پایین (۲۷۰°) ساعت‌گرد."],
-      ti: ["ኣብ ሞዴል፣ ሰማያዊ መስመር ኣብ ጸጋም እዩ።", "ኣብ ባዶ ካርታ፡ ላዕሊ (90°)፣ የማን (180°) ወይ ታሕቲ (270°) ብሰዓት ኣንፈት።"],
-      uk: ["На моделі синя мітка зліва.", "На порожній сітці: зверху (90°), справа (180°) або знизу (270°) за годинником."],
+      fr: ["Ex.1 : modèle à gauche → haut / droite / bas.", "Ex.2 : modèle à droite → haut / gauche / bas."],
+      en: ["Ex.1: model on the left → top / right / bottom.", "Ex.2: model on the right → top / left / bottom."],
+      ar: ["تمرين 1: النموذج يسار → أعلى / يمين / أسفل.", "تمرين 2: النموذج يمين → أعلى / يسار / أسفل."],
+      fa: ["تمرین ۱: مدل چپ → بالا / راست / پایین.", "تمرین ۲: مدل راست → بالا / چپ / پایین."],
+      ti: ["ስፈ.1፡ ሞዴል ጸጋም → ላዕሊ / የማን / ታሕቲ።", "ስፈ.2፡ ሞዴል የማን → ላዕሊ / ጸጋም / ታሕቲ።"],
+      uk: ["Впр.1: модель зліва → верх / право / низ.", "Впр.2: модель справа → верх / ліво / низ."],
     } },
     { text: S("Propriétés", "Properties", "الخصائص", "ویژگی‌ها", "ንብረታት", "Властивості") },
     { label: S("", "", "", "", "", ""), items: {
@@ -45,15 +45,5 @@ export const TRAD_G7_5: SubmoduleTrad = {
   paragraphs: {
     fr: ["Rotation sur quadrillage : le trait bleu indique le sens (90°, 180° ou 270° horaire)."],
     en: ["Grid rotation: the blue mark shows the direction (90°, 180° or 270° clockwise)."],
-  },
-  consignes: {
-    g7Rotation: S(
-      "Le trait bleu est à gauche du modèle. Sur la grille vide, reproduisez la figure après la rotation indiquée par le trait bleu.",
-      "The blue mark is on the left of the model. On the empty grid, redraw the figure after the rotation shown by the blue mark.",
-      "العلامة الزرقاء على يسار النموذج. على الشبكة الفارغة، أعد رسم الشكل بعد الدوران الذي تشير إليه العلامة الزرقاء.",
-      "علامت آبی سمت چپ مدل است. روی شبکه خالی، شکل را پس از چرخش نشان‌داده‌شده با علامت آبی بکشید.",
-      "ሰማያዊ መስመር ኣብ ጸጋም ሞዴል እዩ። ኣብ ባዶ ካርታ፣ ነቲ ስእሊ ድሕሪ እቲ ብሰማያዊ መስመር ዝተመልከተ ምምቕቃሉ ድገም።",
-      "Синя мітка зліва на моделі. На порожній сітці відтворіть фігуру після повороту, показаного синьою міткою.",
-    ),
   },
 };

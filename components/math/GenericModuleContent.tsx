@@ -5284,7 +5284,6 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const pushG7RotSet = () => {
         steps.push({ kind: "g7_rotation", lesson, exNum: 1 });
         steps.push({ kind: "g7_rotation", lesson, exNum: 2 });
-        steps.push({ kind: "g7_rotation", lesson, exNum: 3 });
       };
       pushG7RotSet();
       steps.push({ kind: "eval_start", lesson });

@@ -38,7 +38,7 @@ function snapPoint(px: number, py: number, size: number): GridPoint | null {
   return best;
 }
 
-function EdgeMarker({ side, size }: { side: "left" | RotationSide; size: number }) {
+function EdgeMarker({ side, size }: { side: RotationSide; size: number }) {
   const x0 = MARGIN;
   const y0 = MARGIN;
   const x1 = MARGIN + size * CELL;
@@ -74,7 +74,7 @@ function GridCanvas({
   size: number;
   dots: Set<string>;
   segments: Set<string>;
-  edge: "left" | RotationSide;
+  edge: RotationSide;
   interactive?: boolean;
   pending?: GridPoint | null;
   wrongDots?: Set<string>;
@@ -204,7 +204,7 @@ export function G7RotationExercise({
   consigneDir?: "ltr" | "rtl";
 }) {
   const [task] = useState<RotationTask>(() =>
-    pickRotationTask(exNum * 997 + seed * 31 + 19),
+    pickRotationTask(exNum * 997 + seed * 31 + 19, exNum),
   );
   const expected = useMemo(() => expectedFromRotation(task), [task]);
 
@@ -292,7 +292,7 @@ export function G7RotationExercise({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
           <p className="mb-2 text-center text-xs font-medium text-[var(--color-text-secondary)]">Modèle</p>
-          <GridCanvas size={task.size} dots={refDots} segments={refSegments} edge="left" />
+          <GridCanvas size={task.size} dots={refDots} segments={refSegments} edge={task.modelSide} />
         </div>
         <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
           <p className="mb-2 text-center text-xs font-medium text-[var(--color-text-secondary)]">Reproduction</p>
