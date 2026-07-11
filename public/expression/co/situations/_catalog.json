@@ -1,0 +1,889 @@
+{
+  "count": 221,
+  "situations": [
+    {
+      "slug": "annoncer-evenement",
+      "label": "Annoncer evenement"
+    },
+    {
+      "slug": "annoncer-nouvelle",
+      "label": "Annoncer nouvelle"
+    },
+    {
+      "slug": "annuler-rdv",
+      "label": "Annuler rdv"
+    },
+    {
+      "slug": "commander",
+      "label": "Commander"
+    },
+    {
+      "slug": "confirmer-rdv",
+      "label": "Confirmer rdv"
+    },
+    {
+      "slug": "conseiller",
+      "label": "Conseiller"
+    },
+    {
+      "slug": "decrire-personne",
+      "label": "Decrire personne"
+    },
+    {
+      "slug": "demander-chemin",
+      "label": "Demander chemin"
+    },
+    {
+      "slug": "demander-informations",
+      "label": "Demander informations"
+    },
+    {
+      "slug": "demander-nouvelles",
+      "label": "Demander nouvelles"
+    },
+    {
+      "slug": "demander-service",
+      "label": "Demander service"
+    },
+    {
+      "slug": "donner-impressions",
+      "label": "Donner impressions"
+    },
+    {
+      "slug": "donner-indications",
+      "label": "Donner indications"
+    },
+    {
+      "slug": "exprimer-gouts",
+      "label": "Exprimer gouts"
+    },
+    {
+      "slug": "feliciter",
+      "label": "Feliciter"
+    },
+    {
+      "slug": "horaires",
+      "label": "Horaires"
+    },
+    {
+      "slug": "prendre-conge",
+      "label": "Prendre conge"
+    },
+    {
+      "slug": "prendre-rdv",
+      "label": "Prendre rdv"
+    },
+    {
+      "slug": "presenter",
+      "label": "Presenter"
+    },
+    {
+      "slug": "proposer-activite",
+      "label": "Proposer activite"
+    },
+    {
+      "slug": "proposer-aide",
+      "label": "Proposer aide"
+    },
+    {
+      "slug": "proposer-sortie",
+      "label": "Proposer sortie"
+    },
+    {
+      "slug": "refuser",
+      "label": "Refuser"
+    },
+    {
+      "slug": "s-excuser",
+      "label": "S'excuser"
+    },
+    {
+      "slug": "signaler-probleme",
+      "label": "Signaler probleme"
+    },
+    {
+      "slug": "saluer",
+      "label": "Saluer"
+    },
+    {
+      "slug": "remercier",
+      "label": "Remercier"
+    },
+    {
+      "slug": "inviter",
+      "label": "Inviter"
+    },
+    {
+      "slug": "accepter-invitation",
+      "label": "Accepter invitation"
+    },
+    {
+      "slug": "presenter-excuse-retard",
+      "label": "Presenter excuse retard"
+    },
+    {
+      "slug": "demander-pardon",
+      "label": "Demander pardon"
+    },
+    {
+      "slug": "consoler",
+      "label": "Consoler"
+    },
+    {
+      "slug": "encourager",
+      "label": "Encourager"
+    },
+    {
+      "slug": "complimenter",
+      "label": "Complimenter"
+    },
+    {
+      "slug": "souhaiter-bon-anniversaire",
+      "label": "Souhaiter bon anniversaire"
+    },
+    {
+      "slug": "souhaiter-bonne-annee",
+      "label": "Souhaiter bonne annee"
+    },
+    {
+      "slug": "souhaiter-bonnes-vacances",
+      "label": "Souhaiter bonnes'vacances"
+    },
+    {
+      "slug": "prendre-des-nouvelles-sante",
+      "label": "Prendre des'nouvelles'sante"
+    },
+    {
+      "slug": "parler-de-la-famille",
+      "label": "Parler de la famille"
+    },
+    {
+      "slug": "parler-du-travail",
+      "label": "Parler du travail"
+    },
+    {
+      "slug": "parler-des-hobbies",
+      "label": "Parler des'hobbies"
+    },
+    {
+      "slug": "parler-du-week-end",
+      "label": "Parler du week end"
+    },
+    {
+      "slug": "raconter-une-histoire",
+      "label": "Raconter une histoire"
+    },
+    {
+      "slug": "raconter-un-voyage",
+      "label": "Raconter un voyage"
+    },
+    {
+      "slug": "raconter-une-journee",
+      "label": "Raconter une journee"
+    },
+    {
+      "slug": "ouvrir-un-compte-bancaire",
+      "label": "Ouvrir un compte bancaire"
+    },
+    {
+      "slug": "retirer-de-largent",
+      "label": "Retirer de largent"
+    },
+    {
+      "slug": "payer-par-carte",
+      "label": "Payer par carte"
+    },
+    {
+      "slug": "demander-une-facture",
+      "label": "Demander une facture"
+    },
+    {
+      "slug": "reserver-hotel",
+      "label": "Reserver hotel"
+    },
+    {
+      "slug": "reserver-chambre",
+      "label": "Reserver chambre"
+    },
+    {
+      "slug": "check-in-hotel",
+      "label": "Check in hotel"
+    },
+    {
+      "slug": "check-out-hotel",
+      "label": "Check out hotel"
+    },
+    {
+      "slug": "acheter-billet-train",
+      "label": "Acheter billet train"
+    },
+    {
+      "slug": "acheter-billet-bus",
+      "label": "Acheter billet bus"
+    },
+    {
+      "slug": "acheter-billet-cinema",
+      "label": "Acheter billet cinema"
+    },
+    {
+      "slug": "reserver-table-restaurant",
+      "label": "Reserver table restaurant"
+    },
+    {
+      "slug": "commander-a-emporter",
+      "label": "Commander a emporter"
+    },
+    {
+      "slug": "reclamer-au-restaurant",
+      "label": "Reclamer au restaurant"
+    },
+    {
+      "slug": "demander-addition",
+      "label": "Demander addition"
+    },
+    {
+      "slug": "laisser-pourboire",
+      "label": "Laisser pourboire"
+    },
+    {
+      "slug": "acheter-medicament",
+      "label": "Acheter medicament"
+    },
+    {
+      "slug": "consulter-medecin",
+      "label": "Consulter medecin"
+    },
+    {
+      "slug": "prendre-rendez-vous-dentiste",
+      "label": "Prendre rendez vous'dentiste"
+    },
+    {
+      "slug": "expliquer-symptomes",
+      "label": "Expliquer symptomes"
+    },
+    {
+      "slug": "aller-pharmacie",
+      "label": "Aller pharmacie"
+    },
+    {
+      "slug": "demander-ordonnance",
+      "label": "Demander ordonnance"
+    },
+    {
+      "slug": "renouveler-ordonnance",
+      "label": "Renouveler ordonnance"
+    },
+    {
+      "slug": "essayer-vetement",
+      "label": "Essayer vetement"
+    },
+    {
+      "slug": "demander-taille",
+      "label": "Demander taille"
+    },
+    {
+      "slug": "demander-prix",
+      "label": "Demander prix"
+    },
+    {
+      "slug": "demander-reduction",
+      "label": "Demander reduction"
+    },
+    {
+      "slug": "echanger-article",
+      "label": "Echanger article"
+    },
+    {
+      "slug": "rendre-article",
+      "label": "Rendre article"
+    },
+    {
+      "slug": "payer-especes",
+      "label": "Payer especes"
+    },
+    {
+      "slug": "demander-sac",
+      "label": "Demander sac"
+    },
+    {
+      "slug": "choisir-cadeau",
+      "label": "Choisir cadeau"
+    },
+    {
+      "slug": "acheter-au-marche",
+      "label": "Acheter au marche"
+    },
+    {
+      "slug": "acheter-pain",
+      "label": "Acheter pain"
+    },
+    {
+      "slug": "acheter-fleurs",
+      "label": "Acheter fleurs"
+    },
+    {
+      "slug": "acheter-livre",
+      "label": "Acheter livre"
+    },
+    {
+      "slug": "acheter-telephone",
+      "label": "Acheter telephone"
+    },
+    {
+      "slug": "comparer-produits",
+      "label": "Comparer produits"
+    },
+    {
+      "slug": "acheter-titre-transport",
+      "label": "Acheter titre transport"
+    },
+    {
+      "slug": "demander-arret-bus",
+      "label": "Demander arret bus"
+    },
+    {
+      "slug": "signaler-retard-train",
+      "label": "Signaler retard train"
+    },
+    {
+      "slug": "demander-quai",
+      "label": "Demander quai"
+    },
+    {
+      "slug": "louer-velo",
+      "label": "Louer velo"
+    },
+    {
+      "slug": "louer-voiture",
+      "label": "Louer voiture"
+    },
+    {
+      "slug": "demander-parking",
+      "label": "Demander parking"
+    },
+    {
+      "slug": "appeler-taxi",
+      "label": "Appeler taxi"
+    },
+    {
+      "slug": "utiliser-gps",
+      "label": "Utiliser gps"
+    },
+    {
+      "slug": "traverser-rue",
+      "label": "Traverser rue"
+    },
+    {
+      "slug": "demander-toilettes",
+      "label": "Demander toilettes"
+    },
+    {
+      "slug": "demander-wifi",
+      "label": "Demander wifi"
+    },
+    {
+      "slug": "demander-prise-electrique",
+      "label": "Demander prise electrique"
+    },
+    {
+      "slug": "postuler-emploi",
+      "label": "Postuler emploi"
+    },
+    {
+      "slug": "passer-entretien",
+      "label": "Passer entretien"
+    },
+    {
+      "slug": "demander-augmentation",
+      "label": "Demander augmentation"
+    },
+    {
+      "slug": "demander-conge",
+      "label": "Demander conge"
+    },
+    {
+      "slug": "expliquer-retard-travail",
+      "label": "Expliquer retard travail"
+    },
+    {
+      "slug": "presenter-collegue",
+      "label": "Presenter collegue"
+    },
+    {
+      "slug": "participer-reunion",
+      "label": "Participer reunion"
+    },
+    {
+      "slug": "donner-presentation",
+      "label": "Donner presentation"
+    },
+    {
+      "slug": "demander-aide-devoirs",
+      "label": "Demander aide devoirs"
+    },
+    {
+      "slug": "rendre-devoir",
+      "label": "Rendre devoir"
+    },
+    {
+      "slug": "demander-explication-cours",
+      "label": "Demander explication cours"
+    },
+    {
+      "slug": "sinscrire-cours",
+      "label": "Sinscrire cours"
+    },
+    {
+      "slug": "emprunter-livre-bibliotheque",
+      "label": "Emprunter livre bibliotheque"
+    },
+    {
+      "slug": "prolonger-emprunt",
+      "label": "Prolonger emprunt"
+    },
+    {
+      "slug": "demander-notes",
+      "label": "Demander notes"
+    },
+    {
+      "slug": "chercher-appartement",
+      "label": "Chercher appartement"
+    },
+    {
+      "slug": "visiter-appartement",
+      "label": "Visiter appartement"
+    },
+    {
+      "slug": "signer-bail",
+      "label": "Signer bail"
+    },
+    {
+      "slug": "demander-caution",
+      "label": "Demander caution"
+    },
+    {
+      "slug": "signaler-panne",
+      "label": "Signaler panne"
+    },
+    {
+      "slug": "appeler-plombier",
+      "label": "Appeler plombier"
+    },
+    {
+      "slug": "appeler-electricien",
+      "label": "Appeler electricien"
+    },
+    {
+      "slug": "demander-voisin-aide",
+      "label": "Demander voisin aide"
+    },
+    {
+      "slug": "organiser-demenagement",
+      "label": "Organiser demenagement"
+    },
+    {
+      "slug": "recevoir-colis",
+      "label": "Recevoir colis"
+    },
+    {
+      "slug": "envoyer-colis",
+      "label": "Envoyer colis"
+    },
+    {
+      "slug": "aller-poste",
+      "label": "Aller poste"
+    },
+    {
+      "slug": "passer-appel",
+      "label": "Passer appel"
+    },
+    {
+      "slug": "laisser-message-vocal",
+      "label": "Laisser message vocal"
+    },
+    {
+      "slug": "envoyer-sms",
+      "label": "Envoyer sms"
+    },
+    {
+      "slug": "repondre-email",
+      "label": "Repondre email"
+    },
+    {
+      "slug": "passer-appel-video",
+      "label": "Passer appel video"
+    },
+    {
+      "slug": "resoudre-probleme-internet",
+      "label": "Resoudre probleme internet"
+    },
+    {
+      "slug": "demander-mot-de-passe",
+      "label": "Demander mot de passe"
+    },
+    {
+      "slug": "partager-photo",
+      "label": "Partager photo"
+    },
+    {
+      "slug": "acheter-place-concert",
+      "label": "Acheter place concert"
+    },
+    {
+      "slug": "acheter-place-theatre",
+      "label": "Acheter place theatre"
+    },
+    {
+      "slug": "reserver-musee",
+      "label": "Reserver musee"
+    },
+    {
+      "slug": "visiter-exposition",
+      "label": "Visiter exposition"
+    },
+    {
+      "slug": "jouer-sport",
+      "label": "Jouer sport"
+    },
+    {
+      "slug": "sincrire-club-sport",
+      "label": "Sincrire club sport"
+    },
+    {
+      "slug": "demander-regles-jeu",
+      "label": "Demander regles'jeu"
+    },
+    {
+      "slug": "proposer-film",
+      "label": "Proposer film"
+    },
+    {
+      "slug": "choisir-restaurant",
+      "label": "Choisir restaurant"
+    },
+    {
+      "slug": "organiser-pique-nique",
+      "label": "Organiser pique nique"
+    },
+    {
+      "slug": "partir-camping",
+      "label": "Partir camping"
+    },
+    {
+      "slug": "faire-randonnee",
+      "label": "Faire randonnee"
+    },
+    {
+      "slug": "exprimer-joie",
+      "label": "Exprimer joie"
+    },
+    {
+      "slug": "exprimer-tristesse",
+      "label": "Exprimer tristesse"
+    },
+    {
+      "slug": "exprimer-colere",
+      "label": "Exprimer colere"
+    },
+    {
+      "slug": "exprimer-surprise",
+      "label": "Exprimer surprise"
+    },
+    {
+      "slug": "exprimer-peur",
+      "label": "Exprimer peur"
+    },
+    {
+      "slug": "donner-avis-film",
+      "label": "Donner avis'film"
+    },
+    {
+      "slug": "donner-avis-livre",
+      "label": "Donner avis'livre"
+    },
+    {
+      "slug": "donner-avis-restaurant",
+      "label": "Donner avis'restaurant"
+    },
+    {
+      "slug": "nuancer-opinion",
+      "label": "Nuancer opinion"
+    },
+    {
+      "slug": "etre-daccord",
+      "label": "Etre daccord"
+    },
+    {
+      "slug": "pas-daccord",
+      "label": "Pas'daccord"
+    },
+    {
+      "slug": "changer-sujet",
+      "label": "Changer sujet"
+    },
+    {
+      "slug": "interrompre-poliment",
+      "label": "Interrompre poliment"
+    },
+    {
+      "slug": "parler-meteo",
+      "label": "Parler meteo"
+    },
+    {
+      "slug": "demander-heure",
+      "label": "Demander heure"
+    },
+    {
+      "slug": "fixer-heure-rdv",
+      "label": "Fixer heure rdv"
+    },
+    {
+      "slug": "reporter-rdv",
+      "label": "Reporter rdv"
+    },
+    {
+      "slug": "arriver-en-avance",
+      "label": "Arriver en avance"
+    },
+    {
+      "slug": "arriver-en-retard",
+      "label": "Arriver en retard"
+    },
+    {
+      "slug": "attendre-quelquun",
+      "label": "Attendre quelquun"
+    },
+    {
+      "slug": "demander-aide-urgence",
+      "label": "Demander aide urgence"
+    },
+    {
+      "slug": "appeler-pompiers",
+      "label": "Appeler pompiers"
+    },
+    {
+      "slug": "appeler-police",
+      "label": "Appeler police"
+    },
+    {
+      "slug": "aider-personne-agee",
+      "label": "Aider personne agee"
+    },
+    {
+      "slug": "porter-sac",
+      "label": "Porter sac"
+    },
+    {
+      "slug": "cedez-place",
+      "label": "Cedez place"
+    },
+    {
+      "slug": "signaler-objet-perdu",
+      "label": "Signaler objet perdu"
+    },
+    {
+      "slug": "retrouver-objet-perdu",
+      "label": "Retrouver objet perdu"
+    },
+    {
+      "slug": "faire-courses",
+      "label": "Faire courses"
+    },
+    {
+      "slug": "cuisiner-ensemble",
+      "label": "Cuisiner ensemble"
+    },
+    {
+      "slug": "mettre-table",
+      "label": "Mettre table"
+    },
+    {
+      "slug": "faire-vaisselle",
+      "label": "Faire vaisselle"
+    },
+    {
+      "slug": "nettoyer-maison",
+      "label": "Nettoyer maison"
+    },
+    {
+      "slug": "arroser-plantes",
+      "label": "Arroser plantes"
+    },
+    {
+      "slug": "nourrir-animal",
+      "label": "Nourrir animal"
+    },
+    {
+      "slug": "promener-chien",
+      "label": "Promener chien"
+    },
+    {
+      "slug": "reparer-objet",
+      "label": "Reparer objet"
+    },
+    {
+      "slug": "organiser-fete",
+      "label": "Organiser fete"
+    },
+    {
+      "slug": "acheter-gateau",
+      "label": "Acheter gateau"
+    },
+    {
+      "slug": "offrir-cadeau",
+      "label": "Offrir cadeau"
+    },
+    {
+      "slug": "ouvrir-cadeau",
+      "label": "Ouvrir cadeau"
+    },
+    {
+      "slug": "danser-fete",
+      "label": "Danser fete"
+    },
+    {
+      "slug": "chanter-ensemble",
+      "label": "Chanter ensemble"
+    },
+    {
+      "slug": "prendre-photo-groupe",
+      "label": "Prendre photo groupe"
+    },
+    {
+      "slug": "porter-un-toast",
+      "label": "Porter un toast"
+    },
+    {
+      "slug": "passer-douane",
+      "label": "Passer douane"
+    },
+    {
+      "slug": "declarer-bagages",
+      "label": "Declarer bagages"
+    },
+    {
+      "slug": "demander-direction-aeroport",
+      "label": "Demander direction aeroport"
+    },
+    {
+      "slug": "changer-devise",
+      "label": "Changer devise"
+    },
+    {
+      "slug": "reserver-visite-guidee",
+      "label": "Reserver visite guidee"
+    },
+    {
+      "slug": "demander-plan-ville",
+      "label": "Demander plan ville"
+    },
+    {
+      "slug": "acheter-souvenir",
+      "label": "Acheter souvenir"
+    },
+    {
+      "slug": "envoyer-carte-postale",
+      "label": "Envoyer carte postale"
+    },
+    {
+      "slug": "se-reveiller",
+      "label": "Se reveiller"
+    },
+    {
+      "slug": "prendre-petit-dejeuner",
+      "label": "Prendre petit dejeuner"
+    },
+    {
+      "slug": "aller-travail",
+      "label": "Aller travail"
+    },
+    {
+      "slug": "rentrer-maison",
+      "label": "Rentrer maison"
+    },
+    {
+      "slug": "se-coucher",
+      "label": "Se coucher"
+    },
+    {
+      "slug": "lire-journal",
+      "label": "Lire journal"
+    },
+    {
+      "slug": "regarder-television",
+      "label": "Regarder television"
+    },
+    {
+      "slug": "ecouter-musique",
+      "label": "Ecouter musique"
+    },
+    {
+      "slug": "faire-sport-matin",
+      "label": "Faire sport matin"
+    },
+    {
+      "slug": "discuter-parc",
+      "label": "Discuter parc"
+    },
+    {
+      "slug": "rencontrer-ami",
+      "label": "Rencontrer ami"
+    },
+    {
+      "slug": "faire-connaissance",
+      "label": "Faire connaissance"
+    },
+    {
+      "slug": "garder-secret",
+      "label": "Garder secret"
+    },
+    {
+      "slug": "emprunter-argent",
+      "label": "Emprunter argent"
+    },
+    {
+      "slug": "rendre-argent",
+      "label": "Rendre argent"
+    },
+    {
+      "slug": "partager-addition",
+      "label": "Partager addition"
+    },
+    {
+      "slug": "negocier-prix",
+      "label": "Negocier prix"
+    },
+    {
+      "slug": "demander-temoin",
+      "label": "Demander temoin"
+    },
+    {
+      "slug": "temoigner",
+      "label": "Temoigner"
+    },
+    {
+      "slug": "remplir-formulaire",
+      "label": "Remplir formulaire"
+    },
+    {
+      "slug": "montrer-piece-identite",
+      "label": "Montrer piece identite"
+    },
+    {
+      "slug": "renouveler-passeport",
+      "label": "Renouveler passeport"
+    },
+    {
+      "slug": "demander-visa",
+      "label": "Demander visa"
+    },
+    {
+      "slug": "sincrire-assurances",
+      "label": "Sincrire assurances"
+    },
+    {
+      "slug": "declarer-sinistre",
+      "label": "Declarer sinistre"
+    }
+  ]
+}
