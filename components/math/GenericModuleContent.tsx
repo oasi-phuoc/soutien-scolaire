@@ -68,6 +68,7 @@ import { G7SymmetryReflectExercise } from "@/components/math/geo/G7SymmetryRefle
 import { G7RotationExercise } from "@/components/math/geo/G7RotationExercise";
 import { G7CentralSymmetryExercise } from "@/components/math/geo/G7CentralSymmetryExercise";
 import { G7TranslationExercise } from "@/components/math/geo/G7TranslationExercise";
+import { listReproduceTasks } from "@/lib/curriculum/content/math/g7-reproduce-data";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
@@ -5247,7 +5248,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "G7-1") {
       const pushG7ReproduceSet = () => {
         steps.push({ kind: "g7_reproduce", lesson, variant: 1, exNum: 1 });
-        steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 2 });
+        // Ex.2 (réduction ÷2) : omis tant que le pool SCALE_FIGURES est vide
+        if (listReproduceTasks(2).length > 0) {
+          steps.push({ kind: "g7_reproduce", lesson, variant: 2, exNum: 2 });
+        }
         steps.push({ kind: "g7_reproduce", lesson, variant: 3, exNum: 3 });
       };
       pushG7ReproduceSet();
