@@ -67,6 +67,7 @@ import { G7SymmetryAxesExercise } from "@/components/math/geo/G7SymmetryAxesExer
 import { G7SymmetryReflectExercise } from "@/components/math/geo/G7SymmetryReflectExercise";
 import { G7RotationExercise } from "@/components/math/geo/G7RotationExercise";
 import { G7CentralSymmetryExercise } from "@/components/math/geo/G7CentralSymmetryExercise";
+import { G7TranslationExercise } from "@/components/math/geo/G7TranslationExercise";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
@@ -347,6 +348,7 @@ type G7ReproduceStep = { kind: "g7_reproduce"; lesson: MathSubmoduleLesson; vari
 type G7SymmetryStep = { kind: "g7_symmetry"; lesson: MathSubmoduleLesson; exNum: number };
 type G7RotationStep = { kind: "g7_rotation"; lesson: MathSubmoduleLesson; exNum: number };
 type G7CentralStep = { kind: "g7_central"; lesson: MathSubmoduleLesson; exNum: number };
+type G7TranslationStep = { kind: "g7_translation"; lesson: MathSubmoduleLesson; exNum: number };
 
 type AlgebraGroupQuestion = { expr: string; answer: number; difficulty: "easy" | "medium" | "hard" };
 type AlgebraGroupStep = { kind: "algebra_group"; lesson: MathSubmoduleLesson; letter: string; value: number; questions: AlgebraGroupQuestion[] };
@@ -376,7 +378,7 @@ type SymbolicGroupStep = {
   givens?: { letter: string; value: number }[];
 };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | G6PlanStep | G7ReproduceStep | G7SymmetryStep | G7RotationStep | G7CentralStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep | G6PlanStep | G7ReproduceStep | G7SymmetryStep | G7RotationStep | G7CentralStep | G7TranslationStep | AlgebraGroupStep | MonomialGroupStep | SymbolicGroupStep | EquationGroupStep | SystemEquationStep | FracEquationGroupStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -5267,6 +5269,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       pushG7CentralSet();
       steps.push({ kind: "eval_start", lesson });
       pushG7CentralSet();
+    } else if (sid === "G7-4") {
+      const pushG7TransSet = () => {
+        steps.push({ kind: "g7_translation", lesson, exNum: 1 });
+      };
+      pushG7TransSet();
+      steps.push({ kind: "eval_start", lesson });
+      pushG7TransSet();
     } else if (sid === "G7-5") {
       const pushG7RotSet = () => {
         steps.push({ kind: "g7_rotation", lesson, exNum: 1 });
@@ -5657,6 +5666,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "G7-1" ||
     l.submoduleId === "G7-2" ||
     l.submoduleId === "G7-3" ||
+    l.submoduleId === "G7-4" ||
     l.submoduleId === "G7-5" ||
     !!G3_GEO_PLACEMENT[l.submoduleId] ||
     !!G5_VOLUME_PLACEMENT[l.submoduleId] ||
@@ -7794,9 +7804,9 @@ export function GenericModuleContent({
           return numericAnswerMatches(v, String(q.answer));
         });
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
-      } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan" || currentStep.kind === "g7_reproduce" || currentStep.kind === "g7_symmetry" || currentStep.kind === "g7_rotation" || currentStep.kind === "g7_central") {
+      } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement" || currentStep.kind === "g6_plan" || currentStep.kind === "g7_reproduce" || currentStep.kind === "g7_symmetry" || currentStep.kind === "g7_rotation" || currentStep.kind === "g7_central" || currentStep.kind === "g7_translation") {
         const fallbackLen = currentStep.kind === "g6_plan" ? 4
-          : (currentStep.kind === "g7_reproduce" || currentStep.kind === "g7_symmetry" || currentStep.kind === "g7_rotation" || currentStep.kind === "g7_central") ? 1
+          : (currentStep.kind === "g7_reproduce" || currentStep.kind === "g7_symmetry" || currentStep.kind === "g7_rotation" || currentStep.kind === "g7_central" || currentStep.kind === "g7_translation") ? 1
           : 2;
         const pending = currentStep.kind === "g6_plan" ? pendingG6EvalRef.current[evalStepOffset] : undefined;
         currentResults = pending?.results
@@ -7863,7 +7873,7 @@ export function GenericModuleContent({
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : es?.kind === "word_problems" ? "Problèmes"
                 : es?.kind === "geo_placement" || es?.kind === "volume_placement" ? es.label
-                : es?.kind === "g6_plan" || es?.kind === "g7_reproduce" || es?.kind === "g7_symmetry" || es?.kind === "g7_rotation" || es?.kind === "g7_central" ? `Exercice ${es.exNum}`
+                : es?.kind === "g6_plan" || es?.kind === "g7_reproduce" || es?.kind === "g7_symmetry" || es?.kind === "g7_rotation" || es?.kind === "g7_central" || es?.kind === "g7_translation" ? `Exercice ${es.exNum}`
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -8315,7 +8325,7 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "geo_placement" || currentStep?.kind === "volume_placement" || currentStep?.kind === "g6_plan" || currentStep?.kind === "g7_reproduce" || currentStep?.kind === "g7_symmetry" || currentStep?.kind === "g7_rotation" || currentStep?.kind === "g7_central") {
+  if (currentStep?.kind === "geo_placement" || currentStep?.kind === "volume_placement" || currentStep?.kind === "g6_plan" || currentStep?.kind === "g7_reproduce" || currentStep?.kind === "g7_symmetry" || currentStep?.kind === "g7_rotation" || currentStep?.kind === "g7_central" || currentStep?.kind === "g7_translation") {
     stepCanValidate = !geoValidated;
     stepValidate = geoValidated ? () => {} : () => {
       setGeoValidateTrigger((n) => n + 1);
@@ -9487,6 +9497,7 @@ export function GenericModuleContent({
       case "g7_symmetry":
       case "g7_rotation":
       case "g7_central":
+      case "g7_translation":
         return (
           <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
         );
@@ -9531,6 +9542,56 @@ export function GenericModuleContent({
               onValidated={() => {}}
               reviewSnapshot={snap}
               half={snap.half}
+            />
+          );
+        }
+        if (step.variant === 8 && snap.kind === "g6_qall_figure") {
+          return (
+            <G6QAllFigureCoordsExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 10 && snap.kind === "g6_line_intersect") {
+          return (
+            <G6LineIntersectExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 11 && snap.kind === "g6_cartesian_place") {
+          return (
+            <G6CartesianPlaceExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 12 && snap.kind === "g6_find_vertex") {
+          return (
+            <G6FindVertexExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
+            />
+          );
+        }
+        if (step.variant === 13 && snap.kind === "g6_perp_parallel") {
+          return (
+            <G6PerpParallelPlaceExercise
+              exNum={step.exNum}
+              validateCommand={0}
+              onValidated={() => {}}
+              reviewSnapshot={snap}
             />
           );
         }
@@ -10838,28 +10899,28 @@ export function GenericModuleContent({
           )}
           {currentStep.variant === 8 && (
             <G6QAllFigureCoordsExercise key={`g6qall-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6QAllFigureCoords")} />
           )}
           {currentStep.variant === 10 && (
             <G6LineIntersectExercise key={`g6li-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6LineIntersect")} />
           )}
           {currentStep.variant === 11 && (
             <G6CartesianPlaceExercise key={`g6cp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6CartesianPlace")} />
           )}
           {currentStep.variant === 12 && (
             <G6FindVertexExercise key={`g6fv-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               consigneLang={showPivotTranslation ? pivot : undefined}
               consigneDir={showPivotTranslation && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"} />
           )}
           {currentStep.variant === 13 && (
             <G6PerpParallelPlaceExercise key={`g6pp-${stepIdx}-${geoResetKey}`} exNum={currentStep.exNum} validateCommand={geoValidateTrigger}
-              onValidated={(score, max) => { setGeoResults(Array.from({ length: max }, (_, i) => i < score)); setGeoValidated(true); }}
+              onValidated={handleG6Validated}
               {...g6Cons("g6PerpParallelPlace")} />
           )}
         </EvalRevealContext.Provider>
@@ -10949,6 +11010,21 @@ export function GenericModuleContent({
         <EvalRevealContext.Provider value={revealCorrection}>
           <G7CentralSymmetryExercise
             key={`g7cen-${stepIdx}-${geoResetKey}`}
+            exNum={currentStep.exNum}
+            seed={geoResetKey}
+            validateCommand={geoValidateTrigger}
+            onValidated={(score, max) => {
+              setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+              setGeoValidated(true);
+            }}
+          />
+        </EvalRevealContext.Provider>
+      )}
+
+      {!showEvalScore && currentStep?.kind === "g7_translation" && (
+        <EvalRevealContext.Provider value={revealCorrection}>
+          <G7TranslationExercise
+            key={`g7trans-${stepIdx}-${geoResetKey}`}
             exNum={currentStep.exNum}
             seed={geoResetKey}
             validateCommand={geoValidateTrigger}

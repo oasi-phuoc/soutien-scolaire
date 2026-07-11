@@ -2,7 +2,7 @@ import type { MathSubmoduleLesson } from "./math-a1-types";
 import { MATH_G7_REPRODUCE_LESSON } from "./math-g7-reproduce-1";
 import { MATH_G7_2_LESSON } from "./math-g7-2";
 import { MATH_G7_3_LESSON } from "./math-g7-3-central";
-import { MATH_G7_4_LESSON } from "./math-g7-4-translation";
+import { MATH_G7_4_LESSON } from "./math-g7-4";
 import { MATH_G7_5_ROTATION_LESSON } from "./math-g7-5-rotation";
 import { MATH_G7_6_LESSON } from "./math-g7-6-homothety";
 import { MATH_G7_7_LESSON } from "./math-g7-7-isometries";

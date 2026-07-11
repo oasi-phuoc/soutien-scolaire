@@ -8,6 +8,8 @@ export type SegmentLine = {
   x2: number;
   y2: number;
   label: string;
+  /** Si true, prolonge le trait jusqu'aux bords du repère (droite). Sinon segment entre les deux points. */
+  infinite?: boolean;
 };
 
 export type LineScenarioQuestion =
