@@ -97,11 +97,11 @@ export function G7GridCanvas({
   const pt = (p: GridPoint) => ({ cx: margin + p.x * cell, cy: margin + p.y * cell });
   const dotR = cell >= 22 ? 4 : 3;
 
-  const renderSeg = (key: string, stroke: string, dash?: string) => {
-    const s = parseSeg(key);
+  const renderSeg = (reactKey: string, segKey: string, stroke: string, dash?: string) => {
+    const s = parseSeg(segKey);
     return (
       <line
-        key={key}
+        key={reactKey}
         x1={margin + s.x1 * cell}
         y1={margin + s.y1 * cell}
         x2={margin + s.x2 * cell}
@@ -250,14 +250,14 @@ export function G7GridCanvas({
         );
       })()}
 
-      {[...lockedSegments].map((key) => renderSeg(`lock-s-${key}`, "#64748b"))}
+      {[...lockedSegments].map((key) => renderSeg(`lock-s-${key}`, key, "#64748b"))}
       {[...segments].map((key) => {
         if (lockedSegments.has(key)) return null;
-        return renderSeg(`s-${key}`, wrongSegments?.has(key) ? "#d97706" : "#1e293b");
+        return renderSeg(`s-${key}`, key, wrongSegments?.has(key) ? "#d97706" : "#1e293b");
       })}
       {validated && expectedSegments && [...expectedSegments]
         .filter((k) => !segments.has(k) && !lockedSegments.has(k))
-        .map((key) => renderSeg(`exp-s-${key}`, "#d97706", "4 3"))}
+        .map((key) => renderSeg(`exp-s-${key}`, key, "#d97706", "4 3"))}
 
       {[...lockedDots].map((key) => {
         const [x, y] = key.split(",").map(Number);
