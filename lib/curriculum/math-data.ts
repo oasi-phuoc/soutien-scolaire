@@ -7,7 +7,7 @@ const sm = (code: string, title: string) => ({
 });
 
 /**
- * Modules algèbre A1–A13 (A2 = add./soust.), géométrie G1–G10, statistiques S1–S2.
+ * Modules algèbre A1–A13 (A2 = add./soust.), géométrie G1–G7.
  * Renumérotation : ancien A2→A3 … ancien A12→A13.
  */
 export const MATH_MODULES: MathModule[] = [
@@ -260,109 +260,6 @@ export const MATH_MODULES: MathModule[] = [
       sm("G7.8", "Homothétie et longueurs"),
     ],
   },
-  {
-    id: "G8",
-    code: "G8",
-    title: "Échelles et plans",
-    branch: "geometry",
-    comingSoon: true,
-    prerequisiteIds: ["G7", "A6"],
-    algebraRefs: ["A3", "A6", "A5"],
-    submodules: [
-      sm("G8.1", "Notion d'échelle"),
-      sm("G8.2", "Lire une échelle"),
-      sm("G8.3", "Distance réelle"),
-      sm("G8.4", "Représentation"),
-      sm("G8.5", "Agrandir / réduire"),
-    ],
-  },
-  {
-    id: "G9",
-    code: "G9",
-    title: "Théorème de Pythagore",
-    branch: "geometry",
-    comingSoon: true,
-    prerequisiteIds: ["G1", "A8"],
-    algebraRefs: ["A8", "A5"],
-    submodules: [
-      sm("G9.1", "Triangle rectangle"),
-      sm("G9.2", "Énoncé a²+b²=c²"),
-      sm("G9.3", "Hypoténuse"),
-      sm("G9.4", "Cathète"),
-      sm("G9.5", "Réciproque"),
-      sm("G9.6", "Applications"),
-    ],
-  },
-  {
-    id: "G10",
-    code: "G10",
-    title: "Lecture et construction de graphiques",
-    branch: "geometry",
-    comingSoon: true,
-    prerequisiteIds: ["A5", "A6"],
-    algebraRefs: ["A6", "A5", "A7", "A13"],
-    submodules: [
-      sm("G10.1", "Repère cartésien"),
-      sm("G10.2", "Lire / placer des points"),
-      sm("G10.3", "Diagramme en bâtons"),
-      sm("G10.4", "Diagramme en secteurs"),
-      sm("G10.5", "Courbes"),
-      sm("G10.6", "Construire bâtons"),
-      sm("G10.7", "Construire secteurs"),
-      sm("G10.8", "Interpréter"),
-    ],
-  },
-  {
-    id: "G11",
-    code: "G11",
-    title: "Trigonométrie (introduction)",
-    branch: "geometry",
-    comingSoon: true,
-    prerequisiteIds: ["G9", "A10", "A5"],
-    algebraRefs: ["A8", "A10", "A5"],
-    submodules: [
-      sm("G11.1", "Rappel Pythagore"),
-      sm("G11.2", "sin, cos, tan"),
-      sm("G11.3", "Calculer un rapport"),
-      sm("G11.4", "Angle à partir du rapport"),
-      sm("G11.5", "Côté inconnu"),
-      sm("G11.6", "Applications"),
-    ],
-  },
-  {
-    id: "S1",
-    code: "S1",
-    title: "Statistiques descriptives",
-    branch: "stats",
-    prerequisiteIds: ["A3", "A6", "G10"],
-    algebraRefs: ["A3", "A6", "G10"],
-    submodules: [
-      sm("S1.1", "Collecte et tableaux"),
-      sm("S1.2", "Moyenne"),
-      sm("S1.3", "Médiane"),
-      sm("S1.4", "Mode"),
-      sm("S1.5", "Étendue"),
-      sm("S1.6", "Diagrammes (lien G9)"),
-      sm("S1.7", "Lecture critique"),
-    ],
-  },
-  {
-    id: "S2",
-    code: "S2",
-    title: "Probabilités",
-    branch: "stats",
-    prerequisiteIds: ["A4", "A6"],
-    algebraRefs: ["A4", "A6"],
-    submodules: [
-      sm("S2.1", "Expérience, univers"),
-      sm("S2.2", "Probabilité classique"),
-      sm("S2.3", "Complémentaire"),
-      sm("S2.4", "Impossible / certain"),
-      sm("S2.5", "Arbre à deux étapes"),
-      sm("S2.6", "Simulation et fréquences"),
-      sm("S2.7", "Intro combinaisons"),
-    ],
-  },
 ];
 
 export const MATH_ALGEBRA_ORDER = MATH_MODULES.filter((m) => m.branch === "algebra").map(
@@ -371,18 +268,12 @@ export const MATH_ALGEBRA_ORDER = MATH_MODULES.filter((m) => m.branch === "algeb
 
 export const MATH_GEOMETRY_TAB_ORDER = [
   ...MATH_MODULES.filter((m) => m.branch === "geometry").map((m) => m.id),
-  "S1",
-  "S2",
 ];
 
 /** Ancienne numérotation A2–A12 → nouvelle A3–A13 (après insertion du nouvel A2). */
-/** Ancienne numérotation G6–G10 → nouvelle G7–G11 (après insertion du G6 « Se repérer »). */
+/** Ancienne numérotation G6 → G7 (après insertion du G6 « Se repérer »). */
 export const GEOMETRY_LEGACY_ID_MAP: Record<string, string> = {
   G6: "G7",
-  G7: "G8",
-  G8: "G9",
-  G9: "G10",
-  G10: "G11",
 };
 
 export const ALGEBRA_LEGACY_ID_MAP: Record<string, string> = {
@@ -404,7 +295,7 @@ export function getMathModule(id: string): MathModule | undefined {
   return MATH_MODULES.find((m) => m.id === id);
 }
 
-/** Module visible dans la liste mais pas encore ouvert aux élèves (G7–G11, etc.). */
+/** Module visible dans la liste mais pas encore ouvert aux élèves (G7, etc.). */
 export function isMathModuleAccessibleToStudent(mod: MathModule | undefined): boolean {
   return !!mod && !mod.comingSoon;
 }
