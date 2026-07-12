@@ -332,17 +332,27 @@ export function DesktopSidebar() {
         )}
 
         {pedagogicNav.isAdmin && (
-          <button
-            type="button"
-            onClick={() => go("/admin")}
-            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-              adminOpen
-                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-            }`}
-          >
-            Admin
-          </button>
+          <div>
+            <button
+              type="button"
+              onClick={() => go("/admin")}
+              className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+                adminOpen
+                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`}
+            >
+              Admin
+            </button>
+            {adminOpen &&
+              renderSubs([
+                {
+                  href: "/admin/attribution-professeurs",
+                  label: "Professeurs",
+                  active: pathname.startsWith("/admin/attribution-professeurs"),
+                },
+              ])}
+          </div>
         )}
 
         <div className="my-2 border-t border-[var(--color-border-default)]" />
