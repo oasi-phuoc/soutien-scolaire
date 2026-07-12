@@ -24,6 +24,7 @@ export function ContenuAdminClient() {
   const [pending, startTransition] = useTransition();
   const [syncMsg, setSyncMsg] = useState<string | null>(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [deleteMsg, setDeleteMsg] = useState<string | null>(null);
 
   function reload() {
     startTransition(async () => {
@@ -58,11 +59,17 @@ export function ContenuAdminClient() {
   }, []);
 
   function handleDelete(key: string) {
-    if (!confirm(`Supprimer l'override « ${key} » ?`)) return;
+    if (!confirm(`Supprimer l'override « ${key} » ?\n\nCela retire aussi le fichier sur GitHub si possible.`))
+      return;
     startTransition(async () => {
+      setDeleteMsg(null);
       removeLocalOverride(key);
       const res = await deleteContentOverrideAction(key);
-      if (!res.ok) setError(res.reason ?? "Suppression impossible");
+      if (!res.ok) {
+        setError(res.reason ?? "Suppression impossible");
+        return;
+      }
+      setDeleteMsg(res.message ?? "Override supprimé");
       reload();
     });
   }
@@ -167,9 +174,18 @@ export function ContenuAdminClient() {
 
             <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
               <h2 className="text-base font-bold text-zinc-900">
-                Overrides enregistrés ({records.length})
+                Overrides enregistrés ({Math.min(records.length, 5)}
+                {records.length > 5 ? ` / ${records.length}` : ""})
               </h2>
+              <p className="mt-1 text-xs text-zinc-500">
+                Les 5 plus récents. Supprimer retire aussi le fichier sur GitHub.
+              </p>
               {error && <p className="mt-2 text-sm text-amber-800">{error}</p>}
+              {deleteMsg && (
+                <p className="mt-2 text-sm text-emerald-800" role="status">
+                  {deleteMsg}
+                </p>
+              )}
               {records.length === 0 ? (
                 <p className="mt-3 text-sm text-zinc-500">
                   Aucune modification enregistrée. Éditez une page dans le hub
@@ -177,7 +193,7 @@ export function ContenuAdminClient() {
                 </p>
               ) : (
                 <ul className="mt-3 divide-y divide-zinc-100">
-                  {records.map((r) => (
+                  {records.slice(0, 5).map((r) => (
                     <li
                       key={r.key}
                       className="flex flex-wrap items-center gap-2 py-3 text-sm"

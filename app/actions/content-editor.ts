@@ -6,6 +6,7 @@ import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { loadDiskOverrides } from "@/lib/content-editor/disk";
 import {
   commitOverrideToGitHub,
+  deleteOverrideFromGitHub,
   getGitHubConfigFromEnv,
   probeGitHubConnection,
   resolveGitHubConfig,
@@ -258,12 +259,25 @@ export async function saveContentOverrideAction(input: {
 export async function deleteContentOverrideAction(key: string): Promise<{
   ok: boolean;
   reason?: string;
+  message?: string;
+  gitDeleted?: boolean;
 }> {
   const auth = await requireAdmin();
   if (!auth.ok) return { ok: false, reason: auth.reason };
 
   const db = createServiceClient() ?? (await createSupabaseActionClient());
+  let label = labelForKey(key);
+  let gitPath: string | null = gitPathForKey(key);
+
   if (db) {
+    const { data: existing } = await db
+      .from("curriculum_content_overrides")
+      .select("label, git_path")
+      .eq("key", key)
+      .maybeSingle();
+    if (existing?.label) label = String(existing.label);
+    if (existing?.git_path) gitPath = String(existing.git_path);
+
     const { error } = await db
       .from("curriculum_content_overrides")
       .delete()
@@ -271,8 +285,32 @@ export async function deleteContentOverrideAction(key: string): Promise<{
     if (error) return { ok: false, reason: error.message };
   }
 
+  // Aussi depuis les fichiers disque (déploiement local / déjà sync)
+  const disk = await loadDiskOverrides();
+  const diskRec = disk[key];
+  if (diskRec?.gitPath) gitPath = diskRec.gitPath;
+  if (diskRec?.label) label = diskRec.label;
+
+  const notes: string[] = ["Supabase/local"];
+  let gitDeleted = false;
+  const gitRes = await deleteOverrideFromGitHub({ key, label, gitPath });
+  if (gitRes.ok) {
+    gitDeleted = true;
+    notes.push(
+      gitRes.sha
+        ? `Git (fichier retiré, ${gitRes.sha.slice(0, 7)})`
+        : "Git (fichier déjà absent)",
+    );
+  } else {
+    notes.push(`Git non nettoyé: ${gitRes.reason}`);
+  }
+
   revalidatePath("/admin/contenu");
-  return { ok: true };
+  return {
+    ok: true,
+    gitDeleted,
+    message: notes.join(" · "),
+  };
 }
 
 export async function getContentSyncSettingsAction(): Promise<{
