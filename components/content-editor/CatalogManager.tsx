@@ -47,6 +47,58 @@ function slugify(s: string) {
     .slice(0, 60);
 }
 
+function OpenIcon() {
+  return (
+    <svg
+      className="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  );
+}
+
+function ActiveToggle({
+  active,
+  disabled,
+  onChange,
+}: {
+  active: boolean;
+  disabled?: boolean;
+  onChange: (next: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={active}
+      disabled={disabled}
+      onClick={() => onChange(!active)}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide transition disabled:opacity-50 ${
+        active
+          ? "border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+          : "border-zinc-300 bg-zinc-100 text-zinc-500"
+      }`}
+      title={active ? "Actif — visible pour les élèves" : "Inactif — masqué pour les élèves"}
+    >
+      <span
+        className={`h-2.5 w-2.5 rounded-full ${
+          active ? "bg-[var(--color-theme)]" : "bg-zinc-400"
+        }`}
+      />
+      {active ? "Actif" : "Inactif"}
+    </button>
+  );
+}
+
 /**
  * Gestion catalogue : ajouter / masquer modules et leçons,
  * puis persister via overrides (Supabase + Git).
@@ -164,13 +216,24 @@ export function CatalogManager() {
     });
   }
 
-  function hideMathModule(moduleId: string) {
+  function setMathModuleActive(moduleId: string, active: boolean) {
     const next: MathCatalogPayload = {
       modules: mathCatalog.modules.map((m) =>
-        m.id === moduleId ? { ...m, hidden: true } : m,
+        m.id === moduleId ? { ...m, hidden: !active } : m,
       ),
     };
     startTransition(() => void persist(catalogMathKey(), "Catalogue maths", next));
+  }
+
+  function setLectureModuleActive(moduleId: string, active: boolean) {
+    const next: LectureCatalogPayload = {
+      modules: lectureCatalog.modules.map((m) =>
+        m.id === moduleId ? { ...m, hidden: !active } : m,
+      ),
+    };
+    startTransition(() =>
+      void persist(catalogLectureKey(), "Catalogue lecture", next),
+    );
   }
 
   function addLectureModule() {
@@ -277,13 +340,44 @@ export function CatalogManager() {
     });
   }
 
-  function hideFrenchTheme(slug: string) {
+  function setFrenchThemeActive(slug: string, active: boolean) {
     const next: FrenchCatalogPayload = {
       themes: frenchCatalog.themes.map((t) =>
-        t.slug === slug ? { ...t, hidden: true } : t,
+        t.slug === slug ? { ...t, hidden: !active } : t,
       ),
     };
-    startTransition(() => void persist(catalogFrenchKey(), "Catalogue français", next));
+    startTransition(() =>
+      void persist(catalogFrenchKey(), "Catalogue français", next),
+    );
+  }
+
+  function setCommModuleActive(moduleId: string, active: boolean) {
+    const next: CommCatalogPayload = {
+      modules: commCatalog.modules.map((m) =>
+        m.id === moduleId ? { ...m, hidden: !active } : m,
+      ),
+    };
+    startTransition(() =>
+      void persist(catalogCommKey(), "Catalogue communication", next),
+    );
+  }
+
+  function setCommSubActive(moduleId: string, subId: string, active: boolean) {
+    const next: CommCatalogPayload = {
+      modules: commCatalog.modules.map((m) =>
+        m.id === moduleId
+          ? {
+              ...m,
+              submodules: m.submodules.map((s) =>
+                s.id === subId ? { ...s, hidden: !active } : s,
+              ),
+            }
+          : m,
+      ),
+    };
+    startTransition(() =>
+      void persist(catalogCommKey(), "Catalogue communication", next),
+    );
   }
 
   function addCommSubmodule(moduleId: string) {
@@ -322,9 +416,10 @@ export function CatalogManager() {
           Modules &amp; leçons
         </h2>
         <p className="mt-1 text-sm text-zinc-600">
-          Ajoutez ou masquez des entrées du curriculum. Les contenus sont
-          éditables ensuite en mode édition sur la leçon. Visible pour tous via
-          Supabase{capabilities.gitConfigured ? " + Git" : ""}.
+          Ajoutez des entrées ou basculez <strong>Actif / Inactif</strong> (les
+          inactives restent listées ici, masquées pour les élèves). Édition ensuite
+          en mode édition sur la leçon. Sync Supabase
+          {capabilities.gitConfigured ? " + Git" : ""}.
         </p>
       </div>
 
@@ -362,14 +457,26 @@ export function CatalogManager() {
             + Module maths
           </button>
           <ul className="space-y-2">
-            {mathCatalog.modules
-              .filter((m) => !m.hidden)
-              .map((m) => (
-                <li key={m.id} className="rounded-lg border border-zinc-100 p-3">
+            {mathCatalog.modules.map((m) => {
+              const active = !m.hidden;
+              return (
+                <li
+                  key={m.id}
+                  className={`rounded-lg border p-3 ${
+                    active
+                      ? "border-zinc-100"
+                      : "border-zinc-200 bg-zinc-50/80 opacity-80"
+                  }`}
+                >
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold text-zinc-900">
                       {m.code} — {m.title}
                     </span>
+                    <ActiveToggle
+                      active={active}
+                      disabled={pending}
+                      onChange={(next) => setMathModuleActive(m.id, next)}
+                    />
                     <button
                       type="button"
                       className="text-[11px] font-bold text-amber-800"
@@ -377,28 +484,27 @@ export function CatalogManager() {
                     >
                       + Leçon
                     </button>
-                    <button
-                      type="button"
-                      className="text-[11px] font-bold text-red-700"
-                      onClick={() => hideMathModule(m.id)}
-                    >
-                      Masquer
-                    </button>
                   </div>
                   <ul className="mt-2 space-y-1 text-xs text-zinc-600">
                     {m.submodules.map((s) => (
-                      <li key={s.id}>
+                      <li key={s.id} className="flex items-center gap-2">
+                        <span className="min-w-0 flex-1">
+                          {s.code} — {s.title}
+                        </span>
                         <Link
                           href={`/mathematiques/${s.id}`}
-                          className="text-[var(--color-theme)] underline"
+                          aria-label={`Ouvrir ${s.code}`}
+                          title="Ouvrir"
+                          className="rounded-md p-1 text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
                         >
-                          {s.code} — {s.title}
+                          <OpenIcon />
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </li>
-              ))}
+              );
+            })}
           </ul>
         </div>
       )}
@@ -413,14 +519,26 @@ export function CatalogManager() {
             + Module lecture
           </button>
           <ul className="space-y-2">
-            {lectureCatalog.modules
-              .filter((m) => !m.hidden)
-              .map((m) => (
-                <li key={m.id} className="rounded-lg border border-zinc-100 p-3">
+            {lectureCatalog.modules.map((m) => {
+              const active = !m.hidden;
+              return (
+                <li
+                  key={m.id}
+                  className={`rounded-lg border p-3 ${
+                    active
+                      ? "border-zinc-100"
+                      : "border-zinc-200 bg-zinc-50/80 opacity-80"
+                  }`}
+                >
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold">
                       {m.code} — {m.title}
                     </span>
+                    <ActiveToggle
+                      active={active}
+                      disabled={pending}
+                      onChange={(next) => setLectureModuleActive(m.id, next)}
+                    />
                     <button
                       type="button"
                       className="text-[11px] font-bold text-amber-800"
@@ -428,12 +546,21 @@ export function CatalogManager() {
                     >
                       + Lettre / leçon
                     </button>
+                    <Link
+                      href="/lecture"
+                      aria-label={`Ouvrir ${m.code}`}
+                      title="Ouvrir"
+                      className="rounded-md p-1 text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
+                    >
+                      <OpenIcon />
+                    </Link>
                   </div>
                   <p className="mt-1 text-xs text-zinc-500">
                     Lettres : {m.letterKeys.join(", ") || "—"}
                   </p>
                 </li>
-              ))}
+              );
+            })}
           </ul>
         </div>
       )}
@@ -463,42 +590,55 @@ export function CatalogManager() {
               + Leçon conjugaison
             </button>
           </div>
-          <ul className="max-h-80 space-y-1 overflow-y-auto text-sm">
+          <ul className="max-h-[28rem] space-y-1 overflow-y-auto text-sm">
             {frenchCatalog.themes
-              .filter((t) => !t.hidden)
               .slice()
-              .reverse()
-              .slice(0, 40)
-              .map((t) => (
-                <li
-                  key={t.id}
-                  className="flex flex-wrap items-center gap-2 rounded border border-zinc-50 px-2 py-1.5"
-                >
-                  <span className="min-w-0 flex-1 truncate">
-                    <span className="font-semibold">{t.code}</span> {t.title}
-                    <span className="text-zinc-400"> · {t.tab ?? "général"}</span>
-                  </span>
-                  <Link
-                    href={
-                      t.tab === "vocabulaire"
-                        ? `/francais/vocabulaire/${t.slug}`
-                        : t.tab === "conjugaison"
-                          ? `/francais/conjugaison/${t.slug}`
-                          : `/francais/grammaire/${t.slug}`
-                    }
-                    className="text-[11px] font-bold text-[var(--color-theme)]"
+              .sort((a, b) => {
+                const ah = a.hidden ? 1 : 0;
+                const bh = b.hidden ? 1 : 0;
+                if (ah !== bh) return ah - bh;
+                return a.code.localeCompare(b.code, "fr");
+              })
+              .map((t) => {
+                const active = !t.hidden;
+                const href =
+                  t.tab === "vocabulaire"
+                    ? `/francais/vocabulaire/${t.slug}`
+                    : t.tab === "conjugaison"
+                      ? `/francais/conjugaison/${t.slug}`
+                      : `/francais/grammaire/${t.slug}`;
+                return (
+                  <li
+                    key={t.id}
+                    className={`flex flex-wrap items-center gap-2 rounded border px-2 py-1.5 ${
+                      active
+                        ? "border-zinc-50"
+                        : "border-zinc-200 bg-zinc-50/80 opacity-80"
+                    }`}
                   >
-                    Ouvrir
-                  </Link>
-                  <button
-                    type="button"
-                    className="text-[11px] font-bold text-red-700"
-                    onClick={() => hideFrenchTheme(t.slug)}
-                  >
-                    Masquer
-                  </button>
-                </li>
-              ))}
+                    <span className="min-w-0 flex-1 truncate">
+                      <span className="font-semibold">{t.code}</span> {t.title}
+                      <span className="text-zinc-400">
+                        {" "}
+                        · {t.tab ?? "général"}
+                      </span>
+                    </span>
+                    <ActiveToggle
+                      active={active}
+                      disabled={pending}
+                      onChange={(next) => setFrenchThemeActive(t.slug, next)}
+                    />
+                    <Link
+                      href={href}
+                      aria-label={`Ouvrir ${t.code}`}
+                      title="Ouvrir"
+                      className="rounded-md p-1 text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
+                    >
+                      <OpenIcon />
+                    </Link>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       )}
@@ -506,14 +646,26 @@ export function CatalogManager() {
       {tab === "comm" && (
         <div className="space-y-3">
           <ul className="space-y-2">
-            {commCatalog.modules
-              .filter((m) => !m.hidden)
-              .map((m) => (
-                <li key={m.id} className="rounded-lg border border-zinc-100 p-3">
+            {commCatalog.modules.map((m) => {
+              const active = !m.hidden;
+              return (
+                <li
+                  key={m.id}
+                  className={`rounded-lg border p-3 ${
+                    active
+                      ? "border-zinc-100"
+                      : "border-zinc-200 bg-zinc-50/80 opacity-80"
+                  }`}
+                >
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold">
                       {m.id} — {m.title}
                     </span>
+                    <ActiveToggle
+                      active={active}
+                      disabled={pending}
+                      onChange={(next) => setCommModuleActive(m.id, next)}
+                    />
                     <button
                       type="button"
                       className="text-[11px] font-bold text-amber-800"
@@ -523,21 +675,40 @@ export function CatalogManager() {
                     </button>
                   </div>
                   <ul className="mt-2 space-y-1 text-xs text-zinc-600">
-                    {m.submodules
-                      .filter((s) => !s.hidden)
-                      .map((s) => (
-                        <li key={s.id}>
+                    {m.submodules.map((s) => {
+                      const subActive = !s.hidden;
+                      return (
+                        <li
+                          key={s.id}
+                          className={`flex flex-wrap items-center gap-2 ${
+                            subActive ? "" : "opacity-70"
+                          }`}
+                        >
+                          <span className="min-w-0 flex-1">
+                            {s.code} — {s.title}
+                          </span>
+                          <ActiveToggle
+                            active={subActive}
+                            disabled={pending}
+                            onChange={(next) =>
+                              setCommSubActive(m.id, s.id, next)
+                            }
+                          />
                           <Link
                             href={`/communication/${s.id}`}
-                            className="text-[var(--color-theme)] underline"
+                            aria-label={`Ouvrir ${s.code}`}
+                            title="Ouvrir"
+                            className="rounded-md p-1 text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
                           >
-                            {s.code} — {s.title}
+                            <OpenIcon />
                           </Link>
                         </li>
-                      ))}
+                      );
+                    })}
                   </ul>
                 </li>
-              ))}
+              );
+            })}
           </ul>
           <p className="text-xs text-zinc-500">
             CE / CO : uploadez des images liées aux mots dans l&apos;onglet Images
