@@ -200,6 +200,85 @@ export async function commitBinaryToGitHub(input: {
   return putGitHubFile(cfg, filePath, content, input.message);
 }
 
+/**
+ * Supprime le fichier JSON d'override sur GitHub (commit de suppression).
+ */
+export async function deleteOverrideFromGitHub(input: {
+  key: string;
+  label?: string;
+  gitPath?: string | null;
+}): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
+  const cfg = await resolveGitHubConfig();
+  if (!cfg) {
+    return {
+      ok: false,
+      reason:
+        "GitHub non configuré — définissez CONTENT_GITHUB_TOKEN (Vercel) ou le token dans Admin → Contenu",
+    };
+  }
+
+  const [owner, repoName] = cfg.repo.split("/");
+  if (!owner || !repoName) {
+    return { ok: false, reason: `Dépôt GitHub invalide: ${cfg.repo}` };
+  }
+
+  const filePath = (input.gitPath || gitPathForKey(input.key)).replace(/^\//, "");
+  const encodedPath = filePath
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
+
+  const getRes = await ghFetch(
+    cfg,
+    `/repos/${owner}/${repoName}/contents/${encodedPath}?ref=${encodeURIComponent(cfg.branch)}`,
+  );
+
+  if (getRes.status === 404) {
+    return {
+      ok: true,
+      sha: "",
+      path: filePath,
+    };
+  }
+  if (!getRes.ok) {
+    const err = await getRes.text();
+    return { ok: false, reason: `Lecture GitHub: ${getRes.status} ${err}` };
+  }
+
+  const existing = (await getRes.json()) as { sha?: string };
+  if (!existing.sha) {
+    return { ok: false, reason: "SHA GitHub introuvable pour ce fichier" };
+  }
+
+  const label = input.label?.trim() || input.key;
+  const delRes = await ghFetch(
+    cfg,
+    `/repos/${owner}/${repoName}/contents/${encodedPath}`,
+    {
+      method: "DELETE",
+      body: JSON.stringify({
+        message: `content(delete): ${label}`,
+        sha: existing.sha,
+        branch: cfg.branch,
+      }),
+    },
+  );
+
+  if (!delRes.ok) {
+    const err = await delRes.text();
+    return { ok: false, reason: `Suppression GitHub: ${delRes.status} ${err}` };
+  }
+
+  const json = (await delRes.json()) as {
+    commit?: { sha?: string };
+  };
+  return {
+    ok: true,
+    sha: json.commit?.sha || "",
+    path: filePath,
+  };
+}
+
 export async function probeGitHubConnection(): Promise<{
   ok: boolean;
   reason?: string;
