@@ -133,7 +133,7 @@ export function listHubPages(
       })),
     );
   } else if (domain === "francais" && submenu === "vocabulaire") {
-    // Uniquement les thèmes tab=vocabulaire (V1.x…), PAS les leçons Apprendre A.1–A.61 (sans tab).
+    // Uniquement les thèmes tab=vocabulaire (V1.x…).
     const themes = resolveFrenchThemes(FRENCH_THEMES, {
       ...overrides,
       [catalogFrenchKey()]: overrides[catalogFrenchKey()],
