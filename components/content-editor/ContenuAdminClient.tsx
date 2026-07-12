@@ -17,6 +17,7 @@ import type {
 } from "@/lib/content-editor/types";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { CatalogManager } from "@/components/content-editor/CatalogManager";
+import { ContentHubEditor } from "@/components/content-editor/ContentHubEditor";
 
 export function ContenuAdminClient() {
   const { setEditMode, refresh } = useContentEditor();
@@ -31,6 +32,7 @@ export function ContenuAdminClient() {
   const [envConfigured, setEnvConfigured] = useState(false);
   const [hasStoredToken, setHasStoredToken] = useState(false);
   const [tokenHint, setTokenHint] = useState<string | null>(null);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   function reload() {
     startTransition(async () => {
@@ -120,14 +122,27 @@ export function ContenuAdminClient() {
 
   return (
     <div className="space-y-6">
+      <ContentHubEditor />
+
+      <button
+        type="button"
+        onClick={() => setShowAdvanced((v) => !v)}
+        className="text-sm font-semibold text-[var(--color-theme)] underline"
+      >
+        {showAdvanced
+          ? "Masquer catalogue, sync Git et overrides"
+          : "Catalogue, sync Git et overrides…"}
+      </button>
+
+      {showAdvanced && (
+        <>
       <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
         <h2 className="text-base font-bold text-zinc-900">Mode édition en ligne</h2>
         <p className="mt-1 text-sm text-zinc-600">
-          Réservé au compte <strong>admin</strong>. Activez le mode édition, ouvrez une
-          leçon (lecture, vocabulaire, grammaire, maths), modifiez le contenu, puis
-          enregistrez. Les changements partent vers le navigateur
-          {caps?.supabaseConfigured ? ", Supabase" : ""}
-          {caps?.gitConfigured ? " et GitHub" : ""}.
+          Réservé au compte <strong>admin</strong>. Le hub ci-dessus active
+          l&apos;édition automatiquement. Sync
+          {caps?.supabaseConfigured ? " Supabase" : ""}
+          {caps?.gitConfigured ? " + GitHub" : ""}.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <button
@@ -374,6 +389,8 @@ export function ContenuAdminClient() {
           </li>
         </ul>
       </div>
+        </>
+      )}
     </div>
   );
 }

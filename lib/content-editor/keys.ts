@@ -71,6 +71,8 @@ const KNOWN_DOMAINS: ContentDomain[] = [
   "ce",
   "co",
   "asset",
+  "comm",
+  "placement",
 ];
 
 export function parseContentKey(key: string): {
@@ -120,6 +122,10 @@ export function labelForKey(key: string): string {
       return `CE — ${id}`;
     case "co":
       return `CO — ${id}`;
+    case "comm":
+      return `Communication — ${id}`;
+    case "placement":
+      return `Placement — ${kind}/${id}`;
     case "asset":
       return `Image — ${id}`;
     default:
