@@ -121,6 +121,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
     const params = new URLSearchParams(window.location.search);
     const t = params.get("tab");
     if (t === "geometry") setTab("geometry");
+    else if (t === "algebra") setTab("algebra");
   }, []);
 
   const _persist = useCallback((next: StoredProgressV1) => {
@@ -185,7 +186,10 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
               : "bg-transparent text-[var(--color-accent-alg)] hover:bg-white/40"
           }`}
-          onClick={() => setTab("algebra")}
+          onClick={() => {
+            setTab("algebra");
+            window.history.replaceState(null, "", "/mathematiques?tab=algebra");
+          }}
         >
           Algèbre
         </button>
@@ -198,7 +202,10 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               ? "bg-[var(--color-accent-geo)] text-white shadow-sm"
               : "bg-transparent text-[var(--color-accent-geo)] hover:bg-white/40"
           }`}
-          onClick={() => setTab("geometry")}
+          onClick={() => {
+            setTab("geometry");
+            window.history.replaceState(null, "", "/mathematiques?tab=geometry");
+          }}
         >
           Géométrie
         </button>
