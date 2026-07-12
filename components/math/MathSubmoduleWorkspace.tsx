@@ -38,6 +38,9 @@ import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
+import { mathLessonKey } from "@/lib/content-editor/keys";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
 import { G3AreaExercise } from "@/components/math/geo/G3AreaExercises";
@@ -1793,7 +1796,11 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode, isAdmin }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
   const sectionBackUrl = moduleId.startsWith("G") ? "/mathematiques?tab=geometry" : "/mathematiques";
-  const lesson = getLessonBySubmoduleId(submoduleId ?? "");
+  const baseLesson = getLessonBySubmoduleId(submoduleId ?? "");
+  const { resolve, getOverride } = useContentEditor();
+  const contentKey = mathLessonKey(submoduleId ?? "");
+  const lesson = baseLesson ? resolve(contentKey, baseLesson) : undefined;
+  const overrideStamp = getOverride(contentKey)?.updatedAt ?? "base";
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
   const lessonTrad = lesson ? getTrad(lesson.submoduleId) : undefined;
@@ -1802,7 +1809,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     return lessonTrad?.consignes?.[promptFr]?.[pivot] ?? promptFr;
   }, [lessonTrad, pivot, showPivotTranslation]);
 
-  const [steps] = useState<WorkspaceStep[]>(() => {
+  const [steps, setSteps] = useState<WorkspaceStep[]>(() => {
     if (directRevisionMode) {
       const evalSteps = buildRevisionEvalSteps(moduleId);
       return [
@@ -1813,6 +1820,13 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     }
     return lesson ? buildSteps(lesson) : [];
   });
+
+  useEffect(() => {
+    if (directRevisionMode || !lesson) return;
+    setSteps(buildSteps(lesson));
+    // Rebuild after admin content save
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overrideStamp, submoduleId]);
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
   const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
@@ -2158,6 +2172,11 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
 
   return (
     <div className="pb-40">
+      {baseLesson && (
+        <div className="app-shell mb-4">
+          <MathLessonEditorHost submoduleId={baseLesson.submoduleId} />
+        </div>
+      )}
       {isInEvalExercises && <EvalGuardSentinel />}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">

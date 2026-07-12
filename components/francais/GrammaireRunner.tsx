@@ -27,6 +27,10 @@ import {
   EvalResultsHint,
   EvalResultsSummary,
 } from "@/components/ui/EvalResultsUI";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { ContentEditorPanel } from "@/components/content-editor/ContentEditorPanel";
+import { GrammarLessonFields } from "@/components/content-editor/GrammarLessonFields";
+import { conjugationLessonKey, grammarLessonKey } from "@/lib/content-editor/keys";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -2543,12 +2547,18 @@ function GramHintPopup({ hint, onClose }: { hint: string; onClose: () => void })
   );
 }
 
-export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
+export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
   const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
+  const { resolve } = useContentEditor();
+  const contentKey =
+    subject === "Conjugaison"
+      ? conjugationLessonKey(baseLesson.slug)
+      : grammarLessonKey(baseLesson.slug);
+  const lesson = resolve(contentKey, baseLesson);
   const midExercises = lesson.midExercises ?? [];
   const evalExercises = lesson.evalExercises ?? [];
   const hasEval = evalExercises.length > 0;
@@ -2759,6 +2769,15 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   return (
     <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+      <ContentEditorPanel
+        contentKey={contentKey}
+        label={`${subject} — ${baseLesson.slug}`}
+        baseValue={baseLesson}
+      >
+        {({ value, setValue }) => (
+          <GrammarLessonFields value={value} setValue={setValue} />
+        )}
+      </ContentEditorPanel>
       {isEvalPhase && <EvalGuardSentinel />}
       {/* Cancel confirmation dialog */}
       {showCancelConfirm && (

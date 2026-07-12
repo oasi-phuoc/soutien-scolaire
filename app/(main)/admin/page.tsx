@@ -55,6 +55,13 @@ export default async function AdminPage() {
           </div>
         </div>
         <Link
+          href="/admin/contenu"
+          className="flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-amber-400/50 bg-amber-50 px-3 text-sm font-semibold text-amber-900 shadow-sm transition-colors hover:bg-amber-100"
+          title="Édition du contenu pédagogique"
+        >
+          Contenu
+        </Link>
+        <Link
           href="/admin/attribution-professeurs"
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-theme)]/30 bg-white text-[var(--color-theme)] shadow-sm transition-colors hover:bg-[var(--color-theme-light)] dark:bg-zinc-900 dark:hover:bg-[var(--color-theme)]/10"
           aria-label="Attribution des professeurs"

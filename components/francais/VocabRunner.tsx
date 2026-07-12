@@ -33,6 +33,10 @@ import {
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { pickVocabTitle } from "@/lib/curriculum/vocab-theme-utils";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { ContentEditorPanel } from "@/components/content-editor/ContentEditorPanel";
+import { VocabThemeFields } from "@/components/content-editor/VocabThemeFields";
+import { vocabThemeKey } from "@/lib/content-editor/keys";
 
 interface Props {
   theme: VocabTheme;
@@ -117,10 +121,13 @@ function VocabHintPopup({ hint, onClose }: { hint: string; onClose: () => void }
   );
 }
 
-export function VocabRunner({ theme }: Props) {
+export function VocabRunner({ theme: baseTheme }: Props) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
+  const { resolve } = useContentEditor();
+  const contentKey = vocabThemeKey(baseTheme.slug);
+  const theme = resolve(contentKey, baseTheme);
   const displayTitle = pickVocabTitle(theme, pivot, showPivot);
   const titleRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
   const evalGuard = useEvalNavGuard();
@@ -401,6 +408,15 @@ export function VocabRunner({ theme }: Props) {
 
   return (
     <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+      <ContentEditorPanel
+        contentKey={contentKey}
+        label={`Vocabulaire — ${baseTheme.slug}`}
+        baseValue={baseTheme}
+      >
+        {({ value, setValue }) => (
+          <VocabThemeFields value={value} setValue={setValue} />
+        )}
+      </ContentEditorPanel>
       {isInEvalPhase && <EvalGuardSentinel />}
 
       {/* Cancel eval confirmation dialog */}

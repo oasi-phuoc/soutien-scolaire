@@ -23,6 +23,9 @@ import {
 } from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
+import { mathLessonKey } from "@/lib/content-editor/keys";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -2280,6 +2283,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
+  const { resolve } = useContentEditor();
   const [activeIdx, setActiveIdx] = useState(() => {
     if (startSubmoduleId) {
       const idx = MATH_A1_LESSONS.findIndex((l) => l.submoduleId === startSubmoduleId);
@@ -2678,7 +2682,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
     } catch { /* ignore */ }
   }, [activeIdx, step]);
 
-  const lesson = MATH_A1_LESSONS[activeIdx];
+  const rawLesson = MATH_A1_LESSONS[activeIdx];
+  const lesson = rawLesson
+    ? resolve(mathLessonKey(rawLesson.submoduleId), rawLesson)
+    : undefined;
   if (!lesson) return null;
 
   // Items et logique de soumission de l'évaluation (utilisés par le timer)
@@ -3056,6 +3063,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
 
   return (
     <div className="pb-40">
+      <div className="app-shell mb-4">
+        <MathLessonEditorHost submoduleId={lesson.submoduleId} />
+      </div>
       {step === "eval" && evalStarted && !evalSubmitted && <EvalGuardSentinel />}
 
       {/* Step progress bar — hidden during eval */}
