@@ -92,18 +92,28 @@ export const HUB_DOMAINS: {
 
 type OverrideMap = Record<string, { payload: unknown } | undefined>;
 
+function sortHubPagesAlpha(pages: HubPage[]): HubPage[] {
+  return [...pages].sort((a, b) => {
+    const byTitle = a.title.localeCompare(b.title, "fr", { sensitivity: "base" });
+    if (byTitle !== 0) return byTitle;
+    return a.code.localeCompare(b.code, "fr", { numeric: true, sensitivity: "base" });
+  });
+}
+
 export function listHubPages(
   domain: HubDomain,
   submenu: HubSubmenu,
   overrides: OverrideMap = {},
 ): HubPage[] {
+  let pages: HubPage[] = [];
+
   if (domain === "math" && (submenu === "algebra" || submenu === "geometry")) {
     const branch = submenu === "algebra" ? "algebra" : "geometry";
     const modules = resolveMathModules(MATH_MODULES, {
       ...overrides,
       [catalogMathKey()]: overrides[catalogMathKey()],
     }).filter((m) => m.branch === branch);
-    return modules.flatMap((m) =>
+    pages = modules.flatMap((m) =>
       m.submodules.map((s) => ({
         id: s.id,
         code: s.code,
@@ -122,15 +132,13 @@ export function listHubPages(
         },
       })),
     );
-  }
-
-  if (domain === "francais" && submenu === "vocabulaire") {
+  } else if (domain === "francais" && submenu === "vocabulaire") {
     // Uniquement les thèmes tab=vocabulaire (V1.x…), PAS les leçons Apprendre A.1–A.61 (sans tab).
     const themes = resolveFrenchThemes(FRENCH_THEMES, {
       ...overrides,
       [catalogFrenchKey()]: overrides[catalogFrenchKey()],
     }).filter((t) => t.tab === "vocabulaire");
-    return themes.map((t) => ({
+    pages = themes.map((t) => ({
       id: t.slug,
       code: t.code,
       title: t.title,
@@ -146,14 +154,12 @@ export function listHubPages(
           sentences: [],
         },
     }));
-  }
-
-  if (domain === "francais" && submenu === "grammaire") {
+  } else if (domain === "francais" && submenu === "grammaire") {
     const themes = resolveFrenchThemes(FRENCH_THEMES, {
       ...overrides,
       [catalogFrenchKey()]: overrides[catalogFrenchKey()],
     }).filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
-    return themes.map((t) => ({
+    pages = themes.map((t) => ({
       id: t.slug,
       code: t.code,
       title: t.title,
@@ -175,10 +181,8 @@ export function listHubPages(
           exercises: [],
         },
     }));
-  }
-
-  if (domain === "francais" && submenu === "expression") {
-    return COMM_MODULES.flatMap((m) =>
+  } else if (domain === "francais" && submenu === "expression") {
+    pages = COMM_MODULES.flatMap((m) =>
       m.submodules
         .filter((s) => s.available !== false)
         .map((s) => ({
@@ -196,14 +200,12 @@ export function listHubPages(
           }),
         })),
     );
-  }
-
-  if (domain === "lecture" && submenu === "apprendre") {
+  } else if (domain === "lecture" && submenu === "apprendre") {
     const modules = resolveLectureModules(LECTURE_MODULES, {
       ...overrides,
       [catalogLectureKey()]: overrides[catalogLectureKey()],
     });
-    return modules.flatMap((m) =>
+    pages = modules.flatMap((m) =>
       m.letters.map((letter) => ({
         id: `${m.id}-${letter.letterLower}`,
         code: `${m.code}.${letter.letter ?? letter.letterLower}`,
@@ -213,10 +215,8 @@ export function listHubPages(
         loadBase: () => letter,
       })),
     );
-  }
-
-  if (domain === "lecture" && submenu === "histoires") {
-    return STORIES.map((s) => ({
+  } else if (domain === "lecture" && submenu === "histoires") {
+    pages = STORIES.map((s) => ({
       id: s.id,
       code: s.id,
       title: s.title,
@@ -224,10 +224,8 @@ export function listHubPages(
       href: `/lecture/histoires/${s.id}`,
       loadBase: () => s,
     }));
-  }
-
-  if (domain === "placement" && submenu === "placement-math") {
-    return [
+  } else if (domain === "placement" && submenu === "placement-math") {
+    pages = [
       {
         id: "placement-math-overview",
         code: "PL-MATH",
@@ -242,11 +240,9 @@ export function listHubPages(
         }),
       },
     ];
-  }
-
-  if (domain === "placement" && ["ce", "co", "pe", "po"].includes(submenu)) {
+  } else if (domain === "placement" && ["ce", "co", "pe", "po"].includes(submenu)) {
     const skill = submenu.toUpperCase();
-    return (["base", "moyen", "avance"] as const).map((level, i) => ({
+    pages = (["base", "moyen", "avance"] as const).map((level, i) => ({
       id: `${skill}-${i + 1}`,
       code: `${skill}-${i + 1}`,
       title: `${skill} — niveau ${level}`,
@@ -262,5 +258,5 @@ export function listHubPages(
     }));
   }
 
-  return [];
+  return sortHubPagesAlpha(pages);
 }
