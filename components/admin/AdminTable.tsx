@@ -388,20 +388,20 @@ export function AdminTable({
         </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
+      {/* Table — hauteur bornée à la fenêtre, scroll interne */}
+      <div className="max-h-[calc(100dvh-14rem)] overflow-auto rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
         <table className="w-full text-sm">
-          <thead>
+          <thead className="sticky top-0 z-10">
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="hidden whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Statut</th>
-              <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Prénom, Nom</th>
-              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell">Classe</th>
-              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Dernier accès</th>
-              <th className="hidden whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Maths</th>
-              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
-              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
-              <th className="hidden whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Placement</th>
-              <th className="w-10 px-2 py-2 sm:px-4 sm:py-3" aria-label="Détail" />
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Statut</th>
+              <th className="bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Prénom, Nom</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell">Classe</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Dernier accès</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Maths</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Placement</th>
+              <th className="w-10 bg-[var(--color-theme)] px-2 py-2 sm:px-4 sm:py-3" aria-label="Détail" />
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
