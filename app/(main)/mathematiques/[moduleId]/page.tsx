@@ -15,7 +15,7 @@ import {
 } from "@/lib/curriculum/lessons-registry";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getContentOverridesMapAction } from "@/app/actions/content-editor";
-import { catalogMathKey, mathLessonKey } from "@/lib/content-editor/keys";
+import { mathLessonKey } from "@/lib/content-editor/keys";
 import { resolveMathModules } from "@/lib/content-editor/catalog";
 import type { MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 
