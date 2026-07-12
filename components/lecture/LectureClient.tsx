@@ -345,6 +345,9 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
   useEffect(() => {
     setProgress(loadLectureProgress());
     setHydrated(true);
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("tab");
+    if (t === "histoires" || t === "apprendre") setTab(t);
   }, []);
 
   const activeModuleId = hydrated
@@ -384,7 +387,10 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           type="button"
           role="tab"
           aria-selected={tab === "apprendre"}
-          onClick={() => setTab("apprendre")}
+          onClick={() => {
+            setTab("apprendre");
+            window.history.replaceState(null, "", "/lecture?tab=apprendre");
+          }}
           className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "apprendre"
               ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"
@@ -397,7 +403,10 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           type="button"
           role="tab"
           aria-selected={tab === "histoires"}
-          onClick={() => setTab("histoires")}
+          onClick={() => {
+            setTab("histoires");
+            window.history.replaceState(null, "", "/lecture?tab=histoires");
+          }}
           className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "histoires"
               ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"

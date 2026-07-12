@@ -10,11 +10,19 @@ import { getContentEditorCapabilitiesAction } from "@/app/actions/content-editor
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { getMathModule } from "@/lib/curriculum/math-data";
+import { getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
 
 type NavLink = {
   href: string;
   label: string;
   match?: (pathname: string) => boolean;
+};
+
+type SubLink = {
+  href: string;
+  label: string;
+  active: boolean;
 };
 
 const mainLinks: NavLink[] = [
@@ -28,16 +36,26 @@ const mainLinks: NavLink[] = [
   { href: "/mathematiques", label: "Maths" },
 ];
 
-const frenchSubs = [
-  { href: "/francais?tab=vocabulaire", label: "Vocabulaire", tab: "vocabulaire" },
-  { href: "/francais?tab=grammaire", label: "Grammaire", tab: "grammaire" },
-  { href: "/francais?tab=communication", label: "Expression", tab: "communication" },
-  { href: "/communication", label: "Parler", tab: null as string | null },
-];
-
 function isActive(pathname: string, link: NavLink) {
   if (link.match) return link.match(pathname);
   return pathname === link.href || pathname.startsWith(`${link.href}/`);
+}
+
+function TranslateOnIcon() {
+  return (
+    <svg
+      className="h-4 w-4 shrink-0"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
 }
 
 /**
@@ -73,9 +91,12 @@ export function DesktopSidebar() {
   }, [capabilities.canEdit]);
 
   const badge = pendingTasks + unreadMessages;
+  const lectureOpen = pathname.startsWith("/lecture");
   const frenchOpen =
     pathname.startsWith("/francais") || pathname.startsWith("/communication");
-  const currentTab =
+  const mathsOpen = pathname.startsWith("/mathematiques");
+
+  const frenchTab =
     searchParams.get("tab") ??
     (pathname.startsWith("/francais/vocabulaire")
       ? "vocabulaire"
@@ -86,12 +107,95 @@ export function DesktopSidebar() {
           ? "communication"
           : "vocabulaire");
 
+  const lectureTab =
+    searchParams.get("tab") === "histoires" ||
+    pathname.startsWith("/lecture/histoires")
+      ? "histoires"
+      : "apprendre";
+
+  const mathTabParam = searchParams.get("tab");
+  let mathsTab: "algebra" | "geometry" =
+    mathTabParam === "geometry" ? "geometry" : "algebra";
+  if (mathsOpen && pathname !== "/mathematiques" && !mathTabParam) {
+    const upper = pathname.split("/")[2]?.toUpperCase() ?? "";
+    const moduleId = getModuleIdForSubmodule(upper) ?? upper.split("-")[0] ?? upper;
+    const mod = getMathModule(moduleId);
+    if (mod?.branch === "geometry") mathsTab = "geometry";
+  }
+
+  const lectureSubs: SubLink[] = [
+    {
+      href: "/lecture?tab=apprendre",
+      label: "Apprendre",
+      active: lectureTab === "apprendre",
+    },
+    {
+      href: "/lecture?tab=histoires",
+      label: "Histoires",
+      active: lectureTab === "histoires",
+    },
+  ];
+
+  const frenchSubs: SubLink[] = [
+    {
+      href: "/francais?tab=vocabulaire",
+      label: "Vocabulaire",
+      active: !pathname.startsWith("/communication") && frenchTab === "vocabulaire",
+    },
+    {
+      href: "/francais?tab=grammaire",
+      label: "Grammaire",
+      active: !pathname.startsWith("/communication") && frenchTab === "grammaire",
+    },
+    {
+      href: "/francais?tab=communication",
+      label: "Expression",
+      active:
+        frenchTab === "communication" || pathname.startsWith("/communication"),
+    },
+  ];
+
+  const mathsSubs: SubLink[] = [
+    {
+      href: "/mathematiques?tab=algebra",
+      label: "Algèbre",
+      active: mathsTab === "algebra",
+    },
+    {
+      href: "/mathematiques?tab=geometry",
+      label: "Géométrie",
+      active: mathsTab === "geometry",
+    },
+  ];
+
   function go(href: string) {
     if (evalGuard?.active) {
       evalGuard.requestNavigate(() => router.push(href));
       return;
     }
     router.push(href);
+  }
+
+  function renderSubs(subs: SubLink[]) {
+    return (
+      <ul className="mt-1 ml-3 space-y-0.5 border-l border-[var(--color-border-default)] pl-3">
+        {subs.map((sub) => (
+          <li key={sub.href}>
+            <button
+              type="button"
+              onClick={() => go(sub.href)}
+              className={`block w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-xs font-medium transition ${
+                sub.active
+                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`}
+            >
+              {sub.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   return (
@@ -129,33 +233,9 @@ export function DesktopSidebar() {
                   )}
                 </span>
               </button>
-              {link.href === "/francais" && frenchOpen && (
-                <ul className="mt-1 ml-3 space-y-0.5 border-l border-[var(--color-border-default)] pl-3">
-                  {frenchSubs.map((sub) => {
-                    const subActive =
-                      (sub.href === "/communication" &&
-                        pathname.startsWith("/communication")) ||
-                      (Boolean(sub.tab) &&
-                        !pathname.startsWith("/communication") &&
-                        currentTab === sub.tab);
-                    return (
-                      <li key={sub.href}>
-                        <button
-                          type="button"
-                          onClick={() => go(sub.href)}
-                          className={`block w-full rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-xs font-medium transition ${
-                            subActive
-                              ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                              : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-                          }`}
-                        >
-                          {sub.label}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+              {link.href === "/lecture" && lectureOpen && renderSubs(lectureSubs)}
+              {link.href === "/francais" && frenchOpen && renderSubs(frenchSubs)}
+              {link.href === "/mathematiques" && mathsOpen && renderSubs(mathsSubs)}
             </div>
           );
         })}
@@ -191,13 +271,15 @@ export function DesktopSidebar() {
         <button
           type="button"
           onClick={togglePivot}
-          className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+          aria-pressed={showPivot}
+          className={`flex w-full items-center gap-2 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
             showPivot
               ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
               : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
           }`}
         >
-          Traductions {showPivot ? "(on)" : ""}
+          <span className="flex-1">Traductions</span>
+          {showPivot && <TranslateOnIcon />}
         </button>
 
         {canAdmin && (
