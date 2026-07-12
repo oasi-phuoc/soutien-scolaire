@@ -63,10 +63,6 @@ function skillPillState(draft: PlacementFrenchDraft, skill: FrenchSkill): "pendi
   return "pending";
 }
 
-const PILL_RED_LIGHT = "color-mix(in oklch, #dc2626 22%, white)";
-const PILL_RED_DONE = "color-mix(in oklch, #dc2626 68%, #7f1d1d)";
-const PILL_RED_ACTIVE = "#7f1d1d";
-
 function FrenchSkillPills({ draft }: { draft: PlacementFrenchDraft }) {
   return (
     <div className="flex items-center justify-center gap-3">
@@ -74,10 +70,13 @@ function FrenchSkillPills({ draft }: { draft: PlacementFrenchDraft }) {
         const state = skillPillState(draft, skill);
         const pillStyle =
           state === "pending"
-            ? { background: PILL_RED_LIGHT, color: "#991b1b" }
+            ? {
+                background: "var(--color-skill-pill-pending-bg)",
+                color: "var(--color-skill-pill-pending-text)",
+              }
             : state === "active"
-              ? { background: PILL_RED_ACTIVE, color: "#fff" }
-              : { background: PILL_RED_DONE, color: "#fff" };
+              ? { background: "var(--color-skill-pill-active)", color: "#fff" }
+              : { background: "var(--color-skill-pill-done)", color: "#fff" };
 
         const pill = (
           <span
@@ -93,7 +92,7 @@ function FrenchSkillPills({ draft }: { draft: PlacementFrenchDraft }) {
             <div
               key={skill}
               className="rounded-full p-0.5"
-              style={{ boxShadow: "0 0 0 2px #7f1d1d" }}
+              style={{ boxShadow: "0 0 0 2px var(--color-skill-pill-active)" }}
             >
               {pill}
             </div>

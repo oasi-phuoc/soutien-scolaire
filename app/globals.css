@@ -30,6 +30,12 @@
   --color-accent-quiz: var(--color-theme);
   --color-accent-comm: var(--color-theme);
 
+  /* Pastilles compétences CE / CO / PE / PO (placement) */
+  --color-skill-pill-pending-bg: var(--color-theme-light);
+  --color-skill-pill-pending-text: var(--color-theme-muted);
+  --color-skill-pill-active: var(--color-theme-muted);
+  --color-skill-pill-done: var(--color-theme);
+
   /* Correction / feedback erreur — orange pêche EPCAS */
   --color-correction: #e8a67a;
   --color-correction-soft: #f8e4d4;
