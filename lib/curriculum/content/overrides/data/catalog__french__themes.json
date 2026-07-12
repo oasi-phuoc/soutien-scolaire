@@ -1574,7 +1574,7 @@
         "summary": "Table et service au restaurant.",
         "tab": "vocabulaire",
         "markers": [],
-        "hidden": true
+        "hidden": false
       },
       {
         "id": "V10-v7-boulangerie",
@@ -1619,7 +1619,7 @@
       }
     ]
   },
-  "updatedAt": "2026-07-12T21:00:20.923Z",
+  "updatedAt": "2026-07-12T21:17:36.123Z",
   "updatedBy": "dc25c315-6996-445d-bebb-b4d80d66da1a",
   "gitPath": "lib/curriculum/content/overrides/data/catalog__french__themes.json"
 }
