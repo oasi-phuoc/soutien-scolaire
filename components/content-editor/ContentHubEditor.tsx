@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useContentEditor } from "./ContentEditorProvider";
 import { MarkdownToolbar } from "./MarkdownToolbar";
 import { useEditorHistory } from "@/lib/content-editor/use-editor-history";
@@ -264,37 +264,43 @@ function simpleMarkdownPreview(text: string) {
   });
 }
 
+function docsEqual(a: EditorDoc, b: EditorDoc) {
+  return a.title === b.title && a.body === b.body;
+}
+
 function PageEditor({
   page,
-  basePayload,
+  basePayload: _basePayload,
+  initialDoc,
+  baselineDoc,
+  onDraftChange,
+  onDiscardDraft,
   onSaved,
 }: {
   page: HubPage;
   basePayload: unknown;
+  initialDoc: EditorDoc;
+  baselineDoc: EditorDoc;
+  onDraftChange: (key: string, doc: EditorDoc) => void;
+  onDiscardDraft: (key: string) => void;
   onSaved: () => void;
 }) {
-  const { getOverride, saveOverride } = useContentEditor();
-  const initial = extractDoc(
-    getOverride(page.contentKey)?.payload ?? basePayload,
-    page.title,
-  );
+  const { saveOverride } = useContentEditor();
   const { present, setPresent, undo, redo, canUndo, canRedo, historyDepth, historyLimit, reset } =
-    useEditorHistory<EditorDoc>(initial);
+    useEditorHistory<EditorDoc>(initialDoc);
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const [status, setStatus] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const dirty = !docsEqual(present, baselineDoc);
 
   useEffect(() => {
-    const next = extractDoc(
-      getOverride(page.contentKey)?.payload ?? basePayload,
-      page.title,
-    );
-    reset(next);
-    setMode("edit");
-    setStatus(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page.contentKey]);
+    if (docsEqual(present, baselineDoc)) {
+      onDiscardDraft(page.contentKey);
+    } else {
+      onDraftChange(page.contentKey, present);
+    }
+  }, [page.contentKey, present, baselineDoc, onDraftChange, onDiscardDraft]);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -309,13 +315,13 @@ function PageEditor({
         redo();
       } else if (key === "s") {
         e.preventDefault();
-        void handleSave();
+        if (dirty) void handleSave();
       }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [undo, redo, present]);
+  }, [undo, redo, present, dirty]);
 
   async function handleSave() {
     setStatus(null);
@@ -338,7 +344,18 @@ function PageEditor({
     setStatus(
       `Enregistré (${parts.join(" + ")})${res.message ? ` — ${res.message}` : ""}`,
     );
+    const nextDoc = { ...present, raw: payload };
+    reset(nextDoc);
+    onDiscardDraft(page.contentKey);
     onSaved();
+  }
+
+  function handleDiscard() {
+    if (dirty && !confirm("Annuler le brouillon de cette page ?")) return;
+    reset(baselineDoc);
+    onDiscardDraft(page.contentKey);
+    setMode("edit");
+    setStatus("Brouillon annulé");
   }
 
   return (
@@ -391,12 +408,15 @@ function PageEditor({
           </span>
         </div>
 
-        <Link
-          href={page.href}
-          className="ml-auto text-xs font-semibold text-[var(--color-theme)] underline"
-        >
-          Ouvrir la page élève
-        </Link>
+        {dirty ? (
+          <span className="rounded-md bg-amber-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">
+            Brouillon
+          </span>
+        ) : (
+          <span className="rounded-md bg-[var(--color-theme-light)] px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-[var(--color-theme-muted)]">
+            À jour
+          </span>
+        )}
       </div>
 
       <label className="block text-sm">
@@ -445,15 +465,15 @@ function PageEditor({
               spellCheck={false}
             />
             <span className="mt-1 block text-xs text-[var(--color-text-secondary)]">
-              Précédent / Suivant (Ctrl+Z / Ctrl+Y). Jusqu&apos;à 40 étapes. Ctrl+S
-              pour enregistrer.
+              Modifs en brouillon jusqu&apos;à Enregistrer. Ctrl+Z / Ctrl+Y ·
+              Ctrl+S pour enregistrer.
             </span>
           </label>
         </>
       ) : (
         <div className="rounded-[10px] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/40 p-4 sm:p-5">
           <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-[var(--color-theme-muted)]">
-            Preview
+            Preview{dirty ? " (brouillon)" : ""}
           </p>
           <h2 className="mb-4 text-2xl font-bold text-[var(--color-text-primary)]">
             {present.title || "Sans titre"}
@@ -465,11 +485,19 @@ function PageEditor({
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          disabled={pending}
+          disabled={pending || !dirty}
           onClick={() => startTransition(() => void handleSave())}
           className="rounded-lg bg-[var(--color-theme)] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-50"
         >
           {pending ? "Enregistrement…" : "Enregistrer"}
+        </button>
+        <button
+          type="button"
+          disabled={!dirty || pending}
+          onClick={handleDiscard}
+          className="rounded-lg border border-[var(--color-border-default)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--color-text-primary)] disabled:opacity-50"
+        >
+          Annuler le brouillon
         </button>
         {mode === "edit" ? (
           <button
@@ -499,22 +527,20 @@ function PageEditor({
 }
 
 /**
- * Hub d'édition contenu style EPCAS :
+ * Hub d'édition contenu style EPCAS (bureau uniquement) :
  * module (4) → sous-menu obligatoire → liste de pages → éditeur Édition/Preview.
+ * Les modifications restent en brouillon jusqu'à Enregistrer.
  */
 export function ContentHubEditor() {
-  const { overrides, setEditMode, refresh } = useContentEditor();
+  const { overrides, refresh } = useContentEditor();
   const [domain, setDomain] = useState<HubDomain | null>(null);
   const [submenu, setSubmenu] = useState<HubSubmenu | null>(null);
   const [query, setQuery] = useState("");
   const [pageId, setPageId] = useState<string | null>(null);
+  const [drafts, setDrafts] = useState<Record<string, EditorDoc>>({});
 
   const domainMeta = HUB_DOMAINS.find((d) => d.id === domain) ?? null;
   const submenus = domainMeta?.submenus ?? [];
-
-  useEffect(() => {
-    setEditMode(true);
-  }, [setEditMode]);
 
   useEffect(() => {
     setSubmenu(null);
@@ -549,8 +575,47 @@ export function ContentHubEditor() {
     null;
 
   const ready = Boolean(domain && submenu);
+  const draftCount = Object.keys(drafts).length;
+
+  useEffect(() => {
+    if (draftCount === 0) return;
+    function onBeforeUnload(e: BeforeUnloadEvent) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [draftCount]);
+
+  const onDraftChange = useCallback((key: string, doc: EditorDoc) => {
+    setDrafts((prev) => {
+      const prevDoc = prev[key];
+      if (prevDoc && docsEqual(prevDoc, doc)) return prev;
+      return { ...prev, [key]: doc };
+    });
+  }, []);
+
+  const onDiscardDraft = useCallback((key: string) => {
+    setDrafts((prev) => {
+      if (!(key in prev)) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  }, []);
 
   const submenuLabel = submenus.find((s) => s.id === submenu)?.label;
+
+  let baselineDoc: EditorDoc | null = null;
+  let initialDoc: EditorDoc | null = null;
+  if (selectedPage) {
+    const basePayload = selectedPage.loadBase();
+    baselineDoc = extractDoc(
+      overrides[selectedPage.contentKey]?.payload ?? basePayload,
+      selectedPage.title,
+    );
+    initialDoc = drafts[selectedPage.contentKey] ?? baselineDoc;
+  }
 
   return (
     <div className="space-y-4">
@@ -562,7 +627,7 @@ export function ContentHubEditor() {
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
             {domainMeta && submenuLabel
               ? `${domainMeta.label} · ${submenuLabel}`
-              : "Choisissez un module et son sous-menu, puis une page à éditer."}
+              : "Choisissez un module et son sous-menu, puis une page à éditer — sans quitter cette page."}
           </p>
         </div>
         <Link
@@ -572,6 +637,14 @@ export function ContentHubEditor() {
           ← Contenu
         </Link>
       </header>
+
+      {draftCount > 0 && (
+        <p className="rounded-[10px] border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-950">
+          {draftCount} brouillon{draftCount > 1 ? "s" : ""} non enregistré
+          {draftCount > 1 ? "s" : ""}. Cliquez <strong>Enregistrer</strong> pour
+          publier (Supabase + Git).
+        </p>
+      )}
 
       <div className="rounded-[14px] border border-[var(--color-border-default)] bg-white p-4 shadow-sm sm:p-5">
         <p className="mb-2 text-sm font-medium text-[var(--color-text-primary)]">
@@ -640,6 +713,7 @@ export function ContentHubEditor() {
                 </p>
                 <p className="text-sm font-medium text-[var(--color-text-primary)]">
                   {selectedPage.code} — {selectedPage.title}
+                  {drafts[selectedPage.contentKey] ? " · brouillon" : ""}
                 </p>
                 <span className="mt-1 inline-block rounded-md bg-[var(--color-correction-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--color-text-primary)]">
                   {domainMeta?.label} · {submenuLabel}
@@ -677,6 +751,7 @@ export function ContentHubEditor() {
                 >
                   {filtered.map((p) => {
                     const selected = p.id === selectedPage?.id;
+                    const hasDraft = Boolean(drafts[p.contentKey]);
                     return (
                       <li key={p.id}>
                         <button
@@ -698,6 +773,11 @@ export function ContentHubEditor() {
                           </span>
                           <span className="min-w-0 flex-1 text-sm leading-snug">
                             {p.title}
+                            {hasDraft ? (
+                              <span className="ml-1 text-[10px] font-bold text-amber-700">
+                                · brouillon
+                              </span>
+                            ) : null}
                           </span>
                         </button>
                       </li>
@@ -706,18 +786,26 @@ export function ContentHubEditor() {
                 </ul>
               )}
               <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
-                Tapez pour filtrer, puis touchez une page dans la liste.
+                Tapez pour filtrer, puis touchez une page — l&apos;éditeur
+                s&apos;ouvre ici (pas besoin de naviguer).
               </p>
             </div>
           </>
         )}
       </div>
 
-      {selectedPage && (
+      {selectedPage && baselineDoc && initialDoc && (
         <PageEditor
           key={selectedPage.contentKey}
           page={selectedPage}
-          basePayload={selectedPage.loadBase()}
+          basePayload={
+            overrides[selectedPage.contentKey]?.payload ??
+            selectedPage.loadBase()
+          }
+          initialDoc={initialDoc}
+          baselineDoc={baselineDoc}
+          onDraftChange={onDraftChange}
+          onDiscardDraft={onDiscardDraft}
           onSaved={() => void refresh()}
         />
       )}

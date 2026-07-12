@@ -20,7 +20,7 @@ import { CatalogManager } from "@/components/content-editor/CatalogManager";
 import { ContentHubEditor } from "@/components/content-editor/ContentHubEditor";
 
 export function ContenuAdminClient() {
-  const { setEditMode, refresh } = useContentEditor();
+  const { refresh } = useContentEditor();
   const [records, setRecords] = useState<ContentOverrideRecord[]>([]);
   const [caps, setCaps] = useState<ContentEditorCapabilities | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -121,7 +121,16 @@ export function ContenuAdminClient() {
   }
 
   return (
-    <div className="space-y-6">
+    <>
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 lg:hidden">
+        <p className="font-semibold">Édition disponible sur ordinateur uniquement</p>
+        <p className="mt-1">
+          Ouvrez cette page sur un écran large (bureau) pour éditer le contenu
+          sans quitter le hub, comme dans EPCAS.
+        </p>
+      </div>
+
+      <div className="hidden space-y-6 lg:block">
       <ContentHubEditor />
 
       <button
@@ -137,28 +146,14 @@ export function ContenuAdminClient() {
       {showAdvanced && (
         <>
       <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-        <h2 className="text-base font-bold text-zinc-900">Mode édition en ligne</h2>
+        <h2 className="text-base font-bold text-zinc-900">Sync &amp; capacités</h2>
         <p className="mt-1 text-sm text-zinc-600">
-          Réservé au compte <strong>admin</strong>. Le hub ci-dessus active
-          l&apos;édition automatiquement. Sync
+          L&apos;édition se fait uniquement dans le hub ci-dessus (brouillon
+          jusqu&apos;à Enregistrer). Sync
           {caps?.supabaseConfigured ? " Supabase" : ""}
           {caps?.gitConfigured ? " + GitHub" : ""}.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setEditMode(true)}
-            className="rounded-xl bg-amber-600 px-4 py-2 text-sm font-bold text-white hover:bg-amber-700"
-          >
-            Activer le mode édition
-          </button>
-          <button
-            type="button"
-            onClick={() => setEditMode(false)}
-            className="rounded-xl border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-700"
-          >
-            Quitter
-          </button>
           <button
             type="button"
             disabled={pending}
@@ -205,8 +200,9 @@ export function ContenuAdminClient() {
       <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
         <h2 className="text-base font-bold text-zinc-900">Sync GitHub</h2>
         <p className="mt-1 text-sm text-zinc-600">
-          À chaque <strong>Enregistrer</strong> en mode édition, le contenu est poussé
-          vers Supabase puis commité sur GitHub (fichier JSON sous{" "}
+          À chaque <strong>Enregistrer</strong> du hub (pas avant), le contenu
+          brouillon est poussé vers Supabase puis commité sur GitHub (fichier JSON
+          sous{" "}
           <code className="rounded bg-zinc-100 px-1 text-xs">
             lib/curriculum/content/overrides/data/
           </code>
@@ -327,8 +323,8 @@ export function ContenuAdminClient() {
         {error && <p className="mt-2 text-sm text-amber-800">{error}</p>}
         {records.length === 0 ? (
           <p className="mt-3 text-sm text-zinc-500">
-            Aucune modification pour l&apos;instant. Parcourez le site en mode édition
-            pour en créer.
+            Aucune modification enregistrée. Éditez une page dans le hub
+            ci-dessus, puis cliquez Enregistrer.
           </p>
         ) : (
           <ul className="mt-3 divide-y divide-zinc-100">
@@ -391,6 +387,7 @@ export function ContenuAdminClient() {
       </div>
         </>
       )}
-    </div>
+      </div>
+    </>
   );
 }

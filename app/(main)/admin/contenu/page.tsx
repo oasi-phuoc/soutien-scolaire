@@ -33,7 +33,7 @@ export default async function AdminContenuPage() {
             Contenu pédagogique
           </h1>
           <p className="mt-1 text-sm text-zinc-500">
-            Hub d&apos;édition style EPCAS — Math, Français, Lecture, Placement
+            Édition bureau uniquement — brouillon jusqu&apos;à Enregistrer
           </p>
         </div>
       </div>
