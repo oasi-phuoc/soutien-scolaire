@@ -1,15 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
-import { getContentEditorCapabilitiesAction } from "@/app/actions/content-editor";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
-import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import { getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
 
@@ -60,6 +57,7 @@ function TranslateOnIcon() {
 
 /**
  * Menu latéral bureau (inspiré epcas) — masqué sur mobile.
+ * Admin / édition : uniquement via Réglages.
  */
 export function DesktopSidebar() {
   const pathname = usePathname() ?? "";
@@ -67,11 +65,9 @@ export function DesktopSidebar() {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
   const { showPivot, togglePivot } = useTranslation();
-  const { editMode, setEditMode, capabilities } = useContentEditor();
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [placementVisible, setPlacementVisible] = useState(true);
-  const [canAdmin, setCanAdmin] = useState(false);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
@@ -81,14 +77,7 @@ export function DesktopSidebar() {
         if (res.ok) setPlacementVisible(res.visible);
       })
       .catch(() => {});
-    getContentEditorCapabilitiesAction()
-      .then((c) => setCanAdmin(c.canEdit))
-      .catch(() => {});
   }, [pathname]);
-
-  useEffect(() => {
-    setCanAdmin(capabilities.canEdit);
-  }, [capabilities.canEdit]);
 
   const badge = pendingTasks + unreadMessages;
   const lectureOpen = pathname.startsWith("/lecture");
@@ -281,56 +270,6 @@ export function DesktopSidebar() {
           <span className="flex-1">Traductions</span>
           {showPivot && <TranslateOnIcon />}
         </button>
-
-        {canAdmin && (
-          <>
-            <div className="my-2 border-t border-[var(--color-border-default)]" />
-            <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
-              Admin
-            </p>
-            <Link
-              href="/admin"
-              className={`rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium transition ${
-                pathname === "/admin"
-                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-              }`}
-            >
-              Comptes
-            </Link>
-            <Link
-              href="/admin/contenu"
-              className={`rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium transition ${
-                pathname.startsWith("/admin/contenu")
-                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-              }`}
-            >
-              Contenu
-            </Link>
-            <Link
-              href="/suivi"
-              className={`rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium transition ${
-                pathname.startsWith("/suivi")
-                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-              }`}
-            >
-              Suivi
-            </Link>
-            <button
-              type="button"
-              onClick={() => setEditMode(!editMode)}
-              className={`rounded-[var(--radius-md)] px-3 py-2 text-left text-sm font-medium transition ${
-                editMode
-                  ? "bg-[var(--color-correction-soft)] text-[var(--color-wrong-text)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-              }`}
-            >
-              {editMode ? "Quitter édition" : "Mode édition"}
-            </button>
-          </>
-        )}
       </nav>
     </aside>
   );
