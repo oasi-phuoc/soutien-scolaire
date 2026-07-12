@@ -125,10 +125,11 @@ export function listHubPages(
   }
 
   if (domain === "francais" && submenu === "vocabulaire") {
+    // Uniquement les thèmes tab=vocabulaire (V1.x…), PAS les leçons Apprendre A.1–A.61 (sans tab).
     const themes = resolveFrenchThemes(FRENCH_THEMES, {
       ...overrides,
       [catalogFrenchKey()]: overrides[catalogFrenchKey()],
-    }).filter((t) => t.tab === "vocabulaire" || !t.tab);
+    }).filter((t) => t.tab === "vocabulaire");
     return themes.map((t) => ({
       id: t.slug,
       code: t.code,
