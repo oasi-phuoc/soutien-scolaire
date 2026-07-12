@@ -3,13 +3,21 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
 import { MathModuleComingSoon } from "@/components/math/MathModuleComingSoon";
-import { getMathModule, isMathModuleAccessibleToStudent } from "@/lib/curriculum/math-data";
+import {
+  MATH_MODULES,
+  getMathModule,
+  isMathModuleAccessibleToStudent,
+} from "@/lib/curriculum/math-data";
 import {
   getLessonsForModule,
   getLessonBySubmoduleId,
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getContentOverridesMapAction } from "@/app/actions/content-editor";
+import { catalogMathKey, mathLessonKey } from "@/lib/content-editor/keys";
+import { resolveMathModules } from "@/lib/content-editor/catalog";
+import type { MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 
 type Props = { params: Promise<{ moduleId: string }>; searchParams: Promise<{ eval?: string }> };
 
@@ -24,9 +32,12 @@ export default async function MathModulePage({ params, searchParams }: Props) {
     isAdmin = myRole === "admin" || myRole === "prof";
   }
   const upper = moduleId.toUpperCase();
+  const { map } = await getContentOverridesMapAction();
+  const catalogModules = resolveMathModules(MATH_MODULES, map);
 
   // If it's a module ID (A4, G1…), redirect to its first submodule
-  const mod = getMathModule(upper);
+  const mod =
+    catalogModules.find((m) => m.id === upper) ?? getMathModule(upper);
   if (mod) {
     if (!isAdmin && !isMathModuleAccessibleToStudent(mod)) {
       const backHref = mod.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
@@ -37,21 +48,32 @@ export default async function MathModulePage({ params, searchParams }: Props) {
       );
     }
     const lessons = getLessonsForModule(upper);
-    if (lessons && lessons.length > 0) {
-      redirect(`/mathematiques/${lessons[0]!.submoduleId}`);
+    const firstSub =
+      lessons?.[0]?.submoduleId ??
+      mod.submodules[0]?.id ??
+      null;
+    if (firstSub) {
+      redirect(`/mathematiques/${firstSub}`);
     }
     notFound();
   }
 
   // Otherwise treat it as a submodule ID (A4-1, A4-2…)
-  const lesson = getLessonBySubmoduleId(upper);
+  const baseLesson = getLessonBySubmoduleId(upper);
+  const ovLesson = map[mathLessonKey(upper)]?.payload as MathSubmoduleLesson | undefined;
+  const lesson = ovLesson ?? baseLesson;
   if (!lesson) notFound();
 
-  const parentModuleId = getModuleIdForSubmodule(upper);
+  const parentFromCatalog = catalogModules.find((m) =>
+    m.submodules.some((s) => s.id === upper),
+  );
+  const parentModuleId =
+    parentFromCatalog?.id ?? getModuleIdForSubmodule(upper) ?? upper.split("-")[0]!;
   if (!parentModuleId) notFound();
-  const parentMod = getMathModule(parentModuleId!);
+  const parentMod =
+    parentFromCatalog ?? getMathModule(parentModuleId) ?? undefined;
   // RA/RG revision modules are not in MATH_MODULES — allow them through
-  if (!parentMod && !parentModuleId!.startsWith("RA")) notFound();
+  if (!parentMod && !parentModuleId.startsWith("RA") && !isAdmin) notFound();
   if (parentMod && !isAdmin && !isMathModuleAccessibleToStudent(parentMod)) {
     const backHref = parentMod.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
     return (
@@ -85,11 +107,11 @@ export default async function MathModulePage({ params, searchParams }: Props) {
             </svg>
           </Link>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {lesson!.submoduleCode} — {lesson!.theory.title.fr}
+            {lesson.submoduleCode} — {lesson.theory?.title?.fr ?? lesson.submoduleId}
           </h1>
         </div>
       </header>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} startAtEval={evalParam === "1"} isAdmin={isAdmin} />
+      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId} startAtEval={evalParam === "1"} isAdmin={isAdmin} />
     </main>
   );
 }

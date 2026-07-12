@@ -39,6 +39,10 @@ import {
 } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { ContentEditorPanel } from "@/components/content-editor/ContentEditorPanel";
+import { LectureLetterFields } from "@/components/content-editor/LectureLetterFields";
+import { lectureLetterKey } from "@/lib/content-editor/keys";
 
 interface Props {
   data: LetterData;
@@ -844,10 +848,13 @@ function CSoundsExplain() {
   );
 }
 
-export function LectureLetterRunner({ data, moduleId }: Props) {
+export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const router = useRouter();
   const evalGuard = useEvalNavGuard();
   const searchParams = useSearchParams();
+  const { resolve } = useContentEditor();
+  const contentKey = lectureLetterKey(baseData.letterLower);
+  const data = resolve(contentKey, baseData);
   const steps = getSteps(data);
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
@@ -1327,6 +1334,15 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
 
   return (
     <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+      <ContentEditorPanel
+        contentKey={contentKey}
+        label={`Lecture — ${baseData.letterLower}`}
+        baseValue={baseData}
+      >
+        {({ value, setValue }) => (
+          <LectureLetterFields value={value} setValue={setValue} />
+        )}
+      </ContentEditorPanel>
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · {lessonCategory}{lessonNumber ? ` · ${lessonNumber}` : ""}

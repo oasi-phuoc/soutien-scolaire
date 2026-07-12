@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LECTURE_MODULES, STORIES, getRevision, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { resolveLectureModules } from "@/lib/content-editor/catalog";
 import {
   loadLectureProgress,
   getSubmoduleState,
@@ -330,6 +332,8 @@ function StoriesList() {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
+  const { overrides } = useContentEditor();
+  const lectureModules = resolveLectureModules(LECTURE_MODULES, overrides);
   const [tab, setTab] = useState<TabId>("apprendre");
   const [progress, setProgress] = useState<LectureProgressV2>(() => ({
     version: 2,
@@ -344,8 +348,8 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
   }, []);
 
   const activeModuleId = hydrated
-    ? (LECTURE_MODULES.find((m) => getModuleState(progress, m.id) === "in_progress")?.id ??
-       LECTURE_MODULES.find((m) => getModuleState(progress, m.id) === "available")?.id)
+    ? (lectureModules.find((m) => getModuleState(progress, m.id) === "in_progress")?.id ??
+       lectureModules.find((m) => getModuleState(progress, m.id) === "available")?.id)
     : null;
 
   return (
@@ -408,7 +412,7 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
         <>
           {/* Module cards */}
           <section className="space-y-4" aria-label="Modules de lecture">
-            {LECTURE_MODULES.map((mod) => (
+            {lectureModules.map((mod) => (
               <ModuleCard
                 key={mod.id}
                 mod={mod}

@@ -28,6 +28,9 @@ import {
   EvalResultsHint,
   EvalResultsSummary,
 } from "@/components/ui/EvalResultsUI";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
+import { mathLessonKey } from "@/lib/content-editor/keys";
 import type { PivotCode } from "@/lib/pivot-langs";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
@@ -6883,10 +6886,17 @@ export function GenericModuleContent({
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
-  const allLessons = getLessonsForModule(moduleId);
+  const { resolve, getOverride } = useContentEditor();
+  const allLessonsRaw = getLessonsForModule(moduleId);
+  const allLessons = allLessonsRaw?.map((l) =>
+    resolve(mathLessonKey(l.submoduleId), l),
+  );
   const lessons = startSubmoduleId && allLessons
     ? allLessons.filter((l) => l.submoduleId === startSubmoduleId)
     : allLessons;
+  const overrideStamp = (lessons ?? [])
+    .map((l) => getOverride(mathLessonKey(l.submoduleId))?.updatedAt ?? "")
+    .join("|");
 
   const withEval = !!startSubmoduleId || !!revisionMode;
 
@@ -6903,6 +6913,22 @@ export function GenericModuleContent({
     }
     return buildSteps(lessons, withEval);
   });
+
+  useEffect(() => {
+    if (!lessons || lessons.length === 0) return;
+    if (revisionMode) {
+      const evalSteps = buildRevisionFlatSteps(lessons);
+      const lastLesson = lessons[lessons.length - 1]!;
+      setSteps([
+        { kind: "eval_start", lesson: lastLesson },
+        ...evalSteps,
+        ...(evalSteps.length === 0 ? [{ kind: "pass_toggle" as const, lesson: lastLesson }] : []),
+      ]);
+      return;
+    }
+    setSteps(buildSteps(lessons, withEval));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overrideStamp, startSubmoduleId, moduleId, revisionMode]);
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
   const trainingHasWordProblems = evalStartIdx >= 0 && steps.slice(0, evalStartIdx).some(s => s.kind === "word_problems");
@@ -9649,6 +9675,11 @@ export function GenericModuleContent({
 
   return (
     <div className="pb-40" style={geoStyle}>
+      {startSubmoduleId && (
+        <div className="app-shell mb-4">
+          <MathLessonEditorHost submoduleId={startSubmoduleId} />
+        </div>
+      )}
       {isInEvalPhase && <EvalGuardSentinel />}
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (

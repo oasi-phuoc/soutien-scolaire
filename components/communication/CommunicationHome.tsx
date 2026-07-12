@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { resolveCommModules } from "@/lib/content-editor/catalog";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
@@ -54,6 +56,8 @@ function ModuleProgressBar({ total, completed }: { total: number; completed: num
 
 export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
+  const { overrides } = useContentEditor();
+  const commModules = resolveCommModules(COMM_MODULES, overrides);
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
 
@@ -70,7 +74,7 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 
   return (
     <ul className="space-y-4">
-      {COMM_MODULES.map((m) => {
+      {commModules.map((m) => {
         const isExpanded = !!expanded[m.id];
         const allUnavailable = !isAdmin && m.submodules.every((s) => !s.available);
         const completedCount = m.submodules.filter((s) => completed[s.id]).length;

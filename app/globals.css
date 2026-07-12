@@ -4,39 +4,52 @@
 
 :root {
   color-scheme: light;
-  --background: #FAFAF8;
-  --foreground: #1A2332;
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F2F6F3;
-  --color-text-primary: #1A2332;
-  --color-text-secondary: #6B7B8D;
-  --color-border-default: rgba(26, 35, 50, 0.09);
-  --color-border-emphasis: rgba(26, 35, 50, 0.17);
-  /* Pastel accent colors — section-specific */
-  --color-accent-fr: #F4A83A;
-  --color-accent-lecture: #9B74D4;
-  --color-accent-alg: #6EA2E8;
-  --color-accent-geo: #6EA2E8;
-  --color-accent-quiz: #C06078;
-  --color-accent-comm: #F4A83A;
-  --color-correction: #D97832;
-  --color-correction-soft: #FFF1E7;
+  /* Thème unique style EPCAS — vert sauge + orange correction */
+  --background: #eef6f3;
+  --foreground: #2f3a3f;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f3f8f6;
+  --color-text-primary: #2f3a3f;
+  --color-text-secondary: #5c6b72;
+  --color-border-default: #d5e4df;
+  --color-border-emphasis: #b7cdc6;
+  /* Alias legacy utilisés dans certains composants */
+  --color-border: var(--color-border-default);
+  --color-surface: var(--color-bg-primary);
+  --color-bg: var(--color-bg-secondary);
+
+  --color-theme: #6fafa0;
+  --color-theme-light: #d8efe8;
+  --color-theme-muted: #4f8f80;
+
+  /* Une seule couleur d'accent (= thème) pour toutes les sections */
+  --color-accent-fr: var(--color-theme);
+  --color-accent-lecture: var(--color-theme);
+  --color-accent-alg: var(--color-theme);
+  --color-accent-geo: var(--color-theme);
+  --color-accent-quiz: var(--color-theme);
+  --color-accent-comm: var(--color-theme);
+
+  /* Correction / feedback erreur — orange pêche EPCAS */
+  --color-correction: #e8a67a;
+  --color-correction-soft: #f8e4d4;
+
   /* Feedback */
-  --color-success: #48A078;
-  --color-warning: #C49518;
-  --color-danger: #C84848;
-  --color-correct: #4A7EC8;
-  --color-correct-bg: #EEF3FC;
-  --color-correct-text: #2258B0;
-  --color-wrong: #D4940A;
-  --color-wrong-bg: #FDF6E0;
-  --color-wrong-text: #7A5200;
-  --color-marker-prereq-bg: #FDF5E0;
-  --color-marker-prereq-text: #7A5200;
-  --color-marker-cross-bg: #E8F1FC;
-  --color-marker-cross-text: #1E5FA5;
-  --color-marker-quiz-bg: #F0EEFF;
-  --color-marker-quiz-text: #5C4AB7;
+  --color-success: #7cbc8e;
+  --color-warning: #e2c06a;
+  --color-danger: #e08b8b;
+  --color-correct: var(--color-theme);
+  --color-correct-bg: var(--color-theme-light);
+  --color-correct-text: var(--color-theme-muted);
+  --color-wrong: var(--color-correction);
+  --color-wrong-bg: var(--color-correction-soft);
+  --color-wrong-text: #d4895c;
+  --color-marker-prereq-bg: var(--color-correction-soft);
+  --color-marker-prereq-text: #d4895c;
+  --color-marker-cross-bg: var(--color-theme-light);
+  --color-marker-cross-text: var(--color-theme-muted);
+  --color-marker-quiz-bg: var(--color-theme-light);
+  --color-marker-quiz-text: var(--color-theme-muted);
   /* Radius — more rounded */
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -49,10 +62,10 @@
   --font-size-xl: 1.125rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
-  /* Thème vert sauge */
-  --color-theme: #5A9E78;
-  --color-theme-light: #E5F5EC;
-  --color-theme-muted: #78BA96;
+
+  --sidebar-w: 16.5rem;
+  --header-h: 3.25rem;
+  --bottom-nav-h: 5.5rem;
 }
 
 @theme inline {
@@ -63,7 +76,11 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #dcefe8 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #f3e4d8 0%, transparent 50%),
+    linear-gradient(165deg, #eef6f3, #f7f0ea);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-nunito), system-ui, sans-serif;
   text-align: justify;
@@ -112,9 +129,9 @@ body {
 }
 
 .section-background {
-  --section-tint: #cfead5;
+  --section-tint: #d8efe8;
   --section-soft: #f7fbf8;
-  --section-accent: #5a9e78;
+  --section-accent: var(--color-theme);
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -158,14 +175,18 @@ body {
 }
 
 .section-background-home,
-.section-background-settings {
-  --section-tint: #cfead5;
+.section-background-settings,
+.section-background-lecture,
+.section-background-maths,
+.section-background-francais,
+.section-background-placement {
+  --section-tint: #d8efe8;
   --section-soft: #f7fbf8;
-  --section-accent: #5a9e78;
+  --section-accent: var(--color-theme);
 }
 
 .section-background-home {
-  background: #ffffff;
+  background: transparent;
 }
 
 .section-background-home::before,
@@ -173,55 +194,20 @@ body {
   display: none;
 }
 
-.section-background-lecture {
-  --section-tint: #e6d9f7;
-  --section-soft: #fbf8ff;
-  --section-accent: #9b74d4;
-}
-
-.section-background-maths {
-  --section-tint: #d6e8fa;
-  --section-soft: #f7fbff;
-  --section-accent: #4a7ec8;
-}
-
-.section-background-francais {
-  --section-tint: #ffe5b8;
-  --section-soft: #fffaf1;
-  --section-accent: #d98b19;
-}
-
-.section-background-placement {
-  --section-tint: #f5dde3;
-  --section-soft: #fff9fa;
-  --section-accent: #c06078;
-}
-
-body:has(.section-background-lecture) {
-  --color-correction: #D7A32B;
-  --color-correction-soft: #FFF7DA;
-}
-
-body:has(.section-background-francais) {
-  --color-correction: #4F86D9;
-  --color-correction-soft: #EAF2FF;
-}
-
-body:has(.section-background-maths) {
-  --color-correction: #D97832;
-  --color-correction-soft: #FFF1E7;
-}
-
+/* Correction unique (orange) — plus de surcharges par section */
+body:has(.section-background-lecture),
+body:has(.section-background-francais),
+body:has(.section-background-maths),
 body:has(.section-background-placement),
 .placement-tcm,
 .placement-french-runner {
-  --color-theme: var(--color-accent-quiz);
-  --color-theme-light: color-mix(in oklch, var(--color-accent-quiz) 15%, white);
-  --color-theme-muted: color-mix(in oklch, var(--color-accent-quiz) 72%, white);
-  --color-accent-alg: var(--color-accent-quiz);
-  --color-accent-comm: var(--color-accent-quiz);
-  --color-correction: #4F86D9;
-  --color-correction-soft: #EAF2FF;
+  --color-theme: #6fafa0;
+  --color-theme-light: #d8efe8;
+  --color-theme-muted: #4f8f80;
+  --color-accent-alg: var(--color-theme);
+  --color-accent-comm: var(--color-theme);
+  --color-correction: #e8a67a;
+  --color-correction-soft: #f8e4d4;
 }
 
 .placement-french-runner {
@@ -307,7 +293,7 @@ body:has(.section-background-lecture, .section-background-francais, .section-bac
 
 .math-module-page [data-grid-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus,
 .math-module-page [data-divcol-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
-  border-color: #f59e0b !important;
+  border-color: var(--color-correction) !important;
   background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
   background-color: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
   box-shadow: none !important;
@@ -325,7 +311,7 @@ body:has(.section-background-lecture, .section-background-francais, .section-bac
 .math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="text-center"],
 .math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="font-mono"],
 .math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="flex-col"] {
-  border: 1px solid #f59e0b !important;
+  border: 1px solid var(--color-correction) !important;
   border-radius: 6px !important;
   background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
   background-color: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
@@ -458,6 +444,25 @@ input[type=number] {
 
   .app-shell--full {
     max-width: none;
+  }
+}
+
+/* Décalage contenu pour la sidebar bureau */
+@media (min-width: 1024px) {
+  .desktop-shell {
+    padding-left: var(--sidebar-w);
+  }
+
+  .desktop-shell .app-shell,
+  .desktop-shell .app-shell-bar {
+    max-width: min(72rem, calc(100vw - var(--sidebar-w) - 2rem));
+  }
+
+  /* Moins de padding bas : la nav flottante mobile est masquée */
+  .desktop-shell .pb-56,
+  .desktop-shell .pb-32,
+  .desktop-shell .pb-28 {
+    padding-bottom: 2.5rem;
   }
 }
 

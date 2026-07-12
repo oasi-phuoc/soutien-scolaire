@@ -8,10 +8,12 @@ import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
+import {
+  isLessonMode,
+  useLessonActions,
+} from "@/lib/hooks/useLessonActions";
 
 type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
-type ActionKind = "back" | "refresh" | "validate" | "next";
-type ActionAvailability = Record<ActionKind, { available: boolean; disabled: boolean; label?: string }>;
 type NavItem = {
   href: string;
   label: string;
@@ -52,79 +54,8 @@ function isActivePath(pathname: string, href: string) {
   return href === "/" ? pathname === "/" || pathname === "" : pathname.startsWith(href);
 }
 
-function sectionColor(pathname: string) {
-  if (pathname.startsWith("/placement")) return "var(--color-accent-quiz)";
-  if (pathname.startsWith("/lecture")) return "var(--color-accent-lecture)";
-  if (pathname.startsWith("/mathematiques")) return "var(--color-accent-alg)";
-  if (pathname.startsWith("/francais") || pathname.startsWith("/communication")) return "var(--color-accent-fr)";
+function sectionColor(_pathname: string) {
   return "var(--color-theme)";
-}
-
-function isPlacementHubPage(pathname: string) {
-  return pathname === "/placement";
-}
-
-function isMainSectionPage(pathname: string) {
-  return ["", "/", "/lecture", "/francais", "/mathematiques", "/communication"].includes(pathname)
-    || pathname.startsWith("/compte")
-    || isPlacementHubPage(pathname)
-    || pathname.startsWith("/messagerie");
-}
-
-const emptyActionAvailability: ActionAvailability = {
-  back: { available: false, disabled: true },
-  refresh: { available: false, disabled: true },
-  validate: { available: false, disabled: true },
-  next: { available: false, disabled: true },
-};
-
-function normalizedLabel(button: HTMLButtonElement) {
-  return `${button.getAttribute("aria-label") ?? ""} ${button.textContent ?? ""}`
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim()
-    .toLowerCase();
-}
-
-function getLegacyActionButton(kind: ActionKind) {
-  if (typeof document === "undefined") return undefined;
-  const tests: Record<ActionKind, RegExp[]> = {
-    back: [/\bretour\b/, /\bprecedent\b/],
-    refresh: [/recommencer/, /reinitialiser/, /refaire/, /refresh/, /actualiser/],
-    validate: [/valider/],
-    next: [/suivant/, /terminer/, /imprimer/],
-  };
-  const candidates = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).reverse();
-  const priorityCandidates = candidates.filter((candidate) => candidate.closest("[data-nav-action-priority]"));
-  const pool = priorityCandidates.length > 0 ? priorityCandidates : candidates;
-  return pool.find((candidate) => {
-    if (candidate.closest("[data-main-nav]")) return false;
-    if (!candidate.closest(".hidden.fixed.bottom-0")) return false;
-    if (candidate.dataset.navAction) return candidate.dataset.navAction === kind;
-    return tests[kind].some((rx) => rx.test(normalizedLabel(candidate)));
-  });
-}
-
-function readActionAvailability(): ActionAvailability {
-  const states = { ...emptyActionAvailability };
-  (Object.keys(states) as ActionKind[]).forEach((kind) => {
-    const button = getLegacyActionButton(kind);
-    states[kind] = {
-      available: !!button && !button.classList.contains("invisible") && !button.classList.contains("hidden"),
-      disabled: !button || button.disabled || button.getAttribute("aria-disabled") === "true",
-      label: button?.dataset.navLabel,
-    };
-  });
-  return states;
-}
-
-function triggerLegacyAction(kind: ActionKind, fallback: () => void) {
-  const button = getLegacyActionButton(kind);
-  if (button) {
-    button.click();
-    return;
-  }
-  fallback();
 }
 
 export function MainNav() {
@@ -135,8 +66,9 @@ export function MainNav() {
   const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
-  const [actions, setActions] = useState<ActionAvailability>(emptyActionAvailability);
   const [placementVisible, setPlacementVisible] = useState(true);
+  const lessonMode = isLessonMode(pathname);
+  const { actions, trigger } = useLessonActions(lessonMode);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
@@ -159,33 +91,7 @@ export function MainNav() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  useEffect(() => {
-    if (isMainSectionPage(pathname) || pathname.startsWith("/admin") || pathname.startsWith("/suivi")) return;
-
-    let frame = 0;
-    const syncActions = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const next = readActionAvailability();
-        setActions((current) => JSON.stringify(current) === JSON.stringify(next) ? current : next);
-      });
-    };
-    syncActions();
-    const observer = new MutationObserver(syncActions);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["disabled", "aria-disabled", "class", "data-nav-label"],
-    });
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [pathname]);
-
   const navColor = sectionColor(pathname);
-  const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin") && !pathname.startsWith("/suivi");
   const menuItems = [...links, ...(placementVisible ? [placementItem] : []), translateItem];
 
   return (
@@ -199,7 +105,7 @@ export function MainNav() {
         />
       )}
       <nav
-        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10"
+        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10 lg:hidden"
         aria-label="Navigation principale"
         data-main-nav
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
@@ -306,10 +212,10 @@ export function MainNav() {
               {lessonMode ? (
                 <>
                   {actions.back.available ? (
-                    <ActionButton label="Retour" icon={<IconLeft />} disabled={actions.back.disabled} onClick={() => triggerLegacyAction("back", () => router.back())} />
+                    <ActionButton label="Retour" icon={<IconLeft />} disabled={actions.back.disabled} onClick={() => trigger("back")} />
                   ) : <span aria-hidden />}
                   {actions.refresh.available ? (
-                    <ActionButton label="Refresh" icon={<IconRefresh />} disabled={actions.refresh.disabled} onClick={() => triggerLegacyAction("refresh", () => {})} />
+                    <ActionButton label="Refresh" icon={<IconRefresh />} disabled={actions.refresh.disabled} onClick={() => trigger("refresh")} />
                   ) : <span aria-hidden />}
                 </>
               ) : (
@@ -345,7 +251,7 @@ export function MainNav() {
                       label={actions.validate.label ?? "Valider"}
                       icon={actions.validate.label === "Imprimer" ? <IconPrint /> : <IconCheck />}
                       disabled={actions.validate.disabled}
-                      onClick={() => triggerLegacyAction("validate", () => {})}
+                      onClick={() => trigger("validate")}
                     />
                   ) : <span aria-hidden />}
                   {actions.next.available ? (
@@ -353,7 +259,7 @@ export function MainNav() {
                       label={actions.next.label ?? "Suivant"}
                       icon={actions.next.label === "Imprimer" ? <IconPrint /> : <IconRight />}
                       disabled={actions.next.disabled}
-                      onClick={() => triggerLegacyAction("next", () => {})}
+                      onClick={() => trigger("next")}
                     />
                   ) : <span aria-hidden />}
                 </>
