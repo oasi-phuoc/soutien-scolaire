@@ -1,6 +1,21 @@
 "use client";
 
-import type { RefObject } from "react";
+import type { ReactNode, RefObject } from "react";
+import {
+  Bold,
+  Heading1,
+  Heading2,
+  Heading3,
+  Highlighter,
+  Italic,
+  Link2,
+  List,
+  ListOrdered,
+  Minus,
+  Quote,
+  RemoveFormatting,
+  Table2,
+} from "lucide-react";
 
 type Props = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
@@ -12,10 +27,12 @@ function ToolBtn({
   label,
   title,
   onClick,
+  children,
 }: {
   label: string;
   title: string;
   onClick: () => void;
+  children: ReactNode;
 }) {
   return (
     <button
@@ -23,11 +40,19 @@ function ToolBtn({
       title={title}
       aria-label={title}
       onClick={onClick}
-      className="inline-flex h-9 min-w-9 items-center justify-center gap-1 rounded-[10px] border border-[var(--color-border-default)] bg-white px-2 text-xs font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-theme)]/40 hover:bg-[var(--color-theme-light)] active:scale-[0.97]"
+      className={[
+        "inline-flex h-9 min-w-9 items-center justify-center gap-1 rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-2 text-xs font-medium text-[var(--color-text-primary)]",
+        "transition hover:border-[var(--color-theme)]/40 hover:bg-[var(--color-theme-light)] active:scale-[0.97]",
+      ].join(" ")}
     >
-      <span className="sm:inline">{label}</span>
+      {children}
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
+}
+
+function Divider() {
+  return <span className="mx-0.5 hidden h-9 w-px bg-[var(--color-border-default)] sm:block" />;
 }
 
 function applyInline(
@@ -57,46 +82,54 @@ function applyLinePrefix(
   if (lineEnd === -1) lineEnd = value.length;
   const block = value.slice(lineStart, lineEnd);
   const lines = block.split("\n");
-  const nextBlock = lines
-    .map((line, i) => prefixFor(line.replace(/^#{1,3}\s+|^[-*]\s+|^\d+\.\s+/, ""), i))
+  const rewritten = lines
+    .map((line, i) => {
+      const stripped = line
+        .replace(/^#{1,6}\s+/, "")
+        .replace(/^>\s+/, "")
+        .replace(/^[-*]\s+/, "")
+        .replace(/^\d+\.\s+/, "");
+      return prefixFor(stripped, i);
+    })
     .join("\n");
-  const next = value.slice(0, lineStart) + nextBlock + value.slice(lineEnd);
+  const next = value.slice(0, lineStart) + rewritten + value.slice(lineEnd);
   return {
     next,
     selStart: lineStart,
-    selEnd: lineStart + nextBlock.length,
+    selEnd: lineStart + rewritten.length,
   };
 }
 
 /**
- * Barre d'outils markdown (style EPCAS) pour l'éditeur de contenu.
+ * Barre d'outils markdown — icônes et style alignés sur EPCAS.
  */
 export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
-  const focusApply = (result: { next: string; selStart: number; selEnd: number }) => {
-    onChange(result.next);
+  function focusAndSelect(selStart: number, selEnd: number) {
     requestAnimationFrame(() => {
       const el = textareaRef.current;
       if (!el) return;
       el.focus();
-      el.setSelectionRange(result.selStart, result.selEnd);
+      el.setSelectionRange(selStart, selEnd);
     });
-  };
+  }
 
   function withSelection(
-    fn: (value: string, start: number, end: number) => {
-      next: string;
-      selStart: number;
-      selEnd: number;
-    },
+    transform: (
+      value: string,
+      start: number,
+      end: number,
+    ) => { next: string; selStart: number; selEnd: number },
   ) {
     const el = textareaRef.current;
-    const start = el?.selectionStart ?? 0;
-    const end = el?.selectionEnd ?? 0;
-    focusApply(fn(value, start, end));
+    const start = el?.selectionStart ?? value.length;
+    const end = el?.selectionEnd ?? value.length;
+    const { next, selStart, selEnd } = transform(value, start, end);
+    onChange(next);
+    focusAndSelect(selStart, selEnd);
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5 rounded-[14px] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/60 p-2">
+    <div className="flex flex-wrap gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-2">
       <ToolBtn
         label="H1 Titre"
         title="Titre H1"
@@ -105,7 +138,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line) => `# ${line || "Titre"}`),
           )
         }
-      />
+      >
+        <Heading1 className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="H2 Sous-titre"
         title="Sous-titre H2"
@@ -114,7 +149,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line) => `## ${line || "Sous-titre"}`),
           )
         }
-      />
+      >
+        <Heading2 className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="H3 Petit titre"
         title="Petit titre H3"
@@ -123,28 +160,44 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line) => `### ${line || "Petit titre"}`),
           )
         }
-      />
+      >
+        <Heading3 className="h-4 w-4" />
+      </ToolBtn>
+
+      <Divider />
+
       <ToolBtn
-        label="B Gras"
+        label="Gras"
         title="Gras"
         onClick={() =>
           withSelection((v, s, e) => applyInline(v, s, e, "**", "**", "gras"))
         }
-      />
+      >
+        <Bold className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
-        label="I Italique"
+        label="Italique"
         title="Italique"
         onClick={() =>
           withSelection((v, s, e) => applyInline(v, s, e, "*", "*", "italique"))
         }
-      />
+      >
+        <Italic className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Surligner"
         title="Surligner"
         onClick={() =>
-          withSelection((v, s, e) => applyInline(v, s, e, "==", "==", "surligné"))
+          withSelection((v, s, e) =>
+            applyInline(v, s, e, "==", "==", "surligné"),
+          )
         }
-      />
+      >
+        <Highlighter className="h-4 w-4" />
+      </ToolBtn>
+
+      <Divider />
+
       <ToolBtn
         label="Puces"
         title="Liste à puces"
@@ -153,7 +206,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line) => `- ${line || "item"}`),
           )
         }
-      />
+      >
+        <List className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Numéros"
         title="Liste numérotée"
@@ -162,7 +217,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line, i) => `${i + 1}. ${line || "item"}`),
           )
         }
-      />
+      >
+        <ListOrdered className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Citation"
         title="Citation"
@@ -171,53 +228,75 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             applyLinePrefix(v, s, e, (line) => `> ${line || "citation"}`),
           )
         }
-      />
+      >
+        <Quote className="h-4 w-4" />
+      </ToolBtn>
+
+      <Divider />
+
       <ToolBtn
         label="Lien"
-        title="Lien"
+        title="Insérer un lien"
         onClick={() =>
-          withSelection((v, s, e) =>
-            applyInline(v, s, e, "[", "](https://)", "texte"),
-          )
+          withSelection((v, s, e) => {
+            const selected = v.slice(s, e) || "texte";
+            const insert = `[${selected}](https://)`;
+            const next = v.slice(0, s) + insert + v.slice(e);
+            const urlStart = s + selected.length + 3;
+            return { next, selStart: urlStart, selEnd: urlStart + 8 };
+          })
         }
-      />
+      >
+        <Link2 className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Tableau"
-        title="Tableau"
+        title="Insérer un tableau"
         onClick={() =>
           withSelection((v, s, e) => {
             const table =
-              "| Colonne | Colonne |\n| --- | --- |\n| Cellule | Cellule |\n";
-            const next = v.slice(0, s) + table + v.slice(e);
-            return { next, selStart: s, selEnd: s + table.length };
+              "| Colonne | Colonne |\n| --- | --- |\n| Cellule | Cellule |";
+            const before = s > 0 && v[s - 1] !== "\n" ? "\n\n" : "";
+            const after = "\n\n";
+            const insert = before + table + after;
+            const next = v.slice(0, s) + insert + v.slice(e);
+            const selStart = s + before.length;
+            return { next, selStart, selEnd: selStart + table.length };
           })
         }
-      />
+      >
+        <Table2 className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Ligne"
-        title="Ligne horizontale"
+        title="Ligne de séparation"
         onClick={() =>
-          withSelection((v, s, e) => {
-            const insert = "\n---\n";
-            const next = v.slice(0, s) + insert + v.slice(e);
-            return { next, selStart: s + insert.length, selEnd: s + insert.length };
+          withSelection((v, s) => {
+            const before = s > 0 && v[s - 1] !== "\n" ? "\n\n" : "\n";
+            const insert = `${before}---\n\n`;
+            const next = v.slice(0, s) + insert + v.slice(s);
+            const pos = s + insert.length;
+            return { next, selStart: pos, selEnd: pos };
           })
         }
-      />
+      >
+        <Minus className="h-4 w-4" />
+      </ToolBtn>
       <ToolBtn
         label="Nettoyer"
-        title="Nettoyer le formatage markdown"
+        title="Retirer le formatage de la sélection"
         onClick={() =>
           withSelection((v, s, e) => {
             const selected = v.slice(s, e) || v;
             const cleaned = selected
-              .replace(/#{1,6}\s+/g, "")
-              .replace(/\*\*|__/g, "")
-              .replace(/\*|_/g, "")
+              .replace(/\*\*/g, "")
               .replace(/==/g, "")
+              .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1$2")
+              .replace(/^#{1,6}\s+/gm, "")
               .replace(/^>\s+/gm, "")
               .replace(/^[-*]\s+/gm, "")
-              .replace(/^\d+\.\s+/gm, "");
+              .replace(/^\d+\.\s+/gm, "")
+              .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
             if (s === e) {
               return { next: cleaned, selStart: 0, selEnd: cleaned.length };
             }
@@ -225,7 +304,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: Props) {
             return { next, selStart: s, selEnd: s + cleaned.length };
           })
         }
-      />
+      >
+        <RemoveFormatting className="h-4 w-4" />
+      </ToolBtn>
     </div>
   );
 }

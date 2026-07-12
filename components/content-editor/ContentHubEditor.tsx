@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { Eye, Pencil, Redo2, Undo2 } from "lucide-react";
 import { useContentEditor } from "./ContentEditorProvider";
 import { MarkdownToolbar } from "./MarkdownToolbar";
 import { useEditorHistory } from "@/lib/content-editor/use-editor-history";
@@ -364,24 +365,26 @@ function PageEditor({
         <button
           type="button"
           onClick={() => setMode("edit")}
-          className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold ${
+          className={`inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] px-3 py-1.5 text-xs font-bold ${
             mode === "edit"
               ? "bg-[var(--color-theme)] text-white"
               : "border border-[var(--color-border-default)] bg-white text-[var(--color-text-primary)]"
           }`}
         >
-          ✎ Édition
+          <Pencil className="h-4 w-4" />
+          Édition
         </button>
         <button
           type="button"
           onClick={() => setMode("preview")}
-          className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold ${
+          className={`inline-flex items-center gap-1.5 rounded-[var(--radius-sm)] px-3 py-1.5 text-xs font-bold ${
             mode === "preview"
               ? "bg-[var(--color-theme)] text-white"
               : "border border-[var(--color-border-default)] bg-white text-[var(--color-text-primary)]"
           }`}
         >
-          👁 Preview
+          <Eye className="h-4 w-4" />
+          Preview
         </button>
 
         <div className="flex flex-wrap items-center gap-1 border-l border-[var(--color-border-default)] pl-2">
@@ -390,18 +393,20 @@ function PageEditor({
             disabled={!canUndo}
             onClick={undo}
             title="Annuler (Ctrl+Z)"
-            className="rounded-lg px-2 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] disabled:opacity-30"
+            className="inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] disabled:opacity-30"
           >
-            ← Précédent
+            <Undo2 className="h-4 w-4" />
+            Précédent
           </button>
           <button
             type="button"
             disabled={!canRedo}
             onClick={redo}
             title="Rétablir (Ctrl+Y)"
-            className="rounded-lg px-2 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] disabled:opacity-30"
+            className="inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] disabled:opacity-30"
           >
-            Suivant →
+            <Redo2 className="h-4 w-4" />
+            Suivant
           </button>
           <span className="px-1 text-xs text-[var(--color-text-secondary)]">
             {historyDepth}/{historyLimit}
