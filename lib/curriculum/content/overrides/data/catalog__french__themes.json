@@ -1615,11 +1615,11 @@
         "summary": "Séjour à l'hôtel et hébergement.",
         "tab": "vocabulaire",
         "markers": [],
-        "hidden": true
+        "hidden": false
       }
     ]
   },
-  "updatedAt": "2026-07-12T21:17:36.123Z",
+  "updatedAt": "2026-07-12T21:17:39.985Z",
   "updatedBy": "dc25c315-6996-445d-bebb-b4d80d66da1a",
   "gitPath": "lib/curriculum/content/overrides/data/catalog__french__themes.json"
 }
