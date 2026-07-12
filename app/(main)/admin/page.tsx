@@ -56,8 +56,8 @@ export default async function AdminPage() {
         </div>
         <Link
           href="/admin/contenu"
-          className="flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-amber-400/50 bg-amber-50 px-3 text-sm font-semibold text-amber-900 shadow-sm transition-colors hover:bg-amber-100"
-          title="Édition du contenu pédagogique"
+          className="hidden h-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-amber-400/50 bg-amber-50 px-3 text-sm font-semibold text-amber-900 shadow-sm transition-colors hover:bg-amber-100 lg:inline-flex"
+          title="Édition du contenu pédagogique (bureau uniquement)"
         >
           Contenu
         </Link>

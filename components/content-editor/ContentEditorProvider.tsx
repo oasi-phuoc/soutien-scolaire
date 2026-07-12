@@ -16,7 +16,6 @@ import {
 } from "@/app/actions/content-editor";
 import { applyContentOverride } from "@/lib/content-editor/merge";
 import {
-  readEditModeEnabled,
   readLocalOverrides,
   writeEditModeEnabled,
   writeLocalOverride,
@@ -61,7 +60,6 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
   const [capabilities, setCapabilities] =
     useState<ContentEditorCapabilities>(defaultCapabilities);
-  const [editMode, setEditModeState] = useState(false);
   const [overrides, setOverrides] = useState<
     Record<string, ContentOverrideRecord>
   >({});
@@ -95,30 +93,24 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    setEditModeState(readEditModeEnabled());
+    // Plus d'édition inline : forcer le flag local à false.
+    writeEditModeEnabled(false);
     void refresh();
     const onStorage = () => {
-      setEditModeState(readEditModeEnabled());
       setOverrides((prev) => ({ ...prev, ...readLocalOverrides() }));
     };
-    window.addEventListener("soutien-content-edit-mode", onStorage);
     window.addEventListener("soutien-content-overrides", onStorage);
     window.addEventListener("storage", onStorage);
     return () => {
-      window.removeEventListener("soutien-content-edit-mode", onStorage);
       window.removeEventListener("soutien-content-overrides", onStorage);
       window.removeEventListener("storage", onStorage);
     };
   }, [refresh]);
 
-  const setEditMode = useCallback(
-    (v: boolean) => {
-      if (v && !capabilities.canEdit) return;
-      writeEditModeEnabled(v);
-      setEditModeState(v);
-    },
-    [capabilities.canEdit],
-  );
+  const setEditMode = useCallback((_v: boolean) => {
+    // No-op : édition uniquement via le hub /admin/contenu (bureau).
+    writeEditModeEnabled(false);
+  }, []);
 
   const resolve = useCallback(
     <T,>(key: string, base: T): T => {
@@ -154,7 +146,7 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
     () => ({
       ready,
       capabilities,
-      editMode: editMode && capabilities.canEdit,
+      editMode: false,
       setEditMode,
       overrides,
       resolve,
@@ -165,7 +157,6 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
     [
       ready,
       capabilities,
-      editMode,
       setEditMode,
       overrides,
       resolve,

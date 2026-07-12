@@ -9,7 +9,9 @@ export type ContentDomain =
   | "catalog"
   | "ce"
   | "co"
-  | "asset";
+  | "asset"
+  | "comm"
+  | "placement";
 
 export type ContentOverrideRecord = {
   key: string;

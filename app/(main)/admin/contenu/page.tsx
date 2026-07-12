@@ -33,7 +33,7 @@ export default async function AdminContenuPage() {
             Contenu pédagogique
           </h1>
           <p className="mt-1 text-sm text-zinc-500">
-            Édition en ligne — lecture, vocabulaire, grammaire, maths
+            Édition bureau uniquement — brouillon jusqu&apos;à Enregistrer
           </p>
         </div>
       </div>
