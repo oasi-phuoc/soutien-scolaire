@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { Eye, Pencil, Redo2, Undo2 } from "lucide-react";
 import { useContentEditor } from "./ContentEditorProvider";
-import { MarkdownToolbar } from "./MarkdownToolbar";
 import { useEditorHistory } from "@/lib/content-editor/use-editor-history";
 import {
   HUB_DOMAINS,
@@ -13,295 +12,351 @@ import {
   type HubPage,
   type HubSubmenu,
 } from "@/lib/content-editor/hub-pages";
+import { MathLessonFields } from "./MathLessonFields";
+import { VocabThemeFields } from "./VocabThemeFields";
+import { GrammarLessonFields } from "./GrammarLessonFields";
+import { LectureLetterFields } from "./LectureLetterFields";
+import type { MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import type { MathRichBlock } from "@/lib/curriculum/content/math/math-a1-types";
 
-type EditorDoc = {
-  title: string;
-  body: string;
-  raw: unknown;
-};
+type EditorKind =
+  | "math"
+  | "vocab"
+  | "grammar"
+  | "conjugation"
+  | "lecture"
+  | "story"
+  | "generic";
 
-function extractDoc(payload: unknown, fallbackTitle: string): EditorDoc {
-  if (!payload || typeof payload !== "object") {
-    return { title: fallbackTitle, body: "", raw: payload ?? {} };
-  }
-  const p = payload as Record<string, unknown>;
-
-  // Maths lesson
-  const theory = p.theory as
-    | { title?: { fr?: string }; paragraphs?: { fr?: string[] }; blocks?: unknown }
-    | undefined;
-  if (theory) {
-    const title = theory.title?.fr ?? fallbackTitle;
-    const paragraphs = (theory.paragraphs?.fr ?? []).join("\n\n");
-    const blocks = theory.blocks
-      ? `\n\n\`\`\`blocks\n${JSON.stringify(theory.blocks, null, 2)}\n\`\`\``
-      : "";
-    const exercises = p.exercises
-      ? `\n\n\`\`\`exercises\n${JSON.stringify(p.exercises, null, 2)}\n\`\`\``
-      : "";
-    return {
-      title,
-      body: `${paragraphs}${blocks}${exercises}`.trim(),
-      raw: payload,
-    };
-  }
-
-  // Vocab
-  if (Array.isArray(p.words) || Array.isArray(p.sentences)) {
-    return {
-      title: String(p.title ?? fallbackTitle),
-      body: JSON.stringify(
-        { words: p.words ?? [], sentences: p.sentences ?? [] },
-        null,
-        2,
-      ),
-      raw: payload,
-    };
-  }
-
-  // Grammar
-  if (Array.isArray(p.theory) || Array.isArray(p.exercises)) {
-    return {
-      title: String(p.title ?? fallbackTitle),
-      body: JSON.stringify(
-        { theory: p.theory ?? [], exercises: p.exercises ?? [] },
-        null,
-        2,
-      ),
-      raw: payload,
-    };
-  }
-
-  // Lecture letter
-  if (typeof p.letterLower === "string" || typeof p.phoneme === "string") {
-    return {
-      title: String(p.letter ?? p.letterLower ?? fallbackTitle),
-      body: JSON.stringify(payload, null, 2),
-      raw: payload,
-    };
-  }
-
-  // Story
-  if (Array.isArray(p.sentences) && typeof p.level === "string") {
-    return {
-      title: String(p.title ?? fallbackTitle),
-      body: (p.sentences as string[]).join("\n"),
-      raw: payload,
-    };
-  }
-
-  // Generic
-  return {
-    title: String(p.title ?? fallbackTitle),
-    body:
-      typeof p.notes === "string" || typeof p.instructions === "string"
-        ? String(p.notes ?? p.instructions ?? "")
-        : JSON.stringify(payload, null, 2),
-    raw: payload,
-  };
+function kindFromKey(key: string): EditorKind {
+  if (key.startsWith("math:")) return "math";
+  if (key.startsWith("vocab:")) return "vocab";
+  if (key.startsWith("grammar:")) return "grammar";
+  if (key.startsWith("conjugation:")) return "conjugation";
+  if (key.startsWith("lecture:letter:")) return "lecture";
+  if (key.startsWith("lecture:story:")) return "story";
+  return "generic";
 }
 
-function applyDocToPayload(doc: EditorDoc): unknown {
-  const raw = (doc.raw && typeof doc.raw === "object" ? doc.raw : {}) as Record<
+function payloadsEqual(a: unknown, b: unknown) {
+  try {
+    return JSON.stringify(a) === JSON.stringify(b);
+  } catch {
+    return a === b;
+  }
+}
+
+function labelFromPayload(payload: unknown, fallback: string): string {
+  if (!payload || typeof payload !== "object") return fallback;
+  const p = payload as Record<string, unknown>;
+  if (typeof p.title === "string" && p.title.trim()) return p.title;
+  const theory = p.theory as { title?: { fr?: string } } | undefined;
+  if (theory?.title?.fr) return theory.title.fr;
+  if (typeof p.letter === "string") return p.letter;
+  return fallback;
+}
+
+function SimpleBlockPreview({ blocks }: { blocks: MathRichBlock[] }) {
+  return (
+    <div className="space-y-3">
+      {blocks.map((b, i) => {
+        if (b.type === "heading")
+          return (
+            <h3
+              key={i}
+              className={`text-base font-bold ${b.black ? "text-[var(--color-text-primary)]" : "text-[var(--color-theme-muted)]"}`}
+            >
+              {b.fr}
+            </h3>
+          );
+        if (b.type === "highlight")
+          return (
+            <p key={i} className="font-bold text-[var(--color-theme-muted)]">
+              {b.fr}
+            </p>
+          );
+        if (b.type === "plain")
+          return (
+            <p key={i} className="text-sm text-[var(--color-text-primary)]">
+              {b.fr || "\u00a0"}
+            </p>
+          );
+        if (b.type === "note" || b.type === "example")
+          return (
+            <p
+              key={i}
+              className="rounded-[var(--radius-sm)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm"
+            >
+              {b.fr}
+            </p>
+          );
+        if (b.type === "section" || b.type === "bullets" || b.type === "rule") {
+          const items =
+            b.type === "rule"
+              ? b.itemsFr
+              : b.type === "section"
+                ? b.itemsFr
+                : b.itemsFr;
+          const label =
+            b.type === "rule"
+              ? b.titleFr
+              : b.type === "section"
+                ? b.labelFr
+                : b.labelFr;
+          return (
+            <div key={i} className="space-y-1">
+              {label ? (
+                <p className="text-sm font-bold text-[var(--color-theme-muted)]">
+                  {label}
+                </p>
+              ) : null}
+              <ul className="space-y-0.5 border-l-2 border-[var(--color-theme)] pl-3 text-sm">
+                {items.map((it, j) => (
+                  <li key={j}>{it}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        if (b.type === "table")
+          return (
+            <div key={i} className="overflow-x-auto text-sm">
+              <table className="min-w-full border-collapse">
+                <thead>
+                  <tr>
+                    {b.headersFr.map((h, j) => (
+                      <th
+                        key={j}
+                        className="bg-[var(--color-theme-light)] px-2 py-1 text-left text-[10px] font-bold uppercase text-[var(--color-theme-muted)]"
+                      >
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {b.rows.map((row, ri) => (
+                    <tr key={ri} className={ri % 2 ? "bg-[var(--color-bg-secondary)]/50" : ""}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className="px-2 py-1">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        if (b.type === "theory_tabs")
+          return (
+            <div key={i} className="space-y-2 rounded-[var(--radius-sm)] border border-[var(--color-border-default)] p-3">
+              <p className="text-[10px] font-bold uppercase text-[var(--color-theme-muted)]">
+                Onglets
+              </p>
+              {b.tabs.map((t, ti) => (
+                <div key={ti}>
+                  <p className="mb-1 text-sm font-bold text-[var(--color-theme-muted)]">
+                    {t.label}
+                  </p>
+                  <SimpleBlockPreview blocks={t.blocks} />
+                </div>
+              ))}
+            </div>
+          );
+        return (
+          <p key={i} className="text-xs text-[var(--color-text-secondary)]">
+            [{b.type}]
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function StructuredPreview({ kind, value }: { kind: EditorKind; value: unknown }) {
+  if (kind === "math" && value && typeof value === "object") {
+    const lesson = value as MathSubmoduleLesson;
+    return (
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">
+          {lesson.theory?.title?.fr || "Sans titre"}
+        </h2>
+        {(lesson.theory?.paragraphs?.fr ?? []).map((p, i) => (
+          <p key={i} className="text-sm text-[var(--color-text-primary)]">
+            {p}
+          </p>
+        ))}
+        <SimpleBlockPreview blocks={lesson.theory?.blocks ?? []} />
+      </div>
+    );
+  }
+
+  if (value && typeof value === "object") {
+    const p = value as Record<string, unknown>;
+    return (
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">
+          {labelFromPayload(value, "Sans titre")}
+        </h2>
+        {kind === "story" && Array.isArray(p.sentences) ? (
+          <div className="space-y-2 text-sm">
+            {(p.sentences as string[]).map((s, i) => (
+              <p key={i}>{s}</p>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Aperçu structuré — utilisez Édition pour modifier les champs.
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return null;
+}
+
+function GenericFields({
+  value,
+  setValue,
+}: {
+  value: unknown;
+  setValue: (next: unknown, history?: "debounce" | "immediate") => void;
+}) {
+  const obj = (value && typeof value === "object" ? value : {}) as Record<
     string,
     unknown
   >;
+  const title = typeof obj.title === "string" ? obj.title : "";
+  const notes =
+    typeof obj.notes === "string"
+      ? obj.notes
+      : typeof obj.instructions === "string"
+        ? obj.instructions
+        : "";
 
-  // Maths
-  if (raw.theory && typeof raw.theory === "object") {
-    const theory = { ...(raw.theory as Record<string, unknown>) };
-    const titleObj = {
-      ...((theory.title as Record<string, unknown>) ?? {}),
-      fr: doc.title,
-    };
-    const blocksMatch = doc.body.match(/```blocks\n([\s\S]*?)```/);
-    const exercisesMatch = doc.body.match(/```exercises\n([\s\S]*?)```/);
-    const main = doc.body
-      .replace(/```blocks\n[\s\S]*?```/g, "")
-      .replace(/```exercises\n[\s\S]*?```/g, "")
-      .trim();
-    const paragraphs = {
-      ...((theory.paragraphs as Record<string, unknown>) ?? {}),
-      fr: main ? main.split(/\n\n+/).filter(Boolean) : [],
-    };
-    let blocks = theory.blocks;
-    let exercises = raw.exercises;
-    try {
-      if (blocksMatch?.[1]) blocks = JSON.parse(blocksMatch[1]);
-    } catch {
-      /* keep */
-    }
-    try {
-      if (exercisesMatch?.[1]) exercises = JSON.parse(exercisesMatch[1]);
-    } catch {
-      /* keep */
-    }
-    return {
-      ...raw,
-      theory: { ...theory, title: titleObj, paragraphs, blocks },
-      exercises,
-    };
-  }
+  return (
+    <div className="space-y-4">
+      <label className="block text-sm">
+        <span className="mb-1 block text-xs font-semibold text-[var(--color-theme-muted)]">
+          Titre
+        </span>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) =>
+            setValue({ ...obj, title: e.target.value }, "debounce")
+          }
+          className="w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 py-2.5 text-sm outline-none focus:border-[var(--color-theme)]"
+        />
+      </label>
+      <label className="block text-sm">
+        <span className="mb-1 block text-xs font-semibold text-[var(--color-theme-muted)]">
+          Notes / consignes
+        </span>
+        <textarea
+          value={notes}
+          onChange={(e) =>
+            setValue(
+              { ...obj, notes: e.target.value, instructions: e.target.value },
+              "debounce",
+            )
+          }
+          className="min-h-40 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 py-2.5 text-sm outline-none focus:border-[var(--color-theme)]"
+        />
+      </label>
+    </div>
+  );
+}
 
-  // Vocab
-  if (Array.isArray(raw.words) || "words" in raw) {
-    try {
-      const parsed = JSON.parse(doc.body) as {
-        words?: unknown;
-        sentences?: unknown;
-      };
-      return {
-        ...raw,
-        title: doc.title,
-        words: parsed.words ?? raw.words,
-        sentences: parsed.sentences ?? raw.sentences,
-      };
-    } catch {
-      return { ...raw, title: doc.title };
-    }
-  }
-
-  // Grammar
-  if (Array.isArray(raw.theory) || "theory" in raw) {
-    try {
-      const parsed = JSON.parse(doc.body) as {
-        theory?: unknown;
-        exercises?: unknown;
-      };
-      return {
-        ...raw,
-        title: doc.title,
-        theory: parsed.theory ?? raw.theory,
-        exercises: parsed.exercises ?? raw.exercises,
-      };
-    } catch {
-      return { ...raw, title: doc.title };
-    }
-  }
-
-  // Story
-  if (Array.isArray(raw.sentences) && typeof raw.level === "string") {
-    return {
-      ...raw,
-      title: doc.title,
-      sentences: doc.body.split("\n").filter((l) => l.length > 0),
-    };
-  }
-
-  // Letter / generic JSON body
-  if (doc.body.trim().startsWith("{") || doc.body.trim().startsWith("[")) {
-    try {
-      const parsed = JSON.parse(doc.body) as Record<string, unknown>;
-      return { ...raw, ...parsed, title: doc.title };
-    } catch {
-      /* fall through */
-    }
-  }
-
-  return {
-    ...raw,
-    title: doc.title,
-    notes: doc.body,
-    instructions: doc.body,
+function StoryFields({
+  value,
+  setValue,
+}: {
+  value: unknown;
+  setValue: (next: unknown, history?: "debounce" | "immediate") => void;
+}) {
+  const story = (value && typeof value === "object" ? value : {}) as {
+    title?: string;
+    level?: string;
+    sentences?: string[];
   };
-}
-
-function simpleMarkdownPreview(text: string) {
-  const lines = text.split("\n");
-  return lines.map((line, i) => {
-    if (line.startsWith("### "))
-      return (
-        <h3 key={i} className="mt-3 text-base font-bold text-[var(--color-text-primary)]">
-          {line.slice(4)}
-        </h3>
-      );
-    if (line.startsWith("## "))
-      return (
-        <h2 key={i} className="mt-4 text-lg font-bold text-[var(--color-theme-muted)]">
-          {line.slice(3)}
-        </h2>
-      );
-    if (line.startsWith("# "))
-      return (
-        <h1 key={i} className="mt-4 text-xl font-bold text-[var(--color-text-primary)]">
-          {line.slice(2)}
-        </h1>
-      );
-    if (line.startsWith("> "))
-      return (
-        <blockquote
-          key={i}
-          className="my-2 border-l-4 border-[var(--color-theme)] pl-3 text-[var(--color-text-secondary)]"
-        >
-          {line.slice(2)}
-        </blockquote>
-      );
-    if (line.trim() === "---")
-      return <hr key={i} className="my-4 border-[var(--color-border-default)]" />;
-    if (line.startsWith("- ") || line.startsWith("* "))
-      return (
-        <li key={i} className="ml-5 list-disc text-sm text-[var(--color-text-primary)]">
-          {line.slice(2)}
-        </li>
-      );
-    if (/^\d+\.\s/.test(line))
-      return (
-        <li key={i} className="ml-5 list-decimal text-sm text-[var(--color-text-primary)]">
-          {line.replace(/^\d+\.\s/, "")}
-        </li>
-      );
-    if (!line.trim()) return <div key={i} className="h-2" />;
-    const html = line
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.+?)\*/g, "<em>$1</em>")
-      .replace(/==(.+?)==/g, '<mark class="bg-[var(--color-correction-soft)]">$1</mark>');
-    return (
-      <p
-        key={i}
-        className="text-sm leading-relaxed text-[var(--color-text-primary)]"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    );
-  });
-}
-
-function docsEqual(a: EditorDoc, b: EditorDoc) {
-  return a.title === b.title && a.body === b.body;
+  return (
+    <div className="space-y-4">
+      <label className="block text-sm">
+        <span className="mb-1 block text-xs font-semibold text-[var(--color-theme-muted)]">
+          Titre
+        </span>
+        <input
+          type="text"
+          value={story.title ?? ""}
+          onChange={(e) =>
+            setValue({ ...story, title: e.target.value }, "debounce")
+          }
+          className="w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 py-2.5 text-sm outline-none focus:border-[var(--color-theme)]"
+        />
+      </label>
+      <label className="block text-sm">
+        <span className="mb-1 block text-xs font-semibold text-[var(--color-theme-muted)]">
+          Phrases (une par ligne)
+        </span>
+        <textarea
+          value={(story.sentences ?? []).join("\n")}
+          onChange={(e) =>
+            setValue(
+              {
+                ...story,
+                sentences: e.target.value.split("\n"),
+              },
+              "debounce",
+            )
+          }
+          className="min-h-48 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 py-2.5 font-mono text-sm outline-none focus:border-[var(--color-theme)]"
+        />
+      </label>
+    </div>
+  );
 }
 
 function PageEditor({
   page,
-  basePayload: _basePayload,
-  initialDoc,
-  baselineDoc,
+  initialPayload,
+  baselinePayload,
   onDraftChange,
   onDiscardDraft,
   onSaved,
 }: {
   page: HubPage;
-  basePayload: unknown;
-  initialDoc: EditorDoc;
-  baselineDoc: EditorDoc;
-  onDraftChange: (key: string, doc: EditorDoc) => void;
+  initialPayload: unknown;
+  baselinePayload: unknown;
+  onDraftChange: (key: string, payload: unknown) => void;
   onDiscardDraft: (key: string) => void;
   onSaved: () => void;
 }) {
   const { saveOverride } = useContentEditor();
+  const kind = kindFromKey(page.contentKey);
   const { present, setPresent, undo, redo, canUndo, canRedo, historyDepth, historyLimit, reset } =
-    useEditorHistory<EditorDoc>(initialDoc);
+    useEditorHistory<unknown>(initialPayload);
   const [mode, setMode] = useState<"edit" | "preview">("edit");
   const [status, setStatus] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const dirty = !docsEqual(present, baselineDoc);
+  const dirty = !payloadsEqual(present, baselinePayload);
+
+  const setValue = useCallback(
+    (next: unknown, history: "debounce" | "immediate" = "debounce") => {
+      setPresent(next, { history });
+    },
+    [setPresent],
+  );
 
   useEffect(() => {
-    if (docsEqual(present, baselineDoc)) {
+    if (payloadsEqual(present, baselinePayload)) {
       onDiscardDraft(page.contentKey);
     } else {
       onDraftChange(page.contentKey, present);
     }
-  }, [page.contentKey, present, baselineDoc, onDraftChange, onDiscardDraft]);
+  }, [page.contentKey, present, baselinePayload, onDraftChange, onDiscardDraft]);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -326,11 +381,10 @@ function PageEditor({
 
   async function handleSave() {
     setStatus(null);
-    const payload = applyDocToPayload(present);
     const res = await saveOverride({
       key: page.contentKey,
-      label: `${page.code} — ${present.title || page.title}`,
-      payload,
+      label: `${page.code} — ${labelFromPayload(present, page.title)}`,
+      payload: present,
       syncGit: true,
     });
     if (!res.ok) {
@@ -345,15 +399,14 @@ function PageEditor({
     setStatus(
       `Enregistré (${parts.join(" + ")})${res.message ? ` — ${res.message}` : ""}`,
     );
-    const nextDoc = { ...present, raw: payload };
-    reset(nextDoc);
+    reset(present);
     onDiscardDraft(page.contentKey);
     onSaved();
   }
 
   function handleDiscard() {
     if (dirty && !confirm("Annuler le brouillon de cette page ?")) return;
-    reset(baselineDoc);
+    reset(baselinePayload);
     onDiscardDraft(page.contentKey);
     setMode("edit");
     setStatus("Brouillon annulé");
@@ -424,66 +477,37 @@ function PageEditor({
         )}
       </div>
 
-      <label className="block text-sm">
-        <span className="mb-1 block font-medium text-[var(--color-text-primary)]">
-          Titre de la page
-        </span>
-        <input
-          type="text"
-          value={present.title}
-          onChange={(e) =>
-            setPresent(
-              (prev) => ({ ...prev, title: e.target.value }),
-              { history: "debounce" },
-            )
-          }
-          className="w-full rounded-[10px] border border-[var(--color-border-default)] bg-white px-3 py-2.5 text-sm outline-none focus:border-[var(--color-theme)]"
-          required
-        />
-      </label>
-
       {mode === "edit" ? (
-        <>
-          <MarkdownToolbar
-            textareaRef={textareaRef}
-            value={present.body}
-            onChange={(next) =>
-              setPresent((prev) => ({ ...prev, body: next }), {
-                history: "immediate",
-              })
-            }
-          />
-          <label className="block text-sm">
-            <span className="mb-1 block font-medium text-[var(--color-text-primary)]">
-              Contenu complet
-            </span>
-            <textarea
-              ref={textareaRef}
-              value={present.body}
-              onChange={(e) =>
-                setPresent(
-                  (prev) => ({ ...prev, body: e.target.value }),
-                  { history: "debounce" },
-                )
-              }
-              className="min-h-72 w-full rounded-[10px] border border-[var(--color-border-default)] bg-white px-3 py-3 font-mono text-sm leading-relaxed outline-none focus:border-[var(--color-theme)]"
-              spellCheck={false}
-            />
-            <span className="mt-1 block text-xs text-[var(--color-text-secondary)]">
-              Modifs en brouillon jusqu&apos;à Enregistrer. Ctrl+Z / Ctrl+Y ·
-              Ctrl+S pour enregistrer.
-            </span>
-          </label>
-        </>
+        <div className="space-y-2">
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            Modifiez les blocs et champs ci-dessous. Rien n&apos;est publié tant
+            que vous n&apos;avez pas cliqué Enregistrer.
+          </p>
+          {kind === "math" && (
+            <MathLessonFields value={present} setValue={setValue} />
+          )}
+          {kind === "vocab" && (
+            <VocabThemeFields value={present} setValue={setValue} />
+          )}
+          {(kind === "grammar" || kind === "conjugation") && (
+            <GrammarLessonFields value={present} setValue={setValue} />
+          )}
+          {kind === "lecture" && (
+            <LectureLetterFields value={present} setValue={setValue} />
+          )}
+          {kind === "story" && (
+            <StoryFields value={present} setValue={setValue} />
+          )}
+          {kind === "generic" && (
+            <GenericFields value={present} setValue={setValue} />
+          )}
+        </div>
       ) : (
         <div className="rounded-[10px] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/40 p-4 sm:p-5">
           <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-[var(--color-theme-muted)]">
             Preview{dirty ? " (brouillon)" : ""}
           </p>
-          <h2 className="mb-4 text-2xl font-bold text-[var(--color-text-primary)]">
-            {present.title || "Sans titre"}
-          </h2>
-          <div className="space-y-1">{simpleMarkdownPreview(present.body)}</div>
+          <StructuredPreview kind={kind} value={present} />
         </div>
       )}
 
@@ -532,9 +556,8 @@ function PageEditor({
 }
 
 /**
- * Hub d'édition contenu style EPCAS (bureau uniquement) :
- * module (4) → sous-menu obligatoire → liste de pages → éditeur Édition/Preview.
- * Les modifications restent en brouillon jusqu'à Enregistrer.
+ * Hub d'édition contenu style EPCAS (bureau) :
+ * module → sous-menu → page → éditeur structuré (blocs / champs), brouillon jusqu'à Enregistrer.
  */
 export function ContentHubEditor() {
   const { overrides, refresh } = useContentEditor();
@@ -542,7 +565,7 @@ export function ContentHubEditor() {
   const [submenu, setSubmenu] = useState<HubSubmenu | null>(null);
   const [query, setQuery] = useState("");
   const [pageId, setPageId] = useState<string | null>(null);
-  const [drafts, setDrafts] = useState<Record<string, EditorDoc>>({});
+  const [drafts, setDrafts] = useState<Record<string, unknown>>({});
 
   const domainMeta = HUB_DOMAINS.find((d) => d.id === domain) ?? null;
   const submenus = domainMeta?.submenus ?? [];
@@ -592,11 +615,10 @@ export function ContentHubEditor() {
     return () => window.removeEventListener("beforeunload", onBeforeUnload);
   }, [draftCount]);
 
-  const onDraftChange = useCallback((key: string, doc: EditorDoc) => {
+  const onDraftChange = useCallback((key: string, payload: unknown) => {
     setDrafts((prev) => {
-      const prevDoc = prev[key];
-      if (prevDoc && docsEqual(prevDoc, doc)) return prev;
-      return { ...prev, [key]: doc };
+      if (payloadsEqual(prev[key], payload)) return prev;
+      return { ...prev, [key]: payload };
     });
   }, []);
 
@@ -611,15 +633,12 @@ export function ContentHubEditor() {
 
   const submenuLabel = submenus.find((s) => s.id === submenu)?.label;
 
-  let baselineDoc: EditorDoc | null = null;
-  let initialDoc: EditorDoc | null = null;
+  let baselinePayload: unknown = null;
+  let initialPayload: unknown = null;
   if (selectedPage) {
-    const basePayload = selectedPage.loadBase();
-    baselineDoc = extractDoc(
-      overrides[selectedPage.contentKey]?.payload ?? basePayload,
-      selectedPage.title,
-    );
-    initialDoc = drafts[selectedPage.contentKey] ?? baselineDoc;
+    baselinePayload =
+      overrides[selectedPage.contentKey]?.payload ?? selectedPage.loadBase();
+    initialPayload = drafts[selectedPage.contentKey] ?? baselinePayload;
   }
 
   return (
@@ -632,7 +651,7 @@ export function ContentHubEditor() {
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
             {domainMeta && submenuLabel
               ? `${domainMeta.label} · ${submenuLabel}`
-              : "Choisissez un module et son sous-menu, puis une page à éditer — sans quitter cette page."}
+              : "Choisissez un module et son sous-menu, puis une page — édition par blocs sur cette page."}
           </p>
         </div>
         <Link
@@ -647,7 +666,7 @@ export function ContentHubEditor() {
         <p className="rounded-[10px] border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-950">
           {draftCount} brouillon{draftCount > 1 ? "s" : ""} non enregistré
           {draftCount > 1 ? "s" : ""}. Cliquez <strong>Enregistrer</strong> pour
-          publier (Supabase + Git).
+          publier.
         </p>
       )}
 
@@ -720,9 +739,6 @@ export function ContentHubEditor() {
                   {selectedPage.code} — {selectedPage.title}
                   {drafts[selectedPage.contentKey] ? " · brouillon" : ""}
                 </p>
-                <span className="mt-1 inline-block rounded-md bg-[var(--color-correction-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--color-text-primary)]">
-                  {domainMeta?.label} · {submenuLabel}
-                </span>
               </div>
             )}
 
@@ -790,25 +806,17 @@ export function ContentHubEditor() {
                   })}
                 </ul>
               )}
-              <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
-                Tapez pour filtrer, puis touchez une page — l&apos;éditeur
-                s&apos;ouvre ici (pas besoin de naviguer).
-              </p>
             </div>
           </>
         )}
       </div>
 
-      {selectedPage && baselineDoc && initialDoc && (
+      {selectedPage && baselinePayload !== null && initialPayload !== null && (
         <PageEditor
           key={selectedPage.contentKey}
           page={selectedPage}
-          basePayload={
-            overrides[selectedPage.contentKey]?.payload ??
-            selectedPage.loadBase()
-          }
-          initialDoc={initialDoc}
-          baselineDoc={baselineDoc}
+          initialPayload={initialPayload}
+          baselinePayload={baselinePayload}
           onDraftChange={onDraftChange}
           onDiscardDraft={onDiscardDraft}
           onSaved={() => void refresh()}
