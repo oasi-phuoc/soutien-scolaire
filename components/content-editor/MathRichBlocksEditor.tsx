@@ -11,6 +11,35 @@ const areaCls =
 const btnIcon =
   "rounded px-1.5 py-0.5 text-xs font-bold text-[var(--color-text-secondary)] hover:bg-[var(--color-theme-light)] hover:text-[var(--color-theme-muted)] disabled:opacity-30";
 
+const BLOCK_LABELS: Record<string, string> = {
+  heading: "Titre",
+  highlight: "Sous-titre coloré",
+  plain: "Paragraphe",
+  note: "Note",
+  example: "Exemple",
+  section: "Encadré",
+  bullets: "Liste à puces",
+  rule: "Règle",
+  table: "Tableau",
+  theory_tabs: "Onglets",
+  theory_toggle: "Basculer A/B",
+  svg: "Image SVG",
+  svg_row: "Rangée d’images",
+  shape_explorer: "Explorateur de formes",
+  mult_table: "Table de multiplication",
+  div_table: "Table de division",
+  power_table: "Table des puissances",
+  mul_step_cards: "Étapes multiplication",
+  mul2_step_cards: "Étapes multiplication 2 chiffres",
+  div_step_cards: "Étapes division",
+  add_step_cards: "Étapes +/−",
+  add_sub_toggle_cards: "Étapes +/−",
+};
+
+function frenchType(type: string) {
+  return BLOCK_LABELS[type] ?? "Bloc spécial";
+}
+
 const ADDABLE = [
   "heading",
   "highlight",
@@ -102,7 +131,10 @@ function JsonBlockEditor({
   const [draft, setDraft] = useState(() => JSON.stringify(block, null, 2));
   return (
     <div>
-      <span className={labelCls}>JSON du bloc</span>
+      <p className="mb-1 text-xs text-[var(--color-text-secondary)]">
+        Bloc spécial ({frenchType(block.type)}). Modifiez avec précaution.
+      </p>
+      <span className={labelCls}>Réglages techniques</span>
       <textarea
         value={draft}
         spellCheck={false}
@@ -413,10 +445,13 @@ export function MathRichBlocksEditor({
   blocks,
   onChange,
   depth = 0,
+  single = false,
 }: {
   blocks: MathRichBlock[];
   onChange: (blocks: MathRichBlock[]) => void;
   depth?: number;
+  /** Mode un seul bloc (étape) : pas de barre ↑↓ / ajouter. */
+  single?: boolean;
 }) {
   const [addType, setAddType] = useState<Addable>("plain");
 
@@ -438,51 +473,55 @@ export function MathRichBlocksEditor({
           key={i}
           className="rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white p-2.5"
         >
-          <div className="mb-2 flex items-center gap-1.5">
-            <span className="rounded-md bg-[var(--color-theme-light)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-theme-muted)]">
-              {block.type}
-            </span>
-            <div className="ml-auto flex items-center gap-0.5">
-              <button type="button" className={btnIcon} disabled={i === 0} onClick={() => move(i, -1)}>
-                ↑
-              </button>
-              <button
-                type="button"
-                className={btnIcon}
-                disabled={i === blocks.length - 1}
-                onClick={() => move(i, 1)}
-              >
-                ↓
-              </button>
-              <button type="button" className={btnIcon} onClick={() => removeAt(i)} aria-label="Supprimer">
-                ×
-              </button>
+          {!single && (
+            <div className="mb-2 flex items-center gap-1.5">
+              <span className="rounded-md bg-[var(--color-theme-light)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-theme-muted)]">
+                {frenchType(block.type)}
+              </span>
+              <div className="ml-auto flex items-center gap-0.5">
+                <button type="button" className={btnIcon} disabled={i === 0} onClick={() => move(i, -1)}>
+                  ↑
+                </button>
+                <button
+                  type="button"
+                  className={btnIcon}
+                  disabled={i === blocks.length - 1}
+                  onClick={() => move(i, 1)}
+                >
+                  ↓
+                </button>
+                <button type="button" className={btnIcon} onClick={() => removeAt(i)} aria-label="Supprimer">
+                  ×
+                </button>
+              </div>
             </div>
-          </div>
+          )}
           <BlockFields block={block} depth={depth} onChange={(next) => updateAt(i, next)} />
         </div>
       ))}
 
-      <div className="flex flex-wrap items-center gap-2 pt-1">
-        <select
-          value={addType}
-          onChange={(e) => setAddType(e.target.value as Addable)}
-          className="rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-2 py-1.5 text-xs outline-none focus:border-[var(--color-theme)]"
-        >
-          {ADDABLE.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <button
-          type="button"
-          className="rounded-[var(--radius-sm)] bg-[var(--color-theme-light)] px-3 py-1.5 text-xs font-bold text-[var(--color-theme-muted)] hover:bg-[var(--color-theme)] hover:text-white"
-          onClick={() => onChange([...blocks, emptyBlock(addType)])}
-        >
-          + Ajouter un bloc
-        </button>
-      </div>
+      {!single && (
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <select
+            value={addType}
+            onChange={(e) => setAddType(e.target.value as Addable)}
+            className="rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-2 py-1.5 text-xs outline-none focus:border-[var(--color-theme)]"
+          >
+            {ADDABLE.map((t) => (
+              <option key={t} value={t}>
+                {frenchType(t)}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="rounded-[var(--radius-sm)] bg-[var(--color-theme-light)] px-3 py-1.5 text-xs font-bold text-[var(--color-theme-muted)] hover:bg-[var(--color-theme)] hover:text-white"
+            onClick={() => onChange([...blocks, emptyBlock(addType)])}
+          >
+            + Ajouter un bloc
+          </button>
+        </div>
+      )}
     </div>
   );
 }
