@@ -7,6 +7,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type KeyboardEvent,
 } from "react";
 
@@ -27,6 +28,7 @@ export type AppSelectProps = {
   size?: "sm" | "md";
   placement?: "bottom" | "top";
   className?: string;
+  style?: CSSProperties;
   menuClassName?: string;
   id?: string;
   name?: string;
@@ -50,6 +52,7 @@ export function AppSelect({
   size = "md",
   placement = "bottom",
   className = "",
+  style,
   menuClassName = "",
   id,
   name,
@@ -117,7 +120,7 @@ export function AppSelect({
       : "top-full mt-1";
 
   return (
-    <div ref={rootRef} className={`relative ${className}`}>
+    <div ref={rootRef} className={`relative ${className}`} style={style}>
       {name ? <input type="hidden" name={name} value={value} /> : null}
       <button
         id={selectId}

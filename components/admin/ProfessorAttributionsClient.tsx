@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition, type CSSProperties } from "react";
 import {
   getProfessorAttributionsAction,
   saveProfessorAttributionsAction,
@@ -51,12 +51,14 @@ function ClassMultiPicker({
   excludeClassId,
   disabled,
   onChange,
+  widthStyle,
 }: {
   options: ProfessorClassOption[];
   value: Set<string>;
   excludeClassId: string | null;
   disabled?: boolean;
   onChange: (next: Set<string>) => void;
+  widthStyle?: CSSProperties;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -94,12 +96,12 @@ function ClassMultiPicker({
   }
 
   return (
-    <div ref={rootRef} className="relative min-w-[10rem]">
+    <div ref={rootRef} className="relative" style={widthStyle}>
       <button
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setOpen((v) => !v)}
-        className={`flex h-10 w-full min-w-[10rem] items-center justify-between rounded-[22px] border bg-white px-4 text-left text-sm shadow-sm outline-none transition-colors dark:bg-zinc-900 ${
+        className={`flex h-10 w-full items-center justify-between rounded-[22px] border bg-white px-4 text-left text-sm shadow-sm outline-none transition-colors dark:bg-zinc-900 ${
           open
             ? "border-[var(--color-theme)] ring-2 ring-[var(--color-theme)]/20"
             : "border-[var(--color-theme-muted)]/40 dark:border-[var(--color-theme)]/40"
@@ -165,6 +167,30 @@ export function ProfessorAttributionsClient() {
   const classOptions = useMemo(
     () => classes.map((c) => ({ value: c.class_id, label: c.label })),
     [classes],
+  );
+
+  /** Largeur commune des deux sélecteurs (titulariat / autres), basée sur le plus long libellé. */
+  const selectWidthCh = useMemo(() => {
+    const labels = classes.map((c) => c.label);
+    let maxLen = Math.max(
+      "— Aucune —".length,
+      "Aucune".length,
+      ...labels.map((l) => l.length),
+      8,
+    );
+    const byLen = [...labels].sort((a, b) => b.length - a.length);
+    if (byLen.length >= 2) {
+      maxLen = Math.max(maxLen, `${byLen[0]}, ${byLen[1]}`.length);
+    }
+    if (classes.length >= 3) {
+      maxLen = Math.max(maxLen, `${classes.length} classes`.length);
+    }
+    return maxLen + 3;
+  }, [classes]);
+
+  const selectBoxStyle = useMemo(
+    () => ({ width: `${selectWidthCh}ch`, maxWidth: "100%" }) as const,
+    [selectWidthCh],
   );
 
   const applyServerRows = useCallback((rows: ProfessorAttributionRow[]) => {
@@ -280,7 +306,7 @@ export function ProfessorAttributionsClient() {
       </p>
 
       <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="w-full min-w-[42rem] text-sm">
+        <table className="w-auto min-w-0 text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
@@ -314,7 +340,7 @@ export function ProfessorAttributionsClient() {
                       <p className="font-semibold text-zinc-800 dark:text-zinc-100">{professorName(prof)}</p>
                       <p className="mt-0.5 text-xs text-zinc-400">{prof.email}</p>
                     </td>
-                    <td className="px-3 py-3 align-top">
+                    <td className="px-3 py-3 align-top whitespace-nowrap">
                       <AppSelect
                         value={draft.primaryClassId ?? ""}
                         onChange={(v) => updatePrimary(prof.id, v || null)}
@@ -322,16 +348,17 @@ export function ProfessorAttributionsClient() {
                         placeholder="— Aucune —"
                         emptyOption={{ value: "", label: "— Aucune —" }}
                         disabled={isPending}
-                        className="min-w-[9rem]"
+                        style={selectBoxStyle}
                         aria-label={`Titulariat de ${professorName(prof)}`}
                       />
                     </td>
-                    <td className="px-3 py-3 align-top">
+                    <td className="px-3 py-3 align-top whitespace-nowrap">
                       <ClassMultiPicker
                         options={classes}
                         value={draft.secondaryClassIds}
                         excludeClassId={draft.primaryClassId}
                         disabled={isPending}
+                        widthStyle={selectBoxStyle}
                         onChange={(next) => updateSecondary(prof.id, next)}
                       />
                     </td>
