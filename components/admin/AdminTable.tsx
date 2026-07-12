@@ -431,16 +431,16 @@ export function AdminTable({
                     {row.classe ? <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{row.classe}</span> : <span className="text-zinc-400">—</span>}
                   </td>
                   <td className="hidden whitespace-nowrap px-4 py-3 text-zinc-500 md:table-cell dark:text-zinc-400">{lastSeen(activity)}</td>
-                  <td className="hidden px-3 py-2.5 sm:table-cell sm:px-4 sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
-                  <td className="hidden px-4 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
-                  <td className="hidden px-4 py-3 lg:table-cell"><ProgressCell {...lecture} color="bg-amber-500" /></td>
-                  <td className="hidden w-32 px-4 py-3 lg:table-cell">
+                  <td className="hidden px-2 py-2.5 sm:table-cell sm:px-2.5 sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
+                  <td className="hidden px-2.5 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
+                  <td className="hidden px-2.5 py-3 lg:table-cell"><ProgressCell {...lecture} color="bg-amber-500" /></td>
+                  <td className="hidden w-16 px-2.5 py-3 lg:table-cell">
                     {row.placement_combined ? (
                       <div className="space-y-0.5">
-                        <p className="text-xs font-bold tabular-nums text-violet-700 dark:text-violet-300">
+                        <p className="text-[10px] font-bold tabular-nums text-violet-700 dark:text-violet-300">
                           {row.placement_combined.total}/200
                         </p>
-                        <p className="text-[10px] text-zinc-500">{row.placement_combined.zone}</p>
+                        <p className="text-[9px] leading-tight text-zinc-500">{row.placement_combined.zone}</p>
                       </div>
                     ) : row.placement_test_best ? (
                       <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
