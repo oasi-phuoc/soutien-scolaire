@@ -1,0 +1,1624 @@
+{
+  "key": "catalog:french:themes",
+  "domain": "catalog",
+  "label": "Catalogue français",
+  "payload": {
+    "themes": [
+      {
+        "id": "A0-a0-1",
+        "slug": "a0-1",
+        "code": "A.1",
+        "title": "Salutations et politesse",
+        "section": "A0",
+        "summary": "Présentations, tutoiement / vouvoiement.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A0-a0-2",
+        "slug": "a0-2",
+        "code": "A.2",
+        "title": "Chiffres, nombres et âge (0–100)",
+        "section": "A0",
+        "summary": "Avoir, nombres, identité orale.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A0-a0-3",
+        "slug": "a0-3",
+        "code": "A.3",
+        "title": "Couleurs, formes et descriptions simples",
+        "section": "A0",
+        "summary": "Être, adjectifs, accord des couleurs.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A0-a0-4",
+        "slug": "a0-4",
+        "code": "A.4",
+        "title": "La famille",
+        "section": "A0",
+        "summary": "Possessifs, négation, arbre généalogique.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A0-a0-5",
+        "slug": "a0-5",
+        "code": "A.5",
+        "title": "Le corps et la santé de base",
+        "section": "A0",
+        "summary": "Parties du corps, urgences, avoir mal.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A0-a0-6",
+        "slug": "a0-6",
+        "code": "A.6",
+        "title": "Objets du quotidien et la classe",
+        "section": "A0",
+        "summary": "Impératif, démonstratifs, consignes.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l01",
+        "slug": "a1-l01",
+        "code": "A.7",
+        "title": "Enchanté !",
+        "section": "A1",
+        "summary": "Saluer, se présenter, identité et nationalités ; verbes être et avoir au présent.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l02",
+        "slug": "a1-l02",
+        "code": "A.8",
+        "title": "C'est qui ?",
+        "section": "A1",
+        "summary": "Présenter sa famille, décrire une personne ; adjectifs possessifs et situation de famille.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l03",
+        "slug": "a1-l03",
+        "code": "A.9",
+        "title": "Je vous invite.",
+        "section": "A1",
+        "summary": "Inviter, accepter ou refuser une invitation ; jours, heure, date ; verbes en -er.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l04",
+        "slug": "a1-l04",
+        "code": "A.10",
+        "title": "J'habite dans un appartement.",
+        "section": "A1",
+        "summary": "Décrire son logement, types d'habitat, pièces ; articles définis et indéfinis.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l05",
+        "slug": "a1-l05",
+        "code": "A.11",
+        "title": "Ça ne marche pas !",
+        "section": "A1",
+        "summary": "Expliquer un problème domestique, prendre rendez-vous ; verbes venir, pouvoir, prendre.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l06",
+        "slug": "a1-l06",
+        "code": "A.12",
+        "title": "Respectons notre immeuble !",
+        "section": "A1",
+        "summary": "Comprendre et donner des instructions simples ; l'impératif pour donner des conseils.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l07",
+        "slug": "a1-l07",
+        "code": "A.13",
+        "title": "Le cours commence à quelle heure ?",
+        "section": "A1",
+        "summary": "Demander des explications, s'orienter dans un lieu d'études ; mots interrogatifs.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l08",
+        "slug": "a1-l08",
+        "code": "A.14",
+        "title": "Je me couche tôt.",
+        "section": "A1",
+        "summary": "Parler de sa journée et ses habitudes ; verbes pronominaux (se préparer, s'habiller).",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l09",
+        "slug": "a1-l09",
+        "code": "A.15",
+        "title": "C'est une collègue sérieuse.",
+        "section": "A1",
+        "summary": "Parler de son travail et ses collègues ; accord des adjectifs au féminin.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l10",
+        "slug": "a1-l10",
+        "code": "A.16",
+        "title": "Ça me plaît !",
+        "section": "A1",
+        "summary": "Acheter des vêtements et accessoires, exprimer une demande polie ; conditionnel.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l11",
+        "slug": "a1-l11",
+        "code": "A.17",
+        "title": "Je suis végétarien !",
+        "section": "A1",
+        "summary": "Commander à manger et à boire, demander l'addition ; articles partitifs et négation.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l12",
+        "slug": "a1-l12",
+        "code": "A.18",
+        "title": "Une tarte pour combien ?",
+        "section": "A1",
+        "summary": "Acheter du pain et des pâtisseries, comprendre une recette ; expression de la quantité.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l13",
+        "slug": "a1-l13",
+        "code": "A.19",
+        "title": "J'ai mal à la gorge !",
+        "section": "A1",
+        "summary": "Expliquer un problème de santé, corps humain ; articles contractés (au/à la/aux).",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l14",
+        "slug": "a1-l14",
+        "code": "A.20",
+        "title": "Vous devez prendre deux comprimés.",
+        "section": "A1",
+        "summary": "Comprendre une instruction médicale, pharmacie ; obligation avec il faut / devoir.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l15",
+        "slug": "a1-l15",
+        "code": "A.21",
+        "title": "Quel bus va à la mairie ?",
+        "section": "A1",
+        "summary": "Demander son chemin, utiliser les transports en commun ; verbe aller au présent.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l16",
+        "slug": "a1-l16",
+        "code": "A.22",
+        "title": "Tu vas où ?",
+        "section": "A1",
+        "summary": "Trajets et horaires, comparer les modes de transport ; adjectif interrogatif quel.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l17",
+        "slug": "a1-l17",
+        "code": "A.23",
+        "title": "J'ai un vol pour Bruxelles.",
+        "section": "A1",
+        "summary": "S'orienter dans un aéroport, présenter ses documents ; prépositions de lieu avec les pays.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l18",
+        "slug": "a1-l18",
+        "code": "A.24",
+        "title": "On voudrait réserver pour 2 nuits.",
+        "section": "A1",
+        "summary": "Faire une réservation de logement, localiser un endroit ; prépositions de lieu.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l19",
+        "slug": "a1-l19",
+        "code": "A.25",
+        "title": "Il fait beau, on fait du vélo !",
+        "section": "A1",
+        "summary": "Parler du temps qu'il fait, des sports et des saisons ; faire (du/de la/de l').",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-l20",
+        "slug": "a1-l20",
+        "code": "A.26",
+        "title": "On va voir ce spectacle ?",
+        "section": "A1",
+        "summary": "Spectacles, sorties culturelles, proposer des idées ; adjectifs démonstratifs.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l01",
+        "slug": "a2-l01",
+        "code": "A.27",
+        "title": "Je préfère acheter un lave-linge d'occasion.",
+        "section": "A2",
+        "summary": "Achats, comparaison, retour d'un produit ; la place de l'adjectif.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l02",
+        "slug": "a2-l02",
+        "code": "A.28",
+        "title": "C'est un ticket pour le parking et le tram ?",
+        "section": "A2",
+        "summary": "Transports en commun, location de voiture ; le passé récent (venir de).",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l03",
+        "slug": "a2-l03",
+        "code": "A.29",
+        "title": "Les nouveaux locataires vont emménager demain.",
+        "section": "A2",
+        "summary": "Petites annonces immobilières, déménagement ; le futur proche.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l04",
+        "slug": "a2-l04",
+        "code": "A.30",
+        "title": "Je voudrais renouveler mon titre de séjour.",
+        "section": "A2",
+        "summary": "Démarches administratives : mairie, préfecture, banque ; passé composé avec avoir.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l05",
+        "slug": "a2-l05",
+        "code": "A.31",
+        "title": "Tu regardes les infos sur quelle chaîne ?",
+        "section": "A2",
+        "summary": "Presse, télévision, radio et Internet ; passé composé avec être.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l06",
+        "slug": "a2-l06",
+        "code": "A.32",
+        "title": "Ça te dit de venir pique-niquer ?",
+        "section": "A2",
+        "summary": "Formuler et réagir à une invitation ; questions formelles et informelles.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l07",
+        "slug": "a2-l07",
+        "code": "A.33",
+        "title": "Aujourd'hui il y a une soirée salsa !",
+        "section": "A2",
+        "summary": "Réseaux sociaux, rencontres, parler de soi et des autres ; le pronom y.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l08",
+        "slug": "a2-l08",
+        "code": "A.34",
+        "title": "On mangera et on dansera dehors !",
+        "section": "A2",
+        "summary": "Organiser un événement festif, contacter un établissement ; le futur simple.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l09",
+        "slug": "a2-l09",
+        "code": "A.35",
+        "title": "C'est une fête que nous organisons.",
+        "section": "A2",
+        "summary": "Vie scolaire, rôle des parents à l'école ; les pronoms relatifs qui et que.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l10",
+        "slug": "a2-l10",
+        "code": "A.36",
+        "title": "On voudrait se rendre utiles dans une association.",
+        "section": "A2",
+        "summary": "S'engager, parler de son expérience bénévole ; passé composé des pronominaux.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l11",
+        "slug": "a2-l11",
+        "code": "A.37",
+        "title": "On y mange quels types de plats ?",
+        "section": "A2",
+        "summary": "Gastronomie, présenter un restaurant et une recette ; indicateurs de temps.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l12",
+        "slug": "a2-l12",
+        "code": "A.38",
+        "title": "Je peux m'inscrire pour samedi prochain ?",
+        "section": "A2",
+        "summary": "Jeux et activités de loisirs, conditions de participation ; les pronoms COD.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l13",
+        "slug": "a2-l13",
+        "code": "A.39",
+        "title": "J'adore cuisiner ! Ça me détend.",
+        "section": "A2",
+        "summary": "Partager ses intérêts, exprimer enthousiasme ou déception ; les pronoms COI.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l14",
+        "slug": "a2-l14",
+        "code": "A.40",
+        "title": "Alors, tu passes de bonnes vacances ?",
+        "section": "A2",
+        "summary": "Informations touristiques, raconter ses vacances ; exprimer la condition.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l15",
+        "slug": "a2-l15",
+        "code": "A.41",
+        "title": "Comment est-ce que je dois me soigner ?",
+        "section": "A2",
+        "summary": "Santé, conseil médical, comprendre un professionnel ; le subjonctif après il faut que.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l16",
+        "slug": "a2-l16",
+        "code": "A.42",
+        "title": "Alors le parcours santé, c'était comment ?",
+        "section": "A2",
+        "summary": "Pratiquer un sport, commenter une activité sportive ; l'imparfait.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l17",
+        "slug": "a2-l17",
+        "code": "A.43",
+        "title": "Il ne faut pas manger trop d'aliments gras.",
+        "section": "A2",
+        "summary": "Alimentation équilibrée, habitudes alimentaires ; la conséquence et le but.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l18",
+        "slug": "a2-l18",
+        "code": "A.44",
+        "title": "C'est aussi vert et calme qu'un village.",
+        "section": "A2",
+        "summary": "Comparer ville et campagne, présenter un lieu de vie ; la comparaison.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l19",
+        "slug": "a2-l19",
+        "code": "A.45",
+        "title": "J'arrête de stresser et j'apprends à me détendre.",
+        "section": "A2",
+        "summary": "Bien-être, prendre soin de soi ; verbes et adjectifs construits avec à ou de.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l20",
+        "slug": "a2-l20",
+        "code": "A.46",
+        "title": "J'ai envie de changer de métier.",
+        "section": "A2",
+        "summary": "Parcours de formation, parler de son cursus scolaire ; le pronom en.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l21",
+        "slug": "a2-l21",
+        "code": "A.47",
+        "title": "Je voudrais m'inscrire à Pôle Emploi.",
+        "section": "A2",
+        "summary": "Recherche d'emploi, stage, alternance et jobs étudiants ; la négation.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l22",
+        "slug": "a2-l22",
+        "code": "A.48",
+        "title": "Comment se passe ta recherche d'emploi ?",
+        "section": "A2",
+        "summary": "Sélectionner une offre, rédiger un CV et une lettre de motivation simple ; la cause.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l23",
+        "slug": "a2-l23",
+        "code": "A.49",
+        "title": "Parlez-moi de votre expérience.",
+        "section": "A2",
+        "summary": "Entretien d'embauche, parler de ses compétences et conditions de travail ; l'ordre du discours.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A2-a2-l24",
+        "slug": "a2-l24",
+        "code": "A.50",
+        "title": "Je te souhaite la bienvenue dans l'entreprise !",
+        "section": "A2",
+        "summary": "Vie en entreprise, règlement intérieur, rendre compte de son travail ; l'opposition.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-1",
+        "slug": "b1-1",
+        "code": "A.51",
+        "title": "Exprimer ses opinions et ses sentiments",
+        "section": "B1",
+        "summary": "Subjonctif intro, concessions.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-2",
+        "slug": "b1-2",
+        "code": "A.52",
+        "title": "Futur et projets",
+        "section": "B1",
+        "summary": "Futur simple, conditionnel, hypothèses.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-3",
+        "slug": "b1-3",
+        "code": "A.53",
+        "title": "Le monde du travail et la formation professionnelle",
+        "section": "B1",
+        "summary": "CV, entretien, relatifs, gérondif.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-4",
+        "slug": "b1-4",
+        "code": "A.54",
+        "title": "Santé et société",
+        "section": "B1",
+        "summary": "LAMal, bien-être, discours indirect.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-5",
+        "slug": "b1-5",
+        "code": "A.55",
+        "title": "L'environnement et l'actualité locale",
+        "section": "B1",
+        "summary": "Voix passive intro, démocratie CH.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B1-b1-6",
+        "slug": "b1-6",
+        "code": "A.56",
+        "title": "Compréhension de documents authentiques",
+        "section": "B1",
+        "summary": "Presse, e-mails, structure de texte.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B2-b2-1",
+        "slug": "b2-1",
+        "code": "A.57",
+        "title": "Argumentation et débat",
+        "section": "B2",
+        "summary": "Subjonctif passé, conditionnel passé, nuance.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B2-b2-2",
+        "slug": "b2-2",
+        "code": "A.58",
+        "title": "Textes littéraires et culturels",
+        "section": "B2",
+        "summary": "Registres, style indirect au passé.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B2-b2-3",
+        "slug": "b2-3",
+        "code": "A.59",
+        "title": "Écrits professionnels et formels",
+        "section": "B2",
+        "summary": "Rapports, tournures nominales.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B2-b2-4",
+        "slug": "b2-4",
+        "code": "A.60",
+        "title": "Économie et société",
+        "section": "B2",
+        "summary": "PIB, politique CH, connecteurs de réfutation.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "B2-b2-5",
+        "slug": "b2-5",
+        "code": "A.61",
+        "title": "Préparation au TCF",
+        "section": "B2",
+        "summary": "Format, entraînement CO/CE/PO/PE.",
+        "markers": [
+          "quiz"
+        ]
+      },
+      {
+        "id": "A1-a1-conj-l00",
+        "slug": "a1-conj-l00",
+        "code": "R1.1",
+        "title": "Les pronoms personnels sujets",
+        "section": "A1",
+        "summary": "Je, tu, il, elle, on, nous, vous, ils, elles — choisir et utiliser le bon pronom.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l01",
+        "slug": "a1-conj-l01",
+        "code": "R1.2",
+        "title": "Les verbes être et avoir",
+        "section": "A1",
+        "summary": "Conjugaison complète de être et avoir au présent + expressions courantes.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l04",
+        "slug": "a1-gr-l04",
+        "code": "R1.3",
+        "title": "Les articles définis et indéfinis",
+        "section": "A1",
+        "summary": "Le, la, l', les / un, une, des : choisir le bon article selon le contexte.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l03",
+        "slug": "a1-gr-l03",
+        "code": "R1.4",
+        "title": "Le genre des noms et des adjectifs",
+        "section": "A1",
+        "summary": "Masculin/féminin : noms courants et adjectifs de nationalité.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l07",
+        "slug": "a1-conj-l07",
+        "code": "R1.5",
+        "title": "Les verbes en -er au présent",
+        "section": "A1",
+        "summary": "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-phrases",
+        "slug": "a1-gr-phrases",
+        "code": "R1.6",
+        "title": "Les phrases",
+        "section": "A1",
+        "summary": "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l02",
+        "slug": "a1-gr-l02",
+        "code": "R1.7",
+        "title": "La négation",
+        "section": "A1",
+        "summary": "Ne…pas : construire une phrase négative avec être et avoir.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-cest-il-est",
+        "slug": "a1-gr-cest-il-est",
+        "code": "R1.9",
+        "title": "C'est, ce sont, il est ou ils sont ?",
+        "section": "A1",
+        "summary": "Distinguer les formes d'identification et de description au singulier et au pluriel.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l08",
+        "slug": "a1-conj-l08",
+        "code": "R2.1",
+        "title": "Les verbes de mouvement",
+        "section": "A1",
+        "summary": "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l09",
+        "slug": "a1-conj-l09",
+        "code": "R2.2",
+        "title": "Les verbes pronominaux",
+        "section": "A1",
+        "summary": "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l15",
+        "slug": "a1-conj-l15",
+        "code": "R2.3",
+        "title": "Les verbes modaux",
+        "section": "A1",
+        "summary": "Les verbes modaux : conjugaison et emploi au présent.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-irreguliers",
+        "slug": "a2-conj-irreguliers",
+        "code": "R2.4",
+        "title": "Verbes irréguliers",
+        "section": "A2",
+        "summary": "Faire, croire, boire, naître, savoir, connaître, prendre au présent.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-l02",
+        "slug": "a2-conj-l02",
+        "code": "R2.5",
+        "title": "Les verbes en -ir",
+        "section": "A2",
+        "summary": "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-interro",
+        "slug": "a1-gr-interro",
+        "code": "R3.1",
+        "title": "L'interrogation de base",
+        "section": "A1",
+        "summary": "Est-ce que et l'intonation montante : construire une question simple.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l07",
+        "slug": "a2-gr-l07",
+        "code": "R3.2",
+        "title": "Les questions fermées",
+        "section": "A2",
+        "summary": "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l09",
+        "slug": "a2-gr-l09",
+        "code": "R3.3",
+        "title": "Répondre aux questions fermées",
+        "section": "A2",
+        "summary": "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l10",
+        "slug": "a1-gr-l10",
+        "code": "R3.4",
+        "title": "Les questions ouvertes",
+        "section": "A1",
+        "summary": "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l23",
+        "slug": "a1-gr-l23",
+        "code": "R4.1",
+        "title": "Les adjectifs qualificatifs",
+        "section": "A1",
+        "summary": "Genre, nombre et place de l'adjectif dans la phrase.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l18",
+        "slug": "a1-gr-l18",
+        "code": "R4.2",
+        "title": "Les adjectifs démonstratifs",
+        "section": "A1",
+        "summary": "Ce, cet, cette, ces : désigner et montrer quelque chose.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l19",
+        "slug": "a1-gr-l19",
+        "code": "R4.3",
+        "title": "Les adjectifs possessifs",
+        "section": "A1",
+        "summary": "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l14",
+        "slug": "a1-gr-l14",
+        "code": "R4.4",
+        "title": "Les adjectifs partitifs",
+        "section": "A1",
+        "summary": "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l11",
+        "slug": "a1-gr-l11",
+        "code": "R4.5",
+        "title": "Les prépositions de lieu",
+        "section": "A1",
+        "summary": "Dans, sur, sous, devant, derrière, à côté de, en face de…",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l28",
+        "slug": "a1-conj-l28",
+        "code": "R6.1",
+        "title": "Passé récent et présent continu",
+        "section": "A1",
+        "summary": "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l29",
+        "slug": "a1-conj-l29",
+        "code": "R6.2",
+        "title": "Passé composé avec avoir",
+        "section": "A1",
+        "summary": "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l30",
+        "slug": "a1-conj-l30",
+        "code": "R6.3",
+        "title": "Passé composé avec être",
+        "section": "A1",
+        "summary": "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1ConjL31",
+        "slug": "a1ConjL31",
+        "code": "R6.4",
+        "title": "Négation au passé composé",
+        "section": "A1",
+        "summary": "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-verbes-double-auxiliaire",
+        "slug": "a1-gr-verbes-double-auxiliaire",
+        "code": "R6.5",
+        "title": "Les verbes à double auxiliaire",
+        "section": "A1",
+        "summary": "Sortir, rentrer, entrer, passer, monter, descendre et retourner : être sans COD, avoir avec COD.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-pronominaux-passe-compose",
+        "slug": "a1-gr-pronominaux-passe-compose",
+        "code": "R6.6",
+        "title": "Les verbes pronominaux au passé composé",
+        "section": "A1",
+        "summary": "Auxiliaire être, accord avec le sujet réel et négation.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-l07",
+        "slug": "a2-conj-l07",
+        "code": "R6.7",
+        "title": "Les verbes réguliers à l'imparfait",
+        "section": "A2",
+        "summary": "Base de nous au présent et terminaisons -ais, -ais, -ait, -ions, -iez, -aient.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-imparfait-irreguliers",
+        "slug": "a2-gr-imparfait-irreguliers",
+        "code": "R6.8",
+        "title": "Les verbes irréguliers à l'imparfait",
+        "section": "A2",
+        "summary": "Être et les bases particulières des verbes fréquents.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-passe-compose-ou-imparfait",
+        "slug": "a2-gr-passe-compose-ou-imparfait",
+        "code": "R6.9",
+        "title": "Passé composé ou imparfait ?",
+        "section": "A2",
+        "summary": "Événement ponctuel, habitude, description, contexte et simultanéité.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-conj-l20",
+        "slug": "a1-conj-l20",
+        "code": "R7.1",
+        "title": "Le futur proche",
+        "section": "A1",
+        "summary": "Aller + infinitif : parler de ce qui va arriver bientôt.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-l22",
+        "slug": "a1-gr-l22",
+        "code": "R7.2",
+        "title": "Les adverbes de fréquence",
+        "section": "A1",
+        "summary": "Toujours, souvent, parfois, rarement, jamais : situer une action dans le temps.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-l08",
+        "slug": "a2-conj-l08",
+        "code": "R7.3",
+        "title": "Les verbes réguliers au futur simple",
+        "section": "A2",
+        "summary": "Infinitif et terminaisons ; particularités des verbes en -re, -eler et -eter.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-futur-irreguliers",
+        "slug": "a2-gr-futur-irreguliers",
+        "code": "R7.4",
+        "title": "Les verbes irréguliers au futur simple",
+        "section": "A2",
+        "summary": "Les quinze bases irrégulières essentielles.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-futur-simple-ou-proche",
+        "slug": "a2-gr-futur-simple-ou-proche",
+        "code": "R7.5",
+        "title": "Futur simple ou futur proche ?",
+        "section": "A2",
+        "summary": "Choisir selon la proximité, l'intention, la promesse ou la prévision.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-hypothese-futur",
+        "slug": "a2-gr-hypothese-futur",
+        "code": "R7.6",
+        "title": "L'hypothèse sur le futur",
+        "section": "A2",
+        "summary": "Si + présent, puis futur simple ; condition, conséquence et élision avec il.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-gr-marqueurs-temps-complet",
+        "slug": "gr-marqueurs-temps-complet",
+        "code": "R9.1",
+        "title": "Les marqueurs de temps",
+        "section": "A2",
+        "summary": "Présent, passé, futur : depuis, il y a, pendant, dans, pour, hier, demain, la veille…",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l52",
+        "slug": "a2-gr-l52",
+        "code": "R9.2",
+        "title": "Les relations logiques — Cause et conséquence",
+        "section": "A2",
+        "summary": "Parce que, car, comme, à cause de, grâce à, donc, c'est pourquoi et par conséquent.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A1-a1-gr-expressions-temps",
+        "slug": "a1-gr-expressions-temps",
+        "code": "R9.3",
+        "title": "Les expressions de temps",
+        "section": "A1",
+        "summary": "Aujourd'hui, demain, après-demain, la semaine prochaine…",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l39",
+        "slug": "a2-gr-l39",
+        "code": "R10.1",
+        "title": "Le comparatif",
+        "section": "A2",
+        "summary": "Comparer des adjectifs, adverbes, verbes et noms avec plus, aussi, autant ou moins.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-bon-bien-meilleur-mieux",
+        "slug": "a2-gr-bon-bien-meilleur-mieux",
+        "code": "R10.2",
+        "title": "Bon ou bien, meilleur ou mieux ?",
+        "section": "A2",
+        "summary": "Adjectif, adverbe et formes irrégulières du comparatif et du superlatif.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-superlatif",
+        "slug": "a2-gr-superlatif",
+        "code": "R10.3",
+        "title": "Le superlatif",
+        "section": "A2",
+        "summary": "Le, la ou les plus et moins ; le meilleur, le mieux et le pire.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l42",
+        "slug": "a2-gr-l42",
+        "code": "R10.4",
+        "title": "La négation (2/2)",
+        "section": "A2",
+        "summary": "Ne…jamais, ne…rien, ne…personne ; rien et personne comme sujets.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-l04",
+        "slug": "a2-conj-l04",
+        "code": "R8.1",
+        "title": "Le conditionnel de politesse",
+        "section": "A2",
+        "summary": "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-conditionnel",
+        "slug": "a2-gr-conditionnel",
+        "code": "R8.2",
+        "title": "Le conditionnel",
+        "section": "A2",
+        "summary": "Conditionnel présent et passé ; phrases hypothétiques avec si + imparfait ou plus-que-parfait.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-conj-l05",
+        "slug": "a2-conj-l05",
+        "code": "R8.3",
+        "title": "L'impératif",
+        "section": "A2",
+        "summary": "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.",
+        "tab": "conjugaison",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-gerondif",
+        "slug": "a2-gr-gerondif",
+        "code": "R8.4",
+        "title": "Le gérondif",
+        "section": "A2",
+        "summary": "En + participe présent : simultanéité, manière, condition et cause.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-subjonctif",
+        "slug": "a2-gr-subjonctif",
+        "code": "R8.5",
+        "title": "Le subjonctif",
+        "section": "A2",
+        "summary": "Formation, irréguliers et emplois : vouloir que, il faut que, bien que, pour que, avant que.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l19",
+        "slug": "a2-gr-l19",
+        "code": "R5.1",
+        "title": "Les pronoms relatifs qui et que",
+        "section": "A2",
+        "summary": "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l35",
+        "slug": "a2-gr-l35",
+        "code": "R5.2",
+        "title": "Les pronoms COD et COI",
+        "section": "A2",
+        "summary": "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "A2-a2-gr-l36",
+        "slug": "a2-gr-l36",
+        "code": "R5.3",
+        "title": "Les pronoms Y et EN",
+        "section": "A2",
+        "summary": "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",
+        "tab": "grammaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-nationalites",
+        "slug": "v1-nationalites",
+        "code": "V1.1",
+        "title": "Les nationalités",
+        "section": "V1",
+        "summary": "Nationalités masculin/féminin, pays d'Europe et du monde.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-professions",
+        "slug": "v1-professions",
+        "code": "V1.2",
+        "title": "Les professions",
+        "section": "V1",
+        "summary": "Métiers courants, masculin/féminin des professions.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-famille",
+        "slug": "v1-famille",
+        "code": "V1.3",
+        "title": "La famille",
+        "section": "V1",
+        "summary": "Membres de la famille, mari, femme, bébé.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-etat-civil",
+        "slug": "v1-etat-civil",
+        "code": "V1.4",
+        "title": "L'état civil",
+        "section": "V1",
+        "summary": "Situations familiales et personnelles.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-description-physique",
+        "slug": "v1-description-physique",
+        "code": "V1.5",
+        "title": "La description physique",
+        "section": "V1",
+        "summary": "Adjectifs pour décrire l'apparence d'une personne.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V1-v1-description-morale",
+        "slug": "v1-description-morale",
+        "code": "V1.6",
+        "title": "La description morale",
+        "section": "V1",
+        "summary": "Adjectifs pour décrire le caractère d'une personne.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V2-v2-jours-mois-dates",
+        "slug": "v2-jours-mois-dates",
+        "code": "V2.1",
+        "title": "Jours, Mois et Dates",
+        "section": "V2",
+        "summary": "Jours de la semaine, mois de l'année, exprimer une date.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V2-v2-heure",
+        "slug": "v2-heure",
+        "code": "V2.2",
+        "title": "L'heure",
+        "section": "V2",
+        "summary": "Exprimer l'heure, unités de temps, moments de la journée.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V2-v2-saisons",
+        "slug": "v2-saisons",
+        "code": "V2.3",
+        "title": "Les saisons",
+        "section": "V2",
+        "summary": "Les quatre saisons, périodes et durées.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V2-v2-meteo",
+        "slug": "v2-meteo",
+        "code": "V2.4",
+        "title": "La météo",
+        "section": "V2",
+        "summary": "Temps qu'il fait, phénomènes météorologiques.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V3-v3-sport",
+        "slug": "v3-sport",
+        "code": "V3.1",
+        "title": "Le sport",
+        "section": "V3",
+        "summary": "Sports individuels et collectifs.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V4-v4-type-logement",
+        "slug": "v4-type-logement",
+        "code": "V4.1",
+        "title": "Les types de logement",
+        "section": "V4",
+        "summary": "Différents types d'habitation.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V4-v4-pieces-maison",
+        "slug": "v4-pieces-maison",
+        "code": "V4.2",
+        "title": "Les pièces de la maison",
+        "section": "V4",
+        "summary": "Pièces et espaces d'un logement.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V4-v4-equipements",
+        "slug": "v4-equipements",
+        "code": "V4.3",
+        "title": "Les meubles",
+        "section": "V4",
+        "summary": "Meubles du quotidien.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V4-v4-appareils-electromenagers",
+        "slug": "v4-appareils-electromenagers",
+        "code": "V4.4",
+        "title": "Les appareils électroménagers",
+        "section": "V4",
+        "summary": "Appareils utilisés dans la maison.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V4-v4-pannes",
+        "slug": "v4-pannes",
+        "code": "V4.5",
+        "title": "Les pannes",
+        "section": "V4",
+        "summary": "Problèmes et réparations dans le logement.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V5-v5-matieres",
+        "slug": "v5-matieres",
+        "code": "V5.1",
+        "title": "Les matières scolaires",
+        "section": "V5",
+        "summary": "Disciplines scolaires.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V5-v5-materiel-scolaire",
+        "slug": "v5-materiel-scolaire",
+        "code": "V5.2",
+        "title": "Le matériel scolaire",
+        "section": "V5",
+        "summary": "Fournitures et outils scolaires.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V5-v5-structure-ecole",
+        "slug": "v5-structure-ecole",
+        "code": "V5.3",
+        "title": "La structure de l'école",
+        "section": "V5",
+        "summary": "Espaces et organisation de l'école.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V6-v6-vetements",
+        "slug": "v6-vetements",
+        "code": "V6.1",
+        "title": "Les vêtements",
+        "section": "V6",
+        "summary": "Vêtements du quotidien.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V6-v6-accessoires",
+        "slug": "v6-accessoires",
+        "code": "V6.2",
+        "title": "Les accessoires",
+        "section": "V6",
+        "summary": "Accessoires de mode.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V6-v6-couleurs",
+        "slug": "v6-couleurs",
+        "code": "V6.3",
+        "title": "Les couleurs",
+        "section": "V6",
+        "summary": "Couleurs et nuances.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V6-v6-matieres",
+        "slug": "v6-matieres",
+        "code": "V6.4",
+        "title": "Les matières",
+        "section": "V6",
+        "summary": "Matériaux et tissus.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V7-v7-fruits",
+        "slug": "v7-fruits",
+        "code": "V7.1",
+        "title": "Les fruits",
+        "section": "V7",
+        "summary": "Fruits courants.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V7-v7-legumes",
+        "slug": "v7-legumes",
+        "code": "V7.2",
+        "title": "Les légumes",
+        "section": "V7",
+        "summary": "Légumes courants.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V7-v7-cuisine",
+        "slug": "v7-cuisine",
+        "code": "V7.3",
+        "title": "La cuisine",
+        "section": "V7",
+        "summary": "Verbes et actions en cuisine.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V7-v7-recettes",
+        "slug": "v7-recettes",
+        "code": "V7.4",
+        "title": "Les recettes",
+        "section": "V7",
+        "summary": "Ingrédients de base et ustensiles.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V7-v7-quantites",
+        "slug": "v7-quantites",
+        "code": "V7.5",
+        "title": "Les quantités",
+        "section": "V7",
+        "summary": "Unités de mesure et contenants.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V8-v8-corps",
+        "slug": "v8-corps",
+        "code": "V8.1",
+        "title": "Le corps",
+        "section": "V8",
+        "summary": "Parties du corps humain.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V8-v8-maladies",
+        "slug": "v8-maladies",
+        "code": "V8.2",
+        "title": "Les maladies",
+        "section": "V8",
+        "summary": "Maladies et symptômes courants.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V8-v8-medecins",
+        "slug": "v8-medecins",
+        "code": "V8.3",
+        "title": "Les médecins",
+        "section": "V8",
+        "summary": "Professions de santé.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V8-v8-pharmacie",
+        "slug": "v8-pharmacie",
+        "code": "V8.4",
+        "title": "La pharmacie",
+        "section": "V8",
+        "summary": "Médicaments et produits pharmaceutiques.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V9-v9-ville",
+        "slug": "v9-ville",
+        "code": "V9.1",
+        "title": "La ville",
+        "section": "V9",
+        "summary": "Lieux et bâtiments en ville.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V9-v9-transport",
+        "slug": "v9-transport",
+        "code": "V9.2",
+        "title": "Le transport",
+        "section": "V9",
+        "summary": "Moyens de transport urbains et longue distance.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V9-v9-direction",
+        "slug": "v9-direction",
+        "code": "V9.3",
+        "title": "La direction",
+        "section": "V9",
+        "summary": "S'orienter et indiquer un chemin.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V9-v9-espace-culturel",
+        "slug": "v9-espace-culturel",
+        "code": "V9.4",
+        "title": "L'espace culturel",
+        "section": "V9",
+        "summary": "Lieux et acteurs de la culture.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V9-v9-paysage",
+        "slug": "v9-paysage",
+        "code": "V9.5",
+        "title": "Le paysage",
+        "section": "V9",
+        "summary": "Éléments naturels du paysage.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V10-v7-restaurant",
+        "slug": "v7-restaurant",
+        "code": "V10.1",
+        "title": "Le restaurant",
+        "section": "V10",
+        "summary": "Table et service au restaurant.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V10-v7-boulangerie",
+        "slug": "v7-boulangerie",
+        "code": "V10.2",
+        "title": "La boulangerie",
+        "section": "V10",
+        "summary": "Produits de boulangerie et pâtisserie.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V10-v9-train",
+        "slug": "v9-train",
+        "code": "V10.3",
+        "title": "La gare",
+        "section": "V10",
+        "summary": "Vocabulaire de la gare et du train.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V10-v9-aeroport",
+        "slug": "v9-aeroport",
+        "code": "V10.4",
+        "title": "L'aéroport",
+        "section": "V10",
+        "summary": "Vocabulaire de l'aéroport et du voyage en avion.",
+        "tab": "vocabulaire",
+        "markers": []
+      },
+      {
+        "id": "V10-v9-hotel",
+        "slug": "v9-hotel",
+        "code": "V10.5",
+        "title": "L'hôtel",
+        "section": "V10",
+        "summary": "Séjour à l'hôtel et hébergement.",
+        "tab": "vocabulaire",
+        "markers": [],
+        "hidden": true
+      }
+    ]
+  },
+  "updatedAt": "2026-07-12T21:00:06.439Z",
+  "updatedBy": "dc25c315-6996-445d-bebb-b4d80d66da1a",
+  "gitPath": "lib/curriculum/content/overrides/data/catalog__french__themes.json"
+}
