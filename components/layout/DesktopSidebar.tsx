@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
-import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
+import {
+  getPedagogicNavVisibilityAction,
+  getPlacementNavVisibilityAction,
+} from "@/app/actions/admin";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { getMathModule } from "@/lib/curriculum/math-data";
@@ -57,7 +60,6 @@ function TranslateOnIcon() {
 
 /**
  * Menu latéral bureau (inspiré epcas) — masqué sur mobile.
- * Admin / édition : uniquement via Réglages.
  */
 export function DesktopSidebar() {
   const pathname = usePathname() ?? "";
@@ -68,6 +70,12 @@ export function DesktopSidebar() {
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [placementVisible, setPlacementVisible] = useState(true);
+  const [pedagogicNav, setPedagogicNav] = useState({
+    showSection: false,
+    isAdmin: false,
+    hasSuiviAccess: false,
+    canEditContent: false,
+  });
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
@@ -77,6 +85,17 @@ export function DesktopSidebar() {
         if (res.ok) setPlacementVisible(res.visible);
       })
       .catch(() => {});
+    getPedagogicNavVisibilityAction()
+      .then((res) => {
+        if (!res.ok) return;
+        setPedagogicNav({
+          showSection: res.showSection,
+          isAdmin: res.isAdmin,
+          hasSuiviAccess: res.hasSuiviAccess,
+          canEditContent: res.canEditContent,
+        });
+      })
+      .catch(() => {});
   }, [pathname]);
 
   const badge = pendingTasks + unreadMessages;
@@ -84,6 +103,8 @@ export function DesktopSidebar() {
   const frenchOpen =
     pathname.startsWith("/francais") || pathname.startsWith("/communication");
   const mathsOpen = pathname.startsWith("/mathematiques");
+  const pedagogicOpen =
+    pathname.startsWith("/suivi") || pathname.startsWith("/admin");
 
   const frenchTab =
     searchParams.get("tab") ??
@@ -155,6 +176,29 @@ export function DesktopSidebar() {
       label: "Géométrie",
       active: mathsTab === "geometry",
     },
+  ];
+
+  const pedagogicSubs: SubLink[] = [
+    ...(pedagogicNav.isAdmin
+      ? [
+          {
+            href: "/admin",
+            label: "Admin",
+            active:
+              pathname.startsWith("/admin") &&
+              !pathname.startsWith("/admin/contenu"),
+          },
+        ]
+      : []),
+    ...(pedagogicNav.canEditContent
+      ? [
+          {
+            href: "/admin/contenu",
+            label: "Édition de contenu",
+            active: pathname.startsWith("/admin/contenu"),
+          },
+        ]
+      : []),
   ];
 
   function go(href: string) {
@@ -241,6 +285,31 @@ export function DesktopSidebar() {
           >
             Placement
           </button>
+        )}
+
+        {pedagogicNav.showSection && (
+          <div>
+            <button
+              type="button"
+              onClick={() =>
+                go(
+                  pedagogicNav.hasSuiviAccess || pedagogicNav.isAdmin
+                    ? "/suivi"
+                    : pedagogicNav.canEditContent
+                      ? "/admin/contenu"
+                      : "/suivi",
+                )
+              }
+              className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+                pedagogicOpen
+                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
+              }`}
+            >
+              Suivi pédagogique
+            </button>
+            {pedagogicSubs.length > 0 && renderSubs(pedagogicSubs)}
+          </div>
         )}
 
         <div className="my-2 border-t border-[var(--color-border-default)]" />

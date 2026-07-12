@@ -235,3 +235,53 @@ export async function getPlacementNavVisibilityAction(): Promise<{ ok: boolean; 
   if (error) return { ok: true, visible: true };
   return { ok: true, visible: enabled !== false };
 }
+
+/** Visibilité de la section « Suivi pédagogique » (Admin / Édition contenu) dans la barre latérale. */
+export async function getPedagogicNavVisibilityAction(): Promise<{
+  ok: boolean;
+  showSection: boolean;
+  isAdmin: boolean;
+  hasSuiviAccess: boolean;
+  canEditContent: boolean;
+}> {
+  const supabase = await createSupabaseActionClient();
+  const openLocally =
+    process.env.CONTENT_EDIT_OPEN === "1" ||
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabase) {
+    return {
+      ok: true,
+      showSection: true,
+      isAdmin: false,
+      hasSuiviAccess: false,
+      canEditContent: true,
+    };
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return {
+      ok: true,
+      showSection: openLocally,
+      isAdmin: false,
+      hasSuiviAccess: false,
+      canEditContent: openLocally,
+    };
+  }
+
+  const { data: role } = await supabase.rpc("get_my_role");
+  const isAdmin = role === "admin";
+  let hasSuiviAccess = isAdmin || role === "prof";
+  if (!isAdmin && role === "prof") {
+    const { data: access } = await supabase.rpc("has_suivi_access");
+    hasSuiviAccess = Boolean(access);
+  }
+  const canEditContent = isAdmin || openLocally;
+  const showSection = isAdmin || hasSuiviAccess || canEditContent;
+
+  return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent };
+}
