@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import Link from "next/link";
 import {
   deleteContentOverrideAction,
   listContentOverridesAction,
@@ -354,36 +353,6 @@ export function ContenuAdminClient() {
             ))}
           </ul>
         )}
-      </div>
-
-      <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 p-4 text-sm text-zinc-600">
-        <p className="font-semibold text-zinc-800">Raccourcis utiles</p>
-        <ul className="mt-2 list-inside list-disc space-y-1">
-          <li>
-            <Link href="/lecture" className="text-[var(--color-theme)] underline">
-              Lecture
-            </Link>{" "}
-            — phonèmes, grilles, listes de mots
-          </li>
-          <li>
-            <Link href="/francais?tab=vocabulaire" className="text-[var(--color-theme)] underline">
-              Vocabulaire
-            </Link>{" "}
-            — mots, articles, phrases
-          </li>
-          <li>
-            <Link href="/francais?tab=grammaire" className="text-[var(--color-theme)] underline">
-              Grammaire / conjugaison
-            </Link>{" "}
-            — théorie et exercices
-          </li>
-          <li>
-            <Link href="/mathematiques" className="text-[var(--color-theme)] underline">
-              Mathématiques
-            </Link>{" "}
-            — blocs de mise en forme et exercices
-          </li>
-        </ul>
       </div>
         </>
       )}
