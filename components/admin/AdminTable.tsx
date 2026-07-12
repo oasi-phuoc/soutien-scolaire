@@ -84,7 +84,7 @@ function lastSeen(iso: string | null): string {
 
 function Bar({ pct, color }: { pct: number; color: string }) {
   return (
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+    <div className="h-[3px] w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
       <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
     </div>
   );
@@ -92,8 +92,8 @@ function Bar({ pct, color }: { pct: number; color: string }) {
 
 function ProgressCell({ done, total, pct, color }: { done: number; total: number; pct: number; color: string }) {
   return (
-    <div className="flex w-10 flex-col gap-0.5 sm:w-28 sm:gap-1" title={`${done}/${total} (${pct} %)`}>
-      <span className="hidden text-xs font-semibold text-zinc-800 sm:block dark:text-zinc-200">{done}/{total}</span>
+    <div className="flex w-8 flex-col gap-0.5 sm:w-14" title={`${done}/${total} (${pct} %)`}>
+      <span className="hidden text-[10px] font-semibold tabular-nums leading-none text-zinc-800 sm:block dark:text-zinc-200">{done}/{total}</span>
       <Bar pct={pct} color={color} />
     </div>
   );
