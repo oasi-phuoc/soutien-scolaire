@@ -2,6 +2,8 @@ import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES, STORIES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { getVocabTheme } from "@/lib/curriculum/vocabulary-data";
+import { getGrammarLesson } from "@/lib/curriculum/grammar-data";
 import {
   catalogFrenchKey,
   catalogLectureKey,
@@ -133,14 +135,15 @@ export function listHubPages(
       title: t.title,
       contentKey: vocabThemeKey(t.slug),
       href: `/francais/vocabulaire/${t.slug}`,
-      loadBase: () => ({
-        slug: t.slug,
-        code: t.code,
-        title: t.title,
-        section: t.section,
-        words: [],
-        sentences: [],
-      }),
+      loadBase: () =>
+        getVocabTheme(t.slug) ?? {
+          slug: t.slug,
+          code: t.code,
+          title: t.title,
+          section: t.section,
+          words: [],
+          sentences: [],
+        },
     }));
   }
 
@@ -161,14 +164,15 @@ export function listHubPages(
         t.tab === "conjugaison"
           ? `/francais/conjugaison/${t.slug}`
           : `/francais/grammaire/${t.slug}`,
-      loadBase: () => ({
-        slug: t.slug,
-        code: t.code,
-        level: "A1",
-        title: t.title,
-        theory: [{ type: "heading", text: t.title }],
-        exercises: [],
-      }),
+      loadBase: () =>
+        getGrammarLesson(t.slug) ?? {
+          slug: t.slug,
+          code: t.code,
+          level: "A1" as const,
+          title: t.title,
+          theory: [{ type: "heading" as const, text: t.title }],
+          exercises: [],
+        },
     }));
   }
 
