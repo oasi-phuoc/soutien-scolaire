@@ -272,7 +272,7 @@ export function AdminTable({
   const [placementPending, startPlacementTransition] = useTransition();
   const [filterClasse, setFilterClasse] = useState<string>("");
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
+  const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture" | "access" | "placement">("name");
   const [sortOpen, setSortOpen] = useState(false);
   const [resetConfirming, setResetConfirming] = useState(false);
 
@@ -288,6 +288,16 @@ export function AdminTable({
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
     if (sortBy === "francais") return frenchPct(b.progress_data).pct - frenchPct(a.progress_data).pct;
     if (sortBy === "lecture") return lecturePct(b.progress_data).pct - lecturePct(a.progress_data).pct;
+    if (sortBy === "access") {
+      const ta = Date.parse(a.progress_updated_at ?? a.progress_data?.lastActivityAt ?? "") || 0;
+      const tb = Date.parse(b.progress_updated_at ?? b.progress_data?.lastActivityAt ?? "") || 0;
+      return tb - ta;
+    }
+    if (sortBy === "placement") {
+      const pa = a.placement_combined?.total ?? a.placement_test_best?.points ?? -1;
+      const pb = b.placement_combined?.total ?? b.placement_test_best?.points ?? -1;
+      return pb - pa;
+    }
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
     return na.localeCompare(nb, "fr");
