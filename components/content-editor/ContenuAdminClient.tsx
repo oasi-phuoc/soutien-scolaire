@@ -6,6 +6,9 @@ import {
   deleteContentOverrideAction,
   listContentOverridesAction,
   getContentEditorCapabilitiesAction,
+  getContentSyncSettingsAction,
+  saveContentSyncSettingsAction,
+  probeContentSyncAction,
 } from "@/app/actions/content-editor";
 import { removeLocalOverride, readLocalOverrides } from "@/lib/content-editor/local-store";
 import type {
@@ -21,17 +24,31 @@ export function ContenuAdminClient() {
   const [caps, setCaps] = useState<ContentEditorCapabilities | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [syncMsg, setSyncMsg] = useState<string | null>(null);
+  const [tokenInput, setTokenInput] = useState("");
+  const [repoInput, setRepoInput] = useState("oasi-phuoc/soutien-scolaire");
+  const [branchInput, setBranchInput] = useState("main");
+  const [envConfigured, setEnvConfigured] = useState(false);
+  const [hasStoredToken, setHasStoredToken] = useState(false);
+  const [tokenHint, setTokenHint] = useState<string | null>(null);
 
   function reload() {
     startTransition(async () => {
-      const [list, capabilities] = await Promise.all([
+      const [list, capabilities, syncSettings] = await Promise.all([
         listContentOverridesAction(),
         getContentEditorCapabilitiesAction(),
+        getContentSyncSettingsAction(),
       ]);
       setCaps(capabilities);
+      if (syncSettings.ok) {
+        setEnvConfigured(syncSettings.envConfigured);
+        setRepoInput(syncSettings.settings.repo);
+        setBranchInput(syncSettings.settings.branch);
+        setHasStoredToken(syncSettings.settings.hasToken);
+        setTokenHint(syncSettings.settings.tokenHint);
+      }
       if (!list.ok) {
         setError(list.reason ?? "Erreur");
-        // fallback local
         setRecords(Object.values(readLocalOverrides()));
         return;
       }
@@ -61,6 +78,42 @@ export function ContenuAdminClient() {
       removeLocalOverride(key);
       const res = await deleteContentOverrideAction(key);
       if (!res.ok) setError(res.reason ?? "Suppression impossible");
+      reload();
+    });
+  }
+
+  function handleSaveSync() {
+    startTransition(async () => {
+      setSyncMsg(null);
+      const res = await saveContentSyncSettingsAction({
+        githubToken: tokenInput || undefined,
+        githubRepo: repoInput,
+        githubBranch: branchInput,
+      });
+      if (!res.ok) {
+        setSyncMsg(res.reason ?? "Échec");
+        return;
+      }
+      setTokenInput("");
+      setSyncMsg(res.message ?? "Enregistré");
+      reload();
+    });
+  }
+
+  function handleProbe() {
+    startTransition(async () => {
+      setSyncMsg(null);
+      const res = await probeContentSyncAction();
+      const parts = [
+        res.supabase.ok
+          ? "Supabase OK"
+          : `Supabase: ${res.supabase.reason ?? "échec"}`,
+        res.git.ok
+          ? `GitHub OK (${res.git.source} → ${res.git.repo}@${res.git.branch})`
+          : `GitHub: ${res.git.reason ?? "échec"}`,
+      ];
+      setSyncMsg(parts.join(" · "));
+      await refresh();
       reload();
     });
   }
@@ -99,50 +152,154 @@ export function ContenuAdminClient() {
           >
             Actualiser
           </button>
+          <button
+            type="button"
+            disabled={pending}
+            onClick={handleProbe}
+            className="rounded-xl border border-[var(--color-theme)] px-4 py-2 text-sm font-semibold text-[var(--color-theme)] disabled:opacity-50"
+          >
+            Tester la sync
+          </button>
         </div>
         {caps && (
           <ul className="mt-3 space-y-1 text-xs text-zinc-500">
             <li>Édition autorisée : {caps.canEdit ? "oui" : "non"}</li>
-            <li>Supabase : {caps.supabaseConfigured ? "configuré" : "absent"}</li>
+            <li>
+              Supabase :{" "}
+              {caps.supabaseConfigured
+                ? caps.supabaseServiceRole
+                  ? "configuré (+ service role)"
+                  : "configuré (sans service role — écritures limitées)"
+                : "absent"}
+            </li>
             <li>
               GitHub :{" "}
               {caps.gitConfigured
-                ? "configuré (CONTENT_GITHUB_TOKEN)"
-                : "non configuré — ajoutez CONTENT_GITHUB_TOKEN"}
+                ? `configuré via ${caps.git?.source === "env" ? "variables d'environnement" : "réglages Supabase"} (${caps.git?.repo}@${caps.git?.branch})`
+                : "non configuré"}
             </li>
           </ul>
         )}
+        {syncMsg && (
+          <p className="mt-3 text-xs font-medium text-amber-900" role="status">
+            {syncMsg}
+          </p>
+        )}
+      </div>
+
+      <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
+        <h2 className="text-base font-bold text-zinc-900">Sync GitHub</h2>
+        <p className="mt-1 text-sm text-zinc-600">
+          À chaque <strong>Enregistrer</strong> en mode édition, le contenu est poussé
+          vers Supabase puis commité sur GitHub (fichier JSON sous{" "}
+          <code className="rounded bg-zinc-100 px-1 text-xs">
+            lib/curriculum/content/overrides/data/
+          </code>
+          ).
+        </p>
+
+        {envConfigured ? (
+          <p className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
+            Token détecté via <code>CONTENT_GITHUB_TOKEN</code> (Vercel / .env)
+            {tokenHint ? ` ${tokenHint}` : ""}. Redeployez après ajout des variables
+            sur Vercel si le statut restait « non configuré ».
+          </p>
+        ) : (
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-zinc-600">
+              Collez ici le PAT GitHub (scope <strong>repo</strong>). Il est stocké dans
+              Supabase (pas dans Git). Appliquez d&apos;abord la migration{" "}
+              <code className="rounded bg-zinc-100 px-1 text-xs">
+                20260712210000_curriculum_content_sync_settings.sql
+              </code>
+              .
+              {hasStoredToken && tokenHint
+                ? ` Token actuel enregistré ${tokenHint}.`
+                : ""}
+            </p>
+            <label className="block text-xs font-semibold text-zinc-700">
+              Token GitHub
+              <input
+                type="password"
+                autoComplete="off"
+                value={tokenInput}
+                onChange={(e) => setTokenInput(e.target.value)}
+                placeholder={hasStoredToken ? "Laisser vide pour conserver" : "ghp_…"}
+                className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 font-mono text-sm"
+              />
+            </label>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <label className="block text-xs font-semibold text-zinc-700">
+                Dépôt
+                <input
+                  type="text"
+                  value={repoInput}
+                  onChange={(e) => setRepoInput(e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 font-mono text-sm"
+                />
+              </label>
+              <label className="block text-xs font-semibold text-zinc-700">
+                Branche
+                <input
+                  type="text"
+                  value={branchInput}
+                  onChange={(e) => setBranchInput(e.target.value)}
+                  className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 font-mono text-sm"
+                />
+              </label>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={pending}
+                onClick={handleSaveSync}
+                className="rounded-xl bg-[var(--color-theme)] px-4 py-2 text-sm font-bold text-white disabled:opacity-50"
+              >
+                Enregistrer la config Git
+              </button>
+              {hasStoredToken && (
+                <button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => {
+                    startTransition(async () => {
+                      const res = await saveContentSyncSettingsAction({
+                        clearToken: true,
+                      });
+                      setSyncMsg(res.ok ? "Token Supabase effacé" : res.reason ?? "Erreur");
+                      reload();
+                    });
+                  }}
+                  className="rounded-xl border border-red-200 px-4 py-2 text-sm font-semibold text-red-700 disabled:opacity-50"
+                >
+                  Effacer le token
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
         <details className="mt-4 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-600">
           <summary className="cursor-pointer font-semibold text-zinc-800">
-            Comment obtenir le token GitHub ?
+            Variables Vercel (recommandé en production)
           </summary>
           <ol className="mt-2 list-decimal space-y-1 pl-4">
             <li>
-              Sur GitHub → Settings → Developer settings →{" "}
-              <strong>Personal access tokens</strong> (fine-grained ou classic)
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_TOKEN</code> = PAT
+              avec scope <strong>repo</strong>
             </li>
             <li>
-              Créez un token avec permission <strong>Contents: Read and write</strong>{" "}
-              sur le dépôt <code>oasi-phuoc/soutien-scolaire</code>
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_REPO</code> ={" "}
+              oasi-phuoc/soutien-scolaire
             </li>
             <li>
-              Ajoutez-le dans les variables d&apos;environnement du déploiement
-              (Vercel / .env) :{" "}
-              <code className="rounded bg-white px-1">CONTENT_GITHUB_TOKEN=ghp_…</code>
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_BRANCH</code> = main
             </li>
             <li>
-              Optionnel :{" "}
-              <code className="rounded bg-white px-1">CONTENT_GITHUB_REPO=oasi-phuoc/soutien-scolaire</code>{" "}
-              et{" "}
-              <code className="rounded bg-white px-1">CONTENT_GITHUB_BRANCH=main</code>
+              Cochez <strong>Production</strong> (et Preview si besoin), puis{" "}
+              <strong>Redeploy</strong>
             </li>
           </ol>
-          <p className="mt-2">
-            Ce n&apos;est <strong>pas</strong> une variable magique déjà fournie : vous
-            devez créer le token une fois, puis le coller dans la config serveur.
-            Sans token, les changements restent sur Supabase (tous les utilisateurs)
-            mais ne sont pas commités dans Git.
-          </p>
         </details>
       </div>
 

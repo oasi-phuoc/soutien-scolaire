@@ -238,7 +238,9 @@ export function ContentEditorPanel({
             <span className="self-center text-[11px] text-amber-900/70">
               Cibles : local
               {capabilities.supabaseConfigured ? " · Supabase" : ""}
-              {capabilities.gitConfigured ? " · GitHub" : " · Git (non configuré)"}
+              {capabilities.gitConfigured
+                ? ` · GitHub (${capabilities.git?.source === "env" ? "env" : "réglages"})`
+                : " · Git (non configuré)"}
             </span>
           </div>
         </div>

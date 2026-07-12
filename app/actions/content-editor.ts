@@ -4,7 +4,12 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 import { loadDiskOverrides } from "@/lib/content-editor/disk";
-import { commitOverrideToGitHub, isGitConfigured } from "@/lib/content-editor/github";
+import {
+  commitOverrideToGitHub,
+  getGitHubConfigFromEnv,
+  probeGitHubConnection,
+  resolveGitHubConfig,
+} from "@/lib/content-editor/github";
 import {
   domainFromKey,
   gitPathForKey,
@@ -16,9 +21,15 @@ import type {
   SaveContentResult,
 } from "@/lib/content-editor/types";
 
+function trimEnv(name: string): string {
+  const raw = process.env[name];
+  if (!raw) return "";
+  return raw.trim().replace(/^['"]|['"]$/g, "");
+}
+
 function createServiceClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = trimEnv("NEXT_PUBLIC_SUPABASE_URL");
+  const key = trimEnv("SUPABASE_SERVICE_ROLE_KEY");
   if (!url || !key) return null;
   return createClient(url, key, {
     auth: { autoRefreshToken: false, persistSession: false },
@@ -77,16 +88,21 @@ function rowToRecord(row: {
 
 export async function getContentEditorCapabilitiesAction(): Promise<ContentEditorCapabilities> {
   const supabaseConfigured = Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    trimEnv("NEXT_PUBLIC_SUPABASE_URL") && trimEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
   );
+  const supabaseServiceRole = Boolean(trimEnv("SUPABASE_SERVICE_ROLE_KEY"));
   const openLocally = process.env.CONTENT_EDIT_OPEN === "1" || !supabaseConfigured;
   const auth = await requireAdmin();
+  const git = await resolveGitHubConfig();
   return {
     canEdit: auth.ok,
     supabaseConfigured,
-    gitConfigured: isGitConfigured(),
+    supabaseServiceRole,
+    gitConfigured: git != null,
     openLocally,
+    git: git
+      ? { repo: git.repo, branch: git.branch, source: git.source }
+      : null,
   };
 }
 
@@ -200,25 +216,30 @@ export async function saveContentOverrideAction(input: {
     notes.push("Supabase non configuré — sauvegarde locale uniquement");
   }
 
-  // GitHub
+  // GitHub — toujours tenter la sync à l'enregistrement
   const wantGit = input.syncGit !== false;
-  if (wantGit && isGitConfigured()) {
-    const git = await commitOverrideToGitHub(record);
-    if (git.ok) {
-      persisted.git = true;
-      record.gitSha = git.sha;
-      record.gitPath = git.path;
-      if (db) {
-        await db
-          .from("curriculum_content_overrides")
-          .update({ git_sha: git.sha, git_path: git.path })
-          .eq("key", record.key);
+  if (wantGit) {
+    const gitCfg = await resolveGitHubConfig();
+    if (gitCfg) {
+      const git = await commitOverrideToGitHub(record);
+      if (git.ok) {
+        persisted.git = true;
+        record.gitSha = git.sha;
+        record.gitPath = git.path;
+        if (db) {
+          await db
+            .from("curriculum_content_overrides")
+            .update({ git_sha: git.sha, git_path: git.path })
+            .eq("key", record.key);
+        }
+      } else {
+        notes.push(git.reason);
       }
     } else {
-      notes.push(git.reason);
+      notes.push(
+        "GitHub non configuré (CONTENT_GITHUB_TOKEN ou Admin → Contenu → Sync Git)",
+      );
     }
-  } else if (wantGit) {
-    notes.push("GitHub non configuré (CONTENT_GITHUB_TOKEN)");
   }
 
   revalidatePath("/admin/contenu");
@@ -252,4 +273,192 @@ export async function deleteContentOverrideAction(key: string): Promise<{
 
   revalidatePath("/admin/contenu");
   return { ok: true };
+}
+
+export async function getContentSyncSettingsAction(): Promise<{
+  ok: boolean;
+  reason?: string;
+  envConfigured: boolean;
+  settings: {
+    hasToken: boolean;
+    tokenHint: string | null;
+    repo: string;
+    branch: string;
+    source: "env" | "supabase" | null;
+  };
+}> {
+  const auth = await requireAdmin();
+  if (!auth.ok) {
+    return {
+      ok: false,
+      reason: auth.reason,
+      envConfigured: false,
+      settings: {
+        hasToken: false,
+        tokenHint: null,
+        repo: "oasi-phuoc/soutien-scolaire",
+        branch: "main",
+        source: null,
+      },
+    };
+  }
+
+  const envCfg = getGitHubConfigFromEnv();
+  if (envCfg) {
+    return {
+      ok: true,
+      envConfigured: true,
+      settings: {
+        hasToken: true,
+        tokenHint: `…${envCfg.token.slice(-4)}`,
+        repo: envCfg.repo,
+        branch: envCfg.branch,
+        source: "env",
+      },
+    };
+  }
+
+  const svc = createServiceClient() ?? (await createSupabaseActionClient());
+  if (!svc) {
+    return {
+      ok: true,
+      envConfigured: false,
+      settings: {
+        hasToken: false,
+        tokenHint: null,
+        repo: "oasi-phuoc/soutien-scolaire",
+        branch: "main",
+        source: null,
+      },
+    };
+  }
+
+  const { data } = await svc
+    .from("curriculum_content_sync_settings")
+    .select("github_token, github_repo, github_branch")
+    .eq("id", "default")
+    .maybeSingle();
+
+  const token = data?.github_token?.trim() || "";
+  return {
+    ok: true,
+    envConfigured: false,
+    settings: {
+      hasToken: Boolean(token),
+      tokenHint: token ? `…${token.slice(-4)}` : null,
+      repo: data?.github_repo?.trim() || "oasi-phuoc/soutien-scolaire",
+      branch: data?.github_branch?.trim() || "main",
+      source: token ? "supabase" : null,
+    },
+  };
+}
+
+export async function saveContentSyncSettingsAction(input: {
+  githubToken?: string;
+  githubRepo?: string;
+  githubBranch?: string;
+  clearToken?: boolean;
+}): Promise<{ ok: boolean; reason?: string; message?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { ok: false, reason: auth.reason };
+
+  if (getGitHubConfigFromEnv()) {
+    return {
+      ok: true,
+      message:
+        "Un token est déjà défini via CONTENT_GITHUB_TOKEN (Vercel/.env) — il prime sur ce formulaire.",
+    };
+  }
+
+  const db = createServiceClient() ?? (await createSupabaseActionClient());
+  if (!db) {
+    return {
+      ok: false,
+      reason:
+        "Supabase non configuré (SUPABASE_SERVICE_ROLE_KEY recommandé pour stocker le token)",
+    };
+  }
+
+  const { data: existing } = await db
+    .from("curriculum_content_sync_settings")
+    .select("github_token, github_repo, github_branch")
+    .eq("id", "default")
+    .maybeSingle();
+
+  const nextToken = input.clearToken
+    ? null
+    : input.githubToken?.trim()
+      ? input.githubToken.trim()
+      : existing?.github_token ?? null;
+
+  const { error } = await db.from("curriculum_content_sync_settings").upsert(
+    {
+      id: "default",
+      github_token: nextToken,
+      github_repo:
+        input.githubRepo?.trim() ||
+        existing?.github_repo ||
+        "oasi-phuoc/soutien-scolaire",
+      github_branch:
+        input.githubBranch?.trim() || existing?.github_branch || "main",
+      updated_by: auth.userId,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "id" },
+  );
+
+  if (error) {
+    return {
+      ok: false,
+      reason: `${error.message} — appliquez la migration curriculum_content_sync_settings.sql`,
+    };
+  }
+
+  revalidatePath("/admin/contenu");
+  return { ok: true, message: "Réglages Git enregistrés dans Supabase." };
+}
+
+export async function probeContentSyncAction(): Promise<{
+  ok: boolean;
+  supabase: { ok: boolean; reason?: string };
+  git: {
+    ok: boolean;
+    reason?: string;
+    repo?: string;
+    branch?: string;
+    source?: "env" | "supabase";
+  };
+}> {
+  const auth = await requireAdmin();
+  if (!auth.ok) {
+    return {
+      ok: false,
+      supabase: { ok: false, reason: auth.reason },
+      git: { ok: false, reason: auth.reason },
+    };
+  }
+
+  let supabaseOk = false;
+  let supabaseReason: string | undefined;
+  const db = createServiceClient() ?? (await createSupabaseActionClient());
+  if (!db) {
+    supabaseReason = "Client Supabase absent";
+  } else {
+    const { error } = await db
+      .from("curriculum_content_overrides")
+      .select("key")
+      .limit(1);
+    if (error) {
+      supabaseReason = `${error.message} — migration overrides manquante ?`;
+    } else {
+      supabaseOk = true;
+    }
+  }
+
+  const git = await probeGitHubConnection();
+  return {
+    ok: supabaseOk && git.ok,
+    supabase: { ok: supabaseOk, reason: supabaseReason },
+    git,
+  };
 }

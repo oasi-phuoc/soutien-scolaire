@@ -1,32 +1,82 @@
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { gitPathForKey } from "./keys";
 import type { ContentOverrideRecord } from "./types";
 
-type GitHubConfig = {
+export type GitHubConfig = {
   token: string;
   repo: string;
   branch: string;
+  source: "env" | "supabase";
 };
 
-export function getGitHubConfig(): GitHubConfig | null {
+function trimEnv(name: string): string {
+  const raw = process.env[name];
+  if (!raw) return "";
+  return raw.trim().replace(/^['"]|['"]$/g, "");
+}
+
+function createServiceClient(): SupabaseClient | null {
+  const url = trimEnv("NEXT_PUBLIC_SUPABASE_URL");
+  const key = trimEnv("SUPABASE_SERVICE_ROLE_KEY");
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
+
+/** Config depuis les variables d'environnement uniquement. */
+export function getGitHubConfigFromEnv(): GitHubConfig | null {
   const token =
-    process.env.CONTENT_GITHUB_TOKEN ||
-    process.env.GITHUB_TOKEN ||
-    process.env.GH_TOKEN ||
-    "";
+    trimEnv("CONTENT_GITHUB_TOKEN") ||
+    trimEnv("GITHUB_TOKEN") ||
+    trimEnv("GH_TOKEN");
   const repo =
-    process.env.CONTENT_GITHUB_REPO ||
-    process.env.GITHUB_REPOSITORY ||
+    trimEnv("CONTENT_GITHUB_REPO") ||
+    trimEnv("GITHUB_REPOSITORY") ||
     "oasi-phuoc/soutien-scolaire";
   const branch =
-    process.env.CONTENT_GITHUB_BRANCH ||
-    process.env.GITHUB_REF_NAME ||
+    trimEnv("CONTENT_GITHUB_BRANCH") ||
+    trimEnv("GITHUB_REF_NAME") ||
     "main";
-  if (!token || !repo) return null;
-  return { token, repo, branch };
+  if (!token) return null;
+  return { token, repo, branch, source: "env" };
+}
+
+async function getGitHubConfigFromSupabase(): Promise<GitHubConfig | null> {
+  const svc = createServiceClient();
+  if (!svc) return null;
+  const { data, error } = await svc
+    .from("curriculum_content_sync_settings")
+    .select("github_token, github_repo, github_branch")
+    .eq("id", "default")
+    .maybeSingle();
+  if (error || !data?.github_token) return null;
+  const token = String(data.github_token).trim();
+  if (!token) return null;
+  return {
+    token,
+    repo: (data.github_repo?.trim() || "oasi-phuoc/soutien-scolaire"),
+    branch: (data.github_branch?.trim() || "main"),
+    source: "supabase",
+  };
+}
+
+/** Résout la config GitHub : env Vercel en priorité, sinon réglages Supabase. */
+export async function resolveGitHubConfig(): Promise<GitHubConfig | null> {
+  return getGitHubConfigFromEnv() ?? (await getGitHubConfigFromSupabase());
+}
+
+/** @deprecated préférer resolveGitHubConfig() — sync env only */
+export function getGitHubConfig(): GitHubConfig | null {
+  return getGitHubConfigFromEnv();
 }
 
 export function isGitConfigured(): boolean {
-  return getGitHubConfig() != null;
+  return getGitHubConfigFromEnv() != null;
+}
+
+export async function isGitConfiguredAsync(): Promise<boolean> {
+  return (await resolveGitHubConfig()) != null;
 }
 
 async function ghFetch(
@@ -105,8 +155,14 @@ async function putGitHubFile(
 export async function commitOverrideToGitHub(
   record: ContentOverrideRecord,
 ): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
-  const cfg = getGitHubConfig();
-  if (!cfg) return { ok: false, reason: "GitHub non configuré (CONTENT_GITHUB_TOKEN)" };
+  const cfg = await resolveGitHubConfig();
+  if (!cfg) {
+    return {
+      ok: false,
+      reason:
+        "GitHub non configuré — définissez CONTENT_GITHUB_TOKEN (Vercel) ou le token dans Admin → Contenu",
+    };
+  }
 
   const filePath = record.gitPath || gitPathForKey(record.key);
   const body = {
@@ -130,10 +186,54 @@ export async function commitBinaryToGitHub(input: {
   bytes: Buffer;
   message: string;
 }): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
-  const cfg = getGitHubConfig();
-  if (!cfg) return { ok: false, reason: "GitHub non configuré (CONTENT_GITHUB_TOKEN)" };
+  const cfg = await resolveGitHubConfig();
+  if (!cfg) {
+    return {
+      ok: false,
+      reason:
+        "GitHub non configuré — définissez CONTENT_GITHUB_TOKEN (Vercel) ou le token dans Admin → Contenu",
+    };
+  }
 
   const filePath = input.relativePath.replace(/^\//, "");
   const content = input.bytes.toString("base64");
   return putGitHubFile(cfg, filePath, content, input.message);
+}
+
+export async function probeGitHubConnection(): Promise<{
+  ok: boolean;
+  reason?: string;
+  repo?: string;
+  branch?: string;
+  source?: "env" | "supabase";
+}> {
+  const cfg = await resolveGitHubConfig();
+  if (!cfg) {
+    return {
+      ok: false,
+      reason:
+        "Aucun token — CONTENT_GITHUB_TOKEN absent (Vercel/.env) et aucun réglage Supabase",
+    };
+  }
+  const [owner, repoName] = cfg.repo.split("/");
+  if (!owner || !repoName) {
+    return { ok: false, reason: `Dépôt invalide: ${cfg.repo}` };
+  }
+  const res = await ghFetch(cfg, `/repos/${owner}/${repoName}`);
+  if (!res.ok) {
+    const err = await res.text();
+    return {
+      ok: false,
+      reason: `Accès dépôt refusé (${res.status}). Vérifiez le token (scope repo) et le nom du dépôt. ${err.slice(0, 180)}`,
+      repo: cfg.repo,
+      branch: cfg.branch,
+      source: cfg.source,
+    };
+  }
+  return {
+    ok: true,
+    repo: cfg.repo,
+    branch: cfg.branch,
+    source: cfg.source,
+  };
 }
