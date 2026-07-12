@@ -8,6 +8,7 @@ import {
   getPedagogicNavVisibilityAction,
   getPlacementNavVisibilityAction,
 } from "@/app/actions/admin";
+import { getSuiviContextAction } from "@/app/actions/suivi";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { getMathModule } from "@/lib/curriculum/math-data";
@@ -76,6 +77,12 @@ export function DesktopSidebar() {
     hasSuiviAccess: false,
     canEditContent: false,
   });
+  const [suiviClasses, setSuiviClasses] = useState<{ label: string }[]>([]);
+
+  const inSuiviClass = pathname.startsWith("/suivi/classes/");
+  const currentClassSlug = inSuiviClass
+    ? decodeURIComponent(pathname.split("/")[3] ?? "")
+    : "";
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
@@ -98,13 +105,33 @@ export function DesktopSidebar() {
       .catch(() => {});
   }, [pathname]);
 
+  useEffect(() => {
+    if (!pedagogicNav.showSection || !inSuiviClass) {
+      setSuiviClasses([]);
+      return;
+    }
+    getSuiviContextAction()
+      .then((ctx) => {
+        if (!ctx?.hasAccess) {
+          setSuiviClasses([]);
+          return;
+        }
+        setSuiviClasses(
+          [...ctx.classes]
+            .sort((a, b) => a.label.localeCompare(b.label, "fr"))
+            .map((c) => ({ label: c.label })),
+        );
+      })
+      .catch(() => setSuiviClasses([]));
+  }, [pedagogicNav.showSection, inSuiviClass, pathname]);
+
   const badge = pendingTasks + unreadMessages;
   const lectureOpen = pathname.startsWith("/lecture");
   const frenchOpen =
     pathname.startsWith("/francais") || pathname.startsWith("/communication");
   const mathsOpen = pathname.startsWith("/mathematiques");
-  const pedagogicOpen =
-    pathname.startsWith("/suivi") || pathname.startsWith("/admin");
+  const suiviOpen = pathname.startsWith("/suivi");
+  const adminOpen = pathname.startsWith("/admin");
 
   const frenchTab =
     searchParams.get("tab") ??
@@ -178,16 +205,24 @@ export function DesktopSidebar() {
     },
   ];
 
-  const pedagogicSubs: SubLink[] = [
-    ...(pedagogicNav.isAdmin
-      ? [
-          {
-            href: "/admin",
-            label: "Admin",
-            active: pathname.startsWith("/admin"),
-          },
-        ]
+  const suiviSubs: SubLink[] = [
+    ...(inSuiviClass
+      ? suiviClasses.map((c) => ({
+          href: `/suivi/classes/${encodeURIComponent(c.label)}`,
+          label: c.label,
+          active: c.label === currentClassSlug,
+        }))
       : []),
+    {
+      href: "/suivi/devoirs/apercu",
+      label: "Devoirs",
+      active: pathname.startsWith("/suivi/devoirs/apercu"),
+    },
+    {
+      href: "/suivi/devoirs",
+      label: "Affecter devoir",
+      active: pathname === "/suivi/devoirs",
+    },
   ];
 
   function go(href: string) {
@@ -277,20 +312,37 @@ export function DesktopSidebar() {
         )}
 
         {pedagogicNav.showSection && (
-          <div>
-            <button
-              type="button"
-              onClick={() => go("/suivi")}
-              className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-                pedagogicOpen
-                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
-              }`}
-            >
-              Suivi pédagogique
-            </button>
-            {pedagogicSubs.length > 0 && renderSubs(pedagogicSubs)}
-          </div>
+          <>
+            <div className="my-2 border-t border-[var(--color-border-default)]" />
+            <div>
+              <button
+                type="button"
+                onClick={() => go("/suivi")}
+                className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+                  suiviOpen
+                    ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
+                }`}
+              >
+                Suivi pédagogique
+              </button>
+              {suiviOpen && renderSubs(suiviSubs)}
+            </div>
+          </>
+        )}
+
+        {pedagogicNav.isAdmin && (
+          <button
+            type="button"
+            onClick={() => go("/admin")}
+            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+              adminOpen
+                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+            }`}
+          >
+            Admin
+          </button>
         )}
 
         <div className="my-2 border-t border-[var(--color-border-default)]" />
