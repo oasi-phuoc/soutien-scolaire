@@ -13,7 +13,7 @@
         "fr": [
           "Un **nombre** entier s’écrit avec des chiffres (de **0** à **9**).",
           "En français, on sépare souvent les milliers par une espace fine : 125 000.",
-          "En Suisse romande, on utilise souvent septante, huitante et nonante pour **70**, **80** et **900**."
+          "En Suisse romande, on utilise souvent septante, huitante et nonante pour **70**, **80** et **90**."
         ]
       },
       "readAloud": {
@@ -752,7 +752,7 @@
     },
     "exercises": []
   },
-  "updatedAt": "2026-07-12T21:09:49.434Z",
+  "updatedAt": "2026-07-12T21:10:04.743Z",
   "updatedBy": "dc25c315-6996-445d-bebb-b4d80d66da1a",
   "gitPath": "lib/curriculum/content/overrides/data/math__lesson__A1-1.json"
 }
