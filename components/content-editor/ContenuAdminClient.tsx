@@ -13,6 +13,7 @@ import type {
   ContentOverrideRecord,
 } from "@/lib/content-editor/types";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { CatalogManager } from "@/components/content-editor/CatalogManager";
 
 export function ContenuAdminClient() {
   const { setEditMode, refresh } = useContentEditor();
@@ -111,7 +112,41 @@ export function ContenuAdminClient() {
             </li>
           </ul>
         )}
+        <details className="mt-4 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-600">
+          <summary className="cursor-pointer font-semibold text-zinc-800">
+            Comment obtenir le token GitHub ?
+          </summary>
+          <ol className="mt-2 list-decimal space-y-1 pl-4">
+            <li>
+              Sur GitHub → Settings → Developer settings →{" "}
+              <strong>Personal access tokens</strong> (fine-grained ou classic)
+            </li>
+            <li>
+              Créez un token avec permission <strong>Contents: Read and write</strong>{" "}
+              sur le dépôt <code>oasi-phuoc/soutien-scolaire</code>
+            </li>
+            <li>
+              Ajoutez-le dans les variables d&apos;environnement du déploiement
+              (Vercel / .env) :{" "}
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_TOKEN=ghp_…</code>
+            </li>
+            <li>
+              Optionnel :{" "}
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_REPO=oasi-phuoc/soutien-scolaire</code>{" "}
+              et{" "}
+              <code className="rounded bg-white px-1">CONTENT_GITHUB_BRANCH=main</code>
+            </li>
+          </ol>
+          <p className="mt-2">
+            Ce n&apos;est <strong>pas</strong> une variable magique déjà fournie : vous
+            devez créer le token une fois, puis le coller dans la config serveur.
+            Sans token, les changements restent sur Supabase (tous les utilisateurs)
+            mais ne sont pas commités dans Git.
+          </p>
+        </details>
       </div>
+
+      <CatalogManager />
 
       <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
         <h2 className="text-base font-bold text-zinc-900">

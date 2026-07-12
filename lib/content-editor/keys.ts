@@ -24,6 +24,55 @@ export function apprendreLessonKey(slug: string): string {
   return `apprendre:lesson:${slug}`;
 }
 
+export function ceLessonKey(id: string): string {
+  return `ce:lesson:${id}`;
+}
+
+export function coLessonKey(id: string): string {
+  return `co:lesson:${id}`;
+}
+
+export function catalogMathKey(): string {
+  return "catalog:math:modules";
+}
+
+export function catalogLectureKey(): string {
+  return "catalog:lecture:modules";
+}
+
+export function catalogFrenchKey(): string {
+  return "catalog:french:themes";
+}
+
+export function catalogCommKey(): string {
+  return "catalog:comm:modules";
+}
+
+export function catalogCeKey(): string {
+  return "catalog:ce:lessons";
+}
+
+export function catalogCoKey(): string {
+  return "catalog:co:lessons";
+}
+
+export function imageAliasKey(): string {
+  return "catalog:image:aliases";
+}
+
+const KNOWN_DOMAINS: ContentDomain[] = [
+  "lecture",
+  "vocab",
+  "grammar",
+  "conjugation",
+  "math",
+  "apprendre",
+  "catalog",
+  "ce",
+  "co",
+  "asset",
+];
+
 export function parseContentKey(key: string): {
   domain: ContentDomain;
   kind: string;
@@ -34,17 +83,8 @@ export function parseContentKey(key: string): {
   const [domain, kind, ...rest] = parts;
   const id = rest.join(":");
   if (!domain || !kind || !id) return null;
-  if (
-    domain !== "lecture" &&
-    domain !== "vocab" &&
-    domain !== "grammar" &&
-    domain !== "conjugation" &&
-    domain !== "math" &&
-    domain !== "apprendre"
-  ) {
-    return null;
-  }
-  return { domain, kind, id };
+  if (!KNOWN_DOMAINS.includes(domain as ContentDomain)) return null;
+  return { domain: domain as ContentDomain, kind, id };
 }
 
 export function domainFromKey(key: string): ContentDomain | null {
@@ -74,6 +114,14 @@ export function labelForKey(key: string): string {
       return `Maths — ${id}`;
     case "apprendre":
       return `Apprendre — ${id}`;
+    case "catalog":
+      return `Catalogue — ${kind}/${id}`;
+    case "ce":
+      return `CE — ${id}`;
+    case "co":
+      return `CO — ${id}`;
+    case "asset":
+      return `Image — ${id}`;
     default:
       return key;
   }

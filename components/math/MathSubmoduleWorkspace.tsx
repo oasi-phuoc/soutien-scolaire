@@ -1796,9 +1796,13 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode, isAdmin }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
   const sectionBackUrl = moduleId.startsWith("G") ? "/mathematiques?tab=geometry" : "/mathematiques";
-  const baseLesson = getLessonBySubmoduleId(submoduleId ?? "");
+  const baseFromRegistry = getLessonBySubmoduleId(submoduleId ?? "");
   const { resolve, getOverride } = useContentEditor();
   const contentKey = mathLessonKey(submoduleId ?? "");
+  const baseLesson =
+    baseFromRegistry ??
+    (getOverride(contentKey)?.payload as ReturnType<typeof getLessonBySubmoduleId>) ??
+    undefined;
   const lesson = baseLesson ? resolve(contentKey, baseLesson) : undefined;
   const overrideStamp = getOverride(contentKey)?.updatedAt ?? "base";
   const pivot = usePivotLang();

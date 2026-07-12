@@ -1,6 +1,7 @@
 "use client";
 
 import type { LetterData } from "@/lib/curriculum/lecture-data";
+import { ImageUploadField } from "./ImageUploadField";
 
 function Field({
   label,
@@ -114,6 +115,16 @@ export function LectureLetterFields({
           onChange={(v) => patch({ letterLower: v, letter: v.toUpperCase() })}
         />
       </div>
+
+      {"exampleWord" in data && (
+        <ImageUploadField
+          label="Image du mot exemple"
+          value={(data as { exampleImagePath?: string }).exampleImagePath}
+          word={(data as { exampleWord?: string }).exampleWord}
+          domain="lecture"
+          onChange={(url) => patch({ exampleImagePath: url || undefined }, "immediate")}
+        />
+      )}
 
       {"upperWords" in data && Array.isArray(data.upperWords) && (
         <ListEditor

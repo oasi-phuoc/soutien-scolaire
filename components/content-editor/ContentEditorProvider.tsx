@@ -81,6 +81,14 @@ export function ContentEditorProvider({ children }: { children: ReactNode }) {
       if (!rem || loc.updatedAt >= rem.updatedAt) merged[k] = loc;
     }
     setOverrides(merged);
+    // Appliquer alias images runtime (CE/CO/vocab/lecture)
+    const aliases = merged["catalog:image:aliases"]?.payload;
+    if (aliases && typeof aliases === "object") {
+      const { setRuntimeImageAliases } = await import(
+        "@/lib/curriculum/word-image-resolver"
+      );
+      setRuntimeImageAliases(aliases as Record<string, string>);
+    }
     setReady(true);
   }, []);
 

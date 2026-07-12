@@ -5,9 +5,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   MATH_ALGEBRA_ORDER,
   MATH_GEOMETRY_TAB_ORDER,
+  MATH_MODULES,
   getMathModule,
   prerequisitesMet,
 } from "@/lib/curriculum/math-data";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { resolveMathModules } from "@/lib/content-editor/catalog";
+import type { MathModule } from "@/lib/curriculum/types";
 import {
   computeRecommendation,
   type MathTabId,
@@ -95,6 +99,8 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
 
 export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { isLoggedIn?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
+  const { overrides } = useContentEditor();
+  const catalogModules = resolveMathModules(MATH_MODULES, overrides);
   const [tab, setTab] = useState<MathTabId>("algebra");
   const [progress, setProgress] = useState<StoredProgressV1>(createInitialProgress);
   const [hydrated, setHydrated] = useState(false);
@@ -123,10 +129,18 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
   }, []);
 
   const order = tab === "algebra" ? MATH_ALGEBRA_ORDER : MATH_GEOMETRY_TAB_ORDER;
-  const modules = useMemo(
-    () => order.map((id) => getMathModule(id)).filter(Boolean),
-    [order],
-  );
+  const branch = tab === "algebra" ? "algebra" : "geometry";
+  const modules = useMemo(() => {
+    const byId = new Map(catalogModules.map((m) => [m.id, m]));
+    const ordered = order
+      .map((id) => byId.get(id) ?? getMathModule(id))
+      .filter(Boolean) as MathModule[];
+    const extras = catalogModules.filter(
+      (m) => m.branch === branch && !order.includes(m.id),
+    );
+    return [...ordered, ...extras];
+  }, [order, catalogModules, branch]);
+
 
   const reco = useMemo(() => computeRecommendation(tab, progress), [tab, progress]);
 

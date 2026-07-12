@@ -45,10 +45,63 @@ async function ghFetch(
   });
 }
 
-/**
- * Crée ou met à jour le fichier JSON d'override dans le dépôt GitHub.
- * Retourne le SHA du blob écrit.
- */
+async function putGitHubFile(
+  cfg: GitHubConfig,
+  filePath: string,
+  contentBase64: string,
+  message: string,
+): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
+  const [owner, repoName] = cfg.repo.split("/");
+  if (!owner || !repoName) {
+    return { ok: false, reason: `Dépôt GitHub invalide: ${cfg.repo}` };
+  }
+
+  let existingSha: string | undefined;
+  const getRes = await ghFetch(
+    cfg,
+    `/repos/${owner}/${repoName}/contents/${filePath
+      .split("/")
+      .map(encodeURIComponent)
+      .join("/")}?ref=${encodeURIComponent(cfg.branch)}`,
+  );
+  if (getRes.ok) {
+    const existing = (await getRes.json()) as { sha?: string };
+    existingSha = existing.sha;
+  } else if (getRes.status !== 404) {
+    const err = await getRes.text();
+    return { ok: false, reason: `Lecture GitHub: ${getRes.status} ${err}` };
+  }
+
+  const putRes = await ghFetch(
+    cfg,
+    `/repos/${owner}/${repoName}/contents/${filePath
+      .split("/")
+      .map(encodeURIComponent)
+      .join("/")}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        message,
+        content: contentBase64,
+        branch: cfg.branch,
+        ...(existingSha ? { sha: existingSha } : {}),
+      }),
+    },
+  );
+
+  if (!putRes.ok) {
+    const err = await putRes.text();
+    return { ok: false, reason: `Commit GitHub: ${putRes.status} ${err}` };
+  }
+
+  const json = (await putRes.json()) as {
+    content?: { sha?: string };
+    commit?: { sha?: string };
+  };
+  const sha = json.content?.sha || json.commit?.sha || "";
+  return { ok: true, sha, path: filePath };
+}
+
 export async function commitOverrideToGitHub(
   record: ContentOverrideRecord,
 ): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
@@ -69,52 +122,18 @@ export async function commitOverrideToGitHub(
     "base64",
   );
 
-  const [owner, repoName] = cfg.repo.split("/");
-  if (!owner || !repoName) {
-    return { ok: false, reason: `Dépôt GitHub invalide: ${cfg.repo}` };
-  }
+  return putGitHubFile(cfg, filePath, content, `content(edit): ${record.label}`);
+}
 
-  // Récupérer le SHA existant si le fichier est déjà présent
-  let existingSha: string | undefined;
-  const getRes = await ghFetch(
-    cfg,
-    `/repos/${owner}/${repoName}/contents/${encodeURIComponent(filePath).replace(/%2F/g, "/")}?ref=${encodeURIComponent(cfg.branch)}`,
-  );
-  if (getRes.ok) {
-    const existing = (await getRes.json()) as { sha?: string };
-    existingSha = existing.sha;
-  } else if (getRes.status !== 404) {
-    const err = await getRes.text();
-    return { ok: false, reason: `Lecture GitHub: ${getRes.status} ${err}` };
-  }
+export async function commitBinaryToGitHub(input: {
+  relativePath: string;
+  bytes: Buffer;
+  message: string;
+}): Promise<{ ok: true; sha: string; path: string } | { ok: false; reason: string }> {
+  const cfg = getGitHubConfig();
+  if (!cfg) return { ok: false, reason: "GitHub non configuré (CONTENT_GITHUB_TOKEN)" };
 
-  const message = `content(edit): ${record.label}`;
-  const putRes = await ghFetch(
-    cfg,
-    `/repos/${owner}/${repoName}/contents/${filePath
-      .split("/")
-      .map(encodeURIComponent)
-      .join("/")}`,
-    {
-      method: "PUT",
-      body: JSON.stringify({
-        message,
-        content,
-        branch: cfg.branch,
-        ...(existingSha ? { sha: existingSha } : {}),
-      }),
-    },
-  );
-
-  if (!putRes.ok) {
-    const err = await putRes.text();
-    return { ok: false, reason: `Commit GitHub: ${putRes.status} ${err}` };
-  }
-
-  const json = (await putRes.json()) as {
-    content?: { sha?: string };
-    commit?: { sha?: string };
-  };
-  const sha = json.content?.sha || json.commit?.sha || "";
-  return { ok: true, sha, path: filePath };
+  const filePath = input.relativePath.replace(/^\//, "");
+  const content = input.bytes.toString("base64");
+  return putGitHubFile(cfg, filePath, content, input.message);
 }

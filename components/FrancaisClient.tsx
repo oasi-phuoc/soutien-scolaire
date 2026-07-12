@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
+import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { resolveFrenchThemes } from "@/lib/content-editor/catalog";
 import type { FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 import { CommunicationModuleList } from "@/components/communication/CommunicationHome";
@@ -381,6 +383,8 @@ function SectionCard({
 export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") as FrenchTab | null;
+  const { overrides } = useContentEditor();
+  const frenchThemes = resolveFrenchThemes(FRENCH_THEMES, overrides);
   const [tab, setTab] = useState<FrenchTab>(
     initialTab && VALID_TABS.includes(initialTab) ? initialTab : "vocabulaire",
   );
@@ -460,7 +464,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         {tab === "vocabulaire" ? (
           <>
             {VOCAB_MODULES.map((mod) => {
-              const themes = FRENCH_THEMES.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
+              const themes = frenchThemes.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
               if (themes.length === 0) return null;
               const allDone = hydrated && themes.every((th) => completedSlugs.has(th.slug));
               const state: SectionState = !hydrated ? "locked" : allDone ? "completed" : "in_progress";
@@ -485,14 +489,14 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
             const allTabThemes = tab === "grammaire"
               ? GRAMMAR_GROUPS.flatMap((grp) =>
-                  FRENCH_THEMES.filter(
+                  frenchThemes.filter(
                     (th) =>
                       (th.tab === "grammaire" || th.tab === "conjugaison") &&
                       grammarGroupId(th.code) === grp.id,
                   ),
                 )
               : SECTIONS.flatMap((sec) =>
-                  FRENCH_THEMES.filter(
+                  frenchThemes.filter(
                     (th) => th.section === sec.id && th.tab === tab,
                   ),
                 );

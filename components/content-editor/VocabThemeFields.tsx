@@ -1,6 +1,7 @@
 "use client";
 
 import type { VocabSentence, VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
+import { ImageUploadField } from "./ImageUploadField";
 
 function Field({
   label,
@@ -124,6 +125,16 @@ export function VocabThemeFields({
                 }
                 className="rounded-md border border-amber-200 px-2 py-1 text-sm sm:col-span-3"
               />
+              <div className="sm:col-span-4">
+                <ImageUploadField
+                  label="Image du mot"
+                  value={w.image}
+                  word={w.word}
+                  folder={theme.imageFolder ?? theme.section}
+                  domain="vocab"
+                  onChange={(url) => updateWord(i, { ...w, image: url || undefined })}
+                />
+              </div>
             </div>
           ))}
         </div>

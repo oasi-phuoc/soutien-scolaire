@@ -3,6 +3,17 @@ import aliasesJson from "./content/communication/word-image-aliases.json";
 
 const ALIASES = aliasesJson as Record<string, string>;
 
+/** Alias runtime (overrides admin / uploads) — fusionnés par-dessus le JSON. */
+let runtimeAliases: Record<string, string> = {};
+
+export function setRuntimeImageAliases(map: Record<string, string> | null | undefined) {
+  runtimeAliases = map && typeof map === "object" ? { ...map } : {};
+}
+
+function lookupAlias(slug: string): string | undefined {
+  return runtimeAliases[slug] || ALIASES[slug];
+}
+
 /** French determiners / articles stripped from the front of a label. */
 const DETERMINERS = new Set([
   "le", "la", "les", "l", "un", "une", "des", "du", "de", "d", "au", "aux",
@@ -246,16 +257,22 @@ function isVocabImagePath(path: string): boolean {
 function resolveLectureSlug(slug: string): string | null {
   const direct = LECTURE_IMAGE_INDEX[slug];
   if (direct) return direct;
-  const alias = ALIASES[slug];
-  if (alias && LECTURE_IMAGE_INDEX[alias]) return LECTURE_IMAGE_INDEX[alias];
+  const alias = lookupAlias(slug);
+  if (alias) {
+    if (/^https?:\/\//i.test(alias) || alias.startsWith("/")) return alias;
+    if (LECTURE_IMAGE_INDEX[alias]) return LECTURE_IMAGE_INDEX[alias];
+  }
   return null;
 }
 
 function resolveVocabSlug(slug: string): string | null {
   const direct = WORD_IMAGE_INDEX[slug];
   if (direct && isVocabImagePath(direct)) return direct;
-  const alias = ALIASES[slug];
+  const alias = lookupAlias(slug);
   if (alias) {
+    if (/^https?:\/\//i.test(alias) || (alias.startsWith("/") && isVocabImagePath(alias))) {
+      return alias;
+    }
     const aliased = WORD_IMAGE_INDEX[alias];
     if (aliased && isVocabImagePath(aliased)) return aliased;
   }
@@ -264,8 +281,9 @@ function resolveVocabSlug(slug: string): string | null {
 
 /** CE/CO : alias scène (prioritaire), expression/horloge, lecture, vocabulaire. */
 function resolveCeCoIndexedSlug(slug: string): string | null {
-  const alias = ALIASES[slug];
+  const alias = lookupAlias(slug);
   if (alias) {
+    if (/^https?:\/\//i.test(alias) || alias.startsWith("/assets/")) return alias;
     const aliased = WORD_IMAGE_INDEX[alias];
     if (aliased && !isVocabImagePath(aliased)) return aliased;
   }
@@ -324,9 +342,13 @@ export function resolveWordImage(label: string | undefined | null): string | nul
   const time = timeSlug(label);
   if (time && WORD_IMAGE_INDEX[time]) return WORD_IMAGE_INDEX[time];
   for (const candidate of candidateSlugs(label)) {
+    const runtime = lookupAlias(candidate);
+    if (runtime && (/^https?:\/\//i.test(runtime) || runtime.startsWith("/"))) {
+      return runtime;
+    }
     const direct = WORD_IMAGE_INDEX[candidate];
     if (direct) return direct;
-    const alias = ALIASES[candidate];
+    const alias = lookupAlias(candidate);
     if (alias && WORD_IMAGE_INDEX[alias]) return WORD_IMAGE_INDEX[alias];
   }
   return null;
@@ -384,6 +406,7 @@ const EXPRESSION_CE_BASE =
 /** CE/CO — scènes, conversations, objet-pick, horloges ; fallback lecture puis vocabulaire. */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
+    if (/^https?:\/\//i.test(path)) return path;
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
     if (path.startsWith("/expression/co/")) return path;
