@@ -100,34 +100,57 @@ function ActiveToggle({
 }
 
 /**
- * Gestion catalogue : ajouter / masquer modules et leçons,
- * puis persister via overrides (Supabase + Git).
+ * Gestion catalogue : brouillon local, puis Enregistrer → Supabase + Git.
  */
 export function CatalogManager() {
   const { overrides, saveOverride, capabilities, resolve } = useContentEditor();
   const [tab, setTab] = useState<Tab>("french");
   const [pending, startTransition] = useTransition();
   const [status, setStatus] = useState<string | null>(null);
+  const [mathDraft, setMathDraft] = useState<MathCatalogPayload | null>(null);
+  const [lectureDraft, setLectureDraft] = useState<LectureCatalogPayload | null>(
+    null,
+  );
+  const [frenchDraft, setFrenchDraft] = useState<FrenchCatalogPayload | null>(
+    null,
+  );
+  const [commDraft, setCommDraft] = useState<CommCatalogPayload | null>(null);
+  const [pendingContent, setPendingContent] = useState<
+    Array<{ key: string; label: string; payload: unknown }>
+  >([]);
 
-  const mathCatalog = useMemo(() => {
+  const mathSaved = useMemo(() => {
     const ov = overrides[catalogMathKey()]?.payload as MathCatalogPayload | undefined;
     return ov ?? snapshotMathCatalog(MATH_MODULES);
   }, [overrides]);
 
-  const lectureCatalog = useMemo(() => {
-    const ov = overrides[catalogLectureKey()]?.payload as LectureCatalogPayload | undefined;
+  const lectureSaved = useMemo(() => {
+    const ov = overrides[catalogLectureKey()]?.payload as
+      | LectureCatalogPayload
+      | undefined;
     return ov ?? snapshotLectureCatalog(LECTURE_MODULES);
   }, [overrides]);
 
-  const frenchCatalog = useMemo(() => {
-    const ov = overrides[catalogFrenchKey()]?.payload as FrenchCatalogPayload | undefined;
+  const frenchSaved = useMemo(() => {
+    const ov = overrides[catalogFrenchKey()]?.payload as
+      | FrenchCatalogPayload
+      | undefined;
     return ov ?? snapshotFrenchCatalog(FRENCH_THEMES);
   }, [overrides]);
 
-  const commCatalog = useMemo(() => {
+  const commSaved = useMemo(() => {
     const ov = overrides[catalogCommKey()]?.payload as CommCatalogPayload | undefined;
     return ov ?? snapshotCommCatalog(COMM_MODULES);
   }, [overrides]);
+
+  const mathCatalog = mathDraft ?? mathSaved;
+  const lectureCatalog = lectureDraft ?? lectureSaved;
+  const frenchCatalog = frenchDraft ?? frenchSaved;
+  const commCatalog = commDraft ?? commSaved;
+
+  const isDraft = Boolean(
+    mathDraft || lectureDraft || frenchDraft || commDraft || pendingContent.length,
+  );
 
   // Ensure resolve helpers stay typed / used (list previews)
   const _previewMath = resolveMathModules(MATH_MODULES, overrides);
@@ -140,23 +163,102 @@ export function CatalogManager() {
   void _previewComm;
   void resolve;
 
-  async function persist(
-    key: string,
-    label: string,
-    payload: unknown,
-  ) {
+  function markDraft(msg = "Brouillon — cliquez Enregistrer pour publier") {
+    setStatus(msg);
+  }
+
+  function queueContent(item: { key: string; label: string; payload: unknown }) {
+    setPendingContent((prev) => {
+      const without = prev.filter((p) => p.key !== item.key);
+      return [...without, item];
+    });
+  }
+
+  function discardDraft() {
+    setMathDraft(null);
+    setLectureDraft(null);
+    setFrenchDraft(null);
+    setCommDraft(null);
+    setPendingContent([]);
+    setStatus("Brouillon annulé");
+  }
+
+  async function saveDraft() {
     setStatus(null);
-    const res = await saveOverride({ key, label, payload, syncGit: true });
-    if (!res.ok) {
-      setStatus(res.reason);
+    const jobs: Array<{ key: string; label: string; payload: unknown }> = [];
+    if (mathDraft) {
+      jobs.push({
+        key: catalogMathKey(),
+        label: "Catalogue maths",
+        payload: mathDraft,
+      });
+    }
+    if (lectureDraft) {
+      jobs.push({
+        key: catalogLectureKey(),
+        label: "Catalogue lecture",
+        payload: lectureDraft,
+      });
+    }
+    if (frenchDraft) {
+      jobs.push({
+        key: catalogFrenchKey(),
+        label: "Catalogue français",
+        payload: frenchDraft,
+      });
+    }
+    if (commDraft) {
+      jobs.push({
+        key: catalogCommKey(),
+        label: "Catalogue communication",
+        payload: commDraft,
+      });
+    }
+    jobs.push(...pendingContent);
+
+    if (jobs.length === 0) {
+      setStatus("Rien à enregistrer");
       return;
     }
-    const parts = [
-      res.persisted.supabase ? "Supabase" : null,
-      res.persisted.git ? "Git" : null,
-      "local",
-    ].filter(Boolean);
-    setStatus(`Catalogue enregistré (${parts.join(" + ")})${res.message ? ` — ${res.message}` : ""}`);
+
+    const notes: string[] = [];
+    let okCount = 0;
+    for (const job of jobs) {
+      const res = await saveOverride({
+        key: job.key,
+        label: job.label,
+        payload: job.payload,
+        syncGit: true,
+      });
+      if (!res.ok) {
+        notes.push(res.reason);
+        continue;
+      }
+      okCount += 1;
+      if (res.message) notes.push(res.message);
+    }
+
+    if (okCount === jobs.length) {
+      setMathDraft(null);
+      setLectureDraft(null);
+      setFrenchDraft(null);
+      setCommDraft(null);
+      setPendingContent([]);
+      const parts = ["Supabase", capabilities.gitConfigured ? "Git" : null, "local"].filter(
+        Boolean,
+      );
+      setStatus(
+        `Catalogue enregistré (${parts.join(" + ")})${
+          notes.length ? ` — ${notes.join(" · ")}` : ""
+        }`,
+      );
+    } else {
+      setStatus(
+        `Enregistrement partiel (${okCount}/${jobs.length})${
+          notes.length ? ` — ${notes.join(" · ")}` : ""
+        }`,
+      );
+    }
   }
 
   function addMathModule() {
@@ -165,7 +267,7 @@ export function CatalogManager() {
     const title = prompt("Titre", `Module ${id}`) ?? `Module ${id}`;
     const branch = (prompt("Branche (algebra|geometry|stats)", "algebra") ??
       "algebra") as MathCatalogPayload["modules"][0]["branch"];
-    const next: MathCatalogPayload = {
+    setMathDraft({
       modules: [
         ...mathCatalog.modules,
         {
@@ -177,8 +279,8 @@ export function CatalogManager() {
           prerequisiteIds: [],
         },
       ],
-    };
-    startTransition(() => void persist(catalogMathKey(), "Catalogue maths", next));
+    });
+    markDraft();
   }
 
   function addMathSubmodule(moduleId: string) {
@@ -186,7 +288,7 @@ export function CatalogManager() {
     if (!code) return;
     const title = prompt("Titre", "Nouvelle leçon") ?? "Nouvelle leçon";
     const subId = code.replace(/\./g, "-");
-    const next: MathCatalogPayload = {
+    setMathDraft({
       modules: mathCatalog.modules.map((m) =>
         m.id === moduleId
           ? {
@@ -195,45 +297,40 @@ export function CatalogManager() {
             }
           : m,
       ),
-    };
-    startTransition(async () => {
-      await persist(catalogMathKey(), "Catalogue maths", next);
-      await saveOverride({
-        key: mathLessonKey(subId),
-        label: `Maths — ${subId}`,
-        payload: {
-          submoduleId: subId,
-          submoduleCode: code,
-          theory: {
-            title: { fr: title },
-            paragraphs: { fr: ["Contenu à rédiger."] },
-            blocks: [{ type: "plain", fr: "Contenu à rédiger." }],
-          },
-          exercises: [],
-        },
-        syncGit: true,
-      });
     });
+    queueContent({
+      key: mathLessonKey(subId),
+      label: `Maths — ${subId}`,
+      payload: {
+        submoduleId: subId,
+        submoduleCode: code,
+        theory: {
+          title: { fr: title },
+          paragraphs: { fr: ["Contenu à rédiger."] },
+          blocks: [{ type: "plain", fr: "Contenu à rédiger." }],
+        },
+        exercises: [],
+      },
+    });
+    markDraft();
   }
 
   function setMathModuleActive(moduleId: string, active: boolean) {
-    const next: MathCatalogPayload = {
+    setMathDraft({
       modules: mathCatalog.modules.map((m) =>
         m.id === moduleId ? { ...m, hidden: !active } : m,
       ),
-    };
-    startTransition(() => void persist(catalogMathKey(), "Catalogue maths", next));
+    });
+    markDraft();
   }
 
   function setLectureModuleActive(moduleId: string, active: boolean) {
-    const next: LectureCatalogPayload = {
+    setLectureDraft({
       modules: lectureCatalog.modules.map((m) =>
         m.id === moduleId ? { ...m, hidden: !active } : m,
       ),
-    };
-    startTransition(() =>
-      void persist(catalogLectureKey(), "Catalogue lecture", next),
-    );
+    });
+    markDraft();
   }
 
   function addLectureModule() {
@@ -241,57 +338,57 @@ export function CatalogManager() {
     if (!id) return;
     const code = prompt("Code (ex. L9)", id.toUpperCase()) ?? id.toUpperCase();
     const title = prompt("Titre", `Module ${code}`) ?? `Module ${code}`;
-    const next: LectureCatalogPayload = {
+    setLectureDraft({
       modules: [
         ...lectureCatalog.modules,
         { id, code, title, description: "", letterKeys: [] },
       ],
-    };
-    startTransition(() => void persist(catalogLectureKey(), "Catalogue lecture", next));
+    });
+    markDraft();
   }
 
   function addLectureLetter(moduleId: string) {
     const letter = prompt("Lettre / grapheme (minuscule)", "ch");
     if (!letter) return;
     const phoneme = prompt("Phonème", `/${letter}/`) ?? `/${letter}/`;
-    const next: LectureCatalogPayload = {
+    setLectureDraft({
       modules: lectureCatalog.modules.map((m) =>
         m.id === moduleId
           ? { ...m, letterKeys: [...m.letterKeys, letter.toLowerCase()] }
           : m,
       ),
-    };
-    startTransition(async () => {
-      await persist(catalogLectureKey(), "Catalogue lecture", next);
-      await saveOverride({
-        key: lectureLetterKey(letter),
-        label: `Lecture — ${letter}`,
-        payload: {
-          type: "vowel",
-          letter: letter.toUpperCase(),
-          letterLower: letter.toLowerCase(),
-          phoneme,
-          exampleWord: letter,
-          upperGrid: Array(20).fill(letter.toUpperCase()),
-          lowerGrid: Array(20).fill(letter.toLowerCase()),
-          upperWords: [],
-          lowerWords: [],
-          soundItems: [],
-          pronunciationChain: [],
-        },
-        syncGit: true,
-      });
     });
+    queueContent({
+      key: lectureLetterKey(letter),
+      label: `Lecture — ${letter}`,
+      payload: {
+        type: "vowel",
+        letter: letter.toUpperCase(),
+        letterLower: letter.toLowerCase(),
+        phoneme,
+        exampleWord: letter,
+        upperGrid: Array(20).fill(letter.toUpperCase()),
+        lowerGrid: Array(20).fill(letter.toLowerCase()),
+        upperWords: [],
+        lowerWords: [],
+        soundItems: [],
+        pronunciationChain: [],
+      },
+    });
+    markDraft();
   }
 
   function addFrenchTheme(tab: "vocabulaire" | "grammaire" | "conjugaison") {
-    const section = prompt("Section (ex. V11 ou R10)", tab === "vocabulaire" ? "V11" : "R10");
+    const section = prompt(
+      "Section (ex. V11 ou R10)",
+      tab === "vocabulaire" ? "V11" : "R10",
+    );
     if (!section) return;
     const code = prompt("Code (ex. V11.1)", `${section}.1`) ?? `${section}.1`;
     const title = prompt("Titre", "Nouveau thème") ?? "Nouveau thème";
     const slug = slugify(prompt("Slug URL", title) ?? title);
     const id = `${section}-${slug}`;
-    const next: FrenchCatalogPayload = {
+    setFrenchDraft({
       themes: [
         ...frenchCatalog.themes,
         {
@@ -305,65 +402,57 @@ export function CatalogManager() {
           markers: [],
         },
       ],
-    };
-    startTransition(async () => {
-      await persist(catalogFrenchKey(), "Catalogue français", next);
-      if (tab === "vocabulaire") {
-        await saveOverride({
-          key: vocabThemeKey(slug),
-          label: `Vocabulaire — ${slug}`,
-          payload: {
-            slug,
-            code,
-            title,
-            section,
-            words: [],
-            sentences: [],
-          },
-          syncGit: true,
-        });
-      } else {
-        await saveOverride({
-          key: grammarLessonKey(slug),
-          label: `${tab} — ${slug}`,
-          payload: {
-            slug,
-            code,
-            level: "A1",
-            title,
-            theory: [{ type: "heading", text: title }],
-            exercises: [],
-          },
-          syncGit: true,
-        });
-      }
     });
+    if (tab === "vocabulaire") {
+      queueContent({
+        key: vocabThemeKey(slug),
+        label: `Vocabulaire — ${slug}`,
+        payload: {
+          slug,
+          code,
+          title,
+          section,
+          words: [],
+          sentences: [],
+        },
+      });
+    } else {
+      queueContent({
+        key: grammarLessonKey(slug),
+        label: `${tab} — ${slug}`,
+        payload: {
+          slug,
+          code,
+          level: "A1",
+          title,
+          theory: [{ type: "heading", text: title }],
+          exercises: [],
+        },
+      });
+    }
+    markDraft();
   }
 
   function setFrenchThemeActive(slug: string, active: boolean) {
-    const next: FrenchCatalogPayload = {
+    setFrenchDraft({
       themes: frenchCatalog.themes.map((t) =>
         t.slug === slug ? { ...t, hidden: !active } : t,
       ),
-    };
-    startTransition(() =>
-      void persist(catalogFrenchKey(), "Catalogue français", next),
-    );
+    });
+    markDraft();
   }
 
   function setCommModuleActive(moduleId: string, active: boolean) {
-    const next: CommCatalogPayload = {
+    setCommDraft({
       modules: commCatalog.modules.map((m) =>
         m.id === moduleId ? { ...m, hidden: !active } : m,
       ),
-    };
-    startTransition(() =>
-      void persist(catalogCommKey(), "Catalogue communication", next),
-    );
+    });
+    markDraft();
   }
 
   function setCommSubActive(moduleId: string, subId: string, active: boolean) {
-    const next: CommCatalogPayload = {
+    setCommDraft({
       modules: commCatalog.modules.map((m) =>
         m.id === moduleId
           ? {
@@ -374,10 +463,8 @@ export function CatalogManager() {
             }
           : m,
       ),
-    };
-    startTransition(() =>
-      void persist(catalogCommKey(), "Catalogue communication", next),
-    );
+    });
+    markDraft();
   }
 
   function addCommSubmodule(moduleId: string) {
@@ -385,7 +472,7 @@ export function CatalogManager() {
     if (!id) return;
     const code = prompt("Code", id.replace("-", ".")) ?? id;
     const title = prompt("Titre", "Nouvelle leçon") ?? "Nouvelle leçon";
-    const next: CommCatalogPayload = {
+    setCommDraft({
       modules: commCatalog.modules.map((m) =>
         m.id === moduleId
           ? {
@@ -397,8 +484,8 @@ export function CatalogManager() {
             }
           : m,
       ),
-    };
-    startTransition(() => void persist(catalogCommKey(), "Catalogue communication", next));
+    });
+    markDraft();
   }
 
   const tabs: { id: Tab; label: string }[] = [
@@ -411,16 +498,42 @@ export function CatalogManager() {
 
   return (
     <div className="space-y-4 rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-      <div>
-        <h2 className="text-base font-bold text-zinc-900">
-          Modules &amp; leçons
-        </h2>
-        <p className="mt-1 text-sm text-zinc-600">
-          Ajoutez des entrées ou basculez <strong>Actif / Inactif</strong> (les
-          inactives restent listées ici, masquées pour les élèves). Édition ensuite
-          en mode édition sur la leçon. Sync Supabase
-          {capabilities.gitConfigured ? " + Git" : ""}.
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-base font-bold text-zinc-900">
+            Modules &amp; leçons
+          </h2>
+          <p className="mt-1 text-sm text-zinc-600">
+            Les changements restent en <strong>brouillon</strong> jusqu&apos;à
+            Enregistrer (puis sync Supabase
+            {capabilities.gitConfigured ? " + Git" : ""}). Toggle{" "}
+            <strong>Actif / Inactif</strong> : les inactives restent listées ici,
+            masquées pour les élèves.
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {isDraft && (
+            <span className="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">
+              Brouillon
+            </span>
+          )}
+          <button
+            type="button"
+            disabled={!isDraft || pending}
+            onClick={discardDraft}
+            className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 disabled:opacity-40"
+          >
+            Annuler
+          </button>
+          <button
+            type="button"
+            disabled={!isDraft || pending}
+            onClick={() => startTransition(() => void saveDraft())}
+            className="rounded-lg bg-[var(--color-theme)] px-4 py-2 text-xs font-bold text-white disabled:opacity-40"
+          >
+            {pending ? "Enregistrement…" : "Enregistrer"}
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-1.5">
