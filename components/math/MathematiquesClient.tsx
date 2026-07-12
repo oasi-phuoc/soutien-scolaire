@@ -171,11 +171,11 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
         </div>
       </header>
 
-      {/* Tab toggle */}
+      {/* Tab toggle — mobile only (desktop: barre latérale) */}
       <div
         role="tablist"
         aria-label="Branches mathématiques"
-        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)]/15 p-1"
+        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)]/15 p-1 lg:hidden"
       >
         <button
           type="button"

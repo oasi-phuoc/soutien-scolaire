@@ -430,11 +430,11 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
         </div>
       </header>
 
-      {/* Tab toggle */}
+      {/* Tab toggle — mobile only (desktop: barre latérale) */}
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1"
+        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
       >
         {TABS.map(({ id, label }) => (
           <button

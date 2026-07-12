@@ -377,11 +377,11 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
         </div>
       </header>
 
-      {/* Tab toggle */}
+      {/* Tab toggle — mobile only (desktop: barre latérale) */}
       <div
         role="tablist"
         aria-label="Sections lecture"
-        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)]/15 p-1"
+        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)]/15 p-1 lg:hidden"
       >
         <button
           type="button"
