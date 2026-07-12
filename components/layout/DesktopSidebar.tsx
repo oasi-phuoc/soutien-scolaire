@@ -184,19 +184,7 @@ export function DesktopSidebar() {
           {
             href: "/admin",
             label: "Admin",
-            active:
-              pathname.startsWith("/admin") &&
-              !pathname.startsWith("/admin/contenu"),
-          },
-        ]
-      : []),
-    // Édition : admin, ou mode local sans compte (canEditContent sans isAdmin).
-    ...(pedagogicNav.canEditContent
-      ? [
-          {
-            href: "/admin/contenu",
-            label: "Édition de contenu",
-            active: pathname.startsWith("/admin/contenu"),
+            active: pathname.startsWith("/admin"),
           },
         ]
       : []),
@@ -292,15 +280,7 @@ export function DesktopSidebar() {
           <div>
             <button
               type="button"
-              onClick={() =>
-                go(
-                  pedagogicNav.hasSuiviAccess || pedagogicNav.isAdmin
-                    ? "/suivi"
-                    : pedagogicNav.canEditContent
-                      ? "/admin/contenu"
-                      : "/suivi",
-                )
-              }
+              onClick={() => go("/suivi")}
               className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
                 pedagogicOpen
                   ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"

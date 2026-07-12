@@ -237,9 +237,10 @@ export async function getPlacementNavVisibilityAction(): Promise<{ ok: boolean; 
 }
 
 /** Visibilité de la section « Suivi pédagogique » dans la barre latérale.
- *  - admin : Suivi + Admin + Édition de contenu
+ *  - admin : Suivi + Admin
  *  - prof (avec accès suivi) : Suivi uniquement
  *  - élève : rien
+ *  Édition de contenu : désactivée pour le moment (jamais affichée).
  */
 export async function getPedagogicNavVisibilityAction(): Promise<{
   ok: boolean;
@@ -249,19 +250,17 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   canEditContent: boolean;
 }> {
   const supabase = await createSupabaseActionClient();
-  const openLocally =
-    process.env.CONTENT_EDIT_OPEN === "1" ||
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // Sans Supabase : édition locale uniquement (pas de faux rôle admin).
+  // Édition de contenu temporairement désactivée pour tous.
+  const canEditContent = false;
+
   if (!supabase) {
     return {
       ok: true,
-      showSection: true,
+      showSection: false,
       isAdmin: false,
       hasSuiviAccess: false,
-      canEditContent: true,
+      canEditContent,
     };
   }
 
@@ -271,10 +270,10 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   if (!user) {
     return {
       ok: true,
-      showSection: openLocally,
+      showSection: false,
       isAdmin: false,
       hasSuiviAccess: false,
-      canEditContent: openLocally,
+      canEditContent,
     };
   }
 
@@ -287,8 +286,6 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
     hasSuiviAccess = Boolean(access);
   }
 
-  // Admin / Édition : strictement réservés au rôle admin (jamais via openLocally si connecté).
-  const canEditContent = isAdmin;
   const showSection = isAdmin || hasSuiviAccess;
 
   return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent };

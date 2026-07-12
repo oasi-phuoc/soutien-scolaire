@@ -249,20 +249,12 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             {isAdmin && (
-              <>
-                <Link
-                  href="/admin"
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
-                >
-                  Admin
-                </Link>
-                <Link
-                  href="/admin/contenu"
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-amber-500 px-4 font-semibold text-amber-800 hover:bg-amber-50"
-                >
-                  Édition contenu
-                </Link>
-              </>
+              <Link
+                href="/admin"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
+              >
+                Admin
+              </Link>
             )}
             {hasSuiviAccess && (
               <Link
