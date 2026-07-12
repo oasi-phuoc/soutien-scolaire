@@ -47,8 +47,10 @@ type ContentEditorContextValue = {
 const defaultCapabilities: ContentEditorCapabilities = {
   canEdit: false,
   supabaseConfigured: false,
+  supabaseServiceRole: false,
   gitConfigured: false,
   openLocally: false,
+  git: null,
 };
 
 const ContentEditorContext = createContext<ContentEditorContextValue | null>(

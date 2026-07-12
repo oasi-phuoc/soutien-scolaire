@@ -38,8 +38,15 @@ export type SaveContentResult =
 export type ContentEditorCapabilities = {
   canEdit: boolean;
   supabaseConfigured: boolean;
+  /** Service role présent (écritures overrides / images). */
+  supabaseServiceRole: boolean;
   gitConfigured: boolean;
   openLocally: boolean;
+  git?: {
+    repo: string;
+    branch: string;
+    source: "env" | "supabase";
+  } | null;
 };
 
 /** Entrée de navigation pour un thème / leçon ajouté via le catalogue. */

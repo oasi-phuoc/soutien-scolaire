@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
-import { commitBinaryToGitHub, isGitConfigured } from "@/lib/content-editor/github";
+import { commitBinaryToGitHub } from "@/lib/content-editor/github";
 import { saveContentOverrideAction } from "@/app/actions/content-editor";
 import type { ImageUploadResult } from "@/lib/content-editor/types";
 
@@ -138,17 +138,13 @@ export async function uploadCurriculumImageAction(
   }
 
   // GitHub — source de vérité long terme sous public/
-  if (isGitConfigured()) {
-    const git = await commitBinaryToGitHub({
-      relativePath: relativeGitPath,
-      bytes,
-      message: `content(image): ${domain} ${fileName}`,
-    });
-    if (git.ok) gitOk = true;
-    else notes.push(git.reason);
-  } else {
-    notes.push("GitHub non configuré (CONTENT_GITHUB_TOKEN)");
-  }
+  const git = await commitBinaryToGitHub({
+    relativePath: relativeGitPath,
+    bytes,
+    message: `content(image): ${domain} ${fileName}`,
+  });
+  if (git.ok) gitOk = true;
+  else notes.push(git.reason);
 
   // Alias mot → image (utile CE/CO + résolution globale)
   if (label.trim()) {
