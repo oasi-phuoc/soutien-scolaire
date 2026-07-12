@@ -1,0 +1,758 @@
+{
+  "key": "math:lesson:A1-1",
+  "domain": "math",
+  "label": "Maths — A1-1",
+  "payload": {
+    "submoduleId": "A1-1",
+    "submoduleCode": "A1.1",
+    "theory": {
+      "title": {
+        "fr": "Compter en français"
+      },
+      "paragraphs": {
+        "fr": [
+          "Un **nombre** entier s’écrit avec des chiffres (de **0** à **9**).",
+          "En français, on sépare souvent les milliers par une espace fine : 125 000.",
+          "En Suisse romande, on utilise souvent septante, huitante et nonante pour **70**, **80** et **900**."
+        ]
+      },
+      "readAloud": {
+        "headingFr": "Enregistrement",
+        "legendFr": [
+          {
+            "swatch": "red",
+            "labelFr": "Rouge : un seul son"
+          },
+          {
+            "swatch": "text",
+            "labelFr": "Noir : son"
+          },
+          {
+            "swatch": "gray",
+            "labelFr": "Gris : pas de son"
+          }
+        ],
+        "rows": [
+          {
+            "col1": {
+              "num": "1",
+              "parts": [
+                {
+                  "text": "un",
+                  "kind": "vowel"
+                }
+              ]
+            },
+            "col2": {
+              "num": "11",
+              "parts": [
+                {
+                  "text": "onz",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "21",
+              "parts": [
+                {
+                  "text": "v",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "gt",
+                  "kind": "silent"
+                },
+                {
+                  "text": " ",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": " ",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "un",
+                  "kind": "vowel"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "2",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "eu",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col2": {
+              "num": "12",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "ou",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "z",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "22",
+              "parts": [
+                {
+                  "text": "v",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "gt",
+                  "kind": "silent"
+                },
+                {
+                  "text": " ",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "eu",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "3",
+              "parts": [
+                {
+                  "text": "tr",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "oi",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "s",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col2": {
+              "num": "13",
+              "parts": [
+                {
+                  "text": "tr",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "ei",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "z",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "30",
+              "parts": [
+                {
+                  "text": "tr",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "en",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "4",
+              "parts": [
+                {
+                  "text": "qu",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "a",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "tr",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col2": {
+              "num": "14",
+              "parts": [
+                {
+                  "text": "qu",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "a",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "or",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "z",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "40",
+              "parts": [
+                {
+                  "text": "qu",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "a",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "r",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "an",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "5",
+              "parts": [
+                {
+                  "text": "c",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "q",
+                  "kind": "consonant"
+                }
+              ],
+              "wordUnderline": true
+            },
+            "col2": {
+              "num": "15",
+              "parts": [
+                {
+                  "text": "qu",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "z",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "50",
+              "parts": [
+                {
+                  "text": "c",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "qu",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "an",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "6",
+              "parts": [
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "i",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col2": {
+              "num": "16",
+              "parts": [
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "ei",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "z",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "60",
+              "parts": [
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "oi",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "an",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "7",
+              "parts": [
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "pt",
+                  "kind": "silent"
+                }
+              ],
+              "wordUnderline": true
+            },
+            "col2": {
+              "num": "17",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "i",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "-",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "pt",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "70",
+              "parts": [
+                {
+                  "text": "s",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "pt",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "a",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "nt",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "8",
+              "parts": [
+                {
+                  "text": "h",
+                  "kind": "silent"
+                },
+                {
+                  "text": "ui",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col2": {
+              "num": "18",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "i",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "-",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "h",
+                  "kind": "silent"
+                },
+                {
+                  "text": "ui",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col3": {
+              "num": "80",
+              "parts": [
+                {
+                  "text": "h",
+                  "kind": "silent"
+                },
+                {
+                  "text": "ui",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "an",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "9",
+              "parts": [
+                {
+                  "text": "n",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "eu",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "f",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col2": {
+              "num": "19",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "i",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "-",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "n",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "eu",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "f",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col3": {
+              "num": "90",
+              "parts": [
+                {
+                  "text": "n",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "o",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "n",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "an",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "e",
+                  "kind": "silent"
+                }
+              ]
+            }
+          },
+          {
+            "col1": {
+              "num": "10",
+              "parts": [
+                {
+                  "text": "d",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "i",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "x",
+                  "kind": "consonant"
+                }
+              ]
+            },
+            "col2": {
+              "num": "20",
+              "parts": [
+                {
+                  "text": "v",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "in",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "gt",
+                  "kind": "silent"
+                }
+              ]
+            },
+            "col3": {
+              "num": "100",
+              "parts": [
+                {
+                  "text": "c",
+                  "kind": "consonant"
+                },
+                {
+                  "text": "en",
+                  "kind": "vowel"
+                },
+                {
+                  "text": "t",
+                  "kind": "silent"
+                }
+              ],
+              "wordUnderline": true
+            }
+          }
+        ],
+        "audioSrc": "/audio/a1-1-compter-fr.mp4"
+      }
+    },
+    "exercises": []
+  },
+  "updatedAt": "2026-07-12T21:09:49.434Z",
+  "updatedBy": "dc25c315-6996-445d-bebb-b4d80d66da1a",
+  "gitPath": "lib/curriculum/content/overrides/data/math__lesson__A1-1.json"
+}
