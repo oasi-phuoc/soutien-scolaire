@@ -190,6 +190,7 @@ export function DesktopSidebar() {
           },
         ]
       : []),
+    // Édition : admin, ou mode local sans compte (canEditContent sans isAdmin).
     ...(pedagogicNav.canEditContent
       ? [
           {
