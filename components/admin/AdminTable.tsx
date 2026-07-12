@@ -377,7 +377,7 @@ export function AdminTable({
             }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-[var(--color-theme)] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
-                {([["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
+                {([["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"], ["access", "Accès"], ["placement", "Placement"]] as const).map(([val, label]) => (
                   <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
                 ))}
               </>
