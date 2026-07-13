@@ -89,7 +89,7 @@ body {
   background-attachment: fixed;
   color: var(--foreground);
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-nunito), system-ui, sans-serif;
-  text-align: justify;
+  text-align: left;
 }
 
 /* Conserver l'alignement explicite centré ou à gauche */
@@ -462,13 +462,6 @@ input[type=number] {
   .desktop-shell .app-shell,
   .desktop-shell .app-shell-bar {
     max-width: min(72rem, calc(100vw - var(--sidebar-w) - 2rem));
-  }
-
-  /* Moins de padding bas : la nav flottante mobile est masquée */
-  .desktop-shell .pb-56,
-  .desktop-shell .pb-32,
-  .desktop-shell .pb-28 {
-    padding-bottom: 2.5rem;
   }
 }
 

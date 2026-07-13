@@ -106,7 +106,7 @@ export function AppSelect({
 
   const sizeCls =
     size === "sm"
-      ? "h-8 rounded-[18px] px-3 text-sm"
+      ? "h-8 min-h-8 rounded-lg px-1.5 text-sm"
       : "h-10 rounded-[22px] px-4 text-sm";
 
   const menuRounded =
@@ -141,6 +141,8 @@ export function AppSelect({
       >
         <span
           className={`min-w-0 truncate ${
+            size === "sm" ? "flex-1 text-center font-semibold uppercase" : ""
+          } ${
             selected
               ? error
                 ? "font-semibold text-amber-600"
@@ -151,7 +153,9 @@ export function AppSelect({
           {triggerLabel}
         </span>
         <svg
-          className={`shrink-0 text-[var(--color-theme)] transition-transform ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 text-[var(--color-theme)] transition-transform ${
+            size === "sm" ? "hidden" : ""
+          } ${open ? "rotate-180" : ""}`}
           width={size === "sm" ? 15 : 17}
           height={size === "sm" ? 15 : 17}
           viewBox="0 0 24 24"

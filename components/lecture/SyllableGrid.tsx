@@ -13,6 +13,8 @@ export interface SyllableGridHandle {
 interface Props {
   baseLetter: string;
   mode?: "cv" | "vc" | "mixed";
+  /** Liste personnalisée (édition contenu) — sinon génération auto. */
+  items?: string[];
 }
 
 type RecState = "idle" | "listening" | "correct" | "wrong";
@@ -73,22 +75,34 @@ function matchesSyllable(transcript: string, target: string): boolean {
 }
 
 export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
-  function SyllableGrid({ baseLetter, mode = "cv" }, ref) {
+  function SyllableGrid({ baseLetter, mode = "cv", items }, ref) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
   const recRef = useRef<unknown>(null);
-  const [states, setStates] = useState<RecState[]>(() => Array(6).fill("idle"));
-  const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
-  const [syllables, setSyllables] = useState<string[]>(() => makeSyllables(baseLetter, mode));
+
+  function resolveSyllables() {
+    const custom = (items ?? []).map((s) => s.trim()).filter(Boolean);
+    if (custom.length > 0) return custom;
+    return makeSyllables(baseLetter, mode);
+  }
+
+  const [syllables, setSyllables] = useState<string[]>(() => resolveSyllables());
+  const [states, setStates] = useState<RecState[]>(() =>
+    Array(resolveSyllables().length).fill("idle"),
+  );
+  const [heard, setHeard] = useState<string[]>(() =>
+    Array(resolveSyllables().length).fill(""),
+  );
 
   // Refresh: regenerate a fresh sequence of syllables and clear the state.
   function reset() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (recRef.current as any)?.abort?.();
     recRef.current = null;
-    setSyllables(makeSyllables(baseLetter, mode));
-    setStates(Array(6).fill("idle"));
-    setHeard(Array(6).fill(""));
+    const next = resolveSyllables();
+    setSyllables(next);
+    setStates(Array(next.length).fill("idle"));
+    setHeard(Array(next.length).fill(""));
   }
 
   useImperativeHandle(ref, () => ({ reset }));

@@ -1251,25 +1251,48 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
         return <SoundPicker key={k} ref={soundImageRef} phoneme="/s/" mode="audio" />;
       case "syllables-cv":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="cv" />;
+        return (
+          <SyllableGrid
+            key={k}
+            ref={pronounceGridRef}
+            baseLetter={data.letterLower}
+            mode="cv"
+            items={(data as { cvSyllables?: string[] }).cvSyllables}
+          />
+        );
       case "syllables-vc":
         if (data.type !== "consonant") return null;
-        return <SyllableGrid key={k} ref={pronounceGridRef} baseLetter={data.letterLower} mode="vc" />;
+        return (
+          <SyllableGrid
+            key={k}
+            ref={pronounceGridRef}
+            baseLetter={data.letterLower}
+            mode="vc"
+            items={(data as { vcSyllables?: string[] }).vcSyllables}
+          />
+        );
       case "syll-2": {
         if (data.type !== "consonant") return null;
+        const customSyll2 = ((data as { syll2Items?: string[] }).syll2Items ?? [])
+          .map((s) => s.trim())
+          .filter(Boolean);
         // 2-syllable reading built from the consonant's CV syllables (e.g. "caco").
         const vowels = ["a", "o", "i", "e", "u", "y"];
         const cvLower = vowels.map((v) => `${data.letterLower}${v}`);
         const combos: string[] = [];
         for (const a of cvLower) for (const b of cvLower) if (a !== b) combos.push(a + b);
+        const poolUpper = customSyll2.length
+          ? customSyll2.map((c) => c.toUpperCase())
+          : combos.map((c) => c.toUpperCase());
+        const poolLower = customSyll2.length ? customSyll2 : combos;
         return (
           <WordPronounceGrid
             key={k}
             ref={pronounceGridRef}
             kind="syllable"
             sampleSpec={[
-              { pool: combos.map((c) => c.toUpperCase()), n: 8 },
-              { pool: combos, n: 7 },
+              { pool: poolUpper, n: Math.min(8, poolUpper.length) },
+              { pool: poolLower, n: Math.min(7, poolLower.length) },
             ]}
             title="Lecture de 2 syllabes"
             consigne="Lisez chaque suite de 2 syllabes à voix haute."
@@ -1333,7 +1356,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
           : "Consonne";
 
   return (
-    <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+    <div className="app-shell flex-1 py-8 pb-56">
       <ContentEditorPanel
         contentKey={contentKey}
         label={`Lecture — ${baseData.letterLower}`}

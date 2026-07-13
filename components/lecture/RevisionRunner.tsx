@@ -155,7 +155,7 @@ export function RevisionRunner({ data }: Props) {
   }
 
   return (
-    <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+    <div className="app-shell flex-1 py-8 pb-56">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Révision

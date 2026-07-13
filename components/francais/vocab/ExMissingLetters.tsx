@@ -107,11 +107,13 @@ export function ExMissingLetters({
                         value={s.blanks[pos] ?? ""}
                         onChange={(v) => setBlank(w.word, pos, v)}
                         options={ALPHABET.map((l) => ({ value: l, label: l }))}
-                        placeholder=""
-                        emptyOption={{ value: "", label: "" }}
+                        placeholder="?"
+                        emptyOption={{ value: "", label: "?" }}
                         disabled={s.checked}
                         size="sm"
-                        className="w-7"
+                        className="w-11"
+                        menuClassName="!left-0 !right-auto w-28"
+                        aria-label={`Lettre manquante position ${pos + 1}`}
                       />
                     )
                   ) : (

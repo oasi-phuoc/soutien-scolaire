@@ -407,7 +407,7 @@ export function VocabRunner({ theme: baseTheme }: Props) {
   }
 
   return (
-    <div className="app-shell flex-1 py-8 pb-56 lg:pb-32">
+    <div className="app-shell flex-1 py-8 pb-56">
       <ContentEditorPanel
         contentKey={contentKey}
         label={`Vocabulaire — ${baseTheme.slug}`}

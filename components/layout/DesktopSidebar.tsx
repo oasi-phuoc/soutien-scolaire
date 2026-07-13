@@ -351,8 +351,32 @@ export function DesktopSidebar() {
                   label: "Professeurs",
                   active: pathname.startsWith("/admin/attribution-professeurs"),
                 },
+                ...(pedagogicNav.canEditContent
+                  ? [
+                      {
+                        href: "/admin/contenu",
+                        label: "Édition de contenu",
+                        active: pathname.startsWith("/admin/contenu"),
+                      },
+                    ]
+                  : []),
               ])}
           </div>
+        )}
+
+        {/* Mode local sans rôle admin : accès direct à l'édition */}
+        {!pedagogicNav.isAdmin && pedagogicNav.canEditContent && (
+          <button
+            type="button"
+            onClick={() => go("/admin/contenu")}
+            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+              pathname.startsWith("/admin/contenu")
+                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+            }`}
+          >
+            Édition de contenu
+          </button>
         )}
 
         <div className="my-2 border-t border-[var(--color-border-default)]" />

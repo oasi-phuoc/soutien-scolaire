@@ -105,7 +105,11 @@ export function MainNav() {
         />
       )}
       <nav
-        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10 lg:hidden"
+        className={
+          lessonMode
+            ? "print:hidden fixed bottom-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10 left-0 right-0 lg:left-[var(--sidebar-w)]"
+            : "print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10 lg:hidden"
+        }
         aria-label="Navigation principale"
         data-main-nav
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
