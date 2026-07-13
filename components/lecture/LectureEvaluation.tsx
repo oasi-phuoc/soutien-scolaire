@@ -479,7 +479,7 @@ function SoundAudioExercise({
         Écoutez et touchez ceux où vous entendez{" "}
         <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
       </p>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
         {items.map((word, i) => {
           const s = cellStates[i]!;
           return (
@@ -1090,7 +1090,7 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
     ))}</ul>;
   }
   if (snapshot.kind === "sound-image" || snapshot.kind === "sound-audio") {
-    return <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{snapshot.labels.map((label, i) => (
+    return <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">{snapshot.labels.map((label, i) => (
       <div key={`${label}-${i}`} className={`flex min-h-24 flex-col items-center justify-center rounded-[var(--radius-lg)] border-2 p-2 ${correctionStateClass(snapshot.states[i]!)}`}>
         {snapshot.kind === "sound-image" && (() => {
           const imgSrc = getLectureWordImagePath(label);
