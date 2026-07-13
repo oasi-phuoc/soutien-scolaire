@@ -65,7 +65,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
             {lectureUi(lang, "tapSoundsYouHear")}
           </p>
         )}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">
           {words.map(({ word, answer }, i) => {
             const sel = selections[i]!;
             const isCorrectA = answer === "A" || answer === "AB";
@@ -74,7 +74,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
             return (
               <div
                 key={i}
-                className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2"
+                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
               >
                 {mode === "image" ? (
                   <div className="relative aspect-square w-full overflow-hidden rounded-lg">

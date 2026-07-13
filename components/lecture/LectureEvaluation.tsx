@@ -387,7 +387,7 @@ function SoundImageExercise({
         Touchez les images où vous entendez{" "}
         <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
       </p>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
         {items.map((word, i) => {
           const s = cellStates[i]!;
           const imgSrc = getLectureWordImagePath(word.label);

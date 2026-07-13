@@ -231,13 +231,14 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
   ) : null;
 
   return (
-    <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+    <div className="flex flex-col gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2">
       {/* Image with audio overlay */}
-      <div className="relative w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white" style={{ aspectRatio: "4/3" }}>
+      <div className="relative w-full overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white" style={{ aspectRatio: "4/3" }}>
         {src && !imgFailed ? (
           <Image src={src} alt={w.word} fill
             className="object-cover"
-            onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
+            onError={() => setImgFailed(true)}
+            sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 160px" />
         ) : (
           <div className="h-full w-full bg-white" aria-hidden />
         )}
@@ -335,7 +336,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
             {sec.group && (
               <p className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{sec.group}</p>
             )}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">
               {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} imageFolder={theme.imageFolder ?? theme.section} />)}
             </div>
           </div>

@@ -87,7 +87,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
           </p>
         )}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
           {items.map((word, i) => {
             const s = states[i]!;
             const imgSrc = getLectureWordImagePath(word.label);
@@ -193,7 +193,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             {lectureUi(lang, "listenTapWithSound", { x: phoneme })}
           </p>
         )}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
           {items.map((word, i) => {
             const s = states[i]!;
             return (

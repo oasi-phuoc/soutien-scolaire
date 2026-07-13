@@ -18,7 +18,7 @@ function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string
         <Image src={src} alt={alt} fill
           className="object-cover"
           onError={() => setFailed(true)}
-          sizes="(max-width: 640px) 45vw, 200px" />
+          sizes="(max-width: 640px) 45vw, 140px" />
       </div>
     );
   }
@@ -104,14 +104,14 @@ export function ExImageMatch({
         ))}
       </div>
       {/* Image cards — 4 cards, numbered 1-4 with letter select */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {shownCards.map((w, cardIdx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
             <div
               key={w.word}
-              className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2"
+              className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
             >
               <ImgOrPlaceholder
                 src={resolveImg(w.image)}
