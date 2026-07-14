@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
@@ -26,6 +26,26 @@ type Props = AudioProps | ImageProps;
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
+const DESKTOP_MQ = "(min-width: 768px)";
+
+function useSoundPickerItemCount(defaultCount = 16): number {
+  const [count, setCount] = useState(() => {
+    if (typeof window === "undefined") return defaultCount;
+    return window.matchMedia(DESKTOP_MQ).matches ? 20 : defaultCount;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setCount(mq.matches ? 20 : defaultCount);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [defaultCount]);
+
+  return count;
+}
+
 export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
   function SoundPicker(props, ref) {
     if (props.mode === "audio") {
@@ -41,15 +61,16 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   function ImagePicker({ phoneme }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [items, setItems] = useState(() => randomSoundItems(phoneme, 16, true));
-    const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
+    const itemCount = useSoundPickerItemCount(16);
+    const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount, true));
+    const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setItems(randomSoundItems(phoneme, 16, true));
-      setStates(Array(16).fill("idle"));
+      setItems(randomSoundItems(phoneme, itemCount, true));
+      setStates(Array(itemCount).fill("idle"));
       setValidated(false);
-    }, [phoneme]);
+    }, [itemCount, phoneme]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -145,15 +166,16 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   function AudioPicker({ phoneme }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [items, setItems] = useState(() => randomSoundItems(phoneme, 16));
-    const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
+    const itemCount = useSoundPickerItemCount(16);
+    const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount));
+    const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setItems(randomSoundItems(phoneme, 16));
-      setStates(Array(16).fill("idle"));
+      setItems(randomSoundItems(phoneme, itemCount));
+      setStates(Array(itemCount).fill("idle"));
       setValidated(false);
-    }, [phoneme]);
+    }, [itemCount, phoneme]);
 
     const validate = useCallback(() => {
       if (validated) return;

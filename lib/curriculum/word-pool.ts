@@ -488,7 +488,7 @@ export function complexGraphemeId(label: string): string | null {
 
 /** Longueur max des mots dans les exercices « repérer la lettre / le graphème ». */
 export const LECTURE_WORD_MAX_LENGTH_MOBILE = 10;
-export const LECTURE_WORD_MAX_LENGTH_DESKTOP = 24;
+export const LECTURE_WORD_MAX_LENGTH_DESKTOP = 11;
 
 /** Pool de mots pour un son complexe (étapes 4-5 L7), sans mots-outils. */
 export function wordsForComplexGrapheme(
@@ -774,9 +774,17 @@ export function allWordItems(): WordItem[] {
   return [...byLabel.values()];
 }
 
+function isSimpleLectureWordLabel(label: string): boolean {
+  const normalized = label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/gu, "")
+    .trim();
+  return !/[\s-]/.test(normalized);
+}
+
 /** Labels étendus pour le pool bureau (mots illustrés + liste lecture). */
 function extendedSpotterWordLabels(): string[] {
-  return [...new Set([...LETTER_WORDS, ...allWordItems().map((w) => w.label)])];
+  return [...new Set([...LETTER_WORDS, ...allWordItems().map((w) => w.label)])].filter(isSimpleLectureWordLabel);
 }
 
 /** Tous les labels disponibles (LETTER_WORDS + mots-outils + WORD_ITEMS). */
