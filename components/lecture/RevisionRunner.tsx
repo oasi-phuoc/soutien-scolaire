@@ -57,7 +57,7 @@ export function RevisionRunner({ data }: Props) {
 
   const soundWords = useMemo(
     () => lectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, true),
-    [data.phonemeA, data.phonemeB, soundItemCount],
+    [data.phonemeA, data.phonemeB, soundItemCount, step.key, resetKey],
   );
 
   useEffect(() => {
@@ -72,8 +72,10 @@ export function RevisionRunner({ data }: Props) {
   function exerciseReset() {
     if (isGridStep) gridRef.current?.reset();
     else if (isWordStep) wordRef.current?.reset();
-    else if (isSoundStep) soundRef.current?.reset();
-    else if (isPronounceStep) pronounceRef.current?.reset();
+    else if (isSoundStep) {
+      soundRef.current?.reset();
+      setResetKey((k) => k + 1);
+    } else if (isPronounceStep) pronounceRef.current?.reset();
   }
 
   function exerciseValidate() {

@@ -29,15 +29,18 @@ function selectedVoice(): Voice {
 }
 
 /**
- * Ordered list of audio URLs to try for a recording. The chosen voice comes
- * first; the masculine voice falls back to the feminine one, and the caller
- * falls back to TTS when none of the files exist.
+ * Ordered list of audio URLs to try for a recording.
+ * Lecture words always prefer the feminine recording first.
+ * Other sounds use the selected voice first, with a fallback.
  */
 function audioCandidates(kind: "mots" | "syllable", text: string): string[] {
   const slug = getWordAssetSlug(text);
   const fem = `/assets/words/son_f/${kind}/${slug}.mp3`;
   const masc = `/assets/words/son_m/${kind}/${slug}.mp3`;
-  return selectedVoice() === "m" ? [masc, fem] : [fem];
+  if (kind === "mots" && hasLectureWordImage(text)) {
+    return [fem, masc];
+  }
+  return selectedVoice() === "m" ? [masc, fem] : [fem, masc];
 }
 
 /**

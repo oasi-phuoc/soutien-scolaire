@@ -72,8 +72,8 @@ function getSteps(data: LetterData): Step[] {
       { key: "complex-grid-lower", label: "Minuscules" },
       { key: "complex-word-upper", label: "Mots (MAJ)" },
       { key: "complex-word-lower", label: "Mots (min)" },
-      { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
+      { key: "sound-image", label: "Images" },
       {
         key: "complex-syllables-cv",
         label: usesGraphemeVowelSyllables(data.letterLower) ? "Son complexe + voyelle" : "Syllabes",
@@ -116,8 +116,8 @@ function getSteps(data: LetterData): Step[] {
       { key: "grid-lower", label: "Minuscules" },
       { key: "word-upper", label: "Mots (MAJ)" },
       { key: "word-lower", label: "Mots (min)" },
-      { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
+      { key: "sound-image", label: "Images" },
       { key: "pronounce", label: "Prononcer" },
       { key: "eval", label: "Évaluation" },
     ];
@@ -131,11 +131,11 @@ function getSteps(data: LetterData): Step[] {
     { key: "grid-lower", label: "Minuscules" },
     { key: "word-upper-1", label: "Mots 1" },
     { key: "word-lower", label: "Mots (min)" },
-    { key: "sound-image", label: "Images" },
     { key: "sound-audio", label: "Audio" },
+    { key: "sound-image", label: "Images" },
     ...(isC ? [
-      { key: "sound-image-s", label: "Images /s/" },
       { key: "sound-audio-s", label: "Audio /s/" },
+      { key: "sound-image-s", label: "Images /s/" },
     ] : []),
     { key: "syllables-cv", label: "Syllabes" },
     { key: "syllables-vc", label: "Syllabes inverses" },
