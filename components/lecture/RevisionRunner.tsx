@@ -1,38 +1,43 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { RevisionData } from "@/lib/curriculum/lecture-data";
 import { RevisionLetterGrid, type RevisionLetterGridHandle } from "./RevisionLetterGrid";
 import { RevisionWordSpotter, type RevisionWordSpotterHandle } from "./RevisionWordSpotter";
 import { RevisionSoundStep, type RevisionSoundStepHandle } from "./RevisionSoundStep";
+import { RevisionSoundDiscrim } from "./RevisionSoundDiscrim";
 import { RevisionPronounce, type RevisionPronounceHandle } from "./RevisionPronounce";
 import {
   loadLectureProgress,
   saveLectureProgress,
   markRevisionCompleted,
 } from "@/lib/progress/lecture-progress";
+import { lectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: RevisionData;
 }
 
 type Step = { key: string; label: string };
+const DESKTOP_MQ = "(min-width: 768px)";
 
 const STEPS: Step[] = [
   { key: "grid-upper", label: "MAJ" },
   { key: "grid-lower", label: "min" },
   { key: "word-upper", label: "Mots MAJ" },
   { key: "word-lower", label: "Mots min" },
-  { key: "sound-image", label: "Sons images" },
-  { key: "sound-audio", label: "Sons audio" },
+  { key: "sound-audio", label: "Audio" },
+  { key: "sound-image", label: "Images" },
   { key: "pronounce", label: "Prononcer" },
+  { key: "eval", label: "Évaluation" },
 ];
 
 export function RevisionRunner({ data }: Props) {
   const router = useRouter();
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
+  const [soundItemCount, setSoundItemCount] = useState(9);
 
   const gridRef = useRef<RevisionLetterGridHandle>(null);
   const wordRef = useRef<RevisionWordSpotterHandle>(null);
@@ -47,7 +52,22 @@ export function RevisionRunner({ data }: Props) {
   const isWordStep = step.key === "word-upper" || step.key === "word-lower";
   const isSoundStep = step.key === "sound-image" || step.key === "sound-audio";
   const isPronounceStep = step.key === "pronounce";
+  const isEvalStep = step.key === "eval";
   const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
+
+  const soundWords = useMemo(
+    () => lectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, true),
+    [data.phonemeA, data.phonemeB, soundItemCount],
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setSoundItemCount(mq.matches ? 12 : 9);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   function exerciseReset() {
     if (isGridStep) gridRef.current?.reset();
@@ -125,17 +145,6 @@ export function RevisionRunner({ data }: Props) {
             isUppercase={false}
           />
         );
-      case "sound-image":
-        return (
-          <RevisionSoundStep
-            key={k}
-            ref={soundRef}
-            phonemeA={data.phonemeA}
-            phonemeB={data.phonemeB}
-            words={data.soundWords}
-            mode="image"
-          />
-        );
       case "sound-audio":
         return (
           <RevisionSoundStep
@@ -143,12 +152,31 @@ export function RevisionRunner({ data }: Props) {
             ref={soundRef}
             phonemeA={data.phonemeA}
             phonemeB={data.phonemeB}
-            words={data.soundWords}
+            words={soundWords}
             mode="audio"
+          />
+        );
+      case "sound-image":
+        return (
+          <RevisionSoundStep
+            key={k}
+            ref={soundRef}
+            phonemeA={data.phonemeA}
+            phonemeB={data.phonemeB}
+            words={soundWords}
+            mode="image"
           />
         );
       case "pronounce":
         return <RevisionPronounce key={k} ref={pronounceRef} words={data.readWords} />;
+      case "eval":
+        return (
+          <RevisionSoundDiscrim
+            phonemeA={data.phonemeA}
+            phonemeB={data.phonemeB}
+            words={soundWords.map((w) => ({ word: w.word, answer: w.answer === "AB" ? "A" : w.answer }))}
+          />
+        );
       default:
         return null;
     }
@@ -160,26 +188,46 @@ export function RevisionRunner({ data }: Props) {
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Révision
         </p>
-        <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-          {data.title}
-        </h1>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={goBack}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)] text-white transition-opacity hover:opacity-80"
+            aria-label="Retour"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+            {data.title}
+          </h1>
+        </div>
       </header>
 
       {/* Progress bar */}
-      <div className="mb-6 flex gap-1">
-        {STEPS.map((s, i) => (
-          <div
-            key={s.key}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < stepIdx
-                ? "bg-[var(--color-accent-lecture)]"
-                : i === stepIdx
-                  ? "bg-[var(--color-accent-lecture)] opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
-      </div>
+      {!isEvalStep && (
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">Entraînement</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {STEPS.length}</p>
+          </div>
+          <div className="flex gap-1">
+            {STEPS.map((s, i) => (
+              <div
+                key={s.key}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i < stepIdx
+                    ? "bg-[var(--color-accent-lecture)]"
+                    : i === stepIdx
+                      ? "bg-[var(--color-accent-lecture)] opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="min-h-[280px]">{renderStep()}</div>
 

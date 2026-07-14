@@ -47,10 +47,10 @@ type EvalSnapshot =
 
 type ValidatedHandler = (score: number, snapshot: EvalSnapshot) => void;
 
-const BASE_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "pronounce", "results"];
-const CONSONANT_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "syllables-mixed", "pronounce", "results"];
+const BASE_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-image", "pronounce", "results"];
+const CONSONANT_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-image", "syllables-mixed", "pronounce", "results"];
 // L7 complex sounds reuse the same set of exercises as consonants.
-const COMPLEX_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "syllables-mixed", "pronounce", "results"];
+const COMPLEX_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-image", "syllables-mixed", "pronounce", "results"];
 
 const RESULT_ROW_BY_STEP: Record<Exclude<EvalStep, "results">, { label: string; max: number }> = {
   grid: { label: "Reconnaître la lettre", max: 4 },

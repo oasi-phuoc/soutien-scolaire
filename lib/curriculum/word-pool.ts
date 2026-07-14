@@ -888,3 +888,54 @@ export function randomSoundItems(phoneme: string, n = 16, forImages = false): Wo
   const nCount = Math.min(n - yCount, no.length);
   return shuffle([...yes.slice(0, yCount), ...no.slice(0, nCount)]);
 }
+
+function lectureRevisionSoundItems(
+  phonemeA: string,
+  phonemeB: string,
+  forImages = false,
+  requireExclusive = false,
+) {
+  let pool = allWordItems().filter((w) => isLectureSoundPoolWord(w.label));
+  if (forImages) pool = pool.filter((w) => hasLectureWordImage(w.label));
+
+  const items = pool
+    .map((item) => {
+      const hasA = wordHasPhoneme(item, phonemeA);
+      const hasB = wordHasPhoneme(item, phonemeB);
+      if (!hasA && !hasB) return null;
+      if (requireExclusive && hasA && hasB) return null;
+      return {
+        label: item.label,
+        answer: hasA && hasB ? "AB" : hasA ? "A" : "B",
+      } as { label: string; answer: "A" | "B" | "AB" };
+    })
+    .filter(Boolean) as { label: string; answer: "A" | "B" | "AB" }[];
+
+  return items.sort((a, b) => a.label.localeCompare(b.label, "fr", { sensitivity: "base" }));
+}
+
+export function lectureRevisionSoundWords(
+  phonemeA: string,
+  phonemeB: string,
+  count: number,
+  forImages = false,
+  offset = 0,
+) {
+  const items = lectureRevisionSoundItems(phonemeA, phonemeB, forImages, false);
+  if (items.length === 0) return [];
+  const cycle = [...items, ...items];
+  return cycle.slice(offset, offset + count).map(({ label, answer }) => ({ word: label, answer }));
+}
+
+export function lectureRevisionExclusiveSoundWords(
+  phonemeA: string,
+  phonemeB: string,
+  count: number,
+  forImages = false,
+  offset = 0,
+) {
+  const items = lectureRevisionSoundItems(phonemeA, phonemeB, forImages, true);
+  if (items.length === 0) return [];
+  const cycle = [...items, ...items];
+  return cycle.slice(offset, offset + count).map(({ label, answer }) => ({ word: label, answer: answer as "A" | "B" }));
+}
