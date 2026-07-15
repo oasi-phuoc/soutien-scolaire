@@ -172,8 +172,10 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
                 ) : (
                   <span className="h-11 w-11 shrink-0" aria-hidden />
                 )}
-                <span className="min-h-12 px-2 text-center text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
-                  {step.syllable}
+                <span className="min-h-12 px-2 text-center leading-[3rem] text-[var(--color-text-primary)]">
+                  <span className="text-xl font-normal">{step.syllable}</span>
+                  <span className="mx-2 text-base text-[var(--color-text-secondary)]">→</span>
+                  <span className="text-xl font-bold">{step.word}</span>
                 </span>
                 <button
                   type="button"

@@ -89,21 +89,40 @@ function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
   const base =
     "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
   if (!validated) {
-    return state === "selected"
-      ? `${base} border-[var(--color-accent-lecture)]`
-      : `${base} border-[var(--color-border-default)]`;
+    return `${base} border-[var(--color-border-default)]`;
   }
   if (state === "correct") {
     return `${base} border-[var(--color-accent-lecture)]`;
   }
   if (state === "wrong") {
-    return `${base} border-red-400`;
+    return `${base} border-red-400 bg-red-50`;
   }
   if (state === "missed") {
-    return `${base} border-amber-400`;
+    return `${base} border-amber-400 bg-amber-50`;
   }
   if (hasPhoneme) {
-    return `${base} border-amber-400`;
+    return `${base} border-amber-400 bg-amber-50`;
+  }
+  return `${base} border-[var(--color-border-default)]`;
+}
+
+function audioCardClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
+  const base =
+    "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
+  if (!validated) {
+    return `${base} border-[var(--color-border-default)]`;
+  }
+  if (state === "correct") {
+    return `${base} border-[var(--color-accent-lecture)]`;
+  }
+  if (state === "wrong") {
+    return `${base} border-red-400 bg-red-50`;
+  }
+  if (state === "missed") {
+    return `${base} border-amber-400 bg-amber-50`;
+  }
+  if (hasPhoneme) {
+    return `${base} border-amber-400 bg-amber-50`;
   }
   return `${base} border-[var(--color-border-default)]`;
 }
@@ -200,7 +219,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <button
                   type="button"
                   onClick={() => playWord(word.label)}
-                  className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)]"
+                  className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)] bg-white"
                   aria-label={`Écouter ${word.label}`}
                 >
                   {imgSrc ? (
@@ -221,7 +240,6 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                     state={s}
                     validated={validated}
                     hasPhoneme={hasPhoneme}
-                    neutral
                     onClick={() => toggle(i)}
                   />
                 </div>
@@ -294,7 +312,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             return (
               <div
                 key={`${word.label}-${i}`}
-                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
+                className={audioCardClass(s, validated, hasPhoneme)}
               >
                 <button
                   type="button"

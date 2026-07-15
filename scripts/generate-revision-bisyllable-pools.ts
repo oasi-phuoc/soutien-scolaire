@@ -18,6 +18,7 @@ import {
 
 const TARGET = 50;
 const MAX_LEN = 11;
+const PRONOUNCE_MAX_LEN = 6;
 
 const PRON_2_SYL = new Set<string>();
 
@@ -207,8 +208,17 @@ console.log(`\nÉcrit : ${outPath}`);
 
 const pronouncePools: Record<string, { phoneme: string; syllable: string; word: string }[]> = {};
 for (const { letter } of letters) {
-  pronouncePools[letter] = pools[letter]!.map((word) => wordToPronStep(word, letter));
+  pronouncePools[letter] = pools[letter]!
+    .filter((word) => word.length <= PRONOUNCE_MAX_LEN && isBisyllabic(word))
+    .map((word) => wordToPronStep(word, letter));
 }
+
+const pronounceStats = letters.map(({ letter }) => ({
+  letter,
+  count: pronouncePools[letter]!.length,
+}));
+console.log("\nPools prononcer (≤6 lettres, 2 syllabes) :");
+console.table(pronounceStats);
 
 const pronouncePath = resolve(__dirname, "../lib/curriculum/lecture-pronounce-pools.json");
 writeFileSync(pronouncePath, JSON.stringify(pronouncePools, null, 2) + "\n", "utf8");

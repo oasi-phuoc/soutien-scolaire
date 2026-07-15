@@ -22,28 +22,22 @@ interface Props {
 
 type CardSelection = { A: boolean; B: boolean };
 
-const PHONEME_NEUTRAL_CLASS =
-  "rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)] transition-colors disabled:opacity-70";
-
 function isCardCorrect(sel: CardSelection, answer: "A" | "B" | "AB"): boolean {
   const wantsA = answer === "A" || answer === "AB";
   const wantsB = answer === "B" || answer === "AB";
   return sel.A === wantsA && sel.B === wantsB;
 }
 
-function revisionImageCardClass(
+function revisionCardClass(
   sel: CardSelection,
   answer: "A" | "B" | "AB",
   validated: boolean,
 ): string {
   const base =
     "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
-  const hasSelection = sel.A || sel.B;
 
   if (!validated) {
-    return hasSelection
-      ? `${base} border-[var(--color-accent-lecture)]`
-      : `${base} border-[var(--color-border-default)]`;
+    return `${base} border-[var(--color-border-default)]`;
   }
 
   if (isCardCorrect(sel, answer)) {
@@ -58,12 +52,36 @@ function revisionImageCardClass(
   const wrongB = !wantsB && sel.B;
 
   if (missedA || missedB) {
-    return `${base} border-amber-400`;
+    return `${base} border-amber-400 bg-amber-50`;
   }
-  if (wrongA || wrongB || hasSelection) {
-    return `${base} border-red-400`;
+  if (wrongA || wrongB) {
+    return `${base} border-red-400 bg-red-50`;
   }
   return `${base} border-[var(--color-border-default)]`;
+}
+
+function revisionPhonemeButtonClass(
+  isSelected: boolean,
+  validated: boolean,
+  isCorrect: boolean,
+): string {
+  const base =
+    "rounded-full border px-3 py-1 text-xs font-semibold transition-colors disabled:opacity-70";
+  if (!validated) {
+    return isSelected
+      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
+      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+  }
+  if (isSelected && isCorrect) {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
+  }
+  if (isSelected && !isCorrect) {
+    return `${base} border-red-400 bg-red-50 text-red-700`;
+  }
+  if (!isSelected && isCorrect) {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
+  }
+  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
 }
 
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
@@ -137,17 +155,13 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
             return (
               <div
                 key={i}
-                className={
-                  mode === "image"
-                    ? revisionImageCardClass(sel, answer, validated)
-                    : "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
-                }
+                className={revisionCardClass(sel, answer, validated)}
               >
                 {mode === "image" ? (
                   <button
                     type="button"
                     onClick={() => playAudio(word)}
-                    className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)]"
+                    className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)] bg-white"
                     aria-label={`Écouter ${word}`}
                   >
                     {(() => {
@@ -191,21 +205,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                         onClick={() => toggle(i, opt)}
                         disabled={validated}
                         aria-pressed={isSelected}
-                        className={
-                          mode === "image"
-                            ? `${PHONEME_NEUTRAL_CLASS}${isSelected ? " font-bold" : ""}`
-                            : `rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
-                                validated && isSelected
-                                  ? isCorrect
-                                    ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                                    : "border-red-400 bg-red-50 text-red-700"
-                                  : validated && !isSelected && isCorrect
-                                    ? "border-amber-400 bg-amber-50 text-amber-700"
-                                    : isSelected
-                                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                                      : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
-                              }`
-                        }
+                        className={revisionPhonemeButtonClass(isSelected, validated, isCorrect)}
                       >
                         {opt === "A" ? phonemeA : phonemeB}
                       </button>

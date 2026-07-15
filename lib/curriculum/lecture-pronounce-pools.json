@@ -27,11 +27,6 @@
     },
     {
       "phoneme": "a",
-      "syllable": "fro-mage",
-      "word": "fromage"
-    },
-    {
-      "phoneme": "a",
       "syllable": "i-mage",
       "word": "image"
     },
@@ -57,18 +52,8 @@
     },
     {
       "phoneme": "a",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "a",
       "syllable": "al-bum",
       "word": "album"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "a-louette",
-      "word": "alouette"
     },
     {
       "phoneme": "a",
@@ -77,43 +62,13 @@
     },
     {
       "phoneme": "a",
-      "syllable": "a-raignée",
-      "word": "araignée"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "ar-doise",
-      "word": "ardoise"
-    },
-    {
-      "phoneme": "a",
       "syllable": "a-rène",
       "word": "arène"
     },
     {
       "phoneme": "a",
-      "syllable": "ar-moire",
-      "word": "armoire"
-    },
-    {
-      "phoneme": "a",
       "syllable": "ar-mure",
       "word": "armure"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "as-siette",
-      "word": "assiette"
     },
     {
       "phoneme": "a",
@@ -137,23 +92,8 @@
     },
     {
       "phoneme": "a",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "a",
       "syllable": "ba-lai",
       "word": "balai"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "ba-lance",
-      "word": "balance"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "ba-leine",
-      "word": "baleine"
     },
     {
       "phoneme": "a",
@@ -172,23 +112,8 @@
     },
     {
       "phoneme": "a",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "a",
       "syllable": "ba-teau",
       "word": "bateau"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "bil-lard",
-      "word": "billard"
     },
     {
       "phoneme": "a",
@@ -224,11 +149,6 @@
       "phoneme": "a",
       "syllable": "ca-mion",
       "word": "camion"
-    },
-    {
-      "phoneme": "a",
-      "syllable": "cam-pagne",
-      "word": "campagne"
     },
     {
       "phoneme": "a",
@@ -319,11 +239,6 @@
     },
     {
       "phoneme": "o",
-      "syllable": "aut-ruche",
-      "word": "autruche"
-    },
-    {
-      "phoneme": "o",
       "syllable": "a-zote",
       "word": "azote"
     },
@@ -336,11 +251,6 @@
       "phoneme": "o",
       "syllable": "ba-teau",
       "word": "bateau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "ber-ceau",
-      "word": "berceau"
     },
     {
       "phoneme": "o",
@@ -359,43 +269,13 @@
     },
     {
       "phoneme": "o",
-      "syllable": "bor-deaux",
-      "word": "bordeaux"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "o",
       "syllable": "bot-tes",
       "word": "bottes"
     },
     {
       "phoneme": "o",
-      "syllable": "bou-leau",
-      "word": "bouleau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "bous-sole",
-      "word": "boussole"
-    },
-    {
-      "phoneme": "o",
       "syllable": "bo-xe",
       "word": "boxe"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "broc-het",
-      "word": "brochet"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "brow-nie",
-      "word": "brownie"
     },
     {
       "phoneme": "o",
@@ -409,63 +289,8 @@
     },
     {
       "phoneme": "o",
-      "syllable": "ca-rotte",
-      "word": "carotte"
-    },
-    {
-      "phoneme": "o",
       "syllable": "cas-tor",
       "word": "castor"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "cer-ceau",
-      "word": "cerceau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "cer-veau",
-      "word": "cerveau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "cha-meau",
-      "word": "chameau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "cha-peau",
-      "word": "chapeau"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "châ-teau",
-      "word": "château"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "chauf-feur",
-      "word": "chauffeur"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "chaus-sons",
-      "word": "chaussons"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "ci-gogne",
-      "word": "cigogne"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "clô-ture",
-      "word": "clôture"
     },
     {
       "phoneme": "o",
@@ -479,28 +304,8 @@
     },
     {
       "phoneme": "o",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "co-lombe",
-      "word": "colombe"
-    },
-    {
-      "phoneme": "o",
       "syllable": "co-mète",
       "word": "comète"
-    },
-    {
-      "phoneme": "o",
-      "syllable": "com-mode",
-      "word": "commode"
     }
   ],
   "i": [
@@ -556,28 +361,8 @@
     },
     {
       "phoneme": "i",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "i",
       "syllable": "a-mi",
       "word": "ami"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "a-raignée",
-      "word": "araignée"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "as-siette",
-      "word": "assiette"
     },
     {
       "phoneme": "i",
@@ -586,28 +371,8 @@
     },
     {
       "phoneme": "i",
-      "syllable": "ba-leine",
-      "word": "baleine"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "i",
       "syllable": "bi-jou",
       "word": "bijou"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "bil-lard",
-      "word": "billard"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
     },
     {
       "phoneme": "i",
@@ -616,43 +381,13 @@
     },
     {
       "phoneme": "i",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
-    },
-    {
-      "phoneme": "i",
       "syllable": "bre-bis",
       "word": "brebis"
     },
     {
       "phoneme": "i",
-      "syllable": "bri-quet",
-      "word": "briquet"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "brow-nie",
-      "word": "brownie"
-    },
-    {
-      "phoneme": "i",
       "syllable": "ca-hier",
       "word": "cahier"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "cais-sier",
-      "word": "caissier"
     },
     {
       "phoneme": "i",
@@ -681,23 +416,8 @@
     },
     {
       "phoneme": "i",
-      "syllable": "che-minée",
-      "word": "cheminée"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "che-mise",
-      "word": "chemise"
-    },
-    {
-      "phoneme": "i",
       "syllable": "ci-gare",
       "word": "cigare"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "ci-gogne",
-      "word": "cigogne"
     },
     {
       "phoneme": "i",
@@ -706,53 +426,13 @@
     },
     {
       "phoneme": "i",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
-    },
-    {
-      "phoneme": "i",
       "syllable": "cit-ron",
       "word": "citron"
     },
     {
       "phoneme": "i",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "co-riandre",
-      "word": "coriandre"
-    },
-    {
-      "phoneme": "i",
       "syllable": "cra-yon",
       "word": "crayon"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "cri-quet",
-      "word": "criquet"
-    },
-    {
-      "phoneme": "i",
-      "syllable": "cy-lindre",
-      "word": "cylindre"
     }
   ],
   "u": [
@@ -798,16 +478,6 @@
     },
     {
       "phoneme": "u",
-      "syllable": "aut-ruche",
-      "word": "autruche"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "u",
       "syllable": "buf-fet",
       "word": "buffet"
     },
@@ -828,41 +498,6 @@
     },
     {
       "phoneme": "u",
-      "syllable": "cein-ture",
-      "word": "ceinture"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "char-geur",
-      "word": "chargeur"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "chauf-feur",
-      "word": "chauffeur"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "clô-ture",
-      "word": "clôture"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "cu-lotte",
-      "word": "culotte"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "cup-cake",
-      "word": "cupcake"
-    },
-    {
-      "phoneme": "u",
       "syllable": "dé-luge",
       "word": "déluge"
     },
@@ -870,11 +505,6 @@
       "phoneme": "u",
       "syllable": "do-nut",
       "word": "donut"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "du-nette",
-      "word": "dunette"
     },
     {
       "phoneme": "u",
@@ -888,43 +518,13 @@
     },
     {
       "phoneme": "u",
-      "syllable": "fac-teur",
-      "word": "facteur"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "fleu-riste",
-      "word": "fleuriste"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "frac-ture",
-      "word": "fracture"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "gué-pard",
-      "word": "guépard"
-    },
-    {
-      "phoneme": "u",
       "syllable": "i-guane",
       "word": "iguane"
     },
     {
       "phoneme": "u",
-      "syllable": "in-dustrie",
-      "word": "industrie"
-    },
-    {
-      "phoneme": "u",
       "syllable": "ja-guar",
       "word": "jaguar"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "jon-gleur",
-      "word": "jongleur"
     },
     {
       "phoneme": "u",
@@ -938,23 +538,8 @@
     },
     {
       "phoneme": "u",
-      "syllable": "ket-chup",
-      "word": "ketchup"
-    },
-    {
-      "phoneme": "u",
       "syllable": "lé-gu-me",
       "word": "légume"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "lu-carne",
-      "word": "lucarne"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "lu-ciole",
-      "word": "luciole"
     },
     {
       "phoneme": "u",
@@ -963,18 +548,8 @@
     },
     {
       "phoneme": "u",
-      "syllable": "mar-queur",
-      "word": "marqueur"
-    },
-    {
-      "phoneme": "u",
       "syllable": "mé-duse",
       "word": "méduse"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "me-ringue",
-      "word": "meringue"
     },
     {
       "phoneme": "u",
@@ -990,21 +565,6 @@
       "phoneme": "u",
       "syllable": "mu-ret",
       "word": "muret"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "mu-sique",
-      "word": "musique"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "pêc-heur",
-      "word": "pêcheur"
-    },
-    {
-      "phoneme": "u",
-      "syllable": "pein-ture",
-      "word": "peinture"
     }
   ],
   "e": [
@@ -1040,68 +600,8 @@
     },
     {
       "phoneme": "e",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "a-louette",
-      "word": "alouette"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "an-tenne",
-      "word": "antenne"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "a-raignée",
-      "word": "araignée"
-    },
-    {
-      "phoneme": "e",
       "syllable": "a-rène",
       "word": "arène"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "as-siette",
-      "word": "assiette"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "ba-leine",
-      "word": "baleine"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "beig-net",
-      "word": "beignet"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "ber-ceau",
-      "word": "berceau"
     },
     {
       "phoneme": "e",
@@ -1115,43 +615,13 @@
     },
     {
       "phoneme": "e",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "e",
       "syllable": "bot-tes",
       "word": "bottes"
     },
     {
       "phoneme": "e",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "bou-quet",
-      "word": "bouquet"
-    },
-    {
-      "phoneme": "e",
       "syllable": "bre-bis",
       "word": "brebis"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "bri-quet",
-      "word": "briquet"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "broc-het",
-      "word": "brochet"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "brouet-te",
-      "word": "brouette"
     },
     {
       "phoneme": "e",
@@ -1170,28 +640,8 @@
     },
     {
       "phoneme": "e",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "cer-ceau",
-      "word": "cerceau"
-    },
-    {
-      "phoneme": "e",
       "syllable": "ce-rise",
       "word": "cerise"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "cer-veau",
-      "word": "cerveau"
     },
     {
       "phoneme": "e",
@@ -1200,58 +650,8 @@
     },
     {
       "phoneme": "e",
-      "syllable": "char-geur",
-      "word": "chargeur"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "chauf-feur",
-      "word": "chauffeur"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "che-minée",
-      "word": "cheminée"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "che-mise",
-      "word": "chemise"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "che-nille",
-      "word": "chenille"
-    },
-    {
-      "phoneme": "e",
       "syllable": "che-val",
       "word": "cheval"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "che-veux",
-      "word": "cheveux"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "chouet-te",
-      "word": "chouette"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "e",
-      "syllable": "col-lier",
-      "word": "collier"
     },
     {
       "phoneme": "e",
@@ -1267,11 +667,6 @@
     },
     {
       "phoneme": "y",
-      "syllable": "mys-tère",
-      "word": "mystère"
-    },
-    {
-      "phoneme": "y",
       "syllable": "sty-lo",
       "word": "stylo"
     },
@@ -1282,28 +677,8 @@
     },
     {
       "phoneme": "y",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "y",
       "syllable": "a-mi",
       "word": "ami"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "a-raignée",
-      "word": "araignée"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "as-siette",
-      "word": "assiette"
     },
     {
       "phoneme": "y",
@@ -1312,28 +687,8 @@
     },
     {
       "phoneme": "y",
-      "syllable": "ba-leine",
-      "word": "baleine"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "y",
       "syllable": "bi-jou",
       "word": "bijou"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "bil-lard",
-      "word": "billard"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
     },
     {
       "phoneme": "y",
@@ -1342,43 +697,13 @@
     },
     {
       "phoneme": "y",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
-    },
-    {
-      "phoneme": "y",
       "syllable": "bre-bis",
       "word": "brebis"
     },
     {
       "phoneme": "y",
-      "syllable": "bri-quet",
-      "word": "briquet"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "brow-nie",
-      "word": "brownie"
-    },
-    {
-      "phoneme": "y",
       "syllable": "ca-hier",
       "word": "cahier"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "cais-sier",
-      "word": "caissier"
     },
     {
       "phoneme": "y",
@@ -1407,23 +732,8 @@
     },
     {
       "phoneme": "y",
-      "syllable": "che-minée",
-      "word": "cheminée"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "che-mise",
-      "word": "chemise"
-    },
-    {
-      "phoneme": "y",
       "syllable": "ci-gare",
       "word": "cigare"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "ci-gogne",
-      "word": "cigogne"
     },
     {
       "phoneme": "y",
@@ -1432,38 +742,8 @@
     },
     {
       "phoneme": "y",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
-    },
-    {
-      "phoneme": "y",
       "syllable": "cit-ron",
       "word": "citron"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "co-riandre",
-      "word": "coriandre"
     },
     {
       "phoneme": "y",
@@ -1472,43 +752,13 @@
     },
     {
       "phoneme": "y",
-      "syllable": "cri-quet",
-      "word": "criquet"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "cy-lindre",
-      "word": "cylindre"
-    },
-    {
-      "phoneme": "y",
       "syllable": "cyp-rès",
       "word": "cyprès"
     },
     {
       "phoneme": "y",
-      "syllable": "den-tiste",
-      "word": "dentiste"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "di-manche",
-      "word": "dimanche"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "dip-lôme",
-      "word": "diplôme"
-    },
-    {
-      "phoneme": "y",
       "syllable": "di-van",
       "word": "divan"
-    },
-    {
-      "phoneme": "y",
-      "syllable": "dos-sier",
-      "word": "dossier"
     }
   ],
   "b": [
@@ -1549,38 +799,13 @@
     },
     {
       "phoneme": "b",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "b",
       "syllable": "al-bum",
       "word": "album"
     },
     {
       "phoneme": "b",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "baig-noire",
-      "word": "baignoire"
-    },
-    {
-      "phoneme": "b",
       "syllable": "ba-lai",
       "word": "balai"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "ba-lance",
-      "word": "balance"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "ba-leine",
-      "word": "baleine"
     },
     {
       "phoneme": "b",
@@ -1594,28 +819,8 @@
     },
     {
       "phoneme": "b",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "b",
       "syllable": "ba-teau",
       "word": "bateau"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "beig-net",
-      "word": "beignet"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "ber-ceau",
-      "word": "berceau"
     },
     {
       "phoneme": "b",
@@ -1629,21 +834,6 @@
     },
     {
       "phoneme": "b",
-      "syllable": "bil-lard",
-      "word": "billard"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "blou-son",
-      "word": "blouson"
-    },
-    {
-      "phoneme": "b",
       "syllable": "bo-bine",
       "word": "bobine"
     },
@@ -1651,11 +841,6 @@
       "phoneme": "b",
       "syllable": "bo-cal",
       "word": "bocal"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bois-son",
-      "word": "boisson"
     },
     {
       "phoneme": "b",
@@ -1669,63 +854,13 @@
     },
     {
       "phoneme": "b",
-      "syllable": "bor-deaux",
-      "word": "bordeaux"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "b",
       "syllable": "bot-tes",
       "word": "bottes"
     },
     {
       "phoneme": "b",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bou-leau",
-      "word": "bouleau"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bou-quet",
-      "word": "bouquet"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bour-don",
-      "word": "bourdon"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bous-sole",
-      "word": "boussole"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bou-teille",
-      "word": "bouteille"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "b",
       "syllable": "bou-ton",
       "word": "bouton"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
     },
     {
       "phoneme": "b",
@@ -1736,31 +871,6 @@
       "phoneme": "b",
       "syllable": "bre-bis",
       "word": "brebis"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "brin-dille",
-      "word": "brindille"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "bri-quet",
-      "word": "briquet"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "broc-het",
-      "word": "brochet"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "brouet-te",
-      "word": "brouette"
-    },
-    {
-      "phoneme": "b",
-      "syllable": "brow-nie",
-      "word": "brownie"
     }
   ],
   "c": [
@@ -1781,11 +891,6 @@
     },
     {
       "phoneme": "c",
-      "syllable": "ca-rotte",
-      "word": "carotte"
-    },
-    {
-      "phoneme": "c",
       "syllable": "co-co",
       "word": "coco"
     },
@@ -1796,43 +901,8 @@
     },
     {
       "phoneme": "c",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
-    },
-    {
-      "phoneme": "c",
       "syllable": "bo-cal",
       "word": "bocal"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bou-quet",
-      "word": "bouquet"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "bri-quet",
-      "word": "briquet"
     },
     {
       "phoneme": "c",
@@ -1851,11 +921,6 @@
     },
     {
       "phoneme": "c",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "c",
       "syllable": "cal-cul",
       "word": "calcul"
     },
@@ -1863,11 +928,6 @@
       "phoneme": "c",
       "syllable": "ca-mion",
       "word": "camion"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cam-pagne",
-      "word": "campagne"
     },
     {
       "phoneme": "c",
@@ -1886,21 +946,6 @@
     },
     {
       "phoneme": "c",
-      "syllable": "caout-chouc",
-      "word": "caoutchouc"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "car-table",
-      "word": "cartable"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "c",
       "syllable": "cas-sis",
       "word": "cassis"
     },
@@ -1908,26 +953,6 @@
       "phoneme": "c",
       "syllable": "cas-tor",
       "word": "castor"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cloi-son",
-      "word": "cloison"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "clô-ture",
-      "word": "clôture"
     },
     {
       "phoneme": "c",
@@ -1941,28 +966,8 @@
     },
     {
       "phoneme": "c",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "co-lombe",
-      "word": "colombe"
-    },
-    {
-      "phoneme": "c",
       "syllable": "co-mète",
       "word": "comète"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "com-mode",
-      "word": "commode"
     },
     {
       "phoneme": "c",
@@ -1971,48 +976,13 @@
     },
     {
       "phoneme": "c",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "con-combre",
-      "word": "concombre"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "co-quille",
-      "word": "coquille"
-    },
-    {
-      "phoneme": "c",
       "syllable": "co-rail",
       "word": "corail"
     },
     {
       "phoneme": "c",
-      "syllable": "cor-beau",
-      "word": "corbeau"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "co-riandre",
-      "word": "coriandre"
-    },
-    {
-      "phoneme": "c",
       "syllable": "co-ton",
       "word": "coton"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cou-loir",
-      "word": "couloir"
-    },
-    {
-      "phoneme": "c",
-      "syllable": "cour-gette",
-      "word": "courgette"
     }
   ],
   "d": [
@@ -2033,48 +1003,8 @@
     },
     {
       "phoneme": "d",
-      "syllable": "ar-doise",
-      "word": "ardoise"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "bor-deaux",
-      "word": "bordeaux"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "bour-don",
-      "word": "bourdon"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "brin-dille",
-      "word": "brindille"
-    },
-    {
-      "phoneme": "d",
       "syllable": "ca-deau",
       "word": "cadeau"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "com-mode",
-      "word": "commode"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "co-riandre",
-      "word": "coriandre"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "cy-lindre",
-      "word": "cylindre"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "daup-hin",
-      "word": "dauphin"
     },
     {
       "phoneme": "d",
@@ -2083,33 +1013,13 @@
     },
     {
       "phoneme": "d",
-      "syllable": "den-tiste",
-      "word": "dentiste"
-    },
-    {
-      "phoneme": "d",
       "syllable": "dé-sert",
       "word": "désert"
     },
     {
       "phoneme": "d",
-      "syllable": "des-sert",
-      "word": "dessert"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "di-manche",
-      "word": "dimanche"
-    },
-    {
-      "phoneme": "d",
       "syllable": "din-don",
       "word": "dindon"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "dip-lôme",
-      "word": "diplôme"
     },
     {
       "phoneme": "d",
@@ -2133,43 +1043,8 @@
     },
     {
       "phoneme": "d",
-      "syllable": "dos-sier",
-      "word": "dossier"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "dra-peau",
-      "word": "drapeau"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "du-nette",
-      "word": "dunette"
-    },
-    {
-      "phoneme": "d",
       "syllable": "du-rion",
       "word": "durion"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "en-droit",
-      "word": "endroit"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "gre-nade",
-      "word": "grenade"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "guir-lande",
-      "word": "guirlande"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "han-dball",
-      "word": "handball"
     },
     {
       "phoneme": "d",
@@ -2180,11 +1055,6 @@
       "phoneme": "d",
       "syllable": "in-dien",
       "word": "indien"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "in-dustrie",
-      "word": "industrie"
     },
     {
       "phoneme": "d",
@@ -2203,18 +1073,8 @@
     },
     {
       "phoneme": "d",
-      "syllable": "la-vande",
-      "word": "lavande"
-    },
-    {
-      "phoneme": "d",
       "syllable": "lun-di",
       "word": "lundi"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "mé-daille",
-      "word": "médaille"
     },
     {
       "phoneme": "d",
@@ -2228,43 +1088,13 @@
     },
     {
       "phoneme": "d",
-      "syllable": "or-chidée",
-      "word": "orchidée"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "ou-tarde",
-      "word": "outarde"
-    },
-    {
-      "phoneme": "d",
       "syllable": "pan-da",
       "word": "panda"
     },
     {
       "phoneme": "d",
-      "syllable": "pen-derie",
-      "word": "penderie"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "pen-dule",
-      "word": "pendule"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "per-drix",
-      "word": "perdrix"
-    },
-    {
-      "phoneme": "d",
       "syllable": "pi-nède",
       "word": "pinède"
-    },
-    {
-      "phoneme": "d",
-      "syllable": "pin-tade",
-      "word": "pintade"
     }
   ],
   "g": [
@@ -2280,28 +1110,8 @@
     },
     {
       "phoneme": "g",
-      "syllable": "go-rille",
-      "word": "gorille"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gui-tare",
-      "word": "guitare"
-    },
-    {
-      "phoneme": "g",
       "syllable": "lé-gu-me",
       "word": "légume"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "ci-gogne",
-      "word": "cigogne"
     },
     {
       "phoneme": "g",
@@ -2320,53 +1130,13 @@
     },
     {
       "phoneme": "g",
-      "syllable": "é-pingle",
-      "word": "épingle"
-    },
-    {
-      "phoneme": "g",
       "syllable": "é-tang",
       "word": "étang"
     },
     {
       "phoneme": "g",
-      "syllable": "frag-ment",
-      "word": "fragment"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "ga-laxie",
-      "word": "galaxie"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "ga-zette",
-      "word": "gazette"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gla-cier",
-      "word": "glacier"
-    },
-    {
-      "phoneme": "g",
       "syllable": "gla-çon",
       "word": "glaçon"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "glou-ton",
-      "word": "glouton"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gly-cine",
-      "word": "glycine"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "goé-land",
-      "word": "goéland"
     },
     {
       "phoneme": "g",
@@ -2380,68 +1150,13 @@
     },
     {
       "phoneme": "g",
-      "syllable": "gout-tière",
-      "word": "gouttière"
-    },
-    {
-      "phoneme": "g",
       "syllable": "gra-tin",
       "word": "gratin"
     },
     {
       "phoneme": "g",
-      "syllable": "gra-vier",
-      "word": "gravier"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gre-nade",
-      "word": "grenade"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gre-nouille",
-      "word": "grenouille"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gril-lon",
-      "word": "grillon"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "griz-zly",
-      "word": "grizzly"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gro-seille",
-      "word": "groseille"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gué-pard",
-      "word": "guépard"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "guir-lande",
-      "word": "guirlande"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "gui-toune",
-      "word": "guitoune"
-    },
-    {
-      "phoneme": "g",
       "syllable": "han-gar",
       "word": "hangar"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "har-fang",
-      "word": "harfang"
     },
     {
       "phoneme": "g",
@@ -2460,26 +1175,6 @@
     },
     {
       "phoneme": "g",
-      "syllable": "jon-gleur",
-      "word": "jongleur"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "lan-gouste",
-      "word": "langouste"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "lég-ging",
-      "word": "légging"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "me-ringue",
-      "word": "meringue"
-    },
-    {
-      "phoneme": "g",
       "syllable": "mu-guet",
       "word": "muguet"
     },
@@ -2490,33 +1185,8 @@
     },
     {
       "phoneme": "g",
-      "syllable": "pin-gouin",
-      "word": "pingouin"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "rec-tangle",
-      "word": "rectangle"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "rég-lisse",
-      "word": "réglisse"
-    },
-    {
-      "phoneme": "g",
       "syllable": "ri-gole",
       "word": "rigole"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "san-glier",
-      "word": "sanglier"
-    },
-    {
-      "phoneme": "g",
-      "syllable": "vi-naigre",
-      "word": "vinaigre"
     }
   ],
   "k": [
@@ -2537,58 +1207,13 @@
     },
     {
       "phoneme": "k",
-      "syllable": "ki-osque",
-      "word": "kiosque"
-    },
-    {
-      "phoneme": "k",
       "syllable": "ko-a-la",
       "word": "koala"
     },
     {
       "phoneme": "k",
-      "syllable": "par-king",
-      "word": "parking"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
-    },
-    {
-      "phoneme": "k",
       "syllable": "bo-cal",
       "word": "bocal"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bou-quet",
-      "word": "bouquet"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "bri-quet",
-      "word": "briquet"
     },
     {
       "phoneme": "k",
@@ -2612,11 +1237,6 @@
     },
     {
       "phoneme": "k",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "k",
       "syllable": "cal-cul",
       "word": "calcul"
     },
@@ -2624,11 +1244,6 @@
       "phoneme": "k",
       "syllable": "ca-mion",
       "word": "camion"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "cam-pagne",
-      "word": "campagne"
     },
     {
       "phoneme": "k",
@@ -2652,26 +1267,6 @@
     },
     {
       "phoneme": "k",
-      "syllable": "caout-chouc",
-      "word": "caoutchouc"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "ca-rotte",
-      "word": "carotte"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "car-table",
-      "word": "cartable"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "k",
       "syllable": "cas-sis",
       "word": "cassis"
     },
@@ -2679,26 +1274,6 @@
       "phoneme": "k",
       "syllable": "cas-tor",
       "word": "castor"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "cloi-son",
-      "word": "cloison"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "clô-ture",
-      "word": "clôture"
     },
     {
       "phoneme": "k",
@@ -2712,28 +1287,8 @@
     },
     {
       "phoneme": "k",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "co-lombe",
-      "word": "colombe"
-    },
-    {
-      "phoneme": "k",
       "syllable": "co-mète",
       "word": "comète"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "com-mode",
-      "word": "commode"
     },
     {
       "phoneme": "k",
@@ -2742,33 +1297,8 @@
     },
     {
       "phoneme": "k",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "con-combre",
-      "word": "concombre"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "co-quille",
-      "word": "coquille"
-    },
-    {
-      "phoneme": "k",
       "syllable": "co-rail",
       "word": "corail"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "cor-beau",
-      "word": "corbeau"
-    },
-    {
-      "phoneme": "k",
-      "syllable": "co-riandre",
-      "word": "coriandre"
     }
   ],
   "p": [
@@ -2789,63 +1319,13 @@
     },
     {
       "phoneme": "p",
-      "syllable": "am-poule",
-      "word": "ampoule"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "cam-pagne",
-      "word": "campagne"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "cha-peau",
-      "word": "chapeau"
-    },
-    {
-      "phoneme": "p",
       "syllable": "com-pas",
       "word": "compas"
     },
     {
       "phoneme": "p",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "cra-paud",
-      "word": "crapaud"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "cup-cake",
-      "word": "cupcake"
-    },
-    {
-      "phoneme": "p",
       "syllable": "cyp-rès",
       "word": "cyprès"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "dip-lôme",
-      "word": "diplôme"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "dra-peau",
-      "word": "drapeau"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "éc-harpe",
-      "word": "écharpe"
     },
     {
       "phoneme": "p",
@@ -2856,11 +1336,6 @@
       "phoneme": "p",
       "syllable": "é-pice",
       "word": "épice"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "é-pingle",
-      "word": "épingle"
     },
     {
       "phoneme": "p",
@@ -2879,11 +1354,6 @@
     },
     {
       "phoneme": "p",
-      "syllable": "gué-pard",
-      "word": "guépard"
-    },
-    {
-      "phoneme": "p",
       "syllable": "ja-pon",
       "word": "japon"
     },
@@ -2899,11 +1369,6 @@
     },
     {
       "phoneme": "p",
-      "syllable": "pal-mier",
-      "word": "palmier"
-    },
-    {
-      "phoneme": "p",
       "syllable": "pan-da",
       "word": "panda"
     },
@@ -2911,11 +1376,6 @@
       "phoneme": "p",
       "syllable": "pa-nier",
       "word": "panier"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pan-thère",
-      "word": "panthère"
     },
     {
       "phoneme": "p",
@@ -2929,23 +1389,8 @@
     },
     {
       "phoneme": "p",
-      "syllable": "pa-rapluie",
-      "word": "parapluie"
-    },
-    {
-      "phoneme": "p",
       "syllable": "par-fum",
       "word": "parfum"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pas-soire",
-      "word": "passoire"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pas-tèque",
-      "word": "pastèque"
     },
     {
       "phoneme": "p",
@@ -2959,58 +1404,13 @@
     },
     {
       "phoneme": "p",
-      "syllable": "pêc-heur",
-      "word": "pêcheur"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pein-ture",
-      "word": "peinture"
-    },
-    {
-      "phoneme": "p",
       "syllable": "pe-lote",
       "word": "pelote"
     },
     {
       "phoneme": "p",
-      "syllable": "pe-luche",
-      "word": "peluche"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pen-derie",
-      "word": "penderie"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pen-dule",
-      "word": "pendule"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pé-niche",
-      "word": "péniche"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "per-drix",
-      "word": "perdrix"
-    },
-    {
-      "phoneme": "p",
       "syllable": "per-sil",
       "word": "persil"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "pé-tiole",
-      "word": "pétiole"
-    },
-    {
-      "phoneme": "p",
-      "syllable": "peup-lier",
-      "word": "peuplier"
     },
     {
       "phoneme": "p",
@@ -3041,43 +1441,8 @@
     },
     {
       "phoneme": "qu",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "bo-cal",
       "word": "bocal"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bou-quet",
-      "word": "bouquet"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "bri-quet",
-      "word": "briquet"
     },
     {
       "phoneme": "qu",
@@ -3101,11 +1466,6 @@
     },
     {
       "phoneme": "qu",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "cal-cul",
       "word": "calcul"
     },
@@ -3113,11 +1473,6 @@
       "phoneme": "qu",
       "syllable": "ca-mion",
       "word": "camion"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cam-pagne",
-      "word": "campagne"
     },
     {
       "phoneme": "qu",
@@ -3141,26 +1496,6 @@
     },
     {
       "phoneme": "qu",
-      "syllable": "caout-chouc",
-      "word": "caoutchouc"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "ca-rotte",
-      "word": "carotte"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "car-table",
-      "word": "cartable"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "cas-sis",
       "word": "cassis"
     },
@@ -3168,26 +1503,6 @@
       "phoneme": "qu",
       "syllable": "cas-tor",
       "word": "castor"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cloi-son",
-      "word": "cloison"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "clô-ture",
-      "word": "clôture"
     },
     {
       "phoneme": "qu",
@@ -3201,28 +1516,8 @@
     },
     {
       "phoneme": "qu",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "co-lombe",
-      "word": "colombe"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "co-mète",
       "word": "comète"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "com-mode",
-      "word": "commode"
     },
     {
       "phoneme": "qu",
@@ -3231,48 +1526,13 @@
     },
     {
       "phoneme": "qu",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "con-combre",
-      "word": "concombre"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "co-quille",
-      "word": "coquille"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "co-rail",
       "word": "corail"
     },
     {
       "phoneme": "qu",
-      "syllable": "cor-beau",
-      "word": "corbeau"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "co-riandre",
-      "word": "coriandre"
-    },
-    {
-      "phoneme": "qu",
       "syllable": "co-ton",
       "word": "coton"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cou-loir",
-      "word": "couloir"
-    },
-    {
-      "phoneme": "qu",
-      "syllable": "cour-gette",
-      "word": "courgette"
     }
   ],
   "t": [
@@ -3280,11 +1540,6 @@
       "phoneme": "t",
       "syllable": "ba-teau",
       "word": "bateau"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "ca-rotte",
-      "word": "carotte"
     },
     {
       "phoneme": "t",
@@ -3303,26 +1558,6 @@
     },
     {
       "phoneme": "t",
-      "syllable": "a-louette",
-      "word": "alouette"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "an-tenne",
-      "word": "antenne"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "as-siette",
-      "word": "assiette"
-    },
-    {
-      "phoneme": "t",
       "syllable": "at-las",
       "word": "atlas"
     },
@@ -3333,28 +1568,8 @@
     },
     {
       "phoneme": "t",
-      "syllable": "aut-ruche",
-      "word": "autruche"
-    },
-    {
-      "phoneme": "t",
       "syllable": "a-zote",
       "word": "azote"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "ba-guette",
-      "word": "baguette"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "bat-terie",
-      "word": "batterie"
     },
     {
       "phoneme": "t",
@@ -3363,23 +1578,8 @@
     },
     {
       "phoneme": "t",
-      "syllable": "bou-teille",
-      "word": "bouteille"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "bou-tique",
-      "word": "boutique"
-    },
-    {
-      "phoneme": "t",
       "syllable": "bou-ton",
       "word": "bouton"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "brouet-te",
-      "word": "brouette"
     },
     {
       "phoneme": "t",
@@ -3388,38 +1588,8 @@
     },
     {
       "phoneme": "t",
-      "syllable": "caout-chouc",
-      "word": "caoutchouc"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "car-table",
-      "word": "cartable"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "t",
       "syllable": "cas-tor",
       "word": "castor"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cein-ture",
-      "word": "ceinture"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "châ-teau",
-      "word": "château"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "chouet-te",
-      "word": "chouette"
     },
     {
       "phoneme": "t",
@@ -3428,68 +1598,13 @@
     },
     {
       "phoneme": "t",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "clô-ture",
-      "word": "clôture"
-    },
-    {
-      "phoneme": "t",
       "syllable": "co-mète",
       "word": "comète"
     },
     {
       "phoneme": "t",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
-    },
-    {
-      "phoneme": "t",
       "syllable": "co-ton",
       "word": "coton"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cour-gette",
-      "word": "courgette"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cou-teau",
-      "word": "couteau"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cra-vate",
-      "word": "cravate"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cre-vette",
-      "word": "crevette"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "cu-lotte",
-      "word": "culotte"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "den-tiste",
-      "word": "dentiste"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "du-nette",
-      "word": "dunette"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "en-ceinte",
-      "word": "enceinte"
     },
     {
       "phoneme": "t",
@@ -3510,21 +1625,6 @@
       "phoneme": "t",
       "syllable": "e-toile",
       "word": "etoile"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "fac-teur",
-      "word": "facteur"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "fan-tôme",
-      "word": "fantôme"
-    },
-    {
-      "phoneme": "t",
-      "syllable": "fau-teuil",
-      "word": "fauteuil"
     }
   ],
   "f": [
@@ -3560,21 +1660,6 @@
     },
     {
       "phoneme": "f",
-      "syllable": "chauf-feur",
-      "word": "chauffeur"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "daup-hin",
-      "word": "dauphin"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "ef-frayant",
-      "word": "effrayant"
-    },
-    {
-      "phoneme": "f",
       "syllable": "en-fant",
       "word": "enfant"
     },
@@ -3585,63 +1670,13 @@
     },
     {
       "phoneme": "f",
-      "syllable": "fac-teur",
-      "word": "facteur"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fa-laise",
-      "word": "falaise"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fa-mille",
-      "word": "famille"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fan-fare",
-      "word": "fanfare"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fan-tôme",
-      "word": "fantôme"
-    },
-    {
-      "phoneme": "f",
       "syllable": "fau-con",
       "word": "faucon"
     },
     {
       "phoneme": "f",
-      "syllable": "fau-teuil",
-      "word": "fauteuil"
-    },
-    {
-      "phoneme": "f",
       "syllable": "fé-e",
       "word": "fée"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fe-netre",
-      "word": "fenetre"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fe-nêtre",
-      "word": "fenêtre"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fe-nouil",
-      "word": "fenouil"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fer-mier",
-      "word": "fermier"
     },
     {
       "phoneme": "f",
@@ -3655,11 +1690,6 @@
     },
     {
       "phoneme": "f",
-      "syllable": "fi-celle",
-      "word": "ficelle"
-    },
-    {
-      "phoneme": "f",
       "syllable": "fi-let",
       "word": "filet"
     },
@@ -3670,38 +1700,8 @@
     },
     {
       "phoneme": "f",
-      "syllable": "fla-mant",
-      "word": "flamant"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fleu-riste",
-      "word": "fleuriste"
-    },
-    {
-      "phoneme": "f",
       "syllable": "flo-con",
       "word": "flocon"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fon-taine",
-      "word": "fontaine"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "foot-ball",
-      "word": "football"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fou-lard",
-      "word": "foulard"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "four-chette",
-      "word": "fourchette"
     },
     {
       "phoneme": "f",
@@ -3710,43 +1710,13 @@
     },
     {
       "phoneme": "f",
-      "syllable": "frac-ture",
-      "word": "fracture"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "frag-ment",
-      "word": "fragment"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fram-boise",
-      "word": "framboise"
-    },
-    {
-      "phoneme": "f",
       "syllable": "fri-tes",
       "word": "frites"
     },
     {
       "phoneme": "f",
-      "syllable": "fro-mage",
-      "word": "fromage"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "fron-tière",
-      "word": "frontière"
-    },
-    {
-      "phoneme": "f",
       "syllable": "gi-rafe",
       "word": "girafe"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "har-fang",
-      "word": "harfang"
     },
     {
       "phoneme": "f",
@@ -3760,18 +1730,8 @@
     },
     {
       "phoneme": "f",
-      "syllable": "phar-macie",
-      "word": "pharmacie"
-    },
-    {
-      "phoneme": "f",
       "syllable": "pho-to",
       "word": "photo"
-    },
-    {
-      "phoneme": "f",
-      "syllable": "pré-fixe",
-      "word": "préfixe"
     },
     {
       "phoneme": "f",
@@ -3787,11 +1747,6 @@
     },
     {
       "phoneme": "j",
-      "syllable": "bon-jour",
-      "word": "bonjour"
-    },
-    {
-      "phoneme": "j",
       "syllable": "jar-din",
       "word": "jardin"
     },
@@ -3802,28 +1757,8 @@
     },
     {
       "phoneme": "j",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "j",
       "syllable": "ban-jo",
       "word": "banjo"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "bar-rage",
-      "word": "barrage"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "char-geur",
-      "word": "chargeur"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "cour-gette",
-      "word": "courgette"
     },
     {
       "phoneme": "j",
@@ -3839,11 +1774,6 @@
       "phoneme": "j",
       "syllable": "é-ponge",
       "word": "éponge"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "fro-mage",
-      "word": "fromage"
     },
     {
       "phoneme": "j",
@@ -3867,43 +1797,13 @@
     },
     {
       "phoneme": "j",
-      "syllable": "gi-rouette",
-      "word": "girouette"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "gym-nase",
-      "word": "gymnase"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "hor-loge",
-      "word": "horloge"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "hy-giène",
-      "word": "hygiène"
-    },
-    {
-      "phoneme": "j",
       "syllable": "i-mage",
       "word": "image"
     },
     {
       "phoneme": "j",
-      "syllable": "ja-cinthe",
-      "word": "jacinthe"
-    },
-    {
-      "phoneme": "j",
       "syllable": "ja-guar",
       "word": "jaguar"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "ja-lousie",
-      "word": "jalousie"
     },
     {
       "phoneme": "j",
@@ -3932,16 +1832,6 @@
     },
     {
       "phoneme": "j",
-      "syllable": "jon-gleur",
-      "word": "jongleur"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "jon-quille",
-      "word": "jonquille"
-    },
-    {
-      "phoneme": "j",
       "syllable": "joue",
       "word": "joue"
     },
@@ -3952,18 +1842,8 @@
     },
     {
       "phoneme": "j",
-      "syllable": "jour-nal",
-      "word": "journal"
-    },
-    {
-      "phoneme": "j",
       "syllable": "ju-do",
       "word": "judo"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "juil-let",
-      "word": "juillet"
     },
     {
       "phoneme": "j",
@@ -3972,38 +1852,13 @@
     },
     {
       "phoneme": "j",
-      "syllable": "lég-ging",
-      "word": "légging"
-    },
-    {
-      "phoneme": "j",
       "syllable": "li-tige",
       "word": "litige"
     },
     {
       "phoneme": "j",
-      "syllable": "lo-sange",
-      "word": "losange"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "mé-sange",
-      "word": "mésange"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "mes-sage",
-      "word": "message"
-    },
-    {
-      "phoneme": "j",
       "syllable": "mi-rage",
       "word": "mirage"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "ni-gelle",
-      "word": "nigelle"
     },
     {
       "phoneme": "j",
@@ -4017,18 +1872,8 @@
     },
     {
       "phoneme": "j",
-      "syllable": "pas-sage",
-      "word": "passage"
-    },
-    {
-      "phoneme": "j",
       "syllable": "pi-geon",
       "word": "pigeon"
-    },
-    {
-      "phoneme": "j",
-      "syllable": "plon-geon",
-      "word": "plongeon"
     }
   ],
   "l": [
@@ -4054,23 +1899,8 @@
     },
     {
       "phoneme": "l",
-      "syllable": "a-beille",
-      "word": "abeille"
-    },
-    {
-      "phoneme": "l",
       "syllable": "al-bum",
       "word": "album"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "a-louette",
-      "word": "alouette"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "am-poule",
-      "word": "ampoule"
     },
     {
       "phoneme": "l",
@@ -4084,28 +1914,8 @@
     },
     {
       "phoneme": "l",
-      "syllable": "ba-lance",
-      "word": "balance"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "ba-leine",
-      "word": "baleine"
-    },
-    {
-      "phoneme": "l",
       "syllable": "ba-lle",
       "word": "balle"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "bil-lard",
-      "word": "billard"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "blou-son",
-      "word": "blouson"
     },
     {
       "phoneme": "l",
@@ -4114,33 +1924,8 @@
     },
     {
       "phoneme": "l",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "bou-leau",
-      "word": "bouleau"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "bous-sole",
-      "word": "boussole"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
-    },
-    {
-      "phoneme": "l",
       "syllable": "cal-cul",
       "word": "calcul"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "car-table",
-      "word": "cartable"
     },
     {
       "phoneme": "l",
@@ -4154,63 +1939,8 @@
     },
     {
       "phoneme": "l",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "cloi-son",
-      "word": "cloison"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "clô-ture",
-      "word": "clôture"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "co-lombe",
-      "word": "colombe"
-    },
-    {
-      "phoneme": "l",
       "syllable": "co-rail",
       "word": "corail"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "cou-loir",
-      "word": "couloir"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "cu-lotte",
-      "word": "culotte"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "cy-lindre",
-      "word": "cylindre"
     },
     {
       "phoneme": "l",
@@ -4219,18 +1949,8 @@
     },
     {
       "phoneme": "l",
-      "syllable": "dip-lôme",
-      "word": "diplôme"
-    },
-    {
-      "phoneme": "l",
       "syllable": "dol-men",
       "word": "dolmen"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "éc-helle",
-      "word": "échelle"
     },
     {
       "phoneme": "l",
@@ -4256,11 +1976,6 @@
       "phoneme": "l",
       "syllable": "é-paule",
       "word": "épaule"
-    },
-    {
-      "phoneme": "l",
-      "syllable": "é-pingle",
-      "word": "épingle"
     },
     {
       "phoneme": "l",
@@ -4316,11 +2031,6 @@
     },
     {
       "phoneme": "m",
-      "syllable": "ar-moire",
-      "word": "armoire"
-    },
-    {
-      "phoneme": "m",
       "syllable": "ar-mure",
       "word": "armure"
     },
@@ -4336,21 +2046,6 @@
     },
     {
       "phoneme": "m",
-      "syllable": "cha-meau",
-      "word": "chameau"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "che-minée",
-      "word": "cheminée"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "che-mise",
-      "word": "chemise"
-    },
-    {
-      "phoneme": "m",
       "syllable": "ci-ment",
       "word": "ciment"
     },
@@ -4358,21 +2053,6 @@
       "phoneme": "m",
       "syllable": "co-mète",
       "word": "comète"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "com-mode",
-      "word": "commode"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "di-manche",
-      "word": "dimanche"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "dip-lôme",
-      "word": "diplôme"
     },
     {
       "phoneme": "m",
@@ -4386,38 +2066,8 @@
     },
     {
       "phoneme": "m",
-      "syllable": "fa-mille",
-      "word": "famille"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "fan-tôme",
-      "word": "fantôme"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "fer-mier",
-      "word": "fermier"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "fla-mant",
-      "word": "flamant"
-    },
-    {
-      "phoneme": "m",
       "syllable": "four-mi",
       "word": "fourmi"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "frag-ment",
-      "word": "fragment"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "fro-mage",
-      "word": "fromage"
     },
     {
       "phoneme": "m",
@@ -4426,18 +2076,8 @@
     },
     {
       "phoneme": "m",
-      "syllable": "gym-nase",
-      "word": "gymnase"
-    },
-    {
-      "phoneme": "m",
       "syllable": "ha-mac",
       "word": "hamac"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "her-mine",
-      "word": "hermine"
     },
     {
       "phoneme": "m",
@@ -4461,11 +2101,6 @@
     },
     {
       "phoneme": "m",
-      "syllable": "ker-messe",
-      "word": "kermesse"
-    },
-    {
-      "phoneme": "m",
       "syllable": "la-ma",
       "word": "lama"
     },
@@ -4486,48 +2121,13 @@
     },
     {
       "phoneme": "m",
-      "syllable": "mail-lot",
-      "word": "maillot"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "ma-nette",
-      "word": "manette"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "man-teau",
-      "word": "manteau"
-    },
-    {
-      "phoneme": "m",
       "syllable": "ma-rais",
       "word": "marais"
     },
     {
       "phoneme": "m",
-      "syllable": "mar-mite",
-      "word": "marmite"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "mar-queur",
-      "word": "marqueur"
-    },
-    {
-      "phoneme": "m",
       "syllable": "mar-ron",
       "word": "marron"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "mar-souin",
-      "word": "marsouin"
-    },
-    {
-      "phoneme": "m",
-      "syllable": "mar-teau",
-      "word": "marteau"
     },
     {
       "phoneme": "m",
@@ -4553,11 +2153,6 @@
     },
     {
       "phoneme": "n",
-      "syllable": "noi-sette",
-      "word": "noisette"
-    },
-    {
-      "phoneme": "n",
       "syllable": "nu-age",
       "word": "nuage"
     },
@@ -4568,18 +2163,8 @@
     },
     {
       "phoneme": "n",
-      "syllable": "an-tenne",
-      "word": "antenne"
-    },
-    {
-      "phoneme": "n",
       "syllable": "a-rène",
       "word": "arène"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "ba-leine",
-      "word": "baleine"
     },
     {
       "phoneme": "n",
@@ -4590,11 +2175,6 @@
       "phoneme": "n",
       "syllable": "bon-net",
       "word": "bonnet"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "brow-nie",
-      "word": "brownie"
     },
     {
       "phoneme": "n",
@@ -4613,33 +2193,8 @@
     },
     {
       "phoneme": "n",
-      "syllable": "che-minée",
-      "word": "cheminée"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "che-nille",
-      "word": "chenille"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "col-line",
-      "word": "colline"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "cou-ronne",
-      "word": "couronne"
-    },
-    {
-      "phoneme": "n",
       "syllable": "do-nut",
       "word": "donut"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "du-nette",
-      "word": "dunette"
     },
     {
       "phoneme": "n",
@@ -4648,63 +2203,8 @@
     },
     {
       "phoneme": "n",
-      "syllable": "fe-netre",
-      "word": "fenetre"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "fe-nêtre",
-      "word": "fenêtre"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "fe-nouil",
-      "word": "fenouil"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "fon-taine",
-      "word": "fontaine"
-    },
-    {
-      "phoneme": "n",
       "syllable": "ge-nou",
       "word": "genou"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "gly-cine",
-      "word": "glycine"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "gre-nade",
-      "word": "grenade"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "gre-nouille",
-      "word": "grenouille"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "gui-toune",
-      "word": "guitoune"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "gym-nase",
-      "word": "gymnase"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "har-nais",
-      "word": "harnais"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "her-mine",
-      "word": "hermine"
     },
     {
       "phoneme": "n",
@@ -4713,53 +2213,8 @@
     },
     {
       "phoneme": "n",
-      "syllable": "jour-nal",
-      "word": "journal"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "la-nière",
-      "word": "lanière"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "lan-terne",
-      "word": "lanterne"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "li-corne",
-      "word": "licorne"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "li-notte",
-      "word": "linotte"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "lu-carne",
-      "word": "lucarne"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "ma-nette",
-      "word": "manette"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "mayon-naise",
-      "word": "mayonnaise"
-    },
-    {
-      "phoneme": "n",
       "syllable": "mi-nuit",
       "word": "minuit"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "moi-neau",
-      "word": "moineau"
     },
     {
       "phoneme": "n",
@@ -4773,18 +2228,8 @@
     },
     {
       "phoneme": "n",
-      "syllable": "nau-tile",
-      "word": "nautile"
-    },
-    {
-      "phoneme": "n",
       "syllable": "na-vet",
       "word": "navet"
-    },
-    {
-      "phoneme": "n",
-      "syllable": "na-vette",
-      "word": "navette"
     }
   ],
   "r": [
@@ -4810,23 +2255,8 @@
     },
     {
       "phoneme": "r",
-      "syllable": "ri-vière",
-      "word": "rivière"
-    },
-    {
-      "phoneme": "r",
       "syllable": "ro-se",
       "word": "rose"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "a-raignée",
-      "word": "araignée"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "ar-doise",
-      "word": "ardoise"
     },
     {
       "phoneme": "r",
@@ -4835,43 +2265,8 @@
     },
     {
       "phoneme": "r",
-      "syllable": "ar-moire",
-      "word": "armoire"
-    },
-    {
-      "phoneme": "r",
       "syllable": "ar-mure",
       "word": "armure"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "aut-ruche",
-      "word": "autruche"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "baig-noire",
-      "word": "baignoire"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bat-terie",
-      "word": "batterie"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "ber-ceau",
-      "word": "berceau"
     },
     {
       "phoneme": "r",
@@ -4880,58 +2275,8 @@
     },
     {
       "phoneme": "r",
-      "syllable": "bil-lard",
-      "word": "billard"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bor-deaux",
-      "word": "bordeaux"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bouc-lier",
-      "word": "bouclier"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bour-don",
-      "word": "bourdon"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
-    },
-    {
-      "phoneme": "r",
       "syllable": "bre-bis",
       "word": "brebis"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "brin-dille",
-      "word": "brindille"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "bri-quet",
-      "word": "briquet"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "broc-het",
-      "word": "brochet"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "brouet-te",
-      "word": "brouette"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "brow-nie",
-      "word": "brownie"
     },
     {
       "phoneme": "r",
@@ -4940,23 +2285,8 @@
     },
     {
       "phoneme": "r",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "r",
       "syllable": "ca-nard",
       "word": "canard"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "ca-rotte",
-      "word": "carotte"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "car-table",
-      "word": "cartable"
     },
     {
       "phoneme": "r",
@@ -4965,33 +2295,8 @@
     },
     {
       "phoneme": "r",
-      "syllable": "cein-ture",
-      "word": "ceinture"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "cer-ceau",
-      "word": "cerceau"
-    },
-    {
-      "phoneme": "r",
       "syllable": "ce-rise",
       "word": "cerise"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "cer-veau",
-      "word": "cerveau"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "char-geur",
-      "word": "chargeur"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "chauf-feur",
-      "word": "chauffeur"
     },
     {
       "phoneme": "r",
@@ -5005,46 +2310,11 @@
     },
     {
       "phoneme": "r",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "clô-ture",
-      "word": "clôture"
-    },
-    {
-      "phoneme": "r",
       "syllable": "cob-ra",
       "word": "cobra"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "col-lier",
-      "word": "collier"
-    },
-    {
-      "phoneme": "r",
-      "syllable": "com-ptoir",
-      "word": "comptoir"
     }
   ],
   "s": [
-    {
-      "phoneme": "s",
-      "syllable": "pois-son",
-      "word": "poisson"
-    },
     {
       "phoneme": "s",
       "syllable": "sa-pin",
@@ -5062,71 +2332,6 @@
     },
     {
       "phoneme": "s",
-      "syllable": "ar-tiste",
-      "word": "artiste"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "as-perge",
-      "word": "asperge"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "as-siette",
-      "word": "assiette"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "ba-lance",
-      "word": "balance"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "bas-kets",
-      "word": "baskets"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "ber-ceau",
-      "word": "berceau"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "bis-cuit",
-      "word": "biscuit"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "bois-son",
-      "word": "boisson"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "bos-quet",
-      "word": "bosquet"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "bous-sole",
-      "word": "boussole"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "buis-son",
-      "word": "buisson"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cais-sier",
-      "word": "caissier"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cas-quette",
-      "word": "casquette"
-    },
-    {
-      "phoneme": "s",
       "syllable": "cas-sis",
       "word": "cassis"
     },
@@ -5137,28 +2342,8 @@
     },
     {
       "phoneme": "s",
-      "syllable": "cein-ture",
-      "word": "ceinture"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cer-ceau",
-      "word": "cerceau"
-    },
-    {
-      "phoneme": "s",
       "syllable": "ce-rise",
       "word": "cerise"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cer-veau",
-      "word": "cerveau"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "chaus-sons",
-      "word": "chaussons"
     },
     {
       "phoneme": "s",
@@ -5167,18 +2352,8 @@
     },
     {
       "phoneme": "s",
-      "syllable": "ci-gogne",
-      "word": "cigogne"
-    },
-    {
-      "phoneme": "s",
       "syllable": "ci-ment",
       "word": "ciment"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
     },
     {
       "phoneme": "s",
@@ -5187,53 +2362,8 @@
     },
     {
       "phoneme": "s",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "clas-seur",
-      "word": "classeur"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cous-sin",
-      "word": "coussin"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "crois-sant",
-      "word": "croissant"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "cy-lindre",
-      "word": "cylindre"
-    },
-    {
-      "phoneme": "s",
       "syllable": "cyp-rès",
       "word": "cyprès"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "den-tiste",
-      "word": "dentiste"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "des-sert",
-      "word": "dessert"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "dos-sier",
-      "word": "dossier"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "en-ceinte",
-      "word": "enceinte"
     },
     {
       "phoneme": "s",
@@ -5252,31 +2382,6 @@
     },
     {
       "phoneme": "s",
-      "syllable": "fi-celle",
-      "word": "ficelle"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "fleu-riste",
-      "word": "fleuriste"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "gla-cier",
-      "word": "glacier"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "gly-cine",
-      "word": "glycine"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "ham-ster",
-      "word": "hamster"
-    },
-    {
-      "phoneme": "s",
       "syllable": "hé-lice",
       "word": "hélice"
     },
@@ -5284,11 +2389,6 @@
       "phoneme": "s",
       "syllable": "i-bis",
       "word": "ibis"
-    },
-    {
-      "phoneme": "s",
-      "syllable": "in-dustrie",
-      "word": "industrie"
     }
   ],
   "v": [
@@ -5314,38 +2414,8 @@
     },
     {
       "phoneme": "v",
-      "syllable": "bouv-reuil",
-      "word": "bouvreuil"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "cer-veau",
-      "word": "cerveau"
-    },
-    {
-      "phoneme": "v",
       "syllable": "che-val",
       "word": "cheval"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "che-veux",
-      "word": "cheveux"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "cla-vier",
-      "word": "clavier"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "cra-vate",
-      "word": "cravate"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "cre-vette",
-      "word": "crevette"
     },
     {
       "phoneme": "v",
@@ -5364,11 +2434,6 @@
     },
     {
       "phoneme": "v",
-      "syllable": "gra-vier",
-      "word": "gravier"
-    },
-    {
-      "phoneme": "v",
       "syllable": "hi-ver",
       "word": "hiver"
     },
@@ -5376,11 +2441,6 @@
       "phoneme": "v",
       "syllable": "i-voire",
       "word": "ivoire"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "la-vande",
-      "word": "lavande"
     },
     {
       "phoneme": "v",
@@ -5396,11 +2456,6 @@
       "phoneme": "v",
       "syllable": "na-vet",
       "word": "navet"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "na-vette",
-      "word": "navette"
     },
     {
       "phoneme": "v",
@@ -5434,18 +2489,8 @@
     },
     {
       "phoneme": "v",
-      "syllable": "pi-voine",
-      "word": "pivoine"
-    },
-    {
-      "phoneme": "v",
       "syllable": "pi-vot",
       "word": "pivot"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "poiv-ron",
-      "word": "poivron"
     },
     {
       "phoneme": "v",
@@ -5454,23 +2499,8 @@
     },
     {
       "phoneme": "v",
-      "syllable": "ri-vière",
-      "word": "rivière"
-    },
-    {
-      "phoneme": "v",
       "syllable": "sa-von",
       "word": "savon"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "ser-veuse",
-      "word": "serveuse"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "vais-seau",
-      "word": "vaisseau"
     },
     {
       "phoneme": "v",
@@ -5479,38 +2509,8 @@
     },
     {
       "phoneme": "v",
-      "syllable": "vam-pire",
-      "word": "vampire"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "va-nille",
-      "word": "vanille"
-    },
-    {
-      "phoneme": "v",
       "syllable": "va-rech",
       "word": "varech"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "vau-tour",
-      "word": "vautour"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "ve-lours",
-      "word": "velours"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "ven-touse",
-      "word": "ventouse"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "ver-dure",
-      "word": "verdure"
     },
     {
       "phoneme": "v",
@@ -5524,18 +2524,8 @@
     },
     {
       "phoneme": "v",
-      "syllable": "vi-naigre",
-      "word": "vinaigre"
-    },
-    {
-      "phoneme": "v",
       "syllable": "vio-let",
       "word": "violet"
-    },
-    {
-      "phoneme": "v",
-      "syllable": "vio-lette",
-      "word": "violette"
     },
     {
       "phoneme": "v",
@@ -5544,11 +2534,6 @@
     }
   ],
   "z": [
-    {
-      "phoneme": "z",
-      "syllable": "ga-zelle",
-      "word": "gazelle"
-    },
     {
       "phoneme": "z",
       "syllable": "puz-zle",
@@ -5566,38 +2551,13 @@
     },
     {
       "phoneme": "z",
-      "syllable": "ar-doise",
-      "word": "ardoise"
-    },
-    {
-      "phoneme": "z",
       "syllable": "a-zote",
       "word": "azote"
     },
     {
       "phoneme": "z",
-      "syllable": "blou-son",
-      "word": "blouson"
-    },
-    {
-      "phoneme": "z",
       "syllable": "ce-rise",
       "word": "cerise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "che-mise",
-      "word": "chemise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "cloi-son",
-      "word": "cloison"
     },
     {
       "phoneme": "z",
@@ -5616,48 +2576,8 @@
     },
     {
       "phoneme": "z",
-      "syllable": "fa-laise",
-      "word": "falaise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "fram-boise",
-      "word": "framboise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "ga-zette",
-      "word": "gazette"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "griz-zly",
-      "word": "grizzly"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "gro-seille",
-      "word": "groseille"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "gym-nase",
-      "word": "gymnase"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "ja-lousie",
-      "word": "jalousie"
-    },
-    {
-      "phoneme": "z",
       "syllable": "lé-zard",
       "word": "lézard"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "lo-sange",
-      "word": "losange"
     },
     {
       "phoneme": "z",
@@ -5666,33 +2586,13 @@
     },
     {
       "phoneme": "z",
-      "syllable": "mayon-naise",
-      "word": "mayonnaise"
-    },
-    {
-      "phoneme": "z",
       "syllable": "mé-duse",
       "word": "méduse"
     },
     {
       "phoneme": "z",
-      "syllable": "mé-sange",
-      "word": "mésange"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "mu-sique",
-      "word": "musique"
-    },
-    {
-      "phoneme": "z",
       "syllable": "na-seau",
       "word": "naseau"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "noi-sette",
-      "word": "noisette"
     },
     {
       "phoneme": "z",
@@ -5703,16 +2603,6 @@
       "phoneme": "z",
       "syllable": "piz-za",
       "word": "pizza"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "pu-naise",
-      "word": "punaise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "quet-zal",
-      "word": "quetzal"
     },
     {
       "phoneme": "z",
@@ -5746,23 +2636,8 @@
     },
     {
       "phoneme": "z",
-      "syllable": "ser-veuse",
-      "word": "serveuse"
-    },
-    {
-      "phoneme": "z",
       "syllable": "ti-sane",
       "word": "tisane"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "tra-pèze",
-      "word": "trapèze"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "tur-quoise",
-      "word": "turquoise"
     },
     {
       "phoneme": "z",
@@ -5773,11 +2648,6 @@
       "phoneme": "z",
       "syllable": "va-lise",
       "word": "valise"
-    },
-    {
-      "phoneme": "z",
-      "syllable": "ven-touse",
-      "word": "ventouse"
     },
     {
       "phoneme": "z",
@@ -5798,11 +2668,6 @@
   "w": [
     {
       "phoneme": "w",
-      "syllable": "bow-ling",
-      "word": "bowling"
-    },
-    {
-      "phoneme": "w",
       "syllable": "ki-wi",
       "word": "kiwi"
     },
@@ -5818,33 +2683,8 @@
     },
     {
       "phoneme": "w",
-      "syllable": "a-louette",
-      "word": "alouette"
-    },
-    {
-      "phoneme": "w",
       "syllable": "a-vouer",
       "word": "avouer"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "brouet-te",
-      "word": "brouette"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "brow-nie",
-      "word": "brownie"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "chouet-te",
-      "word": "chouette"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "cit-rouille",
-      "word": "citrouille"
     },
     {
       "phoneme": "w",
@@ -5853,38 +2693,8 @@
     },
     {
       "phoneme": "w",
-      "syllable": "doua-nier",
-      "word": "douanier"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "douil-let",
-      "word": "douillet"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "fe-nouil",
-      "word": "fenouil"
-    },
-    {
-      "phoneme": "w",
       "syllable": "fouet",
       "word": "fouet"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "gi-rouette",
-      "word": "girouette"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "gouac-he",
-      "word": "gouache"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "gre-nouille",
-      "word": "grenouille"
     },
     {
       "phoneme": "w",
@@ -5908,53 +2718,13 @@
     },
     {
       "phoneme": "w",
-      "syllable": "mar-souin",
-      "word": "marsouin"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "mouet-te",
-      "word": "mouette"
-    },
-    {
-      "phoneme": "w",
       "syllable": "ouest",
       "word": "ouest"
     },
     {
       "phoneme": "w",
-      "syllable": "pin-gouin",
-      "word": "pingouin"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "rouil-le",
-      "word": "rouille"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "san-dwich",
-      "word": "sandwich"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "snow-board",
-      "word": "snowboard"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "tram-way",
-      "word": "tramway"
-    },
-    {
-      "phoneme": "w",
       "syllable": "wal-do",
       "word": "waldo"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "wal-kman",
-      "word": "walkman"
     },
     {
       "phoneme": "w",
@@ -5983,18 +2753,8 @@
     },
     {
       "phoneme": "w",
-      "syllable": "wat-tman",
-      "word": "wattman"
-    },
-    {
-      "phoneme": "w",
       "syllable": "web-cam",
       "word": "webcam"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "wes-tern",
-      "word": "western"
     },
     {
       "phoneme": "w",
@@ -6005,11 +2765,6 @@
       "phoneme": "w",
       "syllable": "wil-son",
       "word": "wilson"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "win-dsurf",
-      "word": "windsurf"
     },
     {
       "phoneme": "w",
@@ -6030,21 +2785,6 @@
       "phoneme": "w",
       "syllable": "zoua-ve",
       "word": "zouave"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "wa-labi",
-      "word": "walabi"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "wa-piti",
-      "word": "wapiti"
-    },
-    {
-      "phoneme": "w",
-      "syllable": "wa-sabi",
-      "word": "wasabi"
     }
   ],
   "x": [
@@ -6095,33 +2835,8 @@
     },
     {
       "phoneme": "x",
-      "syllable": "bor-deaux",
-      "word": "bordeaux"
-    },
-    {
-      "phoneme": "x",
       "syllable": "bo-xer",
       "word": "boxer"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "che-veux",
-      "word": "cheveux"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "ci-seaux",
-      "word": "ciseaux"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "com-plexe",
-      "word": "complexe"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "con-vexe",
-      "word": "convexe"
     },
     {
       "phoneme": "x",
@@ -6150,16 +2865,6 @@
     },
     {
       "phoneme": "x",
-      "syllable": "ex-trait",
-      "word": "extrait"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "ga-laxie",
-      "word": "galaxie"
-    },
-    {
-      "phoneme": "x",
       "syllable": "he-xane",
       "word": "hexane"
     },
@@ -6185,23 +2890,8 @@
     },
     {
       "phoneme": "x",
-      "syllable": "le-xique",
-      "word": "lexique"
-    },
-    {
-      "phoneme": "x",
       "syllable": "ma-xi",
       "word": "maxi"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "per-drix",
-      "word": "perdrix"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "per-plexe",
-      "word": "perplexe"
     },
     {
       "phoneme": "x",
@@ -6212,16 +2902,6 @@
       "phoneme": "x",
       "syllable": "pi-xel",
       "word": "pixel"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "pré-fixe",
-      "word": "préfixe"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "réf-lexe",
-      "word": "réflexe"
     },
     {
       "phoneme": "x",
@@ -6282,21 +2962,6 @@
       "phoneme": "x",
       "syllable": "xé-rès",
       "word": "xérès"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "e-xamen",
-      "word": "examen"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "e-xercice",
-      "word": "exercice"
-    },
-    {
-      "phoneme": "x",
-      "syllable": "he-xagone",
-      "word": "hexagone"
     }
   ],
   "h": [
@@ -6352,26 +3017,6 @@
     },
     {
       "phoneme": "h",
-      "syllable": "hac-hette",
-      "word": "hachette"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hac-hoir",
-      "word": "hachoir"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "ha-leine",
-      "word": "haleine"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hal-tère",
-      "word": "haltère"
-    },
-    {
-      "phoneme": "h",
       "syllable": "ha-mac",
       "word": "hamac"
     },
@@ -6379,16 +3024,6 @@
       "phoneme": "h",
       "syllable": "ha-meau",
       "word": "hameau"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "ham-ster",
-      "word": "hamster"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "han-dball",
-      "word": "handball"
     },
     {
       "phoneme": "h",
@@ -6407,23 +3042,8 @@
     },
     {
       "phoneme": "h",
-      "syllable": "har-fang",
-      "word": "harfang"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "har-nais",
-      "word": "harnais"
-    },
-    {
-      "phoneme": "h",
       "syllable": "ha-sard",
       "word": "hasard"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hau-teur",
-      "word": "hauteur"
     },
     {
       "phoneme": "h",
@@ -6434,11 +3054,6 @@
       "phoneme": "h",
       "syllable": "hé-lice",
       "word": "hélice"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "her-mine",
-      "word": "hermine"
     },
     {
       "phoneme": "h",
@@ -6472,33 +3087,8 @@
     },
     {
       "phoneme": "h",
-      "syllable": "hom-mage",
-      "word": "hommage"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hon-nête",
-      "word": "honnête"
-    },
-    {
-      "phoneme": "h",
       "syllable": "ho-noré",
       "word": "honoré"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hon-teux",
-      "word": "honteux"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "ho-raire",
-      "word": "horaire"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hor-loge",
-      "word": "horloge"
     },
     {
       "phoneme": "h",
@@ -6529,26 +3119,6 @@
       "phoneme": "h",
       "syllable": "hu-tin",
       "word": "hutin"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hyb-ride",
-      "word": "hybride"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hyd-rate",
-      "word": "hydrate"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hy-giène",
-      "word": "hygiène"
-    },
-    {
-      "phoneme": "h",
-      "syllable": "hyp-nose",
-      "word": "hypnose"
     }
   ]
 }
