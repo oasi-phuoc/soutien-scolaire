@@ -5,7 +5,6 @@ import type { RevisionData } from "@/lib/curriculum/lecture-data";
 import { lectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
-import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import {
@@ -114,7 +113,10 @@ export function RevisionEvaluation({
   const [validateTarget, setValidateTarget] = useState<number | null>(null);
   const [evalStarted, setEvalStarted] = useState(false);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const [evalResetKey, setEvalResetKey] = useState(0);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+
+  const evalGridSessionKey = `eval-${data.pair}-grid-${evalResetKey}`;
 
   const step = EVAL_STEPS[stepIdx]!;
   const isResults = step === "results";
@@ -214,6 +216,7 @@ export function RevisionEvaluation({
                   setValidated(emptyValidated);
                   validatedRef.current = emptyValidated;
                   setValidateTarget(null);
+                  setEvalResetKey((k) => k + 1);
                   setShowCancelConfirm(false);
                 }}
                 className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
@@ -252,6 +255,7 @@ export function RevisionEvaluation({
                 letterB={data.letterB}
                 isUppercase={true}
                 mixedCase
+                sessionKey={evalGridSessionKey}
                 onValidated={(score, max) => recordScore(0, score, max)}
                 shouldValidate={validateTarget === 0 || validateTarget === -1}
               />

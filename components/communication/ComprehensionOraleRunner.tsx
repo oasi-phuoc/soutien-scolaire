@@ -480,25 +480,17 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   itemsRef.current = items;
 
   useEffect(() => {
-    stop();
-    return () => {
-      clearWait();
-      audioRef.current?.pause();
-    };
-  }, [itemsKey]);
-
-  useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = playbackRate;
   }, [playbackRate]);
 
-  function clearWait() {
+  const clearWait = useCallback(() => {
     if (waitTimerRef.current) {
       window.clearTimeout(waitTimerRef.current.timeoutId);
       waitTimerRef.current = null;
     }
-  }
+  }, []);
 
-  function stop() {
+  const stop = useCallback(() => {
     clearWait();
     pauseSnapshotRef.current = null;
     const player = audioRef.current;
@@ -513,7 +505,15 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
     setProgress(0);
     setAudioCurrentTime(0);
     setAudioDuration(0);
-  }
+  }, [clearWait]);
+
+  useEffect(() => {
+    stop();
+    return () => {
+      clearWait();
+      audioRef.current?.pause();
+    };
+  }, [itemsKey, stop, clearWait]);
 
   function ensurePlayer() {
     let player = audioRef.current;

@@ -190,7 +190,7 @@ export function LectureLetterStepEditor({
   setValue: (next: unknown, history?: "debounce" | "immediate") => void;
 }) {
   const data = value as EditableLetter;
-  const steps = useMemo(() => buildSteps(data), [data.type]);
+  const steps = useMemo(() => buildSteps(data), [data]);
   const [stepIdx, setStepIdx] = useState(0);
   const safeIdx = Math.min(stepIdx, steps.length - 1);
   const step = steps[safeIdx]!;

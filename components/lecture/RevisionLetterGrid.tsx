@@ -16,6 +16,8 @@ interface Props {
   isUppercase: boolean;
   /** Éval : majuscules et minuscules mélangées (50/50 aléatoire). */
   mixedCase?: boolean;
+  /** Clé stable (ex. step-reset) pour éviter une double génération au montage Strict Mode. */
+  sessionKey?: string;
   onValidated?: (score: number, max: number) => void;
   shouldValidate?: boolean;
 }
@@ -55,6 +57,24 @@ function makeGrid(letterA: string, letterB: string, isUppercase: boolean, mixedC
   return cells;
 }
 
+const gridSessionCache = new Map<string, string[]>();
+
+function getOrMakeGrid(
+  sessionKey: string | undefined,
+  letterA: string,
+  letterB: string,
+  isUppercase: boolean,
+  mixedCase: boolean,
+): string[] {
+  if (sessionKey) {
+    const cached = gridSessionCache.get(sessionKey);
+    if (cached) return cached;
+  }
+  const grid = makeGrid(letterA, letterB, isUppercase, mixedCase);
+  if (sessionKey) gridSessionCache.set(sessionKey, grid);
+  return grid;
+}
+
 function targetSet(letterA: string, letterB: string, isUppercase: boolean, mixedCase: boolean): Set<string> {
   if (mixedCase) {
     return new Set([letterA, letterA.toLowerCase(), letterB, letterB.toLowerCase()]);
@@ -65,21 +85,23 @@ function targetSet(letterA: string, letterB: string, isUppercase: boolean, mixed
 }
 
 export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
-  function RevisionLetterGrid({ letterA, letterB, isUppercase, mixedCase = false, onValidated, shouldValidate }, ref) {
+  function RevisionLetterGrid({ letterA, letterB, isUppercase, mixedCase = false, sessionKey, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
     const a = mixedCase ? `${letterA}/${letterA.toLowerCase()}` : isUppercase ? letterA : letterA.toLowerCase();
     const b = mixedCase ? `${letterB}/${letterB.toLowerCase()}` : isUppercase ? letterB : letterB.toLowerCase();
 
-    const [grid, setGrid] = useState(() => makeGrid(letterA, letterB, isUppercase, mixedCase));
+    const [grid, setGrid] = useState(() => getOrMakeGrid(sessionKey, letterA, letterB, isUppercase, mixedCase));
     const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setGrid(makeGrid(letterA, letterB, isUppercase, mixedCase));
+      const next = makeGrid(letterA, letterB, isUppercase, mixedCase);
+      if (sessionKey) gridSessionCache.set(sessionKey, next);
+      setGrid(next);
       setStates(Array(GRID_SIZE).fill("idle"));
       setValidated(false);
-    }, [letterA, letterB, isUppercase, mixedCase]);
+    }, [letterA, letterB, isUppercase, mixedCase, sessionKey]);
 
     const validate = useCallback(() => {
       if (validated) return;
