@@ -82,48 +82,54 @@ function ouiNonButtonClass(state: CellState, validated: boolean, hasPhoneme: boo
   return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
 }
 
+const OUI_NON_NEUTRAL_CLASS =
+  "rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)] transition-colors disabled:opacity-70";
+
+function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
+  const base =
+    "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
+  if (!validated) {
+    return state === "selected"
+      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`
+      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+  }
+  if (state === "correct") {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`;
+  }
+  if (state === "wrong") {
+    return `${base} border-red-400 bg-red-50`;
+  }
+  if (state === "missed") {
+    return `${base} border-amber-400 bg-amber-50`;
+  }
+  if (hasPhoneme) {
+    return `${base} border-amber-400 bg-amber-50`;
+  }
+  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+}
+
 function OuiNonButton({
   state,
   validated,
   hasPhoneme,
   onClick,
+  neutral = false,
 }: {
   state: CellState;
   validated: boolean;
   hasPhoneme: boolean;
   onClick: () => void;
+  neutral?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={validated}
-      className={ouiNonButtonClass(state, validated, hasPhoneme)}
+      className={neutral ? OUI_NON_NEUTRAL_CLASS : ouiNonButtonClass(state, validated, hasPhoneme)}
       aria-pressed={ouiNonLabel(state) === "Oui"}
     >
       {ouiNonLabel(state)}
-    </button>
-  );
-}
-
-function AudioPlayButton({
-  word,
-  size = "sm",
-  className = "",
-}: {
-  word: string;
-  size?: "sm" | "md";
-  className?: string;
-}) {
-  const dim = size === "md" ? "h-7 w-7" : "h-6 w-6";
-  return (
-    <button
-      type="button"
-      aria-label={`Écouter ${word}`}
-      onClick={() => playWord(word)}
-      className={`flex ${dim} shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm ${className}`}
-    >
-      {size === "md" ? <MediumSpeakerIcon /> : <SmallSpeakerIcon />}
     </button>
   );
 }
@@ -189,9 +195,14 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             return (
               <div
                 key={`${word.label}-${i}`}
-                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
+                className={imageCardClass(s, validated, hasPhoneme)}
               >
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                <button
+                  type="button"
+                  onClick={() => playWord(word.label)}
+                  className="relative aspect-square w-full overflow-hidden rounded-lg bg-[var(--color-bg-secondary)]"
+                  aria-label={`Écouter ${word.label}`}
+                >
                   {imgSrc ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -204,13 +215,13 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                       {word.label}
                     </span>
                   )}
-                </div>
-                <div className="flex w-full items-center justify-between gap-2 px-0.5">
-                  <AudioPlayButton word={word.label} />
+                </button>
+                <div className="flex w-full justify-center">
                   <OuiNonButton
                     state={s}
                     validated={validated}
                     hasPhoneme={hasPhoneme}
+                    neutral
                     onClick={() => toggle(i)}
                   />
                 </div>
@@ -310,21 +321,3 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
     );
   },
 );
-
-function SmallSpeakerIcon() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-    </svg>
-  );
-}
-
-function MediumSpeakerIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-    </svg>
-  );
-}
