@@ -72,7 +72,7 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
   function RevisionPronounce({ words, wordCount, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [selected] = useState(() => pickWords(words, wordCount));
+    const [selected, setSelected] = useState(() => pickWords(words, wordCount));
     const [recStates, setRecStates] = useState<RecState[]>(() => selected.map(() => "idle"));
     const [validated, setValidated] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,9 +80,11 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
 
     const reset = useCallback(() => {
       recRef.current?.abort();
-      setRecStates(selected.map(() => "idle"));
+      const next = pickWords(words, wordCount);
+      setSelected(next);
+      setRecStates(next.map(() => "idle"));
       setValidated(false);
-    }, [selected]);
+    }, [words, wordCount]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -99,6 +101,13 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
     }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
+
+    useEffect(() => {
+      const next = pickWords(words, wordCount);
+      setSelected(next);
+      setRecStates(next.map(() => "idle"));
+      setValidated(false);
+    }, [words, wordCount]);
 
     function startListening(wordIdx: number) {
       if (validated || recStates[wordIdx] === "listening") return;

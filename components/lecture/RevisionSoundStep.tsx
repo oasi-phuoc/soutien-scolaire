@@ -75,6 +75,11 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     );
     const [validated, setValidated] = useState(false);
 
+    useEffect(() => {
+      setSelections(words.map(() => ({ A: false, B: false })));
+      setValidated(false);
+    }, [words]);
+
     const reset = useCallback(() => {
       setSelections(words.map(() => ({ A: false, B: false })));
       setValidated(false);

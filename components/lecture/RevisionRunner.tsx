@@ -14,7 +14,7 @@ import {
   saveLectureProgress,
   markRevisionCompleted,
 } from "@/lib/progress/lecture-progress";
-import { lectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
+import { lectureRevisionBisyllableWords, randomLectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: RevisionData;
@@ -39,6 +39,8 @@ export function RevisionRunner({ data }: Props) {
   const router = useRouter();
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
+  const [soundRefreshSeed, setSoundRefreshSeed] = useState(0);
+  const [pronounceRefreshSeed, setPronounceRefreshSeed] = useState(0);
   const [soundItemCount, setSoundItemCount] = useState(() => {
     if (typeof window === "undefined") return 9;
     return window.matchMedia(DESKTOP_MQ).matches ? 12 : 9;
@@ -67,9 +69,17 @@ export function RevisionRunner({ data }: Props) {
   const isPronounceStep = step.key === "pronounce";
   const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
 
-  const soundWords = useMemo(
-    () => lectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, true),
-    [data.phonemeA, data.phonemeB, soundItemCount],
+  const soundAudioWords = useMemo(
+    () => randomLectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, false),
+    [data.phonemeA, data.phonemeB, soundItemCount, soundRefreshSeed],
+  );
+  const soundImageWords = useMemo(
+    () => randomLectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, true),
+    [data.phonemeA, data.phonemeB, soundItemCount, soundRefreshSeed],
+  );
+  const pronounceWords = useMemo(
+    () => lectureRevisionBisyllableWords(data.readWords),
+    [data.readWords],
   );
 
   useEffect(() => {
@@ -84,9 +94,12 @@ export function RevisionRunner({ data }: Props) {
     if (isGridStep) gridRef.current?.reset();
     else if (isWordStep) wordRef.current?.reset();
     else if (isSoundStep) {
-      soundRef.current?.reset();
+      setSoundRefreshSeed((s) => s + 1);
       setResetKey((k) => k + 1);
-    } else if (isPronounceStep) pronounceRef.current?.reset();
+    } else if (isPronounceStep) {
+      setPronounceRefreshSeed((s) => s + 1);
+      setResetKey((k) => k + 1);
+    }
   }
 
   function exerciseValidate() {
@@ -174,7 +187,7 @@ export function RevisionRunner({ data }: Props) {
             ref={soundRef}
             phonemeA={data.phonemeA}
             phonemeB={data.phonemeB}
-            words={soundWords}
+            words={soundAudioWords}
             mode="audio"
           />
         );
@@ -185,12 +198,18 @@ export function RevisionRunner({ data }: Props) {
             ref={soundRef}
             phonemeA={data.phonemeA}
             phonemeB={data.phonemeB}
-            words={soundWords}
+            words={soundImageWords}
             mode="image"
           />
         );
       case "pronounce":
-        return <RevisionPronounce key={k} ref={pronounceRef} words={data.readWords} />;
+        return (
+          <RevisionPronounce
+            key={`${k}-${pronounceRefreshSeed}`}
+            ref={pronounceRef}
+            words={pronounceWords}
+          />
+        );
       case "eval":
         return (
           <RevisionEvaluation

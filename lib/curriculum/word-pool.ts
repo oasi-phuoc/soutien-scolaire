@@ -927,6 +927,27 @@ export function lectureRevisionSoundWords(
   return cycle.slice(offset, offset + count).map(({ label, answer }) => ({ word: label, answer }));
 }
 
+/** Mots aléatoires pour l'entraînement révision (étapes audio / images). */
+export function randomLectureRevisionSoundWords(
+  phonemeA: string,
+  phonemeB: string,
+  count: number,
+  forImages = false,
+) {
+  const items = lectureRevisionSoundItems(phonemeA, phonemeB, forImages, false);
+  if (items.length === 0) return [];
+  return shuffle(items)
+    .slice(0, Math.min(count, items.length))
+    .map(({ label, answer }) => ({ word: label, answer }));
+}
+
+/** Mots de prononciation révision : pool de la leçon, 2 syllabes uniquement. */
+export function lectureRevisionBisyllableWords(
+  readWords: { letter: string; word: string }[],
+): { letter: string; word: string }[] {
+  return readWords.filter((entry) => countSyllables(entry.word) === 2);
+}
+
 export function lectureRevisionExclusiveSoundWords(
   phonemeA: string,
   phonemeB: string,

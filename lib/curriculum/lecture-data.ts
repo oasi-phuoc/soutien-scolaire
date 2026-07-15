@@ -935,10 +935,10 @@ export const VOWEL_REVISIONS: RevisionData[] = [
       { word: "lune", answer: "B" },
     ],
     readWords: [
-      { letter: "i", word: "île" },
-      { letter: "i", word: "lire" },
-      { letter: "u", word: "une" },
-      { letter: "u", word: "lune" },
+      { letter: "i", word: "midi" },
+      { letter: "i", word: "piste" },
+      { letter: "u", word: "musée" },
+      { letter: "u", word: "ruse" },
     ],
   },
   {
@@ -980,8 +980,8 @@ export const CONSONANT_REVISIONS: RevisionData[] = [
       { word: "canard", answer: "B" },
     ],
     readWords: [
-      { letter: "b", word: "balle" },
-      { letter: "b", word: "robe" },
+      { letter: "b", word: "bébé" },
+      { letter: "b", word: "habit" },
       { letter: "c", word: "café" },
       { letter: "c", word: "coco" },
     ],
@@ -1150,8 +1150,8 @@ export const CONSONANT_REVISIONS: RevisionData[] = [
     readWords: [
       { letter: "w", word: "wagon" },
       { letter: "w", word: "kiwi" },
-      { letter: "x", word: "taxe" },
-      { letter: "x", word: "texte" },
+      { letter: "x", word: "boxe" },
+      { letter: "x", word: "saxo" },
     ],
   },
   {
@@ -1169,10 +1169,10 @@ export const CONSONANT_REVISIONS: RevisionData[] = [
       { word: "herbe", answer: "B" },
     ],
     readWords: [
-      { letter: "x", word: "taxe" },
-      { letter: "x", word: "texte" },
+      { letter: "x", word: "boxe" },
+      { letter: "x", word: "saxo" },
       { letter: "h", word: "hibou" },
-      { letter: "h", word: "herbe" },
+      { letter: "h", word: "cahier" },
     ],
   },
 ];
