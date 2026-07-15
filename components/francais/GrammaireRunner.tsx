@@ -31,6 +31,11 @@ import { useContentEditor } from "@/components/content-editor/ContentEditorProvi
 import { ContentEditorPanel } from "@/components/content-editor/ContentEditorPanel";
 import { GrammarLessonFields } from "@/components/content-editor/GrammarLessonFields";
 import { conjugationLessonKey, grammarLessonKey } from "@/lib/content-editor/keys";
+import {
+  CORRECTION_CARD_DARK,
+  CORRECTION_INLINE_STRIKE,
+  CORRECTION_MATCH_WRONG,
+} from "@/components/correction-styles";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -324,7 +329,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                           ✓ {ex.correct}
                         </code>
                         {ex.wrong && (
-                          <code className="block rounded bg-red-50 px-2 py-1 text-xs font-medium text-red-600 line-through dark:bg-red-900/20 dark:text-red-400">
+                          <code className={`block rounded px-2 py-1 text-xs font-medium ${CORRECTION_INLINE_STRIKE}`}>
                             ✗ {ex.wrong}
                           </code>
                         )}
@@ -1401,7 +1406,7 @@ function MatchExercise({
             leftCls += isCorrect
               ? `border-current ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
-                ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
+                ? CORRECTION_MATCH_WRONG
                 : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
           } else if (isSelected) {
             leftCls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
@@ -1415,7 +1420,7 @@ function MatchExercise({
           const dotCls = `w-2 h-2 rounded-full mx-auto transition-colors ${
             isConnected
               ? validated && revealCorrection
-                ? isCorrect ? `bg-current ${MATCH_COLORS[colorIdx]}` : "bg-red-500"
+                ? isCorrect ? `bg-current ${MATCH_COLORS[colorIdx]}` : "bg-amber-500"
                 : `bg-current ${MATCH_COLORS[colorIdx]}`
               : isSelected
                 ? "bg-[var(--color-accent-fr)]"
@@ -1460,7 +1465,7 @@ function MatchExercise({
             cls += isCorrect
               ? `border-current cursor-pointer ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
-                ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
+                ? CORRECTION_MATCH_WRONG
                 : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
           } else if (isConnected) {
             cls += `border-current cursor-pointer ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`;
@@ -1476,7 +1481,7 @@ function MatchExercise({
               <span className="flex-1 text-left">{pair.right}</span>
               {validated && revealCorrection && isConnected && !isCorrect && (
                 <span className="shrink-0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-red-500" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-amber-600" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </span>
               )}
             </button>
@@ -1935,7 +1940,7 @@ function OrderExercise({
               validated && revealCorrection
                 ? correct
                   ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30"
-                  : "border-red-400 bg-red-50 dark:bg-red-950/30"
+                  : CORRECTION_CARD_DARK
                 : "border-[var(--color-accent-fr)]/40 bg-[var(--color-surface)]"
             }`}>
               {built.length === 0 && (

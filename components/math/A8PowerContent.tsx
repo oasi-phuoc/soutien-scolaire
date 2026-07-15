@@ -3,7 +3,7 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
-const CLS_WRONG = "border-[var(--color-accent-alg)]";
+const CLS_WRONG = "border-amber-400 bg-amber-50 text-amber-700";
 
 const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
 const toSup = (n: number) => String(n).split("").map(d => SUPS[parseInt(d)]).join("");

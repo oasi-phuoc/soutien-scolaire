@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import { CORRECTION_ACCENT, CORRECTION_BORDER, CORRECTION_TEXT_STRONG } from "@/components/correction-styles";
 
 const SCORE_INCOMPLETE_CLASS = "text-amber-600";
 
@@ -64,7 +65,7 @@ export function EvalResultsSummary({
               className="h-full rounded-full transition-all duration-700"
               style={{
                 width: `${pct}%`,
-                background: passed ? accent : "#f87171",
+                background: passed ? accent : CORRECTION_ACCENT,
               }}
             />
           </div>
@@ -78,7 +79,7 @@ export function EvalResultsSummary({
         </div>
         <div
           className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
-            mentionOverride ? "border-[var(--color-border-default)]" : passed ? "border-green-500" : "border-red-400"
+            mentionOverride ? "border-[var(--color-border-default)]" : passed ? "border-green-500" : CORRECTION_BORDER
           }`}
         >
           <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
@@ -88,7 +89,7 @@ export function EvalResultsSummary({
                 ? "text-[var(--color-text-secondary)]"
                 : passed
                   ? "text-green-600"
-                  : "text-red-500"
+                  : CORRECTION_TEXT_STRONG
             }`}
             style={mentionOverride ? { color: accent } : undefined}
           >

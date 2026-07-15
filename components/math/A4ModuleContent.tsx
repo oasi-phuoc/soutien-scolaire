@@ -718,7 +718,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
     } else {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-        : isCorrect ? "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+        : isCorrect ? "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
         : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
     }
     return cls;

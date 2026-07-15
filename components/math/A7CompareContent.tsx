@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
-const CLS_WRONG = "border-[var(--color-accent-alg)]";
+const CLS_WRONG = "border-amber-400 bg-amber-50 text-amber-700";
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -190,7 +190,7 @@ export function A7RelNumberSelectExercise({
               : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
           } else {
             if (isSelected && should) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-            else if (isSelected && !should) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+            else if (isSelected && !should) cls += CLS_WRONG;
             else if (!isSelected && should) cls += CLS_WRONG;
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
           }
