@@ -90,22 +90,22 @@ function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
     "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
   if (!validated) {
     return state === "selected"
-      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`
-      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+      ? `${base} border-[var(--color-accent-lecture)]`
+      : `${base} border-[var(--color-border-default)]`;
   }
   if (state === "correct") {
-    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`;
+    return `${base} border-[var(--color-accent-lecture)]`;
   }
   if (state === "wrong") {
-    return `${base} border-red-400 bg-red-50`;
+    return `${base} border-red-400`;
   }
   if (state === "missed") {
-    return `${base} border-amber-400 bg-amber-50`;
+    return `${base} border-amber-400`;
   }
   if (hasPhoneme) {
-    return `${base} border-amber-400 bg-amber-50`;
+    return `${base} border-amber-400`;
   }
-  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+  return `${base} border-[var(--color-border-default)]`;
 }
 
 function OuiNonButton({
@@ -200,7 +200,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <button
                   type="button"
                   onClick={() => playWord(word.label)}
-                  className="relative aspect-square w-full overflow-hidden rounded-lg bg-[var(--color-bg-secondary)]"
+                  className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)]"
                   aria-label={`Écouter ${word.label}`}
                 >
                   {imgSrc ? (

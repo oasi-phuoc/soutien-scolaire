@@ -42,12 +42,12 @@ function revisionImageCardClass(
 
   if (!validated) {
     return hasSelection
-      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`
-      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+      ? `${base} border-[var(--color-accent-lecture)]`
+      : `${base} border-[var(--color-border-default)]`;
   }
 
   if (isCardCorrect(sel, answer)) {
-    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`;
+    return `${base} border-[var(--color-accent-lecture)]`;
   }
 
   const wantsA = answer === "A" || answer === "AB";
@@ -58,12 +58,12 @@ function revisionImageCardClass(
   const wrongB = !wantsB && sel.B;
 
   if (missedA || missedB) {
-    return `${base} border-amber-400 bg-amber-50`;
+    return `${base} border-amber-400`;
   }
   if (wrongA || wrongB || hasSelection) {
-    return `${base} border-red-400 bg-red-50`;
+    return `${base} border-red-400`;
   }
-  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+  return `${base} border-[var(--color-border-default)]`;
 }
 
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
@@ -147,7 +147,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   <button
                     type="button"
                     onClick={() => playAudio(word)}
-                    className="relative aspect-square w-full overflow-hidden rounded-lg bg-[var(--color-bg-secondary)]"
+                    className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)]"
                     aria-label={`Écouter ${word}`}
                   >
                     {(() => {
