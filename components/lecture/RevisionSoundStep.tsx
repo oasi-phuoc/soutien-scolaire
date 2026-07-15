@@ -22,10 +22,48 @@ interface Props {
 
 type CardSelection = { A: boolean; B: boolean };
 
+const PHONEME_NEUTRAL_CLASS =
+  "rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-text-secondary)] transition-colors disabled:opacity-70";
+
 function isCardCorrect(sel: CardSelection, answer: "A" | "B" | "AB"): boolean {
   const wantsA = answer === "A" || answer === "AB";
   const wantsB = answer === "B" || answer === "AB";
   return sel.A === wantsA && sel.B === wantsB;
+}
+
+function revisionImageCardClass(
+  sel: CardSelection,
+  answer: "A" | "B" | "AB",
+  validated: boolean,
+): string {
+  const base =
+    "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
+  const hasSelection = sel.A || sel.B;
+
+  if (!validated) {
+    return hasSelection
+      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`
+      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
+  }
+
+  if (isCardCorrect(sel, answer)) {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`;
+  }
+
+  const wantsA = answer === "A" || answer === "AB";
+  const wantsB = answer === "B" || answer === "AB";
+  const missedA = wantsA && !sel.A;
+  const missedB = wantsB && !sel.B;
+  const wrongA = !wantsA && sel.A;
+  const wrongB = !wantsB && sel.B;
+
+  if (missedA || missedB) {
+    return `${base} border-amber-400 bg-amber-50`;
+  }
+  if (wrongA || wrongB || hasSelection) {
+    return `${base} border-red-400 bg-red-50`;
+  }
+  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)]`;
 }
 
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
@@ -94,17 +132,26 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
             return (
               <div
                 key={i}
-                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
+                className={
+                  mode === "image"
+                    ? revisionImageCardClass(sel, answer, validated)
+                    : "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
+                }
               >
                 {mode === "image" ? (
-                  <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                  <button
+                    type="button"
+                    onClick={() => playAudio(word)}
+                    className="relative aspect-square w-full overflow-hidden rounded-lg bg-[var(--color-bg-secondary)]"
+                    aria-label={`Écouter ${word}`}
+                  >
                     {(() => {
                       const imgSrc = getLectureWordImagePath(word);
                       return imgSrc ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={imgSrc}
-                          alt=""
+                          alt={word}
                           className="h-full w-full object-contain p-1"
                         />
                       ) : (
@@ -113,15 +160,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                         </span>
                       );
                     })()}
-                    <button
-                      type="button"
-                      onClick={() => playAudio(word)}
-                      className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm"
-                      aria-label={`Écouter ${word}`}
-                    >
-                      <SmallSpeakerIcon />
-                    </button>
-                  </div>
+                  </button>
                 ) : (
                   <button
                     type="button"
@@ -136,7 +175,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   </button>
                 )}
 
-                <div className="flex gap-2">
+                <div className={`flex gap-2${mode === "image" ? " justify-center w-full" : ""}`}>
                   {(["A", "B"] as const).map((opt) => {
                     const isSelected = sel[opt];
                     const isCorrect = opt === "A" ? isCorrectA : isCorrectB;
@@ -146,17 +185,22 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                         type="button"
                         onClick={() => toggle(i, opt)}
                         disabled={validated}
-                        className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
-                          validated && isSelected
-                            ? isCorrect
-                              ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                              : "border-red-400 bg-red-50 text-red-700"
-                            : validated && !isSelected && isCorrect
-                              ? "border-amber-400 bg-amber-50 text-amber-700"
-                              : isSelected
-                                ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
-                        }`}
+                        aria-pressed={isSelected}
+                        className={
+                          mode === "image"
+                            ? `${PHONEME_NEUTRAL_CLASS}${isSelected ? " font-bold" : ""}`
+                            : `rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                                validated && isSelected
+                                  ? isCorrect
+                                    ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                                    : "border-red-400 bg-red-50 text-red-700"
+                                  : validated && !isSelected && isCorrect
+                                    ? "border-amber-400 bg-amber-50 text-amber-700"
+                                    : isSelected
+                                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                                      : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
+                              }`
+                        }
                       >
                         {opt === "A" ? phonemeA : phonemeB}
                       </button>
@@ -171,12 +215,3 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     );
   },
 );
-
-function SmallSpeakerIcon() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-    </svg>
-  );
-}
