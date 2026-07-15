@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { RevisionData } from "@/lib/curriculum/lecture-data";
-import { lectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
+import { revisionPronouncePool, revisionSoundWords } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -93,12 +93,33 @@ export function RevisionEvaluation({
   );
 
   const soundAudioWords = useMemo(
-    () => lectureRevisionSoundWords(data.phonemeA, data.phonemeB, EVAL_SOUND_COUNT, false),
-    [data.phonemeA, data.phonemeB],
+    () =>
+      revisionSoundWords(
+        data.letterA,
+        data.phonemeA,
+        data.letterB,
+        data.phonemeB,
+        EVAL_SOUND_COUNT,
+        false,
+      ),
+    [data.letterA, data.phonemeA, data.letterB, data.phonemeB],
   );
   const soundImageWords = useMemo(
-    () => lectureRevisionSoundWords(data.phonemeA, data.phonemeB, EVAL_SOUND_COUNT, true, EVAL_SOUND_COUNT),
-    [data.phonemeA, data.phonemeB],
+    () =>
+      revisionSoundWords(
+        data.letterA,
+        data.phonemeA,
+        data.letterB,
+        data.phonemeB,
+        EVAL_SOUND_COUNT,
+        true,
+        EVAL_SOUND_COUNT,
+      ),
+    [data.letterA, data.phonemeA, data.letterB, data.phonemeB],
+  );
+  const pronounceWords = useMemo(
+    () => revisionPronouncePool(data.letterA, data.letterB),
+    [data.letterA, data.letterB],
   );
 
   const makeEmptyScores = () => exerciseSteps.map(() => null) as (number | null)[];
@@ -293,7 +314,7 @@ export function RevisionEvaluation({
             </div>
             <div hidden={isResults || stepIdx !== 4}>
               <RevisionPronounce
-                words={data.readWords}
+                words={pronounceWords}
                 wordCount={EVAL_PRONOUNCE_COUNT}
                 onValidated={(score, max) => recordScore(4, score, max)}
                 shouldValidate={validateTarget === 4 || validateTarget === -1}

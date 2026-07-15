@@ -14,7 +14,7 @@ import {
   saveLectureProgress,
   markRevisionCompleted,
 } from "@/lib/progress/lecture-progress";
-import { lectureRevisionBisyllableWords, randomLectureRevisionSoundWords } from "@/lib/curriculum/word-pool";
+import { randomRevisionSoundWords, revisionPronouncePool } from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: RevisionData;
@@ -69,17 +69,17 @@ export function RevisionRunner({ data }: Props) {
   const isPronounceStep = step.key === "pronounce";
   const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
 
-  const soundAudioWords = useMemo(
-    () => randomLectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, false),
-    [data.phonemeA, data.phonemeB, soundItemCount, soundRefreshSeed],
-  );
-  const soundImageWords = useMemo(
-    () => randomLectureRevisionSoundWords(data.phonemeA, data.phonemeB, soundItemCount, true),
-    [data.phonemeA, data.phonemeB, soundItemCount, soundRefreshSeed],
-  );
+  const soundAudioWords = useMemo(() => {
+    void soundRefreshSeed;
+    return randomRevisionSoundWords(data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, false);
+  }, [data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, soundRefreshSeed]);
+  const soundImageWords = useMemo(() => {
+    void soundRefreshSeed;
+    return randomRevisionSoundWords(data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, true);
+  }, [data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, soundRefreshSeed]);
   const pronounceWords = useMemo(
-    () => lectureRevisionBisyllableWords(data.readWords),
-    [data.readWords],
+    () => revisionPronouncePool(data.letterA, data.letterB),
+    [data.letterA, data.letterB],
   );
 
   useEffect(() => {

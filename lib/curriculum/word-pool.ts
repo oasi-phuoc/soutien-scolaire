@@ -3,6 +3,7 @@ import { complexTargets } from "../utils/complex-grapheme";
 import { isImageableLabel } from "./word-image-resolver";
 import graphemePoolsData from "./grapheme-word-pools-data.json";
 import lectureImageWordItemsData from "./lecture-image-word-items.json";
+import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
 
 type GraphemePoolsData = {
   complex: Record<string, string[]>;
@@ -10,6 +11,7 @@ type GraphemePoolsData = {
 };
 
 const GRAPHEME_POOLS = graphemePoolsData as GraphemePoolsData;
+const REVISION_BISYLLABLE_POOLS = revisionBisyllablePoolsData as Record<string, string[]>;
 
 // Each word carries the list of TEACHING phonemes it actually contains
 // (phonetically, not orthographically).
@@ -925,6 +927,91 @@ export function lectureRevisionSoundWords(
   if (items.length === 0) return [];
   const cycle = [...items, ...items];
   return cycle.slice(offset, offset + count).map(({ label, answer }) => ({ word: label, answer }));
+}
+
+/** Pool de 50 mots bisyllabiques par lettre (révisions lecture). */
+export function revisionBisyllablePool(letterLower: string): string[] {
+  return REVISION_BISYLLABLE_POOLS[letterLower.toLowerCase()] ?? [];
+}
+
+function classifyRevisionSoundAnswer(
+  word: string,
+  phonemeA: string,
+  phonemeB: string,
+): "A" | "B" | "AB" | null {
+  const item: WordItem = { label: word, phonemes: teachingPhonemes(word) };
+  const hasA = wordHasPhoneme(item, phonemeA);
+  const hasB = wordHasPhoneme(item, phonemeB);
+  if (!hasA && !hasB) return null;
+  if (hasA && hasB) return "AB";
+  return hasA ? "A" : "B";
+}
+
+/** Mots prononcer révision : union des pools des deux lettres. */
+export function revisionPronouncePool(
+  letterA: string,
+  letterB: string,
+): { letter: string; word: string }[] {
+  const a = letterA.toLowerCase();
+  const b = letterB.toLowerCase();
+  return [
+    ...revisionBisyllablePool(a).map((word) => ({ letter: a, word })),
+    ...revisionBisyllablePool(b).map((word) => ({ letter: b, word })),
+  ];
+}
+
+/** Mots aléatoires pour entendre les sons (révision, pools par lettre). */
+export function randomRevisionSoundWords(
+  letterA: string,
+  phonemeA: string,
+  letterB: string,
+  phonemeB: string,
+  count: number,
+  forImages = false,
+): { word: string; answer: "A" | "B" | "AB" }[] {
+  const byWord = new Map<string, "A" | "B" | "AB">();
+  for (const word of [
+    ...revisionBisyllablePool(letterA.toLowerCase()),
+    ...revisionBisyllablePool(letterB.toLowerCase()),
+  ]) {
+    const answer = classifyRevisionSoundAnswer(word, phonemeA, phonemeB);
+    if (answer) byWord.set(word, answer);
+  }
+
+  let items = [...byWord.entries()].map(([word, answer]) => ({ word, answer }));
+  if (forImages) {
+    items = items.filter(({ word }) => hasLectureWordImage(word));
+  }
+  if (items.length === 0) return [];
+  return shuffle(items).slice(0, Math.min(count, items.length));
+}
+
+/** Mots déterministes pour l'évaluation révision (décalage fixe). */
+export function revisionSoundWords(
+  letterA: string,
+  phonemeA: string,
+  letterB: string,
+  phonemeB: string,
+  count: number,
+  forImages = false,
+  offset = 0,
+): { word: string; answer: "A" | "B" | "AB" }[] {
+  const byWord = new Map<string, "A" | "B" | "AB">();
+  for (const word of [
+    ...revisionBisyllablePool(letterA.toLowerCase()),
+    ...revisionBisyllablePool(letterB.toLowerCase()),
+  ]) {
+    const answer = classifyRevisionSoundAnswer(word, phonemeA, phonemeB);
+    if (answer) byWord.set(word, answer);
+  }
+  let items = [...byWord.entries()].map(([word, answer]) => ({ word, answer }));
+  if (forImages) {
+    items = items.filter(({ word }) => hasLectureWordImage(word));
+  }
+  items.sort((a, b) => a.word.localeCompare(b.word, "fr", { sensitivity: "base" }));
+  if (items.length === 0) return [];
+  const cycle = [...items, ...items];
+  return cycle.slice(offset, offset + count);
 }
 
 /** Mots aléatoires pour l'entraînement révision (étapes audio / images). */
