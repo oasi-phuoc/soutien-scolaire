@@ -6,6 +6,7 @@ import lectureImageWordItemsData from "./lecture-image-word-items.json";
 import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
 import pronouncePoolsData from "./lecture-pronounce-pools.json";
 import { isPedagogicBisyllable } from "./syllabify";
+import { TRISYLLABLE_WORDS, QUADRISYLLABLE_WORDS, type LongPronounceWord } from "./lecture-long-pronounce";
 import type { PronStep } from "./lecture-data";
 
 type GraphemePoolsData = {
@@ -950,6 +951,47 @@ export function randomLetterPronounceSteps(letterLower: string, count = 5): Pron
   const pool = letterPronouncePool(letterLower);
   if (pool.length === 0) return [];
   return shuffle(pool).slice(0, Math.min(count, pool.length));
+}
+
+function longWordContainsLetter(word: string, letterLower: string): boolean {
+  return word
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/gu, "")
+    .toLowerCase()
+    .includes(letterLower);
+}
+
+/**
+ * Mots 3–4 syllabes pour l'étape « Prononcer » longue des révisions :
+ * mots contenant l'une des deux lettres (tous sons confondus),
+ * mélange équilibré de 3 et 4 syllabes.
+ */
+export function randomRevisionLongPronounceSteps(
+  letterA: string,
+  letterB: string,
+  count = 5,
+): PronStep[] {
+  const a = letterA.toLowerCase();
+  const b = letterB.toLowerCase();
+  const matches = (pool: LongPronounceWord[]) =>
+    pool.filter((w) => longWordContainsLetter(w.word, a) || longWordContainsLetter(w.word, b));
+  const tri = shuffle(matches(TRISYLLABLE_WORDS));
+  const quad = shuffle(matches(QUADRISYLLABLE_WORDS));
+
+  const nTri = Math.min(tri.length, Math.ceil(count / 2));
+  const nQuad = Math.min(quad.length, count - nTri);
+  const picked = [
+    ...tri.slice(0, nTri),
+    ...quad.slice(0, nQuad),
+    // Complément si l'une des listes est trop courte
+    ...tri.slice(nTri, nTri + Math.max(0, count - nTri - nQuad)),
+  ].slice(0, count);
+
+  return shuffle(picked).map(({ word, syllable }) => ({
+    phoneme: longWordContainsLetter(word, a) ? a : b,
+    syllable,
+    word,
+  }));
 }
 
 /** 5 mots aléatoires pour révision : 2–3 par lettre. */

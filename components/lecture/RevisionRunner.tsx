@@ -14,7 +14,11 @@ import {
   saveLectureProgress,
   markRevisionCompleted,
 } from "@/lib/progress/lecture-progress";
-import { randomRevisionSoundWords, randomRevisionPronounceSteps } from "@/lib/curriculum/word-pool";
+import {
+  randomRevisionSoundWords,
+  randomRevisionPronounceSteps,
+  randomRevisionLongPronounceSteps,
+} from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: RevisionData;
@@ -31,6 +35,7 @@ const TRAINING_STEPS: Step[] = [
   { key: "sound-audio", label: "Audio" },
   { key: "sound-image", label: "Images" },
   { key: "pronounce", label: "Prononcer" },
+  { key: "pronounce-long", label: "Prononcer 3-4" },
 ];
 
 const STEPS: Step[] = [...TRAINING_STEPS, { key: "eval", label: "Évaluation" }];
@@ -66,7 +71,7 @@ export function RevisionRunner({ data }: Props) {
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = step.key === "word-upper" || step.key === "word-lower";
   const isSoundStep = step.key === "sound-image" || step.key === "sound-audio";
-  const isPronounceStep = step.key === "pronounce";
+  const isPronounceStep = step.key === "pronounce" || step.key === "pronounce-long";
   const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
 
   const soundAudioWords = useMemo(() => {
@@ -80,6 +85,10 @@ export function RevisionRunner({ data }: Props) {
   const pronounceSteps = useMemo(() => {
     void pronounceRefreshSeed;
     return randomRevisionPronounceSteps(data.letterA, data.letterB, 5);
+  }, [data.letterA, data.letterB, pronounceRefreshSeed]);
+  const pronounceLongSteps = useMemo(() => {
+    void pronounceRefreshSeed;
+    return randomRevisionLongPronounceSteps(data.letterA, data.letterB, 5);
   }, [data.letterA, data.letterB, pronounceRefreshSeed]);
 
   useEffect(() => {
@@ -210,6 +219,14 @@ export function RevisionRunner({ data }: Props) {
             steps={pronounceSteps}
           />
         );
+      case "pronounce-long":
+        return (
+          <RevisionPronounce
+            key={`${k}-${pronounceRefreshSeed}`}
+            ref={pronounceRef}
+            steps={pronounceLongSteps}
+          />
+        );
       case "eval":
         return (
           <RevisionEvaluation
@@ -293,6 +310,7 @@ export function RevisionRunner({ data }: Props) {
             <div className="app-shell-bar flex items-center justify-between py-3">
               <button
                 type="button"
+                data-nav-action="back"
                 onClick={goBack}
                 className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
@@ -306,6 +324,7 @@ export function RevisionRunner({ data }: Props) {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
+                    data-nav-action="refresh"
                     aria-label="Recommencer"
                     onClick={exerciseReset}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
@@ -318,6 +337,7 @@ export function RevisionRunner({ data }: Props) {
                   {!isPronounceStep && (
                     <button
                       type="button"
+                      data-nav-action="validate"
                       aria-label="Valider"
                       onClick={exerciseValidate}
                       className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
@@ -332,6 +352,8 @@ export function RevisionRunner({ data }: Props) {
 
               <button
                 type="button"
+                data-nav-action="next"
+                data-nav-label={stepIdx === TRAINING_STEPS.length - 1 ? "Évaluation" : undefined}
                 onClick={goNext}
                 className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
               >

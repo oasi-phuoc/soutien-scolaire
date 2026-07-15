@@ -97,6 +97,18 @@ function revisionImageButtonClass(
   return `${base} ${LECTURE_CORRECTION_BORDER}`;
 }
 
+function revisionAudioButtonClass(
+  sel: CardSelection,
+  answer: "A" | "B" | "AB",
+  validated: boolean,
+): string {
+  const base =
+    "flex aspect-square w-full items-center justify-center rounded-lg border bg-white";
+  if (!validated) return `${base} border-[var(--color-accent-lecture)]`;
+  if (isCardCorrect(sel, answer)) return `${base} border-[var(--color-accent-lecture)]`;
+  return `${base} ${LECTURE_CORRECTION_BORDER}`;
+}
+
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
   function RevisionSoundStep({ phonemeA, phonemeB, words, mode, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
@@ -197,7 +209,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   <button
                     type="button"
                     onClick={() => playAudio(word)}
-                    className="flex aspect-square w-full items-center justify-center rounded-lg bg-[var(--color-bg-secondary)]"
+                    className={revisionAudioButtonClass(sel, answer, validated)}
                     aria-label={`Écouter ${word}`}
                   >
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent-lecture)]" aria-hidden>

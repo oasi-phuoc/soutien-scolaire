@@ -91,9 +91,16 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
     const a = mixedCase ? `${letterA}/${letterA.toLowerCase()}` : isUppercase ? letterA : letterA.toLowerCase();
     const b = mixedCase ? `${letterB}/${letterB.toLowerCase()}` : isUppercase ? letterB : letterB.toLowerCase();
 
-    const [grid, setGrid] = useState(() => getOrMakeGrid(sessionKey, letterA, letterB, isUppercase, mixedCase));
+    // Grille générée uniquement côté client (au montage) : le rendu serveur
+    // affiche des cases vides, ce qui évite la double génération visible
+    // (une grille SSR aléatoire remplacée par une autre à l'hydratation).
+    const [grid, setGrid] = useState<string[] | null>(null);
     const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
     const [validated, setValidated] = useState(false);
+
+    useEffect(() => {
+      setGrid(getOrMakeGrid(sessionKey, letterA, letterB, isUppercase, mixedCase));
+    }, [sessionKey, letterA, letterB, isUppercase, mixedCase]);
 
     const reset = useCallback(() => {
       const next = makeGrid(letterA, letterB, isUppercase, mixedCase);
@@ -104,7 +111,7 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
     }, [letterA, letterB, isUppercase, mixedCase, sessionKey]);
 
     const validate = useCallback(() => {
-      if (validated) return;
+      if (validated || !grid) return;
       const targets = targetSet(letterA, letterB, isUppercase, mixedCase);
       const newStates = states.map((s, i) => {
         const isTarget = targets.has(grid[i]!);
@@ -153,14 +160,14 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
           </p>
         )}
         <div className="grid grid-cols-5 gap-2">
-          {grid.map((letter, i) => {
+          {(grid ?? Array.from({ length: GRID_SIZE }, () => "")).map((letter, i) => {
             const s = states[i];
             return (
               <button
                 key={i}
                 type="button"
                 onClick={() => tap(i)}
-                disabled={validated}
+                disabled={validated || !grid}
                 className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-4xl font-bold transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
