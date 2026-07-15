@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Geist_Mono } from "next/font/google";
 import { OfflineProvider } from "@/components/OfflineProvider";
+import { ForceLightMode, FORCE_LIGHT_MODE_SCRIPT } from "@/components/ForceLightMode";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -33,10 +34,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" style={{ colorScheme: "light" }}>
+    <html lang="fr" style={{ colorScheme: "light" }} suppressHydrationWarning>
+      <head>
+        <meta name="color-scheme" content="light only" />
+        <script dangerouslySetInnerHTML={{ __html: FORCE_LIGHT_MODE_SCRIPT }} />
+      </head>
       <body
         className={`${nunito.variable} ${geistMono.variable} antialiased`}
       >
+        <ForceLightMode />
         <OfflineProvider />
         {children}
       </body>

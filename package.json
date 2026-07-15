@@ -12,7 +12,7 @@
     "generate:offline-manifest": "node scripts/generate-offline-manifest.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "mobile:sync": "cap sync",
+    "mobile:sync": "cap sync && node scripts/patch-ios-light-mode.mjs",
     "mobile:android": "cap open android",
     "mobile:ios": "cap open ios",
     "mobile:ios:init": "cap add ios"

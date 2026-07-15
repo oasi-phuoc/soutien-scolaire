@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
-  color-scheme: light;
+  color-scheme: light only;
   /* Thème unique style EPCAS — vert sauge + orange correction */
   --background: #eef6f3;
   --foreground: #2f3a3f;
@@ -131,7 +129,15 @@ td[class~="text-left"] {
 
 html,
 body {
-  color-scheme: light;
+  color-scheme: light only;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  html,
+  body {
+    color-scheme: light only;
+  }
 }
 
 .section-background {
