@@ -5,6 +5,7 @@ import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+import { LECTURE_CORRECTION_BORDER, LECTURE_CORRECTION_BUTTON, LECTURE_CORRECTION_CARD } from "./lecture-correction";
 
 export interface RevisionSoundStepHandle {
   reset: () => void;
@@ -55,7 +56,7 @@ function revisionCardClass(
     return `${base} border-amber-400 bg-amber-50`;
   }
   if (wrongA || wrongB) {
-    return `${base} border-red-400 bg-red-50`;
+    return `${base} ${LECTURE_CORRECTION_CARD}`;
   }
   return `${base} border-[var(--color-border-default)]`;
 }
@@ -76,12 +77,24 @@ function revisionPhonemeButtonClass(
     return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
   }
   if (isSelected && !isCorrect) {
-    return `${base} border-red-400 bg-red-50 text-red-700`;
+    return `${base} ${LECTURE_CORRECTION_BUTTON}`;
   }
   if (!isSelected && isCorrect) {
     return `${base} border-amber-400 bg-amber-50 text-amber-700`;
   }
   return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+}
+
+function revisionImageButtonClass(
+  sel: CardSelection,
+  answer: "A" | "B" | "AB",
+  validated: boolean,
+): string {
+  const base =
+    "relative aspect-square w-full overflow-hidden rounded-lg border bg-white";
+  if (!validated) return `${base} border-[var(--color-accent-lecture)]`;
+  if (isCardCorrect(sel, answer)) return `${base} border-[var(--color-accent-lecture)]`;
+  return `${base} ${LECTURE_CORRECTION_BORDER}`;
 }
 
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
@@ -161,7 +174,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   <button
                     type="button"
                     onClick={() => playAudio(word)}
-                    className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)] bg-white"
+                    className={revisionImageButtonClass(sel, answer, validated)}
                     aria-label={`Écouter ${word}`}
                   >
                     {(() => {

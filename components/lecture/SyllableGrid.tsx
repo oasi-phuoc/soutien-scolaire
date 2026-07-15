@@ -211,7 +211,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
-                    ? "border-red-300 bg-[var(--color-bg-primary)]"
+                    ? "border-amber-400 bg-[var(--color-bg-primary)]"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
@@ -226,7 +226,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
                     : state === "correct"
                       ? "bg-[var(--color-accent-lecture)]"
                       : state === "wrong"
-                        ? "bg-red-400"
+                        ? "bg-amber-500"
                         : "bg-[var(--color-accent-lecture)]"
                 }`}
                 aria-label="Parler"
@@ -262,7 +262,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
                 </svg>
               </button>
               {state === "wrong" && heard[i] && (
-                <p className="col-span-4 pl-8 text-xs text-red-500 md:pl-6 md:text-[10px]">J&apos;ai entendu: {heard[i]}</p>
+                <p className="col-span-4 pl-8 text-xs text-amber-600 md:pl-6 md:text-[10px]">J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );

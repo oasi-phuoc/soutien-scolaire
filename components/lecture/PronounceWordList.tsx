@@ -6,6 +6,7 @@ import { playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+import { LECTURE_CORRECTION_BORDER } from "./lecture-correction";
 
 export interface PronounceWordListHandle {
   reset: () => void;
@@ -33,9 +34,10 @@ function isMatch(recognized: string, target: string): boolean {
 }
 
 function rowClass(state: RecState): string {
-  const base = "grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors";
+  const base =
+    "grid grid-cols-[auto_minmax(5.5rem,auto)_1.5rem_minmax(5.5rem,auto)_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors";
   if (state === "correct") return `${base} border-[var(--color-accent-lecture)]`;
-  if (state === "wrong") return `${base} border-red-300`;
+  if (state === "wrong") return `${base} ${LECTURE_CORRECTION_BORDER}`;
   return `${base} border-[var(--color-border-default)]`;
 }
 
@@ -148,7 +150,7 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
                       state === "listening"
                         ? "animate-pulse bg-red-500"
                         : state === "wrong"
-                          ? "bg-red-400"
+                          ? "bg-amber-500"
                           : "bg-[var(--color-accent-lecture)]"
                     }`}
                     aria-label={`Prononcer ${step.word}`}
@@ -172,10 +174,12 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
                 ) : (
                   <span className="h-11 w-11 shrink-0" aria-hidden />
                 )}
-                <span className="min-h-12 px-2 text-center leading-[3rem] text-[var(--color-text-primary)]">
-                  <span className="text-xl font-normal">{step.syllable}</span>
-                  <span className="mx-2 text-base text-[var(--color-text-secondary)]">→</span>
-                  <span className="text-xl font-bold">{step.word}</span>
+                <span className="text-left text-xl font-normal leading-none text-[var(--color-text-primary)]">
+                  {step.syllable}
+                </span>
+                <span className="text-center text-base leading-none text-[var(--color-text-secondary)]">→</span>
+                <span className="text-left text-xl font-bold leading-none text-[var(--color-text-primary)]">
+                  {step.word}
                 </span>
                 <button
                   type="button"

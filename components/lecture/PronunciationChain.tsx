@@ -114,7 +114,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
           recState === "correct"
             ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
             : recState === "wrong"
-              ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+              ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
               : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
         }`}>
           <span className="text-sm text-[var(--color-text-secondary)]">
@@ -153,7 +153,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
                   : recState === "correct"
                     ? "bg-[var(--color-accent-lecture)] text-white"
                     : recState === "wrong"
-                      ? "bg-red-400 text-white"
+                      ? "bg-amber-500 text-white"
                       : "bg-[var(--color-accent-lecture)] text-white hover:opacity-90"
               }`}
               aria-label="Parler"
@@ -188,10 +188,10 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
                 <span className="font-semibold text-[var(--color-accent-lecture)]">Bravo ! 🎉</span>
               )}
               {recState === "wrong" && heard && (
-                <span className="text-red-500">J&apos;ai entendu « {heard} » — réessaie !</span>
+                <span className="text-amber-600">J&apos;ai entendu « {heard} » — réessaie !</span>
               )}
               {recState === "wrong" && !heard && (
-                <span className="text-red-500">Je n&apos;ai pas compris — réessaie !</span>
+                <span className="text-amber-600">Je n&apos;ai pas compris — réessaie !</span>
               )}
             </p>
           </div>

@@ -243,7 +243,7 @@ function GridExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -337,7 +337,7 @@ function WordsExercise({
                       s === "correct" || s === "selected"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
-                          ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
+                          ? "border-amber-400 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
                           : "border-transparent text-[var(--color-text-primary)]"
                     }`}
                   >
@@ -415,7 +415,7 @@ function SoundImageExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-red-400"
+                    ? "border-amber-400"
                     : "border-[var(--color-border-default)]"
               }`}
             >
@@ -506,7 +506,7 @@ function SoundAudioExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-red-400"
+                    ? "border-amber-400"
                     : "border-[var(--color-border-default)]"
               }`}
             >
@@ -518,7 +518,7 @@ function SoundAudioExercise({
                   s === "correct" || s === "selected"
                     ? "bg-[var(--color-accent-lecture)] text-white"
                     : s === "wrong" || s === "missed"
-                      ? "bg-red-400 text-white"
+                      ? "bg-amber-500 text-white"
                       : "bg-[var(--color-accent-lecture)] text-white"
                 }`}
               >
@@ -628,7 +628,7 @@ function SyllablesMixedExercise({
           return (
             <div key={`${syllable}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
               state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                : state === "wrong" ? "border-red-400 bg-red-50"
+                : state === "wrong" ? "border-amber-400 bg-amber-50"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
             }`}>
               <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
@@ -798,7 +798,7 @@ function PronounceExercise({
             return (
               <div key={`${step.word}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
                 state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                  : state === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+                  : state === "wrong" ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}>
                 <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
@@ -858,7 +858,7 @@ function PronounceExercise({
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer le mot</h2>
       <div className={`flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border-2 px-6 py-6 text-center transition-colors ${
         recState === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-          : recState === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+          : recState === "wrong" ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
             : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
       }`}>
         <span className="text-sm text-[var(--color-text-secondary)]">
@@ -883,7 +883,7 @@ function PronounceExercise({
             className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
               recState === "listening" ? "animate-pulse bg-red-500 text-white"
                 : recState === "correct" ? "bg-[var(--color-accent-lecture)] text-white"
-                  : recState === "wrong" ? "bg-red-400 text-white"
+                  : recState === "wrong" ? "bg-amber-500 text-white"
                     : "bg-[var(--color-accent-lecture)] text-white hover:opacity-90"
             }`} aria-label="Parler">
             {recState === "correct"
@@ -979,7 +979,7 @@ function ComplexGridExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -1070,7 +1070,7 @@ function ComplexWordsExercise({
                     s === "correct" || s === "selected"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : s === "wrong" || s === "missed"
-                        ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
+                        ? "border-amber-400 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
                         : "border-transparent text-[var(--color-text-primary)]"
                   }`}
                 >
@@ -1153,7 +1153,7 @@ function ComplexSyllablesExercise({
           return (
             <div key={`${syllable}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
               state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                : state === "wrong" ? "border-red-400 bg-red-50"
+                : state === "wrong" ? "border-amber-400 bg-amber-50"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
             }`}>
               <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
@@ -1244,7 +1244,7 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
       return (
         <li key={`${syllable}-${i}`} className={`rounded-[var(--radius-lg)] border px-4 py-3 text-center ${
           state === "correct" ? "border-[var(--color-correction)] text-[var(--color-correction)]"
-            : state === "wrong" ? "border-red-300 text-red-600"
+            : state === "wrong" ? "border-amber-400 text-amber-600"
               : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
         }`}>
           {state === "wrong" && heard && <p className="text-xs line-through opacity-70">{heard}</p>}
@@ -1260,7 +1260,7 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
       return (
         <li key={`${word}-${i}`} className={`rounded-[var(--radius-lg)] border px-4 py-3 text-center ${
           state === "correct" ? "border-[var(--color-correction)] text-[var(--color-correction)]"
-            : state === "wrong" ? "border-red-300 text-red-600"
+            : state === "wrong" ? "border-amber-400 text-amber-600"
               : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
         }`}>
           <p className="text-lg font-bold">{word}</p>

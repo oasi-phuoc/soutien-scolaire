@@ -6,6 +6,7 @@ import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+import { LECTURE_CORRECTION_BUTTON, LECTURE_CORRECTION_BORDER, LECTURE_CORRECTION_CARD } from "./lecture-correction";
 
 export interface SoundPickerHandle {
   reset: () => void;
@@ -71,7 +72,7 @@ function ouiNonButtonClass(state: CellState, validated: boolean, hasPhoneme: boo
     return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
   }
   if (state === "wrong") {
-    return `${base} border-red-400 bg-red-50 text-red-700`;
+    return `${base} ${LECTURE_CORRECTION_BUTTON}`;
   }
   if (state === "missed") {
     return `${base} border-amber-400 bg-amber-50 text-amber-700`;
@@ -95,7 +96,7 @@ function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
     return `${base} border-[var(--color-accent-lecture)]`;
   }
   if (state === "wrong") {
-    return `${base} border-red-400 bg-red-50`;
+    return `${base} ${LECTURE_CORRECTION_CARD}`;
   }
   if (state === "missed") {
     return `${base} border-amber-400 bg-amber-50`;
@@ -104,6 +105,14 @@ function imageCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
     return `${base} border-amber-400 bg-amber-50`;
   }
   return `${base} border-[var(--color-border-default)]`;
+}
+
+function imageButtonClass(state: CellState, validated: boolean): string {
+  const base =
+    "relative aspect-square w-full overflow-hidden rounded-lg border bg-white";
+  if (!validated) return `${base} border-[var(--color-accent-lecture)]`;
+  if (state === "wrong" || state === "missed") return `${base} ${LECTURE_CORRECTION_BORDER}`;
+  return `${base} border-[var(--color-accent-lecture)]`;
 }
 
 function audioCardClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
@@ -116,7 +125,7 @@ function audioCardClass(state: CellState, validated: boolean, hasPhoneme: boolea
     return `${base} border-[var(--color-accent-lecture)]`;
   }
   if (state === "wrong") {
-    return `${base} border-red-400 bg-red-50`;
+    return `${base} ${LECTURE_CORRECTION_CARD}`;
   }
   if (state === "missed") {
     return `${base} border-amber-400 bg-amber-50`;
@@ -219,7 +228,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <button
                   type="button"
                   onClick={() => playWord(word.label)}
-                  className="relative aspect-square w-full overflow-hidden rounded-lg border border-[var(--color-accent-lecture)] bg-white"
+                  className={imageButtonClass(s, validated)}
                   aria-label={`Écouter ${word.label}`}
                 >
                   {imgSrc ? (

@@ -228,7 +228,7 @@ const ComplexGraphemeGrid = forwardRef<LetterGridHandle, {
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : state === "wrong" || state === "missed"
-                    ? "border-red-400 bg-red-50 text-red-700"
+                    ? "border-amber-400 bg-amber-50 text-amber-700"
                     : state === "selected"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                       : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
@@ -323,7 +323,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
                     state === "correct"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : state === "wrong" || state === "missed"
-                        ? "border-red-400 bg-red-100 text-red-600"
+                        ? "border-amber-400 bg-amber-100 text-amber-600"
                         : state === "selected"
                           ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                           : "border-transparent text-[var(--color-text-primary)]"
@@ -424,7 +424,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
-                    ? "border-red-300 bg-[var(--color-bg-primary)]"
+                    ? "border-amber-400 bg-[var(--color-bg-primary)]"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
@@ -439,7 +439,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
                     : state === "correct"
                       ? "bg-[var(--color-accent-lecture)]"
                       : state === "wrong"
-                        ? "bg-red-400"
+                        ? "bg-amber-500"
                         : "bg-[var(--color-accent-lecture)]"
                 }`}
                 aria-label="Parler"
@@ -471,7 +471,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
                 </svg>
               </button>
               {state === "wrong" && heard[i] && (
-                <p className="col-span-4 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+                <p className="col-span-4 pl-8 text-xs text-amber-600">J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );
@@ -678,7 +678,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
             </p>
             <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
               <div
-                className={`h-full rounded-full ${passed ? "bg-[var(--color-accent-lecture)]" : "bg-red-400"}`}
+                className={`h-full rounded-full ${passed ? "bg-[var(--color-accent-lecture)]" : "bg-amber-500"}`}
                 style={{ width: `${Math.round((evalCorrect / Math.max(items.length, 1)) * 100)}%` }}
               />
             </div>
@@ -689,9 +689,9 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
               {grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span>
             </p>
           </div>
-          <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
+          <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-amber-400"}`}>
             <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-            <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>{passed ? "Réussi" : "À améliorer"}</p>
+            <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-amber-600"}`}>{passed ? "Réussi" : "À améliorer"}</p>
           </div>
         </div>
         <ul className="space-y-2">
@@ -701,12 +701,12 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
               <li
                 key={`${word}-${i}`}
                 className={`flex items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-2 ${
-                  ok ? "border-green-300 bg-green-50/50 dark:bg-green-950/20" : "border-red-300 bg-red-50/50 dark:bg-red-950/20"
+                  ok ? "border-green-300 bg-green-50/50 dark:bg-green-950/20" : "border-amber-400 bg-amber-50/50 dark:bg-amber-950/20"
                 }`}
               >
                 <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
                 <span className="flex-1 text-base font-bold text-[var(--color-text-primary)]">{word}</span>
-                <span className={`text-sm font-bold ${ok ? "text-green-600" : "text-red-500"}`}>{ok ? "✓" : "✗"}</span>
+                <span className={`text-sm font-bold ${ok ? "text-green-600" : "text-amber-600"}`}>{ok ? "✓" : "✗"}</span>
               </li>
             );
           })}
@@ -732,7 +732,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
           {isEval && !evalWithResults && (
             <div className="mb-1 flex items-center justify-end">
               <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-                timeUp ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                timeUp ? "bg-red-100 text-amber-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
               }`}>
                 {fmt(timeLeft)}
               </span>
@@ -749,7 +749,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
         </div>
       )}
       {timeUp && !evalWithResults && (
-        <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/20">
+        <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-amber-600 dark:bg-red-900/20">
           Temps écoulé ! Appuyez sur recommencer pour réessayer.
         </p>
       )}
@@ -765,7 +765,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
-                    ? "border-red-300 bg-[var(--color-bg-primary)]"
+                    ? "border-amber-400 bg-[var(--color-bg-primary)]"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
@@ -780,7 +780,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "wrong"
-                      ? "bg-red-400"
+                      ? "bg-amber-500"
                       : "bg-[var(--color-accent-lecture)]"
                 }`}
                 aria-label="Parler"
@@ -816,7 +816,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
                 </svg>
               </button>
               {state === "wrong" && heard[i] && (
-                <p className={`col-span-4 pl-8 text-xs text-red-500${desktopTwoColumn ? " md:pl-6 md:text-[10px]" : ""}`}>J&apos;ai entendu: {heard[i]}</p>
+                <p className={`col-span-4 pl-8 text-xs text-amber-600${desktopTwoColumn ? " md:pl-6 md:text-[10px]" : ""}`}>J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );
@@ -1435,7 +1435,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
             <div className="flex items-center gap-3">
               {isTimedReview && wordTimerLeft != null && (
                 <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-                  wordTimerLeft <= 0 ? "bg-red-100 text-red-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                  wordTimerLeft <= 0 ? "bg-red-100 text-amber-600" : "bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                 }`}>
                   {`${Math.floor(wordTimerLeft / 60)}:${String(wordTimerLeft % 60).padStart(2, "0")}`}
                 </span>
