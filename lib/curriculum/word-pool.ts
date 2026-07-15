@@ -4,6 +4,8 @@ import { isImageableLabel } from "./word-image-resolver";
 import graphemePoolsData from "./grapheme-word-pools-data.json";
 import lectureImageWordItemsData from "./lecture-image-word-items.json";
 import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
+import pronouncePoolsData from "./lecture-pronounce-pools.json";
+import type { PronStep } from "./lecture-data";
 
 type GraphemePoolsData = {
   complex: Record<string, string[]>;
@@ -12,6 +14,7 @@ type GraphemePoolsData = {
 
 const GRAPHEME_POOLS = graphemePoolsData as GraphemePoolsData;
 const REVISION_BISYLLABLE_POOLS = revisionBisyllablePoolsData as Record<string, string[]>;
+const LETTER_PRONOUNCE_POOLS = pronouncePoolsData as Record<string, PronStep[]>;
 
 // Each word carries the list of TEACHING phonemes it actually contains
 // (phonetically, not orthographically).
@@ -932,6 +935,52 @@ export function lectureRevisionSoundWords(
 /** Pool de 50 mots bisyllabiques par lettre (révisions lecture). */
 export function revisionBisyllablePool(letterLower: string): string[] {
   return REVISION_BISYLLABLE_POOLS[letterLower.toLowerCase()] ?? [];
+}
+
+/** Pool prononcer lettre : 50 mots bisyllabiques avec syllabation pédagogique. */
+export function letterPronouncePool(letterLower: string): PronStep[] {
+  return LETTER_PRONOUNCE_POOLS[letterLower.toLowerCase()] ?? [];
+}
+
+/** 5 mots aléatoires pour l'étape prononcer (leçon lettre). */
+export function randomLetterPronounceSteps(letterLower: string, count = 5): PronStep[] {
+  const pool = letterPronouncePool(letterLower);
+  if (pool.length === 0) return [];
+  return shuffle(pool).slice(0, Math.min(count, pool.length));
+}
+
+/** 5 mots aléatoires pour révision : 2–3 par lettre. */
+export function randomRevisionPronounceSteps(
+  letterA: string,
+  letterB: string,
+  count = 5,
+): PronStep[] {
+  const poolA = letterPronouncePool(letterA.toLowerCase());
+  const poolB = letterPronouncePool(letterB.toLowerCase());
+  if (poolA.length === 0 && poolB.length === 0) return [];
+  const countA = Math.min(poolA.length, 2 + Math.floor(Math.random() * 2));
+  const countB = Math.min(poolB.length, Math.max(0, count - countA));
+  return [
+    ...shuffle(poolA).slice(0, countA),
+    ...shuffle(poolB).slice(0, countB),
+  ].slice(0, count);
+}
+
+/** Tirage déterministe pour l'évaluation révision (prononcer). */
+export function revisionPronounceSteps(
+  letterA: string,
+  letterB: string,
+  count: number,
+  offset = 0,
+): PronStep[] {
+  const merged = [
+    ...letterPronouncePool(letterA.toLowerCase()),
+    ...letterPronouncePool(letterB.toLowerCase()),
+  ];
+  merged.sort((a, b) => a.word.localeCompare(b.word, "fr", { sensitivity: "base" }));
+  if (merged.length === 0) return [];
+  const cycle = [...merged, ...merged];
+  return cycle.slice(offset, offset + count);
 }
 
 function classifyRevisionSoundAnswer(

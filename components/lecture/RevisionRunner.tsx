@@ -14,7 +14,7 @@ import {
   saveLectureProgress,
   markRevisionCompleted,
 } from "@/lib/progress/lecture-progress";
-import { randomRevisionSoundWords, revisionPronouncePool } from "@/lib/curriculum/word-pool";
+import { randomRevisionSoundWords, randomRevisionPronounceSteps } from "@/lib/curriculum/word-pool";
 
 interface Props {
   data: RevisionData;
@@ -77,10 +77,10 @@ export function RevisionRunner({ data }: Props) {
     void soundRefreshSeed;
     return randomRevisionSoundWords(data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, true);
   }, [data.letterA, data.phonemeA, data.letterB, data.phonemeB, soundItemCount, soundRefreshSeed]);
-  const pronounceWords = useMemo(
-    () => revisionPronouncePool(data.letterA, data.letterB),
-    [data.letterA, data.letterB],
-  );
+  const pronounceSteps = useMemo(() => {
+    void pronounceRefreshSeed;
+    return randomRevisionPronounceSteps(data.letterA, data.letterB, 5);
+  }, [data.letterA, data.letterB, pronounceRefreshSeed]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -207,7 +207,7 @@ export function RevisionRunner({ data }: Props) {
           <RevisionPronounce
             key={`${k}-${pronounceRefreshSeed}`}
             ref={pronounceRef}
-            words={pronounceWords}
+            steps={pronounceSteps}
           />
         );
       case "eval":

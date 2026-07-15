@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { RevisionData } from "@/lib/curriculum/lecture-data";
-import { revisionPronouncePool, revisionSoundWords } from "@/lib/curriculum/word-pool";
+import { revisionPronounceSteps, revisionSoundWords } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { useRegisterEvalGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
@@ -31,7 +31,7 @@ type EvalStep = "grid-mixed" | "words-mixed" | "sound-audio" | "sound-image" | "
 
 const EVAL_STEPS: EvalStep[] = ["grid-mixed", "words-mixed", "sound-audio", "sound-image", "pronounce", "results"];
 const EVAL_SOUND_COUNT = 8;
-const EVAL_PRONOUNCE_COUNT = 4;
+const EVAL_PRONOUNCE_COUNT = 5;
 const EVAL_MINUTES = 5;
 
 const RESULT_LABELS: Record<Exclude<EvalStep, "results">, string> = {
@@ -117,8 +117,8 @@ export function RevisionEvaluation({
       ),
     [data.letterA, data.phonemeA, data.letterB, data.phonemeB],
   );
-  const pronounceWords = useMemo(
-    () => revisionPronouncePool(data.letterA, data.letterB),
+  const pronounceSteps = useMemo(
+    () => revisionPronounceSteps(data.letterA, data.letterB, EVAL_PRONOUNCE_COUNT),
     [data.letterA, data.letterB],
   );
 
@@ -314,8 +314,7 @@ export function RevisionEvaluation({
             </div>
             <div hidden={isResults || stepIdx !== 4}>
               <RevisionPronounce
-                words={pronounceWords}
-                wordCount={EVAL_PRONOUNCE_COUNT}
+                steps={pronounceSteps}
                 onValidated={(score, max) => recordScore(4, score, max)}
                 shouldValidate={validateTarget === 4 || validateTarget === -1}
               />

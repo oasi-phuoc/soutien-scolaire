@@ -16,7 +16,8 @@ import {
 } from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
-import { PronunciationChain, type PronunciationChainHandle } from "./PronunciationChain";
+import { LetterPronounce, type LetterPronounceHandle } from "./LetterPronounce";
+import { PronunciationChain } from "./PronunciationChain";
 import {
   loadLectureProgress,
   saveLectureProgress,
@@ -910,7 +911,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
-  const pronounceRef = useRef<PronunciationChainHandle>(null);
+  const pronounceRef = useRef<LetterPronounceHandle>(null);
   const pronounceGridRef = useRef<WordPronounceGridHandle>(null);
 
   const isFirst = stepIdx === 0;
@@ -1363,7 +1364,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
         );
       }
       case "pronounce":
-        return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+        return <LetterPronounce key={k} ref={pronounceRef} letterLower={data.letterLower} />;
       case "eval":
         return (
           <LectureEvaluation
