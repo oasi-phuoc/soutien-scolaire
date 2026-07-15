@@ -184,7 +184,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
           {items.map((word, i) => {
             const s = states[i]!;
-            const hasPhoneme = wordHasPhoneme(word.label, phoneme);
+            const hasPhoneme = wordHasPhoneme(word, phoneme);
             const imgSrc = getLectureWordImagePath(word.label);
             return (
               <div
@@ -279,7 +279,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
           {items.map((word, i) => {
             const s = states[i]!;
-            const hasPhoneme = wordHasPhoneme(word.label, phoneme);
+            const hasPhoneme = wordHasPhoneme(word, phoneme);
             return (
               <div
                 key={`${word.label}-${i}`}
