@@ -154,7 +154,7 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
                       s === "correct"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
-                          ? "border-amber-400 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+                          ? "border-amber-400 bg-amber-100 text-amber-600"
                           : s === "selected"
                             ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                             : "border-transparent text-[var(--color-text-primary)]"

@@ -3092,7 +3092,7 @@ function ArithmeticGroupExercise({
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
               ? timeLeft <= 15
-                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
+                ? "bg-red-100 text-red-600"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
               : "invisible"
           }`}>
@@ -6331,7 +6331,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       const noteText = textFor(block.fr, pivotText ?? block.pivot?.[pivot]);
       return (
         <div>
-          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800">
             <span lang={textLang} dir={textDir}>{renderText(noteText)}</span>
           </div>
         </div>
@@ -6658,7 +6658,7 @@ function ShapeExplorerBlock({
             className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
               selectedIdx === i
                 ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
-                : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"
+                : "border-[var(--color-border-default)] bg-white hover:border-[var(--color-accent-alg)]/60"
             }`}
           >
             <div className="pointer-events-none w-full h-full" dangerouslySetInnerHTML={{ __html: shape.svg }} />
@@ -6693,7 +6693,7 @@ function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
   }, [onClose]);
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl dark:shadow-black/50 border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
+      <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
         <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">💡 Astuce</p>
         <p className="text-sm leading-relaxed text-[var(--color-text-primary)] pr-4">{hint}</p>
         <button type="button" onClick={onClose}
@@ -9814,7 +9814,7 @@ export function GenericModuleContent({
             }`}
           />
           {exStatus === "wrong" && (
-            <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+            <p className="text-xs font-medium text-amber-600">
               {exAttempts >= 2 ? `Réponse attendue : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
             </p>
           )}
@@ -10340,7 +10340,7 @@ export function GenericModuleContent({
             }`}
           />
           {exStatus === "wrong" && (
-            <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+            <p className="text-xs font-medium text-amber-600">
               {exAttempts >= 2 ? `Réponse attendue : ${currentStep.nlConfig.target}` : "Essayez encore…"}
             </p>
           )}
@@ -11712,7 +11712,7 @@ export function GenericModuleContent({
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
                   ? "border-2 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50"
               }`}
             >
               Oui
@@ -11723,7 +11723,7 @@ export function GenericModuleContent({
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "non"
                   ? "bg-red-400 text-white shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-950/20"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-red-400 hover:bg-red-50"
               }`}
             >
               Non

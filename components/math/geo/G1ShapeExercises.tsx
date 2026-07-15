@@ -806,7 +806,7 @@ export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExP
           return (
             <label key={i} className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 transition-colors ${
               validated
-                ? res === false ? "border-amber-400 bg-amber-50/50 dark:bg-amber-950/20" : "border-[var(--color-border-default)]"
+                ? res === false ? "border-amber-400 bg-amber-50/50" : "border-[var(--color-border-default)]"
                 : "border-[var(--color-border-default)] hover:border-[var(--color-accent-alg)]/50"
             }`}>
               <input

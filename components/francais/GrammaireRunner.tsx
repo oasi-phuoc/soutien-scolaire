@@ -325,7 +325,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                   <div className="ml-5 space-y-1">
                     {block.examples.map((ex, ei) => (
                       <div key={ei} className="space-y-0.5">
-                        <code className="block rounded bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400">
+                        <code className="block rounded bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700">
                           ✓ {ex.correct}
                         </code>
                         {ex.wrong && (
@@ -344,7 +344,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             return (
               <div
                 key={i}
-                className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-300"
+                className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"
               >
                 <span className="mr-1.5">ℹ</span>
                 {block.text}
@@ -719,7 +719,7 @@ function QcmExercise({
             if (isSelected && !isCorrect) {
               cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             } else if (!isSelected && isCorrect && userWrong) {
-              cls += "text-amber-500 dark:text-amber-400 font-semibold";
+              cls += "text-amber-500 font-semibold";
             } else {
               cls += isSelected
                 ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
@@ -735,7 +735,7 @@ function QcmExercise({
 
         if (hasInlineToggle) {
           const inlineGroup = (
-            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} align-middle`}>
+            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500" : "border-[var(--color-border-default)]"} align-middle`}>
               {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
             </span>
           );
@@ -791,7 +791,7 @@ function QcmExercise({
                     if (isSelected && !isCorrect) {
                       cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
-                      cls += "text-amber-500 dark:text-amber-400 font-semibold";
+                      cls += "text-amber-500 font-semibold";
                     } else {
                       cls += isSelected
                         ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
@@ -828,7 +828,7 @@ function QcmExercise({
               </p>
             )}
             {exercise.toggleChoices ? (
-              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500" : "border-[var(--color-border-default)]"}`}>
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
               </div>
             ) : (
@@ -847,10 +847,10 @@ function QcmExercise({
                     const userWrong = selected[i] !== item.correctIdx;
                     if (isSelected && !isCorrect) {
                       cls +=
-                        "border-amber-500 dark:border-amber-400 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                        "border-amber-500 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
-                        "border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold";
+                        "border-amber-500 bg-transparent text-amber-500 font-semibold";
                     } else {
                       cls += isSelected
                         ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -990,8 +990,8 @@ function FillExercise({
 
         const inputEl = validated && !correct && revealCorrection ? (
           <span className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
-            <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
-            <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500 dark:text-amber-400">{item.answer}</span>
+            <span className="text-[10px] leading-none text-zinc-900">{userAnswer || "—"}</span>
+            <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500">{item.answer}</span>
           </span>
         ) : (
           <input
@@ -1131,8 +1131,8 @@ function FillSelectExercise({
                 <p className="flex-1 text-sm text-[var(--color-text-primary)]">{sentDisplay}</p>
                 <div className="shrink-0">
                   {wrongField ? (
-                    <div className="inline-flex h-8 w-20 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
-                      <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userLetter || "—"}</span>
+                    <div className="inline-flex h-8 w-20 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1">
+                      <span className="text-[9px] leading-none text-amber-600 line-through">{userLetter || "—"}</span>
                       <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{correctLetter}</span>
                     </div>
                   ) : (
@@ -1168,8 +1168,8 @@ function FillSelectExercise({
             const [before, after] = item.sentence.split("___");
 
             const selectEl = wrongField ? (
-              <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
-                <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userAnswer || "—"}</span>
+              <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1">
+                <span className="text-[9px] leading-none text-amber-600 line-through">{userAnswer || "—"}</span>
                 <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
               </span>
             ) : (
@@ -1265,8 +1265,8 @@ function ClockReadExercise({
                   <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
                 ) : (
                   <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
-                    <p className="text-xs text-amber-500 dark:text-amber-400">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">{clk.answer}</p>
+                    <p className="text-xs text-amber-500">{userAnswer || "—"}</p>
+                    <p className="text-xs font-semibold text-zinc-900">{clk.answer}</p>
                   </div>
                 )
               ) : (
@@ -1291,20 +1291,20 @@ function ClockReadExercise({
 
 // Palette of accent colours for match connections (6 distinct hues)
 const MATCH_COLORS = [
-  "text-violet-600 dark:text-violet-400",
-  "text-sky-600 dark:text-sky-400",
-  "text-rose-600 dark:text-rose-400",
-  "text-amber-600 dark:text-amber-400",
-  "text-emerald-600 dark:text-emerald-400",
-  "text-fuchsia-600 dark:text-fuchsia-400",
+  "text-violet-600",
+  "text-sky-600",
+  "text-rose-600",
+  "text-amber-600",
+  "text-emerald-600",
+  "text-fuchsia-600",
 ];
 const MATCH_BG = [
-  "bg-violet-100 dark:bg-violet-900/30",
-  "bg-sky-100 dark:bg-sky-900/30",
-  "bg-rose-100 dark:bg-rose-900/30",
-  "bg-amber-100 dark:bg-amber-900/30",
-  "bg-emerald-100 dark:bg-emerald-900/30",
-  "bg-fuchsia-100 dark:bg-fuchsia-900/30",
+  "bg-violet-100",
+  "bg-sky-100",
+  "bg-rose-100",
+  "bg-amber-100",
+  "bg-emerald-100",
+  "bg-fuchsia-100",
 ];
 const LETTERS = "abcdefghijklmnopqrstuvwxyz";
 
@@ -1496,7 +1496,7 @@ function MatchExercise({
             const isCorrect = ri !== undefined && rightItems[ri]?.pair.right === pair.right;
             if (isCorrect) return null;
             return (
-              <p key={li} className="text-xs text-emerald-600 dark:text-emerald-400">
+              <p key={li} className="text-xs text-emerald-600">
                 {pair.left} → <strong>{pair.right}</strong>
               </p>
             );
@@ -1657,7 +1657,7 @@ function WriteExercise({
     <div className="space-y-4">
       {/* API error toast */}
       {apiError && (
-        <div className="fixed bottom-24 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-zinc-800 px-4 py-3 text-sm text-white shadow-xl dark:bg-zinc-700">
+        <div className="fixed bottom-24 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-zinc-800 px-4 py-3 text-sm text-white shadow-xl">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-amber-400" aria-hidden>
             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
             <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
@@ -1698,7 +1698,7 @@ function WriteExercise({
             {exercise.promptLayout === "stacked" ? (
               <>
                 <p className="text-sm font-medium text-[var(--color-text-primary)]">
-                  <span className={`font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
+                  <span className={`font-medium ${isClean ? "text-emerald-500" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
                   {perVerb ? `(${perVerb})` : displayedPrompts[i]}
                 </p>
                 <input
@@ -1708,14 +1708,14 @@ function WriteExercise({
                   disabled={validated}
                   className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
                     isClean
-                      ? "border-emerald-400 dark:border-emerald-500"
+                      ? "border-emerald-400"
                       : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
                   }`}
                 />
               </>
             ) : (
               <div className="flex items-center gap-2">
-                <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+                <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500" : "text-[var(--color-accent-fr)]"}`}>
                   {i + 1}.
                 </span>
                 {perVerb && (
@@ -1730,7 +1730,7 @@ function WriteExercise({
                   disabled={validated}
                   className={`flex-1 rounded-xl border bg-transparent px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-70 ${
                     isClean
-                      ? "border-emerald-400 dark:border-emerald-500"
+                      ? "border-emerald-400"
                       : "border-[var(--color-accent-fr)]"
                   }`}
                 />
@@ -1738,7 +1738,7 @@ function WriteExercise({
             )}
             {/* Internal verb check — shown only after validation */}
             {validated && revealCorrection && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
-              <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
+              <p className="ml-5 text-xs text-amber-600">
                 Le verbe <strong>{perVerb ?? exercise.verb}</strong> est attendu dans cette phrase
               </p>
             )}
@@ -1749,11 +1749,11 @@ function WriteExercise({
                   const suggestions = err.replacements.slice(0, 3).map((r) => r.value).filter(Boolean);
                   return (
                     <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs">
-                      <span className="text-amber-600 dark:text-amber-400">
+                      <span className="text-amber-600">
                         {err.shortMessage || err.message}
                       </span>
                       {suggestions.length > 0 && (
-                        <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                        <span className="font-semibold text-emerald-600">
                           → {suggestions.join(" / ")}
                         </span>
                       )}
@@ -1763,7 +1763,7 @@ function WriteExercise({
               </ul>
             )}
             {isClean && (
-              <p className="ml-5 text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</p>
+              <p className="ml-5 text-xs text-emerald-600">✓ Aucune erreur détectée</p>
             )}
           </div>
         );
@@ -1843,12 +1843,12 @@ function TrueFalseExercise({
             const showCorrection = validated && revealCorrection;
             if (isSelected) {
               if (showCorrection && !isRight) {
-                return "px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400";
+                return "px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600";
               }
               return "px-4 py-1.5 text-xs font-semibold bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             }
             if (showCorrection && !isRight && val === correct) {
-              return "px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400";
+              return "px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600";
             }
             return "px-4 py-1.5 text-xs font-medium text-[var(--color-text-secondary)]";
           };
@@ -1939,7 +1939,7 @@ function OrderExercise({
             <div className={`min-h-9 flex flex-wrap gap-1.5 rounded border-2 p-2 transition-colors ${
               validated && revealCorrection
                 ? correct
-                  ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30"
+                  ? "border-emerald-400 bg-emerald-50"
                   : CORRECTION_CARD_DARK
                 : "border-[var(--color-accent-fr)]/40 bg-[var(--color-surface)]"
             }`}>
@@ -1958,7 +1958,7 @@ function OrderExercise({
               ))}
             </div>
             {validated && revealCorrection && !correct && (
-              <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ {item.sentence}</p>
+              <p className="text-xs text-emerald-600">✓ {item.sentence}</p>
             )}
             {/* word pool */}
             <div className="flex flex-wrap gap-1.5">
@@ -2029,16 +2029,16 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500" : "border-[var(--color-border-default)]"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && revealCorrection && !isRight;
                   let cls = "flex-1 py-1.5 text-center text-xs font-medium transition-colors ";
-                  if (ci > 0) cls += `border-l ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
+                  if (ci > 0) cls += `border-l ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500" : "border-[var(--color-border-default)]"} `;
                   if (active) {
                     cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
-                    cls += "font-semibold text-amber-500 dark:text-amber-400";
+                    cls += "font-semibold text-amber-500";
                   } else {
                     cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                   }
@@ -2172,7 +2172,7 @@ function WordOrderExercise({
             </div>
 
             {validated && revealCorrection && !correct && (
-              <p className="text-xs font-medium text-amber-500 dark:text-amber-400">
+              <p className="text-xs font-medium text-amber-500">
                 → {item.sentence}
               </p>
             )}
@@ -2186,9 +2186,9 @@ function WordOrderExercise({
 // ── Color-highlight exercise ──────────────────────────────────────────────────
 
 const HIGHLIGHT_STYLES = [
-  { bg: "bg-yellow-300 dark:bg-yellow-400", text: "text-yellow-900 dark:text-yellow-900", btn: "bg-yellow-300 dark:bg-yellow-400 text-yellow-900" },
-  { bg: "bg-red-400 dark:bg-red-500", text: "text-white", btn: "bg-red-400 dark:bg-red-500 text-white" },
-  { bg: "bg-emerald-400 dark:bg-emerald-500", text: "text-white", btn: "bg-emerald-400 dark:bg-emerald-500 text-white" },
+  { bg: "bg-yellow-300", text: "text-yellow-900", btn: "bg-yellow-300 text-yellow-900" },
+  { bg: "bg-red-400", text: "text-white", btn: "bg-red-400 text-white" },
+  { bg: "bg-emerald-400", text: "text-white", btn: "bg-emerald-400 text-white" },
 ];
 
 function ColorHighlightExercise({
@@ -2329,16 +2329,16 @@ function PillGroup<T extends string>({
 }) {
   const revealCorrection = useEvalReveal();
   return (
-    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && revealCorrection && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} text-xs font-semibold`}>
+    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && revealCorrection && value !== correct ? "border-amber-500" : "border-[var(--color-border)]"} text-xs font-semibold`}>
       {options.map((opt, oi) => {
         const active = value === opt;
         const userWrong = validated && revealCorrection && value !== correct;
         let cls = "px-3 py-1 transition-colors ";
-        if (oi > 0) cls += `border-l ${validated && revealCorrection && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} `;
+        if (oi > 0) cls += `border-l ${validated && revealCorrection && value !== correct ? "border-amber-500" : "border-[var(--color-border)]"} `;
         if (active) {
           cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
         } else if (userWrong && opt === correct) {
-          cls += "text-amber-500 dark:text-amber-400";
+          cls += "text-amber-500";
         } else {
           cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/10";
         }
@@ -2439,7 +2439,7 @@ function Tag2Exercise({
 
               {/* Correction */}
               {(nWrong || gWrong) && (
-                <span className="ml-auto text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                <span className="ml-auto text-xs font-medium text-emerald-600">
                   → {item.number}{item.gender ? ` ${item.gender}` : ""}
                 </span>
               )}

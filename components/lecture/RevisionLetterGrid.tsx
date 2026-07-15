@@ -165,7 +165,7 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
-                      ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                      ? "border-amber-400 bg-amber-50 text-amber-700"
                       : s === "selected"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                         : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"

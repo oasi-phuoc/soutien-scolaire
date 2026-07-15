@@ -164,13 +164,13 @@ export function ExSentenceWrite({
               </p>
               {isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
-                  <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>
+                  <p className="text-sm text-amber-600 line-through">{s.answer || "—"}</p>
                   <ul className="mt-0.5 space-y-0.5">
                     {s.basicErrors.map((err, ei) => (
-                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">{err}</li>
+                      <li key={`b${ei}`} className="text-xs text-amber-600">{err}</li>
                     ))}
                     {s.grammarErrors.map((err, ei) => (
-                      <li key={`g${ei}`} className="text-xs text-amber-600 dark:text-amber-400">
+                      <li key={`g${ei}`} className="text-xs text-amber-600">
                         {err.shortMessage}
                         {err.suggestions.length > 0 && (
                           <span className="ml-1 font-semibold text-[var(--color-text-primary)]">→ {err.suggestions.join(" / ")}</span>

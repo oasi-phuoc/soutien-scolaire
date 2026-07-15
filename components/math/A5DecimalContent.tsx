@@ -408,7 +408,7 @@ export function DecArithGroupExercise({
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
               ? timeLeft <= 15
-                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
+                ? "bg-red-100 text-red-600"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
               : "invisible"
           }`}>

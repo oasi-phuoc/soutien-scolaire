@@ -94,8 +94,8 @@ function TheoryBlock({ block }: { block: VocabTheoryBlock }) {
   }
   if (block.type === "note") {
     return (
-      <div className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800/40 dark:bg-amber-900/10">
-        <p className="text-xs text-amber-700 dark:text-amber-400">{block.text}</p>
+      <div className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50 px-4 py-3">
+        <p className="text-xs text-amber-700">{block.text}</p>
       </div>
     );
   }

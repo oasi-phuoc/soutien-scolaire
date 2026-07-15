@@ -423,13 +423,13 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                 let cls = "w-9 h-8 rounded border text-center text-sm font-bold transition-colors";
                 if (validated) {
                   if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
-                  else if (sym === sel && sym === correct) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
-                  else if (sym === sel && sym !== correct) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                  else if (sym === sel && sym === correct) cls += " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]";
+                  else if (sym === sel && sym !== correct) cls += " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]";
                   else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
                 } else {
                   cls += sel === sym
-                    ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
-                    : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                    ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]"
+                    : " border-zinc-300 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
                 }
                 return (
                   <button key={sym} type="button" className={cls}

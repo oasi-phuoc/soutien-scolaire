@@ -98,7 +98,7 @@ export function ExMissingLetters({
                     // Blank position: select or correction box
                     s.checked && s.blankOk[pos] === false && revealCorrection ? (
                       <div key={pos} className={`h-8 w-7 ${WRONG_BOX_CLS}`}>
-                        <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{s.blanks[pos] || "—"}</span>
+                        <span className="text-[9px] leading-none text-amber-600 line-through">{s.blanks[pos] || "—"}</span>
                         <span className="mt-0.5 text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{w.word[pos]}</span>
                       </div>
                     ) : (

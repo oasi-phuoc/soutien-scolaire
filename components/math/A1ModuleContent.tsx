@@ -174,8 +174,8 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
       const pv = pivotMainText ?? block.pivot?.[pivot];
       const text = textFor(block.fr, pv);
       return (
-        <div className="rounded-[var(--radius-md)] border border-amber-300/50 bg-amber-50 px-4 py-2 dark:bg-amber-950/20">
-          <p className="text-sm text-amber-900 dark:text-amber-200" lang={textLang} dir={textDir}>{renderBold(text)}</p>
+        <div className="rounded-[var(--radius-md)] border border-amber-300/50 bg-amber-50 px-4 py-2">
+          <p className="text-sm text-amber-900" lang={textLang} dir={textDir}>{renderBold(text)}</p>
         </div>
       );
     }
@@ -1491,44 +1491,44 @@ interface Ex16Cfg { offsets: [number, number, number, number]; arrows: Ex16Arrow
 const EX16_CONFIGS: Ex16Cfg[] = [
   // 0: classic L-shape — →blue top, ↓red left, →green bottom
   { offsets: [0, 1000, 100, 110],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600" },
+             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600" }]},
   // 1: →red top, ↓blue left, →green bottom
   { offsets: [0, 100, 1000, 1010],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600" },
+             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600" }]},
   // 2: →green top, ↓red left, →blue bottom
   { offsets: [0, 10, 100, 1100],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:2,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-emerald-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600" },
+             { row:2,col:1,symbol:"→",colorCls:"text-blue-600" }]},
   // 3: →blue top, ↓green left, →red bottom
   { offsets: [0, 1000, 10, 110],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
-             { row:2,col:1,symbol:"→",colorCls:"text-amber-600 dark:text-red-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600" },
+             { row:2,col:1,symbol:"→",colorCls:"text-amber-600" }]},
   // 4: diagonal star from TL — →red top, ↓green left, ↘blue center
   { offsets: [0, 100, 10, 1000],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
-             { row:1,col:1,symbol:"↘",colorCls:"text-blue-600 dark:text-blue-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600" },
+             { row:1,col:1,symbol:"↘",colorCls:"text-blue-600" }]},
   // 5: diagonal star from TL — →blue top, ↓green left, ↘red center
   { offsets: [0, 1000, 10, 100],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
-             { row:1,col:1,symbol:"↘",colorCls:"text-amber-600 dark:text-red-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600" },
+             { row:1,col:1,symbol:"↘",colorCls:"text-amber-600" }]},
   // 6: upside-down L — →blue top, ↓red left, ↓green right
   { offsets: [0, 1000, 100, 1010],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-amber-600" },
+             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600" }]},
   // 7: upside-down L — →red top, ↓blue left, ↓green right
   { offsets: [0, 100, 1000, 110],
-    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600 dark:text-red-400" },
-             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600 dark:text-blue-400" },
-             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-amber-600" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600" },
+             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600" }]},
 ];
 
 const ARROW_FLIP: Record<string, string> = {
@@ -1925,9 +1925,9 @@ function ex25CorrectColor(n: number): string | null {
 
 const EX26_NUMBERS = [12, 710, 553, 34, 908, 199, 48, 587, 200, 330, 815, 242, 261, 498, 890, 699, 314];
 const EX26_BUBBLES = [
-  { lo: 10, hi: 250, bgCls: "bg-amber-50 dark:bg-amber-950/20", borderCls: "border-amber-400 dark:border-red-600", textCls: "text-red-600 dark:text-red-400", btnBase: "border-red-300 dark:border-red-700 hover:bg-red-100 dark:hover:bg-red-900/30", btnSel: "bg-red-200 dark:bg-red-800/40 border-red-500" },
-  { lo: 250, hi: 700, bgCls: "bg-violet-50 dark:bg-violet-950/20", borderCls: "border-violet-400 dark:border-violet-600", textCls: "text-violet-600 dark:text-violet-400", btnBase: "border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30", btnSel: "bg-violet-200 dark:bg-violet-800/40 border-violet-500" },
-  { lo: 700, hi: 920, bgCls: "bg-blue-50 dark:bg-blue-950/20", borderCls: "border-blue-400 dark:border-blue-600", textCls: "text-blue-600 dark:text-blue-400", btnBase: "border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30", btnSel: "bg-blue-200 dark:bg-blue-800/40 border-blue-500" },
+  { lo: 10, hi: 250, bgCls: "bg-amber-50", borderCls: "border-amber-400", textCls: "text-red-600", btnBase: "border-red-300 hover:bg-red-100", btnSel: "bg-red-200 border-red-500" },
+  { lo: 250, hi: 700, bgCls: "bg-violet-50", borderCls: "border-violet-400", textCls: "text-violet-600", btnBase: "border-violet-300 hover:bg-violet-100", btnSel: "bg-violet-200 border-violet-500" },
+  { lo: 700, hi: 920, bgCls: "bg-blue-50", borderCls: "border-blue-400", textCls: "text-blue-600", btnBase: "border-blue-300 hover:bg-blue-100", btnSel: "bg-blue-200 border-blue-500" },
 ] as const;
 
 // ─── Ex27 — Écrire entre deux bornes (A1.4) ──────────────────────────────────
@@ -1981,8 +1981,8 @@ function loadA1Position(): { lessonIdx: number; step: Step } {
 }
 
 function partClass(kind: WordPhonemeKind): string {
-  if (kind === "vowel") return "text-red-600 dark:text-red-400";
-  if (kind === "silent") return "text-zinc-500 dark:text-zinc-400";
+  if (kind === "vowel") return "text-red-600";
+  if (kind === "silent") return "text-zinc-500";
   return "text-[var(--color-text-primary)]";
 }
 
@@ -2049,13 +2049,13 @@ function SvgUnite({ s = 16 }: { s?: number }) {
 
 function PlaceValueIllustration() {
   const items = [
-    { label: "1 Millier = 1000", color: "text-emerald-600 dark:text-emerald-400", svg: <SvgMillier s={4} d={9} /> },
-    { label: "1 Centaine = 100", color: "text-violet-600 dark:text-violet-400",   svg: <SvgCentaine s={7} /> },
-    { label: "1 Dizaine = 10",   color: "text-orange-500 dark:text-orange-400",   svg: <SvgDizaine s={9} /> },
-    { label: "1 Unité",          color: "text-sky-500 dark:text-sky-400",          svg: <SvgUnite s={22} /> },
+    { label: "1 Millier = 1000", color: "text-emerald-600", svg: <SvgMillier s={4} d={9} /> },
+    { label: "1 Centaine = 100", color: "text-violet-600",   svg: <SvgCentaine s={7} /> },
+    { label: "1 Dizaine = 10",   color: "text-orange-500",   svg: <SvgDizaine s={9} /> },
+    { label: "1 Unité",          color: "text-sky-500",          svg: <SvgUnite s={22} /> },
   ];
   return (
-    <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-zinc-950">
+    <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4">
       <table className="w-full table-fixed border-0 border-collapse">
         <tbody>
           <tr>
@@ -3243,7 +3243,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                   </div>
                 ),
                 1: (
-                  <div className="mt-3 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
+                  <div className="mt-3 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm">
                     <span className="italic text-[var(--color-text-secondary)]">Exemple : </span>
                     <span className="font-medium text-[var(--color-text-primary)]">350 &lt; 354 &lt; 360</span>
                   </div>
@@ -3281,13 +3281,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                   <tbody>
                     {read.rows.map((row, ri) => (
                       <tr key={ri}>
-                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <td className="border border-dashed border-zinc-300 px-3 py-2">
                           <ReadAloudNumberCell cell={row.col1} />
                         </td>
-                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <td className="border border-dashed border-zinc-300 px-3 py-2">
                           <ReadAloudNumberCell cell={row.col2} />
                         </td>
-                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <td className="border border-dashed border-zinc-300 px-3 py-2">
                           <ReadAloudNumberCell cell={row.col3} />
                         </td>
                       </tr>
@@ -3343,13 +3343,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
               <tbody>
                 {read.rows.map((row, ri) => (
                   <tr key={ri}>
-                    <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                    <td className="border border-dashed border-zinc-300 px-3 py-2">
                       <ReadAloudNumberCell cell={row.col1} />
                     </td>
-                    <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                    <td className="border border-dashed border-zinc-300 px-3 py-2">
                       <ReadAloudNumberCell cell={row.col2} />
                     </td>
-                    <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                    <td className="border border-dashed border-zinc-300 px-3 py-2">
                       <ReadAloudNumberCell cell={row.col3} />
                     </td>
                   </tr>
@@ -3554,18 +3554,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
             ) : null}
           </div>
           {/* Responsive 10-column grid — cells are always square */}
-          <div className="grid border-l border-t border-zinc-300 dark:border-zinc-600" style={{ gridTemplateColumns: "repeat(10, 1fr)" }}>
+          <div className="grid border-l border-t border-zinc-300" style={{ gridTemplateColumns: "repeat(10, 1fr)" }}>
             {/* Header row */}
-            <div className="aspect-square border-b border-r border-zinc-300 bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800" />
+            <div className="aspect-square border-b border-r border-zinc-300 bg-zinc-100" />
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
-              <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+              <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700">
                 {u}
               </div>
             ))}
             {/* Data rows */}
             {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
               <React.Fragment key={d}>
-                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700">
                   {d}
                 </div>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
@@ -3576,15 +3576,15 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
 
                   if (state === "revealed") {
                     return (
-                      <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 dark:border-zinc-600">
-                        <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
+                      <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300">
+                        <span className="text-sm font-medium tabular-nums text-zinc-800">{value}</span>
                       </div>
                     );
                   }
                   if (state === "fill") {
                     if (ex7Validated && result !== null) {
                       return (
-                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "border-zinc-300 dark:border-zinc-600" : `${CLS_WRONG} ring-1 ring-inset ring-amber-400`}`}>
+                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "border-zinc-300" : `${CLS_WRONG} ring-1 ring-inset ring-amber-400`}`}>
                           <span className="text-sm font-medium tabular-nums">
                             {result ? (ex7Answers[key] ?? "") : value}
                           </span>
@@ -3592,7 +3592,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       );
                     }
                     return (
-                      <div key={u} className="aspect-square border-b border-r border-zinc-300 dark:border-zinc-600">
+                      <div key={u} className="aspect-square border-b border-r border-zinc-300">
                         <input
                           type="text" inputMode="numeric"
                           value={ex7Answers[key] ?? ""}
@@ -3603,7 +3603,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       </div>
                     );
                   }
-                  return <div key={u} className="aspect-square border-b border-r border-zinc-300 dark:border-zinc-600" />;
+                  return <div key={u} className="aspect-square border-b border-r border-zinc-300" />;
                 })}
               </React.Fragment>
             ))}
@@ -3655,13 +3655,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                             key={i} type="text" inputMode="numeric"
                             value={ex8Answers[ansKey] ?? ""}
                             onChange={(e) => setEx8Answers((prev) => ({ ...prev, [ansKey]: e.target.value.replace(/[^0-9]/g, "") }))}
-                            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500"
+                            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none"
                             aria-label={`Série ${si + 1}, position ${i + 1}`}
                           />
                         );
                       }
                       return (
-                        <div key={i} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
+                        <div key={i} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700">
                           {num}
                         </div>
                       );
@@ -3714,7 +3714,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : ex9Validated && c === value ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
+                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : ex9Validated && c === value ? "border-amber-500 bg-amber-50 text-amber-600" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]"}`}>
                           {c}
                         </button>
                       );
@@ -4094,11 +4094,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                 <div className="flex flex-col gap-2">
                   {q.tags.map((tag, ti) => {
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
-                    let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                    let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
                     if (isSelected) {
                       cls = "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                     } else if (ex15Validated && tag.correct) {
-                      cls = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                      cls = "border-amber-500 bg-amber-50 text-amber-600";
                     }
                     return (
                       <button key={ti} type="button"
@@ -4135,9 +4135,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
             ) : null}
           </div>
           <div className="mb-3 flex flex-wrap gap-4 text-xs font-medium">
-            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
-            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
-            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700">+1 millier</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700">+1 centaine</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700">+1 dizaine</span></span>
           </div>
           <div className="space-y-6">
             {ex16Questions.map((q, qi) => {
@@ -4149,7 +4149,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                 const ansKey = ["tl","tr","bl","br"][idx]!;
                 if (isGiven) {
                   return (
-                    <div className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
+                    <div className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)]">
                       {val.toLocaleString("fr-CH")}
                     </div>
                   );
@@ -4243,7 +4243,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       {a12EvalQ9.choices.map(c => {
                         const isSelected = a12EvalQ9Sel === c;
                         let cls = "w-16 rounded border py-1.5 text-sm font-normal transition-colors ";
-                        cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                        cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)]";
                         return (
                           <button key={c} type="button"
                             disabled={evalPageValidated}
@@ -4439,7 +4439,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                         {q.tags.map((tag, ti) => {
                           const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
                           let cls = "flex min-w-0 items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ";
-                          cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                          cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
                           return (
                             <button key={ti} type="button"
                               disabled={evalPageValidated}
@@ -4463,9 +4463,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex7[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex7[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex7", "Suivez les flèches pour trouver les nombres manquants.")} <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   <div className="flex flex-wrap gap-4 text-xs font-medium">
-                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
-                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
-                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700">+1 millier</span></span>
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700">+1 centaine</span></span>
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700">+1 dizaine</span></span>
                   </div>
                   <div className="space-y-4">
                     {a12EvalEx16Qs.map((q, qi) => {
@@ -4480,7 +4480,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                             const val = vals[ci]!;
                             const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
                             if (isGiven) {
-                              cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
+                              cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{val.toLocaleString("fr-CH")}</div>);
                             } else {
                               cells16.push(
                                 <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans} disabled={evalPageValidated}
@@ -4576,19 +4576,19 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                           if (ni === ex.blankIdx) {
                             const seriesAns = evalAnswers[ex.id] ?? "";
                             return evalPageValidated ? (
-                              <div key={ni} className="flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-none border-0 border-b-2 border-zinc-300 text-sm font-medium tabular-nums dark:border-zinc-600">
+                              <div key={ni} className="flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-none border-0 border-b-2 border-zinc-300 text-sm font-medium tabular-nums">
                                 <span className="text-[var(--color-text-primary)]">{seriesAns}</span>
                               </div>
                             ) : (
                               <input key={ni} type="text" inputMode="numeric"
                                 value={seriesAns}
                                 onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                                className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500"
+                                className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none"
                               />
                             );
                           }
                           return (
-                            <div key={ni} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
+                            <div key={ni} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700">
                               {num}
                             </div>
                           );
@@ -4909,7 +4909,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Trouvez les voisins des dizaines</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les dizaines encadrantes.</p>
-            <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
+            <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm">
               <span className="italic text-[var(--color-text-secondary)]">Exemple : </span>
               <span className="font-medium text-[var(--color-text-primary)]">350 &lt; 354 &lt; 360</span>
             </div>
@@ -4964,7 +4964,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Trouvez les voisins des centaines</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les centaines encadrantes.</p>
-            <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
+            <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm">
               <span className="italic text-[var(--color-text-secondary)]">Exemple : </span>
               <span className="font-medium text-[var(--color-text-primary)]">2 300 &lt; 2 354 &lt; 2 400</span>
             </div>
@@ -5043,11 +5043,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       let cls = "rounded-[var(--radius-md)] border px-4 py-2 text-sm font-bold tabular-nums transition-colors";
                       if (ex21Validated) {
                         if (correct && !sel) cls += ` ${CLS_WRONG}`;
-                        else if (sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                        else if (sel) cls += " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]";
                         else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                       } else {
                         cls += sel
-                          ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
+                          ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)] cursor-pointer"
                           : " border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
                       }
                       return (
@@ -5098,11 +5098,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                         let cls = "w-10 rounded border py-1 text-center text-sm font-bold transition-colors";
                         if (validated) {
                           if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
-                          else if (sym === sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                          else if (sym === sel) cls += " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]";
                           else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                         } else {
-                          cls += sel === sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
-                            : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                          cls += sel === sym ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]"
+                            : " border-zinc-300 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
                         }
                         return (
                           <button key={sym} type="button" className={cls}
@@ -5137,11 +5137,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
               const nextSym = CYCLE[(CYCLE.indexOf(sym) + 1) % CYCLE.length]!;
               let symCls = "w-8 h-8 rounded border text-center text-sm font-bold leading-8 transition-colors shrink-0";
               if (ex23Validated) {
-                symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
-                  : " border-zinc-300 dark:border-zinc-600 text-zinc-400";
+                symCls += sym ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]"
+                  : " border-zinc-300 text-zinc-400";
               } else {
-                symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
-                  : " border-zinc-300 dark:border-zinc-600 text-zinc-400 cursor-pointer hover:border-teal-400";
+                symCls += sym ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)] cursor-pointer"
+                  : " border-zinc-300 text-zinc-400 cursor-pointer hover:border-teal-400";
               }
               return (
                 <div key={pi} className="flex items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] px-2 py-1.5">
@@ -5191,11 +5191,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                           let cls = "flex-1 rounded border px-1 py-2 text-center text-xs font-bold tabular-nums transition-colors";
                           if (ex24Validated) {
                             if (correct && !sel) cls += ` ${CLS_WRONG}`;
-                            else if (sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                            else if (sel) cls += " border-teal-500 bg-teal-50 text-[var(--color-text-primary)]";
                             else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                           } else {
-                            cls += sel ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
-                              : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                            cls += sel ? " border-teal-500 bg-teal-50 text-[var(--color-text-primary)] cursor-pointer"
+                              : " border-zinc-300 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
                           }
                           return (
                             <button key={idx} type="button" className={cls}
@@ -5232,9 +5232,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
               const col = ex25Colors[ni];
               const correctCol = ex25CorrectColor(n);
               const COLOR_BG: Record<string, string> = {
-                vert: "bg-green-100 dark:bg-green-900/40 border-blue-400",
-                bleu: "bg-blue-100 dark:bg-blue-900/40 border-blue-400",
-                jaune: "bg-yellow-100 dark:bg-yellow-900/40 border-yellow-400",
+                vert: "bg-green-100 border-blue-400",
+                bleu: "bg-blue-100 border-blue-400",
+                jaune: "bg-yellow-100 border-yellow-400",
               };
               const COLOR_CYCLE = [null, "vert", "bleu", "jaune"];
               const nextCol = COLOR_CYCLE[(COLOR_CYCLE.indexOf(col) + 1) % COLOR_CYCLE.length] as string | null;
@@ -5243,7 +5243,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                 const ok = col === correctCol;
                 cls += ok
                   ? (col ? ` ${COLOR_BG[col] ?? "border-[var(--color-border-default)]"}` : " border-[var(--color-border-default)]")
-                  : " border-amber-400 bg-amber-50 dark:bg-amber-950/20";
+                  : " border-amber-400 bg-amber-50";
               } else {
                 cls += col ? ` ${COLOR_BG[col] ?? "border-[var(--color-border-default)]"} cursor-pointer`
                   : " border-[var(--color-border-default)] hover:border-teal-400 cursor-pointer";
@@ -5337,7 +5337,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                       <div key={ii} className={`flex items-center justify-center gap-1 rounded-[var(--radius-md)] border px-2 py-2 text-sm font-bold tabular-nums transition-colors ${ok === true ? "border-blue-400" : ok === false ? CLS_WRONG : "border-[var(--color-border-default)]"}`}>
                         {item.reversed ? (
                           <>
-                            <span className="text-blue-600 dark:text-blue-400">{item.hi}</span>
+                            <span className="text-blue-600">{item.hi}</span>
                             <span className="text-[var(--color-text-secondary)]">&gt;</span>
                             {ex27Validated ? (
                               <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
@@ -5348,11 +5348,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                                 onChange={e => { const v = e.target.value.replace(/[^0-9]/g, ""); setEx27Ans(prev => prev.map((s2, si2) => si2 === si ? s2.map((q, qi) => qi === ii ? v : q) : s2)); }} />
                             )}
                             <span className="text-[var(--color-text-secondary)]">&gt;</span>
-                            <span className="text-blue-600 dark:text-blue-400">{item.lo}</span>
+                            <span className="text-blue-600">{item.lo}</span>
                           </>
                         ) : (
                           <>
-                            <span className="text-blue-600 dark:text-blue-400">{item.lo}</span>
+                            <span className="text-blue-600">{item.lo}</span>
                             <span className="text-[var(--color-text-secondary)]">&lt;</span>
                             {ex27Validated ? (
                               <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
@@ -5363,7 +5363,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
                                 onChange={e => { const v = e.target.value.replace(/[^0-9]/g, ""); setEx27Ans(prev => prev.map((s2, si2) => si2 === si ? s2.map((q, qi) => qi === ii ? v : q) : s2)); }} />
                             )}
                             <span className="text-[var(--color-text-secondary)]">&lt;</span>
-                            <span className="text-blue-600 dark:text-blue-400">{item.hi}</span>
+                            <span className="text-blue-600">{item.hi}</span>
                           </>
                         )}
                       </div>

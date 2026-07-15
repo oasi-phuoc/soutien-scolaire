@@ -243,7 +243,7 @@ function GridExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                    ? "border-amber-400 bg-amber-50 text-amber-700"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -337,7 +337,7 @@ function WordsExercise({
                       s === "correct" || s === "selected"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
-                          ? "border-amber-400 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+                          ? "border-amber-400 bg-amber-100 text-amber-600"
                           : "border-transparent text-[var(--color-text-primary)]"
                     }`}
                   >
@@ -798,7 +798,7 @@ function PronounceExercise({
             return (
               <div key={`${step.word}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
                 state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                  : state === "wrong" ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
+                  : state === "wrong" ? "border-amber-400 bg-amber-50"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}>
                 <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
@@ -858,7 +858,7 @@ function PronounceExercise({
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer le mot</h2>
       <div className={`flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border-2 px-6 py-6 text-center transition-colors ${
         recState === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-          : recState === "wrong" ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
+          : recState === "wrong" ? "border-amber-400 bg-amber-50"
             : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
       }`}>
         <span className="text-sm text-[var(--color-text-secondary)]">
@@ -979,7 +979,7 @@ function ComplexGridExercise({
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
-                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                    ? "border-amber-400 bg-amber-50 text-amber-700"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -1070,7 +1070,7 @@ function ComplexWordsExercise({
                     s === "correct" || s === "selected"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : s === "wrong" || s === "missed"
-                        ? "border-amber-400 bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+                        ? "border-amber-400 bg-amber-100 text-amber-600"
                         : "border-transparent text-[var(--color-text-primary)]"
                   }`}
                 >

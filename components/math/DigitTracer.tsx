@@ -120,7 +120,7 @@ export function DigitTracer({ digit }: { digit: number }) {
   return (
     <div className="flex flex-col items-center gap-2">
       <div
-        className="relative select-none overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white dark:bg-zinc-900"
+        className="relative select-none overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white"
         style={{ width: 144, height: 216 }}
       >
         {/* SVG guide */}

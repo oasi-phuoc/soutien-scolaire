@@ -290,11 +290,11 @@ export function G7RotationExercise({
       </p>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3">
           <p className="mb-2 text-center text-xs font-medium text-[var(--color-text-secondary)]">Modèle</p>
           <GridCanvas size={task.size} dots={refDots} segments={refSegments} edge={task.modelSide} />
         </div>
-        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3">
           <p className="mb-2 text-center text-xs font-medium text-[var(--color-text-secondary)]">Reproduction</p>
           <GridCanvas
             size={task.size}

@@ -21,8 +21,8 @@ export default function TrainingProgressBar({ current, total, timeLeft }: Traini
           {timeLeft != null && (
             <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
               timeLeft <= 15
-                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
-                : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                ? "bg-red-100 text-red-600"
+                : "bg-amber-100 text-amber-700"
             }`}>
               {formatTime(timeLeft)}
             </span>

@@ -145,7 +145,7 @@ export function G7CentralSymmetryExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{centralConsigne(task)}</p>
-      <div className="overflow-x-auto rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+      <div className="overflow-x-auto rounded-lg border border-[var(--color-border-default)] bg-white p-3">
         <G7GridCanvas
           width={task.width}
           height={task.height}

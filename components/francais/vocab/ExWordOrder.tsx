@@ -89,7 +89,7 @@ export function ExWordOrder({
                 <span className="mt-1.5 w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
                 {s.checked && !s.correct && revealCorrection ? (
                   <div className="flex flex-1 flex-col border-b-2 border-amber-400 pb-0.5">
-                    <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtPhrase || "—"}</span>
+                    <span className="text-sm text-amber-500 line-through">{builtPhrase || "—"}</span>
                     <span className="text-sm font-bold text-[var(--color-text-primary)]">{phrases[idx]}</span>
                   </div>
                 ) : (

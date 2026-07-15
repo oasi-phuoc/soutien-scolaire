@@ -140,7 +140,7 @@ export function G7SymmetryAxesExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{symmetryAxesConsigne()}</p>
-      <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+      <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3">
         <svg
           viewBox={`0 0 ${w} ${h}`}
           className="mx-auto w-full max-w-[360px]"

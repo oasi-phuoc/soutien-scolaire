@@ -117,7 +117,7 @@ function ModuleCard({
           onClick={() => isCollapsible && setExpanded((e) => !e)}
           className={`flex w-full items-center gap-3 px-4 py-3 text-left ${isCollapsible ? "" : "cursor-default"}`}
         >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
             <span className="text-sm font-bold text-[var(--color-accent-lecture)]">{mod.code}</span>
           </div>
           <div className="flex-1 min-w-0">
@@ -280,9 +280,9 @@ function ModuleCard({
 // ── Stories tab ────────────────────────────────────────────────────────────────
 
 const LEVEL_META: Record<string, { label: string; color: string }> = {
-  A1: { label: "Débutant", color: "bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300" },
-  A2: { label: "Moyen", color: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300" },
-  B1: { label: "Avancé", color: "bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300" },
+  A1: { label: "Débutant", color: "bg-teal-100 text-teal-800" },
+  A2: { label: "Moyen", color: "bg-amber-100 text-amber-800" },
+  B1: { label: "Avancé", color: "bg-violet-100 text-violet-800" },
 };
 
 function StoriesList() {

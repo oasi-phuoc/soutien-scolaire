@@ -92,7 +92,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
       return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{block.fr}</p>;
     case "note":
       return (
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
+        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800">
           {block.fr}
         </div>
       );
@@ -718,7 +718,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
     } else {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-        : isCorrect ? "bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+        : isCorrect ? "bg-amber-50 text-amber-700"
         : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
     }
     return cls;
@@ -1827,7 +1827,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
     if (validated && matched) {
       if (!revealCorrection) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
       return matchResults[fi]
-        ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
+        ? "border-[var(--color-border-default)] bg-blue-50 text-[var(--color-text-primary)]"
         : "border-[var(--color-accent-alg)]";
     }
     if (validated) return revealCorrection ? "border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
@@ -1842,7 +1842,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
       if (!revealCorrection) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
       const fi = parseInt(matchedEntry[0]);
       return matchResults[fi]
-        ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
+        ? "border-[var(--color-border-default)] bg-blue-50 text-[var(--color-text-primary)]"
         : "border-[var(--color-accent-alg)]";
     }
     if (matchedEntry) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";

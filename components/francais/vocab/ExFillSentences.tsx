@@ -114,7 +114,7 @@ export function ExFillSentences({
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct && revealCorrection ? (
                 <span className={`mx-1 inline-flex h-8 w-28 ${WRONG_BOX_CLS}`}>
-                  <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                  <span className="text-[9px] leading-none text-amber-600 line-through">{s.answer || "—"}</span>
                   <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
                 </span>
               ) : (

@@ -1267,7 +1267,7 @@ function ShapeExplorer({ block }: { block: Extract<MathRichBlock, { type: "shape
             className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
               selectedIdx === i
                 ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
-                : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"
+                : "border-[var(--color-border-default)] bg-white hover:border-[var(--color-accent-alg)]/60"
             }`}
           >
             <div className="pointer-events-none w-full h-full" dangerouslySetInnerHTML={{ __html: shape.svg }} />
@@ -1329,7 +1329,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot = "en", showPivot = fals
       return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot]))}</p>;
     case "note":
       return (
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
+        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800">
           <span lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot] ?? block.pivot?.[pivot]))}</span>
         </div>
       );
@@ -1581,7 +1581,7 @@ function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
   }, [onClose]);
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl dark:shadow-black/50 border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
+      <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
         <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">💡 Astuce</p>
         <p className="text-sm leading-relaxed text-[var(--color-text-primary)] pr-4">{hint}</p>
         <button type="button" onClick={onClose}
@@ -2783,7 +2783,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
                   ? "border-2 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50"
               }`}
             >
               Oui
@@ -2794,7 +2794,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "non"
                   ? "bg-red-400 text-white shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-950/20"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-red-400 hover:bg-red-50"
               }`}
             >
               Non

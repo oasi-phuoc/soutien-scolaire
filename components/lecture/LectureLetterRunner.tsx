@@ -701,7 +701,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
               <li
                 key={`${word}-${i}`}
                 className={`flex items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-2 ${
-                  ok ? "border-green-300 bg-green-50/50 dark:bg-green-950/20" : "border-amber-400 bg-amber-50/50 dark:bg-amber-950/20"
+                  ok ? "border-green-300 bg-green-50/50" : "border-amber-400 bg-amber-50/50"
                 }`}
               >
                 <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
@@ -749,7 +749,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
         </div>
       )}
       {timeUp && !evalWithResults && (
-        <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-amber-600 dark:bg-red-900/20">
+        <p className="rounded-[var(--radius-md)] bg-red-50 px-3 py-2 text-sm font-semibold text-amber-600">
           Temps écoulé ! Appuyez sur recommencer pour réessayer.
         </p>
       )}

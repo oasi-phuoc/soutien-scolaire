@@ -248,10 +248,10 @@ export function G7ReproduceExercise({
       <p className="text-sm text-[var(--color-text-secondary)]">{taskConsigne(task)}</p>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3">
           <GridCanvas size={task.reference.size} dots={refDots} segments={refSegments} />
         </div>
-        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3 dark:bg-[var(--color-bg-primary)]">
+        <div className="rounded-lg border border-[var(--color-border-default)] bg-white p-3">
           <GridCanvas
             size={task.targetSize}
             dots={userDots}

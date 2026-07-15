@@ -99,7 +99,7 @@ export function ExAnagram({
                       <span className="text-sm text-[var(--color-text-primary)]">{builtWord}</span>
                     ) : (
                       <>
-                        <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtWord || "—"}</span>
+                        <span className="text-sm text-amber-500 line-through">{builtWord || "—"}</span>
                         <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.word.word}</span>
                       </>
                     )}

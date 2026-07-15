@@ -114,7 +114,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
           recState === "correct"
             ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
             : recState === "wrong"
-              ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
+              ? "border-amber-400 bg-amber-50"
               : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
         }`}>
           <span className="text-sm text-[var(--color-text-secondary)]">

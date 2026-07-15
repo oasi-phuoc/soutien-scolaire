@@ -1230,7 +1230,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
                     const isSelected = sel === val;
                     let cls = "px-3 py-1 rounded-lg border text-xs font-bold transition-colors ";
                     if (validated && revealCorrection) {
-                      if (val === q.answer && isSelected) cls += "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400";
+                      if (val === q.answer && isSelected) cls += "border-green-500 bg-green-50 text-green-700";
                       else if (val === q.answer && !isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       else if (isSelected && isWrong) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
@@ -1398,7 +1398,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
               <input type="text" inputMode="numeric" value={val} disabled={validated}
                 onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; })}
                 style={{ width: 80, height: 36 }}
-                className={`rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 text-green-700 dark:text-green-400" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
+                className={`rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 text-green-700" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
               />
             );
             return (
@@ -1518,7 +1518,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
               <input type="text" inputMode="numeric" value={val} disabled={validated}
                 onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; })}
                 style={{ width: 80, height: 36 }}
-                className={`rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 text-green-700 dark:text-green-400" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
+                className={`rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 text-green-700" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
               />
             );
             return (

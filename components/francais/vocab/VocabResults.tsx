@@ -71,7 +71,7 @@ export function VocabResults({ evalScores, grade, passingGrade, selectedResultId
       <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${
         passed
           ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5"
-          : "border-amber-400 bg-amber-50 dark:bg-amber-900/10"
+          : "border-amber-400 bg-amber-50"
       }`}>
         <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
         <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>

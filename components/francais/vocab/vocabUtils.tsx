@@ -50,16 +50,16 @@ export interface ExerciseProps {
 }
 
 export const WRONG_INPUT_CLS =
-  "border border-amber-400 bg-amber-50 dark:border-amber-500 dark:bg-amber-900/20";
-export const WRONG_TEXT_CLS = "text-amber-600 dark:text-amber-400 line-through";
+  "border border-amber-400 bg-amber-50";
+export const WRONG_TEXT_CLS = "text-amber-600 line-through";
 export const WRONG_ANSWER_CLS = "text-[var(--color-text-primary)] font-semibold";
 export const WRONG_BTN_CLS =
-  "border-amber-400 bg-amber-50 text-amber-700 dark:border-amber-500 dark:bg-amber-900/20 dark:text-amber-400";
+  "border-amber-400 bg-amber-50 text-amber-700";
 
 // Correction display: single box (same width as the input it replaces)
 // wrong answer strikethrough amber + correct answer normal — no extra column added
 export const WRONG_BOX_CLS =
-  "inline-flex flex-col items-center justify-center text-center rounded border border-amber-400 bg-amber-50 dark:border-amber-500 dark:bg-amber-950/20 px-1";
+  "inline-flex flex-col items-center justify-center text-center rounded border border-amber-400 bg-amber-50 px-1";
 // keep old names so nothing breaks while we migrate
 export const WRONG_DISPLAY_INPUT_CLS = "";   // unused — remove from imports
 export const CORRECT_DISPLAY_INPUT_CLS = ""; // unused — remove from imports

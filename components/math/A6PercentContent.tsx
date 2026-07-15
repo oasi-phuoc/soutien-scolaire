@@ -32,8 +32,8 @@ function FracInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum,
   }`;
   const wrongBox = (val: string, correct?: string) => (
     <span className="w-12 h-8 rounded-none border-0 border-b-2 border-amber-500 px-0 flex flex-col items-center justify-center">
-      <span className="text-[10px] text-zinc-700 dark:text-zinc-300 tabular-nums leading-none">{val || "—"}</span>
-      <span className="text-xs font-bold text-amber-600 dark:text-amber-400 tabular-nums leading-none">{correct}</span>
+      <span className="text-[10px] text-zinc-700 tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (
@@ -274,8 +274,8 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.dec}</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.dec}</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={locked}
@@ -346,8 +346,8 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={locked}
@@ -418,8 +418,8 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={locked}
@@ -473,8 +473,8 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.ans}</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.ans}</span>
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
@@ -569,8 +569,8 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
             if (q.missing === col) {
               return dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansStr}</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{ansStr}</span>
                 </div>
               ) : (
                 <input type="text" inputMode={col === "variation" ? "text" : "decimal"} value={s.ans}
@@ -645,8 +645,8 @@ function A63Grid({ questions, states, setStates, ansKey, revealCorrection }: {
             <span className="text-sm text-[var(--color-text-primary)]">=</span>
             {dispStatus === "wrong" ? (
               <div className={WRONG_CLS}>
-                <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{correct}</span>
+                <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                <span className="text-xs font-bold text-amber-600 leading-none">{correct}</span>
               </div>
             ) : (
               <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
@@ -794,16 +794,16 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                     let cls = "w-20 text-center py-1 rounded-xl text-sm border transition-colors ";
                     if (dispStatus === "idle") {
                       cls += isSel
-                        ? "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40"
-                        : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 cursor-pointer hover:border-[var(--color-accent-alg)]/60";
+                        ? "border-[var(--color-accent-alg)] bg-blue-100"
+                        : "border-zinc-300 bg-white cursor-pointer hover:border-[var(--color-accent-alg)]/60";
                     } else if (dispStatus === "correct") {
                       cls += isSel
-                        ? "border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400"
-                        : "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
+                        ? "border-green-400 bg-green-50 text-green-700"
+                        : "border-zinc-200 bg-zinc-50 text-zinc-400";
                     } else {
-                      if (isSel)       cls += "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40";
+                      if (isSel)       cls += "border-[var(--color-accent-alg)] bg-blue-100";
                       else if (isCor)  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)] font-bold";
-                      else             cls += "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
+                      else             cls += "border-zinc-200 bg-zinc-50 text-zinc-400";
                     }
                     return (
                       <button key={opt} disabled={locked}
@@ -971,8 +971,8 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
                 <span className="text-sm text-[var(--color-text-primary)]">{q.text}</span>
                 {dispStatus === "wrong" ? (
                   <div className={WRONG_CLS}>
-                    <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansDisplay}</span>
+                    <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600 leading-none">{ansDisplay}</span>
                   </div>
                 ) : (
                   <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
@@ -1028,8 +1028,8 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
+                  <span className="text-[10px] text-zinc-700 leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={locked}

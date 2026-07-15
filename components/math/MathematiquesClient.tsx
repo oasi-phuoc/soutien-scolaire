@@ -226,13 +226,13 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                       style={{ "--module-header-accent": accentColor } as React.CSSProperties}
                     >
                       <div className="flex w-full items-center gap-3 px-4 py-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
                           <span className="text-sm font-bold" style={{ color: accentColor }}>{m.code}</span>
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
                         </div>
-                        <span className="shrink-0 rounded-full border border-[var(--color-border-default)] bg-white/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)] dark:bg-zinc-900/40">
+                        <span className="shrink-0 rounded-full border border-[var(--color-border-default)] bg-white/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
                           En cours de développement
                         </span>
                       </div>
@@ -311,7 +311,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                       }}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70 dark:bg-zinc-900/40">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/70">
                         <span className="text-sm font-bold" style={{ color: accentColor }}>
                           {m.code}
                         </span>
