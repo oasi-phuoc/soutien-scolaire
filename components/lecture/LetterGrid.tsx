@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -18,17 +18,43 @@ interface Props {
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
-const GRID_SIZE = 25;
+const DESKTOP_MQ = "(min-width: 768px)";
+const MOBILE_GRID_SIZE = 25;
+const DESKTOP_GRID_SIZE = 32;
 
-function makeGrid(target: string, isUppercase: boolean): string[] {
+function useLetterGridSize(): number {
+  const [size, setSize] = useState(() => {
+    if (typeof window === "undefined") return MOBILE_GRID_SIZE;
+    return window.matchMedia(DESKTOP_MQ).matches ? DESKTOP_GRID_SIZE : MOBILE_GRID_SIZE;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setSize(mq.matches ? DESKTOP_GRID_SIZE : MOBILE_GRID_SIZE);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return size;
+}
+
+function targetCountForSize(gridSize: number): number {
+  const min = Math.round(4 * gridSize / MOBILE_GRID_SIZE);
+  const max = Math.round(7 * gridSize / MOBILE_GRID_SIZE);
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+function makeGrid(target: string, isUppercase: boolean, gridSize: number): string[] {
   const alpha = isUppercase
     ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     : "abcdefghijklmnopqrstuvwxyz";
   const distractors = alpha.split("").filter((c) => c !== target);
-  const targetCount = 4 + Math.floor(Math.random() * 4); // 4–7
+  const targetCount = targetCountForSize(gridSize);
   const cells: string[] = [
     ...Array(targetCount).fill(target),
-    ...Array.from({ length: GRID_SIZE - targetCount }, () =>
+    ...Array.from({ length: gridSize - targetCount }, () =>
       distractors[Math.floor(Math.random() * distractors.length)],
     ),
   ];
@@ -43,15 +69,25 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
   function LetterGrid({ target, isUppercase, cols = 5 }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [grid, setGrid] = useState(() => makeGrid(target, isUppercase));
-    const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
+    const gridSize = useLetterGridSize();
+    const prevGridSize = useRef(gridSize);
+    const [grid, setGrid] = useState(() => makeGrid(target, isUppercase, gridSize));
+    const [states, setStates] = useState<CellState[]>(() => Array(gridSize).fill("idle"));
     const [validated, setValidated] = useState(false);
 
-    const reset = useCallback(() => {
-      setGrid(makeGrid(target, isUppercase));
-      setStates(Array(GRID_SIZE).fill("idle"));
+    useEffect(() => {
+      if (prevGridSize.current === gridSize) return;
+      prevGridSize.current = gridSize;
+      setGrid(makeGrid(target, isUppercase, gridSize));
+      setStates(Array(gridSize).fill("idle"));
       setValidated(false);
-    }, [target, isUppercase]);
+    }, [gridSize, target, isUppercase]);
+
+    const reset = useCallback(() => {
+      setGrid(makeGrid(target, isUppercase, gridSize));
+      setStates(Array(gridSize).fill("idle"));
+      setValidated(false);
+    }, [target, isUppercase, gridSize]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -91,7 +127,11 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
             {lectureUi(lang, "tapEachLetter", { x: isUppercase ? target.toUpperCase() : target.toLowerCase() })}
           </p>
         )}
-        <div className={`grid gap-2 ${cols === 5 ? "grid-cols-5" : "grid-cols-4"}`}>
+        <div
+          className={`grid gap-2 ${
+            cols === 4 ? "grid-cols-4" : "grid-cols-5 md:grid-cols-8 md:gap-1.5"
+          }`}
+        >
           {grid.map((letter, i) => {
             const s = states[i];
             return (
@@ -100,7 +140,7 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
                 type="button"
                 onClick={() => tap(i)}
                 disabled={validated}
-                className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-4xl font-bold transition-colors ${
+                className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-4xl font-bold transition-colors md:text-2xl ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"

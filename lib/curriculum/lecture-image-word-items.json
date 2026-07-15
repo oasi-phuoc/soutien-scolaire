@@ -1,6 +1,6 @@
 [
   {
-    "label": "accordeon",
+    "label": "accordéon",
     "phonemes": [
       "/a/",
       "/k/",
@@ -12,7 +12,7 @@
     ]
   },
   {
-    "label": "activite-mentale",
+    "label": "activité-mentale",
     "phonemes": [
       "/a/",
       "/k/",
@@ -155,7 +155,7 @@
     ]
   },
   {
-    "label": "asteroide",
+    "label": "astéroïde",
     "phonemes": [
       "/a/",
       "/s/",
@@ -350,7 +350,7 @@
     ]
   },
   {
-    "label": "beret",
+    "label": "béret",
     "phonemes": [
       "/b/",
       "/e/",
@@ -431,7 +431,7 @@
     ]
   },
   {
-    "label": "boite",
+    "label": "boîte",
     "phonemes": [
       "/b/",
       "/wa/",
@@ -593,7 +593,7 @@
     ]
   },
   {
-    "label": "brosse-a-dents",
+    "label": "brosse-à-dents",
     "phonemes": [
       "/b/",
       "/r/",
@@ -709,7 +709,7 @@
     ]
   },
   {
-    "label": "calecon",
+    "label": "caleçon",
     "phonemes": [
       "/k/",
       "/a/",
@@ -719,7 +719,7 @@
     ]
   },
   {
-    "label": "cameleon",
+    "label": "caméléon",
     "phonemes": [
       "/k/",
       "/a/",
@@ -804,7 +804,7 @@
     ]
   },
   {
-    "label": "carre",
+    "label": "carré",
     "phonemes": [
       "/k/",
       "/a/",
@@ -1035,7 +1035,7 @@
     ]
   },
   {
-    "label": "chataignier",
+    "label": "châtaignier",
     "phonemes": [
       "/ʃ/",
       "/a/",
@@ -1048,7 +1048,7 @@
     ]
   },
   {
-    "label": "chateau",
+    "label": "château",
     "phonemes": [
       "/ʃ/",
       "/a/",
@@ -1057,7 +1057,7 @@
     ]
   },
   {
-    "label": "chateau-de-sable",
+    "label": "château-de-sable",
     "phonemes": [
       "/ʃ/",
       "/a/",
@@ -1112,7 +1112,7 @@
     ]
   },
   {
-    "label": "cheminee",
+    "label": "cheminée",
     "phonemes": [
       "/ʃ/",
       "/e/",
@@ -1132,7 +1132,7 @@
     ]
   },
   {
-    "label": "chene",
+    "label": "chêne",
     "phonemes": [
       "/ʃ/",
       "/e/",
@@ -1163,7 +1163,7 @@
     ]
   },
   {
-    "label": "chevre",
+    "label": "chèvre",
     "phonemes": [
       "/ʃ/",
       "/e/",
@@ -1205,7 +1205,7 @@
     ]
   },
   {
-    "label": "chronometre",
+    "label": "chronomètre",
     "phonemes": [
       "/ʃ/",
       "/r/",
@@ -1217,7 +1217,7 @@
     ]
   },
   {
-    "label": "chrysantheme",
+    "label": "chrysanthème",
     "phonemes": [
       "/ʃ/",
       "/r/",
@@ -1299,7 +1299,7 @@
     ]
   },
   {
-    "label": "clementine",
+    "label": "clémentine",
     "phonemes": [
       "/k/",
       "/l/",
@@ -1357,7 +1357,7 @@
     ]
   },
   {
-    "label": "coeur",
+    "label": "cœur",
     "phonemes": [
       "/k/",
       "/ø/",
@@ -1424,7 +1424,7 @@
     ]
   },
   {
-    "label": "comete",
+    "label": "comète",
     "phonemes": [
       "/k/",
       "/o/",
@@ -1443,7 +1443,7 @@
     ]
   },
   {
-    "label": "comptoire",
+    "label": "comptoir",
     "phonemes": [
       "/k/",
       "/ɔ̃/",
@@ -1454,7 +1454,7 @@
     ]
   },
   {
-    "label": "cone",
+    "label": "cône",
     "phonemes": [
       "/k/",
       "/o/",
@@ -1520,7 +1520,7 @@
     ]
   },
   {
-    "label": "corde-a-sauter",
+    "label": "corde-à-sauter",
     "phonemes": [
       "/k/",
       "/o/",
@@ -1644,7 +1644,7 @@
     ]
   },
   {
-    "label": "crepe",
+    "label": "crêpe",
     "phonemes": [
       "/k/",
       "/r/",
@@ -1737,7 +1737,7 @@
     ]
   },
   {
-    "label": "cypres",
+    "label": "cyprès",
     "phonemes": [
       "/s/",
       "/i/",
@@ -1780,7 +1780,7 @@
     ]
   },
   {
-    "label": "deodorant",
+    "label": "déodorant",
     "phonemes": [
       "/d/",
       "/e/",
@@ -1790,7 +1790,7 @@
     ]
   },
   {
-    "label": "desert",
+    "label": "désert",
     "phonemes": [
       "/d/",
       "/e/",
@@ -1917,7 +1917,7 @@
     ]
   },
   {
-    "label": "echarpe",
+    "label": "écharpe",
     "phonemes": [
       "/e/",
       "/ʃ/",
@@ -1927,7 +1927,7 @@
     ]
   },
   {
-    "label": "echelle",
+    "label": "échelle",
     "phonemes": [
       "/e/",
       "/ʃ/",
@@ -1935,7 +1935,7 @@
     ]
   },
   {
-    "label": "ecouteurs",
+    "label": "écouteurs",
     "phonemes": [
       "/e/",
       "/k/",
@@ -1946,7 +1946,7 @@
     ]
   },
   {
-    "label": "ecureuil",
+    "label": "écureuil",
     "phonemes": [
       "/e/",
       "/k/",
@@ -1958,7 +1958,7 @@
     ]
   },
   {
-    "label": "elastique",
+    "label": "élastique",
     "phonemes": [
       "/e/",
       "/l/",
@@ -2034,7 +2034,7 @@
     ]
   },
   {
-    "label": "eponge",
+    "label": "éponge",
     "phonemes": [
       "/e/",
       "/p/",
@@ -2043,7 +2043,7 @@
     ]
   },
   {
-    "label": "erable",
+    "label": "érable",
     "phonemes": [
       "/e/",
       "/r/",
@@ -2065,7 +2065,7 @@
     ]
   },
   {
-    "label": "etang",
+    "label": "étang",
     "phonemes": [
       "/e/",
       "/t/",
@@ -2083,7 +2083,7 @@
     ]
   },
   {
-    "label": "etoile-de-mer",
+    "label": "étoile-de-mer",
     "phonemes": [
       "/e/",
       "/t/",
@@ -2217,7 +2217,7 @@
     ]
   },
   {
-    "label": "fleche",
+    "label": "flèche",
     "phonemes": [
       "/f/",
       "/l/",
@@ -2498,7 +2498,7 @@
     ]
   },
   {
-    "label": "guepe",
+    "label": "guêpe",
     "phonemes": [
       "/g/",
       "/y/",
@@ -2507,7 +2507,7 @@
     ]
   },
   {
-    "label": "haltere",
+    "label": "haltère",
     "phonemes": [
       "/∅/",
       "/a/",
@@ -2518,7 +2518,7 @@
     ]
   },
   {
-    "label": "halteres",
+    "label": "haltères",
     "phonemes": [
       "/∅/",
       "/a/",
@@ -2608,7 +2608,7 @@
     ]
   },
   {
-    "label": "helicoptere",
+    "label": "hélicoptère",
     "phonemes": [
       "/∅/",
       "/e/",
@@ -2622,7 +2622,7 @@
     ]
   },
   {
-    "label": "herisson",
+    "label": "hérisson",
     "phonemes": [
       "/∅/",
       "/e/",
@@ -2633,7 +2633,7 @@
     ]
   },
   {
-    "label": "hetre",
+    "label": "hêtre",
     "phonemes": [
       "/∅/",
       "/e/",
@@ -3398,7 +3398,7 @@
     ]
   },
   {
-    "label": "huitre",
+    "label": "huître",
     "phonemes": [
       "/∅/",
       "/ɥi/",
@@ -3407,7 +3407,7 @@
     ]
   },
   {
-    "label": "hygiene",
+    "label": "hygiène",
     "phonemes": [
       "/∅/",
       "/i/",
@@ -3604,7 +3604,7 @@
     ]
   },
   {
-    "label": "kaleidoscope",
+    "label": "kaléidoscope",
     "phonemes": [
       "/k/",
       "/a/",
@@ -3708,7 +3708,7 @@
     ]
   },
   {
-    "label": "legging",
+    "label": "légging",
     "phonemes": [
       "/l/",
       "/e/",
@@ -3727,7 +3727,7 @@
     ]
   },
   {
-    "label": "lezard",
+    "label": "lézard",
     "phonemes": [
       "/l/",
       "/e/",
@@ -3862,7 +3862,7 @@
     ]
   },
   {
-    "label": "macon",
+    "label": "maçon",
     "phonemes": [
       "/m/",
       "/a/",
@@ -3913,7 +3913,7 @@
     ]
   },
   {
-    "label": "mais",
+    "label": "maïs",
     "phonemes": [
       "/m/",
       "/ɛ/"
@@ -4071,7 +4071,7 @@
     ]
   },
   {
-    "label": "mecanicien",
+    "label": "mécanicien",
     "phonemes": [
       "/m/",
       "/e/",
@@ -4084,7 +4084,7 @@
     ]
   },
   {
-    "label": "medaille",
+    "label": "médaille",
     "phonemes": [
       "/m/",
       "/e/",
@@ -4094,7 +4094,7 @@
     ]
   },
   {
-    "label": "meduse",
+    "label": "méduse",
     "phonemes": [
       "/m/",
       "/e/",
@@ -4123,7 +4123,7 @@
     ]
   },
   {
-    "label": "mesange",
+    "label": "mésange",
     "phonemes": [
       "/m/",
       "/e/",
@@ -4143,7 +4143,7 @@
     ]
   },
   {
-    "label": "metro",
+    "label": "métro",
     "phonemes": [
       "/m/",
       "/e/",
@@ -4214,7 +4214,7 @@
     ]
   },
   {
-    "label": "montgolfiere",
+    "label": "montgolfière",
     "phonemes": [
       "/m/",
       "/ɔ̃/",
@@ -4341,7 +4341,7 @@
     ]
   },
   {
-    "label": "nenuphar",
+    "label": "nénuphar",
     "phonemes": [
       "/n/",
       "/e/",
@@ -4369,7 +4369,7 @@
     ]
   },
   {
-    "label": "noeud-papillon",
+    "label": "nœud-papillon",
     "phonemes": [
       "/n/",
       "/ø/",
@@ -4422,7 +4422,7 @@
     ]
   },
   {
-    "label": "oeil",
+    "label": "œil",
     "phonemes": [
       "/o/",
       "/ɛ/",
@@ -4430,7 +4430,7 @@
     ]
   },
   {
-    "label": "oeillet",
+    "label": "œillet",
     "phonemes": [
       "/o/",
       "/ɛ/",
@@ -4439,7 +4439,7 @@
     ]
   },
   {
-    "label": "oeuf",
+    "label": "œuf",
     "phonemes": [
       "/ø/",
       "/f/"
@@ -4463,7 +4463,7 @@
     ]
   },
   {
-    "label": "orchidee",
+    "label": "orchidée",
     "phonemes": [
       "/o/",
       "/r/",
@@ -4648,7 +4648,7 @@
     ]
   },
   {
-    "label": "paquerette",
+    "label": "pâquerette",
     "phonemes": [
       "/p/",
       "/a/",
@@ -4702,7 +4702,7 @@
     ]
   },
   {
-    "label": "pates",
+    "label": "pâtes",
     "phonemes": [
       "/p/",
       "/a/",
@@ -4711,7 +4711,7 @@
     ]
   },
   {
-    "label": "patins-a-roulettes",
+    "label": "patins-à-roulettes",
     "phonemes": [
       "/p/",
       "/a/",
@@ -4725,7 +4725,7 @@
     ]
   },
   {
-    "label": "peche",
+    "label": "pêche",
     "phonemes": [
       "/p/",
       "/e/",
@@ -4733,7 +4733,7 @@
     ]
   },
   {
-    "label": "pecheur",
+    "label": "pêcheur",
     "phonemes": [
       "/p/",
       "/e/",
@@ -4761,7 +4761,7 @@
     ]
   },
   {
-    "label": "pelican",
+    "label": "pélican",
     "phonemes": [
       "/p/",
       "/e/",
@@ -5033,7 +5033,7 @@
     ]
   },
   {
-    "label": "planete",
+    "label": "planète",
     "phonemes": [
       "/p/",
       "/l/",
@@ -5113,7 +5113,7 @@
     ]
   },
   {
-    "label": "porte-cles",
+    "label": "porte-clés",
     "phonemes": [
       "/p/",
       "/o/",
@@ -5226,7 +5226,7 @@
     ]
   },
   {
-    "label": "poupee",
+    "label": "poupée",
     "phonemes": [
       "/p/",
       "/u/",
@@ -5910,7 +5910,7 @@
     ]
   },
   {
-    "label": "randonnee",
+    "label": "randonnée",
     "phonemes": [
       "/r/",
       "/ɑ̃/",
@@ -5962,7 +5962,7 @@
     ]
   },
   {
-    "label": "rateau",
+    "label": "râteau",
     "phonemes": [
       "/r/",
       "/a/",
@@ -5983,7 +5983,7 @@
     ]
   },
   {
-    "label": "refrigerateur",
+    "label": "réfrigérateur",
     "phonemes": [
       "/r/",
       "/e/",
@@ -5996,7 +5996,7 @@
     ]
   },
   {
-    "label": "regle",
+    "label": "règle",
     "phonemes": [
       "/r/",
       "/e/",
@@ -6016,7 +6016,7 @@
     ]
   },
   {
-    "label": "reveil",
+    "label": "réveil",
     "phonemes": [
       "/r/",
       "/e/",
@@ -6259,7 +6259,7 @@
     ]
   },
   {
-    "label": "seche-cheveux",
+    "label": "sèche-cheveux",
     "phonemes": [
       "/s/",
       "/e/",
@@ -6290,7 +6290,7 @@
     ]
   },
   {
-    "label": "sequoia",
+    "label": "séquoia",
     "phonemes": [
       "/s/",
       "/e/",
@@ -6474,7 +6474,7 @@
     ]
   },
   {
-    "label": "sphere",
+    "label": "sphère",
     "phonemes": [
       "/s/",
       "/f/",
@@ -6639,7 +6639,7 @@
     ]
   },
   {
-    "label": "telecommande",
+    "label": "télécommande",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6652,7 +6652,7 @@
     ]
   },
   {
-    "label": "telepherique",
+    "label": "téléphérique",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6664,7 +6664,7 @@
     ]
   },
   {
-    "label": "telephone",
+    "label": "téléphone",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6675,7 +6675,7 @@
     ]
   },
   {
-    "label": "telescope",
+    "label": "télescope",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6687,7 +6687,7 @@
     ]
   },
   {
-    "label": "television",
+    "label": "télévision",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6699,7 +6699,7 @@
     ]
   },
   {
-    "label": "tempete",
+    "label": "tempête",
     "phonemes": [
       "/t/",
       "/ɑ̃/",
@@ -6724,20 +6724,20 @@
     ]
   },
   {
-    "label": "tete",
+    "label": "tête",
     "phonemes": [
       "/t/",
       "/e/"
     ]
   },
   {
-    "label": "the",
+    "label": "thé",
     "phonemes": [
       "/t/"
     ]
   },
   {
-    "label": "the-glace",
+    "label": "thé-glacé",
     "phonemes": [
       "/t/",
       "/e/",
@@ -6925,7 +6925,7 @@
     ]
   },
   {
-    "label": "trophee",
+    "label": "trophée",
     "phonemes": [
       "/t/",
       "/r/",
@@ -6966,7 +6966,7 @@
     ]
   },
   {
-    "label": "vallee",
+    "label": "vallée",
     "phonemes": [
       "/v/",
       "/a/",
@@ -7048,7 +7048,7 @@
     ]
   },
   {
-    "label": "veterinaire",
+    "label": "vétérinaire",
     "phonemes": [
       "/v/",
       "/e/",

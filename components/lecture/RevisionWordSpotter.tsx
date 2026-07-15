@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { randomWordsWithLetter } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { usePivotLang } from "@/components/math/usePivotLang";
@@ -16,62 +16,97 @@ interface Props {
   letterA: string;
   letterB: string;
   isUppercase: boolean;
+  /** Éval : majuscules et minuscules mélangées (50/50 aléatoire). */
+  mixedCase?: boolean;
+  wordCount?: number;
+  onValidated?: (score: number, max: number) => void;
+  shouldValidate?: boolean;
 }
 
 type CharState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
 const WORD_COUNT = 5;
 
-function buildWords(letterA: string, letterB: string, isUppercase: boolean, maxLength: number): string[] {
+function buildWords(
+  letterA: string,
+  letterB: string,
+  isUppercase: boolean,
+  maxLength: number,
+  mixedCase = false,
+  wordCount = WORD_COUNT,
+): string[] {
   const a = letterA.toLowerCase();
   const b = letterB.toLowerCase();
   const rawA = randomWordsWithLetter(a, 15, maxLength);
   const rawB = randomWordsWithLetter(b, 15, maxLength);
-  const merged = [...new Set([...rawA, ...rawB])].slice(0, WORD_COUNT);
-  return merged.map((w) => (isUppercase ? w.toUpperCase() : w.toLowerCase()));
+  const merged = [...new Set([...rawA, ...rawB])].slice(0, wordCount);
+  return merged.map((w) => {
+    if (mixedCase) return Math.random() < 0.5 ? w.toUpperCase() : w.toLowerCase();
+    return isUppercase ? w.toUpperCase() : w.toLowerCase();
+  });
+}
+
+function targetSet(letterA: string, letterB: string, isUppercase: boolean, mixedCase: boolean): Set<string> {
+  if (mixedCase) {
+    return new Set([letterA, letterA.toLowerCase(), letterB, letterB.toLowerCase()]);
+  }
+  const a = isUppercase ? letterA : letterA.toLowerCase();
+  const b = isUppercase ? letterB : letterB.toLowerCase();
+  return new Set([a, b]);
 }
 
 export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
-  function RevisionWordSpotter({ letterA, letterB, isUppercase }, ref) {
+  function RevisionWordSpotter(
+    { letterA, letterB, isUppercase, mixedCase = false, wordCount = WORD_COUNT, onValidated, shouldValidate },
+    ref,
+  ) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
     const maxLength = useLectureWordMaxLength(9);
-    const a = isUppercase ? letterA : letterA.toLowerCase();
-    const b = isUppercase ? letterB : letterB.toLowerCase();
+    const a = mixedCase ? `${letterA}/${letterA.toLowerCase()}` : isUppercase ? letterA : letterA.toLowerCase();
+    const b = mixedCase ? `${letterB}/${letterB.toLowerCase()}` : isUppercase ? letterB : letterB.toLowerCase();
 
-    const [words, setWords] = useState(() => buildWords(letterA, letterB, isUppercase, maxLength));
+    const [words, setWords] = useState(() => buildWords(letterA, letterB, isUppercase, maxLength, mixedCase, wordCount));
     const [states, setStates] = useState<Record<string, CharState>>({});
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setWords(buildWords(letterA, letterB, isUppercase, maxLength));
+      setWords(buildWords(letterA, letterB, isUppercase, maxLength, mixedCase, wordCount));
       setStates({});
       setValidated(false);
-    }, [letterA, letterB, isUppercase, maxLength]);
+    }, [letterA, letterB, isUppercase, maxLength, mixedCase, wordCount]);
 
     const validate = useCallback(() => {
       if (validated) return;
-      const ta = isUppercase ? letterA : letterA.toLowerCase();
-      const tb = isUppercase ? letterB : letterB.toLowerCase();
-      const targets = new Set([ta, tb]);
-      setValidated(true);
-      setStates((prev) => {
-        const next: Record<string, CharState> = {};
-        words.forEach((word, wi) => {
-          word.split("").forEach((char, li) => {
-            const key = `${wi}-${li}`;
-            const isTarget = targets.has(char);
-            const s = prev[key] ?? "idle";
-            if (s === "selected") {
-              next[key] = isTarget ? "correct" : "wrong";
-            } else if (isTarget) {
-              next[key] = "missed";
-            }
-          });
+      const targets = targetSet(letterA, letterB, isUppercase, mixedCase);
+      const newStates: Record<string, CharState> = {};
+      let score = 0;
+      words.forEach((word, wi) => {
+        let lineOk = true;
+        word.split("").forEach((char, li) => {
+          const key = `${wi}-${li}`;
+          const isTarget = targets.has(char);
+          const s = states[key] ?? "idle";
+          if (s === "selected") {
+            newStates[key] = isTarget ? "correct" : "wrong";
+            if (!isTarget) lineOk = false;
+          } else if (isTarget) {
+            newStates[key] = "missed";
+            lineOk = false;
+          }
         });
-        return next;
+        if (lineOk) score++;
       });
-    }, [validated, words, letterA, letterB, isUppercase]);
+      setValidated(true);
+      setStates(newStates);
+      onValidated?.(score, words.length);
+    }, [validated, words, letterA, letterB, isUppercase, mixedCase, states, onValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 

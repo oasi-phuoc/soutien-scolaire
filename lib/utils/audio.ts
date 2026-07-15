@@ -1,16 +1,9 @@
-import { speak } from "@/lib/utils/speech";
+import { speak, primeSpeechVoices, type VoiceGender } from "@/lib/utils/speech";
 
 import { LECTURE_IMAGE_INDEX } from "@/lib/curriculum/content/communication/word-image-index";
 
 export function getWordAssetSlug(word: string): string {
-  return word
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\u0153/g, "oe")
-    .replace(/\u0152/g, "oe")
-    .replace(/\u00e6/g, "ae")
-    .replace(/\u00c6/g, "ae")
-    .toLowerCase();
+  return word.toLowerCase();
 }
 
 export function getLectureWordImagePath(word: string): string {
@@ -21,54 +14,73 @@ export function hasLectureWordImage(word: string): boolean {
   return !!LECTURE_IMAGE_INDEX[getWordAssetSlug(word)];
 }
 
-type Voice = "f" | "m";
+export type { VoiceGender } from "@/lib/utils/speech";
 
-function selectedVoice(): Voice {
+export function selectedVoice(): VoiceGender {
   if (typeof window === "undefined") return "f";
   return localStorage.getItem("soutien-genre") === "m" ? "m" : "f";
 }
 
 /**
  * Ordered list of audio URLs to try for a recording.
- * Lecture words always prefer the feminine recording first.
- * Other sounds use the selected voice first, with a fallback.
+ * Uses the selected voice first, with the other gender as fallback.
  */
 function audioCandidates(kind: "mots" | "syllable", text: string): string[] {
   const slug = getWordAssetSlug(text);
   const fem = `/assets/words/son_f/${kind}/${slug}.mp3`;
   const masc = `/assets/words/son_m/${kind}/${slug}.mp3`;
-  if (kind === "mots" && hasLectureWordImage(text)) {
-    return [fem, masc];
-  }
   return selectedVoice() === "m" ? [masc, fem] : [fem, masc];
 }
 
 /**
- * Feminine word recording path. Kept for callers that only need a single URL
- * (e.g. building <audio> elements); prefer `playWord` for the full fallback.
+ * Preferred word recording path for the selected voice.
+ * Prefer `playWord` for the full fallback chain.
  */
 export function getWordAudioPath(word: string): string {
-  return `/assets/words/son_f/mots/${getWordAssetSlug(word)}.mp3`;
+  const slug = getWordAssetSlug(word);
+  const kind = selectedVoice() === "m" ? "son_m" : "son_f";
+  return `/assets/words/${kind}/mots/${slug}.mp3`;
+}
+
+const PLAY_TIMEOUT_MS = 8000;
+
+/**
+ * Try to play a recording URL. Calls play() immediately so iOS/WebView keeps
+ * the user-gesture context; waiting for canplaythrough before play() often hangs
+ * silently on mobile (media is not fetched until play() is invoked).
+ */
+async function tryPlayUrl(url: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const audio = new Audio(url);
+    let settled = false;
+    const finish = (ok: boolean) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      resolve(ok);
+    };
+    const timer = window.setTimeout(() => finish(false), PLAY_TIMEOUT_MS);
+    audio.addEventListener("error", () => finish(false), { once: true });
+    audio.addEventListener("playing", () => finish(true), { once: true });
+    void audio.play().catch(() => finish(false));
+  });
 }
 
 async function playWithFallback(candidates: string[], fallbackText: string): Promise<void> {
   for (const url of candidates) {
-    try {
-      await new Audio(url).play();
-      return;
-    } catch {
-      // File missing / not playable — try the next candidate.
-    }
+    if (await tryPlayUrl(url)) return;
   }
-  speak(fallbackText);
+  speak(fallbackText, "fr-CH", 0.85, selectedVoice());
 }
 
-/** Play a word recording (masculine → feminine → TTS). */
+/** Play a word recording (preferred voice → other voice → TTS). */
 export function playWord(word: string): void {
+  primeSpeechVoices();
   void playWithFallback(audioCandidates("mots", word), word);
 }
 
-/** Play a syllable recording (masculine → feminine → TTS). */
+/** Play a syllable recording (preferred voice → other voice → TTS). */
 export function playSyllable(syllable: string): void {
+  primeSpeechVoices();
   void playWithFallback(audioCandidates("syllable", syllable), syllable);
 }

@@ -209,7 +209,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   [
     {
       title: "Règles d'hygiène",
-      image: "/assets/words/lecture/hygiene.webp",
+      image: "/assets/words/lecture/hygiène.webp",
       imageLabel: "Hygiène",
       body: "Quand vous arrivez au travail, lavez-vous les mains. Portez une tenue propre. Nettoyez votre espace après chaque client.",
       questions: [
@@ -219,7 +219,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Remplacement",
-      image: "/assets/words/lecture/comptoire.webp",
+      image: "/assets/words/lecture/comptoir.webp",
       imageLabel: "Remplacement",
       body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.\n— Samira",
       questions: [
@@ -277,8 +277,8 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
     title: "Améliorez votre mémoire !",
     sections: [
       { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/assets/words/lecture/alimentation.webp", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/assets/words/lecture/velo.webp", imageLabel: "Sport" },
-      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/assets/words/lecture/activite-mentale.webp", imageLabel: "Activité mentale" },
+      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/assets/words/lecture/vélo.webp", imageLabel: "Sport" },
+      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/assets/words/lecture/activité-mentale.webp", imageLabel: "Activité mentale" },
     ],
     questions: [
       { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },

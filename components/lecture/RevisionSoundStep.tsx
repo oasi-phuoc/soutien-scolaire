@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -16,12 +16,20 @@ interface Props {
   phonemeB: string;
   words: { word: string; answer: "A" | "B" | "AB" }[];
   mode: "image" | "audio";
+  onValidated?: (score: number, max: number) => void;
+  shouldValidate?: boolean;
 }
 
 type CardSelection = { A: boolean; B: boolean };
 
+function isCardCorrect(sel: CardSelection, answer: "A" | "B" | "AB"): boolean {
+  const wantsA = answer === "A" || answer === "AB";
+  const wantsB = answer === "B" || answer === "AB";
+  return sel.A === wantsA && sel.B === wantsB;
+}
+
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
-  function RevisionSoundStep({ phonemeA, phonemeB, words, mode }, ref) {
+  function RevisionSoundStep({ phonemeA, phonemeB, words, mode, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
     const [selections, setSelections] = useState<CardSelection[]>(() =>
@@ -37,7 +45,19 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     const validate = useCallback(() => {
       if (validated) return;
       setValidated(true);
-    }, [validated]);
+      if (onValidated) {
+        const score = words.reduce((sum, { answer }, i) => (
+          sum + (isCardCorrect(selections[i]!, answer) ? 1 : 0)
+        ), 0);
+        onValidated(score, words.length);
+      }
+    }, [validated, selections, words, onValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 

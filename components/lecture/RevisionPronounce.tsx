@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -8,10 +8,15 @@ import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface RevisionPronounceHandle {
   reset: () => void;
+  validate: () => void;
 }
 
 interface Props {
   words: { letter: string; word: string }[];
+  /** Nombre de mots à prononcer (éval : 4). */
+  wordCount?: number;
+  onValidated?: (score: number, max: number) => void;
+  shouldValidate?: boolean;
 }
 
 type RecState = "idle" | "listening" | "correct" | "wrong";
@@ -43,24 +48,60 @@ function pickOnePerLetter(words: { letter: string; word: string }[]): { letter: 
   return result;
 }
 
+function pickWords(words: { letter: string; word: string }[], count?: number): { letter: string; word: string }[] {
+  const byLetter: Record<string, { letter: string; word: string }[]> = {};
+  for (const w of words) {
+    if (!byLetter[w.letter]) byLetter[w.letter] = [];
+    byLetter[w.letter]!.push(w);
+  }
+  const letters = Object.keys(byLetter);
+  if (!count) return pickOnePerLetter(words);
+  const perLetter = Math.ceil(count / letters.length);
+  const picked: { letter: string; word: string }[] = [];
+  for (const letter of letters) {
+    const pool = [...byLetter[letter]!];
+    for (let i = 0; i < perLetter && pool.length > 0 && picked.length < count; i++) {
+      const idx = Math.floor(Math.random() * pool.length);
+      picked.push(pool.splice(idx, 1)[0]!);
+    }
+  }
+  return picked.slice(0, count);
+}
+
 export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
-  function RevisionPronounce({ words }, ref) {
+  function RevisionPronounce({ words, wordCount, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const [selected] = useState(() => pickOnePerLetter(words));
+    const [selected] = useState(() => pickWords(words, wordCount));
     const [recStates, setRecStates] = useState<RecState[]>(() => selected.map(() => "idle"));
+    const [validated, setValidated] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const recRef = useRef<any>(null);
 
     const reset = useCallback(() => {
       recRef.current?.abort();
       setRecStates(selected.map(() => "idle"));
+      setValidated(false);
     }, [selected]);
 
-    useImperativeHandle(ref, () => ({ reset }), [reset]);
+    const validate = useCallback(() => {
+      if (validated) return;
+      recRef.current?.abort();
+      setValidated(true);
+      const score = recStates.filter((s) => s === "correct").length;
+      onValidated?.(score, selected.length);
+    }, [validated, recStates, selected.length, onValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
+
+    useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
     function startListening(wordIdx: number) {
-      if (recStates[wordIdx] === "listening") return;
+      if (validated || recStates[wordIdx] === "listening") return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
       if (!SR) return;
@@ -110,7 +151,7 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
               <div className="flex items-center gap-3">
                 <span className="text-3xl font-bold text-[var(--color-text-primary)]">{entry.word}</span>
                 <button type="button" onClick={() => playWord(entry.word)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)]"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-95"
                   aria-label={`Écouter ${entry.word}`}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
@@ -120,7 +161,7 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
               </div>
 
               {srAvailable && (
-                <button type="button" onClick={() => startListening(wi)} disabled={recState === "listening"}
+                <button type="button" onClick={() => startListening(wi)} disabled={validated || recState === "listening"}
                   className={`flex h-14 w-14 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
                     recState === "listening" ? "animate-pulse bg-red-500 text-white"
                       : recState === "correct" ? "bg-[var(--color-accent-lecture)] text-white"

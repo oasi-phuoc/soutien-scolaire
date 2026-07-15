@@ -55,6 +55,79 @@ export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
   },
 );
 
+function ouiNonLabel(state: CellState): "Oui" | "Non" {
+  return state === "selected" || state === "correct" || state === "wrong" ? "Oui" : "Non";
+}
+
+function ouiNonButtonClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
+  const base =
+    "rounded-full border px-3 py-1 text-xs font-semibold transition-colors disabled:opacity-70";
+  if (!validated) {
+    return state === "selected"
+      ? `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`
+      : `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+  }
+  if (state === "correct") {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]`;
+  }
+  if (state === "wrong") {
+    return `${base} border-red-400 bg-red-50 text-red-700`;
+  }
+  if (state === "missed") {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
+  }
+  if (hasPhoneme) {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
+  }
+  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]`;
+}
+
+function OuiNonButton({
+  state,
+  validated,
+  hasPhoneme,
+  onClick,
+}: {
+  state: CellState;
+  validated: boolean;
+  hasPhoneme: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={validated}
+      className={ouiNonButtonClass(state, validated, hasPhoneme)}
+      aria-pressed={ouiNonLabel(state) === "Oui"}
+    >
+      {ouiNonLabel(state)}
+    </button>
+  );
+}
+
+function AudioPlayButton({
+  word,
+  size = "sm",
+  className = "",
+}: {
+  word: string;
+  size?: "sm" | "md";
+  className?: string;
+}) {
+  const dim = size === "md" ? "h-7 w-7" : "h-6 w-6";
+  return (
+    <button
+      type="button"
+      aria-label={`Écouter ${word}`}
+      onClick={() => playWord(word)}
+      className={`flex ${dim} shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm ${className}`}
+    >
+      {size === "md" ? <MediumSpeakerIcon /> : <SmallSpeakerIcon />}
+    </button>
+  );
+}
+
 // ── ImagePicker ───────────────────────────────────────────────────────────────
 
 const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
@@ -108,50 +181,40 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
           </p>
         )}
-        <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
+        <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
           {items.map((word, i) => {
             const s = states[i]!;
+            const hasPhoneme = wordHasPhoneme(word.label, phoneme);
             const imgSrc = getLectureWordImagePath(word.label);
             return (
-              <button
+              <div
                 key={`${word.label}-${i}`}
-                type="button"
-                onClick={() => toggle(i)}
-                disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
-                  s === "correct"
-                    ? "border-[var(--color-accent-lecture)]"
-                    : s === "wrong" || s === "missed"
-                      ? "border-red-400"
-                      : s === "selected"
-                        ? "border-[var(--color-accent-lecture)]"
-                        : "border-[var(--color-border-default)]"
-                }`}
+                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
               >
-                {imgSrc ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={imgSrc}
-                    alt={word.label}
-                    className="absolute inset-0 h-full w-full object-contain p-1 pt-7 pr-7 rounded-[var(--radius-md)]"
+                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                  {imgSrc ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={imgSrc}
+                      alt={word.label}
+                      className="h-full w-full object-contain p-1"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center px-1 text-center text-xs font-semibold text-[var(--color-text-primary)]">
+                      {word.label}
+                    </span>
+                  )}
+                </div>
+                <div className="flex w-full items-center justify-between gap-2 px-0.5">
+                  <AudioPlayButton word={word.label} />
+                  <OuiNonButton
+                    state={s}
+                    validated={validated}
+                    hasPhoneme={hasPhoneme}
+                    onClick={() => toggle(i)}
                   />
-                ) : (
-                  <span className="absolute inset-0 flex items-center justify-center px-1 pt-6 text-center text-[10px] font-semibold leading-tight text-[var(--color-text-primary)]">
-                    {word.label}
-                  </span>
-                )}
-                <button
-                  type="button"
-                  aria-label={`Écouter ${word.label}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    playWord(word.label);
-                  }}
-                  className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
-                >
-                  <SmallSpeakerIcon />
-                </button>
-              </button>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -194,8 +257,6 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 
     function toggle(i: number) {
       if (validated) return;
-      const word = items[i]!;
-      playWord(word.label);
       setStates((prev) => {
         const next = [...prev] as CellState[];
         next[i] = prev[i] === "selected" ? "idle" : "selected";
@@ -215,40 +276,33 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
             {lectureUi(lang, "listenTapWithSound", { x: phoneme })}
           </p>
         )}
-        <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
+        <div className="grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-4">
           {items.map((word, i) => {
             const s = states[i]!;
+            const hasPhoneme = wordHasPhoneme(word.label, phoneme);
             return (
-              <button
+              <div
                 key={`${word.label}-${i}`}
-                type="button"
-                onClick={() => toggle(i)}
-                disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
-                  s === "correct"
-                    ? "border-[var(--color-accent-lecture)]"
-                    : s === "wrong" || s === "missed"
-                      ? "border-red-400"
-                      : s === "selected"
-                        ? "border-[var(--color-accent-lecture)]"
-                        : "border-[var(--color-border-default)]"
-                }`}
+                className="flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-1.5"
               >
                 <button
                   type="button"
-                  aria-label={`Écouter`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    playWord(word.label);
-                  }}
-                  className="absolute inset-0 m-auto flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
+                  onClick={() => playWord(word.label)}
+                  className="flex aspect-square w-full items-center justify-center rounded-lg bg-[var(--color-bg-secondary)]"
+                  aria-label={`Écouter ${word.label}`}
                 >
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent-lecture)]" aria-hidden>
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
                   </svg>
                 </button>
-              </button>
+                <OuiNonButton
+                  state={s}
+                  validated={validated}
+                  hasPhoneme={hasPhoneme}
+                  onClick={() => toggle(i)}
+                />
+              </div>
             );
           })}
         </div>
@@ -260,6 +314,15 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 function SmallSpeakerIcon() {
   return (
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+    </svg>
+  );
+}
+
+function MediumSpeakerIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
       <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
     </svg>

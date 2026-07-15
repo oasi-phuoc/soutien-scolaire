@@ -1,6 +1,6 @@
 [
   {
-    "slug": "activite-mentale",
+    "slug": "activité-mentale",
     "label": "Activité mentale"
   },
   {
@@ -80,7 +80,7 @@
     "label": "cadeau"
   },
   {
-    "slug": "cafe",
+    "slug": "café",
     "label": "Café"
   },
   {
@@ -180,7 +180,7 @@
     "label": "Du jus"
   },
   {
-    "slug": "elastique",
+    "slug": "élastique",
     "label": "élastique"
   },
   {
@@ -264,7 +264,7 @@
     "label": "carte orientation gare-01 option c"
   },
   {
-    "slug": "gateau",
+    "slug": "gâteau",
     "label": "gâteau"
   },
   {
@@ -284,11 +284,11 @@
     "label": "guitare"
   },
   {
-    "slug": "haltere",
+    "slug": "haltère",
     "label": "haltère"
   },
   {
-    "slug": "helicoptere",
+    "slug": "hélicoptère",
     "label": "hélicoptère"
   },
   {
@@ -296,7 +296,7 @@
     "label": "Hiver"
   },
   {
-    "slug": "hygiene",
+    "slug": "hygiène",
     "label": "Hygiène"
   },
   {
@@ -524,7 +524,7 @@
     "label": "Métal"
   },
   {
-    "slug": "metro",
+    "slug": "métro",
     "label": "Métro"
   },
   {
@@ -652,7 +652,7 @@
     "label": "radis"
   },
   {
-    "slug": "regle",
+    "slug": "règle",
     "label": "règle"
   },
   {
@@ -872,7 +872,7 @@
     "label": "Une veste"
   },
   {
-    "slug": "velo",
+    "slug": "vélo",
     "label": "Vélo"
   },
   {

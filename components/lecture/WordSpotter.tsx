@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { randomWordsWithLetter } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { usePivotLang } from "@/components/math/usePivotLang";
@@ -19,11 +19,48 @@ interface Props {
 
 type CharState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
-const WORD_COUNT = 5;
+export const DESKTOP_MQ = "(min-width: 768px)";
+export const MOBILE_WORD_SPOTTER_COUNT = 5;
+export const DESKTOP_WORD_SPOTTER_COUNT = 12;
 
-function buildWords(target: string, isUppercase: boolean, maxLength: number): string[] {
-  const raw = randomWordsWithLetter(target.toLowerCase(), 20, maxLength);
-  const filtered = raw.filter((w) => w.length <= maxLength).slice(0, WORD_COUNT);
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia(query).matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(query);
+    const update = () => setMatches(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [query]);
+
+  return matches;
+}
+
+export function useIsDesktopMd(): boolean {
+  return useMediaQuery(DESKTOP_MQ);
+}
+
+export function useWordSpotterItemCount(
+  mobileCount = MOBILE_WORD_SPOTTER_COUNT,
+  desktopCount = DESKTOP_WORD_SPOTTER_COUNT,
+): number {
+  const isDesktop = useIsDesktopMd();
+  return isDesktop ? desktopCount : mobileCount;
+}
+
+function buildWords(
+  target: string,
+  isUppercase: boolean,
+  maxLength: number,
+  wordCount: number,
+): string[] {
+  const raw = randomWordsWithLetter(target.toLowerCase(), wordCount * 4, maxLength);
+  const filtered = raw.filter((w) => w.length <= maxLength).slice(0, wordCount);
   return filtered.map((w) => (isUppercase ? w.toUpperCase() : w.toLowerCase()));
 }
 
@@ -32,16 +69,26 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
     const maxLength = useLectureWordMaxLength(9);
-    const [words, setWords] = useState(() => buildWords(target, isUppercase, maxLength));
+    const wordCount = useWordSpotterItemCount();
+    const prevWordCount = useRef(wordCount);
+    const [words, setWords] = useState(() => buildWords(target, isUppercase, maxLength, wordCount));
     // states keyed by "wi-li"
     const [states, setStates] = useState<Record<string, CharState>>({});
     const [validated, setValidated] = useState(false);
 
-    const reset = useCallback(() => {
-      setWords(buildWords(target, isUppercase, maxLength));
+    useEffect(() => {
+      if (prevWordCount.current === wordCount) return;
+      prevWordCount.current = wordCount;
+      setWords(buildWords(target, isUppercase, maxLength, wordCount));
       setStates({});
       setValidated(false);
-    }, [target, isUppercase, maxLength]);
+    }, [wordCount, target, isUppercase, maxLength]);
+
+    const reset = useCallback(() => {
+      setWords(buildWords(target, isUppercase, maxLength, wordCount));
+      setStates({});
+      setValidated(false);
+    }, [target, isUppercase, maxLength, wordCount]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -90,11 +137,11 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
             {lectureUi(lang, "tapLetterInWords", { x: target })}
           </p>
         )}
-        <ul className="space-y-2">
+        <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
           {words.map((word, wi) => (
             <li
               key={wi}
-              className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 md:px-4"
+              className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 md:px-2 md:py-2"
             >
               {word.split("").map((char, li) => {
                 const key = `${wi}-${li}`;
@@ -105,7 +152,7 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
                     type="button"
                     disabled={validated}
                     onClick={() => tap(wi, li)}
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors md:h-7 md:w-7 md:text-sm ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors md:h-6 md:w-6 md:text-xs ${
                       s === "correct"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"

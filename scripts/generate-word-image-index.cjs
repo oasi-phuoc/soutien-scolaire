@@ -33,6 +33,10 @@ const vocabDir = path.join(root, "public/assets/words/vocab");
 const outFile = path.join(root, "lib/curriculum/content/communication/word-image-index.ts");
 
 function slug(word) {
+  return word.toLowerCase();
+}
+
+function baseSlug(word) {
   return word
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -50,9 +54,13 @@ function addFrom(dir, urlPrefix, index) {
   if (!fs.existsSync(dir)) return;
   for (const file of fs.readdirSync(dir).sort()) {
     if (!IMG_RE.test(file)) continue;
-    const base = slug(file.replace(IMG_RE, ""));
-    if (base.startsWith("prix-")) continue;
-    if (!index.has(base)) index.set(base, `${urlPrefix}/${file}`);
+    const baseName = file.replace(IMG_RE, "");
+    const accentKey = slug(baseName);
+    const plainKey = baseSlug(baseName);
+    if (accentKey.startsWith("prix-")) continue;
+    const url = `${urlPrefix}/${file}`;
+    if (!index.has(accentKey)) index.set(accentKey, url);
+    if (plainKey !== accentKey && !index.has(plainKey)) index.set(plainKey, url);
   }
 }
 

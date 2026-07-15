@@ -43,7 +43,7 @@ type EvalSnapshot =
   | { kind: "words"; words: string[]; states: Record<string, CellState>; letter: string; letterLower: string }
   | { kind: "sound-image" | "sound-audio"; labels: string[]; targets: boolean[]; states: CellState[] }
   | { kind: "syllables-mixed"; syllables: string[]; states: RecState[]; heard: string[]; score: number }
-  | { kind: "pronounce"; phoneme: string; syllable: string; word: string; score: number };
+  | { kind: "pronounce"; phoneme: string; syllable: string; word: string; score: number; words?: string[]; states?: RecState[] };
 
 type ValidatedHandler = (score: number, snapshot: EvalSnapshot) => void;
 
@@ -51,6 +51,20 @@ const BASE_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-imag
 const CONSONANT_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-image", "syllables-mixed", "pronounce", "results"];
 // L7 complex sounds reuse the same set of exercises as consonants.
 const COMPLEX_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-image", "syllables-mixed", "pronounce", "results"];
+
+const EVAL_SOUND_ITEM_COUNT = 8;
+const EVAL_PRONOUNCE_WORD_COUNT = 2;
+
+function pickPronSteps(chain: PronStep[], count: number): PronStep[] {
+  return shuffle([...chain]).slice(0, Math.min(count, chain.length));
+}
+
+function pronounceEvalScore(correctCount: number, wordCount: number): number {
+  if (wordCount <= 1) return correctCount > 0 ? 3 : 0;
+  if (correctCount >= 2) return 3;
+  if (correctCount === 1) return 2;
+  return 0;
+}
 
 const RESULT_ROW_BY_STEP: Record<Exclude<EvalStep, "results">, { label: string; max: number }> = {
   grid: { label: "Reconnaître la lettre", max: 4 },
@@ -344,8 +358,8 @@ function WordsExercise({
 function SoundImageExercise({
   phoneme, onValidated, shouldValidate,
 }: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [items] = useState(() => randomSoundItems(phoneme, 4, true));
-  const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
+  const [items] = useState(() => randomSoundItems(phoneme, EVAL_SOUND_ITEM_COUNT, true));
+  const [cellStates, setCellStates] = useState<CellState[]>(Array(EVAL_SOUND_ITEM_COUNT).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   function validate() {
@@ -387,7 +401,7 @@ function SoundImageExercise({
         Touchez les images où vous entendez{" "}
         <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
       </p>
-      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
           const imgSrc = getLectureWordImagePath(word.label);
@@ -434,8 +448,8 @@ function SoundImageExercise({
 function SoundAudioExercise({
   phoneme, onValidated, shouldValidate,
 }: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [items] = useState(() => randomSoundItems(phoneme, 4));
-  const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
+  const [items] = useState(() => randomSoundItems(phoneme, EVAL_SOUND_ITEM_COUNT));
+  const [cellStates, setCellStates] = useState<CellState[]>(Array(EVAL_SOUND_ITEM_COUNT).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   function validate() {
@@ -479,7 +493,7 @@ function SoundAudioExercise({
         Écoutez et touchez ceux où vous entendez{" "}
         <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
       </p>
-      <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-5 lg:grid-cols-6">
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
         {items.map((word, i) => {
           const s = cellStates[i]!;
           return (
@@ -665,17 +679,20 @@ function SyllablesMixedExercise({
 }
 
 function PronounceExercise({
-  chain, onValidated, shouldValidate,
-}: { chain: PronStep[]; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [step] = useState(() => chain[Math.floor(Math.random() * chain.length)]!);
-  const [recState, setRecState] = useState<"idle" | "listening" | "correct" | "wrong">("idle");
-  const recRef = useRef<unknown>(null);
-  const [scored, setScored] = useState(false);
-  const [pendingScore, setPendingScore] = useState(0);
+  chain, onValidated, shouldValidate, wordCount = 1,
+}: { chain: PronStep[]; onValidated: ValidatedHandler; shouldValidate: boolean; wordCount?: number }) {
+  const [steps] = useState(() => wordCount > 1 ? pickPronSteps(chain, wordCount) : [chain[Math.floor(Math.random() * chain.length)]!]);
+  const [recStates, setRecStates] = useState<RecState[]>(() => steps.map(() => "idle"));
+  const [scored, setScored] = useState<boolean[]>(() => steps.map(() => false));
   const [validated, setValidated] = useState(false);
+  const recRef = useRef<unknown>(null);
 
-  function startListening() {
-    if (recState === "listening") return;
+  // Single-word mode (vowel eval): legacy all-or-nothing scoring via pendingScore.
+  const [pendingScore, setPendingScore] = useState(0);
+  const singleScored = scored[0] ?? false;
+
+  function startListening(index: number) {
+    if (validated || recStates[index] === "listening") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -685,40 +702,156 @@ function PronounceExercise({
     rec.continuous = false;
     rec.interimResults = false;
     rec.maxAlternatives = 3;
-    rec.onstart = () => setRecState("listening");
+    setRecStates((prev) => {
+      const next = [...prev] as RecState[];
+      next[index] = "listening";
+      return next;
+    });
+    const target = steps[index]!.word;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     rec.onresult = (e: any) => {
       let matched = false;
       for (let a = 0; a < e.results[0].length; a++) {
         const t: string = e.results[0][a].transcript.trim();
-        if (isMatch(t, step.word)) { matched = true; break; }
+        if (isMatch(t, target)) { matched = true; break; }
       }
-      setRecState("idle");
-      if (!scored) { setScored(true); setPendingScore(matched ? 3 : 0); }
+      setRecStates((prev) => {
+        const next = [...prev] as RecState[];
+        next[index] = matched ? "correct" : "wrong";
+        return next;
+      });
+      setScored((prev) => {
+        if (prev[index]) return prev;
+        if (wordCount <= 1) setPendingScore(matched ? 3 : 0);
+        const next = [...prev];
+        next[index] = true;
+        return next;
+      });
     };
-    rec.onerror = () => setRecState("idle");
-    rec.onend = () => setRecState((s) => s === "listening" ? "idle" : s);
+    rec.onerror = () => setRecStates((prev) => {
+      const next = [...prev] as RecState[];
+      next[index] = "idle";
+      return next;
+    });
+    rec.onend = () => setRecStates((prev) => {
+      const next = [...prev] as RecState[];
+      if (next[index] === "listening") next[index] = "idle";
+      return next;
+    });
     recRef.current = rec;
     rec.start();
   }
 
-  function manualScore(pts: number) {
-    if (!scored) { setScored(true); setPendingScore(pts); }
-    setRecState("idle");
+  function manualScore(index: number, pts: number) {
+    if (!scored[index]) {
+      setScored((prev) => {
+        const next = [...prev];
+        next[index] = true;
+        return next;
+      });
+      if (wordCount <= 1) setPendingScore(pts);
+      else setRecStates((prev) => {
+        const next = [...prev] as RecState[];
+        next[index] = pts > 0 ? "correct" : "wrong";
+        return next;
+      });
+    }
   }
 
   const validateRef = useRef(() => {});
   validateRef.current = () => {
     if (validated) return;
     setValidated(true);
-    onValidated(pendingScore, {
-      kind: "pronounce", phoneme: step.phoneme, syllable: step.syllable, word: step.word, score: pendingScore,
-    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    const score = wordCount > 1
+      ? pronounceEvalScore(recStates.filter((state) => state === "correct").length, wordCount)
+      : pendingScore;
+    const first = steps[0]!;
+    onValidated(score, wordCount > 1
+      ? {
+          kind: "pronounce",
+          phoneme: first.phoneme,
+          syllable: first.syllable,
+          word: first.word,
+          score,
+          words: steps.map((s) => s.word),
+          states: recStates,
+        }
+      : {
+          kind: "pronounce", phoneme: first.phoneme, syllable: first.syllable, word: first.word, score,
+        });
   };
   useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
+  if (wordCount > 1) {
+    return (
+      <section className="space-y-3">
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer les mots</h2>
+        <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque mot à voix haute.</p>
+        <div className="space-y-2">
+          {steps.map((step, index) => {
+            const state = recStates[index]!;
+            return (
+              <div key={`${step.word}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
+                state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
+                  : state === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
+              }`}>
+                <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
+                <div className="flex flex-1 flex-col items-center gap-1 text-center">
+                  <span className="text-xs text-[var(--color-text-secondary)]">
+                    <span className="font-bold" style={{ color: "var(--color-accent-lecture)" }}>{step.phoneme}</span>
+                    {" → "}{step.syllable}
+                  </span>
+                  <span className="text-2xl font-bold text-[var(--color-text-primary)]">{step.word}</span>
+                  <button type="button" onClick={() => playWord(step.word)}
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)]"
+                    aria-label={`Écouter ${step.word}`}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  </button>
+                </div>
+                {srAvailable ? (
+                  <button
+                    type="button"
+                    onClick={() => startListening(index)}
+                    disabled={validated || state === "listening"}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95 ${
+                      state === "listening" ? "animate-pulse bg-red-500" : "bg-[var(--color-accent-lecture)]"
+                    } disabled:opacity-40`}
+                    aria-label={`Prononcer ${step.word}`}
+                  >
+                    {state === "correct"
+                      ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                      : state === "wrong"
+                        ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+                        : <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
+                    }
+                  </button>
+                ) : !scored[index] ? (
+                  <div className="flex shrink-0 gap-2">
+                    <button type="button" onClick={() => manualScore(index, 1)} disabled={validated}
+                      className="rounded-full border border-[var(--color-accent-lecture)] px-3 py-1 text-xs font-bold text-[var(--color-accent-lecture)] disabled:opacity-50">
+                      OK
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
+  const step = steps[0]!;
+  const recState = recStates[0] ?? "idle";
 
   return (
     <section className="space-y-5">
@@ -746,7 +879,7 @@ function PronounceExercise({
 
       {srAvailable ? (
         <div className="flex flex-col items-center gap-3">
-          <button type="button" onClick={startListening} disabled={recState === "listening" || validated}
+          <button type="button" onClick={() => startListening(0)} disabled={recState === "listening" || validated}
             className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
               recState === "listening" ? "animate-pulse bg-red-500 text-white"
                 : recState === "correct" ? "bg-[var(--color-accent-lecture)] text-white"
@@ -765,11 +898,11 @@ function PronounceExercise({
         <div className="flex flex-col items-center gap-3">
           <p className="text-sm text-[var(--color-text-secondary)]">Auto-évaluation — as-tu réussi à prononcer le mot ?</p>
           <div className="flex gap-3">
-            <button type="button" onClick={() => manualScore(3)} disabled={scored}
+            <button type="button" onClick={() => manualScore(0, 3)} disabled={singleScored}
               className="flex h-11 items-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white disabled:opacity-50">
               Oui ✓
             </button>
-            <button type="button" onClick={() => manualScore(0)} disabled={scored}
+            <button type="button" onClick={() => manualScore(0, 0)} disabled={singleScored}
               className="flex h-11 items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-5 text-sm font-medium text-[var(--color-text-secondary)] disabled:opacity-50">
               Non ✗
             </button>
@@ -1090,7 +1223,7 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
     ))}</ul>;
   }
   if (snapshot.kind === "sound-image" || snapshot.kind === "sound-audio") {
-    return <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">{snapshot.labels.map((label, i) => (
+    return <div className="grid grid-cols-4 gap-2">{snapshot.labels.map((label, i) => (
       <div key={`${label}-${i}`} className={`flex min-h-24 flex-col items-center justify-center rounded-[var(--radius-lg)] border-2 p-2 ${correctionStateClass(snapshot.states[i]!)}`}>
         {snapshot.kind === "sound-image" && (() => {
           const imgSrc = getLectureWordImagePath(label);
@@ -1121,6 +1254,20 @@ function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
     })}</ul>;
   }
   if (snapshot.kind !== "pronounce") return null;
+  if (snapshot.words && snapshot.states) {
+    return <ul className="space-y-2">{snapshot.words.map((word, i) => {
+      const state = snapshot.states![i]!;
+      return (
+        <li key={`${word}-${i}`} className={`rounded-[var(--radius-lg)] border px-4 py-3 text-center ${
+          state === "correct" ? "border-[var(--color-correction)] text-[var(--color-correction)]"
+            : state === "wrong" ? "border-red-300 text-red-600"
+              : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
+        }`}>
+          <p className="text-lg font-bold">{word}</p>
+        </li>
+      );
+    })}</ul>;
+  }
   return <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] p-4 text-center">
     <p className="text-sm text-[var(--color-text-secondary)]">{snapshot.phoneme} → {snapshot.syllable}</p>
     <p className="text-2xl font-bold text-[var(--color-correction)]">{snapshot.word}</p>
@@ -1363,7 +1510,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                     ? <ComplexSyllablesExercise label={letter} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />
                     : <SyllablesMixedExercise letter={letterLower} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} />}
                 </div>
-                <div hidden={isResults || stepIdx !== 5}><PronounceExercise chain={pronounceChain} onValidated={(s, snapshot) => recordScore(5, s, snapshot)} shouldValidate={validateTarget === 5 || validateTarget === -1} /></div>
+                <div hidden={isResults || stepIdx !== 5}><PronounceExercise chain={pronounceChain} wordCount={EVAL_PRONOUNCE_WORD_COUNT} onValidated={(s, snapshot) => recordScore(5, s, snapshot)} shouldValidate={validateTarget === 5 || validateTarget === -1} /></div>
               </>
             ) : (
               <div hidden={isResults || stepIdx !== 4}><PronounceExercise chain={pronunciationChain} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} /></div>

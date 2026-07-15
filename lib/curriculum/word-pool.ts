@@ -29,7 +29,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "abricot",    phonemes: ["/a/", "/b/", "/r/", "/i/", "/k/", "/o/"] },
   { label: "avion",      phonemes: ["/a/", "/v/", "/i/", "/ɔ̃/"] },
   { label: "animal",     phonemes: ["/a/", "/n/", "/i/", "/m/", "/l/"] },
-  { label: "araignee",   phonemes: ["/a/", "/r/", "/i/", "/ɲ/", "/e/"] },
+  { label: "araignée",   phonemes: ["/a/", "/r/", "/i/", "/ɲ/", "/e/"] },
   { label: "alphabet",   phonemes: ["/a/", "/l/", "/f/", "/b/", "/e/"] },
   { label: "autobus",    phonemes: ["/o/", "/t/", "/b/", "/y/", "/s/"] },
   { label: "île",        phonemes: ["/i/", "/l/"] },
@@ -38,11 +38,11 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "usine",      phonemes: ["/y/", "/z/", "/i/", "/n/"] },
   { label: "uniforme",   phonemes: ["/y/", "/n/", "/i/", "/f/", "/o/", "/r/", "/m/"] },
   { label: "école",      phonemes: ["/e/", "/k/", "/o/", "/l/"] },
-  { label: "elephant",   phonemes: ["/e/", "/l/", "/f/", "/ɑ̃/"] },
+  { label: "éléphant",   phonemes: ["/e/", "/l/", "/f/", "/ɑ̃/"] },
   { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/i/"] },
-  { label: "echecs",     phonemes: ["/e/", "/ʃ/", "/k/"] },
-  { label: "epaule",     phonemes: ["/e/", "/p/", "/o/", "/l/"] },          // au=/o/
-  { label: "equerre",    phonemes: ["/e/", "/k/", "/r/"] },
+  { label: "échecs",     phonemes: ["/e/", "/ʃ/", "/k/"] },
+  { label: "épaule",     phonemes: ["/e/", "/p/", "/o/", "/l/"] },          // au=/o/
+  { label: "équerre",    phonemes: ["/e/", "/k/", "/r/"] },
   { label: "escalade",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/d/"] },
   // ── A (more) ───────────────────────────────────────────────────────────────
   { label: "abeille",    phonemes: ["/a/", "/b/", "/e/", "/i/", "/l/"] },
@@ -53,7 +53,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "ballon",     phonemes: ["/b/", "/a/", "/l/", "/ɔ̃/"] },
   { label: "banane",     phonemes: ["/b/", "/a/", "/n/"] },
   { label: "bateau",     phonemes: ["/b/", "/a/", "/t/", "/o/"] },
-  { label: "bebe",       phonemes: ["/b/", "/e/"] },
+  { label: "bébé",       phonemes: ["/b/", "/e/"] },
   { label: "biberon",    phonemes: ["/b/", "/i/", "/e/", "/r/", "/ɔ̃/"] },
   { label: "bras",       phonemes: ["/b/", "/r/", "/a/"] },
   { label: "bureau",     phonemes: ["/b/", "/y/", "/r/", "/o/"] },
@@ -105,7 +105,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "forêt",      phonemes: ["/f/", "/o/", "/r/", "/e/"] },
   { label: "fraise",     phonemes: ["/f/", "/r/", "/a/", "/i/", "/z/"] },
   { label: "fromage",    phonemes: ["/f/", "/r/", "/o/", "/m/", "/a/", "/ʒ/"] },
-  { label: "fusee",      phonemes: ["/f/", "/y/", "/z/", "/e/"] },
+  { label: "fusée",      phonemes: ["/f/", "/y/", "/z/", "/e/"] },
   { label: "flûte",      phonemes: ["/f/", "/l/", "/y/", "/t/"] },
   { label: "feuille",    phonemes: ["/f/", "/e/", "/y/", "/i/", "/l/"] },
   { label: "feutre",     phonemes: ["/f/", "/e/", "/y/", "/t/", "/r/"] },
@@ -113,7 +113,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "frais",      phonemes: ["/f/", "/r/", "/a/", "/i/"] },
   { label: "froid",      phonemes: ["/f/", "/r/", "/wa/"] },
   // ── G ──────────────────────────────────────────────────────────────────────
-  { label: "gateau",     phonemes: ["/g/", "/a/", "/t/", "/o/"] },
+  { label: "gâteau",     phonemes: ["/g/", "/a/", "/t/", "/o/"] },
   { label: "girafe",     phonemes: ["/ʒ/", "/i/", "/r/", "/a/", "/f/"] }, // g + i → /ʒ/
   { label: "gorille",    phonemes: ["/g/", "/o/", "/r/", "/i/", "/l/"] },
   { label: "grenouille", phonemes: ["/g/", "/r/", "/e/", "/n/", "/w/", "/i/", "/l/"] },
@@ -217,7 +217,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "saxophone",  phonemes: ["/s/", "/a/", "/ks/", "/o/", "/f/", "/n/"] },
   { label: "xylophone",  phonemes: ["/ks/", "/i/", "/l/", "/o/", "/f/", "/n/"] },
   // ── Z ──────────────────────────────────────────────────────────────────────
-  { label: "zebre",          phonemes: ["/z/", "/e/", "/b/", "/r/"] },
+  { label: "zèbre",          phonemes: ["/z/", "/e/", "/b/", "/r/"] },
   { label: "zigzag",         phonemes: ["/z/", "/i/", "/g/", "/a/"] },
   { label: "zoo",            phonemes: ["/z/", "/o/"] },
   // ── Légumes & Fruits ───────────────────────────────────────────────────────
@@ -227,25 +227,25 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "basilic",        phonemes: ["/b/", "/a/", "/z/", "/i/", "/l/", "/k/"] },
   { label: "betterave",      phonemes: ["/b/", "/e/", "/t/", "/r/", "/a/", "/v/"] },
   { label: "brocoli",        phonemes: ["/b/", "/r/", "/o/", "/k/", "/l/", "/i/"] },
-  { label: "celeri",         phonemes: ["/s/", "/e/", "/l/", "/r/", "/i/"] },
+  { label: "céleri",         phonemes: ["/s/", "/e/", "/l/", "/r/", "/i/"] },
   { label: "champignon",     phonemes: ["/ʃ/", "/ɑ̃/", "/p/", "/i/", "/ɲ/", "/ɔ̃/"] },
   { label: "chou",           phonemes: ["/ʃ/", "/u/"] },
   { label: "citrouille",     phonemes: ["/s/", "/i/", "/t/", "/r/", "/w/", "/l/"] },
   { label: "concombre",      phonemes: ["/k/", "/ɔ̃/", "/b/", "/r/"] },
   { label: "coriandre",      phonemes: ["/k/", "/o/", "/r/", "/i/", "/ɑ̃/", "/d/"] },
   { label: "courgette",      phonemes: ["/k/", "/u/", "/r/", "/ʒ/", "/e/", "/t/"] },
-  { label: "echalote",       phonemes: ["/e/", "/ʃ/", "/a/", "/l/", "/o/", "/t/"] },
-  { label: "epinard",        phonemes: ["/e/", "/p/", "/i/", "/n/", "/a/", "/r/"] },
+  { label: "échalote",       phonemes: ["/e/", "/ʃ/", "/a/", "/l/", "/o/", "/t/"] },
+  { label: "épinard",        phonemes: ["/e/", "/p/", "/i/", "/n/", "/a/", "/r/"] },
   { label: "framboise",      phonemes: ["/f/", "/r/", "/ɑ̃/", "/b/", "/wa/", "/z/"] },
   { label: "mangue",         phonemes: ["/m/", "/ɑ̃/", "/g/"] },              // u muet dans "gue"
   { label: "melon",          phonemes: ["/m/", "/e/", "/l/", "/ɔ̃/"] },
   { label: "menthe",         phonemes: ["/m/", "/ɑ̃/", "/t/"] },
-  { label: "mure",           phonemes: ["/m/", "/y/", "/r/"] },
+  { label: "mûre",           phonemes: ["/m/", "/y/", "/r/"] },
   { label: "myrtille",       phonemes: ["/m/", "/i/", "/r/", "/t/", "/l/"] },
   { label: "nectarine",      phonemes: ["/n/", "/e/", "/k/", "/t/", "/a/", "/r/", "/i/"] },
   { label: "oignon",         phonemes: ["/wa/", "/ɲ/", "/ɔ̃/"] },
   { label: "olive",          phonemes: ["/o/", "/l/", "/i/", "/v/"] },
-  { label: "pasteque",       phonemes: ["/p/", "/a/", "/s/", "/t/", "/e/", "/k/"] },
+  { label: "pastèque",       phonemes: ["/p/", "/a/", "/s/", "/t/", "/e/", "/k/"] },
   { label: "persil",         phonemes: ["/p/", "/e/", "/r/", "/s/", "/i/", "/l/"] },
   { label: "piment",         phonemes: ["/p/", "/i/", "/m/", "/ɑ̃/"] },
   { label: "poire",          phonemes: ["/p/", "/wa/", "/r/"] },
@@ -302,11 +302,11 @@ export const WORD_ITEMS: WordItem[] = [
 
 export const LETTER_WORDS: string[] = [
   // ── A ──
-  "arbre","ami","ananas","abricot","avion","animal","araignee","alphabet","autobus",
+  "arbre","ami","ananas","abricot","avion","animal","araignée","alphabet","autobus",
   "asperge","aubergine","avocat",
   "ambulance","abeille","aigle","arc","armoire","assiette","artiste","agenda",
   "antilope","astronaute","accordéon","acrobate","alligator","anniversaire",
-  "aquarium","arrosoir","aspirateur","araignee","avocado","albatros","araignee",
+  "aquarium","arrosoir","aspirateur","araignée","avocado","albatros","araignée",
   "alouette","agrafeuse","aimant","ampoule","ancre","antenne","armure","atlas",
   "avalanche","azote","arlequin","abricot","anneau","atome","arène","arche",
   // ── B ──
@@ -336,7 +336,7 @@ export const LETTER_WORDS: string[] = [
   "étagère","échelle","épaule","éclair","écran","édredon","effrayant","égout",
   "éléphant","émeu","encre","endroit","entonnoir","épice","équipe","erreur",
   "espace","étang","étiquette","étoffe","étudiant","éveil","évier",
-  "épinard","échalote","echecs","equerre",
+  "épinard","échalote","échecs","équerre",
   // ── F ──
   "farine","flamme","fleur","forêt","fraise","fromage","fusée","flûte","fée",
   "fenêtre","fourmi","fanfare","famille","foulard","fantôme","framboise","flaçon",
@@ -381,16 +381,16 @@ export const LETTER_WORDS: string[] = [
   // ── N ──
   "nid","noisette","nuage","nuit","neige","nénuphar","nœud","nounours","nougat",
   "narval","naseau","navet","naïade","nasse","nautile","navette","navet",
-  "nébuleuse","nectarine","nenuphar","névé","nickel","nigelle","niveau","noix",
+  "nébuleuse","nectarine","nénuphar","névé","nickel","nigelle","niveau","noix",
   "nomade","noyau","numéro","nymphe",
   // ── O ──
   "oiseau","orange","oreille","ordinateur","olive","otarie","ogre",
-  "obélisque","océan","oeillet","ombre","omelette","ongle","opossum","oranger",
+  "obélisque","océan","œillet","ombre","omelette","ongle","opossum","oranger",
   "orchidée","orgue","ortie","oscille","oubli","outarde","outre","ovale","ovni",
   "oignon",
   // ── P ──
   "panda","papillon","piano","poisson","pomme","puzzle","piste","perroquet",
-  "poney","pieuvre","pirate","pantalon","pelican","phoque","panthère","poire",
+  "poney","pieuvre","pirate","pantalon","pélican","phoque","panthère","poire",
   "pastèque","pinceau","parapluie","patate","poulpe","peigne","pelote","pendule",
   "péniche","perche","perdrix","pétiole","phacochère","pie","pigeon","pilote",
   "piment","pinède","pintade","piscine","pivot","placard","planète","platane",
@@ -402,9 +402,9 @@ export const LETTER_WORDS: string[] = [
   "queue","quille","quiche","quartier","quinze","quille","quetzal","quinquet",
   "quinconce","quiproquo","quota",
   // ── R ──
-  "radis","renard","requin","rivière","robot","rose","rue","raisin","regle","robe",
+  "radis","renard","requin","rivière","robot","rose","rue","raisin","règle","robe",
   "rhinocéros","rouleau","raquette","rame","ruban","roseau","ragondin","rainette",
-  "rameau","ramier","rasoir","rateau","rayon","récif","réglisse","rémora","rennet",
+  "rameau","ramier","rasoir","râteau","rayon","récif","réglisse","rémora","rennet",
   "reptile","réseau","rhododendron","rigole","ronce","rosier","rouget","rouille",
   "rouleau","roussette","ruche","ruisseau","rutabaga",
   "romarin","raisin",
@@ -553,7 +553,7 @@ function hasNasalEnding(word: string, index: number, size: number): boolean {
 export function phonemesFromFrenchGraphemes(label: string): Set<string> {
   const rawWord = label.toLowerCase();
   const word = normalizeWordLabel(label).replace(/[^a-z-]/gu, "");
-  const finalEPronounced = new Set(["bebe", "cafe", "fusee"]);
+  const finalEPronounced = new Set(["bébé", "café", "fusée"]);
   const phonemes = new Set<string>();
 
   for (let i = 0; i < word.length; i += 1) {

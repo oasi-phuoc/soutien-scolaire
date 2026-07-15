@@ -7,7 +7,13 @@ import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { getLectureModule, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
-import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
+import {
+  WordSpotter,
+  type WordSpotterHandle,
+  useWordSpotterItemCount,
+  useIsDesktopMd,
+  DESKTOP_WORD_SPOTTER_COUNT,
+} from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
 import { PronunciationChain, type PronunciationChainHandle } from "./PronunciationChain";
@@ -240,15 +246,25 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
   function ComplexWordSpotter({ target, isUppercase }, ref) {
   const targets = complexTargets(target);
   const maxLength = useLectureWordMaxLength();
-  const VISIBLE = 8;
+  const wordCount = useWordSpotterItemCount(8, DESKTOP_WORD_SPOTTER_COUNT);
+  const prevWordCount = useRef(wordCount);
   const buildWords = () =>
-    randomWordsWithGrapheme(target, 20, maxLength)
-      .slice(0, VISIBLE)
+    randomWordsWithGrapheme(target, wordCount * 4, maxLength)
+      .slice(0, wordCount)
       .map((word) => (isUppercase ? word.toUpperCase() : word.toLowerCase()));
   const [selectedWords, setSelectedWords] = useState(buildWords);
   const displayedWords = selectedWords;
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
+
+  useEffect(() => {
+    if (prevWordCount.current === wordCount) return;
+    prevWordCount.current = wordCount;
+    setSelectedWords(buildWords());
+    setStates({});
+    setValidated(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wordCount, target, isUppercase, maxLength]);
 
   function reset() {
     setSelectedWords(buildWords());
@@ -281,11 +297,11 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
         <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
         dans chaque mot.
       </p>
-      <ul className="space-y-2">
+      <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {displayedWords.map((word, wordIndex) => (
           <li
             key={`${word}-${wordIndex}`}
-            className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3 md:px-4"
+            className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3 md:px-2 md:py-2"
           >
             {splitComplexWord(word, targets).map((part, partIndex) => {
               const key = `${wordIndex}-${partIndex}`;
@@ -302,7 +318,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
                       [key]: prev[key] === "selected" ? "idle" : "selected",
                     }));
                   }}
-                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors md:h-7 md:min-w-6 md:text-sm ${
+                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors md:h-6 md:min-w-5 md:px-0.5 md:text-xs ${
                     state === "correct"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : state === "wrong" || state === "missed"
@@ -480,26 +496,31 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   consigne?: string;
   // Which audio folder the play button targets (words vs syllables).
   kind?: "mots" | "syllable";
+  /** Desktop (md+): 2 columns × 6 rows with optional alternate sample spec. */
+  desktopTwoColumn?: boolean;
+  desktopSampleSpec?: { pool: string[]; n: number }[];
   onTimeChange?: (t: number | null) => void;
   onEvalStateChange?: (state: { isResults: boolean; canValidate: boolean; started: boolean }) => void;
   onValidated?: (correct: number, total: number) => void;
   onFinish?: () => void;
 }>(
-  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", onTimeChange, onEvalStateChange, onValidated, onFinish }, ref) {
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", desktopTwoColumn, desktopSampleSpec, onTimeChange, onEvalStateChange, onValidated, onFinish }, ref) {
+  const isDesktop = useIsDesktopMd();
+  const activeSpec = desktopTwoColumn && isDesktop && desktopSampleSpec ? desktopSampleSpec : sampleSpec;
   // Stable content keys so the sampling effect below runs once per step (and
   // not on every render — a fresh array prop would otherwise loop forever).
   const wordsKey = words.join("");
-  const specKey = sampleSpec ? sampleSpec.map((s) => `${s.n}:${s.pool.join(",")}`).join("|") : "";
+  const specKey = activeSpec ? activeSpec.map((s) => `${s.n}:${s.pool.join(",")}`).join("|") : "";
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const unique = useMemo(() => Array.from(new Set(words)), [wordsKey]);
-  const count = sampleSpec
-    ? sampleSpec.reduce((sum, s) => sum + Math.min(s.n, new Set(s.pool).size), 0)
+  const count = activeSpec
+    ? activeSpec.reduce((sum, s) => sum + Math.min(s.n, new Set(s.pool).size), 0)
     : sampleSize
       ? Math.min(sampleSize, unique.length)
       : unique.length;
   const buildItems = () =>
-    sampleSpec
-      ? shuffle(sampleSpec.flatMap((s) => shuffle(Array.from(new Set(s.pool))).slice(0, s.n)))
+    activeSpec
+      ? shuffle(activeSpec.flatMap((s) => shuffle(Array.from(new Set(s.pool))).slice(0, s.n)))
       : shuffle(unique).slice(0, count);
   // Items start empty and are sampled on the client only — this avoids a
   // server/client hydration mismatch (the random order would differ), which
@@ -731,13 +752,15 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
           Temps écoulé ! Appuyez sur recommencer pour réessayer.
         </p>
       )}
-      <div className="space-y-2">
+      <div className={desktopTwoColumn ? "space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0" : "space-y-2"}>
         {items.map((word, i) => {
           const state = states[i]!;
           return (
             <div
               key={`${word}-${i}`}
               className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border-2 px-3 py-2 transition-colors ${
+                desktopTwoColumn ? "md:gap-2 md:px-2 md:py-1.5" : ""
+              } ${
                 state === "correct"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
                   : state === "wrong"
@@ -745,12 +768,14 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
               }`}
             >
-              <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
+              <span className={`w-5 text-sm font-bold text-[var(--color-accent-lecture)]${desktopTwoColumn ? " md:w-4 md:text-xs" : ""}`}>{i + 1}.</span>
               <button
                 type="button"
                 onClick={() => startListening(i)}
                 disabled={state === "listening" || state === "correct" || (timeUp && !evalWithResults) || finished}
                 className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
+                  desktopTwoColumn ? "md:h-9 md:w-9" : ""
+                } ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "wrong"
@@ -760,33 +785,37 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
                 aria-label="Parler"
               >
                 {state === "correct" ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={desktopTwoColumn ? "md:h-4 md:w-4" : ""} aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
                 ) : state === "wrong" ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={desktopTwoColumn ? "md:h-4 md:w-4" : ""} aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
                 ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={desktopTwoColumn ? "md:h-4 md:w-4" : ""} aria-hidden>
                     <rect x="9" y="2" width="6" height="12" rx="3" />
                     <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
                     <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
               </button>
-              <span className="min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
+              <span className={`min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]${
+                desktopTwoColumn ? " md:min-h-8 md:px-2 md:text-base md:leading-normal" : ""
+              }`}>
                 {word}
               </span>
               <button
                 type="button"
                 onClick={() => (kind === "syllable" ? playSyllable(word) : playWord(word))}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95"
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-accent-lecture)] shadow-sm active:scale-95${
+                  desktopTwoColumn ? " md:h-8 md:w-8" : ""
+                }`}
                 aria-label={`Écouter ${word}`}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={desktopTwoColumn ? "md:h-3 md:w-3" : ""} aria-hidden>
                   <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                   <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                 </svg>
               </button>
               {state === "wrong" && heard[i] && (
-                <p className="col-span-4 pl-8 text-xs text-red-500">J&apos;ai entendu: {heard[i]}</p>
+                <p className={`col-span-4 pl-8 text-xs text-red-500${desktopTwoColumn ? " md:pl-6 md:text-[10px]" : ""}`}>J&apos;ai entendu: {heard[i]}</p>
               )}
             </div>
           );
@@ -1290,9 +1319,14 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
             key={k}
             ref={pronounceGridRef}
             kind="syllable"
+            desktopTwoColumn
             sampleSpec={[
               { pool: poolUpper, n: Math.min(8, poolUpper.length) },
               { pool: poolLower, n: Math.min(7, poolLower.length) },
+            ]}
+            desktopSampleSpec={[
+              { pool: poolUpper, n: Math.min(6, poolUpper.length) },
+              { pool: poolLower, n: Math.min(6, poolLower.length) },
             ]}
             title="Lecture de 2 syllabes"
             consigne="Lisez chaque suite de 2 syllabes à voix haute."
@@ -1312,9 +1346,14 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
             key={k}
             ref={pronounceGridRef}
             kind="syllable"
+            desktopTwoColumn
             sampleSpec={[
               { pool: upper, n: 3 },
               { pool: lower, n: 3 },
+            ]}
+            desktopSampleSpec={[
+              { pool: upper, n: 6 },
+              { pool: lower, n: 6 },
             ]}
             timerSeconds={120}
             title="Lecture rapide chronométré"

@@ -1,5 +1,6 @@
 "use client";
 
+import { playWord } from "@/lib/utils/audio";
 import { speak } from "@/lib/utils/speech";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -44,7 +45,7 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
             if (exampleAudioPath) {
               new Audio(exampleAudioPath).play().catch(() => speak(exampleWord));
             } else {
-              speak(exampleWord);
+              playWord(exampleWord);
             }
           }}
           className="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm active:opacity-80"

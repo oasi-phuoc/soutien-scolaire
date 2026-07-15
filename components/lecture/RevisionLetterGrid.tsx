@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
@@ -14,27 +14,38 @@ interface Props {
   letterA: string;
   letterB: string;
   isUppercase: boolean;
+  /** Éval : majuscules et minuscules mélangées (50/50 aléatoire). */
+  mixedCase?: boolean;
+  onValidated?: (score: number, max: number) => void;
+  shouldValidate?: boolean;
 }
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
 const GRID_SIZE = 25;
 
-function makeGrid(letterA: string, letterB: string, isUppercase: boolean): string[] {
-  const a = isUppercase ? letterA : letterA.toLowerCase();
-  const b = isUppercase ? letterB : letterB.toLowerCase();
-  const alpha = isUppercase
-    ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    : "abcdefghijklmnopqrstuvwxyz";
-  const distractors = alpha.split("").filter((c) => c !== a && c !== b);
+function randomCase(letter: string): string {
+  return Math.random() < 0.5 ? letter : letter.toLowerCase();
+}
+
+function makeGrid(letterA: string, letterB: string, isUppercase: boolean, mixedCase = false): string[] {
+  const a = mixedCase ? randomCase(letterA) : isUppercase ? letterA : letterA.toLowerCase();
+  const b = mixedCase ? randomCase(letterB) : isUppercase ? letterB : letterB.toLowerCase();
+  const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const distractors = mixedCase
+    ? alpha.split("").flatMap((c) => {
+        if (c === letterA || c === letterB) return [];
+        return [c, c.toLowerCase()];
+      })
+    : (isUppercase ? alpha : alpha.toLowerCase()).split("").filter((c) => c !== a && c !== b);
   const totalTargets = 6 + Math.floor(Math.random() * 3);
   const countA = Math.ceil(totalTargets / 2);
   const countB = totalTargets - countA;
   const cells: string[] = [
-    ...Array(countA).fill(a),
-    ...Array(countB).fill(b),
+    ...Array.from({ length: countA }, () => (mixedCase ? randomCase(letterA) : a)),
+    ...Array.from({ length: countB }, () => (mixedCase ? randomCase(letterB) : b)),
     ...Array.from({ length: GRID_SIZE - totalTargets }, () =>
-      distractors[Math.floor(Math.random() * distractors.length)],
+      distractors[Math.floor(Math.random() * distractors.length)]!,
     ),
   ];
   for (let i = cells.length - 1; i > 0; i--) {
@@ -44,38 +55,55 @@ function makeGrid(letterA: string, letterB: string, isUppercase: boolean): strin
   return cells;
 }
 
+function targetSet(letterA: string, letterB: string, isUppercase: boolean, mixedCase: boolean): Set<string> {
+  if (mixedCase) {
+    return new Set([letterA, letterA.toLowerCase(), letterB, letterB.toLowerCase()]);
+  }
+  const a = isUppercase ? letterA : letterA.toLowerCase();
+  const b = isUppercase ? letterB : letterB.toLowerCase();
+  return new Set([a, b]);
+}
+
 export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
-  function RevisionLetterGrid({ letterA, letterB, isUppercase }, ref) {
+  function RevisionLetterGrid({ letterA, letterB, isUppercase, mixedCase = false, onValidated, shouldValidate }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const a = isUppercase ? letterA : letterA.toLowerCase();
-    const b = isUppercase ? letterB : letterB.toLowerCase();
+    const a = mixedCase ? `${letterA}/${letterA.toLowerCase()}` : isUppercase ? letterA : letterA.toLowerCase();
+    const b = mixedCase ? `${letterB}/${letterB.toLowerCase()}` : isUppercase ? letterB : letterB.toLowerCase();
 
-    const [grid, setGrid] = useState(() => makeGrid(letterA, letterB, isUppercase));
+    const [grid, setGrid] = useState(() => makeGrid(letterA, letterB, isUppercase, mixedCase));
     const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setGrid(makeGrid(letterA, letterB, isUppercase));
+      setGrid(makeGrid(letterA, letterB, isUppercase, mixedCase));
       setStates(Array(GRID_SIZE).fill("idle"));
       setValidated(false);
-    }, [letterA, letterB, isUppercase]);
+    }, [letterA, letterB, isUppercase, mixedCase]);
 
     const validate = useCallback(() => {
       if (validated) return;
-      const ta = isUppercase ? letterA : letterA.toLowerCase();
-      const tb = isUppercase ? letterB : letterB.toLowerCase();
-      const targets = new Set([ta, tb]);
+      const targets = targetSet(letterA, letterB, isUppercase, mixedCase);
+      const newStates = states.map((s, i) => {
+        const isTarget = targets.has(grid[i]!);
+        if (s === "selected") return isTarget ? "correct" : "wrong";
+        if (isTarget) return "missed";
+        return "idle";
+      }) as CellState[];
       setValidated(true);
-      setStates((prev) =>
-        prev.map((s, i) => {
-          const isTarget = targets.has(grid[i]!);
-          if (s === "selected") return isTarget ? "correct" : "wrong";
-          if (isTarget) return "missed";
-          return "idle";
-        }),
-      );
-    }, [validated, grid, letterA, letterB, isUppercase]);
+      setStates(newStates);
+      if (onValidated) {
+        const max = grid.filter((cell) => targets.has(cell)).length;
+        const score = newStates.filter((s) => s === "correct").length;
+        onValidated(score, max);
+      }
+    }, [validated, grid, letterA, letterB, isUppercase, mixedCase, states, onValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 

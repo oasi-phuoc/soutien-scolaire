@@ -37,7 +37,7 @@ export function RevisionSoundDiscrim({ phonemeA, phonemeB, words }: Props) {
               <button
                 type="button"
                 onClick={() => speak(word)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-primary)] text-white"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-95"
                 aria-label={`Écouter ${word}`}
               >
                 <SpeakerIcon />

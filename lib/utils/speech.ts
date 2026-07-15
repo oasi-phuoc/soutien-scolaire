@@ -1,6 +1,29 @@
 const FRENCH_SWISS_LANG = "fr-CH";
 
-function pickFrenchVoice(): SpeechSynthesisVoice | null {
+export type VoiceGender = "f" | "m";
+
+const FEMALE_VOICE_HINTS =
+  /femme|female|woman|amélie|amelie|audrey|marie|claire|hélène|helene|virginie|alice|julie|victoire|sara|zénaide|zenaide|denise|florence/i;
+const MALE_VOICE_HINTS =
+  /homme|male|man|thomas|paul|michel|daniel|nicolas|jacques|henri|alain|guillaume|pierre|olivier|bruno|arthur|gilles|yannick|damien|aurelien|aurélien/i;
+
+function voiceMatchesGender(voice: SpeechSynthesisVoice, gender: VoiceGender): boolean | null {
+  const name = voice.name.toLowerCase();
+  if (FEMALE_VOICE_HINTS.test(name)) return gender === "f";
+  if (MALE_VOICE_HINTS.test(name)) return gender === "m";
+  return null;
+}
+
+function pickFromPool(pool: SpeechSynthesisVoice[], gender: VoiceGender): SpeechSynthesisVoice | undefined {
+  const gendered = pool.filter((voice) => voiceMatchesGender(voice, gender) === true);
+  if (gendered.length) {
+    return gendered.find((voice) => voice.localService) ?? gendered[0];
+  }
+  const neutral = pool.filter((voice) => voiceMatchesGender(voice, gender) === null);
+  return neutral.find((voice) => voice.localService) ?? neutral[0] ?? pool[0];
+}
+
+function pickFrenchVoice(gender: VoiceGender): SpeechSynthesisVoice | null {
   if (typeof window === "undefined") return null;
   const voices = window.speechSynthesis.getVoices();
   const byLang = (code: string) => voices.filter((voice) => voice.lang.toLowerCase() === code);
@@ -10,26 +33,44 @@ function pickFrenchVoice(): SpeechSynthesisVoice | null {
   const canadaFrenchVoices = byLang("fr-ca");
   const anyFrenchVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("fr"));
 
-  // Preference chain: Swiss → France → Belgium → Canada → any French.
-  return (
-    swissFrenchVoices.find((voice) => voice.localService) ??
-    swissFrenchVoices.find((voice) => /suisse|swiss|francais|french/i.test(voice.name)) ??
-    swissFrenchVoices[0] ??
-    franceFrenchVoices.find((voice) => voice.localService) ??
-    franceFrenchVoices.find((voice) => /france|francais|amelie|audrey|thomas/i.test(voice.name)) ??
-    franceFrenchVoices[0] ??
-    belgiumFrenchVoices.find((voice) => voice.localService) ??
-    belgiumFrenchVoices[0] ??
-    canadaFrenchVoices.find((voice) => voice.localService) ??
-    canadaFrenchVoices[0] ??
-    anyFrenchVoices.find((voice) => voice.localService) ??
-    anyFrenchVoices[0] ??
-    null
-  );
+  const pools = [
+    swissFrenchVoices,
+    franceFrenchVoices,
+    belgiumFrenchVoices,
+    canadaFrenchVoices,
+    anyFrenchVoices,
+  ];
+
+  for (const pool of pools) {
+    const voice = pickFromPool(pool, gender);
+    if (voice) return voice;
+  }
+
+  return null;
 }
 
-export function speak(text: string, lang = FRENCH_SWISS_LANG, rate = 0.85) {
+function resolveVoiceGender(gender?: VoiceGender): VoiceGender {
+  if (gender) return gender;
+  if (typeof window === "undefined") return "f";
+  return localStorage.getItem("soutien-genre") === "m" ? "m" : "f";
+}
+
+/** Prime voice list on first user interaction (iOS/WKWebView returns [] until then). */
+export function primeSpeechVoices(): void {
   if (typeof window === "undefined") return;
+  if (window.speechSynthesis.getVoices().length > 0) return;
+  const warm = new SpeechSynthesisUtterance(" ");
+  warm.volume = 0;
+  window.speechSynthesis.speak(warm);
+  window.speechSynthesis.cancel();
+}
+
+function speakNow(
+  text: string,
+  lang: string,
+  rate: number,
+  gender: VoiceGender,
+): void {
   window.speechSynthesis.cancel();
 
   const requestedLang = lang.toLowerCase().startsWith("fr") ? FRENCH_SWISS_LANG : lang;
@@ -38,7 +79,7 @@ export function speak(text: string, lang = FRENCH_SWISS_LANG, rate = 0.85) {
   utterance.rate = rate;
 
   if (requestedLang.toLowerCase().startsWith("fr")) {
-    const voice = pickFrenchVoice();
+    const voice = pickFrenchVoice(gender);
     if (voice) {
       utterance.voice = voice;
       utterance.lang = voice.lang || requestedLang;
@@ -46,4 +87,25 @@ export function speak(text: string, lang = FRENCH_SWISS_LANG, rate = 0.85) {
   }
 
   window.speechSynthesis.speak(utterance);
+}
+
+export function speak(text: string, lang = FRENCH_SWISS_LANG, rate = 0.85, gender?: VoiceGender) {
+  if (typeof window === "undefined") return;
+  const resolvedGender = resolveVoiceGender(gender);
+
+  if (window.speechSynthesis.getVoices().length > 0) {
+    speakNow(text, lang, rate, resolvedGender);
+    return;
+  }
+
+  let spoke = false;
+  const start = () => {
+    if (spoke) return;
+    spoke = true;
+    speakNow(text, lang, rate, resolvedGender);
+  };
+
+  window.speechSynthesis.addEventListener("voiceschanged", start, { once: true });
+  primeSpeechVoices();
+  window.setTimeout(start, 300);
 }

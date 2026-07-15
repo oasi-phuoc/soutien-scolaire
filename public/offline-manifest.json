@@ -1,6 +1,6 @@
 {
-  "version": 1784025070424,
-  "totalBytes": 272851991,
+  "version": 1784039754818,
+  "totalBytes": 272733777,
   "routes": [
     "/",
     "/avant-propos",
@@ -1376,8 +1376,8 @@
     "/assets/math/digits/9.webp",
     "/assets/words/lecture/abeille.webp",
     "/assets/words/lecture/abricot.webp",
-    "/assets/words/lecture/accordeon.webp",
-    "/assets/words/lecture/activite-mentale.webp",
+    "/assets/words/lecture/accordéon.webp",
+    "/assets/words/lecture/activité-mentale.webp",
     "/assets/words/lecture/addition.webp",
     "/assets/words/lecture/agenda.webp",
     "/assets/words/lecture/agriculteur.webp",
@@ -1393,7 +1393,7 @@
     "/assets/words/lecture/ananas.webp",
     "/assets/words/lecture/animal.webp",
     "/assets/words/lecture/appareil-photo.webp",
-    "/assets/words/lecture/araignee.webp",
+    "/assets/words/lecture/araignée.webp",
     "/assets/words/lecture/arbre.webp",
     "/assets/words/lecture/arc.webp",
     "/assets/words/lecture/architecte.webp",
@@ -1402,7 +1402,7 @@
     "/assets/words/lecture/arrosoir.webp",
     "/assets/words/lecture/artichaut.webp",
     "/assets/words/lecture/asperge.webp",
-    "/assets/words/lecture/asteroide.webp",
+    "/assets/words/lecture/astéroïde.webp",
     "/assets/words/lecture/astronaute.webp",
     "/assets/words/lecture/atlas.webp",
     "/assets/words/lecture/aubergine.webp",
@@ -1416,7 +1416,7 @@
     "/assets/words/lecture/balance.webp",
     "/assets/words/lecture/baleine.webp",
     "/assets/words/lecture/balle.webp",
-    "/assets/words/lecture/ballon-3.webp",
+    "/assets/words/lecture/ballon.webp",
     "/assets/words/lecture/bambou.webp",
     "/assets/words/lecture/banane.webp",
     "/assets/words/lecture/banc.webp",
@@ -1427,11 +1427,11 @@
     "/assets/words/lecture/bateau.webp",
     "/assets/words/lecture/batte.webp",
     "/assets/words/lecture/batterie.webp",
-    "/assets/words/lecture/bebe.webp",
+    "/assets/words/lecture/bébé.webp",
     "/assets/words/lecture/beige.webp",
     "/assets/words/lecture/beignet.webp",
     "/assets/words/lecture/berceau.webp",
-    "/assets/words/lecture/beret.webp",
+    "/assets/words/lecture/béret.webp",
     "/assets/words/lecture/betterave.webp",
     "/assets/words/lecture/beurre.webp",
     "/assets/words/lecture/biberon.webp",
@@ -1445,7 +1445,7 @@
     "/assets/words/lecture/blouson.webp",
     "/assets/words/lecture/bocal.webp",
     "/assets/words/lecture/boisson.webp",
-    "/assets/words/lecture/boite.webp",
+    "/assets/words/lecture/boîte.webp",
     "/assets/words/lecture/bonbon.webp",
     "/assets/words/lecture/bonnet.webp",
     "/assets/words/lecture/bordeaux.webp",
@@ -1464,7 +1464,7 @@
     "/assets/words/lecture/bras.webp",
     "/assets/words/lecture/briquet.webp",
     "/assets/words/lecture/brocoli.webp",
-    "/assets/words/lecture/brosse-a-dents.webp",
+    "/assets/words/lecture/brosse-à-dents.webp",
     "/assets/words/lecture/brosse.webp",
     "/assets/words/lecture/brouette.webp",
     "/assets/words/lecture/brownie.webp",
@@ -1474,13 +1474,13 @@
     "/assets/words/lecture/but.webp",
     "/assets/words/lecture/cadeau.webp",
     "/assets/words/lecture/cadenas.webp",
-    "/assets/words/lecture/cafe.webp",
+    "/assets/words/lecture/café.webp",
     "/assets/words/lecture/cahier-bleu.webp",
     "/assets/words/lecture/cahier.webp",
     "/assets/words/lecture/caissier.webp",
     "/assets/words/lecture/calculatrice.webp",
-    "/assets/words/lecture/calecon.webp",
-    "/assets/words/lecture/cameleon.webp",
+    "/assets/words/lecture/caleçon.webp",
+    "/assets/words/lecture/caméléon.webp",
     "/assets/words/lecture/camion-de-pompier.webp",
     "/assets/words/lecture/camion.webp",
     "/assets/words/lecture/campagne.webp",
@@ -1489,19 +1489,17 @@
     "/assets/words/lecture/canyon.webp",
     "/assets/words/lecture/caravane.webp",
     "/assets/words/lecture/carotte.webp",
-    "/assets/words/lecture/carre.webp",
+    "/assets/words/lecture/carré.webp",
     "/assets/words/lecture/cartable.webp",
-    "/assets/words/lecture/carte-d-etudiant.webp",
-    "/assets/words/lecture/carte-d-identite.webp",
+    "/assets/words/lecture/carte-d'étudiant.webp",
+    "/assets/words/lecture/carte-d'identité.webp",
     "/assets/words/lecture/carte-de-credit.webp",
     "/assets/words/lecture/carte.webp",
     "/assets/words/lecture/casque-1.webp",
-    "/assets/words/lecture/casque-2.webp",
-    "/assets/words/lecture/casque.webp",
     "/assets/words/lecture/casquette.webp",
     "/assets/words/lecture/cassis.webp",
     "/assets/words/lecture/ceinture.webp",
-    "/assets/words/lecture/celeri.webp",
+    "/assets/words/lecture/céleri.webp",
     "/assets/words/lecture/cerceau.webp",
     "/assets/words/lecture/cercle.webp",
     "/assets/words/lecture/cerf-volant.webp",
@@ -1516,28 +1514,28 @@
     "/assets/words/lecture/chargeur.webp",
     "/assets/words/lecture/charpentier.webp",
     "/assets/words/lecture/chat.webp",
-    "/assets/words/lecture/chataignier.webp",
-    "/assets/words/lecture/chateau-de-sable.webp",
-    "/assets/words/lecture/chateau.webp",
+    "/assets/words/lecture/châtaignier.webp",
+    "/assets/words/lecture/château-de-sable.webp",
+    "/assets/words/lecture/château.webp",
     "/assets/words/lecture/chauffeur.webp",
     "/assets/words/lecture/chaussettes.webp",
     "/assets/words/lecture/chaussons.webp",
     "/assets/words/lecture/chaussures.webp",
-    "/assets/words/lecture/cheminee.webp",
+    "/assets/words/lecture/cheminée.webp",
     "/assets/words/lecture/chemise.webp",
-    "/assets/words/lecture/chene.webp",
+    "/assets/words/lecture/chêne.webp",
     "/assets/words/lecture/chenille.webp",
     "/assets/words/lecture/cheval-a-bascule.webp",
     "/assets/words/lecture/cheval.webp",
     "/assets/words/lecture/cheveux.webp",
-    "/assets/words/lecture/chevre.webp",
+    "/assets/words/lecture/chèvre.webp",
     "/assets/words/lecture/chien.webp",
     "/assets/words/lecture/chocolat-chaud.webp",
     "/assets/words/lecture/chocolat.webp",
     "/assets/words/lecture/chou-fleur.webp",
     "/assets/words/lecture/chou.webp",
-    "/assets/words/lecture/chronometre.webp",
-    "/assets/words/lecture/chrysantheme.webp",
+    "/assets/words/lecture/chronomètre.webp",
+    "/assets/words/lecture/chrysanthème.webp",
     "/assets/words/lecture/cible.webp",
     "/assets/words/lecture/cigogne.webp",
     "/assets/words/lecture/cire.webp",
@@ -1549,13 +1547,13 @@
     "/assets/words/lecture/clarinette.webp",
     "/assets/words/lecture/classeur.webp",
     "/assets/words/lecture/clavier.webp",
-    "/assets/words/lecture/clementine.webp",
+    "/assets/words/lecture/clémentine.webp",
     "/assets/words/lecture/climatiseur.webp",
     "/assets/words/lecture/clou.webp",
     "/assets/words/lecture/cobra.webp",
     "/assets/words/lecture/coccinelle.webp",
     "/assets/words/lecture/cochon.webp",
-    "/assets/words/lecture/coeur.webp",
+    "/assets/words/lecture/cœur.webp",
     "/assets/words/lecture/coffre.webp",
     "/assets/words/lecture/coing.webp",
     "/assets/words/lecture/colibri.webp",
@@ -1563,19 +1561,19 @@
     "/assets/words/lecture/collier.webp",
     "/assets/words/lecture/colline.webp",
     "/assets/words/lecture/colombe.webp",
-    "/assets/words/lecture/comete.webp",
+    "/assets/words/lecture/comète.webp",
     "/assets/words/lecture/commode.webp",
     "/assets/words/lecture/compas.webp",
-    "/assets/words/lecture/comptoire.webp",
+    "/assets/words/lecture/comptoir.webp",
     "/assets/words/lecture/concombre.webp",
-    "/assets/words/lecture/cone.webp",
+    "/assets/words/lecture/cône.webp",
     "/assets/words/lecture/confiture.webp",
     "/assets/words/lecture/cookie.webp",
     "/assets/words/lecture/coq.webp",
     "/assets/words/lecture/coquelicot.webp",
     "/assets/words/lecture/corail.webp",
     "/assets/words/lecture/corbeau.webp",
-    "/assets/words/lecture/corde-a-sauter.webp",
+    "/assets/words/lecture/corde-à-sauter.webp",
     "/assets/words/lecture/corde.webp",
     "/assets/words/lecture/coriandre.webp",
     "/assets/words/lecture/coton-tige.webp",
@@ -1589,7 +1587,7 @@
     "/assets/words/lecture/crapaud.webp",
     "/assets/words/lecture/cravate.webp",
     "/assets/words/lecture/crayon.webp",
-    "/assets/words/lecture/crepe.webp",
+    "/assets/words/lecture/crêpe.webp",
     "/assets/words/lecture/crevette.webp",
     "/assets/words/lecture/criquet.webp",
     "/assets/words/lecture/crocodile.webp",
@@ -1600,15 +1598,15 @@
     "/assets/words/lecture/cyan.webp",
     "/assets/words/lecture/cygne.webp",
     "/assets/words/lecture/cylindre.webp",
-    "/assets/words/lecture/cypres.webp",
+    "/assets/words/lecture/cyprès.webp",
     "/assets/words/lecture/danse.webp",
     "/assets/words/lecture/datte.webp",
     "/assets/words/lecture/dauphin.webp",
-    "/assets/words/lecture/de.webp",
+    "/assets/words/lecture/dé.webp",
     "/assets/words/lecture/dent.webp",
     "/assets/words/lecture/dentifrice.webp",
-    "/assets/words/lecture/deodorant.webp",
-    "/assets/words/lecture/desert.webp",
+    "/assets/words/lecture/déodorant.webp",
+    "/assets/words/lecture/désert.webp",
     "/assets/words/lecture/dictionnaire.webp",
     "/assets/words/lecture/dimanche.webp",
     "/assets/words/lecture/dinde.webp",
@@ -1622,30 +1620,28 @@
     "/assets/words/lecture/drapeau.webp",
     "/assets/words/lecture/dune.webp",
     "/assets/words/lecture/eau.webp",
-    "/assets/words/lecture/echalote.webp",
-    "/assets/words/lecture/echalotte.webp",
-    "/assets/words/lecture/echarpe.webp",
-    "/assets/words/lecture/echecs.webp",
-    "/assets/words/lecture/echelle.webp",
-    "/assets/words/lecture/ecouteurs.webp",
-    "/assets/words/lecture/ecureuil.webp",
-    "/assets/words/lecture/elastique-1.webp",
-    "/assets/words/lecture/elastique.webp",
-    "/assets/words/lecture/elephant.webp",
+    "/assets/words/lecture/échalote.webp",
+    "/assets/words/lecture/écharpe.webp",
+    "/assets/words/lecture/échecs.webp",
+    "/assets/words/lecture/échelle.webp",
+    "/assets/words/lecture/écouteurs.webp",
+    "/assets/words/lecture/écureuil.webp",
+    "/assets/words/lecture/élastique.webp",
+    "/assets/words/lecture/éléphant.webp",
     "/assets/words/lecture/enceinte.webp",
     "/assets/words/lecture/encre.webp",
     "/assets/words/lecture/entonnoir.webp",
     "/assets/words/lecture/enveloppe.webp",
-    "/assets/words/lecture/epaule.webp",
-    "/assets/words/lecture/epinard.webp",
-    "/assets/words/lecture/eponge.webp",
-    "/assets/words/lecture/equerre.webp",
-    "/assets/words/lecture/erable.webp",
+    "/assets/words/lecture/épaule.webp",
+    "/assets/words/lecture/épinard.webp",
+    "/assets/words/lecture/éponge.webp",
+    "/assets/words/lecture/équerre.webp",
+    "/assets/words/lecture/érable.webp",
     "/assets/words/lecture/escalade.webp",
     "/assets/words/lecture/escalier.webp",
     "/assets/words/lecture/escargot.webp",
-    "/assets/words/lecture/etang.webp",
-    "/assets/words/lecture/etoile-de-mer.webp",
+    "/assets/words/lecture/étang.webp",
+    "/assets/words/lecture/étoile-de-mer.webp",
     "/assets/words/lecture/facteur.webp",
     "/assets/words/lecture/falaise.webp",
     "/assets/words/lecture/farine.webp",
@@ -1665,14 +1661,14 @@
     "/assets/words/lecture/flamant-rose.webp",
     "/assets/words/lecture/flamme.webp",
     "/assets/words/lecture/flan.webp",
-    "/assets/words/lecture/fleche.webp",
+    "/assets/words/lecture/flèche.webp",
     "/assets/words/lecture/fleur.webp",
     "/assets/words/lecture/fleuriste.webp",
     "/assets/words/lecture/flocon.webp",
-    "/assets/words/lecture/flute.webp",
+    "/assets/words/lecture/flûte.webp",
     "/assets/words/lecture/foin.webp",
     "/assets/words/lecture/football.webp",
-    "/assets/words/lecture/foret.webp",
+    "/assets/words/lecture/forêt.webp",
     "/assets/words/lecture/foulard.webp",
     "/assets/words/lecture/four.webp",
     "/assets/words/lecture/fourmi.webp",
@@ -1681,13 +1677,13 @@
     "/assets/words/lecture/frites.webp",
     "/assets/words/lecture/fromage.webp",
     "/assets/words/lecture/fruit.webp",
-    "/assets/words/lecture/fusee.webp",
+    "/assets/words/lecture/fusée.webp",
     "/assets/words/lecture/galaxie.webp",
     "/assets/words/lecture/gant-boxe.webp",
     "/assets/words/lecture/gants.webp",
     "/assets/words/lecture/garçon.webp",
     "/assets/words/lecture/gare.webp",
-    "/assets/words/lecture/gateau.webp",
+    "/assets/words/lecture/gâteau.webp",
     "/assets/words/lecture/gaufre.webp",
     "/assets/words/lecture/gecko.webp",
     "/assets/words/lecture/genou.webp",
@@ -1709,11 +1705,11 @@
     "/assets/words/lecture/gris.webp",
     "/assets/words/lecture/groin.webp",
     "/assets/words/lecture/groseille.webp",
-    "/assets/words/lecture/guepe.webp",
+    "/assets/words/lecture/guêpe.webp",
     "/assets/words/lecture/guitare.webp",
     "/assets/words/lecture/gymnastique.webp",
-    "/assets/words/lecture/haltere.webp",
-    "/assets/words/lecture/halteres.webp",
+    "/assets/words/lecture/haltère.webp",
+    "/assets/words/lecture/haltères.webp",
     "/assets/words/lecture/hamac.webp",
     "/assets/words/lecture/hamburger.webp",
     "/assets/words/lecture/handball.webp",
@@ -1721,10 +1717,10 @@
     "/assets/words/lecture/haricot.webp",
     "/assets/words/lecture/harmonica.webp",
     "/assets/words/lecture/harpe.webp",
-    "/assets/words/lecture/helicoptere.webp",
+    "/assets/words/lecture/hélicoptère.webp",
     "/assets/words/lecture/herbe.webp",
-    "/assets/words/lecture/herisson.webp",
-    "/assets/words/lecture/hetre.webp",
+    "/assets/words/lecture/hérisson.webp",
+    "/assets/words/lecture/hêtre.webp",
     "/assets/words/lecture/hexagone.webp",
     "/assets/words/lecture/hibou.webp",
     "/assets/words/lecture/hippocampe.webp",
@@ -1735,12 +1731,12 @@
     "/assets/words/lecture/homme.webp",
     "/assets/words/lecture/huile.webp",
     "/assets/words/lecture/huit.webp",
-    "/assets/words/lecture/huitre.webp",
-    "/assets/words/lecture/hygiene.webp",
+    "/assets/words/lecture/huître.webp",
+    "/assets/words/lecture/hygiène.webp",
     "/assets/words/lecture/ibis.webp",
     "/assets/words/lecture/igloo.webp",
     "/assets/words/lecture/iguane.webp",
-    "/assets/words/lecture/ile.webp",
+    "/assets/words/lecture/île.webp",
     "/assets/words/lecture/image.webp",
     "/assets/words/lecture/imprimante.webp",
     "/assets/words/lecture/infusion.webp",
@@ -1765,7 +1761,7 @@
     "/assets/words/lecture/jus-d-orange.webp",
     "/assets/words/lecture/jus.webp",
     "/assets/words/lecture/kaki.webp",
-    "/assets/words/lecture/kaleidoscope.webp",
+    "/assets/words/lecture/kaléidoscope.webp",
     "/assets/words/lecture/kangourou.webp",
     "/assets/words/lecture/kayak.webp",
     "/assets/words/lecture/kiwi.webp",
@@ -1780,10 +1776,10 @@
     "/assets/words/lecture/lavabo.webp",
     "/assets/words/lecture/lavande.webp",
     "/assets/words/lecture/lave-vaisselle.webp",
-    "/assets/words/lecture/legging.webp",
-    "/assets/words/lecture/legume.webp",
+    "/assets/words/lecture/légging.webp",
+    "/assets/words/lecture/légume.webp",
     "/assets/words/lecture/lentille.webp",
-    "/assets/words/lecture/lezard.webp",
+    "/assets/words/lecture/lézard.webp",
     "/assets/words/lecture/libellule.webp",
     "/assets/words/lecture/limace.webp",
     "/assets/words/lecture/lime.webp",
@@ -1804,12 +1800,12 @@
     "/assets/words/lecture/lys.webp",
     "/assets/words/lecture/macaron.webp",
     "/assets/words/lecture/machine-a-laver.webp",
-    "/assets/words/lecture/macon.webp",
+    "/assets/words/lecture/maçon.webp",
     "/assets/words/lecture/madeleine.webp",
     "/assets/words/lecture/maillot-de-bain.webp",
     "/assets/words/lecture/maillot.webp",
     "/assets/words/lecture/main.webp",
-    "/assets/words/lecture/mais.webp",
+    "/assets/words/lecture/maïs.webp",
     "/assets/words/lecture/maison.webp",
     "/assets/words/lecture/maman.webp",
     "/assets/words/lecture/mandarine.webp",
@@ -1826,15 +1822,15 @@
     "/assets/words/lecture/marron.webp",
     "/assets/words/lecture/marronnier.webp",
     "/assets/words/lecture/marteau.webp",
-    "/assets/words/lecture/mecanicien.webp",
-    "/assets/words/lecture/medaille.webp",
-    "/assets/words/lecture/meduse.webp",
+    "/assets/words/lecture/mécanicien.webp",
+    "/assets/words/lecture/médaille.webp",
+    "/assets/words/lecture/méduse.webp",
     "/assets/words/lecture/melon.webp",
     "/assets/words/lecture/menthe.webp",
     "/assets/words/lecture/mer.webp",
     "/assets/words/lecture/meringue.webp",
-    "/assets/words/lecture/mesange.webp",
-    "/assets/words/lecture/metro.webp",
+    "/assets/words/lecture/mésange.webp",
+    "/assets/words/lecture/métro.webp",
     "/assets/words/lecture/micro-ondes.webp",
     "/assets/words/lecture/miel.webp",
     "/assets/words/lecture/milkshake.webp",
@@ -1842,7 +1838,7 @@
     "/assets/words/lecture/miroir.webp",
     "/assets/words/lecture/moineau.webp",
     "/assets/words/lecture/montagne.webp",
-    "/assets/words/lecture/montgolfiere.webp",
+    "/assets/words/lecture/montgolfière.webp",
     "/assets/words/lecture/montre-connectee.webp",
     "/assets/words/lecture/montre.webp",
     "/assets/words/lecture/morceau.webp",
@@ -1856,31 +1852,31 @@
     "/assets/words/lecture/muffin.webp",
     "/assets/words/lecture/muguet.webp",
     "/assets/words/lecture/mur.webp",
-    "/assets/words/lecture/mure.webp",
+    "/assets/words/lecture/mûre.webp",
     "/assets/words/lecture/myrtille.webp",
     "/assets/words/lecture/natation.webp",
     "/assets/words/lecture/navet.webp",
     "/assets/words/lecture/navire.webp",
     "/assets/words/lecture/nectarine.webp",
-    "/assets/words/lecture/nenuphar.webp",
+    "/assets/words/lecture/nénuphar.webp",
     "/assets/words/lecture/nez.webp",
     "/assets/words/lecture/nid.webp",
-    "/assets/words/lecture/noeud-papillon.webp",
+    "/assets/words/lecture/nœud-papillon.webp",
     "/assets/words/lecture/noir.webp",
     "/assets/words/lecture/noisetier.webp",
     "/assets/words/lecture/noisette.webp",
     "/assets/words/lecture/noix-de-coco.webp",
     "/assets/words/lecture/nuage.webp",
-    "/assets/words/lecture/oeil.webp",
-    "/assets/words/lecture/oeillet.webp",
-    "/assets/words/lecture/oeuf.webp",
+    "/assets/words/lecture/œil.webp",
+    "/assets/words/lecture/œillet.webp",
+    "/assets/words/lecture/œuf.webp",
     "/assets/words/lecture/oie.webp",
     "/assets/words/lecture/oignon.webp",
     "/assets/words/lecture/oiseau.webp",
     "/assets/words/lecture/olive.webp",
     "/assets/words/lecture/olivier.webp",
     "/assets/words/lecture/orange.webp",
-    "/assets/words/lecture/orchidee.webp",
+    "/assets/words/lecture/orchidée.webp",
     "/assets/words/lecture/ordinateur-portable.webp",
     "/assets/words/lecture/ordinateur.webp",
     "/assets/words/lecture/oreille.webp",
@@ -1901,20 +1897,20 @@
     "/assets/words/lecture/papier-toilette.webp",
     "/assets/words/lecture/papillon.webp",
     "/assets/words/lecture/paquebot.webp",
-    "/assets/words/lecture/paquerette.webp",
+    "/assets/words/lecture/pâquerette.webp",
     "/assets/words/lecture/parapluie.webp",
     "/assets/words/lecture/parasol.webp",
     "/assets/words/lecture/parfum.webp",
     "/assets/words/lecture/passoire.webp",
-    "/assets/words/lecture/pasteque.webp",
+    "/assets/words/lecture/pastèque.webp",
     "/assets/words/lecture/patate-douce.webp",
-    "/assets/words/lecture/pates.webp",
-    "/assets/words/lecture/patins-a-roulettes.webp",
-    "/assets/words/lecture/peche.webp",
-    "/assets/words/lecture/pecheur.webp",
+    "/assets/words/lecture/pâtes.webp",
+    "/assets/words/lecture/patins-à-roulettes.webp",
+    "/assets/words/lecture/pêche.webp",
+    "/assets/words/lecture/pêcheur.webp",
     "/assets/words/lecture/peigne.webp",
     "/assets/words/lecture/peinture.webp",
-    "/assets/words/lecture/pelican.webp",
+    "/assets/words/lecture/pélican.webp",
     "/assets/words/lecture/pelle.webp",
     "/assets/words/lecture/peluche.webp",
     "/assets/words/lecture/penderie.webp",
@@ -1946,7 +1942,7 @@
     "/assets/words/lecture/plage.webp",
     "/assets/words/lecture/planche-de-surf.webp",
     "/assets/words/lecture/planche.webp",
-    "/assets/words/lecture/planete.webp",
+    "/assets/words/lecture/planète.webp",
     "/assets/words/lecture/plume.webp",
     "/assets/words/lecture/poing.webp",
     "/assets/words/lecture/point.webp",
@@ -1963,7 +1959,7 @@
     "/assets/words/lecture/pommier.webp",
     "/assets/words/lecture/pompier.webp",
     "/assets/words/lecture/pont.webp",
-    "/assets/words/lecture/porte-cles.webp",
+    "/assets/words/lecture/porte-clés.webp",
     "/assets/words/lecture/porte-documents.webp",
     "/assets/words/lecture/porte-manteau.webp",
     "/assets/words/lecture/porte-mine.webp",
@@ -1974,7 +1970,7 @@
     "/assets/words/lecture/poubelle.webp",
     "/assets/words/lecture/poule.webp",
     "/assets/words/lecture/poulet.webp",
-    "/assets/words/lecture/poupee.webp",
+    "/assets/words/lecture/poupée.webp",
     "/assets/words/lecture/prairie.webp",
     "/assets/words/lecture/prune.webp",
     "/assets/words/lecture/pull.webp",
@@ -1988,22 +1984,21 @@
     "/assets/words/lecture/radis.webp",
     "/assets/words/lecture/raie.webp",
     "/assets/words/lecture/raisin.webp",
-    "/assets/words/lecture/randonnee.webp",
+    "/assets/words/lecture/randonnée.webp",
     "/assets/words/lecture/rapporteur.webp",
-    "/assets/words/lecture/raquette-1.webp",
-    "/assets/words/lecture/raquette-2.webp",
+    "/assets/words/lecture/raquette.webp",
     "/assets/words/lecture/rasoir.webp",
     "/assets/words/lecture/rat.webp",
-    "/assets/words/lecture/rateau.webp",
+    "/assets/words/lecture/râteau.webp",
     "/assets/words/lecture/rectangle.webp",
-    "/assets/words/lecture/refrigerateur.webp",
-    "/assets/words/lecture/regle.webp",
+    "/assets/words/lecture/réfrigérateur.webp",
+    "/assets/words/lecture/règle.webp",
     "/assets/words/lecture/renard.webp",
     "/assets/words/lecture/requin.webp",
     "/assets/words/lecture/restaurant.webp",
-    "/assets/words/lecture/reveil.webp",
+    "/assets/words/lecture/réveil.webp",
     "/assets/words/lecture/rideau.webp",
-    "/assets/words/lecture/riviere.webp",
+    "/assets/words/lecture/rivière.webp",
     "/assets/words/lecture/riz.webp",
     "/assets/words/lecture/robe.webp",
     "/assets/words/lecture/robot.webp",
@@ -2029,10 +2024,10 @@
     "/assets/words/lecture/scorpion.webp",
     "/assets/words/lecture/scotch.webp",
     "/assets/words/lecture/seau.webp",
-    "/assets/words/lecture/seche-cheveux.webp",
+    "/assets/words/lecture/sèche-cheveux.webp",
     "/assets/words/lecture/semaine.webp",
     "/assets/words/lecture/sentier.webp",
-    "/assets/words/lecture/sequoia.webp",
+    "/assets/words/lecture/séquoia.webp",
     "/assets/words/lecture/serpent.webp",
     "/assets/words/lecture/serveuse.webp",
     "/assets/words/lecture/shampoing.webp",
@@ -2052,7 +2047,7 @@
     "/assets/words/lecture/souris.webp",
     "/assets/words/lecture/sous-marin.webp",
     "/assets/words/lecture/soutien-gorge.webp",
-    "/assets/words/lecture/sphere.webp",
+    "/assets/words/lecture/sphère.webp",
     "/assets/words/lecture/stade.webp",
     "/assets/words/lecture/station.webp",
     "/assets/words/lecture/stylo-plume.webp",
@@ -2069,17 +2064,17 @@
     "/assets/words/lecture/tampon.webp",
     "/assets/words/lecture/tapis.webp",
     "/assets/words/lecture/taxi.webp",
-    "/assets/words/lecture/telecommande.webp",
-    "/assets/words/lecture/telepherique.webp",
-    "/assets/words/lecture/telephone.webp",
-    "/assets/words/lecture/telescope.webp",
-    "/assets/words/lecture/television.webp",
-    "/assets/words/lecture/tempete.webp",
+    "/assets/words/lecture/télécommande.webp",
+    "/assets/words/lecture/téléphérique.webp",
+    "/assets/words/lecture/téléphone.webp",
+    "/assets/words/lecture/télescope.webp",
+    "/assets/words/lecture/télévision.webp",
+    "/assets/words/lecture/tempête.webp",
     "/assets/words/lecture/tennis.webp",
     "/assets/words/lecture/tente.webp",
-    "/assets/words/lecture/tete.webp",
-    "/assets/words/lecture/the-glace.webp",
-    "/assets/words/lecture/the.webp",
+    "/assets/words/lecture/tête.webp",
+    "/assets/words/lecture/thé-glacé.webp",
+    "/assets/words/lecture/thé.webp",
     "/assets/words/lecture/thym.webp",
     "/assets/words/lecture/tigre.webp",
     "/assets/words/lecture/timbre.webp",
@@ -2088,7 +2083,6 @@
     "/assets/words/lecture/toit.webp",
     "/assets/words/lecture/tomate.webp",
     "/assets/words/lecture/tornade.webp",
-    "/assets/words/lecture/tortue-1.webp",
     "/assets/words/lecture/tortue.webp",
     "/assets/words/lecture/toucan.webp",
     "/assets/words/lecture/toupie.webp",
@@ -2102,7 +2096,7 @@
     "/assets/words/lecture/triangle.webp",
     "/assets/words/lecture/trombone.webp",
     "/assets/words/lecture/trompette.webp",
-    "/assets/words/lecture/trophee.webp",
+    "/assets/words/lecture/trophée.webp",
     "/assets/words/lecture/trottinette.webp",
     "/assets/words/lecture/trousse.webp",
     "/assets/words/lecture/tulipe.webp",
@@ -2111,17 +2105,17 @@
     "/assets/words/lecture/usine.webp",
     "/assets/words/lecture/vache.webp",
     "/assets/words/lecture/valise.webp",
-    "/assets/words/lecture/vallee.webp",
+    "/assets/words/lecture/vallée.webp",
     "/assets/words/lecture/vampire.webp",
     "/assets/words/lecture/vanille.webp",
-    "/assets/words/lecture/velo.webp",
+    "/assets/words/lecture/vélo.webp",
     "/assets/words/lecture/ventre.webp",
     "/assets/words/lecture/ver-de-terre.webp",
     "/assets/words/lecture/verre.webp",
     "/assets/words/lecture/vert.webp",
     "/assets/words/lecture/veste-hiver.webp",
     "/assets/words/lecture/veste.webp",
-    "/assets/words/lecture/veterinaire.webp",
+    "/assets/words/lecture/vétérinaire.webp",
     "/assets/words/lecture/viande.webp",
     "/assets/words/lecture/violet.webp",
     "/assets/words/lecture/violette.webp",
@@ -2137,7 +2131,7 @@
     "/assets/words/lecture/yaourt.webp",
     "/assets/words/lecture/yoga.webp",
     "/assets/words/lecture/yoyo.webp",
-    "/assets/words/lecture/zebre.webp",
+    "/assets/words/lecture/zèbre.webp",
     "/assets/words/lecture/zigzag.webp",
     "/assets/words/vocab/V1/afghanistan.webp",
     "/assets/words/vocab/V1/age.webp",
@@ -2442,6 +2436,7 @@
     "/assets/words/vocab/V7/cuisiner.webp",
     "/assets/words/vocab/V7/curry.webp",
     "/assets/words/vocab/V7/doseur.webp",
+    "/assets/words/vocab/V7/echalotte.webp",
     "/assets/words/vocab/V7/egoutter.webp",
     "/assets/words/vocab/V7/epice.webp",
     "/assets/words/vocab/V7/eplucher.webp",
@@ -7592,12 +7587,12 @@
       "revision": "e06f033b5c0389e6"
     },
     {
-      "url": "/assets/words/lecture/accordeon.webp",
+      "url": "/assets/words/lecture/accordéon.webp",
       "size": 53146,
       "revision": "36e670c7d45b3aef"
     },
     {
-      "url": "/assets/words/lecture/activite-mentale.webp",
+      "url": "/assets/words/lecture/activité-mentale.webp",
       "size": 46034,
       "revision": "ef3bc99437ce50fa"
     },
@@ -7677,7 +7672,7 @@
       "revision": "96504f48b72e9107"
     },
     {
-      "url": "/assets/words/lecture/araignee.webp",
+      "url": "/assets/words/lecture/araignée.webp",
       "size": 29240,
       "revision": "960c770b1c7d6a87"
     },
@@ -7722,7 +7717,7 @@
       "revision": "6e4612a0a4861968"
     },
     {
-      "url": "/assets/words/lecture/asteroide.webp",
+      "url": "/assets/words/lecture/astéroïde.webp",
       "size": 54326,
       "revision": "7ac681da52886177"
     },
@@ -7792,7 +7787,7 @@
       "revision": "8a9a69b1d379503c"
     },
     {
-      "url": "/assets/words/lecture/ballon-3.webp",
+      "url": "/assets/words/lecture/ballon.webp",
       "size": 5672,
       "revision": "755fc6e6eadb3510"
     },
@@ -7847,7 +7842,7 @@
       "revision": "bd882f052008a867"
     },
     {
-      "url": "/assets/words/lecture/bebe.webp",
+      "url": "/assets/words/lecture/bébé.webp",
       "size": 11770,
       "revision": "460433fdde00903b"
     },
@@ -7867,7 +7862,7 @@
       "revision": "20f0a239ba246f06"
     },
     {
-      "url": "/assets/words/lecture/beret.webp",
+      "url": "/assets/words/lecture/béret.webp",
       "size": 9074,
       "revision": "3b610b80f56c91ad"
     },
@@ -7937,7 +7932,7 @@
       "revision": "ab79df7188a443f4"
     },
     {
-      "url": "/assets/words/lecture/boite.webp",
+      "url": "/assets/words/lecture/boîte.webp",
       "size": 1992,
       "revision": "0081594e776d643f"
     },
@@ -8032,7 +8027,7 @@
       "revision": "4d88df26f97d83da"
     },
     {
-      "url": "/assets/words/lecture/brosse-a-dents.webp",
+      "url": "/assets/words/lecture/brosse-à-dents.webp",
       "size": 5286,
       "revision": "340d1617045b6967"
     },
@@ -8082,7 +8077,7 @@
       "revision": "e8bbcec742b6f66f"
     },
     {
-      "url": "/assets/words/lecture/cafe.webp",
+      "url": "/assets/words/lecture/café.webp",
       "size": 9332,
       "revision": "c64a0b1f1c377391"
     },
@@ -8107,12 +8102,12 @@
       "revision": "7e317934198c6f62"
     },
     {
-      "url": "/assets/words/lecture/calecon.webp",
+      "url": "/assets/words/lecture/caleçon.webp",
       "size": 19742,
       "revision": "2334a5c16463a98a"
     },
     {
-      "url": "/assets/words/lecture/cameleon.webp",
+      "url": "/assets/words/lecture/caméléon.webp",
       "size": 69536,
       "revision": "d6ba503443fc78ba"
     },
@@ -8157,7 +8152,7 @@
       "revision": "295e902a4c428470"
     },
     {
-      "url": "/assets/words/lecture/carre.webp",
+      "url": "/assets/words/lecture/carré.webp",
       "size": 2602,
       "revision": "5aab612ef4b5dffd"
     },
@@ -8167,12 +8162,12 @@
       "revision": "ecffa8ac923d26f2"
     },
     {
-      "url": "/assets/words/lecture/carte-d-etudiant.webp",
+      "url": "/assets/words/lecture/carte-d'étudiant.webp",
       "size": 3644,
       "revision": "a5de4a3fcd46fafb"
     },
     {
-      "url": "/assets/words/lecture/carte-d-identite.webp",
+      "url": "/assets/words/lecture/carte-d'identité.webp",
       "size": 2042,
       "revision": "fcc33bbe6e473c47"
     },
@@ -8192,16 +8187,6 @@
       "revision": "9da7178755546f31"
     },
     {
-      "url": "/assets/words/lecture/casque-2.webp",
-      "size": 24440,
-      "revision": "eab9a33731f4a91c"
-    },
-    {
-      "url": "/assets/words/lecture/casque.webp",
-      "size": 17496,
-      "revision": "55cd85ddd26cc6fa"
-    },
-    {
       "url": "/assets/words/lecture/casquette.webp",
       "size": 12446,
       "revision": "d1da977ab888ade8"
@@ -8217,7 +8202,7 @@
       "revision": "5b0749bbdf7702c5"
     },
     {
-      "url": "/assets/words/lecture/celeri.webp",
+      "url": "/assets/words/lecture/céleri.webp",
       "size": 33082,
       "revision": "aa3f4437e5b67c70"
     },
@@ -8292,17 +8277,17 @@
       "revision": "41404dbdc357ac17"
     },
     {
-      "url": "/assets/words/lecture/chataignier.webp",
+      "url": "/assets/words/lecture/châtaignier.webp",
       "size": 78200,
       "revision": "3cea74a4db5c3486"
     },
     {
-      "url": "/assets/words/lecture/chateau-de-sable.webp",
+      "url": "/assets/words/lecture/château-de-sable.webp",
       "size": 53348,
       "revision": "4d1fd2ca478d20dc"
     },
     {
-      "url": "/assets/words/lecture/chateau.webp",
+      "url": "/assets/words/lecture/château.webp",
       "size": 61084,
       "revision": "9859db29d674f975"
     },
@@ -8327,7 +8312,7 @@
       "revision": "6f4eda9355c531bd"
     },
     {
-      "url": "/assets/words/lecture/cheminee.webp",
+      "url": "/assets/words/lecture/cheminée.webp",
       "size": 39216,
       "revision": "b3df4c51fce54e92"
     },
@@ -8337,7 +8322,7 @@
       "revision": "6b3090bec411e44d"
     },
     {
-      "url": "/assets/words/lecture/chene.webp",
+      "url": "/assets/words/lecture/chêne.webp",
       "size": 97466,
       "revision": "960ee72e8cd02a11"
     },
@@ -8362,7 +8347,7 @@
       "revision": "dd686edbc79a0db6"
     },
     {
-      "url": "/assets/words/lecture/chevre.webp",
+      "url": "/assets/words/lecture/chèvre.webp",
       "size": 15856,
       "revision": "c460b816e119cd5d"
     },
@@ -8392,12 +8377,12 @@
       "revision": "08312c74481f2fbe"
     },
     {
-      "url": "/assets/words/lecture/chronometre.webp",
+      "url": "/assets/words/lecture/chronomètre.webp",
       "size": 17342,
       "revision": "d9c85f288c17fe40"
     },
     {
-      "url": "/assets/words/lecture/chrysantheme.webp",
+      "url": "/assets/words/lecture/chrysanthème.webp",
       "size": 30370,
       "revision": "c950421905d3fbcf"
     },
@@ -8457,7 +8442,7 @@
       "revision": "6f6955284adeb98e"
     },
     {
-      "url": "/assets/words/lecture/clementine.webp",
+      "url": "/assets/words/lecture/clémentine.webp",
       "size": 42228,
       "revision": "f903b0736423bdd7"
     },
@@ -8487,7 +8472,7 @@
       "revision": "68d3efc9560560f6"
     },
     {
-      "url": "/assets/words/lecture/coeur.webp",
+      "url": "/assets/words/lecture/cœur.webp",
       "size": 31566,
       "revision": "fd7a3d98c387eaa0"
     },
@@ -8527,7 +8512,7 @@
       "revision": "aba77b99dabee0f9"
     },
     {
-      "url": "/assets/words/lecture/comete.webp",
+      "url": "/assets/words/lecture/comète.webp",
       "size": 20020,
       "revision": "1590a10dc39377e2"
     },
@@ -8542,7 +8527,7 @@
       "revision": "fdb334067d146637"
     },
     {
-      "url": "/assets/words/lecture/comptoire.webp",
+      "url": "/assets/words/lecture/comptoir.webp",
       "size": 18714,
       "revision": "f8ef5d885001011e"
     },
@@ -8552,7 +8537,7 @@
       "revision": "a1bfb9e1d6b2ab4e"
     },
     {
-      "url": "/assets/words/lecture/cone.webp",
+      "url": "/assets/words/lecture/cône.webp",
       "size": 5552,
       "revision": "12d6454ae085ea5c"
     },
@@ -8587,7 +8572,7 @@
       "revision": "efda417ee91f675f"
     },
     {
-      "url": "/assets/words/lecture/corde-a-sauter.webp",
+      "url": "/assets/words/lecture/corde-à-sauter.webp",
       "size": 24008,
       "revision": "f7c464e6ada01083"
     },
@@ -8657,7 +8642,7 @@
       "revision": "13d16cbbe5cd0213"
     },
     {
-      "url": "/assets/words/lecture/crepe.webp",
+      "url": "/assets/words/lecture/crêpe.webp",
       "size": 29842,
       "revision": "f6a3233bf15a17a1"
     },
@@ -8712,7 +8697,7 @@
       "revision": "0f7141542ad2129f"
     },
     {
-      "url": "/assets/words/lecture/cypres.webp",
+      "url": "/assets/words/lecture/cyprès.webp",
       "size": 13946,
       "revision": "3798676c5769a638"
     },
@@ -8732,7 +8717,7 @@
       "revision": "c86100933b030889"
     },
     {
-      "url": "/assets/words/lecture/de.webp",
+      "url": "/assets/words/lecture/dé.webp",
       "size": 6092,
       "revision": "a1ad60e4f0fb0875"
     },
@@ -8747,12 +8732,12 @@
       "revision": "2498fa412a7bc311"
     },
     {
-      "url": "/assets/words/lecture/deodorant.webp",
+      "url": "/assets/words/lecture/déodorant.webp",
       "size": 2876,
       "revision": "3aae10604cb4c465"
     },
     {
-      "url": "/assets/words/lecture/desert.webp",
+      "url": "/assets/words/lecture/désert.webp",
       "size": 30162,
       "revision": "c23304d23236a272"
     },
@@ -8822,52 +8807,42 @@
       "revision": "d4700070f233a4b1"
     },
     {
-      "url": "/assets/words/lecture/echalote.webp",
+      "url": "/assets/words/lecture/échalote.webp",
       "size": 19044,
       "revision": "f7e3abc12a013ab6"
     },
     {
-      "url": "/assets/words/lecture/echalotte.webp",
-      "size": 23496,
-      "revision": "e072ccb6599e5f9b"
-    },
-    {
-      "url": "/assets/words/lecture/echarpe.webp",
+      "url": "/assets/words/lecture/écharpe.webp",
       "size": 21998,
       "revision": "5e3bb42c3fc36907"
     },
     {
-      "url": "/assets/words/lecture/echecs.webp",
+      "url": "/assets/words/lecture/échecs.webp",
       "size": 31698,
       "revision": "4fc1c8c1d5de05a4"
     },
     {
-      "url": "/assets/words/lecture/echelle.webp",
+      "url": "/assets/words/lecture/échelle.webp",
       "size": 9266,
       "revision": "c326c7d3093dc07a"
     },
     {
-      "url": "/assets/words/lecture/ecouteurs.webp",
+      "url": "/assets/words/lecture/écouteurs.webp",
       "size": 5114,
       "revision": "b450efef9977b851"
     },
     {
-      "url": "/assets/words/lecture/ecureuil.webp",
+      "url": "/assets/words/lecture/écureuil.webp",
       "size": 44294,
       "revision": "5057ab88e8eb59db"
     },
     {
-      "url": "/assets/words/lecture/elastique-1.webp",
-      "size": 15166,
-      "revision": "e598a31649e154fe"
-    },
-    {
-      "url": "/assets/words/lecture/elastique.webp",
+      "url": "/assets/words/lecture/élastique.webp",
       "size": 29138,
       "revision": "b62520c8c9ef3701"
     },
     {
-      "url": "/assets/words/lecture/elephant.webp",
+      "url": "/assets/words/lecture/éléphant.webp",
       "size": 34658,
       "revision": "9728fa8cd2b49ba9"
     },
@@ -8892,27 +8867,27 @@
       "revision": "6e5dcb8bd7dabd3c"
     },
     {
-      "url": "/assets/words/lecture/epaule.webp",
+      "url": "/assets/words/lecture/épaule.webp",
       "size": 9650,
       "revision": "ac166b40023f7f79"
     },
     {
-      "url": "/assets/words/lecture/epinard.webp",
+      "url": "/assets/words/lecture/épinard.webp",
       "size": 45550,
       "revision": "ae4030777d96c438"
     },
     {
-      "url": "/assets/words/lecture/eponge.webp",
+      "url": "/assets/words/lecture/éponge.webp",
       "size": 27010,
       "revision": "bbb572c2e355fadb"
     },
     {
-      "url": "/assets/words/lecture/equerre.webp",
+      "url": "/assets/words/lecture/équerre.webp",
       "size": 16406,
       "revision": "d782f476139561b8"
     },
     {
-      "url": "/assets/words/lecture/erable.webp",
+      "url": "/assets/words/lecture/érable.webp",
       "size": 91020,
       "revision": "98ca7e6e8f3407d8"
     },
@@ -8932,12 +8907,12 @@
       "revision": "4685b55183dd6c14"
     },
     {
-      "url": "/assets/words/lecture/etang.webp",
+      "url": "/assets/words/lecture/étang.webp",
       "size": 59274,
       "revision": "60050bb5f6d8bf08"
     },
     {
-      "url": "/assets/words/lecture/etoile-de-mer.webp",
+      "url": "/assets/words/lecture/étoile-de-mer.webp",
       "size": 30888,
       "revision": "e58e1c0e5a743b60"
     },
@@ -9037,7 +9012,7 @@
       "revision": "fef11baad4af582d"
     },
     {
-      "url": "/assets/words/lecture/fleche.webp",
+      "url": "/assets/words/lecture/flèche.webp",
       "size": 5738,
       "revision": "63870c720c5fd231"
     },
@@ -9057,7 +9032,7 @@
       "revision": "ece1b6949147cdfa"
     },
     {
-      "url": "/assets/words/lecture/flute.webp",
+      "url": "/assets/words/lecture/flûte.webp",
       "size": 7000,
       "revision": "8e9e092dfc74a409"
     },
@@ -9072,7 +9047,7 @@
       "revision": "ea376a9ef0c101df"
     },
     {
-      "url": "/assets/words/lecture/foret.webp",
+      "url": "/assets/words/lecture/forêt.webp",
       "size": 81258,
       "revision": "82c636e9ac5b148c"
     },
@@ -9117,7 +9092,7 @@
       "revision": "802cb36cdc0747ff"
     },
     {
-      "url": "/assets/words/lecture/fusee.webp",
+      "url": "/assets/words/lecture/fusée.webp",
       "size": 19626,
       "revision": "06f0f17130e72d97"
     },
@@ -9147,7 +9122,7 @@
       "revision": "b32d0ec7b34d1c27"
     },
     {
-      "url": "/assets/words/lecture/gateau.webp",
+      "url": "/assets/words/lecture/gâteau.webp",
       "size": 43406,
       "revision": "64c0ac7c9a34cb26"
     },
@@ -9257,7 +9232,7 @@
       "revision": "7557b150b8262f4d"
     },
     {
-      "url": "/assets/words/lecture/guepe.webp",
+      "url": "/assets/words/lecture/guêpe.webp",
       "size": 31658,
       "revision": "b25658ce0b2f453a"
     },
@@ -9272,12 +9247,12 @@
       "revision": "65f8ac7f4036eef5"
     },
     {
-      "url": "/assets/words/lecture/haltere.webp",
+      "url": "/assets/words/lecture/haltère.webp",
       "size": 12382,
       "revision": "c03c1b97f23d8a40"
     },
     {
-      "url": "/assets/words/lecture/halteres.webp",
+      "url": "/assets/words/lecture/haltères.webp",
       "size": 21666,
       "revision": "1739fbf4d93e102c"
     },
@@ -9317,7 +9292,7 @@
       "revision": "4e2bd409b9932953"
     },
     {
-      "url": "/assets/words/lecture/helicoptere.webp",
+      "url": "/assets/words/lecture/hélicoptère.webp",
       "size": 27966,
       "revision": "b1da6dbb5b4ac052"
     },
@@ -9327,12 +9302,12 @@
       "revision": "3cf33150a44cc8a3"
     },
     {
-      "url": "/assets/words/lecture/herisson.webp",
+      "url": "/assets/words/lecture/hérisson.webp",
       "size": 61136,
       "revision": "b161f04cca352d88"
     },
     {
-      "url": "/assets/words/lecture/hetre.webp",
+      "url": "/assets/words/lecture/hêtre.webp",
       "size": 77220,
       "revision": "8980a42e688108eb"
     },
@@ -9387,12 +9362,12 @@
       "revision": "081fe66cd1027928"
     },
     {
-      "url": "/assets/words/lecture/huitre.webp",
+      "url": "/assets/words/lecture/huître.webp",
       "size": 27480,
       "revision": "121cf06e1a429602"
     },
     {
-      "url": "/assets/words/lecture/hygiene.webp",
+      "url": "/assets/words/lecture/hygiène.webp",
       "size": 13174,
       "revision": "31f8d721ed1f4b70"
     },
@@ -9412,7 +9387,7 @@
       "revision": "b936be7f7a73d0bb"
     },
     {
-      "url": "/assets/words/lecture/ile.webp",
+      "url": "/assets/words/lecture/île.webp",
       "size": 49348,
       "revision": "c56da6d2b17b092d"
     },
@@ -9537,7 +9512,7 @@
       "revision": "c2dfb08dbaed6ec6"
     },
     {
-      "url": "/assets/words/lecture/kaleidoscope.webp",
+      "url": "/assets/words/lecture/kaléidoscope.webp",
       "size": 45478,
       "revision": "cbc9f308c8c7629a"
     },
@@ -9612,12 +9587,12 @@
       "revision": "d08d22821f2d9775"
     },
     {
-      "url": "/assets/words/lecture/legging.webp",
+      "url": "/assets/words/lecture/légging.webp",
       "size": 4230,
       "revision": "079ee10cb1fa82fa"
     },
     {
-      "url": "/assets/words/lecture/legume.webp",
+      "url": "/assets/words/lecture/légume.webp",
       "size": 33242,
       "revision": "a58c70ed19386c82"
     },
@@ -9627,7 +9602,7 @@
       "revision": "6a68cd430622678d"
     },
     {
-      "url": "/assets/words/lecture/lezard.webp",
+      "url": "/assets/words/lecture/lézard.webp",
       "size": 31822,
       "revision": "80980f4e1280cbb7"
     },
@@ -9732,7 +9707,7 @@
       "revision": "29ca3a1251d0ea06"
     },
     {
-      "url": "/assets/words/lecture/macon.webp",
+      "url": "/assets/words/lecture/maçon.webp",
       "size": 26322,
       "revision": "749ef85f458256b1"
     },
@@ -9757,7 +9732,7 @@
       "revision": "96dfdb9c1484ed9f"
     },
     {
-      "url": "/assets/words/lecture/mais.webp",
+      "url": "/assets/words/lecture/maïs.webp",
       "size": 36190,
       "revision": "e7d27218d27431e8"
     },
@@ -9842,17 +9817,17 @@
       "revision": "ad7db3529f88087a"
     },
     {
-      "url": "/assets/words/lecture/mecanicien.webp",
+      "url": "/assets/words/lecture/mécanicien.webp",
       "size": 19290,
       "revision": "fa5b3bbfd824e2cb"
     },
     {
-      "url": "/assets/words/lecture/medaille.webp",
+      "url": "/assets/words/lecture/médaille.webp",
       "size": 25664,
       "revision": "83c7336e653caa40"
     },
     {
-      "url": "/assets/words/lecture/meduse.webp",
+      "url": "/assets/words/lecture/méduse.webp",
       "size": 16682,
       "revision": "488ad73b278e1327"
     },
@@ -9877,12 +9852,12 @@
       "revision": "77af4ad8b791cc72"
     },
     {
-      "url": "/assets/words/lecture/mesange.webp",
+      "url": "/assets/words/lecture/mésange.webp",
       "size": 28426,
       "revision": "6fd23e7ac71c6af9"
     },
     {
-      "url": "/assets/words/lecture/metro.webp",
+      "url": "/assets/words/lecture/métro.webp",
       "size": 22224,
       "revision": "06b5d48b793d7a26"
     },
@@ -9922,7 +9897,7 @@
       "revision": "887c9ef3ab41eea4"
     },
     {
-      "url": "/assets/words/lecture/montgolfiere.webp",
+      "url": "/assets/words/lecture/montgolfière.webp",
       "size": 15398,
       "revision": "415f21d7074fcad8"
     },
@@ -9992,7 +9967,7 @@
       "revision": "02ff65e256d7960f"
     },
     {
-      "url": "/assets/words/lecture/mure.webp",
+      "url": "/assets/words/lecture/mûre.webp",
       "size": 36478,
       "revision": "870be0f29d75e1ac"
     },
@@ -10022,7 +9997,7 @@
       "revision": "bbd9b534c3e24d12"
     },
     {
-      "url": "/assets/words/lecture/nenuphar.webp",
+      "url": "/assets/words/lecture/nénuphar.webp",
       "size": 19652,
       "revision": "4caa8e603f5dadd9"
     },
@@ -10037,7 +10012,7 @@
       "revision": "c4c52b510bcf32c1"
     },
     {
-      "url": "/assets/words/lecture/noeud-papillon.webp",
+      "url": "/assets/words/lecture/nœud-papillon.webp",
       "size": 28822,
       "revision": "95b94244dbf5d41f"
     },
@@ -10067,17 +10042,17 @@
       "revision": "1b9066abb7687f19"
     },
     {
-      "url": "/assets/words/lecture/oeil.webp",
+      "url": "/assets/words/lecture/œil.webp",
       "size": 27360,
       "revision": "6a10509325ee60d9"
     },
     {
-      "url": "/assets/words/lecture/oeillet.webp",
+      "url": "/assets/words/lecture/œillet.webp",
       "size": 27718,
       "revision": "e8ac029a600844e3"
     },
     {
-      "url": "/assets/words/lecture/oeuf.webp",
+      "url": "/assets/words/lecture/œuf.webp",
       "size": 19886,
       "revision": "d0521fd458b3dfdd"
     },
@@ -10112,7 +10087,7 @@
       "revision": "5b373e98ee0ec94e"
     },
     {
-      "url": "/assets/words/lecture/orchidee.webp",
+      "url": "/assets/words/lecture/orchidée.webp",
       "size": 42418,
       "revision": "f4c595bf72bf553a"
     },
@@ -10217,7 +10192,7 @@
       "revision": "9fb8b15be34d671e"
     },
     {
-      "url": "/assets/words/lecture/paquerette.webp",
+      "url": "/assets/words/lecture/pâquerette.webp",
       "size": 16088,
       "revision": "9bee00a47818ddcc"
     },
@@ -10242,7 +10217,7 @@
       "revision": "d1ddb7bc573443bb"
     },
     {
-      "url": "/assets/words/lecture/pasteque.webp",
+      "url": "/assets/words/lecture/pastèque.webp",
       "size": 55022,
       "revision": "d083308a71cd2103"
     },
@@ -10252,22 +10227,22 @@
       "revision": "1b6c7d4805d55d2a"
     },
     {
-      "url": "/assets/words/lecture/pates.webp",
+      "url": "/assets/words/lecture/pâtes.webp",
       "size": 21860,
       "revision": "6aba0b8866b3a37c"
     },
     {
-      "url": "/assets/words/lecture/patins-a-roulettes.webp",
+      "url": "/assets/words/lecture/patins-à-roulettes.webp",
       "size": 18838,
       "revision": "55db762012ab9bb2"
     },
     {
-      "url": "/assets/words/lecture/peche.webp",
+      "url": "/assets/words/lecture/pêche.webp",
       "size": 21692,
       "revision": "7aec9241ac2caaf9"
     },
     {
-      "url": "/assets/words/lecture/pecheur.webp",
+      "url": "/assets/words/lecture/pêcheur.webp",
       "size": 24276,
       "revision": "ada599c9929284c3"
     },
@@ -10282,7 +10257,7 @@
       "revision": "f745abf805fe27ca"
     },
     {
-      "url": "/assets/words/lecture/pelican.webp",
+      "url": "/assets/words/lecture/pélican.webp",
       "size": 18830,
       "revision": "c76248bfeaf86186"
     },
@@ -10442,7 +10417,7 @@
       "revision": "01e873b8f8c6807d"
     },
     {
-      "url": "/assets/words/lecture/planete.webp",
+      "url": "/assets/words/lecture/planète.webp",
       "size": 47464,
       "revision": "79e5a4504e29bf5b"
     },
@@ -10527,7 +10502,7 @@
       "revision": "b621b5e25399ac02"
     },
     {
-      "url": "/assets/words/lecture/porte-cles.webp",
+      "url": "/assets/words/lecture/porte-clés.webp",
       "size": 17876,
       "revision": "cc370c7b9c0b5375"
     },
@@ -10582,7 +10557,7 @@
       "revision": "75aa40a03c711e2f"
     },
     {
-      "url": "/assets/words/lecture/poupee.webp",
+      "url": "/assets/words/lecture/poupée.webp",
       "size": 28246,
       "revision": "d5db951536df7aac"
     },
@@ -10652,7 +10627,7 @@
       "revision": "203256d37e306d97"
     },
     {
-      "url": "/assets/words/lecture/randonnee.webp",
+      "url": "/assets/words/lecture/randonnée.webp",
       "size": 17824,
       "revision": "815299db92e8ec6f"
     },
@@ -10662,14 +10637,9 @@
       "revision": "925abf0c165e4d4b"
     },
     {
-      "url": "/assets/words/lecture/raquette-1.webp",
+      "url": "/assets/words/lecture/raquette.webp",
       "size": 24806,
       "revision": "962e19da183bf6c1"
-    },
-    {
-      "url": "/assets/words/lecture/raquette-2.webp",
-      "size": 12896,
-      "revision": "bd7d955d77fe33be"
     },
     {
       "url": "/assets/words/lecture/rasoir.webp",
@@ -10682,7 +10652,7 @@
       "revision": "2c4f3e4fa247208c"
     },
     {
-      "url": "/assets/words/lecture/rateau.webp",
+      "url": "/assets/words/lecture/râteau.webp",
       "size": 4814,
       "revision": "4a0a773049759a29"
     },
@@ -10692,12 +10662,12 @@
       "revision": "47c4c1aa7ec9e555"
     },
     {
-      "url": "/assets/words/lecture/refrigerateur.webp",
+      "url": "/assets/words/lecture/réfrigérateur.webp",
       "size": 3394,
       "revision": "03b837351dd30252"
     },
     {
-      "url": "/assets/words/lecture/regle.webp",
+      "url": "/assets/words/lecture/règle.webp",
       "size": 20040,
       "revision": "e003eb2fa10a08c5"
     },
@@ -10717,7 +10687,7 @@
       "revision": "74963c8cdafd544e"
     },
     {
-      "url": "/assets/words/lecture/reveil.webp",
+      "url": "/assets/words/lecture/réveil.webp",
       "size": 18702,
       "revision": "94af9b493196466b"
     },
@@ -10727,7 +10697,7 @@
       "revision": "1064dc91b2ecaf47"
     },
     {
-      "url": "/assets/words/lecture/riviere.webp",
+      "url": "/assets/words/lecture/rivière.webp",
       "size": 67482,
       "revision": "9cd598457998973d"
     },
@@ -10857,7 +10827,7 @@
       "revision": "fea201532e3cad4e"
     },
     {
-      "url": "/assets/words/lecture/seche-cheveux.webp",
+      "url": "/assets/words/lecture/sèche-cheveux.webp",
       "size": 9142,
       "revision": "6a880c6a381b392c"
     },
@@ -10872,7 +10842,7 @@
       "revision": "8d9a057217ce2380"
     },
     {
-      "url": "/assets/words/lecture/sequoia.webp",
+      "url": "/assets/words/lecture/séquoia.webp",
       "size": 33278,
       "revision": "134a85952fad65ee"
     },
@@ -10972,7 +10942,7 @@
       "revision": "bb73935d063b7c4b"
     },
     {
-      "url": "/assets/words/lecture/sphere.webp",
+      "url": "/assets/words/lecture/sphère.webp",
       "size": 7912,
       "revision": "566fab393bda0191"
     },
@@ -11057,32 +11027,32 @@
       "revision": "767f8e2cfbdce812"
     },
     {
-      "url": "/assets/words/lecture/telecommande.webp",
+      "url": "/assets/words/lecture/télécommande.webp",
       "size": 10554,
       "revision": "dd75d88a0f5ffc01"
     },
     {
-      "url": "/assets/words/lecture/telepherique.webp",
+      "url": "/assets/words/lecture/téléphérique.webp",
       "size": 17044,
       "revision": "4c018b94de07c31f"
     },
     {
-      "url": "/assets/words/lecture/telephone.webp",
+      "url": "/assets/words/lecture/téléphone.webp",
       "size": 13646,
       "revision": "c20aa42c2fa58805"
     },
     {
-      "url": "/assets/words/lecture/telescope.webp",
+      "url": "/assets/words/lecture/télescope.webp",
       "size": 12304,
       "revision": "439a060f9d7d29ad"
     },
     {
-      "url": "/assets/words/lecture/television.webp",
+      "url": "/assets/words/lecture/télévision.webp",
       "size": 3496,
       "revision": "c67c0a68dee3fa5a"
     },
     {
-      "url": "/assets/words/lecture/tempete.webp",
+      "url": "/assets/words/lecture/tempête.webp",
       "size": 16316,
       "revision": "e7ccfdd9deebdf20"
     },
@@ -11097,17 +11067,17 @@
       "revision": "8f924b83cd06aed8"
     },
     {
-      "url": "/assets/words/lecture/tete.webp",
+      "url": "/assets/words/lecture/tête.webp",
       "size": 22540,
       "revision": "061478883a456e14"
     },
     {
-      "url": "/assets/words/lecture/the-glace.webp",
+      "url": "/assets/words/lecture/thé-glacé.webp",
       "size": 21140,
       "revision": "3306866ee3cf1364"
     },
     {
-      "url": "/assets/words/lecture/the.webp",
+      "url": "/assets/words/lecture/thé.webp",
       "size": 20966,
       "revision": "70557dc30620ca2a"
     },
@@ -11150,11 +11120,6 @@
       "url": "/assets/words/lecture/tornade.webp",
       "size": 10872,
       "revision": "2d2aeb34ca819043"
-    },
-    {
-      "url": "/assets/words/lecture/tortue-1.webp",
-      "size": 37844,
-      "revision": "a53a103765eb4cdf"
     },
     {
       "url": "/assets/words/lecture/tortue.webp",
@@ -11222,7 +11187,7 @@
       "revision": "efc4f38cc7e79457"
     },
     {
-      "url": "/assets/words/lecture/trophee.webp",
+      "url": "/assets/words/lecture/trophée.webp",
       "size": 19106,
       "revision": "230285bbd159e72e"
     },
@@ -11267,7 +11232,7 @@
       "revision": "2349fe6c8604e158"
     },
     {
-      "url": "/assets/words/lecture/vallee.webp",
+      "url": "/assets/words/lecture/vallée.webp",
       "size": 74220,
       "revision": "4db57779e65bd95f"
     },
@@ -11282,7 +11247,7 @@
       "revision": "c15cef17df91384e"
     },
     {
-      "url": "/assets/words/lecture/velo.webp",
+      "url": "/assets/words/lecture/vélo.webp",
       "size": 30518,
       "revision": "55136646694fe570"
     },
@@ -11317,7 +11282,7 @@
       "revision": "3391517fe402763c"
     },
     {
-      "url": "/assets/words/lecture/veterinaire.webp",
+      "url": "/assets/words/lecture/vétérinaire.webp",
       "size": 21406,
       "revision": "f79bfd95f8870ab7"
     },
@@ -11397,7 +11362,7 @@
       "revision": "a64772d0c719d634"
     },
     {
-      "url": "/assets/words/lecture/zebre.webp",
+      "url": "/assets/words/lecture/zèbre.webp",
       "size": 49618,
       "revision": "686717a3f04a71a7"
     },
@@ -12920,6 +12885,11 @@
       "url": "/assets/words/vocab/V7/doseur.webp",
       "size": 7848,
       "revision": "6745184280ad544a"
+    },
+    {
+      "url": "/assets/words/vocab/V7/echalotte.webp",
+      "size": 13124,
+      "revision": "d3c2fbb5ef783219"
     },
     {
       "url": "/assets/words/vocab/V7/egoutter.webp",
