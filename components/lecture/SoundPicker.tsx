@@ -115,6 +115,14 @@ function imageButtonClass(state: CellState, validated: boolean): string {
   return `${base} border-[var(--color-accent-lecture)]`;
 }
 
+function audioButtonClass(state: CellState, validated: boolean): string {
+  const base =
+    "flex aspect-square w-full items-center justify-center rounded-lg border bg-white";
+  if (!validated) return `${base} border-[var(--color-accent-lecture)]`;
+  if (state === "wrong" || state === "missed") return `${base} ${LECTURE_CORRECTION_BORDER}`;
+  return `${base} border-[var(--color-accent-lecture)]`;
+}
+
 function audioCardClass(state: CellState, validated: boolean, hasPhoneme: boolean): string {
   const base =
     "flex flex-col items-center gap-1.5 rounded-[var(--radius-lg)] border p-1.5 transition-colors";
@@ -326,7 +334,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <button
                   type="button"
                   onClick={() => playWord(word.label)}
-                  className="flex aspect-square w-full items-center justify-center rounded-lg bg-[var(--color-bg-secondary)]"
+                  className={audioButtonClass(s, validated)}
                   aria-label={`Écouter ${word.label}`}
                 >
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent-lecture)]" aria-hidden>
