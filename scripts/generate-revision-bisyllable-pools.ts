@@ -6,7 +6,7 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { VOWELS, CONSONANTS } from "../lib/curriculum/lecture-data";
-import { phonemeLabelForLetter, wordToPronStep, isPedagogicBisyllable } from "../lib/curriculum/syllabify";
+import { isPedagogicBisyllable } from "../lib/curriculum/syllabify";
 import {
   LETTER_WORDS,
   allWordItems,
@@ -18,8 +18,6 @@ import {
 
 const TARGET = 50;
 const MAX_LEN = 11;
-const PRONOUNCE_MAX_LEN = 6;
-
 const PRON_2_SYL = new Set<string>();
 
 for (const lesson of [...VOWELS, ...CONSONANTS]) {
@@ -195,21 +193,4 @@ if (short.length) {
 const outPath = resolve(__dirname, "../lib/curriculum/lecture-revision-bisyllable-pools.json");
 writeFileSync(outPath, JSON.stringify(pools, null, 2) + "\n", "utf8");
 console.log(`\nÉcrit : ${outPath}`);
-
-const pronouncePools: Record<string, { phoneme: string; syllable: string; word: string }[]> = {};
-for (const { letter } of letters) {
-  pronouncePools[letter] = pools[letter]!
-    .filter((word) => word.length <= PRONOUNCE_MAX_LEN && isPedagogicBisyllable(word))
-    .map((word) => wordToPronStep(word, letter));
-}
-
-const pronounceStats = letters.map(({ letter }) => ({
-  letter,
-  count: pronouncePools[letter]!.length,
-}));
-console.log("\nPools prononcer (≤6 lettres, 2 syllabes) :");
-console.table(pronounceStats);
-
-const pronouncePath = resolve(__dirname, "../lib/curriculum/lecture-pronounce-pools.json");
-writeFileSync(pronouncePath, JSON.stringify(pronouncePools, null, 2) + "\n", "utf8");
-console.log(`Écrit : ${pronouncePath}`);
+console.log("Pools prononcer (étape 12) : voir scripts/generate-pronounce-pools.ts");
