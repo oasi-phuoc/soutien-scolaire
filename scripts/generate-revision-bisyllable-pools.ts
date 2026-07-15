@@ -6,7 +6,7 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { VOWELS, CONSONANTS } from "../lib/curriculum/lecture-data";
-import { phonemeLabelForLetter, wordToPronStep } from "../lib/curriculum/syllabify";
+import { phonemeLabelForLetter, wordToPronStep, isPedagogicBisyllable } from "../lib/curriculum/syllabify";
 import {
   LETTER_WORDS,
   allWordItems,
@@ -25,30 +25,23 @@ const PRON_2_SYL = new Set<string>();
 for (const lesson of [...VOWELS, ...CONSONANTS]) {
   if (!("pronunciationChain" in lesson) || !lesson.pronunciationChain) continue;
   for (const step of lesson.pronunciationChain) {
-    if ((step.syllable.match(/-/g) ?? []).length === 1) {
+    if (step.syllable.split("-").filter(Boolean).length === 2) {
       PRON_2_SYL.add(step.word.toLowerCase());
     }
   }
 }
 
-/** Syllabation pédagogique CP (2 syllabes en lecture). */
-for (const w of [
-  "joueur", "ouest", "douane", "mouette", "chouette", "gouache", "nougat", "louer", "bijou", "genou",
-  "herbe", "homme", "joue", "fouet", "houle", "rouille", "brouette", "brownie", "zouave",
-]) {
-  PRON_2_SYL.add(w);
-}
-
-/** Compléments curatés pour les lettres rares (validés par les règles ci-dessous). */
+/** Compléments curatés pour les lettres rares (validés par isPedagogicBisyllable). */
 const EXTRA: Record<string, string[]> = {
   j: ["visage", "passage", "barrage", "mirage", "plumage", "volage", "message", "beige", "nuage", "fromage"],
   w: [
-    "wagon", "wifi", "kiwi", "western", "bowling", "sandwich", "tramway", "walrus", "wombat", "wapiti",
-    "walabi", "webcam", "whisky", "windsurf", "walkman", "snowboard", "jouet", "joueur", "fenouil",
-    "ouest", "douane", "mouette", "chouette", "avouer", "douillet", "douanier", "alouette", "citrouille",
+    "wagon", "wifi", "kiwi", "bowling", "sandwich", "tramway", "walrus", "wombat", "wapiti",
+    "walabi", "webcam", "whisky", "windsurf", "walkman", "snowboard", "jouet", "fenouil",
+    "douane", "mouette", "chouette", "avouer", "douillet", "douanier", "alouette", "citrouille",
     "girouette", "grenouille", "marsouin", "pingouin", "wattman", "show", "clown", "wok", "gouache",
-    "nougat", "louer", "bijou", "genou", "joue", "fouet", "houle", "rouille", "brouette", "brownie",
-    "zouave", "waffle", "wilson", "waldo", "wasabi", "winter", "wonder", "walter", "warner", "watson", "walnut",
+    "nougat", "bijou", "genou", "houle", "rouille", "brouette", "brownie", "zouave", "waffle",
+    "wilson", "waldo", "wasabi", "winter", "wonder", "walter", "warner", "watson", "walnut",
+    "waterpolo", "western",
   ],
   x: [
     "taxi", "index", "fixe", "mixte", "boxe", "saxo", "silex", "latex", "préfixe", "klaxon", "vexant",
@@ -77,14 +70,11 @@ function isSimpleWord(label: string): boolean {
 }
 
 function isBisyllabic(label: string): boolean {
-  return countSyllables(label) === 2 || PRON_2_SYL.has(label.toLowerCase());
+  return isPedagogicBisyllable(label) || PRON_2_SYL.has(label.toLowerCase());
 }
 
-/** Lettres rares : accepte aussi 3 syllabes pour atteindre 50 mots. */
-function isPoolSyllable(label: string, letterLower: string): boolean {
-  if (isBisyllabic(label)) return true;
-  if (["w", "x"].includes(letterLower) && countSyllables(label) === 3) return true;
-  return false;
+function isPoolSyllable(label: string): boolean {
+  return isPedagogicBisyllable(label);
 }
 
 function labelToItem(label: string): WordItem {
@@ -157,7 +147,7 @@ function collectCandidates(letterLower: string, phoneme: string): string[] {
     if (seen.has(lc)) return;
     if (!isSimpleWord(label)) return;
     if (label.length > MAX_LEN) return;
-    if (!isPoolSyllable(label, letterLower)) return;
+    if (!isPoolSyllable(label)) return;
     if (!matchesLetterSound(letterLower, phoneme, label)) return;
     seen.add(lc);
     out.push(label);
@@ -209,7 +199,7 @@ console.log(`\nÉcrit : ${outPath}`);
 const pronouncePools: Record<string, { phoneme: string; syllable: string; word: string }[]> = {};
 for (const { letter } of letters) {
   pronouncePools[letter] = pools[letter]!
-    .filter((word) => word.length <= PRONOUNCE_MAX_LEN && isBisyllabic(word))
+    .filter((word) => word.length <= PRONOUNCE_MAX_LEN && isPedagogicBisyllable(word))
     .map((word) => wordToPronStep(word, letter));
 }
 

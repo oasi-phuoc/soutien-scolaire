@@ -358,7 +358,7 @@ export const CONSONANTS: ConsonantData[] = [
     pronunciationChain: [
       { phoneme: "b", syllable: "ba-lle", word: "balle" },
       { phoneme: "b", syllable: "ro-be", word: "robe" },
-      { phoneme: "b", syllable: "ba-na-ne", word: "banane" },
+      { phoneme: "b", syllable: "bo-cal", word: "bocal" },
       { phoneme: "b", syllable: "tu-be", word: "tube" },
     ],
   },

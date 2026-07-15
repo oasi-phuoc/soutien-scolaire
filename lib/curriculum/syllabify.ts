@@ -39,6 +39,15 @@ function guessBisyllableSyllable(word: string): string {
   return `${word.slice(0, split)}-${word.slice(split)}`;
 }
 
+/** Nombre de syllabes affichées (segments séparés par « - »). */
+export function pedagogicSyllableCount(word: string): number {
+  return pedagogicSyllable(word).split("-").filter(Boolean).length;
+}
+
+export function isPedagogicBisyllable(word: string): boolean {
+  return pedagogicSyllableCount(word) === 2;
+}
+
 export function phonemeLabelForLetter(letterLower: string): string {
   const lesson =
     VOWELS.find((v) => v.letterLower === letterLower) ??

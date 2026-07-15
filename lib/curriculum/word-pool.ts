@@ -5,6 +5,7 @@ import graphemePoolsData from "./grapheme-word-pools-data.json";
 import lectureImageWordItemsData from "./lecture-image-word-items.json";
 import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
 import pronouncePoolsData from "./lecture-pronounce-pools.json";
+import { isPedagogicBisyllable } from "./syllabify";
 import type { PronStep } from "./lecture-data";
 
 type GraphemePoolsData = {
@@ -937,9 +938,11 @@ export function revisionBisyllablePool(letterLower: string): string[] {
   return REVISION_BISYLLABLE_POOLS[letterLower.toLowerCase()] ?? [];
 }
 
-/** Pool prononcer lettre : 50 mots bisyllabiques avec syllabation pédagogique. */
+/** Pool prononcer lettre : mots bisyllabiques (2 segments affichés) avec syllabation pédagogique. */
 export function letterPronouncePool(letterLower: string): PronStep[] {
-  return LETTER_PRONOUNCE_POOLS[letterLower.toLowerCase()] ?? [];
+  return (LETTER_PRONOUNCE_POOLS[letterLower.toLowerCase()] ?? []).filter(
+    (step) => step.syllable.split("-").filter(Boolean).length === 2,
+  );
 }
 
 /** 5 mots aléatoires pour l'étape prononcer (leçon lettre). */
@@ -1077,11 +1080,11 @@ export function randomLectureRevisionSoundWords(
     .map(({ label, answer }) => ({ word: label, answer }));
 }
 
-/** Mots de prononciation révision : pool de la leçon, 2 syllabes uniquement. */
+/** Mots de prononciation révision : pool de la leçon, 2 syllabes affichées uniquement. */
 export function lectureRevisionBisyllableWords(
   readWords: { letter: string; word: string }[],
 ): { letter: string; word: string }[] {
-  return readWords.filter((entry) => countSyllables(entry.word) === 2);
+  return readWords.filter((entry) => isPedagogicBisyllable(entry.word));
 }
 
 export function lectureRevisionExclusiveSoundWords(
