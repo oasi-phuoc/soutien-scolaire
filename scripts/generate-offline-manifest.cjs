@@ -14,6 +14,7 @@ const root = process.cwd();
 const publicDir = path.join(root, "public");
 
 const IMAGE_RE = /\.(webp|png|svg|jpe?g)$/i;
+const AUDIO_RE = /\.(mp3|wav|ogg|m4a|aac)$/i;
 const SOURCE_DIRS = ["lib", "components", "app"];
 const STATIC_IMAGE_DIRS = [
   "assets/icons",
@@ -21,6 +22,14 @@ const STATIC_IMAGE_DIRS = [
   "assets/letters/img",
   "assets/expression/images-temp",
   "expression/co/situations",
+];
+/** MP3 pré-générés pour playWord / playSyllable (lecture hors ligne). */
+const STATIC_AUDIO_DIRS = [
+  "assets/words/son_f/mots",
+  "assets/words/son_f/syllable",
+  "assets/words/son_m/mots",
+  "assets/words/son_m/syllable",
+  "assets/letters/son",
 ];
 
 const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);
@@ -53,7 +62,7 @@ function walkSourceFiles(dir, out = []) {
   return out;
 }
 
-function walkPublicImages(relDir, urlPrefix) {
+function walkPublicFiles(relDir, urlPrefix, fileRe) {
   const abs = path.join(publicDir, relDir);
   if (!fs.existsSync(abs)) return [];
   const out = [];
@@ -62,11 +71,19 @@ function walkPublicImages(relDir, urlPrefix) {
       const childAbs = path.join(currentAbs, entry.name);
       const childUrl = `${currentPrefix}/${entry.name}`;
       if (entry.isDirectory()) walk(childAbs, childUrl);
-      else if (IMAGE_RE.test(entry.name)) out.push(childUrl);
+      else if (fileRe.test(entry.name)) out.push(childUrl);
     }
   }
   walk(abs, urlPrefix);
   return out;
+}
+
+function walkPublicImages(relDir, urlPrefix) {
+  return walkPublicFiles(relDir, urlPrefix, IMAGE_RE);
+}
+
+function walkPublicAudio(relDir, urlPrefix) {
+  return walkPublicFiles(relDir, urlPrefix, AUDIO_RE);
 }
 
 /** Toutes les URLs d'images dans word-image-index.ts (lecture, vocab, CE/CO). */
@@ -97,6 +114,7 @@ function collectReferencedAssets() {
     ...imageUrlsFromWordIndex(),
     ...imageUrlsFromSourceScan(),
     ...STATIC_IMAGE_DIRS.flatMap((dir) => walkPublicImages(dir, `/${dir}`)),
+    ...STATIC_AUDIO_DIRS.flatMap((dir) => walkPublicAudio(dir, `/${dir}`)),
     "/offline.html",
   ]);
 
@@ -227,4 +245,8 @@ fs.writeFileSync(
 );
 
 const mb = (totalBytes / 1024 / 1024).toFixed(1);
-console.log(`Generated offline manifest: ${routes.length} routes, ${assets.length} image assets (${mb} Mo).`);
+const audioCount = assets.filter((u) => AUDIO_RE.test(u)).length;
+const imageCount = assets.length - audioCount;
+console.log(
+  `Generated offline manifest: ${routes.length} routes, ${imageCount} images + ${audioCount} audio (${mb} Mo).`,
+);
