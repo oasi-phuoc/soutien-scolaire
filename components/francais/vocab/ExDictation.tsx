@@ -55,7 +55,7 @@ export function ExDictation({
               <div className="flex justify-end">
                 <button
                   type="button"
-                  onClick={() => playWord(w)}
+                  onClick={() => playWord(w, theme)}
                   className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10 active:scale-90"
                   aria-label="Écouter"
                 >

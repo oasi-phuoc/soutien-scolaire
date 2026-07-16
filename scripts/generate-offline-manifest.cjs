@@ -23,12 +23,14 @@ const STATIC_IMAGE_DIRS = [
   "assets/expression/images-temp",
   "expression/co/situations",
 ];
-/** MP3 pré-générés pour playWord / playSyllable (lecture hors ligne). */
+/** MP3 pré-générés pour playWord / playSyllable / vocab (lecture hors ligne). */
 const STATIC_AUDIO_DIRS = [
   "assets/words/son_f/mots",
   "assets/words/son_f/syllable",
+  "assets/words/son_f/vocab",
   "assets/words/son_m/mots",
   "assets/words/son_m/syllable",
+  "assets/words/son_m/vocab",
   "assets/letters/son",
 ];
 

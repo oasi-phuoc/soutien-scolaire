@@ -244,7 +244,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
         )}
         <button
           type="button"
-          onClick={() => playWord(w)}
+          onClick={() => playWord(w, { section: imageFolder })}
           className="absolute top-1.5 right-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-white/80 text-[var(--color-accent-fr)] shadow-sm backdrop-blur-sm transition-colors hover:bg-white active:scale-90"
           aria-label={`Écouter ${w.word}`}
         >

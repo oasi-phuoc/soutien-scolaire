@@ -1,6 +1,13 @@
 "use client";
 import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { speak } from "@/lib/utils/speech";
+import {
+  vocabAudioFolder,
+  vocabAudioPath,
+  vocabAudioSlug,
+  vocabSpokenText,
+} from "@/lib/curriculum/vocab-audio";
+import { selectedVoice } from "@/lib/utils/audio";
+import { primeSpeechVoices, speak } from "@/lib/utils/speech";
 
 export function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -15,18 +22,69 @@ export function pickN<T>(arr: T[], n: number): T[] {
   return shuffle(arr).slice(0, Math.min(n, arr.length));
 }
 
-export function playWord(word: VocabWord | string) {
-  const text = typeof word === "string" ? word : word.word;
-  const audioPath = typeof word === "object" ? word.audio : undefined;
-  if (audioPath) {
-    new Audio(audioPath).play().catch(() => speakFr(text));
-  } else {
-    speakFr(text);
-  }
+const PLAY_TIMEOUT_MS = 8000;
+
+async function tryPlayUrl(url: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const audio = new Audio(url);
+    let settled = false;
+    const finish = (ok: boolean) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      resolve(ok);
+    };
+    const timer = window.setTimeout(() => finish(false), PLAY_TIMEOUT_MS);
+    audio.addEventListener("error", () => finish(false), { once: true });
+    audio.addEventListener("playing", () => finish(true), { once: true });
+    void audio.play().catch(() => finish(false));
+  });
 }
 
-function speakFr(text: string) {
-  speak(text);
+/**
+ * Joue l'audio préenregistré du mot (voix choisie → autre voix → TTS).
+ * Les formes liées (pays, féminin…) sont dans le même MP3.
+ */
+export function playWord(
+  word: VocabWord | string,
+  theme?: { section: string; imageFolder?: string },
+) {
+  primeSpeechVoices();
+
+  if (typeof word === "string") {
+    speak(word);
+    return;
+  }
+
+  const spoken = vocabSpokenText(word);
+  const explicit = word.audio;
+  if (explicit) {
+    void tryPlayUrl(explicit).then((ok) => {
+      if (!ok) speak(spoken);
+    });
+    return;
+  }
+
+  if (!theme) {
+    speak(spoken);
+    return;
+  }
+
+  const folder = vocabAudioFolder(theme);
+  const slug = vocabAudioSlug(word);
+  const preferred = selectedVoice();
+  const other = preferred === "m" ? "f" : "m";
+  const candidates = [
+    vocabAudioPath(preferred, folder, slug),
+    vocabAudioPath(other, folder, slug),
+  ];
+
+  void (async () => {
+    for (const url of candidates) {
+      if (await tryPlayUrl(url)) return;
+    }
+    speak(spoken);
+  })();
 }
 
 export function normalizeText(s: string): string {

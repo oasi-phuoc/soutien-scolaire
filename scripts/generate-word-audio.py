@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-Génère les MP3 manquants pour playWord() / playSyllable() via Piper TTS.
+Génère les MP3 lecture / vocabulaire via Piper TTS.
 
-Entrée  : /tmp/lecture-audio-labels.json  (produit par generate-word-audio-list.ts)
-Sortie  : public/assets/words/son_f/{mots,syllable}/{slug}.mp3
+Voix :
+  f → /tmp/piper-voices/fr_FR-siwis-medium.onnx  → public/.../son_f/
+  m → /tmp/piper-voices/fr_FR-tom-medium.onnx    → public/.../son_m/
 
-Ne régénère pas les fichiers déjà présents. Utilise la voix française
-« siwis medium » (Rhasspy / Piper). Une seule voix féminine : playWord
-retombe déjà sur son_f si son_m est absent.
+Sources :
+  /tmp/lecture-audio-labels.json  (mots + syllables)
+  /tmp/vocab-audio-labels.json    (entries folder/slug/text)
 
 Usage :
-  npx --yes tsx scripts/generate-word-audio-list.ts
-  python3 scripts/generate-word-audio.py
-  python3 scripts/generate-word-audio.py --force   # régénère tout
+  python3 scripts/generate-word-audio.py --voice m
+  python3 scripts/generate-word-audio.py --voice f --vocab-only
+  python3 scripts/generate-word-audio.py --voice m --lecture-only
 """
 from __future__ import annotations
 
@@ -25,14 +26,14 @@ import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PUBLIC = ROOT / "public" / "assets" / "words" / "son_f"
-LABELS = Path("/tmp/lecture-audio-labels.json")
-VOICE = Path("/tmp/piper-voices/fr_FR-siwis-medium.onnx")
+PUBLIC_WORDS = ROOT / "public" / "assets" / "words"
+LECTURE_LABELS = Path("/tmp/lecture-audio-labels.json")
+VOCAB_LABELS = Path("/tmp/vocab-audio-labels.json")
+VOICES = {
+    "f": Path("/tmp/piper-voices/fr_FR-siwis-medium.onnx"),
+    "m": Path("/tmp/piper-voices/fr_FR-tom-medium.onnx"),
+}
 BITRATE = "96k"
-
-
-def slug(text: str) -> str:
-    return text.lower()
 
 
 def synthesize(voice, text: str, wav_path: Path) -> None:
@@ -53,20 +54,21 @@ def wav_to_mp3(wav_path: Path, mp3_path: Path) -> None:
     )
 
 
-def generate_batch(voice, items: list[str], kind: str, force: bool) -> tuple[int, int]:
-    out_dir = PUBLIC / kind
-    out_dir.mkdir(parents=True, exist_ok=True)
+def generate_pairs(
+    voice,
+    pairs: list[tuple[str, Path]],
+    label: str,
+    force: bool,
+) -> tuple[int, int]:
+    """pairs = [(texte_à_dire, chemin_mp3), ...]"""
     created = 0
     skipped = 0
-    total = len(items)
-
+    total = len(pairs)
     with tempfile.TemporaryDirectory(prefix="piper-") as tmp:
         tmp_dir = Path(tmp)
-        for i, text in enumerate(items, 1):
-            s = slug(text)
-            if not s:
+        for i, (text, dest) in enumerate(pairs, 1):
+            if not text.strip():
                 continue
-            dest = out_dir / f"{s}.mp3"
             if dest.exists() and not force:
                 skipped += 1
                 continue
@@ -76,54 +78,87 @@ def generate_batch(voice, items: list[str], kind: str, force: bool) -> tuple[int
                 wav_to_mp3(wav, dest)
                 created += 1
             except Exception as exc:  # noqa: BLE001
-                print(f"  ! échec « {text} » ({kind}): {exc}", file=sys.stderr)
+                print(f"  ! échec « {text} » → {dest.name}: {exc}", file=sys.stderr)
             if i % 100 == 0 or i == total:
-                print(f"  [{kind}] {i}/{total} — créés {created}, déjà présents {skipped}", flush=True)
+                print(
+                    f"  [{label}] {i}/{total} — créés {created}, déjà présents {skipped}",
+                    flush=True,
+                )
             wav.unlink(missing_ok=True)
-
     return created, skipped
+
+
+def lecture_pairs(gender: str) -> list[tuple[str, Path]]:
+    data = json.loads(LECTURE_LABELS.read_text(encoding="utf-8"))
+    base = PUBLIC_WORDS / f"son_{gender}"
+    pairs: list[tuple[str, Path]] = []
+    for word in data["mots"]:
+        s = word.lower().strip()
+        if s:
+            pairs.append((word, base / "mots" / f"{s}.mp3"))
+    for syl in data["syllables"]:
+        s = syl.lower().strip()
+        if s:
+            pairs.append((syl, base / "syllable" / f"{s}.mp3"))
+    return pairs
+
+
+def vocab_pairs(gender: str) -> list[tuple[str, Path]]:
+    data = json.loads(VOCAB_LABELS.read_text(encoding="utf-8"))
+    base = PUBLIC_WORDS / f"son_{gender}" / "vocab"
+    pairs: list[tuple[str, Path]] = []
+    for entry in data["entries"]:
+        folder = entry["folder"]
+        slug = entry["slug"]
+        text = entry["text"]
+        pairs.append((text, base / folder / f"{slug}.mp3"))
+    return pairs
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--force", action="store_true", help="Régénère même si le MP3 existe")
-    parser.add_argument("--mots-only", action="store_true")
-    parser.add_argument("--syllables-only", action="store_true")
+    parser.add_argument("--voice", choices=("f", "m"), required=True)
+    parser.add_argument("--force", action="store_true")
+    parser.add_argument("--lecture-only", action="store_true")
+    parser.add_argument("--vocab-only", action="store_true")
     args = parser.parse_args()
 
-    if not LABELS.exists():
-        print(f"Manquant : {LABELS} — lancer d'abord generate-word-audio-list.ts", file=sys.stderr)
-        return 1
-    if not VOICE.exists():
-        print(f"Manquant : {VOICE}", file=sys.stderr)
+    model = VOICES[args.voice]
+    if not model.exists():
+        print(f"Manquant : {model}", file=sys.stderr)
         return 1
 
-    data = json.loads(LABELS.read_text(encoding="utf-8"))
-    mots: list[str] = data["mots"]
-    syllables: list[str] = data["syllables"]
+    do_lecture = not args.vocab_only
+    do_vocab = not args.lecture_only
 
-    print(f"Chargement Piper ({VOICE.name})…", flush=True)
+    if do_lecture and not LECTURE_LABELS.exists():
+        print(f"Manquant : {LECTURE_LABELS}", file=sys.stderr)
+        return 1
+    if do_vocab and not VOCAB_LABELS.exists():
+        print(f"Manquant : {VOCAB_LABELS}", file=sys.stderr)
+        return 1
+
+    print(f"Chargement Piper {args.voice} ({model.name})…", flush=True)
     from piper import PiperVoice
 
-    voice = PiperVoice.load(str(VOICE))
-    print(f"Prêt — {len(mots)} mots, {len(syllables)} syllabes", flush=True)
+    voice = PiperVoice.load(str(model))
+    total_c = total_s = 0
 
-    total_created = 0
-    total_skipped = 0
+    if do_lecture:
+        pairs = lecture_pairs(args.voice)
+        print(f"=== lecture son_{args.voice} ({len(pairs)} clips) ===", flush=True)
+        c, s = generate_pairs(voice, pairs, f"lecture-{args.voice}", args.force)
+        total_c += c
+        total_s += s
 
-    if not args.syllables_only:
-        print("=== mots ===", flush=True)
-        c, s = generate_batch(voice, mots, "mots", args.force)
-        total_created += c
-        total_skipped += s
+    if do_vocab:
+        pairs = vocab_pairs(args.voice)
+        print(f"=== vocab son_{args.voice} ({len(pairs)} clips) ===", flush=True)
+        c, s = generate_pairs(voice, pairs, f"vocab-{args.voice}", args.force)
+        total_c += c
+        total_s += s
 
-    if not args.mots_only:
-        print("=== syllables ===", flush=True)
-        c, s = generate_batch(voice, syllables, "syllable", args.force)
-        total_created += c
-        total_skipped += s
-
-    print(f"Terminé : {total_created} créés, {total_skipped} déjà présents.")
+    print(f"Terminé (voix {args.voice}) : {total_c} créés, {total_s} déjà présents.")
     return 0
 
 
