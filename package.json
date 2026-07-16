@@ -18,6 +18,8 @@
     "mobile:ios:init": "cap add ios"
   },
   "dependencies": {
+    "@capacitor-community/text-to-speech": "^8.0.2",
+    "@capacitor/core": "^8.4.1",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
     "lucide-react": "^0.511.0",
@@ -28,7 +30,6 @@
   "devDependencies": {
     "@capacitor/android": "^8.4.1",
     "@capacitor/cli": "^8.4.1",
-    "@capacitor/core": "^8.4.1",
     "@capacitor/ios": "^8.4.1",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",

@@ -28,7 +28,7 @@ import {
   studentLineIndices,
 } from "@/lib/curriculum/content/communication/po-dialogues";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
-import { speak } from "@/lib/utils/speech";
+import { cancelSpeech, speak } from "@/lib/utils/speech";
 import { HintLightbulbButton, TtsPlayButton } from "@/components/communication/TtsSequencePlayer";
 import {
   CommunicationFinishButton,
@@ -1175,7 +1175,7 @@ export function OralProductionRunner({
               className="fixed inset-0 z-50 flex items-center justify-center p-4"
               style={{ background: "rgba(0,0,0,0.5)" }}
               onClick={() => {
-                window.speechSynthesis?.cancel();
+                cancelSpeech();
                 if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
                 setPlayingGuideIdx(null);
                 setOpenTranscriptIdx(null);
@@ -1190,7 +1190,7 @@ export function OralProductionRunner({
                 <button
                   type="button"
                   onClick={() => {
-                    window.speechSynthesis?.cancel();
+                    cancelSpeech();
                     if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
                     setPlayingGuideIdx(null);
                     setOpenTranscriptIdx(null);
@@ -1231,7 +1231,7 @@ export function OralProductionRunner({
                             <button
                               type="button"
                               onClick={() => {
-                                window.speechSynthesis?.cancel();
+                                cancelSpeech();
                                 if (guideIntervalRef.current) clearInterval(guideIntervalRef.current);
                                 if (isPlaying) {
                                   setPlayingGuideIdx(null);

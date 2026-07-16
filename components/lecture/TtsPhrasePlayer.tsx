@@ -2,45 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
+import { cancelSpeech, estimateSpeechDurationMs, speakPhraseAsync } from "@/lib/utils/speech";
 
 const LECTURE_ACCENT = "var(--color-accent-lecture)";
-
-function estimateDurationMs(text: string, rate: number) {
-  return Math.max(1200, (text.length / (11 * rate)) * 1000);
-}
-
-function speakAsync(
-  text: string,
-  rate: number,
-  signal: { cancelled: boolean },
-  onProgress: (percent: number) => void,
-) {
-  return new Promise<void>((resolve) => {
-    if (signal.cancelled || typeof window === "undefined") {
-      resolve();
-      return;
-    }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "fr-CH";
-    utterance.rate = rate;
-    const estMs = estimateDurationMs(text, rate);
-    const start = Date.now();
-    const timer = window.setInterval(() => {
-      onProgress(Math.min(99, ((Date.now() - start) / estMs) * 100));
-    }, 80);
-    utterance.onend = () => {
-      window.clearInterval(timer);
-      onProgress(100);
-      resolve();
-    };
-    utterance.onerror = () => {
-      window.clearInterval(timer);
-      resolve();
-    };
-    window.speechSynthesis.speak(utterance);
-  });
-}
 
 type TtsPhrasePlayerProps = {
   text: string;
@@ -56,12 +20,12 @@ export function TtsPhrasePlayer({ text, accentColor = LECTURE_ACCENT }: TtsPhras
   const [progress, setProgress] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
 
-  const durationSec = estimateDurationMs(text, playbackRate) / 1000;
+  const durationSec = estimateSpeechDurationMs(text, playbackRate) / 1000;
   const currentSec = (progress / 100) * durationSec;
 
   useEffect(() => {
     cancelRef.current.cancelled = true;
-    window.speechSynthesis?.cancel();
+    cancelSpeech();
     playingRef.current = false;
     setPlaying(false);
     setPaused(false);
@@ -69,13 +33,13 @@ export function TtsPhrasePlayer({ text, accentColor = LECTURE_ACCENT }: TtsPhras
     cancelRef.current = { cancelled: false };
     return () => {
       cancelRef.current.cancelled = true;
-      window.speechSynthesis?.cancel();
+      cancelSpeech();
     };
   }, [text]);
 
   function stop() {
     cancelRef.current.cancelled = true;
-    window.speechSynthesis?.cancel();
+    cancelSpeech();
     playingRef.current = false;
     setPlaying(false);
     setPaused(false);
@@ -88,7 +52,7 @@ export function TtsPhrasePlayer({ text, accentColor = LECTURE_ACCENT }: TtsPhras
     playingRef.current = true;
     setPaused(false);
     setPlaying(true);
-    await speakAsync(text, playbackRate, cancelRef.current, setProgress);
+    await speakPhraseAsync(text, playbackRate, cancelRef.current, setProgress);
     playingRef.current = false;
     setPlaying(false);
     if (!cancelRef.current.cancelled) setProgress(0);
@@ -97,7 +61,7 @@ export function TtsPhrasePlayer({ text, accentColor = LECTURE_ACCENT }: TtsPhras
   function toggle() {
     if (playing) {
       cancelRef.current.cancelled = true;
-      window.speechSynthesis?.cancel();
+      cancelSpeech();
       playingRef.current = false;
       setPlaying(false);
       setPaused(true);

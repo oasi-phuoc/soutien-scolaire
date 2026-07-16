@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { MediaPlayerBar } from "@/components/communication/MediaPlayerBar";
+import { cancelSpeech, speak, speakPhraseAsync } from "@/lib/utils/speech";
 
 export type TtsSequenceItem = {
   id: string;
@@ -33,40 +34,6 @@ function estimateDurationMs(text: string, rate: number) {
   return Math.max(1500, (text.length / (11 * rate)) * 1000);
 }
 
-function speakAsync(
-  text: string,
-  rate: number,
-  signal: { cancelled: boolean },
-  onProgress: (percent: number) => void,
-) {
-  return new Promise<void>((resolve) => {
-    if (signal.cancelled || typeof window === "undefined") {
-      resolve();
-      return;
-    }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "fr-CH";
-    utterance.rate = rate;
-    const estMs = estimateDurationMs(text, rate);
-    const start = Date.now();
-    const timer = window.setInterval(() => {
-      const p = Math.min(99, ((Date.now() - start) / estMs) * 100);
-      onProgress(p);
-    }, 80);
-    utterance.onend = () => {
-      window.clearInterval(timer);
-      onProgress(100);
-      resolve();
-    };
-    utterance.onerror = () => {
-      window.clearInterval(timer);
-      resolve();
-    };
-    window.speechSynthesis.speak(utterance);
-  });
-}
-
 export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--color-accent-comm)" }: TtsSequencePlayerProps) {
   const cancelRef = useRef({ cancelled: false });
   const playingRef = useRef(false);
@@ -81,7 +48,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
 
   useEffect(() => {
     cancelRef.current.cancelled = true;
-    window.speechSynthesis?.cancel();
+    cancelSpeech();
     playingRef.current = false;
     setPlaying(false);
     setPaused(false);
@@ -91,7 +58,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
     cancelRef.current = { cancelled: false };
     return () => {
       cancelRef.current.cancelled = true;
-      window.speechSynthesis?.cancel();
+      cancelSpeech();
     };
   }, [items]);
 
@@ -103,7 +70,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
 
   function stop() {
     cancelRef.current.cancelled = true;
-    window.speechSynthesis?.cancel();
+    cancelSpeech();
     playingRef.current = false;
     setPlaying(false);
     setPaused(false);
@@ -124,7 +91,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
       const item = items[i]!;
       setCurrentIndex(i);
       setWaiting(false);
-      await speakAsync(item.text, playbackRate, cancelRef.current, (itemProgress) => {
+      await speakPhraseAsync(item.text, playbackRate, cancelRef.current, (itemProgress) => {
         sequenceProgressRef.current = { itemIndex: i, itemProgress };
         setProgress(computeOverallProgress(i, itemProgress));
       });
@@ -152,7 +119,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
   function toggle() {
     if (playing || waiting) {
       cancelRef.current.cancelled = true;
-      window.speechSynthesis?.cancel();
+      cancelSpeech();
       playingRef.current = false;
       setPlaying(false);
       setWaiting(false);
@@ -176,7 +143,7 @@ export function TtsSequencePlayer({ items, gapMs = 3000, accentColor = "var(--co
     if (items.length === 0) return;
     const targetIndex = Math.min(items.length - 1, Math.floor((percent / 100) * items.length));
     cancelRef.current.cancelled = true;
-    window.speechSynthesis?.cancel();
+    cancelSpeech();
     playingRef.current = false;
     setPaused(false);
     setWaiting(false);
@@ -218,14 +185,7 @@ export function TtsPlayButton({ text, small }: { text: string; small?: boolean }
     <button
       type="button"
       aria-label="Écouter"
-      onClick={() => {
-        if (typeof window === "undefined") return;
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "fr-CH";
-        utterance.rate = 0.85;
-        window.speechSynthesis.speak(utterance);
-      }}
+      onClick={() => speak(text, "fr-CH", 0.85)}
       className={`flex shrink-0 items-center justify-center rounded-full shadow-sm active:opacity-80 ${small ? "h-8 w-8" : "h-10 w-10"} text-white`}
       style={{ background: ACCENT }}
     >

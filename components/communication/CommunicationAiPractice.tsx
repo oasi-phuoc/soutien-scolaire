@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
-import { speak } from "@/lib/utils/speech";
+import { cancelSpeech, speak } from "@/lib/utils/speech";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -116,7 +116,7 @@ export function CommunicationAiPractice() {
   useEffect(() => {
     return () => {
       recognitionRef.current?.abort();
-      window.speechSynthesis.cancel();
+      cancelSpeech();
     };
   }, []);
 
