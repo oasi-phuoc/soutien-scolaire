@@ -71,7 +71,9 @@ export function EvalAnnounceScreen({
             {exerciseCount != null ? (
               <>
                 L&apos;évaluation comporte{" "}
-                <strong className="text-[var(--color-text-primary)]">{exerciseCount} exercices notés</strong>{" "}
+                <strong className="text-[var(--color-text-primary)]">
+                  {exerciseCount} {exerciseCount > 1 ? "exercices notés" : "exercice noté"}
+                </strong>{" "}
                 et est chronométrée.{" "}
               </>
             ) : (

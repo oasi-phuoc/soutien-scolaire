@@ -491,6 +491,8 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   // lowercase); each pool is shuffled and `n` items are taken, then combined.
   sampleSpec?: { pool: string[]; n: number }[];
   isEval?: boolean;
+  /** Lesson title shown on the evaluation announcement screen. */
+  evalLessonTitle?: string;
   /** L6/L8 word-eval: validate button, results screen, auto-validate on timer. */
   evalWithResults?: boolean;
   title?: string;
@@ -505,7 +507,7 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   onValidated?: (correct: number, total: number) => void;
   onFinish?: () => void;
 }>(
-  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalWithResults, title, consigne, kind = "mots", desktopTwoColumn, desktopSampleSpec, onTimeChange, onEvalStateChange, onValidated, onFinish }, ref) {
+  function WordPronounceGrid({ words = EMPTY_WORDS, timerSeconds, sampleSize, sampleSpec, isEval, evalLessonTitle, evalWithResults, title, consigne, kind = "mots", desktopTwoColumn, desktopSampleSpec, onTimeChange, onEvalStateChange, onValidated, onFinish }, ref) {
   const isDesktop = useIsDesktopMd();
   const activeSpec = desktopTwoColumn && isDesktop && desktopSampleSpec ? desktopSampleSpec : sampleSpec;
   // Stable content keys so the sampling effect below runs once per step (and
@@ -615,6 +617,8 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
     return (
       <EvalAnnounceScreen
         accent="var(--color-accent-lecture)"
+        lessonTitle={evalLessonTitle}
+        exerciseCount={1}
         minutes={Math.round((timerSeconds ?? 0) / 60)}
         onStart={() => setStarted(true)}
       />
@@ -1036,6 +1040,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
             ]}
             timerSeconds={300}
             isEval
+            evalLessonTitle={data.title}
           />
         );
       }
@@ -1110,6 +1115,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
             timerSeconds={300}
             sampleSize={isMulti ? 25 : 30}
             isEval
+            evalLessonTitle={data.title}
             evalWithResults
             onTimeChange={setWordTimerLeft}
             onEvalStateChange={setWordEvalState}

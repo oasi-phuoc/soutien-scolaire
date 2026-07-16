@@ -1483,6 +1483,8 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
         {!evalStarted && !isResults && (
           <EvalAnnounceScreen
             accent="var(--color-accent-lecture)"
+            lessonTitle={data.type === "complex-sound" ? data.title : `la lettre ${letter}`}
+            exerciseCount={exerciseSteps.length}
             minutes={5}
             onStart={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
           />
