@@ -336,7 +336,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
             {sec.group && (
               <p className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{sec.group}</p>
             )}
-            <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-5">
               {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} imageFolder={theme.imageFolder ?? theme.section} />)}
             </div>
           </div>
