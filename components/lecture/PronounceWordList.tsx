@@ -21,6 +21,8 @@ interface Props {
   shouldValidate?: boolean;
   title?: string;
   consigne?: string;
+  /** Syllabes sur une ligne, flèche + mot entier en dessous (révision étape 8). */
+  twoLineText?: boolean;
 }
 
 function normalize(s: string): string {
@@ -33,9 +35,10 @@ function isMatch(recognized: string, target: string): boolean {
   return r === t || r.includes(t) || t.includes(r);
 }
 
-function rowClass(state: RecState): string {
-  const base =
-    "grid grid-cols-[auto_minmax(5.5rem,auto)_1.5rem_minmax(5.5rem,auto)_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors";
+function rowClass(state: RecState, twoLineText = false): string {
+  const base = twoLineText
+    ? "grid grid-cols-[auto_1fr_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors"
+    : "grid grid-cols-[auto_minmax(5.5rem,auto)_1.5rem_minmax(5.5rem,auto)_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors";
   if (state === "correct") return `${base} border-[var(--color-accent-lecture)]`;
   if (state === "wrong") return `${base} ${LECTURE_CORRECTION_BORDER}`;
   return `${base} border-[var(--color-border-default)]`;
@@ -43,7 +46,7 @@ function rowClass(state: RecState): string {
 
 export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
   function PronounceWordList(
-    { steps, onValidated, shouldValidate, title, consigne },
+    { steps, onValidated, shouldValidate, title, consigne, twoLineText = false },
     ref,
   ) {
     const lang = usePivotLang();
@@ -140,7 +143,7 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
           {steps.map((step, i) => {
             const state = recStates[i]!;
             return (
-              <div key={`${step.word}-${i}`} className={rowClass(state)}>
+              <div key={`${step.word}-${i}`} className={rowClass(state, twoLineText)}>
                 {srAvailable ? (
                   <button
                     type="button"
@@ -174,13 +177,29 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
                 ) : (
                   <span className="h-11 w-11 shrink-0" aria-hidden />
                 )}
-                <span className="text-left text-xl font-normal leading-none text-[var(--color-text-primary)]">
-                  {step.syllable}
-                </span>
-                <span className="text-center text-base leading-none text-[var(--color-text-secondary)]">→</span>
-                <span className="text-left text-xl font-bold leading-none text-[var(--color-text-primary)]">
-                  {step.word}
-                </span>
+                {twoLineText ? (
+                  <div className="flex min-w-0 flex-col gap-0.5 py-0.5">
+                    <span className="text-left text-xl font-normal leading-tight text-[var(--color-text-primary)]">
+                      {step.syllable}
+                    </span>
+                    <span className="flex items-center gap-2 text-left leading-tight">
+                      <span className="text-base text-[var(--color-text-secondary)]">→</span>
+                      <span className="text-xl font-bold text-[var(--color-text-primary)]">
+                        {step.word}
+                      </span>
+                    </span>
+                  </div>
+                ) : (
+                  <>
+                    <span className="text-left text-xl font-normal leading-none text-[var(--color-text-primary)]">
+                      {step.syllable}
+                    </span>
+                    <span className="text-center text-base leading-none text-[var(--color-text-secondary)]">→</span>
+                    <span className="text-left text-xl font-bold leading-none text-[var(--color-text-primary)]">
+                      {step.word}
+                    </span>
+                  </>
+                )}
                 <button
                   type="button"
                   onClick={() => playWord(step.word)}

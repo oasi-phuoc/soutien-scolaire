@@ -225,6 +225,7 @@ export function RevisionRunner({ data }: Props) {
             key={`${k}-${pronounceRefreshSeed}`}
             ref={pronounceRef}
             steps={pronounceLongSteps}
+            twoLineText
           />
         );
       case "eval":

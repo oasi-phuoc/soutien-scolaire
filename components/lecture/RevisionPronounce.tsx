@@ -13,10 +13,11 @@ interface Props {
   steps: PronStep[];
   onValidated?: (score: number, max: number) => void;
   shouldValidate?: boolean;
+  twoLineText?: boolean;
 }
 
 export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
-  function RevisionPronounce({ steps, onValidated, shouldValidate }, ref) {
+  function RevisionPronounce({ steps, onValidated, shouldValidate, twoLineText }, ref) {
     const listRef = useRef<PronounceWordListHandle>(null);
 
     const reset = useCallback(() => {
@@ -35,6 +36,7 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
         steps={steps}
         onValidated={onValidated}
         shouldValidate={shouldValidate}
+        twoLineText={twoLineText}
       />
     );
   },
