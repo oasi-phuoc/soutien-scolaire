@@ -7,6 +7,7 @@ const PUBLIC_PATHS = new Set([
   "/reinitialiser-mot-de-passe",
   "/verification-otp",
   "/api/download-app",
+  "/app.apk",
 ]);
 
 const ADMIN_PREFIX = "/admin";
@@ -14,7 +15,7 @@ const SUIVI_PREFIX = "/suivi";
 const TEACHER_PATHS = ["/messagerie"];
 
 function isPublicAsset(path: string): boolean {
-  return /\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|ico)$/i.test(path);
+  return /\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|ico|apk)$/i.test(path);
 }
 
 export async function middleware(request: NextRequest) {
@@ -104,6 +105,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav|ogg|m4a|aac|apk)$).*)",
   ],
 };
