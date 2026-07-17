@@ -1,4 +1,4 @@
-const CACHE_VERSION = "learnup-offline-v8";
+const CACHE_VERSION = "learnup-offline-v9";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const OFFLINE_META_URL = "/__learnup-offline-meta";

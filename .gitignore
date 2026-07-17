@@ -27,6 +27,7 @@ package-lock.json
 # fichiers locaux générés par Android Studio
 /android/.idea/
 /android/gradle/gradle-daemon-jvm.properties
+/.android-sdk/
 
 # misc
 .DS_Store

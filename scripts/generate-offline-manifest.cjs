@@ -21,9 +21,15 @@ const STATIC_IMAGE_DIRS = [
   "assets/math",
   "assets/letters/img",
   "assets/expression/images-temp",
+  "assets/expression/images",
+  "assets/expression/co",
+  "assets/expression/po",
+  "assets/words/vocab",
+  "assets/words/lecture",
+  "assets/words/lecture-2",
   "expression/co/situations",
 ];
-/** MP3 pré-générés pour playWord / playSyllable / vocab (lecture hors ligne). */
+/** Audio pré-générés (lecture, vocab, CO, nombres maths). */
 const STATIC_AUDIO_DIRS = [
   "assets/words/son_f/mots",
   "assets/words/son_f/syllable",
@@ -32,6 +38,8 @@ const STATIC_AUDIO_DIRS = [
   "assets/words/son_m/syllable",
   "assets/words/son_m/vocab",
   "assets/letters/son",
+  "assets/expression/co",
+  "audio/nombres",
 ];
 
 const ignored = new Set(["/offline-manifest.json", "/sw.js", "/app.apk"]);

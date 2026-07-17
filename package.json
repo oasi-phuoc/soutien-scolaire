@@ -13,10 +13,13 @@
     "generate:word-audio": "npx --yes tsx scripts/generate-word-audio-list.ts && npx --yes tsx scripts/generate-vocab-audio-list.ts && python3 scripts/generate-word-audio.py --voice f && python3 scripts/generate-word-audio.py --voice m",
     "test": "vitest run",
     "test:watch": "vitest",
-    "mobile:sync": "cap sync && node scripts/patch-ios-light-mode.mjs",
-    "mobile:android": "cap open android",
-    "mobile:ios": "cap open ios",
-    "mobile:ios:init": "cap add ios"
+    "mobile:sync": "npx cap sync && node scripts/patch-ios-light-mode.mjs",
+    "mobile:android": "npx cap open android",
+    "mobile:android:sync": "npx cap sync android && node scripts/patch-ios-light-mode.mjs",
+    "mobile:android:apk": "npx cap sync android && cd android && ./gradlew assembleDebug",
+    "mobile:android:apk:release": "npx cap sync android && cd android && ./gradlew assembleRelease",
+    "mobile:ios": "npx cap open ios",
+    "mobile:ios:init": "npx cap add ios"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "^8.0.2",
