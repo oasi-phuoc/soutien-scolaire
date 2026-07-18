@@ -172,7 +172,7 @@ export function AppSelect({
 
       {open && (
         <div
-          className={`absolute left-0 right-0 z-30 ${menuPosition} overflow-hidden ${menuRounded} bg-white shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30 ${menuClassName}`}
+          className={`absolute left-0 right-0 z-[60] ${menuPosition} overflow-hidden ${menuRounded} bg-white shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30 ${menuClassName}`}
         >
           <div className="app-select-scroll max-h-72 overflow-y-auto overscroll-contain py-2" role="listbox" aria-labelledby={selectId}>
             {emptyOption ? (
