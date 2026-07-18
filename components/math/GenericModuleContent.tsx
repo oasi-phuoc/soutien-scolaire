@@ -7583,8 +7583,10 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "symbolic_group") {
         currentResults = symbolicResults.slice(0, currentStep.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: symbolicAnswers } }));
-      } else if (currentStep.kind === "equation_group") {
-        const step = equationOverrideSteps[stepIdx] ?? currentStep;
+      } else if (currentStep.kind === "equation_group" || currentStep.kind === "frac_equation_group") {
+        const step = currentStep.kind === "equation_group"
+          ? (equationOverrideSteps[stepIdx] ?? currentStep)
+          : currentStep;
         currentResults = eqResults.slice(0, step.questions.length);
         setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: eqAnswers, work: eqWorkAnswers } }));
       } else if (currentStep.kind === "system_equation") {
@@ -8813,6 +8815,165 @@ export function GenericModuleContent({
             ))}
           </div>
         );
+      case "equation_group":
+      case "frac_equation_group": {
+        if (!snapshot) return null;
+        const absIdx = evalStartIdx + 1 + stepOffset;
+        const reviewStep = (
+          step.kind === "equation_group"
+            ? (equationOverrideSteps[absIdx] ?? step)
+            : step
+        ) as EquationGroupStep | FracEquationGroupStep;
+        const formatSol = (sol: EquationSolution) =>
+          sol.kind === "impossible" ? "impossible"
+            : sol.kind === "infinite" ? "infini"
+              : sol.den === 1 ? `${sol.num}` : `${sol.num}/${sol.den}`;
+        const answers: string[] = snapshot.answers ?? [];
+        const work: string[] = snapshot.work ?? [];
+        return (
+          <div className="space-y-4 text-xs">
+            {reviewStep.kind === "equation_group"
+              ? reviewStep.questions.map((q, index) => {
+                  const user = answers[index] ?? "";
+                  const expected = formatSol(q.solution);
+                  const wrong = results[index] === false;
+                  return (
+                    <div key={index} className="space-y-2">
+                      <p>
+                        <span className="font-bold text-[var(--color-accent-alg)]">{index + 1}. </span>
+                        <span className="font-mono text-[var(--color-text-primary)]">{renderText(q.expr)}</span>
+                      </p>
+                      <p>
+                        <span className="text-[var(--color-text-secondary)]">x = </span>
+                        <span className={wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}>
+                          {user || "—"}
+                        </span>
+                        {wrong && (
+                          <>
+                            <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+                            <span className="font-bold text-amber-600">{expected}</span>
+                          </>
+                        )}
+                        {!wrong && results[index] === true && (
+                          <span className="ml-2 text-[var(--color-accent-alg)]">✓</span>
+                        )}
+                      </p>
+                      {q.development && q.development.length > 0 && (
+                        <div className="rounded-[var(--radius-md)] border border-amber-200/60 bg-amber-50/40 px-3 py-2">
+                          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-amber-600">Correction</p>
+                          <EquationCorrectionLines lines={q.development} operations={q.operations} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              : (reviewStep as FracEquationGroupStep).questions.map((q, index) => {
+                  const user = answers[index] ?? "";
+                  const expected = formatSol(q.solution);
+                  const wrong = results[index] === false;
+                  return (
+                    <div key={index} className="space-y-1">
+                      <p>
+                        <span className="font-bold text-[var(--color-accent-alg)]">{index + 1}. </span>
+                        <span className="text-[var(--color-text-secondary)]">x = </span>
+                        <span className={wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}>
+                          {user || "—"}
+                        </span>
+                        <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+                        <span className="font-bold text-[var(--color-accent-alg)]">{expected}</span>
+                      </p>
+                    </div>
+                  );
+                })}
+            {work.some((line) => line.trim()) && (
+              <div className="space-y-1 border-t border-[var(--color-border-default)] pt-2">
+                <p className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">Ton développement</p>
+                {work.map((line, i) =>
+                  line.trim() ? (
+                    <p key={i} className="font-mono text-[var(--color-text-primary)]">{line}</p>
+                  ) : null,
+                )}
+              </div>
+            )}
+          </div>
+        );
+      }
+      case "system_equation": {
+        if (!snapshot) return null;
+        const absIdx = evalStartIdx + 1 + stepOffset;
+        const reviewStep = (systemOverrideSteps[absIdx] ?? step) as SystemEquationStep;
+        const q = reviewStep.question;
+        const answers: string[] = snapshot.answers ?? [];
+        const work: string[] = snapshot.work ?? [];
+        const userX = answers[0] ?? "";
+        const userY = answers[1] ?? "";
+        const isPairSol = (q.acceptable[0] ?? "").includes(";");
+        const corrX = isPairSol ? ((q.acceptable[0] ?? "").split(";")[0] ?? "") : q.answer;
+        const corrY = isPairSol ? ((q.acceptable[0] ?? "").split(";")[1] ?? "") : "";
+        const wrong = results[0] === false;
+        const xLow = userX.trim().toLowerCase().replace(/\s+/g, "");
+        const isSpecial = ["ir", "ℝ", "infini", "impossible", "∅", "vide"].some(
+          (k) => xLow === k || xLow.includes(k),
+        );
+        return (
+          <div className="space-y-3 text-xs">
+            <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] items-center gap-x-3 font-mono text-sm text-[var(--color-text-primary)]">
+              <span className="text-sm font-serif">I</span>
+              <span className="row-span-2 text-5xl leading-none text-[var(--color-text-secondary)]">{"{"}</span>
+              <span>{renderText(q.equations[0])}</span>
+              <span className="text-sm font-serif">II</span>
+              <span>{renderText(q.equations[1])}</span>
+            </div>
+            <div className="space-y-1">
+              <p>
+                <span className="text-[var(--color-text-secondary)]">x = </span>
+                <span className={wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}>
+                  {userX || "—"}
+                </span>
+                {wrong && (
+                  <>
+                    <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+                    <span className="font-bold text-amber-600">{renderText(corrX)}</span>
+                  </>
+                )}
+                {!wrong && results[0] === true && (
+                  <span className="ml-2 text-[var(--color-accent-alg)]">✓</span>
+                )}
+              </p>
+              {isPairSol && !isSpecial && (
+                <p>
+                  <span className="text-[var(--color-text-secondary)]">y = </span>
+                  <span className={wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}>
+                    {userY || "—"}
+                  </span>
+                  {wrong && (
+                    <>
+                      <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+                      <span className="font-bold text-amber-600">{renderText(corrY)}</span>
+                    </>
+                  )}
+                </p>
+              )}
+            </div>
+            {work.some((line) => line.trim()) && (
+              <div className="space-y-1 border-t border-[var(--color-border-default)] pt-2">
+                <p className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">Ton développement</p>
+                {work.map((line, i) =>
+                  line.trim() ? (
+                    <p key={i} className="font-mono text-[var(--color-text-primary)]">{i + 1}. {line}</p>
+                  ) : null,
+                )}
+              </div>
+            )}
+            {q.development.length > 0 && (
+              <div className="rounded-[var(--radius-md)] border border-amber-200/60 bg-amber-50/40 px-3 py-2">
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-amber-600">Correction</p>
+                <EquationCorrectionLines lines={q.development} operations={q.operations} />
+              </div>
+            )}
+          </div>
+        );
+      }
       case "arithmetic_group":
         if (!snapshot) return null;
         return (
