@@ -57,7 +57,7 @@ function buildWordList(theme: VocabTheme): VocabWord[] {
 
   // Deduplicate by word, shuffle, limit
   const deduped = [...new Map(result.map((w) => [w.word, w])).values()];
-  return shuffle(deduped).slice(0, 10);
+  return shuffle(deduped).slice(0, 5);
 }
 
 export function ExArticle({
@@ -115,7 +115,7 @@ export function ExArticle({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez l&apos;article défini (le, la, l&apos;, les).
       </p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+      <div className="flex flex-col gap-5">
         {words.map((w, i) => {
           const s = states[w.word]!;
           return (

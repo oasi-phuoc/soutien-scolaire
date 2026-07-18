@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
-import { AppSelect } from "@/components/ui/AppSelect";
+import { ExerciseProps, shuffle, normalizeText } from "./vocabUtils";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const VOWELS = "aeiouàâäèéêëîïôùûüœæ";
-const ALPHABET = "abcdefghijklmnopqrstuvwxyzàâäéèêëîïôùûüçœ".split("");
+
+const BLANK_INPUT_CLS =
+  "h-8 w-7 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]";
 
 function makePatternChars(word: string): string[] {
   let blanked = 0;
@@ -83,9 +84,9 @@ export function ExMissingLetters({
     <div>
       <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Choisissez les lettres manquantes pour compléter le mot.
+        Écrivez les lettres manquantes pour compléter le mot.
       </p>
-      <div className="space-y-3">
+      <div className="space-y-6">
         {words.map((w, i) => {
           const s = states[w.word]!;
           const pattern = patterns[w.word]!;
@@ -95,32 +96,34 @@ export function ExMissingLetters({
               <div className="flex flex-wrap items-center gap-1">
                 {pattern.map((char, pos) =>
                   char === "_" ? (
-                    // Blank position: select or correction box
                     s.checked && s.blankOk[pos] === false && revealCorrection ? (
-                      <div key={pos} className={`h-8 w-7 ${WRONG_BOX_CLS}`}>
-                        <span className="text-[9px] leading-none text-amber-600 line-through">{s.blanks[pos] || "—"}</span>
-                        <span className="mt-0.5 text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{w.word[pos]}</span>
+                      <div
+                        key={pos}
+                        className="h-8 w-7 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 text-center"
+                      >
+                        <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.blanks[pos] || "—"}</span>
+                        <span className="text-xs font-bold leading-none text-amber-600">{w.word[pos]}</span>
                       </div>
                     ) : (
-                      <AppSelect
+                      <input
                         key={pos}
+                        type="text"
+                        inputMode="text"
+                        maxLength={1}
                         value={s.blanks[pos] ?? ""}
-                        onChange={(v) => setBlank(w.word, pos, v)}
-                        options={ALPHABET.map((l) => ({ value: l, label: l }))}
-                        placeholder="?"
-                        emptyOption={{ value: "", label: "?" }}
                         disabled={s.checked}
-                        size="sm"
-                        className="w-11"
-                        menuClassName="!left-0 !right-auto w-28"
+                        onChange={(e) => {
+                          const v = e.target.value.slice(-1);
+                          setBlank(w.word, pos, v);
+                        }}
+                        className={BLANK_INPUT_CLS}
                         aria-label={`Lettre manquante position ${pos + 1}`}
                       />
                     )
                   ) : (
-                    // Known letter tile
                     <span
                       key={pos}
-                      className="flex h-8 w-7 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
+                      className="flex h-8 w-7 items-center justify-center text-sm font-medium text-[var(--color-text-primary)]"
                     >
                       {char}
                     </span>
