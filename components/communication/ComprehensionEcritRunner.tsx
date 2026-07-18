@@ -730,7 +730,7 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         ? { title: articleMoyen.title, sections: articleMoyen.sections }
         : {
             title: articleLegacy!.title,
-            sections: (level === "base"
+            sections: level === "base"
               ? articleLegacy!.sections.map((section) => ({
                   ...section,
                   image: undefined,
