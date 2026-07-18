@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { savePlacementToCloudAction } from "@/app/actions/placement";
+import { FrenchSkillCardsProgress, FrenchSkillCardsSelect, type FrenchSkill } from "@/components/placement/FrenchSkillCards";
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { PlacementEvolutionChart } from "@/components/placement/PlacementEvolutionChart";
@@ -33,76 +34,8 @@ const LEVEL_TOGGLE: { id: PlacementLevel; label: string }[] = [
   { id: "avance", label: "B1" },
 ];
 
-const STEP_ORDER = ["ce", "co", "pe", "po"] as const;
-type FrenchSkill = (typeof STEP_ORDER)[number];
-
-const SKILL_HEADERS: Record<FrenchSkill, string> = {
-  ce: "CE",
-  co: "CO",
-  pe: "PE",
-  po: "PO",
-};
-
 function formatHalf(value: number) {
   return Number.isInteger(value) ? String(value) : value.toFixed(1);
-}
-
-function stepIndex(step: PlacementFrenchDraft["step"]) {
-  if (step === "recap") return STEP_ORDER.length;
-  return STEP_ORDER.indexOf(step as FrenchSkill);
-}
-
-function skillPillState(draft: PlacementFrenchDraft, skill: FrenchSkill): "pending" | "active" | "done" {
-  const current = stepIndex(draft.step);
-  const idx = STEP_ORDER.indexOf(skill);
-
-  if (current > idx) return "done";
-  if (skill === "pe" && draft.peSent) return "done";
-  if (skill === "po" && draft.poSent) return "done";
-  if (draft.step === skill) return "active";
-  return "pending";
-}
-
-function FrenchSkillPills({ draft }: { draft: PlacementFrenchDraft }) {
-  return (
-    <div className="flex items-center justify-center gap-3">
-      {STEP_ORDER.map((skill) => {
-        const state = skillPillState(draft, skill);
-        const pillStyle =
-          state === "pending"
-            ? {
-                background: "var(--color-skill-pill-pending-bg)",
-                color: "var(--color-skill-pill-pending-text)",
-              }
-            : state === "active"
-              ? { background: "var(--color-skill-pill-active)", color: "#fff" }
-              : { background: "var(--color-skill-pill-done)", color: "#fff" };
-
-        const pill = (
-          <span
-            className="flex h-10 w-10 items-center justify-center rounded-full text-[11px] font-bold"
-            style={pillStyle}
-          >
-            {SKILL_HEADERS[skill]}
-          </span>
-        );
-
-        if (state === "active") {
-          return (
-            <div
-              key={skill}
-              className="rounded-full p-0.5"
-              style={{ boxShadow: "0 0 0 2px var(--color-skill-pill-active)" }}
-            >
-              {pill}
-            </div>
-          );
-        }
-
-        return <div key={skill}>{pill}</div>;
-      })}
-    </div>
-  );
 }
 
 function FrenchProgressBlock({
@@ -138,7 +71,7 @@ function FrenchProgressBlock({
           </button>
         </div>
         <div className="mt-3">
-          <FrenchSkillPills draft={draft} />
+          <FrenchSkillCardsProgress draft={draft} />
         </div>
       </div>
 
@@ -326,41 +259,6 @@ function IndividualModeIcon() {
       <rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor" stroke="none" />
       <rect x="14" y="14" width="7" height="7" rx="1.5" opacity="0.35" />
     </svg>
-  );
-}
-
-function FrenchSkillToggle({
-  selected,
-  onChange,
-  disabled = false,
-}: {
-  selected: FrenchSkill;
-  onChange: (next: FrenchSkill) => void;
-  disabled?: boolean;
-}) {
-  return (
-    <div
-      className={`flex w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
-      role="group"
-      aria-label="Compétence à entraîner"
-    >
-      {STEP_ORDER.map((skill) => (
-        <button
-          key={skill}
-          type="button"
-          disabled={disabled}
-          onClick={() => !disabled && onChange(skill)}
-          className={`min-w-0 flex-1 rounded-md px-2 py-1.5 text-xs font-bold transition-colors ${
-            selected === skill ? "text-white" : "text-[var(--color-text-secondary)]"
-          } ${disabled ? "cursor-not-allowed" : ""}`}
-          style={selected === skill ? { background: ACCENT } : undefined}
-          aria-pressed={selected === skill}
-          aria-label={SKILL_HEADERS[skill]}
-        >
-          {SKILL_HEADERS[skill]}
-        </button>
-      ))}
-    </div>
   );
 }
 
@@ -613,9 +511,9 @@ export function PlacementHubClient() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex flex-col gap-2">
-            <div className="flex items-center gap-2">
+        <div className="space-y-3">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-3">
+            <div className="flex min-w-0 items-center gap-2">
               <FrenchLevelToggle
                 level={displayLevel}
                 onChange={selectLevel}
@@ -640,22 +538,21 @@ export function PlacementHubClient() {
                 <IndividualModeIcon />
               </button>
             </div>
-            {individualMode && (
-              <FrenchSkillToggle
-                selected={selectedSkill}
-                onChange={setSelectedSkill}
-                disabled={trainingInProgress}
-              />
-            )}
+            <button
+              type="button"
+              onClick={trainingInProgress ? resumeTraining : launchTraining}
+              className="shrink-0 justify-self-end rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-bold text-white"
+              style={{ background: ACCENT }}
+            >
+              {trainingInProgress ? "Reprendre" : "S'entraîner"}
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={trainingInProgress ? resumeTraining : launchTraining}
-            className="rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-bold text-white"
-            style={{ background: ACCENT }}
-          >
-            {trainingInProgress ? "Reprendre" : "S'entraîner"}
-          </button>
+          <FrenchSkillCardsSelect
+            selected={selectedSkill}
+            onChange={setSelectedSkill}
+            disabled={trainingInProgress}
+            interactive={individualMode}
+          />
         </div>
 
         {trainingInProgress && trainingDraft && (
