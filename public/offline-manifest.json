@@ -1,6 +1,6 @@
 {
-  "version": 1784268753563,
-  "totalBytes": 714631825,
+  "version": 1784365477495,
+  "totalBytes": 715137292,
   "routes": [
     "/",
     "/avant-propos",
@@ -9724,6 +9724,7 @@
     "/assets/words/son_f/vocab/V7/ananas.mp3",
     "/assets/words/son_f/vocab/V7/asperge.mp3",
     "/assets/words/son_f/vocab/V7/aubergine.mp3",
+    "/assets/words/son_f/vocab/V7/avocat.mp3",
     "/assets/words/son_f/vocab/V7/banane.mp3",
     "/assets/words/son_f/vocab/V7/betterave.mp3",
     "/assets/words/son_f/vocab/V7/beurre.mp3",
@@ -9751,6 +9752,7 @@
     "/assets/words/son_f/vocab/V7/epinard.mp3",
     "/assets/words/son_f/vocab/V7/eplucher.mp3",
     "/assets/words/son_f/vocab/V7/farine.mp3",
+    "/assets/words/son_f/vocab/V7/figue.mp3",
     "/assets/words/son_f/vocab/V7/fraise.mp3",
     "/assets/words/son_f/vocab/V7/framboise.mp3",
     "/assets/words/son_f/vocab/V7/frire.mp3",
@@ -9765,14 +9767,17 @@
     "/assets/words/son_f/vocab/V7/laver.mp3",
     "/assets/words/son_f/vocab/V7/louche.mp3",
     "/assets/words/son_f/vocab/V7/mais.mp3",
+    "/assets/words/son_f/vocab/V7/mandarine.mp3",
     "/assets/words/son_f/vocab/V7/mangue.mp3",
     "/assets/words/son_f/vocab/V7/melanger.mp3",
     "/assets/words/son_f/vocab/V7/melon.mp3",
     "/assets/words/son_f/vocab/V7/morceau.mp3",
+    "/assets/words/son_f/vocab/V7/myrtille.mp3",
     "/assets/words/son_f/vocab/V7/navet.mp3",
     "/assets/words/son_f/vocab/V7/oeuf.mp3",
     "/assets/words/son_f/vocab/V7/oignon.mp3",
     "/assets/words/son_f/vocab/V7/orange.mp3",
+    "/assets/words/son_f/vocab/V7/pamplemousse.mp3",
     "/assets/words/son_f/vocab/V7/paprika.mp3",
     "/assets/words/son_f/vocab/V7/paquet.mp3",
     "/assets/words/son_f/vocab/V7/part.mp3",
@@ -16249,6 +16254,7 @@
     "/assets/words/son_m/vocab/V7/ananas.mp3",
     "/assets/words/son_m/vocab/V7/asperge.mp3",
     "/assets/words/son_m/vocab/V7/aubergine.mp3",
+    "/assets/words/son_m/vocab/V7/avocat.mp3",
     "/assets/words/son_m/vocab/V7/banane.mp3",
     "/assets/words/son_m/vocab/V7/betterave.mp3",
     "/assets/words/son_m/vocab/V7/beurre.mp3",
@@ -16276,6 +16282,7 @@
     "/assets/words/son_m/vocab/V7/epinard.mp3",
     "/assets/words/son_m/vocab/V7/eplucher.mp3",
     "/assets/words/son_m/vocab/V7/farine.mp3",
+    "/assets/words/son_m/vocab/V7/figue.mp3",
     "/assets/words/son_m/vocab/V7/fraise.mp3",
     "/assets/words/son_m/vocab/V7/framboise.mp3",
     "/assets/words/son_m/vocab/V7/frire.mp3",
@@ -16290,14 +16297,17 @@
     "/assets/words/son_m/vocab/V7/laver.mp3",
     "/assets/words/son_m/vocab/V7/louche.mp3",
     "/assets/words/son_m/vocab/V7/mais.mp3",
+    "/assets/words/son_m/vocab/V7/mandarine.mp3",
     "/assets/words/son_m/vocab/V7/mangue.mp3",
     "/assets/words/son_m/vocab/V7/melanger.mp3",
     "/assets/words/son_m/vocab/V7/melon.mp3",
     "/assets/words/son_m/vocab/V7/morceau.mp3",
+    "/assets/words/son_m/vocab/V7/myrtille.mp3",
     "/assets/words/son_m/vocab/V7/navet.mp3",
     "/assets/words/son_m/vocab/V7/oeuf.mp3",
     "/assets/words/son_m/vocab/V7/oignon.mp3",
     "/assets/words/son_m/vocab/V7/orange.mp3",
+    "/assets/words/son_m/vocab/V7/pamplemousse.mp3",
     "/assets/words/son_m/vocab/V7/paprika.mp3",
     "/assets/words/son_m/vocab/V7/paquet.mp3",
     "/assets/words/son_m/vocab/V7/part.mp3",
@@ -16883,6 +16893,7 @@
     "/assets/words/vocab/V7/ananas.webp",
     "/assets/words/vocab/V7/asperge.webp",
     "/assets/words/vocab/V7/aubergine.webp",
+    "/assets/words/vocab/V7/avocat.webp",
     "/assets/words/vocab/V7/banane.webp",
     "/assets/words/vocab/V7/betterave.webp",
     "/assets/words/vocab/V7/beurre.webp",
@@ -16915,6 +16926,7 @@
     "/assets/words/vocab/V7/epinard.webp",
     "/assets/words/vocab/V7/eplucher.webp",
     "/assets/words/vocab/V7/farine.webp",
+    "/assets/words/vocab/V7/figue.webp",
     "/assets/words/vocab/V7/fraise.webp",
     "/assets/words/vocab/V7/framboise.webp",
     "/assets/words/vocab/V7/frire.webp",
@@ -16929,14 +16941,17 @@
     "/assets/words/vocab/V7/laver.webp",
     "/assets/words/vocab/V7/louche.webp",
     "/assets/words/vocab/V7/mais.webp",
+    "/assets/words/vocab/V7/mandarine.webp",
     "/assets/words/vocab/V7/mangue.webp",
     "/assets/words/vocab/V7/melanger.webp",
     "/assets/words/vocab/V7/melon.webp",
     "/assets/words/vocab/V7/morceau.webp",
+    "/assets/words/vocab/V7/myrtille.webp",
     "/assets/words/vocab/V7/navet.webp",
     "/assets/words/vocab/V7/oeuf.webp",
     "/assets/words/vocab/V7/oignon.webp",
     "/assets/words/vocab/V7/orange.webp",
+    "/assets/words/vocab/V7/pamplemousse.webp",
     "/assets/words/vocab/V7/paprika.webp",
     "/assets/words/vocab/V7/paquet.webp",
     "/assets/words/vocab/V7/part.webp",
@@ -64033,6 +64048,11 @@
       "revision": "d8535d9884db4f26"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/avocat.mp3",
+      "size": 12583,
+      "revision": "e2551dc4c5eef1d3"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/banane.mp3",
       "size": 11956,
       "revision": "b6319aa7e4877a73"
@@ -64168,6 +64188,11 @@
       "revision": "cd7ccdc574003fcf"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/figue.mp3",
+      "size": 12583,
+      "revision": "1d3cd02a7fa87348"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/fraise.mp3",
       "size": 13524,
       "revision": "de0181749ec1251e"
@@ -64238,6 +64263,11 @@
       "revision": "5191278be01da677"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/mandarine.mp3",
+      "size": 14778,
+      "revision": "2f549f9223bf1de6"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/mangue.mp3",
       "size": 13524,
       "revision": "7e239a61d6687bd7"
@@ -64258,6 +64288,11 @@
       "revision": "1574736e6dd47ac5"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/myrtille.mp3",
+      "size": 12583,
+      "revision": "ffd2a473220f82b8"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/navet.mp3",
       "size": 11956,
       "revision": "ff9d4c703e0a3a77"
@@ -64276,6 +64311,11 @@
       "url": "/assets/words/son_f/vocab/V7/orange.mp3",
       "size": 12897,
       "revision": "181b5135699421ea"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V7/pamplemousse.mp3",
+      "size": 14778,
+      "revision": "9632c2592e4f37a0"
     },
     {
       "url": "/assets/words/son_f/vocab/V7/paprika.mp3",
@@ -96658,6 +96698,11 @@
       "revision": "85a324e7ce455e8f"
     },
     {
+      "url": "/assets/words/son_m/vocab/V7/avocat.mp3",
+      "size": 9762,
+      "revision": "550f5ea255245865"
+    },
+    {
       "url": "/assets/words/son_m/vocab/V7/banane.mp3",
       "size": 16345,
       "revision": "65a59d4839dba1e1"
@@ -96793,6 +96838,11 @@
       "revision": "e69e2d5ee79c2be2"
     },
     {
+      "url": "/assets/words/son_m/vocab/V7/figue.mp3",
+      "size": 11329,
+      "revision": "8811efd7cd215015"
+    },
+    {
       "url": "/assets/words/son_m/vocab/V7/fraise.mp3",
       "size": 11643,
       "revision": "9bd2ea89e175ef48"
@@ -96863,6 +96913,11 @@
       "revision": "db7c9e6bf43bb911"
     },
     {
+      "url": "/assets/words/son_m/vocab/V7/mandarine.mp3",
+      "size": 16972,
+      "revision": "ad77b54a5796766b"
+    },
+    {
       "url": "/assets/words/son_m/vocab/V7/mangue.mp3",
       "size": 11956,
       "revision": "80fc73894e8bcf97"
@@ -96883,6 +96938,11 @@
       "revision": "59cb1a61e7fff8a8"
     },
     {
+      "url": "/assets/words/son_m/vocab/V7/myrtille.mp3",
+      "size": 13524,
+      "revision": "fd5987336df8a9be"
+    },
+    {
       "url": "/assets/words/son_m/vocab/V7/navet.mp3",
       "size": 12897,
       "revision": "8e80b476c7a0e50a"
@@ -96901,6 +96961,11 @@
       "url": "/assets/words/son_m/vocab/V7/orange.mp3",
       "size": 15405,
       "revision": "199ed16ce4c4350c"
+    },
+    {
+      "url": "/assets/words/son_m/vocab/V7/pamplemousse.mp3",
+      "size": 16031,
+      "revision": "6150a65564e64fb5"
     },
     {
       "url": "/assets/words/son_m/vocab/V7/paprika.mp3",
@@ -99804,8 +99869,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/abricot.webp",
-      "size": 14990,
-      "revision": "27874342857e5018"
+      "size": 25884,
+      "revision": "e06f033b5c0389e6"
     },
     {
       "url": "/assets/words/vocab/V7/ail.webp",
@@ -99814,8 +99879,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/ananas.webp",
-      "size": 17826,
-      "revision": "5c3ba7beea59a51d"
+      "size": 25152,
+      "revision": "cb9dbf8899ee8cc2"
     },
     {
       "url": "/assets/words/vocab/V7/asperge.webp",
@@ -99828,9 +99893,14 @@
       "revision": "d8f285c49543daac"
     },
     {
+      "url": "/assets/words/vocab/V7/avocat.webp",
+      "size": 29824,
+      "revision": "82d05f9fc4d477ff"
+    },
+    {
       "url": "/assets/words/vocab/V7/banane.webp",
-      "size": 5108,
-      "revision": "c9ebd44083cfe055"
+      "size": 9040,
+      "revision": "f35da213c1770026"
     },
     {
       "url": "/assets/words/vocab/V7/betterave.webp",
@@ -99889,8 +99959,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/cerise.webp",
-      "size": 5084,
-      "revision": "4f1e2f6412e0660b"
+      "size": 9268,
+      "revision": "0a4e4b1948fb6b25"
     },
     {
       "url": "/assets/words/vocab/V7/champignon.webp",
@@ -99904,8 +99974,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/citron.webp",
-      "size": 11952,
-      "revision": "98ab328b3da618df"
+      "size": 16902,
+      "revision": "335288a18ff542ba"
     },
     {
       "url": "/assets/words/vocab/V7/concombre.webp",
@@ -99988,14 +100058,19 @@
       "revision": "3f5fc79edfd9ed57"
     },
     {
+      "url": "/assets/words/vocab/V7/figue.webp",
+      "size": 41076,
+      "revision": "ea0fd8ea69c64497"
+    },
+    {
       "url": "/assets/words/vocab/V7/fraise.webp",
-      "size": 22518,
-      "revision": "85ee1a9e88fd2cf9"
+      "size": 40608,
+      "revision": "3b34b1dad184168b"
     },
     {
       "url": "/assets/words/vocab/V7/framboise.webp",
-      "size": 22206,
-      "revision": "14c71f70d9c8b288"
+      "size": 40652,
+      "revision": "90765b602820b3c2"
     },
     {
       "url": "/assets/words/vocab/V7/frire.webp",
@@ -100034,8 +100109,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/kiwi.webp",
-      "size": 22318,
-      "revision": "781808a102ac3fbc"
+      "size": 40582,
+      "revision": "29a8d42dad968514"
     },
     {
       "url": "/assets/words/vocab/V7/lait.webp",
@@ -100058,9 +100133,14 @@
       "revision": "bba9ee2cb3f04aa0"
     },
     {
+      "url": "/assets/words/vocab/V7/mandarine.webp",
+      "size": 38960,
+      "revision": "49e11646b52bcc85"
+    },
+    {
       "url": "/assets/words/vocab/V7/mangue.webp",
-      "size": 12722,
-      "revision": "5e5cd3a3a16f1809"
+      "size": 21784,
+      "revision": "2b18b3538da9ab99"
     },
     {
       "url": "/assets/words/vocab/V7/melanger.webp",
@@ -100069,13 +100149,18 @@
     },
     {
       "url": "/assets/words/vocab/V7/melon.webp",
-      "size": 23450,
-      "revision": "26fa189b01a610b9"
+      "size": 43740,
+      "revision": "f92554a5d9f2be14"
     },
     {
       "url": "/assets/words/vocab/V7/morceau.webp",
       "size": 4008,
       "revision": "197991ad974da75a"
+    },
+    {
+      "url": "/assets/words/vocab/V7/myrtille.webp",
+      "size": 31152,
+      "revision": "5d699c573c5b00ef"
     },
     {
       "url": "/assets/words/vocab/V7/navet.webp",
@@ -100094,8 +100179,13 @@
     },
     {
       "url": "/assets/words/vocab/V7/orange.webp",
-      "size": 12682,
-      "revision": "8e2a4fa172a1c878"
+      "size": 11304,
+      "revision": "5b373e98ee0ec94e"
+    },
+    {
+      "url": "/assets/words/vocab/V7/pamplemousse.webp",
+      "size": 38774,
+      "revision": "faa13c27a9f4fdce"
     },
     {
       "url": "/assets/words/vocab/V7/paprika.webp",
@@ -100114,13 +100204,13 @@
     },
     {
       "url": "/assets/words/vocab/V7/pasteque.webp",
-      "size": 29244,
-      "revision": "4ca02207bb7499b5"
+      "size": 55022,
+      "revision": "d083308a71cd2103"
     },
     {
       "url": "/assets/words/vocab/V7/peche.webp",
-      "size": 12148,
-      "revision": "65427e66fad007e4"
+      "size": 21692,
+      "revision": "7aec9241ac2caaf9"
     },
     {
       "url": "/assets/words/vocab/V7/piment.webp",
@@ -100144,8 +100234,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/poire.webp",
-      "size": 10610,
-      "revision": "33d1b2509ddb286f"
+      "size": 19560,
+      "revision": "39d5e8bdc7624a13"
     },
     {
       "url": "/assets/words/vocab/V7/poivre.webp",
@@ -100164,8 +100254,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/pomme.webp",
-      "size": 15862,
-      "revision": "bb4b45b4edc36426"
+      "size": 28140,
+      "revision": "2917d74b738562bd"
     },
     {
       "url": "/assets/words/vocab/V7/pot.webp",
@@ -100174,8 +100264,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/prune.webp",
-      "size": 8256,
-      "revision": "6686a55a38a5bf2a"
+      "size": 14798,
+      "revision": "34e8b66aaf267a5a"
     },
     {
       "url": "/assets/words/vocab/V7/radis.webp",
@@ -100184,8 +100274,8 @@
     },
     {
       "url": "/assets/words/vocab/V7/raisin.webp",
-      "size": 17080,
-      "revision": "259af8e85c0057ca"
+      "size": 30686,
+      "revision": "203256d37e306d97"
     },
     {
       "url": "/assets/words/vocab/V7/recette.webp",

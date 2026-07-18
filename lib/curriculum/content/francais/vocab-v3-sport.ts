@@ -439,7 +439,7 @@ export const V3_SPORT_THEME: VocabTheme = {
     },
     {
       word: "course",
-      image: "courir.webp",
+      image: "course.webp",
       article: "la",
       gender: "f",
       definition: ["Activité où l’on court."],
@@ -691,7 +691,7 @@ export const V3_SPORT_THEME: VocabTheme = {
     },
     {
       word: "randonnée",
-      image: "marcher.webp",
+      image: "randonnee.webp",
       article: "la",
       gender: "f",
       definition: ["Longue marche dans la nature."],
