@@ -805,10 +805,6 @@ export const V2_HEURE_THEME: VocabTheme = {
         { h: 8,  m: 45, label: "8h45 — moins le quart" },
       ],
     },
-    {
-      type: "note",
-      text: "Heure officielle (formelle) : 14h30 = quatorze heures trente. Heure informelle : 14h30 = deux heures et demie de l'après-midi.",
-    },
   ],
   theoryPivot: [
     {
@@ -875,20 +871,6 @@ export const V2_HEURE_THEME: VocabTheme = {
         ps: ["8h00 — پر بجو","8h15 — او ربع","8h30 — او نیم","8h45 — ربع کم"],
       },
     },
-    {
-      type: "note",
-      text: {
-          en: "Official time (formal): 14h30 = fourteen thirty. Informal time: 14h30 = half past two in the afternoon.",
-          ar: "الوقت الرسمي (الفصيح): 14h30 = الرابعة عشرة وثلاثون دقيقة. الوقت غير الرسمي: 14h30 = الثانية والنصف بعد الظهر.",
-          fa: "زمان رسمی: 14h30 = چهارده و سی دقیقه. زمان غیررسمی: 14h30 = دو و نیم بعدازظهر.",
-          ti: "ወግዓዊ ሰዓት፦ 14h30 = ዓሰርተ ኣርባዕተን ሰላሳን። ዘይወግዓዊ ሰዓት፦ 14h30 = ክልተን ፈረቓን ድሕሪ ቀትሪ።",
-          uk: "Офіційний час: 14h30 = чотирнадцята тридцять. Неофіційний час: 14h30 = пів на третю дня.",
-          pt: "Hora oficial (formal): 14h30 = catorze horas e trinta. Hora informal: 14h30 = duas e meia da tarde.",
-          so: "Waqtiga rasmiga ah: 14h30 = afar iyo toban iyo soddon. Waqtiga aan rasmiga ahayn: 14h30 = laba iyo badh galabnimo.",
-          tr: "Resmî saat: 14h30 = on dört otuz. Günlük kullanım: 14h30 = öğleden sonra iki buçuk.",
-          ps: "رسمي وخت: 14h30 = څوارلس بجې او دېرش دقیقې. نا رسمي وخت: 14h30 = د ماسپښين دوه نيمې بجې.",
-        },
-    }
   ],
   sentences: [
     { sentence: "Je me lève à sept heures du ___.",                     answer: "matin" },
