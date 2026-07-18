@@ -109,6 +109,9 @@ function FrenchProgressBlock({
   );
 }
 
+/** Hauteur commune : toggle A1/A2/B1, I–IV, et bouton individuel. */
+const LEVEL_CTRL_H = "h-9";
+
 function FrenchLevelToggle({
   level,
   onChange,
@@ -120,7 +123,7 @@ function FrenchLevelToggle({
 }) {
   return (
     <div
-      className={`flex shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
+      className={`flex ${LEVEL_CTRL_H} shrink-0 items-stretch rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
       role="group"
       aria-label="Niveau d'entraînement français"
     >
@@ -130,7 +133,7 @@ function FrenchLevelToggle({
           type="button"
           disabled={disabled}
           onClick={() => !disabled && onChange(opt.id)}
-          className={`min-w-[2.25rem] rounded-md px-2 py-1.5 text-xs font-bold transition-colors ${
+          className={`flex min-w-[2.25rem] items-center justify-center rounded-md px-2 text-xs font-bold transition-colors ${
             level === opt.id ? "text-white" : "text-[var(--color-text-secondary)]"
           } ${disabled ? "cursor-not-allowed" : ""}`}
           style={level === opt.id ? { background: ACCENT } : undefined}
@@ -154,7 +157,7 @@ function MathLevelToggle({
 }) {
   return (
     <div
-      className={`flex shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
+      className={`flex ${LEVEL_CTRL_H} shrink-0 items-stretch rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/50 p-0.5 ${disabled ? "opacity-50" : ""}`}
       role="group"
       aria-label="Niveau d'entraînement mathématiques"
     >
@@ -164,7 +167,7 @@ function MathLevelToggle({
           type="button"
           disabled={disabled}
           onClick={() => !disabled && onChange(opt.id)}
-          className={`min-w-[2rem] rounded-md px-2 py-1.5 text-xs font-bold transition-colors ${
+          className={`flex min-w-[2rem] items-center justify-center rounded-md px-2 text-xs font-bold transition-colors ${
             level === opt.id ? "text-white" : "text-[var(--color-text-secondary)]"
           } ${disabled ? "cursor-not-allowed" : ""}`}
           style={level === opt.id ? { background: ACCENT } : undefined}
@@ -526,7 +529,7 @@ export function PlacementHubClient() {
                 aria-label={individualMode ? "Désactiver le mode individuel" : "Activer le mode individuel (CE, CO, PE, PO)"}
                 aria-pressed={individualMode}
                 title={individualMode ? "Mode individuel actif" : "Entraîner une seule compétence"}
-                className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg border transition-colors ${
+                className={`flex ${LEVEL_CTRL_H} w-9 shrink-0 items-center justify-center rounded-lg border transition-colors ${
                   trainingInProgress ? "cursor-not-allowed opacity-50" : "hover:border-[var(--color-accent-quiz)]"
                 } ${
                   individualMode
@@ -547,12 +550,14 @@ export function PlacementHubClient() {
               {trainingInProgress ? "Reprendre" : "S'entraîner"}
             </button>
           </div>
-          <FrenchSkillCardsSelect
-            selected={selectedSkill}
-            onChange={setSelectedSkill}
-            disabled={trainingInProgress}
-            interactive={individualMode}
-          />
+          {individualMode && (
+            <FrenchSkillCardsSelect
+              selected={selectedSkill}
+              onChange={setSelectedSkill}
+              disabled={trainingInProgress}
+              interactive
+            />
+          )}
         </div>
 
         {trainingInProgress && trainingDraft && (

@@ -61,7 +61,7 @@ function FrenchSkillCard({
       type={interactive && onClick ? "button" : undefined}
       disabled={interactive && onClick ? disabled : undefined}
       onClick={interactive && onClick && !disabled ? onClick : undefined}
-      className={`flex min-w-0 flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] p-1.5 text-left transition-opacity ${
+      className={`relative aspect-square w-full overflow-hidden rounded-full border bg-[var(--color-bg-primary)] p-1.5 transition-opacity ${
         interactive && onClick && !disabled ? "cursor-pointer hover:border-[var(--color-accent-quiz)]" : ""
       } ${disabled && interactive ? "cursor-not-allowed opacity-50" : ""} ${
         isActive
@@ -73,7 +73,7 @@ function FrenchSkillCard({
       aria-label={label}
       aria-pressed={interactive ? selected : undefined}
     >
-      <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-sm)] bg-[var(--color-bg-secondary)]">
+      <div className="relative h-full w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={skillImage(skill)}
@@ -88,18 +88,6 @@ function FrenchSkillCard({
           />
         )}
       </div>
-      <p
-        className="mt-1 truncate text-center text-[10px] font-bold uppercase tracking-wide"
-        style={{
-          color: isActive
-            ? "var(--color-skill-pill-active)"
-            : isDone
-              ? "var(--color-skill-pill-done)"
-              : "var(--color-text-secondary)",
-        }}
-      >
-        {label}
-      </p>
     </Tag>
   );
 }
