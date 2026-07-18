@@ -1,6 +1,6 @@
 {
-  "version": 1784268753563,
-  "totalBytes": 714631825,
+  "version": 1784365303085,
+  "totalBytes": 714681309,
   "routes": [
     "/",
     "/avant-propos",
@@ -16806,6 +16806,7 @@
     "/assets/words/vocab/V5/sport.webp",
     "/assets/words/vocab/V5/stylo.webp",
     "/assets/words/vocab/V5/surligneur.webp",
+    "/assets/words/vocab/V5/tableau.webp",
     "/assets/words/vocab/V5/taille-crayon.webp",
     "/assets/words/vocab/V5/trousse.webp",
     "/assets/words/vocab/V6/bague.webp",
@@ -98489,8 +98490,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/dimanche.webp",
-      "size": 3106,
-      "revision": "c72ea5e21b76147f"
+      "size": 5586,
+      "revision": "d896c72b42a83fc3"
     },
     {
       "url": "/assets/words/vocab/V2/doux.webp",
@@ -98534,8 +98535,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/heure.webp",
-      "size": 8338,
-      "revision": "5ff552b163f12d50"
+      "size": 12538,
+      "revision": "728b21cd114dbd72"
     },
     {
       "url": "/assets/words/vocab/V2/hiver.webp",
@@ -98544,8 +98545,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/horloge.webp",
-      "size": 9532,
-      "revision": "3d79aab3b3339828"
+      "size": 10306,
+      "revision": "3d160d40a7a7e892"
     },
     {
       "url": "/assets/words/vocab/V2/humide.webp",
@@ -98559,8 +98560,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/jeudi.webp",
-      "size": 2340,
-      "revision": "355a41e53bc1277e"
+      "size": 4064,
+      "revision": "b638a9de889c6878"
     },
     {
       "url": "/assets/words/vocab/V2/jour.webp",
@@ -98579,8 +98580,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/lundi.webp",
-      "size": 2026,
-      "revision": "44673928a0801e81"
+      "size": 3664,
+      "revision": "04c29f2b6b5e9c6e"
     },
     {
       "url": "/assets/words/vocab/V2/lune.webp",
@@ -98594,8 +98595,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/mardi.webp",
-      "size": 2548,
-      "revision": "e16fadbfb9a2098e"
+      "size": 4586,
+      "revision": "45834a78f86d8b5e"
     },
     {
       "url": "/assets/words/vocab/V2/mars.webp",
@@ -98609,8 +98610,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/mercredi.webp",
-      "size": 3146,
-      "revision": "9333b5d912763abe"
+      "size": 5490,
+      "revision": "02c78b7a3fdfed58"
     },
     {
       "url": "/assets/words/vocab/V2/meteo.webp",
@@ -98629,8 +98630,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/minute.webp",
-      "size": 8758,
-      "revision": "9242fdb27fe3cca7"
+      "size": 13526,
+      "revision": "092202e64df0f241"
     },
     {
       "url": "/assets/words/vocab/V2/mois.webp",
@@ -98684,8 +98685,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/samedi.webp",
-      "size": 3006,
-      "revision": "e91a4ed063f984a6"
+      "size": 5238,
+      "revision": "d07a87937ffca4a1"
     },
     {
       "url": "/assets/words/vocab/V2/se-rafraichir.webp",
@@ -98704,8 +98705,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/seconde.webp",
-      "size": 11986,
-      "revision": "e2a169f6d3b8aff1"
+      "size": 12958,
+      "revision": "5440abc7e9fedb7b"
     },
     {
       "url": "/assets/words/vocab/V2/semaine.webp",
@@ -98734,8 +98735,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/vendredi.webp",
-      "size": 3308,
-      "revision": "3a8b60ef8600865c"
+      "size": 5776,
+      "revision": "07c0c8f6bfdcb792"
     },
     {
       "url": "/assets/words/vocab/V2/vent.webp",
@@ -98749,8 +98750,8 @@
     },
     {
       "url": "/assets/words/vocab/V3/course.webp",
-      "size": 10402,
-      "revision": "1acc5c39452cd6ce"
+      "size": 13910,
+      "revision": "39c95c746fe104c0"
     },
     {
       "url": "/assets/words/vocab/V3/danse.webp",
@@ -98794,8 +98795,8 @@
     },
     {
       "url": "/assets/words/vocab/V3/randonnee.webp",
-      "size": 9742,
-      "revision": "4ff634c8de791726"
+      "size": 17460,
+      "revision": "f3e0c80263ec3b3a"
     },
     {
       "url": "/assets/words/vocab/V3/ski.webp",
@@ -99174,8 +99175,8 @@
     },
     {
       "url": "/assets/words/vocab/V4/table.webp",
-      "size": 6828,
-      "revision": "b994a4d28cd4f19e"
+      "size": 10956,
+      "revision": "36ec89e8382136cc"
     },
     {
       "url": "/assets/words/vocab/V4/tabouret.webp",
@@ -99441,6 +99442,11 @@
       "url": "/assets/words/vocab/V5/surligneur.webp",
       "size": 5984,
       "revision": "571694642c52c75e"
+    },
+    {
+      "url": "/assets/words/vocab/V5/tableau.webp",
+      "size": 8492,
+      "revision": "2e470e997e72f82e"
     },
     {
       "url": "/assets/words/vocab/V5/taille-crayon.webp",
