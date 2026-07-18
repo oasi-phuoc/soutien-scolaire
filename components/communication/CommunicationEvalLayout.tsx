@@ -41,6 +41,9 @@ export function CommunicationIntroSection({
   footer?: ReactNode;
 }) {
   const [tipsOpen, setTipsOpen] = useState(false);
+  const tipsAccent = "var(--color-accent-quiz)";
+  const tipsSoft = "color-mix(in oklch, var(--color-accent-quiz) 12%, white)";
+  const tipsBorder = "color-mix(in oklch, var(--color-accent-quiz) 28%, white)";
 
   return (
     <div className="space-y-6">
@@ -75,17 +78,37 @@ export function CommunicationIntroSection({
         </div>
       </div>
 
-      <div className="rounded-[var(--radius-lg)] border border-slate-200 bg-white/80 shadow-none">
+      <div
+        className="overflow-hidden rounded-[var(--radius-md)] border shadow-none"
+        style={{ borderColor: tipsBorder, background: tipsSoft }}
+      >
         <button
           type="button"
           onClick={() => setTipsOpen((value) => !value)}
-          className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold text-[var(--color-text-primary)]"
+          className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:brightness-[0.98]"
         >
-          <span>Conseils pour réussir</span>
-          <span style={{ color: ACCENT }}>{tipsOpen ? "-" : "+"}</span>
+          <span className="text-sm font-bold" style={{ color: tipsAccent }}>
+            Conseils pour réussir
+          </span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden
+            className={`shrink-0 transition-transform ${tipsOpen ? "rotate-180" : ""}`}
+            style={{ color: tipsAccent }}
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
         </button>
         {tipsOpen && (
-          <div className="space-y-2 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+          <div
+            className="space-y-2 border-t px-4 py-3 text-sm leading-relaxed text-[var(--color-text-secondary)]"
+            style={{ borderColor: tipsBorder }}
+          >
             {tips}
           </div>
         )}
@@ -210,6 +233,7 @@ export function CommunicationTeacherSubmit({
             placeholder="Choisissez un professeur"
             emptyOption={{ value: "", label: "Choisissez un professeur" }}
             disabled={sent}
+            placement="top"
             className="min-h-11 flex-1"
           />
           <button

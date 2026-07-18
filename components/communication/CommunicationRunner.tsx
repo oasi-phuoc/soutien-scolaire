@@ -200,6 +200,7 @@ function WritingExercise({
                 placeholder="Choisissez un professeur"
                 emptyOption={{ value: "", label: "Choisissez un professeur" }}
                 disabled={sent}
+                placement="top"
                 className="min-h-11 flex-1"
               />
               <button

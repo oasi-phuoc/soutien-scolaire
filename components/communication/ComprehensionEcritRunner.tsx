@@ -715,6 +715,8 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
           })()
         : instructions!.map((card) => ({
             ...card,
+            image: level === "base" ? "" : card.image,
+            imageLabel: level === "base" ? "" : card.imageLabel,
             body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
             questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
           })),
@@ -728,8 +730,12 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         ? { title: articleMoyen.title, sections: articleMoyen.sections }
         : {
             title: articleLegacy!.title,
-            sections: level === "base"
-              ? articleLegacy!.sections
+            sections: (level === "base"
+              ? articleLegacy!.sections.map((section) => ({
+                  ...section,
+                  image: undefined,
+                  imageLabel: undefined,
+                }))
               : articleLegacy!.sections.map((section) => ({
                   ...section,
                   body: `${section.body} Cette information est importante pour comprendre le texte de niveau ${levelName}.`,
@@ -737,7 +743,17 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
           },
       questions: articleMoyen
         ? buildCeMessageQuestions(articleMoyen.pool, 7, `${level}-${stamp}-article`, "full")
-        : articleLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+        : articleLegacy!.questions.map((q) => {
+            const task = toQuestionTask(q as RawQuestionTask);
+            if (level === "base" && task.kind === "choice") {
+              return {
+                ...task,
+                image: false,
+                choices: task.choices.map((choice) => ({ label: choice.label })),
+              };
+            }
+            return task;
+          }),
     },
   ];
 }
@@ -1086,16 +1102,20 @@ function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEP
 function InstructionsPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "instructions" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
   return (
     <div className="space-y-5">
-      {part.cards.map((card, cardIndex) => (
+      {part.cards.map((card, cardIndex) => {
+        const showImage = Boolean(card.image || card.imageLabel);
+        return (
         <div key={card.title} className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
-          <div className="flex items-start gap-4">
+          <div className={`flex items-start gap-4 ${showImage ? "" : ""}`}>
             <div className="flex-1">
               <h3 className="text-lg font-bold" style={{ color: ACCENT }}>{card.title}</h3>
               <p className={`mt-2 ${CE_BODY_TEXT_PRE}`}>{card.body}</p>
             </div>
-            <div className="w-24 shrink-0">
-              <ImagePlaceholder label={card.imageLabel} path={card.image} />
-            </div>
+            {showImage && (
+              <div className="w-24 shrink-0">
+                <ImagePlaceholder label={card.imageLabel} path={card.image} />
+              </div>
+            )}
           </div>
           <div className="mt-4 space-y-4">
             {card.questions.map((question, questionIndex) => {
@@ -1109,7 +1129,8 @@ function InstructionsPart({ part, answers, setAnswer, correction }: { part: Extr
             })}
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

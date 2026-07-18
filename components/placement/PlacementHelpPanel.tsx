@@ -13,16 +13,58 @@ const LEVEL_SHORT: Record<PlacementLevel, string> = {
   avance: "B1",
 };
 
+const SKILL_PARTS: Array<{
+  code: "CE" | "CO" | "PE" | "PO";
+  title: string;
+  description: string;
+}> = [
+  {
+    code: "CE",
+    title: "compréhension écrite",
+    description: "Lire et comprendre des textes (messages, consignes, articles) et répondre à des questions.",
+  },
+  {
+    code: "CO",
+    title: "compréhension orale",
+    description: "Écouter des documents audio et repérer les informations essentielles.",
+  },
+  {
+    code: "PE",
+    title: "production écrite",
+    description: "Rédiger des textes (formulaires, messages, lettres) adaptés à la situation.",
+  },
+  {
+    code: "PO",
+    title: "production orale",
+    description: "S’exprimer à l’oral : répondre, décrire, raconter et dialoguer.",
+  },
+];
+
 const FOUR_PARTS = (
-  <>
+  <div className="space-y-3">
     <p>Il est organisé en quatre parties :</p>
-    <ul className="list-disc space-y-1 pl-5">
-      <li>compréhension écrite</li>
-      <li>compréhension orale</li>
-      <li>production écrite</li>
-      <li>production orale</li>
+    <ul className="space-y-3">
+      {SKILL_PARTS.map((part) => (
+        <li key={part.code} className="flex items-start gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/assets/expression/images/comp/${part.code}.png`}
+            alt=""
+            className="mt-0.5 h-10 w-10 shrink-0 rounded-full bg-white object-contain"
+            draggable={false}
+          />
+          <div className="min-w-0">
+            <p className="font-semibold text-[var(--color-text-primary)]">
+              <span className="uppercase tracking-wide" style={{ color: ACCENT }}>{part.code}</span>
+              {" — "}
+              {part.title}
+            </p>
+            <p className="mt-0.5 text-sm leading-relaxed">{part.description}</p>
+          </div>
+        </li>
+      ))}
     </ul>
-  </>
+  </div>
 );
 
 export function PlacementFrenchHelpContent({
@@ -48,7 +90,7 @@ export function PlacementFrenchHelpContent({
       ) : (
         <>
           <p>
-            L&apos;entraînement {levelLabel} propose des exercices de niveau {levelLabel}. Il peut être interrompu
+            L&apos;entraînement propose des exercices de niveau {levelLabel}. Il peut être interrompu
             après chaque étape et repris plus tard. Les résultats ne comptent pas pour le total de placement.
           </p>
           <FrenchTrainingElementsBlock

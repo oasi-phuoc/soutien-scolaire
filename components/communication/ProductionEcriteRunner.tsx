@@ -32,7 +32,6 @@ import { markCommunicationLessonComplete } from "@/lib/progress/communication-pr
 import {
   CommunicationFinishButton,
   CommunicationIntroSection,
-  CommunicationResultsExercise,
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
   type IntroBullet,
@@ -226,6 +225,58 @@ function CorrectionBlock({ title, children }: { title: string; children: ReactNo
     <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2.5">
       <p className="mb-1.5 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{title}</p>
       <div className="space-y-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]">{children}</div>
+    </div>
+  );
+}
+
+const ACCENT_SOFT = "color-mix(in oklch, var(--color-accent-quiz) 12%, white)";
+const ACCENT_BORDER = "color-mix(in oklch, var(--color-accent-quiz) 28%, white)";
+
+function PePropositionAccordion({
+  title,
+  open,
+  onToggle,
+  children,
+}: {
+  title: string;
+  open: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className="overflow-hidden rounded-[var(--radius-md)] border"
+      style={{ borderColor: ACCENT_BORDER, background: ACCENT_SOFT }}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:brightness-[0.98]"
+      >
+        <span className="font-bold" style={{ color: ACCENT }}>{title}</span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden
+          className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          style={{ color: ACCENT }}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          className="space-y-3 border-t px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]"
+          style={{ borderColor: ACCENT_BORDER }}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 }
@@ -425,7 +476,7 @@ function AdviceSection({ children }: { children: ReactNode }) {
 function AdviceContent({ level }: { level: WritingLevel }) {
   if (level === "base") {
     return (
-      <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
         <AdviceLine title="1. Comprendre">Lire la consigne deux fois et repérer les informations demandées.</AdviceLine>
         <AdviceLine title="2. Préparer">Noter les idées principales avec des mots-clés.</AdviceLine>
         <AdviceLine title="3. Organiser">Mettre les idées dans un ordre logique.</AdviceLine>
@@ -449,7 +500,7 @@ function AdviceContent({ level }: { level: WritingLevel }) {
 
   if (level === "moyen") {
     return (
-      <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
         <AdviceLine title="1. Comprendre">Lire la consigne et identifier le type de texte demandé : réponse, récit, description ou avis.</AdviceLine>
         <AdviceLine title="2. Préparer">Noter les idées avec des mots-clés et choisir l&apos;ordre des informations.</AdviceLine>
         <AdviceLine title="3. Organiser">Séparer le texte en début, milieu et fin.</AdviceLine>
@@ -474,7 +525,7 @@ function AdviceContent({ level }: { level: WritingLevel }) {
   }
 
   return (
-    <div className="space-y-4 border-t border-[var(--color-border-default)] px-5 py-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
+    <div className="space-y-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
       <AdviceLine title="1. Comprendre">Identifier le destinataire, le but du texte et le registre attendu.</AdviceLine>
       <AdviceLine title="2. Préparer">Choisir deux ou trois idées fortes et prévoir des exemples précis.</AdviceLine>
       <AdviceLine title="3. Organiser">Construire un texte avec une introduction, un développement et une conclusion.</AdviceLine>
@@ -768,19 +819,15 @@ export function ProductionEcriteRunner({
         </section>
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Vous pouvez relire vos réponses avant l&apos;envoi.</p>
         <div className="space-y-3">
-          {stepMeta.map((item, index) => {
+          {stepMeta.map((item) => {
             const isOpen = openResult === item.id;
             const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
             const shortSample = getWritingSampleAnswer(shortPrompt.id);
             const longSample = getWritingSampleAnswer(longPrompt.id);
             return (
-              <CommunicationResultsExercise
+              <PePropositionAccordion
                 key={item.id}
-                index={index}
-                title={item.title}
-                correct={0}
-                total={item.points}
-                scoreLabel={`0 / ${item.points}`}
+                title={`Proposition de réponse — ${item.title}`}
                 open={isOpen}
                 onToggle={() => setOpenResult(isOpen ? null : item.id)}
               >
@@ -789,7 +836,7 @@ export function ProductionEcriteRunner({
                     <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">Votre production</p>
                     <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{formToTextLocal(formTemplate, formAnswers)}</pre>
                     {formSample && (
-                      <CorrectionBlock title="Proposition de réponse">
+                      <CorrectionBlock title="Exemple">
                         <pre className="whitespace-pre-wrap">{formSample}</pre>
                       </CorrectionBlock>
                     )}
@@ -800,7 +847,7 @@ export function ProductionEcriteRunner({
                     <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{shortPrompt.title}</p>
                     <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
                     {shortSample && (
-                      <CorrectionBlock title="Proposition de réponse">
+                      <CorrectionBlock title="Exemple">
                         <SampleParagraphs text={shortSample} />
                       </CorrectionBlock>
                     )}
@@ -811,13 +858,13 @@ export function ProductionEcriteRunner({
                     <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{longPrompt.title}</p>
                     <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
                     {longSample && (
-                      <CorrectionBlock title="Proposition de réponse">
+                      <CorrectionBlock title="Exemple">
                         <SampleParagraphs text={longSample} />
                       </CorrectionBlock>
                     )}
                   </>
                 )}
-              </CommunicationResultsExercise>
+              </PePropositionAccordion>
             );
           })}
         </div>
