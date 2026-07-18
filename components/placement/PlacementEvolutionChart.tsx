@@ -189,7 +189,7 @@ export function PlacementEvolutionChart({
   const frenchItems = lastSlots(frenchSessions).map((s) => (s ? { points: s.countedTotal } : null));
 
   return (
-    <div className="space-y-6">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <SubjectEvolutionPanel
         label="Mathématiques"
         barColor={PLACEMENT_BAR_FILL}
