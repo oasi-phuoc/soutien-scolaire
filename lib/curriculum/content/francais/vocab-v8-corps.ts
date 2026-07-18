@@ -102,6 +102,7 @@ export const V8_CORPS_THEME: VocabTheme = {
     },
     {
       word: "bras",
+      image: "bras.webp",
       article: "le",
       gender: "m",
       definition: ["Partie du corps entre l’épaule et la main."],
