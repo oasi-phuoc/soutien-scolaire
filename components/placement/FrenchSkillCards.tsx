@@ -61,7 +61,7 @@ function FrenchSkillCard({
       type={interactive && onClick ? "button" : undefined}
       disabled={interactive && onClick ? disabled : undefined}
       onClick={interactive && onClick && !disabled ? onClick : undefined}
-      className={`relative aspect-square w-full overflow-hidden rounded-full border bg-[var(--color-bg-primary)] p-1.5 transition-opacity ${
+      className={`relative aspect-square w-full overflow-hidden rounded-full border bg-[var(--color-bg-primary)] p-0.5 transition-opacity ${
         interactive && onClick && !disabled ? "cursor-pointer hover:border-[var(--color-accent-quiz)]" : ""
       } ${disabled && interactive ? "cursor-not-allowed opacity-50" : ""} ${
         isActive
@@ -94,7 +94,7 @@ function FrenchSkillCard({
 
 export function FrenchSkillCardsProgress({ draft }: { draft: PlacementFrenchDraft }) {
   return (
-    <div className="grid grid-cols-4 gap-2 sm:gap-3">
+    <div className="mx-auto grid w-1/2 grid-cols-4 gap-1 sm:gap-1.5">
       {FRENCH_SKILLS.map((skill) => (
         <FrenchSkillCard
           key={skill}
@@ -119,7 +119,7 @@ export function FrenchSkillCardsSelect({
   interactive?: boolean;
 }) {
   return (
-    <div className="grid grid-cols-4 gap-2 sm:gap-3" role={interactive ? "group" : undefined} aria-label={interactive ? "Compétence à entraîner" : undefined}>
+    <div className="mx-auto grid w-1/2 grid-cols-4 gap-1 sm:gap-1.5" role={interactive ? "group" : undefined} aria-label={interactive ? "Compétence à entraîner" : undefined}>
       {FRENCH_SKILLS.map((skill) => (
         <FrenchSkillCard
           key={skill}
