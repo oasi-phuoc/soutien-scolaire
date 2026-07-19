@@ -1,10 +1,10 @@
 Images manquantes — Placement français (CE / CO)
 ================================================
 Mis à jour : 2026-07-19
-Reste à faire : 0 fichier
+Reste à faire : 33 fichiers (mini-cartes d'orientation CE A1)
 
-Toutes les images listées précédemment ont été générées, reliées
-ou remplacées par des assets existants.
+Les mini-cartes générées automatiquement ont été supprimées
+(trajets incorrects). À produire manuellement plus tard.
 
 
 --------------------------------------------------------------------------------
@@ -42,18 +42,67 @@ Liens : ce-messages-moyen.ts
 
 
 --------------------------------------------------------------------------------
-FAIT — CE A1 « Lire pour s'orienter » (mini-cartes trajets)
+À FAIRE — CE A1 « Lire pour s'orienter » (mini-cartes trajets)
 --------------------------------------------------------------------------------
-33 mini-cartes générées (SVG→webp) :
-  /assets/expression/ce/base/orientation/{lieu}-01-{a|b|c}.webp
+Niveau : A1 (base)
+Exercice : Lire pour s'orienter
+Dossier cible : /assets/expression/images-temp/itineraire/
+33 fichiers (11 lieux × 3 trajets a/b/c)
 
-Lieux : musee, examen, maladiere, olympique, bibliotheque,
-        theatre, gare, foire, inscription, librairie, poste
+Activité : Sortie musée
+  - ce-itineraire-musee-trajet-a.webp
+  - ce-itineraire-musee-trajet-b.webp
+  - ce-itineraire-musee-trajet-c.webp
 
-Liens : ce-orientation-base.ts (MAP → ce/base/orientation)
+Activité : Convocation examen
+  - ce-itineraire-examen-trajet-a.webp
+  - ce-itineraire-examen-trajet-b.webp
+  - ce-itineraire-examen-trajet-c.webp
 
+Activité : RDV client 12/03
+  - ce-itineraire-maladiere-trajet-a.webp
+  - ce-itineraire-maladiere-trajet-b.webp
+  - ce-itineraire-maladiere-trajet-c.webp
 
---------------------------------------------------------------------------------
-Reste à faire
---------------------------------------------------------------------------------
-(Aucun — inventaire initial de 48 fichiers soldé.)
+Activité : Visite (olympique)
+  - ce-itineraire-olympique-trajet-a.webp
+  - ce-itineraire-olympique-trajet-b.webp
+  - ce-itineraire-olympique-trajet-c.webp
+
+Activité : Ski (bibliothèque)
+  - ce-itineraire-bibliotheque-trajet-a.webp
+  - ce-itineraire-bibliotheque-trajet-b.webp
+  - ce-itineraire-bibliotheque-trajet-c.webp
+
+Activité : Spectacle
+  - ce-itineraire-theatre-trajet-a.webp
+  - ce-itineraire-theatre-trajet-b.webp
+  - ce-itineraire-theatre-trajet-c.webp
+
+Activité : train
+  - ce-itineraire-gare-trajet-a.webp
+  - ce-itineraire-gare-trajet-b.webp
+  - ce-itineraire-gare-trajet-c.webp
+
+Activité : Fête foraine
+  - ce-itineraire-foire-trajet-a.webp
+  - ce-itineraire-foire-trajet-b.webp
+  - ce-itineraire-foire-trajet-c.webp
+
+Activité : Inscriptions universitaires — Infos pratiques
+  - ce-itineraire-inscription-trajet-a.webp
+  - ce-itineraire-inscription-trajet-b.webp
+  - ce-itineraire-inscription-trajet-c.webp
+
+Activité : Nouvelle librairie
+  - ce-itineraire-librairie-trajet-a.webp
+  - ce-itineraire-librairie-trajet-b.webp
+  - ce-itineraire-librairie-trajet-c.webp
+
+Activité : Bureau de poste : nouvelle adresse
+  - ce-itineraire-poste-trajet-a.webp
+  - ce-itineraire-poste-trajet-b.webp
+  - ce-itineraire-poste-trajet-c.webp
+
+Note : ne pas régénérer automatiquement — cartes à produire
+avec les bons trajets (contenu des messages CE).
