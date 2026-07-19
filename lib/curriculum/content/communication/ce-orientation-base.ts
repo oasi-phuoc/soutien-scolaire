@@ -2,9 +2,9 @@ import type { CEMessageItem } from "./ce-questions-helpers";
 import { ceMapQ, ceQ } from "./ce-questions-helpers";
 
 const MAP = (lieu: string): [string, string, string] => [
-  `/assets/expression/images-temp/itineraire/ce-itineraire-${lieu}-trajet-a.webp`,
-  `/assets/expression/images-temp/itineraire/ce-itineraire-${lieu}-trajet-b.webp`,
-  `/assets/expression/images-temp/itineraire/ce-itineraire-${lieu}-trajet-c.webp`,
+  `/assets/expression/ce/base/orientation/${lieu}-01-a.webp`,
+  `/assets/expression/ce/base/orientation/${lieu}-01-b.webp`,
+  `/assets/expression/ce/base/orientation/${lieu}-01-c.webp`,
 ];
 
 /** Textes CE base — « Lire pour s'orienter » (messages + itinéraires). */

@@ -15,7 +15,10 @@ function slugify(label: string): string {
 }
 
 function opImg(label: string): string {
-  return `/assets/expression/images/scene/${slugify(label)}.webp`;
+  const slug = slugify(label);
+  // Chaussures de sport → baskets (asset lecture existant)
+  if (slug === "chaussures-de-sport") return "/assets/words/lecture/baskets.webp";
+  return `/assets/words/lecture/${slug}.webp`;
 }
 
 function opCards(

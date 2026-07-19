@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
-const OUT_DIR = path.join(__dirname, "..", "public", "expression", "ce", "base", "orientation");
+const OUT_DIR = path.join(__dirname, "..", "public", "assets", "expression", "ce", "base", "orientation");
 
 const BLOCK = "#b8d4e8";
 const STREET = "#ffffff";

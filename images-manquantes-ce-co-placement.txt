@@ -1,0 +1,59 @@
+Images manquantes — Placement français (CE / CO)
+================================================
+Mis à jour : 2026-07-19
+Reste à faire : 0 fichier
+
+Toutes les images listées précédemment ont été générées, reliées
+ou remplacées par des assets existants.
+
+
+--------------------------------------------------------------------------------
+FAIT — CO A1 « Identifier des objets »
+--------------------------------------------------------------------------------
+Généré (words/lecture, 4:3 webp, fond blanc, réaliste) :
+  - carte-detudiant.webp (+ carte-d'étudiant.webp)
+  - carte-didentite.webp (+ carte-d'identité.webp)
+  - chips.webp
+  - salade-de-fruits.webp
+  - bouteille-deau.webp
+
+Relié à un asset existant :
+  - chaussures de sport → /assets/words/lecture/baskets.webp
+
+Liens : co-questions-objet-pick.ts (opImg → words/lecture)
+
+
+--------------------------------------------------------------------------------
+FAIT — CE A2 « Lire des messages »
+--------------------------------------------------------------------------------
+Messages reliés à des scènes existantes (expression/images/scene) :
+
+  Sortie plongée samedi          → nager-piscine.webp
+  Anniversaire de Sophie         → preparer-anniversaire.webp
+  Vacances chez ma cousine       → souhaiter-bonnes-vacances.webp
+  Soirée pizza vendredi          → manger-pizza.webp
+  Fête de l'école de danse       → danser-fete.webp
+  Correspondance avec l'Allemagne→ envoyer-lettre.webp
+  Album photos de Turquie        → prendre-photo.webp
+  Prolongation d'emprunt         → prolonger-emprunt.webp
+  Abonnements musique en ligne   → ecouter-musique.webp
+
+Liens : ce-messages-moyen.ts
+
+
+--------------------------------------------------------------------------------
+FAIT — CE A1 « Lire pour s'orienter » (mini-cartes trajets)
+--------------------------------------------------------------------------------
+33 mini-cartes générées (SVG→webp) :
+  /assets/expression/ce/base/orientation/{lieu}-01-{a|b|c}.webp
+
+Lieux : musee, examen, maladiere, olympique, bibliotheque,
+        theatre, gare, foire, inscription, librairie, poste
+
+Liens : ce-orientation-base.ts (MAP → ce/base/orientation)
+
+
+--------------------------------------------------------------------------------
+Reste à faire
+--------------------------------------------------------------------------------
+(Aucun — inventaire initial de 48 fichiers soldé.)
