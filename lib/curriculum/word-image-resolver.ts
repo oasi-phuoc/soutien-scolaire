@@ -86,6 +86,17 @@ function stripDeterminers(tokens: string[]): string[] {
   return out;
 }
 
+/** Slug fichier lecture / son (aligné CO opImg → words/lecture). */
+export function labelToAssetSlug(label: string): string {
+  return label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['’]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+}
+
 function candidateSlugs(label: string): string[] {
   const tokens = tokenize(label);
   if (!tokens.length) return [];

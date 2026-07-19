@@ -1,17 +1,23 @@
-import { speak, primeSpeechVoices, type VoiceGender } from "@/lib/utils/speech";
-
 import { LECTURE_IMAGE_INDEX } from "@/lib/curriculum/content/communication/word-image-index";
+import { labelToAssetSlug, resolveCeCoWordImage } from "@/lib/curriculum/word-image-resolver";
+import { speak, primeSpeechVoices, type VoiceGender } from "@/lib/utils/speech";
 
 export function getWordAssetSlug(word: string): string {
   return word.toLowerCase();
 }
 
 export function getLectureWordImagePath(word: string): string {
+  const resolved = resolveCeCoWordImage(word);
+  if (resolved) return resolved;
+  const slug = labelToAssetSlug(word);
+  if (LECTURE_IMAGE_INDEX[slug]) return LECTURE_IMAGE_INDEX[slug]!;
   return `/assets/words/lecture/${getWordAssetSlug(word)}.webp`;
 }
 
 export function hasLectureWordImage(word: string): boolean {
-  return !!LECTURE_IMAGE_INDEX[getWordAssetSlug(word)];
+  if (resolveCeCoWordImage(word)) return true;
+  const slug = labelToAssetSlug(word);
+  return !!(LECTURE_IMAGE_INDEX[getWordAssetSlug(word)] || LECTURE_IMAGE_INDEX[slug]);
 }
 
 export type { VoiceGender } from "@/lib/utils/speech";
@@ -21,15 +27,19 @@ export function selectedVoice(): VoiceGender {
   return localStorage.getItem("soutien-genre") === "m" ? "m" : "f";
 }
 
+function audioSlugCandidates(text: string): string[] {
+  return [...new Set([getWordAssetSlug(text), labelToAssetSlug(text)])];
+}
+
 /**
  * Ordered list of audio URLs to try for a recording.
  * Uses the selected voice first, with the other gender as fallback.
  */
 function audioCandidates(kind: "mots" | "syllable", text: string): string[] {
-  const slug = getWordAssetSlug(text);
-  const fem = `/assets/words/son_f/${kind}/${slug}.mp3`;
-  const masc = `/assets/words/son_m/${kind}/${slug}.mp3`;
-  return selectedVoice() === "m" ? [masc, fem] : [fem, masc];
+  const slugs = audioSlugCandidates(text);
+  const fem = slugs.map((slug) => `/assets/words/son_f/${kind}/${slug}.mp3`);
+  const masc = slugs.map((slug) => `/assets/words/son_m/${kind}/${slug}.mp3`);
+  return selectedVoice() === "m" ? [...masc, ...fem] : [...fem, ...masc];
 }
 
 /**
@@ -37,7 +47,7 @@ function audioCandidates(kind: "mots" | "syllable", text: string): string[] {
  * Prefer `playWord` for the full fallback chain.
  */
 export function getWordAudioPath(word: string): string {
-  const slug = getWordAssetSlug(word);
+  const slug = audioSlugCandidates(word)[0] ?? getWordAssetSlug(word);
   const kind = selectedVoice() === "m" ? "son_m" : "son_f";
   return `/assets/words/${kind}/mots/${slug}.mp3`;
 }

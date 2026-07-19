@@ -1,6 +1,6 @@
 {
-  "version": 1784397470563,
-  "totalBytes": 683197856,
+  "version": 1784457312998,
+  "totalBytes": 686923142,
   "routes": [
     "/",
     "/avant-propos",
@@ -798,6 +798,10 @@
     "/assets/expression/images/ce/ce-orientation-09.webp",
     "/assets/expression/images/ce/ce-orientation-10.webp",
     "/assets/expression/images/ce/ce-orientation-11.webp",
+    "/assets/expression/images/comp/CE.png",
+    "/assets/expression/images/comp/CO.png",
+    "/assets/expression/images/comp/PE.png",
+    "/assets/expression/images/comp/PO.png",
     "/assets/expression/images/heure/horloge-01h00.webp",
     "/assets/expression/images/heure/horloge-01h30.webp",
     "/assets/expression/images/heure/horloge-02h00.webp",
@@ -2735,6 +2739,7 @@
     "/assets/words/lecture/bouleau.webp",
     "/assets/words/lecture/bouquet.webp",
     "/assets/words/lecture/boussole.webp",
+    "/assets/words/lecture/bouteille-deau.webp",
     "/assets/words/lecture/bouteille.webp",
     "/assets/words/lecture/boutique.webp",
     "/assets/words/lecture/bracelet.webp",
@@ -2752,7 +2757,6 @@
     "/assets/words/lecture/cadeau.webp",
     "/assets/words/lecture/cadenas.webp",
     "/assets/words/lecture/café.webp",
-    "/assets/words/lecture/cahier-bleu.webp",
     "/assets/words/lecture/cahier.webp",
     "/assets/words/lecture/caissier.webp",
     "/assets/words/lecture/calculatrice.webp",
@@ -2768,9 +2772,9 @@
     "/assets/words/lecture/carotte.webp",
     "/assets/words/lecture/carré.webp",
     "/assets/words/lecture/cartable.webp",
-    "/assets/words/lecture/carte-d'étudiant.webp",
-    "/assets/words/lecture/carte-d'identité.webp",
     "/assets/words/lecture/carte-de-credit.webp",
+    "/assets/words/lecture/carte-detudiant.webp",
+    "/assets/words/lecture/carte-didentite.webp",
     "/assets/words/lecture/carte.webp",
     "/assets/words/lecture/casque-1.webp",
     "/assets/words/lecture/casquette.webp",
@@ -2807,6 +2811,7 @@
     "/assets/words/lecture/cheveux.webp",
     "/assets/words/lecture/chèvre.webp",
     "/assets/words/lecture/chien.webp",
+    "/assets/words/lecture/chips.webp",
     "/assets/words/lecture/chocolat-chaud.webp",
     "/assets/words/lecture/chocolat.webp",
     "/assets/words/lecture/chou-fleur.webp",
@@ -3285,6 +3290,7 @@
     "/assets/words/lecture/rouge.webp",
     "/assets/words/lecture/ruisseau.webp",
     "/assets/words/lecture/sac-a-main.webp",
+    "/assets/words/lecture/salade-de-fruits.webp",
     "/assets/words/lecture/salade.webp",
     "/assets/words/lecture/salamandre.webp",
     "/assets/words/lecture/sandales.webp",
@@ -3493,6 +3499,7 @@
     "/assets/words/son_f/mots/bouleau.mp3",
     "/assets/words/son_f/mots/bouquet.mp3",
     "/assets/words/son_f/mots/boussole.mp3",
+    "/assets/words/son_f/mots/bouteille-deau.mp3",
     "/assets/words/son_f/mots/bouteille.mp3",
     "/assets/words/son_f/mots/boutique.mp3",
     "/assets/words/son_f/mots/bracelet.mp3",
@@ -3524,6 +3531,8 @@
     "/assets/words/son_f/mots/caravane.mp3",
     "/assets/words/son_f/mots/carotte.mp3",
     "/assets/words/son_f/mots/carré.mp3",
+    "/assets/words/son_f/mots/carte-detudiant.mp3",
+    "/assets/words/son_f/mots/carte-didentite.mp3",
     "/assets/words/son_f/mots/casque.mp3",
     "/assets/words/son_f/mots/céleri.mp3",
     "/assets/words/son_f/mots/cerise.mp3",
@@ -3534,6 +3543,7 @@
     "/assets/words/son_f/mots/chenille.mp3",
     "/assets/words/son_f/mots/cheval.mp3",
     "/assets/words/son_f/mots/chien.mp3",
+    "/assets/words/son_f/mots/chips.mp3",
     "/assets/words/son_f/mots/chou.mp3",
     "/assets/words/son_f/mots/cire.mp3",
     "/assets/words/son_f/mots/ciseaux.mp3",
@@ -3704,6 +3714,7 @@
     "/assets/words/son_f/mots/romarin.mp3",
     "/assets/words/son_f/mots/rose.mp3",
     "/assets/words/son_f/mots/rue.mp3",
+    "/assets/words/son_f/mots/salade-de-fruits.mp3",
     "/assets/words/son_f/mots/salade.mp3",
     "/assets/words/son_f/mots/sapin.mp3",
     "/assets/words/son_f/mots/saxophone.mp3",
@@ -7825,6 +7836,7 @@
     "/assets/words/son_m/mots/bouleau.mp3",
     "/assets/words/son_m/mots/bouquet.mp3",
     "/assets/words/son_m/mots/boussole.mp3",
+    "/assets/words/son_m/mots/bouteille-deau.mp3",
     "/assets/words/son_m/mots/bouteille.mp3",
     "/assets/words/son_m/mots/boutique.mp3",
     "/assets/words/son_m/mots/bracelet.mp3",
@@ -7856,6 +7868,8 @@
     "/assets/words/son_m/mots/caravane.mp3",
     "/assets/words/son_m/mots/carotte.mp3",
     "/assets/words/son_m/mots/carré.mp3",
+    "/assets/words/son_m/mots/carte-detudiant.mp3",
+    "/assets/words/son_m/mots/carte-didentite.mp3",
     "/assets/words/son_m/mots/casque.mp3",
     "/assets/words/son_m/mots/céleri.mp3",
     "/assets/words/son_m/mots/cerise.mp3",
@@ -7866,6 +7880,7 @@
     "/assets/words/son_m/mots/chenille.mp3",
     "/assets/words/son_m/mots/cheval.mp3",
     "/assets/words/son_m/mots/chien.mp3",
+    "/assets/words/son_m/mots/chips.mp3",
     "/assets/words/son_m/mots/chou.mp3",
     "/assets/words/son_m/mots/cire.mp3",
     "/assets/words/son_m/mots/ciseaux.mp3",
@@ -8036,6 +8051,7 @@
     "/assets/words/son_m/mots/romarin.mp3",
     "/assets/words/son_m/mots/rose.mp3",
     "/assets/words/son_m/mots/rue.mp3",
+    "/assets/words/son_m/mots/salade-de-fruits.mp3",
     "/assets/words/son_m/mots/salade.mp3",
     "/assets/words/son_m/mots/sapin.mp3",
     "/assets/words/son_m/mots/saxophone.mp3",
@@ -15018,6 +15034,26 @@
       "url": "/assets/expression/images/ce/ce-orientation-11.webp",
       "size": 61062,
       "revision": "26607a2602b4a896"
+    },
+    {
+      "url": "/assets/expression/images/comp/CE.png",
+      "size": 782011,
+      "revision": "9a52cfae0ce079d1"
+    },
+    {
+      "url": "/assets/expression/images/comp/CO.png",
+      "size": 788715,
+      "revision": "f6058f76c32a32e1"
+    },
+    {
+      "url": "/assets/expression/images/comp/PE.png",
+      "size": 723078,
+      "revision": "c22932ceb6908cd1"
+    },
+    {
+      "url": "/assets/expression/images/comp/PO.png",
+      "size": 644422,
+      "revision": "c0f13dfffc5ed5e7"
     },
     {
       "url": "/assets/expression/images/heure/horloge-01h00.webp",
@@ -24705,6 +24741,11 @@
       "revision": "eb43aa6f353c5c41"
     },
     {
+      "url": "/assets/words/lecture/bouteille-deau.webp",
+      "size": 13764,
+      "revision": "7def6abf4f031f8c"
+    },
+    {
       "url": "/assets/words/lecture/bouteille.webp",
       "size": 5882,
       "revision": "8052c3ee4773520c"
@@ -24790,11 +24831,6 @@
       "revision": "c64a0b1f1c377391"
     },
     {
-      "url": "/assets/words/lecture/cahier-bleu.webp",
-      "size": 12440,
-      "revision": "174c49ae8032f2cc"
-    },
-    {
       "url": "/assets/words/lecture/cahier.webp",
       "size": 23632,
       "revision": "d842e3825205ba86"
@@ -24870,19 +24906,19 @@
       "revision": "ecffa8ac923d26f2"
     },
     {
-      "url": "/assets/words/lecture/carte-d'étudiant.webp",
-      "size": 3644,
-      "revision": "a5de4a3fcd46fafb"
-    },
-    {
-      "url": "/assets/words/lecture/carte-d'identité.webp",
-      "size": 2042,
-      "revision": "fcc33bbe6e473c47"
-    },
-    {
       "url": "/assets/words/lecture/carte-de-credit.webp",
       "size": 4818,
       "revision": "cac43d8fdedf610a"
+    },
+    {
+      "url": "/assets/words/lecture/carte-detudiant.webp",
+      "size": 28784,
+      "revision": "afa982368c20fce2"
+    },
+    {
+      "url": "/assets/words/lecture/carte-didentite.webp",
+      "size": 52862,
+      "revision": "7883a56d8c6e68b6"
     },
     {
       "url": "/assets/words/lecture/carte.webp",
@@ -25063,6 +25099,11 @@
       "url": "/assets/words/lecture/chien.webp",
       "size": 21206,
       "revision": "930c550313fb54d1"
+    },
+    {
+      "url": "/assets/words/lecture/chips.webp",
+      "size": 48816,
+      "revision": "548111a181ea36a8"
     },
     {
       "url": "/assets/words/lecture/chocolat-chaud.webp",
@@ -27455,6 +27496,11 @@
       "revision": "42ce3f7c0677c343"
     },
     {
+      "url": "/assets/words/lecture/salade-de-fruits.webp",
+      "size": 42826,
+      "revision": "24c2ec890f1f6210"
+    },
+    {
       "url": "/assets/words/lecture/salade.webp",
       "size": 48154,
       "revision": "fe4e4ce988841124"
@@ -28495,6 +28541,11 @@
       "revision": "23c23fe327bd3129"
     },
     {
+      "url": "/assets/words/son_f/mots/bouteille-deau.mp3",
+      "size": 63151,
+      "revision": "8458378ac938d810"
+    },
+    {
       "url": "/assets/words/son_f/mots/bouteille.mp3",
       "size": 55210,
       "revision": "bd9cb573387522c1"
@@ -28650,6 +28701,16 @@
       "revision": "be2656aa25846e63"
     },
     {
+      "url": "/assets/words/son_f/mots/carte-detudiant.mp3",
+      "size": 59389,
+      "revision": "d98f49f0aef1c913"
+    },
+    {
+      "url": "/assets/words/son_f/mots/carte-didentite.mp3",
+      "size": 65659,
+      "revision": "4814d30bd4d624cb"
+    },
+    {
       "url": "/assets/words/son_f/mots/casque.mp3",
       "size": 52598,
       "revision": "28a7129a26e3dc6d"
@@ -28698,6 +28759,11 @@
       "url": "/assets/words/son_f/mots/chien.mp3",
       "size": 46328,
       "revision": "9e3a0bb95e369d85"
+    },
+    {
+      "url": "/assets/words/son_f/mots/chips.mp3",
+      "size": 51448,
+      "revision": "22526c6cf84a7ec0"
     },
     {
       "url": "/assets/words/son_f/mots/chou.mp3",
@@ -29548,6 +29614,11 @@
       "url": "/assets/words/son_f/mots/rue.mp3",
       "size": 50090,
       "revision": "b318f12006dab488"
+    },
+    {
+      "url": "/assets/words/son_f/mots/salade-de-fruits.mp3",
+      "size": 69420,
+      "revision": "fcec3c190e9892d1"
     },
     {
       "url": "/assets/words/son_f/mots/salade.mp3",
@@ -50155,6 +50226,11 @@
       "revision": "23c23fe327bd3129"
     },
     {
+      "url": "/assets/words/son_m/mots/bouteille-deau.mp3",
+      "size": 63151,
+      "revision": "8458378ac938d810"
+    },
+    {
       "url": "/assets/words/son_m/mots/bouteille.mp3",
       "size": 55210,
       "revision": "bd9cb573387522c1"
@@ -50310,6 +50386,16 @@
       "revision": "be2656aa25846e63"
     },
     {
+      "url": "/assets/words/son_m/mots/carte-detudiant.mp3",
+      "size": 59389,
+      "revision": "d98f49f0aef1c913"
+    },
+    {
+      "url": "/assets/words/son_m/mots/carte-didentite.mp3",
+      "size": 65659,
+      "revision": "4814d30bd4d624cb"
+    },
+    {
       "url": "/assets/words/son_m/mots/casque.mp3",
       "size": 52598,
       "revision": "28a7129a26e3dc6d"
@@ -50358,6 +50444,11 @@
       "url": "/assets/words/son_m/mots/chien.mp3",
       "size": 46328,
       "revision": "9e3a0bb95e369d85"
+    },
+    {
+      "url": "/assets/words/son_m/mots/chips.mp3",
+      "size": 51448,
+      "revision": "22526c6cf84a7ec0"
     },
     {
       "url": "/assets/words/son_m/mots/chou.mp3",
@@ -51208,6 +51299,11 @@
       "url": "/assets/words/son_m/mots/rue.mp3",
       "size": 50090,
       "revision": "b318f12006dab488"
+    },
+    {
+      "url": "/assets/words/son_m/mots/salade-de-fruits.mp3",
+      "size": 69420,
+      "revision": "fcec3c190e9892d1"
     },
     {
       "url": "/assets/words/son_m/mots/salade.mp3",

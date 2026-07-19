@@ -1,21 +1,12 @@
 import { buildObjectPickTask, type COObjectPickCard } from "./co-questions-helpers";
+import { labelToAssetSlug } from "../../word-image-resolver";
 
 export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
-function slugify(label: string): string {
-  return label
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/['']/g, "")
-    .replace(/[^a-zA-Z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .toLowerCase();
-}
-
 function opImg(label: string): string {
-  const slug = slugify(label);
+  const slug = labelToAssetSlug(label);
   // Chaussures de sport → baskets (asset lecture existant)
   if (slug === "chaussures-de-sport") return "/assets/words/lecture/baskets.webp";
   return `/assets/words/lecture/${slug}.webp`;
