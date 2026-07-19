@@ -1,0 +1,125 @@
+Images manquantes — Placement français (CE / CO)
+================================================
+Total : 48 fichiers
+Dossier CE manquant : public/assets/expression/images-temp/ (inexistant)
+Dossier CO partiel  : public/assets/expression/images/scene/
+
+
+--------------------------------------------------------------------------------
+CE — Niveau A1 (base) — Exercice « Lire pour s'orienter »
+Source : CE_ORIENTATION_BASE (ce-orientation-base.ts)
+Dossier cible : /assets/expression/images-temp/itineraire/
+33 fichiers (11 lieux × 3 trajets a/b/c)
+--------------------------------------------------------------------------------
+
+Activité : Sortie musée
+  - ce-itineraire-musee-trajet-a.webp
+  - ce-itineraire-musee-trajet-b.webp
+  - ce-itineraire-musee-trajet-c.webp
+
+Activité : Convocation examen
+  - ce-itineraire-examen-trajet-a.webp
+  - ce-itineraire-examen-trajet-b.webp
+  - ce-itineraire-examen-trajet-c.webp
+
+Activité : RDV client 12/03
+  - ce-itineraire-maladiere-trajet-a.webp
+  - ce-itineraire-maladiere-trajet-b.webp
+  - ce-itineraire-maladiere-trajet-c.webp
+
+Activité : Visite (olympique)
+  - ce-itineraire-olympique-trajet-a.webp
+  - ce-itineraire-olympique-trajet-b.webp
+  - ce-itineraire-olympique-trajet-c.webp
+
+Activité : Ski (bibliothèque)
+  - ce-itineraire-bibliotheque-trajet-a.webp
+  - ce-itineraire-bibliotheque-trajet-b.webp
+  - ce-itineraire-bibliotheque-trajet-c.webp
+
+Activité : Spectacle
+  - ce-itineraire-theatre-trajet-a.webp
+  - ce-itineraire-theatre-trajet-b.webp
+  - ce-itineraire-theatre-trajet-c.webp
+
+Activité : train
+  - ce-itineraire-gare-trajet-a.webp
+  - ce-itineraire-gare-trajet-b.webp
+  - ce-itineraire-gare-trajet-c.webp
+
+Activité : Fête foraine
+  - ce-itineraire-foire-trajet-a.webp
+  - ce-itineraire-foire-trajet-b.webp
+  - ce-itineraire-foire-trajet-c.webp
+
+Activité : Inscriptions universitaires — Infos pratiques
+  - ce-itineraire-inscription-trajet-a.webp
+  - ce-itineraire-inscription-trajet-b.webp
+  - ce-itineraire-inscription-trajet-c.webp
+
+Activité : Nouvelle librairie
+  - ce-itineraire-librairie-trajet-a.webp
+  - ce-itineraire-librairie-trajet-b.webp
+  - ce-itineraire-librairie-trajet-c.webp
+
+Activité : Bureau de poste : nouvelle adresse
+  - ce-itineraire-poste-trajet-a.webp
+  - ce-itineraire-poste-trajet-b.webp
+  - ce-itineraire-poste-trajet-c.webp
+
+
+--------------------------------------------------------------------------------
+CE — Niveau A2 (moyen) — Exercice « Lire des messages »
+Source : CE_MESSAGES_MOYEN (ce-messages-moyen.ts)
+Dossier cible : /assets/expression/images-temp/
+9 fichiers
+--------------------------------------------------------------------------------
+
+Activité : Sortie plongée samedi
+  - ce-moyen-message-melina-plongee.webp
+
+Activité : Anniversaire de Sophie
+  - ce-moyen-message-fred-anniversaire.webp
+
+Activité : Vacances chez ma cousine
+  - ce-moyen-message-julia-vacances.webp
+
+Activité : Soirée pizza vendredi
+  - ce-moyen-message-sophie-pizza.webp
+
+Activité : Fête de l'école de danse
+  - ce-moyen-message-karl-danse.webp
+
+Activité : Correspondance avec l'Allemagne
+  - ce-moyen-message-stefanie-correspondante.webp
+
+Activité : Album photos de Turquie
+  - ce-moyen-message-anabelle-album.webp
+
+Activité : Prolongation d'emprunt
+  - ce-moyen-message-bibliotheque-emprunt.webp
+
+Activité : Abonnements musique en ligne
+  - ce-moyen-message-musikenligne.webp
+
+
+--------------------------------------------------------------------------------
+CO — Niveau A1 (base) — Exercice « Identifier des objets »
+Source : CO_OBJET_PICK (co-questions-objet-pick.ts)
+Dossier cible : /assets/expression/images/scene/
+6 fichiers
+--------------------------------------------------------------------------------
+
+Groupe : base-objet-3
+  - carte-detudiant.webp          (carte d'étudiant)
+  - carte-didentite.webp          (carte d'identité)
+
+Groupe : base-scolaire-objet-5
+  - chips.webp                    (chips)
+
+Groupe : base-scolaire-objet-10
+  - salade-de-fruits.webp         (salade de fruits)
+
+Groupe : base-scolaire-objet-12
+  - chaussures-de-sport.webp      (chaussures de sport)
+  - bouteille-deau.webp           (bouteille d'eau)
