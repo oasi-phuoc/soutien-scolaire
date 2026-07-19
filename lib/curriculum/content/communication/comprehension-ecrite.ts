@@ -1010,7 +1010,7 @@ const CE_TEXTS: CEText[] = [
       { question: "Quel pourcentage de la population parle allemand ?", choices: ["Environ 40 %", "Environ 55 %", "Environ 63 %", "Environ 70 %"], correct: 2 },
       { question: "Comment appelle-t-on la partie francophone de la Suisse ?", choices: ["Le Valais", "La Romandie", "Le Tessin", "Les Grisons"], correct: 1 },
       { question: "Dans quel canton parle-t-on principalement l'italien ?", choices: ["Le Valais", "Les Grisons", "Genève", "Le Tessin"], correct: 3 },
-      { question: "Quel est le défi de la diversité linguistique selon le texte ?", choices: ["Les gens ne se comprennent pas", "Les Suisses doivent apprendre plusieurs langues", "Il n'y a pas de langue commune", "L'anglais remplace les langues nationales"], correct: 1 },
+      { question: "Quel est le défi de la diversité linguistique?", choices: ["Les gens ne se comprennent pas", "Les Suisses doivent apprendre plusieurs langues", "Il n'y a pas de langue commune", "L'anglais remplace les langues nationales"], correct: 1 },
       { question: "Quelle proportion de Suisses parle le romanche ?", choices: ["1 %", "5 %", "10 %", "20 %"], correct: 0 },
     ],
   },
@@ -1045,11 +1045,11 @@ const CE_TEXTS: CEText[] = [
     title: "Chercher un emploi en Suisse",
     body: "Trouver un emploi en Suisse demande de la préparation. Il est important d'avoir un curriculum vitae (CV) bien structuré, qui présente vos expériences professionnelles, vos formations et vos compétences linguistiques. En Suisse, les employeurs accordent beaucoup d'importance aux langues parlées, surtout si le poste nécessite de communiquer avec des clients ou des collègues de différentes régions.\n\nLes offres d'emploi se trouvent sur des sites internet comme jobs.ch ou Indeed, mais aussi dans les journaux locaux et les offices régionaux de placement (ORP). Ces derniers peuvent aider les personnes sans emploi à trouver un travail en proposant des formations, des conseils et un suivi personnalisé. En Suisse, le taux de chômage est généralement l'un des plus bas d'Europe.",
     questions: [
-      { question: "Qu'est-ce qu'un CV doit présenter selon le texte ?", choices: ["Uniquement les diplômes", "Les expériences, formations et compétences linguistiques", "Seulement les références", "Le salaire souhaité"], correct: 1 },
+      { question: "Qu'est-ce qu'un CV doit présenter?", choices: ["Uniquement les diplômes", "Les expériences, formations et compétences linguistiques", "Seulement les références", "Le salaire souhaité"], correct: 1 },
       { question: "Pourquoi les langues sont-elles importantes pour les employeurs suisses ?", choices: ["C'est une obligation légale", "Pour communiquer avec des clients ou collègues de différentes régions", "Pour travailler à l'étranger", "C'est une tradition suisse"], correct: 1 },
       { question: "Qu'est-ce que l'ORP ?", choices: ["Un site internet d'offres d'emploi", "L'office régional de placement", "Un syndicat de travailleurs", "Une école professionnelle"], correct: 1 },
       { question: "Quels services propose l'ORP ?", choices: ["Uniquement des formations", "Des formations, conseils et suivi personnalisé", "Seulement un suivi financier", "Des offres d'emploi exclusivement"], correct: 1 },
-      { question: "Comment est le taux de chômage en Suisse selon le texte ?", choices: ["Parmi les plus élevés d'Europe", "Dans la moyenne européenne", "Parmi les plus bas d'Europe", "Le plus bas du monde"], correct: 2 },
+      { question: "Comment est le taux de chômage en Suisse?", choices: ["Parmi les plus élevés d'Europe", "Dans la moyenne européenne", "Parmi les plus bas d'Europe", "Le plus bas du monde"], correct: 2 },
     ],
   },
   {
@@ -1091,7 +1091,7 @@ const CE_TEXTS: CEText[] = [
       { question: "Combien de signatures faut-il pour une initiative populaire ?", choices: ["10 000", "50 000", "100 000", "200 000"], correct: 2 },
       { question: "Quelle est la différence entre initiative et référendum ?", choices: ["Il n'y en a pas", "L'initiative propose une modification constitutionnelle ; le référendum porte sur une loi du Parlement", "Le référendum propose une modification de la Constitution", "Seul le référendum est obligatoire"], correct: 1 },
       { question: "Quelle critique certains font-ils du système suisse ?", choices: ["Il donne trop de pouvoir aux cantons", "Il exclut les étrangers", "Il peut ralentir le processus législatif", "Il est trop coûteux"], correct: 2 },
-      { question: "Qu'est-ce qui rend le système suisse unique selon le texte ?", choices: ["Son fédéralisme", "Sa neutralité", "Sa démocratie directe", "Sa richesse économique"], correct: 2 },
+      { question: "Qu'est-ce qui rend le système suisse unique?", choices: ["Son fédéralisme", "Sa neutralité", "Sa démocratie directe", "Sa richesse économique"], correct: 2 },
     ],
   },
   {
@@ -1105,7 +1105,7 @@ const CE_TEXTS: CEText[] = [
       { question: "Quelle part de l'électricité suisse provient de l'énergie hydraulique ?", choices: ["Plus de 20 %", "Environ 40 %", "Plus de 55 %", "Environ 70 %"], correct: 2 },
       { question: "Quel est le principal défi environnemental mentionné pour la Suisse ?", choices: ["La pollution de l'air dans les villes", "La déforestation", "La fonte des glaciers alpins", "La pollution des rivières"], correct: 2 },
       { question: "Que pourrait-il arriver aux glaciers suisses d'ici la fin du siècle ?", choices: ["Ils pourraient doubler de taille", "Ils ne changeraient pas", "Un tiers pourrait disparaître", "Deux tiers pourraient avoir disparu"], correct: 3 },
-      { question: "Quelle ressource est menacée par la fonte des glaciers selon le texte ?", choices: ["L'énergie hydraulique uniquement", "Les réserves d'eau douce et les écosystèmes de montagne", "Les zones agricoles de plaine", "Le tourisme uniquement"], correct: 1 },
+      { question: "Quelle ressource est menacée par la fonte des glaciers?", choices: ["L'énergie hydraulique uniquement", "Les réserves d'eau douce et les écosystèmes de montagne", "Les zones agricoles de plaine", "Le tourisme uniquement"], correct: 1 },
     ],
   },
   {
@@ -1113,13 +1113,13 @@ const CE_TEXTS: CEText[] = [
     title: "Le marché du travail suisse",
     body: "Le marché du travail suisse est réputé pour sa flexibilité et son dynamisme. La Suisse affiche l'un des taux de chômage les plus bas d'Europe, souvent inférieur à 3 %. Cette situation favorable s'explique par plusieurs facteurs : une économie diversifiée et innovante, une formation professionnelle duale très valorisée et un cadre légal du travail relativement souple.\n\nLa formation professionnelle duale, qui combine une formation pratique en entreprise et un enseignement théorique à l'école, est particulièrement prisée en Suisse. Environ deux tiers des jeunes Suisses choisissent cette voie après l'école obligatoire, ce qui garantit une insertion rapide dans le marché du travail. Les apprentis sont formés dans plus de 200 métiers différents.\n\nCependant, le marché du travail suisse n'est pas sans défis. La numérisation et l'automatisation transforment de nombreux secteurs, créant de nouveaux métiers tout en en rendant d'autres obsolètes. De plus, la concurrence internationale et les accords bilatéraux avec l'Union européenne influencent fortement les conditions d'emploi, notamment dans les secteurs exposés à la libre circulation des travailleurs.",
     questions: [
-      { question: "Quel est approximativement le taux de chômage en Suisse selon le texte ?", choices: ["Inférieur à 1 %", "Souvent inférieur à 3 %", "Environ 5 %", "Entre 5 et 10 %"], correct: 1 },
+      { question: "Quel est approximativement le taux de chômage en Suisse?", choices: ["Inférieur à 1 %", "Souvent inférieur à 3 %", "Environ 5 %", "Entre 5 et 10 %"], correct: 1 },
       { question: "Qu'est-ce que la formation professionnelle duale ?", choices: ["Une formation uniquement scolaire", "Une formation qui combine pratique en entreprise et enseignement théorique", "Une formation universitaire sur deux ans", "Une formation à distance"], correct: 1 },
       { question: "Quelle proportion de jeunes Suisses choisit la formation professionnelle ?", choices: ["Un tiers", "La moitié", "Deux tiers", "Presque tous"], correct: 2 },
       { question: "Dans combien de métiers les apprentis peuvent-ils se former ?", choices: ["Plus de 50", "Plus de 100", "Plus de 200", "Plus de 500"], correct: 2 },
       { question: "Quels sont les défis du marché du travail mentionnés dans le texte ?", choices: ["Le vieillissement de la population uniquement", "La numérisation et la concurrence internationale", "Uniquement les accords avec l'UE", "Le manque de main-d'œuvre qualifiée"], correct: 1 },
-      { question: "Quel effet a la numérisation sur le marché du travail selon le texte ?", choices: ["Elle supprime tous les emplois", "Elle crée de nouveaux métiers tout en en rendant d'autres obsolètes", "Elle n'a aucun impact", "Elle augmente uniquement le chômage"], correct: 1 },
-      { question: "Qu'est-ce qui explique le faible taux de chômage en Suisse selon le texte ?", choices: ["Uniquement la formation professionnelle", "La taille réduite du pays", "Une économie diversifiée, la formation duale et un cadre légal souple", "Les accords avec l'Union européenne"], correct: 2 },
+      { question: "Quel effet a la numérisation sur le marché du travail?", choices: ["Elle supprime tous les emplois", "Elle crée de nouveaux métiers tout en en rendant d'autres obsolètes", "Elle n'a aucun impact", "Elle augmente uniquement le chômage"], correct: 1 },
+      { question: "Qu'est-ce qui explique le faible taux de chômage en Suisse?", choices: ["Uniquement la formation professionnelle", "La taille réduite du pays", "Une économie diversifiée, la formation duale et un cadre légal souple", "Les accords avec l'Union européenne"], correct: 2 },
     ],
   },
 ];

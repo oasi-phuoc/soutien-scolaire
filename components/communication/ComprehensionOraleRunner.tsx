@@ -749,18 +749,19 @@ function ImagePlaceholder({ label, path, compact }: { label: string; path?: stri
   );
 }
 
-function ObjectCardImage({ src, alt }: { src?: string; alt: string }) {
+function ObjectCardImage({ src, alt, compact }: { src?: string; alt: string; compact?: boolean }) {
   const resolved = ceCoImageSource(src, alt);
   const [failed, setFailed] = useState(false);
+  const wrapCls = compact ? "relative mx-auto aspect-[4/3] w-1/2 overflow-hidden rounded-md bg-white" : "relative aspect-[4/3] w-full overflow-hidden rounded-md bg-white";
   if (resolved && !failed) {
     return (
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md bg-white">
+      <div className={wrapCls}>
         <Image
           src={resolved}
           alt={alt}
           fill
           className="object-contain p-1"
-          sizes="(max-width: 640px) 30vw, 160px"
+          sizes={compact ? "(max-width: 640px) 20vw, 100px" : "(max-width: 640px) 30vw, 160px"}
           onError={() => setFailed(true)}
         />
       </div>
@@ -768,7 +769,7 @@ function ObjectCardImage({ src, alt }: { src?: string; alt: string }) {
   }
   return (
     <div
-      className="flex aspect-[4/3] w-full items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-2 text-center text-sm font-semibold text-slate-500"
+      className={`flex aspect-[4/3] items-center justify-center rounded-md border border-dashed border-slate-300 bg-slate-50 px-2 text-center text-sm font-semibold text-slate-500 ${compact ? "mx-auto w-1/2" : "w-full"}`}
       data-image-path={src}
       title={src}
     >
@@ -1089,10 +1090,10 @@ function ImageMatchQuestionView({
         return (
           <div
             key={index}
-            className={`overflow-hidden rounded-xl border-2 bg-white ${isCorrect ? "border-amber-400" : isWrong ? "border-red-300" : "border-slate-200"}`}
+            className={`rounded-xl border-2 bg-white ${isCorrect ? "border-amber-400" : isWrong ? "border-red-300" : "border-slate-200"}`}
           >
-            <ObjectCardImage src={card.image} alt={card.label} />
-            <div className="border-t border-slate-200 p-2">
+            <ObjectCardImage src={card.image} alt={card.label} compact />
+            <div className="relative z-10 border-t border-slate-200 p-2">
               <AppSelect
                 value={String(chosen)}
                 onChange={(v) => setCard(index, Number(v))}
@@ -1104,10 +1105,11 @@ function ImageMatchQuestionView({
                     disabled: takenElsewhere && chosen !== d,
                   };
                 })}
-                placeholder="— n°"
-                emptyOption={{ value: "0", label: "— n°" }}
+                placeholder="—"
+                emptyOption={{ value: "0", label: "—" }}
                 disabled={correction}
                 size="sm"
+                placement="top"
                 className="w-full"
                 aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
               />
@@ -1145,14 +1147,14 @@ function ConversationImageGridQuestionView({
 
   function setCard(cardIndex: number, raw: string) {
     if (correction) return;
-    const nextValue = raw === "" ? 0 : Number.parseInt(raw, 10);
+    const nextValue = raw === "" || raw === "0" ? 0 : Number.parseInt(raw, 10);
     const next = [...selected];
     if (nextValue >= 1 && nextValue <= 4) {
       for (let i = 0; i < next.length; i++) {
         if (i !== cardIndex && next[i] === nextValue) next[i] = 0;
       }
     }
-    next[cardIndex] = nextValue;
+    next[cardIndex] = Number.isFinite(nextValue) ? nextValue : 0;
     onChange(next);
   }
 
@@ -1166,14 +1168,14 @@ function ConversationImageGridQuestionView({
         return (
           <div
             key={`${card.suffix}-${index}`}
-            className={`overflow-hidden rounded-xl border bg-white ${
+            className={`rounded-xl border bg-white ${
               correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
             }`}
           >
-            <ObjectCardImage src={card.image} alt={`Situation ${index + 1}`} />
-            <div className="border-t border-slate-100 p-2">
+            <ObjectCardImage src={card.image} alt={`Situation ${index + 1}`} compact />
+            <div className="relative z-10 border-t border-slate-100 p-2">
               <AppSelect
-                value={current > 0 ? String(current) : ""}
+                value={current > 0 ? String(current) : "0"}
                 onChange={(v) => setCard(index, v)}
                 options={[
                   { value: "1", label: "1" },
@@ -1182,10 +1184,11 @@ function ConversationImageGridQuestionView({
                   { value: "4", label: "4" },
                 ]}
                 placeholder="—"
-                emptyOption={{ value: "", label: "—" }}
+                emptyOption={{ value: "0", label: "—" }}
                 disabled={correction}
                 error={correction && wrong}
                 size="sm"
+                placement="top"
                 className="w-full"
                 aria-label={`Image ${index + 1} — dialogue`}
               />
@@ -1272,24 +1275,21 @@ function QuestionBlock({
   const isImageMatch = part.questions.length === 1 && part.questions[0]!.kind === "image_match";
   const isSingleTask = isMatchGrid || isObjectPick || isImageMatch;
 
+  const consigne = isConversationImageGrid
+    ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
+    : isImageMatch
+      ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
+      : isMatchGrid
+        ? "Lisez les situations. Écoutez les dialogues puis répondez."
+        : isObjectPick
+          ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
+          : "Écoutez l'enregistrement et répondez aux questions.";
+
   return (
     <div className="space-y-5">
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
-            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              {isConversationImageGrid
-                ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
-                : isImageMatch
-                  ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
-                  : isMatchGrid
-                ? "Lisez les situations. Écoutez les dialogues puis répondez."
-                : isObjectPick
-                  ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
-                  : "Écoutez l'enregistrement et répondez aux questions."}
-            </p>
-          </div>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
           <div className="flex shrink-0 items-center gap-2">
             <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
               {part.points} points
@@ -1312,6 +1312,7 @@ function QuestionBlock({
             )}
           </div>
         </div>
+        <p className="w-full text-sm leading-relaxed text-[var(--color-text-secondary)]">{consigne}</p>
         <div className="space-y-3">
           <AudioSequencePlayer items={part.audioGroup.items} />
           {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
@@ -1336,9 +1337,6 @@ function QuestionBlock({
         const answer = answers[key] ?? null;
         return (
           <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
-            {isConversationImageGrid && question.kind === "conversation_image_grid" && (
-              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{question.prompt}</p>
-            )}
             {!isConversationImageGrid && !isSingleTask && (
               <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
             )}

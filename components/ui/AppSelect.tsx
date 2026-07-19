@@ -106,7 +106,7 @@ export function AppSelect({
 
   const sizeCls =
     size === "sm"
-      ? "h-8 min-h-8 rounded-lg px-1.5 text-sm"
+      ? "h-8 min-h-8 rounded-lg px-2 text-sm"
       : "h-10 rounded-[22px] px-4 text-sm";
 
   const menuRounded =
@@ -118,6 +118,8 @@ export function AppSelect({
     placement === "top"
       ? "bottom-full mb-1"
       : "top-full mt-1";
+
+  const isNumericSelection = /^\d+$/.test(triggerLabel);
 
   return (
     <div ref={rootRef} className={`relative ${className}`} style={style}>
@@ -141,7 +143,7 @@ export function AppSelect({
       >
         <span
           className={`min-w-0 truncate ${
-            size === "sm" ? "flex-1 text-center font-semibold uppercase" : ""
+            size === "sm" ? `flex-1 text-center font-semibold ${isNumericSelection ? "" : "uppercase"}` : ""
           } ${
             selected
               ? error
@@ -154,10 +156,10 @@ export function AppSelect({
         </span>
         <svg
           className={`shrink-0 text-[var(--color-theme)] transition-transform ${
-            size === "sm" ? "hidden" : ""
+            size === "sm" ? "opacity-70" : ""
           } ${open ? "rotate-180" : ""}`}
-          width={size === "sm" ? 15 : 17}
-          height={size === "sm" ? 15 : 17}
+          width={size === "sm" ? 14 : 17}
+          height={size === "sm" ? 14 : 17}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -172,7 +174,7 @@ export function AppSelect({
 
       {open && (
         <div
-          className={`absolute left-0 right-0 z-[60] ${menuPosition} overflow-hidden ${menuRounded} bg-white shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30 ${menuClassName}`}
+          className={`absolute left-0 right-0 z-[80] ${menuPosition} overflow-hidden ${menuRounded} bg-white shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30 ${menuClassName}`}
         >
           <div className="app-select-scroll max-h-72 overflow-y-auto overscroll-contain py-2" role="listbox" aria-labelledby={selectId}>
             {emptyOption ? (

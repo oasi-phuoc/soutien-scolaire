@@ -582,7 +582,7 @@ const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
     questions: [
       { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Apprendre une langue à l'âge adulte" }, { label: "Voyager à l'étranger" }, { label: "Enseigner aux enfants" }], correct: 0 },
       { prompt: "Quel avantage ont les adultes ?", choices: [{ label: "Ils comprennent les règles plus vite" }, { label: "Ils ont toujours plus de temps libre" }, { label: "Ils n'oublient jamais rien" }], correct: 0 },
-      { prompt: "Quel est « le secret » selon l'article ?", choices: [{ label: "Pratiquer un peu chaque jour" }, { label: "Travailler dix heures le dimanche" }, { label: "Ne jamais réviser" }], correct: 0 },
+      { prompt: "Quel est « le secret »?", choices: [{ label: "Pratiquer un peu chaque jour" }, { label: "Travailler dix heures le dimanche" }, { label: "Ne jamais réviser" }], correct: 0 },
       { prompt: "Comment rendre l'apprentissage plus vivant ?", choices: [{ label: "Écouter des chansons, regarder des vidéos" }, { label: "Lire le dictionnaire en entier" }, { label: "Ne rien faire" }], correct: 0 },
       { prompt: "Que pense l'article des erreurs ?", choices: [{ label: "Elles font partie de l'apprentissage" }, { label: "Il faut absolument les éviter" }, { label: "Elles sont totalement inutiles" }], correct: 0 },
       { prompt: "Qui progresse souvent plus vite ?", answer: "ceux qui osent parler", accept: ["ceux qui osent parler même mal", "ceux qui parlent", "ceux qui n'ont pas peur des erreurs"] },
@@ -601,7 +601,7 @@ const CE_AVANCE_ARTICLES: ArticleSeriesItem[] = [
       { prompt: "Combien de temps faut-il pour être utile ?", choices: [{ label: "Quelques heures par mois suffisent" }, { label: "Au moins huit heures par jour" }, { label: "Toute l'année sans pause" }], correct: 0 },
       { prompt: "Quel bénéfice le bénévole en tire-t-il ?", choices: [{ label: "Rencontrer des gens et apprendre" }, { label: "Gagner un bon salaire" }, { label: "Voyager gratuitement" }], correct: 0 },
       { prompt: "Pour qui est-ce aussi un moyen de retrouver des contacts ?", choices: [{ label: "Pour les personnes seules" }, { label: "Pour les enfants" }, { label: "Pour les touristes" }], correct: 0 },
-      { prompt: "Comment commencer selon l'article ?", answer: "contacter une association proche", accept: ["contacter une association", "contacter une association près de chez soi", "s'adresser à une association"] },
+      { prompt: "Comment commencer?", answer: "contacter une association proche", accept: ["contacter une association", "contacter une association près de chez soi", "s'adresser à une association"] },
       { prompt: "Pourquoi commencer doucement ?", answer: "pour ne pas se décourager", accept: ["pour ne pas se décourager", "pour tenir dans le temps", "pour éviter d'abandonner"] },
       { prompt: "Combien de parties contient l'article ?", answer: "3", accept: ["trois"] },
     ],
@@ -1189,12 +1189,14 @@ function PartView({ part, answers, setAnswer, correction }: { part: CEPart; answ
 function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index: number; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void }) {
   return (
     <div className="space-y-5">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wider" style={{ color: ACCENT }}>Exercice {index + 1}</p>
-          <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+      <div className="space-y-2">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-wider" style={{ color: ACCENT }}>Exercice {index + 1}</p>
+            <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+          </div>
+          <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
         </div>
-        <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
       </div>
       <PartView part={part} answers={answers} setAnswer={setAnswer} />
     </div>

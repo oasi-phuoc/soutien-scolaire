@@ -1878,7 +1878,7 @@ export const SCOLAIRE_ANNONCE_23 = buildPool("base", "scolaire-annonce-23", [
   },
   {
     id: "sa23-q5",
-    textQ: "Où êtes-vous selon l'annonce ?",
+    textQ: "Où êtes-vous?",
     text: ["Dans un cinéma", "Dans un train", "Dans un musée"],
     textC: 0,
     img: ["Cinéma", "Train", "Musée"],

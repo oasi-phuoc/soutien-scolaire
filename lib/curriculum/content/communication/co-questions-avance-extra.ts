@@ -37,7 +37,7 @@ const CONVERSATION_11 = buildPool("avance", "conversation-11", [
 
 const CONVERSATION_12 = buildPool("avance", "conversation-12", [
   {
-    id: "ac12-q1", textQ: "Quel est le site le plus visité de France selon l'enquête ?", text: ["Disneyland Paris","La Tour Eiffel","Le Louvre"], textC: 0,
+    id: "ac12-q1", textQ: "Quel est le site le plus visité de France?", text: ["Disneyland Paris","La Tour Eiffel","Le Louvre"], textC: 0,
     img: ["Disneyland","Tour Eiffel","Louvre"], imgC: 0,
     fillQ: "Le plus visité est _________ Paris.", fill: "Disneyland",
     fillA: ["disneyland"],
@@ -109,7 +109,7 @@ const CONVERSATION_13 = buildPool("avance", "conversation-13", [
 
 const CONVERSATION_14 = buildPool("avance", "conversation-14", [
   {
-    id: "ac14-q1", textQ: "Quel est le plat préféré des Français selon l'enquête ?", text: ["Le magret de canard","Les moules-frites","Le couscous"], textC: 0,
+    id: "ac14-q1", textQ: "Quel est le plat préféré des Français?", text: ["Le magret de canard","Les moules-frites","Le couscous"], textC: 0,
     img: ["Magret","Moules-frites","Couscous"], imgC: 0,
     fillQ: "Le plat préféré est le magret de _________.", fill: "canard",
   },
@@ -513,7 +513,7 @@ const RADIO_7 = buildPool("avance", "radio-7", [
     fillQ: "La journée a lieu le ___ novembre.", fill: "13",
   },
   {
-    id: "ar7-q3", textQ: "Quel est le contraire de la gentillesse selon l'auteur ?", text: ["Le cynisme","La méchanceté","La colère"], textC: 0,
+    id: "ar7-q3", textQ: "Quel est le contraire de la gentillesse?", text: ["Le cynisme","La méchanceté","La colère"], textC: 0,
     img: ["Cynisme","Méchanceté","Colère"], imgC: 0,
     fillQ: "Le contraire n'est pas la méchanceté, mais le _________.", fill: "cynisme",
   },
@@ -524,7 +524,7 @@ const RADIO_7 = buildPool("avance", "radio-7", [
     fillA: ["bourin"],
   },
   {
-    id: "ar7-q5", textQ: "Où la gentillesse est-elle née selon l'auteur ?", text: ["Dans la noblesse romaine","Dans les usines","Dans les écoles"], textC: 0,
+    id: "ar7-q5", textQ: "Où la gentillesse est-elle née?", text: ["Dans la noblesse romaine","Dans les usines","Dans les écoles"], textC: 0,
     img: ["Noblesse romaine","Usines","Écoles"], imgC: 0,
     fillQ: "Elle est née dans la noblesse _________.", fill: "romaine",
   },
@@ -1136,7 +1136,7 @@ const RADIO_24 = buildPool("avance", "radio-24", [
     fillA: ["etes"],
   },
   {
-    id: "ar24-q5", textQ: "Combien de temps pour avaler un menu selon le texte ?", text: ["Moins de trente minutes","Une heure","Deux heures"], textC: 0,
+    id: "ar24-q5", textQ: "Combien de temps pour avaler un menu?", text: ["Moins de trente minutes","Une heure","Deux heures"], textC: 0,
     img: ["< 30 min","1 h","2 h"], imgC: 0,
     fillQ: "Avaler un menu en moins de ___ minutes.", fill: "trente",
     fillA: ["30"],

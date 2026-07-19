@@ -1095,19 +1095,14 @@ export function OralProductionRunner({
       {phase === "task3" && (
         <div className="flex-1 space-y-4">
           <div>
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-                  Partie 3 — Description d&apos;image
-                </h2>
-                <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
-                  Enregistrez autant de phrases que vous voulez, puis validez.
-                </p>
-              </div>
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+                Partie 3 — Description d&apos;image
+              </h2>
               <button
                 type="button"
                 onClick={() => { setImageHelpOpen(true); setOpenTranscriptIdx(null); }}
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:opacity-80"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors hover:opacity-80"
                 style={{ color: ACCENT }}
                 aria-label="Astuces"
                 title="Astuces"
@@ -1119,6 +1114,9 @@ export function OralProductionRunner({
                 </svg>
               </button>
             </div>
+            <p className="mt-1 w-full text-xs leading-relaxed text-[var(--color-text-secondary)]">
+              Enregistrez autant de phrases que vous voulez, puis validez.
+            </p>
           </div>
 
           <div className="overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white">
@@ -1450,7 +1448,7 @@ export function OralProductionRunner({
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 5 — Argumentation
             </h2>
-            <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
+            <p className="mt-1 w-full text-xs leading-relaxed text-[var(--color-text-secondary)]">
               Enregistrez autant de phrases que vous voulez, puis validez.
             </p>
           </div>

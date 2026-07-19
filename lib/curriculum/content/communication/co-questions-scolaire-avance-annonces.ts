@@ -1024,7 +1024,7 @@ export const SCOLAIRE_AVANCE_ANNONCE_36 = buildPool("avance", "scolaire-annonce-
   },
   {
     id: "saa36-q2",
-    textQ: "Faut-il éplucher les légumes bio selon l'annonce ?",
+    textQ: "Faut-il éplucher les légumes bio?",
     text: ["Non", "Oui, toujours", "Oui, sauf les carottes"],
     textC: 0,
     img: ["Non", "Oui", "Carottes"],

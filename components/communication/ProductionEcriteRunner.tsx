@@ -421,9 +421,9 @@ function WritingExercise({
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
+        <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         <SourceMessageCard prompt={prompt} />
-        <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
+        <p className="mt-3 w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
         <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
         <ul className="mt-1 space-y-1">
           {prompt.points.map((point) => (
@@ -893,9 +893,9 @@ export function ProductionEcriteRunner({
       <Header level={level} title="Production écrite" placement={mode === "placement"} />
       <ProgressBar steps={stepMeta} current={current} remaining={remaining} secondsLeft={secondsLeft} onSelect={setCurrent} />
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{step.title}</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">{step.points} pts</span>
+          <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">{step.points} pts</span>
         </div>
         {current === "form" && formTemplate && (
           <FormExercise
