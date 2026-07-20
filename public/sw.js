@@ -144,25 +144,43 @@ async function assetIsCurrent(cache, entry, meta) {
   if (!cached) return false;
 
   const storedRevision = meta.assets?.[entry.url];
-  if (!entry.revision || storedRevision !== entry.revision) return false;
 
-  if (entry.size > 0) {
-    const cachedSize = await responseBytes(cached);
-    if (cachedSize !== entry.size) return false;
+  // Révision connue et identique → fichier à jour (contrôle taille si dispo).
+  if (entry.revision && storedRevision === entry.revision) {
+    if (entry.size > 0) {
+      const cachedSize = await responseBytes(cached);
+      if (cachedSize !== entry.size) return false;
+    }
+    return true;
   }
 
-  return true;
+  // Fichier déjà en cache avec la bonne taille : considéré à jour et on
+  // répare la meta (cas d'une maj interrompue ou d'un asset lié sans révision).
+  if (entry.size > 0) {
+    const cachedSize = await responseBytes(cached);
+    if (cachedSize === entry.size) {
+      if (entry.revision) {
+        meta.assets[entry.url] = entry.revision;
+        meta._healed = true;
+      }
+      return true;
+    }
+  }
+
+  return false;
 }
 
 async function routeIsCurrent(cache, url, manifestVersion, meta) {
   const cached = await cache.match(url);
   if (!cached) return false;
+  // Les pages HTML suivent la version du manifest (rebuild Next).
   if (meta.manifestVersion !== manifestVersion) return false;
   return meta.assets?.[routeMetaKey(url)] === "ok";
 }
 
 async function analyzeOfflinePlan(cache, manifest, onCheckProgress) {
   const meta = await readOfflineMeta(cache);
+  meta.assets = meta.assets || {};
   const assetEntries = normalizeAssetEntries(manifest);
   const routeUrls = manifest.routes || [];
   const routes = [...new Set([...APP_ROUTES, ...routeUrls])];
@@ -178,12 +196,14 @@ async function analyzeOfflinePlan(cache, manifest, onCheckProgress) {
   async function tickCheck() {
     checked += 1;
     if (!onCheckProgress) return;
-    // Emit regularly so the UI bar advances during verification.
     if (checked === totalItems || checked === 1 || checked % 25 === 0) {
+      const pendingSoFar = routesToUpdate.length + assetsToUpdate.length;
       await onCheckProgress({
         checked,
         total: totalItems,
         percent: totalItems > 0 ? Math.min(100, Math.round((checked / totalItems) * 100)) : 0,
+        pendingSoFar,
+        skippedSoFar: skippedCount,
       });
     }
   }
@@ -205,6 +225,13 @@ async function analyzeOfflinePlan(cache, manifest, onCheckProgress) {
       pendingBytes += entry.size || 0;
     }
     await tickCheck();
+  }
+
+  // Persiste les révisions réparées pour les prochaines vérifs.
+  if (meta._healed) {
+    delete meta._healed;
+    finalizeOfflineMeta(meta, manifestVersion);
+    await writeOfflineMeta(cache, meta);
   }
 
   return {
@@ -249,6 +276,11 @@ async function downloadBatch(items, runOne, state, notifyProgress) {
     skippedCount: state.skippedCount,
     percent,
   });
+
+  // Persiste la meta régulièrement pour ne pas tout re-télécharger si interruption.
+  if (state.cache && state.meta && state.completed % 30 === 0) {
+    await writeOfflineMeta(state.cache, state.meta);
+  }
 }
 
 async function cacheManifestAsset(cache, entry, meta) {
@@ -369,6 +401,8 @@ self.addEventListener("message", (event) => {
             checked: check.checked,
             total: check.total,
             percent: check.percent,
+            pendingSoFar: check.pendingSoFar ?? 0,
+            skippedSoFar: check.skippedSoFar ?? 0,
           });
         });
 
@@ -416,6 +450,8 @@ self.addEventListener("message", (event) => {
           total: totalWork,
           pendingBytes,
           skippedCount,
+          cache,
+          meta,
         };
         const BATCH = 6;
 

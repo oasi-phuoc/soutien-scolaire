@@ -29,6 +29,9 @@ type ProgressState = {
   downloadedBytes: number;
   pendingBytes: number;
   skippedCount: number;
+  /** Pendant la vérif : fichiers déjà jugés à jour / à télécharger. */
+  skippedSoFar: number;
+  pendingSoFar: number;
   /** Pourcentage affiché — uniquement croissant. */
   percent: number;
 };
@@ -81,6 +84,8 @@ const EMPTY_PROGRESS: ProgressState = {
   downloadedBytes: 0,
   pendingBytes: 0,
   skippedCount: 0,
+  skippedSoFar: 0,
+  pendingSoFar: 0,
   percent: 0,
 };
 
@@ -153,12 +158,16 @@ export function OfflineSettings() {
           downloadedBytes: 0,
           pendingBytes: 0,
           skippedCount: 0,
+          skippedSoFar: 0,
+          pendingSoFar: 0,
           percent: 0,
         });
       }
       if (event.data?.type === "OFFLINE_CHECK_PROGRESS") {
         const checked = Number(event.data.checked) || 0;
         const total = Number(event.data.total) || 0;
+        const pendingSoFar = Number(event.data.pendingSoFar) || 0;
+        const skippedSoFar = Number(event.data.skippedSoFar) || 0;
         const percent = typeof event.data.percent === "number"
           ? event.data.percent
           : (total > 0 ? Math.min(100, Math.round((checked / total) * 100)) : 0);
@@ -169,6 +178,8 @@ export function OfflineSettings() {
           downloadedBytes: 0,
           pendingBytes: prev.pendingBytes,
           skippedCount: prev.skippedCount,
+          skippedSoFar: Math.max(prev.phase === "checking" ? prev.skippedSoFar : 0, skippedSoFar),
+          pendingSoFar: Math.max(prev.phase === "checking" ? prev.pendingSoFar : 0, pendingSoFar),
           percent: Math.max(prev.phase === "checking" ? prev.percent : 0, percent),
         }));
       }
@@ -187,6 +198,8 @@ export function OfflineSettings() {
           downloadedBytes: 0,
           pendingBytes,
           skippedCount,
+          skippedSoFar: skippedCount,
+          pendingSoFar: pendingCount,
           percent: 0,
         });
         setState(pendingCount > 0 ? "preparing" : "checking");
@@ -208,6 +221,8 @@ export function OfflineSettings() {
           downloadedBytes: Math.max(prev.phase === "downloading" ? prev.downloadedBytes : 0, downloaded),
           pendingBytes: pendingBytes || prev.pendingBytes,
           skippedCount,
+          skippedSoFar: prev.skippedSoFar,
+          pendingSoFar: prev.pendingSoFar,
           percent: Math.max(prev.phase === "downloading" ? prev.percent : 0, percent),
         }));
         setState("preparing");
@@ -312,6 +327,8 @@ export function OfflineSettings() {
         downloadedBytes: 0,
         pendingBytes: 0,
         skippedCount: 0,
+        skippedSoFar: 0,
+        pendingSoFar: 0,
         percent: 0,
       });
       if (navigator.storage?.persist) await navigator.storage.persist().catch(() => false);
@@ -364,16 +381,19 @@ export function OfflineSettings() {
 
   const progressTitle = progress.phase === "checking"
     ? "Vérification des fichiers…"
-    : "Téléchargement…";
+    : "Téléchargement des fichiers modifiés…";
 
   const progressSubtitle = progress.phase === "checking"
     ? (progress.total > 0
-      ? `${progress.completed} / ${progress.total} fichiers vérifiés`
+      ? `${progress.completed} / ${progress.total} comparés au catalogue`
+        + (progress.skippedSoFar > 0 || progress.pendingSoFar > 0
+          ? ` · ${progress.pendingSoFar} à mettre à jour · ${progress.skippedSoFar} déjà à jour`
+          : "")
       : "Analyse du contenu en cache…")
     : (progress.total > 0
-      ? `${progress.completed} / ${progress.total} fichiers à mettre à jour`
+      ? `${progress.completed} / ${progress.total} fichiers à télécharger`
         + (progress.downloadedBytes > 0 ? ` · ${formatBytes(progress.downloadedBytes)}` : "")
-        + (progress.skippedCount > 0 ? ` · ${progress.skippedCount} déjà à jour` : "")
+        + (progress.skippedCount > 0 ? ` · ${progress.skippedCount} ignorés (inchangés)` : "")
       : "Préparation…");
 
   return (
