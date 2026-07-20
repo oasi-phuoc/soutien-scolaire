@@ -17,11 +17,16 @@ const DIGITS = {
   seize: "16",
 };
 
-function numberSvg(word, digit) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-<rect width="800" height="600" fill="#ffffff"/>
-<text x="400" y="260" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="180" font-weight="700" fill="#1a1a1a">${digit}</text>
-<text x="400" y="390" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="600" fill="#444444">${word}</text>
+function numberSvg(digit) {
+  const width = 800;
+  const height = 600;
+  const padY = height * 0.1;
+  const boxH = height - padY * 2;
+  const fontSize = Math.floor(Math.min(boxH * 0.95, width / (digit.length * 0.56)));
+  const centerY = height / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+<rect width="${width}" height="${height}" fill="#ffffff"/>
+<text x="${width / 2}" y="${centerY}" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="${fontSize}" font-weight="700" fill="#1a1a1a">${digit}</text>
 </svg>`;
 }
 
@@ -35,8 +40,8 @@ async function main() {
       continue;
     }
     const dest = path.join(outDir, `${word}.webp`);
-    await sharp(Buffer.from(numberSvg(word, digit))).webp({ quality: 90 }).toFile(dest);
-    console.log(`→ ${path.relative(process.cwd(), dest)}`);
+    await sharp(Buffer.from(numberSvg(digit))).webp({ quality: 90 }).toFile(dest);
+    console.log(`→ ${path.relative(process.cwd(), dest)} (${digit})`);
   }
 }
 

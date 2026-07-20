@@ -13,8 +13,6 @@ import { loadProgress, saveProgress, setLevel } from "@/lib/progress/math-progre
 import { LEVEL_LABELS, type LevelKey } from "@/lib/scoring";
 
 const STORAGE_KEY = "soutien:pivot";
-const GENRE_KEY = "soutien-genre";
-type GenreKey = "f" | "m";
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
@@ -66,15 +64,12 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
   const [saved, setSaved] = useState(false);
   const [pivotMsg, setPivotMsg] = useState<string | null>(null);
   const [level, setLevelState] = useState<LevelKey>("base");
-  const [genre, setGenreState] = useState<GenreKey>("f");
   const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
   const [syncError, setSyncError] = useState<string | null>(null);
 
   useEffect(() => {
     const prog = loadProgress();
     setLevelState(prog.level ?? "base");
-    const g = localStorage.getItem(GENRE_KEY) as GenreKey | null;
-    if (g === "f" || g === "m") setGenreState(g);
   }, []);
 
   useEffect(() => {
@@ -318,32 +313,6 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
                 }`}
               >
                 {LEVEL_LABELS[lvl]}
-              </button>
-            );
-          })}
-        </div>
-      </Card>
-
-      {/* Voix */}
-      <Card>
-        <SectionTitle>Voix</SectionTitle>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-          Voix utilisée pour les sons des mots en lecture.
-        </p>
-        <div className="mt-4 flex overflow-hidden rounded-full border border-zinc-200">
-          {([["f", "Féminine"], ["m", "Masculine"]] as [GenreKey, string][]).map(([key, label], i) => {
-            const checked = genre === key;
-            const isLast = i === 1;
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => { setGenreState(key); localStorage.setItem(GENRE_KEY, key); }}
-                className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200"} ${
-                  checked ? "bg-[var(--color-theme)] text-white" : "bg-white text-zinc-500 hover:text-zinc-700"
-                }`}
-              >
-                {label}
               </button>
             );
           })}

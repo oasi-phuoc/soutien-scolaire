@@ -29,14 +29,11 @@ const STATIC_IMAGE_DIRS = [
   "assets/words/lecture-2",
   "expression/co/situations",
 ];
-/** Audio pré-générés (lecture, vocab, CO, nombres maths). */
+/** Audio pré-générés (lecture, vocab, CO, nombres maths). Voix féminine uniquement (son_m hors manifest). */
 const STATIC_AUDIO_DIRS = [
   "assets/words/son_f/mots",
   "assets/words/son_f/syllable",
   "assets/words/son_f/vocab",
-  "assets/words/son_m/mots",
-  "assets/words/son_m/syllable",
-  "assets/words/son_m/vocab",
   "assets/letters/son",
   "assets/expression/co",
   "audio/nombres",

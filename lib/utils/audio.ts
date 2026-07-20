@@ -23,8 +23,7 @@ export function hasLectureWordImage(word: string): boolean {
 export type { VoiceGender } from "@/lib/utils/speech";
 
 export function selectedVoice(): VoiceGender {
-  if (typeof window === "undefined") return "f";
-  return localStorage.getItem("soutien-genre") === "m" ? "m" : "f";
+  return "f";
 }
 
 function audioSlugCandidates(text: string): string[] {
@@ -32,24 +31,19 @@ function audioSlugCandidates(text: string): string[] {
 }
 
 /**
- * Ordered list of audio URLs to try for a recording.
- * Uses the selected voice first, with the other gender as fallback.
+ * Ordered list of audio URLs to try for a recording (son_f only).
  */
 function audioCandidates(kind: "mots" | "syllable", text: string): string[] {
   const slugs = audioSlugCandidates(text);
-  const fem = slugs.map((slug) => `/assets/words/son_f/${kind}/${slug}.mp3`);
-  const masc = slugs.map((slug) => `/assets/words/son_m/${kind}/${slug}.mp3`);
-  return selectedVoice() === "m" ? [...masc, ...fem] : [...fem, ...masc];
+  return slugs.map((slug) => `/assets/words/son_f/${kind}/${slug}.mp3`);
 }
 
 /**
- * Preferred word recording path for the selected voice.
- * Prefer `playWord` for the full fallback chain.
+ * Preferred word recording path (son_f).
  */
 export function getWordAudioPath(word: string): string {
   const slug = audioSlugCandidates(word)[0] ?? getWordAssetSlug(word);
-  const kind = selectedVoice() === "m" ? "son_m" : "son_f";
-  return `/assets/words/${kind}/mots/${slug}.mp3`;
+  return `/assets/words/son_f/mots/${slug}.mp3`;
 }
 
 const PLAY_TIMEOUT_MS = 8000;
@@ -80,7 +74,7 @@ async function playWithFallback(candidates: string[], fallbackText: string): Pro
   for (const url of candidates) {
     if (await tryPlayUrl(url)) return;
   }
-  speak(fallbackText, "fr-CH", 0.85, selectedVoice());
+  speak(fallbackText, "fr-CH", 0.85, "f");
 }
 
 /** Play a word recording (preferred voice → other voice → TTS). */

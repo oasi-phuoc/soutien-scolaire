@@ -6,7 +6,6 @@ import {
   vocabAudioSlug,
   vocabSpokenText,
 } from "@/lib/curriculum/vocab-audio";
-import { selectedVoice } from "@/lib/utils/audio";
 import { primeSpeechVoices, speak } from "@/lib/utils/speech";
 
 export function shuffle<T>(arr: T[]): T[] {
@@ -72,12 +71,7 @@ export function playWord(
 
   const folder = vocabAudioFolder(theme);
   const slug = vocabAudioSlug(word);
-  const preferred = selectedVoice();
-  const other = preferred === "m" ? "f" : "m";
-  const candidates = [
-    vocabAudioPath(preferred, folder, slug),
-    vocabAudioPath(other, folder, slug),
-  ];
+  const candidates = [vocabAudioPath("f", folder, slug)];
 
   void (async () => {
     for (const url of candidates) {

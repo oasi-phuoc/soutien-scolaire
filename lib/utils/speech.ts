@@ -171,9 +171,7 @@ function pickFrenchVoice(gender: VoiceGender): SpeechSynthesisVoice | null {
 }
 
 function resolveVoiceGender(gender?: VoiceGender): VoiceGender {
-  if (gender) return gender;
-  if (typeof window === "undefined") return "f";
-  return localStorage.getItem("soutien-genre") === "m" ? "m" : "f";
+  return "f";
 }
 
 /** Prime voice list on first user interaction (iOS/WKWebView returns [] until then). */
