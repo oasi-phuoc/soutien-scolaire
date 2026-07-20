@@ -253,16 +253,16 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
                 </Link>
                 <Link
                   href="/admin/contenu"
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-amber-500 px-4 font-semibold text-amber-800 hover:bg-amber-50"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
                 >
-                  Édition contenu
+                  Édition
                 </Link>
               </>
             )}
             {hasSuiviAccess && (
               <Link
                 href="/suivi"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)] px-4 font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme-light)]"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 font-semibold text-white hover:opacity-90"
               >
                 Suivi
               </Link>
