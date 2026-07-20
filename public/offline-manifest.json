@@ -1,6 +1,6 @@
 {
-  "version": 1784558117711,
-  "totalBytes": 639794051,
+  "version": 1784559211423,
+  "totalBytes": 641606012,
   "routes": [
     "/",
     "/avant-propos",
@@ -1793,7 +1793,6 @@
     "/assets/words/lecture-2/bottes.webp",
     "/assets/words/lecture-2/bottines.webp",
     "/assets/words/lecture-2/bouche.webp",
-    "/assets/words/lecture-2/boucle-d-oreille.webp",
     "/assets/words/lecture-2/boucles-d-oreilles.webp",
     "/assets/words/lecture-2/bougie.webp",
     "/assets/words/lecture-2/bouleau.webp",
@@ -1823,7 +1822,6 @@
     "/assets/words/lecture-2/calculatrice.webp",
     "/assets/words/lecture-2/calecon.webp",
     "/assets/words/lecture-2/cameleon.webp",
-    "/assets/words/lecture-2/camion-de-pompier.webp",
     "/assets/words/lecture-2/camion.webp",
     "/assets/words/lecture-2/campagne.webp",
     "/assets/words/lecture-2/canard.webp",
@@ -1838,7 +1836,6 @@
     "/assets/words/lecture-2/carte-d-identite.webp",
     "/assets/words/lecture-2/carte-de-credit.webp",
     "/assets/words/lecture-2/carte.webp",
-    "/assets/words/lecture-2/casque-1.webp",
     "/assets/words/lecture-2/casque-2.webp",
     "/assets/words/lecture-2/casque.webp",
     "/assets/words/lecture-2/casquette.webp",
@@ -1888,7 +1885,6 @@
     "/assets/words/lecture-2/cigogne.webp",
     "/assets/words/lecture-2/cire.webp",
     "/assets/words/lecture-2/ciseaux.webp",
-    "/assets/words/lecture-2/citron-vert.webp",
     "/assets/words/lecture-2/citron.webp",
     "/assets/words/lecture-2/citronnade.webp",
     "/assets/words/lecture-2/citrouille.webp",
@@ -2046,7 +2042,6 @@
     "/assets/words/lecture-2/fuite.webp",
     "/assets/words/lecture-2/fusee.webp",
     "/assets/words/lecture-2/galaxie.webp",
-    "/assets/words/lecture-2/gant-boxe.webp",
     "/assets/words/lecture-2/gants.webp",
     "/assets/words/lecture-2/gare.webp",
     "/assets/words/lecture-2/gateau.webp",
@@ -2070,7 +2065,6 @@
     "/assets/words/lecture-2/gratte-ciel.webp",
     "/assets/words/lecture-2/grenade.webp",
     "/assets/words/lecture-2/grenouille.webp",
-    "/assets/words/lecture-2/grille-pain.webp",
     "/assets/words/lecture-2/gris.webp",
     "/assets/words/lecture-2/groin.webp",
     "/assets/words/lecture-2/groseille.webp",
@@ -2132,7 +2126,6 @@
     "/assets/words/lecture-2/juin.webp",
     "/assets/words/lecture-2/jumelles.webp",
     "/assets/words/lecture-2/jupe.webp",
-    "/assets/words/lecture-2/jus-d-orange.webp",
     "/assets/words/lecture-2/jus.webp",
     "/assets/words/lecture-2/kaki.webp",
     "/assets/words/lecture-2/kaleidoscope.webp",
@@ -2171,14 +2164,12 @@
     "/assets/words/lecture-2/luciole.webp",
     "/assets/words/lecture-2/lundi.webp",
     "/assets/words/lecture-2/lune.webp",
-    "/assets/words/lecture-2/lunettes-de-soleil.webp",
     "/assets/words/lecture-2/lunettes.webp",
     "/assets/words/lecture-2/lys.webp",
     "/assets/words/lecture-2/macaron.webp",
     "/assets/words/lecture-2/machine-a-laver.webp",
     "/assets/words/lecture-2/macon.webp",
     "/assets/words/lecture-2/madeleine.webp",
-    "/assets/words/lecture-2/maillot-de-bain.webp",
     "/assets/words/lecture-2/maillot.webp",
     "/assets/words/lecture-2/main.webp",
     "/assets/words/lecture-2/mais.webp",
@@ -2218,7 +2209,6 @@
     "/assets/words/lecture-2/moineau.webp",
     "/assets/words/lecture-2/montagne.webp",
     "/assets/words/lecture-2/montgolfiere.webp",
-    "/assets/words/lecture-2/montre-connectee.webp",
     "/assets/words/lecture-2/montre.webp",
     "/assets/words/lecture-2/morceau.webp",
     "/assets/words/lecture-2/morse.webp",
@@ -2542,7 +2532,7 @@
     "/assets/words/lecture/abeille.webp",
     "/assets/words/lecture/abricot.webp",
     "/assets/words/lecture/accordéon.webp",
-    "/assets/words/lecture/activité-mentale.webp",
+    "/assets/words/lecture/activité.webp",
     "/assets/words/lecture/addition.webp",
     "/assets/words/lecture/agenda.webp",
     "/assets/words/lecture/agriculteur.webp",
@@ -2617,7 +2607,6 @@
     "/assets/words/lecture/bottes.webp",
     "/assets/words/lecture/bottines.webp",
     "/assets/words/lecture/bouche.webp",
-    "/assets/words/lecture/boucle-d-oreille.webp",
     "/assets/words/lecture/boucles-d-oreilles.webp",
     "/assets/words/lecture/bougie.webp",
     "/assets/words/lecture/bouleau.webp",
@@ -2646,7 +2635,6 @@
     "/assets/words/lecture/calculatrice.webp",
     "/assets/words/lecture/caleçon.webp",
     "/assets/words/lecture/caméléon.webp",
-    "/assets/words/lecture/camion-de-pompier.webp",
     "/assets/words/lecture/camion.webp",
     "/assets/words/lecture/campagne.webp",
     "/assets/words/lecture/canard.webp",
@@ -2660,7 +2648,7 @@
     "/assets/words/lecture/carte-detudiant.webp",
     "/assets/words/lecture/carte-didentite.webp",
     "/assets/words/lecture/carte.webp",
-    "/assets/words/lecture/casque-1.webp",
+    "/assets/words/lecture/casque.webp",
     "/assets/words/lecture/casquette.webp",
     "/assets/words/lecture/cassis.webp",
     "/assets/words/lecture/ceinture.webp",
@@ -2672,6 +2660,7 @@
     "/assets/words/lecture/cerise.webp",
     "/assets/words/lecture/cerisier.webp",
     "/assets/words/lecture/cerveau.webp",
+    "/assets/words/lecture/chaîne.webp",
     "/assets/words/lecture/chaise.webp",
     "/assets/words/lecture/champ.webp",
     "/assets/words/lecture/champignon.webp",
@@ -2704,7 +2693,6 @@
     "/assets/words/lecture/cigogne.webp",
     "/assets/words/lecture/cire.webp",
     "/assets/words/lecture/ciseaux.webp",
-    "/assets/words/lecture/citron-vert.webp",
     "/assets/words/lecture/citron.webp",
     "/assets/words/lecture/citronnade.webp",
     "/assets/words/lecture/citrouille.webp",
@@ -2728,7 +2716,7 @@
     "/assets/words/lecture/comète.webp",
     "/assets/words/lecture/commode.webp",
     "/assets/words/lecture/compas.webp",
-    "/assets/words/lecture/comptoir.webp",
+    "/assets/words/lecture/comptoire.webp",
     "/assets/words/lecture/concombre.webp",
     "/assets/words/lecture/cône.webp",
     "/assets/words/lecture/confiture.webp",
@@ -2757,6 +2745,7 @@
     "/assets/words/lecture/crocodile.webp",
     "/assets/words/lecture/croissant.webp",
     "/assets/words/lecture/cube.webp",
+    "/assets/words/lecture/cuisinier.webp",
     "/assets/words/lecture/culotte.webp",
     "/assets/words/lecture/cupcake.webp",
     "/assets/words/lecture/cyan.webp",
@@ -2844,7 +2833,6 @@
     "/assets/words/lecture/fruit.webp",
     "/assets/words/lecture/fusée.webp",
     "/assets/words/lecture/galaxie.webp",
-    "/assets/words/lecture/gant-boxe.webp",
     "/assets/words/lecture/gants.webp",
     "/assets/words/lecture/garçon.webp",
     "/assets/words/lecture/gare.webp",
@@ -2866,7 +2854,6 @@
     "/assets/words/lecture/gratte-ciel.webp",
     "/assets/words/lecture/grenade.webp",
     "/assets/words/lecture/grenouille.webp",
-    "/assets/words/lecture/grille-pain.webp",
     "/assets/words/lecture/gris.webp",
     "/assets/words/lecture/groin.webp",
     "/assets/words/lecture/groseille.webp",
@@ -2874,7 +2861,6 @@
     "/assets/words/lecture/guitare.webp",
     "/assets/words/lecture/gymnastique.webp",
     "/assets/words/lecture/haltère.webp",
-    "/assets/words/lecture/haltères.webp",
     "/assets/words/lecture/hamac.webp",
     "/assets/words/lecture/hamburger.webp",
     "/assets/words/lecture/handball.webp",
@@ -2923,7 +2909,6 @@
     "/assets/words/lecture/juge.webp",
     "/assets/words/lecture/jumelles.webp",
     "/assets/words/lecture/jupe.webp",
-    "/assets/words/lecture/jus-d-orange.webp",
     "/assets/words/lecture/jus.webp",
     "/assets/words/lecture/kaki.webp",
     "/assets/words/lecture/kaléidoscope.webp",
@@ -2960,14 +2945,12 @@
     "/assets/words/lecture/luciole.webp",
     "/assets/words/lecture/lundi.webp",
     "/assets/words/lecture/lune.webp",
-    "/assets/words/lecture/lunettes-de-soleil.webp",
     "/assets/words/lecture/lunettes.webp",
     "/assets/words/lecture/lys.webp",
     "/assets/words/lecture/macaron.webp",
     "/assets/words/lecture/machine-a-laver.webp",
     "/assets/words/lecture/maçon.webp",
     "/assets/words/lecture/madeleine.webp",
-    "/assets/words/lecture/maillot-de-bain.webp",
     "/assets/words/lecture/maillot.webp",
     "/assets/words/lecture/main.webp",
     "/assets/words/lecture/maïs.webp",
@@ -2987,6 +2970,7 @@
     "/assets/words/lecture/marron.webp",
     "/assets/words/lecture/marronnier.webp",
     "/assets/words/lecture/marteau.webp",
+    "/assets/words/lecture/mayonnaise.webp",
     "/assets/words/lecture/mécanicien.webp",
     "/assets/words/lecture/médaille.webp",
     "/assets/words/lecture/méduse.webp",
@@ -3004,7 +2988,6 @@
     "/assets/words/lecture/moineau.webp",
     "/assets/words/lecture/montagne.webp",
     "/assets/words/lecture/montgolfière.webp",
-    "/assets/words/lecture/montre-connectee.webp",
     "/assets/words/lecture/montre.webp",
     "/assets/words/lecture/morceau.webp",
     "/assets/words/lecture/morse.webp",
@@ -3420,6 +3403,7 @@
     "/assets/words/son_f/mots/carotte.mp3",
     "/assets/words/son_f/mots/carré.mp3",
     "/assets/words/son_f/mots/cartable.mp3",
+    "/assets/words/son_f/mots/carte-de-credit.mp3",
     "/assets/words/son_f/mots/carte-detudiant.mp3",
     "/assets/words/son_f/mots/carte-didentite.mp3",
     "/assets/words/son_f/mots/carte.mp3",
@@ -3461,6 +3445,7 @@
     "/assets/words/son_f/mots/chèvre.mp3",
     "/assets/words/son_f/mots/chien.mp3",
     "/assets/words/son_f/mots/chips.mp3",
+    "/assets/words/son_f/mots/chocolat-chaud.mp3",
     "/assets/words/son_f/mots/chocolat.mp3",
     "/assets/words/son_f/mots/chou-fleur.mp3",
     "/assets/words/son_f/mots/chou.mp3",
@@ -3585,8 +3570,10 @@
     "/assets/words/son_f/mots/farine.mp3",
     "/assets/words/son_f/mots/faucon.mp3",
     "/assets/words/son_f/mots/fauteuil.mp3",
+    "/assets/words/son_f/mots/femme.mp3",
     "/assets/words/son_f/mots/fenêtre.mp3",
     "/assets/words/son_f/mots/fenouil.mp3",
+    "/assets/words/son_f/mots/fermier.mp3",
     "/assets/words/son_f/mots/ferry.mp3",
     "/assets/words/son_f/mots/feu.mp3",
     "/assets/words/son_f/mots/feuille.mp3",
@@ -3619,6 +3606,7 @@
     "/assets/words/son_f/mots/fusée.mp3",
     "/assets/words/son_f/mots/galaxie.mp3",
     "/assets/words/son_f/mots/gants.mp3",
+    "/assets/words/son_f/mots/garçon.mp3",
     "/assets/words/son_f/mots/gare.mp3",
     "/assets/words/son_f/mots/gâteau.mp3",
     "/assets/words/son_f/mots/gauche.mp3",
@@ -3638,7 +3626,7 @@
     "/assets/words/son_f/mots/grange.mp3",
     "/assets/words/son_f/mots/gratin.mp3",
     "/assets/words/son_f/mots/gratte-ciel.mp3",
-    "/assets/words/son_f/mots/grenades.mp3",
+    "/assets/words/son_f/mots/grenade.mp3",
     "/assets/words/son_f/mots/grenouille.mp3",
     "/assets/words/son_f/mots/gris.mp3",
     "/assets/words/son_f/mots/groin.mp3",
@@ -3646,7 +3634,7 @@
     "/assets/words/son_f/mots/guêpe.mp3",
     "/assets/words/son_f/mots/guitare.mp3",
     "/assets/words/son_f/mots/gymnastique.mp3",
-    "/assets/words/son_f/mots/haltères.mp3",
+    "/assets/words/son_f/mots/haltère.mp3",
     "/assets/words/son_f/mots/hamac.mp3",
     "/assets/words/son_f/mots/hamburger.mp3",
     "/assets/words/son_f/mots/handball.mp3",
@@ -3665,6 +3653,7 @@
     "/assets/words/son_f/mots/hiver.mp3",
     "/assets/words/son_f/mots/hockey.mp3",
     "/assets/words/son_f/mots/homard.mp3",
+    "/assets/words/son_f/mots/homme.mp3",
     "/assets/words/son_f/mots/hopital.mp3",
     "/assets/words/son_f/mots/huile.mp3",
     "/assets/words/son_f/mots/huit.mp3",
@@ -3878,7 +3867,11 @@
     "/assets/words/son_f/mots/pilote.mp3",
     "/assets/words/son_f/mots/piment.mp3",
     "/assets/words/son_f/mots/pin.mp3",
+    "/assets/words/son_f/mots/pinceau.mp3",
+    "/assets/words/son_f/mots/pingouin.mp3",
+    "/assets/words/son_f/mots/pissenlit.mp3",
     "/assets/words/son_f/mots/piste.mp3",
+    "/assets/words/son_f/mots/pivoine.mp3",
     "/assets/words/son_f/mots/poing.mp3",
     "/assets/words/son_f/mots/point.mp3",
     "/assets/words/son_f/mots/pointe.mp3",
@@ -7307,6 +7300,37 @@
     "/assets/words/son_f/syllable/zyzi.mp3",
     "/assets/words/son_f/syllable/zyzo.mp3",
     "/assets/words/son_f/syllable/zyzu.mp3",
+    "/assets/words/son_f/vocab/activité.mp3",
+    "/assets/words/son_f/vocab/brun.mp3",
+    "/assets/words/son_f/vocab/casque.mp3",
+    "/assets/words/son_f/vocab/chaîne.mp3",
+    "/assets/words/son_f/vocab/chalet.mp3",
+    "/assets/words/son_f/vocab/chambre.mp3",
+    "/assets/words/son_f/vocab/chaud.mp3",
+    "/assets/words/son_f/vocab/coin.mp3",
+    "/assets/words/son_f/vocab/comptoire.mp3",
+    "/assets/words/son_f/vocab/couloir.mp3",
+    "/assets/words/son_f/vocab/cuisinier.mp3",
+    "/assets/words/son_f/vocab/doux.mp3",
+    "/assets/words/son_f/vocab/ecole.mp3",
+    "/assets/words/son_f/vocab/etang.mp3",
+    "/assets/words/son_f/vocab/frais.mp3",
+    "/assets/words/son_f/vocab/froid.mp3",
+    "/assets/words/son_f/vocab/fuite.mp3",
+    "/assets/words/son_f/vocab/gauche.mp3",
+    "/assets/words/son_f/vocab/goûter.mp3",
+    "/assets/words/son_f/vocab/grenades.mp3",
+    "/assets/words/son_f/vocab/hopital.mp3",
+    "/assets/words/son_f/vocab/jardin.mp3",
+    "/assets/words/son_f/vocab/juillet.mp3",
+    "/assets/words/son_f/vocab/juin.mp3",
+    "/assets/words/son_f/vocab/mai.mp3",
+    "/assets/words/son_f/vocab/marche.mp3",
+    "/assets/words/son_f/vocab/matin.mp3",
+    "/assets/words/son_f/vocab/mayonnaise.mp3",
+    "/assets/words/son_f/vocab/mère.mp3",
+    "/assets/words/son_f/vocab/métal.mp3",
+    "/assets/words/son_f/vocab/minuit.mp3",
     "/assets/words/son_f/vocab/V1/age.mp3",
     "/assets/words/son_f/vocab/V1/allemagne.mp3",
     "/assets/words/son_f/vocab/V1/angleterre.mp3",
@@ -15869,11 +15893,6 @@
       "revision": "94bcf4f66345eafe"
     },
     {
-      "url": "/assets/words/lecture-2/boucle-d-oreille.webp",
-      "size": 29268,
-      "revision": "7efcdcc486b157e9"
-    },
-    {
       "url": "/assets/words/lecture-2/boucles-d-oreilles.webp",
       "size": 36308,
       "revision": "510253310dc0452b"
@@ -16019,11 +16038,6 @@
       "revision": "89fb8361d053cecc"
     },
     {
-      "url": "/assets/words/lecture-2/camion-de-pompier.webp",
-      "size": 71900,
-      "revision": "cb2d20c26ba61798"
-    },
-    {
       "url": "/assets/words/lecture-2/camion.webp",
       "size": 39974,
       "revision": "0c0d19a871c6e0b0"
@@ -16092,11 +16106,6 @@
       "url": "/assets/words/lecture-2/carte.webp",
       "size": 8346,
       "revision": "d0ff146d1accdc90"
-    },
-    {
-      "url": "/assets/words/lecture-2/casque-1.webp",
-      "size": 21692,
-      "revision": "194b7b74cef3330d"
     },
     {
       "url": "/assets/words/lecture-2/casque-2.webp",
@@ -16342,11 +16351,6 @@
       "url": "/assets/words/lecture-2/ciseaux.webp",
       "size": 22358,
       "revision": "c262d8eecd256dda"
-    },
-    {
-      "url": "/assets/words/lecture-2/citron-vert.webp",
-      "size": 43084,
-      "revision": "4242b1f88a4ebb53"
     },
     {
       "url": "/assets/words/lecture-2/citron.webp",
@@ -17134,11 +17138,6 @@
       "revision": "f522db7cf4c1284b"
     },
     {
-      "url": "/assets/words/lecture-2/gant-boxe.webp",
-      "size": 19794,
-      "revision": "d474e4c6d16d1ea2"
-    },
-    {
       "url": "/assets/words/lecture-2/gants.webp",
       "size": 32252,
       "revision": "2bbe08563fe11ebb"
@@ -17252,11 +17251,6 @@
       "url": "/assets/words/lecture-2/grenouille.webp",
       "size": 30372,
       "revision": "3b834a26615b32ea"
-    },
-    {
-      "url": "/assets/words/lecture-2/grille-pain.webp",
-      "size": 40402,
-      "revision": "7fa02e0c0a728dad"
     },
     {
       "url": "/assets/words/lecture-2/gris.webp",
@@ -17564,11 +17558,6 @@
       "revision": "f739ec0fdb2b4f9b"
     },
     {
-      "url": "/assets/words/lecture-2/jus-d-orange.webp",
-      "size": 22682,
-      "revision": "e48cd2812287738f"
-    },
-    {
       "url": "/assets/words/lecture-2/jus.webp",
       "size": 14876,
       "revision": "515b2c78429fa9db"
@@ -17759,11 +17748,6 @@
       "revision": "9ff9af79199ab1bd"
     },
     {
-      "url": "/assets/words/lecture-2/lunettes-de-soleil.webp",
-      "size": 25700,
-      "revision": "5fbee277935f7ae4"
-    },
-    {
       "url": "/assets/words/lecture-2/lunettes.webp",
       "size": 28664,
       "revision": "b46eb9f9e9178c68"
@@ -17792,11 +17776,6 @@
       "url": "/assets/words/lecture-2/madeleine.webp",
       "size": 76262,
       "revision": "b020d6c6a3e6a1db"
-    },
-    {
-      "url": "/assets/words/lecture-2/maillot-de-bain.webp",
-      "size": 13818,
-      "revision": "f85852f6a52d5a3e"
     },
     {
       "url": "/assets/words/lecture-2/maillot.webp",
@@ -17992,11 +17971,6 @@
       "url": "/assets/words/lecture-2/montgolfiere.webp",
       "size": 22312,
       "revision": "3a443d9ee3dbbd11"
-    },
-    {
-      "url": "/assets/words/lecture-2/montre-connectee.webp",
-      "size": 18036,
-      "revision": "f17f9ca2dd8ff43c"
     },
     {
       "url": "/assets/words/lecture-2/montre.webp",
@@ -19614,7 +19588,7 @@
       "revision": "36e670c7d45b3aef"
     },
     {
-      "url": "/assets/words/lecture/activité-mentale.webp",
+      "url": "/assets/words/lecture/activité.webp",
       "size": 46034,
       "revision": "ef3bc99437ce50fa"
     },
@@ -19989,11 +19963,6 @@
       "revision": "0aae27785009e8a3"
     },
     {
-      "url": "/assets/words/lecture/boucle-d-oreille.webp",
-      "size": 37446,
-      "revision": "040a5fdef630ab53"
-    },
-    {
       "url": "/assets/words/lecture/boucles-d-oreilles.webp",
       "size": 15318,
       "revision": "4c2ff13170876936"
@@ -20134,11 +20103,6 @@
       "revision": "d6ba503443fc78ba"
     },
     {
-      "url": "/assets/words/lecture/camion-de-pompier.webp",
-      "size": 50700,
-      "revision": "01405d4eedc509b5"
-    },
-    {
       "url": "/assets/words/lecture/camion.webp",
       "size": 25482,
       "revision": "a526af769e67e039"
@@ -20204,7 +20168,7 @@
       "revision": "5c35381479ab08e8"
     },
     {
-      "url": "/assets/words/lecture/casque-1.webp",
+      "url": "/assets/words/lecture/casque.webp",
       "size": 17316,
       "revision": "9da7178755546f31"
     },
@@ -20262,6 +20226,11 @@
       "url": "/assets/words/lecture/cerveau.webp",
       "size": 35502,
       "revision": "0149cc27fc581e5c"
+    },
+    {
+      "url": "/assets/words/lecture/chaîne.webp",
+      "size": 20402,
+      "revision": "8045707a2716bd0a"
     },
     {
       "url": "/assets/words/lecture/chaise.webp",
@@ -20424,11 +20393,6 @@
       "revision": "8a2ca1c472bc17df"
     },
     {
-      "url": "/assets/words/lecture/citron-vert.webp",
-      "size": 29258,
-      "revision": "1ac7030599bc078b"
-    },
-    {
       "url": "/assets/words/lecture/citron.webp",
       "size": 16902,
       "revision": "335288a18ff542ba"
@@ -20544,7 +20508,7 @@
       "revision": "fdb334067d146637"
     },
     {
-      "url": "/assets/words/lecture/comptoir.webp",
+      "url": "/assets/words/lecture/comptoire.webp",
       "size": 18714,
       "revision": "f8ef5d885001011e"
     },
@@ -20687,6 +20651,11 @@
       "url": "/assets/words/lecture/cube.webp",
       "size": 11954,
       "revision": "3c557b159d9b6adf"
+    },
+    {
+      "url": "/assets/words/lecture/cuisinier.webp",
+      "size": 59628,
+      "revision": "adf63043cde4f5e9"
     },
     {
       "url": "/assets/words/lecture/culotte.webp",
@@ -21124,11 +21093,6 @@
       "revision": "3fd69638ba4bf39d"
     },
     {
-      "url": "/assets/words/lecture/gant-boxe.webp",
-      "size": 20608,
-      "revision": "dff4c4e90ab9892f"
-    },
-    {
       "url": "/assets/words/lecture/gants.webp",
       "size": 27990,
       "revision": "03145145aa076aa7"
@@ -21234,11 +21198,6 @@
       "revision": "2f1186d0c161a014"
     },
     {
-      "url": "/assets/words/lecture/grille-pain.webp",
-      "size": 10688,
-      "revision": "9af6d832af83993a"
-    },
-    {
       "url": "/assets/words/lecture/gris.webp",
       "size": 7464,
       "revision": "58856d29784f3943"
@@ -21272,11 +21231,6 @@
       "url": "/assets/words/lecture/haltère.webp",
       "size": 12382,
       "revision": "c03c1b97f23d8a40"
-    },
-    {
-      "url": "/assets/words/lecture/haltères.webp",
-      "size": 21666,
-      "revision": "1739fbf4d93e102c"
     },
     {
       "url": "/assets/words/lecture/hamac.webp",
@@ -21519,11 +21473,6 @@
       "revision": "d6182d6bf287fef3"
     },
     {
-      "url": "/assets/words/lecture/jus-d-orange.webp",
-      "size": 11854,
-      "revision": "816a77186c57ffdd"
-    },
-    {
       "url": "/assets/words/lecture/jus.webp",
       "size": 5246,
       "revision": "31b9420c3f8d120e"
@@ -21704,11 +21653,6 @@
       "revision": "86e629ac2cd575cc"
     },
     {
-      "url": "/assets/words/lecture/lunettes-de-soleil.webp",
-      "size": 11006,
-      "revision": "428263fda0569106"
-    },
-    {
       "url": "/assets/words/lecture/lunettes.webp",
       "size": 14052,
       "revision": "44709c98740e2627"
@@ -21737,11 +21681,6 @@
       "url": "/assets/words/lecture/madeleine.webp",
       "size": 26938,
       "revision": "09884eb0f4dc2259"
-    },
-    {
-      "url": "/assets/words/lecture/maillot-de-bain.webp",
-      "size": 11590,
-      "revision": "ec6a820fa11c9c4c"
     },
     {
       "url": "/assets/words/lecture/maillot.webp",
@@ -21839,6 +21778,11 @@
       "revision": "ad7db3529f88087a"
     },
     {
+      "url": "/assets/words/lecture/mayonnaise.webp",
+      "size": 27464,
+      "revision": "d1801f41a89c06c7"
+    },
+    {
       "url": "/assets/words/lecture/mécanicien.webp",
       "size": 19290,
       "revision": "fa5b3bbfd824e2cb"
@@ -21922,11 +21866,6 @@
       "url": "/assets/words/lecture/montgolfière.webp",
       "size": 15398,
       "revision": "415f21d7074fcad8"
-    },
-    {
-      "url": "/assets/words/lecture/montre-connectee.webp",
-      "size": 9430,
-      "revision": "79843b4385382b1f"
     },
     {
       "url": "/assets/words/lecture/montre.webp",
@@ -24004,6 +23943,11 @@
       "revision": "dfacf9aa107bb396"
     },
     {
+      "url": "/assets/words/son_f/mots/carte-de-credit.mp3",
+      "size": 64405,
+      "revision": "76e1f61ab333affb"
+    },
+    {
       "url": "/assets/words/son_f/mots/carte-detudiant.mp3",
       "size": 59389,
       "revision": "d98f49f0aef1c913"
@@ -24207,6 +24151,11 @@
       "url": "/assets/words/son_f/mots/chips.mp3",
       "size": 51448,
       "revision": "22526c6cf84a7ec0"
+    },
+    {
+      "url": "/assets/words/son_f/mots/chocolat-chaud.mp3",
+      "size": 59389,
+      "revision": "5450df7cb01000ce"
     },
     {
       "url": "/assets/words/son_f/mots/chocolat.mp3",
@@ -24829,6 +24778,11 @@
       "revision": "3c161083659fb079"
     },
     {
+      "url": "/assets/words/son_f/mots/femme.mp3",
+      "size": 52702,
+      "revision": "84577cb2d160ffe4"
+    },
+    {
       "url": "/assets/words/son_f/mots/fenêtre.mp3",
       "size": 53956,
       "revision": "a7ffb311f92b5140"
@@ -24837,6 +24791,11 @@
       "url": "/assets/words/son_f/mots/fenouil.mp3",
       "size": 53956,
       "revision": "979120cc8a32124e"
+    },
+    {
+      "url": "/assets/words/son_f/mots/fermier.mp3",
+      "size": 53956,
+      "revision": "3377098f3a0ce376"
     },
     {
       "url": "/assets/words/son_f/mots/ferry.mp3",
@@ -24999,6 +24958,11 @@
       "revision": "93656b98a7ee92f6"
     },
     {
+      "url": "/assets/words/son_f/mots/garçon.mp3",
+      "size": 55233,
+      "revision": "d8b1e58443f05583"
+    },
+    {
       "url": "/assets/words/son_f/mots/gare.mp3",
       "size": 59285,
       "revision": "41df333a36e1ab56"
@@ -25094,7 +25058,7 @@
       "revision": "fccbf2221866ad21"
     },
     {
-      "url": "/assets/words/son_f/mots/grenades.mp3",
+      "url": "/assets/words/son_f/mots/grenade.mp3",
       "size": 64405,
       "revision": "7b157cbc87bf561e"
     },
@@ -25134,7 +25098,7 @@
       "revision": "c7791378c06e3c63"
     },
     {
-      "url": "/assets/words/son_f/mots/haltères.mp3",
+      "url": "/assets/words/son_f/mots/haltère.mp3",
       "size": 56463,
       "revision": "5d20c74e426899ff"
     },
@@ -25227,6 +25191,11 @@
       "url": "/assets/words/son_f/mots/homard.mp3",
       "size": 55210,
       "revision": "652e7afd7ba33f61"
+    },
+    {
+      "url": "/assets/words/son_f/mots/homme.mp3",
+      "size": 58135,
+      "revision": "4a9fe46eaf8f0ec3"
     },
     {
       "url": "/assets/words/son_f/mots/hopital.mp3",
@@ -26294,9 +26263,29 @@
       "revision": "a791c5af5e5d1326"
     },
     {
+      "url": "/assets/words/son_f/mots/pinceau.mp3",
+      "size": 51448,
+      "revision": "0887a4adc36ca03d"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pingouin.mp3",
+      "size": 53956,
+      "revision": "d3e3b02c841ec056"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pissenlit.mp3",
+      "size": 53979,
+      "revision": "f4fb46e597139d3c"
+    },
+    {
       "url": "/assets/words/son_f/mots/piste.mp3",
       "size": 55106,
       "revision": "05e539fac19d4c6a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pivoine.mp3",
+      "size": 53956,
+      "revision": "d0b96bee270f995b"
     },
     {
       "url": "/assets/words/son_f/mots/poing.mp3",
@@ -43437,6 +43426,161 @@
       "url": "/assets/words/son_f/syllable/zyzu.mp3",
       "size": 11016,
       "revision": "874b47ddd9db58bc"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/activité.mp3",
+      "size": 56463,
+      "revision": "233dd5dcc50dd500"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/brun.mp3",
+      "size": 47686,
+      "revision": "d4621e6ec7574e6d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/casque.mp3",
+      "size": 52598,
+      "revision": "28a7129a26e3dc6d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/chaîne.mp3",
+      "size": 52702,
+      "revision": "27b6593db0bccaa6"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/chalet.mp3",
+      "size": 50194,
+      "revision": "1eb6491996a10d32"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/chambre.mp3",
+      "size": 53956,
+      "revision": "74ce6b413dd42167"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/chaud.mp3",
+      "size": 50090,
+      "revision": "c9f8d97465014925"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/coin.mp3",
+      "size": 47686,
+      "revision": "5d30971d0fe30103"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/comptoire.mp3",
+      "size": 53956,
+      "revision": "62a42ba45674bb6a"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/couloir.mp3",
+      "size": 60643,
+      "revision": "9e61d62811fb5213"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/cuisinier.mp3",
+      "size": 53956,
+      "revision": "3678aa6314a24a5f"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/doux.mp3",
+      "size": 60539,
+      "revision": "15f443d7c52b91bb"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/ecole.mp3",
+      "size": 52598,
+      "revision": "c285f311a84dc5cb"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/etang.mp3",
+      "size": 50194,
+      "revision": "0c884b32ac7e65a7"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/frais.mp3",
+      "size": 52598,
+      "revision": "022b19085376f6d6"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/froid.mp3",
+      "size": 50090,
+      "revision": "18f37607160590fa"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/fuite.mp3",
+      "size": 52702,
+      "revision": "f1972035a160b873"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/gauche.mp3",
+      "size": 53956,
+      "revision": "aea7a7d299f4fb8d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/goûter.mp3",
+      "size": 51448,
+      "revision": "23d0cf606e265bb8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/grenades.mp3",
+      "size": 64405,
+      "revision": "7b157cbc87bf561e"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/hopital.mp3",
+      "size": 58031,
+      "revision": "f769d022c7d1813d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/jardin.mp3",
+      "size": 52598,
+      "revision": "b1a6e118266e02f4"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/juillet.mp3",
+      "size": 52702,
+      "revision": "099a8d87f9ddaf28"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/juin.mp3",
+      "size": 56463,
+      "revision": "a2d22a725b129be9"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/mai.mp3",
+      "size": 52702,
+      "revision": "74878040d4b173ee"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/marche.mp3",
+      "size": 50090,
+      "revision": "2163be8f20865bbc"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/matin.mp3",
+      "size": 46432,
+      "revision": "76394ee2a3f4590b"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/mayonnaise.mp3",
+      "size": 58135,
+      "revision": "0fa144a68ea904b8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/mère.mp3",
+      "size": 65659,
+      "revision": "1131aa83c836910f"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/métal.mp3",
+      "size": 53956,
+      "revision": "4b3ed15aec9cfdf2"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/minuit.mp3",
+      "size": 52702,
+      "revision": "50f8e0a9195e09ed"
     },
     {
       "url": "/assets/words/son_f/vocab/V1/age.mp3",

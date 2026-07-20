@@ -219,7 +219,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Remplacement",
-      image: "/assets/words/lecture/comptoir.webp",
+      image: "/assets/words/lecture/comptoire.webp",
       imageLabel: "Remplacement",
       body: "Bonjour, je suis absente aujourd'hui. Remplace-moi à l'accueil. Si un client arrive en retard, propose un nouveau rendez-vous.\n— Samira",
       questions: [
@@ -278,11 +278,11 @@ const ARTICLE_SERIES: ArticleSeriesItem[] = [
     sections: [
       { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "/assets/words/lecture/alimentation.webp", imageLabel: "Alimentation" },
       { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "/assets/words/lecture/vélo.webp", imageLabel: "Sport" },
-      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/assets/words/lecture/activité-mentale.webp", imageLabel: "Activité mentale" },
+      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "/assets/words/lecture/activité.webp", imageLabel: "Activité mentale" },
     ],
     questions: [
       { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/assets/words/lecture/chaussures.webp" }, { label: "La boxe", image: "/assets/words/lecture/gant-boxe.webp" }, { label: "Le ski nautique", image: "/assets/expression/images/scene/faire-ski.webp" }], correct: 0, image: true },
+      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "/assets/words/lecture/chaussures.webp" }, { label: "La boxe", image: "/assets/words/lecture/gants.webp" }, { label: "Le ski nautique", image: "/assets/expression/images/scene/faire-ski.webp" }], correct: 0, image: true },
       { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
       { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
       { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
