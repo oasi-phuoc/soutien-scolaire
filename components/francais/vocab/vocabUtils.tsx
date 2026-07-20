@@ -3,6 +3,7 @@ import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   vocabAudioFolder,
   vocabAudioPath,
+  vocabAudioRootPath,
   vocabAudioSlug,
   vocabSpokenText,
 } from "@/lib/curriculum/vocab-audio";
@@ -71,7 +72,10 @@ export function playWord(
 
   const folder = vocabAudioFolder(theme);
   const slug = vocabAudioSlug(word);
-  const candidates = [vocabAudioPath("f", folder, slug)];
+  const candidates = [
+    vocabAudioRootPath("f", slug),
+    vocabAudioPath("f", folder, slug),
+  ];
 
   void (async () => {
     for (const url of candidates) {

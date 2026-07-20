@@ -126,3 +126,8 @@ export function vocabAudioPath(
 ): string {
   return `/assets/words/son_${gender}/vocab/${folder}/${slug}.mp3`;
 }
+
+/** Audio vocab à la racine de son_f/vocab (prioritaire sur V1, V2…). */
+export function vocabAudioRootPath(gender: "f" | "m", slug: string): string {
+  return `/assets/words/son_${gender}/vocab/${slug}.mp3`;
+}
