@@ -1,4 +1,4 @@
-const CACHE_VERSION = "learnup-offline-v9";
+const CACHE_VERSION = "learnup-offline-v10";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const OFFLINE_META_URL = "/__learnup-offline-meta";
@@ -161,33 +161,50 @@ async function routeIsCurrent(cache, url, manifestVersion, meta) {
   return meta.assets?.[routeMetaKey(url)] === "ok";
 }
 
-async function analyzeOfflinePlan(cache, manifest) {
+async function analyzeOfflinePlan(cache, manifest, onCheckProgress) {
   const meta = await readOfflineMeta(cache);
   const assetEntries = normalizeAssetEntries(manifest);
   const routeUrls = manifest.routes || [];
   const routes = [...new Set([...APP_ROUTES, ...routeUrls])];
   const manifestVersion = manifest.version || 0;
+  const totalItems = routes.length + assetEntries.length;
 
   const routesToUpdate = [];
   const assetsToUpdate = [];
   let pendingBytes = 0;
   let skippedCount = 0;
+  let checked = 0;
+
+  async function tickCheck() {
+    checked += 1;
+    if (!onCheckProgress) return;
+    // Emit regularly so the UI bar advances during verification.
+    if (checked === totalItems || checked === 1 || checked % 25 === 0) {
+      await onCheckProgress({
+        checked,
+        total: totalItems,
+        percent: totalItems > 0 ? Math.min(100, Math.round((checked / totalItems) * 100)) : 0,
+      });
+    }
+  }
 
   for (const url of routes) {
     if (await routeIsCurrent(cache, url, manifestVersion, meta)) {
       skippedCount += 1;
-      continue;
+    } else {
+      routesToUpdate.push(url);
     }
-    routesToUpdate.push(url);
+    await tickCheck();
   }
 
   for (const entry of assetEntries) {
     if (await assetIsCurrent(cache, entry, meta)) {
       skippedCount += 1;
-      continue;
+    } else {
+      assetsToUpdate.push(entry);
+      pendingBytes += entry.size || 0;
     }
-    assetsToUpdate.push(entry);
-    pendingBytes += entry.size || 0;
+    await tickCheck();
   }
 
   return {
@@ -198,9 +215,40 @@ async function analyzeOfflinePlan(cache, manifest) {
     pendingBytes,
     skippedCount,
     totalWork: routesToUpdate.length + assetsToUpdate.length,
-    totalItems: routes.length + assetEntries.length,
+    totalItems,
     expectedBytes: manifest.totalBytes || 0,
   };
+}
+
+/** Download a batch in parallel, then apply counters + notify once (monotonic). */
+async function downloadBatch(items, runOne, state, notifyProgress) {
+  const results = await Promise.all(items.map(async (item) => {
+    try {
+      return await runOne(item);
+    } catch {
+      return 0;
+    }
+  }));
+
+  for (const bytes of results) {
+    state.completed += 1;
+    state.downloadedBytes += bytes;
+  }
+
+  const percent = state.total > 0
+    ? Math.min(100, Math.round((state.completed / state.total) * 100))
+    : 0;
+
+  await notifyProgress({
+    type: "OFFLINE_PROGRESS",
+    phase: "downloading",
+    completed: state.completed,
+    total: state.total,
+    downloadedBytes: state.downloadedBytes,
+    pendingBytes: state.pendingBytes,
+    skippedCount: state.skippedCount,
+    percent,
+  });
 }
 
 async function cacheManifestAsset(cache, entry, meta) {
@@ -311,7 +359,19 @@ self.addEventListener("message", (event) => {
       try {
         await notifyClients({ type: "OFFLINE_CHECK_START" });
 
-        const { manifest, plan } = await buildUpdatePlan();
+        const manifestRes = await fetch("/offline-manifest.json", { cache: "no-store" });
+        const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
+        const cache = await caches.open(CORE_CACHE);
+
+        const plan = await analyzeOfflinePlan(cache, manifest, async (check) => {
+          await notifyClients({
+            type: "OFFLINE_CHECK_PROGRESS",
+            checked: check.checked,
+            total: check.total,
+            percent: check.percent,
+          });
+        });
+
         const {
           meta,
           manifestVersion,
@@ -331,11 +391,12 @@ self.addEventListener("message", (event) => {
           skippedCount,
           totalItems,
           expectedBytes,
+          routesCount: routesToUpdate.length,
+          assetsCount: assetsToUpdate.length,
         });
 
         if (totalWork === 0) {
           finalizeOfflineMeta(meta, manifestVersion);
-          const cache = await caches.open(CORE_CACHE);
           await writeOfflineMeta(cache, meta);
           await notifyClients({
             type: "OFFLINE_READY",
@@ -349,49 +410,35 @@ self.addEventListener("message", (event) => {
           return;
         }
 
-        const cache = await caches.open(CORE_CACHE);
-        let completed = 0;
-        let downloadedBytes = 0;
+        const state = {
+          completed: 0,
+          downloadedBytes: 0,
+          total: totalWork,
+          pendingBytes,
+          skippedCount,
+        };
         const BATCH = 6;
+
+        const notifyProgress = (message) => notifyClients(message);
 
         for (let i = 0; i < routesToUpdate.length; i += BATCH) {
           const batch = routesToUpdate.slice(i, i + BATCH);
-          await Promise.all(batch.map(async (url) => {
-            try {
-              downloadedBytes += await cacheRoute(cache, url, manifestVersion, meta);
-            } catch {
-              // One failed route must not cancel the whole download.
-            }
-            completed += 1;
-            await notifyClients({
-              type: "OFFLINE_PROGRESS",
-              completed,
-              total: totalWork,
-              downloadedBytes,
-              pendingBytes,
-              skippedCount,
-            });
-          }));
+          await downloadBatch(
+            batch,
+            (url) => cacheRoute(cache, url, manifestVersion, meta),
+            state,
+            notifyProgress,
+          );
         }
 
         for (let i = 0; i < assetsToUpdate.length; i += BATCH) {
           const batch = assetsToUpdate.slice(i, i + BATCH);
-          await Promise.all(batch.map(async (entry) => {
-            try {
-              downloadedBytes += await cacheManifestAsset(cache, entry, meta);
-            } catch {
-              // One failed asset must not cancel the whole download.
-            }
-            completed += 1;
-            await notifyClients({
-              type: "OFFLINE_PROGRESS",
-              completed,
-              total: totalWork,
-              downloadedBytes,
-              pendingBytes,
-              skippedCount,
-            });
-          }));
+          await downloadBatch(
+            batch,
+            (entry) => cacheManifestAsset(cache, entry, meta),
+            state,
+            notifyProgress,
+          );
         }
 
         finalizeOfflineMeta(meta, manifestVersion);
@@ -399,7 +446,7 @@ self.addEventListener("message", (event) => {
 
         await notifyClients({
           type: "OFFLINE_READY",
-          downloadedBytes,
+          downloadedBytes: state.downloadedBytes,
           totalBytes: expectedBytes,
           skippedCount,
           upToDate: false,

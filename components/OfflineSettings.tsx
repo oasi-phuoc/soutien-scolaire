@@ -20,6 +20,19 @@ type OfflineSyncInfo = {
   updatedAt: number | null;
 };
 
+type ProgressState = {
+  phase: "idle" | "checking" | "downloading";
+  /** Fichiers déjà traités dans la phase courante (vérif ou téléchargement). */
+  completed: number;
+  /** Total de la phase courante. */
+  total: number;
+  downloadedBytes: number;
+  pendingBytes: number;
+  skippedCount: number;
+  /** Pourcentage affiché — uniquement croissant. */
+  percent: number;
+};
+
 function formatBytes(bytes: number) {
   if (bytes < 1024 * 1024) return `${Math.max(0, Math.round(bytes / 1024))} Ko`;
   return `${(bytes / (1024 * 1024)).toFixed(1).replace(".", ",")} Mo`;
@@ -61,16 +74,20 @@ function OfflineSyncDetails({ info }: { info: OfflineSyncInfo }) {
   );
 }
 
+const EMPTY_PROGRESS: ProgressState = {
+  phase: "idle",
+  completed: 0,
+  total: 0,
+  downloadedBytes: 0,
+  pendingBytes: 0,
+  skippedCount: 0,
+  percent: 0,
+};
+
 export function OfflineSettings() {
   const [online, setOnline] = useState(true);
   const [state, setState] = useState<OfflineState>("idle");
-  const [progress, setProgress] = useState({
-    completed: 0,
-    total: 0,
-    downloadedBytes: 0,
-    pendingBytes: 0,
-    skippedCount: 0,
-  });
+  const [progress, setProgress] = useState<ProgressState>(EMPTY_PROGRESS);
   const [manifestSize, setManifestSize] = useState<number | null>(null);
   const [downloadedBytes, setDownloadedBytes] = useState<number | null>(null);
   const [updatePlan, setUpdatePlan] = useState<UpdatePlan | null>(null);
@@ -83,6 +100,7 @@ export function OfflineSettings() {
   const [hasCachedContent, setHasCachedContent] = useState(false);
   const [lastUpToDate, setLastUpToDate] = useState(false);
   const [syncInfo, setSyncInfo] = useState<OfflineSyncInfo>({ manifestVersion: null, updatedAt: null });
+  const [pendingDetail, setPendingDetail] = useState<{ routesCount: number; assetsCount: number } | null>(null);
 
   const checkCachedContent = async () => {
     try {
@@ -127,30 +145,84 @@ export function OfflineSettings() {
       if (event.data?.type === "OFFLINE_CHECK_START") {
         setState("checking");
         setLastUpToDate(false);
+        setPendingDetail(null);
+        setProgress({
+          phase: "checking",
+          completed: 0,
+          total: 0,
+          downloadedBytes: 0,
+          pendingBytes: 0,
+          skippedCount: 0,
+          percent: 0,
+        });
+      }
+      if (event.data?.type === "OFFLINE_CHECK_PROGRESS") {
+        const checked = Number(event.data.checked) || 0;
+        const total = Number(event.data.total) || 0;
+        const percent = typeof event.data.percent === "number"
+          ? event.data.percent
+          : (total > 0 ? Math.min(100, Math.round((checked / total) * 100)) : 0);
+        setProgress((prev) => ({
+          phase: "checking",
+          completed: Math.max(prev.phase === "checking" ? prev.completed : 0, checked),
+          total: Math.max(prev.phase === "checking" ? prev.total : 0, total),
+          downloadedBytes: 0,
+          pendingBytes: prev.pendingBytes,
+          skippedCount: prev.skippedCount,
+          percent: Math.max(prev.phase === "checking" ? prev.percent : 0, percent),
+        }));
       }
       if (event.data?.type === "OFFLINE_CHECK_DONE") {
-        setProgress((prev) => ({
-          ...prev,
-          total: event.data.pendingCount ?? 0,
-          pendingBytes: event.data.pendingBytes ?? 0,
-          skippedCount: event.data.skippedCount ?? 0,
-        }));
-        setState("preparing");
+        const pendingCount = Number(event.data.pendingCount) || 0;
+        const pendingBytes = Number(event.data.pendingBytes) || 0;
+        const skippedCount = Number(event.data.skippedCount) || 0;
+        setPendingDetail({
+          routesCount: Number(event.data.routesCount) || 0,
+          assetsCount: Number(event.data.assetsCount) || 0,
+        });
+        setProgress({
+          phase: pendingCount > 0 ? "downloading" : "idle",
+          completed: 0,
+          total: pendingCount,
+          downloadedBytes: 0,
+          pendingBytes,
+          skippedCount,
+          percent: 0,
+        });
+        setState(pendingCount > 0 ? "preparing" : "checking");
       }
       if (event.data?.type === "OFFLINE_PROGRESS") {
-        setProgress({
-          completed: event.data.completed,
-          total: event.data.total,
-          downloadedBytes: event.data.downloadedBytes ?? 0,
-          pendingBytes: event.data.pendingBytes ?? 0,
-          skippedCount: event.data.skippedCount ?? 0,
-        });
+        const completed = Number(event.data.completed) || 0;
+        const total = Number(event.data.total) || 0;
+        const downloaded = Number(event.data.downloadedBytes) || 0;
+        const pendingBytes = Number(event.data.pendingBytes) || 0;
+        const skippedCount = Number(event.data.skippedCount) || 0;
+        const filePct = total > 0 ? Math.min(100, Math.round((completed / total) * 100)) : 0;
+        const percent = typeof event.data.percent === "number"
+          ? Math.min(100, Math.max(0, event.data.percent))
+          : filePct;
+        setProgress((prev) => ({
+          phase: "downloading",
+          completed: Math.max(prev.phase === "downloading" ? prev.completed : 0, completed),
+          total: Math.max(prev.phase === "downloading" ? prev.total : 0, total),
+          downloadedBytes: Math.max(prev.phase === "downloading" ? prev.downloadedBytes : 0, downloaded),
+          pendingBytes: pendingBytes || prev.pendingBytes,
+          skippedCount,
+          percent: Math.max(prev.phase === "downloading" ? prev.percent : 0, percent),
+        }));
+        setState("preparing");
       }
       if (event.data?.type === "OFFLINE_READY") {
         setState("ready");
         setHasCachedContent(true);
         setLastUpToDate(!!event.data.upToDate);
         if (typeof event.data.downloadedBytes === "number") setDownloadedBytes(event.data.downloadedBytes);
+        setProgress((prev) => ({
+          ...prev,
+          phase: "idle",
+          percent: 100,
+          completed: prev.total || prev.completed,
+        }));
         setSyncInfo({
           manifestVersion: event.data.manifestVersion ?? null,
           updatedAt: event.data.updatedAt ?? null,
@@ -160,15 +232,17 @@ export function OfflineSettings() {
       }
       if (event.data?.type === "OFFLINE_CLEARED") {
         setState("cleared");
-        setProgress({ completed: 0, total: 0, downloadedBytes: 0, pendingBytes: 0, skippedCount: 0 });
+        setProgress(EMPTY_PROGRESS);
         setDownloadedBytes(null);
         setUpdatePlan(null);
+        setPendingDetail(null);
         setHasCachedContent(false);
         setLastUpToDate(false);
         setSyncInfo({ manifestVersion: null, updatedAt: null });
       }
       if (event.data?.type === "OFFLINE_ERROR") {
         setState("error");
+        setProgress(EMPTY_PROGRESS);
       }
       if (event.data?.type === "MANIFEST_SIZE") {
         setManifestSize(event.data.totalBytes ?? null);
@@ -230,7 +304,16 @@ export function OfflineSettings() {
       if (!navigator.onLine) { setState("error"); return; }
       setState("checking");
       setLastUpToDate(false);
-      setProgress({ completed: 0, total: 0, downloadedBytes: 0, pendingBytes: 0, skippedCount: 0 });
+      setPendingDetail(null);
+      setProgress({
+        phase: "checking",
+        completed: 0,
+        total: 0,
+        downloadedBytes: 0,
+        pendingBytes: 0,
+        skippedCount: 0,
+        percent: 0,
+      });
       if (navigator.storage?.persist) await navigator.storage.persist().catch(() => false);
       const registration = await navigator.serviceWorker.ready;
       const worker = registration.active ?? navigator.serviceWorker.controller;
@@ -252,11 +335,6 @@ export function OfflineSettings() {
     }
   };
 
-  const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
-  const bytesDenom = progress.pendingBytes > 0 ? progress.pendingBytes : progress.downloadedBytes;
-  const bytesPct = bytesDenom > 0
-    ? Math.min(100, Math.round((progress.downloadedBytes / bytesDenom) * 100))
-    : pct;
   const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~195 Mo";
   const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
   const cacheExpectedBytes = cacheStatus?.expectedBytes || manifestSize || 0;
@@ -274,6 +352,7 @@ export function OfflineSettings() {
   const pendingBytes = updatePlan?.pendingBytes ?? 0;
   const skippedCount = updatePlan?.skippedCount ?? 0;
   const isUpToDate = hasCachedContent && pendingCount === 0;
+  const busy = state === "checking" || state === "preparing";
 
   const downloadLabel = !hasCachedContent
     ? "Tout télécharger"
@@ -282,6 +361,20 @@ export function OfflineSettings() {
       : pendingBytes > 0
         ? `Mettre à jour (${formatBytes(pendingBytes)})`
         : `Mettre à jour (${pendingCount} fichiers)`;
+
+  const progressTitle = progress.phase === "checking"
+    ? "Vérification des fichiers…"
+    : "Téléchargement…";
+
+  const progressSubtitle = progress.phase === "checking"
+    ? (progress.total > 0
+      ? `${progress.completed} / ${progress.total} fichiers vérifiés`
+      : "Analyse du contenu en cache…")
+    : (progress.total > 0
+      ? `${progress.completed} / ${progress.total} fichiers à mettre à jour`
+        + (progress.downloadedBytes > 0 ? ` · ${formatBytes(progress.downloadedBytes)}` : "")
+        + (progress.skippedCount > 0 ? ` · ${progress.skippedCount} déjà à jour` : "")
+      : "Préparation…");
 
   return (
     <>
@@ -306,35 +399,31 @@ export function OfflineSettings() {
         )}
       </p>
 
-      {state === "checking" && (
-        <p className="mt-4 text-sm text-[var(--color-text-secondary)]" role="status">
-          Vérification des fichiers en cours…
-        </p>
-      )}
-
-      {(state === "preparing" || state === "checking") && progress.total > 0 && state === "preparing" && (
-        <div className="mt-4 space-y-2">
+      {busy && (
+        <div className="mt-4 space-y-2" role="status" aria-live="polite">
           <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-            <span>
-              Téléchargement…
-              {progress.downloadedBytes > 0 && ` (${formatBytes(progress.downloadedBytes)})`}
-              {progress.skippedCount > 0 && ` · ${progress.skippedCount} ignorés`}
-            </span>
-            <span>{bytesPct}%</span>
+            <span>{progressTitle}</span>
+            <span className="tabular-nums font-semibold">{progress.percent}%</span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]" aria-label="Progression">
             <div
-              className="h-full rounded-full bg-[var(--color-theme)] transition-[width] duration-300"
-              style={{ width: `${bytesPct}%` }}
+              className="h-full rounded-full bg-[var(--color-theme)] transition-[width] duration-300 ease-out"
+              style={{ width: `${progress.percent}%` }}
             />
           </div>
-          <p className="text-xs text-[var(--color-text-secondary)]">
-            {progress.completed} / {progress.total} fichiers à mettre à jour
-          </p>
+          <p className="text-xs text-[var(--color-text-secondary)]">{progressSubtitle}</p>
+          {progress.phase === "downloading" && pendingDetail && (
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {pendingDetail.routesCount > 0 && `${pendingDetail.routesCount} page${pendingDetail.routesCount > 1 ? "s" : ""}`}
+              {pendingDetail.routesCount > 0 && pendingDetail.assetsCount > 0 && " · "}
+              {pendingDetail.assetsCount > 0 && `${pendingDetail.assetsCount} média${pendingDetail.assetsCount > 1 ? "s" : ""}`}
+              {progress.pendingBytes > 0 && ` (${formatBytes(progress.pendingBytes)})`}
+            </p>
+          )}
         </div>
       )}
 
-      {state !== "preparing" && state !== "checking" && (
+      {!busy && (
         <div className="mt-4 flex flex-wrap gap-2">
           <button
             type="button"
