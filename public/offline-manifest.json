@@ -1,6 +1,6 @@
 {
-  "version": 1784546117533,
-  "totalBytes": 637112091,
+  "version": 1784547771223,
+  "totalBytes": 640286584,
   "routes": [
     "/",
     "/avant-propos",
@@ -3830,25 +3830,81 @@
     "/assets/words/son_f/mots/lapin.mp3",
     "/assets/words/son_f/mots/lavabo.mp3",
     "/assets/words/son_f/mots/lavande.mp3",
+    "/assets/words/son_f/mots/lave-vaisselle.mp3",
+    "/assets/words/son_f/mots/legging.mp3",
     "/assets/words/son_f/mots/légume.mp3",
+    "/assets/words/son_f/mots/lentille.mp3",
+    "/assets/words/son_f/mots/lézard.mp3",
+    "/assets/words/son_f/mots/libellule.mp3",
+    "/assets/words/son_f/mots/limace.mp3",
     "/assets/words/son_f/mots/lime.mp3",
+    "/assets/words/son_f/mots/limonade.mp3",
     "/assets/words/son_f/mots/lion.mp3",
+    "/assets/words/son_f/mots/litchi.mp3",
     "/assets/words/son_f/mots/livre.mp3",
+    "/assets/words/son_f/mots/losange.mp3",
     "/assets/words/son_f/mots/lotion.mp3",
     "/assets/words/son_f/mots/loto.mp3",
     "/assets/words/son_f/mots/loup.mp3",
+    "/assets/words/son_f/mots/loupe.mp3",
+    "/assets/words/son_f/mots/luciole.mp3",
     "/assets/words/son_f/mots/lundi.mp3",
     "/assets/words/son_f/mots/lune.mp3",
+    "/assets/words/son_f/mots/lunettes.mp3",
+    "/assets/words/son_f/mots/lys.mp3",
+    "/assets/words/son_f/mots/macaron.mp3",
+    "/assets/words/son_f/mots/machine-a-laver.mp3",
+    "/assets/words/son_f/mots/maçon.mp3",
+    "/assets/words/son_f/mots/madeleine.mp3",
+    "/assets/words/son_f/mots/mai.mp3",
+    "/assets/words/son_f/mots/maillot.mp3",
     "/assets/words/son_f/mots/main.mp3",
+    "/assets/words/son_f/mots/maïs.mp3",
     "/assets/words/son_f/mots/maison.mp3",
     "/assets/words/son_f/mots/maman.mp3",
+    "/assets/words/son_f/mots/mandarine.mp3",
+    "/assets/words/son_f/mots/manette.mp3",
     "/assets/words/son_f/mots/mangue.mp3",
+    "/assets/words/son_f/mots/mante-religieuse.mp3",
+    "/assets/words/son_f/mots/manteau.mp3",
+    "/assets/words/son_f/mots/maracas.mp3",
+    "/assets/words/son_f/mots/marais.mp3",
     "/assets/words/son_f/mots/marche.mp3",
+    "/assets/words/son_f/mots/marguerite.mp3",
+    "/assets/words/son_f/mots/marionnette.mp3",
+    "/assets/words/son_f/mots/marmite.mp3",
+    "/assets/words/son_f/mots/marqueur.mp3",
+    "/assets/words/son_f/mots/marron.mp3",
+    "/assets/words/son_f/mots/marronnier.mp3",
+    "/assets/words/son_f/mots/marteau.mp3",
+    "/assets/words/son_f/mots/matin.mp3",
+    "/assets/words/son_f/mots/mayonnaise.mp3",
+    "/assets/words/son_f/mots/mécanicien.mp3",
+    "/assets/words/son_f/mots/médaille.mp3",
+    "/assets/words/son_f/mots/méduse.mp3",
     "/assets/words/son_f/mots/melon.mp3",
     "/assets/words/son_f/mots/menthe.mp3",
+    "/assets/words/son_f/mots/mer.mp3",
+    "/assets/words/son_f/mots/mère.mp3",
+    "/assets/words/son_f/mots/meringue.mp3",
+    "/assets/words/son_f/mots/mésange.mp3",
+    "/assets/words/son_f/mots/métal.mp3",
+    "/assets/words/son_f/mots/métro.mp3",
+    "/assets/words/son_f/mots/micro-ondes.mp3",
+    "/assets/words/son_f/mots/miel.mp3",
+    "/assets/words/son_f/mots/milkshake.mp3",
+    "/assets/words/son_f/mots/mille-feuille.mp3",
+    "/assets/words/son_f/mots/minuit.mp3",
     "/assets/words/son_f/mots/miroir.mp3",
+    "/assets/words/son_f/mots/moineau.mp3",
     "/assets/words/son_f/mots/montagne.mp3",
+    "/assets/words/son_f/mots/montgolfière.mp3",
+    "/assets/words/son_f/mots/montre.mp3",
+    "/assets/words/son_f/mots/morceau.mp3",
+    "/assets/words/son_f/mots/morse.mp3",
     "/assets/words/son_f/mots/moto.mp3",
+    "/assets/words/son_f/mots/mouche.mp3",
+    "/assets/words/son_f/mots/mouette.mp3",
     "/assets/words/son_f/mots/mouton.mp3",
     "/assets/words/son_f/mots/mûre.mp3",
     "/assets/words/son_f/mots/myrtille.mp3",
@@ -26057,9 +26113,39 @@
       "revision": "ba9d44d8b6f88ea8"
     },
     {
+      "url": "/assets/words/son_f/mots/lave-vaisselle.mp3",
+      "size": 71928,
+      "revision": "7f7f74eda36748fd"
+    },
+    {
+      "url": "/assets/words/son_f/mots/legging.mp3",
+      "size": 51448,
+      "revision": "c1f678c40d31c1df"
+    },
+    {
       "url": "/assets/words/son_f/mots/légume.mp3",
       "size": 63047,
       "revision": "66b86383f77c7c63"
+    },
+    {
+      "url": "/assets/words/son_f/mots/lentille.mp3",
+      "size": 58135,
+      "revision": "6715f899ea7e78f9"
+    },
+    {
+      "url": "/assets/words/son_f/mots/lézard.mp3",
+      "size": 56463,
+      "revision": "a8f66035c5d23bf1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/libellule.mp3",
+      "size": 61897,
+      "revision": "f119486d5e889f66"
+    },
+    {
+      "url": "/assets/words/son_f/mots/limace.mp3",
+      "size": 59389,
+      "revision": "6076e43f30c0c990"
     },
     {
       "url": "/assets/words/son_f/mots/lime.mp3",
@@ -26067,14 +26153,29 @@
       "revision": "13ef33d0e7202e9c"
     },
     {
+      "url": "/assets/words/son_f/mots/limonade.mp3",
+      "size": 66912,
+      "revision": "f8362e2cfdcdfb12"
+    },
+    {
       "url": "/assets/words/son_f/mots/lion.mp3",
       "size": 15931,
       "revision": "33e585f4a29080ff"
     },
     {
+      "url": "/assets/words/son_f/mots/litchi.mp3",
+      "size": 53956,
+      "revision": "c3bc5d1f8e9288c9"
+    },
+    {
       "url": "/assets/words/son_f/mots/livre.mp3",
       "size": 53852,
       "revision": "34520d7a8c9798d7"
+    },
+    {
+      "url": "/assets/words/son_f/mots/losange.mp3",
+      "size": 58135,
+      "revision": "23996ebb1d294050"
     },
     {
       "url": "/assets/words/son_f/mots/lotion.mp3",
@@ -26092,6 +26193,16 @@
       "revision": "51dd763097eee54f"
     },
     {
+      "url": "/assets/words/son_f/mots/loupe.mp3",
+      "size": 52702,
+      "revision": "907f4a14388360d0"
+    },
+    {
+      "url": "/assets/words/son_f/mots/luciole.mp3",
+      "size": 60643,
+      "revision": "1ba294c8ace18b00"
+    },
+    {
       "url": "/assets/words/son_f/mots/lundi.mp3",
       "size": 52702,
       "revision": "d3b8629094b8e816"
@@ -26102,9 +26213,54 @@
       "revision": "d32d4b3acb275107"
     },
     {
+      "url": "/assets/words/son_f/mots/lunettes.mp3",
+      "size": 53956,
+      "revision": "e2d60be5382c28d2"
+    },
+    {
+      "url": "/assets/words/son_f/mots/lys.mp3",
+      "size": 53956,
+      "revision": "197ca24d518802dd"
+    },
+    {
+      "url": "/assets/words/son_f/mots/macaron.mp3",
+      "size": 59389,
+      "revision": "9c70dc590a467c13"
+    },
+    {
+      "url": "/assets/words/son_f/mots/machine-a-laver.mp3",
+      "size": 61897,
+      "revision": "e360c4025da7108c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/maçon.mp3",
+      "size": 64405,
+      "revision": "c197798ada0d18bb"
+    },
+    {
+      "url": "/assets/words/son_f/mots/madeleine.mp3",
+      "size": 51448,
+      "revision": "892f40303e881d62"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mai.mp3",
+      "size": 52702,
+      "revision": "74878040d4b173ee"
+    },
+    {
+      "url": "/assets/words/son_f/mots/maillot.mp3",
+      "size": 50194,
+      "revision": "f710f5423512b9fc"
+    },
+    {
       "url": "/assets/words/son_f/mots/main.mp3",
       "size": 13867,
       "revision": "363f2c3526402119"
+    },
+    {
+      "url": "/assets/words/son_f/mots/maïs.mp3",
+      "size": 52702,
+      "revision": "32403030e3e2106b"
     },
     {
       "url": "/assets/words/son_f/mots/maison.mp3",
@@ -26117,14 +26273,104 @@
       "revision": "abeee6454d9285f8"
     },
     {
+      "url": "/assets/words/son_f/mots/mandarine.mp3",
+      "size": 58135,
+      "revision": "51d6e7550663b82a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/manette.mp3",
+      "size": 51448,
+      "revision": "c5710af277c49227"
+    },
+    {
       "url": "/assets/words/son_f/mots/mangue.mp3",
       "size": 53852,
       "revision": "f52ee21bb20778b3"
     },
     {
+      "url": "/assets/words/son_f/mots/mante-religieuse.mp3",
+      "size": 63151,
+      "revision": "366f66cbf7054ca2"
+    },
+    {
+      "url": "/assets/words/son_f/mots/manteau.mp3",
+      "size": 52702,
+      "revision": "3d2416657783094e"
+    },
+    {
+      "url": "/assets/words/son_f/mots/maracas.mp3",
+      "size": 60643,
+      "revision": "613e0ff5494a4993"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marais.mp3",
+      "size": 46432,
+      "revision": "d7d7e4a15365042e"
+    },
+    {
       "url": "/assets/words/son_f/mots/marche.mp3",
       "size": 50090,
       "revision": "2163be8f20865bbc"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marguerite.mp3",
+      "size": 59389,
+      "revision": "373d8c0fe03a6680"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marionnette.mp3",
+      "size": 60643,
+      "revision": "a69d495468e5c872"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marmite.mp3",
+      "size": 58135,
+      "revision": "ebc9b9829f9d733c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marqueur.mp3",
+      "size": 50194,
+      "revision": "ce7ed3be16328499"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marron.mp3",
+      "size": 52702,
+      "revision": "1cc6c35648ad1886"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marronnier.mp3",
+      "size": 53956,
+      "revision": "f7e085d440749ca7"
+    },
+    {
+      "url": "/assets/words/son_f/mots/marteau.mp3",
+      "size": 55210,
+      "revision": "bf14321fa2b6d47a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/matin.mp3",
+      "size": 46432,
+      "revision": "76394ee2a3f4590b"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mayonnaise.mp3",
+      "size": 58135,
+      "revision": "0fa144a68ea904b8"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mécanicien.mp3",
+      "size": 56463,
+      "revision": "d9d9fdd25c3505d7"
+    },
+    {
+      "url": "/assets/words/son_f/mots/médaille.mp3",
+      "size": 53956,
+      "revision": "65ae3b97c2c46403"
+    },
+    {
+      "url": "/assets/words/son_f/mots/méduse.mp3",
+      "size": 55210,
+      "revision": "202f83ae7f16e67e"
     },
     {
       "url": "/assets/words/son_f/mots/melon.mp3",
@@ -26137,9 +26383,69 @@
       "revision": "fdd7868a50b55a78"
     },
     {
+      "url": "/assets/words/son_f/mots/mer.mp3",
+      "size": 65659,
+      "revision": "1131aa83c836910f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mère.mp3",
+      "size": 65659,
+      "revision": "1131aa83c836910f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/meringue.mp3",
+      "size": 58135,
+      "revision": "986dc7a145e7b937"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mésange.mp3",
+      "size": 59389,
+      "revision": "4b1a0029520c72f5"
+    },
+    {
+      "url": "/assets/words/son_f/mots/métal.mp3",
+      "size": 53956,
+      "revision": "4b3ed15aec9cfdf2"
+    },
+    {
+      "url": "/assets/words/son_f/mots/métro.mp3",
+      "size": 53956,
+      "revision": "8f79a4d3004f7f90"
+    },
+    {
+      "url": "/assets/words/son_f/mots/micro-ondes.mp3",
+      "size": 59389,
+      "revision": "05aaa478aed03769"
+    },
+    {
+      "url": "/assets/words/son_f/mots/miel.mp3",
+      "size": 52702,
+      "revision": "aa386266f3524128"
+    },
+    {
+      "url": "/assets/words/son_f/mots/milkshake.mp3",
+      "size": 60643,
+      "revision": "972de174a8e1675e"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mille-feuille.mp3",
+      "size": 58135,
+      "revision": "f00eedea864afa85"
+    },
+    {
+      "url": "/assets/words/son_f/mots/minuit.mp3",
+      "size": 52702,
+      "revision": "50f8e0a9195e09ed"
+    },
+    {
       "url": "/assets/words/son_f/mots/miroir.mp3",
       "size": 52598,
       "revision": "a29511902f4fa922"
+    },
+    {
+      "url": "/assets/words/son_f/mots/moineau.mp3",
+      "size": 51448,
+      "revision": "a54c818540c314e9"
     },
     {
       "url": "/assets/words/son_f/mots/montagne.mp3",
@@ -26147,9 +26453,39 @@
       "revision": "8d55ce626355916e"
     },
     {
+      "url": "/assets/words/son_f/mots/montgolfière.mp3",
+      "size": 60643,
+      "revision": "f9fe319ebe97bf8e"
+    },
+    {
+      "url": "/assets/words/son_f/mots/montre.mp3",
+      "size": 52702,
+      "revision": "90305cdd0542a3d2"
+    },
+    {
+      "url": "/assets/words/son_f/mots/morceau.mp3",
+      "size": 51448,
+      "revision": "21b899e0413ae620"
+    },
+    {
+      "url": "/assets/words/son_f/mots/morse.mp3",
+      "size": 60643,
+      "revision": "9abf5e9f3ff59a6a"
+    },
+    {
       "url": "/assets/words/son_f/mots/moto.mp3",
       "size": 46328,
       "revision": "221b18f9cfdd1c6d"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mouche.mp3",
+      "size": 59389,
+      "revision": "6b83fd4c26bf3059"
+    },
+    {
+      "url": "/assets/words/son_f/mots/mouette.mp3",
+      "size": 52702,
+      "revision": "fd6a69d7c4c52f6a"
     },
     {
       "url": "/assets/words/son_f/mots/mouton.mp3",
