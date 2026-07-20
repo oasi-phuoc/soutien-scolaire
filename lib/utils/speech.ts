@@ -170,7 +170,7 @@ function pickFrenchVoice(gender: VoiceGender): SpeechSynthesisVoice | null {
   return null;
 }
 
-function resolveVoiceGender(gender?: VoiceGender): VoiceGender {
+function resolveVoiceGender(_gender?: VoiceGender): VoiceGender {
   return "f";
 }
 
