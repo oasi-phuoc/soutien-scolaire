@@ -9,15 +9,23 @@ import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 
 const VOWEL_START = /^[aeiouyàâäéèêëïîôöùûüœæh]/i;
 
-function normalizeWordKey(text: string): string {
+/** Clé de dédup qui conserve le/la, un/une (épicènes : le/la réceptionniste). */
+function normalizePhraseKey(text: string): string {
   return text
     .trim()
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/gu, "")
     .replace(/[''`]/g, "'")
-    .replace(/^(l'|le|la|les|un|une|des|du|de|d')\s*/i, "")
     .replace(/\s+/g, " ");
+}
+
+/** Lemme sans article (comparer masculin / féminin). */
+function normalizeLemmaKey(text: string): string {
+  return normalizePhraseKey(text).replace(
+    /^(l'|le|la|les|un|une|des|du|de|d')\s*/i,
+    "",
+  );
 }
 
 function joinArticle(article: string, word: string): string {
@@ -59,7 +67,7 @@ export function vocabSpokenForms(w: VocabWord): string[] {
   const add = (phrase: string | undefined) => {
     const p = (phrase ?? "").trim();
     if (!p) return;
-    const key = normalizeWordKey(p);
+    const key = normalizePhraseKey(p);
     if (!key || seen.has(key)) return;
     seen.add(key);
     forms.push(p);
@@ -83,14 +91,16 @@ export function vocabSpokenForms(w: VocabWord): string[] {
   }
 
   if (w.feminine) {
-    const femKey = normalizeWordKey(w.feminine);
-    const mascKey = normalizeWordKey(w.word);
-    if (femKey && femKey !== mascKey) {
+    const femKey = normalizeLemmaKey(w.feminine);
+    const mascKey = normalizeLemmaKey(w.word);
+    const sameLemma = Boolean(femKey && femKey === mascKey);
+    if (femKey && (!sameLemma || w.article)) {
+      // Même lemme épicène (ex. réceptionniste) : ajouter « la … » si article.
       if (w.article) {
         add(joinArticle(feminizeArticle(w.article), w.feminine));
-      } else if (hasCountryRelated) {
+      } else if (!sameLemma && hasCountryRelated) {
         add(joinArticle(defaultArticle(w.feminine, "f"), w.feminine));
-      } else {
+      } else if (!sameLemma) {
         // Adjectifs : « grande » sans article
         add(w.feminine);
       }
