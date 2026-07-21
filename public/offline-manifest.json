@@ -1,6 +1,6 @@
 {
-  "version": 1784628727003,
-  "totalBytes": 421407448,
+  "version": 1784634865451,
+  "totalBytes": 422492589,
   "routes": [
     "/",
     "/avant-propos",
@@ -2405,37 +2405,88 @@
     "/assets/words/son_f/mots/pissenlit.mp3",
     "/assets/words/son_f/mots/piste.mp3",
     "/assets/words/son_f/mots/pivoine.mp3",
+    "/assets/words/son_f/mots/pizza.mp3",
+    "/assets/words/son_f/mots/plage.mp3",
+    "/assets/words/son_f/mots/planche.mp3",
+    "/assets/words/son_f/mots/planète.mp3",
+    "/assets/words/son_f/mots/plume.mp3",
     "/assets/words/son_f/mots/poing.mp3",
     "/assets/words/son_f/mots/point.mp3",
     "/assets/words/son_f/mots/pointe.mp3",
     "/assets/words/son_f/mots/poire.mp3",
     "/assets/words/son_f/mots/poireau.mp3",
     "/assets/words/son_f/mots/poirier.mp3",
+    "/assets/words/son_f/mots/pois-chiche.mp3",
     "/assets/words/son_f/mots/poisson.mp3",
     "/assets/words/son_f/mots/poivron.mp3",
+    "/assets/words/son_f/mots/policier.mp3",
     "/assets/words/son_f/mots/pomme-de-terre.mp3",
     "/assets/words/son_f/mots/pomme.mp3",
+    "/assets/words/son_f/mots/pommier.mp3",
+    "/assets/words/son_f/mots/pompier.mp3",
+    "/assets/words/son_f/mots/pont.mp3",
+    "/assets/words/son_f/mots/porte-cles.mp3",
+    "/assets/words/son_f/mots/porte-documents.mp3",
+    "/assets/words/son_f/mots/porte-manteau.mp3",
+    "/assets/words/son_f/mots/porte-mine.mp3",
+    "/assets/words/son_f/mots/portefeuille.mp3",
+    "/assets/words/son_f/mots/post-it.mp3",
     "/assets/words/son_f/mots/poste.mp3",
     "/assets/words/son_f/mots/potion.mp3",
+    "/assets/words/son_f/mots/potiron.mp3",
+    "/assets/words/son_f/mots/poubelle.mp3",
     "/assets/words/son_f/mots/poule.mp3",
+    "/assets/words/son_f/mots/poulet.mp3",
+    "/assets/words/son_f/mots/poupée.mp3",
+    "/assets/words/son_f/mots/prairie.mp3",
+    "/assets/words/son_f/mots/prune.mp3",
+    "/assets/words/son_f/mots/pull.mp3",
+    "/assets/words/son_f/mots/punaise.mp3",
+    "/assets/words/son_f/mots/pupitre.mp3",
     "/assets/words/son_f/mots/puzzle.mp3",
+    "/assets/words/son_f/mots/pyjama.mp3",
+    "/assets/words/son_f/mots/pyramide.mp3",
+    "/assets/words/son_f/mots/python.mp3",
     "/assets/words/son_f/mots/quatorze.mp3",
     "/assets/words/son_f/mots/quinze.mp3",
+    "/assets/words/son_f/mots/radio.mp3",
     "/assets/words/son_f/mots/radis.mp3",
+    "/assets/words/son_f/mots/raie.mp3",
     "/assets/words/son_f/mots/raisin.mp3",
     "/assets/words/son_f/mots/randonnée.mp3",
+    "/assets/words/son_f/mots/rapporteur.mp3",
+    "/assets/words/son_f/mots/rasoir.mp3",
     "/assets/words/son_f/mots/rat.mp3",
+    "/assets/words/son_f/mots/rateau.mp3",
+    "/assets/words/son_f/mots/rectangle.mp3",
+    "/assets/words/son_f/mots/réfrigerateur.mp3",
     "/assets/words/son_f/mots/règle.mp3",
     "/assets/words/son_f/mots/renard.mp3",
     "/assets/words/son_f/mots/requin.mp3",
+    "/assets/words/son_f/mots/restaurant.mp3",
+    "/assets/words/son_f/mots/réveil.mp3",
+    "/assets/words/son_f/mots/rideau.mp3",
     "/assets/words/son_f/mots/rivière.mp3",
+    "/assets/words/son_f/mots/riz.mp3",
+    "/assets/words/son_f/mots/robe.mp3",
     "/assets/words/son_f/mots/robot.mp3",
+    "/assets/words/son_f/mots/rocher.mp3",
     "/assets/words/son_f/mots/romarin.mp3",
     "/assets/words/son_f/mots/rose.mp3",
+    "/assets/words/son_f/mots/rouge.mp3",
     "/assets/words/son_f/mots/rue.mp3",
+    "/assets/words/son_f/mots/ruisseau.mp3",
+    "/assets/words/son_f/mots/sac-a-main.mp3",
     "/assets/words/son_f/mots/salade-de-fruits.mp3",
     "/assets/words/son_f/mots/salade.mp3",
+    "/assets/words/son_f/mots/salamandre.mp3",
+    "/assets/words/son_f/mots/salon.mp3",
+    "/assets/words/son_f/mots/sandales.mp3",
     "/assets/words/son_f/mots/sapin.mp3",
+    "/assets/words/son_f/mots/satellite.mp3",
+    "/assets/words/son_f/mots/saturne.mp3",
+    "/assets/words/son_f/mots/saule-pleureur.mp3",
+    "/assets/words/son_f/mots/sauterelle.mp3",
     "/assets/words/son_f/mots/saxophone.mp3",
     "/assets/words/son_f/mots/seize.mp3",
     "/assets/words/son_f/mots/serpent.mp3",
@@ -5833,37 +5884,6 @@
     "/assets/words/son_f/syllable/zyzi.mp3",
     "/assets/words/son_f/syllable/zyzo.mp3",
     "/assets/words/son_f/syllable/zyzu.mp3",
-    "/assets/words/son_f/vocab/activité.mp3",
-    "/assets/words/son_f/vocab/brun.mp3",
-    "/assets/words/son_f/vocab/casque.mp3",
-    "/assets/words/son_f/vocab/chaîne.mp3",
-    "/assets/words/son_f/vocab/chalet.mp3",
-    "/assets/words/son_f/vocab/chambre.mp3",
-    "/assets/words/son_f/vocab/chaud.mp3",
-    "/assets/words/son_f/vocab/coin.mp3",
-    "/assets/words/son_f/vocab/comptoire.mp3",
-    "/assets/words/son_f/vocab/couloir.mp3",
-    "/assets/words/son_f/vocab/cuisinier.mp3",
-    "/assets/words/son_f/vocab/doux.mp3",
-    "/assets/words/son_f/vocab/ecole.mp3",
-    "/assets/words/son_f/vocab/etang.mp3",
-    "/assets/words/son_f/vocab/frais.mp3",
-    "/assets/words/son_f/vocab/froid.mp3",
-    "/assets/words/son_f/vocab/fuite.mp3",
-    "/assets/words/son_f/vocab/gauche.mp3",
-    "/assets/words/son_f/vocab/goûter.mp3",
-    "/assets/words/son_f/vocab/grenades.mp3",
-    "/assets/words/son_f/vocab/hopital.mp3",
-    "/assets/words/son_f/vocab/jardin.mp3",
-    "/assets/words/son_f/vocab/juillet.mp3",
-    "/assets/words/son_f/vocab/juin.mp3",
-    "/assets/words/son_f/vocab/mai.mp3",
-    "/assets/words/son_f/vocab/marche.mp3",
-    "/assets/words/son_f/vocab/matin.mp3",
-    "/assets/words/son_f/vocab/mayonnaise.mp3",
-    "/assets/words/son_f/vocab/mère.mp3",
-    "/assets/words/son_f/vocab/métal.mp3",
-    "/assets/words/son_f/vocab/minuit.mp3",
     "/assets/words/son_f/vocab/V1/afghanistan.mp3",
     "/assets/words/son_f/vocab/V1/age.mp3",
     "/assets/words/son_f/vocab/V1/allemagne.mp3",
@@ -10819,18 +10839,18 @@
     },
     {
       "url": "/assets/icons/markers/arrow-module.svg",
-      "size": 240,
-      "revision": "14c40b60f4dd36ad"
+      "size": 244,
+      "revision": "8bbf01d007cd1107"
     },
     {
       "url": "/assets/icons/markers/quiz-clock.svg",
-      "size": 362,
-      "revision": "23ad523bcd628cc2"
+      "size": 370,
+      "revision": "f4500edaaefad636"
     },
     {
       "url": "/assets/icons/markers/triangle-alert.svg",
-      "size": 340,
-      "revision": "699bc3f45e1ba35a"
+      "size": 345,
+      "revision": "286101e2a8fc1d5a"
     },
     {
       "url": "/assets/letters/img/a-arbre.webp",
@@ -17703,6 +17723,31 @@
       "revision": "d0b96bee270f995b"
     },
     {
+      "url": "/assets/words/son_f/mots/pizza.mp3",
+      "size": 51471,
+      "revision": "89f5fc8cf49ed2a8"
+    },
+    {
+      "url": "/assets/words/son_f/mots/plage.mp3",
+      "size": 50217,
+      "revision": "413f5719d5f70d6f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/planche.mp3",
+      "size": 56486,
+      "revision": "16f2ff4606e223d5"
+    },
+    {
+      "url": "/assets/words/son_f/mots/planète.mp3",
+      "size": 53956,
+      "revision": "e4e67d3f68cc6093"
+    },
+    {
+      "url": "/assets/words/son_f/mots/plume.mp3",
+      "size": 58135,
+      "revision": "7eb27bded0f05a1c"
+    },
+    {
       "url": "/assets/words/son_f/mots/poing.mp3",
       "size": 51448,
       "revision": "318af54db13d3c72"
@@ -17733,6 +17778,11 @@
       "revision": "336660056831f56a"
     },
     {
+      "url": "/assets/words/son_f/mots/pois-chiche.mp3",
+      "size": 89923,
+      "revision": "8baa4313f3297da4"
+    },
+    {
       "url": "/assets/words/son_f/mots/poisson.mp3",
       "size": 51344,
       "revision": "0e5725cec6262acf"
@@ -17741,6 +17791,11 @@
       "url": "/assets/words/son_f/mots/poivron.mp3",
       "size": 51344,
       "revision": "4dee3b85cf035a53"
+    },
+    {
+      "url": "/assets/words/son_f/mots/policier.mp3",
+      "size": 55210,
+      "revision": "bcfacf56be7cc5d6"
     },
     {
       "url": "/assets/words/son_f/mots/pomme-de-terre.mp3",
@@ -17753,6 +17808,51 @@
       "revision": "d4dd2490e87453b1"
     },
     {
+      "url": "/assets/words/son_f/mots/pommier.mp3",
+      "size": 52725,
+      "revision": "9e3f2fa3a1143379"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pompier.mp3",
+      "size": 53956,
+      "revision": "8c6804fa0881bded"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pont.mp3",
+      "size": 56463,
+      "revision": "821a651822663217"
+    },
+    {
+      "url": "/assets/words/son_f/mots/porte-cles.mp3",
+      "size": 55233,
+      "revision": "b6ba65ce0c3955e1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/porte-documents.mp3",
+      "size": 61897,
+      "revision": "a620f7bb39da2f5c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/porte-manteau.mp3",
+      "size": 58158,
+      "revision": "b461ca00e44a798b"
+    },
+    {
+      "url": "/assets/words/son_f/mots/porte-mine.mp3",
+      "size": 56486,
+      "revision": "b9721b5d29b72c4a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/portefeuille.mp3",
+      "size": 59389,
+      "revision": "dde1157555949c55"
+    },
+    {
+      "url": "/assets/words/son_f/mots/post-it.mp3",
+      "size": 53956,
+      "revision": "354efde4d98aa54f"
+    },
+    {
       "url": "/assets/words/son_f/mots/poste.mp3",
       "size": 58031,
       "revision": "2f4668ced45ac59b"
@@ -17763,14 +17863,74 @@
       "revision": "bb0afde7b9015417"
     },
     {
+      "url": "/assets/words/son_f/mots/potiron.mp3",
+      "size": 58135,
+      "revision": "318fd9f4fc98c9d9"
+    },
+    {
+      "url": "/assets/words/son_f/mots/poubelle.mp3",
+      "size": 52702,
+      "revision": "1f22168a9e2eb53f"
+    },
+    {
       "url": "/assets/words/son_f/mots/poule.mp3",
       "size": 55106,
       "revision": "e26d5075672f1833"
     },
     {
+      "url": "/assets/words/son_f/mots/poulet.mp3",
+      "size": 46455,
+      "revision": "4fe66ba2a43621a7"
+    },
+    {
+      "url": "/assets/words/son_f/mots/poupée.mp3",
+      "size": 50217,
+      "revision": "9ba3e3de6fdc862c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/prairie.mp3",
+      "size": 51448,
+      "revision": "988ab398e14c516c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/prune.mp3",
+      "size": 19867,
+      "revision": "6383f34151e1fb94"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pull.mp3",
+      "size": 19147,
+      "revision": "f73f919a4c1d7691"
+    },
+    {
+      "url": "/assets/words/son_f/mots/punaise.mp3",
+      "size": 52702,
+      "revision": "2d76c2a0f496dfc4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pupitre.mp3",
+      "size": 56486,
+      "revision": "5cb37f98213891c5"
+    },
+    {
       "url": "/assets/words/son_f/mots/puzzle.mp3",
       "size": 51344,
       "revision": "67313d8a10873115"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pyjama.mp3",
+      "size": 68166,
+      "revision": "f0e948f49f4772a4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/pyramide.mp3",
+      "size": 56463,
+      "revision": "a66b0f5e7f14066d"
+    },
+    {
+      "url": "/assets/words/son_f/mots/python.mp3",
+      "size": 50217,
+      "revision": "6d755a7ba1664d4a"
     },
     {
       "url": "/assets/words/son_f/mots/quatorze.mp3",
@@ -17783,9 +17943,19 @@
       "revision": "1973705f2d7ea804"
     },
     {
+      "url": "/assets/words/son_f/mots/radio.mp3",
+      "size": 51448,
+      "revision": "a42d1cf230d3efbe"
+    },
+    {
       "url": "/assets/words/son_f/mots/radis.mp3",
       "size": 51344,
       "revision": "f1a318a97296e605"
+    },
+    {
+      "url": "/assets/words/son_f/mots/raie.mp3",
+      "size": 46455,
+      "revision": "9e8cbb57fec68d0b"
     },
     {
       "url": "/assets/words/son_f/mots/raisin.mp3",
@@ -17798,9 +17968,34 @@
       "revision": "038ed29df6a49a1f"
     },
     {
+      "url": "/assets/words/son_f/mots/rapporteur.mp3",
+      "size": 60666,
+      "revision": "60a0047e27b5b752"
+    },
+    {
+      "url": "/assets/words/son_f/mots/rasoir.mp3",
+      "size": 55210,
+      "revision": "d39449f22b0df43f"
+    },
+    {
       "url": "/assets/words/son_f/mots/rat.mp3",
       "size": 46328,
       "revision": "1f1085a40973d27f"
+    },
+    {
+      "url": "/assets/words/son_f/mots/rateau.mp3",
+      "size": 55210,
+      "revision": "b99d7435c9eb8d95"
+    },
+    {
+      "url": "/assets/words/son_f/mots/rectangle.mp3",
+      "size": 33403,
+      "revision": "c4c88a399eeb6b17"
+    },
+    {
+      "url": "/assets/words/son_f/mots/réfrigerateur.mp3",
+      "size": 63151,
+      "revision": "f5d3a736146067bf"
     },
     {
       "url": "/assets/words/son_f/mots/règle.mp3",
@@ -17818,14 +18013,44 @@
       "revision": "3612cd9805a54f51"
     },
     {
+      "url": "/assets/words/son_f/mots/restaurant.mp3",
+      "size": 59389,
+      "revision": "84eaf4bf078958be"
+    },
+    {
+      "url": "/assets/words/son_f/mots/réveil.mp3",
+      "size": 53979,
+      "revision": "978cc3a1d9608df0"
+    },
+    {
+      "url": "/assets/words/son_f/mots/rideau.mp3",
+      "size": 52725,
+      "revision": "c6aa08c8d18ba02b"
+    },
+    {
       "url": "/assets/words/son_f/mots/rivière.mp3",
       "size": 55106,
       "revision": "a2213f67d612d179"
     },
     {
+      "url": "/assets/words/son_f/mots/riz.mp3",
+      "size": 50194,
+      "revision": "275876cc6802f907"
+    },
+    {
+      "url": "/assets/words/son_f/mots/robe.mp3",
+      "size": 52702,
+      "revision": "db2d2801ca5cf31f"
+    },
+    {
       "url": "/assets/words/son_f/mots/robot.mp3",
       "size": 50090,
       "revision": "ce02af0bef322979"
+    },
+    {
+      "url": "/assets/words/son_f/mots/rocher.mp3",
+      "size": 52702,
+      "revision": "5ce3a1b5be310864"
     },
     {
       "url": "/assets/words/son_f/mots/romarin.mp3",
@@ -17838,9 +18063,24 @@
       "revision": "dc5a05070a3b9a05"
     },
     {
+      "url": "/assets/words/son_f/mots/rouge.mp3",
+      "size": 52725,
+      "revision": "5234410882e0d14f"
+    },
+    {
       "url": "/assets/words/son_f/mots/rue.mp3",
       "size": 50090,
       "revision": "b318f12006dab488"
+    },
+    {
+      "url": "/assets/words/son_f/mots/ruisseau.mp3",
+      "size": 55210,
+      "revision": "902d04516578420a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sac-a-main.mp3",
+      "size": 53956,
+      "revision": "8e4e3f73d83fe449"
     },
     {
       "url": "/assets/words/son_f/mots/salade-de-fruits.mp3",
@@ -17853,9 +18093,44 @@
       "revision": "06d78af4ea6f1a92"
     },
     {
+      "url": "/assets/words/son_f/mots/salamandre.mp3",
+      "size": 63174,
+      "revision": "107f035fa68dd2e7"
+    },
+    {
+      "url": "/assets/words/son_f/mots/salon.mp3",
+      "size": 51471,
+      "revision": "9b73a086ae0fe0c6"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sandales.mp3",
+      "size": 73182,
+      "revision": "f0ccd5f6cf3077da"
+    },
+    {
       "url": "/assets/words/son_f/mots/sapin.mp3",
       "size": 50090,
       "revision": "71b8d498d400279d"
+    },
+    {
+      "url": "/assets/words/son_f/mots/satellite.mp3",
+      "size": 30571,
+      "revision": "7fdbe6ad7e736481"
+    },
+    {
+      "url": "/assets/words/son_f/mots/saturne.mp3",
+      "size": 56463,
+      "revision": "fe03949bd0abe320"
+    },
+    {
+      "url": "/assets/words/son_f/mots/saule-pleureur.mp3",
+      "size": 68166,
+      "revision": "93bbe2f45b84bbec"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sauterelle.mp3",
+      "size": 55210,
+      "revision": "a1a0a76d1881e1b7"
     },
     {
       "url": "/assets/words/son_f/mots/saxophone.mp3",
@@ -34843,161 +35118,6 @@
       "revision": "874b47ddd9db58bc"
     },
     {
-      "url": "/assets/words/son_f/vocab/activité.mp3",
-      "size": 56463,
-      "revision": "233dd5dcc50dd500"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/brun.mp3",
-      "size": 47686,
-      "revision": "d4621e6ec7574e6d"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/casque.mp3",
-      "size": 52598,
-      "revision": "28a7129a26e3dc6d"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/chaîne.mp3",
-      "size": 52702,
-      "revision": "27b6593db0bccaa6"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/chalet.mp3",
-      "size": 50194,
-      "revision": "1eb6491996a10d32"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/chambre.mp3",
-      "size": 53956,
-      "revision": "74ce6b413dd42167"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/chaud.mp3",
-      "size": 50090,
-      "revision": "c9f8d97465014925"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/coin.mp3",
-      "size": 47686,
-      "revision": "5d30971d0fe30103"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/comptoire.mp3",
-      "size": 53956,
-      "revision": "62a42ba45674bb6a"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/couloir.mp3",
-      "size": 60643,
-      "revision": "9e61d62811fb5213"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/cuisinier.mp3",
-      "size": 53956,
-      "revision": "3678aa6314a24a5f"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/doux.mp3",
-      "size": 60539,
-      "revision": "15f443d7c52b91bb"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/ecole.mp3",
-      "size": 52598,
-      "revision": "c285f311a84dc5cb"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/etang.mp3",
-      "size": 50194,
-      "revision": "0c884b32ac7e65a7"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/frais.mp3",
-      "size": 52598,
-      "revision": "022b19085376f6d6"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/froid.mp3",
-      "size": 50090,
-      "revision": "18f37607160590fa"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/fuite.mp3",
-      "size": 52702,
-      "revision": "f1972035a160b873"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/gauche.mp3",
-      "size": 53956,
-      "revision": "aea7a7d299f4fb8d"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/goûter.mp3",
-      "size": 51448,
-      "revision": "23d0cf606e265bb8"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/grenades.mp3",
-      "size": 64405,
-      "revision": "7b157cbc87bf561e"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/hopital.mp3",
-      "size": 58031,
-      "revision": "f769d022c7d1813d"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/jardin.mp3",
-      "size": 52598,
-      "revision": "b1a6e118266e02f4"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/juillet.mp3",
-      "size": 52702,
-      "revision": "099a8d87f9ddaf28"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/juin.mp3",
-      "size": 56463,
-      "revision": "a2d22a725b129be9"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/mai.mp3",
-      "size": 52702,
-      "revision": "74878040d4b173ee"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/marche.mp3",
-      "size": 50090,
-      "revision": "2163be8f20865bbc"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/matin.mp3",
-      "size": 46432,
-      "revision": "76394ee2a3f4590b"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/mayonnaise.mp3",
-      "size": 58135,
-      "revision": "0fa144a68ea904b8"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/mère.mp3",
-      "size": 65659,
-      "revision": "1131aa83c836910f"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/métal.mp3",
-      "size": 53956,
-      "revision": "4b3ed15aec9cfdf2"
-    },
-    {
-      "url": "/assets/words/son_f/vocab/minuit.mp3",
-      "size": 52702,
-      "revision": "50f8e0a9195e09ed"
-    },
-    {
       "url": "/assets/words/son_f/vocab/V1/afghanistan.mp3",
       "size": 33272,
       "revision": "a7e932a1fb325b0d"
@@ -43374,8 +43494,8 @@
     },
     {
       "url": "/offline.html",
-      "size": 1399,
-      "revision": "e5a5e7fccd258148"
+      "size": 1425,
+      "revision": "f1eb091c1c121447"
     }
   ]
 }
