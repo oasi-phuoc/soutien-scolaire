@@ -7,6 +7,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { LECTURE_CORRECTION_BORDER } from "./lecture-correction";
+import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
 
 export interface PronounceWordListHandle {
   reset: () => void;
@@ -23,16 +24,6 @@ interface Props {
   consigne?: string;
   /** Syllabes sur une ligne, flèche + mot entier en dessous (révision étape 8). */
   twoLineText?: boolean;
-}
-
-function normalize(s: string): string {
-  return s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-}
-
-function isMatch(recognized: string, target: string): boolean {
-  const r = normalize(recognized);
-  const t = normalize(target);
-  return r === t || r.includes(t) || t.includes(r);
 }
 
 function rowClass(state: RecState, twoLineText = false): string {
@@ -108,7 +99,7 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
         let matched = false;
         for (let a = 0; a < e.results[0].length; a++) {
           const transcript: string = e.results[0][a].transcript.trim();
-          if (isMatch(transcript, target)) {
+          if (matchesSpokenWord(transcript, target)) {
             matched = true;
             break;
           }

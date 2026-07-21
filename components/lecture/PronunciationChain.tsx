@@ -6,6 +6,7 @@ import type { PronStep } from "@/lib/curriculum/lecture-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
+import { matchesSpokenWord } from "@/lib/utils/french-speech-match";
 
 export interface PronunciationChainHandle {
   reset: () => void;
@@ -17,16 +18,6 @@ interface Props {
 }
 
 type RecState = "idle" | "listening" | "correct" | "wrong";
-
-function normalize(s: string): string {
-  return s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-}
-
-function isMatch(recognized: string, target: string): boolean {
-  const r = normalize(recognized);
-  const t = normalize(target);
-  return r === t || r.includes(t) || t.includes(r);
-}
 
 function randomIdx(len: number) {
   return Math.floor(Math.random() * len);
@@ -74,7 +65,7 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
         let matched = false;
         for (let a = 0; a < e.results[0].length; a++) {
           const transcript: string = e.results[0][a].transcript.trim();
-          if (isMatch(transcript, step.word)) {
+          if (matchesSpokenWord(transcript, step.word)) {
             matched = true;
             setHeard(transcript);
             break;

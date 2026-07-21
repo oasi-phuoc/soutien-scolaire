@@ -7,6 +7,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { useWordSpotterItemCount } from "./WordSpotter";
 import { complexTargets, makeComplexSyllables } from "@/lib/utils/complex-grapheme";
+import { matchesSyllable } from "@/lib/utils/french-speech-match";
 
 export interface SyllableGridHandle {
   reset: () => void;
@@ -88,23 +89,6 @@ function expandCustomItems(custom: string[], count: number): string[] {
     return [...custom.map((s) => s.toUpperCase()), ...custom.map((s) => s.toLowerCase())];
   }
   return custom;
-}
-
-function normalize(text: string): string {
-  return text
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/gu, "")
-    .replace(/\s+/gu, "")
-    .toLowerCase();
-}
-
-function matchesSyllable(transcript: string, target: string): boolean {
-  const heard = normalize(transcript);
-  const wanted = normalize(target);
-  const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
-  return Array.from(aliases).some(
-    (alias) => heard === alias || heard.includes(alias) || alias.includes(heard),
-  );
 }
 
 function makeComplexSyllableList(

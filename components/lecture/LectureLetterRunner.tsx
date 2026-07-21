@@ -33,6 +33,7 @@ import {
   splitComplexWord,
   usesGraphemeVowelSyllables,
 } from "@/lib/utils/complex-grapheme";
+import { matchesSpokenWord, matchesSyllable } from "@/lib/utils/french-speech-match";
 import { useRegisterEvalGuard, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
@@ -507,11 +508,11 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
     rec.onresult = (event: any) => {
       let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
       let matched = false;
-      const want = normalizeGraph(items[index]!).replace(/\s+/gu, "");
+      const want = items[index]!;
+      const matchFn = kind === "syllable" ? matchesSyllable : matchesSpokenWord;
       for (let alt = 0; alt < event.results[0].length; alt++) {
         const transcript = event.results[0][alt].transcript.trim();
-        const norm = normalizeGraph(transcript).replace(/\s+/gu, "");
-        if (norm === want || norm.includes(want) || want.includes(norm)) {
+        if (matchFn(transcript, want)) {
           best = transcript;
           matched = true;
           break;
