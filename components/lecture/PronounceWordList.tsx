@@ -17,7 +17,7 @@ type RecState = "idle" | "listening" | "correct" | "wrong";
 
 interface Props {
   steps: PronStep[];
-  onValidated?: (score: number, max: number) => void;
+  onValidated?: (score: number, max: number, states?: RecState[]) => void;
   shouldValidate?: boolean;
   title?: string;
   consigne?: string;
@@ -75,7 +75,7 @@ export const PronounceWordList = forwardRef<PronounceWordListHandle, Props>(
       (recRef.current as any)?.abort?.();
       setValidated(true);
       const score = recStates.filter((s) => s === "correct").length;
-      onValidated?.(score, steps.length);
+      onValidated?.(score, steps.length, recStates);
     }, [validated, recStates, steps.length, onValidated]);
 
     const validateRef = useRef(validate);

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
@@ -23,7 +23,31 @@ interface ImageProps {
   mode: "image";
 }
 
-type Props = AudioProps | ImageProps;
+type Props = (AudioProps | ImageProps) & {
+  fixedItemCount?: number;
+  shouldValidate?: boolean;
+  onEvalValidated?: (labels: string[], targets: boolean[], states: CellState[]) => void;
+};
+
+type PickerEvalProps = {
+  fixedItemCount?: number;
+  shouldValidate?: boolean;
+  onEvalValidated?: (labels: string[], targets: boolean[], states: CellState[]) => void;
+};
+
+export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
+  function SoundPicker(props, ref) {
+    const evalProps: PickerEvalProps = {
+      fixedItemCount: props.fixedItemCount,
+      shouldValidate: props.shouldValidate,
+      onEvalValidated: props.onEvalValidated,
+    };
+    if (props.mode === "audio") {
+      return <AudioPicker phoneme={props.phoneme} ref={ref} {...evalProps} />;
+    }
+    return <ImagePicker phoneme={props.phoneme} ref={ref} {...evalProps} />;
+  },
+);
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
@@ -46,15 +70,6 @@ function useSoundPickerItemCount(defaultCount = 16): number {
 
   return count;
 }
-
-export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
-  function SoundPicker(props, ref) {
-    if (props.mode === "audio") {
-      return <AudioPicker phoneme={props.phoneme} ref={ref} />;
-    }
-    return <ImagePicker phoneme={props.phoneme} ref={ref} />;
-  },
-);
 
 function ouiNonLabel(state: CellState): "Oui" | "Non" {
   return state === "selected" || state === "correct" || state === "wrong" ? "Oui" : "Non";
@@ -172,11 +187,17 @@ function OuiNonButton({
 
 // ── ImagePicker ───────────────────────────────────────────────────────────────
 
-const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
-  function ImagePicker({ phoneme }, ref) {
+const ImagePicker = forwardRef<SoundPickerHandle, {
+  phoneme: string;
+  fixedItemCount?: number;
+  shouldValidate?: boolean;
+  onEvalValidated?: (labels: string[], targets: boolean[], states: CellState[]) => void;
+}>(
+  function ImagePicker({ phoneme, fixedItemCount, shouldValidate, onEvalValidated }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const itemCount = useSoundPickerItemCount(16);
+    const responsiveCount = useSoundPickerItemCount(16);
+    const itemCount = fixedItemCount ?? responsiveCount;
     const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount, true));
     const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -189,16 +210,26 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 
     const validate = useCallback(() => {
       if (validated) return;
+      const newStates = states.map((s, i) => {
+        const isCorrect = wordHasPhoneme(items[i]!, phoneme);
+        if (s === "selected") return isCorrect ? "correct" : "wrong";
+        if (isCorrect) return "missed";
+        return "idle";
+      }) as CellState[];
       setValidated(true);
-      setStates((prev) =>
-        prev.map((s, i) => {
-          const isCorrect = wordHasPhoneme(items[i]!, phoneme);
-          if (s === "selected") return isCorrect ? "correct" : "wrong";
-          if (isCorrect) return "missed";
-          return "idle";
-        }),
-      );
-    }, [validated, items, phoneme]);
+      setStates(newStates);
+      if (onEvalValidated) {
+        const labels = items.map((w) => w.label);
+        const targets = items.map((w) => wordHasPhoneme(w, phoneme));
+        onEvalValidated(labels, targets, newStates);
+      }
+    }, [validated, items, phoneme, states, onEvalValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
@@ -271,11 +302,17 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 
 // ── AudioPicker ───────────────────────────────────────────────────────────────
 
-const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
-  function AudioPicker({ phoneme }, ref) {
+const AudioPicker = forwardRef<SoundPickerHandle, {
+  phoneme: string;
+  fixedItemCount?: number;
+  shouldValidate?: boolean;
+  onEvalValidated?: (labels: string[], targets: boolean[], states: CellState[]) => void;
+}>(
+  function AudioPicker({ phoneme, fixedItemCount, shouldValidate, onEvalValidated }, ref) {
     const lang = usePivotLang();
     const { showPivot } = useTranslation();
-    const itemCount = useSoundPickerItemCount(16);
+    const responsiveCount = useSoundPickerItemCount(16);
+    const itemCount = fixedItemCount ?? responsiveCount;
     const [items, setItems] = useState(() => randomSoundItems(phoneme, itemCount));
     const [states, setStates] = useState<CellState[]>(() => Array(itemCount).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -288,16 +325,26 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 
     const validate = useCallback(() => {
       if (validated) return;
+      const newStates = states.map((s, i) => {
+        const isCorrect = wordHasPhoneme(items[i]!, phoneme);
+        if (s === "selected") return isCorrect ? "correct" : "wrong";
+        if (isCorrect) return "missed";
+        return "idle";
+      }) as CellState[];
       setValidated(true);
-      setStates((prev) =>
-        prev.map((s, i) => {
-          const isCorrect = wordHasPhoneme(items[i]!, phoneme);
-          if (s === "selected") return isCorrect ? "correct" : "wrong";
-          if (isCorrect) return "missed";
-          return "idle";
-        }),
-      );
-    }, [validated, items, phoneme]);
+      setStates(newStates);
+      if (onEvalValidated) {
+        const labels = items.map((w) => w.label);
+        const targets = items.map((w) => wordHasPhoneme(w, phoneme));
+        onEvalValidated(labels, targets, newStates);
+      }
+    }, [validated, items, phoneme, states, onEvalValidated]);
+
+    const validateRef = useRef(validate);
+    validateRef.current = validate;
+    useEffect(() => {
+      if (shouldValidate) validateRef.current();
+    }, [shouldValidate]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 

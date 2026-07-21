@@ -2,14 +2,16 @@
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import type { ComplexSoundLessonData, ConsonantData, PronStep, VowelData } from "@/lib/curriculum/lecture-data";
-import { randomWordsWithLetter, randomSoundItems, randomWordsWithGrapheme, wordHasPhoneme } from "@/lib/curriculum/word-pool";
+import { randomWordsWithLetter, randomWordsWithGrapheme } from "@/lib/curriculum/word-pool";
 import { useLectureWordMaxLength } from "@/lib/hooks/useLectureWordMaxLength";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
-import { getLectureWordImagePath, playWord } from "@/lib/utils/audio";
+import { getLectureWordImagePath } from "@/lib/utils/audio";
+import { SoundPicker } from "./SoundPicker";
+import { SyllableGrid } from "./SyllableGrid";
+import { PronounceWordList } from "./PronounceWordList";
 import {
   complexTargets,
   makeComplexGrid,
-  makeComplexSyllables,
   normalizeGraph,
   splitComplexWord,
 } from "@/lib/utils/complex-grapheme";
@@ -54,6 +56,29 @@ const COMPLEX_EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-audio", "sound-i
 
 const EVAL_SOUND_ITEM_COUNT = 8;
 const EVAL_PRONOUNCE_WORD_COUNT = 2;
+const EVAL_SYLLABLE_COUNT = 6;
+
+function soundEvalScore(states: CellState[], targets: boolean[]): number {
+  const perfect = !states.some((s) => s === "wrong" || s === "missed");
+  const half =
+    states.filter((s) => s === "correct").length >= Math.ceil(targets.filter(Boolean).length * 0.5) &&
+    states.filter((s) => s === "wrong").length <= 1;
+  return perfect ? 2 : half ? 1 : 0;
+}
+
+function gridCellClass(state: CellState, textSize = "text-4xl md:text-2xl"): string {
+  const base = `flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border font-bold transition-colors ${textSize}`;
+  if (state === "correct") {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]`;
+  }
+  if (state === "wrong" || state === "missed") {
+    return `${base} border-amber-400 bg-amber-50 text-amber-700`;
+  }
+  if (state === "selected") {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]`;
+  }
+  return `${base} border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95`;
+}
 
 function pickPronSteps(chain: PronStep[], count: number): PronStep[] {
   return shuffle([...chain]).slice(0, Math.min(count, chain.length));
@@ -99,47 +124,6 @@ function makeMixedGrid(upper: string, lower: string): string[] {
   return shuffle([...targets, ...shuffle(distractors).slice(0, 19)]);
 }
 
-function normalize(s: string): string {
-  return s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-}
-
-function isMatch(recognized: string, target: string): boolean {
-  const r = normalize(recognized);
-  const t = normalize(target);
-  return r === t || r.includes(t) || t.includes(r);
-}
-
-const SIMPLE_VOWELS = ["a", "e", "i", "o", "u", "y"] as const;
-
-function applyBalancedCase(items: string[]): string[] {
-  const upperFlags = shuffle([true, true, true, false, false, false]);
-  return items.map((item, index) => (upperFlags[index] ? item.toUpperCase() : item.toLowerCase()));
-}
-
-function makeMixedSyllables(baseLetter: string): string[] {
-  const letter = baseLetter.toLowerCase();
-  const vowels = shuffle([...SIMPLE_VOWELS]);
-  const patterns = [
-    (a: string, b: string) => `${a}${letter}${b}`,
-    (a: string, _b: string) => `${letter}${a}${letter}`,
-    (a: string, b: string) => `${letter}${a}${letter}${b}`,
-    (a: string, b: string) => `${a}${letter}${b}${letter}`,
-  ];
-  const syllables = Array.from({ length: 6 }, (_, index) => {
-    const first = vowels[index % vowels.length]!;
-    const second = vowels[(index + 2) % vowels.length]!;
-    return patterns[index % patterns.length]!(first, second);
-  });
-  return applyBalancedCase(syllables);
-}
-
-function matchesSyllable(transcript: string, target: string): boolean {
-  const heard = normalize(transcript).replace(/\s+/gu, "");
-  const wanted = normalize(target).replace(/\s+/gu, "");
-  const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
-  return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
-}
-
 function getPassGrade(): number {
   if (typeof window === "undefined") return 4;
   try {
@@ -170,14 +154,6 @@ function IconRight() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <path d="M9 18l6-6-6-6" />
-    </svg>
-  );
-}
-function IconSpeaker() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
     </svg>
   );
 }
@@ -230,7 +206,7 @@ function GridExercise({
         <strong className="text-[var(--color-accent-lecture)]">{upper}</strong> et{" "}
         <strong className="text-[var(--color-accent-lecture)]">{lower}</strong>
       </p>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-2 md:grid-cols-8 md:gap-1.5">
         {grid.map((cell, i) => {
           const s = states[i]!;
           return (
@@ -239,13 +215,7 @@ function GridExercise({
               type="button"
               onClick={() => tap(i)}
               disabled={validated}
-              className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
-                s === "correct" || s === "selected"
-                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
-                  : s === "wrong" || s === "missed"
-                    ? "border-amber-400 bg-amber-50 text-amber-700"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
-              }`}
+              className={gridCellClass(s)}
             >
               {cell}
             </button>
@@ -320,32 +290,32 @@ function WordsExercise({
         <strong className="text-[var(--color-accent-lecture)]">{letter}</strong> ou{" "}
         <strong className="text-[var(--color-accent-lecture)]">{letterLower}</strong> dans chaque mot
       </p>
-      <ul className="space-y-2">
+      <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {words.map((word, wi) => (
-          <li key={wi} className="flex items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
-            <span className="flex flex-wrap justify-center gap-0.5">
-              {word.split("").map((char, ci) => {
-                const key = `${wi}-${ci}`;
-                const s = states[key] ?? "idle";
-                return (
-                  <button
-                    key={ci}
-                    type="button"
-                    disabled={validated}
-                    onClick={() => tap(wi, ci)}
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors ${
-                      s === "correct" || s === "selected"
-                        ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                        : s === "wrong" || s === "missed"
-                          ? "border-amber-400 bg-amber-100 text-amber-600"
+          <li key={wi} className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3 md:px-2 md:py-2">
+            {word.split("").map((char, ci) => {
+              const key = `${wi}-${ci}`;
+              const s = states[key] ?? "idle";
+              return (
+                <button
+                  key={ci}
+                  type="button"
+                  disabled={validated}
+                  onClick={() => tap(wi, ci)}
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors md:h-6 md:w-6 md:text-xs ${
+                    s === "correct"
+                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                      : s === "wrong" || s === "missed"
+                        ? "border-amber-400 bg-amber-100 text-amber-600"
+                        : s === "selected"
+                          ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                           : "border-transparent text-[var(--color-text-primary)]"
-                    }`}
-                  >
-                    {char}
-                  </button>
-                );
-              })}
-            </span>
+                  }`}
+                >
+                  {char}
+                </button>
+              );
+            })}
           </li>
         ))}
       </ul>
@@ -353,563 +323,107 @@ function WordsExercise({
   );
 }
 
-// ─── Exercise 3 — Sound Image (2 pts) ────────────────────────────────────────
-
-function SoundImageExercise({
-  phoneme, onValidated, shouldValidate,
-}: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [items] = useState(() => randomSoundItems(phoneme, EVAL_SOUND_ITEM_COUNT, true));
-  const [cellStates, setCellStates] = useState<CellState[]>(Array(EVAL_SOUND_ITEM_COUNT).fill("idle"));
-  const [validated, setValidated] = useState(false);
-
-  function validate() {
-    if (validated) return;
-    setValidated(true);
-    const isTarget = items.map((w) => wordHasPhoneme(w, phoneme));
-    const newStates = cellStates.map((s, i) => {
-      if (s === "selected") return isTarget[i] ? "correct" : "wrong";
-      if (isTarget[i]) return "missed" as CellState;
-      return "idle" as CellState;
-    });
-    setCellStates(newStates);
-    const perfect = !newStates.some((s) => s === "wrong" || s === "missed");
-    const half =
-      newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
-      newStates.filter((s) => s === "wrong").length <= 1;
-    onValidated(perfect ? 2 : half ? 1 : 0, {
-      kind: "sound-image", labels: items.map((item) => item.label), targets: isTarget, states: newStates,
-    });
-  }
-
-  const validateRef = useRef(validate);
-  validateRef.current = validate;
-  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
-
-  function toggle(i: number) {
-    if (validated) return;
-    setCellStates((prev) => {
-      const next = [...prev] as CellState[];
-      next[i] = prev[i] === "selected" ? "idle" : "selected";
-      return next;
-    });
-  }
-
-  return (
-    <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre le son — images</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Touchez les images où vous entendez{" "}
-        <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
-      </p>
-      <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
-        {items.map((word, i) => {
-          const s = cellStates[i]!;
-          const imgSrc = getLectureWordImagePath(word.label);
-          return (
-            <button
-              key={i}
-              type="button"
-              onClick={() => toggle(i)}
-              disabled={validated}
-              className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
-                s === "correct" || s === "selected"
-                  ? "border-[var(--color-accent-lecture)]"
-                  : s === "wrong" || s === "missed"
-                    ? "border-amber-400"
-                    : "border-[var(--color-border-default)]"
-              }`}
-            >
-              {imgSrc ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={imgSrc} alt={word.label} className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]" />
-              ) : (
-                <span className="absolute inset-0 flex items-center justify-center px-1 text-center text-[10px] font-semibold text-[var(--color-text-primary)]">
-                  {word.label}
-                </span>
-              )}
-              <button
-                type="button"
-                aria-label={`Écouter ${word.label}`}
-                onClick={(e) => { e.stopPropagation(); playWord(word.label); }}
-                className="absolute top-1 right-1 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm"
-              >
-                <IconSpeaker />
-              </button>
-            </button>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-// ─── Exercise 4 — Sound Audio (2 pts) ────────────────────────────────────────
+// ─── Exercise 3 — Sound Audio (2 pts) ────────────────────────────────────────
 
 function SoundAudioExercise({
   phoneme, onValidated, shouldValidate,
 }: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [items] = useState(() => randomSoundItems(phoneme, EVAL_SOUND_ITEM_COUNT));
-  const [cellStates, setCellStates] = useState<CellState[]>(Array(EVAL_SOUND_ITEM_COUNT).fill("idle"));
-  const [validated, setValidated] = useState(false);
-
-  function validate() {
-    if (validated) return;
-    setValidated(true);
-    const isTarget = items.map((w) => wordHasPhoneme(w, phoneme));
-    const newStates = cellStates.map((s, i) => {
-      if (s === "selected") return isTarget[i] ? "correct" : "wrong";
-      if (isTarget[i]) return "missed" as CellState;
-      return "idle" as CellState;
-    });
-    setCellStates(newStates);
-    const perfect = !newStates.some((s) => s === "wrong" || s === "missed");
-    const half =
-      newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
-      newStates.filter((s) => s === "wrong").length <= 1;
-    onValidated(perfect ? 2 : half ? 1 : 0, {
-      kind: "sound-audio", labels: items.map((item) => item.label), targets: isTarget, states: newStates,
-    });
-  }
-
-  const validateRef = useRef(validate);
-  validateRef.current = validate;
-  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
-
-  function toggle(i: number) {
-    if (validated) return;
-    const word = items[i]!;
-    playWord(word.label);
-    setCellStates((prev) => {
-      const next = [...prev] as CellState[];
-      next[i] = prev[i] === "selected" ? "idle" : "selected";
-      return next;
-    });
-  }
-
   return (
-    <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre le son — audio</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        Écoutez et touchez ceux où vous entendez{" "}
-        <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
-      </p>
-      <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
-        {items.map((word, i) => {
-          const s = cellStates[i]!;
-          return (
-            <button
-              key={i}
-              type="button"
-              onClick={() => toggle(i)}
-              disabled={validated}
-              className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
-                s === "correct" || s === "selected"
-                  ? "border-[var(--color-accent-lecture)]"
-                  : s === "wrong" || s === "missed"
-                    ? "border-amber-400"
-                    : "border-[var(--color-border-default)]"
-              }`}
-            >
-              <button
-                type="button"
-                aria-label="Écouter"
-                onClick={(e) => { e.stopPropagation(); playWord(word.label); }}
-                className={`absolute inset-0 m-auto flex h-7 w-7 items-center justify-center rounded-full shadow-sm z-10 ${
-                  s === "correct" || s === "selected"
-                    ? "bg-[var(--color-accent-lecture)] text-white"
-                    : s === "wrong" || s === "missed"
-                      ? "bg-amber-500 text-white"
-                      : "bg-[var(--color-accent-lecture)] text-white"
-                }`}
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                </svg>
-              </button>
-            </button>
-          );
-        })}
-      </div>
-    </section>
+    <SoundPicker
+      mode="audio"
+      phoneme={phoneme}
+      fixedItemCount={EVAL_SOUND_ITEM_COUNT}
+      shouldValidate={shouldValidate}
+      onEvalValidated={(labels, targets, states) => {
+        onValidated(soundEvalScore(states, targets), {
+          kind: "sound-audio",
+          labels,
+          targets,
+          states,
+        });
+      }}
+    />
   );
 }
 
-// ─── Exercise 5 — Pronounce (3 pts) ──────────────────────────────────────────
+// ─── Exercise 4 — Sound Image (2 pts) ────────────────────────────────────────
+
+function SoundImageExercise({
+  phoneme, onValidated, shouldValidate,
+}: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
+  return (
+    <SoundPicker
+      mode="image"
+      phoneme={phoneme}
+      fixedItemCount={EVAL_SOUND_ITEM_COUNT}
+      shouldValidate={shouldValidate}
+      onEvalValidated={(labels, targets, states) => {
+        onValidated(soundEvalScore(states, targets), {
+          kind: "sound-image",
+          labels,
+          targets,
+          states,
+        });
+      }}
+    />
+  );
+}
+
+// ─── Exercise 5 — Syllables (3 pts) ──────────────────────────────────────────
 
 function SyllablesMixedExercise({
   letter, onValidated, shouldValidate,
 }: { letter: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const [syllables] = useState(() => makeMixedSyllables(letter));
-  const [recStates, setRecStates] = useState<RecState[]>(() => syllables.map(() => "idle"));
-  const [heard, setHeard] = useState<string[]>(() => syllables.map(() => ""));
-  const [scored, setScored] = useState<boolean[]>(() => syllables.map(() => false));
-  const [validated, setValidated] = useState(false);
-  const recRef = useRef<unknown>(null);
-
-  function startListening(index: number) {
-    if (validated || recStates[index] === "listening") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      next[index] = "listening";
-      return next;
-    });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let transcript = "";
-      let matched = false;
-      for (let a = 0; a < event.results[0].length; a++) {
-        transcript = event.results[0][a].transcript.trim();
-        if (matchesSyllable(transcript, syllables[index]!)) {
-          matched = true;
-          break;
-        }
-      }
-      setHeard((prev) => {
-        const next = [...prev];
-        next[index] = transcript;
-        return next;
-      });
-      setScored((prev) => {
-        const next = [...prev];
-        next[index] = true;
-        return next;
-      });
-      setRecStates((prev) => {
-        const next = [...prev] as RecState[];
-        next[index] = matched ? "correct" : "wrong";
-        return next;
-      });
-    };
-    rec.onerror = () => setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      next[index] = "idle";
-      return next;
-    });
-    rec.onend = () => setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      if (next[index] === "listening") next[index] = "idle";
-      return next;
-    });
-    recRef.current = rec;
-    rec.start();
-  }
-
-  const validateRef = useRef(() => {});
-  validateRef.current = () => {
-    if (validated) return;
-    setValidated(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    const score = Math.min(3, recStates.filter((state) => state === "correct").length);
-    onValidated(score, { kind: "syllables-mixed", syllables, states: recStates, heard, score });
-  };
-  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
-
   return (
-    <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Prononcez les syllabes affichées.</p>
-      <div className="space-y-2">
-        {syllables.map((syllable, index) => {
-          const state = recStates[index]!;
-          return (
-            <div key={`${syllable}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
-              state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                : state === "wrong" ? "border-amber-400 bg-amber-50"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
-            }`}>
-              <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
-              <span className="flex-1 text-center text-2xl font-bold text-[var(--color-text-primary)]">{syllable}</span>
-              <button
-                type="button"
-                onClick={() => startListening(index)}
-                disabled={!srAvailable || validated || state === "listening"}
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95 ${
-                  state === "listening" ? "animate-pulse bg-red-500" : "bg-[var(--color-accent-lecture)]"
-                } disabled:opacity-40`}
-                aria-label={`Prononcer ${syllable}`}
-              >
-                {state === "correct"
-                  ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-                  : state === "wrong"
-                    ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-                    : <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
-                }
-              </button>
-              {!srAvailable && !scored[index] && (
-                <button
-                  type="button"
-                  disabled={validated}
-                  onClick={() => {
-                    setRecStates((prev) => {
-                      const next = [...prev] as RecState[];
-                      next[index] = "correct";
-                      return next;
-                    });
-                    setScored((prev) => {
-                      const next = [...prev];
-                      next[index] = true;
-                      return next;
-                    });
-                  }}
-                  className="rounded-full border border-[var(--color-accent-lecture)] px-3 py-1 text-xs font-bold text-[var(--color-accent-lecture)]"
-                >
-                  OK
-                </button>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    <SyllableGrid
+      baseLetter={letter}
+      mode="mixed"
+      fixedSyllableCount={EVAL_SYLLABLE_COUNT}
+      shouldValidate={shouldValidate}
+      onEvalValidated={(syllables, states, heard, score) => {
+        onValidated(score, { kind: "syllables-mixed", syllables, states, heard, score });
+      }}
+    />
   );
 }
 
 function PronounceExercise({
   chain, onValidated, shouldValidate, wordCount = 1,
 }: { chain: PronStep[]; onValidated: ValidatedHandler; shouldValidate: boolean; wordCount?: number }) {
-  const [steps] = useState(() => wordCount > 1 ? pickPronSteps(chain, wordCount) : [chain[Math.floor(Math.random() * chain.length)]!]);
-  const [recStates, setRecStates] = useState<RecState[]>(() => steps.map(() => "idle"));
-  const [scored, setScored] = useState<boolean[]>(() => steps.map(() => false));
-  const [validated, setValidated] = useState(false);
-  const recRef = useRef<unknown>(null);
-
-  // Single-word mode (vowel eval): legacy all-or-nothing scoring via pendingScore.
-  const [pendingScore, setPendingScore] = useState(0);
-  const singleScored = scored[0] ?? false;
-
-  function startListening(index: number) {
-    if (validated || recStates[index] === "listening") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      next[index] = "listening";
-      return next;
-    });
-    const target = steps[index]!.word;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (e: any) => {
-      let matched = false;
-      for (let a = 0; a < e.results[0].length; a++) {
-        const t: string = e.results[0][a].transcript.trim();
-        if (isMatch(t, target)) { matched = true; break; }
-      }
-      setRecStates((prev) => {
-        const next = [...prev] as RecState[];
-        next[index] = matched ? "correct" : "wrong";
-        return next;
-      });
-      setScored((prev) => {
-        if (prev[index]) return prev;
-        if (wordCount <= 1) setPendingScore(matched ? 3 : 0);
-        const next = [...prev];
-        next[index] = true;
-        return next;
-      });
-    };
-    rec.onerror = () => setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      next[index] = "idle";
-      return next;
-    });
-    rec.onend = () => setRecStates((prev) => {
-      const next = [...prev] as RecState[];
-      if (next[index] === "listening") next[index] = "idle";
-      return next;
-    });
-    recRef.current = rec;
-    rec.start();
-  }
-
-  function manualScore(index: number, pts: number) {
-    if (!scored[index]) {
-      setScored((prev) => {
-        const next = [...prev];
-        next[index] = true;
-        return next;
-      });
-      if (wordCount <= 1) setPendingScore(pts);
-      else setRecStates((prev) => {
-        const next = [...prev] as RecState[];
-        next[index] = pts > 0 ? "correct" : "wrong";
-        return next;
-      });
-    }
-  }
-
-  const validateRef = useRef(() => {});
-  validateRef.current = () => {
-    if (validated) return;
-    setValidated(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    const score = wordCount > 1
-      ? pronounceEvalScore(recStates.filter((state) => state === "correct").length, wordCount)
-      : pendingScore;
-    const first = steps[0]!;
-    onValidated(score, wordCount > 1
-      ? {
-          kind: "pronounce",
-          phoneme: first.phoneme,
-          syllable: first.syllable,
-          word: first.word,
-          score,
-          words: steps.map((s) => s.word),
-          states: recStates,
-        }
-      : {
-          kind: "pronounce", phoneme: first.phoneme, syllable: first.syllable, word: first.word, score,
-        });
-  };
-  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
-
-  if (wordCount > 1) {
-    return (
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer les mots</h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">Prononcez chaque mot à voix haute.</p>
-        <div className="space-y-2">
-          {steps.map((step, index) => {
-            const state = recStates[index]!;
-            return (
-              <div key={`${step.word}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
-                state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                  : state === "wrong" ? "border-amber-400 bg-amber-50"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
-              }`}>
-                <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
-                <div className="flex flex-1 flex-col items-center gap-1 text-center">
-                  <span className="text-xs text-[var(--color-text-secondary)]">
-                    <span className="font-bold" style={{ color: "var(--color-accent-lecture)" }}>{step.phoneme}</span>
-                    {" → "}{step.syllable}
-                  </span>
-                  <span className="text-2xl font-bold text-[var(--color-text-primary)]">{step.word}</span>
-                  <button type="button" onClick={() => playWord(step.word)}
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)]"
-                    aria-label={`Écouter ${step.word}`}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                    </svg>
-                  </button>
-                </div>
-                {srAvailable ? (
-                  <button
-                    type="button"
-                    onClick={() => startListening(index)}
-                    disabled={validated || state === "listening"}
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95 ${
-                      state === "listening" ? "animate-pulse bg-red-500" : "bg-[var(--color-accent-lecture)]"
-                    } disabled:opacity-40`}
-                    aria-label={`Prononcer ${step.word}`}
-                  >
-                    {state === "correct"
-                      ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-                      : state === "wrong"
-                        ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-                        : <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
-                    }
-                  </button>
-                ) : !scored[index] ? (
-                  <div className="flex shrink-0 gap-2">
-                    <button type="button" onClick={() => manualScore(index, 1)} disabled={validated}
-                      className="rounded-full border border-[var(--color-accent-lecture)] px-3 py-1 text-xs font-bold text-[var(--color-accent-lecture)] disabled:opacity-50">
-                      OK
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    );
-  }
-
-  const step = steps[0]!;
-  const recState = recStates[0] ?? "idle";
+  const [steps] = useState(() => (wordCount > 1
+    ? pickPronSteps(chain, wordCount)
+    : [chain[Math.floor(Math.random() * chain.length)]!]));
 
   return (
-    <section className="space-y-5">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer le mot</h2>
-      <div className={`flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border-2 px-6 py-6 text-center transition-colors ${
-        recState === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-          : recState === "wrong" ? "border-amber-400 bg-amber-50"
-            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
-      }`}>
-        <span className="text-sm text-[var(--color-text-secondary)]">
-          <span className="font-bold" style={{ color: "var(--color-accent-lecture)" }}>{step.phoneme}</span>
-          {" → "}{step.syllable}{" → "}
-          <span className="font-bold text-[var(--color-text-primary)]">{step.word}</span>
-        </span>
-        <span className="text-4xl font-bold text-[var(--color-text-primary)]">{step.word}</span>
-        <button type="button" onClick={() => playWord(step.word)}
-          className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/20 text-[var(--color-text-secondary)]"
-          aria-label={`Écouter ${step.word}`}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-          </svg>
-        </button>
-      </div>
-
-      {srAvailable ? (
-        <div className="flex flex-col items-center gap-3">
-          <button type="button" onClick={() => startListening(0)} disabled={recState === "listening" || validated}
-            className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
-              recState === "listening" ? "animate-pulse bg-red-500 text-white"
-                : recState === "correct" ? "bg-[var(--color-accent-lecture)] text-white"
-                  : recState === "wrong" ? "bg-amber-500 text-white"
-                    : "bg-[var(--color-accent-lecture)] text-white hover:opacity-90"
-            }`} aria-label="Parler">
-            {recState === "correct"
-              ? <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-              : recState === "wrong"
-                ? <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-                : <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
+    <PronounceWordList
+      steps={steps}
+      shouldValidate={shouldValidate}
+      title="Prononcer les mots"
+      consigne="Prononcez chaque mot à voix haute."
+      onValidated={(correct, _max, states) => {
+        const score = wordCount > 1
+          ? pronounceEvalScore(correct, wordCount)
+          : (correct > 0 ? 3 : 0);
+        const first = steps[0]!;
+        onValidated(score, wordCount > 1
+          ? {
+              kind: "pronounce",
+              phoneme: first.phoneme,
+              syllable: first.syllable,
+              word: first.word,
+              score,
+              words: steps.map((step) => step.word),
+              states,
             }
-          </button>
-        </div>
-      ) : (
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-sm text-[var(--color-text-secondary)]">Auto-évaluation — as-tu réussi à prononcer le mot ?</p>
-          <div className="flex gap-3">
-            <button type="button" onClick={() => manualScore(0, 3)} disabled={singleScored}
-              className="flex h-11 items-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white disabled:opacity-50">
-              Oui ✓
-            </button>
-            <button type="button" onClick={() => manualScore(0, 0)} disabled={singleScored}
-              className="flex h-11 items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-5 text-sm font-medium text-[var(--color-text-secondary)] disabled:opacity-50">
-              Non ✗
-            </button>
-          </div>
-        </div>
-      )}
-    </section>
+          : {
+              kind: "pronounce",
+              phoneme: first.phoneme,
+              syllable: first.syllable,
+              word: first.word,
+              score,
+            });
+      }}
+    />
   );
 }
 
@@ -975,13 +489,7 @@ function ComplexGridExercise({
               type="button"
               onClick={() => tap(i)}
               disabled={validated}
-              className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
-                s === "correct" || s === "selected"
-                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
-                  : s === "wrong" || s === "missed"
-                    ? "border-amber-400 bg-amber-50 text-amber-700"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
-              }`}
+              className={gridCellClass(s, "text-xl")}
             >
               {cell}
             </button>
@@ -1054,9 +562,9 @@ function ComplexWordsExercise({
         Touchez le graphème{" "}
         <strong className="text-[var(--color-accent-lecture)]">{label}</strong> dans chaque mot
       </p>
-      <ul className="space-y-2">
+      <ul className="space-y-2 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
         {words.map((word, wi) => (
-          <li key={wi} className="flex flex-nowrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-2">
+          <li key={wi} className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 py-3 md:px-2 md:py-2">
             {splitComplexWord(word, targets).map((part, ci) => {
               const key = `${wi}-${ci}`;
               const s = states[key] ?? "idle";
@@ -1066,12 +574,14 @@ function ComplexWordsExercise({
                   type="button"
                   disabled={validated}
                   onClick={() => tap(wi, ci)}
-                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors ${
-                    s === "correct" || s === "selected"
+                  className={`flex h-8 min-w-7 shrink-0 items-center justify-center rounded-lg border px-1 text-base font-bold transition-colors md:h-6 md:min-w-5 md:px-0.5 md:text-xs ${
+                    s === "correct"
                       ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                       : s === "wrong" || s === "missed"
                         ? "border-amber-400 bg-amber-100 text-amber-600"
-                        : "border-transparent text-[var(--color-text-primary)]"
+                        : s === "selected"
+                          ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                          : "border-transparent text-[var(--color-text-primary)]"
                   }`}
                 >
                   {part.text}
@@ -1085,113 +595,20 @@ function ComplexWordsExercise({
   );
 }
 
-// Read grapheme syllables aloud (3 pts) — like SyllablesMixedExercise.
+// Read grapheme syllables aloud (3 pts) — même UI que l'entraînement.
 function ComplexSyllablesExercise({
   label, onValidated, shouldValidate,
 }: { label: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
-  const targets = useMemo(() => complexTargets(label), [label]);
-  const [syllables] = useState(() => makeComplexSyllables(targets, "mixed"));
-  const [recStates, setRecStates] = useState<RecState[]>(() => syllables.map(() => "idle"));
-  const [heard, setHeard] = useState<string[]>(() => syllables.map(() => ""));
-  const [scored, setScored] = useState<boolean[]>(() => syllables.map(() => false));
-  const [validated, setValidated] = useState(false);
-  const recRef = useRef<unknown>(null);
-
-  function startListening(index: number) {
-    if (validated || recStates[index] === "listening") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "listening"; return next; });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let transcript = "";
-      let matched = false;
-      const want = normalizeGraph(syllables[index]!).replace(/\s+/gu, "");
-      for (let a = 0; a < event.results[0].length; a++) {
-        transcript = event.results[0][a].transcript.trim();
-        const norm = normalizeGraph(transcript).replace(/\s+/gu, "");
-        if (norm === want || norm.includes(want) || want.includes(norm)) { matched = true; break; }
-      }
-      setHeard((prev) => { const next = [...prev]; next[index] = transcript; return next; });
-      setScored((prev) => { const next = [...prev]; next[index] = true; return next; });
-      setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = matched ? "correct" : "wrong"; return next; });
-    };
-    rec.onerror = () => setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "idle"; return next; });
-    rec.onend = () => setRecStates((prev) => { const next = [...prev] as RecState[]; if (next[index] === "listening") next[index] = "idle"; return next; });
-    recRef.current = rec;
-    rec.start();
-  }
-
-  const validateRef = useRef(() => {});
-  validateRef.current = () => {
-    if (validated) return;
-    setValidated(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    const score = Math.min(3, recStates.filter((state) => state === "correct").length);
-    onValidated(score, { kind: "syllables-mixed", syllables, states: recStates, heard, score });
-  };
-  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
-
   return (
-    <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Prononcez les syllabes affichées.</p>
-      <div className="space-y-2">
-        {syllables.map((syllable, index) => {
-          const state = recStates[index]!;
-          return (
-            <div key={`${syllable}-${index}`} className={`flex min-h-16 items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
-              state === "correct" ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                : state === "wrong" ? "border-amber-400 bg-amber-50"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
-            }`}>
-              <span className="w-7 text-sm font-bold text-[var(--color-accent-lecture)]">{index + 1}.</span>
-              <span className="flex-1 text-center text-2xl font-bold text-[var(--color-text-primary)]">{syllable}</span>
-              <button
-                type="button"
-                onClick={() => startListening(index)}
-                disabled={!srAvailable || validated || state === "listening"}
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all active:scale-95 ${
-                  state === "listening" ? "animate-pulse bg-red-500" : "bg-[var(--color-accent-lecture)]"
-                } disabled:opacity-40`}
-                aria-label={`Prononcer ${syllable}`}
-              >
-                {state === "correct"
-                  ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-                  : state === "wrong"
-                    ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-                    : <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
-                }
-              </button>
-              {!srAvailable && !scored[index] && (
-                <button
-                  type="button"
-                  disabled={validated}
-                  onClick={() => {
-                    setRecStates((prev) => { const next = [...prev] as RecState[]; next[index] = "correct"; return next; });
-                    setScored((prev) => { const next = [...prev]; next[index] = true; return next; });
-                  }}
-                  className="rounded-full border border-[var(--color-accent-lecture)] px-3 py-1 text-xs font-bold text-[var(--color-accent-lecture)]"
-                >
-                  OK
-                </button>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    <SyllableGrid
+      graphemeLabel={label}
+      mode="mixed"
+      fixedSyllableCount={EVAL_SYLLABLE_COUNT}
+      shouldValidate={shouldValidate}
+      onEvalValidated={(syllables, states, heard, score) => {
+        onValidated(score, { kind: "syllables-mixed", syllables, states, heard, score });
+      }}
+    />
   );
 }
 
@@ -1503,8 +920,8 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                 ? <ComplexWordsExercise label={letter} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />
                 : <WordsExercise letter={letter} letterLower={letterLower} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} />}
             </div>
-            <div hidden={isResults || stepIdx !== 2}><SoundImageExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(2, s, snapshot)} shouldValidate={validateTarget === 2 || validateTarget === -1} /></div>
-            <div hidden={isResults || stepIdx !== 3}><SoundAudioExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(3, s, snapshot)} shouldValidate={validateTarget === 3 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 2}><SoundAudioExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(2, s, snapshot)} shouldValidate={validateTarget === 2 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 3}><SoundImageExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(3, s, snapshot)} shouldValidate={validateTarget === 3 || validateTarget === -1} /></div>
             {data.type === "consonant" || isComplex ? (
               <>
                 <div hidden={isResults || stepIdx !== 4}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { playSyllable } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -19,6 +19,10 @@ interface Props {
   mode?: "cv" | "vc" | "mixed" | "graph-vowel";
   /** Liste personnalisée (édition contenu) — sinon génération auto. */
   items?: string[];
+  /** Nombre fixe de syllabes (évaluation) — sinon 6 mobile / 12 bureau. */
+  fixedSyllableCount?: number;
+  shouldValidate?: boolean;
+  onEvalValidated?: (syllables: string[], states: RecState[], heard: string[], correctCount: number) => void;
 }
 
 type RecState = "idle" | "listening" | "correct" | "wrong";
@@ -115,11 +119,12 @@ function makeComplexSyllableList(
 }
 
 export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
-  function SyllableGrid({ baseLetter = "", graphemeLabel, mode = "cv", items }, ref) {
+  function SyllableGrid({ baseLetter = "", graphemeLabel, mode = "cv", items, fixedSyllableCount, shouldValidate, onEvalValidated }, ref) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
   const recRef = useRef<unknown>(null);
-  const syllableCount = useWordSpotterItemCount(MOBILE_SYLLABLE_COUNT, DESKTOP_SYLLABLE_COUNT);
+  const responsiveCount = useWordSpotterItemCount(MOBILE_SYLLABLE_COUNT, DESKTOP_SYLLABLE_COUNT);
+  const syllableCount = fixedSyllableCount ?? responsiveCount;
   const prevSyllableCount = useRef(syllableCount);
 
   function resolveSyllables(count: number) {
@@ -159,6 +164,19 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   }
 
   useImperativeHandle(ref, () => ({ reset }));
+
+  const validateEval = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (recRef.current as any)?.abort?.();
+    const correctCount = Math.min(3, states.filter((state) => state === "correct").length);
+    onEvalValidated?.(syllables, states, heard, correctCount);
+  }, [syllables, states, heard, onEvalValidated]);
+
+  const validateEvalRef = useRef(validateEval);
+  validateEvalRef.current = validateEval;
+  useEffect(() => {
+    if (shouldValidate) validateEvalRef.current();
+  }, [shouldValidate]);
 
   function startListening(index: number) {
     // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
