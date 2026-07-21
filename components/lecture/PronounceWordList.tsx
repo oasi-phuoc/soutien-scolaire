@@ -39,7 +39,9 @@ function rowClass(state: RecState, twoLineText = false): string {
   const base = twoLineText
     ? "grid grid-cols-[auto_1fr_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors"
     : "grid grid-cols-[auto_minmax(5.5rem,auto)_1.5rem_minmax(5.5rem,auto)_auto] items-center gap-x-3 rounded-[var(--radius-md)] border px-3 py-2 transition-colors";
-  if (state === "correct") return `${base} border-[var(--color-accent-lecture)]`;
+  if (state === "correct") {
+    return `${base} border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10`;
+  }
   if (state === "wrong") return `${base} ${LECTURE_CORRECTION_BORDER}`;
   return `${base} border-[var(--color-border-default)]`;
 }

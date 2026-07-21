@@ -27,7 +27,7 @@ const DESKTOP_SYLLABLE_COUNT = 12;
 const ROW_CLASS =
   "grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border-2 px-3 py-2 transition-colors md:gap-2 md:px-2 md:py-1.5";
 const MIC_CLASS =
-  "flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:active:scale-100 md:h-9 md:w-9";
+  "flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 md:h-9 md:w-9";
 const SYLLABLE_CLASS =
   "min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)] md:min-h-8 md:px-2 md:text-base md:leading-normal";
 const PLAY_CLASS =
@@ -95,7 +95,9 @@ function matchesSyllable(transcript: string, target: string): boolean {
   const heard = normalize(transcript);
   const wanted = normalize(target);
   const aliases = new Set([wanted, wanted.replace(/y/gu, "i")]);
-  return Array.from(aliases).some((alias) => heard === alias || heard.includes(alias));
+  return Array.from(aliases).some(
+    (alias) => heard === alias || heard.includes(alias) || alias.includes(heard),
+  );
 }
 
 export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
@@ -144,7 +146,8 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   useImperativeHandle(ref, () => ({ reset }));
 
   function startListening(index: number) {
-    if (typeof window === "undefined" || states[index] === "correct") return;
+    // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
+    if (typeof window === "undefined" || states[index] === "listening" || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;

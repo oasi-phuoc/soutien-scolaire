@@ -361,7 +361,8 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
   useImperativeHandle(ref, () => ({ reset }));
 
   function startListening(index: number) {
-    if (typeof window === "undefined" || states[index] === "correct") return;
+    // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
+    if (typeof window === "undefined" || states[index] === "listening" || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;
@@ -433,7 +434,7 @@ const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv"
                 type="button"
                 onClick={() => startListening(i)}
                 disabled={state === "listening" || state === "correct"}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:active:scale-100 ${
+                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
                   state === "listening"
                     ? "animate-pulse bg-red-500"
                     : state === "correct"
@@ -627,7 +628,8 @@ const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
 
 
   function startListening(index: number) {
-    if (typeof window === "undefined" || (timeUp && !evalWithResults) || finished || states[index] === "correct") return;
+    // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
+    if (typeof window === "undefined" || (timeUp && !evalWithResults) || finished || states[index] === "listening" || states[index] === "correct") return;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
     if (!SR) return;

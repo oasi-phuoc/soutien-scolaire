@@ -54,7 +54,8 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
     useImperativeHandle(ref, () => ({ reset }), [reset]);
 
     function startListening() {
-      if (recState === "listening") return;
+      // Une fois juste : verrouillé — pas de refaire (comme PronounceWordList).
+      if (recState === "listening" || recState === "correct") return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
       if (!SR) return;
@@ -146,8 +147,8 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
             <button
               type="button"
               onClick={startListening}
-              disabled={recState === "listening"}
-              className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
+              disabled={recState === "listening" || recState === "correct"}
+              className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
                 recState === "listening"
                   ? "animate-pulse bg-red-500 text-white"
                   : recState === "correct"
