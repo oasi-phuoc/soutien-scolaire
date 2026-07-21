@@ -1,6 +1,6 @@
 {
-  "version": 1784626207034,
-  "totalBytes": 421352056,
+  "version": 1784628695906,
+  "totalBytes": 421364672,
   "routes": [
     "/",
     "/avant-propos",
@@ -7311,6 +7311,7 @@
     "/assets/words/vocab/V9/faucon.webp",
     "/assets/words/vocab/V9/ferry.webp",
     "/assets/words/vocab/V9/festival.webp",
+    "/assets/words/vocab/V9/feu-rouge.webp",
     "/assets/words/vocab/V9/flamant-rose.webp",
     "/assets/words/vocab/V9/fleuve.webp",
     "/assets/words/vocab/V9/foret.webp",
@@ -42229,6 +42230,11 @@
       "url": "/assets/words/vocab/V9/festival.webp",
       "size": 43114,
       "revision": "24befa0717cec2b3"
+    },
+    {
+      "url": "/assets/words/vocab/V9/feu-rouge.webp",
+      "size": 12616,
+      "revision": "fda8e2be1f0fd2d9"
     },
     {
       "url": "/assets/words/vocab/V9/flamant-rose.webp",

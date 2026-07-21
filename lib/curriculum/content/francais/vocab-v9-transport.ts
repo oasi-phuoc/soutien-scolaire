@@ -699,7 +699,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
     },
     {
       word: "vélo",
-      image: "/assets/words/lecture/vélo.webp",
+      image: "velo.webp",
       article: "le",
       gender: "m",
       group: "Sur la route",
