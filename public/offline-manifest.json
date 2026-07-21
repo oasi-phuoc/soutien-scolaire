@@ -1,6 +1,6 @@
 {
-  "version": 1784616068814,
-  "totalBytes": 419580282,
+  "version": 1784616209125,
+  "totalBytes": 420372143,
   "routes": [
     "/",
     "/avant-propos",
@@ -5968,6 +5968,8 @@
     "/assets/words/son_f/vocab/V10/avion.mp3",
     "/assets/words/son_f/vocab/V10/bagage.mp3",
     "/assets/words/son_f/vocab/V10/baguette.mp3",
+    "/assets/words/son_f/vocab/V10/beignet.mp3",
+    "/assets/words/son_f/vocab/V10/beurre.mp3",
     "/assets/words/son_f/vocab/V10/bien-cuit.mp3",
     "/assets/words/son_f/vocab/V10/billet.mp3",
     "/assets/words/son_f/vocab/V10/biscuit.mp3",
@@ -5979,34 +5981,49 @@
     "/assets/words/son_f/vocab/V10/chambre-double.mp3",
     "/assets/words/son_f/vocab/V10/chambre-simple.mp3",
     "/assets/words/son_f/vocab/V10/chambre.mp3",
+    "/assets/words/son_f/vocab/V10/chausson.mp3",
+    "/assets/words/son_f/vocab/V10/chocolat.mp3",
     "/assets/words/son_f/vocab/V10/cle.mp3",
     "/assets/words/son_f/vocab/V10/coffre-fort.mp3",
     "/assets/words/son_f/vocab/V10/concierge.mp3",
+    "/assets/words/son_f/vocab/V10/confiture.mp3",
     "/assets/words/son_f/vocab/V10/controleur.mp3",
+    "/assets/words/son_f/vocab/V10/cookie.mp3",
     "/assets/words/son_f/vocab/V10/correspondance.mp3",
     "/assets/words/son_f/vocab/V10/couteau.mp3",
     "/assets/words/son_f/vocab/V10/couvert.mp3",
+    "/assets/words/son_f/vocab/V10/crepe.mp3",
     "/assets/words/son_f/vocab/V10/croissant.mp3",
     "/assets/words/son_f/vocab/V10/cuillere.mp3",
     "/assets/words/son_f/vocab/V10/cuisine.mp3",
     "/assets/words/son_f/vocab/V10/cuisinier.mp3",
+    "/assets/words/son_f/vocab/V10/cupcake.mp3",
     "/assets/words/son_f/vocab/V10/demi-pension.mp3",
     "/assets/words/son_f/vocab/V10/depart.mp3",
     "/assets/words/son_f/vocab/V10/dessert.mp3",
     "/assets/words/son_f/vocab/V10/destination.mp3",
+    "/assets/words/son_f/vocab/V10/donut.mp3",
     "/assets/words/son_f/vocab/V10/douane.mp3",
     "/assets/words/son_f/vocab/V10/eclair.mp3",
     "/assets/words/son_f/vocab/V10/embarquement.mp3",
     "/assets/words/son_f/vocab/V10/enregistrement.mp3",
     "/assets/words/son_f/vocab/V10/escale.mp3",
     "/assets/words/son_f/vocab/V10/etage.mp3",
+    "/assets/words/son_f/vocab/V10/farine.mp3",
+    "/assets/words/son_f/vocab/V10/flan.mp3",
     "/assets/words/son_f/vocab/V10/fourchette.mp3",
     "/assets/words/son_f/vocab/V10/gare.mp3",
     "/assets/words/son_f/vocab/V10/gateau.mp3",
+    "/assets/words/son_f/vocab/V10/gaufre.mp3",
     "/assets/words/son_f/vocab/V10/greve.mp3",
     "/assets/words/son_f/vocab/V10/guichet.mp3",
     "/assets/words/son_f/vocab/V10/horaire.mp3",
+    "/assets/words/son_f/vocab/V10/macaron.mp3",
+    "/assets/words/son_f/vocab/V10/madeleine.mp3",
     "/assets/words/son_f/vocab/V10/menu.mp3",
+    "/assets/words/son_f/vocab/V10/meringue.mp3",
+    "/assets/words/son_f/vocab/V10/mille-feuille.mp3",
+    "/assets/words/son_f/vocab/V10/muffin.mp3",
     "/assets/words/son_f/vocab/V10/nuit.mp3",
     "/assets/words/son_f/vocab/V10/pain-au-chocolat.mp3",
     "/assets/words/son_f/vocab/V10/pain.mp3",
@@ -6731,27 +6748,45 @@
     "/assets/words/vocab/V10/assiette.webp",
     "/assets/words/vocab/V10/bagage.webp",
     "/assets/words/vocab/V10/baguette.webp",
+    "/assets/words/vocab/V10/beignet.webp",
+    "/assets/words/vocab/V10/beurre.webp",
     "/assets/words/vocab/V10/biscuit.webp",
     "/assets/words/vocab/V10/boisson.webp",
     "/assets/words/vocab/V10/brioche.webp",
     "/assets/words/vocab/V10/carte-d-embarquement.webp",
     "/assets/words/vocab/V10/chambre-double.webp",
     "/assets/words/vocab/V10/chambre-simple.webp",
+    "/assets/words/vocab/V10/chausson.webp",
+    "/assets/words/vocab/V10/chocolat.webp",
     "/assets/words/vocab/V10/cle.webp",
+    "/assets/words/vocab/V10/confiture.webp",
+    "/assets/words/vocab/V10/cookie.webp",
     "/assets/words/vocab/V10/couteau.webp",
     "/assets/words/vocab/V10/couvert.webp",
+    "/assets/words/vocab/V10/crepe.webp",
+    "/assets/words/vocab/V10/croissant.webp",
     "/assets/words/vocab/V10/cuillere.webp",
     "/assets/words/vocab/V10/cuisine.webp",
     "/assets/words/vocab/V10/cuisinier.webp",
+    "/assets/words/vocab/V10/cupcake.webp",
     "/assets/words/vocab/V10/demi-pension.webp",
     "/assets/words/vocab/V10/dessert.webp",
     "/assets/words/vocab/V10/destination.webp",
+    "/assets/words/vocab/V10/donut.webp",
     "/assets/words/vocab/V10/douane.webp",
     "/assets/words/vocab/V10/eclair.webp",
     "/assets/words/vocab/V10/embarquement.webp",
+    "/assets/words/vocab/V10/farine.webp",
+    "/assets/words/vocab/V10/flan.webp",
     "/assets/words/vocab/V10/fourchette.webp",
     "/assets/words/vocab/V10/gateau.webp",
+    "/assets/words/vocab/V10/gaufre.webp",
+    "/assets/words/vocab/V10/macaron.webp",
+    "/assets/words/vocab/V10/madeleine.webp",
     "/assets/words/vocab/V10/menu.webp",
+    "/assets/words/vocab/V10/meringue.webp",
+    "/assets/words/vocab/V10/mille-feuille.webp",
+    "/assets/words/vocab/V10/muffin.webp",
     "/assets/words/vocab/V10/pain-au-chocolat.webp",
     "/assets/words/vocab/V10/pain.webp",
     "/assets/words/vocab/V10/passeport.webp",
@@ -35448,6 +35483,16 @@
       "revision": "ed194ffe17818d99"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/beignet.mp3",
+      "size": 11643,
+      "revision": "196fb00fa9b3184d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/beurre.mp3",
+      "size": 11956,
+      "revision": "4936b862a195e492"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/bien-cuit.mp3",
       "size": 11016,
       "revision": "e9a4a951b6be8f12"
@@ -35503,6 +35548,16 @@
       "revision": "9d119a85e73be1dc"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/chausson.mp3",
+      "size": 11016,
+      "revision": "ebe3d86efa3801b8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/chocolat.mp3",
+      "size": 12270,
+      "revision": "556ed996a4affadc"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/cle.mp3",
       "size": 11643,
       "revision": "322e07044a3e0e8c"
@@ -35518,9 +35573,19 @@
       "revision": "9cd497d0008cb451"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/confiture.mp3",
+      "size": 14778,
+      "revision": "029941b2a284678f"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/controleur.mp3",
       "size": 14464,
       "revision": "8df594932ad05f4d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/cookie.mp3",
+      "size": 11956,
+      "revision": "1d19c7e18c4fc228"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/correspondance.mp3",
@@ -35536,6 +35601,11 @@
       "url": "/assets/words/son_f/vocab/V10/couvert.mp3",
       "size": 11956,
       "revision": "55c119b360fe1ae5"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/crepe.mp3",
+      "size": 12270,
+      "revision": "9e1f9564f8a6162a"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/croissant.mp3",
@@ -35558,6 +35628,11 @@
       "revision": "fb676cc47ff24011"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/cupcake.mp3",
+      "size": 14151,
+      "revision": "9dcf341188f9632b"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/demi-pension.mp3",
       "size": 16658,
       "revision": "fdf0b630729c747f"
@@ -35576,6 +35651,11 @@
       "url": "/assets/words/son_f/vocab/V10/destination.mp3",
       "size": 16031,
       "revision": "5f4e462a1ccc8c8c"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/donut.mp3",
+      "size": 9762,
+      "revision": "5c27b6666d66ee47"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/douane.mp3",
@@ -35608,6 +35688,16 @@
       "revision": "d62be89d1674435b"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/farine.mp3",
+      "size": 12270,
+      "revision": "ea6402cf0043aa06"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/flan.mp3",
+      "size": 11956,
+      "revision": "4bb21fa82d39ffc0"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/fourchette.mp3",
       "size": 14778,
       "revision": "476ebbd05e600008"
@@ -35621,6 +35711,11 @@
       "url": "/assets/words/son_f/vocab/V10/gateau.mp3",
       "size": 10703,
       "revision": "cdbc740a17856a3c"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/gaufre.mp3",
+      "size": 12897,
+      "revision": "a3e086aeaf215371"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/greve.mp3",
@@ -35638,9 +35733,34 @@
       "revision": "56cfaa20e3b2f20a"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/macaron.mp3",
+      "size": 13210,
+      "revision": "a6425ffbe3123c32"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/madeleine.mp3",
+      "size": 14464,
+      "revision": "49b26ad490d4c982"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/menu.mp3",
       "size": 10389,
       "revision": "bb7bd0372bb160b5"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/meringue.mp3",
+      "size": 10703,
+      "revision": "7025d6b97686f7ab"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/mille-feuille.mp3",
+      "size": 14778,
+      "revision": "febb5440945bcce6"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/muffin.mp3",
+      "size": 10389,
+      "revision": "aae10ee132a416a6"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/nuit.mp3",
@@ -39263,6 +39383,16 @@
       "revision": "8c0406bfb91d7d64"
     },
     {
+      "url": "/assets/words/vocab/V10/beignet.webp",
+      "size": 69874,
+      "revision": "f3f8c3d8e6d1dcda"
+    },
+    {
+      "url": "/assets/words/vocab/V10/beurre.webp",
+      "size": 11038,
+      "revision": "666e6ceee1c73a3d"
+    },
+    {
       "url": "/assets/words/vocab/V10/biscuit.webp",
       "size": 19854,
       "revision": "e1287a78c7836ead"
@@ -39293,9 +39423,29 @@
       "revision": "0be6ae11298bfc04"
     },
     {
+      "url": "/assets/words/vocab/V10/chausson.webp",
+      "size": 28914,
+      "revision": "0379c629726257b1"
+    },
+    {
+      "url": "/assets/words/vocab/V10/chocolat.webp",
+      "size": 16738,
+      "revision": "85feb268426b28f6"
+    },
+    {
       "url": "/assets/words/vocab/V10/cle.webp",
       "size": 24374,
       "revision": "671b1d4fc78786ff"
+    },
+    {
+      "url": "/assets/words/vocab/V10/confiture.webp",
+      "size": 22066,
+      "revision": "084cf0cd6ee1a412"
+    },
+    {
+      "url": "/assets/words/vocab/V10/cookie.webp",
+      "size": 46970,
+      "revision": "d8d281821482bfda"
     },
     {
       "url": "/assets/words/vocab/V10/couteau.webp",
@@ -39306,6 +39456,16 @@
       "url": "/assets/words/vocab/V10/couvert.webp",
       "size": 7060,
       "revision": "cdb785559a100cab"
+    },
+    {
+      "url": "/assets/words/vocab/V10/crepe.webp",
+      "size": 28016,
+      "revision": "0ad97d13236cd841"
+    },
+    {
+      "url": "/assets/words/vocab/V10/croissant.webp",
+      "size": 38924,
+      "revision": "aaddfb418e2ff4de"
     },
     {
       "url": "/assets/words/vocab/V10/cuillere.webp",
@@ -39323,6 +39483,11 @@
       "revision": "adf63043cde4f5e9"
     },
     {
+      "url": "/assets/words/vocab/V10/cupcake.webp",
+      "size": 18862,
+      "revision": "c56daa3c7fa2348a"
+    },
+    {
       "url": "/assets/words/vocab/V10/demi-pension.webp",
       "size": 33484,
       "revision": "4a2f7d2c57c25b7c"
@@ -39336,6 +39501,11 @@
       "url": "/assets/words/vocab/V10/destination.webp",
       "size": 30832,
       "revision": "a59d0c8248695dfc"
+    },
+    {
+      "url": "/assets/words/vocab/V10/donut.webp",
+      "size": 26782,
+      "revision": "1512adecc3d7a667"
     },
     {
       "url": "/assets/words/vocab/V10/douane.webp",
@@ -39353,6 +39523,16 @@
       "revision": "2082962ca034cd15"
     },
     {
+      "url": "/assets/words/vocab/V10/farine.webp",
+      "size": 28590,
+      "revision": "99a2f57bc539b8a4"
+    },
+    {
+      "url": "/assets/words/vocab/V10/flan.webp",
+      "size": 16936,
+      "revision": "06d8293c72f9ff06"
+    },
+    {
       "url": "/assets/words/vocab/V10/fourchette.webp",
       "size": 5752,
       "revision": "dfc05de144cb2215"
@@ -39363,9 +39543,39 @@
       "revision": "23c66550fe8212a9"
     },
     {
+      "url": "/assets/words/vocab/V10/gaufre.webp",
+      "size": 70330,
+      "revision": "b5f6853b47f89621"
+    },
+    {
+      "url": "/assets/words/vocab/V10/macaron.webp",
+      "size": 31206,
+      "revision": "781a76a11b10625d"
+    },
+    {
+      "url": "/assets/words/vocab/V10/madeleine.webp",
+      "size": 24636,
+      "revision": "c53cd14c3353fef4"
+    },
+    {
       "url": "/assets/words/vocab/V10/menu.webp",
       "size": 7316,
       "revision": "5d804d4f639ada20"
+    },
+    {
+      "url": "/assets/words/vocab/V10/meringue.webp",
+      "size": 10350,
+      "revision": "d26da1b7cd109586"
+    },
+    {
+      "url": "/assets/words/vocab/V10/mille-feuille.webp",
+      "size": 45312,
+      "revision": "f9236e62dbe98430"
+    },
+    {
+      "url": "/assets/words/vocab/V10/muffin.webp",
+      "size": 45848,
+      "revision": "5655b40047964bec"
     },
     {
       "url": "/assets/words/vocab/V10/pain-au-chocolat.webp",

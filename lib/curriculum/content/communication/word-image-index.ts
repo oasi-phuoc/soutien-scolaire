@@ -376,6 +376,7 @@ export const WORD_IMAGE_INDEX: Record<string, string> = {
   "chaud": "/assets/words/vocab/V2/chaud.webp",
   "chauffeur": "/assets/words/lecture/chauffeur.webp",
   "chaussettes": "/assets/words/lecture/chaussettes.webp",
+  "chausson": "/assets/words/vocab/V10/chausson.webp",
   "chaussons": "/assets/words/lecture/chaussons.webp",
   "chaussures": "/assets/words/lecture/chaussures.webp",
   "check-in-hotel": "/assets/expression/images/scene/check-in-hotel.webp",
