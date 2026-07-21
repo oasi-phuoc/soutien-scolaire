@@ -386,18 +386,23 @@ export function OfflineSettings() {
   const progressMainLine = progress.phase === "checking"
     ? (progress.total > 0
       ? `${progress.completed} / ${progress.total} comparés au catalogue`
-        + (progress.pendingSoFar > 0 ? ` · ${progress.pendingSoFar} à mettre à jour` : "")
       : "Analyse du contenu en cache…")
     : (progress.total > 0
       ? `${progress.completed} / ${progress.total} fichiers à télécharger`
         + (progress.downloadedBytes > 0 ? ` · ${formatBytes(progress.downloadedBytes)}` : "")
       : "Préparation…");
 
-  const progressStatusLine = progress.phase === "checking" && progress.skippedSoFar > 0
-    ? `${progress.skippedSoFar} déjà à jour`
-    : progress.phase === "downloading" && progress.skippedCount > 0
-      ? `${progress.skippedCount} ignorés`
-      : null;
+  const progressStatusLines: string[] = [];
+  if (progress.phase === "checking") {
+    if (progress.skippedSoFar > 0) {
+      progressStatusLines.push(`${progress.skippedSoFar} déjà à jour`);
+    }
+    if (progress.pendingSoFar > 0) {
+      progressStatusLines.push(`${progress.pendingSoFar} à mettre à jour`);
+    }
+  } else if (progress.phase === "downloading" && progress.skippedCount > 0) {
+    progressStatusLines.push(`${progress.skippedCount} ignorés`);
+  }
   return (
     <>
       <div className="flex items-center justify-between gap-4">
@@ -435,12 +440,11 @@ export function OfflineSettings() {
           </div>
           <p className="text-xs text-[var(--color-text-secondary)]">
             {progressMainLine}
-            {progressStatusLine && (
-              <>
-                <br />
-                {progressStatusLine}
-              </>
-            )}
+            {progressStatusLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </p>
           {progress.phase === "downloading" && pendingDetail && (
             <p className="text-xs text-[var(--color-text-secondary)]">
