@@ -535,7 +535,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
     },
     {
       word: "cuisinier",
-      article: "un",
+      article: "le",
       gender: "m",
       image: "cuisinier.webp",
       feminine: "cuisinière",

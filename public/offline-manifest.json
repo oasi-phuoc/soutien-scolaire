@@ -1,6 +1,6 @@
 {
-  "version": 1784615762427,
-  "totalBytes": 419493085,
+  "version": 1784616068814,
+  "totalBytes": 419580282,
   "routes": [
     "/",
     "/avant-propos",
@@ -5988,6 +5988,7 @@
     "/assets/words/son_f/vocab/V10/couvert.mp3",
     "/assets/words/son_f/vocab/V10/croissant.mp3",
     "/assets/words/son_f/vocab/V10/cuillere.mp3",
+    "/assets/words/son_f/vocab/V10/cuisine.mp3",
     "/assets/words/son_f/vocab/V10/cuisinier.mp3",
     "/assets/words/son_f/vocab/V10/demi-pension.mp3",
     "/assets/words/son_f/vocab/V10/depart.mp3",
@@ -6740,6 +6741,8 @@
     "/assets/words/vocab/V10/couteau.webp",
     "/assets/words/vocab/V10/couvert.webp",
     "/assets/words/vocab/V10/cuillere.webp",
+    "/assets/words/vocab/V10/cuisine.webp",
+    "/assets/words/vocab/V10/cuisinier.webp",
     "/assets/words/vocab/V10/demi-pension.webp",
     "/assets/words/vocab/V10/dessert.webp",
     "/assets/words/vocab/V10/destination.webp",
@@ -35021,8 +35024,8 @@
     },
     {
       "url": "/assets/words/son_f/vocab/V1/cuisinier.mp3",
-      "size": 42363,
-      "revision": "56134d39a4e222e1"
+      "size": 37347,
+      "revision": "21ba64d89e613606"
     },
     {
       "url": "/assets/words/son_f/vocab/V1/divorce.mp3",
@@ -35545,9 +35548,14 @@
       "revision": "2c807cd1d3d34d4a"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/cuisine.mp3",
+      "size": 14778,
+      "revision": "f092cb3211061d91"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/cuisinier.mp3",
-      "size": 27630,
-      "revision": "1f42f29d2d105023"
+      "size": 24809,
+      "revision": "fb676cc47ff24011"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/demi-pension.mp3",
@@ -39303,6 +39311,16 @@
       "url": "/assets/words/vocab/V10/cuillere.webp",
       "size": 5118,
       "revision": "5a737c5a38bcdcdd"
+    },
+    {
+      "url": "/assets/words/vocab/V10/cuisine.webp",
+      "size": 20628,
+      "revision": "5c3eeb63925bc344"
+    },
+    {
+      "url": "/assets/words/vocab/V10/cuisinier.webp",
+      "size": 59628,
+      "revision": "adf63043cde4f5e9"
     },
     {
       "url": "/assets/words/vocab/V10/demi-pension.webp",

@@ -630,7 +630,7 @@ export const WORD_IMAGE_INDEX: Record<string, string> = {
   "cuillere": "/assets/words/vocab/V10/cuillere.webp",
   "cuir": "/assets/words/vocab/V6/cuir.webp",
   "cuire": "/assets/words/vocab/V7/cuire.webp",
-  "cuisine": "/assets/words/vocab/V4/cuisine.webp",
+  "cuisine": "/assets/words/vocab/V10/cuisine.webp",
   "cuisiner": "/assets/words/vocab/V7/cuisiner.webp",
   "cuisiner-chocolat": "/assets/expression/images/scene/cuisiner-chocolat.webp",
   "cuisiner-ensemble": "/assets/expression/images/scene/cuisiner-ensemble.webp",
