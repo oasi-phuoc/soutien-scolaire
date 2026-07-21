@@ -1353,6 +1353,7 @@ export const WORD_IMAGE_INDEX: Record<string, string> = {
   "medaille": "/assets/words/lecture/médaille.webp",
   "médaille": "/assets/words/lecture/médaille.webp",
   "medecin": "/assets/words/vocab/V1/medecin.webp",
+  "docteur": "/assets/words/vocab/V8/docteur.webp",
   "medicament": "/assets/words/vocab/V8/medicament.webp",
   "meduse": "/assets/words/lecture/méduse.webp",
   "méduse": "/assets/words/lecture/méduse.webp",
