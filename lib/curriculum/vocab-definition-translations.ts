@@ -1496,9 +1496,9 @@ const V9_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["passeport", "visa", "vol", "destination", "escale", "valise", "terminal", "douane", "enregistrement", "réservation", "embarquement", "porte", "bagage", "carte d'embarquement"].map((word) => [word, airportDef]),
   ...["nord", "sud", "est", "ouest", "gauche", "droite", "ici", "là-bas", "tout droit", "jusqu'à", "au bout de", "panneau", "feu", "passage piéton"].map((word) => [word, directionDef]),
   ...["théâtre", "cinéma", "musée", "concert", "exposition", "spectacle", "chanteur", "acteur", "musicien", "peintre", "danseur", "billet", "salle", "scène", "festival"].map((word) => [word, cultureDef]),
-  ...["réception", "clé", "chambre", "chambre double", "chambre simple", "piscine", "petit-déjeuner", "demi-pension", "nuit", "étage", "ascenseur", "coffre-fort", "concierge", "parking"].map((word) => [word, hotelDef]),
-  ...["montagne", "mer", "plage", "campagne", "forêt", "rivière", "lac", "colline", "vallée", "désert", "île", "nature", "paysage", "côte", "volcan"].map((word) => [word, landscapeDef]),
+  ...["réception", "clé", "chambre", "chambre double", "chambre simple", "petit-déjeuner", "demi-pension", "nuit", "étage", "ascenseur", "coffre-fort", "parking"].map((word) => [word, hotelDef]),
+  ...["montagne", "mer", "plage", "campagne", "forêt", "rivière", "lac", "colline", "vallée", "désert", "île", "côte", "volcan"].map((word) => [word, landscapeDef]),
   ...["gare", "quai", "guichet", "aller-retour", "départ", "arrivée", "wagon", "contrôleur", "place", "grève", "retard", "correspondance", "voie", "horaire"].map((word) => [word, trainDef]),
-  ...["bus", "métro", "tram", "train", "voiture", "vélo", "taxi", "moto", "avion", "bateau", "camion", "scooter"].map((word) => [word, transportDef]),
+  ...["bus", "métro", "tram", "train", "voiture", "vélo", "taxi", "moto", "avion", "hélicoptère", "fusée", "montgolfière", "bateau", "navire", "ferry", "voilier", "sous-marin", "camion", "scooter", "trottinette"].map((word) => [word, transportDef]),
   ...["ville", "quartier", "centre-ville", "avenue", "marché", "hôpital", "magasin", "banque", "parc", "boulangerie", "église"].map((word) => [word, cityDef]),
 ]);

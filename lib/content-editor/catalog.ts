@@ -80,7 +80,7 @@ export function resolveFrenchThemes(
     | FrenchCatalogPayload
     | undefined;
   if (!raw?.themes?.length) return base;
-  return raw.themes
+  const fromOverride = raw.themes
     .filter((t) => !t.hidden)
     .map((t) => ({
       id: t.id,
@@ -92,6 +92,11 @@ export function resolveFrenchThemes(
       markers: (t.markers ?? []) as FrenchTheme["markers"],
       tab: t.tab as FrenchTheme["tab"],
     }));
+  // Conserver les thèmes du catalogue de base absents de l'override
+  // (ex. V10.6 animaux ajouté après une édition du catalogue).
+  const overrideSlugs = new Set(fromOverride.map((t) => t.slug));
+  const missing = base.filter((t) => !overrideSlugs.has(t.slug));
+  return [...fromOverride, ...missing];
 }
 
 export function resolveCommModules(

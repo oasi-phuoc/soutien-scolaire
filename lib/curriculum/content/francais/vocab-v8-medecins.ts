@@ -22,6 +22,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "docteur.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       feminine: "doctoresse",
       definition: ["Personne qui examine et soigne les malades."],
       definitionPivot: {
@@ -106,6 +107,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "infirmier.webp",
       article: "l'",
       gender: "m",
+      group: "Professionnels de santé",
       feminine: "infirmière",
       definition: ["Personne qui soigne les patients et aide le médecin."],
       definitionPivot: {
@@ -190,6 +192,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "pharmacien.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       feminine: "pharmacienne",
       definition: ["Personne qui vend et conseille des médicaments dans une pharmacie."],
       definitionPivot: {
@@ -274,6 +277,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "dentiste.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       definition: ["Médecin qui soigne les dents."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -357,6 +361,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "ophtalmologue.webp",
       article: "l'",
       gender: "m",
+      group: "Professionnels de santé",
       definition: ["Médecin spécialiste des yeux."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -440,6 +445,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "pediatre.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       definition: ["Médecin spécialiste des enfants."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -523,6 +529,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "chirurgien.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       feminine: "chirurgienne",
       definition: ["Médecin qui opère les patients."],
       definitionPivot: {
@@ -607,6 +614,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "urgentiste.webp",
       article: "l'",
       gender: "m",
+      group: "Professionnels de santé",
       definition: ["Médecin qui soigne les personnes en urgence."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -690,6 +698,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "kinésithérapeute.webp",
       article: "le",
       gender: "m",
+      group: "Professionnels de santé",
       definition: ["Personne qui aide à soigner le corps avec des mouvements et des exercices."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -773,6 +782,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "salle-d-attente.webp",
       article: "la",
       gender: "f",
+      group: "Au cabinet",
       definition: ["Lieu où l’on attend avant de voir le médecin."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -856,6 +866,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "consultation.webp",
       article: "la",
       gender: "f",
+      group: "Au cabinet",
       definition: ["Rendez-vous avec un médecin pour parler d’un problème de santé."],
       definitionPivot: {
         en: "A person or place connected with health care.",
@@ -939,6 +950,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "ordonnance.webp",
       article: "l'",
       gender: "f",
+      group: "Au cabinet",
       definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."],
       definitionPivot: {
         en: "A product or object used for health care.",
@@ -1022,6 +1034,7 @@ export const V8_MEDECINS_THEME: VocabTheme = {
       image: "rendez-vous.webp",
       article: "le",
       gender: "m",
+      group: "Au cabinet",
       definition: ["Moment fixé pour rencontrer quelqu’un, par exemple un médecin."],
       definitionPivot: {
         en: "A person or place connected with health care.",

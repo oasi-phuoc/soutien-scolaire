@@ -140,7 +140,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("V9", "v9-espace-culturel",      "V9.4", "L'espace culturel",       "Lieux et acteurs de la culture.",                                  "vocabulaire"),
   lesson("V9", "v9-paysage",              "V9.5", "Le paysage",              "Éléments naturels du paysage.",                                    "vocabulaire"),
 
-  // ── V10 — Services et voyages ──────────────────────────────────────────────
+  // ── V10 — Services, voyages et animaux ──────────────────────────────────────────────
   lesson("V10", "v7-restaurant",          "V10.1", "Le restaurant",          "Table et service au restaurant.",                                  "vocabulaire"),
   lesson("V10", "v7-boulangerie",         "V10.2", "La boulangerie",         "Produits de boulangerie et pâtisserie.",                           "vocabulaire"),
   lesson("V10", "v9-train",               "V10.3", "La gare",                "Vocabulaire de la gare et du train.",                              "vocabulaire"),

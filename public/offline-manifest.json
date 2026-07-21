@@ -1,6 +1,6 @@
 {
-  "version": 1784618701870,
-  "totalBytes": 421274086,
+  "version": 1784626207034,
+  "totalBytes": 421352056,
   "routes": [
     "/",
     "/avant-propos",
@@ -6544,6 +6544,7 @@
     "/assets/words/son_f/vocab/V9/etoile-de-mer.mp3",
     "/assets/words/son_f/vocab/V9/exposition.mp3",
     "/assets/words/son_f/vocab/V9/faucon.mp3",
+    "/assets/words/son_f/vocab/V9/ferry.mp3",
     "/assets/words/son_f/vocab/V9/festival.mp3",
     "/assets/words/son_f/vocab/V9/feu-rouge.mp3",
     "/assets/words/son_f/vocab/V9/feu.mp3",
@@ -6584,6 +6585,7 @@
     "/assets/words/son_f/vocab/V9/mer.mp3",
     "/assets/words/son_f/vocab/V9/metro.mp3",
     "/assets/words/son_f/vocab/V9/montagne.mp3",
+    "/assets/words/son_f/vocab/V9/montgolfiere.mp3",
     "/assets/words/son_f/vocab/V9/moto.mp3",
     "/assets/words/son_f/vocab/V9/mouche.mp3",
     "/assets/words/son_f/vocab/V9/mouette.mp3",
@@ -6638,6 +6640,7 @@
     "/assets/words/son_f/vocab/V9/serpent.mp3",
     "/assets/words/son_f/vocab/V9/singe.mp3",
     "/assets/words/son_f/vocab/V9/souris.mp3",
+    "/assets/words/son_f/vocab/V9/sous-marin.mp3",
     "/assets/words/son_f/vocab/V9/spectacle.mp3",
     "/assets/words/son_f/vocab/V9/sud.mp3",
     "/assets/words/son_f/vocab/V9/supermarche.mp3",
@@ -6655,6 +6658,7 @@
     "/assets/words/son_f/vocab/V9/vallee.mp3",
     "/assets/words/son_f/vocab/V9/vélo.mp3",
     "/assets/words/son_f/vocab/V9/ville.mp3",
+    "/assets/words/son_f/vocab/V9/voilier.mp3",
     "/assets/words/son_f/vocab/V9/voiture.mp3",
     "/assets/words/son_f/vocab/V9/volcan.mp3",
     "/assets/words/son_f/vocab/V9/zebre.mp3",
@@ -6771,7 +6775,6 @@
     "/assets/words/vocab/V10/chausson.webp",
     "/assets/words/vocab/V10/cle.webp",
     "/assets/words/vocab/V10/coffre-fort.webp",
-    "/assets/words/vocab/V10/concierge.webp",
     "/assets/words/vocab/V10/controleur.webp",
     "/assets/words/vocab/V10/cookie.webp",
     "/assets/words/vocab/V10/couteau.webp",
@@ -7102,7 +7105,6 @@
     "/assets/words/vocab/V7/beurre.webp",
     "/assets/words/vocab/V7/bien-cuit.webp",
     "/assets/words/vocab/V7/bleu.webp",
-    "/assets/words/vocab/V7/bocal.webp",
     "/assets/words/vocab/V7/boite.webp",
     "/assets/words/vocab/V7/bol.webp",
     "/assets/words/vocab/V7/bouillir.webp",
@@ -7117,7 +7119,6 @@
     "/assets/words/vocab/V7/citron.webp",
     "/assets/words/vocab/V7/concombre.webp",
     "/assets/words/vocab/V7/confiture.webp",
-    "/assets/words/vocab/V7/conserve.webp",
     "/assets/words/vocab/V7/couper.webp",
     "/assets/words/vocab/V7/courgette.webp",
     "/assets/words/vocab/V7/cuire.webp",
@@ -7170,7 +7171,6 @@
     "/assets/words/vocab/V7/poivron.webp",
     "/assets/words/vocab/V7/pomme-de-terre.webp",
     "/assets/words/vocab/V7/pomme.webp",
-    "/assets/words/vocab/V7/pot.webp",
     "/assets/words/vocab/V7/prune.webp",
     "/assets/words/vocab/V7/radis.webp",
     "/assets/words/vocab/V7/raisin.webp",
@@ -7309,6 +7309,7 @@
     "/assets/words/vocab/V9/etoile-de-mer.webp",
     "/assets/words/vocab/V9/exposition.webp",
     "/assets/words/vocab/V9/faucon.webp",
+    "/assets/words/vocab/V9/ferry.webp",
     "/assets/words/vocab/V9/festival.webp",
     "/assets/words/vocab/V9/flamant-rose.webp",
     "/assets/words/vocab/V9/fleuve.webp",
@@ -7347,6 +7348,7 @@
     "/assets/words/vocab/V9/mer.webp",
     "/assets/words/vocab/V9/metro.webp",
     "/assets/words/vocab/V9/montagne.webp",
+    "/assets/words/vocab/V9/montgolfiere.webp",
     "/assets/words/vocab/V9/moto.webp",
     "/assets/words/vocab/V9/mouche.webp",
     "/assets/words/vocab/V9/mouette.webp",
@@ -7399,6 +7401,7 @@
     "/assets/words/vocab/V9/serpent.webp",
     "/assets/words/vocab/V9/singe.webp",
     "/assets/words/vocab/V9/souris.webp",
+    "/assets/words/vocab/V9/sous-marin.webp",
     "/assets/words/vocab/V9/spectacle.webp",
     "/assets/words/vocab/V9/sud.webp",
     "/assets/words/vocab/V9/supermarche.webp",
@@ -7415,6 +7418,7 @@
     "/assets/words/vocab/V9/vache.webp",
     "/assets/words/vocab/V9/vallee.webp",
     "/assets/words/vocab/V9/ville.webp",
+    "/assets/words/vocab/V9/voilier.webp",
     "/assets/words/vocab/V9/voiture.webp",
     "/assets/words/vocab/V9/volcan.webp",
     "/assets/words/vocab/V9/zebre.webp",
@@ -38392,6 +38396,11 @@
       "revision": "d0fdc94c7709dd3a"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/ferry.mp3",
+      "size": 12583,
+      "revision": "9efc2ca86034ab4c"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/festival.mp3",
       "size": 14151,
       "revision": "d263303dd109055b"
@@ -38590,6 +38599,11 @@
       "url": "/assets/words/son_f/vocab/V9/montagne.mp3",
       "size": 13524,
       "revision": "f06c0b6a5a8797d1"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/montgolfiere.mp3",
+      "size": 17912,
+      "revision": "5b82351c2d6de448"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/moto.mp3",
@@ -38862,6 +38876,11 @@
       "revision": "70827d1a3fe1ed5b"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/sous-marin.mp3",
+      "size": 13210,
+      "revision": "d8882fc7527ed9c7"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/spectacle.mp3",
       "size": 16031,
       "revision": "f7e4d4a021049ccd"
@@ -38945,6 +38964,11 @@
       "url": "/assets/words/son_f/vocab/V9/ville.mp3",
       "size": 12897,
       "revision": "81353108c8feb390"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/voilier.mp3",
+      "size": 12583,
+      "revision": "009f927c6e15ea58"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/voiture.mp3",
@@ -39513,8 +39537,8 @@
     },
     {
       "url": "/assets/words/vocab/V10/chausson.webp",
-      "size": 28914,
-      "revision": "0379c629726257b1"
+      "size": 50386,
+      "revision": "d65529f966281581"
     },
     {
       "url": "/assets/words/vocab/V10/cle.webp",
@@ -39525,11 +39549,6 @@
       "url": "/assets/words/vocab/V10/coffre-fort.webp",
       "size": 24484,
       "revision": "89ac7b2549969bdb"
-    },
-    {
-      "url": "/assets/words/vocab/V10/concierge.webp",
-      "size": 45056,
-      "revision": "525531aede2be09e"
     },
     {
       "url": "/assets/words/vocab/V10/controleur.webp",
@@ -39568,8 +39587,8 @@
     },
     {
       "url": "/assets/words/vocab/V10/cuisine.webp",
-      "size": 20628,
-      "revision": "5c3eeb63925bc344"
+      "size": 50366,
+      "revision": "fbd92119d26a15f9"
     },
     {
       "url": "/assets/words/vocab/V10/cuisinier.webp",
@@ -39828,8 +39847,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/apres-midi.webp",
-      "size": 40268,
-      "revision": "246b56ae85f15f73"
+      "size": 56646,
+      "revision": "22337cda973adeb1"
     },
     {
       "url": "/assets/words/vocab/V2/arc-en-ciel.webp",
@@ -39988,8 +40007,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/matin.webp",
-      "size": 15360,
-      "revision": "2874e3f02a756327"
+      "size": 39002,
+      "revision": "51c3ecf2fcc9d337"
     },
     {
       "url": "/assets/words/vocab/V2/mercredi.webp",
@@ -40003,13 +40022,13 @@
     },
     {
       "url": "/assets/words/vocab/V2/midi.webp",
-      "size": 21238,
-      "revision": "d92812e257cd1908"
+      "size": 51636,
+      "revision": "4da1638a042415bd"
     },
     {
       "url": "/assets/words/vocab/V2/minuit.webp",
-      "size": 11638,
-      "revision": "a8bdf550f201d4a3"
+      "size": 12168,
+      "revision": "7bf7f3e4bedf49d6"
     },
     {
       "url": "/assets/words/vocab/V2/minute.webp",
@@ -40103,8 +40122,8 @@
     },
     {
       "url": "/assets/words/vocab/V2/soir.webp",
-      "size": 17510,
-      "revision": "506c024c86b672d8"
+      "size": 37410,
+      "revision": "248d0e9bcca79e72"
     },
     {
       "url": "/assets/words/vocab/V2/soleil.webp",
@@ -40208,8 +40227,8 @@
     },
     {
       "url": "/assets/words/vocab/V4/ampoule.webp",
-      "size": 9136,
-      "revision": "722459b8d3e413d1"
+      "size": 8362,
+      "revision": "236032c451e961ec"
     },
     {
       "url": "/assets/words/vocab/V4/appartement.webp",
@@ -40898,8 +40917,8 @@
     },
     {
       "url": "/assets/words/vocab/V6/cuir.webp",
-      "size": 55580,
-      "revision": "1f974b3068ba5da2"
+      "size": 32840,
+      "revision": "b5461b242173799c"
     },
     {
       "url": "/assets/words/vocab/V6/culotte.webp",
@@ -41098,8 +41117,8 @@
     },
     {
       "url": "/assets/words/vocab/V6/velours.webp",
-      "size": 72734,
-      "revision": "5ae4c4c92c9d1206"
+      "size": 10260,
+      "revision": "35e16b720a59bfd2"
     },
     {
       "url": "/assets/words/vocab/V6/verre.webp",
@@ -41182,11 +41201,6 @@
       "revision": "b77c73a5237083c1"
     },
     {
-      "url": "/assets/words/vocab/V7/bocal.webp",
-      "size": 9202,
-      "revision": "61011b0e57c15c15"
-    },
-    {
       "url": "/assets/words/vocab/V7/boite.webp",
       "size": 1124,
       "revision": "66ea4c67535bb919"
@@ -41255,11 +41269,6 @@
       "url": "/assets/words/vocab/V7/confiture.webp",
       "size": 22066,
       "revision": "084cf0cd6ee1a412"
-    },
-    {
-      "url": "/assets/words/vocab/V7/conserve.webp",
-      "size": 7038,
-      "revision": "44c833d8e34ae42b"
     },
     {
       "url": "/assets/words/vocab/V7/couper.webp",
@@ -41520,11 +41529,6 @@
       "url": "/assets/words/vocab/V7/pomme.webp",
       "size": 28140,
       "revision": "2917d74b738562bd"
-    },
-    {
-      "url": "/assets/words/vocab/V7/pot.webp",
-      "size": 3904,
-      "revision": "da96328a2ca34564"
     },
     {
       "url": "/assets/words/vocab/V7/prune.webp",
@@ -42217,6 +42221,11 @@
       "revision": "a0ce73c7f27faa94"
     },
     {
+      "url": "/assets/words/vocab/V9/ferry.webp",
+      "size": 15760,
+      "revision": "de945260b0f90866"
+    },
+    {
       "url": "/assets/words/vocab/V9/festival.webp",
       "size": 43114,
       "revision": "24befa0717cec2b3"
@@ -42243,8 +42252,8 @@
     },
     {
       "url": "/assets/words/vocab/V9/fusee.webp",
-      "size": 12222,
-      "revision": "615dd7a0fb785869"
+      "size": 11064,
+      "revision": "c56cae2377dac1de"
     },
     {
       "url": "/assets/words/vocab/V9/gare.webp",
@@ -42407,6 +42416,11 @@
       "revision": "ff04659c4aa8b9b7"
     },
     {
+      "url": "/assets/words/vocab/V9/montgolfiere.webp",
+      "size": 16220,
+      "revision": "bde9ddf691774fe8"
+    },
+    {
       "url": "/assets/words/vocab/V9/moto.webp",
       "size": 28770,
       "revision": "70e89b6261e6ce52"
@@ -42443,8 +42457,8 @@
     },
     {
       "url": "/assets/words/vocab/V9/navire.webp",
-      "size": 35466,
-      "revision": "689d62d6c3f171ed"
+      "size": 15502,
+      "revision": "266385ade2909f0f"
     },
     {
       "url": "/assets/words/vocab/V9/nord.webp",
@@ -42667,6 +42681,11 @@
       "revision": "78b50c6ec7edd301"
     },
     {
+      "url": "/assets/words/vocab/V9/sous-marin.webp",
+      "size": 6892,
+      "revision": "88f64e04b1833ad5"
+    },
+    {
       "url": "/assets/words/vocab/V9/spectacle.webp",
       "size": 39034,
       "revision": "fc238dce35094bdf"
@@ -42745,6 +42764,11 @@
       "url": "/assets/words/vocab/V9/ville.webp",
       "size": 45084,
       "revision": "3ce72f7f2e6578e8"
+    },
+    {
+      "url": "/assets/words/vocab/V9/voilier.webp",
+      "size": 13062,
+      "revision": "458af7ed8a0282be"
     },
     {
       "url": "/assets/words/vocab/V9/voiture.webp",

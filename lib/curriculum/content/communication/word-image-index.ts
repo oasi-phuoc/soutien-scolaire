@@ -2163,6 +2163,7 @@ export const WORD_IMAGE_INDEX: Record<string, string> = {
   "vitamine": "/assets/words/vocab/V8/vitamine.webp",
   "vitrine": "/assets/words/lecture/vitrine.webp",
   "voie": "/assets/words/vocab/V10/voie.webp",
+  "voilier": "/assets/words/vocab/V9/voilier.webp",
   "voiture": "/assets/words/lecture/voiture.webp",
   "vol": "/assets/words/vocab/V10/vol.webp",
   "volant": "/assets/words/lecture/volant.webp",
