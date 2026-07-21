@@ -383,19 +383,21 @@ export function OfflineSettings() {
     ? "Vérification des fichiers…"
     : "Téléchargement des fichiers modifiés…";
 
-  const progressSubtitle = progress.phase === "checking"
+  const progressMainLine = progress.phase === "checking"
     ? (progress.total > 0
       ? `${progress.completed} / ${progress.total} comparés au catalogue`
-        + (progress.skippedSoFar > 0 || progress.pendingSoFar > 0
-          ? ` · ${progress.pendingSoFar} à mettre à jour · ${progress.skippedSoFar} déjà à jour`
-          : "")
+        + (progress.pendingSoFar > 0 ? ` · ${progress.pendingSoFar} à mettre à jour` : "")
       : "Analyse du contenu en cache…")
     : (progress.total > 0
       ? `${progress.completed} / ${progress.total} fichiers à télécharger`
         + (progress.downloadedBytes > 0 ? ` · ${formatBytes(progress.downloadedBytes)}` : "")
-        + (progress.skippedCount > 0 ? ` · ${progress.skippedCount} ignorés (inchangés)` : "")
       : "Préparation…");
 
+  const progressStatusLine = progress.phase === "checking" && progress.skippedSoFar > 0
+    ? `${progress.skippedSoFar} déjà à jour`
+    : progress.phase === "downloading" && progress.skippedCount > 0
+      ? `${progress.skippedCount} ignorés`
+      : null;
   return (
     <>
       <div className="flex items-center justify-between gap-4">
@@ -431,7 +433,15 @@ export function OfflineSettings() {
               style={{ width: `${progress.percent}%` }}
             />
           </div>
-          <p className="text-xs text-[var(--color-text-secondary)]">{progressSubtitle}</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            {progressMainLine}
+            {progressStatusLine && (
+              <>
+                <br />
+                {progressStatusLine}
+              </>
+            )}
+          </p>
           {progress.phase === "downloading" && pendingDetail && (
             <p className="text-xs text-[var(--color-text-secondary)]">
               {pendingDetail.routesCount > 0 && `${pendingDetail.routesCount} page${pendingDetail.routesCount > 1 ? "s" : ""}`}
