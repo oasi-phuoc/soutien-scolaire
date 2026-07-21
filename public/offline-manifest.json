@@ -1,6 +1,6 @@
 {
-  "version": 1784615593219,
-  "totalBytes": 417539767,
+  "version": 1784615762427,
+  "totalBytes": 419493085,
   "routes": [
     "/",
     "/avant-propos",
@@ -6460,7 +6460,9 @@
     "/assets/words/son_f/vocab/V9/acteur.mp3",
     "/assets/words/son_f/vocab/V9/aeroport.mp3",
     "/assets/words/son_f/vocab/V9/aigle.mp3",
+    "/assets/words/son_f/vocab/V9/araignee.mp3",
     "/assets/words/son_f/vocab/V9/au-bout-de.mp3",
+    "/assets/words/son_f/vocab/V9/autruche.mp3",
     "/assets/words/son_f/vocab/V9/avenue.mp3",
     "/assets/words/son_f/vocab/V9/avion.mp3",
     "/assets/words/son_f/vocab/V9/baleine.mp3",
@@ -6473,21 +6475,32 @@
     "/assets/words/son_f/vocab/V9/camion.mp3",
     "/assets/words/son_f/vocab/V9/campagne.mp3",
     "/assets/words/son_f/vocab/V9/canard.mp3",
+    "/assets/words/son_f/vocab/V9/canari.mp3",
     "/assets/words/son_f/vocab/V9/carrefour.mp3",
     "/assets/words/son_f/vocab/V9/cascade.mp3",
     "/assets/words/son_f/vocab/V9/centre-ville.mp3",
+    "/assets/words/son_f/vocab/V9/cerf.mp3",
     "/assets/words/son_f/vocab/V9/chanteur.mp3",
     "/assets/words/son_f/vocab/V9/chat.mp3",
+    "/assets/words/son_f/vocab/V9/chenille.mp3",
     "/assets/words/son_f/vocab/V9/cheval.mp3",
+    "/assets/words/son_f/vocab/V9/chevre.mp3",
     "/assets/words/son_f/vocab/V9/chien.mp3",
+    "/assets/words/son_f/vocab/V9/cigogne.mp3",
     "/assets/words/son_f/vocab/V9/cinema.mp3",
+    "/assets/words/son_f/vocab/V9/coccinelle.mp3",
     "/assets/words/son_f/vocab/V9/cochon.mp3",
     "/assets/words/son_f/vocab/V9/coiffeur.mp3",
+    "/assets/words/son_f/vocab/V9/colibri.mp3",
     "/assets/words/son_f/vocab/V9/colline.mp3",
     "/assets/words/son_f/vocab/V9/commissariat.mp3",
     "/assets/words/son_f/vocab/V9/concert.mp3",
     "/assets/words/son_f/vocab/V9/coq.mp3",
+    "/assets/words/son_f/vocab/V9/corbeau.mp3",
     "/assets/words/son_f/vocab/V9/cote.mp3",
+    "/assets/words/son_f/vocab/V9/crabe.mp3",
+    "/assets/words/son_f/vocab/V9/crevette.mp3",
+    "/assets/words/son_f/vocab/V9/criquet.mp3",
     "/assets/words/son_f/vocab/V9/crocodile.mp3",
     "/assets/words/son_f/vocab/V9/cygne.mp3",
     "/assets/words/son_f/vocab/V9/danseur.mp3",
@@ -6495,24 +6508,35 @@
     "/assets/words/son_f/vocab/V9/desert.mp3",
     "/assets/words/son_f/vocab/V9/dodo.mp3",
     "/assets/words/son_f/vocab/V9/droite.mp3",
+    "/assets/words/son_f/vocab/V9/ecureuil.mp3",
     "/assets/words/son_f/vocab/V9/eglise.mp3",
     "/assets/words/son_f/vocab/V9/église.mp3",
     "/assets/words/son_f/vocab/V9/elephant.mp3",
+    "/assets/words/son_f/vocab/V9/escargot.mp3",
     "/assets/words/son_f/vocab/V9/est.mp3",
+    "/assets/words/son_f/vocab/V9/etoile-de-mer.mp3",
     "/assets/words/son_f/vocab/V9/exposition.mp3",
+    "/assets/words/son_f/vocab/V9/faucon.mp3",
     "/assets/words/son_f/vocab/V9/festival.mp3",
     "/assets/words/son_f/vocab/V9/feu-rouge.mp3",
     "/assets/words/son_f/vocab/V9/feu.mp3",
+    "/assets/words/son_f/vocab/V9/flamant-rose.mp3",
     "/assets/words/son_f/vocab/V9/fleuve.mp3",
     "/assets/words/son_f/vocab/V9/foret.mp3",
+    "/assets/words/son_f/vocab/V9/fourmi.mp3",
     "/assets/words/son_f/vocab/V9/fusee.mp3",
     "/assets/words/son_f/vocab/V9/gare.mp3",
     "/assets/words/son_f/vocab/V9/gauche.mp3",
     "/assets/words/son_f/vocab/V9/girafe.mp3",
     "/assets/words/son_f/vocab/V9/gorille.mp3",
+    "/assets/words/son_f/vocab/V9/grenouille.mp3",
     "/assets/words/son_f/vocab/V9/grotte.mp3",
+    "/assets/words/son_f/vocab/V9/guepe.mp3",
     "/assets/words/son_f/vocab/V9/helicoptere.mp3",
+    "/assets/words/son_f/vocab/V9/herisson.mp3",
     "/assets/words/son_f/vocab/V9/hibou.mp3",
+    "/assets/words/son_f/vocab/V9/hippocampe.mp3",
+    "/assets/words/son_f/vocab/V9/hirondelle.mp3",
     "/assets/words/son_f/vocab/V9/hopital.mp3",
     "/assets/words/son_f/vocab/V9/ibis.mp3",
     "/assets/words/son_f/vocab/V9/ici.mp3",
@@ -6523,15 +6547,20 @@
     "/assets/words/son_f/vocab/V9/la-bas.mp3",
     "/assets/words/son_f/vocab/V9/lac.mp3",
     "/assets/words/son_f/vocab/V9/lapin.mp3",
+    "/assets/words/son_f/vocab/V9/libellule.mp3",
     "/assets/words/son_f/vocab/V9/librairie.mp3",
     "/assets/words/son_f/vocab/V9/lion.mp3",
     "/assets/words/son_f/vocab/V9/loup.mp3",
     "/assets/words/son_f/vocab/V9/magasin.mp3",
     "/assets/words/son_f/vocab/V9/marche.mp3",
+    "/assets/words/son_f/vocab/V9/meduse.mp3",
     "/assets/words/son_f/vocab/V9/mer.mp3",
     "/assets/words/son_f/vocab/V9/metro.mp3",
     "/assets/words/son_f/vocab/V9/montagne.mp3",
     "/assets/words/son_f/vocab/V9/moto.mp3",
+    "/assets/words/son_f/vocab/V9/mouche.mp3",
+    "/assets/words/son_f/vocab/V9/mouette.mp3",
+    "/assets/words/son_f/vocab/V9/moustique.mp3",
     "/assets/words/son_f/vocab/V9/mouton.mp3",
     "/assets/words/son_f/vocab/V9/musee.mp3",
     "/assets/words/son_f/vocab/V9/musicien.mp3",
@@ -6539,16 +6568,28 @@
     "/assets/words/son_f/vocab/V9/navire.mp3",
     "/assets/words/son_f/vocab/V9/nord.mp3",
     "/assets/words/son_f/vocab/V9/ocean.mp3",
+    "/assets/words/son_f/vocab/V9/oie.mp3",
+    "/assets/words/son_f/vocab/V9/oiseau.mp3",
+    "/assets/words/son_f/vocab/V9/otarie.mp3",
     "/assets/words/son_f/vocab/V9/ouest.mp3",
     "/assets/words/son_f/vocab/V9/ours.mp3",
     "/assets/words/son_f/vocab/V9/panda.mp3",
     "/assets/words/son_f/vocab/V9/panneau.mp3",
+    "/assets/words/son_f/vocab/V9/paon.mp3",
     "/assets/words/son_f/vocab/V9/papeterie.mp3",
+    "/assets/words/son_f/vocab/V9/papillon.mp3",
     "/assets/words/son_f/vocab/V9/parc.mp3",
     "/assets/words/son_f/vocab/V9/passage-pieton.mp3",
     "/assets/words/son_f/vocab/V9/paysage.mp3",
     "/assets/words/son_f/vocab/V9/peintre.mp3",
+    "/assets/words/son_f/vocab/V9/pelican.mp3",
+    "/assets/words/son_f/vocab/V9/perroquet.mp3",
     "/assets/words/son_f/vocab/V9/pharmacie.mp3",
+    "/assets/words/son_f/vocab/V9/phoque.mp3",
+    "/assets/words/son_f/vocab/V9/pie.mp3",
+    "/assets/words/son_f/vocab/V9/pieuvre.mp3",
+    "/assets/words/son_f/vocab/V9/pigeon.mp3",
+    "/assets/words/son_f/vocab/V9/pingouin.mp3",
     "/assets/words/son_f/vocab/V9/piscine.mp3",
     "/assets/words/son_f/vocab/V9/place.mp3",
     "/assets/words/son_f/vocab/V9/plage.mp3",
@@ -6564,18 +6605,26 @@
     "/assets/words/son_f/vocab/V9/rond-point.mp3",
     "/assets/words/son_f/vocab/V9/rue.mp3",
     "/assets/words/son_f/vocab/V9/salle-de-sport.mp3",
+    "/assets/words/son_f/vocab/V9/sauterelle.mp3",
     "/assets/words/son_f/vocab/V9/scene.mp3",
     "/assets/words/son_f/vocab/V9/scooter.mp3",
+    "/assets/words/son_f/vocab/V9/serpent.mp3",
+    "/assets/words/son_f/vocab/V9/singe.mp3",
+    "/assets/words/son_f/vocab/V9/souris.mp3",
     "/assets/words/son_f/vocab/V9/spectacle.mp3",
     "/assets/words/son_f/vocab/V9/sud.mp3",
     "/assets/words/son_f/vocab/V9/supermarche.mp3",
     "/assets/words/son_f/vocab/V9/taxi.mp3",
     "/assets/words/son_f/vocab/V9/theatre.mp3",
+    "/assets/words/son_f/vocab/V9/tigre.mp3",
+    "/assets/words/son_f/vocab/V9/tortue.mp3",
+    "/assets/words/son_f/vocab/V9/toucan.mp3",
     "/assets/words/son_f/vocab/V9/tout-droit.mp3",
     "/assets/words/son_f/vocab/V9/train.mp3",
     "/assets/words/son_f/vocab/V9/tram.mp3",
     "/assets/words/son_f/vocab/V9/tribunal.mp3",
     "/assets/words/son_f/vocab/V9/trotinette.mp3",
+    "/assets/words/son_f/vocab/V9/vache.mp3",
     "/assets/words/son_f/vocab/V9/vallee.mp3",
     "/assets/words/son_f/vocab/V9/vélo.mp3",
     "/assets/words/son_f/vocab/V9/ville.mp3",
@@ -7137,7 +7186,9 @@
     "/assets/words/vocab/V9/acteur.webp",
     "/assets/words/vocab/V9/aeroport.webp",
     "/assets/words/vocab/V9/aigle.webp",
+    "/assets/words/vocab/V9/araignee.webp",
     "/assets/words/vocab/V9/au-bout-de.webp",
+    "/assets/words/vocab/V9/autruche.webp",
     "/assets/words/vocab/V9/avenue.webp",
     "/assets/words/vocab/V9/avion.webp",
     "/assets/words/vocab/V9/baleine.webp",
@@ -7150,21 +7201,32 @@
     "/assets/words/vocab/V9/camion.webp",
     "/assets/words/vocab/V9/campagne.webp",
     "/assets/words/vocab/V9/canard.webp",
+    "/assets/words/vocab/V9/canari.webp",
     "/assets/words/vocab/V9/carrefour.webp",
     "/assets/words/vocab/V9/cascade.webp",
     "/assets/words/vocab/V9/centre-ville.webp",
+    "/assets/words/vocab/V9/cerf.webp",
     "/assets/words/vocab/V9/chanteur.webp",
     "/assets/words/vocab/V9/chat.webp",
+    "/assets/words/vocab/V9/chenille.webp",
     "/assets/words/vocab/V9/cheval.webp",
+    "/assets/words/vocab/V9/chevre.webp",
     "/assets/words/vocab/V9/chien.webp",
+    "/assets/words/vocab/V9/cigogne.webp",
     "/assets/words/vocab/V9/cinema.webp",
+    "/assets/words/vocab/V9/coccinelle.webp",
     "/assets/words/vocab/V9/cochon.webp",
     "/assets/words/vocab/V9/coiffeur.webp",
+    "/assets/words/vocab/V9/colibri.webp",
     "/assets/words/vocab/V9/colline.webp",
     "/assets/words/vocab/V9/commissariat.webp",
     "/assets/words/vocab/V9/concert.webp",
     "/assets/words/vocab/V9/coq.webp",
+    "/assets/words/vocab/V9/corbeau.webp",
     "/assets/words/vocab/V9/cote.webp",
+    "/assets/words/vocab/V9/crabe.webp",
+    "/assets/words/vocab/V9/crevette.webp",
+    "/assets/words/vocab/V9/criquet.webp",
     "/assets/words/vocab/V9/crocodile.webp",
     "/assets/words/vocab/V9/cygne.webp",
     "/assets/words/vocab/V9/danseur.webp",
@@ -7172,21 +7234,32 @@
     "/assets/words/vocab/V9/desert.webp",
     "/assets/words/vocab/V9/dodo.webp",
     "/assets/words/vocab/V9/droite.webp",
+    "/assets/words/vocab/V9/ecureuil.webp",
     "/assets/words/vocab/V9/eglise.webp",
     "/assets/words/vocab/V9/elephant.webp",
+    "/assets/words/vocab/V9/escargot.webp",
     "/assets/words/vocab/V9/est.webp",
+    "/assets/words/vocab/V9/etoile-de-mer.webp",
     "/assets/words/vocab/V9/exposition.webp",
+    "/assets/words/vocab/V9/faucon.webp",
     "/assets/words/vocab/V9/festival.webp",
+    "/assets/words/vocab/V9/flamant-rose.webp",
     "/assets/words/vocab/V9/fleuve.webp",
     "/assets/words/vocab/V9/foret.webp",
+    "/assets/words/vocab/V9/fourmi.webp",
     "/assets/words/vocab/V9/fusee.webp",
     "/assets/words/vocab/V9/gare.webp",
     "/assets/words/vocab/V9/gauche.webp",
     "/assets/words/vocab/V9/girafe.webp",
     "/assets/words/vocab/V9/gorille.webp",
+    "/assets/words/vocab/V9/grenouille.webp",
     "/assets/words/vocab/V9/grotte.webp",
+    "/assets/words/vocab/V9/guepe.webp",
     "/assets/words/vocab/V9/helicoptere.webp",
+    "/assets/words/vocab/V9/herisson.webp",
     "/assets/words/vocab/V9/hibou.webp",
+    "/assets/words/vocab/V9/hippocampe.webp",
+    "/assets/words/vocab/V9/hirondelle.webp",
     "/assets/words/vocab/V9/hopital.webp",
     "/assets/words/vocab/V9/ibis.webp",
     "/assets/words/vocab/V9/ici.webp",
@@ -7197,30 +7270,47 @@
     "/assets/words/vocab/V9/la-bas.webp",
     "/assets/words/vocab/V9/lac.webp",
     "/assets/words/vocab/V9/lapin.webp",
+    "/assets/words/vocab/V9/libellule.webp",
     "/assets/words/vocab/V9/librairie.webp",
     "/assets/words/vocab/V9/lion.webp",
     "/assets/words/vocab/V9/loup.webp",
     "/assets/words/vocab/V9/magasin.webp",
     "/assets/words/vocab/V9/marche.webp",
+    "/assets/words/vocab/V9/meduse.webp",
     "/assets/words/vocab/V9/mer.webp",
     "/assets/words/vocab/V9/metro.webp",
     "/assets/words/vocab/V9/montagne.webp",
     "/assets/words/vocab/V9/moto.webp",
+    "/assets/words/vocab/V9/mouche.webp",
+    "/assets/words/vocab/V9/mouette.webp",
+    "/assets/words/vocab/V9/moustique.webp",
     "/assets/words/vocab/V9/mouton.webp",
     "/assets/words/vocab/V9/musee.webp",
     "/assets/words/vocab/V9/musicien.webp",
     "/assets/words/vocab/V9/navire.webp",
     "/assets/words/vocab/V9/nord.webp",
     "/assets/words/vocab/V9/ocean.webp",
+    "/assets/words/vocab/V9/oie.webp",
+    "/assets/words/vocab/V9/oiseau.webp",
+    "/assets/words/vocab/V9/otarie.webp",
     "/assets/words/vocab/V9/ouest.webp",
     "/assets/words/vocab/V9/ours.webp",
     "/assets/words/vocab/V9/panda.webp",
     "/assets/words/vocab/V9/panneau.webp",
+    "/assets/words/vocab/V9/paon.webp",
     "/assets/words/vocab/V9/papeterie.webp",
+    "/assets/words/vocab/V9/papillon.webp",
     "/assets/words/vocab/V9/parc.webp",
     "/assets/words/vocab/V9/passage-pieton.webp",
     "/assets/words/vocab/V9/peintre.webp",
+    "/assets/words/vocab/V9/pelican.webp",
+    "/assets/words/vocab/V9/perroquet.webp",
     "/assets/words/vocab/V9/pharmacie.webp",
+    "/assets/words/vocab/V9/phoque.webp",
+    "/assets/words/vocab/V9/pie.webp",
+    "/assets/words/vocab/V9/pieuvre.webp",
+    "/assets/words/vocab/V9/pigeon.webp",
+    "/assets/words/vocab/V9/pingouin.webp",
     "/assets/words/vocab/V9/piscine.webp",
     "/assets/words/vocab/V9/place.webp",
     "/assets/words/vocab/V9/plage.webp",
@@ -7236,18 +7326,26 @@
     "/assets/words/vocab/V9/rond-point.webp",
     "/assets/words/vocab/V9/rue.webp",
     "/assets/words/vocab/V9/salle-de-sport.webp",
+    "/assets/words/vocab/V9/sauterelle.webp",
     "/assets/words/vocab/V9/scene.webp",
     "/assets/words/vocab/V9/scooter.webp",
+    "/assets/words/vocab/V9/serpent.webp",
+    "/assets/words/vocab/V9/singe.webp",
+    "/assets/words/vocab/V9/souris.webp",
     "/assets/words/vocab/V9/spectacle.webp",
     "/assets/words/vocab/V9/sud.webp",
     "/assets/words/vocab/V9/supermarche.webp",
     "/assets/words/vocab/V9/taxi.webp",
     "/assets/words/vocab/V9/theatre.webp",
+    "/assets/words/vocab/V9/tigre.webp",
+    "/assets/words/vocab/V9/tortue.webp",
+    "/assets/words/vocab/V9/toucan.webp",
     "/assets/words/vocab/V9/tout-droit.webp",
     "/assets/words/vocab/V9/train.webp",
     "/assets/words/vocab/V9/tram.webp",
     "/assets/words/vocab/V9/tribunal.webp",
     "/assets/words/vocab/V9/trotinette.webp",
+    "/assets/words/vocab/V9/vache.webp",
     "/assets/words/vocab/V9/vallee.webp",
     "/assets/words/vocab/V9/ville.webp",
     "/assets/words/vocab/V9/voiture.webp",
@@ -37807,9 +37905,19 @@
       "revision": "c1ef7a5ca6d8f990"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/araignee.mp3",
+      "size": 12897,
+      "revision": "e4c3758e239c8d6e"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/au-bout-de.mp3",
       "size": 9762,
       "revision": "a69c20651465cf9e"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/autruche.mp3",
+      "size": 12270,
+      "revision": "6d51e04832a26866"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/avenue.mp3",
@@ -37872,6 +37980,11 @@
       "revision": "663199edf63600a3"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/canari.mp3",
+      "size": 11643,
+      "revision": "afaf715601dfeb7b"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/carrefour.mp3",
       "size": 14151,
       "revision": "1263f5d53564df0d"
@@ -37887,6 +38000,11 @@
       "revision": "17eeef20ad66244d"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/cerf.mp3",
+      "size": 12270,
+      "revision": "f1280d6ecbf8e39c"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/chanteur.mp3",
       "size": 22928,
       "revision": "1bc41e4d4a17b698"
@@ -37897,9 +38015,19 @@
       "revision": "6cf51d26439dff3b"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/chenille.mp3",
+      "size": 12270,
+      "revision": "bd3b60a1b37f9042"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/cheval.mp3",
       "size": 12583,
       "revision": "25b86380949feba3"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/chevre.mp3",
+      "size": 14464,
+      "revision": "dd5763a86e2fd35d"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/chien.mp3",
@@ -37907,9 +38035,19 @@
       "revision": "5397b913c0c1bb41"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/cigogne.mp3",
+      "size": 12270,
+      "revision": "09db21c6bbdd20b8"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/cinema.mp3",
       "size": 13524,
       "revision": "564c52a0eedfcf66"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/coccinelle.mp3",
+      "size": 14778,
+      "revision": "bce8d7e0898fb5b6"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/cochon.mp3",
@@ -37920,6 +38058,11 @@
       "url": "/assets/words/son_f/vocab/V9/coiffeur.mp3",
       "size": 13837,
       "revision": "f14ed7d2713e260a"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/colibri.mp3",
+      "size": 13524,
+      "revision": "bd84dba9f66adc96"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/colline.mp3",
@@ -37942,9 +38085,29 @@
       "revision": "974a8f64cf48104b"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/corbeau.mp3",
+      "size": 11956,
+      "revision": "231f2d6488990d1c"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/cote.mp3",
       "size": 13210,
       "revision": "9f835790e324a4d0"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/crabe.mp3",
+      "size": 12270,
+      "revision": "dae26f3019cb6e87"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/crevette.mp3",
+      "size": 13524,
+      "revision": "781136fe203ce9b4"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/criquet.mp3",
+      "size": 12583,
+      "revision": "1dc521f373d452e7"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/crocodile.mp3",
@@ -37982,6 +38145,11 @@
       "revision": "f0dd46561927b239"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/ecureuil.mp3",
+      "size": 14464,
+      "revision": "779eb6094306954a"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/eglise.mp3",
       "size": 12583,
       "revision": "75682456c0ddd461"
@@ -37997,14 +38165,29 @@
       "revision": "6850d3d394caa335"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/escargot.mp3",
+      "size": 13837,
+      "revision": "e198b8191c89d4e0"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/est.mp3",
       "size": 7254,
       "revision": "bc3b234ff13c1223"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/etoile-de-mer.mp3",
+      "size": 16031,
+      "revision": "dde491a447f06557"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/exposition.mp3",
       "size": 15718,
       "revision": "4a89144991ffed76"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/faucon.mp3",
+      "size": 12897,
+      "revision": "d0fdc94c7709dd3a"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/festival.mp3",
@@ -38022,6 +38205,11 @@
       "revision": "bc99d3a7f11d5bfe"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/flamant-rose.mp3",
+      "size": 11329,
+      "revision": "23448bb4d93e0151"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/fleuve.mp3",
       "size": 13210,
       "revision": "d491be0ca1f0899b"
@@ -38030,6 +38218,11 @@
       "url": "/assets/words/son_f/vocab/V9/foret.mp3",
       "size": 10703,
       "revision": "8448191df64c8568"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/fourmi.mp3",
+      "size": 10076,
+      "revision": "6ddaf1c704120b56"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/fusee.mp3",
@@ -38057,9 +38250,19 @@
       "revision": "0701886dedf8df82"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/grenouille.mp3",
+      "size": 12897,
+      "revision": "99f94a99e4ad9430"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/grotte.mp3",
       "size": 12897,
       "revision": "44c447106192a4d8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/guepe.mp3",
+      "size": 10076,
+      "revision": "f47445af4c14dcce"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/helicoptere.mp3",
@@ -38067,9 +38270,24 @@
       "revision": "9b459f8466b4d453"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/herisson.mp3",
+      "size": 13837,
+      "revision": "87652384e4cc9525"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/hibou.mp3",
       "size": 10703,
       "revision": "05aab9a4fa3f820f"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/hippocampe.mp3",
+      "size": 13210,
+      "revision": "929beb9b85c547f4"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/hirondelle.mp3",
+      "size": 14778,
+      "revision": "c28015ff3bd87377"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/hopital.mp3",
@@ -38122,6 +38340,11 @@
       "revision": "b2bc82c8a6378884"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/libellule.mp3",
+      "size": 12897,
+      "revision": "5ad8d466e4e578ab"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/librairie.mp3",
       "size": 12270,
       "revision": "bc1dbd7bdf036562"
@@ -38147,6 +38370,11 @@
       "revision": "178042c5bed1f6a0"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/meduse.mp3",
+      "size": 12270,
+      "revision": "4cfda202dd1df8fb"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/mer.mp3",
       "size": 11329,
       "revision": "c15a602b859d75bc"
@@ -38165,6 +38393,21 @@
       "url": "/assets/words/son_f/vocab/V9/moto.mp3",
       "size": 12583,
       "revision": "06f7f374786524d6"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/mouche.mp3",
+      "size": 11643,
+      "revision": "f5253fdb43b6a430"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/mouette.mp3",
+      "size": 13210,
+      "revision": "48b37154cd78f3e8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/moustique.mp3",
+      "size": 11329,
+      "revision": "defc0557b6b7e734"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/mouton.mp3",
@@ -38202,6 +38445,21 @@
       "revision": "96c17b7456854149"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/oie.mp3",
+      "size": 9762,
+      "revision": "09f0d1dbb7363e4b"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/oiseau.mp3",
+      "size": 9762,
+      "revision": "8c5f5690abaea59b"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/otarie.mp3",
+      "size": 11329,
+      "revision": "e088040c8eb9853f"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/ouest.mp3",
       "size": 12270,
       "revision": "0e386e2d30317246"
@@ -38222,9 +38480,19 @@
       "revision": "7b371a94a77ae7fb"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/paon.mp3",
+      "size": 10076,
+      "revision": "76aa7144a5c12957"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/papeterie.mp3",
       "size": 10076,
       "revision": "894e9b6fa132adec"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/papillon.mp3",
+      "size": 12270,
+      "revision": "a9b2fa3713a591c3"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/parc.mp3",
@@ -38247,9 +38515,44 @@
       "revision": "faefb31d0f55b97e"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/pelican.mp3",
+      "size": 13837,
+      "revision": "b4e1de299f65cd48"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/perroquet.mp3",
+      "size": 13210,
+      "revision": "62d8978deb444ba0"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/pharmacie.mp3",
       "size": 13524,
       "revision": "597c61e4b97fa00a"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/phoque.mp3",
+      "size": 10389,
+      "revision": "800d73169018ffd2"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/pie.mp3",
+      "size": 10389,
+      "revision": "cc2ae0e1ff8ba8d7"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/pieuvre.mp3",
+      "size": 11956,
+      "revision": "a0a777019177d0ff"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/pigeon.mp3",
+      "size": 11329,
+      "revision": "c54ccf4fd3ab9975"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/pingouin.mp3",
+      "size": 12897,
+      "revision": "7933fb7feb1b09a6"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/piscine.mp3",
@@ -38327,6 +38630,11 @@
       "revision": "cf6956ef2905b398"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/sauterelle.mp3",
+      "size": 14151,
+      "revision": "8737e073019ff98e"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/scene.mp3",
       "size": 11643,
       "revision": "14fcd41110c13a64"
@@ -38335,6 +38643,21 @@
       "url": "/assets/words/son_f/vocab/V9/scooter.mp3",
       "size": 11329,
       "revision": "bbf7b2314f5eb141"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/serpent.mp3",
+      "size": 11956,
+      "revision": "e591e2fb812068b7"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/singe.mp3",
+      "size": 13524,
+      "revision": "9a241c8c9a80b1eb"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/souris.mp3",
+      "size": 10703,
+      "revision": "70827d1a3fe1ed5b"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/spectacle.mp3",
@@ -38362,6 +38685,21 @@
       "revision": "7b71461d070472f1"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/tigre.mp3",
+      "size": 12897,
+      "revision": "8a58cbbf421b82c9"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/tortue.mp3",
+      "size": 11329,
+      "revision": "5307f81030ec7595"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/toucan.mp3",
+      "size": 12897,
+      "revision": "7d04b718909b5b6d"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/tout-droit.mp3",
       "size": 11016,
       "revision": "27e0abcb17ca263f"
@@ -38385,6 +38723,11 @@
       "url": "/assets/words/son_f/vocab/V9/trotinette.mp3",
       "size": 14778,
       "revision": "defa4d2e2ec7de12"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/vache.mp3",
+      "size": 11643,
+      "revision": "fba5b6dd3e539653"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/vallee.mp3",
@@ -41192,9 +41535,19 @@
       "revision": "1c58459c10accb68"
     },
     {
+      "url": "/assets/words/vocab/V9/araignee.webp",
+      "size": 28702,
+      "revision": "9fc58fbb5f3c2cc7"
+    },
+    {
       "url": "/assets/words/vocab/V9/au-bout-de.webp",
       "size": 12926,
       "revision": "f4ce9ff78e65f475"
+    },
+    {
+      "url": "/assets/words/vocab/V9/autruche.webp",
+      "size": 17808,
+      "revision": "72a313601863eaaa"
     },
     {
       "url": "/assets/words/vocab/V9/avenue.webp",
@@ -41257,6 +41610,11 @@
       "revision": "c9c8692c01400fb9"
     },
     {
+      "url": "/assets/words/vocab/V9/canari.webp",
+      "size": 14314,
+      "revision": "e596484f9243d8c8"
+    },
+    {
       "url": "/assets/words/vocab/V9/carrefour.webp",
       "size": 34060,
       "revision": "7b888fc3cc5ec606"
@@ -41272,6 +41630,11 @@
       "revision": "c7587208277327ca"
     },
     {
+      "url": "/assets/words/vocab/V9/cerf.webp",
+      "size": 31530,
+      "revision": "782ff2121805ad76"
+    },
+    {
       "url": "/assets/words/vocab/V9/chanteur.webp",
       "size": 17600,
       "revision": "2302697d0e095987"
@@ -41282,9 +41645,19 @@
       "revision": "8e9d57f3bfc7d2e9"
     },
     {
+      "url": "/assets/words/vocab/V9/chenille.webp",
+      "size": 22092,
+      "revision": "320fa15b97bef538"
+    },
+    {
       "url": "/assets/words/vocab/V9/cheval.webp",
       "size": 17828,
       "revision": "325c6a9f2abb512e"
+    },
+    {
+      "url": "/assets/words/vocab/V9/chevre.webp",
+      "size": 15482,
+      "revision": "a8c02f7c49be92e1"
     },
     {
       "url": "/assets/words/vocab/V9/chien.webp",
@@ -41292,9 +41665,19 @@
       "revision": "565014ca1d95d34e"
     },
     {
+      "url": "/assets/words/vocab/V9/cigogne.webp",
+      "size": 12168,
+      "revision": "9ac600b4733c8464"
+    },
+    {
       "url": "/assets/words/vocab/V9/cinema.webp",
       "size": 45200,
       "revision": "e5b01f0a8a960030"
+    },
+    {
+      "url": "/assets/words/vocab/V9/coccinelle.webp",
+      "size": 24298,
+      "revision": "a68c2119eead7aad"
     },
     {
       "url": "/assets/words/vocab/V9/cochon.webp",
@@ -41305,6 +41688,11 @@
       "url": "/assets/words/vocab/V9/coiffeur.webp",
       "size": 107590,
       "revision": "6406bb30a3dd0de7"
+    },
+    {
+      "url": "/assets/words/vocab/V9/colibri.webp",
+      "size": 23676,
+      "revision": "b2bfee0cc97a0cbf"
     },
     {
       "url": "/assets/words/vocab/V9/colline.webp",
@@ -41327,9 +41715,29 @@
       "revision": "9b17ef6f41948290"
     },
     {
+      "url": "/assets/words/vocab/V9/corbeau.webp",
+      "size": 23030,
+      "revision": "06832eedf2d925e4"
+    },
+    {
       "url": "/assets/words/vocab/V9/cote.webp",
       "size": 44188,
       "revision": "44074969589834ed"
+    },
+    {
+      "url": "/assets/words/vocab/V9/crabe.webp",
+      "size": 54726,
+      "revision": "9dc67621f6be2c15"
+    },
+    {
+      "url": "/assets/words/vocab/V9/crevette.webp",
+      "size": 22138,
+      "revision": "2ad94105d112941c"
+    },
+    {
+      "url": "/assets/words/vocab/V9/criquet.webp",
+      "size": 38428,
+      "revision": "0f089cdbf363d83f"
     },
     {
       "url": "/assets/words/vocab/V9/crocodile.webp",
@@ -41367,6 +41775,11 @@
       "revision": "8e504fc570c1c960"
     },
     {
+      "url": "/assets/words/vocab/V9/ecureuil.webp",
+      "size": 43820,
+      "revision": "e90fe3040a7c33b7"
+    },
+    {
       "url": "/assets/words/vocab/V9/eglise.webp",
       "size": 28952,
       "revision": "c49ac94a4a22d3ef"
@@ -41377,9 +41790,19 @@
       "revision": "17b852d5c744148b"
     },
     {
+      "url": "/assets/words/vocab/V9/escargot.webp",
+      "size": 31324,
+      "revision": "688cc7fff249989d"
+    },
+    {
       "url": "/assets/words/vocab/V9/est.webp",
       "size": 27018,
       "revision": "49a6e20d2b49a1ce"
+    },
+    {
+      "url": "/assets/words/vocab/V9/etoile-de-mer.webp",
+      "size": 30500,
+      "revision": "91d4078f626830eb"
     },
     {
       "url": "/assets/words/vocab/V9/exposition.webp",
@@ -41387,9 +41810,19 @@
       "revision": "2dfe3067679f00b8"
     },
     {
+      "url": "/assets/words/vocab/V9/faucon.webp",
+      "size": 30472,
+      "revision": "a0ce73c7f27faa94"
+    },
+    {
       "url": "/assets/words/vocab/V9/festival.webp",
       "size": 43114,
       "revision": "24befa0717cec2b3"
+    },
+    {
+      "url": "/assets/words/vocab/V9/flamant-rose.webp",
+      "size": 12738,
+      "revision": "753673ed72280a8f"
     },
     {
       "url": "/assets/words/vocab/V9/fleuve.webp",
@@ -41400,6 +41833,11 @@
       "url": "/assets/words/vocab/V9/foret.webp",
       "size": 58036,
       "revision": "e503356cb789487b"
+    },
+    {
+      "url": "/assets/words/vocab/V9/fourmi.webp",
+      "size": 23122,
+      "revision": "8c56ce478eff57d0"
     },
     {
       "url": "/assets/words/vocab/V9/fusee.webp",
@@ -41427,9 +41865,19 @@
       "revision": "3e487409a97d16cc"
     },
     {
+      "url": "/assets/words/vocab/V9/grenouille.webp",
+      "size": 24266,
+      "revision": "fd73a2e8b3cb4c73"
+    },
+    {
       "url": "/assets/words/vocab/V9/grotte.webp",
       "size": 44382,
       "revision": "87039726283e9caf"
+    },
+    {
+      "url": "/assets/words/vocab/V9/guepe.webp",
+      "size": 31048,
+      "revision": "9b944bc5bcdd8dc4"
     },
     {
       "url": "/assets/words/vocab/V9/helicoptere.webp",
@@ -41437,9 +41885,24 @@
       "revision": "ec72a19df7eb2e6a"
     },
     {
+      "url": "/assets/words/vocab/V9/herisson.webp",
+      "size": 60496,
+      "revision": "7cd5c9df5e7a3725"
+    },
+    {
       "url": "/assets/words/vocab/V9/hibou.webp",
       "size": 36018,
       "revision": "7862d9408636e8e6"
+    },
+    {
+      "url": "/assets/words/vocab/V9/hippocampe.webp",
+      "size": 14888,
+      "revision": "e7ac694c4912ea18"
+    },
+    {
+      "url": "/assets/words/vocab/V9/hirondelle.webp",
+      "size": 15468,
+      "revision": "dedae747e06e1b52"
     },
     {
       "url": "/assets/words/vocab/V9/hopital.webp",
@@ -41492,6 +41955,11 @@
       "revision": "9b916d4724da2f8a"
     },
     {
+      "url": "/assets/words/vocab/V9/libellule.webp",
+      "size": 30644,
+      "revision": "6f234f719f89fc8a"
+    },
+    {
       "url": "/assets/words/vocab/V9/librairie.webp",
       "size": 151922,
       "revision": "552505f1d29ab1f6"
@@ -41517,6 +41985,11 @@
       "revision": "8c94b23c2c34d391"
     },
     {
+      "url": "/assets/words/vocab/V9/meduse.webp",
+      "size": 16002,
+      "revision": "469e45aa9a18d3f1"
+    },
+    {
       "url": "/assets/words/vocab/V9/mer.webp",
       "size": 35320,
       "revision": "de92d793d2ecfddc"
@@ -41535,6 +42008,21 @@
       "url": "/assets/words/vocab/V9/moto.webp",
       "size": 28770,
       "revision": "70e89b6261e6ce52"
+    },
+    {
+      "url": "/assets/words/vocab/V9/mouche.webp",
+      "size": 30216,
+      "revision": "22060a449843ad3e"
+    },
+    {
+      "url": "/assets/words/vocab/V9/mouette.webp",
+      "size": 11374,
+      "revision": "d6e4c6c20c5db715"
+    },
+    {
+      "url": "/assets/words/vocab/V9/moustique.webp",
+      "size": 22986,
+      "revision": "a438d1f3ca69cee7"
     },
     {
       "url": "/assets/words/vocab/V9/mouton.webp",
@@ -41567,6 +42055,21 @@
       "revision": "e6117a39864078c4"
     },
     {
+      "url": "/assets/words/vocab/V9/oie.webp",
+      "size": 9340,
+      "revision": "fd816b18c6b011ab"
+    },
+    {
+      "url": "/assets/words/vocab/V9/oiseau.webp",
+      "size": 30422,
+      "revision": "2e879598641d1770"
+    },
+    {
+      "url": "/assets/words/vocab/V9/otarie.webp",
+      "size": 21920,
+      "revision": "657f3b6f1b438570"
+    },
+    {
       "url": "/assets/words/vocab/V9/ouest.webp",
       "size": 27762,
       "revision": "2848ffec8f972adb"
@@ -41587,9 +42090,19 @@
       "revision": "a9dd8e1f996e415e"
     },
     {
+      "url": "/assets/words/vocab/V9/paon.webp",
+      "size": 95570,
+      "revision": "1f733668f0dc0725"
+    },
+    {
       "url": "/assets/words/vocab/V9/papeterie.webp",
       "size": 103386,
       "revision": "44a20cab2e01bdff"
+    },
+    {
+      "url": "/assets/words/vocab/V9/papillon.webp",
+      "size": 57920,
+      "revision": "b461bd8944dd07a1"
     },
     {
       "url": "/assets/words/vocab/V9/parc.webp",
@@ -41607,9 +42120,44 @@
       "revision": "9a2cb3c0127f23cc"
     },
     {
+      "url": "/assets/words/vocab/V9/pelican.webp",
+      "size": 18352,
+      "revision": "4923817b1ddd556f"
+    },
+    {
+      "url": "/assets/words/vocab/V9/perroquet.webp",
+      "size": 23586,
+      "revision": "6c1ceee8e68567c9"
+    },
+    {
       "url": "/assets/words/vocab/V9/pharmacie.webp",
       "size": 46544,
       "revision": "57cf4b77d8a66997"
+    },
+    {
+      "url": "/assets/words/vocab/V9/phoque.webp",
+      "size": 28112,
+      "revision": "36740bb0a948c9ce"
+    },
+    {
+      "url": "/assets/words/vocab/V9/pie.webp",
+      "size": 14626,
+      "revision": "48f0228f056d2f29"
+    },
+    {
+      "url": "/assets/words/vocab/V9/pieuvre.webp",
+      "size": 45954,
+      "revision": "6abaf9af5e022082"
+    },
+    {
+      "url": "/assets/words/vocab/V9/pigeon.webp",
+      "size": 22340,
+      "revision": "088a19cad18eb30d"
+    },
+    {
+      "url": "/assets/words/vocab/V9/pingouin.webp",
+      "size": 11092,
+      "revision": "32a6330cc5dc4889"
     },
     {
       "url": "/assets/words/vocab/V9/piscine.webp",
@@ -41687,6 +42235,11 @@
       "revision": "682bcf448f233dec"
     },
     {
+      "url": "/assets/words/vocab/V9/sauterelle.webp",
+      "size": 32448,
+      "revision": "0a43fa039b408a54"
+    },
+    {
       "url": "/assets/words/vocab/V9/scene.webp",
       "size": 23348,
       "revision": "9b6885f23c0029f0"
@@ -41695,6 +42248,21 @@
       "url": "/assets/words/vocab/V9/scooter.webp",
       "size": 20486,
       "revision": "20e6df084e0d38d2"
+    },
+    {
+      "url": "/assets/words/vocab/V9/serpent.webp",
+      "size": 27668,
+      "revision": "7131032a94c29134"
+    },
+    {
+      "url": "/assets/words/vocab/V9/singe.webp",
+      "size": 19734,
+      "revision": "37de6ce2a9c613d6"
+    },
+    {
+      "url": "/assets/words/vocab/V9/souris.webp",
+      "size": 33870,
+      "revision": "78b50c6ec7edd301"
     },
     {
       "url": "/assets/words/vocab/V9/spectacle.webp",
@@ -41722,6 +42290,21 @@
       "revision": "5cc9948a0281f4b6"
     },
     {
+      "url": "/assets/words/vocab/V9/tigre.webp",
+      "size": 29192,
+      "revision": "5cbf3ef62f444eb5"
+    },
+    {
+      "url": "/assets/words/vocab/V9/tortue.webp",
+      "size": 24356,
+      "revision": "83bc8f1120fdf29f"
+    },
+    {
+      "url": "/assets/words/vocab/V9/toucan.webp",
+      "size": 16078,
+      "revision": "3e9162f42e55f11d"
+    },
+    {
       "url": "/assets/words/vocab/V9/tout-droit.webp",
       "size": 11236,
       "revision": "6c54b7385a912b28"
@@ -41745,6 +42328,11 @@
       "url": "/assets/words/vocab/V9/trotinette.webp",
       "size": 9190,
       "revision": "8954ca9b1dcd45cf"
+    },
+    {
+      "url": "/assets/words/vocab/V9/vache.webp",
+      "size": 25176,
+      "revision": "a92c124753c7ce5f"
     },
     {
       "url": "/assets/words/vocab/V9/vallee.webp",
