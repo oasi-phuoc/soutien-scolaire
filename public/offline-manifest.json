@@ -1,6 +1,6 @@
 {
-  "version": 1784628695906,
-  "totalBytes": 421364672,
+  "version": 1784628727003,
+  "totalBytes": 421407448,
   "routes": [
     "/",
     "/avant-propos",
@@ -7418,6 +7418,7 @@
     "/assets/words/vocab/V9/trotinette.webp",
     "/assets/words/vocab/V9/vache.webp",
     "/assets/words/vocab/V9/vallee.webp",
+    "/assets/words/vocab/V9/velo.webp",
     "/assets/words/vocab/V9/ville.webp",
     "/assets/words/vocab/V9/voilier.webp",
     "/assets/words/vocab/V9/voiture.webp",
@@ -42765,6 +42766,11 @@
       "url": "/assets/words/vocab/V9/vallee.webp",
       "size": 53984,
       "revision": "571ac7f8735fc6dc"
+    },
+    {
+      "url": "/assets/words/vocab/V9/velo.webp",
+      "size": 42776,
+      "revision": "a27dc7fbe5d60606"
     },
     {
       "url": "/assets/words/vocab/V9/ville.webp",
