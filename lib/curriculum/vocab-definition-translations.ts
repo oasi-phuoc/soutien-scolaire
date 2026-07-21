@@ -1478,7 +1478,7 @@ const medicineDef = d("A product or object used for health care.", "منتج أ�
 
 const V8_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["tête", "bras", "main", "doigt", "jambe", "pied", "dos", "ventre", "genou", "épaule", "cou", "nez", "bouche", "œil", "oreille", "dent"].map((word) => [word, bodyPartDef]),
-  ...["rhume", "grippe", "fièvre", "douleur", "toux", "allergie", "coupure", "brûlure", "blessure", "fracture", "nausée"].map((word) => [word, illnessDef]),
+  ...["rhume", "grippe", "fièvre", "douleur", "toux", "allergie", "coupure", "brûlure", "blessure", "fracture", "nausée", "virus", "bactéries", "microbe", "infection", "vaccin", "antibiotique"].map((word) => [word, illnessDef]),
   ...["médecin", "infirmier", "pharmacien", "dentiste", "ophtalmologue", "pédiatre", "chirurgien", "urgentiste", "kinésithérapeute", "salle d'attente", "consultation", "rendez-vous"].map((word) => [word, medicalWorkerDef]),
   ...["médicament", "ordonnance", "sirop", "comprimé", "gélule", "pommade", "crème", "pansement", "thermomètre", "spray", "goutte", "pharmacie", "dosette", "vitamine", "boîte"].map((word) => [word, medicineDef]),
 ]);

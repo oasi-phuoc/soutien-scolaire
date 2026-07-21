@@ -1,6 +1,6 @@
 {
-  "version": 1784617134013,
-  "totalBytes": 421019031,
+  "version": 1784618074028,
+  "totalBytes": 421218288,
   "routes": [
     "/",
     "/avant-propos",
@@ -6415,6 +6415,8 @@
     "/assets/words/son_f/vocab/V7/ustensile.mp3",
     "/assets/words/son_f/vocab/V7/verser.mp3",
     "/assets/words/son_f/vocab/V8/allergie.mp3",
+    "/assets/words/son_f/vocab/V8/antibiotique.mp3",
+    "/assets/words/son_f/vocab/V8/bacterie.mp3",
     "/assets/words/son_f/vocab/V8/blessure.mp3",
     "/assets/words/son_f/vocab/V8/boite.mp3",
     "/assets/words/son_f/vocab/V8/boîte.mp3",
@@ -6443,6 +6445,7 @@
     "/assets/words/son_f/vocab/V8/genou.mp3",
     "/assets/words/son_f/vocab/V8/goutte.mp3",
     "/assets/words/son_f/vocab/V8/grippe.mp3",
+    "/assets/words/son_f/vocab/V8/infection.mp3",
     "/assets/words/son_f/vocab/V8/infirmier.mp3",
     "/assets/words/son_f/vocab/V8/jambe.mp3",
     "/assets/words/son_f/vocab/V8/kinésithérapeute.mp3",
@@ -6450,6 +6453,7 @@
     "/assets/words/son_f/vocab/V8/medecin.mp3",
     "/assets/words/son_f/vocab/V8/medicament.mp3",
     "/assets/words/son_f/vocab/V8/médicament.mp3",
+    "/assets/words/son_f/vocab/V8/microbe.mp3",
     "/assets/words/son_f/vocab/V8/nausee.mp3",
     "/assets/words/son_f/vocab/V8/nez.mp3",
     "/assets/words/son_f/vocab/V8/oeil.mp3",
@@ -6472,7 +6476,9 @@
     "/assets/words/son_f/vocab/V8/thermomètre.mp3",
     "/assets/words/son_f/vocab/V8/toux.mp3",
     "/assets/words/son_f/vocab/V8/urgentiste.mp3",
+    "/assets/words/son_f/vocab/V8/vaccin.mp3",
     "/assets/words/son_f/vocab/V8/ventre.mp3",
+    "/assets/words/son_f/vocab/V8/virus.mp3",
     "/assets/words/son_f/vocab/V8/vitamine.mp3",
     "/assets/words/son_f/vocab/V9/abeille.mp3",
     "/assets/words/son_f/vocab/V9/acteur.mp3",
@@ -6810,7 +6816,6 @@
     "/assets/words/vocab/V10/plat.webp",
     "/assets/words/vocab/V10/porte.webp",
     "/assets/words/vocab/V10/quai.webp",
-    "/assets/words/vocab/V10/reception.webp",
     "/assets/words/vocab/V10/receptionniste.webp",
     "/assets/words/vocab/V10/reservation.webp",
     "/assets/words/vocab/V10/retard.webp",
@@ -7184,6 +7189,8 @@
     "/assets/words/vocab/V7/ustensile.webp",
     "/assets/words/vocab/V7/verser.webp",
     "/assets/words/vocab/V8/allergie.webp",
+    "/assets/words/vocab/V8/antibiotique.webp",
+    "/assets/words/vocab/V8/bacterie.webp",
     "/assets/words/vocab/V8/blessure.webp",
     "/assets/words/vocab/V8/boite.webp",
     "/assets/words/vocab/V8/bouche.webp",
@@ -7208,12 +7215,14 @@
     "/assets/words/vocab/V8/genou.webp",
     "/assets/words/vocab/V8/goutte.webp",
     "/assets/words/vocab/V8/grippe.webp",
+    "/assets/words/vocab/V8/infection.webp",
     "/assets/words/vocab/V8/infirmier.webp",
     "/assets/words/vocab/V8/jambe.webp",
     "/assets/words/vocab/V8/kinésithérapeute.webp",
     "/assets/words/vocab/V8/main.webp",
     "/assets/words/vocab/V8/medecin.webp",
     "/assets/words/vocab/V8/medicament.webp",
+    "/assets/words/vocab/V8/microbe.webp",
     "/assets/words/vocab/V8/nausee.webp",
     "/assets/words/vocab/V8/nez.webp",
     "/assets/words/vocab/V8/oeil.webp",
@@ -7235,7 +7244,9 @@
     "/assets/words/vocab/V8/thermometre.webp",
     "/assets/words/vocab/V8/toux.webp",
     "/assets/words/vocab/V8/urgentiste.webp",
+    "/assets/words/vocab/V8/vaccin.webp",
     "/assets/words/vocab/V8/ventre.webp",
+    "/assets/words/vocab/V8/virus.webp",
     "/assets/words/vocab/V8/vitamine.webp",
     "/assets/words/vocab/V9/abeille.webp",
     "/assets/words/vocab/V9/acteur.webp",
@@ -35851,8 +35862,8 @@
     },
     {
       "url": "/assets/words/son_f/vocab/V10/receptionniste.mp3",
-      "size": 18226,
-      "revision": "24eb43fff60a665f"
+      "size": 17599,
+      "revision": "35476ec9771ad2ae"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/reservation.mp3",
@@ -37735,6 +37746,16 @@
       "revision": "38681f69a12f0742"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/antibiotique.mp3",
+      "size": 15091,
+      "revision": "dec7756ce994bed2"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V8/bacterie.mp3",
+      "size": 11956,
+      "revision": "cc0c5ad8db759673"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/blessure.mp3",
       "size": 15091,
       "revision": "6d5d6b38dc2d798d"
@@ -37875,6 +37896,11 @@
       "revision": "e474a67f43dfd434"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/infection.mp3",
+      "size": 12897,
+      "revision": "319d1e7e6d511c7d"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/infirmier.mp3",
       "size": 28570,
       "revision": "18e77c7953dadc3a"
@@ -37908,6 +37934,11 @@
       "url": "/assets/words/son_f/vocab/V8/médicament.mp3",
       "size": 13524,
       "revision": "bc82ca3333904030"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V8/microbe.mp3",
+      "size": 13524,
+      "revision": "1dbcd34adfa29dcb"
     },
     {
       "url": "/assets/words/son_f/vocab/V8/nausee.mp3",
@@ -38020,9 +38051,19 @@
       "revision": "cbc032701134a099"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/vaccin.mp3",
+      "size": 14151,
+      "revision": "ee157d215ee0bda0"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/ventre.mp3",
       "size": 12583,
       "revision": "b8aaf93a60606c71"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V8/virus.mp3",
+      "size": 12897,
+      "revision": "18a3ee997a4139f7"
     },
     {
       "url": "/assets/words/son_f/vocab/V8/vitamine.mp3",
@@ -39708,11 +39749,6 @@
       "url": "/assets/words/vocab/V10/quai.webp",
       "size": 39968,
       "revision": "7d5bfdb10a39fa29"
-    },
-    {
-      "url": "/assets/words/vocab/V10/reception.webp",
-      "size": 29582,
-      "revision": "67e7509e82ec3a73"
     },
     {
       "url": "/assets/words/vocab/V10/receptionniste.webp",
@@ -41580,6 +41616,16 @@
       "revision": "86dca28afec39bb8"
     },
     {
+      "url": "/assets/words/vocab/V8/antibiotique.webp",
+      "size": 10098,
+      "revision": "705ecbee5bae0429"
+    },
+    {
+      "url": "/assets/words/vocab/V8/bacterie.webp",
+      "size": 42168,
+      "revision": "21fd02bcd4e4f48c"
+    },
+    {
       "url": "/assets/words/vocab/V8/blessure.webp",
       "size": 11930,
       "revision": "c048a6ae332e4a61"
@@ -41700,6 +41746,11 @@
       "revision": "59b6a2593939bb8d"
     },
     {
+      "url": "/assets/words/vocab/V8/infection.webp",
+      "size": 10838,
+      "revision": "f0b2641bccf7266d"
+    },
+    {
       "url": "/assets/words/vocab/V8/infirmier.webp",
       "size": 19790,
       "revision": "7be2edb81ec01fc5"
@@ -41728,6 +41779,11 @@
       "url": "/assets/words/vocab/V8/medicament.webp",
       "size": 3064,
       "revision": "0fd1247f3110ed2d"
+    },
+    {
+      "url": "/assets/words/vocab/V8/microbe.webp",
+      "size": 37290,
+      "revision": "3e6e41bdf82f7f8e"
     },
     {
       "url": "/assets/words/vocab/V8/nausee.webp",
@@ -41835,9 +41891,19 @@
       "revision": "a7efef86fe9d82da"
     },
     {
+      "url": "/assets/words/vocab/V8/vaccin.webp",
+      "size": 10010,
+      "revision": "6b0468b9ef34ffa6"
+    },
+    {
       "url": "/assets/words/vocab/V8/ventre.webp",
       "size": 3936,
       "revision": "babe8f7f39b3fd2b"
+    },
+    {
+      "url": "/assets/words/vocab/V8/virus.webp",
+      "size": 38546,
+      "revision": "60ab998d27fce9cc"
     },
     {
       "url": "/assets/words/vocab/V8/vitamine.webp",
