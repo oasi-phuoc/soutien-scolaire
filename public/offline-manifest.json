@@ -1,6 +1,6 @@
 {
-  "version": 1784634865451,
-  "totalBytes": 422492589,
+  "version": 1784635803946,
+  "totalBytes": 423838709,
   "routes": [
     "/",
     "/avant-propos",
@@ -2487,15 +2487,39 @@
     "/assets/words/son_f/mots/saturne.mp3",
     "/assets/words/son_f/mots/saule-pleureur.mp3",
     "/assets/words/son_f/mots/sauterelle.mp3",
+    "/assets/words/son_f/mots/savon.mp3",
     "/assets/words/son_f/mots/saxophone.mp3",
+    "/assets/words/son_f/mots/scarabée.mp3",
+    "/assets/words/son_f/mots/scientifique.mp3",
+    "/assets/words/son_f/mots/scooter.mp3",
+    "/assets/words/son_f/mots/scorpion.mp3",
+    "/assets/words/son_f/mots/scotch.mp3",
+    "/assets/words/son_f/mots/seau.mp3",
+    "/assets/words/son_f/mots/sèche-cheveux.mp3",
     "/assets/words/son_f/mots/seize.mp3",
+    "/assets/words/son_f/mots/semaine.mp3",
+    "/assets/words/son_f/mots/sentier.mp3",
+    "/assets/words/son_f/mots/sequoia.mp3",
     "/assets/words/son_f/mots/serpent.mp3",
+    "/assets/words/son_f/mots/serveur.mp3",
+    "/assets/words/son_f/mots/serveuse.mp3",
     "/assets/words/son_f/mots/shampoing.mp3",
+    "/assets/words/son_f/mots/short.mp3",
+    "/assets/words/son_f/mots/sifflet.mp3",
     "/assets/words/son_f/mots/singe.mp3",
+    "/assets/words/son_f/mots/skateboard.mp3",
     "/assets/words/son_f/mots/ski.mp3",
+    "/assets/words/son_f/mots/smartphone.mp3",
+    "/assets/words/son_f/mots/snowboard.mp3",
+    "/assets/words/son_f/mots/soda.mp3",
     "/assets/words/son_f/mots/soleil.mp3",
     "/assets/words/son_f/mots/soulier.mp3",
+    "/assets/words/son_f/mots/soupe.mp3",
+    "/assets/words/son_f/mots/source.mp3",
     "/assets/words/son_f/mots/souris.mp3",
+    "/assets/words/son_f/mots/sous-marin.mp3",
+    "/assets/words/son_f/mots/soutien-gorge.mp3",
+    "/assets/words/son_f/mots/sphère.mp3",
     "/assets/words/son_f/mots/station.mp3",
     "/assets/words/son_f/mots/stylo.mp3",
     "/assets/words/son_f/mots/surligneur.mp3",
@@ -18133,9 +18157,49 @@
       "revision": "a1a0a76d1881e1b7"
     },
     {
+      "url": "/assets/words/son_f/mots/savon.mp3",
+      "size": 50217,
+      "revision": "eb46091bb1e43042"
+    },
+    {
       "url": "/assets/words/son_f/mots/saxophone.mp3",
       "size": 56359,
       "revision": "5a000d50e9492e52"
+    },
+    {
+      "url": "/assets/words/son_f/mots/scarabée.mp3",
+      "size": 56486,
+      "revision": "67f06189b4abdeb1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/scientifique.mp3",
+      "size": 69420,
+      "revision": "42bfff4cfb0a3435"
+    },
+    {
+      "url": "/assets/words/son_f/mots/scooter.mp3",
+      "size": 58158,
+      "revision": "07671bd5a979366a"
+    },
+    {
+      "url": "/assets/words/son_f/mots/scorpion.mp3",
+      "size": 58135,
+      "revision": "b86ec206217f4fc1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/scotch.mp3",
+      "size": 55233,
+      "revision": "7fa8d62b00424eeb"
+    },
+    {
+      "url": "/assets/words/son_f/mots/seau.mp3",
+      "size": 59412,
+      "revision": "4207146dcac69d11"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sèche-cheveux.mp3",
+      "size": 65659,
+      "revision": "75ec0b2694670b59"
     },
     {
       "url": "/assets/words/son_f/mots/seize.mp3",
@@ -18143,9 +18207,34 @@
       "revision": "148dd8b8eaefc8c8"
     },
     {
+      "url": "/assets/words/son_f/mots/semaine.mp3",
+      "size": 53979,
+      "revision": "8c6517889a10a1ba"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sentier.mp3",
+      "size": 53956,
+      "revision": "e9519a78f9b5389c"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sequoia.mp3",
+      "size": 58158,
+      "revision": "0fabfe733079a160"
+    },
+    {
       "url": "/assets/words/son_f/mots/serpent.mp3",
       "size": 51344,
       "revision": "5cefb043b4ec3fc1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/serveur.mp3",
+      "size": 53956,
+      "revision": "847481ae2b156379"
+    },
+    {
+      "url": "/assets/words/son_f/mots/serveuse.mp3",
+      "size": 58158,
+      "revision": "007bbb118c1df65c"
     },
     {
       "url": "/assets/words/son_f/mots/shampoing.mp3",
@@ -18153,14 +18242,44 @@
       "revision": "8882216d1fe289f8"
     },
     {
+      "url": "/assets/words/son_f/mots/short.mp3",
+      "size": 52725,
+      "revision": "d095072b933e25fb"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sifflet.mp3",
+      "size": 60666,
+      "revision": "a898ce8d7398cd4c"
+    },
+    {
       "url": "/assets/words/son_f/mots/singe.mp3",
       "size": 55106,
       "revision": "e8682cb5b2bcdf3c"
     },
     {
+      "url": "/assets/words/son_f/mots/skateboard.mp3",
+      "size": 33019,
+      "revision": "819bf28f3ae16275"
+    },
+    {
       "url": "/assets/words/son_f/mots/ski.mp3",
       "size": 46328,
       "revision": "d5b370b363f7045d"
+    },
+    {
+      "url": "/assets/words/son_f/mots/smartphone.mp3",
+      "size": 53956,
+      "revision": "22582b63b86f291e"
+    },
+    {
+      "url": "/assets/words/son_f/mots/snowboard.mp3",
+      "size": 56463,
+      "revision": "4b5762d06c9686c4"
+    },
+    {
+      "url": "/assets/words/son_f/mots/soda.mp3",
+      "size": 52702,
+      "revision": "7259d0c8dc445f98"
     },
     {
       "url": "/assets/words/son_f/mots/soleil.mp3",
@@ -18173,9 +18292,34 @@
       "revision": "a0afacaf7141aec6"
     },
     {
+      "url": "/assets/words/son_f/mots/soupe.mp3",
+      "size": 51448,
+      "revision": "01185397a8f16da8"
+    },
+    {
+      "url": "/assets/words/son_f/mots/source.mp3",
+      "size": 65659,
+      "revision": "0a27b129fb1ab7e8"
+    },
+    {
       "url": "/assets/words/son_f/mots/souris.mp3",
       "size": 50090,
       "revision": "62e743df2f1605be"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sous-marin.mp3",
+      "size": 51448,
+      "revision": "124040c1cba17cc1"
+    },
+    {
+      "url": "/assets/words/son_f/mots/soutien-gorge.mp3",
+      "size": 61897,
+      "revision": "959e2c26dd69c349"
+    },
+    {
+      "url": "/assets/words/son_f/mots/sphère.mp3",
+      "size": 55210,
+      "revision": "a0fd2d2fc53cd463"
     },
     {
       "url": "/assets/words/son_f/mots/station.mp3",
