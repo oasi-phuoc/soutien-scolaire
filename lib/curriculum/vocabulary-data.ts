@@ -88,6 +88,7 @@ import { V9_TRAIN_THEME } from "./content/francais/vocab-v9-train";
 import { V9_AEROPORT_THEME } from "./content/francais/vocab-v9-aeroport";
 import { V9_HOTEL_THEME } from "./content/francais/vocab-v9-hotel";
 import { V9_PAYSAGE_THEME } from "./content/francais/vocab-v9-paysage";
+import { V10_ANIMAUX_THEME } from "./content/francais/vocab-v10-animaux";
 import { VOCAB_TITLE_PIVOT_OVERRIDES } from "./vocab-theme-pivots";
 import { getVocabThemePivots } from "./vocab-theme-pivots";
 
@@ -144,6 +145,7 @@ export const VOCAB_THEMES: VocabTheme[] = [
   movedTheme(V9_TRAIN_THEME, "V10", "V10.3", "La gare", VOCAB_TITLE_PIVOT_OVERRIDES["v9-train-display"]),
   movedTheme(V9_AEROPORT_THEME, "V10", "V10.4"),
   movedTheme(V9_HOTEL_THEME, "V10", "V10.5"),
+  V10_ANIMAUX_THEME,
 ];
 
 export function getVocabTheme(slug: string): VocabTheme | undefined {

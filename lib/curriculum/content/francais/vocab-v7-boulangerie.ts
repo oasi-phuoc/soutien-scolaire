@@ -16,6 +16,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
     ps: "نانوايي",
   },
   section: "V7",
+  imageFolder: "V10",
   words: [
     {
       word: "pain",

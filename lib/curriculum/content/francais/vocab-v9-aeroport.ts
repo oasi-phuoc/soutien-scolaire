@@ -16,6 +16,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
     ps: "هوايي ډګر",
   },
   section: "V9",
+  imageFolder: "V10",
   words: [
     {
       word: "passeport",
@@ -355,7 +356,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
     },
     {
       word: "avion",
-      image: "avion.webp",
+      image: "/assets/words/vocab/V9/avion.webp",
       article: "l'",
       gender: "m",
       definition: ["Véhicule qui vole dans le ciel et transporte des passagers."],
@@ -1277,12 +1278,22 @@ export const V9_AEROPORT_THEME: VocabTheme = {
         ],
       },
     },
+    {
+      word: "sécurité",
+      image: "securite.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Contrôle pour protéger les voyageurs à l’aéroport."],
+      definitionPivot: { en: "Security checks to protect travelers at the airport.", ar: "الأمن في المطار.", fa: "امنیت فرودگاه.", pt: "Segurança no aeroporto.", so: "Amniga garoonka.", ti: "ድሕንነት ኣብ መዕረፊ ነፈርቲ።", tr: "Havaalanı güvenliği.", ps: "د هوایی ډګر امنیت.", uk: "Безпека в аеропорту." },
+      synonym: [],
+      exampleSentences: { a1: [], a2: ["Nous sommes passés par la sécurité.", "Hier, j'ai attendu à la sécurité.", "Demain, je vais préparer mes affaires pour la sécurité.", "La sécurité a contrôlé mon sac.", "Ils ont suivi les règles de la sécurité.", "Elle a retiré sa ceinture à la sécurité.", "Après la leçon, j'ai utilisé le mot sécurité.", "Nous allons réviser sécurité avant l'évaluation.", "J'ai choisi sécurité dans la liste.", "Pendant l'exercice, j'ai écrit une phrase avec sécurité.", "Le professeur a demandé un exemple avec sécurité.", "J'ai ajouté sécurité dans mon carnet."], b1: ["Bien que la sécurité prenne du temps, elle est nécessaire.", "Comme sécurité apparaît dans cette leçon, je l'ai noté.", "Si je comprends bien la sécurité, je pourrai l'employer.", "Même si je connais déjà sécurité, je dois encore le prononcer.", "Lorsque j'aurai mémorisé sécurité, je l'utiliserai naturellement.", "Puisque sécurité est utile, je le révise régulièrement.", "Le professeur nous demande d'utiliser la sécurité."] },
+    },
   ],
   sentences: [
     { sentence: "Il présente son ___ au contrôle de sécurité.",          answer: "passeport" },
     { sentence: "L'___ commence à la porte 12.",                         answer: "embarquement" },
     { sentence: "Elle fait la queue à l'___ pour enregistrer ses bagages.", answer: "enregistrement" },
     { sentence: "Sa ___ est trop lourde, elle doit payer un supplément.", answer: "valise" },
-    { sentence: "Le ___ Paris-New York fait escale à Londres.",          answer: "vol" },
+    { sentence: "Le ___ Paris-New York fait escale à Londres.",          answer: "vol" }
   ],
 };

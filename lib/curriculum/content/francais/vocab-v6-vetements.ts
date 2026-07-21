@@ -1452,7 +1452,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
       word: "débardeur",
       article: "le",
       gender: "m",
-      image: "t-shirt.webp",
+      image: "debardeur.webp",
       group: "Sous-vêtements",
       definition: ["Vêtement sans manches pour le haut du corps."],
       definitionPivot: {

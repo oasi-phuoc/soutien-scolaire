@@ -19,6 +19,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
   words: [
     {
       word: "médicament",
+      image: "medicament.webp",
       article: "le",
       gender: "m",
       definition: ["Produit que l’on prend pour se soigner."],
@@ -101,6 +102,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "ordonnance",
+      image: "ordonnance.webp",
       article: "l'",
       gender: "f",
       definition: ["Papier du médecin pour obtenir des médicaments ou un traitement."],
@@ -183,6 +185,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "sirop",
+      image: "sirop.webp",
       article: "le",
       gender: "m",
       definition: ["Médicament liquide, souvent pour la toux."],
@@ -265,6 +268,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "comprimé",
+      image: "comprime.webp",
       article: "le",
       gender: "m",
       definition: ["Médicament solide que l’on avale."],
@@ -347,6 +351,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "gélule",
+      image: "gelule.webp",
       article: "la",
       gender: "f",
       definition: ["Médicament dans une petite enveloppe que l’on avale."],
@@ -429,6 +434,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "pommade",
+      image: "pommade.webp",
       article: "la",
       gender: "f",
       definition: ["Produit épais que l’on met sur la peau pour soigner."],
@@ -511,6 +517,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "crème",
+      image: "creme.webp",
       article: "la",
       gender: "f",
       definition: ["Produit que l’on met sur la peau."],
@@ -593,6 +600,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "pansement",
+      image: "pansement.webp",
       article: "le",
       gender: "m",
       definition: ["Protection que l’on met sur une petite blessure."],
@@ -675,6 +683,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "thermomètre",
+      image: "thermometre.webp",
       article: "le",
       gender: "m",
       definition: ["Objet qui sert à mesurer la température du corps."],
@@ -757,6 +766,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "spray",
+      image: "spray.webp",
       article: "le",
       gender: "m",
       definition: ["Produit que l’on vaporise."],
@@ -839,6 +849,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "goutte",
+      image: "goutte.webp",
       article: "la",
       gender: "f",
       definition: ["Petite quantité de liquide, souvent pour les yeux, les oreilles ou le nez."],
@@ -921,6 +932,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "pharmacie",
+      image: "pharmacie.webp",
       article: "la",
       gender: "f",
       definition: ["Lieu où l’on achète des médicaments."],
@@ -1003,6 +1015,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "dosette",
+      image: "dosette.webp",
       article: "la",
       gender: "f",
       definition: ["Petite dose de produit déjà préparée."],
@@ -1085,6 +1098,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "vitamine",
+      image: "vitamine.webp",
       article: "la",
       gender: "f",
       definition: ["Substance utile au corps pour rester en bonne santé."],
@@ -1167,6 +1181,7 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     },
     {
       word: "boîte",
+      image: "boite.webp",
       article: "la",
       gender: "f",
       definition: ["Emballage qui contient un médicament ou un produit."],

@@ -16,6 +16,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
     ps: "هوټل",
   },
   section: "V9",
+  imageFolder: "V10",
   words: [
     {
       word: "réception",
@@ -439,7 +440,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
     },
     {
       word: "piscine",
-      image: "piscine.webp",
+      image: "/assets/words/vocab/V9/piscine.webp",
       article: "la",
       gender: "f",
       definition: ["Bassin rempli d’eau où l’on nage."],
@@ -1277,12 +1278,33 @@ export const V9_HOTEL_THEME: VocabTheme = {
         ],
       },
     },
+    {
+      word: "pension complète",
+      image: "pension-complete.webp",
+      article: "la",
+      gender: "f",
+      definition: ["Formule d’hôtel avec tous les repas inclus."],
+      definitionPivot: { en: "A hotel plan with all meals included.", ar: "إقامة كاملة.", fa: "اقامت کامل.", pt: "Pensão completa.", so: "Hoyga oo dhan.", ti: "ምሉእ መግቢ ዘለዎ ዓየር ሆቴል።", tr: "Tam pansiyon.", ps: "بشپړ پینشن.", uk: "Повний пансіон." },
+      synonym: [],
+      exampleSentences: { a1: [], a2: ["Nous avons choisi la pension complète.", "La pension complète inclut tous les repas.", "Hier, j'ai réservé une pension complète.", "Demain, je vais demander la pension complète.", "Le réceptionniste a proposé la pension complète.", "Elle préfère la pension complète.", "Après la leçon, j'ai utilisé le mot pension complète.", "Nous allons réviser pension complète avant l'évaluation.", "J'ai choisi pension complète dans la liste.", "Pendant l'exercice, j'ai écrit une phrase avec pension complète.", "Le professeur a demandé un exemple avec pension complète.", "J'ai ajouté pension complète dans mon carnet."], b1: ["Bien que la pension complète coûte plus cher, elle est pratique.", "Comme pension complète apparaît dans cette leçon, je l'ai noté.", "Si je comprends bien la pension complète, je pourrai l'employer.", "Même si je connais déjà pension complète, je dois encore le prononcer.", "Lorsque j'aurai mémorisé pension complète, je l'utiliserai naturellement.", "Puisque pension complète est utile, je le révise régulièrement.", "Le professeur nous demande d'utiliser la pension complète."] },
+    },
+    {
+      word: "réceptionniste",
+      image: "receptionniste.webp",
+      article: "le",
+      gender: "m",
+      feminine: "réceptionniste",
+      definition: ["Personne qui accueille les clients à la réception."],
+      definitionPivot: { en: "A person who greets guests at reception.", ar: "موظف الاستقبال.", fa: "پذیرشگر.", pt: "Recepcionista.", so: "Qofka soo dhaweya.", ti: "ናይ ኣቀባብላ ሰራሕተኛ።", tr: "Resepsiyon görevlisi.", ps: "د استقبال کارکوونکی.", uk: "Адміністратор рецепції." },
+      synonym: [],
+      exampleSentences: { a1: [], a2: ["Le réceptionniste a pris nos clés.", "Hier, j'ai parlé au réceptionniste.", "Demain, je vais demander au réceptionniste.", "La réceptionniste a souri aux clients.", "Nous avons remercié le réceptionniste.", "Elle travaille comme réceptionniste.", "Après la leçon, j'ai utilisé le mot réceptionniste.", "Nous allons réviser réceptionniste avant l'évaluation.", "J'ai choisi réceptionniste dans la liste.", "Pendant l'exercice, j'ai écrit une phrase avec réceptionniste.", "Le professeur a demandé un exemple avec réceptionniste.", "J'ai ajouté réceptionniste dans mon carnet."], b1: ["Bien que le réceptionniste soit occupé, il reste poli.", "Comme réceptionniste apparaît dans cette leçon, je l'ai noté.", "Si je comprends bien réceptionniste, je pourrai l'employer.", "Même si je connais déjà réceptionniste, je dois encore le prononcer.", "Lorsque j'aurai mémorisé réceptionniste, je l'utiliserai naturellement.", "Puisque réceptionniste est utile, je le révise régulièrement.", "Le professeur nous demande d'utiliser le réceptionniste."] },
+    },
   ],
   sentences: [
     { sentence: "Il fait une ___ pour deux nuits à l'hôtel.",            answer: "réservation" },
     { sentence: "La ___ vous remettra la clé de votre chambre.",         answer: "réception" },
     { sentence: "Le ___ est servi de 7h à 10h.",                         answer: "petit-déjeuner" },
     { sentence: "Je range mes bijoux dans le ___ de la chambre.",        answer: "coffre-fort" },
-    { sentence: "La chambre est au troisième ___, prenez l'ascenseur.",  answer: "étage" },
+    { sentence: "La chambre est au troisième ___, prenez l'ascenseur.",  answer: "étage" }
   ],
 };

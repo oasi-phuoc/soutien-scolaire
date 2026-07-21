@@ -146,6 +146,7 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
   lesson("V10", "v9-train",               "V10.3", "La gare",                "Vocabulaire de la gare et du train.",                              "vocabulaire"),
   lesson("V10", "v9-aeroport",            "V10.4", "L'aéroport",             "Vocabulaire de l'aéroport et du voyage en avion.",                 "vocabulaire"),
   lesson("V10", "v9-hotel",               "V10.5", "L'hôtel",                "Séjour à l'hôtel et hébergement.",                                 "vocabulaire"),
+  lesson("V10", "v10-animaux",            "V10.6", "Les animaux",            "Animaux domestiques, de la ferme, sauvages et marins.",            "vocabulaire"),
 
 ];
 

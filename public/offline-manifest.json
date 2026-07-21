@@ -1,6 +1,6 @@
 {
-  "version": 1784580926782,
-  "totalBytes": 414056262,
+  "version": 1784612741733,
+  "totalBytes": 416255282,
   "routes": [
     "/",
     "/avant-propos",
@@ -81,6 +81,7 @@
     "/francais/vocabulaire/v1-famille",
     "/francais/vocabulaire/v1-nationalites",
     "/francais/vocabulaire/v1-professions",
+    "/francais/vocabulaire/v10-animaux",
     "/francais/vocabulaire/v2-heure",
     "/francais/vocabulaire/v2-jours-mois-dates",
     "/francais/vocabulaire/v2-meteo",
@@ -6501,6 +6502,7 @@
     "/assets/words/son_f/vocab/V9/ville.mp3",
     "/assets/words/son_f/vocab/V9/voiture.mp3",
     "/assets/words/son_f/vocab/V9/volcan.mp3",
+    "/assets/words/vocab/V1/afghanistan.webp",
     "/assets/words/vocab/V1/age.webp",
     "/assets/words/vocab/V1/allemagne.webp",
     "/assets/words/vocab/V1/angleterre.webp",
@@ -6591,25 +6593,54 @@
     "/assets/words/vocab/V1/travail.webp",
     "/assets/words/vocab/V1/tristesse.webp",
     "/assets/words/vocab/V1/turquie.webp",
+    "/assets/words/vocab/V1/ukraine.webp",
     "/assets/words/vocab/V1/vendeur.webp",
     "/assets/words/vocab/V1/veuf.webp",
+    "/assets/words/vocab/V1/vietnam.webp",
+    "/assets/words/vocab/V10/addition.webp",
+    "/assets/words/vocab/V10/assiette.webp",
+    "/assets/words/vocab/V10/bagage.webp",
     "/assets/words/vocab/V10/baguette.webp",
+    "/assets/words/vocab/V10/biscuit.webp",
+    "/assets/words/vocab/V10/boisson.webp",
     "/assets/words/vocab/V10/brioche.webp",
+    "/assets/words/vocab/V10/carte-d-embarquement.webp",
+    "/assets/words/vocab/V10/chambre-double.webp",
+    "/assets/words/vocab/V10/chambre-simple.webp",
     "/assets/words/vocab/V10/cle.webp",
+    "/assets/words/vocab/V10/couteau.webp",
+    "/assets/words/vocab/V10/couvert.webp",
     "/assets/words/vocab/V10/cuillere.webp",
+    "/assets/words/vocab/V10/demi-pension.webp",
     "/assets/words/vocab/V10/dessert.webp",
+    "/assets/words/vocab/V10/destination.webp",
     "/assets/words/vocab/V10/douane.webp",
     "/assets/words/vocab/V10/eclair.webp",
+    "/assets/words/vocab/V10/embarquement.webp",
     "/assets/words/vocab/V10/fourchette.webp",
+    "/assets/words/vocab/V10/gateau.webp",
+    "/assets/words/vocab/V10/menu.webp",
+    "/assets/words/vocab/V10/pain-au-chocolat.webp",
+    "/assets/words/vocab/V10/pain.webp",
     "/assets/words/vocab/V10/passeport.webp",
     "/assets/words/vocab/V10/patisserie.webp",
+    "/assets/words/vocab/V10/pension-complete.webp",
     "/assets/words/vocab/V10/petit-dejeuner.webp",
     "/assets/words/vocab/V10/plat.webp",
+    "/assets/words/vocab/V10/reception.webp",
+    "/assets/words/vocab/V10/receptionniste.webp",
     "/assets/words/vocab/V10/reservation.webp",
     "/assets/words/vocab/V10/sandwich.webp",
+    "/assets/words/vocab/V10/securite.webp",
     "/assets/words/vocab/V10/serviette.webp",
     "/assets/words/vocab/V10/table.webp",
     "/assets/words/vocab/V10/tarte.webp",
+    "/assets/words/vocab/V10/terminal.webp",
+    "/assets/words/vocab/V10/valise.webp",
+    "/assets/words/vocab/V10/verre.webp",
+    "/assets/words/vocab/V10/viennoiserie.webp",
+    "/assets/words/vocab/V10/visa.webp",
+    "/assets/words/vocab/V10/vol.webp",
     "/assets/words/vocab/V2/annee.webp",
     "/assets/words/vocab/V2/aout.webp",
     "/assets/words/vocab/V2/apres-midi.webp",
@@ -6680,6 +6711,7 @@
     "/assets/words/vocab/V3/football.webp",
     "/assets/words/vocab/V3/gymnastique.webp",
     "/assets/words/vocab/V3/handball.webp",
+    "/assets/words/vocab/V3/hockey.webp",
     "/assets/words/vocab/V3/judo.webp",
     "/assets/words/vocab/V3/natation.webp",
     "/assets/words/vocab/V3/randonnee.webp",
@@ -6694,6 +6726,7 @@
     "/assets/words/vocab/V4/aspirateur.webp",
     "/assets/words/vocab/V4/balcon.webp",
     "/assets/words/vocab/V4/bouilloire.webp",
+    "/assets/words/vocab/V4/buanderie.webp",
     "/assets/words/vocab/V4/bureau.webp",
     "/assets/words/vocab/V4/cabane.webp",
     "/assets/words/vocab/V4/cafetiere.webp",
@@ -6735,6 +6768,7 @@
     "/assets/words/vocab/V4/micro-onde.webp",
     "/assets/words/vocab/V4/miroir.webp",
     "/assets/words/vocab/V4/panne-de-courant.webp",
+    "/assets/words/vocab/V4/pavillon.webp",
     "/assets/words/vocab/V4/place.webp",
     "/assets/words/vocab/V4/plombier.webp",
     "/assets/words/vocab/V4/porte.webp",
@@ -6772,6 +6806,7 @@
     "/assets/words/vocab/V5/chimie.webp",
     "/assets/words/vocab/V5/classe.webp",
     "/assets/words/vocab/V5/classeur.webp",
+    "/assets/words/vocab/V5/colle.webp",
     "/assets/words/vocab/V5/compas.webp",
     "/assets/words/vocab/V5/couloir.webp",
     "/assets/words/vocab/V5/cour.webp",
@@ -6795,6 +6830,7 @@
     "/assets/words/vocab/V5/panneau.webp",
     "/assets/words/vocab/V5/perforatrice.webp",
     "/assets/words/vocab/V5/physique.webp",
+    "/assets/words/vocab/V5/porte-mine.webp",
     "/assets/words/vocab/V5/regle.webp",
     "/assets/words/vocab/V5/sac-a-dos.webp",
     "/assets/words/vocab/V5/salle.webp",
@@ -6833,6 +6869,7 @@
     "/assets/words/vocab/V6/cuir.webp",
     "/assets/words/vocab/V6/culotte.webp",
     "/assets/words/vocab/V6/cyan.svg",
+    "/assets/words/vocab/V6/debardeur.webp",
     "/assets/words/vocab/V6/echarpe.webp",
     "/assets/words/vocab/V6/foulard.webp",
     "/assets/words/vocab/V6/gilet.webp",
@@ -6874,6 +6911,7 @@
     "/assets/words/vocab/V6/vert.svg",
     "/assets/words/vocab/V6/veste.webp",
     "/assets/words/vocab/V6/violet.svg",
+    "/assets/words/vocab/V7/a-point.webp",
     "/assets/words/vocab/V7/abricot.webp",
     "/assets/words/vocab/V7/ail.webp",
     "/assets/words/vocab/V7/ananas.webp",
@@ -6883,6 +6921,9 @@
     "/assets/words/vocab/V7/banane.webp",
     "/assets/words/vocab/V7/betterave.webp",
     "/assets/words/vocab/V7/beurre.webp",
+    "/assets/words/vocab/V7/bien-cuit.webp",
+    "/assets/words/vocab/V7/bleu.webp",
+    "/assets/words/vocab/V7/bocal.webp",
     "/assets/words/vocab/V7/boite.webp",
     "/assets/words/vocab/V7/bol.webp",
     "/assets/words/vocab/V7/bouillir.webp",
@@ -6895,6 +6936,7 @@
     "/assets/words/vocab/V7/chou.webp",
     "/assets/words/vocab/V7/citron.webp",
     "/assets/words/vocab/V7/concombre.webp",
+    "/assets/words/vocab/V7/conserve.webp",
     "/assets/words/vocab/V7/couper.webp",
     "/assets/words/vocab/V7/courgette.webp",
     "/assets/words/vocab/V7/cuire.webp",
@@ -6902,6 +6944,7 @@
     "/assets/words/vocab/V7/curry.webp",
     "/assets/words/vocab/V7/doseur.webp",
     "/assets/words/vocab/V7/echalotte.webp",
+    "/assets/words/vocab/V7/egoutter.webp",
     "/assets/words/vocab/V7/epice.webp",
     "/assets/words/vocab/V7/epinard.webp",
     "/assets/words/vocab/V7/eplucher.webp",
@@ -6946,13 +6989,16 @@
     "/assets/words/vocab/V7/poivron.webp",
     "/assets/words/vocab/V7/pomme-de-terre.webp",
     "/assets/words/vocab/V7/pomme.webp",
+    "/assets/words/vocab/V7/pot.webp",
     "/assets/words/vocab/V7/prune.webp",
     "/assets/words/vocab/V7/radis.webp",
     "/assets/words/vocab/V7/raisin.webp",
+    "/assets/words/vocab/V7/recette.webp",
     "/assets/words/vocab/V7/rechauffer.webp",
     "/assets/words/vocab/V7/rotir.webp",
     "/assets/words/vocab/V7/rouleau.webp",
     "/assets/words/vocab/V7/sachet.webp",
+    "/assets/words/vocab/V7/saignant.webp",
     "/assets/words/vocab/V7/salade.webp",
     "/assets/words/vocab/V7/saler.webp",
     "/assets/words/vocab/V7/sel.webp",
@@ -6965,10 +7011,12 @@
     "/assets/words/vocab/V7/verser.webp",
     "/assets/words/vocab/V8/allergie.webp",
     "/assets/words/vocab/V8/blessure.webp",
+    "/assets/words/vocab/V8/boite.webp",
     "/assets/words/vocab/V8/bouche.webp",
     "/assets/words/vocab/V8/bras.webp",
     "/assets/words/vocab/V8/brulure.webp",
     "/assets/words/vocab/V8/chirurgien.webp",
+    "/assets/words/vocab/V8/comprime.webp",
     "/assets/words/vocab/V8/consultation.webp",
     "/assets/words/vocab/V8/cou.webp",
     "/assets/words/vocab/V8/coupure.webp",
@@ -6977,11 +7025,14 @@
     "/assets/words/vocab/V8/dentiste.webp",
     "/assets/words/vocab/V8/doigt.webp",
     "/assets/words/vocab/V8/dos.webp",
+    "/assets/words/vocab/V8/dosette.webp",
     "/assets/words/vocab/V8/douleur.webp",
     "/assets/words/vocab/V8/epaule.webp",
     "/assets/words/vocab/V8/fievre.webp",
     "/assets/words/vocab/V8/fracture.webp",
+    "/assets/words/vocab/V8/gelule.webp",
     "/assets/words/vocab/V8/genou.webp",
+    "/assets/words/vocab/V8/goutte.webp",
     "/assets/words/vocab/V8/grippe.webp",
     "/assets/words/vocab/V8/infirmier.webp",
     "/assets/words/vocab/V8/jambe.webp",
@@ -6995,23 +7046,31 @@
     "/assets/words/vocab/V8/ophtalmologue.webp",
     "/assets/words/vocab/V8/ordonnance.webp",
     "/assets/words/vocab/V8/oreille.webp",
+    "/assets/words/vocab/V8/pansement.webp",
     "/assets/words/vocab/V8/pediatre.webp",
     "/assets/words/vocab/V8/pharmacie.webp",
     "/assets/words/vocab/V8/pharmacien.webp",
     "/assets/words/vocab/V8/pied.webp",
+    "/assets/words/vocab/V8/pommade.webp",
     "/assets/words/vocab/V8/rendez-vous.webp",
     "/assets/words/vocab/V8/rhume.webp",
     "/assets/words/vocab/V8/salle-d-attente.webp",
     "/assets/words/vocab/V8/sirop.webp",
+    "/assets/words/vocab/V8/spray.webp",
     "/assets/words/vocab/V8/tete.webp",
+    "/assets/words/vocab/V8/thermometre.webp",
     "/assets/words/vocab/V8/toux.webp",
     "/assets/words/vocab/V8/urgentiste.webp",
     "/assets/words/vocab/V8/ventre.webp",
     "/assets/words/vocab/V8/vitamine.webp",
+    "/assets/words/vocab/V9/abeille.webp",
     "/assets/words/vocab/V9/acteur.webp",
     "/assets/words/vocab/V9/aeroport.webp",
+    "/assets/words/vocab/V9/aigle.webp",
     "/assets/words/vocab/V9/au-bout-de.webp",
+    "/assets/words/vocab/V9/avenue.webp",
     "/assets/words/vocab/V9/avion.webp",
+    "/assets/words/vocab/V9/baleine.webp",
     "/assets/words/vocab/V9/banque.webp",
     "/assets/words/vocab/V9/bateau.webp",
     "/assets/words/vocab/V9/bibliotheque.webp",
@@ -7020,49 +7079,84 @@
     "/assets/words/vocab/V9/bus.webp",
     "/assets/words/vocab/V9/camion.webp",
     "/assets/words/vocab/V9/campagne.webp",
+    "/assets/words/vocab/V9/canard.webp",
+    "/assets/words/vocab/V9/carrefour.webp",
+    "/assets/words/vocab/V9/centre-ville.webp",
     "/assets/words/vocab/V9/chanteur.webp",
+    "/assets/words/vocab/V9/chat.webp",
+    "/assets/words/vocab/V9/cheval.webp",
+    "/assets/words/vocab/V9/chien.webp",
     "/assets/words/vocab/V9/cinema.webp",
+    "/assets/words/vocab/V9/cochon.webp",
     "/assets/words/vocab/V9/coiffeur.webp",
     "/assets/words/vocab/V9/colline.webp",
     "/assets/words/vocab/V9/commissariat.webp",
     "/assets/words/vocab/V9/concert.webp",
+    "/assets/words/vocab/V9/coq.webp",
     "/assets/words/vocab/V9/cote.webp",
+    "/assets/words/vocab/V9/cygne.webp",
     "/assets/words/vocab/V9/danseur.webp",
+    "/assets/words/vocab/V9/dauphin.webp",
     "/assets/words/vocab/V9/desert.webp",
     "/assets/words/vocab/V9/droite.webp",
     "/assets/words/vocab/V9/eglise.webp",
+    "/assets/words/vocab/V9/elephant.webp",
     "/assets/words/vocab/V9/est.webp",
     "/assets/words/vocab/V9/exposition.webp",
     "/assets/words/vocab/V9/festival.webp",
+    "/assets/words/vocab/V9/feu.webp",
     "/assets/words/vocab/V9/foret.webp",
     "/assets/words/vocab/V9/gare.webp",
     "/assets/words/vocab/V9/gauche.webp",
+    "/assets/words/vocab/V9/girafe.webp",
+    "/assets/words/vocab/V9/gorille.webp",
+    "/assets/words/vocab/V9/hibou.webp",
     "/assets/words/vocab/V9/hopital.webp",
+    "/assets/words/vocab/V9/ibis.webp",
     "/assets/words/vocab/V9/ici.webp",
     "/assets/words/vocab/V9/ile.webp",
     "/assets/words/vocab/V9/jusqu-a.webp",
+    "/assets/words/vocab/V9/kangourou.webp",
+    "/assets/words/vocab/V9/koala.webp",
     "/assets/words/vocab/V9/la-bas.webp",
     "/assets/words/vocab/V9/lac.webp",
+    "/assets/words/vocab/V9/lapin.webp",
     "/assets/words/vocab/V9/librairie.webp",
+    "/assets/words/vocab/V9/lion.webp",
+    "/assets/words/vocab/V9/loup.webp",
     "/assets/words/vocab/V9/magasin.webp",
     "/assets/words/vocab/V9/marche.webp",
     "/assets/words/vocab/V9/mer.webp",
     "/assets/words/vocab/V9/metro.webp",
     "/assets/words/vocab/V9/montagne.webp",
     "/assets/words/vocab/V9/moto.webp",
+    "/assets/words/vocab/V9/mouton.webp",
     "/assets/words/vocab/V9/musee.webp",
     "/assets/words/vocab/V9/musicien.webp",
     "/assets/words/vocab/V9/nord.webp",
     "/assets/words/vocab/V9/ocean.webp",
     "/assets/words/vocab/V9/ouest.webp",
+    "/assets/words/vocab/V9/ours.webp",
+    "/assets/words/vocab/V9/panda.webp",
+    "/assets/words/vocab/V9/panneau.webp",
     "/assets/words/vocab/V9/papeterie.webp",
+    "/assets/words/vocab/V9/parc.webp",
     "/assets/words/vocab/V9/passage-pieton.webp",
     "/assets/words/vocab/V9/peintre.webp",
+    "/assets/words/vocab/V9/pharmacie.webp",
     "/assets/words/vocab/V9/piscine.webp",
+    "/assets/words/vocab/V9/place.webp",
     "/assets/words/vocab/V9/plage.webp",
+    "/assets/words/vocab/V9/poisson.webp",
     "/assets/words/vocab/V9/poste.webp",
+    "/assets/words/vocab/V9/poule.webp",
+    "/assets/words/vocab/V9/quartier.webp",
+    "/assets/words/vocab/V9/rat.webp",
+    "/assets/words/vocab/V9/renard.webp",
+    "/assets/words/vocab/V9/requin.webp",
     "/assets/words/vocab/V9/restaurant.webp",
     "/assets/words/vocab/V9/riviere.webp",
+    "/assets/words/vocab/V9/rond-point.webp",
     "/assets/words/vocab/V9/rue.webp",
     "/assets/words/vocab/V9/salle-de-sport.webp",
     "/assets/words/vocab/V9/scene.webp",
@@ -7077,8 +7171,10 @@
     "/assets/words/vocab/V9/tram.webp",
     "/assets/words/vocab/V9/tribunal.webp",
     "/assets/words/vocab/V9/vallee.webp",
+    "/assets/words/vocab/V9/ville.webp",
     "/assets/words/vocab/V9/voiture.webp",
     "/assets/words/vocab/V9/volcan.webp",
+    "/assets/words/vocab/V9/zebre.webp",
     "/audio/nombres/centaine/100.mp3",
     "/audio/nombres/centaine/200.mp3",
     "/audio/nombres/centaine/300.mp3",
@@ -37843,6 +37939,11 @@
       "revision": "032a20e637c25060"
     },
     {
+      "url": "/assets/words/vocab/V1/afghanistan.webp",
+      "size": 58552,
+      "revision": "a76fdc28858a7334"
+    },
+    {
       "url": "/assets/words/vocab/V1/age.webp",
       "size": 29850,
       "revision": "848ee560ae7a12bc"
@@ -38224,8 +38325,8 @@
     },
     {
       "url": "/assets/words/vocab/V1/russie.webp",
-      "size": 12360,
-      "revision": "5a5cc8806a3c7adb"
+      "size": 76818,
+      "revision": "da606a6841998f9e"
     },
     {
       "url": "/assets/words/vocab/V1/secretaire.webp",
@@ -38293,6 +38394,11 @@
       "revision": "c9ddfd900b6e8b9b"
     },
     {
+      "url": "/assets/words/vocab/V1/ukraine.webp",
+      "size": 27198,
+      "revision": "0c640128f3c8722a"
+    },
+    {
       "url": "/assets/words/vocab/V1/vendeur.webp",
       "size": 41948,
       "revision": "0f2159cfcb3d78a3"
@@ -38303,9 +38409,39 @@
       "revision": "6d9027c2e2af6f4a"
     },
     {
+      "url": "/assets/words/vocab/V1/vietnam.webp",
+      "size": 22836,
+      "revision": "f11af03c098e5c66"
+    },
+    {
+      "url": "/assets/words/vocab/V10/addition.webp",
+      "size": 12588,
+      "revision": "6b9cd00ec4fd8f20"
+    },
+    {
+      "url": "/assets/words/vocab/V10/assiette.webp",
+      "size": 2288,
+      "revision": "16757b567d42db79"
+    },
+    {
+      "url": "/assets/words/vocab/V10/bagage.webp",
+      "size": 34768,
+      "revision": "d52d57df90c964b7"
+    },
+    {
       "url": "/assets/words/vocab/V10/baguette.webp",
       "size": 16064,
       "revision": "8c0406bfb91d7d64"
+    },
+    {
+      "url": "/assets/words/vocab/V10/biscuit.webp",
+      "size": 19854,
+      "revision": "e1287a78c7836ead"
+    },
+    {
+      "url": "/assets/words/vocab/V10/boisson.webp",
+      "size": 12450,
+      "revision": "e597b26ac9ee76f3"
     },
     {
       "url": "/assets/words/vocab/V10/brioche.webp",
@@ -38313,9 +38449,34 @@
       "revision": "dba65f36a6445299"
     },
     {
+      "url": "/assets/words/vocab/V10/carte-d-embarquement.webp",
+      "size": 35172,
+      "revision": "8be2f286ca57c01b"
+    },
+    {
+      "url": "/assets/words/vocab/V10/chambre-double.webp",
+      "size": 25832,
+      "revision": "914fd97b26b1ebdf"
+    },
+    {
+      "url": "/assets/words/vocab/V10/chambre-simple.webp",
+      "size": 21678,
+      "revision": "0be6ae11298bfc04"
+    },
+    {
       "url": "/assets/words/vocab/V10/cle.webp",
       "size": 24374,
       "revision": "671b1d4fc78786ff"
+    },
+    {
+      "url": "/assets/words/vocab/V10/couteau.webp",
+      "size": 3398,
+      "revision": "71dcee97fe6503d3"
+    },
+    {
+      "url": "/assets/words/vocab/V10/couvert.webp",
+      "size": 7060,
+      "revision": "cdb785559a100cab"
     },
     {
       "url": "/assets/words/vocab/V10/cuillere.webp",
@@ -38323,9 +38484,19 @@
       "revision": "5a737c5a38bcdcdd"
     },
     {
+      "url": "/assets/words/vocab/V10/demi-pension.webp",
+      "size": 33484,
+      "revision": "4a2f7d2c57c25b7c"
+    },
+    {
       "url": "/assets/words/vocab/V10/dessert.webp",
       "size": 28724,
       "revision": "fc3c57b66b5f1f43"
+    },
+    {
+      "url": "/assets/words/vocab/V10/destination.webp",
+      "size": 30832,
+      "revision": "a59d0c8248695dfc"
     },
     {
       "url": "/assets/words/vocab/V10/douane.webp",
@@ -38338,9 +38509,34 @@
       "revision": "e4025dff3187957f"
     },
     {
+      "url": "/assets/words/vocab/V10/embarquement.webp",
+      "size": 19554,
+      "revision": "2082962ca034cd15"
+    },
+    {
       "url": "/assets/words/vocab/V10/fourchette.webp",
       "size": 5752,
       "revision": "dfc05de144cb2215"
+    },
+    {
+      "url": "/assets/words/vocab/V10/gateau.webp",
+      "size": 33300,
+      "revision": "23c66550fe8212a9"
+    },
+    {
+      "url": "/assets/words/vocab/V10/menu.webp",
+      "size": 7316,
+      "revision": "5d804d4f639ada20"
+    },
+    {
+      "url": "/assets/words/vocab/V10/pain-au-chocolat.webp",
+      "size": 30454,
+      "revision": "d5bf1f9d79bbe981"
+    },
+    {
+      "url": "/assets/words/vocab/V10/pain.webp",
+      "size": 42608,
+      "revision": "baf6a51775fd279a"
     },
     {
       "url": "/assets/words/vocab/V10/passeport.webp",
@@ -38353,6 +38549,11 @@
       "revision": "a5b22e3521efa311"
     },
     {
+      "url": "/assets/words/vocab/V10/pension-complete.webp",
+      "size": 34940,
+      "revision": "841edf55336568dd"
+    },
+    {
       "url": "/assets/words/vocab/V10/petit-dejeuner.webp",
       "size": 34938,
       "revision": "90097c6d21d73769"
@@ -38363,6 +38564,16 @@
       "revision": "6bd1732e4ef9e7ff"
     },
     {
+      "url": "/assets/words/vocab/V10/reception.webp",
+      "size": 29582,
+      "revision": "67e7509e82ec3a73"
+    },
+    {
+      "url": "/assets/words/vocab/V10/receptionniste.webp",
+      "size": 21908,
+      "revision": "340bd4cd5ab4a909"
+    },
+    {
       "url": "/assets/words/vocab/V10/reservation.webp",
       "size": 28144,
       "revision": "864ecaea18ba5693"
@@ -38371,6 +38582,11 @@
       "url": "/assets/words/vocab/V10/sandwich.webp",
       "size": 27854,
       "revision": "5e7332287764846a"
+    },
+    {
+      "url": "/assets/words/vocab/V10/securite.webp",
+      "size": 28522,
+      "revision": "33b1aee71acf053e"
     },
     {
       "url": "/assets/words/vocab/V10/serviette.webp",
@@ -38386,6 +38602,36 @@
       "url": "/assets/words/vocab/V10/tarte.webp",
       "size": 37806,
       "revision": "bed601547c1202d4"
+    },
+    {
+      "url": "/assets/words/vocab/V10/terminal.webp",
+      "size": 29802,
+      "revision": "7398216d86683f49"
+    },
+    {
+      "url": "/assets/words/vocab/V10/valise.webp",
+      "size": 16100,
+      "revision": "324fc21bebf617df"
+    },
+    {
+      "url": "/assets/words/vocab/V10/verre.webp",
+      "size": 5776,
+      "revision": "e71b690fe4c4a782"
+    },
+    {
+      "url": "/assets/words/vocab/V10/viennoiserie.webp",
+      "size": 42144,
+      "revision": "096888ae4f7895ae"
+    },
+    {
+      "url": "/assets/words/vocab/V10/visa.webp",
+      "size": 33052,
+      "revision": "820ce9a5b402d869"
+    },
+    {
+      "url": "/assets/words/vocab/V10/vol.webp",
+      "size": 21152,
+      "revision": "172148328a5db854"
     },
     {
       "url": "/assets/words/vocab/V2/annee.webp",
@@ -38738,6 +38984,11 @@
       "revision": "fa731e97fbdb91f6"
     },
     {
+      "url": "/assets/words/vocab/V3/hockey.webp",
+      "size": 12300,
+      "revision": "cc452bb6a4db5909"
+    },
+    {
       "url": "/assets/words/vocab/V3/judo.webp",
       "size": 9020,
       "revision": "2c3089a9dc7243db"
@@ -38779,8 +39030,8 @@
     },
     {
       "url": "/assets/words/vocab/V4/ampoule.webp",
-      "size": 15514,
-      "revision": "06d3a265d0441996"
+      "size": 9136,
+      "revision": "722459b8d3e413d1"
     },
     {
       "url": "/assets/words/vocab/V4/appartement.webp",
@@ -38806,6 +39057,11 @@
       "url": "/assets/words/vocab/V4/bouilloire.webp",
       "size": 5492,
       "revision": "6d15d3b526893f1c"
+    },
+    {
+      "url": "/assets/words/vocab/V4/buanderie.webp",
+      "size": 24548,
+      "revision": "34c56247d228c241"
     },
     {
       "url": "/assets/words/vocab/V4/bureau.webp",
@@ -39013,6 +39269,11 @@
       "revision": "cf533921f5cbc691"
     },
     {
+      "url": "/assets/words/vocab/V4/pavillon.webp",
+      "size": 110594,
+      "revision": "210fea6023be07bf"
+    },
+    {
       "url": "/assets/words/vocab/V4/place.webp",
       "size": 48282,
       "revision": "b5f46a31e1b0b968"
@@ -39198,6 +39459,11 @@
       "revision": "a4542d927f070766"
     },
     {
+      "url": "/assets/words/vocab/V5/colle.webp",
+      "size": 2548,
+      "revision": "bfb80c4d47ea93f5"
+    },
+    {
       "url": "/assets/words/vocab/V5/compas.webp",
       "size": 5384,
       "revision": "a1da71ba79d9f349"
@@ -39311,6 +39577,11 @@
       "url": "/assets/words/vocab/V5/physique.webp",
       "size": 36230,
       "revision": "03af185caecd5d53"
+    },
+    {
+      "url": "/assets/words/vocab/V5/porte-mine.webp",
+      "size": 4340,
+      "revision": "ce27f6c86b48cf4d"
     },
     {
       "url": "/assets/words/vocab/V5/regle.webp",
@@ -39501,6 +39772,11 @@
       "url": "/assets/words/vocab/V6/cyan.svg",
       "size": 322,
       "revision": "eb3d86ef21696591"
+    },
+    {
+      "url": "/assets/words/vocab/V6/debardeur.webp",
+      "size": 1926,
+      "revision": "7fd65119c885370a"
     },
     {
       "url": "/assets/words/vocab/V6/echarpe.webp",
@@ -39708,6 +39984,11 @@
       "revision": "6cc1b4657d9e9614"
     },
     {
+      "url": "/assets/words/vocab/V7/a-point.webp",
+      "size": 33166,
+      "revision": "207e229b2fdbb40a"
+    },
+    {
       "url": "/assets/words/vocab/V7/abricot.webp",
       "size": 25884,
       "revision": "e06f033b5c0389e6"
@@ -39751,6 +40032,21 @@
       "url": "/assets/words/vocab/V7/beurre.webp",
       "size": 6380,
       "revision": "af08191f4aa4bd25"
+    },
+    {
+      "url": "/assets/words/vocab/V7/bien-cuit.webp",
+      "size": 38700,
+      "revision": "924573808c96bec7"
+    },
+    {
+      "url": "/assets/words/vocab/V7/bleu.webp",
+      "size": 35384,
+      "revision": "b77c73a5237083c1"
+    },
+    {
+      "url": "/assets/words/vocab/V7/bocal.webp",
+      "size": 9202,
+      "revision": "61011b0e57c15c15"
     },
     {
       "url": "/assets/words/vocab/V7/boite.webp",
@@ -39813,6 +40109,11 @@
       "revision": "e436a4d40af1709b"
     },
     {
+      "url": "/assets/words/vocab/V7/conserve.webp",
+      "size": 7038,
+      "revision": "44c833d8e34ae42b"
+    },
+    {
       "url": "/assets/words/vocab/V7/couper.webp",
       "size": 20772,
       "revision": "80ab72b10945d931"
@@ -39846,6 +40147,11 @@
       "url": "/assets/words/vocab/V7/echalotte.webp",
       "size": 13124,
       "revision": "d3c2fbb5ef783219"
+    },
+    {
+      "url": "/assets/words/vocab/V7/egoutter.webp",
+      "size": 21518,
+      "revision": "860653661c13cda1"
     },
     {
       "url": "/assets/words/vocab/V7/epice.webp",
@@ -40068,6 +40374,11 @@
       "revision": "2917d74b738562bd"
     },
     {
+      "url": "/assets/words/vocab/V7/pot.webp",
+      "size": 3904,
+      "revision": "da96328a2ca34564"
+    },
+    {
       "url": "/assets/words/vocab/V7/prune.webp",
       "size": 14798,
       "revision": "34e8b66aaf267a5a"
@@ -40081,6 +40392,11 @@
       "url": "/assets/words/vocab/V7/raisin.webp",
       "size": 30686,
       "revision": "203256d37e306d97"
+    },
+    {
+      "url": "/assets/words/vocab/V7/recette.webp",
+      "size": 34872,
+      "revision": "71bc3b3d191bdf10"
     },
     {
       "url": "/assets/words/vocab/V7/rechauffer.webp",
@@ -40101,6 +40417,11 @@
       "url": "/assets/words/vocab/V7/sachet.webp",
       "size": 1994,
       "revision": "f8f7d95658aafc43"
+    },
+    {
+      "url": "/assets/words/vocab/V7/saignant.webp",
+      "size": 31320,
+      "revision": "a98fb4c00a667819"
     },
     {
       "url": "/assets/words/vocab/V7/salade.webp",
@@ -40163,6 +40484,11 @@
       "revision": "c048a6ae332e4a61"
     },
     {
+      "url": "/assets/words/vocab/V8/boite.webp",
+      "size": 2856,
+      "revision": "d17ff8bec76151ff"
+    },
+    {
       "url": "/assets/words/vocab/V8/bouche.webp",
       "size": 10278,
       "revision": "88731b5ce0bc7d64"
@@ -40181,6 +40507,11 @@
       "url": "/assets/words/vocab/V8/chirurgien.webp",
       "size": 24204,
       "revision": "13a5dd5175e94c30"
+    },
+    {
+      "url": "/assets/words/vocab/V8/comprime.webp",
+      "size": 2902,
+      "revision": "b200a119a35621ae"
     },
     {
       "url": "/assets/words/vocab/V8/consultation.webp",
@@ -40223,6 +40554,11 @@
       "revision": "16c4d0aeb2e87f48"
     },
     {
+      "url": "/assets/words/vocab/V8/dosette.webp",
+      "size": 9160,
+      "revision": "f2963b5e76e21820"
+    },
+    {
       "url": "/assets/words/vocab/V8/douleur.webp",
       "size": 11284,
       "revision": "3296ffb188f7386c"
@@ -40243,9 +40579,19 @@
       "revision": "ed7ce27098ca1bf6"
     },
     {
+      "url": "/assets/words/vocab/V8/gelule.webp",
+      "size": 7602,
+      "revision": "9fc21bffa6f83fcd"
+    },
+    {
       "url": "/assets/words/vocab/V8/genou.webp",
       "size": 6304,
       "revision": "9376853ce003d1dd"
+    },
+    {
+      "url": "/assets/words/vocab/V8/goutte.webp",
+      "size": 4306,
+      "revision": "080d6f531ec29a61"
     },
     {
       "url": "/assets/words/vocab/V8/grippe.webp",
@@ -40313,6 +40659,11 @@
       "revision": "eb77d7f0c5dd0ce5"
     },
     {
+      "url": "/assets/words/vocab/V8/pansement.webp",
+      "size": 5354,
+      "revision": "b081315f5f52a518"
+    },
+    {
       "url": "/assets/words/vocab/V8/pediatre.webp",
       "size": 19860,
       "revision": "7abdf68cb1b726ea"
@@ -40331,6 +40682,11 @@
       "url": "/assets/words/vocab/V8/pied.webp",
       "size": 4888,
       "revision": "cf4b4e6d3c2d876b"
+    },
+    {
+      "url": "/assets/words/vocab/V8/pommade.webp",
+      "size": 10796,
+      "revision": "2591d6692cbe0076"
     },
     {
       "url": "/assets/words/vocab/V8/rendez-vous.webp",
@@ -40353,9 +40709,19 @@
       "revision": "b8f055e41b179582"
     },
     {
+      "url": "/assets/words/vocab/V8/spray.webp",
+      "size": 1730,
+      "revision": "e2083730f81bc2fc"
+    },
+    {
       "url": "/assets/words/vocab/V8/tete.webp",
       "size": 12416,
       "revision": "ed0ad8da6f3d436c"
+    },
+    {
+      "url": "/assets/words/vocab/V8/thermometre.webp",
+      "size": 1510,
+      "revision": "7d36faa7bc545c06"
     },
     {
       "url": "/assets/words/vocab/V8/toux.webp",
@@ -40378,6 +40744,11 @@
       "revision": "c74928362496562f"
     },
     {
+      "url": "/assets/words/vocab/V9/abeille.webp",
+      "size": 17596,
+      "revision": "6227a9f489f50d1d"
+    },
+    {
       "url": "/assets/words/vocab/V9/acteur.webp",
       "size": 14042,
       "revision": "2108467b7b56392f"
@@ -40388,14 +40759,29 @@
       "revision": "4eaf78a5925092d5"
     },
     {
+      "url": "/assets/words/vocab/V9/aigle.webp",
+      "size": 20554,
+      "revision": "2a2cd74538490783"
+    },
+    {
       "url": "/assets/words/vocab/V9/au-bout-de.webp",
       "size": 12926,
       "revision": "f4ce9ff78e65f475"
     },
     {
+      "url": "/assets/words/vocab/V9/avenue.webp",
+      "size": 41332,
+      "revision": "a492eddbb673e412"
+    },
+    {
       "url": "/assets/words/vocab/V9/avion.webp",
       "size": 8388,
       "revision": "c8621a5aa4908c50"
+    },
+    {
+      "url": "/assets/words/vocab/V9/baleine.webp",
+      "size": 14618,
+      "revision": "8b9595c8995cb5fc"
     },
     {
       "url": "/assets/words/vocab/V9/banque.webp",
@@ -40438,14 +40824,49 @@
       "revision": "51bce6147552e7cc"
     },
     {
+      "url": "/assets/words/vocab/V9/canard.webp",
+      "size": 15806,
+      "revision": "3f80da056101fbef"
+    },
+    {
+      "url": "/assets/words/vocab/V9/carrefour.webp",
+      "size": 34060,
+      "revision": "7b888fc3cc5ec606"
+    },
+    {
+      "url": "/assets/words/vocab/V9/centre-ville.webp",
+      "size": 56412,
+      "revision": "c7587208277327ca"
+    },
+    {
       "url": "/assets/words/vocab/V9/chanteur.webp",
       "size": 17600,
       "revision": "2302697d0e095987"
     },
     {
+      "url": "/assets/words/vocab/V9/chat.webp",
+      "size": 13680,
+      "revision": "c98b7058329fcf5f"
+    },
+    {
+      "url": "/assets/words/vocab/V9/cheval.webp",
+      "size": 12748,
+      "revision": "1999d5d834e33fe8"
+    },
+    {
+      "url": "/assets/words/vocab/V9/chien.webp",
+      "size": 12518,
+      "revision": "9f93971fb6808389"
+    },
+    {
       "url": "/assets/words/vocab/V9/cinema.webp",
       "size": 45200,
       "revision": "e5b01f0a8a960030"
+    },
+    {
+      "url": "/assets/words/vocab/V9/cochon.webp",
+      "size": 4570,
+      "revision": "d0bfede52d5e41d6"
     },
     {
       "url": "/assets/words/vocab/V9/coiffeur.webp",
@@ -40468,14 +40889,29 @@
       "revision": "2fbb92ee75ca01dd"
     },
     {
+      "url": "/assets/words/vocab/V9/coq.webp",
+      "size": 14040,
+      "revision": "41ce4a808bdb8632"
+    },
+    {
       "url": "/assets/words/vocab/V9/cote.webp",
       "size": 44188,
       "revision": "44074969589834ed"
     },
     {
+      "url": "/assets/words/vocab/V9/cygne.webp",
+      "size": 10618,
+      "revision": "c6803d251fbdfe3b"
+    },
+    {
       "url": "/assets/words/vocab/V9/danseur.webp",
       "size": 14820,
       "revision": "3823069f1d6f5b1e"
+    },
+    {
+      "url": "/assets/words/vocab/V9/dauphin.webp",
+      "size": 9538,
+      "revision": "705fff438c357097"
     },
     {
       "url": "/assets/words/vocab/V9/desert.webp",
@@ -40493,6 +40929,11 @@
       "revision": "c49ac94a4a22d3ef"
     },
     {
+      "url": "/assets/words/vocab/V9/elephant.webp",
+      "size": 19756,
+      "revision": "fcf854feb67122b3"
+    },
+    {
       "url": "/assets/words/vocab/V9/est.webp",
       "size": 27018,
       "revision": "49a6e20d2b49a1ce"
@@ -40506,6 +40947,11 @@
       "url": "/assets/words/vocab/V9/festival.webp",
       "size": 43114,
       "revision": "24befa0717cec2b3"
+    },
+    {
+      "url": "/assets/words/vocab/V9/feu.webp",
+      "size": 11994,
+      "revision": "9f09deaba3a327ea"
     },
     {
       "url": "/assets/words/vocab/V9/foret.webp",
@@ -40523,9 +40969,29 @@
       "revision": "8759ba69d54106f3"
     },
     {
+      "url": "/assets/words/vocab/V9/girafe.webp",
+      "size": 21112,
+      "revision": "061523a26fa7c4d7"
+    },
+    {
+      "url": "/assets/words/vocab/V9/gorille.webp",
+      "size": 10774,
+      "revision": "c693da2ea48071f6"
+    },
+    {
+      "url": "/assets/words/vocab/V9/hibou.webp",
+      "size": 42436,
+      "revision": "593c13d5c8a1acfe"
+    },
+    {
       "url": "/assets/words/vocab/V9/hopital.webp",
       "size": 33996,
       "revision": "8cc6b967c5313301"
+    },
+    {
+      "url": "/assets/words/vocab/V9/ibis.webp",
+      "size": 11150,
+      "revision": "213daf6d491a8ce5"
     },
     {
       "url": "/assets/words/vocab/V9/ici.webp",
@@ -40543,6 +41009,16 @@
       "revision": "9a75e2d98ede6932"
     },
     {
+      "url": "/assets/words/vocab/V9/kangourou.webp",
+      "size": 14872,
+      "revision": "bc3f6edb046aef4d"
+    },
+    {
+      "url": "/assets/words/vocab/V9/koala.webp",
+      "size": 36214,
+      "revision": "c2b7b37d94c7bcbb"
+    },
+    {
       "url": "/assets/words/vocab/V9/la-bas.webp",
       "size": 13256,
       "revision": "a9aae5bfe1586af1"
@@ -40553,9 +41029,24 @@
       "revision": "93a487a01a8093e1"
     },
     {
+      "url": "/assets/words/vocab/V9/lapin.webp",
+      "size": 11120,
+      "revision": "314dfd89d1239321"
+    },
+    {
       "url": "/assets/words/vocab/V9/librairie.webp",
       "size": 151922,
       "revision": "552505f1d29ab1f6"
+    },
+    {
+      "url": "/assets/words/vocab/V9/lion.webp",
+      "size": 33618,
+      "revision": "45a64b0290831592"
+    },
+    {
+      "url": "/assets/words/vocab/V9/loup.webp",
+      "size": 19540,
+      "revision": "7a6c2b921ed1ad8d"
     },
     {
       "url": "/assets/words/vocab/V9/magasin.webp",
@@ -40588,6 +41079,11 @@
       "revision": "70e89b6261e6ce52"
     },
     {
+      "url": "/assets/words/vocab/V9/mouton.webp",
+      "size": 31096,
+      "revision": "2938c6d7f1b11758"
+    },
+    {
       "url": "/assets/words/vocab/V9/musee.webp",
       "size": 114784,
       "revision": "c3e99a72421e3c6f"
@@ -40613,9 +41109,29 @@
       "revision": "2848ffec8f972adb"
     },
     {
+      "url": "/assets/words/vocab/V9/ours.webp",
+      "size": 11102,
+      "revision": "5be79a169ad1e9af"
+    },
+    {
+      "url": "/assets/words/vocab/V9/panda.webp",
+      "size": 27088,
+      "revision": "d2de4fad16ae0c92"
+    },
+    {
+      "url": "/assets/words/vocab/V9/panneau.webp",
+      "size": 8404,
+      "revision": "a9dd8e1f996e415e"
+    },
+    {
       "url": "/assets/words/vocab/V9/papeterie.webp",
       "size": 103386,
       "revision": "44a20cab2e01bdff"
+    },
+    {
+      "url": "/assets/words/vocab/V9/parc.webp",
+      "size": 43188,
+      "revision": "f70dde044edefb5b"
     },
     {
       "url": "/assets/words/vocab/V9/passage-pieton.webp",
@@ -40628,9 +41144,19 @@
       "revision": "9a2cb3c0127f23cc"
     },
     {
+      "url": "/assets/words/vocab/V9/pharmacie.webp",
+      "size": 60882,
+      "revision": "25aa9cfe5773641f"
+    },
+    {
       "url": "/assets/words/vocab/V9/piscine.webp",
       "size": 95892,
       "revision": "92527e6aed094a9c"
+    },
+    {
+      "url": "/assets/words/vocab/V9/place.webp",
+      "size": 44584,
+      "revision": "719a9420c5a3e8ac"
     },
     {
       "url": "/assets/words/vocab/V9/plage.webp",
@@ -40638,9 +41164,39 @@
       "revision": "8971bac82ec009d9"
     },
     {
+      "url": "/assets/words/vocab/V9/poisson.webp",
+      "size": 7566,
+      "revision": "bd3ebd7414b45c7b"
+    },
+    {
       "url": "/assets/words/vocab/V9/poste.webp",
       "size": 108526,
       "revision": "ee69dde884bbe8ee"
+    },
+    {
+      "url": "/assets/words/vocab/V9/poule.webp",
+      "size": 29918,
+      "revision": "70929afa097d69f4"
+    },
+    {
+      "url": "/assets/words/vocab/V9/quartier.webp",
+      "size": 47408,
+      "revision": "580f6cd7e7940d4d"
+    },
+    {
+      "url": "/assets/words/vocab/V9/rat.webp",
+      "size": 14988,
+      "revision": "1339a616ead1bf89"
+    },
+    {
+      "url": "/assets/words/vocab/V9/renard.webp",
+      "size": 14616,
+      "revision": "e5ddcd5175892a22"
+    },
+    {
+      "url": "/assets/words/vocab/V9/requin.webp",
+      "size": 6866,
+      "revision": "a3e598adbb29cf00"
     },
     {
       "url": "/assets/words/vocab/V9/restaurant.webp",
@@ -40651,6 +41207,11 @@
       "url": "/assets/words/vocab/V9/riviere.webp",
       "size": 49122,
       "revision": "fadd1e7b08de8b44"
+    },
+    {
+      "url": "/assets/words/vocab/V9/rond-point.webp",
+      "size": 35892,
+      "revision": "5fe8aba5c4ce6f64"
     },
     {
       "url": "/assets/words/vocab/V9/rue.webp",
@@ -40723,6 +41284,11 @@
       "revision": "571ac7f8735fc6dc"
     },
     {
+      "url": "/assets/words/vocab/V9/ville.webp",
+      "size": 45084,
+      "revision": "3ce72f7f2e6578e8"
+    },
+    {
       "url": "/assets/words/vocab/V9/voiture.webp",
       "size": 17706,
       "revision": "2d2251b71a7b1a8f"
@@ -40731,6 +41297,11 @@
       "url": "/assets/words/vocab/V9/volcan.webp",
       "size": 38572,
       "revision": "517e6dcd169e79bb"
+    },
+    {
+      "url": "/assets/words/vocab/V9/zebre.webp",
+      "size": 39806,
+      "revision": "e0f3d4ea029f97d2"
     },
     {
       "url": "/audio/nombres/centaine/100.mp3",
