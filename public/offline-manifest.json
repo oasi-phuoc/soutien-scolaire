@@ -1,6 +1,6 @@
 {
-  "version": 1784612741733,
-  "totalBytes": 416255282,
+  "version": 1784613227979,
+  "totalBytes": 417112339,
   "routes": [
     "/",
     "/avant-propos",
@@ -5861,6 +5861,7 @@
     "/assets/words/son_f/vocab/mère.mp3",
     "/assets/words/son_f/vocab/métal.mp3",
     "/assets/words/son_f/vocab/minuit.mp3",
+    "/assets/words/son_f/vocab/V1/afghanistan.mp3",
     "/assets/words/son_f/vocab/V1/age.mp3",
     "/assets/words/son_f/vocab/V1/allemagne.mp3",
     "/assets/words/son_f/vocab/V1/angleterre.mp3",
@@ -5950,8 +5951,11 @@
     "/assets/words/son_f/vocab/V1/travail.mp3",
     "/assets/words/son_f/vocab/V1/tristesse.mp3",
     "/assets/words/son_f/vocab/V1/turquie.mp3",
+    "/assets/words/son_f/vocab/V1/ukraine.mp3",
     "/assets/words/son_f/vocab/V1/vendeur.mp3",
     "/assets/words/son_f/vocab/V1/veuf.mp3",
+    "/assets/words/son_f/vocab/V1/vietnam.mp3",
+    "/assets/words/son_f/vocab/V10/a-point.mp3",
     "/assets/words/son_f/vocab/V10/addition.mp3",
     "/assets/words/son_f/vocab/V10/aller-retour.mp3",
     "/assets/words/son_f/vocab/V10/arrivee.mp3",
@@ -5960,8 +5964,10 @@
     "/assets/words/son_f/vocab/V10/avion.mp3",
     "/assets/words/son_f/vocab/V10/bagage.mp3",
     "/assets/words/son_f/vocab/V10/baguette.mp3",
+    "/assets/words/son_f/vocab/V10/bien-cuit.mp3",
     "/assets/words/son_f/vocab/V10/billet.mp3",
     "/assets/words/son_f/vocab/V10/biscuit.mp3",
+    "/assets/words/son_f/vocab/V10/bleu.mp3",
     "/assets/words/son_f/vocab/V10/boisson.mp3",
     "/assets/words/son_f/vocab/V10/brioche.mp3",
     "/assets/words/son_f/vocab/V10/carte-d-embarquement.mp3",
@@ -6002,6 +6008,7 @@
     "/assets/words/son_f/vocab/V10/parking.mp3",
     "/assets/words/son_f/vocab/V10/passeport.mp3",
     "/assets/words/son_f/vocab/V10/patisserie.mp3",
+    "/assets/words/son_f/vocab/V10/pension-complete.mp3",
     "/assets/words/son_f/vocab/V10/petit-dejeuner.mp3",
     "/assets/words/son_f/vocab/V10/piscine.mp3",
     "/assets/words/son_f/vocab/V10/place.mp3",
@@ -6009,9 +6016,12 @@
     "/assets/words/son_f/vocab/V10/porte.mp3",
     "/assets/words/son_f/vocab/V10/quai.mp3",
     "/assets/words/son_f/vocab/V10/reception.mp3",
+    "/assets/words/son_f/vocab/V10/receptionniste.mp3",
     "/assets/words/son_f/vocab/V10/reservation.mp3",
     "/assets/words/son_f/vocab/V10/retard.mp3",
+    "/assets/words/son_f/vocab/V10/saignant.mp3",
     "/assets/words/son_f/vocab/V10/sandwich.mp3",
+    "/assets/words/son_f/vocab/V10/securite.mp3",
     "/assets/words/son_f/vocab/V10/serveur.mp3",
     "/assets/words/son_f/vocab/V10/serviette.mp3",
     "/assets/words/son_f/vocab/V10/table.mp3",
@@ -6088,14 +6098,17 @@
     "/assets/words/son_f/vocab/V2/vent.mp3",
     "/assets/words/son_f/vocab/V3/basketball.mp3",
     "/assets/words/son_f/vocab/V3/courir.mp3",
+    "/assets/words/son_f/vocab/V3/course.mp3",
     "/assets/words/son_f/vocab/V3/danse.mp3",
     "/assets/words/son_f/vocab/V3/escalade.mp3",
     "/assets/words/son_f/vocab/V3/football.mp3",
     "/assets/words/son_f/vocab/V3/gymnastique.mp3",
     "/assets/words/son_f/vocab/V3/handball.mp3",
+    "/assets/words/son_f/vocab/V3/hockey.mp3",
     "/assets/words/son_f/vocab/V3/judo.mp3",
     "/assets/words/son_f/vocab/V3/marcher.mp3",
     "/assets/words/son_f/vocab/V3/natation.mp3",
+    "/assets/words/son_f/vocab/V3/randonnee.mp3",
     "/assets/words/son_f/vocab/V3/ski.mp3",
     "/assets/words/son_f/vocab/V3/tennis.mp3",
     "/assets/words/son_f/vocab/V3/velo.mp3",
@@ -6107,6 +6120,7 @@
     "/assets/words/son_f/vocab/V4/aspirateur.mp3",
     "/assets/words/son_f/vocab/V4/balcon.mp3",
     "/assets/words/son_f/vocab/V4/bouilloire.mp3",
+    "/assets/words/son_f/vocab/V4/buanderie.mp3",
     "/assets/words/son_f/vocab/V4/bureau.mp3",
     "/assets/words/son_f/vocab/V4/cabane.mp3",
     "/assets/words/son_f/vocab/V4/cafetiere.mp3",
@@ -6146,6 +6160,7 @@
     "/assets/words/son_f/vocab/V4/micro-onde.mp3",
     "/assets/words/son_f/vocab/V4/miroir.mp3",
     "/assets/words/son_f/vocab/V4/panne-de-courant.mp3",
+    "/assets/words/son_f/vocab/V4/pavillon.mp3",
     "/assets/words/son_f/vocab/V4/plombier.mp3",
     "/assets/words/son_f/vocab/V4/porte.mp3",
     "/assets/words/son_f/vocab/V4/prise.mp3",
@@ -6178,6 +6193,7 @@
     "/assets/words/son_f/vocab/V5/chimie.mp3",
     "/assets/words/son_f/vocab/V5/classe.mp3",
     "/assets/words/son_f/vocab/V5/classeur.mp3",
+    "/assets/words/son_f/vocab/V5/colle.mp3",
     "/assets/words/son_f/vocab/V5/compas.mp3",
     "/assets/words/son_f/vocab/V5/couloir.mp3",
     "/assets/words/son_f/vocab/V5/cour.mp3",
@@ -6200,6 +6216,7 @@
     "/assets/words/son_f/vocab/V5/musique.mp3",
     "/assets/words/son_f/vocab/V5/perforatrice.mp3",
     "/assets/words/son_f/vocab/V5/physique.mp3",
+    "/assets/words/son_f/vocab/V5/porte-mine.mp3",
     "/assets/words/son_f/vocab/V5/regle.mp3",
     "/assets/words/son_f/vocab/V5/sac-a-dos.mp3",
     "/assets/words/son_f/vocab/V5/salle.mp3",
@@ -6238,6 +6255,7 @@
     "/assets/words/son_f/vocab/V6/cuir.mp3",
     "/assets/words/son_f/vocab/V6/culotte.mp3",
     "/assets/words/son_f/vocab/V6/cyan.mp3",
+    "/assets/words/son_f/vocab/V6/debardeur.mp3",
     "/assets/words/son_f/vocab/V6/echarpe.mp3",
     "/assets/words/son_f/vocab/V6/foulard.mp3",
     "/assets/words/son_f/vocab/V6/gris.mp3",
@@ -6287,6 +6305,7 @@
     "/assets/words/son_f/vocab/V7/banane.mp3",
     "/assets/words/son_f/vocab/V7/betterave.mp3",
     "/assets/words/son_f/vocab/V7/beurre.mp3",
+    "/assets/words/son_f/vocab/V7/bocal.mp3",
     "/assets/words/son_f/vocab/V7/boite.mp3",
     "/assets/words/son_f/vocab/V7/bol.mp3",
     "/assets/words/son_f/vocab/V7/bouillir.mp3",
@@ -6299,6 +6318,7 @@
     "/assets/words/son_f/vocab/V7/chou.mp3",
     "/assets/words/son_f/vocab/V7/citron.mp3",
     "/assets/words/son_f/vocab/V7/concombre.mp3",
+    "/assets/words/son_f/vocab/V7/conserve.mp3",
     "/assets/words/son_f/vocab/V7/couper.mp3",
     "/assets/words/son_f/vocab/V7/courgette.mp3",
     "/assets/words/son_f/vocab/V7/cuillere.mp3",
@@ -6307,6 +6327,7 @@
     "/assets/words/son_f/vocab/V7/curry.mp3",
     "/assets/words/son_f/vocab/V7/doseur.mp3",
     "/assets/words/son_f/vocab/V7/echalotte.mp3",
+    "/assets/words/son_f/vocab/V7/egoutter.mp3",
     "/assets/words/son_f/vocab/V7/epice.mp3",
     "/assets/words/son_f/vocab/V7/epinard.mp3",
     "/assets/words/son_f/vocab/V7/eplucher.mp3",
@@ -6351,9 +6372,11 @@
     "/assets/words/son_f/vocab/V7/poivron.mp3",
     "/assets/words/son_f/vocab/V7/pomme-de-terre.mp3",
     "/assets/words/son_f/vocab/V7/pomme.mp3",
+    "/assets/words/son_f/vocab/V7/pot.mp3",
     "/assets/words/son_f/vocab/V7/prune.mp3",
     "/assets/words/son_f/vocab/V7/radis.mp3",
     "/assets/words/son_f/vocab/V7/raisin.mp3",
+    "/assets/words/son_f/vocab/V7/recette.mp3",
     "/assets/words/son_f/vocab/V7/rechauffer.mp3",
     "/assets/words/son_f/vocab/V7/rotir.mp3",
     "/assets/words/son_f/vocab/V7/rouleau.mp3",
@@ -6369,15 +6392,18 @@
     "/assets/words/son_f/vocab/V7/verser.mp3",
     "/assets/words/son_f/vocab/V8/allergie.mp3",
     "/assets/words/son_f/vocab/V8/blessure.mp3",
+    "/assets/words/son_f/vocab/V8/boite.mp3",
     "/assets/words/son_f/vocab/V8/boîte.mp3",
     "/assets/words/son_f/vocab/V8/bouche.mp3",
     "/assets/words/son_f/vocab/V8/bras.mp3",
     "/assets/words/son_f/vocab/V8/brulure.mp3",
     "/assets/words/son_f/vocab/V8/chirurgien.mp3",
+    "/assets/words/son_f/vocab/V8/comprime.mp3",
     "/assets/words/son_f/vocab/V8/comprimé.mp3",
     "/assets/words/son_f/vocab/V8/consultation.mp3",
     "/assets/words/son_f/vocab/V8/cou.mp3",
     "/assets/words/son_f/vocab/V8/coupure.mp3",
+    "/assets/words/son_f/vocab/V8/creme.mp3",
     "/assets/words/son_f/vocab/V8/crème.mp3",
     "/assets/words/son_f/vocab/V8/dent.mp3",
     "/assets/words/son_f/vocab/V8/dentiste.mp3",
@@ -6388,6 +6414,7 @@
     "/assets/words/son_f/vocab/V8/epaule.mp3",
     "/assets/words/son_f/vocab/V8/fievre.mp3",
     "/assets/words/son_f/vocab/V8/fracture.mp3",
+    "/assets/words/son_f/vocab/V8/gelule.mp3",
     "/assets/words/son_f/vocab/V8/gélule.mp3",
     "/assets/words/son_f/vocab/V8/genou.mp3",
     "/assets/words/son_f/vocab/V8/goutte.mp3",
@@ -6397,6 +6424,7 @@
     "/assets/words/son_f/vocab/V8/kinésithérapeute.mp3",
     "/assets/words/son_f/vocab/V8/main.mp3",
     "/assets/words/son_f/vocab/V8/medecin.mp3",
+    "/assets/words/son_f/vocab/V8/medicament.mp3",
     "/assets/words/son_f/vocab/V8/médicament.mp3",
     "/assets/words/son_f/vocab/V8/nausee.mp3",
     "/assets/words/son_f/vocab/V8/nez.mp3",
@@ -6416,16 +6444,20 @@
     "/assets/words/son_f/vocab/V8/sirop.mp3",
     "/assets/words/son_f/vocab/V8/spray.mp3",
     "/assets/words/son_f/vocab/V8/tete.mp3",
+    "/assets/words/son_f/vocab/V8/thermometre.mp3",
     "/assets/words/son_f/vocab/V8/thermomètre.mp3",
     "/assets/words/son_f/vocab/V8/toux.mp3",
     "/assets/words/son_f/vocab/V8/urgentiste.mp3",
     "/assets/words/son_f/vocab/V8/ventre.mp3",
     "/assets/words/son_f/vocab/V8/vitamine.mp3",
+    "/assets/words/son_f/vocab/V9/abeille.mp3",
     "/assets/words/son_f/vocab/V9/acteur.mp3",
     "/assets/words/son_f/vocab/V9/aeroport.mp3",
+    "/assets/words/son_f/vocab/V9/aigle.mp3",
     "/assets/words/son_f/vocab/V9/au-bout-de.mp3",
     "/assets/words/son_f/vocab/V9/avenue.mp3",
     "/assets/words/son_f/vocab/V9/avion.mp3",
+    "/assets/words/son_f/vocab/V9/baleine.mp3",
     "/assets/words/son_f/vocab/V9/banque.mp3",
     "/assets/words/son_f/vocab/V9/bateau.mp3",
     "/assets/words/son_f/vocab/V9/bibliotheque.mp3",
@@ -6434,56 +6466,87 @@
     "/assets/words/son_f/vocab/V9/bus.mp3",
     "/assets/words/son_f/vocab/V9/camion.mp3",
     "/assets/words/son_f/vocab/V9/campagne.mp3",
+    "/assets/words/son_f/vocab/V9/canard.mp3",
+    "/assets/words/son_f/vocab/V9/carrefour.mp3",
     "/assets/words/son_f/vocab/V9/centre-ville.mp3",
     "/assets/words/son_f/vocab/V9/chanteur.mp3",
+    "/assets/words/son_f/vocab/V9/chat.mp3",
+    "/assets/words/son_f/vocab/V9/cheval.mp3",
+    "/assets/words/son_f/vocab/V9/chien.mp3",
     "/assets/words/son_f/vocab/V9/cinema.mp3",
+    "/assets/words/son_f/vocab/V9/cochon.mp3",
     "/assets/words/son_f/vocab/V9/coiffeur.mp3",
     "/assets/words/son_f/vocab/V9/colline.mp3",
     "/assets/words/son_f/vocab/V9/commissariat.mp3",
     "/assets/words/son_f/vocab/V9/concert.mp3",
+    "/assets/words/son_f/vocab/V9/coq.mp3",
     "/assets/words/son_f/vocab/V9/cote.mp3",
+    "/assets/words/son_f/vocab/V9/cygne.mp3",
     "/assets/words/son_f/vocab/V9/danseur.mp3",
+    "/assets/words/son_f/vocab/V9/dauphin.mp3",
     "/assets/words/son_f/vocab/V9/desert.mp3",
     "/assets/words/son_f/vocab/V9/droite.mp3",
+    "/assets/words/son_f/vocab/V9/eglise.mp3",
     "/assets/words/son_f/vocab/V9/église.mp3",
+    "/assets/words/son_f/vocab/V9/elephant.mp3",
     "/assets/words/son_f/vocab/V9/est.mp3",
     "/assets/words/son_f/vocab/V9/exposition.mp3",
     "/assets/words/son_f/vocab/V9/festival.mp3",
     "/assets/words/son_f/vocab/V9/feu-rouge.mp3",
+    "/assets/words/son_f/vocab/V9/feu.mp3",
     "/assets/words/son_f/vocab/V9/foret.mp3",
     "/assets/words/son_f/vocab/V9/gare.mp3",
     "/assets/words/son_f/vocab/V9/gauche.mp3",
+    "/assets/words/son_f/vocab/V9/girafe.mp3",
+    "/assets/words/son_f/vocab/V9/gorille.mp3",
+    "/assets/words/son_f/vocab/V9/hibou.mp3",
     "/assets/words/son_f/vocab/V9/hopital.mp3",
+    "/assets/words/son_f/vocab/V9/ibis.mp3",
     "/assets/words/son_f/vocab/V9/ici.mp3",
     "/assets/words/son_f/vocab/V9/ile.mp3",
     "/assets/words/son_f/vocab/V9/jusqu-a.mp3",
+    "/assets/words/son_f/vocab/V9/kangourou.mp3",
+    "/assets/words/son_f/vocab/V9/koala.mp3",
     "/assets/words/son_f/vocab/V9/la-bas.mp3",
     "/assets/words/son_f/vocab/V9/lac.mp3",
+    "/assets/words/son_f/vocab/V9/lapin.mp3",
     "/assets/words/son_f/vocab/V9/librairie.mp3",
+    "/assets/words/son_f/vocab/V9/lion.mp3",
+    "/assets/words/son_f/vocab/V9/loup.mp3",
     "/assets/words/son_f/vocab/V9/magasin.mp3",
     "/assets/words/son_f/vocab/V9/marche.mp3",
     "/assets/words/son_f/vocab/V9/mer.mp3",
     "/assets/words/son_f/vocab/V9/metro.mp3",
     "/assets/words/son_f/vocab/V9/montagne.mp3",
     "/assets/words/son_f/vocab/V9/moto.mp3",
+    "/assets/words/son_f/vocab/V9/mouton.mp3",
     "/assets/words/son_f/vocab/V9/musee.mp3",
     "/assets/words/son_f/vocab/V9/musicien.mp3",
     "/assets/words/son_f/vocab/V9/nature.mp3",
     "/assets/words/son_f/vocab/V9/nord.mp3",
     "/assets/words/son_f/vocab/V9/ouest.mp3",
+    "/assets/words/son_f/vocab/V9/ours.mp3",
+    "/assets/words/son_f/vocab/V9/panda.mp3",
     "/assets/words/son_f/vocab/V9/panneau.mp3",
     "/assets/words/son_f/vocab/V9/papeterie.mp3",
     "/assets/words/son_f/vocab/V9/parc.mp3",
     "/assets/words/son_f/vocab/V9/passage-pieton.mp3",
     "/assets/words/son_f/vocab/V9/paysage.mp3",
     "/assets/words/son_f/vocab/V9/peintre.mp3",
+    "/assets/words/son_f/vocab/V9/pharmacie.mp3",
     "/assets/words/son_f/vocab/V9/piscine.mp3",
     "/assets/words/son_f/vocab/V9/place.mp3",
     "/assets/words/son_f/vocab/V9/plage.mp3",
+    "/assets/words/son_f/vocab/V9/poisson.mp3",
     "/assets/words/son_f/vocab/V9/poste.mp3",
+    "/assets/words/son_f/vocab/V9/poule.mp3",
     "/assets/words/son_f/vocab/V9/quartier.mp3",
+    "/assets/words/son_f/vocab/V9/rat.mp3",
+    "/assets/words/son_f/vocab/V9/renard.mp3",
+    "/assets/words/son_f/vocab/V9/requin.mp3",
     "/assets/words/son_f/vocab/V9/restaurant.mp3",
     "/assets/words/son_f/vocab/V9/riviere.mp3",
+    "/assets/words/son_f/vocab/V9/rond-point.mp3",
     "/assets/words/son_f/vocab/V9/rue.mp3",
     "/assets/words/son_f/vocab/V9/salle-de-sport.mp3",
     "/assets/words/son_f/vocab/V9/scene.mp3",
@@ -6502,6 +6565,7 @@
     "/assets/words/son_f/vocab/V9/ville.mp3",
     "/assets/words/son_f/vocab/V9/voiture.mp3",
     "/assets/words/son_f/vocab/V9/volcan.mp3",
+    "/assets/words/son_f/vocab/V9/zebre.mp3",
     "/assets/words/vocab/V1/afghanistan.webp",
     "/assets/words/vocab/V1/age.webp",
     "/assets/words/vocab/V1/allemagne.webp",
@@ -34734,6 +34798,11 @@
       "revision": "50f8e0a9195e09ed"
     },
     {
+      "url": "/assets/words/son_f/vocab/V1/afghanistan.mp3",
+      "size": 33272,
+      "revision": "a7e932a1fb325b0d"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V1/age.mp3",
       "size": 12270,
       "revision": "23d46a694d52ebfa"
@@ -35179,6 +35248,11 @@
       "revision": "f6fd39cc5c19438d"
     },
     {
+      "url": "/assets/words/son_f/vocab/V1/ukraine.mp3",
+      "size": 32645,
+      "revision": "31f1c3609c8d98a6"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V1/vendeur.mp3",
       "size": 32018,
       "revision": "de965d7a0deb401d"
@@ -35187,6 +35261,16 @@
       "url": "/assets/words/son_f/vocab/V1/veuf.mp3",
       "size": 15405,
       "revision": "f3ca1295a190fb00"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V1/vietnam.mp3",
+      "size": 38915,
+      "revision": "9109fdac185a9c4b"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/a-point.mp3",
+      "size": 10389,
+      "revision": "73f6f55317f2f78a"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/addition.mp3",
@@ -35229,6 +35313,11 @@
       "revision": "ed194ffe17818d99"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/bien-cuit.mp3",
+      "size": 11016,
+      "revision": "e9a4a951b6be8f12"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/billet.mp3",
       "size": 10389,
       "revision": "b8415524ec3c75aa"
@@ -35237,6 +35326,11 @@
       "url": "/assets/words/son_f/vocab/V10/biscuit.mp3",
       "size": 10703,
       "revision": "9c21443301dffb23"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/bleu.mp3",
+      "size": 8508,
+      "revision": "94c9a955fda37001"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/boisson.mp3",
@@ -35439,6 +35533,11 @@
       "revision": "765c650c1f3297b5"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/pension-complete.mp3",
+      "size": 18226,
+      "revision": "64960a77c983ced9"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/petit-dejeuner.mp3",
       "size": 15718,
       "revision": "b887ad2224379c09"
@@ -35474,6 +35573,11 @@
       "revision": "f07438b620af1ad1"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/receptionniste.mp3",
+      "size": 18226,
+      "revision": "24eb43fff60a665f"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/reservation.mp3",
       "size": 13837,
       "revision": "a889f89b8dba5004"
@@ -35484,9 +35588,19 @@
       "revision": "b172938914cb4f3f"
     },
     {
+      "url": "/assets/words/son_f/vocab/V10/saignant.mp3",
+      "size": 11329,
+      "revision": "88b36c936f88aff9"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V10/sandwich.mp3",
       "size": 14151,
       "revision": "72ce16673b819720"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V10/securite.mp3",
+      "size": 13837,
+      "revision": "e52d613f3ca06e6f"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/serveur.mp3",
@@ -35869,6 +35983,11 @@
       "revision": "8545b30e5e50ce54"
     },
     {
+      "url": "/assets/words/son_f/vocab/V3/course.mp3",
+      "size": 13837,
+      "revision": "3d4209fa1e4014b7"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V3/danse.mp3",
       "size": 13524,
       "revision": "7025052c04cd0190"
@@ -35894,6 +36013,11 @@
       "revision": "f747035a42d9d29e"
     },
     {
+      "url": "/assets/words/son_f/vocab/V3/hockey.mp3",
+      "size": 10076,
+      "revision": "71fb17f4bc4604ea"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V3/judo.mp3",
       "size": 12583,
       "revision": "c6a108b7c3890a20"
@@ -35907,6 +36031,11 @@
       "url": "/assets/words/son_f/vocab/V3/natation.mp3",
       "size": 14151,
       "revision": "97b837b89d90d480"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V3/randonnee.mp3",
+      "size": 13837,
+      "revision": "a8aac7b7c8fa1c37"
     },
     {
       "url": "/assets/words/son_f/vocab/V3/ski.mp3",
@@ -35962,6 +36091,11 @@
       "url": "/assets/words/son_f/vocab/V4/bouilloire.mp3",
       "size": 12897,
       "revision": "3552f7477d432708"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V4/buanderie.mp3",
+      "size": 12583,
+      "revision": "b8e368f7370dee10"
     },
     {
       "url": "/assets/words/son_f/vocab/V4/bureau.mp3",
@@ -36159,6 +36293,11 @@
       "revision": "a2e0926f5267d74a"
     },
     {
+      "url": "/assets/words/son_f/vocab/V4/pavillon.mp3",
+      "size": 13210,
+      "revision": "b09113051b7ef6a2"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V4/plombier.mp3",
       "size": 22614,
       "revision": "078f561de7ff2ad2"
@@ -36319,6 +36458,11 @@
       "revision": "81e1ead9f86c54ab"
     },
     {
+      "url": "/assets/words/son_f/vocab/V5/colle.mp3",
+      "size": 12583,
+      "revision": "e71a0e730cf66aef"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V5/compas.mp3",
       "size": 10703,
       "revision": "1a5c0153311b8dcb"
@@ -36427,6 +36571,11 @@
       "url": "/assets/words/son_f/vocab/V5/physique.mp3",
       "size": 11643,
       "revision": "d8abfb781961feee"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V5/porte-mine.mp3",
+      "size": 15718,
+      "revision": "d0e79a27ca018580"
     },
     {
       "url": "/assets/words/son_f/vocab/V5/regle.mp3",
@@ -36617,6 +36766,11 @@
       "url": "/assets/words/son_f/vocab/V6/cyan.mp3",
       "size": 10389,
       "revision": "f94b908e478d818d"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V6/debardeur.mp3",
+      "size": 14151,
+      "revision": "b2e00eb1eec49799"
     },
     {
       "url": "/assets/words/son_f/vocab/V6/echarpe.mp3",
@@ -36864,6 +37018,11 @@
       "revision": "7165e24a80ab20b2"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/bocal.mp3",
+      "size": 12897,
+      "revision": "68c9150a18e58f93"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/boite.mp3",
       "size": 10703,
       "revision": "4f1f9e81c2ced632"
@@ -36924,6 +37083,11 @@
       "revision": "39db2f2cd88e13a0"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/conserve.mp3",
+      "size": 14778,
+      "revision": "a2036d1621c297f3"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/couper.mp3",
       "size": 8195,
       "revision": "671c9e74abbf47e8"
@@ -36962,6 +37126,11 @@
       "url": "/assets/words/son_f/vocab/V7/echalotte.mp3",
       "size": 12897,
       "revision": "c482c3b8a7bf3574"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V7/egoutter.mp3",
+      "size": 11016,
+      "revision": "22599945c682fc0f"
     },
     {
       "url": "/assets/words/son_f/vocab/V7/epice.mp3",
@@ -37184,6 +37353,11 @@
       "revision": "acdddfca5d681369"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/pot.mp3",
+      "size": 11016,
+      "revision": "525c42292a20e689"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/prune.mp3",
       "size": 11329,
       "revision": "c4eade83270d41e1"
@@ -37197,6 +37371,11 @@
       "url": "/assets/words/son_f/vocab/V7/raisin.mp3",
       "size": 11956,
       "revision": "a4c3a9314893f848"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V7/recette.mp3",
+      "size": 12897,
+      "revision": "b76f3e3f66c091f0"
     },
     {
       "url": "/assets/words/son_f/vocab/V7/rechauffer.mp3",
@@ -37274,6 +37453,11 @@
       "revision": "6d5d6b38dc2d798d"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/boite.mp3",
+      "size": 12897,
+      "revision": "d604dccdec5ce17e"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/boîte.mp3",
       "size": 13210,
       "revision": "a17bfc5e8ebaedf8"
@@ -37299,6 +37483,11 @@
       "revision": "a59ac2a4f3b67acd"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/comprime.mp3",
+      "size": 12270,
+      "revision": "f0e2581e4844aee7"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/comprimé.mp3",
       "size": 11643,
       "revision": "4cacb2a978045075"
@@ -37317,6 +37506,11 @@
       "url": "/assets/words/son_f/vocab/V8/coupure.mp3",
       "size": 13837,
       "revision": "c4fc775e4bd011f8"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V8/creme.mp3",
+      "size": 12897,
+      "revision": "cb337df7728ec4e3"
     },
     {
       "url": "/assets/words/son_f/vocab/V8/crème.mp3",
@@ -37369,6 +37563,11 @@
       "revision": "9d7b2ccc8cde0c26"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/gelule.mp3",
+      "size": 14151,
+      "revision": "3b9a74e1cdd55133"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/gélule.mp3",
       "size": 14151,
       "revision": "17028f8c0cb651db"
@@ -37412,6 +37611,11 @@
       "url": "/assets/words/son_f/vocab/V8/medecin.mp3",
       "size": 11016,
       "revision": "ca9d1e27e73454ef"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V8/medicament.mp3",
+      "size": 14464,
+      "revision": "d740722a5c366885"
     },
     {
       "url": "/assets/words/son_f/vocab/V8/médicament.mp3",
@@ -37509,6 +37713,11 @@
       "revision": "5b2514e3cb3103c5"
     },
     {
+      "url": "/assets/words/son_f/vocab/V8/thermometre.mp3",
+      "size": 15091,
+      "revision": "92ca012e2a51ff27"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V8/thermomètre.mp3",
       "size": 15405,
       "revision": "eb4cd8acf8ddf2d7"
@@ -37534,6 +37743,11 @@
       "revision": "f33f1463beb80a79"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/abeille.mp3",
+      "size": 12897,
+      "revision": "66a32ab7b65d30d5"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/acteur.mp3",
       "size": 22301,
       "revision": "9f240c74450d7fc1"
@@ -37542,6 +37756,11 @@
       "url": "/assets/words/son_f/vocab/V9/aeroport.mp3",
       "size": 13837,
       "revision": "faae3a376f9fca8e"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/aigle.mp3",
+      "size": 9762,
+      "revision": "c1ef7a5ca6d8f990"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/au-bout-de.mp3",
@@ -37557,6 +37776,11 @@
       "url": "/assets/words/son_f/vocab/V9/avion.mp3",
       "size": 11016,
       "revision": "4c604615b9beb1b0"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/baleine.mp3",
+      "size": 13524,
+      "revision": "e5efe2a721e18045"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/banque.mp3",
@@ -37599,6 +37823,16 @@
       "revision": "9341688608e3fc24"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/canard.mp3",
+      "size": 12270,
+      "revision": "663199edf63600a3"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/carrefour.mp3",
+      "size": 14151,
+      "revision": "1263f5d53564df0d"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/centre-ville.mp3",
       "size": 16658,
       "revision": "17eeef20ad66244d"
@@ -37609,9 +37843,29 @@
       "revision": "1bc41e4d4a17b698"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/chat.mp3",
+      "size": 10703,
+      "revision": "6cf51d26439dff3b"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/cheval.mp3",
+      "size": 12583,
+      "revision": "25b86380949feba3"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/chien.mp3",
+      "size": 9762,
+      "revision": "5397b913c0c1bb41"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/cinema.mp3",
       "size": 13524,
       "revision": "564c52a0eedfcf66"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/cochon.mp3",
+      "size": 12897,
+      "revision": "39e2c143da8c237e"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/coiffeur.mp3",
@@ -37634,14 +37888,29 @@
       "revision": "87ce95f75e1869d5"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/coq.mp3",
+      "size": 10389,
+      "revision": "974a8f64cf48104b"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/cote.mp3",
       "size": 13210,
       "revision": "9f835790e324a4d0"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/cygne.mp3",
+      "size": 12270,
+      "revision": "45537edd51720f95"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/danseur.mp3",
       "size": 27003,
       "revision": "107c3a64fd5a0aa6"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/dauphin.mp3",
+      "size": 12583,
+      "revision": "36b9452c82bbd007"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/desert.mp3",
@@ -37654,9 +37923,19 @@
       "revision": "f0dd46561927b239"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/eglise.mp3",
+      "size": 12583,
+      "revision": "75682456c0ddd461"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/église.mp3",
       "size": 13524,
       "revision": "ac42d59fc0506e7f"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/elephant.mp3",
+      "size": 11643,
+      "revision": "6850d3d394caa335"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/est.mp3",
@@ -37679,6 +37958,11 @@
       "revision": "517f305ac8d7ce3d"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/feu.mp3",
+      "size": 11643,
+      "revision": "bc99d3a7f11d5bfe"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/foret.mp3",
       "size": 10703,
       "revision": "8448191df64c8568"
@@ -37694,9 +37978,29 @@
       "revision": "15ffaa6416f938db"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/girafe.mp3",
+      "size": 12270,
+      "revision": "ce5b3db2ce373f7f"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/gorille.mp3",
+      "size": 11329,
+      "revision": "0701886dedf8df82"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/hibou.mp3",
+      "size": 10703,
+      "revision": "05aab9a4fa3f820f"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/hopital.mp3",
       "size": 12270,
       "revision": "b06acb42003aaa9a"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/ibis.mp3",
+      "size": 10703,
+      "revision": "c87313f7e46b0e79"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/ici.mp3",
@@ -37714,6 +38018,16 @@
       "revision": "7f651ac7637ca3a5"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/kangourou.mp3",
+      "size": 13524,
+      "revision": "950690bea8e1dbcb"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/koala.mp3",
+      "size": 11016,
+      "revision": "2920c3b517d53d6a"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/la-bas.mp3",
       "size": 9449,
       "revision": "10dfb84ac5b15ce1"
@@ -37724,9 +38038,24 @@
       "revision": "561245783dbe6bf8"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/lapin.mp3",
+      "size": 11956,
+      "revision": "b2bc82c8a6378884"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/librairie.mp3",
       "size": 12270,
       "revision": "bc1dbd7bdf036562"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/lion.mp3",
+      "size": 10389,
+      "revision": "2f3e65d1e40d7770"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/loup.mp3",
+      "size": 8822,
+      "revision": "039b266f9bdf1a9e"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/magasin.mp3",
@@ -37759,6 +38088,11 @@
       "revision": "06f7f374786524d6"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/mouton.mp3",
+      "size": 12270,
+      "revision": "7b8756e4df07862c"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/musee.mp3",
       "size": 12270,
       "revision": "b1d17f558ea264f7"
@@ -37782,6 +38116,16 @@
       "url": "/assets/words/son_f/vocab/V9/ouest.mp3",
       "size": 12270,
       "revision": "0e386e2d30317246"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/ours.mp3",
+      "size": 11329,
+      "revision": "49e8b8b743154d7c"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/panda.mp3",
+      "size": 12583,
+      "revision": "5313b052d5cc35eb"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/panneau.mp3",
@@ -37814,6 +38158,11 @@
       "revision": "faefb31d0f55b97e"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/pharmacie.mp3",
+      "size": 13524,
+      "revision": "597c61e4b97fa00a"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/piscine.mp3",
       "size": 13524,
       "revision": "2702be904c43cd6c"
@@ -37829,14 +38178,39 @@
       "revision": "258176489b38ecae"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/poisson.mp3",
+      "size": 11643,
+      "revision": "b0393467057be6c5"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/poste.mp3",
       "size": 11329,
       "revision": "4a43fa1216cc1c3f"
     },
     {
+      "url": "/assets/words/son_f/vocab/V9/poule.mp3",
+      "size": 12270,
+      "revision": "00faafa032d58a6a"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V9/quartier.mp3",
       "size": 12583,
       "revision": "0910eefaa0fc0344"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/rat.mp3",
+      "size": 8822,
+      "revision": "96c17b00462a25fd"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/renard.mp3",
+      "size": 11643,
+      "revision": "107aab885b9c115a"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/requin.mp3",
+      "size": 9762,
+      "revision": "f69db4396aec4b58"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/restaurant.mp3",
@@ -37847,6 +38221,11 @@
       "url": "/assets/words/son_f/vocab/V9/riviere.mp3",
       "size": 13524,
       "revision": "29371558797eb8f0"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/rond-point.mp3",
+      "size": 13210,
+      "revision": "964fabb383e0b178"
     },
     {
       "url": "/assets/words/son_f/vocab/V9/rue.mp3",
@@ -37937,6 +38316,11 @@
       "url": "/assets/words/son_f/vocab/V9/volcan.mp3",
       "size": 12897,
       "revision": "032a20e637c25060"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V9/zebre.mp3",
+      "size": 12897,
+      "revision": "01ff670dbcf14ae9"
     },
     {
       "url": "/assets/words/vocab/V1/afghanistan.webp",
