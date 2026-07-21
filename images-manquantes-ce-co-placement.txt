@@ -1,53 +1,16 @@
 Images manquantes — Placement français (CE / CO)
 ================================================
-Mis à jour : 2026-07-19
-Reste à faire : 33 fichiers (mini-cartes d'orientation CE A1)
-
-Les mini-cartes générées automatiquement ont été supprimées
-(trajets incorrects). À produire manuellement plus tard.
+Total : 48 fichiers
+Dossier CE manquant : public/assets/expression/images-temp/ (inexistant)
+Dossier CO partiel  : public/assets/expression/images/scene/
 
 
 --------------------------------------------------------------------------------
-FAIT — CO A1 « Identifier des objets »
---------------------------------------------------------------------------------
-Généré (words/lecture, 4:3 webp, fond blanc, réaliste) :
-  - carte-detudiant.webp (+ carte-d'étudiant.webp)
-  - carte-didentite.webp (+ carte-d'identité.webp)
-  - chips.webp
-  - salade-de-fruits.webp
-  - bouteille-deau.webp
-
-Relié à un asset existant :
-  - chaussures de sport → /assets/words/lecture/baskets.webp
-
-Liens : co-questions-objet-pick.ts (opImg → words/lecture)
-
-
---------------------------------------------------------------------------------
-FAIT — CE A2 « Lire des messages »
---------------------------------------------------------------------------------
-Messages reliés à des scènes existantes (expression/images/scene) :
-
-  Sortie plongée samedi          → nager-piscine.webp
-  Anniversaire de Sophie         → preparer-anniversaire.webp
-  Vacances chez ma cousine       → souhaiter-bonnes-vacances.webp
-  Soirée pizza vendredi          → manger-pizza.webp
-  Fête de l'école de danse       → danser-fete.webp
-  Correspondance avec l'Allemagne→ envoyer-lettre.webp
-  Album photos de Turquie        → prendre-photo.webp
-  Prolongation d'emprunt         → prolonger-emprunt.webp
-  Abonnements musique en ligne   → ecouter-musique.webp
-
-Liens : ce-messages-moyen.ts
-
-
---------------------------------------------------------------------------------
-À FAIRE — CE A1 « Lire pour s'orienter » (mini-cartes trajets)
---------------------------------------------------------------------------------
-Niveau : A1 (base)
-Exercice : Lire pour s'orienter
+CE — Niveau A1 (base) — Exercice « Lire pour s'orienter »
+Source : CE_ORIENTATION_BASE (ce-orientation-base.ts)
 Dossier cible : /assets/expression/images-temp/itineraire/
 33 fichiers (11 lieux × 3 trajets a/b/c)
+--------------------------------------------------------------------------------
 
 Activité : Sortie musée
   - ce-itineraire-musee-trajet-a.webp
@@ -104,5 +67,59 @@ Activité : Bureau de poste : nouvelle adresse
   - ce-itineraire-poste-trajet-b.webp
   - ce-itineraire-poste-trajet-c.webp
 
-Note : ne pas régénérer automatiquement — cartes à produire
-avec les bons trajets (contenu des messages CE).
+
+--------------------------------------------------------------------------------
+CE — Niveau A2 (moyen) — Exercice « Lire des messages »
+Source : CE_MESSAGES_MOYEN (ce-messages-moyen.ts)
+Dossier cible : /assets/expression/images-temp/
+9 fichiers
+--------------------------------------------------------------------------------
+
+Activité : Sortie plongée samedi
+  - ce-moyen-message-melina-plongee.webp
+
+Activité : Anniversaire de Sophie
+  - ce-moyen-message-fred-anniversaire.webp
+
+Activité : Vacances chez ma cousine
+  - ce-moyen-message-julia-vacances.webp
+
+Activité : Soirée pizza vendredi
+  - ce-moyen-message-sophie-pizza.webp
+
+Activité : Fête de l'école de danse
+  - ce-moyen-message-karl-danse.webp
+
+Activité : Correspondance avec l'Allemagne
+  - ce-moyen-message-stefanie-correspondante.webp
+
+Activité : Album photos de Turquie
+  - ce-moyen-message-anabelle-album.webp
+
+Activité : Prolongation d'emprunt
+  - ce-moyen-message-bibliotheque-emprunt.webp
+
+Activité : Abonnements musique en ligne
+  - ce-moyen-message-musikenligne.webp
+
+
+--------------------------------------------------------------------------------
+CO — Niveau A1 (base) — Exercice « Identifier des objets »
+Source : CO_OBJET_PICK (co-questions-objet-pick.ts)
+Dossier cible : /assets/expression/images/scene/
+6 fichiers
+--------------------------------------------------------------------------------
+
+Groupe : base-objet-3
+  - carte-detudiant.webp          (carte d'étudiant)
+  - carte-didentite.webp          (carte d'identité)
+
+Groupe : base-scolaire-objet-5
+  - chips.webp                    (chips)
+
+Groupe : base-scolaire-objet-10
+  - salade-de-fruits.webp         (salade de fruits)
+
+Groupe : base-scolaire-objet-12
+  - chaussures-de-sport.webp      (chaussures de sport)
+  - bouteille-deau.webp           (bouteille d'eau)
