@@ -1,6 +1,6 @@
 {
-  "version": 1784616209125,
-  "totalBytes": 420372143,
+  "version": 1784617134013,
+  "totalBytes": 421019031,
   "routes": [
     "/",
     "/avant-propos",
@@ -6745,21 +6745,28 @@
     "/assets/words/vocab/V1/veuf.webp",
     "/assets/words/vocab/V1/vietnam.webp",
     "/assets/words/vocab/V10/addition.webp",
+    "/assets/words/vocab/V10/arrivee.webp",
+    "/assets/words/vocab/V10/ascenseur.webp",
     "/assets/words/vocab/V10/assiette.webp",
     "/assets/words/vocab/V10/bagage.webp",
     "/assets/words/vocab/V10/baguette.webp",
     "/assets/words/vocab/V10/beignet.webp",
     "/assets/words/vocab/V10/beurre.webp",
+    "/assets/words/vocab/V10/billet.webp",
     "/assets/words/vocab/V10/biscuit.webp",
     "/assets/words/vocab/V10/boisson.webp",
     "/assets/words/vocab/V10/brioche.webp",
     "/assets/words/vocab/V10/carte-d-embarquement.webp",
     "/assets/words/vocab/V10/chambre-double.webp",
     "/assets/words/vocab/V10/chambre-simple.webp",
+    "/assets/words/vocab/V10/chambre.webp",
     "/assets/words/vocab/V10/chausson.webp",
     "/assets/words/vocab/V10/chocolat.webp",
     "/assets/words/vocab/V10/cle.webp",
+    "/assets/words/vocab/V10/coffre-fort.webp",
+    "/assets/words/vocab/V10/concierge.webp",
     "/assets/words/vocab/V10/confiture.webp",
+    "/assets/words/vocab/V10/controleur.webp",
     "/assets/words/vocab/V10/cookie.webp",
     "/assets/words/vocab/V10/couteau.webp",
     "/assets/words/vocab/V10/couvert.webp",
@@ -6776,27 +6783,37 @@
     "/assets/words/vocab/V10/douane.webp",
     "/assets/words/vocab/V10/eclair.webp",
     "/assets/words/vocab/V10/embarquement.webp",
+    "/assets/words/vocab/V10/enregistrement.webp",
+    "/assets/words/vocab/V10/escale.webp",
+    "/assets/words/vocab/V10/etage.webp",
     "/assets/words/vocab/V10/farine.webp",
     "/assets/words/vocab/V10/flan.webp",
     "/assets/words/vocab/V10/fourchette.webp",
     "/assets/words/vocab/V10/gateau.webp",
     "/assets/words/vocab/V10/gaufre.webp",
+    "/assets/words/vocab/V10/guichet.webp",
     "/assets/words/vocab/V10/macaron.webp",
     "/assets/words/vocab/V10/madeleine.webp",
     "/assets/words/vocab/V10/menu.webp",
     "/assets/words/vocab/V10/meringue.webp",
     "/assets/words/vocab/V10/mille-feuille.webp",
     "/assets/words/vocab/V10/muffin.webp",
+    "/assets/words/vocab/V10/nuit.webp",
     "/assets/words/vocab/V10/pain-au-chocolat.webp",
     "/assets/words/vocab/V10/pain.webp",
+    "/assets/words/vocab/V10/parking.webp",
     "/assets/words/vocab/V10/passeport.webp",
     "/assets/words/vocab/V10/patisserie.webp",
     "/assets/words/vocab/V10/pension-complete.webp",
     "/assets/words/vocab/V10/petit-dejeuner.webp",
+    "/assets/words/vocab/V10/place.webp",
     "/assets/words/vocab/V10/plat.webp",
+    "/assets/words/vocab/V10/porte.webp",
+    "/assets/words/vocab/V10/quai.webp",
     "/assets/words/vocab/V10/reception.webp",
     "/assets/words/vocab/V10/receptionniste.webp",
     "/assets/words/vocab/V10/reservation.webp",
+    "/assets/words/vocab/V10/retard.webp",
     "/assets/words/vocab/V10/sandwich.webp",
     "/assets/words/vocab/V10/securite.webp",
     "/assets/words/vocab/V10/serviette.webp",
@@ -39368,6 +39385,16 @@
       "revision": "6b9cd00ec4fd8f20"
     },
     {
+      "url": "/assets/words/vocab/V10/arrivee.webp",
+      "size": 51704,
+      "revision": "7ca2459f332e79b6"
+    },
+    {
+      "url": "/assets/words/vocab/V10/ascenseur.webp",
+      "size": 24688,
+      "revision": "5c402b51efc36bf3"
+    },
+    {
       "url": "/assets/words/vocab/V10/assiette.webp",
       "size": 2288,
       "revision": "16757b567d42db79"
@@ -39391,6 +39418,11 @@
       "url": "/assets/words/vocab/V10/beurre.webp",
       "size": 11038,
       "revision": "666e6ceee1c73a3d"
+    },
+    {
+      "url": "/assets/words/vocab/V10/billet.webp",
+      "size": 31330,
+      "revision": "61850cdee1d4b7d2"
     },
     {
       "url": "/assets/words/vocab/V10/biscuit.webp",
@@ -39423,6 +39455,11 @@
       "revision": "0be6ae11298bfc04"
     },
     {
+      "url": "/assets/words/vocab/V10/chambre.webp",
+      "size": 37416,
+      "revision": "fa0b033d2d85aa86"
+    },
+    {
       "url": "/assets/words/vocab/V10/chausson.webp",
       "size": 28914,
       "revision": "0379c629726257b1"
@@ -39438,9 +39475,24 @@
       "revision": "671b1d4fc78786ff"
     },
     {
+      "url": "/assets/words/vocab/V10/coffre-fort.webp",
+      "size": 24484,
+      "revision": "89ac7b2549969bdb"
+    },
+    {
+      "url": "/assets/words/vocab/V10/concierge.webp",
+      "size": 45056,
+      "revision": "525531aede2be09e"
+    },
+    {
       "url": "/assets/words/vocab/V10/confiture.webp",
       "size": 22066,
       "revision": "084cf0cd6ee1a412"
+    },
+    {
+      "url": "/assets/words/vocab/V10/controleur.webp",
+      "size": 26312,
+      "revision": "e5c9fcd585b53f85"
     },
     {
       "url": "/assets/words/vocab/V10/cookie.webp",
@@ -39523,6 +39575,21 @@
       "revision": "2082962ca034cd15"
     },
     {
+      "url": "/assets/words/vocab/V10/enregistrement.webp",
+      "size": 53832,
+      "revision": "9950eae5f6bd33d6"
+    },
+    {
+      "url": "/assets/words/vocab/V10/escale.webp",
+      "size": 42254,
+      "revision": "abfa68acf522ac66"
+    },
+    {
+      "url": "/assets/words/vocab/V10/etage.webp",
+      "size": 49744,
+      "revision": "10875d78452ba35c"
+    },
+    {
       "url": "/assets/words/vocab/V10/farine.webp",
       "size": 28590,
       "revision": "99a2f57bc539b8a4"
@@ -39546,6 +39613,11 @@
       "url": "/assets/words/vocab/V10/gaufre.webp",
       "size": 70330,
       "revision": "b5f6853b47f89621"
+    },
+    {
+      "url": "/assets/words/vocab/V10/guichet.webp",
+      "size": 26860,
+      "revision": "cdd95b88e746bd0e"
     },
     {
       "url": "/assets/words/vocab/V10/macaron.webp",
@@ -39578,6 +39650,11 @@
       "revision": "5655b40047964bec"
     },
     {
+      "url": "/assets/words/vocab/V10/nuit.webp",
+      "size": 32014,
+      "revision": "3dc4b8f38032818b"
+    },
+    {
       "url": "/assets/words/vocab/V10/pain-au-chocolat.webp",
       "size": 30454,
       "revision": "d5bf1f9d79bbe981"
@@ -39586,6 +39663,11 @@
       "url": "/assets/words/vocab/V10/pain.webp",
       "size": 42608,
       "revision": "baf6a51775fd279a"
+    },
+    {
+      "url": "/assets/words/vocab/V10/parking.webp",
+      "size": 43360,
+      "revision": "53fb57976ea06d2d"
     },
     {
       "url": "/assets/words/vocab/V10/passeport.webp",
@@ -39608,9 +39690,24 @@
       "revision": "90097c6d21d73769"
     },
     {
+      "url": "/assets/words/vocab/V10/place.webp",
+      "size": 22152,
+      "revision": "6f97d29029a0654e"
+    },
+    {
       "url": "/assets/words/vocab/V10/plat.webp",
       "size": 33044,
       "revision": "6bd1732e4ef9e7ff"
+    },
+    {
+      "url": "/assets/words/vocab/V10/porte.webp",
+      "size": 48262,
+      "revision": "d2bb7c8be4c44a28"
+    },
+    {
+      "url": "/assets/words/vocab/V10/quai.webp",
+      "size": 39968,
+      "revision": "7d5bfdb10a39fa29"
     },
     {
       "url": "/assets/words/vocab/V10/reception.webp",
@@ -39626,6 +39723,11 @@
       "url": "/assets/words/vocab/V10/reservation.webp",
       "size": 28144,
       "revision": "864ecaea18ba5693"
+    },
+    {
+      "url": "/assets/words/vocab/V10/retard.webp",
+      "size": 47452,
+      "revision": "1c61524483d0d96b"
     },
     {
       "url": "/assets/words/vocab/V10/sandwich.webp",

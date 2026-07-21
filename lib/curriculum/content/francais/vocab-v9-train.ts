@@ -775,7 +775,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
     },
     {
       word: "place",
-      image: "/assets/words/lecture/place.webp",
+      image: "place.webp",
       article: "la",
       gender: "f",
       definition: ["Siège réservé ou disponible dans un transport."],

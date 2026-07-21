@@ -188,7 +188,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
     },
     {
       word: "chambre",
-      image: "/assets/words/lecture/chambre.webp",
+      image: "chambre.webp",
       article: "la",
       gender: "f",
       definition: ["Pièce où l’on dort dans un hôtel."],
@@ -776,7 +776,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
     },
     {
       word: "nuit",
-      image: "/assets/words/lecture/nuit.webp",
+      image: "nuit.webp",
       article: "la",
       gender: "f",
       definition: ["Période entre le soir et le matin ; dans un hôtel, temps passé à dormir sur place."],
@@ -944,7 +944,7 @@ export const V9_HOTEL_THEME: VocabTheme = {
     },
     {
       word: "ascenseur",
-      image: "/assets/words/lecture/ascenseur.webp",
+      image: "ascenseur.webp",
       article: "l'",
       gender: "m",
       definition: ["Appareil qui monte et descend entre les étages."],
