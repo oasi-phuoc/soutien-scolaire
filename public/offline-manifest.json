@@ -1,6 +1,6 @@
 {
-  "version": 1784617134013,
-  "totalBytes": 421019031,
+  "version": 1784617453212,
+  "totalBytes": 421018601,
   "routes": [
     "/",
     "/avant-propos",
@@ -6810,7 +6810,6 @@
     "/assets/words/vocab/V10/plat.webp",
     "/assets/words/vocab/V10/porte.webp",
     "/assets/words/vocab/V10/quai.webp",
-    "/assets/words/vocab/V10/reception.webp",
     "/assets/words/vocab/V10/receptionniste.webp",
     "/assets/words/vocab/V10/reservation.webp",
     "/assets/words/vocab/V10/retard.webp",
@@ -35851,8 +35850,8 @@
     },
     {
       "url": "/assets/words/son_f/vocab/V10/receptionniste.mp3",
-      "size": 18226,
-      "revision": "24eb43fff60a665f"
+      "size": 47378,
+      "revision": "8a8be3d0498778e0"
     },
     {
       "url": "/assets/words/son_f/vocab/V10/reservation.mp3",
@@ -39708,11 +39707,6 @@
       "url": "/assets/words/vocab/V10/quai.webp",
       "size": 39968,
       "revision": "7d5bfdb10a39fa29"
-    },
-    {
-      "url": "/assets/words/vocab/V10/reception.webp",
-      "size": 29582,
-      "revision": "67e7509e82ec3a73"
     },
     {
       "url": "/assets/words/vocab/V10/receptionniste.webp",
