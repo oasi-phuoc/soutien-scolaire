@@ -1,6 +1,6 @@
 {
-  "version": 1784618317354,
-  "totalBytes": 421285100,
+  "version": 1784618574759,
+  "totalBytes": 421274086,
   "routes": [
     "/",
     "/avant-propos",
@@ -6339,9 +6339,11 @@
     "/assets/words/son_f/vocab/V7/casserole.mp3",
     "/assets/words/son_f/vocab/V7/cerise.mp3",
     "/assets/words/son_f/vocab/V7/champignon.mp3",
+    "/assets/words/son_f/vocab/V7/chocolat.mp3",
     "/assets/words/son_f/vocab/V7/chou.mp3",
     "/assets/words/son_f/vocab/V7/citron.mp3",
     "/assets/words/son_f/vocab/V7/concombre.mp3",
+    "/assets/words/son_f/vocab/V7/confiture.mp3",
     "/assets/words/son_f/vocab/V7/conserve.mp3",
     "/assets/words/son_f/vocab/V7/couper.mp3",
     "/assets/words/son_f/vocab/V7/courgette.mp3",
@@ -6758,7 +6760,6 @@
     "/assets/words/vocab/V10/bagage.webp",
     "/assets/words/vocab/V10/baguette.webp",
     "/assets/words/vocab/V10/beignet.webp",
-    "/assets/words/vocab/V10/beurre.webp",
     "/assets/words/vocab/V10/billet.webp",
     "/assets/words/vocab/V10/biscuit.webp",
     "/assets/words/vocab/V10/boisson.webp",
@@ -6768,11 +6769,9 @@
     "/assets/words/vocab/V10/chambre-simple.webp",
     "/assets/words/vocab/V10/chambre.webp",
     "/assets/words/vocab/V10/chausson.webp",
-    "/assets/words/vocab/V10/chocolat.webp",
     "/assets/words/vocab/V10/cle.webp",
     "/assets/words/vocab/V10/coffre-fort.webp",
     "/assets/words/vocab/V10/concierge.webp",
-    "/assets/words/vocab/V10/confiture.webp",
     "/assets/words/vocab/V10/controleur.webp",
     "/assets/words/vocab/V10/cookie.webp",
     "/assets/words/vocab/V10/couteau.webp",
@@ -6793,7 +6792,6 @@
     "/assets/words/vocab/V10/enregistrement.webp",
     "/assets/words/vocab/V10/escale.webp",
     "/assets/words/vocab/V10/etage.webp",
-    "/assets/words/vocab/V10/farine.webp",
     "/assets/words/vocab/V10/flan.webp",
     "/assets/words/vocab/V10/fourchette.webp",
     "/assets/words/vocab/V10/gateau.webp",
@@ -7114,9 +7112,11 @@
     "/assets/words/vocab/V7/casserole.webp",
     "/assets/words/vocab/V7/cerise.webp",
     "/assets/words/vocab/V7/champignon.webp",
+    "/assets/words/vocab/V7/chocolat.webp",
     "/assets/words/vocab/V7/chou.webp",
     "/assets/words/vocab/V7/citron.webp",
     "/assets/words/vocab/V7/concombre.webp",
+    "/assets/words/vocab/V7/confiture.webp",
     "/assets/words/vocab/V7/conserve.webp",
     "/assets/words/vocab/V7/couper.webp",
     "/assets/words/vocab/V7/courgette.webp",
@@ -37367,6 +37367,11 @@
       "revision": "b13191541d082243"
     },
     {
+      "url": "/assets/words/son_f/vocab/V7/chocolat.mp3",
+      "size": 12583,
+      "revision": "882e23c21195a37b"
+    },
+    {
       "url": "/assets/words/son_f/vocab/V7/chou.mp3",
       "size": 10389,
       "revision": "a2fd2c62f0e7d1ef"
@@ -37380,6 +37385,11 @@
       "url": "/assets/words/son_f/vocab/V7/concombre.mp3",
       "size": 14151,
       "revision": "39db2f2cd88e13a0"
+    },
+    {
+      "url": "/assets/words/son_f/vocab/V7/confiture.mp3",
+      "size": 16031,
+      "revision": "dab5fa63f374938a"
     },
     {
       "url": "/assets/words/son_f/vocab/V7/conserve.mp3",
@@ -39462,11 +39472,6 @@
       "revision": "f3f8c3d8e6d1dcda"
     },
     {
-      "url": "/assets/words/vocab/V10/beurre.webp",
-      "size": 11038,
-      "revision": "666e6ceee1c73a3d"
-    },
-    {
       "url": "/assets/words/vocab/V10/billet.webp",
       "size": 31330,
       "revision": "61850cdee1d4b7d2"
@@ -39512,11 +39517,6 @@
       "revision": "0379c629726257b1"
     },
     {
-      "url": "/assets/words/vocab/V10/chocolat.webp",
-      "size": 16738,
-      "revision": "85feb268426b28f6"
-    },
-    {
       "url": "/assets/words/vocab/V10/cle.webp",
       "size": 24374,
       "revision": "671b1d4fc78786ff"
@@ -39530,11 +39530,6 @@
       "url": "/assets/words/vocab/V10/concierge.webp",
       "size": 45056,
       "revision": "525531aede2be09e"
-    },
-    {
-      "url": "/assets/words/vocab/V10/confiture.webp",
-      "size": 22066,
-      "revision": "084cf0cd6ee1a412"
     },
     {
       "url": "/assets/words/vocab/V10/controleur.webp",
@@ -39635,11 +39630,6 @@
       "url": "/assets/words/vocab/V10/etage.webp",
       "size": 49744,
       "revision": "10875d78452ba35c"
-    },
-    {
-      "url": "/assets/words/vocab/V10/farine.webp",
-      "size": 28590,
-      "revision": "99a2f57bc539b8a4"
     },
     {
       "url": "/assets/words/vocab/V10/flan.webp",
@@ -41242,6 +41232,11 @@
       "revision": "f93f89a46404a94f"
     },
     {
+      "url": "/assets/words/vocab/V7/chocolat.webp",
+      "size": 16738,
+      "revision": "85feb268426b28f6"
+    },
+    {
       "url": "/assets/words/vocab/V7/chou.webp",
       "size": 17512,
       "revision": "bf0d5d6bc38909e7"
@@ -41255,6 +41250,11 @@
       "url": "/assets/words/vocab/V7/concombre.webp",
       "size": 10500,
       "revision": "e436a4d40af1709b"
+    },
+    {
+      "url": "/assets/words/vocab/V7/confiture.webp",
+      "size": 22066,
+      "revision": "084cf0cd6ee1a412"
     },
     {
       "url": "/assets/words/vocab/V7/conserve.webp",

@@ -1466,7 +1466,7 @@ const V7_DEFINITIONS: Record<string, DefinitionMap> = Object.fromEntries([
   ...["pomme", "poire", "banane", "orange", "fraise", "framboise", "raisin", "kiwi", "pêche", "abricot", "cerise", "prune", "ananas", "citron", "melon", "pastèque", "mangue"].map((word) => [word, fruitDef]),
   ...["carotte", "tomate", "salade", "concombre", "pomme de terre", "oignon", "échalote", "ail", "poivron", "piment", "courgette", "aubergine", "brocoli", "chou", "épinard", "asperge", "betterave", "navet", "radis", "haricot", "maïs", "champignon"].map((word) => [word, vegetableDef]),
   ...["gramme", "kilogramme", "boîte", "paquet", "sachet", "pincée", "tranche", "part", "morceau", "bol", "bouteille", "cuillère"].map((word) => [word, quantityDef]),
-  ...["ingrédient", "farine", "lait", "œuf", "beurre", "sucre", "sel", "poivre", "épice", "curry", "paprika", "herbe"].map((word) => [word, ingredientDef]),
+  ...["ingrédient", "farine", "lait", "œuf", "beurre", "chocolat", "confiture", "sucre", "sel", "poivre", "épice", "curry", "paprika", "herbe"].map((word) => [word, ingredientDef]),
   ...["ustensile", "casserole", "poêle", "planche", "rouleau", "doseur", "spatule", "louche"].map((word) => [word, kitchenToolDef]),
   ...["service", "cuisine", "table", "chaise", "assiette", "couvert", "couteau", "fourchette", "verre", "serviette", "plat", "dessert", "menu", "addition", "boisson"].map((word) => [word, restaurantDef]),
 ]);
