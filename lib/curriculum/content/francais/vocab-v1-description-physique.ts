@@ -1446,6 +1446,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
     {
       word: "brun",
       feminine: "brune",
+      image: "brun.webp",
       group: "Cheveux",
       definition: ["Qui a les cheveux bruns ou foncés."],
       definitionPivot: {

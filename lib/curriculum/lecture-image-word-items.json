@@ -12,17 +12,14 @@
     ]
   },
   {
-    "label": "activité-mentale",
+    "label": "activité",
     "phonemes": [
       "/a/",
       "/k/",
       "/t/",
       "/i/",
       "/v/",
-      "/e/",
-      "/m/",
-      "/ɑ̃/",
-      "/l/"
+      "/e/"
     ]
   },
   {
@@ -234,33 +231,6 @@
     ]
   },
   {
-    "label": "ballon-1",
-    "phonemes": [
-      "/b/",
-      "/a/",
-      "/l/",
-      "/ɔ̃/"
-    ]
-  },
-  {
-    "label": "ballon-2",
-    "phonemes": [
-      "/b/",
-      "/a/",
-      "/l/",
-      "/ɔ̃/"
-    ]
-  },
-  {
-    "label": "ballon-3",
-    "phonemes": [
-      "/b/",
-      "/a/",
-      "/l/",
-      "/ɔ̃/"
-    ]
-  },
-  {
     "label": "bambou",
     "phonemes": [
       "/b/",
@@ -313,13 +283,6 @@
       "/e/",
       "/r/",
       "/i/"
-    ]
-  },
-  {
-    "label": "beau",
-    "phonemes": [
-      "/b/",
-      "/o/"
     ]
   },
   {
@@ -415,13 +378,6 @@
     ]
   },
   {
-    "label": "bois",
-    "phonemes": [
-      "/b/",
-      "/wa/"
-    ]
-  },
-  {
     "label": "boisson",
     "phonemes": [
       "/b/",
@@ -484,21 +440,6 @@
     ]
   },
   {
-    "label": "boucle-d-oreille",
-    "phonemes": [
-      "/b/",
-      "/u/",
-      "/k/",
-      "/l/",
-      "/e/",
-      "/d/",
-      "/o/",
-      "/r/",
-      "/ɛ/",
-      "/j/"
-    ]
-  },
-  {
     "label": "boucles-d-oreilles",
     "phonemes": [
       "/b/",
@@ -550,6 +491,19 @@
       "/t/",
       "/ɛ/",
       "/j/"
+    ]
+  },
+  {
+    "label": "bouteille-deau",
+    "phonemes": [
+      "/b/",
+      "/u/",
+      "/t/",
+      "/ɛ/",
+      "/j/",
+      "/e/",
+      "/d/",
+      "/o/"
     ]
   },
   {
@@ -671,20 +625,6 @@
     ]
   },
   {
-    "label": "cahier-bleu",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/∅/",
-      "/i/",
-      "/e/",
-      "/r/",
-      "/b/",
-      "/l/",
-      "/ø/"
-    ]
-  },
-  {
     "label": "caissier",
     "phonemes": [
       "/k/",
@@ -740,20 +680,6 @@
     ]
   },
   {
-    "label": "camion-de-pompier",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/m/",
-      "/i/",
-      "/ɔ̃/",
-      "/d/",
-      "/e/",
-      "/p/",
-      "/r/"
-    ]
-  },
-  {
     "label": "campagne",
     "phonemes": [
       "/k/",
@@ -784,16 +710,6 @@
     ]
   },
   {
-    "label": "caoutchouc",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/u/",
-      "/t/",
-      "/ʃ/"
-    ]
-  },
-  {
     "label": "caravane",
     "phonemes": [
       "/k/",
@@ -808,7 +724,8 @@
     "phonemes": [
       "/k/",
       "/a/",
-      "/r/"
+      "/r/",
+      "/e/"
     ]
   },
   {
@@ -832,7 +749,19 @@
     ]
   },
   {
-    "label": "carte-d-etudiant",
+    "label": "carte-de-credit",
+    "phonemes": [
+      "/k/",
+      "/a/",
+      "/r/",
+      "/t/",
+      "/e/",
+      "/d/",
+      "/i/"
+    ]
+  },
+  {
+    "label": "carte-detudiant",
     "phonemes": [
       "/k/",
       "/a/",
@@ -846,7 +775,7 @@
     ]
   },
   {
-    "label": "carte-d-identite",
+    "label": "carte-didentite",
     "phonemes": [
       "/k/",
       "/a/",
@@ -856,36 +785,6 @@
       "/d/",
       "/i/",
       "/ɑ̃/"
-    ]
-  },
-  {
-    "label": "carte-de-credit",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/r/",
-      "/t/",
-      "/e/",
-      "/d/",
-      "/i/"
-    ]
-  },
-  {
-    "label": "casque-1",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/s/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "casque-2",
-    "phonemes": [
-      "/k/",
-      "/a/",
-      "/s/",
-      "/e/"
     ]
   },
   {
@@ -977,24 +876,6 @@
     ]
   },
   {
-    "label": "chalet",
-    "phonemes": [
-      "/ʃ/",
-      "/a/",
-      "/l/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "chambre",
-    "phonemes": [
-      "/ʃ/",
-      "/ɑ̃/",
-      "/b/",
-      "/r/"
-    ]
-  },
-  {
     "label": "champ",
     "phonemes": [
       "/ʃ/",
@@ -1054,20 +935,6 @@
       "/a/",
       "/t/",
       "/o/"
-    ]
-  },
-  {
-    "label": "château-de-sable",
-    "phonemes": [
-      "/ʃ/",
-      "/a/",
-      "/t/",
-      "/o/",
-      "/d/",
-      "/e/",
-      "/s/",
-      "/b/",
-      "/l/"
     ]
   },
   {
@@ -1140,20 +1007,6 @@
     ]
   },
   {
-    "label": "cheval-a-bascule",
-    "phonemes": [
-      "/ʃ/",
-      "/e/",
-      "/v/",
-      "/a/",
-      "/l/",
-      "/b/",
-      "/s/",
-      "/k/",
-      "/y/"
-    ]
-  },
-  {
     "label": "cheveux",
     "phonemes": [
       "/ʃ/",
@@ -1169,6 +1022,14 @@
       "/e/",
       "/v/",
       "/r/"
+    ]
+  },
+  {
+    "label": "chips",
+    "phonemes": [
+      "/ʃ/",
+      "/i/",
+      "/p/"
     ]
   },
   {
@@ -1246,18 +1107,6 @@
       "/g/",
       "/o/",
       "/ɲ/"
-    ]
-  },
-  {
-    "label": "citron-vert",
-    "phonemes": [
-      "/s/",
-      "/i/",
-      "/t/",
-      "/r/",
-      "/ɔ̃/",
-      "/v/",
-      "/e/"
     ]
   },
   {
@@ -1360,7 +1209,7 @@
     "label": "cœur",
     "phonemes": [
       "/k/",
-      "/ø/",
+      "/y/",
       "/r/"
     ]
   },
@@ -1443,7 +1292,7 @@
     ]
   },
   {
-    "label": "comptoir",
+    "label": "comptoire",
     "phonemes": [
       "/k/",
       "/ɔ̃/",
@@ -1533,23 +1382,6 @@
     ]
   },
   {
-    "label": "cote",
-    "phonemes": [
-      "/k/",
-      "/o/",
-      "/t/"
-    ]
-  },
-  {
-    "label": "coton",
-    "phonemes": [
-      "/k/",
-      "/o/",
-      "/t/",
-      "/ɔ̃/"
-    ]
-  },
-  {
     "label": "coton-tige",
     "phonemes": [
       "/k/",
@@ -1561,24 +1393,6 @@
     ]
   },
   {
-    "label": "couloir",
-    "phonemes": [
-      "/k/",
-      "/u/",
-      "/l/",
-      "/wa/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "cour",
-    "phonemes": [
-      "/k/",
-      "/u/",
-      "/r/"
-    ]
-  },
-  {
     "label": "couronne",
     "phonemes": [
       "/k/",
@@ -1586,15 +1400,6 @@
       "/r/",
       "/o/",
       "/n/"
-    ]
-  },
-  {
-    "label": "cousin",
-    "phonemes": [
-      "/k/",
-      "/u/",
-      "/z/",
-      "/ɛ̃/"
     ]
   },
   {
@@ -1682,23 +1487,6 @@
     ]
   },
   {
-    "label": "cube-1",
-    "phonemes": [
-      "/k/",
-      "/y/",
-      "/b/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "cuir",
-    "phonemes": [
-      "/k/",
-      "/ɥi/",
-      "/r/"
-    ]
-  },
-  {
     "label": "culotte",
     "phonemes": [
       "/k/",
@@ -1755,9 +1543,10 @@
     ]
   },
   {
-    "label": "de",
+    "label": "dé",
     "phonemes": [
-      "/d/"
+      "/d/",
+      "/e/"
     ]
   },
   {
@@ -1796,52 +1585,6 @@
       "/e/",
       "/z/",
       "/r/"
-    ]
-  },
-  {
-    "label": "devant-la-boutique",
-    "phonemes": [
-      "/d/",
-      "/e/",
-      "/v/",
-      "/ɑ̃/",
-      "/t/",
-      "/l/",
-      "/a/",
-      "/b/",
-      "/u/",
-      "/i/",
-      "/k/"
-    ]
-  },
-  {
-    "label": "devant-le-fleuriste",
-    "phonemes": [
-      "/d/",
-      "/e/",
-      "/v/",
-      "/ɑ̃/",
-      "/t/",
-      "/l/",
-      "/f/",
-      "/y/",
-      "/r/",
-      "/i/",
-      "/s/"
-    ]
-  },
-  {
-    "label": "devant-le-restaurant",
-    "phonemes": [
-      "/d/",
-      "/e/",
-      "/v/",
-      "/ɑ̃/",
-      "/t/",
-      "/l/",
-      "/r/",
-      "/s/",
-      "/o/"
     ]
   },
   {
@@ -1892,6 +1635,14 @@
     ]
   },
   {
+    "label": "douze",
+    "phonemes": [
+      "/d/",
+      "/u/",
+      "/z/"
+    ]
+  },
+  {
     "label": "dune",
     "phonemes": [
       "/d/",
@@ -1903,17 +1654,6 @@
     "label": "eau",
     "phonemes": [
       "/o/"
-    ]
-  },
-  {
-    "label": "echalotte",
-    "phonemes": [
-      "/e/",
-      "/ʃ/",
-      "/a/",
-      "/l/",
-      "/o/",
-      "/t/"
     ]
   },
   {
@@ -1967,31 +1707,6 @@
       "/t/",
       "/i/",
       "/k/"
-    ]
-  },
-  {
-    "label": "elastique-1",
-    "phonemes": [
-      "/e/",
-      "/l/",
-      "/a/",
-      "/s/",
-      "/t/",
-      "/i/",
-      "/k/"
-    ]
-  },
-  {
-    "label": "electricien",
-    "phonemes": [
-      "/e/",
-      "/l/",
-      "/k/",
-      "/t/",
-      "/r/",
-      "/i/",
-      "/s/",
-      "/jɛ̃/"
     ]
   },
   {
@@ -2074,15 +1789,6 @@
     ]
   },
   {
-    "label": "etoile",
-    "phonemes": [
-      "/e/",
-      "/t/",
-      "/wa/",
-      "/l/"
-    ]
-  },
-  {
     "label": "étoile-de-mer",
     "phonemes": [
       "/e/",
@@ -2134,6 +1840,14 @@
       "/ø/",
       "/i/",
       "/l/"
+    ]
+  },
+  {
+    "label": "femme",
+    "phonemes": [
+      "/f/",
+      "/e/",
+      "/m/"
     ]
   },
   {
@@ -2287,14 +2001,6 @@
     ]
   },
   {
-    "label": "fuite",
-    "phonemes": [
-      "/f/",
-      "/ɥi/",
-      "/t/"
-    ]
-  },
-  {
     "label": "galaxie",
     "phonemes": [
       "/g/",
@@ -2302,17 +2008,6 @@
       "/l/",
       "/ks/",
       "/i/"
-    ]
-  },
-  {
-    "label": "gant-boxe",
-    "phonemes": [
-      "/g/",
-      "/ɑ̃/",
-      "/t/",
-      "/b/",
-      "/o/",
-      "/ks/"
     ]
   },
   {
@@ -2324,11 +2019,13 @@
     ]
   },
   {
-    "label": "gauche",
+    "label": "garçon",
     "phonemes": [
       "/g/",
-      "/o/",
-      "/ʃ/"
+      "/a/",
+      "/r/",
+      "/k/",
+      "/ɔ̃/"
     ]
   },
   {
@@ -2399,29 +2096,11 @@
     ]
   },
   {
-    "label": "gouter",
-    "phonemes": [
-      "/g/",
-      "/u/",
-      "/t/",
-      "/e/",
-      "/r/"
-    ]
-  },
-  {
     "label": "goutte",
     "phonemes": [
       "/g/",
       "/u/",
       "/t/"
-    ]
-  },
-  {
-    "label": "grand",
-    "phonemes": [
-      "/g/",
-      "/r/",
-      "/ɑ̃/"
     ]
   },
   {
@@ -2468,17 +2147,6 @@
     ]
   },
   {
-    "label": "grille-pain",
-    "phonemes": [
-      "/g/",
-      "/r/",
-      "/j/",
-      "/e/",
-      "/p/",
-      "/ɛ̃/"
-    ]
-  },
-  {
     "label": "gris",
     "phonemes": [
       "/g/",
@@ -2508,17 +2176,6 @@
   },
   {
     "label": "haltère",
-    "phonemes": [
-      "/∅/",
-      "/a/",
-      "/l/",
-      "/t/",
-      "/e/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "haltères",
     "phonemes": [
       "/∅/",
       "/a/",
@@ -2569,20 +2226,6 @@
       "/i/",
       "/k/",
       "/o/"
-    ]
-  },
-  {
-    "label": "haricot-vert",
-    "phonemes": [
-      "/∅/",
-      "/a/",
-      "/r/",
-      "/i/",
-      "/k/",
-      "/o/",
-      "/t/",
-      "/v/",
-      "/e/"
     ]
   },
   {
@@ -2697,696 +2340,11 @@
     ]
   },
   {
-    "label": "horloge-00h00",
+    "label": "homme",
     "phonemes": [
       "/∅/",
       "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-01h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-01h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-02h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-05h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-07h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-07h25",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-07h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-08h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-08h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-08h35",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-08h45",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-08h56",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-09h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-09h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-09h25",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-09h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-10h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-10h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-10h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h20",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h22",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h25",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h45",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-11h55",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h02",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h03",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h10",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-12h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-13h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-13h12",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-13h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-13h45",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-14h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-14h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-14h20",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-14h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-15h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-15h05",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-15h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-15h50",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-16h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-16h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-16h40",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-17h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-17h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-17h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-18h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-18h15",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-18h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-18h45",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-19h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-19h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-20h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-20h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-21h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-22h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-22h30",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "horloge-23h00",
-    "phonemes": [
-      "/∅/",
-      "/o/",
-      "/r/",
-      "/l/",
-      "/ʒ/",
-      "/e/"
+      "/m/"
     ]
   },
   {
@@ -3503,14 +2461,6 @@
     ]
   },
   {
-    "label": "jeune",
-    "phonemes": [
-      "/ʒ/",
-      "/ø/",
-      "/n/"
-    ]
-  },
-  {
     "label": "jonquille",
     "phonemes": [
       "/ʒ/",
@@ -3549,23 +2499,6 @@
     ]
   },
   {
-    "label": "juillet",
-    "phonemes": [
-      "/ʒ/",
-      "/ɥi/",
-      "/l/",
-      "/e/"
-    ]
-  },
-  {
-    "label": "juin",
-    "phonemes": [
-      "/ʒ/",
-      "/ɥi/",
-      "/n/"
-    ]
-  },
-  {
     "label": "jumelles",
     "phonemes": [
       "/ʒ/",
@@ -3581,18 +2514,6 @@
       "/ʒ/",
       "/y/",
       "/p/"
-    ]
-  },
-  {
-    "label": "jus-d-orange",
-    "phonemes": [
-      "/ʒ/",
-      "/y/",
-      "/s/",
-      "/d/",
-      "/o/",
-      "/r/",
-      "/ɑ̃/"
     ]
   },
   {
@@ -3614,14 +2535,6 @@
       "/o/",
       "/s/",
       "/p/"
-    ]
-  },
-  {
-    "label": "laine",
-    "phonemes": [
-      "/l/",
-      "/ɛ/",
-      "/n/"
     ]
   },
   {
@@ -3670,20 +2583,6 @@
       "/v/",
       "/b/",
       "/o/"
-    ]
-  },
-  {
-    "label": "lavage-des-mains",
-    "phonemes": [
-      "/l/",
-      "/a/",
-      "/v/",
-      "/ʒ/",
-      "/e/",
-      "/d/",
-      "/s/",
-      "/m/",
-      "/ɛ̃/"
     ]
   },
   {
@@ -3816,20 +2715,6 @@
     ]
   },
   {
-    "label": "lunettes-de-soleil",
-    "phonemes": [
-      "/l/",
-      "/y/",
-      "/n/",
-      "/e/",
-      "/t/",
-      "/s/",
-      "/d/",
-      "/o/",
-      "/ɛ/"
-    ]
-  },
-  {
     "label": "lys",
     "phonemes": [
       "/l/",
@@ -3889,20 +2774,6 @@
       "/ɛ/",
       "/l/",
       "/o/"
-    ]
-  },
-  {
-    "label": "maillot-de-bain",
-    "phonemes": [
-      "/m/",
-      "/ɛ/",
-      "/l/",
-      "/o/",
-      "/t/",
-      "/d/",
-      "/e/",
-      "/b/",
-      "/ɛ̃/"
     ]
   },
   {
@@ -4062,12 +2933,15 @@
     ]
   },
   {
-    "label": "matin",
+    "label": "mayonnaise",
     "phonemes": [
       "/m/",
       "/a/",
-      "/t/",
-      "/ɛ̃/"
+      "/i/",
+      "/o/",
+      "/n/",
+      "/ɛ/",
+      "/z/"
     ]
   },
   {
@@ -4133,16 +3007,6 @@
     ]
   },
   {
-    "label": "metal",
-    "phonemes": [
-      "/m/",
-      "/e/",
-      "/t/",
-      "/a/",
-      "/l/"
-    ]
-  },
-  {
     "label": "métro",
     "phonemes": [
       "/m/",
@@ -4196,15 +3060,6 @@
     ]
   },
   {
-    "label": "minuit",
-    "phonemes": [
-      "/m/",
-      "/i/",
-      "/n/",
-      "/ɥi/"
-    ]
-  },
-  {
     "label": "moineau",
     "phonemes": [
       "/m/",
@@ -4235,19 +3090,6 @@
       "/ɔ̃/",
       "/t/",
       "/r/"
-    ]
-  },
-  {
-    "label": "montre-connectee",
-    "phonemes": [
-      "/m/",
-      "/ɔ̃/",
-      "/t/",
-      "/r/",
-      "/e/",
-      "/k/",
-      "/o/",
-      "/n/"
     ]
   },
   {
@@ -4352,15 +3194,6 @@
     ]
   },
   {
-    "label": "neveu",
-    "phonemes": [
-      "/n/",
-      "/e/",
-      "/v/",
-      "/ø/"
-    ]
-  },
-  {
     "label": "nez",
     "phonemes": [
       "/n/",
@@ -4372,7 +3205,7 @@
     "label": "nœud-papillon",
     "phonemes": [
       "/n/",
-      "/ø/",
+      "/y/",
       "/d/",
       "/p/",
       "/a/",
@@ -4413,27 +3246,15 @@
     ]
   },
   {
-    "label": "nylon",
-    "phonemes": [
-      "/n/",
-      "/i/",
-      "/l/",
-      "/ɔ̃/"
-    ]
-  },
-  {
     "label": "œil",
     "phonemes": [
-      "/o/",
-      "/ɛ/",
+      "/i/",
       "/l/"
     ]
   },
   {
     "label": "œillet",
     "phonemes": [
-      "/o/",
-      "/ɛ/",
       "/j/",
       "/e/"
     ]
@@ -4441,7 +3262,7 @@
   {
     "label": "œuf",
     "phonemes": [
-      "/ø/",
+      "/y/",
       "/f/"
     ]
   },
@@ -4460,6 +3281,13 @@
       "/v/",
       "/e/",
       "/r/"
+    ]
+  },
+  {
+    "label": "onze",
+    "phonemes": [
+      "/ɔ̃/",
+      "/z/"
     ]
   },
   {
@@ -4611,16 +3439,6 @@
       "/p/",
       "/a/",
       "/i/"
-    ]
-  },
-  {
-    "label": "papier",
-    "phonemes": [
-      "/p/",
-      "/a/",
-      "/i/",
-      "/e/",
-      "/r/"
     ]
   },
   {
@@ -4844,17 +3662,6 @@
     ]
   },
   {
-    "label": "pharmacien",
-    "phonemes": [
-      "/f/",
-      "/a/",
-      "/r/",
-      "/m/",
-      "/s/",
-      "/jɛ̃/"
-    ]
-  },
-  {
     "label": "photographe",
     "phonemes": [
       "/f/",
@@ -5003,21 +3810,6 @@
     ]
   },
   {
-    "label": "planche-a-decouper",
-    "phonemes": [
-      "/p/",
-      "/l/",
-      "/ɑ̃/",
-      "/ʃ/",
-      "/e/",
-      "/a/",
-      "/d/",
-      "/k/",
-      "/u/",
-      "/r/"
-    ]
-  },
-  {
     "label": "planche-de-surf",
     "phonemes": [
       "/p/",
@@ -5041,26 +3833,6 @@
       "/n/",
       "/e/",
       "/t/"
-    ]
-  },
-  {
-    "label": "plastique",
-    "phonemes": [
-      "/p/",
-      "/l/",
-      "/a/",
-      "/s/",
-      "/t/",
-      "/i/",
-      "/k/"
-    ]
-  },
-  {
-    "label": "pluie",
-    "phonemes": [
-      "/p/",
-      "/l/",
-      "/ɥi/"
     ]
   },
   {
@@ -5187,15 +3959,6 @@
     ]
   },
   {
-    "label": "poste",
-    "phonemes": [
-      "/p/",
-      "/o/",
-      "/s/",
-      "/t/"
-    ]
-  },
-  {
     "label": "potiron",
     "phonemes": [
       "/p/",
@@ -5240,589 +4003,6 @@
       "/r/",
       "/ɛ/",
       "/i/"
-    ]
-  },
-  {
-    "label": "prix-1-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-10-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-10-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-10-fr",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/f/"
-    ]
-  },
-  {
-    "label": "prix-100-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-11-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-12-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-123-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-13-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-14-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-15-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-150-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-16-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-17-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-19-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-199-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-2-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-2-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-20-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-200-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-2000-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-223-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-25-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-28-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-29-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-299-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-3-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-3-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-30-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-30-eur-ht",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/",
-      "/∅/"
-    ]
-  },
-  {
-    "label": "prix-32-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-323-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-35-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-38-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-39-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-40-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-45-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-45-eur-ht",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/",
-      "/∅/"
-    ]
-  },
-  {
-    "label": "prix-48-eur-ht",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/",
-      "/∅/"
-    ]
-  },
-  {
-    "label": "prix-499-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-5-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-5-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-5-fr",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/f/"
-    ]
-  },
-  {
-    "label": "prix-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-500-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-59-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-60-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-7-50-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-7-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-8-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-8-fr",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/f/"
-    ]
-  },
-  {
-    "label": "prix-89-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
-    ]
-  },
-  {
-    "label": "prix-9-eur",
-    "phonemes": [
-      "/p/",
-      "/r/",
-      "/i/",
-      "/ks/",
-      "/e/",
-      "/y/"
     ]
   },
   {
@@ -5893,6 +4073,14 @@
     ]
   },
   {
+    "label": "quinze",
+    "phonemes": [
+      "/k/",
+      "/ɛ̃/",
+      "/z/"
+    ]
+  },
+  {
     "label": "radio",
     "phonemes": [
       "/r/",
@@ -5933,17 +4121,7 @@
     ]
   },
   {
-    "label": "raquette-1",
-    "phonemes": [
-      "/r/",
-      "/a/",
-      "/k/",
-      "/e/",
-      "/t/"
-    ]
-  },
-  {
-    "label": "raquette-2",
+    "label": "raquette",
     "phonemes": [
       "/r/",
       "/a/",
@@ -6087,27 +4265,17 @@
     ]
   },
   {
-    "label": "sac-de-sport",
+    "label": "salade-de-fruits",
     "phonemes": [
       "/s/",
       "/a/",
-      "/k/",
+      "/l/",
       "/d/",
       "/e/",
-      "/p/",
-      "/o/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "sac-sport",
-    "phonemes": [
-      "/s/",
-      "/a/",
-      "/k/",
-      "/p/",
-      "/o/",
-      "/r/"
+      "/f/",
+      "/r/",
+      "/ɥi/",
+      "/t/"
     ]
   },
   {
@@ -6120,15 +4288,6 @@
       "/ɑ̃/",
       "/d/",
       "/r/"
-    ]
-  },
-  {
-    "label": "salon",
-    "phonemes": [
-      "/s/",
-      "/a/",
-      "/l/",
-      "/ɔ̃/"
     ]
   },
   {
@@ -6269,6 +4428,14 @@
     ]
   },
   {
+    "label": "seize",
+    "phonemes": [
+      "/s/",
+      "/ɛ/",
+      "/z/"
+    ]
+  },
+  {
     "label": "semaine",
     "phonemes": [
       "/s/",
@@ -6395,21 +4562,6 @@
     ]
   },
   {
-    "label": "soeur",
-    "phonemes": [
-      "/s/",
-      "/ø/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "soie",
-    "phonemes": [
-      "/s/",
-      "/wa/"
-    ]
-  },
-  {
     "label": "sortie-secours",
     "phonemes": [
       "/s/",
@@ -6428,25 +4580,6 @@
       "/s/",
       "/u/",
       "/p/"
-    ]
-  },
-  {
-    "label": "source",
-    "phonemes": [
-      "/s/",
-      "/u/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "souris-grise",
-    "phonemes": [
-      "/s/",
-      "/u/",
-      "/r/",
-      "/i/",
-      "/g/",
-      "/z/"
     ]
   },
   {
@@ -6489,18 +4622,6 @@
       "/t/",
       "/a/",
       "/d/"
-    ]
-  },
-  {
-    "label": "station-spatiale",
-    "phonemes": [
-      "/s/",
-      "/t/",
-      "/a/",
-      "/sjɔ̃/",
-      "/p/",
-      "/i/",
-      "/l/"
     ]
   },
   {
@@ -6620,16 +4741,6 @@
     ]
   },
   {
-    "label": "tapis-1",
-    "phonemes": [
-      "/t/",
-      "/a/",
-      "/p/",
-      "/i/",
-      "/s/"
-    ]
-  },
-  {
     "label": "taxi",
     "phonemes": [
       "/t/",
@@ -6733,7 +4844,8 @@
   {
     "label": "thé",
     "phonemes": [
-      "/t/"
+      "/t/",
+      "/e/"
     ]
   },
   {
@@ -6794,16 +4906,6 @@
       "/n/",
       "/a/",
       "/d/"
-    ]
-  },
-  {
-    "label": "tortue-1",
-    "phonemes": [
-      "/t/",
-      "/o/",
-      "/r/",
-      "/y/",
-      "/e/"
     ]
   },
   {
@@ -6975,23 +5077,6 @@
     ]
   },
   {
-    "label": "velours",
-    "phonemes": [
-      "/v/",
-      "/e/",
-      "/l/",
-      "/u/",
-      "/r/"
-    ]
-  },
-  {
-    "label": "vent",
-    "phonemes": [
-      "/v/",
-      "/ɑ̃/"
-    ]
-  },
-  {
     "label": "ventre",
     "phonemes": [
       "/v/",
@@ -7119,38 +5204,6 @@
       "/t/",
       "/y/",
       "/r/"
-    ]
-  },
-  {
-    "label": "voiture-de-police",
-    "phonemes": [
-      "/v/",
-      "/wa/",
-      "/t/",
-      "/y/",
-      "/r/",
-      "/e/",
-      "/d/",
-      "/p/",
-      "/o/",
-      "/l/",
-      "/i/",
-      "/s/"
-    ]
-  },
-  {
-    "label": "voiture-miniature",
-    "phonemes": [
-      "/v/",
-      "/wa/",
-      "/t/",
-      "/y/",
-      "/r/",
-      "/e/",
-      "/m/",
-      "/i/",
-      "/n/",
-      "/a/"
     ]
   },
   {

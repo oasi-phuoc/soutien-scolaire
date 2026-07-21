@@ -82,6 +82,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "citron",     phonemes: ["/s/", "/i/", "/t/", "/r/", "/ɔ̃/"] },    // c + i → /s/
   { label: "cerise",     phonemes: ["/s/", "/e/", "/r/", "/i/", "/z/"] },    // c + e → /s/
   { label: "chat",       phonemes: ["/ʃ/", "/a/"] },
+  { label: "chaîne",     phonemes: ["/ʃ/", "/ɛ/", "/n/"] },
   { label: "cheval",     phonemes: ["/ʃ/", "/e/", "/v/", "/a/", "/l/"] },
   { label: "chien",      phonemes: ["/ʃ/", "/i/", "/ɛ̃/"] },
   { label: "cochon",     phonemes: ["/k/", "/o/", "/ʃ/", "/ɔ̃/"] },
@@ -207,7 +208,9 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "tomate",     phonemes: ["/t/", "/o/", "/m/", "/a/"] },
   { label: "tortue",     phonemes: ["/t/", "/o/", "/r/", "/y/"] },
   { label: "train",      phonemes: ["/t/", "/r/", "/ɛ̃/"] },
+  { label: "treize",     phonemes: ["/t/", "/r/", "/ɛ/", "/z/"] },
   { label: "tulipe",     phonemes: ["/t/", "/y/", "/l/", "/i/", "/p/"] },
+  { label: "quatorze",   phonemes: ["/k/", "/a/", "/t/", "/o/", "/r/", "/z/"] },
   // ── V ──────────────────────────────────────────────────────────────────────
   { label: "vache",      phonemes: ["/v/", "/a/", "/ʃ/"] },
   { label: "valise",     phonemes: ["/v/", "/a/", "/l/", "/i/", "/z/"] },
