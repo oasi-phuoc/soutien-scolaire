@@ -62,3 +62,11 @@ export function wordToPronStep(word: string, letterLower: string): PronStep {
     word,
   };
 }
+
+export function wordToComplexPronStep(word: string, graphemeLabel: string): PronStep {
+  return {
+    phoneme: graphemeLabel,
+    syllable: pedagogicSyllable(word),
+    word,
+  };
+}

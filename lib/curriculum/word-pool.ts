@@ -5,7 +5,7 @@ import graphemePoolsData from "./grapheme-word-pools-data.json";
 import lectureImageWordItemsData from "./lecture-image-word-items.json";
 import revisionBisyllablePoolsData from "./lecture-revision-bisyllable-pools.json";
 import pronouncePoolsData from "./lecture-pronounce-pools.json";
-import { isPedagogicBisyllable } from "./syllabify";
+import { isPedagogicBisyllable, wordToComplexPronStep } from "./syllabify";
 import { TRISYLLABLE_WORDS, QUADRISYLLABLE_WORDS, type LongPronounceWord } from "./lecture-long-pronounce";
 import type { PronStep } from "./lecture-data";
 
@@ -952,6 +952,20 @@ export function letterPronouncePool(letterLower: string): PronStep[] {
 /** 5 mots aléatoires pour l'étape prononcer (leçon lettre). */
 export function randomLetterPronounceSteps(letterLower: string, count = 5): PronStep[] {
   const pool = letterPronouncePool(letterLower);
+  if (pool.length === 0) return [];
+  return shuffle(pool).slice(0, Math.min(count, pool.length));
+}
+
+/** Pool prononcer son complexe : mots bisyllabiques contenant le graphème. */
+export function complexGraphemePronouncePool(graphemeLabel: string): PronStep[] {
+  return wordsForComplexGrapheme(graphemeLabel)
+    .filter(isPedagogicBisyllable)
+    .map((word) => wordToComplexPronStep(word, graphemeLabel));
+}
+
+/** 5 mots aléatoires pour l'étape prononcer (leçon son complexe L7). */
+export function randomComplexGraphemePronounceSteps(graphemeLabel: string, count = 5): PronStep[] {
+  const pool = complexGraphemePronouncePool(graphemeLabel);
   if (pool.length === 0) return [];
   return shuffle(pool).slice(0, Math.min(count, pool.length));
 }

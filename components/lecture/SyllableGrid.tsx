@@ -6,14 +6,17 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 import { useWordSpotterItemCount } from "./WordSpotter";
+import { complexTargets, makeComplexSyllables } from "@/lib/utils/complex-grapheme";
 
 export interface SyllableGridHandle {
   reset: () => void;
 }
 
 interface Props {
-  baseLetter: string;
-  mode?: "cv" | "vc" | "mixed";
+  baseLetter?: string;
+  /** Label du graphème (sons complexes L7) — remplace baseLetter. */
+  graphemeLabel?: string;
+  mode?: "cv" | "vc" | "mixed" | "graph-vowel";
   /** Liste personnalisée (édition contenu) — sinon génération auto. */
   items?: string[];
 }
@@ -100,8 +103,19 @@ function matchesSyllable(transcript: string, target: string): boolean {
   );
 }
 
+function makeComplexSyllableList(
+  graphemeLabel: string,
+  mode: NonNullable<Props["mode"]>,
+  count: number,
+): string[] {
+  const targets = complexTargets(graphemeLabel);
+  const base = makeComplexSyllables(targets, mode);
+  if (count <= MOBILE_SYLLABLE_COUNT) return applyBalancedCase(base);
+  return [...base.map((s) => s.toUpperCase()), ...base.map((s) => s.toLowerCase())];
+}
+
 export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
-  function SyllableGrid({ baseLetter, mode = "cv", items }, ref) {
+  function SyllableGrid({ baseLetter = "", graphemeLabel, mode = "cv", items }, ref) {
   const lang = usePivotLang();
   const { showPivot } = useTranslation();
   const recRef = useRef<unknown>(null);
@@ -111,6 +125,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
   function resolveSyllables(count: number) {
     const custom = (items ?? []).map((s) => s.trim()).filter(Boolean);
     if (custom.length > 0) return expandCustomItems(custom, count);
+    if (graphemeLabel) return makeComplexSyllableList(graphemeLabel, mode, count);
     return makeSyllables(baseLetter, mode, count);
   }
 
@@ -130,7 +145,7 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
     setStates(Array(next.length).fill("idle"));
     setHeard(Array(next.length).fill(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [syllableCount, baseLetter, mode, items]);
+  }, [syllableCount, baseLetter, graphemeLabel, mode, items]);
 
   // Refresh: regenerate a fresh sequence of syllables and clear the state.
   function reset() {
@@ -193,11 +208,21 @@ export const SyllableGrid = forwardRef<SyllableGridHandle, Props>(
     rec.start();
   }
 
+  const isGraphVowel = mode === "graph-vowel";
+  const heading = graphemeLabel && isGraphVowel
+    ? "Son complexe + voyelle"
+    : "Lire les syllabes";
+  const consigne = graphemeLabel && isGraphVowel
+    ? `Prononcez chaque syllabe à voix haute. Exemples : ${
+        graphemeLabel.toLowerCase().includes("ph") ? "phi, phu, phe" : "cha, chu, cho"
+      }.`
+    : "Prononcez chaque syllabe a voix haute.";
+
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Lire les syllabes</h2>
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{heading}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Prononcez chaque syllabe a voix haute.
+        {consigne}
       </p>
       {showPivot && (
         <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>

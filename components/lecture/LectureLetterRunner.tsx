@@ -17,7 +17,7 @@ import {
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
 import { LetterPronounce, type LetterPronounceHandle } from "./LetterPronounce";
-import { PronunciationChain } from "./PronunciationChain";
+import { ComplexGraphemePronounce, type ComplexGraphemePronounceHandle } from "./ComplexGraphemePronounce";
 import {
   loadLectureProgress,
   saveLectureProgress,
@@ -30,7 +30,6 @@ import {
   normalizeGraph,
   complexTargets,
   makeComplexGrid,
-  makeComplexSyllables,
   splitComplexWord,
   usesGraphemeVowelSyllables,
 } from "@/lib/utils/complex-grapheme";
@@ -341,148 +340,7 @@ const ComplexWordSpotter = forwardRef<WordSpotterHandle, { target: string; isUpp
   },
 );
 
-const ComplexSyllableGrid = forwardRef<ResetHandle, { target: string; mode: "cv" | "vc" | "mixed" | "graph-vowel" }>(
-  function ComplexSyllableGrid({ target, mode }, ref) {
-  const targets = complexTargets(target);
-  const [syllables, setSyllables] = useState(() => makeComplexSyllables(targets, mode));
-  const [states, setStates] = useState<("idle" | "listening" | "correct" | "wrong")[]>(() => Array(6).fill("idle"));
-  const [heard, setHeard] = useState<string[]>(() => Array(6).fill(""));
-  const recRef = useRef<unknown>(null);
-
-  function reset() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    recRef.current = null;
-    setSyllables(makeComplexSyllables(complexTargets(target), mode));
-    setStates(Array(6).fill("idle"));
-    setHeard(Array(6).fill(""));
-  }
-
-  useImperativeHandle(ref, () => ({ reset }));
-
-  function startListening(index: number) {
-    // Une fois juste : verrouillé (comme l'étape Prononcer) — pas de refaire.
-    if (typeof window === "undefined" || states[index] === "listening" || states[index] === "correct") return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition;
-    if (!SR) return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (recRef.current as any)?.abort?.();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rec: any = new SR();
-    rec.lang = "fr-CH";
-    rec.continuous = false;
-    rec.interimResults = false;
-    rec.maxAlternatives = 3;
-    rec.onstart = () => {
-      setStates((prev) => prev.map((s, i) => (i === index ? "listening" : s)));
-      setHeard((prev) => prev.map((v, i) => (i === index ? "" : v)));
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    rec.onresult = (event: any) => {
-      let best = event.results[0]?.[0]?.transcript?.trim?.() ?? "";
-      let matched = false;
-      for (let alt = 0; alt < event.results[0].length; alt++) {
-        const transcript = event.results[0][alt].transcript.trim();
-        const norm = normalizeGraph(transcript).replace(/\s+/gu, "");
-        const want = normalizeGraph(syllables[index]!).replace(/\s+/gu, "");
-        if (norm === want || norm.includes(want)) {
-          best = transcript;
-          matched = true;
-          break;
-        }
-      }
-      setHeard((prev) => prev.map((v, i) => (i === index ? best : v)));
-      setStates((prev) => prev.map((s, i) => (i === index ? (matched ? "correct" : "wrong") : s)));
-    };
-    rec.onerror = () => setStates((prev) => prev.map((s, i) => (i === index ? "idle" : s)));
-    rec.onend = () => setStates((prev) => prev.map((s, i) => (i === index && s === "listening" ? "idle" : s)));
-    recRef.current = rec;
-    rec.start();
-  }
-
-  return (
-    <section className="space-y-3">
-      <div>
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-          {mode === "graph-vowel" ? "Son complexe + voyelle" : "Lire les syllabes"}
-        </h2>
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          {mode === "graph-vowel"
-            ? `Prononcez chaque syllabe à voix haute. Exemples : ${
-                normalizeGraph(target).includes("ph") ? "phi, phu, phe" : "cha, chu, cho"
-              }.`
-            : "Prononcez chaque syllabe à voix haute."}
-        </p>
-      </div>
-      <div className="space-y-2">
-        {syllables.map((syl, i) => {
-          const state = states[i]!;
-          return (
-            <div
-              key={`${syl}-${i}`}
-              className={`grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 rounded-[var(--radius-md)] border-2 px-3 py-2 transition-colors ${
-                state === "correct"
-                  ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                  : state === "wrong"
-                    ? "border-amber-400 bg-[var(--color-bg-primary)]"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
-              }`}
-            >
-              <span className="w-5 text-sm font-bold text-[var(--color-accent-lecture)]">{i + 1}.</span>
-              <button
-                type="button"
-                onClick={() => startListening(i)}
-                disabled={state === "listening" || state === "correct"}
-                className={`flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-transform active:scale-95 disabled:opacity-40 disabled:active:scale-100 ${
-                  state === "listening"
-                    ? "animate-pulse bg-red-500"
-                    : state === "correct"
-                      ? "bg-[var(--color-accent-lecture)]"
-                      : state === "wrong"
-                        ? "bg-amber-500"
-                        : "bg-[var(--color-accent-lecture)]"
-                }`}
-                aria-label="Parler"
-              >
-                {state === "correct" ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
-                ) : state === "wrong" ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <rect x="9" y="2" width="6" height="12" rx="3" />
-                    <path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" />
-                    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                )}
-              </button>
-              <span className="min-h-12 px-4 text-left text-xl font-bold leading-[3rem] text-[var(--color-text-primary)]">
-                {syl}
-              </span>
-              <button
-                type="button"
-                onClick={() => playSyllable(syl)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-secondary)]/15 text-[var(--color-text-secondary)] transition-opacity hover:opacity-75 active:scale-95"
-                aria-label={`Écouter ${syl}`}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                </svg>
-              </button>
-              {state === "wrong" && heard[i] && (
-                <p className="col-span-4 pl-8 text-xs text-amber-600">J&apos;ai entendu: {heard[i]}</p>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-});
-
-// Word pronunciation grid — same mic/word/audio row layout as the complex-sound
+// Word pronunciation grid — same mic/word/audio row layout as the syllable step,
 // syllable step, but driven by a fixed word list (used for the L6.1 tool words).
 const WordPronounceGrid = forwardRef<WordPronounceGridHandle, {
   words?: string[];
@@ -899,7 +757,6 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const [wordEvalState, setWordEvalState] = useState<{ isResults: boolean; canValidate: boolean; started: boolean } | null>(null);
   const [wordEvalResult, setWordEvalResult] = useState<{ grade: number; passed: boolean; total: number } | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
-  const wordMaxLength = useLectureWordMaxLength();
 
   useEffect(() => {
     if (searchParams.get("eval") === "1") {
@@ -917,8 +774,8 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
-  const pronounceRef = useRef<LetterPronounceHandle>(null);
-  const pronounceGridRef = useRef<WordPronounceGridHandle>(null);
+  const pronounceRef = useRef<LetterPronounceHandle | ComplexGraphemePronounceHandle>(null);
+  const pronounceGridRef = useRef<{ reset: () => void; validate?: () => void }>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
@@ -938,11 +795,10 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
   const isComplexWordStep = step.key === "complex-word-upper" || step.key === "complex-word-lower";
   const isSoundImageStep = step.key === "sound-image" || step.key === "sound-image-s";
   const isSoundAudioStep = step.key === "sound-audio" || step.key === "sound-audio-s";
-  const isPronounceStep = step.key === "pronounce";
-  const isPronounceComplexStep = step.key === "pronounce-complex";
+  const isPronounceStep = step.key === "pronounce" || step.key === "pronounce-complex";
   const isEvalStep = step.key === "eval";
   const isWordEvalL6L8 = isWordEvalStep && (data.type === "monosyllable" || data.type === "multisyllable");
-  // Steps rendered with the mic/word/audio grids (ComplexSyllableGrid / WordPronounceGrid):
+  // Steps rendered with the mic/word/audio grids (SyllableGrid / WordPronounceGrid):
   // these auto-validate on correct speech, so they only need a refresh action.
   const isPronounceGridStep =
     step.key === "complex-syllables-cv" ||
@@ -956,13 +812,12 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
     (data.type === "monosyllable" && !isWordEvalL6L8);
   const showExerciseButtons = isGridStep || isWordStep || isComplexGridStep || isComplexWordStep || isSoundImageStep || isSoundAudioStep;
   const showRefreshButton =
-    showExerciseButtons || isPronounceStep || isPronounceComplexStep || isPronounceGridStep;
+    showExerciseButtons || isPronounceStep || isPronounceGridStep;
 
   function exerciseReset() {
     if (isGridStep || isComplexGridStep) gridRef.current?.reset();
     else if (isWordStep || isComplexWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
-    else if (isPronounceComplexStep) setResetKey((k) => k + 1);
     else if (isPronounceStep) pronounceRef.current?.reset();
     else if (isPronounceGridStep) pronounceGridRef.current?.reset();
   }
@@ -1221,24 +1076,19 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
           return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
         case "complex-syllables-cv":
           return (
-            <ComplexSyllableGrid
+            <SyllableGrid
               key={k}
               ref={pronounceGridRef}
-              target={data.letter}
+              graphemeLabel={data.letter}
               mode={usesGraphemeVowelSyllables(data.letterLower) ? "graph-vowel" : "cv"}
             />
           );
         case "pronounce-complex":
           return (
-            <PronunciationChain
+            <ComplexGraphemePronounce
               key={k}
               ref={pronounceRef}
-              phoneme={data.phoneme}
-              chain={randomWordsWithGrapheme(data.letter, 8, wordMaxLength).map((word) => ({
-                phoneme: data.letter,
-                syllable: word,
-                word,
-              }))}
+              graphemeLabel={data.letter}
             />
           );
         default:
@@ -1504,7 +1354,7 @@ export function LectureLetterRunner({ data: baseData, moduleId }: Props) {
               Retour
             </button>
 
-            {(showExerciseButtons || isPronounceStep || isPronounceComplexStep || isPronounceGridStep || isWordEvalL6L8) && (
+            {(showExerciseButtons || isPronounceStep || isPronounceGridStep || isWordEvalL6L8) && (
               <div className="flex items-center gap-2">
                 {showRefreshButton && (
                   <button
