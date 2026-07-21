@@ -272,8 +272,14 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
         ) : w.feminine ? (
           <>
             <WordTitle definitionButton={definitionButton}>
-              {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
-              <span>{w.word}</span>
+              {w.relatedWords?.[0] ? (
+                <span>{w.relatedWords[0]}</span>
+              ) : (
+                <>
+                  {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
+                  <span>{w.word}</span>
+                </>
+              )}
             </WordTitle>
             <DefinitionText w={w} isOpen={definitionOpen} />
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
