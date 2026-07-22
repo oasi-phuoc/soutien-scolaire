@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
-import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
+import {
+  getPedagogicNavVisibilityAction,
+  getPlacementNavVisibilityAction,
+} from "@/app/actions/admin";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import {
@@ -28,6 +31,14 @@ const placementItem: NavItem = {
   icon: PlacementIcon,
   x: 0,
   y: -100,
+};
+
+const impressionsItem: NavItem = {
+  href: "/impressions",
+  label: "Impression",
+  icon: ImpressionIcon,
+  x: -40,
+  y: -90,
 };
 
 const links: NavItem[] = [
@@ -67,6 +78,7 @@ export function MainNav() {
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [placementVisible, setPlacementVisible] = useState(true);
+  const [impressionsVisible, setImpressionsVisible] = useState(false);
   const lessonMode = isLessonMode(pathname);
   const { actions, trigger } = useLessonActions(lessonMode);
 
@@ -75,6 +87,9 @@ export function MainNav() {
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
     getPlacementNavVisibilityAction().then((res) => {
       if (res.ok) setPlacementVisible(res.visible);
+    }).catch(() => {});
+    getPedagogicNavVisibilityAction().then((res) => {
+      if (res.ok) setImpressionsVisible(res.showImpressions);
     }).catch(() => {});
   }, [pathname]);
 
@@ -92,7 +107,13 @@ export function MainNav() {
   }, [open]);
 
   const navColor = sectionColor(pathname);
-  const menuItems = [...links, ...(placementVisible ? [placementItem] : []), translateItem];
+  const menuItems = [
+    ...links.filter((item) => item.href !== "/compte"),
+    ...(placementVisible ? [placementItem] : []),
+    ...(impressionsVisible ? [impressionsItem] : []),
+    settingsItem,
+    translateItem,
+  ];
 
   return (
     <>
@@ -192,6 +213,7 @@ export function MainNav() {
               aria-hidden={!open}
             >
               {placementVisible && <SecondaryMenuLink item={placementItem} open={open} />}
+              {impressionsVisible && <SecondaryMenuLink item={impressionsItem} open={open} />}
               <SecondaryMenuLink item={settingsItem} open={open} />
               <button
                 type="button"
@@ -432,6 +454,16 @@ function PlacementIcon({ active: _active }: { active: boolean }) {
       <path d="M12 20V10" />
       <path d="M18 20V4" />
       <path d="M6 20v-4" />
+    </svg>
+  );
+}
+
+function ImpressionIcon({ active: _active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
+      <path d="M6 9V2h12v7" />
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+      <rect x="6" y="14" width="12" height="8" rx="1" />
     </svg>
   );
 }

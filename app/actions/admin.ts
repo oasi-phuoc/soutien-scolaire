@@ -247,6 +247,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   isAdmin: boolean;
   hasSuiviAccess: boolean;
   canEditContent: boolean;
+  showImpressions: boolean;
 }> {
   const supabase = await createSupabaseActionClient();
   const openLocally =
@@ -262,6 +263,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
       isAdmin: false,
       hasSuiviAccess: false,
       canEditContent: true,
+      showImpressions: true,
     };
   }
 
@@ -275,6 +277,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
       isAdmin: false,
       hasSuiviAccess: false,
       canEditContent: openLocally,
+      showImpressions: openLocally,
     };
   }
 
@@ -291,5 +294,12 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   const canEditContent = isAdmin;
   const showSection = isAdmin || hasSuiviAccess;
 
-  return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent };
+  return {
+    ok: true,
+    showSection,
+    isAdmin,
+    hasSuiviAccess,
+    canEditContent,
+    showImpressions: isAdmin,
+  };
 }

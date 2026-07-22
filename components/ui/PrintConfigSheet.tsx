@@ -189,13 +189,15 @@ export function PrintDocumentFooter({
 // with its "Page N sur Total" number.
 const A4_RATIO = 297 / 210;
 
-function PaginatedPreview({
+/** Aperçu A4 paginé — en-tête page 1 uniquement, pied de page sur toutes les pages. */
+export function PaginatedPreview({
   header,
   theoryNode,
   exerciseNodes,
   printDate,
   printedBy,
   pagesContainerRef,
+  maxHeightClassName = "max-h-[calc(100vh-14rem)]",
 }: {
   header: ReactNode;
   theoryNode: ReactNode | null;
@@ -203,6 +205,7 @@ function PaginatedPreview({
   printDate: string;
   printedBy?: string;
   pagesContainerRef?: RefObject<HTMLDivElement | null>;
+  maxHeightClassName?: string;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const headerMeasureRef = useRef<HTMLDivElement>(null);
@@ -315,7 +318,7 @@ function PaginatedPreview({
       )}
 
       {/* Visible page sheets, stacked like a book. */}
-      <div ref={pagesContainerRef} className="preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto pb-32 pt-1" style={{ maxHeight: "calc(100vh - 14rem)" }}>
+      <div ref={pagesContainerRef} className={`preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto pb-8 pt-1 ${maxHeightClassName}`}>
         {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
           <div
             key={pageIdx}
