@@ -22,7 +22,7 @@ import {
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
@@ -448,7 +448,7 @@ function getA1StepHint(step: Step): string | undefined {
 
 // ─── Aperçu d'impression des exercices A1 (versions vierges à remplir) ───────
 // Reproduit chaque exercice avec des données fraîches et des champs vides,
-// pour l'aperçu PDF / impression (PrintConfigSheet).
+// pour les documents centralisés dans /impressions.
 function a1PrintPreview(step: Step): React.ReactNode | undefined {
   const line = (w = 150) => (
     <span className="inline-block border-b border-black/50 align-bottom" style={{ width: w, height: 15 }} />
@@ -2277,9 +2277,64 @@ function ExerciseRow({
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
+/** Contenu imprimable A1 (aperçu pixel-fidèle) — utilisé par /impressions. */
+export function A1PrintDocumentParts(submoduleId: string): {
+  title: string;
+  course: "Mathématiques";
+  accentColor: string;
+  theoryPreview: React.ReactNode;
+  exercises: PrintExercise[];
+} | null {
+  const lesson = MATH_A1_LESSONS.find((l) => l.submoduleId === submoduleId);
+  if (!lesson) return null;
+  const steps = getLessonSteps(lesson);
+  const theoryFr = pickTheoryFrench(lesson.theory);
+  const lessonTrad = getTrad(lesson.submoduleId);
+  return {
+    title: theoryFr.title,
+    course: "Mathématiques",
+    accentColor: "var(--color-accent-alg)",
+    theoryPreview: (
+      <div className="space-y-3 leading-relaxed text-black">
+        <h2 className="text-base font-bold">{theoryFr.title}</h2>
+        {lesson.theory.blocks
+          ? lesson.theory.blocks.map((block, i) => (
+              <React.Fragment key={i}>
+                {RichBlock({
+                  block,
+                  blockIdx: i,
+                  trad: lessonTrad,
+                  pivot: "en",
+                  showPivot: false,
+                  isRtl: false,
+                })}
+              </React.Fragment>
+            ))
+          : theoryFr.paragraphs.map((p, i) => <p key={i}>{renderBold(p)}</p>)}
+      </div>
+    ),
+    exercises: steps
+      .filter((candidate) => candidate.startsWith("ex"))
+      .map((candidate, index) => {
+        const hint = getA1StepHint(candidate);
+        const body = a1PrintPreview(candidate);
+        return {
+          id: candidate,
+          label: `Exercice ${index + 1}`,
+          preview: (
+            <div className="space-y-2">
+              {hint && <p className="text-xs italic text-zinc-600">{hint}</p>}
+              {body ?? <div className="h-7 border-b border-black/40" />}
+            </div>
+          ),
+        };
+      }),
+  };
+}
+
 // ─── Composant principal ──────────────────────────────────────────────────────
 
-export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { startSubmoduleId?: string; startAtEval?: boolean; isAdmin?: boolean } = {}) {
+export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmoduleId?: string; startAtEval?: boolean; isAdmin?: boolean } = {}) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
@@ -2296,11 +2351,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
     return startSubmoduleId ? "theory" : loadA1Position().step;
   });
   const [showHint, setShowHint] = useState(false);
-  const [showPrintConfig, setShowPrintConfig] = useState(false);
-
-  const handlePrint = () => {
-    setShowPrintConfig(false);
-  };
 
   // Exercice 2 — écrire les nombres (1–10)
   const [ex2Numbers, setEx2Numbers] = useState<number[]>(generateNumbers);
@@ -3102,62 +3152,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval, isAdmin }: { st
         <div data-no-print>
           <A1HintPopup hint={getA1StepHint(step)!} onClose={() => setShowHint(false)} />
         </div>
-      )}
-
-      {/* Print config button — floated right, only on theory step, only for admin */}
-      {isAdmin && step === "theory" && (
-        <div className="float-right ml-2" data-no-print>
-          <button
-            type="button"
-            onClick={() => setShowPrintConfig(true)}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-            aria-label="Imprimer en PDF"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      )}
-
-      {/* Print config sheet */}
-      {showPrintConfig && (
-        <PrintConfigSheet
-          onClose={() => setShowPrintConfig(false)}
-          onPrint={handlePrint}
-          lessonTitle={defaultTheoryTitle}
-          theoryPreview={
-            <div className="space-y-3 leading-relaxed text-black">
-              <h2 className="text-base font-bold">{theoryTitleText}</h2>
-              {lesson.theory.blocks
-                ? lesson.theory.blocks.map((block, i) => (
-                    <React.Fragment key={i}>
-                      {RichBlock({ block, blockIdx: i, trad: lessonTrad, pivot, showPivot: false, isRtl: false })}
-                    </React.Fragment>
-                  ))
-                : theoryFr.paragraphs.map((p, i) => <p key={i}>{renderBold(p)}</p>)}
-            </div>
-          }
-          exercises={steps
-            .filter((candidate) => candidate.startsWith("ex"))
-            .map((candidate, index) => {
-              const hint = getA1StepHint(candidate);
-              const body = a1PrintPreview(candidate);
-              return {
-                id: candidate,
-                label: `Exercice ${index + 1}`,
-                preview: (
-                  <div className="space-y-2">
-                    {hint && <p className="text-xs italic text-zinc-600">{hint}</p>}
-                    {body ?? <div className="h-7 border-b border-black/40" />}
-                  </div>
-                ),
-              };
-            })}
-          accentColor="var(--color-accent-alg)"
-        />
       )}
 
       {step === "theory" && (

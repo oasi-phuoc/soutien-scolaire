@@ -35,7 +35,6 @@ import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGu
 import { useTranslation } from "@/components/TranslationProvider";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 type ExerciseMeta = PlacementMathExerciseMeta;
 
@@ -358,7 +357,6 @@ export function PlacementTestClient({
   const [savedResult, setSavedResult] = useState(false);
   const [selectedResultIdx, setSelectedResultIdx] = useState(0);
   const exerciseKeys = useMemo(() => exercises.map((_, i) => sessionKey * 100 + i), [exercises, sessionKey]);
-  const [showPrint, setShowPrint] = useState(false);
 
   useRegisterEvalGuard(mode === "placement" && phase === "running");
 
@@ -384,25 +382,6 @@ export function PlacementTestClient({
       updatedAt: new Date().toISOString(),
     });
   }, [currentIdx, isTraining, scores, sessionKey, timeLeft, trainingLevel, trainingSessionId, validateTriggers, validated]);
-
-  const printExercisesForConfig = useMemo(() =>
-    exercises.map(ex => {
-      const ExComp = ex.component;
-      return {
-        id: String(ex.id),
-        label: `${ex.id}. ${ex.label}`,
-        preview: (
-          <ExComp
-            exerciseKey={1}
-            validated={false}
-            onValidated={() => {}}
-            validateTrigger={0}
-          />
-        ),
-      };
-    }),
-    [exercises]
-  );
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -579,18 +558,6 @@ export function PlacementTestClient({
   // ── Start screen ───────────────────────────────────────────────────────────
 
   if (phase === "idle") {
-    if (showPrint) {
-      return (
-        <PrintConfigSheet
-          onClose={() => setShowPrint(false)}
-          onPrint={() => {}}
-          exercises={printExercisesForConfig}
-          accentColor={accent}
-          lessonTitle="Test de placement"
-        />
-      );
-    }
-
     return (
       <div className="placement-test-font app-shell flex-1 py-8 pb-32 lg:pb-28">
         <div className="space-y-6">
@@ -654,22 +621,6 @@ export function PlacementTestClient({
             {isTraining ? "Commencer l'entraînement" : introText.start}
           </button>
 
-          {!isTraining && (
-          <button
-            type="button"
-            onClick={() => setShowPrint(true)}
-            className="flex w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-border-emphasis)]"
-            onMouseEnter={(e) => { e.currentTarget.style.color = accent; e.currentTarget.style.borderColor = accent; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = ""; e.currentTarget.style.borderColor = ""; }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
-            </svg>
-            Imprimer le test ({exerciseCount} exercices)
-          </button>
-          )}
         </div>
       </div>
     );

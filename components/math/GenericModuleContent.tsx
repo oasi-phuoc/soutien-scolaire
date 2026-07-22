@@ -32,7 +32,6 @@ import { useContentEditor } from "@/components/content-editor/ContentEditorProvi
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import type { PivotCode } from "@/lib/pivot-langs";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import {
@@ -6933,18 +6932,6 @@ export function GenericModuleContent({
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
   const trainingHasWordProblems = evalStartIdx >= 0 && steps.slice(0, evalStartIdx).some(s => s.kind === "word_problems");
   const initialIdx = !trainingHasWordProblems && (startAtEval || revisionMode) && evalStartIdx >= 0 ? evalStartIdx : 0;
-  const trainingExercisePrompts = (() => {
-    const textExercises = (evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps)
-      .filter((s) => s.kind === "exercise")
-      .map((s) => (s as { kind: "exercise"; item: { promptFr: string } }).item.promptFr);
-    if (textExercises.length > 0) return textExercises;
-    // Fallback for interactive-only modules (A1.3/A1.4/A1.5/A3.4): use exercisePool for PDF display
-    const pool = lessons?.[0]?.exercisePool;
-    const size = lessons?.[0]?.poolSize ?? 5;
-    if (pool && pool.length > 0 && size > 0)
-      return shufflePick(pool, size).map((e) => e.promptFr);
-    return [];
-  })();
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [answer, setAnswer] = useState("");
@@ -7153,13 +7140,6 @@ export function GenericModuleContent({
 
   // Hint popup
   const [showHint, setShowHint] = useState(false);
-
-  // Print config sheet
-  const [showPrintConfig, setShowPrintConfig] = useState(false);
-
-  const handlePrint = useCallback(() => {
-    setShowPrintConfig(false);
-  }, []);
 
   // Eval phase state
   const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
@@ -9862,25 +9842,6 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Print config sheet */}
-      {showPrintConfig && (
-        <PrintConfigSheet
-          onClose={() => setShowPrintConfig(false)}
-          onPrint={handlePrint}
-          lessonTitle={revisionTitle ?? currentStep?.lesson.theory.title.fr ?? ""}
-          theoryPreview={(() => {
-            const ts = trainingSteps.find(s => s.kind === "theory") as { kind: "theory"; lesson: MathSubmoduleLesson } | undefined;
-            return ts ? <TheoryView lesson={ts.lesson} pivot={pivot} showPivot={!!showPivotTranslation} /> : undefined;
-          })()}
-          exercises={trainingExercisePrompts.map((prompt, i) => ({
-            id: String(i),
-            label: `Exercice ${i + 1}`,
-            preview: <p>{prompt}</p>,
-          }))}
-          accentColor="var(--color-accent-alg)"
-        />
-      )}
-
       {/* Main progress bar — training steps only */}
       {!inEvalPhase && (
         <div data-no-print>
@@ -9923,24 +9884,6 @@ export function GenericModuleContent({
       {showHint && getStepHint(currentStep) && (
         <div data-no-print>
           <HintPopup hint={getStepHint(currentStep)!} onClose={() => setShowHint(false)} />
-        </div>
-      )}
-
-      {/* Print config button — floated right, only on theory step */}
-      {!showEvalScore && currentStep?.kind === "theory" && (
-        <div className="float-right ml-2" data-no-print>
-          <button
-            type="button"
-            onClick={() => setShowPrintConfig(true)}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-            aria-label="Imprimer en PDF"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-            </svg>
-          </button>
         </div>
       )}
 
