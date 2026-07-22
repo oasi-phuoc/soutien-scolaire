@@ -6871,6 +6871,91 @@ function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
   return result;
 }
 
+function GenericExercisePrintPreview({ prompt }: { prompt: string }) {
+  return (
+    <div className="space-y-3">
+      <p className="text-sm leading-relaxed text-black">{prompt}</p>
+      <div className="h-8 w-full border-b-2 border-black/40" />
+    </div>
+  );
+}
+
+function genericStepPrompt(step: FlatStep): string | null {
+  if (step.kind === "exercise") return step.item.promptFr;
+  if ("config" in step && step.config && typeof step.config === "object") {
+    const cfg = step.config as { promptFr?: string; instructionFr?: string };
+    return cfg.promptFr ?? cfg.instructionFr ?? null;
+  }
+  if ("item" in step && step.item && typeof step.item === "object" && "promptFr" in step.item) {
+    return String((step.item as { promptFr: string }).promptFr);
+  }
+  return null;
+}
+
+/** Aperçus d'impression pour leçons GenericModuleContent (prompts + cases à remplir). */
+export function buildGenericMathPrintExercises(
+  lesson: MathSubmoduleLesson,
+): { id: string; label: string; preview: React.ReactNode }[] {
+  const steps = buildSteps([lesson], true);
+  const evalStart = steps.findIndex((s) => s.kind === "eval_start");
+  const training = steps.slice(0, evalStart >= 0 ? evalStart : steps.length);
+  const out: { id: string; label: string; preview: React.ReactNode }[] = [];
+
+  for (const step of training) {
+    if (
+      step.kind === "theory" ||
+      step.kind === "eval_start" ||
+      step.kind === "pass_toggle"
+    ) {
+      continue;
+    }
+    const prompt = genericStepPrompt(step);
+    const n = out.length + 1;
+    if (prompt) {
+      out.push({
+        id: `${step.kind}-${n}`,
+        label: `Exercice ${n}`,
+        preview: <GenericExercisePrintPreview prompt={prompt} />,
+      });
+      continue;
+    }
+    // Étapes interactives sans prompt texte : feuille avec plusieurs cases
+    out.push({
+      id: `${step.kind}-${n}`,
+      label: `Exercice ${n}`,
+      preview: (
+        <div className="space-y-3">
+          <p className="text-sm font-medium text-black">
+            Complète les questions de l&apos;exercice {n}.
+          </p>
+          {Array.from({ length: 5 }, (_, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">
+                {i + 1}.
+              </span>
+              <div className="h-8 flex-1 border-b-2 border-black/40" />
+            </div>
+          ))}
+        </div>
+      ),
+    });
+  }
+
+  if (out.length === 0) {
+    const pool = lesson.exercisePool ?? [];
+    const size = lesson.poolSize ?? Math.min(5, pool.length);
+    pool.slice(0, size).forEach((item, i) => {
+      out.push({
+        id: String(i + 1),
+        label: `Exercice ${i + 1}`,
+        preview: <GenericExercisePrintPreview prompt={item.promptFr} />,
+      });
+    });
+  }
+
+  return out;
+}
+
 export function GenericModuleContent({
   moduleId,
   startSubmoduleId,

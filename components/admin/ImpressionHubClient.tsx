@@ -64,24 +64,29 @@ export function ImpressionHubClient() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-2">
-        {DOMAINS.map((d) => {
-          const active = domain === d.id;
-          return (
-            <button
-              key={d.id}
-              type="button"
-              onClick={() => selectDomain(d.id)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                active
-                  ? "bg-[var(--color-theme)] text-white"
-                  : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-              }`}
-            >
-              {d.label}
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-2">
+          {DOMAINS.map((d) => {
+            const active = domain === d.id;
+            return (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => selectDomain(d.id)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  active
+                    ? "bg-[var(--color-theme)] text-white"
+                    : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                }`}
+              >
+                {d.label}
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-xs text-[var(--color-text-secondary)]">
+          Une leçon à la fois · Aperçu A4 puis Imprimer / PDF
+        </p>
       </div>
 
       {groups.length > 1 && (

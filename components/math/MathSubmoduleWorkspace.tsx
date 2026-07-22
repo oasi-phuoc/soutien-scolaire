@@ -1792,6 +1792,160 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
   );
 }
 
+
+export function isWorkspaceCustomSubmodule(moduleId: string, submoduleId?: string): boolean {
+  if (moduleId === "A4") return true;
+  if (!submoduleId) return false;
+  return (
+    submoduleId === "G1-1" ||
+    submoduleId === "G1-2" ||
+    submoduleId.startsWith("G3-") ||
+    submoduleId.startsWith("G4-") ||
+    submoduleId === "A5-1" ||
+    submoduleId === "A5-4" ||
+    submoduleId === "A5-5" ||
+    submoduleId === "A5-6" ||
+    submoduleId === "A7-1" ||
+    submoduleId === "A7-2" ||
+    submoduleId === "A7-3" ||
+    submoduleId === "A7-4" ||
+    submoduleId === "A6-1" ||
+    submoduleId === "A6-2" ||
+    submoduleId === "A6-3" ||
+    submoduleId === "A8-1" ||
+    submoduleId === "A8-2" ||
+    submoduleId === "A8-3" ||
+    submoduleId === "A8-4" ||
+    submoduleId === "A8-5"
+  );
+}
+
+function renderWorkspaceEvalStep(
+  step: WorkspaceStep,
+  validateCmd: number,
+  onVld: (ok: boolean, correct?: number, total?: number) => void,
+  promptFor: (promptFr: string) => string = (s) => s,
+): React.ReactNode {
+  if (step.kind === "fraction_toggle") return <FractionToggleExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_coloring") return <FractionColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_read") return <FractionReadExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_multi_coloring") return <FractionMultiColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_multi_read") return <FractionMultiReadExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_equiv") return <FractionEquivExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_simplify") return <FractionSimplifyExercise validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "fraction_compare") return <FractionCompareExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "frac_op_compare") return <FracOpCompareExercise exNum={step.exNum} opMode={step.opMode} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "frac_to_dec") return <FracToDecExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_to_frac") return <DecToFracExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "frac_ops") return <FractionOpsExercise exType={step.exType} opMode={step.opMode} count={step.count} displayExNum={step.displayExNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_arith_group") return <DecArithGroupExercise exNum={step.exNum} op={step.op} missingOperand={step.missingOperand} timer={step.timer} precision={step.precision} mixed={step.mixed} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_mul_col") return <DecMulColGridExercise exNum={step.exNum} preFilledOperands={step.preFilledOperands} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_mul2_col") return <DecMul2ColExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_div_simple") return <DecDivSimpleExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_div_missing") return <DecDivMissingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_div_ext") return <DecDivExtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_col_arith") return <DecColArithExercise exNum={step.exNum} op={step.op} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_col_arith_full") return <DecColArithFullExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_expr_comp") return <DecExprCompExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_decompose") return <DecReadDecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_recompose") return <DecReadRecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_place_value") return <DecReadPlaceValueExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_digit_at") return <DecReadDigitAtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_dictation") return <DecReadDictationExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_compare") return <DecReadCompareExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_order") return <DecReadOrderExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_filter_gt") return <DecReadFilterGtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_filter_lt") return <DecReadFilterLtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_filter_between") return <DecReadFilterBetweenExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_encadrement") return <DecReadEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_encadrement_unite") return <DecReadEncadrementUniteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_nl_read") return <DecReadNLReadExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_read_nl_place") return <DecReadNLPlaceExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_nl_read_mixed") return <A7NLReadMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_nl_place_mixed") return <A7NLPlaceMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_nl_read_neg") return <A7NLReadNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_nl_place_neg") return <A7NLPlaceNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_compare_ex") return <A7CompareExercise exNum={step.exNum} level={step.level} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_num_select") return <A7RelNumberSelectExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_encadrement") return <A7RelEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_ordering") return <A7RelOrderingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_seq_complete") return <A7RelSeqCompleteExercise exNum={step.exNum} isDecimal={step.isDecimal} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_arith") return <A7RelArithExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a7_rel_mul_div") return <A7RelMulDivExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_power_ex") return <A8PowerExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_missing_exp_ex") return <A8MissingExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_missing_base_ex") return <A8MissingBaseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_power_cmp_ex") return <A8PowerCompareExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_power_order_ex") return <A8PowerOrderExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_mult_ex") return <A8MultExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_div_ex") return <A8DivExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_pow_pow_ex") return <A8PowPowExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_mixed_ex") return <A8MixedExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_eq_complete_ex") return <A8EqCompleteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_pow10_calc_ex") return <A8Pow10CalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_to_pow10_ex") return <A8ToPow10Exercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_pow10_exp_ex") return <A8Pow10ExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_sci_calc_ex") return <A8SciCalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_sci_write_ex") return <A8SciWriteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_sqrt_tf_ex") return <A8SqrtTrueFalseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_sqrt_ex") return <A8SqrtExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_sqrt_missing_ex") return <A8SqrtMissingExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_simple_ex") return <A8OpSimpleExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_paren_ex") return <A8OpParenExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_bracket_ex") return <A8OpBracketExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_fill_ex") return <A8OpFillExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_powsqrt_ex") return <A8OpPowSqrtExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "a8_op_complex_ex") return <A8OpComplexExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_to_frac_ex") return <PctToFracExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_to_dec_ex") return <PctToDecExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "frac_to_pct_ex") return <FracToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "dec_to_pct_ex") return <DecToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_of_num_ex") return <PctOfNumExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "part_to_pct_ex") return <PartToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_diff_ex") return <PctDiffExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_change_ex") return <PctChangeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_multiplier_ex") return <PctMultiplierExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_table_ex") return <PctTableExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pct_word_ex") return <PctWordExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_name_to_svg") return <G1NameToSVGExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_definition_match") return <G1DefinitionMatchExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_anagram") return <G1AnagramExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_shape_write") return <G1ShapeWriteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_prop_check") return <G1PropCheckExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g1_shape_qa") return <G1ShapeQAExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
+  if (step.kind === "pool_group") return <PoolGroupExercise exNum={step.exNum} pool={step.pool} count={step.count} validateCommand={validateCmd} onValidated={onVld} />;
+  return null;
+}
+
+
+export function buildWorkspacePrintExercises(
+  lesson: MathSubmoduleLesson,
+): { id: string; label: string; preview: React.ReactNode }[] {
+  const steps = buildSteps(lesson);
+  const evalStart = steps.findIndex((s) => s.kind === "eval_start");
+  const training = steps
+    .slice(0, evalStart >= 0 ? evalStart : steps.length)
+    .filter(
+      (s) =>
+        s.kind !== "theory" &&
+        s.kind !== "eval_start" &&
+        s.kind !== "pass_toggle" &&
+        s.kind !== "results",
+    );
+  const noop = () => {};
+  return training.map((step, index) => ({
+    id: `${step.kind}-${index}`,
+    label: `Exercice ${index + 1}`,
+    preview: (
+      <div className="print-ex-content [&_button]:pointer-events-none">
+        {renderWorkspaceEvalStep(step, 0, noop)}
+      </div>
+    ),
+  }));
+}
+
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {
   const router = useRouter();
   const sectionBackUrl = moduleId.startsWith("G") ? "/mathematiques?tab=geometry" : "/mathematiques";
@@ -2075,97 +2229,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     validateCmd: number,
     onVld: (ok: boolean, correct?: number, total?: number) => void,
   ): React.ReactNode {
-    if (step.kind === "fraction_toggle") return <FractionToggleExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_coloring") return <FractionColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_read") return <FractionReadExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_multi_coloring") return <FractionMultiColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_multi_read") return <FractionMultiReadExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_equiv") return <FractionEquivExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_simplify") return <FractionSimplifyExercise validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "fraction_compare") return <FractionCompareExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "frac_op_compare") return <FracOpCompareExercise exNum={step.exNum} opMode={step.opMode} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "frac_to_dec") return <FracToDecExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_to_frac") return <DecToFracExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "frac_ops") return <FractionOpsExercise exType={step.exType} opMode={step.opMode} count={step.count} displayExNum={step.displayExNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_arith_group") return <DecArithGroupExercise exNum={step.exNum} op={step.op} missingOperand={step.missingOperand} timer={step.timer} precision={step.precision} mixed={step.mixed} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_mul_col") return <DecMulColGridExercise exNum={step.exNum} preFilledOperands={step.preFilledOperands} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_mul2_col") return <DecMul2ColExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_div_simple") return <DecDivSimpleExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_div_missing") return <DecDivMissingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_div_ext") return <DecDivExtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_col_arith") return <DecColArithExercise exNum={step.exNum} op={step.op} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_col_arith_full") return <DecColArithFullExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_expr_comp") return <DecExprCompExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_decompose") return <DecReadDecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_recompose") return <DecReadRecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_place_value") return <DecReadPlaceValueExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_digit_at") return <DecReadDigitAtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_dictation") return <DecReadDictationExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_compare") return <DecReadCompareExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_order") return <DecReadOrderExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_filter_gt") return <DecReadFilterGtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_filter_lt") return <DecReadFilterLtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_filter_between") return <DecReadFilterBetweenExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_encadrement") return <DecReadEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_encadrement_unite") return <DecReadEncadrementUniteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_nl_read") return <DecReadNLReadExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_read_nl_place") return <DecReadNLPlaceExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_nl_read_mixed") return <A7NLReadMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_nl_place_mixed") return <A7NLPlaceMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_nl_read_neg") return <A7NLReadNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_nl_place_neg") return <A7NLPlaceNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_compare_ex") return <A7CompareExercise exNum={step.exNum} level={step.level} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_num_select") return <A7RelNumberSelectExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_encadrement") return <A7RelEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_ordering") return <A7RelOrderingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_seq_complete") return <A7RelSeqCompleteExercise exNum={step.exNum} isDecimal={step.isDecimal} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_arith") return <A7RelArithExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a7_rel_mul_div") return <A7RelMulDivExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_power_ex") return <A8PowerExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_missing_exp_ex") return <A8MissingExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_missing_base_ex") return <A8MissingBaseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_power_cmp_ex") return <A8PowerCompareExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_power_order_ex") return <A8PowerOrderExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_mult_ex") return <A8MultExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_div_ex") return <A8DivExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_pow_pow_ex") return <A8PowPowExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_mixed_ex") return <A8MixedExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_eq_complete_ex") return <A8EqCompleteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_pow10_calc_ex") return <A8Pow10CalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_to_pow10_ex") return <A8ToPow10Exercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_pow10_exp_ex") return <A8Pow10ExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_sci_calc_ex") return <A8SciCalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_sci_write_ex") return <A8SciWriteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_sqrt_tf_ex") return <A8SqrtTrueFalseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_sqrt_ex") return <A8SqrtExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_sqrt_missing_ex") return <A8SqrtMissingExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_simple_ex") return <A8OpSimpleExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_paren_ex") return <A8OpParenExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_bracket_ex") return <A8OpBracketExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_fill_ex") return <A8OpFillExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_powsqrt_ex") return <A8OpPowSqrtExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "a8_op_complex_ex") return <A8OpComplexExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_to_frac_ex") return <PctToFracExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_to_dec_ex") return <PctToDecExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "frac_to_pct_ex") return <FracToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "dec_to_pct_ex") return <DecToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_of_num_ex") return <PctOfNumExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "part_to_pct_ex") return <PartToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_diff_ex") return <PctDiffExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_change_ex") return <PctChangeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_multiplier_ex") return <PctMultiplierExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_table_ex") return <PctTableExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pct_word_ex") return <PctWordExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_name_to_svg") return <G1NameToSVGExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_definition_match") return <G1DefinitionMatchExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_anagram") return <G1AnagramExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_shape_write") return <G1ShapeWriteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_prop_check") return <G1PropCheckExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g1_shape_qa") return <G1ShapeQAExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
-    if (step.kind === "pool_group") return <PoolGroupExercise exNum={step.exNum} pool={step.pool} count={step.count} validateCommand={validateCmd} onValidated={onVld} />;
-    return null;
+    return renderWorkspaceEvalStep(step, validateCmd, onVld, promptFor);
   }
 
   return (

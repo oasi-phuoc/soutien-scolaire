@@ -2,11 +2,20 @@
 
 import type { ReactNode } from "react";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
-import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
+import {
+  getLessonBySubmoduleId,
+  getModuleIdForSubmodule,
+} from "@/lib/curriculum/lessons-registry";
 import { getVocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { getGrammarLesson, getConjLesson } from "@/lib/curriculum/grammar-data";
 import { PLACEMENT_MATH_EXERCISES } from "@/lib/placement/math-exercises";
 import { MathTheoryPrintView } from "@/components/print/MathTheoryPrintView";
+import { buildA1PrintExercises } from "@/components/math/A1ModuleContent";
+import {
+  buildWorkspacePrintExercises,
+  isWorkspaceCustomSubmodule,
+} from "@/components/math/MathSubmoduleWorkspace";
+import { buildGenericMathPrintExercises } from "@/components/math/GenericModuleContent";
 import { VocabCards } from "@/components/francais/vocab/VocabCards";
 import { ExImageMatch } from "@/components/francais/vocab/ExImageMatch";
 import { ExArticle } from "@/components/francais/vocab/ExArticle";
@@ -36,39 +45,32 @@ export type PrintBundle = {
 
 const noop = () => {};
 
-function mathExercisePrompts(submoduleId: string): string[] {
-  const lesson = getLessonBySubmoduleId(submoduleId);
-  if (!lesson) return [];
-  const pool = lesson.exercisePool;
-  if (pool && pool.length > 0) {
-    const size = lesson.poolSize ?? Math.min(5, pool.length);
-    return pool.slice(0, size).map((e) => e.promptFr);
-  }
-  if (lesson.exercisePools && lesson.exercisePools.length > 0) {
-    const prompts: string[] = [];
-    lesson.exercisePools.forEach((p, i) => {
-      const size = lesson.poolSizes?.[i] ?? Math.min(5, p.length);
-      prompts.push(...p.slice(0, size).map((e) => e.promptFr));
-    });
-    return prompts;
-  }
-  return [];
-}
-
 function buildMathBundle(submoduleId: string): PrintBundle | null {
   const lesson = getLessonBySubmoduleId(submoduleId);
   if (!lesson) return null;
-  const prompts = mathExercisePrompts(submoduleId);
+  const moduleId = getModuleIdForSubmodule(submoduleId) ?? submoduleId.split("-")[0] ?? "";
+
+  let exercises: PrintExercise[];
+  if (submoduleId === "A1-1" || submoduleId === "A1-2") {
+    exercises = buildA1PrintExercises(submoduleId);
+  } else if (isWorkspaceCustomSubmodule(moduleId, submoduleId)) {
+    exercises = buildWorkspacePrintExercises(lesson);
+  } else {
+    exercises = buildGenericMathPrintExercises(lesson);
+  }
+
+  // Fallback si aucun exercice n'a pu être construit
+  if (exercises.length === 0) {
+    exercises = buildGenericMathPrintExercises(lesson);
+  }
+
+  const isGeo = moduleId.startsWith("G");
   return {
     lessonTitle: lesson.theory.title.fr,
     course: "Mathématiques",
-    accentColor: "var(--color-accent-alg)",
+    accentColor: isGeo ? "var(--color-accent-geo)" : "var(--color-accent-alg)",
     theoryPreview: <MathTheoryPrintView lesson={lesson} />,
-    exercises: prompts.map((prompt, i) => ({
-      id: String(i),
-      label: `Exercice ${i + 1}`,
-      preview: <p className="text-sm text-black">{prompt}</p>,
-    })),
+    exercises,
   };
 }
 
