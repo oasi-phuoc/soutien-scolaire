@@ -1588,3 +1588,24 @@ export function ComprehensionOraleRunner({
     </main>
   );
 }
+
+/** Aperçu imprimable du CO progressif (test de placement). */
+export function PlacementCoPrintPreview({ seed = 1 }: { seed?: number }) {
+  const parts = useMemo(() => makeProgressiveCoParts(seed), [seed]);
+  return (
+    <div className="space-y-10">
+      {parts.map((part, index) => (
+        <div key={part.id} className="space-y-3">
+          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
+            Exercice {index + 1}
+          </p>
+          <QuestionBlock
+            part={part}
+            answers={{}}
+            onAnswer={() => undefined}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}

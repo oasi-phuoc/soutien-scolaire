@@ -70,6 +70,14 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     title: "Test de placement — Mathématiques",
   });
 
+  entries.push({
+    id: "placement:francais",
+    domain: "placement",
+    group: "Placement",
+    code: "P.Fr",
+    title: "Test de placement — Français",
+  });
+
   return entries;
 }
 

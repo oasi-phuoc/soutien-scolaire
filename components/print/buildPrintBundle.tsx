@@ -33,6 +33,10 @@ import {
   GrammarTheoryView,
   GrammarExerciseView,
 } from "@/components/francais/GrammaireRunner";
+import { PlacementCePrintPreview } from "@/components/communication/ComprehensionEcritRunner";
+import { PlacementCoPrintPreview } from "@/components/communication/ComprehensionOraleRunner";
+import { PlacementPePrintPreview } from "@/components/communication/ProductionEcriteRunner";
+import { PlacementPoPrintPreview } from "@/components/communication/OralProductionRunner";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 
 export type PrintBundle = {
@@ -294,11 +298,11 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
   };
 }
 
-function buildPlacementBundle(): PrintBundle {
+function buildPlacementMathBundle(): PrintBundle {
   return {
-    lessonTitle: "Test de placement",
+    lessonTitle: "Test de placement — Mathématiques",
     course: "Mathématiques",
-    accentColor: "var(--color-accent-alg)",
+    accentColor: "var(--color-accent-quiz)",
     exercises: PLACEMENT_MATH_EXERCISES.map((ex) => {
       const Comp = ex.component;
       return {
@@ -317,9 +321,41 @@ function buildPlacementBundle(): PrintBundle {
   };
 }
 
+function buildPlacementFrenchBundle(): PrintBundle {
+  const seed = 1;
+  return {
+    lessonTitle: "Test de placement — Français",
+    course: "Français",
+    accentColor: "var(--color-accent-quiz)",
+    exercises: [
+      {
+        id: "ce",
+        label: "1. Compréhension écrite",
+        preview: <PlacementCePrintPreview seed={seed} />,
+      },
+      {
+        id: "co",
+        label: "2. Compréhension orale",
+        preview: <PlacementCoPrintPreview seed={seed} />,
+      },
+      {
+        id: "pe",
+        label: "3. Production écrite",
+        preview: <PlacementPePrintPreview />,
+      },
+      {
+        id: "po",
+        label: "4. Production orale",
+        preview: <PlacementPoPrintPreview />,
+      },
+    ],
+  };
+}
+
 /** Construit le bundle d'aperçu pour une entrée du catalogue d'impression. */
 export function buildPrintBundle(catalogId: string): PrintBundle | null {
-  if (catalogId === "placement:math") return buildPlacementBundle();
+  if (catalogId === "placement:math") return buildPlacementMathBundle();
+  if (catalogId === "placement:francais") return buildPlacementFrenchBundle();
 
   if (catalogId.startsWith("math:")) {
     return buildMathBundle(catalogId.slice("math:".length));

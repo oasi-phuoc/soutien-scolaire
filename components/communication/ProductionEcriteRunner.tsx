@@ -922,3 +922,55 @@ export function ProductionEcriteRunner({
     </main>
   );
 }
+
+/** Aperçu imprimable PE hybride du test de placement (formulaire + court + long). */
+export function PlacementPePrintPreview() {
+  const [formTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
+  const [shortPrompt] = useState(() => buildPrompt("moyen", "short"));
+  const [longPrompt] = useState(() => buildPrompt("avance", "long"));
+  const emptyForm: Record<string, string> = {};
+
+  return (
+    <div className="space-y-10">
+      {formTemplate && (
+        <section className="space-y-3">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-lg font-bold text-black">1. Formulaire</h2>
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">5 pts</span>
+          </div>
+          <FormExercise
+            template={formTemplate}
+            answers={emptyForm}
+            advanced={false}
+            disabled={false}
+            onChange={() => {}}
+          />
+        </section>
+      )}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-lg font-bold text-black">2. Texte court</h2>
+          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">10 pts</span>
+        </div>
+        <WritingExercise
+          prompt={shortPrompt}
+          text=""
+          disabled={false}
+          onTextChange={() => {}}
+        />
+      </section>
+      <section className="space-y-3">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-lg font-bold text-black">3. Texte long</h2>
+          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">10 pts</span>
+        </div>
+        <WritingExercise
+          prompt={longPrompt}
+          text=""
+          disabled={false}
+          onTextChange={() => {}}
+        />
+      </section>
+    </div>
+  );
+}

@@ -1422,3 +1422,22 @@ export function ComprehensionEcritRunner({
     </div>
   );
 }
+
+/** Aperçu imprimable du CE progressif (test de placement). */
+export function PlacementCePrintPreview({ seed = 1 }: { seed?: number }) {
+  const parts = useMemo(() => buildProgressiveCEParts(seed), [seed]);
+  const noopSetAnswer = (_key: string, _value: number | string | null) => {};
+  return (
+    <div className="space-y-10">
+      {parts.map((part, index) => (
+        <ExercisePage
+          key={part.id}
+          part={part}
+          index={index}
+          answers={{}}
+          setAnswer={noopSetAnswer}
+        />
+      ))}
+    </div>
+  );
+}
