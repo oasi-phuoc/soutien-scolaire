@@ -9,6 +9,8 @@ export interface PrintExercise {
   id: string;
   label: string;
   preview?: ReactNode;
+  /** Points par défaut en mode évaluation (barème du test). */
+  defaultPoints?: number;
 }
 
 export interface ExercisePrintSelection {
@@ -43,6 +45,8 @@ interface PrintConfigSheetProps {
   lessonTitle?: string;
   /** Cours par défaut dans l'en-tête (ex. Mathématiques, Français). */
   defaultCourse?: string;
+  /** Active le mode Évaluation dès l'ouverture (tests de placement). */
+  defaultEvalMode?: boolean;
 }
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
@@ -473,19 +477,27 @@ export function PrintConfigSheet({
   accentColor = "var(--color-theme)",
   lessonTitle = "",
   defaultCourse = "Mathématiques",
+  defaultEvalMode = false,
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
-  const [evalMode, setEvalMode] = useState(false);
+  const [evalMode, setEvalMode] = useState(defaultEvalMode);
   const [theory, setTheory] = useState(false);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState(defaultCourse);
-  const [title, setTitle] = useState(() => lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
+  const [title, setTitle] = useState(() =>
+    defaultEvalMode ? "Évaluation" : lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""),
+  );
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);
   const [printedBy, setPrintedBy] = useState("");
   const [selection, setSelection] = useState<ExercisePrintSelection[]>(() =>
-    exercises.map((ex) => ({ id: ex.id, included: true, occurrences: 1, points: 1 }))
+    exercises.map((ex) => ({
+      id: ex.id,
+      included: true,
+      occurrences: 1,
+      points: Math.max(1, ex.defaultPoints ?? 1),
+    }))
   );
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
@@ -827,7 +839,7 @@ export function PrintConfigSheet({
                               value={sel.points}
                               onChange={(value) => setExercisePoints(ex.id, value)}
                               min={1}
-                              max={20}
+                              max={100}
                               accent={accentColor}
                             />
                           </div>

@@ -3,6 +3,7 @@ import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { VOCAB_THEMES } from "@/lib/curriculum/vocabulary-data";
 import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/grammar-data";
 import {
+  getMathExercisesForLevel,
   MATH_TRAINING_LEVEL_LABELS,
   MATH_TRAINING_LEVEL_TOGGLE,
 } from "@/lib/placement/math-training-levels";
@@ -78,15 +79,33 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     });
   }
 
-  for (const level of MATH_TRAINING_LEVEL_TOGGLE) {
+  for (const level of [
+    { id: "complet" as const, code: "P.Math", title: "Test de placement — Complet (100 pts)" },
+    ...MATH_TRAINING_LEVEL_TOGGLE.map((level) => {
+      const pts = getMathExercisesForLevel(level.id).reduce((sum, ex) => sum + ex.maxPoints, 0);
+      return {
+        id: level.id,
+        code: `P.Math.${level.id}`,
+        title: `${MATH_TRAINING_LEVEL_LABELS[level.id]} (${pts} pts)`,
+      };
+    }),
+  ]) {
     entries.push({
       id: `placement:math:${level.id}`,
       domain: "placement",
       group: "Mathématiques",
-      code: `P.Math.${level.id}`,
-      title: MATH_TRAINING_LEVEL_LABELS[level.id],
+      code: level.code,
+      title: level.title,
     });
   }
+
+  entries.push({
+    id: "placement:francais:complet",
+    domain: "placement",
+    group: "Français",
+    code: "P.Fr",
+    title: "Test de placement — Complet (100 pts)",
+  });
 
   for (const part of PLACEMENT_FRENCH_PRINT_PARTS) {
     entries.push({
@@ -94,7 +113,7 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       domain: "placement",
       group: "Français",
       code: `P.Fr.${part.code}`,
-      title: part.title,
+      title: `${part.title} (25 pts)`,
     });
   }
 

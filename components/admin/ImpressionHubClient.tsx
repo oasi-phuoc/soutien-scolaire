@@ -169,6 +169,7 @@ export function ImpressionHubClient() {
           exercises={selectedBundle.exercises}
           accentColor={selectedBundle.accentColor}
           defaultCourse={selectedBundle.course}
+          defaultEvalMode={selectedBundle.defaultEvalMode}
         />
       )}
     </div>

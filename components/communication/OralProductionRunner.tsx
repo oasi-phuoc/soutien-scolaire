@@ -1795,7 +1795,7 @@ export function PlacementPoPrintPreview() {
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-bold">1. Questions sur les thèmes</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">4 pts</span>
+          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">3 pts</span>
         </div>
         <div className="space-y-4">
           {prompt.themes.map((theme) => (
@@ -1868,7 +1868,7 @@ export function PlacementPoPrintPreview() {
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-bold">5. Argumentation</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">6 pts</span>
+          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">7 pts</span>
         </div>
         <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
         {blank(5)}
