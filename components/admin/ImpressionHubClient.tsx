@@ -85,7 +85,7 @@ export function ImpressionHubClient() {
           })}
         </div>
         <p className="text-xs text-[var(--color-text-secondary)]">
-          Une leçon à la fois · Aperçu A4 puis Imprimer / PDF
+          Une leçon ou une partie à la fois · Aperçu A4 puis Imprimer / PDF
         </p>
       </div>
 

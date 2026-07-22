@@ -8,7 +8,6 @@ import {
 } from "@/lib/curriculum/lessons-registry";
 import { getVocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { getGrammarLesson, getConjLesson } from "@/lib/curriculum/grammar-data";
-import { PLACEMENT_MATH_EXERCISES } from "@/lib/placement/math-exercises";
 import { MathTheoryPrintView } from "@/components/print/MathTheoryPrintView";
 import { buildA1PrintExercises } from "@/components/math/A1ModuleContent";
 import {
@@ -37,6 +36,13 @@ import { PlacementCePrintPreview } from "@/components/communication/Comprehensio
 import { PlacementCoPrintPreview } from "@/components/communication/ComprehensionOraleRunner";
 import { PlacementPePrintPreview } from "@/components/communication/ProductionEcriteRunner";
 import { PlacementPoPrintPreview } from "@/components/communication/OralProductionRunner";
+import {
+  getMathExercisesForLevel,
+  MATH_TRAINING_LEVEL_LABELS,
+  levelFromMathParam,
+} from "@/lib/placement/math-training-levels";
+import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
+import type { PlacementSkill } from "@/lib/placement/types";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 
 export type PrintBundle = {
@@ -298,12 +304,15 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
   };
 }
 
-function buildPlacementMathBundle(): PrintBundle {
+function buildPlacementMathPartBundle(levelId: string): PrintBundle | null {
+  const level = levelFromMathParam(levelId);
+  if (!level) return null;
+  const exercises = getMathExercisesForLevel(level);
   return {
-    lessonTitle: "Test de placement — Mathématiques",
+    lessonTitle: MATH_TRAINING_LEVEL_LABELS[level],
     course: "Mathématiques",
     accentColor: "var(--color-accent-quiz)",
-    exercises: PLACEMENT_MATH_EXERCISES.map((ex) => {
+    exercises: exercises.map((ex) => {
       const Comp = ex.component;
       return {
         id: String(ex.id),
@@ -321,32 +330,31 @@ function buildPlacementMathBundle(): PrintBundle {
   };
 }
 
-function buildPlacementFrenchBundle(): PrintBundle {
-  const seed = 1;
+function frenchPartPreview(part: PlacementSkill, seed: number) {
+  switch (part) {
+    case "ce":
+      return <PlacementCePrintPreview seed={seed} />;
+    case "co":
+      return <PlacementCoPrintPreview seed={seed} />;
+    case "pe":
+      return <PlacementPePrintPreview />;
+    case "po":
+      return <PlacementPoPrintPreview />;
+  }
+}
+
+function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
+  const part = PLACEMENT_FRENCH_PRINT_PARTS.find((p) => p.id === partId);
+  if (!part) return null;
   return {
-    lessonTitle: "Test de placement — Français",
+    lessonTitle: `Test de placement — ${part.title}`,
     course: "Français",
     accentColor: "var(--color-accent-quiz)",
     exercises: [
       {
-        id: "ce",
-        label: "1. Compréhension écrite",
-        preview: <PlacementCePrintPreview seed={seed} />,
-      },
-      {
-        id: "co",
-        label: "2. Compréhension orale",
-        preview: <PlacementCoPrintPreview seed={seed} />,
-      },
-      {
-        id: "pe",
-        label: "3. Production écrite",
-        preview: <PlacementPePrintPreview />,
-      },
-      {
-        id: "po",
-        label: "4. Production orale",
-        preview: <PlacementPoPrintPreview />,
+        id: part.id,
+        label: part.title,
+        preview: frenchPartPreview(part.id, 1),
       },
     ],
   };
@@ -354,8 +362,12 @@ function buildPlacementFrenchBundle(): PrintBundle {
 
 /** Construit le bundle d'aperçu pour une entrée du catalogue d'impression. */
 export function buildPrintBundle(catalogId: string): PrintBundle | null {
-  if (catalogId === "placement:math") return buildPlacementMathBundle();
-  if (catalogId === "placement:francais") return buildPlacementFrenchBundle();
+  if (catalogId.startsWith("placement:math:")) {
+    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length));
+  }
+  if (catalogId.startsWith("placement:francais:")) {
+    return buildPlacementFrenchPartBundle(catalogId.slice("placement:francais:".length));
+  }
 
   if (catalogId.startsWith("math:")) {
     return buildMathBundle(catalogId.slice("math:".length));

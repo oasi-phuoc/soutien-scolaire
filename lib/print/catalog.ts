@@ -2,6 +2,11 @@ import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { VOCAB_THEMES } from "@/lib/curriculum/vocabulary-data";
 import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/grammar-data";
+import {
+  MATH_TRAINING_LEVEL_LABELS,
+  MATH_TRAINING_LEVEL_TOGGLE,
+} from "@/lib/placement/math-training-levels";
+import type { PlacementSkill } from "@/lib/placement/types";
 
 export type PrintDomain = "math" | "francais" | "placement";
 
@@ -13,6 +18,17 @@ export type PrintCatalogEntry = {
   code: string;
   title: string;
 };
+
+export const PLACEMENT_FRENCH_PRINT_PARTS: Array<{
+  id: PlacementSkill;
+  code: string;
+  title: string;
+}> = [
+  { id: "ce", code: "CE", title: "Compréhension écrite" },
+  { id: "co", code: "CO", title: "Compréhension orale" },
+  { id: "pe", code: "PE", title: "Production écrite" },
+  { id: "po", code: "PO", title: "Production orale" },
+];
 
 /** Catalogue plat des leçons imprimables (une entrée = une feuille). */
 export function listPrintableLessons(): PrintCatalogEntry[] {
@@ -62,21 +78,25 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     });
   }
 
-  entries.push({
-    id: "placement:math",
-    domain: "placement",
-    group: "Placement",
-    code: "P.Math",
-    title: "Test de placement — Mathématiques",
-  });
+  for (const level of MATH_TRAINING_LEVEL_TOGGLE) {
+    entries.push({
+      id: `placement:math:${level.id}`,
+      domain: "placement",
+      group: "Mathématiques",
+      code: `P.Math.${level.id}`,
+      title: MATH_TRAINING_LEVEL_LABELS[level.id],
+    });
+  }
 
-  entries.push({
-    id: "placement:francais",
-    domain: "placement",
-    group: "Placement",
-    code: "P.Fr",
-    title: "Test de placement — Français",
-  });
+  for (const part of PLACEMENT_FRENCH_PRINT_PARTS) {
+    entries.push({
+      id: `placement:francais:${part.id}`,
+      domain: "placement",
+      group: "Français",
+      code: `P.Fr.${part.code}`,
+      title: part.title,
+    });
+  }
 
   return entries;
 }
