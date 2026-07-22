@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
-import { getPlacementNavVisibilityAction } from "@/app/actions/admin";
+import {
+  getPlacementNavVisibilityAction,
+  getPedagogicNavVisibilityAction,
+} from "@/app/actions/admin";
 import { useTranslation } from "@/components/TranslationProvider";
 import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import {
@@ -27,6 +30,14 @@ const placementItem: NavItem = {
   label: "Placement",
   icon: PlacementIcon,
   x: 0,
+  y: -100,
+};
+
+const impressionItem: NavItem = {
+  href: "/admin/impression",
+  label: "Impression",
+  icon: ImpressionIcon,
+  x: -80,
   y: -100,
 };
 
@@ -67,6 +78,7 @@ export function MainNav() {
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [placementVisible, setPlacementVisible] = useState(true);
+  const [impressionVisible, setImpressionVisible] = useState(false);
   const lessonMode = isLessonMode(pathname);
   const { actions, trigger } = useLessonActions(lessonMode);
 
@@ -75,6 +87,9 @@ export function MainNav() {
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
     getPlacementNavVisibilityAction().then((res) => {
       if (res.ok) setPlacementVisible(res.visible);
+    }).catch(() => {});
+    getPedagogicNavVisibilityAction().then((res) => {
+      if (res.ok) setImpressionVisible(res.isAdmin);
     }).catch(() => {});
   }, [pathname]);
 
@@ -92,7 +107,12 @@ export function MainNav() {
   }, [open]);
 
   const navColor = sectionColor(pathname);
-  const menuItems = [...links, ...(placementVisible ? [placementItem] : []), translateItem];
+  const menuItems = [
+    ...links,
+    ...(placementVisible ? [placementItem] : []),
+    ...(impressionVisible ? [impressionItem] : []),
+    translateItem,
+  ];
 
   return (
     <>
@@ -192,6 +212,7 @@ export function MainNav() {
               aria-hidden={!open}
             >
               {placementVisible && <SecondaryMenuLink item={placementItem} open={open} />}
+              {impressionVisible && <SecondaryMenuLink item={impressionItem} open={open} />}
               <SecondaryMenuLink item={settingsItem} open={open} />
               <button
                 type="button"
@@ -432,6 +453,17 @@ function PlacementIcon({ active: _active }: { active: boolean }) {
       <path d="M12 20V10" />
       <path d="M18 20V4" />
       <path d="M6 20v-4" />
+    </svg>
+  );
+}
+
+function ImpressionIcon({ active: _active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M6 9V2h12v7" />
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+      <rect x="6" y="14" width="12" height="8" rx="1" />
+      <circle cx="18" cy="13" r="0.8" fill="currentColor" stroke="none" />
     </svg>
   );
 }

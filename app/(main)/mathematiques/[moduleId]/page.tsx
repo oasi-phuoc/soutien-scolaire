@@ -111,7 +111,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
           </h1>
         </div>
       </header>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId} startAtEval={evalParam === "1"} isAdmin={isAdmin} />
+      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId} startAtEval={evalParam === "1"} />
     </main>
   );
 }

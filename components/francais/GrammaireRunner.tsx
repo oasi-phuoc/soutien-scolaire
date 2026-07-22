@@ -17,7 +17,6 @@ import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalGuardSentinel, useEvalNavGuard } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
@@ -250,7 +249,7 @@ function VerbToggleView({ verbs, negation, buttonCols, pivot, showTrans }: { ver
   );
 }
 
-function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
+export function GrammarTheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
   const isRtl = pivot === "ar" || pivot === "fa";
   const useTrans = showTrans && pivot !== "fr";
 
@@ -597,7 +596,7 @@ function SelectorBlock({ block, pivot, showTrans }: {
         ))}
       </div>
       <div>
-        <TheoryView blocks={block.tabs[activeTab]!.content} pivot={pivot} showTrans={showTrans} />
+        <GrammarTheoryView blocks={block.tabs[activeTab]!.content} pivot={pivot} showTrans={showTrans} />
       </div>
     </div>
   );
@@ -2453,7 +2452,7 @@ function Tag2Exercise({
 
 // ── Exercise wrapper ──────────────────────────────────────────────────────────
 
-function ExerciseView({
+export function GrammarExerciseView({
   exercise,
   onValidated,
   validateCommand,
@@ -2584,11 +2583,6 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
   const [validateCommand, setValidateCommand] = useState(0);
   const [exercisesStarted, setExercisesStarted] = useState(!hasTimer);
   const [showHint, setShowHint] = useState(false);
-  const [showPrintConfig, setShowPrintConfig] = useState(false);
-
-  const handlePrint = useCallback(() => {
-    setShowPrintConfig(false);
-  }, []);
 
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
@@ -2882,44 +2876,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
         </div>
       )}
 
-      {/* Print config button — floated right, only on theory steps */}
-      {isTheory && (
-        <div className="float-right ml-2" data-no-print>
-          <button
-            type="button"
-            onClick={() => setShowPrintConfig(true)}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
-            aria-label="Imprimer en PDF"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      )}
 
-      {/* Print config sheet */}
-      {showPrintConfig && (
-        <PrintConfigSheet
-          onClose={() => setShowPrintConfig(false)}
-          onPrint={handlePrint}
-          lessonTitle={lesson.title}
-          theoryPreview={
-            <div className="space-y-3 leading-relaxed text-black">
-              <TheoryView blocks={lesson.theory} pivot={pivot} showTrans={false} />
-              {lesson.theory2 && <TheoryView blocks={lesson.theory2} pivot={pivot} showTrans={false} />}
-            </div>
-          }
-          exercises={lesson.exercises.map((ex, i) => ({
-            id: String(i),
-            label: ex.title ?? `Exercice ${i + 1}`,
-            preview: <ExerciseView exercise={ex} onValidated={() => {}} validateCommand={0} onCanValidateChange={() => {}} />,
-          }))}
-          accentColor="var(--color-accent-fr)"
-        />
-      )}
 
       {/* Content */}
       <div className="min-h-[280px]">
@@ -2933,10 +2890,10 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
           </div>
         )}
 
-        {isTheory && <TheoryView blocks={currentBlocks!} pivot={pivot} showTrans={showTrans} />}
+        {isTheory && <GrammarTheoryView blocks={currentBlocks!} pivot={pivot} showTrans={showTrans} />}
 
         {isMidEx && currentMidEx && (
-          <ExerciseView
+          <GrammarExerciseView
             key={exerciseKey}
             exercise={currentMidEx}
             onValidated={handleValidated}
@@ -2960,7 +2917,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
               </button>
             </div>
           ) : currentExercise ? (
-            <ExerciseView
+            <GrammarExerciseView
               key={exerciseKey}
               exercise={currentExercise}
               onValidated={handleValidated}
@@ -3041,7 +2998,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                         onToggle={() => setSelectedResultIdx(isSelectedResult ? null : i)}
                       >
                         <EvalRevealContext.Provider value={isResults}>
-                          <ExerciseView
+                          <GrammarExerciseView
                             exercise={ex}
                             onValidated={handleEvalValidated}
                             validateCommand={evalValidateCommands[i] ?? 0}
@@ -3053,7 +3010,7 @@ export function GrammaireRunner({ lesson: baseLesson, subject = "Conjugaison" }:
                     {isEvalPhase && (
                       <div className={isActive ? "" : "hidden"}>
                         <EvalRevealContext.Provider value={false}>
-                          <ExerciseView
+                          <GrammarExerciseView
                             exercise={ex}
                             onValidated={handleEvalValidated}
                             validateCommand={evalValidateCommands[i] ?? 0}

@@ -22,7 +22,6 @@ import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
 import {
   EvalExerciseResultList,
@@ -144,11 +143,6 @@ export function VocabRunner({ theme: baseTheme }: Props) {
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
   const [showHint, setShowHint] = useState(false);
-  const [showPrintConfig, setShowPrintConfig] = useState(false);
-
-  const handlePrint = () => {
-    setShowPrintConfig(false);
-  };
 
   const [_canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number } | null>>(() => Array(evalTotal).fill(null));
@@ -531,61 +525,7 @@ export function VocabRunner({ theme: baseTheme }: Props) {
         </div>
       )}
 
-      {/* Print config button — floated right, only on theory step */}
-      {step.isTheory && step.key !== "results" && step.key !== "eval-announce" && (
-        <div className="float-right ml-2" data-no-print>
-          <button
-            type="button"
-            onClick={() => setShowPrintConfig(true)}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
-            aria-label="Imprimer en PDF"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      )}
 
-      {/* Print config sheet */}
-      {showPrintConfig && (() => {
-        const noop = () => {};
-        function exPreview(stepKey: string) {
-          switch (stepKey) {
-            case "ex1-image-match":     return <ExImageMatch theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex2-article":         return <ExArticle theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex3-anagram":         return <ExAnagram theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex4-missing-letters": return <ExMissingLetters theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex5-definition-match":return <ExDefinitionMatch theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex6-fill-sentences":  return <ExFillSentences theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex-masc-fem":         return <ExMascFem theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex7-image-write":     return <ExImageWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex8-dictation":       return <ExDictation theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex-word-order":       return <ExWordOrder theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex9-sentence-write":  return <ExSentenceWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            case "ex10-question-write": return <ExQuestionWrite theme={theme} validateCommand={0} onValidated={noop} onCanValidateChange={noop} exerciseNumber={1} />;
-            default: return undefined;
-          }
-        }
-        return (
-          <PrintConfigSheet
-            onClose={() => setShowPrintConfig(false)}
-            onPrint={handlePrint}
-            lessonTitle={displayTitle}
-            theoryPreview={<VocabCards theme={theme} onCanValidateChange={noop} />}
-            exercises={steps
-              .filter((candidate) => !candidate.isTheory && !candidate.isEval)
-              .map((candidate, index) => ({
-                id: candidate.key,
-                label: candidate.label || `Exercice ${index + 1}`,
-                preview: exPreview(candidate.key),
-              }))}
-            accentColor="var(--color-accent-fr)"
-          />
-        );
-      })()}
 
       {/* Step content */}
       <div className="min-h-[280px]">

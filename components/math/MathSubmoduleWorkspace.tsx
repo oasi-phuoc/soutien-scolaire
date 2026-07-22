@@ -37,7 +37,6 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
-import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
@@ -1793,7 +1792,7 @@ function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson;
   );
 }
 
-export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode, isAdmin }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean; isAdmin?: boolean }) {
+export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {
   const router = useRouter();
   const sectionBackUrl = moduleId.startsWith("G") ? "/mathematiques?tab=geometry" : "/mathematiques";
   const baseFromRegistry = getLessonBySubmoduleId(submoduleId ?? "");
@@ -1850,11 +1849,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [revTimerLeft, setRevTimerLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [showPrintConfig, setShowPrintConfig] = useState(false);
-
-  const handlePrint = useCallback(() => {
-    setShowPrintConfig(false);
-  }, []);
 
   const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});
   const [evalExValidated, setEvalExValidated] = useState<Record<number, boolean>>({});
@@ -1917,7 +1911,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // A1-1 and A1-2 use the rich A1ModuleContent; A1-3+ use GenericModuleContent with toggle
   if (moduleId === "A1") {
     if (submoduleId === "A1-1" || submoduleId === "A1-2") {
-      return <A1ModuleContent startSubmoduleId={submoduleId} startAtEval={startAtEval} isAdmin={isAdmin} />;
+      return <A1ModuleContent startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
     }
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
@@ -2341,41 +2335,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         </div>
       )}
 
-      {/* Print config button — floated right, only on theory step, only for admin */}
-      {isAdmin && currentStep?.kind === "theory" && !isInEvalExercises && (
-        <div className="float-right ml-2" data-no-print>
-          <button
-            type="button"
-            onClick={() => setShowPrintConfig(true)}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-            aria-label="Imprimer en PDF"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      )}
 
-      {/* Print config sheet */}
-      {showPrintConfig && (
-        <PrintConfigSheet
-          onClose={() => setShowPrintConfig(false)}
-          onPrint={handlePrint}
-          lessonTitle={lesson?.theory.title.fr ?? ""}
-          theoryPreview={lesson ? <TheoryView lesson={lesson} pivot={pivot} showPivot={showPivotTranslation} /> : undefined}
-          exercises={trainingSteps
-            .filter((step) => step.kind !== "theory" && step.kind !== "eval_start" && step.kind !== "pass_toggle" && step.kind !== "results")
-            .map((step, index) => ({
-              id: String(index),
-              label: `Exercice ${index + 1}`,
-              preview: renderEvalStep(step, 0, () => {}) ?? undefined,
-            }))}
-          accentColor="var(--color-accent-alg)"
-        />
-      )}
 
       {!isInEvalExercises && (<>
       {/* Theory */}

@@ -41,6 +41,8 @@ interface PrintConfigSheetProps {
   theoryPreview?: ReactNode;
   accentColor?: string;
   lessonTitle?: string;
+  /** Cours par défaut dans l'en-tête (ex. Mathématiques, Français). */
+  defaultCourse?: string;
 }
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
@@ -422,13 +424,14 @@ export function PrintConfigSheet({
   theoryPreview,
   accentColor = "var(--color-theme)",
   lessonTitle = "",
+  defaultCourse = "Mathématiques",
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(false);
   const [theory, setTheory] = useState(false);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
-  const [course, setCourse] = useState("Mathématiques");
+  const [course, setCourse] = useState(defaultCourse);
   const [title, setTitle] = useState(() => lessonTitle.replace(/^v\d+(\.\d+)*\s+/i, ""));
   const [hasPrinted, setHasPrinted] = useState(false);
   const [showExitWarning, setShowExitWarning] = useState(false);

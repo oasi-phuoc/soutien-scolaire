@@ -59,6 +59,25 @@ function TranslateOnIcon() {
   );
 }
 
+function ImpressionNavIcon() {
+  return (
+    <svg
+      className="h-4 w-4 shrink-0"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M6 9V2h12v7" />
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+      <rect x="6" y="14" width="12" height="8" rx="1" />
+    </svg>
+  );
+}
+
 /**
  * Menu latéral bureau (inspiré epcas) — masqué sur mobile.
  */
@@ -332,36 +351,51 @@ export function DesktopSidebar() {
         )}
 
         {pedagogicNav.isAdmin && (
-          <div>
+          <>
             <button
               type="button"
-              onClick={() => go("/admin")}
+              onClick={() => go("/admin/impression")}
               className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-                adminOpen
+                pathname.startsWith("/admin/impression")
                   ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              Admin
+              <ImpressionNavIcon />
+              Impression
             </button>
-            {adminOpen &&
-              renderSubs([
-                {
-                  href: "/admin/attribution-professeurs",
-                  label: "Professeurs",
-                  active: pathname.startsWith("/admin/attribution-professeurs"),
-                },
-                ...(pedagogicNav.canEditContent
-                  ? [
-                      {
-                        href: "/admin/contenu",
-                        label: "Édition de contenu",
-                        active: pathname.startsWith("/admin/contenu"),
-                      },
-                    ]
-                  : []),
-              ])}
-          </div>
+            <div>
+              <button
+                type="button"
+                onClick={() => go("/admin")}
+                className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+                  adminOpen && !pathname.startsWith("/admin/impression")
+                    ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                    : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+                }`}
+              >
+                Admin
+              </button>
+              {adminOpen &&
+                !pathname.startsWith("/admin/impression") &&
+                renderSubs([
+                  {
+                    href: "/admin/attribution-professeurs",
+                    label: "Professeurs",
+                    active: pathname.startsWith("/admin/attribution-professeurs"),
+                  },
+                  ...(pedagogicNav.canEditContent
+                    ? [
+                        {
+                          href: "/admin/contenu",
+                          label: "Édition de contenu",
+                          active: pathname.startsWith("/admin/contenu"),
+                        },
+                      ]
+                    : []),
+                ])}
+            </div>
+          </>
         )}
 
         {/* Mode local sans rôle admin : accès direct à l'édition */}
