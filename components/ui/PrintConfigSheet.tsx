@@ -584,7 +584,7 @@ export function PrintConfigSheet({
             <p className="mt-0.5 text-sm text-[var(--color-text-secondary)]">
               {step === 0 && "Choisissez le contenu à inclure"}
               {step === 1 && "Configurez l'en-tête du document"}
-              {step === 2 && "Vérifiez le PDF avant l'impression"}
+              {step === 2 && "Vérifiez puis imprimez / enregistrez en PDF"}
             </p>
           </div>
         </div>
@@ -816,17 +816,30 @@ export function PrintConfigSheet({
                   />
                 </div>
               </div>
-              <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
-                <PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />
-              </div>
             </section>
           )}
 
           {step === 2 && (
             <section className="space-y-4">
-              <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
-                Aperçu avant impression
-              </h2>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+                  Aperçu avant impression
+                </h2>
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  disabled={!hasPrintableContent}
+                  className="inline-flex min-h-10 items-center gap-2 rounded-xl px-4 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                  style={{ background: accentColor }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M6 9V2h12v7" />
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                    <path d="M6 14h12v8H6z" />
+                  </svg>
+                  Imprimer / PDF
+                </button>
+              </div>
               <PaginatedPreview
                 pagesContainerRef={previewPagesRef}
                 printDate={printDate}
@@ -859,6 +872,22 @@ export function PrintConfigSheet({
                   Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
                 </p>
               )}
+              <div className="sticky bottom-4 z-10 flex justify-end pt-2">
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  disabled={!hasPrintableContent}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-bold text-white shadow-lg transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                  style={{ background: accentColor }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M6 9V2h12v7" />
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                    <path d="M6 14h12v8H6z" />
+                  </svg>
+                  Imprimer / PDF
+                </button>
+              </div>
             </section>
           )}
         </main>
