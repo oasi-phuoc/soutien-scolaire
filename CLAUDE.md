@@ -2,7 +2,7 @@
 
 ## TODO
 
-_(Aucun TODO ouvert — voir historique git pour messagerie devoirs et audit phonèmes Lecture.)_
+- **Section Documents d’exercice (admin)** — plan : `docs/plan-section-impression.md`. Centraliser l’impression (retirer les boutons dans les leçons), nouvelle entrée nav admin + aperçu/PDF style ecole-manager.
 
 ## Blocs de contenu math (`MathRichBlock`)
 
