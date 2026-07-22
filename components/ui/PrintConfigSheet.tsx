@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
-import { capturePageCss, openPrintPopup } from "@/lib/utils/print";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
@@ -184,12 +184,23 @@ export function PrintDocumentFooter({
   );
 }
 
-// ── Book-like A4 page preview ─────────────────────────────────────────────
-// Splits the content (theory + each exercise) across distinct A4 sheets,
-// measuring real heights so each exercise stays whole — same rule as the
-// printed output. The header appears on page 1 only; every page has a footer
-// with its "Page N sur Total" number.
-const A4_RATIO = 297 / 210;
+// ── A4 preview = PDF (même layout, comme école-manager) ───────────────────
+// Les feuilles sont toujours composées en vrai format A4 (210×297 mm).
+// L’écran ne fait que les redimensionner via `transform: scale(...)`.
+// L’impression clone ce DOM sans changer largeur / padding / police.
+
+const A4_SHEET_STYLE: CSSProperties = {
+  width: "210mm",
+  height: "297mm",
+  minHeight: "297mm",
+  maxHeight: "297mm",
+  padding: "18mm 12mm 12mm",
+  fontSize: "10px",
+  lineHeight: 1.55,
+  boxSizing: "border-box",
+  color: "#000",
+  background: "#fff",
+};
 
 function PaginatedPreview({
   header,
@@ -207,10 +218,12 @@ function PaginatedPreview({
   pagesContainerRef?: RefObject<HTMLDivElement | null>;
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const probeRef = useRef<HTMLDivElement>(null);
   const headerMeasureRef = useRef<HTMLDivElement>(null);
   const footerMeasureRef = useRef<HTMLDivElement>(null);
   const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [pageWidth, setPageWidth] = useState(0);
+  const [availWidth, setAvailWidth] = useState(0);
+  const [metrics, setMetrics] = useState<{ pageW: number; pageH: number; contentW: number; contentH: number } | null>(null);
   const [tick, setTick] = useState(0);
   const [pages, setPages] = useState<number[][]>([]);
 
@@ -222,37 +235,42 @@ function PaginatedPreview({
   }, [theoryNode, exerciseNodes]);
   blockRefs.current = [];
 
-  // Page geometry (px), derived from the available width.
-  const padX = (pageWidth * 12) / 210;
-  const padTop = (pageWidth * 18) / 210;
-  const padBottom = (pageWidth * 12) / 210;
-  const pageHeight = pageWidth * A4_RATIO;
-  const contentWidth = pageWidth - 2 * padX;
-  const contentHeight = pageHeight - padTop - padBottom;
-  // Match print scale: 10px at 794px (210mm@96dpi) so measurement matches PDF reflow.
-  const baseFont = (pageWidth / 794) * 10;
-  const gap = baseFont * 3;
+  const gap = 30; // px between blocks inside a page (at A4 scale, ~3em @ 10px)
 
-  // Track available width responsively.
   useLayoutEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
-    const update = () => setPageWidth(Math.min(el.clientWidth, 704));
+    const update = () => setAvailWidth(el.clientWidth);
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
 
-  // Recompute after images (logos) load and settle.
+  useLayoutEffect(() => {
+    const probe = probeRef.current;
+    if (!probe) return;
+    const cs = getComputedStyle(probe);
+    const padL = parseFloat(cs.paddingLeft) || 0;
+    const padR = parseFloat(cs.paddingRight) || 0;
+    const padT = parseFloat(cs.paddingTop) || 0;
+    const padB = parseFloat(cs.paddingBottom) || 0;
+    setMetrics({
+      pageW: probe.offsetWidth,
+      pageH: probe.offsetHeight,
+      contentW: probe.clientWidth - padL - padR,
+      contentH: probe.clientHeight - padT - padB,
+    });
+  }, []);
+
   useEffect(() => {
     const t1 = setTimeout(() => setTick((v) => v + 1), 200);
     const t2 = setTimeout(() => setTick((v) => v + 1), 700);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [pageWidth, blocks.length]);
+  }, [metrics, blocks.length]);
 
   useEffect(() => {
-    if (pageWidth === 0 || typeof ResizeObserver === "undefined") return;
+    if (!metrics || typeof ResizeObserver === "undefined") return;
     let frame = 0;
     const observer = new ResizeObserver(() => {
       cancelAnimationFrame(frame);
@@ -265,16 +283,15 @@ function PaginatedPreview({
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, [pageWidth, blocks]);
+  }, [metrics, blocks]);
 
-  // Pack blocks into pages based on measured heights.
   useLayoutEffect(() => {
-    if (pageWidth === 0) return;
+    if (!metrics) return;
     const headerH = headerMeasureRef.current?.offsetHeight ?? 0;
     const footerH = footerMeasureRef.current?.offsetHeight ?? 0;
     const blockH = blocks.map((_, i) => blockRefs.current[i]?.offsetHeight ?? 0);
-    const page1Avail = contentHeight - headerH - footerH - gap;
-    const pageNAvail = contentHeight - footerH - gap;
+    const page1Avail = metrics.contentH - headerH - footerH - gap;
+    const pageNAvail = metrics.contentH - footerH - gap;
     const result: number[][] = [];
     let cur: number[] = [];
     let curH = 0;
@@ -293,16 +310,27 @@ function PaginatedPreview({
     if (cur.length > 0) result.push(cur);
     if (result.length === 0) result.push([]);
     setPages(result);
-  }, [pageWidth, blocks, contentHeight, gap, tick]);
+  }, [metrics, blocks, gap, tick]);
+
+  const scale = metrics && availWidth > 0 ? Math.min(1, availWidth / metrics.pageW) : 1;
+  const sheetGap = 24;
 
   return (
     <div ref={wrapRef} className="w-full">
-      {/* Hidden measuring layer — same width & font context as a page. */}
-      {pageWidth > 0 && (
+      {/* Sonde A4 — lit les dimensions réelles du navigateur (mm → px). */}
+      <div
+        ref={probeRef}
+        aria-hidden
+        className="pointer-events-none invisible absolute -left-[9999px] top-0"
+        style={A4_SHEET_STYLE}
+      />
+
+      {/* Mesure des blocs au format A4 (identique à l’impression). */}
+      {metrics && (
         <div
-          aria-hidden="true"
+          aria-hidden
           className="print-layout-context pointer-events-none invisible absolute -left-[9999px] top-0"
-          style={{ width: contentWidth, fontSize: baseFont }}
+          style={{ width: metrics.contentW, fontSize: A4_SHEET_STYLE.fontSize, lineHeight: A4_SHEET_STYLE.lineHeight }}
         >
           <div ref={headerMeasureRef}>{header}</div>
           {blocks.map((b, i) => (
@@ -316,33 +344,53 @@ function PaginatedPreview({
         </div>
       )}
 
-      {/* Visible page sheets, stacked like a book. */}
-      <div ref={pagesContainerRef} className="preview-pages-container mx-auto flex flex-col items-center gap-6 overflow-y-auto pb-32 pt-1" style={{ maxHeight: "calc(100vh - 14rem)" }}>
-        {pageWidth > 0 && pages.map((blockIdxs, pageIdx) => (
+      {/* Aperçu écran : scale visuelle uniquement — le DOM A4 reste intact pour le clone PDF. */}
+      <div
+        className="mx-auto overflow-y-auto pb-32 pt-1"
+        style={{ maxHeight: "calc(100vh - 14rem)" }}
+      >
+        {metrics && (
           <div
-            key={pageIdx}
-            className="preview-page-sheet print-layout-context flex shrink-0 flex-col overflow-hidden rounded-sm border border-zinc-300 bg-white text-black shadow-lg"
             style={{
-              width: pageWidth,
-              minHeight: pageHeight,
-              paddingTop: padTop,
-              paddingBottom: padBottom,
-              paddingLeft: padX,
-              paddingRight: padX,
-              fontSize: baseFont,
+              width: metrics.pageW * scale,
+              height: pages.length * metrics.pageH * scale + Math.max(0, pages.length - 1) * sheetGap,
+              marginInline: "auto",
+              position: "relative",
             }}
           >
-            {pageIdx === 0 && header}
-            <div className="flex-1">
-              {blockIdxs.map((bi, j) => (
-                <div key={blocks[bi]!.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
-                  {blocks[bi]!.node}
-                </div>
-              ))}
+            <div
+              style={{
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+                width: metrics.pageW,
+              }}
+            >
+              <div
+                ref={pagesContainerRef}
+                className="preview-pages-container flex flex-col"
+                style={{ gap: sheetGap / scale }}
+              >
+                {pages.map((blockIdxs, pageIdx) => (
+                  <div
+                    key={pageIdx}
+                    className="preview-page-sheet print-layout-context flex shrink-0 flex-col overflow-hidden rounded-sm border border-zinc-300 shadow-lg"
+                    style={A4_SHEET_STYLE}
+                  >
+                    {pageIdx === 0 && header}
+                    <div className="flex-1">
+                      {blockIdxs.map((bi, j) => (
+                        <div key={blocks[bi]!.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
+                          {blocks[bi]!.node}
+                        </div>
+                      ))}
+                    </div>
+                    <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={pageIdx + 1} totalPages={pages.length} />
+                  </div>
+                ))}
+              </div>
             </div>
-            <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={pageIdx + 1} totalPages={pages.length} />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
@@ -515,10 +563,47 @@ export function PrintConfigSheet({
         image.loading = "eager";
         image.decoding = "sync";
       });
-      // Print only the preview sheets and keep the same page box as the on-screen preview.
-      const printCss = `@page{size:A4 portrait;margin:0!important;}html,body{width:210mm!important;margin:0!important;padding:0!important;background:white!important;}body *{visibility:hidden!important;}*{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}.preview-pages-container,.preview-pages-container *{visibility:visible!important;}.preview-pages-container{position:absolute!important;left:0!important;top:0!important;width:210mm!important;max-height:none!important;overflow:visible!important;gap:0!important;padding:0!important;margin:0!important;display:block!important;background:white!important;}.preview-page-sheet{box-sizing:border-box!important;width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;overflow:hidden!important;padding:18mm 12mm 12mm!important;font-size:9px!important;line-height:1.55!important;color:#000!important;background:white!important;transform:none!important;box-shadow:none!important;border:none!important;border-radius:0!important;page-break-after:always!important;break-after:page!important;display:flex!important;flex-direction:column!important;margin:0!important;}.preview-page-sheet:last-child{page-break-after:auto!important;break-after:auto!important;}.print-exercise{break-inside:avoid;page-break-inside:avoid;}.print-ex-content h2,.print-ex-content p.font-bold{display:none!important;}img{visibility:visible!important;opacity:1!important;}`;
-      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${printCss}</style></head><body>${printNode.outerHTML}</body></html>`;
-      openPrintPopup(html, { title: "Feuille d'exercice", width: 1000, height: 800 });
+      // Même procédé école-manager : cloner le DOM aperçu tel quel,
+      // sans reflow (pas de changement de largeur / padding / police).
+      printNode.style.gap = "0";
+      printNode.style.maxHeight = "none";
+      printNode.style.overflow = "visible";
+      printNode.querySelectorAll<HTMLElement>(".preview-page-sheet").forEach((sheet, index, all) => {
+        sheet.style.boxShadow = "none";
+        sheet.style.border = "none";
+        sheet.style.borderRadius = "0";
+        sheet.style.pageBreakAfter = index < all.length - 1 ? "always" : "auto";
+        sheet.style.breakAfter = index < all.length - 1 ? "page" : "auto";
+      });
+      const wysiwygCss = `
+        html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
+        .preview-pages-container {
+          display: block !important;
+          gap: 0 !important;
+          max-height: none !important;
+          overflow: visible !important;
+          transform: none !important;
+        }
+        .preview-page-sheet {
+          box-shadow: none !important;
+          border: none !important;
+          border-radius: 0 !important;
+          page-break-after: always !important;
+          break-after: page !important;
+        }
+        .preview-page-sheet:last-child {
+          page-break-after: auto !important;
+          break-after: auto !important;
+        }
+        .print-exercise { break-inside: avoid; page-break-inside: avoid; }
+        img { visibility: visible !important; opacity: 1 !important; }
+      `;
+      const html = `<!DOCTYPE html><html lang="fr"><head><base href="${base}/"><meta charset="utf-8"><title>Feuille d'exercice</title><style>${css}${wysiwygCss}</style></head><body>${printNode.outerHTML}</body></html>`;
+      openPrintPopup(injectForcedPrintCss(html, "A4 portrait", "0"), {
+        title: "Feuille d'exercice",
+        width: 1000,
+        height: 800,
+      });
     }
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
   };

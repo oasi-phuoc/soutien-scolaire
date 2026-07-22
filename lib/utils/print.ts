@@ -34,6 +34,50 @@ export function capturePageCss(): string {
   return styles.join("\n");
 }
 
+/** CSS forcé d’impression — même procédé que école-manager. */
+export function getForcedPrintCss(pageSize = "A4 portrait", margin = "0"): string {
+  return `
+    @page { size: ${pageSize}; margin: ${margin}; }
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+      background: white !important;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      box-sizing: border-box;
+    }
+    @media print {
+      html, body {
+        width: 100%;
+        height: auto;
+        overflow: visible !important;
+        background: white !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  `;
+}
+
+/** Injecte le CSS d’impression dans un document HTML (école-manager). */
+export function injectForcedPrintCss(
+  htmlDocument: string,
+  pageSize = "A4 portrait",
+  margin = "0",
+): string {
+  const css = getForcedPrintCss(pageSize, margin);
+  if (!htmlDocument || typeof htmlDocument !== "string") return htmlDocument;
+  if (htmlDocument.includes("</head>")) {
+    return htmlDocument.replace("</head>", `<style>${css}</style></head>`);
+  }
+  return `<style>${css}</style>${htmlDocument}`;
+}
+
 /**
  * Opens a new popup window, writes the given HTML, and triggers the print dialog.
  */
