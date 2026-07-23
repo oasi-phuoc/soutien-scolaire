@@ -229,3 +229,27 @@ export function rubricForPeExercise(kind: PeExerciseKind, maxPoints = 0): Exerci
 export function rubricMaxPoints(rubric: ExerciseRubric): number {
   return rubric.criteria.reduce((sum, criterion) => sum + Math.max(...criterion.options), 0);
 }
+
+/** Labels d’annotation (select messagerie) — grille PE si dispo, sinon critères génériques PE/PO. */
+export const DEFAULT_ANNOTATION_CRITERIA = [
+  "Respect de la consigne",
+  "Lexique et orthographe",
+  "Syntaxe et grammaire",
+  "Cohérence et cohésion",
+  "Prononciation / clarté",
+  "Interaction",
+  "Autre",
+] as const;
+
+export function annotationCriteriaForExercise(
+  kind: PeExerciseKind,
+  maxPoints = 0,
+  options?: { oral?: boolean },
+): string[] {
+  if (options?.oral) return [...DEFAULT_ANNOTATION_CRITERIA];
+  const rubric = rubricForPeExercise(kind, maxPoints);
+  if (rubric?.criteria.length) {
+    return [...rubric.criteria.map((c) => c.label), "Autre"];
+  }
+  return [...DEFAULT_ANNOTATION_CRITERIA];
+}

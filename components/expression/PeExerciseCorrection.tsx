@@ -1,36 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { AppSelect } from "@/components/ui/AppSelect";
+import { CorrectedRichEditor, CorrectedTextView } from "@/components/expression/CorrectedRichEditor";
+import { annotationCriteriaForExercise } from "@/lib/curriculum/content/communication/pe-grading-rubrics";
 import type { BlockAnnotation, ExerciseBlockReview, SubmissionExercise } from "@/lib/curriculum/content/communication/expression-submission-types";
-
-function CorrectedText({ original, corrected }: { original: string; corrected: string }) {
-  const before = original.split(/(\s+)/u);
-  const after = corrected.split(/(\s+)/u);
-  return (
-    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">
-      {after.map((token, index) => (
-        <span key={index} className={token !== before[index] && token.trim() ? "font-semibold text-amber-600" : undefined}>
-          {token}
-        </span>
-      ))}
-    </p>
-  );
-}
 
 export function PeExerciseCorrection({
   exercise,
   review,
   editable,
   hidePoints = false,
+  isOral = false,
   onChange,
 }: {
   exercise: SubmissionExercise;
   review: ExerciseBlockReview;
   editable: boolean;
   hidePoints?: boolean;
+  isOral?: boolean;
   onChange?: (review: ExerciseBlockReview) => void;
 }) {
-  const [labelDraft, setLabelDraft] = useState("");
+  const criteria = annotationCriteriaForExercise(exercise.kind, exercise.maxPoints, { oral: isOral });
+  const [labelDraft, setLabelDraft] = useState(criteria[0] ?? "");
   const [commentDraft, setCommentDraft] = useState("");
 
   function update(patch: Partial<ExerciseBlockReview>) {
@@ -44,7 +36,6 @@ export function PeExerciseCorrection({
       comment: commentDraft.trim(),
     };
     update({ annotations: [...review.annotations, next] });
-    setLabelDraft("");
     setCommentDraft("");
   }
 
@@ -75,7 +66,7 @@ export function PeExerciseCorrection({
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-amber-600">Version corrigée</p>
             <div className="mt-2 rounded-[var(--radius-md)] border-2 border-amber-300 bg-white p-4">
-              <CorrectedText original={exercise.text} corrected={review.correctedText} />
+              <CorrectedTextView original={exercise.text} corrected={review.correctedText} />
             </div>
           </div>
         )}
@@ -92,12 +83,14 @@ export function PeExerciseCorrection({
     <div className="space-y-4 border-t border-[var(--color-border-default)] pt-4">
       <div>
         <p className="text-xs font-bold uppercase tracking-wide text-amber-600">Annotations</p>
-        <div className="mt-2 grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto]">
-          <input
+        <div className="mt-2 grid gap-2 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)_auto]">
+          <AppSelect
             value={labelDraft}
-            onChange={(event) => setLabelDraft(event.target.value)}
-            placeholder="Nom de l'annotation"
-            className="min-h-10 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-amber-500"
+            onChange={setLabelDraft}
+            options={criteria}
+            placeholder="Critère"
+            aria-label="Critère de l'annotation"
+            className="w-full"
           />
           <input
             value={commentDraft}
@@ -143,11 +136,10 @@ export function PeExerciseCorrection({
         <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-amber-600">
           Version corrigée
         </label>
-        <textarea
+        <CorrectedRichEditor
           value={review.correctedText}
-          onChange={(event) => update({ correctedText: event.target.value })}
-          rows={6}
-          className="w-full rounded-[var(--radius-md)] border-2 border-amber-300 bg-white p-4 text-sm leading-relaxed outline-none focus:border-amber-500"
+          onChange={(html) => update({ correctedText: html })}
+          placeholder="Corrigez le texte de l'élève…"
         />
       </div>
 

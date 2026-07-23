@@ -18,6 +18,7 @@ import { PeExerciseCorrection } from "@/components/expression/PeExerciseCorrecti
 import { PeExerciseFrame } from "@/components/expression/PeExerciseFrame";
 import { PeGradingRubric, sumGradingTotal } from "@/components/expression/PeGradingRubric";
 import { PeGradingResult } from "@/components/expression/PeGradingResult";
+import { hasCorrectedContent } from "@/lib/curriculum/content/communication/sanitize-corrected-html";
 
 export function ExpressionSubmissionDetail({
   item,
@@ -125,7 +126,7 @@ export function ExpressionSubmissionDetail({
     });
   }
 
-  const allBlocksCorrected = blockReviews.every((review) => review.correctedText.trim());
+  const allBlocksCorrected = blockReviews.every((review) => hasCorrectedContent(review.correctedText));
   const hasPoints = hasRubric ? rubricTotal > 0 || blockTotal > 0 : blockTotal > 0 || teacherPoints.trim();
 
   return (
@@ -189,6 +190,7 @@ export function ExpressionSubmissionDetail({
                           exercise={exercise}
                           review={review}
                           editable
+                          isOral={isOral}
                           hidePoints={hasRubric && Boolean(rubricForPeExercise(exercise.kind, exercise.maxPoints))}
                           onChange={updateBlockReview}
                         />
@@ -207,6 +209,7 @@ export function ExpressionSubmissionDetail({
                             exercise={exercise}
                             review={review}
                             editable={false}
+                            isOral={isOral}
                           />
                         )}
                       </>
