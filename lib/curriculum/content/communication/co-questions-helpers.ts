@@ -134,6 +134,20 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
   return shuffleWithSeed(items, seed);
 }
 
+/** Mélange les choix QCM et recalcule l’index de la bonne réponse. */
+function shuffleChoiceTask<T extends { label: string; image?: string }>(
+  choices: T[],
+  correct: number,
+  seed: string,
+): { choices: T[]; correct: number } {
+  const indexed = choices.map((c, i) => ({ c, i }));
+  const shuffled = shuffleWithSeed(indexed, seed);
+  return {
+    choices: shuffled.map((x) => x.c),
+    correct: shuffled.findIndex((x) => x.i === correct),
+  };
+}
+
 function img(_level: string, _groupSlug: string, _qId: string, _suffix: string, label: string): COImageChoice {
   if (isCeCoImageableLabel(label)) {
     const dedicated = resolveCeCoWordImage(label);
@@ -161,7 +175,12 @@ export function buildPool(level: string, groupSlug: string, items: RawQ[]): COMu
   }));
 }
 
-function multiToTask(q: COMultiQuestion, format: COFormatType, fillMode: COFillMode): COQuestionTask {
+function multiToTask(
+  q: COMultiQuestion,
+  format: COFormatType,
+  fillMode: COFillMode,
+  seed: string,
+): COQuestionTask {
   if (format === "fill") {
     return {
       kind: "fill",
@@ -173,19 +192,26 @@ function multiToTask(q: COMultiQuestion, format: COFormatType, fillMode: COFillM
     };
   }
   if (format === "image") {
+    const withVariants = q.imageChoices.map((c, i) => ({
+      label: c.label,
+      image: ceCoImageSource(c.image, c.label, `${seed}-img-${i}`) ?? c.image,
+    }));
+    const shuffled = shuffleChoiceTask(withVariants, q.imageCorrect, `${seed}-choices`);
     return {
       kind: "choice",
       prompt: q.imageQ,
-      choices: q.imageChoices.map((c) => ({ label: c.label, image: c.image })),
-      correct: q.imageCorrect,
+      choices: shuffled.choices,
+      correct: shuffled.correct,
       image: true,
     };
   }
+  const textChoices = q.textChoices.map((label) => ({ label }));
+  const shuffled = shuffleChoiceTask(textChoices, q.textCorrect, `${seed}-choices`);
   return {
     kind: "choice",
     prompt: q.textQ,
-    choices: q.textChoices.map((label) => ({ label })),
-    correct: q.textCorrect,
+    choices: shuffled.choices,
+    correct: shuffled.correct,
   };
 }
 
@@ -351,7 +377,7 @@ export function buildCoPartQuestions(
     const format = scolaireAvance
       ? pickCoScolaireAvanceQuestionFormat(index)
       : pickCoQuestionFormat(index, seed, q.id, imageable);
-    return multiToTask(q, format, fillMode);
+    return multiToTask(q, format, fillMode, `${seed}-${q.id}-${index}`);
   });
 }
 

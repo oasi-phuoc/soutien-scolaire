@@ -18,7 +18,7 @@ import {
 import { EvalExerciseResultList, EvalResultsHint } from "@/components/ui/EvalResultsUI";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
-import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
+import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS, seededShuffle } from "@/lib/placement/progressive-pick";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_MESSAGES_MOYEN } from "@/lib/curriculum/content/communication/ce-messages-moyen";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
@@ -121,11 +121,19 @@ function answerOk(task: QuestionTask, answer: number | string | null) {
   return [task.answer, ...(task.accept ?? [])].map(normalize).some((expected) => value.includes(expected));
 }
 
-function toQuestionTask(question: RawQuestionTask): QuestionTask {
+function toQuestionTask(question: RawQuestionTask, seed = "legacy"): QuestionTask {
   if ("answer" in question) {
     return { kind: "fill", fillMode: "full", ...question };
   }
-  return { kind: "choice", ...question };
+  const indexed = question.choices.map((c, i) => ({ c, i }));
+  const shuffled = seededShuffle(indexed, `${seed}-legacy-choices`);
+  return {
+    kind: "choice",
+    prompt: question.prompt,
+    choices: shuffled.map((x) => x.c),
+    correct: shuffled.findIndex((x) => x.i === question.correct),
+    image: question.image,
+  };
 }
 
 function CEHeader({ level, title, placement = false }: { level: CELevel; title: string; placement?: boolean }) {
@@ -688,7 +696,9 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
         ? { from: emailBase.from, subject: emailBase.subject }
         : { from: emailLegacy!.from, subject: emailLegacy!.subject },
       body: emailBase ? emailBase.body : emailLegacy!.body,
-      image: emailBase ? (emailBase.image || "") : "",
+      image: emailBase
+        ? (ceCoImageSource(emailBase.image || "", emailBase.subject, `${level}-${stamp}-email-hero`) || "")
+        : "",
       questions: emailBase
         ? buildCeMessageQuestions(
             emailBase.pool,
@@ -696,7 +706,9 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
             `${level}-${stamp}-email`,
             level === "moyen" ? "full" : "stem",
           )
-        : emailLegacy!.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+        : emailLegacy!.questions.map((q, qi) =>
+            toQuestionTask(q as RawQuestionTask, `${level}-${stamp}-email-legacy-${qi}`),
+          ),
     },
     {
       id: "instructions",
@@ -714,12 +726,14 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
               questions: perCard[cardIndex] ?? [],
             }));
           })()
-        : instructions!.map((card) => ({
+        : instructions!.map((card, cardIndex) => ({
             ...card,
             image: level === "base" ? "" : card.image,
             imageLabel: level === "base" ? "" : card.imageLabel,
             body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
-            questions: card.questions.map((q) => toQuestionTask(q as RawQuestionTask)),
+            questions: card.questions.map((q, qi) =>
+              toQuestionTask(q as RawQuestionTask, `${level}-${stamp}-instr-legacy-${cardIndex}-${qi}`),
+            ),
           })),
     },
     {
@@ -744,8 +758,8 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
           },
       questions: articleMoyen
         ? buildCeMessageQuestions(articleMoyen.pool, 7, `${level}-${stamp}-article`, "full")
-        : articleLegacy!.questions.map((q) => {
-            const task = toQuestionTask(q as RawQuestionTask);
+        : articleLegacy!.questions.map((q, qi) => {
+            const task = toQuestionTask(q as RawQuestionTask, `${level}-${stamp}-article-legacy-${qi}`);
             if (level === "base" && task.kind === "choice") {
               return {
                 ...task,

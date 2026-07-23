@@ -1,5 +1,6 @@
 import { LECTURE_IMAGE_INDEX, WORD_IMAGE_INDEX } from "./content/communication/word-image-index";
 import aliasesJson from "./content/communication/word-image-aliases.json";
+import { pickSceneVariantPath } from "./content/communication/scene-image-catalog";
 
 const ALIASES = aliasesJson as Record<string, string>;
 
@@ -362,12 +363,19 @@ function resolveCeCoIndexedSlug(slug: string): string | null {
 
 /**
  * Resolve a CE/CO object label: uniquement scènes dans expression/images/scene.
+ * Si `seed` est fourni et que la scène a des variantes similaires, en tire une
+ * de façon déterministe (ex. `acheter-pain.webp` / `acheter-pain (2).webp`).
  */
-export function resolveCeCoWordImage(label: string | undefined | null): string | null {
+export function resolveCeCoWordImage(
+  label: string | undefined | null,
+  seed?: string,
+): string | null {
   if (!label) return null;
   for (const candidate of candidateSlugs(label)) {
     const resolved = resolveCeCoIndexedSlug(candidate);
-    if (resolved) return resolved;
+    if (resolved) {
+      return pickSceneVariantPath(resolved, seed) ?? resolved;
+    }
   }
   return null;
 }
@@ -435,13 +443,22 @@ export function slugFromAssetPath(path: string): string | null {
 
 /**
  * Remappe un chemin CE/CO vers une image scene (ou conserve une conversation CO).
+ * Avec `seed`, tire une variante similaire si la famille en a plusieurs.
  */
-export function remapExpressionImagePath(path?: string | null): string | null {
+export function remapExpressionImagePath(
+  path?: string | null,
+  seed?: string,
+): string | null {
   if (!path) return null;
-  if (isAllowedCeCoImagePath(path)) return path;
+  if (isCoConversationImagePath(path)) return path;
+  if (isSceneImagePath(path)) {
+    return pickSceneVariantPath(path, seed) ?? path;
+  }
   const slug = slugFromAssetPath(path);
   if (!slug || slug.startsWith("prix-")) return null;
-  return resolveCeCoIndexedSlug(slug);
+  const resolved = resolveCeCoIndexedSlug(slug);
+  if (!resolved) return null;
+  return pickSceneVariantPath(resolved, seed) ?? resolved;
 }
 
 /** True when the path already points at a real vocab/lecture/clock/price asset. */
@@ -458,18 +475,26 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
  * CE/CO — `expression/images/scene/` + images conversation sous `expression/co/…`
  * + chemins lecture explicites (cartes objet-pick uniquement).
  * Les QCM image par label restent limités à scene (pas de fallback vocab).
+ * `seed` : tirage déterministe parmi les variantes similaires d’une scène.
  */
-export function ceCoImageSource(path?: string | null, label?: string): string | null {
+export function ceCoImageSource(
+  path?: string | null,
+  label?: string,
+  seed?: string,
+): string | null {
   if (path) {
-    if (isAllowedCeCoImagePath(path)) return path;
+    if (isCoConversationImagePath(path)) return path;
+    if (isSceneImagePath(path)) {
+      return pickSceneVariantPath(path, seed) ?? path;
+    }
     // Objet-pick : images vocabulaire (lecture / vocab) passées explicitement
     if (path.startsWith("/assets/words/lecture/") || path.startsWith("/assets/words/vocab/")) {
       return path;
     }
-    const remapped = remapExpressionImagePath(path);
+    const remapped = remapExpressionImagePath(path, seed);
     if (remapped) return remapped;
   }
-  if (label && isCeCoImageableLabel(label)) return resolveCeCoWordImage(label);
+  if (label && isCeCoImageableLabel(label)) return resolveCeCoWordImage(label, seed);
   return null;
 }
 

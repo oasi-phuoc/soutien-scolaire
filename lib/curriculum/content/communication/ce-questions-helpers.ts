@@ -22,6 +22,20 @@ function fallbackInstructionFormat(
   return preferred;
 }
 
+/** Mélange les choix QCM et recalcule l’index de la bonne réponse. */
+function shuffleChoiceTask<T extends { label: string; image?: string }>(
+  choices: T[],
+  correct: number,
+  seed: string,
+): { choices: T[]; correct: number } {
+  const indexed = choices.map((c, i) => ({ c, i }));
+  const shuffled = shuffleWithSeed(indexed, seed);
+  return {
+    choices: shuffled.map((x) => x.c),
+    correct: shuffled.findIndex((x) => x.i === correct),
+  };
+}
+
 /**
  * Construit les questions « Lire des instructions » : 3 textes × 2 questions.
  * Chaque texte utilise une paire de formats distincts (saisie / QCM image / QCM texte).
@@ -53,7 +67,7 @@ export function buildCeInstructionQuestions(
           accept: q.fillAccept,
         };
       }
-      return multiToTask(q, format, "full");
+      return multiToTask(q, format, "full", `${seed}-instr-${cardIndex}-${q.id}`);
     });
   });
 }
@@ -107,8 +121,8 @@ export type CEMessageItem = {
   pool: CEMultiQuestion[];
 };
 
-export function ceImgChoice(label: string): CEImageChoice {
-  const image = resolveCeCoWordImage(label) ?? "";
+export function ceImgChoice(label: string, seed?: string): CEImageChoice {
+  const image = resolveCeCoWordImage(label, seed) ?? "";
   return { label, image };
 }
 
@@ -118,7 +132,12 @@ function supportsImageFormat(choices: { label: string; image: string }[]): boole
   return choices.every((c) => !!ceCoImageSource(c.image, c.label));
 }
 
-function multiToTask(q: CEMultiQuestion, format: CEFormatType, fillMode: CEFillMode): CEQuestionTask {
+function multiToTask(
+  q: CEMultiQuestion,
+  format: CEFormatType,
+  fillMode: CEFillMode,
+  seed: string,
+): CEQuestionTask {
   if (format === "fill") {
     return {
       kind: "fill",
@@ -130,19 +149,26 @@ function multiToTask(q: CEMultiQuestion, format: CEFormatType, fillMode: CEFillM
     };
   }
   if (format === "image") {
+    const withVariants = q.imageChoices.map((c, i) => ({
+      label: c.label,
+      image: ceCoImageSource(c.image, c.label, `${seed}-img-${i}`) ?? c.image,
+    }));
+    const shuffled = shuffleChoiceTask(withVariants, q.imageCorrect, `${seed}-choices`);
     return {
       kind: "choice",
       prompt: q.imageQ,
-      choices: q.imageChoices.map((c) => ({ label: c.label, image: c.image })),
-      correct: q.imageCorrect,
+      choices: shuffled.choices,
+      correct: shuffled.correct,
       image: true,
     };
   }
+  const textChoices = q.textChoices.map((label) => ({ label }));
+  const shuffled = shuffleChoiceTask(textChoices, q.textCorrect, `${seed}-choices`);
   return {
     kind: "choice",
     prompt: q.textQ,
-    choices: q.textChoices.map((label) => ({ label })),
-    correct: q.textCorrect,
+    choices: shuffled.choices,
+    correct: shuffled.correct,
   };
 }
 
@@ -172,7 +198,7 @@ export function buildCeMessageQuestions(
   return selected.map((q, index) => {
     const imageable = supportsImageFormat(q.imageChoices);
     const format = pickCeCoQuestionFormat(index, seed, q.id, imageable);
-    return multiToTask(q, format, fillMode);
+    return multiToTask(q, format, fillMode, `${seed}-${q.id}-${index}`);
   });
 }
 
