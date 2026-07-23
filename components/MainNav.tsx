@@ -107,10 +107,9 @@ export function MainNav() {
   }, [open]);
 
   const navColor = sectionColor(pathname);
+  // En mode exercice (mobile), Placement et Impression tropent la rangée — restés sur les hubs.
   const menuItems = [
     ...links,
-    ...(placementVisible ? [placementItem] : []),
-    ...(impressionVisible ? [impressionItem] : []),
     translateItem,
   ];
 
