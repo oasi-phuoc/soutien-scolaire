@@ -27,6 +27,7 @@ import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce
 import { buildCeInstructionQuestions, buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
 import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-question-filters";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 
 const TOTAL_SECONDS = 45 * 60;
 const CE_BODY_TEXT = "text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
@@ -1423,20 +1424,31 @@ export function ComprehensionEcritRunner({
   );
 }
 
-/** Aperçu imprimable du CE progressif (test de placement). */
-export function PlacementCePrintPreview({ seed = 1 }: { seed?: number }) {
-  const parts = useMemo(() => buildProgressiveCEParts(seed), [seed]);
+/** Aperçu imprimable du CE progressif (test de placement) — un item = un exercice. */
+export function buildPlacementCePrintExercises(seed = 1): PrintExercise[] {
+  const parts = buildProgressiveCEParts(seed);
   const noopSetAnswer = (_key: string, _value: number | string | null) => {};
+  return parts.map((part, index) => ({
+    id: `ce-${index}-${part.id}`,
+    label: `CE ${index + 1}. ${part.title}`,
+    defaultPoints: part.points,
+    preview: (
+      <ExercisePage
+        part={part}
+        index={index}
+        answers={{}}
+        setAnswer={noopSetAnswer}
+      />
+    ),
+  }));
+}
+
+/** @deprecated Préférer buildPlacementCePrintExercises (pagination exercice par exercice). */
+export function PlacementCePrintPreview({ seed = 1 }: { seed?: number }) {
   return (
     <div className="space-y-10">
-      {parts.map((part, index) => (
-        <ExercisePage
-          key={part.id}
-          part={part}
-          index={index}
-          answers={{}}
-          setAnswer={noopSetAnswer}
-        />
+      {buildPlacementCePrintExercises(seed).map((item) => (
+        <div key={item.id}>{item.preview}</div>
       ))}
     </div>
   );

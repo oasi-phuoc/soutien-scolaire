@@ -32,10 +32,10 @@ import {
   GrammarTheoryView,
   GrammarExerciseView,
 } from "@/components/francais/GrammaireRunner";
-import { PlacementCePrintPreview } from "@/components/communication/ComprehensionEcritRunner";
-import { PlacementCoPrintPreview } from "@/components/communication/ComprehensionOraleRunner";
-import { PlacementPePrintPreview } from "@/components/communication/ProductionEcriteRunner";
-import { PlacementPoPrintPreview } from "@/components/communication/OralProductionRunner";
+import { buildPlacementCePrintExercises } from "@/components/communication/ComprehensionEcritRunner";
+import { buildPlacementCoPrintExercises } from "@/components/communication/ComprehensionOraleRunner";
+import { buildPlacementPePrintExercises } from "@/components/communication/ProductionEcriteRunner";
+import { buildPlacementPoPrintExercises } from "@/components/communication/OralProductionRunner";
 import {
   getMathExercisesForLevel,
   MATH_TRAINING_LEVEL_LABELS,
@@ -57,8 +57,6 @@ export type PrintBundle = {
 };
 
 const noop = () => {};
-
-const FRENCH_SKILL_POINTS = 25 as const;
 
 function buildMathBundle(submoduleId: string): PrintBundle | null {
   const lesson = getLessonBySubmoduleId(submoduleId);
@@ -348,32 +346,30 @@ function buildPlacementMathPartBundle(levelId: string): PrintBundle | null {
   };
 }
 
-function frenchPartPreview(part: PlacementSkill, seed: number) {
-  switch (part) {
+function frenchSkillPrintExercises(skill: PlacementSkill, seed: number): PrintExercise[] {
+  switch (skill) {
     case "ce":
-      return <PlacementCePrintPreview seed={seed} />;
+      return buildPlacementCePrintExercises(seed);
     case "co":
-      return <PlacementCoPrintPreview seed={seed} />;
+      return buildPlacementCoPrintExercises(seed);
     case "pe":
-      return <PlacementPePrintPreview />;
+      return buildPlacementPePrintExercises();
     case "po":
-      return <PlacementPoPrintPreview />;
+      return buildPlacementPoPrintExercises();
   }
 }
 
 function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
   if (partId === "complet") {
+    const seed = 1;
     return {
       lessonTitle: "Test de placement — Français",
       course: "Français",
       accentColor: "var(--color-accent-quiz)",
       defaultEvalMode: true,
-      exercises: PLACEMENT_FRENCH_PRINT_PARTS.map((part) => ({
-        id: part.id,
-        label: part.title,
-        defaultPoints: FRENCH_SKILL_POINTS,
-        preview: frenchPartPreview(part.id, 1),
-      })),
+      exercises: PLACEMENT_FRENCH_PRINT_PARTS.flatMap((part) =>
+        frenchSkillPrintExercises(part.id, seed),
+      ),
     };
   }
   const part = PLACEMENT_FRENCH_PRINT_PARTS.find((p) => p.id === partId);
@@ -383,14 +379,7 @@ function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
     course: "Français",
     accentColor: "var(--color-accent-quiz)",
     defaultEvalMode: true,
-    exercises: [
-      {
-        id: part.id,
-        label: part.title,
-        defaultPoints: FRENCH_SKILL_POINTS,
-        preview: frenchPartPreview(part.id, 1),
-      },
-    ],
+    exercises: frenchSkillPrintExercises(part.id, 1),
   };
 }
 

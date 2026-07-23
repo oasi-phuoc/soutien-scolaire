@@ -41,6 +41,7 @@ import { useRegisterEvalGuard, useEvalNavGuard, useGuardedNavigate } from "@/com
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
 import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -1763,116 +1764,134 @@ export function OralProductionRunner({
   );
 }
 
-/** Aperçu imprimable PO du test de placement (tâches 1–5, mode feuille). */
-export function PlacementPoPrintPreview() {
-  const [prompt] = useState<OralPrompt>(() => randomOralPrompt("avance"));
-  const [situation] = useState(() => randomOralSituation("avance"));
-  const [argumentationTopic] = useState(() => randomArgumentationTopic("avance"));
-  const [interviewQuestions] = useState<string[]>(() => {
-    const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
-    return [...DIRECTED_INTERVIEW_BASE, ...group];
-  });
-  const dialogue = useMemo(() => {
-    const script = getPoDialogue(situation.id);
-    const studentRole = pickStudentRole();
-    return {
-      script,
-      roleText: roleAssignmentText(script, studentRole),
-      studentTurns: studentLineIndices(script, studentRole),
-    };
-  }, [situation.id]);
-
-  const blank = (lines = 3) => (
+function printBlankLines(lines = 3) {
+  return (
     <div className="space-y-2">
       {Array.from({ length: lines }, (_, i) => (
         <div key={i} className="h-7 border-b border-black/40" />
       ))}
     </div>
   );
+}
 
-  return (
-    <div className="space-y-10 text-black">
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold">1. Questions sur les thèmes</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">3 pts</span>
-        </div>
-        <div className="space-y-4">
+/** Aperçu imprimable PO — un item = une tâche (1–5), barème 3+4+5+6+7 = 25. */
+export function buildPlacementPoPrintExercises(): PrintExercise[] {
+  const prompt = randomOralPrompt("avance");
+  const situation = randomOralSituation("avance");
+  const argumentationTopic = randomArgumentationTopic("avance");
+  const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
+  const interviewQuestions = [...DIRECTED_INTERVIEW_BASE, ...group];
+  const script = getPoDialogue(situation.id);
+  const studentRole = pickStudentRole();
+  const roleText = roleAssignmentText(script, studentRole);
+  const studentTurns = studentLineIndices(script, studentRole);
+
+  return [
+    {
+      id: "po-themes",
+      label: "PO 1. Questions sur les thèmes",
+      defaultPoints: 3,
+      preview: (
+        <div className="space-y-4 text-black">
           {prompt.themes.map((theme) => (
             <div key={theme.word} className="rounded-lg border border-zinc-200 p-3">
               <p className="text-sm font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
               {theme.example ? (
                 <p className="mt-1 text-xs text-zinc-600">Exemple : {theme.example}</p>
               ) : null}
-              <div className="mt-3">{blank(2)}</div>
+              <div className="mt-3">{printBlankLines(2)}</div>
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold">2. Entretien dirigé</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">4 pts</span>
-        </div>
-        <ol className="space-y-3">
+      ),
+    },
+    {
+      id: "po-interview",
+      label: "PO 2. Entretien dirigé",
+      defaultPoints: 4,
+      preview: (
+        <ol className="space-y-3 text-black">
           {interviewQuestions.map((question, i) => (
             <li key={i} className="space-y-2">
               <p className="text-sm font-medium">
                 <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
               </p>
-              {blank(1)}
+              {printBlankLines(1)}
             </li>
           ))}
         </ol>
-      </section>
+      ),
+    },
+    {
+      id: "po-image",
+      label: "PO 3. Description d'image",
+      defaultPoints: 5,
+      preview: (
+        <div className="space-y-3 text-black">
+          <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white p-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={situation.image}
+              alt={situation.imageDescription || "Situation orale"}
+              className="mx-auto max-h-64 w-auto object-contain"
+            />
+          </div>
+          <p className="text-sm text-zinc-700">Décrivez cette image.</p>
+          {printBlankLines(4)}
+        </div>
+      ),
+    },
+    {
+      id: "po-dialogue",
+      label: "PO 4. Dialogue structuré",
+      defaultPoints: 6,
+      preview: (
+        <div className="space-y-3 text-black">
+          <p className="text-sm text-zinc-700">{roleText}</p>
+          <ol className="space-y-2">
+            {script.lines.map((line, i) => {
+              const isStudent = studentTurns.includes(i);
+              const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
+              return (
+                <li key={i} className="rounded-lg border border-zinc-200 px-3 py-2 text-sm">
+                  <p className="font-semibold text-zinc-500">{speaker}</p>
+                  {isStudent ? printBlankLines(1) : <p className="mt-1">{line.text}</p>}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      ),
+    },
+    {
+      id: "po-argumentation",
+      label: "PO 5. Argumentation",
+      defaultPoints: 7,
+      preview: (
+        <div className="space-y-3 text-black">
+          <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
+          {printBlankLines(5)}
+        </div>
+      ),
+    },
+  ];
+}
 
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold">3. Description d&apos;image</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">5 pts</span>
-        </div>
-        <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white p-2">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={situation.image}
-            alt={situation.imageDescription || "Situation orale"}
-            className="mx-auto max-h-64 w-auto object-contain"
-          />
-        </div>
-        <p className="text-sm text-zinc-700">Décrivez cette image.</p>
-        {blank(4)}
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold">4. Dialogue structuré</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">6 pts</span>
-        </div>
-        <p className="text-sm text-zinc-700">{dialogue.roleText}</p>
-        <ol className="space-y-2">
-          {dialogue.script.lines.map((line, i) => {
-            const isStudent = dialogue.studentTurns.includes(i);
-            const speaker =
-              line.role === "A" ? dialogue.script.roleA.title : dialogue.script.roleB.title;
-            return (
-              <li key={i} className="rounded-lg border border-zinc-200 px-3 py-2 text-sm">
-                <p className="font-semibold text-zinc-500">{speaker}</p>
-                {isStudent ? blank(1) : <p className="mt-1">{line.text}</p>}
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold">5. Argumentation</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">7 pts</span>
-        </div>
-        <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
-        {blank(5)}
-      </section>
+/** @deprecated Préférer buildPlacementPoPrintExercises. */
+export function PlacementPoPrintPreview() {
+  return (
+    <div className="space-y-10 text-black">
+      {buildPlacementPoPrintExercises().map((item) => (
+        <section key={item.id} className="space-y-3">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-lg font-bold">{item.label.replace(/^PO \d+\.\s*/, "")}</h2>
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">
+              {item.defaultPoints} pts
+            </span>
+          </div>
+          {item.preview}
+        </section>
+      ))}
     </div>
   );
 }

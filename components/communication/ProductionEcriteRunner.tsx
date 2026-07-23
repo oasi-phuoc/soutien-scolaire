@@ -38,6 +38,7 @@ import {
   type IntroRow,
 } from "@/components/communication/CommunicationEvalLayout";
 import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTrainingElementsBlock";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
@@ -923,54 +924,74 @@ export function ProductionEcriteRunner({
   );
 }
 
-/** Aperçu imprimable PE hybride du test de placement (formulaire + court + long). */
-export function PlacementPePrintPreview() {
-  const [formTemplate] = useState<FormTemplate | null>(() => randomFormTemplates(1)[0] ?? null);
-  const [shortPrompt] = useState(() => buildPrompt("moyen", "short"));
-  const [longPrompt] = useState(() => buildPrompt("avance", "long"));
+/** Aperçu imprimable PE hybride — un item = un exercice (formulaire / court / long). */
+export function buildPlacementPePrintExercises(): PrintExercise[] {
+  const formTemplate = randomFormTemplates(1)[0] ?? null;
+  const shortPrompt = buildPrompt("moyen", "short");
+  const longPrompt = buildPrompt("avance", "long");
   const emptyForm: Record<string, string> = {};
 
+  const items: PrintExercise[] = [];
+  if (formTemplate) {
+    items.push({
+      id: "pe-form",
+      label: "PE 1. Formulaire",
+      defaultPoints: 5,
+      preview: (
+        <FormExercise
+          template={formTemplate}
+          answers={emptyForm}
+          advanced={false}
+          disabled={false}
+          onChange={() => {}}
+        />
+      ),
+    });
+  }
+  items.push({
+    id: "pe-short",
+    label: "PE 2. Texte court",
+    defaultPoints: 10,
+    preview: (
+      <WritingExercise
+        prompt={shortPrompt}
+        text=""
+        disabled={false}
+        onTextChange={() => {}}
+      />
+    ),
+  });
+  items.push({
+    id: "pe-long",
+    label: "PE 3. Texte long",
+    defaultPoints: 10,
+    preview: (
+      <WritingExercise
+        prompt={longPrompt}
+        text=""
+        disabled={false}
+        onTextChange={() => {}}
+      />
+    ),
+  });
+  return items;
+}
+
+/** @deprecated Préférer buildPlacementPePrintExercises. */
+export function PlacementPePrintPreview() {
   return (
     <div className="space-y-10">
-      {formTemplate && (
-        <section className="space-y-3">
+      {buildPlacementPePrintExercises().map((item) => (
+        <div key={item.id} className="space-y-3">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-lg font-bold text-black">1. Formulaire</h2>
-            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">5 pts</span>
+            <h2 className="text-lg font-bold text-black">{item.label.replace(/^PE \d+\.\s*/, "")}</h2>
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">
+              {item.defaultPoints} pts
+            </span>
           </div>
-          <FormExercise
-            template={formTemplate}
-            answers={emptyForm}
-            advanced={false}
-            disabled={false}
-            onChange={() => {}}
-          />
-        </section>
-      )}
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold text-black">2. Texte court</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">10 pts</span>
+          {item.preview}
         </div>
-        <WritingExercise
-          prompt={shortPrompt}
-          text=""
-          disabled={false}
-          onTextChange={() => {}}
-        />
-      </section>
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold text-black">3. Texte long</h2>
-          <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-zinc-600">10 pts</span>
-        </div>
-        <WritingExercise
-          prompt={longPrompt}
-          text=""
-          disabled={false}
-          onTextChange={() => {}}
-        />
-      </section>
+      ))}
     </div>
   );
 }

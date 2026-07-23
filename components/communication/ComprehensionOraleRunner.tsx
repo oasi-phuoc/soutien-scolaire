@@ -17,6 +17,7 @@ import { getCoPartQuestions, type COQuestionTask } from "@/lib/curriculum/conten
 import { CO_SCOLAIRE_MOYEN_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-moyen";
 import { CO_SCOLAIRE_AVANCE_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-avance";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import {
   CommunicationFinishButton,
   CommunicationIntroSection,
@@ -1260,13 +1261,16 @@ function QuestionBlock({
   answers,
   onAnswer,
   readonly,
+  forceTranscripts = false,
 }: {
   part: COPart;
   answers: Answers;
   onAnswer: (key: string, value: number | string | number[] | boolean[]) => void;
   readonly?: boolean;
+  /** Mode impression PDF : affiche les scripts sans bouton audio. */
+  forceTranscripts?: boolean;
 }) {
-  const [showTranscripts, setShowTranscripts] = useState(false);
+  const [showTranscripts, setShowTranscripts] = useState(forceTranscripts);
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
   const isMatchGrid = part.questions.length === 1 && part.questions[0]!.kind === "match_grid";
   const isObjectPick = part.questions.length === 1 && part.questions[0]!.kind === "object_pick";
@@ -1294,7 +1298,7 @@ function QuestionBlock({
             <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
               {part.points} points
             </span>
-            {hasTranscript && (
+            {hasTranscript && !forceTranscripts && (
               <button
                 type="button"
                 onClick={() => setShowTranscripts((value) => !value)}
@@ -1312,10 +1316,12 @@ function QuestionBlock({
             )}
           </div>
         </div>
-        <p className="w-full text-sm leading-relaxed text-[var(--color-text-secondary)]">{consigne}</p>
+        <p className="w-full text-sm leading-relaxed text-[var(--color-text-secondary)]">
+          {forceTranscripts ? "Lisez le script ci-dessous et répondez aux questions." : consigne}
+        </p>
         <div className="space-y-3">
-          <AudioSequencePlayer items={part.audioGroup.items} />
-          {showTranscripts && part.audioGroup.items.map((item) => item.transcript ? (
+          {!forceTranscripts && <AudioSequencePlayer items={part.audioGroup.items} />}
+          {(showTranscripts || forceTranscripts) && part.audioGroup.items.map((item) => item.transcript ? (
             <COTranscriptView
               key={item.id}
               transcript={item.transcript}
@@ -1589,22 +1595,35 @@ export function ComprehensionOraleRunner({
   );
 }
 
-/** Aperçu imprimable du CO progressif (test de placement). */
+/** Aperçu imprimable du CO progressif — un item = un exercice (scripts inclus). */
+export function buildPlacementCoPrintExercises(seed = 1): PrintExercise[] {
+  const parts = makeProgressiveCoParts(seed);
+  return parts.map((part, index) => ({
+    id: `co-${index}-${part.id}`,
+    label: `CO ${index + 1}. ${part.title}`,
+    defaultPoints: part.points,
+    preview: (
+      <div className="space-y-3">
+        <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
+          Exercice {index + 1}
+        </p>
+        <QuestionBlock
+          part={part}
+          answers={{}}
+          onAnswer={() => undefined}
+          forceTranscripts
+        />
+      </div>
+    ),
+  }));
+}
+
+/** @deprecated Préférer buildPlacementCoPrintExercises. */
 export function PlacementCoPrintPreview({ seed = 1 }: { seed?: number }) {
-  const parts = useMemo(() => makeProgressiveCoParts(seed), [seed]);
   return (
     <div className="space-y-10">
-      {parts.map((part, index) => (
-        <div key={part.id} className="space-y-3">
-          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
-            Exercice {index + 1}
-          </p>
-          <QuestionBlock
-            part={part}
-            answers={{}}
-            onAnswer={() => undefined}
-          />
-        </div>
+      {buildPlacementCoPrintExercises(seed).map((item) => (
+        <div key={item.id}>{item.preview}</div>
       ))}
     </div>
   );
