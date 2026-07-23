@@ -56,6 +56,11 @@ export interface PrintExercise {
   correctionFollowPreviews?: { title?: string; preview: ReactNode }[];
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
+  /**
+   * Si `false`, l’exercice peut partager une page avec le précédent
+   * tant qu’il tient entièrement (placement maths). Défaut : saut forcé.
+   */
+  forceNewPage?: boolean;
 }
 
 export interface ExercisePrintSelection {
@@ -1083,6 +1088,15 @@ export function PrintConfigSheet({
                 }
                 exerciseNodes={previewBlocks.flatMap((block) => {
                   const sectionNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
+                  const isCorrectionSection = Boolean(block.title);
+                  /** Placement maths : packer sauf 1er exo après l’annonce (page 1 réservée). */
+                  const exerciseBreak = (exercise: PrintExercise | undefined, index: number) => {
+                    if (exercise?.forceNewPage === false) {
+                      if (index === 0 && Boolean(announcementPreview) && !isCorrectionSection) return true;
+                      return false;
+                    }
+                    return true;
+                  };
                   if (block.title) {
                     sectionNodes.push({
                       key: `section-${block.key}`,
@@ -1258,7 +1272,7 @@ export function PrintConfigSheet({
 
                     sectionNodes.push({
                       key: item.key,
-                      forceNewPage: true,
+                      forceNewPage: exerciseBreak(exercise, index),
                       node: (
                         <div className="print-exercise">
                           <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
