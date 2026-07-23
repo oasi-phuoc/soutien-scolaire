@@ -243,6 +243,9 @@ function HiddenNav({
   );
 }
 
+const ACCENT_SOFT = "color-mix(in oklch, var(--color-accent-quiz) 12%, white)";
+const ACCENT_BORDER = "color-mix(in oklch, var(--color-accent-quiz) 28%, white)";
+
 function PePropositionAccordion({
   title,
   open,
