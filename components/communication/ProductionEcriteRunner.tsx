@@ -39,13 +39,30 @@ import {
 } from "@/components/communication/CommunicationEvalLayout";
 import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTrainingElementsBlock";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import {
+  PePrintRubricGrid,
+  PeWritingPrintExercise,
+} from "@/components/communication/PeWritingPrintPreview";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
 import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
+import type { PeExerciseKind } from "@/lib/curriculum/content/communication/expression-submission-types";
 
 type StepId = "form" | "short" | "long";
 type Phase = "intro" | "exercise" | "results";
+
+/** Kind de grille de notation aligné sur `buildPeSubmissionBundle`. */
+function pePrintKind(
+  writingLevel: WritingLevel,
+  stepId: StepId,
+  isHybrid: boolean,
+): PeExerciseKind {
+  if (stepId === "form") return "form";
+  if (isHybrid) return stepId === "short" ? "reply" : "experience";
+  if (writingLevel === "moyen") return stepId === "short" ? "reply" : "experience";
+  return stepId === "short" ? "short" : "long";
+}
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -959,16 +976,19 @@ export function buildPlacementPePrintExercises(
         label: `PE ${n}. ${step.title}`,
         defaultPoints: step.points,
         preview: (
-          <FormExercise
-            template={formTemplate}
-            answers={emptyForm}
-            advanced={false}
-            disabled={false}
-            onChange={() => {}}
-          />
+          <div className="space-y-5">
+            <FormExercise
+              template={formTemplate}
+              answers={emptyForm}
+              advanced={false}
+              disabled={false}
+              onChange={() => {}}
+            />
+            <PePrintRubricGrid kind="form" maxPoints={step.points} />
+          </div>
         ),
         correctionPreview: (
-          <div className="space-y-3">
+          <div className="space-y-5">
             <FormExercise
               template={formTemplate}
               answers={formCorrectionAnswers}
@@ -981,6 +1001,7 @@ export function buildPlacementPePrintExercises(
                 {formSample}
               </div>
             ) : null}
+            <PePrintRubricGrid kind="form" maxPoints={step.points} />
           </div>
         ),
       });
@@ -993,24 +1014,24 @@ export function buildPlacementPePrintExercises(
       : writingLevel;
     const prompt = buildPrompt(promptLevel, step.id === "long" ? "long" : "short");
     const sample = getWritingSampleAnswer(prompt.id) ?? "";
+    const kind = pePrintKind(writingLevel, step.id, isHybrid);
     items.push({
       id: `pe-${step.id}-${n}`,
       label: `PE ${n}. ${step.title}`,
       defaultPoints: step.points,
       preview: (
-        <WritingExercise
+        <PeWritingPrintExercise
           prompt={prompt}
-          text=""
-          disabled={false}
-          onTextChange={() => {}}
+          kind={kind}
+          maxPoints={step.points}
         />
       ),
       correctionPreview: (
-        <WritingExercise
+        <PeWritingPrintExercise
           prompt={prompt}
-          text={sample || "—"}
-          disabled
-          onTextChange={() => {}}
+          sampleText={sample || "—"}
+          kind={kind}
+          maxPoints={step.points}
         />
       ),
     });
