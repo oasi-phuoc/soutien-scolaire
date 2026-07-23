@@ -1265,7 +1265,6 @@ export function PrintConfigSheet({
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
                                 Exercice {index + 1} — {follow.title ?? "Suite"}
-                                {item.correction ? "" : ""}
                               </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
