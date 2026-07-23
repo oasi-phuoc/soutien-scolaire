@@ -1,5 +1,24 @@
 {
-  "total": 704,
-  "done": [],
-  "failed": []
+  "total_sources_excl_ce_moyen": 704,
+  "unique_outputs": 703,
+  "done": 703,
+  "excluded": [
+    "ce-moyen-message-melina-plongee.webp",
+    "ce-moyen-message-fred-anniversaire.webp",
+    "ce-moyen-message-julia-vacances.webp",
+    "ce-moyen-message-sophie-pizza.webp",
+    "ce-moyen-message-karl-danse.webp",
+    "ce-moyen-message-stefanie-correspondante.webp",
+    "ce-moyen-message-anabelle-album.webp",
+    "ce-moyen-message-bibliotheque-emprunt.webp",
+    "ce-moyen-message-musikenligne.webp"
+  ],
+  "style": "manga/anime soft watercolor, ref admirer-fleurs, 4:3 800x600 webp",
+  "collision": {
+    "out": "demander-information-aeroport.webp",
+    "srcs": [
+      "demander-information-aeroport.png",
+      "demander-information-aeroport.webp"
+    ]
+  }
 }
