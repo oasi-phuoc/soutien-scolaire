@@ -462,8 +462,10 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
     if (isAllowedCeCoImagePath(path)) return path;
-    // Objet-pick : images vocabulaire lecture passées explicitement
-    if (path.startsWith("/assets/words/lecture/")) return path;
+    // Objet-pick : images vocabulaire (lecture / vocab) passées explicitement
+    if (path.startsWith("/assets/words/lecture/") || path.startsWith("/assets/words/vocab/")) {
+      return path;
+    }
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
   }

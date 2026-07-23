@@ -1,5 +1,11 @@
 import { buildObjectPickTask, type COObjectPickCard } from "./co-questions-helpers";
-import { labelToAssetSlug } from "../../word-image-resolver";
+import {
+  labelToAssetSlug,
+} from "../../word-image-resolver";
+import {
+  LECTURE_IMAGE_INDEX,
+  WORD_IMAGE_INDEX,
+} from "./word-image-index";
 
 export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
@@ -8,7 +14,7 @@ export type COObjetPickDef = {
 const LECTURE_DIR = "/assets/words/lecture";
 
 /**
- * Objet-pick → images vocabulaire (lecture).
+ * Objet-pick → images vocabulaire (lecture / vocab).
  * Chaussures / chaussures de sport → baskets.
  */
 function opImg(label: string): string {
@@ -16,16 +22,16 @@ function opImg(label: string): string {
   if (slug === "chaussures-de-sport" || slug === "chaussures" || slug === "chaussure") {
     return `${LECTURE_DIR}/baskets.webp`;
   }
-  // Liens explicites demandés (noms de fichiers lecture)
-  const aliases: Record<string, string> = {
-    "carte-detudiant": "carte-detudiant",
-    "carte-didentite": "carte-didentite",
-    chips: "chips",
-    "salade-de-fruits": "salade-de-fruits",
-    "bouteille-deau": "bouteille-deau",
-  };
-  const file = aliases[slug] ?? slug;
-  return `${LECTURE_DIR}/${file}.webp`;
+  const fromLecture = LECTURE_IMAGE_INDEX[slug];
+  if (fromLecture) return fromLecture;
+  const fromIndex = WORD_IMAGE_INDEX[slug];
+  if (
+    fromIndex &&
+    (fromIndex.startsWith("/assets/words/lecture/") || fromIndex.startsWith("/assets/words/vocab/"))
+  ) {
+    return fromIndex;
+  }
+  return `${LECTURE_DIR}/${slug}.webp`;
 }
 
 function opCards(
