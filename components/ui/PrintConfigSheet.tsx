@@ -43,12 +43,18 @@ interface PrintConfigSheetProps {
   onPrint: (config: PrintConfig) => void;
   exercises?: PrintExercise[];
   theoryPreview?: ReactNode;
+  /** Page d'annonce (placement) : toujours imprimée en page 1. */
+  announcementPreview?: ReactNode;
   accentColor?: string;
   lessonTitle?: string;
   /** Cours par défaut dans l'en-tête (ex. Mathématiques, Français). */
   defaultCourse?: string;
   /** Active le mode Évaluation dès l'ouverture (tests de placement). */
   defaultEvalMode?: boolean;
+  /** Sélecteur de niveau FR (compétences séparées). */
+  frenchLevelSelectable?: boolean;
+  frenchLevel?: "base" | "moyen" | "avance";
+  onFrenchLevelChange?: (level: "base" | "moyen" | "avance") => void;
 }
 
 const CLASS_LEVELS: PrintHeaderConfig["classLevel"][] = ["CSC", "CFR", "EPL", "CPR"];
@@ -477,10 +483,14 @@ export function PrintConfigSheet({
   onPrint,
   exercises = [],
   theoryPreview,
+  announcementPreview,
   accentColor = "var(--color-theme)",
   lessonTitle = "",
   defaultCourse = "Mathématiques",
   defaultEvalMode = false,
+  frenchLevelSelectable = false,
+  frenchLevel = "base",
+  onFrenchLevelChange,
 }: PrintConfigSheetProps) {
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(defaultEvalMode);
@@ -624,7 +634,10 @@ export function PrintConfigSheet({
     onPrint({ theory, evalMode, exerciseSelection: selection, header, printDate, version });
   };
 
-  const hasPrintableContent = theory || selection.some((item) => item.included && item.occurrences > 0);
+  const hasPrintableContent =
+    Boolean(announcementPreview) ||
+    theory ||
+    selection.some((item) => item.included && item.occurrences > 0);
   const totalPoints = selection
     .filter((s) => s.included && s.occurrences > 0)
     .reduce((sum, s) => sum + s.points * s.occurrences, 0);
@@ -759,7 +772,41 @@ export function PrintConfigSheet({
             </div>
           </section>
 
+          {frenchLevelSelectable && onFrenchLevelChange && (
+            <section className="mb-5">
+              <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+                Niveau
+              </h2>
+              <div className="grid grid-cols-3 gap-1 rounded-xl border border-[var(--color-border-default)] p-1">
+                {(
+                  [
+                    { value: "base" as const, label: "A1" },
+                    { value: "moyen" as const, label: "A2" },
+                    { value: "avance" as const, label: "B1" },
+                  ] as const
+                ).map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => onFrenchLevelChange(option.value)}
+                    className="min-h-11 rounded-lg px-3 text-sm font-semibold transition-colors"
+                    style={frenchLevel === option.value
+                      ? { background: accentColor, color: "white" }
+                      : { color: "var(--color-text-secondary)" }}
+                    aria-pressed={frenchLevel === option.value}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
+                Choisissez le niveau des exercices pour cette compétence.
+              </p>
+            </section>
+          )}
+
           {/* ── Théorie ── */}
+          {!announcementPreview && (
           <section className="mb-5">
             <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
               Théorie
@@ -780,6 +827,7 @@ export function PrintConfigSheet({
               </div>
             </div>
           </section>
+          )}
 
           {/* ── Corrigé ── */}
           <section className="mb-5">
@@ -985,13 +1033,19 @@ export function PrintConfigSheet({
                 printDate={printDate}
                 printedBy={printedBy}
                 header={<PrintDocumentHeader config={header} evalMode={evalMode} totalPoints={totalPoints} />}
-                theoryNode={theory ? (
+                theoryNode={
+                  announcementPreview ? (
+                    <div className="print-exercise [&_button]:hidden">
+                      {announcementPreview}
+                    </div>
+                  ) : theory ? (
                   <div className="[&_button]:hidden [&_[data-no-print]]:hidden [&_h1]:text-[1.25em] [&_h2]:text-[1.2em] [&_h3]:text-[1.1em] [&_p]:text-[1em] [&_.text-2xl]:!text-[1.3em] [&_.text-xl]:!text-[1.15em] [&_.text-lg]:!text-[1.05em] [&_.text-base]:!text-[1em] [&_.text-sm]:!text-[0.85em] [&_.text-xs]:!text-[0.7em]">
                     {theoryPreview ?? (
                       <p className="text-zinc-500">La théorie de la leçon sera incluse dans le document.</p>
                     )}
                   </div>
-                ) : null}
+                  ) : null
+                }
                 exerciseNodes={previewBlocks.flatMap((block) => {
                   const sectionNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
                   if (block.title) {
@@ -1014,8 +1068,14 @@ export function PrintConfigSheet({
                     const body = item.correction
                       ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
                       : item.exercise?.preview;
+                    const forceNewPage =
+                      Boolean(announcementPreview) &&
+                      block.key === "eleve" &&
+                      index === 0 &&
+                      !block.title;
                     sectionNodes.push({
                       key: item.key,
+                      forceNewPage,
                       node: (
                         <div className="print-exercise">
                           <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>

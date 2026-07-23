@@ -6,7 +6,7 @@ export type PlacementZone = "CSC" | "CFR" | "CAF" | "CAP";
 
 export type PlacementSkill = "ce" | "co" | "pe" | "po";
 
-export type MathTrainingLevel = "I" | "II" | "III" | "IV";
+export type MathTrainingLevel = "CSC" | "CFR" | "CAF" | "CAP";
 
 export const PLACEMENT_LEVEL_LABELS: Record<PlacementLevel, string> = {
   base: "A1 — Base",

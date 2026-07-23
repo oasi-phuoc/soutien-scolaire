@@ -1775,10 +1775,12 @@ function printBlankLines(lines = 3) {
 }
 
 /** Aperçu imprimable PO — un item = une tâche (1–5), barème 3+4+5+6+7 = 25. */
-export function buildPlacementPoPrintExercises(): PrintExercise[] {
-  const prompt = randomOralPrompt("avance");
-  const situation = randomOralSituation("avance");
-  const argumentationTopic = randomArgumentationTopic("avance");
+export function buildPlacementPoPrintExercises(
+  level: OralLevel = "avance",
+): PrintExercise[] {
+  const prompt = randomOralPrompt(level);
+  const situation = randomOralSituation(level);
+  const argumentationTopic = randomArgumentationTopic(level);
   const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
   const interviewQuestions = [...DIRECTED_INTERVIEW_BASE, ...group];
   const script = getPoDialogue(situation.id);
@@ -1789,7 +1791,7 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
   const argumentationSample = getArgumentationResponse(
     argumentationTopic.theme,
     argumentationTopic.prompt,
-    "avance",
+    level,
   );
 
   return [

@@ -16,9 +16,6 @@ import {
   loadFrenchSessions,
   loadMathHistory,
   loadTotalHistory,
-  loadMathTrainingDraft,
-  saveMathTrainingDraft,
-  createMathTrainingSessionId,
 } from "@/lib/placement/storage";
 import {
   PLACEMENT_MATH_EXERCISES,
@@ -27,7 +24,10 @@ import {
 } from "@/lib/placement/math-exercises";
 import {
   getMathExercisesForLevel,
+  MATH_PLACEMENT_TIMER_SECONDS,
   MATH_TRAINING_LEVEL_LABELS,
+  MATH_TRAINING_LEVEL_TOPICS,
+  MATH_TRAINING_TIMER_SECONDS,
 } from "@/lib/placement/math-training-levels";
 import type { MathTrainingLevel } from "@/lib/placement/types";
 import { PlacementPageHeader, PlacementBackButton } from "@/components/placement/PlacementPageHeader";
@@ -37,8 +37,6 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import type { PivotCode } from "@/lib/pivot-langs";
 
 type ExerciseMeta = PlacementMathExerciseMeta;
-
-const TIMER_SECONDS = 90 * 60; // 90 minutes
 
 // ── Timer formatter ───────────────────────────────────────────────────────────
 
@@ -321,12 +319,10 @@ export function PlacementTestClient({
     () => exercises.reduce((s, e) => s + e.maxPoints, 0),
     [exercises],
   );
-
-  const initialTrainingDraft = (() => {
-    if (!trainingLevel || typeof window === "undefined") return null;
-    const draft = loadMathTrainingDraft();
-    return draft?.level === trainingLevel && draft.phase === "running" ? draft : null;
-  })();
+  const timerSeconds = trainingLevel
+    ? MATH_TRAINING_TIMER_SECONDS[trainingLevel]
+    : MATH_PLACEMENT_TIMER_SECONDS;
+  const timerMinutes = Math.round(timerSeconds / 60);
 
   const accent = mode === "placement" ? "var(--color-accent-quiz)" : "var(--color-accent-alg)";
   const pivot = usePivotLang();
@@ -334,23 +330,18 @@ export function PlacementTestClient({
   const introText = (showPivot ? PLACEMENT_INTRO_TEXTS[pivot] : undefined) ?? PLACEMENT_INTRO_TEXTS.fr;
   const introLang = showPivot ? pivot : "fr";
   const introDir = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr";
-  const [phase, setPhase] = useState<TestPhase>(() => (initialTrainingDraft ? "running" : "idle"));
-  const [currentIdx, setCurrentIdx] = useState(() => initialTrainingDraft?.currentIdx ?? 0);
-  const [timeLeft, setTimeLeft] = useState(() => initialTrainingDraft?.timeLeft ?? TIMER_SECONDS);
-  const [validated, setValidated] = useState<boolean[]>(
-    () => initialTrainingDraft?.validated ?? Array(exerciseCount).fill(false),
-  );
+  const [phase, setPhase] = useState<TestPhase>("idle");
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(timerSeconds);
+  const [validated, setValidated] = useState<boolean[]>(() => Array(exerciseCount).fill(false));
   const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(
-    () => initialTrainingDraft?.scores ?? Array(exerciseCount).fill(null),
+    () => Array(exerciseCount).fill(null),
   );
   const [validateTriggers, setValidateTriggers] = useState<number[]>(
-    () => initialTrainingDraft?.validateTriggers ?? Array(exerciseCount).fill(0),
+    () => Array(exerciseCount).fill(0),
   );
   const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(exerciseCount).fill(false));
-  const [sessionKey, setSessionKey] = useState(() => initialTrainingDraft?.sessionKey ?? 1);
-  const [trainingSessionId] = useState(
-    () => initialTrainingDraft?.sessionId ?? createMathTrainingSessionId(),
-  );
+  const [sessionKey, setSessionKey] = useState(1);
   const [skipConfirmOpen, setSkipConfirmOpen] = useState(false);
   const [skipAccepted, setSkipAccepted] = useState(false);
   const [skipRequested, setSkipRequested] = useState(false);
@@ -359,29 +350,6 @@ export function PlacementTestClient({
   const exerciseKeys = useMemo(() => exercises.map((_, i) => sessionKey * 100 + i), [exercises, sessionKey]);
 
   useRegisterEvalGuard(mode === "placement" && phase === "running");
-
-  const persistTrainingDraft = useCallback((patch: {
-    currentIdx?: number;
-    timeLeft?: number;
-    validated?: boolean[];
-    scores?: Array<{ points: number; maxPoints: number } | null>;
-    validateTriggers?: number[];
-    sessionKey?: number;
-  }) => {
-    if (!isTraining || !trainingLevel) return;
-    saveMathTrainingDraft({
-      sessionId: trainingSessionId,
-      level: trainingLevel,
-      phase: "running",
-      currentIdx: patch.currentIdx ?? currentIdx,
-      timeLeft: patch.timeLeft ?? timeLeft,
-      validated: patch.validated ?? validated,
-      scores: patch.scores ?? scores,
-      validateTriggers: patch.validateTriggers ?? validateTriggers,
-      sessionKey: patch.sessionKey ?? sessionKey,
-      updatedAt: new Date().toISOString(),
-    });
-  }, [currentIdx, isTraining, scores, sessionKey, timeLeft, trainingLevel, trainingSessionId, validateTriggers, validated]);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -456,13 +424,11 @@ export function PlacementTestClient({
       if (next >= 0) setCurrentIdx(next);
       else if (prevOpen >= 0) setCurrentIdx(prevOpen);
       else setPhase("results");
-      persistTrainingDraft({ validated: n, currentIdx: next >= 0 ? next : prevOpen >= 0 ? prevOpen : exIdx });
       return n;
     });
     setScores(prev => {
       const n = [...prev];
       n[exIdx] = { points, maxPoints };
-      persistTrainingDraft({ scores: n });
       return n;
     });
   }
@@ -484,10 +450,7 @@ export function PlacementTestClient({
 
   // Save result to localStorage history when results screen appears (placement test only)
   useEffect(() => {
-    if (phase !== "results" || isTraining) {
-      if (phase === "results" && isTraining) saveMathTrainingDraft(null);
-      return;
-    }
+    if (phase !== "results" || isTraining) return;
     const pts = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
     const maxPts = exercises.reduce((s, e) => s + e.maxPoints, 0);
     const percent = maxPts > 0 ? Math.round((pts / maxPts) * 100) : 0;
@@ -519,34 +482,16 @@ export function PlacementTestClient({
   }, [phase, isTraining]);
 
   function startTest() {
-    if (isTraining) saveMathTrainingDraft(null);
     const nextSessionKey = sessionKey + 1;
     setSessionKey(nextSessionKey);
-    const emptyValidated = Array(exerciseCount).fill(false);
-    const emptyScores = Array(exerciseCount).fill(null);
-    const emptyTriggers = Array(exerciseCount).fill(0);
-    setValidated(emptyValidated);
-    setScores(emptyScores);
-    setValidateTriggers(emptyTriggers);
+    setValidated(Array(exerciseCount).fill(false));
+    setScores(Array(exerciseCount).fill(null));
+    setValidateTriggers(Array(exerciseCount).fill(0));
     setCurrentIdx(0);
     setSelectedResultIdx(0);
-    setTimeLeft(TIMER_SECONDS);
+    setTimeLeft(timerSeconds);
     setSavedResult(false);
     setPhase("running");
-    if (isTraining) {
-      saveMathTrainingDraft({
-        sessionId: trainingSessionId,
-        level: trainingLevel!,
-        phase: "running",
-        currentIdx: 0,
-        timeLeft: TIMER_SECONDS,
-        validated: emptyValidated,
-        scores: emptyScores,
-        validateTriggers: emptyTriggers,
-        sessionKey: nextSessionKey,
-        updatedAt: new Date().toISOString(),
-      });
-    }
   }
 
   function confirmSkipAll() {
@@ -589,16 +534,44 @@ export function PlacementTestClient({
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4" lang={introLang} dir={introDir}>
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
+              {isTraining && trainingLevel ? (
+                <ul className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
+                  {MATH_TRAINING_LEVEL_TOPICS[trainingLevel].map((topic) => (
+                    <li key={topic} className="flex items-start gap-2">
+                      <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
+                      <span>{topic}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : !isTraining ? (
+                <ul className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
+                  {(
+                    [
+                      ["CSC", "Additions et soustractions"],
+                      ["CFR", "Multiplications, divisions, périmètre et aire du rectangle"],
+                      ["CAF", "Nombres décimaux, fractions, périmètre et aire"],
+                      ["CAP", "Puissances et racines, relatifs, fractions et équations, périmètre et aire"],
+                    ] as const
+                  ).map(([code, desc]) => (
+                    <li key={code} className="flex items-start gap-2">
+                      <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
+                      <span><strong className="text-[var(--color-text-primary)]">{code}</strong> — {desc}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
                 {(isTraining ? [
                   <><strong className="text-[var(--color-text-primary)]">{exerciseCount} {introText.exercisesLabel}</strong> pour ce niveau</>,
+                  <><strong className="text-[var(--color-text-primary)]">{timerMinutes} minutes</strong> {introText.minutesSuffix}</>,
                   introText.validateLine,
                   introText.navigateLine,
                   <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{maxPointsTotal} {introText.points}</strong></>,
                   "Cet entraînement ne compte pas pour le total de placement.",
+                  "Si vous quittez, la progression n'est pas sauvegardée.",
                 ] : [
                   <><strong className="text-[var(--color-text-primary)]">{exerciseCount} {introText.exercisesLabel}</strong> {introText.coverage}</>,
-                  <><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</>,
+                  <><strong className="text-[var(--color-text-primary)]">{timerMinutes} minutes</strong> {introText.minutesSuffix}</>,
                   introText.validateLine,
                   introText.navigateLine,
                   <>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{PLACEMENT_MATH_TOTAL_POINTS} {introText.points}</strong></>,
@@ -664,7 +637,7 @@ export function PlacementTestClient({
         </button>
         )}
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          {isTraining && trainingLevel ? MATH_TRAINING_LEVEL_LABELS[trainingLevel] : "Test de placement"}
+          {isTraining && trainingLevel ? trainingLevel : "Test de placement"}
         </h1>
         <button
           type="button"

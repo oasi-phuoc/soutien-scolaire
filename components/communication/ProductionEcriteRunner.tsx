@@ -924,94 +924,96 @@ export function ProductionEcriteRunner({
   );
 }
 
-/** Aperçu imprimable PE hybride — un item = un exercice (formulaire / court / long). */
-export function buildPlacementPePrintExercises(): PrintExercise[] {
-  const formTemplate = randomFormTemplates(1)[0] ?? null;
-  const shortPrompt = buildPrompt("moyen", "short");
-  const longPrompt = buildPrompt("avance", "long");
+/** Aperçu imprimable PE — hybride (défaut) ou selon le niveau d'entraînement. */
+export function buildPlacementPePrintExercises(
+  level?: "base" | "moyen" | "avance",
+): PrintExercise[] {
+  const isHybrid = !level;
+  const writingLevel = level ?? "base";
+  const formTemplate = (isHybrid || writingLevel === "base")
+    ? (randomFormTemplates(1)[0] ?? null)
+    : null;
   const emptyForm: Record<string, string> = {};
   const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
   const formCorrectionAnswers = formTemplate && formSample
     ? parseFormSampleAnswers(formTemplate, formSample)
     : emptyForm;
-  const shortSample = getWritingSampleAnswer(shortPrompt.id) ?? "";
-  const longSample = getWritingSampleAnswer(longPrompt.id) ?? "";
+
+  const meta = isHybrid
+    ? [
+        { id: "form" as const, title: "Formulaire", points: 5 },
+        { id: "short" as const, title: "Texte court", points: 10 },
+        { id: "long" as const, title: "Texte long", points: 10 },
+      ]
+    : getStepMeta(writingLevel);
 
   const items: PrintExercise[] = [];
-  if (formTemplate) {
+  let n = 1;
+  for (const step of meta) {
+    if (step.id === "form") {
+      if (!formTemplate) continue;
+      items.push({
+        id: "pe-form",
+        label: `PE ${n}. ${step.title}`,
+        defaultPoints: step.points,
+        preview: (
+          <FormExercise
+            template={formTemplate}
+            answers={emptyForm}
+            advanced={false}
+            disabled={false}
+            onChange={() => {}}
+          />
+        ),
+        correctionPreview: (
+          <div className="space-y-3">
+            <FormExercise
+              template={formTemplate}
+              answers={formCorrectionAnswers}
+              advanced={false}
+              disabled
+              onChange={() => {}}
+            />
+            {formSample && Object.keys(formCorrectionAnswers).length === 0 ? (
+              <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-sm whitespace-pre-line text-emerald-900">
+                {formSample}
+              </div>
+            ) : null}
+          </div>
+        ),
+      });
+      n += 1;
+      continue;
+    }
+
+    const promptLevel = isHybrid
+      ? (step.id === "short" ? "moyen" : "avance")
+      : writingLevel;
+    const prompt = buildPrompt(promptLevel, step.id === "long" ? "long" : "short");
+    const sample = getWritingSampleAnswer(prompt.id) ?? "";
     items.push({
-      id: "pe-form",
-      label: "PE 1. Formulaire",
-      defaultPoints: 5,
+      id: `pe-${step.id}-${n}`,
+      label: `PE ${n}. ${step.title}`,
+      defaultPoints: step.points,
       preview: (
-        <FormExercise
-          template={formTemplate}
-          answers={emptyForm}
-          advanced={false}
+        <WritingExercise
+          prompt={prompt}
+          text=""
           disabled={false}
-          onChange={() => {}}
+          onTextChange={() => {}}
         />
       ),
       correctionPreview: (
-        <div className="space-y-3">
-          <FormExercise
-            template={formTemplate}
-            answers={formCorrectionAnswers}
-            advanced={false}
-            disabled
-            onChange={() => {}}
-          />
-          {formSample && Object.keys(formCorrectionAnswers).length === 0 ? (
-            <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-sm whitespace-pre-line text-emerald-900">
-              {formSample}
-            </div>
-          ) : null}
-        </div>
+        <WritingExercise
+          prompt={prompt}
+          text={sample || "—"}
+          disabled
+          onTextChange={() => {}}
+        />
       ),
     });
+    n += 1;
   }
-  items.push({
-    id: "pe-short",
-    label: "PE 2. Texte court",
-    defaultPoints: 10,
-    preview: (
-      <WritingExercise
-        prompt={shortPrompt}
-        text=""
-        disabled={false}
-        onTextChange={() => {}}
-      />
-    ),
-    correctionPreview: (
-      <WritingExercise
-        prompt={shortPrompt}
-        text={shortSample || "—"}
-        disabled
-        onTextChange={() => {}}
-      />
-    ),
-  });
-  items.push({
-    id: "pe-long",
-    label: "PE 3. Texte long",
-    defaultPoints: 10,
-    preview: (
-      <WritingExercise
-        prompt={longPrompt}
-        text=""
-        disabled={false}
-        onTextChange={() => {}}
-      />
-    ),
-    correctionPreview: (
-      <WritingExercise
-        prompt={longPrompt}
-        text={longSample || "—"}
-        disabled
-        onTextChange={() => {}}
-      />
-    ),
-  });
   return items;
 }
 

@@ -8,6 +8,7 @@ import {
 } from "@/lib/print/catalog";
 import { buildPrintBundle } from "@/components/print/buildPrintBundle";
 import { PrintConfigSheet } from "@/components/ui/PrintConfigSheet";
+import type { PlacementLevel } from "@/lib/placement/types";
 
 const DOMAINS: { id: PrintDomain; label: string }[] = [
   { id: "math", label: "Maths" },
@@ -21,6 +22,7 @@ export function ImpressionHubClient() {
   const [group, setGroup] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
 
   const domainEntries = useMemo(
     () => catalog.filter((e) => e.domain === domain),
@@ -47,8 +49,8 @@ export function ImpressionHubClient() {
   }, [domainEntries, activeGroup, query]);
 
   const selectedBundle = useMemo(
-    () => (selectedId ? buildPrintBundle(selectedId) : null),
-    [selectedId],
+    () => (selectedId ? buildPrintBundle(selectedId, { frenchLevel }) : null),
+    [selectedId, frenchLevel],
   );
 
   function selectDomain(next: PrintDomain) {
@@ -59,6 +61,7 @@ export function ImpressionHubClient() {
   }
 
   function selectLesson(entry: PrintCatalogEntry) {
+    setFrenchLevel("base");
     setSelectedId(entry.id);
   }
 
@@ -161,15 +164,21 @@ export function ImpressionHubClient() {
 
       {selectedId && selectedBundle && (
         <PrintConfigSheet
-          key={selectedId}
+          key={`${selectedId}-${frenchLevel}`}
           onClose={() => setSelectedId(null)}
           onPrint={() => setSelectedId(null)}
           lessonTitle={selectedBundle.lessonTitle}
           theoryPreview={selectedBundle.theoryPreview}
+          announcementPreview={selectedBundle.announcementPreview}
           exercises={selectedBundle.exercises}
           accentColor={selectedBundle.accentColor}
           defaultCourse={selectedBundle.course}
           defaultEvalMode={selectedBundle.defaultEvalMode}
+          frenchLevelSelectable={selectedBundle.frenchLevelSelectable}
+          frenchLevel={frenchLevel}
+          onFrenchLevelChange={
+            selectedBundle.frenchLevelSelectable ? setFrenchLevel : undefined
+          }
         />
       )}
     </div>

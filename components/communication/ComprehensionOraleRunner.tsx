@@ -1612,9 +1612,12 @@ function buildCoCorrectAnswers(part: COPart): Answers {
   return answers;
 }
 
-/** Aperçu imprimable du CO progressif — un item = un exercice (scripts inclus). */
-export function buildPlacementCoPrintExercises(seed = 1): PrintExercise[] {
-  const parts = makeProgressiveCoParts(seed);
+/** Aperçu imprimable du CO — progressif (défaut) ou un niveau fixe. */
+export function buildPlacementCoPrintExercises(
+  seed = 1,
+  level?: "base" | "moyen" | "avance",
+): PrintExercise[] {
+  const parts = level ? makeParts(level, seed) : makeProgressiveCoParts(seed);
   return parts.map((part, index) => {
     const correctAnswers = buildCoCorrectAnswers(part);
     return {

@@ -7,20 +7,25 @@ import { FrenchSkillCardsProgress, FrenchSkillCardsSelect, type FrenchSkill } fr
 import { PlacementPageHeader } from "@/components/placement/PlacementPageHeader";
 import { PlacementUnifiedChart } from "@/components/placement/PlacementUnifiedChart";
 import { PlacementEvolutionChart } from "@/components/placement/PlacementEvolutionChart";
-import type { MathTrainingDraft, MathTrainingLevel, PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types";
+import type { MathTrainingLevel, PlacementFrenchDraft, PlacementLevel } from "@/lib/placement/types";
 import {
   loadFrenchDraft,
   loadFrenchSessions,
   loadFrenchTrainingDraft,
   loadMathHistory,
-  loadMathTrainingDraft,
   loadTotalHistory,
   recomputePlacementProfile,
   saveFrenchDraft,
   saveFrenchTrainingDraft,
   saveMathTrainingDraft,
 } from "@/lib/placement/storage";
-import { MATH_TRAINING_LEVEL_LABELS, MATH_TRAINING_LEVEL_TOGGLE } from "@/lib/placement/math-training-levels";
+import {
+  levelFromMathParam,
+  MATH_TRAINING_LEVEL_LABELS,
+  MATH_TRAINING_LEVEL_TOGGLE,
+  MATH_TRAINING_LEVEL_TOPICS,
+  mathTrainingMinutes,
+} from "@/lib/placement/math-training-levels";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
 const LEVEL_KEY = "placement-selected-level";
@@ -167,7 +172,7 @@ function MathLevelToggle({
           type="button"
           disabled={disabled}
           onClick={() => !disabled && onChange(opt.id)}
-          className={`flex min-w-[2rem] items-center justify-center rounded-md px-2 text-xs font-bold transition-colors ${
+          className={`flex min-w-[2.5rem] items-center justify-center rounded-md px-2 text-xs font-bold transition-colors ${
             level === opt.id ? "text-white" : "text-[var(--color-text-secondary)]"
           } ${disabled ? "cursor-not-allowed" : ""}`}
           style={level === opt.id ? { background: ACCENT } : undefined}
@@ -177,80 +182,6 @@ function MathLevelToggle({
         </button>
       ))}
     </div>
-  );
-}
-
-function MathTrainingProgressBlock({
-  draft,
-  onReset,
-  embedded = false,
-}: {
-  draft: MathTrainingDraft;
-  onReset: () => void;
-  embedded?: boolean;
-}) {
-  const [confirmReset, setConfirmReset] = useState(false);
-  const done = draft.validated.filter(Boolean).length;
-  const total = draft.validated.length;
-
-  return (
-    <>
-      <div
-        className={
-          embedded
-            ? "border-t border-[var(--color-border-default)] pt-4"
-            : "rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-[var(--color-bg-primary)]"
-        }
-      >
-        <div className="flex items-center justify-between gap-2">
-          <p className={CARD_TITLE} style={{ color: ACCENT }}>Entraînement maths en cours</p>
-          <button
-            type="button"
-            onClick={() => setConfirmReset(true)}
-            className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
-          >
-            Reset
-          </button>
-        </div>
-        <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-          Niveau {draft.level} · {done}/{total} exercices validés
-        </p>
-        <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-          {MATH_TRAINING_LEVEL_LABELS[draft.level]}
-        </p>
-      </div>
-
-      {confirmReset && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
-            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler la progression ?</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Votre progression en cours sera perdue. Vous pourrez recommencer depuis le début.
-            </p>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  setConfirmReset(false);
-                  onReset();
-                }}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-              >
-                Annuler
-              </button>
-              <button
-                type="button"
-                onClick={() => setConfirmReset(false)}
-                className="flex-1 rounded-[var(--radius-lg)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
-                style={{ background: ACCENT }}
-              >
-                Continuer
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
   );
 }
 
@@ -294,14 +225,11 @@ export function PlacementHubClient() {
   const [ready, setReady] = useState(false);
   const [individualMode, setIndividualMode] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<FrenchSkill>("ce");
-  const [mathLevel, setMathLevel] = useState<MathTrainingLevel>("I");
-  const [mathTrainingDraft, setMathTrainingDraft] = useState<MathTrainingDraft | null>(null);
+  const [mathLevel, setMathLevel] = useState<MathTrainingLevel>("CSC");
 
   const placementInProgress = !!(placementDraft && placementDraft.step !== "recap");
   const trainingInProgress = !!(trainingDraft && trainingDraft.step !== "recap");
-  const mathTrainingInProgress = !!mathTrainingDraft;
   const displayLevel = trainingInProgress && trainingDraft ? trainingDraft.level : level;
-  const displayMathLevel = mathTrainingInProgress && mathTrainingDraft ? mathTrainingDraft.level : mathLevel;
 
   function refreshProfile() {
     const profile = recomputePlacementProfile();
@@ -320,14 +248,14 @@ export function PlacementHubClient() {
     (async () => {
       const localPlacementDraft = loadFrenchDraft();
       const localTrainingDraft = loadFrenchTrainingDraft();
-      const localMathTrainingDraft = loadMathTrainingDraft();
+      // Anciens brouillons maths : on les efface (plus de reprise).
+      saveMathTrainingDraft(null);
       try {
         const saved = localStorage.getItem(LEVEL_KEY) as PlacementLevel | null;
         if (localTrainingDraft?.level) setLevel(localTrainingDraft.level);
         else if (saved === "base" || saved === "moyen" || saved === "avance") setLevel(saved);
-        const savedMath = localStorage.getItem(MATH_LEVEL_KEY) as MathTrainingLevel | null;
-        if (localMathTrainingDraft?.level) setMathLevel(localMathTrainingDraft.level);
-        else if (savedMath === "I" || savedMath === "II" || savedMath === "III" || savedMath === "IV") setMathLevel(savedMath);
+        const savedMath = levelFromMathParam(localStorage.getItem(MATH_LEVEL_KEY));
+        if (savedMath) setMathLevel(savedMath);
       } catch { /* ignore */ }
       const profile = await syncPlacementFromCloud();
       if (cancelled) return;
@@ -340,7 +268,6 @@ export function PlacementHubClient() {
       setPendingFrench(profile.pendingFrench);
       setPlacementDraft(localPlacementDraft);
       setTrainingDraft(localTrainingDraft);
-      setMathTrainingDraft(localMathTrainingDraft);
       if (localTrainingDraft?.singleSkill) {
         setIndividualMode(true);
         setSelectedSkill(localTrainingDraft.singleSkill);
@@ -359,7 +286,6 @@ export function PlacementHubClient() {
   }
 
   function selectMathLevel(next: MathTrainingLevel) {
-    if (mathTrainingInProgress) return;
     setMathLevel(next);
     localStorage.setItem(MATH_LEVEL_KEY, next);
   }
@@ -408,18 +334,6 @@ export function PlacementHubClient() {
     saveMathTrainingDraft(null);
     localStorage.setItem(MATH_LEVEL_KEY, mathLevel);
     router.push(`/placement/mathematiques/entrainement?level=${mathLevel}`);
-  }
-
-  function resumeMathTraining() {
-    const d = loadMathTrainingDraft();
-    const resumeLevel = d?.level ?? mathLevel;
-    localStorage.setItem(MATH_LEVEL_KEY, resumeLevel);
-    router.push(`/placement/mathematiques/entrainement?level=${resumeLevel}`);
-  }
-
-  function resetMathTrainingDraft() {
-    saveMathTrainingDraft(null);
-    setMathTrainingDraft(null);
   }
 
   if (!ready) {
@@ -473,37 +387,32 @@ export function PlacementHubClient() {
         <div>
           <p className={CARD_TITLE} style={{ color: ACCENT }}>Entraînement maths par niveau</p>
           <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-            Choisissez un niveau I à IV pour vous entraîner sur une partie du test. Les résultats ne comptent pas pour le total de placement.
+            Choisissez CSC, CFR, CAF ou CAP. L&apos;entraînement n&apos;est pas sauvegardé si vous quittez.
+            Les résultats ne comptent pas pour le total de placement.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <MathLevelToggle
-            level={displayMathLevel}
+            level={mathLevel}
             onChange={selectMathLevel}
-            disabled={mathTrainingInProgress}
           />
           <button
             type="button"
-            onClick={mathTrainingInProgress ? resumeMathTraining : launchMathTraining}
+            onClick={launchMathTraining}
             className="rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-bold text-white"
             style={{ background: ACCENT }}
           >
-            {mathTrainingInProgress ? "Reprendre" : "S'entraîner"}
+            S&apos;entraîner
           </button>
         </div>
 
-        <p className="text-xs text-[var(--color-text-secondary)]">
-          {MATH_TRAINING_LEVEL_LABELS[displayMathLevel]}
-        </p>
-
-        {mathTrainingInProgress && mathTrainingDraft && (
-          <MathTrainingProgressBlock
-            draft={mathTrainingDraft}
-            onReset={resetMathTrainingDraft}
-            embedded
-          />
-        )}
+        <div className="space-y-1 text-xs text-[var(--color-text-secondary)]">
+          <p className="font-medium text-[var(--color-text-primary)]">{MATH_TRAINING_LEVEL_LABELS[mathLevel]}</p>
+          <p>
+            {mathTrainingMinutes(mathLevel)} min · {MATH_TRAINING_LEVEL_TOPICS[mathLevel].join(" · ")}
+          </p>
+        </div>
       </div>
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">

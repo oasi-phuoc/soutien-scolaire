@@ -41,10 +41,16 @@ import {
   MATH_TRAINING_LEVEL_LABELS,
   levelFromMathParam,
 } from "@/lib/placement/math-training-levels";
-import { PLACEMENT_MATH_EXERCISES } from "@/lib/placement/math-exercises";
+import { PLACEMENT_MATH_EXERCISES, PLACEMENT_MATH_TOTAL_POINTS } from "@/lib/placement/math-exercises";
 import { PlacementMathPrintPreview, PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
+import {
+  FrenchPlacementCompleteAnnounce,
+  FrenchPlacementSkillAnnounce,
+  MathPlacementCompleteAnnounce,
+  MathPlacementLevelAnnounce,
+} from "@/components/print/PlacementPrintAnnounce";
 import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
-import type { PlacementSkill } from "@/lib/placement/types";
+import type { PlacementLevel, PlacementSkill } from "@/lib/placement/types";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 
 export type PrintBundle = {
@@ -52,9 +58,17 @@ export type PrintBundle = {
   course: string;
   accentColor: string;
   theoryPreview?: ReactNode;
+  /** Page d'annonce placement (toujours page 1, puis saut avant le 1er exo). */
+  announcementPreview?: ReactNode;
   exercises: PrintExercise[];
   /** Mode évaluation + barème du test (placement = 100 pts). */
   defaultEvalMode?: boolean;
+  /** Compétence FR séparée : afficher le sélecteur A1/A2/B1. */
+  frenchLevelSelectable?: boolean;
+};
+
+export type BuildPrintBundleOptions = {
+  frenchLevel?: PlacementLevel;
 };
 
 const noop = () => {};
@@ -280,40 +294,62 @@ function mathExercisePrintItem(ex: (typeof PLACEMENT_MATH_EXERCISES)[number]): P
 
 function buildPlacementMathPartBundle(levelId: string): PrintBundle | null {
   if (levelId === "complet") {
+    const exercises = PLACEMENT_MATH_EXERCISES.map(mathExercisePrintItem);
     return {
       lessonTitle: "Test de placement — Mathématiques",
       course: "Mathématiques",
       accentColor: "var(--color-accent-quiz)",
       defaultEvalMode: true,
-      exercises: PLACEMENT_MATH_EXERCISES.map(mathExercisePrintItem),
+      announcementPreview: (
+        <MathPlacementCompleteAnnounce
+          exerciseCount={PLACEMENT_MATH_EXERCISES.length}
+          maxPoints={PLACEMENT_MATH_TOTAL_POINTS}
+        />
+      ),
+      exercises,
     };
   }
   const level = levelFromMathParam(levelId);
   if (!level) return null;
-  const exercises = getMathExercisesForLevel(level);
+  const levelExercises = getMathExercisesForLevel(level);
+  const maxPoints = levelExercises.reduce((sum, ex) => sum + ex.maxPoints, 0);
   return {
     lessonTitle: MATH_TRAINING_LEVEL_LABELS[level],
     course: "Mathématiques",
     accentColor: "var(--color-accent-quiz)",
     defaultEvalMode: true,
-    exercises: exercises.map(mathExercisePrintItem),
+    announcementPreview: (
+      <MathPlacementLevelAnnounce
+        level={level}
+        exerciseCount={levelExercises.length}
+        maxPoints={maxPoints}
+      />
+    ),
+    exercises: levelExercises.map(mathExercisePrintItem),
   };
 }
 
-function frenchSkillPrintExercises(skill: PlacementSkill, seed: number): PrintExercise[] {
+function frenchSkillPrintExercises(
+  skill: PlacementSkill,
+  seed: number,
+  level?: PlacementLevel,
+): PrintExercise[] {
   switch (skill) {
     case "ce":
-      return buildPlacementCePrintExercises(seed);
+      return buildPlacementCePrintExercises(seed, level);
     case "co":
-      return buildPlacementCoPrintExercises(seed);
+      return buildPlacementCoPrintExercises(seed, level);
     case "pe":
-      return buildPlacementPePrintExercises();
+      return buildPlacementPePrintExercises(level);
     case "po":
-      return buildPlacementPoPrintExercises();
+      return buildPlacementPoPrintExercises(level ?? "avance");
   }
 }
 
-function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
+function buildPlacementFrenchPartBundle(
+  partId: string,
+  frenchLevel: PlacementLevel = "base",
+): PrintBundle | null {
   if (partId === "complet") {
     const seed = 1;
     return {
@@ -321,6 +357,7 @@ function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
       course: "Français",
       accentColor: "var(--color-accent-quiz)",
       defaultEvalMode: true,
+      announcementPreview: <FrenchPlacementCompleteAnnounce />,
       exercises: PLACEMENT_FRENCH_PRINT_PARTS.flatMap((part) =>
         frenchSkillPrintExercises(part.id, seed),
       ),
@@ -328,22 +365,39 @@ function buildPlacementFrenchPartBundle(partId: string): PrintBundle | null {
   }
   const part = PLACEMENT_FRENCH_PRINT_PARTS.find((p) => p.id === partId);
   if (!part) return null;
+  const exercises = frenchSkillPrintExercises(part.id, 1, frenchLevel);
+  const maxPoints = exercises.reduce((sum, ex) => sum + (ex.defaultPoints ?? 0), 0);
   return {
     lessonTitle: `Test de placement — ${part.title}`,
     course: "Français",
     accentColor: "var(--color-accent-quiz)",
     defaultEvalMode: true,
-    exercises: frenchSkillPrintExercises(part.id, 1),
+    frenchLevelSelectable: true,
+    announcementPreview: (
+      <FrenchPlacementSkillAnnounce
+        skill={part.id}
+        level={frenchLevel}
+        exerciseCount={exercises.length}
+        maxPoints={maxPoints || 25}
+      />
+    ),
+    exercises,
   };
 }
 
 /** Construit le bundle d'aperçu pour une entrée du catalogue d'impression. */
-export function buildPrintBundle(catalogId: string): PrintBundle | null {
+export function buildPrintBundle(
+  catalogId: string,
+  options?: BuildPrintBundleOptions,
+): PrintBundle | null {
   if (catalogId.startsWith("placement:math:")) {
     return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length));
   }
   if (catalogId.startsWith("placement:francais:")) {
-    return buildPlacementFrenchPartBundle(catalogId.slice("placement:francais:".length));
+    return buildPlacementFrenchPartBundle(
+      catalogId.slice("placement:francais:".length),
+      options?.frenchLevel ?? "base",
+    );
   }
 
   if (catalogId.startsWith("math:")) {

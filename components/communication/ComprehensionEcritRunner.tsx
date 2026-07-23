@@ -1258,9 +1258,12 @@ function buildCeCorrectAnswers(part: CEPart): CEAnswers {
   return answers;
 }
 
-/** Aperçu imprimable du CE progressif (test de placement) — un item = un exercice. */
-export function buildPlacementCePrintExercises(seed = 1): PrintExercise[] {
-  const parts = buildProgressiveCEParts(seed);
+/** Aperçu imprimable du CE — progressif (défaut) ou un niveau fixe. */
+export function buildPlacementCePrintExercises(
+  seed = 1,
+  level?: "base" | "moyen" | "avance",
+): PrintExercise[] {
+  const parts = level ? buildParts(level, seed) : buildProgressiveCEParts(seed);
   const noopSetAnswer = (_key: string, _value: number | string | null) => {};
   return parts.map((part, index) => ({
     id: `ce-${index}-${part.id}`,

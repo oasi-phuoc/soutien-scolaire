@@ -114,13 +114,13 @@ export function PlacementHelpContent() {
       <div className="space-y-2">
         <h2 className={SECTION_HEADING}>Test de mathématiques</h2>
         <p>
-          Le parcours est progressif, du niveau primaire au niveau secondaire. Il couvre notamment :
+          Le parcours va de CSC à CAP. Chaque niveau prépare une partie du test :
         </p>
         <ul className="list-disc space-y-1 pl-5">
-          <li>additions, soustractions, multiplications et divisions</li>
-          <li>périmètre et aire</li>
-          <li>fractions et pourcentages</li>
-          <li>équations</li>
+          <li><strong>CSC</strong> — additions et soustractions</li>
+          <li><strong>CFR</strong> — multiplications, divisions, périmètre et aire du rectangle</li>
+          <li><strong>CAF</strong> — nombres décimaux, fractions, périmètre et aire</li>
+          <li><strong>CAP</strong> — puissances et racines, nombres relatifs, fractions et équations, périmètre et aire</li>
         </ul>
       </div>
 
