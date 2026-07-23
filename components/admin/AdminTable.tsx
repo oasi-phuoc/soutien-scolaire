@@ -7,8 +7,13 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
-import { resetAllElevesAction, setPlacementModuleEnabledAction } from "@/app/actions/admin";
+import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
 import { AppSelect } from "@/components/ui/AppSelect";
+import {
+  currentSchoolYearLabel,
+  currentSchoolYearStart,
+  previousSchoolYearLabel,
+} from "@/lib/school-year";
 
 export type UserRow = {
   id: string;
@@ -147,14 +152,46 @@ const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "
 function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleveCount: number; onClose: () => void; onReset: () => void; onArchive: () => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
+  const [okMsg, setOkMsg] = useState<string | null>(null);
   const [deleteChecked, setDeleteChecked] = useState(false);
   const [archiveChecked, setArchiveChecked] = useState(false);
+  const [purgeMessagesChecked, setPurgeMessagesChecked] = useState(false);
   const [deletePhrase, setDeletePhrase] = useState("");
   const [finalDeleteConfirm, setFinalDeleteConfirm] = useState(false);
   const requiredPhrase = "Supprimé tous les élèves";
 
+  const schoolStart = currentSchoolYearStart();
+  const schoolStartLabel = schoolStart.toLocaleDateString("fr-CH", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const prevYearLabel = previousSchoolYearLabel();
+  const currYearLabel = currentSchoolYearLabel();
+
+  async function runPurgeMessages(): Promise<boolean> {
+    const r = await purgePreviousSchoolYearMessagesAction();
+    if (!r.ok) {
+      setErr(r.reason ?? "Erreur lors de la purge des messages.");
+      return false;
+    }
+    const total = (r.expressionDeleted ?? 0) + (r.taskDeleted ?? 0);
+    setOkMsg(
+      `${total} message${total !== 1 ? "s" : ""} supprimé${total !== 1 ? "s" : ""} ` +
+        `(PE/PO : ${r.expressionDeleted ?? 0}, devoirs : ${r.taskDeleted ?? 0}) — antérieurs au ${schoolStartLabel}.`,
+    );
+    return true;
+  }
+
   function confirmDelete() {
+    setErr(null);
+    setOkMsg(null);
     startTransition(async () => {
+      if (purgeMessagesChecked) {
+        const ok = await runPurgeMessages();
+        if (!ok) return;
+      }
       const r = await resetAllElevesAction("delete");
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
       onReset();
@@ -162,10 +199,25 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
   }
 
   function confirmArchive() {
+    setErr(null);
+    setOkMsg(null);
     startTransition(async () => {
+      if (purgeMessagesChecked) {
+        const ok = await runPurgeMessages();
+        if (!ok) return;
+      }
       const r = await resetAllElevesAction("archive");
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
       onArchive();
+    });
+  }
+
+  function confirmPurgeMessages() {
+    setErr(null);
+    setOkMsg(null);
+    startTransition(async () => {
+      const ok = await runPurgeMessages();
+      if (ok) setPurgeMessagesChecked(false);
     });
   }
 
@@ -185,6 +237,19 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
             <input type="checkbox" checked={archiveChecked} onChange={e => { setArchiveChecked(e.target.checked); if (e.target.checked) setDeleteChecked(false); }} className="mt-1" />
             <span>Changer tous les élèves en classe <strong>ancien {currentYear}</strong>.</span>
           </label>
+          <label className="flex items-start gap-2 text-sm text-teal-800 dark:text-teal-300">
+            <input
+              type="checkbox"
+              checked={purgeMessagesChecked}
+              onChange={e => setPurgeMessagesChecked(e.target.checked)}
+              className="mt-1"
+            />
+            <span>
+              Supprimer tous les messages de messagerie (PE, PO, devoirs) de <strong>tous les comptes</strong>{" "}
+              antérieurs au début de l&apos;année scolaire <strong>{currYearLabel}</strong>{" "}
+              (avant le <strong>{schoolStartLabel}</strong>) — année précédente {prevYearLabel} et plus anciennes.
+            </span>
+          </label>
           <label className="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
             <input type="checkbox" checked={deleteChecked} onChange={e => { setDeleteChecked(e.target.checked); if (e.target.checked) setArchiveChecked(false); }} className="mt-1" />
             <span>Supprimer définitivement tous les comptes élèves et leurs données.</span>
@@ -203,9 +268,17 @@ function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleve
             </div>
           )}
         </div>
-        {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
-        <div className="flex justify-end gap-2">
+        {err && <p className="mb-3 text-sm text-red-600" role="alert">{err}</p>}
+        {okMsg && <p className="mb-3 text-sm text-teal-700 dark:text-teal-400" role="status">{okMsg}</p>}
+        <div className="flex flex-wrap justify-end gap-2">
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
+          <button
+            onClick={confirmPurgeMessages}
+            disabled={pending || !purgeMessagesChecked || archiveChecked || deleteChecked}
+            className="rounded-2xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-40"
+          >
+            {pending && purgeMessagesChecked && !archiveChecked && !deleteChecked ? "Purge…" : "Purger messages"}
+          </button>
           <button onClick={confirmArchive} disabled={pending || !archiveChecked} className="rounded-2xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-40">
             Valider archivage
           </button>

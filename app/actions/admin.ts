@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
+import { currentSchoolYearStartIso } from "@/lib/school-year";
 
 type CallerRole = "admin" | "prof" | null;
 
@@ -79,6 +80,69 @@ export async function resetAllElevesAction(mode: "delete" | "archive" = "delete"
 
   revalidatePath("/admin");
   return { ok: true, count: (eleves ?? []).length };
+}
+
+/**
+ * Supprime les messages messagerie (PE/PO + devoirs) créés avant le début
+ * de l'année scolaire en cours (1er août) — tous les comptes.
+ */
+export async function purgePreviousSchoolYearMessagesAction(): Promise<{
+  ok: boolean;
+  reason?: string;
+  expressionDeleted?: number;
+  taskDeleted?: number;
+  before?: string;
+}> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+
+  const before = currentSchoolYearStartIso();
+
+  const supabase = await createSupabaseActionClient();
+  if (supabase) {
+    const { data, error } = await supabase.rpc("admin_purge_messages_before", {
+      p_before: before,
+    });
+    if (!error && data) {
+      const payload = data as { expression_deleted?: number; task_deleted?: number };
+      revalidatePath("/admin");
+      revalidatePath("/messagerie");
+      return {
+        ok: true,
+        expressionDeleted: Number(payload.expression_deleted ?? 0),
+        taskDeleted: Number(payload.task_deleted ?? 0),
+        before,
+      };
+    }
+  }
+
+  // Fallback service role si la RPC n'est pas encore déployée.
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Supabase non configuré" };
+
+  const [{ error: exprErr, count: exprCount }, { error: taskErr, count: taskCount }] =
+    await Promise.all([
+      svc
+        .from("expression_submissions")
+        .delete({ count: "exact" })
+        .lt("created_at", before),
+      svc
+        .from("task_messages")
+        .delete({ count: "exact" })
+        .lt("created_at", before),
+    ]);
+
+  if (exprErr) return { ok: false, reason: exprErr.message };
+  if (taskErr) return { ok: false, reason: taskErr.message };
+
+  revalidatePath("/admin");
+  revalidatePath("/messagerie");
+  return {
+    ok: true,
+    expressionDeleted: exprCount ?? 0,
+    taskDeleted: taskCount ?? 0,
+    before,
+  };
 }
 
 export async function changePasswordAction(userId: string, newPassword: string) {
