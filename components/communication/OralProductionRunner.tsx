@@ -1785,6 +1785,12 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
   const studentRole = pickStudentRole();
   const roleText = roleAssignmentText(script, studentRole);
   const studentTurns = studentLineIndices(script, studentRole);
+  const imageModel = getImageDescriptionModel(situation.id);
+  const argumentationSample = getArgumentationResponse(
+    argumentationTopic.theme,
+    argumentationTopic.prompt,
+    "avance",
+  );
 
   return [
     {
@@ -1800,6 +1806,20 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
                 <p className="mt-1 text-xs text-zinc-600">Exemple : {theme.example}</p>
               ) : null}
               <div className="mt-3">{printBlankLines(2)}</div>
+            </div>
+          ))}
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-4 text-black">
+          {prompt.themes.map((theme) => (
+            <div key={theme.word} className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
+              <p className="text-sm font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-emerald-900">
+                {getThemeSuggestions(theme.word).map((q) => (
+                  <li key={q}>{q}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -1821,6 +1841,20 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
           ))}
         </ol>
       ),
+      correctionPreview: (
+        <ol className="space-y-3 text-black">
+          {interviewQuestions.map((question, i) => (
+            <li key={i} className="space-y-1 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
+              <p className="text-sm font-medium">
+                <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
+              </p>
+              <p className="text-sm text-emerald-900">
+                {getInterviewSuggestion(question) ?? "—"}
+              </p>
+            </li>
+          ))}
+        </ol>
+      ),
     },
     {
       id: "po-image",
@@ -1838,6 +1872,33 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
           </div>
           <p className="text-sm text-zinc-700">Décrivez cette image.</p>
           {printBlankLines(4)}
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-3 text-black">
+          <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white p-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={situation.image}
+              alt={situation.imageDescription || "Situation orale"}
+              className="mx-auto max-h-64 w-auto object-contain"
+            />
+          </div>
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 text-sm text-emerald-900">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-[var(--color-accent-quiz)]">
+              Structure
+            </p>
+            <ul className="mb-3 list-disc space-y-1 pl-5 text-zinc-700">
+              {IMAGE_DESCRIPTION_MEMO.map((starter) => (
+                <li key={starter}>{starter}</li>
+              ))}
+            </ul>
+            {imageModel ? (
+              <SampleParagraphs text={imageModel.formatted} />
+            ) : (
+              <p>{situation.imageDescription || "Description modèle non disponible."}</p>
+            )}
+          </div>
         </div>
       ),
     },
@@ -1862,6 +1923,30 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
           </ol>
         </div>
       ),
+      correctionPreview: (
+        <div className="space-y-3 text-black">
+          <p className="text-sm text-zinc-700">{roleText}</p>
+          <ol className="space-y-2">
+            {script.lines.map((line, i) => {
+              const isStudent = studentTurns.includes(i);
+              const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
+              return (
+                <li
+                  key={i}
+                  className={`rounded-lg border px-3 py-2 text-sm ${
+                    isStudent
+                      ? "border-emerald-200 bg-emerald-50/60 text-emerald-900"
+                      : "border-zinc-200"
+                  }`}
+                >
+                  <p className="font-semibold text-zinc-500">{speaker}{isStudent ? " (votre rôle)" : ""}</p>
+                  <p className="mt-1">{line.text}</p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      ),
     },
     {
       id: "po-argumentation",
@@ -1871,6 +1956,14 @@ export function buildPlacementPoPrintExercises(): PrintExercise[] {
         <div className="space-y-3 text-black">
           <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
           {printBlankLines(5)}
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-3 text-black">
+          <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 text-sm text-emerald-900">
+            <SampleParagraphs text={argumentationSample} />
+          </div>
         </div>
       ),
     },

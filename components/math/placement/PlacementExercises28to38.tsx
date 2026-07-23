@@ -1,20 +1,14 @@
 ﻿"use client";
 import React, { useState, useMemo, useEffect } from "react";
 import type { PlacementExerciseProps } from "./PlacementExercises1to15";
+import {
+  placementRandInt as randInt,
+  placementShuffle as shuffle,
+  placementRandom,
+} from "@/components/math/placement/placement-print-rng";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function randInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
 
 function parseNum(input: string): number {
   return parseFloat(input.replace(/\s/g, "").replace(",", "."));
@@ -35,7 +29,7 @@ function randOneDecimal(minTenths: number, maxTenths: number): number {
   return value / 10;
 }
 function randDecimalValue(): number {
-  const decimals = Math.random() < 0.5 ? 1 : 3;
+  const decimals = placementRandom() < 0.5 ? 1 : 3;
   const scale = decimals === 1 ? 10 : 1000;
   return randInt(10 * scale, 100 * scale - 1) / scale;
 }
@@ -168,7 +162,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
     const b = randInt(2, 7);
     const sq = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169][randInt(0, 11)]!;
     const sqRoot = Math.sqrt(sq);
-    const mult = parseFloat((Math.random() < 0.5 ? randInt(1, 99) * 0.1 : randInt(1, 999) * 0.01).toFixed(2));
+    const mult = parseFloat((placementRandom() < 0.5 ? randInt(1, 99) * 0.1 : randInt(1, 999) * 0.01).toFixed(2));
     const powers = [10, 100, 1000, 10000];
     const pwr10mult = powers[randInt(0, powers.length - 1)]!;
     let pwr10div = powers[randInt(0, powers.length - 1)]!;
@@ -311,7 +305,7 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
 export function Exercise30({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
     // 2 additions, 2 subtractions, 2 multiplications, 2 divisions
-    const sign = () => (Math.random() < 0.5 ? 1 : -1);
+    const sign = () => (placementRandom() < 0.5 ? 1 : -1);
     const a1 = sign() * randInt(2, 15), b1 = sign() * randInt(2, 15);
     const a2 = sign() * randInt(2, 15), b2 = sign() * randInt(2, 15);
     const a3 = sign() * randInt(2, 15), b3 = sign() * randInt(2, 15);
@@ -404,7 +398,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 
     const q1Base = pickReduced();
     const q1Factor = randInt(2, 6);
-    const q1Ask = Math.random() < 0.5 ? "num" as const : "den" as const;
+    const q1Ask = placementRandom() < 0.5 ? "num" as const : "den" as const;
 
     const q2Base = pickReduced();
     const q2Factor = randInt(2, 6);
@@ -422,9 +416,9 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const q6Ans = fracAns(q6.a.n * q6.b.d, q6.a.d * q6.b.n);
 
     const q7 = makePair();
-    const q7Op = Math.random() < 0.5 ? "+" as const : "−" as const;
-    let q7NegA = Math.random() < 0.5;
-    const q7NegB = Math.random() < 0.5;
+    const q7Op = placementRandom() < 0.5 ? "+" as const : "−" as const;
+    let q7NegA = placementRandom() < 0.5;
+    const q7NegB = placementRandom() < 0.5;
     if (!q7NegA && !q7NegB) q7NegA = true;
     const q7aN = q7NegA ? -q7.a.n : q7.a.n;
     const q7bN = q7NegB ? -q7.b.n : q7.b.n;
@@ -433,9 +427,9 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
       : fracAns(q7aN * q7.b.d - q7bN * q7.a.d, q7.a.d * q7.b.d);
 
     const q8 = makePair();
-    const q8Op = Math.random() < 0.5 ? "×" as const : "÷" as const;
-    let q8NegA = Math.random() < 0.5;
-    const q8NegB = Math.random() < 0.5;
+    const q8Op = placementRandom() < 0.5 ? "×" as const : "÷" as const;
+    let q8NegA = placementRandom() < 0.5;
+    const q8NegB = placementRandom() < 0.5;
     if (!q8NegA && !q8NegB) q8NegA = true;
     const q8aN = q8NegA ? -q8.a.n : q8.a.n;
     const q8bN = q8NegB ? -q8.b.n : q8.b.n;

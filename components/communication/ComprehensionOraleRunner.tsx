@@ -1595,27 +1595,61 @@ export function ComprehensionOraleRunner({
   );
 }
 
+function buildCoCorrectAnswers(part: COPart): Answers {
+  const answers: Answers = {};
+  part.questions.forEach((question, index) => {
+    const key = `${part.id}-${index}`;
+    if (question.kind === "choice") answers[key] = question.correct;
+    else if (question.kind === "fill") answers[key] = question.answer;
+    else if (question.kind === "match_grid") answers[key] = [...question.correctByColumn];
+    else if (question.kind === "object_pick") answers[key] = question.cards.map((card) => card.heard);
+    else if (question.kind === "image_match") {
+      answers[key] = question.cards.map((card) => card.correct ?? 0);
+    } else if (question.kind === "conversation_image_grid") {
+      answers[key] = [...question.correctByCard];
+    }
+  });
+  return answers;
+}
+
 /** Aperçu imprimable du CO progressif — un item = un exercice (scripts inclus). */
 export function buildPlacementCoPrintExercises(seed = 1): PrintExercise[] {
   const parts = makeProgressiveCoParts(seed);
-  return parts.map((part, index) => ({
-    id: `co-${index}-${part.id}`,
-    label: `CO ${index + 1}. ${part.title}`,
-    defaultPoints: part.points,
-    preview: (
-      <div className="space-y-3">
-        <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
-          Exercice {index + 1}
-        </p>
-        <QuestionBlock
-          part={part}
-          answers={{}}
-          onAnswer={() => undefined}
-          forceTranscripts
-        />
-      </div>
-    ),
-  }));
+  return parts.map((part, index) => {
+    const correctAnswers = buildCoCorrectAnswers(part);
+    return {
+      id: `co-${index}-${part.id}`,
+      label: `CO ${index + 1}. ${part.title}`,
+      defaultPoints: part.points,
+      preview: (
+        <div className="space-y-3">
+          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
+            Exercice {index + 1}
+          </p>
+          <QuestionBlock
+            part={part}
+            answers={{}}
+            onAnswer={() => undefined}
+            forceTranscripts
+          />
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-3">
+          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
+            Exercice {index + 1} — Corrigé
+          </p>
+          <QuestionBlock
+            part={part}
+            answers={correctAnswers}
+            onAnswer={() => undefined}
+            forceTranscripts
+            readonly
+          />
+        </div>
+      ),
+    };
+  });
 }
 
 /** @deprecated Préférer buildPlacementCoPrintExercises. */

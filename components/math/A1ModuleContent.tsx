@@ -29,6 +29,11 @@ import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { EvalGuardSentinel } from "@/components/EvalNavGuard";
 import { EvalAnnounceScreen } from "@/components/ui/EvalAnnounceScreen";
 import { EvalFinishButton } from "@/components/ui/EvalFinishButton";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import {
+  beginPlacementPrintSeed,
+  endPlacementPrintSeed,
+} from "@/components/math/placement/placement-print-rng";
 import {
   EvalExerciseResultButton,
   EvalExerciseResultDetail,
@@ -463,20 +468,44 @@ function shuffle<T>(arr: T[]): T[] {
 
 
 // ─── Aperçu d'impression des exercices A1 (versions vierges à remplir) ───────
-function a1PrintPreview(step: Step): React.ReactNode | undefined {
+function a1PrintPreview(step: Step, correction = false): React.ReactNode | undefined {
   const line = (w = 150) => (
     <span className="inline-block border-b border-black/50 align-bottom" style={{ width: w, height: 15 }} />
   );
-  const box = (w = 36, h = 26) => (
-    <span className="inline-block rounded border border-black/60 align-middle" style={{ width: w, height: h }} />
+  const box = (w = 36, h = 26, value?: string | number) => (
+    <span
+      className={`inline-flex items-center justify-center rounded border align-middle text-[10px] tabular-nums ${
+        correction && value != null
+          ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+          : "border-black/60"
+      }`}
+      style={{ width: w, height: h }}
+    >
+      {correction && value != null ? value : null}
+    </span>
   );
-  const numberedBlanks = (count: number, lead?: (i: number) => React.ReactNode) => (
+  const answerLine = (value: string | number, w = 150) =>
+    correction ? (
+      <span
+        className="inline-flex min-h-[15px] items-center border-b-2 border-emerald-500 px-1 text-sm font-semibold text-emerald-800"
+        style={{ minWidth: w }}
+      >
+        {value}
+      </span>
+    ) : (
+      line(w)
+    );
+  const numberedBlanks = (
+    count: number,
+    lead?: (i: number) => React.ReactNode,
+    answers?: Array<string | number>,
+  ) => (
     <ol className="space-y-2">
       {Array.from({ length: count }, (_, i) => (
         <li key={i} className="flex items-center gap-3">
           <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
           {lead?.(i)}
-          {line(180)}
+          {answers ? answerLine(answers[i] ?? "", 180) : line(180)}
         </li>
       ))}
     </ol>
@@ -533,13 +562,27 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
 
   switch (step) {
     case "ex2":
-      return (() => { const nums = generateNumbers(); return numberedBlanks(nums.length, (i) => (
-        <span className="w-10 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
-      )); })();
+      return (() => {
+        const nums = generateNumbers();
+        return numberedBlanks(
+          nums.length,
+          (i) => (
+            <span className="w-10 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
+          ),
+          correction ? nums.map((n) => FR_WORDS[n] ?? String(n)) : undefined,
+        );
+      })();
     case "ex3":
-      return (() => { const nums = generateTensNumbers(); return numberedBlanks(nums.length, (i) => (
-        <span className="w-12 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
-      )); })();
+      return (() => {
+        const nums = generateTensNumbers();
+        return numberedBlanks(
+          nums.length,
+          (i) => (
+            <span className="w-12 shrink-0 text-center text-xl font-bold tabular-nums text-[var(--color-accent-alg)]">{nums[i]}</span>
+          ),
+          correction ? nums.map((n) => FR_TENS[n] ?? String(n)) : undefined,
+        );
+      })();
     case "ex4":
     case "ex5":
     case "ex6":
@@ -558,9 +601,16 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                 <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-400 bg-zinc-100 text-[10px] font-bold">{d}</div>
                 {units.map((u) => {
                   const state = grid[`${d}-${u}`] ?? "empty";
+                  const value = d + u;
+                  const show = state === "revealed" || (correction && state === "fill");
                   return (
-                    <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-400 text-[10px] tabular-nums">
-                      {state === "revealed" ? d + u : ""}
+                    <div
+                      key={u}
+                      className={`aspect-square flex items-center justify-center border-b border-r border-zinc-400 text-[10px] tabular-nums ${
+                        correction && state === "fill" ? "bg-emerald-50 font-semibold text-emerald-800" : ""
+                      }`}
+                    >
+                      {show ? value : ""}
                     </div>
                   );
                 })}
@@ -581,8 +631,17 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                   const num = s.start + i;
                   const isBlank = s.blanks.includes(i);
                   return (
-                    <span key={i} className={`flex h-7 min-w-0 flex-1 items-center justify-center rounded border text-[11px] tabular-nums ${isBlank ? "border-zinc-500 bg-white" : "border-zinc-300 bg-zinc-50 text-zinc-700"}`}>
-                      {isBlank ? "" : num}
+                    <span
+                      key={i}
+                      className={`flex h-7 min-w-0 flex-1 items-center justify-center rounded border text-[11px] tabular-nums ${
+                        isBlank
+                          ? correction
+                            ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+                            : "border-zinc-500 bg-white"
+                          : "border-zinc-300 bg-zinc-50 text-zinc-700"
+                      }`}
+                    >
+                      {isBlank && !correction ? "" : num}
                     </span>
                   );
                 })}
@@ -603,9 +662,22 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                   {q.units > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({ length: q.units }, (_, ui) => <SvgUnite key={ui} s={10} />)}</div>}
                 </div>
                 <div className="mt-2 flex justify-center gap-2">
-                  {q.choices.map((c) => (
-                    <span key={c} className="w-14 rounded border border-zinc-400 py-1 text-center text-sm tabular-nums">{c}</span>
-                  ))}
+                  {q.choices.map((c) => {
+                    const answer = q.tens * 10 + q.units;
+                    const isCorrect = c === answer;
+                    return (
+                      <span
+                        key={c}
+                        className={`w-14 rounded border py-1 text-center text-sm tabular-nums ${
+                          correction && isCorrect
+                            ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+                            : "border-zinc-400"
+                        }`}
+                      >
+                        {c}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -626,7 +698,7 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                     </div>
                   ))}
                 </ScaledCanvas>
-                <div className="mt-2 flex items-center gap-2 text-sm">Total : {line(120)}</div>
+                <div className="mt-2 flex items-center gap-2 text-sm">Total : {answerLine(q.h * 100 + q.d * 10 + q.u, 120)}</div>
               </div>
             ))}
           </div>
@@ -647,7 +719,7 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                   ))}
                 </ScaledCanvas>
                 <div className="mt-2 flex items-center justify-center gap-1 text-sm">
-                  = {box(44)} + {box(44)} + {box(44)} + {box(44)}
+                  = {box(44, 26, q.m * 1000)} + {box(44, 26, q.c * 100)} + {box(44, 26, q.d * 10)} + {box(44, 26, q.u)}
                 </div>
               </div>
             ))}
@@ -664,7 +736,9 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={q.src} alt="assemblage de cubes" className="max-h-56 w-auto object-contain" />
             </div>
-            <div className="mt-1 flex items-center gap-2 text-sm">Nombre de cubes : {line(120)}</div>
+            <div className="mt-1 flex items-center gap-2 text-sm">
+              Nombre de cubes : {answerLine(q.answer, 120)}
+            </div>
           </div>
         );
       })();
@@ -673,14 +747,20 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
         const nums = Array.from({ length: 2 }, () => Math.floor(Math.random() * 9899) + 101);
         return (
           <div className="space-y-3">
-            {nums.map((n, i) => (
+            {nums.map((n, i) => {
+              const m = Math.floor(n / 1000);
+              const h = Math.floor((n % 1000) / 100);
+              const d = Math.floor((n % 100) / 10);
+              const u = n % 10;
+              return (
               <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                 <div className="mb-2 text-center text-xl font-bold tabular-nums">{n.toLocaleString("fr-CH")}</div>
                 <div className="flex items-end justify-center gap-1 text-xs">
-                  = {box(40)} <span className="text-[10px]">millier</span> + {box(40)} <span className="text-[10px]">centaine</span> + {box(40)} <span className="text-[10px]">dizaine</span> + {box(40)} <span className="text-[10px]">unité</span>
+                  = {box(40, 26, m)} <span className="text-[10px]">millier</span> + {box(40, 26, h)} <span className="text-[10px]">centaine</span> + {box(40, 26, d)} <span className="text-[10px]">dizaine</span> + {box(40, 26, u)} <span className="text-[10px]">unité</span>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         );
       })();
@@ -694,8 +774,19 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                 <div className="mb-2 text-center text-xl font-bold tabular-nums">{q.refDisplay}</div>
                 <div className="flex flex-col gap-1.5">
                   {q.tags.map((t, ti) => (
-                    <div key={ti} className="flex items-center gap-2 rounded border border-zinc-300 p-2 text-sm">
-                      <span className="inline-block h-4 w-4 shrink-0 rounded-full border-2 border-zinc-400" />
+                    <div
+                      key={ti}
+                      className={`flex items-center gap-2 rounded border p-2 text-sm ${
+                        correction && t.correct
+                          ? "border-emerald-500 bg-emerald-50 text-emerald-900"
+                          : "border-zinc-300"
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 shrink-0 rounded-full border-2 ${
+                          correction && t.correct ? "border-emerald-600 bg-emerald-600" : "border-zinc-400"
+                        }`}
+                      />
                       <span>{t.label}</span>
                     </div>
                   ))}
@@ -719,8 +810,17 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                 if (ci !== -1) {
                   const isGiven = ci === q.givenIdx;
                   cells.push(
-                    <div key={`${r}${c}`} className="flex h-9 items-center justify-center rounded border border-zinc-400 text-sm font-bold tabular-nums">
-                      {isGiven ? corners[ci]!.toLocaleString("fr-CH") : ""}
+                    <div
+                      key={`${r}${c}`}
+                      className={`flex h-9 items-center justify-center rounded border text-sm font-bold tabular-nums ${
+                        isGiven
+                          ? "border-zinc-400"
+                          : correction
+                            ? "border-emerald-500 bg-emerald-50 text-emerald-800"
+                            : "border-zinc-400"
+                      }`}
+                    >
+                      {isGiven || correction ? corners[ci]!.toLocaleString("fr-CH") : ""}
                     </div>
                   );
                 } else {
@@ -745,6 +845,7 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
     case "ex20":
       return (() => {
         const data = step === "ex19" ? generateEx19() : generateEx20();
+        const stepVal = step === "ex19" ? 10 : 100;
         return (
           <div className="space-y-3">
             {data.map((nums, si) => (
@@ -753,9 +854,9 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
                 <div className="space-y-1.5">
                   {nums.map((n, ni) => (
                     <div key={ni} className="flex items-center gap-2 text-sm">
-                      {box(48, 22)} <span className="text-[var(--color-text-secondary)]">&lt;</span>
+                      {box(48, 22, n - stepVal)} <span className="text-[var(--color-text-secondary)]">&lt;</span>
                       <span className="w-14 text-center font-bold tabular-nums">{n.toLocaleString("fr-CH")}</span>
-                      <span className="text-[var(--color-text-secondary)]">&lt;</span> {box(48, 22)}
+                      <span className="text-[var(--color-text-secondary)]">&lt;</span> {box(48, 22, n + stepVal)}
                     </div>
                   ))}
                 </div>
@@ -888,7 +989,7 @@ function a1PrintPreview(step: Step): React.ReactNode | undefined {
   }
 }
 
-export function buildA1PrintExercises(submoduleId: string): { id: string; label: string; preview: React.ReactNode }[] {
+export function buildA1PrintExercises(submoduleId: string): PrintExercise[] {
   const steps: Step[] =
     submoduleId === "A1-1"
       ? ["ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
@@ -897,7 +998,13 @@ export function buildA1PrintExercises(submoduleId: string): { id: string; label:
         : [];
   return steps.map((step, index) => {
     const hint = typeof getA1StepHint === "function" ? getA1StepHint(step) : undefined;
-    const body = a1PrintPreview(step);
+    const seed = 3_000_000 + index;
+    beginPlacementPrintSeed(seed);
+    const body = a1PrintPreview(step, false);
+    endPlacementPrintSeed();
+    beginPlacementPrintSeed(seed);
+    const correctionBody = a1PrintPreview(step, true);
+    endPlacementPrintSeed();
     return {
       id: step,
       label: `Exercice ${index + 1}`,
@@ -905,6 +1012,12 @@ export function buildA1PrintExercises(submoduleId: string): { id: string; label:
         <div className="space-y-2">
           {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
           {body ?? <div className="h-7 border-b border-black/40" />}
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-2">
+          {hint ? <p className="text-xs italic text-zinc-600">{hint}</p> : null}
+          {correctionBody ?? <div className="h-7 border-b border-black/40" />}
         </div>
       ),
     };

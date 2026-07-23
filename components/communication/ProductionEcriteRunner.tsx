@@ -930,6 +930,12 @@ export function buildPlacementPePrintExercises(): PrintExercise[] {
   const shortPrompt = buildPrompt("moyen", "short");
   const longPrompt = buildPrompt("avance", "long");
   const emptyForm: Record<string, string> = {};
+  const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
+  const formCorrectionAnswers = formTemplate && formSample
+    ? parseFormSampleAnswers(formTemplate, formSample)
+    : emptyForm;
+  const shortSample = getWritingSampleAnswer(shortPrompt.id) ?? "";
+  const longSample = getWritingSampleAnswer(longPrompt.id) ?? "";
 
   const items: PrintExercise[] = [];
   if (formTemplate) {
@@ -946,6 +952,22 @@ export function buildPlacementPePrintExercises(): PrintExercise[] {
           onChange={() => {}}
         />
       ),
+      correctionPreview: (
+        <div className="space-y-3">
+          <FormExercise
+            template={formTemplate}
+            answers={formCorrectionAnswers}
+            advanced={false}
+            disabled
+            onChange={() => {}}
+          />
+          {formSample && Object.keys(formCorrectionAnswers).length === 0 ? (
+            <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 text-sm whitespace-pre-line text-emerald-900">
+              {formSample}
+            </div>
+          ) : null}
+        </div>
+      ),
     });
   }
   items.push({
@@ -957,6 +979,14 @@ export function buildPlacementPePrintExercises(): PrintExercise[] {
         prompt={shortPrompt}
         text=""
         disabled={false}
+        onTextChange={() => {}}
+      />
+    ),
+    correctionPreview: (
+      <WritingExercise
+        prompt={shortPrompt}
+        text={shortSample || "—"}
+        disabled
         onTextChange={() => {}}
       />
     ),
@@ -973,8 +1003,29 @@ export function buildPlacementPePrintExercises(): PrintExercise[] {
         onTextChange={() => {}}
       />
     ),
+    correctionPreview: (
+      <WritingExercise
+        prompt={longPrompt}
+        text={longSample || "—"}
+        disabled
+        onTextChange={() => {}}
+      />
+    ),
   });
   return items;
+}
+
+function parseFormSampleAnswers(template: FormTemplate, sample: string): Record<string, string> {
+  const answers: Record<string, string> = {};
+  for (const line of sample.split("\n")) {
+    const sep = line.indexOf(" : ");
+    if (sep < 0) continue;
+    const label = line.slice(0, sep).trim();
+    const value = line.slice(sep + 3).trim();
+    const field = template.fields.find((f) => f.label === label);
+    if (field) answers[field.id] = value;
+  }
+  return answers;
 }
 
 /** @deprecated Préférer buildPlacementPePrintExercises. */

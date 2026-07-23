@@ -38,6 +38,8 @@ import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
+import { PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
+import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import { MathLessonEditorHost } from "@/components/content-editor/MathLessonEditorHost";
 import { mathLessonKey } from "@/lib/content-editor/keys";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
@@ -1922,7 +1924,7 @@ function renderWorkspaceEvalStep(
 
 export function buildWorkspacePrintExercises(
   lesson: MathSubmoduleLesson,
-): { id: string; label: string; preview: React.ReactNode }[] {
+): PrintExercise[] {
   const steps = buildSteps(lesson);
   const evalStart = steps.findIndex((s) => s.kind === "eval_start");
   const training = steps
@@ -1935,15 +1937,27 @@ export function buildWorkspacePrintExercises(
         s.kind !== "results",
     );
   const noop = () => {};
-  return training.map((step, index) => ({
-    id: `${step.kind}-${index}`,
-    label: `Exercice ${index + 1}`,
-    preview: (
-      <div className="print-ex-content [&_button]:pointer-events-none">
-        {renderWorkspaceEvalStep(step, 0, noop)}
-      </div>
-    ),
-  }));
+  return training.map((step, index) => {
+    const seed = 2_000_000 + index;
+    return {
+      id: `${step.kind}-${index}`,
+      label: `Exercice ${index + 1}`,
+      preview: (
+        <div className="print-ex-content [&_button]:pointer-events-none">
+          <PlacementPrintSeedRoot seed={seed}>
+            {renderWorkspaceEvalStep(step, 0, noop)}
+          </PlacementPrintSeedRoot>
+        </div>
+      ),
+      correctionPreview: (
+        <div className="print-ex-content [&_button]:pointer-events-none">
+          <PlacementPrintSeedRoot seed={seed}>
+            {renderWorkspaceEvalStep(step, 1, noop)}
+          </PlacementPrintSeedRoot>
+        </div>
+      ),
+    };
+  });
 }
 
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {

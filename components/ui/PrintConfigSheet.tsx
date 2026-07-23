@@ -9,6 +9,8 @@ export interface PrintExercise {
   id: string;
   label: string;
   preview?: ReactNode;
+  /** Même série que `preview`, avec réponses affichées (bloc corrigé). */
+  correctionPreview?: ReactNode;
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
 }
@@ -216,7 +218,7 @@ function PaginatedPreview({
 }: {
   header: ReactNode;
   theoryNode: ReactNode | null;
-  exerciseNodes: { key: string; node: ReactNode }[];
+  exerciseNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[];
   printDate: string;
   printedBy?: string;
   pagesContainerRef?: RefObject<HTMLDivElement | null>;
@@ -232,7 +234,7 @@ function PaginatedPreview({
   const [pages, setPages] = useState<number[][]>([]);
 
   const blocks = useMemo(() => {
-    const arr: { key: string; node: ReactNode }[] = [];
+    const arr: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
     if (theoryNode) arr.push({ key: "__theory__", node: theoryNode });
     exerciseNodes.forEach((e) => arr.push(e));
     return arr;
@@ -302,7 +304,8 @@ function PaginatedPreview({
     let avail = page1Avail;
     blocks.forEach((_, i) => {
       const h = blockH[i] + gap;
-      if (cur.length > 0 && curH + h > avail) {
+      const forceNew = blocks[i]?.forceNewPage && cur.length > 0;
+      if (forceNew || (cur.length > 0 && curH + h > avail)) {
         result.push(cur);
         cur = [];
         curH = 0;
@@ -482,6 +485,7 @@ export function PrintConfigSheet({
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(defaultEvalMode);
   const [theory, setTheory] = useState(false);
+  const [includeCorrections, setIncludeCorrections] = useState(false);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState(defaultCourse);
@@ -632,8 +636,23 @@ export function PrintConfigSheet({
       exercise,
       selection: item,
       occurrence,
+      correction: false as boolean,
     }));
   });
+  const previewBlocks = includeCorrections
+    ? [
+        { key: "eleve", title: null as string | null, items: previewExercises },
+        {
+          key: "corrige",
+          title: "Corrigé",
+          items: previewExercises.map((item) => ({
+            ...item,
+            key: `${item.key}-corrige`,
+            correction: true,
+          })),
+        },
+      ]
+    : [{ key: "eleve", title: null as string | null, items: previewExercises }];
 
   const handleBack = () => {
     if (step === 0) {
@@ -756,6 +775,30 @@ export function PrintConfigSheet({
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Inclure la théorie</p>
                   <p className="text-xs text-[var(--color-text-secondary)]">
                     {theory ? "La leçon sera incluse dans le PDF" : "Seulement les exercices"}
+                  </p>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Corrigé ── */}
+          <section className="mb-5">
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-wide" style={{ color: accentColor }}>
+              Corrigé
+            </h2>
+            <div className="rounded-xl border border-[var(--color-border-default)]">
+              <div className="flex min-h-14 cursor-pointer items-center gap-4 px-4">
+                <CheckBox checked={includeCorrections} onChange={setIncludeCorrections} accent={accentColor} />
+                <button
+                  type="button"
+                  className="flex-1 text-left"
+                  onClick={() => setIncludeCorrections((v) => !v)}
+                >
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Inclure le corrigé</p>
+                  <p className="text-xs text-[var(--color-text-secondary)]">
+                    {includeCorrections
+                      ? "Feuille élève puis même série avec les réponses"
+                      : "Uniquement la feuille sans réponses"}
                   </p>
                 </button>
               </div>
@@ -949,20 +992,48 @@ export function PrintConfigSheet({
                     )}
                   </div>
                 ) : null}
-                exerciseNodes={previewExercises.map((item, index) => ({
-                  key: item.key,
-                  node: (
-                    <div className="print-exercise">
-                      <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
-                        <span className="flex-1">Exercice {index + 1}</span>
-                        {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
-                      </div>
-                      <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
-                        {item.exercise?.preview ?? <div className="h-7 border-b border-black/40" />}
-                      </div>
-                    </div>
-                  ),
-                }))}
+                exerciseNodes={previewBlocks.flatMap((block) => {
+                  const sectionNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
+                  if (block.title) {
+                    sectionNodes.push({
+                      key: `section-${block.key}`,
+                      forceNewPage: true,
+                      node: (
+                        <div className="print-exercise border-b-2 border-black pb-2">
+                          <p className="text-[2em] font-bold uppercase tracking-wide text-black">
+                            {block.title}
+                          </p>
+                          <p className="mt-1 text-[1.2em] text-zinc-600">
+                            Même série d&apos;exercices avec les réponses
+                          </p>
+                        </div>
+                      ),
+                    });
+                  }
+                  block.items.forEach((item, index) => {
+                    const body = item.correction
+                      ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
+                      : item.exercise?.preview;
+                    sectionNodes.push({
+                      key: item.key,
+                      node: (
+                        <div className="print-exercise">
+                          <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                            <span className="flex-1">
+                              Exercice {index + 1}
+                              {item.correction ? " — Corrigé" : ""}
+                            </span>
+                            {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
+                          </div>
+                          <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            {body ?? <div className="h-7 border-b border-black/40" />}
+                          </div>
+                        </div>
+                      ),
+                    });
+                  });
+                  return sectionNodes;
+                })}
               />
               {!hasPrintableContent && (
                 <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-700">

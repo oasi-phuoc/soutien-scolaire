@@ -921,23 +921,33 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
   const inputValue = typeof value === "string" ? value : "";
   const inputCls = "border-0 border-b-2 bg-transparent pb-1 text-sm outline-none";
   const stemParts = task.fillMode !== "full" && task.stem ? parseFillStem(task.stem) : null;
+  const shownValue = correction && !inputValue.trim() ? task.answer : inputValue;
+  const showExpectedHint = Boolean(correction && inputValue.trim() && !ok);
 
   if (stemParts) {
     return (
       <div className="space-y-1">
         <div className="flex flex-wrap items-baseline gap-x-1 gap-y-2 text-sm text-[var(--color-text-primary)]">
           <span>{stemParts.before}</span>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(event) => onChange(event.target.value)}
-            disabled={correction}
-            className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
-            style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
-          />
+          {correction ? (
+            <span
+              className="inline-block min-w-[5rem] max-w-full border-0 border-b-2 px-1 pb-1 font-semibold"
+              style={{ borderColor: ok || !inputValue.trim() ? "#16a34a" : INVERSE, color: "#16a34a" }}
+            >
+              {shownValue}
+            </span>
+          ) : (
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(event) => onChange(event.target.value)}
+              className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
+              style={{ borderColor: ACCENT }}
+            />
+          )}
           {stemParts.after ? <span>{stemParts.after}</span> : null}
         </div>
-        {correction && !ok && (
+        {showExpectedHint && (
           <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
         )}
       </div>
@@ -949,15 +959,23 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
       {task.fillMode === "full" && (
         <p className="text-xs text-[var(--color-text-secondary)]">Écrivez une phrase complète contenant la réponse.</p>
       )}
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(event) => onChange(event.target.value)}
-        disabled={correction}
-        className={`w-full ${inputCls}`}
-        style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
-      />
-      {correction && !ok && (
+      {correction ? (
+        <div
+          className={`w-full border-0 border-b-2 pb-1 text-sm font-semibold`}
+          style={{ borderColor: ok || !inputValue.trim() ? "#16a34a" : INVERSE, color: "#16a34a" }}
+        >
+          {shownValue}
+        </div>
+      ) : (
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(event) => onChange(event.target.value)}
+          className={`w-full ${inputCls}`}
+          style={{ borderColor: ACCENT }}
+        />
+      )}
+      {showExpectedHint && (
         <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
       )}
     </div>
@@ -1187,7 +1205,19 @@ function PartView({ part, answers, setAnswer, correction }: { part: CEPart; answ
   return <ArticlePart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
 }
 
-function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index: number; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void }) {
+function ExercisePage({
+  part,
+  index,
+  answers,
+  setAnswer,
+  correction = false,
+}: {
+  part: CEPart;
+  index: number;
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string | null) => void;
+  correction?: boolean;
+}) {
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -1199,9 +1229,61 @@ function ExercisePage({ part, index, answers, setAnswer }: { part: CEPart; index
           <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
         </div>
       </div>
-      <PartView part={part} answers={answers} setAnswer={setAnswer} />
+      <PartView part={part} answers={answers} setAnswer={setAnswer} correction={correction} />
     </div>
   );
+}
+
+function buildCeCorrectAnswers(part: CEPart): CEAnswers {
+  const answers: CEAnswers = {};
+  if (part.layout === "orientation") {
+    part.task.answers.forEach((expected, index) => {
+      if (expected >= 0) answers[questionKey(part, index)] = expected;
+    });
+    return answers;
+  }
+  if (part.layout === "instructions") {
+    part.cards.forEach((card, cardIndex) => {
+      card.questions.forEach((question, questionIndex) => {
+        const key = questionKey(part, cardIndex, questionIndex);
+        answers[key] = question.kind === "choice" ? question.correct : question.answer;
+      });
+    });
+    return answers;
+  }
+  part.questions.forEach((question, index) => {
+    const key = questionKey(part, index);
+    answers[key] = question.kind === "choice" ? question.correct : question.answer;
+  });
+  return answers;
+}
+
+/** Aperçu imprimable du CE progressif (test de placement) — un item = un exercice. */
+export function buildPlacementCePrintExercises(seed = 1): PrintExercise[] {
+  const parts = buildProgressiveCEParts(seed);
+  const noopSetAnswer = (_key: string, _value: number | string | null) => {};
+  return parts.map((part, index) => ({
+    id: `ce-${index}-${part.id}`,
+    label: `CE ${index + 1}. ${part.title}`,
+    defaultPoints: part.points,
+    preview: (
+      <ExercisePage
+        part={part}
+        index={index}
+        answers={{}}
+        setAnswer={noopSetAnswer}
+      />
+    ),
+    correctionPreview: (
+      <ExercisePage
+        part={part}
+        index={index}
+        answers={buildCeCorrectAnswers(part)}
+        setAnswer={noopSetAnswer}
+        correction
+      />
+    ),
+  }));
 }
 
 function ResultsPage({
@@ -1422,25 +1504,6 @@ export function ComprehensionEcritRunner({
       )}
     </div>
   );
-}
-
-/** Aperçu imprimable du CE progressif (test de placement) — un item = un exercice. */
-export function buildPlacementCePrintExercises(seed = 1): PrintExercise[] {
-  const parts = buildProgressiveCEParts(seed);
-  const noopSetAnswer = (_key: string, _value: number | string | null) => {};
-  return parts.map((part, index) => ({
-    id: `ce-${index}-${part.id}`,
-    label: `CE ${index + 1}. ${part.title}`,
-    defaultPoints: part.points,
-    preview: (
-      <ExercisePage
-        part={part}
-        index={index}
-        answers={{}}
-        setAnswer={noopSetAnswer}
-      />
-    ),
-  }));
 }
 
 /** @deprecated Préférer buildPlacementCePrintExercises (pagination exercice par exercice). */

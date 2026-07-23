@@ -9,20 +9,14 @@ import {
   preColorFlat,
 } from "@/components/math/A4ModuleContent";
 import type { ShapeKind } from "@/components/math/A4ModuleContent";
+import {
+  placementRandInt as randInt,
+  placementShuffle as shuffle,
+  placementRandom,
+} from "@/components/math/placement/placement-print-rng";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function randInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
 function parseNum(input: string): number {
   return parseFloat(input.replace(/\s/g, "").replace(",", "."));
 }
@@ -162,7 +156,7 @@ function genSeq17Int() {
     if (s % 100 !== 0) steps.push(s);
   }
   const step = steps[randInt(0, steps.length - 1)]!;
-  const isAsc = Math.random() < 0.5;
+  const isAsc = placementRandom() < 0.5;
   const totalSpan = 5 * step;
   const startMin = isAsc ? 1000 : 1000 + totalSpan;
   const startMax = isAsc ? 50000 - totalSpan : 50000;
@@ -177,7 +171,7 @@ function genSeq17Dec() {
   // work in units of 0.05 to avoid float precision issues
   const oddK = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
   const stepK = oddK[randInt(0, oddK.length - 1)]!;
-  const isAsc = Math.random() < 0.5;
+  const isAsc = placementRandom() < 0.5;
   // Range: 1 to 199 units of 0.05 (= 0.05 to 9.95)
   const spanK = 5 * stepK;
   const startMinK = isAsc ? 1 : 1 + spanK;
@@ -367,7 +361,7 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
       parseFloat((intPart + tenths / 100).toFixed(2)),
     ];
     while (decsBase.length < 4) {
-      const decimals = Math.random() < 0.5
+      const decimals = placementRandom() < 0.5
         ? randInt(1, 9) * 10
         : randInt(11, 99);
       if (decimals % 10 === 0 && decimals / 10 === tenths) continue;
@@ -833,7 +827,7 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
 export function Exercise20({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
     return Array.from({ length: 2 }, () => {
-      const aDecimals = Math.random() < 0.5 ? 1 : 2;
+      const aDecimals = placementRandom() < 0.5 ? 1 : 2;
       let bInt: number;
       do { bInt = randInt(11, 29); } while (bInt % 10 === 0);
       const aInt = randInt(100, 299);
@@ -1153,7 +1147,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
       }
     };
     const makeSmallDecimalQ = () => {
-      const decPlaces = (Math.random() < 0.5 ? 2 : 3) as 2 | 3;
+      const decPlaces = (placementRandom() < 0.5 ? 2 : 3) as 2 | 3;
       const scale = decPlaces === 2 ? 100 : 1000;
       for (;;) {
         const divisor = randInt(2, 9);
@@ -1548,7 +1542,7 @@ const SPECIAL_FACTORS = [0.2, 0.25, 0.5, 0.75];
 
 export function Exercise24({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
-    function r1(min: number, max: number) { return Math.round((Math.random() * (max - min) + min) * 10) / 10; }
+    function r1(min: number, max: number) { return Math.round((placementRandom() * (max - min) + min) * 10) / 10; }
     const qs: { left: string; op: string; right: string; result: number }[] = [];
     // 1. int + dec
     const a1 = randInt(10, 50), b1 = r1(1, 9);

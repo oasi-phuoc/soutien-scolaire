@@ -42,6 +42,7 @@ import {
   levelFromMathParam,
 } from "@/lib/placement/math-training-levels";
 import { PLACEMENT_MATH_EXERCISES } from "@/lib/placement/math-exercises";
+import { PlacementMathPrintPreview, PlacementPrintSeedRoot } from "@/components/math/placement/PlacementMathPrintPreview";
 import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
 import type { PlacementSkill } from "@/lib/placement/types";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
@@ -106,128 +107,43 @@ function vocabTrainingSteps(theme: VocabTheme): { key: string; label: string }[]
   ];
 }
 
-function vocabExPreview(stepKey: string, theme: VocabTheme): ReactNode | undefined {
+function vocabExPreview(
+  stepKey: string,
+  theme: VocabTheme,
+  validateCommand = 0,
+): ReactNode | undefined {
+  const common = {
+    theme,
+    validateCommand,
+    onValidated: noop,
+    onCanValidateChange: noop,
+    exerciseNumber: 1,
+  };
   switch (stepKey) {
     case "ex1-image-match":
-      return (
-        <ExImageMatch
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExImageMatch {...common} />;
     case "ex2-article":
-      return (
-        <ExArticle
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExArticle {...common} />;
     case "ex3-anagram":
-      return (
-        <ExAnagram
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExAnagram {...common} />;
     case "ex4-missing-letters":
-      return (
-        <ExMissingLetters
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExMissingLetters {...common} />;
     case "ex5-definition-match":
-      return (
-        <ExDefinitionMatch
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExDefinitionMatch {...common} />;
     case "ex6-fill-sentences":
-      return (
-        <ExFillSentences
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExFillSentences {...common} />;
     case "ex-masc-fem":
-      return (
-        <ExMascFem
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExMascFem {...common} />;
     case "ex7-image-write":
-      return (
-        <ExImageWrite
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExImageWrite {...common} />;
     case "ex8-dictation":
-      return (
-        <ExDictation
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExDictation {...common} />;
     case "ex-word-order":
-      return (
-        <ExWordOrder
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExWordOrder {...common} />;
     case "ex9-sentence-write":
-      return (
-        <ExSentenceWrite
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExSentenceWrite {...common} />;
     case "ex10-question-write":
-      return (
-        <ExQuestionWrite
-          theme={theme}
-          validateCommand={0}
-          onValidated={noop}
-          onCanValidateChange={noop}
-          exerciseNumber={1}
-        />
-      );
+      return <ExQuestionWrite {...common} />;
     default:
       return undefined;
   }
@@ -242,11 +158,23 @@ function buildVocabBundle(slug: string): PrintBundle | null {
     course: "Français",
     accentColor: "var(--color-accent-fr)",
     theoryPreview: <VocabCards theme={theme} onCanValidateChange={noop} />,
-    exercises: steps.map((step, index) => ({
-      id: step.key,
-      label: step.label || `Exercice ${index + 1}`,
-      preview: vocabExPreview(step.key, theme),
-    })),
+    exercises: steps.map((step, index) => {
+      const seed = 6_000_000 + index;
+      return {
+        id: step.key,
+        label: step.label || `Exercice ${index + 1}`,
+        preview: (
+          <PlacementPrintSeedRoot seed={seed}>
+            {vocabExPreview(step.key, theme, 0)}
+          </PlacementPrintSeedRoot>
+        ),
+        correctionPreview: (
+          <PlacementPrintSeedRoot seed={seed}>
+            {vocabExPreview(step.key, theme, 1)}
+          </PlacementPrintSeedRoot>
+        ),
+      };
+    }),
   };
 }
 
@@ -263,18 +191,33 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
           <GrammarTheoryView blocks={lesson.theory} pivot="fr" showTrans={false} />
         </div>
       ),
-      exercises: lesson.exercises.map((ex, i) => ({
-        id: String(i),
-        label: ex.title ?? `Exercice ${i + 1}`,
-        preview: (
-          <GrammarExerciseView
-            exercise={ex}
-            onValidated={noop}
-            validateCommand={0}
-            onCanValidateChange={noop}
-          />
-        ),
-      })),
+      exercises: lesson.exercises.map((ex, i) => {
+        const seed = 4_000_000 + i;
+        return {
+          id: String(i),
+          label: ex.title ?? `Exercice ${i + 1}`,
+          preview: (
+            <PlacementPrintSeedRoot seed={seed}>
+              <GrammarExerciseView
+                exercise={ex}
+                onValidated={noop}
+                validateCommand={0}
+                onCanValidateChange={noop}
+              />
+            </PlacementPrintSeedRoot>
+          ),
+          correctionPreview: (
+            <PlacementPrintSeedRoot seed={seed}>
+              <GrammarExerciseView
+                exercise={ex}
+                onValidated={noop}
+                validateCommand={1}
+                onCanValidateChange={noop}
+              />
+            </PlacementPrintSeedRoot>
+          ),
+        };
+      }),
     };
   }
 
@@ -292,18 +235,33 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
         ) : null}
       </div>
     ),
-    exercises: lesson.exercises.map((ex, i) => ({
-      id: String(i),
-      label: ex.title ?? `Exercice ${i + 1}`,
-      preview: (
-        <GrammarExerciseView
-          exercise={ex}
-          onValidated={noop}
-          validateCommand={0}
-          onCanValidateChange={noop}
-        />
-      ),
-    })),
+    exercises: lesson.exercises.map((ex, i) => {
+      const seed = 5_000_000 + i;
+      return {
+        id: String(i),
+        label: ex.title ?? `Exercice ${i + 1}`,
+        preview: (
+          <PlacementPrintSeedRoot seed={seed}>
+            <GrammarExerciseView
+              exercise={ex}
+              onValidated={noop}
+              validateCommand={0}
+              onCanValidateChange={noop}
+            />
+          </PlacementPrintSeedRoot>
+        ),
+        correctionPreview: (
+          <PlacementPrintSeedRoot seed={seed}>
+            <GrammarExerciseView
+              exercise={ex}
+              onValidated={noop}
+              validateCommand={1}
+              onCanValidateChange={noop}
+            />
+          </PlacementPrintSeedRoot>
+        ),
+      };
+    }),
   };
 }
 
@@ -313,13 +271,9 @@ function mathExercisePrintItem(ex: (typeof PLACEMENT_MATH_EXERCISES)[number]): P
     id: String(ex.id),
     label: `${ex.id}. ${ex.label}`,
     defaultPoints: ex.maxPoints,
-    preview: (
-      <Comp
-        exerciseKey={1}
-        validated={false}
-        validateTrigger={0}
-        onValidated={noop}
-      />
+    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} />,
+    correctionPreview: (
+      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} correction />
     ),
   };
 }

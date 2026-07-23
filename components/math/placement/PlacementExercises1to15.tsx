@@ -4,6 +4,12 @@ import React, { useState, useMemo, useEffect } from "react";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 
+import {
+  placementRandInt as randInt,
+  placementShuffle as shuffle,
+  placementRandom,
+} from "@/components/math/placement/placement-print-rng";
+
 export interface PlacementExerciseProps {
   exerciseKey: number;
   validated: boolean;
@@ -13,18 +19,7 @@ export interface PlacementExerciseProps {
 
 // ── Utility helpers ──────────────────────────────────────────────────────────
 
-function randInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
+// randInt / shuffle : aléatoire normal, ou seed d'impression si actif.
 
 // Correction-style input display (shows wrong/correct when validated)
 function CorrectionInput({
@@ -318,7 +313,7 @@ export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger
     function mkLt() { const a = randInt(11, 98); const b = randInt(a + 1, 99); return { a, b, correct: "<" as CompOp }; }
     function mkGt() { const b = randInt(11, 98); const a = randInt(b + 1, 99); return { a, b, correct: ">" as CompOp }; }
     function mkEq() { const a = randInt(11, 99); return { a, b: a, correct: "=" as CompOp }; }
-    function mkRnd() { const r = Math.random(); return r < 1/3 ? mkLt() : r < 2/3 ? mkGt() : mkEq(); }
+    function mkRnd() { const r = placementRandom(); return r < 1/3 ? mkLt() : r < 2/3 ? mkGt() : mkEq(); }
     const fixed = shuffle([mkLt(), mkGt(), mkEq()]);
     return shuffle([...fixed, mkRnd()]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -401,7 +396,7 @@ function SeqQuestion({
 export function Exercise3({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
     const gap1 = randInt(2, 9);
-    const dir1: "asc" | "desc" = Math.random() < 0.5 ? "asc" : "desc";
+    const dir1: "asc" | "desc" = placementRandom() < 0.5 ? "asc" : "desc";
     const dir2: "asc" | "desc" = dir1 === "asc" ? "desc" : "asc";
     const gap2 = randInt(11, 19);
 
@@ -986,7 +981,7 @@ function makeLargeSeq(gap: number, ascending: boolean, minVal: number, maxVal: n
 
 export function Exercise10({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const asc1 = Math.random() < 0.5;
+    const asc1 = placementRandom() < 0.5;
     const asc2 = !asc1;
     const gap1 = randInt(5, 19) * 5; // multiple of 5, 25–95
     const gap2 = randInt(5, 39) * 25; // multiple of 25, 125–975
@@ -1066,7 +1061,7 @@ interface MixedQuestion {
 export function Exercise11({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): MixedQuestion[] => {
     function mkAdd(): MixedQuestion {
-      const format = (Math.random() < 0.5 ? "x_plus_blank_eq_y" : "blank_plus_x_eq_y") as MissingFormat;
+      const format = (placementRandom() < 0.5 ? "x_plus_blank_eq_y" : "blank_plus_x_eq_y") as MissingFormat;
       if (format === "x_plus_blank_eq_y") {
         const a = randInt(75, 450); const b = randInt(75, 500 - a);
         return { kind: "missing", format, a, b, result: a + b };
@@ -1075,7 +1070,7 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
       return { kind: "missing", format, a, b, result: a + b };
     }
     function mkSub(): MixedQuestion {
-      const format = (Math.random() < 0.5 ? "x_minus_blank_eq_y" : "blank_minus_x_eq_y") as MissingFormat;
+      const format = (placementRandom() < 0.5 ? "x_minus_blank_eq_y" : "blank_minus_x_eq_y") as MissingFormat;
       if (format === "x_minus_blank_eq_y") {
         const b = randInt(75, 425); const result = randInt(75, 500 - b);
         return { kind: "missing", format, a: b + result, b, result };
