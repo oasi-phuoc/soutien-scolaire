@@ -37,7 +37,6 @@ import { HintLightbulbButton, TtsPlayButton } from "@/components/communication/T
 import {
   CommunicationFinishButton,
   CommunicationIntroSection,
-  CommunicationResultsExercise,
   CommunicationTeacherSubmit,
   EXPRESSION_TAB_HREF,
 } from "@/components/communication/CommunicationEvalLayout";
@@ -265,11 +264,54 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
 
 // ——— Voice message bubble (WhatsApp-style for app prompts in task 3) ———
 
-function CorrectionBlock({ title, children }: { title: string; children: ReactNode }) {
+const ACCENT_SOFT = "color-mix(in oklch, var(--color-accent-quiz) 12%, white)";
+const ACCENT_BORDER = "color-mix(in oklch, var(--color-accent-quiz) 28%, white)";
+
+function PoPropositionAccordion({
+  title,
+  open,
+  onToggle,
+  children,
+}: {
+  title: string;
+  open: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
   return (
-    <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2.5">
-      <p className="mb-1.5 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{title}</p>
-      <div className="space-y-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]">{children}</div>
+    <div
+      className="overflow-hidden rounded-[var(--radius-md)] border"
+      style={{ borderColor: ACCENT_BORDER, background: ACCENT_SOFT }}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:brightness-[0.98]"
+      >
+        <span className="font-bold" style={{ color: ACCENT }}>{title}</span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden
+          className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          style={{ color: ACCENT }}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          className="space-y-3 border-t px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]"
+          style={{ borderColor: ACCENT_BORDER }}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 }
@@ -1582,120 +1624,120 @@ export function OralProductionRunner({
             </p>
           </section>
           <p className="text-center text-sm text-[var(--color-text-secondary)]">Vous pouvez relire vos réponses avant l&apos;envoi.</p>
-          <div className="space-y-3">
+          <div className="space-y-5">
             {[
-              { num: 1, label: "Questions thématiques", points: 3, lines: task1Lines },
-              { num: 2, label: "Entretien dirigé", points: 4, lines: interviewLines },
-              { num: 3, label: "Description d'image", points: 5, lines: task2Lines },
-              { num: 4, label: "Dialogue", points: 6, lines: task4Lines },
-              { num: 5, label: "Argumentation", points: 7, lines: task5Lines },
-            ].map(({ num, label, points, lines }) => {
+              { num: 1, label: "Questions thématiques", lines: task1Lines },
+              { num: 2, label: "Entretien dirigé", lines: interviewLines },
+              { num: 3, label: "Description d'image", lines: task2Lines },
+              { num: 4, label: "Dialogue", lines: task4Lines },
+              { num: 5, label: "Argumentation", lines: task5Lines },
+            ].map(({ num, label, lines }) => {
               const isOpen = openReview === num;
-              return (
-                <CommunicationResultsExercise
-                  key={num}
-                  index={num - 1}
-                  title={label}
-                  correct={0}
-                  total={points}
-                  scoreLabel={`0 / ${points}`}
-                  open={isOpen}
-                  onToggle={() => setOpenReview(isOpen ? null : num)}
-                >
-                  {lines.length ? (
-                    lines.map((line, i) => <DialogueBubble key={i} line={{ ...line }} />)
-                  ) : (
-                    <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
-                  )}
-
-                  {num === 1 && (
-                    <CorrectionBlock title="Propositions de questions">
-                      {prompt.themes.map((theme) => (
-                        <div key={theme.word}>
-                          <p className="font-semibold">{theme.word}</p>
-                          <ul className="ml-4 list-disc text-[var(--color-text-secondary)]">
-                            {getThemeSuggestions(theme.word).map((q) => (
-                              <li key={q}>{q}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </CorrectionBlock>
-                  )}
-
-                  {num === 2 && (
-                    <CorrectionBlock title="Réponses modèles (Phuoc Van, Aproz)">
-                      {interviewQuestions.map((question) => (
-                        <p key={question}>
-                          <span className="font-semibold">{question}</span>
-                          <br />
-                          <span className="text-[var(--color-text-secondary)]">
-                            {getInterviewSuggestion(question) ?? "—"}
-                          </span>
-                        </p>
-                      ))}
-                    </CorrectionBlock>
-                  )}
-
-                  {num === 3 && imageDescriptionModel && (
-                    <CorrectionBlock title="Description modèle">
-                      <p className="mb-2 text-xs font-semibold text-[var(--color-text-secondary)]">Structure à mémoriser :</p>
-                      <ul className="mb-3 ml-4 list-disc text-[var(--color-text-secondary)]">
-                        {IMAGE_DESCRIPTION_MEMO.map((starter) => (
-                          <li key={starter}>{starter}</li>
-                        ))}
-                      </ul>
-                      <p>{imageDescriptionModel.formatted}</p>
-                    </CorrectionBlock>
-                  )}
-
-                  {num === 4 && (
-                    <CorrectionBlock title="Réponses proposées pour cette situation">
-                      <p className="mb-2 font-medium">{dialogueState.roleText}</p>
-                      <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
-                        Niveau {level === "base" ? "PO.1 (base)" : level === "moyen" ? "PO.2 (moyen)" : "PO.3 (avancé)"} — situation : {situation.alt}
+              const proposition =
+                num === 1 ? (
+                  <div className="space-y-3">
+                    {prompt.themes.map((theme) => (
+                      <div key={theme.word}>
+                        <p className="font-semibold">{theme.word}</p>
+                        <ul className="ml-4 list-disc text-[var(--color-text-secondary)]">
+                          {getThemeSuggestions(theme.word).map((q) => (
+                            <li key={q}>{q}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ) : num === 2 ? (
+                  <div className="space-y-3">
+                    {interviewQuestions.map((question) => (
+                      <p key={question}>
+                        <span className="font-semibold">{question}</span>
+                        <br />
+                        <span className="text-[var(--color-text-secondary)]">
+                          {getInterviewSuggestion(question) ?? "—"}
+                        </span>
                       </p>
-                      {([
-                        { role: "A" as const, data: dialogueSuggestions.roleA },
-                        { role: "B" as const, data: dialogueSuggestions.roleB },
-                      ]).map(({ role, data }) => {
-                        const isYourRole = role === dialogueState.studentRole;
-                        return (
-                          <div key={role} className="mb-3">
-                            <p className="font-semibold">
-                              Si vous êtes {data.title}
-                              {isYourRole ? " (votre rôle)" : ""} :
-                            </p>
-                            <ol className="ml-4 mt-1 list-decimal space-y-1 text-[var(--color-text-secondary)]">
-                              {data.responses.map((response, i) => (
-                                <li key={i} className={isYourRole ? "text-[var(--color-text-primary)]" : ""}>
-                                  {response}
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                        );
-                      })}
-                      <p className="mt-2 text-xs font-semibold text-[var(--color-text-secondary)]">Dialogue complet :</p>
-                      {dialogueState.script.lines.map((line, i) => {
-                        const speaker = line.role === "A" ? dialogueState.script.roleA : dialogueState.script.roleB;
-                        const isStudent = line.role === dialogueState.studentRole;
-                        return (
-                          <p key={i} className="text-sm">
-                            <span className="font-semibold">{isStudent ? "Vous" : speaker.title} :</span>{" "}
-                            <span className={isStudent ? "" : "text-[var(--color-text-secondary)]"}>{line.text}</span>
+                    ))}
+                  </div>
+                ) : num === 3 && imageDescriptionModel ? (
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Structure à mémoriser :</p>
+                    <ul className="ml-4 list-disc text-[var(--color-text-secondary)]">
+                      {IMAGE_DESCRIPTION_MEMO.map((starter) => (
+                        <li key={starter}>{starter}</li>
+                      ))}
+                    </ul>
+                    <p>{imageDescriptionModel.formatted}</p>
+                  </div>
+                ) : num === 4 ? (
+                  <div className="space-y-3">
+                    <p className="font-medium">{dialogueState.roleText}</p>
+                    <p className="text-xs text-[var(--color-text-secondary)]">
+                      Niveau {level === "base" ? "PO.1 (base)" : level === "moyen" ? "PO.2 (moyen)" : "PO.3 (avancé)"} — situation : {situation.alt}
+                    </p>
+                    {([
+                      { role: "A" as const, data: dialogueSuggestions.roleA },
+                      { role: "B" as const, data: dialogueSuggestions.roleB },
+                    ]).map(({ role, data }) => {
+                      const isYourRole = role === dialogueState.studentRole;
+                      return (
+                        <div key={role}>
+                          <p className="font-semibold">
+                            Si vous êtes {data.title}
+                            {isYourRole ? " (votre rôle)" : ""} :
                           </p>
-                        );
-                      })}
-                    </CorrectionBlock>
-                  )}
+                          <ol className="ml-4 mt-1 list-decimal space-y-1 text-[var(--color-text-secondary)]">
+                            {data.responses.map((response, i) => (
+                              <li key={i} className={isYourRole ? "text-[var(--color-text-primary)]" : ""}>
+                                {response}
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      );
+                    })}
+                    <p className="text-xs font-semibold text-[var(--color-text-secondary)]">Dialogue complet :</p>
+                    {dialogueState.script.lines.map((line, i) => {
+                      const speaker = line.role === "A" ? dialogueState.script.roleA : dialogueState.script.roleB;
+                      const isStudent = line.role === dialogueState.studentRole;
+                      return (
+                        <p key={i} className="text-sm">
+                          <span className="font-semibold">{isStudent ? "Vous" : speaker.title} :</span>{" "}
+                          <span className={isStudent ? "" : "text-[var(--color-text-secondary)]"}>{line.text}</span>
+                        </p>
+                      );
+                    })}
+                  </div>
+                ) : num === 5 && argumentationResponse ? (
+                  <SampleParagraphs text={argumentationResponse} />
+                ) : null;
 
-                  {num === 5 && argumentationResponse && (
-                    <CorrectionBlock title="Proposition de réponse">
-                      <SampleParagraphs text={argumentationResponse} />
-                    </CorrectionBlock>
-                  )}
-                </CommunicationResultsExercise>
+              return (
+                <div key={num} className="space-y-3">
+                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-4 py-3">
+                    <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
+                      Votre production — {label}
+                    </p>
+                    {lines.length ? (
+                      <div className="space-y-2">
+                        {lines.map((line, i) => (
+                          <DialogueBubble key={i} line={{ ...line }} />
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-[var(--color-text-secondary)]">Aucune production enregistrée.</p>
+                    )}
+                  </div>
+                  {proposition ? (
+                    <PoPropositionAccordion
+                      title="Proposer une réponse"
+                      open={isOpen}
+                      onToggle={() => setOpenReview(isOpen ? null : num)}
+                    >
+                      {proposition}
+                    </PoPropositionAccordion>
+                  ) : null}
+                </div>
               );
             })}
           </div>
