@@ -862,7 +862,7 @@ function IntroPage({ level, onStart, placement = false }: { level: CELevel; onSt
 }
 function ChoiceQuestionView({ task, value, onChange, correction }: { task: ChoiceTask; value: number | string | null; onChange: (value: number) => void; correction?: boolean }) {
   return (
-    <div className={task.image ? "grid grid-cols-3 gap-2" : "space-y-2"}>
+    <div className="grid grid-cols-3 gap-2">
       {task.choices.map((choice, index) => {
         const selected = value === index;
         const correct = correction && index === task.correct;
@@ -873,7 +873,7 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
             type="button"
             onClick={() => !correction && onChange(index)}
             aria-label={task.image ? `${String.fromCharCode(97 + index)}. ${choice.label}` : undefined}
-            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
+            className={`rounded-xl border px-2 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />
@@ -1211,12 +1211,14 @@ function ExercisePage({
   answers,
   setAnswer,
   correction = false,
+  hidePoints = false,
 }: {
   part: CEPart;
   index: number;
   answers: CEAnswers;
   setAnswer: (key: string, value: number | string | null) => void;
   correction?: boolean;
+  hidePoints?: boolean;
 }) {
   return (
     <div className="space-y-5">
@@ -1226,7 +1228,9 @@ function ExercisePage({
             <p className="text-sm font-bold uppercase tracking-wider" style={{ color: ACCENT }}>Exercice {index + 1}</p>
             <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
           </div>
-          <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
+          {!hidePoints && (
+            <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
+          )}
         </div>
       </div>
       <PartView part={part} answers={answers} setAnswer={setAnswer} correction={correction} />
@@ -1275,6 +1279,7 @@ export function buildPlacementCePrintExercises(
         index={index}
         answers={{}}
         setAnswer={noopSetAnswer}
+        hidePoints
       />
     ),
     correctionPreview: (
@@ -1284,6 +1289,7 @@ export function buildPlacementCePrintExercises(
         answers={buildCeCorrectAnswers(part)}
         setAnswer={noopSetAnswer}
         correction
+        hidePoints
       />
     ),
   }));

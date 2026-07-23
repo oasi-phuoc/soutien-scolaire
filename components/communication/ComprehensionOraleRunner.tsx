@@ -875,7 +875,7 @@ function ChoiceQuestionView({
   correction?: boolean;
 }) {
   return (
-    <div className={task.image ? "grid grid-cols-3 gap-2" : "space-y-2"}>
+    <div className="grid grid-cols-3 gap-2">
       {task.choices.map((choice, index) => {
         const selected = value === index;
         const correct = correction && index === task.correct;
@@ -887,7 +887,7 @@ function ChoiceQuestionView({
             disabled={correction}
             onClick={() => onChange(index)}
             aria-label={task.image ? `${String.fromCharCode(97 + index)}. ${choice.label}` : undefined}
-            className={`rounded-xl border px-3 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
+            className={`rounded-xl border px-2 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />
@@ -1269,6 +1269,7 @@ function QuestionBlock({
   forceTranscripts = false,
   hideAudioPlayer = false,
   hideQuestions = false,
+  hidePoints = false,
   qrItems,
 }: {
   part: COPart;
@@ -1281,6 +1282,8 @@ function QuestionBlock({
   hideAudioPlayer?: boolean;
   /** Impression corrigé (page scripts) : pas de questions. */
   hideQuestions?: boolean;
+  /** Impression : masquer le badge « X points » (déjà dans l'en-tête). */
+  hidePoints?: boolean;
   /** Rangée de QR codes au-dessus des questions / scripts. */
   qrItems?: PrintAudioQrItem[];
 }) {
@@ -1305,15 +1308,24 @@ function QuestionBlock({
             ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
             : "Écoutez l'enregistrement et répondez aux questions.";
 
+  const consigneText =
+    forceTranscripts && !qrItems?.length
+      ? "Lisez le script ci-dessous et répondez aux questions."
+      : hideQuestions
+        ? "Scannez les QR codes pour réécouter, puis lisez les transcriptions."
+        : consigne;
+
   return (
     <div className="space-y-5">
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-4">
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">{part.title}</h2>
           <div className="flex shrink-0 items-center gap-2">
-            <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
-              {part.points} points
-            </span>
+            {!hidePoints && (
+              <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
+                {part.points} points
+              </span>
+            )}
             {hasTranscript && !forceTranscripts && !hideAudioPlayer && (
               <button
                 type="button"
@@ -1332,15 +1344,17 @@ function QuestionBlock({
             )}
           </div>
         </div>
-        <p className="w-full text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          {forceTranscripts && !qrItems?.length
-            ? "Lisez le script ci-dessous et répondez aux questions."
-            : hideQuestions
-              ? "Scannez les QR codes pour réécouter, puis lisez les transcriptions."
-              : consigne}
-        </p>
+        <div className="flex items-start gap-3">
+          {qrItems && qrItems.length > 0 ? (
+            <div className="shrink-0">
+              <PrintAudioQrRow items={qrItems} size={64} />
+            </div>
+          ) : null}
+          <p className="min-w-0 flex-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            {consigneText}
+          </p>
+        </div>
         <div className="space-y-3">
-          {qrItems && qrItems.length > 0 ? <PrintAudioQrRow items={qrItems} /> : null}
           {!forceTranscripts && !hideAudioPlayer && <AudioSequencePlayer items={part.audioGroup.items} />}
           {(showTranscripts || forceTranscripts) && part.audioGroup.items.map((item) => item.transcript ? (
             <COTranscriptView
@@ -1656,6 +1670,7 @@ export function buildPlacementCoPrintExercises(
             answers={{}}
             onAnswer={() => undefined}
             hideAudioPlayer
+            hidePoints
             qrItems={qrItems}
           />
         </div>
@@ -1668,6 +1683,7 @@ export function buildPlacementCoPrintExercises(
           forceTranscripts
           hideAudioPlayer
           hideQuestions
+          hidePoints
           qrItems={qrItems}
         />
       ),
@@ -1677,6 +1693,7 @@ export function buildPlacementCoPrintExercises(
           answers={correctAnswers}
           onAnswer={() => undefined}
           hideAudioPlayer
+          hidePoints
           readonly
         />
       ),

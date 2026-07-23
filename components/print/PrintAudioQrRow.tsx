@@ -22,7 +22,7 @@ function listenUrl(audioPath: string, label: string): string {
   return `${origin}/ecoute?${params.toString()}`;
 }
 
-function QrCell({ item }: { item: PrintAudioQrItem }) {
+function QrCell({ item, size = 72 }: { item: PrintAudioQrItem; size?: number }) {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,8 +42,11 @@ function QrCell({ item }: { item: PrintAudioQrItem }) {
   }, [item.audio, item.label]);
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col items-center gap-1">
-      <div className="flex h-[88px] w-[88px] items-center justify-center rounded border border-zinc-300 bg-white p-1">
+    <div className="flex shrink-0 flex-col items-center gap-0.5">
+      <div
+        className="flex items-center justify-center rounded border border-zinc-300 bg-white p-0.5"
+        style={{ width: size, height: size }}
+      >
         {dataUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={dataUrl} alt={`QR ${item.label}`} className="h-full w-full" />
@@ -51,7 +54,7 @@ function QrCell({ item }: { item: PrintAudioQrItem }) {
           <span className="text-[9px] text-zinc-400">QR…</span>
         )}
       </div>
-      <span className="max-w-[6.5rem] text-center text-[10px] font-semibold leading-tight text-zinc-800">
+      <span className="max-w-[4.5rem] text-center text-[9px] font-semibold leading-tight text-zinc-800">
         {item.label}
       </span>
     </div>
@@ -61,19 +64,24 @@ function QrCell({ item }: { item: PrintAudioQrItem }) {
 /** Rangée de QR codes (un par audio) pour l'impression CO. */
 export function PrintAudioQrRow({
   items,
-  caption = "Scannez pour écouter l'audio",
+  caption,
+  size = 72,
 }: {
   items: PrintAudioQrItem[];
+  /** Légende optionnelle au-dessus des QR (vide par défaut). */
   caption?: string;
+  size?: number;
 }) {
   if (!items.length) return null;
 
   return (
-    <div className="rounded border border-zinc-300 bg-zinc-50/80 px-2 py-2 print:break-inside-avoid">
-      <p className="mb-2 text-center text-[11px] font-semibold text-zinc-600">{caption}</p>
-      <div className="flex flex-row flex-wrap items-start justify-center gap-2">
+    <div className="print:break-inside-avoid">
+      {caption ? (
+        <p className="mb-1.5 text-center text-[11px] font-semibold text-zinc-600">{caption}</p>
+      ) : null}
+      <div className="flex flex-row flex-wrap items-start justify-start gap-1.5">
         {items.map((item) => (
-          <QrCell key={item.id} item={item} />
+          <QrCell key={item.id} item={item} size={size} />
         ))}
       </div>
     </div>
