@@ -1194,7 +1194,7 @@ function EmailPart({
         <div
           className={
             forPrint
-              ? "mx-auto max-w-[42%] overflow-hidden rounded-lg border border-slate-300 bg-white"
+              ? "mx-auto max-w-[42%] overflow-hidden bg-white"
               : "overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm"
           }
         >
@@ -1216,7 +1216,7 @@ function EmailPart({
           </div>
         </div>
       )}
-      <div className={`rounded-xl border border-slate-300 bg-white shadow-sm ${forPrint ? "p-3" : "p-4"}`}>
+      <div className={forPrint ? "space-y-3" : `rounded-xl border border-slate-300 bg-white shadow-sm p-4`}>
         {(part.meta.from || part.meta.subject) && (
           <div className={`border-b border-slate-300 pb-2 text-[var(--color-text-secondary)] ${forPrint ? "text-xs" : "text-sm"}`}>
             {part.meta.from && <p><span className="font-semibold">De :</span> {part.meta.from}</p>}

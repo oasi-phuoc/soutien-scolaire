@@ -8,6 +8,19 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
 
+/** Préfixe compétence (CE/CO/PE/PO) depuis le label catalogue, pour le test complet. */
+function printExerciseHeading(
+  exercise: PrintExercise | undefined,
+  index: number,
+  suffix?: string,
+): string {
+  const fromLabel = exercise?.label?.match(/^(CE|CO|PE|PO)\b/i)?.[1]?.toUpperCase();
+  const base = fromLabel
+    ? `${fromLabel} - Exercice ${index + 1}`
+    : `Exercice ${index + 1}`;
+  return suffix ? `${base} — ${suffix}` : base;
+}
+
 export interface PrintExercise {
   id: string;
   label: string;
@@ -1088,21 +1101,20 @@ export function PrintConfigSheet({
                   }
                   block.items.forEach((item, index) => {
                     const exercise = item.exercise;
-                    const forceFirstAfterAnnounce =
-                      Boolean(announcementPreview) &&
-                      block.key === "eleve" &&
-                      index === 0 &&
-                      !block.title;
 
                     if (item.correction && exercise?.correctionLeadPreview) {
                       sectionNodes.push({
                         key: `${item.key}-lead`,
-                        forceNewPage: forceFirstAfterAnnounce,
+                        forceNewPage: true,
                         node: (
                           <div className="print-exercise">
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
-                                Exercice {index + 1} — {exercise.correctionLeadTitle ?? "Audios & transcriptions"}
+                                {printExerciseHeading(
+                                  exercise,
+                                  index,
+                                  exercise.correctionLeadTitle ?? "Audios & transcriptions",
+                                )}
                               </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
@@ -1122,7 +1134,9 @@ export function PrintConfigSheet({
                         node: (
                           <div className="print-exercise">
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">Exercice {index + 1} — Corrigé</span>
+                              <span className="flex-1">
+                                {printExerciseHeading(exercise, index, "Corrigé")}
+                              </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
                                   {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
@@ -1145,7 +1159,7 @@ export function PrintConfigSheet({
                             <div className="print-exercise">
                               <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                                 <span className="flex-1">
-                                  Exercice {index + 1} — {follow.title ?? "Suite"}
+                                  {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
                                 </span>
                                 {evalMode && (
                                   <span style={{ color: "black" }}>
@@ -1174,11 +1188,11 @@ export function PrintConfigSheet({
                     if (lead) {
                       sectionNodes.push({
                         key: `${item.key}-lead`,
-                        forceNewPage: forceFirstAfterAnnounce,
+                        forceNewPage: true,
                         node: (
                           <div className="print-exercise">
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
-                              <span className="flex-1">Exercice {index + 1}</span>
+                              <span className="flex-1">{printExerciseHeading(exercise, index)}</span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
                                   {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
@@ -1198,7 +1212,11 @@ export function PrintConfigSheet({
                           <div className="print-exercise">
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
-                                Exercice {index + 1} — {exercise?.leadFollowTitle ?? "Grille"}
+                                {printExerciseHeading(
+                                  exercise,
+                                  index,
+                                  exercise?.leadFollowTitle ?? "Grille",
+                                )}
                               </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
@@ -1220,7 +1238,7 @@ export function PrintConfigSheet({
                             <div className="print-exercise">
                               <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                                 <span className="flex-1">
-                                  Exercice {index + 1} — {follow.title ?? "Suite"}
+                                  {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
                                 </span>
                                 {evalMode && (
                                   <span style={{ color: "black" }}>
@@ -1240,13 +1258,16 @@ export function PrintConfigSheet({
 
                     sectionNodes.push({
                       key: item.key,
-                      forceNewPage: forceFirstAfterAnnounce,
+                      forceNewPage: true,
                       node: (
                         <div className="print-exercise">
                           <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                             <span className="flex-1">
-                              Exercice {index + 1}
-                              {item.correction ? " — Corrigé" : ""}
+                              {printExerciseHeading(
+                                exercise,
+                                index,
+                                item.correction ? "Corrigé" : undefined,
+                              )}
                             </span>
                             {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                           </div>
@@ -1264,7 +1285,7 @@ export function PrintConfigSheet({
                           <div className="print-exercise">
                             <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
-                                Exercice {index + 1} — {follow.title ?? "Suite"}
+                                {printExerciseHeading(exercise, index, follow.title ?? "Suite")}
                               </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>

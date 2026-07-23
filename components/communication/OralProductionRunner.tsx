@@ -1816,39 +1816,61 @@ function PoPrintDialoguePage({
   roleText?: string;
   correction?: boolean;
 }) {
+  // Groupes Client/Vendeur (A puis B) avec grand écart entre chaque échange.
+  const pairs: PoDialogueLine[][] = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]!;
+    const next = lines[i + 1];
+    if (line.role === "A" && next?.role === "B") {
+      pairs.push([line, next]);
+      i += 1;
+    } else {
+      pairs.push([line]);
+    }
+  }
+
   return (
     <div className="space-y-3 text-black">
       {roleText ? <p className="text-sm text-zinc-700">{roleText}</p> : null}
-      <div className="space-y-2.5">
-        {lines.map((line, localIdx) => {
-          const globalIdx = globalOffset + localIdx;
-          const isStudent = studentTurns.includes(globalIdx);
-          const isLeft = line.role === "A";
-          const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
+      <div className="space-y-8">
+        {pairs.map((pair, pairIdx) => {
+          const pairOffset = pairs
+            .slice(0, pairIdx)
+            .reduce((sum, p) => sum + p.length, 0);
           return (
-            <div
-              key={globalIdx}
-              className={`flex w-full ${isLeft ? "justify-start" : "justify-end"}`}
-            >
-              <div
-                className={`w-[80%] rounded-xl border px-3 py-2 text-sm ${
-                  correction && isStudent
-                    ? "border-emerald-200 bg-emerald-50/60"
-                    : "border-zinc-300 bg-white"
-                } ${isLeft ? "rounded-tl-sm" : "rounded-tr-sm"}`}
-              >
-                <p className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
-                  {speaker}
-                  {correction && isStudent ? " (votre rôle)" : ""}
-                </p>
-                {isStudent && !correction ? (
-                  <div className="mt-1">{printBlankLines(2)}</div>
-                ) : (
-                  <p className={`mt-1 leading-snug ${correction && isStudent ? "text-emerald-900" : ""}`}>
-                    {line.text}
-                  </p>
-                )}
-              </div>
+            <div key={`pair-${globalOffset + pairOffset}`} className="space-y-2.5">
+              {pair.map((line, localInPair) => {
+                const globalIdx = globalOffset + pairOffset + localInPair;
+                const isStudent = studentTurns.includes(globalIdx);
+                const isLeft = line.role === "A";
+                const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
+                return (
+                  <div
+                    key={globalIdx}
+                    className={`flex w-full ${isLeft ? "justify-start" : "justify-end"}`}
+                  >
+                    <div
+                      className={`w-[80%] rounded-xl border px-3 py-2 text-sm ${
+                        correction && isStudent
+                          ? "border-emerald-200 bg-emerald-50/60"
+                          : "border-zinc-300 bg-white"
+                      } ${isLeft ? "rounded-tl-sm" : "rounded-tr-sm"}`}
+                    >
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+                        {speaker}
+                        {correction && isStudent ? " (votre rôle)" : ""}
+                      </p>
+                      {isStudent && !correction ? (
+                        <div className="mt-1">{printBlankLines(2)}</div>
+                      ) : (
+                        <p className={`mt-1 leading-snug ${correction && isStudent ? "text-emerald-900" : ""}`}>
+                          {line.text}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           );
         })}
@@ -1914,26 +1936,32 @@ export function buildPlacementPoPrintExercises(
       label: "PO 1. Questions sur les thèmes",
       defaultPoints: 3,
       preview: (
-        <div className="space-y-4 text-black">
+        <div className="space-y-5 text-black">
           <p className="text-sm leading-relaxed text-zinc-700">
             Posez des questions sur ces thèmes. Une question par thème.
           </p>
-          {prompt.themes.map((theme) => (
-            <div key={theme.word} className="rounded-lg border border-zinc-300 bg-white px-3 py-3">
-              <p className="text-base font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
-              <div className="mt-2">{printBlankLines(2)}</div>
+          {prompt.themes.map((theme, i) => (
+            <div key={`${theme.word}-${i}`} className="space-y-2">
+              <p className="flex items-baseline gap-2 text-base font-bold text-black">
+                <span className="tabular-nums text-[var(--color-accent-quiz)]">{i + 1}.</span>
+                <span className="rounded border-2 border-black px-2 py-0.5">{theme.word}</span>
+              </p>
+              {printBlankLines(2)}
             </div>
           ))}
         </div>
       ),
       correctionPreview: (
-        <div className="space-y-4 text-black">
+        <div className="space-y-5 text-black">
           <p className="text-sm leading-relaxed text-zinc-700">
             Posez des questions sur ces thèmes. Une question par thème.
           </p>
-          {prompt.themes.map((theme) => (
-            <div key={theme.word} className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
-              <p className="text-base font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
+          {prompt.themes.map((theme, i) => (
+            <div key={`${theme.word}-${i}`} className="space-y-2 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
+              <p className="flex items-baseline gap-2 text-base font-bold text-black">
+                <span className="tabular-nums text-[var(--color-accent-quiz)]">{i + 1}.</span>
+                <span className="rounded border-2 border-black px-2 py-0.5">{theme.word}</span>
+              </p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-emerald-900">
                 {getThemeSuggestions(theme.word).map((q) => (
                   <li key={q}>{q}</li>
@@ -1949,7 +1977,7 @@ export function buildPlacementPoPrintExercises(
       label: "PO 2. Entretien dirigé",
       defaultPoints: 4,
       preview: (
-        <ol className="space-y-3 text-black">
+        <ol className="space-y-7 text-black">
           {interviewQuestions.map((question, i) => (
             <li key={i} className="space-y-2">
               <p className="text-sm font-medium">
@@ -1961,7 +1989,7 @@ export function buildPlacementPoPrintExercises(
         </ol>
       ),
       correctionPreview: (
-        <ol className="space-y-3 text-black">
+        <ol className="space-y-7 text-black">
           {interviewQuestions.map((question, i) => (
             <li key={i} className="space-y-1 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
               <p className="text-sm font-medium">
@@ -1981,28 +2009,24 @@ export function buildPlacementPoPrintExercises(
       defaultPoints: 5,
       preview: (
         <div className="space-y-3 text-black">
-          <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white p-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={situation.image}
-              alt={situation.imageDescription || "Situation orale"}
-              className="mx-auto max-h-64 w-auto object-contain"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={situation.image}
+            alt={situation.imageDescription || "Situation orale"}
+            className="mx-auto max-h-64 w-auto object-contain"
+          />
           <p className="text-sm text-zinc-700">Décrivez cette image.</p>
-          {printBlankLines(4)}
+          {printBlankLines(15)}
         </div>
       ),
       correctionPreview: (
         <div className="space-y-3 text-black">
-          <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white p-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={situation.image}
-              alt={situation.imageDescription || "Situation orale"}
-              className="mx-auto max-h-64 w-auto object-contain"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={situation.image}
+            alt={situation.imageDescription || "Situation orale"}
+            className="mx-auto max-h-64 w-auto object-contain"
+          />
           <div className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 text-sm text-emerald-900">
             <p className="mb-2 text-xs font-bold uppercase tracking-wide text-[var(--color-accent-quiz)]">
               Structure
