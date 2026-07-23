@@ -905,7 +905,12 @@ function ChoiceQuestionView({
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />
             ) : (
-              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + displayIndex)}.</span>{choice.label}</span>
+              <span className="flex w-full items-start gap-1.5 text-left">
+                <span className="shrink-0 font-mono leading-snug">
+                  {String.fromCharCode(97 + displayIndex)}.
+                </span>
+                <span className="min-w-0 flex-1 leading-snug">{choice.label}</span>
+              </span>
             )}
           </button>
         );
