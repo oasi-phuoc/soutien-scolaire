@@ -1147,7 +1147,7 @@ function ImageMatchQuestionView({
   }
 
   return (
-    <div className={`grid grid-cols-2 ${forPrint ? "gap-5" : "gap-3 sm:gap-4"}`}>
+    <div className={`grid grid-cols-2 ${forPrint ? "gap-x-5 gap-y-10" : "gap-3 sm:gap-4"}`}>
       {task.cards.map((card, index) => {
         const chosen = selected[index] ?? 0;
         const isCorrect = correction && card.correct !== null && chosen === card.correct;
@@ -1234,7 +1234,7 @@ function ConversationImageGridQuestionView({
   }
 
   return (
-    <div className={`grid grid-cols-2 ${forPrint ? "gap-5" : "gap-4"}`}>
+    <div className={`grid grid-cols-2 ${forPrint ? "gap-x-5 gap-y-10" : "gap-4"}`}>
       {task.cards.map((card, index) => {
         const current = selected[index] ?? 0;
         const expected = task.correctByCard[index] ?? 0;
