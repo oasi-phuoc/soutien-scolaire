@@ -1018,19 +1018,41 @@ export function buildPlacementPePrintExercises(
       id: `pe-${step.id}-${n}`,
       label: `PE ${n}. ${step.title}`,
       defaultPoints: step.points,
+      leadPreview: (
+        <PeWritingPrintExercise
+          prompt={prompt}
+          kind={kind}
+          maxPoints={step.points}
+          part="prompt"
+        />
+      ),
+      leadFollowTitle: "Production",
       preview: (
         <PeWritingPrintExercise
           prompt={prompt}
           kind={kind}
           maxPoints={step.points}
+          part="lines"
+          showRubric={false}
         />
       ),
+      correctionLeadPreview: (
+        <PeWritingPrintExercise
+          prompt={prompt}
+          kind={kind}
+          maxPoints={step.points}
+          part="prompt"
+        />
+      ),
+      correctionLeadTitle: "Énoncé",
       correctionPreview: (
         <PeWritingPrintExercise
           prompt={prompt}
           sampleText={sample || "—"}
           kind={kind}
           maxPoints={step.points}
+          part="lines"
+          showRubric
         />
       ),
     });
