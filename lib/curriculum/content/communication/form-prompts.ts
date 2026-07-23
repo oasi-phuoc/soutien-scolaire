@@ -1,6 +1,7 @@
 export type FormField = {
   id: string;
   label: string;
+  /** `date` est rendu comme textbox (saisie libre, ex. 14.03.1994). */
   type?: "text" | "date" | "email" | "tel";
   options?: string[];
   wide?: boolean;
@@ -17,7 +18,7 @@ export type FormTemplate = {
 const IDENTITY: FormField[] = [
   { id: "nom", label: "Nom" },
   { id: "prenom", label: "Prénom" },
-  { id: "naissance", label: "Date de naissance", type: "date" },
+  { id: "naissance", label: "Date de naissance" },
   { id: "nationalite", label: "Nationalité" },
 ];
 
@@ -89,7 +90,7 @@ export const SWISS_FORM_TEMPLATES: FormTemplate[] = [
     fields: [
       ...IDENTITY, ...CONTACT,
       { id: "document", label: "Numéro de passeport ou carte d'identité", wide: true },
-      { id: "arrivee", label: "Date d'arrivée", type: "date" },
+      { id: "arrivee", label: "Date d'arrivée" },
       { id: "nuits", label: "Nombre de nuits" },
       { id: "personnes", label: "Nombre de personnes" },
       { id: "langues", label: "Langue(s) parlée(s)", wide: true },
@@ -105,7 +106,7 @@ export const SWISS_FORM_TEMPLATES: FormTemplate[] = [
       { id: "domicile", label: "Gare de départ habituelle" },
       { id: "destination", label: "Destination habituelle" },
       { id: "abonnement", label: "Abonnement souhaité", options: ["Demi-tarif", "AG 2e classe", "AG 1re classe", "Abonnement de parcours"] },
-      { id: "debut", label: "Date de début", type: "date" },
+      { id: "debut", label: "Date de début" },
     ],
   },
   {
@@ -132,7 +133,7 @@ export const SWISS_FORM_TEMPLATES: FormTemplate[] = [
       { id: "employeur", label: "Employeur", wide: true },
       { id: "revenu", label: "Revenu mensuel brut" },
       { id: "personnes", label: "Nombre de personnes dans le logement" },
-      { id: "entree", label: "Date d'entrée souhaitée", type: "date" },
+      { id: "entree", label: "Date d'entrée souhaitée" },
       { id: "animaux", label: "Avez-vous un animal ?", options: ["Oui", "Non"] },
     ],
   },
@@ -147,7 +148,7 @@ export const SWISS_FORM_TEMPLATES: FormTemplate[] = [
       { id: "surface", label: "Surface du logement en m²" },
       { id: "pieces", label: "Nombre de pièces" },
       { id: "habitants", label: "Nombre de personnes au domicile" },
-      { id: "debut", label: "Début de l'assurance", type: "date" },
+      { id: "debut", label: "Début de l'assurance" },
     ],
   },
   {
@@ -158,8 +159,8 @@ export const SWISS_FORM_TEMPLATES: FormTemplate[] = [
     fields: [
       ...IDENTITY, ...CONTACT,
       { id: "permis", label: "Numéro du permis de conduire", wide: true },
-      { id: "depart", label: "Date de départ", type: "date" },
-      { id: "retour", label: "Date de retour", type: "date" },
+      { id: "depart", label: "Date de départ" },
+      { id: "retour", label: "Date de retour" },
       { id: "vehicule", label: "Catégorie de véhicule", options: ["Citadine", "Break", "Familiale", "Utilitaire"] },
       { id: "conducteur", label: "Deuxième conducteur", options: ["Oui", "Non"] },
     ],

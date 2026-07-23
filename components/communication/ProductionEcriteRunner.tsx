@@ -345,8 +345,10 @@ function FormFieldControl({
   onChange: (value: string) => void;
 }) {
   const className = "min-h-11 w-full rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-comm)] disabled:opacity-70";
+  // Dates en textbox (pas de sélecteur natif).
+  const inputType = !field.type || field.type === "date" ? "text" : field.type;
   return (
-    <label className={field.wide ? "sm:col-span-2" : ""}>
+    <label className={field.wide ? "col-span-2" : ""}>
       <span className="mb-1 block text-xs font-semibold text-[var(--color-text-secondary)]">{field.label}</span>
       {field.options?.length ? (
         <AppSelect
@@ -359,7 +361,7 @@ function FormFieldControl({
           className="w-full"
         />
       ) : (
-        <input type={field.type ?? "text"} value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={className} />
+        <input type={inputType} value={value} disabled={disabled} onChange={(event) => onChange(event.target.value)} className={className} />
       )}
     </label>
   );
@@ -389,7 +391,7 @@ function FormExercise({
       <section className="border border-slate-200 bg-white px-4 py-5 shadow-none sm:px-6">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">{template.organization}</p>
         <h2 className="mt-1 text-center text-xl font-bold uppercase text-[var(--color-text-primary)]">{template.title}</h2>
-        <div className="mt-5 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
+        <div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4">
           {template.fields.map((field) => (
             <FormFieldControl
               key={field.id}
