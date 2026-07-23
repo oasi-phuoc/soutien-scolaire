@@ -89,7 +89,7 @@ export function MainNav() {
       if (res.ok) setPlacementVisible(res.visible);
     }).catch(() => {});
     getPedagogicNavVisibilityAction().then((res) => {
-      if (res.ok) setImpressionVisible(res.isAdmin);
+      if (res.ok) setImpressionVisible(res.canPrint);
     }).catch(() => {});
   }, [pathname]);
 

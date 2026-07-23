@@ -152,7 +152,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const [{ data, error }, { data: authData }] = await Promise.all([
     svc
       .from("profiles")
-      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history, placement_combined_profile")
+      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, can_print, placement_test_history, placement_combined_profile")
       .eq("id", userId)
       .single(),
     svc.auth.admin.getUserById(userId),
@@ -176,6 +176,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
     ok: true,
     user: {
       ...data,
+      can_print: Boolean(data.can_print),
       email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
       placement_combined: combined?.total !== undefined ? {
@@ -187,6 +188,37 @@ export async function getUserForAdminAction(userId: string): Promise<{
       } : null,
     } as import("@/components/admin/AdminTable").UserRow,
   };
+}
+
+export async function setUserPrintAccessAction(
+  userId: string,
+  enabled: boolean,
+): Promise<{ ok: boolean; reason?: string }> {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Supabase non configuré" };
+
+  const { error } = await supabase.rpc("set_user_print_access", {
+    p_user_id: userId,
+    p_enabled: enabled,
+  });
+  if (error) {
+    // Fallback service role si la migration RPC n'est pas encore appliquée.
+    const svc = createServiceClient();
+    if (!svc) return { ok: false, reason: error.message };
+    const { error: svcErr } = await svc
+      .from("profiles")
+      .update({ can_print: enabled })
+      .eq("id", userId);
+    if (svcErr) return { ok: false, reason: svcErr.message };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath(`/admin/eleves/${userId}`);
+  revalidatePath("/");
+  revalidatePath("/admin/impression");
+  return { ok: true };
 }
 
 export async function updateUserProfileAction(
@@ -247,6 +279,8 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
   isAdmin: boolean;
   hasSuiviAccess: boolean;
   canEditContent: boolean;
+  /** Accès hub Impression : admin ou flag can_print. */
+  canPrint: boolean;
 }> {
   const supabase = await createSupabaseActionClient();
   const openLocally =
@@ -262,6 +296,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
       isAdmin: false,
       hasSuiviAccess: false,
       canEditContent: true,
+      canPrint: false,
     };
   }
 
@@ -275,6 +310,7 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
       isAdmin: false,
       hasSuiviAccess: false,
       canEditContent: openLocally,
+      canPrint: false,
     };
   }
 
@@ -287,9 +323,24 @@ export async function getPedagogicNavVisibilityAction(): Promise<{
     hasSuiviAccess = Boolean(access);
   }
 
+  let canPrint = isAdmin;
+  if (!canPrint) {
+    const { data: printAccess, error } = await supabase.rpc("can_access_print");
+    if (!error) {
+      canPrint = Boolean(printAccess);
+    } else {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("can_print")
+        .eq("id", user.id)
+        .maybeSingle();
+      canPrint = Boolean(profile?.can_print);
+    }
+  }
+
   // Admin / Édition : strictement réservés au rôle admin (jamais via openLocally si connecté).
   const canEditContent = isAdmin;
   const showSection = isAdmin || hasSuiviAccess;
 
-  return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent };
+  return { ok: true, showSection, isAdmin, hasSuiviAccess, canEditContent, canPrint };
 }

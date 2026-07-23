@@ -6,22 +6,38 @@ import { ExpressionMailboxCard } from "@/components/expression/ExpressionMailbox
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
-async function getHomeRole(): Promise<"admin" | "prof" | "other"> {
+async function getHomeAccess(): Promise<{
+  role: "admin" | "prof" | "other";
+  canPrint: boolean;
+}> {
   const supabase = await createSupabaseServerClient();
-  if (!supabase) return "other";
+  if (!supabase) return { role: "other", canPrint: false };
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return "other";
+  if (!user) return { role: "other", canPrint: false };
+
   const { data: role } = await supabase.rpc("get_my_role");
-  if (role === "admin") return "admin";
-  if (role === "prof") return "prof";
-  return "other";
+  const isAdmin = role === "admin";
+  const homeRole: "admin" | "prof" | "other" =
+    role === "admin" ? "admin" : role === "prof" ? "prof" : "other";
+
+  if (isAdmin) return { role: homeRole, canPrint: true };
+
+  const { data: printAccess, error } = await supabase.rpc("can_access_print");
+  if (!error) return { role: homeRole, canPrint: Boolean(printAccess) };
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("can_print")
+    .eq("id", user.id)
+    .maybeSingle();
+  return { role: homeRole, canPrint: Boolean(profile?.can_print) };
 }
 
 export default async function HomePage({ searchParams }: Props) {
   const q = (await searchParams) ?? {};
-  const role = await getHomeRole();
+  const { role, canPrint } = await getHomeAccess();
   const teacher = role === "admin" || role === "prof";
 
   return (
@@ -34,7 +50,7 @@ export default async function HomePage({ searchParams }: Props) {
 
       {!teacher ? <TasksCard /> : null}
       <ExpressionMailboxCard />
-      {role === "admin" ? <HomeImpressionCard /> : null}
+      {canPrint ? <HomeImpressionCard /> : null}
 
       <HomeTeacherSection />
     </main>

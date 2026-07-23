@@ -14,7 +14,24 @@ export default async function AdminImpressionPage() {
   if (!user) redirect("/connexion");
 
   const { data: myRole } = await supabase.rpc("get_my_role");
-  if (myRole !== "admin") redirect(myRole === "prof" ? "/suivi" : "/");
+  const isAdmin = myRole === "admin";
+
+  let canPrint = isAdmin;
+  if (!canPrint) {
+    const { data: printAccess, error } = await supabase.rpc("can_access_print");
+    if (!error) {
+      canPrint = Boolean(printAccess);
+    } else {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("can_print")
+        .eq("id", user.id)
+        .maybeSingle();
+      canPrint = Boolean(profile?.can_print);
+    }
+  }
+
+  if (!canPrint) redirect(myRole === "prof" ? "/suivi" : "/");
 
   return (
     <main className={`${APP_SHELL_FULL} min-w-0 flex-1 overflow-x-hidden py-10 pb-28`}>

@@ -26,7 +26,10 @@ export default async function AdminPage() {
   };
   const { data: placementEnabled } = await supabase.rpc("get_placement_module_enabled");
 
-  const rows: UserRow[] = (users ?? []).sort((a, b) => {
+  const rows: UserRow[] = (users ?? []).map((u) => ({
+    ...u,
+    can_print: Boolean((u as { can_print?: boolean }).can_print),
+  })).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
     return na.localeCompare(nb, "fr");

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-/** Raccourci Accueil → hub d'impression (admins uniquement). */
+/** Raccourci Accueil → hub d'impression (admins ou comptes autorisés). */
 export function HomeImpressionCard() {
   return (
     <Link

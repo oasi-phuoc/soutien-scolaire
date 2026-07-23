@@ -26,6 +26,8 @@ export type UserRow = {
   progress_updated_at: string | null;
   is_admin: boolean;
   role: "eleve" | "prof" | "admin";
+  /** Accès hub Impression (élèves / profs). Les admins y ont toujours accès. */
+  can_print: boolean;
   placement_test_best: { points: number; maxPoints: number; percent: number } | null;
   placement_combined: { total: number; zone: string; mathCounted: number; frenchCounted: number; pendingFrench?: number } | null;
 };
@@ -406,6 +408,7 @@ export function AdminTable({
               <th className="w-10 bg-[var(--color-theme)] px-2 py-2 sm:px-3 sm:py-3" aria-label="Détail" />
               <th className="bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Prénom, Nom</th>
               <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Statut</th>
+              <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3" title="Accès Impression">Imp.</th>
               <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell">Classe</th>
               <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Dernier accès</th>
               <th className="hidden whitespace-nowrap bg-[var(--color-theme)] px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-4 sm:py-3">Maths</th>
@@ -416,13 +419,14 @@ export function AdminTable({
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {sorted.length === 0 ? (
-              <tr><td colSpan={9} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
+              <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
             ) : sorted.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
               const french = frenchPct(row.progress_data);
               const lecture = lecturePct(row.progress_data);
               const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
+              const hasPrint = row.role === "admin" || row.can_print;
               return (
                 <tr key={row.id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <td className="px-2 py-2 sm:px-3 sm:py-3">
@@ -441,6 +445,23 @@ export function AdminTable({
                     }`}>
                       {ROLE_LABELS[row.role]}
                     </span>
+                  </td>
+                  <td className="hidden px-3 py-2.5 sm:table-cell sm:px-4 sm:py-3">
+                    {hasPrint ? (
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-[10px] font-bold text-teal-700 dark:bg-teal-900/30 dark:text-teal-300"
+                        title={row.role === "admin" ? "Admin — accès impression automatique" : "Accès impression activé"}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                          <path d="M6 9V2h12v7" />
+                          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                          <path d="M6 14h12v8H6z" />
+                        </svg>
+                        Oui
+                      </span>
+                    ) : (
+                      <span className="text-xs text-zinc-400">—</span>
+                    )}
                   </td>
                   <td className="hidden px-4 py-3 sm:table-cell">
                     {row.classe ? <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">{row.classe}</span> : <span className="text-zinc-400">—</span>}

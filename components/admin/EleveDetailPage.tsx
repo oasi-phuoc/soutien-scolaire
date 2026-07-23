@@ -8,6 +8,7 @@ import {
   deleteUserAction,
   updateUserProfileAction,
   changePasswordAction,
+  setUserPrintAccessAction,
 } from "@/app/actions/admin";
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { TeacherClassAssignment } from "@/components/suivi/TeacherClassAssignment";
@@ -265,12 +266,22 @@ export function EleveDetailPage({
   const canDelete = !isSuivi && currentUserRole === "admin" && !isSelf && user.role !== "admin";
   const canChangeRole = !isSuivi && currentUserRole === "admin" && !isSelf;
   const canEditAccount = !isSuivi && currentUserRole === "admin";
+  const canTogglePrint = !isSuivi && currentUserRole === "admin" && user.role !== "admin";
   const showTeacherAssignment = !isSuivi && currentUserRole === "admin" && user.role === "prof";
 
   function handleChangeRole(newRole: "eleve" | "prof" | "admin") {
     startTransition(async () => {
       const r = await changeRoleAction(user.id, newRole);
       if (r.ok) setUser(u => ({ ...u, role: newRole, is_admin: newRole === "admin" }));
+    });
+  }
+
+  function handleTogglePrint(next: boolean) {
+    startTransition(async () => {
+      const prev = user.can_print;
+      setUser(u => ({ ...u, can_print: next }));
+      const r = await setUserPrintAccessAction(user.id, next);
+      if (!r.ok) setUser(u => ({ ...u, can_print: prev }));
     });
   }
 
@@ -399,6 +410,42 @@ export function EleveDetailPage({
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {(canTogglePrint || user.role === "admin") && canEditAccount && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Impression</h2>
+              {user.role === "admin" ? (
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  Les comptes admin ont toujours accès au hub Impression.
+                </p>
+              ) : (
+                <label className="flex cursor-pointer items-center justify-between gap-4 select-none">
+                  <span className="text-sm text-zinc-700 dark:text-zinc-300">
+                    Autoriser l&apos;accès à l&apos;impression
+                    <span className="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">
+                      Menu Impression + documents d&apos;exercice
+                    </span>
+                  </span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={user.can_print}
+                    aria-label="Accès impression"
+                    onClick={() => handleTogglePrint(!user.can_print)}
+                    className={`flex h-7 w-11 shrink-0 items-center rounded-full p-0.5 transition-colors ${
+                      user.can_print ? "bg-[var(--color-theme)]" : "bg-zinc-300 dark:bg-zinc-600"
+                    }`}
+                  >
+                    <span
+                      className={`block h-6 w-6 rounded-full bg-white shadow transition-transform ${
+                        user.can_print ? "translate-x-4" : "translate-x-0"
+                      }`}
+                    />
+                  </button>
+                </label>
+              )}
             </div>
           )}
         </div>

@@ -74,6 +74,7 @@ export function DesktopSidebar() {
     isAdmin: false,
     hasSuiviAccess: false,
     canEditContent: false,
+    canPrint: false,
   });
   const [suiviClasses, setSuiviClasses] = useState<{ label: string }[]>([]);
 
@@ -93,6 +94,7 @@ export function DesktopSidebar() {
           isAdmin: res.isAdmin,
           hasSuiviAccess: res.hasSuiviAccess,
           canEditContent: res.canEditContent,
+          canPrint: res.canPrint,
         });
       })
       .catch(() => {});
@@ -310,19 +312,22 @@ export function DesktopSidebar() {
           </>
         )}
 
+        {pedagogicNav.canPrint && (
+          <button
+            type="button"
+            onClick={() => go("/admin/impression")}
+            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+              pathname.startsWith("/admin/impression")
+                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
+            }`}
+          >
+            Impression
+          </button>
+        )}
+
         {pedagogicNav.isAdmin && (
           <>
-            <button
-              type="button"
-              onClick={() => go("/admin/impression")}
-              className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-                pathname.startsWith("/admin/impression")
-                  ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
-              }`}
-            >
-              Impression
-            </button>
             <div>
               <button
                 type="button"
