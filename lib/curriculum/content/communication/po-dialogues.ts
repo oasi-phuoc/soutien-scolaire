@@ -1,3 +1,5 @@
+import { pickIndex } from "@/lib/placement/progressive-pick";
+
 export type PoDialogueRole = "A" | "B";
 
 export type PoDialogueLine = {
@@ -1040,6 +1042,10 @@ export function getPoDialogue(situationId: string): PoDialogueScript {
 
 export function pickStudentRole(): PoDialogueRole {
   return Math.random() < 0.5 ? "A" : "B";
+}
+
+export function pickStudentRoleSeeded(seed: string): PoDialogueRole {
+  return pickIndex(2, seed) === 0 ? "A" : "B";
 }
 
 export function roleAssignmentText(

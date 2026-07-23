@@ -1,3 +1,5 @@
+import { pickFromPool } from "@/lib/placement/progressive-pick";
+
 export type OralSituation = {
   id: string;
   level: "base" | "moyen";
@@ -514,4 +516,11 @@ export function randomOralSituation(level: "base" | "moyen" | "avance"): OralSit
     level === "base" ? s.level === "base" : s.level === "moyen"
   );
   return pool[Math.floor(Math.random() * pool.length)]!;
+}
+
+export function seededOralSituation(level: "base" | "moyen" | "avance", seed: string): OralSituation {
+  const pool = ORAL_SITUATIONS.filter((s) =>
+    level === "base" ? s.level === "base" : s.level === "moyen"
+  );
+  return pickFromPool(pool, seed);
 }

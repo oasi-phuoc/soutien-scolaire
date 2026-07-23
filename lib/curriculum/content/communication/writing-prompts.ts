@@ -1,3 +1,5 @@
+import { pickIndex } from "@/lib/placement/progressive-pick";
+
 export type WritingLevel = "base" | "moyen" | "avance";
 export type WritingKind = "short" | "long";
 
@@ -1288,6 +1290,23 @@ export function randomWritingPrompt(level: WritingLevel, kind: WritingKind = "lo
   if (level === "avance" && kind === "short") return getWritingPrompt(level, Math.floor(Math.random() * PE3_SHORT_PROMPTS.length), kind);
   if (level === "avance" && kind === "long") return getWritingPrompt(level, Math.floor(Math.random() * PE3_LONG_PROMPTS.length), kind);
   return getWritingPrompt(level, Math.floor(Math.random() * SCENARIOS.length), kind);
+}
+
+/** Tirage déterministe (impression : même feuille / corrigé, seed différent à chaque ouverture). */
+export function seededWritingPrompt(
+  level: WritingLevel,
+  kind: WritingKind,
+  seed: string,
+): WritingPrompt {
+  const size =
+    level === "base" && kind === "short" ? PE1_SHORT_PROMPTS.length
+    : level === "base" && kind === "long" ? PE1_LONG_PROMPTS.length
+    : level === "moyen" && kind === "short" ? PE2_REPLY_PROMPTS.length
+    : level === "moyen" && kind === "long" ? PE2_LONG_PROMPTS.length
+    : level === "avance" && kind === "short" ? PE3_SHORT_PROMPTS.length
+    : level === "avance" && kind === "long" ? PE3_LONG_PROMPTS.length
+    : SCENARIOS.length;
+  return getWritingPrompt(level, pickIndex(size, seed), kind);
 }
 
 export const WRITING_PROMPT_COUNT = SCENARIOS.length;

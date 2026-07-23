@@ -80,6 +80,7 @@ export function ImpressionHubClient() {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [frenchLevel, setFrenchLevel] = useState<PlacementLevel>("base");
+  const [printSeed, setPrintSeed] = useState(() => Date.now());
 
   const domainEntries = useMemo(
     () => catalog.filter((e) => e.domain === domain),
@@ -128,8 +129,8 @@ export function ImpressionHubClient() {
   }, [filtered]);
 
   const selectedBundle = useMemo(
-    () => (selectedId ? buildPrintBundle(selectedId, { frenchLevel }) : null),
-    [selectedId, frenchLevel],
+    () => (selectedId ? buildPrintBundle(selectedId, { frenchLevel, seed: printSeed }) : null),
+    [selectedId, frenchLevel, printSeed],
   );
 
   function selectDomain(next: PrintDomain) {
@@ -154,8 +155,13 @@ export function ImpressionHubClient() {
     });
   }
 
+  function freshPrintSeed() {
+    return Date.now() ^ Math.floor(Math.random() * 1_000_000_000);
+  }
+
   function selectLesson(entry: PrintCatalogEntry) {
     setFrenchLevel("base");
+    setPrintSeed(freshPrintSeed());
     setSelectedId(entry.id);
   }
 
@@ -279,7 +285,7 @@ export function ImpressionHubClient() {
 
       {selectedId && selectedBundle && (
         <PrintConfigSheet
-          key={`${selectedId}-${frenchLevel}`}
+          key={`${selectedId}-${frenchLevel}-${printSeed}`}
           onClose={() => setSelectedId(null)}
           onPrint={() => setSelectedId(null)}
           lessonTitle={selectedBundle.lessonTitle}
@@ -292,7 +298,12 @@ export function ImpressionHubClient() {
           frenchLevelSelectable={selectedBundle.frenchLevelSelectable}
           frenchLevel={frenchLevel}
           onFrenchLevelChange={
-            selectedBundle.frenchLevelSelectable ? setFrenchLevel : undefined
+            selectedBundle.frenchLevelSelectable
+              ? (level) => {
+                  setFrenchLevel(level);
+                  setPrintSeed(freshPrintSeed());
+                }
+              : undefined
           }
         />
       )}

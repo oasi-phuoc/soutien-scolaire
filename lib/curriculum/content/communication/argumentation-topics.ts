@@ -1,4 +1,5 @@
 import type { OralLevel } from "./speaking-prompts";
+import { pickFromPool } from "@/lib/placement/progressive-pick";
 
 export type ArgumentationTopic = {
   theme: string;
@@ -92,4 +93,9 @@ const ARGUMENTATION_TOPICS: Record<OralLevel, ArgumentationTopic[]> = {
 export function randomArgumentationTopic(level: OralLevel): ArgumentationTopic {
   const pool = ARGUMENTATION_TOPICS[level] ?? ARGUMENTATION_TOPICS.base;
   return pool[Math.floor(Math.random() * pool.length)]!;
+}
+
+export function seededArgumentationTopic(level: OralLevel, seed: string): ArgumentationTopic {
+  const pool = ARGUMENTATION_TOPICS[level] ?? ARGUMENTATION_TOPICS.base;
+  return pickFromPool(pool, seed);
 }

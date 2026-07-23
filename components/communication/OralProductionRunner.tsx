@@ -10,9 +10,9 @@ import {
 } from "@/app/actions/expression";
 import { submitOralAction, type OralDialogueLine } from "@/app/actions/oral";
 import { buildPoSubmissionExercises } from "@/lib/curriculum/content/communication/po-submission";
-import { randomOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
-import { randomOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
-import { randomArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
+import { randomOralPrompt, seededOralPrompt, type OralLevel, type OralPrompt } from "@/lib/curriculum/content/communication/speaking-prompts";
+import { randomOralSituation, seededOralSituation } from "@/lib/curriculum/content/communication/oral-situations";
+import { randomArgumentationTopic, seededArgumentationTopic } from "@/lib/curriculum/content/communication/argumentation-topics";
 import {
   getArgumentationResponse,
   getImageDescriptionModel,
@@ -24,11 +24,13 @@ import {
 import {
   getPoDialogue,
   pickStudentRole,
+  pickStudentRoleSeeded,
   roleAssignmentText,
   studentLineIndices,
   type PoDialogueLine,
   type PoDialogueScript,
 } from "@/lib/curriculum/content/communication/po-dialogues";
+import { pickFromPool } from "@/lib/placement/progressive-pick";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { cancelSpeech, speak } from "@/lib/utils/speech";
 import { HintLightbulbButton, TtsPlayButton } from "@/components/communication/TtsSequencePlayer";
@@ -1913,14 +1915,16 @@ function buildPoDialoguePrintParts(
 /** Aperçu imprimable PO — un item = une tâche (1–5), barème 3+4+5+6+7 = 25. */
 export function buildPlacementPoPrintExercises(
   level: OralLevel = "avance",
+  seed = Date.now(),
 ): PrintExercise[] {
-  const prompt = randomOralPrompt(level);
-  const situation = randomOralSituation(level);
-  const argumentationTopic = randomArgumentationTopic(level);
-  const group = DIRECTED_INTERVIEW_GROUPS[Math.floor(Math.random() * DIRECTED_INTERVIEW_GROUPS.length)]!;
+  const seedKey = String(seed);
+  const prompt = seededOralPrompt(level, `${seedKey}-po-themes`);
+  const situation = seededOralSituation(level, `${seedKey}-po-situation`);
+  const argumentationTopic = seededArgumentationTopic(level, `${seedKey}-po-arg`);
+  const group = pickFromPool(DIRECTED_INTERVIEW_GROUPS, `${seedKey}-po-interview`);
   const interviewQuestions = [...DIRECTED_INTERVIEW_BASE, ...group];
   const script = getPoDialogue(situation.id);
-  const studentRole = pickStudentRole();
+  const studentRole = pickStudentRoleSeeded(`${seedKey}-po-role`);
   const roleText = roleAssignmentText(script, studentRole);
   const studentTurns = studentLineIndices(script, studentRole);
   const imageModel = getImageDescriptionModel(situation.id);

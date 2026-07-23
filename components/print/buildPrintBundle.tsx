@@ -76,7 +76,14 @@ export type PrintBundle = {
 
 export type BuildPrintBundleOptions = {
   frenchLevel?: PlacementLevel;
+  /** Seed de tirage (refresh à chaque ouverture d'impression). */
+  seed?: number;
 };
+
+function resolvePrintSeed(seed?: number): number {
+  if (typeof seed === "number" && Number.isFinite(seed)) return Math.floor(seed);
+  return Date.now() ^ Math.floor(Math.random() * 1_000_000);
+}
 
 const noop = () => {};
 
@@ -286,22 +293,25 @@ function buildGrammarBundle(slug: string, kind: "grammar" | "conj"): PrintBundle
   };
 }
 
-function mathExercisePrintItem(ex: (typeof PLACEMENT_MATH_EXERCISES)[number]): PrintExercise {
+function mathExercisePrintItem(
+  ex: (typeof PLACEMENT_MATH_EXERCISES)[number],
+  sessionSeed: number,
+): PrintExercise {
   const Comp = ex.component;
   return {
     id: String(ex.id),
     label: `${ex.id}. ${ex.label}`,
     defaultPoints: ex.maxPoints,
-    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} />,
+    preview: <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} />,
     correctionPreview: (
-      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} correction />
+      <PlacementMathPrintPreview Comp={Comp} exerciseId={ex.id} sessionSeed={sessionSeed} correction />
     ),
   };
 }
 
-function buildPlacementMathPartBundle(levelId: string): PrintBundle | null {
+function buildPlacementMathPartBundle(levelId: string, seed: number): PrintBundle | null {
   if (levelId === "complet") {
-    const exercises = PLACEMENT_MATH_EXERCISES.map(mathExercisePrintItem);
+    const exercises = PLACEMENT_MATH_EXERCISES.map((ex) => mathExercisePrintItem(ex, seed));
     return {
       lessonTitle: "Test de placement — Mathématiques",
       course: "Mathématiques",
@@ -332,7 +342,7 @@ function buildPlacementMathPartBundle(levelId: string): PrintBundle | null {
         maxPoints={maxPoints}
       />
     ),
-    exercises: levelExercises.map(mathExercisePrintItem),
+    exercises: levelExercises.map((ex) => mathExercisePrintItem(ex, seed)),
   };
 }
 
@@ -347,32 +357,32 @@ function frenchSkillPrintExercises(
     case "co":
       return buildPlacementCoPrintExercises(seed, level);
     case "pe":
-      return buildPlacementPePrintExercises(level);
+      return buildPlacementPePrintExercises(level, seed);
     case "po":
-      return buildPlacementPoPrintExercises(level ?? "avance");
+      return buildPlacementPoPrintExercises(level ?? "avance", seed);
   }
 }
 
 function buildPlacementFrenchPartBundle(
   partId: string,
   frenchLevel: PlacementLevel = "base",
+  seed = Date.now(),
 ): PrintBundle | null {
   if (partId === "complet") {
-    const seed = 1;
     return {
       lessonTitle: "Test de placement — Français",
       course: "Français",
       accentColor: "var(--color-accent-quiz)",
       defaultEvalMode: true,
       announcementPreview: <FrenchPlacementCompleteAnnounce />,
-      exercises: PLACEMENT_FRENCH_PRINT_PARTS.flatMap((part) =>
-        frenchSkillPrintExercises(part.id, seed),
+      exercises: PLACEMENT_FRENCH_PRINT_PARTS.flatMap((part, i) =>
+        frenchSkillPrintExercises(part.id, seed + i * 10_007),
       ),
     };
   }
   const part = PLACEMENT_FRENCH_PRINT_PARTS.find((p) => p.id === partId);
   if (!part) return null;
-  const exercises = frenchSkillPrintExercises(part.id, 1, frenchLevel);
+  const exercises = frenchSkillPrintExercises(part.id, seed, frenchLevel);
   const maxPoints = exercises.reduce((sum, ex) => sum + (ex.defaultPoints ?? 0), 0);
   return {
     lessonTitle: `Test de placement — ${part.title}`,
@@ -487,13 +497,15 @@ export function buildPrintBundle(
   catalogId: string,
   options?: BuildPrintBundleOptions,
 ): PrintBundle | null {
+  const seed = resolvePrintSeed(options?.seed);
   if (catalogId.startsWith("placement:math:")) {
-    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length));
+    return buildPlacementMathPartBundle(catalogId.slice("placement:math:".length), seed);
   }
   if (catalogId.startsWith("placement:francais:")) {
     return buildPlacementFrenchPartBundle(
       catalogId.slice("placement:francais:".length),
       options?.frenchLevel ?? "base",
+      seed,
     );
   }
 

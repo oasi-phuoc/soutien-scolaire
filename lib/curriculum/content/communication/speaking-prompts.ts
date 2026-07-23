@@ -1,3 +1,5 @@
+import { pickFromPool } from "@/lib/placement/progressive-pick";
+
 export type OralLevel = "base" | "moyen" | "avance";
 
 export type SpeakingTheme = {
@@ -239,6 +241,10 @@ const ALL_PROMPTS: Record<OralLevel, OralPrompt[]> = {
 export function randomOralPrompt(level: OralLevel): OralPrompt {
   const list = ALL_PROMPTS[level];
   return list[Math.floor(Math.random() * list.length)]!;
+}
+
+export function seededOralPrompt(level: OralLevel, seed: string): OralPrompt {
+  return pickFromPool(ALL_PROMPTS[level], seed);
 }
 
 // 3 suggested responses per dialogue prompt, indexed by prompt id then prompt index

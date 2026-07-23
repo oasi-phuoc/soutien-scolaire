@@ -1,3 +1,5 @@
+import { pickFromPool } from "@/lib/placement/progressive-pick";
+
 export type FormField = {
   id: string;
   label: string;
@@ -201,4 +203,9 @@ export function randomFormTemplates(count = 5): FormTemplate[] {
     [shuffled[index], shuffled[target]] = [shuffled[target]!, shuffled[index]!];
   }
   return shuffled.slice(0, Math.min(count, shuffled.length));
+}
+
+/** Tirage déterministe d'un formulaire (impression). */
+export function pickFormTemplate(seed: string): FormTemplate {
+  return pickFromPool(SWISS_FORM_TEMPLATES, seed);
 }

@@ -10,6 +10,7 @@ import {
 import { AppSelect } from "@/components/ui/AppSelect";
 import {
   randomFormTemplates,
+  pickFormTemplate,
   type FormField,
   type FormTemplate,
 } from "@/lib/curriculum/content/communication/form-prompts";
@@ -19,6 +20,7 @@ import {
 } from "@/lib/curriculum/content/communication/pe-sample-answers";
 import {
   randomWritingPrompt,
+  seededWritingPrompt,
   type WritingLevel,
   type WritingPrompt,
 } from "@/lib/curriculum/content/communication/writing-prompts";
@@ -123,8 +125,10 @@ function wordCount(text: string) {
   return text.trim() ? text.trim().split(/\s+/u).filter(Boolean).length : 0;
 }
 
-function buildPrompt(level: WritingLevel, kind: "short" | "long"): WritingPrompt {
-  const base = randomWritingPrompt(level, kind);
+function buildPrompt(level: WritingLevel, kind: "short" | "long", seed?: string): WritingPrompt {
+  const base = seed
+    ? seededWritingPrompt(level, kind, seed)
+    : randomWritingPrompt(level, kind);
   const minWords = minWordsFor(level, kind);
   return {
     ...base,
@@ -946,11 +950,13 @@ export function ProductionEcriteRunner({
 /** Aperçu imprimable PE — hybride (défaut) ou selon le niveau d'entraînement. */
 export function buildPlacementPePrintExercises(
   level?: "base" | "moyen" | "avance",
+  seed = Date.now(),
 ): PrintExercise[] {
   const isHybrid = !level;
   const writingLevel = level ?? "base";
+  const seedKey = String(seed);
   const formTemplate = (isHybrid || writingLevel === "base")
-    ? (randomFormTemplates(1)[0] ?? null)
+    ? pickFormTemplate(`${seedKey}-pe-form`)
     : null;
   const emptyForm: Record<string, string> = {};
   const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
@@ -1016,7 +1022,11 @@ export function buildPlacementPePrintExercises(
     const promptLevel = isHybrid
       ? (step.id === "short" ? "moyen" : "avance")
       : writingLevel;
-    const prompt = buildPrompt(promptLevel, step.id === "long" ? "long" : "short");
+    const prompt = buildPrompt(
+      promptLevel,
+      step.id === "long" ? "long" : "short",
+      `${seedKey}-pe-${step.id}`,
+    );
     const sample = getWritingSampleAnswer(prompt.id) ?? "";
     const kind = pePrintKind(writingLevel, step.id, isHybrid);
     items.push({

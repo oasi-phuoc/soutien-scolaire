@@ -30,12 +30,15 @@ export function PlacementMathPrintPreview({
   Comp,
   exerciseId,
   correction = false,
+  sessionSeed = 0,
 }: {
   Comp: React.ComponentType<PlacementExerciseProps>;
   exerciseId: number;
   correction?: boolean;
+  /** Seed de session (change à chaque ouverture d'impression). */
+  sessionSeed?: number;
 }) {
-  const seed = 1_000_000 + exerciseId;
+  const seed = sessionSeed * 1_000_003 + exerciseId * 97 + 1_000_000;
   return (
     <PlacementPrintSeedRoot seed={seed}>
       <Comp
