@@ -150,13 +150,14 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
   }
 
   for (const level of [
-    { id: "complet" as const, code: "P.Math", title: "Test de placement — Complet (100 pts)" },
+    { id: "complet" as const, code: "Complet", title: "Test de placement" },
     ...MATH_TRAINING_LEVEL_TOGGLE.map((level) => {
-      const pts = getMathExercisesForLevel(level.id).reduce((sum, ex) => sum + ex.maxPoints, 0);
+      const full = MATH_TRAINING_LEVEL_LABELS[level.id];
+      const title = full.includes(" — ") ? full.split(" — ").slice(1).join(" — ") : full;
       return {
         id: level.id,
-        code: `P.Math.${level.id}`,
-        title: `${MATH_TRAINING_LEVEL_LABELS[level.id]} (${pts} pts)`,
+        code: level.id,
+        title,
       };
     }),
   ]) {
@@ -178,10 +179,10 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     domain: "placement",
     group: "Français",
     moduleId: "placement-fr-complet",
-    moduleCode: "P.Fr",
-    moduleTitle: "Test de placement — Complet (100 pts)",
-    code: "P.Fr",
-    title: "Test de placement — Complet (100 pts)",
+    moduleCode: "Complet",
+    moduleTitle: "Test de placement",
+    code: "Complet",
+    title: "Test de placement",
   });
 
   for (const part of PLACEMENT_FRENCH_PRINT_PARTS) {
@@ -190,10 +191,10 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       domain: "placement",
       group: "Français",
       moduleId: `placement-fr-${part.id}`,
-      moduleCode: `P.Fr.${part.code}`,
-      moduleTitle: `${part.title} (25 pts)`,
-      code: `P.Fr.${part.code}`,
-      title: `${part.title} (25 pts)`,
+      moduleCode: part.code,
+      moduleTitle: part.title,
+      code: part.code,
+      title: part.title,
     });
   }
 
