@@ -723,10 +723,6 @@ function AudioSequencePlayer({ items }: { items: COAudioItem[] }) {
   );
 }
 
-function choiceLabel(task: Extract<QuestionTask, { kind: "choice" }>, index: number) {
-  return task.choices[index]?.label ?? "";
-}
-
 function ImagePlaceholder({ label, path, compact }: { label: string; path?: string; compact?: boolean }) {
   const src = ceCoImageSource(path, label);
   const [failed, setFailed] = useState(false);

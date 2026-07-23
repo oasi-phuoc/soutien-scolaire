@@ -1,4 +1,4 @@
-import { LECTURE_IMAGE_INDEX, WORD_IMAGE_INDEX } from "./content/communication/word-image-index";
+import { WORD_IMAGE_INDEX } from "./content/communication/word-image-index";
 import aliasesJson from "./content/communication/word-image-aliases.json";
 import { pickSceneVariantPath } from "./content/communication/scene-image-catalog";
 
@@ -262,35 +262,6 @@ function isLikelyIllustrableObject(label: string): boolean {
   return false;
 }
 
-function isVocabImagePath(path: string): boolean {
-  return path.startsWith("/assets/words/vocab/");
-}
-
-function resolveLectureSlug(slug: string): string | null {
-  const direct = LECTURE_IMAGE_INDEX[slug];
-  if (direct) return direct;
-  const alias = lookupAlias(slug);
-  if (alias) {
-    if (/^https?:\/\//i.test(alias) || alias.startsWith("/")) return alias;
-    if (LECTURE_IMAGE_INDEX[alias]) return LECTURE_IMAGE_INDEX[alias];
-  }
-  return null;
-}
-
-function resolveVocabSlug(slug: string): string | null {
-  const direct = WORD_IMAGE_INDEX[slug];
-  if (direct && isVocabImagePath(direct)) return direct;
-  const alias = lookupAlias(slug);
-  if (alias) {
-    if (/^https?:\/\//i.test(alias) || (alias.startsWith("/") && isVocabImagePath(alias))) {
-      return alias;
-    }
-    const aliased = WORD_IMAGE_INDEX[alias];
-    if (aliased && isVocabImagePath(aliased)) return aliased;
-  }
-  return null;
-}
-
 /** CE/CO : scènes manga + images conversation (dossiers CO). */
 const SCENE_IMAGE_PREFIX = "/assets/expression/images/scene/";
 const CO_CONVERSATION_IMAGE_RE =
@@ -329,10 +300,6 @@ function isSceneImagePath(path: string): boolean {
 /** Images des grilles « conversation » CO (hors dossier scene, à conserver). */
 export function isCoConversationImagePath(path: string): boolean {
   return CO_CONVERSATION_IMAGE_RE.test(path);
-}
-
-function isAllowedCeCoImagePath(path: string): boolean {
-  return isSceneImagePath(path) || isCoConversationImagePath(path);
 }
 
 /** CE/CO : résolution d’index limitée à `expression/images/scene`. */
