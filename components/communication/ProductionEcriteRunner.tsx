@@ -147,11 +147,11 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   const isSms = /sms|message|whatsapp|week-end|anniversaire/i.test(prompt.title);
   if (isPostcard) {
     return (
-      <div className="mt-3 grid overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white text-sm sm:grid-cols-[1fr_150px]">
-        <div className="min-h-36 p-4 leading-relaxed text-[var(--color-text-primary)]">
+      <div className="mt-3 grid text-sm sm:grid-cols-[1fr_150px]">
+        <div className="min-h-36 py-1 leading-relaxed text-[var(--color-text-primary)]">
           <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
         </div>
-        <div className="border-t border-dashed border-[var(--color-border-default)] p-4 sm:border-l sm:border-t-0">
+        <div className="border-t border-dashed border-[var(--color-border-default)] py-1 sm:border-l sm:border-t-0 sm:pl-4">
           <p className="text-xs font-semibold uppercase text-[var(--color-text-secondary)]">Carte postale</p>
           {prompt.sourceMessage.from && <p className="mt-4 font-semibold">{prompt.sourceMessage.from}</p>}
         </div>
@@ -160,19 +160,19 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   }
   if (isSms) {
     return (
-      <div className="mt-3 rounded-2xl rounded-bl-sm border border-[var(--color-border-default)] bg-white px-4 py-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="mt-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
         {prompt.sourceMessage.from && <p className="mb-1 text-xs font-bold text-[var(--color-accent-fr)]">{prompt.sourceMessage.from}</p>}
         <p className="whitespace-pre-line">{prompt.sourceMessage.body}</p>
       </div>
     );
   }
   return (
-    <div className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/85 text-sm leading-relaxed text-[var(--color-text-primary)]">
-      <div className="space-y-1 bg-slate-50 px-4 py-3">
+    <div className="mt-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div className="space-y-1">
         {prompt.sourceMessage.from && <p><span className="font-semibold">De :</span> {prompt.sourceMessage.from}</p>}
         {prompt.sourceMessage.subject && <p><span className="font-semibold">Objet :</span> {prompt.sourceMessage.subject}</p>}
       </div>
-      <div className="whitespace-pre-line border-t border-[var(--color-border-default)] px-4 py-3">{prompt.sourceMessage.body}</div>
+      <div className="mt-2 whitespace-pre-line">{prompt.sourceMessage.body}</div>
     </div>
   );
 }
@@ -438,7 +438,7 @@ function WritingExercise({
   const count = wordCount(text);
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
+      <div>
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>

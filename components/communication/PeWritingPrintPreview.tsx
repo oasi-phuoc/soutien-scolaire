@@ -118,7 +118,7 @@ function SourceMessageCard({ prompt }: { prompt: WritingPrompt }) {
   if (!prompt.sourceMessage) return null;
   const { from, subject, body } = prompt.sourceMessage;
   return (
-    <div className="mt-3 rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-[var(--color-theme-light)]/15 p-3 text-sm">
+    <div className="mt-3 text-sm">
       {from ? <p className="text-[var(--color-text-secondary)]">De : <span className="font-semibold text-[var(--color-text-primary)]">{from}</span></p> : null}
       {subject ? <p className="text-[var(--color-text-secondary)]">Objet : <span className="font-semibold text-[var(--color-text-primary)]">{subject}</span></p> : null}
       <p className="mt-1 whitespace-pre-wrap leading-relaxed text-[var(--color-text-primary)]">{body}</p>
@@ -146,7 +146,7 @@ export function PeWritingPrintExercise({
 }) {
   return (
     <div className="space-y-5">
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4">
+      <div>
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
         <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
