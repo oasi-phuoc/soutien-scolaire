@@ -1153,39 +1153,76 @@ function OrientationGridPart({
   );
 }
 
-function EmailPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "email" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
+function EmailPart({
+  part,
+  answers,
+  setAnswer,
+  correction,
+  forPrint = false,
+  contentOnly = false,
+  questionsOnly = false,
+}: {
+  part: Extract<CEPart, { layout: "email" }>;
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string) => void;
+  correction?: boolean;
+  /** Impression : image compacte pour laisser de la place au message. */
+  forPrint?: boolean;
+  /** Impression : image + texte du message uniquement. */
+  contentOnly?: boolean;
+  /** Impression : questions uniquement (page suivante). */
+  questionsOnly?: boolean;
+}) {
   const [imageFailed, setImageFailed] = useState(false);
   const imageSrc = ceCoImageSource(part.image, part.meta.subject ?? part.meta.from);
-  const showImage = !!imageSrc && !imageFailed;
+  const showImage = !!imageSrc && !imageFailed && !questionsOnly;
+
+  if (questionsOnly) {
+    return (
+      <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+    );
+  }
 
   return (
-    <div className="space-y-5">
+    <div className={forPrint ? "space-y-3" : "space-y-5"}>
       {showImage && (
-        <div className="overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
-          <div className="relative w-full">
+        <div
+          className={
+            forPrint
+              ? "mx-auto max-w-[42%] overflow-hidden rounded-lg border border-slate-300 bg-white"
+              : "overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm"
+          }
+        >
+          <div className={`relative w-full ${forPrint ? "max-h-[9rem]" : ""}`}>
             <Image
               src={imageSrc}
               alt=""
-              width={900}
-              height={600}
-              className="h-auto w-full object-contain"
-              sizes="(max-width: 768px) 100vw, 640px"
+              width={forPrint ? 420 : 900}
+              height={forPrint ? 280 : 600}
+              className={
+                forPrint
+                  ? "mx-auto h-auto max-h-[9rem] w-full object-contain"
+                  : "h-auto w-full object-contain"
+              }
+              sizes={forPrint ? "220px" : "(max-width: 768px) 100vw, 640px"}
               onError={() => setImageFailed(true)}
               priority
             />
           </div>
         </div>
       )}
-      <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
+      <div className={`rounded-xl border border-slate-300 bg-white shadow-sm ${forPrint ? "p-3" : "p-4"}`}>
         {(part.meta.from || part.meta.subject) && (
-          <div className="border-b border-slate-300 pb-2 text-sm text-[var(--color-text-secondary)]">
+          <div className={`border-b border-slate-300 pb-2 text-[var(--color-text-secondary)] ${forPrint ? "text-xs" : "text-sm"}`}>
             {part.meta.from && <p><span className="font-semibold">De :</span> {part.meta.from}</p>}
             {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
           </div>
         )}
-        <div className={`mt-3 ${CE_BODY_TEXT_PRE}`}>{part.body}</div>
+        <div className={`mt-3 ${forPrint ? "text-sm leading-snug whitespace-pre-wrap" : CE_BODY_TEXT_PRE}`}>{part.body}</div>
       </div>
-      <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+      {!contentOnly && (
+        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+      )}
     </div>
   );
 }
@@ -1379,6 +1416,50 @@ export function buildPlacementCePrintExercises(
         ),
         correctionLeadTitle: "Documents",
         correctionPreview: gridCorrect,
+      };
+    }
+
+    if (part.layout === "email") {
+      const answers = buildCeCorrectAnswers(part);
+      const messageLead = (
+        <div className="space-y-3">
+          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+          <EmailPart
+            part={part}
+            answers={{}}
+            setAnswer={noopSetAnswer}
+            forPrint
+            contentOnly
+          />
+        </div>
+      );
+      return {
+        id: `ce-${index}-${part.id}`,
+        label: `CE ${index + 1}. ${part.title}`,
+        defaultPoints: part.points,
+        leadPreview: messageLead,
+        leadFollowTitle: "Questions",
+        preview: (
+          <EmailPart
+            part={part}
+            answers={{}}
+            setAnswer={noopSetAnswer}
+            forPrint
+            questionsOnly
+          />
+        ),
+        correctionLeadPreview: messageLead,
+        correctionLeadTitle: "Message",
+        correctionPreview: (
+          <EmailPart
+            part={part}
+            answers={answers}
+            setAnswer={noopSetAnswer}
+            correction
+            forPrint
+            questionsOnly
+          />
+        ),
       };
     }
 

@@ -17,6 +17,11 @@ export interface PrintExercise {
    */
   leadPreview?: ReactNode;
   /**
+   * Libellé du corps après `leadPreview` (défaut : « Grille »).
+   * Ex. « Questions » pour un message e-mail CE.
+   */
+  leadFollowTitle?: string;
+  /**
    * Bloc corrigé affiché avant les réponses (ex. QR + transcriptions CO, annonces CE).
    * Un saut de page est forcé avant `correctionPreview`.
    */
@@ -1153,7 +1158,9 @@ export function PrintConfigSheet({
                         node: (
                           <div className="print-exercise">
                             <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
-                              <span className="flex-1">Exercice {index + 1} — Grille</span>
+                              <span className="flex-1">
+                                Exercice {index + 1} — {exercise?.leadFollowTitle ?? "Grille"}
+                              </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
                                   {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
