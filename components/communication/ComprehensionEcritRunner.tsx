@@ -885,7 +885,19 @@ function IntroPage({ level, onStart, placement = false }: { level: CELevel; onSt
     </div>
   );
 }
-function ChoiceQuestionView({ task, value, onChange, correction }: { task: ChoiceTask; value: number | string | null; onChange: (value: number) => void; correction?: boolean }) {
+function ChoiceQuestionView({
+  task,
+  value,
+  onChange,
+  correction,
+  forPrint = false,
+}: {
+  task: ChoiceTask;
+  value: number | string | null;
+  onChange: (value: number) => void;
+  correction?: boolean;
+  forPrint?: boolean;
+}) {
   const orderKey = `${task.prompt}|${task.choices.map((c) => c.label).join("¦")}|${task.correct}|${task.image ? 1 : 0}`;
   const [order, setOrder] = useState<number[] | null>(null);
 
@@ -893,13 +905,16 @@ function ChoiceQuestionView({ task, value, onChange, correction }: { task: Choic
     setOrder(randomIndexOrder(task.choices.length));
   }, [orderKey, task.choices.length]);
 
+  // QCM image / impression : une ligne. QCM texte à l'écran : une option par ligne.
+  const gridCls = task.image || forPrint ? "grid grid-cols-3 gap-2" : "grid grid-cols-1 gap-2";
+
   // Tant que l’ordre client n’est pas prêt : ne pas afficher (évite de spoiler la position a).
   if (!order) {
-    return <div className="grid min-h-[3rem] grid-cols-3 gap-2" aria-hidden />;
+    return <div className={`min-h-[3rem] ${gridCls}`} aria-hidden />;
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className={gridCls}>
       {order.map((origIndex, displayIndex) => {
         const choice = task.choices[origIndex]!;
         const selected = value === origIndex;
@@ -1025,9 +1040,29 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
   );
 }
 
-function RenderQuestion({ task, value, onChange, correction }: { task: QuestionTask; value: number | string | null; onChange: (value: number | string) => void; correction?: boolean }) {
+function RenderQuestion({
+  task,
+  value,
+  onChange,
+  correction,
+  forPrint = false,
+}: {
+  task: QuestionTask;
+  value: number | string | null;
+  onChange: (value: number | string) => void;
+  correction?: boolean;
+  forPrint?: boolean;
+}) {
   if (task.kind === "fill") return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
-  return <ChoiceQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+  return (
+    <ChoiceQuestionView
+      task={task}
+      value={value}
+      onChange={(v) => onChange(v)}
+      correction={correction}
+      forPrint={forPrint}
+    />
+  );
 }
 
 function OrientationPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "orientation" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void; correction?: boolean }) {
@@ -1200,7 +1235,7 @@ function EmailPart({
     return (
       <div className="space-y-4">
         <ExerciseConsigne>Répondez aux questions sur le message.</ExerciseConsigne>
-        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />
       </div>
     );
   }
@@ -1244,7 +1279,7 @@ function EmailPart({
         <div className={`mt-3 ${forPrint ? "whitespace-pre-line text-sm leading-snug text-justify text-[var(--color-text-primary)]" : CE_BODY_TEXT_PRE}`}>{part.body}</div>
       </div>
       {!contentOnly && (
-        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />
       )}
     </div>
   );
@@ -1298,6 +1333,7 @@ function InstructionsPart({
                       value={answers[key] ?? null}
                       onChange={(value) => setAnswer(key, value)}
                       correction={correction}
+                      forPrint={forPrint}
                     />
                   </div>
                 );
@@ -1310,7 +1346,19 @@ function InstructionsPart({
   );
 }
 
-function ArticlePart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "article" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
+function ArticlePart({
+  part,
+  answers,
+  setAnswer,
+  correction,
+  forPrint = false,
+}: {
+  part: Extract<CEPart, { layout: "article" }>;
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string) => void;
+  correction?: boolean;
+  forPrint?: boolean;
+}) {
   return (
     <div className="space-y-5">
       <div className="rounded-xl border border-slate-300 bg-white p-4 shadow-sm">
@@ -1331,12 +1379,26 @@ function ArticlePart({ part, answers, setAnswer, correction }: { part: Extract<C
           ))}
         </div>
       </div>
-      <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+      <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />
     </div>
   );
 }
 
-function QuestionsList({ part, questions, answers, setAnswer, correction }: { part: Extract<CEPart, { questions: QuestionTask[] }>; questions: QuestionTask[]; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
+function QuestionsList({
+  part,
+  questions,
+  answers,
+  setAnswer,
+  correction,
+  forPrint = false,
+}: {
+  part: Extract<CEPart, { questions: QuestionTask[] }>;
+  questions: QuestionTask[];
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string) => void;
+  correction?: boolean;
+  forPrint?: boolean;
+}) {
   return (
     <div className="space-y-5">
       {questions.map((question, index) => {
@@ -1346,7 +1408,13 @@ function QuestionsList({ part, questions, answers, setAnswer, correction }: { pa
             <p className="text-sm font-semibold text-[var(--color-text-primary)]">
               <span style={{ color: ACCENT }}>{index + 1}.</span> {question.prompt}
             </p>
-            <RenderQuestion task={question} value={answers[key] ?? null} onChange={(value) => setAnswer(key, value)} correction={correction} />
+            <RenderQuestion
+              task={question}
+              value={answers[key] ?? null}
+              onChange={(value) => setAnswer(key, value)}
+              correction={correction}
+              forPrint={forPrint}
+            />
           </div>
         );
       })}
@@ -1354,11 +1422,23 @@ function QuestionsList({ part, questions, answers, setAnswer, correction }: { pa
   );
 }
 
-function PartView({ part, answers, setAnswer, correction }: { part: CEPart; answers: CEAnswers; setAnswer: (key: string, value: number | string | null) => void; correction?: boolean }) {
+function PartView({
+  part,
+  answers,
+  setAnswer,
+  correction,
+  forPrint = false,
+}: {
+  part: CEPart;
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string | null) => void;
+  correction?: boolean;
+  forPrint?: boolean;
+}) {
   if (part.layout === "orientation") return <OrientationPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
-  if (part.layout === "email") return <EmailPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
-  if (part.layout === "instructions") return <InstructionsPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
-  return <ArticlePart part={part} answers={answers} setAnswer={setAnswer} correction={correction} />;
+  if (part.layout === "email") return <EmailPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />;
+  if (part.layout === "instructions") return <InstructionsPart part={part} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />;
+  return <ArticlePart part={part} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />;
 }
 
 function ExercisePage({
@@ -1368,6 +1448,7 @@ function ExercisePage({
   setAnswer,
   correction = false,
   hidePoints = false,
+  forPrint = false,
 }: {
   part: CEPart;
   index: number;
@@ -1375,6 +1456,7 @@ function ExercisePage({
   setAnswer: (key: string, value: number | string | null) => void;
   correction?: boolean;
   hidePoints?: boolean;
+  forPrint?: boolean;
 }) {
   return (
     <div className="space-y-5">
@@ -1393,7 +1475,7 @@ function ExercisePage({
           <ExerciseConsigne>{ceExerciseConsigne(part)}</ExerciseConsigne>
         )}
       </div>
-      <PartView part={part} answers={answers} setAnswer={setAnswer} correction={correction} />
+      <PartView part={part} answers={answers} setAnswer={setAnswer} correction={correction} forPrint={forPrint} />
     </div>
   );
 }
@@ -1594,6 +1676,7 @@ export function buildPlacementCePrintExercises(
           answers={{}}
           setAnswer={noopSetAnswer}
           hidePoints
+          forPrint
         />
       ),
       correctionPreview: (
@@ -1604,6 +1687,7 @@ export function buildPlacementCePrintExercises(
           setAnswer={noopSetAnswer}
           correction
           hidePoints
+          forPrint
         />
       ),
     };

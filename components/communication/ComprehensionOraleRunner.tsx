@@ -866,11 +866,13 @@ function ChoiceQuestionView({
   value,
   onChange,
   correction,
+  forPrint = false,
 }: {
   task: Extract<QuestionTask, { kind: "choice" }>;
   value: number | string | number[] | boolean[] | null;
   onChange: (value: number) => void;
   correction?: boolean;
+  forPrint?: boolean;
 }) {
   const orderKey = `${task.prompt}|${task.choices.map((c) => c.label).join("¦")}|${task.correct}|${task.image ? 1 : 0}`;
   const [order, setOrder] = useState<number[] | null>(null);
@@ -879,12 +881,15 @@ function ChoiceQuestionView({
     setOrder(randomIndexOrder(task.choices.length));
   }, [orderKey, task.choices.length]);
 
+  // QCM image / impression : une ligne. QCM texte à l'écran : une option par ligne.
+  const gridCls = task.image || forPrint ? "grid grid-cols-3 gap-2" : "grid grid-cols-1 gap-2";
+
   if (!order) {
-    return <div className="grid min-h-[3rem] grid-cols-3 gap-2" aria-hidden />;
+    return <div className={`min-h-[3rem] ${gridCls}`} aria-hidden />;
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className={gridCls}>
       {order.map((origIndex, displayIndex) => {
         const choice = task.choices[origIndex]!;
         const selected = value === origIndex;
@@ -1346,7 +1351,15 @@ function RenderQuestion({
   if (task.kind === "fill") {
     return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
   }
-  return <ChoiceQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+  return (
+    <ChoiceQuestionView
+      task={task}
+      value={value}
+      onChange={(v) => onChange(v)}
+      correction={correction}
+      forPrint={forPrint}
+    />
+  );
 }
 
 function QuestionBlock({
