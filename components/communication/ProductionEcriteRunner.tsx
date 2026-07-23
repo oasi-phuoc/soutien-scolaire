@@ -619,7 +619,7 @@ export function ProductionEcriteRunner({
   const [shortText, setShortText] = useState("");
   const [longText, setLongText] = useState("");
   const [validatedSteps, setValidatedSteps] = useState<Set<StepId>>(new Set());
-  const [openResult, setOpenResult] = useState<StepId | null>(initialSteps[0]!);
+  const [openResult, setOpenResult] = useState<StepId | null>(null);
   const [teachers, setTeachers] = useState<TeacherOption[]>([]);
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");

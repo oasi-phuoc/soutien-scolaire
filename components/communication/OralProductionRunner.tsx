@@ -475,7 +475,7 @@ export function OralProductionRunner({
   const [teacherId, setTeacherId] = useState("");
   const [sendMessage, setSendMessage] = useState("");
   const [sent, setSent] = useState(false);
-  const [openReview, setOpenReview] = useState<number | null>(1);
+  const [openReview, setOpenReview] = useState<number | null>(null);
   const [isSending, startSending] = useTransition();
 
   useRegisterEvalGuard(mode === "placement" && phase !== "intro" && !(phase === "review" && sent));
