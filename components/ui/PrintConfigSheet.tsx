@@ -31,6 +31,16 @@ export interface PrintExercise {
   correctionLeadPreview?: ReactNode;
   /** Libellé du bloc lead corrigé (défaut : « Audios & transcriptions »). */
   correctionLeadTitle?: string;
+  /**
+   * Pages supplémentaires après `preview` (feuille élève).
+   * Chacune force un saut de page (ex. dialogue PO).
+   */
+  followPreviews?: { title?: string; preview: ReactNode }[];
+  /**
+   * Pages supplémentaires après `correctionPreview`.
+   * Chacune force un saut de page.
+   */
+  correctionFollowPreviews?: { title?: string; preview: ReactNode }[];
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
 }
@@ -1127,6 +1137,29 @@ export function PrintConfigSheet({
                           </div>
                         ),
                       });
+                      (exercise.correctionFollowPreviews ?? []).forEach((follow, fi) => {
+                        sectionNodes.push({
+                          key: `${item.key}-corr-follow-${fi}`,
+                          forceNewPage: true,
+                          node: (
+                            <div className="print-exercise">
+                              <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
+                                <span className="flex-1">
+                                  Exercice {index + 1} — {follow.title ?? "Suite"}
+                                </span>
+                                {evalMode && (
+                                  <span style={{ color: "black" }}>
+                                    {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                                {follow.preview}
+                              </div>
+                            </div>
+                          ),
+                        });
+                      });
                       return;
                     }
 
@@ -1134,6 +1167,9 @@ export function PrintConfigSheet({
                       ? (exercise?.correctionPreview ?? exercise?.preview)
                       : exercise?.preview;
                     const lead = !item.correction ? exercise?.leadPreview : undefined;
+                    const follows = item.correction
+                      ? (exercise?.correctionFollowPreviews ?? [])
+                      : (exercise?.followPreviews ?? []);
 
                     if (lead) {
                       sectionNodes.push({
@@ -1176,6 +1212,29 @@ export function PrintConfigSheet({
                           </div>
                         ),
                       });
+                      follows.forEach((follow, fi) => {
+                        sectionNodes.push({
+                          key: `${item.key}-follow-${fi}`,
+                          forceNewPage: true,
+                          node: (
+                            <div className="print-exercise">
+                              <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
+                                <span className="flex-1">
+                                  Exercice {index + 1} — {follow.title ?? "Suite"}
+                                </span>
+                                {evalMode && (
+                                  <span style={{ color: "black" }}>
+                                    {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                                {follow.preview}
+                              </div>
+                            </div>
+                          ),
+                        });
+                      });
                       return;
                     }
 
@@ -1196,6 +1255,30 @@ export function PrintConfigSheet({
                           </div>
                         </div>
                       ),
+                    });
+                    follows.forEach((follow, fi) => {
+                      sectionNodes.push({
+                        key: `${item.key}-follow-${fi}`,
+                        forceNewPage: true,
+                        node: (
+                          <div className="print-exercise">
+                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
+                              <span className="flex-1">
+                                Exercice {index + 1} — {follow.title ?? "Suite"}
+                                {item.correction ? "" : ""}
+                              </span>
+                              {evalMode && (
+                                <span style={{ color: "black" }}>
+                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                </span>
+                              )}
+                            </div>
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              {follow.preview}
+                            </div>
+                          </div>
+                        ),
+                      });
                     });
                   });
                   return sectionNodes;

@@ -26,6 +26,8 @@ import {
   pickStudentRole,
   roleAssignmentText,
   studentLineIndices,
+  type PoDialogueLine,
+  type PoDialogueScript,
 } from "@/lib/curriculum/content/communication/po-dialogues";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import { cancelSpeech, speak } from "@/lib/utils/speech";
@@ -1774,6 +1776,115 @@ function printBlankLines(lines = 3) {
   );
 }
 
+/** Découpe le dialogue : saut de page dès que chaque rôle a eu 3 répliques. */
+function chunkDialogueBySpeakerTurns(lines: PoDialogueLine[]): PoDialogueLine[][] {
+  const pages: PoDialogueLine[][] = [];
+  let current: PoDialogueLine[] = [];
+  let countA = 0;
+  let countB = 0;
+  for (const line of lines) {
+    current.push(line);
+    if (line.role === "A") countA += 1;
+    else countB += 1;
+    if (countA >= 3 && countB >= 3) {
+      pages.push(current);
+      current = [];
+      countA = 0;
+      countB = 0;
+    }
+  }
+  if (current.length > 0) pages.push(current);
+  return pages.length > 0 ? pages : [[]];
+}
+
+function PoPrintDialoguePage({
+  script,
+  lines,
+  studentTurns,
+  globalOffset,
+  roleText,
+  correction = false,
+}: {
+  script: PoDialogueScript;
+  lines: PoDialogueLine[];
+  studentTurns: number[];
+  /** Index de la 1ʳᵉ ligne dans le script complet (pour savoir si c’est le tour élève). */
+  globalOffset: number;
+  roleText?: string;
+  correction?: boolean;
+}) {
+  return (
+    <div className="space-y-3 text-black">
+      {roleText ? <p className="text-sm text-zinc-700">{roleText}</p> : null}
+      <div className="space-y-2.5">
+        {lines.map((line, localIdx) => {
+          const globalIdx = globalOffset + localIdx;
+          const isStudent = studentTurns.includes(globalIdx);
+          const isLeft = line.role === "A";
+          const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
+          return (
+            <div
+              key={globalIdx}
+              className={`flex w-full ${isLeft ? "justify-start" : "justify-end"}`}
+            >
+              <div
+                className={`w-[80%] rounded-xl border px-3 py-2 text-sm ${
+                  correction && isStudent
+                    ? "border-emerald-200 bg-emerald-50/60"
+                    : "border-zinc-300 bg-white"
+                } ${isLeft ? "rounded-tl-sm" : "rounded-tr-sm"}`}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-wide text-zinc-500">
+                  {speaker}
+                  {correction && isStudent ? " (votre rôle)" : ""}
+                </p>
+                {isStudent && !correction ? (
+                  <div className="mt-1">{printBlankLines(2)}</div>
+                ) : (
+                  <p className={`mt-1 leading-snug ${correction && isStudent ? "text-emerald-900" : ""}`}>
+                    {line.text}
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function buildPoDialoguePrintParts(
+  script: PoDialogueScript,
+  studentTurns: number[],
+  roleText: string,
+  correction: boolean,
+): { first: ReactNode; follows: { title?: string; preview: ReactNode }[] } {
+  const pages = chunkDialogueBySpeakerTurns(script.lines);
+  let offset = 0;
+  const nodes = pages.map((pageLines, pageIdx) => {
+    const node = (
+      <PoPrintDialoguePage
+        script={script}
+        lines={pageLines}
+        studentTurns={studentTurns}
+        globalOffset={offset}
+        roleText={pageIdx === 0 ? roleText : undefined}
+        correction={correction}
+      />
+    );
+    offset += pageLines.length;
+    return node;
+  });
+  return {
+    first: nodes[0] ?? null,
+    follows: nodes.slice(1).map((preview, i) => ({
+      title: `Dialogue (suite ${i + 1})`,
+      preview,
+    })),
+  };
+}
+
 /** Aperçu imprimable PO — un item = une tâche (1–5), barème 3+4+5+6+7 = 25. */
 export function buildPlacementPoPrintExercises(
   level: OralLevel = "avance",
@@ -1908,47 +2019,16 @@ export function buildPlacementPoPrintExercises(
       id: "po-dialogue",
       label: "PO 4. Dialogue structuré",
       defaultPoints: 6,
-      preview: (
-        <div className="space-y-3 text-black">
-          <p className="text-sm text-zinc-700">{roleText}</p>
-          <ol className="space-y-2">
-            {script.lines.map((line, i) => {
-              const isStudent = studentTurns.includes(i);
-              const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
-              return (
-                <li key={i} className="rounded-lg border border-zinc-200 px-3 py-2 text-sm">
-                  <p className="font-semibold text-zinc-500">{speaker}</p>
-                  {isStudent ? printBlankLines(1) : <p className="mt-1">{line.text}</p>}
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      ),
-      correctionPreview: (
-        <div className="space-y-3 text-black">
-          <p className="text-sm text-zinc-700">{roleText}</p>
-          <ol className="space-y-2">
-            {script.lines.map((line, i) => {
-              const isStudent = studentTurns.includes(i);
-              const speaker = line.role === "A" ? script.roleA.title : script.roleB.title;
-              return (
-                <li
-                  key={i}
-                  className={`rounded-lg border px-3 py-2 text-sm ${
-                    isStudent
-                      ? "border-emerald-200 bg-emerald-50/60 text-emerald-900"
-                      : "border-zinc-200"
-                  }`}
-                >
-                  <p className="font-semibold text-zinc-500">{speaker}{isStudent ? " (votre rôle)" : ""}</p>
-                  <p className="mt-1">{line.text}</p>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      ),
+      ...(() => {
+        const eleve = buildPoDialoguePrintParts(script, studentTurns, roleText, false);
+        const corrige = buildPoDialoguePrintParts(script, studentTurns, roleText, true);
+        return {
+          preview: eleve.first,
+          followPreviews: eleve.follows,
+          correctionPreview: corrige.first,
+          correctionFollowPreviews: corrige.follows,
+        };
+      })(),
     },
     {
       id: "po-argumentation",
