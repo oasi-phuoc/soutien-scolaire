@@ -1191,7 +1191,7 @@ function ImageMatchQuestionView({
                 {correction && (
                   <p
                     className="mt-1 text-center text-xs font-semibold"
-                    style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? INVERSE : INVERSE }}
+                    style={{ color: card.correct === null ? "#64748b" : INVERSE }}
                   >
                     {card.correct === null ? "Aucun (leurre)" : `Dialogue ${card.correct}`}
                   </p>

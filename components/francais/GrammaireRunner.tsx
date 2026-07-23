@@ -1268,12 +1268,12 @@ function ClockReadExercise({
               <AnalogClock h={clk.h} m={clk.m} size={76} />
               <p className="text-xs font-bold text-[var(--color-text-secondary)]">{clk.label}</p>
               {validated && revealCorrection ? (
-                correct ? (
-                  <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
+                correct || !userAnswer.trim() ? (
+                  <p className="text-center text-xs font-semibold text-amber-600">{clk.answer}</p>
                 ) : (
                   <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
                     <p className="text-xs text-amber-500">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-zinc-900">{clk.answer}</p>
+                    <p className="text-xs font-semibold text-amber-700">{clk.answer}</p>
                   </div>
                 )
               ) : (
