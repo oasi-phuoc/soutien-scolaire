@@ -243,18 +243,6 @@ function HiddenNav({
   );
 }
 
-function CorrectionBlock({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2.5">
-      <p className="mb-1.5 text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>{title}</p>
-      <div className="space-y-1.5 text-sm leading-relaxed text-[var(--color-text-primary)]">{children}</div>
-    </div>
-  );
-}
-
-const ACCENT_SOFT = "color-mix(in oklch, var(--color-accent-quiz) 12%, white)";
-const ACCENT_BORDER = "color-mix(in oklch, var(--color-accent-quiz) 28%, white)";
-
 function PePropositionAccordion({
   title,
   open,
@@ -845,53 +833,54 @@ export function ProductionEcriteRunner({
           </p>
         </section>
         <p className="text-center text-sm text-[var(--color-text-secondary)]">Vous pouvez relire vos réponses avant l&apos;envoi.</p>
-        <div className="space-y-3">
+        <div className="space-y-5">
           {stepMeta.map((item) => {
             const isOpen = openResult === item.id;
             const formSample = formTemplate ? getFormSampleAnswer(formTemplate.id) : undefined;
             const shortSample = getWritingSampleAnswer(shortPrompt.id);
             const longSample = getWritingSampleAnswer(longPrompt.id);
+            const sample =
+              item.id === "form" ? formSample
+              : item.id === "short" ? shortSample
+              : longSample;
+
+            const studentBody =
+              item.id === "form" ? (
+                <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {formToTextLocal(formTemplate, formAnswers)}
+                </pre>
+              ) : item.id === "short" ? (
+                <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {shortText || "Aucun texte saisi."}
+                </p>
+              ) : (
+                <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {longText || "Aucun texte saisi."}
+                </p>
+              );
+
             return (
-              <PePropositionAccordion
-                key={item.id}
-                title={`Proposition de réponse — ${item.title}`}
-                open={isOpen}
-                onToggle={() => setOpenResult(isOpen ? null : item.id)}
-              >
-                {item.id === "form" && (
-                  <>
-                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">Votre production</p>
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{formToTextLocal(formTemplate, formAnswers)}</pre>
-                    {formSample && (
-                      <CorrectionBlock title="Exemple">
-                        <pre className="whitespace-pre-wrap">{formSample}</pre>
-                      </CorrectionBlock>
+              <div key={item.id} className="space-y-3">
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-4 py-3">
+                  <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
+                    Votre production — {item.title}
+                  </p>
+                  {studentBody}
+                </div>
+                {sample ? (
+                  <PePropositionAccordion
+                    title="Proposer une réponse"
+                    open={isOpen}
+                    onToggle={() => setOpenResult(isOpen ? null : item.id)}
+                  >
+                    {item.id === "form" ? (
+                      <pre className="whitespace-pre-wrap">{sample}</pre>
+                    ) : (
+                      <SampleParagraphs text={sample} />
                     )}
-                  </>
-                )}
-                {item.id === "short" && (
-                  <>
-                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{shortPrompt.title}</p>
-                    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{shortText || "Aucun texte saisi."}</p>
-                    {shortSample && (
-                      <CorrectionBlock title="Exemple">
-                        <SampleParagraphs text={shortSample} />
-                      </CorrectionBlock>
-                    )}
-                  </>
-                )}
-                {item.id === "long" && (
-                  <>
-                    <p className="mb-1 text-xs font-semibold text-[var(--color-text-secondary)]">{longPrompt.title}</p>
-                    <p className="whitespace-pre-wrap text-sm leading-relaxed text-[var(--color-text-primary)]">{longText || "Aucun texte saisi."}</p>
-                    {longSample && (
-                      <CorrectionBlock title="Exemple">
-                        <SampleParagraphs text={longSample} />
-                      </CorrectionBlock>
-                    )}
-                  </>
-                )}
-              </PePropositionAccordion>
+                  </PePropositionAccordion>
+                ) : null}
+              </div>
             );
           })}
         </div>
