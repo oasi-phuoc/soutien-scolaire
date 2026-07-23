@@ -1000,9 +1000,14 @@ export function buildPlacementPePrintExercises(
                 {formSample}
               </div>
             ) : null}
-            <PePrintRubricGrid kind="form" maxPoints={step.points} />
           </div>
         ),
+        correctionFollowPreviews: [
+          {
+            title: "Décompte",
+            preview: <PePrintRubricGrid kind="form" maxPoints={step.points} />,
+          },
+        ],
       });
       n += 1;
       continue;
@@ -1052,9 +1057,15 @@ export function buildPlacementPePrintExercises(
           kind={kind}
           maxPoints={step.points}
           part="lines"
-          showRubric
+          showRubric={false}
         />
       ),
+      correctionFollowPreviews: [
+        {
+          title: "Décompte",
+          preview: <PePrintRubricGrid kind={kind} maxPoints={step.points} />,
+        },
+      ],
     });
     n += 1;
   }
