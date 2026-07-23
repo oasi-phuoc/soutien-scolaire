@@ -16,6 +16,10 @@ export type PrintCatalogEntry = {
   domain: PrintDomain;
   /** Sous-filtre affiché dans le hub (Algèbre, Vocabulaire, …). */
   group: string;
+  /** Bloc module (A1, Vocabulaire, …) pour l’accordéon hub. */
+  moduleId: string;
+  moduleCode: string;
+  moduleTitle: string;
   code: string;
   title: string;
 };
@@ -43,6 +47,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
         id: `math:${lesson.submoduleId}`,
         domain: "math",
         group,
+        moduleId: mod.id,
+        moduleCode: mod.code,
+        moduleTitle: mod.title,
         code: lesson.submoduleCode,
         title: lesson.theory.title.fr,
       });
@@ -54,6 +61,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `vocab:${theme.slug}`,
       domain: "francais",
       group: "Vocabulaire",
+      moduleId: "vocab",
+      moduleCode: "Vocab",
+      moduleTitle: "Vocabulaire",
       code: theme.code,
       title: theme.title,
     });
@@ -64,6 +74,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `grammar:${lesson.slug}`,
       domain: "francais",
       group: "Grammaire",
+      moduleId: "grammar",
+      moduleCode: "Gram",
+      moduleTitle: "Grammaire",
       code: lesson.code,
       title: lesson.title,
     });
@@ -74,6 +87,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `conj:${lesson.slug}`,
       domain: "francais",
       group: "Conjugaison",
+      moduleId: "conj",
+      moduleCode: "Conj",
+      moduleTitle: "Conjugaison",
       code: lesson.code,
       title: lesson.title,
     });
@@ -94,6 +110,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `placement:math:${level.id}`,
       domain: "placement",
       group: "Mathématiques",
+      moduleId: "placement-math",
+      moduleCode: "P.Math",
+      moduleTitle: "Placement — Mathématiques",
       code: level.code,
       title: level.title,
     });
@@ -103,6 +122,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     id: "placement:francais:complet",
     domain: "placement",
     group: "Français",
+    moduleId: "placement-fr",
+    moduleCode: "P.Fr",
+    moduleTitle: "Placement — Français",
     code: "P.Fr",
     title: "Test de placement — Complet (100 pts)",
   });
@@ -112,6 +134,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `placement:francais:${part.id}`,
       domain: "placement",
       group: "Français",
+      moduleId: "placement-fr",
+      moduleCode: "P.Fr",
+      moduleTitle: "Placement — Français",
       code: `P.Fr.${part.code}`,
       title: `${part.title} (25 pts)`,
     });

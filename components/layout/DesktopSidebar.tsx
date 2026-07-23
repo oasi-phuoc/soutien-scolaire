@@ -6,7 +6,6 @@ import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import {
   getPedagogicNavVisibilityAction,
-  getPlacementNavVisibilityAction,
 } from "@/app/actions/admin";
 import { getSuiviContextAction } from "@/app/actions/suivi";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -59,25 +58,6 @@ function TranslateOnIcon() {
   );
 }
 
-function ImpressionNavIcon() {
-  return (
-    <svg
-      className="h-4 w-4 shrink-0"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M6 9V2h12v7" />
-      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-      <rect x="6" y="14" width="12" height="8" rx="1" />
-    </svg>
-  );
-}
-
 /**
  * Menu latéral bureau (inspiré epcas) — masqué sur mobile.
  */
@@ -89,7 +69,6 @@ export function DesktopSidebar() {
   const { showPivot, togglePivot } = useTranslation();
   const [pendingTasks, setPendingTasks] = useState(0);
   const [unreadMessages, setUnreadMessages] = useState(0);
-  const [placementVisible, setPlacementVisible] = useState(true);
   const [pedagogicNav, setPedagogicNav] = useState({
     showSection: false,
     isAdmin: false,
@@ -106,11 +85,6 @@ export function DesktopSidebar() {
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
-    getPlacementNavVisibilityAction()
-      .then((res) => {
-        if (res.ok) setPlacementVisible(res.visible);
-      })
-      .catch(() => {});
     getPedagogicNavVisibilityAction()
       .then((res) => {
         if (!res.ok) return;
@@ -316,20 +290,6 @@ export function DesktopSidebar() {
           );
         })}
 
-        {placementVisible && (
-          <button
-            type="button"
-            onClick={() => go("/placement")}
-            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-              pathname.startsWith("/placement")
-                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
-                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-            }`}
-          >
-            Placement
-          </button>
-        )}
-
         {pedagogicNav.showSection && (
           <>
             <div className="my-2 border-t border-[var(--color-border-default)]" />
@@ -361,7 +321,6 @@ export function DesktopSidebar() {
                   : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              <ImpressionNavIcon />
               Impression
             </button>
             <div>

@@ -334,7 +334,7 @@ function PaginatedPreview({
   const sheetGap = 24;
 
   return (
-    <div ref={wrapRef} className="w-full">
+    <div ref={wrapRef} className="w-full min-w-0 overflow-x-hidden">
       {/* Sonde A4 — lit les dimensions réelles du navigateur (mm → px). */}
       <div
         ref={probeRef}
@@ -364,8 +364,8 @@ function PaginatedPreview({
 
       {/* Aperçu écran : scale visuelle uniquement — le DOM A4 reste intact pour le clone PDF. */}
       <div
-        className="mx-auto overflow-y-auto pb-32 pt-1"
-        style={{ maxHeight: "calc(100vh - 14rem)" }}
+        className="mx-auto w-full min-w-0 overflow-x-hidden overflow-y-auto pb-8 pt-1"
+        style={{ maxHeight: "calc(100vh - 12rem)" }}
       >
         {metrics && (
           <div
@@ -738,8 +738,8 @@ export function PrintConfigSheet({
       </header>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto">
-        <main className="app-shell pb-32 pt-6">
+      <div className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
+        <main className="app-shell min-w-0 pb-16 pt-6">
 
           {step === 0 && (
             <>
@@ -1145,22 +1145,6 @@ export function PrintConfigSheet({
                   Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
                 </p>
               )}
-              <div className="sticky bottom-4 z-10 flex justify-end pt-2">
-                <button
-                  type="button"
-                  onClick={handlePrint}
-                  disabled={!hasPrintableContent}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-bold text-white shadow-lg transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-                  style={{ background: accentColor }}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <path d="M6 9V2h12v7" />
-                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-                    <path d="M6 14h12v8H6z" />
-                  </svg>
-                  Imprimer / PDF
-                </button>
-              </div>
             </section>
           )}
         </main>

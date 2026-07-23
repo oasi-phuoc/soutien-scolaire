@@ -27,7 +27,7 @@ export function HomeImpressionCard() {
       <span className="min-w-0 flex-1">
         <span className="block text-sm font-bold text-[var(--color-text-primary)]">Impression</span>
         <span className="block text-xs text-[var(--color-text-secondary)]">
-          Documents d&apos;exercice — Maths, Français, Placement
+          Documents d&apos;exercice
         </span>
       </span>
       <span className="text-xl text-[var(--color-theme)]">›</span>

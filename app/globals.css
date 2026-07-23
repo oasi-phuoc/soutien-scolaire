@@ -468,6 +468,12 @@ input[type=number] {
   .desktop-shell .app-shell,
   .desktop-shell .app-shell-bar {
     max-width: min(72rem, calc(100vw - var(--sidebar-w) - 2rem));
+    width: 100%;
+    min-width: 0;
+  }
+
+  .desktop-shell .app-shell--full {
+    max-width: min(72rem, calc(100vw - var(--sidebar-w) - 2rem));
   }
 }
 
