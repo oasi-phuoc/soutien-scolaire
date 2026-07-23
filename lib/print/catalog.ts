@@ -2,6 +2,8 @@ import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { VOCAB_THEMES } from "@/lib/curriculum/vocabulary-data";
 import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/grammar-data";
+import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { EXPRESS_ORAL_LESSONS } from "@/lib/curriculum/content/communication/express-index";
 import {
   getMathExercisesForLevel,
   MATH_TRAINING_LEVEL_LABELS,
@@ -16,7 +18,7 @@ export type PrintCatalogEntry = {
   domain: PrintDomain;
   /** Sous-filtre affiché dans le hub (Algèbre, Vocabulaire, …). */
   group: string;
-  /** Bloc module (A1, Vocabulaire, …) pour l’accordéon hub. */
+  /** Bloc module (A1, V1, …) pour l’accordéon hub. */
   moduleId: string;
   moduleCode: string;
   moduleTitle: string;
@@ -34,6 +36,37 @@ export const PLACEMENT_FRENCH_PRINT_PARTS: Array<{
   { id: "pe", code: "PE", title: "Production écrite" },
   { id: "po", code: "PO", title: "Production orale" },
 ];
+
+const VOCAB_MODULE_TITLES: Record<string, string> = {
+  V1: "L'identité",
+  V2: "Le temps",
+  V3: "Les loisirs",
+  V4: "Le logement",
+  V5: "L'école",
+  V6: "Les vêtements",
+  V7: "La nourriture",
+  V8: "La santé",
+  V9: "Les lieux",
+  V10: "Services, voyages et animaux",
+};
+
+const GRAMMAR_MODULE_TITLES: Record<string, string> = {
+  R1: "Les fondamentaux",
+  R2: "Les verbes essentiels",
+  R3: "L'interrogation",
+  R4: "Les adjectifs",
+  R5: "Les pronoms",
+  R6: "Le passé",
+  R7: "Le futur",
+  R8: "Les autres temps",
+  R9: "La comparaison",
+  R10: "Adverbes et négation",
+};
+
+function grammarModuleCode(code: string): string {
+  const match = code.match(/^(R\d+)/);
+  return match?.[1] ?? "R";
+}
 
 /** Catalogue plat des leçons imprimables (une entrée = une feuille). */
 export function listPrintableLessons(): PrintCatalogEntry[] {
@@ -57,42 +90,63 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
   }
 
   for (const theme of VOCAB_THEMES) {
+    const moduleCode = theme.section;
     entries.push({
       id: `vocab:${theme.slug}`,
       domain: "francais",
       group: "Vocabulaire",
-      moduleId: "vocab",
-      moduleCode: "Vocab",
-      moduleTitle: "Vocabulaire",
+      moduleId: `vocab-${moduleCode}`,
+      moduleCode,
+      moduleTitle: VOCAB_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: theme.code,
       title: theme.title,
     });
   }
 
   for (const lesson of getAllGrammarLessons()) {
+    const moduleCode = grammarModuleCode(lesson.code);
     entries.push({
       id: `grammar:${lesson.slug}`,
       domain: "francais",
       group: "Grammaire",
-      moduleId: "grammar",
-      moduleCode: "Gram",
-      moduleTitle: "Grammaire",
+      moduleId: `grammar-${moduleCode}`,
+      moduleCode,
+      moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: lesson.code,
       title: lesson.title,
     });
   }
 
   for (const lesson of getAllConjLessons()) {
+    const moduleCode = grammarModuleCode(lesson.code);
     entries.push({
       id: `conj:${lesson.slug}`,
       domain: "francais",
-      group: "Conjugaison",
-      moduleId: "conj",
-      moduleCode: "Conj",
-      moduleTitle: "Conjugaison",
+      group: "Grammaire",
+      moduleId: `grammar-${moduleCode}`,
+      moduleCode,
+      moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: lesson.code,
       title: lesson.title,
     });
+  }
+
+  for (const mod of COMM_MODULES) {
+    for (const sub of mod.submodules) {
+      if (!sub.available || sub.id.endsWith("-0")) continue;
+      const lesson = EXPRESS_ORAL_LESSONS.find((l) => l.id === sub.id);
+      if (!lesson) continue;
+      entries.push({
+        id: `express:${sub.id}`,
+        domain: "francais",
+        group: "Expression",
+        moduleId: `express-${mod.id}`,
+        moduleCode: mod.level,
+        moduleTitle: mod.title,
+        code: sub.code,
+        title: sub.title,
+      });
+    }
   }
 
   for (const level of [
@@ -110,9 +164,10 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `placement:math:${level.id}`,
       domain: "placement",
       group: "Mathématiques",
-      moduleId: "placement-math",
-      moduleCode: "P.Math",
-      moduleTitle: "Placement — Mathématiques",
+      // Chaque partie est une entrée plate (pas d’accordéon regroupé).
+      moduleId: `placement-math-${level.id}`,
+      moduleCode: level.code,
+      moduleTitle: level.title,
       code: level.code,
       title: level.title,
     });
@@ -122,9 +177,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
     id: "placement:francais:complet",
     domain: "placement",
     group: "Français",
-    moduleId: "placement-fr",
+    moduleId: "placement-fr-complet",
     moduleCode: "P.Fr",
-    moduleTitle: "Placement — Français",
+    moduleTitle: "Test de placement — Complet (100 pts)",
     code: "P.Fr",
     title: "Test de placement — Complet (100 pts)",
   });
@@ -134,9 +189,9 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       id: `placement:francais:${part.id}`,
       domain: "placement",
       group: "Français",
-      moduleId: "placement-fr",
-      moduleCode: "P.Fr",
-      moduleTitle: "Placement — Français",
+      moduleId: `placement-fr-${part.id}`,
+      moduleCode: `P.Fr.${part.code}`,
+      moduleTitle: `${part.title} (25 pts)`,
       code: `P.Fr.${part.code}`,
       title: `${part.title} (25 pts)`,
     });

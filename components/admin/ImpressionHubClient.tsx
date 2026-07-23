@@ -59,6 +59,19 @@ function BranchToggle<T extends string>({
   );
 }
 
+function preferredGroups(domain: PrintDomain, groups: string[]): string[] {
+  const preferred =
+    domain === "francais"
+      ? ["Vocabulaire", "Grammaire", "Expression"]
+      : domain === "placement"
+        ? ["Mathématiques", "Français"]
+        : domain === "math"
+          ? ["Algèbre", "Géométrie"]
+          : groups;
+  const ordered = preferred.filter((g) => groups.includes(g));
+  return ordered.length > 0 ? ordered : groups;
+}
+
 export function ImpressionHubClient() {
   const catalog = useMemo(() => listPrintableLessons(), []);
   const [domain, setDomain] = useState<PrintDomain>("math");
@@ -75,8 +88,8 @@ export function ImpressionHubClient() {
 
   const groups = useMemo(() => {
     const set = new Set(domainEntries.map((e) => e.group));
-    return Array.from(set);
-  }, [domainEntries]);
+    return preferredGroups(domain, Array.from(set));
+  }, [catalog, domain, domainEntries]);
 
   const activeGroup = group && groups.includes(group) ? group : groups[0] ?? null;
 
@@ -109,7 +122,9 @@ export function ImpressionHubClient() {
         });
       }
     }
-    return Array.from(map.values());
+    return Array.from(map.values()).sort((a, b) =>
+      a.moduleCode.localeCompare(b.moduleCode, "fr", { numeric: true }),
+    );
   }, [filtered]);
 
   const selectedBundle = useMemo(
@@ -145,6 +160,7 @@ export function ImpressionHubClient() {
   }
 
   const lessonCount = filtered.length;
+  const useFlatList = domain === "placement";
 
   return (
     <div className="min-w-0 space-y-5 overflow-x-hidden">
@@ -174,61 +190,90 @@ export function ImpressionHubClient() {
 
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
         {lessonCount} leçon{lessonCount !== 1 ? "s" : ""}
-        {modules.length > 0 ? ` · ${modules.length} module${modules.length !== 1 ? "s" : ""}` : ""}
+        {!useFlatList && modules.length > 0
+          ? ` · ${modules.length} module${modules.length !== 1 ? "s" : ""}`
+          : ""}
       </p>
 
       <div className="min-w-0 space-y-1 overflow-hidden">
-        {modules.map((mod, idx) => {
-          const isOpen = expanded.has(mod.moduleId) || Boolean(query.trim());
-          return (
-            <div
-              key={mod.moduleId}
-              className={`min-w-0 overflow-hidden rounded-lg ${MODULE_ROW_BG[idx % 2]}`}
-            >
+        {useFlatList ? (
+          <>
+            {filtered.map((entry, idx) => (
               <button
+                key={entry.id}
                 type="button"
-                onClick={() => toggleModule(mod.moduleId)}
-                className="flex w-full min-w-0 items-center justify-between gap-2 px-3 py-2.5 text-left"
-                aria-expanded={isOpen}
+                onClick={() => selectLesson(entry)}
+                className={`flex w-full min-w-0 items-center gap-2 rounded-lg px-3 py-2.5 text-left transition hover:bg-zinc-100/80 dark:hover:bg-zinc-800/50 ${MODULE_ROW_BG[idx % 2]}`}
               >
-                <span className="min-w-0 truncate text-sm font-bold text-[var(--color-theme)]">
-                  Module {mod.moduleCode}
-                  <span className="ml-2 font-medium text-zinc-500 dark:text-zinc-400">
-                    {mod.moduleTitle}
-                  </span>
+                <span className="w-20 shrink-0 text-xs font-bold text-[var(--color-theme)]">
+                  {entry.code}
                 </span>
-                <span className="shrink-0 text-base font-light leading-none text-zinc-400" aria-hidden>
-                  {isOpen ? "−" : "+"}
+                <span className="min-w-0 flex-1 truncate text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                  {entry.title}
                 </span>
               </button>
-              {isOpen && (
-                <ul className="divide-y divide-zinc-100 border-t border-zinc-100/80 px-2 dark:divide-zinc-800 dark:border-zinc-800">
-                  {mod.lessons.map((entry) => (
-                    <li key={entry.id}>
-                      <button
-                        type="button"
-                        onClick={() => selectLesson(entry)}
-                        className="flex w-full min-w-0 items-center gap-2 py-2 text-left text-sm transition hover:bg-zinc-100/80 dark:hover:bg-zinc-800/50"
-                      >
-                        <span className="w-14 shrink-0 text-xs font-semibold text-zinc-500">
-                          {entry.code}
-                        </span>
-                        <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-200">
-                          {entry.title}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          );
-        })}
+            ))}
+            {filtered.length === 0 && (
+              <p className="px-2 py-8 text-center text-sm text-[var(--color-text-secondary)]">
+                Aucune leçon ne correspond à la recherche.
+              </p>
+            )}
+          </>
+        ) : (
+          <>
+            {modules.map((mod, idx) => {
+              const isOpen = expanded.has(mod.moduleId) || Boolean(query.trim());
+              return (
+                <div
+                  key={mod.moduleId}
+                  className={`min-w-0 overflow-hidden rounded-lg ${MODULE_ROW_BG[idx % 2]}`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleModule(mod.moduleId)}
+                    className="flex w-full min-w-0 items-center justify-between gap-2 px-3 py-2.5 text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="min-w-0 truncate text-sm font-bold text-[var(--color-theme)]">
+                      Module {mod.moduleCode}
+                      <span className="ml-2 font-medium text-zinc-500 dark:text-zinc-400">
+                        {mod.moduleTitle}
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-base font-light leading-none text-zinc-400" aria-hidden>
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <ul className="divide-y divide-zinc-100 border-t border-zinc-100/80 px-2 dark:divide-zinc-800 dark:border-zinc-800">
+                      {mod.lessons.map((entry) => (
+                        <li key={entry.id}>
+                          <button
+                            type="button"
+                            onClick={() => selectLesson(entry)}
+                            className="flex w-full min-w-0 items-center gap-2 py-2 text-left text-sm transition hover:bg-zinc-100/80 dark:hover:bg-zinc-800/50"
+                          >
+                            <span className="w-14 shrink-0 text-xs font-semibold text-zinc-500">
+                              {entry.code}
+                            </span>
+                            <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-200">
+                              {entry.title}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
 
-        {modules.length === 0 && (
-          <p className="px-2 py-8 text-center text-sm text-[var(--color-text-secondary)]">
-            Aucune leçon ne correspond à la recherche.
-          </p>
+            {modules.length === 0 && (
+              <p className="px-2 py-8 text-center text-sm text-[var(--color-text-secondary)]">
+                Aucune leçon ne correspond à la recherche.
+              </p>
+            )}
+          </>
         )}
       </div>
 

@@ -52,6 +52,13 @@ import {
 import { PLACEMENT_FRENCH_PRINT_PARTS } from "@/lib/print/catalog";
 import type { PlacementLevel, PlacementSkill } from "@/lib/placement/types";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
+import {
+  EXPRESS_ORAL_BY_ID,
+} from "@/lib/curriculum/content/communication/express-index";
+import {
+  pickProgressiveExercises,
+  type CommunicationTheoryBlock,
+} from "@/lib/curriculum/content/communication/express-types";
 
 export type PrintBundle = {
   lessonTitle: string;
@@ -385,6 +392,96 @@ function buildPlacementFrenchPartBundle(
   };
 }
 
+function expressTheoryLines(block: CommunicationTheoryBlock): string[] {
+  switch (block.type) {
+    case "heading":
+    case "subheading":
+    case "plain":
+    case "note":
+      return [block.text];
+    case "highlight":
+      return [block.title, ...(block.items ?? [])];
+    case "numbered":
+    case "bullets":
+      return block.items;
+    case "section":
+      return [
+        ...(block.label ? [block.label] : []),
+        ...(block.items ?? (block.text ? block.text.split("\n") : [])),
+      ];
+    case "table":
+      return [
+        block.headers.join(" · "),
+        ...block.rows.map((row) => row.join(" · ")),
+      ];
+    case "dialogue":
+      return block.lines.map((line) => `${line.role} : ${line.text}`);
+    case "vocab":
+      return block.items.map((item) => `${item.fr} — ${item.example}`);
+    default:
+      return [];
+  }
+}
+
+function buildExpressBundle(lessonId: string): PrintBundle | null {
+  const lesson = EXPRESS_ORAL_BY_ID[lessonId];
+  if (!lesson) return null;
+  const pool = lesson.exercisePool ?? [];
+  const picked = pickProgressiveExercises(pool, lesson.exerciseCount ?? 8, 1);
+  return {
+    lessonTitle: lesson.title,
+    course: "Français",
+    accentColor: "var(--color-accent-comm)",
+    theoryPreview: (
+      <div className="space-y-2 text-sm leading-relaxed text-black">
+        {lesson.theory.flatMap((block, bi) =>
+          expressTheoryLines(block).map((line, li) => (
+            <p key={`${bi}-${li}`} className={block.type === "heading" ? "font-bold" : undefined}>
+              {line}
+            </p>
+          )),
+        )}
+      </div>
+    ),
+    exercises: picked.map((ex, i) => ({
+      id: ex.id || String(i),
+      label: `Exercice ${i + 1}`,
+      preview: (
+        <div className="space-y-2 text-sm text-black">
+          <p className="font-semibold">{ex.instruction}</p>
+          <p>{ex.question}</p>
+          <ul className="space-y-1">
+            {ex.choices.map((choice, ci) => (
+              <li key={choice} className="flex gap-2">
+                <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
+                <span>{choice}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 h-7 border-b border-black/40" />
+        </div>
+      ),
+      correctionPreview: (
+        <div className="space-y-2 text-sm text-black">
+          <p className="font-semibold">{ex.instruction}</p>
+          <p>{ex.question}</p>
+          <ul className="space-y-1">
+            {ex.choices.map((choice, ci) => (
+              <li key={choice} className="flex gap-2">
+                <span className="w-5 shrink-0 font-bold">{String.fromCharCode(97 + ci)}.</span>
+                <span className={choice === ex.answer ? "font-bold text-amber-700" : undefined}>
+                  {choice}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 font-bold text-amber-700">{ex.answer}</p>
+        </div>
+      ),
+    })),
+  };
+}
+
 /** Construit le bundle d'aperçu pour une entrée du catalogue d'impression. */
 export function buildPrintBundle(
   catalogId: string,
@@ -411,6 +508,9 @@ export function buildPrintBundle(
   }
   if (catalogId.startsWith("conj:")) {
     return buildGrammarBundle(catalogId.slice("conj:".length), "conj");
+  }
+  if (catalogId.startsWith("express:")) {
+    return buildExpressBundle(catalogId.slice("express:".length));
   }
   return null;
 }
