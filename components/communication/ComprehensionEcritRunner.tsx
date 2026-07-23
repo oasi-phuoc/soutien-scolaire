@@ -1218,7 +1218,7 @@ function EmailPart({
             {part.meta.subject && <p><span className="font-semibold">Objet :</span> {part.meta.subject}</p>}
           </div>
         )}
-        <div className={`mt-3 ${forPrint ? "text-sm leading-snug whitespace-pre-wrap" : CE_BODY_TEXT_PRE}`}>{part.body}</div>
+        <div className={`mt-3 ${forPrint ? "whitespace-pre-line text-sm leading-snug text-justify text-[var(--color-text-primary)]" : CE_BODY_TEXT_PRE}`}>{part.body}</div>
       </div>
       {!contentOnly && (
         <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
