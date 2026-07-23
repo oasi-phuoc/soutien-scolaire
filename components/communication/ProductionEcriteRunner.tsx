@@ -984,7 +984,6 @@ export function buildPlacementPePrintExercises(
               disabled={false}
               onChange={() => {}}
             />
-            <PePrintRubricGrid kind="form" maxPoints={step.points} />
           </div>
         ),
         correctionPreview: (
