@@ -11,66 +11,42 @@ function formatPoints(value: number): string {
     : value.toLocaleString("fr-CH", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
-/** Hauteur d'une ligne manuscrite (px @ 10px racine A4). */
-const LINE_HEIGHT_PX = 26;
+/** Nombre de lignes manuscrites pour les rédactions PE (aligné sur PO argumentation). */
+const PE_PRINT_LINE_COUNT = 20;
 
 /**
- * Nombre de lignes pour une page A4 dédiée à la production.
- * Avec en-tête d'exercice + titre + (optionnellement) grille, rester sous ~22 lignes
- * évite le débordement / la troncature (feuilles en overflow:hidden).
+ * Zone lignée pour rédaction manuscrite — même style que `printBlankLines` (PO) :
+ * lignes simples `h-7` + `space-y-2`, sans cadre.
  */
-function printLineCount(prompt: WritingPrompt, opts?: { sampleText?: string; withRubric?: boolean }): number {
-  const fromWords = Math.ceil(prompt.minWords / 7);
-  const fromSample = opts?.sampleText?.trim()
-    ? Math.ceil(opts.sampleText.trim().split(/\s+/).length / 9) + 2
-    : 0;
-  const desired = Math.max(10, fromWords + 3, fromSample);
-  const cap = opts?.withRubric ? 12 : 20;
-  return Math.min(desired, cap);
-}
-
-/** Zone lignée pour rédaction manuscrite (élève) ou texte modèle sur les lignes (corrigé). */
 export function PePrintWritingLines({
   text,
-  lineCount,
+  lineCount = PE_PRINT_LINE_COUNT,
 }: {
   /** Texte modèle (corrigé). Vide = lignes blanches pour l'élève. */
   text?: string;
-  lineCount: number;
+  lineCount?: number;
 }) {
-  const lines = Math.max(8, lineCount);
-  const height = lines * LINE_HEIGHT_PX;
+  const lines = Math.max(1, lineCount);
   const hasText = Boolean(text?.trim());
 
-  return (
-    <div className="min-w-0">
-      <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
-        {hasText ? "Exemple de production" : "Votre production"}
-      </p>
-      <div
-        className="w-full max-w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 pt-0.5 text-base text-[var(--color-text-primary)]"
-        style={{
-          height,
-          maxHeight: height,
-          overflow: "hidden",
-          lineHeight: `${LINE_HEIGHT_PX}px`,
-          backgroundImage: `repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent ${LINE_HEIGHT_PX - 1}px,
-            #d4d4d8 ${LINE_HEIGHT_PX - 1}px,
-            #d4d4d8 ${LINE_HEIGHT_PX}px
-          )`,
-          backgroundOrigin: "content-box",
-          backgroundClip: "content-box",
-        }}
-      >
-        {hasText ? (
-          <p className="m-0 whitespace-pre-wrap break-words">{text!.trim()}</p>
-        ) : (
-          <div aria-hidden style={{ height: height - 4 }} />
-        )}
+  if (hasText) {
+    return (
+      <div className="min-w-0">
+        <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
+          Exemple de production
+        </p>
+        <p className="m-0 whitespace-pre-wrap break-words text-base text-[var(--color-text-primary)]">
+          {text!.trim()}
+        </p>
       </div>
+    );
+  }
+
+  return (
+    <div className="min-w-0 space-y-2">
+      {Array.from({ length: lines }, (_, i) => (
+        <div key={i} className="h-7 border-b border-black/40" />
+      ))}
     </div>
   );
 }
@@ -173,25 +149,21 @@ export function PeWritingPrintPrompt({ prompt }: { prompt: WritingPrompt }) {
 
 /** Zone de production (+ grille optionnelle) — page suivante à l'impression. */
 export function PeWritingPrintLinesBlock({
-  prompt,
   sampleText,
   kind,
   maxPoints,
   showRubric = true,
 }: {
+  /** Conservé pour l'API d'appel (énoncé déjà rendu sur la page précédente). */
   prompt: WritingPrompt;
   sampleText?: string;
   kind: PeExerciseKind;
   maxPoints: number;
   showRubric?: boolean;
 }) {
-  const lineCount = printLineCount(prompt, {
-    sampleText,
-    withRubric: showRubric,
-  });
   return (
     <div className="space-y-4">
-      <PePrintWritingLines text={sampleText} lineCount={lineCount} />
+      <PePrintWritingLines text={sampleText} lineCount={PE_PRINT_LINE_COUNT} />
       {showRubric ? <PePrintRubricGrid kind={kind} maxPoints={maxPoints} /> : null}
     </div>
   );

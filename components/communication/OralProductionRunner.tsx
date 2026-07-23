@@ -2097,7 +2097,7 @@ export function buildPlacementPoPrintExercises(
             Thème : {argumentationTopic.theme}
           </p>
           <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
-          {printBlankLines(5)}
+          {printBlankLines(20)}
         </div>
       ),
       correctionPreview: (
