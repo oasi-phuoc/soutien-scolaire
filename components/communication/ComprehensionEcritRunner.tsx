@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ceCoImageSource } from "@/lib/curriculum/word-image-resolver";
@@ -18,7 +18,8 @@ import {
 import { EvalExerciseResultList, EvalResultsHint } from "@/components/ui/EvalResultsUI";
 import { useRegisterEvalGuard, useGuardedNavigate } from "@/components/EvalNavGuard";
 import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
-import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS, seededShuffle } from "@/lib/placement/progressive-pick";
+import { pickFromPool, pickIndex, PROGRESSIVE_SKILL_LEVELS } from "@/lib/placement/progressive-pick";
+import { randomIndexOrder, shuffleQcmChoicesSeeded } from "@/lib/curriculum/content/communication/shuffle-qcm-choices";
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_MESSAGES_MOYEN } from "@/lib/curriculum/content/communication/ce-messages-moyen";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
@@ -125,13 +126,12 @@ function toQuestionTask(question: RawQuestionTask, seed = "legacy"): QuestionTas
   if ("answer" in question) {
     return { kind: "fill", fillMode: "full", ...question };
   }
-  const indexed = question.choices.map((c, i) => ({ c, i }));
-  const shuffled = seededShuffle(indexed, `${seed}-legacy-choices`);
+  const shuffled = shuffleQcmChoicesSeeded(question.choices, question.correct, `${seed}-legacy-choices`);
   return {
     kind: "choice",
     prompt: question.prompt,
-    choices: shuffled.map((x) => x.c),
-    correct: shuffled.findIndex((x) => x.i === question.correct),
+    choices: shuffled.choices,
+    correct: shuffled.correct,
     image: question.image,
   };
 }
@@ -875,24 +875,37 @@ function IntroPage({ level, onStart, placement = false }: { level: CELevel; onSt
   );
 }
 function ChoiceQuestionView({ task, value, onChange, correction }: { task: ChoiceTask; value: number | string | null; onChange: (value: number) => void; correction?: boolean }) {
+  const orderKey = `${task.prompt}|${task.choices.map((c) => c.label).join("¦")}|${task.correct}|${task.image ? 1 : 0}`;
+  const [order, setOrder] = useState<number[] | null>(null);
+
+  useEffect(() => {
+    setOrder(randomIndexOrder(task.choices.length));
+  }, [orderKey, task.choices.length]);
+
+  // Tant que l’ordre client n’est pas prêt : ne pas afficher (évite de spoiler la position a).
+  if (!order) {
+    return <div className="grid min-h-[3rem] grid-cols-3 gap-2" aria-hidden />;
+  }
+
   return (
     <div className="grid grid-cols-3 gap-2">
-      {task.choices.map((choice, index) => {
-        const selected = value === index;
-        const correct = correction && index === task.correct;
+      {order.map((origIndex, displayIndex) => {
+        const choice = task.choices[origIndex]!;
+        const selected = value === origIndex;
+        const correct = correction && origIndex === task.correct;
         const wrong = correction && selected && !correct;
         return (
           <button
-            key={index}
+            key={`${choice.label}-${origIndex}`}
             type="button"
-            onClick={() => !correction && onChange(index)}
-            aria-label={task.image ? `${String.fromCharCode(97 + index)}. ${choice.label}` : undefined}
+            onClick={() => !correction && onChange(origIndex)}
+            aria-label={task.image ? `${String.fromCharCode(97 + displayIndex)}. ${choice.label}` : undefined}
             className={`rounded-xl border px-2 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />
             ) : (
-              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
+              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + displayIndex)}.</span>{choice.label}</span>
             )}
           </button>
         );

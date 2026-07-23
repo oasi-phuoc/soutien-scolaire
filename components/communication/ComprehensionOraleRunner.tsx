@@ -14,6 +14,7 @@ import {
   type COLevel as COAudioLevel,
 } from "@/lib/curriculum/content/communication/co-audio";
 import { getCoPartQuestions, type COQuestionTask } from "@/lib/curriculum/content/communication/co-questions";
+import { randomIndexOrder } from "@/lib/curriculum/content/communication/shuffle-qcm-choices";
 import { CO_SCOLAIRE_MOYEN_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-moyen";
 import { CO_SCOLAIRE_AVANCE_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-avance";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
@@ -874,25 +875,37 @@ function ChoiceQuestionView({
   onChange: (value: number) => void;
   correction?: boolean;
 }) {
+  const orderKey = `${task.prompt}|${task.choices.map((c) => c.label).join("¦")}|${task.correct}|${task.image ? 1 : 0}`;
+  const [order, setOrder] = useState<number[] | null>(null);
+
+  useEffect(() => {
+    setOrder(randomIndexOrder(task.choices.length));
+  }, [orderKey, task.choices.length]);
+
+  if (!order) {
+    return <div className="grid min-h-[3rem] grid-cols-3 gap-2" aria-hidden />;
+  }
+
   return (
     <div className="grid grid-cols-3 gap-2">
-      {task.choices.map((choice, index) => {
-        const selected = value === index;
-        const correct = correction && index === task.correct;
+      {order.map((origIndex, displayIndex) => {
+        const choice = task.choices[origIndex]!;
+        const selected = value === origIndex;
+        const correct = correction && origIndex === task.correct;
         const wrong = correction && selected && !correct;
         return (
           <button
-            key={`${choice.label}-${index}`}
+            key={`${choice.label}-${origIndex}`}
             type="button"
             disabled={correction}
-            onClick={() => onChange(index)}
-            aria-label={task.image ? `${String.fromCharCode(97 + index)}. ${choice.label}` : undefined}
+            onClick={() => onChange(origIndex)}
+            aria-label={task.image ? `${String.fromCharCode(97 + displayIndex)}. ${choice.label}` : undefined}
             className={`rounded-xl border px-2 py-2 text-left text-sm transition ${task.image ? "flex flex-col items-center p-1.5" : "w-full"} ${correct ? "border-amber-400 bg-amber-50 text-amber-700" : selected ? "border-[var(--color-accent-comm)] bg-[var(--color-accent-comm)]/10 text-[var(--color-accent-comm)]" : wrong ? "border-red-200 bg-red-50 text-red-600 line-through" : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"}`}
           >
             {task.image ? (
               <ImagePlaceholder label={choice.label} path={choice.image} compact />
             ) : (
-              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + index)}.</span>{choice.label}</span>
+              <span><span className="mr-1 font-mono text-xs">{String.fromCharCode(97 + displayIndex)}.</span>{choice.label}</span>
             )}
           </button>
         );

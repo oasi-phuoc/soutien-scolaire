@@ -2,6 +2,7 @@ import { ceCoImageSource, isCeCoImageableLabel, isPriceRange, isSinglePrice, res
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import { pickCoQuestionFormat, pickCoScolaireAvanceQuestionFormat } from "./ce-co-question-formats";
 import { hasBlockedImageChoices, isExcludedCeCoQuestion } from "./ce-co-question-filters";
+import { shuffleQcmChoicesSeeded } from "./shuffle-qcm-choices";
 import type { COAudioGroup } from "./co-audio";
 
 export type COFormatType = "text" | "image" | "fill";
@@ -134,20 +135,6 @@ function seededShuffle<T>(items: T[], seed: string): T[] {
   return shuffleWithSeed(items, seed);
 }
 
-/** Mélange les choix QCM et recalcule l’index de la bonne réponse. */
-function shuffleChoiceTask<T extends { label: string; image?: string }>(
-  choices: T[],
-  correct: number,
-  seed: string,
-): { choices: T[]; correct: number } {
-  const indexed = choices.map((c, i) => ({ c, i }));
-  const shuffled = shuffleWithSeed(indexed, seed);
-  return {
-    choices: shuffled.map((x) => x.c),
-    correct: shuffled.findIndex((x) => x.i === correct),
-  };
-}
-
 function img(_level: string, _groupSlug: string, _qId: string, _suffix: string, label: string): COImageChoice {
   if (isCeCoImageableLabel(label)) {
     const dedicated = resolveCeCoWordImage(label);
@@ -196,7 +183,7 @@ function multiToTask(
       label: c.label,
       image: ceCoImageSource(c.image, c.label, `${seed}-img-${i}`) ?? c.image,
     }));
-    const shuffled = shuffleChoiceTask(withVariants, q.imageCorrect, `${seed}-choices`);
+    const shuffled = shuffleQcmChoicesSeeded(withVariants, q.imageCorrect, `${seed}-choices`);
     return {
       kind: "choice",
       prompt: q.imageQ,
@@ -206,7 +193,7 @@ function multiToTask(
     };
   }
   const textChoices = q.textChoices.map((label) => ({ label }));
-  const shuffled = shuffleChoiceTask(textChoices, q.textCorrect, `${seed}-choices`);
+  const shuffled = shuffleQcmChoicesSeeded(textChoices, q.textCorrect, `${seed}-choices`);
   return {
     kind: "choice",
     prompt: q.textQ,

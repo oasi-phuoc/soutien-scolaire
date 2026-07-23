@@ -2,6 +2,7 @@ import { ceCoImageSource, isPriceRange, isSinglePrice, resolveCeCoWordImage } fr
 import { seededShuffle as shuffleWithSeed } from "@/lib/placement/progressive-pick";
 import { pickCeCoQuestionFormat, type CeCoFormatType } from "./ce-co-question-formats";
 import { hasBlockedImageChoices, isExcludedCeCoQuestion } from "./ce-co-question-filters";
+import { shuffleQcmChoicesSeeded } from "./shuffle-qcm-choices";
 
 /** DELF instructions : 2 formats différents par texte (jamais 2× le même format sur un texte). */
 const INSTRUCTION_TEXT_FORMAT_PAIRS: [CeCoFormatType, CeCoFormatType][] = [
@@ -20,20 +21,6 @@ function fallbackInstructionFormat(
     return opts.find((f) => f !== sibling) ?? "text";
   }
   return preferred;
-}
-
-/** Mélange les choix QCM et recalcule l’index de la bonne réponse. */
-function shuffleChoiceTask<T extends { label: string; image?: string }>(
-  choices: T[],
-  correct: number,
-  seed: string,
-): { choices: T[]; correct: number } {
-  const indexed = choices.map((c, i) => ({ c, i }));
-  const shuffled = shuffleWithSeed(indexed, seed);
-  return {
-    choices: shuffled.map((x) => x.c),
-    correct: shuffled.findIndex((x) => x.i === correct),
-  };
 }
 
 /**
@@ -153,7 +140,7 @@ function multiToTask(
       label: c.label,
       image: ceCoImageSource(c.image, c.label, `${seed}-img-${i}`) ?? c.image,
     }));
-    const shuffled = shuffleChoiceTask(withVariants, q.imageCorrect, `${seed}-choices`);
+    const shuffled = shuffleQcmChoicesSeeded(withVariants, q.imageCorrect, `${seed}-choices`);
     return {
       kind: "choice",
       prompt: q.imageQ,
@@ -163,7 +150,7 @@ function multiToTask(
     };
   }
   const textChoices = q.textChoices.map((label) => ({ label }));
-  const shuffled = shuffleChoiceTask(textChoices, q.textCorrect, `${seed}-choices`);
+  const shuffled = shuffleQcmChoicesSeeded(textChoices, q.textCorrect, `${seed}-choices`);
   return {
     kind: "choice",
     prompt: q.textQ,
