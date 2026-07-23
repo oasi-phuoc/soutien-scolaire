@@ -525,7 +525,7 @@ export function PrintConfigSheet({
   const [step, setStep] = useState(0);
   const [evalMode, setEvalMode] = useState(defaultEvalMode);
   const [theory, setTheory] = useState(false);
-  const [includeCorrections, setIncludeCorrections] = useState(false);
+  const [includeCorrections, setIncludeCorrections] = useState(true);
   const [classLevel, setClassLevel] = useState<PrintHeaderConfig["classLevel"]>("CSC");
   const [classNumber, setClassNumber] = useState("01");
   const [course, setCourse] = useState(defaultCourse);
