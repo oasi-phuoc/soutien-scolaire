@@ -964,7 +964,7 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
           {correction ? (
             <span
               className="inline-block min-w-[5rem] max-w-full border-0 border-b-2 px-1 pb-1 font-semibold"
-              style={{ borderColor: ok || !inputValue.trim() ? "#16a34a" : INVERSE, color: "#16a34a" }}
+              style={{ borderColor: INVERSE, color: INVERSE }}
             >
               {shownValue}
             </span>
@@ -994,7 +994,7 @@ function FillQuestionView({ task, value, onChange, correction }: { task: FillTas
       {correction ? (
         <div
           className={`w-full border-0 border-b-2 pb-1 text-sm font-semibold`}
-          style={{ borderColor: ok || !inputValue.trim() ? "#16a34a" : INVERSE, color: "#16a34a" }}
+          style={{ borderColor: INVERSE, color: INVERSE }}
         >
           {shownValue}
         </div>

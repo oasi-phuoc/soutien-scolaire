@@ -935,23 +935,33 @@ function FillQuestionView({
   const inputCls =
     "border-0 border-b-2 bg-transparent pb-1 text-sm outline-none disabled:opacity-80";
   const stemParts = task.fillMode === "stem" && task.stem ? parseFillStem(task.stem) : null;
+  const shownValue = correction && !inputValue.trim() ? task.answer : inputValue;
+  const showExpectedHint = Boolean(correction && inputValue.trim() && !ok);
 
   if (stemParts) {
     return (
       <div className="space-y-1">
         <div className="flex flex-wrap items-baseline gap-x-1 gap-y-2 text-sm text-[var(--color-text-primary)]">
           <span>{stemParts.before}</span>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(event) => onChange(event.target.value)}
-            disabled={correction}
-            className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
-            style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
-          />
+          {correction ? (
+            <span
+              className="inline-block min-w-[5rem] max-w-full border-0 border-b-2 px-1 pb-1 font-semibold"
+              style={{ borderColor: INVERSE, color: INVERSE }}
+            >
+              {shownValue || task.answer}
+            </span>
+          ) : (
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(event) => onChange(event.target.value)}
+              className={`inline-block min-w-[5rem] max-w-full px-1 ${inputCls}`}
+              style={{ borderColor: ACCENT }}
+            />
+          )}
           {stemParts.after ? <span>{stemParts.after}</span> : null}
         </div>
-        {correction && !ok && (
+        {showExpectedHint && (
           <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
         )}
       </div>
@@ -963,15 +973,23 @@ function FillQuestionView({
       {task.fillMode === "full" && (
         <p className="text-xs text-[var(--color-text-secondary)]">Écrivez une phrase complète contenant la réponse.</p>
       )}
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(event) => onChange(event.target.value)}
-        disabled={correction}
-        className={`w-full ${inputCls}`}
-        style={{ borderColor: correction && !ok ? INVERSE : ACCENT }}
-      />
-      {correction && !ok && (
+      {correction ? (
+        <div
+          className="w-full border-0 border-b-2 pb-1 text-sm font-semibold"
+          style={{ borderColor: INVERSE, color: INVERSE }}
+        >
+          {shownValue || task.answer}
+        </div>
+      ) : (
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(event) => onChange(event.target.value)}
+          className={`w-full ${inputCls}`}
+          style={{ borderColor: ACCENT }}
+        />
+      )}
+      {showExpectedHint && (
         <p className="text-xs font-semibold" style={{ color: INVERSE }}>Réponse attendue : {task.answer}</p>
       )}
     </div>
@@ -1173,7 +1191,7 @@ function ImageMatchQuestionView({
                 {correction && (
                   <p
                     className="mt-1 text-center text-xs font-semibold"
-                    style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? "#16a34a" : INVERSE }}
+                    style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? INVERSE : INVERSE }}
                   >
                     {card.correct === null ? "Aucun (leurre)" : `Dialogue ${card.correct}`}
                   </p>
@@ -1479,11 +1497,6 @@ function QuestionBlock({
                 forPrint={forPrint}
               />
             </div>
-            {readonly && !isSingleTask && (
-              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Réponse : {question.kind === "choice" ? choiceLabel(question, question.correct) : question.kind === "fill" ? question.answer : ""}
-              </p>
-            )}
             {readonly && isConversationImageGrid && question.kind === "conversation_image_grid" && (
               <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
                 Score : {formatPoints(conversationImageGridPoints(question, answer))} / {formatPoints(part.points)} pts

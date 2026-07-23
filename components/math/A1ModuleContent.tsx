@@ -476,7 +476,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
     <span
       className={`inline-flex items-center justify-center rounded border align-middle text-[10px] tabular-nums ${
         correction && value != null
-          ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+          ? "border-amber-500 bg-amber-50 font-semibold text-amber-700"
           : "border-black/60"
       }`}
       style={{ width: w, height: h }}
@@ -487,7 +487,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
   const answerLine = (value: string | number, w = 150) =>
     correction ? (
       <span
-        className="inline-flex min-h-[15px] items-center border-b-2 border-emerald-500 px-1 text-sm font-semibold text-emerald-800"
+        className="inline-flex min-h-[15px] items-center border-b-2 border-amber-500 px-1 text-sm font-semibold text-amber-700"
         style={{ minWidth: w }}
       >
         {value}
@@ -607,7 +607,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                     <div
                       key={u}
                       className={`aspect-square flex items-center justify-center border-b border-r border-zinc-400 text-[10px] tabular-nums ${
-                        correction && state === "fill" ? "bg-emerald-50 font-semibold text-emerald-800" : ""
+                        correction && state === "fill" ? "bg-amber-50 font-semibold text-amber-700" : ""
                       }`}
                     >
                       {show ? value : ""}
@@ -636,7 +636,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                       className={`flex h-7 min-w-0 flex-1 items-center justify-center rounded border text-[11px] tabular-nums ${
                         isBlank
                           ? correction
-                            ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+                            ? "border-amber-500 bg-amber-50 font-semibold text-amber-700"
                             : "border-zinc-500 bg-white"
                           : "border-zinc-300 bg-zinc-50 text-zinc-700"
                       }`}
@@ -670,7 +670,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                         key={c}
                         className={`w-14 rounded border py-1 text-center text-sm tabular-nums ${
                           correction && isCorrect
-                            ? "border-emerald-500 bg-emerald-50 font-semibold text-emerald-800"
+                            ? "border-amber-500 bg-amber-50 font-semibold text-amber-700"
                             : "border-zinc-400"
                         }`}
                       >
@@ -778,13 +778,13 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                       key={ti}
                       className={`flex items-center gap-2 rounded border p-2 text-sm ${
                         correction && t.correct
-                          ? "border-emerald-500 bg-emerald-50 text-emerald-900"
+                          ? "border-amber-500 bg-amber-50 text-amber-700"
                           : "border-zinc-300"
                       }`}
                     >
                       <span
                         className={`inline-block h-4 w-4 shrink-0 rounded-full border-2 ${
-                          correction && t.correct ? "border-emerald-600 bg-emerald-600" : "border-zinc-400"
+                          correction && t.correct ? "border-amber-600 bg-amber-500" : "border-zinc-400"
                         }`}
                       />
                       <span>{t.label}</span>
@@ -816,7 +816,7 @@ function a1PrintPreview(step: Step, correction = false): React.ReactNode | undef
                         isGiven
                           ? "border-zinc-400"
                           : correction
-                            ? "border-emerald-500 bg-emerald-50 text-emerald-800"
+                            ? "border-amber-500 bg-amber-50 text-amber-700"
                             : "border-zinc-400"
                       }`}
                     >

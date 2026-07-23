@@ -987,11 +987,19 @@ function FillExercise({
 
         const inputWidth = exercise.inputWidth ?? "w-28";
 
-        const inputEl = validated && !correct && revealCorrection ? (
-          <span className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
-            <span className="text-[10px] leading-none text-zinc-900">{userAnswer || "—"}</span>
-            <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500">{item.answer}</span>
-          </span>
+        const inputEl = validated && revealCorrection ? (
+          correct || !userAnswer.trim() ? (
+            <span
+              className={`inline-block h-8 ${inputWidth} border-0 border-b-2 border-amber-500 px-2 text-center text-sm font-semibold text-amber-600 mx-1 align-middle leading-8`}
+            >
+              {item.answer}
+            </span>
+          ) : (
+            <span className={`inline-flex h-8 ${inputWidth} flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle`}>
+              <span className="text-[10px] leading-none text-zinc-900">{userAnswer || "—"}</span>
+              <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500">{item.answer}</span>
+            </span>
+          )
         ) : (
           <input
             type="text"
