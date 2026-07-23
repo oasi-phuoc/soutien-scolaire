@@ -11,6 +11,11 @@ export interface PrintExercise {
   preview?: ReactNode;
   /** Même série que `preview`, avec réponses affichées (bloc corrigé). */
   correctionPreview?: ReactNode;
+  /**
+   * Bloc corrigé affiché avant les réponses (ex. QR + transcriptions CO).
+   * Un saut de page est forcé avant `correctionPreview`.
+   */
+  correctionLeadPreview?: ReactNode;
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
 }
@@ -1057,17 +1062,65 @@ export function PrintConfigSheet({
                     });
                   }
                   block.items.forEach((item, index) => {
-                    const body = item.correction
-                      ? (item.exercise?.correctionPreview ?? item.exercise?.preview)
-                      : item.exercise?.preview;
-                    const forceNewPage =
+                    const exercise = item.exercise;
+                    const forceFirstAfterAnnounce =
                       Boolean(announcementPreview) &&
                       block.key === "eleve" &&
                       index === 0 &&
                       !block.title;
+
+                    if (item.correction && exercise?.correctionLeadPreview) {
+                      sectionNodes.push({
+                        key: `${item.key}-lead`,
+                        forceNewPage: forceFirstAfterAnnounce,
+                        node: (
+                          <div className="print-exercise">
+                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                              <span className="flex-1">
+                                Exercice {index + 1} — Audios & transcriptions
+                              </span>
+                              {evalMode && (
+                                <span style={{ color: "black" }}>
+                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                </span>
+                              )}
+                            </div>
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              {exercise.correctionLeadPreview}
+                            </div>
+                          </div>
+                        ),
+                      });
+                      sectionNodes.push({
+                        key: item.key,
+                        forceNewPage: true,
+                        node: (
+                          <div className="print-exercise">
+                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                              <span className="flex-1">Exercice {index + 1} — Corrigé</span>
+                              {evalMode && (
+                                <span style={{ color: "black" }}>
+                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                </span>
+                              )}
+                            </div>
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              {exercise.correctionPreview ?? exercise.preview ?? (
+                                <div className="h-7 border-b border-black/40" />
+                              )}
+                            </div>
+                          </div>
+                        ),
+                      });
+                      return;
+                    }
+
+                    const body = item.correction
+                      ? (exercise?.correctionPreview ?? exercise?.preview)
+                      : exercise?.preview;
                     sectionNodes.push({
                       key: item.key,
-                      forceNewPage,
+                      forceNewPage: forceFirstAfterAnnounce,
                       node: (
                         <div className="print-exercise">
                           <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
