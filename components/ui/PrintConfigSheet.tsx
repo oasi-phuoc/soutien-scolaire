@@ -667,14 +667,6 @@ export function PrintConfigSheet({
       ]
     : [{ key: "eleve", title: null as string | null, items: previewExercises }];
 
-  const handleBack = () => {
-    if (step === 0) {
-      onClose();
-    } else {
-      setStep((current) => current - 1);
-    }
-  };
-
   const handleNext = () => {
     if (step < 2) {
       setStep((current) => current + 1);
@@ -697,8 +689,8 @@ export function PrintConfigSheet({
         <div className="app-shell flex min-h-20 w-full items-center gap-4 py-4">
           <button
             type="button"
-            onClick={handleBack}
-            aria-label="Retour"
+            onClick={onClose}
+            aria-label="Quitter l'impression"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-85"
             style={{ background: accentColor }}
           >
@@ -1123,7 +1115,7 @@ export function PrintConfigSheet({
 
       {/* Legacy action bridge consumed by MainNav. */}
       <div className="hidden fixed bottom-0 left-0 right-0">
-        <button type="button" onClick={handleBack} aria-label="Retour">Retour</button>
+        <button type="button" onClick={onClose} aria-label="Retour">Retour</button>
         {step === 2 && (
           <button
             type="button"
