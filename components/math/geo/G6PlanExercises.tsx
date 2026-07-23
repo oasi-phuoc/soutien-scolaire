@@ -546,7 +546,7 @@ export function G6QAllFigureCoordsExercise({ exNum, validateCommand, onValidated
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -728,7 +728,7 @@ export function G6GridReadExercise({ exNum, validateCommand, onValidated, review
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -833,7 +833,7 @@ export function G6GridPlaceExercise({ exNum, validateCommand, onValidated, revie
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Cliquez sur les formes et placez-les dans les coordonnées indiquées." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -917,7 +917,7 @@ export function G6MedievalLocateExercise({ exNum, validateCommand, onValidated }
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm font-semibold text-[var(--color-text-primary)]">Où sont-ils ?</p>
       <LetterGrid
         cols={["A", "B", "C", "D", "E", "F", "G"]}
@@ -994,7 +994,7 @@ export function G6Q1FigureCoordsExercise({ exNum, validateCommand, onValidated, 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -1069,7 +1069,7 @@ export function G6Q2FigureCoordsExercise({ exNum, validateCommand, onValidated, 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Notez les coordonnées des points." />
       <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -1144,7 +1144,7 @@ export function G6CartesianCoordsExercise({ exNum, validateCommand, onValidated 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Je note les coordonnées des points (x ; y). Chaque petit carré = 2 unités.</p>
       <svg viewBox={`0 0 ${svgW} ${svgH}`} className="mx-auto w-full max-w-lg border border-[var(--color-border-default)] rounded-lg bg-white">
         {Array.from({ length: Math.floor(maxX / 2) + 1 }, (_, i) => i * 2).map((v) => (
@@ -1322,7 +1322,7 @@ function MapPoolExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <MapGrid cols={cols} rows={rows} landmarks={landmarks} title={title} />
       <p className="text-sm text-[var(--color-text-secondary)]">Répondez aux questions ci-dessous :</p>
       <div className="space-y-4">
@@ -1490,7 +1490,7 @@ export function G6RebeuvelierExercise({ exNum, validateCommand, onValidated }: E
 
   return (
     <div className="space-y-6">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{REBEUVELIER_MAP.title} — repère (x ; y), origine en bas à gauche.</p>
 
       <div className="cursor-crosshair" onClick={() => {}}>

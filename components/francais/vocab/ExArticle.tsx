@@ -103,7 +103,7 @@ export function ExArticle({
   if (words.length === 0) {
     return (
       <div>
-        <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+        <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
         <p className="text-sm text-[var(--color-text-secondary)]">Aucun mot avec article pour ce thème.</p>
       </div>
     );
@@ -111,7 +111,7 @@ export function ExArticle({
 
   return (
     <div>
-      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez l&apos;article défini (le, la, l&apos;, les).
       </p>

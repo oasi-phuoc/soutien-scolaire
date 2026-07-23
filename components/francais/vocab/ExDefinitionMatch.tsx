@@ -77,7 +77,7 @@ export function ExDefinitionMatch({
 
   return (
     <div>
-      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Associez chaque définition au mot correspondant en choisissant la lettre.
       </p>

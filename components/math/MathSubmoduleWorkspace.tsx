@@ -1716,7 +1716,7 @@ function PoolGroupExercise({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Résolvez les problèmes. Écrivez uniquement la réponse.</p>
       </div>
       <div className="space-y-6">
@@ -2757,7 +2757,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       {currentStep?.kind === "exercise" && (
         <div className="space-y-4">
           <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+            <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">
               Exercice {currentStep.exNum}
             </h2>
             <p className="mt-2 text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">

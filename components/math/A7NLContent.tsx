@@ -176,7 +176,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Écrivez la valeur indiquée par chaque flèche.</p>
       <div className="space-y-5">
         {cfg.questions.map((q, ai) => {
@@ -387,7 +387,7 @@ function NLPlaceExercise({ exNum, validateCommand, onValidated, cfg }: {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Cliquez un nombre ci-dessous, puis cliquez sa position P sur la droite numérique.</p>
       <div className="space-y-6">
         {cfg.groups.map((group, gi) => (

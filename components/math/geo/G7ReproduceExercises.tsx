@@ -244,7 +244,7 @@ export function G7ReproduceExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{taskConsigne(task)}</p>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

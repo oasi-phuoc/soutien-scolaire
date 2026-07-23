@@ -1742,20 +1742,15 @@ export function buildPlacementCoPrintExercises(
       label: `CO ${index + 1}. ${part.title}`,
       defaultPoints: part.points,
       preview: (
-        <div className="space-y-3">
-          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
-            Exercice {index + 1}
-          </p>
-          <QuestionBlock
-            part={part}
-            answers={{}}
-            onAnswer={() => undefined}
-            hideAudioPlayer
-            hidePoints
-            forPrint
-            qrItems={qrItems}
-          />
-        </div>
+        <QuestionBlock
+          part={part}
+          answers={{}}
+          onAnswer={() => undefined}
+          hideAudioPlayer
+          hidePoints
+          forPrint
+          qrItems={qrItems}
+        />
       ),
       correctionLeadPreview: (
         <QuestionBlock

@@ -1478,7 +1478,7 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
       </div>
       <div className="space-y-4">
@@ -1563,7 +1563,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les fractions. Choisissez &lt;, = ou &gt;.</p>
       </div>
       <div className="space-y-4">
@@ -1656,7 +1656,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme décimale.</p>
       </div>
       <div className="space-y-4">
@@ -1731,7 +1731,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
       <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 3.5rem 1.5rem 3.5rem", alignItems: "center" }}>

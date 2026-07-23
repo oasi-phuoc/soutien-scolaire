@@ -143,7 +143,7 @@ export function ExSentenceWrite({
           Décrivez quelque chose pour pouvoir corriger la phrase.
         </div>
       )}
-      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez une phrase complète avec le mot proposé.<br />Commencez par une majuscule et terminez par un point.
       </p>

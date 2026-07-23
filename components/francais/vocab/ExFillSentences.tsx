@@ -77,7 +77,7 @@ export function ExFillSentences({
   if (sentences.length === 0) {
     return (
       <div>
-        <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+        <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
         <p className="text-sm text-[var(--color-text-secondary)]">
           Aucune phrase disponible pour ce thème.
         </p>
@@ -87,7 +87,7 @@ export function ExFillSentences({
 
   return (
     <div>
-      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Complétez chaque phrase avec le mot correct.
       </p>

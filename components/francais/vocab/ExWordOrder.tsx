@@ -66,7 +66,7 @@ export function ExWordOrder({
   if (phrases.length === 0) {
     return (
       <div>
-        <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+        <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
         <p className="text-sm text-[var(--color-text-secondary)]">Pas de phrases disponibles pour ce thème.</p>
       </div>
     );
@@ -74,7 +74,7 @@ export function ExWordOrder({
 
   return (
     <div>
-      <p className="eval-exercise-title mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+      <p className="eval-exercise-title mb-3 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Cliquez sur les mots pour former une phrase.
         Un mot commence par une majuscule et un mot contient la ponctuation.

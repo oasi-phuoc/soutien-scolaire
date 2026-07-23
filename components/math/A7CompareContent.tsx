@@ -77,7 +77,7 @@ export function A7CompareExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
       <div className="space-y-3">
         {questions.map((q, i) => (
@@ -177,7 +177,7 @@ export function A7RelNumberSelectExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       <div className="grid grid-cols-5 gap-2">
         {numbers.map((n, i) => {
@@ -251,7 +251,7 @@ export function A7RelEncadrementExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à la dizaine près.</p>
       <div className="space-y-3">
         {questions.map((q, i) => {
@@ -341,7 +341,7 @@ export function A7RelOrderingExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre croissant (du plus petit au plus grand).</p>
       <div className="space-y-6">
         {groups.map((g, gi) => {
@@ -445,7 +445,7 @@ export function A7RelSeqCompleteExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
       <div className="space-y-5">
         {questions.map((q, qi) => {

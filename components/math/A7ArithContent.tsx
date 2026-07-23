@@ -241,7 +241,7 @@ function RelArithExercise({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {timerProp !== undefined && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated

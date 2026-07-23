@@ -317,7 +317,7 @@ export function G5VolumeExercise({ exNum, solidKind, mode, decimals = false, val
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
       </div>
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">

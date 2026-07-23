@@ -91,7 +91,7 @@ function DecExercise({
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">
           Exercice {exNum}
         </h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
@@ -403,7 +403,7 @@ export function DecArithGroupExercise({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {timer !== undefined && !hideTimerDisplay && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
@@ -840,7 +840,7 @@ export function DecMulColGridExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
         Posez le calcul en colonnes et complétez.
       </p>
@@ -1248,7 +1248,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       <div className="grid grid-cols-1 gap-4">
         {questions.map((q: DecColQ, qi: number) => (
@@ -1443,7 +1443,7 @@ export function DecColArithFullExercise({ exNum, validateCommand, onValidated }:
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les calculs en colonnes (tous les chiffres sont à saisir).</p>
       <div className="grid grid-cols-1 gap-4">
         {questions.map((q: DecColQ, qi: number) => (
@@ -1537,7 +1537,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les expressions. Choisissez &lt;, = ou &gt;.</p>
       </div>
       <div className="grid items-center gap-y-4" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
@@ -1909,7 +1909,7 @@ export function DecMul2ColExercise({ exNum, validateCommand, onValidated }: {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
         Posez et effectuez les multiplications en colonnes (méthode des entiers + virgule).
       </p>

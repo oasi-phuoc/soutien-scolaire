@@ -186,7 +186,7 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le pourcentage en fraction.</p>
       <div className="space-y-4">
         {questions.map((q, i) => {
@@ -260,7 +260,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le pourcentage en décimal.</p>
       <div className="space-y-3">
         {questions.map((q, i) => {
@@ -332,7 +332,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez la fraction en pourcentage.</p>
       <div className="space-y-3">
         {questions.map((q, i) => {
@@ -404,7 +404,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Convertissez le décimal en pourcentage.</p>
       <div className="space-y-3">
         {questions.map((q, i) => {
@@ -459,7 +459,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez la valeur correspondant au pourcentage indiqué.</p>
       <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
@@ -551,7 +551,7 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Complétez les valeurs manquantes.</p>
       <div className="grid grid-cols-[auto_auto_auto_auto] items-center justify-items-center gap-x-[10px] gap-y-3 w-fit">
         <span />
@@ -685,7 +685,7 @@ export function PctDiffExercise({ validateCommand, onValidated, exNum }: Validat
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">De combien la valeur augmente ou diminue ?</p>
       <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" revealCorrection={revealCorrection} />
     </div>
@@ -717,7 +717,7 @@ export function PctChangeExercise({ validateCommand, onValidated, exNum }: Valid
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez les valeurs finales.</p>
       <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" revealCorrection={revealCorrection} />
     </div>
@@ -773,7 +773,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Quelle opération faut-il effectuer ?</p>
       <div className="grid grid-cols-[auto_1fr] items-start gap-x-3 gap-y-4">
         {questions.map((q, i) => {
@@ -956,7 +956,7 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Résolvez les problèmes.</p>
       <div className="space-y-5">
         {questions.map((q, i) => {
@@ -1014,7 +1014,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
 
   return (
     <div>
-      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-3 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Déterminez quelle part en pourcentage représente la valeur indiquée.</p>
       <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {

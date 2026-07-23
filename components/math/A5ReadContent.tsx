@@ -120,7 +120,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {items.map((item, i) => (
@@ -175,7 +175,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {items.map((item, i) => (
@@ -237,7 +237,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-5">
         {items.map((item, i) => {
@@ -337,7 +337,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-5">
         {items.map((item, i) => (
@@ -404,7 +404,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-3">
         {nums.map((n, i) => (
@@ -475,7 +475,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {pairs.map((pair, i) => {
@@ -560,7 +560,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       {/* Slots */}
       <div className="flex gap-2 flex-wrap">
@@ -686,7 +686,7 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -784,7 +784,7 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez le nombre décimal encadré.</p>
       </div>
       <div className="grid grid-cols-[1.5rem_3.5rem_1.25rem_5rem_1.25rem_3.5rem] items-center gap-x-2 gap-y-3">
@@ -851,7 +851,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à l&apos;unité près.</p>
       </div>
       <div className="grid grid-cols-[1.5rem_5rem_1.25rem_minmax(3rem,max-content)_1.25rem_5rem] items-center gap-x-2 gap-y-3">
@@ -928,7 +928,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-6">
         {lines.map((line, li) => {
@@ -1060,7 +1060,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-3">
         <div className="w-full overflow-x-auto">

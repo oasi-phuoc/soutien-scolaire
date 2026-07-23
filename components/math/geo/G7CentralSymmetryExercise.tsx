@@ -143,7 +143,7 @@ export function G7CentralSymmetryExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold" style={{ color: ACCENT }}>Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{centralConsigne(task)}</p>
       <div className="overflow-x-auto rounded-lg border border-[var(--color-border-default)] bg-white p-3">
         <G7GridCanvas

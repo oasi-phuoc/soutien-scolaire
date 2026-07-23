@@ -1893,7 +1893,7 @@ function ComparisonExercise({
   const numW = maxA >= 10000 ? "6ch" : maxA >= 1000 ? "5ch" : maxA >= 100 ? "3ch" : "2ch";
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
       <div className="space-y-3">
           {config.questions.map((q, i) => (
@@ -1978,7 +1978,7 @@ function ExprCompExercise({
   );
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
         <div className="space-y-3">
           {config.questions.map((q, i) => (
@@ -2930,7 +2930,7 @@ function WordProblemsExercise({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne ?? "Résolvez les problèmes. Écrivez uniquement la réponse numérique."}</p>
       </div>
       <div className="space-y-6">
@@ -2992,7 +2992,7 @@ function UnitConversionExercise({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Convertissez les valeurs vers l&apos;unité de mesure demandée.
         </p>
@@ -3086,7 +3086,7 @@ function ArithmeticGroupExercise({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
         {config.timer !== undefined && !hideTimerDisplay && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
@@ -3314,7 +3314,7 @@ function ColumnGridExercise({
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {consigne && (
         <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       )}
@@ -3780,7 +3780,7 @@ function Mul2DigitExercise({
   void results;
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
         Effectuez les multiplications en colonnes. Écrivez les produits partiels, les retenues et le résultat.
       </p>
@@ -3826,7 +3826,7 @@ function DivColumnGridExercise({
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]" lang={consigneLang} dir={consigneDir}>{consigne ?? "Effectuez les divisions en colonnes."}</p>
       <div className="flex flex-col gap-3">
         {config.questions.map((q, qi) => (
@@ -3876,7 +3876,7 @@ function RoundingExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
       <div className={noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4"}>
         <div
@@ -3966,7 +3966,7 @@ function FracIdExercise({ config, answers, validated, results, onChange, revealC
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-4`}>
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
@@ -4010,7 +4010,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange, reve
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les fractions équivalentes.</p>
       <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-5`}>
         {config.questions.map((q, i) => {
@@ -4074,7 +4074,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange, r
   const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Simplifiez les fractions.</p>
       <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-5`}>
         {config.questions.map((q, i) => {
@@ -4126,7 +4126,7 @@ function FracCompareExercise({ config, answers, validated, onAnswer, revealCorre
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les fractions suivantes.</p>
       <div className={`${noFrame ? "" : "rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4 "}space-y-4`}>
         {config.questions.map((q, i) => (
@@ -4303,7 +4303,7 @@ function GeoPlacementExercise({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
       {step.geoKind === "square" ? <SquareGeoExercise {...common} revealCorrection={revealCorrection} /> :
         step.geoKind === "rectangle" ? <PlacementRectangleExercise {...common} /> :
         step.geoKind === "triangle" ? <PlacementTriangleExercise {...common} /> :
@@ -10088,7 +10088,7 @@ export function GenericModuleContent({
         const numericOnly = step.lesson.submoduleId === "A9-3";
         return (
           <div className="space-y-4">
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
+            <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
             <p className="text-sm text-[var(--color-text-primary)]" lang={stepConsLang(`symbolic_${step.exNum}`)} dir={stepConsDir(`symbolic_${step.exNum}`)}>
               {stepCons(`symbolic_${step.exNum}`, step.instruction)}
             </p>
@@ -10185,7 +10185,7 @@ export function GenericModuleContent({
           const btnClsSingle = (active: boolean) => `px-1.5 py-0.5 text-xs rounded border transition-colors ${active ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50"}`;
           return (
             <div className="space-y-5">
-              <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
+              <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">Résolvez l&apos;équation. Écrivez le développement, puis la valeur de x.</p>
               <div className="space-y-5">
                 <div className="mb-5 text-center font-mono text-sm text-[var(--color-text-primary)]">{renderText(q.expr)}</div>
@@ -10249,7 +10249,7 @@ export function GenericModuleContent({
         }
         return (
           <div className="space-y-4">
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
+            <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Résolvez les équations. Entrez un entier (ex&nbsp;: 4&nbsp;ou&nbsp;−6), une fraction (ex&nbsp;: −1/4), <em>impossible</em> ou <em>IR</em>.</p>
             <div className="space-y-4">
               {step.questions.map((q, i) => {
@@ -10295,7 +10295,7 @@ export function GenericModuleContent({
         const workInputCls = "w-full px-0 pb-1 text-sm font-mono rounded-none border-0 border-b-2 outline-none transition-colors disabled:opacity-70 border-[var(--color-accent-alg)]/50 focus:border-amber-500";
         return (
           <div className="space-y-5">
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
+            <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum ?? 1}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Résolvez le système. Écrivez le développement, puis l&apos;ensemble solution.</p>
             <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] items-center gap-x-3 font-mono text-sm text-[var(--color-text-primary)]">
               <span className="text-sm font-serif">I</span>
@@ -10543,7 +10543,7 @@ export function GenericModuleContent({
       {/* Number select exercise (A1.3) */}
       {!showEvalScore && currentStep?.kind === "number_select" && activeNumberSelectConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNumberSelectConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNumberSelectConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">{activeNumberSelectConfig.consigne}</p>
           <div className="grid grid-cols-5 gap-2">
             {activeNumberSelectConfig.numbers.map((n, i) => {
@@ -10577,7 +10577,7 @@ export function GenericModuleContent({
       {/* Encadrement exercise (A1.3) */}
       {!showEvalScore && currentStep?.kind === "encadrement" && activeEncadrementConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeEncadrementConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeEncadrementConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
             Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
           </p>
@@ -10634,7 +10634,7 @@ export function GenericModuleContent({
       {/* Odd/Even exercise (A1.4) */}
       {!showEvalScore && currentStep?.kind === "odd_even" && activeOddEvenConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOddEvenConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOddEvenConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Indiquez si chaque nombre est pair ou impair.</p>
           <div className="space-y-3">
             {activeOddEvenConfig.questions.map((q, i) => {
@@ -10682,7 +10682,7 @@ export function GenericModuleContent({
       {/* Number line multi exercise (A1.4) */}
       {!showEvalScore && currentStep?.kind === "nl_multi" && activeNlMultiConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNlMultiConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNlMultiConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">{activeNlMultiConfig.consigne}</p>
           <div className="space-y-5">
             {activeNlMultiConfig.questions.map((q, i) => {
@@ -10726,7 +10726,7 @@ export function GenericModuleContent({
       {/* Ordering exercise (A1.5) */}
       {!showEvalScore && currentStep?.kind === "ordering" && activeOrderingConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOrderingConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOrderingConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
             Classez les nombres dans l&apos;ordre {activeOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
           </p>
@@ -10794,7 +10794,7 @@ export function GenericModuleContent({
       {/* Sequence rule exercise (A1.5) */}
       {!showEvalScore && currentStep?.kind === "seq_rule" && activeSeqRuleConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqRuleConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
           <div className="space-y-4">
             {activeSeqRuleConfig.questions.map((q, i) => {
@@ -10831,7 +10831,7 @@ export function GenericModuleContent({
       {/* Sequence complete exercise (A1.5) */}
       {!showEvalScore && currentStep?.kind === "seq_complete" && activeSeqCompleteConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
           <div className="space-y-5">
             {(() => {
@@ -10891,7 +10891,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
         <div className="space-y-4">
           <div>
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</h2>
+            <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">
               {activeDecOrderingConfig.direction === "desc"
                 ? "Classez les nombres dans l’ordre décroissant (plus grand au plus petit)."
@@ -10962,7 +10962,7 @@ export function GenericModuleContent({
       {/* Decimal sequence rule exercise (A5.2) */}
       {!showEvalScore && currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
           <div className="overflow-x-auto">
             <div
@@ -11002,7 +11002,7 @@ export function GenericModuleContent({
       {/* Decimal sequence complete exercise (A5.3) */}
       {!showEvalScore && currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
           <div className="overflow-x-auto">
             <div
@@ -11502,7 +11502,7 @@ export function GenericModuleContent({
       {/* A3.5 — Mult select exercise */}
       {!showEvalScore && currentStep?.kind === "mult_select" && activeMultSelectConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultSelectConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultSelectConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les multiples de <strong className="font-bold">{activeMultSelectConfig.base}</strong>.</p>
           <div className="grid grid-cols-5 gap-2">
             {activeMultSelectConfig.numbers.map((n, i) => {
@@ -11534,7 +11534,7 @@ export function GenericModuleContent({
       {/* A3.5 — Mult list exercise */}
       {!showEvalScore && currentStep?.kind === "mult_list" && activeMultListConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultListConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultListConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les 5 premiers multiple des nombres. Séparez les par des virgules.</p>
           <div className="space-y-4">
             {activeMultListConfig.bases.map((base, i) => {
@@ -11569,7 +11569,7 @@ export function GenericModuleContent({
       {/* A3.5 — True/false mult/div exercise */}
       {!showEvalScore && currentStep?.kind === "true_false_mult_div" && activeTfMultDivConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfMultDivConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfMultDivConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
           <div className="space-y-3">
             {activeTfMultDivConfig.questions.map((q, i) => {
@@ -11614,7 +11614,7 @@ export function GenericModuleContent({
       {/* A3.5 — Find divisors exercise */}
       {!showEvalScore && currentStep?.kind === "find_divisors" && activeFindDivisorsConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeFindDivisorsConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeFindDivisorsConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouve tous les diviseurs des nombres. Sépare les par des virgules.</p>
           <div className="space-y-4">
             {activeFindDivisorsConfig.questions.map((q, i) => {
@@ -11649,7 +11649,7 @@ export function GenericModuleContent({
       {/* A3.5 — Div select exercise */}
       {!showEvalScore && currentStep?.kind === "div_select" && activeDivSelectConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivSelectConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivSelectConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les nombres divisibles par <strong className="font-bold">{activeDivSelectConfig.base}</strong>.</p>
           <div className="grid grid-cols-5 gap-2">
             {activeDivSelectConfig.numbers.map((n, i) => {
@@ -11681,7 +11681,7 @@ export function GenericModuleContent({
       {/* A3.5 — Div by exercise */}
       {!showEvalScore && currentStep?.kind === "div_by" && activeDivByConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivByConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivByConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez le ou les diviseurs corrects pour les nombres suivants.</p>
           <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content repeat(5, 2.5rem)" }}>
             {activeDivByConfig.questions.map((q, i) => {
@@ -11724,7 +11724,7 @@ export function GenericModuleContent({
       {/* A3.5 — Missing digit exercise */}
       {!showEvalScore && currentStep?.kind === "missing_digit_div" && activeMissingDigitConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMissingDigitConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMissingDigitConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le chiffre manquant pour que le nombre soit divisible.</p>
           <div className="grid items-center gap-x-4 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content max-content" }}>
             {activeMissingDigitConfig.questions.map((q, i) => {
@@ -11759,7 +11759,7 @@ export function GenericModuleContent({
       {/* A3.6 — GCD/LCM exercise */}
       {!showEvalScore && currentStep?.kind === "gcd_lcm" && activeGcdLcmConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeGcdLcmConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeGcdLcmConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
             Calculez le {activeGcdLcmConfig.op === "pgcd" ? "PGDC" : "PPMC"} des nombres.
           </p>
@@ -11793,7 +11793,7 @@ export function GenericModuleContent({
       {/* A3.6 — True/false GCD/LCM exercise */}
       {!showEvalScore && currentStep?.kind === "true_false_gcd_lcm" && activeTfGcdLcmConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfGcdLcmConfig.exNum}</h2>
+          <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfGcdLcmConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
           <div className="space-y-3">
             {activeTfGcdLcmConfig.questions.map((q, i) => {

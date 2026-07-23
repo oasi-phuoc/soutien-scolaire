@@ -508,7 +508,7 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
       </div>
 

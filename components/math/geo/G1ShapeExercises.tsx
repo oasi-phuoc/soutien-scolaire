@@ -130,7 +130,7 @@ export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExPr
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Quel est le nom de cette forme ?</p>
       </div>
       <div className="space-y-4">
@@ -229,7 +229,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Associez chaque image au mot en choisissant la lettre correspondante.</p>
       </div>
       {/* Name list */}
@@ -329,7 +329,7 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Associez chaque définition au mot correspondant en choisissant la lettre.</p>
       </div>
       <div className="grid grid-cols-2 gap-x-6 gap-y-1 border-b border-[var(--color-border-default)] pb-3">
@@ -435,7 +435,7 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Complétez le nom de la forme.</p>
       </div>
       <div className="space-y-3">
@@ -538,7 +538,7 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cliquez sur les lettres pour former le mot.</p>
       </div>
       <div className="space-y-5">
@@ -622,7 +622,7 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Regardez et écrivez le mot correspondant.</p>
       </div>
       <div className="space-y-3">
@@ -791,7 +791,7 @@ export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExP
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cochez les propriétés qui s&apos;appliquent à cette forme.</p>
       </div>
       <div className="flex items-center gap-3">
@@ -890,7 +890,7 @@ export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExPro
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Répondez aux questions sur les formes.</p>
       </div>
       <div className="space-y-4">

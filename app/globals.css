@@ -545,3 +545,21 @@ input[type=number] {
 .overflow-hidden.rounded-\[var\(--radius-lg\)\] > .module-list-header:only-child button:focus-visible {
   border-radius: var(--radius-lg);
 }
+
+/* Espace sous les titres d'exercice (français vocab, maths, impression) */
+.eval-exercise-title {
+  margin-bottom: 0.75rem !important;
+}
+
+.print-layout-context .print-ex-title {
+  margin-bottom: 1em !important;
+  padding-bottom: 0.4em !important;
+}
+
+.print-layout-context .print-ex-content > h2:first-child,
+.print-layout-context .print-ex-content > div > h2:first-child,
+.print-layout-context .print-ex-content > .space-y-4 > h2:first-child,
+.print-layout-context .print-ex-content > .space-y-5 > h2:first-child,
+.print-layout-context .print-ex-content > div > div > h2:first-child {
+  margin-bottom: 0.65em !important;
+}

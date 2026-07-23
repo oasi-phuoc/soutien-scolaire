@@ -45,7 +45,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -130,7 +130,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -233,7 +233,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -322,7 +322,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
@@ -430,7 +430,7 @@ export function A8PowerOrderExercise({ exNum, count, promptFr, validateCommand, 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="space-y-6">
@@ -527,7 +527,7 @@ function PureCalcExercise<Q extends { result: number }>({
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -723,7 +723,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -819,7 +819,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -908,7 +908,7 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -955,7 +955,7 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1025,7 +1025,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1104,7 +1104,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1211,7 +1211,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1309,7 +1309,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1379,7 +1379,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
@@ -1499,7 +1499,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
         {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">

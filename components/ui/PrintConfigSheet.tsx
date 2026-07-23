@@ -5,6 +5,9 @@ import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/util
 import { AppSelect } from "@/components/ui/AppSelect";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
+const PRINT_EX_TITLE_CLASS =
+  "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
+
 export interface PrintExercise {
   id: string;
   label: string;
@@ -1087,7 +1090,7 @@ export function PrintConfigSheet({
                         forceNewPage: forceFirstAfterAnnounce,
                         node: (
                           <div className="print-exercise">
-                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
                                 Exercice {index + 1} — {exercise.correctionLeadTitle ?? "Audios & transcriptions"}
                               </span>
@@ -1108,7 +1111,7 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">Exercice {index + 1} — Corrigé</span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
@@ -1138,7 +1141,7 @@ export function PrintConfigSheet({
                         forceNewPage: forceFirstAfterAnnounce,
                         node: (
                           <div className="print-exercise">
-                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">Exercice {index + 1}</span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
@@ -1157,7 +1160,7 @@ export function PrintConfigSheet({
                         forceNewPage: true,
                         node: (
                           <div className="print-exercise">
-                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                            <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                               <span className="flex-1">
                                 Exercice {index + 1} — {exercise?.leadFollowTitle ?? "Grille"}
                               </span>
@@ -1181,7 +1184,7 @@ export function PrintConfigSheet({
                       forceNewPage: forceFirstAfterAnnounce,
                       node: (
                         <div className="print-exercise">
-                          <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                          <div className={PRINT_EX_TITLE_CLASS} style={{ color: accentColor }}>
                             <span className="flex-1">
                               Exercice {index + 1}
                               {item.correction ? " — Corrigé" : ""}

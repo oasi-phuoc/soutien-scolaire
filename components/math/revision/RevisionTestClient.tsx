@@ -307,7 +307,7 @@ export function RevisionTestClient({
             />
           </div>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">
+            <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">
               Exercice {ex.id}
             </h2>
             <div className="flex items-center gap-2">

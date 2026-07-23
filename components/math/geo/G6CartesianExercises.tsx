@@ -382,7 +382,7 @@ export function G6PolygonIntExercise({ exNum, validateCommand, onValidated }: Ex
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les coordonnées des points du pentagone.</p>
       <CartesianPlane {...bounds} polygon={points} points={points} />
       <CoordInputs points={points} answers={answers} validated={validated} results={results}
@@ -418,7 +418,7 @@ export function G6PolygonHalfExercise({ exNum, validateCommand, onValidated }: E
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Graduez les axes de 1 en 1 et écrivez les coordonnées des points.</p>
       <CartesianPlane xMin={-8} xMax={8} yMin={-6} yMax={8} gridStep={1} polygon={points} points={points} />
       <CoordInputs points={points} answers={answers} validated={validated} results={results} allowDecimal
@@ -694,7 +694,7 @@ export function G6LineIntersectExercise({ exNum, validateCommand, onValidated, r
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Observe les droites sur le repère et réponds aux questions." />
       <CartesianPlane
@@ -792,7 +792,7 @@ export function G6CartesianPlaceExercise({ exNum, validateCommand, onValidated, 
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Placez les points sur le plan." />
       <div className="flex flex-wrap items-center gap-1.5">
@@ -916,7 +916,7 @@ export function G6FindVertexExercise({ exNum, validateCommand, onValidated, revi
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne
         consigne={consigneLang ? vertexExercisePrompt(puzzle.type, consigneLang) : undefined}
         consigneLang={consigneLang}
@@ -1079,7 +1079,7 @@ export function G6PerpParallelPlaceExercise({ exNum, validateCommand, onValidate
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Placez D et E sur le plan." />
       <ol className="list-inside list-decimal space-y-1 text-sm text-[var(--color-text-secondary)]">
@@ -1161,7 +1161,7 @@ export function G6QuadrantReadExercise({ exNum, validateCommand, onValidated, co
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <G6Consigne consigne={consigne} consigneLang={consigneLang} consigneDir={consigneDir}
         fallback="Graduez les axes de 1 en 1 et écrivez les coordonnées des points." />
       <CartesianPlane xMin={-12} xMax={12} yMin={-12} yMax={12} points={points} />

@@ -247,7 +247,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {displayExNum ?? exType}</h2>
+        <h2 className="mb-2 text-base font-bold text-[var(--color-accent-alg)]">Exercice {displayExNum ?? exType}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
       <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: cols }}>
