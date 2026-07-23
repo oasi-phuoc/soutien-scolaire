@@ -722,14 +722,14 @@ function buildParts(level: CELevel, stamp: number): CEPart[] {
               title: card.title,
               body: card.body,
               image: "",
-              imageLabel: card.imageLabel,
+              imageLabel: "",
               questions: perCard[cardIndex] ?? [],
             }));
           })()
         : instructions!.map((card, cardIndex) => ({
             ...card,
-            image: level === "base" ? "" : card.image,
-            imageLabel: level === "base" ? "" : card.imageLabel,
+            image: "",
+            imageLabel: "",
             body: level === "avance" ? `${card.body} Respectez l'ordre des actions et justifiez votre choix.` : card.body,
             questions: card.questions.map((q, qi) =>
               toQuestionTask(q as RawQuestionTask, `${level}-${stamp}-instr-legacy-${cardIndex}-${qi}`),
@@ -1227,36 +1227,60 @@ function EmailPart({
   );
 }
 
-function InstructionsPart({ part, answers, setAnswer, correction }: { part: Extract<CEPart, { layout: "instructions" }>; answers: CEAnswers; setAnswer: (key: string, value: number | string) => void; correction?: boolean }) {
+function InstructionsPart({
+  part,
+  answers,
+  setAnswer,
+  correction,
+  cardIndices,
+  forPrint = false,
+}: {
+  part: Extract<CEPart, { layout: "instructions" }>;
+  answers: CEAnswers;
+  setAnswer: (key: string, value: number | string) => void;
+  correction?: boolean;
+  /** Indices des cartes à afficher (impression : pagination 2 max / page). */
+  cardIndices?: number[];
+  forPrint?: boolean;
+}) {
+  const indices = cardIndices ?? part.cards.map((_, index) => index);
   return (
-    <div className="space-y-5">
-      {part.cards.map((card, cardIndex) => {
-        const showImage = Boolean(card.image || card.imageLabel);
+    <div className={forPrint ? "space-y-4" : "space-y-5"}>
+      {indices.map((cardIndex) => {
+        const card = part.cards[cardIndex];
+        if (!card) return null;
         return (
-        <div key={card.title} className="rounded-xl border border-[var(--color-border-default)] bg-white p-4 shadow-sm">
-          <div className={`flex items-start gap-4 ${showImage ? "" : ""}`}>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold" style={{ color: ACCENT }}>{card.title}</h3>
-              <p className={`mt-2 ${CE_BODY_TEXT_PRE}`}>{card.body}</p>
+          <div
+            key={`${card.title}-${cardIndex}`}
+            className={`rounded-xl border border-[var(--color-border-default)] bg-white shadow-sm ${forPrint ? "p-3" : "p-4"}`}
+          >
+            <div>
+              <h3 className={`font-bold ${forPrint ? "text-base" : "text-lg"}`} style={{ color: ACCENT }}>
+                {card.title}
+              </h3>
+              <p className={`mt-2 ${forPrint ? "whitespace-pre-line text-sm leading-snug text-justify text-[var(--color-text-primary)]" : CE_BODY_TEXT_PRE}`}>
+                {card.body}
+              </p>
             </div>
-            {showImage && (
-              <div className="w-24 shrink-0">
-                <ImagePlaceholder label={card.imageLabel} path={card.image} />
-              </div>
-            )}
+            <div className={`mt-4 ${forPrint ? "space-y-3" : "space-y-4"}`}>
+              {card.questions.map((question, questionIndex) => {
+                const key = questionKey(part, cardIndex, questionIndex);
+                return (
+                  <div key={key} className="space-y-2">
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+                      {questionIndex + 1}. {question.prompt}
+                    </p>
+                    <RenderQuestion
+                      task={question}
+                      value={answers[key] ?? null}
+                      onChange={(value) => setAnswer(key, value)}
+                      correction={correction}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="mt-4 space-y-4">
-            {card.questions.map((question, questionIndex) => {
-              const key = questionKey(part, cardIndex, questionIndex);
-              return (
-                <div key={key} className="space-y-2">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">{questionIndex + 1}. {question.prompt}</p>
-                  <RenderQuestion task={question} value={answers[key] ?? null} onChange={(value) => setAnswer(key, value)} correction={correction} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
         );
       })}
     </div>
@@ -1458,6 +1482,66 @@ export function buildPlacementCePrintExercises(
             correction
             forPrint
             questionsOnly
+          />
+        ),
+      };
+    }
+
+    if (part.layout === "instructions" && part.cards.length > 2) {
+      const answers = buildCeCorrectAnswers(part);
+      const firstIndices = part.cards.map((_, i) => i).slice(0, 2);
+      const restIndices = part.cards.map((_, i) => i).slice(2);
+      const title = (
+        <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+      );
+      return {
+        id: `ce-${index}-${part.id}`,
+        label: `CE ${index + 1}. ${part.title}`,
+        defaultPoints: part.points,
+        leadPreview: (
+          <div className="space-y-3">
+            {title}
+            <InstructionsPart
+              part={part}
+              answers={{}}
+              setAnswer={noopSetAnswer}
+              forPrint
+              cardIndices={firstIndices}
+            />
+          </div>
+        ),
+        leadFollowTitle: "Suite",
+        preview: (
+          <InstructionsPart
+            part={part}
+            answers={{}}
+            setAnswer={noopSetAnswer}
+            forPrint
+            cardIndices={restIndices}
+          />
+        ),
+        correctionLeadPreview: (
+          <div className="space-y-3">
+            {title}
+            <InstructionsPart
+              part={part}
+              answers={answers}
+              setAnswer={noopSetAnswer}
+              correction
+              forPrint
+              cardIndices={firstIndices}
+            />
+          </div>
+        ),
+        correctionLeadTitle: "Messages",
+        correctionPreview: (
+          <InstructionsPart
+            part={part}
+            answers={answers}
+            setAnswer={noopSetAnswer}
+            correction
+            forPrint
+            cardIndices={restIndices}
           />
         ),
       };
