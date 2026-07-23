@@ -14,7 +14,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Le matériel de plongée est fourni sur place. Le prix est de 45 francs par personne. " +
       "Inscris-toi avant jeudi au secrétariat du club.\n\n" +
       "Amuse-toi bien si tu viens !\nMéline",
-    image: "/assets/expression/images/scene/nager-piscine.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-melina-plongee.webp",
     pool: [
       ceQ("mel-q1", "Quelle activité est proposée ?", ["La plongée", "Le ski", "Le vélo"], 0, "C'est une sortie de _________.", "plongée", ["plongee"]),
       ceQ("mel-q2", "Où a lieu la sortie ?", ["Au lac de Neuchâtel", "À la piscine de Genève", "À la montagne"], 0, "La sortie est au lac de _________.", "Neuchâtel", ["neuchatel"]),
@@ -40,7 +40,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Peux-tu apporter un dessert ? Moi, j'apporte les boissons et Ahmad prépare une salade pour tout le monde. " +
       "Réponds-moi avant vendredi, car j'ai besoin de savoir combien de personnes viennent pour organiser la soirée.\n\n" +
       "Merci,\nFred",
-    image: "/assets/expression/images/scene/preparer-anniversaire.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-fred-anniversaire.webp",
     pool: [
       ceQ("fred-q1", "Pour qui est la fête ?", ["Sophie", "Fred", "Ahmad"], 0, "C'est l'anniversaire de _________.", "Sophie", ["sophie"]),
       ceQ("fred-q2", "Quel jour a lieu la fête ?", ["Dimanche", "Lundi", "Samedi"], 0, "La fête est _________.", "dimanche"),
@@ -67,7 +67,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Est-ce que tu peux garder mon chat pendant mon absence ? Il a juste besoin d'eau et de croquettes matin et soir. " +
       "Je te laisse les clés mardi soir.\n\n" +
       "Bisous,\nJulia",
-    image: "/assets/expression/images/scene/souhaiter-bonnes-vacances.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-julia-vacances.webp",
     pool: [
       ceQ("jul-q1", "Où va Julia pendant les vacances ?", ["Chez sa cousine", "À l'école", "Au travail"], 0, "Julia va chez sa _________.", "cousine"),
       ceQ("jul-q2", "Comment s'appelle sa cousine ?", ["Carmen", "Fatima", "Olena"], 0, "Sa cousine s'appelle _________.", "Carmen", ["carmen"]),
@@ -93,7 +93,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Chacun apporte une boisson ou une salade. Moi, je prépare les pizzas et Matteo s'occupe de la musique. " +
       "Si vous venez en tram, descendez à l'arrêt Florissant. Confirmez votre présence par message avant jeudi.\n\n" +
       "À vendredi !\nSophie",
-    image: "/assets/expression/images/scene/manger-pizza.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-sophie-pizza.webp",
     pool: [
       ceQ("sop-q1", "Quel type de soirée organise Sophie ?", ["Une soirée pizza", "Un barbecue", "Un cours de cuisine"], 0, "C'est une soirée _________.", "pizza"),
       ceQ("sop-q2", "Quel jour a lieu la soirée ?", ["Vendredi", "Samedi", "Dimanche"], 0, "La soirée est _________.", "vendredi"),
@@ -120,7 +120,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Entrée : 10 francs pour les adultes, gratuite pour les enfants. " +
       "Après le spectacle, un goûter sera servi dans la salle voisine. Merci d'inscrire votre enfant sur la liste à l'accueil avant le 15 mars.\n\n" +
       "Karl, moniteur de danse",
-    image: "/assets/expression/images/scene/danser-fete.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-karl-danse.webp",
     pool: [
       ceQ("karl-q1", "Quel événement est annoncé ?", ["Une fête de danse", "Un match de foot", "Une vente de livres"], 0, "C'est la fête de _________.", "danse"),
       ceQ("karl-q2", "Où a lieu le spectacle ?", ["À la salle communale", "Au stade", "À la piscine"], 0, "Le spectacle est à la salle _________.", "communale"),
@@ -148,7 +148,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Écrivez au moins dix lignes : présentez-vous, parlez de votre famille et de vos loisirs. " +
       "Les enveloppes et les timbres sont à retirer au secrétariat.\n\n" +
       "Bonne rédaction !\nMme Stefanie",
-    image: "/assets/expression/images/scene/envoyer-lettre.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-stefanie-correspondante.webp",
     pool: [
       ceQ("stef-q1", "Avec quel pays est l'échange ?", ["L'Allemagne", "L'Italie", "L'Espagne"], 0, "L'échange est avec l'_________.", "Allemagne", ["allemagne"]),
       ceQ("stef-q2", "Dans quelle ville est l'école partenaire ?", ["Munich", "Berlin", "Hambourg"], 0, "L'école est à _________.", "Munich", ["munich"]),
@@ -175,7 +175,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Apportez si possible une clé USB vide : je peux vous copier les photos que vous aimez. " +
       "Répondez-moi pour que je sache combien de baklavas préparer.\n\n" +
       "À bientôt,\nAnabelle",
-    image: "/assets/expression/images/scene/prendre-photo.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-anabelle-album.webp",
     pool: [
       ceQ("ana-q1", "D'où revient Anabelle ?", ["De Turquie", "D'Italie", "De France"], 0, "Elle revient de _________.", "Turquie", ["turquie"]),
       ceQ("ana-q2", "Combien de temps est-elle partie ?", ["Deux semaines", "Deux jours", "Deux mois"], 0, "Le voyage dure ___ semaines.", "deux", ["2"]),
@@ -202,7 +202,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Passé le 18 avril, une amende de 2 francs par livre et par semaine sera appliquée. " +
       "Pour prolonger, vous avez besoin de votre numéro de carte et du code reçu par courriel.\n\n" +
       "Cordialement,\nLa bibliothèque",
-    image: "/assets/expression/images/scene/prolonger-emprunt.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-bibliotheque-emprunt.webp",
     pool: [
       ceQ("bib-q1", "Combien de livres sont empruntés ?", ["Trois", "Deux", "Cinq"], 0, "Il y a ___ livres empruntés.", "trois", ["3"]),
       ceQ("bib-q2", "Quelle est la date de retour ?", ["Le 18 avril", "Le 8 avril", "Le 28 avril"], 0, "Retour prévu le 18 _________.", "avril"),
@@ -231,7 +231,7 @@ export const CE_MESSAGES_MOYEN: CEMessageItem[] = [
       "Vous pouvez essayer gratuitement pendant 14 jours. Pour annuler, rendez-vous dans les réglages de votre compte avant la fin de la période d'essai. " +
       "Le paiement se fait par carte bancaire ou Twint.\n\n" +
       "L'équipe Musikenligne",
-    image: "/assets/expression/images/scene/ecouter-musique.webp",
+    image: "/assets/expression/images/scene/ce-moyen-message-musikenligne.webp",
     pool: [
       ceQ("mus-q1", "Quel service est proposé ?", ["De la musique en ligne", "Des cours de danse", "Des livres"], 0, "C'est de la musique en _________.", "ligne"),
       ceQ("mus-q2", "Combien coûte la formule Solo ?", ["9,90 francs", "14,90 francs", "19,90 francs"], 0, "La formule Solo coûte 9,90 _________.", "francs"),

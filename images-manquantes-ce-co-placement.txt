@@ -1,6 +1,6 @@
 Images manquantes — Placement français (CE / CO)
 ================================================
-Total : 48 fichiers
+Total : 39 fichiers
 Dossier CE manquant : public/assets/expression/images-temp/ (inexistant)
 Dossier CO partiel  : public/assets/expression/images/scene/
 
@@ -66,41 +66,6 @@ Activité : Bureau de poste : nouvelle adresse
   - ce-itineraire-poste-trajet-a.webp
   - ce-itineraire-poste-trajet-b.webp
   - ce-itineraire-poste-trajet-c.webp
-
-
---------------------------------------------------------------------------------
-CE — Niveau A2 (moyen) — Exercice « Lire des messages »
-Source : CE_MESSAGES_MOYEN (ce-messages-moyen.ts)
-Dossier cible : /assets/expression/images-temp/
-9 fichiers
---------------------------------------------------------------------------------
-
-Activité : Sortie plongée samedi
-  - ce-moyen-message-melina-plongee.webp
-
-Activité : Anniversaire de Sophie
-  - ce-moyen-message-fred-anniversaire.webp
-
-Activité : Vacances chez ma cousine
-  - ce-moyen-message-julia-vacances.webp
-
-Activité : Soirée pizza vendredi
-  - ce-moyen-message-sophie-pizza.webp
-
-Activité : Fête de l'école de danse
-  - ce-moyen-message-karl-danse.webp
-
-Activité : Correspondance avec l'Allemagne
-  - ce-moyen-message-stefanie-correspondante.webp
-
-Activité : Album photos de Turquie
-  - ce-moyen-message-anabelle-album.webp
-
-Activité : Prolongation d'emprunt
-  - ce-moyen-message-bibliotheque-emprunt.webp
-
-Activité : Abonnements musique en ligne
-  - ce-moyen-message-musikenligne.webp
 
 
 --------------------------------------------------------------------------------
