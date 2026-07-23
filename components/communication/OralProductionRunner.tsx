@@ -953,6 +953,9 @@ export function OralProductionRunner({
               <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
                 Partie 1 — Questions thématiques
               </h2>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                Posez des questions sur ces thèmes. Une question par thème.
+              </p>
             </div>
 
             <div className="space-y-3">
@@ -1912,22 +1915,25 @@ export function buildPlacementPoPrintExercises(
       defaultPoints: 3,
       preview: (
         <div className="space-y-4 text-black">
+          <p className="text-sm leading-relaxed text-zinc-700">
+            Posez des questions sur ces thèmes. Une question par thème.
+          </p>
           {prompt.themes.map((theme) => (
-            <div key={theme.word} className="rounded-lg border border-zinc-200 p-3">
-              <p className="text-sm font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
-              {theme.example ? (
-                <p className="mt-1 text-xs text-zinc-600">Exemple : {theme.example}</p>
-              ) : null}
-              <div className="mt-3">{printBlankLines(2)}</div>
+            <div key={theme.word} className="rounded-lg border border-zinc-300 bg-white px-3 py-3">
+              <p className="text-base font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
+              <div className="mt-2">{printBlankLines(2)}</div>
             </div>
           ))}
         </div>
       ),
       correctionPreview: (
         <div className="space-y-4 text-black">
+          <p className="text-sm leading-relaxed text-zinc-700">
+            Posez des questions sur ces thèmes. Une question par thème.
+          </p>
           {prompt.themes.map((theme) => (
             <div key={theme.word} className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
-              <p className="text-sm font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
+              <p className="text-base font-bold text-[var(--color-accent-quiz)]">{theme.word}</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-emerald-900">
                 {getThemeSuggestions(theme.word).map((q) => (
                   <li key={q}>{q}</li>
