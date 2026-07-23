@@ -372,9 +372,6 @@ export function CorrectedRichEditor({
           className="min-h-[9rem] w-full p-4 text-sm leading-relaxed outline-none empty:before:content-[''] [&_mark]:rounded-sm [&_mark]:px-0.5"
         />
       </div>
-      <p className="border-t border-amber-100 px-3 py-1.5 text-[10px] text-amber-700/80">
-        Sélectionnez un passage puis appliquez gras, souligné, surlignage ou couleur pour montrer la correction à l&apos;élève.
-      </p>
     </div>
   );
 }
