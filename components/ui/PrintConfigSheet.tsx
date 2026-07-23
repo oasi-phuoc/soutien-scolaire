@@ -724,7 +724,7 @@ export function PrintConfigSheet({
 
   return (
     <div
-      className="fixed inset-0 z-40 flex flex-col bg-[var(--color-bg-primary)]"
+      className="fixed inset-0 z-40 flex flex-col bg-[var(--color-bg-primary)] lg:left-[var(--sidebar-w)]"
       data-nav-action-priority="print"
     >
       {/* Header */}
