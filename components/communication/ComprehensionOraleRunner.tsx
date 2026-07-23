@@ -1073,16 +1073,42 @@ function MatchGridQuestionView({
   );
 }
 
+function PrintDialogueNumberLine({
+  correction,
+  expected,
+}: {
+  correction?: boolean;
+  /** Numéro attendu (0 / null = leurre « — »). */
+  expected?: number | null;
+}) {
+  const shown =
+    correction
+      ? expected == null || expected === 0
+        ? "—"
+        : String(expected)
+      : "";
+  return (
+    <div className="mt-1.5 flex items-end gap-1 px-0.5">
+      <span className="shrink-0 text-xs font-semibold text-[var(--color-text-primary)]">N° :</span>
+      <span className="min-h-[1.1em] min-w-[2.75rem] flex-1 border-b border-black pb-0.5 text-center text-sm font-semibold leading-none">
+        {shown || "\u00a0"}
+      </span>
+    </div>
+  );
+}
+
 function ImageMatchQuestionView({
   task,
   value,
   onChange,
   correction,
+  forPrint = false,
 }: {
   task: Extract<QuestionTask, { kind: "image_match" }>;
   value: number | string | number[] | boolean[] | null;
   onChange: (value: number[]) => void;
   correction?: boolean;
+  forPrint?: boolean;
 }) {
   const selected: number[] =
     Array.isArray(value) && value.length === task.cards.length && value.every((v) => typeof v === "number")
@@ -1101,7 +1127,7 @@ function ImageMatchQuestionView({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+    <div className={`grid grid-cols-2 ${forPrint ? "gap-2 sm:gap-3" : "gap-3 sm:gap-4"}`}>
       {task.cards.map((card, index) => {
         const chosen = selected[index] ?? 0;
         const isCorrect = correction && card.correct !== null && chosen === card.correct;
@@ -1109,38 +1135,46 @@ function ImageMatchQuestionView({
         return (
           <div
             key={index}
-            className={`rounded-xl border-2 bg-white ${isCorrect ? "border-amber-400" : isWrong ? "border-red-300" : "border-slate-200"}`}
+            className={
+              forPrint
+                ? "bg-transparent"
+                : `rounded-xl border-2 bg-white ${isCorrect ? "border-amber-400" : isWrong ? "border-red-300" : "border-slate-200"}`
+            }
           >
             <ObjectCardImage src={card.image} alt={card.label} compact />
-            <div className="relative z-10 border-t border-slate-200 p-2">
-              <AppSelect
-                value={String(chosen)}
-                onChange={(v) => setCard(index, Number(v))}
-                options={dialogues.map((d) => {
-                  const takenElsewhere = selected.some((val, i) => i !== index && val === d);
-                  return {
-                    value: String(d),
-                    label: String(d),
-                    disabled: takenElsewhere && chosen !== d,
-                  };
-                })}
-                placeholder="—"
-                emptyOption={{ value: "0", label: "—" }}
-                disabled={correction}
-                size="sm"
-                placement="top"
-                className="w-full"
-                aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
-              />
-              {correction && (
-                <p
-                  className="mt-1 text-center text-xs font-semibold"
-                  style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? "#16a34a" : INVERSE }}
-                >
-                  {card.correct === null ? "Aucun (leurre)" : `Dialogue ${card.correct}`}
-                </p>
-              )}
-            </div>
+            {forPrint ? (
+              <PrintDialogueNumberLine correction={correction} expected={card.correct} />
+            ) : (
+              <div className="relative z-10 border-t border-slate-200 p-2">
+                <AppSelect
+                  value={String(chosen)}
+                  onChange={(v) => setCard(index, Number(v))}
+                  options={dialogues.map((d) => {
+                    const takenElsewhere = selected.some((val, i) => i !== index && val === d);
+                    return {
+                      value: String(d),
+                      label: String(d),
+                      disabled: takenElsewhere && chosen !== d,
+                    };
+                  })}
+                  placeholder="—"
+                  emptyOption={{ value: "0", label: "—" }}
+                  disabled={correction}
+                  size="sm"
+                  placement="top"
+                  className="w-full"
+                  aria-label={`Numéro du dialogue pour l'image ${index + 1}`}
+                />
+                {correction && (
+                  <p
+                    className="mt-1 text-center text-xs font-semibold"
+                    style={{ color: card.correct === null ? "#64748b" : chosen === card.correct ? "#16a34a" : INVERSE }}
+                  >
+                    {card.correct === null ? "Aucun (leurre)" : `Dialogue ${card.correct}`}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         );
       })}
@@ -1153,11 +1187,13 @@ function ConversationImageGridQuestionView({
   value,
   onChange,
   correction,
+  forPrint = false,
 }: {
   task: Extract<QuestionTask, { kind: "conversation_image_grid" }>;
   value: number | string | number[] | boolean[] | null;
   onChange: (value: number[]) => void;
   correction?: boolean;
+  forPrint?: boolean;
 }) {
   const selected: number[] =
     Array.isArray(value) && value.length === 6 && value.every((entry) => typeof entry === "number")
@@ -1178,7 +1214,7 @@ function ConversationImageGridQuestionView({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className={`grid grid-cols-2 ${forPrint ? "gap-2" : "gap-4"}`}>
       {task.cards.map((card, index) => {
         const current = selected[index] ?? 0;
         const expected = task.correctByCard[index] ?? 0;
@@ -1187,36 +1223,44 @@ function ConversationImageGridQuestionView({
         return (
           <div
             key={`${card.suffix}-${index}`}
-            className={`rounded-xl border bg-white ${
-              correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
-            }`}
+            className={
+              forPrint
+                ? "bg-transparent"
+                : `rounded-xl border bg-white ${
+                    correct ? "border-amber-500" : wrong ? "border-red-400" : "border-slate-200"
+                  }`
+            }
           >
             <ObjectCardImage src={card.image} alt={`Situation ${index + 1}`} compact />
-            <div className="relative z-10 border-t border-slate-100 p-2">
-              <AppSelect
-                value={current > 0 ? String(current) : "0"}
-                onChange={(v) => setCard(index, v)}
-                options={[
-                  { value: "1", label: "1" },
-                  { value: "2", label: "2" },
-                  { value: "3", label: "3" },
-                  { value: "4", label: "4" },
-                ]}
-                placeholder="—"
-                emptyOption={{ value: "0", label: "—" }}
-                disabled={correction}
-                error={correction && wrong}
-                size="sm"
-                placement="top"
-                className="w-full"
-                aria-label={`Image ${index + 1} — dialogue`}
-              />
-              {correction && wrong && (
-                <p className="mt-1 text-center text-xs font-semibold text-amber-700">
-                  {expected > 0 ? `Dialogue ${expected}` : "Aucun dialogue"}
-                </p>
-              )}
-            </div>
+            {forPrint ? (
+              <PrintDialogueNumberLine correction={correction} expected={expected} />
+            ) : (
+              <div className="relative z-10 border-t border-slate-100 p-2">
+                <AppSelect
+                  value={current > 0 ? String(current) : "0"}
+                  onChange={(v) => setCard(index, v)}
+                  options={[
+                    { value: "1", label: "1" },
+                    { value: "2", label: "2" },
+                    { value: "3", label: "3" },
+                    { value: "4", label: "4" },
+                  ]}
+                  placeholder="—"
+                  emptyOption={{ value: "0", label: "—" }}
+                  disabled={correction}
+                  error={correction && wrong}
+                  size="sm"
+                  placement="top"
+                  className="w-full"
+                  aria-label={`Image ${index + 1} — dialogue`}
+                />
+                {correction && wrong && (
+                  <p className="mt-1 text-center text-xs font-semibold text-amber-700">
+                    {expected > 0 ? `Dialogue ${expected}` : "Aucun dialogue"}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         );
       })}
@@ -1229,11 +1273,13 @@ function RenderQuestion({
   value,
   onChange,
   correction,
+  forPrint = false,
 }: {
   task: QuestionTask;
   value: number | string | number[] | boolean[] | null;
   onChange: (value: number | string | number[] | boolean[]) => void;
   correction?: boolean;
+  forPrint?: boolean;
 }) {
   if (task.kind === "conversation_image_grid") {
     return (
@@ -1242,6 +1288,7 @@ function RenderQuestion({
         value={value}
         onChange={(v) => onChange(v)}
         correction={correction}
+        forPrint={forPrint}
       />
     );
   }
@@ -1266,7 +1313,15 @@ function RenderQuestion({
     );
   }
   if (task.kind === "image_match") {
-    return <ImageMatchQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
+    return (
+      <ImageMatchQuestionView
+        task={task}
+        value={value}
+        onChange={(v) => onChange(v)}
+        correction={correction}
+        forPrint={forPrint}
+      />
+    );
   }
   if (task.kind === "fill") {
     return <FillQuestionView task={task} value={value} onChange={(v) => onChange(v)} correction={correction} />;
@@ -1283,6 +1338,7 @@ function QuestionBlock({
   hideAudioPlayer = false,
   hideQuestions = false,
   hidePoints = false,
+  forPrint = false,
   qrItems,
 }: {
   part: COPart;
@@ -1297,6 +1353,8 @@ function QuestionBlock({
   hideQuestions?: boolean;
   /** Impression : masquer le badge « X points » (déjà dans l'en-tête). */
   hidePoints?: boolean;
+  /** Impression : réponses manuscrites (N° + trait) à la place des selects. */
+  forPrint?: boolean;
   /** Rangée de QR codes au-dessus des questions / scripts. */
   qrItems?: PrintAudioQrItem[];
 }) {
@@ -1312,9 +1370,13 @@ function QuestionBlock({
   const consigne = qrItems?.length
     ? "Scannez le ou les QR codes pour écouter l'audio, puis répondez aux questions."
     : isConversationImageGrid
-      ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
+      ? forPrint
+        ? "Écoutez les 4 dialogues, puis écrivez sous chaque image le numéro du dialogue correspondant (laissez vide pour les leurres)."
+        : "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
       : isImageMatch
-        ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
+        ? forPrint
+          ? "Écoutez les dialogues, puis écrivez sous chaque image le numéro du dialogue correspondant."
+          : "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
         : isMatchGrid
           ? "Lisez les situations. Écoutez les dialogues puis répondez."
           : isObjectPick
@@ -1390,7 +1452,7 @@ function QuestionBlock({
         const key = `${part.id}-${index}`;
         const answer = answers[key] ?? null;
         return (
-          <div key={key} className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4">
+          <div key={key} className={forPrint ? "space-y-2" : "rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4"}>
             {!isConversationImageGrid && !isSingleTask && (
               <p className="font-semibold text-[var(--color-text-primary)]">{index + 1}. {question.prompt}</p>
             )}
@@ -1409,6 +1471,7 @@ function QuestionBlock({
                 value={answer}
                 onChange={(value) => onAnswer(key, value)}
                 correction={readonly}
+                forPrint={forPrint}
               />
             </div>
             {readonly && !isSingleTask && (
@@ -1684,6 +1747,7 @@ export function buildPlacementCoPrintExercises(
             onAnswer={() => undefined}
             hideAudioPlayer
             hidePoints
+            forPrint
             qrItems={qrItems}
           />
         </div>
@@ -1697,6 +1761,7 @@ export function buildPlacementCoPrintExercises(
           hideAudioPlayer
           hideQuestions
           hidePoints
+          forPrint
           qrItems={qrItems}
         />
       ),
@@ -1707,6 +1772,7 @@ export function buildPlacementCoPrintExercises(
           onAnswer={() => undefined}
           hideAudioPlayer
           hidePoints
+          forPrint
           readonly
         />
       ),
