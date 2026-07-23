@@ -1,12 +1,31 @@
 import { buildObjectPickTask, type COObjectPickCard } from "./co-questions-helpers";
-import { resolveCeCoWordImage } from "../../word-image-resolver";
+import { labelToAssetSlug } from "../../word-image-resolver";
 
 export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
+const LECTURE_DIR = "/assets/words/lecture";
+
+/**
+ * Objet-pick → images vocabulaire (lecture).
+ * Chaussures / chaussures de sport → baskets.
+ */
 function opImg(label: string): string {
-  return resolveCeCoWordImage(label) ?? "";
+  const slug = labelToAssetSlug(label);
+  if (slug === "chaussures-de-sport" || slug === "chaussures" || slug === "chaussure") {
+    return `${LECTURE_DIR}/baskets.webp`;
+  }
+  // Liens explicites demandés (noms de fichiers lecture)
+  const aliases: Record<string, string> = {
+    "carte-detudiant": "carte-detudiant",
+    "carte-didentite": "carte-didentite",
+    chips: "chips",
+    "salade-de-fruits": "salade-de-fruits",
+    "bouteille-deau": "bouteille-deau",
+  };
+  const file = aliases[slug] ?? slug;
+  return `${LECTURE_DIR}/${file}.webp`;
 }
 
 function opCards(

@@ -455,12 +455,15 @@ export function isResolvedImagePath(path: string | undefined | null): boolean {
 }
 
 /**
- * CE/CO — `expression/images/scene/` + images conversation sous `expression/co/…`.
- * Les autres dossiers (lecture, vocab, heure, images/ce, …) sont refusés.
+ * CE/CO — `expression/images/scene/` + images conversation sous `expression/co/…`
+ * + chemins lecture explicites (cartes objet-pick uniquement).
+ * Les QCM image par label restent limités à scene (pas de fallback vocab).
  */
 export function ceCoImageSource(path?: string | null, label?: string): string | null {
   if (path) {
     if (isAllowedCeCoImagePath(path)) return path;
+    // Objet-pick : images vocabulaire lecture passées explicitement
+    if (path.startsWith("/assets/words/lecture/")) return path;
     const remapped = remapExpressionImagePath(path);
     if (remapped) return remapped;
   }
