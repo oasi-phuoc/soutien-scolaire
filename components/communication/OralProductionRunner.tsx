@@ -46,6 +46,7 @@ import type { PlacementRunnerProps } from "@/lib/placement/runner-props";
 import { placementLessonCode } from "@/lib/placement/types";
 import { isRetryablePlacementSubmitError, queuePlacementSubmission } from "@/lib/placement/pending-submissions";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 
 const ACCENT = "var(--color-accent-comm)";
 
@@ -1030,6 +1031,9 @@ export function OralProductionRunner({
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 2 — Entretien dirigé
             </h2>
+            <p className="mt-2 text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">
+              Répondez à chaque question de l&apos;entretien (une réponse claire et complète).
+            </p>
           </div>
 
           {/* All questions shown simultaneously */}
@@ -1122,8 +1126,8 @@ export function OralProductionRunner({
                 </svg>
               </button>
             </div>
-            <p className="mt-1 w-full text-xs leading-relaxed text-[var(--color-text-secondary)]">
-              Enregistrez autant de phrases que vous voulez, puis validez.
+            <p className="mt-1 w-full text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">
+              Décrivez cette image en plusieurs phrases (lieu, personnes, actions, détails). Enregistrez autant de phrases que vous voulez, puis validez.
             </p>
           </div>
 
@@ -1456,8 +1460,8 @@ export function OralProductionRunner({
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
               Partie 5 — Argumentation
             </h2>
-            <p className="mt-1 w-full text-xs leading-relaxed text-[var(--color-text-secondary)]">
-              Enregistrez autant de phrases que vous voulez, puis validez.
+            <p className="mt-1 w-full text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">
+              Développez votre argumentation en plusieurs phrases (opinion, arguments, conclusion). Enregistrez autant de phrases que vous voulez, puis validez.
             </p>
           </div>
 
@@ -1981,30 +1985,40 @@ export function buildPlacementPoPrintExercises(
       label: "PO 2. Entretien dirigé",
       defaultPoints: 4,
       preview: (
-        <ol className="space-y-7 text-black">
-          {interviewQuestions.map((question, i) => (
-            <li key={i} className="space-y-2">
-              <p className="text-sm font-medium">
-                <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
-              </p>
-              {printBlankLines(1)}
-            </li>
-          ))}
-        </ol>
+        <div className="space-y-5 text-black">
+          <ExerciseConsigne>
+            Répondez à chaque question de l&apos;entretien (une réponse claire et complète).
+          </ExerciseConsigne>
+          <ol className="space-y-7">
+            {interviewQuestions.map((question, i) => (
+              <li key={i} className="space-y-2">
+                <p className="text-sm font-medium">
+                  <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
+                </p>
+                {printBlankLines(1)}
+              </li>
+            ))}
+          </ol>
+        </div>
       ),
       correctionPreview: (
-        <ol className="space-y-7 text-black">
-          {interviewQuestions.map((question, i) => (
-            <li key={i} className="space-y-1 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
-              <p className="text-sm font-medium">
-                <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
-              </p>
-              <p className="text-sm text-emerald-900">
-                {getInterviewSuggestion(question) ?? "—"}
-              </p>
-            </li>
-          ))}
-        </ol>
+        <div className="space-y-5 text-black">
+          <ExerciseConsigne>
+            Répondez à chaque question de l&apos;entretien (une réponse claire et complète).
+          </ExerciseConsigne>
+          <ol className="space-y-7">
+            {interviewQuestions.map((question, i) => (
+              <li key={i} className="space-y-1 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3">
+                <p className="text-sm font-medium">
+                  <span className="font-bold text-[var(--color-accent-quiz)]">{i + 1}.</span> {question}
+                </p>
+                <p className="text-sm text-emerald-900">
+                  {getInterviewSuggestion(question) ?? "—"}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
       ),
     },
     {
@@ -2013,18 +2027,23 @@ export function buildPlacementPoPrintExercises(
       defaultPoints: 5,
       preview: (
         <div className="space-y-3 text-black">
+          <ExerciseConsigne>
+            Décrivez cette image en plusieurs phrases (lieu, personnes, actions, détails).
+          </ExerciseConsigne>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={situation.image}
             alt={situation.imageDescription || "Situation orale"}
             className="mx-auto max-h-64 w-auto object-contain"
           />
-          <p className="text-sm text-zinc-700">Décrivez cette image.</p>
           {printBlankLines(15)}
         </div>
       ),
       correctionPreview: (
         <div className="space-y-3 text-black">
+          <ExerciseConsigne>
+            Décrivez cette image en plusieurs phrases (lieu, personnes, actions, détails).
+          </ExerciseConsigne>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={situation.image}
@@ -2070,12 +2089,24 @@ export function buildPlacementPoPrintExercises(
       defaultPoints: 7,
       preview: (
         <div className="space-y-3 text-black">
+          <ExerciseConsigne>
+            Développez votre argumentation en plusieurs phrases (opinion, arguments, conclusion).
+          </ExerciseConsigne>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-quiz)]">
+            Thème : {argumentationTopic.theme}
+          </p>
           <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
           {printBlankLines(5)}
         </div>
       ),
       correctionPreview: (
         <div className="space-y-3 text-black">
+          <ExerciseConsigne>
+            Développez votre argumentation en plusieurs phrases (opinion, arguments, conclusion).
+          </ExerciseConsigne>
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-quiz)]">
+            Thème : {argumentationTopic.theme}
+          </p>
           <p className="whitespace-pre-line text-sm font-medium">{argumentationTopic.prompt}</p>
           <div className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 text-sm text-emerald-900">
             <SampleParagraphs text={argumentationSample} />

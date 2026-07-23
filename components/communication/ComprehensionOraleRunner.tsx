@@ -19,6 +19,7 @@ import { CO_SCOLAIRE_MOYEN_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/
 import { CO_SCOLAIRE_AVANCE_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content/communication/co-questions-scolaire-avance";
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
   PrintAudioQrRow,
   coAudioQrItems,
@@ -1399,7 +1400,9 @@ function QuestionBlock({
         : isMatchGrid
           ? "Lisez les situations. Écoutez les dialogues puis répondez."
           : isObjectPick
-            ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
+            ? forPrint
+              ? "Écoutez l'enregistrement et cochez / marquez les objets que vous entendez."
+              : "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
             : "Écoutez l'enregistrement et répondez aux questions.";
 
   const consigneText =
@@ -1408,6 +1411,15 @@ function QuestionBlock({
       : hideQuestions
         ? "Scannez les QR codes pour réécouter, puis lisez les transcriptions."
         : consigne;
+
+  const contextLine =
+    part.context &&
+    !forceTranscripts &&
+    !hideQuestions &&
+    part.context.trim() &&
+    !consigneText.toLowerCase().includes(part.context.trim().toLowerCase().slice(0, 24))
+      ? part.context
+      : null;
 
   return (
     <div className="space-y-5">
@@ -1444,9 +1456,12 @@ function QuestionBlock({
               <PrintAudioQrRow items={qrItems} size={64} />
             </div>
           ) : null}
-          <p className="min-w-0 flex-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-            {consigneText}
-          </p>
+          <div className="min-w-0 flex-1 space-y-1">
+            {contextLine ? <ExerciseConsigne>{contextLine}</ExerciseConsigne> : null}
+            <p className="text-sm font-semibold italic leading-relaxed text-[var(--color-text-primary)]">
+              {consigneText}
+            </p>
+          </div>
         </div>
         <div className="space-y-3">
           {!forceTranscripts && !hideAudioPlayer && <AudioSequencePlayer items={part.audioGroup.items} />}

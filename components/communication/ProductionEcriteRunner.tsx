@@ -41,6 +41,7 @@ import {
 } from "@/components/communication/CommunicationEvalLayout";
 import { FrenchTrainingElementsBlock } from "@/components/placement/FrenchTrainingElementsBlock";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 import {
   PePrintRubricGrid,
   PeWritingPrintExercise,
@@ -403,10 +404,13 @@ function FormExercise({
 }) {
   return (
     <div className="space-y-4">
+      <ExerciseConsigne>
+        Lisez la situation, repérez les informations utiles et complétez le formulaire.
+      </ExerciseConsigne>
       <p className="text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{template.situation}</p>
       {advanced && (
         <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
-          Lisez la situation, repérez les informations utiles et complétez seulement les champs que vous pouvez déduire.
+          Complétez seulement les champs que vous pouvez déduire de la situation.
         </div>
       )}
       <section className="border border-slate-200 bg-white px-4 py-5 shadow-none sm:px-6">

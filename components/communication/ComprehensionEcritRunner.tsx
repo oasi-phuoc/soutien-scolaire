@@ -29,6 +29,7 @@ import { buildCeInstructionQuestions, buildCeMessageQuestions } from "@/lib/curr
 import { parseFillStem } from "@/lib/curriculum/content/communication/ce-co-question-filters";
 import { ORIENTATION_MOYEN } from "@/lib/curriculum/content/communication/ce-orientation-moyen";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
+import { ExerciseConsigne } from "@/components/print/ExerciseConsigne";
 
 const TOTAL_SECONDS = 45 * 60;
 const CE_BODY_TEXT = "text-sm leading-relaxed text-justify text-[var(--color-text-primary)]";
@@ -78,6 +79,16 @@ type CEPart =
   | { id: "email"; title: string; points: 6; layout: "email"; meta: { from?: string; subject?: string }; body: string; image: string; questions: QuestionTask[] }
   | { id: "instructions"; title: string; points: 6; layout: "instructions"; cards: { title: string; body: string; image: string; imageLabel: string; questions: QuestionTask[] }[] }
   | { id: "information"; title: string; points: 7; layout: "article"; article: { title: string; sections: { heading: string; body: string; image?: string; imageLabel?: string }[] }; questions: QuestionTask[] };
+
+/** Consigne affichée sous le titre (écran + impression). */
+function ceExerciseConsigne(part: CEPart): string {
+  if (part.layout === "orientation") return part.task.prompt;
+  if (part.layout === "email") return "Lisez le message, puis répondez aux questions.";
+  if (part.layout === "instructions") {
+    return "Lisez les documents, puis répondez aux questions pour chacun.";
+  }
+  return "Lisez le texte, puis répondez aux questions.";
+}
 
 type CEAnswers = Record<string, number | string | null>;
 
@@ -1054,9 +1065,12 @@ function OrientationDocumentsPart({
 }) {
   return (
     <div className="space-y-3">
-      <p className={`font-semibold italic text-[var(--color-text-primary)] ${compact ? "text-xs" : "text-sm"}`}>
-        {part.task.prompt}
-      </p>
+      {!compact && <ExerciseConsigne>{part.task.prompt}</ExerciseConsigne>}
+      {compact && (
+        <p className="text-xs font-semibold italic text-[var(--color-text-primary)]">
+          {part.task.prompt}
+        </p>
+      )}
       <div className={`grid grid-cols-2 ${compact ? "gap-2" : "gap-3"}`}>
         {part.task.documents.map((doc, index) => (
           <div
@@ -1184,12 +1198,16 @@ function EmailPart({
 
   if (questionsOnly) {
     return (
-      <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+      <div className="space-y-4">
+        <ExerciseConsigne>Répondez aux questions sur le message.</ExerciseConsigne>
+        <QuestionsList part={part} questions={part.questions} answers={answers} setAnswer={setAnswer} correction={correction} />
+      </div>
     );
   }
 
   return (
     <div className={forPrint ? "space-y-3" : "space-y-5"}>
+      {contentOnly && <ExerciseConsigne>Lisez le message ci-dessous.</ExerciseConsigne>}
       {showImage && (
         <div
           className={
@@ -1370,6 +1388,10 @@ function ExercisePage({
             <span className="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)] shadow-sm">{part.points} pts</span>
           )}
         </div>
+        {/* Orientation : consigne déjà dans OrientationDocumentsPart */}
+        {part.layout !== "orientation" && (
+          <ExerciseConsigne>{ceExerciseConsigne(part)}</ExerciseConsigne>
+        )}
       </div>
       <PartView part={part} answers={answers} setAnswer={setAnswer} correction={correction} />
     </div>
@@ -1497,7 +1519,10 @@ export function buildPlacementCePrintExercises(
       const firstIndices = part.cards.map((_, i) => i).slice(0, 2);
       const restIndices = part.cards.map((_, i) => i).slice(2);
       const title = (
-        <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+          <ExerciseConsigne>{ceExerciseConsigne(part)}</ExerciseConsigne>
+        </div>
       );
       return {
         id: `ce-${index}-${part.id}`,
@@ -1517,13 +1542,16 @@ export function buildPlacementCePrintExercises(
         ),
         leadFollowTitle: "Suite",
         preview: (
-          <InstructionsPart
-            part={part}
-            answers={{}}
-            setAnswer={noopSetAnswer}
-            forPrint
-            cardIndices={restIndices}
-          />
+          <div className="space-y-3">
+            <ExerciseConsigne>Continuez : lisez les documents et répondez aux questions.</ExerciseConsigne>
+            <InstructionsPart
+              part={part}
+              answers={{}}
+              setAnswer={noopSetAnswer}
+              forPrint
+              cardIndices={restIndices}
+            />
+          </div>
         ),
         correctionLeadPreview: (
           <div className="space-y-3">
@@ -1540,14 +1568,17 @@ export function buildPlacementCePrintExercises(
         ),
         correctionLeadTitle: "Messages",
         correctionPreview: (
-          <InstructionsPart
-            part={part}
-            answers={answers}
-            setAnswer={noopSetAnswer}
-            correction
-            forPrint
-            cardIndices={restIndices}
-          />
+          <div className="space-y-3">
+            <ExerciseConsigne>Continuez : lisez les documents et répondez aux questions.</ExerciseConsigne>
+            <InstructionsPart
+              part={part}
+              answers={answers}
+              setAnswer={noopSetAnswer}
+              correction
+              forPrint
+              cardIndices={restIndices}
+            />
+          </div>
         ),
       };
     }
