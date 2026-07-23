@@ -25,8 +25,6 @@ import {
 import {
   getMathExercisesForLevel,
   MATH_PLACEMENT_TIMER_SECONDS,
-  MATH_TRAINING_LEVEL_LABELS,
-  MATH_TRAINING_LEVEL_TOPICS,
   MATH_TRAINING_TIMER_SECONDS,
 } from "@/lib/placement/math-training-levels";
 import type { MathTrainingLevel } from "@/lib/placement/types";
@@ -509,7 +507,7 @@ export function PlacementTestClient({
           {mode === "placement" ? (
             <PlacementPageHeader
               label={introText.subject}
-              title={isTraining && trainingLevel ? MATH_TRAINING_LEVEL_LABELS[trainingLevel] : introText.title}
+              title={isTraining && trainingLevel ? `Niveau ${trainingLevel}` : introText.title}
               subtitle={isTraining ? "Les résultats ne comptent pas pour votre score de placement." : undefined}
               backHref="/placement"
             />
@@ -534,16 +532,7 @@ export function PlacementTestClient({
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4" lang={introLang} dir={introDir}>
             <div className="space-y-2">
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
-              {isTraining && trainingLevel ? (
-                <ul className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
-                  {MATH_TRAINING_LEVEL_TOPICS[trainingLevel].map((topic) => (
-                    <li key={topic} className="flex items-start gap-2">
-                      <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: accent }} />
-                      <span>{topic}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : !isTraining ? (
+              {!isTraining ? (
                 <ul className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
                   {(
                     [
@@ -637,7 +626,7 @@ export function PlacementTestClient({
         </button>
         )}
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          {isTraining && trainingLevel ? trainingLevel : "Test de placement"}
+          {isTraining && trainingLevel ? `Niveau ${trainingLevel}` : "Test de placement"}
         </h1>
         <button
           type="button"

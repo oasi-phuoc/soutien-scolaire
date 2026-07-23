@@ -21,10 +21,7 @@ import {
 } from "@/lib/placement/storage";
 import {
   levelFromMathParam,
-  MATH_TRAINING_LEVEL_LABELS,
   MATH_TRAINING_LEVEL_TOGGLE,
-  MATH_TRAINING_LEVEL_TOPICS,
-  mathTrainingMinutes,
 } from "@/lib/placement/math-training-levels";
 import { syncPlacementFromCloud } from "@/lib/placement/sync-from-cloud";
 
@@ -407,12 +404,9 @@ export function PlacementHubClient() {
           </button>
         </div>
 
-        <div className="space-y-1 text-xs text-[var(--color-text-secondary)]">
-          <p className="font-medium text-[var(--color-text-primary)]">{MATH_TRAINING_LEVEL_LABELS[mathLevel]}</p>
-          <p>
-            {mathTrainingMinutes(mathLevel)} min · {MATH_TRAINING_LEVEL_TOPICS[mathLevel].join(" · ")}
-          </p>
-        </div>
+        <p className="text-xs text-[var(--color-text-secondary)]">
+          Niveau {mathLevel}
+        </p>
       </div>
 
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 space-y-4">
