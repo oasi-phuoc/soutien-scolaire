@@ -18,6 +18,8 @@ type LangContent = {
   creditsTitle: string;
   creditsPhuoc: string;
   creditsMelina: string;
+  creditsImages: string;
+  creditsAudios: string;
 };
 
 const CONTENT: Record<PivotCode, LangContent> = {
@@ -39,6 +41,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Crédits",
     creditsPhuoc: "Conception et réalisation de l'application",
     creditsMelina: "Participation — Lecture & Alphabétisation",
+    creditsImages: "Toutes les images sont générées par intelligence artificielle.",
+    creditsAudios: "Les audios sont issus du livre ABC DELF.",
   },
   en: {
     dir: "ltr",
@@ -58,6 +62,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Credits",
     creditsPhuoc: "Design and development of the app",
     creditsMelina: "Contribution — Reading & Literacy",
+    creditsImages: "All images are AI-generated.",
+    creditsAudios: "Audio tracks are taken from the ABC DELF book.",
   },
   ar: {
     dir: "rtl",
@@ -77,6 +83,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "الاعتمادات",
     creditsPhuoc: "تصميم وتطوير التطبيق",
     creditsMelina: "مشاركة — القراءة والكتابة الأولية",
+    creditsImages: "جميع الصور مُولَّدة بالذكاء الاصطناعي.",
+    creditsAudios: "المقاطع الصوتية مأخوذة من كتاب ABC DELF.",
   },
   fa: {
     dir: "rtl",
@@ -96,6 +104,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "اعتبارات",
     creditsPhuoc: "طراحی و توسعه برنامه",
     creditsMelina: "مشارکت — خواندن و سوادآموزی",
+    creditsImages: "همهٔ تصاویر با هوش مصنوعی تولید شده‌اند.",
+    creditsAudios: "فایل‌های صوتی از کتاب ABC DELF گرفته شده‌اند.",
   },
   pt: {
     dir: "ltr",
@@ -115,6 +125,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Créditos",
     creditsPhuoc: "Conceção e desenvolvimento da aplicação",
     creditsMelina: "Participação — Leitura e Alfabetização",
+    creditsImages: "Todas as imagens são geradas por inteligência artificial.",
+    creditsAudios: "Os áudios são retirados do livro ABC DELF.",
   },
   so: {
     dir: "ltr",
@@ -134,6 +146,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Amaanada",
     creditsPhuoc: "Naqshadeynta iyo horumarinta app-ka",
     creditsMelina: "Kaalmo — Akhriska iyo Xarfaha",
+    creditsImages: "Dhammaan sawirrada waxaa soo saaray sirdoon macmal.",
+    creditsAudios: "Codadka waxaa laga soo qaatay buugga ABC DELF.",
   },
   ti: {
     dir: "ltr",
@@ -153,6 +167,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "ኣምሳያ",
     creditsPhuoc: "ዲዛይንን ምዕባይን ናይ ኣፕ",
     creditsMelina: "ምስታፍ — ምንባብን ምፅሓፍን",
+    creditsImages: "ኩሎም ምስልታት ብሓላፊ ምሕዳስ ኣእምሮ ተፈጢሮም።",
+    creditsAudios: "ድምጽታት ካብ መጽሓፍ ABC DELF ተወሲዶም።",
   },
   tr: {
     dir: "ltr",
@@ -172,6 +188,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Katkıda Bulunanlar",
     creditsPhuoc: "Uygulamanın tasarımı ve geliştirilmesi",
     creditsMelina: "Katkı — Okuma ve Okuryazarlık",
+    creditsImages: "Tüm görseller yapay zekâ ile üretilmiştir.",
+    creditsAudios: "Sesler ABC DELF kitabından alınmıştır.",
   },
   ps: {
     dir: "rtl",
@@ -191,6 +209,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "مراتب",
     creditsPhuoc: "د اپ ډیزاین او پراختیا",
     creditsMelina: "ګډون — لوستل او ابتدایي زده کړه",
+    creditsImages: "ټول انځورونه د مصنوعي ذهانت له خوا جوړ شوي دي.",
+    creditsAudios: "غږونه د ABC DELF کتاب څخه اخیستل شوي دي.",
   },
   uk: {
     dir: "ltr",
@@ -210,6 +230,8 @@ const CONTENT: Record<PivotCode, LangContent> = {
     creditsTitle: "Автори",
     creditsPhuoc: "Розробка та реалізація додатку",
     creditsMelina: "Участь — Читання та грамотність",
+    creditsImages: "Усі зображення згенеровані штучним інтелектом.",
+    creditsAudios: "Аудіозаписи взято з книги ABC DELF.",
   },
 };
 
@@ -371,6 +393,32 @@ export default function AvantProposPage() {
             <div>
               <p className="text-sm font-semibold text-[var(--color-text-primary)]">Mélina Schröter</p>
               <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsMelina}</p>
+            </div>
+          </div>
+          <div className={`flex items-start gap-4 p-4 ${isRtl ? "flex-row-reverse" : ""}`}>
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: "var(--color-theme-light)" }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-theme)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <circle cx="8.5" cy="11" r="1.5" />
+                <path d="M21 16l-5-5-4 4-2-2-5 5" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Images</p>
+              <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsImages}</p>
+            </div>
+          </div>
+          <div className={`flex items-start gap-4 p-4 ${isRtl ? "flex-row-reverse" : ""}`}>
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full" style={{ background: "var(--color-theme-light)" }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-theme)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M11 5L6 9H3v6h3l5 4V5z" />
+                <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+                <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Audios</p>
+              <p className="text-xs text-[var(--color-text-secondary)]">{c.creditsAudios}</p>
             </div>
           </div>
         </div>
