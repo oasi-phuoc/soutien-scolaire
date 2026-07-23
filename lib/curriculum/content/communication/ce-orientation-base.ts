@@ -20,7 +20,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Continuez sur la rue Charles-Monnard. Le musée est à gauche au n° 15.\n\n" +
       "Le tarif normal est de 8 CHF, mais comme nous sommes 17, cela va coûter 4 CHF par personne.\n\n" +
       "À demain,\n\nOlena\nProfesseure de français",
-    image: "/assets/expression/images/ce/ce-orientation-01.webp",
+    image: "",
     pool: [
       ceQ(
         "mus-q1",
@@ -124,7 +124,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "En sortant du métro, prenez la première à droite puis tournez à gauche rue Saint-Laurent. " +
       "Le centre est au numéro 17.\n\n" +
       "Le directeur",
-    image: "/assets/expression/images/ce/ce-orientation-02.webp",
+    image: "",
     pool: [
       ceQ(
         "exa-q1",
@@ -230,7 +230,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "« Fringue chic » est en face du point d'information. " +
       "On pourra ensuite déjeuner au restaurant à 12 h 30.\n\n" +
       "Cordialement,\nAhmed",
-    image: "/assets/expression/images/ce/ce-orientation-03.webp",
+    image: "",
     pool: [
       ceQ(
         "mal-q1",
@@ -332,7 +332,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Ensuite, on prend la rue de Montriond, à droite. On continue et on tourne à gauche sur l'avenue de l'Elysée.\n\n" +
       "On peut manger au restaurant ensuite.\n\n" +
       "Appelle-moi !\n\nMatteo",
-    image: "/assets/expression/images/ce/ce-orientation-04.webp",
+    image: "",
     pool: [
       ceQ(
         "oly-q1",
@@ -432,7 +432,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Marche jusqu'à la place Saint-François, puis tu tournes à droite, rue du Portail-Neuf. " +
       "La bibliothèque est en face d'une pharmacie, à côté du métro M2.\n\n" +
       "Appelle-moi !\n\nRita",
-    image: "/assets/expression/images/ce/ce-orientation-05.webp",
+    image: "",
     pool: [
       ceQ(
         "ski-q1",
@@ -531,7 +531,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "C'est en face du cinéma Pathé sur le boulevard de Grancy. " +
       "Ensuite, on pourra aller dîner, je connais un endroit rue du Port, juste à côté. " +
       "Appelle-moi !\n\nSamira",
-    image: "/assets/expression/images/ce/ce-orientation-06.webp",
+    image: "",
     pool: [
       ceQ(
         "spe-q1",
@@ -634,7 +634,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "la gare est sur la place de la Gare, à côté du restaurant « Le Délicieux ». " +
       "Mon téléphone est cassé, envoie-moi un courriel pour confirmer. Merci !\n\n" +
       "Daryna",
-    image: "/assets/expression/images/ce/ce-orientation-07.webp",
+    image: "",
     pool: [
       ceQ(
         "gar-q1",
@@ -736,7 +736,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "L'entrée coûte 14 CHF, mais si tu réserves sur Internet, c'est 7 CHF. " +
       "Appelle-moi pour confirmer !\n\n" +
       "P.-S. : Tu prends un parapluie ? On annonce de la pluie.\n\nFatou",
-    image: "/assets/expression/images/ce/ce-orientation-08.webp",
+    image: "",
     pool: [
       ceQ(
         "foi-q1",
@@ -838,7 +838,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "du lundi au vendredi : 9 h-12 h et 13 h-15 h (sauf le mercredi après-midi).\n\n" +
       "Téléphone : +41 21 692 11 11\n" +
       "inscriptions@unil.ch",
-    image: "/assets/expression/images/ce/ce-orientation-09.webp",
+    image: "",
     pool: [
       ceQ(
         "ins-q1",
@@ -939,7 +939,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Horaires : du lundi au vendredi de 9 h à 18 h, le samedi de 10 h à 17 h.\n\n" +
       "Ouverture exceptionnelle ce dimanche de 13 h à 18 h !\n\n" +
       "Un concours est organisé pour gagner des tablettes numériques.",
-    image: "/assets/expression/images/ce/ce-orientation-10.webp",
+    image: "",
     pool: [
       ceQ(
         "lib-q1",
@@ -1041,7 +1041,7 @@ export const CE_ORIENTATION_BASE: CEMessageItem[] = [
       "Horaires : lundi-vendredi de 9 h à 18 h 30 et samedi de 10 h à 12 h 30.\n" +
       "Derniers envois de courrier à 17 h.\n" +
       "Contact : poste@lausanne.ch",
-    image: "/assets/expression/images/ce/ce-orientation-11.webp",
+    image: "",
     pool: [
       ceQ(
         "pos-q1",

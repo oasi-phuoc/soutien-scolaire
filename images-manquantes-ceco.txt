@@ -1,0 +1,2130 @@
+Images manquantes CE/CO
+======================
+
+Règle : CE/CO n'utilisent que :
+  - /assets/expression/images/scene/
+  - /assets/expression/co/.../conversation-*.webp|png (conservées)
+
+Les images 1 et 3 du type « dentiste / école » (photos vocab/lecture) sont
+refusées ; seuls les équivalents scene (ex. médecin → consultation-medecin) restent.
+
+--- Labels qui prenaient une image HORS scene (à fournir dans scene/) ---
+Total : 437
+
+- Acteur
+    ancien: /assets/words/vocab/V9/acteur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Âge
+    ancien: /assets/words/vocab/V1/age.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Agriculteur
+    ancien: /assets/words/lecture/agriculteur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- album
+    ancien: /assets/words/lecture/album.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Allergie
+    ancien: /assets/words/vocab/V8/allergie.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+- ami
+    ancien: /assets/words/lecture/ami.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Ami
+    ancien: /assets/words/lecture/ami.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- Angleterre
+    ancien: /assets/words/vocab/V1/angleterre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Animal
+    ancien: /assets/words/lecture/animal.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Animaux
+    ancien: /assets/words/lecture/animaux.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Année
+    ancien: /assets/words/vocab/V2/annee.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- après-midi
+    ancien: /assets/words/vocab/V2/apres-midi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Après-midi
+    ancien: /assets/words/vocab/V2/apres-midi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Arc
+    ancien: /assets/words/lecture/arc.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- arrivée
+    ancien: /assets/words/vocab/V10/arrivee.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Art
+    ancien: /assets/words/vocab/V5/art.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- automne
+    ancien: /assets/words/vocab/V2/automne.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- avion
+    ancien: /assets/words/lecture/avion.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Avion
+    ancien: /assets/words/lecture/avion.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Baguette
+    ancien: /assets/words/vocab/V10/baguette.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- balcon
+    ancien: /assets/words/vocab/V4/balcon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Ballon
+    ancien: /assets/words/lecture/ballon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Banc
+    ancien: /assets/words/lecture/banc.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- banque
+    ancien: /assets/words/vocab/V9/banque.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Banque
+    ancien: /assets/words/vocab/V9/banque.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Baskets
+    ancien: /assets/words/lecture/baskets.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- bateau
+    ancien: /assets/words/lecture/bateau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Bateau
+    ancien: /assets/words/lecture/bateau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- beau
+    ancien: /assets/words/vocab/V1/beau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Beau
+    ancien: /assets/words/vocab/V1/beau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- billet
+    ancien: /assets/words/vocab/V10/billet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Billet
+    ancien: /assets/words/vocab/V10/billet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Biscuit
+    ancien: /assets/words/lecture/biscuit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Blanc
+    ancien: /assets/words/lecture/blanc.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Bleu
+    ancien: /assets/words/lecture/bleu.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- bonbon
+    ancien: /assets/words/lecture/bonbon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Bonbon
+    ancien: /assets/words/lecture/bonbon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Bonbons
+    ancien: /assets/words/lecture/bonbon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Bonnet
+    ancien: /assets/words/lecture/bonnet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Bordeaux
+    ancien: /assets/words/lecture/bordeaux.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Bottes
+    ancien: /assets/words/lecture/bottes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Boulanger
+    ancien: /assets/words/vocab/V1/boulanger.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- boulangerie
+    ancien: /assets/words/vocab/V9/boulangerie.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Boulangerie
+    ancien: /assets/words/vocab/V9/boulangerie.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Bouquet
+    ancien: /assets/words/lecture/bouquet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- bouteille d'eau
+    ancien: /assets/words/lecture/bouteille-deau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- bras
+    ancien: /assets/words/lecture/bras.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Bronze
+    ancien: /assets/words/lecture/bronze.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Brouillard
+    ancien: /assets/words/vocab/V2/brouillard.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Buffet
+    ancien: /assets/words/lecture/buffet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- bureau
+    ancien: /assets/words/lecture/bureau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Bureau
+    ancien: /assets/words/lecture/bureau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- cadeau
+    ancien: /assets/words/lecture/cadeau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- café
+    ancien: /assets/words/lecture/café.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Café
+    ancien: /assets/words/lecture/café.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- cahier
+    ancien: /assets/words/lecture/cahier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Cahier
+    ancien: /assets/words/lecture/cahier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Calendrier
+    ancien: /assets/words/lecture/agenda.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Calme
+    ancien: /assets/words/vocab/V1/calme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Campagne
+    ancien: /assets/words/lecture/campagne.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Canada
+    ancien: /assets/words/vocab/V1/canada.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- canapé
+    ancien: /assets/words/vocab/V4/canape.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Carotte
+    ancien: /assets/words/lecture/carotte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- cartable
+    ancien: /assets/words/lecture/cartable.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Cartable
+    ancien: /assets/words/lecture/cartable.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- carte
+    ancien: /assets/words/lecture/carte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Carte
+    ancien: /assets/words/lecture/carte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- carte d'étudiant
+    ancien: /assets/words/lecture/carte-detudiant.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- carte d'identité
+    ancien: /assets/words/lecture/carte-didentite.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- carte de crédit
+    ancien: /assets/words/lecture/carte-de-credit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- casque
+    ancien: /assets/words/lecture/casque.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Casque
+    ancien: /assets/words/lecture/casque.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- casquette
+    ancien: /assets/words/lecture/casquette.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Casquette
+    ancien: /assets/words/lecture/casquette.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Centre-ville
+    ancien: /assets/words/vocab/V9/centre-ville.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- chaise
+    ancien: /assets/words/lecture/chaise.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- chambre
+    ancien: /assets/words/vocab/V10/chambre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- chanteur
+    ancien: /assets/words/vocab/V9/chanteur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Chanteur
+    ancien: /assets/words/vocab/V9/chanteur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- chapeau
+    ancien: /assets/words/lecture/chapeau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Chapeau
+    ancien: /assets/words/lecture/chapeau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- chat
+    ancien: /assets/words/lecture/chat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Chat
+    ancien: /assets/words/lecture/chat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Château
+    ancien: /assets/words/lecture/château.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- chaud
+    ancien: /assets/words/vocab/V2/chaud.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Chaud
+    ancien: /assets/words/vocab/V2/chaud.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Chauffeur
+    ancien: /assets/words/lecture/chauffeur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- chaussures de sport
+    ancien: /assets/words/lecture/baskets.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Chêne
+    ancien: /assets/words/lecture/chêne.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- cheval
+    ancien: /assets/words/lecture/cheval.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Cheval
+    ancien: /assets/words/lecture/cheval.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- chevaux
+    ancien: /assets/words/lecture/cheval.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- chèvre
+    ancien: /assets/words/lecture/chèvre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- chien
+    ancien: /assets/words/lecture/chien.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Chien
+    ancien: /assets/words/lecture/chien.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Chine
+    ancien: /assets/words/vocab/V1/chine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- chips
+    ancien: /assets/words/lecture/chips.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- chocolat
+    ancien: /assets/words/lecture/chocolat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Chocolat
+    ancien: /assets/words/lecture/chocolat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- ciseaux
+    ancien: /assets/words/lecture/ciseaux.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Ciseaux
+    ancien: /assets/words/lecture/ciseaux.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- citron
+    ancien: /assets/words/lecture/citron.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- classe
+    ancien: /assets/words/vocab/V5/classe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Classe
+    ancien: /assets/words/vocab/V5/classe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Classeur
+    ancien: /assets/words/lecture/classeur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- clé
+    ancien: /assets/words/vocab/V10/cle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Clé
+    ancien: /assets/words/vocab/V10/cle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Climat
+    ancien: /assets/words/vocab/V2/climat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Coffre
+    ancien: /assets/words/lecture/coffre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Coiffeur
+    ancien: /assets/words/vocab/V9/coiffeur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- colle
+    ancien: /assets/words/lecture/colle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Contrôleur
+    ancien: /assets/words/vocab/V10/controleur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Corail
+    ancien: /assets/words/lecture/corail.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- corde
+    ancien: /assets/words/lecture/corde.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Corde
+    ancien: /assets/words/lecture/corde.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- coton
+    ancien: /assets/words/vocab/V6/coton.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- couper
+    ancien: /assets/words/vocab/V7/couper.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Cour
+    ancien: /assets/words/vocab/V5/cour.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Cousin
+    ancien: /assets/words/vocab/V1/cousin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Cousine
+    ancien: /assets/words/vocab/V1/cousine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- crayon
+    ancien: /assets/words/lecture/crayon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- crayon de couleur
+    ancien: /assets/words/lecture/crayon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Cuillère
+    ancien: /assets/words/vocab/V10/cuillere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- cuisine
+    ancien: /assets/words/vocab/V10/cuisine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Cuisine
+    ancien: /assets/words/vocab/V10/cuisine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Cuisiner
+    ancien: /assets/words/vocab/V7/cuisiner.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Cuisinière
+    ancien: /assets/words/vocab/V4/cuisiniere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- danse
+    ancien: /assets/words/lecture/danse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Danse
+    ancien: /assets/words/lecture/danse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Dansé
+    ancien: /assets/words/lecture/danse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Décembre
+    ancien: /assets/words/vocab/V2/decembre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Dessert
+    ancien: /assets/words/vocab/V10/dessert.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- dictionnaire
+    ancien: /assets/words/lecture/dictionnaire.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- dimanche
+    ancien: /assets/words/lecture/dimanche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Dimanche
+    ancien: /assets/words/lecture/dimanche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- docteur
+    ancien: /assets/words/vocab/V8/docteur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- dos
+    ancien: /assets/words/lecture/dos.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Drapeau
+    ancien: /assets/words/lecture/drapeau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- droite
+    ancien: /assets/words/vocab/V9/droite.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- eau
+    ancien: /assets/words/lecture/eau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Eau
+    ancien: /assets/words/lecture/eau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Échecs
+    ancien: /assets/words/lecture/échecs.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- élastique
+    ancien: /assets/words/lecture/élastique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Élastique
+    ancien: /assets/words/lecture/élastique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- Escalier
+    ancien: /assets/words/lecture/escalier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- est
+    ancien: /assets/words/vocab/V9/est.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Est
+    ancien: /assets/words/vocab/V9/est.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- États-Unis
+    ancien: /assets/words/vocab/V1/etats-unis.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- été
+    ancien: /assets/words/vocab/V2/ete.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Été
+    ancien: /assets/words/vocab/V2/ete.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- évier
+    ancien: /assets/words/vocab/V4/evier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- femme
+    ancien: /assets/words/lecture/femme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Ferme
+    ancien: /assets/words/vocab/V4/ferme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- fermé
+    ancien: /assets/words/vocab/V4/ferme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Fermé
+    ancien: /assets/words/vocab/V4/ferme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- festival
+    ancien: /assets/words/vocab/V9/festival.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Festival
+    ancien: /assets/words/vocab/V9/festival.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- feuille
+    ancien: /assets/words/lecture/feuille.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- feutre
+    ancien: /assets/words/lecture/feutre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- fille
+    ancien: /assets/words/lecture/fille.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Fille
+    ancien: /assets/words/lecture/fille.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+- fils
+    ancien: /assets/words/vocab/V1/fils.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- fleur
+    ancien: /assets/words/lecture/fleur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- flûte
+    ancien: /assets/words/lecture/flûte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Four
+    ancien: /assets/words/lecture/four.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- Fracture
+    ancien: /assets/words/vocab/V8/fracture.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+- frais
+    ancien: /assets/words/vocab/V2/frais.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- fraise
+    ancien: /assets/words/lecture/fraise.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- France
+    ancien: /assets/words/vocab/V1/france.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Frère
+    ancien: /assets/words/vocab/V1/frere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- frigo
+    ancien: /assets/words/vocab/V4/frigo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- frites
+    ancien: /assets/words/lecture/frites.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Froid
+    ancien: /assets/words/vocab/V2/froid.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- fromage
+    ancien: /assets/words/lecture/fromage.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Fromage
+    ancien: /assets/words/lecture/fromage.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- fruit
+    ancien: /assets/words/lecture/fruit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Gants
+    ancien: /assets/words/lecture/gants.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- Garage
+    ancien: /assets/words/vocab/V4/garage.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- gâteau
+    ancien: /assets/words/lecture/gâteau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Gâteau
+    ancien: /assets/words/lecture/gâteau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- gauche
+    ancien: /assets/words/vocab/V9/gauche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Gentillesse
+    ancien: /assets/words/vocab/V1/gentillesse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Girafe
+    ancien: /assets/words/lecture/girafe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Glace
+    ancien: /assets/words/lecture/glace.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Glacier
+    ancien: /assets/words/lecture/glacier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- gomme
+    ancien: /assets/words/lecture/gomme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Goûter
+    ancien: /assets/words/vocab/V7/gouter.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Grand
+    ancien: /assets/words/vocab/V1/grand.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Grand-père
+    ancien: /assets/words/vocab/V1/grand-pere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- gratin
+    ancien: /assets/words/lecture/gratin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Grèce
+    ancien: /assets/words/vocab/V1/grece.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Gris
+    ancien: /assets/words/lecture/gris.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- guichet
+    ancien: /assets/words/vocab/V10/guichet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Guichet
+    ancien: /assets/words/vocab/V10/guichet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- guitare
+    ancien: /assets/words/lecture/guitare.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Guitare
+    ancien: /assets/words/lecture/guitare.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Gymnastique
+    ancien: /assets/words/lecture/gymnastique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- haltère
+    ancien: /assets/words/lecture/haltère.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Haltère
+    ancien: /assets/words/lecture/haltère.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Hamburger
+    ancien: /assets/words/lecture/hamburger.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- hélicoptère
+    ancien: /assets/words/lecture/hélicoptère.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Hêtre
+    ancien: /assets/words/lecture/hêtre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- hockey
+    ancien: /assets/words/lecture/hockey.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- île
+    ancien: /assets/words/lecture/île.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- informatique
+    ancien: /assets/words/vocab/V5/informatique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Janvier
+    ancien: /assets/words/vocab/V2/janvier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Jardin
+    ancien: /assets/words/vocab/V4/jardin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Jaune
+    ancien: /assets/words/lecture/jaune.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Jeu
+    ancien: /assets/words/lecture/jeu.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Jeudi
+    ancien: /assets/words/lecture/jeudi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Jeune
+    ancien: /assets/words/vocab/V1/jeune.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Journaliste
+    ancien: /assets/words/lecture/journaliste.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Juillet
+    ancien: /assets/words/vocab/V2/juillet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Jupe
+    ancien: /assets/words/lecture/jupe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- jus
+    ancien: /assets/words/lecture/jus.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Jus
+    ancien: /assets/words/lecture/jus.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Lac
+    ancien: /assets/words/lecture/lac.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- laine
+    ancien: /assets/words/vocab/V6/laine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- lait
+    ancien: /assets/words/lecture/lait.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- lampe
+    ancien: /assets/words/lecture/lampe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Langue
+    ancien: /assets/words/lecture/langue.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- laver
+    ancien: /assets/words/vocab/V7/laver.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Laver
+    ancien: /assets/words/vocab/V7/laver.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Lit
+    ancien: /assets/words/vocab/V4/lit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- livre
+    ancien: /assets/words/lecture/livre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Livre
+    ancien: /assets/words/lecture/livre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Logement
+    ancien: /assets/words/vocab/V4/logement.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- long
+    ancien: /assets/words/vocab/V1/long.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Lundi
+    ancien: /assets/words/lecture/lundi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- lunettes
+    ancien: /assets/words/lecture/lunettes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Lunettes
+    ancien: /assets/words/lecture/lunettes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Lunettes de soleil
+    ancien: /assets/words/lecture/lunettes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- macaron
+    ancien: /assets/words/lecture/macaron.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Machine à laver
+    ancien: /assets/words/lecture/machine-a-laver.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- magasin
+    ancien: /assets/words/vocab/V9/magasin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Magasin
+    ancien: /assets/words/vocab/V9/magasin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Maillot
+    ancien: /assets/words/lecture/maillot.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- maison
+    ancien: /assets/words/lecture/maison.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Maison
+    ancien: /assets/words/lecture/maison.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- manteau
+    ancien: /assets/words/lecture/manteau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Manteau
+    ancien: /assets/words/lecture/manteau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Mardi
+    ancien: /assets/words/vocab/V2/mardi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Marie
+    ancien: /assets/words/vocab/V1/marie.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- médicament
+    ancien: /assets/words/vocab/V8/medicament.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Mer
+    ancien: /assets/words/lecture/mer.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Mercredi
+    ancien: /assets/words/vocab/V2/mercredi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- mère
+    ancien: /assets/words/vocab/V1/mere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Mère
+    ancien: /assets/words/vocab/V1/mere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- midi
+    ancien: /assets/words/vocab/V2/midi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Midi
+    ancien: /assets/words/vocab/V2/midi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- miel
+    ancien: /assets/words/lecture/miel.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- minuit
+    ancien: /assets/words/vocab/V2/minuit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Minuit
+    ancien: /assets/words/vocab/V2/minuit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Mois
+    ancien: /assets/words/vocab/V2/mois.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Montre
+    ancien: /assets/words/lecture/montre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- moto
+    ancien: /assets/words/lecture/moto.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Moto
+    ancien: /assets/words/lecture/moto.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- Mouche
+    ancien: /assets/words/lecture/mouche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- mur
+    ancien: /assets/words/lecture/mur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- musicien
+    ancien: /assets/words/vocab/V9/musicien.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Nièce
+    ancien: /assets/words/vocab/V1/niece.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+- Noir
+    ancien: /assets/words/lecture/noir.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- nord
+    ancien: /assets/words/vocab/V9/nord.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- nuit
+    ancien: /assets/words/vocab/V10/nuit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Nuit
+    ancien: /assets/words/vocab/V10/nuit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Océan
+    ancien: /assets/words/vocab/V9/ocean.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Olivier
+    ancien: /assets/words/lecture/olivier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+- Orange
+    ancien: /assets/words/lecture/orange.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- ordinateur
+    ancien: /assets/words/lecture/ordinateur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Ordinateur
+    ancien: /assets/words/lecture/ordinateur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- ordonnance
+    ancien: /assets/words/vocab/V8/ordonnance.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Ordonnance
+    ancien: /assets/words/vocab/V8/ordonnance.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- ouest
+    ancien: /assets/words/vocab/V9/ouest.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Ouest
+    ancien: /assets/words/vocab/V9/ouest.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- page
+    ancien: /assets/words/lecture/page.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- pain
+    ancien: /assets/words/lecture/pain.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Pain
+    ancien: /assets/words/lecture/pain.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- panneau
+    ancien: /assets/words/vocab/V9/panneau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- pantalon
+    ancien: /assets/words/lecture/pantalon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Pantalon
+    ancien: /assets/words/lecture/pantalon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Paresse
+    ancien: /assets/words/vocab/V1/paresse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Parfum
+    ancien: /assets/words/lecture/parfum.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- parking
+    ancien: /assets/words/vocab/V10/parking.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Parking
+    ancien: /assets/words/vocab/V10/parking.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- Part
+    ancien: /assets/words/vocab/V7/part.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- passeport
+    ancien: /assets/words/vocab/V10/passeport.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Passeport
+    ancien: /assets/words/vocab/V10/passeport.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- pâtes
+    ancien: /assets/words/lecture/pâtes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Pâtes
+    ancien: /assets/words/lecture/pâtes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- peintre
+    ancien: /assets/words/vocab/V9/peintre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- peinture
+    ancien: /assets/words/lecture/peinture.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Peinture
+    ancien: /assets/words/lecture/peinture.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Père
+    ancien: /assets/words/vocab/V1/pere.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Petit déjeuner
+    ancien: /assets/words/vocab/V10/petit-dejeuner.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Petit-déjeuner
+    ancien: /assets/words/vocab/V10/petit-dejeuner.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- photo
+    ancien: /assets/words/lecture/photo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Photo
+    ancien: /assets/words/lecture/photo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- pied
+    ancien: /assets/words/lecture/pied.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Pile
+    ancien: /assets/words/lecture/pile.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Pilote
+    ancien: /assets/words/lecture/pilote.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- pizza
+    ancien: /assets/words/lecture/pizza.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Pizza
+    ancien: /assets/words/lecture/pizza.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Pizzeria
+    ancien: /assets/words/lecture/pizzéria.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- plastique
+    ancien: /assets/words/vocab/V6/plastique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Plastique
+    ancien: /assets/words/vocab/V6/plastique.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- plat
+    ancien: /assets/words/vocab/V10/plat.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- plume
+    ancien: /assets/words/lecture/plume.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Point
+    ancien: /assets/words/lecture/point.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- poisson
+    ancien: /assets/words/lecture/poisson.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Poisson
+    ancien: /assets/words/lecture/poisson.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Policier
+    ancien: /assets/words/lecture/policier.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- pomme
+    ancien: /assets/words/lecture/pomme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Pomme
+    ancien: /assets/words/lecture/pomme.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Porte
+    ancien: /assets/words/vocab/V10/porte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- portefeuille
+    ancien: /assets/words/lecture/portefeuille.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- post-it
+    ancien: /assets/words/lecture/post-it.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- poste
+    ancien: /assets/words/vocab/V9/poste.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Poste
+    ancien: /assets/words/vocab/V9/poste.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- poubelle
+    ancien: /assets/words/lecture/poubelle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- poulet
+    ancien: /assets/words/lecture/poulet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Poulet
+    ancien: /assets/words/lecture/poulet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- printemps
+    ancien: /assets/words/vocab/V2/printemps.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Printemps
+    ancien: /assets/words/vocab/V2/printemps.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Pull
+    ancien: /assets/words/lecture/pull.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Puzzle
+    ancien: /assets/words/lecture/puzzle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- radio
+    ancien: /assets/words/lecture/radio.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Radio
+    ancien: /assets/words/lecture/radio.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- radis
+    ancien: /assets/words/lecture/radis.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Randonnée
+    ancien: /assets/words/lecture/randonnée.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Raquette
+    ancien: /assets/words/lecture/raquette.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Réfrigérateur
+    ancien: /assets/words/lecture/réfrigerateur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- règle
+    ancien: /assets/words/lecture/règle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Règle
+    ancien: /assets/words/lecture/règle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Réservation
+    ancien: /assets/words/vocab/V10/reservation.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- retard
+    ancien: /assets/words/vocab/V10/retard.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Retard
+    ancien: /assets/words/vocab/V10/retard.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- robe
+    ancien: /assets/words/lecture/robe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Robe
+    ancien: /assets/words/lecture/robe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Rouge
+    ancien: /assets/words/lecture/rouge.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Rue
+    ancien: /assets/words/vocab/V9/rue.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Rugby
+    ancien: /assets/words/lecture/rugby.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- sac
+    ancien: /assets/words/lecture/sac-a-main.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Sac
+    ancien: /assets/words/lecture/sac-a-main.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- sac à dos
+    ancien: /assets/words/vocab/V5/sac-a-dos.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Sac à dos
+    ancien: /assets/words/vocab/V5/sac-a-dos.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- salade
+    ancien: /assets/words/lecture/salade.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Salade
+    ancien: /assets/words/lecture/salade.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- salade de fruits
+    ancien: /assets/words/lecture/salade-de-fruits.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Salle
+    ancien: /assets/words/vocab/V5/salle.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- salle de bain
+    ancien: /assets/words/vocab/V4/salle-de-bain.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- samedi
+    ancien: /assets/words/vocab/V2/samedi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Samedi
+    ancien: /assets/words/vocab/V2/samedi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- sandwich
+    ancien: /assets/words/lecture/sandwich.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Sandwich
+    ancien: /assets/words/lecture/sandwich.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Saxophone
+    ancien: /assets/words/lecture/saxophone.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- scotch
+    ancien: /assets/words/lecture/scotch.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- seau
+    ancien: /assets/words/lecture/seau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Seconde
+    ancien: /assets/words/vocab/V2/seconde.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Secrétaire
+    ancien: /assets/words/vocab/V1/secretaire.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Sel
+    ancien: /assets/words/vocab/V7/sel.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- semaine
+    ancien: /assets/words/lecture/semaine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Semaine
+    ancien: /assets/words/lecture/semaine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Serpent
+    ancien: /assets/words/lecture/serpent.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Serviette
+    ancien: /assets/words/vocab/V10/serviette.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- sirop
+    ancien: /assets/words/vocab/V8/sirop.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Snowboard
+    ancien: /assets/words/lecture/snowboard.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- soie
+    ancien: /assets/words/vocab/V6/soie.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- soir
+    ancien: /assets/words/vocab/V2/soir.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Soir
+    ancien: /assets/words/vocab/V2/soir.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- soupe
+    ancien: /assets/words/lecture/soupe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Soupe
+    ancien: /assets/words/lecture/soupe.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- station
+    ancien: /assets/words/lecture/station.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- studio
+    ancien: /assets/words/vocab/V4/studio.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Studio
+    ancien: /assets/words/vocab/V4/studio.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- stylo
+    ancien: /assets/words/lecture/stylo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Stylo
+    ancien: /assets/words/lecture/stylo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- sucre
+    ancien: /assets/words/vocab/V7/sucre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Sucre
+    ancien: /assets/words/vocab/V7/sucre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+- sud
+    ancien: /assets/words/vocab/V9/sud.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Suisse
+    ancien: /assets/words/vocab/V1/suisse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- supermarché
+    ancien: /assets/words/vocab/V9/supermarche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Supermarché
+    ancien: /assets/words/vocab/V9/supermarche.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- surligneur
+    ancien: /assets/words/lecture/surligneur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- T-shirt
+    ancien: /assets/words/lecture/t-shirt.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- table
+    ancien: /assets/words/vocab/V10/table.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Table
+    ancien: /assets/words/vocab/V10/table.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- tableau
+    ancien: /assets/words/lecture/tableau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Tableau
+    ancien: /assets/words/lecture/tableau.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+- talon
+    ancien: /assets/words/lecture/talon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- tapis
+    ancien: /assets/words/lecture/tapis.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- tarte
+    ancien: /assets/words/vocab/V10/tarte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Tarte
+    ancien: /assets/words/vocab/V10/tarte.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- taxi
+    ancien: /assets/words/lecture/taxi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Taxi
+    ancien: /assets/words/lecture/taxi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- télévision
+    ancien: /assets/words/lecture/télévision.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Télévision
+    ancien: /assets/words/lecture/télévision.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- tempête
+    ancien: /assets/words/lecture/tempête.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Tente
+    ancien: /assets/words/lecture/tente.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- tête
+    ancien: /assets/words/lecture/tête.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- thé
+    ancien: /assets/words/lecture/thé.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Thé
+    ancien: /assets/words/lecture/thé.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Ticket
+    ancien: /assets/words/vocab/V10/billet.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- Tigre
+    ancien: /assets/words/lecture/tigre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Timidité
+    ancien: /assets/words/vocab/V1/timidite.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Tiramisu
+    ancien: /assets/words/lecture/tiramisu.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- toilettes
+    ancien: /assets/words/vocab/V4/toilettes.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Tomate
+    ancien: /assets/words/lecture/tomate.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+- tout droit
+    ancien: /assets/words/vocab/V9/tout-droit.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- train
+    ancien: /assets/words/lecture/train.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Train
+    ancien: /assets/words/lecture/train.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- tramway
+    ancien: /assets/words/lecture/tramway.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Tramway
+    ancien: /assets/words/lecture/tramway.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+- Tristesse
+    ancien: /assets/words/vocab/V1/tristesse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+- Trousse
+    ancien: /assets/words/lecture/trousse.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Usine
+    ancien: /assets/words/lecture/usine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+- Vaccin
+    ancien: /assets/words/vocab/V8/vaccin.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Valise
+    ancien: /assets/words/lecture/valise.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- vanille
+    ancien: /assets/words/lecture/vanille.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Vendeur
+    ancien: /assets/words/vocab/V1/vendeur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Vendredi
+    ancien: /assets/words/vocab/V2/vendredi.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-moyen-radios.ts
+- Vent
+    ancien: /assets/words/vocab/V2/vent.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Ventilateur
+    ancien: /assets/words/vocab/V4/ventilateur.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- ventre
+    ancien: /assets/words/lecture/ventre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+- Verre
+    ancien: /assets/words/lecture/verre.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Vert
+    ancien: /assets/words/lecture/vert.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- veste
+    ancien: /assets/words/lecture/veste.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-objet-pick.ts
+- Vétérinaire
+    ancien: /assets/words/lecture/vétérinaire.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- viande
+    ancien: /assets/words/lecture/viande.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Viande
+    ancien: /assets/words/lecture/viande.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- ville
+    ancien: /assets/words/vocab/V9/ville.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-base-other.ts
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Ville
+    ancien: /assets/words/vocab/V9/ville.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-base-messages.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-annonces.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-conversations.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-avance-radios.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Violon
+    ancien: /assets/words/lecture/violon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Vitrine
+    ancien: /assets/words/lecture/vitrine.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance-extra.ts
+- Volleyball
+    ancien: /assets/words/lecture/volleyball.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- wagon
+    ancien: /assets/words/lecture/wagon.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-moyen.ts
+- Yoga
+    ancien: /assets/words/lecture/yoga.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-avance.ts
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+- Zoo
+    ancien: /assets/words/lecture/zoo.webp
+    besoin: /assets/expression/images/scene/<slug>.webp
+    ref: lib/curriculum/content/communication/co-questions-scolaire-messages.ts
+
+--- Liens hors scene retirés du code CE ---
+
+- /assets/expression/images/ce/ce-message-01.webp … ce-message-08.webp
+- /assets/expression/images/ce/ce-orientation-01.webp … ce-orientation-11.webp
+- /assets/words/lecture/* dans ComprehensionEcritRunner (hygiène, gare, soleil, …)
+
+--- Images conversation CO conservées (84 fichiers) ---
+
+- /assets/expression/co/base/public/conversation-1-a.webp
+- /assets/expression/co/base/public/conversation-1-b.webp
+- /assets/expression/co/base/public/conversation-1-c.webp
+- /assets/expression/co/base/public/conversation-1-d.webp
+- /assets/expression/co/base/public/conversation-1-e.webp
+- /assets/expression/co/base/public/conversation-1-f.webp
+- /assets/expression/co/base/public/conversation-2-a.webp
+- /assets/expression/co/base/public/conversation-2-b.webp
+- /assets/expression/co/base/public/conversation-2-c.webp
+- /assets/expression/co/base/public/conversation-2-d.webp
+- /assets/expression/co/base/public/conversation-2-e.webp
+- /assets/expression/co/base/public/conversation-2-f.webp
+- /assets/expression/co/base/public/conversation-3-a.webp
+- /assets/expression/co/base/public/conversation-3-b.webp
+- /assets/expression/co/base/public/conversation-3-c.webp
+- /assets/expression/co/base/public/conversation-3-d.webp
+- /assets/expression/co/base/public/conversation-3-e.webp
+- /assets/expression/co/base/public/conversation-3-f.webp
+- /assets/expression/co/base/public/conversation-4-a.webp
+- /assets/expression/co/base/public/conversation-4-b.webp
+- /assets/expression/co/base/public/conversation-4-c.webp
+- /assets/expression/co/base/public/conversation-4-d.webp
+- /assets/expression/co/base/public/conversation-4-e.webp
+- /assets/expression/co/base/public/conversation-4-f.webp
+- /assets/expression/co/base/public/conversation-5-a.webp
+- /assets/expression/co/base/public/conversation-5-b.webp
+- /assets/expression/co/base/public/conversation-5-c.webp
+- /assets/expression/co/base/public/conversation-5-d.webp
+- /assets/expression/co/base/public/conversation-5-e.webp
+- /assets/expression/co/base/public/conversation-5-f.webp
+- /assets/expression/co/base/public/conversation-6-a.webp
+- /assets/expression/co/base/public/conversation-6-b.webp
+- /assets/expression/co/base/public/conversation-6-c.webp
+- /assets/expression/co/base/public/conversation-6-d.webp
+- /assets/expression/co/base/public/conversation-6-e.webp
+- /assets/expression/co/base/public/conversation-6-f.webp
+- /assets/expression/co/base/public/conversation-7-a.webp
+- /assets/expression/co/base/public/conversation-7-b.webp
+- /assets/expression/co/base/public/conversation-7-c.webp
+- /assets/expression/co/base/public/conversation-7-d.webp
+- /assets/expression/co/base/public/conversation-7-e.webp
+- /assets/expression/co/base/public/conversation-7-f.webp
+- /assets/expression/co/base/public/conversation-8-a.webp
+- /assets/expression/co/base/public/conversation-8-b.webp
+- /assets/expression/co/base/public/conversation-8-c.webp
+- /assets/expression/co/base/public/conversation-8-d.webp
+- /assets/expression/co/base/public/conversation-8-e.webp
+- /assets/expression/co/base/public/conversation-8-f.webp
+- /assets/expression/co/base/scolaire/conversation-41-a.webp
+- /assets/expression/co/base/scolaire/conversation-41-b.webp
+- /assets/expression/co/base/scolaire/conversation-41-c.webp
+- /assets/expression/co/base/scolaire/conversation-41-d.webp
+- /assets/expression/co/base/scolaire/conversation-41-e.webp
+- /assets/expression/co/base/scolaire/conversation-41-f.webp
+- /assets/expression/co/base/scolaire/conversation-42-a.webp
+- /assets/expression/co/base/scolaire/conversation-42-b.webp
+- /assets/expression/co/base/scolaire/conversation-42-c.webp
+- /assets/expression/co/base/scolaire/conversation-42-d.webp
+- /assets/expression/co/base/scolaire/conversation-42-e.webp
+- /assets/expression/co/base/scolaire/conversation-42-f.webp
+- /assets/expression/co/base/scolaire/conversation-43-a.webp
+- /assets/expression/co/base/scolaire/conversation-43-b.webp
+- /assets/expression/co/base/scolaire/conversation-43-c.webp
+- /assets/expression/co/base/scolaire/conversation-43-d.webp
+- /assets/expression/co/base/scolaire/conversation-43-e.webp
+- /assets/expression/co/base/scolaire/conversation-43-f.webp
+- /assets/expression/co/base/scolaire/conversation-44-a.webp
+- /assets/expression/co/base/scolaire/conversation-44-b.webp
+- /assets/expression/co/base/scolaire/conversation-44-c.webp
+- /assets/expression/co/base/scolaire/conversation-44-d.webp
+- /assets/expression/co/base/scolaire/conversation-44-e.webp
+- /assets/expression/co/base/scolaire/conversation-44-f.webp
+- /assets/expression/co/base/scolaire/conversation-45-a.webp
+- /assets/expression/co/base/scolaire/conversation-45-b.webp
+- /assets/expression/co/base/scolaire/conversation-45-c.webp
+- /assets/expression/co/base/scolaire/conversation-45-d.webp
+- /assets/expression/co/base/scolaire/conversation-45-e.webp
+- /assets/expression/co/base/scolaire/conversation-45-f.webp
+- /assets/expression/co/base/scolaire/conversation-46-a.webp
+- /assets/expression/co/base/scolaire/conversation-46-b.webp
+- /assets/expression/co/base/scolaire/conversation-46-c.webp
+- /assets/expression/co/base/scolaire/conversation-46-d.webp
+- /assets/expression/co/base/scolaire/conversation-46-e.webp
+- /assets/expression/co/base/scolaire/conversation-46-f.webp

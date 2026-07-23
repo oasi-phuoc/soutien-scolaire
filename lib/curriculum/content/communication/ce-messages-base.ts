@@ -12,7 +12,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Les réunions d'information durent environ une demi-heure. Vous devez confirmer votre présence en écrivant à : info@abc.eu. " +
       "Pour l'inscription à un cours, il faut présenter un formulaire d'inscription et une pièce d'identité au secrétariat. " +
       "Vous pouvez aussi acheter votre livre de cours.\n\nLes cours commencent lundi.\n\nBonne rentrée !",
-    image: "/assets/expression/images/ce/ce-message-01.webp",
+    image: "",
     pool: [
       ceQ(
         "abc-q1",
@@ -112,7 +112,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Peux-tu acheter du parmesan, deux piments et de l'huile ? Je rentre du travail à 18 heures, est-ce que tu peux venir à 19 heures ?\n\n" +
       "Nous serons quatre ce soir. Mes cousines Lucía et Carmen viennent dîner à 20 heures.\n\n" +
       "Merci.\nInês",
-    image: "/assets/expression/images/ce/ce-message-02.webp",
+    image: "",
     pool: [
       ceQ(
         "est-q1",
@@ -210,7 +210,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Nous vous rappelons que les chaussures de ville (bottines, talons…) sont interdites dans la salle.\n" +
       "Apportez de l'eau et votre propre serviette. Accès aux douches pour 3 CHF.\n\n" +
       "La salle ouvre tous les jours de 7 h à 21 h, sauf le dimanche : fermeture à 13 h.\n\nEmre Yilmaz\nResponsable",
-    image: "/assets/expression/images/ce/ce-message-03.webp",
+    image: "",
     pool: [
       ceQ(
         "spo-q1",
@@ -309,7 +309,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Tu peux réserver une place en ligne. Elle coûte 25 CHF.\n\n" +
       "Si tu viens, rendez-vous devant la station M2 Riponne vers 19 h.\n\n" +
       "À plus !\nSamir et Nacera",
-    image: "/assets/expression/images/ce/ce-message-04.webp",
+    image: "",
     pool: [
       ceQ(
         "bn-q1",
@@ -406,7 +406,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Tu peux venir ? Tu peux apporter des bouteilles de jus de fruit ou des gâteaux apéritifs.\n\n" +
       "Voici mon adresse : 17 rue du Simplon. J'habite juste à côté de l'arrêt du bus 1. Le métro M2 est à cinq minutes à pied.\n\n" +
       "Confirme ta présence par texto, s'il te plaît.\n\nYuliia",
-    image: "/assets/expression/images/ce/ce-message-05.webp",
+    image: "",
     pool: [
       ceQ(
         "cl-q1",
@@ -507,7 +507,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "Tu peux apporter à boire ? J'apporte à manger. On va organiser des jeux avec des équipes.\n\n" +
       "Des surprises sont à gagner !\n\nTu peux me confirmer ta présence par courriel, s'il te plaît ? " +
       "Ne m'appelle pas ou n'envoie pas de SMS, mon téléphone est cassé !\n\nÀ bientôt,\nKwame",
-    image: "/assets/expression/images/ce/ce-message-06.webp",
+    image: "",
     pool: [
       ceQ(
         "mb-q1",
@@ -604,7 +604,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "– de la farine ;\n– 6 œufs ;\n– un litre de lait ;\n– du sucre vanillé ?\n" +
       "J'ai les autres ingrédients. Je te rappelle qu'on a rendez-vous à 19 heures ! " +
       "Il faut que tu sois là avant 17 heures, car je dois préparer le gâteau juste avant la fête.\n\nDaryna",
-    image: "/assets/expression/images/ce/ce-message-07.webp",
+    image: "",
     pool: [
       ceQ(
         "el-q1",
@@ -703,7 +703,7 @@ export const CE_MESSAGES_BASE: CEMessageItem[] = [
       "J'ai deux grosses valises avec moi, je ne veux pas prendre le train ou le bus. " +
       "J'ai rendez-vous le jour même pour couper mes cheveux à 17 h.\n\n" +
       "Ça te dit qu'on aille voir l'expo Dali à Lausanne le 16 ? Je peux avoir des places moins chères. Appelle-moi !\n\nMariam",
-    image: "/assets/expression/images/ce/ce-message-08.webp",
+    image: "",
     pool: [
       ceQ(
         "jul-q1",

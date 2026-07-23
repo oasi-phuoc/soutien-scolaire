@@ -1,15 +1,12 @@
 import { buildObjectPickTask, type COObjectPickCard } from "./co-questions-helpers";
-import { labelToAssetSlug } from "../../word-image-resolver";
+import { resolveCeCoWordImage } from "../../word-image-resolver";
 
 export type COObjetPickDef = {
   cards: [COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard, COObjectPickCard];
 };
 
 function opImg(label: string): string {
-  const slug = labelToAssetSlug(label);
-  // Chaussures de sport → baskets (asset lecture existant)
-  if (slug === "chaussures-de-sport") return "/assets/words/lecture/baskets.webp";
-  return `/assets/words/lecture/${slug}.webp`;
+  return resolveCeCoWordImage(label) ?? "";
 }
 
 function opCards(
