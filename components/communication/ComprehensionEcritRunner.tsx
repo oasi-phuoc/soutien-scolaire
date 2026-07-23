@@ -23,6 +23,7 @@ import { randomIndexOrder, shuffleQcmChoicesSeeded } from "@/lib/curriculum/cont
 import { CE_MESSAGES_BASE } from "@/lib/curriculum/content/communication/ce-messages-base";
 import { CE_MESSAGES_MOYEN } from "@/lib/curriculum/content/communication/ce-messages-moyen";
 import { CE_ORIENTATION_BASE } from "@/lib/curriculum/content/communication/ce-orientation-base";
+import { CE_ARTICLES_BASE } from "@/lib/curriculum/content/communication/ce-articles-base";
 import { CE_ARTICLES_MOYEN } from "@/lib/curriculum/content/communication/ce-articles-moyen";
 import { CE_INSTRUCTIONS_MOYEN } from "@/lib/curriculum/content/communication/ce-instructions-moyen";
 import { buildCeInstructionQuestions, buildCeMessageQuestions } from "@/lib/curriculum/content/communication/ce-questions-helpers";
@@ -292,42 +293,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
   ],
 ];
 
-const ARTICLE_SERIES: ArticleSeriesItem[] = [
-  {
-    title: "Améliorez votre mémoire !",
-    sections: [
-      { heading: "L'alimentation", body: "Mangez des légumes frais, des noix et du poisson. Buvez de l'eau régulièrement.", image: "", imageLabel: "Alimentation" },
-      { heading: "Le sport", body: "La marche, le vélo et la danse stimulent le cerveau et aident à rester concentré.", image: "", imageLabel: "Sport" },
-      { heading: "L'activité mentale", body: "Jouez à des jeux de société, lisez un texte ou racontez une histoire à un ami.", image: "", imageLabel: "Activité mentale" },
-    ],
-    questions: [
-      { prompt: "Que conseille-t-on de manger ?", choices: [{ label: "Des légumes frais" }, { label: "Beaucoup de viande" }, { label: "Seulement du sucre" }], correct: 0 },
-      { prompt: "Quel sport est conseillé ?", choices: [{ label: "La marche", image: "" }, { label: "La boxe", image: "" }, { label: "Le ski nautique", image: "/assets/expression/images/scene/faire-ski.webp" }], correct: 0, image: true },
-      { prompt: "Quelle boisson est conseillée ?", answer: "eau", accept: ["de l'eau", "l eau"] },
-      { prompt: "Quelle activité mentale peut-on faire ?", choices: [{ label: "Jouer à des jeux de société" }, { label: "Dormir toute la journée" }, { label: "Ne rien lire" }], correct: 0 },
-      { prompt: "Pourquoi faut-il faire du sport ?", choices: [{ label: "Pour stimuler le cerveau" }, { label: "Pour oublier les règles" }, { label: "Pour éviter les amis" }], correct: 0 },
-      { prompt: "À qui peut-on raconter une histoire ?", answer: "ami", accept: ["un ami", "à un ami"] },
-      { prompt: "Quel est le sujet principal de l'article ?", choices: [{ label: "La mémoire" }, { label: "Le voyage" }, { label: "La météo" }], correct: 0 },
-    ],
-  },
-  {
-    title: "Bien vivre en hiver",
-    sections: [
-      { heading: "Se protéger du froid", body: "Portez un manteau chaud, des gants et de bonnes chaussures quand il neige.", image: "", imageLabel: "Froid" },
-      { heading: "Rester en forme", body: "Même en hiver, sortez marcher un peu et aérez votre logement chaque jour.", image: "", imageLabel: "Hiver" },
-      { heading: "Éviter les maladies", body: "Lavez-vous souvent les mains et reposez-vous si vous êtes fatigué.", image: "", imageLabel: "Lavage des mains" },
-    ],
-    questions: [
-      { prompt: "Que faut-il porter quand il fait froid ?", choices: [{ label: "Un manteau chaud" }, { label: "Un maillot de bain" }, { label: "Des sandales" }], correct: 0 },
-      { prompt: "Quelle image correspond à l'hiver ?", choices: [{ label: "Neige", image: "/assets/expression/images/scene/neige.webp" }, { label: "Soleil d'été", image: "" }, { label: "Plage", image: "" }], correct: 0, image: true },
-      { prompt: "Que faut-il aérer chaque jour ?", answer: "logement", accept: ["le logement", "maison", "appartement"] },
-      { prompt: "Que faut-il laver souvent ?", choices: [{ label: "Les mains" }, { label: "Les chaussures" }, { label: "Les fenêtres" }], correct: 0 },
-      { prompt: "Que faire si on est fatigué ?", choices: [{ label: "Se reposer" }, { label: "Courir toute la nuit" }, { label: "Ne pas dormir" }], correct: 0 },
-      { prompt: "Quel vêtement protège les mains ?", answer: "gants", accept: ["des gants"] },
-      { prompt: "Quel est le sujet de l'article ?", choices: [{ label: "Bien vivre en hiver" }, { label: "Acheter une voiture" }, { label: "Choisir un film" }], correct: 0 },
-    ],
-  },
-];
+const ARTICLE_SERIES: ArticleSeriesItem[] = CE_ARTICLES_BASE;
 
 
 function orientationRowCorrect(expected: number, selected: number | string | null | undefined): boolean {
