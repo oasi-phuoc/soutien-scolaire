@@ -1033,43 +1033,89 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
 
   return (
     <div className="space-y-5">
-      <p className="text-sm font-semibold italic text-[var(--color-text-primary)]">{part.task.prompt}</p>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <OrientationDocumentsPart part={part} />
+      <OrientationGridPart part={part} answers={answers} correction={correction} onToggle={toggle} />
+    </div>
+  );
+}
+
+/** Annonces / documents — toujours 2 colonnes (impression : 2×3 ou 2×4). */
+function OrientationDocumentsPart({
+  part,
+  compact = false,
+}: {
+  part: Extract<CEPart, { layout: "orientation" }>;
+  compact?: boolean;
+}) {
+  return (
+    <div className="space-y-3">
+      <p className={`font-semibold italic text-[var(--color-text-primary)] ${compact ? "text-xs" : "text-sm"}`}>
+        {part.task.prompt}
+      </p>
+      <div className={`grid grid-cols-2 ${compact ? "gap-2" : "gap-3"}`}>
         {part.task.documents.map((doc, index) => (
-          <div key={doc.title} className="rounded-xl border bg-white p-4 shadow-sm" style={{ borderColor: doc.tone }}>
-            <p className="text-lg font-bold" style={{ color: doc.tone }}>Document {index + 1}</p>
-            <p className="font-semibold text-[var(--color-text-primary)]">{doc.title}</p>
-            <p className="text-sm font-medium text-[var(--color-text-secondary)]">{doc.subtitle}</p>
-            <p className={`mt-2 ${CE_BODY_TEXT}`}>{doc.body}</p>
+          <div
+            key={`${doc.title}-${index}`}
+            className={`rounded-xl border bg-white shadow-sm ${compact ? "p-2" : "p-3"}`}
+            style={{ borderColor: doc.tone }}
+          >
+            <p className={`font-bold ${compact ? "text-sm" : "text-base"}`} style={{ color: doc.tone }}>
+              Document {index + 1}
+            </p>
+            <p className={`font-semibold text-[var(--color-text-primary)] ${compact ? "text-xs" : "text-sm"}`}>
+              {doc.title}
+            </p>
+            <p className={`font-medium text-[var(--color-text-secondary)] ${compact ? "text-[10px]" : "text-xs"}`}>
+              {doc.subtitle}
+            </p>
+            <p className={`mt-1 text-[var(--color-text-primary)] ${compact ? "text-[10px] leading-snug" : "text-xs leading-relaxed"}`}>
+              {doc.body}
+            </p>
           </div>
         ))}
       </div>
-      <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white">
-        <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
-          <colgroup>
-            <col />
+    </div>
+  );
+}
+
+function OrientationGridPart({
+  part,
+  answers,
+  correction,
+  onToggle,
+}: {
+  part: Extract<CEPart, { layout: "orientation" }>;
+  answers: CEAnswers;
+  correction?: boolean;
+  onToggle: (row: number, col: number) => void;
+}) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white">
+      <table className="w-full table-fixed border-collapse text-xs sm:text-sm">
+        <colgroup>
+          <col />
+          {part.task.documents.map((_, index) => (
+            <col key={index} style={{ width: "2.25rem" }} />
+          ))}
+        </colgroup>
+        <thead>
+          <tr className="bg-slate-50">
+            <th className="border border-[var(--color-border-default)] p-2 text-left">Personnes</th>
             {part.task.documents.map((_, index) => (
-              <col key={index} style={{ width: "2.25rem" }} />
+              <th key={index} className="border border-[var(--color-border-default)] px-0 py-2 text-center font-bold">
+                {index + 1}
+              </th>
             ))}
-          </colgroup>
-          <thead>
-            <tr className="bg-slate-50">
-              <th className="border border-[var(--color-border-default)] p-2 text-left">Personnes</th>
-              {part.task.documents.map((_, index) => (
-                <th key={index} className="border border-[var(--color-border-default)] px-0 py-2 text-center font-bold">
-                  {index + 1}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {part.task.people.map((person, row) => {
-              const key = questionKey(part, row);
-              const expected = part.task.answers[row]!;
-              const selected = answers[key];
-              const rowOk = correction && orientationRowCorrect(expected, selected);
-              const rowWrong = correction && !rowOk;
-              return (
+          </tr>
+        </thead>
+        <tbody>
+          {part.task.people.map((person, row) => {
+            const key = questionKey(part, row);
+            const expected = part.task.answers[row]!;
+            const selected = answers[key];
+            const rowOk = correction && orientationRowCorrect(expected, selected);
+            const rowWrong = correction && !rowOk;
+            return (
               <tr key={person} className={rowOk ? "bg-amber-50/60" : rowWrong ? "bg-red-50/40" : undefined}>
                 <td className="border border-[var(--color-border-default)] p-2">{person}</td>
                 {part.task.documents.map((_, col) => {
@@ -1081,7 +1127,7 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
                       <button
                         type="button"
                         disabled={correction}
-                        onClick={() => toggle(row, col)}
+                        onClick={() => onToggle(row, col)}
                         aria-label={`Document ${col + 1}`}
                         className={`mx-auto flex h-7 w-7 items-center justify-center rounded border transition ${
                           isCorrectCell
@@ -1099,11 +1145,10 @@ function OrientationPart({ part, answers, setAnswer, correction }: { part: Extra
                   );
                 })}
               </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -1296,30 +1341,72 @@ export function buildPlacementCePrintExercises(
 ): PrintExercise[] {
   const parts = level ? buildParts(level, seed) : buildProgressiveCEParts(seed);
   const noopSetAnswer = (_key: string, _value: number | string | null) => {};
-  return parts.map((part, index) => ({
-    id: `ce-${index}-${part.id}`,
-    label: `CE ${index + 1}. ${part.title}`,
-    defaultPoints: part.points,
-    preview: (
-      <ExercisePage
-        part={part}
-        index={index}
-        answers={{}}
-        setAnswer={noopSetAnswer}
-        hidePoints
-      />
-    ),
-    correctionPreview: (
-      <ExercisePage
-        part={part}
-        index={index}
-        answers={buildCeCorrectAnswers(part)}
-        setAnswer={noopSetAnswer}
-        correction
-        hidePoints
-      />
-    ),
-  }));
+  return parts.map((part, index) => {
+    if (part.layout === "orientation") {
+      const answers = buildCeCorrectAnswers(part);
+      const docs = <OrientationDocumentsPart part={part} compact />;
+      const gridEmpty = (
+        <OrientationGridPart
+          part={part}
+          answers={{}}
+          onToggle={() => {}}
+        />
+      );
+      const gridCorrect = (
+        <OrientationGridPart
+          part={part}
+          answers={answers}
+          correction
+          onToggle={() => {}}
+        />
+      );
+      return {
+        id: `ce-${index}-${part.id}`,
+        label: `CE ${index + 1}. ${part.title}`,
+        defaultPoints: part.points,
+        leadPreview: (
+          <div className="space-y-3">
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+            {docs}
+          </div>
+        ),
+        preview: gridEmpty,
+        correctionLeadPreview: (
+          <div className="space-y-3">
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{part.title}</h2>
+            {docs}
+          </div>
+        ),
+        correctionLeadTitle: "Documents",
+        correctionPreview: gridCorrect,
+      };
+    }
+
+    return {
+      id: `ce-${index}-${part.id}`,
+      label: `CE ${index + 1}. ${part.title}`,
+      defaultPoints: part.points,
+      preview: (
+        <ExercisePage
+          part={part}
+          index={index}
+          answers={{}}
+          setAnswer={noopSetAnswer}
+          hidePoints
+        />
+      ),
+      correctionPreview: (
+        <ExercisePage
+          part={part}
+          index={index}
+          answers={buildCeCorrectAnswers(part)}
+          setAnswer={noopSetAnswer}
+          correction
+          hidePoints
+        />
+      ),
+    };
+  });
 }
 
 function ResultsPage({

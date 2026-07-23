@@ -12,10 +12,17 @@ export interface PrintExercise {
   /** Même série que `preview`, avec réponses affichées (bloc corrigé). */
   correctionPreview?: ReactNode;
   /**
-   * Bloc corrigé affiché avant les réponses (ex. QR + transcriptions CO).
+   * Bloc affiché avant le corps de l’exercice (feuille élève), ex. annonces CE.
+   * Un saut de page est forcé avant `preview`.
+   */
+  leadPreview?: ReactNode;
+  /**
+   * Bloc corrigé affiché avant les réponses (ex. QR + transcriptions CO, annonces CE).
    * Un saut de page est forcé avant `correctionPreview`.
    */
   correctionLeadPreview?: ReactNode;
+  /** Libellé du bloc lead corrigé (défaut : « Audios & transcriptions »). */
+  correctionLeadTitle?: string;
   /** Points par défaut en mode évaluation (barème du test). */
   defaultPoints?: number;
 }
@@ -1077,7 +1084,7 @@ export function PrintConfigSheet({
                           <div className="print-exercise">
                             <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
                               <span className="flex-1">
-                                Exercice {index + 1} — Audios & transcriptions
+                                Exercice {index + 1} — {exercise.correctionLeadTitle ?? "Audios & transcriptions"}
                               </span>
                               {evalMode && (
                                 <span style={{ color: "black" }}>
@@ -1118,6 +1125,50 @@ export function PrintConfigSheet({
                     const body = item.correction
                       ? (exercise?.correctionPreview ?? exercise?.preview)
                       : exercise?.preview;
+                    const lead = !item.correction ? exercise?.leadPreview : undefined;
+
+                    if (lead) {
+                      sectionNodes.push({
+                        key: `${item.key}-lead`,
+                        forceNewPage: forceFirstAfterAnnounce,
+                        node: (
+                          <div className="print-exercise">
+                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                              <span className="flex-1">Exercice {index + 1}</span>
+                              {evalMode && (
+                                <span style={{ color: "black" }}>
+                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                </span>
+                              )}
+                            </div>
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              {lead}
+                            </div>
+                          </div>
+                        ),
+                      });
+                      sectionNodes.push({
+                        key: item.key,
+                        forceNewPage: true,
+                        node: (
+                          <div className="print-exercise">
+                            <div className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold" style={{ color: accentColor }}>
+                              <span className="flex-1">Exercice {index + 1} — Grille</span>
+                              {evalMode && (
+                                <span style={{ color: "black" }}>
+                                  {item.selection.points} pt{item.selection.points > 1 ? "s" : ""}
+                                </span>
+                              )}
+                            </div>
+                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              {body ?? <div className="h-7 border-b border-black/40" />}
+                            </div>
+                          </div>
+                        ),
+                      });
+                      return;
+                    }
+
                     sectionNodes.push({
                       key: item.key,
                       forceNewPage: forceFirstAfterAnnounce,
