@@ -5,7 +5,6 @@ import { getAllGrammarLessons, getAllConjLessons } from "@/lib/curriculum/gramma
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { EXPRESS_ORAL_LESSONS } from "@/lib/curriculum/content/communication/express-index";
 import {
-  getMathExercisesForLevel,
   MATH_TRAINING_LEVEL_LABELS,
   MATH_TRAINING_LEVEL_TOGGLE,
 } from "@/lib/placement/math-training-levels";
