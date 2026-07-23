@@ -1493,27 +1493,6 @@ function QuestionBlock({
                 forPrint={forPrint}
               />
             </div>
-            {readonly && isConversationImageGrid && question.kind === "conversation_image_grid" && (
-              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Score : {formatPoints(conversationImageGridPoints(question, answer))} / {formatPoints(part.points)} pts
-                {" "}({conversationImageGridScorableCorrectCount(question, answer)} / 4 dialogues)
-              </p>
-            )}
-            {readonly && isMatchGrid && question.kind === "match_grid" && (
-              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Score : {formatPoints(matchGridScore(question, answer))} / {formatPoints(part.points)} pts
-              </p>
-            )}
-            {readonly && isObjectPick && question.kind === "object_pick" && (
-              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Score : {formatPoints(objectPickScore(question, answer))} / {formatPoints(part.points)} pts
-              </p>
-            )}
-            {readonly && isImageMatch && question.kind === "image_match" && (
-              <p className="mt-2 text-sm font-semibold" style={{ color: answerOk(question, answer) ? "#16a34a" : INVERSE }}>
-                Score : {imageMatchCount(question, answer)} / {question.dialogues} dialogues
-              </p>
-            )}
           </div>
         );
       })}
