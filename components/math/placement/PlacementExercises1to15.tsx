@@ -144,7 +144,13 @@ export function PlacementInstruction({ text, className = "text-sm text-[var(--co
   const pivot = usePivotLang();
   const { showPivot } = useTranslation();
   const translated = showPivot ? INSTRUCTION_TRANSLATIONS[text]?.[pivot] : undefined;
-  return <p className={className} lang={showPivot ? pivot : "fr"} dir={pivot === "ar" || pivot === "fa" || pivot === "ps" ? "rtl" : "ltr"}>{translated ?? text}</p>;
+  const displayLang = translated ? pivot : "fr";
+  const isRtl = Boolean(translated) && (pivot === "ar" || pivot === "fa" || pivot === "ps");
+  return (
+    <p className={className} lang={displayLang} dir={isRtl ? "rtl" : "ltr"}>
+      {translated ?? text}
+    </p>
+  );
 }
 
 // ── Exercise 1 — Count shapes ─────────────────────────────────────────────────
