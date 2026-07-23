@@ -448,7 +448,6 @@ function WritingExercise({
     <div className="space-y-5">
       <div>
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
-        <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 w-full text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         <SourceMessageCard prompt={prompt} />
         <p className="mt-3 w-full text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>

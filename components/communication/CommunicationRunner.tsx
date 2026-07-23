@@ -116,7 +116,6 @@ function WritingExercise({
     <div className="space-y-5">
       <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4">
         <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
-        <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
         {prompt.sourceMessage && (
           <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-white/85 p-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
