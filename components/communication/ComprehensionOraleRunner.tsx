@@ -19,6 +19,11 @@ import { CO_SCOLAIRE_AVANCE_QUESTIONS_PER_AUDIO } from "@/lib/curriculum/content
 import { markCommunicationLessonComplete } from "@/lib/progress/communication-progress";
 import type { PrintExercise } from "@/components/ui/PrintConfigSheet";
 import {
+  PrintAudioQrRow,
+  coAudioQrItems,
+  type PrintAudioQrItem,
+} from "@/components/print/PrintAudioQrRow";
+import {
   CommunicationFinishButton,
   CommunicationIntroSection,
   CommunicationResultsExercise,
@@ -1262,6 +1267,9 @@ function QuestionBlock({
   onAnswer,
   readonly,
   forceTranscripts = false,
+  hideAudioPlayer = false,
+  hideQuestions = false,
+  qrItems,
 }: {
   part: COPart;
   answers: Answers;
@@ -1269,6 +1277,12 @@ function QuestionBlock({
   readonly?: boolean;
   /** Mode impression PDF : affiche les scripts sans bouton audio. */
   forceTranscripts?: boolean;
+  /** Impression : masquer le lecteur audio (QR à la place). */
+  hideAudioPlayer?: boolean;
+  /** Impression corrigé (page scripts) : pas de questions. */
+  hideQuestions?: boolean;
+  /** Rangée de QR codes au-dessus des questions / scripts. */
+  qrItems?: PrintAudioQrItem[];
 }) {
   const [showTranscripts, setShowTranscripts] = useState(forceTranscripts);
   const hasTranscript = part.audioGroup.items.some((item) => item.transcript);
@@ -1279,15 +1293,17 @@ function QuestionBlock({
   const isImageMatch = part.questions.length === 1 && part.questions[0]!.kind === "image_match";
   const isSingleTask = isMatchGrid || isObjectPick || isImageMatch;
 
-  const consigne = isConversationImageGrid
-    ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
-    : isImageMatch
-      ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
-      : isMatchGrid
-        ? "Lisez les situations. Écoutez les dialogues puis répondez."
-        : isObjectPick
-          ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
-          : "Écoutez l'enregistrement et répondez aux questions.";
+  const consigne = qrItems?.length
+    ? "Scannez le ou les QR codes pour écouter l'audio, puis répondez aux questions."
+    : isConversationImageGrid
+      ? "Écoutez les 4 dialogues, puis associez chaque image (2 pts par bon numéro ; laissez « — » pour les leurres)."
+      : isImageMatch
+        ? "Écoutez les dialogues, puis choisissez sous chaque image le numéro du dialogue correspondant."
+        : isMatchGrid
+          ? "Lisez les situations. Écoutez les dialogues puis répondez."
+          : isObjectPick
+            ? "Écoutez l'enregistrement et cliquez sur les objets que vous entendez."
+            : "Écoutez l'enregistrement et répondez aux questions.";
 
   return (
     <div className="space-y-5">
@@ -1298,7 +1314,7 @@ function QuestionBlock({
             <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-[var(--color-text-secondary)]">
               {part.points} points
             </span>
-            {hasTranscript && !forceTranscripts && (
+            {hasTranscript && !forceTranscripts && !hideAudioPlayer && (
               <button
                 type="button"
                 onClick={() => setShowTranscripts((value) => !value)}
@@ -1317,10 +1333,15 @@ function QuestionBlock({
           </div>
         </div>
         <p className="w-full text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          {forceTranscripts ? "Lisez le script ci-dessous et répondez aux questions." : consigne}
+          {forceTranscripts && !qrItems?.length
+            ? "Lisez le script ci-dessous et répondez aux questions."
+            : hideQuestions
+              ? "Scannez les QR codes pour réécouter, puis lisez les transcriptions."
+              : consigne}
         </p>
         <div className="space-y-3">
-          {!forceTranscripts && <AudioSequencePlayer items={part.audioGroup.items} />}
+          {qrItems && qrItems.length > 0 ? <PrintAudioQrRow items={qrItems} /> : null}
+          {!forceTranscripts && !hideAudioPlayer && <AudioSequencePlayer items={part.audioGroup.items} />}
           {(showTranscripts || forceTranscripts) && part.audioGroup.items.map((item) => item.transcript ? (
             <COTranscriptView
               key={item.id}
@@ -1332,13 +1353,13 @@ function QuestionBlock({
         </div>
       </div>
 
-      {!part.questions.length && (
+      {!hideQuestions && !part.questions.length && (
         <div className="rounded-[var(--radius-md)] border border-slate-200 bg-white/80 p-4 text-sm text-[var(--color-text-secondary)]">
           Les questions seront ajoutées après la vérification des audios.
         </div>
       )}
 
-      {part.questions.map((question, index) => {
+      {!hideQuestions && part.questions.map((question, index) => {
         const key = `${part.id}-${index}`;
         const answer = answers[key] ?? null;
         return (
@@ -1620,6 +1641,7 @@ export function buildPlacementCoPrintExercises(
   const parts = level ? makeParts(level, seed) : makeProgressiveCoParts(seed);
   return parts.map((part, index) => {
     const correctAnswers = buildCoCorrectAnswers(part);
+    const qrItems = coAudioQrItems(part.audioGroup.items);
     return {
       id: `co-${index}-${part.id}`,
       label: `CO ${index + 1}. ${part.title}`,
@@ -1633,23 +1655,30 @@ export function buildPlacementCoPrintExercises(
             part={part}
             answers={{}}
             onAnswer={() => undefined}
-            forceTranscripts
+            hideAudioPlayer
+            qrItems={qrItems}
           />
         </div>
       ),
+      correctionLeadPreview: (
+        <QuestionBlock
+          part={part}
+          answers={{}}
+          onAnswer={() => undefined}
+          forceTranscripts
+          hideAudioPlayer
+          hideQuestions
+          qrItems={qrItems}
+        />
+      ),
       correctionPreview: (
-        <div className="space-y-3">
-          <p className="text-sm font-bold uppercase tracking-wider text-[var(--color-accent-quiz)]">
-            Exercice {index + 1} — Corrigé
-          </p>
-          <QuestionBlock
-            part={part}
-            answers={correctAnswers}
-            onAnswer={() => undefined}
-            forceTranscripts
-            readonly
-          />
-        </div>
+        <QuestionBlock
+          part={part}
+          answers={correctAnswers}
+          onAnswer={() => undefined}
+          hideAudioPlayer
+          readonly
+        />
       ),
     };
   });

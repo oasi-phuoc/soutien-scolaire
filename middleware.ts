@@ -8,6 +8,7 @@ const PUBLIC_PATHS = new Set([
   "/verification-otp",
   "/api/download-app",
   "/app.apk",
+  "/ecoute",
 ]);
 
 const ADMIN_PREFIX = "/admin";
