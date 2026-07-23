@@ -1,22 +1,28 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { HomeTeacherSection } from "@/components/home/HomeTeacherSection";
+import { HomeImpressionCard } from "@/components/home/HomeImpressionCard";
 import { TasksCard } from "@/components/home/TasksCard";
 import { ExpressionMailboxCard } from "@/components/expression/ExpressionMailboxCard";
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
-async function isTeacherAccount(): Promise<boolean> {
+async function getHomeRole(): Promise<"admin" | "prof" | "other"> {
   const supabase = await createSupabaseServerClient();
-  if (!supabase) return false;
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return false;
+  if (!supabase) return "other";
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return "other";
   const { data: role } = await supabase.rpc("get_my_role");
-  return role === "admin" || role === "prof";
+  if (role === "admin") return "admin";
+  if (role === "prof") return "prof";
+  return "other";
 }
 
 export default async function HomePage({ searchParams }: Props) {
   const q = (await searchParams) ?? {};
-  const teacher = await isTeacherAccount();
+  const role = await getHomeRole();
+  const teacher = role === "admin" || role === "prof";
 
   return (
     <main className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
@@ -28,6 +34,7 @@ export default async function HomePage({ searchParams }: Props) {
 
       {!teacher ? <TasksCard /> : null}
       <ExpressionMailboxCard />
+      {role === "admin" ? <HomeImpressionCard /> : null}
 
       <HomeTeacherSection />
     </main>
