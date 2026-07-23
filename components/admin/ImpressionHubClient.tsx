@@ -89,7 +89,7 @@ export function ImpressionHubClient() {
   const groups = useMemo(() => {
     const set = new Set(domainEntries.map((e) => e.group));
     return preferredGroups(domain, Array.from(set));
-  }, [catalog, domain, domainEntries]);
+  }, [domain, domainEntries]);
 
   const activeGroup = group && groups.includes(group) ? group : groups[0] ?? null;
 
