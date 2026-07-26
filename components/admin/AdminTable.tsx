@@ -417,7 +417,14 @@ export function AdminTable({
               aria-label="Filtrer par classe"
             />
           )}
-          {currentUserRole === "admin" && (
+        </div>
+        {currentUserRole === "admin" && (
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <PlacementModuleToggle
+              enabled={placementEnabled}
+              disabled={placementPending}
+              onChange={togglePlacementModule}
+            />
             <button
               onClick={() => setResetConfirming(true)}
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
@@ -426,15 +433,8 @@ export function AdminTable({
             >
               <IconArchive />
             </button>
-          )}
-          {currentUserRole === "admin" && (
-            <PlacementModuleToggle
-              enabled={placementEnabled}
-              disabled={placementPending}
-              onChange={togglePlacementModule}
-            />
-          )}
-        </div>
+          </div>
+        )}
         {placementMsg && (
           <p className="mb-2 text-sm text-red-600" role="status">
             {placementMsg}
@@ -452,7 +452,7 @@ export function AdminTable({
             }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-[var(--color-theme)] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
-                {([["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"], ["access", "Accès"], ["placement", "Placement"]] as const).map(([val, label]) => (
+                {([["math", "Math"], ["francais", "Fr"], ["lecture", "Lec"], ["access", "Acc"], ["placement", "Test"]] as const).map(([val, label]) => (
                   <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
                 ))}
               </>
@@ -473,12 +473,12 @@ export function AdminTable({
         </div>
       </div>
 
-      {/* Table — hauteur bornée, colonnes fixes (pas de scroll horizontal) */}
-      <div className="max-h-[calc(100dvh-14rem)] overflow-y-auto overflow-x-hidden rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
+      {/* Table — hauteur bornée ; colonne loupe sticky à gauche */}
+      <div className="max-h-[calc(100dvh-14rem)] overflow-y-auto overflow-x-auto rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
         <table className="w-full table-fixed text-sm">
-          <thead className="sticky top-0 z-10">
+          <thead className="sticky top-0 z-20">
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="w-9 bg-[var(--color-theme)] px-1.5 py-2 sm:w-10 sm:px-2 sm:py-3" aria-label="Détail" />
+              <th className="sticky left-0 z-30 w-7 bg-[var(--color-theme)] p-0 sm:w-8" aria-label="Détail" />
               <th className="w-[22%] bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-3">Prénom, Nom</th>
               <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
               <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
@@ -501,10 +501,10 @@ export function AdminTable({
               const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
               const hasPrint = row.role === "admin" || row.can_print;
               return (
-                <tr key={row.id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                  <td className="px-1.5 py-2 sm:px-2 sm:py-3">
-                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+                <tr key={row.id} className="group bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                  <td className="sticky left-0 z-10 w-7 bg-white p-0 group-hover:bg-zinc-50 sm:w-8 dark:bg-zinc-950 dark:group-hover:bg-zinc-900">
+                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
                     </Link>
                   </td>
                   <td className="min-w-0 px-2 py-2 sm:px-3 sm:py-3">
