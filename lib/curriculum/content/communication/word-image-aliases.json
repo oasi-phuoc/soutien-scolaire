@@ -442,5 +442,9 @@
   "carte-didentite": "carte-d'identite",
   "bouteille-eau": "bouteille-deau",
   "bouteille-d-eau": "bouteille-deau",
-  "chaussures-de-sport": "baskets"
+  "chaussures-de-sport": "baskets",
+  "invitation": "accepter-invitation",
+  "visite-zoo": "visiter-zoo",
+  "visite-musee": "visiter-musee",
+  "visiter-exposition": "visiter-musee"
 }

@@ -1,6 +1,6 @@
 {
-  "version": 1785064038251,
-  "totalBytes": 432424954,
+  "version": 1785064431650,
+  "totalBytes": 432487386,
   "routes": [
     "/",
     "/avant-propos",
@@ -854,6 +854,7 @@
     "/assets/expression/images/heure/horloge-22h30.webp",
     "/assets/expression/images/heure/horloge-23h00.webp",
     "/assets/expression/images/scene/accueil-hotel.webp",
+    "/assets/expression/images/scene/accueil-inscription.webp",
     "/assets/expression/images/scene/accueillir-gare.webp",
     "/assets/expression/images/scene/achat.magasin.webp",
     "/assets/expression/images/scene/achat.webp",
@@ -10200,6 +10201,11 @@
       "url": "/assets/expression/images/scene/accueil-hotel.webp",
       "size": 184136,
       "revision": "723060807c937e5b"
+    },
+    {
+      "url": "/assets/expression/images/scene/accueil-inscription.webp",
+      "size": 62432,
+      "revision": "073b701e983bd906"
     },
     {
       "url": "/assets/expression/images/scene/accueillir-gare.webp",

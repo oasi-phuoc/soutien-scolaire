@@ -1,6 +1,6 @@
 1 (1) #visiter #zoo #famille #girafe
 1 (2) #visiter #zoo #famille #éléphant
-1 (2) #visiter #zoo #famille #lion
+1 (3) #visiter #zoo #famille #lion
 2 (1) #visiter #musée #exposition #tableau #couple
 2 (2) #visiter #musée #exposition #tableau #femmes
 2 (3) #visiter #musée #exposition #tableau #couple
@@ -12,13 +12,12 @@
 2 (9) #visiter #musée #exposition #tableau #couple
 2 (10) #visiter #musée #exposition #tableau #sculpture #couple
 2 (11) #visiter #musée #exposition #tableau #sculpture #couple
-3 (1) #vister #appartement #homme
-3 (2) #vister #appartement #couple
-3 (3) #vister #appartement #couple
+3 (1) #visiter #appartement #homme
+3 (2) #visiter #appartement #couple
+3 (3) #visiter #appartement #couple
 4 (1) #proposer #accepter #invitation #sortie #fille #homme
 5 (1) #recevoir #invitation #cadeau #lettre #couple
 5 (2) #recevoir #invitation #cadeau #lettre #femme #fille
-6 (1) #reception #accueil #hôtel #femme #vacance 
+6 (1) #reception #accueil #hôtel #femme #vacance
 7 (1) #accueil #reception #inscription #formulaire #femme
 7 (2) #accueil #reception #inscription #formulaire #étudiants #filles #garçons
-
