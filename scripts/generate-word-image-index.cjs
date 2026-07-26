@@ -26,6 +26,10 @@ const expressionTempDir = path.join(root, "public/assets/expression/images-temp"
 const coScolaireDir = path.join(root, "public/assets/expression/co/base/scolaire");
 const coPublicDir = path.join(root, "public/assets/expression/co/base/public");
 const expressionSceneDir = path.join(root, "public/assets/expression/images/scene");
+const sceneCatalogPath = path.join(
+  root,
+  "lib/curriculum/content/communication/scene-image-catalog.json",
+);
 const expressionCeDir = path.join(root, "public/assets/expression/images/ce");
 const expressionHeureDir = path.join(root, "public/assets/expression/images/heure");
 const lectureDir = path.join(root, "public/assets/words/lecture");
@@ -64,6 +68,42 @@ function addFrom(dir, urlPrefix, index) {
   }
 }
 
+/**
+ * Scènes CE/CO : fichiers `N (k).ext` — indexer par clé thématique (slug famille)
+ * pour que les lookups `accepter-invitation`, aliases, etc. restent valides.
+ */
+function addSceneFromCatalog(index) {
+  if (!fs.existsSync(sceneCatalogPath)) {
+    addFrom(expressionSceneDir, "/assets/expression/images/scene", index);
+    return;
+  }
+  const catalog = JSON.parse(fs.readFileSync(sceneCatalogPath, "utf8"));
+  for (const family of catalog.families || []) {
+    const main = family.variants?.[0];
+    if (!main?.path) continue;
+    const url = main.path;
+    const accentKey = slug(family.key);
+    const plainKey = baseSlug(family.key);
+    if (!index.has(accentKey)) index.set(accentKey, url);
+    if (plainKey !== accentKey && !index.has(plainKey)) index.set(plainKey, url);
+
+    // Variantes : `slug (2)`… pour compat + noms numériques `N (k)`
+    family.variants.forEach((v, idx) => {
+      if (!v?.path) return;
+      if (idx > 0) {
+        const variantKey = `${family.key} (${idx + 1})`;
+        if (!index.has(variantKey)) index.set(variantKey, v.path);
+        const plainVariant = baseSlug(variantKey);
+        if (plainVariant !== variantKey && !index.has(plainVariant)) {
+          index.set(plainVariant, v.path);
+        }
+      }
+      const fileBase = String(v.file || "").replace(IMG_RE, "");
+      if (fileBase && !index.has(fileBase)) index.set(fileBase, v.path);
+    });
+  }
+}
+
 function main() {
   const index = new Map();
   const lectureOnly = new Map();
@@ -79,7 +119,7 @@ function main() {
   }
   addFrom(coScolaireDir, "/assets/expression/co/base/scolaire", index);
   addFrom(coPublicDir, "/assets/expression/co/base/public", index);
-  addFrom(expressionSceneDir, "/assets/expression/images/scene", index);
+  addSceneFromCatalog(index);
   addFrom(expressionCeDir, "/assets/expression/images/ce", index);
   addFrom(expressionHeureDir, "/assets/expression/images/heure", index);
   addFrom(lectureDir, "/assets/words/lecture", index);

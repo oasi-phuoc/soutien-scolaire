@@ -272,7 +272,7 @@ const INSTRUCTION_SERIES: InstructionSeriesItem[] = [
     },
     {
       title: "Consigne de sécurité",
-      image: "/assets/expression/images/scene/demander-aide-urgence.webp",
+      image: "/assets/expression/images/scene/164 (1).webp",
       imageLabel: "Sécurité",
       body: "En cas d'alarme, sortez calmement par la porte la plus proche. N'utilisez pas l'ascenseur. Attendez devant le bâtiment.",
       questions: [

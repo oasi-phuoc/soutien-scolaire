@@ -1,15 +1,19 @@
 /**
- * 1) Renomme les images temporaires `N (M).webp` selon `0 mot clé.txt`
- * 2) Régénère CATALOG.md + scene-image-catalog.json
+ * Régénère CATALOG.md + scene-image-catalog.json à partir des fichiers
+ * numérotés `N (k).ext` dans public/assets/expression/images/scene/.
  *
- * Usage: node scripts/rebuild-scene-catalog.cjs
+ * Les clés thématiques (slugs) et tags sont repris du catalogue JSON existant
+ * quand la famille N est déjà connue. Les nouvelles variantes `N (k)` d’une
+ * famille existante entrent automatiquement dans le pool.
+ *
+ * Usage:
+ *   node scripts/rebuild-scene-catalog.cjs
  */
 const fs = require("fs");
 const path = require("path");
 
 const root = process.cwd();
 const sceneDir = path.join(root, "public/assets/expression/images/scene");
-const keywordsFile = path.join(sceneDir, "0 mot clé.txt");
 const catalogMd = path.join(sceneDir, "CATALOG.md");
 const catalogJson = path.join(
   root,
@@ -25,17 +29,6 @@ const GENERIC_TAGS = new Set([
   "anime",
 ]);
 
-/** Thème numérique → slug famille (convention existante). */
-const THEME_SLUGS = {
-  1: "visiter-zoo",
-  2: "visiter-musee",
-  3: "visiter-appartement",
-  4: "accepter-invitation",
-  5: "recevoir-invitation",
-  6: "accueil-hotel",
-  7: "accueil-inscription",
-};
-
 const THEME_TITLES = {
   "visiter-zoo": "Visiter le zoo",
   "visiter-musee": "Visiter le musée",
@@ -45,6 +38,8 @@ const THEME_TITLES = {
   "accueil-hotel": "Accueil à l'hôtel",
   "accueil-inscription": "Accueil / inscription",
 };
+
+const NUMBERED_RE = /^(\d+)\s+\((\d+)\)\.(webp|png|jpe?g)$/i;
 
 function slugifyTag(raw) {
   return String(raw)
@@ -59,248 +54,119 @@ function slugifyTag(raw) {
     .replace(/\s+/g, "-");
 }
 
-function toHashtag(tag) {
-  const t = tag.replace(/^#/, "").trim();
-  return t ? `#${t}` : null;
-}
-
-function parseKeywordsFile(text) {
-  /** @type {Map<string, { theme: number, index: number, tags: string[] }>} */
-  const byTempName = new Map();
-  const lines = text.split(/\r?\n/);
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("//")) continue;
-    const m = trimmed.match(/^(\d+)\s*\((\d+)\)\s*(.*)$/);
-    if (!m) continue;
-    let theme = Number(m[1]);
-    let index = Number(m[2]);
-    const tags = (m[3].match(/#[^\s#]+/g) || [])
-      .map((t) => t.slice(1).trim())
-      .filter(Boolean)
-      .filter((t) => !GENERIC_TAGS.has(slugifyTag(t)));
-
-    // Correction: 1 (2) lion en double → 1 (3)
-    const key = `${theme} (${index})`;
-    if (byTempName.has(key) && theme === 1 && index === 2) {
-      index = 3;
-    }
-    byTempName.set(`${theme} (${index})`, { theme, index, tags });
-  }
-  return byTempName;
-}
-
 function titleFromSlug(slug) {
   if (THEME_TITLES[slug]) return THEME_TITLES[slug];
-  return slug
-    .split("-")
+  return String(slug)
+    .split(/[-.]+/)
     .filter(Boolean)
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 }
 
 function tagsFromSlug(slug) {
-  return slug
+  return String(slug)
     .split(/[-.]+/)
     .filter((w) => w && !/^\d+$/.test(w))
     .filter((w) => !GENERIC_TAGS.has(w))
     .map((w) => `#${w}`);
 }
 
-function variantFileName(slug, variantIndex) {
-  // variantIndex 0 → slug.webp ; 1 → slug (2).webp ; 2 → slug (3).webp
-  if (variantIndex === 0) return `${slug}.webp`;
-  return `${slug} (${variantIndex + 1}).webp`;
-}
-
-function familyKeyFromFile(file) {
-  const base = file.replace(/\.(webp|png|jpe?g)$/i, "");
-  // "name (2)" / "name (10)" → name
-  const paren = base.match(/^(.*)\s+\((\d+)\)$/);
-  if (paren) return paren[1].trim();
-  return base;
-}
-
-function variantOrderFromFile(file) {
-  const base = file.replace(/\.(webp|png|jpe?g)$/i, "");
-  const paren = base.match(/^(.*)\s+\((\d+)\)$/);
-  if (paren) return Number(paren[2]);
-  return 1; // principal
-}
-
-/** Reconstruit tagsByFile après renommage (fichiers déjà au bon nom). */
-function rebuildTagsFromKeywordsOnly(keywordMap) {
-  const tagsByFile = new Map();
-  /** @type {Map<number, { index: number, tags: string[] }[]>} */
-  const byTheme = new Map();
-  for (const info of keywordMap.values()) {
-    const list = byTheme.get(info.theme) || [];
-    list.push({ index: info.index, tags: info.tags });
-    byTheme.set(info.theme, list);
+function cleanTags(tags) {
+  const out = [];
+  const seen = new Set();
+  for (const raw of tags || []) {
+    const t = String(raw).replace(/^#/, "").trim();
+    if (!t || t.includes("\uFFFD") || /\?\?/.test(t)) continue;
+    const k = slugifyTag(t);
+    if (!k || GENERIC_TAGS.has(k) || seen.has(k)) continue;
+    seen.add(k);
+    out.push(`#${t}`);
   }
-  for (const [theme, items] of byTheme) {
-    const slug = THEME_SLUGS[theme];
-    if (!slug) continue;
-    items.sort((a, b) => a.index - b.index);
-    const existing = fs
-      .readdirSync(sceneDir)
-      .filter((f) => /\.(webp|png)$/i.test(f))
-      .filter((f) => familyKeyFromFile(f) === slug);
-    const existingMaxBefore = existing.filter((f) => {
-      // Fichiers qui existaient avant la série mots-clés : ceux sans tags dédiés
-      return true;
-    }).length;
-    // Associer dans l’ordre numérique des fichiers du slug
-    const ordered = existing.sort(
-      (a, b) => variantOrderFromFile(a) - variantOrderFromFile(b) || a.localeCompare(b, "fr"),
-    );
-    // Si plus de fichiers que d’entrées mots-clés, les premiers « en trop »
-    // (ex. visiter-musee.webp préexistant) gardent des tags slug ; les suivants
-    // reçoivent les tags mots-clés dans l’ordre.
-    const extra = Math.max(0, ordered.length - items.length);
-    items.forEach((item, i) => {
-      const file = ordered[extra + i];
-      if (!file) return;
-      tagsByFile.set(
-        file,
-        item.tags.map((t) => `#${t}`),
-      );
+  return out;
+}
+
+function loadPrevCatalog() {
+  if (!fs.existsSync(catalogJson)) return { byId: new Map(), tagsByFile: new Map() };
+  const prev = JSON.parse(fs.readFileSync(catalogJson, "utf8"));
+  /** @type {Map<string, { key: string, tags: string[], variantTags: Map<string, string[]> }>} */
+  const byId = new Map();
+  const tagsByFile = new Map();
+  for (const family of prev.families || []) {
+    const variantTags = new Map();
+    for (const v of family.variants || []) {
+      variantTags.set(v.file, cleanTags(v.tags));
+      tagsByFile.set(v.file, cleanTags(v.tags));
+    }
+    byId.set(String(family.id), {
+      key: family.key,
+      tags: cleanTags(family.tags),
+      variantTags,
     });
   }
-  return { tagsByFile, renames: [] };
+  return { byId, tagsByFile };
 }
 
-function renameTempImages(keywordMap) {
-  /** tags par fichier final */
-  const tagsByFile = new Map();
-  const renames = [];
+function collectNumberedFamilies(prevById) {
+  const files = fs.readdirSync(sceneDir).filter((f) => NUMBERED_RE.test(f));
 
-  // Grouper par thème
-  /** @type {Map<number, { index: number, tags: string[], temp: string }[]>} */
-  const byTheme = new Map();
-  for (const [temp, info] of keywordMap) {
-    const list = byTheme.get(info.theme) || [];
-    list.push({ index: info.index, tags: info.tags, temp });
-    byTheme.set(info.theme, list);
-  }
-
-  for (const [theme, items] of byTheme) {
-    const slug = THEME_SLUGS[theme];
-    if (!slug) {
-      console.warn("Thème inconnu:", theme);
-      continue;
-    }
-    items.sort((a, b) => a.index - b.index);
-
-    // S'il existe déjà slug.webp hors série temporaire, les nouvelles
-    // variantes commencent après les fichiers existants du même slug.
-    const existing = fs
-      .readdirSync(sceneDir)
-      .filter((f) => /\.(webp|png)$/i.test(f))
-      .filter((f) => familyKeyFromFile(f) === slug)
-      .filter((f) => !/^\d+\s+\(\d+\)\./.test(f));
-
-    const existingMax = existing.reduce((max, f) => {
-      const n = variantOrderFromFile(f);
-      return Math.max(max, n);
-    }, 0);
-
-    // Si aucun fichier existant, index 1 = principal ; sinon on ajoute (existingMax+1)…
-    let nextNum = existingMax > 0 ? existingMax + 1 : 1;
-
-    for (const item of items) {
-      const srcName = `${item.temp}.webp`;
-      const src = path.join(sceneDir, srcName);
-      if (!fs.existsSync(src)) {
-        console.warn("Manquant:", srcName);
-        continue;
-      }
-      const destName = nextNum === 1 ? `${slug}.webp` : `${slug} (${nextNum}).webp`;
-      const dest = path.join(sceneDir, destName);
-      if (path.resolve(src) !== path.resolve(dest)) {
-        if (fs.existsSync(dest)) {
-          console.warn("Collision, skip:", destName);
-          continue;
-        }
-        fs.renameSync(src, dest);
-        console.log(`rename ${srcName} → ${destName}`);
-      }
-      tagsByFile.set(destName, item.tags.map((t) => `#${t}`));
-      renames.push({ from: srcName, to: destName, slug, tags: item.tags });
-      nextNum += 1;
-    }
-  }
-  return { tagsByFile, renames };
-}
-
-function collectFamilies(tagsByFile) {
-  const files = fs
-    .readdirSync(sceneDir)
-    .filter((f) => /\.(webp|png)$/i.test(f))
-    .filter((f) => !/^\d+\s+\(\d+\)\./.test(f))
-    .sort((a, b) => a.localeCompare(b, "fr"));
-
-  /** @type {Map<string, string[]>} */
+  /** @type {Map<number, { index: number, file: string }[]>} */
   const groups = new Map();
   for (const file of files) {
-    const key = familyKeyFromFile(file);
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(file);
+    const m = file.match(NUMBERED_RE);
+    const familyNum = Number(m[1]);
+    const index = Number(m[2]);
+    const list = groups.get(familyNum) || [];
+    list.push({ index, file });
+    groups.set(familyNum, list);
   }
 
-  // Trier variantes : principal (sans paren) puis (2), (3)…
-  for (const [key, list] of groups) {
-    list.sort((a, b) => variantOrderFromFile(a) - variantOrderFromFile(b) || a.localeCompare(b, "fr"));
-    groups.set(key, list);
-  }
-
-  const keys = [...groups.keys()].sort((a, b) => a.localeCompare(b, "fr"));
+  const familyNums = [...groups.keys()].sort((a, b) => a - b);
   const families = [];
 
-  keys.forEach((key, idx) => {
-    const id = String(idx + 1);
-    const filesInFamily = groups.get(key);
-    const variantTagLists = filesInFamily.map((file) => {
-      if (tagsByFile.has(file)) return tagsByFile.get(file);
-      // fallback : tags dérivés du slug (sans génériques)
-      return tagsFromSlug(key);
-    });
+  for (const familyNum of familyNums) {
+    const id = String(familyNum);
+    const items = groups.get(familyNum).sort((a, b) => a.index - b.index || a.file.localeCompare(b.file, "fr"));
+    const prev = prevById.get(id);
+    const key = prev?.key || `theme-${id}`;
 
-    // Tags famille = union ordonnée (première variante en tête, puis spécifiques)
-    const familyTags = [];
-    const seen = new Set();
-    for (const tags of variantTagLists) {
-      for (const t of tags) {
-        const k = t.toLowerCase();
-        if (seen.has(k)) continue;
-        // skip génériques
-        if (GENERIC_TAGS.has(slugifyTag(t))) continue;
-        seen.add(k);
-        familyTags.push(t.startsWith("#") ? t : `#${t}`);
-      }
-    }
-
-    const variants = filesInFamily.map((file, vIdx) => {
+    const variants = items.map((item, vIdx) => {
+      const prevTags = prev?.variantTags?.get(item.file);
+      // Si nouveau fichier (ex. 9 (10)), tags famille par défaut
+      const tags =
+        prevTags && prevTags.length
+          ? prevTags
+          : prev?.tags?.length
+            ? prev.tags
+            : tagsFromSlug(key);
       const vid = vIdx === 0 ? id : `${id}.${vIdx}`;
-      const tags = (variantTagLists[vIdx] || []).map((t) => (t.startsWith("#") ? t : `#${t}`));
       return {
         id: vid,
         familyId: id,
         familyKey: key,
-        file,
-        path: `/assets/expression/images/scene/${file}`,
-        tags,
+        file: item.file,
+        path: `/assets/expression/images/scene/${item.file}`,
+        tags: cleanTags(tags),
       };
     });
+
+    const familyTags = [];
+    const seen = new Set();
+    const seedTags = prev?.tags?.length ? prev.tags : [];
+    for (const t of [...seedTags, ...variants.flatMap((v) => v.tags)]) {
+      const k = t.toLowerCase();
+      if (seen.has(k)) continue;
+      if (GENERIC_TAGS.has(slugifyTag(t))) continue;
+      seen.add(k);
+      familyTags.push(t.startsWith("#") ? t : `#${t}`);
+    }
 
     families.push({
       id,
       key,
-      title: titleFromSlug(key),
-      tags: familyTags,
+      tags: familyTags.length ? familyTags : tagsFromSlug(key),
       variants,
     });
-  });
+  }
 
   return families;
 }
@@ -312,22 +178,21 @@ function writeCatalogMd(families) {
   lines.push("");
   lines.push(`Total familles : **${families.length}** — fichiers : **${totalFiles}**`);
   lines.push("");
-  lines.push("Numérotation : `N` = image principale, `N.1`, `N.2`… = variantes du même thème.");
+  lines.push("Fichiers : `N (1)`, `N (2)`… = variantes du thème N (noms courts).");
+  lines.push("Numérotation catalogue : `N` = principale, `N.1`, `N.2`… = variantes.");
   lines.push("En CE/CO, une famille est tirée **aléatoirement** parmi ses variantes.");
+  lines.push("Ajouter `N (k)` puis relancer ce script → entre dans le pool aléatoire.");
   lines.push("");
 
   for (const family of families) {
-    lines.push(`## Famille ${family.id} — ${family.title}`);
+    lines.push(`## Famille ${family.id} — ${titleFromSlug(family.key)}`);
     lines.push("");
     lines.push(`\`${family.key}\``);
     lines.push("");
     if (family.tags.length) lines.push(family.tags.join(" "));
     lines.push("");
     for (const v of family.variants) {
-      const label = v.id.includes(".") ? v.id : family.id;
-      // Afficher N / N.1
-      const displayId = v.id;
-      lines.push(`- **${displayId}** — \`${v.file}\``);
+      lines.push(`- **${v.id}** — \`${v.file}\``);
       if (v.tags.length) lines.push(`  ${v.tags.join(" ")}`);
     }
     lines.push("");
@@ -347,11 +212,10 @@ function writeCatalogJson(families) {
     }
   }
 
-  // JSON consommé par scene-image-catalog.ts (sans champ title)
   const payload = {
-    version: 2,
+    version: 3,
     description:
-      "Catalogue scènes CE/CO : familles thématiques, variantes (N.1, N.2), mots-clés pertinents",
+      "Catalogue scènes CE/CO : fichiers N (k), familles thématiques (clé slug), variantes aléatoires",
     families: families.map(({ id, key, tags, variants }) => ({
       id,
       key,
@@ -367,26 +231,27 @@ function writeCatalogJson(families) {
 }
 
 function main() {
-  if (!fs.existsSync(keywordsFile)) {
-    console.error("Fichier mots-clés introuvable:", keywordsFile);
-    process.exit(1);
+  const { byId } = loadPrevCatalog();
+  const families = collectNumberedFamilies(byId);
+
+  const leftover = fs
+    .readdirSync(sceneDir)
+    .filter((f) => /\.(webp|png|jpe?g)$/i.test(f))
+    .filter((f) => !NUMBERED_RE.test(f));
+  if (leftover.length) {
+    console.warn(
+      `Attention: ${leftover.length} fichier(s) non numéroté(s) ignoré(s):`,
+      leftover.slice(0, 8).join(", "),
+      leftover.length > 8 ? "…" : "",
+    );
   }
 
-  const keywordMap = parseKeywordsFile(fs.readFileSync(keywordsFile, "utf8"));
-  console.log("Entrées mots-clés:", keywordMap.size);
-
-  const noRename = process.argv.includes("--catalog-only");
-  const { tagsByFile, renames } = noRename
-    ? rebuildTagsFromKeywordsOnly(keywordMap)
-    : renameTempImages(keywordMap);
-  console.log(noRename ? "Mode catalog-only" : `Renommages: ${renames.length}`);
-
-  const families = collectFamilies(tagsByFile);
   writeCatalogMd(families);
   writeCatalogJson(families);
 
   const multi = families.filter((f) => f.variants.length > 1).length;
-  console.log(`Familles: ${families.length}, multi-variantes: ${multi}`);
+  const images = families.reduce((n, f) => n + f.variants.length, 0);
+  console.log(`Familles: ${families.length}, images: ${images}, multi: ${multi}`);
 }
 
 main();
