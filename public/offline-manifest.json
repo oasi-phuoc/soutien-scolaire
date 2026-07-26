@@ -1,6 +1,6 @@
 {
-  "version": 1784806353733,
-  "totalBytes": 433048840,
+  "version": 1785064038251,
+  "totalBytes": 432424954,
   "routes": [
     "/",
     "/avant-propos",
@@ -854,7 +854,6 @@
     "/assets/expression/images/heure/horloge-22h30.webp",
     "/assets/expression/images/heure/horloge-23h00.webp",
     "/assets/expression/images/scene/accueil-hotel.webp",
-    "/assets/expression/images/scene/accueil-inscription.webp",
     "/assets/expression/images/scene/accueillir-gare.webp",
     "/assets/expression/images/scene/achat.magasin.webp",
     "/assets/expression/images/scene/achat.webp",
@@ -970,9 +969,6 @@
     "/assets/expression/images/scene/traire-vache.webp",
     "/assets/expression/images/scene/travailler-ordinateur.webp",
     "/assets/expression/images/scene/verifier-meteo.webp",
-    "/assets/expression/images/scene/visite-musee.webp",
-    "/assets/expression/images/scene/visiter-musee-peinture-2.webp",
-    "/assets/expression/images/scene/visiter-musee-peinture.webp",
     "/assets/expression/images/scene/voyager-suisse.webp",
     "/assets/expression/po/A1/PO.A1_A-l-ecole.webp",
     "/assets/expression/po/A1/PO.A1_A-l-hotel.webp",
@@ -1818,7 +1814,6 @@
     "/assets/words/lecture/snowboard.webp",
     "/assets/words/lecture/soda.webp",
     "/assets/words/lecture/soja.webp",
-    "/assets/words/lecture/soleil.webp",
     "/assets/words/lecture/soulier.webp",
     "/assets/words/lecture/soupe.webp",
     "/assets/words/lecture/souris.webp",
@@ -10207,11 +10202,6 @@
       "revision": "723060807c937e5b"
     },
     {
-      "url": "/assets/expression/images/scene/accueil-inscription.webp",
-      "size": 102928,
-      "revision": "066c4d5b7401d41e"
-    },
-    {
       "url": "/assets/expression/images/scene/accueillir-gare.webp",
       "size": 115496,
       "revision": "4d5ea20d4c609a5d"
@@ -10785,21 +10775,6 @@
       "url": "/assets/expression/images/scene/verifier-meteo.webp",
       "size": 86318,
       "revision": "b3c2f936abeebdf0"
-    },
-    {
-      "url": "/assets/expression/images/scene/visite-musee.webp",
-      "size": 59582,
-      "revision": "e331fa8f52e2d71b"
-    },
-    {
-      "url": "/assets/expression/images/scene/visiter-musee-peinture-2.webp",
-      "size": 219142,
-      "revision": "5d299fe0fde0b6d0"
-    },
-    {
-      "url": "/assets/expression/images/scene/visiter-musee-peinture.webp",
-      "size": 199554,
-      "revision": "db345c6e0ba8075d"
     },
     {
       "url": "/assets/expression/images/scene/voyager-suisse.webp",
@@ -15025,11 +15000,6 @@
       "url": "/assets/words/lecture/soja.webp",
       "size": 24492,
       "revision": "4571f0383125ae63"
-    },
-    {
-      "url": "/assets/words/lecture/soleil.webp",
-      "size": 42680,
-      "revision": "7669e631989abcc4"
     },
     {
       "url": "/assets/words/lecture/soulier.webp",
