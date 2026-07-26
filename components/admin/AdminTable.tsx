@@ -473,12 +473,20 @@ export function AdminTable({
         </div>
       </div>
 
-      {/* Table — hauteur bornée ; colonne loupe sticky à gauche */}
+      {/* Table — hauteur bornée ; colonne loupe sticky à gauche, largeur minimale fixe */}
       <div className="max-h-[calc(100dvh-14rem)] overflow-y-auto overflow-x-auto rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
         <table className="w-full table-fixed text-sm">
+          <colgroup>
+            <col style={{ width: 28 }} />
+            <col />
+          </colgroup>
           <thead className="sticky top-0 z-20">
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="sticky left-0 z-30 w-7 bg-[var(--color-theme)] p-0 sm:w-8" aria-label="Détail" />
+              <th
+                className="sticky left-0 z-30 bg-[var(--color-theme)] p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.18)]"
+                style={{ width: 28, minWidth: 28, maxWidth: 28 }}
+                aria-label="Détail"
+              />
               <th className="w-[22%] bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-3">Prénom, Nom</th>
               <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
               <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
@@ -502,9 +510,12 @@ export function AdminTable({
               const hasPrint = row.role === "admin" || row.can_print;
               return (
                 <tr key={row.id} className="group bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                  <td className="sticky left-0 z-10 w-7 bg-white p-0 group-hover:bg-zinc-50 sm:w-8 dark:bg-zinc-950 dark:group-hover:bg-zinc-900">
-                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+                  <td
+                    className="sticky left-0 z-10 bg-white p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
+                    style={{ width: 28, minWidth: 28, maxWidth: 28 }}
+                  >
+                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
                     </Link>
                   </td>
                   <td className="min-w-0 px-2 py-2 sm:px-3 sm:py-3">
