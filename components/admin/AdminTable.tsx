@@ -396,7 +396,7 @@ export function AdminTable({
       {/* Filters */}
       <div className="mb-4">
         <div className="mb-2 flex flex-wrap items-center gap-2">
-          <div className="relative flex-1 max-w-sm">
+          <div className="relative min-w-0 flex-1 max-w-sm">
             <input
               type="search"
               autoComplete="off"
@@ -487,7 +487,7 @@ export function AdminTable({
                 style={{ width: 28, minWidth: 28, maxWidth: 28 }}
                 aria-label="Détail"
               />
-              <th className="w-[22%] bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-3 sm:py-3">Prénom, Nom</th>
+              <th className="bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
               <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
               <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
               <th className="hidden w-[9%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
