@@ -6,6 +6,7 @@ import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { getExpressionUnreadCountAction } from "@/app/actions/expression";
 import {
   getPedagogicNavVisibilityAction,
+  getPlacementNavVisibilityAction,
 } from "@/app/actions/admin";
 import { getSuiviContextAction } from "@/app/actions/suivi";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -77,6 +78,7 @@ export function DesktopSidebar() {
     canEditContent: false,
     canPrint: false,
   });
+  const [placementVisible, setPlacementVisible] = useState(true);
   const [suiviClasses, setSuiviClasses] = useState<{ label: string }[]>([]);
 
   const inSuiviClass = pathname.startsWith("/suivi/classes/");
@@ -87,6 +89,11 @@ export function DesktopSidebar() {
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
     getExpressionUnreadCountAction().then(setUnreadMessages).catch(() => {});
+    getPlacementNavVisibilityAction()
+      .then((res) => {
+        if (res.ok) setPlacementVisible(res.visible);
+      })
+      .catch(() => {});
     getPedagogicNavVisibilityAction()
       .then((res) => {
         if (!res.ok) return;
@@ -124,6 +131,7 @@ export function DesktopSidebar() {
   const badge = pendingTasks + unreadMessages;
   const mathsOpen = pathname.startsWith("/mathematiques");
   const suiviOpen = pathname.startsWith("/suivi");
+  const placementOpen = pathname.startsWith("/placement");
   const adminOpen = pathname.startsWith("/admin");
 
   const frenchTab = (() => {
@@ -299,6 +307,20 @@ export function DesktopSidebar() {
             </div>
           );
         })}
+
+        {placementVisible && (
+          <button
+            type="button"
+            onClick={() => go("/placement")}
+            className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
+              placementOpen
+                ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
+            }`}
+          >
+            Placement
+          </button>
+        )}
 
         {pedagogicNav.showSection && (
           <>
