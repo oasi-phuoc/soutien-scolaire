@@ -382,11 +382,11 @@ function SectionCard({
 
 export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const searchParams = useSearchParams();
-  const initialTab = searchParams.get("tab") as FrenchTab | null;
+  const tabParam = searchParams.get("tab") as FrenchTab | null;
   const { overrides } = useContentEditor();
   const frenchThemes = resolveFrenchThemes(FRENCH_THEMES, overrides);
   const [tab, setTab] = useState<FrenchTab>(
-    initialTab && VALID_TABS.includes(initialTab) ? initialTab : "vocabulaire",
+    tabParam && VALID_TABS.includes(tabParam) ? tabParam : "vocabulaire",
   );
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
@@ -399,6 +399,11 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       setVocabGrades(stored);
     } catch {}
   }
+
+  // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
+  useEffect(() => {
+    if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
+  }, [tabParam]);
 
   useEffect(() => {
     refreshProgress();
@@ -442,7 +447,10 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
             type="button"
             role="tab"
             aria-selected={tab === id}
-            onClick={() => setTab(id)}
+            onClick={() => {
+              setTab(id);
+              window.history.replaceState(null, "", `/francais?tab=${id}`);
+            }}
             className={`min-h-11 rounded-[var(--radius-lg)] px-2 text-sm font-medium transition-colors ${
               tab === id
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"

@@ -121,9 +121,6 @@ export function DesktopSidebar() {
   }, [pedagogicNav.showSection, inSuiviClass, pathname]);
 
   const badge = pendingTasks + unreadMessages;
-  const lectureOpen = pathname.startsWith("/lecture");
-  const frenchOpen =
-    pathname.startsWith("/francais") || pathname.startsWith("/communication");
   const mathsOpen = pathname.startsWith("/mathematiques");
   const suiviOpen = pathname.startsWith("/suivi");
   const adminOpen = pathname.startsWith("/admin");
@@ -285,9 +282,9 @@ export function DesktopSidebar() {
                   )}
                 </span>
               </button>
-              {link.href === "/lecture" && lectureOpen && renderSubs(lectureSubs)}
-              {link.href === "/francais" && frenchOpen && renderSubs(frenchSubs)}
-              {link.href === "/mathematiques" && mathsOpen && renderSubs(mathsSubs)}
+              {link.href === "/lecture" && renderSubs(lectureSubs)}
+              {link.href === "/francais" && renderSubs(frenchSubs)}
+              {link.href === "/mathematiques" && renderSubs(mathsSubs)}
             </div>
           );
         })}

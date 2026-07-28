@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LECTURE_MODULES, STORIES, getRevision, lessonPhonemeLabel } from "@/lib/curriculum/lecture-data";
 import { useContentEditor } from "@/components/content-editor/ContentEditorProvider";
 import { resolveLectureModules } from "@/lib/content-editor/catalog";
@@ -332,9 +332,13 @@ function StoriesList() {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
   const { overrides } = useContentEditor();
   const lectureModules = resolveLectureModules(LECTURE_MODULES, overrides);
-  const [tab, setTab] = useState<TabId>("apprendre");
+  const [tab, setTab] = useState<TabId>(
+    tabParam === "histoires" ? "histoires" : "apprendre",
+  );
   const [progress, setProgress] = useState<LectureProgressV2>(() => ({
     version: 2,
     modules: { l1: "locked", l2: "locked", l3: "locked", l4: "locked", l5: "locked", l6: "locked", l7: "locked", l8: "locked" },
@@ -342,12 +346,14 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
   }));
   const [hydrated, setHydrated] = useState(false);
 
+  // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
+  useEffect(() => {
+    if (tabParam === "histoires" || tabParam === "apprendre") setTab(tabParam);
+  }, [tabParam]);
+
   useEffect(() => {
     setProgress(loadLectureProgress());
     setHydrated(true);
-    const params = new URLSearchParams(window.location.search);
-    const t = params.get("tab");
-    if (t === "histoires" || t === "apprendre") setTab(t);
   }, []);
 
   const activeModuleId = hydrated
