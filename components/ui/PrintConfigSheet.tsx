@@ -8,6 +8,13 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 const PRINT_EX_TITLE_CLASS =
   "print-ex-title mb-4 flex items-start gap-2 border-b border-black pb-1.5 text-[1.6em] font-bold";
 
+const PRINT_EX_CONTENT_CLASS =
+  "print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none";
+
+function printExContentClass(answerKey: boolean): string {
+  return answerKey ? `${PRINT_EX_CONTENT_CLASS} print-answer-key` : PRINT_EX_CONTENT_CLASS;
+}
+
 /** Préfixe compétence (CE/CO/PE/PO) depuis le label catalogue, pour le test complet. */
 function printExerciseHeading(
   exercise: PrintExercise | undefined,
@@ -1097,22 +1104,7 @@ export function PrintConfigSheet({
                     }
                     return true;
                   };
-                  if (block.title) {
-                    sectionNodes.push({
-                      key: `section-${block.key}`,
-                      forceNewPage: true,
-                      node: (
-                        <div className="print-exercise border-b-2 border-black pb-2">
-                          <p className="text-[2em] font-bold uppercase tracking-wide text-black">
-                            {block.title}
-                          </p>
-                          <p className="mt-1 text-[1.2em] text-zinc-600">
-                            Même série d&apos;exercices avec les réponses
-                          </p>
-                        </div>
-                      ),
-                    });
-                  }
+                  // Pas de page « CORRIGÉ » isolée : le titre est déjà sur chaque exercice (… — Corrigé).
                   block.items.forEach((item, index) => {
                     const exercise = item.exercise;
 
@@ -1157,7 +1149,7 @@ export function PrintConfigSheet({
                                 </span>
                               )}
                             </div>
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className={printExContentClass(true)}>
                               {exercise.correctionPreview ?? exercise.preview ?? (
                                 <div className="h-7 border-b border-black/40" />
                               )}
@@ -1181,7 +1173,7 @@ export function PrintConfigSheet({
                                   </span>
                                 )}
                               </div>
-                              <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                              <div className={printExContentClass(true)}>
                                 {follow.preview}
                               </div>
                             </div>
@@ -1238,7 +1230,7 @@ export function PrintConfigSheet({
                                 </span>
                               )}
                             </div>
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className={printExContentClass(Boolean(item.correction))}>
                               {body ?? <div className="h-7 border-b border-black/40" />}
                             </div>
                           </div>
@@ -1285,7 +1277,7 @@ export function PrintConfigSheet({
                             </span>
                             {evalMode && <span style={{ color: "black" }}>{item.selection.points} pt{item.selection.points > 1 ? "s" : ""}</span>}
                           </div>
-                          <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                          <div className={printExContentClass(Boolean(item.correction))}>
                             {body ?? <div className="h-7 border-b border-black/40" />}
                           </div>
                         </div>
@@ -1307,7 +1299,7 @@ export function PrintConfigSheet({
                                 </span>
                               )}
                             </div>
-                            <div className="print-ex-content text-[1.6em] leading-normal text-zinc-800 [&_button]:pointer-events-none">
+                            <div className={printExContentClass(Boolean(item.correction))}>
                               {follow.preview}
                             </div>
                           </div>

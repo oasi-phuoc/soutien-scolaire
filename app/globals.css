@@ -594,6 +594,28 @@ input[type=number] {
   padding-bottom: 0.4em !important;
 }
 
+/*
+ * Corrigé d'impression : pas de tentative élève (vide / « — ») ni trait amber.
+ * On ne garde que la bonne réponse, lisible en noir.
+ */
+.print-layout-context .print-answer-key [class*="border-amber"] > :first-child:not(:only-child),
+.print-layout-context .print-answer-key [class*="border-orange"] > :first-child:not(:only-child) {
+  display: none !important;
+}
+
+.print-layout-context .print-answer-key [class*="border-amber"],
+.print-layout-context .print-answer-key [class*="border-orange"] {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.print-layout-context .print-answer-key [class*="text-amber-"],
+.print-layout-context .print-answer-key [class*="text-orange-"] {
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
 .print-layout-context .print-ex-content > h2:first-child,
 .print-layout-context .print-ex-content > div > h2:first-child,
 .print-layout-context .print-ex-content > .space-y-4 > h2:first-child,
