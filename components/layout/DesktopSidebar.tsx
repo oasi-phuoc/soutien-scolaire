@@ -343,9 +343,9 @@ export function DesktopSidebar() {
         {pedagogicNav.canPrint && (
           <button
             type="button"
-            onClick={() => go("/impressions")}
+            onClick={() => go("/admin/impression")}
             className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-              pathname.startsWith("/impressions")
+              pathname.startsWith("/admin/impression") || pathname.startsWith("/impressions")
                 ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
             }`}
@@ -361,7 +361,7 @@ export function DesktopSidebar() {
                 type="button"
                 onClick={() => go("/admin")}
                 className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-                  adminOpen && !pathname.startsWith("/impressions")
+                  adminOpen && !pathname.startsWith("/admin/impression") && !pathname.startsWith("/impressions")
                     ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
                     : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
                 }`}
@@ -369,6 +369,7 @@ export function DesktopSidebar() {
                 Admin
               </button>
               {adminOpen &&
+                !pathname.startsWith("/admin/impression") &&
                 !pathname.startsWith("/impressions") &&
                 renderSubs([
                   {
