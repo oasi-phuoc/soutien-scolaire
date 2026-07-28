@@ -9,6 +9,7 @@ import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import {
   currentSchoolYearLabel,
   currentSchoolYearStart,
@@ -517,33 +518,37 @@ export function AdminTable({
         </div>
       </div>
 
-      {/* Table — hauteur bornée ; loupe sticky largeur fixe minimale */}
-      <div className="admin-table-scroll max-h-[calc(100dvh-14rem)] overflow-y-auto overflow-x-hidden rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
-        <table className="admin-users-table w-full table-fixed text-sm">
+      {/* Table — en-tête fixe, scrollbar uniquement sur les lignes de données */}
+      <ScrollableTable
+        className="rounded-2xl border border-zinc-200 dark:border-zinc-800"
+        tableClassName="admin-users-table w-full table-fixed text-sm"
+        colgroup={
           <colgroup>
             <col className="admin-users-table__loupe" />
+            <col />
           </colgroup>
-          <thead className="sticky top-0 z-20">
-            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th
-                className="admin-users-table__loupe sticky left-0 z-30 bg-[var(--color-theme)] p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.18)]"
-                aria-label="Détail"
-              />
-              <th className="min-w-0 bg-[var(--color-theme)] px-1.5 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
-              <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
-              <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
-              <th className="hidden w-[9%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
-              <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">Accès</th>
-              <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3">Maths</th>
-              <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
-              <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
-              <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[9%] sm:px-2 sm:py-3 sm:text-xs" title="Points de test">Test</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
-            {sorted.length === 0 ? (
-              <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
-            ) : sorted.map(row => {
+        }
+        head={
+          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+            <th
+              className="admin-users-table__loupe bg-[var(--color-theme)] p-0"
+              aria-label="Détail"
+            />
+            <th className="min-w-0 bg-[var(--color-theme)] px-1.5 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
+            <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
+            <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
+            <th className="hidden w-[9%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
+            <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">Accès</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3">Maths</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
+            <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[9%] sm:px-2 sm:py-3 sm:text-xs" title="Points de test">Test</th>
+          </tr>
+        }
+        body={
+          sorted.length === 0 ? (
+            <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
+          ) : sorted.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
               const french = frenchPct(row.progress_data);
@@ -631,10 +636,9 @@ export function AdminTable({
                   </td>
                 </tr>
               );
-            })}
-          </tbody>
-        </table>
-      </div>
+            })
+        }
+      />
 
       {resetConfirming && (
         <ResetElevesConfirm
