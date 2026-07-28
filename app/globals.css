@@ -609,7 +609,10 @@ input[type=number] {
 
 .admin-users-table col.admin-users-table__loupe,
 .admin-users-table th.admin-users-table__loupe,
-.admin-users-table td.admin-users-table__loupe {
+.admin-users-table td.admin-users-table__loupe,
+.tasks-apercu-table col.tasks-apercu-table__loupe,
+.tasks-apercu-table th.tasks-apercu-table__loupe,
+.tasks-apercu-table td.tasks-apercu-table__loupe {
   box-sizing: border-box;
   width: 22px;
   min-width: 22px;
