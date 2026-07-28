@@ -4,7 +4,7 @@ import Link from "next/link";
 export function HomeImpressionCard() {
   return (
     <Link
-      href="/impressions"
+      href="/admin/impression"
       className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-theme)]/25 bg-white/75 p-4 shadow-sm transition-transform hover:-translate-y-0.5"
     >
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-theme-light)] text-[var(--color-theme)]">

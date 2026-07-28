@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement, type ReactNode, type RefObject, cloneElement, isValidElement } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
@@ -148,7 +148,7 @@ function formatPrintDate(date = new Date()): string {
   return new Intl.DateTimeFormat("fr-CH", { day: "2-digit", month: "2-digit", year: "numeric" }).format(date);
 }
 
-function PrintExerciseBody({
+export function PrintExerciseBody({
   selection,
   answerKey = false,
   children,
@@ -166,6 +166,12 @@ function PrintExerciseBody({
       </div>
     </PrintExerciseLayoutProvider>
   );
+}
+
+/** Clone un nœud React pour pouvoir le monter à la fois en sonde de mesure et en aperçu. */
+function clonePreviewNode(node: ReactNode, key: string): ReactNode {
+  if (!isValidElement(node)) return node;
+  return cloneElement(node as ReactElement, { key });
 }
 
 export function PrintDocumentHeader({
@@ -435,8 +441,8 @@ export function PaginatedPreview({
         >
           <div ref={headerMeasureRef}>{header}</div>
           {blocks.map((b, i) => (
-            <div key={b.key} ref={(el) => { blockRefs.current[i] = el; }}>
-              {b.node}
+            <div key={`measure-${b.key}`} ref={(el) => { blockRefs.current[i] = el; }}>
+              {clonePreviewNode(b.node, `measure-node-${b.key}`)}
             </div>
           ))}
           <div ref={footerMeasureRef}>
