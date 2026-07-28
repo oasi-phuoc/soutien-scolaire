@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: "LearnUp",
     template: "%s · LearnUp",
   },
-  description: "Base Next.js + Supabase Auth — à compléter.",
+  description: "LearnUp — Apprendre · Comprendre · Progresser",
 };
 
 export const viewport: Viewport = {

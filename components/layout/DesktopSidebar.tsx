@@ -14,6 +14,7 @@ import { useEvalNavGuard } from "@/components/EvalNavGuard";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import { getModuleIdForSubmodule } from "@/lib/curriculum/lessons-registry";
 import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
+import { LearnUpLogo } from "@/components/brand/LearnUpLogo";
 
 type NavLink = {
   href: string;
@@ -272,10 +273,7 @@ export function DesktopSidebar() {
       aria-label="Navigation latérale"
     >
       <div className="border-b border-[var(--color-border-default)] px-5 py-5">
-        <p className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]">
-          Soutien
-        </p>
-        <p className="text-sm text-[var(--color-text-secondary)]">scolaire</p>
+        <LearnUpLogo iconSize={34} showTagline />
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
