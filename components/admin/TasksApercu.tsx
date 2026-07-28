@@ -253,21 +253,21 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         )}
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
-              <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
-              <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
-              <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
-              <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
-              <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Actions" />
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 ? (
+      <ScrollableTable
+        className="rounded-2xl border border-zinc-200 dark:border-zinc-800"
+        bodyClassName=""
+        head={
+          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+            <th className="px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
+            <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
+            <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
+            <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
+            <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
+            <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Actions" />
+          </tr>
+        }
+        body={
+            filtered.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-4 py-10 text-center text-sm text-zinc-400">
                   {tasks.length === 0 ? "Aucune tâche assignée pour l'instant." : "Aucun résultat pour cette recherche."}
@@ -371,10 +371,9 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                   </Fragment>
                 );
               })
-            )}
-          </tbody>
-        </table>
-      </div>
+            )
+        }
+      />
 
       <p className="text-xs text-zinc-400">{filtered.length} tâche{filtered.length !== 1 ? "s" : ""} affichée{filtered.length !== 1 ? "s" : ""}</p>
     </div>
