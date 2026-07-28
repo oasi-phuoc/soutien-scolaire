@@ -36,7 +36,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "abricot",    phonemes: ["/a/", "/b/", "/r/", "/i/", "/k/", "/o/"] },
   { label: "avion",      phonemes: ["/a/", "/v/", "/i/", "/ɔ̃/"] },
   { label: "animal",     phonemes: ["/a/", "/n/", "/i/", "/m/", "/l/"] },
-  { label: "araignée",   phonemes: ["/a/", "/r/", "/i/", "/ɲ/", "/e/"] },
+  { label: "araignée",   phonemes: ["/a/", "/r/", "/ɛ/", "/ɲ/", "/e/"] },       // ai = /ɛ/
   { label: "alphabet",   phonemes: ["/a/", "/l/", "/f/", "/b/", "/e/"] },
   { label: "autobus",    phonemes: ["/o/", "/t/", "/b/", "/y/", "/s/"] },
   { label: "île",        phonemes: ["/i/", "/l/"] },
@@ -46,14 +46,14 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "uniforme",   phonemes: ["/y/", "/n/", "/i/", "/f/", "/o/", "/r/", "/m/"] },
   { label: "école",      phonemes: ["/e/", "/k/", "/o/", "/l/"] },
   { label: "éléphant",   phonemes: ["/e/", "/l/", "/f/", "/ɑ̃/"] },
-  { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/i/"] },
+  { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/j/"] }, // -ier = /je/, r muet
   { label: "échecs",     phonemes: ["/e/", "/ʃ/", "/k/"] },
   { label: "épaule",     phonemes: ["/e/", "/p/", "/o/", "/l/"] },          // au=/o/
   { label: "équerre",    phonemes: ["/e/", "/k/", "/r/"] },
   { label: "escalade",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/", "/d/"] },
   // ── A (more) ───────────────────────────────────────────────────────────────
-  { label: "abeille",    phonemes: ["/a/", "/b/", "/e/", "/i/", "/l/"] },
-  { label: "aigle",      phonemes: ["/a/", "/i/", "/g/", "/l/"] },
+  { label: "abeille",    phonemes: ["/a/", "/b/", "/ɛ/", "/j/"] },          // eille = /ɛj/
+  { label: "aigle",      phonemes: ["/ɛ/", "/g/", "/l/"] },                 // ai = /ɛ/
   { label: "armoire",    phonemes: ["/a/", "/r/", "/m/", "/wa/"] },
   { label: "agenda",     phonemes: ["/a/", "/ʒ/", "/ɑ̃/", "/d/"] },
   // ── B ──────────────────────────────────────────────────────────────────────
@@ -65,9 +65,9 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "bras",       phonemes: ["/b/", "/r/", "/a/"] },
   { label: "bureau",     phonemes: ["/b/", "/y/", "/r/", "/o/"] },
   { label: "balle",      phonemes: ["/b/", "/a/", "/l/"] },
-  { label: "baleine",    phonemes: ["/b/", "/a/", "/l/", "/e/", "/i/", "/n/"] },
-  { label: "basketball", phonemes: ["/b/", "/a/", "/s/", "/k/", "/e/", "/t/", "/o/", "/l/"] },
-  { label: "billard",    phonemes: ["/b/", "/i/", "/l/", "/a/", "/r/"] },
+  { label: "baleine",    phonemes: ["/b/", "/a/", "/l/", "/ɛ/", "/n/"] },    // ei = /ɛ/
+  { label: "basketball", phonemes: ["/b/", "/a/", "/s/", "/k/", "/e/", "/t/", "/o/", "/l/"] }, // ball ≈ /ol/
+  { label: "billard",    phonemes: ["/b/", "/j/", "/a/", "/r/"] },           // ill = /j/
   { label: "bouche",     phonemes: ["/b/", "/u/", "/ʃ/"] },
   { label: "bouquet",    phonemes: ["/b/", "/u/", "/k/", "/e/"] },
   // ── K / C ──────────────────────────────────────────────────────────────────
@@ -76,7 +76,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "carotte",    phonemes: ["/k/", "/a/", "/r/", "/o/", "/t/"] },
   { label: "casque",     phonemes: ["/k/", "/a/", "/s/"] },           // e final muet → pas /e/
   { label: "cube",       phonemes: ["/k/", "/y/", "/b/"] },
-  { label: "crayon",     phonemes: ["/k/", "/r/", "/a/", "/i/", "/ɔ̃/"] },
+  { label: "crayon",     phonemes: ["/k/", "/r/", "/ɛ/", "/j/", "/ɔ̃/"] },   // ay = /ɛj/
   { label: "crocodile",  phonemes: ["/k/", "/r/", "/o/", "/d/", "/i/", "/l/"] },
   { label: "lac",        phonemes: ["/l/", "/a/", "/k/"] },
   { label: "citron",     phonemes: ["/s/", "/i/", "/t/", "/r/", "/ɔ̃/"] },    // c + i → /s/
@@ -84,14 +84,14 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "chat",       phonemes: ["/ʃ/", "/a/"] },
   { label: "chaîne",     phonemes: ["/ʃ/", "/ɛ/", "/n/"] },
   { label: "cheval",     phonemes: ["/ʃ/", "/e/", "/v/", "/a/", "/l/"] },
-  { label: "chien",      phonemes: ["/ʃ/", "/i/", "/ɛ̃/"] },
+  { label: "chien",      phonemes: ["/ʃ/", "/jɛ̃/"] },                        // ien = /jɛ̃/
   { label: "cochon",     phonemes: ["/k/", "/o/", "/ʃ/", "/ɔ̃/"] },
-  { label: "coq",        phonemes: ["/k/", "/o/"] },
+  { label: "coq",        phonemes: ["/k/", "/o/"] },                         // q = /k/ (déjà présent)
   { label: "cygne",      phonemes: ["/s/", "/i/", "/ɲ/"] },
-  { label: "cahier",     phonemes: ["/k/", "/a/", "/i/", "/e/"] },
-  { label: "chaud",      phonemes: ["/ʃ/", "/o/"] },                     // au=/o/, ch non enseigné
+  { label: "cahier",     phonemes: ["/k/", "/a/", "/j/", "/e/"] },            // h muet, -ier = /je/
+  { label: "chaud",      phonemes: ["/ʃ/", "/o/"] },                     // au=/o/
   { label: "ciseaux",    phonemes: ["/s/", "/i/", "/z/", "/o/"] },
-  { label: "classeur",   phonemes: ["/k/", "/l/", "/a/", "/s/", "/e/", "/y/", "/r/"] },
+  { label: "classeur",   phonemes: ["/k/", "/l/", "/a/", "/s/", "/ø/", "/r/"] }, // eu = /ø/
   { label: "colle",      phonemes: ["/k/", "/o/", "/l/"] },
   { label: "compas",     phonemes: ["/k/", "/ɔ̃/", "/p/", "/a/"] },
   { label: "cou",        phonemes: ["/k/", "/u/"] },
@@ -109,35 +109,35 @@ export const WORD_ITEMS: WordItem[] = [
   // ── F ──────────────────────────────────────────────────────────────────────
   { label: "farine",     phonemes: ["/f/", "/a/", "/r/", "/i/", "/n/"] },
   { label: "flamme",     phonemes: ["/f/", "/l/", "/a/", "/m/"] },
-  { label: "fleur",      phonemes: ["/f/", "/l/", "/e/", "/y/", "/r/"] },
+  { label: "fleur",      phonemes: ["/f/", "/l/", "/ø/", "/r/"] },            // eu = /ø/ (L7)
   { label: "forêt",      phonemes: ["/f/", "/o/", "/r/", "/e/"] },
-  { label: "fraise",     phonemes: ["/f/", "/r/", "/a/", "/i/", "/z/"] },
+  { label: "fraise",     phonemes: ["/f/", "/r/", "/ɛ/", "/z/"] },            // ai = /ɛ/
   { label: "fromage",    phonemes: ["/f/", "/r/", "/o/", "/m/", "/a/", "/ʒ/"] },
   { label: "fusée",      phonemes: ["/f/", "/y/", "/z/", "/e/"] },
   { label: "flûte",      phonemes: ["/f/", "/l/", "/y/", "/t/"] },
-  { label: "feuille",    phonemes: ["/f/", "/e/", "/y/", "/i/", "/l/"] },
-  { label: "feutre",     phonemes: ["/f/", "/e/", "/y/", "/t/", "/r/"] },
+  { label: "feuille",    phonemes: ["/f/", "/ø/", "/j/"] },                   // euill = /øj/
+  { label: "feutre",     phonemes: ["/f/", "/ø/", "/t/", "/r/"] },            // eu = /ø/
   { label: "football",   phonemes: ["/f/", "/o/", "/t/", "/b/", "/a/", "/l/"] },
-  { label: "frais",      phonemes: ["/f/", "/r/", "/a/", "/i/"] },
+  { label: "frais",      phonemes: ["/f/", "/r/", "/ɛ/"] },                   // ai = /ɛ/
   { label: "froid",      phonemes: ["/f/", "/r/", "/wa/"] },
   // ── G ──────────────────────────────────────────────────────────────────────
   { label: "gâteau",     phonemes: ["/g/", "/a/", "/t/", "/o/"] },
   { label: "girafe",     phonemes: ["/ʒ/", "/i/", "/r/", "/a/", "/f/"] }, // g + i → /ʒ/
-  { label: "gorille",    phonemes: ["/g/", "/o/", "/r/", "/i/", "/l/"] },
-  { label: "grenouille", phonemes: ["/g/", "/r/", "/e/", "/n/", "/w/", "/i/", "/l/"] },
+  { label: "gorille",    phonemes: ["/g/", "/o/", "/r/", "/j/"] },            // ill = /j/
+  { label: "grenouille", phonemes: ["/g/", "/r/", "/e/", "/n/", "/u/", "/j/"] }, // ouille = /uj/
   { label: "guitare",    phonemes: ["/g/", "/i/", "/t/", "/a/", "/r/"] },        // u muet dans "gui"
   { label: "gare",       phonemes: ["/g/", "/a/", "/r/"] },
   { label: "genou",      phonemes: ["/ʒ/", "/e/", "/n/", "/u/"] },
   { label: "gomme",      phonemes: ["/g/", "/o/", "/m/"] },
   { label: "gymnastique", phonemes: ["/ʒ/", "/i/", "/m/", "/n/", "/a/", "/s/", "/t/", "/k/"] },
   // ── H ──────────────────────────────────────────────────────────────────────
-  { label: "handball",   phonemes: ["/ɑ̃/", "/d/", "/b/", "/a/", "/l/"] },
+  { label: "handball",   phonemes: ["/ɑ̃/", "/d/", "/b/", "/a/", "/l/"] },     // h muet (pas /∅/ hors leçon H)
   { label: "herbe",      phonemes: ["/e/", "/r/", "/b/"] },
   { label: "hibou",      phonemes: ["/i/", "/b/", "/u/"] },
-  { label: "hockey",     phonemes: ["/o/", "/k/", "/e/"] },
+  { label: "hockey",     phonemes: ["/o/", "/k/", "/e/"] },                   // ey = /e/
   { label: "hôpital",    phonemes: ["/o/", "/p/", "/i/", "/t/", "/a/", "/l/"] },
   // ── I ──────────────────────────────────────────────────────────────────────
-  { label: "intercalaire", phonemes: ["/ɛ̃/", "/t/", "/e/", "/r/", "/k/", "/a/", "/l/"] },
+  { label: "intercalaire", phonemes: ["/ɛ̃/", "/t/", "/e/", "/r/", "/k/", "/a/", "/l/", "/ɛ/"] }, // aire = /ɛ/
   // ── J / ʒ ──────────────────────────────────────────────────────────────────
   { label: "jambe",      phonemes: ["/ʒ/", "/ɑ̃/", "/b/"] },
   { label: "jardin",     phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/ɛ̃/"] },
@@ -147,7 +147,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "bijou",      phonemes: ["/b/", "/i/", "/ʒ/", "/u/"] },
   // ── K ──────────────────────────────────────────────────────────────────────
   { label: "kangourou",  phonemes: ["/k/", "/ɑ̃/", "/g/", "/u/", "/r/"] },
-  { label: "kayak",      phonemes: ["/k/", "/a/", "/i/"] },
+  { label: "kayak",      phonemes: ["/k/", "/a/", "/j/"] },                  // emprunt : a-y-a, pas ay=/ɛj/
   { label: "kiwi",       phonemes: ["/k/", "/i/", "/w/"] },
   { label: "koala",      phonemes: ["/k/", "/o/", "/a/", "/l/"] },
   // ── L ──────────────────────────────────────────────────────────────────────
@@ -160,7 +160,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "loto",       phonemes: ["/l/", "/o/", "/t/"] },
   { label: "lime",       phonemes: ["/l/", "/i/", "/m/"] },
   // ── M ──────────────────────────────────────────────────────────────────────
-  { label: "maison",     phonemes: ["/m/", "/e/", "/z/", "/ɔ̃/"] },               // ai = /e/ (graphème unique)
+  { label: "maison",     phonemes: ["/m/", "/ɛ/", "/z/", "/ɔ̃/"] },               // ai = /ɛ/ (L7)
   { label: "maman",      phonemes: ["/m/", "/a/", "/ɑ̃/"] },
   { label: "miroir",     phonemes: ["/m/", "/i/", "/r/", "/wa/"] },       // oi = /wa/
   { label: "montagne",   phonemes: ["/m/", "/ɔ̃/", "/t/", "/a/", "/ɲ/"] },
@@ -170,7 +170,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "nid",        phonemes: ["/n/", "/i/"] },
   { label: "noisette",   phonemes: ["/n/", "/wa/", "/z/", "/e/", "/t/"] },        // oi = /wa/
   { label: "nuage",      phonemes: ["/n/", "/y/", "/a/", "/ʒ/"] },
-  { label: "nuit",       phonemes: ["/n/", "/y/", "/i/"] },
+  { label: "nuit",       phonemes: ["/n/", "/ɥi/"] },                             // ui = /ɥi/
   { label: "navire",     phonemes: ["/n/", "/a/", "/v/", "/i/", "/r/"] },
   // ── O ──────────────────────────────────────────────────────────────────────
   { label: "oiseau",     phonemes: ["/wa/", "/z/", "/o/"] },           // oi=/wa/, eau=/o/
@@ -178,7 +178,7 @@ export const WORD_ITEMS: WordItem[] = [
   // ── P ──────────────────────────────────────────────────────────────────────
   { label: "panda",      phonemes: ["/p/", "/ɑ̃/", "/d/", "/a/"] },
   { label: "papa",       phonemes: ["/p/", "/a/"] },
-  { label: "papillon",   phonemes: ["/p/", "/a/", "/i/", "/l/", "/ɔ̃/"] },
+  { label: "papillon",   phonemes: ["/p/", "/a/", "/j/", "/ɔ̃/"] },               // ill = /j/
   { label: "piano",      phonemes: ["/p/", "/i/", "/a/", "/n/", "/o/"] },
   { label: "poisson",    phonemes: ["/p/", "/wa/", "/s/", "/ɔ̃/"] },           // oi = /wa/
   { label: "poule",      phonemes: ["/p/", "/u/", "/l/"] },
@@ -186,7 +186,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "puzzle",     phonemes: ["/p/", "/y/", "/z/", "/l/"] },
   { label: "piste",      phonemes: ["/p/", "/i/", "/s/", "/t/"] },
   // ── R ──────────────────────────────────────────────────────────────────────
-  { label: "radis",      phonemes: ["/r/", "/a/", "/d/", "/i/"] },
+  { label: "radis",      phonemes: ["/r/", "/a/", "/d/", "/i/", "/s/"] },         // s final prononcé
   { label: "renard",     phonemes: ["/r/", "/e/", "/n/", "/a/"] },
   { label: "rat",        phonemes: ["/r/", "/a/"] },
   { label: "requin",     phonemes: ["/r/", "/e/", "/k/", "/ɛ̃/"] },
@@ -198,7 +198,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "sapin",      phonemes: ["/s/", "/a/", "/p/", "/ɛ̃/"] },
   { label: "serpent",    phonemes: ["/s/", "/e/", "/r/", "/p/", "/ɑ̃/"] },
   { label: "singe",      phonemes: ["/s/", "/ɛ̃/", "/ʒ/"] },
-  { label: "soleil",     phonemes: ["/s/", "/o/", "/l/", "/e/", "/i/"] },
+  { label: "soleil",     phonemes: ["/s/", "/o/", "/l/", "/ɛ/", "/j/"] },         // eil = /ɛj/
   { label: "souris",     phonemes: ["/s/", "/u/", "/r/", "/i/"] },
   { label: "stylo",      phonemes: ["/s/", "/t/", "/i/", "/l/", "/o/"] },
   { label: "cire",       phonemes: ["/s/", "/i/", "/r/"] },           // c + i → /s/
@@ -220,9 +220,9 @@ export const WORD_ITEMS: WordItem[] = [
   // ── W ──────────────────────────────────────────────────────────────────────
   { label: "wagon",      phonemes: ["/v/", "/a/", "/g/", "/ɔ̃/"] },       // w = /v/ en français
   // ── Y ──────────────────────────────────────────────────────────────────────
-  { label: "yaourt",     phonemes: ["/i/", "/a/", "/u/", "/r/"] },
-  { label: "yoga",       phonemes: ["/i/", "/o/", "/g/", "/a/"] },
-  { label: "yoyo",       phonemes: ["/i/", "/o/"] },
+  { label: "yaourt",     phonemes: ["/j/", "/a/", "/u/", "/r/", "/t/"] }, // y = /j/, t prononcé
+  { label: "yoga",       phonemes: ["/j/", "/o/", "/g/", "/a/"] },
+  { label: "yoyo",       phonemes: ["/j/", "/o/"] },
   // ── X ──────────────────────────────────────────────────────────────────────
   { label: "saxophone",  phonemes: ["/s/", "/a/", "/ks/", "/o/", "/f/", "/n/"] },
   { label: "xylophone",  phonemes: ["/ks/", "/i/", "/l/", "/o/", "/f/", "/n/"] },
@@ -240,7 +240,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "céleri",         phonemes: ["/s/", "/e/", "/l/", "/r/", "/i/"] },
   { label: "champignon",     phonemes: ["/ʃ/", "/ɑ̃/", "/p/", "/i/", "/ɲ/", "/ɔ̃/"] },
   { label: "chou",           phonemes: ["/ʃ/", "/u/"] },
-  { label: "citrouille",     phonemes: ["/s/", "/i/", "/t/", "/r/", "/w/", "/l/"] },
+  { label: "citrouille",     phonemes: ["/s/", "/i/", "/t/", "/r/", "/u/", "/j/"] }, // ouille = /uj/
   { label: "concombre",      phonemes: ["/k/", "/ɔ̃/", "/b/", "/r/"] },
   { label: "coriandre",      phonemes: ["/k/", "/o/", "/r/", "/i/", "/ɑ̃/", "/d/"] },
   { label: "courgette",      phonemes: ["/k/", "/u/", "/r/", "/ʒ/", "/e/", "/t/"] },
@@ -251,7 +251,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "melon",          phonemes: ["/m/", "/e/", "/l/", "/ɔ̃/"] },
   { label: "menthe",         phonemes: ["/m/", "/ɑ̃/", "/t/"] },
   { label: "mûre",           phonemes: ["/m/", "/y/", "/r/"] },
-  { label: "myrtille",       phonemes: ["/m/", "/i/", "/r/", "/t/", "/l/"] },
+  { label: "myrtille",       phonemes: ["/m/", "/i/", "/r/", "/t/", "/j/"] }, // ill = /j/
   { label: "nectarine",      phonemes: ["/n/", "/e/", "/k/", "/t/", "/a/", "/r/", "/i/"] },
   { label: "oignon",         phonemes: ["/wa/", "/ɲ/", "/ɔ̃/"] },
   { label: "olive",          phonemes: ["/o/", "/l/", "/i/", "/v/"] },
@@ -262,11 +262,11 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "poireau",        phonemes: ["/p/", "/wa/", "/r/", "/o/"] },
   { label: "poivron",        phonemes: ["/p/", "/wa/", "/v/", "/r/", "/ɔ̃/"] },
   { label: "pomme-de-terre", phonemes: ["/p/", "/o/", "/m/", "/e/", "/d/", "/t/", "/r/"] },
-  { label: "raisin",         phonemes: ["/r/", "/e/", "/z/", "/ɛ̃/"] },        // ai = /e/ graphème unique
+  { label: "raisin",         phonemes: ["/r/", "/ɛ/", "/z/", "/ɛ̃/"] },        // ai = /ɛ/
   { label: "romarin",        phonemes: ["/r/", "/o/", "/m/", "/a/", "/ɛ̃/"] },
   { label: "salade",         phonemes: ["/s/", "/a/", "/l/", "/d/"] },
   { label: "thym",           phonemes: ["/t/", "/i/", "/m/"] },
-  // ── Sons complexes (L7) — mots concrets, phonèmes via phonemesFromFrenchGraphemes ─
+  // ── Sons complexes (L7) — mots concrets ───────────────────────────────────
   { label: "natation",       phonemes: ["/n/", "/a/", "/t/", "/sjɔ̃/"] },
   { label: "pharmacie",      phonemes: ["/f/", "/a/", "/r/", "/m/", "/s/", "/i/"] },
   { label: "oreille",        phonemes: ["/o/", "/r/", "/ɛ/", "/j/"] },
@@ -293,7 +293,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "vanille",        phonemes: ["/v/", "/a/", "/n/", "/j/"] },
   { label: "chenille",       phonemes: ["/ʃ/", "/e/", "/n/", "/j/"] },
   { label: "pompier",        phonemes: ["/p/", "/ɔ̃/", "/p/", "/j/", "/e/"] },
-  { label: "jardinier",      phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/i/", "/n/", "/e/"] },
+  { label: "jardinier",      phonemes: ["/ʒ/", "/a/", "/r/", "/d/", "/i/", "/n/", "/j/", "/e/"] },
   { label: "panier",         phonemes: ["/p/", "/a/", "/n/", "/j/", "/e/"] },
   { label: "soulier",        phonemes: ["/s/", "/u/", "/l/", "/j/", "/e/"] },
   { label: "cerisier",       phonemes: ["/s/", "/e/", "/r/", "/i/", "/z/", "/j/", "/e/"] },
@@ -536,23 +536,29 @@ export function isLectureSoundPoolWord(label: string): boolean {
 
 function normalizeWordLabel(label: string): string {
   return label
+    .toLowerCase()
+    .replace(/œ/g, "oe")
+    .replace(/æ/g, "ae")
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/gu, "")
-    .toLowerCase();
+    .replace(/[\u0300-\u036f]/gu, "");
 }
 
 function isVowelChar(char: string | undefined): boolean {
   return !!char && "aeiouy".includes(char);
 }
 
+/** Finales consonnes souvent muettes — exceptions où elles se prononcent. */
+const PRONOUNCED_FINALS = new Set([
+  "ananas", "autobus", "ibis", "radis", "ours", "mars", "bus", "os", "as", "vis",
+  "lys", "gaz", "quiz", "nez", "riz", "lac", "sac", "yaourt", "sport", "ouest",
+  "est", "sud", "club", "slip", "stop", "jeep", "cap",
+]);
+
 function isLikelySilentFinal(word: string, index: number): boolean {
   if (index !== word.length - 1) return false;
   const final = word[index];
   if (!final || !"dtspxz".includes(final)) return false;
-  const pronouncedFinals = new Set([
-    "bus", "os", "as", "vis", "lys", "gaz", "quiz", "nez", "riz", "lac", "sac",
-  ]);
-  return !pronouncedFinals.has(word);
+  return !PRONOUNCED_FINALS.has(word);
 }
 
 function hasNasalEnding(word: string, index: number, size: number): boolean {
@@ -560,25 +566,37 @@ function hasNasalEnding(word: string, index: number, size: number): boolean {
   return !isVowelChar(after) && after !== "n" && after !== "m";
 }
 
+/**
+ * Analyse pédagogique des graphèmes français → phonèmes enseignés (L1–L7).
+ * Retourne un ensemble (présence), pas une transcription complète ordonnée.
+ */
 export function phonemesFromFrenchGraphemes(label: string): Set<string> {
   const rawWord = label.toLowerCase();
   const word = normalizeWordLabel(label).replace(/[^a-z-]/gu, "");
-  const finalEPronounced = new Set(["bébé", "café", "fusée"]);
+  const finalEPronounced = new Set(["bebe", "cafe", "fusee"]);
   const phonemes = new Set<string>();
 
   for (let i = 0; i < word.length; i += 1) {
     const char = word[i];
     const next = word[i + 1];
     const next2 = word[i + 2];
+    const prev = word[i - 1];
     const two = word.slice(i, i + 2);
     const three = word.slice(i, i + 3);
+    const four = word.slice(i, i + 4);
 
     if (!char || char === "-") continue;
     if (isLikelySilentFinal(word, i)) continue;
 
+    // ── Graphèmes longs d'abord ──────────────────────────────────────────────
     if (three === "eau") {
       phonemes.add("/o/");
       i += 2;
+      continue;
+    }
+    if (four === "tion" && hasNasalEnding(word, i + 1, 3)) {
+      phonemes.add("/sjɔ̃/");
+      i += 3;
       continue;
     }
     if (three === "ien") {
@@ -586,18 +604,61 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 2;
       continue;
     }
-    if (word.slice(i, i + 4) === "tion" && hasNasalEnding(word, i + 1, 3)) {
-      phonemes.add("/sjɔ̃/");
-      i += 3;
-      continue;
-    }
     if (three === "oin" && hasNasalEnding(word, i, 3)) {
       phonemes.add("/wɛ̃/");
       i += 2;
       continue;
     }
+    // ouille → /u/ + /j/ (grenouille, citrouille) — avant ou→/w/
+    if (four === "ouil" || word.slice(i, i + 6) === "ouille") {
+      phonemes.add("/u/");
+      phonemes.add("/j/");
+      i += word.slice(i, i + 6) === "ouille" ? 5 : 3;
+      continue;
+    }
+    // euill / oeuill → /ø/ + /j/ (feuille)
+    if (four === "euil" || word.slice(i, i + 5) === "euill") {
+      phonemes.add("/ø/");
+      phonemes.add("/j/");
+      i += word.slice(i, i + 5) === "euill" ? 4 : 3;
+      continue;
+    }
+    if (word.slice(i, i + 5) === "oeuil" || word.slice(i, i + 6) === "oeuill") {
+      phonemes.add("/ø/");
+      phonemes.add("/j/");
+      i += word.slice(i, i + 6) === "oeuill" ? 5 : 4;
+      continue;
+    }
+    // œil / oeil → /ø/ + /j/ (œil)
+    if (four === "oeil") {
+      phonemes.add("/ø/");
+      phonemes.add("/j/");
+      i += 3;
+      continue;
+    }
+    // eill → /ɛ/ + /j/ (abeille)
+    if (four === "eill") {
+      phonemes.add("/ɛ/");
+      phonemes.add("/j/");
+      i += 3;
+      continue;
+    }
+    // eil → /ɛ/ + /j/ (soleil) — avant ei
+    if (three === "eil") {
+      phonemes.add("/ɛ/");
+      phonemes.add("/j/");
+      i += 2;
+      continue;
+    }
+    // -ier final → /j/ + /e/ (r muet pédagogique)
+    if (three === "ier" && i + 3 === word.length) {
+      phonemes.add("/j/");
+      phonemes.add("/e/");
+      i += 2;
+      continue;
+    }
+    // ill → /j/ (papillon, fille) sauf "illi…" rare
     if (three === "ill") {
-      const prev = word[i - 1];
       if ((prev && isVowelChar(prev)) || word[i + 3] !== "i") {
         phonemes.add("/j/");
         i += 2;
@@ -605,12 +666,12 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       }
     }
 
+    // ── Nasales ──────────────────────────────────────────────────────────────
     if ((two === "an" || two === "en" || two === "am" || two === "em") && hasNasalEnding(word, i, 2)) {
       phonemes.add("/ɑ̃/");
       i += 1;
       continue;
     }
-
     if (
       (two === "in" || two === "im" || three === "ain" || three === "ein" || three === "aim") &&
       hasNasalEnding(word, i, three === "ain" || three === "ein" || three === "aim" ? 3 : 2)
@@ -619,7 +680,6 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += three === "ain" || three === "ein" || three === "aim" ? 2 : 1;
       continue;
     }
-
     if ((two === "on" || two === "om") && hasNasalEnding(word, i, 2)) {
       phonemes.add("/ɔ̃/");
       i += 1;
@@ -631,7 +691,8 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       continue;
     }
 
-    if (two === "ch") {
+    // ── Digrammes consonnes / voyelles ───────────────────────────────────────
+    if (two === "ch" || two === "sh") {
       phonemes.add("/ʃ/");
       i += 1;
       continue;
@@ -666,10 +727,15 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 2;
       continue;
     }
-    if (two === "eu" && !word.slice(i, i + 3).startsWith("eau") && !word.slice(i + 2).startsWith("r")) {
-      if (!word.slice(i + 2).startsWith("ill")) {
-        phonemes.add("/ø/");
-      }
+    // eu → /ø/ toujours (fleur, feutre, bleu) — y compris devant r
+    if (two === "eu") {
+      phonemes.add("/ø/");
+      i += 1;
+      continue;
+    }
+    // gui/gue : u muet qui durcit le g
+    if (two === "gu" && next2 && "eiy".includes(next2)) {
+      phonemes.add("/g/");
       i += 1;
       continue;
     }
@@ -678,14 +744,20 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 1;
       continue;
     }
-    if (word.slice(i, i + 4) === "eill") {
-      phonemes.add("/ɛ/");
-      phonemes.add("/j/");
-      i += 3;
-      continue;
-    }
     if (two === "ai" || two === "ei") {
       phonemes.add("/ɛ/");
+      i += 1;
+      continue;
+    }
+    // ay → /ɛ/ + /j/ (crayon) ; pas pour kayak (emprunt /a.jak/)
+    if (two === "ay" && word !== "kayak") {
+      phonemes.add("/ɛ/");
+      phonemes.add("/j/");
+      i += 1;
+      continue;
+    }
+    if (two === "ey") {
+      phonemes.add("/e/");
       i += 1;
       continue;
     }
@@ -699,8 +771,17 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       i += 1;
       continue;
     }
+    // g muet dans -gt (doigt) et -oing (poing, shampoing)
+    if (char === "g" && next === "t" && i + 2 === word.length) {
+      continue;
+    }
+    if (char === "g" && i === word.length - 1 && prev === "n" && word[i - 2] === "i") {
+      continue;
+    }
 
+    // ── Lettres simples ──────────────────────────────────────────────────────
     if (char === "h") {
+      // h muet : pas un vrai phonème sonore ; /∅/ sert à la leçon H
       phonemes.add("/∅/");
       continue;
     }
@@ -717,8 +798,7 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       continue;
     }
     if (char === "s") {
-      const previous = word[i - 1];
-      phonemes.add(isVowelChar(previous) && isVowelChar(next) ? "/z/" : "/s/");
+      phonemes.add(isVowelChar(prev) && isVowelChar(next) ? "/z/" : "/s/");
       continue;
     }
     if (char === "x") {
@@ -726,20 +806,34 @@ export function phonemesFromFrenchGraphemes(label: string): Set<string> {
       continue;
     }
     if (char === "w") {
-      phonemes.add("/w/");
+      // w français souvent /v/ (wagon) ; /w/ pour emprunts (kiwi, wifi)
+      phonemes.add(word === "wagon" ? "/v/" : "/w/");
       continue;
     }
     if (char === "z") {
       phonemes.add("/z/");
       continue;
     }
+    if (char === "q") {
+      phonemes.add("/k/");
+      continue;
+    }
 
     if (char === "a") phonemes.add("/a/");
     else if (char === "e") {
-      const isFinalSilentE = i === word.length - 1 && !/[éèêë]$/u.test(rawWord) && !finalEPronounced.has(word);
+      const isFinalSilentE =
+        i === word.length - 1 &&
+        !/[éèêë]$/u.test(rawWord) &&
+        !finalEPronounced.has(word);
       if (!isFinalSilentE) phonemes.add("/e/");
-    }
-    else if (char === "i" || char === "y") phonemes.add("/i/");
+    } else if (char === "y") {
+      // y entre voyelles ou en tête devant voyelle → /j/ (kayak, yaourt, yoga)
+      if ((prev && isVowelChar(prev) && isVowelChar(next)) || (!prev && isVowelChar(next))) {
+        phonemes.add("/j/");
+      } else {
+        phonemes.add("/i/");
+      }
+    } else if (char === "i") phonemes.add("/i/");
     else if (char === "o") phonemes.add("/o/");
     else if (char === "u") phonemes.add("/y/");
     else if ("bdfklmnprtv".includes(char)) phonemes.add(`/${char}/`);
