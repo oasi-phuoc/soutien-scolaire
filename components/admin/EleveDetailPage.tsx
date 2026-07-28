@@ -303,11 +303,7 @@ export function EleveDetailPage({
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h1>
-              <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
-                user.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
-                : user.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
-              }`}>
+              <span className="rounded-full bg-[var(--color-theme-light)] px-2.5 py-0.5 text-xs font-bold text-[var(--color-theme-muted)]">
                 {ROLE_LABELS[user.role]}
               </span>
               {user.classe && (
