@@ -671,6 +671,39 @@ input[type=number] {
   overflow: hidden;
 }
 
+/* Largeurs colonnes admin — une seule table, en-têtes et cellules alignés */
+.admin-users-table col.admin-users-table__name { width: 22%; }
+.admin-users-table col.admin-users-table__statut { width: 7%; }
+.admin-users-table col.admin-users-table__imp { width: 5%; }
+.admin-users-table col.admin-users-table__classe { width: 9%; }
+.admin-users-table col.admin-users-table__acces { width: 11%; }
+.admin-users-table col.admin-users-table__maths { width: 8%; }
+.admin-users-table col.admin-users-table__francais { width: 8%; }
+.admin-users-table col.admin-users-table__lecture { width: 8%; }
+.admin-users-table col.admin-users-table__test { width: 9%; }
+
+@media (max-width: 1023px) {
+  .admin-users-table col.admin-users-table__francais,
+  .admin-users-table col.admin-users-table__lecture {
+    width: 0;
+  }
+  .admin-users-table col.admin-users-table__name { width: 28%; }
+  .admin-users-table col.admin-users-table__acces { width: 14%; }
+  .admin-users-table col.admin-users-table__test { width: 12%; }
+}
+
+@media (max-width: 639px) {
+  .admin-users-table col.admin-users-table__statut,
+  .admin-users-table col.admin-users-table__imp,
+  .admin-users-table col.admin-users-table__classe,
+  .admin-users-table col.admin-users-table__maths {
+    width: 0;
+  }
+  .admin-users-table col.admin-users-table__name { width: auto; }
+  .admin-users-table col.admin-users-table__acces { width: 3.25rem; }
+  .admin-users-table col.admin-users-table__test { width: 3.25rem; }
+}
+
 .admin-table-scroll {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklch, var(--color-theme) 40%, #b0b0b0) transparent;
