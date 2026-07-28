@@ -79,13 +79,14 @@ export async function middleware(request: NextRequest) {
   if (user && (path.startsWith(ADMIN_PREFIX) || path.startsWith(IMPRESSIONS_PREFIX) || path.startsWith(SUIVI_PREFIX) || TEACHER_PATHS.some((p) => path.startsWith(p)))) {
     const { data: role } = await supabase.rpc("get_my_role");
 
+    // /admin/* réservé aux admins (sauf ancienne URL impression qui redirige)
     if (path.startsWith(ADMIN_PREFIX) && !path.startsWith(`${ADMIN_PREFIX}/impression`)) {
       if (role !== "admin") {
         return NextResponse.redirect(new URL(role === "prof" ? "/suivi" : "/", request.url));
       }
     }
 
-    // /impressions (+ ancienne /admin/impression) : admin ou droit d'impression
+    // /impressions : admin ou droit d'impression (can_print) — pas réservé au rôle admin
     if (path.startsWith(IMPRESSIONS_PREFIX) || path.startsWith(`${ADMIN_PREFIX}/impression`)) {
       if (role !== "admin") {
         const { data: printAccess, error } = await supabase.rpc("can_access_print");

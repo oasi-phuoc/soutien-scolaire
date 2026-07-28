@@ -34,7 +34,7 @@ const placementItem: NavItem = {
 };
 
 const impressionItem: NavItem = {
-  href: "/admin/impression",
+  href: "/impressions",
   label: "Impression",
   icon: ImpressionIcon,
   x: -80,
