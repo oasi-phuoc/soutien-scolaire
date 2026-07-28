@@ -323,9 +323,13 @@ export default function AvantProposPage() {
 
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4">
           <div className={`flex items-start gap-3 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ background: "#f0eeff" }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M3 4h12M3 8h8M3 12h10" stroke="var(--color-accent-lecture)" strokeWidth="1.6" strokeLinecap="round" />
+            <div
+              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+              style={{ background: "color-mix(in oklch, var(--color-accent-lecture) 14%, white)" }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" stroke="var(--color-accent-lecture)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" stroke="var(--color-accent-lecture)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <div>
@@ -337,10 +341,14 @@ export default function AvantProposPage() {
 
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4">
           <div className={`flex items-start gap-3 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ background: "#eef3fc" }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M4 9h10M9 4v10" stroke="var(--color-accent-alg)" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
+            <div
+              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+              style={{ background: "color-mix(in oklch, var(--color-accent-alg) 14%, white)" }}
+            >
+              <span className="flex flex-col items-center justify-center gap-px" style={{ color: "var(--color-accent-alg)" }} aria-hidden="true">
+                <span className="flex gap-0.5 text-[9px] font-bold leading-none"><span>+</span><span>×</span></span>
+                <span className="flex gap-0.5 text-[9px] font-bold leading-none"><span>−</span><span>÷</span></span>
+              </span>
             </div>
             <div>
               <p className="text-sm font-semibold" style={{ color: "var(--color-accent-alg)" }}>Mathématiques</p>
@@ -351,10 +359,13 @@ export default function AvantProposPage() {
 
         <div className="rounded-xl border border-[var(--color-border-default)] bg-white p-4">
           <div className={`flex items-start gap-3 ${isRtl ? "flex-row-reverse" : ""}`}>
-            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ background: "#fff7e6" }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M3 5h12M3 9h8M3 13h6" stroke="var(--color-accent-fr)" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
+            <div
+              className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+              style={{ background: "color-mix(in oklch, var(--color-accent-fr) 14%, white)" }}
+            >
+              <span className="text-[11px] font-black leading-none" style={{ color: "var(--color-accent-fr)" }} aria-hidden="true">
+                FR
+              </span>
             </div>
             <div>
               <p className="text-sm font-semibold" style={{ color: "var(--color-accent-fr)" }}>Français</p>
