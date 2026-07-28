@@ -1,0 +1,223 @@
+[
+  {
+    "i": 1126,
+    "src": "8 (2).webp",
+    "stem": "8 (2)",
+    "out": "8 (2).webp",
+    "key": "acheter-appareil-photo-homme",
+    "tags": [
+      "#acheter",
+      "#appareil",
+      "#argent",
+      "#client",
+      "#homme",
+      "#magasin",
+      "#photo",
+      "#souvenir",
+      "#garçon",
+      "#électronique"
+    ]
+  },
+  {
+    "i": 1127,
+    "src": "80 (1).webp",
+    "stem": "80 (1)",
+    "out": "80 (1).webp",
+    "key": "beau-temps-soleil",
+    "tags": [
+      "#beau",
+      "#beau-temps",
+      "#soleil",
+      "#temps",
+      "#été"
+    ]
+  },
+  {
+    "i": 1128,
+    "src": "80 (2).webp",
+    "stem": "80 (2)",
+    "out": "80 (2).webp",
+    "key": "beau-temps-soleil",
+    "tags": [
+      "#beau",
+      "#beau-temps",
+      "#soleil",
+      "#temps",
+      "#été"
+    ]
+  },
+  {
+    "i": 1129,
+    "src": "81 (1).webp",
+    "stem": "81 (1)",
+    "out": "81 (1).webp",
+    "key": "boire-cafe",
+    "tags": [
+      "#boire",
+      "#boisson",
+      "#cafe",
+      "#terrasse"
+    ]
+  },
+  {
+    "i": 1130,
+    "src": "81 (2).webp",
+    "stem": "81 (2)",
+    "out": "81 (2).webp",
+    "key": "boire-cafe",
+    "tags": [
+      "#boire",
+      "#boisson",
+      "#cafe",
+      "#terrasse"
+    ]
+  },
+  {
+    "i": 1131,
+    "src": "82 (1).webp",
+    "stem": "82 (1)",
+    "out": "82 (1).webp",
+    "key": "boire-jus-ensemble",
+    "tags": [
+      "#amis",
+      "#boire",
+      "#boisson",
+      "#ensemble",
+      "#fruit",
+      "#jus"
+    ]
+  },
+  {
+    "i": 1132,
+    "src": "82 (2).webp",
+    "stem": "82 (2)",
+    "out": "82 (2).webp",
+    "key": "boire-jus-ensemble",
+    "tags": [
+      "#amis",
+      "#boire",
+      "#boisson",
+      "#ensemble",
+      "#fruit",
+      "#jus"
+    ]
+  },
+  {
+    "i": 1133,
+    "src": "83 (1).webp",
+    "stem": "83 (1)",
+    "out": "83 (1).webp",
+    "key": "bord-piscine",
+    "tags": [
+      "#bord",
+      "#eau",
+      "#nager",
+      "#piscine"
+    ]
+  },
+  {
+    "i": 1134,
+    "src": "83 (2).webp",
+    "stem": "83 (2)",
+    "out": "83 (2).webp",
+    "key": "bord-piscine",
+    "tags": [
+      "#bord",
+      "#eau",
+      "#nager",
+      "#piscine"
+    ]
+  },
+  {
+    "i": 1135,
+    "src": "84 (1).webp",
+    "stem": "84 (1)",
+    "out": "84 (1).webp",
+    "key": "brosser-dent",
+    "tags": [
+      "#brosser",
+      "#dent",
+      "#dents"
+    ]
+  },
+  {
+    "i": 1136,
+    "src": "84 (2).webp",
+    "stem": "84 (2)",
+    "out": "84 (2).webp",
+    "key": "brosser-dent",
+    "tags": [
+      "#brosser",
+      "#dent",
+      "#dents"
+    ]
+  },
+  {
+    "i": 1137,
+    "src": "85 (1).png",
+    "stem": "85 (1)",
+    "out": "85 (1).webp",
+    "key": "bureau-travail-demander-conseil",
+    "tags": [
+      "#aide",
+      "#bureau",
+      "#conseil",
+      "#demander",
+      "#question",
+      "#travail",
+      "#collègue"
+    ]
+  },
+  {
+    "i": 1138,
+    "src": "85 (2).webp",
+    "stem": "85 (2)",
+    "out": "85 (2).webp",
+    "key": "bureau-travail-demander-conseil",
+    "tags": [
+      "#aide",
+      "#bureau",
+      "#conseil",
+      "#demander",
+      "#question",
+      "#travail",
+      "#collègue"
+    ]
+  },
+  {
+    "i": 1139,
+    "src": "86 (1).webp",
+    "stem": "86 (1)",
+    "out": "86 (1).webp",
+    "key": "cadeau-noel",
+    "tags": [
+      "#cadeau",
+      "#noel",
+      "#offrir",
+      "#fête"
+    ]
+  },
+  {
+    "i": 1140,
+    "src": "86 (2).webp",
+    "stem": "86 (2)",
+    "out": "86 (2).webp",
+    "key": "cadeau-noel",
+    "tags": [
+      "#cadeau",
+      "#noel",
+      "#offrir",
+      "#fête"
+    ]
+  },
+  {
+    "i": 1141,
+    "src": "87 (1).webp",
+    "stem": "87 (1)",
+    "out": "87 (1).webp",
+    "key": "calculer facture",
+    "tags": [
+      "#calculer facture"
+    ]
+  }
+]
