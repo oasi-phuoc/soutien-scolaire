@@ -1,0 +1,605 @@
+{
+  "batch": 2,
+  "start": 80,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "127 (3).webp",
+      "out": "127 (3).webp",
+      "stem": "127 (3)",
+      "familyId": "127",
+      "familyKey": "consoler",
+      "tags": [
+        "#consoler",
+        "#soutien",
+        "#émotion"
+      ],
+      "id": "127.2"
+    },
+    {
+      "src": "127 (4).webp",
+      "out": "127 (4).webp",
+      "stem": "127 (4)",
+      "familyId": "127",
+      "familyKey": "consoler",
+      "tags": [
+        "#consoler",
+        "#soutien",
+        "#émotion"
+      ],
+      "id": "127.3"
+    },
+    {
+      "src": "128 (1).webp",
+      "out": "128 (1).webp",
+      "stem": "128 (1)",
+      "familyId": "128",
+      "familyKey": "consultation-bibliotheque",
+      "tags": [
+        "#bibliotheque",
+        "#consultation",
+        "#emprunt",
+        "#livre"
+      ],
+      "id": "128"
+    },
+    {
+      "src": "128 (2).webp",
+      "out": "128 (2).webp",
+      "stem": "128 (2)",
+      "familyId": "128",
+      "familyKey": "consultation-bibliotheque",
+      "tags": [
+        "#bibliotheque",
+        "#consultation",
+        "#emprunt",
+        "#livre"
+      ],
+      "id": "128.1"
+    },
+    {
+      "src": "129 (1).webp",
+      "out": "129 (1).webp",
+      "stem": "129 (1)",
+      "familyId": "129",
+      "familyKey": "consultation-medecin",
+      "tags": [
+        "#consultation",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "129"
+    },
+    {
+      "src": "129 (2).webp",
+      "out": "129 (2).webp",
+      "stem": "129 (2)",
+      "familyId": "129",
+      "familyKey": "consultation-medecin",
+      "tags": [
+        "#consultation",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "129.1"
+    },
+    {
+      "src": "13 (1).png",
+      "out": "13 (1).webp",
+      "stem": "13 (1)",
+      "familyId": "13",
+      "familyKey": "acheter-billet-train-gare-guichet",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#billeterie",
+        "#client",
+        "#gare",
+        "#guichet",
+        "#magasin",
+        "#quai",
+        "#service",
+        "#ticket",
+        "#train",
+        "#voyage"
+      ],
+      "id": "13"
+    },
+    {
+      "src": "13 (2).webp",
+      "out": "13 (2).webp",
+      "stem": "13 (2)",
+      "familyId": "13",
+      "familyKey": "acheter-billet-train-gare-guichet",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#billeterie",
+        "#client",
+        "#gare",
+        "#guichet",
+        "#magasin",
+        "#quai",
+        "#service",
+        "#ticket",
+        "#train",
+        "#voyage"
+      ],
+      "id": "13.1"
+    },
+    {
+      "src": "130 (1).png",
+      "out": "130 (1).webp",
+      "stem": "130 (1)",
+      "familyId": "130",
+      "familyKey": "consultation-medecin-bras-casse",
+      "tags": [
+        "#bras",
+        "#casse",
+        "#consultation",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "130"
+    },
+    {
+      "src": "130 (2).webp",
+      "out": "130 (2).webp",
+      "stem": "130 (2)",
+      "familyId": "130",
+      "familyKey": "consultation-medecin-bras-casse",
+      "tags": [
+        "#bras",
+        "#casse",
+        "#consultation",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "130.1"
+    },
+    {
+      "src": "131 (1).png",
+      "out": "131 (1).webp",
+      "stem": "131 (1)",
+      "familyId": "131",
+      "familyKey": "consultation-medecin-ordonnance",
+      "tags": [
+        "#consultation",
+        "#medecin",
+        "#ordonnance",
+        "#médicament",
+        "#santé"
+      ],
+      "id": "131"
+    },
+    {
+      "src": "131 (2).webp",
+      "out": "131 (2).webp",
+      "stem": "131 (2)",
+      "familyId": "131",
+      "familyKey": "consultation-medecin-ordonnance",
+      "tags": [
+        "#consultation",
+        "#medecin",
+        "#ordonnance",
+        "#médicament",
+        "#santé"
+      ],
+      "id": "131.1"
+    },
+    {
+      "src": "132 (1).webp",
+      "out": "132 (1).webp",
+      "stem": "132 (1)",
+      "familyId": "132",
+      "familyKey": "consulter-medecin",
+      "tags": [
+        "#consultation",
+        "#consulter",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "132"
+    },
+    {
+      "src": "132 (2).webp",
+      "out": "132 (2).webp",
+      "stem": "132 (2)",
+      "familyId": "132",
+      "familyKey": "consulter-medecin",
+      "tags": [
+        "#consultation",
+        "#consulter",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "132.1"
+    },
+    {
+      "src": "132 (3).webp",
+      "out": "132 (3).webp",
+      "stem": "132 (3)",
+      "familyId": "132",
+      "familyKey": "consulter-medecin",
+      "tags": [
+        "#consultation",
+        "#consulter",
+        "#medecin",
+        "#santé"
+      ],
+      "id": "132.2"
+    },
+    {
+      "src": "133 (1).webp",
+      "out": "133 (1).webp",
+      "stem": "133 (1)",
+      "familyId": "133",
+      "familyKey": "content-calin",
+      "tags": [
+        "#affection",
+        "#calin",
+        "#content",
+        "#famille",
+        "#joie",
+        "#sourire"
+      ],
+      "id": "133"
+    },
+    {
+      "src": "133 (2).webp",
+      "out": "133 (2).webp",
+      "stem": "133 (2)",
+      "familyId": "133",
+      "familyKey": "content-calin",
+      "tags": [
+        "#affection",
+        "#calin",
+        "#content",
+        "#famille",
+        "#joie",
+        "#sourire"
+      ],
+      "id": "133.1"
+    },
+    {
+      "src": "134 (1).webp",
+      "out": "134 (1).webp",
+      "stem": "134 (1)",
+      "familyId": "134",
+      "familyKey": "couloir-ecole-affiches",
+      "tags": [
+        "#affiches",
+        "#couloir",
+        "#cours",
+        "#ecole",
+        "#élève"
+      ],
+      "id": "134"
+    },
+    {
+      "src": "134 (2).webp",
+      "out": "134 (2).webp",
+      "stem": "134 (2)",
+      "familyId": "134",
+      "familyKey": "couloir-ecole-affiches",
+      "tags": [
+        "#affiches",
+        "#couloir",
+        "#cours",
+        "#ecole",
+        "#élève"
+      ],
+      "id": "134.1"
+    },
+    {
+      "src": "135 (1).webp",
+      "out": "135 (1).webp",
+      "stem": "135 (1)",
+      "familyId": "135",
+      "familyKey": "courir-en-retard",
+      "tags": [
+        "#courir",
+        "#parc",
+        "#retard",
+        "#sport",
+        "#en"
+      ],
+      "id": "135"
+    },
+    {
+      "src": "135 (2).webp",
+      "out": "135 (2).webp",
+      "stem": "135 (2)",
+      "familyId": "135",
+      "familyKey": "courir-en-retard",
+      "tags": [
+        "#courir",
+        "#parc",
+        "#retard",
+        "#sport",
+        "#en"
+      ],
+      "id": "135.1"
+    },
+    {
+      "src": "136 (1).webp",
+      "out": "136 (1).webp",
+      "stem": "136 (1)",
+      "familyId": "136",
+      "familyKey": "courir-ensemble",
+      "tags": [
+        "#amis",
+        "#courir",
+        "#ensemble",
+        "#parc",
+        "#sport"
+      ],
+      "id": "136"
+    },
+    {
+      "src": "136 (2).webp",
+      "out": "136 (2).webp",
+      "stem": "136 (2)",
+      "familyId": "136",
+      "familyKey": "courir-ensemble",
+      "tags": [
+        "#amis",
+        "#courir",
+        "#ensemble",
+        "#parc",
+        "#sport"
+      ],
+      "id": "136.1"
+    },
+    {
+      "src": "137 (1).webp",
+      "out": "137 (1).webp",
+      "stem": "137 (1)",
+      "familyId": "137",
+      "familyKey": "courir-parc",
+      "tags": [
+        "#courir",
+        "#dehors",
+        "#nature",
+        "#parc",
+        "#sport"
+      ],
+      "id": "137"
+    },
+    {
+      "src": "137 (2).webp",
+      "out": "137 (2).webp",
+      "stem": "137 (2)",
+      "familyId": "137",
+      "familyKey": "courir-parc",
+      "tags": [
+        "#courir",
+        "#dehors",
+        "#nature",
+        "#parc",
+        "#sport"
+      ],
+      "id": "137.1"
+    },
+    {
+      "src": "138 (1).webp",
+      "out": "138 (1).webp",
+      "stem": "138 (1)",
+      "familyId": "138",
+      "familyKey": "courir-seul",
+      "tags": [
+        "#courir",
+        "#parc",
+        "#seul",
+        "#sport"
+      ],
+      "id": "138"
+    },
+    {
+      "src": "138 (2).webp",
+      "out": "138 (2).webp",
+      "stem": "138 (2)",
+      "familyId": "138",
+      "familyKey": "courir-seul",
+      "tags": [
+        "#courir",
+        "#parc",
+        "#seul",
+        "#sport"
+      ],
+      "id": "138.1"
+    },
+    {
+      "src": "139 (1).webp",
+      "out": "139 (1).webp",
+      "stem": "139 (1)",
+      "familyId": "139",
+      "familyKey": "cours-de-musique",
+      "tags": [
+        "#cours",
+        "#musique",
+        "#de"
+      ],
+      "id": "139"
+    },
+    {
+      "src": "139 (2).webp",
+      "out": "139 (2).webp",
+      "stem": "139 (2)",
+      "familyId": "139",
+      "familyKey": "cours-de-musique",
+      "tags": [
+        "#cours",
+        "#musique",
+        "#de"
+      ],
+      "id": "139.1"
+    },
+    {
+      "src": "14 (1).webp",
+      "out": "14 (1).webp",
+      "stem": "14 (1)",
+      "familyId": "14",
+      "familyKey": "acheter-boulangerie-1",
+      "tags": [
+        "#acheter",
+        "#boulangerie"
+      ],
+      "id": "14"
+    },
+    {
+      "src": "14 (2).webp",
+      "out": "14 (2).webp",
+      "stem": "14 (2)",
+      "familyId": "14",
+      "familyKey": "acheter-boulangerie-1",
+      "tags": [
+        "#acheter",
+        "#boulangerie"
+      ],
+      "id": "14.1"
+    },
+    {
+      "src": "140 (1).webp",
+      "out": "140 (1).webp",
+      "stem": "140 (1)",
+      "familyId": "140",
+      "familyKey": "cours-de-photo",
+      "tags": [
+        "#appareil",
+        "#cours",
+        "#photo",
+        "#souvenir",
+        "#de"
+      ],
+      "id": "140"
+    },
+    {
+      "src": "140 (2).webp",
+      "out": "140 (2).webp",
+      "stem": "140 (2)",
+      "familyId": "140",
+      "familyKey": "cours-de-photo",
+      "tags": [
+        "#appareil",
+        "#cours",
+        "#photo",
+        "#souvenir",
+        "#de"
+      ],
+      "id": "140.1"
+    },
+    {
+      "src": "141 (1).webp",
+      "out": "141 (1).webp",
+      "stem": "141 (1)",
+      "familyId": "141",
+      "familyKey": "cours-de-yoga",
+      "tags": [
+        "#cours",
+        "#sport",
+        "#yoga",
+        "#de",
+        "#détente"
+      ],
+      "id": "141"
+    },
+    {
+      "src": "141 (2).webp",
+      "out": "141 (2).webp",
+      "stem": "141 (2)",
+      "familyId": "141",
+      "familyKey": "cours-de-yoga",
+      "tags": [
+        "#cours",
+        "#sport",
+        "#yoga",
+        "#de",
+        "#détente"
+      ],
+      "id": "141.1"
+    },
+    {
+      "src": "142 (1).webp",
+      "out": "142 (1).webp",
+      "stem": "142 (1)",
+      "familyId": "142",
+      "familyKey": "cours-eps",
+      "tags": [
+        "#EPS",
+        "#cours",
+        "#sport",
+        "#école"
+      ],
+      "id": "142"
+    },
+    {
+      "src": "142 (2).webp",
+      "out": "142 (2).webp",
+      "stem": "142 (2)",
+      "familyId": "142",
+      "familyKey": "cours-eps",
+      "tags": [
+        "#EPS",
+        "#cours",
+        "#sport",
+        "#école"
+      ],
+      "id": "142.1"
+    },
+    {
+      "src": "143 (1).webp",
+      "out": "143 (1).webp",
+      "stem": "143 (1)",
+      "familyId": "143",
+      "familyKey": "cours-geographie",
+      "tags": [
+        "#cours",
+        "#geographie",
+        "#école"
+      ],
+      "id": "143"
+    },
+    {
+      "src": "143 (2).webp",
+      "out": "143 (2).webp",
+      "stem": "143 (2)",
+      "familyId": "143",
+      "familyKey": "cours-geographie",
+      "tags": [
+        "#cours",
+        "#geographie",
+        "#école"
+      ],
+      "id": "143.1"
+    },
+    {
+      "src": "144 (1).webp",
+      "out": "144 (1).webp",
+      "stem": "144 (1)",
+      "familyId": "144",
+      "familyKey": "course-couloir-ecole",
+      "tags": [
+        "#caddie",
+        "#couloir",
+        "#cours",
+        "#course",
+        "#courses",
+        "#ecole",
+        "#magasin",
+        "#élève"
+      ],
+      "id": "144"
+    }
+  ]
+}

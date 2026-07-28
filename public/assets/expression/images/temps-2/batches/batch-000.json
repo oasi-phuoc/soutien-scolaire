@@ -1,0 +1,644 @@
+{
+  "batch": 0,
+  "start": 0,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "1 (1).webp",
+      "out": "1 (1).webp",
+      "stem": "1 (1)",
+      "familyId": "1",
+      "familyKey": "accepter-invitation",
+      "tags": [
+        "#proposer",
+        "#accepter",
+        "#invitation",
+        "#sortie",
+        "#fille",
+        "#homme",
+        "#accord",
+        "#ami",
+        "#oui",
+        "#fête",
+        "#événement"
+      ],
+      "id": "1"
+    },
+    {
+      "src": "10 (1).webp",
+      "out": "10 (1).webp",
+      "stem": "10 (1)",
+      "familyId": "10",
+      "familyKey": "acheter-billet",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#client",
+        "#guichet",
+        "#magasin",
+        "#ticket"
+      ],
+      "id": "10"
+    },
+    {
+      "src": "10 (2).webp",
+      "out": "10 (2).webp",
+      "stem": "10 (2)",
+      "familyId": "10",
+      "familyKey": "acheter-billet",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#client",
+        "#guichet",
+        "#magasin",
+        "#ticket"
+      ],
+      "id": "10.1"
+    },
+    {
+      "src": "100 (1).webp",
+      "out": "100 (1).webp",
+      "stem": "100 (1)",
+      "familyId": "100",
+      "familyKey": "chambre-desordre-2",
+      "tags": [
+        "#chambre",
+        "#desordre"
+      ],
+      "id": "100"
+    },
+    {
+      "src": "100 (2).webp",
+      "out": "100 (2).webp",
+      "stem": "100 (2)",
+      "familyId": "100",
+      "familyKey": "chambre-desordre-2",
+      "tags": [
+        "#chambre",
+        "#desordre"
+      ],
+      "id": "100.1"
+    },
+    {
+      "src": "101 (1).webp",
+      "out": "101 (1).webp",
+      "stem": "101 (1)",
+      "familyId": "101",
+      "familyKey": "chambre-en-desordre",
+      "tags": [
+        "#chambre",
+        "#desordre",
+        "#maison",
+        "#en"
+      ],
+      "id": "101"
+    },
+    {
+      "src": "102 (1).webp",
+      "out": "102 (1).webp",
+      "stem": "102 (1)",
+      "familyId": "102",
+      "familyKey": "changer-ampoule",
+      "tags": [
+        "#ampoule",
+        "#changer",
+        "#maison",
+        "#réparer"
+      ],
+      "id": "102"
+    },
+    {
+      "src": "102 (2).webp",
+      "out": "102 (2).webp",
+      "stem": "102 (2)",
+      "familyId": "102",
+      "familyKey": "changer-ampoule",
+      "tags": [
+        "#ampoule",
+        "#changer",
+        "#maison",
+        "#réparer"
+      ],
+      "id": "102.1"
+    },
+    {
+      "src": "103 (1).webp",
+      "out": "103 (1).webp",
+      "stem": "103 (1)",
+      "familyId": "103",
+      "familyKey": "changer-devise",
+      "tags": [
+        "#argent",
+        "#change",
+        "#changer",
+        "#devise"
+      ],
+      "id": "103"
+    },
+    {
+      "src": "103 (2).webp",
+      "out": "103 (2).webp",
+      "stem": "103 (2)",
+      "familyId": "103",
+      "familyKey": "changer-devise",
+      "tags": [
+        "#argent",
+        "#change",
+        "#changer",
+        "#devise"
+      ],
+      "id": "103.1"
+    },
+    {
+      "src": "104 (1).webp",
+      "out": "104 (1).webp",
+      "stem": "104 (1)",
+      "familyId": "104",
+      "familyKey": "charger-telephone",
+      "tags": [
+        "#appeler",
+        "#batterie",
+        "#charger",
+        "#mobile",
+        "#telephone"
+      ],
+      "id": "104"
+    },
+    {
+      "src": "104 (2).webp",
+      "out": "104 (2).webp",
+      "stem": "104 (2)",
+      "familyId": "104",
+      "familyKey": "charger-telephone",
+      "tags": [
+        "#appeler",
+        "#batterie",
+        "#charger",
+        "#mobile",
+        "#telephone"
+      ],
+      "id": "104.1"
+    },
+    {
+      "src": "105 (1).webp",
+      "out": "105 (1).webp",
+      "stem": "105 (1)",
+      "familyId": "105",
+      "familyKey": "check-in-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#in",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "105"
+    },
+    {
+      "src": "105 (2).webp",
+      "out": "105 (2).webp",
+      "stem": "105 (2)",
+      "familyId": "105",
+      "familyKey": "check-in-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#in",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "105.1"
+    },
+    {
+      "src": "105 (3).webp",
+      "out": "105 (3).webp",
+      "stem": "105 (3)",
+      "familyId": "105",
+      "familyKey": "check-in-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#in",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "105.2"
+    },
+    {
+      "src": "105 (4).webp",
+      "out": "105 (4).webp",
+      "stem": "105 (4)",
+      "familyId": "105",
+      "familyKey": "check-in-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#in",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "105.3"
+    },
+    {
+      "src": "106 (1).webp",
+      "out": "106 (1).webp",
+      "stem": "106 (1)",
+      "familyId": "106",
+      "familyKey": "check-in-vol",
+      "tags": [
+        "#check",
+        "#enregistrement",
+        "#in",
+        "#vol",
+        "#voyage",
+        "#hôtel"
+      ],
+      "id": "106"
+    },
+    {
+      "src": "106 (2).webp",
+      "out": "106 (2).webp",
+      "stem": "106 (2)",
+      "familyId": "106",
+      "familyKey": "check-in-vol",
+      "tags": [
+        "#check",
+        "#enregistrement",
+        "#in",
+        "#vol",
+        "#voyage",
+        "#hôtel"
+      ],
+      "id": "106.1"
+    },
+    {
+      "src": "106 (3).webp",
+      "out": "106 (3).webp",
+      "stem": "106 (3)",
+      "familyId": "106",
+      "familyKey": "check-in-vol",
+      "tags": [
+        "#check",
+        "#enregistrement",
+        "#in",
+        "#vol",
+        "#voyage",
+        "#hôtel"
+      ],
+      "id": "106.2"
+    },
+    {
+      "src": "107 (1).webp",
+      "out": "107 (1).webp",
+      "stem": "107 (1)",
+      "familyId": "107",
+      "familyKey": "check-out-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#out",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "107"
+    },
+    {
+      "src": "107 (2).webp",
+      "out": "107 (2).webp",
+      "stem": "107 (2)",
+      "familyId": "107",
+      "familyKey": "check-out-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#out",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "107.1"
+    },
+    {
+      "src": "107 (3).webp",
+      "out": "107 (3).webp",
+      "stem": "107 (3)",
+      "familyId": "107",
+      "familyKey": "check-out-hotel",
+      "tags": [
+        "#check",
+        "#client",
+        "#enregistrement",
+        "#hotel",
+        "#out",
+        "#voyage",
+        "#réception"
+      ],
+      "id": "107.2"
+    },
+    {
+      "src": "108 (1).webp",
+      "out": "108 (1).webp",
+      "stem": "108 (1)",
+      "familyId": "108",
+      "familyKey": "chercher-appartement",
+      "tags": [
+        "#appartement",
+        "#chercher",
+        "#logement",
+        "#trouver",
+        "#visite"
+      ],
+      "id": "108"
+    },
+    {
+      "src": "108 (2).webp",
+      "out": "108 (2).webp",
+      "stem": "108 (2)",
+      "familyId": "108",
+      "familyKey": "chercher-appartement",
+      "tags": [
+        "#appartement",
+        "#chercher",
+        "#logement",
+        "#trouver",
+        "#visite"
+      ],
+      "id": "108.1"
+    },
+    {
+      "src": "108 (3).webp",
+      "out": "108 (3).webp",
+      "stem": "108 (3)",
+      "familyId": "108",
+      "familyKey": "chercher-appartement",
+      "tags": [
+        "#appartement",
+        "#chercher",
+        "#logement",
+        "#trouver",
+        "#visite"
+      ],
+      "id": "108.2"
+    },
+    {
+      "src": "108 (4).webp",
+      "out": "108 (4).webp",
+      "stem": "108 (4)",
+      "familyId": "108",
+      "familyKey": "chercher-appartement",
+      "tags": [
+        "#appartement",
+        "#chercher",
+        "#logement",
+        "#trouver",
+        "#visite"
+      ],
+      "id": "108.3"
+    },
+    {
+      "src": "109 (1).webp",
+      "out": "109 (1).webp",
+      "stem": "109 (1)",
+      "familyId": "109",
+      "familyKey": "chercher-cle",
+      "tags": [
+        "#chercher",
+        "#cle",
+        "#perdre",
+        "#trouver"
+      ],
+      "id": "109"
+    },
+    {
+      "src": "109 (2).webp",
+      "out": "109 (2).webp",
+      "stem": "109 (2)",
+      "familyId": "109",
+      "familyKey": "chercher-cle",
+      "tags": [
+        "#chercher",
+        "#cle",
+        "#perdre",
+        "#trouver"
+      ],
+      "id": "109.1"
+    },
+    {
+      "src": "11 (1).webp",
+      "out": "11 (1).webp",
+      "stem": "11 (1)",
+      "familyId": "11",
+      "familyKey": "acheter-billet-cinema",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#cinema",
+        "#client",
+        "#film",
+        "#guichet",
+        "#magasin",
+        "#spectacle",
+        "#ticket"
+      ],
+      "id": "11"
+    },
+    {
+      "src": "11 (2).webp",
+      "out": "11 (2).webp",
+      "stem": "11 (2)",
+      "familyId": "11",
+      "familyKey": "acheter-billet-cinema",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#cinema",
+        "#client",
+        "#film",
+        "#guichet",
+        "#magasin",
+        "#spectacle",
+        "#ticket"
+      ],
+      "id": "11.1"
+    },
+    {
+      "src": "11 (3).webp",
+      "out": "11 (3).webp",
+      "stem": "11 (3)",
+      "familyId": "11",
+      "familyKey": "acheter-billet-cinema",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#cinema",
+        "#client",
+        "#film",
+        "#guichet",
+        "#magasin",
+        "#spectacle",
+        "#ticket"
+      ],
+      "id": "11.2"
+    },
+    {
+      "src": "11 (4).webp",
+      "out": "11 (4).webp",
+      "stem": "11 (4)",
+      "familyId": "11",
+      "familyKey": "acheter-billet-cinema",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#cinema",
+        "#client",
+        "#film",
+        "#guichet",
+        "#magasin",
+        "#spectacle",
+        "#ticket"
+      ],
+      "id": "11.3"
+    },
+    {
+      "src": "110 (1).png",
+      "out": "110 (1).webp",
+      "stem": "110 (1)",
+      "familyId": "110",
+      "familyKey": "chercher-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#trouver"
+      ],
+      "id": "110"
+    },
+    {
+      "src": "110 (2).webp",
+      "out": "110 (2).webp",
+      "stem": "110 (2)",
+      "familyId": "110",
+      "familyKey": "chercher-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#trouver"
+      ],
+      "id": "110.1"
+    },
+    {
+      "src": "111 (1).webp",
+      "out": "111 (1).webp",
+      "stem": "111 (1)",
+      "familyId": "111",
+      "familyKey": "chercher-vacances",
+      "tags": [
+        "#chercher",
+        "#repos",
+        "#trouver",
+        "#vacances",
+        "#voyage"
+      ],
+      "id": "111"
+    },
+    {
+      "src": "111 (2).webp",
+      "out": "111 (2).webp",
+      "stem": "111 (2)",
+      "familyId": "111",
+      "familyKey": "chercher-vacances",
+      "tags": [
+        "#chercher",
+        "#repos",
+        "#trouver",
+        "#vacances",
+        "#voyage"
+      ],
+      "id": "111.1"
+    },
+    {
+      "src": "112 (1).webp",
+      "out": "112 (1).webp",
+      "stem": "112 (1)",
+      "familyId": "112",
+      "familyKey": "choisir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#choisir",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "112"
+    },
+    {
+      "src": "112 (2).webp",
+      "out": "112 (2).webp",
+      "stem": "112 (2)",
+      "familyId": "112",
+      "familyKey": "choisir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#choisir",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "112.1"
+    },
+    {
+      "src": "112 (3).webp",
+      "out": "112 (3).webp",
+      "stem": "112 (3)",
+      "familyId": "112",
+      "familyKey": "choisir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#choisir",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "112.2"
+    },
+    {
+      "src": "113 (1).webp",
+      "out": "113 (1).webp",
+      "stem": "113 (1)",
+      "familyId": "113",
+      "familyKey": "choisir-menu-restaurant",
+      "tags": [
+        "#carte",
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "113"
+    }
+  ]
+}

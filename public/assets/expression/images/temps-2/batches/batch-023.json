@@ -1,0 +1,531 @@
+{
+  "batch": 23,
+  "start": 920,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "463 (4).webp",
+      "out": "463 (4).webp",
+      "stem": "463 (4)",
+      "familyId": "463",
+      "familyKey": "s-excuser",
+      "tags": [
+        "#excuser",
+        "#s"
+      ],
+      "id": "463.3"
+    },
+    {
+      "src": "464 (1).webp",
+      "out": "464 (1).webp",
+      "stem": "464 (1)",
+      "familyId": "464",
+      "familyKey": "saisir-mot-de-passe",
+      "tags": [
+        "#mot",
+        "#passe",
+        "#saisir",
+        "#de"
+      ],
+      "id": "464"
+    },
+    {
+      "src": "464 (2).webp",
+      "out": "464 (2).webp",
+      "stem": "464 (2)",
+      "familyId": "464",
+      "familyKey": "saisir-mot-de-passe",
+      "tags": [
+        "#mot",
+        "#passe",
+        "#saisir",
+        "#de"
+      ],
+      "id": "464.1"
+    },
+    {
+      "src": "465 (1).webp",
+      "out": "465 (1).webp",
+      "stem": "465 (1)",
+      "familyId": "465",
+      "familyKey": "salle-de-cinema",
+      "tags": [
+        "#cinema",
+        "#film",
+        "#salle",
+        "#spectacle",
+        "#de"
+      ],
+      "id": "465"
+    },
+    {
+      "src": "465 (2).webp",
+      "out": "465 (2).webp",
+      "stem": "465 (2)",
+      "familyId": "465",
+      "familyKey": "salle-de-cinema",
+      "tags": [
+        "#cinema",
+        "#film",
+        "#salle",
+        "#spectacle",
+        "#de"
+      ],
+      "id": "465.1"
+    },
+    {
+      "src": "466 (1).webp",
+      "out": "466 (1).webp",
+      "stem": "466 (1)",
+      "familyId": "466",
+      "familyKey": "salon-cuisine-famille",
+      "tags": [
+        "#cuisine",
+        "#famille",
+        "#maison",
+        "#proche",
+        "#salon"
+      ],
+      "id": "466"
+    },
+    {
+      "src": "466 (2).webp",
+      "out": "466 (2).webp",
+      "stem": "466 (2)",
+      "familyId": "466",
+      "familyKey": "salon-cuisine-famille",
+      "tags": [
+        "#cuisine",
+        "#famille",
+        "#maison",
+        "#proche",
+        "#salon"
+      ],
+      "id": "466.1"
+    },
+    {
+      "src": "467 (1).webp",
+      "out": "467 (1).webp",
+      "stem": "467 (1)",
+      "familyId": "467",
+      "familyKey": "saluer",
+      "tags": [
+        "#saluer"
+      ],
+      "id": "467"
+    },
+    {
+      "src": "467 (2).webp",
+      "out": "467 (2).webp",
+      "stem": "467 (2)",
+      "familyId": "467",
+      "familyKey": "saluer",
+      "tags": [
+        "#saluer"
+      ],
+      "id": "467.1"
+    },
+    {
+      "src": "467 (3).webp",
+      "out": "467 (3).webp",
+      "stem": "467 (3)",
+      "familyId": "467",
+      "familyKey": "saluer",
+      "tags": [
+        "#saluer"
+      ],
+      "id": "467.2"
+    },
+    {
+      "src": "467 (4).webp",
+      "out": "467 (4).webp",
+      "stem": "467 (4)",
+      "familyId": "467",
+      "familyKey": "saluer",
+      "tags": [
+        "#saluer"
+      ],
+      "id": "467.3"
+    },
+    {
+      "src": "468 (1).png",
+      "out": "468 (1).webp",
+      "stem": "468 (1)",
+      "familyId": "468",
+      "familyKey": "saluer-arret-bus",
+      "tags": [
+        "#arret",
+        "#bus",
+        "#saluer",
+        "#transport"
+      ],
+      "id": "468"
+    },
+    {
+      "src": "468 (2).webp",
+      "out": "468 (2).webp",
+      "stem": "468 (2)",
+      "familyId": "468",
+      "familyKey": "saluer-arret-bus",
+      "tags": [
+        "#arret",
+        "#bus",
+        "#saluer",
+        "#transport"
+      ],
+      "id": "468.1"
+    },
+    {
+      "src": "469 (1).png",
+      "out": "469 (1).webp",
+      "stem": "469 (1)",
+      "familyId": "469",
+      "familyKey": "saluer-rue",
+      "tags": [
+        "#rue",
+        "#saluer",
+        "#ville"
+      ],
+      "id": "469"
+    },
+    {
+      "src": "469 (2).webp",
+      "out": "469 (2).webp",
+      "stem": "469 (2)",
+      "familyId": "469",
+      "familyKey": "saluer-rue",
+      "tags": [
+        "#rue",
+        "#saluer",
+        "#ville"
+      ],
+      "id": "469.1"
+    },
+    {
+      "src": "47 (1).webp",
+      "out": "47 (1).webp",
+      "stem": "47 (1)",
+      "familyId": "47",
+      "familyKey": "annoncer-evenement",
+      "tags": [
+        "#annoncer",
+        "#evenement"
+      ],
+      "id": "47"
+    },
+    {
+      "src": "47 (2).webp",
+      "out": "47 (2).webp",
+      "stem": "47 (2)",
+      "familyId": "47",
+      "familyKey": "annoncer-evenement",
+      "tags": [
+        "#annoncer",
+        "#evenement"
+      ],
+      "id": "47.1"
+    },
+    {
+      "src": "47 (3).webp",
+      "out": "47 (3).webp",
+      "stem": "47 (3)",
+      "familyId": "47",
+      "familyKey": "annoncer-evenement",
+      "tags": [
+        "#annoncer",
+        "#evenement"
+      ],
+      "id": "47.2"
+    },
+    {
+      "src": "47 (4).webp",
+      "out": "47 (4).webp",
+      "stem": "47 (4)",
+      "familyId": "47",
+      "familyKey": "annoncer-evenement",
+      "tags": [
+        "#annoncer",
+        "#evenement"
+      ],
+      "id": "47.3"
+    },
+    {
+      "src": "470 (1).png",
+      "out": "470 (1).webp",
+      "stem": "470 (1)",
+      "familyId": "470",
+      "familyKey": "saluer-serrer-main",
+      "tags": [
+        "#main",
+        "#saluer",
+        "#serrer"
+      ],
+      "id": "470"
+    },
+    {
+      "src": "470 (2).webp",
+      "out": "470 (2).webp",
+      "stem": "470 (2)",
+      "familyId": "470",
+      "familyKey": "saluer-serrer-main",
+      "tags": [
+        "#main",
+        "#saluer",
+        "#serrer"
+      ],
+      "id": "470.1"
+    },
+    {
+      "src": "471 (1).webp",
+      "out": "471 (1).webp",
+      "stem": "471 (1)",
+      "familyId": "471",
+      "familyKey": "sculpter",
+      "tags": [
+        "#sculpter"
+      ],
+      "id": "471"
+    },
+    {
+      "src": "471 (2).webp",
+      "out": "471 (2).webp",
+      "stem": "471 (2)",
+      "familyId": "471",
+      "familyKey": "sculpter",
+      "tags": [
+        "#sculpter"
+      ],
+      "id": "471.1"
+    },
+    {
+      "src": "472 (1).webp",
+      "out": "472 (1).webp",
+      "stem": "472 (1)",
+      "familyId": "472",
+      "familyKey": "se-preparer",
+      "tags": [
+        "#preparer",
+        "#se"
+      ],
+      "id": "472"
+    },
+    {
+      "src": "472 (2).webp",
+      "out": "472 (2).webp",
+      "stem": "472 (2)",
+      "familyId": "472",
+      "familyKey": "se-preparer",
+      "tags": [
+        "#preparer",
+        "#se"
+      ],
+      "id": "472.1"
+    },
+    {
+      "src": "473 (1).webp",
+      "out": "473 (1).webp",
+      "stem": "473 (1)",
+      "familyId": "473",
+      "familyKey": "se-reveiller",
+      "tags": [
+        "#reveiller",
+        "#se"
+      ],
+      "id": "473"
+    },
+    {
+      "src": "473 (2).webp",
+      "out": "473 (2).webp",
+      "stem": "473 (2)",
+      "familyId": "473",
+      "familyKey": "se-reveiller",
+      "tags": [
+        "#reveiller",
+        "#se"
+      ],
+      "id": "473.1"
+    },
+    {
+      "src": "474 (1).webp",
+      "out": "474 (1).webp",
+      "stem": "474 (1)",
+      "familyId": "474",
+      "familyKey": "service-cantine",
+      "tags": [
+        "#aide",
+        "#cantine",
+        "#repas",
+        "#service",
+        "#école"
+      ],
+      "id": "474"
+    },
+    {
+      "src": "474 (2).webp",
+      "out": "474 (2).webp",
+      "stem": "474 (2)",
+      "familyId": "474",
+      "familyKey": "service-cantine",
+      "tags": [
+        "#aide",
+        "#cantine",
+        "#repas",
+        "#service",
+        "#école"
+      ],
+      "id": "474.1"
+    },
+    {
+      "src": "475 (1).webp",
+      "out": "475 (1).webp",
+      "stem": "475 (1)",
+      "familyId": "475",
+      "familyKey": "signaler-allergie",
+      "tags": [
+        "#allergie",
+        "#signaler"
+      ],
+      "id": "475"
+    },
+    {
+      "src": "475 (2).webp",
+      "out": "475 (2).webp",
+      "stem": "475 (2)",
+      "familyId": "475",
+      "familyKey": "signaler-allergie",
+      "tags": [
+        "#allergie",
+        "#signaler"
+      ],
+      "id": "475.1"
+    },
+    {
+      "src": "475 (3).webp",
+      "out": "475 (3).webp",
+      "stem": "475 (3)",
+      "familyId": "475",
+      "familyKey": "signaler-allergie",
+      "tags": [
+        "#allergie",
+        "#signaler"
+      ],
+      "id": "475.2"
+    },
+    {
+      "src": "476 (1).webp",
+      "out": "476 (1).webp",
+      "stem": "476 (1)",
+      "familyId": "476",
+      "familyKey": "signaler-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#signaler"
+      ],
+      "id": "476"
+    },
+    {
+      "src": "476 (2).webp",
+      "out": "476 (2).webp",
+      "stem": "476 (2)",
+      "familyId": "476",
+      "familyKey": "signaler-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#signaler"
+      ],
+      "id": "476.1"
+    },
+    {
+      "src": "476 (3).webp",
+      "out": "476 (3).webp",
+      "stem": "476 (3)",
+      "familyId": "476",
+      "familyKey": "signaler-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#signaler"
+      ],
+      "id": "476.2"
+    },
+    {
+      "src": "476 (4).webp",
+      "out": "476 (4).webp",
+      "stem": "476 (4)",
+      "familyId": "476",
+      "familyKey": "signaler-objet-perdu",
+      "tags": [
+        "#chercher",
+        "#objet",
+        "#perdu",
+        "#signaler"
+      ],
+      "id": "476.3"
+    },
+    {
+      "src": "477 (1).webp",
+      "out": "477 (1).webp",
+      "stem": "477 (1)",
+      "familyId": "477",
+      "familyKey": "signaler-panne",
+      "tags": [
+        "#ordinateur",
+        "#panne",
+        "#signaler",
+        "#problème"
+      ],
+      "id": "477"
+    },
+    {
+      "src": "477 (2).webp",
+      "out": "477 (2).webp",
+      "stem": "477 (2)",
+      "familyId": "477",
+      "familyKey": "signaler-panne",
+      "tags": [
+        "#ordinateur",
+        "#panne",
+        "#signaler",
+        "#problème"
+      ],
+      "id": "477.1"
+    },
+    {
+      "src": "478 (1).webp",
+      "out": "478 (1).webp",
+      "stem": "478 (1)",
+      "familyId": "478",
+      "familyKey": "signaler-probleme",
+      "tags": [
+        "#probleme",
+        "#signaler"
+      ],
+      "id": "478"
+    },
+    {
+      "src": "478 (2).webp",
+      "out": "478 (2).webp",
+      "stem": "478 (2)",
+      "familyId": "478",
+      "familyKey": "signaler-probleme",
+      "tags": [
+        "#probleme",
+        "#signaler"
+      ],
+      "id": "478.1"
+    }
+  ]
+}

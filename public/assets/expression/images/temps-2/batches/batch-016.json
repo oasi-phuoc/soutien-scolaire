@@ -1,0 +1,590 @@
+{
+  "batch": 16,
+  "start": 640,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "36 (1).webp",
+      "out": "36 (1).webp",
+      "stem": "36 (1)",
+      "familyId": "36",
+      "familyKey": "admirer-fleurs",
+      "tags": [
+        "#admirer",
+        "#bouquet",
+        "#contemplation",
+        "#fleurs",
+        "#nature"
+      ],
+      "id": "36"
+    },
+    {
+      "src": "36 (2).webp",
+      "out": "36 (2).webp",
+      "stem": "36 (2)",
+      "familyId": "36",
+      "familyKey": "admirer-fleurs",
+      "tags": [
+        "#admirer",
+        "#bouquet",
+        "#contemplation",
+        "#fleurs",
+        "#nature"
+      ],
+      "id": "36.1"
+    },
+    {
+      "src": "360 (1).webp",
+      "out": "360 (1).webp",
+      "stem": "360 (1)",
+      "familyId": "360",
+      "familyKey": "parler-livre",
+      "tags": [
+        "#conversation",
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#parler"
+      ],
+      "id": "360"
+    },
+    {
+      "src": "360 (2).webp",
+      "out": "360 (2).webp",
+      "stem": "360 (2)",
+      "familyId": "360",
+      "familyKey": "parler-livre",
+      "tags": [
+        "#conversation",
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#parler"
+      ],
+      "id": "360.1"
+    },
+    {
+      "src": "361 (1).webp",
+      "out": "361 (1).webp",
+      "stem": "361 (1)",
+      "familyId": "361",
+      "familyKey": "parler-meteo",
+      "tags": [
+        "#conversation",
+        "#meteo",
+        "#parler",
+        "#temps"
+      ],
+      "id": "361"
+    },
+    {
+      "src": "361 (2).webp",
+      "out": "361 (2).webp",
+      "stem": "361 (2)",
+      "familyId": "361",
+      "familyKey": "parler-meteo",
+      "tags": [
+        "#conversation",
+        "#meteo",
+        "#parler",
+        "#temps"
+      ],
+      "id": "361.1"
+    },
+    {
+      "src": "362 (1).webp",
+      "out": "362 (1).webp",
+      "stem": "362 (1)",
+      "familyId": "362",
+      "familyKey": "parler-rue",
+      "tags": [
+        "#conversation",
+        "#parler",
+        "#rue",
+        "#ville"
+      ],
+      "id": "362"
+    },
+    {
+      "src": "363 (1).webp",
+      "out": "363 (1).webp",
+      "stem": "363 (1)",
+      "familyId": "363",
+      "familyKey": "partager-addition",
+      "tags": [
+        "#addition",
+        "#parapluie",
+        "#partager",
+        "#payer",
+        "#restaurant"
+      ],
+      "id": "363"
+    },
+    {
+      "src": "363 (2).webp",
+      "out": "363 (2).webp",
+      "stem": "363 (2)",
+      "familyId": "363",
+      "familyKey": "partager-addition",
+      "tags": [
+        "#addition",
+        "#parapluie",
+        "#partager",
+        "#payer",
+        "#restaurant"
+      ],
+      "id": "363.1"
+    },
+    {
+      "src": "364 (1).webp",
+      "out": "364 (1).webp",
+      "stem": "364 (1)",
+      "familyId": "364",
+      "familyKey": "partager-parapluie",
+      "tags": [
+        "#addition",
+        "#parapluie",
+        "#partager",
+        "#pluie"
+      ],
+      "id": "364"
+    },
+    {
+      "src": "364 (2).webp",
+      "out": "364 (2).webp",
+      "stem": "364 (2)",
+      "familyId": "364",
+      "familyKey": "partager-parapluie",
+      "tags": [
+        "#addition",
+        "#parapluie",
+        "#partager",
+        "#pluie"
+      ],
+      "id": "364.1"
+    },
+    {
+      "src": "365 (1).webp",
+      "out": "365 (1).webp",
+      "stem": "365 (1)",
+      "familyId": "365",
+      "familyKey": "participer-reunion",
+      "tags": [
+        "#participer",
+        "#reunion",
+        "#travail",
+        "#équipe"
+      ],
+      "id": "365"
+    },
+    {
+      "src": "365 (2).webp",
+      "out": "365 (2).webp",
+      "stem": "365 (2)",
+      "familyId": "365",
+      "familyKey": "participer-reunion",
+      "tags": [
+        "#participer",
+        "#reunion",
+        "#travail",
+        "#équipe"
+      ],
+      "id": "365.1"
+    },
+    {
+      "src": "365 (3).webp",
+      "out": "365 (3).webp",
+      "stem": "365 (3)",
+      "familyId": "365",
+      "familyKey": "participer-reunion",
+      "tags": [
+        "#participer",
+        "#reunion",
+        "#travail",
+        "#équipe"
+      ],
+      "id": "365.2"
+    },
+    {
+      "src": "366 (1).webp",
+      "out": "366 (1).webp",
+      "stem": "366 (1)",
+      "familyId": "366",
+      "familyKey": "pas-daccord",
+      "tags": [
+        "#accord",
+        "#daccord",
+        "#oui",
+        "#pas",
+        "#désaccord"
+      ],
+      "id": "366"
+    },
+    {
+      "src": "366 (2).webp",
+      "out": "366 (2).webp",
+      "stem": "366 (2)",
+      "familyId": "366",
+      "familyKey": "pas-daccord",
+      "tags": [
+        "#accord",
+        "#daccord",
+        "#oui",
+        "#pas",
+        "#désaccord"
+      ],
+      "id": "366.1"
+    },
+    {
+      "src": "367 (1).webp",
+      "out": "367 (1).webp",
+      "stem": "367 (1)",
+      "familyId": "367",
+      "familyKey": "passer-appel",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#téléphone"
+      ],
+      "id": "367"
+    },
+    {
+      "src": "367 (2).webp",
+      "out": "367 (2).webp",
+      "stem": "367 (2)",
+      "familyId": "367",
+      "familyKey": "passer-appel",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#téléphone"
+      ],
+      "id": "367.1"
+    },
+    {
+      "src": "367 (3).webp",
+      "out": "367 (3).webp",
+      "stem": "367 (3)",
+      "familyId": "367",
+      "familyKey": "passer-appel",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#téléphone"
+      ],
+      "id": "367.2"
+    },
+    {
+      "src": "368 (1).webp",
+      "out": "368 (1).webp",
+      "stem": "368 (1)",
+      "familyId": "368",
+      "familyKey": "passer-appel-video",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#video",
+        "#jeu-vidéo",
+        "#téléphone",
+        "#écran"
+      ],
+      "id": "368"
+    },
+    {
+      "src": "368 (2).webp",
+      "out": "368 (2).webp",
+      "stem": "368 (2)",
+      "familyId": "368",
+      "familyKey": "passer-appel-video",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#video",
+        "#jeu-vidéo",
+        "#téléphone",
+        "#écran"
+      ],
+      "id": "368.1"
+    },
+    {
+      "src": "368 (3).webp",
+      "out": "368 (3).webp",
+      "stem": "368 (3)",
+      "familyId": "368",
+      "familyKey": "passer-appel-video",
+      "tags": [
+        "#appel",
+        "#passer",
+        "#video",
+        "#jeu-vidéo",
+        "#téléphone",
+        "#écran"
+      ],
+      "id": "368.2"
+    },
+    {
+      "src": "369 (1).webp",
+      "out": "369 (1).webp",
+      "stem": "369 (1)",
+      "familyId": "369",
+      "familyKey": "passer-douane",
+      "tags": [
+        "#douane",
+        "#passer",
+        "#aéroport",
+        "#contrôle"
+      ],
+      "id": "369"
+    },
+    {
+      "src": "369 (2).webp",
+      "out": "369 (2).webp",
+      "stem": "369 (2)",
+      "familyId": "369",
+      "familyKey": "passer-douane",
+      "tags": [
+        "#douane",
+        "#passer",
+        "#aéroport",
+        "#contrôle"
+      ],
+      "id": "369.1"
+    },
+    {
+      "src": "37 (1).png",
+      "out": "37 (1).webp",
+      "stem": "37 (1)",
+      "familyId": "37",
+      "familyKey": "agance-voyage-vacances",
+      "tags": [
+        "#agance",
+        "#repos",
+        "#vacances",
+        "#valise",
+        "#voyage",
+        "#départ"
+      ],
+      "id": "37"
+    },
+    {
+      "src": "37 (2).webp",
+      "out": "37 (2).webp",
+      "stem": "37 (2)",
+      "familyId": "37",
+      "familyKey": "agance-voyage-vacances",
+      "tags": [
+        "#agance",
+        "#repos",
+        "#vacances",
+        "#valise",
+        "#voyage",
+        "#départ"
+      ],
+      "id": "37.1"
+    },
+    {
+      "src": "370 (1).webp",
+      "out": "370 (1).webp",
+      "stem": "370 (1)",
+      "familyId": "370",
+      "familyKey": "passer-entretien",
+      "tags": [
+        "#emploi",
+        "#entretien",
+        "#passer"
+      ],
+      "id": "370"
+    },
+    {
+      "src": "370 (2).webp",
+      "out": "370 (2).webp",
+      "stem": "370 (2)",
+      "familyId": "370",
+      "familyKey": "passer-entretien",
+      "tags": [
+        "#emploi",
+        "#entretien",
+        "#passer"
+      ],
+      "id": "370.1"
+    },
+    {
+      "src": "371 (1).webp",
+      "out": "371 (1).webp",
+      "stem": "371 (1)",
+      "familyId": "371",
+      "familyKey": "payer-par-carte",
+      "tags": [
+        "#argent",
+        "#carte",
+        "#paiement",
+        "#par",
+        "#payer"
+      ],
+      "id": "371"
+    },
+    {
+      "src": "371 (2).webp",
+      "out": "371 (2).webp",
+      "stem": "371 (2)",
+      "familyId": "371",
+      "familyKey": "payer-par-carte",
+      "tags": [
+        "#argent",
+        "#carte",
+        "#paiement",
+        "#par",
+        "#payer"
+      ],
+      "id": "371.1"
+    },
+    {
+      "src": "371 (3).webp",
+      "out": "371 (3).webp",
+      "stem": "371 (3)",
+      "familyId": "371",
+      "familyKey": "payer-par-carte",
+      "tags": [
+        "#argent",
+        "#carte",
+        "#paiement",
+        "#par",
+        "#payer"
+      ],
+      "id": "371.2"
+    },
+    {
+      "src": "371 (4).webp",
+      "out": "371 (4).webp",
+      "stem": "371 (4)",
+      "familyId": "371",
+      "familyKey": "payer-par-carte",
+      "tags": [
+        "#argent",
+        "#carte",
+        "#paiement",
+        "#par",
+        "#payer"
+      ],
+      "id": "371.3"
+    },
+    {
+      "src": "372 (1).webp",
+      "out": "372 (1).webp",
+      "stem": "372 (1)",
+      "familyId": "372",
+      "familyKey": "pecher",
+      "tags": [
+        "#eau",
+        "#pecher",
+        "#poisson"
+      ],
+      "id": "372"
+    },
+    {
+      "src": "372 (2).webp",
+      "out": "372 (2).webp",
+      "stem": "372 (2)",
+      "familyId": "372",
+      "familyKey": "pecher",
+      "tags": [
+        "#eau",
+        "#pecher",
+        "#poisson"
+      ],
+      "id": "372.1"
+    },
+    {
+      "src": "373 (1).webp",
+      "out": "373 (1).webp",
+      "stem": "373 (1)",
+      "familyId": "373",
+      "familyKey": "peindre-tableau",
+      "tags": [
+        "#art",
+        "#peindre",
+        "#tableau",
+        "#musée"
+      ],
+      "id": "373"
+    },
+    {
+      "src": "373 (2).webp",
+      "out": "373 (2).webp",
+      "stem": "373 (2)",
+      "familyId": "373",
+      "familyKey": "peindre-tableau",
+      "tags": [
+        "#art",
+        "#peindre",
+        "#tableau",
+        "#musée"
+      ],
+      "id": "373.1"
+    },
+    {
+      "src": "374 (1).webp",
+      "out": "374 (1).webp",
+      "stem": "374 (1)",
+      "familyId": "374",
+      "familyKey": "perdre-cles",
+      "tags": [
+        "#cles",
+        "#objet",
+        "#perdre"
+      ],
+      "id": "374"
+    },
+    {
+      "src": "374 (2).webp",
+      "out": "374 (2).webp",
+      "stem": "374 (2)",
+      "familyId": "374",
+      "familyKey": "perdre-cles",
+      "tags": [
+        "#cles",
+        "#objet",
+        "#perdre"
+      ],
+      "id": "374.1"
+    },
+    {
+      "src": "374 (3).webp",
+      "out": "374 (3).webp",
+      "stem": "374 (3)",
+      "familyId": "374",
+      "familyKey": "perdre-cles",
+      "tags": [
+        "#cles",
+        "#objet",
+        "#perdre"
+      ],
+      "id": "374.2"
+    },
+    {
+      "src": "375 (1).webp",
+      "out": "375 (1).webp",
+      "stem": "375 (1)",
+      "familyId": "375",
+      "familyKey": "pique-nique-tour-eiffel",
+      "tags": [
+        "#dehors",
+        "#eiffel",
+        "#manger",
+        "#nique",
+        "#pique",
+        "#pique-nique",
+        "#tour"
+      ],
+      "id": "375"
+    }
+  ]
+}

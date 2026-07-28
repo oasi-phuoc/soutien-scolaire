@@ -1,0 +1,554 @@
+{
+  "batch": 25,
+  "start": 1000,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "492 (1).webp",
+      "out": "492 (1).webp",
+      "stem": "492 (1)",
+      "familyId": "492",
+      "familyKey": "spectacle-theatre",
+      "tags": [
+        "#spectacle",
+        "#theatre"
+      ],
+      "id": "492"
+    },
+    {
+      "src": "492 (2).webp",
+      "out": "492 (2).webp",
+      "stem": "492 (2)",
+      "familyId": "492",
+      "familyKey": "spectacle-theatre",
+      "tags": [
+        "#spectacle",
+        "#theatre"
+      ],
+      "id": "492.1"
+    },
+    {
+      "src": "493 (1).webp",
+      "out": "493 (1).webp",
+      "stem": "493 (1)",
+      "familyId": "493",
+      "familyKey": "telephoner",
+      "tags": [
+        "#telephoner"
+      ],
+      "id": "493"
+    },
+    {
+      "src": "493 (2).webp",
+      "out": "493 (2).webp",
+      "stem": "493 (2)",
+      "familyId": "493",
+      "familyKey": "telephoner",
+      "tags": [
+        "#telephoner"
+      ],
+      "id": "493.1"
+    },
+    {
+      "src": "494 (1).webp",
+      "out": "494 (1).webp",
+      "stem": "494 (1)",
+      "familyId": "494",
+      "familyKey": "temps-pluie",
+      "tags": [
+        "#pluie",
+        "#temps",
+        "#météo"
+      ],
+      "id": "494"
+    },
+    {
+      "src": "494 (2).webp",
+      "out": "494 (2).webp",
+      "stem": "494 (2)",
+      "familyId": "494",
+      "familyKey": "temps-pluie",
+      "tags": [
+        "#pluie",
+        "#temps",
+        "#météo"
+      ],
+      "id": "494.1"
+    },
+    {
+      "src": "495 (1).webp",
+      "out": "495 (1).webp",
+      "stem": "495 (1)",
+      "familyId": "495",
+      "familyKey": "temps-pluie-2",
+      "tags": [
+        "#temps",
+        "#pluie"
+      ],
+      "id": "495"
+    },
+    {
+      "src": "496 (1).webp",
+      "out": "496 (1).webp",
+      "stem": "496 (1)",
+      "familyId": "496",
+      "familyKey": "tenir-porte",
+      "tags": [
+        "#porte",
+        "#tenir"
+      ],
+      "id": "496"
+    },
+    {
+      "src": "496 (2).webp",
+      "out": "496 (2).webp",
+      "stem": "496 (2)",
+      "familyId": "496",
+      "familyKey": "tenir-porte",
+      "tags": [
+        "#porte",
+        "#tenir"
+      ],
+      "id": "496.1"
+    },
+    {
+      "src": "497 (1).webp",
+      "out": "497 (1).webp",
+      "stem": "497 (1)",
+      "familyId": "497",
+      "familyKey": "traduire-menu",
+      "tags": [
+        "#carte",
+        "#langue",
+        "#menu",
+        "#restaurant",
+        "#traduire"
+      ],
+      "id": "497"
+    },
+    {
+      "src": "497 (2).webp",
+      "out": "497 (2).webp",
+      "stem": "497 (2)",
+      "familyId": "497",
+      "familyKey": "traduire-menu",
+      "tags": [
+        "#carte",
+        "#langue",
+        "#menu",
+        "#restaurant",
+        "#traduire"
+      ],
+      "id": "497.1"
+    },
+    {
+      "src": "497 (3).webp",
+      "out": "497 (3).webp",
+      "stem": "497 (3)",
+      "familyId": "497",
+      "familyKey": "traduire-menu",
+      "tags": [
+        "#carte",
+        "#langue",
+        "#menu",
+        "#restaurant",
+        "#traduire"
+      ],
+      "id": "497.2"
+    },
+    {
+      "src": "498 (1).webp",
+      "out": "498 (1).webp",
+      "stem": "498 (1)",
+      "familyId": "498",
+      "familyKey": "traire-vache",
+      "tags": [
+        "#animal",
+        "#ferme",
+        "#traire",
+        "#vache"
+      ],
+      "id": "498"
+    },
+    {
+      "src": "498 (2).webp",
+      "out": "498 (2).webp",
+      "stem": "498 (2)",
+      "familyId": "498",
+      "familyKey": "traire-vache",
+      "tags": [
+        "#animal",
+        "#ferme",
+        "#traire",
+        "#vache"
+      ],
+      "id": "498.1"
+    },
+    {
+      "src": "499 (1).png",
+      "out": "499 (1).webp",
+      "stem": "499 (1)",
+      "familyId": "499",
+      "familyKey": "travail-ordinateur-bureau-filles",
+      "tags": [
+        "#bureau",
+        "#femme",
+        "#fille",
+        "#filles",
+        "#ordinateur",
+        "#travail",
+        "#collègue"
+      ],
+      "id": "499"
+    },
+    {
+      "src": "499 (2).webp",
+      "out": "499 (2).webp",
+      "stem": "499 (2)",
+      "familyId": "499",
+      "familyKey": "travail-ordinateur-bureau-filles",
+      "tags": [
+        "#bureau",
+        "#femme",
+        "#fille",
+        "#filles",
+        "#ordinateur",
+        "#travail",
+        "#collègue"
+      ],
+      "id": "499.1"
+    },
+    {
+      "src": "5 (1).webp",
+      "out": "5 (1).webp",
+      "stem": "5 (1)",
+      "familyId": "5",
+      "familyKey": "achat",
+      "tags": [
+        "#achat",
+        "#client",
+        "#commerce",
+        "#magasin"
+      ],
+      "id": "5"
+    },
+    {
+      "src": "5 (2).webp",
+      "out": "5 (2).webp",
+      "stem": "5 (2)",
+      "familyId": "5",
+      "familyKey": "achat",
+      "tags": [
+        "#achat",
+        "#client",
+        "#commerce",
+        "#magasin"
+      ],
+      "id": "5.1"
+    },
+    {
+      "src": "50 (1).webp",
+      "out": "50 (1).webp",
+      "stem": "50 (1)",
+      "familyId": "50",
+      "familyKey": "appeler-plombier",
+      "tags": [
+        "#appeler",
+        "#plombier"
+      ],
+      "id": "50"
+    },
+    {
+      "src": "50 (2).webp",
+      "out": "50 (2).webp",
+      "stem": "50 (2)",
+      "familyId": "50",
+      "familyKey": "appeler-plombier",
+      "tags": [
+        "#appeler",
+        "#plombier"
+      ],
+      "id": "50.1"
+    },
+    {
+      "src": "50 (3).webp",
+      "out": "50 (3).webp",
+      "stem": "50 (3)",
+      "familyId": "50",
+      "familyKey": "appeler-plombier",
+      "tags": [
+        "#appeler",
+        "#plombier"
+      ],
+      "id": "50.2"
+    },
+    {
+      "src": "50 (4).webp",
+      "out": "50 (4).webp",
+      "stem": "50 (4)",
+      "familyId": "50",
+      "familyKey": "appeler-plombier",
+      "tags": [
+        "#appeler",
+        "#plombier"
+      ],
+      "id": "50.3"
+    },
+    {
+      "src": "500 (1).png",
+      "out": "500 (1).webp",
+      "stem": "500 (1)",
+      "familyId": "500",
+      "familyKey": "travail-ordinateur-bureau-homme-femme",
+      "tags": [
+        "#bureau",
+        "#femme",
+        "#fille",
+        "#homme",
+        "#ordinateur",
+        "#travail",
+        "#collègue",
+        "#garçon"
+      ],
+      "id": "500"
+    },
+    {
+      "src": "500 (2).webp",
+      "out": "500 (2).webp",
+      "stem": "500 (2)",
+      "familyId": "500",
+      "familyKey": "travail-ordinateur-bureau-homme-femme",
+      "tags": [
+        "#bureau",
+        "#femme",
+        "#fille",
+        "#homme",
+        "#ordinateur",
+        "#travail",
+        "#collègue",
+        "#garçon"
+      ],
+      "id": "500.1"
+    },
+    {
+      "src": "501 (1).webp",
+      "out": "501 (1).webp",
+      "stem": "501 (1)",
+      "familyId": "501",
+      "familyKey": "travailler-detendu",
+      "tags": [
+        "#detendu",
+        "#travailler"
+      ],
+      "id": "501"
+    },
+    {
+      "src": "501 (2).webp",
+      "out": "501 (2).webp",
+      "stem": "501 (2)",
+      "familyId": "501",
+      "familyKey": "travailler-detendu",
+      "tags": [
+        "#detendu",
+        "#travailler"
+      ],
+      "id": "501.1"
+    },
+    {
+      "src": "502 (1).webp",
+      "out": "502 (1).webp",
+      "stem": "502 (1)",
+      "familyId": "502",
+      "familyKey": "travailler-ensemble-4",
+      "tags": [
+        "#travailler",
+        "#ensemble"
+      ],
+      "id": "502"
+    },
+    {
+      "src": "502 (2).webp",
+      "out": "502 (2).webp",
+      "stem": "502 (2)",
+      "familyId": "502",
+      "familyKey": "travailler-ensemble-4",
+      "tags": [
+        "#travailler",
+        "#ensemble"
+      ],
+      "id": "502.1"
+    },
+    {
+      "src": "503 (1).webp",
+      "out": "503 (1).webp",
+      "stem": "503 (1)",
+      "familyId": "503",
+      "familyKey": "travailler-ordinateur",
+      "tags": [
+        "#bureau",
+        "#ordinateur",
+        "#travail",
+        "#travailler"
+      ],
+      "id": "503"
+    },
+    {
+      "src": "503 (2).webp",
+      "out": "503 (2).webp",
+      "stem": "503 (2)",
+      "familyId": "503",
+      "familyKey": "travailler-ordinateur",
+      "tags": [
+        "#bureau",
+        "#ordinateur",
+        "#travail",
+        "#travailler"
+      ],
+      "id": "503.1"
+    },
+    {
+      "src": "504 (1).webp",
+      "out": "504 (1).webp",
+      "stem": "504 (1)",
+      "familyId": "504",
+      "familyKey": "travailler-seul",
+      "tags": [
+        "#seul",
+        "#travailler"
+      ],
+      "id": "504"
+    },
+    {
+      "src": "504 (2).webp",
+      "out": "504 (2).webp",
+      "stem": "504 (2)",
+      "familyId": "504",
+      "familyKey": "travailler-seul",
+      "tags": [
+        "#seul",
+        "#travailler"
+      ],
+      "id": "504.1"
+    },
+    {
+      "src": "505 (1).webp",
+      "out": "505 (1).webp",
+      "stem": "505 (1)",
+      "familyId": "505",
+      "familyKey": "trier-dechet",
+      "tags": [
+        "#dechet",
+        "#trier",
+        "#déchets",
+        "#écologie"
+      ],
+      "id": "505"
+    },
+    {
+      "src": "505 (2).webp",
+      "out": "505 (2).webp",
+      "stem": "505 (2)",
+      "familyId": "505",
+      "familyKey": "trier-dechet",
+      "tags": [
+        "#dechet",
+        "#trier",
+        "#déchets",
+        "#écologie"
+      ],
+      "id": "505.1"
+    },
+    {
+      "src": "506 (1).webp",
+      "out": "506 (1).webp",
+      "stem": "506 (1)",
+      "familyId": "506",
+      "familyKey": "trier-dechets",
+      "tags": [
+        "#dechets",
+        "#trier",
+        "#écologie"
+      ],
+      "id": "506"
+    },
+    {
+      "src": "506 (2).webp",
+      "out": "506 (2).webp",
+      "stem": "506 (2)",
+      "familyId": "506",
+      "familyKey": "trier-dechets",
+      "tags": [
+        "#dechets",
+        "#trier",
+        "#écologie"
+      ],
+      "id": "506.1"
+    },
+    {
+      "src": "507 (1).webp",
+      "out": "507 (1).webp",
+      "stem": "507 (1)",
+      "familyId": "507",
+      "familyKey": "verifier-meteo",
+      "tags": [
+        "#meteo",
+        "#temps",
+        "#verifier"
+      ],
+      "id": "507"
+    },
+    {
+      "src": "507 (2).webp",
+      "out": "507 (2).webp",
+      "stem": "507 (2)",
+      "familyId": "507",
+      "familyKey": "verifier-meteo",
+      "tags": [
+        "#meteo",
+        "#temps",
+        "#verifier"
+      ],
+      "id": "507.1"
+    },
+    {
+      "src": "508 (1).webp",
+      "out": "508 (1).webp",
+      "stem": "508 (1)",
+      "familyId": "508",
+      "familyKey": "verser-eau-cantine",
+      "tags": [
+        "#boisson",
+        "#cantine",
+        "#eau",
+        "#repas",
+        "#verser",
+        "#école"
+      ],
+      "id": "508"
+    },
+    {
+      "src": "508 (2).webp",
+      "out": "508 (2).webp",
+      "stem": "508 (2)",
+      "familyId": "508",
+      "familyKey": "verser-eau-cantine",
+      "tags": [
+        "#boisson",
+        "#cantine",
+        "#eau",
+        "#repas",
+        "#verser",
+        "#école"
+      ],
+      "id": "508.1"
+    }
+  ]
+}

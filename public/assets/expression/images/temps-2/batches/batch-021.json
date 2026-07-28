@@ -1,0 +1,567 @@
+{
+  "batch": 21,
+  "start": 840,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "437 (2).webp",
+      "out": "437 (2).webp",
+      "stem": "437 (2)",
+      "familyId": "437",
+      "familyKey": "rencontrer-ami",
+      "tags": [
+        "#ami",
+        "#rencontrer",
+        "#retrouvailles"
+      ],
+      "id": "437.1"
+    },
+    {
+      "src": "437 (3).webp",
+      "out": "437 (3).webp",
+      "stem": "437 (3)",
+      "familyId": "437",
+      "familyKey": "rencontrer-ami",
+      "tags": [
+        "#ami",
+        "#rencontrer",
+        "#retrouvailles"
+      ],
+      "id": "437.2"
+    },
+    {
+      "src": "437 (4).webp",
+      "out": "437 (4).webp",
+      "stem": "437 (4)",
+      "familyId": "437",
+      "familyKey": "rencontrer-ami",
+      "tags": [
+        "#ami",
+        "#rencontrer",
+        "#retrouvailles"
+      ],
+      "id": "437.3"
+    },
+    {
+      "src": "438 (1).webp",
+      "out": "438 (1).webp",
+      "stem": "438 (1)",
+      "familyId": "438",
+      "familyKey": "rencontrer-ami-nuit",
+      "tags": [
+        "#ami",
+        "#nuit",
+        "#rencontrer",
+        "#retrouvailles",
+        "#soir"
+      ],
+      "id": "438"
+    },
+    {
+      "src": "438 (2).webp",
+      "out": "438 (2).webp",
+      "stem": "438 (2)",
+      "familyId": "438",
+      "familyKey": "rencontrer-ami-nuit",
+      "tags": [
+        "#ami",
+        "#nuit",
+        "#rencontrer",
+        "#retrouvailles",
+        "#soir"
+      ],
+      "id": "438.1"
+    },
+    {
+      "src": "439 (1).webp",
+      "out": "439 (1).webp",
+      "stem": "439 (1)",
+      "familyId": "439",
+      "familyKey": "rendez-vous",
+      "tags": [
+        "#rendez",
+        "#rendez-vous",
+        "#vous"
+      ],
+      "id": "439"
+    },
+    {
+      "src": "439 (2).webp",
+      "out": "439 (2).webp",
+      "stem": "439 (2)",
+      "familyId": "439",
+      "familyKey": "rendez-vous",
+      "tags": [
+        "#rendez",
+        "#rendez-vous",
+        "#vous"
+      ],
+      "id": "439.1"
+    },
+    {
+      "src": "44 (1).webp",
+      "out": "44 (1).webp",
+      "stem": "44 (1)",
+      "familyId": "44",
+      "familyKey": "aller-poste",
+      "tags": [
+        "#aller",
+        "#courrier",
+        "#poste",
+        "#déplacement"
+      ],
+      "id": "44"
+    },
+    {
+      "src": "44 (2).webp",
+      "out": "44 (2).webp",
+      "stem": "44 (2)",
+      "familyId": "44",
+      "familyKey": "aller-poste",
+      "tags": [
+        "#aller",
+        "#courrier",
+        "#poste",
+        "#déplacement"
+      ],
+      "id": "44.1"
+    },
+    {
+      "src": "44 (3).webp",
+      "out": "44 (3).webp",
+      "stem": "44 (3)",
+      "familyId": "44",
+      "familyKey": "aller-poste",
+      "tags": [
+        "#aller",
+        "#courrier",
+        "#poste",
+        "#déplacement"
+      ],
+      "id": "44.2"
+    },
+    {
+      "src": "440 (1).webp",
+      "out": "440 (1).webp",
+      "stem": "440 (1)",
+      "familyId": "440",
+      "familyKey": "rendre-article",
+      "tags": [
+        "#article",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "440"
+    },
+    {
+      "src": "440 (2).webp",
+      "out": "440 (2).webp",
+      "stem": "440 (2)",
+      "familyId": "440",
+      "familyKey": "rendre-article",
+      "tags": [
+        "#article",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "440.1"
+    },
+    {
+      "src": "440 (3).webp",
+      "out": "440 (3).webp",
+      "stem": "440 (3)",
+      "familyId": "440",
+      "familyKey": "rendre-article",
+      "tags": [
+        "#article",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "440.2"
+    },
+    {
+      "src": "440 (4).webp",
+      "out": "440 (4).webp",
+      "stem": "440 (4)",
+      "familyId": "440",
+      "familyKey": "rendre-article",
+      "tags": [
+        "#article",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "440.3"
+    },
+    {
+      "src": "441 (1).webp",
+      "out": "441 (1).webp",
+      "stem": "441 (1)",
+      "familyId": "441",
+      "familyKey": "rendre-devoir",
+      "tags": [
+        "#article",
+        "#devoir",
+        "#magasin",
+        "#rendre",
+        "#école"
+      ],
+      "id": "441"
+    },
+    {
+      "src": "441 (2).webp",
+      "out": "441 (2).webp",
+      "stem": "441 (2)",
+      "familyId": "441",
+      "familyKey": "rendre-devoir",
+      "tags": [
+        "#article",
+        "#devoir",
+        "#magasin",
+        "#rendre",
+        "#école"
+      ],
+      "id": "441.1"
+    },
+    {
+      "src": "441 (3).webp",
+      "out": "441 (3).webp",
+      "stem": "441 (3)",
+      "familyId": "441",
+      "familyKey": "rendre-devoir",
+      "tags": [
+        "#article",
+        "#devoir",
+        "#magasin",
+        "#rendre",
+        "#école"
+      ],
+      "id": "441.2"
+    },
+    {
+      "src": "441 (4).webp",
+      "out": "441 (4).webp",
+      "stem": "441 (4)",
+      "familyId": "441",
+      "familyKey": "rendre-devoir",
+      "tags": [
+        "#article",
+        "#devoir",
+        "#magasin",
+        "#rendre",
+        "#école"
+      ],
+      "id": "441.3"
+    },
+    {
+      "src": "442 (1).webp",
+      "out": "442 (1).webp",
+      "stem": "442 (1)",
+      "familyId": "442",
+      "familyKey": "rendre-livre",
+      "tags": [
+        "#article",
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "442"
+    },
+    {
+      "src": "442 (2).webp",
+      "out": "442 (2).webp",
+      "stem": "442 (2)",
+      "familyId": "442",
+      "familyKey": "rendre-livre",
+      "tags": [
+        "#article",
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#magasin",
+        "#rendre"
+      ],
+      "id": "442.1"
+    },
+    {
+      "src": "443 (1).webp",
+      "out": "443 (1).webp",
+      "stem": "443 (1)",
+      "familyId": "443",
+      "familyKey": "renouveler-passeport",
+      "tags": [
+        "#passeport",
+        "#renouveler",
+        "#voyage",
+        "#identité"
+      ],
+      "id": "443"
+    },
+    {
+      "src": "443 (2).webp",
+      "out": "443 (2).webp",
+      "stem": "443 (2)",
+      "familyId": "443",
+      "familyKey": "renouveler-passeport",
+      "tags": [
+        "#passeport",
+        "#renouveler",
+        "#voyage",
+        "#identité"
+      ],
+      "id": "443.1"
+    },
+    {
+      "src": "443 (3).webp",
+      "out": "443 (3).webp",
+      "stem": "443 (3)",
+      "familyId": "443",
+      "familyKey": "renouveler-passeport",
+      "tags": [
+        "#passeport",
+        "#renouveler",
+        "#voyage",
+        "#identité"
+      ],
+      "id": "443.2"
+    },
+    {
+      "src": "443 (4).webp",
+      "out": "443 (4).webp",
+      "stem": "443 (4)",
+      "familyId": "443",
+      "familyKey": "renouveler-passeport",
+      "tags": [
+        "#passeport",
+        "#renouveler",
+        "#voyage",
+        "#identité"
+      ],
+      "id": "443.3"
+    },
+    {
+      "src": "444 (1).webp",
+      "out": "444 (1).webp",
+      "stem": "444 (1)",
+      "familyId": "444",
+      "familyKey": "rentrer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#rentrer"
+      ],
+      "id": "444"
+    },
+    {
+      "src": "444 (2).webp",
+      "out": "444 (2).webp",
+      "stem": "444 (2)",
+      "familyId": "444",
+      "familyKey": "rentrer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#rentrer"
+      ],
+      "id": "444.1"
+    },
+    {
+      "src": "444 (3).webp",
+      "out": "444 (3).webp",
+      "stem": "444 (3)",
+      "familyId": "444",
+      "familyKey": "rentrer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#rentrer"
+      ],
+      "id": "444.2"
+    },
+    {
+      "src": "444 (4).webp",
+      "out": "444 (4).webp",
+      "stem": "444 (4)",
+      "familyId": "444",
+      "familyKey": "rentrer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#rentrer"
+      ],
+      "id": "444.3"
+    },
+    {
+      "src": "445 (1).webp",
+      "out": "445 (1).webp",
+      "stem": "445 (1)",
+      "familyId": "445",
+      "familyKey": "rentrer-mouillee",
+      "tags": [
+        "#maison",
+        "#mouillee",
+        "#rentrer"
+      ],
+      "id": "445"
+    },
+    {
+      "src": "445 (2).webp",
+      "out": "445 (2).webp",
+      "stem": "445 (2)",
+      "familyId": "445",
+      "familyKey": "rentrer-mouillee",
+      "tags": [
+        "#maison",
+        "#mouillee",
+        "#rentrer"
+      ],
+      "id": "445.1"
+    },
+    {
+      "src": "446 (1).webp",
+      "out": "446 (1).webp",
+      "stem": "446 (1)",
+      "familyId": "446",
+      "familyKey": "reparation-velo",
+      "tags": [
+        "#dehors",
+        "#reparation",
+        "#sport",
+        "#velo"
+      ],
+      "id": "446"
+    },
+    {
+      "src": "446 (2).webp",
+      "out": "446 (2).webp",
+      "stem": "446 (2)",
+      "familyId": "446",
+      "familyKey": "reparation-velo",
+      "tags": [
+        "#dehors",
+        "#reparation",
+        "#sport",
+        "#velo"
+      ],
+      "id": "446.1"
+    },
+    {
+      "src": "447 (1).webp",
+      "out": "447 (1).webp",
+      "stem": "447 (1)",
+      "familyId": "447",
+      "familyKey": "repondre-email",
+      "tags": [
+        "#email",
+        "#repondre"
+      ],
+      "id": "447"
+    },
+    {
+      "src": "447 (2).webp",
+      "out": "447 (2).webp",
+      "stem": "447 (2)",
+      "familyId": "447",
+      "familyKey": "repondre-email",
+      "tags": [
+        "#email",
+        "#repondre"
+      ],
+      "id": "447.1"
+    },
+    {
+      "src": "447 (3).webp",
+      "out": "447 (3).webp",
+      "stem": "447 (3)",
+      "familyId": "447",
+      "familyKey": "repondre-email",
+      "tags": [
+        "#email",
+        "#repondre"
+      ],
+      "id": "447.2"
+    },
+    {
+      "src": "447 (4).webp",
+      "out": "447 (4).webp",
+      "stem": "447 (4)",
+      "familyId": "447",
+      "familyKey": "repondre-email",
+      "tags": [
+        "#email",
+        "#repondre"
+      ],
+      "id": "447.3"
+    },
+    {
+      "src": "448 (1).webp",
+      "out": "448 (1).webp",
+      "stem": "448 (1)",
+      "familyId": "448",
+      "familyKey": "repondre-telephone",
+      "tags": [
+        "#repondre",
+        "#telephone"
+      ],
+      "id": "448"
+    },
+    {
+      "src": "449 (1).webp",
+      "out": "449 (1).webp",
+      "stem": "449 (1)",
+      "familyId": "449",
+      "familyKey": "repondre-telephone-content",
+      "tags": [
+        "#appeler",
+        "#content",
+        "#joie",
+        "#mobile",
+        "#repondre",
+        "#sourire",
+        "#telephone"
+      ],
+      "id": "449"
+    },
+    {
+      "src": "449 (2).webp",
+      "out": "449 (2).webp",
+      "stem": "449 (2)",
+      "familyId": "449",
+      "familyKey": "repondre-telephone-content",
+      "tags": [
+        "#appeler",
+        "#content",
+        "#joie",
+        "#mobile",
+        "#repondre",
+        "#sourire",
+        "#telephone"
+      ],
+      "id": "449.1"
+    },
+    {
+      "src": "45 (1).webp",
+      "out": "45 (1).webp",
+      "stem": "45 (1)",
+      "familyId": "45",
+      "familyKey": "aller-travail",
+      "tags": [
+        "#aller",
+        "#bureau",
+        "#travail",
+        "#collègue",
+        "#déplacement"
+      ],
+      "id": "45"
+    }
+  ]
+}

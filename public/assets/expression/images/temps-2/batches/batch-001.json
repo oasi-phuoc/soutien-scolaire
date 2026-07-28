@@ -1,0 +1,570 @@
+{
+  "batch": 1,
+  "start": 40,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "113 (2).webp",
+      "out": "113 (2).webp",
+      "stem": "113 (2)",
+      "familyId": "113",
+      "familyKey": "choisir-menu-restaurant",
+      "tags": [
+        "#carte",
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "113.1"
+    },
+    {
+      "src": "114 (1).webp",
+      "out": "114 (1).webp",
+      "stem": "114 (1)",
+      "familyId": "114",
+      "familyKey": "choisir-restaurant",
+      "tags": [
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "114"
+    },
+    {
+      "src": "114 (2).webp",
+      "out": "114 (2).webp",
+      "stem": "114 (2)",
+      "familyId": "114",
+      "familyKey": "choisir-restaurant",
+      "tags": [
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "114.1"
+    },
+    {
+      "src": "114 (3).webp",
+      "out": "114 (3).webp",
+      "stem": "114 (3)",
+      "familyId": "114",
+      "familyKey": "choisir-restaurant",
+      "tags": [
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "114.2"
+    },
+    {
+      "src": "114 (4).webp",
+      "out": "114 (4).webp",
+      "stem": "114 (4)",
+      "familyId": "114",
+      "familyKey": "choisir-restaurant",
+      "tags": [
+        "#choisir",
+        "#manger",
+        "#menu",
+        "#restaurant"
+      ],
+      "id": "114.3"
+    },
+    {
+      "src": "115 (1).webp",
+      "out": "115 (1).webp",
+      "stem": "115 (1)",
+      "familyId": "115",
+      "familyKey": "chuchotement-couloir",
+      "tags": [
+        "#chuchotement",
+        "#chuchoter",
+        "#couloir",
+        "#secret",
+        "#école"
+      ],
+      "id": "115"
+    },
+    {
+      "src": "115 (2).webp",
+      "out": "115 (2).webp",
+      "stem": "115 (2)",
+      "familyId": "115",
+      "familyKey": "chuchotement-couloir",
+      "tags": [
+        "#chuchotement",
+        "#chuchoter",
+        "#couloir",
+        "#secret",
+        "#école"
+      ],
+      "id": "115.1"
+    },
+    {
+      "src": "116 (1).webp",
+      "out": "116 (1).webp",
+      "stem": "116 (1)",
+      "familyId": "116",
+      "familyKey": "coach-piste-athletisme",
+      "tags": [
+        "#athletisme",
+        "#coach",
+        "#piste",
+        "#sport"
+      ],
+      "id": "116"
+    },
+    {
+      "src": "116 (2).webp",
+      "out": "116 (2).webp",
+      "stem": "116 (2)",
+      "familyId": "116",
+      "familyKey": "coach-piste-athletisme",
+      "tags": [
+        "#athletisme",
+        "#coach",
+        "#piste",
+        "#sport"
+      ],
+      "id": "116.1"
+    },
+    {
+      "src": "117 (1).webp",
+      "out": "117 (1).webp",
+      "stem": "117 (1)",
+      "familyId": "117",
+      "familyKey": "collegue-travail-ordinateur",
+      "tags": [
+        "#bureau",
+        "#collegue",
+        "#ordinateur",
+        "#travail"
+      ],
+      "id": "117"
+    },
+    {
+      "src": "117 (2).webp",
+      "out": "117 (2).webp",
+      "stem": "117 (2)",
+      "familyId": "117",
+      "familyKey": "collegue-travail-ordinateur",
+      "tags": [
+        "#bureau",
+        "#collegue",
+        "#ordinateur",
+        "#travail"
+      ],
+      "id": "117.1"
+    },
+    {
+      "src": "118 (1).webp",
+      "out": "118 (1).webp",
+      "stem": "118 (1)",
+      "familyId": "118",
+      "familyKey": "commander",
+      "tags": [
+        "#commander",
+        "#restaurant",
+        "#serveur"
+      ],
+      "id": "118"
+    },
+    {
+      "src": "118 (2).webp",
+      "out": "118 (2).webp",
+      "stem": "118 (2)",
+      "familyId": "118",
+      "familyKey": "commander",
+      "tags": [
+        "#commander",
+        "#restaurant",
+        "#serveur"
+      ],
+      "id": "118.1"
+    },
+    {
+      "src": "118 (3).webp",
+      "out": "118 (3).webp",
+      "stem": "118 (3)",
+      "familyId": "118",
+      "familyKey": "commander",
+      "tags": [
+        "#commander",
+        "#restaurant",
+        "#serveur"
+      ],
+      "id": "118.2"
+    },
+    {
+      "src": "118 (4).webp",
+      "out": "118 (4).webp",
+      "stem": "118 (4)",
+      "familyId": "118",
+      "familyKey": "commander",
+      "tags": [
+        "#commander",
+        "#restaurant",
+        "#serveur"
+      ],
+      "id": "118.3"
+    },
+    {
+      "src": "119 (1).webp",
+      "out": "119 (1).webp",
+      "stem": "119 (1)",
+      "familyId": "119",
+      "familyKey": "commander-a-emporter",
+      "tags": [
+        "#commander",
+        "#emporter",
+        "#restaurant",
+        "#serveur",
+        "#a"
+      ],
+      "id": "119"
+    },
+    {
+      "src": "119 (2).webp",
+      "out": "119 (2).webp",
+      "stem": "119 (2)",
+      "familyId": "119",
+      "familyKey": "commander-a-emporter",
+      "tags": [
+        "#commander",
+        "#emporter",
+        "#restaurant",
+        "#serveur",
+        "#a"
+      ],
+      "id": "119.1"
+    },
+    {
+      "src": "119 (3).webp",
+      "out": "119 (3).webp",
+      "stem": "119 (3)",
+      "familyId": "119",
+      "familyKey": "commander-a-emporter",
+      "tags": [
+        "#commander",
+        "#emporter",
+        "#restaurant",
+        "#serveur",
+        "#a"
+      ],
+      "id": "119.2"
+    },
+    {
+      "src": "12 (1).webp",
+      "out": "12 (1).webp",
+      "stem": "12 (1)",
+      "familyId": "12",
+      "familyKey": "acheter-billet-train",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#client",
+        "#gare",
+        "#guichet",
+        "#magasin",
+        "#ticket",
+        "#train",
+        "#voyage"
+      ],
+      "id": "12"
+    },
+    {
+      "src": "12 (2).webp",
+      "out": "12 (2).webp",
+      "stem": "12 (2)",
+      "familyId": "12",
+      "familyKey": "acheter-billet-train",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#billet",
+        "#client",
+        "#gare",
+        "#guichet",
+        "#magasin",
+        "#ticket",
+        "#train",
+        "#voyage"
+      ],
+      "id": "12.1"
+    },
+    {
+      "src": "120 (1).webp",
+      "out": "120 (1).webp",
+      "stem": "120 (1)",
+      "familyId": "120",
+      "familyKey": "comparer-produits",
+      "tags": [
+        "#comparer",
+        "#magasin",
+        "#produits"
+      ],
+      "id": "120"
+    },
+    {
+      "src": "120 (2).webp",
+      "out": "120 (2).webp",
+      "stem": "120 (2)",
+      "familyId": "120",
+      "familyKey": "comparer-produits",
+      "tags": [
+        "#comparer",
+        "#magasin",
+        "#produits"
+      ],
+      "id": "120.1"
+    },
+    {
+      "src": "120 (3).webp",
+      "out": "120 (3).webp",
+      "stem": "120 (3)",
+      "familyId": "120",
+      "familyKey": "comparer-produits",
+      "tags": [
+        "#comparer",
+        "#magasin",
+        "#produits"
+      ],
+      "id": "120.2"
+    },
+    {
+      "src": "120 (4).webp",
+      "out": "120 (4).webp",
+      "stem": "120 (4)",
+      "familyId": "120",
+      "familyKey": "comparer-produits",
+      "tags": [
+        "#comparer",
+        "#magasin",
+        "#produits"
+      ],
+      "id": "120.3"
+    },
+    {
+      "src": "121 (1).webp",
+      "out": "121 (1).webp",
+      "stem": "121 (1)",
+      "familyId": "121",
+      "familyKey": "complimenter",
+      "tags": [
+        "#compliment",
+        "#complimenter",
+        "#gentillesse"
+      ],
+      "id": "121"
+    },
+    {
+      "src": "121 (2).webp",
+      "out": "121 (2).webp",
+      "stem": "121 (2)",
+      "familyId": "121",
+      "familyKey": "complimenter",
+      "tags": [
+        "#compliment",
+        "#complimenter",
+        "#gentillesse"
+      ],
+      "id": "121.1"
+    },
+    {
+      "src": "122 (1).webp",
+      "out": "122 (1).webp",
+      "stem": "122 (1)",
+      "familyId": "122",
+      "familyKey": "composter-dechet",
+      "tags": [
+        "#composter",
+        "#dechet",
+        "#déchets",
+        "#écologie"
+      ],
+      "id": "122"
+    },
+    {
+      "src": "122 (2).webp",
+      "out": "122 (2).webp",
+      "stem": "122 (2)",
+      "familyId": "122",
+      "familyKey": "composter-dechet",
+      "tags": [
+        "#composter",
+        "#dechet",
+        "#déchets",
+        "#écologie"
+      ],
+      "id": "122.1"
+    },
+    {
+      "src": "123 (1).webp",
+      "out": "123 (1).webp",
+      "stem": "123 (1)",
+      "familyId": "123",
+      "familyKey": "composter-dechet-2",
+      "tags": [
+        "#composter",
+        "#dechet"
+      ],
+      "id": "123"
+    },
+    {
+      "src": "123 (2).webp",
+      "out": "123 (2).webp",
+      "stem": "123 (2)",
+      "familyId": "123",
+      "familyKey": "composter-dechet-2",
+      "tags": [
+        "#composter",
+        "#dechet"
+      ],
+      "id": "123.1"
+    },
+    {
+      "src": "124 (1).webp",
+      "out": "124 (1).webp",
+      "stem": "124 (1)",
+      "familyId": "124",
+      "familyKey": "confirmer-rdv",
+      "tags": [
+        "#agenda",
+        "#confirmer",
+        "#rdv",
+        "#rendez-vous"
+      ],
+      "id": "124"
+    },
+    {
+      "src": "124 (2).webp",
+      "out": "124 (2).webp",
+      "stem": "124 (2)",
+      "familyId": "124",
+      "familyKey": "confirmer-rdv",
+      "tags": [
+        "#agenda",
+        "#confirmer",
+        "#rdv",
+        "#rendez-vous"
+      ],
+      "id": "124.1"
+    },
+    {
+      "src": "124 (3).webp",
+      "out": "124 (3).webp",
+      "stem": "124 (3)",
+      "familyId": "124",
+      "familyKey": "confirmer-rdv",
+      "tags": [
+        "#agenda",
+        "#confirmer",
+        "#rdv",
+        "#rendez-vous"
+      ],
+      "id": "124.2"
+    },
+    {
+      "src": "125 (1).webp",
+      "out": "125 (1).webp",
+      "stem": "125 (1)",
+      "familyId": "125",
+      "familyKey": "conseiller",
+      "tags": [
+        "#aide",
+        "#conseiller"
+      ],
+      "id": "125"
+    },
+    {
+      "src": "125 (2).webp",
+      "out": "125 (2).webp",
+      "stem": "125 (2)",
+      "familyId": "125",
+      "familyKey": "conseiller",
+      "tags": [
+        "#aide",
+        "#conseiller"
+      ],
+      "id": "125.1"
+    },
+    {
+      "src": "125 (3).webp",
+      "out": "125 (3).webp",
+      "stem": "125 (3)",
+      "familyId": "125",
+      "familyKey": "conseiller",
+      "tags": [
+        "#aide",
+        "#conseiller"
+      ],
+      "id": "125.2"
+    },
+    {
+      "src": "125 (4).webp",
+      "out": "125 (4).webp",
+      "stem": "125 (4)",
+      "familyId": "125",
+      "familyKey": "conseiller",
+      "tags": [
+        "#aide",
+        "#conseiller"
+      ],
+      "id": "125.3"
+    },
+    {
+      "src": "126 (1).webp",
+      "out": "126 (1).webp",
+      "stem": "126 (1)",
+      "familyId": "126",
+      "familyKey": "consignes-equipe-sport",
+      "tags": [
+        "#consignes",
+        "#equipe",
+        "#mouvement",
+        "#sport",
+        "#activité"
+      ],
+      "id": "126"
+    },
+    {
+      "src": "127 (1).webp",
+      "out": "127 (1).webp",
+      "stem": "127 (1)",
+      "familyId": "127",
+      "familyKey": "consoler",
+      "tags": [
+        "#consoler",
+        "#soutien",
+        "#émotion"
+      ],
+      "id": "127"
+    },
+    {
+      "src": "127 (2).webp",
+      "out": "127 (2).webp",
+      "stem": "127 (2)",
+      "familyId": "127",
+      "familyKey": "consoler",
+      "tags": [
+        "#consoler",
+        "#soutien",
+        "#émotion"
+      ],
+      "id": "127.1"
+    }
+  ]
+}

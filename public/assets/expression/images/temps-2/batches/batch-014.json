@@ -1,0 +1,600 @@
+{
+  "batch": 14,
+  "start": 560,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "329 (2).webp",
+      "out": "329 (2).webp",
+      "stem": "329 (2)",
+      "familyId": "329",
+      "familyKey": "marcher-pluie",
+      "tags": [
+        "#marcher",
+        "#pluie",
+        "#météo"
+      ],
+      "id": "329.1"
+    },
+    {
+      "src": "33 (1).webp",
+      "out": "33 (1).webp",
+      "stem": "33 (1)",
+      "familyId": "33",
+      "familyKey": "acheter-souvenir",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#cadeau",
+        "#client",
+        "#magasin",
+        "#souvenir",
+        "#voyage"
+      ],
+      "id": "33"
+    },
+    {
+      "src": "33 (2).webp",
+      "out": "33 (2).webp",
+      "stem": "33 (2)",
+      "familyId": "33",
+      "familyKey": "acheter-souvenir",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#cadeau",
+        "#client",
+        "#magasin",
+        "#souvenir",
+        "#voyage"
+      ],
+      "id": "33.1"
+    },
+    {
+      "src": "33 (3).webp",
+      "out": "33 (3).webp",
+      "stem": "33 (3)",
+      "familyId": "33",
+      "familyKey": "acheter-souvenir",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#cadeau",
+        "#client",
+        "#magasin",
+        "#souvenir",
+        "#voyage"
+      ],
+      "id": "33.2"
+    },
+    {
+      "src": "330 (1).webp",
+      "out": "330 (1).webp",
+      "stem": "330 (1)",
+      "familyId": "330",
+      "familyKey": "marcher-seul",
+      "tags": [
+        "#marcher",
+        "#seul"
+      ],
+      "id": "330"
+    },
+    {
+      "src": "330 (2).webp",
+      "out": "330 (2).webp",
+      "stem": "330 (2)",
+      "familyId": "330",
+      "familyKey": "marcher-seul",
+      "tags": [
+        "#marcher",
+        "#seul"
+      ],
+      "id": "330.1"
+    },
+    {
+      "src": "331 (1).webp",
+      "out": "331 (1).webp",
+      "stem": "331 (1)",
+      "familyId": "331",
+      "familyKey": "marcher-soir-ensemble",
+      "tags": [
+        "#amis",
+        "#ensemble",
+        "#marcher",
+        "#soir"
+      ],
+      "id": "331"
+    },
+    {
+      "src": "331 (2).webp",
+      "out": "331 (2).webp",
+      "stem": "331 (2)",
+      "familyId": "331",
+      "familyKey": "marcher-soir-ensemble",
+      "tags": [
+        "#amis",
+        "#ensemble",
+        "#marcher",
+        "#soir"
+      ],
+      "id": "331.1"
+    },
+    {
+      "src": "332 (1).webp",
+      "out": "332 (1).webp",
+      "stem": "332 (1)",
+      "familyId": "332",
+      "familyKey": "mere-jeu-video",
+      "tags": [
+        "#famille",
+        "#jeu",
+        "#loisirs",
+        "#mere",
+        "#video",
+        "#jeu-vidéo",
+        "#écran"
+      ],
+      "id": "332"
+    },
+    {
+      "src": "333 (1).webp",
+      "out": "333 (1).webp",
+      "stem": "333 (1)",
+      "familyId": "333",
+      "familyKey": "message-phishing",
+      "tags": [
+        "#internet",
+        "#message",
+        "#phishing",
+        "#sécurité"
+      ],
+      "id": "333"
+    },
+    {
+      "src": "333 (2).webp",
+      "out": "333 (2).webp",
+      "stem": "333 (2)",
+      "familyId": "333",
+      "familyKey": "message-phishing",
+      "tags": [
+        "#internet",
+        "#message",
+        "#phishing",
+        "#sécurité"
+      ],
+      "id": "333.1"
+    },
+    {
+      "src": "334 (1).webp",
+      "out": "334 (1).webp",
+      "stem": "334 (1)",
+      "familyId": "334",
+      "familyKey": "montrer-livre",
+      "tags": [
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#montrer"
+      ],
+      "id": "334"
+    },
+    {
+      "src": "334 (2).webp",
+      "out": "334 (2).webp",
+      "stem": "334 (2)",
+      "familyId": "334",
+      "familyKey": "montrer-livre",
+      "tags": [
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#montrer"
+      ],
+      "id": "334.1"
+    },
+    {
+      "src": "335 (1).webp",
+      "out": "335 (1).webp",
+      "stem": "335 (1)",
+      "familyId": "335",
+      "familyKey": "montrer-piece-identite",
+      "tags": [
+        "#carte",
+        "#identite",
+        "#montrer",
+        "#papiers",
+        "#piece"
+      ],
+      "id": "335"
+    },
+    {
+      "src": "335 (2).webp",
+      "out": "335 (2).webp",
+      "stem": "335 (2)",
+      "familyId": "335",
+      "familyKey": "montrer-piece-identite",
+      "tags": [
+        "#carte",
+        "#identite",
+        "#montrer",
+        "#papiers",
+        "#piece"
+      ],
+      "id": "335.1"
+    },
+    {
+      "src": "336 (1).webp",
+      "out": "336 (1).webp",
+      "stem": "336 (1)",
+      "familyId": "336",
+      "familyKey": "musee-jeux-olympiques",
+      "tags": [
+        "#art",
+        "#exposition",
+        "#jeux",
+        "#musee",
+        "#olympiques"
+      ],
+      "id": "336"
+    },
+    {
+      "src": "336 (2).webp",
+      "out": "336 (2).webp",
+      "stem": "336 (2)",
+      "familyId": "336",
+      "familyKey": "musee-jeux-olympiques",
+      "tags": [
+        "#art",
+        "#exposition",
+        "#jeux",
+        "#musee",
+        "#olympiques"
+      ],
+      "id": "336.1"
+    },
+    {
+      "src": "337 (1).webp",
+      "out": "337 (1).webp",
+      "stem": "337 (1)",
+      "familyId": "337",
+      "familyKey": "nager-natation",
+      "tags": [
+        "#eau",
+        "#nager",
+        "#natation",
+        "#piscine",
+        "#sport"
+      ],
+      "id": "337"
+    },
+    {
+      "src": "337 (2).webp",
+      "out": "337 (2).webp",
+      "stem": "337 (2)",
+      "familyId": "337",
+      "familyKey": "nager-natation",
+      "tags": [
+        "#eau",
+        "#nager",
+        "#natation",
+        "#piscine",
+        "#sport"
+      ],
+      "id": "337.1"
+    },
+    {
+      "src": "338 (1).webp",
+      "out": "338 (1).webp",
+      "stem": "338 (1)",
+      "familyId": "338",
+      "familyKey": "nager-piscine",
+      "tags": [
+        "#eau",
+        "#nager",
+        "#piscine",
+        "#sport"
+      ],
+      "id": "338"
+    },
+    {
+      "src": "338 (2).webp",
+      "out": "338 (2).webp",
+      "stem": "338 (2)",
+      "familyId": "338",
+      "familyKey": "nager-piscine",
+      "tags": [
+        "#eau",
+        "#nager",
+        "#piscine",
+        "#sport"
+      ],
+      "id": "338.1"
+    },
+    {
+      "src": "338 (3).webp",
+      "out": "338 (3).webp",
+      "stem": "338 (3)",
+      "familyId": "338",
+      "familyKey": "nager-piscine",
+      "tags": [
+        "#eau",
+        "#nager",
+        "#piscine",
+        "#sport"
+      ],
+      "id": "338.2"
+    },
+    {
+      "src": "339 (1).webp",
+      "out": "339 (1).webp",
+      "stem": "339 (1)",
+      "familyId": "339",
+      "familyKey": "negocier-prix",
+      "tags": [
+        "#argent",
+        "#magasin",
+        "#negocier",
+        "#prix",
+        "#marché"
+      ],
+      "id": "339"
+    },
+    {
+      "src": "339 (2).webp",
+      "out": "339 (2).webp",
+      "stem": "339 (2)",
+      "familyId": "339",
+      "familyKey": "negocier-prix",
+      "tags": [
+        "#argent",
+        "#magasin",
+        "#negocier",
+        "#prix",
+        "#marché"
+      ],
+      "id": "339.1"
+    },
+    {
+      "src": "339 (3).webp",
+      "out": "339 (3).webp",
+      "stem": "339 (3)",
+      "familyId": "339",
+      "familyKey": "negocier-prix",
+      "tags": [
+        "#argent",
+        "#magasin",
+        "#negocier",
+        "#prix",
+        "#marché"
+      ],
+      "id": "339.2"
+    },
+    {
+      "src": "339 (4).webp",
+      "out": "339 (4).webp",
+      "stem": "339 (4)",
+      "familyId": "339",
+      "familyKey": "negocier-prix",
+      "tags": [
+        "#argent",
+        "#magasin",
+        "#negocier",
+        "#prix",
+        "#marché"
+      ],
+      "id": "339.3"
+    },
+    {
+      "src": "34 (1).webp",
+      "out": "34 (1).webp",
+      "stem": "34 (1)",
+      "familyId": "34",
+      "familyKey": "acheter-titre-transport",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#bus",
+        "#client",
+        "#magasin",
+        "#ticket",
+        "#titre",
+        "#transport"
+      ],
+      "id": "34"
+    },
+    {
+      "src": "34 (2).webp",
+      "out": "34 (2).webp",
+      "stem": "34 (2)",
+      "familyId": "34",
+      "familyKey": "acheter-titre-transport",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#bus",
+        "#client",
+        "#magasin",
+        "#ticket",
+        "#titre",
+        "#transport"
+      ],
+      "id": "34.1"
+    },
+    {
+      "src": "34 (3).webp",
+      "out": "34 (3).webp",
+      "stem": "34 (3)",
+      "familyId": "34",
+      "familyKey": "acheter-titre-transport",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#bus",
+        "#client",
+        "#magasin",
+        "#ticket",
+        "#titre",
+        "#transport"
+      ],
+      "id": "34.2"
+    },
+    {
+      "src": "340 (1).webp",
+      "out": "340 (1).webp",
+      "stem": "340 (1)",
+      "familyId": "340",
+      "familyKey": "neige",
+      "tags": [
+        "#froid",
+        "#hiver",
+        "#neige"
+      ],
+      "id": "340"
+    },
+    {
+      "src": "340 (2).webp",
+      "out": "340 (2).webp",
+      "stem": "340 (2)",
+      "familyId": "340",
+      "familyKey": "neige",
+      "tags": [
+        "#froid",
+        "#hiver",
+        "#neige"
+      ],
+      "id": "340.1"
+    },
+    {
+      "src": "341 (1).webp",
+      "out": "341 (1).webp",
+      "stem": "341 (1)",
+      "familyId": "341",
+      "familyKey": "nettoyer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#nettoyer",
+        "#ménage"
+      ],
+      "id": "341"
+    },
+    {
+      "src": "341 (2).webp",
+      "out": "341 (2).webp",
+      "stem": "341 (2)",
+      "familyId": "341",
+      "familyKey": "nettoyer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#nettoyer",
+        "#ménage"
+      ],
+      "id": "341.1"
+    },
+    {
+      "src": "341 (3).webp",
+      "out": "341 (3).webp",
+      "stem": "341 (3)",
+      "familyId": "341",
+      "familyKey": "nettoyer-maison",
+      "tags": [
+        "#chez-soi",
+        "#maison",
+        "#nettoyer",
+        "#ménage"
+      ],
+      "id": "341.2"
+    },
+    {
+      "src": "342 (1).webp",
+      "out": "342 (1).webp",
+      "stem": "342 (1)",
+      "familyId": "342",
+      "familyKey": "nourrir-elephant",
+      "tags": [
+        "#animal",
+        "#elephant",
+        "#nourrir",
+        "#zoo"
+      ],
+      "id": "342"
+    },
+    {
+      "src": "342 (2).webp",
+      "out": "342 (2).webp",
+      "stem": "342 (2)",
+      "familyId": "342",
+      "familyKey": "nourrir-elephant",
+      "tags": [
+        "#animal",
+        "#elephant",
+        "#nourrir",
+        "#zoo"
+      ],
+      "id": "342.1"
+    },
+    {
+      "src": "343 (1).webp",
+      "out": "343 (1).webp",
+      "stem": "343 (1)",
+      "familyId": "343",
+      "familyKey": "offrir-argent",
+      "tags": [
+        "#argent",
+        "#cadeau",
+        "#offrir",
+        "#payer",
+        "#économie"
+      ],
+      "id": "343"
+    },
+    {
+      "src": "344 (1).webp",
+      "out": "344 (1).webp",
+      "stem": "344 (1)",
+      "familyId": "344",
+      "familyKey": "offrir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "344"
+    },
+    {
+      "src": "344 (2).webp",
+      "out": "344 (2).webp",
+      "stem": "344 (2)",
+      "familyId": "344",
+      "familyKey": "offrir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "344.1"
+    },
+    {
+      "src": "344 (3).webp",
+      "out": "344 (3).webp",
+      "stem": "344 (3)",
+      "familyId": "344",
+      "familyKey": "offrir-cadeau",
+      "tags": [
+        "#cadeau",
+        "#offrir",
+        "#fête"
+      ],
+      "id": "344.2"
+    }
+  ]
+}

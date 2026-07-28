@@ -1,0 +1,664 @@
+{
+  "batch": 5,
+  "start": 200,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "177 (1).webp",
+      "out": "177 (1).webp",
+      "stem": "177 (1)",
+      "familyId": "177",
+      "familyKey": "demander-menu",
+      "tags": [
+        "#aide",
+        "#carte",
+        "#demander",
+        "#menu",
+        "#question",
+        "#restaurant"
+      ],
+      "id": "177"
+    },
+    {
+      "src": "177 (2).webp",
+      "out": "177 (2).webp",
+      "stem": "177 (2)",
+      "familyId": "177",
+      "familyKey": "demander-menu",
+      "tags": [
+        "#aide",
+        "#carte",
+        "#demander",
+        "#menu",
+        "#question",
+        "#restaurant"
+      ],
+      "id": "177.1"
+    },
+    {
+      "src": "178 (1).webp",
+      "out": "178 (1).webp",
+      "stem": "178 (1)",
+      "familyId": "178",
+      "familyKey": "demander-nouvelles",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#famille",
+        "#nouvelles",
+        "#question"
+      ],
+      "id": "178"
+    },
+    {
+      "src": "178 (2).webp",
+      "out": "178 (2).webp",
+      "stem": "178 (2)",
+      "familyId": "178",
+      "familyKey": "demander-nouvelles",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#famille",
+        "#nouvelles",
+        "#question"
+      ],
+      "id": "178.1"
+    },
+    {
+      "src": "178 (3).webp",
+      "out": "178 (3).webp",
+      "stem": "178 (3)",
+      "familyId": "178",
+      "familyKey": "demander-nouvelles",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#famille",
+        "#nouvelles",
+        "#question"
+      ],
+      "id": "178.2"
+    },
+    {
+      "src": "179 (1).webp",
+      "out": "179 (1).webp",
+      "stem": "179 (1)",
+      "familyId": "179",
+      "familyKey": "demander-plan-metro",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#metro",
+        "#orientation",
+        "#plan",
+        "#question",
+        "#transport",
+        "#ville"
+      ],
+      "id": "179"
+    },
+    {
+      "src": "179 (2).webp",
+      "out": "179 (2).webp",
+      "stem": "179 (2)",
+      "familyId": "179",
+      "familyKey": "demander-plan-metro",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#metro",
+        "#orientation",
+        "#plan",
+        "#question",
+        "#transport",
+        "#ville"
+      ],
+      "id": "179.1"
+    },
+    {
+      "src": "18 (1).png",
+      "out": "18 (1).webp",
+      "stem": "18 (1)",
+      "familyId": "18",
+      "familyKey": "acheter-casquette-magasin-femme",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#boutique",
+        "#casquette",
+        "#client",
+        "#commerce",
+        "#essayer",
+        "#femme",
+        "#fille",
+        "#magasin",
+        "#vêtement"
+      ],
+      "id": "18"
+    },
+    {
+      "src": "18 (2).webp",
+      "out": "18 (2).webp",
+      "stem": "18 (2)",
+      "familyId": "18",
+      "familyKey": "acheter-casquette-magasin-femme",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#boutique",
+        "#casquette",
+        "#client",
+        "#commerce",
+        "#essayer",
+        "#femme",
+        "#fille",
+        "#magasin",
+        "#vêtement"
+      ],
+      "id": "18.1"
+    },
+    {
+      "src": "180 (1).webp",
+      "out": "180 (1).webp",
+      "stem": "180 (1)",
+      "familyId": "180",
+      "familyKey": "demander-plan-ville",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#orientation",
+        "#plan",
+        "#question",
+        "#ville"
+      ],
+      "id": "180"
+    },
+    {
+      "src": "180 (2).webp",
+      "out": "180 (2).webp",
+      "stem": "180 (2)",
+      "familyId": "180",
+      "familyKey": "demander-plan-ville",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#orientation",
+        "#plan",
+        "#question",
+        "#ville"
+      ],
+      "id": "180.1"
+    },
+    {
+      "src": "181 (1).webp",
+      "out": "181 (1).webp",
+      "stem": "181 (1)",
+      "familyId": "181",
+      "familyKey": "demander-prix",
+      "tags": [
+        "#aide",
+        "#argent",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question"
+      ],
+      "id": "181"
+    },
+    {
+      "src": "181 (2).webp",
+      "out": "181 (2).webp",
+      "stem": "181 (2)",
+      "familyId": "181",
+      "familyKey": "demander-prix",
+      "tags": [
+        "#aide",
+        "#argent",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question"
+      ],
+      "id": "181.1"
+    },
+    {
+      "src": "181 (3).webp",
+      "out": "181 (3).webp",
+      "stem": "181 (3)",
+      "familyId": "181",
+      "familyKey": "demander-prix",
+      "tags": [
+        "#aide",
+        "#argent",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question"
+      ],
+      "id": "181.2"
+    },
+    {
+      "src": "182 (1).webp",
+      "out": "182 (1).webp",
+      "stem": "182 (1)",
+      "familyId": "182",
+      "familyKey": "demander-quai",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#gare",
+        "#quai",
+        "#question",
+        "#train"
+      ],
+      "id": "182"
+    },
+    {
+      "src": "182 (2).webp",
+      "out": "182 (2).webp",
+      "stem": "182 (2)",
+      "familyId": "182",
+      "familyKey": "demander-quai",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#gare",
+        "#quai",
+        "#question",
+        "#train"
+      ],
+      "id": "182.1"
+    },
+    {
+      "src": "182 (3).webp",
+      "out": "182 (3).webp",
+      "stem": "182 (3)",
+      "familyId": "182",
+      "familyKey": "demander-quai",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#gare",
+        "#quai",
+        "#question",
+        "#train"
+      ],
+      "id": "182.2"
+    },
+    {
+      "src": "183 (1).webp",
+      "out": "183 (1).webp",
+      "stem": "183 (1)",
+      "familyId": "183",
+      "familyKey": "demander-reduction",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question",
+        "#reduction"
+      ],
+      "id": "183"
+    },
+    {
+      "src": "183 (2).webp",
+      "out": "183 (2).webp",
+      "stem": "183 (2)",
+      "familyId": "183",
+      "familyKey": "demander-reduction",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question",
+        "#reduction"
+      ],
+      "id": "183.1"
+    },
+    {
+      "src": "183 (3).webp",
+      "out": "183 (3).webp",
+      "stem": "183 (3)",
+      "familyId": "183",
+      "familyKey": "demander-reduction",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#prix",
+        "#question",
+        "#reduction"
+      ],
+      "id": "183.2"
+    },
+    {
+      "src": "184 (1).webp",
+      "out": "184 (1).webp",
+      "stem": "184 (1)",
+      "familyId": "184",
+      "familyKey": "demander-service",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#question",
+        "#service"
+      ],
+      "id": "184"
+    },
+    {
+      "src": "184 (2).webp",
+      "out": "184 (2).webp",
+      "stem": "184 (2)",
+      "familyId": "184",
+      "familyKey": "demander-service",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#question",
+        "#service"
+      ],
+      "id": "184.1"
+    },
+    {
+      "src": "185 (1).webp",
+      "out": "185 (1).webp",
+      "stem": "185 (1)",
+      "familyId": "185",
+      "familyKey": "demander-siege-fenetre",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#fenetre",
+        "#question",
+        "#siege",
+        "#transport"
+      ],
+      "id": "185"
+    },
+    {
+      "src": "185 (2).webp",
+      "out": "185 (2).webp",
+      "stem": "185 (2)",
+      "familyId": "185",
+      "familyKey": "demander-siege-fenetre",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#fenetre",
+        "#question",
+        "#siege",
+        "#transport"
+      ],
+      "id": "185.1"
+    },
+    {
+      "src": "186 (1).webp",
+      "out": "186 (1).webp",
+      "stem": "186 (1)",
+      "familyId": "186",
+      "familyKey": "demander-taille",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#question",
+        "#taille",
+        "#vêtement"
+      ],
+      "id": "186"
+    },
+    {
+      "src": "186 (2).webp",
+      "out": "186 (2).webp",
+      "stem": "186 (2)",
+      "familyId": "186",
+      "familyKey": "demander-taille",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#question",
+        "#taille",
+        "#vêtement"
+      ],
+      "id": "186.1"
+    },
+    {
+      "src": "186 (3).webp",
+      "out": "186 (3).webp",
+      "stem": "186 (3)",
+      "familyId": "186",
+      "familyKey": "demander-taille",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#question",
+        "#taille",
+        "#vêtement"
+      ],
+      "id": "186.2"
+    },
+    {
+      "src": "186 (4).webp",
+      "out": "186 (4).webp",
+      "stem": "186 (4)",
+      "familyId": "186",
+      "familyKey": "demander-taille",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#magasin",
+        "#question",
+        "#taille",
+        "#vêtement"
+      ],
+      "id": "186.3"
+    },
+    {
+      "src": "187 (1).webp",
+      "out": "187 (1).webp",
+      "stem": "187 (1)",
+      "familyId": "187",
+      "familyKey": "demander-temoin",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#question",
+        "#temoin"
+      ],
+      "id": "187"
+    },
+    {
+      "src": "187 (2).webp",
+      "out": "187 (2).webp",
+      "stem": "187 (2)",
+      "familyId": "187",
+      "familyKey": "demander-temoin",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#question",
+        "#temoin"
+      ],
+      "id": "187.1"
+    },
+    {
+      "src": "187 (3).webp",
+      "out": "187 (3).webp",
+      "stem": "187 (3)",
+      "familyId": "187",
+      "familyKey": "demander-temoin",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#question",
+        "#temoin"
+      ],
+      "id": "187.2"
+    },
+    {
+      "src": "188 (1).webp",
+      "out": "188 (1).webp",
+      "stem": "188 (1)",
+      "familyId": "188",
+      "familyKey": "demander-toilettes",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#lieu-public",
+        "#question",
+        "#toilettes"
+      ],
+      "id": "188"
+    },
+    {
+      "src": "188 (2).webp",
+      "out": "188 (2).webp",
+      "stem": "188 (2)",
+      "familyId": "188",
+      "familyKey": "demander-toilettes",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#lieu-public",
+        "#question",
+        "#toilettes"
+      ],
+      "id": "188.1"
+    },
+    {
+      "src": "189 (1).webp",
+      "out": "189 (1).webp",
+      "stem": "189 (1)",
+      "familyId": "189",
+      "familyKey": "demander-une-facture",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#facture",
+        "#payer",
+        "#question",
+        "#une"
+      ],
+      "id": "189"
+    },
+    {
+      "src": "189 (2).webp",
+      "out": "189 (2).webp",
+      "stem": "189 (2)",
+      "familyId": "189",
+      "familyKey": "demander-une-facture",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#facture",
+        "#payer",
+        "#question",
+        "#une"
+      ],
+      "id": "189.1"
+    },
+    {
+      "src": "189 (3).webp",
+      "out": "189 (3).webp",
+      "stem": "189 (3)",
+      "familyId": "189",
+      "familyKey": "demander-une-facture",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#facture",
+        "#payer",
+        "#question",
+        "#une"
+      ],
+      "id": "189.2"
+    },
+    {
+      "src": "19 (1).png",
+      "out": "19 (1).webp",
+      "stem": "19 (1)",
+      "familyId": "19",
+      "familyKey": "acheter-casquette-magasin-homme",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#boutique",
+        "#casquette",
+        "#client",
+        "#commerce",
+        "#essayer",
+        "#homme",
+        "#magasin",
+        "#garçon",
+        "#vêtement"
+      ],
+      "id": "19"
+    },
+    {
+      "src": "19 (2).webp",
+      "out": "19 (2).webp",
+      "stem": "19 (2)",
+      "familyId": "19",
+      "familyKey": "acheter-casquette-magasin-homme",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#boutique",
+        "#casquette",
+        "#client",
+        "#commerce",
+        "#essayer",
+        "#homme",
+        "#magasin",
+        "#garçon",
+        "#vêtement"
+      ],
+      "id": "19.1"
+    },
+    {
+      "src": "190 (1).webp",
+      "out": "190 (1).webp",
+      "stem": "190 (1)",
+      "familyId": "190",
+      "familyKey": "demander-wifi",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#internet",
+        "#question",
+        "#wifi",
+        "#café"
+      ],
+      "id": "190"
+    },
+    {
+      "src": "190 (2).webp",
+      "out": "190 (2).webp",
+      "stem": "190 (2)",
+      "familyId": "190",
+      "familyKey": "demander-wifi",
+      "tags": [
+        "#aide",
+        "#demander",
+        "#internet",
+        "#question",
+        "#wifi",
+        "#café"
+      ],
+      "id": "190.1"
+    }
+  ]
+}

@@ -1,0 +1,607 @@
+{
+  "batch": 3,
+  "start": 120,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "144 (2).webp",
+      "out": "144 (2).webp",
+      "stem": "144 (2)",
+      "familyId": "144",
+      "familyKey": "course-couloir-ecole",
+      "tags": [
+        "#caddie",
+        "#couloir",
+        "#cours",
+        "#course",
+        "#courses",
+        "#ecole",
+        "#magasin",
+        "#élève"
+      ],
+      "id": "144.1"
+    },
+    {
+      "src": "145 (1).webp",
+      "out": "145 (1).webp",
+      "stem": "145 (1)",
+      "familyId": "145",
+      "familyKey": "courses-voiture",
+      "tags": [
+        "#conduire",
+        "#courses",
+        "#magasin",
+        "#route",
+        "#voiture"
+      ],
+      "id": "145"
+    },
+    {
+      "src": "145 (2).webp",
+      "out": "145 (2).webp",
+      "stem": "145 (2)",
+      "familyId": "145",
+      "familyKey": "courses-voiture",
+      "tags": [
+        "#conduire",
+        "#courses",
+        "#magasin",
+        "#route",
+        "#voiture"
+      ],
+      "id": "145.1"
+    },
+    {
+      "src": "146 (1).webp",
+      "out": "146 (1).webp",
+      "stem": "146 (1)",
+      "familyId": "146",
+      "familyKey": "croisiere-bateau",
+      "tags": [
+        "#bateau",
+        "#croisiere",
+        "#eau",
+        "#mer",
+        "#voyage"
+      ],
+      "id": "146"
+    },
+    {
+      "src": "146 (2).webp",
+      "out": "146 (2).webp",
+      "stem": "146 (2)",
+      "familyId": "146",
+      "familyKey": "croisiere-bateau",
+      "tags": [
+        "#bateau",
+        "#croisiere",
+        "#eau",
+        "#mer",
+        "#voyage"
+      ],
+      "id": "146.1"
+    },
+    {
+      "src": "147 (1).webp",
+      "out": "147 (1).webp",
+      "stem": "147 (1)",
+      "familyId": "147",
+      "familyKey": "cuisiner-chocolat",
+      "tags": [
+        "#chocolat",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#repas"
+      ],
+      "id": "147"
+    },
+    {
+      "src": "147 (2).webp",
+      "out": "147 (2).webp",
+      "stem": "147 (2)",
+      "familyId": "147",
+      "familyKey": "cuisiner-chocolat",
+      "tags": [
+        "#chocolat",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#repas"
+      ],
+      "id": "147.1"
+    },
+    {
+      "src": "148 (1).webp",
+      "out": "148 (1).webp",
+      "stem": "148 (1)",
+      "familyId": "148",
+      "familyKey": "cuisiner-ensemble",
+      "tags": [
+        "#amis",
+        "#cuisine",
+        "#cuisiner",
+        "#ensemble",
+        "#repas"
+      ],
+      "id": "148"
+    },
+    {
+      "src": "148 (2).webp",
+      "out": "148 (2).webp",
+      "stem": "148 (2)",
+      "familyId": "148",
+      "familyKey": "cuisiner-ensemble",
+      "tags": [
+        "#amis",
+        "#cuisine",
+        "#cuisiner",
+        "#ensemble",
+        "#repas"
+      ],
+      "id": "148.1"
+    },
+    {
+      "src": "148 (3).webp",
+      "out": "148 (3).webp",
+      "stem": "148 (3)",
+      "familyId": "148",
+      "familyKey": "cuisiner-ensemble",
+      "tags": [
+        "#amis",
+        "#cuisine",
+        "#cuisiner",
+        "#ensemble",
+        "#repas"
+      ],
+      "id": "148.2"
+    },
+    {
+      "src": "148 (4).webp",
+      "out": "148 (4).webp",
+      "stem": "148 (4)",
+      "familyId": "148",
+      "familyKey": "cuisiner-ensemble",
+      "tags": [
+        "#amis",
+        "#cuisine",
+        "#cuisiner",
+        "#ensemble",
+        "#repas"
+      ],
+      "id": "148.3"
+    },
+    {
+      "src": "149 (1).png",
+      "out": "149 (1).webp",
+      "stem": "149 (1)",
+      "familyId": "149",
+      "familyKey": "cuisiner-gateau-femme",
+      "tags": [
+        "#anniversaire",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#femme",
+        "#fille",
+        "#gateau",
+        "#repas"
+      ],
+      "id": "149"
+    },
+    {
+      "src": "149 (2).webp",
+      "out": "149 (2).webp",
+      "stem": "149 (2)",
+      "familyId": "149",
+      "familyKey": "cuisiner-gateau-femme",
+      "tags": [
+        "#anniversaire",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#femme",
+        "#fille",
+        "#gateau",
+        "#repas"
+      ],
+      "id": "149.1"
+    },
+    {
+      "src": "15 (1).webp",
+      "out": "15 (1).webp",
+      "stem": "15 (1)",
+      "familyId": "15",
+      "familyKey": "acheter-boulangerie-2",
+      "tags": [
+        "#acheter",
+        "#boulangerie"
+      ],
+      "id": "15"
+    },
+    {
+      "src": "15 (2).webp",
+      "out": "15 (2).webp",
+      "stem": "15 (2)",
+      "familyId": "15",
+      "familyKey": "acheter-boulangerie-2",
+      "tags": [
+        "#acheter",
+        "#boulangerie"
+      ],
+      "id": "15.1"
+    },
+    {
+      "src": "150 (1).png",
+      "out": "150 (1).webp",
+      "stem": "150 (1)",
+      "familyId": "150",
+      "familyKey": "cuisiner-gateau-homme",
+      "tags": [
+        "#anniversaire",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#gateau",
+        "#homme",
+        "#repas",
+        "#garçon"
+      ],
+      "id": "150"
+    },
+    {
+      "src": "150 (2).webp",
+      "out": "150 (2).webp",
+      "stem": "150 (2)",
+      "familyId": "150",
+      "familyKey": "cuisiner-gateau-homme",
+      "tags": [
+        "#anniversaire",
+        "#cuisine",
+        "#cuisiner",
+        "#dessert",
+        "#gateau",
+        "#homme",
+        "#repas",
+        "#garçon"
+      ],
+      "id": "150.1"
+    },
+    {
+      "src": "151 (1).webp",
+      "out": "151 (1).webp",
+      "stem": "151 (1)",
+      "familyId": "151",
+      "familyKey": "dancer-disco",
+      "tags": [
+        "#dancer",
+        "#danse",
+        "#disco",
+        "#soirée"
+      ],
+      "id": "151"
+    },
+    {
+      "src": "151 (2).webp",
+      "out": "151 (2).webp",
+      "stem": "151 (2)",
+      "familyId": "151",
+      "familyKey": "dancer-disco",
+      "tags": [
+        "#dancer",
+        "#danse",
+        "#disco",
+        "#soirée"
+      ],
+      "id": "151.1"
+    },
+    {
+      "src": "152 (1).webp",
+      "out": "152 (1).webp",
+      "stem": "152 (1)",
+      "familyId": "152",
+      "familyKey": "danser-fete",
+      "tags": [
+        "#amis",
+        "#danser",
+        "#fete",
+        "#musique",
+        "#célébration"
+      ],
+      "id": "152"
+    },
+    {
+      "src": "152 (2).webp",
+      "out": "152 (2).webp",
+      "stem": "152 (2)",
+      "familyId": "152",
+      "familyKey": "danser-fete",
+      "tags": [
+        "#amis",
+        "#danser",
+        "#fete",
+        "#musique",
+        "#célébration"
+      ],
+      "id": "152.1"
+    },
+    {
+      "src": "152 (3).webp",
+      "out": "152 (3).webp",
+      "stem": "152 (3)",
+      "familyId": "152",
+      "familyKey": "danser-fete",
+      "tags": [
+        "#amis",
+        "#danser",
+        "#fete",
+        "#musique",
+        "#célébration"
+      ],
+      "id": "152.2"
+    },
+    {
+      "src": "152 (4).webp",
+      "out": "152 (4).webp",
+      "stem": "152 (4)",
+      "familyId": "152",
+      "familyKey": "danser-fete",
+      "tags": [
+        "#amis",
+        "#danser",
+        "#fete",
+        "#musique",
+        "#célébration"
+      ],
+      "id": "152.3"
+    },
+    {
+      "src": "153 (1).webp",
+      "out": "153 (1).webp",
+      "stem": "153 (1)",
+      "familyId": "153",
+      "familyKey": "danser-musique",
+      "tags": [
+        "#danser",
+        "#musique",
+        "#fête"
+      ],
+      "id": "153"
+    },
+    {
+      "src": "154 (1).webp",
+      "out": "154 (1).webp",
+      "stem": "154 (1)",
+      "familyId": "154",
+      "familyKey": "declarer-sinistre",
+      "tags": [
+        "#assurance",
+        "#declarer",
+        "#sinistre",
+        "#déclaration"
+      ],
+      "id": "154"
+    },
+    {
+      "src": "154 (2).webp",
+      "out": "154 (2).webp",
+      "stem": "154 (2)",
+      "familyId": "154",
+      "familyKey": "declarer-sinistre",
+      "tags": [
+        "#assurance",
+        "#declarer",
+        "#sinistre",
+        "#déclaration"
+      ],
+      "id": "154.1"
+    },
+    {
+      "src": "155 (1).webp",
+      "out": "155 (1).webp",
+      "stem": "155 (1)",
+      "familyId": "155",
+      "familyKey": "declarer-sinistre maison",
+      "tags": [
+        "#declarer",
+        "#sinistre maison"
+      ],
+      "id": "155"
+    },
+    {
+      "src": "156 (1).webp",
+      "out": "156 (1).webp",
+      "stem": "156 (1)",
+      "familyId": "156",
+      "familyKey": "declarer-sinistre-voiture",
+      "tags": [
+        "#declarer",
+        "#sinistre",
+        "#voiture"
+      ],
+      "id": "156"
+    },
+    {
+      "src": "157 (1).webp",
+      "out": "157 (1).webp",
+      "stem": "157 (1)",
+      "familyId": "157",
+      "familyKey": "decrire-personne",
+      "tags": [
+        "#decrire",
+        "#description",
+        "#personne"
+      ],
+      "id": "157"
+    },
+    {
+      "src": "157 (2).webp",
+      "out": "157 (2).webp",
+      "stem": "157 (2)",
+      "familyId": "157",
+      "familyKey": "decrire-personne",
+      "tags": [
+        "#decrire",
+        "#description",
+        "#personne"
+      ],
+      "id": "157.1"
+    },
+    {
+      "src": "157 (3).webp",
+      "out": "157 (3).webp",
+      "stem": "157 (3)",
+      "familyId": "157",
+      "familyKey": "decrire-personne",
+      "tags": [
+        "#decrire",
+        "#description",
+        "#personne"
+      ],
+      "id": "157.2"
+    },
+    {
+      "src": "158 (1).webp",
+      "out": "158 (1).webp",
+      "stem": "158 (1)",
+      "familyId": "158",
+      "familyKey": "dedicace-signer-livre",
+      "tags": [
+        "#auteur",
+        "#dedicace",
+        "#lecture",
+        "#librairie",
+        "#livre",
+        "#signer"
+      ],
+      "id": "158"
+    },
+    {
+      "src": "159 (1).webp",
+      "out": "159 (1).webp",
+      "stem": "159 (1)",
+      "familyId": "159",
+      "familyKey": "dedicace-signer-livre ",
+      "tags": [
+        "#dedicace",
+        "#signer",
+        "#livre"
+      ],
+      "id": "159"
+    },
+    {
+      "src": "16 (1).png",
+      "out": "16 (1).webp",
+      "stem": "16 (1)",
+      "familyId": "16",
+      "familyKey": "acheter-boulangerie-pain",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#baguette",
+        "#boulangerie",
+        "#client",
+        "#commerce",
+        "#magasin",
+        "#nourriture",
+        "#pain"
+      ],
+      "id": "16"
+    },
+    {
+      "src": "16 (2).webp",
+      "out": "16 (2).webp",
+      "stem": "16 (2)",
+      "familyId": "16",
+      "familyKey": "acheter-boulangerie-pain",
+      "tags": [
+        "#acheter",
+        "#argent",
+        "#baguette",
+        "#boulangerie",
+        "#client",
+        "#commerce",
+        "#magasin",
+        "#nourriture",
+        "#pain"
+      ],
+      "id": "16.1"
+    },
+    {
+      "src": "160 (1).webp",
+      "out": "160 (1).webp",
+      "stem": "160 (1)",
+      "familyId": "160",
+      "familyKey": "dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#repas"
+      ],
+      "id": "160"
+    },
+    {
+      "src": "160 (2).webp",
+      "out": "160 (2).webp",
+      "stem": "160 (2)",
+      "familyId": "160",
+      "familyKey": "dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#repas"
+      ],
+      "id": "160.1"
+    },
+    {
+      "src": "161 (1).webp",
+      "out": "161 (1).webp",
+      "stem": "161 (1)",
+      "familyId": "161",
+      "familyKey": "dejeuner-cantine",
+      "tags": [
+        "#cantine",
+        "#dejeuner",
+        "#repas",
+        "#école"
+      ],
+      "id": "161"
+    },
+    {
+      "src": "161 (2).webp",
+      "out": "161 (2).webp",
+      "stem": "161 (2)",
+      "familyId": "161",
+      "familyKey": "dejeuner-cantine",
+      "tags": [
+        "#cantine",
+        "#dejeuner",
+        "#repas",
+        "#école"
+      ],
+      "id": "161.1"
+    },
+    {
+      "src": "162 (1).webp",
+      "out": "162 (1).webp",
+      "stem": "162 (1)",
+      "familyId": "162",
+      "familyKey": "demander-addition",
+      "tags": [
+        "#addition",
+        "#aide",
+        "#demander",
+        "#payer",
+        "#question",
+        "#restaurant"
+      ],
+      "id": "162"
+    }
+  ]
+}

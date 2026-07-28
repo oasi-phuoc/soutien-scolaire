@@ -1,0 +1,583 @@
+{
+  "batch": 27,
+  "start": 1080,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "6 (2).webp",
+      "out": "6 (2).webp",
+      "stem": "6 (2)",
+      "familyId": "6",
+      "familyKey": "achat.magasin",
+      "tags": [
+        "#achat",
+        "#boutique",
+        "#client",
+        "#commerce",
+        "#magasin"
+      ],
+      "id": "6.1"
+    },
+    {
+      "src": "60 (1).webp",
+      "out": "60 (1).webp",
+      "stem": "60 (1)",
+      "familyId": "60",
+      "familyKey": "arroser-plantes",
+      "tags": [
+        "#arroser",
+        "#plantes"
+      ],
+      "id": "60"
+    },
+    {
+      "src": "60 (2).webp",
+      "out": "60 (2).webp",
+      "stem": "60 (2)",
+      "familyId": "60",
+      "familyKey": "arroser-plantes",
+      "tags": [
+        "#arroser",
+        "#plantes"
+      ],
+      "id": "60.1"
+    },
+    {
+      "src": "60 (3).webp",
+      "out": "60 (3).webp",
+      "stem": "60 (3)",
+      "familyId": "60",
+      "familyKey": "arroser-plantes",
+      "tags": [
+        "#arroser",
+        "#plantes"
+      ],
+      "id": "60.2"
+    },
+    {
+      "src": "61 (1).webp",
+      "out": "61 (1).webp",
+      "stem": "61 (1)",
+      "familyId": "61",
+      "familyKey": "attendre-aeroport",
+      "tags": [
+        "#aeroport",
+        "#attendre",
+        "#avion",
+        "#voyage"
+      ],
+      "id": "61"
+    },
+    {
+      "src": "61 (2).webp",
+      "out": "61 (2).webp",
+      "stem": "61 (2)",
+      "familyId": "61",
+      "familyKey": "attendre-aeroport",
+      "tags": [
+        "#aeroport",
+        "#attendre",
+        "#avion",
+        "#voyage"
+      ],
+      "id": "61.1"
+    },
+    {
+      "src": "62 (1).png",
+      "out": "62 (1).webp",
+      "stem": "62 (1)",
+      "familyId": "62",
+      "familyKey": "attendre-arret-bus",
+      "tags": [
+        "#arret",
+        "#attendre",
+        "#bus",
+        "#transport"
+      ],
+      "id": "62"
+    },
+    {
+      "src": "62 (2).webp",
+      "out": "62 (2).webp",
+      "stem": "62 (2)",
+      "familyId": "62",
+      "familyKey": "attendre-arret-bus",
+      "tags": [
+        "#arret",
+        "#attendre",
+        "#bus",
+        "#transport"
+      ],
+      "id": "62.1"
+    },
+    {
+      "src": "63 (1).webp",
+      "out": "63 (1).webp",
+      "stem": "63 (1)",
+      "familyId": "63",
+      "familyKey": "attendre-bus",
+      "tags": [
+        "#attendre",
+        "#bus",
+        "#transport",
+        "#arrêt"
+      ],
+      "id": "63"
+    },
+    {
+      "src": "63 (2).webp",
+      "out": "63 (2).webp",
+      "stem": "63 (2)",
+      "familyId": "63",
+      "familyKey": "attendre-bus",
+      "tags": [
+        "#attendre",
+        "#bus",
+        "#transport",
+        "#arrêt"
+      ],
+      "id": "63.1"
+    },
+    {
+      "src": "64 (1).webp",
+      "out": "64 (1).webp",
+      "stem": "64 (1)",
+      "familyId": "64",
+      "familyKey": "attendre-quai-gare",
+      "tags": [
+        "#attendre",
+        "#gare",
+        "#quai",
+        "#train",
+        "#voyage"
+      ],
+      "id": "64"
+    },
+    {
+      "src": "64 (2).webp",
+      "out": "64 (2).webp",
+      "stem": "64 (2)",
+      "familyId": "64",
+      "familyKey": "attendre-quai-gare",
+      "tags": [
+        "#attendre",
+        "#gare",
+        "#quai",
+        "#train",
+        "#voyage"
+      ],
+      "id": "64.1"
+    },
+    {
+      "src": "65 (1).webp",
+      "out": "65 (1).webp",
+      "stem": "65 (1)",
+      "familyId": "65",
+      "familyKey": "attendre-quai-train-2",
+      "tags": [
+        "#attendre",
+        "#quai",
+        "#train"
+      ],
+      "id": "65"
+    },
+    {
+      "src": "65 (2).webp",
+      "out": "65 (2).webp",
+      "stem": "65 (2)",
+      "familyId": "65",
+      "familyKey": "attendre-quai-train-2",
+      "tags": [
+        "#attendre",
+        "#quai",
+        "#train"
+      ],
+      "id": "65.1"
+    },
+    {
+      "src": "66 (1).webp",
+      "out": "66 (1).webp",
+      "stem": "66 (1)",
+      "familyId": "66",
+      "familyKey": "attendre-quelquun",
+      "tags": [
+        "#attendre",
+        "#quelquun"
+      ],
+      "id": "66"
+    },
+    {
+      "src": "66 (2).webp",
+      "out": "66 (2).webp",
+      "stem": "66 (2)",
+      "familyId": "66",
+      "familyKey": "attendre-quelquun",
+      "tags": [
+        "#attendre",
+        "#quelquun"
+      ],
+      "id": "66.1"
+    },
+    {
+      "src": "66 (3).webp",
+      "out": "66 (3).webp",
+      "stem": "66 (3)",
+      "familyId": "66",
+      "familyKey": "attendre-quelquun",
+      "tags": [
+        "#attendre",
+        "#quelquun"
+      ],
+      "id": "66.2"
+    },
+    {
+      "src": "67 (1).webp",
+      "out": "67 (1).webp",
+      "stem": "67 (1)",
+      "familyId": "67",
+      "familyKey": "attendre-train-quai",
+      "tags": [
+        "#attendre",
+        "#gare",
+        "#quai",
+        "#train",
+        "#voyage"
+      ],
+      "id": "67"
+    },
+    {
+      "src": "67 (2).webp",
+      "out": "67 (2).webp",
+      "stem": "67 (2)",
+      "familyId": "67",
+      "familyKey": "attendre-train-quai",
+      "tags": [
+        "#attendre",
+        "#gare",
+        "#quai",
+        "#train",
+        "#voyage"
+      ],
+      "id": "67.1"
+    },
+    {
+      "src": "68 (1).png",
+      "out": "68 (1).webp",
+      "stem": "68 (1)",
+      "familyId": "68",
+      "familyKey": "au-cafe-dejeuner",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#dejeuner",
+        "#repas",
+        "#terrasse",
+        "#au"
+      ],
+      "id": "68"
+    },
+    {
+      "src": "68 (2).webp",
+      "out": "68 (2).webp",
+      "stem": "68 (2)",
+      "familyId": "68",
+      "familyKey": "au-cafe-dejeuner",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#dejeuner",
+        "#repas",
+        "#terrasse",
+        "#au"
+      ],
+      "id": "68.1"
+    },
+    {
+      "src": "69 (1).png",
+      "out": "69 (1).webp",
+      "stem": "69 (1)",
+      "familyId": "69",
+      "familyKey": "au-cafe-tarte-fruit",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#fruit",
+        "#tarte",
+        "#terrasse",
+        "#au"
+      ],
+      "id": "69"
+    },
+    {
+      "src": "69 (2).webp",
+      "out": "69 (2).webp",
+      "stem": "69 (2)",
+      "familyId": "69",
+      "familyKey": "au-cafe-tarte-fruit",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#fruit",
+        "#tarte",
+        "#terrasse",
+        "#au"
+      ],
+      "id": "69.1"
+    },
+    {
+      "src": "7 (1).png",
+      "out": "7 (1).webp",
+      "stem": "7 (1)",
+      "familyId": "7",
+      "familyKey": "acheter-appareil-photo-femme",
+      "tags": [
+        "#acheter",
+        "#appareil",
+        "#argent",
+        "#client",
+        "#femme",
+        "#fille",
+        "#magasin",
+        "#photo",
+        "#souvenir",
+        "#électronique"
+      ],
+      "id": "7"
+    },
+    {
+      "src": "7 (2).webp",
+      "out": "7 (2).webp",
+      "stem": "7 (2)",
+      "familyId": "7",
+      "familyKey": "acheter-appareil-photo-femme",
+      "tags": [
+        "#acheter",
+        "#appareil",
+        "#argent",
+        "#client",
+        "#femme",
+        "#fille",
+        "#magasin",
+        "#photo",
+        "#souvenir",
+        "#électronique"
+      ],
+      "id": "7.1"
+    },
+    {
+      "src": "70 (1).png",
+      "out": "70 (1).webp",
+      "stem": "70 (1)",
+      "familyId": "70",
+      "familyKey": "au-cafe-the",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#terrasse",
+        "#au",
+        "#the"
+      ],
+      "id": "70"
+    },
+    {
+      "src": "70 (2).webp",
+      "out": "70 (2).webp",
+      "stem": "70 (2)",
+      "familyId": "70",
+      "familyKey": "au-cafe-the",
+      "tags": [
+        "#boisson",
+        "#cafe",
+        "#terrasse",
+        "#au",
+        "#the"
+      ],
+      "id": "70.1"
+    },
+    {
+      "src": "71 (1).webp",
+      "out": "71 (1).webp",
+      "stem": "71 (1)",
+      "familyId": "71",
+      "familyKey": "au-cinema",
+      "tags": [
+        "#cinema",
+        "#film",
+        "#spectacle",
+        "#au"
+      ],
+      "id": "71"
+    },
+    {
+      "src": "71 (2).webp",
+      "out": "71 (2).webp",
+      "stem": "71 (2)",
+      "familyId": "71",
+      "familyKey": "au-cinema",
+      "tags": [
+        "#cinema",
+        "#film",
+        "#spectacle",
+        "#au"
+      ],
+      "id": "71.1"
+    },
+    {
+      "src": "72 (1).webp",
+      "out": "72 (1).webp",
+      "stem": "72 (1)",
+      "familyId": "72",
+      "familyKey": "au-cinema-2",
+      "tags": [
+        "#au",
+        "#cinema"
+      ],
+      "id": "72"
+    },
+    {
+      "src": "72 (2).webp",
+      "out": "72 (2).webp",
+      "stem": "72 (2)",
+      "familyId": "72",
+      "familyKey": "au-cinema-2",
+      "tags": [
+        "#au",
+        "#cinema"
+      ],
+      "id": "72.1"
+    },
+    {
+      "src": "73 (1).webp",
+      "out": "73 (1).webp",
+      "stem": "73 (1)",
+      "familyId": "73",
+      "familyKey": "au-concert",
+      "tags": [
+        "#concert",
+        "#musique",
+        "#spectacle",
+        "#au"
+      ],
+      "id": "73"
+    },
+    {
+      "src": "73 (2).webp",
+      "out": "73 (2).webp",
+      "stem": "73 (2)",
+      "familyId": "73",
+      "familyKey": "au-concert",
+      "tags": [
+        "#concert",
+        "#musique",
+        "#spectacle",
+        "#au"
+      ],
+      "id": "73.1"
+    },
+    {
+      "src": "74 (1).webp",
+      "out": "74 (1).webp",
+      "stem": "74 (1)",
+      "familyId": "74",
+      "familyKey": "au-concert-2",
+      "tags": [
+        "#au",
+        "#concert"
+      ],
+      "id": "74"
+    },
+    {
+      "src": "74 (2).webp",
+      "out": "74 (2).webp",
+      "stem": "74 (2)",
+      "familyId": "74",
+      "familyKey": "au-concert-2",
+      "tags": [
+        "#au",
+        "#concert"
+      ],
+      "id": "74.1"
+    },
+    {
+      "src": "75 (1).webp",
+      "out": "75 (1).webp",
+      "stem": "75 (1)",
+      "familyId": "75",
+      "familyKey": "au-marche",
+      "tags": [
+        "#marche",
+        "#plein-air",
+        "#au",
+        "#commerçant",
+        "#légumes"
+      ],
+      "id": "75"
+    },
+    {
+      "src": "75 (2).webp",
+      "out": "75 (2).webp",
+      "stem": "75 (2)",
+      "familyId": "75",
+      "familyKey": "au-marche",
+      "tags": [
+        "#marche",
+        "#plein-air",
+        "#au",
+        "#commerçant",
+        "#légumes"
+      ],
+      "id": "75.1"
+    },
+    {
+      "src": "76 (1).png",
+      "out": "76 (1).webp",
+      "stem": "76 (1)",
+      "familyId": "76",
+      "familyKey": "au-musee-sculpture",
+      "tags": [
+        "#art",
+        "#exposition",
+        "#musee",
+        "#sculpture",
+        "#au"
+      ],
+      "id": "76"
+    },
+    {
+      "src": "76 (2).webp",
+      "out": "76 (2).webp",
+      "stem": "76 (2)",
+      "familyId": "76",
+      "familyKey": "au-musee-sculpture",
+      "tags": [
+        "#art",
+        "#exposition",
+        "#musee",
+        "#sculpture",
+        "#au"
+      ],
+      "id": "76.1"
+    },
+    {
+      "src": "77 (1).webp",
+      "out": "77 (1).webp",
+      "stem": "77 (1)",
+      "familyId": "77",
+      "familyKey": "au-theatre",
+      "tags": [
+        "#spectacle",
+        "#theatre",
+        "#au"
+      ],
+      "id": "77"
+    }
+  ]
+}

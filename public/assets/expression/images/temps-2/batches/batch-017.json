@@ -1,0 +1,590 @@
+{
+  "batch": 17,
+  "start": 680,
+  "count": 40,
+  "styleRef": "/workspace/public/assets/expression/images/scene/102 (2).webp",
+  "style": "anime painterly soft, soft brown/grey outlines, warm earth tones, diffused light, paper grain",
+  "rules": [
+    "Keep setting/context of the original scene",
+    "Change characters (appearance, age, clothing, diversity)",
+    "Change the specific action/moment while staying on-theme",
+    "Match style of 102 (2)"
+  ],
+  "items": [
+    {
+      "src": "376 (1).webp",
+      "out": "376 (1).webp",
+      "stem": "376 (1)",
+      "familyId": "376",
+      "familyKey": "placer-meuble",
+      "tags": [
+        "#maison",
+        "#meuble",
+        "#placer"
+      ],
+      "id": "376"
+    },
+    {
+      "src": "377 (1).webp",
+      "out": "377 (1).webp",
+      "stem": "377 (1)",
+      "familyId": "377",
+      "familyKey": "plage-chateau-sable",
+      "tags": [
+        "#chateau",
+        "#mer",
+        "#plage",
+        "#sable",
+        "#château-de-sable",
+        "#été"
+      ],
+      "id": "377"
+    },
+    {
+      "src": "377 (2).webp",
+      "out": "377 (2).webp",
+      "stem": "377 (2)",
+      "familyId": "377",
+      "familyKey": "plage-chateau-sable",
+      "tags": [
+        "#chateau",
+        "#mer",
+        "#plage",
+        "#sable",
+        "#château-de-sable",
+        "#été"
+      ],
+      "id": "377.1"
+    },
+    {
+      "src": "378 (1).webp",
+      "out": "378 (1).webp",
+      "stem": "378 (1)",
+      "familyId": "378",
+      "familyKey": "plage-maillot",
+      "tags": [
+        "#bain",
+        "#maillot",
+        "#mer",
+        "#plage",
+        "#sable",
+        "#été"
+      ],
+      "id": "378"
+    },
+    {
+      "src": "378 (2).webp",
+      "out": "378 (2).webp",
+      "stem": "378 (2)",
+      "familyId": "378",
+      "familyKey": "plage-maillot",
+      "tags": [
+        "#bain",
+        "#maillot",
+        "#mer",
+        "#plage",
+        "#sable",
+        "#été"
+      ],
+      "id": "378.1"
+    },
+    {
+      "src": "379 (1).webp",
+      "out": "379 (1).webp",
+      "stem": "379 (1)",
+      "familyId": "379",
+      "familyKey": "planter-arbre",
+      "tags": [
+        "#arbre",
+        "#nature",
+        "#planter",
+        "#écologie"
+      ],
+      "id": "379"
+    },
+    {
+      "src": "379 (2).webp",
+      "out": "379 (2).webp",
+      "stem": "379 (2)",
+      "familyId": "379",
+      "familyKey": "planter-arbre",
+      "tags": [
+        "#arbre",
+        "#nature",
+        "#planter",
+        "#écologie"
+      ],
+      "id": "379.1"
+    },
+    {
+      "src": "379 (3).webp",
+      "out": "379 (3).webp",
+      "stem": "379 (3)",
+      "familyId": "379",
+      "familyKey": "planter-arbre",
+      "tags": [
+        "#arbre",
+        "#nature",
+        "#planter",
+        "#écologie"
+      ],
+      "id": "379.2"
+    },
+    {
+      "src": "38 (1).webp",
+      "out": "38 (1).webp",
+      "stem": "38 (1)",
+      "familyId": "38",
+      "familyKey": "aider-personne-agee",
+      "tags": [
+        "#agee",
+        "#aider",
+        "#description",
+        "#personne"
+      ],
+      "id": "38"
+    },
+    {
+      "src": "38 (2).webp",
+      "out": "38 (2).webp",
+      "stem": "38 (2)",
+      "familyId": "38",
+      "familyKey": "aider-personne-agee",
+      "tags": [
+        "#agee",
+        "#aider",
+        "#description",
+        "#personne"
+      ],
+      "id": "38.1"
+    },
+    {
+      "src": "38 (3).webp",
+      "out": "38 (3).webp",
+      "stem": "38 (3)",
+      "familyId": "38",
+      "familyKey": "aider-personne-agee",
+      "tags": [
+        "#agee",
+        "#aider",
+        "#description",
+        "#personne"
+      ],
+      "id": "38.2"
+    },
+    {
+      "src": "380 (1).webp",
+      "out": "380 (1).webp",
+      "stem": "380 (1)",
+      "familyId": "380",
+      "familyKey": "porter-sac",
+      "tags": [
+        "#porter",
+        "#sac"
+      ],
+      "id": "380"
+    },
+    {
+      "src": "380 (2).webp",
+      "out": "380 (2).webp",
+      "stem": "380 (2)",
+      "familyId": "380",
+      "familyKey": "porter-sac",
+      "tags": [
+        "#porter",
+        "#sac"
+      ],
+      "id": "380.1"
+    },
+    {
+      "src": "381 (1).webp",
+      "out": "381 (1).webp",
+      "stem": "381 (1)",
+      "familyId": "381",
+      "familyKey": "postuler-emploi",
+      "tags": [
+        "#candidature",
+        "#emploi",
+        "#postuler",
+        "#travail"
+      ],
+      "id": "381"
+    },
+    {
+      "src": "381 (2).webp",
+      "out": "381 (2).webp",
+      "stem": "381 (2)",
+      "familyId": "381",
+      "familyKey": "postuler-emploi",
+      "tags": [
+        "#candidature",
+        "#emploi",
+        "#postuler",
+        "#travail"
+      ],
+      "id": "381.1"
+    },
+    {
+      "src": "381 (3).webp",
+      "out": "381 (3).webp",
+      "stem": "381 (3)",
+      "familyId": "381",
+      "familyKey": "postuler-emploi",
+      "tags": [
+        "#candidature",
+        "#emploi",
+        "#postuler",
+        "#travail"
+      ],
+      "id": "381.2"
+    },
+    {
+      "src": "382 (1).webp",
+      "out": "382 (1).webp",
+      "stem": "382 (1)",
+      "familyId": "382",
+      "familyKey": "prendre-commande-restaurant",
+      "tags": [
+        "#prendre",
+        "#commande",
+        "#restaurant"
+      ],
+      "id": "382"
+    },
+    {
+      "src": "383 (1).webp",
+      "out": "383 (1).webp",
+      "stem": "383 (1)",
+      "familyId": "383",
+      "familyKey": "prendre-conge",
+      "tags": [
+        "#conge",
+        "#prendre",
+        "#travail"
+      ],
+      "id": "383"
+    },
+    {
+      "src": "383 (2).webp",
+      "out": "383 (2).webp",
+      "stem": "383 (2)",
+      "familyId": "383",
+      "familyKey": "prendre-conge",
+      "tags": [
+        "#conge",
+        "#prendre",
+        "#travail"
+      ],
+      "id": "383.1"
+    },
+    {
+      "src": "383 (3).webp",
+      "out": "383 (3).webp",
+      "stem": "383 (3)",
+      "familyId": "383",
+      "familyKey": "prendre-conge",
+      "tags": [
+        "#conge",
+        "#prendre",
+        "#travail"
+      ],
+      "id": "383.2"
+    },
+    {
+      "src": "384 (1).webp",
+      "out": "384 (1).webp",
+      "stem": "384 (1)",
+      "familyId": "384",
+      "familyKey": "prendre-dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#prendre",
+        "#repas"
+      ],
+      "id": "384"
+    },
+    {
+      "src": "384 (2).webp",
+      "out": "384 (2).webp",
+      "stem": "384 (2)",
+      "familyId": "384",
+      "familyKey": "prendre-dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#prendre",
+        "#repas"
+      ],
+      "id": "384.1"
+    },
+    {
+      "src": "385 (1).webp",
+      "out": "385 (1).webp",
+      "stem": "385 (1)",
+      "familyId": "385",
+      "familyKey": "prendre-des-nouvelles-sante",
+      "tags": [
+        "#famille",
+        "#nouvelles",
+        "#prendre",
+        "#sante",
+        "#des",
+        "#médecin"
+      ],
+      "id": "385"
+    },
+    {
+      "src": "385 (2).webp",
+      "out": "385 (2).webp",
+      "stem": "385 (2)",
+      "familyId": "385",
+      "familyKey": "prendre-des-nouvelles-sante",
+      "tags": [
+        "#famille",
+        "#nouvelles",
+        "#prendre",
+        "#sante",
+        "#des",
+        "#médecin"
+      ],
+      "id": "385.1"
+    },
+    {
+      "src": "386 (1).webp",
+      "out": "386 (1).webp",
+      "stem": "386 (1)",
+      "familyId": "386",
+      "familyKey": "prendre-petit-dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#petit",
+        "#prendre",
+        "#repas",
+        "#petit-déjeuner"
+      ],
+      "id": "386"
+    },
+    {
+      "src": "386 (2).webp",
+      "out": "386 (2).webp",
+      "stem": "386 (2)",
+      "familyId": "386",
+      "familyKey": "prendre-petit-dejeuner",
+      "tags": [
+        "#dejeuner",
+        "#petit",
+        "#prendre",
+        "#repas",
+        "#petit-déjeuner"
+      ],
+      "id": "386.1"
+    },
+    {
+      "src": "387 (1).webp",
+      "out": "387 (1).webp",
+      "stem": "387 (1)",
+      "familyId": "387",
+      "familyKey": "prendre-photo",
+      "tags": [
+        "#appareil",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "387"
+    },
+    {
+      "src": "387 (2).webp",
+      "out": "387 (2).webp",
+      "stem": "387 (2)",
+      "familyId": "387",
+      "familyKey": "prendre-photo",
+      "tags": [
+        "#appareil",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "387.1"
+    },
+    {
+      "src": "388 (1).webp",
+      "out": "388 (1).webp",
+      "stem": "388 (1)",
+      "familyId": "388",
+      "familyKey": "prendre-photo-groupe",
+      "tags": [
+        "#amis",
+        "#appareil",
+        "#groupe",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "388"
+    },
+    {
+      "src": "388 (2).webp",
+      "out": "388 (2).webp",
+      "stem": "388 (2)",
+      "familyId": "388",
+      "familyKey": "prendre-photo-groupe",
+      "tags": [
+        "#amis",
+        "#appareil",
+        "#groupe",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "388.1"
+    },
+    {
+      "src": "388 (3).webp",
+      "out": "388 (3).webp",
+      "stem": "388 (3)",
+      "familyId": "388",
+      "familyKey": "prendre-photo-groupe",
+      "tags": [
+        "#amis",
+        "#appareil",
+        "#groupe",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "388.2"
+    },
+    {
+      "src": "388 (4).webp",
+      "out": "388 (4).webp",
+      "stem": "388 (4)",
+      "familyId": "388",
+      "familyKey": "prendre-photo-groupe",
+      "tags": [
+        "#amis",
+        "#appareil",
+        "#groupe",
+        "#photo",
+        "#prendre",
+        "#souvenir"
+      ],
+      "id": "388.3"
+    },
+    {
+      "src": "389 (1).webp",
+      "out": "389 (1).webp",
+      "stem": "389 (1)",
+      "familyId": "389",
+      "familyKey": "prendre-rdv",
+      "tags": [
+        "#agenda",
+        "#prendre",
+        "#rdv",
+        "#rendez-vous"
+      ],
+      "id": "389"
+    },
+    {
+      "src": "389 (2).webp",
+      "out": "389 (2).webp",
+      "stem": "389 (2)",
+      "familyId": "389",
+      "familyKey": "prendre-rdv",
+      "tags": [
+        "#agenda",
+        "#prendre",
+        "#rdv",
+        "#rendez-vous"
+      ],
+      "id": "389.1"
+    },
+    {
+      "src": "39 (1).webp",
+      "out": "39 (1).webp",
+      "stem": "39 (1)",
+      "familyId": "39",
+      "familyKey": "aider-porter-sac",
+      "tags": [
+        "#aider",
+        "#porter",
+        "#sac"
+      ],
+      "id": "39"
+    },
+    {
+      "src": "39 (2).webp",
+      "out": "39 (2).webp",
+      "stem": "39 (2)",
+      "familyId": "39",
+      "familyKey": "aider-porter-sac",
+      "tags": [
+        "#aider",
+        "#porter",
+        "#sac"
+      ],
+      "id": "39.1"
+    },
+    {
+      "src": "390 (1).webp",
+      "out": "390 (1).webp",
+      "stem": "390 (1)",
+      "familyId": "390",
+      "familyKey": "prendre-rendez-vous-dentiste",
+      "tags": [
+        "#dentiste",
+        "#prendre",
+        "#rendez",
+        "#rendez-vous",
+        "#vous",
+        "#santé"
+      ],
+      "id": "390"
+    },
+    {
+      "src": "390 (2).webp",
+      "out": "390 (2).webp",
+      "stem": "390 (2)",
+      "familyId": "390",
+      "familyKey": "prendre-rendez-vous-dentiste",
+      "tags": [
+        "#dentiste",
+        "#prendre",
+        "#rendez",
+        "#rendez-vous",
+        "#vous",
+        "#santé"
+      ],
+      "id": "390.1"
+    },
+    {
+      "src": "391 (1).webp",
+      "out": "391 (1).webp",
+      "stem": "391 (1)",
+      "familyId": "391",
+      "familyKey": "preparer-anniversaire",
+      "tags": [
+        "#anniversaire",
+        "#cadeau",
+        "#preparer",
+        "#fête",
+        "#gâteau"
+      ],
+      "id": "391"
+    },
+    {
+      "src": "391 (2).webp",
+      "out": "391 (2).webp",
+      "stem": "391 (2)",
+      "familyId": "391",
+      "familyKey": "preparer-anniversaire",
+      "tags": [
+        "#anniversaire",
+        "#cadeau",
+        "#preparer",
+        "#fête",
+        "#gâteau"
+      ],
+      "id": "391.1"
+    }
+  ]
+}
