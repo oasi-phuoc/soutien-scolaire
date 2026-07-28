@@ -301,9 +301,9 @@ export function DesktopSidebar() {
                   )}
                 </span>
               </button>
-              {link.href === "/lecture" && renderSubs(lectureSubs)}
-              {link.href === "/francais" && renderSubs(frenchSubs)}
-              {link.href === "/mathematiques" && renderSubs(mathsSubs)}
+              {link.href === "/lecture" && active && renderSubs(lectureSubs)}
+              {link.href === "/francais" && active && renderSubs(frenchSubs)}
+              {link.href === "/mathematiques" && active && renderSubs(mathsSubs)}
             </div>
           );
         })}
