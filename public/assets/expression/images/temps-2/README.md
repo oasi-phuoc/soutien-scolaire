@@ -1,19 +1,23 @@
-# Images scène régénérées (staging) — temps-2
+# Images scène régénérées — temps-2 (staging)
 
-Dossier temporaire : `public/assets/expression/images/temps-2/`
+Dossier : `public/assets/expression/images/temps-2/`
 
 ## Référence de style
 - `scene/102 (2).webp` — intérieur domestique, anime painterly soft
 
 Style cible : anime painterly soft (aquarelle/gouache), contours colorés doux, palette terre naturelle, lumière diffuse chaude, grain papier.
 
-## Critères
-- Contexte / type de situation conservé (catalogue scène)
-- Personnages **changés** (visages, âges, coiffures, tenues)
-- Action / moment de scène **changé** (geste et pose différents)
-- Format : WebP 800×600 qualité 85
+## Critères de régénération
+- **Contexte / thème** conservé (tags famille du catalogue)
+- **Personnages** changés (âge, apparence, vêtements)
+- **Action** changée (autre moment / pose dans le même contexte)
+- Format : 800×600 WebP qualité 85
+- `102 (2).webp` copié tel quel (référence de style)
 
 ## Contenu
 - **1160** fichiers WebP (toutes les images de `scene/`)
-- Catalogue des prompts : `_jobs.json`
+- Format : 800×600 WebP qualité 85
+- Les sources `.png` ont été régénérées en `.webp` (même stem)
+- `102 (2).webp` copié tel quel (référence de style)
+- Contexte / thème conservé ; personnages et actions renouvelés
 - Non copiés vers `scene/` : à valider puis remplacer manuellement si OK
