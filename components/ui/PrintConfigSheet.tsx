@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement, type ReactNode, type RefObject, cloneElement, isValidElement } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { capturePageCss, injectForcedPrintCss, openPrintPopup } from "@/lib/utils/print";
 import { AppSelect } from "@/components/ui/AppSelect";
 import { ELEVE_CLASSE_TYPES, type EleveClasseType } from "@/lib/eleve-classe-types";
@@ -166,25 +166,6 @@ export function PrintExerciseBody({
       </div>
     </PrintExerciseLayoutProvider>
   );
-}
-
-/** Clone profond : mesure + aperçu ne partagent aucun élément React. */
-function clonePreviewNode(node: ReactNode, key: string): ReactNode {
-  if (node == null || typeof node === "boolean") return node;
-  if (typeof node === "string" || typeof node === "number") return node;
-  if (Array.isArray(node)) {
-    return node.map((child, index) => clonePreviewNode(child, `${key}.${index}`));
-  }
-  if (!isValidElement(node)) return node;
-  const element = node as ReactElement<{ children?: ReactNode }>;
-  if (element.props?.children !== undefined) {
-    return cloneElement(
-      element,
-      { key },
-      clonePreviewNode(element.props.children, `${key}.c`),
-    );
-  }
-  return cloneElement(element, { key });
 }
 
 export function PrintDocumentHeader({
