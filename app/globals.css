@@ -722,6 +722,40 @@ input[type=number] {
   overflow: hidden;
 }
 
+/* Suivi des devoirs — largeurs fixes pour éviter le chevauchement mobile */
+.tasks-apercu-table col.tasks-apercu-table__titre { width: auto; }
+.tasks-apercu-table col.tasks-apercu-table__module { width: 18%; }
+.tasks-apercu-table col.tasks-apercu-table__date { width: 7.5rem; }
+.tasks-apercu-table col.tasks-apercu-table__eleves { width: 4.25rem; }
+.tasks-apercu-table col.tasks-apercu-table__avancement { width: 9rem; }
+.tasks-apercu-table col.tasks-apercu-table__actions {
+  width: 2.5rem;
+  min-width: 2.5rem;
+  max-width: 2.5rem;
+}
+
+@media (max-width: 1023px) {
+  .tasks-apercu-table col.tasks-apercu-table__avancement {
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .tasks-apercu-table col.tasks-apercu-table__module {
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+  }
+  .tasks-apercu-table col.tasks-apercu-table__date {
+    width: 6.75rem;
+  }
+  .tasks-apercu-table col.tasks-apercu-table__eleves {
+    width: 3.5rem;
+  }
+}
+
 /* Largeurs colonnes admin — une seule table, en-têtes et cellules alignés */
 .admin-users-table col.admin-users-table__name { width: 22%; }
 .admin-users-table col.admin-users-table__statut { width: 7%; }

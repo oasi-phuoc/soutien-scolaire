@@ -261,12 +261,12 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         colgroup={
           <colgroup>
             <col className="tasks-apercu-table__loupe" />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col className="w-10" />
+            <col className="tasks-apercu-table__titre" />
+            <col className="tasks-apercu-table__module" />
+            <col className="tasks-apercu-table__date" />
+            <col className="tasks-apercu-table__eleves" />
+            <col className="tasks-apercu-table__avancement" />
+            <col className="tasks-apercu-table__actions" />
           </colgroup>
         }
         head={
@@ -275,12 +275,12 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
               className="tasks-apercu-table__loupe bg-[var(--color-theme)]"
               aria-label="Détail"
             />
-            <th className="min-w-0 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
-            <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
-            <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
-            <th className="whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
-            <th className="hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
-            <th className="w-10 px-2 py-2 sm:px-3 sm:py-3" aria-label="Supprimer" />
+            <th className="tasks-apercu-table__titre min-w-0 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
+            <th className="tasks-apercu-table__module hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
+            <th className="tasks-apercu-table__date whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
+            <th className="tasks-apercu-table__eleves whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
+            <th className="tasks-apercu-table__avancement hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
+            <th className="tasks-apercu-table__actions px-2 py-2 sm:px-3 sm:py-3" aria-label="Supprimer" />
           </tr>
         }
         body={
@@ -320,13 +320,13 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <SuiviIconLoupe active={isOpen} />
                         </button>
                       </td>
-                      <td className="min-w-0 px-2 py-2.5 sm:px-4 sm:py-3">
+                      <td className="tasks-apercu-table__titre min-w-0 px-2 py-2.5 sm:px-4 sm:py-3">
                         <span className="block truncate font-medium text-zinc-800 dark:text-zinc-200" title={task.title}>{task.title}</span>
                         {task.description && (
                           <span className="hidden truncate text-xs text-zinc-400 sm:block" title={task.description}>{task.description}</span>
                         )}
                       </td>
-                      <td className="hidden px-4 py-3 md:table-cell">
+                      <td className="tasks-apercu-table__module hidden px-4 py-3 md:table-cell">
                         {task.module_ref || task.lesson_ref ? (
                           <div className="space-y-0.5">
                             {task.module_ref && <span className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">{task.module_ref}</span>}
@@ -336,7 +336,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-2 py-2.5 sm:px-4 sm:py-3">
+                      <td className="tasks-apercu-table__date whitespace-nowrap px-2 py-2.5 sm:px-4 sm:py-3">
                         {task.due_date ? (
                           <span className={`text-xs font-medium ${overdue ? "text-red-600 dark:text-red-400" : soon ? "text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400"}`}>
                             {overdue && "⚠ "}{formatDate(task.due_date)}
@@ -345,10 +345,10 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-2 py-2.5 text-xs font-semibold text-zinc-700 sm:px-4 sm:py-3 dark:text-zinc-300">
+                      <td className="tasks-apercu-table__eleves whitespace-nowrap px-2 py-2.5 text-xs font-semibold text-zinc-700 sm:px-4 sm:py-3 dark:text-zinc-300">
                         {task.done_count}/{task.total_students}
                       </td>
-                      <td className="hidden w-36 px-4 py-3 lg:table-cell">
+                      <td className="tasks-apercu-table__avancement hidden px-4 py-3 lg:table-cell">
                         <div className="flex items-center gap-2">
                           <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                             <div
@@ -359,7 +359,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                           <span className="w-9 shrink-0 text-right text-xs tabular-nums text-zinc-500">{pct}%</span>
                         </div>
                       </td>
-                      <td className="px-2 py-3 sm:px-3">
+                      <td className="tasks-apercu-table__actions px-2 py-3 sm:px-3">
                         {settled ? (
                           <button
                             type="button"
