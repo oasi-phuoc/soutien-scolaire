@@ -14,3 +14,6 @@ Style cible : anime painterly soft (aquarelle/gouache), contours colorés doux, 
 - Format : 800×600 WebP qualité 85
 - Sources `.png` → sortie `.webp` (même stem)
 - Non copiés vers `scene/` : à valider puis remplacer manuellement si OK
+
+## Contenu
+- **1160** fichiers WebP (toutes les images de `scene/`)
