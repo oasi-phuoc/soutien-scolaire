@@ -318,6 +318,8 @@ export function ImpressionsClient() {
     setGroup("");
     setModuleId("");
     setDocId("");
+    setSelection([]);
+    setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
   }
@@ -326,17 +328,23 @@ export function ImpressionsClient() {
     setGroup(next);
     setModuleId("");
     setDocId("");
+    setSelection([]);
+    setTheory(false);
     setPrintSeed(freshSeed());
   }
 
   function changeModule(next: string) {
     setModuleId(next);
     setDocId("");
+    setSelection([]);
+    setTheory(false);
     setPrintSeed(freshSeed());
   }
 
   function changeDocument(next: string) {
     setDocId(next);
+    setSelection([]);
+    setTheory(false);
     setFrenchLevel("base");
     setPrintSeed(freshSeed());
   }
@@ -365,6 +373,7 @@ export function ImpressionsClient() {
   const previewExercises = selection.flatMap((item) => {
     if (!item.included || item.occurrences < 1) return [];
     const exercise = bundle?.exercises.find((candidate) => candidate.id === item.id);
+    if (!exercise) return [];
     return Array.from({ length: item.occurrences }, (_, occurrence) => ({
       key: `${item.id}-${occurrence}`,
       exercise,
@@ -641,6 +650,7 @@ export function ImpressionsClient() {
             </p>
           ) : (
             <PaginatedPreview
+              key={`${selectedEntry?.id ?? "none"}-${printSeed}`}
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
@@ -653,9 +663,9 @@ export function ImpressionsClient() {
               }
               theoryNode={theoryNode}
               exerciseNodes={previewExercises.map((item, index) => ({
-                key: item.key,
-                forceNewPage: item.forceNewPage && index === 0,
-                node: (
+                key: `${item.key}-q${item.selection.questionCount}-c${item.selection.columns}`,
+                forceNewPage: Boolean(item.forceNewPage && index === 0),
+                render: () => (
                   <div className="print-exercise">
                     <div
                       className="mb-1 flex items-start gap-2 border-b border-black pb-0.5 text-[1.6em] font-bold"

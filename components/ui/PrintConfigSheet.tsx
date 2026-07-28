@@ -321,6 +321,17 @@ const A4_SHEET_STYLE: CSSProperties = {
   background: "#fff",
 };
 
+export type PreviewBlock = {
+  key: string;
+  forceNewPage?: boolean;
+  render: () => ReactNode;
+};
+
+/**
+ * Pagination A4 en 2 phases : d’abord mesure seule, puis aperçu seul.
+ * Évite de monter les mêmes previews (hooks) deux fois en parallèle — cause
+ * des plantages au changement de catégorie / module / leçon.
+ */
 export function PaginatedPreview({
   header,
   theoryNode,
@@ -331,7 +342,12 @@ export function PaginatedPreview({
 }: {
   header: ReactNode;
   theoryNode: ReactNode | null;
-  exerciseNodes: { key: string; node: ReactNode; forceNewPage?: boolean }[];
+  exerciseNodes: {
+    key: string;
+    forceNewPage?: boolean;
+    render?: () => ReactNode;
+    node?: ReactNode;
+  }[];
   printDate: string;
   printedBy?: string;
   pagesContainerRef?: RefObject<HTMLDivElement | null>;
@@ -343,18 +359,39 @@ export function PaginatedPreview({
   const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [availWidth, setAvailWidth] = useState(0);
   const [metrics, setMetrics] = useState<{ pageW: number; pageH: number; contentW: number; contentH: number } | null>(null);
+  const [blockHeights, setBlockHeights] = useState<number[] | null>(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [footerH, setFooterH] = useState(0);
   const [tick, setTick] = useState(0);
-  const [pages, setPages] = useState<number[][]>([]);
 
-  const blocks = useMemo(() => {
-    const arr: { key: string; node: ReactNode; forceNewPage?: boolean }[] = [];
-    if (theoryNode) arr.push({ key: "__theory__", node: theoryNode });
-    exerciseNodes.forEach((e) => arr.push(e));
+  const blocks = useMemo((): PreviewBlock[] => {
+    const arr: PreviewBlock[] = [];
+    if (theoryNode) {
+      arr.push({ key: "__theory__", render: () => theoryNode });
+    }
+    for (const e of exerciseNodes) {
+      arr.push({
+        key: e.key,
+        forceNewPage: e.forceNewPage,
+        render: e.render ?? (() => e.node ?? null),
+      });
+    }
     return arr;
   }, [theoryNode, exerciseNodes]);
-  blockRefs.current = [];
 
-  const gap = 30; // px between blocks inside a page (at A4 scale, ~3em @ 10px)
+  const blockKeys = blocks.map((b) => b.key).join("|");
+
+  // Invalider la mesure *pendant le rendu* (pas en useEffect) : sinon un frame
+  // garde d’anciennes hauteurs avec de nouveaux blocs → pages[i] hors bornes → crash.
+  const [measuredKeys, setMeasuredKeys] = useState(blockKeys);
+  if (measuredKeys !== blockKeys) {
+    setMeasuredKeys(blockKeys);
+    setBlockHeights(null);
+    blockRefs.current = [];
+  }
+
+  const heightsReady = Boolean(blockHeights) && measuredKeys === blockKeys;
+  const gap = 30;
 
   useLayoutEffect(() => {
     const el = wrapRef.current;
@@ -382,33 +419,31 @@ export function PaginatedPreview({
     });
   }, []);
 
+  // Phase mesure : lire hauteurs une fois les blocs montés
+  useLayoutEffect(() => {
+    if (!metrics || heightsReady) return;
+    const hH = headerMeasureRef.current?.offsetHeight ?? 0;
+    const fH = footerMeasureRef.current?.offsetHeight ?? 0;
+    const heights = blocks.map((_, i) => blockRefs.current[i]?.offsetHeight ?? 0);
+    // Attendre que le layout ait des hauteurs non nulles (images / fonts)
+    if (blocks.length > 0 && heights.every((h) => h === 0)) {
+      const t = setTimeout(() => setTick((v) => v + 1), 50);
+      return () => clearTimeout(t);
+    }
+    setHeaderH(hH);
+    setFooterH(fH);
+    setBlockHeights(heights);
+  }, [metrics, blocks, heightsReady, tick, blockKeys]);
+
   useEffect(() => {
+    if (heightsReady) return;
     const t1 = setTimeout(() => setTick((v) => v + 1), 200);
     const t2 = setTimeout(() => setTick((v) => v + 1), 700);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [metrics, blocks.length]);
+  }, [metrics, blockKeys, heightsReady]);
 
-  useEffect(() => {
-    if (!metrics || typeof ResizeObserver === "undefined") return;
-    let frame = 0;
-    const observer = new ResizeObserver(() => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setTick((value) => value + 1));
-    });
-    if (headerMeasureRef.current) observer.observe(headerMeasureRef.current);
-    if (footerMeasureRef.current) observer.observe(footerMeasureRef.current);
-    blockRefs.current.forEach((node) => { if (node) observer.observe(node); });
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [metrics, blocks]);
-
-  useLayoutEffect(() => {
-    if (!metrics) return;
-    const headerH = headerMeasureRef.current?.offsetHeight ?? 0;
-    const footerH = footerMeasureRef.current?.offsetHeight ?? 0;
-    const blockH = blocks.map((_, i) => blockRefs.current[i]?.offsetHeight ?? 0);
+  const pages = useMemo(() => {
+    if (!metrics || !heightsReady || !blockHeights) return [] as number[][];
     const page1Avail = metrics.contentH - headerH - footerH - gap;
     const pageNAvail = metrics.contentH - footerH - gap;
     const result: number[][] = [];
@@ -416,8 +451,8 @@ export function PaginatedPreview({
     let curH = 0;
     let avail = page1Avail;
     blocks.forEach((_, i) => {
-      const h = blockH[i] + gap;
-      const forceNew = blocks[i]?.forceNewPage && cur.length > 0;
+      const h = (blockHeights[i] ?? 0) + gap;
+      const forceNew = Boolean(blocks[i]?.forceNewPage && cur.length > 0);
       if (forceNew || (cur.length > 0 && curH + h > avail)) {
         result.push(cur);
         cur = [];
@@ -429,15 +464,15 @@ export function PaginatedPreview({
     });
     if (cur.length > 0) result.push(cur);
     if (result.length === 0) result.push([]);
-    setPages(result);
-  }, [metrics, blocks, gap, tick]);
+    return result;
+  }, [metrics, blockHeights, heightsReady, headerH, footerH, blocks, gap]);
 
   const scale = metrics && availWidth > 0 ? Math.min(1, availWidth / metrics.pageW) : 1;
   const sheetGap = 24;
+  const measuring = Boolean(metrics) && !heightsReady;
 
   return (
     <div ref={wrapRef} className="w-full min-w-0 overflow-x-hidden">
-      {/* Sonde A4 — lit les dimensions réelles du navigateur (mm → px). */}
       <div
         ref={probeRef}
         aria-hidden
@@ -445,17 +480,20 @@ export function PaginatedPreview({
         style={A4_SHEET_STYLE}
       />
 
-      {/* Mesure des blocs au format A4 (identique à l’impression). */}
-      {metrics && (
+      {/* Phase 1 — mesure seule (pas d’aperçu en parallèle). */}
+      {measuring && (
         <div
           aria-hidden
           className="print-layout-context pointer-events-none invisible absolute -left-[9999px] top-0"
-          style={{ width: metrics.contentW, fontSize: A4_SHEET_STYLE.fontSize, lineHeight: A4_SHEET_STYLE.lineHeight }}
+          style={{ width: metrics!.contentW, fontSize: A4_SHEET_STYLE.fontSize, lineHeight: A4_SHEET_STYLE.lineHeight }}
         >
-          <div ref={headerMeasureRef}>{clonePreviewNode(header, "measure-header")}</div>
+          <div ref={headerMeasureRef}>{header}</div>
           {blocks.map((b, i) => (
-            <div key={`measure-${b.key}`} ref={(el) => { blockRefs.current[i] = el; }}>
-              {clonePreviewNode(b.node, `measure-node-${b.key}`)}
+            <div
+              key={`measure-${b.key}`}
+              ref={(el) => { blockRefs.current[i] = el; }}
+            >
+              {b.render()}
             </div>
           ))}
           <div ref={footerMeasureRef}>
@@ -464,12 +502,16 @@ export function PaginatedPreview({
         </div>
       )}
 
-      {/* Aperçu écran : scale visuelle uniquement — le DOM A4 reste intact pour le clone PDF. */}
       <div
         className="mx-auto w-full min-w-0 overflow-x-hidden overflow-y-auto pb-8 pt-1"
         style={{ maxHeight: "calc(100vh - 12rem)" }}
       >
-        {metrics && (
+        {measuring && (
+          <p className="py-8 text-center text-sm text-[var(--color-text-secondary)]">
+            Préparation de l&apos;aperçu…
+          </p>
+        )}
+        {metrics && heightsReady && (
           <div
             style={{
               width: metrics.pageW * scale,
@@ -498,11 +540,15 @@ export function PaginatedPreview({
                   >
                     {pageIdx === 0 && header}
                     <div className="flex-1">
-                      {blockIdxs.map((bi, j) => (
-                        <div key={blocks[bi]!.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
-                          {blocks[bi]!.node}
-                        </div>
-                      ))}
+                      {blockIdxs.map((bi, j) => {
+                        const block = blocks[bi];
+                        if (!block) return null;
+                        return (
+                          <div key={block.key} style={{ marginBottom: j < blockIdxs.length - 1 ? gap : 0 }}>
+                            {block.render()}
+                          </div>
+                        );
+                      })}
                     </div>
                     <PrintDocumentFooter date={printDate} printedBy={printedBy} preview page={pageIdx + 1} totalPages={pages.length} />
                   </div>
@@ -515,6 +561,7 @@ export function PaginatedPreview({
     </div>
   );
 }
+
 
 function CheckBox({
   checked,
