@@ -169,26 +169,18 @@ export function ProfessorAttributionsClient() {
     [classes],
   );
 
-  /** Largeur commune des deux sélecteurs (titulariat / autres), basée sur le plus long libellé. */
+  /** Largeur du sélecteur titulariat, basée sur le plus long libellé de classe. */
   const selectWidthCh = useMemo(() => {
     const labels = classes.map((c) => c.label);
-    let maxLen = Math.max(
+    const maxLen = Math.max(
       "— Aucune —".length,
-      "Aucune".length,
       ...labels.map((l) => l.length),
       8,
     );
-    const byLen = [...labels].sort((a, b) => b.length - a.length);
-    if (byLen.length >= 2) {
-      maxLen = Math.max(maxLen, `${byLen[0]}, ${byLen[1]}`.length);
-    }
-    if (classes.length >= 3) {
-      maxLen = Math.max(maxLen, `${classes.length} classes`.length);
-    }
     return maxLen + 3;
   }, [classes]);
 
-  const selectBoxStyle = useMemo(
+  const titularatBoxStyle = useMemo(
     () => ({ width: `${selectWidthCh}ch`, maxWidth: "100%" }) as const,
     [selectWidthCh],
   );
@@ -306,16 +298,16 @@ export function ProfessorAttributionsClient() {
       </p>
 
       <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="w-auto min-w-0 text-sm">
+        <table className="w-full table-auto text-sm">
           <thead>
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              <th className="w-0 whitespace-nowrap px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
                 Professeur
               </th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              <th className="w-0 whitespace-nowrap px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
                 Titulariat
               </th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              <th className="min-w-0 px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
                 Autres classes
               </th>
             </tr>
@@ -336,11 +328,11 @@ export function ProfessorAttributionsClient() {
                     key={prof.id}
                     className={`hover:bg-zinc-50 dark:hover:bg-zinc-900 ${changed ? "bg-[var(--color-theme-light)]/40 dark:bg-[var(--color-theme)]/5" : ""}`}
                   >
-                    <td className="px-3 py-3 align-top">
+                    <td className="w-0 whitespace-nowrap px-3 py-3 align-middle">
                       <p className="font-semibold text-zinc-800 dark:text-zinc-100">{professorName(prof)}</p>
                       <p className="mt-0.5 text-xs text-zinc-400">{prof.email}</p>
                     </td>
-                    <td className="px-3 py-3 align-top whitespace-nowrap">
+                    <td className="w-0 whitespace-nowrap px-3 py-3 align-middle">
                       <AppSelect
                         value={draft.primaryClassId ?? ""}
                         onChange={(v) => updatePrimary(prof.id, v || null)}
@@ -348,17 +340,16 @@ export function ProfessorAttributionsClient() {
                         placeholder="— Aucune —"
                         emptyOption={{ value: "", label: "— Aucune —" }}
                         disabled={isPending}
-                        style={selectBoxStyle}
+                        style={titularatBoxStyle}
                         aria-label={`Titulariat de ${professorName(prof)}`}
                       />
                     </td>
-                    <td className="px-3 py-3 align-top whitespace-nowrap">
+                    <td className="min-w-0 px-3 py-3 align-middle">
                       <ClassMultiPicker
                         options={classes}
                         value={draft.secondaryClassIds}
                         excludeClassId={draft.primaryClassId}
                         disabled={isPending}
-                        widthStyle={selectBoxStyle}
                         onChange={(next) => updateSecondary(prof.id, next)}
                       />
                     </td>
