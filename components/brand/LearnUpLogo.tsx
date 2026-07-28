@@ -64,11 +64,11 @@ export function LearnUpMark({ size = 36, className = "" }: { size?: number; clas
       className={`shrink-0 ${className}`.trim()}
       aria-hidden
     >
-      <circle cx="24" cy="24" r="24" fill="var(--color-text-primary)" />
+      <circle cx="24" cy="24" r="24" fill="var(--color-text-primary, #2f3a3f)" />
       <path fill="#fff" d="M10 36h8v-6h8v-6h8v-6h4v22H10z" />
-      <rect x="10" y="34" width="8" height="2" fill="var(--color-theme)" />
+      <rect x="10" y="34" width="8" height="2" fill="var(--color-theme, #6fafa0)" />
       <path
-        fill="var(--color-theme)"
+        fill="var(--color-theme, #6fafa0)"
         d="M34 10.5l1.15 2.45 2.7.35-1.98 1.85.52 2.65L34 16.5l-2.39 1.3.52-2.65-1.98-1.85 2.7-.35L34 10.5z"
       />
     </svg>
