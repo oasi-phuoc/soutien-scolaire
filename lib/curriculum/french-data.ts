@@ -152,8 +152,8 @@ const BASE_FRENCH_THEMES: FrenchTheme[] = [
 
 /**
  * Codes pédagogiques :
- * - G1–G6 = Grammaire (fondamentaux sans -er, interrogation, adjectifs, pronoms, marqueurs, comparaison)
- * - C1–C4 = Conjugaison (R1.5+R2, R6 passé, R7 futur, R8 autres temps)
+ * - G1–G6 = Grammaire (fondamentaux, interrogation, adjectifs, pronoms, marqueurs, comparaison)
+ * - C1–C4 = Conjugaison (verbes essentiels, passé, futur, autres temps)
  */
 const REORGANIZED_GRAMMAR_CODES: Record<string, string> = {
   // G1 — Fondamentaux (sans conjugaison)
