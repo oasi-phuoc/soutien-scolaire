@@ -202,7 +202,9 @@ export function ImpressionsClient() {
         id: ex.id,
         included: true,
         occurrences: 1,
-        points: 1,
+        questionCount: Math.max(1, ex.defaultQuestionCount ?? 8),
+        columns: 1,
+        points: ex.defaultPoints ?? 1,
       })),
     );
   }, [payload]);
@@ -524,7 +526,6 @@ export function ImpressionsClient() {
               pagesContainerRef={previewPagesRef}
               printDate={printDate}
               printedBy={printedBy}
-              maxHeightClassName="max-h-none"
               header={
                 <PrintDocumentHeader
                   config={header}
