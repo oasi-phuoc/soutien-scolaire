@@ -393,6 +393,11 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
     } catch {}
   }
 
+  // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
+  useEffect(() => {
+    if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
+  }, [tabParam]);
+
   useEffect(() => {
     if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
   }, [tabParam]);

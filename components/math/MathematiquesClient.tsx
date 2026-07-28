@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   MATH_ALGEBRA_ORDER,
@@ -99,9 +99,13 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
 
 export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { isLoggedIn?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
   const { overrides } = useContentEditor();
   const catalogModules = resolveMathModules(MATH_MODULES, overrides);
-  const [tab, setTab] = useState<MathTabId>("algebra");
+  const [tab, setTab] = useState<MathTabId>(
+    tabParam === "geometry" ? "geometry" : "algebra",
+  );
   const [progress, setProgress] = useState<StoredProgressV1>(createInitialProgress);
   const [hydrated, setHydrated] = useState(false);
   const [manualOverrides, setManualOverrides] = useState<Record<string, boolean>>({});
@@ -115,13 +119,15 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
     setManualOverrides((prev) => ({ ...prev, [id]: !isModuleExpanded(id, state) }));
   }
 
+  // Sync with sidebar / URL (?tab=) — soft nav does not remount the page
+  useEffect(() => {
+    if (tabParam === "geometry") setTab("geometry");
+    else if (tabParam === "algebra") setTab("algebra");
+  }, [tabParam]);
+
   useEffect(() => {
     setProgress(loadProgress());
     setHydrated(true);
-    const params = new URLSearchParams(window.location.search);
-    const t = params.get("tab");
-    if (t === "geometry") setTab("geometry");
-    else if (t === "algebra") setTab("algebra");
   }, []);
 
   const _persist = useCallback((next: StoredProgressV1) => {
