@@ -343,9 +343,9 @@ export function DesktopSidebar() {
         {pedagogicNav.canPrint && (
           <button
             type="button"
-            onClick={() => go("/admin/impression")}
+            onClick={() => go("/impressions")}
             className={`flex w-full items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5 text-left text-sm font-medium transition ${
-              pathname.startsWith("/admin/impression") || pathname.startsWith("/impressions")
+              pathname.startsWith("/impressions") || pathname.startsWith("/admin/impression")
                 ? "bg-[var(--color-theme-light)] text-[var(--color-theme-muted)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]"
             }`}
