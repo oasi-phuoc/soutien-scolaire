@@ -18,17 +18,12 @@ export const MATH_A10_3_LESSON: MathSubmoduleLesson = {
           type: "plain",
           fr: "Un système de deux équations à deux inconnues admet généralement une solution unique (x, y). La méthode de substitution exprime une inconnue en fonction de l'autre, puis substitue.",
         },
-        {
-          type: "rule",
-          titleFr: "Les 5 étapes de la méthode",
-          itemsFr: [
-            "1. Choisir l'équation la plus simple pour exprimer x (ou y)",
-            "2. Exprimer x en fonction de y (ou y en fonction de x)",
-            "3. Substituer cette expression dans l'autre équation",
-            "4. Résoudre l'équation à une inconnue obtenue",
-            "5. Trouver la deuxième inconnue, puis vérifier dans les deux équations",
-          ],
-        },
+        { type: "highlight", fr: "Les 5 étapes de la méthode" },
+        { type: "plain", fr: "**1.** Choisir l'équation la plus simple pour exprimer x (ou y)" },
+        { type: "plain", fr: "**2.** Exprimer x en fonction de y (ou y en fonction de x)" },
+        { type: "plain", fr: "**3.** Substituer cette expression dans l'autre équation" },
+        { type: "plain", fr: "**4.** Résoudre l'équation à une inconnue obtenue" },
+        { type: "plain", fr: "**5.** Trouver la deuxième inconnue, puis vérifier dans les deux équations" },
         {
           type: "heading",
           fr: "Exemple détaillé",
