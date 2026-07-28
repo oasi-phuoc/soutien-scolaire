@@ -1,8 +1,13 @@
 "use client";
 
-import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import { useEvalReveal } from "@/lib/eval-reveal-context";
+import {
+  printQuestionsListClass,
+  usePrintColumns,
+  usePrintQuestionCount,
+} from "@/components/print/PrintExerciseLayoutContext";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function rnd(min: number, max: number) {
@@ -88,6 +93,7 @@ function DecExercise({
     if (validateCommand > 0) doValidate();
   }, [validateCommand, doValidate]);
 
+  const columns = usePrintColumns();
   return (
     <div className="space-y-4">
       <div>
@@ -96,12 +102,12 @@ function DecExercise({
         </h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       </div>
-      <div className="grid items-center gap-x-3 gap-y-2" style={{ gridTemplateColumns: "1.5rem max-content auto" }}>
+      <div className={printQuestionsListClass(columns, "space-y-2")}>
         {questions.map((q, i) => {
           const isWrong = revealCorrection && statuses[i] === "wrong";
           return (
-            <Fragment key={i}>
-              <span className="text-sm font-bold text-[var(--color-accent-alg)] justify-self-start">
+            <div key={i} className="flex items-center gap-3">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] shrink-0">
                 {q.label}.
               </span>
               <span className="text-sm font-mono text-[var(--color-text-primary)]">
@@ -126,7 +132,7 @@ function DecExercise({
                   disabled={validated}
                 />
               )}
-            </Fragment>
+            </div>
           );
         })}
       </div>
@@ -330,11 +336,15 @@ export function DecArithGroupExercise({
   onTimeUpdate?: (t: number) => void;
   hideTimerDisplay?: boolean;
 }) {
-  const count = mixed ? 4 : timer !== undefined ? 8 : 5;
+  const baseCount = mixed ? 4 : timer !== undefined ? 8 : 5;
+  const count = usePrintQuestionCount(baseCount);
+  const columns = usePrintColumns();
   const [questions] = useState<ArithQuestion[]>(() => {
     if (mixed) {
-      return [...genArithQuestions("+", false, precision, 2),
-               ...genArithQuestions("-", false, precision, 2)];
+      // Keep mix balanced when print count differs from default 4
+      const half = Math.floor(count / 2);
+      return [...genArithQuestions("+", false, precision, count - half),
+               ...genArithQuestions("-", false, precision, half)];
     }
     return genArithQuestions(op, missingOperand, precision, count);
   });
@@ -417,7 +427,7 @@ export function DecArithGroupExercise({
         )}
       </div>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
-      <div className="space-y-3">
+      <div className={printQuestionsListClass(columns, "space-y-3")}>
         {questions.map((q: ArithQuestion, i: number) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? results[i] : null;
@@ -483,8 +493,8 @@ interface DecMulColQ {
   carryD: number; // carry from U to D
 }
 
-function genDecMulColQuestions(): DecMulColQ[] {
-  return Array.from({ length: 4 }, () => {
+function genDecMulColQuestions(count: number): DecMulColQ[] {
+  return Array.from({ length: count }, () => {
     const aT = rnd(11, 99);
     const b = rnd(2, 9);
     const rT = aT * b;
@@ -749,22 +759,23 @@ export function DecMulColGridExercise({
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<DecMulColQ[]>(genDecMulColQuestions);
+  const questionCount = usePrintQuestionCount(4);
+  const [questions] = useState<DecMulColQ[]>(() => genDecMulColQuestions(questionCount));
 
   // carryInputs[cardIdx][colIdx] — 0=D carry, 1=U carry
   const [carryInputs, setCarryInputs] = useState<string[][]>(() =>
-    Array.from({ length: 4 }, () => ["", ""])
+    Array.from({ length: questionCount }, () => ["", ""])
   );
   // operandInputs[cardIdx] — [0]=aD, [1]=aU, [2]=aDx, [3]=b
   const [operandInputs, setOperandInputs] = useState<string[][]>(() =>
-    Array.from({ length: 4 }, () => ["", "", "", ""])
+    Array.from({ length: questionCount }, () => ["", "", "", ""])
   );
   // resultInputs[cardIdx] — [0]=rD, [1]=rU, [2]=rDx
   const [resultInputs, setResultInputs] = useState<string[][]>(() =>
-    Array.from({ length: 4 }, () => ["", "", ""])
+    Array.from({ length: questionCount }, () => ["", "", ""])
   );
   const [validated, setValidated] = useState<boolean>(false);
-  const [_results, setResults] = useState<boolean[]>([false, false, false, false]);
+  const [_results, setResults] = useState<boolean[]>(() => Array(questionCount).fill(false));
   const revealCorrection = useEvalReveal();
 
   const onValidatedRef = useRef(onValidated);
@@ -865,8 +876,8 @@ export function DecMulColGridExercise({
 }
 
 // ── A5.6 — Decimal Division (simple: small quotient) ─────────────────────────
-function genDivSimpleItems(): DecQuestion[] {
-  return Array.from({ length: 5 }, (_, i) => {
+function genDivSimpleItems(count: number): DecQuestion[] {
+  return Array.from({ length: count }, (_, i) => {
     const quotT = rnd(11, 99); // quotient 1.1–9.9 in tenths
     const divisor = rnd(2, 9);
     const dividT = quotT * divisor;
@@ -888,7 +899,8 @@ export function DecDivSimpleExercise({
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<DecQuestion[]>(genDivSimpleItems);
+  const questionCount = usePrintQuestionCount(5);
+  const [questions] = useState<DecQuestion[]>(() => genDivSimpleItems(questionCount));
   return (
     <DecExercise
       exNum={exNum}
@@ -902,8 +914,8 @@ export function DecDivSimpleExercise({
 }
 
 // ── A5.6 — Decimal Division (missing operand) ─────────────────────────────────
-function genDivMissingItems(): DecQuestion[] {
-  return Array.from({ length: 5 }, (_, i) => {
+function genDivMissingItems(count: number): DecQuestion[] {
+  return Array.from({ length: count }, (_, i) => {
     const quotT = rnd(11, 99);
     const divisor = rnd(2, 9);
     const dividT = quotT * divisor;
@@ -933,7 +945,8 @@ export function DecDivMissingExercise({
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<DecQuestion[]>(genDivMissingItems);
+  const questionCount = usePrintQuestionCount(5);
+  const [questions] = useState<DecQuestion[]>(() => genDivMissingItems(questionCount));
   return (
     <DecExercise
       exNum={exNum}
@@ -947,8 +960,8 @@ export function DecDivMissingExercise({
 }
 
 // ── A5.6 — Decimal Division (extended: 2-decimal quotient) ───────────────────
-function genDivExtItems(): DecQuestion[] {
-  return Array.from({ length: 5 }, (_, i) => {
+function genDivExtItems(count: number): DecQuestion[] {
+  return Array.from({ length: count }, (_, i) => {
     const quotH = rnd(101, 999); // quotient 1.01–9.99 in hundredths
     const divisor = rnd(2, 9);
     const dividH = quotH * divisor;
@@ -969,7 +982,8 @@ export function DecDivExtExercise({
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<DecQuestion[]>(genDivExtItems);
+  const questionCount = usePrintQuestionCount(5);
+  const [questions] = useState<DecQuestion[]>(() => genDivExtItems(questionCount));
   return (
     <DecExercise
       exNum={exNum}
@@ -1216,10 +1230,11 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<DecColQ[]>(() => genDecColQs(op, 2));
-  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(10).fill("")));
+  const questionCount = usePrintQuestionCount(2);
+  const [questions] = useState<DecColQ[]>(() => genDecColQs(op, questionCount));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: questionCount }, () => Array(10).fill("")));
   const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>(() => Array(2).fill(false));
+  const [results, setResults] = useState<boolean[]>(() => Array(questionCount).fill(false));
   const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
@@ -1403,12 +1418,13 @@ export function DecColArithFullExercise({ exNum, validateCommand, onValidated }:
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
+  const questionCount = usePrintQuestionCount(2);
   const [questions] = useState<DecColQ[]>(() => {
-    const [q1] = genDecColQs("+", 1);
-    const [q2] = genDecColQs("-", 1);
-    return [q1!, q2!];
+    const addN = Math.ceil(questionCount / 2);
+    const subN = questionCount - addN;
+    return [...genDecColQs("+", addN), ...genDecColQs("-", subN)];
   });
-  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(20).fill("")));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: questionCount }, () => Array(20).fill("")));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1514,9 +1530,11 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<DecExprCompQ[]>(() => genDecExprCompQs(5));
-  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
-  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
+  const [questions] = useState<DecExprCompQ[]>(() => genDecExprCompQs(questionCount));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(questionCount).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1540,7 +1558,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les expressions. Choisissez &lt;, = ou &gt;.</p>
       </div>
-      <div className="grid items-center gap-y-4" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
+      <div className={printQuestionsListClass(columns, "space-y-4")}>
         {questions.map((q: DecExprCompQ, i: number) => {
           const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
@@ -1564,9 +1582,9 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
             }`;
           };
           return (
-            <React.Fragment key={i}>
-              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="text-right font-mono text-sm text-[var(--color-text-primary)] pr-2">
+            <div key={i} className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] shrink-0">{i + 1}.</span>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">
                 {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
               </span>
               <div className="flex gap-1.5">
@@ -1578,10 +1596,10 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
                   </button>
                 ))}
               </div>
-              <span className="font-mono text-sm text-[var(--color-text-primary)] pl-2">
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">
                 {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
               </span>
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
@@ -1631,8 +1649,8 @@ function computeCarries5Dec(a: number, bDigit: number): (number | null)[] {
   return row;
 }
 
-function genDecMul2Questions(): DecMul2Q[] {
-  return Array.from({ length: 2 }, () => {
+function genDecMul2Questions(count: number): DecMul2Q[] {
+  return Array.from({ length: count }, () => {
     const aDecimals = Math.random() < 0.5 ? 1 : 2;
     const bDecimals = 1;
     const totalDecimals = aDecimals + bDecimals;
@@ -1850,14 +1868,15 @@ export function DecMul2ColExercise({ exNum, validateCommand, onValidated }: {
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = React.useState<DecMul2Q[]>(genDecMul2Questions);
+  const questionCount = usePrintQuestionCount(2);
+  const [questions] = React.useState<DecMul2Q[]>(() => genDecMul2Questions(questionCount));
   const [carryInputs, setCarryInputs] = React.useState<string[][]>(() =>
-    Array.from({ length: 2 }, () => Array(10).fill(""))
+    Array.from({ length: questionCount }, () => Array(10).fill(""))
   );
   const [cellAnswers, setCellAnswers] = React.useState<string[][]>(() =>
-    Array.from({ length: 2 }, () => Array(15).fill(""))
+    Array.from({ length: questionCount }, () => Array(15).fill(""))
   );
-  const [decResults, setDecResults] = React.useState<string[]>(() => Array(2).fill(""));
+  const [decResults, setDecResults] = React.useState<string[]>(() => Array(questionCount).fill(""));
   const [validated, setValidated] = React.useState(false);
   const revealCorrection = useEvalReveal();
 

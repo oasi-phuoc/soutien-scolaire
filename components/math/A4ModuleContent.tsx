@@ -1725,6 +1725,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
 }) {
   const gen = variant === "extended" ? genDecToFracExtQ : genDecToFracQ;
   const questionCount = usePrintQuestionCount(5);
+  const columns = usePrintColumns();
   const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: questionCount }, gen));
   const [answers, setAnswers] = useState<string[]>(() => Array(questionCount).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(questionCount).fill("idle"));
@@ -1750,12 +1751,12 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
         <h2 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
-      <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 3.5rem 1.5rem 3.5rem", alignItems: "center" }}>
+      <div className={printQuestionsListClass(columns, "space-y-5")}>
         {questions.map((q, i) => {
           const isWrong = revealCorrection && statuses[i] === "wrong";
           const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
           return (
-            <React.Fragment key={i}>
+            <div key={i} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
               <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
               <span className="text-base font-semibold text-[var(--color-text-primary)] text-center">=</span>
@@ -1771,7 +1772,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
                 <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
                 <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
               </span>
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
