@@ -1,15 +1,18 @@
 import type { Exercise, FillItem } from "../../grammar-data";
 
-/** Nombre de modèles par exercice (pronoms variables + accord). */
-export const CONJ_POOL_SIZE = 15;
+/** Nombre de modèles pour ex. 1–5 et 11. */
+export const CONJ_POOL_SIZE = 10;
+
+/** Exercices 6 et 12 : 5 questions. */
+export const CONJ_SHORT_POOL_SIZE = 5;
 
 /** Exercices négation 9–10 : 5 questions (3 aff. + 2 nég.). */
 export const NEGATION_SHORT_POOL_SIZE = 5;
 const NEGATION_QCM_AFF_COUNT = 3;
 
-/** Pronoms utilisés pour générer les 15 phrases (cycle). */
+/** Pronoms utilisés pour générer les phrases (cycle). */
 export const STANDARD_PRONOUNS = [
-  { display: "Je", elide: true },
+  { display: "Je", elide: false },
   { display: "Tu", elide: false },
   { display: "Il", elide: false },
   { display: "Elle", elide: false },
@@ -107,6 +110,24 @@ export type LessonConjProfile = {
   /** Inclure le bloc négation (défaut true). */
   negation?: boolean;
   negationMode?: TenseMode | "present";
+  /** Second temps imposé à l'exercice 2 (leçons à deux temps). */
+  altMode?: TenseMode;
+  /** Verbes au second temps (sinon `verbs`). */
+  altVerbs?: VerbConj[];
+  /** Temps mélangés 50/50 dans les exercices 3 et 10. */
+  mixModes?: [TenseMode, TenseMode];
+};
+
+export const TENSE_LABEL_FR: Record<TenseMode, string> = {
+  present: "présent",
+  futur_proche: "futur proche",
+  passe_recent: "passé récent",
+  passe_compose_avoir: "passé composé",
+  passe_compose_etre: "passé composé",
+  imparfait: "imparfait",
+  futur_simple: "futur simple",
+  conditionnel: "conditionnel",
+  imperatif: "impératif",
 };
 
 function sep(display: string, elide: boolean): string {
@@ -183,25 +204,26 @@ export function buildConjugationPool(
   verbs: VerbConj[],
   mode: TenseMode,
   tails = DEFAULT_TAILS,
+  opts?: { size?: number; includeTenseLabel?: boolean },
 ): FillItem[] {
+  const size = opts?.size ?? CONJ_POOL_SIZE;
+  const includeTenseLabel = opts?.includeTenseLabel ?? false;
+  const tenseTag = includeTenseLabel ? `, ${TENSE_LABEL_FR[mode]}` : "";
   const items: FillItem[] = [];
-  for (let i = 0; i < CONJ_POOL_SIZE; i++) {
+  for (let i = 0; i < size; i++) {
     const v = verbs[Math.floor(i / STANDARD_PRONOUNS.length) % verbs.length];
     const p = pronounAt(i);
     const tail = tailAt(tails, i);
     const idx = i % STANDARD_PRONOUNS.length;
     const answer = verbOnlyAnswer(v, mode, idx);
-    const blank = mode === "futur_proche" || mode === "passe_recent"
-      ? "___"
-      : "___";
-    const parenthetical = `(${v.infinitive})`;
+    const blank = "___";
+    const parenthetical = `(${v.infinitive}${tenseTag})`;
     let sentence: string;
-    if (mode === "futur_proche") {
-      sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${v.infinitive}${tail}`;
-    } else if (mode === "passe_recent") {
-      sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${v.infinitive}${tail}`;
+    if (mode === "futur_proche" || mode === "passe_recent") {
+      sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${parenthetical}${tail}`;
     } else if (mode === "passe_compose_avoir" || mode === "passe_compose_etre") {
-      sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${v.participe ?? v.stem}${tail}`;
+      const pp = (idx === 3 || idx === 7) && v.participeF ? v.participeF : v.participe ?? v.stem;
+      sentence = `${p.display}${sep(p.display, p.elide)}${blank} ${pp} ${parenthetical}${tail}`;
     } else if (mode === "imperatif") {
       const impForms = [1, 4, 5];
       const impIdx = impForms[i % impForms.length];
@@ -216,6 +238,27 @@ export function buildConjugationPool(
     items.push({ sentence, hint: v.infinitive, answer });
   }
   return items;
+}
+
+/** Mélange 50/50 de deux temps (exercices 3 et 10). */
+export function buildMixedConjugationPool(
+  verbsA: VerbConj[],
+  modeA: TenseMode,
+  verbsB: VerbConj[],
+  modeB: TenseMode,
+  tails = DEFAULT_TAILS,
+  size = CONJ_POOL_SIZE,
+): FillItem[] {
+  const half = Math.floor(size / 2);
+  const poolA = buildConjugationPool(verbsA, modeA, tails, { size: half, includeTenseLabel: true });
+  const poolB = buildConjugationPool(verbsB, modeB, tails, { size: size - half, includeTenseLabel: true });
+  const mixed: FillItem[] = [];
+  const max = Math.max(poolA.length, poolB.length);
+  for (let i = 0; i < max; i++) {
+    if (i < poolA.length) mixed.push(poolA[i]!);
+    if (i < poolB.length) mixed.push(poolB[i]!);
+  }
+  return mixed.slice(0, size);
 }
 
 /** Réponse attendue dans le blanc : verbe/auxiliaire seul (sans pronom sujet). */
@@ -307,19 +350,26 @@ function defaultSampleSentences(verbs: VerbConj[], mode: TenseMode): string[] {
 /** Pack complet des 8 exercices style R2. */
 export function buildR2StyleExercises(profile: LessonConjProfile): Exercise[] {
   const tails = profile.tails ?? DEFAULT_TAILS;
-  const verbTails = profile.verbs.map((v) =>
-    profile.mode === "passe_compose_avoir" || profile.mode === "passe_compose_etre"
+  const mode1 = profile.mode;
+  const mode2 = profile.altMode ?? profile.mode;
+  const verbs1 = profile.verbs;
+  const verbs2 = profile.altVerbs ?? profile.verbs;
+  const label1 = TENSE_LABEL_FR[mode1];
+  const label2 = TENSE_LABEL_FR[mode2];
+
+  const verbTails = verbs1.map((v) =>
+    mode1 === "passe_compose_avoir" || mode1 === "passe_compose_etre"
       ? ` ${v.participe ?? v.stem}.`
       : ` ${v.infinitive}.`,
   );
   const ex1Tails =
-    profile.mode === "futur_proche" ||
-    profile.mode === "passe_recent" ||
-    profile.mode === "passe_compose_avoir" ||
-    profile.mode === "passe_compose_etre"
+    mode1 === "futur_proche" ||
+    mode1 === "passe_recent" ||
+    mode1 === "passe_compose_avoir" ||
+    mode1 === "passe_compose_etre"
       ? verbTails
       : tails;
-  const samples = profile.sampleSentences ?? defaultSampleSentences(profile.verbs, profile.mode);
+  const samples = profile.sampleSentences ?? defaultSampleSentences(verbs1, mode1);
   const classifyPool = buildClassifySvc(samples.slice(0, 5));
 
   const wordOrderItems = samples.map((s) => ({
@@ -328,15 +378,46 @@ export function buildR2StyleExercises(profile: LessonConjProfile): Exercise[] {
   }));
 
   const ex1Instruction =
-    profile.mode === "futur_proche"
-      ? "Complétez avec la forme correcte du verbe « aller »."
-      : profile.mode === "passe_recent"
-        ? "Complétez avec la forme correcte de « venir de »."
-        : profile.mode === "passe_compose_avoir"
-          ? "Complétez avec la forme correcte de l'auxiliaire « avoir »."
-          : profile.mode === "passe_compose_etre"
-            ? "Complétez avec la forme correcte de l'auxiliaire « être »."
-            : "Complétez avec la terminaison correcte.";
+    mode1 === "futur_proche"
+      ? "Complétez avec la forme correcte du verbe « aller » au futur proche."
+      : mode1 === "passe_recent"
+        ? "Complétez avec la forme correcte de « venir de » au passé récent."
+        : mode1 === "passe_compose_avoir"
+          ? "Complétez avec la forme correcte de l'auxiliaire « avoir » au passé composé."
+          : mode1 === "passe_compose_etre"
+            ? "Complétez avec la forme correcte de l'auxiliaire « être » au passé composé."
+            : `Complétez avec la terminaison correcte au ${label1}.`;
+
+  const ex2Instruction = `Conjuguez le verbe entre parenthèses au ${label2}.`;
+
+  const hasMix = Boolean(profile.mixModes && profile.mixModes.length === 2);
+  const mixModes = profile.mixModes;
+  const ex3Pool = hasMix && mixModes
+    ? buildMixedConjugationPool(
+        mixModes[0] === mode1 ? verbs1 : verbs2,
+        mixModes[0],
+        mixModes[1] === mode1 ? verbs1 : verbs2,
+        mixModes[1],
+        tails,
+        CONJ_POOL_SIZE,
+      )
+    : buildPluralPool(verbs1, tails);
+  const ex3Instruction = hasMix && mixModes
+    ? `Conjuguez le verbe entre parenthèses au ${TENSE_LABEL_FR[mixModes[0]]} ou au ${TENSE_LABEL_FR[mixModes[1]]} selon l'indication.`
+    : "Mettez les phrases au pluriel.";
+
+  const classifyItems = [
+    { word: "Elle {a}le pain{/a}.", categoryIdx: 0 },
+    { word: "Il travaille {a}à Paris{/a}.", categoryIdx: 1 },
+    { word: "Nous partons {a}tôt le matin{/a}.", categoryIdx: 2 },
+    { word: "Tu regardes {a}la télé{/a}.", categoryIdx: 0 },
+    { word: "Ils marchent {a}dans la rue{/a}.", categoryIdx: 1 },
+    { word: "Je cours {a}rapidement{/a}.", categoryIdx: 2 },
+    { word: "Elle lit {a}un livre{/a}.", categoryIdx: 0 },
+    { word: "Nous habitons {a}en Suisse{/a}.", categoryIdx: 1 },
+    { word: "Vous chantez {a}souvent{/a}.", categoryIdx: 2 },
+    { word: "Il prend {a}le bus{/a}.", categoryIdx: 0 },
+  ];
 
   return [
     {
@@ -344,23 +425,23 @@ export function buildR2StyleExercises(profile: LessonConjProfile): Exercise[] {
       title: "Exercice 1",
       instruction: ex1Instruction,
       items: [],
-      pool: buildEndingPool(profile.verbs, ex1Tails, profile.mode),
+      pool: buildEndingPool(verbs1, ex1Tails, mode1),
       poolSize: CONJ_POOL_SIZE,
     },
     {
       type: "fill",
       title: "Exercice 2",
-      instruction: "Conjuguez le verbe entre parenthèses.",
+      instruction: ex2Instruction,
       items: [],
-      pool: buildConjugationPool(profile.verbs, profile.mode, tails),
+      pool: buildConjugationPool(verbs2, mode2, tails),
       poolSize: CONJ_POOL_SIZE,
     },
     {
       type: "fill",
       title: "Exercice 3",
-      instruction: "Mettez les phrases au pluriel.",
+      instruction: ex3Instruction,
       items: [],
-      pool: buildPluralPool(profile.verbs, tails),
+      pool: ex3Pool,
       poolSize: CONJ_POOL_SIZE,
     },
     {
@@ -377,23 +458,7 @@ export function buildR2StyleExercises(profile: LessonConjProfile): Exercise[] {
       title: "Exercice 5",
       instruction: "Identifiez le type du complément en gras.",
       categories: ["COD", "CC de lieu", "CC de temps / manière"],
-      items: [
-        { word: "Elle {a}le pain{/a}.", categoryIdx: 0 },
-        { word: "Il travaille {a}à Paris{/a}.", categoryIdx: 1 },
-        { word: "Nous partons {a}tôt le matin{/a}.", categoryIdx: 2 },
-        { word: "Tu regardes {a}la télé{/a}.", categoryIdx: 0 },
-        { word: "Ils marchent {a}dans la rue{/a}.", categoryIdx: 1 },
-        { word: "Je cours {a}rapidement{/a}.", categoryIdx: 2 },
-        { word: "Elle lit {a}un livre{/a}.", categoryIdx: 0 },
-        { word: "Nous habitons {a}en Suisse{/a}.", categoryIdx: 1 },
-        { word: "Vous chantez {a}souvent{/a}.", categoryIdx: 2 },
-        { word: "Il prend {a}le bus{/a}.", categoryIdx: 0 },
-        { word: "Tu vas {a}à l'école{/a}.", categoryIdx: 1 },
-        { word: "Elles dansent {a}le samedi{/a}.", categoryIdx: 2 },
-        { word: "Je mange {a}une pomme{/a}.", categoryIdx: 0 },
-        { word: "Ils restent {a}chez eux{/a}.", categoryIdx: 1 },
-        { word: "Nous voyageons {a}en été{/a}.", categoryIdx: 2 },
-      ],
+      items: classifyItems,
     },
     {
       type: "word_order",
@@ -401,7 +466,7 @@ export function buildR2StyleExercises(profile: LessonConjProfile): Exercise[] {
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
       items: [],
       pool: wordOrderItems,
-      poolSize: Math.min(CONJ_POOL_SIZE, wordOrderItems.length),
+      poolSize: Math.min(CONJ_SHORT_POOL_SIZE, wordOrderItems.length),
     },
     {
       type: "color_highlight",
@@ -455,18 +520,17 @@ function negativeCompoundForm(v: VerbConj, mode: TenseMode, idx: number): string
 }
 
 function negativeFuturProche(idx: number): string {
-  const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx];
-  const p = STANDARD_PRONOUNS[idx];
-  const elide = idx === 0 || idx === 2 || idx === 3;
-  const ne = elide ? "n'" : "ne ";
-  return `${p.display} ${ne}${aller} pas`;
+  const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx]!;
+  const p = STANDARD_PRONOUNS[idx]!;
+  return `${p.display} ne ${aller} pas`;
 }
 
-/** 6 exercices négation (style R1.7), 15 modèles par pool. */
+/** 6 exercices négation (style R1.7). */
 export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
   const mode = profile.negationMode ?? profile.mode;
   const verbs = profile.verbs;
   const tails = profile.tails ?? DEFAULT_TAILS;
+  const tenseLabel = TENSE_LABEL_FR[mode === "present" ? "present" : mode];
 
   const qcmPool: Array<{ sentence: string; choices: string[]; correctIdx: number }> = [];
   const fillPool: FillItem[] = [];
@@ -499,6 +563,57 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
     });
   }
 
+  // Ex. 10 : si leçons à deux temps, mélanger 50/50 des conjugaisons (forme affirmative → à négativer plus tard via fill)
+  // Ici on remplace le pool fill par un mélange de phrases à conjuguer puis négativer n'est pas idéal.
+  // À la place : phrases affirmatives déjà conjuguées aux deux temps, à mettre au négatif.
+  let ex10Pool = fillPool;
+  let ex10Instruction = `Mettez la phrase à la forme négative (${tenseLabel}).`;
+  if (profile.mixModes && profile.mixModes.length === 2) {
+    const [m1, m2] = profile.mixModes;
+    const verbs1 = profile.verbs;
+    const verbs2 = profile.altVerbs ?? profile.verbs;
+    const mixedFill: FillItem[] = [];
+    const size = NEGATION_SHORT_POOL_SIZE;
+    for (let i = 0; i < size; i++) {
+      const useFirst = i % 2 === 0;
+      const m = useFirst ? m1 : m2;
+      const vs = useFirst ? verbs1 : verbs2;
+      const v = vs[i % vs.length]!;
+      const idx = i % STANDARD_PRONOUNS.length;
+      const p = STANDARD_PRONOUNS[idx]!;
+      const tail = tailAt(tails, i).replace(/^\s/, "");
+      const label = TENSE_LABEL_FR[m];
+      let affForm: string;
+      let negForm: string;
+      if (m === "futur_proche") {
+        const aller = ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"][idx]!;
+        affForm = `${p.display} ${aller} ${v.infinitive} ${tail}`;
+        negForm = `${negativeFuturProche(idx)} ${v.infinitive} ${tail}`;
+      } else if (m === "passe_compose_avoir" || m === "passe_compose_etre") {
+        const aux =
+          m === "passe_compose_etre"
+            ? ["suis", "es", "est", "est", "sommes", "êtes", "sont", "sont"][idx]!
+            : ["ai", "as", "a", "a", "avons", "avez", "ont", "ont"][idx]!;
+        const pp = (idx === 3 || idx === 7) && v.participeF ? v.participeF : v.participe ?? v.stem;
+        affForm = `${p.display} ${aux} ${pp} ${tail}`;
+        negForm = `${negativeCompoundForm(v, m, idx)} ${tail}`;
+      } else if (m === "futur_simple" || m === "imparfait" || m === "conditionnel" || m === "present") {
+        affForm = `${p.display} ${v.forms[idx]} ${tail}`;
+        negForm = `${negativePresentForm(v, idx)} ${tail}`;
+      } else {
+        affForm = `${p.display} ${v.forms[idx]} ${tail}`;
+        negForm = `${negativePresentForm(v, idx)} ${tail}`;
+      }
+      mixedFill.push({
+        sentence: `${affForm.replace(/\.$/, "")}. → ${p.display} ___ ${tail} (${v.infinitive}, ${label})`,
+        hint: `ne … pas — ${label}`,
+        answer: negForm.replace(p.display, "").replace(tail, "").trim(),
+      });
+    }
+    ex10Pool = mixedFill;
+    ex10Instruction = `Mettez la phrase à la forme négative (${TENSE_LABEL_FR[m1]} ou ${TENSE_LABEL_FR[m2]} selon l'indication).`;
+  }
+
   return [
     {
       type: "qcm",
@@ -512,9 +627,9 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
     {
       type: "fill",
       title: "Exercice 10 — Négation",
-      instruction: "Mettez la phrase à la forme négative.",
+      instruction: ex10Instruction,
       items: [],
-      pool: fillPool,
+      pool: ex10Pool,
       poolSize: NEGATION_SHORT_POOL_SIZE,
       inputWidth: "w-[10.5rem]",
     },
@@ -555,7 +670,7 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
         { sentence: "Tu n'aimes pas ça.", words: ["Tu", "n'aimes", "pas", "ça."] },
         { sentence: "Ils ne sont pas arrivés.", words: ["Ils", "ne", "sont", "pas", "arrivés."] },
       ],
-      poolSize: CONJ_POOL_SIZE,
+      poolSize: CONJ_SHORT_POOL_SIZE,
     },
     {
       type: "color_highlight",
@@ -578,19 +693,39 @@ export function buildNegationExercises(profile: LessonConjProfile): Exercise[] {
   ];
 }
 
-/** Applique poolSize 15 à tous les exercices avec pool. */
+function exerciseNumberFromTitle(title: string): number | null {
+  const m = /Exercice\s+(\d+)/i.exec(title);
+  return m ? Number(m[1]) : null;
+}
+
+/** Taille de pool cible selon le numéro d'exercice. */
+export function targetConjPoolSize(title: string): number {
+  const n = exerciseNumberFromTitle(title);
+  if (n === 6 || n === 12) return CONJ_SHORT_POOL_SIZE;
+  if (n === 9 || n === 10) return NEGATION_SHORT_POOL_SIZE;
+  return CONJ_POOL_SIZE;
+}
+
+/** Applique les tailles de pool (10 / 5) à tous les exercices avec pool. */
 export function bumpPoolSizes(exercises: Exercise[]): Exercise[] {
   return exercises.map((ex) => {
-    if ("pool" in ex && ex.pool && ex.pool.length > 0 && ex.pool.length < CONJ_POOL_SIZE) {
+    const target = targetConjPoolSize(ex.title);
+    if ("pool" in ex && ex.pool && ex.pool.length > 0) {
       const base = ex.pool;
-      const extended = [...base];
-      while (extended.length < CONJ_POOL_SIZE) {
-        extended.push(base[extended.length % base.length]);
+      if (base.length < target) {
+        const extended = [...base];
+        while (extended.length < target) {
+          extended.push(base[extended.length % base.length]);
+        }
+        return { ...ex, pool: extended, poolSize: target } as Exercise;
       }
-      return { ...ex, pool: extended, poolSize: CONJ_POOL_SIZE } as Exercise;
+      return { ...ex, poolSize: Math.min(ex.poolSize ?? target, target, base.length) } as Exercise;
     }
-    if ("pool" in ex && ex.pool && ex.pool.length >= CONJ_POOL_SIZE) {
-      return { ...ex, poolSize: CONJ_POOL_SIZE };
+    if ("items" in ex && Array.isArray(ex.items) && ex.items.length > target) {
+      const n = exerciseNumberFromTitle(ex.title);
+      if (n === 1 || n === 2 || n === 3 || n === 4 || n === 5 || n === 11) {
+        return { ...ex, items: ex.items.slice(0, target) } as Exercise;
+      }
     }
     return ex;
   });
@@ -600,4 +735,41 @@ export function applyConjProfile(profile: LessonConjProfile): Exercise[] {
   const main = buildR2StyleExercises(profile);
   if (profile.negation === false) return main;
   return [...main, ...buildNegationExercises(profile)];
+}
+
+const TENSE_WORD_RE =
+  /présent|imparfait|futur|passé|conditionnel|impératif|subjonctif|passé composé|passé récent/i;
+
+/** Ajoute le temps dans la consigne si elle demande de conjuguer sans le préciser. */
+export function annotateConjInstructions(exercises: Exercise[], tenseLabel: string): Exercise[] {
+  return exercises.map((ex) => {
+    if (!("instruction" in ex) || typeof ex.instruction !== "string") return ex;
+    const instr = ex.instruction;
+    if (TENSE_WORD_RE.test(instr)) return ex;
+    if (/conjuguez le verbe entre parenthèses\.?/i.test(instr)) {
+      return {
+        ...ex,
+        instruction: instr.replace(
+          /conjuguez le verbe entre parenthèses\.?/i,
+          `Conjuguez le verbe entre parenthèses au ${tenseLabel}.`,
+        ),
+      } as Exercise;
+    }
+    if (/conjuguez les verbes entre parenthèses\.?/i.test(instr)) {
+      return {
+        ...ex,
+        instruction: instr.replace(
+          /conjuguez les verbes entre parenthèses\.?/i,
+          `Conjuguez les verbes entre parenthèses au ${tenseLabel}.`,
+        ),
+      } as Exercise;
+    }
+    if (/conjuguez le verbe\b/i.test(instr) && !TENSE_WORD_RE.test(instr)) {
+      return {
+        ...ex,
+        instruction: `${instr.replace(/\s*$/, "")} (${tenseLabel}).`,
+      } as Exercise;
+    }
+    return ex;
+  });
 }

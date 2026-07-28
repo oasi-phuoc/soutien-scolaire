@@ -229,9 +229,19 @@ export const TENSE_LESSON_PROFILES: Record<string, LessonConjProfile> = {
   "a2-gr-futur-simple-ou-proche": {
     slug: "a2-gr-futur-simple-ou-proche",
     mode: "futur_proche",
+    altMode: "futur_simple",
+    mixModes: ["futur_proche", "futur_simple"],
     verbs: [MANGER, TRAVAILLER, PARTIR, FINIR],
+    altVerbs: [futur("manger"), futur("travailler"), futur("partir"), futur("finir")],
     verbPool: ["manger", "travailler", "partir", "finir", "voyager"],
     negationMode: "futur_proche",
+    sampleSentences: [
+      "Je vais manger demain.",
+      "Elle mangera l'année prochaine.",
+      "Nous allons partir ce soir.",
+      "Ils partiront en août.",
+      "Tu vas travailler demain matin.",
+    ],
   },
   "a2-gr-hypothese-futur": {
     slug: "a2-gr-hypothese-futur",
@@ -254,9 +264,19 @@ export const TENSE_LESSON_PROFILES: Record<string, LessonConjProfile> = {
   "a2-gr-passe-compose-ou-imparfait": {
     slug: "a2-gr-passe-compose-ou-imparfait",
     mode: "passe_compose_avoir",
+    altMode: "imparfait",
+    mixModes: ["passe_compose_avoir", "imparfait"],
     verbs: [MANGER, FINIR, PARLER],
+    altVerbs: [imparfait("mang", "manger"), imparfait("finiss", "finir"), imparfait("parl", "parler")],
     verbPool: ["manger", "finir", "parler", "travailler", "habiter"],
     negationMode: "passe_compose_avoir",
+    sampleSentences: [
+      "J'ai mangé une pomme.",
+      "Je mangeais souvent ici.",
+      "Il a fini ses devoirs.",
+      "Il finissait ses devoirs.",
+      "Nous avons parlé ensemble.",
+    ],
   },
   "a2-gr-gerondif": {
     slug: "a2-gr-gerondif",
@@ -346,7 +366,7 @@ export const R2_NEGATION_PROFILES: Record<string, LessonConjProfile> = {
   },
 };
 
-/** Leçon négation passé composé — enrichir pools à 15. */
+/** Leçon négation passé composé — enrichir pools. */
 export const NEGATION_PASSE_COMPOSE_SLUG = "negation-passe-compose";
 
 export function getProfileForLesson(slug: string): LessonConjProfile | undefined {

@@ -66,7 +66,23 @@ const TAB_TITLES: Record<Exclude<FrenchTab, "general">, string> = {
 };
 
 const GRAMMAR_AVAILABLE = new Set(["G1"]);
-const CONJ_AVAILABLE = new Set(["C1"]);
+const CONJ_AVAILABLE = new Set(["C1", "C2", "C3", "C4"]);
+
+/** Déblocage losange conjugaison : C1 → (C2 et C3) → C4. */
+function isConjModuleAccessible(
+  grpId: string,
+  themesByGroup: Map<string, FrenchTheme[]>,
+  completedSlugs: Set<string>,
+): boolean {
+  const allDone = (id: string) => {
+    const themes = themesByGroup.get(id) ?? [];
+    return themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
+  };
+  if (grpId === "C1") return true;
+  if (grpId === "C2" || grpId === "C3") return allDone("C1");
+  if (grpId === "C4") return allDone("C2") && allDone("C3");
+  return false;
+}
 
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
@@ -416,6 +432,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   function renderModuleGroups(
     groups: SectionDef[],
     available: Set<string>,
+    opts?: { conjDiamond?: boolean },
   ) {
     // Regroupe par code G*/C* (pas par champ tab) : certaines leçons de temps
     // sont en module C tout en restant routées via grammaire.
@@ -423,12 +440,20 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       frenchThemes.filter((th) => moduleGroupId(th.code) === grp.id),
     );
 
+    const themesByGroup = new Map<string, FrenchTheme[]>();
+    for (const grp of groups) {
+      themesByGroup.set(
+        grp.id,
+        allTabThemes.filter((th) => moduleGroupId(th.code) === grp.id),
+      );
+    }
+
     let prevCount = 0;
 
     return (
       <>
         {groups.map((grp) => {
-          const themes = allTabThemes.filter((th) => moduleGroupId(th.code) === grp.id);
+          const themes = themesByGroup.get(grp.id) ?? [];
           if (themes.length === 0) return null;
 
 
@@ -438,10 +463,15 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
           if (!hydrated || (!available.has(grp.id) && !isAdmin)) {
             state = "locked";
           } else {
-            const prevThemes = allTabThemes.slice(0, prevCount);
-            const sectionAccessible =
-              prevThemes.length === 0 ||
-              prevThemes.every((th) => completedSlugs.has(th.slug));
+            const sectionAccessible = opts?.conjDiamond
+              ? isConjModuleAccessible(grp.id, themesByGroup, completedSlugs) || !!isAdmin
+              : (() => {
+                  const prevThemes = allTabThemes.slice(0, prevCount);
+                  return (
+                    prevThemes.length === 0 ||
+                    prevThemes.every((th) => completedSlugs.has(th.slug))
+                  );
+                })();
 
             if (!sectionAccessible && !isAdmin) {
               state = "locked";
@@ -553,7 +583,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
             })}
           </>
         ) : tab === "conjugaison" ? (
-          renderModuleGroups(CONJ_GROUPS, CONJ_AVAILABLE)
+          renderModuleGroups(CONJ_GROUPS, CONJ_AVAILABLE, { conjDiamond: true })
         ) : tab === "grammaire" ? (
           renderModuleGroups(GRAMMAR_GROUPS, GRAMMAR_AVAILABLE)
         ) : null}
