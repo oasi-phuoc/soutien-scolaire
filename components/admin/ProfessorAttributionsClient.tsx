@@ -96,7 +96,7 @@ function ClassMultiPicker({
   }
 
   return (
-    <div ref={rootRef} className="relative" style={widthStyle}>
+    <div ref={rootRef} className="relative w-full min-w-0" style={widthStyle}>
       <button
         type="button"
         disabled={disabled}
