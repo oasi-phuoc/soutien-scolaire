@@ -580,7 +580,10 @@ export function AdminTable({
               <th className="admin-users-table__statut hidden bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
               <th className="admin-users-table__imp hidden bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
               <th className="admin-users-table__classe hidden bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
-              <th className="admin-users-table__acces bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">Accès</th>
+              <th className="admin-users-table__acces bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">
+                <span className="sm:hidden">Acc.</span>
+                <span className="hidden sm:inline">Accès</span>
+              </th>
               <th className="admin-users-table__maths hidden bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3">Maths</th>
               <th className="admin-users-table__francais hidden bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
               <th className="admin-users-table__lecture hidden bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
@@ -649,8 +652,8 @@ export function AdminTable({
                     )}
                   </td>
                   <td className="admin-users-table__acces px-1 py-2 text-[11px] tabular-nums text-zinc-500 sm:px-2 sm:py-3 sm:text-xs dark:text-zinc-400" title={lastSeen(activity)}>
-                    <span className="sm:hidden">{lastSeenDate(activity)}</span>
-                    <span className="hidden truncate sm:inline">{lastSeen(activity)}</span>
+                    <span className="block truncate sm:hidden">{lastSeenDate(activity)}</span>
+                    <span className="hidden truncate sm:block">{lastSeen(activity)}</span>
                   </td>
                   <td className="admin-users-table__maths hidden px-2 py-2.5 sm:table-cell sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
                   <td className="admin-users-table__francais hidden px-2 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
@@ -658,7 +661,7 @@ export function AdminTable({
                   <td className="admin-users-table__test min-w-0 px-1 py-2 sm:px-2 sm:py-3" title={testTitle}>
                     {testPoints !== null ? (
                       <>
-                        <span className="text-[11px] font-bold tabular-nums text-violet-700 sm:hidden dark:text-violet-300">{testPoints}</span>
+                        <span className="block truncate text-[11px] font-bold tabular-nums text-violet-700 sm:hidden dark:text-violet-300">{testPoints}</span>
                         <div className="hidden min-w-0 space-y-0.5 sm:block">
                           {row.placement_combined ? (
                             <>

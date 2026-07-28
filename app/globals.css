@@ -703,9 +703,28 @@ input[type=number] {
   margin-bottom: 0.65em !important;
 }
 
-/* Admin users table — colonne loupe fixe minimale + scrollbar sans flèches */
-.admin-users-table {
+/* Admin + devoirs — table-fixed, contenu clipé (pas de chevauchement) */
+.admin-users-table,
+.tasks-apercu-table {
   table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-users-table th,
+.admin-users-table td,
+.tasks-apercu-table th,
+.tasks-apercu-table td {
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+/* Clip uniquement les cellules de données (pas les panneaux colspan) */
+.admin-users-table thead th,
+.admin-users-table tbody td:not([colspan]),
+.tasks-apercu-table thead th,
+.tasks-apercu-table tbody td:not([colspan]) {
+  overflow: hidden;
 }
 
 .admin-users-table col.admin-users-table__loupe,
@@ -722,11 +741,11 @@ input[type=number] {
   overflow: hidden;
 }
 
-/* Suivi des devoirs — largeurs fixes pour éviter le chevauchement mobile */
+/* ── Suivi des devoirs ── */
 .tasks-apercu-table col.tasks-apercu-table__titre { width: auto; }
 .tasks-apercu-table col.tasks-apercu-table__module { width: 18%; }
 .tasks-apercu-table col.tasks-apercu-table__date { width: 7.5rem; }
-.tasks-apercu-table col.tasks-apercu-table__eleves { width: 4.25rem; }
+.tasks-apercu-table col.tasks-apercu-table__eleves { width: 4.5rem; }
 .tasks-apercu-table col.tasks-apercu-table__avancement { width: 9rem; }
 .tasks-apercu-table col.tasks-apercu-table__actions {
   width: 2.5rem;
@@ -735,28 +754,35 @@ input[type=number] {
 }
 
 @media (max-width: 1023px) {
-  .tasks-apercu-table col.tasks-apercu-table__avancement {
-    width: 0;
-    min-width: 0;
-    max-width: 0;
+  .tasks-apercu-table col.tasks-apercu-table__avancement,
+  .tasks-apercu-table th.tasks-apercu-table__avancement,
+  .tasks-apercu-table td.tasks-apercu-table__avancement {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
 }
 
 @media (max-width: 767px) {
-  .tasks-apercu-table col.tasks-apercu-table__module {
-    width: 0;
-    min-width: 0;
-    max-width: 0;
+  .tasks-apercu-table col.tasks-apercu-table__module,
+  .tasks-apercu-table th.tasks-apercu-table__module,
+  .tasks-apercu-table td.tasks-apercu-table__module {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
-  .tasks-apercu-table col.tasks-apercu-table__date {
-    width: 6.75rem;
-  }
-  .tasks-apercu-table col.tasks-apercu-table__eleves {
-    width: 3.5rem;
-  }
+  /* Budget mobile : date compacte JJ.MM.AA + Élèves */
+  .tasks-apercu-table col.tasks-apercu-table__date { width: 4.75rem; }
+  .tasks-apercu-table col.tasks-apercu-table__eleves { width: 3.25rem; }
 }
 
-/* Largeurs colonnes admin — une seule table, en-têtes et cellules alignés */
+/* ── Gestion des comptes ── */
 .admin-users-table col.admin-users-table__name { width: 22%; }
 .admin-users-table col.admin-users-table__statut { width: 7%; }
 .admin-users-table col.admin-users-table__imp { width: 5%; }
@@ -769,10 +795,17 @@ input[type=number] {
 
 @media (max-width: 1023px) {
   .admin-users-table col.admin-users-table__francais,
-  .admin-users-table col.admin-users-table__lecture {
-    width: 0;
-    min-width: 0;
-    max-width: 0;
+  .admin-users-table th.admin-users-table__francais,
+  .admin-users-table td.admin-users-table__francais,
+  .admin-users-table col.admin-users-table__lecture,
+  .admin-users-table th.admin-users-table__lecture,
+  .admin-users-table td.admin-users-table__lecture {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
   .admin-users-table col.admin-users-table__name { width: 28%; }
   .admin-users-table col.admin-users-table__acces { width: 14%; }
@@ -781,16 +814,28 @@ input[type=number] {
 
 @media (max-width: 639px) {
   .admin-users-table col.admin-users-table__statut,
+  .admin-users-table th.admin-users-table__statut,
+  .admin-users-table td.admin-users-table__statut,
   .admin-users-table col.admin-users-table__imp,
+  .admin-users-table th.admin-users-table__imp,
+  .admin-users-table td.admin-users-table__imp,
   .admin-users-table col.admin-users-table__classe,
-  .admin-users-table col.admin-users-table__maths {
-    width: 0;
-    min-width: 0;
-    max-width: 0;
+  .admin-users-table th.admin-users-table__classe,
+  .admin-users-table td.admin-users-table__classe,
+  .admin-users-table col.admin-users-table__maths,
+  .admin-users-table th.admin-users-table__maths,
+  .admin-users-table td.admin-users-table__maths {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
+  /* Loupe + nom + Accès (JJ.MM) + Test — largeurs disjointes */
   .admin-users-table col.admin-users-table__name { width: auto; }
-  .admin-users-table col.admin-users-table__acces { width: 3.25rem; }
-  .admin-users-table col.admin-users-table__test { width: 3.25rem; }
+  .admin-users-table col.admin-users-table__acces { width: 2.85rem; }
+  .admin-users-table col.admin-users-table__test { width: 2.5rem; }
 }
 
 .admin-table-scroll {

@@ -5,12 +5,22 @@ import { useRouter } from "next/navigation";
 import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
 import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
 import { SuiviIconLoupe } from "@/components/suivi/SuiviIconLoupe";
-import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
   const d = new Date(iso + "T00:00:00");
   return d.toLocaleDateString("fr-CH", { day: "numeric", month: "short", year: "numeric" });
+}
+
+/** Date compacte JJ.MM.AA pour mobile (colonne étroite). */
+function formatDateCompact(iso: string | null) {
+  if (!iso) return null;
+  const d = new Date(iso + "T00:00:00");
+  if (Number.isNaN(d.getTime())) return null;
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${dd}.${mm}.${yy}`;
 }
 
 function isDueSoon(iso: string | null) {
@@ -254,11 +264,9 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         )}
       </div>
 
-      <ScrollableTable
-        className="rounded-2xl border border-zinc-200 dark:border-zinc-800"
-        tableClassName="tasks-apercu-table w-full table-fixed text-sm"
-        bodyClassName=""
-        colgroup={
+      {/* Une seule table (en-tête sticky) — évite le décalage de ScrollableTable à 2 tables */}
+      <div className="app-table-scroll max-h-[calc(100dvh-14rem)] overflow-y-auto overflow-x-hidden rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
+        <table className="tasks-apercu-table w-full table-fixed text-sm">
           <colgroup>
             <col className="tasks-apercu-table__loupe" />
             <col className="tasks-apercu-table__titre" />
@@ -268,23 +276,28 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
             <col className="tasks-apercu-table__avancement" />
             <col className="tasks-apercu-table__actions" />
           </colgroup>
-        }
-        head={
-          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-            <th
-              className="tasks-apercu-table__loupe bg-[var(--color-theme)]"
-              aria-label="Détail"
-            />
-            <th className="tasks-apercu-table__titre min-w-0 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
-            <th className="tasks-apercu-table__module hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
-            <th className="tasks-apercu-table__date whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Date limite</th>
-            <th className="tasks-apercu-table__eleves whitespace-nowrap px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Élèves</th>
-            <th className="tasks-apercu-table__avancement hidden px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
-            <th className="tasks-apercu-table__actions px-2 py-2 sm:px-3 sm:py-3" aria-label="Supprimer" />
-          </tr>
-        }
-        body={
-            filtered.length === 0 ? (
+          <thead className="sticky top-0 z-20">
+            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+              <th
+                className="tasks-apercu-table__loupe bg-[var(--color-theme)]"
+                aria-label="Détail"
+              />
+              <th className="tasks-apercu-table__titre min-w-0 bg-[var(--color-theme)] px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3">Titre</th>
+              <th className="tasks-apercu-table__module hidden bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white md:table-cell">Module / Leçon</th>
+              <th className="tasks-apercu-table__date bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3 sm:text-xs" title="Date limite">
+                <span className="sm:hidden">Limite</span>
+                <span className="hidden sm:inline">Date limite</span>
+              </th>
+              <th className="tasks-apercu-table__eleves bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:px-4 sm:py-3 sm:text-xs" title="Élèves">
+                <span className="sm:hidden">Él.</span>
+                <span className="hidden sm:inline">Élèves</span>
+              </th>
+              <th className="tasks-apercu-table__avancement hidden bg-[var(--color-theme)] px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Avancement</th>
+              <th className="tasks-apercu-table__actions bg-[var(--color-theme)] px-2 py-2 sm:px-3 sm:py-3" aria-label="Supprimer" />
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-4 py-10 text-center text-sm text-zinc-400">
                   {tasks.length === 0 ? "Aucune tâche assignée pour l'instant." : "Aucun résultat pour cette recherche."}
@@ -300,9 +313,16 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                 const soon = !overdue && isDueSoon(task.due_date);
                 const isOpen = openTaskId === task.task_id;
                 const settled = isTaskSettled(task);
+                const dateFull = formatDate(task.due_date);
+                const dateCompact = formatDateCompact(task.due_date);
+                const dateCls = overdue
+                  ? "text-red-600 dark:text-red-400"
+                  : soon
+                    ? "text-amber-600 dark:text-amber-400"
+                    : "text-zinc-600 dark:text-zinc-400";
                 return (
                   <Fragment key={task.task_id}>
-                    <tr className={`group align-top transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
+                    <tr className={`group align-middle transition-colors ${isOpen ? "bg-zinc-50 dark:bg-zinc-900/60" : "bg-white dark:bg-zinc-950"} border-b border-zinc-100 dark:border-zinc-800`}>
                       <td
                         className={`tasks-apercu-table__loupe sticky left-0 z-10 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] ${
                           isOpen
@@ -328,29 +348,34 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                       </td>
                       <td className="tasks-apercu-table__module hidden px-4 py-3 md:table-cell">
                         {task.module_ref || task.lesson_ref ? (
-                          <div className="space-y-0.5">
-                            {task.module_ref && <span className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">{task.module_ref}</span>}
-                            {task.lesson_ref && <span className="block text-xs text-zinc-400">{task.lesson_ref}</span>}
+                          <div className="min-w-0 space-y-0.5">
+                            {task.module_ref && <span className="block truncate text-xs font-medium text-zinc-700 dark:text-zinc-300">{task.module_ref}</span>}
+                            {task.lesson_ref && <span className="block truncate text-xs text-zinc-400">{task.lesson_ref}</span>}
                           </div>
                         ) : (
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="tasks-apercu-table__date whitespace-nowrap px-2 py-2.5 sm:px-4 sm:py-3">
+                      <td className="tasks-apercu-table__date px-1 py-2.5 sm:px-4 sm:py-3" title={dateFull ?? undefined}>
                         {task.due_date ? (
-                          <span className={`text-xs font-medium ${overdue ? "text-red-600 dark:text-red-400" : soon ? "text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400"}`}>
-                            {overdue && "⚠ "}{formatDate(task.due_date)}
-                          </span>
+                          <>
+                            <span className={`block truncate text-[11px] font-medium tabular-nums sm:hidden ${dateCls}`}>
+                              {overdue && "⚠ "}{dateCompact}
+                            </span>
+                            <span className={`hidden truncate text-xs font-medium sm:block ${dateCls}`}>
+                              {overdue && "⚠ "}{dateFull}
+                            </span>
+                          </>
                         ) : (
                           <span className="text-zinc-400">—</span>
                         )}
                       </td>
-                      <td className="tasks-apercu-table__eleves whitespace-nowrap px-2 py-2.5 text-xs font-semibold text-zinc-700 sm:px-4 sm:py-3 dark:text-zinc-300">
-                        {task.done_count}/{task.total_students}
+                      <td className="tasks-apercu-table__eleves px-1 py-2.5 text-[11px] font-semibold tabular-nums text-zinc-700 sm:px-4 sm:py-3 sm:text-xs dark:text-zinc-300">
+                        <span className="block truncate">{task.done_count}/{task.total_students}</span>
                       </td>
                       <td className="tasks-apercu-table__avancement hidden px-4 py-3 lg:table-cell">
-                        <div className="flex items-center gap-2">
-                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+                        <div className="flex min-w-0 items-center gap-2">
+                          <div className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
                             <div
                               className={`h-full rounded-full ${pct === 100 ? "bg-[var(--color-theme)]" : "bg-blue-500"}`}
                               style={{ width: `${pct}%` }}
@@ -388,9 +413,10 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                   </Fragment>
                 );
               })
-            )
-        }
-      />
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <p className="text-xs text-zinc-400">{filtered.length} tâche{filtered.length !== 1 ? "s" : ""} affichée{filtered.length !== 1 ? "s" : ""}</p>
     </div>
