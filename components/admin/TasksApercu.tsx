@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
 import { deleteTaskAction, getTaskStudentsAction, updateTaskAction } from "@/app/actions/tasks";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;

@@ -9,6 +9,7 @@ import { StudentPersonalInfoCard, StudentInfoButton } from "@/components/suivi/S
 import { StudentProgressDetail } from "@/components/suivi/StudentProgressDetail";
 import { PROGRESS_FILL } from "@/lib/suivi/progress-colors";
 import { formatPlacementScore, PLACEMENT_SUBJECT_MAX } from "@/lib/suivi/placement-best";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
@@ -158,9 +159,11 @@ export function SuiviClassDashboard({
         />
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="w-full text-sm">
-          <thead>
+      <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)]">
+        <ScrollableTable
+          className="rounded-none border-0"
+          maxHeightClassName="max-h-[calc(100dvh-16rem)] lg:max-h-[calc(100dvh-14rem)]"
+          head={
             <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Progression" />
               <th className="w-8 px-1 py-2 sm:px-2 sm:py-2.5" aria-label="Informations" />
@@ -186,9 +189,9 @@ export function SuiviClassDashboard({
                 Lecture
               </th>
             </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
-            {filteredStudents.length === 0 ? (
+          }
+          body={
+            filteredStudents.length === 0 ? (
               <tr>
                 <td colSpan={9} className="px-3 py-8 text-center text-sm text-zinc-400">
                   {studentSearch.trim() ? "Aucun élève trouvé." : "Aucun élève dans cette classe."}
@@ -201,7 +204,7 @@ export function SuiviClassDashboard({
                 const infoOpen = expandedInfoId === s.id;
                 return (
                   <Fragment key={s.id}>
-                    <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900">
+                    <tr className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                       <td className="px-2 py-2.5">
                         <button
                           type="button"
@@ -264,9 +267,9 @@ export function SuiviClassDashboard({
                   </Fragment>
                 );
               })
-            )}
-          </tbody>
-        </table>
+            )
+          }
+        />
         {filteredStudents.length > 0 && (
           <p className="border-t border-zinc-100 px-3 py-2 text-xs text-zinc-500 dark:border-zinc-800">
             {filteredStudents.length} élève{filteredStudents.length !== 1 ? "s" : ""}

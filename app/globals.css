@@ -488,6 +488,12 @@ input[type=number] {
   width: 6px;
 }
 
+.app-select-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .app-select-scroll::-webkit-scrollbar-track {
   background: transparent;
   margin-block: 0.5rem;
@@ -498,6 +504,38 @@ input[type=number] {
   border-radius: 999px;
   background: color-mix(in oklch, var(--color-theme) 40%, #c5c5c5);
   background-clip: padding-box;
+}
+
+/* Tableaux de données — scrollbar sous l’en-tête, sans flèches */
+.app-table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--color-theme) 40%, #c5c5c5) transparent;
+}
+
+.app-table-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.app-table-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-table-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--color-theme) 40%, #c5c5c5);
+  background-clip: padding-box;
+}
+
+.app-table-scroll::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .app-shell-bar {

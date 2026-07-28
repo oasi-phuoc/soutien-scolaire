@@ -8,6 +8,7 @@ import {
   type ClassDashboardStats,
   type ClassStudentRow,
 } from "@/app/actions/classes";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 function formatDuration(sec: number): string {
   if (sec < 60) return `${sec} s`;
@@ -57,18 +58,19 @@ export function ClassDashboardClient({ classLabel }: { classLabel: string }) {
         {stats?.active_last_7d ?? 0} élève(s) actif(s) sur les 7 derniers jours
       </p>
 
-      <div className="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
-        <table className="w-full text-sm">
-          <thead className="bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500 dark:bg-zinc-900">
-            <tr>
-              <th className="px-2 py-2.5 sm:px-4 sm:py-3">Élève</th>
-              <th className="px-2 py-2.5 sm:px-4 sm:py-3">Devoirs</th>
-              <th className="hidden px-4 py-3 sm:table-cell">Temps</th>
-              <th className="hidden px-4 py-3 md:table-cell">Dernière activité</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((s) => (
+      <ScrollableTable
+        className="rounded-xl border border-zinc-200 dark:border-zinc-800"
+        maxHeightClassName="max-h-[calc(100dvh-18rem)]"
+        head={
+          <tr className="bg-zinc-50 text-left text-xs uppercase tracking-wide text-zinc-500 dark:bg-zinc-900">
+            <th className="px-2 py-2.5 sm:px-4 sm:py-3">Élève</th>
+            <th className="px-2 py-2.5 sm:px-4 sm:py-3">Devoirs</th>
+            <th className="hidden px-4 py-3 sm:table-cell">Temps</th>
+            <th className="hidden px-4 py-3 md:table-cell">Dernière activité</th>
+          </tr>
+        }
+        body={
+students.map((s) => (
               <tr key={s.id} className="border-t border-zinc-100 dark:border-zinc-800">
                 <td className="max-w-[10rem] px-2 py-2.5 sm:max-w-none sm:px-4 sm:py-3">
                   <Link href={`/admin/eleves/${s.id}`} className="block truncate font-medium text-[var(--color-theme)] hover:underline">
@@ -83,10 +85,9 @@ export function ClassDashboardClient({ classLabel }: { classLabel: string }) {
                     : "—"}
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            ))
+        }
+      />
     </div>
   );
 }

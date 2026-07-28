@@ -8,6 +8,7 @@ import {
   type ProfessorClassOption,
 } from "@/app/actions/suivi";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 
 type DraftRow = {
   primaryClassId: string | null;
@@ -305,23 +306,24 @@ export function ProfessorAttributionsClient() {
         Une classe ne peut avoir qu&apos;un seul professeur titulaire.
       </p>
 
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="w-auto min-w-0 text-sm">
-          <thead>
-            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-                Professeur
-              </th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-                Titulariat
-              </th>
-              <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
-                Autres classes
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-100 bg-white dark:divide-zinc-800 dark:bg-zinc-950">
-            {professors.length === 0 ? (
+      <ScrollableTable
+        className="rounded-xl border border-[var(--color-border-default)]"
+        tableClassName="w-auto min-w-full text-sm"
+        head={
+          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+            <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              Professeur
+            </th>
+            <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              Titulariat
+            </th>
+            <th className="px-3 py-2.5 text-left text-[10px] font-semibold uppercase tracking-wide text-white">
+              Autres classes
+            </th>
+          </tr>
+        }
+        body={
+professors.length === 0 ? (
               <tr>
                 <td colSpan={3} className="px-3 py-8 text-center text-sm text-zinc-400">
                   Aucun compte professeur.
@@ -365,10 +367,9 @@ export function ProfessorAttributionsClient() {
                   </tr>
                 );
               })
-            )}
-          </tbody>
-        </table>
-      </div>
+            )
+        }
+      />
 
       {saveMsg && (
         <p className={`text-sm ${saveMsg.includes("Erreur") ? "text-red-600" : "text-emerald-700"}`} role="status">

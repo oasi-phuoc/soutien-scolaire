@@ -9,6 +9,7 @@ import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction, setPlacementModuleEnabledAction, purgePreviousSchoolYearMessagesAction } from "@/app/actions/admin";
 import { AppSelect } from "@/components/ui/AppSelect";
+import { ScrollableTable } from "@/components/ui/ScrollableTable";
 import {
   currentSchoolYearLabel,
   currentSchoolYearStart,
@@ -484,136 +485,128 @@ export function AdminTable({
       </div>
 
       {/* Table — en-tête fixe, scrollbar uniquement sur les lignes de données */}
-      <div className="flex max-h-[calc(100dvh-14rem)] flex-col overflow-hidden rounded-2xl border border-zinc-200 lg:max-h-[calc(100dvh-12rem)] dark:border-zinc-800">
-        <div className="shrink-0 overflow-y-auto [scrollbar-gutter:stable]">
-          <table className="w-full table-fixed text-sm">
-            <colgroup>
-              <col style={{ width: 28 }} />
-              <col />
-            </colgroup>
-            <thead>
-              <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
-                <th
-                  className="bg-[var(--color-theme)] p-0"
-                  style={{ width: 28, minWidth: 28, maxWidth: 28 }}
-                  aria-label="Détail"
-                />
-                <th className="min-w-0 bg-[var(--color-theme)] px-1.5 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
-                <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
-                <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
-                <th className="hidden w-[9%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
-                <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">Accès</th>
-                <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3">Maths</th>
-                <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
-                <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
-                <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[9%] sm:px-2 sm:py-3 sm:text-xs" title="Points de test">Test</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]">
-          <table className="w-full table-fixed text-sm">
-            <colgroup>
-              <col style={{ width: 28 }} />
-              <col />
-            </colgroup>
-            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
-              {sorted.length === 0 ? (
-                <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
-              ) : sorted.map(row => {
-                const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
-                const math = mathPct(row.progress_data);
-                const french = frenchPct(row.progress_data);
-                const lecture = lecturePct(row.progress_data);
-                const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
-                const hasPrint = row.role === "admin" || row.can_print;
-                const testPoints = row.placement_combined?.total ?? row.placement_test_best?.points ?? null;
-                const testTitle = row.placement_combined
-                  ? `${row.placement_combined.total}/200 — ${row.placement_combined.zone}`
-                  : row.placement_test_best
-                    ? `${row.placement_test_best.points}/${row.placement_test_best.maxPoints}`
-                    : undefined;
-                return (
-                  <tr key={row.id} className="group bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
-                    <td
-                      className="sticky left-0 z-10 bg-white p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
-                      style={{ width: 28, minWidth: 28, maxWidth: 28 }}
-                    >
-                      <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-                      </Link>
-                    </td>
-                    <td className="min-w-0 px-1.5 py-2 sm:px-3 sm:py-3">
-                      <span className="block truncate text-xs font-medium text-zinc-800 sm:text-sm dark:text-zinc-200" title={fullName}>{fullName}</span>
-                    </td>
-                    <td className="hidden px-2 py-2.5 sm:table-cell sm:px-2.5 sm:py-3">
-                      <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                        row.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
-                        : row.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                        : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-                      }`}>
-                        {ROLE_LABELS[row.role]}
+      <ScrollableTable
+        className="rounded-2xl border border-zinc-200 dark:border-zinc-800"
+        tableClassName="w-full table-fixed text-sm"
+        colgroup={
+          <colgroup>
+            <col style={{ width: 28 }} />
+            <col />
+          </colgroup>
+        }
+        head={
+          <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
+            <th
+              className="bg-[var(--color-theme)] p-0"
+              style={{ width: 28, minWidth: 28, maxWidth: 28 }}
+              aria-label="Détail"
+            />
+            <th className="min-w-0 bg-[var(--color-theme)] px-1.5 py-2 text-left text-xs font-semibold uppercase tracking-wide text-white sm:w-[22%] sm:px-3 sm:py-3">Prénom, Nom</th>
+            <th className="hidden w-[7%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5 sm:py-3">Statut</th>
+            <th className="hidden w-[5%] whitespace-nowrap bg-[var(--color-theme)] px-1.5 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3" title="Accès Impression">Imp.</th>
+            <th className="hidden w-[9%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2.5">Classe</th>
+            <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs" title="Dernier accès">Accès</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-white sm:table-cell sm:px-2 sm:py-3">Maths</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Français</th>
+            <th className="hidden w-[8%] whitespace-nowrap bg-[var(--color-theme)] px-2 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white lg:table-cell">Lecture</th>
+            <th className="w-12 whitespace-nowrap bg-[var(--color-theme)] px-1 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-white sm:w-[9%] sm:px-2 sm:py-3 sm:text-xs" title="Points de test">Test</th>
+          </tr>
+        }
+        body={
+          sorted.length === 0 ? (
+            <tr><td colSpan={10} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
+          ) : sorted.map(row => {
+              const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
+              const math = mathPct(row.progress_data);
+              const french = frenchPct(row.progress_data);
+              const lecture = lecturePct(row.progress_data);
+              const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
+              const hasPrint = row.role === "admin" || row.can_print;
+              const testPoints = row.placement_combined?.total ?? row.placement_test_best?.points ?? null;
+              const testTitle = row.placement_combined
+                ? `${row.placement_combined.total}/200 — ${row.placement_combined.zone}`
+                : row.placement_test_best
+                  ? `${row.placement_test_best.points}/${row.placement_test_best.maxPoints}`
+                  : undefined;
+              return (
+                <tr key={row.id} className="group bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                  <td
+                    className="sticky left-0 z-10 bg-white p-0 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.12)] group-hover:bg-zinc-50 dark:bg-zinc-950 dark:group-hover:bg-zinc-900"
+                    style={{ width: 28, minWidth: 28, maxWidth: 28 }}
+                  >
+                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex h-full w-full items-center justify-center py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" aria-label="Voir détails">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+                    </Link>
+                  </td>
+                  <td className="min-w-0 px-1.5 py-2 sm:px-3 sm:py-3">
+                    <span className="block truncate text-xs font-medium text-zinc-800 sm:text-sm dark:text-zinc-200" title={fullName}>{fullName}</span>
+                  </td>
+                  <td className="hidden px-2 py-2.5 sm:table-cell sm:px-2.5 sm:py-3">
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                      row.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                      : row.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                      : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                    }`}>
+                      {ROLE_LABELS[row.role]}
+                    </span>
+                  </td>
+                  <td className="hidden px-1.5 py-2.5 sm:table-cell sm:px-2 sm:py-3">
+                    {hasPrint ? (
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold text-teal-700 dark:bg-teal-900/30 dark:text-teal-300"
+                        title={row.role === "admin" ? "Admin — accès impression automatique" : "Accès impression activé"}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                          <path d="M6 9V2h12v7" />
+                          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                          <path d="M6 14h12v8H6z" />
+                        </svg>
+                        Oui
                       </span>
-                    </td>
-                    <td className="hidden px-1.5 py-2.5 sm:table-cell sm:px-2 sm:py-3">
-                      {hasPrint ? (
-                        <span
-                          className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold text-teal-700 dark:bg-teal-900/30 dark:text-teal-300"
-                          title={row.role === "admin" ? "Admin — accès impression automatique" : "Accès impression activé"}
-                        >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                            <path d="M6 9V2h12v7" />
-                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-                            <path d="M6 14h12v8H6z" />
-                          </svg>
-                          Oui
-                        </span>
-                      ) : (
-                        <span className="text-xs text-zinc-400">—</span>
-                      )}
-                    </td>
-                    <td className="hidden min-w-0 px-2 py-3 sm:table-cell sm:px-2.5">
-                      {row.classe ? (
-                        <span className="block truncate text-xs font-medium text-zinc-700 dark:text-zinc-300" title={row.classe}>{row.classe}</span>
-                      ) : (
-                        <span className="text-zinc-400">—</span>
-                      )}
-                    </td>
-                    <td className="w-12 px-1 py-2 text-[11px] tabular-nums text-zinc-500 sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs dark:text-zinc-400" title={lastSeen(activity)}>
-                      <span className="sm:hidden">{lastSeenDate(activity)}</span>
-                      <span className="hidden truncate sm:inline">{lastSeen(activity)}</span>
-                    </td>
-                    <td className="hidden px-2 py-2.5 sm:table-cell sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
-                    <td className="hidden px-2 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
-                    <td className="hidden px-2 py-3 lg:table-cell"><ProgressCell {...lecture} color="bg-amber-500" /></td>
-                    <td className="w-12 min-w-0 px-1 py-2 sm:w-[9%] sm:px-2 sm:py-3" title={testTitle}>
-                      {testPoints !== null ? (
-                        <>
-                          <span className="text-[11px] font-bold tabular-nums text-violet-700 sm:hidden dark:text-violet-300">{testPoints}</span>
-                          <div className="hidden min-w-0 space-y-0.5 sm:block">
-                            {row.placement_combined ? (
-                              <>
-                                <p className="truncate text-[10px] font-bold tabular-nums text-violet-700 dark:text-violet-300">
-                                  {row.placement_combined.total}/200
-                                </p>
-                                <p className="truncate text-[9px] leading-tight text-zinc-500">{row.placement_combined.zone}</p>
-                              </>
-                            ) : row.placement_test_best ? (
-                              <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
-                            ) : null}
-                          </div>
-                        </>
-                      ) : (
-                        <span className="text-xs text-zinc-400">—</span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                    ) : (
+                      <span className="text-xs text-zinc-400">—</span>
+                    )}
+                  </td>
+                  <td className="hidden min-w-0 px-2 py-3 sm:table-cell sm:px-2.5">
+                    {row.classe ? (
+                      <span className="block truncate text-xs font-medium text-zinc-700 dark:text-zinc-300" title={row.classe}>{row.classe}</span>
+                    ) : (
+                      <span className="text-zinc-400">—</span>
+                    )}
+                  </td>
+                  <td className="w-12 px-1 py-2 text-[11px] tabular-nums text-zinc-500 sm:w-[11%] sm:px-2 sm:py-3 sm:text-xs dark:text-zinc-400" title={lastSeen(activity)}>
+                    <span className="sm:hidden">{lastSeenDate(activity)}</span>
+                    <span className="hidden truncate sm:inline">{lastSeen(activity)}</span>
+                  </td>
+                  <td className="hidden px-2 py-2.5 sm:table-cell sm:py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
+                  <td className="hidden px-2 py-3 lg:table-cell"><ProgressCell {...french} color="bg-emerald-500" /></td>
+                  <td className="hidden px-2 py-3 lg:table-cell"><ProgressCell {...lecture} color="bg-amber-500" /></td>
+                  <td className="w-12 min-w-0 px-1 py-2 sm:w-[9%] sm:px-2 sm:py-3" title={testTitle}>
+                    {testPoints !== null ? (
+                      <>
+                        <span className="text-[11px] font-bold tabular-nums text-violet-700 sm:hidden dark:text-violet-300">{testPoints}</span>
+                        <div className="hidden min-w-0 space-y-0.5 sm:block">
+                          {row.placement_combined ? (
+                            <>
+                              <p className="truncate text-[10px] font-bold tabular-nums text-violet-700 dark:text-violet-300">
+                                {row.placement_combined.total}/200
+                              </p>
+                              <p className="truncate text-[9px] leading-tight text-zinc-500">{row.placement_combined.zone}</p>
+                            </>
+                          ) : row.placement_test_best ? (
+                            <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
+                          ) : null}
+                        </div>
+                      </>
+                    ) : (
+                      <span className="text-xs text-zinc-400">—</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })
+        }
+      />
 
       {resetConfirming && (
         <ResetElevesConfirm
