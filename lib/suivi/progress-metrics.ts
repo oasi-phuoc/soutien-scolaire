@@ -4,12 +4,14 @@ import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 
 const FRENCH_VOC = FRENCH_THEMES.filter((t) => t.tab === "vocabulaire");
-const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
+const FRENCH_GRAM_CONJ = FRENCH_THEMES.filter(
+  (t) => t.tab === "grammaire" || t.tab === "conjugaison",
+);
 const MATH_SUB_IDS = new Set(
   MATH_MODULES.flatMap((m) => m.submodules.map((s) => s.id)),
 );
 const TOTAL_MATH_SUBS = MATH_MODULES.reduce((n, m) => n + m.submodules.length, 0);
-const TOTAL_FRENCH_LESSONS = FRENCH_VOC.length + FRENCH_GRAM.length;
+const TOTAL_FRENCH_LESSONS = FRENCH_VOC.length + FRENCH_GRAM_CONJ.length;
 const TOTAL_LECTURE_LETTERS = LECTURE_MODULES.reduce((sum, m) => sum + m.letters.length, 0);
 
 export type SubjectProgress = { done: number; total: number; pct: number };
@@ -27,7 +29,7 @@ export function mathProgress(data: StoredProgressV1 | null): SubjectProgress {
 export function frenchProgress(data: StoredProgressV1 | null): SubjectProgress {
   const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
   const vocDone = FRENCH_VOC.filter((t) => completedSlugs.has(t.slug)).length;
-  const gramDone = FRENCH_GRAM.filter((t) => completedSlugs.has(t.slug)).length;
+  const gramDone = FRENCH_GRAM_CONJ.filter((t) => completedSlugs.has(t.slug)).length;
   const done = vocDone + gramDone;
   return {
     done,

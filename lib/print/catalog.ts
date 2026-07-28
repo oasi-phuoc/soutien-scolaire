@@ -50,21 +50,21 @@ const VOCAB_MODULE_TITLES: Record<string, string> = {
 };
 
 const GRAMMAR_MODULE_TITLES: Record<string, string> = {
-  R1: "Les fondamentaux",
-  R2: "Les verbes essentiels",
-  R3: "L'interrogation",
-  R4: "Les adjectifs",
-  R5: "Les pronoms",
-  R6: "Le passé",
-  R7: "Le futur",
-  R8: "Les autres temps",
-  R9: "La comparaison",
-  R10: "Adverbes et négation",
+  G1: "Les fondamentaux",
+  G2: "L'interrogation",
+  G3: "Les adjectifs",
+  G4: "Les pronoms",
+  G5: "Les marqueurs",
+  G6: "La comparaison",
+  C1: "Les verbes essentiels",
+  C2: "Le passé",
+  C3: "Le futur",
+  C4: "Les autres temps",
 };
 
 function grammarModuleCode(code: string): string {
-  const match = code.match(/^(R\d+)/);
-  return match?.[1] ?? "R";
+  const match = code.match(/^([GC]\d+)/);
+  return match?.[1] ?? code.split(".")[0] ?? code;
 }
 
 /** Catalogue plat des leçons imprimables (une entrée = une feuille). */
@@ -104,11 +104,12 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
 
   for (const lesson of getAllGrammarLessons()) {
     const moduleCode = grammarModuleCode(lesson.code);
+    const isConjTrack = moduleCode.startsWith("C");
     entries.push({
       id: `grammar:${lesson.slug}`,
       domain: "francais",
-      group: "Grammaire",
-      moduleId: `grammar-${moduleCode}`,
+      group: isConjTrack ? "Conjugaison" : "Grammaire",
+      moduleId: `${isConjTrack ? "conj" : "grammar"}-${moduleCode}`,
       moduleCode,
       moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: lesson.code,
@@ -118,11 +119,12 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
 
   for (const lesson of getAllConjLessons()) {
     const moduleCode = grammarModuleCode(lesson.code);
+    const isConjTrack = moduleCode.startsWith("C");
     entries.push({
       id: `conj:${lesson.slug}`,
       domain: "francais",
-      group: "Grammaire",
-      moduleId: `grammar-${moduleCode}`,
+      group: isConjTrack ? "Conjugaison" : "Grammaire",
+      moduleId: `${isConjTrack ? "conj" : "grammar"}-${moduleCode}`,
       moduleCode,
       moduleTitle: GRAMMAR_MODULE_TITLES[moduleCode] ?? moduleCode,
       code: lesson.code,
@@ -138,7 +140,7 @@ export function listPrintableLessons(): PrintCatalogEntry[] {
       entries.push({
         id: `express:${sub.id}`,
         domain: "francais",
-        group: "Expression",
+        group: "Communication",
         moduleId: `express-${mod.id}`,
         moduleCode: mod.level,
         moduleTitle: mod.title,

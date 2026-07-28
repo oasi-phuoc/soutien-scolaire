@@ -183,7 +183,7 @@ export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
           className="text-xs font-medium uppercase tracking-wide"
           style={{ color: ACCENT }}
         >
-          Expression
+          Communication
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
           S&apos;exprimer en français

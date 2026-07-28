@@ -15,36 +15,25 @@ type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
 
-const SECTIONS: SectionDef[] = [
-  { id: "A0", code: "A0", title: "Niveau A0" },
-  { id: "A1", code: "A1", title: "Niveau A1" },
-  { id: "A2", code: "A2", title: "Niveau A2" },
-  { id: "B1", code: "B1", title: "Niveau B1" },
-  { id: "B2", code: "B2", title: "Niveau B2" },
-];
-
 const GRAMMAR_GROUPS: SectionDef[] = [
-  { id: "R1", code: "R1", title: "Les fondamentaux" },
-  { id: "R2", code: "R2", title: "Les verbes essentiels" },
-  { id: "R3", code: "R3", title: "L'interrogation" },
-  { id: "R4", code: "R4", title: "Les adjectifs" },
-  { id: "R5", code: "R5", title: "Les pronoms" },
-  { id: "R6", code: "R6", title: "Le passé" },
-  { id: "R7", code: "R7", title: "Le futur" },
-  { id: "R8", code: "R8", title: "Les autres temps" },
-  { id: "R9", code: "R9", title: "La comparaison" },
+  { id: "G1", code: "G1", title: "Les fondamentaux" },
+  { id: "G2", code: "G2", title: "L'interrogation" },
+  { id: "G3", code: "G3", title: "Les adjectifs" },
+  { id: "G4", code: "G4", title: "Les pronoms" },
+  { id: "G5", code: "G5", title: "Les marqueurs" },
+  { id: "G6", code: "G6", title: "La comparaison" },
 ];
 
-function grammarGroupId(code: string): string {
-  if (code.startsWith("R1.")) return "R1";
-  if (code.startsWith("R2.")) return "R2";
-  if (code.startsWith("R3.")) return "R3";
-  if (code.startsWith("R4.")) return "R4";
-  if (code.startsWith("R5.")) return "R5";
-  if (code.startsWith("R6.")) return "R6";
-  if (code.startsWith("R7.")) return "R7";
-  if (code.startsWith("R8.")) return "R8";
-  return "R9";
+const CONJ_GROUPS: SectionDef[] = [
+  { id: "C1", code: "C1", title: "Les verbes essentiels" },
+  { id: "C2", code: "C2", title: "Le passé" },
+  { id: "C3", code: "C3", title: "Le futur" },
+  { id: "C4", code: "C4", title: "Les autres temps" },
+];
+
+function moduleGroupId(code: string): string {
+  const m = /^(G\d+|C\d+)\./.exec(code);
+  return m?.[1] ?? "";
 }
 
 const VOCAB_MODULES: SectionDef[] = [
@@ -60,13 +49,17 @@ const VOCAB_MODULES: SectionDef[] = [
   { id: "V10", code: "V10", title: "Services, voyages et animaux" },
 ];
 
-const TABS: { id: FrenchTab; label: string }[] = [
-  { id: "vocabulaire",    label: "Vocabulaire" },
-  { id: "grammaire",      label: "Grammaire" },
-  { id: "communication",  label: "Expression" },
+const TABS: { id: FrenchTab; label: string; short: string }[] = [
+  { id: "vocabulaire", label: "Vocabulaire", short: "Voca." },
+  { id: "conjugaison", label: "Conjugaison", short: "Conj." },
+  { id: "grammaire", label: "Grammaire", short: "Gram." },
+  { id: "communication", label: "Communication", short: "Comm." },
 ];
 
-const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire", "communication"];
+const VALID_TABS: FrenchTab[] = ["vocabulaire", "conjugaison", "grammaire", "communication"];
+
+const GRAMMAR_AVAILABLE = new Set(["G1"]);
+const CONJ_AVAILABLE = new Set(["C1"]);
 
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
@@ -382,11 +375,11 @@ function SectionCard({
 
 export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const searchParams = useSearchParams();
-  const initialTab = searchParams.get("tab") as FrenchTab | null;
+  const tabParam = searchParams.get("tab") as FrenchTab | null;
   const { overrides } = useContentEditor();
   const frenchThemes = resolveFrenchThemes(FRENCH_THEMES, overrides);
   const [tab, setTab] = useState<FrenchTab>(
-    initialTab && VALID_TABS.includes(initialTab) ? initialTab : "vocabulaire",
+    tabParam && VALID_TABS.includes(tabParam) ? tabParam : "vocabulaire",
   );
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
@@ -401,12 +394,75 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   }
 
   useEffect(() => {
+    if (tabParam && VALID_TABS.includes(tabParam)) setTab(tabParam);
+  }, [tabParam]);
+
+  useEffect(() => {
     refreshProgress();
     setHydrated(true);
 
     window.addEventListener("soutien-french-lesson-complete", refreshProgress);
     return () => window.removeEventListener("soutien-french-lesson-complete", refreshProgress);
   }, []);
+
+  function renderModuleGroups(
+    groups: SectionDef[],
+    available: Set<string>,
+  ) {
+    const allTabThemes = groups.flatMap((grp) =>
+      frenchThemes.filter(
+        (th) =>
+          (th.tab === "grammaire" || th.tab === "conjugaison") &&
+          moduleGroupId(th.code) === grp.id,
+      ),
+    );
+
+    let prevCount = 0;
+
+    return (
+      <>
+        {groups.map((grp) => {
+          const themes = allTabThemes.filter((th) => moduleGroupId(th.code) === grp.id);
+          if (themes.length === 0) return null;
+
+          const isComingSoon = !available.has(grp.id) && !isAdmin;
+
+          let state: SectionState;
+          if (!hydrated || (!available.has(grp.id) && !isAdmin)) {
+            state = "locked";
+          } else {
+            const prevThemes = allTabThemes.slice(0, prevCount);
+            const sectionAccessible =
+              prevThemes.length === 0 ||
+              prevThemes.every((th) => completedSlugs.has(th.slug));
+
+            if (!sectionAccessible && !isAdmin) {
+              state = "locked";
+            } else {
+              const allDone = themes.every((th) => completedSlugs.has(th.slug));
+              state = allDone ? "completed" : "in_progress";
+            }
+          }
+
+          prevCount += themes.length;
+
+          return (
+            <SectionCard
+              key={grp.id}
+              sec={grp}
+              state={state}
+              themes={themes}
+              completedSlugs={hydrated ? completedSlugs : new Set()}
+              hydrated={hydrated}
+              returnTab={tab}
+              isAdmin={isAdmin}
+              comingSoon={isComingSoon}
+            />
+          );
+        })}
+      </>
+    );
+  }
 
   return (
     <main className="app-shell flex-1 space-y-6 pt-8 pb-32 lg:pb-28">
@@ -434,28 +490,32 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
+        className="grid grid-cols-4 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)]/15 p-1 lg:hidden"
       >
-        {TABS.map(({ id, label }) => (
+        {TABS.map(({ id, label, short }) => (
           <button
             key={id}
             type="button"
             role="tab"
+            aria-label={label}
             aria-selected={tab === id}
-            onClick={() => setTab(id)}
-            className={`min-h-11 rounded-[var(--radius-lg)] px-2 text-sm font-medium transition-colors ${
+            onClick={() => {
+              setTab(id);
+              window.history.replaceState(null, "", `/francais?tab=${id}`);
+            }}
+            className={`min-h-11 rounded-[var(--radius-lg)] px-1 text-xs font-medium transition-colors sm:text-sm ${
               tab === id
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
                 : "bg-transparent text-[var(--color-accent-fr)] hover:bg-white/40"
             }`}
           >
-            {label}
+            {short}
           </button>
         ))}
       </div>
 
       {tab === "communication" ? (
-        <section aria-label="Expression orale" className="space-y-4">
+        <section aria-label="Communication" className="space-y-4">
           <CommunicationModuleList isAdmin={isAdmin} />
         </section>
       ) : null}
@@ -483,74 +543,11 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
               );
             })}
           </>
-        ) : (
-          (() => {
-            const groups = tab === "grammaire" ? GRAMMAR_GROUPS : SECTIONS;
-
-            const allTabThemes = tab === "grammaire"
-              ? GRAMMAR_GROUPS.flatMap((grp) =>
-                  frenchThemes.filter(
-                    (th) =>
-                      (th.tab === "grammaire" || th.tab === "conjugaison") &&
-                      grammarGroupId(th.code) === grp.id,
-                  ),
-                )
-              : SECTIONS.flatMap((sec) =>
-                  frenchThemes.filter(
-                    (th) => th.section === sec.id && th.tab === tab,
-                  ),
-                );
-
-            const GRAMMAR_AVAILABLE = new Set(["R1", "R2"]);
-            let prevCount = 0;
-
-            return (
-              <>
-                {groups.map((grp) => {
-                  const themes = tab === "grammaire"
-                    ? allTabThemes.filter((th) => grammarGroupId(th.code) === grp.id)
-                    : allTabThemes.filter((th) => th.section === grp.id);
-                  if (themes.length === 0) return null;
-
-                  const isComingSoon = tab === "grammaire" && !GRAMMAR_AVAILABLE.has(grp.id) && !isAdmin;
-
-                  let state: SectionState;
-                  if (!hydrated || (tab === "grammaire" && !GRAMMAR_AVAILABLE.has(grp.id) && !isAdmin)) {
-                    state = "locked";
-                  } else {
-                    const prevThemes = allTabThemes.slice(0, prevCount);
-                    const sectionAccessible =
-                      prevThemes.length === 0 ||
-                      prevThemes.every((th) => completedSlugs.has(th.slug));
-
-                    if (!sectionAccessible && !isAdmin) {
-                      state = "locked";
-                    } else {
-                      const allDone = themes.every((th) => completedSlugs.has(th.slug));
-                      state = allDone ? "completed" : "in_progress";
-                    }
-                  }
-
-                  prevCount += themes.length;
-
-                  return (
-                    <SectionCard
-                      key={grp.id}
-                      sec={grp}
-                      state={state}
-                      themes={themes}
-                      completedSlugs={hydrated ? completedSlugs : new Set()}
-                      hydrated={hydrated}
-                      returnTab={tab}
-                      isAdmin={isAdmin}
-                      comingSoon={isComingSoon}
-                    />
-                  );
-                })}
-              </>
-            );
-          })()
-        )}
+        ) : tab === "conjugaison" ? (
+          renderModuleGroups(CONJ_GROUPS, CONJ_AVAILABLE)
+        ) : tab === "grammaire" ? (
+          renderModuleGroups(GRAMMAR_GROUPS, GRAMMAR_AVAILABLE)
+        ) : null}
       </section>
 
     </main>

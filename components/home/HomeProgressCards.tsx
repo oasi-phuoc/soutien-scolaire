@@ -30,7 +30,8 @@ import { loadPlacementProfile } from "@/lib/placement/storage";
 
 // ── French data helpers ──────────────────────────────────────────────────────
 const FRENCH_VOC = FRENCH_THEMES.filter((t) => t.tab === "vocabulaire");
-const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
+const FRENCH_CONJ = FRENCH_THEMES.filter((t) => t.code.startsWith("C"));
+const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.code.startsWith("G"));
 const COMM_AVAILABLE = COMM_MODULES.flatMap((m) => m.submodules).filter((s) => s.available);
 
 // ── Math data helpers ─────────────────────────────────────────────────────────
@@ -216,11 +217,12 @@ export function HomeProgressCards() {
   // ── Français ──
   const completedSlugs = new Set(Object.keys(mathP?.frenchLessons ?? {}));
   const vocDone = FRENCH_VOC.filter((t) => completedSlugs.has(t.slug)).length;
+  const conjDone = FRENCH_CONJ.filter((t) => completedSlugs.has(t.slug)).length;
   const gramDone = FRENCH_GRAM.filter((t) => completedSlugs.has(t.slug)).length;
   const expressionProgress = normalizeCommunicationProgress(mathP?.commProgress ?? {});
   const parlerDone = COMM_AVAILABLE.filter((s) => !!expressionProgress[s.id]).length;
-  const frTotal = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_AVAILABLE.length;
-  const frDone = vocDone + gramDone + parlerDone;
+  const frTotal = FRENCH_VOC.length + FRENCH_CONJ.length + FRENCH_GRAM.length + COMM_AVAILABLE.length;
+  const frDone = vocDone + conjDone + gramDone + parlerDone;
   const frPct = frTotal > 0 ? Math.round((frDone / frTotal) * 100) : 0;
 
   // ── Maths ──
@@ -289,8 +291,9 @@ export function HomeProgressCards() {
         pct={frPct}
         subProgress={[
           { label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length },
+          { label: "Conjugaison", done: conjDone, total: FRENCH_CONJ.length },
           { label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length },
-          { label: "Expression", done: parlerDone, total: Math.max(COMM_AVAILABLE.length, 1) },
+          { label: "Communication", done: parlerDone, total: Math.max(COMM_AVAILABLE.length, 1) },
         ]}
       />
       <CardShell

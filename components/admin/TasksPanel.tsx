@@ -276,15 +276,16 @@ const RAW_CURRICULUM: MatiereOpt[] = [
 // ─── Component ─────────────────────────────────────────────────────────────
 
 const GRAMMAR_MODULE_TITLES: Record<string, string> = {
-  R1: "Les fondamentaux",
-  R2: "Les verbes essentiels",
-  R3: "L'interrogation",
-  R4: "Les adjectifs",
-  R5: "Les pronoms",
-  R6: "Le passé",
-  R7: "Le futur",
-  R8: "Les autres temps",
-  R9: "La comparaison",
+  G1: "Les fondamentaux",
+  G2: "L'interrogation",
+  G3: "Les adjectifs",
+  G4: "Les pronoms",
+  G5: "Les marqueurs",
+  G6: "La comparaison",
+  C1: "Les verbes essentiels",
+  C2: "Le passé",
+  C3: "Le futur",
+  C4: "Les autres temps",
 };
 
 const GRAMMAR_TASK_MODULES: ModuleOpt[] = Object.entries(GRAMMAR_MODULE_TITLES).map(
@@ -305,7 +306,7 @@ const CURRICULUM: MatiereOpt[] = RAW_CURRICULUM.map((subject) => {
   return {
     ...subject,
     modules: [
-      ...subject.modules.filter((module) => !/^(?:R\d+|RI|RP|RX)$/.test(module.id)),
+      ...subject.modules.filter((module) => !/^(?:[RG]\d+|C\d+|RI|RP|RX)$/.test(module.id)),
       ...GRAMMAR_TASK_MODULES,
     ],
   };

@@ -157,51 +157,74 @@ import {
 // ── Registre — grammaire ──────────────────────────────────────────────────────
 
 const REORGANIZED_CODES: Record<string, string> = {
-  "a1-gr-interro": "R3.1",
-  "a2-gr-l07": "R3.2",
-  "a2-gr-l09": "R3.3",
-  "a1-gr-l10": "R3.4",
-  "a1-gr-l23": "R4.1",
-  "a1-gr-l18": "R4.2",
-  "a1-gr-l19": "R4.3",
-  "a1-gr-l14": "R4.4",
-  "a1-gr-l11": "R4.5",
-  "a2-gr-l19": "R5.1",
-  "a2-gr-l35": "R5.2",
-  "a2-gr-l36": "R5.3",
-  "a1-conj-l28": "R6.1",
-  "a1-conj-l29": "R6.2",
-  "a1-conj-l30": "R6.3",
-  "negation-passe-compose": "R6.4",
-  "a1-gr-verbes-double-auxiliaire": "R6.5",
-  "a1-gr-pronominaux-passe-compose": "R6.6",
-  "a2-conj-l07": "R6.7",
-  "a2-gr-imparfait-irreguliers": "R6.8",
-  "a2-gr-passe-compose-ou-imparfait": "R6.9",
-  "a1-conj-l20": "R7.1",
-  "a1-gr-l22": "R7.2",
-  "a2-conj-l08": "R7.3",
-  "a2-gr-futur-irreguliers": "R7.4",
-  "a2-gr-futur-simple-ou-proche": "R7.5",
-  "a2-gr-hypothese-futur": "R7.6",
-  "a2-conj-l04": "R8.1",
-  "a2-gr-conditionnel": "R8.2",
-  "a2-conj-l05": "R8.3",
-  "a2-gr-gerondif": "R8.4",
-  "a2-gr-subjonctif": "R8.5",
-  "gr-marqueurs-temps-complet": "R9.1",
-  "a2-gr-l52": "R9.2",
-  "a1-gr-expressions-temps": "R9.3",
-  "a2-gr-l39": "R10.1",
-  "a2-gr-bon-bien-meilleur-mieux": "R10.2",
-  "a2-gr-superlatif": "R10.3",
-  "a2-gr-l42": "R10.4",
-  "a2-gr-adverbes-types": "R10.5",
+  // G1 — Fondamentaux
+  "a1-conj-l00": "G1.1",
+  "a1-conj-l01": "G1.2",
+  "a1-gr-l04": "G1.3",
+  "a1-gr-l03": "G1.4",
+  "a1-gr-phrases": "G1.5",
+  "a1-gr-l02": "G1.6",
+  "a1-gr-cest-il-est": "G1.7",
+  // G2 — Interrogation
+  "a1-gr-interro": "G2.1",
+  "a2-gr-l07": "G2.2",
+  "a2-gr-l09": "G2.3",
+  "a1-gr-l10": "G2.4",
+  // G3 — Adjectifs
+  "a1-gr-l23": "G3.1",
+  "a1-gr-l18": "G3.2",
+  "a1-gr-l19": "G3.3",
+  "a1-gr-l14": "G3.4",
+  "a1-gr-l11": "G3.5",
+  // G4 — Pronoms
+  "a2-gr-l19": "G4.1",
+  "a2-gr-l35": "G4.2",
+  "a2-gr-l36": "G4.3",
+  // G5 — Marqueurs
+  "gr-marqueurs-temps-complet": "G5.1",
+  "a2-gr-l52": "G5.2",
+  "a1-gr-expressions-temps": "G5.3",
+  // G6 — Comparaison
+  "a2-gr-l39": "G6.1",
+  "a2-gr-bon-bien-meilleur-mieux": "G6.2",
+  "a2-gr-superlatif": "G6.3",
+  "a2-gr-l42": "G6.4",
+  "a2-gr-adverbes-types": "G6.5",
+  // C1 — Verbes essentiels
+  "a1-conj-l07": "C1.1",
+  "a1-conj-l08": "C1.2",
+  "a1-conj-l09": "C1.3",
+  "a1-conj-l15": "C1.4",
+  "a2-conj-irreguliers": "C1.5",
+  "a2-conj-l02": "C1.6",
+  // C2 — Passé
+  "a1-conj-l28": "C2.1",
+  "a1-conj-l29": "C2.2",
+  "a1-conj-l30": "C2.3",
+  "negation-passe-compose": "C2.4",
+  "a1-gr-verbes-double-auxiliaire": "C2.5",
+  "a1-gr-pronominaux-passe-compose": "C2.6",
+  "a2-conj-l07": "C2.7",
+  "a2-gr-imparfait-irreguliers": "C2.8",
+  "a2-gr-passe-compose-ou-imparfait": "C2.9",
+  // C3 — Futur
+  "a1-conj-l20": "C3.1",
+  "a1-gr-l22": "C3.2",
+  "a2-conj-l08": "C3.3",
+  "a2-gr-futur-irreguliers": "C3.4",
+  "a2-gr-futur-simple-ou-proche": "C3.5",
+  "a2-gr-hypothese-futur": "C3.6",
+  // C4 — Autres temps
+  "a2-conj-l04": "C4.1",
+  "a2-gr-conditionnel": "C4.2",
+  "a2-conj-l05": "C4.3",
+  "a2-gr-gerondif": "C4.4",
+  "a2-gr-subjonctif": "C4.5",
 };
 
 const ADJECTIFS_QUALIFICATIFS: GrammarLesson = {
   ...A1_GR_L23,
-  code: "R4.1",
+  code: "G3.1",
   title: "Les adjectifs qualificatifs",
 };
 
@@ -328,10 +351,14 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = BASE_CONJUGAISON_LESSONS
 
 // ── Fonctions de recherche ────────────────────────────────────────────────────
 
+function hasUnlockedEval(code: string): boolean {
+  return /^G1\.|^C[1-4]\./.test(code);
+}
+
 export function getGrammarLesson(slug: string): GrammarLesson | undefined {
   const lesson = GRAMMAR_LESSONS.find((l) => l.slug === slug);
   if (!lesson) return undefined;
-  if (lesson.code.startsWith("R1.") || lesson.code.startsWith("R2.")) {
+  if (hasUnlockedEval(lesson.code)) {
     return { ...lesson, evalExercises: lesson.exercises };
   }
   return lesson;
@@ -344,7 +371,7 @@ export function getAllGrammarLessons(): GrammarLesson[] {
 export function getConjLesson(slug: string): ConjLesson | undefined {
   const lesson = CONJUGAISON_LESSONS.find((l) => l.slug === slug);
   if (!lesson) return undefined;
-  if (lesson.code.startsWith("R1.") || lesson.code.startsWith("R2.") || lesson.code.startsWith("R6.") || lesson.code.startsWith("R7.") || lesson.code.startsWith("R8.")) {
+  if (hasUnlockedEval(lesson.code)) {
     return { ...lesson, evalExercises: lesson.exercises };
   }
   return lesson;
